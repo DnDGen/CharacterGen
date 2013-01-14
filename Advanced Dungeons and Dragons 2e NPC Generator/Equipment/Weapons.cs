@@ -1,226 +1,213 @@
+using NPCGen.Characters;
+using NPCGen.Roll;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
-namespace NPCGen
+namespace NPCGen.Equipment
 {
-    class Weapons
+    public enum WEAPONTYPE { SLASH, PIERCE, BLUNT };
+    public enum WEAPONFEAT { SIMPLE, MARTIAL, EXOTIC };
+    public enum WEAPONRANGE { MELEE, RANGE };
+
+    public class Weapons
     {
-        public enum WEAPONTYPE { SLASH, PIERCE, BLUNT };
-        public enum WEAPONFEAT { SIMPLE, MARTIAL, EXOTIC };
-        public enum WEAPONRANGE { MELEE, RANGE };
-
-        public static string Generate(int Bonus, Classes.CLASS Class, int Level, bool AllowTwoHanded, ref bool TwoHanded, ref Random random)
+        public static String Generate(Int32 bonus, CLASS charClass, Int32 level, Boolean allowTwoHanded, ref Boolean twoHanded)
         {
-            int OutputBonus = 0; int InputBonus = Bonus; string AbilitiesString = ""; int Roll;
-            WEAPONTYPE Type = WEAPONTYPE.BLUNT; WEAPONRANGE Range = WEAPONRANGE.MELEE; bool Ammunition = false;
-            string OutputBonusString; string SpecialQualitiesString; string output; string CursedString = "";
-            
-            bool AllowRange = true;
-            if (!AllowTwoHanded)
-                AllowRange = false;
+            var outputBonus = 0; 
+            var inputBonus = bonus;
+            var abilitiesString = String.Empty; 
+            Int32 roll;
+            var type = WEAPONTYPE.BLUNT;
+            var range = WEAPONRANGE.MELEE; 
+            var ammunition = false;
+            var cursedString = String.Empty;
+            var allowRange = allowTwoHanded;
+            String output = String.Empty;
 
-            MagicItems.POWER Power = MagicItems.PowerByLevel(Level, ref random);
-            string Weapon = WeaponType(Class, ref Type, AllowTwoHanded, ref TwoHanded, AllowRange, ref Range, ref Ammunition, ref random);
+            var power = MagicItems.PowerByLevel(level);
+            var weapon = WeaponType(charClass, ref type, allowTwoHanded, ref twoHanded, allowRange, ref range, ref ammunition);
 
-            if (Bonus > 0 && Dice.Percentile(ref random) <= 5)
-                CursedString = CursedItem.Generate(ref random) + " ";
+            if (bonus > 0 && Dice.Percentile() <= 5)
+                cursedString = CursedItem.Generate() + " ";
 
-            while (InputBonus > 0)
+            while (inputBonus > 0)
             {
-                switch (Power)
+                switch (power)
                 {
-                    case MagicItems.POWER.MEDIUM:
-                        Roll = Dice.Percentile(ref random);
-                        if (Roll > 68 && OutputBonus > 0)
+                    case POWER.MEDIUM:
+                        roll = Dice.Percentile();
+                        if (roll > 68 && outputBonus > 0)
                         {
-                            if (AbilitiesString == "")
-                                AbilitiesString += " of ";
+                            if (abilitiesString == String.Empty)
+                                abilitiesString += " of ";
                             else
-                                AbilitiesString += ", ";
-                            if (Range == WEAPONRANGE.MELEE)
-                                AbilitiesString += MeleeSpecialAbilities(Power, Type, ref InputBonus, ref random);
+                                abilitiesString += ", ";
+                            if (range == WEAPONRANGE.MELEE)
+                                abilitiesString += MeleeSpecialAbilities(power, type, ref inputBonus);
                             else
-                                AbilitiesString += RangedSpecialAbilities(Power, ref InputBonus, ref random);
+                                abilitiesString += RangedSpecialAbilities(power, ref inputBonus);
                         }
-                        else if (Roll > 62 && Roll <= 68)
+                        else if (roll > 62 && roll <= 68)
                         {
-                            Range = WEAPONRANGE.MELEE;
-                            output = SpecificWeapon(Class, Power, Bonus, AllowTwoHanded, ref TwoHanded, AllowRange, ref Range, ref random);
-                            if (Range == WEAPONRANGE.RANGE)
-                                output += String.Format("\n{0}", Melee(Class, ref Type, AllowTwoHanded, ref TwoHanded, ref random));
+                            range = WEAPONRANGE.MELEE;
+                            output = SpecificWeapon(charClass, power, bonus, allowTwoHanded, ref twoHanded, allowRange, ref range);
+                            if (range == WEAPONRANGE.RANGE)
+                                output += String.Format("\n{0}", Melee(charClass, ref type, allowTwoHanded, ref twoHanded));
                             return output;
                         }
                         else
                         {
-                            OutputBonus++;
-                            InputBonus--;
+                            outputBonus++;
+                            inputBonus--;
                         }
                         break;
-                    case MagicItems.POWER.MAJOR:
-                        Roll = Dice.Percentile(ref random);
-                        if (Roll > 63 && OutputBonus > 0)
+                    case POWER.MAJOR:
+                        roll = Dice.Percentile();
+                        if (roll > 63 && outputBonus > 0)
                         {
-                            if (AbilitiesString == "")
-                                AbilitiesString += " of ";
+                            if (abilitiesString == String.Empty)
+                                abilitiesString += " of ";
                             else
-                                AbilitiesString += ", ";
-                            if (Range == WEAPONRANGE.MELEE)
-                                AbilitiesString += MeleeSpecialAbilities(Power, Type, ref InputBonus, ref random);
+                                abilitiesString += ", ";
+                            if (range == WEAPONRANGE.MELEE)
+                                abilitiesString += MeleeSpecialAbilities(power, type, ref inputBonus);
                             else
-                                AbilitiesString += RangedSpecialAbilities(Power, ref InputBonus, ref random);
+                                abilitiesString += RangedSpecialAbilities(power, ref inputBonus);
                         }
-                        else if (Roll > 49 && Roll <= 63)
+                        else if (roll > 49 && roll <= 63)
                         {
-                            Range = WEAPONRANGE.MELEE;
-                            output = SpecificWeapon(Class, Power, Bonus, AllowTwoHanded, ref TwoHanded, true, ref Range, ref random);
-                            if (Range == WEAPONRANGE.RANGE)
-                                output += String.Format("\n{0}", Melee(Class, ref Type, AllowTwoHanded, ref TwoHanded, ref random));
+                            range = WEAPONRANGE.MELEE;
+                            output = SpecificWeapon(charClass, power, bonus, allowTwoHanded, ref twoHanded, true, ref range);
+                            if (range == WEAPONRANGE.RANGE)
+                                output += String.Format("\n{0}", Melee(charClass, ref type, allowTwoHanded, ref twoHanded));
                             return output;
                         }
                         else
                         {
-                            OutputBonus++;
-                            InputBonus--;
+                            outputBonus++;
+                            inputBonus--;
                         }
                         break;
                     default:
-                        if (Dice.Percentile(ref random) > 85 && OutputBonus > 0)
+                        if (Dice.Percentile() > 85 && outputBonus > 0)
                         {
-                            if (AbilitiesString == "")
-                                AbilitiesString += " of ";
+                            if (abilitiesString == String.Empty)
+                                abilitiesString += " of ";
                             else
-                                AbilitiesString += ", ";
-                            if (Range == WEAPONRANGE.MELEE)
-                                AbilitiesString += MeleeSpecialAbilities(Power, Type, ref InputBonus, ref random);
+                                abilitiesString += ", ";
+                            if (range == WEAPONRANGE.MELEE)
+                                abilitiesString += MeleeSpecialAbilities(power, type, ref inputBonus);
                             else
-                                AbilitiesString += RangedSpecialAbilities(Power, ref InputBonus, ref random);
+                                abilitiesString += RangedSpecialAbilities(power, ref inputBonus);
                         }
                         else
                         {
-                            OutputBonus++;
-                            InputBonus--;
+                            outputBonus++;
+                            inputBonus--;
                         }
                         break;
                 }
             }
 
-            OutputBonusString = "";
-            if (OutputBonus > 0)
-                OutputBonusString = String.Format("+{0} ", OutputBonus);
+            var outputBonusString = String.Empty;
+            if (outputBonus > 0)
+                outputBonusString = String.Format("+{0} ", outputBonus);
 
-            if (Range == WEAPONRANGE.MELEE)
-                SpecialQualitiesString = MeleeSpecialQualities(Bonus, ref random);
+            var specialQualitiesString = String.Empty;
+            if (range == WEAPONRANGE.MELEE)
+                specialQualitiesString = MeleeSpecialQualities(bonus);
             else
-                SpecialQualitiesString = RangedSpecialQualities(Bonus, Ammunition, ref random);
+                specialQualitiesString = RangedSpecialQualities(bonus, ammunition);
 
-            if (SpecialQualitiesString != "")
-                SpecialQualitiesString = String.Format(" ({0})", SpecialQualitiesString);
+            if (!String.IsNullOrEmpty(specialQualitiesString))
+                specialQualitiesString = String.Format(" ({0})", specialQualitiesString);
 
-            output = String.Format("{0}{1}{2}{3}{4}", CursedString, OutputBonusString, Weapon, AbilitiesString, SpecialQualitiesString);
-            if (Range == WEAPONRANGE.RANGE)
-                output += String.Format("\n{0}", Melee(Class, ref Type, AllowTwoHanded, ref TwoHanded, ref random));
+            output = String.Format("{0}{1}{2}{3}{4}", cursedString, outputBonusString, weapon, abilitiesString, specialQualitiesString);
+            if (range == WEAPONRANGE.RANGE)
+                output += String.Format("\n{0}", Melee(charClass, ref type, allowTwoHanded, ref twoHanded));
 
             return output;
         }
 
-        private static bool CanWield(Classes.CLASS Class, WEAPONFEAT Feat, string Weapon)
+        private static Boolean CanWield(CLASS charClass, WEAPONFEAT feat, String weapon)
         {
-            switch (Class)
+            switch (charClass)
             {
-                case Classes.CLASS.BARBARIAN:
-                case Classes.CLASS.FIGHTER:
-                case Classes.CLASS.RANGER:
-                case Classes.CLASS.PALADIN: return true;
-                case Classes.CLASS.BARD:
-                    if (Feat != WEAPONFEAT.MARTIAL || Classes.BardWeapons.Contains(Weapon))
-                        return true;
-                    return false;
-                case Classes.CLASS.CLERIC:
-                case Classes.CLASS.SORCERER:
-                    if (Feat != WEAPONFEAT.MARTIAL)
-                        return true;
-                    return false;
-                case Classes.CLASS.DRUID:
-                    if (Classes.DruidWeapons.Contains(Weapon))
-                        return true;
-                    return false;
-                case Classes.CLASS.MONK:
-                    if (Classes.MonkWeapons.Contains(Weapon))
-                        return true;
-                    return false;
-                case Classes.CLASS.THIEF:
-                    if (Classes.ThiefWeapons.Contains(Weapon))
-                        return true;
-                    return false;
-                case Classes.CLASS.WIZARD:
-                    if (Classes.WizardWeapons.Contains(Weapon))
-                        return true;
-                    return false;
+                case CLASS.BARBARIAN:
+                case CLASS.FIGHTER:
+                case CLASS.RANGER:
+                case CLASS.PALADIN: return true;
+                case CLASS.BARD: return feat != WEAPONFEAT.MARTIAL || Classes.BardWeapons.Contains(weapon);
+                case CLASS.CLERIC:
+                case CLASS.SORCERER: return feat != WEAPONFEAT.MARTIAL;
+                case CLASS.DRUID: return Classes.DruidWeapons.Contains(weapon);
+                case CLASS.MONK: return Classes.MonkWeapons.Contains(weapon);
+                case CLASS.THIEF: return Classes.ThiefWeapons.Contains(weapon);
+                case CLASS.WIZARD: return Classes.WizardWeapons.Contains(weapon);
                 default: return false;
             }
         }
 
-        private static string WeaponType(Classes.CLASS Class, ref WEAPONTYPE Type, bool AllowTwoHanded, ref bool TwoHanded, bool AllowRange, ref WEAPONRANGE Range, ref bool Ammunition, ref Random random)
+        private static String WeaponType(CLASS charClass, ref WEAPONTYPE type, Boolean allowTwoHanded, ref Boolean twoHanded, Boolean allowRange, ref WEAPONRANGE range, ref Boolean ammunition)
         {
-            int Roll = Dice.Percentile(ref random);
+            var roll = Dice.Percentile();
 
-            Range = WEAPONRANGE.MELEE;
-            if (Roll < 71)
-                return Common(Class, ref Type, AllowTwoHanded, ref TwoHanded, ref random);
-            if (Roll < 81)
-                return Uncommon(Class, ref Type, AllowTwoHanded, ref TwoHanded, AllowRange, ref Range, ref random);
+            range = WEAPONRANGE.MELEE;
+            if (roll < 71)
+                return Common(charClass, ref type, allowTwoHanded, ref twoHanded);
+            if (roll < 81)
+                return Uncommon(charClass, ref type, allowTwoHanded, ref twoHanded, allowRange, ref range);
 
-            if (AllowRange)
+            if (allowRange)
             {
-                Range = WEAPONRANGE.RANGE;
-                return Ranged(Class, ref Type, ref Ammunition, ref random);
+                range = WEAPONRANGE.RANGE;
+                return Ranged(charClass, ref type, ref ammunition);
             }
-            else
-                return Common(Class, ref Type, AllowTwoHanded, ref TwoHanded, ref random);
+            return Common(charClass, ref type, allowTwoHanded, ref twoHanded);
         }
 
-        public static string Melee(Classes.CLASS Class, ref WEAPONTYPE Type, bool AllowTwoHanded, ref bool TwoHanded, ref Random random)
+        public static String Melee(CLASS charClass, ref WEAPONTYPE type, Boolean allowTwoHanded, ref Boolean twoHanded)
         {
-            WEAPONRANGE Range = WEAPONRANGE.MELEE;
-            
-            if (Dice.d8(ref random) < 8)
-                return Common(Class, ref Type, AllowTwoHanded, ref TwoHanded, ref random);
-            return Uncommon(Class, ref Type, AllowTwoHanded, ref TwoHanded, false, ref Range, ref random);
+            var Range = WEAPONRANGE.MELEE;
+
+            if (Dice.d8() < 8)
+                return Common(charClass, ref type, allowTwoHanded, ref twoHanded);
+            return Uncommon(charClass, ref type, allowTwoHanded, ref twoHanded, false, ref Range);
         }
 
-        private static string Ranged(Classes.CLASS Class, string AmmunitionType, ref Random random)
+        private static String Ranged(CLASS charClass, String ammunitionType)
         {
-            int Roll;
-            
             while (true)
             {
-                System.Windows.Forms.Application.DoEvents();
-                switch (AmmunitionType)
+                Application.DoEvents();
+                switch (ammunitionType)
                 {
                     case "arrows":
-                        Roll = Dice.Roll(1, 55, 0, ref random);
-                        if (Roll > 50)
+                        var roll = Dice.Roll(1, 55, 0);
+                        if (roll > 50)
                             return "Mighty +4 composite longbow";
-                        if (Roll > 45)
+                        if (roll > 45)
                             return "Mighty +3 composite longbow";
-                        if (Roll > 40)
+                        if (roll > 40)
                             return "Mighty +2 composite longbow";
-                        if (Roll > 35)
+                        if (roll > 35)
                             return "Mighty +1 composite longbow";
-                        if (Roll > 30)
+                        if (roll > 30)
                             return "composite longbow";
-                        if (Roll > 20)
+                        if (roll > 20)
                             return "longbow";
-                        if (Roll > 15)
+                        if (roll > 15)
                             return "Mighty +2 composite shortbow";
-                        if (Roll > 10)
+                        if (roll > 10)
                             return "Mighty +1 composite shortbow";
-                        if (Roll > 5)
+                        if (roll > 5)
                             return "composite shortbow";
                         return "shortbow";
                     case "crossbow bolts":
-                        if (Dice.d4(ref random) > 2)
+                        if (Dice.d4() > 2)
                             return "heavy crossbow";
                         return "light crossbow";
                     case "sling bullets": return "sling";
@@ -229,12 +216,12 @@ namespace NPCGen
             }
         }
 
-        public static string Ranged(Classes.CLASS Class, ref WEAPONTYPE Type, ref bool Ammunition, ref Random random)
+        public static String Ranged(CLASS charClass, ref WEAPONTYPE type, ref Boolean ammunition)
         {
             while (true)
             {
-                System.Windows.Forms.Application.DoEvents();
-                switch (Dice.Percentile(ref random))
+                Application.DoEvents();
+                switch (Dice.Percentile())
                 {
                     case 1:
                     case 2:
@@ -246,24 +233,24 @@ namespace NPCGen
                     case 8:
                     case 9:
                     case 10:
-                        string ammo;
-                        if (CanWield(Class, WEAPONFEAT.MARTIAL, "bow"))
+                        String ammo;
+                        if (CanWield(charClass, WEAPONFEAT.MARTIAL, "bow"))
                         {
                             ammo = "arrows";
-                            Ammunition = true;
-                            return String.Format("{0} (x{1}, {2})", ammo, Dice.Percentile(ref random) / 5 + 1, Ranged(Class, ammo, ref random));
+                            ammunition = true;
+                            return String.Format("{0} (x{1}, {2})", ammo, Dice.Percentile() / 5 + 1, Ranged(charClass, ammo));
                         }
-                        else if (CanWield(Class, WEAPONFEAT.SIMPLE, "crossbow"))
+                        else if (CanWield(charClass, WEAPONFEAT.SIMPLE, "crossbow"))
                         {
                             ammo = "crossbow bolts";
-                            Ammunition = true;
-                            return String.Format("{0} (x{1}, {2})", ammo, Dice.Percentile(ref random) / 5 + 1, Ranged(Class, ammo, ref random));
+                            ammunition = true;
+                            return String.Format("{0} (x{1}, {2})", ammo, Dice.Percentile() / 5 + 1, Ranged(charClass, ammo));
                         }
-                        else if (CanWield(Class, WEAPONFEAT.SIMPLE, "sling"))
+                        else if (CanWield(charClass, WEAPONFEAT.SIMPLE, "sling"))
                         {
                             ammo = "sling bullets";
-                            Ammunition = true;
-                            return String.Format("{0} (x{1}, {2})", ammo, Dice.Percentile(ref random) / 5 + 1, Ranged(Class, ammo, ref random));
+                            ammunition = true;
+                            return String.Format("{0} (x{1}, {2})", ammo, Dice.Percentile() / 5 + 1, Ranged(charClass, ammo));
                         }
                         break;
                     case 11:
@@ -271,10 +258,10 @@ namespace NPCGen
                     case 13:
                     case 14:
                     case 15:
-                        if (CanWield(Class, WEAPONFEAT.MARTIAL, "throwing axe"))
+                        if (CanWield(charClass, WEAPONFEAT.MARTIAL, "throwing axe"))
                         {
-                            Type = WEAPONTYPE.SLASH;
-                            return String.Format("throwing axe (x{0}, 1d6, Crit x2)", Dice.Percentile(ref random) / 5 + 1);
+                            type = WEAPONTYPE.SLASH;
+                            return String.Format("throwing axe (x{0}, 1d6, Crit x2)", Dice.Percentile() / 5 + 1);
                         }
                         break;
                     case 16:
@@ -287,10 +274,10 @@ namespace NPCGen
                     case 23:
                     case 24:
                     case 25:
-                        if (CanWield(Class, WEAPONFEAT.SIMPLE, "heavy crossbow"))
+                        if (CanWield(charClass, WEAPONFEAT.SIMPLE, "heavy crossbow"))
                         {
-                            Type = WEAPONTYPE.PIERCE;
-                            return String.Format("heavy crossbow ({0} bolts, 1d10, Crit 19-20/x2)", Dice.Percentile(ref random) / 5 + 1);
+                            type = WEAPONTYPE.PIERCE;
+                            return String.Format("heavy crossbow ({0} bolts, 1d10, Crit 19-20/x2)", Dice.Percentile() / 5 + 1);
                         }
                         break;
                     case 26:
@@ -303,28 +290,28 @@ namespace NPCGen
                     case 33:
                     case 34:
                     case 35:
-                        if (CanWield(Class, WEAPONFEAT.SIMPLE, "light crossbow"))
+                        if (CanWield(charClass, WEAPONFEAT.SIMPLE, "light crossbow"))
                         {
-                            Type = WEAPONTYPE.PIERCE;
-                            return String.Format("light crossbow ({0} bolts, 1d8, Crit 19-20/x2)", Dice.Percentile(ref random) / 5 + 1);
+                            type = WEAPONTYPE.PIERCE;
+                            return String.Format("light crossbow ({0} bolts, 1d8, Crit 19-20/x2)", Dice.Percentile() / 5 + 1);
                         }
                         break;
                     case 36:
                     case 37:
                     case 38:
                     case 39:
-                        if (CanWield(Class, WEAPONFEAT.SIMPLE, "dart"))
+                        if (CanWield(charClass, WEAPONFEAT.SIMPLE, "dart"))
                         {
-                            Type = WEAPONTYPE.PIERCE;
-                            return String.Format("dart (x{0}, 1d4, Crit x2)", Dice.Percentile(ref random) / 5 + 1);
+                            type = WEAPONTYPE.PIERCE;
+                            return String.Format("dart (x{0}, 1d4, Crit x2)", Dice.Percentile() / 5 + 1);
                         }
                         break;
                     case 40:
                     case 41:
-                        if (CanWield(Class, WEAPONFEAT.SIMPLE, "javelin"))
+                        if (CanWield(charClass, WEAPONFEAT.SIMPLE, "javelin"))
                         {
-                            Type = WEAPONTYPE.PIERCE;
-                            return String.Format("javelin (x{0}, 1d6, Crit x2)", Dice.Percentile(ref random) / 5 + 1);
+                            type = WEAPONTYPE.PIERCE;
+                            return String.Format("javelin (x{0}, 1d6, Crit x2)", Dice.Percentile() / 5 + 1);
                         }
                         break;
                     case 42:
@@ -332,10 +319,10 @@ namespace NPCGen
                     case 44:
                     case 45:
                     case 46:
-                        if (CanWield(Class, WEAPONFEAT.MARTIAL, "shortbow"))
+                        if (CanWield(charClass, WEAPONFEAT.MARTIAL, "shortbow"))
                         {
-                            Type = WEAPONTYPE.PIERCE;
-                            return String.Format("shortbow ({0} arrows, 1d6, Crit x3)", Dice.Percentile(ref random) / 5 + 1);
+                            type = WEAPONTYPE.PIERCE;
+                            return String.Format("shortbow ({0} arrows, 1d6, Crit x3)", Dice.Percentile() / 5 + 1);
                         }
                         break;
                     case 47:
@@ -343,10 +330,10 @@ namespace NPCGen
                     case 49:
                     case 50:
                     case 51:
-                        if (CanWield(Class, WEAPONFEAT.MARTIAL, "composite shortbow"))
+                        if (CanWield(charClass, WEAPONFEAT.MARTIAL, "composite shortbow"))
                         {
-                            Type = WEAPONTYPE.PIERCE;
-                            return String.Format("composite shortbow ({0} arrows, 1d6, Crit x3)", Dice.Percentile(ref random) / 5 + 1);
+                            type = WEAPONTYPE.PIERCE;
+                            return String.Format("composite shortbow ({0} arrows, 1d6, Crit x3)", Dice.Percentile() / 5 + 1);
                         }
                         break;
                     case 52:
@@ -354,10 +341,10 @@ namespace NPCGen
                     case 54:
                     case 55:
                     case 56:
-                        if (CanWield(Class, WEAPONFEAT.MARTIAL, "composite shortbow"))
+                        if (CanWield(charClass, WEAPONFEAT.MARTIAL, "composite shortbow"))
                         {
-                            Type = WEAPONTYPE.PIERCE;
-                            return String.Format("Mighty +1 composite shortbow ({0} arrows, 1d6, Crit x3)", Dice.Percentile(ref random) / 5 + 1);
+                            type = WEAPONTYPE.PIERCE;
+                            return String.Format("Mighty +1 composite shortbow ({0} arrows, 1d6, Crit x3)", Dice.Percentile() / 5 + 1);
                         }
                         break;
                     case 57:
@@ -365,20 +352,20 @@ namespace NPCGen
                     case 59:
                     case 60:
                     case 61:
-                        if (CanWield(Class, WEAPONFEAT.MARTIAL, "composite shortbow"))
+                        if (CanWield(charClass, WEAPONFEAT.MARTIAL, "composite shortbow"))
                         {
-                            Type = WEAPONTYPE.PIERCE;
-                            return String.Format("Mighty +2 composite shortbow ({0} arrows, 1d6, Crit x3)", Dice.Percentile(ref random) / 5 + 1);
+                            type = WEAPONTYPE.PIERCE;
+                            return String.Format("Mighty +2 composite shortbow ({0} arrows, 1d6, Crit x3)", Dice.Percentile() / 5 + 1);
                         }
                         break;
                     case 62:
                     case 63:
                     case 64:
                     case 65:
-                        if (CanWield(Class, WEAPONFEAT.SIMPLE, "sling"))
+                        if (CanWield(charClass, WEAPONFEAT.SIMPLE, "sling"))
                         {
-                            Type = WEAPONTYPE.BLUNT;
-                            return String.Format("sling ({0} bullets, 1d4, Crit x2)", Dice.Percentile(ref random) / 5 + 1);
+                            type = WEAPONTYPE.BLUNT;
+                            return String.Format("sling ({0} bullets, 1d4, Crit x2)", Dice.Percentile() / 5 + 1);
                         }
                         break;
                     case 76:
@@ -386,10 +373,10 @@ namespace NPCGen
                     case 78:
                     case 79:
                     case 80:
-                        if (CanWield(Class, WEAPONFEAT.MARTIAL, "composite longbow"))
+                        if (CanWield(charClass, WEAPONFEAT.MARTIAL, "composite longbow"))
                         {
-                            Type = WEAPONTYPE.PIERCE;
-                            return String.Format("composite longbow ({0} arrows, 1d8, Crit x3)", Dice.Percentile(ref random) / 5 + 1);
+                            type = WEAPONTYPE.PIERCE;
+                            return String.Format("composite longbow ({0} arrows, 1d8, Crit x3)", Dice.Percentile() / 5 + 1);
                         }
                         break;
                     case 81:
@@ -397,10 +384,10 @@ namespace NPCGen
                     case 83:
                     case 84:
                     case 85:
-                        if (CanWield(Class, WEAPONFEAT.MARTIAL, "composite longbow"))
+                        if (CanWield(charClass, WEAPONFEAT.MARTIAL, "composite longbow"))
                         {
-                            Type = WEAPONTYPE.PIERCE;
-                            return String.Format("Mighty +1 composite longbow ({0} arrows, 1d8, Crit x3)", Dice.Percentile(ref random) / 5 + 1);
+                            type = WEAPONTYPE.PIERCE;
+                            return String.Format("Mighty +1 composite longbow ({0} arrows, 1d8, Crit x3)", Dice.Percentile() / 5 + 1);
                         }
                         break;
                     case 86:
@@ -408,10 +395,10 @@ namespace NPCGen
                     case 88:
                     case 89:
                     case 90:
-                        if (CanWield(Class, WEAPONFEAT.MARTIAL, "composite longbow"))
+                        if (CanWield(charClass, WEAPONFEAT.MARTIAL, "composite longbow"))
                         {
-                            Type = WEAPONTYPE.PIERCE;
-                            return String.Format("Mighty +2 composite longbow ({0} arrows, 1d8, Crit x3)", Dice.Percentile(ref random) / 5 + 1);
+                            type = WEAPONTYPE.PIERCE;
+                            return String.Format("Mighty +2 composite longbow ({0} arrows, 1d8, Crit x3)", Dice.Percentile() / 5 + 1);
                         }
                         break;
                     case 91:
@@ -419,10 +406,10 @@ namespace NPCGen
                     case 93:
                     case 94:
                     case 95:
-                        if (CanWield(Class, WEAPONFEAT.MARTIAL, "composite longbow"))
+                        if (CanWield(charClass, WEAPONFEAT.MARTIAL, "composite longbow"))
                         {
-                            Type = WEAPONTYPE.PIERCE;
-                            return String.Format("Mighty +3 composite longbow ({0} arrows, 1d8, Crit x3)", Dice.Percentile(ref random) / 5 + 1);
+                            type = WEAPONTYPE.PIERCE;
+                            return String.Format("Mighty +3 composite longbow ({0} arrows, 1d8, Crit x3)", Dice.Percentile() / 5 + 1);
                         }
                         break;
                     case 96:
@@ -430,37 +417,37 @@ namespace NPCGen
                     case 98:
                     case 99:
                     case 100:
-                        if (CanWield(Class, WEAPONFEAT.MARTIAL, "composite longbow"))
+                        if (CanWield(charClass, WEAPONFEAT.MARTIAL, "composite longbow"))
                         {
-                            Type = WEAPONTYPE.PIERCE;
-                            return String.Format("Mighty +4 composite longbow ({0} arrows, 1d8, Crit x3)", Dice.Percentile(ref random) / 5 + 1);
+                            type = WEAPONTYPE.PIERCE;
+                            return String.Format("Mighty +4 composite longbow ({0} arrows, 1d8, Crit x3)", Dice.Percentile() / 5 + 1);
                         }
                         break;
                     default:
-                        if (CanWield(Class, WEAPONFEAT.MARTIAL, "longbow"))
+                        if (CanWield(charClass, WEAPONFEAT.MARTIAL, "longbow"))
                         {
-                            Type = WEAPONTYPE.PIERCE;
-                            return String.Format("longbow ({0} arrows)", Dice.Percentile(ref random) / 5 + 1);
+                            type = WEAPONTYPE.PIERCE;
+                            return String.Format("longbow ({0} arrows)", Dice.Percentile() / 5 + 1);
                         }
                         break;
                 }
             }
         }
 
-        public static string Common(Classes.CLASS Class, ref WEAPONTYPE Type, bool AllowTwoHanded, ref bool TwoHanded, ref Random random)
+        public static String Common(CLASS charClass, ref WEAPONTYPE type, Boolean allowTwoHanded, ref Boolean twoHanded)
         {
             while (true)
             {
-                System.Windows.Forms.Application.DoEvents();
-                switch (Dice.Percentile(ref random))
+                Application.DoEvents();
+                switch (Dice.Percentile())
                 {
                     case 1:
                     case 2:
                     case 3:
                     case 4:
-                        if (CanWield(Class, WEAPONFEAT.SIMPLE, "dagger"))
+                        if (CanWield(charClass, WEAPONFEAT.SIMPLE, "dagger"))
                         {
-                            Type = WEAPONTYPE.PIERCE;
+                            type = WEAPONTYPE.PIERCE;
                             return "dagger (1d4, Crit 19-20/x2)";
                         }
                         break;
@@ -474,10 +461,10 @@ namespace NPCGen
                     case 12:
                     case 13:
                     case 14:
-                        if (CanWield(Class, WEAPONFEAT.MARTIAL, "greataxe") && AllowTwoHanded)
+                        if (CanWield(charClass, WEAPONFEAT.MARTIAL, "greataxe") && allowTwoHanded)
                         {
-                            Type = WEAPONTYPE.SLASH;
-                            TwoHanded = true;
+                            type = WEAPONTYPE.SLASH;
+                            twoHanded = true;
                             return "greataxe (1d12, Crit x3)";
                         }
                         break;
@@ -491,10 +478,10 @@ namespace NPCGen
                     case 22:
                     case 23:
                     case 24:
-                        if (CanWield(Class, WEAPONFEAT.MARTIAL, "greatsword") && AllowTwoHanded)
+                        if (CanWield(charClass, WEAPONFEAT.MARTIAL, "greatsword") && allowTwoHanded)
                         {
-                            Type = WEAPONTYPE.SLASH;
-                            TwoHanded = true;
+                            type = WEAPONTYPE.SLASH;
+                            twoHanded = true;
                             return "greatsword (2d6, Crit 19-20/x2)";
                         }
                         break;
@@ -502,9 +489,9 @@ namespace NPCGen
                     case 26:
                     case 27:
                     case 28:
-                        if (CanWield(Class, WEAPONFEAT.SIMPLE, "kama"))
+                        if (CanWield(charClass, WEAPONFEAT.SIMPLE, "kama"))
                         {
-                            Type = WEAPONTYPE.SLASH;
+                            type = WEAPONTYPE.SLASH;
                             return "kama (1d6, Crit x2)";
                         }
                         break;
@@ -521,9 +508,9 @@ namespace NPCGen
                     case 39:
                     case 40:
                     case 41:
-                        if (CanWield(Class, WEAPONFEAT.MARTIAL, "longsword"))
+                        if (CanWield(charClass, WEAPONFEAT.MARTIAL, "longsword"))
                         {
-                            Type = WEAPONTYPE.SLASH;
+                            type = WEAPONTYPE.SLASH;
                             return "longsword (1d8, Crit 19-20/x2)";
                         }
                         break;
@@ -531,9 +518,9 @@ namespace NPCGen
                     case 43:
                     case 44:
                     case 45:
-                        if (CanWield(Class, WEAPONFEAT.SIMPLE, "light mace"))
+                        if (CanWield(charClass, WEAPONFEAT.SIMPLE, "light mace"))
                         {
-                            Type = WEAPONTYPE.BLUNT;
+                            type = WEAPONTYPE.BLUNT;
                             return "light mace (1d6, Crit x2)";
                         }
                         break;
@@ -542,9 +529,9 @@ namespace NPCGen
                     case 48:
                     case 49:
                     case 50:
-                        if (CanWield(Class, WEAPONFEAT.SIMPLE, "heavy mace"))
+                        if (CanWield(charClass, WEAPONFEAT.SIMPLE, "heavy mace"))
                         {
-                            Type = WEAPONTYPE.BLUNT;
+                            type = WEAPONTYPE.BLUNT;
                             return "heavy mace (1d8, Crit x2)";
                         }
                         break;
@@ -552,19 +539,19 @@ namespace NPCGen
                     case 52:
                     case 53:
                     case 54:
-                        if (CanWield(Class, WEAPONFEAT.EXOTIC, "nunchaku"))
+                        if (CanWield(charClass, WEAPONFEAT.EXOTIC, "nunchaku"))
                         {
-                            Type = WEAPONTYPE.BLUNT;
+                            type = WEAPONTYPE.BLUNT;
                             return "nunchaku (1d6, Crit x2)";
                         }
                         break;
                     case 55:
                     case 56:
                     case 57:
-                        if (CanWield(Class, WEAPONFEAT.SIMPLE, "quarterstaff") && AllowTwoHanded)
+                        if (CanWield(charClass, WEAPONFEAT.SIMPLE, "quarterstaff") && allowTwoHanded)
                         {
-                            Type = WEAPONTYPE.BLUNT;
-                            TwoHanded = true;
+                            type = WEAPONTYPE.BLUNT;
+                            twoHanded = true;
                             return "quarterstaff (1d6/1d6, Crit x2)";
                         }
                         break;
@@ -572,9 +559,9 @@ namespace NPCGen
                     case 59:
                     case 60:
                     case 61:
-                        if (CanWield(Class, WEAPONFEAT.MARTIAL, "rapier"))
+                        if (CanWield(charClass, WEAPONFEAT.MARTIAL, "rapier"))
                         {
-                            Type = WEAPONTYPE.PIERCE;
+                            type = WEAPONTYPE.PIERCE;
                             return "rapier (1d6, Crit 18-20/x2)";
                         }
                         break;
@@ -583,9 +570,9 @@ namespace NPCGen
                     case 64:
                     case 65:
                     case 66:
-                        if (CanWield(Class, WEAPONFEAT.MARTIAL, "scimitar"))
+                        if (CanWield(charClass, WEAPONFEAT.MARTIAL, "scimitar"))
                         {
-                            Type = WEAPONTYPE.SLASH;
+                            type = WEAPONTYPE.SLASH;
                             return "scimitar (1d6, Crit 18-20/x2)";
                         }
                         break;
@@ -593,9 +580,9 @@ namespace NPCGen
                     case 68:
                     case 69:
                     case 70:
-                        if (CanWield(Class, WEAPONFEAT.SIMPLE, "shortspear"))
+                        if (CanWield(charClass, WEAPONFEAT.SIMPLE, "shortspear"))
                         {
-                            Type = WEAPONTYPE.PIERCE;
+                            type = WEAPONTYPE.PIERCE;
                             return "shortspear (1d8, Crit x3)";
                         }
                         break;
@@ -603,9 +590,9 @@ namespace NPCGen
                     case 72:
                     case 73:
                     case 74:
-                        if (CanWield(Class, WEAPONFEAT.EXOTIC, "siangham"))
+                        if (CanWield(charClass, WEAPONFEAT.EXOTIC, "siangham"))
                         {
-                            Type = WEAPONTYPE.PIERCE;
+                            type = WEAPONTYPE.PIERCE;
                             return "siangham (1d6, Crit x2)";
                         }
                         break;
@@ -619,9 +606,9 @@ namespace NPCGen
                     case 82:
                     case 83:
                     case 84:
-                        if (CanWield(Class, WEAPONFEAT.EXOTIC, "bastard sword"))
+                        if (CanWield(charClass, WEAPONFEAT.EXOTIC, "bastard sword"))
                         {
-                            Type = WEAPONTYPE.SLASH;
+                            type = WEAPONTYPE.SLASH;
                             return "bastard sword (1d10, Crit 19-20/x2)";
                         }
                         break;
@@ -630,16 +617,16 @@ namespace NPCGen
                     case 87:
                     case 88:
                     case 89:
-                        if (CanWield(Class, WEAPONFEAT.MARTIAL, "short sword"))
+                        if (CanWield(charClass, WEAPONFEAT.MARTIAL, "short sword"))
                         {
-                            Type = WEAPONTYPE.PIERCE;
+                            type = WEAPONTYPE.PIERCE;
                             return "short sword (1d6, Crit 19-20/x2)";
                         }
                         break;
                     default:
-                        if (CanWield(Class, WEAPONFEAT.EXOTIC, "dwarven waraxe"))
+                        if (CanWield(charClass, WEAPONFEAT.EXOTIC, "dwarven waraxe"))
                         {
-                            Type = WEAPONTYPE.SLASH;
+                            type = WEAPONTYPE.SLASH;
                             return "dwarven waraxe (1d10, Crit x3)";
                         }
                         break;
@@ -647,22 +634,22 @@ namespace NPCGen
             }
         }
 
-        public static string Uncommon(Classes.CLASS Class, ref WEAPONTYPE Type, bool AllowTwoHanded, ref bool TwoHanded, bool AllowRanged, ref WEAPONRANGE Range, ref Random random)
+        public static String Uncommon(CLASS charClass, ref WEAPONTYPE type, Boolean allowTwoHanded, ref Boolean twoHanded, Boolean allowRanged, ref WEAPONRANGE range)
         {
-            Range = WEAPONRANGE.MELEE;
+            range = WEAPONRANGE.MELEE;
 
             while (true)
             {
-                System.Windows.Forms.Application.DoEvents();
-                switch (Dice.Percentile(ref random))
+                Application.DoEvents();
+                switch (Dice.Percentile())
                 {
                     case 1:
                     case 2:
                     case 3:
-                        if (CanWield(Class, WEAPONFEAT.EXOTIC, "orc double axe") && AllowTwoHanded)
+                        if (CanWield(charClass, WEAPONFEAT.EXOTIC, "orc double axe") && allowTwoHanded)
                         {
-                            Type = WEAPONTYPE.SLASH;
-                            TwoHanded = true;
+                            type = WEAPONTYPE.SLASH;
+                            twoHanded = true;
                             return "orc double axe (1d8/1d8, Crit x3)";
                         }
                         break;
@@ -670,27 +657,27 @@ namespace NPCGen
                     case 5:
                     case 6:
                     case 7:
-                        if (CanWield(Class, WEAPONFEAT.MARTIAL, "battleaxe"))
+                        if (CanWield(charClass, WEAPONFEAT.MARTIAL, "battleaxe"))
                         {
-                            Type = WEAPONTYPE.SLASH;
+                            type = WEAPONTYPE.SLASH;
                             return "battleaxe (1d8, Crit x3)";
                         }
                         break;
                     case 8:
                     case 9:
                     case 10:
-                        if (CanWield(Class, WEAPONFEAT.EXOTIC, "spiked chain") && AllowTwoHanded)
+                        if (CanWield(charClass, WEAPONFEAT.EXOTIC, "spiked chain") && allowTwoHanded)
                         {
-                            Type = WEAPONTYPE.PIERCE;
-                            TwoHanded = true;
+                            type = WEAPONTYPE.PIERCE;
+                            twoHanded = true;
                             return "spiked chain (2d4, Crit x2)";
                         }
                         break;
                     case 11:
                     case 12:
-                        if (CanWield(Class, WEAPONFEAT.SIMPLE, "club"))
+                        if (CanWield(charClass, WEAPONFEAT.SIMPLE, "club"))
                         {
-                            Type = WEAPONTYPE.BLUNT;
+                            type = WEAPONTYPE.BLUNT;
                             return "club (1d6, Crit x2)";
                         }
                         break;
@@ -698,47 +685,47 @@ namespace NPCGen
                     case 14:
                     case 15:
                     case 16:
-                        if (CanWield(Class, WEAPONFEAT.EXOTIC, "hand crossbow") && AllowRanged)
+                        if (CanWield(charClass, WEAPONFEAT.EXOTIC, "hand crossbow") && allowRanged)
                         {
-                            Type = WEAPONTYPE.PIERCE;
-                            Range = WEAPONRANGE.RANGE;
+                            type = WEAPONTYPE.PIERCE;
+                            range = WEAPONRANGE.RANGE;
                             return "hand crossbow (1d4, Crit 19-20/x2)";
                         }
                         break;
                     case 17:
                     case 18:
                     case 19:
-                        if (CanWield(Class, WEAPONFEAT.EXOTIC, "repeating crossbow") && AllowRanged)
+                        if (CanWield(charClass, WEAPONFEAT.EXOTIC, "repeating crossbow") && allowRanged)
                         {
-                            Type = WEAPONTYPE.PIERCE;
-                            Range = WEAPONRANGE.RANGE;
+                            type = WEAPONTYPE.PIERCE;
+                            range = WEAPONRANGE.RANGE;
                             return "repeating crossbow (1d8, Crit 19-20/x2)";
                         }
                         break;
                     case 20:
                     case 21:
-                        if (CanWield(Class, WEAPONFEAT.SIMPLE, "punching dagger"))
+                        if (CanWield(charClass, WEAPONFEAT.SIMPLE, "punching dagger"))
                         {
-                            Type = WEAPONTYPE.PIERCE;
+                            type = WEAPONTYPE.PIERCE;
                             return "punching dagger (1d4, Crit x3)";
                         }
                         break;
                     case 22:
                     case 23:
-                        if (CanWield(Class, WEAPONFEAT.MARTIAL, "falchion") && AllowTwoHanded)
+                        if (CanWield(charClass, WEAPONFEAT.MARTIAL, "falchion") && allowTwoHanded)
                         {
-                            Type = WEAPONTYPE.SLASH;
-                            TwoHanded = true;
+                            type = WEAPONTYPE.SLASH;
+                            twoHanded = true;
                             return "falchion (2d4, Crit 18-20/x2)";
                         }
                         break;
                     case 24:
                     case 25:
                     case 26:
-                        if (CanWield(Class, WEAPONFEAT.EXOTIC, "dire flail") && AllowTwoHanded)
+                        if (CanWield(charClass, WEAPONFEAT.EXOTIC, "dire flail") && allowTwoHanded)
                         {
-                            Type = WEAPONTYPE.BLUNT;
-                            TwoHanded = true;
+                            type = WEAPONTYPE.BLUNT;
+                            twoHanded = true;
                             return "dire flail (1d8/1d8, Crit x2)";
                         }
                         break;
@@ -747,10 +734,10 @@ namespace NPCGen
                     case 29:
                     case 30:
                     case 31:
-                        if (CanWield(Class, WEAPONFEAT.MARTIAL, "heavy flail") && AllowTwoHanded)
+                        if (CanWield(charClass, WEAPONFEAT.MARTIAL, "heavy flail") && allowTwoHanded)
                         {
-                            Type = WEAPONTYPE.BLUNT;
-                            TwoHanded = true;
+                            type = WEAPONTYPE.BLUNT;
+                            twoHanded = true;
                             return "heavy flail (1d10, Crit 19-20/x2)";
                         }
                         break;
@@ -758,256 +745,256 @@ namespace NPCGen
                     case 33:
                     case 34:
                     case 35:
-                        if (CanWield(Class, WEAPONFEAT.MARTIAL, "light flail"))
+                        if (CanWield(charClass, WEAPONFEAT.MARTIAL, "light flail"))
                         {
-                            Type = WEAPONTYPE.BLUNT;
+                            type = WEAPONTYPE.BLUNT;
                             return "light flail (1d8, Crit x2)";
                         }
                         break;
                     case 36:
                     case 37:
-                        if (CanWield(Class, WEAPONFEAT.SIMPLE, "gauntlet") && AllowTwoHanded)
+                        if (CanWield(charClass, WEAPONFEAT.SIMPLE, "gauntlet") && allowTwoHanded)
                         {
-                            Type = WEAPONTYPE.BLUNT;
-                            TwoHanded = true;
+                            type = WEAPONTYPE.BLUNT;
+                            twoHanded = true;
                             return "gauntlet (Unarmed strike, Crit x2)";
                         }
                         break;
                     case 38:
                     case 39:
-                        if (CanWield(Class, WEAPONFEAT.SIMPLE, "spiked gauntlet"))
+                        if (CanWield(charClass, WEAPONFEAT.SIMPLE, "spiked gauntlet"))
                         {
-                            Type = WEAPONTYPE.PIERCE;
+                            type = WEAPONTYPE.PIERCE;
                             return "spiked gauntlet (1d4, Crit x2)";
                         }
                         break;
                     case 40:
                     case 41:
-                        if (CanWield(Class, WEAPONFEAT.MARTIAL, "glaive") && AllowTwoHanded)
+                        if (CanWield(charClass, WEAPONFEAT.MARTIAL, "glaive") && allowTwoHanded)
                         {
-                            Type = WEAPONTYPE.SLASH;
-                            TwoHanded = true;
+                            type = WEAPONTYPE.SLASH;
+                            twoHanded = true;
                             return "glaive (1d10, Crit x3)";
                         }
                         break;
                     case 42:
                     case 43:
-                        if (CanWield(Class, WEAPONFEAT.MARTIAL, "greatclub") && AllowTwoHanded)
+                        if (CanWield(charClass, WEAPONFEAT.MARTIAL, "greatclub") && allowTwoHanded)
                         {
-                            Type = WEAPONTYPE.BLUNT;
-                            TwoHanded = true;
+                            type = WEAPONTYPE.BLUNT;
+                            twoHanded = true;
                             return "greatclub (1d10, Crit x2)";
                         }
                         break;
                     case 44:
                     case 45:
-                        if (CanWield(Class, WEAPONFEAT.MARTIAL, "guisarme") && AllowTwoHanded)
+                        if (CanWield(charClass, WEAPONFEAT.MARTIAL, "guisarme") && allowTwoHanded)
                         {
-                            Type = WEAPONTYPE.SLASH;
-                            TwoHanded = true;
+                            type = WEAPONTYPE.SLASH;
+                            twoHanded = true;
                             return "guisarme (2d4, Crit x3)";
                         }
                         break;
                     case 46:
                     case 47:
                     case 48:
-                        if (CanWield(Class, WEAPONFEAT.MARTIAL, "halberd") && AllowTwoHanded)
+                        if (CanWield(charClass, WEAPONFEAT.MARTIAL, "halberd") && allowTwoHanded)
                         {
-                            Type = WEAPONTYPE.SLASH;
-                            TwoHanded = true;
+                            type = WEAPONTYPE.SLASH;
+                            twoHanded = true;
                             return "halberd (1d10, Crit x3)";
                         }
                         break;
                     case 49:
                     case 50:
                     case 51:
-                        if (CanWield(Class, WEAPONFEAT.SIMPLE, "halfspear") && AllowTwoHanded)
+                        if (CanWield(charClass, WEAPONFEAT.SIMPLE, "halfspear") && allowTwoHanded)
                         {
-                            Type = WEAPONTYPE.PIERCE;
-                            TwoHanded = true;
+                            type = WEAPONTYPE.PIERCE;
+                            twoHanded = true;
                             return "halfspear (1d6, Crit x3)";
                         }
                         break;
                     case 52:
                     case 53:
                     case 54:
-                        if (CanWield(Class, WEAPONFEAT.EXOTIC, "gnome hooked hammer") && AllowTwoHanded)
+                        if (CanWield(charClass, WEAPONFEAT.EXOTIC, "gnome hooked hammer") && allowTwoHanded)
                         {
-                            Type = WEAPONTYPE.BLUNT;
-                            TwoHanded = true;
+                            type = WEAPONTYPE.BLUNT;
+                            twoHanded = true;
                             return "gnome hooked hammer (1d6/1d4, Crit x3/x4)";
                         }
                         break;
                     case 55:
                     case 56:
-                        if (CanWield(Class, WEAPONFEAT.MARTIAL, "light hammer"))
+                        if (CanWield(charClass, WEAPONFEAT.MARTIAL, "light hammer"))
                         {
-                            Type = WEAPONTYPE.BLUNT;
+                            type = WEAPONTYPE.BLUNT;
                             return "light hammer (1d4, Crit x2)";
                         }
                         break;
                     case 57:
                     case 58:
-                        if (CanWield(Class, WEAPONFEAT.MARTIAL, "handaxe"))
+                        if (CanWield(charClass, WEAPONFEAT.MARTIAL, "handaxe"))
                         {
-                            Type = WEAPONTYPE.SLASH;
+                            type = WEAPONTYPE.SLASH;
                             return "handaxe (1d6, Crit x3)";
                         }
                         break;
                     case 59:
                     case 60:
                     case 61:
-                        if (CanWield(Class, WEAPONFEAT.EXOTIC, "kukri"))
+                        if (CanWield(charClass, WEAPONFEAT.EXOTIC, "kukri"))
                         {
-                            Type = WEAPONTYPE.SLASH;
+                            type = WEAPONTYPE.SLASH;
                             return "kukri (1d4, Crit 18-20/x2)";
                         }
                         break;
                     case 62:
                     case 63:
-                        if (CanWield(Class, WEAPONFEAT.MARTIAL, "heavy lance") && AllowTwoHanded)
+                        if (CanWield(charClass, WEAPONFEAT.MARTIAL, "heavy lance") && allowTwoHanded)
                         {
-                            Type = WEAPONTYPE.PIERCE;
-                            TwoHanded = true;
+                            type = WEAPONTYPE.PIERCE;
+                            twoHanded = true;
                             return "heavy lance (1d8, Crit x3)";
                         }
                         break;
                     case 64:
                     case 65:
-                        if (CanWield(Class, WEAPONFEAT.MARTIAL, "light lance") && AllowTwoHanded)
+                        if (CanWield(charClass, WEAPONFEAT.MARTIAL, "light lance") && allowTwoHanded)
                         {
-                            Type = WEAPONTYPE.PIERCE;
-                            TwoHanded = true;
+                            type = WEAPONTYPE.PIERCE;
+                            twoHanded = true;
                             return "light lance (1d6, Crit x3)";
                         }
                         break;
                     case 66:
                     case 67:
-                        if (CanWield(Class, WEAPONFEAT.MARTIAL, "longspear") && AllowTwoHanded)
+                        if (CanWield(charClass, WEAPONFEAT.MARTIAL, "longspear") && allowTwoHanded)
                         {
-                            Type = WEAPONTYPE.PIERCE;
-                            TwoHanded = true;
+                            type = WEAPONTYPE.PIERCE;
+                            twoHanded = true;
                             return "longspear (1d8, Crit x3)";
                         }
                         break;
                     case 68:
                     case 69:
                     case 70:
-                        if (CanWield(Class, WEAPONFEAT.SIMPLE, "morningstar"))
+                        if (CanWield(charClass, WEAPONFEAT.SIMPLE, "morningstar"))
                         {
-                            Type = WEAPONTYPE.BLUNT;
+                            type = WEAPONTYPE.BLUNT;
                             return "morningstar (1d8, Crit x2)";
                         }
                         break;
                     case 71:
                     case 72:
-                        if (CanWield(Class, WEAPONFEAT.EXOTIC, "net") && AllowRanged)
+                        if (CanWield(charClass, WEAPONFEAT.EXOTIC, "net") && allowRanged)
                         {
-                            Type = WEAPONTYPE.BLUNT;
-                            Range = WEAPONRANGE.RANGE;
+                            type = WEAPONTYPE.BLUNT;
+                            range = WEAPONRANGE.RANGE;
                             return "net";
                         }
                         break;
                     case 73:
                     case 74:
-                        if (CanWield(Class, WEAPONFEAT.MARTIAL, "heavy pick"))
+                        if (CanWield(charClass, WEAPONFEAT.MARTIAL, "heavy pick"))
                         {
-                            Type = WEAPONTYPE.PIERCE;
+                            type = WEAPONTYPE.PIERCE;
                             return "heavy pick (1d6, Crit x4)";
                         }
                         break;
                     case 75:
                     case 76:
-                        if (CanWield(Class, WEAPONFEAT.MARTIAL, "light pick"))
+                        if (CanWield(charClass, WEAPONFEAT.MARTIAL, "light pick"))
                         {
-                            Type = WEAPONTYPE.PIERCE;
+                            type = WEAPONTYPE.PIERCE;
                             return "light pick (1d4, Crit x4)";
                         }
                         break;
                     case 77:
                     case 78:
-                        if (CanWield(Class, WEAPONFEAT.MARTIAL, "ranseur") && AllowTwoHanded)
+                        if (CanWield(charClass, WEAPONFEAT.MARTIAL, "ranseur") && allowTwoHanded)
                         {
-                            Type = WEAPONTYPE.PIERCE;
-                            TwoHanded = true;
+                            type = WEAPONTYPE.PIERCE;
+                            twoHanded = true;
                             return "ranseur (2d4, Crit x3)";
                         }
                         break;
                     case 79:
                     case 80:
-                        if (CanWield(Class, WEAPONFEAT.MARTIAL, "sap"))
+                        if (CanWield(charClass, WEAPONFEAT.MARTIAL, "sap"))
                         {
-                            Type = WEAPONTYPE.BLUNT;
+                            type = WEAPONTYPE.BLUNT;
                             return "sap (1d6, Crit x2)";
                         }
                         break;
                     case 81:
                     case 82:
-                        if (CanWield(Class, WEAPONFEAT.MARTIAL, "scythe") && AllowTwoHanded)
+                        if (CanWield(charClass, WEAPONFEAT.MARTIAL, "scythe") && allowTwoHanded)
                         {
-                            Type = WEAPONTYPE.SLASH;
-                            TwoHanded = true;
+                            type = WEAPONTYPE.SLASH;
+                            twoHanded = true;
                             return "scythe (2d4, Crit x4)";
                         }
                         break;
                     case 83:
                     case 84:
-                        if (CanWield(Class, WEAPONFEAT.EXOTIC, "shuriken") && AllowRanged)
+                        if (CanWield(charClass, WEAPONFEAT.EXOTIC, "shuriken") && allowRanged)
                         {
-                            Type = WEAPONTYPE.PIERCE;
-                            Range = WEAPONRANGE.RANGE;
+                            type = WEAPONTYPE.PIERCE;
+                            range = WEAPONRANGE.RANGE;
                             return "shuriken (1, Crit x2)";
                         }
                         break;
                     case 85:
                     case 86:
-                        if (CanWield(Class, WEAPONFEAT.SIMPLE, "sickle"))
+                        if (CanWield(charClass, WEAPONFEAT.SIMPLE, "sickle"))
                         {
-                            Type = WEAPONTYPE.SLASH;
+                            type = WEAPONTYPE.SLASH;
                             return "sickle (1d6, Crit x2)";
                         }
                         break;
                     case 87:
                     case 88:
                     case 89:
-                        if (CanWield(Class, WEAPONFEAT.EXOTIC, "two-bladed sword") && AllowTwoHanded)
+                        if (CanWield(charClass, WEAPONFEAT.EXOTIC, "two-bladed sword") && allowTwoHanded)
                         {
-                            Type = WEAPONTYPE.SLASH;
-                            TwoHanded = true;
+                            type = WEAPONTYPE.SLASH;
+                            twoHanded = true;
                             return "two-bladed sword (1d8/1d8, Crit 19-20/x2)";
                         }
                         break;
                     case 90:
                     case 91:
-                        if (CanWield(Class, WEAPONFEAT.MARTIAL, "trident"))
+                        if (CanWield(charClass, WEAPONFEAT.MARTIAL, "trident"))
                         {
-                            Type = WEAPONTYPE.PIERCE;
+                            type = WEAPONTYPE.PIERCE;
                             return "trident (1d8, Crit x2)";
                         }
                         break;
                     case 92:
                     case 93:
                     case 94:
-                        if (CanWield(Class, WEAPONFEAT.EXOTIC, "dwarven urgrosh") && AllowTwoHanded)
+                        if (CanWield(charClass, WEAPONFEAT.EXOTIC, "dwarven urgrosh") && allowTwoHanded)
                         {
-                            Type = WEAPONTYPE.SLASH;
-                            TwoHanded = true;
+                            type = WEAPONTYPE.SLASH;
+                            twoHanded = true;
                             return "dwarven urgrosh (1d8/1d6, Crit x3)";
                         }
                         break;
                     case 95:
                     case 96:
                     case 97:
-                        if (CanWield(Class, WEAPONFEAT.MARTIAL, "warhammer"))
+                        if (CanWield(charClass, WEAPONFEAT.MARTIAL, "warhammer"))
                         {
-                            Type = WEAPONTYPE.BLUNT;
+                            type = WEAPONTYPE.BLUNT;
                             return "warhammer (1d8, Crit x3)";
                         }
                         break;
                     default:
-                        if (CanWield(Class, WEAPONFEAT.EXOTIC, "whip"))
+                        if (CanWield(charClass, WEAPONFEAT.EXOTIC, "whip"))
                         {
-                            Type = WEAPONTYPE.SLASH;
+                            type = WEAPONTYPE.SLASH;
                             return "whip (1d2, Crit x2)";
                         }
                         break;
@@ -1015,17 +1002,17 @@ namespace NPCGen
             }
         }
 
-        private static string MeleeSpecialAbilities(MagicItems.POWER Power, WEAPONTYPE Type, ref int BonusLimit, ref Random random)
+        private static String MeleeSpecialAbilities(POWER power, WEAPONTYPE type, ref Int32 bonusLimit)
         {
-            string StoredSpell = "";
+            var storedSpell = String.Empty;
 
             while (true)
             {
-                System.Windows.Forms.Application.DoEvents();
-                switch (Power)
+                Application.DoEvents();
+                switch (power)
                 {
-                    case MagicItems.POWER.MINOR:
-                        switch (Dice.Percentile(ref random))
+                    case POWER.MINOR:
+                        switch (Dice.Percentile())
                         {
                             case 16:
                             case 17:
@@ -1037,9 +1024,9 @@ namespace NPCGen
                             case 23:
                             case 24:
                             case 25:
-                                if (BonusLimit >= 1)
+                                if (bonusLimit >= 1)
                                 {
-                                    BonusLimit--;
+                                    bonusLimit--;
                                     return "flaming (1d6 fire)";
                                 }
                                 break;
@@ -1053,9 +1040,9 @@ namespace NPCGen
                             case 33:
                             case 34:
                             case 35:
-                                if (BonusLimit >= 1)
+                                if (bonusLimit >= 1)
                                 {
-                                    BonusLimit--;
+                                    bonusLimit--;
                                     return "frost (1d6 ice)";
                                 }
                                 break;
@@ -1069,9 +1056,9 @@ namespace NPCGen
                             case 43:
                             case 44:
                             case 45:
-                                if (BonusLimit >= 1)
+                                if (bonusLimit >= 1)
                                 {
-                                    BonusLimit--;
+                                    bonusLimit--;
                                     return "shock (1d6 lightning)";
                                 }
                                 break;
@@ -1085,9 +1072,9 @@ namespace NPCGen
                             case 53:
                             case 54:
                             case 55:
-                                if (BonusLimit >= 1)
+                                if (bonusLimit >= 1)
                                 {
-                                    BonusLimit--;
+                                    bonusLimit--;
                                     return "ghost touch";
                                 }
                                 break;
@@ -1106,9 +1093,9 @@ namespace NPCGen
                             case 68:
                             case 69:
                             case 70:
-                                if (BonusLimit >= 1 && Type == WEAPONTYPE.SLASH)
+                                if (bonusLimit >= 1 && type == WEAPONTYPE.SLASH)
                                 {
-                                    BonusLimit--;
+                                    bonusLimit--;
                                     return "keen";
                                 }
                                 break;
@@ -1122,9 +1109,9 @@ namespace NPCGen
                             case 78:
                             case 79:
                             case 80:
-                                if (BonusLimit >= 1)
+                                if (bonusLimit >= 1)
                                 {
-                                    BonusLimit--;
+                                    bonusLimit--;
                                     return "mighty cleaving";
                                 }
                                 break;
@@ -1137,12 +1124,12 @@ namespace NPCGen
                             case 87:
                             case 88:
                             case 89:
-                                if (BonusLimit >= 1)
+                                if (bonusLimit >= 1)
                                 {
-                                    if (Dice.Percentile(ref random) <= 50)
-                                        StoredSpell = String.Format(" (contains {0}", Scrolls.RandomSpell(ref random, 3));
-                                    BonusLimit--;
-                                    return String.Format("spell storing{0}", StoredSpell);
+                                    if (Dice.Percentile() <= 50)
+                                        storedSpell = String.Format(" (contains {0}", Scrolls.RandomSpell(3));
+                                    bonusLimit--;
+                                    return String.Format("spell storing{0}", storedSpell);
                                 }
                                 break;
                             case 90:
@@ -1155,33 +1142,33 @@ namespace NPCGen
                             case 97:
                             case 98:
                             case 99:
-                                if (BonusLimit >= 1)
+                                if (bonusLimit >= 1)
                                 {
-                                    BonusLimit--;
+                                    bonusLimit--;
                                     return "throwing";
                                 }
                                 break;
-                            case 100: BonusLimit++; break;
+                            case 100: bonusLimit++; break;
                             default:
-                                if (BonusLimit >= 1)
+                                if (bonusLimit >= 1)
                                 {
-                                    BonusLimit--;
+                                    bonusLimit--;
                                     return "defending";
                                 }
                                 break;
                         }
                         break;
-                    case MagicItems.POWER.MEDIUM:
-                        switch (Dice.Percentile(ref random))
+                    case POWER.MEDIUM:
+                        switch (Dice.Percentile())
                         {
                             case 11:
                             case 12:
                             case 13:
                             case 14:
                             case 15:
-                                if (BonusLimit >= 1)
+                                if (bonusLimit >= 1)
                                 {
-                                    BonusLimit--;
+                                    bonusLimit--;
                                     return "flaming (1d6 fire)";
                                 }
                                 break;
@@ -1190,9 +1177,9 @@ namespace NPCGen
                             case 18:
                             case 19:
                             case 20:
-                                if (BonusLimit >= 1)
+                                if (bonusLimit >= 1)
                                 {
-                                    BonusLimit--;
+                                    bonusLimit--;
                                     return "frost (1d6 ice)";
                                 }
                                 break;
@@ -1201,9 +1188,9 @@ namespace NPCGen
                             case 23:
                             case 24:
                             case 25:
-                                if (BonusLimit >= 1)
+                                if (bonusLimit >= 1)
                                 {
-                                    BonusLimit--;
+                                    bonusLimit--;
                                     return "shock (1d6 lightning)";
                                 }
                                 break;
@@ -1212,9 +1199,9 @@ namespace NPCGen
                             case 28:
                             case 29:
                             case 30:
-                                if (BonusLimit >= 1)
+                                if (bonusLimit >= 1)
                                 {
-                                    BonusLimit--;
+                                    bonusLimit--;
                                     return "ghost touch";
                                 }
                                 break;
@@ -1228,9 +1215,9 @@ namespace NPCGen
                             case 38:
                             case 39:
                             case 40:
-                                if (BonusLimit >= 1 && Type == WEAPONTYPE.SLASH)
+                                if (bonusLimit >= 1 && type == WEAPONTYPE.SLASH)
                                 {
-                                    BonusLimit--;
+                                    bonusLimit--;
                                     return "keen";
                                 }
                                 break;
@@ -1244,19 +1231,19 @@ namespace NPCGen
                             case 48:
                             case 49:
                             case 50:
-                                if (BonusLimit >= 1)
+                                if (bonusLimit >= 1)
                                 {
-                                    BonusLimit--;
+                                    bonusLimit--;
                                     return "mighty cleaving";
                                 }
                                 break;
                             case 51:
-                                if (BonusLimit >= 1)
+                                if (bonusLimit >= 1)
                                 {
-                                    if (Dice.Percentile(ref random) <= 50)
-                                        StoredSpell = String.Format(" (contains {0}", Scrolls.RandomSpell(ref random, 3));
-                                    BonusLimit--;
-                                    return String.Format("spell storing{0}", StoredSpell);
+                                    if (Dice.Percentile() <= 50)
+                                        storedSpell = String.Format(" (contains {0}", Scrolls.RandomSpell(3));
+                                    bonusLimit--;
+                                    return String.Format("spell storing{0}", storedSpell);
                                 }
                                 break;
                             case 52:
@@ -1264,54 +1251,54 @@ namespace NPCGen
                             case 54:
                             case 55:
                             case 56:
-                                if (BonusLimit >= 1)
+                                if (bonusLimit >= 1)
                                 {
-                                    BonusLimit--;
+                                    bonusLimit--;
                                     return "throwing";
                                 }
                                 break;
                             case 57:
                             case 58:
                             case 59:
-                                if (BonusLimit >= 2)
+                                if (bonusLimit >= 2)
                                 {
-                                    BonusLimit -= 2;
-                                    return String.Format("bane (versus {0}, +2 more & +2d6 damage)", Character.CreatureType(ref random));
+                                    bonusLimit -= 2;
+                                    return String.Format("bane (versus {0}, +2 more & +2d6 damage)", Character.CreatureType());
                                 }
                                 break;
                             case 60:
                             case 61:
                             case 62:
-                                if (BonusLimit >= 2 && Type == WEAPONTYPE.BLUNT)
+                                if (bonusLimit >= 2 && type == WEAPONTYPE.BLUNT)
                                 {
-                                    BonusLimit -= 2;
+                                    bonusLimit -= 2;
                                     return "disruption (save DC 14)";
                                 }
                                 break;
                             case 63:
                             case 64:
                             case 65:
-                                if (BonusLimit >= 2)
+                                if (bonusLimit >= 2)
                                 {
-                                    BonusLimit -= 2;
+                                    bonusLimit -= 2;
                                     return "flaming burst (1d6 fire, Crit +(multiplier-1)d10 fire)";
                                 }
                                 break;
                             case 66:
                             case 67:
                             case 68:
-                                if (BonusLimit >= 2)
+                                if (bonusLimit >= 2)
                                 {
-                                    BonusLimit -= 2;
+                                    bonusLimit -= 2;
                                     return "icy burst (1d6 ice, Crit +(multiplier-1)d10 ice)";
                                 }
                                 break;
                             case 69:
                             case 70:
                             case 71:
-                                if (BonusLimit >= 2)
+                                if (bonusLimit >= 2)
                                 {
-                                    BonusLimit -= 2;
+                                    bonusLimit -= 2;
                                     return "shocking burst (1d6 lightning, Crit +(multiplier-1)d10 lightning)";
                                 }
                                 break;
@@ -1320,76 +1307,76 @@ namespace NPCGen
                             case 74:
                             case 75:
                             case 76:
-                                if (BonusLimit >= 2)
+                                if (bonusLimit >= 2)
                                 {
-                                    BonusLimit -= 2;
+                                    bonusLimit -= 2;
                                     return "thundering (Crit +(multiplier-1)d8 sonic, save DC 14 or permanently deafened)";
                                 }
                                 break;
                             case 77:
                             case 78:
                             case 79:
-                                if (BonusLimit >= 2)
+                                if (bonusLimit >= 2)
                                 {
-                                    BonusLimit -= 2;
+                                    bonusLimit -= 2;
                                     return "wounding";
                                 }
                                 break;
                             case 80:
                             case 81:
                             case 82:
-                                if (BonusLimit >= 2)
+                                if (bonusLimit >= 2)
                                 {
-                                    BonusLimit -= 2;
+                                    bonusLimit -= 2;
                                     return "holy (2d6 good)";
                                 }
                                 break;
                             case 83:
                             case 84:
                             case 85:
-                                if (BonusLimit >= 2)
+                                if (bonusLimit >= 2)
                                 {
-                                    BonusLimit -= 2;
+                                    bonusLimit -= 2;
                                     return "unholy (2d6 evil)";
                                 }
                                 break;
                             case 86:
                             case 87:
                             case 88:
-                                if (BonusLimit >= 2)
+                                if (bonusLimit >= 2)
                                 {
-                                    BonusLimit -= 2;
+                                    bonusLimit -= 2;
                                     return "lawful (2d6 law)";
                                 }
                                 break;
                             case 89:
                             case 90:
                             case 91:
-                                if (BonusLimit >= 2)
+                                if (bonusLimit >= 2)
                                 {
-                                    BonusLimit -= 2;
+                                    bonusLimit -= 2;
                                     return "chaotic (2d6 chaos)";
                                 }
                                 break;
                             case 92:
-                                if (BonusLimit >= 4)
+                                if (bonusLimit >= 4)
                                 {
-                                    BonusLimit -= 4;
+                                    bonusLimit -= 4;
                                     return "brilliant energy";
                                 }
                                 break;
                             case 93:
-                                if (BonusLimit >= 4)
+                                if (bonusLimit >= 4)
                                 {
-                                    BonusLimit -= 4;
+                                    bonusLimit -= 4;
                                     return "dancing";
                                 }
                                 break;
                             case 94:
                             case 95:
-                                if (BonusLimit >= 4)
+                                if (bonusLimit >= 4)
                                 {
-                                    BonusLimit -= 4;
+                                    bonusLimit -= 4;
                                     return "speed";
                                 }
                                 break;
@@ -1397,52 +1384,52 @@ namespace NPCGen
                             case 97:
                             case 98:
                             case 99:
-                            case 100: BonusLimit++; break;
+                            case 100: bonusLimit++; break;
                             default:
-                                if (BonusLimit >= 1)
+                                if (bonusLimit >= 1)
                                 {
-                                    BonusLimit--;
+                                    bonusLimit--;
                                     return "defending";
                                 }
                                 break;
                         }
                         break;
-                    case MagicItems.POWER.MAJOR:
-                        switch (Dice.Percentile(ref random))
+                    case POWER.MAJOR:
+                        switch (Dice.Percentile())
                         {
                             case 1:
                             case 2:
                             case 3:
-                                if (BonusLimit >= 1)
+                                if (bonusLimit >= 1)
                                 {
-                                    BonusLimit--;
+                                    bonusLimit--;
                                     return "flaming (1d6 fire)";
                                 }
                                 break;
                             case 4:
                             case 5:
                             case 6:
-                                if (BonusLimit >= 1)
+                                if (bonusLimit >= 1)
                                 {
-                                    BonusLimit--;
+                                    bonusLimit--;
                                     return "frost (1d6 ice)";
                                 }
                                 break;
                             case 7:
                             case 8:
                             case 9:
-                                if (BonusLimit >= 1)
+                                if (bonusLimit >= 1)
                                 {
-                                    BonusLimit--;
+                                    bonusLimit--;
                                     return "shock (1d6 lightning)";
                                 }
                                 break;
                             case 10:
                             case 11:
                             case 12:
-                                if (BonusLimit >= 1)
+                                if (bonusLimit >= 1)
                                 {
-                                    BonusLimit--;
+                                    bonusLimit--;
                                     return "ghost touch";
                                 }
                                 break;
@@ -1451,27 +1438,27 @@ namespace NPCGen
                             case 15:
                             case 16:
                             case 17:
-                                if (BonusLimit >= 1)
+                                if (bonusLimit >= 1)
                                 {
-                                    BonusLimit--;
+                                    bonusLimit--;
                                     return "mighty cleaving";
                                 }
                                 break;
                             case 18:
                             case 19:
-                                if (BonusLimit >= 1)
+                                if (bonusLimit >= 1)
                                 {
-                                    if (Dice.Percentile(ref random) <= 50)
-                                        StoredSpell = String.Format(" (contains {0}", Scrolls.RandomSpell(ref random, 3));
-                                    BonusLimit--;
-                                    return String.Format("spell storing{0}", StoredSpell);
+                                    if (Dice.Percentile() <= 50)
+                                        storedSpell = String.Format(" (contains {0}", Scrolls.RandomSpell(3));
+                                    bonusLimit--;
+                                    return String.Format("spell storing{0}", storedSpell);
                                 }
                                 break;
                             case 20:
                             case 21:
-                                if (BonusLimit >= 1)
+                                if (bonusLimit >= 1)
                                 {
-                                    BonusLimit--;
+                                    bonusLimit--;
                                     return "throwing";
                                 }
                                 break;
@@ -1480,18 +1467,18 @@ namespace NPCGen
                             case 24:
                             case 25:
                             case 26:
-                                if (BonusLimit >= 2)
+                                if (bonusLimit >= 2)
                                 {
-                                    BonusLimit -= 2;
-                                    return String.Format("bane (versus {0}, +2 more & +2d6 damage)", Character.CreatureType(ref random));
+                                    bonusLimit -= 2;
+                                    return String.Format("bane (versus {0}, +2 more & +2d6 damage)", Character.CreatureType());
                                 }
                                 break;
                             case 27:
                             case 28:
                             case 29:
-                                if (BonusLimit >= 2 && Type == WEAPONTYPE.BLUNT)
+                                if (bonusLimit >= 2 && type == WEAPONTYPE.BLUNT)
                                 {
-                                    BonusLimit -= 2;
+                                    bonusLimit -= 2;
                                     return "disruption (DC 14)";
                                 }
                                 break;
@@ -1499,9 +1486,9 @@ namespace NPCGen
                             case 31:
                             case 32:
                             case 33:
-                                if (BonusLimit >= 2)
+                                if (bonusLimit >= 2)
                                 {
-                                    BonusLimit -= 2;
+                                    bonusLimit -= 2;
                                     return "flaming burst (1d6 fire, Crit +(multiplier-1)d10 fire)";
                                 }
                                 break;
@@ -1509,9 +1496,9 @@ namespace NPCGen
                             case 35:
                             case 36:
                             case 37:
-                                if (BonusLimit >= 2)
+                                if (bonusLimit >= 2)
                                 {
-                                    BonusLimit -= 2;
+                                    bonusLimit -= 2;
                                     return "icy burst (1d6 ice, Crit +(multiplier-1)d10 ice)";
                                 }
                                 break;
@@ -1519,27 +1506,27 @@ namespace NPCGen
                             case 39:
                             case 40:
                             case 41:
-                                if (BonusLimit >= 2)
+                                if (bonusLimit >= 2)
                                 {
-                                    BonusLimit -= 2;
+                                    bonusLimit -= 2;
                                     return "shocking burst (1d6 lightning, Crit +(multiplier-1)d10 lightning)";
                                 }
                                 break;
                             case 42:
                             case 43:
                             case 44:
-                                if (BonusLimit >= 2)
+                                if (bonusLimit >= 2)
                                 {
-                                    BonusLimit -= 2;
+                                    bonusLimit -= 2;
                                     return "thundering (Crit (multiplier-1)d8 sonic, save DC 14 or deafened permanently)";
                                 }
                                 break;
                             case 45:
                             case 46:
                             case 47:
-                                if (BonusLimit >= 2)
+                                if (bonusLimit >= 2)
                                 {
-                                    BonusLimit -= 2;
+                                    bonusLimit -= 2;
                                     return "wounding";
                                 }
                                 break;
@@ -1548,9 +1535,9 @@ namespace NPCGen
                             case 50:
                             case 51:
                             case 52:
-                                if (BonusLimit >= 2)
+                                if (bonusLimit >= 2)
                                 {
-                                    BonusLimit -= 2;
+                                    bonusLimit -= 2;
                                     return "holy (2d6 good)";
                                 }
                                 break;
@@ -1559,9 +1546,9 @@ namespace NPCGen
                             case 55:
                             case 56:
                             case 57:
-                                if (BonusLimit >= 2)
+                                if (bonusLimit >= 2)
                                 {
-                                    BonusLimit -= 2;
+                                    bonusLimit -= 2;
                                     return "unholy (2d6 evil)";
                                 }
                                 break;
@@ -1570,9 +1557,9 @@ namespace NPCGen
                             case 60:
                             case 61:
                             case 62:
-                                if (BonusLimit >= 2)
+                                if (bonusLimit >= 2)
                                 {
-                                    BonusLimit -= 2;
+                                    bonusLimit -= 2;
                                     return "lawful (2d6 law)";
                                 }
                                 break;
@@ -1581,9 +1568,9 @@ namespace NPCGen
                             case 65:
                             case 66:
                             case 67:
-                                if (BonusLimit >= 2)
+                                if (bonusLimit >= 2)
                                 {
-                                    BonusLimit -= 2;
+                                    bonusLimit -= 2;
                                     return "chaotic (2d6 chaos)";
                                 }
                                 break;
@@ -1591,26 +1578,26 @@ namespace NPCGen
                             case 69:
                             case 70:
                             case 71:
-                                if (BonusLimit >= 4)
+                                if (bonusLimit >= 4)
                                 {
-                                    BonusLimit -= 4;
+                                    bonusLimit -= 4;
                                     return "brilliant energy";
                                 }
                                 break;
                             case 72:
                             case 73:
-                                if (BonusLimit >= 4)
+                                if (bonusLimit >= 4)
                                 {
-                                    BonusLimit -= 4;
+                                    bonusLimit -= 4;
                                     return "dancing";
                                 }
                                 break;
                             case 74:
                             case 75:
                             case 76:
-                                if (BonusLimit >= 4)
+                                if (bonusLimit >= 4)
                                 {
-                                    BonusLimit -= 4;
+                                    bonusLimit -= 4;
                                     return "speed";
                                 }
                                 break;
@@ -1618,13 +1605,13 @@ namespace NPCGen
                             case 78:
                             case 79:
                             case 80:
-                                if (BonusLimit >= 5 && Type == WEAPONTYPE.SLASH)
+                                if (bonusLimit >= 5 && type == WEAPONTYPE.SLASH)
                                 {
-                                    BonusLimit -= 5;
+                                    bonusLimit -= 5;
                                     return "vorpal";
                                 }
                                 break;
-                            default: BonusLimit++; break;
+                            default: bonusLimit++; break;
                         }
                         break;
                     default: return "[ERROR: NONPOWERED MELEE WEAPON ABILITY.  Weapons.1630]";
@@ -1632,14 +1619,14 @@ namespace NPCGen
             }
         }
 
-        private static string RangedSpecialAbilities(MagicItems.POWER Power, ref int BonusLimit, ref Random random)
+        private static String RangedSpecialAbilities(POWER power, ref Int32 bonusLimit)
         {
             while (true)
             {
-                switch (Power)
+                switch (power)
                 {
-                    case MagicItems.POWER.MINOR:
-                        switch (Dice.Percentile(ref random))
+                    case POWER.MINOR:
+                        switch (Dice.Percentile())
                         {
                             case 1:
                             case 2:
@@ -1661,9 +1648,9 @@ namespace NPCGen
                             case 18:
                             case 19:
                             case 20:
-                                if (BonusLimit >= 1)
+                                if (bonusLimit >= 1)
                                 {
-                                    BonusLimit--;
+                                    bonusLimit--;
                                     return "returning";
                                 }
                                 break;
@@ -1687,9 +1674,9 @@ namespace NPCGen
                             case 38:
                             case 39:
                             case 40:
-                                if (BonusLimit >= 1)
+                                if (bonusLimit >= 1)
                                 {
-                                    BonusLimit--;
+                                    bonusLimit--;
                                     return "distance";
                                 }
                                 break;
@@ -1713,9 +1700,9 @@ namespace NPCGen
                             case 58:
                             case 59:
                             case 60:
-                                if (BonusLimit >= 1)
+                                if (bonusLimit >= 1)
                                 {
-                                    BonusLimit--;
+                                    bonusLimit--;
                                     return "flaming (1d6 fire)";
                                 }
                                 break;
@@ -1739,23 +1726,23 @@ namespace NPCGen
                             case 78:
                             case 79:
                             case 80:
-                                if (BonusLimit >= 1)
+                                if (bonusLimit >= 1)
                                 {
-                                    BonusLimit--;
+                                    bonusLimit--;
                                     return "shock (1d6 lightning)";
                                 }
                                 break;
                             default:
-                                if (BonusLimit >= 1)
+                                if (bonusLimit >= 1)
                                 {
-                                    BonusLimit--;
+                                    bonusLimit--;
                                     return "frost (1d6 ice)";
                                 }
                                 break;
                         }
                         break;
-                    case MagicItems.POWER.MEDIUM:
-                        switch (Dice.Percentile(ref random))
+                    case POWER.MEDIUM:
+                        switch (Dice.Percentile())
                         {
                             case 16:
                             case 17:
@@ -1772,9 +1759,9 @@ namespace NPCGen
                             case 28:
                             case 29:
                             case 30:
-                                if (BonusLimit >= 1)
+                                if (bonusLimit >= 1)
                                 {
-                                    BonusLimit--;
+                                    bonusLimit--;
                                     return "distance";
                                 }
                                 break;
@@ -1783,9 +1770,9 @@ namespace NPCGen
                             case 33:
                             case 34:
                             case 35:
-                                if (BonusLimit >= 1)
+                                if (bonusLimit >= 1)
                                 {
-                                    BonusLimit--;
+                                    bonusLimit--;
                                     return "flaming (1d6 fire)";
                                 }
                                 break;
@@ -1794,9 +1781,9 @@ namespace NPCGen
                             case 38:
                             case 39:
                             case 40:
-                                if (BonusLimit >= 1)
+                                if (bonusLimit >= 1)
                                 {
-                                    BonusLimit--;
+                                    bonusLimit--;
                                     return "shock (1d6 lightning)";
                                 }
                                 break;
@@ -1805,9 +1792,9 @@ namespace NPCGen
                             case 43:
                             case 44:
                             case 45:
-                                if (BonusLimit >= 1)
+                                if (bonusLimit >= 1)
                                 {
-                                    BonusLimit--;
+                                    bonusLimit--;
                                     return "frost (1d6 ice)";
                                 }
                                 break;
@@ -1816,9 +1803,9 @@ namespace NPCGen
                             case 48:
                             case 49:
                             case 50:
-                                if (BonusLimit >= 2)
+                                if (bonusLimit >= 2)
                                 {
-                                    BonusLimit -= 2;
+                                    bonusLimit -= 2;
                                     return "flaming burst (1d6 fire, Crit +(multiplier-1)d10 fire)";
                                 }
                                 break;
@@ -1827,9 +1814,9 @@ namespace NPCGen
                             case 53:
                             case 54:
                             case 55:
-                                if (BonusLimit >= 2)
+                                if (bonusLimit >= 2)
                                 {
-                                    BonusLimit -= 2;
+                                    bonusLimit -= 2;
                                     return "icy burst (1d6 ice, Crit +(multiplier-1)d10 ice)";
                                 }
                                 break;
@@ -1838,9 +1825,9 @@ namespace NPCGen
                             case 58:
                             case 59:
                             case 60:
-                                if (BonusLimit >= 2)
+                                if (bonusLimit >= 2)
                                 {
-                                    BonusLimit -= 2;
+                                    bonusLimit -= 2;
                                     return "shocking burst (1d6 lightning, Crit +(multiplier-1)d10 lightning)";
                                 }
                                 break;
@@ -1850,10 +1837,10 @@ namespace NPCGen
                             case 64:
                             case 65:
                             case 66:
-                                if (BonusLimit >= 2)
+                                if (bonusLimit >= 2)
                                 {
-                                    BonusLimit -= 2;
-                                    return String.Format("bane (versus {0}, +2 more & +2d6 damage)", Character.CreatureType(ref random));
+                                    bonusLimit -= 2;
+                                    return String.Format("bane (versus {0}, +2 more & +2d6 damage)", Character.CreatureType());
                                 }
                                 break;
                             case 67:
@@ -1864,9 +1851,9 @@ namespace NPCGen
                             case 72:
                             case 73:
                             case 74:
-                                if (BonusLimit >= 2)
+                                if (bonusLimit >= 2)
                                 {
-                                    BonusLimit -= 2;
+                                    bonusLimit -= 2;
                                     return "holy (2d6 good)";
                                 }
                                 break;
@@ -1878,9 +1865,9 @@ namespace NPCGen
                             case 80:
                             case 81:
                             case 82:
-                                if (BonusLimit >= 2)
+                                if (bonusLimit >= 2)
                                 {
-                                    BonusLimit -= 2;
+                                    bonusLimit -= 2;
                                     return "unholy (2d6 evil)";
                                 }
                                 break;
@@ -1892,9 +1879,9 @@ namespace NPCGen
                             case 88:
                             case 89:
                             case 90:
-                                if (BonusLimit >= 2)
+                                if (bonusLimit >= 2)
                                 {
-                                    BonusLimit -= 2;
+                                    bonusLimit -= 2;
                                     return "lawful (2d6 law)";
                                 }
                                 break;
@@ -1906,25 +1893,25 @@ namespace NPCGen
                             case 96:
                             case 97:
                             case 98:
-                                if (BonusLimit >= 2)
+                                if (bonusLimit >= 2)
                                 {
-                                    BonusLimit -= 2;
+                                    bonusLimit -= 2;
                                     return "chaotic (2d6 chaos)";
                                 }
                                 break;
                             case 99:
-                            case 100: BonusLimit++; break;
+                            case 100: bonusLimit++; break;
                             default:
-                                if (BonusLimit >= 1)
+                                if (bonusLimit >= 1)
                                 {
-                                    BonusLimit--;
+                                    bonusLimit--;
                                     return "returning";
                                 }
                                 break;
                         }
                         break;
-                    case MagicItems.POWER.MAJOR:
-                        switch (Dice.Percentile(ref random))
+                    case POWER.MAJOR:
+                        switch (Dice.Percentile())
                         {
                             case 11:
                             case 12:
@@ -1936,9 +1923,9 @@ namespace NPCGen
                             case 18:
                             case 19:
                             case 20:
-                                if (BonusLimit >= 1)
+                                if (bonusLimit >= 1)
                                 {
-                                    BonusLimit--;
+                                    bonusLimit--;
                                     return "shock (1d6 lightning)";
                                 }
                                 break;
@@ -1952,9 +1939,9 @@ namespace NPCGen
                             case 28:
                             case 29:
                             case 30:
-                                if (BonusLimit >= 1)
+                                if (bonusLimit >= 1)
                                 {
-                                    BonusLimit--;
+                                    bonusLimit--;
                                     return "frost (1d6 ice)";
                                 }
                                 break;
@@ -1968,9 +1955,9 @@ namespace NPCGen
                             case 38:
                             case 39:
                             case 40:
-                                if (BonusLimit >= 2)
+                                if (bonusLimit >= 2)
                                 {
-                                    BonusLimit -= 2;
+                                    bonusLimit -= 2;
                                     return "flaming burst (1d6 fire, Crit +(multiplier-1)d10 fire)";
                                 }
                                 break;
@@ -1984,9 +1971,9 @@ namespace NPCGen
                             case 48:
                             case 49:
                             case 50:
-                                if (BonusLimit >= 2)
+                                if (bonusLimit >= 2)
                                 {
-                                    BonusLimit -= 2;
+                                    bonusLimit -= 2;
                                     return "icy burst (1d6 ice, Crit +(multiplier-1)d10 ice)";
                                 }
                                 break;
@@ -2000,9 +1987,9 @@ namespace NPCGen
                             case 58:
                             case 59:
                             case 60:
-                                if (BonusLimit >= 2)
+                                if (bonusLimit >= 2)
                                 {
-                                    BonusLimit -= 2;
+                                    bonusLimit -= 2;
                                     return "shocking burst (1d6 lightning, Crit +(multiplier-1)d10 lightning)";
                                 }
                                 break;
@@ -2011,10 +1998,10 @@ namespace NPCGen
                             case 63:
                             case 64:
                             case 65:
-                                if (BonusLimit >= 2)
+                                if (bonusLimit >= 2)
                                 {
-                                    BonusLimit -= 2;
-                                    return String.Format("bane (versus {0}, +2 more & +2d6 damage)", Character.CreatureType(ref random));
+                                    bonusLimit -= 2;
+                                    return String.Format("bane (versus {0}, +2 more & +2d6 damage)", Character.CreatureType());
                                 }
                                 break;
                             case 66:
@@ -2022,9 +2009,9 @@ namespace NPCGen
                             case 68:
                             case 69:
                             case 70:
-                                if (BonusLimit >= 2)
+                                if (bonusLimit >= 2)
                                 {
-                                    BonusLimit -= 2;
+                                    bonusLimit -= 2;
                                     return "holy (2d6 good)";
                                 }
                                 break;
@@ -2033,9 +2020,9 @@ namespace NPCGen
                             case 73:
                             case 74:
                             case 75:
-                                if (BonusLimit >= 2)
+                                if (bonusLimit >= 2)
                                 {
-                                    BonusLimit -= 2;
+                                    bonusLimit -= 2;
                                     return "unholy (2d6 evil)";
                                 }
                                 break;
@@ -2044,9 +2031,9 @@ namespace NPCGen
                             case 78:
                             case 79:
                             case 80:
-                                if (BonusLimit >= 2)
+                                if (bonusLimit >= 2)
                                 {
-                                    BonusLimit -= 2;
+                                    bonusLimit -= 2;
                                     return "lawful (2d6 law)";
                                 }
                                 break;
@@ -2055,9 +2042,9 @@ namespace NPCGen
                             case 83:
                             case 84:
                             case 85:
-                                if (BonusLimit >= 2)
+                                if (bonusLimit >= 2)
                                 {
-                                    BonusLimit -= 2;
+                                    bonusLimit -= 2;
                                     return "chaotic (2d6 chaos)";
                                 }
                                 break;
@@ -2066,9 +2053,9 @@ namespace NPCGen
                             case 88:
                             case 89:
                             case 90:
-                                if (BonusLimit >= 4)
+                                if (bonusLimit >= 4)
                                 {
-                                    BonusLimit -= 4;
+                                    bonusLimit -= 4;
                                     return "speed";
                                 }
                                 break;
@@ -2079,19 +2066,19 @@ namespace NPCGen
                             case 95:
                             case 96:
                             case 97:
-                                if (BonusLimit >= 4)
+                                if (bonusLimit >= 4)
                                 {
-                                    BonusLimit -= 4;
+                                    bonusLimit -= 4;
                                     return "brilliant energy";
                                 }
                                 break;
                             case 98:
                             case 99:
-                            case 100: BonusLimit++; break;
+                            case 100: bonusLimit++; break;
                             default:
-                                if (BonusLimit >= 1)
+                                if (bonusLimit >= 1)
                                 {
-                                    BonusLimit--;
+                                    bonusLimit--;
                                     return "flaming (1d6 fire)";
                                 }
                                 break;
@@ -2102,47 +2089,47 @@ namespace NPCGen
             }
         }
 
-        private static string MeleeSpecialQualities(int Bonus, ref Random random)
+        private static String MeleeSpecialQualities(Int32 bonus)
         {
-            if (Bonus > 0)
-            {
-                int Roll = Dice.Percentile(ref random);
+            if (bonus == 0)
+                return String.Empty;
 
-                if (Roll < 21)
-                    return "Sheds light";
-                else if (Roll < 26)
-                    return Intelligence.Generate(Bonus, ref random);
-                else if (Roll < 36)
-                    return String.Format("Sheds light, {0}", Intelligence.Generate(Bonus, ref random));
-                else if (Roll < 51)
-                    return "Markings";
-            }
-            return "";
+            var roll = Dice.Percentile();
+
+            if (roll < 21)
+                return "Sheds light";
+            else if (roll < 26)
+                return Intelligence.Generate(bonus);
+            else if (roll < 36)
+                return String.Format("Sheds light, {0}", Intelligence.Generate(bonus));
+            else if (roll < 51)
+                return "Markings";
+            return String.Empty;
         }
 
-        private static string RangedSpecialQualities(int Bonus, bool Ammunition, ref Random random)
+        private static String RangedSpecialQualities(Int32 bonus, Boolean ammunition)
         {
-            if (Bonus > 0)
-            {
-                int Roll = Dice.Percentile(ref random);
+            if (bonus == 0)
+                return String.Empty;
 
-                if (Roll < 6 && !Ammunition)
-                    return Intelligence.Generate(Bonus, ref random);
-                else if (Roll < 26 && Roll > 5)
-                    return "Markings";
-            }
-            return "";
+            var roll = Dice.Percentile();
+
+            if (roll < 6 && !ammunition)
+                return Intelligence.Generate(bonus);
+            else if (roll < 26 && roll > 5)
+                return "Markings";
+            return String.Empty;
         }
 
-        private static string SpecificWeapon(Classes.CLASS Class, MagicItems.POWER Power, int BonusLimit, bool AllowTwoHanded, ref bool TwoHanded, bool AllowRanged, ref WEAPONRANGE Range, ref Random random)
+        private static String SpecificWeapon(CLASS charClass, POWER power, Int32 bonusLimit, Boolean allowTwoHanded, ref Boolean twoHanded, Boolean allowRanged, ref WEAPONRANGE range)
         {
             while (true)
             {
-                System.Windows.Forms.Application.DoEvents();
-                switch (Power)
+                Application.DoEvents();
+                switch (power)
                 {
-                    case MagicItems.POWER.MEDIUM:
-                        switch (Dice.Percentile(ref random))
+                    case POWER.MEDIUM:
+                        switch (Dice.Percentile())
                         {
                             case 21:
                             case 22:
@@ -2164,10 +2151,10 @@ namespace NPCGen
                             case 38:
                             case 39:
                             case 40:
-                                if (CanWield(Class, WEAPONFEAT.SIMPLE, "crossbow") && BonusLimit >= 3 && AllowRanged)
+                                if (CanWield(charClass, WEAPONFEAT.SIMPLE, "crossbow") && bonusLimit >= 3 && allowRanged)
                                 {
-                                    Range = WEAPONRANGE.RANGE;
-                                    return String.Format("Screaming Bolts (x{0}, {1})", Dice.Percentile(ref random) / 5 + 1, Ranged(Class, "crossbow bolts", ref random));
+                                    range = WEAPONRANGE.RANGE;
+                                    return String.Format("Screaming Bolts (x{0}, {1})", Dice.Percentile() / 5 + 1, Ranged(charClass, "crossbow bolts"));
                                 }
                                 break;
                             case 41:
@@ -2185,10 +2172,10 @@ namespace NPCGen
                             case 53:
                             case 54:
                             case 55:
-                                if (CanWield(Class, WEAPONFEAT.SIMPLE, "javelin") && BonusLimit >= 3 && AllowRanged)
+                                if (CanWield(charClass, WEAPONFEAT.SIMPLE, "javelin") && bonusLimit >= 3 && allowRanged)
                                 {
-                                    Range = WEAPONRANGE.RANGE;
-                                    return String.Format("Javelin of Lightning (x{0})", Dice.Percentile(ref random) / 5 + 1);
+                                    range = WEAPONRANGE.RANGE;
+                                    return String.Format("Javelin of Lightning (x{0})", Dice.Percentile() / 5 + 1);
                                 }
                                 break;
                             case 56:
@@ -2201,10 +2188,10 @@ namespace NPCGen
                             case 63:
                             case 64:
                             case 65:
-                                if (CanWield(Class, WEAPONFEAT.MARTIAL, "bow") && AllowRanged)
+                                if (CanWield(charClass, WEAPONFEAT.MARTIAL, "bow") && allowRanged)
                                 {
-                                    Range = WEAPONRANGE.RANGE;
-                                    return String.Format("Slaying Arrows ({0}) (x{1}, {2})", Character.CreatureType(ref random), Dice.Percentile(ref random) / 5 + 1, Ranged(Class, "arrows", ref random));
+                                    range = WEAPONRANGE.RANGE;
+                                    return String.Format("Slaying Arrows ({0}) (x{1}, {2})", Character.CreatureType(), Dice.Percentile() / 5 + 1, Ranged(charClass, "arrows"));
                                 }
                                 break;
                             case 66:
@@ -2212,101 +2199,101 @@ namespace NPCGen
                             case 68:
                             case 69:
                             case 70:
-                                if (CanWield(Class, WEAPONFEAT.SIMPLE, "dagger"))
+                                if (CanWield(charClass, WEAPONFEAT.SIMPLE, "dagger"))
                                     return "adamantine dagger";
                                 break;
                             case 71:
                             case 72:
-                                if (CanWield(Class, WEAPONFEAT.MARTIAL, "trident"))
-                                    return String.Format("Trident of Fish Command ({0} charges)", MagicItems.ChargesLeft(ref random, 50, true));
+                                if (CanWield(charClass, WEAPONFEAT.MARTIAL, "trident"))
+                                    return String.Format("Trident of Fish Command ({0} charges)", MagicItems.ChargesLeft(50, true));
                                 break;
                             case 73:
                             case 74:
-                                if (CanWield(Class, WEAPONFEAT.SIMPLE, "dagger") && BonusLimit >= 2)
+                                if (CanWield(charClass, WEAPONFEAT.SIMPLE, "dagger") && bonusLimit >= 2)
                                     return "Dagger of Venom";
                                 break;
                             case 75:
                             case 76:
-                                if (CanWield(Class, WEAPONFEAT.MARTIAL, "battleaxe") && BonusLimit >= 2)
+                                if (CanWield(charClass, WEAPONFEAT.MARTIAL, "battleaxe") && bonusLimit >= 2)
                                     return "adamantine battleaxe";
                                 break;
                             case 77:
                             case 78:
                             case 79:
-                                if (CanWield(Class, WEAPONFEAT.MARTIAL, "trident") && BonusLimit >= 2)
+                                if (CanWield(charClass, WEAPONFEAT.MARTIAL, "trident") && bonusLimit >= 2)
                                     return "Trident of Warning";
                                 break;
                             case 80:
                             case 81:
                             case 82:
-                                if (CanWield(Class, WEAPONFEAT.SIMPLE, "dagger") && BonusLimit >= 2)
+                                if (CanWield(charClass, WEAPONFEAT.SIMPLE, "dagger") && bonusLimit >= 2)
                                     return "Assassin's Dagger";
                                 break;
                             case 83:
                             case 84:
                             case 85:
-                                if (CanWield(Class, WEAPONFEAT.MARTIAL, "short sword") && BonusLimit >= 2)
+                                if (CanWield(charClass, WEAPONFEAT.MARTIAL, "short sword") && bonusLimit >= 2)
                                     return "Sword of Subtlety";
                                 break;
                             case 86:
                             case 87:
                             case 88:
-                                if (CanWield(Class, WEAPONFEAT.SIMPLE, "heavy mace") && BonusLimit >= 2)
+                                if (CanWield(charClass, WEAPONFEAT.SIMPLE, "heavy mace") && bonusLimit >= 2)
                                     return "Mace of Terror";
                                 break;
                             case 89:
                             case 90:
                             case 91:
-                                if (CanWield(Class, WEAPONFEAT.MARTIAL, "longsword") && BonusLimit >= 3)
-                                    return String.Format("Nine Lives Stealer ({0} charges)", MagicItems.ChargesLeft(ref random, 9, true));
+                                if (CanWield(charClass, WEAPONFEAT.MARTIAL, "longsword") && bonusLimit >= 3)
+                                    return String.Format("Nine Lives Stealer ({0} charges)", MagicItems.ChargesLeft(9, true));
                                 break;
                             case 92:
                             case 93:
                             case 94:
-                                if (CanWield(Class, WEAPONFEAT.MARTIAL, "longbow") && BonusLimit >= 3 && AllowRanged)
+                                if (CanWield(charClass, WEAPONFEAT.MARTIAL, "longbow") && bonusLimit >= 3 && allowRanged)
                                 {
-                                    Range = WEAPONRANGE.RANGE;
-                                    return String.Format("Oathbow (x{0} arrows)", Dice.Percentile(ref random) / 5 + 1);
+                                    range = WEAPONRANGE.RANGE;
+                                    return String.Format("Oathbow (x{0} arrows)", Dice.Percentile() / 5 + 1);
                                 }
                                 break;
                             case 95:
                             case 96:
-                                if (CanWield(Class, WEAPONFEAT.MARTIAL, "longsword") && BonusLimit >= 3)
+                                if (CanWield(charClass, WEAPONFEAT.MARTIAL, "longsword") && bonusLimit >= 3)
                                     return "Sword of Life Stealing";
                                 break;
                             case 97:
                             case 98:
-                                if (CanWield(Class, WEAPONFEAT.MARTIAL, "longsword") && BonusLimit >= 4)
+                                if (CanWield(charClass, WEAPONFEAT.MARTIAL, "longsword") && bonusLimit >= 4)
                                     return "Flame Tongue";
                                 break;
                             case 99:
                             case 100:
-                                if (CanWield(Class, WEAPONFEAT.MARTIAL, "greataxe") && BonusLimit >= 4 && AllowTwoHanded)
+                                if (CanWield(charClass, WEAPONFEAT.MARTIAL, "greataxe") && bonusLimit >= 4 && allowTwoHanded)
                                 {
-                                    TwoHanded = true;
+                                    twoHanded = true;
                                     return "Life-Drinker";
                                 }
                                 break;
                             default:
-                                if (CanWield(Class, WEAPONFEAT.SIMPLE, "bow") && BonusLimit >= 2 && AllowRanged)
+                                if (CanWield(charClass, WEAPONFEAT.SIMPLE, "bow") && bonusLimit >= 2 && allowRanged)
                                 {
-                                    Range = WEAPONRANGE.RANGE;
-                                    return String.Format("Sleep Arrows (x{0}, {1})", Dice.Percentile(ref random) / 5 + 1, Ranged(Class, "arrows", ref random));
+                                    range = WEAPONRANGE.RANGE;
+                                    return String.Format("Sleep Arrows (x{0}, {1})", Dice.Percentile() / 5 + 1, Ranged(charClass, "arrows"));
                                 }
                                 break;
                         }
                         break;
-                    case MagicItems.POWER.MAJOR:
-                        switch (Dice.Percentile(ref random))
+                    case POWER.MAJOR:
+                        switch (Dice.Percentile())
                         {
                             case 1:
                             case 2:
                             case 3:
                             case 4:
-                                if (CanWield(Class, WEAPONFEAT.SIMPLE, "javelin") && BonusLimit >= 3 && AllowRanged)
+                                if (CanWield(charClass, WEAPONFEAT.SIMPLE, "javelin") && bonusLimit >= 3 && allowRanged)
                                 {
-                                    Range = WEAPONRANGE.RANGE;
-                                    return String.Format("Javelin of Lightning (x{0})", Dice.Percentile(ref random) / 5 + 1);
+                                    range = WEAPONRANGE.RANGE;
+                                    return String.Format("Javelin of Lightning (x{0})", Dice.Percentile() / 5 + 1);
                                 }
                                 break;
                             case 5:
@@ -2314,36 +2301,36 @@ namespace NPCGen
                             case 7:
                             case 8:
                             case 9:
-                                if (CanWield(Class, WEAPONFEAT.MARTIAL, "bow") && AllowRanged)
+                                if (CanWield(charClass, WEAPONFEAT.MARTIAL, "bow") && allowRanged)
                                 {
-                                    Range = WEAPONRANGE.RANGE;
-                                    return String.Format("Slaying Arrows ({0}) (x{1}, {2})", Character.CreatureType(ref random), Dice.Percentile(ref random) / 5 + 1, Ranged(Class, "arrows", ref random));
+                                    range = WEAPONRANGE.RANGE;
+                                    return String.Format("Slaying Arrows ({0}) (x{1}, {2})", Character.CreatureType(), Dice.Percentile() / 5 + 1, Ranged(charClass, "arrows"));
                                 }
                                 break;
                             case 10:
                             case 11:
-                                if (CanWield(Class, WEAPONFEAT.MARTIAL, "trident"))
-                                    return String.Format("Trident of Fish Command ({0} charges)", MagicItems.ChargesLeft(ref random, 50, true));
+                                if (CanWield(charClass, WEAPONFEAT.MARTIAL, "trident"))
+                                    return String.Format("Trident of Fish Command ({0} charges)", MagicItems.ChargesLeft(50, true));
                                 break;
                             case 12:
                             case 13:
-                                if (CanWield(Class, WEAPONFEAT.MARTIAL, "bow") && AllowRanged)
+                                if (CanWield(charClass, WEAPONFEAT.MARTIAL, "bow") && allowRanged)
                                 {
-                                    Range = WEAPONRANGE.RANGE;
-                                    return String.Format("Greater Slaying Arrows ({0}) (x{1}, {2})", Character.CreatureType(ref random), Dice.Percentile(ref random) / 5 + 1, Ranged(Class, "arrows", ref random));
+                                    range = WEAPONRANGE.RANGE;
+                                    return String.Format("Greater Slaying Arrows ({0}) (x{1}, {2})", Character.CreatureType(), Dice.Percentile() / 5 + 1, Ranged(charClass, "arrows"));
                                 }
                                 break;
                             case 14:
                             case 15:
                             case 16:
                             case 17:
-                                if (CanWield(Class, WEAPONFEAT.SIMPLE, "dagger") && BonusLimit >= 2)
+                                if (CanWield(charClass, WEAPONFEAT.SIMPLE, "dagger") && bonusLimit >= 2)
                                     return "Dagger of Venom";
                                 break;
                             case 18:
                             case 19:
                             case 20:
-                                if (CanWield(Class, WEAPONFEAT.MARTIAL, "battleaxe") && BonusLimit >= 2)
+                                if (CanWield(charClass, WEAPONFEAT.MARTIAL, "battleaxe") && bonusLimit >= 2)
                                     return "adamantine battleaxe";
                                 break;
                             case 21:
@@ -2351,7 +2338,7 @@ namespace NPCGen
                             case 23:
                             case 24:
                             case 25:
-                                if (CanWield(Class, WEAPONFEAT.MARTIAL, "trident") && BonusLimit >= 2)
+                                if (CanWield(charClass, WEAPONFEAT.MARTIAL, "trident") && bonusLimit >= 2)
                                     return "Trident of Warning";
                                 break;
                             case 26:
@@ -2359,7 +2346,7 @@ namespace NPCGen
                             case 28:
                             case 29:
                             case 30:
-                                if (CanWield(Class, WEAPONFEAT.SIMPLE, "dagger") && BonusLimit >= 2)
+                                if (CanWield(charClass, WEAPONFEAT.SIMPLE, "dagger") && bonusLimit >= 2)
                                     return "Assassin's Dagger";
                                 break;
                             case 31:
@@ -2367,7 +2354,7 @@ namespace NPCGen
                             case 33:
                             case 34:
                             case 35:
-                                if (CanWield(Class, WEAPONFEAT.MARTIAL, "short sword") && BonusLimit >= 2)
+                                if (CanWield(charClass, WEAPONFEAT.MARTIAL, "short sword") && bonusLimit >= 2)
                                     return "Sword of Subtlety";
                                 break;
                             case 36:
@@ -2375,7 +2362,7 @@ namespace NPCGen
                             case 38:
                             case 39:
                             case 40:
-                                if (CanWield(Class, WEAPONFEAT.SIMPLE, "heavy mace") && BonusLimit >= 2)
+                                if (CanWield(charClass, WEAPONFEAT.SIMPLE, "heavy mace") && bonusLimit >= 2)
                                     return "Mace of Terror";
                                 break;
                             case 41:
@@ -2383,18 +2370,18 @@ namespace NPCGen
                             case 43:
                             case 44:
                             case 45:
-                                if (CanWield(Class, WEAPONFEAT.MARTIAL, "longsword") && BonusLimit >= 3)
-                                    return String.Format("Nine Lives Stealer ({0} charges)", MagicItems.ChargesLeft(ref random, 9, true));
+                                if (CanWield(charClass, WEAPONFEAT.MARTIAL, "longsword") && bonusLimit >= 3)
+                                    return String.Format("Nine Lives Stealer ({0} charges)", MagicItems.ChargesLeft(9, true));
                                 break;
                             case 46:
                             case 47:
                             case 48:
                             case 49:
                             case 50:
-                                if (CanWield(Class, WEAPONFEAT.MARTIAL, "longbow") && BonusLimit >= 3 && AllowRanged)
+                                if (CanWield(charClass, WEAPONFEAT.MARTIAL, "longbow") && bonusLimit >= 3 && allowRanged)
                                 {
-                                    Range = WEAPONRANGE.RANGE;
-                                    return String.Format("Oathbow (x{0} arrows)", Dice.Percentile(ref random) / 5 + 1);
+                                    range = WEAPONRANGE.RANGE;
+                                    return String.Format("Oathbow (x{0} arrows)", Dice.Percentile() / 5 + 1);
                                 }
                                 break;
                             case 51:
@@ -2402,7 +2389,7 @@ namespace NPCGen
                             case 53:
                             case 54:
                             case 55:
-                                if (CanWield(Class, WEAPONFEAT.MARTIAL, "longsword") && BonusLimit >= 3)
+                                if (CanWield(charClass, WEAPONFEAT.MARTIAL, "longsword") && bonusLimit >= 3)
                                     return "Sword of Life Stealing";
                                 break;
                             case 56:
@@ -2410,7 +2397,7 @@ namespace NPCGen
                             case 58:
                             case 59:
                             case 60:
-                                if (CanWield(Class, WEAPONFEAT.MARTIAL, "longsword") && BonusLimit >= 4)
+                                if (CanWield(charClass, WEAPONFEAT.MARTIAL, "longsword") && bonusLimit >= 4)
                                     return "Flame Tongue";
                                 break;
                             case 61:
@@ -2419,9 +2406,9 @@ namespace NPCGen
                             case 64:
                             case 65:
                             case 66:
-                                if (CanWield(Class, WEAPONFEAT.MARTIAL, "greataxe") && BonusLimit >= 4 && AllowTwoHanded)
+                                if (CanWield(charClass, WEAPONFEAT.MARTIAL, "greataxe") && bonusLimit >= 4 && allowTwoHanded)
                                 {
-                                    TwoHanded = true;
+                                    twoHanded = true;
                                     return "Life-Drinker";
                                 }
                                 break;
@@ -2431,9 +2418,9 @@ namespace NPCGen
                             case 70:
                             case 71:
                             case 72:
-                                if (CanWield(Class, WEAPONFEAT.MARTIAL, "greatsword") && BonusLimit >= 4 && AllowTwoHanded)
+                                if (CanWield(charClass, WEAPONFEAT.MARTIAL, "greatsword") && bonusLimit >= 4 && allowTwoHanded)
                                 {
-                                    TwoHanded = true;
+                                    twoHanded = true;
                                     return "Frost Brand";
                                 }
                                 break;
@@ -2443,34 +2430,34 @@ namespace NPCGen
                             case 76:
                             case 77:
                             case 78:
-                                if (CanWield(Class, WEAPONFEAT.MARTIAL, "rapier") && BonusLimit >= 5)
+                                if (CanWield(charClass, WEAPONFEAT.MARTIAL, "rapier") && bonusLimit >= 5)
                                     return "Rapier of Puncturing";
                                 break;
                             case 79:
                             case 80:
                             case 81:
-                                if ((CanWield(Class, WEAPONFEAT.MARTIAL, "short sword") || CanWield(Class, WEAPONFEAT.EXOTIC, "bastard sword")) && BonusLimit >= 5)
+                                if ((CanWield(charClass, WEAPONFEAT.MARTIAL, "short sword") || CanWield(charClass, WEAPONFEAT.EXOTIC, "bastard sword")) && bonusLimit >= 5)
                                     return "Sun Blade";
                                 break;
                             case 82:
                             case 83:
-                                if (CanWield(Class, WEAPONFEAT.MARTIAL, "longsword") && BonusLimit >= 5)
+                                if (CanWield(charClass, WEAPONFEAT.MARTIAL, "longsword") && bonusLimit >= 5)
                                     return "Sword of the Planes";
                                 break;
                             case 84:
                             case 85:
-                                if (CanWield(Class, WEAPONFEAT.MARTIAL, "scimitar") && BonusLimit >= 5)
+                                if (CanWield(charClass, WEAPONFEAT.MARTIAL, "scimitar") && bonusLimit >= 5)
                                     return "Sylvan Scimitar";
                                 break;
                             case 86:
                             case 87:
-                                if (CanWield(Class, WEAPONFEAT.MARTIAL, "warhammer") && BonusLimit >= 5)
+                                if (CanWield(charClass, WEAPONFEAT.MARTIAL, "warhammer") && bonusLimit >= 5)
                                     return "Dwarven Thrower";
                                 break;
                             case 88:
                             case 89:
                             case 90:
-                                if (CanWield(Class, WEAPONFEAT.SIMPLE, "heavy mace") && BonusLimit >= 6)
+                                if (CanWield(charClass, WEAPONFEAT.SIMPLE, "heavy mace") && bonusLimit >= 6)
                                     return "Mace of Smiting";
                                 break;
                             case 91:
@@ -2479,12 +2466,12 @@ namespace NPCGen
                             case 94:
                             case 95:
                             case 96:
-                                if (CanWield(Class, WEAPONFEAT.MARTIAL, "longsword") && BonusLimit >= 7)
+                                if (CanWield(charClass, WEAPONFEAT.MARTIAL, "longsword") && bonusLimit >= 7)
                                     return "Holy Avenger";
                                 break;
                             default:
-                                if (CanWield(Class, WEAPONFEAT.MARTIAL, "short sword") && BonusLimit >= 9)
-                                    return String.Format("Luck Blade ({0} charges)", MagicItems.ChargesLeft(ref random, 5, true));
+                                if (CanWield(charClass, WEAPONFEAT.MARTIAL, "short sword") && bonusLimit >= 9)
+                                    return String.Format("Luck Blade ({0} charges)", MagicItems.ChargesLeft(5, true));
                                 break;
                         }
                         break;

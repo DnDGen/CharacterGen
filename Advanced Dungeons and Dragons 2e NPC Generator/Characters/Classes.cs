@@ -1,73 +1,56 @@
+using NPCGen.Roll;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
-namespace NPCGen
+namespace NPCGen.Characters
 {
-    class Classes
+    public enum CLASS { BARBARIAN, BARD, CLERIC, DRUID, FIGHTER, MONK, PALADIN, RANGER, THIEF, SORCERER, WIZARD };
+    public enum LEVELRANDOMIZER { ANY, ANY_NONEPIC, LOW_1_5, MEDIUM_6_9, HIGH_10_15, VERYHIGH_16_20, EPIC_21ORMORE };
+    public enum CLASSRANDOMIZER { ANY, ANY_FIGHTER, ANY_SPELLCASTER, ANY_MAGE, ANY_HEALER, ANY_NONSPELLCASTER, ANY_ROGUE };
+
+    public class Classes
     {
-        public enum CLASS { BARBARIAN, BARD, CLERIC, DRUID, FIGHTER, MONK, PALADIN, RANGER, THIEF, SORCERER, WIZARD };
-        public enum LEVELRANDOMIZER { ANY, ANY_NONEPIC, LOW_1_5, MEDIUM_6_9, HIGH_10_15, VERYHIGH_16_20, EPIC_21ORMORE};
-        public enum CLASSRANDOMIZER { ANY, ANY_FIGHTER, ANY_SPELLCASTER, ANY_MAGE, ANY_HEALER, ANY_NONSPELLCASTER, ANY_ROGUE};
+        public static String[] ClassesArray { get { return Enum.GetNames(typeof(CLASS)); } }
+        public static String[] LevelRandomizerArray { get { return Enum.GetNames(typeof(LEVELRANDOMIZER)); } }
+        public static String[] ClassRandomizerArray { get { return Enum.GetNames(typeof(CLASSRANDOMIZER)); } }
 
-        public static string[] ClassesArray
+        public static Int32 RandomLevel(LEVELRANDOMIZER levelRandomizer)
         {
-            get
+            switch (levelRandomizer)
             {
-                return Enum.GetNames(typeof(CLASS));
+                case LEVELRANDOMIZER.ANY_NONEPIC: return Dice.d20();
+                case LEVELRANDOMIZER.EPIC_21ORMORE: return Dice.d20(20);
+                case LEVELRANDOMIZER.HIGH_10_15: return Dice.d6(9);
+                case LEVELRANDOMIZER.LOW_1_5: return Dice.Roll(1, 5);
+                case LEVELRANDOMIZER.MEDIUM_6_9: return Dice.d4(5);
+                case LEVELRANDOMIZER.VERYHIGH_16_20: return Dice.Roll(1, 5, 15);
+                default: return Dice.Roll(1, 40);
             }
         }
 
-        public static string[] LevelRandomizerArray
-        {
-            get
-            {
-                return Enum.GetNames(typeof(LEVELRANDOMIZER));
-            }
-        }
-
-        public static string[] ClassRandomizerArray
-        {
-            get
-            {
-                return Enum.GetNames(typeof(CLASSRANDOMIZER));
-            }
-        }
-
-        public static int RandomLevel(LEVELRANDOMIZER LevelRandomizer, ref Random random)
-        {
-            switch (LevelRandomizer)
-            {
-                case LEVELRANDOMIZER.ANY_NONEPIC: return random.Next(1, 21);
-                case LEVELRANDOMIZER.EPIC_21ORMORE: return random.Next(21, 41);
-                case LEVELRANDOMIZER.HIGH_10_15: return random.Next(10, 16);
-                case LEVELRANDOMIZER.LOW_1_5: return random.Next(1, 6);
-                case LEVELRANDOMIZER.MEDIUM_6_9: return random.Next(6, 10);
-                case LEVELRANDOMIZER.VERYHIGH_16_20: return random.Next(16, 21);
-                default: return random.Next(1, 41);
-            }
-        }
-
-        public static CLASS RandomClass(CLASSRANDOMIZER Randomizer, Character.ALIGNMENT[] Alignment, ref Random random)
+        public static CLASS RandomClass(CLASSRANDOMIZER randomizer, ALIGNMENT[] alignment)
         {
             while (true)
             {
-                System.Windows.Forms.Application.DoEvents();
-                switch (Alignment[1])
+                Application.DoEvents();
+                switch (alignment[1])
                 {
-                    case Character.ALIGNMENT.GOOD:
-                        switch (Dice.Percentile(ref random))
+                    case ALIGNMENT.GOOD:
+                        switch (Dice.Percentile())
                         {
                             case 1:
                             case 2:
                             case 3:
                             case 4:
-                            case 5: if (CheckClass(Randomizer, CLASS.BARBARIAN, Alignment)) { return CLASS.BARBARIAN; } break;
+                            case 5: if (CheckClass(randomizer, CLASS.BARBARIAN, alignment)) { return CLASS.BARBARIAN; } break;
                             case 6:
                             case 7:
                             case 8:
                             case 9:
-                            case 10: if (CheckClass(Randomizer, CLASS.BARD, Alignment)) { return CLASS.BARD; } break;
+                            case 10: if (CheckClass(randomizer, CLASS.BARD, alignment)) { return CLASS.BARD; } break;
                             case 11:
                             case 12:
                             case 13:
@@ -87,12 +70,12 @@ namespace NPCGen
                             case 27:
                             case 28:
                             case 29:
-                            case 30: if (CheckClass(Randomizer, CLASS.CLERIC, Alignment)) { return CLASS.CLERIC; } break;
+                            case 30: if (CheckClass(randomizer, CLASS.CLERIC, alignment)) { return CLASS.CLERIC; } break;
                             case 31:
                             case 32:
                             case 33:
                             case 34:
-                            case 35: if (CheckClass(Randomizer, CLASS.DRUID, Alignment)) { return CLASS.DRUID; } break;
+                            case 35: if (CheckClass(randomizer, CLASS.DRUID, alignment)) { return CLASS.DRUID; } break;
                             case 36:
                             case 37:
                             case 38:
@@ -102,17 +85,17 @@ namespace NPCGen
                             case 42:
                             case 43:
                             case 44:
-                            case 45: if (CheckClass(Randomizer, CLASS.FIGHTER, Alignment)) { return CLASS.FIGHTER; } break;
+                            case 45: if (CheckClass(randomizer, CLASS.FIGHTER, alignment)) { return CLASS.FIGHTER; } break;
                             case 46:
                             case 47:
                             case 48:
                             case 49:
-                            case 50: if (CheckClass(Randomizer, CLASS.MONK, Alignment)) { return CLASS.MONK; } break;
+                            case 50: if (CheckClass(randomizer, CLASS.MONK, alignment)) { return CLASS.MONK; } break;
                             case 51:
                             case 52:
                             case 53:
                             case 54:
-                            case 55: if (CheckClass(Randomizer, CLASS.PALADIN, Alignment)) { return CLASS.PALADIN; } break;
+                            case 55: if (CheckClass(randomizer, CLASS.PALADIN, alignment)) { return CLASS.PALADIN; } break;
                             case 56:
                             case 57:
                             case 58:
@@ -122,7 +105,7 @@ namespace NPCGen
                             case 62:
                             case 63:
                             case 64:
-                            case 65: if (CheckClass(Randomizer, CLASS.RANGER, Alignment)) { return CLASS.RANGER; } break;
+                            case 65: if (CheckClass(randomizer, CLASS.RANGER, alignment)) { return CLASS.RANGER; } break;
                             case 66:
                             case 67:
                             case 68:
@@ -132,12 +115,12 @@ namespace NPCGen
                             case 72:
                             case 73:
                             case 74:
-                            case 75: if (CheckClass(Randomizer, CLASS.THIEF, Alignment)) { return CLASS.THIEF; } break;
+                            case 75: if (CheckClass(randomizer, CLASS.THIEF, alignment)) { return CLASS.THIEF; } break;
                             case 76:
                             case 77:
                             case 78:
                             case 79:
-                            case 80: if (CheckClass(Randomizer, CLASS.SORCERER, Alignment)) { return CLASS.SORCERER; } break;
+                            case 80: if (CheckClass(randomizer, CLASS.SORCERER, alignment)) { return CLASS.SORCERER; } break;
                             case 81:
                             case 82:
                             case 83:
@@ -157,28 +140,28 @@ namespace NPCGen
                             case 97:
                             case 98:
                             case 99:
-                            case 100: if (CheckClass(Randomizer, CLASS.WIZARD, Alignment)) { return CLASS.WIZARD; } break;
+                            case 100: if (CheckClass(randomizer, CLASS.WIZARD, alignment)) { return CLASS.WIZARD; } break;
                             default: return CLASS.FIGHTER;
                         }
                         break;
-                    case Character.ALIGNMENT.NEUTRAL:
-                        switch (Dice.Percentile(ref random))
+                    case ALIGNMENT.NEUTRAL:
+                        switch (Dice.Percentile())
                         {
                             case 1:
                             case 2:
                             case 3:
                             case 4:
-                            case 5: if (CheckClass(Randomizer, CLASS.BARBARIAN, Alignment)) { return CLASS.BARBARIAN; } break;
+                            case 5: if (CheckClass(randomizer, CLASS.BARBARIAN, alignment)) { return CLASS.BARBARIAN; } break;
                             case 6:
                             case 7:
                             case 8:
                             case 9:
-                            case 10: if (CheckClass(Randomizer, CLASS.BARD, Alignment)) { return CLASS.BARD; } break;
+                            case 10: if (CheckClass(randomizer, CLASS.BARD, alignment)) { return CLASS.BARD; } break;
                             case 11:
                             case 12:
                             case 13:
                             case 14:
-                            case 15: if (CheckClass(Randomizer, CLASS.CLERIC, Alignment)) { return CLASS.CLERIC; } break;
+                            case 15: if (CheckClass(randomizer, CLASS.CLERIC, alignment)) { return CLASS.CLERIC; } break;
                             case 16:
                             case 17:
                             case 18:
@@ -188,7 +171,7 @@ namespace NPCGen
                             case 22:
                             case 23:
                             case 24:
-                            case 25: if (CheckClass(Randomizer, CLASS.DRUID, Alignment)) { return CLASS.DRUID; } break;
+                            case 25: if (CheckClass(randomizer, CLASS.DRUID, alignment)) { return CLASS.DRUID; } break;
                             case 26:
                             case 27:
                             case 28:
@@ -208,17 +191,17 @@ namespace NPCGen
                             case 42:
                             case 43:
                             case 44:
-                            case 45: if (CheckClass(Randomizer, CLASS.FIGHTER, Alignment)) { return CLASS.FIGHTER; } break;
+                            case 45: if (CheckClass(randomizer, CLASS.FIGHTER, alignment)) { return CLASS.FIGHTER; } break;
                             case 46:
                             case 47:
                             case 48:
                             case 49:
-                            case 50: if (CheckClass(Randomizer, CLASS.MONK, Alignment)) { return CLASS.MONK; } break;
-                            case 51: if (CheckClass(Randomizer, CLASS.PALADIN, Alignment)) { return CLASS.PALADIN; } break;
+                            case 50: if (CheckClass(randomizer, CLASS.MONK, alignment)) { return CLASS.MONK; } break;
+                            case 51: if (CheckClass(randomizer, CLASS.PALADIN, alignment)) { return CLASS.PALADIN; } break;
                             case 52:
                             case 53:
                             case 54:
-                            case 55: if (CheckClass(Randomizer, CLASS.RANGER, Alignment)) { return CLASS.RANGER; } break;
+                            case 55: if (CheckClass(randomizer, CLASS.RANGER, alignment)) { return CLASS.RANGER; } break;
                             case 56:
                             case 57:
                             case 58:
@@ -238,12 +221,12 @@ namespace NPCGen
                             case 72:
                             case 73:
                             case 74:
-                            case 75: if (CheckClass(Randomizer, CLASS.THIEF, Alignment)) { return CLASS.THIEF; } break;
+                            case 75: if (CheckClass(randomizer, CLASS.THIEF, alignment)) { return CLASS.THIEF; } break;
                             case 76:
                             case 77:
                             case 78:
                             case 79:
-                            case 80: if (CheckClass(Randomizer, CLASS.SORCERER, Alignment)) { return CLASS.SORCERER; } break;
+                            case 80: if (CheckClass(randomizer, CLASS.SORCERER, alignment)) { return CLASS.SORCERER; } break;
                             case 81:
                             case 82:
                             case 83:
@@ -263,12 +246,12 @@ namespace NPCGen
                             case 97:
                             case 98:
                             case 99:
-                            case 100: if (CheckClass(Randomizer, CLASS.WIZARD, Alignment)) { return CLASS.WIZARD; } break;
+                            case 100: if (CheckClass(randomizer, CLASS.WIZARD, alignment)) { return CLASS.WIZARD; } break;
                             default: return CLASS.FIGHTER;
                         }
                         break;
-                    case Character.ALIGNMENT.EVIL:
-                        switch (Dice.Percentile(ref random))
+                    case ALIGNMENT.EVIL:
+                        switch (Dice.Percentile())
                         {
                             case 1:
                             case 2:
@@ -279,12 +262,12 @@ namespace NPCGen
                             case 7:
                             case 8:
                             case 9:
-                            case 10: if (CheckClass(Randomizer, CLASS.BARBARIAN, Alignment)) { return CLASS.BARBARIAN; } break;
+                            case 10: if (CheckClass(randomizer, CLASS.BARBARIAN, alignment)) { return CLASS.BARBARIAN; } break;
                             case 11:
                             case 12:
                             case 13:
                             case 14:
-                            case 15: if (CheckClass(Randomizer, CLASS.BARD, Alignment)) { return CLASS.BARD; } break;
+                            case 15: if (CheckClass(randomizer, CLASS.BARD, alignment)) { return CLASS.BARD; } break;
                             case 16:
                             case 17:
                             case 18:
@@ -304,12 +287,12 @@ namespace NPCGen
                             case 32:
                             case 33:
                             case 34:
-                            case 35: if (CheckClass(Randomizer, CLASS.CLERIC, Alignment)) { return CLASS.CLERIC; } break;
+                            case 35: if (CheckClass(randomizer, CLASS.CLERIC, alignment)) { return CLASS.CLERIC; } break;
                             case 36:
                             case 37:
                             case 38:
                             case 39:
-                            case 40: if (CheckClass(Randomizer, CLASS.DRUID, Alignment)) { return CLASS.DRUID; } break;
+                            case 40: if (CheckClass(randomizer, CLASS.DRUID, alignment)) { return CLASS.DRUID; } break;
                             case 41:
                             case 42:
                             case 43:
@@ -319,17 +302,17 @@ namespace NPCGen
                             case 47:
                             case 48:
                             case 49:
-                            case 50: if (CheckClass(Randomizer, CLASS.FIGHTER, Alignment)) { return CLASS.FIGHTER; } break;
+                            case 50: if (CheckClass(randomizer, CLASS.FIGHTER, alignment)) { return CLASS.FIGHTER; } break;
                             case 51:
                             case 52:
                             case 53:
                             case 54:
-                            case 55: if (CheckClass(Randomizer, CLASS.MONK, Alignment)) { return CLASS.MONK; } break;
-                            case 56: if (CheckClass(Randomizer, CLASS.PALADIN, Alignment)) { return CLASS.PALADIN; } break;
+                            case 55: if (CheckClass(randomizer, CLASS.MONK, alignment)) { return CLASS.MONK; } break;
+                            case 56: if (CheckClass(randomizer, CLASS.PALADIN, alignment)) { return CLASS.PALADIN; } break;
                             case 57:
                             case 58:
                             case 59:
-                            case 60: if (CheckClass(Randomizer, CLASS.RANGER, Alignment)) { return CLASS.RANGER; } break;
+                            case 60: if (CheckClass(randomizer, CLASS.RANGER, alignment)) { return CLASS.RANGER; } break;
                             case 61:
                             case 62:
                             case 63:
@@ -349,12 +332,12 @@ namespace NPCGen
                             case 77:
                             case 78:
                             case 79:
-                            case 80: if (CheckClass(Randomizer, CLASS.THIEF, Alignment)) { return CLASS.THIEF; } break;
+                            case 80: if (CheckClass(randomizer, CLASS.THIEF, alignment)) { return CLASS.THIEF; } break;
                             case 81:
                             case 82:
                             case 83:
                             case 84:
-                            case 85: if (CheckClass(Randomizer, CLASS.SORCERER, Alignment)) { return CLASS.SORCERER; } break;
+                            case 85: if (CheckClass(randomizer, CLASS.SORCERER, alignment)) { return CLASS.SORCERER; } break;
                             case 86:
                             case 87:
                             case 88:
@@ -369,23 +352,23 @@ namespace NPCGen
                             case 97:
                             case 98:
                             case 99:
-                            case 100: if (CheckClass(Randomizer, CLASS.WIZARD, Alignment)) { return CLASS.WIZARD; } break;
+                            case 100: if (CheckClass(randomizer, CLASS.WIZARD, alignment)) { return CLASS.WIZARD; } break;
                             default: return CLASS.FIGHTER;
                         }
                         break;
-                    default: return (CLASS)random.Next(0, ClassesArray.Length);
+                    default: return (CLASS)Dice.Roll(0, ClassesArray.Count());
                 }
             }
         }
 
-        private static bool CheckClass(CLASSRANDOMIZER Randomizer, CLASS Class, Character.ALIGNMENT[] Alignment)
+        private static Boolean CheckClass(CLASSRANDOMIZER randomizer, CLASS charClass, ALIGNMENT[] alignment)
         {
-            switch (Class)
+            switch (charClass)
             {
                 case CLASS.BARBARIAN:
-                    if (Alignment[0] != Character.ALIGNMENT.LAWFUL)
+                    if (alignment[0] != ALIGNMENT.LAWFUL)
                     {
-                        switch (Randomizer)
+                        switch (randomizer)
                         {
                             case CLASSRANDOMIZER.ANY_HEALER:
                             case CLASSRANDOMIZER.ANY_MAGE:
@@ -396,9 +379,9 @@ namespace NPCGen
                     }
                     return false;
                 case CLASS.BARD:
-                    if (Alignment[0] != Character.ALIGNMENT.LAWFUL)
+                    if (alignment[0] != ALIGNMENT.LAWFUL)
                     {
-                        switch (Randomizer)
+                        switch (randomizer)
                         {
                             case CLASSRANDOMIZER.ANY_FIGHTER:
                             case CLASSRANDOMIZER.ANY_NONSPELLCASTER: return false;
@@ -407,7 +390,7 @@ namespace NPCGen
                     }
                     return false;
                 case CLASS.CLERIC:
-                    switch (Randomizer)
+                    switch (randomizer)
                     {
                         case CLASSRANDOMIZER.ANY_FIGHTER:
                         case CLASSRANDOMIZER.ANY_MAGE:
@@ -416,9 +399,9 @@ namespace NPCGen
                         default: return true;
                     }
                 case CLASS.DRUID:
-                    if (Alignment[0] == Character.ALIGNMENT.NEUTRAL || Alignment[1] == Character.ALIGNMENT.NEUTRAL)
+                    if (alignment.Any(x => x == ALIGNMENT.NEUTRAL))
                     {
-                        switch (Randomizer)
+                        switch (randomizer)
                         {
                             case CLASSRANDOMIZER.ANY_FIGHTER:
                             case CLASSRANDOMIZER.ANY_MAGE:
@@ -429,7 +412,7 @@ namespace NPCGen
                     }
                     return false;
                 case CLASS.FIGHTER:
-                    switch (Randomizer)
+                    switch (randomizer)
                     {
                         case CLASSRANDOMIZER.ANY_HEALER:
                         case CLASSRANDOMIZER.ANY_MAGE:
@@ -438,9 +421,9 @@ namespace NPCGen
                         default: return true;
                     }
                 case CLASS.MONK:
-                    if (Alignment[0] == Character.ALIGNMENT.LAWFUL)
+                    if (alignment[0] == ALIGNMENT.LAWFUL)
                     {
-                        switch (Randomizer)
+                        switch (randomizer)
                         {
                             case CLASSRANDOMIZER.ANY_HEALER:
                             case CLASSRANDOMIZER.ANY_MAGE:
@@ -451,9 +434,9 @@ namespace NPCGen
                     }
                     return false;
                 case CLASS.PALADIN:
-                    if (Alignment[0] == Character.ALIGNMENT.LAWFUL)
+                    if (alignment[0] == ALIGNMENT.LAWFUL)
                     {
-                        switch (Randomizer)
+                        switch (randomizer)
                         {
                             case CLASSRANDOMIZER.ANY_MAGE:
                             case CLASSRANDOMIZER.ANY_ROGUE:
@@ -463,7 +446,7 @@ namespace NPCGen
                     }
                     return false;
                 case CLASS.RANGER:
-                    switch (Randomizer)
+                    switch (randomizer)
                     {
                         case CLASSRANDOMIZER.ANY_HEALER:
                         case CLASSRANDOMIZER.ANY_MAGE:
@@ -472,7 +455,7 @@ namespace NPCGen
                         default: return true;
                     }
                 case CLASS.SORCERER:
-                    switch (Randomizer)
+                    switch (randomizer)
                     {
                         case CLASSRANDOMIZER.ANY_FIGHTER:
                         case CLASSRANDOMIZER.ANY_HEALER:
@@ -481,7 +464,7 @@ namespace NPCGen
                         default: return true;
                     }
                 case CLASS.THIEF:
-                    switch (Randomizer)
+                    switch (randomizer)
                     {
                         case CLASSRANDOMIZER.ANY_FIGHTER:
                         case CLASSRANDOMIZER.ANY_HEALER:
@@ -490,7 +473,7 @@ namespace NPCGen
                         default: return true;
                     }
                 case CLASS.WIZARD:
-                    switch (Randomizer)
+                    switch (randomizer)
                     {
                         case CLASSRANDOMIZER.ANY_FIGHTER:
                         case CLASSRANDOMIZER.ANY_HEALER:
@@ -502,273 +485,281 @@ namespace NPCGen
             }
         }
 
-        public static int[] Prioritize(CLASS Class, int[] Stats)
+        public static Int32[] Prioritize(CLASS charClass, Int32[] stats)
         {
-            switch (Class)
+            switch (charClass)
             {
-                case CLASS.BARBARIAN: return Prioritize(Stats, (int)Character.STATS.STRENGTH, (int)Character.STATS.DEXTERITY);
-                case CLASS.BARD: return Prioritize(Stats, (int)Character.STATS.CHARISMA, (int)Character.STATS.INTELLIGENCE);
-                case CLASS.CLERIC: return Prioritize(Stats, (int)Character.STATS.WISDOM, (int)Character.STATS.CHARISMA);
-                case CLASS.DRUID: return Prioritize(Stats, (int)Character.STATS.WISDOM, (int)Character.STATS.DEXTERITY);
-                case CLASS.FIGHTER: return Prioritize(Stats, (int)Character.STATS.STRENGTH, (int)Character.STATS.CONSTITUTION);
-                case CLASS.MONK: return Prioritize(Stats, (int)Character.STATS.WISDOM, (int)Character.STATS.STRENGTH);
-                case CLASS.PALADIN: return Prioritize(Stats, (int)Character.STATS.CHARISMA, (int)Character.STATS.STRENGTH);
-                case CLASS.RANGER: return Prioritize(Stats, (int)Character.STATS.STRENGTH, (int)Character.STATS.WISDOM);
-                case CLASS.THIEF: return Prioritize(Stats, (int)Character.STATS.DEXTERITY, (int)Character.STATS.INTELLIGENCE);
-                case CLASS.SORCERER: return Prioritize(Stats, (int)Character.STATS.CHARISMA, (int)Character.STATS.DEXTERITY);
-                case CLASS.WIZARD: return Prioritize(Stats, (int)Character.STATS.INTELLIGENCE, (int)Character.STATS.DEXTERITY);
-                default: return Stats;
+                case CLASS.BARBARIAN: return Prioritize(stats, Stats.Strength, Stats.Dexterity);
+                case CLASS.BARD: return Prioritize(stats, Stats.Charisma, Stats.Intelligence);
+                case CLASS.CLERIC: return Prioritize(stats, Stats.Wisdom, Stats.Charisma);
+                case CLASS.DRUID: return Prioritize(stats, Stats.Wisdom, Stats.Dexterity);
+                case CLASS.FIGHTER: return Prioritize(stats, Stats.Strength, Stats.Constitution);
+                case CLASS.MONK: return Prioritize(stats, Stats.Wisdom, Stats.Strength);
+                case CLASS.PALADIN: return Prioritize(stats, Stats.Charisma, Stats.Strength);
+                case CLASS.RANGER: return Prioritize(stats, Stats.Strength, Stats.Wisdom);
+                case CLASS.THIEF: return Prioritize(stats, Stats.Dexterity, Stats.Intelligence);
+                case CLASS.SORCERER: return Prioritize(stats, Stats.Charisma, Stats.Dexterity);
+                case CLASS.WIZARD: return Prioritize(stats, Stats.Intelligence, Stats.Dexterity);
+                default: return stats;
             }
         }
 
-        private static int[] Prioritize(int[] Stats, int Priority1, int Priority2)
+        private static Int32[] Prioritize(Int32[] stats, Int32 firstPriority, Int32 secondPriority)
         {
-            int Index = FindMax(Stats); int temp;
+            var index = FindIndexOfMax(stats);
 
-            if (Index != Priority1)
+            if (index != firstPriority)
             {
-                temp = Stats[Index];
-                Stats[Index] = Stats[Priority1];
-                Stats[Priority1] = temp;
+                var temp = stats[index];
+                stats[index] = stats[firstPriority];
+                stats[firstPriority] = temp;
             }
 
-            Index = FindMax(Stats, Priority1);
+            index = FindIndexOfMax(stats, firstPriority);
 
-            if (Index != Priority2)
+            if (index != secondPriority)
             {
-                temp = Stats[Index];
-                Stats[Index] = Stats[Priority2];
-                Stats[Priority2] = temp;
+                var temp = stats[index];
+                stats[index] = stats[secondPriority];
+                stats[secondPriority] = temp;
             }
 
-            return Stats;
+            return stats;
         }
 
-        private static int FindMax(int[] input)
+        private static Int32 FindIndexOfMax(Int32[] input, Int32 SkipIndex = -1)
         {
-            int MaxIndex = 0;
-            for (int i = 1; i < input.Length; i++)
-            {
-                if (input[i] > input[MaxIndex])
-                    MaxIndex = i;
-            }
+            var MaxIndex = 0;
 
-            return MaxIndex;
-        }
-
-        private static int FindMax(int[] input, int SkipIndex)
-        {
-            int MaxIndex = 0;
             if (SkipIndex == 0)
                 MaxIndex = 1;
-            for (int i = 1; i < input.Length; i++)
-            {
+
+            for (var i = 1; i < input.Length; i++)
                 if (input[i] > input[MaxIndex] && i != SkipIndex)
                     MaxIndex = i;
-            }
 
             return MaxIndex;
         }
 
-        public static int HitPoints(CLASS Class, int Level, int Constitution, Races Race, ref Random random)
+        public static Int32 HitPoints(CLASS charClass, Int32 level, Int32 constitution, Races race)
         {
-            int HitDie; int HP; int ConstitutionModifier = 0;
-            switch (Class)
-            {
-                case CLASS.BARBARIAN: HitDie = 12; break;
-                case CLASS.FIGHTER:
-                case CLASS.PALADIN:
-                case CLASS.RANGER: HitDie = 10; break;
-                case CLASS.CLERIC:
-                case CLASS.DRUID:
-                case CLASS.MONK: HitDie = 8; break;
-                case CLASS.BARD:
-                case CLASS.THIEF: HitDie = 6; break;
-                case CLASS.SORCERER:
-                case CLASS.WIZARD: HitDie = 4; break;
-                default: HitDie = 0; break;
-            }
+            var hitDie = GetHitDie(charClass, race.MetaRace);
+            var constitutionModifier = GetConstitutionModifier(charClass, constitution);
 
-            if (Race.MetaRace == Races.METARACE.HALF_DRAGON)
-            {
-                switch (HitDie)
-                {
-                    case 4: HitDie = 6; break;
-                    case 6: HitDie = 8; break;
-                    case 8: HitDie = 10; break;
-                    case 10: HitDie = 12; break;
-                    default: break;
-                }
-            }
+            level--;
+            var HP = hitDie + constitutionModifier;
 
-            switch (Constitution)
+            while (level-- > 0)
             {
-                case 1: ConstitutionModifier = -3; break;
-                case 2:
-                case 3: ConstitutionModifier = -2; break;
-                case 4:
-                case 5:
-                case 6: ConstitutionModifier = -1; break;
-                case 15: ConstitutionModifier = 1; break;
-                case 16: ConstitutionModifier = 2; break;
-                case 17:
-                    ConstitutionModifier = 2;
-                    if (Class == CLASS.BARBARIAN || Class == CLASS.FIGHTER || Class == CLASS.MONK || Class == CLASS.PALADIN || Class == CLASS.RANGER)
-                        ConstitutionModifier = 3;
-                    break;
-                case 18:
-                    ConstitutionModifier = 2;
-                    if (Class == CLASS.BARBARIAN || Class == CLASS.FIGHTER || Class == CLASS.MONK || Class == CLASS.PALADIN || Class == CLASS.RANGER)
-                        ConstitutionModifier = 4;
-                    break;
-                case 19:
-                    ConstitutionModifier = 2;
-                    if (Class == CLASS.BARBARIAN || Class == CLASS.FIGHTER || Class == CLASS.MONK || Class == CLASS.PALADIN || Class == CLASS.RANGER)
-                        ConstitutionModifier = 5;
-                    break;
-                default: break;
-            }
-
-            Level--; HP = HitDie + ConstitutionModifier; int temp;
-            while (Level > 0)
-            {
-                temp = Dice.Roll(1, HitDie, ConstitutionModifier, ref random);
+                var temp = Dice.Roll(1, hitDie, constitutionModifier);
                 if (temp < 1)
                     temp = 1;
                 HP += temp;
-                Level--;
             }
 
-            switch (Race.Race)
-            {
-                case Races.RACE.BUGBEAR: HP += Dice.Roll(3, 8, 0, ref random); break;
-                case Races.RACE.LIZARDFOLK:
-                case Races.RACE.TROGLODYTE:
-                case Races.RACE.GNOLL: HP += Dice.Roll(2, 8, 0, ref random); break;
-                case Races.RACE.MIND_FLAYER: HP += Dice.Roll(8, 8, 0, ref random); break;
-                case Races.RACE.MINOTAUR: HP += Dice.Roll(6, 8, 0, ref random); break;
-                case Races.RACE.OGRE: HP += Dice.Roll(4, 8, 0, ref random); break;
-                case Races.RACE.OGRE_MAGE: HP += Dice.Roll(5, 8, 0, ref random); break;
-                default: break;
-            }
+            HP += RacialBonusHP(race.Race);
 
             return HP;
         }
 
-        public static LinkedList<string> BardWeapons
+        private static Int32 GetConstitutionModifier(CLASS charClass, Int32 constitution)
+        {
+            switch (constitution)
+            {
+                case 1: return -3;
+                case 2:
+                case 3: return -2;
+                case 4:
+                case 5:
+                case 6: return -1;
+                case 15: return 1;
+                case 16: return 2;
+                case 17:
+                    if (IsFighter(charClass))
+                        return 3;
+                    return 2;
+                case 18:
+                    if (IsFighter(charClass))
+                        return 4;
+                    return 2;
+                case 19:
+                    if (IsFighter(charClass))
+                        return 5;
+                    return 2;
+                default: return 0;
+            }
+        }
+
+        private static Boolean IsFighter(CLASS charClass)
+        {
+            return charClass == CLASS.BARBARIAN || charClass == CLASS.FIGHTER || charClass == CLASS.MONK || charClass == CLASS.PALADIN || charClass == CLASS.RANGER;
+        }
+
+        private static Int32 RacialBonusHP(RACE race)
+        {
+            switch (race)
+            {
+                case RACE.BUGBEAR: return Dice.Roll(3, 8);
+                case RACE.LIZARDFOLK:
+                case RACE.TROGLODYTE:
+                case RACE.GNOLL: return Dice.Roll(2, 8);
+                case RACE.MIND_FLAYER: return Dice.Roll(8, 8);
+                case RACE.MINOTAUR: return Dice.Roll(6, 8);
+                case RACE.OGRE: return Dice.Roll(4, 8);
+                case RACE.OGRE_MAGE: return Dice.Roll(5, 8);
+                default: return 0;
+            }
+        }
+
+        private static Int32 GetHitDie(CLASS charClass, METARACE metarace)
+        {
+            var hd = 0;
+
+            switch (charClass)
+            {
+                case CLASS.BARBARIAN: hd = 12; break;
+                case CLASS.FIGHTER:
+                case CLASS.PALADIN:
+                case CLASS.RANGER: hd = 10; break;
+                case CLASS.CLERIC:
+                case CLASS.DRUID:
+                case CLASS.MONK: hd = 8; break;
+                case CLASS.BARD:
+                case CLASS.THIEF: hd = 6; break;
+                case CLASS.SORCERER:
+                case CLASS.WIZARD: hd = 4; break;
+                default: return 0;
+            }
+
+            if (metarace == METARACE.HALF_DRAGON)
+            {
+                switch (hd)
+                {
+                    case 4: hd = 6; break;
+                    case 6: hd = 8; break;
+                    case 8: hd = 10; break;
+                    case 10: hd = 12; break;
+                    default: break;
+                }
+            }
+
+            return hd;
+        }
+
+        public static IEnumerable<String> BardWeapons
         {
             get
             {
-                LinkedList<string> output = new LinkedList<string>();
+                var output = new List<String>();
 
-                output.AddLast("longbow");
-                output.AddLast("composite longbow");
-                output.AddLast("longsword");
-                output.AddLast("rapier");
-                output.AddLast("sap");
-                output.AddLast("composite shortbow");
-                output.AddLast("short sword");
-                output.AddLast("shortbow");
-                output.AddLast("whip");
-                output.AddLast("bow");
+                output.Add("longbow");
+                output.Add("composite longbow");
+                output.Add("longsword");
+                output.Add("rapier");
+                output.Add("sap");
+                output.Add("composite shortbow");
+                output.Add("short sword");
+                output.Add("shortbow");
+                output.Add("whip");
+                output.Add("bow");
 
                 return output;
             }
         }
 
-        public static LinkedList<string> DruidWeapons
+        public static IEnumerable<String> DruidWeapons
         {
             get
             {
-                LinkedList<string> output = new LinkedList<string>();
+                var output = new List<String>();
 
-                output.AddLast("club");
-                output.AddLast("dagger");
-                output.AddLast("dart");
-                output.AddLast("longspear");
-                output.AddLast("quarterstaff");
-                output.AddLast("scimitar");
-                output.AddLast("sickle");
-                output.AddLast("shortspear");
-                output.AddLast("sling");
+                output.Add("club");
+                output.Add("dagger");
+                output.Add("dart");
+                output.Add("longspear");
+                output.Add("quarterstaff");
+                output.Add("scimitar");
+                output.Add("sickle");
+                output.Add("shortspear");
+                output.Add("sling");
 
                 return output;
             }
         }
 
-        public static LinkedList<string> MonkWeapons
+        public static IEnumerable<String> MonkWeapons
         {
             get
             {
-                LinkedList<string> output = new LinkedList<string>();
+                var output = new List<String>();
 
-                output.AddLast("club");
-                output.AddLast("light crossbow");
-                output.AddLast("heavy crossbow");
-                output.AddLast("dagger");
-                output.AddLast("handaxe");
-                output.AddLast("javelin");
-                output.AddLast("kama");
-                output.AddLast("nunchaku");
-                output.AddLast("quarterstaff");
-                output.AddLast("shuriken");
-                output.AddLast("siangham");
-                output.AddLast("sling");
-                output.AddLast("crossbow");
+                output.Add("club");
+                output.Add("light crossbow");
+                output.Add("heavy crossbow");
+                output.Add("dagger");
+                output.Add("handaxe");
+                output.Add("javelin");
+                output.Add("kama");
+                output.Add("nunchaku");
+                output.Add("quarterstaff");
+                output.Add("shuriken");
+                output.Add("siangham");
+                output.Add("sling");
+                output.Add("crossbow");
 
                 return output;
             }
         }
 
-        public static LinkedList<string> ThiefWeapons
+        public static IEnumerable<String> ThiefWeapons
         {
             get
             {
-                LinkedList<string> output = new LinkedList<string>();
+                var output = new List<String>();
 
-                output.AddLast("light crossbow");
-                output.AddLast("hand crossbow");
-                output.AddLast("dagger");
-                output.AddLast("punching dagger");
-                output.AddLast("dart");
-                output.AddLast("light mace");
-                output.AddLast("sap");
-                output.AddLast("shortbow");
-                output.AddLast("composite shortbow");
-                output.AddLast("short sword");
-                output.AddLast("club");
-                output.AddLast("heavy crossbow");
-                output.AddLast("heavy mace");
-                output.AddLast("morningstar");
-                output.AddLast("qurterstaff");
-                output.AddLast("rapier");
-                output.AddLast("bow");
-                output.AddLast("crossbow");
+                output.Add("light crossbow");
+                output.Add("hand crossbow");
+                output.Add("dagger");
+                output.Add("punching dagger");
+                output.Add("dart");
+                output.Add("light mace");
+                output.Add("sap");
+                output.Add("shortbow");
+                output.Add("composite shortbow");
+                output.Add("short sword");
+                output.Add("club");
+                output.Add("heavy crossbow");
+                output.Add("heavy mace");
+                output.Add("morningstar");
+                output.Add("qurterstaff");
+                output.Add("rapier");
+                output.Add("bow");
+                output.Add("crossbow");
 
                 return output;
             }
         }
 
-        public static LinkedList<string> WizardWeapons
+        public static IEnumerable<String> WizardWeapons
         {
             get
             {
-                LinkedList<string> output = new LinkedList<string>();
+                var output = new List<String>();
 
-                output.AddLast("club");
-                output.AddLast("dagger");
-                output.AddLast("light crossbow");
-                output.AddLast("heavy crossbow");
-                output.AddLast("quarterstaff");
-                output.AddLast("crossbow");
+                output.Add("club");
+                output.Add("dagger");
+                output.Add("light crossbow");
+                output.Add("heavy crossbow");
+                output.Add("quarterstaff");
+                output.Add("crossbow");
 
                 return output;
             }
         }
 
-        public static int MonkDamage(int Level)
+        public static Int32 MonkDamage(Int32 level)
         {
-            switch (Level)
+            switch (level)
             {
                 case 1:
                 case 2:
@@ -789,269 +780,270 @@ namespace NPCGen
             }
         }
 
-        public static string Familiar(CLASS Class, int Level, ref Random random)
+        public static String Familiar(CLASS charClass, Int32 level)
         {
-            string Animal = "";
-            switch (Class)
+            var animal = String.Empty;
+
+            switch (charClass)
             {
                 case CLASS.DRUID:
-                    while (Animal == "")
+                    while (animal == String.Empty)
                     {
-                        switch (Dice.Roll(1, 50, 0, ref random))
+                        switch (Dice.Roll(1, 50, 0))
                         {
-                            case 1: Animal = "Badger"; break;
-                            case 2: Animal = "Camel"; break;
-                            case 3: Animal = "Dire Rat"; break;
+                            case 1: animal = "Badger"; break;
+                            case 2: animal = "Camel"; break;
+                            case 3: animal = "Dire Rat"; break;
                             case 4:
-                            case 5: Animal = "Dog"; break;
-                            case 6: Animal = "Riding Dog"; break;
-                            case 7: Animal = "Eagle"; break;
+                            case 5: animal = "Dog"; break;
+                            case 6: animal = "Riding Dog"; break;
+                            case 7: animal = "Eagle"; break;
                             case 8:
-                            case 9: Animal = "Hawk"; break;
+                            case 9: animal = "Hawk"; break;
                             case 50:
-                            case 10: Animal = "Owl"; break;
-                            case 11: Animal = "Light Horse"; break;
-                            case 12: Animal = "Heavy Horse"; break;
-                            case 13: Animal = "Pony"; break;
-                            case 14: Animal = "Small Viper"; break;
-                            case 15: Animal = "Medium Viper"; break;
+                            case 10: animal = "Owl"; break;
+                            case 11: animal = "Light Horse"; break;
+                            case 12: animal = "Heavy Horse"; break;
+                            case 13: animal = "Pony"; break;
+                            case 14: animal = "Small Viper"; break;
+                            case 15: animal = "Medium Viper"; break;
                             case 16:
-                            case 17: Animal = "Wolf"; break;
+                            case 17: animal = "Wolf"; break;
                             case 18:
-                                if (Level > 3)
+                                if (level > 3)
                                 {
-                                    Animal = "Ape";
-                                    Level -= 3;
+                                    animal = "Ape";
+                                    level -= 3;
                                 }
                                 break;
                             case 19:
-                                if (Level > 3)
+                                if (level > 3)
                                 {
-                                    Animal = "Black Bear";
-                                    Level -= 3;
+                                    animal = "Black Bear";
+                                    level -= 3;
                                 }
                                 break;
                             case 20:
-                                if (Level > 3)
+                                if (level > 3)
                                 {
-                                    Animal = "Bison";
-                                    Level -= 3;
+                                    animal = "Bison";
+                                    level -= 3;
                                 }
                                 break;
                             case 21:
-                                if (Level > 3)
+                                if (level > 3)
                                 {
-                                    Animal = "Boar";
-                                    Level -= 3;
+                                    animal = "Boar";
+                                    level -= 3;
                                 }
                                 break;
                             case 22:
-                                if (Level > 3)
+                                if (level > 3)
                                 {
-                                    Animal = "Cheetah";
-                                    Level -= 3;
+                                    animal = "Cheetah";
+                                    level -= 3;
                                 }
                                 break;
                             case 23:
-                                if (Level > 3)
+                                if (level > 3)
                                 {
-                                    Animal = "Dire Badger";
-                                    Level -= 3;
+                                    animal = "Dire Badger";
+                                    level -= 3;
                                 }
                                 break;
                             case 24:
-                                if (Level > 3)
+                                if (level > 3)
                                 {
-                                    Animal = "Dire Weasel";
-                                    Level -= 3;
+                                    animal = "Dire Weasel";
+                                    level -= 3;
                                 }
                                 break;
                             case 25:
-                                if (Level > 3)
+                                if (level > 3)
                                 {
-                                    Animal = "Leopard";
-                                    Level -= 3;
+                                    animal = "Leopard";
+                                    level -= 3;
                                 }
                                 break;
                             case 26:
-                                if (Level > 3)
+                                if (level > 3)
                                 {
-                                    Animal = "Monitor Lizard";
-                                    Level -= 3;
+                                    animal = "Monitor Lizard";
+                                    level -= 3;
                                 }
                                 break;
                             case 27:
-                                if (Level > 3)
+                                if (level > 3)
                                 {
-                                    Animal = "Constrictor Snake";
-                                    Level -= 3;
+                                    animal = "Constrictor Snake";
+                                    level -= 3;
                                 }
                                 break;
                             case 28:
-                                if (Level > 3)
+                                if (level > 3)
                                 {
-                                    Animal = "Large Viper";
-                                    Level -= 3;
+                                    animal = "Large Viper";
+                                    level -= 3;
                                 }
                                 break;
                             case 29:
-                                if (Level > 3)
+                                if (level > 3)
                                 {
-                                    Animal = "Wolverine";
-                                    Level -= 3;
+                                    animal = "Wolverine";
+                                    level -= 3;
                                 }
                                 break;
                             case 30:
-                                if (Level > 6)
+                                if (level > 6)
                                 {
-                                    Animal = "Brown Bear";
-                                    Level -= 6;
+                                    animal = "Brown Bear";
+                                    level -= 6;
                                 }
                                 break;
                             case 31:
-                                if (Level > 6)
+                                if (level > 6)
                                 {
-                                    Animal = "Dire Wolverine";
-                                    Level -= 6;
+                                    animal = "Dire Wolverine";
+                                    level -= 6;
                                 }
                                 break;
                             case 32:
-                                if (Level > 6)
+                                if (level > 6)
                                 {
-                                    Animal = "Giant Crocodile";
-                                    Level -= 6;
+                                    animal = "Giant Crocodile";
+                                    level -= 6;
                                 }
                                 break;
                             case 33:
-                                if (Level > 6)
+                                if (level > 6)
                                 {
-                                    Animal = "Deinonychus";
-                                    Level -= 6;
+                                    animal = "Deinonychus";
+                                    level -= 6;
                                 }
                                 break;
                             case 34:
-                                if (Level > 6)
+                                if (level > 6)
                                 {
-                                    Animal = "Dire Ape";
-                                    Level -= 6;
+                                    animal = "Dire Ape";
+                                    level -= 6;
                                 }
                                 break;
                             case 35:
-                                if (Level > 6)
+                                if (level > 6)
                                 {
-                                    Animal = "Dire Boar";
-                                    Level -= 6;
+                                    animal = "Dire Boar";
+                                    level -= 6;
                                 }
                                 break;
                             case 36:
-                                if (Level > 6)
+                                if (level > 6)
                                 {
-                                    Animal = "Dire Wolf";
-                                    Level -= 6;
+                                    animal = "Dire Wolf";
+                                    level -= 6;
                                 }
                                 break;
                             case 37:
-                                if (Level > 6)
+                                if (level > 6)
                                 {
-                                    Animal = "Lion";
-                                    Level -= 6;
+                                    animal = "Lion";
+                                    level -= 6;
                                 }
                                 break;
                             case 38:
-                                if (Level > 6)
+                                if (level > 6)
                                 {
-                                    Animal = "Rhinoceras";
-                                    Level -= 6;
+                                    animal = "Rhinoceras";
+                                    level -= 6;
                                 }
                                 break;
                             case 39:
-                                if (Level > 6)
+                                if (level > 6)
                                 {
-                                    Animal = "Huge Viper";
-                                    Level -= 6;
+                                    animal = "Huge Viper";
+                                    level -= 6;
                                 }
                                 break;
                             case 40:
-                                if (Level > 6)
+                                if (level > 6)
                                 {
-                                    Animal = "Tiger";
-                                    Level -= 6;
+                                    animal = "Tiger";
+                                    level -= 6;
                                 }
                                 break;
                             case 41:
-                                if (Level > 9)
+                                if (level > 9)
                                 {
-                                    Animal = "Polar Bear";
-                                    Level -= 9;
+                                    animal = "Polar Bear";
+                                    level -= 9;
                                 }
                                 break;
                             case 42:
-                                if (Level > 9)
+                                if (level > 9)
                                 {
-                                    Animal = "Dire Lion";
-                                    Level -= 9;
+                                    animal = "Dire Lion";
+                                    level -= 9;
                                 }
                                 break;
                             case 43:
-                                if (Level > 9)
+                                if (level > 9)
                                 {
-                                    Animal = "Megaraptor";
-                                    Level -= 9;
+                                    animal = "Megaraptor";
+                                    level -= 9;
                                 }
                                 break;
                             case 44:
-                                if (Level > 9)
+                                if (level > 9)
                                 {
-                                    Animal = "Giant Constrictor Snake";
-                                    Level -= 9;
+                                    animal = "Giant Constrictor Snake";
+                                    level -= 9;
                                 }
                                 break;
                             case 45:
-                                if (Level > 12)
+                                if (level > 12)
                                 {
-                                    Animal = "Dire Bear";
-                                    Level -= 12;
+                                    animal = "Dire Bear";
+                                    level -= 12;
                                 }
                                 break;
                             case 46:
-                                if (Level > 12)
+                                if (level > 12)
                                 {
-                                    Animal = "Elephant";
-                                    Level -= 12;
+                                    animal = "Elephant";
+                                    level -= 12;
                                 }
                                 break;
                             case 47:
-                                if (Level > 15)
+                                if (level > 15)
                                 {
-                                    Animal = "Dire Tiger";
-                                    Level -= 15;
+                                    animal = "Dire Tiger";
+                                    level -= 15;
                                 }
                                 break;
                             case 48:
-                                if (Level > 15)
+                                if (level > 15)
                                 {
-                                    Animal = "Triceratops";
-                                    Level -= 15;
+                                    animal = "Triceratops";
+                                    level -= 15;
                                 }
                                 break;
                             case 49:
-                                if (Level > 15)
+                                if (level > 15)
                                 {
-                                    Animal = "Tyrannosaurus";
-                                    Level -= 15;
+                                    animal = "Tyrannosaurus";
+                                    level -= 15;
                                 }
                                 break;
                             default: return "[ERROR: Familiar out of range.  Classes.1036]";
                         }
                     }
-                    return String.Format("{0}: {1}", Animal, AnimalCompanionStats(Level));
+                    return String.Format("{0}: {1}", animal, AnimalCompanionStats(level));
                 case CLASS.RANGER:
-                    if (Level > 3)
-                        return Familiar(CLASS.DRUID, Level / 2, ref random);
-                    return "";
+                    if (level > 3)
+                        return Familiar(CLASS.DRUID, level / 2);
+                    return String.Empty;
                 case CLASS.SORCERER:
                 case CLASS.WIZARD:
-                    switch (Dice.d20(ref random))
+                    switch (Dice.d20())
                     {
                         case 1:
                         case 2:
@@ -1072,16 +1064,16 @@ namespace NPCGen
                         case 17: 
                         case 18: 
                         case 19:
-                        case 20: return "";
+                        case 20: return String.Empty;
                         default: return "[ERROR: Out of range.  Classes.1068]";
                     }
                 case CLASS.PALADIN:
-                    switch (Level)
+                    switch (level)
                     {
                         case 1:
                         case 2:
                         case 3:
-                        case 4: return "";
+                        case 4: return String.Empty;
                         case 5:
                         case 6:
                         case 7: return "Warhorse, +2 HD, +4 AC, +1 STR, Intelligence of 6, Improved Evasion, Shared Spells, Empathic Link, Share Saving Throws";
@@ -1094,13 +1086,13 @@ namespace NPCGen
                         case 14: return "Warhorse, +6 HD, +8 AC, +3 STR, Intelligence of 8, Improved Evasion, Shared Spells, Empathic Link, Share Saving Throws, Command creatures of its kind";
                         default: return "Warhorse, +8 HD, +10 AC, +4 STR, Intelligence of 9, Improved Evasion, Shared Spells, Empathic Link, Share Saving Throws, Command creatures of its kind, Spell resistance";
                     }
-                default: return "";
+                default: return String.Empty;
             }
         }
 
-        private static string AnimalCompanionStats(int Level)
+        private static String AnimalCompanionStats(Int32 level)
         {
-            switch (Level)
+            switch (level)
             {
                 case 1:
                 case 2: return "1 Bonus Trick, Link, Share spells";
@@ -1123,62 +1115,61 @@ namespace NPCGen
             }
         }
 
-        public static int[] Spells(CLASS Class, int Level)
+        public static Int32[] Spells(CLASS charClass, Int32 level)
         {
-            switch (Class)
+            switch (charClass)
             {
-                
                 case CLASS.BARD:
-                    switch (Level)
+                    switch (level)
                     {
-                        case 1: return new int[6] { 0, 0, 0, 0, 0, 0 };
-                        case 2: return new int[6] { 1, 0, 0, 0, 0, 0 };
-                        case 3: return new int[6] { 2, 0, 0, 0, 0, 0 };
-                        case 4: return new int[6] { 2, 1, 0, 0, 0, 0 };
-                        case 5: return new int[6] { 3, 1, 0, 0, 0, 0 };
-                        case 6: return new int[6] { 3, 2, 0, 0, 0, 0 };
-                        case 7: return new int[6] { 3, 2, 1, 0, 0, 0 };
-                        case 8: return new int[6] { 3, 3, 1, 0, 0, 0 };
-                        case 9: return new int[6] { 3, 3, 2, 0, 0, 0 };
-                        case 10: return new int[6] { 3, 3, 2, 1, 0, 0 };
-                        case 11: return new int[6] { 3, 3, 3, 1, 0, 0 };
-                        case 12: return new int[6] { 3, 3, 3, 2, 0, 0 };
-                        case 13: return new int[6] { 3, 3, 3, 2, 1, 0 };
-                        case 14: return new int[6] { 3, 3, 3, 3, 1, 0 };
-                        case 15: return new int[6] { 3, 3, 3, 3, 2, 0 };
-                        case 16: return new int[6] { 4, 3, 3, 3, 2, 1 };
-                        case 17: return new int[6] { 4, 4, 3, 3, 3, 1 };
-                        case 18: return new int[6] { 4, 4, 4, 3, 3, 2 };
-                        case 19: return new int[6] { 4, 4, 4, 4, 3, 2 };
-                        default: return new int[6] { 4, 4, 4, 4, 4, 3 };
+                        case 1: return new Int32[6] { 0, 0, 0, 0, 0, 0 };
+                        case 2: return new Int32[6] { 1, 0, 0, 0, 0, 0 };
+                        case 3: return new Int32[6] { 2, 0, 0, 0, 0, 0 };
+                        case 4: return new Int32[6] { 2, 1, 0, 0, 0, 0 };
+                        case 5: return new Int32[6] { 3, 1, 0, 0, 0, 0 };
+                        case 6: return new Int32[6] { 3, 2, 0, 0, 0, 0 };
+                        case 7: return new Int32[6] { 3, 2, 1, 0, 0, 0 };
+                        case 8: return new Int32[6] { 3, 3, 1, 0, 0, 0 };
+                        case 9: return new Int32[6] { 3, 3, 2, 0, 0, 0 };
+                        case 10: return new Int32[6] { 3, 3, 2, 1, 0, 0 };
+                        case 11: return new Int32[6] { 3, 3, 3, 1, 0, 0 };
+                        case 12: return new Int32[6] { 3, 3, 3, 2, 0, 0 };
+                        case 13: return new Int32[6] { 3, 3, 3, 2, 1, 0 };
+                        case 14: return new Int32[6] { 3, 3, 3, 3, 1, 0 };
+                        case 15: return new Int32[6] { 3, 3, 3, 3, 2, 0 };
+                        case 16: return new Int32[6] { 4, 3, 3, 3, 2, 1 };
+                        case 17: return new Int32[6] { 4, 4, 3, 3, 3, 1 };
+                        case 18: return new Int32[6] { 4, 4, 4, 3, 3, 2 };
+                        case 19: return new Int32[6] { 4, 4, 4, 4, 3, 2 };
+                        default: return new Int32[6] { 4, 4, 4, 4, 4, 3 };
                     }
                 case CLASS.CLERIC:
                 case CLASS.DRUID:
-                    switch (Level)
+                    switch (level)
                     {
-                        case 1: return new int[7] { 1, 0, 0, 0, 0, 0, 0 };
-                        case 2: return new int[7] { 2, 0, 0, 0, 0, 0, 0 };
-                        case 3: return new int[7] { 2, 1, 0, 0, 0, 0, 0 };
-                        case 4: return new int[7] { 3, 2, 0, 0, 0, 0, 0 };
-                        case 5: return new int[7] { 3, 3, 1, 0, 0, 0, 0 };
-                        case 6: return new int[7] { 3, 3, 2, 0, 0, 0, 0 };
-                        case 7: return new int[7] { 3, 3, 2, 1, 0, 0, 0 };
-                        case 8: return new int[7] { 3, 3, 3, 2, 0, 0, 0 };
-                        case 9: return new int[7] { 4, 4, 3, 2, 1, 0, 0 };
-                        case 10: return new int[7] { 4, 4, 3, 3, 2, 0, 0 };
-                        case 11: return new int[7] { 5, 4, 4, 3, 2, 1, 0 };
-                        case 12: return new int[7] { 6, 5, 5, 3, 2, 2, 0 };
-                        case 13: return new int[7] { 6, 6, 6, 4, 2, 2, 0 };
-                        case 14: return new int[7] { 6, 6, 6, 5, 3, 2, 1 };
-                        case 15: return new int[7] { 6, 6, 6, 6, 4, 2, 1 };
-                        case 16: return new int[7] { 7, 7, 7, 6, 4, 3, 1 };
-                        case 17: return new int[7] { 7, 7, 7, 7, 5, 3, 2 };
-                        case 18: return new int[7] { 8, 8, 8, 8, 6, 4, 2 };
-                        case 19: return new int[7] { 9, 9, 8, 8, 6, 4, 2 };
-                        default: return new int[7] { 9, 9, 9, 8, 7, 5, 2 };
+                        case 1: return new Int32[7] { 1, 0, 0, 0, 0, 0, 0 };
+                        case 2: return new Int32[7] { 2, 0, 0, 0, 0, 0, 0 };
+                        case 3: return new Int32[7] { 2, 1, 0, 0, 0, 0, 0 };
+                        case 4: return new Int32[7] { 3, 2, 0, 0, 0, 0, 0 };
+                        case 5: return new Int32[7] { 3, 3, 1, 0, 0, 0, 0 };
+                        case 6: return new Int32[7] { 3, 3, 2, 0, 0, 0, 0 };
+                        case 7: return new Int32[7] { 3, 3, 2, 1, 0, 0, 0 };
+                        case 8: return new Int32[7] { 3, 3, 3, 2, 0, 0, 0 };
+                        case 9: return new Int32[7] { 4, 4, 3, 2, 1, 0, 0 };
+                        case 10: return new Int32[7] { 4, 4, 3, 3, 2, 0, 0 };
+                        case 11: return new Int32[7] { 5, 4, 4, 3, 2, 1, 0 };
+                        case 12: return new Int32[7] { 6, 5, 5, 3, 2, 2, 0 };
+                        case 13: return new Int32[7] { 6, 6, 6, 4, 2, 2, 0 };
+                        case 14: return new Int32[7] { 6, 6, 6, 5, 3, 2, 1 };
+                        case 15: return new Int32[7] { 6, 6, 6, 6, 4, 2, 1 };
+                        case 16: return new Int32[7] { 7, 7, 7, 6, 4, 3, 1 };
+                        case 17: return new Int32[7] { 7, 7, 7, 7, 5, 3, 2 };
+                        case 18: return new Int32[7] { 8, 8, 8, 8, 6, 4, 2 };
+                        case 19: return new Int32[7] { 9, 9, 8, 8, 6, 4, 2 };
+                        default: return new Int32[7] { 9, 9, 9, 8, 7, 5, 2 };
                     }
                 case CLASS.PALADIN:
-                    switch (Level)
+                    switch (level)
                     {
                         case 1: 
                         case 2: 
@@ -1187,22 +1178,22 @@ namespace NPCGen
                         case 5:
                         case 6:
                         case 7:
-                        case 8: return new int[4] { 0, 0, 0, 0 };
-                        case 9: return new int[4] { 1, 0, 0, 0 };
-                        case 10: return new int[4] { 2, 0, 0, 0 };
-                        case 11: return new int[4] { 2, 1, 0, 0 };
-                        case 12: return new int[4] { 2, 2, 0, 0 };
-                        case 13: return new int[4] { 2, 2, 1, 0 };
-                        case 14: return new int[4] { 3, 2, 1, 0 };
-                        case 15: return new int[4] { 3, 2, 1, 1 };
-                        case 16: return new int[4] { 3, 3, 2, 1 };
+                        case 8: return new Int32[4] { 0, 0, 0, 0 };
+                        case 9: return new Int32[4] { 1, 0, 0, 0 };
+                        case 10: return new Int32[4] { 2, 0, 0, 0 };
+                        case 11: return new Int32[4] { 2, 1, 0, 0 };
+                        case 12: return new Int32[4] { 2, 2, 0, 0 };
+                        case 13: return new Int32[4] { 2, 2, 1, 0 };
+                        case 14: return new Int32[4] { 3, 2, 1, 0 };
+                        case 15: return new Int32[4] { 3, 2, 1, 1 };
+                        case 16: return new Int32[4] { 3, 3, 2, 1 };
                         case 17:
-                        case 18: return new int[4] { 3, 3, 3, 1 };
-                        case 19: return new int[4] { 3, 3, 3, 2 };
-                        default: return new int[4] { 3, 3, 3, 3 };
+                        case 18: return new Int32[4] { 3, 3, 3, 1 };
+                        case 19: return new Int32[4] { 3, 3, 3, 2 };
+                        default: return new Int32[4] { 3, 3, 3, 3 };
                     }
                 case CLASS.RANGER:
-                    switch (Level)
+                    switch (level)
                     {
                         case 1: 
                         case 2: 
@@ -1210,83 +1201,84 @@ namespace NPCGen
                         case 4: 
                         case 5: 
                         case 6:
-                        case 7: return new int[3] { 0, 0, 0 };
-                        case 8: return new int[3] { 1, 0, 0 };
-                        case 9: return new int[3] { 2, 0, 0 };
-                        case 10: return new int[3] { 2, 1, 0 };
-                        case 11: return new int[3] { 2, 2, 0 };
-                        case 12: return new int[3] { 2, 2, 1 };
-                        case 13: return new int[3] { 3, 2, 1 };
-                        case 14: return new int[3] { 3, 2, 2 };
-                        case 15: return new int[3] { 3, 3, 2 };
-                        default: return new int[3] { 3, 3, 3 };
+                        case 7: return new Int32[3] { 0, 0, 0 };
+                        case 8: return new Int32[3] { 1, 0, 0 };
+                        case 9: return new Int32[3] { 2, 0, 0 };
+                        case 10: return new Int32[3] { 2, 1, 0 };
+                        case 11: return new Int32[3] { 2, 2, 0 };
+                        case 12: return new Int32[3] { 2, 2, 1 };
+                        case 13: return new Int32[3] { 3, 2, 1 };
+                        case 14: return new Int32[3] { 3, 2, 2 };
+                        case 15: return new Int32[3] { 3, 3, 2 };
+                        default: return new Int32[3] { 3, 3, 3 };
                     }
                 case CLASS.SORCERER:
                 case CLASS.WIZARD:
-                    switch (Level)
+                    switch (level)
                     {
-                        case 1: return new int[9] { 1, 0, 0, 0, 0, 0, 0, 0, 0 };
-                        case 2: return new int[9] { 2, 0, 0, 0, 0, 0, 0, 0, 0 };
-                        case 3: return new int[9] { 2, 1, 0, 0, 0, 0, 0, 0, 0 };
-                        case 4: return new int[9] { 3, 2, 0, 0, 0, 0, 0, 0, 0 };
-                        case 5: return new int[9] { 4, 2, 1, 0, 0, 0, 0, 0, 0 };
-                        case 6: return new int[9] { 4, 2, 2, 0, 0, 0, 0, 0, 0 };
-                        case 7: return new int[9] { 4, 3, 2, 1, 0, 0, 0, 0, 0 };
-                        case 8: return new int[9] { 4, 3, 3, 2, 0, 0, 0, 0, 0 };
-                        case 9: return new int[9] { 4, 3, 3, 2, 1, 0, 0, 0, 0 };
-                        case 10: return new int[9] { 4, 4, 3, 2, 2, 0, 0, 0, 0 };
-                        case 11: return new int[9] { 4, 4, 4, 3, 3, 0, 0, 0, 0 };
-                        case 12: return new int[9] { 4, 4, 4, 4, 4, 1, 0, 0, 0 };
-                        case 13: return new int[9] { 5, 5, 5, 4, 4, 2, 0, 0, 0 };
-                        case 14: return new int[9] { 5, 5, 5, 4, 4, 2, 1, 0, 0 };
-                        case 15: return new int[9] { 5, 5, 5, 5, 5, 2, 1, 0, 0 };
-                        case 16: return new int[9] { 5, 5, 5, 5, 5, 3, 2, 1, 0 };
-                        case 17: return new int[9] { 5, 5, 5, 5, 5, 3, 3, 2, 0 };
-                        case 18: return new int[9] { 5, 5, 5, 5, 5, 3, 3, 2, 1 };
-                        case 19: return new int[9] { 5, 5, 5, 5, 5, 3, 3, 3, 1 };
-                        default: return new int[9] { 5, 5, 5, 5, 5, 4, 3, 3, 2 };
+                        case 1: return new Int32[9] { 1, 0, 0, 0, 0, 0, 0, 0, 0 };
+                        case 2: return new Int32[9] { 2, 0, 0, 0, 0, 0, 0, 0, 0 };
+                        case 3: return new Int32[9] { 2, 1, 0, 0, 0, 0, 0, 0, 0 };
+                        case 4: return new Int32[9] { 3, 2, 0, 0, 0, 0, 0, 0, 0 };
+                        case 5: return new Int32[9] { 4, 2, 1, 0, 0, 0, 0, 0, 0 };
+                        case 6: return new Int32[9] { 4, 2, 2, 0, 0, 0, 0, 0, 0 };
+                        case 7: return new Int32[9] { 4, 3, 2, 1, 0, 0, 0, 0, 0 };
+                        case 8: return new Int32[9] { 4, 3, 3, 2, 0, 0, 0, 0, 0 };
+                        case 9: return new Int32[9] { 4, 3, 3, 2, 1, 0, 0, 0, 0 };
+                        case 10: return new Int32[9] { 4, 4, 3, 2, 2, 0, 0, 0, 0 };
+                        case 11: return new Int32[9] { 4, 4, 4, 3, 3, 0, 0, 0, 0 };
+                        case 12: return new Int32[9] { 4, 4, 4, 4, 4, 1, 0, 0, 0 };
+                        case 13: return new Int32[9] { 5, 5, 5, 4, 4, 2, 0, 0, 0 };
+                        case 14: return new Int32[9] { 5, 5, 5, 4, 4, 2, 1, 0, 0 };
+                        case 15: return new Int32[9] { 5, 5, 5, 5, 5, 2, 1, 0, 0 };
+                        case 16: return new Int32[9] { 5, 5, 5, 5, 5, 3, 2, 1, 0 };
+                        case 17: return new Int32[9] { 5, 5, 5, 5, 5, 3, 3, 2, 0 };
+                        case 18: return new Int32[9] { 5, 5, 5, 5, 5, 3, 3, 2, 1 };
+                        case 19: return new Int32[9] { 5, 5, 5, 5, 5, 3, 3, 3, 1 };
+                        default: return new Int32[9] { 5, 5, 5, 5, 5, 4, 3, 3, 2 };
                     }
-                default: return new int[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+                default: return new Int32[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
             }
         }
 
-        public static string SpellString(CLASS Class, int Level, int Intelligence, int Wisdom, int Charisma, ref Random random)
+        public static String SpellString(CLASS charClass, Int32 level, Int32 intelligence, Int32 wisdom, Int32 charisma)
         {
-            int[] spells = Spells(Class, Level); string output = "";
+            var spells = Spells(charClass, level);
+            var output = String.Empty;
 
-            if (Class == CLASS.DRUID || Class == CLASS.CLERIC || Class == CLASS.PALADIN || Class == CLASS.RANGER)
+            if (IsHealer(charClass))
             {
-                if (Wisdom >= 13)
+                if (wisdom >= 13)
                     spells[0]++;
-                if (Wisdom >= 14)
+                if (wisdom >= 14)
                     spells[0]++;
-                if (Wisdom >= 15)
+                if (wisdom >= 15)
                     spells[1]++;
-                if (Wisdom >= 16)
+                if (wisdom >= 16)
                     spells[1]++;
-                if (Wisdom >= 17)
+                if (wisdom >= 17)
                     spells[2]++;
-                if (Wisdom >= 18)
+                if (wisdom >= 18)
                     spells[3]++;
-                if (Wisdom >= 19)
+                if (wisdom >= 19)
                 {
                     spells[0]++;
                     if (spells.Length >= 4)
                         spells[3]++;
                 }
-                if (Wisdom >= 20)
+                if (wisdom >= 20)
                 {
                     spells[1]++;
                     if (spells.Length >= 4)
                         spells[3]++;
                 }
-                if (Wisdom >= 21)
+                if (wisdom >= 21)
                 {
                     spells[2]++;
                     if (spells.Length >= 5)
                         spells[4]++;
                 }
-                if (Wisdom >= 22)
+                if (wisdom >= 22)
                 {
                     if (spells.Length >= 4)
                     {
@@ -1294,7 +1286,7 @@ namespace NPCGen
                         spells[4]++;
                     }
                 }
-                if (Wisdom >= 23)
+                if (wisdom >= 23)
                 {
                     if (spells.Length >= 5)
                     {
@@ -1302,7 +1294,7 @@ namespace NPCGen
                         spells[4]++;
                     }
                 }
-                if (Wisdom >= 24)
+                if (wisdom >= 24)
                 {
                     if (spells.Length >= 6)
                     {
@@ -1310,7 +1302,7 @@ namespace NPCGen
                         spells[5]++;
                     }
                 }
-                if (Wisdom >= 25)
+                if (wisdom >= 25)
                 {
                     if (spells.Length >= 7)
                     {
@@ -1319,9 +1311,9 @@ namespace NPCGen
                     }
                 }
             }
-            else if (Class == CLASS.BARD || Class == CLASS.SORCERER)
+            else if (charClass == CLASS.BARD || charClass == CLASS.SORCERER)
             {
-                switch (Charisma)
+                switch (charisma)
                 {
                     case 1:
                     case 2:
@@ -1330,90 +1322,88 @@ namespace NPCGen
                     case 5:
                     case 6:
                     case 7:
-                    case 8: return "";
+                    case 8: return String.Empty;
                     case 9:
-                        for (int i = 0; i < 4; i++)
+                        for (var i = 0; i < 4; i++)
                             if (spells[i] > 6)
                                 spells[i] = 6;
-                        for (int i = 4; i < spells.Length; i++)
+                        for (var i = 4; i < spells.Length; i++)
                             spells[i] = 0;
                         break;
                     case 10:
                     case 11:
-                        for (int i = 0; i < 5; i++)
+                        for (var i = 0; i < 5; i++)
                             if (spells[i] > 7)
                                 spells[i] = 7;
-                        for (int i = 5; i < spells.Length; i++)
+                        for (var i = 5; i < spells.Length; i++)
                             spells[i] = 0;
                         break;
                     case 12:
-                        for (int i = 0; i < 6; i++)
+                        for (var i = 0; i < 6; i++)
                             if (spells[i] > 7)
                                 spells[i] = 7;
-                        for (int i = 6; i < spells.Length; i++)
+                        for (var i = 6; i < spells.Length; i++)
                             spells[i] = 0;
                         break;
                     case 13:
-                        for (int i = 0; i < 6; i++)
+                        for (var i = 0; i < 6; i++)
                             if (spells[i] > 9)
                                 spells[i] = 9;
-                        for (int i = 6; i < spells.Length; i++)
+                        for (var i = 6; i < spells.Length; i++)
                             spells[i] = 0;
                         break;
                     case 14:
                         if (spells.Length > 6)
                         {
-                            for (int i = 0; i < 7; i++)
+                            for (var i = 0; i < 7; i++)
                                 if (spells[i] > 9)
                                     spells[i] = 9;
-                            for (int i = 7; i < spells.Length; i++)
+                            for (var i = 7; i < spells.Length; i++)
                                 spells[i] = 0;
                         }
                         break;
                     case 15:
                         if (spells.Length > 6)
                         {
-                            for (int i = 0; i < 7; i++)
+                            for (var i = 0; i < 7; i++)
                                 if (spells[i] > 11)
                                     spells[i] = 11;
-                            for (int i = 7; i < spells.Length; i++)
+                            for (var i = 7; i < spells.Length; i++)
                                 spells[i] = 0;
                         }
                         break;
                     case 16:
                         if (spells.Length > 6)
                         {
-                            for (int i = 0; i < 8; i++)
+                            for (var i = 0; i < 8; i++)
                                 if (spells[i] > 11)
                                     spells[i] = 11;
-                            for (int i = 8; i < spells.Length; i++)
+                            for (var i = 8; i < spells.Length; i++)
                                 spells[i] = 0;
                         }
                         break;
                     case 17:
                         if (spells.Length > 6)
                         {
-                            for (int i = 0; i < 8; i++)
+                            for (var i = 0; i < 8; i++)
                                 if (spells[i] > 14)
                                     spells[i] = 14;
-                            for (int i = 8; i < spells.Length; i++)
+                            for (var i = 8; i < spells.Length; i++)
                                 spells[i] = 0;
                         }
                         break;
                     case 18:
                         if (spells.Length > 6)
-                        {
-                            for (int i = 0; i < 9; i++)
+                            for (var i = 0; i < 9; i++)
                                 if (spells[i] > 18)
                                     spells[i] = 18;
-                        }
                         break;
                     default: break;
                 }
             }
-            else if (Class == CLASS.WIZARD)
+            else if (charClass == CLASS.WIZARD)
             {
-                switch (Intelligence)
+                switch (intelligence)
                 {
                     case 1:
                     case 2:
@@ -1422,66 +1412,66 @@ namespace NPCGen
                     case 5:
                     case 6:
                     case 7:
-                    case 8: return "";
+                    case 8: return String.Empty;
                     case 9:
-                        for (int i = 0; i < 4; i++)
+                        for (var i = 0; i < 4; i++)
                             if (spells[i] > 6)
                                 spells[i] = 6;
-                        for (int i = 4; i < spells.Length; i++)
+                        for (var i = 4; i < spells.Length; i++)
                             spells[i] = 0;
                         break;
                     case 10:
                     case 11:
-                        for (int i = 0; i < 5; i++)
+                        for (var i = 0; i < 5; i++)
                             if (spells[i] > 7)
                                 spells[i] = 7;
-                        for (int i = 5; i < spells.Length; i++)
+                        for (var i = 5; i < spells.Length; i++)
                             spells[i] = 0;
                         break;
                     case 12:
-                        for (int i = 0; i < 6; i++)
+                        for (var i = 0; i < 6; i++)
                             if (spells[i] > 7)
                                 spells[i] = 7;
-                        for (int i = 6; i < spells.Length; i++)
+                        for (var i = 6; i < spells.Length; i++)
                             spells[i] = 0;
                         break;
                     case 13:
-                        for (int i = 0; i < 6; i++)
+                        for (var i = 0; i < 6; i++)
                             if (spells[i] > 9)
                                 spells[i] = 9;
-                        for (int i = 6; i < spells.Length; i++)
+                        for (var i = 6; i < spells.Length; i++)
                             spells[i] = 0;
                         break;
                     case 14:
-                        for (int i = 0; i < 7; i++)
+                        for (var i = 0; i < 7; i++)
                             if (spells[i] > 9)
                                 spells[i] = 9;
-                        for (int i = 7; i < spells.Length; i++)
+                        for (var i = 7; i < spells.Length; i++)
                             spells[i] = 0;
                         break;
                     case 15:
-                        for (int i = 0; i < 7; i++)
+                        for (var i = 0; i < 7; i++)
                             if (spells[i] > 11)
                                 spells[i] = 11;
-                        for (int i = 7; i < spells.Length; i++)
+                        for (var i = 7; i < spells.Length; i++)
                             spells[i] = 0;
                         break;
                     case 16:
-                        for (int i = 0; i < 8; i++)
+                        for (var i = 0; i < 8; i++)
                             if (spells[i] > 11)
                                 spells[i] = 11;
-                        for (int i = 8; i < spells.Length; i++)
+                        for (var i = 8; i < spells.Length; i++)
                             spells[i] = 0;
                         break;
                     case 17:
-                        for (int i = 0; i < 8; i++)
+                        for (var i = 0; i < 8; i++)
                             if (spells[i] > 14)
                                 spells[i] = 14;
-                        for (int i = 8; i < spells.Length; i++)
+                        for (var i = 8; i < spells.Length; i++)
                             spells[i] = 0;
                         break;
                     case 18:
-                        for (int i = 0; i < 9; i++)
+                        for (var i = 0; i < 9; i++)
                             if (spells[i] > 18)
                                 spells[i] = 18;
                         break;
@@ -1489,20 +1479,20 @@ namespace NPCGen
                 }
             }
 
-            for (int i = 0; i < spells.Length; i++)
+            for (var i = 0; i < spells.Length; i++)
                 output += spells[i] + " ";
 
-            if (Class == CLASS.BARD || Class == CLASS.WIZARD)
+            if (charClass == CLASS.BARD || charClass == CLASS.WIZARD)
             {
-                for (int i = 0; i < spells.Length; i++)
+                for (var i = 0; i < spells.Length; i++)
                 {
                     if (spells[i] > 0)
                         output += "\n";
-                    for (int j = 0; j < spells[i]; j++)
+                    for (var j = 0; j < spells[i]; j++)
                     {
                         if (!output.EndsWith("\n"))
                             output += ", ";
-                        output += WizardMemorizedSpell(i + 1, ref random);
+                        output += WizardMemorizedSpell(i + 1);
                     }
                 }
             }
@@ -1510,12 +1500,17 @@ namespace NPCGen
             return output;
         }
 
-        public static string WizardMemorizedSpell(int SpellLevel, ref Random random)
+        private static Boolean IsHealer(CLASS charClass)
         {
-            switch (SpellLevel)
+            return charClass == CLASS.DRUID || charClass == CLASS.CLERIC || charClass == CLASS.PALADIN || charClass == CLASS.RANGER;
+        }
+
+        public static String WizardMemorizedSpell(Int32 spellLevel)
+        {
+            switch (spellLevel)
             {
                 case 1:
-                    switch (Dice.Roll(1, 45, 0, ref random))
+                    switch (Dice.Roll(1, 45))
                     {
                         case 1: return "Affect Normal Fires";
                         case 2: return "Alarm";
@@ -1565,7 +1560,7 @@ namespace NPCGen
                         default: return "[ERROR: Level 1 memorized spell out of range.  Classes.1321]";
                     }
                 case 2:
-                    switch (Dice.Roll(1, 43, 0, ref random))
+                    switch (Dice.Roll(1, 43))
                     {
                         case 1: return "Alter Self";
                         case 2: return "Bind";
@@ -1613,7 +1608,7 @@ namespace NPCGen
                         default: return "[ERROR: Level 2 memorized spell out of range.  Classes.1369]";
                     }
                 case 3:
-                    switch (Dice.Roll(1, 36, 0, ref random))
+                    switch (Dice.Roll(1, 36))
                     {
                         case 1: return "Blink";
                         case 2: return "Clairaudience";
@@ -1654,7 +1649,7 @@ namespace NPCGen
                         default: return "[ERROR: Level 3 memorized spell out of range.  Classes.1410]";
                     }
                 case 4:
-                    switch (Dice.Roll(1, 42, 0, ref random))
+                    switch (Dice.Roll(1, 42))
                     {
                         case 1: return "Charm Monster";
                         case 2: return "Confusion";
@@ -1701,7 +1696,7 @@ namespace NPCGen
                         default: return "[ERROR: Level 4 memorized spell out of range.  Classes.1457]";
                     }
                 case 5:
-                    switch (Dice.Roll(1, 40, 0, ref random))
+                    switch (Dice.Roll(1, 40))
                     {
                         case 1: return "Advanced Illusion";
                         case 2: return "Airy Water";
@@ -1746,7 +1741,7 @@ namespace NPCGen
                         default: return "[ERROR: Level 5 memorized spell out of range.  Classes.1502]";
                     }
                 case 6:
-                    switch (Dice.Roll(1, 40, 0, ref random))
+                    switch (Dice.Roll(1, 40))
                     {
                         case 1: return "Anti-Magic Shell";
                         case 2: return "Bigby's Forceful Hand";
@@ -1791,7 +1786,7 @@ namespace NPCGen
                         default: return "[ERROR: Level 6 memorized spell out of range.  Classes.1547]";
                     }
                 case 7:
-                    switch (Dice.Roll(1, 26, 0, ref random))
+                    switch (Dice.Roll(1, 26))
                     {
                         case 1: return "Banishment";
                         case 2: return "Bigby's Grasping Hand";
@@ -1822,7 +1817,7 @@ namespace NPCGen
                         default: return "[ERROR: Level 7 memorized spell out of range.  Classes.1578]";
                     }
                 case 8:
-                    switch (Dice.Roll(1, 22, 0, ref random))
+                    switch (Dice.Roll(1, 22))
                     {
                         case 1: return "Antipathy-Sympathy";
                         case 2: return "Bigby's Clenched Fist";
@@ -1849,7 +1844,7 @@ namespace NPCGen
                         default: return "[ERROR: Level 8 memorized spell out of range.  Classes.1605]";
                     }
                 case 9:
-                    switch (Dice.Roll(1, 18, 0, ref random))
+                    switch (Dice.Roll(1, 18))
                     {
                         case 1: return "Astral Spell";
                         case 2: return "Bigby's Crushing Hand";
@@ -1875,85 +1870,85 @@ namespace NPCGen
             }
         }
 
-        public static string Abilities(CLASS Class, int Level, int Wisdom)
+        public static String Abilities(CLASS charClass, Int32 level, Int32 wisdom)
         {
-            string output = "";
+            var output = String.Empty;
 
-            switch (Class)
+            switch (charClass)
             {
                 case CLASS.BARBARIAN:
-                    output += String.Format("Rage {0}/day", Level / 4 + 1);
-                    if (Level >= 2)
+                    output += String.Format("Rage {0}/day", level / 4 + 1);
+                    if (level >= 2)
                         output += ", keeps dexterity bonus if flat-footed";
-                    if (Level >= 5)
+                    if (level >= 5)
                         output += ", can't be flanked";
-                    if (Level >= 10)
-                        output += String.Format(", +{0} against traps", (Level - 10) / 3 + 1);
-                    if (Level >= 11)
-                        output += String.Format(", Damage reduction {0}/-", (Level - 11) / 3 + 1);
+                    if (level >= 10)
+                        output += String.Format(", +{0} against traps", (level - 10) / 3 + 1);
+                    if (level >= 11)
+                        output += String.Format(", Damage reduction {0}/-", (level - 11) / 3 + 1);
                     break;
                 case CLASS.BARD:
-                    output += String.Format("Influence reactions of others (save vs. paralyzation at -{0})", Level / 3);
-                    output += String.Format(", Inspire allies (+1 attack, +1 saving throws, +2 morale, for {0} rounds)", Level);
+                    output += String.Format("Influence reactions of others (save vs. paralyzation at -{0})", level / 3);
+                    output += String.Format(", Inspire allies (+1 attack, +1 saving throws, +2 morale, for {0} rounds)", level);
                     output += ", counter magical attacks with explanations, commands, or suggestions (30' around, make successful save vs. spell)";
-                    output += String.Format(", Identify an item ({0}%)", Level * 5);
+                    output += String.Format(", Identify an item ({0}%)", level * 5);
                     break;
-                case CLASS.CLERIC: return "\nTURN: (2d6 undead, * 2d4 additionally turned)" + TurnUndead(Level);
+                case CLASS.CLERIC: return "\nTURN: (2d6 undead, * 2d4 additionally turned)" + TurnUndead(level);
                 case CLASS.DRUID:
-                    if (Level >= 3)
+                    if (level >= 3)
                         output += "Identify plants, animals, and pure water with perfect accuracy, Pass through overgrown areas with no trail and at normal movement rate";
-                    if (Level >= 7)
+                    if (level >= 7)
                         output += ", Immune to charm spells from woodland creatures, shape change into an animal 3/day";
-                    if (Level >= 16)
+                    if (level >= 16)
                         output += ", Immunity to all natural poisons, doesn't age, change appearance at will";
-                    if (Level >= 17)
+                    if (level >= 17)
                         output += ", can hibernate, safely enter Earth plane at will";
-                    if (Level >= 18)
+                    if (level >= 18)
                         output += ", safely enter Fire plane at will";
-                    if (Level >= 19)
+                    if (level >= 19)
                         output += ", safely enter Water plane at will";
-                    if (Level >= 20)
+                    if (level >= 20)
                         output += ", safely enter Air plane at will";
                     break;
                 case CLASS.MONK:
-                    output += String.Format("AC {0} better", (Wisdom - 10) / 2);
-                    output += String.Format(", Stun attack (lasts 1 round), {0}/day", Level);
+                    output += String.Format("AC {0} better", (wisdom - 10) / 2);
+                    output += String.Format(", Stun attack (lasts 1 round), {0}/day", level);
                     output += ", Evasion (successful half damage saves are no damage)";
-                    if (Level >= 2)
+                    if (level >= 2)
                         output += ", Deflect arrows (+1 AC versus missiles)";
-                    if (Level >= 3)
+                    if (level >= 3)
                         output += ", +2 versus enchantment spells";
-                    if (Level >= 4)
-                        output += String.Format(", Slow Fall (use wall to reduce fall height by {0} feet)", ((Level - 2) / 2) * 10);
-                    if (Level >= 5)
+                    if (level >= 4)
+                        output += String.Format(", Slow Fall (use wall to reduce fall height by {0} feet)", ((level - 2) / 2) * 10);
+                    if (level >= 5)
                         output += ", Immunity to nonmagical diseases";
-                    if (Level >= 7)
-                        output += String.Format(", Heal self ({0} points/day)", Level * 2);
-                    if (Level >= 9)
+                    if (level >= 7)
+                        output += String.Format(", Heal self ({0} points/day)", level * 2);
+                    if (level >= 9)
                         output += ", Improved Evasion (failed half damage saves are still half damage)";
-                    if (Level >= 10)
-                        output += String.Format(", Unarmed strike is magical (+{0})", (Level - 10) / 3 + 1);
-                    if (Level >= 11)
+                    if (level >= 10)
+                        output += String.Format(", Unarmed strike is magical (+{0})", (level - 10) / 3 + 1);
+                    if (level >= 11)
                         output += ", Immunity to all poisons";
-                    if (Level >= 15)
+                    if (level >= 15)
                         output += ", Quivering palm (fatal blow, 1/week, save vs. death)";
-                    if (Level >= 17)
+                    if (level >= 17)
                         output += ", does not age, can speak to any living creature";
-                    if (Level >= 19)
-                        output += String.Format(", Become ethereal at will (total {0} rounds/day)", Level);
-                    if (Level >= 20)
+                    if (level >= 19)
+                        output += String.Format(", Become ethereal at will (total {0} rounds/day)", level);
+                    if (level >= 20)
                         output += ", counts as extraplanar creature, damage reduction 20/+1";
                     break;
                 case CLASS.PALADIN:
                     output += "Detect Evil, +2 saving throws, immune to disease";
-                    output += String.Format(", heal by laying on hands ({0} points/day)", 2 * Level);
-                    output += String.Format(", cure disease ({0}/week)", (Level - 1) / 5 + 1);
+                    output += String.Format(", heal by laying on hands ({0} points/day)", 2 * level);
+                    output += String.Format(", cure disease ({0}/week)", (level - 1) / 5 + 1);
                     output += ", protection from evil 10'";
-                    if (Level >= 3)
-                        output += "\nTURN: (2d6 undead, * 2d4 additionally turned)" + TurnUndead(Level - 2);
+                    if (level >= 3)
+                        output += "\nTURN: (2d6 undead, * 2d4 additionally turned)" + TurnUndead(level - 2);
                     output += "\nMust tithe"; break;
                 case CLASS.RANGER:
-                    switch (Level)
+                    switch (level)
                     {
                         case 1: return "Hide in Shadows: 10% Move Silently: 15%";
                         case 2: return "Hide in Shadows: 15% Move Silently: 21%";
@@ -1971,212 +1966,196 @@ namespace NPCGen
                         case 14: return "Hide in Shadows: 93% Move Silently: 99%";
                         default: return "Hide in Shadows: 99% Move Silently: 99%";
                     }
-                case CLASS.THIEF: return String.Format("BACKSTAB: x{0}", (Level - 1) / 4 + 2);
-                default: return "";
+                case CLASS.THIEF: return String.Format("BACKSTAB: x{0}", (level - 1) / 4 + 2);
+                default: return String.Empty;
             }
 
             return output;
         }
 
-        public static int[] ThiefAbilities(int Level, Races.RACE Race, int Dexterity, bool[] Armor, ref Random random)
+        public static Int32[] ThiefAbilities(Int32 level, RACE race, Int32 dexterity, Boolean[] armor)
         {
-            int PointsToSpend; int[] Abil = new int[8] { 15, 10, 5, 10, 5, 15, 60, 0 };
+            var abil = new Int32[8] { 15, 10, 5, 10, 5, 15, 60, 0 };
+
+            if (armor[1])
+            {
+                abil[0] -= 20;
+                abil[1] -= 5;
+                abil[2] -= 5;
+                abil[3] -= 10;
+                abil[4] -= 10;
+                abil[5] -= 5;
+                abil[6] -= 20;
+            }
+            else if (armor[2])
+            {
+                abil[0] -= 30;
+                abil[1] -= 10;
+                abil[2] -= 10;
+                abil[3] -= 20;
+                abil[4] -= 20;
+                abil[5] -= 10;
+                abil[6] -= 30;
+            }
+            else if (armor[0])
+            {
+                abil[0] += 5;
+                abil[3] += 10;
+                abil[4] += 5;
+                abil[6] += 10;
+            }
+
+            switch (dexterity)
+            {
+                case 1: abil[0] -= 55; abil[1] -= 50; abil[2] -= 50; abil[3] -= 60; abil[4] -= 50; break;
+                case 2: abil[0] -= 50; abil[1] -= 45; abil[2] -= 45; abil[3] -= 55; abil[4] -= 45; break;
+                case 3: abil[0] -= 45; abil[1] -= 40; abil[2] -= 40; abil[3] -= 50; abil[4] -= 40; break;
+                case 4: abil[0] -= 40; abil[1] -= 35; abil[2] -= 35; abil[3] -= 45; abil[4] -= 35; break;
+                case 5: abil[0] -= 35; abil[1] -= 30; abil[2] -= 30; abil[3] -= 40; abil[4] -= 30; break;
+                case 6: abil[0] -= 30; abil[1] -= 25; abil[2] -= 25; abil[3] -= 35; abil[4] -= 25; break;
+                case 7: abil[0] -= 25; abil[1] -= 20; abil[2] -= 20; abil[3] -= 30; abil[4] -= 20; break;
+                case 8: abil[0] -= 20; abil[1] -= 15; abil[2] -= 15; abil[3] -= 25; abil[4] -= 15; break;
+                case 9: abil[0] -= 15; abil[1] -= 10; abil[2] -= 10; abil[3] -= 20; abil[4] -= 10; break;
+                case 10: abil[0] -= 10; abil[1] -= 5; abil[2] -= 10; abil[3] -= 15; abil[4] -= 5; break;
+                case 11: abil[0] -= 5; abil[2] -= 5; abil[3] -= 10; break;
+                case 12: abil[3] -= 5; break;
+                case 16: abil[1] += 5; break;
+                case 17: abil[0] += 5; abil[1] += 10; abil[3] += 5; abil[4] += 5; break;
+                case 18: abil[0] += 10; abil[1] += 15; abil[2] += 5; abil[3] += 10; abil[4] += 10; break;
+                case 19: abil[0] += 15; abil[1] += 20; abil[2] += 10; abil[3] += 15; abil[4] += 15; break;
+                case 20: abil[0] += 20; abil[1] += 25; abil[2] += 15; abil[3] += 20; abil[4] += 20; break;
+                case 21: abil[0] += 25; abil[1] += 30; abil[2] += 20; abil[3] += 25; abil[4] += 25; break;
+                case 22: abil[0] += 30; abil[1] += 35; abil[2] += 25; abil[3] += 30; abil[4] += 30; break;
+                case 23: abil[0] += 35; abil[1] += 40; abil[2] += 30; abil[3] += 35; abil[4] += 35; break;
+                case 24: abil[0] += 40; abil[1] += 45; abil[2] += 35; abil[3] += 40; abil[4] += 40; break;
+                case 25: abil[0] += 45; abil[1] += 50; abil[2] += 40; abil[3] += 45; abil[4] += 45; break;
+                default: break;
+            }
+
+            switch (race)
+            {
+                case RACE.DEEP_DWARF:
+                case RACE.DERRO_DWARF:
+                case RACE.DUERGAR:
+                case RACE.HILL_DWARF:
+                case RACE.MOUNTAIN_DWARF: abil[1] += 10; abil[2] += 15; abil[6] -= 10; abil[7] -= 5; break;
+                case RACE.DROW:
+                case RACE.GRAY_ELF:
+                case RACE.WILD_ELF:
+                case RACE.HIGH_ELF:
+                case RACE.WOOD_ELF: abil[0] += 5; abil[1] -= 5; abil[3] += 5; abil[4] += 10; abil[5] += 5; break;
+                case RACE.SVIRFNEBLIN:
+                case RACE.ROCK_GNOME:
+                case RACE.FOREST_GNOME: abil[1] += 5; abil[2] += 10; abil[3] += 5; abil[4] += 5; abil[5] += 10; abil[6] -= 15; break;
+                case RACE.HALFELF: abil[0] += 10; abil[4] += 5; break;
+                case RACE.DEEP_HALFLING:
+                case RACE.LIGHTFOOT_HALFLING:
+                case RACE.TALLFELLOW_HALFLING: abil[0] += 5; abil[1] += 5; abil[2] += 5; abil[3] += 10; abil[4] += 15; abil[5] += 5; abil[6] -= 15; abil[7] -= 5; break;
+                default: break;
+            }
+
+            var pointsToSpend = 60 + (level - 1) * 30;
+
+            while (pointsToSpend > 0 && abil.Any(x => x < 99))
+            {
+                var tempStat = Dice.d8(-1);
+                if (abil[tempStat] < 99)
+                {
+                    abil[tempStat]++;
+                    pointsToSpend--;
+                }
+            }
+
+            return abil;
+        }
+
+        public static Int32[] BardAbilities(Int32 Level, RACE Race, Int32 Dexterity, Boolean[] Armor)
+        {
+            var abil = new Int32[4] { 50, 20, 10, 5 };
 
             if (Armor[1])
             {
-                Abil[0] -= 20;
-                Abil[1] -= 5;
-                Abil[2] -= 5;
-                Abil[3] -= 10;
-                Abil[4] -= 10;
-                Abil[5] -= 5;
-                Abil[6] -= 20;
+                abil[0] -= 20;
+                abil[1] -= 5;
+                abil[2] -= 20;
             }
             else if (Armor[2])
             {
-                Abil[0] -= 30;
-                Abil[1] -= 10;
-                Abil[2] -= 10;
-                Abil[3] -= 20;
-                Abil[4] -= 20;
-                Abil[5] -= 10;
-                Abil[6] -= 30;
+                abil[0] -= 30;
+                abil[1] -= 10;
+                abil[2] -= 30;
             }
             else if (Armor[0])
             {
-                Abil[0] += 5;
-                Abil[3] += 10;
-                Abil[4] += 5;
-                Abil[6] += 10;
+                abil[0] += 10;
+                abil[2] += 5;
             }
 
             switch (Dexterity)
             {
-                case 1: Abil[0] -= 55; Abil[1] -= 50; Abil[2] -= 50; Abil[3] -= 60; Abil[4] -= 50; break;
-                case 2: Abil[0] -= 50; Abil[1] -= 45; Abil[2] -= 45; Abil[3] -= 55; Abil[4] -= 45; break;
-                case 3: Abil[0] -= 45; Abil[1] -= 40; Abil[2] -= 40; Abil[3] -= 50; Abil[4] -= 40; break;
-                case 4: Abil[0] -= 40; Abil[1] -= 35; Abil[2] -= 35; Abil[3] -= 45; Abil[4] -= 35; break;
-                case 5: Abil[0] -= 35; Abil[1] -= 30; Abil[2] -= 30; Abil[3] -= 40; Abil[4] -= 30; break;
-                case 6: Abil[0] -= 30; Abil[1] -= 25; Abil[2] -= 25; Abil[3] -= 35; Abil[4] -= 25; break;
-                case 7: Abil[0] -= 25; Abil[1] -= 20; Abil[2] -= 20; Abil[3] -= 30; Abil[4] -= 20; break;
-                case 8: Abil[0] -= 20; Abil[1] -= 15; Abil[2] -= 15; Abil[3] -= 25; Abil[4] -= 15; break;
-                case 9: Abil[0] -= 15; Abil[1] -= 10; Abil[2] -= 10; Abil[3] -= 20; Abil[4] -= 10; break;
-                case 10: Abil[0] -= 10; Abil[1] -= 5; Abil[2] -= 10; Abil[3] -= 15; Abil[4] -= 5; break;
-                case 11: Abil[0] -= 5; Abil[2] -= 5; Abil[3] -= 10; break;
-                case 12: Abil[3] -= 5; break;
-                case 16: Abil[1] += 5; break;
-                case 17: Abil[0] += 5; Abil[1] += 10; Abil[3] += 5; Abil[4] += 5; break;
-                case 18: Abil[0] += 10; Abil[1] += 15; Abil[2] += 5; Abil[3] += 10; Abil[4] += 10; break;
-                case 19: Abil[0] += 15; Abil[1] += 20; Abil[2] += 10; Abil[3] += 15; Abil[4] += 15; break;
-                case 20: Abil[0] += 20; Abil[1] += 25; Abil[2] += 15; Abil[3] += 20; Abil[4] += 20; break;
-                case 21: Abil[0] += 25; Abil[1] += 30; Abil[2] += 20; Abil[3] += 25; Abil[4] += 25; break;
-                case 22: Abil[0] += 30; Abil[1] += 35; Abil[2] += 25; Abil[3] += 30; Abil[4] += 30; break;
-                case 23: Abil[0] += 35; Abil[1] += 40; Abil[2] += 30; Abil[3] += 35; Abil[4] += 35; break;
-                case 24: Abil[0] += 40; Abil[1] += 45; Abil[2] += 35; Abil[3] += 40; Abil[4] += 40; break;
-                case 25: Abil[0] += 45; Abil[1] += 50; Abil[2] += 40; Abil[3] += 45; Abil[4] += 45; break;
+                case 1: abil[2] -= 55; break;
+                case 2: abil[2] -= 50; break;
+                case 3: abil[2] -= 45; break;
+                case 4: abil[2] -= 40; break;
+                case 5: abil[2] -= 35; break;
+                case 6: abil[2] -= 30; break;
+                case 7: abil[2] -= 25; break;
+                case 8: abil[2] -= 20; break;
+                case 9: abil[2] -= 15; break;
+                case 10: abil[2] -= 10; break;
+                case 11: abil[2] -= 5; break;
+                case 17: abil[2] += 5; break;
+                case 18: abil[2] += 10; break;
+                case 19: abil[2] += 15; break;
+                case 20: abil[2] += 20; break;
+                case 21: abil[2] += 25; break;
+                case 22: abil[2] += 30; break;
+                case 23: abil[2] += 35; break;
+                case 24: abil[2] += 40; break;
+                case 25: abil[2] += 45; break;
                 default: break;
             }
 
             switch (Race)
             {
-                case Races.RACE.DEEP_DWARF:
-                case Races.RACE.DERRO_DWARF:
-                case Races.RACE.DUERGAR:
-                case Races.RACE.HILL_DWARF:
-                case Races.RACE.MOUNTAIN_DWARF: Abil[1] += 10; Abil[2] += 15; Abil[6] -= 10; Abil[7] -= 5; break;
-                case Races.RACE.DROW:
-                case Races.RACE.GRAY_ELF:
-                case Races.RACE.WILD_ELF:
-                case Races.RACE.HIGH_ELF:
-                case Races.RACE.WOOD_ELF: Abil[0] += 5; Abil[1] -= 5; Abil[3] += 5; Abil[4] += 10; Abil[5] += 5; break;
-                case Races.RACE.SVIRFNEBLIN:
-                case Races.RACE.ROCK_GNOME:
-                case Races.RACE.FOREST_GNOME: Abil[1] += 5; Abil[2] += 10; Abil[3] += 5; Abil[4] += 5; Abil[5] += 10; Abil[6] -= 15; break;
-                case Races.RACE.HALFELF: Abil[0] += 10; Abil[4] += 5; break;
-                case Races.RACE.DEEP_HALFLING:
-                case Races.RACE.LIGHTFOOT_HALFLING:
-                case Races.RACE.TALLFELLOW_HALFLING: Abil[0] += 5; Abil[1] += 5; Abil[2] += 5; Abil[3] += 10; Abil[4] += 15; Abil[5] += 5; Abil[6] -= 15; Abil[7] -= 5; break;
+                case RACE.DEEP_DWARF:
+                case RACE.DERRO_DWARF:
+                case RACE.DUERGAR:
+                case RACE.HILL_DWARF:
+                case RACE.MOUNTAIN_DWARF: abil[1] -= 10; abil[3] -= 5; break;
+                case RACE.DROW:
+                case RACE.GRAY_ELF:
+                case RACE.WILD_ELF:
+                case RACE.HIGH_ELF:
+                case RACE.WOOD_ELF: abil[2] += 5; abil[0] += 5; break;
+                case RACE.SVIRFNEBLIN:
+                case RACE.ROCK_GNOME:
+                case RACE.FOREST_GNOME: abil[0] += 10; abil[1] -= 15; break;
+                case RACE.HALFELF: abil[2] += 10; break;
+                case RACE.DEEP_HALFLING:
+                case RACE.LIGHTFOOT_HALFLING:
+                case RACE.TALLFELLOW_HALFLING: abil[2] += 5; abil[0] += 5; abil[1] -= 15; abil[3] -= 5; break;
                 default: break;
             }
 
-            PointsToSpend = 60 + (Level - 1) * 30;
-            int TempStat; bool Maxed;
-            while (PointsToSpend > 0)
+            var pointsToSpend = 20 + (Level - 1) * 15;
+
+            while (pointsToSpend > 0 && abil.Any(x => x < 99))
             {
-                TempStat = Dice.d8(ref random) - 1;
-                if (Abil[TempStat] < 99)
+                var tempStat = Dice.d4(-1);
+                if (abil[tempStat] < 99)
                 {
-                    Abil[TempStat]++;
-                    PointsToSpend--;
+                    abil[tempStat]++;
+                    pointsToSpend--;
                 }
-
-                Maxed = true;
-                foreach (int abil in Abil)
-                    if (abil < 99)
-                        Maxed = false;
-
-                if (Maxed)
-                    break;
             }
 
-            return Abil;
+            return abil;
         }
 
-        public static int[] BardAbilities(int Level, Races.RACE Race, int Dexterity, bool[] Armor, ref Random random)
+        public static String TurnUndead(Int32 Level)
         {
-            int PointsToSpend; int[] Abil = new int[4] { 50, 20, 10, 5 };
-
-            if (Armor[1])
-            {
-                Abil[0] -= 20;
-                Abil[1] -= 5;
-                Abil[2] -= 20;
-            }
-            else if (Armor[2])
-            {
-                Abil[0] -= 30;
-                Abil[1] -= 10;
-                Abil[2] -= 30;
-            }
-            else if (Armor[0])
-            {
-                Abil[0] += 10;
-                Abil[2] += 5;
-            }
-
-            switch (Dexterity)
-            {
-                case 1: Abil[2] -= 55; break;
-                case 2: Abil[2] -= 50; break;
-                case 3: Abil[2] -= 45; break;
-                case 4: Abil[2] -= 40; break;
-                case 5: Abil[2] -= 35; break;
-                case 6: Abil[2] -= 30; break;
-                case 7: Abil[2] -= 25; break;
-                case 8: Abil[2] -= 20; break;
-                case 9: Abil[2] -= 15; break;
-                case 10: Abil[2] -= 10; break;
-                case 11: Abil[2] -= 5; break;
-                case 17: Abil[2] += 5; break;
-                case 18: Abil[2] += 10; break;
-                case 19: Abil[2] += 15; break;
-                case 20: Abil[2] += 20; break;
-                case 21: Abil[2] += 25; break;
-                case 22: Abil[2] += 30; break;
-                case 23: Abil[2] += 35; break;
-                case 24: Abil[2] += 40; break;
-                case 25: Abil[2] += 45; break;
-                default: break;
-            }
-
-            switch (Race)
-            {
-                case Races.RACE.DEEP_DWARF:
-                case Races.RACE.DERRO_DWARF:
-                case Races.RACE.DUERGAR:
-                case Races.RACE.HILL_DWARF:
-                case Races.RACE.MOUNTAIN_DWARF: Abil[1] -= 10; Abil[3] -= 5; break;
-                case Races.RACE.DROW:
-                case Races.RACE.GRAY_ELF:
-                case Races.RACE.WILD_ELF:
-                case Races.RACE.HIGH_ELF:
-                case Races.RACE.WOOD_ELF: Abil[2] += 5; Abil[0] += 5; break;
-                case Races.RACE.SVIRFNEBLIN:
-                case Races.RACE.ROCK_GNOME:
-                case Races.RACE.FOREST_GNOME: Abil[0] += 10; Abil[1] -= 15; break;
-                case Races.RACE.HALFELF: Abil[2] += 10; break;
-                case Races.RACE.DEEP_HALFLING:
-                case Races.RACE.LIGHTFOOT_HALFLING:
-                case Races.RACE.TALLFELLOW_HALFLING: Abil[2] += 5; Abil[0] += 5; Abil[1] -= 15; Abil[3] -= 5; break;
-                default: break;
-            }
-
-            PointsToSpend = 20 + (Level - 1) * 15;
-            int TempStat; bool Maxed;
-            while (PointsToSpend > 0)
-            {
-                TempStat = Dice.d4(ref random) - 1;
-                if (Abil[TempStat] < 99)
-                {
-                    Abil[TempStat]++;
-                    PointsToSpend--;
-                }
-
-                Maxed = true;
-                foreach (int abil in Abil)
-                    if (abil < 99)
-                        Maxed = false;
-
-                if (Maxed)
-                    break;
-            }
-
-            return Abil;
-        }
-
-        public static string TurnUndead(int Level)
-        {
-            string output = "\nHD\t1 HD\tZombie\t2 HD\t3-4 HD\t5 HD\tGhast\t6 HD\t7 HD\t8 HD\t9 HD\t10 HD\t11+ HD\tSpecial";
+            var output = "\nHD\t1 HD\tZombie\t2 HD\t3-4 HD\t5 HD\tGhast\t6 HD\t7 HD\t8 HD\t9 HD\t10 HD\t11+ HD\tSpecial";
             
             switch (Level)
             {

@@ -1,27 +1,27 @@
+using NPCGen.Characters;
+using NPCGen.Roll;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace NPCGen
+namespace NPCGen.Equipment
 {
     class CursedItem
     {
-        public static string Generate(ref Random random)
+        public static String Generate()
         {
-            bool SpecificCursedItem = false;
-            string output;
+            var specificCursedItem = false;
+            String output;
             
-            do
-            {
-                output = Generate(ref SpecificCursedItem, ref random);
-            } while (SpecificCursedItem);
+            do { output = Generate(ref specificCursedItem); }
+            while (specificCursedItem);
 
             return output;
         }
-        
-        public static string Generate(ref bool SpecificCursedItem, ref Random random)
+
+        public static String Generate(ref Boolean SpecificCursedItem)
         {
-            switch (Dice.Percentile(ref random))
+            switch (Dice.Percentile())
             {
                 case 1:
                 case 2:
@@ -47,7 +47,7 @@ namespace NPCGen
                 case 42:
                 case 43:
                 case 44:
-                case 45: return String.Format("cursed ({0})", IntermittentFuctioning(ref random));
+                case 45: return String.Format("cursed ({0})", IntermittentFuctioning());
                 case 46:
                 case 47:
                 case 48:
@@ -62,7 +62,7 @@ namespace NPCGen
                 case 57:
                 case 58:
                 case 59:
-                case 60: return String.Format("cursed ({0})", Requirement(ref random));
+                case 60: return String.Format("cursed ({0})", Requirement());
                 case 61:
                 case 62:
                 case 63:
@@ -77,7 +77,7 @@ namespace NPCGen
                 case 72:
                 case 73:
                 case 74:
-                case 75: return String.Format("cursed ({0})", Drawback(ref random));
+                case 75: return String.Format("cursed ({0})", Drawback());
                 case 76:
                 case 77:
                 case 78:
@@ -92,7 +92,7 @@ namespace NPCGen
                 case 87:
                 case 88:
                 case 89:
-                case 90: return String.Format("cursed (different effect: {0})", DifferentEffect(ref random));
+                case 90: return String.Format("cursed (different effect: {0})", DifferentEffect());
                 case 91:
                 case 92:
                 case 93:
@@ -104,24 +104,24 @@ namespace NPCGen
                 case 99:
                 case 100:
                     SpecificCursedItem = true;
-                    return String.Format("{0}, ", Specific(ref random));
+                    return String.Format("{0}, ", Specific());
                 default: return "cursed (opposite effect or target)";
             }
         }
-        
-        private static string IntermittentFuctioning(ref Random random)
+
+        private static String IntermittentFuctioning()
         {
-            switch (Dice.Roll(1, 3, 0, ref random))
+            switch (Dice.Roll(1, 3, 0))
             {
-                case 1: return String.Format("unreliable: {0}%", Dice.d10(ref random));
-                case 2: return String.Format("dependent: {0}", Dependent(ref random));
-                default: return String.Format("requirement: {0}", Requirement(ref random));
+                case 1: return String.Format("unreliable: {0}%", Dice.d10());
+                case 2: return String.Format("dependent: {0}", Dependent());
+                default: return String.Format("requirement: {0}", Requirement());
             }
         }
 
-        private static string Dependent(ref Random random)
+        private static String Dependent()
         {
-            switch (Dice.Percentile(ref random))
+            switch (Dice.Percentile())
             {
                 case 1:
                 case 2:
@@ -177,11 +177,11 @@ namespace NPCGen
                 case 57:
                 case 58:
                 case 59:
-                case 60: return String.Format("within 10' of {0}", Character.CreatureType(ref random));
+                case 60: return String.Format("within 10' of {0}", Character.CreatureType());
                 case 61:
                 case 62:
                 case 63:
-                case 64: return String.Format("within 10' of {0}", Character.HumanoidSubtype(ref random));
+                case 64: return String.Format("within 10' of {0}", Character.HumanoidSubtype());
                 case 65:
                 case 66:
                 case 67:
@@ -212,8 +212,8 @@ namespace NPCGen
                 case 92:
                 case 93:
                 case 94:
-                case 95: return String.Format("in the hands of a {0} creature", Character.RandomAlignment(ref random));
-                case 96: return String.Format("in the hands of a {0}", Character.RandomGender(ref random, false));
+                case 95: return String.Format("in the hands of a {0} creature", Character.RandomAlignment());
+                case 96: return String.Format("in the hands of a {0}", Character.RandomGender(false));
                 case 97:
                 case 98:
                 case 99: return "on nonholy days or during particular atrological events";
@@ -222,9 +222,9 @@ namespace NPCGen
             }
         }
 
-        private static string Requirement(ref Random random)
+        private static String Requirement()
         {
-            switch (Dice.Roll(1, 19, 0, ref random))
+            switch (Dice.Roll(1, 19))
             {
                 case 1: return "character must eat twice as much as normal";
                 case 2: return "character must sleep twice as much as normal";
@@ -235,7 +235,7 @@ namespace NPCGen
                 case 7: return "character must discard all other magical items";
                 case 8: return "character must worship a particular deity";
                 case 9: return "character must change their name to a specific name";
-                case 10: return String.Format("character must change their class to {0}", Character.RandomClass(ref random));
+                case 10: return String.Format("character must change their class to {0}", Character.RandomClass());
                 case 11: return "character must have a minimum number of ranks in a particular skill";
                 case 12: return "character must sacrifice 2 points of Constitution";
                 case 13: return "item must be cleansed in holy water each day";
@@ -243,14 +243,14 @@ namespace NPCGen
                 case 15: return "item must be bathed in volcanic lava once per month";
                 case 16: return "item must be used once per day";
                 case 17: return "item needs blood";
-                case 18: return String.Format("item must have {0} cast on it", Scrolls.RandomSpell(ref random, 9));
-                default: return String.Format("{0}, {1}", Requirement(ref random), Requirement(ref random));
+                case 18: return String.Format("item must have {0} cast on it", Scrolls.RandomSpell(9));
+                default: return String.Format("{0}, {1}", Requirement(), Requirement());
             }
         }
 
-        private static string Drawback(ref Random random)
+        private static String Drawback()
         {
-            switch (Dice.Percentile(ref random))
+            switch (Dice.Percentile())
             {
                 case 1:
                 case 2:
@@ -261,7 +261,7 @@ namespace NPCGen
                 case 7:
                 case 8:
                 case 9:
-                    if (Dice.Percentile(ref random) <= 50)
+                    if (Dice.Percentile() <= 50)
                         return "character shrinks 1 inch";
                     return "character grows 1 inch";
                 case 10:
@@ -295,7 +295,7 @@ namespace NPCGen
                 case 38:
                 case 39:
                     string noise;
-                    switch (Dice.d8(ref random))
+                    switch (Dice.d8())
                     {
                         case 1: noise = "moaning"; break;
                         case 2: noise = "weeping"; break;
@@ -358,18 +358,18 @@ namespace NPCGen
                 case 93:
                 case 94:
                 case 95: return "character must make a Fortitude save DC 15 each day or temporarily lose 1 point of Dexterity";
-                case 96: return "5% chance each day that character polymorphs into a " + Encounter.Generate(Dice.d20(ref random), ref random);
+                case 96: return "5% chance each day that character polymorphs into a " + Encounter.Generate(Dice.d20());
                 case 97: return "character cannot cast arcane spells";
                 case 98: return "character cannot cast divine spells";
                 case 99: return "character cast any spells";
-                case 100: return String.Format("{0}, {1}", Drawback(ref random), Drawback(ref random));
+                case 100: return String.Format("{0}, {1}", Drawback(), Drawback());
                 default: return "character becomes selfishly possessive about the item";
             }
         }
 
-        private static string Specific(ref Random random)
+        private static String Specific()
         {
-            switch (Dice.Percentile(ref random))
+            switch (Dice.Percentile())
             {
                 case 1: return "Introverted Boots of Eternal Nudity (think you're naked, but not)";
                 case 2:
@@ -466,9 +466,9 @@ namespace NPCGen
         }
 
 
-        private static string DifferentEffect(ref Random random)
+        private static String DifferentEffect()
         {
-            switch (Dice.Percentile(ref random))
+            switch (Dice.Percentile())
             {
                 case 1: return "unaffected by restorative or curative magic";
                 case 2:
@@ -500,8 +500,8 @@ namespace NPCGen
                 case 28:
                 case 29: return "bright 1’ aura surrounds the possessor (opponents are +2 to hit, negate invisibility bonuses)";
                 case 30:
-                case 31: return String.Format("possessor becomes {0}-gendered", Character.RandomGender(ref random, true));
-                case 32: return String.Format("possessor becomes {0}", Character.RandomAlignment(ref random));
+                case 31: return String.Format("possessor becomes {0}-gendered", Character.RandomGender(true));
+                case 32: return String.Format("possessor becomes {0}", Character.RandomAlignment());
                 case 33:
                 case 34: return "all other items vanish";
                 case 35: return "another magical item on the possessor inverts itself";
@@ -509,12 +509,12 @@ namespace NPCGen
                 case 37:
                 case 38:
                 case 39: return "possessor takes 1 point of damage";
-                case 40: return String.Format("possessor becomes a {0} (stats adjust accordingly)", Character.HumanoidSubtype(ref random));
+                case 40: return String.Format("possessor becomes a {0} (stats adjust accordingly)", Character.HumanoidSubtype());
                 case 41: return "all other possessor's magical items negated";
                 case 42:
                 case 43:
                     string appendage;
-                    switch (Dice.d6(ref random))
+                    switch (Dice.d6())
                     {
                         case 1: appendage = "arm"; break;
                         case 2: appendage = "head"; break;
@@ -534,7 +534,7 @@ namespace NPCGen
                 case 51: return "Wisdom and Intelligence stats switch";
                 case 52:
                     string emotion;
-                    switch (Dice.d10(ref random))
+                    switch (Dice.d10())
                     {
                         case 1: emotion = "anger"; break;
                         case 2: emotion = "sadness"; break;
@@ -578,7 +578,7 @@ namespace NPCGen
                 case 80:
                 case 81:
                     string phobia;
-                    switch (Dice.d10(ref random))
+                    switch (Dice.d10())
                     {
                         case 1: phobia = "spiders"; break;
                         case 2: phobia = "darkness"; break;
@@ -600,7 +600,7 @@ namespace NPCGen
                 case 87: return "cannot stop dancing";
                 case 88:
                     string love;
-                    switch (Dice.d4(ref random))
+                    switch (Dice.d4())
                     {
                         case 1: love = "brotherly"; break;
                         case 2: love = "pet-like"; break;

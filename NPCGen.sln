@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 9.00
-# Visual Studio 2005
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Advanced Dungeons and Dragons 2e NPC Generator", "Advanced Dungeons and Dragons 2e NPC Generator\Advanced Dungeons and Dragons 2e NPC Generator.csproj", "{6F667C1C-C443-4878-B99F-7677BDFD93AB}"
 EndProject
 Global

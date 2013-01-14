@@ -1,246 +1,241 @@
+using NPCGen.Characters;
+using NPCGen.Roll;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Forms;
 
-namespace NPCGen
+namespace NPCGen.Equipment
 {
-    class Armor
+    public class Armor
     {
         private enum ARMORTYPE { LIGHT, MEDIUM, HEAVY };
 
-        public static string GenerateArmor(int Bonus, Classes.CLASS Class, int Level, ref Random random)
+        public static String GenerateArmor(Int32 bonus, CLASS charClass, Int32 level)
         {
-            if (!CanWear(Class))
-                return "";
+            if (!CanWear(charClass))
+                return String.Empty;
 
-            MagicItems.POWER Power = MagicItems.PowerByLevel(Level, ref random);
-            int OutputBonus = 0; int InputBonus = Bonus; string AbilitiesString = ""; int Roll;
-            string OutputBonusString; string SpecialQualitiesString; string CursedString = "";
+            var power = MagicItems.PowerByLevel(level);
+            var outputBonus = 0; 
+            var inputBonus = bonus;
+            var abilitiesString = String.Empty;
+            String cursedString = String.Empty;
 
-            string SuitofArmor = ArmorType(Class, ref random);
+            var suitofArmor = ArmorType(charClass);
 
-            if (Bonus > 0 && Dice.Percentile(ref random) <= 5)
-                CursedString = CursedItem.Generate(ref random) + " ";
+            if (bonus > 0 && Dice.Percentile() <= 5)
+                cursedString = CursedItem.Generate() + " ";
 
-            while (InputBonus > 0)
+            while (inputBonus > 0)
             {
-                switch (Power)
+                switch (power)
                 {
-                    case MagicItems.POWER.MINOR:
-                        if (Dice.Roll(1, 35, 0, ref random) > 22 && OutputBonus > 0)
+                    case POWER.MINOR:
+                        if (Dice.Roll(1, 35) > 22 && outputBonus > 0)
                         {
-                            if (AbilitiesString == "")
-                                AbilitiesString += " of ";
+                            if (String.IsNullOrEmpty(abilitiesString))
+                                abilitiesString += " of ";
                             else
-                                AbilitiesString += ", ";
-                            AbilitiesString += ArmorSpecialAbility(Power, ref InputBonus, ref random);
+                                abilitiesString += ", ";
+                            abilitiesString += ArmorSpecialAbility(power, ref inputBonus);
                         }
                         else
                         {
-                            InputBonus--;
-                            OutputBonus++;
+                            inputBonus--;
+                            outputBonus++;
                         }
                         break;
-                    case MagicItems.POWER.MEDIUM:
-                        Roll = Dice.Roll(1, 67, 0, ref random);
-                        if (Roll > 30 && OutputBonus > 0)
+                    case POWER.MEDIUM:
+                        var roll = Dice.Roll(1, 67);
+                        if (roll > 30 && outputBonus > 0)
                         {
-                            if (AbilitiesString == "")
-                                AbilitiesString += " of ";
+                            if (String.IsNullOrEmpty(abilitiesString))
+                                abilitiesString += " of ";
                             else
-                                AbilitiesString += ", ";
-                            AbilitiesString += ArmorSpecialAbility(Power, ref InputBonus, ref random);
+                                abilitiesString += ", ";
+                            abilitiesString += ArmorSpecialAbility(power, ref inputBonus);
                         }
-                        else if (Roll > 27 && Roll < 31)
-                            return SpecificArmor(MagicItems.POWER.MEDIUM, Class, ref random);
+                        else if (roll > 27 && roll < 31)
+                            return SpecificArmor(POWER.MEDIUM, charClass);
                         else
                         {
-                            InputBonus--;
-                            OutputBonus++;
+                            inputBonus--;
+                            outputBonus++;
                         }
                         break;
-                    case MagicItems.POWER.MAJOR:
-                        Roll = Dice.Roll(1, 67, 0, ref random);
-                        if (Roll > 30 && OutputBonus > 0)
+                    case POWER.MAJOR:
+                        roll = Dice.Roll(1, 67, 0);
+                        if (roll > 30 && outputBonus > 0)
                         {
-                            if (AbilitiesString == "")
-                                AbilitiesString += " of ";
+                            if (abilitiesString == String.Empty)
+                                abilitiesString += " of ";
                             else
-                                AbilitiesString += ", ";
-                            AbilitiesString += ArmorSpecialAbility(Power, ref InputBonus, ref random);
+                                abilitiesString += ", ";
+                            abilitiesString += ArmorSpecialAbility(power, ref inputBonus);
                         }
-                        else if (Roll > 27 && Roll < 31)
-                            return SpecificArmor(MagicItems.POWER.MAJOR, Class, ref random);
+                        else if (roll > 27 && roll < 31)
+                            return SpecificArmor(POWER.MAJOR, charClass);
                         else
                         {
-                            InputBonus--;
-                            OutputBonus++;
+                            inputBonus--;
+                            outputBonus++;
                         }
                         break;
-                    default: return ArmorType(Class, ref random);
+                    default: return ArmorType(charClass);
                 }
             }
 
-            OutputBonusString = "";
-            if (OutputBonus > 0)
-                OutputBonusString = String.Format("+{0} ", OutputBonus);
-            SpecialQualitiesString = MagicItems.SpecialQualities(false, Bonus, ref random);
-            if (SpecialQualitiesString != "")
-                SpecialQualitiesString = String.Format(" ({0})", SpecialQualitiesString);
+            var outputBonusString = String.Empty;
+            if (outputBonus > 0)
+                outputBonusString = String.Format("+{0} ", outputBonus);
+            var specialQualitiesString = MagicItems.SpecialQualities(false, bonus);
+            if (!String.IsNullOrEmpty(specialQualitiesString))
+                specialQualitiesString = String.Format(" ({0})", specialQualitiesString);
 
-            return String.Format("{0}{1}{2}{3}{4}", CursedString, OutputBonusString, SuitofArmor, AbilitiesString, SpecialQualitiesString);
+            return String.Format("{0}{1}{2}{3}{4}", cursedString, outputBonusString, suitofArmor, abilitiesString, specialQualitiesString);
         }
 
-        public static string GenerateShield(int Bonus, Classes.CLASS Class, int Level, ref Random random)
+        public static String GenerateShield(Int32 bonus, CLASS charClass, Int32 level)
         {
-            if (!CanWield(Class, false))
-                return "";
+            if (!CanWield(charClass, false))
+                return String.Empty;
 
-            MagicItems.POWER Power = MagicItems.PowerByLevel(Level, ref random);
-            int OutputBonus = 0; int InputBonus = Bonus; string AbilitiesString = ""; int Roll;
-            string OutputBonusString; string SpecialQualitiesString; string CursedString = "";
+            var power = MagicItems.PowerByLevel(level);
+            var outputBonus = 0; 
+            var inputBonus = bonus;
+            var abilitiesString = String.Empty;
+            var cursedString = String.Empty;
 
-            if (Bonus > 0 && Dice.Percentile(ref random) <= 5)
-                CursedString = CursedItem.Generate(ref random) + " ";
+            if (bonus > 0 && Dice.Percentile() <= 5)
+                cursedString = CursedItem.Generate() + " ";
 
-            string Shield = ShieldType(Class, ref random);
+            var shield = ShieldType(charClass);
 
-            while (InputBonus > 0)
+            while (inputBonus > 0)
             {
-                switch (Power)
+                switch (power)
                 {
-                    case MagicItems.POWER.MINOR:
-                        if (Dice.Roll(1, 87, 0, ref random) > 65 && OutputBonus > 0)
+                    case POWER.MINOR:
+                        if (Dice.Roll(1, 87) > 65 && outputBonus > 0)
                         {
-                            if (AbilitiesString == "")
-                                AbilitiesString += " of ";
+                            if (String.IsNullOrEmpty(abilitiesString))
+                                abilitiesString += " of ";
                             else
-                                AbilitiesString += ", ";
-                            AbilitiesString += ShieldSpecialAbility(Power, ref InputBonus, ref random);
+                                abilitiesString += ", ";
+                            abilitiesString += ShieldSpecialAbility(power, ref inputBonus);
                         }
                         else
                         {
-                            InputBonus--;
-                            OutputBonus++;
+                            inputBonus--;
+                            outputBonus++;
                         }
                         break;
-                    case MagicItems.POWER.MEDIUM:
-                        Roll = Dice.Roll(1, 70, 0, ref random);
-                        if (Roll > 33 && OutputBonus > 0)
+                    case POWER.MEDIUM:
+                        var roll = Dice.Roll(1, 70);
+                        if (roll > 33 && outputBonus > 0)
                         {
-                            if (AbilitiesString == "")
-                                AbilitiesString += " of ";
+                            if (String.IsNullOrEmpty(abilitiesString))
+                                abilitiesString += " of ";
                             else
-                                AbilitiesString += ", ";
-                            AbilitiesString += ShieldSpecialAbility(Power, ref InputBonus, ref random);
+                                abilitiesString += ", ";
+                            abilitiesString += ShieldSpecialAbility(power, ref inputBonus);
                         }
-                        else if (Roll > 30 && Roll < 34)
-                            return SpecificShield(MagicItems.POWER.MEDIUM, Class, ref random);
+                        else if (roll > 30 && roll < 34)
+                            return SpecificShield(POWER.MEDIUM, charClass);
                         else
                         {
-                            InputBonus--;
-                            OutputBonus++;
+                            inputBonus--;
+                            outputBonus++;
                         }
                         break;
-                    case MagicItems.POWER.MAJOR:
-                        Roll = Dice.Roll(1, 70, 0, ref random);
-                        if (Roll > 33 && OutputBonus > 0)
+                    case POWER.MAJOR:
+                        roll = Dice.Roll(1, 70);
+                        if (roll > 33 && outputBonus > 0)
                         {
-                            if (AbilitiesString == "")
-                                AbilitiesString += " of ";
+                            if (String.IsNullOrEmpty(abilitiesString))
+                                abilitiesString += " of ";
                             else
-                                AbilitiesString += ", ";
-                            AbilitiesString += ShieldSpecialAbility(Power, ref InputBonus, ref random);
+                                abilitiesString += ", ";
+                            abilitiesString += ShieldSpecialAbility(power, ref inputBonus);
                         }
-                        else if (Roll > 30 && Roll < 34)
-                            return SpecificShield(MagicItems.POWER.MAJOR, Class, ref random);
+                        else if (roll > 30 && roll < 34)
+                            return SpecificShield(POWER.MAJOR, charClass);
                         else
                         {
-                            InputBonus--;
-                            OutputBonus++;
+                            inputBonus--;
+                            outputBonus++;
                         }
                         break;
-                    default: return ShieldType(Class, ref random);
+                    default: return ShieldType(charClass);
                 }
             }
 
-            OutputBonusString = "";
-            if (OutputBonus > 0)
-                OutputBonusString = String.Format("+{0} ", OutputBonus);
-            SpecialQualitiesString = MagicItems.SpecialQualities(false, Bonus, ref random);
-            if (SpecialQualitiesString != "")
-                SpecialQualitiesString = String.Format(" ({0})", SpecialQualitiesString);
+            var outputBonusString = String.Empty;
+            if (outputBonus > 0)
+                outputBonusString = String.Format("+{0} ", outputBonus);
+            var specialQualitiesString = MagicItems.SpecialQualities(false, bonus);
+            if (!String.IsNullOrEmpty(specialQualitiesString))
+                specialQualitiesString = String.Format(" ({0})", specialQualitiesString);
 
-            return String.Format("{0}{1}{2}{3}{4}", CursedString, OutputBonusString, Shield, AbilitiesString, SpecialQualitiesString);
+            return String.Format("{0}{1}{2}{3}{4}", cursedString, outputBonusString, shield, abilitiesString, specialQualitiesString);
         }
 
-        public static bool CanWield(Classes.CLASS Class, bool Metal)
+        public static Boolean CanWield(CLASS charClass, Boolean metal)
         {
-            switch (Class)
+            switch (charClass)
             {
-                case Classes.CLASS.MONK:
-                case Classes.CLASS.THIEF:
-                case Classes.CLASS.SORCERER:
-                case Classes.CLASS.WIZARD: return false;
-                case Classes.CLASS.DRUID:
-                    if (!Metal)
-                        return true;
-                    return false;
+                case CLASS.MONK:
+                case CLASS.THIEF:
+                case CLASS.SORCERER:
+                case CLASS.WIZARD: return false;
+                case CLASS.DRUID: return !metal;
                 default: return true;
             }
         }
 
-        private static bool CanWear(Classes.CLASS Class, ARMORTYPE ArmorType, bool Metal)
+        private static bool CanWear(CLASS charClass, ARMORTYPE armorType, Boolean metal)
         {
-            switch (Class)
+            switch (charClass)
             {
-                case Classes.CLASS.BARBARIAN:
-                case Classes.CLASS.BARD:
-                case Classes.CLASS.RANGER:
-                    if (ArmorType != ARMORTYPE.HEAVY)
-                        return true;
-                    return false;
-                case Classes.CLASS.CLERIC:
-                case Classes.CLASS.PALADIN:
-                case Classes.CLASS.FIGHTER: return true;
-                case Classes.CLASS.DRUID:
-                    if (ArmorType != ARMORTYPE.HEAVY && !Metal)
-                        return true;
-                    return false;
-                case Classes.CLASS.THIEF:
-                    if (ArmorType == ARMORTYPE.LIGHT)
-                        return true;
-                    return false;
+                case CLASS.BARBARIAN:
+                case CLASS.BARD:
+                case CLASS.RANGER: return armorType != ARMORTYPE.HEAVY;
+                case CLASS.CLERIC:
+                case CLASS.PALADIN:
+                case CLASS.FIGHTER: return true;
+                case CLASS.DRUID: return armorType != ARMORTYPE.HEAVY && !metal;
+                case CLASS.THIEF: return armorType == ARMORTYPE.LIGHT;
                 default: return false;
             }
         }
 
-        private static bool CanWear(Classes.CLASS Class)
+        private static Boolean CanWear(CLASS charClass)
         {
-            switch (Class)
+            switch (charClass)
             {
-                case Classes.CLASS.MONK:
-                case Classes.CLASS.SORCERER:
-                case Classes.CLASS.WIZARD: return false;
+                case CLASS.MONK:
+                case CLASS.SORCERER:
+                case CLASS.WIZARD: return false;
                 default: return true;
             }
         }
 
-        private static string ArmorType(Classes.CLASS Class, ref Random random)
+        private static String ArmorType(CLASS charClass)
         {
-            if (CanWear(Class))
+            if (CanWear(charClass))
             {
                 while (true)
                 {
-                    System.Windows.Forms.Application.DoEvents();
-                    switch (Dice.Percentile(ref random))
+                    Application.DoEvents();
+                    switch (Dice.Percentile())
                     {
                         case 1:
-                            if (CanWear(Class, ARMORTYPE.LIGHT, false))
+                            if (CanWear(charClass, ARMORTYPE.LIGHT, false))
                                 return "padded armor (AC 9)";
                             break;
                         case 2:
-                            if (CanWear(Class, ARMORTYPE.LIGHT, false))
+                            if (CanWear(charClass, ARMORTYPE.LIGHT, false))
                                 return "leather armor (AC 8)";
                             break;
                         case 3:
@@ -253,7 +248,7 @@ namespace NPCGen
                         case 10:
                         case 11:
                         case 12:
-                            if (CanWear(Class, ARMORTYPE.MEDIUM, false))
+                            if (CanWear(charClass, ARMORTYPE.MEDIUM, false))
                                 return "hide armor (AC 7)";
                             break;
                         case 13:
@@ -271,7 +266,7 @@ namespace NPCGen
                         case 25:
                         case 26:
                         case 27:
-                            if (CanWear(Class, ARMORTYPE.LIGHT, true))
+                            if (CanWear(charClass, ARMORTYPE.LIGHT, true))
                                 return "studded leather armor (AC 7)";
                             break;
                         case 28:
@@ -289,15 +284,15 @@ namespace NPCGen
                         case 40:
                         case 41:
                         case 42:
-                            if (CanWear(Class, ARMORTYPE.LIGHT, true))
+                            if (CanWear(charClass, ARMORTYPE.LIGHT, true))
                                 return "chain shirt (AC 6)";
                             break;
                         case 43:
-                            if (CanWear(Class, ARMORTYPE.MEDIUM, true))
+                            if (CanWear(charClass, ARMORTYPE.MEDIUM, true))
                                 return "scale mail (AC 6)";
                             break;
                         case 44:
-                            if (CanWear(Class, ARMORTYPE.MEDIUM, true))
+                            if (CanWear(charClass, ARMORTYPE.MEDIUM, true))
                                 return "chainmail (AC 5)";
                             break;
                         case 45:
@@ -313,37 +308,37 @@ namespace NPCGen
                         case 55:
                         case 56:
                         case 57:
-                            if (CanWear(Class, ARMORTYPE.MEDIUM, true))
+                            if (CanWear(charClass, ARMORTYPE.MEDIUM, true))
                                 return "breastplate (AC 5)";
                             break;
                         case 58:
-                            if (CanWear(Class, ARMORTYPE.HEAVY, true))
+                            if (CanWear(charClass, ARMORTYPE.HEAVY, true))
                                 return "splint mail (AC 4)";
                             break;
                         case 59:
-                            if (CanWear(Class, ARMORTYPE.HEAVY, true))
+                            if (CanWear(charClass, ARMORTYPE.HEAVY, true))
                                 return "banded mail (AC 4)";
                             break;
                         case 60:
-                            if (CanWear(Class, ARMORTYPE.HEAVY, true))
+                            if (CanWear(charClass, ARMORTYPE.HEAVY, true))
                                 return "half-plate (AC 3)";
                             break;
                         default:
-                            if (CanWear(Class, ARMORTYPE.HEAVY, true))
+                            if (CanWear(charClass, ARMORTYPE.HEAVY, true))
                                 return "full plate (AC 2)";
                             break;
                     }
                 }
             }
-            return "";
+            return String.Empty;
         }
 
-        private static string ShieldType(Classes.CLASS Class, ref Random random)
+        private static String ShieldType(CLASS charClass)
         {
             while (true)
             {
-                System.Windows.Forms.Application.DoEvents();
-                switch (Dice.Percentile(ref random))
+                Application.DoEvents();
+                switch (Dice.Percentile())
                 {
                     case 1:
                     case 2:
@@ -354,17 +349,17 @@ namespace NPCGen
                     case 7:
                     case 8:
                     case 9:
-                    case 10: if (CanWield(Class, true)) { return "buckler (AC +1)"; } break;
+                    case 10: if (CanWield(charClass, true)) { return "buckler (AC +1)"; } break;
                     case 11:
                     case 12:
                     case 13:
                     case 14:
-                    case 15: if (CanWield(Class, false)) { return "small wooden shield (AC +1)"; } break;
+                    case 15: if (CanWield(charClass, false)) { return "small wooden shield (AC +1)"; } break;
                     case 16:
                     case 17:
                     case 18:
                     case 19:
-                    case 20: if (CanWield(Class, true)) { return "small steel shield (AC +1)"; } break;
+                    case 20: if (CanWield(charClass, true)) { return "small steel shield (AC +1)"; } break;
                     case 21:
                     case 22:
                     case 23:
@@ -374,26 +369,26 @@ namespace NPCGen
                     case 27:
                     case 28:
                     case 29:
-                    case 30: if (CanWield(Class, false)) { return "large wooden shield (AC +2)"; } break;
+                    case 30: if (CanWield(charClass, false)) { return "large wooden shield (AC +2)"; } break;
                     case 96:
                     case 97:
                     case 98:
                     case 99:
-                    case 100: if (CanWield(Class, false)) { return "tower shield"; } break;
-                    default: if (CanWield(Class, true)) { return "large steel shield (AC +2)"; } break;
+                    case 100: if (CanWield(charClass, false)) { return "tower shield"; } break;
+                    default: if (CanWield(charClass, true)) { return "large steel shield (AC +2)"; } break;
                 }
             }
         }
 
-        private static string ArmorSpecialAbility(MagicItems.POWER Power, ref int BonusLimit, ref Random random)
+        private static String ArmorSpecialAbility(POWER power, ref Int32 bonusLimit)
         {
             while (true)
             {
-                System.Windows.Forms.Application.DoEvents();
-                switch (Power)
+                Application.DoEvents();
+                switch (power)
                 {
-                    case MagicItems.POWER.MINOR:
-                        switch (Dice.Percentile(ref random))
+                    case POWER.MINOR:
+                        switch (Dice.Percentile())
                         {
                             case 31:
                             case 32:
@@ -417,9 +412,9 @@ namespace NPCGen
                             case 50:
                             case 51:
                             case 52:
-                                if (BonusLimit >= 1)
+                                if (bonusLimit >= 1)
                                 {
-                                    BonusLimit--;
+                                    bonusLimit--;
                                     return "slick";
                                 }
                                 break;
@@ -445,9 +440,9 @@ namespace NPCGen
                             case 72:
                             case 73:
                             case 74:
-                                if (BonusLimit >= 1)
+                                if (bonusLimit >= 1)
                                 {
-                                    BonusLimit--;
+                                    bonusLimit--;
                                     return "shadow";
                                 }
                                 break;
@@ -473,38 +468,38 @@ namespace NPCGen
                             case 94:
                             case 95:
                             case 96:
-                                if (BonusLimit >= 1)
+                                if (bonusLimit >= 1)
                                 {
-                                    BonusLimit--;
+                                    bonusLimit--;
                                     return "silent moves";
                                 }
                                 break;
                             case 97:
                             case 98:
-                                if (BonusLimit >= 3)
+                                if (bonusLimit >= 3)
                                 {
-                                    BonusLimit -= 3;
+                                    bonusLimit -= 3;
                                     return "moderate fortification";
                                 }
                                 break;
                             case 99:
-                            case 100: BonusLimit++; break;
+                            case 100: bonusLimit++; break;
                             default:
-                                if (BonusLimit >= 1)
+                                if (bonusLimit >= 1)
                                 {
-                                    BonusLimit--;
+                                    bonusLimit--;
                                     return "glamered";
                                 }
                                 break;
                         } break;
-                    case MagicItems.POWER.MEDIUM:
-                        switch (Dice.Percentile(ref random))
+                    case POWER.MEDIUM:
+                        switch (Dice.Percentile())
                         {
                             case 1:
                             case 2:
-                                if (BonusLimit >= 1)
+                                if (bonusLimit >= 1)
                                 {
-                                    BonusLimit--;
+                                    bonusLimit--;
                                     return "light fortification";
                                 }
                                 break;
@@ -513,9 +508,9 @@ namespace NPCGen
                             case 5:
                             case 6:
                             case 7:
-                                if (BonusLimit >= 1)
+                                if (bonusLimit >= 1)
                                 {
-                                    BonusLimit--;
+                                    bonusLimit--;
                                     return "glamered";
                                 }
                                 break;
@@ -531,9 +526,9 @@ namespace NPCGen
                             case 17:
                             case 18:
                             case 19:
-                                if (BonusLimit >= 1)
+                                if (bonusLimit >= 1)
                                 {
-                                    BonusLimit--;
+                                    bonusLimit--;
                                     return "slick";
                                 }
                                 break;
@@ -548,16 +543,16 @@ namespace NPCGen
                             case 28:
                             case 29:
                             case 30:
-                                if (BonusLimit >= 1)
+                                if (bonusLimit >= 1)
                                 {
-                                    BonusLimit--;
+                                    bonusLimit--;
                                     return "shadow";
                                 }
                                 break;
                             case 50:
-                                if (BonusLimit >= 2)
+                                if (bonusLimit >= 2)
                                 {
-                                    BonusLimit -= 2;
+                                    bonusLimit -= 2;
                                     return "spell resistance (13)";
                                 }
                                 break;
@@ -571,9 +566,9 @@ namespace NPCGen
                             case 58:
                             case 59:
                             case 60:
-                                if (BonusLimit >= 3)
+                                if (bonusLimit >= 3)
                                 {
-                                    BonusLimit -= 3;
+                                    bonusLimit -= 3;
                                     return "ghost touch";
                                 }
                                 break;
@@ -582,16 +577,16 @@ namespace NPCGen
                             case 63:
                             case 64:
                             case 65:
-                                if (BonusLimit >= 3)
+                                if (bonusLimit >= 3)
                                 {
-                                    BonusLimit -= 3;
+                                    bonusLimit -= 3;
                                     return "moderate fortification";
                                 }
                                 break;
                             case 66:
-                                if (BonusLimit >= 3)
+                                if (bonusLimit >= 3)
                                 {
-                                    BonusLimit -= 3;
+                                    bonusLimit -= 3;
                                     return "spell resistance (15)";
                                 }
                                 break;
@@ -600,9 +595,9 @@ namespace NPCGen
                             case 69:
                             case 70:
                             case 71:
-                                if (BonusLimit >= 3)
+                                if (bonusLimit >= 3)
                                 {
-                                    BonusLimit -= 3;
+                                    bonusLimit -= 3;
                                     return "acid resistance/10";
                                 }
                                 break;
@@ -611,9 +606,9 @@ namespace NPCGen
                             case 74:
                             case 75:
                             case 76:
-                                if (BonusLimit >= 3)
+                                if (bonusLimit >= 3)
                                 {
-                                    BonusLimit -= 3;
+                                    bonusLimit -= 3;
                                     return "cold resistance/10";
                                 }
                                 break;
@@ -622,9 +617,9 @@ namespace NPCGen
                             case 79:
                             case 80:
                             case 81:
-                                if (BonusLimit >= 3)
+                                if (bonusLimit >= 3)
                                 {
-                                    BonusLimit -= 3;
+                                    bonusLimit -= 3;
                                     return "fire resistance/10";
                                 }
                                 break;
@@ -633,9 +628,9 @@ namespace NPCGen
                             case 84:
                             case 85:
                             case 86:
-                                if (BonusLimit >= 3)
+                                if (bonusLimit >= 3)
                                 {
-                                    BonusLimit -= 3;
+                                    bonusLimit -= 3;
                                     return "lightning resistance/10";
                                 }
                                 break;
@@ -644,55 +639,55 @@ namespace NPCGen
                             case 89:
                             case 90:
                             case 91:
-                                if (BonusLimit >= 3)
+                                if (bonusLimit >= 3)
                                 {
-                                    BonusLimit -= 3;
+                                    bonusLimit -= 3;
                                     return "sonic resistance/10";
                                 }
                                 break;
                             case 92:
                             case 93:
                             case 94:
-                                if (BonusLimit >= 4)
+                                if (bonusLimit >= 4)
                                 {
-                                    BonusLimit -= 4;
+                                    bonusLimit -= 4;
                                     return "spell resistance (17)";
                                 }
                                 break;
                             case 95:
-                                if (BonusLimit >= 5)
+                                if (bonusLimit >= 5)
                                 {
-                                    BonusLimit -= 5;
+                                    bonusLimit -= 5;
                                     return "etherealness";
                                 }
                                 break;
                             case 96:
                             case 97:
                             case 98:
-                                if (BonusLimit >= 5)
+                                if (bonusLimit >= 5)
                                 {
-                                    BonusLimit -= 5;
+                                    bonusLimit -= 5;
                                     return "heavy fortification";
                                 }
                                 break;
                             case 99:
-                            case 100: BonusLimit++; break;
+                            case 100: bonusLimit++; break;
                             default:
-                                if (BonusLimit >= 1)
+                                if (bonusLimit >= 1)
                                 {
-                                    BonusLimit--;
+                                    bonusLimit--;
                                     return "silent moves";
                                 }
                                 break;
                         } break;
-                    case MagicItems.POWER.MAJOR:
-                        switch (Dice.Percentile(ref random))
+                    case POWER.MAJOR:
+                        switch (Dice.Percentile())
                         {
                             case 1:
                             case 2:
-                                if (BonusLimit >= 1)
+                                if (bonusLimit >= 1)
                                 {
-                                    BonusLimit--;
+                                    bonusLimit--;
                                     return "light fortification";
                                 }
                                 break;
@@ -702,41 +697,41 @@ namespace NPCGen
                             case 6:
                             case 7:
                             case 8:
-                                if (BonusLimit >= 1)
+                                if (bonusLimit >= 1)
                                 {
-                                    BonusLimit--;
+                                    bonusLimit--;
                                     return "glamered";
                                 }
                                 break;
                             case 9:
-                                if (BonusLimit >= 1)
+                                if (bonusLimit >= 1)
                                 {
-                                    BonusLimit--;
+                                    bonusLimit--;
                                     return "slick";
                                 }
                                 break;
                             case 10:
                             case 11:
-                                if (BonusLimit >= 1)
+                                if (bonusLimit >= 1)
                                 {
-                                    BonusLimit--;
+                                    bonusLimit--;
                                     return "shadow";
                                 }
                                 break;
                             case 12:
                             case 13:
                             case 14:
-                                if (BonusLimit >= 1)
+                                if (bonusLimit >= 1)
                                 {
-                                    BonusLimit--;
+                                    bonusLimit--;
                                     return "silent moves";
                                 }
                                 break;
                             case 15:
                             case 16:
-                                if (BonusLimit >= 2)
+                                if (bonusLimit >= 2)
                                 {
-                                    BonusLimit -= 2;
+                                    bonusLimit -= 2;
                                     return "spell resistance (13)";
                                 }
                                 break;
@@ -745,17 +740,17 @@ namespace NPCGen
                             case 19:
                             case 20:
                             case 21:
-                                if (BonusLimit >= 3)
+                                if (bonusLimit >= 3)
                                 {
-                                    BonusLimit -= 3;
+                                    bonusLimit -= 3;
                                     return "ghost touch";
                                 }
                                 break;
                             case 22:
                             case 23:
-                                if (BonusLimit >= 3)
+                                if (bonusLimit >= 3)
                                 {
-                                    BonusLimit -= 3;
+                                    bonusLimit -= 3;
                                     return "invulnerability (damage reduction 5/+1)";
                                 }
                                 break;
@@ -763,25 +758,25 @@ namespace NPCGen
                             case 25:
                             case 26:
                             case 27:
-                                if (BonusLimit >= 3)
+                                if (bonusLimit >= 3)
                                 {
-                                    BonusLimit -= 3;
+                                    bonusLimit -= 3;
                                     return "moderate fortification";
                                 }
                                 break;
                             case 28:
                             case 29:
-                                if (BonusLimit >= 3)
+                                if (bonusLimit >= 3)
                                 {
-                                    BonusLimit -= 3;
+                                    bonusLimit -= 3;
                                     return "spell resistance (15)";
                                 }
                                 break;
                             case 30:
                             case 31:
-                                if (BonusLimit >= 3)
+                                if (bonusLimit >= 3)
                                 {
-                                    BonusLimit -= 3;
+                                    bonusLimit -= 3;
                                     return "acid resistance/10";
                                 }
                                 break;
@@ -795,9 +790,9 @@ namespace NPCGen
                             case 39:
                             case 40:
                             case 41:
-                                if (BonusLimit >= 3)
+                                if (bonusLimit >= 3)
                                 {
-                                    BonusLimit -= 3;
+                                    bonusLimit -= 3;
                                     return "cold resistance/10";
                                 }
                                 break;
@@ -811,9 +806,9 @@ namespace NPCGen
                             case 49:
                             case 50:
                             case 51:
-                                if (BonusLimit >= 3)
+                                if (bonusLimit >= 3)
                                 {
-                                    BonusLimit -= 3;
+                                    bonusLimit -= 3;
                                     return "fire resistance/10";
                                 }
                                 break;
@@ -827,71 +822,71 @@ namespace NPCGen
                             case 59:
                             case 60:
                             case 61:
-                                if (BonusLimit >= 3)
+                                if (bonusLimit >= 3)
                                 {
-                                    BonusLimit -= 3;
+                                    bonusLimit -= 3;
                                     return "lightning resistance/10";
                                 }
                                 break;
                             case 62:
                             case 63:
                             case 64:
-                                if (BonusLimit >= 3)
+                                if (bonusLimit >= 3)
                                 {
-                                    BonusLimit -= 3;
+                                    bonusLimit -= 3;
                                     return "sonic resistance/10";
                                 }
                                 break;
                             case 65:
                             case 66:
                             case 67:
-                                if (BonusLimit >= 4)
+                                if (bonusLimit >= 4)
                                 {
-                                    BonusLimit -= 4;
+                                    bonusLimit -= 4;
                                     return "spell resistance (17)";
                                 }
                                 break;
                             case 68:
                             case 69:
-                                if (BonusLimit >= 5)
+                                if (bonusLimit >= 5)
                                 {
-                                    BonusLimit -= 5;
+                                    bonusLimit -= 5;
                                     return "etherealness";
                                 }
                                 break;
                             case 70:
                             case 71:
                             case 72:
-                                if (BonusLimit >= 5)
+                                if (bonusLimit >= 5)
                                 {
-                                    BonusLimit -= 5;
+                                    bonusLimit -= 5;
                                     return "heavy fortification";
                                 }
                                 break;
                             case 73:
                             case 74:
-                                if (BonusLimit >= 5)
+                                if (bonusLimit >= 5)
                                 {
-                                    BonusLimit -= 5;
+                                    bonusLimit -= 5;
                                     return "spell resistance (19)";
                                 }
                                 break;
-                            default: BonusLimit++; break;
+                            default: bonusLimit++; break;
                         } break;
                     default: return "[ERROR: Unpowered Armor ability.  Armor.875]";
                 }
             }
         }
 
-        private static string ShieldSpecialAbility(MagicItems.POWER Power, ref int BonusLimit, ref Random random)
+        private static String ShieldSpecialAbility(POWER power, ref Int32 bonusLimit)
         {
             while (true)
             {
-                System.Windows.Forms.Application.DoEvents();
-                switch (Power)
+                Application.DoEvents();
+                switch (power)
                 {
-                    case MagicItems.POWER.MINOR:
-                        switch (Dice.Percentile(ref random))
+                    case POWER.MINOR:
+                        switch (Dice.Percentile())
                         {
                             case 1:
                             case 2:
@@ -923,9 +918,9 @@ namespace NPCGen
                             case 28:
                             case 29:
                             case 30:
-                                if (BonusLimit >= 1)
+                                if (bonusLimit >= 1)
                                 {
-                                    BonusLimit--;
+                                    bonusLimit--;
                                     return "bashing";
                                 }
                                 break;
@@ -949,9 +944,9 @@ namespace NPCGen
                             case 48:
                             case 49:
                             case 50:
-                                if (BonusLimit >= 1)
+                                if (bonusLimit >= 1)
                                 {
-                                    BonusLimit--;
+                                    bonusLimit--;
                                     return "blinding";
                                 }
                                 break;
@@ -965,23 +960,23 @@ namespace NPCGen
                             case 58:
                             case 59:
                             case 60:
-                                if (BonusLimit >= 1)
+                                if (bonusLimit >= 1)
                                 {
-                                    BonusLimit--;
+                                    bonusLimit--;
                                     return "light fortification";
                                 }
                                 break;
-                            case 100: BonusLimit++; break;
+                            case 100: bonusLimit++; break;
                             default:
-                                if (BonusLimit >= 2)
+                                if (bonusLimit >= 2)
                                 {
-                                    BonusLimit -= 2;
+                                    bonusLimit -= 2;
                                     return "arrow deflection";
                                 }
                                 break;
                         } break;
-                    case MagicItems.POWER.MEDIUM:
-                        switch (Dice.Percentile(ref random))
+                    case POWER.MEDIUM:
+                        switch (Dice.Percentile())
                         {
                             case 1:
                             case 2:
@@ -993,9 +988,9 @@ namespace NPCGen
                             case 8:
                             case 9:
                             case 10:
-                                if (BonusLimit >= 2)
+                                if (bonusLimit >= 2)
                                 {
-                                    BonusLimit -= 2;
+                                    bonusLimit -= 2;
                                     return "arrow deflection";
                                 }
                                 break;
@@ -1005,9 +1000,9 @@ namespace NPCGen
                             case 14:
                             case 15:
                             case 16:
-                                if (BonusLimit >= 2)
+                                if (bonusLimit >= 2)
                                 {
-                                    BonusLimit -= 2;
+                                    bonusLimit -= 2;
                                     return "animated";
                                 }
                                 break;
@@ -1015,9 +1010,9 @@ namespace NPCGen
                             case 18:
                             case 19:
                             case 20:
-                                if (BonusLimit >= 2)
+                                if (bonusLimit >= 2)
                                 {
-                                    BonusLimit -= 2;
+                                    bonusLimit -= 2;
                                     return "spell resistance (13)";
                                 }
                                 break;
@@ -1026,9 +1021,9 @@ namespace NPCGen
                             case 23:
                             case 24:
                             case 25:
-                                if (BonusLimit >= 3)
+                                if (bonusLimit >= 3)
                                 {
-                                    BonusLimit -= 3;
+                                    bonusLimit -= 3;
                                     return "ghost touch";
                                 }
                                 break;
@@ -1037,9 +1032,9 @@ namespace NPCGen
                             case 28:
                             case 29:
                             case 30:
-                                if (BonusLimit >= 3)
+                                if (bonusLimit >= 3)
                                 {
-                                    BonusLimit -= 3;
+                                    bonusLimit -= 3;
                                     return "moderate fortification";
                                 }
                                 break;
@@ -1053,9 +1048,9 @@ namespace NPCGen
                             case 38:
                             case 39:
                             case 40:
-                                if (BonusLimit >= 3)
+                                if (bonusLimit >= 3)
                                 {
-                                    BonusLimit -= 3;
+                                    bonusLimit -= 3;
                                     return "acid resistance/10";
                                 }
                                 break;
@@ -1069,9 +1064,9 @@ namespace NPCGen
                             case 48:
                             case 49:
                             case 50:
-                                if (BonusLimit >= 3)
+                                if (bonusLimit >= 3)
                                 {
-                                    BonusLimit -= 3;
+                                    bonusLimit -= 3;
                                     return "cold resistance/10";
                                 }
                                 break;
@@ -1085,9 +1080,9 @@ namespace NPCGen
                             case 58:
                             case 59:
                             case 60:
-                                if (BonusLimit >= 3)
+                                if (bonusLimit >= 3)
                                 {
-                                    BonusLimit -= 3;
+                                    bonusLimit -= 3;
                                     return "fire resistance/10";
                                 }
                                 break;
@@ -1101,9 +1096,9 @@ namespace NPCGen
                             case 78:
                             case 79:
                             case 80:
-                                if (BonusLimit >= 3)
+                                if (bonusLimit >= 3)
                                 {
-                                    BonusLimit -= 3;
+                                    bonusLimit -= 3;
                                     return "sonic resistance/10";
                                 }
                                 break;
@@ -1117,9 +1112,9 @@ namespace NPCGen
                             case 88:
                             case 89:
                             case 90:
-                                if (BonusLimit >= 5)
+                                if (bonusLimit >= 5)
                                 {
-                                    BonusLimit -= 5;
+                                    bonusLimit -= 5;
                                     return "reflecting";
                                 }
                                 break;
@@ -1132,17 +1127,17 @@ namespace NPCGen
                             case 97:
                             case 98:
                             case 99:
-                            case 100: BonusLimit++; break;
+                            case 100: bonusLimit++; break;
                             default:
-                                if (BonusLimit >= 3)
+                                if (bonusLimit >= 3)
                                 {
-                                    BonusLimit -= 3;
+                                    bonusLimit -= 3;
                                     return "lightning resistance/10";
                                 }
                                 break;
                         } break;
-                    case MagicItems.POWER.MAJOR:
-                        switch (Dice.Percentile(ref random))
+                    case POWER.MAJOR:
+                        switch (Dice.Percentile())
                         {
                             case 1:
                             case 2:
@@ -1159,9 +1154,9 @@ namespace NPCGen
                             case 13:
                             case 14:
                             case 15:
-                                if (BonusLimit >= 2)
+                                if (bonusLimit >= 2)
                                 {
-                                    BonusLimit -= 2;
+                                    bonusLimit -= 2;
                                     return "animated";
                                 }
                                 break;
@@ -1170,9 +1165,9 @@ namespace NPCGen
                             case 18:
                             case 19:
                             case 20:
-                                if (BonusLimit >= 2)
+                                if (bonusLimit >= 2)
                                 {
-                                    BonusLimit -= 2;
+                                    bonusLimit -= 2;
                                     return "spell resistance (13)";
                                 }
                                 break;
@@ -1181,9 +1176,9 @@ namespace NPCGen
                             case 23:
                             case 24:
                             case 25:
-                                if (BonusLimit >= 3)
+                                if (bonusLimit >= 3)
                                 {
-                                    BonusLimit -= 3;
+                                    bonusLimit -= 3;
                                     return "ghost touch";
                                 }
                                 break;
@@ -1197,54 +1192,54 @@ namespace NPCGen
                             case 33:
                             case 34:
                             case 35:
-                                if (BonusLimit >= 3)
+                                if (bonusLimit >= 3)
                                 {
-                                    BonusLimit -= 3;
+                                    bonusLimit -= 3;
                                     return "moderate fortification";
                                 }
                                 break;
                             case 36:
                             case 37:
                             case 38:
-                                if (BonusLimit >= 3)
+                                if (bonusLimit >= 3)
                                 {
-                                    BonusLimit -= 3;
+                                    bonusLimit -= 3;
                                     return "acid resistance/10";
                                 }
                                 break;
                             case 39:
                             case 40:
                             case 41:
-                                if (BonusLimit >= 3)
+                                if (bonusLimit >= 3)
                                 {
-                                    BonusLimit -= 3;
+                                    bonusLimit -= 3;
                                     return "cold resistance/10";
                                 }
                                 break;
                             case 42:
                             case 43:
                             case 44:
-                                if (BonusLimit >= 3)
+                                if (bonusLimit >= 3)
                                 {
-                                    BonusLimit -= 3;
+                                    bonusLimit -= 3;
                                     return "fire resistance/10";
                                 }
                                 break;
                             case 45:
                             case 46:
                             case 47:
-                                if (BonusLimit >= 3)
+                                if (bonusLimit >= 3)
                                 {
-                                    BonusLimit -= 3;
+                                    bonusLimit -= 3;
                                     return "lightning resistance/10";
                                 }
                                 break;
                             case 48:
                             case 49:
                             case 50:
-                                if (BonusLimit >= 3)
+                                if (bonusLimit >= 3)
                                 {
-                                    BonusLimit -= 3;
+                                    bonusLimit -= 3;
                                     return "sonic resistance/10";
                                 }
                                 break;
@@ -1253,9 +1248,9 @@ namespace NPCGen
                             case 53:
                             case 54:
                             case 55:
-                                if (BonusLimit >= 3)
+                                if (bonusLimit >= 3)
                                 {
-                                    BonusLimit -= 3;
+                                    bonusLimit -= 3;
                                     return "spell resistance (15)";
                                 }
                                 break;
@@ -1264,9 +1259,9 @@ namespace NPCGen
                             case 58:
                             case 59:
                             case 60:
-                                if (BonusLimit >= 4)
+                                if (bonusLimit >= 4)
                                 {
-                                    BonusLimit -= 4;
+                                    bonusLimit -= 4;
                                     return "spell resistance (17)";
                                 }
                                 break;
@@ -1275,9 +1270,9 @@ namespace NPCGen
                             case 63:
                             case 64:
                             case 65:
-                                if (BonusLimit >= 5)
+                                if (bonusLimit >= 5)
                                 {
-                                    BonusLimit -= 5;
+                                    bonusLimit -= 5;
                                     return "heavy fortification";
                                 }
                                 break;
@@ -1286,9 +1281,9 @@ namespace NPCGen
                             case 68:
                             case 69:
                             case 70:
-                                if (BonusLimit >= 5)
+                                if (bonusLimit >= 5)
                                 {
-                                    BonusLimit -= 5;
+                                    bonusLimit -= 5;
                                     return "reflecting";
                                 }
                                 break;
@@ -1302,29 +1297,28 @@ namespace NPCGen
                             case 78:
                             case 79:
                             case 80:
-                                if (BonusLimit >= 5)
+                                if (bonusLimit >= 5)
                                 {
-                                    BonusLimit -= 5;
+                                    bonusLimit -= 5;
                                     return "spell resistance (19)";
                                 }
                                 break;
-                            default: BonusLimit++; break;
+                            default: bonusLimit++; break;
                         } break;
                     default: return "[ERROR: Unpowered Shield Ability.  Armor.1307]";
                 }
             }
         }
 
-        private static string SpecificArmor(MagicItems.POWER Power, Classes.CLASS Class, ref Random random)
+        private static String SpecificArmor(POWER power, CLASS charClass)
         {
-            int Roll;
             while (true)
             {
-                System.Windows.Forms.Application.DoEvents();
-                switch (Power)
+                Application.DoEvents();
+                switch (power)
                 {
-                    case MagicItems.POWER.MEDIUM:
-                        switch (Dice.Percentile(ref random))
+                    case POWER.MEDIUM:
+                        switch (Dice.Percentile())
                         {
                             case 1:
                             case 2:
@@ -1335,7 +1329,7 @@ namespace NPCGen
                             case 7:
                             case 8:
                             case 9:
-                            case 10: if (CanWear(Class, ARMORTYPE.LIGHT, true)) { return "mithral shirt"; } break;
+                            case 10: if (CanWear(charClass, ARMORTYPE.LIGHT, true)) { return "mithral shirt"; } break;
                             case 11:
                             case 12:
                             case 13:
@@ -1350,7 +1344,7 @@ namespace NPCGen
                             case 22:
                             case 23:
                             case 24:
-                            case 25: if (CanWear(Class, ARMORTYPE.LIGHT, true)) { return "Elven Chain"; } break;
+                            case 25: if (CanWear(charClass, ARMORTYPE.LIGHT, true)) { return "Elven Chain"; } break;
                             case 26:
                             case 27:
                             case 28:
@@ -1360,7 +1354,7 @@ namespace NPCGen
                             case 32:
                             case 33:
                             case 34:
-                            case 35: if (CanWear(Class, ARMORTYPE.MEDIUM, false)) { return "Rhino Hide"; } break;
+                            case 35: if (CanWear(charClass, ARMORTYPE.MEDIUM, false)) { return "Rhino Hide"; } break;
                             case 36:
                             case 37:
                             case 38:
@@ -1370,7 +1364,7 @@ namespace NPCGen
                             case 42:
                             case 43:
                             case 44:
-                            case 45: if (CanWear(Class, ARMORTYPE.MEDIUM, true)) { return "adamantine breastplate"; } break;
+                            case 45: if (CanWear(charClass, ARMORTYPE.MEDIUM, true)) { return "adamantine breastplate"; } break;
                             case 71:
                             case 72:
                             case 73:
@@ -1380,7 +1374,7 @@ namespace NPCGen
                             case 77:
                             case 78:
                             case 79:
-                            case 80: if (CanWear(Class, ARMORTYPE.HEAVY, true)) { return "Plate Armor of the Deep"; } break;
+                            case 80: if (CanWear(charClass, ARMORTYPE.HEAVY, true)) { return "Plate Armor of the Deep"; } break;
                             case 81:
                             case 82:
                             case 83:
@@ -1390,7 +1384,7 @@ namespace NPCGen
                             case 87:
                             case 88:
                             case 89:
-                            case 90: if (CanWear(Class, ARMORTYPE.HEAVY, true)) { return "Banded Mail of Luck"; } break;
+                            case 90: if (CanWear(charClass, ARMORTYPE.HEAVY, true)) { return "Banded Mail of Luck"; } break;
                             case 91:
                             case 92:
                             case 93:
@@ -1400,22 +1394,22 @@ namespace NPCGen
                             case 97:
                             case 98:
                             case 99:
-                            case 100: if (CanWear(Class, ARMORTYPE.MEDIUM, true)) { return "Breastplate of Command"; } break;
-                            default: if (CanWear(Class, ARMORTYPE.MEDIUM, true)) { return "Dwarven Plate"; } break;
+                            case 100: if (CanWear(charClass, ARMORTYPE.MEDIUM, true)) { return "Breastplate of Command"; } break;
+                            default: if (CanWear(charClass, ARMORTYPE.MEDIUM, true)) { return "Dwarven Plate"; } break;
                         } break;
-                    case MagicItems.POWER.MAJOR:
-                        Roll = Dice.Percentile(ref random);
-                        if (!CanWear(Class, ARMORTYPE.LIGHT, true))
+                    case POWER.MAJOR:
+                        var roll = Dice.Percentile();
+                        if (!CanWear(charClass, ARMORTYPE.LIGHT, true))
                             return "Rhino Hide";
-                        else if (Roll > 80 && CanWear(Class, ARMORTYPE.HEAVY, true))
+                        else if (roll > 80 && CanWear(charClass, ARMORTYPE.HEAVY, true))
                             return "Demon Armor";
-                        else if (Roll > 60 && Roll < 81 && CanWear(Class, ARMORTYPE.LIGHT, true))
+                        else if (roll > 60 && roll < 81 && CanWear(charClass, ARMORTYPE.LIGHT, true))
                             return "Celestial Armor";
-                        else if (Roll > 40 && Roll < 61 && CanWear(Class, ARMORTYPE.MEDIUM, true))
+                        else if (roll > 40 && roll < 61 && CanWear(charClass, ARMORTYPE.MEDIUM, true))
                             return "Breastplate of Command";
-                        else if (Roll > 10 && Roll < 41 && CanWear(Class, ARMORTYPE.HEAVY, true))
+                        else if (roll > 10 && roll < 41 && CanWear(charClass, ARMORTYPE.HEAVY, true))
                             return "Banded Mail of Luck";
-                        else if (Roll < 11 && CanWear(Class, ARMORTYPE.HEAVY, true))
+                        else if (roll < 11 && CanWear(charClass, ARMORTYPE.HEAVY, true))
                             return "Plate Mail of the Deep";
                         break;
                     default: return "[ERROR: Unpowered or minor specific armor.  Armor.1415]";
@@ -1423,16 +1417,16 @@ namespace NPCGen
             }
         }
 
-        private static string SpecificShield(MagicItems.POWER Power, Classes.CLASS Class, ref Random random)
+        private static String SpecificShield(POWER power, CLASS charClass)
         {
-            string spell;
             while (true)
             {
-                System.Windows.Forms.Application.DoEvents();
-                switch (Power)
+                Application.DoEvents();
+                String spell;
+                switch (power)
                 {
-                    case MagicItems.POWER.MEDIUM:
-                        switch (Dice.Percentile(ref random))
+                    case POWER.MEDIUM:
+                        switch (Dice.Percentile())
                         {
                             case 1:
                             case 2:
@@ -1443,7 +1437,7 @@ namespace NPCGen
                             case 7:
                             case 8:
                             case 9:
-                            case 10: if (CanWield(Class, false)) { return "darkwood shield"; } break;
+                            case 10: if (CanWield(charClass, false)) { return "darkwood shield"; } break;
                             case 11:
                             case 12:
                             case 13:
@@ -1451,14 +1445,14 @@ namespace NPCGen
                             case 15:
                             case 16:
                             case 17:
-                            case 18: if (CanWield(Class, true)) { return "mithral large shield"; } break;
+                            case 18: if (CanWield(charClass, true)) { return "mithral large shield"; } break;
                             case 19:
                             case 20:
                             case 21:
                             case 22:
                             case 23:
                             case 24:
-                            case 25: if (CanWield(Class, true)) { return "adamantine shield"; } break;
+                            case 25: if (CanWield(charClass, true)) { return "adamantine shield"; } break;
                             case 26:
                             case 27:
                             case 28:
@@ -1478,7 +1472,7 @@ namespace NPCGen
                             case 42:
                             case 43:
                             case 44:
-                            case 45: if (CanWield(Class, true)) { return "Spined Shield"; } break;
+                            case 45: if (CanWield(charClass, true)) { return "Spined Shield"; } break;
                             case 46:
                             case 47:
                             case 48:
@@ -1499,15 +1493,15 @@ namespace NPCGen
                             case 63:
                             case 64:
                             case 65:
-                                if (CanWield(Class, false))
+                                if (CanWield(charClass, false))
                                 {
-                                    spell = "";
-                                    if (Dice.Percentile(ref random) <= 50)
+                                    spell = String.Empty;
+                                    if (Dice.Percentile() <= 50)
                                     {
-                                        if (Dice.Percentile(ref random) <= 80)
-                                            spell = String.Format(" (has {0})", Scrolls.RandomSpell(ref random, 9, Scrolls.SPELLTYPE.DIVINE));
+                                        if (Dice.Percentile() <= 80)
+                                            spell = String.Format(" (has {0})", Scrolls.RandomSpell(9, SPELLTYPE.DIVINE));
                                         else
-                                            spell = String.Format(" (has {0})", Scrolls.RandomSpell(ref random, 9, Scrolls.SPELLTYPE.ARCANE));
+                                            spell = String.Format(" (has {0})", Scrolls.RandomSpell(9, SPELLTYPE.ARCANE));
                                     }
                                     return String.Format("Caster's Shield{0}", spell);
                                 } break;
@@ -1520,11 +1514,11 @@ namespace NPCGen
                             case 97:
                             case 98:
                             case 99:
-                            case 100: if (CanWield(Class, false)) { return "Winged Shield"; } break;
-                            default: if (CanWield(Class, true)) { return "Lion's Shield"; } break;
+                            case 100: if (CanWield(charClass, false)) { return "Winged Shield"; } break;
+                            default: if (CanWield(charClass, true)) { return "Lion's Shield"; } break;
                         } break;
-                    case MagicItems.POWER.MAJOR:
-                        switch (Dice.Percentile(ref random))
+                    case POWER.MAJOR:
+                        switch (Dice.Percentile())
                         {
                             case 1:
                             case 2:
@@ -1545,7 +1539,7 @@ namespace NPCGen
                             case 17:
                             case 18:
                             case 19:
-                            case 20: if (CanWield(Class, true)) { return "Spined Shield"; } break;
+                            case 20: if (CanWield(charClass, true)) { return "Spined Shield"; } break;
                             case 21:
                             case 22:
                             case 23:
@@ -1566,15 +1560,15 @@ namespace NPCGen
                             case 38:
                             case 39:
                             case 40:
-                                if (CanWield(Class, false))
+                                if (CanWield(charClass, false))
                                 {
-                                    spell = "";
-                                    if (Dice.Percentile(ref random) <= 50)
+                                    spell = String.Empty;
+                                    if (Dice.Percentile() <= 50)
                                     {
-                                        if (Dice.Percentile(ref random) <= 80)
-                                            spell = String.Format(" (has {0})", Scrolls.RandomSpell(ref random, 9, Scrolls.SPELLTYPE.DIVINE));
+                                        if (Dice.Percentile() <= 80)
+                                            spell = String.Format(" (has {0})", Scrolls.RandomSpell(9, SPELLTYPE.DIVINE));
                                         else
-                                            spell = String.Format(" (has {0})", Scrolls.RandomSpell(ref random, 9, Scrolls.SPELLTYPE.ARCANE));
+                                            spell = String.Format(" (has {0})", Scrolls.RandomSpell(9, SPELLTYPE.ARCANE));
                                     }
                                     return String.Format("Caster's Shield{0}", spell);
                                 } break;
@@ -1597,7 +1591,7 @@ namespace NPCGen
                             case 57:
                             case 58:
                             case 59:
-                            case 60: if (CanWield(Class, true)) { return "Lion's Shield"; } break;
+                            case 60: if (CanWield(charClass, true)) { return "Lion's Shield"; } break;
                             case 61:
                             case 62:
                             case 63:
@@ -1617,8 +1611,8 @@ namespace NPCGen
                             case 77:
                             case 78:
                             case 79:
-                            case 80: if (CanWield(Class, false)) { return "Winged Shield"; } break;
-                            default: if (CanWield(Class, true)) { return "Absorbing Shield"; } break;
+                            case 80: if (CanWield(charClass, false)) { return "Winged Shield"; } break;
+                            default: if (CanWield(charClass, true)) { return "Absorbing Shield"; } break;
                         } break;
                     default: return "[ERROR: Non-powered or minor specific shield.  Armor.1617]";
                 }

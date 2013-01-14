@@ -1,64 +1,59 @@
+using NPCGen.Equipment;
+using NPCGen.Roll;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Forms;
 
-namespace NPCGen
+namespace NPCGen.Characters
 {
-    class Character
+    public enum ALIGNMENT { LAWFUL, NEUTRAL, CHAOTIC, GOOD, EVIL };
+    public enum ALIGNMENT_RANDOMIZER { ANY_GOOD, ANY_EVIL, ANY_LAWFUL, ANY_CHAOTIC, ANY, ANY_NEUTRAL, ANY_NONGOOD, ANY_NONNEUTRAL, ANY_NONEVIL, ANY_NONLAWFUL, ANY_NONCHAOTIC };
+
+    public class Character
     {
-        public enum ALIGNMENT { LAWFUL, NEUTRAL, CHAOTIC, GOOD, EVIL };
-        public enum ALIGNMENT_RANDOMIZER { ANY_GOOD, ANY_EVIL, ANY_LAWFUL, ANY_CHAOTIC, ANY, ANY_NEUTRAL, ANY_NONGOOD, ANY_NONNEUTRAL, ANY_NONEVIL, ANY_NONLAWFUL, ANY_NONCHAOTIC };
-        public enum STATS { STRENGTH, CONSTITUTION, DEXTERITY, INTELLIGENCE, WISDOM, CHARISMA };
-        public enum ITEMTYPE { WEAPON, ARMOR, BRACERS, RING_OF_PROTECTION, SHIELD, SCROLL, POTION, MISCELLANEOUS, SPELLS, FAMILIARS, MONEY };
-
-        public Classes.CLASS Class;
-        public int Level;
-        public int[] Stats;
-        public int StrengthPercentile;
+        public CLASS Class;
+        public Int32 Level;
+        public Int32[] StatScores;
+        public Int32 StrengthPercentile;
         public ALIGNMENT[] Alignment;
-        public int[] THACO;
-        public string[] Equipment;
+        public Int32[] THACO;
+        public String[] Equipment;
         public Races Race;
-        public int HP;
-        public string Languages;
-        public int[] RogueAbilities;
+        public Int32 HP;
+        public String Languages;
+        public Int32[] RogueAbilities;
 
-        public static string[] AlignmentRandomizerArray
+        public static String[] AlignmentRandomizerArray { get { return Enum.GetNames(typeof(ALIGNMENT_RANDOMIZER)); } }
+
+        public String StatAbilities
         {
             get
             {
-                return Enum.GetNames(typeof(ALIGNMENT_RANDOMIZER));
-            }
-        }
+                var output = String.Empty;
 
-        public string StatAbilities
-        {
-            get
-            {
-                string output = "";
-
-                if (StrengthAbilities != "")
+                if (StrengthAbilities != String.Empty)
                     output += "\nSTR: " + StrengthAbilities;
-                if (DexterityAbilities != "")
+                if (DexterityAbilities != String.Empty)
                     output += "\nDEX: " + DexterityAbilities;
-                if (ConstitutionAbilities != "")
+                if (ConstitutionAbilities != String.Empty)
                     output += "\nCON: " + ConstitutionAbilities;
-                if (IntelligenceAbilities != "")
+                if (IntelligenceAbilities != String.Empty)
                     output += "\nINT: " + IntelligenceAbilities;
-                if (WisdomAbilities != "")
+                if (WisdomAbilities != String.Empty)
                     output += "\nWIS: " + WisdomAbilities;
-                if (CharismaAbilities != "")
+                if (CharismaAbilities != String.Empty)
                     output += "\nCHA: " + CharismaAbilities;
 
                 return output;
             }
         }
 
-        public string StrengthAbilities
+        public String StrengthAbilities
         {
             get
             {
-                switch (Stats[(int)STATS.STRENGTH])
+                switch (StatScores[Stats.Strength])
                 {
                     case 1: return "-4 damage";
                     case 2: return "-2 damage";
@@ -85,16 +80,16 @@ namespace NPCGen
                     case 23: return "+11 damage";
                     case 24: return "+12 damage";
                     case 25: return "+14 damage";
-                    default: return "";
+                    default: return String.Empty;
                 }
             }
         }
 
-        public string DexterityAbilities
+        public String DexterityAbilities
         {
             get
             {
-                switch (Stats[(int)STATS.DEXTERITY])
+                switch (StatScores[Stats.Dexterity])
                 {
                     case 1: return "-6 Surprise, AC 5 worse";
                     case 2: return "-4 Surprise, AC 5 worse";
@@ -113,16 +108,16 @@ namespace NPCGen
                     case 23: return "+4 Surprise, AC 5 better";
                     case 24:
                     case 25: return "+5 Surprise, AC 6 better";
-                    default: return "";
+                    default: return String.Empty;
                 }
             }
         }
 
-        public string ConstitutionAbilities
+        public String ConstitutionAbilities
         {
             get
             {
-                switch (Stats[(int)STATS.CONSTITUTION])
+                switch (StatScores[Stats.Constitution])
                 {
                     case 1: return "-2 Poison save";
                     case 2: return "-1 Poison save";
@@ -133,16 +128,16 @@ namespace NPCGen
                     case 23: return "+3 Poison save, Regen 1/3 turns";
                     case 24: return "+3 Poison save, Regen 1/2 turns";
                     case 25: return "+4 Poison save, Regen 1/1 turns";
-                    default: return "";
+                    default: return String.Empty;
                 }
             }
         }
 
-        public string IntelligenceAbilities
+        public String IntelligenceAbilities
         {
             get
             {
-                switch (Stats[(int)STATS.INTELLIGENCE])
+                switch (StatScores[Stats.Intelligence])
                 {
                     case 19: return "Immune to 1st-level illusions";
                     case 20: return "Immune to up to 2nd-level illusions";
@@ -151,65 +146,65 @@ namespace NPCGen
                     case 23: return "Immune to up to 5th-level illusions";
                     case 24: return "Immune to up to 6th-level illusions";
                     case 25: return "Immune to up to 7th-level illusions";
-                    default: return "";
+                    default: return String.Empty;
                 }
             }
         }
 
-        public string WisdomAbilities
+        public String WisdomAbilities
         {
             get
             {
-                switch (Stats[(int)STATS.WISDOM])
+                switch (StatScores[Stats.Wisdom])
                 {
                     case 1:
-                        if (Class == Classes.CLASS.CLERIC || Class == Classes.CLASS.DRUID || Class == Classes.CLASS.PALADIN || Class == Classes.CLASS.RANGER)
+                        if (IsHealer())
                             return "80% spell failure";
-                        return "";
+                        return String.Empty;
                     case 2:
-                        if (Class == Classes.CLASS.CLERIC || Class == Classes.CLASS.DRUID || Class == Classes.CLASS.PALADIN || Class == Classes.CLASS.RANGER)
+                        if (IsHealer())
                             return "60% spell failure";
-                        return "";
+                        return String.Empty;
                     case 3:
-                        if (Class == Classes.CLASS.CLERIC || Class == Classes.CLASS.DRUID || Class == Classes.CLASS.PALADIN || Class == Classes.CLASS.RANGER)
+                        if (IsHealer())
                             return "50% spell failure";
-                        return "";
+                        return String.Empty;
                     case 4:
-                        if (Class == Classes.CLASS.CLERIC || Class == Classes.CLASS.DRUID || Class == Classes.CLASS.PALADIN || Class == Classes.CLASS.RANGER)
+                        if (IsHealer())
                             return "45% spell failure";
-                        return "";
+                        return String.Empty;
                     case 5:
-                        if (Class == Classes.CLASS.CLERIC || Class == Classes.CLASS.DRUID || Class == Classes.CLASS.PALADIN || Class == Classes.CLASS.RANGER)
+                        if (IsHealer())
                             return "40% spell failure";
-                        return "";
+                        return String.Empty;
                     case 6:
-                        if (Class == Classes.CLASS.CLERIC || Class == Classes.CLASS.DRUID || Class == Classes.CLASS.PALADIN || Class == Classes.CLASS.RANGER)
+                        if (IsHealer())
                             return "35% spell failure";
-                        return "";
+                        return String.Empty;
                     case 7:
-                        if (Class == Classes.CLASS.CLERIC || Class == Classes.CLASS.DRUID || Class == Classes.CLASS.PALADIN || Class == Classes.CLASS.RANGER)
+                        if (IsHealer())
                             return "30% spell failure";
-                        return "";
+                        return String.Empty;
                     case 8:
-                        if (Class == Classes.CLASS.CLERIC || Class == Classes.CLASS.DRUID || Class == Classes.CLASS.PALADIN || Class == Classes.CLASS.RANGER)
+                        if (IsHealer())
                             return "25% spell failure";
-                        return "";
+                        return String.Empty;
                     case 9:
-                        if (Class == Classes.CLASS.CLERIC || Class == Classes.CLASS.DRUID || Class == Classes.CLASS.PALADIN || Class == Classes.CLASS.RANGER)
+                        if (IsHealer())
                             return "20% spell failure";
-                        return "";
+                        return String.Empty;
                     case 10:
-                        if (Class == Classes.CLASS.CLERIC || Class == Classes.CLASS.DRUID || Class == Classes.CLASS.PALADIN || Class == Classes.CLASS.RANGER)
+                        if (IsHealer())
                             return "15% spell failure";
-                        return "";
+                        return String.Empty;
                     case 11:
-                        if (Class == Classes.CLASS.CLERIC || Class == Classes.CLASS.DRUID || Class == Classes.CLASS.PALADIN || Class == Classes.CLASS.RANGER)
+                        if (IsHealer())
                             return "10% spell failure";
-                        return "";
+                        return String.Empty;
                     case 12:
-                        if (Class == Classes.CLASS.CLERIC || Class == Classes.CLASS.DRUID || Class == Classes.CLASS.PALADIN || Class == Classes.CLASS.RANGER)
+                        if (IsHealer())
                             return "5% spell failure";
-                        return "";
+                        return String.Empty;
                     case 15: return "+1 on saves v. mind spells";
                     case 16: return "+2 on saves v. mind spells";
                     case 17: return "+3 on saves v. mind spells";
@@ -221,16 +216,21 @@ namespace NPCGen
                     case 23: return "+4 on saves v. mind spells; immune to Cause Fear, Charm Person, Command, Friends, Hypnotism, Forget, Hold Person, Ray of Enfeeblement, Scare, Fear, Charm Monster, Confusion, Emotion, Fumble, Suggestion, Chaos, Feeblemind, Hold Monster, Magic Jar, Quest";
                     case 24: return "+4 on saves v. mind spells; immune to Cause Fear, Charm Person, Command, Friends, Hypnotism, Forget, Hold Person, Ray of Enfeeblement, Scare, Fear, Charm Monster, Confusion, Emotion, Fumble, Suggestion, Chaos, Feeblemind, Hold Monster, Magic Jar, Quest, Geas, Mass Suggestion, Rod of Rulership";
                     case 25: return "+4 on saves v. mind spells; immune to Cause Fear, Charm Person, Command, Friends, Hypnotism, Forget, Hold Person, Ray of Enfeeblement, Scare, Fear, Charm Monster, Confusion, Emotion, Fumble, Suggestion, Chaos, Feeblemind, Hold Monster, Magic Jar, Quest, Geas, Mass Suggestion, Rod of Rulership, Antipathy/Sympathy, Death Spell, Mass Charm";
-                    default: return "";
+                    default: return String.Empty;
                 }
             }
         }
 
-        public string CharismaAbilities
+        private Boolean IsHealer()
+        {
+            return Class == CLASS.CLERIC || Class == CLASS.DRUID || Class == CLASS.PALADIN || Class == CLASS.RANGER;
+        }
+
+        public String CharismaAbilities
         {
             get
             {
-                switch (Stats[(int)STATS.CHARISMA])
+                switch (StatScores[Stats.Charisma])
                 {
                     case 1: return "-7 Reaction adjustment";
                     case 2: return "-6 Reaction adjustment";
@@ -252,251 +252,252 @@ namespace NPCGen
                     case 23: return "+12 Reaction adjustment";
                     case 24: return "+13 Reaction adjustment";
                     case 25: return "+14 Reaction adjustment";
-                    default: return "";
+                    default: return String.Empty;
                 }
             }
         }
 
-        public Character(Dice.ROLLMETHOD RollMethod, Races Race, ALIGNMENT[] Alignment, Classes.CLASS Class, int Level, ref System.Windows.Forms.RichTextBox Progress, ref Random random)
+        public Character(ROLLMETHOD rollMethod, Races race, ALIGNMENT[] alignment, CLASS charClass, Int32 level, ref RichTextBox progress)
         {
-            System.Windows.Forms.Application.DoEvents();
-            Progress.Text += "\nInitializing NPC object...";
-            this.Class = Class;
-            this.Level = Level;
-            this.Alignment = Alignment;
-            this.Race = Race;
-            Progress.Text += "Initialized";
+            Application.DoEvents();
+            progress.Text += "\nInitializing NPC object...";
+            Class = charClass;
+            Level = level;
+            Alignment = alignment;
+            Race = race;
+            progress.Text += "Initialized";
 
-            System.Windows.Forms.Application.DoEvents();
-            Progress.Text += "\nRolling stats...";
-            Stats = Dice.Roll(RollMethod, ref random);
-            foreach (int stat in Stats)
-                Progress.Text += " " + stat.ToString();
-            System.Windows.Forms.Application.DoEvents();
-            Progress.Text += "\nPrioritizing and adjusting stats...";
-            Stats = Classes.Prioritize(Class, Stats);
+            Application.DoEvents();
+            progress.Text += "\nRolling stats...";
+            StatScores = StatDice.Roll(rollMethod);
+            foreach (var stat in StatScores)
+                progress.Text += " " + stat.ToString();
+
+            Application.DoEvents();
+            progress.Text += "\nPrioritizing and adjusting stats...";
+            StatScores = Classes.Prioritize(charClass, StatScores);
             StrengthPercentile = 0;
 
-            if (IsFighter(Class))
-                if (Stats[(int)STATS.STRENGTH] > 17 && Stats[(int)STATS.STRENGTH] < 19)
-                    StrengthPercentile = Dice.Percentile(ref random);
+            if (IsFighter(charClass))
+                if (StatScores[Stats.Strength] > 17 && StatScores[Stats.Strength] < 19)
+                    StrengthPercentile = Dice.Percentile();
 
             StatAdjustment();
-            foreach (int stat in Stats)
-                Progress.Text += " " + stat.ToString();
-            Progress.Text += " " + StrengthPercentile.ToString();
+            foreach (var stat in StatScores)
+                progress.Text += " " + stat.ToString();
+            progress.Text += " " + StrengthPercentile.ToString();
 
-            System.Windows.Forms.Application.DoEvents();
-            Progress.Text += "\nDetermining HP...";
-            HP = Classes.HitPoints(Class, Level, Stats[(int)STATS.CONSTITUTION], Race, ref random);
-            Progress.Text += HP.ToString();
+            Application.DoEvents();
+            progress.Text += "\nDetermining HP...";
+            HP = Classes.HitPoints(charClass, level, StatScores[Stats.Constitution], race);
+            progress.Text += HP.ToString();
 
-            System.Windows.Forms.Application.DoEvents();
-            Progress.Text += "\nDetermining Languages...";
-            Languages = SetLanguages(ref random);
-            Progress.Text += Languages;
+            Application.DoEvents();
+            progress.Text += "\nDetermining Languages...";
+            Languages = SetLanguages();
+            progress.Text += Languages;
 
-            System.Windows.Forms.Application.DoEvents();
-            Progress.Text += "\nDetermining THAC0...";
+            Application.DoEvents();
+            progress.Text += "\nDetermining THAC0...";
             SetTHACO();
-            Progress.Text += THACO[0].ToString() + ", " + THACO[1].ToString();
+            progress.Text += THACO[0].ToString() + ", " + THACO[1].ToString();
 
-            System.Windows.Forms.Application.DoEvents();
-            Progress.Text += "\nDetermining gear...";
+            Application.DoEvents();
+            progress.Text += "\nDetermining gear...";
             //Variables for determining magical abilities of NPC's items
-            Equipment = new string[Enum.GetNames(typeof(ITEMTYPE)).Length];
-            int Bonus; bool TwoHanded = false;
+            Equipment = new String[EquipmentType.Types];
+            var twoHanded = false;
 
             //Generate weapon
-            System.Windows.Forms.Application.DoEvents();
-            Progress.Text += "\nGenerating weapon...";
-            Bonus = BonusByChance(Level * PercentageChance(Class, ITEMTYPE.WEAPON), ref random);
-            Equipment[(int)ITEMTYPE.WEAPON] = Weapons.Generate(Bonus, Class, Level, true, ref TwoHanded, ref random);
-            if (Class == Classes.CLASS.MONK)
-                Equipment[(int)ITEMTYPE.WEAPON] += String.Format("\nUnarmed Strike: 1d{0}", Classes.MonkDamage(Level));
-            Progress.Text += Equipment[(int)ITEMTYPE.WEAPON];
+            Application.DoEvents();
+            progress.Text += "\nGenerating weapon...";
+            var bonus = BonusByChance(level * PercentageChance(charClass, EquipmentType.Weapon));
+            Equipment[EquipmentType.Weapon] = Weapons.Generate(bonus, charClass, level, true, ref twoHanded);
+            if (charClass == CLASS.MONK)
+                Equipment[EquipmentType.Weapon] += String.Format("\nUnarmed Strike: 1d{0}", Classes.MonkDamage(level));
+            progress.Text += Equipment[EquipmentType.Weapon];
 
             //Generate armor
             System.Windows.Forms.Application.DoEvents();
-            Progress.Text += "\nGenerating armor...";
-            Bonus = BonusByChance(Level * PercentageChance(Class, ITEMTYPE.ARMOR), ref random);
-            Equipment[(int)ITEMTYPE.ARMOR] = Armor.GenerateArmor(Bonus, Class, Level, ref random);
-            Progress.Text += Equipment[(int)ITEMTYPE.ARMOR];
+            progress.Text += "\nGenerating armor...";
+            bonus = BonusByChance(level * PercentageChance(charClass, EquipmentType.Armor));
+            Equipment[EquipmentType.Armor] = Armor.GenerateArmor(bonus, charClass, level);
+            progress.Text += Equipment[EquipmentType.Armor];
 
             //Generate rogue abilities, if applicable
             System.Windows.Forms.Application.DoEvents();
-            Progress.Text += "\nGenerating rogue abilities...";
+            progress.Text += "\nGenerating rogue abilities...";
             bool[] ArmorBool = new bool[3];
-            ArmorBool[0] = (Equipment[(int)ITEMTYPE.ARMOR] == "");
-            ArmorBool[1] = (Equipment[(int)ITEMTYPE.ARMOR].Contains("chain") || Equipment[(int)ITEMTYPE.ARMOR].Contains("mithral"));
-            ArmorBool[2] = (Equipment[(int)ITEMTYPE.ARMOR].Contains("padded") || Equipment[(int)ITEMTYPE.ARMOR].Contains("leather"));
-            if (Class == Classes.CLASS.THIEF)
-                RogueAbilities = Classes.ThiefAbilities(Level, Race.Race, Stats[(int)STATS.DEXTERITY], ArmorBool, ref random);
-            else if (Class == Classes.CLASS.BARD)
-                RogueAbilities = Classes.BardAbilities(Level, Race.Race, Stats[(int)STATS.DEXTERITY], ArmorBool, ref random);
+            ArmorBool[0] = (Equipment[EquipmentType.Armor] == String.Empty);
+            ArmorBool[1] = (Equipment[EquipmentType.Armor].Contains("chain") || Equipment[EquipmentType.Armor].Contains("mithral"));
+            ArmorBool[2] = (Equipment[EquipmentType.Armor].Contains("padded") || Equipment[EquipmentType.Armor].Contains("leather"));
+            if (charClass == CLASS.THIEF)
+                RogueAbilities = Classes.ThiefAbilities(level, race.Race, StatScores[Stats.Dexterity], ArmorBool);
+            else if (charClass == CLASS.BARD)
+                RogueAbilities = Classes.BardAbilities(level, race.Race, StatScores[Stats.Dexterity], ArmorBool);
             if (RogueAbilities != null)
-                foreach (int abil in RogueAbilities)
-                    Progress.Text += " " + abil.ToString();
+                foreach (var abil in RogueAbilities)
+                    progress.Text += " " + abil.ToString();
 
             //Generate shield or dual-wield weapon
-            System.Windows.Forms.Application.DoEvents();
-            Progress.Text += "\nGenerating shield or dual-wield weapon...";
-            if (!TwoHanded)
+            Application.DoEvents();
+            progress.Text += "\nGenerating shield or dual-wield weapon...";
+            if (!twoHanded)
             {
-                Bonus = BonusByChance(Level * PercentageChance(Class, ITEMTYPE.SHIELD), ref random);
-                if (Armor.CanWield(Class, false) && Stats[(int)STATS.DEXTERITY] > 18)
+                bonus = BonusByChance(level * PercentageChance(charClass, EquipmentType.Shield));
+                if (Armor.CanWield(charClass, false) && StatScores[Stats.Dexterity] > 18)
                 {
-                    if (Dice.Percentile(ref random) > 50)
-                        Equipment[(int)ITEMTYPE.SHIELD] = Weapons.Generate(Bonus, Class, Level, false, ref TwoHanded, ref random);
+                    if (Dice.Percentile() > 50)
+                        Equipment[EquipmentType.Shield] = Weapons.Generate(bonus, charClass, level, false, ref twoHanded);
                     else
-                        Equipment[(int)ITEMTYPE.SHIELD] = Armor.GenerateShield(Bonus, Class, Level, ref random);
+                        Equipment[EquipmentType.Shield] = Armor.GenerateShield(bonus, charClass, level);
                 }
-                else if (Stats[(int)STATS.DEXTERITY] > 18)
-                    Equipment[(int)ITEMTYPE.SHIELD] = Weapons.Generate(Bonus, Class, Level, false, ref TwoHanded, ref random);
-                else if (Armor.CanWield(Class, false))
-                    Equipment[(int)ITEMTYPE.SHIELD] = Armor.GenerateShield(Bonus, Class, Level, ref random);
+                else if (StatScores[Stats.Dexterity] > 18)
+                    Equipment[EquipmentType.Shield] = Weapons.Generate(bonus, charClass, level, false, ref twoHanded);
+                else if (Armor.CanWield(charClass, false))
+                    Equipment[EquipmentType.Shield] = Armor.GenerateShield(bonus, charClass, level);
             }
-            Progress.Text += Equipment[(int)ITEMTYPE.SHIELD];
+            progress.Text += Equipment[EquipmentType.Shield];
 
             //Generate bracers
-            System.Windows.Forms.Application.DoEvents();
-            Progress.Text += "\nGenerating bracers...";
-            Bonus = BonusByChance(Level * PercentageChance(Class, ITEMTYPE.BRACERS), ref random);
-            if (Bonus > 0)
-                Equipment[(int)ITEMTYPE.BRACERS] = String.Format("Bracers AC {0}", 10 - 2 * Bonus);
-            Progress.Text += Equipment[(int)ITEMTYPE.BRACERS];
+            Application.DoEvents();
+            progress.Text += "\nGenerating bracers...";
+            bonus = BonusByChance(level * PercentageChance(charClass, EquipmentType.Bracers));
+            if (bonus > 0)
+                Equipment[EquipmentType.Bracers] = String.Format("Bracers AC {0}", 10 - 2 * bonus);
+            progress.Text += Equipment[EquipmentType.Bracers];
 
             //Generate rings of protection
-            System.Windows.Forms.Application.DoEvents();
-            Progress.Text += "\nGenerating ring of protection...";
-            Bonus = BonusByChance(Level * PercentageChance(Class, ITEMTYPE.RING_OF_PROTECTION), ref random);
-            if (Bonus > 0)
-                Equipment[(int)ITEMTYPE.RING_OF_PROTECTION] = String.Format("Ring of Protection +{0}", Bonus);
-            Progress.Text += Equipment[(int)ITEMTYPE.RING_OF_PROTECTION];
+            Application.DoEvents();
+            progress.Text += "\nGenerating ring of protection...";
+            bonus = BonusByChance(level * PercentageChance(charClass, EquipmentType.RingOfProtection));
+            if (bonus > 0)
+                Equipment[EquipmentType.RingOfProtection] = String.Format("Ring of Protection +{0}", bonus);
+            progress.Text += Equipment[EquipmentType.RingOfProtection];
 
             //Generate potions.  Bonus is quantity
-            System.Windows.Forms.Application.DoEvents();
-            Progress.Text += "\nGenerating potions...";
-            Bonus = BonusByChance(Level * PercentageChance(Class, ITEMTYPE.POTION), ref random);
-            Equipment[(int)ITEMTYPE.POTION] = MagicItems.Potion(MagicItems.PowerByLevel(Level, ref random), Bonus, ref random);
-            Progress.Text += Equipment[(int)ITEMTYPE.POTION];
+            Application.DoEvents();
+            progress.Text += "\nGenerating potions...";
+            bonus = BonusByChance(level * PercentageChance(charClass, EquipmentType.Potion));
+            Equipment[EquipmentType.Potion] = MagicItems.Potion(MagicItems.PowerByLevel(level), bonus);
+            progress.Text += Equipment[EquipmentType.Potion];
 
             //Generate scrolls.  Bonus is quantity
-            System.Windows.Forms.Application.DoEvents();
-            Progress.Text += "\nGenerating scrolls...";
-            Bonus = BonusByChance(Level * PercentageChance(Class, ITEMTYPE.SCROLL), ref random);
-            Equipment[(int)ITEMTYPE.SCROLL] = Scrolls.Generate(Class, Level, Bonus, ref random);
-            Progress.Text += Equipment[(int)ITEMTYPE.SCROLL];
+            Application.DoEvents();
+            progress.Text += "\nGenerating scrolls...";
+            bonus = BonusByChance(level * PercentageChance(charClass, EquipmentType.Scroll));
+            Equipment[EquipmentType.Scroll] = Scrolls.Generate(charClass, level, bonus);
+            progress.Text += Equipment[EquipmentType.Scroll];
 
             //Generate miscellaneous items.  Bonus is quantity
-            System.Windows.Forms.Application.DoEvents();
-            Progress.Text += "\nGenerating miscellaneous items...";
-            Bonus = BonusByChance(Level * PercentageChance(Class, ITEMTYPE.MISCELLANEOUS), ref random);
-            if (Bonus > 0)
-                Equipment[(int)ITEMTYPE.MISCELLANEOUS] = MagicItems.Generate(MagicItems.PowerByLevel(Level, ref random), Bonus, ref random);
-            Equipment[(int)ITEMTYPE.MISCELLANEOUS] += "\n" + Treasure.MundaneItems(ref random);
-            if (Dice.Percentile(ref random) > 10)
+            Application.DoEvents();
+            progress.Text += "\nGenerating miscellaneous items...";
+            bonus = BonusByChance(level * PercentageChance(charClass, EquipmentType.Miscellaneous));
+            if (bonus > 0)
+                Equipment[EquipmentType.Miscellaneous] = MagicItems.Generate(MagicItems.PowerByLevel(level), bonus);
+            Equipment[EquipmentType.Miscellaneous] += "\n" + Treasure.MundaneItems();
+            if (Dice.Percentile() > 10)
             {
-                Equipment[(int)ITEMTYPE.MISCELLANEOUS] += "\nPack:";
-                Equipment[(int)ITEMTYPE.MISCELLANEOUS] += String.Format("\n\tRations ({0} Days)", Dice.d8(ref random) - 1);
-                Equipment[(int)ITEMTYPE.MISCELLANEOUS] += String.Format("\n\t{0}' rope", Dice.Percentile(ref random)/2);
-                Equipment[(int)ITEMTYPE.MISCELLANEOUS] += String.Format("\n\t{0} torches", Dice.d4(ref random) - 1);
-                Equipment[(int)ITEMTYPE.MISCELLANEOUS] += String.Format("\n\tflint & steel");
-                Equipment[(int)ITEMTYPE.MISCELLANEOUS] += String.Format("\n\twhetstone");
-                Equipment[(int)ITEMTYPE.MISCELLANEOUS] += String.Format("\n\t{0} spikes", Dice.d4(ref random) - 1);
+                Equipment[EquipmentType.Miscellaneous] += "\nPack:";
+                Equipment[EquipmentType.Miscellaneous] += String.Format("\n\tRations ({0} Days)", Dice.d8() - 1);
+                Equipment[EquipmentType.Miscellaneous] += String.Format("\n\t{0}' rope", Dice.Percentile() / 2);
+                Equipment[EquipmentType.Miscellaneous] += String.Format("\n\t{0} torches", Dice.d4() - 1);
+                Equipment[EquipmentType.Miscellaneous] += String.Format("\n\tflint & steel");
+                Equipment[EquipmentType.Miscellaneous] += String.Format("\n\twhetstone");
+                Equipment[EquipmentType.Miscellaneous] += String.Format("\n\t{0} spikes", Dice.d4() - 1);
             }
-            Progress.Text += Equipment[(int)ITEMTYPE.MISCELLANEOUS];
+            progress.Text += Equipment[EquipmentType.Miscellaneous];
 
             //Generate money
-            System.Windows.Forms.Application.DoEvents();
-            Progress.Text += "\nGenerating money, gems, and art objects...";
-            Equipment[(int)ITEMTYPE.MONEY] = Treasure.Money(Level, ref random);
-            Progress.Text += Equipment[(int)ITEMTYPE.MONEY];
+            Application.DoEvents();
+            progress.Text += "\nGenerating money, gems, and art objects...";
+            Equipment[EquipmentType.Money] = Treasure.Money(level);
+            progress.Text += Equipment[EquipmentType.Money];
 
             //Generate spells
-            System.Windows.Forms.Application.DoEvents();
-            Progress.Text += "\nGenerating spells...";
-            if (Class == Classes.CLASS.BARD || Class == Classes.CLASS.WIZARD || Class == Classes.CLASS.CLERIC || Class == Classes.CLASS.DRUID || Class == Classes.CLASS.PALADIN || Class == Classes.CLASS.RANGER || Class == Classes.CLASS.SORCERER)
-                Equipment[(int)ITEMTYPE.SPELLS] = String.Format("{0} spells: {1}\n", Class.ToString(), Classes.SpellString(Class, Level, Stats[(int)STATS.INTELLIGENCE], Stats[(int)STATS.WISDOM], Stats[(int)STATS.CHARISMA], ref random));
-            Progress.Text += Equipment[(int)ITEMTYPE.SPELLS];
+            Application.DoEvents();
+            progress.Text += "\nGenerating spells...";
+            if (charClass == CLASS.BARD || charClass == CLASS.WIZARD || charClass == CLASS.CLERIC || charClass == CLASS.DRUID || charClass == CLASS.PALADIN || charClass == CLASS.RANGER || charClass == CLASS.SORCERER)
+                Equipment[EquipmentType.Spells] = String.Format("{0} spells: {1}\n", charClass.ToString(), Classes.SpellString(charClass, level, StatScores[Stats.Intelligence], StatScores[Stats.Wisdom], StatScores[Stats.Charisma]));
+            progress.Text += Equipment[EquipmentType.Spells];
 
             //Generate familiars
-            System.Windows.Forms.Application.DoEvents();
-            Progress.Text += "\nGenerating familiars...";
-            Equipment[(int)ITEMTYPE.FAMILIARS] = Classes.Familiar(Class, Level, ref random);
-            Progress.Text += Equipment[(int)ITEMTYPE.FAMILIARS];
+            Application.DoEvents();
+            progress.Text += "\nGenerating familiars...";
+            Equipment[EquipmentType.Familiars] = Classes.Familiar(charClass, level);
+            progress.Text += Equipment[EquipmentType.Familiars];
         }
 
-        private string SetLanguages(ref Random random)
+        private String SetLanguages()
         {
-            int NumberOfLanguages = (Stats[(int)STATS.INTELLIGENCE] - 10) / 2;
-            string languages;
+            var NumberOfLanguages = (StatScores[Stats.Intelligence] - 10) / 2;
+            String languages;
 
             switch (Race.Race)
             {
-                case Races.RACE.AASIMAR: languages = "Common, Celestial"; break;
-                case Races.RACE.GOBLIN:
-                case Races.RACE.HOBGOBLIN:
-                case Races.RACE.BUGBEAR: languages = "Common, Goblin"; break;
-                case Races.RACE.DUERGAR: languages = "Common, Dwarven, Undercommon"; break;
-                case Races.RACE.HILL_DWARF:
-                case Races.RACE.MOUNTAIN_DWARF:
-                case Races.RACE.DEEP_DWARF:
-                case Races.RACE.DERRO_DWARF: languages = "Common, Dwarven"; break;
-                case Races.RACE.DROW: languages = "Common, Elven, Undercommon"; break;
-                case Races.RACE.FOREST_GNOME: languages = "Common, Gnome, Elven, Sylvan"; break;
-                case Races.RACE.GNOLL: languages = "Gnoll"; break;
-                case Races.RACE.GRAY_ELF:
-                case Races.RACE.HIGH_ELF:
-                case Races.RACE.WILD_ELF:
-                case Races.RACE.WOOD_ELF:
-                case Races.RACE.HALFELF: languages = "Common, Elven"; break;
-                case Races.RACE.ORC:
-                case Races.RACE.HALFORC: languages = "Common, Orc"; break;
-                case Races.RACE.LIZARDFOLK: languages = "Common, Draconic"; break;
-                case Races.RACE.TROGLODYTE:
-                case Races.RACE.KOBOLD: languages = "Draconic"; break;
-                case Races.RACE.DEEP_HALFLING:
-                case Races.RACE.TALLFELLOW_HALFLING:
-                case Races.RACE.LIGHTFOOT_HALFLING: languages = "Common, Halfling"; break;
-                case Races.RACE.MIND_FLAYER: languages = "Common, Undercommon"; break;
-                case Races.RACE.OGRE:
-                case Races.RACE.OGRE_MAGE:
-                case Races.RACE.MINOTAUR: languages = "Common, Giant"; break;
-                case Races.RACE.ROCK_GNOME: languages = "Common, Gnome"; break;
-                case Races.RACE.SVIRFNEBLIN: languages = "Common, Gnome, Undercommon"; break;
-                case Races.RACE.TIEFLING: languages = "Common, Infernal"; break;
+                case RACE.AASIMAR: languages = "Common, Celestial"; break;
+                case RACE.GOBLIN:
+                case RACE.HOBGOBLIN:
+                case RACE.BUGBEAR: languages = "Common, Goblin"; break;
+                case RACE.DUERGAR: languages = "Common, Dwarven, Undercommon"; break;
+                case RACE.HILL_DWARF:
+                case RACE.MOUNTAIN_DWARF:
+                case RACE.DEEP_DWARF:
+                case RACE.DERRO_DWARF: languages = "Common, Dwarven"; break;
+                case RACE.DROW: languages = "Common, Elven, Undercommon"; break;
+                case RACE.FOREST_GNOME: languages = "Common, Gnome, Elven, Sylvan"; break;
+                case RACE.GNOLL: languages = "Gnoll"; break;
+                case RACE.GRAY_ELF:
+                case RACE.HIGH_ELF:
+                case RACE.WILD_ELF:
+                case RACE.WOOD_ELF:
+                case RACE.HALFELF: languages = "Common, Elven"; break;
+                case RACE.ORC:
+                case RACE.HALFORC: languages = "Common, Orc"; break;
+                case RACE.LIZARDFOLK: languages = "Common, Draconic"; break;
+                case RACE.TROGLODYTE:
+                case RACE.KOBOLD: languages = "Draconic"; break;
+                case RACE.DEEP_HALFLING:
+                case RACE.TALLFELLOW_HALFLING:
+                case RACE.LIGHTFOOT_HALFLING: languages = "Common, Halfling"; break;
+                case RACE.MIND_FLAYER: languages = "Common, Undercommon"; break;
+                case RACE.OGRE:
+                case RACE.OGRE_MAGE:
+                case RACE.MINOTAUR: languages = "Common, Giant"; break;
+                case RACE.ROCK_GNOME: languages = "Common, Gnome"; break;
+                case RACE.SVIRFNEBLIN: languages = "Common, Gnome, Undercommon"; break;
+                case RACE.TIEFLING: languages = "Common, Infernal"; break;
                 default: languages = "Common"; break;
             }
 
             switch (Race.MetaRace)
             {
-                case Races.METARACE.HALF_CELESTIAL:
+                case METARACE.HALF_CELESTIAL:
                     if (!languages.Contains("Celestial"))
                         languages += ", Celestial";
                     break;
-                case Races.METARACE.HALF_DRAGON:
+                case METARACE.HALF_DRAGON:
                     if (!languages.Contains("Draconic"))
                         languages += ", Draconic";
                     break;
-                case Races.METARACE.HALF_FIEND:
+                case METARACE.HALF_FIEND:
                     if (!languages.Contains("Infernal"))
                         languages += ", Infernal";
                     break;
                 default: break;
             }
 
-            if (Class == Classes.CLASS.DRUID)
+            if (Class == CLASS.DRUID)
                 languages += ", Druidic";
             
             while (NumberOfLanguages > 0)
             {
-                switch (Dice.d20(ref random))
+                switch (Dice.d20())
                 {
                     case 1:
                         if (!languages.Contains("Abyssal"))
                         {
-                            if (Class == Classes.CLASS.CLERIC || Race.CanSpeak("Abyssal"))
+                            if (Class == CLASS.CLERIC || Race.CanSpeak("Abyssal"))
                             {
                                 NumberOfLanguages--;
                                 languages += ", Abyssal";
@@ -526,7 +527,7 @@ namespace NPCGen
                     case 4:
                         if (!languages.Contains("Celestial"))
                         {
-                            if (Class == Classes.CLASS.CLERIC || Race.CanSpeak("Celestial"))
+                            if (Class == CLASS.CLERIC || Race.CanSpeak("Celestial"))
                             {
                                 NumberOfLanguages--;
                                 languages += ", Celestial";
@@ -543,7 +544,7 @@ namespace NPCGen
                     case 6:
                         if (!languages.Contains("Draconic"))
                         {
-                            if (Class == Classes.CLASS.WIZARD || Race.CanSpeak("Draconic"))
+                            if (Class == CLASS.WIZARD || Race.CanSpeak("Draconic"))
                             {
                                 NumberOfLanguages--;
                                 languages += ", Draconic";
@@ -634,7 +635,7 @@ namespace NPCGen
                     case 16:
                         if (!languages.Contains("Infernal"))
                         {
-                            if (Class == Classes.CLASS.CLERIC || Race.CanSpeak("Infernal"))
+                            if (Class == CLASS.CLERIC || Race.CanSpeak("Infernal"))
                             {
                                 NumberOfLanguages--;
                                 languages += ", Infernal";
@@ -654,7 +655,7 @@ namespace NPCGen
                     case 18:
                         if (!languages.Contains("Sylvan"))
                         {
-                            if (Class == Classes.CLASS.DRUID || Race.CanSpeak("Sylvan"))
+                            if (Class == CLASS.DRUID || Race.CanSpeak("Sylvan"))
                             {
                                 NumberOfLanguages--;
                                 languages += ", Sylvan";
@@ -690,36 +691,36 @@ namespace NPCGen
 
         private void SetTHACO()
         {
-            THACO = new int[2] { 20, 20 };
+            THACO = new Int32[2] { 20, 20 };
             switch (Class)
             {
-                case Classes.CLASS.BARBARIAN:
-                case Classes.CLASS.FIGHTER:
-                case Classes.CLASS.MONK:
-                case Classes.CLASS.PALADIN:
-                case Classes.CLASS.RANGER:
+                case CLASS.BARBARIAN:
+                case CLASS.FIGHTER:
+                case CLASS.MONK:
+                case CLASS.PALADIN:
+                case CLASS.RANGER:
                     THACO[0] -= (Level - 1);
                     THACO[1] -= (Level - 1);
                     break;
-                case Classes.CLASS.CLERIC:
-                case Classes.CLASS.DRUID:
+                case CLASS.CLERIC:
+                case CLASS.DRUID:
                     THACO[0] -= ((Level - 1) / 3) * 2;
                     THACO[1] -= ((Level - 1) / 3) * 2;
                     break;
-                case Classes.CLASS.SORCERER:
-                case Classes.CLASS.WIZARD:
+                case CLASS.SORCERER:
+                case CLASS.WIZARD:
                     THACO[0] -= ((Level - 1) / 3);
                     THACO[1] -= ((Level - 1) / 3);
                     break;
-                case Classes.CLASS.THIEF:
-                case Classes.CLASS.BARD:
+                case CLASS.THIEF:
+                case CLASS.BARD:
                     THACO[0] -= ((Level - 1) / 2);
                     THACO[1] -= ((Level - 1) / 2);
                     break;
                 default: break;
             }
 
-            switch (Stats[(int)STATS.STRENGTH])
+            switch (StatScores[Stats.Strength])
             {
                 case 1:
                     THACO[0] -= -5;
@@ -779,7 +780,7 @@ namespace NPCGen
                 default: break;
             }
 
-            switch (Stats[(int)STATS.DEXTERITY])
+            switch (StatScores[Stats.Dexterity])
             {
                 case 1: THACO[1] -= -6; break;
                 case 2: THACO[1] -= -4; break;
@@ -800,44 +801,46 @@ namespace NPCGen
             }
         }
 
-        private static int BonusByChance(int Chance, ref Random random)
+        private static Int32 BonusByChance(Int32 Chance)
         {
-            int Bonus = 0; int Roll;
+            var bonus = 0;
+
             while (Chance > 100)
             {
-                Bonus++;
+                bonus++;
                 Chance -= 100;
             }
+
             while (Chance > 0)
             {
-                Roll = Dice.Percentile(ref random);
-                if (Roll <= Chance)
-                    Bonus++;
-                Chance -= Roll;
+                var roll = Dice.Percentile();
+                if (roll <= Chance)
+                    bonus++;
+                Chance -= roll;
             }
 
-            return Bonus;
+            return bonus;
         }
 
-        public static ALIGNMENT[] RandomAlignment(ALIGNMENT_RANDOMIZER Randomizer, ref Random random)
+        public static ALIGNMENT[] RandomAlignment(ALIGNMENT_RANDOMIZER Randomizer)
         {
-            int Roll; ALIGNMENT[] TempAlignment = new ALIGNMENT[2] { ALIGNMENT.LAWFUL, ALIGNMENT.GOOD };
+            var TempAlignment = new ALIGNMENT[2] { ALIGNMENT.LAWFUL, ALIGNMENT.GOOD };
             
             switch (Randomizer)
             {
                 case ALIGNMENT_RANDOMIZER.ANY_CHAOTIC:
                     TempAlignment[0] = ALIGNMENT.CHAOTIC;
-                    Roll = Dice.Percentile(ref random);
-                    if (Roll < 21)
+                    var roll = Dice.Percentile();
+                    if (roll < 21)
                         TempAlignment[1] = ALIGNMENT.GOOD;
-                    else if (Roll < 51)
+                    else if (roll < 51)
                         TempAlignment[1] = ALIGNMENT.NEUTRAL;
                     else
                         TempAlignment[1] = ALIGNMENT.EVIL;
                     return TempAlignment;
                 case ALIGNMENT_RANDOMIZER.ANY_EVIL:
                     TempAlignment[1] = ALIGNMENT.EVIL;
-                    switch (Dice.Roll(1, 3, 0, ref random))
+                    switch (Dice.Roll(1, 3, 0))
                     {
                         case 1: TempAlignment[0] = ALIGNMENT.LAWFUL; break;
                         case 2: TempAlignment[0] = ALIGNMENT.NEUTRAL; break;
@@ -847,7 +850,7 @@ namespace NPCGen
                     return TempAlignment;
                 case ALIGNMENT_RANDOMIZER.ANY_GOOD:
                     TempAlignment[1] = ALIGNMENT.GOOD;
-                    switch (Dice.Roll(1, 3, 0, ref random))
+                    switch (Dice.Roll(1, 3, 0))
                     {
                         case 1: TempAlignment[0] = ALIGNMENT.LAWFUL; break;
                         case 2: TempAlignment[0] = ALIGNMENT.NEUTRAL; break;
@@ -857,16 +860,16 @@ namespace NPCGen
                     return TempAlignment;
                 case ALIGNMENT_RANDOMIZER.ANY_LAWFUL:
                     TempAlignment[0] = ALIGNMENT.LAWFUL;
-                    Roll = Dice.Percentile(ref random);
-                    if (Roll < 21)
+                    roll = Dice.Percentile();
+                    if (roll < 21)
                         TempAlignment[1] = ALIGNMENT.GOOD;
-                    else if (Roll < 51)
+                    else if (roll < 51)
                         TempAlignment[1] = ALIGNMENT.NEUTRAL;
                     else
                         TempAlignment[1] = ALIGNMENT.EVIL;
                     return TempAlignment;
                 case ALIGNMENT_RANDOMIZER.ANY_NEUTRAL:
-                    switch (Dice.Roll(1, 3, 0, ref random))
+                    switch (Dice.Roll(1, 3, 0))
                     {
                         case 1: TempAlignment[0] = ALIGNMENT.LAWFUL; break;
                         case 2: TempAlignment[0] = ALIGNMENT.NEUTRAL; break;
@@ -875,10 +878,10 @@ namespace NPCGen
                     }
                     if (TempAlignment[0] == ALIGNMENT.NEUTRAL)
                     {
-                        Roll = Dice.Percentile(ref random);
-                        if (Roll < 21)
+                        roll = Dice.Percentile();
+                        if (roll < 21)
                             TempAlignment[1] = ALIGNMENT.GOOD;
-                        else if (Roll < 51)
+                        else if (roll < 51)
                             TempAlignment[1] = ALIGNMENT.NEUTRAL;
                         else
                             TempAlignment[1] = ALIGNMENT.EVIL;
@@ -888,18 +891,18 @@ namespace NPCGen
                     return TempAlignment;
                 case ALIGNMENT_RANDOMIZER.ANY_NONCHAOTIC:
                     TempAlignment[0] = ALIGNMENT.LAWFUL;
-                    if (Dice.Percentile(ref random) < 51)
+                    if (Dice.Percentile() < 51)
                         TempAlignment[0] = ALIGNMENT.NEUTRAL;
-                    Roll = Dice.Percentile(ref random);
-                    if (Roll < 21)
+                    roll = Dice.Percentile();
+                    if (roll < 21)
                         TempAlignment[1] = ALIGNMENT.GOOD;
-                    else if (Roll < 51)
+                    else if (roll < 51)
                         TempAlignment[1] = ALIGNMENT.NEUTRAL;
                     else
                         TempAlignment[1] = ALIGNMENT.EVIL;
                     return TempAlignment;
                 case ALIGNMENT_RANDOMIZER.ANY_NONEVIL:
-                    switch (Dice.Roll(1, 3, 0, ref random))
+                    switch (Dice.Roll(1, 3, 0))
                     {
                         case 1: TempAlignment[0] = ALIGNMENT.LAWFUL; break;
                         case 2: TempAlignment[0] = ALIGNMENT.NEUTRAL; break;
@@ -907,11 +910,11 @@ namespace NPCGen
                         default: break;
                     }
                     TempAlignment[1] = ALIGNMENT.GOOD;
-                    if (Dice.Roll(1, 5, 0, ref random) > 2)
+                    if (Dice.Roll(1, 5, 0) > 2)
                         TempAlignment[1] = ALIGNMENT.NEUTRAL;
                     return TempAlignment;
                 case ALIGNMENT_RANDOMIZER.ANY_NONGOOD:
-                    switch (Dice.Roll(1, 3, 0, ref random))
+                    switch (Dice.Roll(1, 3, 0))
                     {
                         case 1: TempAlignment[0] = ALIGNMENT.LAWFUL; break;
                         case 2: TempAlignment[0] = ALIGNMENT.NEUTRAL; break;
@@ -919,41 +922,41 @@ namespace NPCGen
                         default: break;
                     }
                     TempAlignment[1] = ALIGNMENT.EVIL;
-                    if (Dice.Roll(1, 8, 0, ref random) < 4)
+                    if (Dice.Roll(1, 8, 0) < 4)
                         TempAlignment[1] = ALIGNMENT.NEUTRAL;
                     return TempAlignment;
                 case ALIGNMENT_RANDOMIZER.ANY_NONLAWFUL:
                     TempAlignment[0] = ALIGNMENT.CHAOTIC;
-                    if (Dice.Percentile(ref random) < 51)
+                    if (Dice.Percentile() < 51)
                         TempAlignment[0] = ALIGNMENT.NEUTRAL;
-                    Roll = Dice.Percentile(ref random);
-                    if (Roll < 21)
+                    roll = Dice.Percentile();
+                    if (roll < 21)
                         TempAlignment[1] = ALIGNMENT.GOOD;
-                    else if (Roll < 51)
+                    else if (roll < 51)
                         TempAlignment[1] = ALIGNMENT.NEUTRAL;
                     else
                         TempAlignment[1] = ALIGNMENT.EVIL;
                     return TempAlignment;
                 case ALIGNMENT_RANDOMIZER.ANY_NONNEUTRAL:
                     TempAlignment[0] = ALIGNMENT.LAWFUL;
-                    if (Dice.Percentile(ref random) < 51)
+                    if (Dice.Percentile() < 51)
                         TempAlignment[0] = ALIGNMENT.CHAOTIC;
                     TempAlignment[1] = ALIGNMENT.EVIL;
-                    if (Dice.Roll(1, 7, 0, ref random) < 3)
+                    if (Dice.Roll(1, 7, 0) < 3)
                         TempAlignment[1] = ALIGNMENT.GOOD;
                     return TempAlignment;
                 case ALIGNMENT_RANDOMIZER.ANY:
-                    switch (Dice.Roll(1, 3, 0, ref random))
+                    switch (Dice.Roll(1, 3, 0))
                     {
                         case 1: TempAlignment[0] = ALIGNMENT.LAWFUL; break;
                         case 2: TempAlignment[0] = ALIGNMENT.NEUTRAL; break;
                         case 3: TempAlignment[0] = ALIGNMENT.CHAOTIC; break;
                         default: break;
                     }
-                    Roll = Dice.Percentile(ref random);
-                    if (Roll < 21)
+                    roll = Dice.Percentile();
+                    if (roll < 21)
                         TempAlignment[1] = ALIGNMENT.GOOD;
-                    else if (Roll < 51)
+                    else if (roll < 51)
                         TempAlignment[1] = ALIGNMENT.NEUTRAL;
                     else
                         TempAlignment[1] = ALIGNMENT.EVIL;
@@ -962,33 +965,33 @@ namespace NPCGen
             }
         }
 
-        private static bool IsFighter(Classes.CLASS Class)
+        private static Boolean IsFighter(CLASS charClass)
         {
-            switch (Class)
+            switch (charClass)
             {
-                case Classes.CLASS.BARBARIAN:
-                case Classes.CLASS.FIGHTER:
-                case Classes.CLASS.MONK:
-                case Classes.CLASS.PALADIN:
-                case Classes.CLASS.RANGER: return true;
+                case CLASS.BARBARIAN:
+                case CLASS.FIGHTER:
+                case CLASS.MONK:
+                case CLASS.PALADIN:
+                case CLASS.RANGER: return true;
                 default: return false;
             }
         }
 
-        public static ALIGNMENT[] StringToAlignment(string Input)
+        public static ALIGNMENT[] StringToAlignment(String input)
         {
-            ALIGNMENT[] output = new ALIGNMENT[2];
+            var output = new ALIGNMENT[2];
 
-            if (Input.StartsWith("Lawful"))
+            if (input.StartsWith("Lawful"))
                 output[0] = ALIGNMENT.LAWFUL;
-            else if (Input.StartsWith("Neutral") || Input.StartsWith("True"))
+            else if (input.StartsWith("Neutral") || input.StartsWith("True"))
                 output[0] = ALIGNMENT.NEUTRAL;
             else
                 output[0] = ALIGNMENT.CHAOTIC;
 
-            if (Input.EndsWith("Good"))
+            if (input.EndsWith("Good"))
                 output[1] = ALIGNMENT.GOOD;
-            else if (Input.EndsWith("Neutral"))
+            else if (input.EndsWith("Neutral"))
                 output[1] = ALIGNMENT.NEUTRAL;
             else
                 output[1] = ALIGNMENT.EVIL;
@@ -1000,147 +1003,201 @@ namespace NPCGen
         {
             switch (Race.Race)
             {
-                case Races.RACE.HILL_DWARF:
-                case Races.RACE.MOUNTAIN_DWARF:
-                    Stats[(int)STATS.CONSTITUTION]++;
-                    Stats[(int)STATS.CHARISMA]--;
+                case RACE.HILL_DWARF:
+                case RACE.MOUNTAIN_DWARF:
+                    StatScores[Stats.Constitution]++;
+                    StatScores[Stats.Charisma]--;
                     break;
-                case Races.RACE.HIGH_ELF:
-                    Stats[(int)STATS.DEXTERITY]++;
-                    Stats[(int)STATS.CONSTITUTION]--;
+                case RACE.HIGH_ELF:
+                    StatScores[Stats.Dexterity]++;
+                    StatScores[Stats.Constitution]--;
                     break;
-                case Races.RACE.ROCK_GNOME:
-                case Races.RACE.FOREST_GNOME:
-                    Stats[(int)STATS.CONSTITUTION]++;
+                case RACE.ROCK_GNOME:
+                case RACE.FOREST_GNOME:
+                    StatScores[Stats.Constitution]++;
                     AdjustStrength(-1);
                     break;
-                case Races.RACE.DEEP_HALFLING:
-                case Races.RACE.LIGHTFOOT_HALFLING:
-                case Races.RACE.TALLFELLOW_HALFLING:
-                    Stats[(int)STATS.DEXTERITY]++;
+                case RACE.DEEP_HALFLING:
+                case RACE.LIGHTFOOT_HALFLING:
+                case RACE.TALLFELLOW_HALFLING:
+                    StatScores[Stats.Dexterity]++;
                     AdjustStrength(-1);
                     break;
-                case Races.RACE.HALFORC:
+                case RACE.HALFORC:
                     AdjustStrength(2);
-                    Stats[(int)STATS.CHARISMA]--; Stats[(int)STATS.INTELLIGENCE]--;
+                    StatScores[Stats.Charisma]--; 
+                    StatScores[Stats.Intelligence]--;
                     break;
-                case Races.RACE.AASIMAR:
-                    Stats[(int)STATS.CHARISMA]++; Stats[(int)STATS.WISDOM]++;
+                case RACE.AASIMAR:
+                    StatScores[Stats.Charisma]++; 
+                    StatScores[Stats.Wisdom]++;
                     break;
-                case Races.RACE.BUGBEAR:
-                    AdjustStrength(2); Stats[(int)STATS.DEXTERITY]++; Stats[(int)STATS.CONSTITUTION]++;
-                    Stats[(int)STATS.CHARISMA]--;
+                case RACE.BUGBEAR:
+                    AdjustStrength(2); 
+                    StatScores[Stats.Dexterity]++; 
+                    StatScores[Stats.Constitution]++;
+                    StatScores[Stats.Charisma]--;
                     break;
-                case Races.RACE.DERRO_DWARF:
-                    Stats[(int)STATS.DEXTERITY] += 2; Stats[(int)STATS.CONSTITUTION]++;
-                    Stats[(int)STATS.CHARISMA] -= 2; AdjustStrength(-1);
+                case RACE.DERRO_DWARF:
+                    StatScores[Stats.Dexterity] += 2; 
+                    StatScores[Stats.Constitution]++;
+                    StatScores[Stats.Charisma] -= 2; 
+                    AdjustStrength(-1);
                     break;
-                case Races.RACE.DOPPELGANGER:
-                    AdjustStrength(1); Stats[(int)STATS.DEXTERITY]++; Stats[(int)STATS.CONSTITUTION]++; Stats[(int)STATS.INTELLIGENCE]++; Stats[(int)STATS.CHARISMA]++; Stats[(int)STATS.WISDOM] += 2;
+                case RACE.DOPPELGANGER:
+                    AdjustStrength(1); 
+                    StatScores[Stats.Dexterity]++; 
+                    StatScores[Stats.Constitution]++; 
+                    StatScores[Stats.Intelligence]++;
+                    StatScores[Stats.Charisma]++; 
+                    StatScores[Stats.Wisdom] += 2;
                     break;
-                case Races.RACE.DROW:
-                    Stats[(int)STATS.DEXTERITY]++; Stats[(int)STATS.CONSTITUTION]++;
+                case RACE.DROW:
+                    StatScores[Stats.Dexterity]++; 
+                    StatScores[Stats.Constitution]++;
                     if (Race.Male)
-                        Stats[(int)STATS.CHARISMA]--;
+                        StatScores[Stats.Charisma]--;
                     else
-                        Stats[(int)STATS.CHARISMA]++;
+                        StatScores[Stats.Charisma]++;
                     break;
-                case Races.RACE.DUERGAR:
-                case Races.RACE.DEEP_DWARF:
-                    Stats[(int)STATS.CONSTITUTION]++;
-                    Stats[(int)STATS.CHARISMA] -= 2;
+                case RACE.DUERGAR:
+                case RACE.DEEP_DWARF:
+                    StatScores[Stats.Constitution]++;
+                    StatScores[Stats.Charisma] -= 2;
                     break;
-                case Races.RACE.GNOLL:
-                    AdjustStrength(2); Stats[(int)STATS.CONSTITUTION]++;
-                    Stats[(int)STATS.INTELLIGENCE]--; Stats[(int)STATS.CHARISMA]--;
+                case RACE.GNOLL:
+                    AdjustStrength(2);
+                    StatScores[Stats.Constitution]++;
+                    StatScores[Stats.Intelligence]--;
+                    StatScores[Stats.Charisma]--;
                     break;
-                case Races.RACE.GOBLIN:
-                    Stats[(int)STATS.DEXTERITY]++;
-                    AdjustStrength(-1); Stats[(int)STATS.CHARISMA]--;
+                case RACE.GOBLIN:
+                    StatScores[Stats.Dexterity]++;
+                    AdjustStrength(-1);
+                    StatScores[Stats.Charisma]--;
                     break;
-                case Races.RACE.GRAY_ELF:
-                    Stats[(int)STATS.INTELLIGENCE]++; Stats[(int)STATS.DEXTERITY]++;
-                    Stats[(int)STATS.CONSTITUTION]--; AdjustStrength(-1); 
+                case RACE.GRAY_ELF:
+                    StatScores[Stats.Intelligence]++;
+                    StatScores[Stats.Dexterity]++;
+                    StatScores[Stats.Constitution]--; 
+                    AdjustStrength(-1); 
                     break;
-                case Races.RACE.HOBGOBLIN:
-                    Stats[(int)STATS.DEXTERITY]++; Stats[(int)STATS.CONSTITUTION]++;
+                case RACE.HOBGOBLIN:
+                    StatScores[Stats.Dexterity]++;
+                    StatScores[Stats.Constitution]++;
                     break;
-                case Races.RACE.KOBOLD:
-                    Stats[(int)STATS.DEXTERITY]++;
+                case RACE.KOBOLD:
+                    StatScores[Stats.Dexterity]++;
                     AdjustStrength(-2);
                     break;
-                case Races.RACE.LIZARDFOLK:
-                    AdjustStrength(1); Stats[(int)STATS.CONSTITUTION]++;
-                    Stats[(int)STATS.INTELLIGENCE]--;
+                case RACE.LIZARDFOLK:
+                    AdjustStrength(1);
+                    StatScores[Stats.Constitution]++;
+                    StatScores[Stats.Intelligence]--;
                     break;
-                case Races.RACE.MIND_FLAYER:
-                    AdjustStrength(1); Stats[(int)STATS.DEXTERITY] += 2; Stats[(int)STATS.CONSTITUTION]++; Stats[(int)STATS.INTELLIGENCE] += 4; Stats[(int)STATS.CHARISMA] += 3; Stats[(int)STATS.WISDOM] += 3;
+                case RACE.MIND_FLAYER:
+                    AdjustStrength(1); 
+                    StatScores[Stats.Dexterity] += 2;
+                    StatScores[Stats.Constitution]++;
+                    StatScores[Stats.Intelligence] += 4;
+                    StatScores[Stats.Charisma] += 3;
+                    StatScores[Stats.Wisdom] += 3;
                     break;
-                case Races.RACE.MINOTAUR:
-                    AdjustStrength(4); Stats[(int)STATS.CONSTITUTION] += 2; Stats[(int)STATS.INTELLIGENCE] -= 2; Stats[(int)STATS.CHARISMA]--;
+                case RACE.MINOTAUR:
+                    AdjustStrength(4); 
+                    StatScores[Stats.Constitution] += 2;
+                    StatScores[Stats.Intelligence] -= 2;
+                    StatScores[Stats.Charisma]--;
                     break;
-                case Races.RACE.OGRE:
-                    AdjustStrength(5); Stats[(int)STATS.DEXTERITY]--; Stats[(int)STATS.CONSTITUTION] += 2; Stats[(int)STATS.INTELLIGENCE] -= 2; Stats[(int)STATS.CHARISMA] -= 2;
+                case RACE.OGRE:
+                    AdjustStrength(5);
+                    StatScores[Stats.Dexterity]--;
+                    StatScores[Stats.Constitution] += 2;
+                    StatScores[Stats.Intelligence] -= 2;
+                    StatScores[Stats.Charisma] -= 2;
                     break;
-                case Races.RACE.OGRE_MAGE:
-                    AdjustStrength(5); Stats[(int)STATS.CONSTITUTION] += 3; Stats[(int)STATS.INTELLIGENCE] += 2; Stats[(int)STATS.WISDOM] += 2; Stats[(int)STATS.CHARISMA] += 3;
+                case RACE.OGRE_MAGE:
+                    AdjustStrength(5);
+                    StatScores[Stats.Constitution] += 3;
+                    StatScores[Stats.Intelligence] += 2;
+                    StatScores[Stats.Wisdom] += 2;
+                    StatScores[Stats.Charisma] += 3;
                     break;
-                case Races.RACE.ORC:
+                case RACE.ORC:
                     AdjustStrength(2);
-                    Stats[(int)STATS.INTELLIGENCE]--; Stats[(int)STATS.WISDOM]--; Stats[(int)STATS.CHARISMA]--;
+                    StatScores[Stats.Intelligence]--;
+                    StatScores[Stats.Wisdom]--;
+                    StatScores[Stats.Charisma]--;
                     break;
-                case Races.RACE.SVIRFNEBLIN:
-                    Stats[(int)STATS.DEXTERITY]++; Stats[(int)STATS.WISDOM]++;
-                    Stats[(int)STATS.CHARISMA] -= 2;
+                case RACE.SVIRFNEBLIN:
+                    StatScores[Stats.Dexterity]++;
+                    StatScores[Stats.Wisdom]++;
+                    StatScores[Stats.Charisma] -= 2;
                     break;
-                case Races.RACE.TIEFLING:
-                    Stats[(int)STATS.DEXTERITY]++; Stats[(int)STATS.INTELLIGENCE]++;
-                    Stats[(int)STATS.CHARISMA]--;
+                case RACE.TIEFLING:
+                    StatScores[Stats.Dexterity]++;
+                    StatScores[Stats.Intelligence]++;
+                    StatScores[Stats.Charisma]--;
                     break;
-                case Races.RACE.TROGLODYTE:
-                    Stats[(int)STATS.CONSTITUTION] += 2;
-                    Stats[(int)STATS.DEXTERITY]--; Stats[(int)STATS.INTELLIGENCE]--;
+                case RACE.TROGLODYTE:
+                    StatScores[Stats.Constitution] += 2;
+                    StatScores[Stats.Dexterity]--;
+                    StatScores[Stats.Intelligence]--;
                     break;
-                case Races.RACE.WILD_ELF:
-                    Stats[(int)STATS.DEXTERITY]++;
-                    Stats[(int)STATS.INTELLIGENCE]--;
+                case RACE.WILD_ELF:
+                    StatScores[Stats.Dexterity]++;
+                    StatScores[Stats.Intelligence]--;
                     break;
-                case Races.RACE.WOOD_ELF:
-                    Stats[(int)STATS.DEXTERITY]++; AdjustStrength(1);
-                    Stats[(int)STATS.CONSTITUTION]--; Stats[(int)STATS.INTELLIGENCE]--;
+                case RACE.WOOD_ELF:
+                    StatScores[Stats.Dexterity]++; 
+                    AdjustStrength(1);
+                    StatScores[Stats.Constitution]--;
+                    StatScores[Stats.Intelligence]--;
                     break;
                 default: break;
             }
 
             switch (Race.MetaRace)
             {
-                case Races.METARACE.HALF_CELESTIAL:
-                    AdjustStrength(2); Stats[(int)STATS.DEXTERITY]++; Stats[(int)STATS.CONSTITUTION] += 2; Stats[(int)STATS.INTELLIGENCE]++; Stats[(int)STATS.CHARISMA] += 2; Stats[(int)STATS.WISDOM] += 2;
+                case METARACE.HALF_CELESTIAL:
+                    AdjustStrength(2);
+                    StatScores[Stats.Dexterity]++;
+                    StatScores[Stats.Constitution] += 2;
+                    StatScores[Stats.Intelligence]++;
+                    StatScores[Stats.Charisma] += 2;
+                    StatScores[Stats.Wisdom] += 2;
                     break;
-                case Races.METARACE.HALF_DRAGON:
-                    AdjustStrength(4); Stats[(int)STATS.CONSTITUTION]++; Stats[(int)STATS.INTELLIGENCE]++; Stats[(int)STATS.CHARISMA]++;
+                case METARACE.HALF_DRAGON:
+                    AdjustStrength(4);
+                    StatScores[Stats.Constitution]++;
+                    StatScores[Stats.Intelligence]++;
+                    StatScores[Stats.Charisma]++;
                     break;
-                case Races.METARACE.HALF_FIEND:
-                    AdjustStrength(2); Stats[(int)STATS.DEXTERITY] += 2; Stats[(int)STATS.CONSTITUTION]++; Stats[(int)STATS.INTELLIGENCE] += 2; Stats[(int)STATS.CHARISMA]++;
+                case METARACE.HALF_FIEND:
+                    AdjustStrength(2);
+                    StatScores[Stats.Dexterity] += 2;
+                    StatScores[Stats.Constitution]++;
+                    StatScores[Stats.Intelligence] += 2;
+                    StatScores[Stats.Charisma]++;
                     break;
                 default: break;
             }
         }
 
-        public void AdjustStrength(int Adjustment)
+        public void AdjustStrength(Int32 adjustment)
         {
-            while (Adjustment != 0)
+            while (adjustment != 0)
             {
-                if (Adjustment < 0)
+                if (adjustment < 0)
                 {
-                    if (Stats[(int)STATS.STRENGTH] != 18 || StrengthPercentile == 0)
+                    if (StatScores[Stats.Strength] != 18 || StrengthPercentile == 0)
                     {
-                        Stats[(int)STATS.STRENGTH]--;
-                        if (Stats[(int)STATS.STRENGTH] == 18)
+                        StatScores[Stats.Strength]--;
+                        if (StatScores[Stats.Strength] == 18)
                             StrengthPercentile = 100;
                         else
                             StrengthPercentile = 0;
-                        Adjustment++;
+                        adjustment++;
                     }
                     else
                     {
@@ -1154,16 +1211,16 @@ namespace NPCGen
                             StrengthPercentile = 1;
                         else
                             StrengthPercentile = 0;
-                        Adjustment++;
+                        adjustment++;
                     }
                 }
                 else
                 {
-                    if (Stats[(int)STATS.STRENGTH] != 18 || StrengthPercentile == 100)
+                    if (StatScores[Stats.Strength] != 18 || StrengthPercentile == 100)
                     {
-                        Stats[(int)STATS.STRENGTH]++;
+                        StatScores[Stats.Strength]++;
                         StrengthPercentile = 0;
-                        Adjustment--;
+                        adjustment--;
                     }
                     else
                     {
@@ -1177,7 +1234,7 @@ namespace NPCGen
                             StrengthPercentile = 91;
                         else
                             StrengthPercentile = 100;
-                        Adjustment--;
+                        adjustment--;
                     }
                 }
             }
@@ -1185,43 +1242,43 @@ namespace NPCGen
 
         public override string ToString()
         {
-            string output = String.Format("{0} {1} Level {2}", Race.ToString(), Class, Level);
+            var output = String.Format("{0} {1} Level {2}", Race.ToString(), Class, Level);
 
             output += "\n" + Alignment[0].ToString() + " " + Alignment[1].ToString();
             output += String.Format(" HP {0}, THAC0: {1} Melee, {2} Missile\n", HP, THACO[0], THACO[1]);
-            string StrengthString = String.Format("{0}", Stats[(int)STATS.STRENGTH]);
+            var strengthString = String.Format("{0}", StatScores[Stats.Strength]);
             if (StrengthPercentile != 0)
-                StrengthString += String.Format("/{0}", StrengthPercentile);
+                strengthString += String.Format("/{0}", StrengthPercentile);
             output += String.Format("STR {0} CON {1} DEX {2} INT {3} WIS {4} CHA {5}",
-                StrengthString, Stats[(int)STATS.CONSTITUTION], Stats[(int)STATS.DEXTERITY], Stats[(int)STATS.INTELLIGENCE],
-                Stats[(int)STATS.WISDOM], Stats[(int)STATS.CHARISMA]);
+                strengthString, StatScores[Stats.Constitution], StatScores[Stats.Dexterity], StatScores[Stats.Intelligence],
+                StatScores[Stats.Wisdom], StatScores[Stats.Charisma]);
 
-            if (StatAbilities != "")
+            if (StatAbilities != String.Empty)
                 output += "\n" + StatAbilities;
 
             output += "\nLANGUAGES: " + Languages;
 
-            if (Race.RacialTraits != "" || Race.MetaRacialTraits != "")
+            if (Race.RacialTraits != String.Empty || Race.MetaRacialTraits != String.Empty)
             {
-                if (Race.RacialTraits != "" && Race.MetaRacialTraits != "")
+                if (Race.RacialTraits != String.Empty && Race.MetaRacialTraits != String.Empty)
                     output += String.Format("\n{0}: {1}, {2}", Race.ToString(), Race.RacialTraits, Race.MetaRacialTraits);
                 else
                     output += String.Format("\n{0}: {1}{2}", Race.ToString(), Race.RacialTraits, Race.MetaRacialTraits);
             }
 
-            if (Classes.Abilities(Class, Level, Stats[(int)STATS.WISDOM]) != "")
-                output += "\n" + Class.ToString() + ": " + Classes.Abilities(Class, Level, Stats[(int)STATS.WISDOM]);
+            if (Classes.Abilities(Class, Level, StatScores[Stats.Wisdom]) != String.Empty)
+                output += "\n" + Class.ToString() + ": " + Classes.Abilities(Class, Level, StatScores[Stats.Wisdom]);
 
             if (RogueAbilities != null)
             {             
-                if (Class == Classes.CLASS.BARD)
+                if (Class == CLASS.BARD)
                 {
                     output += String.Format("\nClimb Walls: {0}%", RogueAbilities[0]);
                     output += String.Format("\nDetect Noise: {0}%", RogueAbilities[1]);
                     output += String.Format("\nPick Pockets: {0}%", RogueAbilities[2]);
                     output += String.Format("\nRead Languages: {0}%", RogueAbilities[3]);
                 }
-                else if (Class == Classes.CLASS.THIEF)
+                else if (Class == CLASS.THIEF)
                 {
                     output += String.Format("\nPick Pockets: {0}%", RogueAbilities[0]);
                     output += String.Format("\nOpen Locks: {0}%", RogueAbilities[1]);
@@ -1234,148 +1291,148 @@ namespace NPCGen
                 }
             }
 
-            output += "\n\n" + Equipment[(int)ITEMTYPE.WEAPON];
+            output += "\n\n" + Equipment[EquipmentType.Weapon];
 
-            if (Equipment[(int)ITEMTYPE.ARMOR] != "")
-                output += "\n" + Equipment[(int)ITEMTYPE.ARMOR];
-            if (Equipment[(int)ITEMTYPE.RING_OF_PROTECTION] != "")
-                output += "\n" + Equipment[(int)ITEMTYPE.RING_OF_PROTECTION];
-            if (Equipment[(int)ITEMTYPE.BRACERS] != "")
-                output += "\n" + Equipment[(int)ITEMTYPE.BRACERS];
-            if (Equipment[(int)ITEMTYPE.SHIELD] != "")
-                output += "\n" + Equipment[(int)ITEMTYPE.SHIELD];
-            if (Equipment[(int)ITEMTYPE.POTION] != "")
-                output += "\n\n" + Equipment[(int)ITEMTYPE.POTION];
-            if (Equipment[(int)ITEMTYPE.SCROLL] != "")
-                output += "\n\n" + Equipment[(int)ITEMTYPE.SCROLL];
-            if (Equipment[(int)ITEMTYPE.MISCELLANEOUS] != "")
-                output += "\n\n" + Equipment[(int)ITEMTYPE.MISCELLANEOUS];
-            if (Equipment[(int)ITEMTYPE.MONEY] != "")
-                output += "\n\n" + Equipment[(int)ITEMTYPE.MONEY];
-            if (Equipment[(int)ITEMTYPE.SPELLS] != "")
-                output += "\n\n" + Equipment[(int)ITEMTYPE.SPELLS];
-            if (Equipment[(int)ITEMTYPE.FAMILIARS] != "")
-                output += "\n\n" + Equipment[(int)ITEMTYPE.FAMILIARS];
+            if (Equipment[EquipmentType.Armor] != String.Empty)
+                output += "\n" + Equipment[EquipmentType.Armor];
+            if (Equipment[EquipmentType.RingOfProtection] != String.Empty)
+                output += "\n" + Equipment[EquipmentType.RingOfProtection];
+            if (Equipment[EquipmentType.Bracers] != String.Empty)
+                output += "\n" + Equipment[EquipmentType.Bracers];
+            if (Equipment[EquipmentType.Shield] != String.Empty)
+                output += "\n" + Equipment[EquipmentType.Shield];
+            if (Equipment[EquipmentType.Potion] != String.Empty)
+                output += "\n\n" + Equipment[EquipmentType.Potion];
+            if (Equipment[EquipmentType.Scroll] != String.Empty)
+                output += "\n\n" + Equipment[EquipmentType.Scroll];
+            if (Equipment[EquipmentType.Miscellaneous] != String.Empty)
+                output += "\n\n" + Equipment[EquipmentType.Miscellaneous];
+            if (Equipment[EquipmentType.Money] != String.Empty)
+                output += "\n\n" + Equipment[EquipmentType.Money];
+            if (Equipment[EquipmentType.Spells] != String.Empty)
+                output += "\n\n" + Equipment[EquipmentType.Spells];
+            if (Equipment[EquipmentType.Familiars] != String.Empty)
+                output += "\n\n" + Equipment[EquipmentType.Familiars];
 
             return output;
         }
 
-        private int PercentageChance(Classes.CLASS Class, ITEMTYPE Type)
+        private Int32 PercentageChance(CLASS Class, Int32 equipmentType)
         {
-            switch (Type)
+            switch (equipmentType)
             {
-                case ITEMTYPE.ARMOR:
+                case EquipmentType.Armor:
                     switch (Class)
                     {
-                        case Classes.CLASS.CLERIC:
-                        case Classes.CLASS.DRUID: return 8;
-                        case Classes.CLASS.FIGHTER:
-                        case Classes.CLASS.BARBARIAN:
-                        case Classes.CLASS.PALADIN:
-                        case Classes.CLASS.BARD:
-                        case Classes.CLASS.THIEF: return 10;
-                        case Classes.CLASS.RANGER: return 15;
+                        case CLASS.CLERIC:
+                        case CLASS.DRUID: return 8;
+                        case CLASS.FIGHTER:
+                        case CLASS.BARBARIAN:
+                        case CLASS.PALADIN:
+                        case CLASS.BARD:
+                        case CLASS.THIEF: return 10;
+                        case CLASS.RANGER: return 15;
                         default: return 0;
                     }
-                case ITEMTYPE.SHIELD:
+                case EquipmentType.Shield:
                     switch (Class)
                     {
-                        case Classes.CLASS.CLERIC:
-                        case Classes.CLASS.FIGHTER:
-                        case Classes.CLASS.BARBARIAN:
-                        case Classes.CLASS.PALADIN: return 10;
-                        case Classes.CLASS.RANGER:
-                        case Classes.CLASS.BARD: return 8;
+                        case CLASS.CLERIC:
+                        case CLASS.FIGHTER:
+                        case CLASS.BARBARIAN:
+                        case CLASS.PALADIN: return 10;
+                        case CLASS.RANGER:
+                        case CLASS.BARD: return 8;
                         default: return 0;
                     }
-                case ITEMTYPE.BRACERS:
+                case EquipmentType.Bracers:
                     switch (Class)
                     {
-                        case Classes.CLASS.SORCERER:
-                        case Classes.CLASS.WIZARD:
-                        case Classes.CLASS.MONK: return 4;
+                        case CLASS.SORCERER:
+                        case CLASS.WIZARD:
+                        case CLASS.MONK: return 4;
                         default: return 0;
                     }
-                case ITEMTYPE.RING_OF_PROTECTION:
+                case EquipmentType.RingOfProtection:
                     switch (Class)
                     {
-                        case Classes.CLASS.CLERIC: return 2;
-                        case Classes.CLASS.DRUID: return 5;
-                        case Classes.CLASS.SORCERER:
-                        case Classes.CLASS.MONK:
-                        case Classes.CLASS.WIZARD: return 15;
-                        case Classes.CLASS.BARD: return 3;
-                        case Classes.CLASS.THIEF: return 4;
+                        case CLASS.CLERIC: return 2;
+                        case CLASS.DRUID: return 5;
+                        case CLASS.SORCERER:
+                        case CLASS.MONK:
+                        case CLASS.WIZARD: return 15;
+                        case CLASS.BARD: return 3;
+                        case CLASS.THIEF: return 4;
                         default: return 0;
                     }
-                case ITEMTYPE.WEAPON:
+                case EquipmentType.Weapon:
                     switch (Class)
                     {
-                        case Classes.CLASS.CLERIC: return 12;
-                        case Classes.CLASS.DRUID:
-                        case Classes.CLASS.FIGHTER:
-                        case Classes.CLASS.BARBARIAN:
-                        case Classes.CLASS.PALADIN:
-                        case Classes.CLASS.BARD:
-                        case Classes.CLASS.RANGER: return 10;
-                        case Classes.CLASS.MONK: return 5;
-                        case Classes.CLASS.SORCERER:
-                        case Classes.CLASS.WIZARD: return 15;
-                        case Classes.CLASS.THIEF: return 12;
+                        case CLASS.CLERIC: return 12;
+                        case CLASS.DRUID:
+                        case CLASS.FIGHTER:
+                        case CLASS.BARBARIAN:
+                        case CLASS.PALADIN:
+                        case CLASS.BARD:
+                        case CLASS.RANGER: return 10;
+                        case CLASS.MONK: return 5;
+                        case CLASS.SORCERER:
+                        case CLASS.WIZARD: return 15;
+                        case CLASS.THIEF: return 12;
                         default: return 0;
                     }
-                case ITEMTYPE.SCROLL:
+                case EquipmentType.Scroll:
                     switch (Class)
                     {
-                        case Classes.CLASS.CLERIC: return 8;
-                        case Classes.CLASS.DRUID: return 7;
-                        case Classes.CLASS.FIGHTER:
-                        case Classes.CLASS.THIEF:
-                        case Classes.CLASS.MONK: return 6;
-                        case Classes.CLASS.PALADIN: return 4;
-                        case Classes.CLASS.RANGER: return 5;
-                        case Classes.CLASS.SORCERER: return 12;
-                        case Classes.CLASS.WIZARD:
-                        case Classes.CLASS.BARD: return 15;
+                        case CLASS.CLERIC: return 8;
+                        case CLASS.DRUID: return 7;
+                        case CLASS.FIGHTER:
+                        case CLASS.THIEF:
+                        case CLASS.MONK: return 6;
+                        case CLASS.PALADIN: return 4;
+                        case CLASS.RANGER: return 5;
+                        case CLASS.SORCERER: return 12;
+                        case CLASS.WIZARD:
+                        case CLASS.BARD: return 15;
                         default: return 0;
                     }
-                case ITEMTYPE.POTION:
+                case EquipmentType.Potion:
                     switch (Class)
                     {
-                        case Classes.CLASS.PALADIN:
-                        case Classes.CLASS.CLERIC: return 6;
-                        case Classes.CLASS.DRUID: return 11;
-                        case Classes.CLASS.FIGHTER: return 8;
-                        case Classes.CLASS.SORCERER:
-                        case Classes.CLASS.WIZARD:
-                        case Classes.CLASS.BARD:
-                        case Classes.CLASS.MONK: return 10;
-                        case Classes.CLASS.RANGER: return 7;
-                        case Classes.CLASS.THIEF: return 9;
+                        case CLASS.PALADIN:
+                        case CLASS.CLERIC: return 6;
+                        case CLASS.DRUID: return 11;
+                        case CLASS.FIGHTER: return 8;
+                        case CLASS.SORCERER:
+                        case CLASS.WIZARD:
+                        case CLASS.BARD:
+                        case CLASS.MONK: return 10;
+                        case CLASS.RANGER: return 7;
+                        case CLASS.THIEF: return 9;
                         default: return 0;
                     }
-                case ITEMTYPE.MISCELLANEOUS:
+                case EquipmentType.Miscellaneous:
                     switch (Class)
                     {
-                        case Classes.CLASS.DRUID:
-                        case Classes.CLASS.PALADIN: return 3;
-                        case Classes.CLASS.RANGER: return 4;
-                        case Classes.CLASS.SORCERER: return 8;
-                        case Classes.CLASS.WIZARD: return 9;
-                        case Classes.CLASS.BARD: return 6;
-                        case Classes.CLASS.FIGHTER:
-                        case Classes.CLASS.CLERIC:
-                        case Classes.CLASS.MONK:
-                        case Classes.CLASS.THIEF: return 5;
+                        case CLASS.DRUID:
+                        case CLASS.PALADIN: return 3;
+                        case CLASS.RANGER: return 4;
+                        case CLASS.SORCERER: return 8;
+                        case CLASS.WIZARD: return 9;
+                        case CLASS.BARD: return 6;
+                        case CLASS.FIGHTER:
+                        case CLASS.CLERIC:
+                        case CLASS.MONK:
+                        case CLASS.THIEF: return 5;
                         default: return 0;
                     }
                 default: return 0;
             }
         }
 
-        public static string RandomAlignment(ref Random random)
+        public static String RandomAlignment()
         {
-            switch (Dice.Roll(1, 9, 0, ref random))
+            switch (Dice.Roll(1, 9))
             {
                 case 1: return "lawful good";
                 case 2: return "neutral good";
@@ -1389,13 +1446,13 @@ namespace NPCGen
             }
         }
 
-        public static string RandomGender(ref Random random, bool ExtraGenders)
+        public static String RandomGender(Boolean ExtraGenders)
         {
-            int limit = 2;
+            var limit = 2;
             if (ExtraGenders)
                 limit = 4;
 
-            switch (Dice.Roll(1, limit, 0, ref random))
+            switch (Dice.Roll(1, limit))
             {
                 case 1: return "male";
                 case 2: return "female";
@@ -1404,9 +1461,9 @@ namespace NPCGen
             }
         }
 
-        public static string RandomClass(ref Random random)
+        public static String RandomClass()
         {
-            switch (Dice.Roll(1, 11, 0, ref random))
+            switch (Dice.Roll(1, 11))
             {
                 case 1: return "barbarian";
                 case 2: return "bard";
@@ -1422,9 +1479,9 @@ namespace NPCGen
             }
         }
 
-        public static string HumanoidSubtype(ref Random random)
+        public static String HumanoidSubtype()
         {
-            switch (Dice.Roll(1, 510, 0, ref random))
+            switch (Dice.Roll(1, 510))
             {
                 case 1:
                 case 2:
@@ -1924,9 +1981,9 @@ namespace NPCGen
             }
         }
 
-        public static string CreatureType(ref Random random)
+        public static String CreatureType()
         {
-            switch (Dice.Percentile(ref random))
+            switch (Dice.Percentile())
             {
                 case 1:
                 case 2:
@@ -2022,7 +2079,7 @@ namespace NPCGen
                 case 92: return "undead";
                 case 93:
                 case 94: return "vermin";
-                default: return HumanoidSubtype(ref random);
+                default: return HumanoidSubtype();
             }
         }
     }

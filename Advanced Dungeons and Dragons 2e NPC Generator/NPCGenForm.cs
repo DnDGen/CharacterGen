@@ -1,8 +1,11 @@
+using NPCGen.Characters;
+using NPCGen.Roll;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
@@ -18,24 +21,25 @@ namespace NPCGen
         private void Form1_Load(object sender, EventArgs e)
         {
             RaceCombo.Items.AddRange(Races.RacesArray);
-            RaceCombo.Items.AddRange(Enum.GetNames(typeof(Races.RACE_RANDOMIZER)));
-            MetaRaceCombo.Items.AddRange(Enum.GetNames(typeof(Races.METARACE)));
-            MetaRaceCombo.Items.AddRange(Enum.GetNames(typeof(Races.METARACE_RANDOMIZER)));
+            RaceCombo.Items.AddRange(Races.RaceRandomizerArray);
+            MetaRaceCombo.Items.AddRange(Races.MetaRacesArray);
+            MetaRaceCombo.Items.AddRange(Races.MetaRaceRandomizerArray);
 
             ClassCombo.Items.AddRange(Classes.ClassesArray);
             ClassCombo.Items.AddRange(Classes.ClassRandomizerArray);
+
             ClassLvlCombo.Items.AddRange(Classes.LevelRandomizerArray);
-            for (int i = 1; i <= 40; i++)
+            for (var i = 1; i <= 40; i++)
                 ClassLvlCombo.Items.Add(i);
 
             GenderCombo.Items.Add("Any");
             GenderCombo.Items.Add("Male");
             GenderCombo.Items.Add("Female");
 
-            RollMethodCombo.Items.AddRange(Dice.RollMethodArray);
+            RollMethodCombo.Items.AddRange(StatDice.RollMethodArray);
             RollMethodCombo.Items.Add("ANY");
 
-            AlignmentCombo.Items.AddRange(Enum.GetNames(typeof(Character.ALIGNMENT_RANDOMIZER)));
+            AlignmentCombo.Items.AddRange(Character.AlignmentRandomizerArray);
             AlignmentCombo.Items.Add("Lawful Good");
             AlignmentCombo.Items.Add("Neutral Good");
             AlignmentCombo.Items.Add("Chaotic Good");
@@ -56,19 +60,23 @@ namespace NPCGen
             ResetButton.Enabled = false;
             OutputText.Text = "Generating NPC...";
 
-            Dice.ROLLMETHOD RollMethod = Dice.ROLLMETHOD.STRAIGHT; Races Race = new Races(); Classes.CLASS Class = Classes.CLASS.FIGHTER; int Level = 1;
-            Character.ALIGNMENT[] Alignment = new Character.ALIGNMENT[2];
-            Character NPC; Random random = new Random(); bool Male;
+            var RollMethod = ROLLMETHOD.STRAIGHT;
+            var Race = new Races();
+            var Class = CLASS.FIGHTER; 
+            var Level = 1;
+            var Alignment = new ALIGNMENT[2];
+            Character NPC;
+            Boolean Male;
 
             //Determine the alignment
             Application.DoEvents();
-            bool Randomized = false;
+            var Randomized = false;
             OutputText.Text += "\nDetermining Alignment...";
-            for (int i = 0; i < Character.AlignmentRandomizerArray.Length; i++)
+            for (var i = 0; i < Character.AlignmentRandomizerArray.Length; i++)
             {
                 if (Character.AlignmentRandomizerArray[i] == AlignmentCombo.Text)
                 {
-                    Alignment = Character.RandomAlignment((Character.ALIGNMENT_RANDOMIZER)i, ref random);
+                    Alignment = Character.RandomAlignment((ALIGNMENT_RANDOMIZER)i);
                     Randomized = true;
                     break;
                 }
@@ -83,11 +91,11 @@ namespace NPCGen
             Application.DoEvents();
             OutputText.Text += "\nDetermining Class...";
             Randomized = false;
-            for (int i = 0; i < Classes.ClassRandomizerArray.Length; i++)
+            for (var i = 0; i < Classes.ClassRandomizerArray.Length; i++)
             {
                 if (Classes.ClassRandomizerArray[i] == ClassCombo.Text)
                 {
-                    Class = Classes.RandomClass((Classes.CLASSRANDOMIZER)i, Alignment, ref random);
+                    Class = Classes.RandomClass((CLASSRANDOMIZER)i, Alignment);
                     Randomized = true;
                     break;
                 }
@@ -96,11 +104,11 @@ namespace NPCGen
             //set class, if not randomized
             if (!Randomized)
             {
-                for (int i = 0; i < Classes.ClassesArray.Length; i++)
+                for (var i = 0; i < Classes.ClassesArray.Length; i++)
                 {
                     if (Classes.ClassesArray[i] == ClassCombo.Text)
                     {
-                        Class = (Classes.CLASS)i;
+                        Class = (CLASS)i;
                         break;
                     }
                 }
@@ -108,22 +116,22 @@ namespace NPCGen
             OutputText.Text += Class.ToString();
 
             //verify correct alignments
-            if (Class == Classes.CLASS.PALADIN || Class == Classes.CLASS.MONK)
-                Alignment[0] = Character.ALIGNMENT.LAWFUL;
-            else if (Alignment[0] == Character.ALIGNMENT.LAWFUL && (Class == Classes.CLASS.BARBARIAN || Class == Classes.CLASS.BARD))
-                Alignment[0] = Character.ALIGNMENT.NEUTRAL;
-            else if (Class == Classes.CLASS.DRUID && !(Alignment[0] == Character.ALIGNMENT.NEUTRAL || Alignment[1] == Character.ALIGNMENT.NEUTRAL))
-                Alignment[0] = Character.ALIGNMENT.NEUTRAL;
+            if (Class == CLASS.PALADIN || Class == CLASS.MONK)
+                Alignment[0] = ALIGNMENT.LAWFUL;
+            else if (Alignment[0] == ALIGNMENT.LAWFUL && (Class == CLASS.BARBARIAN || Class == CLASS.BARD))
+                Alignment[0] = ALIGNMENT.NEUTRAL;
+            else if (Class == CLASS.DRUID && !(Alignment[0] == ALIGNMENT.NEUTRAL || Alignment[1] == ALIGNMENT.NEUTRAL))
+                Alignment[0] = ALIGNMENT.NEUTRAL;
 
             //Determine level by randomization method
             Application.DoEvents();
             OutputText.Text += "\nDetermining Level...";
             Randomized = false;
-            for (int i = 0; i < Classes.LevelRandomizerArray.Length; i++)
+            for (var i = 0; i < Classes.LevelRandomizerArray.Length; i++)
             {
                 if (Classes.LevelRandomizerArray[i] == ClassLvlCombo.Text)
                 {
-                    Level = Classes.RandomLevel((Classes.LEVELRANDOMIZER)i, ref random);
+                    Level = Classes.RandomLevel((LEVELRANDOMIZER)i);
                     Randomized = true;
                     break;
                 }
@@ -137,18 +145,18 @@ namespace NPCGen
             //Determine the roll method
             Application.DoEvents();
             OutputText.Text += "\nDetermining Roll Method for stats...";
-            bool Any = true;
-            for (int i = 0; i < Dice.RollMethodArray.Length; i++)
+            var Any = true;
+            for (var i = 0; i < StatDice.RollMethodArray.Length; i++)
             {
-                if (Dice.RollMethodArray[i] == RollMethodCombo.Text)
+                if (StatDice.RollMethodArray[i] == RollMethodCombo.Text)
                 {
-                    RollMethod = (Dice.ROLLMETHOD)i;
+                    RollMethod = (ROLLMETHOD)i;
                     Any = false;
                     break;
                 }
             }
             if (Any)
-                RollMethod = (Dice.ROLLMETHOD)random.Next(1, Dice.RollMethodArray.Length);
+                RollMethod = (ROLLMETHOD)Dice.Roll(1, StatDice.RollMethodArray.Length);
 
             OutputText.Text += RollMethod.ToString();
 
@@ -158,7 +166,7 @@ namespace NPCGen
             if (GenderCombo.Text == "Any")
             {
                 Male = true;
-                if (Dice.Percentile(ref random) < 34)
+                if (Dice.Percentile() < 34)
                     Male = false;
             }
             else if (GenderCombo.Text == "Female")
@@ -166,14 +174,15 @@ namespace NPCGen
             else
                 Male = true;
 
-            Randomized = false; bool AllowMetaRaces = false;
-            for (int i = 0; i < Races.RaceRandomizerArray.Length; i++)
+            Randomized = false; 
+            var AllowMetaRaces = false;
+            for (var i = 0; i < Races.RaceRandomizerArray.Length; i++)
             {
                 if (Races.RaceRandomizerArray[i] == RaceCombo.Text)
                 {
                     if (MetaRaceCombo.Text == "MAYBE")
                         AllowMetaRaces = true;
-                    Race = new Races(Alignment[1], Class, (Races.RACE_RANDOMIZER)i, AllowMetaRaces, Male, ref random);
+                    Race = new Races(Alignment[1], Class, (RACE_RANDOMIZER)i, AllowMetaRaces, Male);
                     Randomized = true;
                     break;
                 }
@@ -181,11 +190,11 @@ namespace NPCGen
 
             if (!Randomized)
             {
-                for (int i = 0; i < Races.RacesArray.Length; i++)
+                for (var i = 0; i < Races.RacesArray.Length; i++)
                 {
                     if (Races.RacesArray[i] == RaceCombo.Text)
                     {
-                        Race.Race = (Races.RACE)i;
+                        Race.Race = (RACE)i;
                         break;
                     }
                 }
@@ -193,11 +202,11 @@ namespace NPCGen
 
             //Determine the metarace, if any
             Randomized = false;
-            for (int i = 0; i < Races.MetaRaceRandomizerArray.Length; i++)
+            for (var i = 0; i < Races.MetaRaceRandomizerArray.Length; i++)
             {
                 if (Races.MetaRaceRandomizerArray[i] == MetaRaceCombo.Text)
                 {
-                    Race.MetaRace = Races.RandomMetaRace(Alignment[1], Class, (Races.METARACE_RANDOMIZER)i, ref random);
+                    Race.MetaRace = Races.RandomMetaRace(Alignment[1], Class, (METARACE_RANDOMIZER)i);
                     Randomized = true;
                     break;
                 }
@@ -205,11 +214,11 @@ namespace NPCGen
 
             if (!Randomized && MetaRaceCombo.Text != "NONE" && MetaRaceCombo.Text != "MAYBE")
             {
-                for (int i = 0; i < Races.MetaRacesArray.Length; i++)
+                for (var i = 0; i < Races.MetaRacesArray.Length; i++)
                 {
                     if (Races.MetaRacesArray[i] == MetaRaceCombo.Text)
                     {
-                        Race.MetaRace = (Races.METARACE)i;
+                        Race.MetaRace = (METARACE)i;
                         break;
                     }
                 }
@@ -219,7 +228,7 @@ namespace NPCGen
             //Create the NPC and output to form
             Application.DoEvents();
             OutputText.Text += "\nCreating NPC...";
-            NPC = new Character(RollMethod, Race, Alignment, Class, Level, ref OutputText, ref random);
+            NPC = new Character(RollMethod, Race, Alignment, Class, Level, ref OutputText);
             OutputText.Text = NPC.ToString();
 
             //re-enable other command tools
@@ -242,7 +251,7 @@ namespace NPCGen
             RollMethodCombo.SelectedIndex = RollMethodCombo.FindString("ANY");
             MetaRaceCombo.SelectedIndex = MetaRaceCombo.FindString("NONE");
             AlignmentCombo.SelectedIndex = AlignmentCombo.FindString("ANY");
-            OutputText.Text = "";
+            OutputText.Text = String.Empty;
         }
     }
 }

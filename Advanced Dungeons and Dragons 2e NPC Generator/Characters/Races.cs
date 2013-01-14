@@ -1,30 +1,40 @@
+using NPCGen.Roll;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace NPCGen
+namespace NPCGen.Characters
 {
-    class Races
+    public enum RACE
     {
-        public enum RACE { AASIMAR,
-            DEEP_DWARF, HILL_DWARF, MOUNTAIN_DWARF,
-            GRAY_ELF, HIGH_ELF, WILD_ELF, WOOD_ELF, HALFELF,
-            FOREST_GNOME, ROCK_GNOME, SVIRFNEBLIN,
-            HALFORC, LIGHTFOOT_HALFLING, DEEP_HALFLING, TALLFELLOW_HALFLING,
-            HUMAN, LIZARDFOLK, DOPPELGANGER, GOBLIN, HOBGOBLIN, KOBOLD, ORC,
-            TIEFLING, DROW, DUERGAR, DERRO_DWARF, GNOLL, TROGLODYTE, BUGBEAR, OGRE, MINOTAUR, MIND_FLAYER, OGRE_MAGE};
-        
-        public enum METARACE { NONE, HALF_CELESTIAL, HALF_DRAGON, WEREBEAR, WEREBOAR, WERETIGER, WERERAT, WEREWOLF, HALF_FIEND };
-        public enum METARACE_RANDOMIZER { ANY, MAYBE, ANY_LYCANTHROPE, ANY_NONLYCANTHROPE,
-            ANY_GOOD, ANY_NEUTRAL, ANY_EVIL, ANY_NONGOOD, ANY_NONNEUTRAL, ANY_NONEVIL };
-        public enum RACE_RANDOMIZER { ANY, ANY_STANDARD, ANY_NONSTANDARD,
-            ANY_EVIL, ANY_GOOD, ANY_NEUTRAL, ANY_NONEVIL, ANY_NONNEUTRAL, ANY_NONGOOD };
+        AASIMAR,
+        DEEP_DWARF, HILL_DWARF, MOUNTAIN_DWARF,
+        GRAY_ELF, HIGH_ELF, WILD_ELF, WOOD_ELF, HALFELF,
+        FOREST_GNOME, ROCK_GNOME, SVIRFNEBLIN,
+        HALFORC, LIGHTFOOT_HALFLING, DEEP_HALFLING, TALLFELLOW_HALFLING,
+        HUMAN, LIZARDFOLK, DOPPELGANGER, GOBLIN, HOBGOBLIN, KOBOLD, ORC,
+        TIEFLING, DROW, DUERGAR, DERRO_DWARF, GNOLL, TROGLODYTE, BUGBEAR, OGRE, MINOTAUR, MIND_FLAYER, OGRE_MAGE
+    };
 
+    public enum METARACE { NONE, HALF_CELESTIAL, HALF_DRAGON, WEREBEAR, WEREBOAR, WERETIGER, WERERAT, WEREWOLF, HALF_FIEND };
+    public enum METARACE_RANDOMIZER
+    {
+        ANY, MAYBE, ANY_LYCANTHROPE, ANY_NONLYCANTHROPE,
+        ANY_GOOD, ANY_NEUTRAL, ANY_EVIL, ANY_NONGOOD, ANY_NONNEUTRAL, ANY_NONEVIL
+    };
+    public enum RACE_RANDOMIZER
+    {
+        ANY, ANY_STANDARD, ANY_NONSTANDARD,
+        ANY_EVIL, ANY_GOOD, ANY_NEUTRAL, ANY_NONEVIL, ANY_NONNEUTRAL, ANY_NONGOOD
+    };
+
+    public class Races
+    {
         public RACE Race;
         public METARACE MetaRace;
-        public bool Male;
+        public Boolean Male;
 
-        public string Gender
+        public String Gender
         {
             get
             {
@@ -34,39 +44,12 @@ namespace NPCGen
             }
         }
 
-        public static string[] RacesArray
-        {
-            get
-            {
-                return Enum.GetNames(typeof(RACE));
-            }
-        }
+        public static String[] RacesArray { get { return Enum.GetNames(typeof(RACE)); } }
+        public static String[] MetaRacesArray { get { return Enum.GetNames(typeof(METARACE)); } }
+        public static String[] RaceRandomizerArray { get { return Enum.GetNames(typeof(RACE_RANDOMIZER)); } }
+        public static String[] MetaRaceRandomizerArray { get { return Enum.GetNames(typeof(METARACE_RANDOMIZER)); } }
 
-        public static string[] MetaRacesArray
-        {
-            get
-            {
-                return Enum.GetNames(typeof(METARACE));
-            }
-        }
-
-        public static string[] RaceRandomizerArray
-        {
-            get
-            {
-                return Enum.GetNames(typeof(RACE_RANDOMIZER));
-            }
-        }
-
-        public static string[] MetaRaceRandomizerArray
-        {
-            get
-            {
-                return Enum.GetNames(typeof(METARACE_RANDOMIZER));
-            }
-        }
-
-        public string RacialTraits
+        public String RacialTraits
         {
             get
             {
@@ -101,26 +84,26 @@ namespace NPCGen
                     case RACE.TALLFELLOW_HALFLING:
                     case RACE.LIGHTFOOT_HALFLING: return "+1/(3.5 CON) saving throw v. poison, wands, staves, rods, and spells; +1 with thrown missile weapons and slings; infravision 60'; detect grade of passage (1-3 on d6); detect direction (1-3 on d6)";
                     case RACE.HALFORC: return "Darkvision; can use orc weapons with no penalty";
-                    default: return "";
+                    default: return String.Empty;
                 }
             }
         }
 
-        public string MetaRacialTraits
+        public String MetaRacialTraits
         {
             get
             {
                 switch (MetaRace)
                 {
                     case METARACE.HALF_CELESTIAL:
-                        string output = "AC 1 better"; Random random = new Random();
-                        if (Dice.Percentile(ref random) <= 75)
+                        var output = "AC 1 better";
+                        if (Dice.Percentile() <= 75)
                             output += ", angel wings (fly at double speed)";
                         return output;
                     case METARACE.HALF_DRAGON: return "If large, has wings (can fly)";
                     case METARACE.HALF_FIEND: 
-                        output = "AC 1 better"; random = new Random();
-                        if (Dice.Percentile(ref random) <= 50)
+                        output = "AC 1 better";
+                        if (Dice.Percentile() <= 50)
                             output += ", bat wings (can fly)";
                         return output;
                     case METARACE.WEREBOAR:
@@ -128,62 +111,54 @@ namespace NPCGen
                     case METARACE.WERETIGER:
                     case METARACE.WEREWOLF:
                     case METARACE.WEREBEAR: return "AC 2 better";
-                    default: return "";
+                    default: return String.Empty;
                 }
             }
         }
 
-        public static string[] RacesRandomizerArray
+        public Races(ALIGNMENT alignment, CLASS charClass, RACE_RANDOMIZER randomizer, Boolean allowMetaRaces, Boolean male)
         {
-            get
+            switch (randomizer)
             {
-                return Enum.GetNames(typeof(RACE_RANDOMIZER));
-            }
-        }
-
-        public Races(Character.ALIGNMENT Alignment, Classes.CLASS Class, RACE_RANDOMIZER Randomizer, bool AllowMetaRaces, bool Male, ref Random random)
-        {
-            switch (Randomizer)
-            {
-                case RACE_RANDOMIZER.ANY_STANDARD: RaceByAlignment(Alignment, Class, AllowMetaRaces, true, false, ref random); break;
-                case RACE_RANDOMIZER.ANY_NONSTANDARD: RaceByAlignment(Alignment, Class, AllowMetaRaces, false, true, ref random); break;
-                case RACE_RANDOMIZER.ANY_EVIL: RaceByAlignment(Character.ALIGNMENT.EVIL, Class, AllowMetaRaces, false, false, ref random); break;
-                case RACE_RANDOMIZER.ANY_GOOD: RaceByAlignment(Character.ALIGNMENT.GOOD, Class, AllowMetaRaces, false, false, ref random); break;
-                case RACE_RANDOMIZER.ANY_NEUTRAL: RaceByAlignment(Character.ALIGNMENT.NEUTRAL, Class, AllowMetaRaces, false, false, ref random); break;
+                case RACE_RANDOMIZER.ANY_STANDARD: RaceByAlignment(alignment, charClass, allowMetaRaces, true, false); break;
+                case RACE_RANDOMIZER.ANY_NONSTANDARD: RaceByAlignment(alignment, charClass, allowMetaRaces, false, true); break;
+                case RACE_RANDOMIZER.ANY_EVIL: RaceByAlignment(ALIGNMENT.EVIL, charClass, allowMetaRaces, false, false); break;
+                case RACE_RANDOMIZER.ANY_GOOD: RaceByAlignment(ALIGNMENT.GOOD, charClass, allowMetaRaces, false, false); break;
+                case RACE_RANDOMIZER.ANY_NEUTRAL: RaceByAlignment(ALIGNMENT.NEUTRAL, charClass, allowMetaRaces, false, false); break;
                 case RACE_RANDOMIZER.ANY_NONEVIL:
-                    if (Alignment != Character.ALIGNMENT.EVIL)
-                        RaceByAlignment(Alignment, Class, AllowMetaRaces, false, false, ref random);
+                    if (alignment != ALIGNMENT.EVIL)
+                        RaceByAlignment(alignment, charClass, allowMetaRaces, false, false);
                     else
                     {
-                        if (Dice.Roll(1, 5, 0, ref random) > 3)
-                            RaceByAlignment(Character.ALIGNMENT.GOOD, Class, AllowMetaRaces, false, false, ref random);
+                        if (Dice.Roll(1, 5, 0) > 3)
+                            RaceByAlignment(ALIGNMENT.GOOD, charClass, allowMetaRaces, false, false);
                         else
-                            RaceByAlignment(Character.ALIGNMENT.NEUTRAL, Class, AllowMetaRaces, false, false, ref random);
+                            RaceByAlignment(ALIGNMENT.NEUTRAL, charClass, allowMetaRaces, false, false);
                     } break;
                 case RACE_RANDOMIZER.ANY_NONGOOD:
-                    if (Alignment != Character.ALIGNMENT.GOOD)
-                        RaceByAlignment(Alignment, Class, AllowMetaRaces, false, false, ref random);
+                    if (alignment != ALIGNMENT.GOOD)
+                        RaceByAlignment(alignment, charClass, allowMetaRaces, false, false);
                     else
                     {
-                        if (Dice.d8(ref random) > 3)
-                            RaceByAlignment(Character.ALIGNMENT.EVIL, Class, AllowMetaRaces, false, false, ref random);
+                        if (Dice.d8() > 3)
+                            RaceByAlignment(ALIGNMENT.EVIL, charClass, allowMetaRaces, false, false);
                         else
-                            RaceByAlignment(Character.ALIGNMENT.NEUTRAL, Class, AllowMetaRaces, false, false, ref random);
+                            RaceByAlignment(ALIGNMENT.NEUTRAL, charClass, allowMetaRaces, false, false);
                     } break;
                 case RACE_RANDOMIZER.ANY_NONNEUTRAL:
-                    if (Alignment != Character.ALIGNMENT.EVIL)
-                        RaceByAlignment(Alignment, Class, AllowMetaRaces, false, false, ref random);
+                    if (alignment != ALIGNMENT.EVIL)
+                        RaceByAlignment(alignment, charClass, allowMetaRaces, false, false);
                     else
                     {
-                        if (Dice.Roll(1, 7, 0, ref random) > 2)
-                            RaceByAlignment(Character.ALIGNMENT.EVIL, Class, AllowMetaRaces, false, false, ref random);
+                        if (Dice.Roll(1, 7, 0) > 2)
+                            RaceByAlignment(ALIGNMENT.EVIL, charClass, allowMetaRaces, false, false);
                         else
-                            RaceByAlignment(Character.ALIGNMENT.GOOD, Class, AllowMetaRaces, false, false, ref random);
+                            RaceByAlignment(ALIGNMENT.GOOD, charClass, allowMetaRaces, false, false);
                     } break;
-                default: RaceByAlignment(Alignment, Class, AllowMetaRaces, false, false, ref random); break;
+                default: RaceByAlignment(alignment, charClass, allowMetaRaces, false, false); break;
             }
 
-            this.Male = Male;
+            Male = male;
         }
 
         public Races()
@@ -193,22 +168,22 @@ namespace NPCGen
             Male = true;
         }
 
-        private void RaceByAlignment(Character.ALIGNMENT Alignment, Classes.CLASS Class, bool AllowMetaRaces, bool ForceStandard, bool ForceNonStandard, ref Random random)
+        private void RaceByAlignment(ALIGNMENT alignment, CLASS charClass, Boolean allowMetaRaces, Boolean forceStandard, Boolean forceNonStandard)
         {
-            switch (Alignment)
+            switch (alignment)
             {
-                case Character.ALIGNMENT.GOOD:
-                    switch (Class)
+                case ALIGNMENT.GOOD:
+                    switch (charClass)
                     {
-                        case Classes.CLASS.BARBARIAN:
-                            switch (Dice.Percentile(ref random))
+                        case CLASS.BARBARIAN:
+                            switch (Dice.Percentile())
                             {
                                 case 1:
                                 case 2:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HILL_DWARF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);    
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 3:
                                 case 4:
@@ -240,29 +215,29 @@ namespace NPCGen
                                 case 30:
                                 case 31:
                                 case 32:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.WILD_ELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 33:
                                 case 34:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.WOOD_ELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 35:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HALFELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 36:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.LIGHTFOOT_HALFLING;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 37:
                                 case 38:
@@ -289,10 +264,10 @@ namespace NPCGen
                                 case 59:
                                 case 60:
                                 case 61:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HALFORC;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 62:
                                 case 63:
@@ -331,59 +306,59 @@ namespace NPCGen
                                 case 96:
                                 case 97:
                                 case 98:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HUMAN;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 99:
-                                    if (AllowMetaRaces || ForceNonStandard)
+                                    if (allowMetaRaces || forceNonStandard)
                                     {
                                         MetaRace = METARACE.HALF_CELESTIAL;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
+                                        RaceByAlignment(alignment, charClass, false, false, false);
                                     }
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 100:
-                                    if (AllowMetaRaces || ForceNonStandard)
+                                    if (allowMetaRaces || forceNonStandard)
                                     {
                                         MetaRace = METARACE.HALF_DRAGON;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
+                                        RaceByAlignment(alignment, charClass, false, false, false);
                                     }
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 default: Race = RACE.HUMAN; MetaRace = METARACE.NONE; break;
                             } break;
-                        case Classes.CLASS.BARD:
-                            switch (Dice.Percentile(ref random))
+                        case CLASS.BARD:
+                            switch (Dice.Percentile())
                             {
                                 case 1:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.AASIMAR;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 2:
                                 case 3:
                                 case 4:
                                 case 5:
                                 case 6:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HILL_DWARF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 7:
                                 case 8:
                                 case 9:
                                 case 10:
                                 case 11:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.GRAY_ELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 12:
                                 case 13:
@@ -410,38 +385,38 @@ namespace NPCGen
                                 case 34:
                                 case 35:
                                 case 36:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HIGH_ELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 37:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.WILD_ELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 38:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.WOOD_ELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 39:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.FOREST_GNOME;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 40:
                                 case 41:
                                 case 42:
                                 case 43:
                                 case 44:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.ROCK_GNOME;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 45:
                                 case 46:
@@ -452,34 +427,34 @@ namespace NPCGen
                                 case 51:
                                 case 52:
                                 case 53:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HALFELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 54:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.LIGHTFOOT_HALFLING;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 55:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.DEEP_HALFLING;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 56:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.DEEP_HALFLING;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 57:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.TALLFELLOW_HALFLING;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 58:
                                 case 59:
@@ -521,43 +496,43 @@ namespace NPCGen
                                 case 95:
                                 case 96:
                                 case 97:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HUMAN;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 98:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.SVIRFNEBLIN;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 99:
-                                    if (AllowMetaRaces)
+                                    if (allowMetaRaces)
                                         MetaRace = METARACE.HALF_CELESTIAL;
-                                    RaceByAlignment(Alignment, Class, false, false, false, ref random);
+                                    RaceByAlignment(alignment, charClass, false, false, false);
                                     break;
                                 case 100:
-                                    if (AllowMetaRaces)
+                                    if (allowMetaRaces)
                                         MetaRace = METARACE.HALF_DRAGON;
-                                    RaceByAlignment(Alignment, Class, false, false, false, ref random);
+                                    RaceByAlignment(alignment, charClass, false, false, false);
                                     break;
                                 default: Race = RACE.HUMAN; MetaRace = METARACE.NONE; break;
                             } break;
-                        case Classes.CLASS.CLERIC:
-                            switch (Dice.Percentile(ref random))
+                        case CLASS.CLERIC:
+                            switch (Dice.Percentile())
                             {
                                 case 1:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.AASIMAR;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 2:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.DEEP_DWARF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 3:
                                 case 4:
@@ -579,23 +554,23 @@ namespace NPCGen
                                 case 20:
                                 case 21:
                                 case 22:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HILL_DWARF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 23:
                                 case 24:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.MOUNTAIN_DWARF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 25:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.GRAY_ELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 26:
                                 case 27:
@@ -607,32 +582,32 @@ namespace NPCGen
                                 case 33:
                                 case 34:
                                 case 35:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HIGH_ELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 36:
                                 case 37:
                                 case 38:
                                 case 39:
                                 case 40:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.WILD_ELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 41:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.WOOD_ELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 42:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.FOREST_GNOME;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 43:
                                 case 44:
@@ -643,20 +618,20 @@ namespace NPCGen
                                 case 49:
                                 case 50:
                                 case 51:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.ROCK_GNOME;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 52:
                                 case 53:
                                 case 54:
                                 case 55:
                                 case 56:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HALFELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 57:
                                 case 58:
@@ -668,29 +643,29 @@ namespace NPCGen
                                 case 64:
                                 case 65:
                                 case 66:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.LIGHTFOOT_HALFLING;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 67:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.DEEP_HALFLING;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 68:
                                 case 69:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.TALLFELLOW_HALFLING;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 70:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HALFORC;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 71:
                                 case 72:
@@ -717,55 +692,55 @@ namespace NPCGen
                                 case 93:
                                 case 94:
                                 case 95:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HUMAN;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 96:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.SVIRFNEBLIN;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 97:
                                 case 98:
-                                    if (AllowMetaRaces || ForceNonStandard)
+                                    if (allowMetaRaces || forceNonStandard)
                                     {
                                         MetaRace = METARACE.HALF_CELESTIAL;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
+                                        RaceByAlignment(alignment, charClass, false, false, false);
                                     }
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 99:
-                                    if (AllowMetaRaces || ForceNonStandard)
+                                    if (allowMetaRaces || forceNonStandard)
                                     {
                                         MetaRace = METARACE.HALF_DRAGON;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
+                                        RaceByAlignment(alignment, charClass, false, false, false);
                                     }
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 100:
-                                    if (AllowMetaRaces || ForceNonStandard)
+                                    if (allowMetaRaces || forceNonStandard)
                                     {
                                         MetaRace = METARACE.WEREBEAR;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
+                                        RaceByAlignment(alignment, charClass, false, false, false);
                                     }
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 default: Race = RACE.HUMAN; MetaRace = METARACE.NONE; break;
                             } break;
-                        case Classes.CLASS.DRUID:
-                            switch (Dice.Percentile(ref random))
+                        case CLASS.DRUID:
+                            switch (Dice.Percentile())
                             {
                                 case 1:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.GRAY_ELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 2:
                                 case 3:
@@ -777,10 +752,10 @@ namespace NPCGen
                                 case 9:
                                 case 10:
                                 case 11:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HIGH_ELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 12:
                                 case 13:
@@ -792,10 +767,10 @@ namespace NPCGen
                                 case 19:
                                 case 20:
                                 case 21:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.WILD_ELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 22:
                                 case 23:
@@ -807,26 +782,26 @@ namespace NPCGen
                                 case 29:
                                 case 30:
                                 case 31:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.WOOD_ELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 32:
                                 case 33:
                                 case 34:
                                 case 35:
                                 case 36:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.FOREST_GNOME;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 37:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.ROCK_GNOME;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 38:
                                 case 39:
@@ -837,28 +812,28 @@ namespace NPCGen
                                 case 44:
                                 case 45:
                                 case 46:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HALFELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 47:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.LIGHTFOOT_HALFLING;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 48:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.TALLFELLOW_HALFLING;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 49:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HALFORC;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 50:
                                 case 51:
@@ -910,32 +885,32 @@ namespace NPCGen
                                 case 97:
                                 case 98:
                                 case 99:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HUMAN;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 100:
-                                    if (AllowMetaRaces || ForceNonStandard)
+                                    if (allowMetaRaces || forceNonStandard)
                                     {
                                         MetaRace = METARACE.HALF_CELESTIAL;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
+                                        RaceByAlignment(alignment, charClass, false, false, false);
                                     }
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 default: Race = RACE.HUMAN; MetaRace = METARACE.NONE; break;
                             } break;
-                        case Classes.CLASS.FIGHTER:
-                            switch (Dice.Percentile(ref random))
+                        case CLASS.FIGHTER:
+                            switch (Dice.Percentile())
                             {
                                 case 1:
                                 case 2:
                                 case 3:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.DEEP_DWARF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 4:
                                 case 5:
@@ -967,10 +942,10 @@ namespace NPCGen
                                 case 31:
                                 case 32:
                                 case 33:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HILL_DWARF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 34:
                                 case 35:
@@ -980,61 +955,61 @@ namespace NPCGen
                                 case 39:
                                 case 40:
                                 case 41:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.MOUNTAIN_DWARF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 42:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.GRAY_ELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 43:
                                 case 44:
                                 case 45:
                                 case 46:
                                 case 47:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HIGH_ELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 48:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.ROCK_GNOME;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 49:
                                 case 50:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HALFELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 51:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.LIGHTFOOT_HALFLING;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 52:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.DEEP_HALFLING;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 53:
                                 case 54:
                                 case 55:
                                 case 56:
                                 case 57:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HALFORC;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 58:
                                 case 59:
@@ -1076,55 +1051,55 @@ namespace NPCGen
                                 case 95:
                                 case 96:
                                 case 97:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HUMAN;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 98:
-                                    if (AllowMetaRaces || ForceNonStandard)
+                                    if (allowMetaRaces || forceNonStandard)
                                     {
                                         MetaRace = METARACE.HALF_CELESTIAL;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
+                                        RaceByAlignment(alignment, charClass, false, false, false);
                                     }
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 99:
-                                    if (AllowMetaRaces || ForceNonStandard)
+                                    if (allowMetaRaces || forceNonStandard)
                                     {
                                         MetaRace = METARACE.HALF_DRAGON;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
+                                        RaceByAlignment(alignment, charClass, false, false, false);
                                     }
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 100:
-                                    if (AllowMetaRaces || ForceNonStandard)
+                                    if (allowMetaRaces || forceNonStandard)
                                     {
                                         MetaRace = METARACE.WEREBEAR;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
+                                        RaceByAlignment(alignment, charClass, false, false, false);
                                     }
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 default: Race = RACE.HUMAN; MetaRace = METARACE.NONE; break;
                             } break;
-                        case Classes.CLASS.MONK:
-                            switch (Dice.Percentile(ref random))
+                        case CLASS.MONK:
+                            switch (Dice.Percentile())
                             {
                                 case 1:
                                 case 2:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.AASIMAR;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 3:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HILL_DWARF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 4:
                                 case 5:
@@ -1136,42 +1111,42 @@ namespace NPCGen
                                 case 11:
                                 case 12:
                                 case 13:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HIGH_ELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 14:
                                 case 15:
                                 case 16:
                                 case 17:
                                 case 18:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HALFELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 19:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.LIGHTFOOT_HALFLING;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 20:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.DEEP_HALFLING;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 21:
                                 case 22:
                                 case 23:
                                 case 24:
                                 case 25:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HALFORC;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 26:
                                 case 27:
@@ -1245,42 +1220,42 @@ namespace NPCGen
                                 case 95:
                                 case 96:
                                 case 97:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HUMAN;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 98:
-                                    if (AllowMetaRaces || ForceNonStandard)
+                                    if (allowMetaRaces || forceNonStandard)
                                     {
                                         MetaRace = METARACE.HALF_CELESTIAL;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
+                                        RaceByAlignment(alignment, charClass, false, false, false);
                                     }
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 99:
-                                    if (AllowMetaRaces || ForceNonStandard)
+                                    if (allowMetaRaces || forceNonStandard)
                                     {
                                         MetaRace = METARACE.HALF_DRAGON;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
+                                        RaceByAlignment(alignment, charClass, false, false, false);
                                     }
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 100:
-                                    if (AllowMetaRaces || ForceNonStandard)
+                                    if (allowMetaRaces || forceNonStandard)
                                     {
                                         MetaRace = METARACE.WEREBEAR;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
+                                        RaceByAlignment(alignment, charClass, false, false, false);
                                     }
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 default: Race = RACE.HUMAN; MetaRace = METARACE.NONE; break;
                             } break;
-                        case Classes.CLASS.PALADIN:
-                            switch (Dice.Percentile(ref random))
+                        case CLASS.PALADIN:
+                            switch (Dice.Percentile())
                             {
                                 case 1:
                                 case 2:
@@ -1292,10 +1267,10 @@ namespace NPCGen
                                 case 8:
                                 case 9:
                                 case 10:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.AASIMAR;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 11:
                                 case 12:
@@ -1307,50 +1282,50 @@ namespace NPCGen
                                 case 18:
                                 case 19:
                                 case 20:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HILL_DWARF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 21:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.MOUNTAIN_DWARF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 22:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.ROCK_GNOME;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 23:
                                 case 24:
                                 case 25:
                                 case 26:
                                 case 27:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HALFELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 28:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.LIGHTFOOT_HALFLING;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 29:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.DEEP_HALFLING;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 30:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HALFORC;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 31:
                                 case 32:
@@ -1419,52 +1394,52 @@ namespace NPCGen
                                 case 95:
                                 case 96:
                                 case 97:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HUMAN;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 98:
-                                    if (AllowMetaRaces || ForceNonStandard)
+                                    if (allowMetaRaces || forceNonStandard)
                                     {
                                         MetaRace = METARACE.HALF_CELESTIAL;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
+                                        RaceByAlignment(alignment, charClass, false, false, false);
                                     }
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 99:
-                                    if (AllowMetaRaces || ForceNonStandard)
+                                    if (allowMetaRaces || forceNonStandard)
                                     {
                                         MetaRace = METARACE.HALF_DRAGON;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
+                                        RaceByAlignment(alignment, charClass, false, false, false);
                                     }
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 100:
-                                    if (AllowMetaRaces || ForceNonStandard)
+                                    if (allowMetaRaces || forceNonStandard)
                                     {
                                         MetaRace = METARACE.WEREBEAR;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
+                                        RaceByAlignment(alignment, charClass, false, false, false);
                                     }
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 default: Race = RACE.HUMAN; MetaRace = METARACE.NONE; break;
                             } break;
-                        case Classes.CLASS.RANGER:
-                            switch (Dice.Percentile(ref random))
+                        case CLASS.RANGER:
+                            switch (Dice.Percentile())
                             {
                                 case 1:
                                 case 2:
                                 case 3:
                                 case 4:
                                 case 5:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HILL_DWARF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 6:
                                 case 7:
@@ -1481,16 +1456,16 @@ namespace NPCGen
                                 case 18:
                                 case 19:
                                 case 20:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HIGH_ELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 21:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.WILD_ELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 22:
                                 case 23:
@@ -1507,26 +1482,26 @@ namespace NPCGen
                                 case 34:
                                 case 35:
                                 case 36:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.WOOD_ELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 37:
                                 case 38:
                                 case 39:
                                 case 40:
                                 case 41:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.FOREST_GNOME;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 42:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.ROCK_GNOME;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 43:
                                 case 44:
@@ -1543,32 +1518,32 @@ namespace NPCGen
                                 case 55:
                                 case 56:
                                 case 57:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HALFELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 58:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.LIGHTFOOT_HALFLING;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 59:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.TALLFELLOW_HALFLING;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 60:
                                 case 61:
                                 case 62:
                                 case 63:
                                 case 64:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HALFORC;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 65:
                                 case 66:
@@ -1603,83 +1578,83 @@ namespace NPCGen
                                 case 95:
                                 case 96:
                                 case 97:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HUMAN;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 98:
-                                    if (AllowMetaRaces || ForceNonStandard)
+                                    if (allowMetaRaces || forceNonStandard)
                                     {
                                         MetaRace = METARACE.HALF_CELESTIAL;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
+                                        RaceByAlignment(alignment, charClass, false, false, false);
                                     }
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 99:
-                                    if (AllowMetaRaces || ForceNonStandard)
+                                    if (allowMetaRaces || forceNonStandard)
                                     {
                                         MetaRace = METARACE.HALF_DRAGON;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
+                                        RaceByAlignment(alignment, charClass, false, false, false);
                                     }
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 100:
-                                    if (AllowMetaRaces || ForceNonStandard)
+                                    if (allowMetaRaces || forceNonStandard)
                                     {
                                         MetaRace = METARACE.WEREBEAR;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
+                                        RaceByAlignment(alignment, charClass, false, false, false);
                                     }
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 default: Race = RACE.HUMAN; MetaRace = METARACE.NONE; break;
                             } break;
-                        case Classes.CLASS.SORCERER:
-                            switch (Dice.Percentile(ref random))
+                        case CLASS.SORCERER:
+                            switch (Dice.Percentile())
                             {
                                 case 1:
                                 case 2:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.AASIMAR;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 3:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.DEEP_DWARF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 4:
                                 case 5:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HILL_DWARF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 6:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.MOUNTAIN_DWARF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 7:
                                 case 8:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.GRAY_ELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 9:
                                 case 10:
                                 case 11:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HIGH_ELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 12:
                                 case 13:
@@ -1706,39 +1681,39 @@ namespace NPCGen
                                 case 34:
                                 case 35:
                                 case 36:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.WILD_ELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 37:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.WOOD_ELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 38:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.FOREST_GNOME;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 39:
                                 case 40:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.ROCK_GNOME;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 41:
                                 case 42:
                                 case 43:
                                 case 44:
                                 case 45:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HALFELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 46:
                                 case 47:
@@ -1749,29 +1724,29 @@ namespace NPCGen
                                 case 52:
                                 case 53:
                                 case 54:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.LIGHTFOOT_HALFLING;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 55:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.DEEP_HALFLING;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 56:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.TALLFELLOW_HALFLING;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 57:
                                 case 58:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HALFORC;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 59:
                                 case 60:
@@ -1810,65 +1785,65 @@ namespace NPCGen
                                 case 93:
                                 case 94:
                                 case 95:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HUMAN;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 96:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.SVIRFNEBLIN;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 97:
-                                    if (AllowMetaRaces || ForceNonStandard)
+                                    if (allowMetaRaces || forceNonStandard)
                                     {
                                         MetaRace = METARACE.HALF_CELESTIAL;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
+                                        RaceByAlignment(alignment, charClass, false, false, false);
                                     }
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 98:
                                 case 99:
-                                    if (AllowMetaRaces || ForceNonStandard)
+                                    if (allowMetaRaces || forceNonStandard)
                                     {
                                         MetaRace = METARACE.HALF_DRAGON;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
+                                        RaceByAlignment(alignment, charClass, false, false, false);
                                     }
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 100:
-                                    if (AllowMetaRaces || ForceNonStandard)
+                                    if (allowMetaRaces || forceNonStandard)
                                     {
                                         MetaRace = METARACE.WEREBEAR;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
+                                        RaceByAlignment(alignment, charClass, false, false, false);
                                     }
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 default: Race = RACE.HUMAN; MetaRace = METARACE.NONE; break;
                             } break;
-                        case Classes.CLASS.THIEF:
-                            switch (Dice.Percentile(ref random))
+                        case CLASS.THIEF:
+                            switch (Dice.Percentile())
                             {
                                 case 1:
                                 case 2:
                                 case 3:
                                 case 4:
                                 case 5:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HILL_DWARF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 6:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.MOUNTAIN_DWARF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 7:
                                 case 8:
@@ -1883,26 +1858,26 @@ namespace NPCGen
                                 case 17:
                                 case 18:
                                 case 19:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HIGH_ELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 20:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.FOREST_GNOME;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 21:
                                 case 22:
                                 case 23:
                                 case 24:
                                 case 25:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.ROCK_GNOME;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 26:
                                 case 27:
@@ -1914,10 +1889,10 @@ namespace NPCGen
                                 case 33:
                                 case 34:
                                 case 35:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HALFELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 36:
                                 case 37:
@@ -1944,10 +1919,10 @@ namespace NPCGen
                                 case 58:
                                 case 59:
                                 case 60:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.LIGHTFOOT_HALFLING;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 61:
                                 case 62:
@@ -1955,10 +1930,10 @@ namespace NPCGen
                                 case 64:
                                 case 65:
                                 case 66:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.DEEP_HALFLING;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 67:
                                 case 68:
@@ -1966,20 +1941,20 @@ namespace NPCGen
                                 case 70:
                                 case 71:
                                 case 72:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.TALLFELLOW_HALFLING;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 73:
                                 case 74:
                                 case 75:
                                 case 76:
                                 case 77:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HALFORC;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 78:
                                 case 79:
@@ -2000,70 +1975,70 @@ namespace NPCGen
                                 case 94:
                                 case 95:
                                 case 96:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HUMAN;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 97:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.SVIRFNEBLIN;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 98:
-                                    if (AllowMetaRaces || ForceNonStandard)
+                                    if (allowMetaRaces || forceNonStandard)
                                     {
                                         MetaRace = METARACE.HALF_CELESTIAL;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
+                                        RaceByAlignment(alignment, charClass, false, false, false);
                                     }
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 99:
-                                    if (AllowMetaRaces || ForceNonStandard)
+                                    if (allowMetaRaces || forceNonStandard)
                                     {
                                         MetaRace = METARACE.HALF_DRAGON;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
+                                        RaceByAlignment(alignment, charClass, false, false, false);
                                     }
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 100:
-                                    if (AllowMetaRaces || ForceNonStandard)
+                                    if (allowMetaRaces || forceNonStandard)
                                     {
                                         MetaRace = METARACE.WEREBEAR;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
+                                        RaceByAlignment(alignment, charClass, false, false, false);
                                     }
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 default: Race = RACE.HUMAN; MetaRace = METARACE.NONE; break;
                             } break;
-                        case Classes.CLASS.WIZARD:
-                            switch (Dice.Percentile(ref random))
+                        case CLASS.WIZARD:
+                            switch (Dice.Percentile())
                             {
                                 case 1:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.AASIMAR;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 2:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HILL_DWARF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 3:
                                 case 4:
                                 case 5:
                                 case 6:
                                 case 7:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.GRAY_ELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 8:
                                 case 9:
@@ -2099,32 +2074,32 @@ namespace NPCGen
                                 case 39:
                                 case 40:
                                 case 41:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HIGH_ELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 42:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.WOOD_ELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 43:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.FOREST_GNOME;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 44:
                                 case 45:
                                 case 46:
                                 case 47:
                                 case 48:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.ROCK_GNOME;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 49:
                                 case 50:
@@ -2136,40 +2111,40 @@ namespace NPCGen
                                 case 56:
                                 case 57:
                                 case 58:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HALFELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 59:
                                 case 60:
                                 case 61:
                                 case 62:
                                 case 63:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.LIGHTFOOT_HALFLING;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 64:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.DEEP_HALFLING;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 65:
                                 case 66:
                                 case 67:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.TALLFELLOW_HALFLING;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 68:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HALFORC;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 69:
                                 case 70:
@@ -2199,65 +2174,65 @@ namespace NPCGen
                                 case 94:
                                 case 95:
                                 case 96:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HUMAN;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 97:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.SVIRFNEBLIN;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 98:
-                                    if (AllowMetaRaces || ForceNonStandard)
+                                    if (allowMetaRaces || forceNonStandard)
                                     {
                                         MetaRace = METARACE.HALF_CELESTIAL;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
+                                        RaceByAlignment(alignment, charClass, false, false, false);
                                     }
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 99:
-                                    if (AllowMetaRaces || ForceNonStandard)
+                                    if (allowMetaRaces || forceNonStandard)
                                     {
                                         MetaRace = METARACE.HALF_DRAGON;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
+                                        RaceByAlignment(alignment, charClass, false, false, false);
                                     }
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 100:
-                                    if (AllowMetaRaces || ForceNonStandard)
+                                    if (allowMetaRaces || forceNonStandard)
                                     {
                                         MetaRace = METARACE.WEREBEAR;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
+                                        RaceByAlignment(alignment, charClass, false, false, false);
                                     }
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 default: Race = RACE.HUMAN; MetaRace = METARACE.NONE; break;
                             } break;
                         default: Race = RACE.HUMAN; MetaRace = METARACE.NONE; break;
                     } break;
-                case Character.ALIGNMENT.NEUTRAL:
-                    switch (Class)
+                case ALIGNMENT.NEUTRAL:
+                    switch (charClass)
                     {
-                        case Classes.CLASS.BARBARIAN:
-                            switch (Dice.Percentile(ref random))
+                        case CLASS.BARBARIAN:
+                            switch (Dice.Percentile())
                             {
                                 case 1:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.DEEP_DWARF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 2:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HILL_DWARF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 3:
                                 case 4:
@@ -2270,36 +2245,36 @@ namespace NPCGen
                                 case 11:
                                 case 12:
                                 case 13:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.WILD_ELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 14:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.WOOD_ELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 15:
                                 case 16:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HALFELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 17:
                                 case 18:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.LIGHTFOOT_HALFLING;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 19:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.DEEP_HALFLING;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 20:
                                 case 21:
@@ -2340,10 +2315,10 @@ namespace NPCGen
                                 case 56:
                                 case 57:
                                 case 58:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HALFORC;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 59:
                                 case 60:
@@ -2374,10 +2349,10 @@ namespace NPCGen
                                 case 85:
                                 case 86:
                                 case 87:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HUMAN;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 88:
                                 case 89:
@@ -2390,53 +2365,53 @@ namespace NPCGen
                                 case 96:
                                 case 97:
                                 case 98:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.LIZARDFOLK;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 99:
-                                    if (AllowMetaRaces || ForceNonStandard)
+                                    if (allowMetaRaces || forceNonStandard)
                                     {
                                         MetaRace = METARACE.WEREBOAR;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
+                                        RaceByAlignment(alignment, charClass, false, false, false);
                                     }
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 100:
-                                    if (AllowMetaRaces || ForceNonStandard)
+                                    if (allowMetaRaces || forceNonStandard)
                                     {
                                         MetaRace = METARACE.WERETIGER;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
+                                        RaceByAlignment(alignment, charClass, false, false, false);
                                     }
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 default: Race = RACE.HUMAN; MetaRace = METARACE.NONE; break;
                             } break;
-                        case Classes.CLASS.BARD:
-                            switch (Dice.Percentile(ref random))
+                        case CLASS.BARD:
+                            switch (Dice.Percentile())
                             {
                                 case 1:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.DEEP_DWARF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 2:
                                 case 3:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HILL_DWARF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 4:
                                 case 5:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.GRAY_ELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 6:
                                 case 7:
@@ -2448,33 +2423,33 @@ namespace NPCGen
                                 case 13:
                                 case 14:
                                 case 15:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HIGH_ELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 16:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.WILD_ELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 17:
                                 case 18:
                                 case 19:
                                 case 20:
                                 case 21:
-                                    if (!ForceStandard)
-                                        Race = RACE.WOOD_ELF; 
+                                    if (!forceStandard)
+                                        Race = RACE.WOOD_ELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 22:
                                 case 23:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.ROCK_GNOME; 
+                                    if (!forceNonStandard)
+                                        Race = RACE.ROCK_GNOME;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 24:
                                 case 25:
@@ -2486,1620 +2461,1620 @@ namespace NPCGen
                                 case 31:
                                 case 32:
                                 case 33:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HALFELF; 
+                                    if (!forceNonStandard)
+                                        Race = RACE.HALFELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 34:
                                 case 35:
                                 case 36:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.LIGHTFOOT_HALFLING; 
+                                    if (!forceNonStandard)
+                                        Race = RACE.LIGHTFOOT_HALFLING;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 37:
-                                    if (!ForceStandard)
-                                        Race = RACE.DEEP_HALFLING; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 38:
-                                    if (!ForceStandard)
-                                        Race = RACE.TALLFELLOW_HALFLING; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 39:
-                                case 40:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HALFORC; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 41:
-                                case 42:
-                                case 43:
-                                case 44:
-                                case 45:
-                                case 46:
-                                case 47:
-                                case 48:
-                                case 49:
-                                case 50:
-                                case 51:
-                                case 52:
-                                case 53:
-                                case 54:
-                                case 55:
-                                case 56:
-                                case 57:
-                                case 58:
-                                case 59:
-                                case 60:
-                                case 61:
-                                case 62:
-                                case 63:
-                                case 64:
-                                case 65:
-                                case 66:
-                                case 67:
-                                case 68:
-                                case 69:
-                                case 70:
-                                case 71:
-                                case 72:
-                                case 73:
-                                case 74:
-                                case 75:
-                                case 76:
-                                case 77:
-                                case 78:
-                                case 79:
-                                case 80:
-                                case 81:
-                                case 82:
-                                case 83:
-                                case 84:
-                                case 85:
-                                case 86:
-                                case 87:
-                                case 88:
-                                case 89:
-                                case 90:
-                                case 91:
-                                case 92:
-                                case 93:
-                                case 94:
-                                case 95:
-                                case 96:
-                                case 97:
-                                case 98:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HUMAN;
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 99:
-                                    if (AllowMetaRaces || ForceNonStandard)
-                                    {
-                                        MetaRace = METARACE.WEREBOAR;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
-                                    }
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 100:
-                                    if (AllowMetaRaces || ForceNonStandard)
-                                    {
-                                        MetaRace = METARACE.WERETIGER;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
-                                    }
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                default: Race = RACE.HUMAN; MetaRace = METARACE.NONE; break;
-                            } break;
-                        case Classes.CLASS.CLERIC:
-                            switch (Dice.Percentile(ref random))
-                            {
-                                case 1:
-                                case 2:
-                                case 3:
-                                case 4:
-                                case 5:
-                                case 6:
-                                case 7:
-                                case 8:
-                                case 9:
-                                case 10:
-                                case 11:
-                                case 12:
-                                case 13:
-                                case 14:
-                                case 15:
-                                    if (!ForceStandard)
-                                        Race = RACE.DEEP_DWARF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 16:
-                                case 17:
-                                case 18:
-                                case 19:
-                                case 20:
-                                case 21:
-                                case 22:
-                                case 23:
-                                case 24:
-                                case 25:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HILL_DWARF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 26:
-                                    if (!ForceStandard)
-                                        Race = RACE.MOUNTAIN_DWARF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 27:
-                                    if (!ForceStandard)
-                                        Race = RACE.HIGH_ELF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 28:
-                                    if (!ForceStandard)
-                                        Race = RACE.WILD_ELF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 29:
-                                case 30:
-                                case 31:
-                                case 32:
-                                case 33:
-                                case 34:
-                                case 35:
-                                case 36:
-                                case 37:
-                                case 38:
-                                    if (!ForceStandard)
-                                        Race = RACE.WOOD_ELF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 39:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.ROCK_GNOME; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 40:
-                                case 41:
-                                case 42:
-                                case 43:
-                                case 44:
-                                case 45:
-                                case 46:
-                                case 47:
-                                case 48:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HALFELF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 49:
-                                case 50:
-                                case 51:
-                                case 52:
-                                case 53:
-                                case 54:
-                                case 55:
-                                case 56:
-                                case 57:
-                                case 58:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.LIGHTFOOT_HALFLING; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 59:
-                                    if (!ForceStandard)
-                                        Race = RACE.DEEP_HALFLING; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 60:
-                                    if (!ForceStandard)
-                                        Race = RACE.TALLFELLOW_HALFLING; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 61:
-                                case 62:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HALFORC; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 63:
-                                case 64:
-                                case 65:
-                                case 66:
-                                case 67:
-                                case 68:
-                                case 69:
-                                case 70:
-                                case 71:
-                                case 72:
-                                case 73:
-                                case 74:
-                                case 75:
-                                case 76:
-                                case 77:
-                                case 78:
-                                case 79:
-                                case 80:
-                                case 81:
-                                case 82:
-                                case 83:
-                                case 84:
-                                case 85:
-                                case 86:
-                                case 87:
-                                case 88:
-                                case 89:
-                                case 90:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HUMAN; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 91:
-                                case 92:
-                                case 93:
-                                case 94:
-                                case 95:
-                                case 96:
-                                case 97:
-                                    if (!ForceStandard)
-                                        Race = RACE.LIZARDFOLK; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 98:
-                                    if (!ForceStandard)
-                                        Race = RACE.DOPPELGANGER; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 99:
-                                    if (AllowMetaRaces || ForceNonStandard)
-                                    {
-                                        MetaRace = METARACE.WEREBOAR;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
-                                    }
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 100:
-                                    if (AllowMetaRaces || ForceNonStandard)
-                                    {
-                                        MetaRace = METARACE.WERETIGER;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
-                                    }
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                default: Race = RACE.HUMAN; MetaRace = METARACE.NONE; break;
-                            } break;
-                        case Classes.CLASS.DRUID:
-                            switch (Dice.Percentile(ref random))
-                            {
-                                case 1:
-                                    if (!ForceStandard)
-                                        Race = RACE.GRAY_ELF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 2:
-                                case 3:
-                                case 4:
-                                case 5:
-                                case 6:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HIGH_ELF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 7:
-                                case 8:
-                                case 9:
-                                case 10:
-                                case 11:
-                                    if (!ForceStandard)
-                                        Race = RACE.WILD_ELF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 12:
-                                case 13:
-                                case 14:
-                                case 15:
-                                case 16:
-                                case 17:
-                                case 18:
-                                case 19:
-                                case 20:
-                                case 21:
-                                case 22:
-                                case 23:
-                                case 24:
-                                case 25:
-                                case 26:
-                                case 27:
-                                case 28:
-                                case 29:
-                                case 30:
-                                case 31:
-                                    if (!ForceStandard)
-                                        Race = RACE.WOOD_ELF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 32:
-                                    if (!ForceStandard)
-                                        Race = RACE.FOREST_GNOME; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 33:
-                                case 34:
-                                case 35:
-                                case 36:
-                                case 37:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HALFELF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 38:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.LIGHTFOOT_HALFLING; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 39:
-                                    if (!ForceStandard)
-                                        Race = RACE.TALLFELLOW_HALFLING; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 40:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HALFORC; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 41:
-                                case 42:
-                                case 43:
-                                case 44:
-                                case 45:
-                                case 46:
-                                case 47:
-                                case 48:
-                                case 49:
-                                case 50:
-                                case 51:
-                                case 52:
-                                case 53:
-                                case 54:
-                                case 55:
-                                case 56:
-                                case 57:
-                                case 58:
-                                case 59:
-                                case 60:
-                                case 61:
-                                case 62:
-                                case 63:
-                                case 64:
-                                case 65:
-                                case 66:
-                                case 67:
-                                case 68:
-                                case 69:
-                                case 70:
-                                case 71:
-                                case 72:
-                                case 73:
-                                case 74:
-                                case 75:
-                                case 76:
-                                case 77:
-                                case 78:
-                                case 79:
-                                case 80:
-                                case 81:
-                                case 82:
-                                case 83:
-                                case 84:
-                                case 85:
-                                case 86:
-                                case 87:
-                                case 88:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HUMAN; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 89:
-                                case 90:
-                                case 91:
-                                case 92:
-                                case 93:
-                                case 94:
-                                case 95:
-                                case 96:
-                                case 97:
-                                case 98:
-                                    if (!ForceStandard)
-                                        Race = RACE.LIZARDFOLK; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 99:
-                                    if (AllowMetaRaces || ForceNonStandard)
-                                    {
-                                        MetaRace = METARACE.WEREBOAR;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
-                                    }
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 100:
-                                    if (AllowMetaRaces || ForceNonStandard)
-                                    {
-                                        MetaRace = METARACE.WERETIGER;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
-                                    }
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                default: Race = RACE.HUMAN; MetaRace = METARACE.NONE; break;
-                            } break;
-                        case Classes.CLASS.FIGHTER:
-                            switch (Dice.Percentile(ref random))
-                            {
-                                case 1:
-                                case 2:
-                                case 3:
-                                case 4:
-                                case 5:
-                                case 6:
-                                case 7:
-                                case 8:
-                                case 9:
-                                case 10:
-                                    if (!ForceStandard)
-                                        Race = RACE.DEEP_DWARF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 11:
-                                case 12:
-                                case 13:
-                                case 14:
-                                case 15:
-                                case 16:
-                                case 17:
-                                case 18:
-                                case 19:
-                                case 20:
-                                case 21:
-                                case 22:
-                                case 23:
-                                case 24:
-                                case 25:
-                                case 26:
-                                case 27:
-                                case 28:
-                                case 29:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HILL_DWARF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 30:
-                                case 31:
-                                case 32:
-                                case 33:
-                                case 34:
-                                    if (!ForceStandard)
-                                        Race = RACE.MOUNTAIN_DWARF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 35:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HIGH_ELF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 36:
-                                case 37:
-                                case 38:
-                                case 39:
-                                case 40:
-                                case 41:
-                                    if (!ForceStandard)
-                                        Race = RACE.WOOD_ELF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 42:
-                                case 43:
-                                case 44:
-                                case 45:
-                                case 46:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HALFELF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 47:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.LIGHTFOOT_HALFLING; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 48:
-                                    if (!ForceStandard)
-                                        Race = RACE.DEEP_HALFLING; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 49:
-                                case 50:
-                                case 51:
-                                case 52:
-                                case 53:
-                                case 54:
-                                case 55:
-                                case 56:
-                                case 57:
-                                case 58:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HALFORC; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 59:
-                                case 60:
-                                case 61:
-                                case 62:
-                                case 63:
-                                case 64:
-                                case 65:
-                                case 66:
-                                case 67:
-                                case 68:
-                                case 69:
-                                case 70:
-                                case 71:
-                                case 72:
-                                case 73:
-                                case 74:
-                                case 75:
-                                case 76:
-                                case 77:
-                                case 78:
-                                case 79:
-                                case 80:
-                                case 81:
-                                case 82:
-                                case 83:
-                                case 84:
-                                case 85:
-                                case 86:
-                                case 87:
-                                case 88:
-                                case 89:
-                                case 90:
-                                case 91:
-                                case 92:
-                                case 93:
-                                case 94:
-                                case 95:
-                                case 96:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HUMAN; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 97:
-                                    if (!ForceStandard)
-                                        Race = RACE.LIZARDFOLK; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 98:
-                                    if (!ForceStandard)
-                                        Race = RACE.DOPPELGANGER; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 99:
-                                    if (AllowMetaRaces || ForceNonStandard)
-                                    {
-                                        MetaRace = METARACE.WEREBOAR;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
-                                    }
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 100:
-                                    if (AllowMetaRaces || ForceNonStandard)
-                                    {
-                                        MetaRace = METARACE.WERETIGER;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
-                                    }
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                default: Race = RACE.HUMAN; MetaRace = METARACE.NONE; break;
-                            } break;
-                        case Classes.CLASS.MONK:
-                            switch (Dice.Percentile(ref random))
-                            {
-                                case 1:
-                                case 2:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HIGH_ELF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 3:
-                                    if (!ForceStandard)
-                                        Race = RACE.WOOD_ELF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 4:
-                                case 5:
-                                case 6:
-                                case 7:
-                                case 8:
-                                case 9:
-                                case 10:
-                                case 11:
-                                case 12:
-                                case 13:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HALFELF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 14:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.LIGHTFOOT_HALFLING; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 15:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.DEEP_HALFLING;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 16:
-                                case 17:
-                                case 18:
-                                case 19:
-                                case 20:
-                                case 21:
-                                case 22:
-                                case 23:
-                                case 24:
-                                case 25:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HALFORC; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 26:
-                                case 27:
-                                case 28:
-                                case 29:
-                                case 30:
-                                case 31:
-                                case 32:
-                                case 33:
-                                case 34:
-                                case 35:
-                                case 36:
-                                case 37:
-                                case 38:
-                                case 39:
-                                case 40:
-                                case 41:
-                                case 42:
-                                case 43:
-                                case 44:
-                                case 45:
-                                case 46:
-                                case 47:
-                                case 48:
-                                case 49:
-                                case 50:
-                                case 51:
-                                case 52:
-                                case 53:
-                                case 54:
-                                case 55:
-                                case 56:
-                                case 57:
-                                case 58:
-                                case 59:
-                                case 60:
-                                case 61:
-                                case 62:
-                                case 63:
-                                case 64:
-                                case 65:
-                                case 66:
-                                case 67:
-                                case 68:
-                                case 69:
-                                case 70:
-                                case 71:
-                                case 72:
-                                case 73:
-                                case 74:
-                                case 75:
-                                case 76:
-                                case 77:
-                                case 78:
-                                case 79:
-                                case 80:
-                                case 81:
-                                case 82:
-                                case 83:
-                                case 84:
-                                case 85:
-                                case 86:
-                                case 87:
-                                case 88:
-                                case 89:
-                                case 90:
-                                case 91:
-                                case 92:
-                                case 93:
-                                case 94:
-                                case 95:
-                                case 96:
-                                case 97:
-                                case 98:
-                                case 99:
-                                case 100:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HUMAN; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                default: Race = RACE.HUMAN; MetaRace = METARACE.NONE; break;
-                            } break;
-                        case Classes.CLASS.PALADIN:
-                            switch (Dice.Percentile(ref random))
-                            {
-                                case 1:
-                                case 2:
-                                case 3:
-                                case 4:
-                                case 5:
-                                case 6:
-                                case 7:
-                                case 8:
-                                case 9:
-                                case 10:
-                                case 11:
-                                case 12:
-                                case 13:
-                                case 14:
-                                case 15:
-                                case 16:
-                                case 17:
-                                case 18:
-                                case 19:
-                                case 20:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HILL_DWARF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 21:
-                                    if (!ForceStandard)
-                                        Race = RACE.MOUNTAIN_DWARF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 22:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.ROCK_GNOME; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 23:
-                                case 24:
-                                case 25:
-                                case 26:
-                                case 27:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HALFELF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 28:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.LIGHTFOOT_HALFLING; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 29:
-                                    if (!ForceStandard)
-                                        Race = RACE.DEEP_HALFLING; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 30:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HALFORC; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 31:
-                                case 32:
-                                case 33:
-                                case 34:
-                                case 35:
-                                case 36:
-                                case 37:
-                                case 38:
-                                case 39:
-                                case 40:
-                                case 41:
-                                case 42:
-                                case 43:
-                                case 44:
-                                case 45:
-                                case 46:
-                                case 47:
-                                case 48:
-                                case 49:
-                                case 50:
-                                case 51:
-                                case 52:
-                                case 53:
-                                case 54:
-                                case 55:
-                                case 56:
-                                case 57:
-                                case 58:
-                                case 59:
-                                case 60:
-                                case 61:
-                                case 62:
-                                case 63:
-                                case 64:
-                                case 65:
-                                case 66:
-                                case 67:
-                                case 68:
-                                case 69:
-                                case 70:
-                                case 71:
-                                case 72:
-                                case 73:
-                                case 74:
-                                case 75:
-                                case 76:
-                                case 77:
-                                case 78:
-                                case 79:
-                                case 80:
-                                case 81:
-                                case 82:
-                                case 83:
-                                case 84:
-                                case 85:
-                                case 86:
-                                case 87:
-                                case 88:
-                                case 89:
-                                case 90:
-                                case 91:
-                                case 92:
-                                case 93:
-                                case 94:
-                                case 95:
-                                case 96:
-                                case 97:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HUMAN; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 98: 
-                                    if (!ForceStandard)
-                                        Race = RACE.DOPPELGANGER; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 99:
-                                    if (AllowMetaRaces || ForceNonStandard)
-                                    {
-                                        MetaRace = METARACE.WEREBOAR;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
-                                    }
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 100:
-                                    if (AllowMetaRaces || ForceNonStandard)
-                                    {
-                                        MetaRace = METARACE.WERETIGER;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
-                                    }
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                default: Race = RACE.HUMAN; MetaRace = METARACE.NONE; break;
-                            } break;
-                        case Classes.CLASS.RANGER:
-                            switch (Dice.Percentile(ref random))
-                            {
-                                case 1:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HILL_DWARF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 2:
-                                case 3:
-                                case 4:
-                                case 5:
-                                case 6:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HIGH_ELF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 7:
-                                    if (!ForceStandard)
-                                        Race = RACE.WILD_ELF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 8:
-                                case 9:
-                                case 10:
-                                case 11:
-                                case 12:
-                                case 13:
-                                case 14:
-                                case 15:
-                                case 16:
-                                case 17:
-                                case 18:
-                                case 19:
-                                case 20:
-                                case 21:
-                                case 22:
-                                case 23:
-                                case 24:
-                                case 25:
-                                case 26:
-                                case 27:
-                                case 28:
-                                case 29:
-                                case 30:
-                                case 31:
-                                case 32:
-                                case 33:
-                                case 34:
-                                case 35:
-                                case 36:
-                                    if (!ForceStandard)
-                                        Race = RACE.WOOD_ELF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 37:
-                                    if (!ForceStandard)
-                                        Race = RACE.FOREST_GNOME; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 38:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.ROCK_GNOME; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 39:
-                                case 40:
-                                case 41:
-                                case 42:
-                                case 43:
-                                case 44:
-                                case 45:
-                                case 46:
-                                case 47:
-                                case 48:
-                                case 49:
-                                case 50:
-                                case 51:
-                                case 52:
-                                case 53:
-                                case 54:
-                                case 55:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HALFELF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 56:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.LIGHTFOOT_HALFLING; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 57:
-                                    if (!ForceStandard)
-                                        Race = RACE.TALLFELLOW_HALFLING; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 58:
-                                case 59:
-                                case 60:
-                                case 61:
-                                case 62:
-                                case 63:
-                                case 64:
-                                case 65:
-                                case 66:
-                                case 67:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HALFORC; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 68:
-                                case 69:
-                                case 70:
-                                case 71:
-                                case 72:
-                                case 73:
-                                case 74:
-                                case 75:
-                                case 76:
-                                case 77:
-                                case 78:
-                                case 79:
-                                case 80:
-                                case 81:
-                                case 82:
-                                case 83:
-                                case 84:
-                                case 85:
-                                case 86:
-                                case 87:
-                                case 88:
-                                case 89:
-                                case 90:
-                                case 91:
-                                case 92:
-                                case 93:
-                                case 94:
-                                case 95:
-                                case 96:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HUMAN; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 97:
-                                case 98:
-                                    if (!ForceStandard)
-                                        Race = RACE.LIZARDFOLK; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 99:
-                                    if (AllowMetaRaces || ForceNonStandard)
-                                    {
-                                        MetaRace = METARACE.WEREBOAR;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
-                                    }
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 100:
-                                    if (AllowMetaRaces || ForceNonStandard)
-                                    {
-                                        MetaRace = METARACE.WERETIGER;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
-                                    }
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                default: Race = RACE.HUMAN; MetaRace = METARACE.NONE; break;
-                            } break;
-                        case Classes.CLASS.SORCERER:
-                            switch (Dice.Percentile(ref random))
-                            {
-                                case 1:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HILL_DWARF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 2:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HIGH_ELF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 3:
-                                case 4:
-                                case 5:
-                                case 6:
-                                case 7:
-                                case 8:
-                                case 9:
-                                case 10:
-                                case 11:
-                                case 12:
-                                    if (!ForceStandard)
-                                        Race = RACE.WILD_ELF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 13:
-                                case 14:
-                                case 15:
-                                    if (!ForceStandard)
-                                        Race = RACE.WOOD_ELF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 16:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.ROCK_GNOME; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 17:
-                                case 18:
-                                case 19:
-                                case 20:
-                                case 21:
-                                case 22:
-                                case 23:
-                                case 24:
-                                case 25:
-                                case 26:
-                                case 27:
-                                case 28:
-                                case 29:
-                                case 30:
-                                case 31:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HALFELF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 32:
-                                case 33:
-                                case 34:
-                                case 35:
-                                case 36:
-                                case 37:
-                                case 38:
-                                case 39:
-                                case 40:
-                                case 41:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.LIGHTFOOT_HALFLING; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 42:
-                                    if (!ForceStandard)
-                                        Race = RACE.DEEP_HALFLING; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 43:
-                                    if (!ForceStandard)
-                                        Race = RACE.TALLFELLOW_HALFLING; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 44:
-                                case 45:
-                                case 46:
-                                case 47:
-                                case 48:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HALFORC; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 49:
-                                case 50:
-                                case 51:
-                                case 52:
-                                case 53:
-                                case 54:
-                                case 55:
-                                case 56:
-                                case 57:
-                                case 58:
-                                case 59:
-                                case 60:
-                                case 61:
-                                case 62:
-                                case 63:
-                                case 64:
-                                case 65:
-                                case 66:
-                                case 67:
-                                case 68:
-                                case 69:
-                                case 70:
-                                case 71:
-                                case 72:
-                                case 73:
-                                case 74:
-                                case 75:
-                                case 76:
-                                case 77:
-                                case 78:
-                                case 79:
-                                case 80:
-                                case 81:
-                                case 82:
-                                case 83:
-                                case 84:
-                                case 85:
-                                case 86:
-                                case 87:
-                                case 88:
-                                case 89:
-                                case 90:
-                                case 91:
-                                case 92:
-                                case 93:
-                                case 94:
-                                case 95:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HUMAN; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 96:
-                                case 97:
-                                    if (!ForceStandard)
-                                        Race = RACE.LIZARDFOLK; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 98:
-                                    if (!ForceStandard)
-                                        Race = RACE.DOPPELGANGER; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 99:
-                                    if (AllowMetaRaces || ForceNonStandard)
-                                    {
-                                        MetaRace = METARACE.WEREBOAR;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
-                                    }
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 100:
-                                    if (AllowMetaRaces || ForceNonStandard)
-                                    {
-                                        MetaRace = METARACE.WERETIGER;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
-                                    }
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                default: Race = RACE.HUMAN; MetaRace = METARACE.NONE; break;
-                            } break;
-                        case Classes.CLASS.THIEF:
-                            switch (Dice.Percentile(ref random))
-                            {
-                                case 1:
-                                    if (!ForceStandard)
-                                        Race = RACE.DEEP_DWARF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 2:
-                                case 3:
-                                case 4:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HILL_DWARF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 5:
-                                case 6:
-                                case 7:
-                                case 8:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HIGH_ELF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 9:
-                                    if (!ForceStandard)
-                                        Race = RACE.WOOD_ELF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 10:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.ROCK_GNOME; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 11:
-                                case 12:
-                                case 13:
-                                case 14:
-                                case 15:
-                                case 16:
-                                case 17:
-                                case 18:
-                                case 19:
-                                case 20:
-                                case 21:
-                                case 22:
-                                case 23:
-                                case 24:
-                                case 25:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HALFELF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 26:
-                                case 27:
-                                case 28:
-                                case 29:
-                                case 30:
-                                case 31:
-                                case 32:
-                                case 33:
-                                case 34:
-                                case 35:
-                                case 36:
-                                case 37:
-                                case 38:
-                                case 39:
-                                case 40:
-                                case 41:
-                                case 42:
-                                case 43:
-                                case 44:
-                                case 45:
-                                case 46:
-                                case 47:
-                                case 48:
-                                case 49:
-                                case 50:
-                                case 51:
-                                case 52:
-                                case 53:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.LIGHTFOOT_HALFLING; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 54:
-                                case 55:
-                                case 56:
-                                case 57:
-                                case 58:
-                                    if (!ForceStandard)
-                                        Race = RACE.DEEP_HALFLING; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 59:
-                                case 60:
-                                case 61:
-                                case 62:
-                                case 63:
-                                    if (!ForceStandard)
-                                        Race = RACE.TALLFELLOW_HALFLING; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 64:
-                                case 65:
-                                case 66:
-                                case 67:
-                                case 68:
-                                case 69:
-                                case 70:
-                                case 71:
-                                case 72:
-                                case 73:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HALFORC; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 74:
-                                case 75:
-                                case 76:
-                                case 77:
-                                case 78:
-                                case 79:
-                                case 80:
-                                case 81:
-                                case 82:
-                                case 83:
-                                case 84:
-                                case 85:
-                                case 86:
-                                case 87:
-                                case 88:
-                                case 89:
-                                case 90:
-                                case 91:
-                                case 92:
-                                case 93:
-                                case 94:
-                                case 95:
-                                case 96:
-                                case 97:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HUMAN; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 98:
-                                    if (!ForceStandard)
-                                        Race = RACE.DOPPELGANGER; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 99:
-                                    if (AllowMetaRaces || ForceNonStandard)
-                                    {
-                                        MetaRace = METARACE.WEREBOAR;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
-                                    }
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 100:
-                                    if (AllowMetaRaces || ForceNonStandard)
-                                    {
-                                        MetaRace = METARACE.WERETIGER;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
-                                    }
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                default: Race = RACE.HUMAN; MetaRace = METARACE.NONE; break;
-                            } break;
-                        case Classes.CLASS.WIZARD:
-                            switch (Dice.Percentile(ref random))
-                            {
-                                case 1:
-                                    if (!ForceStandard)
-                                        Race = RACE.GRAY_ELF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 2:
-                                case 3:
-                                case 4:
-                                case 5:
-                                case 6:
-                                case 7:
-                                case 8:
-                                case 9:
-                                case 10:
-                                case 11:
-                                case 12:
-                                case 13:
-                                case 14:
-                                case 15:
-                                case 16:
-                                case 17:
-                                case 18:
-                                case 19:
-                                case 20:
-                                case 21:
-                                case 22:
-                                case 23:
-                                case 24:
-                                case 25:
-                                case 26:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HIGH_ELF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 27:
-                                case 28:
-                                    if (!ForceStandard)
-                                        Race = RACE.WOOD_ELF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 29:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.ROCK_GNOME; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 30:
-                                case 31:
-                                case 32:
-                                case 33:
-                                case 34:
-                                case 35:
-                                case 36:
-                                case 37:
-                                case 38:
-                                case 39:
-                                case 40:
-                                case 41:
-                                case 42:
-                                case 43:
-                                case 44:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HALFELF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 45:
-                                case 46:
-                                case 47:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.LIGHTFOOT_HALFLING; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 48:
-                                case 49:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.TALLFELLOW_HALFLING;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 39:
+                                case 40:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HALFORC;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 41:
+                                case 42:
+                                case 43:
+                                case 44:
+                                case 45:
+                                case 46:
+                                case 47:
+                                case 48:
+                                case 49:
+                                case 50:
+                                case 51:
+                                case 52:
+                                case 53:
+                                case 54:
+                                case 55:
+                                case 56:
+                                case 57:
+                                case 58:
+                                case 59:
+                                case 60:
+                                case 61:
+                                case 62:
+                                case 63:
+                                case 64:
+                                case 65:
+                                case 66:
+                                case 67:
+                                case 68:
+                                case 69:
+                                case 70:
+                                case 71:
+                                case 72:
+                                case 73:
+                                case 74:
+                                case 75:
+                                case 76:
+                                case 77:
+                                case 78:
+                                case 79:
+                                case 80:
+                                case 81:
+                                case 82:
+                                case 83:
+                                case 84:
+                                case 85:
+                                case 86:
+                                case 87:
+                                case 88:
+                                case 89:
+                                case 90:
+                                case 91:
+                                case 92:
+                                case 93:
+                                case 94:
+                                case 95:
+                                case 96:
+                                case 97:
+                                case 98:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HUMAN;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 99:
+                                    if (allowMetaRaces || forceNonStandard)
+                                    {
+                                        MetaRace = METARACE.WEREBOAR;
+                                        RaceByAlignment(alignment, charClass, false, false, false);
+                                    }
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 100:
+                                    if (allowMetaRaces || forceNonStandard)
+                                    {
+                                        MetaRace = METARACE.WERETIGER;
+                                        RaceByAlignment(alignment, charClass, false, false, false);
+                                    }
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                default: Race = RACE.HUMAN; MetaRace = METARACE.NONE; break;
+                            } break;
+                        case CLASS.CLERIC:
+                            switch (Dice.Percentile())
+                            {
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                case 9:
+                                case 10:
+                                case 11:
+                                case 12:
+                                case 13:
+                                case 14:
+                                case 15:
+                                    if (!forceStandard)
+                                        Race = RACE.DEEP_DWARF; 
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 16:
+                                case 17:
+                                case 18:
+                                case 19:
+                                case 20:
+                                case 21:
+                                case 22:
+                                case 23:
+                                case 24:
+                                case 25:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HILL_DWARF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 26:
+                                    if (!forceStandard)
+                                        Race = RACE.MOUNTAIN_DWARF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 27:
+                                    if (!forceStandard)
+                                        Race = RACE.HIGH_ELF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 28:
+                                    if (!forceStandard)
+                                        Race = RACE.WILD_ELF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 29:
+                                case 30:
+                                case 31:
+                                case 32:
+                                case 33:
+                                case 34:
+                                case 35:
+                                case 36:
+                                case 37:
+                                case 38:
+                                    if (!forceStandard)
+                                        Race = RACE.WOOD_ELF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 39:
+                                    if (!forceNonStandard)
+                                        Race = RACE.ROCK_GNOME;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 40:
+                                case 41:
+                                case 42:
+                                case 43:
+                                case 44:
+                                case 45:
+                                case 46:
+                                case 47:
+                                case 48:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HALFELF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 49:
+                                case 50:
+                                case 51:
+                                case 52:
+                                case 53:
+                                case 54:
+                                case 55:
+                                case 56:
+                                case 57:
+                                case 58:
+                                    if (!forceNonStandard)
+                                        Race = RACE.LIGHTFOOT_HALFLING;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 59:
+                                    if (!forceStandard)
+                                        Race = RACE.DEEP_HALFLING;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 60:
+                                    if (!forceStandard)
+                                        Race = RACE.TALLFELLOW_HALFLING;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 61:
+                                case 62:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HALFORC;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 63:
+                                case 64:
+                                case 65:
+                                case 66:
+                                case 67:
+                                case 68:
+                                case 69:
+                                case 70:
+                                case 71:
+                                case 72:
+                                case 73:
+                                case 74:
+                                case 75:
+                                case 76:
+                                case 77:
+                                case 78:
+                                case 79:
+                                case 80:
+                                case 81:
+                                case 82:
+                                case 83:
+                                case 84:
+                                case 85:
+                                case 86:
+                                case 87:
+                                case 88:
+                                case 89:
+                                case 90:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HUMAN;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 91:
+                                case 92:
+                                case 93:
+                                case 94:
+                                case 95:
+                                case 96:
+                                case 97:
+                                    if (!forceStandard)
+                                        Race = RACE.LIZARDFOLK;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 98:
+                                    if (!forceStandard)
+                                        Race = RACE.DOPPELGANGER;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 99:
+                                    if (allowMetaRaces || forceNonStandard)
+                                    {
+                                        MetaRace = METARACE.WEREBOAR;
+                                        RaceByAlignment(alignment, charClass, false, false, false);
+                                    }
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 100:
+                                    if (allowMetaRaces || forceNonStandard)
+                                    {
+                                        MetaRace = METARACE.WERETIGER;
+                                        RaceByAlignment(alignment, charClass, false, false, false);
+                                    }
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                default: Race = RACE.HUMAN; MetaRace = METARACE.NONE; break;
+                            } break;
+                        case CLASS.DRUID:
+                            switch (Dice.Percentile())
+                            {
+                                case 1:
+                                    if (!forceStandard)
+                                        Race = RACE.GRAY_ELF; 
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HIGH_ELF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 7:
+                                case 8:
+                                case 9:
+                                case 10:
+                                case 11:
+                                    if (!forceStandard)
+                                        Race = RACE.WILD_ELF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 12:
+                                case 13:
+                                case 14:
+                                case 15:
+                                case 16:
+                                case 17:
+                                case 18:
+                                case 19:
+                                case 20:
+                                case 21:
+                                case 22:
+                                case 23:
+                                case 24:
+                                case 25:
+                                case 26:
+                                case 27:
+                                case 28:
+                                case 29:
+                                case 30:
+                                case 31:
+                                    if (!forceStandard)
+                                        Race = RACE.WOOD_ELF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 32:
+                                    if (!forceStandard)
+                                        Race = RACE.FOREST_GNOME;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 33:
+                                case 34:
+                                case 35:
+                                case 36:
+                                case 37:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HALFELF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 38:
+                                    if (!forceNonStandard)
+                                        Race = RACE.LIGHTFOOT_HALFLING;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 39:
+                                    if (!forceStandard)
+                                        Race = RACE.TALLFELLOW_HALFLING;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 40:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HALFORC;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 41:
+                                case 42:
+                                case 43:
+                                case 44:
+                                case 45:
+                                case 46:
+                                case 47:
+                                case 48:
+                                case 49:
+                                case 50:
+                                case 51:
+                                case 52:
+                                case 53:
+                                case 54:
+                                case 55:
+                                case 56:
+                                case 57:
+                                case 58:
+                                case 59:
+                                case 60:
+                                case 61:
+                                case 62:
+                                case 63:
+                                case 64:
+                                case 65:
+                                case 66:
+                                case 67:
+                                case 68:
+                                case 69:
+                                case 70:
+                                case 71:
+                                case 72:
+                                case 73:
+                                case 74:
+                                case 75:
+                                case 76:
+                                case 77:
+                                case 78:
+                                case 79:
+                                case 80:
+                                case 81:
+                                case 82:
+                                case 83:
+                                case 84:
+                                case 85:
+                                case 86:
+                                case 87:
+                                case 88:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HUMAN;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 89:
+                                case 90:
+                                case 91:
+                                case 92:
+                                case 93:
+                                case 94:
+                                case 95:
+                                case 96:
+                                case 97:
+                                case 98:
+                                    if (!forceStandard)
+                                        Race = RACE.LIZARDFOLK;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 99:
+                                    if (allowMetaRaces || forceNonStandard)
+                                    {
+                                        MetaRace = METARACE.WEREBOAR;
+                                        RaceByAlignment(alignment, charClass, false, false, false);
+                                    }
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 100:
+                                    if (allowMetaRaces || forceNonStandard)
+                                    {
+                                        MetaRace = METARACE.WERETIGER;
+                                        RaceByAlignment(alignment, charClass, false, false, false);
+                                    }
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                default: Race = RACE.HUMAN; MetaRace = METARACE.NONE; break;
+                            } break;
+                        case CLASS.FIGHTER:
+                            switch (Dice.Percentile())
+                            {
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                case 9:
+                                case 10:
+                                    if (!forceStandard)
+                                        Race = RACE.DEEP_DWARF; 
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 11:
+                                case 12:
+                                case 13:
+                                case 14:
+                                case 15:
+                                case 16:
+                                case 17:
+                                case 18:
+                                case 19:
+                                case 20:
+                                case 21:
+                                case 22:
+                                case 23:
+                                case 24:
+                                case 25:
+                                case 26:
+                                case 27:
+                                case 28:
+                                case 29:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HILL_DWARF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 30:
+                                case 31:
+                                case 32:
+                                case 33:
+                                case 34:
+                                    if (!forceStandard)
+                                        Race = RACE.MOUNTAIN_DWARF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 35:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HIGH_ELF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 36:
+                                case 37:
+                                case 38:
+                                case 39:
+                                case 40:
+                                case 41:
+                                    if (!forceStandard)
+                                        Race = RACE.WOOD_ELF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 42:
+                                case 43:
+                                case 44:
+                                case 45:
+                                case 46:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HALFELF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 47:
+                                    if (!forceNonStandard)
+                                        Race = RACE.LIGHTFOOT_HALFLING;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 48:
+                                    if (!forceStandard)
+                                        Race = RACE.DEEP_HALFLING;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 49:
+                                case 50:
+                                case 51:
+                                case 52:
+                                case 53:
+                                case 54:
+                                case 55:
+                                case 56:
+                                case 57:
+                                case 58:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HALFORC;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 59:
+                                case 60:
+                                case 61:
+                                case 62:
+                                case 63:
+                                case 64:
+                                case 65:
+                                case 66:
+                                case 67:
+                                case 68:
+                                case 69:
+                                case 70:
+                                case 71:
+                                case 72:
+                                case 73:
+                                case 74:
+                                case 75:
+                                case 76:
+                                case 77:
+                                case 78:
+                                case 79:
+                                case 80:
+                                case 81:
+                                case 82:
+                                case 83:
+                                case 84:
+                                case 85:
+                                case 86:
+                                case 87:
+                                case 88:
+                                case 89:
+                                case 90:
+                                case 91:
+                                case 92:
+                                case 93:
+                                case 94:
+                                case 95:
+                                case 96:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HUMAN;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 97:
+                                    if (!forceStandard)
+                                        Race = RACE.LIZARDFOLK;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 98:
+                                    if (!forceStandard)
+                                        Race = RACE.DOPPELGANGER;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 99:
+                                    if (allowMetaRaces || forceNonStandard)
+                                    {
+                                        MetaRace = METARACE.WEREBOAR;
+                                        RaceByAlignment(alignment, charClass, false, false, false);
+                                    }
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 100:
+                                    if (allowMetaRaces || forceNonStandard)
+                                    {
+                                        MetaRace = METARACE.WERETIGER;
+                                        RaceByAlignment(alignment, charClass, false, false, false);
+                                    }
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                default: Race = RACE.HUMAN; MetaRace = METARACE.NONE; break;
+                            } break;
+                        case CLASS.MONK:
+                            switch (Dice.Percentile())
+                            {
+                                case 1:
+                                case 2:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HIGH_ELF; 
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 3:
+                                    if (!forceStandard)
+                                        Race = RACE.WOOD_ELF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                case 9:
+                                case 10:
+                                case 11:
+                                case 12:
+                                case 13:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HALFELF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 14:
+                                    if (!forceNonStandard)
+                                        Race = RACE.LIGHTFOOT_HALFLING;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 15:
+                                    if (!forceStandard)
+                                        Race = RACE.DEEP_HALFLING;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 16:
+                                case 17:
+                                case 18:
+                                case 19:
+                                case 20:
+                                case 21:
+                                case 22:
+                                case 23:
+                                case 24:
+                                case 25:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HALFORC;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 26:
+                                case 27:
+                                case 28:
+                                case 29:
+                                case 30:
+                                case 31:
+                                case 32:
+                                case 33:
+                                case 34:
+                                case 35:
+                                case 36:
+                                case 37:
+                                case 38:
+                                case 39:
+                                case 40:
+                                case 41:
+                                case 42:
+                                case 43:
+                                case 44:
+                                case 45:
+                                case 46:
+                                case 47:
+                                case 48:
+                                case 49:
+                                case 50:
+                                case 51:
+                                case 52:
+                                case 53:
+                                case 54:
+                                case 55:
+                                case 56:
+                                case 57:
+                                case 58:
+                                case 59:
+                                case 60:
+                                case 61:
+                                case 62:
+                                case 63:
+                                case 64:
+                                case 65:
+                                case 66:
+                                case 67:
+                                case 68:
+                                case 69:
+                                case 70:
+                                case 71:
+                                case 72:
+                                case 73:
+                                case 74:
+                                case 75:
+                                case 76:
+                                case 77:
+                                case 78:
+                                case 79:
+                                case 80:
+                                case 81:
+                                case 82:
+                                case 83:
+                                case 84:
+                                case 85:
+                                case 86:
+                                case 87:
+                                case 88:
+                                case 89:
+                                case 90:
+                                case 91:
+                                case 92:
+                                case 93:
+                                case 94:
+                                case 95:
+                                case 96:
+                                case 97:
+                                case 98:
+                                case 99:
+                                case 100:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HUMAN;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                default: Race = RACE.HUMAN; MetaRace = METARACE.NONE; break;
+                            } break;
+                        case CLASS.PALADIN:
+                            switch (Dice.Percentile())
+                            {
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                case 9:
+                                case 10:
+                                case 11:
+                                case 12:
+                                case 13:
+                                case 14:
+                                case 15:
+                                case 16:
+                                case 17:
+                                case 18:
+                                case 19:
+                                case 20:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HILL_DWARF; 
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 21:
+                                    if (!forceStandard)
+                                        Race = RACE.MOUNTAIN_DWARF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 22:
+                                    if (!forceNonStandard)
+                                        Race = RACE.ROCK_GNOME;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 23:
+                                case 24:
+                                case 25:
+                                case 26:
+                                case 27:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HALFELF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 28:
+                                    if (!forceNonStandard)
+                                        Race = RACE.LIGHTFOOT_HALFLING;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 29:
+                                    if (!forceStandard)
+                                        Race = RACE.DEEP_HALFLING;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 30:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HALFORC;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 31:
+                                case 32:
+                                case 33:
+                                case 34:
+                                case 35:
+                                case 36:
+                                case 37:
+                                case 38:
+                                case 39:
+                                case 40:
+                                case 41:
+                                case 42:
+                                case 43:
+                                case 44:
+                                case 45:
+                                case 46:
+                                case 47:
+                                case 48:
+                                case 49:
+                                case 50:
+                                case 51:
+                                case 52:
+                                case 53:
+                                case 54:
+                                case 55:
+                                case 56:
+                                case 57:
+                                case 58:
+                                case 59:
+                                case 60:
+                                case 61:
+                                case 62:
+                                case 63:
+                                case 64:
+                                case 65:
+                                case 66:
+                                case 67:
+                                case 68:
+                                case 69:
+                                case 70:
+                                case 71:
+                                case 72:
+                                case 73:
+                                case 74:
+                                case 75:
+                                case 76:
+                                case 77:
+                                case 78:
+                                case 79:
+                                case 80:
+                                case 81:
+                                case 82:
+                                case 83:
+                                case 84:
+                                case 85:
+                                case 86:
+                                case 87:
+                                case 88:
+                                case 89:
+                                case 90:
+                                case 91:
+                                case 92:
+                                case 93:
+                                case 94:
+                                case 95:
+                                case 96:
+                                case 97:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HUMAN;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 98:
+                                    if (!forceStandard)
+                                        Race = RACE.DOPPELGANGER;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 99:
+                                    if (allowMetaRaces || forceNonStandard)
+                                    {
+                                        MetaRace = METARACE.WEREBOAR;
+                                        RaceByAlignment(alignment, charClass, false, false, false);
+                                    }
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 100:
+                                    if (allowMetaRaces || forceNonStandard)
+                                    {
+                                        MetaRace = METARACE.WERETIGER;
+                                        RaceByAlignment(alignment, charClass, false, false, false);
+                                    }
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                default: Race = RACE.HUMAN; MetaRace = METARACE.NONE; break;
+                            } break;
+                        case CLASS.RANGER:
+                            switch (Dice.Percentile())
+                            {
+                                case 1:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HILL_DWARF; 
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HIGH_ELF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 7:
+                                    if (!forceStandard)
+                                        Race = RACE.WILD_ELF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 8:
+                                case 9:
+                                case 10:
+                                case 11:
+                                case 12:
+                                case 13:
+                                case 14:
+                                case 15:
+                                case 16:
+                                case 17:
+                                case 18:
+                                case 19:
+                                case 20:
+                                case 21:
+                                case 22:
+                                case 23:
+                                case 24:
+                                case 25:
+                                case 26:
+                                case 27:
+                                case 28:
+                                case 29:
+                                case 30:
+                                case 31:
+                                case 32:
+                                case 33:
+                                case 34:
+                                case 35:
+                                case 36:
+                                    if (!forceStandard)
+                                        Race = RACE.WOOD_ELF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 37:
+                                    if (!forceStandard)
+                                        Race = RACE.FOREST_GNOME;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 38:
+                                    if (!forceNonStandard)
+                                        Race = RACE.ROCK_GNOME;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 39:
+                                case 40:
+                                case 41:
+                                case 42:
+                                case 43:
+                                case 44:
+                                case 45:
+                                case 46:
+                                case 47:
+                                case 48:
+                                case 49:
+                                case 50:
+                                case 51:
+                                case 52:
+                                case 53:
+                                case 54:
+                                case 55:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HALFELF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 56:
+                                    if (!forceNonStandard)
+                                        Race = RACE.LIGHTFOOT_HALFLING;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 57:
+                                    if (!forceStandard)
+                                        Race = RACE.TALLFELLOW_HALFLING;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 58:
+                                case 59:
+                                case 60:
+                                case 61:
+                                case 62:
+                                case 63:
+                                case 64:
+                                case 65:
+                                case 66:
+                                case 67:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HALFORC;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 68:
+                                case 69:
+                                case 70:
+                                case 71:
+                                case 72:
+                                case 73:
+                                case 74:
+                                case 75:
+                                case 76:
+                                case 77:
+                                case 78:
+                                case 79:
+                                case 80:
+                                case 81:
+                                case 82:
+                                case 83:
+                                case 84:
+                                case 85:
+                                case 86:
+                                case 87:
+                                case 88:
+                                case 89:
+                                case 90:
+                                case 91:
+                                case 92:
+                                case 93:
+                                case 94:
+                                case 95:
+                                case 96:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HUMAN;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 97:
+                                case 98:
+                                    if (!forceStandard)
+                                        Race = RACE.LIZARDFOLK;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 99:
+                                    if (allowMetaRaces || forceNonStandard)
+                                    {
+                                        MetaRace = METARACE.WEREBOAR;
+                                        RaceByAlignment(alignment, charClass, false, false, false);
+                                    }
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 100:
+                                    if (allowMetaRaces || forceNonStandard)
+                                    {
+                                        MetaRace = METARACE.WERETIGER;
+                                        RaceByAlignment(alignment, charClass, false, false, false);
+                                    }
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                default: Race = RACE.HUMAN; MetaRace = METARACE.NONE; break;
+                            } break;
+                        case CLASS.SORCERER:
+                            switch (Dice.Percentile())
+                            {
+                                case 1:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HILL_DWARF; 
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 2:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HIGH_ELF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                case 9:
+                                case 10:
+                                case 11:
+                                case 12:
+                                    if (!forceStandard)
+                                        Race = RACE.WILD_ELF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 13:
+                                case 14:
+                                case 15:
+                                    if (!forceStandard)
+                                        Race = RACE.WOOD_ELF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 16:
+                                    if (!forceNonStandard)
+                                        Race = RACE.ROCK_GNOME;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 17:
+                                case 18:
+                                case 19:
+                                case 20:
+                                case 21:
+                                case 22:
+                                case 23:
+                                case 24:
+                                case 25:
+                                case 26:
+                                case 27:
+                                case 28:
+                                case 29:
+                                case 30:
+                                case 31:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HALFELF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 32:
+                                case 33:
+                                case 34:
+                                case 35:
+                                case 36:
+                                case 37:
+                                case 38:
+                                case 39:
+                                case 40:
+                                case 41:
+                                    if (!forceNonStandard)
+                                        Race = RACE.LIGHTFOOT_HALFLING;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 42:
+                                    if (!forceStandard)
+                                        Race = RACE.DEEP_HALFLING;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 43:
+                                    if (!forceStandard)
+                                        Race = RACE.TALLFELLOW_HALFLING;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 44:
+                                case 45:
+                                case 46:
+                                case 47:
+                                case 48:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HALFORC;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 49:
+                                case 50:
+                                case 51:
+                                case 52:
+                                case 53:
+                                case 54:
+                                case 55:
+                                case 56:
+                                case 57:
+                                case 58:
+                                case 59:
+                                case 60:
+                                case 61:
+                                case 62:
+                                case 63:
+                                case 64:
+                                case 65:
+                                case 66:
+                                case 67:
+                                case 68:
+                                case 69:
+                                case 70:
+                                case 71:
+                                case 72:
+                                case 73:
+                                case 74:
+                                case 75:
+                                case 76:
+                                case 77:
+                                case 78:
+                                case 79:
+                                case 80:
+                                case 81:
+                                case 82:
+                                case 83:
+                                case 84:
+                                case 85:
+                                case 86:
+                                case 87:
+                                case 88:
+                                case 89:
+                                case 90:
+                                case 91:
+                                case 92:
+                                case 93:
+                                case 94:
+                                case 95:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HUMAN;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 96:
+                                case 97:
+                                    if (!forceStandard)
+                                        Race = RACE.LIZARDFOLK;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 98:
+                                    if (!forceStandard)
+                                        Race = RACE.DOPPELGANGER;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 99:
+                                    if (allowMetaRaces || forceNonStandard)
+                                    {
+                                        MetaRace = METARACE.WEREBOAR;
+                                        RaceByAlignment(alignment, charClass, false, false, false);
+                                    }
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 100:
+                                    if (allowMetaRaces || forceNonStandard)
+                                    {
+                                        MetaRace = METARACE.WERETIGER;
+                                        RaceByAlignment(alignment, charClass, false, false, false);
+                                    }
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                default: Race = RACE.HUMAN; MetaRace = METARACE.NONE; break;
+                            } break;
+                        case CLASS.THIEF:
+                            switch (Dice.Percentile())
+                            {
+                                case 1:
+                                    if (!forceStandard)
+                                        Race = RACE.DEEP_DWARF; 
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 2:
+                                case 3:
+                                case 4:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HILL_DWARF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HIGH_ELF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 9:
+                                    if (!forceStandard)
+                                        Race = RACE.WOOD_ELF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 10:
+                                    if (!forceNonStandard)
+                                        Race = RACE.ROCK_GNOME;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 11:
+                                case 12:
+                                case 13:
+                                case 14:
+                                case 15:
+                                case 16:
+                                case 17:
+                                case 18:
+                                case 19:
+                                case 20:
+                                case 21:
+                                case 22:
+                                case 23:
+                                case 24:
+                                case 25:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HALFELF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 26:
+                                case 27:
+                                case 28:
+                                case 29:
+                                case 30:
+                                case 31:
+                                case 32:
+                                case 33:
+                                case 34:
+                                case 35:
+                                case 36:
+                                case 37:
+                                case 38:
+                                case 39:
+                                case 40:
+                                case 41:
+                                case 42:
+                                case 43:
+                                case 44:
+                                case 45:
+                                case 46:
+                                case 47:
+                                case 48:
+                                case 49:
+                                case 50:
+                                case 51:
+                                case 52:
+                                case 53:
+                                    if (!forceNonStandard)
+                                        Race = RACE.LIGHTFOOT_HALFLING;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 54:
+                                case 55:
+                                case 56:
+                                case 57:
+                                case 58:
+                                    if (!forceStandard)
+                                        Race = RACE.DEEP_HALFLING;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 59:
+                                case 60:
+                                case 61:
+                                case 62:
+                                case 63:
+                                    if (!forceStandard)
+                                        Race = RACE.TALLFELLOW_HALFLING;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 64:
+                                case 65:
+                                case 66:
+                                case 67:
+                                case 68:
+                                case 69:
+                                case 70:
+                                case 71:
+                                case 72:
+                                case 73:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HALFORC;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 74:
+                                case 75:
+                                case 76:
+                                case 77:
+                                case 78:
+                                case 79:
+                                case 80:
+                                case 81:
+                                case 82:
+                                case 83:
+                                case 84:
+                                case 85:
+                                case 86:
+                                case 87:
+                                case 88:
+                                case 89:
+                                case 90:
+                                case 91:
+                                case 92:
+                                case 93:
+                                case 94:
+                                case 95:
+                                case 96:
+                                case 97:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HUMAN;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 98:
+                                    if (!forceStandard)
+                                        Race = RACE.DOPPELGANGER;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 99:
+                                    if (allowMetaRaces || forceNonStandard)
+                                    {
+                                        MetaRace = METARACE.WEREBOAR;
+                                        RaceByAlignment(alignment, charClass, false, false, false);
+                                    }
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 100:
+                                    if (allowMetaRaces || forceNonStandard)
+                                    {
+                                        MetaRace = METARACE.WERETIGER;
+                                        RaceByAlignment(alignment, charClass, false, false, false);
+                                    }
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                default: Race = RACE.HUMAN; MetaRace = METARACE.NONE; break;
+                            } break;
+                        case CLASS.WIZARD:
+                            switch (Dice.Percentile())
+                            {
+                                case 1:
+                                    if (!forceStandard)
+                                        Race = RACE.GRAY_ELF; 
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                case 9:
+                                case 10:
+                                case 11:
+                                case 12:
+                                case 13:
+                                case 14:
+                                case 15:
+                                case 16:
+                                case 17:
+                                case 18:
+                                case 19:
+                                case 20:
+                                case 21:
+                                case 22:
+                                case 23:
+                                case 24:
+                                case 25:
+                                case 26:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HIGH_ELF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 27:
+                                case 28:
+                                    if (!forceStandard)
+                                        Race = RACE.WOOD_ELF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 29:
+                                    if (!forceNonStandard)
+                                        Race = RACE.ROCK_GNOME;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 30:
+                                case 31:
+                                case 32:
+                                case 33:
+                                case 34:
+                                case 35:
+                                case 36:
+                                case 37:
+                                case 38:
+                                case 39:
+                                case 40:
+                                case 41:
+                                case 42:
+                                case 43:
+                                case 44:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HALFELF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 45:
+                                case 46:
+                                case 47:
+                                    if (!forceNonStandard)
+                                        Race = RACE.LIGHTFOOT_HALFLING;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 48:
+                                case 49:
+                                    if (!forceStandard)
+                                        Race = RACE.TALLFELLOW_HALFLING;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 50:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HALFORC; 
+                                    if (!forceNonStandard)
+                                        Race = RACE.HALFORC;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 51:
                                 case 52:
@@ -4148,75 +4123,75 @@ namespace NPCGen
                                 case 95:
                                 case 96:
                                 case 97:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HUMAN; 
+                                    if (!forceNonStandard)
+                                        Race = RACE.HUMAN;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 98:
-                                    if (!ForceStandard)
-                                        Race = RACE.DOPPELGANGER; 
+                                    if (!forceStandard)
+                                        Race = RACE.DOPPELGANGER;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 99:
-                                    if (AllowMetaRaces || ForceNonStandard)
+                                    if (allowMetaRaces || forceNonStandard)
                                     {
                                         MetaRace = METARACE.WEREBOAR;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
+                                        RaceByAlignment(alignment, charClass, false, false, false);
                                     }
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 100:
-                                    if (AllowMetaRaces || ForceNonStandard)
+                                    if (allowMetaRaces || forceNonStandard)
                                     {
                                         MetaRace = METARACE.WERETIGER;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
+                                        RaceByAlignment(alignment, charClass, false, false, false);
                                     }
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 default: Race = RACE.HUMAN; MetaRace = METARACE.NONE; break;
                             } break;
                         default: Race = RACE.HUMAN; MetaRace = METARACE.NONE; break;
                     } break;
-                case Character.ALIGNMENT.EVIL:
-                    switch (Class)
+                case ALIGNMENT.EVIL:
+                    switch (charClass)
                     {
-                        case Classes.CLASS.BARBARIAN:
-                            switch (Dice.Percentile(ref random))
+                        case CLASS.BARBARIAN:
+                            switch (Dice.Percentile())
                             {
                                 case 1:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.WILD_ELF; 
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 2:
                                 case 3:
-                                    if (!ForceStandard)
-                                        Race = RACE.WOOD_ELF; 
+                                    if (!forceStandard)
+                                        Race = RACE.WOOD_ELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 4:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HALFELF; 
+                                    if (!forceNonStandard)
+                                        Race = RACE.HALFELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 5:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.LIGHTFOOT_HALFLING; 
+                                    if (!forceNonStandard)
+                                        Race = RACE.LIGHTFOOT_HALFLING;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 6:
-                                    if (!ForceStandard)
-                                        Race = RACE.TALLFELLOW_HALFLING; 
+                                    if (!forceStandard)
+                                        Race = RACE.TALLFELLOW_HALFLING;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 7:
                                 case 8:
@@ -4241,10 +4216,10 @@ namespace NPCGen
                                 case 27:
                                 case 28:
                                 case 29:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HALFORC; 
+                                    if (!forceNonStandard)
+                                        Race = RACE.HALFORC;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 30:
                                 case 31:
@@ -4256,656 +4231,39 @@ namespace NPCGen
                                 case 37:
                                 case 38:
                                 case 39:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HUMAN; 
+                                    if (!forceNonStandard)
+                                        Race = RACE.HUMAN;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 40:
                                 case 41:
                                 case 42:
                                 case 43:
                                 case 44:
-                                    if (!ForceStandard)
-                                        Race = RACE.LIZARDFOLK; 
+                                    if (!forceStandard)
+                                        Race = RACE.LIZARDFOLK;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 45:
-                                    if (!ForceStandard)
-                                        Race = RACE.GOBLIN; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 46:
-                                    if (!ForceStandard)
-                                        Race = RACE.HOBGOBLIN; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 47:
-                                    if (!ForceStandard)
-                                        Race = RACE.KOBOLD; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 48:
-                                case 49:
-                                case 50:
-                                case 51:
-                                case 52:
-                                case 53:
-                                case 54:
-                                case 55:
-                                case 56:
-                                case 57:
-                                case 58:
-                                case 59:
-                                case 60:
-                                case 61:
-                                case 62:
-                                case 63:
-                                case 64:
-                                case 65:
-                                case 66:
-                                case 67:
-                                case 68:
-                                case 69:
-                                case 70:
-                                case 71:
-                                case 72:
-                                case 73:
-                                case 74:
-                                case 75:
-                                case 76:
-                                case 77:
-                                    if (!ForceStandard)
-                                        Race = RACE.ORC; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 78:
-                                    if (!ForceStandard)
-                                        Race = RACE.TIEFLING; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 79:
-                                case 80:
-                                case 81:
-                                case 82:
-                                case 83:
-                                    if (!ForceStandard)
-                                        Race = RACE.GNOLL; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 84:
-                                    if (!ForceStandard)
-                                        Race = RACE.TROGLODYTE; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 85:
-                                case 86:
-                                    if (!ForceStandard)
-                                        Race = RACE.BUGBEAR; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 87:
-                                case 88:
-                                case 89:
-                                case 90:
-                                    if (!ForceStandard)
-                                        Race = RACE.OGRE; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 91:
-                                case 92:
-                                case 93:
-                                case 94:
-                                    if (!ForceStandard)
-                                        Race = RACE.MINOTAUR; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 95:
-                                case 96:
-                                    if (AllowMetaRaces || ForceNonStandard)
-                                    {
-                                        MetaRace = METARACE.WEREWOLF;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
-                                    }
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 97:
-                                case 98:
-                                    if (AllowMetaRaces || ForceNonStandard)
-                                    {
-                                        MetaRace = METARACE.HALF_FIEND;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
-                                    }
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 99:
-                                case 100:
-                                    if (AllowMetaRaces || ForceNonStandard)
-                                    {
-                                        MetaRace = METARACE.HALF_DRAGON;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
-                                    }
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                default: Race = RACE.HUMAN; MetaRace = METARACE.NONE; break;
-                            } break;
-                        case Classes.CLASS.BARD:
-                            switch (Dice.Percentile(ref random))
-                            {
-                                case 1:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HIGH_ELF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 2:
-                                    if (!ForceStandard)
-                                        Race = RACE.WOOD_ELF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 3:
-                                case 4:
-                                case 5:
-                                case 6:
-                                case 7:
-                                case 8:
-                                case 9:
-                                case 10:
-                                case 11:
-                                case 12:
-                                case 13:
-                                case 14:
-                                case 15:
-                                case 16:
-                                case 17:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HALFELF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 18:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.LIGHTFOOT_HALFLING; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 19:
-                                    if (!ForceStandard)
-                                        Race = RACE.DEEP_HALFLING; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 20:
-                                    if (!ForceStandard)
-                                        Race = RACE.TALLFELLOW_HALFLING; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 21:
-                                case 22:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HALFORC; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 23:
-                                case 24:
-                                case 25:
-                                case 26:
-                                case 27:
-                                case 28:
-                                case 29:
-                                case 30:
-                                case 31:
-                                case 32:
-                                case 33:
-                                case 34:
-                                case 35:
-                                case 36:
-                                case 37:
-                                case 38:
-                                case 39:
-                                case 40:
-                                case 41:
-                                case 42:
-                                case 43:
-                                case 44:
-                                case 45:
-                                case 46:
-                                case 47:
-                                case 48:
-                                case 49:
-                                case 50:
-                                case 51:
-                                case 52:
-                                case 53:
-                                case 54:
-                                case 55:
-                                case 56:
-                                case 57:
-                                case 58:
-                                case 59:
-                                case 60:
-                                case 61:
-                                case 62:
-                                case 63:
-                                case 64:
-                                case 65:
-                                case 66:
-                                case 67:
-                                case 68:
-                                case 69:
-                                case 70:
-                                case 71:
-                                case 72:
-                                case 73:
-                                case 74:
-                                case 75:
-                                case 76:
-                                case 77:
-                                case 78:
-                                case 79:
-                                case 80:
-                                case 81:
-                                case 82:
-                                case 83:
-                                case 84:
-                                case 85:
-                                case 86:
-                                case 87:
-                                case 88:
-                                case 89:
-                                case 90:
-                                case 91:
-                                case 92:
-                                case 93:
-                                case 94:
-                                case 95:
-                                case 96:
-                                case 97:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HUMAN; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 98:
-                                    if (!ForceStandard)
-                                        Race = RACE.GOBLIN; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 99:
-                                    if (!ForceStandard)
-                                        Race = RACE.TIEFLING; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 100:
-                                    if (AllowMetaRaces || ForceNonStandard)
-                                    {
-                                        MetaRace = METARACE.WEREWOLF;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
-                                    }
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                default: Race = RACE.HUMAN; MetaRace = METARACE.NONE; break;
-                            } break;
-                        case Classes.CLASS.CLERIC:
-                            switch (Dice.Percentile(ref random))
-                            {
-                                case 1:
-                                case 2:
-                                    if (!ForceStandard)
-                                        Race = RACE.DEEP_DWARF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 3:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HILL_DWARF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 4:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HIGH_ELF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 5:
-                                    if (!ForceStandard)
-                                        Race = RACE.WILD_ELF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 6:
-                                case 7:
-                                case 8:
-                                    if (!ForceStandard)
-                                        Race = RACE.WOOD_ELF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 9:
-                                case 10:
-                                case 11:
-                                case 12:
-                                case 13:
-                                case 14:
-                                case 15:
-                                case 16:
-                                case 17:
-                                case 18:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HALFELF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 19:
-                                case 20:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.LIGHTFOOT_HALFLING; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 21:
-                                    if (!ForceStandard)
-                                        Race = RACE.DEEP_HALFLING;
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 22:
-                                    if (!ForceStandard)
-                                        Race = RACE.TALLFELLOW_HALFLING; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 23:
-                                case 24:
-                                case 25:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HALFORC; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 26:
-                                case 27:
-                                case 28:
-                                case 29:
-                                case 30:
-                                case 31:
-                                case 32:
-                                case 33:
-                                case 34:
-                                case 35:
-                                case 36:
-                                case 37:
-                                case 38:
-                                case 39:
-                                case 40:
-                                case 41:
-                                case 42:
-                                case 43:
-                                case 44:
-                                case 45:
-                                case 46:
-                                case 47:
-                                case 48:
-                                case 49:
-                                case 50:
-                                case 51:
-                                case 52:
-                                case 53:
-                                case 54:
-                                case 55:
-                                case 56:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HUMAN; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 57:
-                                case 58:
-                                case 59:
-                                case 60:
-                                case 61:
-                                case 62:
-                                case 63:
-                                    if (!ForceStandard)
-                                        Race = RACE.LIZARDFOLK; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 64:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.GOBLIN;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
-                                case 65:
-                                    if (!ForceStandard)
-                                        Race = RACE.HOBGOBLIN; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 66:
-                                    if (!ForceStandard)
-                                        Race = RACE.KOBOLD; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 67:
-                                    if (!ForceStandard)
-                                        Race = RACE.ORC; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 68:
-                                    if (!ForceStandard)
-                                        Race = RACE.TIEFLING;
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 69:
-                                case 70:
-                                case 71:
-                                    if (!ForceStandard)
-                                    {
-                                        Race = RACE.DROW;
-                                        Male = false;
-                                    }
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 72:
-                                    if (!ForceStandard)
-                                        Race = RACE.DUERGAR; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 73:
-                                case 74:
-                                    if (!ForceStandard)
-                                        Race = RACE.GNOLL; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 75:
-                                case 76:
-                                case 77:
-                                case 78:
-                                case 79:
-                                case 80:
-                                case 81:
-                                case 82:
-                                case 83:
-                                case 84:
-                                case 85:
-                                case 86:
-                                case 87:
-                                case 88:
-                                case 89:
-                                    if (!ForceStandard)
-                                        Race = RACE.TROGLODYTE; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 90:
-                                case 91:
-                                    if (!ForceStandard)
-                                        Race = RACE.BUGBEAR; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 92:
-                                    if (!ForceStandard)
-                                        Race = RACE.OGRE; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 93:
-                                    if (!ForceStandard)
-                                        Race = RACE.MINOTAUR; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 94:
-                                    if (!ForceStandard)
-                                        Race = RACE.MIND_FLAYER; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 95:
-                                    if (!ForceStandard)
-                                        Race = RACE.OGRE_MAGE; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 96:
-                                    if (AllowMetaRaces || ForceNonStandard)
-                                    {
-                                        MetaRace = METARACE.WERERAT;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
-                                    }
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 97:
-                                    if (AllowMetaRaces || ForceNonStandard)
-                                    {
-                                        MetaRace = METARACE.WEREWOLF;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
-                                    }
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 98:
-                                case 99:
-                                    if (AllowMetaRaces || ForceNonStandard)
-                                    {
-                                        MetaRace = METARACE.HALF_FIEND;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
-                                    }
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 100:
-                                    if (AllowMetaRaces || ForceNonStandard)
-                                    {
-                                        MetaRace = METARACE.HALF_DRAGON;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
-                                    }
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                default: Race = RACE.HUMAN; MetaRace = METARACE.NONE; break;
-                            } break;
-                        case Classes.CLASS.DRUID:
-                            switch (Dice.Percentile(ref random))
-                            {
-                                case 1:
-                                case 2:
-                                    if (!ForceStandard)
-                                        Race = RACE.WOOD_ELF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 3:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HALFELF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 4:
-                                    if (!ForceStandard)
-                                        Race = RACE.TALLFELLOW_HALFLING; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 5:
-                                case 6:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HALFORC; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 7:
-                                case 8:
-                                case 9:
-                                case 10:
-                                case 11:
-                                case 12:
-                                case 13:
-                                case 14:
-                                case 15:
-                                case 16:
-                                case 17:
-                                case 18:
-                                case 19:
-                                case 20:
-                                case 21:
-                                case 22:
-                                case 23:
-                                case 24:
-                                case 25:
-                                case 26:
-                                case 27:
-                                case 28:
-                                case 29:
-                                case 30:
-                                case 31:
-                                case 32:
-                                case 33:
-                                case 34:
-                                case 35:
-                                case 36:
-                                case 37:
-                                case 38:
-                                case 39:
-                                case 40:
-                                case 41:
-                                case 42:
-                                case 43:
-                                case 44:
-                                case 45:
                                 case 46:
+                                    if (!forceStandard)
+                                        Race = RACE.HOBGOBLIN;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
                                 case 47:
+                                    if (!forceStandard)
+                                        Race = RACE.KOBOLD;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
                                 case 48:
                                 case 49:
                                 case 50:
@@ -4915,11 +4273,6 @@ namespace NPCGen
                                 case 54:
                                 case 55:
                                 case 56:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HUMAN; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
                                 case 57:
                                 case 58:
                                 case 59:
@@ -4935,324 +4288,111 @@ namespace NPCGen
                                 case 69:
                                 case 70:
                                 case 71:
-                                    if (!ForceStandard)
-                                        Race = RACE.LIZARDFOLK; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
                                 case 72:
-                                    if (!ForceStandard)
-                                        Race = RACE.GOBLIN; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
                                 case 73:
-                                    if (!ForceStandard)
-                                        Race = RACE.HOBGOBLIN; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
                                 case 74:
-                                    if (!ForceStandard)
-                                        Race = RACE.KOBOLD; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
                                 case 75:
-                                    if (!ForceStandard)
+                                case 76:
+                                case 77:
+                                    if (!forceStandard)
                                         Race = RACE.ORC;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
-                                case 76:
-                                case 77:
                                 case 78:
+                                    if (!forceStandard)
+                                        Race = RACE.TIEFLING;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
                                 case 79:
                                 case 80:
                                 case 81:
                                 case 82:
                                 case 83:
+                                    if (!forceStandard)
+                                        Race = RACE.GNOLL;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
                                 case 84:
+                                    if (!forceStandard)
+                                        Race = RACE.TROGLODYTE;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
                                 case 85:
                                 case 86:
+                                    if (!forceStandard)
+                                        Race = RACE.BUGBEAR;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
                                 case 87:
                                 case 88:
                                 case 89:
                                 case 90:
+                                    if (!forceStandard)
+                                        Race = RACE.OGRE;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
                                 case 91:
                                 case 92:
                                 case 93:
                                 case 94:
-                                case 95:
-                                case 96:
-                                case 97:
-                                case 98:
-                                case 99:
-                                case 100:
-                                    if (!ForceStandard)
-                                        Race = RACE.GNOLL; 
+                                    if (!forceStandard)
+                                        Race = RACE.MINOTAUR;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                default: Race = RACE.HUMAN; MetaRace = METARACE.NONE; break;
-                            } break;
-                        case Classes.CLASS.FIGHTER:
-                            switch (Dice.Percentile(ref random))
-                            {
-                                case 1:
-                                case 2:
-                                    if (!ForceStandard)
-                                        Race = RACE.DEEP_DWARF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 3:
-                                case 4:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HILL_DWARF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 5:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HIGH_ELF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 6:
-                                case 7:
-                                    if (!ForceStandard)
-                                        Race = RACE.WOOD_ELF;
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 8:
-                                case 9:
-                                case 10:
-                                case 11:
-                                case 12:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HALFELF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 13:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.LIGHTFOOT_HALFLING; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 14:
-                                    if (!ForceStandard)
-                                        Race = RACE.DEEP_HALFLING; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 15:
-                                case 16:
-                                case 17:
-                                case 18:
-                                case 19:
-                                case 20:
-                                case 21:
-                                case 22:
-                                case 23:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HALFORC; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 24:
-                                case 25:
-                                case 26:
-                                case 27:
-                                case 28:
-                                case 29:
-                                case 30:
-                                case 31:
-                                case 32:
-                                case 33:
-                                case 34:
-                                case 35:
-                                case 36:
-                                case 37:
-                                case 38:
-                                case 39:
-                                case 40:
-                                case 41:
-                                case 42:
-                                case 43:
-                                case 44:
-                                case 45:
-                                case 46:
-                                case 47:
-                                case 48:
-                                case 49:
-                                case 50:
-                                case 51:
-                                case 52:
-                                case 53:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HUMAN; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 54:
-                                    if (!ForceStandard)
-                                        Race = RACE.LIZARDFOLK; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 55:
-                                    if (!ForceStandard)
-                                        Race = RACE.GOBLIN; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 56:
-                                case 57:
-                                case 58:
-                                case 59:
-                                case 60:
-                                case 61:
-                                case 62:
-                                case 63:
-                                case 64:
-                                case 65:
-                                case 66:
-                                case 67:
-                                case 68:
-                                case 69:
-                                case 70:
-                                case 71:
-                                case 72:
-                                case 73:
-                                case 74:
-                                case 75:
-                                case 76:
-                                case 77:
-                                case 78:
-                                case 79:
-                                case 80:
-                                    if (!ForceStandard)
-                                        Race = RACE.HOBGOBLIN; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 81:
-                                    if (!ForceStandard)
-                                        Race = RACE.KOBOLD;
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 82:
-                                case 83:
-                                case 84:
-                                case 85:
-                                case 86:
-                                    if (!ForceStandard)
-                                        Race = RACE.ORC; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 87:
-                                case 88:
-                                    if (!ForceStandard)
-                                        Race = RACE.DROW; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 89:
-                                    if (!ForceStandard)
-                                        Race = RACE.DUERGAR; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 90:
-                                    if (!ForceStandard)
-                                        Race = RACE.DERRO_DWARF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 91:
-                                    if (!ForceStandard)
-                                        Race = RACE.GNOLL; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 92:
-                                    if (!ForceStandard)
-                                        Race = RACE.TROGLODYTE; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 93:
-                                    if (!ForceStandard)
-                                        Race = RACE.BUGBEAR; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 94:
-                                    if (!ForceStandard)
-                                        Race = RACE.OGRE; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 95:
-                                    if (!ForceStandard)
-                                        Race = RACE.MIND_FLAYER; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
                                 case 96:
-                                    if (!ForceStandard)
-                                        Race = RACE.OGRE_MAGE;
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 97:
-                                    if (AllowMetaRaces || ForceNonStandard)
-                                    {
-                                        MetaRace = METARACE.WERERAT;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
-                                    }
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 98:
-                                    if (AllowMetaRaces || ForceNonStandard)
+                                    if (allowMetaRaces || forceNonStandard)
                                     {
                                         MetaRace = METARACE.WEREWOLF;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
+                                        RaceByAlignment(alignment, charClass, false, false, false);
                                     }
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
-                                case 99:
-                                    if (AllowMetaRaces || ForceNonStandard)
+                                case 97:
+                                case 98:
+                                    if (allowMetaRaces || forceNonStandard)
                                     {
                                         MetaRace = METARACE.HALF_FIEND;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
+                                        RaceByAlignment(alignment, charClass, false, false, false);
                                     }
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
+                                case 99:
                                 case 100:
-                                    if (AllowMetaRaces || ForceNonStandard)
+                                    if (allowMetaRaces || forceNonStandard)
                                     {
                                         MetaRace = METARACE.HALF_DRAGON;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
+                                        RaceByAlignment(alignment, charClass, false, false, false);
                                     }
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 default: Race = RACE.HUMAN; MetaRace = METARACE.NONE; break;
                             } break;
-                        case Classes.CLASS.MONK:
-                            switch (Dice.Percentile(ref random))
+                        case CLASS.BARD:
+                            switch (Dice.Percentile())
                             {
                                 case 1:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HIGH_ELF; 
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
                                 case 2:
+                                    if (!forceStandard)
+                                        Race = RACE.WOOD_ELF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
                                 case 3:
                                 case 4:
                                 case 5:
@@ -5261,11 +4401,6 @@ namespace NPCGen
                                 case 8:
                                 case 9:
                                 case 10:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HALFELF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
                                 case 11:
                                 case 12:
                                 case 13:
@@ -5273,16 +4408,36 @@ namespace NPCGen
                                 case 15:
                                 case 16:
                                 case 17:
-                                case 18:
-                                case 19:
-                                case 20:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HALFORC; 
+                                    if (!forceNonStandard)
+                                        Race = RACE.HALFELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 18:
+                                    if (!forceNonStandard)
+                                        Race = RACE.LIGHTFOOT_HALFLING;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 19:
+                                    if (!forceStandard)
+                                        Race = RACE.DEEP_HALFLING;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 20:
+                                    if (!forceStandard)
+                                        Race = RACE.TALLFELLOW_HALFLING;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 21:
                                 case 22:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HALFORC;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
                                 case 23:
                                 case 24:
                                 case 25:
@@ -5351,568 +4506,221 @@ namespace NPCGen
                                 case 88:
                                 case 89:
                                 case 90:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HUMAN; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
                                 case 91:
                                 case 92:
                                 case 93:
-                                    if (!ForceStandard)
-                                        Race = RACE.HOBGOBLIN; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
                                 case 94:
-                                    if (!ForceStandard)
-                                        Race = RACE.TIEFLING; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
                                 case 95:
                                 case 96:
-                                    if (!ForceStandard)
-                                        Race = RACE.OGRE_MAGE; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
                                 case 97:
-                                case 98:
-                                    if (AllowMetaRaces || ForceNonStandard)
-                                    {
-                                        MetaRace = METARACE.WERERAT;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
-                                    }
+                                    if (!forceNonStandard)
+                                        Race = RACE.HUMAN;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 98:
+                                    if (!forceStandard)
+                                        Race = RACE.GOBLIN;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 99:
-                                    if (AllowMetaRaces || ForceNonStandard)
-                                    {
-                                        MetaRace = METARACE.HALF_FIEND;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
-                                    }
+                                    if (!forceStandard)
+                                        Race = RACE.TIEFLING;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 100:
-                                    if (AllowMetaRaces || ForceNonStandard)
+                                    if (allowMetaRaces || forceNonStandard)
                                     {
-                                        MetaRace = METARACE.HALF_DRAGON;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
+                                        MetaRace = METARACE.WEREWOLF;
+                                        RaceByAlignment(alignment, charClass, false, false, false);
                                     }
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 default: Race = RACE.HUMAN; MetaRace = METARACE.NONE; break;
                             } break;
-                        case Classes.CLASS.PALADIN:
-                            switch (Dice.Percentile(ref random))
+                        case CLASS.CLERIC:
+                            switch (Dice.Percentile())
                             {
                                 case 1:
                                 case 2:
+                                    if (!forceStandard)
+                                        Race = RACE.DEEP_DWARF; 
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
                                 case 3:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HILL_DWARF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
                                 case 4:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HIGH_ELF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
                                 case 5:
+                                    if (!forceStandard)
+                                        Race = RACE.WILD_ELF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
                                 case 6:
                                 case 7:
                                 case 8:
+                                    if (!forceStandard)
+                                        Race = RACE.WOOD_ELF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
                                 case 9:
                                 case 10:
-                                    if (!ForceStandard)
+                                case 11:
+                                case 12:
+                                case 13:
+                                case 14:
+                                case 15:
+                                case 16:
+                                case 17:
+                                case 18:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HALFELF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 19:
+                                case 20:
+                                    if (!forceNonStandard)
+                                        Race = RACE.LIGHTFOOT_HALFLING;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 21:
+                                    if (!forceStandard)
+                                        Race = RACE.DEEP_HALFLING;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 22:
+                                    if (!forceStandard)
+                                        Race = RACE.TALLFELLOW_HALFLING;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 23:
+                                case 24:
+                                case 25:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HALFORC;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 26:
+                                case 27:
+                                case 28:
+                                case 29:
+                                case 30:
+                                case 31:
+                                case 32:
+                                case 33:
+                                case 34:
+                                case 35:
+                                case 36:
+                                case 37:
+                                case 38:
+                                case 39:
+                                case 40:
+                                case 41:
+                                case 42:
+                                case 43:
+                                case 44:
+                                case 45:
+                                case 46:
+                                case 47:
+                                case 48:
+                                case 49:
+                                case 50:
+                                case 51:
+                                case 52:
+                                case 53:
+                                case 54:
+                                case 55:
+                                case 56:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HUMAN;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 57:
+                                case 58:
+                                case 59:
+                                case 60:
+                                case 61:
+                                case 62:
+                                case 63:
+                                    if (!forceStandard)
+                                        Race = RACE.LIZARDFOLK;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 64:
+                                    if (!forceStandard)
+                                        Race = RACE.GOBLIN;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 65:
+                                    if (!forceStandard)
+                                        Race = RACE.HOBGOBLIN;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 66:
+                                    if (!forceStandard)
+                                        Race = RACE.KOBOLD;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 67:
+                                    if (!forceStandard)
+                                        Race = RACE.ORC;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 68:
+                                    if (!forceStandard)
+                                        Race = RACE.TIEFLING;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 69:
+                                case 70:
+                                case 71:
+                                    if (!forceStandard)
                                     {
                                         Race = RACE.DROW;
                                         Male = false;
                                     }
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 11:
-                                case 12:
-                                case 13:
-                                case 14:
-                                case 15:
-                                case 16:
-                                case 17:
-                                case 18:
-                                case 19:
-                                case 20:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HILL_DWARF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 21:
-                                    if (!ForceStandard)
-                                        Race = RACE.DUERGAR; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 22:
-                                    if (!ForceStandard)
-                                        Race = RACE.DERRO_DWARF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 23:
-                                case 24:
-                                case 25:
-                                case 26:
-                                case 27:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HALFELF;
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 28:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.LIGHTFOOT_HALFLING; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 29:
-                                    if (!ForceStandard)
-                                        Race = RACE.DEEP_HALFLING;
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 30:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HALFORC; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 31:
-                                case 32:
-                                case 33:
-                                case 34:
-                                case 35:
-                                case 36:
-                                case 37:
-                                case 38:
-                                case 39:
-                                case 40:
-                                case 41:
-                                case 42:
-                                case 43:
-                                case 44:
-                                case 45:
-                                case 46:
-                                case 47:
-                                case 48:
-                                case 49:
-                                case 50:
-                                case 51:
-                                case 52:
-                                case 53:
-                                case 54:
-                                case 55:
-                                case 56:
-                                case 57:
-                                case 58:
-                                case 59:
-                                case 60:
-                                case 61:
-                                case 62:
-                                case 63:
-                                case 64:
-                                case 65:
-                                case 66:
-                                case 67:
-                                case 68:
-                                case 69:
-                                case 70:
-                                case 71:
-                                case 72:
-                                case 73:
-                                case 74:
-                                case 75:
-                                case 76:
-                                case 77:
-                                case 78:
-                                case 79:
-                                case 80:
-                                case 81:
-                                case 82:
-                                case 83:
-                                case 84:
-                                case 85:
-                                case 86:
-                                case 87:
-                                case 88:
-                                case 89:
-                                case 90:
-                                case 91:
-                                case 92:
-                                case 93:
-                                case 94:
-                                case 95:
-                                case 96:
-                                case 97:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HUMAN;
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 98:
-                                    if (AllowMetaRaces || ForceNonStandard)
-                                    {
-                                        MetaRace = METARACE.WEREWOLF;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
-                                    }
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 99:
-                                    if (AllowMetaRaces || ForceNonStandard)
-                                    {
-                                        MetaRace = METARACE.HALF_FIEND;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
-                                    }
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 100:
-                                    if (AllowMetaRaces || ForceNonStandard)
-                                    {
-                                        MetaRace = METARACE.HALF_DRAGON;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
-                                    }
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                default: Race = RACE.HUMAN; MetaRace = METARACE.NONE; break;
-                            } break;
-                        case Classes.CLASS.RANGER:
-                            switch (Dice.Percentile(ref random))
-                            {
-                                case 1:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HIGH_ELF;
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 2:
-                                case 3:
-                                case 4:
-                                case 5:
-                                case 6:
-                                case 7:
-                                case 8:
-                                case 9:
-                                case 10:
-                                case 11:
-                                    if (!ForceStandard)
-                                        Race = RACE.WOOD_ELF;
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 12:
-                                case 13:
-                                case 14:
-                                case 15:
-                                case 16:
-                                case 17:
-                                case 18:
-                                case 19:
-                                case 20:
-                                case 21:
-                                case 22:
-                                case 23:
-                                case 24:
-                                case 25:
-                                case 26:
-                                case 27:
-                                case 28:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HALFELF;
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 29:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.LIGHTFOOT_HALFLING;
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 30:
-                                    if (!ForceStandard)
-                                        Race = RACE.TALLFELLOW_HALFLING;
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 31:
-                                case 32:
-                                case 33:
-                                case 34:
-                                case 35:
-                                case 36:
-                                case 37:
-                                case 38:
-                                case 39:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HALFORC;
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 40:
-                                case 41:
-                                case 42:
-                                case 43:
-                                case 44:
-                                case 45:
-                                case 46:
-                                case 47:
-                                case 48:
-                                case 49:
-                                case 50:
-                                case 51:
-                                case 52:
-                                case 53:
-                                case 54:
-                                case 55:
-                                case 56:
-                                case 57:
-                                case 58:
-                                case 59:
-                                case 60:
-                                case 61:
-                                case 62:
-                                case 63:
-                                case 64:
-                                case 65:
-                                case 66:
-                                case 67:
-                                case 68:
-                                case 69:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HUMAN;
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 70:
-                                case 71:
-                                    if (!ForceStandard)
-                                        Race = RACE.LIZARDFOLK;
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 72:
-                                    if (!ForceStandard)
-                                        Race = RACE.HOBGOBLIN;
+                                    if (!forceStandard)
+                                        Race = RACE.DUERGAR;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 73:
                                 case 74:
-                                case 75:
-                                case 76:
-                                case 77:
-                                case 78:
-                                case 79:
-                                case 80:
-                                case 81:
-                                case 82:
-                                case 83:
-                                case 84:
-                                case 85:
-                                case 86:
-                                case 87:
-                                case 88:
-                                case 89:
-                                case 90:
-                                case 91:
-                                case 92:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.GNOLL;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
-                                case 93:
-                                    if (!ForceStandard)
-                                        Race = RACE.BUGBEAR;
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 94:
-                                    if (!ForceStandard)
-                                        Race = RACE.TROGLODYTE;
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 95:
-                                    if (!ForceStandard)
-                                        Race = RACE.OGRE;
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 96:
-                                    if (AllowMetaRaces || ForceNonStandard)
-                                    {
-                                        MetaRace = METARACE.WERERAT;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
-                                    }
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 97:
-                                case 98:
-                                    if (AllowMetaRaces || ForceNonStandard)
-                                    {
-                                        MetaRace = METARACE.WEREWOLF;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
-                                    }
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 99:
-                                    if (AllowMetaRaces || ForceNonStandard)
-                                    {
-                                        MetaRace = METARACE.HALF_FIEND;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
-                                    }
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 100:
-                                    if (AllowMetaRaces || ForceNonStandard)
-                                    {
-                                        MetaRace = METARACE.HALF_DRAGON;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
-                                    }
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                default: Race = RACE.HUMAN; MetaRace = METARACE.NONE; break;
-                            } break;
-                        case Classes.CLASS.SORCERER:
-                            switch (Dice.Percentile(ref random))
-                            {
-                                case 1:
-                                    if (!ForceStandard)
-                                        Race = RACE.WILD_ELF;
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 2:
-                                case 3:
-                                case 4:
-                                case 5:
-                                case 6:
-                                case 7:
-                                case 8:
-                                case 9:
-                                case 10:
-                                case 11:
-                                case 12:
-                                case 13:
-                                case 14:
-                                case 15:
-                                case 16:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HALFELF;
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 17:
-                                case 18:
-                                case 19:
-                                case 20:
-                                case 21:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.LIGHTFOOT_HALFLING;
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 22:
-                                    if (!ForceStandard)
-                                        Race = RACE.DEEP_HALFLING;
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 23:
-                                    if (!ForceStandard)
-                                        Race = RACE.TALLFELLOW_HALFLING;
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 24:
-                                case 25:
-                                case 26:
-                                case 27:
-                                case 28:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HALFORC;
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 29:
-                                case 30:
-                                case 31:
-                                case 32:
-                                case 33:
-                                case 34:
-                                case 35:
-                                case 36:
-                                case 37:
-                                case 38:
-                                case 39:
-                                case 40:
-                                case 41:
-                                case 42:
-                                case 43:
-                                case 44:
-                                case 45:
-                                case 46:
-                                case 47:
-                                case 48:
-                                case 49:
-                                case 50:
-                                case 51:
-                                case 52:
-                                case 53:
-                                case 54:
-                                case 55:
-                                case 56:
-                                case 57:
-                                case 58:
-                                case 59:
-                                case 60:
-                                case 61:
-                                case 62:
-                                case 63:
-                                case 64:
-                                case 65:
-                                case 66:
-                                case 67:
-                                case 68:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HUMAN;
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 69:
-                                    if (!ForceStandard)
-                                        Race = RACE.LIZARDFOLK;
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 70:
-                                    if (!ForceStandard)
-                                        Race = RACE.GOBLIN;
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 71:
-                                    if (!ForceStandard)
-                                        Race = RACE.HOBGOBLIN;
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 72:
-                                case 73:
-                                case 74:
                                 case 75:
                                 case 76:
                                 case 77:
@@ -5925,114 +4733,1281 @@ namespace NPCGen
                                 case 84:
                                 case 85:
                                 case 86:
-                                    if (!ForceStandard)
-                                        Race = RACE.KOBOLD;
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
                                 case 87:
-                                    if (!ForceStandard)
-                                        Race = RACE.GNOLL;
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
                                 case 88:
                                 case 89:
-                                case 90:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.TROGLODYTE;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
+                                case 90:
                                 case 91:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.BUGBEAR;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 92:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.OGRE;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 93:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.MINOTAUR;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 94:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.MIND_FLAYER;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 95:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.OGRE_MAGE;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 96:
-                                    if (AllowMetaRaces || ForceNonStandard)
+                                    if (allowMetaRaces || forceNonStandard)
                                     {
                                         MetaRace = METARACE.WERERAT;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
+                                        RaceByAlignment(alignment, charClass, false, false, false);
                                     }
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 97:
-                                    if (AllowMetaRaces || ForceNonStandard)
+                                    if (allowMetaRaces || forceNonStandard)
                                     {
                                         MetaRace = METARACE.WEREWOLF;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
+                                        RaceByAlignment(alignment, charClass, false, false, false);
                                     }
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 98:
-                                    if (AllowMetaRaces || ForceNonStandard)
+                                case 99:
+                                    if (allowMetaRaces || forceNonStandard)
                                     {
                                         MetaRace = METARACE.HALF_FIEND;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
+                                        RaceByAlignment(alignment, charClass, false, false, false);
                                     }
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
-                                case 99:
                                 case 100:
-                                    if (AllowMetaRaces || ForceNonStandard)
+                                    if (allowMetaRaces || forceNonStandard)
                                     {
                                         MetaRace = METARACE.HALF_DRAGON;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
+                                        RaceByAlignment(alignment, charClass, false, false, false);
                                     }
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 default: Race = RACE.HUMAN; MetaRace = METARACE.NONE; break;
                             } break;
-                        case Classes.CLASS.THIEF:
-                            switch (Dice.Percentile(ref random))
+                        case CLASS.DRUID:
+                            switch (Dice.Percentile())
                             {
                                 case 1:
-                                    if (!ForceStandard)
-                                        Race = RACE.DEEP_DWARF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
                                 case 2:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HIGH_ELF; 
-                                    else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
-                                    break;
-                                case 3:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.WOOD_ELF; 
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 3:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HALFELF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 4:
+                                    if (!forceStandard)
+                                        Race = RACE.TALLFELLOW_HALFLING;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 5:
+                                case 6:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HALFORC;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 7:
+                                case 8:
+                                case 9:
+                                case 10:
+                                case 11:
+                                case 12:
+                                case 13:
+                                case 14:
+                                case 15:
+                                case 16:
+                                case 17:
+                                case 18:
+                                case 19:
+                                case 20:
+                                case 21:
+                                case 22:
+                                case 23:
+                                case 24:
+                                case 25:
+                                case 26:
+                                case 27:
+                                case 28:
+                                case 29:
+                                case 30:
+                                case 31:
+                                case 32:
+                                case 33:
+                                case 34:
+                                case 35:
+                                case 36:
+                                case 37:
+                                case 38:
+                                case 39:
+                                case 40:
+                                case 41:
+                                case 42:
+                                case 43:
+                                case 44:
+                                case 45:
+                                case 46:
+                                case 47:
+                                case 48:
+                                case 49:
+                                case 50:
+                                case 51:
+                                case 52:
+                                case 53:
+                                case 54:
+                                case 55:
+                                case 56:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HUMAN;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 57:
+                                case 58:
+                                case 59:
+                                case 60:
+                                case 61:
+                                case 62:
+                                case 63:
+                                case 64:
+                                case 65:
+                                case 66:
+                                case 67:
+                                case 68:
+                                case 69:
+                                case 70:
+                                case 71:
+                                    if (!forceStandard)
+                                        Race = RACE.LIZARDFOLK;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 72:
+                                    if (!forceStandard)
+                                        Race = RACE.GOBLIN;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 73:
+                                    if (!forceStandard)
+                                        Race = RACE.HOBGOBLIN;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 74:
+                                    if (!forceStandard)
+                                        Race = RACE.KOBOLD;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 75:
+                                    if (!forceStandard)
+                                        Race = RACE.ORC;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 76:
+                                case 77:
+                                case 78:
+                                case 79:
+                                case 80:
+                                case 81:
+                                case 82:
+                                case 83:
+                                case 84:
+                                case 85:
+                                case 86:
+                                case 87:
+                                case 88:
+                                case 89:
+                                case 90:
+                                case 91:
+                                case 92:
+                                case 93:
+                                case 94:
+                                case 95:
+                                case 96:
+                                case 97:
+                                case 98:
+                                case 99:
+                                case 100:
+                                    if (!forceStandard)
+                                        Race = RACE.GNOLL;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                default: Race = RACE.HUMAN; MetaRace = METARACE.NONE; break;
+                            } break;
+                        case CLASS.FIGHTER:
+                            switch (Dice.Percentile())
+                            {
+                                case 1:
+                                case 2:
+                                    if (!forceStandard)
+                                        Race = RACE.DEEP_DWARF; 
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 3:
+                                case 4:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HILL_DWARF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 5:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HIGH_ELF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 6:
+                                case 7:
+                                    if (!forceStandard)
+                                        Race = RACE.WOOD_ELF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 8:
+                                case 9:
+                                case 10:
+                                case 11:
+                                case 12:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HALFELF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 13:
+                                    if (!forceNonStandard)
+                                        Race = RACE.LIGHTFOOT_HALFLING;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 14:
+                                    if (!forceStandard)
+                                        Race = RACE.DEEP_HALFLING;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 15:
+                                case 16:
+                                case 17:
+                                case 18:
+                                case 19:
+                                case 20:
+                                case 21:
+                                case 22:
+                                case 23:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HALFORC;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 24:
+                                case 25:
+                                case 26:
+                                case 27:
+                                case 28:
+                                case 29:
+                                case 30:
+                                case 31:
+                                case 32:
+                                case 33:
+                                case 34:
+                                case 35:
+                                case 36:
+                                case 37:
+                                case 38:
+                                case 39:
+                                case 40:
+                                case 41:
+                                case 42:
+                                case 43:
+                                case 44:
+                                case 45:
+                                case 46:
+                                case 47:
+                                case 48:
+                                case 49:
+                                case 50:
+                                case 51:
+                                case 52:
+                                case 53:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HUMAN;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 54:
+                                    if (!forceStandard)
+                                        Race = RACE.LIZARDFOLK;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 55:
+                                    if (!forceStandard)
+                                        Race = RACE.GOBLIN;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 56:
+                                case 57:
+                                case 58:
+                                case 59:
+                                case 60:
+                                case 61:
+                                case 62:
+                                case 63:
+                                case 64:
+                                case 65:
+                                case 66:
+                                case 67:
+                                case 68:
+                                case 69:
+                                case 70:
+                                case 71:
+                                case 72:
+                                case 73:
+                                case 74:
+                                case 75:
+                                case 76:
+                                case 77:
+                                case 78:
+                                case 79:
+                                case 80:
+                                    if (!forceStandard)
+                                        Race = RACE.HOBGOBLIN;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 81:
+                                    if (!forceStandard)
+                                        Race = RACE.KOBOLD;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 82:
+                                case 83:
+                                case 84:
+                                case 85:
+                                case 86:
+                                    if (!forceStandard)
+                                        Race = RACE.ORC;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 87:
+                                case 88:
+                                    if (!forceStandard)
+                                        Race = RACE.DROW;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 89:
+                                    if (!forceStandard)
+                                        Race = RACE.DUERGAR;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 90:
+                                    if (!forceStandard)
+                                        Race = RACE.DERRO_DWARF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 91:
+                                    if (!forceStandard)
+                                        Race = RACE.GNOLL;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 92:
+                                    if (!forceStandard)
+                                        Race = RACE.TROGLODYTE;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 93:
+                                    if (!forceStandard)
+                                        Race = RACE.BUGBEAR;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 94:
+                                    if (!forceStandard)
+                                        Race = RACE.OGRE;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 95:
+                                    if (!forceStandard)
+                                        Race = RACE.MIND_FLAYER;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 96:
+                                    if (!forceStandard)
+                                        Race = RACE.OGRE_MAGE;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 97:
+                                    if (allowMetaRaces || forceNonStandard)
+                                    {
+                                        MetaRace = METARACE.WERERAT;
+                                        RaceByAlignment(alignment, charClass, false, false, false);
+                                    }
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 98:
+                                    if (allowMetaRaces || forceNonStandard)
+                                    {
+                                        MetaRace = METARACE.WEREWOLF;
+                                        RaceByAlignment(alignment, charClass, false, false, false);
+                                    }
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 99:
+                                    if (allowMetaRaces || forceNonStandard)
+                                    {
+                                        MetaRace = METARACE.HALF_FIEND;
+                                        RaceByAlignment(alignment, charClass, false, false, false);
+                                    }
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 100:
+                                    if (allowMetaRaces || forceNonStandard)
+                                    {
+                                        MetaRace = METARACE.HALF_DRAGON;
+                                        RaceByAlignment(alignment, charClass, false, false, false);
+                                    }
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                default: Race = RACE.HUMAN; MetaRace = METARACE.NONE; break;
+                            } break;
+                        case CLASS.MONK:
+                            switch (Dice.Percentile())
+                            {
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                case 9:
+                                case 10:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HALFELF; 
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 11:
+                                case 12:
+                                case 13:
+                                case 14:
+                                case 15:
+                                case 16:
+                                case 17:
+                                case 18:
+                                case 19:
+                                case 20:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HALFORC;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 21:
+                                case 22:
+                                case 23:
+                                case 24:
+                                case 25:
+                                case 26:
+                                case 27:
+                                case 28:
+                                case 29:
+                                case 30:
+                                case 31:
+                                case 32:
+                                case 33:
+                                case 34:
+                                case 35:
+                                case 36:
+                                case 37:
+                                case 38:
+                                case 39:
+                                case 40:
+                                case 41:
+                                case 42:
+                                case 43:
+                                case 44:
+                                case 45:
+                                case 46:
+                                case 47:
+                                case 48:
+                                case 49:
+                                case 50:
+                                case 51:
+                                case 52:
+                                case 53:
+                                case 54:
+                                case 55:
+                                case 56:
+                                case 57:
+                                case 58:
+                                case 59:
+                                case 60:
+                                case 61:
+                                case 62:
+                                case 63:
+                                case 64:
+                                case 65:
+                                case 66:
+                                case 67:
+                                case 68:
+                                case 69:
+                                case 70:
+                                case 71:
+                                case 72:
+                                case 73:
+                                case 74:
+                                case 75:
+                                case 76:
+                                case 77:
+                                case 78:
+                                case 79:
+                                case 80:
+                                case 81:
+                                case 82:
+                                case 83:
+                                case 84:
+                                case 85:
+                                case 86:
+                                case 87:
+                                case 88:
+                                case 89:
+                                case 90:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HUMAN;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 91:
+                                case 92:
+                                case 93:
+                                    if (!forceStandard)
+                                        Race = RACE.HOBGOBLIN;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 94:
+                                    if (!forceStandard)
+                                        Race = RACE.TIEFLING;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 95:
+                                case 96:
+                                    if (!forceStandard)
+                                        Race = RACE.OGRE_MAGE;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 97:
+                                case 98:
+                                    if (allowMetaRaces || forceNonStandard)
+                                    {
+                                        MetaRace = METARACE.WERERAT;
+                                        RaceByAlignment(alignment, charClass, false, false, false);
+                                    }
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 99:
+                                    if (allowMetaRaces || forceNonStandard)
+                                    {
+                                        MetaRace = METARACE.HALF_FIEND;
+                                        RaceByAlignment(alignment, charClass, false, false, false);
+                                    }
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 100:
+                                    if (allowMetaRaces || forceNonStandard)
+                                    {
+                                        MetaRace = METARACE.HALF_DRAGON;
+                                        RaceByAlignment(alignment, charClass, false, false, false);
+                                    }
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                default: Race = RACE.HUMAN; MetaRace = METARACE.NONE; break;
+                            } break;
+                        case CLASS.PALADIN:
+                            switch (Dice.Percentile())
+                            {
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                case 9:
+                                case 10:
+                                    if (!forceStandard)
+                                    {
+                                        Race = RACE.DROW;
+                                        Male = false;
+                                    }
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 11:
+                                case 12:
+                                case 13:
+                                case 14:
+                                case 15:
+                                case 16:
+                                case 17:
+                                case 18:
+                                case 19:
+                                case 20:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HILL_DWARF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 21:
+                                    if (!forceStandard)
+                                        Race = RACE.DUERGAR;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 22:
+                                    if (!forceStandard)
+                                        Race = RACE.DERRO_DWARF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 23:
+                                case 24:
+                                case 25:
+                                case 26:
+                                case 27:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HALFELF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 28:
+                                    if (!forceNonStandard)
+                                        Race = RACE.LIGHTFOOT_HALFLING;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 29:
+                                    if (!forceStandard)
+                                        Race = RACE.DEEP_HALFLING;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 30:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HALFORC;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 31:
+                                case 32:
+                                case 33:
+                                case 34:
+                                case 35:
+                                case 36:
+                                case 37:
+                                case 38:
+                                case 39:
+                                case 40:
+                                case 41:
+                                case 42:
+                                case 43:
+                                case 44:
+                                case 45:
+                                case 46:
+                                case 47:
+                                case 48:
+                                case 49:
+                                case 50:
+                                case 51:
+                                case 52:
+                                case 53:
+                                case 54:
+                                case 55:
+                                case 56:
+                                case 57:
+                                case 58:
+                                case 59:
+                                case 60:
+                                case 61:
+                                case 62:
+                                case 63:
+                                case 64:
+                                case 65:
+                                case 66:
+                                case 67:
+                                case 68:
+                                case 69:
+                                case 70:
+                                case 71:
+                                case 72:
+                                case 73:
+                                case 74:
+                                case 75:
+                                case 76:
+                                case 77:
+                                case 78:
+                                case 79:
+                                case 80:
+                                case 81:
+                                case 82:
+                                case 83:
+                                case 84:
+                                case 85:
+                                case 86:
+                                case 87:
+                                case 88:
+                                case 89:
+                                case 90:
+                                case 91:
+                                case 92:
+                                case 93:
+                                case 94:
+                                case 95:
+                                case 96:
+                                case 97:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HUMAN;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 98:
+                                    if (allowMetaRaces || forceNonStandard)
+                                    {
+                                        MetaRace = METARACE.WEREWOLF;
+                                        RaceByAlignment(alignment, charClass, false, false, false);
+                                    }
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 99:
+                                    if (allowMetaRaces || forceNonStandard)
+                                    {
+                                        MetaRace = METARACE.HALF_FIEND;
+                                        RaceByAlignment(alignment, charClass, false, false, false);
+                                    }
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 100:
+                                    if (allowMetaRaces || forceNonStandard)
+                                    {
+                                        MetaRace = METARACE.HALF_DRAGON;
+                                        RaceByAlignment(alignment, charClass, false, false, false);
+                                    }
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                default: Race = RACE.HUMAN; MetaRace = METARACE.NONE; break;
+                            } break;
+                        case CLASS.RANGER:
+                            switch (Dice.Percentile())
+                            {
+                                case 1:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HIGH_ELF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                case 9:
+                                case 10:
+                                case 11:
+                                    if (!forceStandard)
+                                        Race = RACE.WOOD_ELF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 12:
+                                case 13:
+                                case 14:
+                                case 15:
+                                case 16:
+                                case 17:
+                                case 18:
+                                case 19:
+                                case 20:
+                                case 21:
+                                case 22:
+                                case 23:
+                                case 24:
+                                case 25:
+                                case 26:
+                                case 27:
+                                case 28:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HALFELF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 29:
+                                    if (!forceNonStandard)
+                                        Race = RACE.LIGHTFOOT_HALFLING;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 30:
+                                    if (!forceStandard)
+                                        Race = RACE.TALLFELLOW_HALFLING;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 31:
+                                case 32:
+                                case 33:
+                                case 34:
+                                case 35:
+                                case 36:
+                                case 37:
+                                case 38:
+                                case 39:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HALFORC;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 40:
+                                case 41:
+                                case 42:
+                                case 43:
+                                case 44:
+                                case 45:
+                                case 46:
+                                case 47:
+                                case 48:
+                                case 49:
+                                case 50:
+                                case 51:
+                                case 52:
+                                case 53:
+                                case 54:
+                                case 55:
+                                case 56:
+                                case 57:
+                                case 58:
+                                case 59:
+                                case 60:
+                                case 61:
+                                case 62:
+                                case 63:
+                                case 64:
+                                case 65:
+                                case 66:
+                                case 67:
+                                case 68:
+                                case 69:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HUMAN;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 70:
+                                case 71:
+                                    if (!forceStandard)
+                                        Race = RACE.LIZARDFOLK;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 72:
+                                    if (!forceStandard)
+                                        Race = RACE.HOBGOBLIN;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 73:
+                                case 74:
+                                case 75:
+                                case 76:
+                                case 77:
+                                case 78:
+                                case 79:
+                                case 80:
+                                case 81:
+                                case 82:
+                                case 83:
+                                case 84:
+                                case 85:
+                                case 86:
+                                case 87:
+                                case 88:
+                                case 89:
+                                case 90:
+                                case 91:
+                                case 92:
+                                    if (!forceStandard)
+                                        Race = RACE.GNOLL;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 93:
+                                    if (!forceStandard)
+                                        Race = RACE.BUGBEAR;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 94:
+                                    if (!forceStandard)
+                                        Race = RACE.TROGLODYTE;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 95:
+                                    if (!forceStandard)
+                                        Race = RACE.OGRE;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 96:
+                                    if (allowMetaRaces || forceNonStandard)
+                                    {
+                                        MetaRace = METARACE.WERERAT;
+                                        RaceByAlignment(alignment, charClass, false, false, false);
+                                    }
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 97:
+                                case 98:
+                                    if (allowMetaRaces || forceNonStandard)
+                                    {
+                                        MetaRace = METARACE.WEREWOLF;
+                                        RaceByAlignment(alignment, charClass, false, false, false);
+                                    }
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 99:
+                                    if (allowMetaRaces || forceNonStandard)
+                                    {
+                                        MetaRace = METARACE.HALF_FIEND;
+                                        RaceByAlignment(alignment, charClass, false, false, false);
+                                    }
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 100:
+                                    if (allowMetaRaces || forceNonStandard)
+                                    {
+                                        MetaRace = METARACE.HALF_DRAGON;
+                                        RaceByAlignment(alignment, charClass, false, false, false);
+                                    }
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                default: Race = RACE.HUMAN; MetaRace = METARACE.NONE; break;
+                            } break;
+                        case CLASS.SORCERER:
+                            switch (Dice.Percentile())
+                            {
+                                case 1:
+                                    if (!forceStandard)
+                                        Race = RACE.WILD_ELF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                case 9:
+                                case 10:
+                                case 11:
+                                case 12:
+                                case 13:
+                                case 14:
+                                case 15:
+                                case 16:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HALFELF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 17:
+                                case 18:
+                                case 19:
+                                case 20:
+                                case 21:
+                                    if (!forceNonStandard)
+                                        Race = RACE.LIGHTFOOT_HALFLING;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 22:
+                                    if (!forceStandard)
+                                        Race = RACE.DEEP_HALFLING;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 23:
+                                    if (!forceStandard)
+                                        Race = RACE.TALLFELLOW_HALFLING;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 24:
+                                case 25:
+                                case 26:
+                                case 27:
+                                case 28:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HALFORC;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 29:
+                                case 30:
+                                case 31:
+                                case 32:
+                                case 33:
+                                case 34:
+                                case 35:
+                                case 36:
+                                case 37:
+                                case 38:
+                                case 39:
+                                case 40:
+                                case 41:
+                                case 42:
+                                case 43:
+                                case 44:
+                                case 45:
+                                case 46:
+                                case 47:
+                                case 48:
+                                case 49:
+                                case 50:
+                                case 51:
+                                case 52:
+                                case 53:
+                                case 54:
+                                case 55:
+                                case 56:
+                                case 57:
+                                case 58:
+                                case 59:
+                                case 60:
+                                case 61:
+                                case 62:
+                                case 63:
+                                case 64:
+                                case 65:
+                                case 66:
+                                case 67:
+                                case 68:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HUMAN;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 69:
+                                    if (!forceStandard)
+                                        Race = RACE.LIZARDFOLK;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 70:
+                                    if (!forceStandard)
+                                        Race = RACE.GOBLIN;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 71:
+                                    if (!forceStandard)
+                                        Race = RACE.HOBGOBLIN;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 72:
+                                case 73:
+                                case 74:
+                                case 75:
+                                case 76:
+                                case 77:
+                                case 78:
+                                case 79:
+                                case 80:
+                                case 81:
+                                case 82:
+                                case 83:
+                                case 84:
+                                case 85:
+                                case 86:
+                                    if (!forceStandard)
+                                        Race = RACE.KOBOLD;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 87:
+                                    if (!forceStandard)
+                                        Race = RACE.GNOLL;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 88:
+                                case 89:
+                                case 90:
+                                    if (!forceStandard)
+                                        Race = RACE.TROGLODYTE;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 91:
+                                    if (!forceStandard)
+                                        Race = RACE.BUGBEAR;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 92:
+                                    if (!forceStandard)
+                                        Race = RACE.OGRE;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 93:
+                                    if (!forceStandard)
+                                        Race = RACE.MINOTAUR;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 94:
+                                    if (!forceStandard)
+                                        Race = RACE.MIND_FLAYER;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 95:
+                                    if (!forceStandard)
+                                        Race = RACE.OGRE_MAGE;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 96:
+                                    if (allowMetaRaces || forceNonStandard)
+                                    {
+                                        MetaRace = METARACE.WERERAT;
+                                        RaceByAlignment(alignment, charClass, false, false, false);
+                                    }
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 97:
+                                    if (allowMetaRaces || forceNonStandard)
+                                    {
+                                        MetaRace = METARACE.WEREWOLF;
+                                        RaceByAlignment(alignment, charClass, false, false, false);
+                                    }
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 98:
+                                    if (allowMetaRaces || forceNonStandard)
+                                    {
+                                        MetaRace = METARACE.HALF_FIEND;
+                                        RaceByAlignment(alignment, charClass, false, false, false);
+                                    }
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 99:
+                                case 100:
+                                    if (allowMetaRaces || forceNonStandard)
+                                    {
+                                        MetaRace = METARACE.HALF_DRAGON;
+                                        RaceByAlignment(alignment, charClass, false, false, false);
+                                    }
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                default: Race = RACE.HUMAN; MetaRace = METARACE.NONE; break;
+                            } break;
+                        case CLASS.THIEF:
+                            switch (Dice.Percentile())
+                            {
+                                case 1:
+                                    if (!forceStandard)
+                                        Race = RACE.DEEP_DWARF; 
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 2:
+                                    if (!forceNonStandard)
+                                        Race = RACE.HIGH_ELF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
+                                    break;
+                                case 3:
+                                    if (!forceStandard)
+                                        Race = RACE.WOOD_ELF;
+                                    else
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 4:
                                 case 5:
@@ -6049,10 +6024,10 @@ namespace NPCGen
                                 case 16:
                                 case 17:
                                 case 18:
-                                    if (!ForceNonStandard)
-                                        Race = RACE.HALFELF; 
+                                    if (!forceNonStandard)
+                                        Race = RACE.HALFELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 19:
                                 case 20:
@@ -6074,22 +6049,22 @@ namespace NPCGen
                                 case 36:
                                 case 37:
                                 case 38:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.LIGHTFOOT_HALFLING;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 39:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.DEEP_HALFLING;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 40:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.TALLFELLOW_HALFLING;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 41:
                                 case 42:
@@ -6101,10 +6076,10 @@ namespace NPCGen
                                 case 48:
                                 case 49:
                                 case 50:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HALFORC;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 51:
                                 case 52:
@@ -6126,10 +6101,10 @@ namespace NPCGen
                                 case 68:
                                 case 69:
                                 case 70:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HUMAN;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 71:
                                 case 72:
@@ -6146,87 +6121,87 @@ namespace NPCGen
                                 case 83:
                                 case 84:
                                 case 85:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.GOBLIN;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 86:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.HOBGOBLIN;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 87:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.KOBOLD;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 88:
                                 case 89:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.TIEFLING;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 90:
                                 case 91:
                                 case 92:
                                 case 93:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.BUGBEAR;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 94:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.MIND_FLAYER;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 95:
                                 case 96:
-                                    if (AllowMetaRaces || ForceNonStandard)
+                                    if (allowMetaRaces || forceNonStandard)
                                     {
                                         MetaRace = METARACE.WERERAT;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
+                                        RaceByAlignment(alignment, charClass, false, false, false);
                                     }
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 97:
-                                    if (AllowMetaRaces || ForceNonStandard)
+                                    if (allowMetaRaces || forceNonStandard)
                                     {
                                         MetaRace = METARACE.WEREWOLF;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
+                                        RaceByAlignment(alignment, charClass, false, false, false);
                                     }
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 98:
                                 case 99:
-                                    if (AllowMetaRaces || ForceNonStandard)
+                                    if (allowMetaRaces || forceNonStandard)
                                     {
                                         MetaRace = METARACE.HALF_FIEND;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
+                                        RaceByAlignment(alignment, charClass, false, false, false);
                                     }
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 100:
-                                    if (AllowMetaRaces || ForceNonStandard)
+                                    if (allowMetaRaces || forceNonStandard)
                                     {
                                         MetaRace = METARACE.HALF_DRAGON;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
+                                        RaceByAlignment(alignment, charClass, false, false, false);
                                     }
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 default: Race = RACE.HUMAN; MetaRace = METARACE.NONE; break;
                             } break;
-                        case Classes.CLASS.WIZARD:
-                            switch (Dice.Percentile(ref random))
+                        case CLASS.WIZARD:
+                            switch (Dice.Percentile())
                             {
                                 case 1:
                                 case 2:
@@ -6238,16 +6213,16 @@ namespace NPCGen
                                 case 8:
                                 case 9:
                                 case 10:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HIGH_ELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 11:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.WOOD_ELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 12:
                                 case 13:
@@ -6264,22 +6239,22 @@ namespace NPCGen
                                 case 24:
                                 case 25:
                                 case 26:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HALFELF;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 27:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.LIGHTFOOT_HALFLING;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 28:
-                                    if (!ForceStandard)
-                                        Race = RACE.TALLFELLOW_HALFLING; 
+                                    if (!forceStandard)
+                                        Race = RACE.TALLFELLOW_HALFLING;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 29:
                                 case 30:
@@ -6331,23 +6306,23 @@ namespace NPCGen
                                 case 76:
                                 case 77:
                                 case 78:
-                                    if (!ForceNonStandard)
+                                    if (!forceNonStandard)
                                         Race = RACE.HUMAN;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 79:
                                 case 80:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.HOBGOBLIN;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 81:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.TIEFLING;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 82:
                                 case 83:
@@ -6359,74 +6334,74 @@ namespace NPCGen
                                 case 89:
                                 case 90:
                                 case 91:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                     {
-                                        Race = RACE.DROW; 
+                                        Race = RACE.DROW;
                                         Male = true;
                                     }
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 92:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.GNOLL;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 93:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.BUGBEAR;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 94:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.MIND_FLAYER;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 95:
                                 case 96:
-                                    if (!ForceStandard)
+                                    if (!forceStandard)
                                         Race = RACE.OGRE_MAGE;
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 97:
-                                    if (AllowMetaRaces || ForceNonStandard)
+                                    if (allowMetaRaces || forceNonStandard)
                                     {
                                         MetaRace = METARACE.WERERAT;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
+                                        RaceByAlignment(alignment, charClass, false, false, false);
                                     }
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 98:
-                                    if (AllowMetaRaces || ForceNonStandard)
+                                    if (allowMetaRaces || forceNonStandard)
                                     {
                                         MetaRace = METARACE.WEREWOLF;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
+                                        RaceByAlignment(alignment, charClass, false, false, false);
                                     }
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 99:
-                                    if (AllowMetaRaces || ForceNonStandard)
+                                    if (allowMetaRaces || forceNonStandard)
                                     {
                                         MetaRace = METARACE.HALF_FIEND;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
+                                        RaceByAlignment(alignment, charClass, false, false, false);
                                     }
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 case 100:
-                                    if (AllowMetaRaces || ForceNonStandard)
+                                    if (allowMetaRaces || forceNonStandard)
                                     {
                                         MetaRace = METARACE.HALF_DRAGON;
-                                        RaceByAlignment(Alignment, Class, false, false, false, ref random);
+                                        RaceByAlignment(alignment, charClass, false, false, false);
                                     }
                                     else
-                                        RaceByAlignment(Alignment, Class, AllowMetaRaces, ForceStandard, ForceNonStandard, ref random);
+                                        RaceByAlignment(alignment, charClass, allowMetaRaces, forceStandard, forceNonStandard);
                                     break;
                                 default: Race = RACE.HUMAN; MetaRace = METARACE.NONE; break;
                             } break;
@@ -6436,255 +6411,254 @@ namespace NPCGen
             }
         }
 
-        public static METARACE RandomMetaRace(Character.ALIGNMENT Alignment, Classes.CLASS Class, METARACE_RANDOMIZER Randomizer, ref Random random)
+        public static METARACE RandomMetaRace(ALIGNMENT Alignment, CLASS Class, METARACE_RANDOMIZER Randomizer)
         {
-            int Roll;
             switch (Randomizer)
             {
                 case METARACE_RANDOMIZER.ANY:
                     switch (Alignment)
                     {
-                        case Character.ALIGNMENT.GOOD:
+                        case ALIGNMENT.GOOD:
                             switch (Class)
                             {
-                                case Classes.CLASS.BARBARIAN:
-                                case Classes.CLASS.BARD:
-                                    if (Dice.Percentile(ref random) < 51)
+                                case CLASS.BARBARIAN:
+                                case CLASS.BARD:
+                                    if (Dice.Percentile() < 51)
                                         return METARACE.HALF_CELESTIAL;
                                     return METARACE.HALF_DRAGON;
-                                case Classes.CLASS.CLERIC:
-                                    Roll = Dice.Percentile(ref random);
-                                    if (Roll < 51)
+                                case CLASS.CLERIC:
+                                    var roll = Dice.Percentile();
+                                    if (roll < 51)
                                         return METARACE.HALF_CELESTIAL;
-                                    else if (Roll < 76)
+                                    else if (roll < 76)
                                         return METARACE.HALF_DRAGON;
                                     return METARACE.WEREBEAR;
-                                case Classes.CLASS.DRUID: return METARACE.HALF_CELESTIAL;
-                                case Classes.CLASS.FIGHTER:
-                                case Classes.CLASS.MONK:
-                                case Classes.CLASS.PALADIN:
-                                case Classes.CLASS.RANGER:
-                                case Classes.CLASS.THIEF:
-                                case Classes.CLASS.WIZARD:
-                                    Roll = Dice.d6(ref random);
-                                    if (Roll < 3)
+                                case CLASS.DRUID: return METARACE.HALF_CELESTIAL;
+                                case CLASS.FIGHTER:
+                                case CLASS.MONK:
+                                case CLASS.PALADIN:
+                                case CLASS.RANGER:
+                                case CLASS.THIEF:
+                                case CLASS.WIZARD:
+                                    roll = Dice.d6();
+                                    if (roll < 3)
                                         return METARACE.HALF_CELESTIAL;
-                                    else if (Roll < 5)
+                                    else if (roll < 5)
                                         return METARACE.HALF_DRAGON;
                                     return METARACE.WEREBEAR;
-                                case Classes.CLASS.SORCERER:
-                                    Roll = Dice.Percentile(ref random);
-                                    if (Roll < 26)
+                                case CLASS.SORCERER:
+                                    roll = Dice.Percentile();
+                                    if (roll < 26)
                                         return METARACE.HALF_CELESTIAL;
-                                    else if (Roll < 76)
+                                    else if (roll < 76)
                                         return METARACE.HALF_DRAGON;
                                     return METARACE.WEREBEAR;
                                 default: return METARACE.NONE;
                             }
-                        case Character.ALIGNMENT.NEUTRAL:
+                        case ALIGNMENT.NEUTRAL:
                             switch (Class)
                             {
-                                case Classes.CLASS.BARBARIAN:
-                                case Classes.CLASS.BARD:
-                                case Classes.CLASS.CLERIC:
-                                case Classes.CLASS.DRUID:
-                                case Classes.CLASS.FIGHTER:
-                                case Classes.CLASS.PALADIN:
-                                case Classes.CLASS.RANGER:
-                                case Classes.CLASS.SORCERER:
-                                case Classes.CLASS.THIEF:
-                                case Classes.CLASS.WIZARD:
-                                    if (Dice.Percentile(ref random) < 51)
+                                case CLASS.BARBARIAN:
+                                case CLASS.BARD:
+                                case CLASS.CLERIC:
+                                case CLASS.DRUID:
+                                case CLASS.FIGHTER:
+                                case CLASS.PALADIN:
+                                case CLASS.RANGER:
+                                case CLASS.SORCERER:
+                                case CLASS.THIEF:
+                                case CLASS.WIZARD:
+                                    if (Dice.Percentile() < 51)
                                         return METARACE.WEREBOAR;
                                     return METARACE.WERETIGER;
                                 default: return METARACE.NONE;
                             }
-                        case Character.ALIGNMENT.EVIL:
+                        case ALIGNMENT.EVIL:
                             switch (Class)
                             {
-                                case Classes.CLASS.BARBARIAN:
-                                    Roll = Dice.d6(ref random);
-                                    if (Roll < 3)
+                                case CLASS.BARBARIAN:
+                                    var roll = Dice.d6();
+                                    if (roll < 3)
                                         return METARACE.WEREWOLF;
-                                    else if (Roll < 5)
+                                    else if (roll < 5)
                                         return METARACE.HALF_FIEND;
                                     return METARACE.HALF_DRAGON;
-                                case Classes.CLASS.BARD: return METARACE.WEREWOLF;
-                                case Classes.CLASS.CLERIC:
-                                    Roll = Dice.Percentile(ref random);
-                                    if (Roll < 21)
+                                case CLASS.BARD: return METARACE.WEREWOLF;
+                                case CLASS.CLERIC:
+                                    roll = Dice.Percentile();
+                                    if (roll < 21)
                                         return METARACE.WERERAT;
-                                    else if (Roll < 41)
+                                    else if (roll < 41)
                                         return METARACE.WEREWOLF;
-                                    else if (Roll < 81)
+                                    else if (roll < 81)
                                         return METARACE.HALF_FIEND;
                                     return METARACE.HALF_DRAGON;
-                                case Classes.CLASS.FIGHTER:
-                                case Classes.CLASS.WIZARD:
-                                    Roll = Dice.Percentile(ref random);
-                                    if (Roll < 26)
+                                case CLASS.FIGHTER:
+                                case CLASS.WIZARD:
+                                    roll = Dice.Percentile();
+                                    if (roll < 26)
                                         return METARACE.WERERAT;
-                                    else if (Roll < 51)
+                                    else if (roll < 51)
                                         return METARACE.WEREWOLF;
-                                    else if (Roll < 76)
+                                    else if (roll < 76)
                                         return METARACE.HALF_FIEND;
                                     return METARACE.HALF_DRAGON;
-                                case Classes.CLASS.MONK:
-                                    Roll = Dice.Percentile(ref random);
-                                    if (Roll < 51)
+                                case CLASS.MONK:
+                                    roll = Dice.Percentile();
+                                    if (roll < 51)
                                         return METARACE.WERERAT;
-                                    else if (Roll < 76)
+                                    else if (roll < 76)
                                         return METARACE.HALF_FIEND;
                                     return METARACE.HALF_DRAGON;
-                                case Classes.CLASS.PALADIN: return METARACE.HALF_DRAGON;
-                                case Classes.CLASS.RANGER:
-                                    Roll = Dice.Percentile(ref random);
-                                    if (Roll < 21)
+                                case CLASS.PALADIN: return METARACE.HALF_DRAGON;
+                                case CLASS.RANGER:
+                                    roll = Dice.Percentile();
+                                    if (roll < 21)
                                         return METARACE.WERERAT;
-                                    else if (Roll < 61)
+                                    else if (roll < 61)
                                         return METARACE.WEREWOLF;
-                                    else if (Roll < 81)
+                                    else if (roll < 81)
                                         return METARACE.HALF_FIEND;
                                     return METARACE.HALF_DRAGON;
-                                case Classes.CLASS.SORCERER:
-                                    Roll = Dice.Percentile(ref random);
-                                    if (Roll < 21)
+                                case CLASS.SORCERER:
+                                    roll = Dice.Percentile();
+                                    if (roll < 21)
                                         return METARACE.WERERAT;
-                                    else if (Roll < 41)
+                                    else if (roll < 41)
                                         return METARACE.WEREWOLF;
-                                    else if (Roll < 61)
+                                    else if (roll < 61)
                                         return METARACE.HALF_FIEND;
                                     return METARACE.HALF_DRAGON;
-                                case Classes.CLASS.THIEF:
-                                    Roll = Dice.d6(ref random);
-                                    if (Roll < 3)
+                                case CLASS.THIEF:
+                                    roll = Dice.d6();
+                                    if (roll < 3)
                                         return METARACE.WERERAT;
-                                    else if (Roll < 4)
+                                    else if (roll < 4)
                                         return METARACE.WEREWOLF;
-                                    else if (Roll < 6)
+                                    else if (roll < 6)
                                         return METARACE.HALF_FIEND;
                                     return METARACE.HALF_DRAGON;
                                 default: return METARACE.NONE;
                             }
                         default: return METARACE.NONE;
                     }
-                case METARACE_RANDOMIZER.ANY_EVIL: return RandomMetaRace(Character.ALIGNMENT.EVIL, Class, METARACE_RANDOMIZER.ANY, ref random);
-                case METARACE_RANDOMIZER.ANY_GOOD: return RandomMetaRace(Character.ALIGNMENT.GOOD, Class, METARACE_RANDOMIZER.ANY, ref random);
+                case METARACE_RANDOMIZER.ANY_EVIL: return RandomMetaRace(ALIGNMENT.EVIL, Class, METARACE_RANDOMIZER.ANY);
+                case METARACE_RANDOMIZER.ANY_GOOD: return RandomMetaRace(ALIGNMENT.GOOD, Class, METARACE_RANDOMIZER.ANY);
                 case METARACE_RANDOMIZER.ANY_LYCANTHROPE:
                     switch (Alignment)
                     {
-                        case Character.ALIGNMENT.GOOD:
+                        case ALIGNMENT.GOOD:
                             switch (Class)
                             {
-                                case Classes.CLASS.CLERIC:                                   
-                                case Classes.CLASS.FIGHTER:
-                                case Classes.CLASS.MONK:
-                                case Classes.CLASS.PALADIN:
-                                case Classes.CLASS.RANGER:
-                                case Classes.CLASS.THIEF:
-                                case Classes.CLASS.WIZARD:
-                                case Classes.CLASS.SORCERER: return METARACE.WEREBEAR;
+                                case CLASS.CLERIC:                                   
+                                case CLASS.FIGHTER:
+                                case CLASS.MONK:
+                                case CLASS.PALADIN:
+                                case CLASS.RANGER:
+                                case CLASS.THIEF:
+                                case CLASS.WIZARD:
+                                case CLASS.SORCERER: return METARACE.WEREBEAR;
                                 default: return METARACE.NONE;
                             }
-                        case Character.ALIGNMENT.NEUTRAL:
+                        case ALIGNMENT.NEUTRAL:
                             switch (Class)
                             {
-                                case Classes.CLASS.BARBARIAN:
-                                case Classes.CLASS.BARD:
-                                case Classes.CLASS.CLERIC:
-                                case Classes.CLASS.DRUID:
-                                case Classes.CLASS.FIGHTER:
-                                case Classes.CLASS.PALADIN:
-                                case Classes.CLASS.RANGER:
-                                case Classes.CLASS.SORCERER:
-                                case Classes.CLASS.THIEF:
-                                case Classes.CLASS.WIZARD:
-                                    if (Dice.Percentile(ref random) < 51)
+                                case CLASS.BARBARIAN:
+                                case CLASS.BARD:
+                                case CLASS.CLERIC:
+                                case CLASS.DRUID:
+                                case CLASS.FIGHTER:
+                                case CLASS.PALADIN:
+                                case CLASS.RANGER:
+                                case CLASS.SORCERER:
+                                case CLASS.THIEF:
+                                case CLASS.WIZARD:
+                                    if (Dice.Percentile() < 51)
                                         return METARACE.WEREBOAR;
                                     return METARACE.WERETIGER;
                                 default: return METARACE.NONE;
                             }
-                        case Character.ALIGNMENT.EVIL:
+                        case ALIGNMENT.EVIL:
                             switch (Class)
                             {
-                                case Classes.CLASS.BARBARIAN:
-                                case Classes.CLASS.BARD: return METARACE.WEREWOLF;
-                                case Classes.CLASS.CLERIC:
-                                case Classes.CLASS.FIGHTER:
-                                case Classes.CLASS.WIZARD:
-                                case Classes.CLASS.SORCERER:
-                                    if (Dice.Percentile(ref random) < 51)
+                                case CLASS.BARBARIAN:
+                                case CLASS.BARD: return METARACE.WEREWOLF;
+                                case CLASS.CLERIC:
+                                case CLASS.FIGHTER:
+                                case CLASS.WIZARD:
+                                case CLASS.SORCERER:
+                                    if (Dice.Percentile() < 51)
                                         return METARACE.WERERAT;
                                     return METARACE.WEREWOLF;
-                                case Classes.CLASS.MONK: return METARACE.WERERAT;
-                                case Classes.CLASS.RANGER:
-                                    if (Dice.d6(ref random) < 3)
+                                case CLASS.MONK: return METARACE.WERERAT;
+                                case CLASS.RANGER:
+                                    if (Dice.d6() < 3)
                                         return METARACE.WERERAT;
                                     return METARACE.WEREWOLF;
-                                case Classes.CLASS.THIEF:
-                                    if (Dice.d6(ref random) < 3)
+                                case CLASS.THIEF:
+                                    if (Dice.d6() < 3)
                                         return METARACE.WEREWOLF;
                                     return METARACE.WERERAT;
                                 default: return METARACE.NONE;
                             }
                         default: return METARACE.NONE;
                     }
-                case METARACE_RANDOMIZER.ANY_NEUTRAL: return RandomMetaRace(Character.ALIGNMENT.NEUTRAL, Class, METARACE_RANDOMIZER.ANY, ref random);
+                case METARACE_RANDOMIZER.ANY_NEUTRAL: return RandomMetaRace(ALIGNMENT.NEUTRAL, Class, METARACE_RANDOMIZER.ANY);
                 case METARACE_RANDOMIZER.ANY_NONEVIL:
-                    if (Alignment != Character.ALIGNMENT.EVIL)
-                        return RandomMetaRace(Alignment, Class, METARACE_RANDOMIZER.ANY, ref random);
+                    if (Alignment != ALIGNMENT.EVIL)
+                        return RandomMetaRace(Alignment, Class, METARACE_RANDOMIZER.ANY);
                     return METARACE.NONE;
                 case METARACE_RANDOMIZER.ANY_NONGOOD:
-                    if (Alignment != Character.ALIGNMENT.GOOD)
-                        return RandomMetaRace(Alignment, Class, METARACE_RANDOMIZER.ANY, ref random);
+                    if (Alignment != ALIGNMENT.GOOD)
+                        return RandomMetaRace(Alignment, Class, METARACE_RANDOMIZER.ANY);
                     return METARACE.NONE;
                 case METARACE_RANDOMIZER.ANY_NONLYCANTHROPE:
                     switch (Alignment)
                     {
-                        case Character.ALIGNMENT.GOOD:
+                        case ALIGNMENT.GOOD:
                             switch (Class)
                             {
-                                case Classes.CLASS.BARBARIAN:
-                                case Classes.CLASS.BARD:
-                                case Classes.CLASS.FIGHTER:
-                                case Classes.CLASS.MONK:
-                                case Classes.CLASS.PALADIN:
-                                case Classes.CLASS.RANGER:
-                                case Classes.CLASS.THIEF:
-                                case Classes.CLASS.WIZARD:
-                                    if (Dice.Percentile(ref random) < 51)
+                                case CLASS.BARBARIAN:
+                                case CLASS.BARD:
+                                case CLASS.FIGHTER:
+                                case CLASS.MONK:
+                                case CLASS.PALADIN:
+                                case CLASS.RANGER:
+                                case CLASS.THIEF:
+                                case CLASS.WIZARD:
+                                    if (Dice.Percentile() < 51)
                                         return METARACE.HALF_CELESTIAL;
                                     return METARACE.HALF_DRAGON;
-                                case Classes.CLASS.CLERIC:
-                                    if (Dice.d6(ref random) < 5)
+                                case CLASS.CLERIC:
+                                    if (Dice.d6() < 5)
                                         return METARACE.HALF_CELESTIAL;
                                     return METARACE.HALF_DRAGON;
-                                case Classes.CLASS.DRUID: return METARACE.HALF_CELESTIAL;
-                                case Classes.CLASS.SORCERER:
-                                    if (Dice.d6(ref random) < 3)
+                                case CLASS.DRUID: return METARACE.HALF_CELESTIAL;
+                                case CLASS.SORCERER:
+                                    if (Dice.d6() < 3)
                                         return METARACE.HALF_CELESTIAL;
                                     return METARACE.HALF_DRAGON;
                                 default: return METARACE.NONE;
                             }
-                        case Character.ALIGNMENT.EVIL:
+                        case ALIGNMENT.EVIL:
                             switch (Class)
                             {
-                                case Classes.CLASS.BARBARIAN:
-                                case Classes.CLASS.FIGHTER:
-                                case Classes.CLASS.WIZARD:
-                                case Classes.CLASS.MONK:
-                                case Classes.CLASS.RANGER:
-                                    if (Dice.d6(ref random) < 4)
+                                case CLASS.BARBARIAN:
+                                case CLASS.FIGHTER:
+                                case CLASS.WIZARD:
+                                case CLASS.MONK:
+                                case CLASS.RANGER:
+                                    if (Dice.d6() < 4)
                                         return METARACE.HALF_FIEND;
                                     return METARACE.HALF_DRAGON;
-                                case Classes.CLASS.CLERIC:
-                                case Classes.CLASS.THIEF:
-                                    if (Dice.d6(ref random) < 5)
+                                case CLASS.CLERIC:
+                                case CLASS.THIEF:
+                                    if (Dice.d6() < 5)
                                         return METARACE.HALF_FIEND;
                                     return METARACE.HALF_DRAGON;
-                                case Classes.CLASS.PALADIN: return METARACE.HALF_DRAGON;
-                                case Classes.CLASS.SORCERER:
-                                    if (Dice.d6(ref random) < 3)
+                                case CLASS.PALADIN: return METARACE.HALF_DRAGON;
+                                case CLASS.SORCERER:
+                                    if (Dice.d6() < 3)
                                         return METARACE.HALF_FIEND;
                                     return METARACE.HALF_DRAGON;
                                 default: return METARACE.NONE;
@@ -6692,14 +6666,14 @@ namespace NPCGen
                         default: return METARACE.NONE;
                     }
                 case METARACE_RANDOMIZER.ANY_NONNEUTRAL:
-                    if (Alignment != Character.ALIGNMENT.NEUTRAL)
-                        return RandomMetaRace(Alignment, Class, METARACE_RANDOMIZER.ANY, ref random);
+                    if (Alignment != ALIGNMENT.NEUTRAL)
+                        return RandomMetaRace(Alignment, Class, METARACE_RANDOMIZER.ANY);
                     return METARACE.NONE;
                 default: return METARACE.NONE;
             }
         }
 
-        public bool CanSpeak(string Language)
+        public Boolean CanSpeak(String Language)
         {
             switch (Race)
             {
@@ -6932,11 +6906,9 @@ namespace NPCGen
 
         public override string ToString()
         {
-            string MetaRaceString = "";
+            var MetaRaceString = String.Empty;
             if (MetaRace != METARACE.NONE)
-            {
                 MetaRaceString = Enum.GetName(typeof(METARACE), MetaRace) + " ";
-            }
             
             return String.Format("{0} {1}{2}", Gender, MetaRaceString, Enum.GetName(typeof(RACE), Race));
         }

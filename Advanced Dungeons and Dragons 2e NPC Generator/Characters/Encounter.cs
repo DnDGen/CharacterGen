@@ -1,14 +1,15 @@
+using NPCGen.Roll;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace NPCGen
+namespace NPCGen.Characters
 {
     class Encounter
     {
-        public static string Generate(int Level, ref Random random)
+        public static String Generate(Int32 Level)
         {
-            switch (Dice.Percentile(ref random))
+            switch (Dice.Percentile())
             {
                 case 1:
                 case 2:
@@ -20,27 +21,27 @@ namespace NPCGen
                         case 1:
                         case 2:
                         case 3:
-                        case 4: return Level1(ref random);
+                        case 4: return Level1();
                         case 5:
-                        case 6: return Level2(ref random);
-                        case 7: return Level3(ref random);
-                        case 8: return Level4(ref random);
-                        case 9: return Level5(ref random);
-                        case 10: return Level6(ref random);
-                        case 11: return Level7(ref random);
-                        case 12: return Level8(ref random);
-                        case 13: return Level9(ref random);
-                        case 14: return Level10(ref random);
-                        case 15: return Level11(ref random);
-                        case 16: return Level12(ref random);
-                        case 17: return Level13(ref random);
-                        case 18: return Level14(ref random);
-                        case 19: return Level15(ref random);
-                        case 20: return Level16(ref random);
-                        case 21: return Level17(ref random);
-                        case 22: return Level18(ref random);
-                        case 23: return Level19(ref random);
-                        case 24: return Level20(ref random);
+                        case 6: return Level2();
+                        case 7: return Level3();
+                        case 8: return Level4();
+                        case 9: return Level5();
+                        case 10: return Level6();
+                        case 11: return Level7();
+                        case 12: return Level8();
+                        case 13: return Level9();
+                        case 14: return Level10();
+                        case 15: return Level11();
+                        case 16: return Level12();
+                        case 17: return Level13();
+                        case 18: return Level14();
+                        case 19: return Level15();
+                        case 20: return Level16();
+                        case 21: return Level17();
+                        case 22: return Level18();
+                        case 23: return Level19();
+                        case 24: return Level20();
                         default: return "Epic-Level Monster";
                     }
                 case 6:
@@ -53,26 +54,26 @@ namespace NPCGen
                         case 1:
                         case 2:
                         case 3:
-                        case 4: return Level1(ref random);
-                        case 5: return Level2(ref random);
-                        case 6: return Level3(ref random);
-                        case 7: return Level4(ref random);
-                        case 8: return Level5(ref random);
-                        case 9: return Level6(ref random);
-                        case 10: return Level7(ref random);
-                        case 11: return Level8(ref random);
-                        case 12: return Level9(ref random);
-                        case 13: return Level10(ref random);
-                        case 14: return Level11(ref random);
-                        case 15: return Level12(ref random);
-                        case 16: return Level13(ref random);
-                        case 17: return Level14(ref random);
-                        case 18: return Level15(ref random);
-                        case 19: return Level16(ref random);
-                        case 20: return Level17(ref random);
-                        case 21: return Level18(ref random);
-                        case 22: return Level19(ref random);
-                        case 23: return Level20(ref random);
+                        case 4: return Level1();
+                        case 5: return Level2();
+                        case 6: return Level3();
+                        case 7: return Level4();
+                        case 8: return Level5();
+                        case 9: return Level6();
+                        case 10: return Level7();
+                        case 11: return Level8();
+                        case 12: return Level9();
+                        case 13: return Level10();
+                        case 14: return Level11();
+                        case 15: return Level12();
+                        case 16: return Level13();
+                        case 17: return Level14();
+                        case 18: return Level15();
+                        case 19: return Level16();
+                        case 20: return Level17();
+                        case 21: return Level18();
+                        case 22: return Level19();
+                        case 23: return Level20();
                         default: return "Epic-level Monster";
                     }
                 case 11:
@@ -88,27 +89,27 @@ namespace NPCGen
                     switch (Level)
                     {
                         case 1:
-                        case 2: return Level1(ref random);
+                        case 2: return Level1();
                         case 3:
-                        case 4: return Level2(ref random);
-                        case 5: return Level3(ref random);
-                        case 6: return Level4(ref random);
-                        case 7: return Level5(ref random);
-                        case 8: return Level6(ref random);
-                        case 9: return Level7(ref random);
-                        case 10: return Level8(ref random);
-                        case 11: return Level9(ref random);
-                        case 12: return Level10(ref random);
-                        case 13: return Level11(ref random);
-                        case 14: return Level12(ref random);
-                        case 15: return Level13(ref random);
-                        case 16: return Level14(ref random);
-                        case 17: return Level15(ref random);
-                        case 18: return Level16(ref random);
-                        case 19: return Level17(ref random);
-                        case 20: return Level18(ref random);
-                        case 21: return Level19(ref random);
-                        case 22: return Level20(ref random);
+                        case 4: return Level2();
+                        case 5: return Level3();
+                        case 6: return Level4();
+                        case 7: return Level5();
+                        case 8: return Level6();
+                        case 9: return Level7();
+                        case 10: return Level8();
+                        case 11: return Level9();
+                        case 12: return Level10();
+                        case 13: return Level11();
+                        case 14: return Level12();
+                        case 15: return Level13();
+                        case 16: return Level14();
+                        case 17: return Level15();
+                        case 18: return Level16();
+                        case 19: return Level17();
+                        case 20: return Level18();
+                        case 21: return Level19();
+                        case 22: return Level20();
                         default: return "Epic-level Monster";
                     }
                 case 21:
@@ -123,27 +124,27 @@ namespace NPCGen
                 case 30:
                     switch (Level)
                     {
-                        case 1: return Level1(ref random);
+                        case 1: return Level1();
                         case 2:
-                        case 3: return Level2(ref random);
-                        case 4: return Level3(ref random);
-                        case 5: return Level4(ref random);
-                        case 6: return Level5(ref random);
-                        case 7: return Level6(ref random);
-                        case 8: return Level7(ref random);
-                        case 9: return Level8(ref random);
-                        case 10: return Level9(ref random);
-                        case 11: return Level10(ref random);
-                        case 12: return Level11(ref random);
-                        case 13: return Level12(ref random);
-                        case 14: return Level13(ref random);
-                        case 15: return Level14(ref random);
-                        case 16: return Level15(ref random);
-                        case 17: return Level16(ref random);
-                        case 18: return Level17(ref random);
-                        case 19: return Level18(ref random);
-                        case 20: return Level19(ref random);
-                        case 21: return Level20(ref random);
+                        case 3: return Level2();
+                        case 4: return Level3();
+                        case 5: return Level4();
+                        case 6: return Level5();
+                        case 7: return Level6();
+                        case 8: return Level7();
+                        case 9: return Level8();
+                        case 10: return Level9();
+                        case 11: return Level10();
+                        case 12: return Level11();
+                        case 13: return Level12();
+                        case 14: return Level13();
+                        case 15: return Level14();
+                        case 16: return Level15();
+                        case 17: return Level16();
+                        case 18: return Level17();
+                        case 19: return Level18();
+                        case 20: return Level19();
+                        case 21: return Level20();
                         default: return "Epic-level Monster";
                     }
                 case 71:
@@ -158,26 +159,26 @@ namespace NPCGen
                 case 80:
                     switch (Level)
                     {
-                        case 1: return Level2(ref random);
-                        case 2: return Level3(ref random);
-                        case 3: return Level4(ref random);
-                        case 4: return Level5(ref random);
-                        case 5: return Level6(ref random);
-                        case 6: return Level7(ref random);
-                        case 7: return Level8(ref random);
-                        case 8: return Level9(ref random);
-                        case 9: return Level10(ref random);
-                        case 10: return Level11(ref random);
-                        case 11: return Level12(ref random);
-                        case 12: return Level13(ref random);
-                        case 13: return Level14(ref random);
-                        case 14: return Level15(ref random);
-                        case 15: return Level16(ref random);
-                        case 16: return Level17(ref random);
-                        case 17: return Level18(ref random);
+                        case 1: return Level2();
+                        case 2: return Level3();
+                        case 3: return Level4();
+                        case 4: return Level5();
+                        case 5: return Level6();
+                        case 6: return Level7();
+                        case 7: return Level8();
+                        case 8: return Level9();
+                        case 9: return Level10();
+                        case 10: return Level11();
+                        case 11: return Level12();
+                        case 12: return Level13();
+                        case 13: return Level14();
+                        case 14: return Level15();
+                        case 15: return Level16();
+                        case 16: return Level17();
+                        case 17: return Level18();
                         case 18:
-                        case 19: return Level19(ref random);
-                        case 20: return Level20(ref random);
+                        case 19: return Level19();
+                        case 20: return Level20();
                         default: return "Epic-level Monster";
                     }
                 case 81:
@@ -192,26 +193,26 @@ namespace NPCGen
                 case 90:
                     switch (Level)
                     {
-                        case 1: return Level2(ref random);
-                        case 2: return Level4(ref random);
-                        case 3: return Level5(ref random);
-                        case 4: return Level6(ref random);
-                        case 5: return Level7(ref random);
-                        case 6: return Level8(ref random);
-                        case 7: return Level9(ref random);
-                        case 8: return Level10(ref random);
-                        case 9: return Level11(ref random);
-                        case 10: return Level12(ref random);
-                        case 11: return Level13(ref random);
-                        case 12: return Level14(ref random);
-                        case 13: return Level15(ref random);
-                        case 14: return Level16(ref random);
-                        case 15: return Level17(ref random);
-                        case 16: return Level18(ref random);
-                        case 17: return Level19(ref random);
+                        case 1: return Level2();
+                        case 2: return Level4();
+                        case 3: return Level5();
+                        case 4: return Level6();
+                        case 5: return Level7();
+                        case 6: return Level8();
+                        case 7: return Level9();
+                        case 8: return Level10();
+                        case 9: return Level11();
+                        case 10: return Level12();
+                        case 11: return Level13();
+                        case 12: return Level14();
+                        case 13: return Level15();
+                        case 14: return Level16();
+                        case 15: return Level17();
+                        case 16: return Level18();
+                        case 17: return Level19();
                         case 18:
                         case 19:
-                        case 20: return Level20(ref random);
+                        case 20: return Level20();
                         default: return "Epic-level Monster";
                     }
                 case 91:
@@ -226,59 +227,59 @@ namespace NPCGen
                 case 100:
                     switch (Level)
                     {
-                        case 1: return Level3(ref random);
-                        case 2: return Level5(ref random);
-                        case 3: return Level6(ref random);
-                        case 4: return Level7(ref random);
-                        case 5: return Level8(ref random);
-                        case 6: return Level9(ref random);
-                        case 7: return Level10(ref random);
-                        case 8: return Level11(ref random);
-                        case 9: return Level12(ref random);
-                        case 10: return Level13(ref random);
-                        case 11: return Level14(ref random);
-                        case 12: return Level15(ref random);
-                        case 13: return Level16(ref random);
-                        case 14: return Level17(ref random);
-                        case 15: return Level18(ref random);
-                        case 16: return Level19(ref random);
+                        case 1: return Level3();
+                        case 2: return Level5();
+                        case 3: return Level6();
+                        case 4: return Level7();
+                        case 5: return Level8();
+                        case 6: return Level9();
+                        case 7: return Level10();
+                        case 8: return Level11();
+                        case 9: return Level12();
+                        case 10: return Level13();
+                        case 11: return Level14();
+                        case 12: return Level15();
+                        case 13: return Level16();
+                        case 14: return Level17();
+                        case 15: return Level18();
+                        case 16: return Level19();
                         case 17:
                         case 18:
                         case 19:
-                        case 20: return Level20(ref random);
+                        case 20: return Level20();
                         default: return "Epic-level Monster";
                     }
                 default:
                     switch (Level)
                     {
-                        case 1: return Level1(ref random);
-                        case 2: return Level2(ref random);
-                        case 3: return Level3(ref random);
-                        case 4: return Level4(ref random);
-                        case 5: return Level5(ref random);
-                        case 6: return Level6(ref random);
-                        case 7: return Level7(ref random);
-                        case 8: return Level8(ref random);
-                        case 9: return Level9(ref random);
-                        case 10: return Level10(ref random);
-                        case 11: return Level11(ref random);
-                        case 12: return Level12(ref random);
-                        case 13: return Level13(ref random);
-                        case 14: return Level14(ref random);
-                        case 15: return Level15(ref random);
-                        case 16: return Level16(ref random);
-                        case 17: return Level17(ref random);
-                        case 18: return Level18(ref random);
-                        case 19: return Level19(ref random);
-                        case 20: return Level20(ref random);
+                        case 1: return Level1();
+                        case 2: return Level2();
+                        case 3: return Level3();
+                        case 4: return Level4();
+                        case 5: return Level5();
+                        case 6: return Level6();
+                        case 7: return Level7();
+                        case 8: return Level8();
+                        case 9: return Level9();
+                        case 10: return Level10();
+                        case 11: return Level11();
+                        case 12: return Level12();
+                        case 13: return Level13();
+                        case 14: return Level14();
+                        case 15: return Level15();
+                        case 16: return Level16();
+                        case 17: return Level17();
+                        case 18: return Level18();
+                        case 19: return Level19();
+                        case 20: return Level20();
                         default: return "Epic-level Monster";
                     }
             }
         }
 
-        private static string Level1(ref Random random)
+        private static String Level1()
         {
-            switch (Dice.Percentile(ref random))
+            switch (Dice.Percentile())
             {
                 case 1:
                 case 2:
@@ -304,7 +305,7 @@ namespace NPCGen
                 case 22:
                 case 23:
                 case 24:
-                case 25: return Dragon(ref random);
+                case 25: return Dragon();
                 case 26:
                 case 27:
                 case 28:
@@ -319,7 +320,7 @@ namespace NPCGen
                 case 37:
                 case 38:
                 case 39:
-                case 40: return Character.HumanoidSubtype(ref random);
+                case 40: return Character.HumanoidSubtype();
                 case 41:
                 case 42:
                 case 43:
@@ -374,9 +375,9 @@ namespace NPCGen
             }
         }
 
-        private static string Level2(ref Random random)
+        private static String Level2()
         {
-            switch (Dice.Percentile(ref random))
+            switch (Dice.Percentile())
             {
                 case 1:
                 case 2:
@@ -402,7 +403,7 @@ namespace NPCGen
                 case 22:
                 case 23:
                 case 24:
-                case 25: return Dragon(ref random);
+                case 25: return Dragon();
                 case 26:
                 case 27:
                 case 28:
@@ -412,7 +413,7 @@ namespace NPCGen
                 case 32:
                 case 33:
                 case 34:
-                case 35: return Character.HumanoidSubtype(ref random);
+                case 35: return Character.HumanoidSubtype();
                 case 36:
                 case 37: return "choker";
                 case 38:
@@ -472,9 +473,9 @@ namespace NPCGen
             }
         }
 
-        private static string Level3(ref Random random)
+        private static String Level3()
         {
-            switch (Dice.Percentile(ref random))
+            switch (Dice.Percentile())
             {
                 case 1:
                 case 2: return "giant bombardier beetles";
@@ -495,7 +496,7 @@ namespace NPCGen
                 case 17:
                 case 18:
                 case 19:
-                case 20: return Dragon(ref random);
+                case 20: return Dragon();
                 case 21:
                 case 22:
                 case 23:
@@ -515,7 +516,7 @@ namespace NPCGen
                 case 37:
                 case 38:
                 case 39:
-                case 40: return Character.HumanoidSubtype(ref random);
+                case 40: return Character.HumanoidSubtype();
                 case 41:
                 case 42:
                 case 43:
@@ -570,9 +571,9 @@ namespace NPCGen
             }
         }
 
-        private static string Level4(ref Random random)
+        private static String Level4()
         {
-            switch (Dice.Percentile(ref random))
+            switch (Dice.Percentile())
             {
                 case 1:
                 case 2:
@@ -593,7 +594,7 @@ namespace NPCGen
                 case 17:
                 case 18:
                 case 19:
-                case 20: return Dragon(ref random);
+                case 20: return Dragon();
                 case 21:
                 case 22:
                 case 23: return "formian";
@@ -613,7 +614,7 @@ namespace NPCGen
                 case 37:
                 case 38:
                 case 39:
-                case 40: return Character.HumanoidSubtype(ref random);
+                case 40: return Character.HumanoidSubtype();
                 case 41:
                 case 42:
                 case 43:
@@ -673,9 +674,9 @@ namespace NPCGen
             }
         }
 
-        private static string Level5(ref Random random)
+        private static String Level5()
         {
-            switch (Dice.Percentile(ref random))
+            switch (Dice.Percentile())
             {
                 case 1:
                 case 2: return "giant ants";
@@ -696,7 +697,7 @@ namespace NPCGen
                 case 17:
                 case 18:
                 case 19:
-                case 20: return Dragon(ref random);
+                case 20: return Dragon();
                 case 21:
                 case 22:
                 case 23: return "doppelgangers";
@@ -716,7 +717,7 @@ namespace NPCGen
                 case 37:
                 case 38:
                 case 39:
-                case 40: return Character.HumanoidSubtype(ref random);
+                case 40: return Character.HumanoidSubtype();
                 case 41:
                 case 42:
                 case 43: return "cockatrices";
@@ -776,9 +777,9 @@ namespace NPCGen
             }
         }
 
-        private static string Level6(ref Random random)
+        private static String Level6()
         {
-            switch (Dice.Percentile(ref random))
+            switch (Dice.Percentile())
             {
                 case 1:
                 case 2: return "digester";
@@ -799,7 +800,7 @@ namespace NPCGen
                 case 17:
                 case 18:
                 case 19:
-                case 20: return Dragon(ref random);
+                case 20: return Dragon();
                 case 21:
                 case 22: return "annis";
                 case 23:
@@ -819,7 +820,7 @@ namespace NPCGen
                 case 37:
                 case 38:
                 case 39:
-                case 40: return Character.HumanoidSubtype(ref random);
+                case 40: return Character.HumanoidSubtype();
                 case 41:
                 case 42:
                 case 43: return "arrowhawks";
@@ -874,9 +875,9 @@ namespace NPCGen
             }
         }
 
-        private static string Level7(ref Random random)
+        private static String Level7()
         {
-            switch (Dice.Percentile(ref random))
+            switch (Dice.Percentile())
             {
                 case 1:
                 case 2:
@@ -897,7 +898,7 @@ namespace NPCGen
                 case 17:
                 case 18:
                 case 19:
-                case 20: return Dragon(ref random);
+                case 20: return Dragon();
                 case 21:
                 case 22: return "araneas";
                 case 23:
@@ -917,7 +918,7 @@ namespace NPCGen
                 case 37:
                 case 38:
                 case 39:
-                case 40: return Character.HumanoidSubtype(ref random);
+                case 40: return Character.HumanoidSubtype();
                 case 41:
                 case 42:
                 case 43:
@@ -972,9 +973,9 @@ namespace NPCGen
             }
         }
 
-        private static string Level8(ref Random random)
+        private static String Level8()
         {
-            switch (Dice.Percentile(ref random))
+            switch (Dice.Percentile())
             {
                 case 1:
                 case 2:
@@ -995,7 +996,7 @@ namespace NPCGen
                 case 17:
                 case 18:
                 case 19:
-                case 20: return Dragon(ref random);
+                case 20: return Dragon();
                 case 21:
                 case 22: return "aboleth";
                 case 23:
@@ -1020,7 +1021,7 @@ namespace NPCGen
                 case 42:
                 case 43:
                 case 44:
-                case 45: return Character.HumanoidSubtype(ref random);
+                case 45: return Character.HumanoidSubtype();
                 case 46:
                 case 47: return "achaierais";
                 case 48: return "arrowhawks";
@@ -1069,9 +1070,9 @@ namespace NPCGen
             }
         }
 
-        private static string Level9(ref Random random)
+        private static String Level9()
         {
-            switch (Dice.Percentile(ref random))
+            switch (Dice.Percentile())
             {
                 case 1:
                 case 2:
@@ -1092,7 +1093,7 @@ namespace NPCGen
                 case 17:
                 case 18:
                 case 19:
-                case 20: return Dragon(ref random);
+                case 20: return Dragon();
                 case 21: return "bebilith";
                 case 22: return "lamias";
                 case 23:
@@ -1117,7 +1118,7 @@ namespace NPCGen
                 case 42:
                 case 43:
                 case 44:
-                case 45: return Character.HumanoidSubtype(ref random);
+                case 45: return Character.HumanoidSubtype();
                 case 46:
                 case 47: return "behirs";
                 case 48:
@@ -1167,9 +1168,9 @@ namespace NPCGen
             }
         }
 
-        private static string Level10(ref Random random)
+        private static String Level10()
         {
-            switch (Dice.Percentile(ref random))
+            switch (Dice.Percentile())
             {
                 case 1:
                 case 2:
@@ -1185,7 +1186,7 @@ namespace NPCGen
                 case 12:
                 case 13:
                 case 14:
-                case 15: return Dragon(ref random);
+                case 15: return Dragon();
                 case 16:
                 case 17: return "aboleths";
                 case 18:
@@ -1217,7 +1218,7 @@ namespace NPCGen
                 case 44:
                 case 45:
                 case 46:
-                case 47: return Character.HumanoidSubtype(ref random);
+                case 47: return Character.HumanoidSubtype();
                 case 48:
                 case 49: return "chaos beasts";
                 case 50:
@@ -1265,9 +1266,9 @@ namespace NPCGen
             }
         }
 
-        private static string Level11(ref Random random)
+        private static String Level11()
         {
-            switch (Dice.Percentile(ref random))
+            switch (Dice.Percentile())
             {
                 case 1:
                 case 2:
@@ -1283,7 +1284,7 @@ namespace NPCGen
                 case 12:
                 case 13:
                 case 14:
-                case 15: return Dragon(ref random);
+                case 15: return Dragon();
                 case 16:
                 case 17:
                 case 18: return "hags";
@@ -1313,7 +1314,7 @@ namespace NPCGen
                 case 42:
                 case 43:
                 case 44:
-                case 45: return Character.HumanoidSubtype(ref random);
+                case 45: return Character.HumanoidSubtype();
                 case 46:
                 case 47:
                 case 48: return "arrowhawks";
@@ -1363,9 +1364,9 @@ namespace NPCGen
             }
         }
 
-        private static string Level12(ref Random random)
+        private static String Level12()
         {
-            switch (Dice.Percentile(ref random))
+            switch (Dice.Percentile())
             {
                 case 1:
                 case 2:
@@ -1381,7 +1382,7 @@ namespace NPCGen
                 case 12:
                 case 13:
                 case 14:
-                case 15: return Dragon(ref random);
+                case 15: return Dragon();
                 case 16:
                 case 17:
                 case 18:
@@ -1452,13 +1453,13 @@ namespace NPCGen
                 case 98:
                 case 99:
                 case 100: return "vampire";
-                default: return Character.HumanoidSubtype(ref random);
+                default: return Character.HumanoidSubtype();
             }
         }
 
-        private static string Level13(ref Random random)
+        private static String Level13()
         {
-            switch (Dice.Percentile(ref random))
+            switch (Dice.Percentile())
             {
                 case 1:
                 case 2:
@@ -1474,7 +1475,7 @@ namespace NPCGen
                 case 12:
                 case 13:
                 case 14:
-                case 15: return Dragon(ref random);
+                case 15: return Dragon();
                 case 16:
                 case 17:
                 case 18:
@@ -1545,13 +1546,13 @@ namespace NPCGen
                 case 98:
                 case 99:
                 case 100: return "ghost";
-                default: return Character.HumanoidSubtype(ref random);
+                default: return Character.HumanoidSubtype();
             }
         }
 
-        private static string Level14(ref Random random)
+        private static String Level14()
         {
-            switch (Dice.Percentile(ref random))
+            switch (Dice.Percentile())
             {
                 case 1:
                 case 2:
@@ -1567,7 +1568,7 @@ namespace NPCGen
                 case 12:
                 case 13:
                 case 14:
-                case 15: return Dragon(ref random);
+                case 15: return Dragon();
                 case 16:
                 case 17:
                 case 18:
@@ -1638,13 +1639,13 @@ namespace NPCGen
                 case 98:
                 case 99:
                 case 100: return "lich";
-                default: return Character.HumanoidSubtype(ref random);
+                default: return Character.HumanoidSubtype();
             }
         }
 
-        private static string Level15(ref Random random)
+        private static String Level15()
         {
-            switch (Dice.Percentile(ref random))
+            switch (Dice.Percentile())
             {
                 case 1:
                 case 2:
@@ -1665,7 +1666,7 @@ namespace NPCGen
                 case 17:
                 case 18:
                 case 19:
-                case 20: return Dragon(ref random);
+                case 20: return Dragon();
                 case 21:
                 case 22:
                 case 23:
@@ -1721,13 +1722,13 @@ namespace NPCGen
                 case 98:
                 case 99:
                 case 100: return "vampire";
-                default: return Character.HumanoidSubtype(ref random);
+                default: return Character.HumanoidSubtype();
             }
         }
 
-        private static string Level16(ref Random random)
+        private static String Level16()
         {
-            switch (Dice.Percentile(ref random))
+            switch (Dice.Percentile())
             {
                 case 1:
                 case 2:
@@ -1748,7 +1749,7 @@ namespace NPCGen
                 case 17:
                 case 18:
                 case 19:
-                case 20: return Dragon(ref random);
+                case 20: return Dragon();
                 case 21:
                 case 22:
                 case 23:
@@ -1804,13 +1805,13 @@ namespace NPCGen
                 case 98:
                 case 99:
                 case 100: return "ghost";
-                default: return Character.HumanoidSubtype(ref random);
+                default: return Character.HumanoidSubtype();
             }
         }
 
-        private static string Level17(ref Random random)
+        private static String Level17()
         {
-            switch (Dice.Percentile(ref random))
+            switch (Dice.Percentile())
             {
                 case 1:
                 case 2:
@@ -1831,7 +1832,7 @@ namespace NPCGen
                 case 17:
                 case 18:
                 case 19:
-                case 20: return Dragon(ref random);
+                case 20: return Dragon();
                 case 21:
                 case 22:
                 case 23:
@@ -1887,13 +1888,13 @@ namespace NPCGen
                 case 98:
                 case 99:
                 case 100: return "nightwings";
-                default: return Character.HumanoidSubtype(ref random);
+                default: return Character.HumanoidSubtype();
             }
         }
 
-        private static string Level18(ref Random random)
+        private static String Level18()
         {
-            switch (Dice.Percentile(ref random))
+            switch (Dice.Percentile())
             {
                 case 1:
                 case 2:
@@ -1914,7 +1915,7 @@ namespace NPCGen
                 case 17:
                 case 18:
                 case 19:
-                case 20: return Dragon(ref random);
+                case 20: return Dragon();
                 case 21:
                 case 22:
                 case 23:
@@ -1970,13 +1971,13 @@ namespace NPCGen
                 case 98:
                 case 99:
                 case 100: return "nightwalkers";
-                default: return Character.HumanoidSubtype(ref random);
+                default: return Character.HumanoidSubtype();
             }
         }
 
-        private static string Level19(ref Random random)
+        private static String Level19()
         {
-            switch (Dice.Percentile(ref random))
+            switch (Dice.Percentile())
             {
                 case 1:
                 case 2:
@@ -1997,7 +1998,7 @@ namespace NPCGen
                 case 17:
                 case 18:
                 case 19:
-                case 20: return Dragon(ref random);
+                case 20: return Dragon();
                 case 21:
                 case 22:
                 case 23:
@@ -2053,13 +2054,13 @@ namespace NPCGen
                 case 98:
                 case 99:
                 case 100: return "nightcrawlers";
-                default: return Character.HumanoidSubtype(ref random);
+                default: return Character.HumanoidSubtype();
             }
         }
 
-        private static string Level20(ref Random random)
+        private static String Level20()
         {
-            switch (Dice.Percentile(ref random))
+            switch (Dice.Percentile())
             {
                 case 21:
                 case 22:
@@ -2110,7 +2111,7 @@ namespace NPCGen
                 case 67:
                 case 68:
                 case 69:
-                case 70: return Character.HumanoidSubtype(ref random);
+                case 70: return Character.HumanoidSubtype();
                 case 71:
                 case 72:
                 case 73:
@@ -2141,13 +2142,13 @@ namespace NPCGen
                 case 98:
                 case 99:
                 case 100: return "vampire";
-                default: return Dragon(ref random);
+                default: return Dragon();
             }
         }
 
-        private static string Dragon(ref Random random)
+        private static String Dragon()
         {
-            switch (Dice.Percentile(ref random))
+            switch (Dice.Percentile())
             {
                 case 17:
                 case 18:
