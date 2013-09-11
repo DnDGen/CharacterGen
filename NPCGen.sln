@@ -1,7 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Advanced Dungeons and Dragons 2e NPC Generator", "Advanced Dungeons and Dragons 2e NPC Generator\Advanced Dungeons and Dragons 2e NPC Generator.csproj", "{6F667C1C-C443-4878-B99F-7677BDFD93AB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NPCGen.Legacy", "Advanced Dungeons and Dragons 2e NPC Generator\NPCGen.Legacy.csproj", "{6F667C1C-C443-4878-B99F-7677BDFD93AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NPCGen.Core", "NPCGen.Core\NPCGen.Core.csproj", "{83F2B67C-3EB0-4E46-AAD5-BAFAA2E35689}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,6 +15,10 @@ Global
 		{6F667C1C-C443-4878-B99F-7677BDFD93AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F667C1C-C443-4878-B99F-7677BDFD93AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F667C1C-C443-4878-B99F-7677BDFD93AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83F2B67C-3EB0-4E46-AAD5-BAFAA2E35689}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83F2B67C-3EB0-4E46-AAD5-BAFAA2E35689}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83F2B67C-3EB0-4E46-AAD5-BAFAA2E35689}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83F2B67C-3EB0-4E46-AAD5-BAFAA2E35689}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{83F2B67C-3EB0-4E46-AAD5-BAFAA2E35689}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NPCGen.Core</RootNamespace>
+    <AssemblyName>NPCGen.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="D20Dice">
+      <HintPath>..\packages\D20Dice.1.0.0\lib\D20Dice.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Characters\Data\Alignment.cs" />
+    <Compile Include="Characters\Data\Character.cs" />
+    <Compile Include="Characters\Data\Classes\CharacterClass.cs" />
+    <Compile Include="Characters\Data\Classes\ClassConstants.cs" />
+    <Compile Include="Characters\Data\Feat.cs" />
+    <Compile Include="Characters\Data\Races\Race.cs" />
+    <Compile Include="Characters\Data\Races\RaceConstants.cs" />
+    <Compile Include="Characters\Data\Skill.cs" />
+    <Compile Include="Characters\Data\Stats.cs" />
+    <Compile Include="Characters\Generation\Factories\CharacterClassFactory.cs" />
+    <Compile Include="Characters\Generation\Factories\CharacterFactory.cs" />
+    <Compile Include="Characters\Generation\Factories\Interfaces\ICharacterClassFactory.cs" />
+    <Compile Include="Characters\Generation\Factories\Interfaces\ICharacterFactory.cs" />
+    <Compile Include="Characters\Generation\Randomizers\Alignments\AnyAlignment.cs" />
+    <Compile Include="Characters\Generation\Randomizers\Alignments\ChaoticAlignment.cs" />
+    <Compile Include="Characters\Generation\Randomizers\Alignments\EvilAlignment.cs" />
+    <Compile Include="Characters\Generation\Randomizers\Alignments\GoodAlignment.cs" />
+    <Compile Include="Characters\Generation\Randomizers\Alignments\IAlignmentRandomizer.cs" />
+    <Compile Include="Characters\Generation\Randomizers\Alignments\LawfulAlignment.cs" />
+    <Compile Include="Characters\Generation\Randomizers\Alignments\NeutralAlignment.cs" />
+    <Compile Include="Characters\Generation\Randomizers\Alignments\NonChaoticAlignment.cs" />
+    <Compile Include="Characters\Generation\Randomizers\Alignments\NonEvilAlignment.cs" />
+    <Compile Include="Characters\Generation\Randomizers\Alignments\NonGoodAlignment.cs" />
+    <Compile Include="Characters\Generation\Randomizers\Alignments\NonLawfulAlignment.cs" />
+    <Compile Include="Characters\Generation\Randomizers\Alignments\NonNeutralAlignment.cs" />
+    <Compile Include="Characters\Generation\Randomizers\Alignments\SetAlignment.cs" />
+    <Compile Include="Characters\Generation\Randomizers\CharacterClass\AnyClass.cs" />
+    <Compile Include="Characters\Generation\Randomizers\CharacterClass\IClassRandomizer.cs" />
+    <Compile Include="Characters\Generation\Randomizers\CharacterClass\SetClass.cs" />
+    <Compile Include="Characters\Generation\Randomizers\Level\AnyLevel.cs" />
+    <Compile Include="Characters\Generation\Randomizers\Level\AnyNonEpicLevel.cs" />
+    <Compile Include="Characters\Generation\Randomizers\Level\EpicLevel.cs" />
+    <Compile Include="Characters\Generation\Randomizers\Level\HighLevel.cs" />
+    <Compile Include="Characters\Generation\Randomizers\Level\ILevelRandomizer.cs" />
+    <Compile Include="Characters\Generation\Randomizers\Level\LowLevel.cs" />
+    <Compile Include="Characters\Generation\Randomizers\Level\MediumLevel.cs" />
+    <Compile Include="Characters\Generation\Randomizers\Level\SetLevel.cs" />
+    <Compile Include="Characters\Generation\Randomizers\Level\VeryHighLevel.cs" />
+    <Compile Include="Characters\Generation\Randomizers\Races\IMetaraceRandomizer.cs" />
+    <Compile Include="Characters\Generation\Randomizers\Races\IRaceRandomizer.cs" />
+    <Compile Include="Characters\Generation\Verifiers\RandomizerVerifier.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Dice\" />
+    <Folder Include="Encounters\" />
+    <Folder Include="Equipment\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
