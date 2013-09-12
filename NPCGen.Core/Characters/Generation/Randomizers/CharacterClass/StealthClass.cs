@@ -5,9 +5,9 @@ using System;
 
 namespace NPCGen.Core.Characters.Generation.Randomizers.CharacterClass
 {
-    public class RogueClass : BaseClassRandomizer
+    public class StealthClass : BaseClassRandomizer
     {
-        public RogueClass(IDice dice) : base(dice) { }
+        public StealthClass(IDice dice) : base(dice) { }
 
         protected override Boolean ClassIsAllowed(String characterClass, Alignment alignment)
         {

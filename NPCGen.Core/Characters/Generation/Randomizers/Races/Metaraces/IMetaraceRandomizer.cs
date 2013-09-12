@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace NPCGen.Core.Characters.Generation.Randomizers.Races
+namespace NPCGen.Core.Characters.Generation.Randomizers.Races.Metaraces
 {
     public enum METARACE_RANDOMIZER
     {

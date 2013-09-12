@@ -29,14 +29,9 @@ namespace NPCGen.Core.Characters.Generation.Factories
 
         public Character Generate()
         {
+            VerifyRandomizers();
+
             var character = new Character();
-
-            var verifier = new RandomizerVerifier();
-            var verified = verifier.Verify(alignmentFactory.AlignmentRandomizer, classFactory.ClassRandomizer, raceFactory.RaceRandomizer,
-                raceFactory.MetaraceRandomizer);
-
-            if (!verified)
-                throw new IncompatibleRandomizersException();
 
             character.Alignment = alignmentFactory.Generate();
             character.Class = classFactory.Generate(character.Alignment);
@@ -203,6 +198,16 @@ namespace NPCGen.Core.Characters.Generation.Factories
             progress.Text += Equipment[EquipmentType.Familiars];
 
             return character;
+        }
+
+        private void VerifyRandomizers()
+        {
+            var verifier = new RandomizerVerifier();
+            var verified = verifier.Verify(alignmentFactory.AlignmentRandomizer, classFactory.ClassRandomizer, raceFactory.RaceRandomizer,
+                raceFactory.MetaraceRandomizer);
+
+            if (!verified)
+                throw new IncompatibleRandomizersException();
         }
     }
 }

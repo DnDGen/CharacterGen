@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NPCGen.Core.Characters.Data
 {
@@ -38,6 +34,21 @@ namespace NPCGen.Core.Characters.Data
         public Boolean IsLawful()
         {
             return Lawfulness == 1;
+        }
+
+        public Boolean IsChaotic()
+        {
+            return Lawfulness == -1;
+        }
+
+        public Boolean IsGood()
+        {
+            return Goodness == 1;
+        }
+
+        public Boolean IsEvil()
+        {
+            return Goodness == -1;
         }
 
         public override String ToString()

@@ -1,7 +1,7 @@
-﻿using D20Dice.Dice;
+﻿using System;
+using D20Dice.Dice;
 using NPCGen.Core.Characters.Data;
 using NPCGen.Core.Characters.Data.Classes;
-using System;
 
 namespace NPCGen.Core.Characters.Generation.Randomizers.CharacterClass
 {
@@ -16,8 +16,8 @@ namespace NPCGen.Core.Characters.Generation.Randomizers.CharacterClass
                 case ClassConstants.BARBARIAN:
                 case ClassConstants.BARD: return !alignment.IsLawful();
                 case ClassConstants.DRUID: return alignment.IsNeutral();
-                case ClassConstants.MONK:
-                case ClassConstants.PALADIN: return alignment.IsLawful();
+                case ClassConstants.MONK: return alignment.IsLawful();
+                case ClassConstants.PALADIN: return alignment.IsLawful() && alignment.IsGood();
                 case ClassConstants.FIGHTER:
                 case ClassConstants.CLERIC:
                 case ClassConstants.RANGER:

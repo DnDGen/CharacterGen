@@ -80,7 +80,7 @@
     <Compile Include="Characters\Generation\Randomizers\CharacterClass\IClassRandomizer.cs" />
     <Compile Include="Characters\Generation\Randomizers\CharacterClass\MageClass.cs" />
     <Compile Include="Characters\Generation\Randomizers\CharacterClass\NonSpellcasterClass.cs" />
-    <Compile Include="Characters\Generation\Randomizers\CharacterClass\RogueClass.cs" />
+    <Compile Include="Characters\Generation\Randomizers\CharacterClass\StealthClass.cs" />
     <Compile Include="Characters\Generation\Randomizers\CharacterClass\SetClass.cs" />
     <Compile Include="Characters\Generation\Randomizers\CharacterClass\SpellcasterClass.cs" />
     <Compile Include="Characters\Generation\Randomizers\CharacterClass\WarriorClass.cs" />
@@ -91,8 +91,11 @@
     <Compile Include="Characters\Generation\Randomizers\Level\MediumLevel.cs" />
     <Compile Include="Characters\Generation\Randomizers\Level\SetLevel.cs" />
     <Compile Include="Characters\Generation\Randomizers\Level\VeryHighLevel.cs" />
-    <Compile Include="Characters\Generation\Randomizers\Races\IMetaraceRandomizer.cs" />
-    <Compile Include="Characters\Generation\Randomizers\Races\IRaceRandomizer.cs" />
+    <Compile Include="Characters\Generation\Randomizers\Races\BaseRaces\AnyBaseRace.cs" />
+    <Compile Include="Characters\Generation\Randomizers\Races\BaseRaces\BaseBaseRaceRandomizer.cs" />
+    <Compile Include="Characters\Generation\Randomizers\Races\Metaraces\IMetaraceRandomizer.cs" />
+    <Compile Include="Characters\Generation\Randomizers\Races\BaseRaces\IBaseRaceRandomizer.cs" />
+    <Compile Include="Characters\Generation\Randomizers\Races\BaseRaces\SetBaseRace.cs" />
     <Compile Include="Characters\Generation\Verifiers\Exceptions\IncompatibleRandomizersException.cs" />
     <Compile Include="Characters\Generation\Verifiers\RandomizerVerifier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

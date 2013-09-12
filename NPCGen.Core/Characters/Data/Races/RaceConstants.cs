@@ -1,51 +1,57 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NPCGen.Core.Characters.Data.Races
 {
     public class RaceConstants
     {
-        public String Aasimar = "Aasimar";
-        public String DeepDwarf = "Deep Dwarf";
-        public String HillDwarf = "Hill Dwarf";
-        public String MountainDwarf = "Mountain Dwarf";
-        public String GrayElf = "Gray Elf";
-        public String HighElf = "High Elf";
-        public String WildElf = "Wild Elf";
-        public String WoodElf = "Wood Elf";
-        public String HalfElf = "Half Elf";
-        public String ForestGnome = "Forest Gnome";
-        public String RockGnome = "Rock Gnome";
-        public String Svirfneblin = "Svirfneblin";
-        public String Halforc = "Halforc";
-        public String Lizardfolk = "Lizardfolk";
-        public String Doppelganger = "Doppelganger";
-        public String Goblin = "Goblin";
-        public String Hobgoblin = "Hobgoblin";
-        public String Kobold = "Kobold";
-        public String Orc = "Orc";
-        public String Tiefling = "Tiefling";
-        public String Drow = "Drow";
-        public String Duergar = "Duergar";
-        public String DerroDwarf = "Derro Dwarf";
-        public String Gnoll = "Gnoll";
-        public String Troglodyte = "Troglodyte";
-        public String Bugbear = "Bugbear";
-        public String Ogre = "Ogre";
-        public String Minotaur = "Minotaur";
-        public String MindFlayer = "Mind Flayer";
-        public String OgreMage = "Ogre Mage";
+        public class BaseRaces
+        {
+            public const String Aasimar = "Aasimar";
+            public const String Bugbear = "Bugbear";
+            public const String DeepDwarf = "Deep Dwarf";
+            public const String DeepHalfling = "Deep Halfling";
+            public const String DerroDwarf = "Derro Dwarf";
+            public const String Doppelganger = "Doppelganger";
+            public const String Drow = "Drow";
+            public const String Duergar = "Duergar";
+            public const String ForestGnome = "Forest Gnome";
+            public const String Goblin = "Goblin";
+            public const String Gnoll = "Gnoll";
+            public const String GrayElf = "Gray Elf";
+            public const String HalfElf = "Half Elf";
+            public const String Halforc = "Halforc";
+            public const String HighElf = "High Elf";
+            public const String HillDwarf = "Hill Dwarf";
+            public const String Hobgoblin = "Hobgoblin";
+            public const String Human = "Human";
+            public const String Kobold = "Kobold";
+            public const String LightfootHalfling = "Lightfoot Halfling";
+            public const String Lizardfolk = "Lizardfolk";
+            public const String MindFlayer = "Mind Flayer";
+            public const String Minotaur = "Minotaur";
+            public const String MountainDwarf = "Mountain Dwarf";
+            public const String Ogre = "Ogre";
+            public const String OgreMage = "Ogre Mage";
+            public const String Orc = "Orc";
+            public const String RockGnome = "Rock Gnome";
+            public const String Svirfneblin = "Svirfneblin";
+            public const String TallfellowHalfling = "Tallfellow Halfling";
+            public const String Tiefling = "Tiefling";
+            public const String Troglodyte = "Troglodyte";
+            public const String WildElf = "Wild Elf";
+            public const String WoodElf = "Wood Elf";
+        }
 
-        public String HalfCelestial = "Half Celestial";
-        public String HalfDragon = "Half Dragon";
-        public String Werebear = "Werebear";
-        public String Wereboar = "Wereboar";
-        public String Weretiger = "Weretiger";
-        public String Wererat = "Wererat";
-        public String Werewolf = "Werewolf";
-        public String HalfFiend = "Half Fiend";
+        public class Metaraces
+        {
+            public const String HalfCelestial = "Half Celestial";
+            public const String HalfDragon = "Half Dragon";
+            public const String HalfFiend = "Half Fiend";
+            public const String Werebear = "Werebear";
+            public const String Wereboar = "Wereboar";
+            public const String Weretiger = "Weretiger";
+            public const String Wererat = "Wererat";
+            public const String Werewolf = "Werewolf";
+        }
     }
 }
