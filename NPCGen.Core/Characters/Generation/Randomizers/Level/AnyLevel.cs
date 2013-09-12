@@ -1,9 +1,5 @@
 ﻿using D20Dice.Dice;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NPCGen.Core.Characters.Generation.Randomizers.Level
 {
@@ -18,8 +14,7 @@ namespace NPCGen.Core.Characters.Generation.Randomizers.Level
 
         public Int32 Randomize()
         {
-            var tens = (dice.d4() - 1) * 10;
-            return tens + dice.d10();
+            return dice.d20();
         }
     }
 }

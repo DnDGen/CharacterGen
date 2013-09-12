@@ -1,6 +1,8 @@
 ﻿using D20Dice.Dice;
 using NPCGen.Core.Characters.Data;
 using NPCGen.Core.Characters.Generation.Factories.Interfaces;
+using NPCGen.Core.Characters.Generation.Verifiers;
+using NPCGen.Core.Characters.Generation.Verifiers.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,22 +15,32 @@ namespace NPCGen.Core.Characters.Generation.Factories
     {
         private IDice dice;
         private ICharacterClassFactory classFactory;
+        private IAlignmentFactory alignmentFactory;
+        private IRaceFactory raceFactory;
 
-        public CharacterFactory(IDice dice, ICharacterClassFactory classFactory)
+        public CharacterFactory(IDice dice, ICharacterClassFactory classFactory, IAlignmentFactory alignmentFactory,
+            IRaceFactory raceFactory)
         {
             this.dice = dice;
             this.classFactory = classFactory;
+            this.alignmentFactory = alignmentFactory;
+            this.raceFactory = raceFactory;
         }
 
         public Character Generate()
         {
             var character = new Character();
 
+            var verifier = new RandomizerVerifier();
+            var verified = verifier.Verify(alignmentFactory.AlignmentRandomizer, classFactory.ClassRandomizer, raceFactory.RaceRandomizer,
+                raceFactory.MetaraceRandomizer);
 
+            if (!verified)
+                throw new IncompatibleRandomizersException();
 
             character.Alignment = alignmentFactory.Generate();
-            character.Class = classFactory.Generate();
-            character.Race = raceFactory.Generate();
+            character.Class = classFactory.Generate(character.Alignment);
+            character.Race = raceFactory.Generate(character.Alignment, character.Class);
 
             //******************
 

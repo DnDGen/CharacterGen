@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Characters\Data\Alignment.cs" />
     <Compile Include="Characters\Data\Character.cs" />
+    <Compile Include="Characters\Data\Classes\BaseAttack.cs" />
     <Compile Include="Characters\Data\Classes\CharacterClass.cs" />
     <Compile Include="Characters\Data\Classes\ClassConstants.cs" />
     <Compile Include="Characters\Data\Feat.cs" />
@@ -51,10 +52,15 @@
     <Compile Include="Characters\Data\Races\RaceConstants.cs" />
     <Compile Include="Characters\Data\Skill.cs" />
     <Compile Include="Characters\Data\Stats.cs" />
+    <Compile Include="Characters\Generation\Factories\AlignmentFactory.cs" />
+    <Compile Include="Characters\Generation\Factories\BaseAttackFactory.cs" />
     <Compile Include="Characters\Generation\Factories\CharacterClassFactory.cs" />
     <Compile Include="Characters\Generation\Factories\CharacterFactory.cs" />
+    <Compile Include="Characters\Generation\Factories\Interfaces\IAlignmentFactory.cs" />
+    <Compile Include="Characters\Generation\Factories\Interfaces\IBaseAttackFactory.cs" />
     <Compile Include="Characters\Generation\Factories\Interfaces\ICharacterClassFactory.cs" />
     <Compile Include="Characters\Generation\Factories\Interfaces\ICharacterFactory.cs" />
+    <Compile Include="Characters\Generation\Factories\Interfaces\IRaceFactory.cs" />
     <Compile Include="Characters\Generation\Randomizers\Alignments\AnyAlignment.cs" />
     <Compile Include="Characters\Generation\Randomizers\Alignments\ChaoticAlignment.cs" />
     <Compile Include="Characters\Generation\Randomizers\Alignments\EvilAlignment.cs" />
@@ -69,11 +75,16 @@
     <Compile Include="Characters\Generation\Randomizers\Alignments\NonNeutralAlignment.cs" />
     <Compile Include="Characters\Generation\Randomizers\Alignments\SetAlignment.cs" />
     <Compile Include="Characters\Generation\Randomizers\CharacterClass\AnyClass.cs" />
+    <Compile Include="Characters\Generation\Randomizers\CharacterClass\BaseClassRandomizer.cs" />
+    <Compile Include="Characters\Generation\Randomizers\CharacterClass\HealerClass.cs" />
     <Compile Include="Characters\Generation\Randomizers\CharacterClass\IClassRandomizer.cs" />
+    <Compile Include="Characters\Generation\Randomizers\CharacterClass\MageClass.cs" />
+    <Compile Include="Characters\Generation\Randomizers\CharacterClass\NonSpellcasterClass.cs" />
+    <Compile Include="Characters\Generation\Randomizers\CharacterClass\RogueClass.cs" />
     <Compile Include="Characters\Generation\Randomizers\CharacterClass\SetClass.cs" />
+    <Compile Include="Characters\Generation\Randomizers\CharacterClass\SpellcasterClass.cs" />
+    <Compile Include="Characters\Generation\Randomizers\CharacterClass\WarriorClass.cs" />
     <Compile Include="Characters\Generation\Randomizers\Level\AnyLevel.cs" />
-    <Compile Include="Characters\Generation\Randomizers\Level\AnyNonEpicLevel.cs" />
-    <Compile Include="Characters\Generation\Randomizers\Level\EpicLevel.cs" />
     <Compile Include="Characters\Generation\Randomizers\Level\HighLevel.cs" />
     <Compile Include="Characters\Generation\Randomizers\Level\ILevelRandomizer.cs" />
     <Compile Include="Characters\Generation\Randomizers\Level\LowLevel.cs" />
@@ -82,11 +93,11 @@
     <Compile Include="Characters\Generation\Randomizers\Level\VeryHighLevel.cs" />
     <Compile Include="Characters\Generation\Randomizers\Races\IMetaraceRandomizer.cs" />
     <Compile Include="Characters\Generation\Randomizers\Races\IRaceRandomizer.cs" />
+    <Compile Include="Characters\Generation\Verifiers\Exceptions\IncompatibleRandomizersException.cs" />
     <Compile Include="Characters\Generation\Verifiers\RandomizerVerifier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Dice\" />
     <Folder Include="Encounters\" />
     <Folder Include="Equipment\" />
   </ItemGroup>

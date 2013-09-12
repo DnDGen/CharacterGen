@@ -5,25 +5,25 @@ using System;
 
 namespace NPCGen.Core.Characters.Generation.Randomizers.CharacterClass
 {
-    public class AnyClass : BaseClassRandomizer
+    public class RogueClass : BaseClassRandomizer
     {
-        public AnyClass(IDice dice) : base(dice) { }
+        public RogueClass(IDice dice) : base(dice) { }
 
         protected override Boolean ClassIsAllowed(String characterClass, Alignment alignment)
         {
             switch (characterClass)
             {
-                case ClassConstants.BARBARIAN:
-                case ClassConstants.BARD: return !alignment.IsLawful();
-                case ClassConstants.DRUID: return alignment.IsNeutral();
-                case ClassConstants.MONK:
-                case ClassConstants.PALADIN: return alignment.IsLawful();
-                case ClassConstants.FIGHTER:
-                case ClassConstants.CLERIC:
                 case ClassConstants.RANGER:
+                case ClassConstants.ROGUE: return true;
+                case ClassConstants.BARD: return !alignment.IsLawful();
+                case ClassConstants.MONK:
+                case ClassConstants.BARBARIAN:
                 case ClassConstants.SORCERER:
-                case ClassConstants.ROGUE:
-                case ClassConstants.WIZARD: return true;
+                case ClassConstants.WIZARD:
+                case ClassConstants.DRUID:
+                case ClassConstants.PALADIN:
+                case ClassConstants.FIGHTER:
+                case ClassConstants.CLERIC: return false;
                 default: throw new ArgumentOutOfRangeException();
             }
         }

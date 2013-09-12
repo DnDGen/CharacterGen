@@ -16,7 +16,7 @@ namespace NPCGen.Core.Characters.Data.Classes
         public const String MONK = "Monk";
         public const String PALADIN = "Paladin";
         public const String RANGER = "Ranger";
-        public const String THIEF = "Thief";
+        public const String ROGUE = "Rogue";
         public const String SORCERER = "Sorcerer";
         public const String WIZARD = "Wizard";
     }

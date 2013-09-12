@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using NPCGen.Core.Characters.Data;
 
 namespace NPCGen.Core.Characters.Generation.Factories.Interfaces
 {
-    class ICharacterFactory
+    public class ICharacterFactory
     {
+        Character Generate();
     }
 }

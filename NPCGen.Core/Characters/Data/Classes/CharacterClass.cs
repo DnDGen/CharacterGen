@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NPCGen.Core.Characters.Data.Classes
 {
@@ -10,10 +6,10 @@ namespace NPCGen.Core.Characters.Data.Classes
     {
         public Int32 HitPoints { get; set; }
         public Int32 Level { get; set; }
-        public Int32 BaseAttack { get; set; }
+        public BaseAttack BaseAttack { get; set; }
         public String ClassName { get; set; }
 
-        public Boolean IsCombatant()
+        public Boolean IsWarrior()
         {
             switch (ClassName)
             {
@@ -45,7 +41,7 @@ namespace NPCGen.Core.Characters.Data.Classes
             {
                 case ClassConstants.BARD:
                 case ClassConstants.RANGER:
-                case ClassConstants.THIEF: return true;
+                case ClassConstants.ROGUE: return true;
                 default: return false;
             }
         }
@@ -55,6 +51,7 @@ namespace NPCGen.Core.Characters.Data.Classes
             switch (ClassName)
             {
                 case ClassConstants.BARD:
+                case ClassConstants.RANGER:
                 case ClassConstants.SORCERER:
                 case ClassConstants.WIZARD: return true;
                 default: return false;
