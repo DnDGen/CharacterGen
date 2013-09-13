@@ -1,8 +1,8 @@
-﻿using System;
-using D20Dice.Dice;
+﻿using D20Dice.Dice;
 using NPCGen.Core.Characters.Data;
 using NPCGen.Core.Characters.Data.Classes;
 using NPCGen.Core.Characters.Data.Races;
+using System;
 
 namespace NPCGen.Core.Characters.Generation.Randomizers.Races.BaseRaces
 {
@@ -421,7 +421,30 @@ namespace NPCGen.Core.Characters.Generation.Randomizers.Races.BaseRaces
 
         private string NeutralWizardRace()
         {
-            throw new NotImplementedException();
+            var roll = dice.Percentile();
+
+            if (roll <= 1)
+                return RaceConstants.BaseRaces.GrayElf;
+            else if (roll <= 26)
+                return RaceConstants.BaseRaces.HighElf;
+            else if (roll <= 28)
+                return RaceConstants.BaseRaces.WoodElf;
+            else if (roll <= 29)
+                return RaceConstants.BaseRaces.RockGnome;
+            else if (roll <= 44)
+                return RaceConstants.BaseRaces.HalfElf;
+            else if (roll <= 47)
+                return RaceConstants.BaseRaces.LightfootHalfling;
+            else if (roll <= 49)
+                return RaceConstants.BaseRaces.TallfellowHalfling;
+            else if (roll <= 50)
+                return RaceConstants.BaseRaces.Halforc;
+            else if (roll <= 97)
+                return RaceConstants.BaseRaces.Human;
+            else if (roll <= 98)
+                return RaceConstants.BaseRaces.Doppelganger;
+
+            return NeutralWizardRace();
         }
 
         private string NeutralSorcererRace()
