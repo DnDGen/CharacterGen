@@ -56,13 +56,20 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Data\Alignments\AlignmentTests.cs" />
+    <Compile Include="Data\Classes\BaseAttackTests.cs" />
+    <Compile Include="Data\Stats\StatTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Characters\" />
+    <ProjectReference Include="..\NPCGen.Core\NPCGen.Core.csproj">
+      <Project>{83f2b67c-3eb0-4e46-aad5-bafaa2e35689}</Project>
+      <Name>NPCGen.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

@@ -17,19 +17,19 @@ namespace NPCGen.Core.Generation.Randomizers.CharacterClass
 
         public String Randomize(Alignment alignment)
         {
-            var characterClass = String.Empty;
+            var className = String.Empty;
 
             do
             {
                 if (alignment.Goodness == 1)
-                    characterClass = GoodClass();
+                    className = GoodClass();
                 else if (alignment.Goodness == 0)
-                    characterClass = NeutralClass();
+                    className = NeutralClass();
                 else if (alignment.Goodness == -1)
-                    characterClass = EvilClass();
-            } while (!ClassIsAllowed(characterClass, alignment));
+                    className = EvilClass();
+            } while (!ClassIsAllowed(className, alignment));
 
-            return characterClass;
+            return className;
         }
 
         private String GoodClass()
@@ -112,6 +112,6 @@ namespace NPCGen.Core.Generation.Randomizers.CharacterClass
             return ClassConstants.WIZARD;
         }
 
-        protected abstract Boolean ClassIsAllowed(String characterClass, Alignment alignment);
+        protected abstract Boolean ClassIsAllowed(String className, Alignment alignment);
     }
 }

@@ -10,9 +10,9 @@ namespace NPCGen.Core.Generation.Randomizers.CharacterClass
     {
         public AnyClass(IDice dice) : base(dice) { }
 
-        protected override Boolean ClassIsAllowed(String characterClass, Alignment alignment)
+        protected override Boolean ClassIsAllowed(String className, Alignment alignment)
         {
-            switch (characterClass)
+            switch (className)
             {
                 case ClassConstants.BARBARIAN:
                 case ClassConstants.BARD: return !alignment.IsLawful();

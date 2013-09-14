@@ -13,25 +13,63 @@ namespace NPCGen.Core.Generation.Factories
         public ILevelRandomizer LevelRandomizer { get; set; }
         public IClassRandomizer ClassRandomizer { get; set; }
 
-        private IBaseAttackFactory baseAttackFactory;
         private IDice dice;
 
-        public CharacterClassFactory(IDice dice, IBaseAttackFactory baseAttackFactory)
+        public CharacterClassFactory(IDice dice)
         {
             this.dice = dice;
-            this.baseAttackFactory = baseAttackFactory;
         }
 
-        public override CharacterClass Generate(Alignment alignment, Int32 constitutionBonus)
+        public CharacterClass Generate(Alignment alignment, Int32 constitutionBonus)
         {
             var characterClass = new CharacterClass();
 
             characterClass.Level = LevelRandomizer.Randomize();
             characterClass.ClassName = ClassRandomizer.Randomize(alignment);
-            characterClass.BaseAttack = baseAttackFactory.Generate(characterClass);
+            characterClass.BaseAttack.BaseAttackBonus = GetBaseAttackBonusByLevel(characterClass);
             characterClass.HitPoints = GetHitPoints(characterClass, constitutionBonus);
 
             throw new NotImplementedException();
+        }
+
+        private Int32 GetBaseAttackBonusByLevel(CharacterClass characterClass)
+        {
+            switch (characterClass.ClassName)
+            {
+                case ClassConstants.FIGHTER:
+                case ClassConstants.PALADIN:
+                case ClassConstants.RANGER:
+                case ClassConstants.BARBARIAN: return GetGoodRootAttack(characterClass.Level);
+                case ClassConstants.BARD:
+                case ClassConstants.CLERIC:
+                case ClassConstants.MONK:
+                case ClassConstants.ROGUE:
+                case ClassConstants.DRUID: return GetAverageRootAttack(characterClass.Level);
+                case ClassConstants.SORCERER:
+                case ClassConstants.WIZARD: return GetPoorRootAttack(characterClass.Level);
+                default: throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        private Int32 GetGoodRootAttack(Int32 level)
+        {
+            return level;
+        }
+
+        private Int32 GetAverageRootAttack(Int32 level)
+        {
+            var rootAttack = 0;
+
+            for (var i = level; i > 1; i--)
+                if ((i - 1) % 4 != 0)
+                    rootAttack++;
+
+            return rootAttack;
+        }
+
+        private Int32 GetPoorRootAttack(Int32 level)
+        {
+            return level / 2;
         }
 
         private Int32 GetHitPoints(CharacterClass characterClass, Int32 constitutionBonus)
