@@ -11,6 +11,7 @@
     <AssemblyName>NPCGen.Core</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -20,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -28,6 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="D20Dice">
@@ -42,92 +45,117 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Characters\Data\Alignments\Alignment.cs" />
-    <Compile Include="Characters\Data\Alignments\AlignmentConstants.cs" />
-    <Compile Include="Characters\Data\Character.cs" />
-    <Compile Include="Characters\Data\Classes\BaseAttack.cs" />
-    <Compile Include="Characters\Data\Classes\CharacterClass.cs" />
-    <Compile Include="Characters\Data\Classes\ClassConstants.cs" />
-    <Compile Include="Characters\Data\Feat.cs" />
-    <Compile Include="Characters\Data\Races\Race.cs" />
-    <Compile Include="Characters\Data\Races\RaceConstants.cs" />
-    <Compile Include="Characters\Data\Skill.cs" />
-    <Compile Include="Characters\Data\Stats.cs" />
-    <Compile Include="Characters\Generation\Factories\AlignmentFactory.cs" />
-    <Compile Include="Characters\Generation\Factories\BaseAttackFactory.cs" />
-    <Compile Include="Characters\Generation\Factories\CharacterClassFactory.cs" />
-    <Compile Include="Characters\Generation\Factories\CharacterFactory.cs" />
-    <Compile Include="Characters\Generation\Factories\Interfaces\IAlignmentFactory.cs" />
-    <Compile Include="Characters\Generation\Factories\Interfaces\IBaseAttackFactory.cs" />
-    <Compile Include="Characters\Generation\Factories\Interfaces\ICharacterClassFactory.cs" />
-    <Compile Include="Characters\Generation\Factories\Interfaces\ICharacterFactory.cs" />
-    <Compile Include="Characters\Generation\Factories\Interfaces\IRaceFactory.cs" />
-    <Compile Include="Characters\Generation\Randomizers\Alignments\AnyAlignment.cs" />
-    <Compile Include="Characters\Generation\Randomizers\Alignments\BaseAlignmentRandomizer.cs" />
-    <Compile Include="Characters\Generation\Randomizers\Alignments\ChaoticAlignment.cs" />
-    <Compile Include="Characters\Generation\Randomizers\Alignments\EvilAlignment.cs" />
-    <Compile Include="Characters\Generation\Randomizers\Alignments\GoodAlignment.cs" />
-    <Compile Include="Characters\Generation\Randomizers\Alignments\IAlignmentRandomizer.cs" />
-    <Compile Include="Characters\Generation\Randomizers\Alignments\LawfulAlignment.cs" />
-    <Compile Include="Characters\Generation\Randomizers\Alignments\NeutralAlignment.cs" />
-    <Compile Include="Characters\Generation\Randomizers\Alignments\NonChaoticAlignment.cs" />
-    <Compile Include="Characters\Generation\Randomizers\Alignments\NonEvilAlignment.cs" />
-    <Compile Include="Characters\Generation\Randomizers\Alignments\NonGoodAlignment.cs" />
-    <Compile Include="Characters\Generation\Randomizers\Alignments\NonLawfulAlignment.cs" />
-    <Compile Include="Characters\Generation\Randomizers\Alignments\NonNeutralAlignment.cs" />
-    <Compile Include="Characters\Generation\Randomizers\Alignments\SetAlignment.cs" />
-    <Compile Include="Characters\Generation\Randomizers\CharacterClass\AnyClass.cs" />
-    <Compile Include="Characters\Generation\Randomizers\CharacterClass\BaseClassRandomizer.cs" />
-    <Compile Include="Characters\Generation\Randomizers\CharacterClass\HealerClass.cs" />
-    <Compile Include="Characters\Generation\Randomizers\CharacterClass\IClassRandomizer.cs" />
-    <Compile Include="Characters\Generation\Randomizers\CharacterClass\MageClass.cs" />
-    <Compile Include="Characters\Generation\Randomizers\CharacterClass\NonSpellcasterClass.cs" />
-    <Compile Include="Characters\Generation\Randomizers\CharacterClass\StealthClass.cs" />
-    <Compile Include="Characters\Generation\Randomizers\CharacterClass\SetClass.cs" />
-    <Compile Include="Characters\Generation\Randomizers\CharacterClass\SpellcasterClass.cs" />
-    <Compile Include="Characters\Generation\Randomizers\CharacterClass\WarriorClass.cs" />
-    <Compile Include="Characters\Generation\Randomizers\Level\AnyLevel.cs" />
-    <Compile Include="Characters\Generation\Randomizers\Level\HighLevel.cs" />
-    <Compile Include="Characters\Generation\Randomizers\Level\ILevelRandomizer.cs" />
-    <Compile Include="Characters\Generation\Randomizers\Level\LowLevel.cs" />
-    <Compile Include="Characters\Generation\Randomizers\Level\MediumLevel.cs" />
-    <Compile Include="Characters\Generation\Randomizers\Level\SetLevel.cs" />
-    <Compile Include="Characters\Generation\Randomizers\Level\VeryHighLevel.cs" />
-    <Compile Include="Characters\Generation\Randomizers\Races\BaseRaces\AnyBaseRace.cs" />
-    <Compile Include="Characters\Generation\Randomizers\Races\BaseRaces\BaseBaseRaceRandomizer.cs" />
-    <Compile Include="Characters\Generation\Randomizers\Races\Metaraces\IMetaraceRandomizer.cs" />
-    <Compile Include="Characters\Generation\Randomizers\Races\BaseRaces\IBaseRaceRandomizer.cs" />
-    <Compile Include="Characters\Generation\Randomizers\Races\BaseRaces\SetBaseRace.cs" />
-    <Compile Include="Characters\Generation\Verifiers\Alignments\ChaoticAlignmentVerifier.cs" />
-    <Compile Include="Characters\Generation\Verifiers\Alignments\EvilAlignmentVerifier.cs" />
-    <Compile Include="Characters\Generation\Verifiers\Alignments\IAlignmentVerifier.cs" />
-    <Compile Include="Characters\Generation\Verifiers\Alignments\LawfulAlignmentVerifier.cs" />
-    <Compile Include="Characters\Generation\Verifiers\Alignments\NeutralAlignmentVerifier.cs" />
-    <Compile Include="Characters\Generation\Verifiers\Exceptions\IncompatibleRandomizersException.cs" />
-    <Compile Include="Characters\Generation\Verifiers\Factories\AlignmentVerifierFactory.cs" />
-    <Compile Include="Characters\Generation\Verifiers\Factories\Interfaces\IAlignmentVerifierFactory.cs" />
-    <Compile Include="Characters\Generation\Verifiers\IRandomizerVerifier.cs" />
-    <Compile Include="Characters\Generation\Verifiers\RandomizerVerifier.cs" />
-    <Compile Include="Characters\Generation\Xml\IPercentileXmlParser.cs" />
-    <Compile Include="Characters\Generation\Xml\PercentileObject.cs" />
-    <Compile Include="Characters\Generation\Xml\PercentileXmlParser.cs" />
+    <Compile Include="Data\Alignments\Alignment.cs" />
+    <Compile Include="Data\Alignments\AlignmentConstants.cs" />
+    <Compile Include="Data\Character.cs" />
+    <Compile Include="Data\Classes\BaseAttack.cs" />
+    <Compile Include="Data\Classes\CharacterClass.cs" />
+    <Compile Include="Data\Classes\ClassConstants.cs" />
+    <Compile Include="Data\Feat.cs" />
+    <Compile Include="Data\Races\Race.cs" />
+    <Compile Include="Data\Races\RaceConstants.cs" />
+    <Compile Include="Data\Skill.cs" />
+    <Compile Include="Data\Stats\Stat.cs" />
+    <Compile Include="Data\Stats\StatConstants.cs" />
+    <Compile Include="Generation\Factories\AlignmentFactory.cs" />
+    <Compile Include="Generation\Factories\BaseAttackFactory.cs" />
+    <Compile Include="Generation\Factories\CharacterClassFactory.cs" />
+    <Compile Include="Generation\Factories\CharacterFactory.cs" />
+    <Compile Include="Generation\Factories\Interfaces\IAlignmentFactory.cs" />
+    <Compile Include="Generation\Factories\Interfaces\IBaseAttackFactory.cs" />
+    <Compile Include="Generation\Factories\Interfaces\ICharacterClassFactory.cs" />
+    <Compile Include="Generation\Factories\Interfaces\ICharacterFactory.cs" />
+    <Compile Include="Generation\Factories\Interfaces\IRaceFactory.cs" />
+    <Compile Include="Generation\Randomizers\Alignments\AnyAlignment.cs" />
+    <Compile Include="Generation\Randomizers\Alignments\BaseAlignmentRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Alignments\ChaoticAlignment.cs" />
+    <Compile Include="Generation\Randomizers\Alignments\EvilAlignment.cs" />
+    <Compile Include="Generation\Randomizers\Alignments\GoodAlignment.cs" />
+    <Compile Include="Generation\Randomizers\Alignments\IAlignmentRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Alignments\LawfulAlignment.cs" />
+    <Compile Include="Generation\Randomizers\Alignments\NeutralAlignment.cs" />
+    <Compile Include="Generation\Randomizers\Alignments\NonChaoticAlignment.cs" />
+    <Compile Include="Generation\Randomizers\Alignments\NonEvilAlignment.cs" />
+    <Compile Include="Generation\Randomizers\Alignments\NonGoodAlignment.cs" />
+    <Compile Include="Generation\Randomizers\Alignments\NonLawfulAlignment.cs" />
+    <Compile Include="Generation\Randomizers\Alignments\NonNeutralAlignment.cs" />
+    <Compile Include="Generation\Randomizers\Alignments\SetAlignment.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClass\AnyClass.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClass\BaseClassRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClass\HealerClass.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClass\IClassRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClass\MageClass.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClass\NonSpellcasterClass.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClass\StealthClass.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClass\SetClass.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClass\SpellcasterClass.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClass\WarriorClass.cs" />
+    <Compile Include="Generation\Randomizers\Providers\Interfaces\IPercentileResultProvider.cs" />
+    <Compile Include="Generation\Randomizers\Level\AnyLevel.cs" />
+    <Compile Include="Generation\Randomizers\Level\HighLevel.cs" />
+    <Compile Include="Generation\Randomizers\Level\ILevelRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Level\LowLevel.cs" />
+    <Compile Include="Generation\Randomizers\Level\MediumLevel.cs" />
+    <Compile Include="Generation\Randomizers\Level\SetLevel.cs" />
+    <Compile Include="Generation\Randomizers\Level\VeryHighLevel.cs" />
+    <Compile Include="Generation\Randomizers\Providers\PercentileResultProvider.cs" />
+    <Compile Include="Generation\Randomizers\Races\BaseRaces\AnyBaseRace.cs" />
+    <Compile Include="Generation\Randomizers\Races\BaseRaces\BaseBaseRaceRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Races\Metaraces\IMetaraceRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Races\BaseRaces\IBaseRaceRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Races\BaseRaces\SetBaseRace.cs" />
+    <Compile Include="Generation\Verifiers\Alignments\ChaoticAlignmentVerifier.cs" />
+    <Compile Include="Generation\Verifiers\Alignments\EvilAlignmentVerifier.cs" />
+    <Compile Include="Generation\Verifiers\Alignments\IAlignmentVerifier.cs" />
+    <Compile Include="Generation\Verifiers\Alignments\LawfulAlignmentVerifier.cs" />
+    <Compile Include="Generation\Verifiers\Alignments\NeutralAlignmentVerifier.cs" />
+    <Compile Include="Generation\Verifiers\Exceptions\IncompatibleRandomizersException.cs" />
+    <Compile Include="Generation\Verifiers\Factories\AlignmentVerifierFactory.cs" />
+    <Compile Include="Generation\Verifiers\Factories\Interfaces\IAlignmentVerifierFactory.cs" />
+    <Compile Include="Generation\Verifiers\IRandomizerVerifier.cs" />
+    <Compile Include="Generation\Verifiers\RandomizerVerifier.cs" />
+    <Compile Include="Generation\Xml\Parsers\IPercentileXmlParser.cs" />
+    <Compile Include="Generation\Xml\Parsers\PercentileObject.cs" />
+    <Compile Include="Generation\Xml\Parsers\PercentileXmlParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Characters\Generation\Verifiers\BaseRaces\" />
-    <Folder Include="Characters\Generation\Verifiers\CharacterClasses\" />
-    <Folder Include="Characters\Generation\Verifiers\Metaraces\" />
-    <Folder Include="Encounters\" />
-    <Folder Include="Equipment\" />
+    <Folder Include="Generation\Verifiers\BaseRaces\" />
+    <Folder Include="Generation\Verifiers\CharacterClasses\" />
+    <Folder Include="Generation\Verifiers\Metaraces\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Characters\Generation\Xml\Races\BaseRaces\Good\GoodWizardBaseRaces.xml" />
+    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Good\GoodWizardBaseRaces.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Characters\Generation\Xml\Races\BaseRaces\Good\GoodSorcererBaseRaces.xml" />
+    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Good\GoodSorcererBaseRaces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Good\GoodRogueBaseRaces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Good\GoodRangerBaseRaces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Good\GoodPalidanBaseRaces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Good\GoodMonkBaseRaces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Good\GoodFighterBaseRaces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Good\GoodDruidBaseRaces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Good\GoodClericBaseRaces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Good\GoodBardBaseRaces.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
