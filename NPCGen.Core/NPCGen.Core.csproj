@@ -42,7 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Characters\Data\Alignment.cs" />
+    <Compile Include="Characters\Data\Alignments\Alignment.cs" />
+    <Compile Include="Characters\Data\Alignments\AlignmentConstants.cs" />
     <Compile Include="Characters\Data\Character.cs" />
     <Compile Include="Characters\Data\Classes\BaseAttack.cs" />
     <Compile Include="Characters\Data\Classes\CharacterClass.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="Characters\Generation\Factories\Interfaces\ICharacterFactory.cs" />
     <Compile Include="Characters\Generation\Factories\Interfaces\IRaceFactory.cs" />
     <Compile Include="Characters\Generation\Randomizers\Alignments\AnyAlignment.cs" />
+    <Compile Include="Characters\Generation\Randomizers\Alignments\BaseAlignmentRandomizer.cs" />
     <Compile Include="Characters\Generation\Randomizers\Alignments\ChaoticAlignment.cs" />
     <Compile Include="Characters\Generation\Randomizers\Alignments\EvilAlignment.cs" />
     <Compile Include="Characters\Generation\Randomizers\Alignments\GoodAlignment.cs" />
@@ -96,16 +98,36 @@
     <Compile Include="Characters\Generation\Randomizers\Races\Metaraces\IMetaraceRandomizer.cs" />
     <Compile Include="Characters\Generation\Randomizers\Races\BaseRaces\IBaseRaceRandomizer.cs" />
     <Compile Include="Characters\Generation\Randomizers\Races\BaseRaces\SetBaseRace.cs" />
+    <Compile Include="Characters\Generation\Verifiers\Alignments\ChaoticAlignmentVerifier.cs" />
+    <Compile Include="Characters\Generation\Verifiers\Alignments\EvilAlignmentVerifier.cs" />
+    <Compile Include="Characters\Generation\Verifiers\Alignments\IAlignmentVerifier.cs" />
+    <Compile Include="Characters\Generation\Verifiers\Alignments\LawfulAlignmentVerifier.cs" />
+    <Compile Include="Characters\Generation\Verifiers\Alignments\NeutralAlignmentVerifier.cs" />
     <Compile Include="Characters\Generation\Verifiers\Exceptions\IncompatibleRandomizersException.cs" />
+    <Compile Include="Characters\Generation\Verifiers\Factories\AlignmentVerifierFactory.cs" />
+    <Compile Include="Characters\Generation\Verifiers\Factories\Interfaces\IAlignmentVerifierFactory.cs" />
+    <Compile Include="Characters\Generation\Verifiers\IRandomizerVerifier.cs" />
     <Compile Include="Characters\Generation\Verifiers\RandomizerVerifier.cs" />
+    <Compile Include="Characters\Generation\Xml\IPercentileXmlParser.cs" />
+    <Compile Include="Characters\Generation\Xml\PercentileObject.cs" />
+    <Compile Include="Characters\Generation\Xml\PercentileXmlParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Characters\Generation\Verifiers\BaseRaces\" />
+    <Folder Include="Characters\Generation\Verifiers\CharacterClasses\" />
+    <Folder Include="Characters\Generation\Verifiers\Metaraces\" />
     <Folder Include="Encounters\" />
     <Folder Include="Equipment\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Generation\Xml\Races\BaseRaces\Good\GoodWizardBaseRaces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Generation\Xml\Races\BaseRaces\Good\GoodSorcererBaseRaces.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

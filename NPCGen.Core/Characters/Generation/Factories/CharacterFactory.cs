@@ -17,14 +17,16 @@ namespace NPCGen.Core.Characters.Generation.Factories
         private ICharacterClassFactory classFactory;
         private IAlignmentFactory alignmentFactory;
         private IRaceFactory raceFactory;
+        private IRandomizerVerifier randomizerVerifier;
 
         public CharacterFactory(IDice dice, ICharacterClassFactory classFactory, IAlignmentFactory alignmentFactory,
-            IRaceFactory raceFactory)
+            IRaceFactory raceFactory, IRandomizerVerifier randomizerVerifier)
         {
             this.dice = dice;
             this.classFactory = classFactory;
             this.alignmentFactory = alignmentFactory;
             this.raceFactory = raceFactory;
+            this.randomizerVerifier = randomizerVerifier;
         }
 
         public Character Generate()
@@ -202,9 +204,8 @@ namespace NPCGen.Core.Characters.Generation.Factories
 
         private void VerifyRandomizers()
         {
-            var verifier = new RandomizerVerifier();
-            var verified = verifier.Verify(alignmentFactory.AlignmentRandomizer, classFactory.ClassRandomizer, raceFactory.RaceRandomizer,
-                raceFactory.MetaraceRandomizer);
+            var verified = randomizerVerifier.VerifyCompatibility(alignmentFactory.AlignmentRandomizer, classFactory.ClassRandomizer,
+                raceFactory.BaseRaceRandomizer, raceFactory.MetaraceRandomizer);
 
             if (!verified)
                 throw new IncompatibleRandomizersException();

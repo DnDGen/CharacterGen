@@ -18,8 +18,8 @@ namespace NPCGen.Core.Characters.Data.Races
             public const String Goblin = "Goblin";
             public const String Gnoll = "Gnoll";
             public const String GrayElf = "Gray Elf";
-            public const String HalfElf = "Half Elf";
-            public const String Halforc = "Halforc";
+            public const String HalfElf = "Half-Elf";
+            public const String HalfOrc = "Half-Orc";
             public const String HighElf = "High Elf";
             public const String HillDwarf = "Hill Dwarf";
             public const String Hobgoblin = "Hobgoblin";

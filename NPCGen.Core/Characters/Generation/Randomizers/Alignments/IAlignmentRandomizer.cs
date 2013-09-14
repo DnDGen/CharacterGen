@@ -1,9 +1,4 @@
-﻿using NPCGen.Core.Characters.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using NPCGen.Core.Characters.Data.Alignments;
 
 namespace NPCGen.Core.Characters.Generation.Randomizers.Alignments
 {

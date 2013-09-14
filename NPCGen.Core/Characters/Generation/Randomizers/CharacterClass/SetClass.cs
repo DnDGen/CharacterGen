@@ -1,19 +1,20 @@
-﻿using System;
+﻿using NPCGen.Core.Characters.Data.Alignments;
+using System;
 
 namespace NPCGen.Core.Characters.Generation.Randomizers.CharacterClass
 {
     public class SetClass : IClassRandomizer
     {
-        private String characterClass;
+        public String ClassName { get; set; }
 
-        public SetClass(String characterClass)
+        public SetClass(String className)
         {
-            this.characterClass = characterClass;
+            ClassName = className;
         }
 
-        public String Randomize()
+        public String Randomize(Alignment alignment)
         {
-            return characterClass;
+            return ClassName;
         }
     }
 }

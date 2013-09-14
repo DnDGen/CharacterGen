@@ -1,132 +1,44 @@
 ﻿using D20Dice.Dice;
-using NPCGen.Core.Characters.Data;
-using NPCGen.Core.Characters.Data.Classes;
+using NPCGen.Core.Characters.Data.Alignments;
 using NPCGen.Core.Characters.Data.Races;
+using NPCGen.Core.Characters.Generation.Xml;
 using System;
+using System.Linq;
 
 namespace NPCGen.Core.Characters.Generation.Randomizers.Races.BaseRaces
 {
     public abstract class BaseBaseRaceRandomizer : IBaseRaceRandomizer
     {
         private IDice dice;
+        private IPercentileXmlParser percentileXmlParser;
 
-        public BaseBaseRaceRandomizer(IDice dice)
+        public BaseBaseRaceRandomizer(IDice dice, IPercentileXmlParser percentileXmlParser)
         {
             this.dice = dice;
+            this.percentileXmlParser = percentileXmlParser;
         }
 
         public String Randomize(Alignment alignment, String className)
         {
+            var filename = String.Format("{0}{1}BaseRaces", alignment.GetGoodnessString(), className);
+            var table = percentileXmlParser.Parse(filename);
             var baseRace = String.Empty;
 
             do
             {
-                if (alignment.Goodness == 1)
-                    baseRace = GoodRace(className);
-                else if (alignment.Goodness == 0)
-                    baseRace = NeutralRace(className);
-                else if (alignment.Goodness == -1)
-                    baseRace = EvilRace(className);
+                var roll = dice.Percentile();
+                var result = table.FirstOrDefault(o => RollIsInRange(roll, o));
+
+                if (result != null)
+                    baseRace = result.Content;
             } while (!RaceIsAllowed(baseRace, alignment, className));
 
             return baseRace;
         }
 
-        private String GoodRace(String className)
+        private Boolean RollIsInRange(Int32 roll, PercentileObject percentileObject)
         {
-            switch (className)
-            {
-                case ClassConstants.BARBARIAN: return GoodBarbarianRace();
-                case ClassConstants.BARD: return GoodBardRace();
-                case ClassConstants.CLERIC: return GoodClericRace();
-                case ClassConstants.DRUID: return GoodDruidRace();
-                case ClassConstants.FIGHTER: return GoodFighterRace();
-                case ClassConstants.MONK: return GoodMonkRace();
-                case ClassConstants.PALADIN: return PaladinRace();
-                case ClassConstants.RANGER: return GoodRangerRace();
-                case ClassConstants.ROGUE: return GoodRogueRace();
-                case ClassConstants.SORCERER: return GoodSorcererRace();
-                case ClassConstants.WIZARD: return GoodWizardRace();
-                default: throw new ArgumentOutOfRangeException();
-            }
-        }
-
-        private String GoodWizardRace()
-        {
-            var roll = dice.Percentile();
-
-            if (roll <= 1)
-                return RaceConstants.BaseRaces.Aasimar;
-            else if (roll <= 2)
-                return RaceConstants.BaseRaces.HillDwarf;
-            else if (roll <= 7)
-                return RaceConstants.BaseRaces.GrayElf;
-            else if (roll <= 41)
-                return RaceConstants.BaseRaces.HighElf;
-            else if (roll <= 42)
-                return RaceConstants.BaseRaces.WoodElf;
-            else if (roll <= 43)
-                return RaceConstants.BaseRaces.ForestGnome;
-            else if (roll <= 48)
-                return RaceConstants.BaseRaces.RockGnome;
-            else if (roll <= 58)
-                return RaceConstants.BaseRaces.HalfElf;
-            else if (roll <= 63)
-                return RaceConstants.BaseRaces.LightfootHalfling;
-            else if (roll <= 64)
-                return RaceConstants.BaseRaces.DeepHalfling;
-            else if (roll <= 67)
-                return RaceConstants.BaseRaces.TallfellowHalfling;
-            else if (roll <= 68)
-                return RaceConstants.BaseRaces.Halforc;
-            else if (roll <= 96)
-                return RaceConstants.BaseRaces.Human;
-            else if (roll <= 97)
-                return RaceConstants.BaseRaces.Svirfneblin;
-
-            return GoodWizardRace();
-        }
-
-        private String GoodSorcererRace()
-        {
-            var roll = dice.Percentile();
-
-            if (roll <= 2)
-                return RaceConstants.BaseRaces.Aasimar;
-            else if (roll <= 3)
-                return RaceConstants.BaseRaces.DeepDwarf;
-            else if (roll <= 5)
-                return RaceConstants.BaseRaces.HillDwarf;
-            else if (roll <= 6)
-                return RaceConstants.BaseRaces.MountainDwarf;
-            else if (roll <= 8)
-                return RaceConstants.BaseRaces.GrayElf;
-            else if (roll <= 11)
-                return RaceConstants.BaseRaces.HighElf;
-            else if (roll <= 36)
-                return RaceConstants.BaseRaces.WildElf;
-            else if (roll <= 37)
-                return RaceConstants.BaseRaces.WoodElf;
-            else if (roll <= 38)
-                return RaceConstants.BaseRaces.ForestGnome;
-            else if (roll <= 40)
-                return RaceConstants.BaseRaces.RockGnome;
-            else if (roll <= 45)
-                return RaceConstants.BaseRaces.HalfElf;
-            else if (roll <= 54)
-                return RaceConstants.BaseRaces.LightfootHalfling;
-            else if (roll <= 55)
-                return RaceConstants.BaseRaces.DeepHalfling;
-            else if (roll <= 56)
-                return RaceConstants.BaseRaces.TallfellowHalfling;
-            else if (roll <= 58)
-                return RaceConstants.BaseRaces.Halforc;
-            else if (roll <= 95)
-                return RaceConstants.BaseRaces.Human;
-            else if (roll <= 96)
-                return RaceConstants.BaseRaces.Svirfneblin;
-
-            return GoodSorcererRace();
+            return percentileObject.LowerLimit <= roll && percentileObject.UpperLimit >= roll;
         }
 
         private String GoodRogueRace()
@@ -152,7 +64,7 @@ namespace NPCGen.Core.Characters.Generation.Randomizers.Races.BaseRaces
             else if (roll <= 72)
                 return RaceConstants.BaseRaces.TallfellowHalfling;
             else if (roll <= 77)
-                return RaceConstants.BaseRaces.Halforc;
+                return RaceConstants.BaseRaces.HalfOrc;
             else if (roll <= 96)
                 return RaceConstants.BaseRaces.Human;
             else if (roll <= 97)
@@ -184,7 +96,7 @@ namespace NPCGen.Core.Characters.Generation.Randomizers.Races.BaseRaces
             else if (roll <= 59)
                 return RaceConstants.BaseRaces.TallfellowHalfling;
             else if (roll <= 64)
-                return RaceConstants.BaseRaces.Halforc;
+                return RaceConstants.BaseRaces.HalfOrc;
             else if (roll <= 97)
                 return RaceConstants.BaseRaces.Human;
 
@@ -210,7 +122,7 @@ namespace NPCGen.Core.Characters.Generation.Randomizers.Races.BaseRaces
             else if (roll <= 29)
                 return RaceConstants.BaseRaces.DeepHalfling;
             else if (roll <= 30)
-                return RaceConstants.BaseRaces.Halforc;
+                return RaceConstants.BaseRaces.HalfOrc;
             else if (roll <= 97)
                 return RaceConstants.BaseRaces.Human;
 
@@ -234,7 +146,7 @@ namespace NPCGen.Core.Characters.Generation.Randomizers.Races.BaseRaces
             else if (roll <= 20)
                 return RaceConstants.BaseRaces.DeepHalfling;
             else if (roll <= 25)
-                return RaceConstants.BaseRaces.Halforc;
+                return RaceConstants.BaseRaces.HalfOrc;
             else if (roll <= 97)
                 return RaceConstants.BaseRaces.Human;
 
@@ -264,7 +176,7 @@ namespace NPCGen.Core.Characters.Generation.Randomizers.Races.BaseRaces
             else if (roll <= 52)
                 return RaceConstants.BaseRaces.DeepHalfling;
             else if (roll <= 57)
-                return RaceConstants.BaseRaces.Halforc;
+                return RaceConstants.BaseRaces.HalfOrc;
             else if (roll <= 97)
                 return RaceConstants.BaseRaces.Human;
 
@@ -294,7 +206,7 @@ namespace NPCGen.Core.Characters.Generation.Randomizers.Races.BaseRaces
             else if (roll <= 48)
                 return RaceConstants.BaseRaces.TallfellowHalfling;
             else if (roll <= 49)
-                return RaceConstants.BaseRaces.Halforc;
+                return RaceConstants.BaseRaces.HalfOrc;
             else if (roll <= 99)
                 return RaceConstants.BaseRaces.Human;
 
@@ -334,7 +246,7 @@ namespace NPCGen.Core.Characters.Generation.Randomizers.Races.BaseRaces
             else if (roll <= 69)
                 return RaceConstants.BaseRaces.TallfellowHalfling;
             else if (roll <= 70)
-                return RaceConstants.BaseRaces.Halforc;
+                return RaceConstants.BaseRaces.HalfOrc;
             else if (roll <= 95)
                 return RaceConstants.BaseRaces.Human;
             else if (roll <= 96)
@@ -394,32 +306,14 @@ namespace NPCGen.Core.Characters.Generation.Randomizers.Races.BaseRaces
             else if (roll <= 36)
                 return RaceConstants.BaseRaces.LightfootHalfling;
             else if (roll <= 61)
-                return RaceConstants.BaseRaces.Halforc;
+                return RaceConstants.BaseRaces.HalfOrc;
             else if (roll <= 98)
                 return RaceConstants.BaseRaces.Human;
 
             return GoodBarbarianRace();
         }
 
-        private String NeutralRace(String className)
-        {
-            switch (className)
-            {
-                case ClassConstants.BARBARIAN: return NeutralBarbarianRace();
-                case ClassConstants.BARD: return NeutralBardRace();
-                case ClassConstants.CLERIC: return NeutralClericRace();
-                case ClassConstants.DRUID: return NeutralDruidRace();
-                case ClassConstants.FIGHTER: return NeutralFighterRace();
-                case ClassConstants.MONK: return NeutralMonkRace();
-                case ClassConstants.RANGER: return NeutralRangerRace();
-                case ClassConstants.ROGUE: return NeutralRogueRace();
-                case ClassConstants.SORCERER: return NeutralSorcererRace();
-                case ClassConstants.WIZARD: return NeutralWizardRace();
-                default: throw new ArgumentOutOfRangeException();
-            }
-        }
-
-        private string NeutralWizardRace()
+        private String NeutralWizardRace()
         {
             var roll = dice.Percentile();
 
@@ -438,7 +332,7 @@ namespace NPCGen.Core.Characters.Generation.Randomizers.Races.BaseRaces
             else if (roll <= 49)
                 return RaceConstants.BaseRaces.TallfellowHalfling;
             else if (roll <= 50)
-                return RaceConstants.BaseRaces.Halforc;
+                return RaceConstants.BaseRaces.HalfOrc;
             else if (roll <= 97)
                 return RaceConstants.BaseRaces.Human;
             else if (roll <= 98)
@@ -447,117 +341,102 @@ namespace NPCGen.Core.Characters.Generation.Randomizers.Races.BaseRaces
             return NeutralWizardRace();
         }
 
-        private string NeutralSorcererRace()
+        private String NeutralSorcererRace()
         {
-            throw new NotImplementedException();
+            var roll = dice.Percentile();
+
+            if (roll <= 1)
+                return RaceConstants.BaseRaces.HillDwarf;
+            else if (roll <= 2)
+                return RaceConstants.BaseRaces.HighElf;
+            else if (roll <= 12)
+                return RaceConstants.BaseRaces.WildElf;
+            else if (roll <= 15)
+                return RaceConstants.BaseRaces.WoodElf;
+            else if (roll <= 16)
+                return RaceConstants.BaseRaces.RockGnome;
+            else if (roll <= 31)
+                return RaceConstants.BaseRaces.HalfElf;
+            else if (roll <= 41)
+                return RaceConstants.BaseRaces.LightfootHalfling;
+            else if (roll <= 42)
+                return RaceConstants.BaseRaces.DeepHalfling;
+            else if (roll <= 43)
+                return RaceConstants.BaseRaces.TallfellowHalfling;
+            else if (roll <= 48)
+                return RaceConstants.BaseRaces.HalfOrc;
+            else if (roll <= 95)
+                return RaceConstants.BaseRaces.Human;
+            else if (roll <= 97)
+                return RaceConstants.BaseRaces.Lizardfolk;
+            else if (roll <= 98)
+                return RaceConstants.BaseRaces.Doppelganger;
+
+            return NeutralSorcererRace();
         }
 
-        private string NeutralRogueRace()
+        private String NeutralRogueRace()
         {
-            throw new NotImplementedException();
+            var roll = dice.Percentile();
+
+            if (roll <= 1)
+                return RaceConstants.BaseRaces.DeepDwarf;
+            else if (roll <= 4)
+                return RaceConstants.BaseRaces.HillDwarf;
+            else if (roll <= 8)
+                return RaceConstants.BaseRaces.HighElf;
+            else if (roll <= 9)
+                return RaceConstants.BaseRaces.WoodElf;
+            else if (roll <= 10)
+                return RaceConstants.BaseRaces.RockGnome;
+            else if (roll <= 25)
+                return RaceConstants.BaseRaces.HalfElf;
+            else if (roll <= 53)
+                return RaceConstants.BaseRaces.LightfootHalfling;
+            else if (roll <= 58)
+                return RaceConstants.BaseRaces.DeepHalfling;
+            else if (roll <= 63)
+                return RaceConstants.BaseRaces.TallfellowHalfling;
+            else if (roll <= 73)
+                return RaceConstants.BaseRaces.HalfOrc;
+            else if (roll <= 97)
+                return RaceConstants.BaseRaces.Human;
+            else if (roll <= 98)
+                return RaceConstants.BaseRaces.Doppelganger;
+
+            return NeutralRogueRace();
         }
 
-        private string NeutralRangerRace()
+        private String NeutralRangerRace()
         {
-            throw new NotImplementedException();
-        }
+            var roll = dice.Percentile();
 
-        private string NeutralMonkRace()
-        {
-            throw new NotImplementedException();
-        }
+            if (roll <= 1)
+                return RaceConstants.BaseRaces.HillDwarf;
+            else if (roll <= 6)
+                return RaceConstants.BaseRaces.HighElf;
+            else if (roll <= 7)
+                return RaceConstants.BaseRaces.WildElf;
+            else if (roll <= 36)
+                return RaceConstants.BaseRaces.WoodElf;
+            else if (roll <= 37)
+                return RaceConstants.BaseRaces.ForestGnome;
+            else if (roll <= 38)
+                return RaceConstants.BaseRaces.RockGnome;
+            else if (roll <= 55)
+                return RaceConstants.BaseRaces.HalfElf;
+            else if (roll <= 56)
+                return RaceConstants.BaseRaces.LightfootHalfling;
+            else if (roll <= 57)
+                return RaceConstants.BaseRaces.TallfellowHalfling;
+            else if (roll <= 67)
+                return RaceConstants.BaseRaces.HalfOrc;
+            else if (roll <= 96)
+                return RaceConstants.BaseRaces.Human;
+            else if (roll <= 98)
+                return RaceConstants.BaseRaces.Lizardfolk;
 
-        private string NeutralFighterRace()
-        {
-            throw new NotImplementedException();
-        }
-
-        private string NeutralDruidRace()
-        {
-            throw new NotImplementedException();
-        }
-
-        private string NeutralClericRace()
-        {
-            throw new NotImplementedException();
-        }
-
-        private string NeutralBardRace()
-        {
-            throw new NotImplementedException();
-        }
-
-        private string NeutralBarbarianRace()
-        {
-            throw new NotImplementedException();
-        }
-
-        private String EvilRace(String className)
-        {
-            switch (className)
-            {
-                case ClassConstants.BARBARIAN: return EvilBarbarianRace();
-                case ClassConstants.BARD: return EvilBardRace();
-                case ClassConstants.CLERIC: return EvilClericRace();
-                case ClassConstants.DRUID: return EvilDruidRace();
-                case ClassConstants.FIGHTER: return EvilFighterRace();
-                case ClassConstants.MONK: return EvilMonkRace();
-                case ClassConstants.RANGER: return EvilRangerRace();
-                case ClassConstants.ROGUE: return EvilRogueRace();
-                case ClassConstants.SORCERER: return EvilSorcererRace();
-                case ClassConstants.WIZARD: return EvilWizardRace();
-                default: throw new ArgumentOutOfRangeException();
-            }
-        }
-
-        private string EvilWizardRace()
-        {
-            throw new NotImplementedException();
-        }
-
-        private string EvilSorcererRace()
-        {
-            throw new NotImplementedException();
-        }
-
-        private string EvilRogueRace()
-        {
-            throw new NotImplementedException();
-        }
-
-        private string EvilRangerRace()
-        {
-            throw new NotImplementedException();
-        }
-
-        private string EvilMonkRace()
-        {
-            throw new NotImplementedException();
-        }
-
-        private string EvilFighterRace()
-        {
-            throw new NotImplementedException();
-        }
-
-        private string EvilDruidRace()
-        {
-            throw new NotImplementedException();
-        }
-
-        private string EvilClericRace()
-        {
-            throw new NotImplementedException();
-        }
-
-        private string EvilBardRace()
-        {
-            throw new NotImplementedException();
-        }
-
-        private string EvilBarbarianRace()
-        {
-            throw new NotImplementedException();
+            return NeutralRangerRace();
         }
 
         protected abstract Boolean RaceIsAllowed(String baseRace, Alignment alignment, String className);

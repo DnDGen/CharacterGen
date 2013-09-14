@@ -1,28 +1,18 @@
 ﻿using D20Dice.Dice;
-using NPCGen.Core.Characters.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NPCGen.Core.Characters.Data.Alignments;
 
 namespace NPCGen.Core.Characters.Generation.Randomizers.Alignments
 {
-    public class EvilAlignment : IAlignmentRandomizer
+    public class EvilAlignment : BaseAlignmentRandomizer
     {
-        private IDice dice;
-
-        public EvilAlignment(IDice dice)
-        {
-            this.dice = dice;
-        }
+        public EvilAlignment(IDice dice) : base(dice) { }
 
         public Alignment Randomize()
         {
             var alignment = new Alignment();
 
-            alignment.Lawfulness = dice.d3(bonus: -2);
-            alignment.Goodness = -1;
+            alignment.Lawfulness = RollLawfulness();
+            alignment.Goodness = AlignmentConstants.Evil;
 
             return alignment;
         }
