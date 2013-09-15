@@ -67,6 +67,12 @@
     <Compile Include="Generation\Factories\CharacterClassFactoryTests.cs" />
     <Compile Include="Generation\Factories\CharacterFactoryTests.cs" />
     <Compile Include="Generation\Factories\StatsFactoryTests.cs" />
+    <Compile Include="Generation\Randomizers\Alignments\AnyAlignmentTests.cs" />
+    <Compile Include="Generation\Randomizers\Alignments\ChaoticAlignmentTests.cs" />
+    <Compile Include="Generation\Randomizers\Alignments\EvilAlignmentTests.cs" />
+    <Compile Include="Generation\Randomizers\Alignments\GoodAlignmentTests.cs" />
+    <Compile Include="Generation\Randomizers\Alignments\LawfulAlignmentTests.cs" />
+    <Compile Include="Generation\Randomizers\Alignments\NeutralAlignmentTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

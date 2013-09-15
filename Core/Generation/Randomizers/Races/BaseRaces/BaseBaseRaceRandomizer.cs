@@ -15,10 +15,10 @@ namespace NPCGen.Core.Generation.Randomizers.Races.BaseRaces
 
         public String Randomize(Alignment alignment, String className)
         {
-            var filename = String.Format("{0}{1}BaseRaces", alignment.GetGoodnessString(), className);
+            var tableName = String.Format("{0}{1}BaseRaces", alignment.GetGoodnessString(), className);
             var baseRace = String.Empty;
 
-            do baseRace = percentileResultProvider.GetPercentileResult(filename);
+            do baseRace = percentileResultProvider.GetPercentileResult(tableName);
             while (!RaceIsAllowed(baseRace, alignment, className));
 
             return baseRace;
