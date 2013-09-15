@@ -11,16 +11,16 @@ namespace NPCGen.Core.Generation.Factories
     public class CharacterClassFactory : ICharacterClassFactory
     {
         public ILevelRandomizer LevelRandomizer { get; set; }
-        public IClassRandomizer ClassRandomizer { get; set; }
+        public ICharacterClassRandomizer CharacterClassRandomizer { get; set; }
 
         private IDice dice;
 
         public CharacterClassFactory(IDice dice, ILevelRandomizer levelRandomizer,
-            IClassRandomizer classRandomizer)
+            ICharacterClassRandomizer classRandomizer)
         {
             this.dice = dice;
             LevelRandomizer = levelRandomizer;
-            ClassRandomizer = classRandomizer;
+            CharacterClassRandomizer = classRandomizer;
         }
 
         public CharacterClass Generate(Alignment alignment, Int32 constitutionBonus)
@@ -28,7 +28,7 @@ namespace NPCGen.Core.Generation.Factories
             var characterClass = new CharacterClass();
 
             characterClass.Level = LevelRandomizer.Randomize();
-            characterClass.ClassName = ClassRandomizer.Randomize(alignment);
+            characterClass.ClassName = CharacterClassRandomizer.Randomize(alignment);
             characterClass.BaseAttack = GetBaseAttack(characterClass);
             characterClass.HitPoints = GetHitPoints(characterClass, constitutionBonus);
 

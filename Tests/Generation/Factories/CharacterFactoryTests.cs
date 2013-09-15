@@ -6,7 +6,7 @@ namespace NPCGen.Tests.Generation.Factories
     public class CharacterFactoryTests
     {
         [Test]
-        public void Test()
+        public void CharacterFactoryTest()
         {
             Assert.Fail();
         }

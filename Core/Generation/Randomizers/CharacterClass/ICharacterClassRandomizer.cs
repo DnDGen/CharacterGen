@@ -3,7 +3,7 @@ using System;
 
 namespace NPCGen.Core.Generation.Randomizers.CharacterClass
 {
-    public interface IClassRandomizer
+    public interface ICharacterClassRandomizer
     {
         String Randomize(Alignment alignment);
     }

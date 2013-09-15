@@ -6,7 +6,7 @@ using System;
 
 namespace NPCGen.Core.Generation.Randomizers.CharacterClass
 {
-    public abstract class BaseClassRandomizer : IClassRandomizer
+    public abstract class BaseClassRandomizer : ICharacterClassRandomizer
     {
         private IDice dice;
 

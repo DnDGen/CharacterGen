@@ -3,7 +3,7 @@ using System;
 
 namespace NPCGen.Core.Generation.Randomizers.CharacterClass
 {
-    public class SetClass : IClassRandomizer
+    public class SetClass : ICharacterClassRandomizer
     {
         public String ClassName { get; set; }
 

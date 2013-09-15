@@ -7,7 +7,7 @@ namespace NPCGen.Core.Generation.Verifiers.Alignments
 {
     public interface IAlignmentVerifier
     {
-        Boolean VerifyCompatiblity(IClassRandomizer classRandomizer);
+        Boolean VerifyCompatiblity(ICharacterClassRandomizer classRandomizer);
         Boolean VerifyCompatiblity(IBaseRaceRandomizer baseRaceRandomizer);
         Boolean VerifyCompatiblity(IMetaraceRandomizer metaraceRandomizer);
     }

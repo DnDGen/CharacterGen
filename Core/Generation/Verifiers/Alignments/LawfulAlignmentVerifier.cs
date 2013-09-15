@@ -8,7 +8,7 @@ namespace NPCGen.Core.Generation.Verifiers.Alignments
 {
     public class LawfulAlignmentVerifier : IAlignmentVerifier
     {
-        public Boolean VerifyCompatiblity(IClassRandomizer classRandomizer)
+        public Boolean VerifyCompatiblity(ICharacterClassRandomizer classRandomizer)
         {
             if (classRandomizer is SetClass)
             {

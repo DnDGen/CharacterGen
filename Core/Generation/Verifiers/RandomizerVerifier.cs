@@ -16,7 +16,7 @@ namespace NPCGen.Core.Generation.Verifiers
             this.alignmentVerifierFactory = alignmentVerifierFactory;
         }
 
-        public Boolean VerifyCompatibility(IAlignmentRandomizer alignmentRandomizer, IClassRandomizer classRandomizer,
+        public Boolean VerifyCompatibility(IAlignmentRandomizer alignmentRandomizer, ICharacterClassRandomizer classRandomizer,
             IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer)
         {
             var verified = true;

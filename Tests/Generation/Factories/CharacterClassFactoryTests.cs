@@ -16,7 +16,7 @@ namespace NPCGen.Tests.Generation.Factories
     {
         private Mock<IDice> mockDice;
         private Mock<ILevelRandomizer> mockLevelRandomizer;
-        private Mock<IClassRandomizer> mockClassRandomizer;
+        private Mock<ICharacterClassRandomizer> mockClassRandomizer;
 
         private ICharacterClassFactory characterClassFactory;
         private Alignment alignment;
@@ -26,7 +26,7 @@ namespace NPCGen.Tests.Generation.Factories
         {
             mockDice = new Mock<IDice>();
             mockLevelRandomizer = new Mock<ILevelRandomizer>();
-            mockClassRandomizer = new Mock<IClassRandomizer>();
+            mockClassRandomizer = new Mock<ICharacterClassRandomizer>();
 
             alignment = new Alignment();
             mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(ClassConstants.Barbarian);
@@ -38,7 +38,7 @@ namespace NPCGen.Tests.Generation.Factories
         [Test]
         public void RandomizersProperlySet()
         {
-            Assert.That(characterClassFactory.ClassRandomizer, Is.EqualTo(mockClassRandomizer.Object));
+            Assert.That(characterClassFactory.CharacterClassRandomizer, Is.EqualTo(mockClassRandomizer.Object));
             Assert.That(characterClassFactory.LevelRandomizer, Is.EqualTo(mockLevelRandomizer.Object));
         }
 
@@ -72,9 +72,9 @@ namespace NPCGen.Tests.Generation.Factories
         [Test]
         public void ChangeClassRandomizer()
         {
-            var differentRandomizer = new Mock<IClassRandomizer>();
+            var differentRandomizer = new Mock<ICharacterClassRandomizer>();
             differentRandomizer.Setup(r => r.Randomize(alignment)).Returns(ClassConstants.Wizard);
-            characterClassFactory.ClassRandomizer = differentRandomizer.Object;
+            characterClassFactory.CharacterClassRandomizer = differentRandomizer.Object;
 
             var characterClass = characterClassFactory.Generate(alignment, 0);
             Assert.That(characterClass.ClassName, Is.EqualTo(ClassConstants.Wizard));

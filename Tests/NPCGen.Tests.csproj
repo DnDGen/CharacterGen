@@ -65,6 +65,8 @@
     <Compile Include="Data\Stats\StatTests.cs" />
     <Compile Include="Generation\Factories\AlignmentFactoryTests.cs" />
     <Compile Include="Generation\Factories\CharacterClassFactoryTests.cs" />
+    <Compile Include="Generation\Factories\CharacterFactoryTests.cs" />
+    <Compile Include="Generation\Factories\StatsFactoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -72,7 +74,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\NPCGen.Core\NPCGen.Core.csproj">
+    <ProjectReference Include="..\Core\NPCGen.Core.csproj">
       <Project>{83f2b67c-3eb0-4e46-aad5-bafaa2e35689}</Project>
       <Name>NPCGen.Core</Name>
     </ProjectReference>

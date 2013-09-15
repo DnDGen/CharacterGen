@@ -64,8 +64,8 @@
     <Compile Include="Generation\Factories\Interfaces\ICharacterClassFactory.cs" />
     <Compile Include="Generation\Factories\Interfaces\ICharacterFactory.cs" />
     <Compile Include="Generation\Factories\Interfaces\IRaceFactory.cs" />
-    <Compile Include="Generation\Factories\Interfaces\IStatFactory.cs" />
-    <Compile Include="Generation\Factories\StatFactory.cs" />
+    <Compile Include="Generation\Factories\Interfaces\IStatsFactory.cs" />
+    <Compile Include="Generation\Factories\StatsFactory.cs" />
     <Compile Include="Generation\Randomizers\Alignments\AnyAlignment.cs" />
     <Compile Include="Generation\Randomizers\Alignments\BaseAlignmentRandomizer.cs" />
     <Compile Include="Generation\Randomizers\Alignments\ChaoticAlignment.cs" />
@@ -83,7 +83,7 @@
     <Compile Include="Generation\Randomizers\CharacterClass\AnyClass.cs" />
     <Compile Include="Generation\Randomizers\CharacterClass\BaseClassRandomizer.cs" />
     <Compile Include="Generation\Randomizers\CharacterClass\HealerClass.cs" />
-    <Compile Include="Generation\Randomizers\CharacterClass\IClassRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClass\ICharacterClassRandomizer.cs" />
     <Compile Include="Generation\Randomizers\CharacterClass\MageClass.cs" />
     <Compile Include="Generation\Randomizers\CharacterClass\NonSpellcasterClass.cs" />
     <Compile Include="Generation\Randomizers\CharacterClass\StealthClass.cs" />
@@ -104,7 +104,7 @@
     <Compile Include="Generation\Randomizers\Races\Metaraces\IMetaraceRandomizer.cs" />
     <Compile Include="Generation\Randomizers\Races\BaseRaces\IBaseRaceRandomizer.cs" />
     <Compile Include="Generation\Randomizers\Races\BaseRaces\SetBaseRace.cs" />
-    <Compile Include="Generation\Randomizers\Stats\IStatRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Stats\IStatsRandomizer.cs" />
     <Compile Include="Generation\Verifiers\Alignments\ChaoticAlignmentVerifier.cs" />
     <Compile Include="Generation\Verifiers\Alignments\EvilAlignmentVerifier.cs" />
     <Compile Include="Generation\Verifiers\Alignments\IAlignmentVerifier.cs" />

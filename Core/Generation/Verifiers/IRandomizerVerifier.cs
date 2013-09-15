@@ -8,7 +8,7 @@ namespace NPCGen.Core.Generation.Verifiers
 {
     public interface IRandomizerVerifier
     {
-        Boolean VerifyCompatibility(IAlignmentRandomizer alignmentRandomizer, IClassRandomizer classRandomizer,
+        Boolean VerifyCompatibility(IAlignmentRandomizer alignmentRandomizer, ICharacterClassRandomizer classRandomizer,
             IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer);
     }
 }
