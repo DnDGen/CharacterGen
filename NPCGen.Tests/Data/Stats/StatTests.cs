@@ -12,7 +12,7 @@ namespace NPCGen.Tests.Data.Stats
         {
             var stat = new Stat();
 
-            for (var v = 0; v < 50; v++)
+            for (var v = 0; v < 30; v++)
             {
                 stat.Value = v;
                 var expectedBonus = GetExpectedBonus(v);

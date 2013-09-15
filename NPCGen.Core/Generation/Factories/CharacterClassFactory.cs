@@ -15,9 +15,12 @@ namespace NPCGen.Core.Generation.Factories
 
         private IDice dice;
 
-        public CharacterClassFactory(IDice dice)
+        public CharacterClassFactory(IDice dice, ILevelRandomizer levelRandomizer,
+            IClassRandomizer classRandomizer)
         {
             this.dice = dice;
+            LevelRandomizer = levelRandomizer;
+            ClassRandomizer = classRandomizer;
         }
 
         public CharacterClass Generate(Alignment alignment, Int32 constitutionBonus)
@@ -26,37 +29,37 @@ namespace NPCGen.Core.Generation.Factories
 
             characterClass.Level = LevelRandomizer.Randomize();
             characterClass.ClassName = ClassRandomizer.Randomize(alignment);
-            characterClass.BaseAttack.BaseAttackBonus = GetBaseAttackBonusByLevel(characterClass);
+            characterClass.BaseAttack.BaseAttackBonus = GetBaseAttackBonus(characterClass);
             characterClass.HitPoints = GetHitPoints(characterClass, constitutionBonus);
 
-            throw new NotImplementedException();
+            return characterClass;
         }
 
-        private Int32 GetBaseAttackBonusByLevel(CharacterClass characterClass)
+        private Int32 GetBaseAttackBonus(CharacterClass characterClass)
         {
             switch (characterClass.ClassName)
             {
                 case ClassConstants.FIGHTER:
                 case ClassConstants.PALADIN:
                 case ClassConstants.RANGER:
-                case ClassConstants.BARBARIAN: return GetGoodRootAttack(characterClass.Level);
+                case ClassConstants.BARBARIAN: return GetGoodBaseAttackBonus(characterClass.Level);
                 case ClassConstants.BARD:
                 case ClassConstants.CLERIC:
                 case ClassConstants.MONK:
                 case ClassConstants.ROGUE:
-                case ClassConstants.DRUID: return GetAverageRootAttack(characterClass.Level);
+                case ClassConstants.DRUID: return GetAverageBaseAttackBonus(characterClass.Level);
                 case ClassConstants.SORCERER:
-                case ClassConstants.WIZARD: return GetPoorRootAttack(characterClass.Level);
+                case ClassConstants.WIZARD: return GetPoorBaseAttackBonus(characterClass.Level);
                 default: throw new ArgumentOutOfRangeException();
             }
         }
 
-        private Int32 GetGoodRootAttack(Int32 level)
+        private Int32 GetGoodBaseAttackBonus(Int32 level)
         {
             return level;
         }
 
-        private Int32 GetAverageRootAttack(Int32 level)
+        private Int32 GetAverageBaseAttackBonus(Int32 level)
         {
             var rootAttack = 0;
 
@@ -67,7 +70,7 @@ namespace NPCGen.Core.Generation.Factories
             return rootAttack;
         }
 
-        private Int32 GetPoorRootAttack(Int32 level)
+        private Int32 GetPoorBaseAttackBonus(Int32 level)
         {
             return level / 2;
         }

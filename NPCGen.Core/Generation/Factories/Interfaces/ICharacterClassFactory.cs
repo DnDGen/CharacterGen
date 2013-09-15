@@ -8,8 +8,8 @@ namespace NPCGen.Core.Generation.Factories.Interfaces
 {
     public interface ICharacterClassFactory
     {
-        ILevelRandomizer LevelRandomizer { get; }
-        IClassRandomizer ClassRandomizer { get; }
+        ILevelRandomizer LevelRandomizer { get; set; }
+        IClassRandomizer ClassRandomizer { get; set; }
 
         CharacterClass Generate(Alignment alignment, Int32 constitutionBonus);
     }
