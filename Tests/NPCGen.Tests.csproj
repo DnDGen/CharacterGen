@@ -73,6 +73,8 @@
     <Compile Include="Generation\Randomizers\Alignments\GoodAlignmentTests.cs" />
     <Compile Include="Generation\Randomizers\Alignments\LawfulAlignmentTests.cs" />
     <Compile Include="Generation\Randomizers\Alignments\NeutralAlignmentTests.cs" />
+    <Compile Include="Generation\Randomizers\Alignments\NonChaoticAlignmentTests.cs" />
+    <Compile Include="Generation\Randomizers\Alignments\NonEvilAlignmentTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
