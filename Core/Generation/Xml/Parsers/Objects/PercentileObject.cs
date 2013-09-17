@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NPCGen.Core.Generation.Xml.Parsers
+namespace NPCGen.Core.Generation.Xml.Parsers.Objects
 {
     public class PercentileObject
     {

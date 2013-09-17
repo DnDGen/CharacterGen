@@ -1,5 +1,4 @@
 ﻿using NPCGen.Core.Data.Alignments;
-using System;
 
 namespace NPCGen.Core.Generation.Randomizers.Alignments
 {
@@ -7,11 +6,9 @@ namespace NPCGen.Core.Generation.Randomizers.Alignments
     {
         public Alignment Alignment { get; set; }
 
-        public SetAlignment(Int32 lawfulness, Int32 goodness)
+        public SetAlignment()
         {
             Alignment = new Alignment();
-            Alignment.Lawfulness = lawfulness;
-            Alignment.Goodness = goodness;
         }
 
         public Alignment Randomize()

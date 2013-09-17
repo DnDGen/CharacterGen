@@ -48,9 +48,9 @@
     <Compile Include="Data\Alignments\Alignment.cs" />
     <Compile Include="Data\Alignments\AlignmentConstants.cs" />
     <Compile Include="Data\Character.cs" />
-    <Compile Include="Data\Classes\BaseAttack.cs" />
-    <Compile Include="Data\Classes\CharacterClass.cs" />
-    <Compile Include="Data\Classes\ClassConstants.cs" />
+    <Compile Include="Data\CharacterClasses\BaseAttack.cs" />
+    <Compile Include="Data\CharacterClasses\CharacterClass.cs" />
+    <Compile Include="Data\CharacterClasses\CharacterClassConstants.cs" />
     <Compile Include="Data\Feat.cs" />
     <Compile Include="Data\Races\Race.cs" />
     <Compile Include="Data\Races\RaceConstants.cs" />
@@ -80,16 +80,16 @@
     <Compile Include="Generation\Randomizers\Alignments\NonLawfulAlignment.cs" />
     <Compile Include="Generation\Randomizers\Alignments\NonNeutralAlignment.cs" />
     <Compile Include="Generation\Randomizers\Alignments\SetAlignment.cs" />
-    <Compile Include="Generation\Randomizers\CharacterClass\AnyClass.cs" />
-    <Compile Include="Generation\Randomizers\CharacterClass\BaseClassRandomizer.cs" />
-    <Compile Include="Generation\Randomizers\CharacterClass\HealerClass.cs" />
-    <Compile Include="Generation\Randomizers\CharacterClass\ICharacterClassRandomizer.cs" />
-    <Compile Include="Generation\Randomizers\CharacterClass\MageClass.cs" />
-    <Compile Include="Generation\Randomizers\CharacterClass\NonSpellcasterClass.cs" />
-    <Compile Include="Generation\Randomizers\CharacterClass\StealthClass.cs" />
-    <Compile Include="Generation\Randomizers\CharacterClass\SetClass.cs" />
-    <Compile Include="Generation\Randomizers\CharacterClass\SpellcasterClass.cs" />
-    <Compile Include="Generation\Randomizers\CharacterClass\WarriorClass.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\AnyClass.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\BaseClassRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\HealerClass.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\ICharacterClassRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\MageClass.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\NonSpellcasterClass.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\StealthClass.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\SetClass.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\SpellcasterClass.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\WarriorClass.cs" />
     <Compile Include="Generation\Randomizers\Providers\Interfaces\IPercentileResultProvider.cs" />
     <Compile Include="Generation\Randomizers\Level\AnyLevel.cs" />
     <Compile Include="Generation\Randomizers\Level\HighLevel.cs" />
@@ -115,9 +115,11 @@
     <Compile Include="Generation\Verifiers\Factories\Interfaces\IAlignmentVerifierFactory.cs" />
     <Compile Include="Generation\Verifiers\IRandomizerVerifier.cs" />
     <Compile Include="Generation\Verifiers\RandomizerVerifier.cs" />
-    <Compile Include="Generation\Xml\Parsers\IPercentileXmlParser.cs" />
-    <Compile Include="Generation\Xml\Parsers\PercentileObject.cs" />
+    <Compile Include="Generation\Xml\Parsers\Interfaces\IPercentileXmlParser.cs" />
+    <Compile Include="Generation\Xml\Parsers\Interfaces\IStreamLoader.cs" />
+    <Compile Include="Generation\Xml\Parsers\Objects\PercentileObject.cs" />
     <Compile Include="Generation\Xml\Parsers\PercentileXmlParser.cs" />
+    <Compile Include="Generation\Xml\Parsers\EmbeddedResourceStreamLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -198,6 +200,15 @@
     <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Neutral\NeutralWizardBaseRaces.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\CharacterClasses\GoodCharacterClasses.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\CharacterClasses\NeutralCharacterClasses.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\CharacterClasses\EvilCharacterClasses.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

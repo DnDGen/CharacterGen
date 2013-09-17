@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace NPCGen.Core.Data.Classes
+namespace NPCGen.Core.Data.CharacterClasses
 {
-    public class ClassConstants
+    public class CharacterClassConstants
     {
         public const String Barbarian = "Barbarian";
         public const String Bard = "Bard";

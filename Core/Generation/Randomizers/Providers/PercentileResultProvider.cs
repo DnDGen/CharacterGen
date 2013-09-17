@@ -1,9 +1,10 @@
-﻿using D20Dice.Dice;
-using NPCGen.Core.Generation.Randomizers.Providers.Interfaces;
-using NPCGen.Core.Generation.Xml.Parsers;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using D20Dice.Dice;
+using NPCGen.Core.Generation.Randomizers.Providers.Interfaces;
+using NPCGen.Core.Generation.Xml.Parsers.Interfaces;
+using NPCGen.Core.Generation.Xml.Parsers.Objects;
 
 namespace NPCGen.Core.Generation.Randomizers.Providers
 {
@@ -11,22 +12,21 @@ namespace NPCGen.Core.Generation.Randomizers.Providers
     {
         private IPercentileXmlParser percentileXmlParser;
         private IDice dice;
-        private List<PercentileObject> table;
-        private String tableName;
+        private Dictionary<String, List<PercentileObject>> cachedTables;
 
         public PercentileResultProvider(IPercentileXmlParser percentileXmlParser, IDice dice)
         {
             this.percentileXmlParser = percentileXmlParser;
             this.dice = dice;
+            cachedTables = new Dictionary<String, List<PercentileObject>>();
         }
 
         public String GetPercentileResult(String tableName)
         {
-            if (this.tableName != tableName)
+            if (!cachedTables.ContainsKey(tableName))
                 CacheTable(tableName);
 
-            var roll = dice.Percentile();
-            var percentileObject = table.FirstOrDefault(o => RollIsInRange(roll, o));
+            var percentileObject = GetPercentileObject(tableName);
 
             if (percentileObject == null)
                 return String.Empty;
@@ -36,13 +36,20 @@ namespace NPCGen.Core.Generation.Randomizers.Providers
 
         private void CacheTable(String tableName)
         {
-            this.tableName = tableName;
-            table = percentileXmlParser.Parse(tableName);
+            var filename = tableName + ".xml";
+            var table = percentileXmlParser.Parse(filename);
+            cachedTables.Add(tableName, table);
+        }
+
+        private PercentileObject GetPercentileObject(String tableName)
+        {
+            var roll = dice.Percentile();
+            return cachedTables[tableName].FirstOrDefault(o => RollIsInRange(roll, o));
         }
 
         private Boolean RollIsInRange(Int32 roll, PercentileObject percentileObject)
         {
-            return percentileObject.LowerLimit <= roll && percentileObject.UpperLimit >= roll;
+            return percentileObject.LowerLimit <= roll && roll <= percentileObject.UpperLimit;
         }
     }
 }

@@ -1,7 +1,7 @@
-﻿using NPCGen.Core.Data.Alignments;
-using System;
+﻿using System;
+using NPCGen.Core.Data.Alignments;
 
-namespace NPCGen.Core.Generation.Randomizers.CharacterClass
+namespace NPCGen.Core.Generation.Randomizers.CharacterClasses
 {
     public class SetClass : ICharacterClassRandomizer
     {

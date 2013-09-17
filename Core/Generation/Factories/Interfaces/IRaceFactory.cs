@@ -1,5 +1,5 @@
 ﻿using NPCGen.Core.Data.Alignments;
-using NPCGen.Core.Data.Classes;
+using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Data.Races;
 using NPCGen.Core.Generation.Randomizers.Races.BaseRaces;
 using NPCGen.Core.Generation.Randomizers.Races.Metaraces;

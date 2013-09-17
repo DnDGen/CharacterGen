@@ -1,8 +1,8 @@
-﻿using NPCGen.Core.Data.Alignments;
-using NPCGen.Core.Data.Classes;
-using NPCGen.Core.Generation.Randomizers.CharacterClass;
+﻿using System;
+using NPCGen.Core.Data.Alignments;
+using NPCGen.Core.Data.CharacterClasses;
+using NPCGen.Core.Generation.Randomizers.CharacterClasses;
 using NPCGen.Core.Generation.Randomizers.Level;
-using System;
 
 namespace NPCGen.Core.Generation.Factories.Interfaces
 {

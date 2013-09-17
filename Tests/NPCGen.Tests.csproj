@@ -65,7 +65,6 @@
     <Compile Include="Data\Stats\StatTests.cs" />
     <Compile Include="Generation\Factories\AlignmentFactoryTests.cs" />
     <Compile Include="Generation\Factories\CharacterClassFactoryTests.cs" />
-    <Compile Include="Generation\Factories\CharacterFactoryTests.cs" />
     <Compile Include="Generation\Factories\StatsFactoryTests.cs" />
     <Compile Include="Generation\Randomizers\Alignments\AnyAlignmentTests.cs" />
     <Compile Include="Generation\Randomizers\Alignments\ChaoticAlignmentTests.cs" />
@@ -75,12 +74,23 @@
     <Compile Include="Generation\Randomizers\Alignments\NeutralAlignmentTests.cs" />
     <Compile Include="Generation\Randomizers\Alignments\NonChaoticAlignmentTests.cs" />
     <Compile Include="Generation\Randomizers\Alignments\NonEvilAlignmentTests.cs" />
+    <Compile Include="Generation\Randomizers\Alignments\NonGoodAlignmentTests.cs" />
+    <Compile Include="Generation\Randomizers\Alignments\NonLawfulAlignmentTests.cs" />
+    <Compile Include="Generation\Randomizers\Alignments\NonNeutralAlignmentTests.cs" />
+    <Compile Include="Generation\Randomizers\Alignments\SetAlignmentTests.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClass\BaseClassRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Providers\PercentileResultProviderTests.cs" />
+    <Compile Include="Generation\Xml\Data\CharacterClasses\EvilCharacterClassesTests.cs" />
+    <Compile Include="Generation\Xml\Data\CharacterClasses\GoodCharacterClassesTests.cs" />
+    <Compile Include="Generation\Xml\Data\CharacterClasses\NeutralCharacterClassesTests.cs" />
+    <Compile Include="Generation\Xml\Data\PercentileTests.cs" />
+    <Compile Include="Generation\Xml\Parsers\EmbeddedResourceStreamLoaderTests.cs" />
+    <Compile Include="Generation\Xml\Parsers\PercentileXmlParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Core\NPCGen.Core.csproj">
       <Project>{83f2b67c-3eb0-4e46-aad5-bafaa2e35689}</Project>

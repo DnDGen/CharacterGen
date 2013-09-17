@@ -4,23 +4,25 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Xml;
+using NPCGen.Core.Generation.Xml.Parsers.Interfaces;
+using NPCGen.Core.Generation.Xml.Parsers.Objects;
 
 namespace NPCGen.Core.Generation.Xml.Parsers
 {
     public class PercentileXmlParser : IPercentileXmlParser
     {
+        private IStreamLoader streamLoader;
+
+        public PercentileXmlParser(IStreamLoader streamLoader)
+        {
+            this.streamLoader = streamLoader;
+        }
+
         public List<PercentileObject> Parse(String filename)
         {
-            var executingAssembly = Assembly.GetExecutingAssembly();
-            var resources = executingAssembly.GetManifestResourceNames();
-
-            if (!resources.Any(r => r.Contains(filename)))
-                throw new FileNotFoundException();
-
-            var streamSource = resources.First(r => r.Contains(filename));
             var results = new List<PercentileObject>();
 
-            using (var stream = executingAssembly.GetManifestResourceStream(streamSource))
+            using (var stream = streamLoader.LoadStream(filename))
             {
                 var xmlDocument = new XmlDocument();
                 xmlDocument.Load(stream);

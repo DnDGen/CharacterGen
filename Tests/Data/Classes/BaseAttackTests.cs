@@ -1,6 +1,6 @@
-﻿using NPCGen.Core.Data.Classes;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using System;
+using NPCGen.Core.Data.CharacterClasses;
 
 namespace NPCGen.Tests.Data.Classes
 {

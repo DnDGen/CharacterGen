@@ -1,9 +1,9 @@
 ﻿using NPCGen.Core.Data.Alignments;
-using NPCGen.Core.Data.Classes;
 using NPCGen.Core.Data.Races;
 using NPCGen.Core.Data.Stats;
 using System;
 using System.Collections.Generic;
+using NPCGen.Core.Data.CharacterClasses;
 
 namespace NPCGen.Core.Data
 {

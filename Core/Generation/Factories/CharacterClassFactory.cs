@@ -1,10 +1,10 @@
-﻿using D20Dice.Dice;
+﻿using System;
+using D20Dice.Dice;
 using NPCGen.Core.Data.Alignments;
-using NPCGen.Core.Data.Classes;
+using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Generation.Factories.Interfaces;
-using NPCGen.Core.Generation.Randomizers.CharacterClass;
+using NPCGen.Core.Generation.Randomizers.CharacterClasses;
 using NPCGen.Core.Generation.Randomizers.Level;
-using System;
 
 namespace NPCGen.Core.Generation.Factories
 {
@@ -46,17 +46,17 @@ namespace NPCGen.Core.Generation.Factories
         {
             switch (characterClass.ClassName)
             {
-                case ClassConstants.Fighter:
-                case ClassConstants.Paladin:
-                case ClassConstants.Ranger:
-                case ClassConstants.Barbarian: return GetGoodBaseAttackBonus(characterClass.Level);
-                case ClassConstants.Bard:
-                case ClassConstants.Cleric:
-                case ClassConstants.Monk:
-                case ClassConstants.Rogue:
-                case ClassConstants.Druid: return GetAverageBaseAttackBonus(characterClass.Level);
-                case ClassConstants.Sorcerer:
-                case ClassConstants.Wizard: return GetPoorBaseAttackBonus(characterClass.Level);
+                case CharacterClassConstants.Fighter:
+                case CharacterClassConstants.Paladin:
+                case CharacterClassConstants.Ranger:
+                case CharacterClassConstants.Barbarian: return GetGoodBaseAttackBonus(characterClass.Level);
+                case CharacterClassConstants.Bard:
+                case CharacterClassConstants.Cleric:
+                case CharacterClassConstants.Monk:
+                case CharacterClassConstants.Rogue:
+                case CharacterClassConstants.Druid: return GetAverageBaseAttackBonus(characterClass.Level);
+                case CharacterClassConstants.Sorcerer:
+                case CharacterClassConstants.Wizard: return GetPoorBaseAttackBonus(characterClass.Level);
                 default: throw new ArgumentOutOfRangeException();
             }
         }
@@ -93,17 +93,17 @@ namespace NPCGen.Core.Generation.Factories
         {
             switch (className)
             {
-                case ClassConstants.Fighter:
-                case ClassConstants.Paladin: return dice.d10(bonus: constitutionBonus);
-                case ClassConstants.Barbarian: return dice.d12(bonus: constitutionBonus);
-                case ClassConstants.Cleric:
-                case ClassConstants.Druid:
-                case ClassConstants.Monk:
-                case ClassConstants.Ranger: return dice.d8(bonus: constitutionBonus);
-                case ClassConstants.Bard:
-                case ClassConstants.Rogue: return dice.d6(bonus: constitutionBonus);
-                case ClassConstants.Sorcerer:
-                case ClassConstants.Wizard: return dice.d4(bonus: constitutionBonus);
+                case CharacterClassConstants.Fighter:
+                case CharacterClassConstants.Paladin: return dice.d10(bonus: constitutionBonus);
+                case CharacterClassConstants.Barbarian: return dice.d12(bonus: constitutionBonus);
+                case CharacterClassConstants.Cleric:
+                case CharacterClassConstants.Druid:
+                case CharacterClassConstants.Monk:
+                case CharacterClassConstants.Ranger: return dice.d8(bonus: constitutionBonus);
+                case CharacterClassConstants.Bard:
+                case CharacterClassConstants.Rogue: return dice.d6(bonus: constitutionBonus);
+                case CharacterClassConstants.Sorcerer:
+                case CharacterClassConstants.Wizard: return dice.d4(bonus: constitutionBonus);
                 default: throw new ArgumentOutOfRangeException();
             }
         }

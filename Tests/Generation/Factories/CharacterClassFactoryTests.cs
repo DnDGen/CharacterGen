@@ -1,13 +1,13 @@
 ﻿using D20Dice.Dice;
 using Moq;
 using NPCGen.Core.Data.Alignments;
-using NPCGen.Core.Data.Classes;
 using NPCGen.Core.Generation.Factories;
 using NPCGen.Core.Generation.Factories.Interfaces;
-using NPCGen.Core.Generation.Randomizers.CharacterClass;
 using NPCGen.Core.Generation.Randomizers.Level;
 using NUnit.Framework;
 using System;
+using NPCGen.Core.Generation.Randomizers.CharacterClasses;
+using NPCGen.Core.Data.CharacterClasses;
 
 namespace NPCGen.Tests.Generation.Factories
 {
@@ -29,7 +29,7 @@ namespace NPCGen.Tests.Generation.Factories
             mockClassRandomizer = new Mock<ICharacterClassRandomizer>();
 
             alignment = new Alignment();
-            mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(ClassConstants.Barbarian);
+            mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Barbarian);
 
             characterClassFactory = new CharacterClassFactory(mockDice.Object, mockLevelRandomizer.Object,
                 mockClassRandomizer.Object);
@@ -66,24 +66,24 @@ namespace NPCGen.Tests.Generation.Factories
         public void FactoryReturnsRandomizedClass()
         {
             var characterClass = characterClassFactory.Generate(alignment, 0);
-            Assert.That(characterClass.ClassName, Is.EqualTo(ClassConstants.Barbarian));
+            Assert.That(characterClass.ClassName, Is.EqualTo(CharacterClassConstants.Barbarian));
         }
 
         [Test]
         public void ChangeClassRandomizer()
         {
             var differentRandomizer = new Mock<ICharacterClassRandomizer>();
-            differentRandomizer.Setup(r => r.Randomize(alignment)).Returns(ClassConstants.Wizard);
+            differentRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Wizard);
             characterClassFactory.CharacterClassRandomizer = differentRandomizer.Object;
 
             var characterClass = characterClassFactory.Generate(alignment, 0);
-            Assert.That(characterClass.ClassName, Is.EqualTo(ClassConstants.Wizard));
+            Assert.That(characterClass.ClassName, Is.EqualTo(CharacterClassConstants.Wizard));
         }
 
         [Test]
         public void FighterGetsGoodBaseAttackBonus()
         {
-            mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(ClassConstants.Fighter);
+            mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Fighter);
             mockLevelRandomizer.Setup(r => r.Randomize()).Returns(20);
 
             var characterClass = characterClassFactory.Generate(alignment, 0);
@@ -93,7 +93,7 @@ namespace NPCGen.Tests.Generation.Factories
         [Test]
         public void PaladinGetsGoodBaseAttackBonus()
         {
-            mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(ClassConstants.Paladin);
+            mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Paladin);
             mockLevelRandomizer.Setup(r => r.Randomize()).Returns(20);
 
             var characterClass = characterClassFactory.Generate(alignment, 0);
@@ -103,7 +103,7 @@ namespace NPCGen.Tests.Generation.Factories
         [Test]
         public void RangerGetsGoodBaseAttackBonus()
         {
-            mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(ClassConstants.Ranger);
+            mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Ranger);
             mockLevelRandomizer.Setup(r => r.Randomize()).Returns(20);
 
             var characterClass = characterClassFactory.Generate(alignment, 0);
@@ -113,7 +113,7 @@ namespace NPCGen.Tests.Generation.Factories
         [Test]
         public void BarbarianGetsGoodBaseAttackBonus()
         {
-            mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(ClassConstants.Barbarian);
+            mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Barbarian);
             mockLevelRandomizer.Setup(r => r.Randomize()).Returns(20);
 
             var characterClass = characterClassFactory.Generate(alignment, 0);
@@ -130,7 +130,7 @@ namespace NPCGen.Tests.Generation.Factories
         [Test]
         public void BardGetsAverageBaseAttackBonus()
         {
-            mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(ClassConstants.Bard);
+            mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Bard);
             mockLevelRandomizer.Setup(r => r.Randomize()).Returns(20);
 
             var characterClass = characterClassFactory.Generate(alignment, 0);
@@ -140,7 +140,7 @@ namespace NPCGen.Tests.Generation.Factories
         [Test]
         public void ClericGetsAverageBaseAttackBonus()
         {
-            mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(ClassConstants.Cleric);
+            mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Cleric);
             mockLevelRandomizer.Setup(r => r.Randomize()).Returns(20);
 
             var characterClass = characterClassFactory.Generate(alignment, 0);
@@ -150,7 +150,7 @@ namespace NPCGen.Tests.Generation.Factories
         [Test]
         public void MonkGetsAverageBaseAttackBonus()
         {
-            mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(ClassConstants.Monk);
+            mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Monk);
             mockLevelRandomizer.Setup(r => r.Randomize()).Returns(20);
 
             var characterClass = characterClassFactory.Generate(alignment, 0);
@@ -160,7 +160,7 @@ namespace NPCGen.Tests.Generation.Factories
         [Test]
         public void RogueGetsAverageBaseAttackBonus()
         {
-            mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(ClassConstants.Rogue);
+            mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Rogue);
             mockLevelRandomizer.Setup(r => r.Randomize()).Returns(20);
 
             var characterClass = characterClassFactory.Generate(alignment, 0);
@@ -170,7 +170,7 @@ namespace NPCGen.Tests.Generation.Factories
         [Test]
         public void DruidGetsAverageBaseAttackBonus()
         {
-            mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(ClassConstants.Druid);
+            mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Druid);
             mockLevelRandomizer.Setup(r => r.Randomize()).Returns(20);
 
             var characterClass = characterClassFactory.Generate(alignment, 0);
@@ -180,7 +180,7 @@ namespace NPCGen.Tests.Generation.Factories
         [Test]
         public void SorcererGetsPoorBaseAttackBonus()
         {
-            mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(ClassConstants.Sorcerer);
+            mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Sorcerer);
             mockLevelRandomizer.Setup(r => r.Randomize()).Returns(20);
 
             var characterClass = characterClassFactory.Generate(alignment, 0);
@@ -190,7 +190,7 @@ namespace NPCGen.Tests.Generation.Factories
         [Test]
         public void WizardGetsPoorBaseAttackBonus()
         {
-            mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(ClassConstants.Wizard);
+            mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Wizard);
             mockLevelRandomizer.Setup(r => r.Randomize()).Returns(20);
 
             var characterClass = characterClassFactory.Generate(alignment, 0);
@@ -211,7 +211,7 @@ namespace NPCGen.Tests.Generation.Factories
         [Test]
         public void AverageBaseAttackBonus()
         {
-            mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(ClassConstants.Cleric);
+            mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Cleric);
 
             for (var level = 1; level <= 20; level++)
             {
@@ -224,7 +224,7 @@ namespace NPCGen.Tests.Generation.Factories
         [Test]
         public void PoorBaseAttackBonus()
         {
-            mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(ClassConstants.Wizard);
+            mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Wizard);
 
             for (var level = 1; level <= 20; level++)
             {
@@ -237,7 +237,7 @@ namespace NPCGen.Tests.Generation.Factories
         [Test]
         public void FighterGetsd10ForHitPoints()
         {
-            mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(ClassConstants.Fighter);
+            mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Fighter);
             mockLevelRandomizer.Setup(r => r.Randomize()).Returns(1);
 
             characterClassFactory.Generate(alignment, 0);
@@ -247,7 +247,7 @@ namespace NPCGen.Tests.Generation.Factories
         [Test]
         public void PaladinGetsd10ForHitPoints()
         {
-            mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(ClassConstants.Paladin);
+            mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Paladin);
             mockLevelRandomizer.Setup(r => r.Randomize()).Returns(1);
 
             characterClassFactory.Generate(alignment, 0);
@@ -257,7 +257,7 @@ namespace NPCGen.Tests.Generation.Factories
         [Test]
         public void BarbarianGetsd12ForHitPoints()
         {
-            mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(ClassConstants.Barbarian);
+            mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Barbarian);
             mockLevelRandomizer.Setup(r => r.Randomize()).Returns(1);
 
             characterClassFactory.Generate(alignment, 0);
@@ -267,7 +267,7 @@ namespace NPCGen.Tests.Generation.Factories
         [Test]
         public void ClericGetsd8ForHitPoints()
         {
-            mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(ClassConstants.Cleric);
+            mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Cleric);
             mockLevelRandomizer.Setup(r => r.Randomize()).Returns(1);
 
             characterClassFactory.Generate(alignment, 0);
@@ -277,7 +277,7 @@ namespace NPCGen.Tests.Generation.Factories
         [Test]
         public void DruidGetsd8ForHitPoints()
         {
-            mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(ClassConstants.Druid);
+            mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Druid);
             mockLevelRandomizer.Setup(r => r.Randomize()).Returns(1);
 
             characterClassFactory.Generate(alignment, 0);
@@ -287,7 +287,7 @@ namespace NPCGen.Tests.Generation.Factories
         [Test]
         public void MonkGetsd8ForHitPoints()
         {
-            mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(ClassConstants.Monk);
+            mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Monk);
             mockLevelRandomizer.Setup(r => r.Randomize()).Returns(1);
 
             characterClassFactory.Generate(alignment, 0);
@@ -297,7 +297,7 @@ namespace NPCGen.Tests.Generation.Factories
         [Test]
         public void RangerGetsd8ForHitPoints()
         {
-            mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(ClassConstants.Ranger);
+            mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Ranger);
             mockLevelRandomizer.Setup(r => r.Randomize()).Returns(1);
 
             characterClassFactory.Generate(alignment, 0);
@@ -307,7 +307,7 @@ namespace NPCGen.Tests.Generation.Factories
         [Test]
         public void BardGetsd6ForHitPoints()
         {
-            mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(ClassConstants.Bard);
+            mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Bard);
             mockLevelRandomizer.Setup(r => r.Randomize()).Returns(1);
 
             characterClassFactory.Generate(alignment, 0);
@@ -317,7 +317,7 @@ namespace NPCGen.Tests.Generation.Factories
         [Test]
         public void RogueGetsd6ForHitPoints()
         {
-            mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(ClassConstants.Rogue);
+            mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Rogue);
             mockLevelRandomizer.Setup(r => r.Randomize()).Returns(1);
 
             characterClassFactory.Generate(alignment, 0);
@@ -327,7 +327,7 @@ namespace NPCGen.Tests.Generation.Factories
         [Test]
         public void SorcererGetsd4ForHitPoints()
         {
-            mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(ClassConstants.Sorcerer);
+            mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Sorcerer);
             mockLevelRandomizer.Setup(r => r.Randomize()).Returns(1);
 
             characterClassFactory.Generate(alignment, 0);
@@ -337,7 +337,7 @@ namespace NPCGen.Tests.Generation.Factories
         [Test]
         public void WizardGetsd4ForHitPoints()
         {
-            mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(ClassConstants.Wizard);
+            mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Wizard);
             mockLevelRandomizer.Setup(r => r.Randomize()).Returns(1);
 
             characterClassFactory.Generate(alignment, 0);
