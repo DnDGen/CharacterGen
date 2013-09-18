@@ -86,6 +86,7 @@
     <Compile Include="Generation\Randomizers\ClassNames\NonSpellcasterClassNameRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\ClassNames\SetClassNameRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\ClassNames\SpellcasterClassNameRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\ClassNames\StealthClassNameRandomizerTests.cs" />
     <Compile Include="Generation\Xml\Data\CharacterClasses\EvilCharacterClassesTests.cs" />
     <Compile Include="Generation\Xml\Data\CharacterClasses\GoodCharacterClassesTests.cs" />
     <Compile Include="Generation\Xml\Data\CharacterClasses\NeutralCharacterClassesTests.cs" />
