@@ -10,9 +10,9 @@ namespace NPCGen.Core.Generation.Verifiers.Alignments
     {
         public Boolean VerifyCompatiblity(IClassNameRandomizer classRandomizer)
         {
-            if (classRandomizer is SetClass)
+            if (classRandomizer is SetClassNameRandomizer)
             {
-                var setClass = classRandomizer as SetClass;
+                var setClass = classRandomizer as SetClassNameRandomizer;
                 return setClass.ClassName != CharacterClassConstants.Paladin;
             }
 

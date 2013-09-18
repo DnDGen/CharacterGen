@@ -26,31 +26,31 @@ namespace NPCGen.Core.Generation.Verifiers
             verified &= alignmentVerifier.VerifyCompatiblity(baseRaceRandomizer);
             verified &= alignmentVerifier.VerifyCompatiblity(metaraceRandomizer);
 
-            if (classRandomizer is HealerClass)
+            if (classRandomizer is HealerClassNameRandomizer)
             {
                 throw new NotImplementedException();
             }
-            else if (classRandomizer is MageClass)
+            else if (classRandomizer is MageClassNameRandomizer)
             {
                 throw new NotImplementedException();
             }
-            else if (classRandomizer is NonSpellcasterClass)
+            else if (classRandomizer is NonSpellcasterClassNameRandomizer)
             {
                 throw new NotImplementedException();
             }
-            else if (classRandomizer is SpellcasterClass)
+            else if (classRandomizer is SpellcasterClassNameRandomizer)
             {
                 throw new NotImplementedException();
             }
-            else if (classRandomizer is StealthClass)
+            else if (classRandomizer is StealthClassNameRandomizer)
             {
                 throw new NotImplementedException();
             }
-            else if (classRandomizer is WarriorClass)
+            else if (classRandomizer is WarriorClassNameRandomizer)
             {
                 throw new NotImplementedException();
             }
-            else if (classRandomizer is SetClass)
+            else if (classRandomizer is SetClassNameRandomizer)
             {
                 throw new NotImplementedException();
             }
