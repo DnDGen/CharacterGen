@@ -6,7 +6,7 @@ using NPCGen.Core.Generation.Factories.Interfaces;
 using NPCGen.Core.Generation.Randomizers.Level;
 using NUnit.Framework;
 using System;
-using NPCGen.Core.Generation.Randomizers.CharacterClasses;
+using NPCGen.Core.Generation.Randomizers.ClassNames;
 using NPCGen.Core.Data.CharacterClasses;
 
 namespace NPCGen.Tests.Generation.Factories
@@ -16,7 +16,7 @@ namespace NPCGen.Tests.Generation.Factories
     {
         private Mock<IDice> mockDice;
         private Mock<ILevelRandomizer> mockLevelRandomizer;
-        private Mock<ICharacterClassRandomizer> mockClassRandomizer;
+        private Mock<IClassNameRandomizer> mockClassRandomizer;
 
         private ICharacterClassFactory characterClassFactory;
         private Alignment alignment;
@@ -26,7 +26,7 @@ namespace NPCGen.Tests.Generation.Factories
         {
             mockDice = new Mock<IDice>();
             mockLevelRandomizer = new Mock<ILevelRandomizer>();
-            mockClassRandomizer = new Mock<ICharacterClassRandomizer>();
+            mockClassRandomizer = new Mock<IClassNameRandomizer>();
 
             alignment = new Alignment();
             mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Barbarian);
@@ -72,7 +72,7 @@ namespace NPCGen.Tests.Generation.Factories
         [Test]
         public void ChangeClassRandomizer()
         {
-            var differentRandomizer = new Mock<ICharacterClassRandomizer>();
+            var differentRandomizer = new Mock<IClassNameRandomizer>();
             differentRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Wizard);
             characterClassFactory.CharacterClassRandomizer = differentRandomizer.Object;
 

@@ -3,7 +3,7 @@ using D20Dice.Dice;
 using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Generation.Factories.Interfaces;
-using NPCGen.Core.Generation.Randomizers.CharacterClasses;
+using NPCGen.Core.Generation.Randomizers.ClassNames;
 using NPCGen.Core.Generation.Randomizers.Level;
 
 namespace NPCGen.Core.Generation.Factories
@@ -11,12 +11,12 @@ namespace NPCGen.Core.Generation.Factories
     public class CharacterClassFactory : ICharacterClassFactory
     {
         public ILevelRandomizer LevelRandomizer { get; set; }
-        public ICharacterClassRandomizer CharacterClassRandomizer { get; set; }
+        public IClassNameRandomizer CharacterClassRandomizer { get; set; }
 
         private IDice dice;
 
         public CharacterClassFactory(IDice dice, ILevelRandomizer levelRandomizer,
-            ICharacterClassRandomizer classRandomizer)
+            IClassNameRandomizer classRandomizer)
         {
             this.dice = dice;
             LevelRandomizer = levelRandomizer;

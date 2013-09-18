@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using D20Dice.Dice;
-using NPCGen.Core.Generation.Randomizers.Providers.Interfaces;
+﻿using D20Dice.Dice;
+using NPCGen.Core.Generation.Providers.Interfaces;
 using NPCGen.Core.Generation.Xml.Parsers.Interfaces;
 using NPCGen.Core.Generation.Xml.Parsers.Objects;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
-namespace NPCGen.Core.Generation.Randomizers.Providers
+namespace NPCGen.Core.Generation.Providers
 {
     public class PercentileResultProvider : IPercentileResultProvider
     {

@@ -1,10 +1,10 @@
 ﻿using System;
 using NPCGen.Core.Data.Alignments;
-using NPCGen.Core.Generation.Randomizers.Providers.Interfaces;
+using NPCGen.Core.Generation.Providers.Interfaces;
 
-namespace NPCGen.Core.Generation.Randomizers.CharacterClasses
+namespace NPCGen.Core.Generation.Randomizers.ClassNames
 {
-    public abstract class BaseClassRandomizer : ICharacterClassRandomizer
+    public abstract class BaseClassRandomizer : IClassNameRandomizer
     {
         private IPercentileResultProvider percentileResultProvider;
 

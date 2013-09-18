@@ -3,7 +3,7 @@ using NPCGen.Core.Generation.Randomizers.Races.BaseRaces;
 using NPCGen.Core.Generation.Randomizers.Races.Metaraces;
 using NPCGen.Core.Generation.Verifiers.Factories.Interfaces;
 using System;
-using NPCGen.Core.Generation.Randomizers.CharacterClasses;
+using NPCGen.Core.Generation.Randomizers.ClassNames;
 
 namespace NPCGen.Core.Generation.Verifiers
 {
@@ -16,7 +16,7 @@ namespace NPCGen.Core.Generation.Verifiers
             this.alignmentVerifierFactory = alignmentVerifierFactory;
         }
 
-        public Boolean VerifyCompatibility(IAlignmentRandomizer alignmentRandomizer, ICharacterClassRandomizer classRandomizer,
+        public Boolean VerifyCompatibility(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classRandomizer,
             IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer)
         {
             var verified = true;

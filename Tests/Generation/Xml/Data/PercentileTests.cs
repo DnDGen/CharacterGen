@@ -1,8 +1,8 @@
 ﻿using System;
 using D20Dice.Dice;
 using Moq;
-using NPCGen.Core.Generation.Randomizers.Providers;
-using NPCGen.Core.Generation.Randomizers.Providers.Interfaces;
+using NPCGen.Core.Generation.Providers;
+using NPCGen.Core.Generation.Providers.Interfaces;
 using NPCGen.Core.Generation.Xml.Parsers;
 using NUnit.Framework;
 

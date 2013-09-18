@@ -78,8 +78,8 @@
     <Compile Include="Generation\Randomizers\Alignments\NonLawfulAlignmentTests.cs" />
     <Compile Include="Generation\Randomizers\Alignments\NonNeutralAlignmentTests.cs" />
     <Compile Include="Generation\Randomizers\Alignments\SetAlignmentTests.cs" />
-    <Compile Include="Generation\Randomizers\CharacterClass\BaseClassRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\Providers\PercentileResultProviderTests.cs" />
+    <Compile Include="Generation\Randomizers\ClassNames\BaseClassRandomizerTests.cs" />
+    <Compile Include="Generation\Providers\PercentileResultProviderTests.cs" />
     <Compile Include="Generation\Xml\Data\CharacterClasses\EvilCharacterClassesTests.cs" />
     <Compile Include="Generation\Xml\Data\CharacterClasses\GoodCharacterClassesTests.cs" />
     <Compile Include="Generation\Xml\Data\CharacterClasses\NeutralCharacterClassesTests.cs" />

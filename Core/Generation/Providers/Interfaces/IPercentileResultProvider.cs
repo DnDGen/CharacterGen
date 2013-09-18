@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NPCGen.Core.Generation.Randomizers.Providers.Interfaces
+namespace NPCGen.Core.Generation.Providers.Interfaces
 {
     public interface IPercentileResultProvider
     {
