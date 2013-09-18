@@ -19,7 +19,7 @@ namespace NPCGen.Tests.Generation.Randomizers.ClassNames
         public void Setup()
         {
             mockPercentileResultProvider = new Mock<IPercentileResultProvider>();
-            classNameRandomizer = new AnyClassNameRandomizer(mockPercentileResultProvider.Object);
+            classNameRandomizer = new NonSpellcasterClassNameRandomizer(mockPercentileResultProvider.Object);
 
             alignment = new Alignment();
         }

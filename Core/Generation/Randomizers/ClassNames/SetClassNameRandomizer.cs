@@ -7,11 +7,6 @@ namespace NPCGen.Core.Generation.Randomizers.ClassNames
     {
         public String ClassName { get; set; }
 
-        public SetClassNameRandomizer(String className)
-        {
-            ClassName = className;
-        }
-
         public String Randomize(Alignment alignment)
         {
             return ClassName;
