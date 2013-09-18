@@ -13,67 +13,67 @@ namespace NPCGen.Tests.Generation.Xml.Data.CharacterClasses
         }
 
         [Test]
-        public void Barbarian()
+        public void GoodBarbarianPercentile()
         {
             AssertContentIsInRange(CharacterClassConstants.Barbarian, 1, 5);
         }
 
         [Test]
-        public void Bard()
+        public void GoodBardPercentile()
         {
             AssertContentIsInRange(CharacterClassConstants.Bard, 6, 10);
         }
 
         [Test]
-        public void Cleric()
+        public void GoodClericPercentile()
         {
             AssertContentIsInRange(CharacterClassConstants.Cleric, 11, 30);
         }
 
         [Test]
-        public void Druid()
+        public void GoodDruidPercentile()
         {
             AssertContentIsInRange(CharacterClassConstants.Druid, 31, 35);
         }
 
         [Test]
-        public void Fighter()
+        public void GoodFighterPercentile()
         {
             AssertContentIsInRange(CharacterClassConstants.Fighter, 36, 45);
         }
 
         [Test]
-        public void Monk()
+        public void GoodMonkPercentile()
         {
             AssertContentIsInRange(CharacterClassConstants.Monk, 46, 50);
         }
 
         [Test]
-        public void Paladin()
+        public void PaladinPercentile()
         {
             AssertContentIsInRange(CharacterClassConstants.Paladin, 51, 55);
         }
 
         [Test]
-        public void Ranger()
+        public void GoodRangerPercentile()
         {
             AssertContentIsInRange(CharacterClassConstants.Ranger, 56, 65);
         }
 
         [Test]
-        public void Rogue()
+        public void GoodRoguePercentile()
         {
             AssertContentIsInRange(CharacterClassConstants.Rogue, 66, 75);
         }
 
         [Test]
-        public void Sorcerer()
+        public void GoodSorcererPercentile()
         {
             AssertContentIsInRange(CharacterClassConstants.Sorcerer, 76, 80);
         }
 
         [Test]
-        public void Wizard()
+        public void GoodWizardPercentile()
         {
             AssertContentIsInRange(CharacterClassConstants.Wizard, 81, 100);
         }

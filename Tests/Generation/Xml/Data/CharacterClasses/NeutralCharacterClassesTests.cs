@@ -13,61 +13,61 @@ namespace NPCGen.Tests.Generation.Xml.Data.CharacterClasses
         }
 
         [Test]
-        public void Barbarian()
+        public void NeutralBarbarianPercentile()
         {
             AssertContentIsInRange(CharacterClassConstants.Barbarian, 1, 5);
         }
 
         [Test]
-        public void Bard()
+        public void NeutralBardPercentile()
         {
             AssertContentIsInRange(CharacterClassConstants.Bard, 6, 10);
         }
 
         [Test]
-        public void Cleric()
+        public void NeutralClericPercentile()
         {
             AssertContentIsInRange(CharacterClassConstants.Cleric, 11, 15);
         }
 
         [Test]
-        public void Druid()
+        public void NeutralDruidPercentile()
         {
             AssertContentIsInRange(CharacterClassConstants.Druid, 16, 25);
         }
 
         [Test]
-        public void Fighter()
+        public void NeutralFighterPercentile()
         {
             AssertContentIsInRange(CharacterClassConstants.Fighter, 26, 45);
         }
 
         [Test]
-        public void Monk()
+        public void NeutralMonkPercentile()
         {
             AssertContentIsInRange(CharacterClassConstants.Monk, 46, 50);
         }
 
         [Test]
-        public void Ranger()
+        public void NeutralRangerPercentile()
         {
             AssertContentIsInRange(CharacterClassConstants.Ranger, 51, 55);
         }
 
         [Test]
-        public void Rogue()
+        public void NeutralRoguePercentile()
         {
             AssertContentIsInRange(CharacterClassConstants.Rogue, 56, 75);
         }
 
         [Test]
-        public void Sorcerer()
+        public void NeutralSorcererPercentile()
         {
             AssertContentIsInRange(CharacterClassConstants.Sorcerer, 76, 80);
         }
 
         [Test]
-        public void Wizard()
+        public void NeutralWizardPercentile()
         {
             AssertContentIsInRange(CharacterClassConstants.Wizard, 81, 100);
         }

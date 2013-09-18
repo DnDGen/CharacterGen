@@ -81,6 +81,7 @@
     <Compile Include="Generation\Randomizers\ClassNames\AnyClassTests.cs" />
     <Compile Include="Generation\Randomizers\ClassNames\BaseClassRandomizerTests.cs" />
     <Compile Include="Generation\Providers\PercentileResultProviderTests.cs" />
+    <Compile Include="Generation\Randomizers\ClassNames\HealerClassTests.cs" />
     <Compile Include="Generation\Xml\Data\CharacterClasses\EvilCharacterClassesTests.cs" />
     <Compile Include="Generation\Xml\Data\CharacterClasses\GoodCharacterClassesTests.cs" />
     <Compile Include="Generation\Xml\Data\CharacterClasses\NeutralCharacterClassesTests.cs" />
