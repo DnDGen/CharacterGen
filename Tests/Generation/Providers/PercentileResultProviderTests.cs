@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using D20Dice.Dice;
+﻿using D20Dice.Dice;
 using Moq;
 using NPCGen.Core.Generation.Providers;
 using NPCGen.Core.Generation.Providers.Interfaces;
 using NPCGen.Core.Generation.Xml.Parsers.Interfaces;
 using NPCGen.Core.Generation.Xml.Parsers.Objects;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
 
-namespace NPCGen.Tests.Generation.Randomizers.Providers
+namespace NPCGen.Tests.Generation.Providers
 {
     [TestFixture]
     public class PercentileResultProviderTests

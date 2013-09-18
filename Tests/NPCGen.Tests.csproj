@@ -78,6 +78,7 @@
     <Compile Include="Generation\Randomizers\Alignments\NonLawfulAlignmentTests.cs" />
     <Compile Include="Generation\Randomizers\Alignments\NonNeutralAlignmentTests.cs" />
     <Compile Include="Generation\Randomizers\Alignments\SetAlignmentTests.cs" />
+    <Compile Include="Generation\Randomizers\ClassNames\AnyClassTests.cs" />
     <Compile Include="Generation\Randomizers\ClassNames\BaseClassRandomizerTests.cs" />
     <Compile Include="Generation\Providers\PercentileResultProviderTests.cs" />
     <Compile Include="Generation\Xml\Data\CharacterClasses\EvilCharacterClassesTests.cs" />
