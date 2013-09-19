@@ -90,6 +90,10 @@
     <Compile Include="Generation\Randomizers\ClassNames\WarriorClassNameRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\Level\AnyLevelRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\Level\HighLevelRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Level\LowLevelRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Level\MediumLevelRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Level\RangedLevelRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Level\VeryHighLevelRandomizerTests.cs" />
     <Compile Include="Generation\Xml\Data\CharacterClasses\EvilCharacterClassesTests.cs" />
     <Compile Include="Generation\Xml\Data\CharacterClasses\GoodCharacterClassesTests.cs" />
     <Compile Include="Generation\Xml\Data\CharacterClasses\NeutralCharacterClassesTests.cs" />

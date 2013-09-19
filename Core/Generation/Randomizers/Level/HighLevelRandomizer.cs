@@ -1,29 +1,13 @@
 ﻿using D20Dice.Dice;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NPCGen.Core.Generation.Randomizers.Level
 {
-    public class HighLevelRandomizer : ILevelRandomizer
+    public class HighLevelRandomizer : RangedLevelRandomizer
     {
-        private IDice dice;
-
         public HighLevelRandomizer(IDice dice)
+            : base(dice)
         {
-            this.dice = dice;
-        }
-
-        public Int32 Randomize()
-        {
-            var roll = dice.d6();
-
-            while (roll == 6)
-                roll = dice.d6();
-
-            return roll + 10;
+            rollBonus = 10;
         }
     }
 }

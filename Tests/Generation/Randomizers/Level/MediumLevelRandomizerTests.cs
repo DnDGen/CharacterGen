@@ -6,17 +6,17 @@ using NUnit.Framework;
 namespace NPCGen.Tests.Generation.Randomizers.Level
 {
     [TestFixture]
-    public class HighLevelRandomizerTests
+    public class MediumLevelRandomizerTests
     {
         [Test]
-        public void AddTenToRoll()
+        public void AddFiveToRoll()
         {
             var mockDice = new Mock<IDice>();
-            var randomizer = new HighLevelRandomizer(mockDice.Object);
+            var randomizer = new MediumLevelRandomizer(mockDice.Object);
 
             mockDice.Setup(d => d.d6(1, 0)).Returns(1);
             var level = randomizer.Randomize();
-            Assert.That(level, Is.EqualTo(11));
+            Assert.That(level, Is.EqualTo(6));
         }
     }
 }

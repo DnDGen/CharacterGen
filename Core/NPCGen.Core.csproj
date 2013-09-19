@@ -96,6 +96,7 @@
     <Compile Include="Generation\Randomizers\Level\ILevelRandomizer.cs" />
     <Compile Include="Generation\Randomizers\Level\LowLevelRandomizer.cs" />
     <Compile Include="Generation\Randomizers\Level\MediumLevelRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Level\RangedLevelRandomizer.cs" />
     <Compile Include="Generation\Randomizers\Level\SetLevelRandomizer.cs" />
     <Compile Include="Generation\Randomizers\Level\VeryHighLevelRandomizer.cs" />
     <Compile Include="Generation\Providers\PercentileResultProvider.cs" />

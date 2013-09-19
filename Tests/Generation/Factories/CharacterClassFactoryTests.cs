@@ -1,13 +1,13 @@
 ﻿using D20Dice.Dice;
 using Moq;
 using NPCGen.Core.Data.Alignments;
+using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Generation.Factories;
 using NPCGen.Core.Generation.Factories.Interfaces;
+using NPCGen.Core.Generation.Randomizers.ClassNames;
 using NPCGen.Core.Generation.Randomizers.Level;
 using NUnit.Framework;
 using System;
-using NPCGen.Core.Generation.Randomizers.ClassNames;
-using NPCGen.Core.Data.CharacterClasses;
 
 namespace NPCGen.Tests.Generation.Factories
 {
@@ -235,7 +235,7 @@ namespace NPCGen.Tests.Generation.Factories
         }
 
         [Test]
-        public void FighterGetsd10ForHitPoints()
+        public void FighterGetsD10ForHitPoints()
         {
             mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Fighter);
             mockLevelRandomizer.Setup(r => r.Randomize()).Returns(1);
@@ -245,7 +245,7 @@ namespace NPCGen.Tests.Generation.Factories
         }
 
         [Test]
-        public void PaladinGetsd10ForHitPoints()
+        public void PaladinGetsD10ForHitPoints()
         {
             mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Paladin);
             mockLevelRandomizer.Setup(r => r.Randomize()).Returns(1);
@@ -255,7 +255,7 @@ namespace NPCGen.Tests.Generation.Factories
         }
 
         [Test]
-        public void BarbarianGetsd12ForHitPoints()
+        public void BarbarianGetsD12ForHitPoints()
         {
             mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Barbarian);
             mockLevelRandomizer.Setup(r => r.Randomize()).Returns(1);
@@ -265,7 +265,7 @@ namespace NPCGen.Tests.Generation.Factories
         }
 
         [Test]
-        public void ClericGetsd8ForHitPoints()
+        public void ClericGetsD8ForHitPoints()
         {
             mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Cleric);
             mockLevelRandomizer.Setup(r => r.Randomize()).Returns(1);
@@ -275,7 +275,7 @@ namespace NPCGen.Tests.Generation.Factories
         }
 
         [Test]
-        public void DruidGetsd8ForHitPoints()
+        public void DruidGetsD8ForHitPoints()
         {
             mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Druid);
             mockLevelRandomizer.Setup(r => r.Randomize()).Returns(1);
@@ -285,7 +285,7 @@ namespace NPCGen.Tests.Generation.Factories
         }
 
         [Test]
-        public void MonkGetsd8ForHitPoints()
+        public void MonkGetsD8ForHitPoints()
         {
             mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Monk);
             mockLevelRandomizer.Setup(r => r.Randomize()).Returns(1);
@@ -295,7 +295,7 @@ namespace NPCGen.Tests.Generation.Factories
         }
 
         [Test]
-        public void RangerGetsd8ForHitPoints()
+        public void RangerGetsD8ForHitPoints()
         {
             mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Ranger);
             mockLevelRandomizer.Setup(r => r.Randomize()).Returns(1);
@@ -305,7 +305,7 @@ namespace NPCGen.Tests.Generation.Factories
         }
 
         [Test]
-        public void BardGetsd6ForHitPoints()
+        public void BardGetsD6ForHitPoints()
         {
             mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Bard);
             mockLevelRandomizer.Setup(r => r.Randomize()).Returns(1);
@@ -315,7 +315,7 @@ namespace NPCGen.Tests.Generation.Factories
         }
 
         [Test]
-        public void RogueGetsd6ForHitPoints()
+        public void RogueGetsD6ForHitPoints()
         {
             mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Rogue);
             mockLevelRandomizer.Setup(r => r.Randomize()).Returns(1);
@@ -325,7 +325,7 @@ namespace NPCGen.Tests.Generation.Factories
         }
 
         [Test]
-        public void SorcererGetsd4ForHitPoints()
+        public void SorcererGetsD4ForHitPoints()
         {
             mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Sorcerer);
             mockLevelRandomizer.Setup(r => r.Randomize()).Returns(1);
@@ -335,7 +335,7 @@ namespace NPCGen.Tests.Generation.Factories
         }
 
         [Test]
-        public void WizardGetsd4ForHitPoints()
+        public void WizardGetsD4ForHitPoints()
         {
             mockClassRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Wizard);
             mockLevelRandomizer.Setup(r => r.Randomize()).Returns(1);
