@@ -1,6 +1,6 @@
-﻿using D20Dice.Dice;
+﻿using System;
+using D20Dice.Dice;
 using NPCGen.Core.Data.Alignments;
-using System;
 
 namespace NPCGen.Core.Generation.Randomizers.Alignments
 {

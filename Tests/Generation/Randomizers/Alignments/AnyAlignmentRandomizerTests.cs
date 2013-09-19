@@ -20,7 +20,7 @@ namespace NPCGen.Tests.Generation.Randomizers.Alignments
         }
 
         [Test]
-        public void Lawful()
+        public void LawfulIs3OnD3()
         {
             mockDice.Setup(d => d.d3(1, 0)).Returns(3);
             var alignment = alignmentRandomizer.Randomize();
@@ -28,7 +28,7 @@ namespace NPCGen.Tests.Generation.Randomizers.Alignments
         }
 
         [Test]
-        public void NeutralLawfulness()
+        public void NeutralLawfulnessIs2OnD3()
         {
             mockDice.Setup(d => d.d3(1, 0)).Returns(2);
             var alignment = alignmentRandomizer.Randomize();
@@ -36,7 +36,7 @@ namespace NPCGen.Tests.Generation.Randomizers.Alignments
         }
 
         [Test]
-        public void Chaotic()
+        public void ChaoticIs1OnD3()
         {
             mockDice.Setup(d => d.d3(1, 0)).Returns(1);
             var alignment = alignmentRandomizer.Randomize();
@@ -44,7 +44,7 @@ namespace NPCGen.Tests.Generation.Randomizers.Alignments
         }
 
         [Test]
-        public void Good()
+        public void GoodPercentile()
         {
             for (var roll = 1; roll <= 20; roll++)
             {
@@ -55,7 +55,7 @@ namespace NPCGen.Tests.Generation.Randomizers.Alignments
         }
 
         [Test]
-        public void NeutralGoodness()
+        public void NeutralGoodnessPercentile()
         {
             for (var roll = 21; roll <= 50; roll++)
             {
@@ -66,7 +66,7 @@ namespace NPCGen.Tests.Generation.Randomizers.Alignments
         }
 
         [Test]
-        public void Evil()
+        public void EvilPercentile()
         {
             for (var roll = 51; roll <= 100; roll++)
             {
