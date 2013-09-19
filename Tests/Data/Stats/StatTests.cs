@@ -1,6 +1,6 @@
-﻿using NPCGen.Core.Data.Stats;
+﻿using System;
+using NPCGen.Core.Data.Stats;
 using NUnit.Framework;
-using System;
 
 namespace NPCGen.Tests.Data.Stats
 {
@@ -22,12 +22,7 @@ namespace NPCGen.Tests.Data.Stats
 
         private Int32 GetExpectedBonus(Int32 statValue)
         {
-            var expectedBonus = statValue - 10;
-
-            if (expectedBonus % 2 == 1)
-                expectedBonus--;
-
-            return expectedBonus / 2;
+            return (statValue - 10) / 2;
         }
     }
 }
