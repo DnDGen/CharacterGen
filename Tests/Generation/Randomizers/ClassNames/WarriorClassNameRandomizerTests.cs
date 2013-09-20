@@ -1,154 +1,110 @@
-﻿using System;
-using Moq;
-using NPCGen.Core.Data.Alignments;
+﻿using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Data.CharacterClasses;
-using NPCGen.Core.Generation.Providers.Interfaces;
 using NPCGen.Core.Generation.Randomizers.ClassNames;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Generation.Randomizers.ClassNames
 {
     [TestFixture]
-    public class WarriorClassNameRandomizerTests
+    public class WarriorClassNameRandomizerTests : ClassNameRandomizerTests
     {
-        private IClassNameRandomizer classNameRandomizer;
-        private Mock<IPercentileResultProvider> mockPercentileResultProvider;
-        private Alignment alignment;
-
         [SetUp]
         public void Setup()
         {
-            mockPercentileResultProvider = new Mock<IPercentileResultProvider>();
-            classNameRandomizer = new WarriorClassNameRandomizer(mockPercentileResultProvider.Object);
-
-            alignment = new Alignment();
+            randomizer = new WarriorClassNameRandomizer(mockPercentileResultProvider.Object);
+            controlCase = CharacterClassConstants.Fighter;
         }
 
         [Test]
         public void FighterAlwaysAllowed()
         {
-            mockPercentileResultProvider.SetupSequence(p => p.GetPercentileResult(It.IsAny<String>()))
-                .Returns(CharacterClassConstants.Fighter)
-                .Returns(CharacterClassConstants.Ranger);
-            var className = classNameRandomizer.Randomize(alignment);
-            Assert.That(className, Is.EqualTo(CharacterClassConstants.Fighter));
+            AssertControlIsAllowed(CharacterClassConstants.Ranger);
         }
 
         [Test]
         public void ClericNeverAllowed()
         {
-            mockPercentileResultProvider.SetupSequence(p => p.GetPercentileResult(It.IsAny<String>()))
-                .Returns(CharacterClassConstants.Cleric)
-                .Returns(CharacterClassConstants.Fighter);
-            var className = classNameRandomizer.Randomize(alignment);
-            Assert.That(className, Is.EqualTo(CharacterClassConstants.Fighter));
+            AssertClassIsNotAllowed(CharacterClassConstants.Cleric);
         }
 
         [Test]
         public void RangerAlwaysAllowed()
         {
-            mockPercentileResultProvider.SetupSequence(p => p.GetPercentileResult(It.IsAny<String>()))
-                .Returns(CharacterClassConstants.Ranger)
-                .Returns(CharacterClassConstants.Fighter);
-            var className = classNameRandomizer.Randomize(alignment);
-            Assert.That(className, Is.EqualTo(CharacterClassConstants.Ranger));
+            AssertClassIsAllowed(CharacterClassConstants.Ranger);
         }
 
         [Test]
         public void SorcererNeverAllowed()
         {
-            mockPercentileResultProvider.SetupSequence(p => p.GetPercentileResult(It.IsAny<String>()))
-                .Returns(CharacterClassConstants.Sorcerer)
-                .Returns(CharacterClassConstants.Fighter);
-            var className = classNameRandomizer.Randomize(alignment);
-            Assert.That(className, Is.EqualTo(CharacterClassConstants.Fighter));
+            AssertClassIsNotAllowed(CharacterClassConstants.Sorcerer);
         }
 
         [Test]
         public void RogueNeverAllowed()
         {
-            mockPercentileResultProvider.SetupSequence(p => p.GetPercentileResult(It.IsAny<String>()))
-                .Returns(CharacterClassConstants.Rogue)
-                .Returns(CharacterClassConstants.Fighter);
-            var className = classNameRandomizer.Randomize(alignment);
-            Assert.That(className, Is.EqualTo(CharacterClassConstants.Fighter));
+            AssertClassIsNotAllowed(CharacterClassConstants.Rogue);
         }
 
         [Test]
         public void WizardNeverAllowed()
         {
-            mockPercentileResultProvider.SetupSequence(p => p.GetPercentileResult(It.IsAny<String>()))
-                .Returns(CharacterClassConstants.Wizard)
-                .Returns(CharacterClassConstants.Fighter);
-            var className = classNameRandomizer.Randomize(alignment);
-            Assert.That(className, Is.EqualTo(CharacterClassConstants.Fighter));
+            AssertClassIsNotAllowed(CharacterClassConstants.Wizard);
         }
 
         [Test]
         public void BarbarianNotAllowedIfAlignmentIsLawful()
         {
             alignment.Lawfulness = AlignmentConstants.Lawful;
-            mockPercentileResultProvider.SetupSequence(p => p.GetPercentileResult(It.IsAny<String>()))
-                .Returns(CharacterClassConstants.Barbarian)
-                .Returns(CharacterClassConstants.Fighter);
-            var className = classNameRandomizer.Randomize(alignment);
-            Assert.That(className, Is.EqualTo(CharacterClassConstants.Fighter));
+            AssertClassIsNotAllowed(CharacterClassConstants.Barbarian);
         }
 
         [Test]
-        public void BarbarianAllowedIfAlignmentIsNotLawful()
+        public void BarbarianAllowedIfAlignmentIsNeutral()
         {
             alignment.Lawfulness = AlignmentConstants.Neutral;
-            mockPercentileResultProvider.SetupSequence(p => p.GetPercentileResult(It.IsAny<String>()))
-                .Returns(CharacterClassConstants.Barbarian)
-                .Returns(CharacterClassConstants.Fighter);
-            var className = classNameRandomizer.Randomize(alignment);
-            Assert.That(className, Is.EqualTo(CharacterClassConstants.Barbarian));
+            AssertClassIsAllowed(CharacterClassConstants.Barbarian);
+        }
+
+        [Test]
+        public void BarbarianAllowedIfAlignmentIsChaotic()
+        {
+            alignment.Lawfulness = AlignmentConstants.Chaotic;
+            AssertClassIsAllowed(CharacterClassConstants.Barbarian);
         }
 
         [Test]
         public void BardNeverAllowed()
         {
             alignment.Lawfulness = AlignmentConstants.Chaotic;
-            mockPercentileResultProvider.SetupSequence(p => p.GetPercentileResult(It.IsAny<String>()))
-                .Returns(CharacterClassConstants.Bard)
-                .Returns(CharacterClassConstants.Fighter);
-            var className = classNameRandomizer.Randomize(alignment);
-            Assert.That(className, Is.EqualTo(CharacterClassConstants.Fighter));
+            AssertClassIsNotAllowed(CharacterClassConstants.Bard);
         }
 
         [Test]
         public void DruidNeverAllowed()
         {
             alignment.Lawfulness = AlignmentConstants.Neutral;
-            alignment.Goodness = AlignmentConstants.Good;
-            mockPercentileResultProvider.SetupSequence(p => p.GetPercentileResult(It.IsAny<String>()))
-                .Returns(CharacterClassConstants.Druid)
-                .Returns(CharacterClassConstants.Fighter);
-            var className = classNameRandomizer.Randomize(alignment);
-            Assert.That(className, Is.EqualTo(CharacterClassConstants.Fighter));
+            AssertClassIsNotAllowed(CharacterClassConstants.Druid);
         }
 
         [Test]
-        public void MonkNotAllowedIfAlignmentIsNotLawful()
+        public void MonkNotAllowedIfAlignmentIsChaotic()
+        {
+            alignment.Lawfulness = AlignmentConstants.Chaotic;
+            AssertClassIsNotAllowed(CharacterClassConstants.Monk);
+        }
+
+        [Test]
+        public void MonkNotAllowedIfAlignmentIsNeutral()
         {
             alignment.Lawfulness = AlignmentConstants.Neutral;
-            mockPercentileResultProvider.SetupSequence(p => p.GetPercentileResult(It.IsAny<String>()))
-                .Returns(CharacterClassConstants.Monk)
-                .Returns(CharacterClassConstants.Fighter);
-            var className = classNameRandomizer.Randomize(alignment);
-            Assert.That(className, Is.EqualTo(CharacterClassConstants.Fighter));
+            AssertClassIsNotAllowed(CharacterClassConstants.Monk);
         }
 
         [Test]
         public void MonkAllowedIfAlignmentIsLawful()
         {
             alignment.Lawfulness = AlignmentConstants.Lawful;
-            mockPercentileResultProvider.SetupSequence(p => p.GetPercentileResult(It.IsAny<String>()))
-                .Returns(CharacterClassConstants.Monk)
-                .Returns(CharacterClassConstants.Fighter);
-            var className = classNameRandomizer.Randomize(alignment);
-            Assert.That(className, Is.EqualTo(CharacterClassConstants.Monk));
+            AssertClassIsAllowed(CharacterClassConstants.Monk);
         }
 
         [Test]
@@ -156,11 +112,7 @@ namespace NPCGen.Tests.Generation.Randomizers.ClassNames
         {
             alignment.Lawfulness = AlignmentConstants.Neutral;
             alignment.Goodness = AlignmentConstants.Good;
-            mockPercentileResultProvider.SetupSequence(p => p.GetPercentileResult(It.IsAny<String>()))
-                .Returns(CharacterClassConstants.Paladin)
-                .Returns(CharacterClassConstants.Fighter);
-            var className = classNameRandomizer.Randomize(alignment);
-            Assert.That(className, Is.EqualTo(CharacterClassConstants.Fighter));
+            AssertClassIsNotAllowed(CharacterClassConstants.Paladin);
         }
 
         [Test]
@@ -168,11 +120,7 @@ namespace NPCGen.Tests.Generation.Randomizers.ClassNames
         {
             alignment.Goodness = AlignmentConstants.Neutral;
             alignment.Lawfulness = AlignmentConstants.Lawful;
-            mockPercentileResultProvider.SetupSequence(p => p.GetPercentileResult(It.IsAny<String>()))
-                .Returns(CharacterClassConstants.Paladin)
-                .Returns(CharacterClassConstants.Fighter);
-            var className = classNameRandomizer.Randomize(alignment);
-            Assert.That(className, Is.EqualTo(CharacterClassConstants.Fighter));
+            AssertClassIsNotAllowed(CharacterClassConstants.Paladin);
         }
 
         [Test]
@@ -180,11 +128,7 @@ namespace NPCGen.Tests.Generation.Randomizers.ClassNames
         {
             alignment.Goodness = AlignmentConstants.Good;
             alignment.Lawfulness = AlignmentConstants.Lawful;
-            mockPercentileResultProvider.SetupSequence(p => p.GetPercentileResult(It.IsAny<String>()))
-                .Returns(CharacterClassConstants.Paladin)
-                .Returns(CharacterClassConstants.Fighter);
-            var className = classNameRandomizer.Randomize(alignment);
-            Assert.That(className, Is.EqualTo(CharacterClassConstants.Paladin));
+            AssertClassIsAllowed(CharacterClassConstants.Paladin);
         }
     }
 }

@@ -1,18 +1,17 @@
 ﻿using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Generation.Randomizers.ClassNames;
-using NPCGen.Core.Generation.Randomizers.Races.BaseRaces;
 using NPCGen.Core.Generation.Verifiers.Alignments;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Generation.Verifiers.Alignments
 {
     [TestFixture]
-    public class ChaoticAlignmentVerifierTests : AlignmentVerifierTests
+    public class EvilAlignmentVerifierTests : AlignmentVerifierTests
     {
         [SetUp]
         public void Setup()
         {
-            verifier = new ChaoticAlignmentVerifier();
+            verifier = new EvilAlignmentVerifier();
         }
 
         [Test]
@@ -95,9 +94,9 @@ namespace NPCGen.Tests.Generation.Verifiers.Alignments
         }
 
         [Test]
-        public void MonkIsNotAllowed()
+        public void MonkIsAllowed()
         {
-            AssertClassNameIsNotAllowed(CharacterClassConstants.Monk);
+            AssertClassNameIsAllowed(CharacterClassConstants.Monk);
         }
 
         [Test]
@@ -128,22 +127,6 @@ namespace NPCGen.Tests.Generation.Verifiers.Alignments
         public void WizardIsAllowed()
         {
             AssertClassNameIsAllowed(CharacterClassConstants.Wizard);
-        }
-
-        [Test]
-        public void AnyBaseRaceRandomizerIsAllowed()
-        {
-            var randomizer = new AnyBaseRaceRandomizer(mockPercentileResultProvider.Object);
-            var allowed = verifier.VerifyCompatiblity(randomizer);
-            Assert.That(allowed, Is.True);
-        }
-
-        [Test]
-        public void SetBaseRaceRandomizerIsAllowed()
-        {
-            var randomizer = new SetBaseRaceRandomizer();
-            var allowed = verifier.VerifyCompatiblity(randomizer);
-            Assert.That(allowed, Is.True);
         }
     }
 }

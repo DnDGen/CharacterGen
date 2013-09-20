@@ -81,6 +81,7 @@
     <Compile Include="Generation\Randomizers\ClassNames\AnyClassNameRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\ClassNames\BaseClassNameRandomizerTests.cs" />
     <Compile Include="Generation\Providers\PercentileResultProviderTests.cs" />
+    <Compile Include="Generation\Randomizers\ClassNames\ClassNameRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\ClassNames\HealerClassNameRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\ClassNames\MageClassNameRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\ClassNames\NonSpellcasterClassNameRandomizerTests.cs" />
@@ -97,8 +98,12 @@
     <Compile Include="Generation\Randomizers\Level\VeryHighLevelRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\Races\BaseRaces\AnyBaseRaceRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\Races\BaseRaces\BaseBaseRaceRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Races\BaseRaces\BaseRaceRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\Races\BaseRaces\SetBaseRaceRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Races\BaseRaces\StandardBaseRaceRandomizerTests.cs" />
+    <Compile Include="Generation\Verifiers\Alignments\AlignmentVerifierTests.cs" />
     <Compile Include="Generation\Verifiers\Alignments\ChaoticAlignmentVerifierTests.cs" />
+    <Compile Include="Generation\Verifiers\Alignments\EvilAlignmentVerifierTests.cs" />
     <Compile Include="Generation\Xml\Data\CharacterClasses\EvilCharacterClassesTests.cs" />
     <Compile Include="Generation\Xml\Data\CharacterClasses\GoodCharacterClassesTests.cs" />
     <Compile Include="Generation\Xml\Data\CharacterClasses\NeutralCharacterClassesTests.cs" />
