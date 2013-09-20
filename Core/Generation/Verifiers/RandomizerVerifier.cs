@@ -1,9 +1,9 @@
-﻿using NPCGen.Core.Generation.Randomizers.Alignments;
+﻿using System;
+using NPCGen.Core.Generation.Randomizers.Alignments;
+using NPCGen.Core.Generation.Randomizers.ClassNames;
 using NPCGen.Core.Generation.Randomizers.Races.BaseRaces;
 using NPCGen.Core.Generation.Randomizers.Races.Metaraces;
 using NPCGen.Core.Generation.Verifiers.Factories.Interfaces;
-using System;
-using NPCGen.Core.Generation.Randomizers.ClassNames;
 
 namespace NPCGen.Core.Generation.Verifiers
 {
@@ -19,13 +19,17 @@ namespace NPCGen.Core.Generation.Verifiers
         public Boolean VerifyCompatibility(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classRandomizer,
             IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer)
         {
-            var verified = true;
+            if (!VerifyAlignment(alignmentRandomizer, classRandomizer, baseRaceRandomizer, metaraceRandomizer))
+                return false;
 
-            var alignmentVerifier = alignmentVerifierFactory.Create(alignmentRandomizer);
-            verified &= alignmentVerifier.VerifyCompatiblity(classRandomizer);
-            verified &= alignmentVerifier.VerifyCompatiblity(baseRaceRandomizer);
-            verified &= alignmentVerifier.VerifyCompatiblity(metaraceRandomizer);
+            if (!VerifyClass(classRandomizer))
+                return false;
 
+            return true;
+        }
+
+        private Boolean VerifyClass(IClassNameRandomizer classRandomizer)
+        {
             if (classRandomizer is HealerClassNameRandomizer)
             {
                 throw new NotImplementedException();
@@ -55,7 +59,23 @@ namespace NPCGen.Core.Generation.Verifiers
                 throw new NotImplementedException();
             }
 
-            return verified;
+            return true;
+        }
+
+        private Boolean VerifyAlignment(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classRandomizer, IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer)
+        {
+            var alignmentVerifier = alignmentVerifierFactory.Create(alignmentRandomizer);
+
+            if (!alignmentVerifier.VerifyCompatiblity(classRandomizer))
+                return false;
+
+            if (!alignmentVerifier.VerifyCompatiblity(baseRaceRandomizer))
+                return false;
+
+            if (!alignmentVerifier.VerifyCompatiblity(metaraceRandomizer))
+                return false;
+
+            return true;
         }
     }
 }

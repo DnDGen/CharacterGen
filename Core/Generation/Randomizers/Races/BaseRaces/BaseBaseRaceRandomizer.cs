@@ -19,11 +19,11 @@ namespace NPCGen.Core.Generation.Randomizers.Races.BaseRaces
             var baseRace = String.Empty;
 
             do baseRace = percentileResultProvider.GetPercentileResult(tableName);
-            while (!RaceIsAllowed(baseRace, alignment, className));
+            while (!RaceIsAllowed(baseRace, alignment));
 
             return baseRace;
         }
 
-        protected abstract Boolean RaceIsAllowed(String baseRace, Alignment alignment, String className);
+        protected abstract Boolean RaceIsAllowed(String baseRace, Alignment alignment);
     }
 }
