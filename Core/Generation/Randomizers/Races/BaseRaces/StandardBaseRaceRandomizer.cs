@@ -13,13 +13,13 @@ namespace NPCGen.Core.Generation.Randomizers.Races.BaseRaces
         {
             switch (baseRace)
             {
-                case RaceConstants.BaseRaces.LightfootHalfling:
-                case RaceConstants.BaseRaces.Human:
+                case RaceConstants.BaseRaces.ForestGnome:
+                case RaceConstants.BaseRaces.HalfElf:
                 case RaceConstants.BaseRaces.HalfOrc:
                 case RaceConstants.BaseRaces.HighElf:
                 case RaceConstants.BaseRaces.HillDwarf:
-                case RaceConstants.BaseRaces.HalfElf:
-                case RaceConstants.BaseRaces.ForestGnome: return true;
+                case RaceConstants.BaseRaces.Human:
+                case RaceConstants.BaseRaces.LightfootHalfling: return true;
                 case RaceConstants.BaseRaces.Aasimar:
                 case RaceConstants.BaseRaces.Bugbear:
                 case RaceConstants.BaseRaces.DeepDwarf:

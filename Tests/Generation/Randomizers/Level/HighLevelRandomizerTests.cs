@@ -9,7 +9,7 @@ namespace NPCGen.Tests.Generation.Randomizers.Level
     public class HighLevelRandomizerTests
     {
         [Test]
-        public void AddTenToRoll()
+        public void Add10ToRoll()
         {
             var mockDice = new Mock<IDice>();
             var randomizer = new HighLevelRandomizer(mockDice.Object);

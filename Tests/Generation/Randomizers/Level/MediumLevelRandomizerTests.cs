@@ -9,7 +9,7 @@ namespace NPCGen.Tests.Generation.Randomizers.Level
     public class MediumLevelRandomizerTests
     {
         [Test]
-        public void AddFiveToRoll()
+        public void Add5ToRoll()
         {
             var mockDice = new Mock<IDice>();
             var randomizer = new MediumLevelRandomizer(mockDice.Object);

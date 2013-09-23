@@ -6,13 +6,13 @@ using NUnit.Framework;
 namespace NPCGen.Tests.Generation.Randomizers.Races.BaseRaces
 {
     [TestFixture]
-    public class AnyBaseRaceRandomizerTests : BaseRaceRandomizerTests
+    public class NonStandardBaseRaceRandomizerTests : BaseRaceRandomizerTests
     {
         [SetUp]
         public void Setup()
         {
-            randomizer = new AnyBaseRaceRandomizer(mockPercentileResultProvider.Object);
-            controlCase = RaceConstants.BaseRaces.Human;
+            randomizer = new NonStandardBaseRaceRandomizer(mockPercentileResultProvider.Object);
+            controlCase = RaceConstants.BaseRaces.DeepDwarf;
         }
 
         [Test]
@@ -30,7 +30,7 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.BaseRaces
         [Test]
         public void DeepDwarfIsAlwaysAllowed()
         {
-            AssertBaseRaceIsAlwaysAllowed(RaceConstants.BaseRaces.DeepDwarf);
+            AssertControlIsAlwaysAllowed(RaceConstants.BaseRaces.DeepHalfling);
         }
 
         [Test]
@@ -64,9 +64,9 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.BaseRaces
         }
 
         [Test]
-        public void ForestGnomeIsAlwaysAllowed()
+        public void ForestGnomeIsNeverAllowed()
         {
-            AssertBaseRaceIsAlwaysAllowed(RaceConstants.BaseRaces.ForestGnome);
+            AssertBaseRaceIsNeverAllowed(RaceConstants.BaseRaces.ForestGnome);
         }
 
         [Test]
@@ -88,27 +88,27 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.BaseRaces
         }
 
         [Test]
-        public void HalfElfIsAlwaysAllowed()
+        public void HalfElfIsNeverAllowed()
         {
-            AssertBaseRaceIsAlwaysAllowed(RaceConstants.BaseRaces.HalfElf);
+            AssertBaseRaceIsNeverAllowed(RaceConstants.BaseRaces.HalfElf);
         }
 
         [Test]
-        public void HalfOrcIsAlwaysAllowed()
+        public void HalfOrcIsNeverAllowed()
         {
-            AssertBaseRaceIsAlwaysAllowed(RaceConstants.BaseRaces.HalfOrc);
+            AssertBaseRaceIsNeverAllowed(RaceConstants.BaseRaces.HalfOrc);
         }
 
         [Test]
-        public void HighElfIsAlwaysAllowed()
+        public void HighElfIsNeverAllowed()
         {
-            AssertBaseRaceIsAlwaysAllowed(RaceConstants.BaseRaces.HighElf);
+            AssertBaseRaceIsNeverAllowed(RaceConstants.BaseRaces.HighElf);
         }
 
         [Test]
-        public void HillDwarfIsAlwaysAllowed()
+        public void HillDwarfIsNeverAllowed()
         {
-            AssertBaseRaceIsAlwaysAllowed(RaceConstants.BaseRaces.HillDwarf);
+            AssertBaseRaceIsNeverAllowed(RaceConstants.BaseRaces.HillDwarf);
         }
 
         [Test]
@@ -118,9 +118,9 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.BaseRaces
         }
 
         [Test]
-        public void HumanIsAlwaysAllowed()
+        public void HumanIsNeverAllowed()
         {
-            AssertControlIsAlwaysAllowed(RaceConstants.BaseRaces.HighElf);
+            AssertBaseRaceIsNeverAllowed(RaceConstants.BaseRaces.HighElf);
         }
 
         [Test]
@@ -130,9 +130,9 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.BaseRaces
         }
 
         [Test]
-        public void LightfootHalflingIsAlwaysAllowed()
+        public void LightfootHalflingIsNeverAllowed()
         {
-            AssertBaseRaceIsAlwaysAllowed(RaceConstants.BaseRaces.LightfootHalfling);
+            AssertBaseRaceIsNeverAllowed(RaceConstants.BaseRaces.LightfootHalfling);
         }
 
         [Test]
