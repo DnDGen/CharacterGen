@@ -1,5 +1,4 @@
-﻿using NPCGen.Core.Data.Alignments;
-using NPCGen.Core.Data.CharacterClasses;
+﻿using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Generation.Randomizers.ClassNames;
 using NUnit.Framework;
 
@@ -18,87 +17,67 @@ namespace NPCGen.Tests.Generation.Randomizers.ClassNames
         [Test]
         public void FighterNeverAllowed()
         {
-            AssertClassIsNotAllowed(CharacterClassConstants.Fighter);
+            AssertClassIsNeverAllowed(CharacterClassConstants.Fighter);
         }
 
         [Test]
         public void ClericNeverAllowed()
         {
-            AssertClassIsNotAllowed(CharacterClassConstants.Cleric);
+            AssertClassIsNeverAllowed(CharacterClassConstants.Cleric);
         }
 
         [Test]
         public void RangerAlwaysAllowed()
         {
-            AssertClassIsAllowed(CharacterClassConstants.Ranger);
+            AssertClassIsAlwaysAllowed(CharacterClassConstants.Ranger);
         }
 
         [Test]
         public void SorcererNeverAllowed()
         {
-            AssertClassIsNotAllowed(CharacterClassConstants.Sorcerer);
+            AssertClassIsNeverAllowed(CharacterClassConstants.Sorcerer);
         }
 
         [Test]
         public void RogueAlwaysAllowed()
         {
-            AssertControlIsAllowed(CharacterClassConstants.Ranger);
+            AssertControlIsAlwaysAllowed(CharacterClassConstants.Ranger);
         }
 
         [Test]
         public void WizardNeverAllowed()
         {
-            AssertClassIsNotAllowed(CharacterClassConstants.Wizard);
+            AssertClassIsNeverAllowed(CharacterClassConstants.Wizard);
         }
 
         [Test]
         public void BarbarianNeverAllowed()
         {
-            alignment.Lawfulness = AlignmentConstants.Chaotic;
-            AssertClassIsNotAllowed(CharacterClassConstants.Barbarian);
+            AssertClassIsNeverAllowed(CharacterClassConstants.Barbarian);
         }
 
         [Test]
-        public void BardNotAllowedIfAlignmentIsLawful()
+        public void BardAllowedIfAlignmentIsNotLawful()
         {
-            alignment.Lawfulness = AlignmentConstants.Lawful;
-            AssertClassIsNotAllowed(CharacterClassConstants.Bard);
-        }
-
-        [Test]
-        public void BardAllowedIfAlignmentIsNeutral()
-        {
-            alignment.Lawfulness = AlignmentConstants.Neutral;
-            AssertClassIsAllowed(CharacterClassConstants.Bard);
-        }
-
-        [Test]
-        public void BardAllowedIfAlignmentIsChaotic()
-        {
-            alignment.Lawfulness = AlignmentConstants.Chaotic;
-            AssertClassIsAllowed(CharacterClassConstants.Bard);
+            AssertClassMustNotBeLawful(CharacterClassConstants.Bard);
         }
 
         [Test]
         public void DruidNeverAllowed()
         {
-            alignment.Lawfulness = AlignmentConstants.Neutral;
-            AssertClassIsNotAllowed(CharacterClassConstants.Druid);
+            AssertClassIsNeverAllowed(CharacterClassConstants.Druid);
         }
 
         [Test]
         public void MonkNeverAllowed()
         {
-            alignment.Lawfulness = AlignmentConstants.Lawful;
-            AssertClassIsNotAllowed(CharacterClassConstants.Monk);
+            AssertClassIsNeverAllowed(CharacterClassConstants.Monk);
         }
 
         [Test]
         public void PaladinNeverAllowed()
         {
-            alignment.Lawfulness = AlignmentConstants.Lawful;
-            alignment.Goodness = AlignmentConstants.Good;
-            AssertClassIsNotAllowed(CharacterClassConstants.Paladin);
+            AssertClassIsNeverAllowed(CharacterClassConstants.Paladin);
         }
     }
 }

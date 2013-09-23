@@ -82,12 +82,6 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.BaseRaces
             Assert.That(result, Is.EqualTo(controlCase));
         }
 
-        private void AssertControlIsAllowed(String secondaryControl)
-        {
-            var result = GetResult(controlCase, secondaryControl);
-            Assert.That(result, Is.EqualTo(controlCase));
-        }
-
         private String GetResult(String baseRace, String controlCase)
         {
             mockPercentileResultProvider.SetupSequence(p => p.GetPercentileResult(It.IsAny<String>()))

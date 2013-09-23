@@ -1,6 +1,7 @@
 ﻿using System;
 using Moq;
 using NPCGen.Core.Data.Alignments;
+using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Generation.Providers.Interfaces;
 using NPCGen.Core.Generation.Randomizers.ClassNames;
 using NUnit.Framework;
@@ -11,10 +12,10 @@ namespace NPCGen.Tests.Generation.Randomizers.ClassNames
     public class ClassNameRandomizerTests
     {
         protected Mock<IPercentileResultProvider> mockPercentileResultProvider;
-        protected Alignment alignment;
-
         protected IClassNameRandomizer randomizer;
         protected String controlCase;
+
+        private Alignment alignment;
 
         [SetUp]
         public void Setup()
@@ -23,19 +24,137 @@ namespace NPCGen.Tests.Generation.Randomizers.ClassNames
             alignment = new Alignment();
         }
 
-        protected void AssertControlIsAllowed(String secondaryControl)
+        protected void AssertClassIsAlwaysAllowed(String className)
         {
-            var result = GetResult(controlCase, secondaryControl);
-            Assert.That(result, Is.EqualTo(controlCase));
+            var goodnesses = new[] { AlignmentConstants.Evil, AlignmentConstants.Neutral, AlignmentConstants.Good };
+            var lawfulnesses = new[] { AlignmentConstants.Chaotic, AlignmentConstants.Neutral, AlignmentConstants.Lawful };
+
+            foreach (var lawfulness in lawfulnesses)
+            {
+                foreach (var goodness in goodnesses)
+                {
+                    alignment.Lawfulness = lawfulness;
+                    alignment.Goodness = goodness;
+                    
+                    AssertClassIsAllowed(className);
+                }
+            }
         }
 
-        protected void AssertClassIsAllowed(String className)
+        protected void AssertPaladinIsAllowed()
+        {
+            var goodnesses = new[] { AlignmentConstants.Evil, AlignmentConstants.Neutral, AlignmentConstants.Good };
+            var lawfulnesses = new[] { AlignmentConstants.Chaotic, AlignmentConstants.Neutral, AlignmentConstants.Lawful };
+
+            foreach (var lawfulness in lawfulnesses)
+            {
+                foreach (var goodness in goodnesses)
+                {
+                    alignment.Lawfulness = lawfulness;
+                    alignment.Goodness = goodness;
+
+                    if (alignment.IsLawful() && alignment.IsGood())
+                        AssertClassIsAllowed(CharacterClassConstants.Paladin);
+                    else
+                        AssertClassIsNotAllowed(CharacterClassConstants.Paladin);
+                }
+            }
+        }
+
+        protected void AssertDruidIsAllowed()
+        {
+            var goodnesses = new[] { AlignmentConstants.Evil, AlignmentConstants.Neutral, AlignmentConstants.Good };
+            var lawfulnesses = new[] { AlignmentConstants.Chaotic, AlignmentConstants.Neutral, AlignmentConstants.Lawful };
+
+            foreach (var lawfulness in lawfulnesses)
+            {
+                foreach (var goodness in goodnesses)
+                {
+                    alignment.Lawfulness = lawfulness;
+                    alignment.Goodness = goodness;
+
+                    if (alignment.IsNeutral())
+                        AssertClassIsAllowed(CharacterClassConstants.Druid);
+                    else
+                        AssertClassIsNotAllowed(CharacterClassConstants.Druid);
+                }
+            }
+        }
+
+        protected void AssertMonkIsAllowed()
+        {
+            var goodnesses = new[] { AlignmentConstants.Evil, AlignmentConstants.Neutral, AlignmentConstants.Good };
+            var lawfulnesses = new[] { AlignmentConstants.Chaotic, AlignmentConstants.Neutral, AlignmentConstants.Lawful };
+
+            foreach (var lawfulness in lawfulnesses)
+            {
+                foreach (var goodness in goodnesses)
+                {
+                    alignment.Lawfulness = lawfulness;
+                    alignment.Goodness = goodness;
+
+                    if (alignment.IsLawful())
+                        AssertClassIsAllowed(CharacterClassConstants.Monk);
+                    else
+                        AssertClassIsNotAllowed(CharacterClassConstants.Monk);
+                }
+            }
+        }
+
+        protected void AssertClassMustNotBeLawful(String className)
+        {
+            var goodnesses = new[] { AlignmentConstants.Evil, AlignmentConstants.Neutral, AlignmentConstants.Good };
+            var lawfulnesses = new[] { AlignmentConstants.Chaotic, AlignmentConstants.Neutral, AlignmentConstants.Lawful };
+
+            foreach (var lawfulness in lawfulnesses)
+            {
+                foreach (var goodness in goodnesses)
+                {
+                    alignment.Lawfulness = lawfulness;
+                    alignment.Goodness = goodness;
+
+                    if (alignment.IsLawful())
+                        AssertClassIsNotAllowed(className);
+                    else
+                        AssertClassIsAllowed(className);
+                }
+            }
+        }
+
+        protected void AssertClassIsNeverAllowed(String className)
+        {
+            var goodnesses = new[] { AlignmentConstants.Evil, AlignmentConstants.Neutral, AlignmentConstants.Good };
+            var lawfulnesses = new[] { AlignmentConstants.Chaotic, AlignmentConstants.Neutral, AlignmentConstants.Lawful };
+
+            foreach (var lawfulness in lawfulnesses)
+            {
+                foreach (var goodness in goodnesses)
+                {
+                    alignment.Lawfulness = lawfulness;
+                    alignment.Goodness = goodness;
+
+                    AssertClassIsNotAllowed(className);
+                }
+            }
+        }
+
+        protected void AssertControlIsAlwaysAllowed(String secondaryControl)
+        {
+            var storedControlCase = controlCase;
+            controlCase = secondaryControl;
+
+            AssertClassIsAlwaysAllowed(storedControlCase);
+
+            controlCase = storedControlCase;
+        }
+
+        private void AssertClassIsAllowed(String className)
         {
             var result = GetResult(className, controlCase);
             Assert.That(result, Is.EqualTo(className));
         }
 
-        protected void AssertClassIsNotAllowed(String className)
+        private void AssertClassIsNotAllowed(String className)
         {
             var result = GetResult(className, controlCase);
             Assert.That(result, Is.EqualTo(controlCase));
