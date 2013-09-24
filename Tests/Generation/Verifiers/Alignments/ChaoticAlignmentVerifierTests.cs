@@ -134,16 +134,70 @@ namespace NPCGen.Tests.Generation.Verifiers.Alignments
         public void AnyBaseRaceRandomizerIsAllowed()
         {
             var randomizer = new AnyBaseRaceRandomizer(mockPercentileResultProvider.Object);
-            var allowed = verifier.VerifyCompatiblity(randomizer);
-            Assert.That(allowed, Is.True);
+            AssertRandomizerIsAllowed(randomizer);
+        }
+
+        [Test]
+        public void EvilBaseRaceRandomizerIsAllowed()
+        {
+            var randomizer = new EvilBaseRaceRandomizer(mockPercentileResultProvider.Object);
+            AssertRandomizerIsAllowed(randomizer);
+        }
+
+        [Test]
+        public void GoodBaseRaceRandomizerIsAllowed()
+        {
+            var randomizer = new GoodBaseRaceRandomizer(mockPercentileResultProvider.Object);
+            AssertRandomizerIsAllowed(randomizer);
+        }
+
+        [Test]
+        public void NeutralBaseRaceRandomizerIsAllowed()
+        {
+            var randomizer = new NeutralBaseRaceRandomizer(mockPercentileResultProvider.Object);
+            AssertRandomizerIsAllowed(randomizer);
+        }
+
+        [Test]
+        public void NonEvilBaseRaceRandomizerIsAllowed()
+        {
+            var randomizer = new NonEvilBaseRaceRandomizer(mockPercentileResultProvider.Object);
+            AssertRandomizerIsAllowed(randomizer);
+        }
+
+        [Test]
+        public void NonGoodBaseRaceRandomizerIsAllowed()
+        {
+            var randomizer = new NonGoodBaseRaceRandomizer(mockPercentileResultProvider.Object);
+            AssertRandomizerIsAllowed(randomizer);
+        }
+
+        [Test]
+        public void NonNeutralBaseRaceRandomizerIsAllowed()
+        {
+            var randomizer = new NonNeutralBaseRaceRandomizer(mockPercentileResultProvider.Object);
+            AssertRandomizerIsAllowed(randomizer);
+        }
+
+        [Test]
+        public void NonStandardBaseRaceRandomizerIsAllowed()
+        {
+            var randomizer = new NonStandardBaseRaceRandomizer(mockPercentileResultProvider.Object);
+            AssertRandomizerIsAllowed(randomizer);
+        }
+
+        [Test]
+        public void StandardBaseRaceRandomizerIsAllowed()
+        {
+            var randomizer = new StandardBaseRaceRandomizer(mockPercentileResultProvider.Object);
+            AssertRandomizerIsAllowed(randomizer);
         }
 
         [Test]
         public void SetBaseRaceRandomizerIsAllowed()
         {
             var randomizer = new SetBaseRaceRandomizer();
-            var allowed = verifier.VerifyCompatiblity(randomizer);
-            Assert.That(allowed, Is.True);
+            AssertRandomizerIsAllowed(randomizer);
         }
     }
 }

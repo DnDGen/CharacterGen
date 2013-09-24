@@ -1,4 +1,5 @@
 ﻿using NPCGen.Core.Data;
+using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Data.Stats;
 using NPCGen.Core.Generation.Factories.Interfaces;
 using NPCGen.Core.Generation.Verifiers;
@@ -6,13 +7,14 @@ using NPCGen.Core.Generation.Verifiers.Exceptions;
 
 namespace NPCGen.Core.Generation.Factories
 {
-    public class CharacterFactory
+    public class CharacterFactory : ICharacterFactory
     {
         private ICharacterClassFactory characterClassFactory;
         private IAlignmentFactory alignmentFactory;
         private IRaceFactory raceFactory;
-        private IRandomizerVerifier randomizerVerifier;
         private IStatsFactory statFactory;
+
+        private IRandomizerVerifier randomizerVerifier;
 
         public CharacterFactory(ICharacterClassFactory characterClassFactory, IAlignmentFactory alignmentFactory,
             IRaceFactory raceFactory, IRandomizerVerifier randomizerVerifier, IStatsFactory statFactory)
@@ -33,8 +35,10 @@ namespace NPCGen.Core.Generation.Factories
             character.Stats = statFactory.Generate();
 
             //need to verify each alignment, class as rolled with randomizers
-            character.Alignment = alignmentFactory.Generate();
+            character.Alignment = GenerateAlignment();
+
             character.Class = characterClassFactory.Generate(character.Alignment, character.Stats[StatConstants.Constitution].Bonus);
+
             character.Race = raceFactory.Generate(character.Alignment, character.Class);
 
             //move HP out of class, put in character, make HitPointFactory(characterClass, constitutionBonus, metarace)
@@ -209,6 +213,15 @@ namespace NPCGen.Core.Generation.Factories
 
             if (!verified)
                 throw new IncompatibleRandomizersException();
+        }
+
+        private Alignment GenerateAlignment()
+        {
+            var classVerifier = randomizerVerifier
+
+            var alignment = alignmentFactory.Generate();
+
+            return alignment;
         }
     }
 }

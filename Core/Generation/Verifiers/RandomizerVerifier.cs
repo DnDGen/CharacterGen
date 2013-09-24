@@ -9,11 +9,12 @@ namespace NPCGen.Core.Generation.Verifiers
 {
     public class RandomizerVerifier : IRandomizerVerifier
     {
-        private IAlignmentVerifierFactory alignmentVerifierFactory;
+        public IAlignmentVerifierFactory AlignmentVerifierFactory { get; set; }
+        public ICharacterClassVerifierFactory CharacterClassVerifierFactory { get; set; }
 
         public RandomizerVerifier(IAlignmentVerifierFactory alignmentVerifierFactory)
         {
-            this.alignmentVerifierFactory = alignmentVerifierFactory;
+            this.AlignmentVerifierFactory = alignmentVerifierFactory;
         }
 
         public Boolean VerifyCompatibility(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classRandomizer,
@@ -23,6 +24,22 @@ namespace NPCGen.Core.Generation.Verifiers
                 return false;
 
             if (!VerifyClass(classRandomizer))
+                return false;
+
+            return true;
+        }
+
+        private Boolean VerifyAlignment(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classRandomizer, IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer)
+        {
+            var alignmentVerifier = AlignmentVerifierFactory.Create(alignmentRandomizer);
+
+            if (!alignmentVerifier.VerifyCompatiblity(classRandomizer))
+                return false;
+
+            if (!alignmentVerifier.VerifyCompatiblity(baseRaceRandomizer))
+                return false;
+
+            if (!alignmentVerifier.VerifyCompatiblity(metaraceRandomizer))
                 return false;
 
             return true;
@@ -58,22 +75,6 @@ namespace NPCGen.Core.Generation.Verifiers
             {
                 throw new NotImplementedException();
             }
-
-            return true;
-        }
-
-        private Boolean VerifyAlignment(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classRandomizer, IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer)
-        {
-            var alignmentVerifier = alignmentVerifierFactory.Create(alignmentRandomizer);
-
-            if (!alignmentVerifier.VerifyCompatiblity(classRandomizer))
-                return false;
-
-            if (!alignmentVerifier.VerifyCompatiblity(baseRaceRandomizer))
-                return false;
-
-            if (!alignmentVerifier.VerifyCompatiblity(metaraceRandomizer))
-                return false;
 
             return true;
         }

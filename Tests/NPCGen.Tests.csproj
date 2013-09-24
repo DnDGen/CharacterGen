@@ -65,6 +65,7 @@
     <Compile Include="Data\Stats\StatTests.cs" />
     <Compile Include="Generation\Factories\AlignmentFactoryTests.cs" />
     <Compile Include="Generation\Factories\CharacterClassFactoryTests.cs" />
+    <Compile Include="Generation\Factories\CharacterFactoryTests.cs" />
     <Compile Include="Generation\Factories\StatsFactoryTests.cs" />
     <Compile Include="Generation\Randomizers\Alignments\AnyAlignmentRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\Alignments\ChaoticAlignmentRandomizerTests.cs" />
@@ -99,12 +100,19 @@
     <Compile Include="Generation\Randomizers\Races\BaseRaces\AnyBaseRaceRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\Races\BaseRaces\BaseBaseRaceRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\Races\BaseRaces\BaseRaceRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Races\BaseRaces\EvilBaseRaceRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Races\BaseRaces\GoodBaseRaceRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Races\BaseRaces\NeutralBaseRaceRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Races\BaseRaces\NonEvilBaseRaceRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Races\BaseRaces\NonGoodBaseRaceRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Races\BaseRaces\NonNeutralBaseRaceRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\Races\BaseRaces\NonStandardBaseRaceRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\Races\BaseRaces\SetBaseRaceRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\Races\BaseRaces\StandardBaseRaceRandomizerTests.cs" />
     <Compile Include="Generation\Verifiers\Alignments\AlignmentVerifierTests.cs" />
     <Compile Include="Generation\Verifiers\Alignments\ChaoticAlignmentVerifierTests.cs" />
     <Compile Include="Generation\Verifiers\Alignments\EvilAlignmentVerifierTests.cs" />
+    <Compile Include="Generation\Verifiers\Factories\AlignmentVerifierFactoryTests.cs" />
     <Compile Include="Generation\Xml\Data\CharacterClasses\EvilCharacterClassesTests.cs" />
     <Compile Include="Generation\Xml\Data\CharacterClasses\GoodCharacterClassesTests.cs" />
     <Compile Include="Generation\Xml\Data\CharacterClasses\NeutralCharacterClassesTests.cs" />

@@ -73,13 +73,13 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.BaseRaces
         private void AssertBaseRaceIsAllowed(String baseRace)
         {
             var result = GetResult(baseRace, controlCase);
-            Assert.That(result, Is.EqualTo(baseRace));
+            Assert.That(result, Is.EqualTo(baseRace), alignment.ToString());
         }
 
         private void AssertBaseRaceIsNotAllowed(String baseRace)
         {
             var result = GetResult(baseRace, controlCase);
-            Assert.That(result, Is.EqualTo(controlCase));
+            Assert.That(result, Is.EqualTo(controlCase), alignment.ToString());
         }
 
         private String GetResult(String baseRace, String controlCase)
