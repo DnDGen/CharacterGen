@@ -1,14 +1,13 @@
 ﻿using System;
 using NPCGen.Core.Data.Alignments;
-using NPCGen.Core.Generation.Randomizers.Races.BaseRaces;
 using NPCGen.Core.Generation.Randomizers.Races.Metaraces;
 
-namespace NPCGen.Core.Generation.Verifiers.CharacterClasses
+namespace NPCGen.Core.Generation.Verifiers.BaseRaces
 {
-    public interface ICharacterClassVerifier
+    public interface IBaseRaceVerifier
     {
         Boolean VerifyCompatibility(Alignment alignment);
-        Boolean VerifyCompatibility(IBaseRaceRandomizer baseRaceRandomizer);
+        Boolean VerifyCompatibility(String className);
         Boolean VerifyCompatibility(IMetaraceRandomizer metaraceRandomizer);
     }
 }

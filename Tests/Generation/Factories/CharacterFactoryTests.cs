@@ -12,6 +12,8 @@ using NPCGen.Core.Generation.Randomizers.ClassNames;
 using NPCGen.Core.Generation.Randomizers.Races.BaseRaces;
 using NPCGen.Core.Generation.Randomizers.Races.Metaraces;
 using NPCGen.Core.Generation.Verifiers;
+using NPCGen.Core.Generation.Verifiers.BaseRaces;
+using NPCGen.Core.Generation.Verifiers.CharacterClasses;
 using NPCGen.Core.Generation.Verifiers.Exceptions;
 using NUnit.Framework;
 
@@ -21,11 +23,15 @@ namespace NPCGen.Tests.Generation.Factories
     public class CharacterFactoryTests
     {
         private ICharacterFactory characterFactory;
-        private Mock<IRandomizerVerifier> mockRandomizerVerifier;
-        private Mock<ICharacterClassFactory> mockCharacterClassFactory;
-        private Mock<IAlignmentFactory> mockAlignmentFactory;
-        private Mock<IRaceFactory> mockRaceFactory;
+
         private Mock<IStatsFactory> mockStatsFactory;
+        private Mock<IAlignmentFactory> mockAlignmentFactory;
+        private Mock<ICharacterClassFactory> mockCharacterClassFactory;
+        private Mock<IRaceFactory> mockRaceFactory;
+
+        private Mock<IRandomizerVerifier> mockRandomizerVerifier;
+        private Mock<ICharacterClassVerifier> mockCharacterClassVerifier;
+        private Mock<IBaseRaceVerifier> mockBaseRaceVerifier;
 
         private Dictionary<String, Stat> stats;
         private Alignment alignment;
@@ -35,21 +41,14 @@ namespace NPCGen.Tests.Generation.Factories
         [SetUp]
         public void Setup()
         {
-            mockRandomizerVerifier = new Mock<IRandomizerVerifier>();
-            mockRandomizerVerifier.Setup(v => v.VerifyCompatibility(It.IsAny<IAlignmentRandomizer>(),
-                                                                    It.IsAny<IClassNameRandomizer>(),
-                                                                    It.IsAny<IBaseRaceRandomizer>(),
-                                                                    It.IsAny<IMetaraceRandomizer>())).Returns(true);
-
-
-            mockAlignmentFactory = new Mock<IAlignmentFactory>();
-            alignment = new Alignment();
-            mockAlignmentFactory.Setup(f => f.Generate()).Returns(alignment);
-
             mockStatsFactory = new Mock<IStatsFactory>();
             stats = new Dictionary<String, Stat>();
             stats.Add(StatConstants.Constitution, new Stat());
             mockStatsFactory.Setup(f => f.Generate()).Returns(stats);
+
+            mockAlignmentFactory = new Mock<IAlignmentFactory>();
+            alignment = new Alignment();
+            mockAlignmentFactory.Setup(f => f.Generate()).Returns(alignment);
             
             mockCharacterClassFactory = new Mock<ICharacterClassFactory>();
             characterClass = new CharacterClass();
@@ -59,7 +58,20 @@ namespace NPCGen.Tests.Generation.Factories
             race = new Race();
             mockRaceFactory.Setup(f => f.Generate(alignment, characterClass)).Returns(race);
 
-            characterFactory = new CharacterFactory(mockCharacterClassFactory.Object, mockAlignmentFactory.Object, mockRaceFactory.Object, mockRandomizerVerifier.Object, mockStatsFactory.Object);
+            mockRandomizerVerifier = new Mock<IRandomizerVerifier>();
+            mockRandomizerVerifier.Setup(v => v.VerifyCompatibility(It.IsAny<IAlignmentRandomizer>(),
+                                                                    It.IsAny<IClassNameRandomizer>(),
+                                                                    It.IsAny<IBaseRaceRandomizer>(),
+                                                                    It.IsAny<IMetaraceRandomizer>())).Returns(true);
+
+            mockCharacterClassVerifier = new Mock<ICharacterClassVerifier>();
+            mockCharacterClassVerifier.Setup(v => v.VerifyCompatibility(alignment)).Returns(true);
+
+            mockBaseRaceVerifier = new Mock<IBaseRaceVerifier>();
+            mockBaseRaceVerifier.Setup(v => v.VerifyCompatibility(alignment)).Returns(true);
+
+            characterFactory = new CharacterFactory(mockCharacterClassFactory.Object, mockAlignmentFactory.Object, mockRaceFactory.Object,
+                mockRandomizerVerifier.Object, mockStatsFactory.Object, mockCharacterClassVerifier.Object, mockBaseRaceVerifier.Object);
         }
 
         [Test, ExpectedException(typeof(IncompatibleRandomizersException))]
@@ -102,12 +114,19 @@ namespace NPCGen.Tests.Generation.Factories
         }
 
         [Test]
-        public void IncompatibleAlignmentIsRegenerated()
+        public void AlignmentIncompatibleWithCharacterClassIsRegenerated()
         {
-            alignment.Goodness = AlignmentConstants.Evil;
-            var acceptableAlignment = new Alignment();
-            acceptableAlignment.Goodness = AlignmentConstants.Good;
-            mockAlignmentFactory.SetupSequence(f => f.Generate()).Returns(alignment).Returns(acceptableAlignment);
+            mockCharacterClassVerifier.SetupSequence(v => v.VerifyCompatibility(alignment)).Returns(false).Returns(true);
+            characterFactory.Generate();
+            mockAlignmentFactory.Verify(f => f.Generate(), Times.Exactly(2));
+        }
+
+        [Test]
+        public void AlignmentIncompatibleWithBaseRaceIsRegenerated()
+        {
+            mockBaseRaceVerifier.SetupSequence(v => v.VerifyCompatibility(alignment)).Returns(false).Returns(true);
+            characterFactory.Generate();
+            mockAlignmentFactory.Verify(f => f.Generate(), Times.Exactly(2));
         }
     }
 }

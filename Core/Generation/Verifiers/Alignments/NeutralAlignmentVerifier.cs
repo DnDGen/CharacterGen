@@ -8,7 +8,7 @@ namespace NPCGen.Core.Generation.Verifiers.Alignments
 {
     public class NeutralAlignmentVerifier : IAlignmentVerifier
     {
-        public Boolean VerifyCompatiblity(IClassNameRandomizer classRandomizer)
+        public Boolean VerifyCompatibility(IClassNameRandomizer classRandomizer)
         {
             if (classRandomizer is SetClassNameRandomizer)
             {
@@ -21,12 +21,12 @@ namespace NPCGen.Core.Generation.Verifiers.Alignments
             return true;
         }
 
-        public Boolean VerifyCompatiblity(IBaseRaceRandomizer baseRaceRandomizer)
+        public Boolean VerifyCompatibility(IBaseRaceRandomizer baseRaceRandomizer)
         {
             throw new NotImplementedException();
         }
 
-        public Boolean VerifyCompatiblity(IMetaraceRandomizer metaraceRandomizer)
+        public Boolean VerifyCompatibility(IMetaraceRandomizer metaraceRandomizer)
         {
             throw new NotImplementedException();
         }

@@ -1,7 +1,7 @@
-﻿using NPCGen.Core.Generation.Randomizers.Alignments;
+﻿using System;
+using NPCGen.Core.Generation.Randomizers.Alignments;
 using NPCGen.Core.Generation.Verifiers.Alignments;
 using NPCGen.Core.Generation.Verifiers.Factories.Interfaces;
-using System;
 
 namespace NPCGen.Core.Generation.Verifiers.Factories
 {
@@ -9,12 +9,14 @@ namespace NPCGen.Core.Generation.Verifiers.Factories
     {
         public IAlignmentVerifier Create(IAlignmentRandomizer alignmentRandomizer)
         {
-            if (alignmentRandomizer is ChaoticAlignmentRandomizer)
+            if (alignmentRandomizer is AnyAlignmentRandomizer)
+                throw new NotImplementedException();
+            else if (alignmentRandomizer is ChaoticAlignmentRandomizer)
                 return new ChaoticAlignmentVerifier();
             else if (alignmentRandomizer is EvilAlignmentRandomizer)
                 return new EvilAlignmentVerifier();
             else if (alignmentRandomizer is GoodAlignmentRandomizer)
-                throw new NotImplementedException();
+                return new GoodAlignmentVerifier();
             else if (alignmentRandomizer is LawfulAlignmentRandomizer)
                 return new LawfulAlignmentVerifier();
             else if (alignmentRandomizer is NeutralAlignmentRandomizer)

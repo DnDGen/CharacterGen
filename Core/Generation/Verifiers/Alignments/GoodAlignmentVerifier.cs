@@ -7,17 +7,17 @@ namespace NPCGen.Core.Generation.Verifiers.Alignments
 {
     public class GoodAlignmentVerifier : IAlignmentVerifier
     {
-        public Boolean VerifyCompatiblity(IClassNameRandomizer classRandomizer)
+        public Boolean VerifyCompatibility(IClassNameRandomizer classRandomizer)
         {
             throw new NotImplementedException();
         }
 
-        public Boolean VerifyCompatiblity(IBaseRaceRandomizer baseRaceRandomizer)
+        public Boolean VerifyCompatibility(IBaseRaceRandomizer baseRaceRandomizer)
         {
             throw new NotImplementedException();
         }
 
-        public Boolean VerifyCompatiblity(IMetaraceRandomizer metaraceRandomizer)
+        public Boolean VerifyCompatibility(IMetaraceRandomizer metaraceRandomizer)
         {
             throw new NotImplementedException();
         }

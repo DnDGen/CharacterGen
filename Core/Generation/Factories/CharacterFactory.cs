@@ -1,29 +1,38 @@
-﻿using NPCGen.Core.Data;
+﻿using System;
+using NPCGen.Core.Data;
 using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Data.Stats;
 using NPCGen.Core.Generation.Factories.Interfaces;
 using NPCGen.Core.Generation.Verifiers;
+using NPCGen.Core.Generation.Verifiers.BaseRaces;
+using NPCGen.Core.Generation.Verifiers.CharacterClasses;
 using NPCGen.Core.Generation.Verifiers.Exceptions;
 
 namespace NPCGen.Core.Generation.Factories
 {
     public class CharacterFactory : ICharacterFactory
     {
-        private ICharacterClassFactory characterClassFactory;
-        private IAlignmentFactory alignmentFactory;
-        private IRaceFactory raceFactory;
         private IStatsFactory statFactory;
+        private IAlignmentFactory alignmentFactory;
+        private ICharacterClassFactory characterClassFactory;
+        private IRaceFactory raceFactory;
 
         private IRandomizerVerifier randomizerVerifier;
+        private ICharacterClassVerifier characterClassVerifier;
+        private IBaseRaceVerifier baseRaceVerifier;
 
         public CharacterFactory(ICharacterClassFactory characterClassFactory, IAlignmentFactory alignmentFactory,
-            IRaceFactory raceFactory, IRandomizerVerifier randomizerVerifier, IStatsFactory statFactory)
+            IRaceFactory raceFactory, IRandomizerVerifier randomizerVerifier, IStatsFactory statFactory,
+            ICharacterClassVerifier characterClassVerifier, IBaseRaceVerifier baseRaceVerifier)
         {
-            this.characterClassFactory = characterClassFactory;
-            this.alignmentFactory = alignmentFactory;
-            this.raceFactory = raceFactory;
-            this.randomizerVerifier = randomizerVerifier;
             this.statFactory = statFactory;
+            this.alignmentFactory = alignmentFactory;
+            this.characterClassFactory = characterClassFactory;
+            this.raceFactory = raceFactory;
+
+            this.randomizerVerifier = randomizerVerifier;
+            this.characterClassVerifier = characterClassVerifier;
+            this.baseRaceVerifier = baseRaceVerifier;
         }
 
         public Character Generate()
@@ -36,9 +45,7 @@ namespace NPCGen.Core.Generation.Factories
 
             //need to verify each alignment, class as rolled with randomizers
             character.Alignment = GenerateAlignment();
-
             character.Class = characterClassFactory.Generate(character.Alignment, character.Stats[StatConstants.Constitution].Bonus);
-
             character.Race = raceFactory.Generate(character.Alignment, character.Class);
 
             //move HP out of class, put in character, make HitPointFactory(characterClass, constitutionBonus, metarace)
@@ -217,11 +224,18 @@ namespace NPCGen.Core.Generation.Factories
 
         private Alignment GenerateAlignment()
         {
-            var classVerifier = randomizerVerifier
+            Alignment alignment;
 
-            var alignment = alignmentFactory.Generate();
+            do alignment = alignmentFactory.Generate();
+            while (!AlignmentIsAllowed(alignment));
 
             return alignment;
+        }
+
+        private Boolean AlignmentIsAllowed(Alignment alignment)
+        {
+            return characterClassVerifier.VerifyCompatibility(alignment)
+                   && baseRaceVerifier.VerifyCompatibility(alignment);
         }
     }
 }

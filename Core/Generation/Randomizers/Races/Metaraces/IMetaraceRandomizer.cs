@@ -1,4 +1,5 @@
 ﻿using System;
+using NPCGen.Core.Data.Alignments;
 
 namespace NPCGen.Core.Generation.Randomizers.Races.Metaraces
 {
@@ -10,6 +11,6 @@ namespace NPCGen.Core.Generation.Randomizers.Races.Metaraces
 
     public interface IMetaraceRandomizer
     {
-        String Randomize();
+        String Randomize(Alignment alignment, String className);
     }
 }

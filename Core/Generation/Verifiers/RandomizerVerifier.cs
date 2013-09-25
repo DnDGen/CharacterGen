@@ -9,12 +9,13 @@ namespace NPCGen.Core.Generation.Verifiers
 {
     public class RandomizerVerifier : IRandomizerVerifier
     {
-        public IAlignmentVerifierFactory AlignmentVerifierFactory { get; set; }
-        public ICharacterClassVerifierFactory CharacterClassVerifierFactory { get; set; }
+        private IAlignmentVerifierFactory alignmentVerifierFactory;
+        private ICharacterClassVerifierFactory characterClassVerifierFactory;
 
-        public RandomizerVerifier(IAlignmentVerifierFactory alignmentVerifierFactory)
+        public RandomizerVerifier(IAlignmentVerifierFactory alignmentVerifierFactory, ICharacterClassVerifierFactory characterClassVerifierFactory)
         {
-            this.AlignmentVerifierFactory = alignmentVerifierFactory;
+            this.alignmentVerifierFactory = alignmentVerifierFactory;
+            this.characterClassVerifierFactory = characterClassVerifierFactory;
         }
 
         public Boolean VerifyCompatibility(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classRandomizer,
@@ -31,15 +32,15 @@ namespace NPCGen.Core.Generation.Verifiers
 
         private Boolean VerifyAlignment(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classRandomizer, IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer)
         {
-            var alignmentVerifier = AlignmentVerifierFactory.Create(alignmentRandomizer);
+            var alignmentVerifier = alignmentVerifierFactory.Create(alignmentRandomizer);
 
-            if (!alignmentVerifier.VerifyCompatiblity(classRandomizer))
+            if (!alignmentVerifier.VerifyCompatibility(classRandomizer))
                 return false;
 
-            if (!alignmentVerifier.VerifyCompatiblity(baseRaceRandomizer))
+            if (!alignmentVerifier.VerifyCompatibility(baseRaceRandomizer))
                 return false;
 
-            if (!alignmentVerifier.VerifyCompatiblity(metaraceRandomizer))
+            if (!alignmentVerifier.VerifyCompatibility(metaraceRandomizer))
                 return false;
 
             return true;

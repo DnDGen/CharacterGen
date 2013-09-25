@@ -113,6 +113,8 @@
     <Compile Include="Generation\Randomizers\Races\Metaraces\IMetaraceRandomizer.cs" />
     <Compile Include="Generation\Randomizers\Races\BaseRaces\IBaseRaceRandomizer.cs" />
     <Compile Include="Generation\Randomizers\Races\BaseRaces\SetBaseRaceRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Races\Metaraces\NoMetaraceRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Races\Metaraces\SetMetaraceRandomizer.cs" />
     <Compile Include="Generation\Randomizers\Stats\IStatsRandomizer.cs" />
     <Compile Include="Generation\Verifiers\Alignments\ChaoticAlignmentVerifier.cs" />
     <Compile Include="Generation\Verifiers\Alignments\EvilAlignmentVerifier.cs" />
@@ -120,6 +122,7 @@
     <Compile Include="Generation\Verifiers\Alignments\IAlignmentVerifier.cs" />
     <Compile Include="Generation\Verifiers\Alignments\LawfulAlignmentVerifier.cs" />
     <Compile Include="Generation\Verifiers\Alignments\NeutralAlignmentVerifier.cs" />
+    <Compile Include="Generation\Verifiers\BaseRaces\IBaseRaceVerifier.cs" />
     <Compile Include="Generation\Verifiers\CharacterClasses\ICharacterClassVerifier.cs" />
     <Compile Include="Generation\Verifiers\Exceptions\IncompatibleRandomizersException.cs" />
     <Compile Include="Generation\Verifiers\Factories\AlignmentVerifierFactory.cs" />
@@ -136,7 +139,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Generation\Verifiers\BaseRaces\" />
     <Folder Include="Generation\Verifiers\Metaraces\" />
   </ItemGroup>
   <ItemGroup>
