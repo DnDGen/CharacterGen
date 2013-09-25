@@ -11,7 +11,7 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.BaseRaces
     [TestFixture]
     public class BaseBaseRaceRandomizerTests
     {
-        private TestBaseRaceRandomizer randomzier;
+        private TestBaseRaceRandomizer randomizer;
         private Mock<IPercentileResultProvider> mockPercentileResultProvider;
         private Alignment alignment;
 
@@ -22,24 +22,24 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.BaseRaces
             alignment.Goodness = AlignmentConstants.Good;
 
             mockPercentileResultProvider = new Mock<IPercentileResultProvider>();
-            randomzier = new TestBaseRaceRandomizer(mockPercentileResultProvider.Object);
+            randomizer = new TestBaseRaceRandomizer(mockPercentileResultProvider.Object);
         }
 
         [Test]
         public void LoopUntilBaseRaceIsAllowed()
         {
-            randomzier.BaseRaceIsAllowed = false;
-            randomzier.Randomize(alignment, CharacterClassConstants.Barbarian);
+            randomizer.BaseRaceIsAllowed = false;
+            randomizer.Randomize(alignment, CharacterClassConstants.Barbarian);
             mockPercentileResultProvider.Verify(p => p.GetPercentileResult("GoodBarbarianBaseRaces"), Times.Exactly(2));
         }
 
         [Test]
         public void ReturnBaseRaceFromPercentileResultProvider()
         {
-            randomzier.BaseRaceIsAllowed = true;
+            randomizer.BaseRaceIsAllowed = true;
             mockPercentileResultProvider.Setup(p => p.GetPercentileResult("GoodBarbarianBaseRaces")).Returns("result");
 
-            var result = randomzier.Randomize(alignment, CharacterClassConstants.Barbarian);
+            var result = randomizer.Randomize(alignment, CharacterClassConstants.Barbarian);
             Assert.That(result, Is.EqualTo("result"));
         }
 
