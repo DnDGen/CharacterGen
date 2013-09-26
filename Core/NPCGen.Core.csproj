@@ -111,6 +111,7 @@
     <Compile Include="Generation\Randomizers\Races\BaseRaces\NonStandardBaseRaceRandomizer.cs" />
     <Compile Include="Generation\Randomizers\Races\BaseRaces\StandardBaseRaceRandomizer.cs" />
     <Compile Include="Generation\Randomizers\Races\Metaraces\BaseMetaraceRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Races\Metaraces\ForcedMetaraceRandomizer.cs" />
     <Compile Include="Generation\Randomizers\Races\Metaraces\IMetaraceRandomizer.cs" />
     <Compile Include="Generation\Randomizers\Races\BaseRaces\IBaseRaceRandomizer.cs" />
     <Compile Include="Generation\Randomizers\Races\BaseRaces\SetBaseRaceRandomizer.cs" />
