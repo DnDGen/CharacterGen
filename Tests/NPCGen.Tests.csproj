@@ -133,6 +133,7 @@
     <Compile Include="Generation\Xml\Data\Races\BaseRaces\Good\GoodMonkBaseRacesTests.cs" />
     <Compile Include="Generation\Xml\Data\Races\BaseRaces\Good\GoodPaladinBaseRacesTests.cs" />
     <Compile Include="Generation\Xml\Data\Races\BaseRaces\Good\GoodRangerBaseRacesTests.cs" />
+    <Compile Include="Generation\Xml\Data\Races\BaseRaces\Good\GoodRogueBaseRacesTests.cs" />
     <Compile Include="Generation\Xml\Parsers\EmbeddedResourceStreamLoaderTests.cs" />
     <Compile Include="Generation\Xml\Parsers\PercentileXmlParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
