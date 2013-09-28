@@ -161,7 +161,7 @@
     <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Good\GoodRangerBaseRaces.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Good\GoodPalidanBaseRaces.xml" />
+    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Good\GoodPaladinBaseRaces.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Good\GoodMonkBaseRaces.xml" />
