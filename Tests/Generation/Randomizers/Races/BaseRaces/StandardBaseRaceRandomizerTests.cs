@@ -63,9 +63,9 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.BaseRaces
         }
 
         [Test]
-        public void ForestGnomeIsAlwaysAllowed()
+        public void ForestGnomeIsNeverAllowed()
         {
-            AssertRaceIsAlwaysAllowed(RaceConstants.BaseRaces.ForestGnome);
+            AssertRaceIsNeverAllowed(RaceConstants.BaseRaces.ForestGnome);
         }
 
         [Test]
@@ -177,9 +177,9 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.BaseRaces
         }
 
         [Test]
-        public void RockGnomeIsNeverAllowed()
+        public void RockGnomeIsAlwaysAllowed()
         {
-            AssertRaceIsNeverAllowed(RaceConstants.BaseRaces.RockGnome);
+            AssertRaceIsAlwaysAllowed(RaceConstants.BaseRaces.RockGnome);
         }
 
         [Test]

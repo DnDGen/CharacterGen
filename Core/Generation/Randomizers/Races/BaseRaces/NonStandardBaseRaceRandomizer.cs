@@ -1,7 +1,7 @@
-﻿using System;
-using NPCGen.Core.Data.Alignments;
+﻿using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Data.Races;
 using NPCGen.Core.Generation.Providers.Interfaces;
+using System;
 
 namespace NPCGen.Core.Generation.Randomizers.Races.BaseRaces
 {
@@ -19,12 +19,12 @@ namespace NPCGen.Core.Generation.Randomizers.Races.BaseRaces
                 case RaceConstants.BaseRaces.HighElf:
                 case RaceConstants.BaseRaces.HillDwarf:
                 case RaceConstants.BaseRaces.HalfElf:
-                case RaceConstants.BaseRaces.ForestGnome: return false;
+                case RaceConstants.BaseRaces.RockGnome: return false;
                 case RaceConstants.BaseRaces.Svirfneblin:
                 case RaceConstants.BaseRaces.Aasimar: return alignment.IsGood();
-                case RaceConstants.BaseRaces.DerroDwarf: 
-                case RaceConstants.BaseRaces.Drow: 
-                case RaceConstants.BaseRaces.Duergar: 
+                case RaceConstants.BaseRaces.DerroDwarf:
+                case RaceConstants.BaseRaces.Drow:
+                case RaceConstants.BaseRaces.Duergar:
                 case RaceConstants.BaseRaces.Goblin:
                 case RaceConstants.BaseRaces.Hobgoblin:
                 case RaceConstants.BaseRaces.Ogre:
@@ -40,7 +40,7 @@ namespace NPCGen.Core.Generation.Randomizers.Races.BaseRaces
                 case RaceConstants.BaseRaces.Doppelganger:
                 case RaceConstants.BaseRaces.Lizardfolk: return alignment.Goodness == AlignmentConstants.Neutral;
                 case RaceConstants.BaseRaces.MountainDwarf:
-                case RaceConstants.BaseRaces.RockGnome:
+                case RaceConstants.BaseRaces.ForestGnome:
                 case RaceConstants.BaseRaces.TallfellowHalfling:
                 case RaceConstants.BaseRaces.WildElf:
                 case RaceConstants.BaseRaces.DeepDwarf:

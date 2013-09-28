@@ -1,7 +1,7 @@
-﻿using System;
-using NPCGen.Core.Data.Alignments;
+﻿using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Data.Races;
 using NPCGen.Core.Generation.Providers.Interfaces;
+using System;
 
 namespace NPCGen.Core.Generation.Randomizers.Races.BaseRaces
 {
@@ -13,7 +13,7 @@ namespace NPCGen.Core.Generation.Randomizers.Races.BaseRaces
         {
             switch (baseRace)
             {
-                case RaceConstants.BaseRaces.ForestGnome:
+                case RaceConstants.BaseRaces.RockGnome:
                 case RaceConstants.BaseRaces.HalfElf:
                 case RaceConstants.BaseRaces.HalfOrc:
                 case RaceConstants.BaseRaces.HighElf:
@@ -40,7 +40,7 @@ namespace NPCGen.Core.Generation.Randomizers.Races.BaseRaces
                 case RaceConstants.BaseRaces.Ogre:
                 case RaceConstants.BaseRaces.OgreMage:
                 case RaceConstants.BaseRaces.Orc:
-                case RaceConstants.BaseRaces.RockGnome:
+                case RaceConstants.BaseRaces.ForestGnome:
                 case RaceConstants.BaseRaces.Svirfneblin:
                 case RaceConstants.BaseRaces.TallfellowHalfling:
                 case RaceConstants.BaseRaces.Tiefling:

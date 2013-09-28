@@ -1,10 +1,5 @@
 ﻿using NPCGen.Core.Data.Races;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NPCGen.Tests.Generation.Xml.Data.Races.BaseRaces.Good
 {
@@ -24,87 +19,105 @@ namespace NPCGen.Tests.Generation.Xml.Data.Races.BaseRaces.Good
         }
 
         [Test]
+        public void GoodClericDeepDwarfPercentile()
+        {
+            AssertContentOnSingleRoll(RaceConstants.BaseRaces.DeepDwarf, 2);
+        }
+
+        [Test]
         public void GoodClericHillDwarfPercentile()
         {
-            AssertContentIsInRange(RaceConstants.BaseRaces.HillDwarf, 2, 6);
+            AssertContentIsInRange(RaceConstants.BaseRaces.HillDwarf, 3, 22);
+        }
+
+        [Test]
+        public void GoodClericMountainDwarfPercentile()
+        {
+            AssertContentIsInRange(RaceConstants.BaseRaces.MountainDwarf, 23, 24);
         }
 
         [Test]
         public void GoodClericGrayElfPercentile()
         {
-            AssertContentIsInRange(RaceConstants.BaseRaces.GrayElf, 7, 11);
+            AssertContentOnSingleRoll(RaceConstants.BaseRaces.GrayElf, 25);
         }
 
         [Test]
         public void GoodClericHighElfPercentile()
         {
-            AssertContentIsInRange(RaceConstants.BaseRaces.HighElf, 12, 36);
+            AssertContentIsInRange(RaceConstants.BaseRaces.HighElf, 26, 35);
         }
 
         [Test]
         public void GoodClericWildElfPercentile()
         {
-            AssertContentOnSingleRoll(RaceConstants.BaseRaces.WildElf, 37);
+            AssertContentIsInRange(RaceConstants.BaseRaces.WildElf, 36, 40);
         }
 
         [Test]
         public void GoodClericWoodElfPercentile()
         {
-            AssertContentOnSingleRoll(RaceConstants.BaseRaces.WoodElf, 38);
+            AssertContentOnSingleRoll(RaceConstants.BaseRaces.WoodElf, 41);
         }
 
         [Test]
         public void GoodClericForestGnomePercentile()
         {
-            AssertContentOnSingleRoll(RaceConstants.BaseRaces.ForestGnome, 39);
+            AssertContentOnSingleRoll(RaceConstants.BaseRaces.ForestGnome, 42);
         }
 
         [Test]
         public void GoodClericRockGnomePercentile()
         {
-            AssertContentIsInRange(RaceConstants.BaseRaces.RockGnome, 40, 44);
+            AssertContentIsInRange(RaceConstants.BaseRaces.RockGnome, 43, 51);
         }
 
         [Test]
         public void GoodClericHalfElfPercentile()
         {
-            AssertContentIsInRange(RaceConstants.BaseRaces.HalfElf, 45, 53);
+            AssertContentIsInRange(RaceConstants.BaseRaces.HalfElf, 52, 56);
         }
 
         [Test]
         public void GoodClericLightfootHalflingPercentile()
         {
-            AssertContentOnSingleRoll(RaceConstants.BaseRaces.LightfootHalfling, 54);
+            AssertContentIsInRange(RaceConstants.BaseRaces.LightfootHalfling, 57, 66);
         }
 
         [Test]
         public void GoodClericDeepHalflingPercentile()
         {
-            AssertContentOnSingleRoll(RaceConstants.BaseRaces.DeepHalfling, 55);
+            AssertContentOnSingleRoll(RaceConstants.BaseRaces.DeepHalfling, 67);
         }
 
         [Test]
         public void GoodClericTallfellowHalflingPercentile()
         {
-            AssertContentIsInRange(RaceConstants.BaseRaces.TallfellowHalfling, 56, 57);
+            AssertContentIsInRange(RaceConstants.BaseRaces.TallfellowHalfling, 68, 69);
+        }
+
+        [Test]
+        public void GoodClericHalfOrcPercentile()
+        {
+            AssertContentOnSingleRoll(RaceConstants.BaseRaces.HalfOrc, 70);
         }
 
         [Test]
         public void GoodClericHumanPercentile()
         {
-            AssertContentIsInRange(RaceConstants.BaseRaces.Human, 58, 97);
+            AssertContentIsInRange(RaceConstants.BaseRaces.Human, 71, 95);
         }
 
         [Test]
         public void GoodClericSvirfneblinPercentile()
         {
-            AssertContentOnSingleRoll(RaceConstants.BaseRaces.Svirfneblin, 98);
+            AssertContentOnSingleRoll(RaceConstants.BaseRaces.Svirfneblin, 96);
         }
 
         [Test]
         public void GoodClericEmptyPercentile()
         {
-            AssertEmpty(99, 100);
+            AssertEmpty(97, 100);
         }
     }
 }
