@@ -128,6 +128,8 @@
     <Compile Include="Generation\Xml\Data\Races\BaseRaces\Good\GoodClericBaseRacesTests.cs" />
     <Compile Include="Generation\Xml\Data\Races\BaseRaces\Good\GoodBarbarianBaseRacesTests.cs" />
     <Compile Include="Generation\Xml\Data\Races\BaseRaces\Good\GoodBardBaseRacesTests.cs" />
+    <Compile Include="Generation\Xml\Data\Races\BaseRaces\Good\GoodDruidBaseRacesTests.cs" />
+    <Compile Include="Generation\Xml\Data\Races\BaseRaces\Good\GoodFighterBaseRacesTests.cs" />
     <Compile Include="Generation\Xml\Parsers\EmbeddedResourceStreamLoaderTests.cs" />
     <Compile Include="Generation\Xml\Parsers\PercentileXmlParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
