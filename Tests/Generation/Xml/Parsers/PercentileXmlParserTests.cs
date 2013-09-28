@@ -1,9 +1,9 @@
-﻿using System;
-using System.IO;
-using Moq;
+﻿using Moq;
 using NPCGen.Core.Generation.Xml.Parsers;
 using NPCGen.Core.Generation.Xml.Parsers.Interfaces;
 using NUnit.Framework;
+using System;
+using System.IO;
 
 namespace NPCGen.Tests.Generation.Xml.Parsers
 {
@@ -12,11 +12,13 @@ namespace NPCGen.Tests.Generation.Xml.Parsers
     {
         private IPercentileXmlParser percentileXmlParser;
         private Mock<IStreamLoader> mockStreamLoader;
-        private const String filename = "filename";
+        private const String filename = "PercentileXmlParserTests.xml";
 
         [SetUp]
         public void Setup()
         {
+            MakeXmlFile();
+
             mockStreamLoader = new Mock<IStreamLoader>();
             mockStreamLoader.Setup(l => l.LoadStream(filename)).Returns(GetStream());
 
@@ -41,14 +43,13 @@ namespace NPCGen.Tests.Generation.Xml.Parsers
 
         private Stream GetStream()
         {
-            MakeXmlFile();
-            return new FileStream("PercentileXmlParserTests.xml", FileMode.Open);
+            return new FileStream(filename, FileMode.Open);
         }
 
         private void MakeXmlFile()
         {
             var content = "<?xml version=\"1.0\" encoding=\"utf-8\" ?><percentile><object><lower>1</lower><content>1-5</content><upper>5</upper></object><object><lower>6</lower><content>6</content><upper>6</upper></object></percentile>";
-            File.WriteAllText("PercentileXmlParserTests.xml", content);
+            File.WriteAllText(filename, content);
         }
     }
 }

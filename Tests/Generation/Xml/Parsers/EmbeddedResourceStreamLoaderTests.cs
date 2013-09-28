@@ -1,7 +1,7 @@
-﻿using System.IO;
-using NPCGen.Core.Generation.Xml.Parsers;
+﻿using NPCGen.Core.Generation.Xml.Parsers;
 using NPCGen.Core.Generation.Xml.Parsers.Interfaces;
 using NUnit.Framework;
+using System.IO;
 
 namespace NPCGen.Tests.Generation.Xml.Parsers
 {
@@ -17,10 +17,11 @@ namespace NPCGen.Tests.Generation.Xml.Parsers
         }
 
         [Test]
-        public void GetsFileIfIsAnEmbeddeResource()
+        public void GetsFileIfItIsAnEmbeddeResource()
         {
-            using(var stream = streamLoader.LoadStream("GoodCharacterClasses"))
+            using (var stream = streamLoader.LoadStream("GoodCharacterClasses.xml"))
             {
+                //no error was thrown, so the stream was successfully loaded
                 Assert.Pass();
             }
         }
@@ -28,9 +29,9 @@ namespace NPCGen.Tests.Generation.Xml.Parsers
         [Test, ExpectedException(typeof(FileNotFoundException))]
         public void ThrowErrorIfFileIsNotEmbeddedResource()
         {
-            using (var stream = streamLoader.LoadStream("GoodCharacterClasses"))
+            using (var stream = streamLoader.LoadStream("NotAnActualFile.xml"))
             {
-                Assert.Pass();
+                //Shouldn't get here, should throw error
             }
         }
     }

@@ -46,6 +46,7 @@
       <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.XML" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -124,6 +125,9 @@
     <Compile Include="Generation\Xml\Data\CharacterClasses\GoodCharacterClassesTests.cs" />
     <Compile Include="Generation\Xml\Data\CharacterClasses\NeutralCharacterClassesTests.cs" />
     <Compile Include="Generation\Xml\Data\PercentileTests.cs" />
+    <Compile Include="Generation\Xml\Data\Races\BaseRaces\Good\GoodClericBaseRacesTests.cs" />
+    <Compile Include="Generation\Xml\Data\Races\BaseRaces\Good\GoodBarbarianBaseRacesTests.cs" />
+    <Compile Include="Generation\Xml\Data\Races\BaseRaces\Good\GoodBardBaseRacesTests.cs" />
     <Compile Include="Generation\Xml\Parsers\EmbeddedResourceStreamLoaderTests.cs" />
     <Compile Include="Generation\Xml\Parsers\PercentileXmlParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -137,7 +141,6 @@
       <Name>NPCGen.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

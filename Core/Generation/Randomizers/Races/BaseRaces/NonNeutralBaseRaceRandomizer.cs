@@ -9,7 +9,7 @@ namespace NPCGen.Core.Generation.Randomizers.Races.BaseRaces
     {
         public NonNeutralBaseRaceRandomizer(IPercentileResultProvider percentileResultProvider) : base(percentileResultProvider) { }
 
-        protected override Boolean RaceIsAllowed(String baseRace, Alignment alignment)
+        protected override Boolean BaseRaceIsAllowed(String baseRace, Alignment alignment)
         {
             switch (baseRace)
             {

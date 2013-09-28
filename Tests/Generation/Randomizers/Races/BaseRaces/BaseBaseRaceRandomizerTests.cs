@@ -1,10 +1,10 @@
-﻿using System;
-using Moq;
+﻿using Moq;
 using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Generation.Providers.Interfaces;
 using NPCGen.Core.Generation.Randomizers.Races.BaseRaces;
 using NUnit.Framework;
+using System;
 
 namespace NPCGen.Tests.Generation.Randomizers.Races.BaseRaces
 {
@@ -28,7 +28,9 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.BaseRaces
         [Test]
         public void LoopUntilBaseRaceIsAllowed()
         {
-            randomizer.BaseRaceIsAllowed = false;
+            randomizer.Allowed = false;
+            mockPercentileResultProvider.Setup(p => p.GetPercentileResult("GoodBarbarianBaseRaces")).Returns("result");
+
             randomizer.Randomize(alignment, CharacterClassConstants.Barbarian);
             mockPercentileResultProvider.Verify(p => p.GetPercentileResult("GoodBarbarianBaseRaces"), Times.Exactly(2));
         }
@@ -36,23 +38,33 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.BaseRaces
         [Test]
         public void ReturnBaseRaceFromPercentileResultProvider()
         {
-            randomizer.BaseRaceIsAllowed = true;
+            randomizer.Allowed = true;
             mockPercentileResultProvider.Setup(p => p.GetPercentileResult("GoodBarbarianBaseRaces")).Returns("result");
 
             var result = randomizer.Randomize(alignment, CharacterClassConstants.Barbarian);
             Assert.That(result, Is.EqualTo("result"));
         }
 
+        [Test]
+        public void NoBaseRaceIsNotAllowed()
+        {
+            randomizer.Allowed = true;
+            mockPercentileResultProvider.SetupSequence(p => p.GetPercentileResult("GoodBarbarianBaseRaces")).Returns(String.Empty).Returns("result");
+
+            randomizer.Randomize(alignment, CharacterClassConstants.Barbarian);
+            mockPercentileResultProvider.Verify(p => p.GetPercentileResult("GoodBarbarianBaseRaces"), Times.Exactly(2));
+        }
+
         private class TestBaseRaceRandomizer : BaseBaseRaceRandomizer
         {
-            public Boolean BaseRaceIsAllowed { get; set; }
+            public Boolean Allowed { get; set; }
 
             public TestBaseRaceRandomizer(IPercentileResultProvider percentileResultProvider) : base(percentileResultProvider) { }
 
-            protected override Boolean RaceIsAllowed(String baseRace, Alignment alignment)
+            protected override Boolean BaseRaceIsAllowed(String baseRace, Alignment alignment)
             {
-                var toReturn = BaseRaceIsAllowed;
-                BaseRaceIsAllowed = !BaseRaceIsAllowed;
+                var toReturn = Allowed;
+                Allowed = !Allowed;
                 return toReturn;
             }
         }
