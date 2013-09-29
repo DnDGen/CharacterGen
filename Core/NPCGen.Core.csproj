@@ -187,7 +187,9 @@
     <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Neutral\NeutralBarbarianBaseRaces.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Neutral\NeutralBardBaseRaces.xml" />
+    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Neutral\NeutralBardBaseRaces.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Neutral\NeutralClericBaseRaces.xml">
