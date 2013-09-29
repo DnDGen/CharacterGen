@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<percentile>
+  <object><lower>1</lower><content>Deep Dwarf</content><upper>15</upper></object>
+  <object>
+    <lower>16</lower>
+    <content>Hill Dwarf</content>
+    <upper>25</upper>
+  </object>
+  <object>
+    <lower>26</lower>
+    <content>Mountain Dwarf</content>
+    <upper>26</upper>
+  </object>
+  <object>
+    <lower>27</lower>
+    <content>High Elf</content>
+    <upper>27</upper>
+  </object>
+  <object>
+    <lower>28</lower>
+    <content>Wild Elf</content>
+    <upper>28</upper>
+  </object>
+  <object>
+    <lower>29</lower>
+    <content>Wood Elf</content>
+    <upper>38</upper>
+  </object>
+  <object>
+    <lower>39</lower>
+    <content>Rock Gnome</content>
+    <upper>39</upper>
+  </object>
+  <object>
+    <lower>40</lower>
+    <content>Half-Elf</content>
+    <upper>48</upper>
+  </object>
+  <object>
+    <lower>49</lower>
+    <content>Lightfoot Halfling</content>
+    <upper>58</upper>
+  </object>
+  <object>
+    <lower>59</lower>
+    <content>Deep Halfling</content>
+    <upper>59</upper>
+  </object>
+  <object>
+    <lower>60</lower>
+    <content>Tallfellow Halfling</content>
+    <upper>60</upper>
+  </object>
+  <object>
+    <lower>61</lower>
+    <content>Half-Orc</content>
+    <upper>62</upper>
+  </object>
+  <object>
+    <lower>63</lower>
+    <content>Human</content>
+    <upper>90</upper>
+  </object>
+  <object>
+    <lower>91</lower>
+    <content>Lizardfolk</content>
+    <upper>97</upper>
+  </object>
+  <object>
+    <lower>98</lower>
+    <content>Doppelganger</content>
+    <upper>98</upper>
+  </object>
+</percentile>

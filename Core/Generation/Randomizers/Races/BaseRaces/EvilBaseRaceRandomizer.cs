@@ -29,8 +29,8 @@ namespace NPCGen.Core.Generation.Randomizers.Races.BaseRaces
                 case RaceConstants.BaseRaces.MindFlayer:
                 case RaceConstants.BaseRaces.Minotaur:
                 case RaceConstants.BaseRaces.Tiefling: return true;
-                case RaceConstants.BaseRaces.Doppelganger:
-                case RaceConstants.BaseRaces.Lizardfolk: return false;
+                case RaceConstants.BaseRaces.Doppelganger: return false;
+                case RaceConstants.BaseRaces.Lizardfolk:
                 case RaceConstants.BaseRaces.DeepDwarf:
                 case RaceConstants.BaseRaces.DeepHalfling: return true;
                 case RaceConstants.BaseRaces.ForestGnome:

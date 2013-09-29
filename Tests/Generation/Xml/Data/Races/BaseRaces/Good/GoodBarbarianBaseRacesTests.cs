@@ -15,43 +15,43 @@ namespace NPCGen.Tests.Generation.Xml.Data.Races.BaseRaces.Good
         [Test]
         public void GoodBarbarianHillDwarfPercentile()
         {
-            AssertContentIsInRange(RaceConstants.BaseRaces.HillDwarf, 1, 2);
+            AssertContent(RaceConstants.BaseRaces.HillDwarf, 1, 2);
         }
 
         [Test]
         public void GoodBarbarianWildElfPercentile()
         {
-            AssertContentIsInRange(RaceConstants.BaseRaces.WildElf, 3, 32);
+            AssertContent(RaceConstants.BaseRaces.WildElf, 3, 32);
         }
 
         [Test]
         public void GoodBarbarianWoodElfPercentile()
         {
-            AssertContentIsInRange(RaceConstants.BaseRaces.WoodElf, 33, 34);
+            AssertContent(RaceConstants.BaseRaces.WoodElf, 33, 34);
         }
 
         [Test]
         public void GoodBarbarianHalfElfPercentile()
         {
-            AssertContentOnSingleRoll(RaceConstants.BaseRaces.HalfElf, 35);
+            AssertContent(RaceConstants.BaseRaces.HalfElf, 35);
         }
 
         [Test]
         public void GoodBarbarianLightfootHalflingPercentile()
         {
-            AssertContentOnSingleRoll(RaceConstants.BaseRaces.LightfootHalfling, 36);
+            AssertContent(RaceConstants.BaseRaces.LightfootHalfling, 36);
         }
 
         [Test]
         public void GoodBarbarianHalfOrcPercentile()
         {
-            AssertContentIsInRange(RaceConstants.BaseRaces.HalfOrc, 37, 61);
+            AssertContent(RaceConstants.BaseRaces.HalfOrc, 37, 61);
         }
 
         [Test]
         public void GoodBarbarianHumanPercentile()
         {
-            AssertContentIsInRange(RaceConstants.BaseRaces.Human, 62, 98);
+            AssertContent(RaceConstants.BaseRaces.Human, 62, 98);
         }
 
         [Test]

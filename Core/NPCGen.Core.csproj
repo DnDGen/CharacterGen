@@ -228,6 +228,42 @@
   <ItemGroup>
     <EmbeddedResource Include="Generation\Xml\Data\CharacterClasses\EvilCharacterClasses.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Evil\EvilBarbarianBaseRaces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Evil\EvilBardBaseRaces.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Evil\EvilClericBaseRaces.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Evil\EvilDruidBaseRaces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Evil\EvilFighterBaseRaces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Evil\EvilMonkBaseRaces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Evil\EvilRangerBaseRaces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Evil\EvilRogueBaseRaces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Evil\EvilSorcererBaseRaces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Evil\EvilWizardBaseRaces.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -15,85 +15,85 @@ namespace NPCGen.Tests.Generation.Xml.Data.Races.BaseRaces.Good
         [Test]
         public void GoodWizardAasimarPercentile()
         {
-            AssertContentOnSingleRoll(RaceConstants.BaseRaces.Aasimar, 1);
+            AssertContent(RaceConstants.BaseRaces.Aasimar, 1);
         }
 
         [Test]
         public void GoodWizardHillDwarfPercentile()
         {
-            AssertContentOnSingleRoll(RaceConstants.BaseRaces.HillDwarf, 2);
+            AssertContent(RaceConstants.BaseRaces.HillDwarf, 2);
         }
 
         [Test]
         public void GoodWizardGrayElfPercentile()
         {
-            AssertContentIsInRange(RaceConstants.BaseRaces.GrayElf, 3, 7);
+            AssertContent(RaceConstants.BaseRaces.GrayElf, 3, 7);
         }
 
         [Test]
         public void GoodWizardHighElfPercentile()
         {
-            AssertContentIsInRange(RaceConstants.BaseRaces.HighElf, 8, 41);
+            AssertContent(RaceConstants.BaseRaces.HighElf, 8, 41);
         }
 
         [Test]
         public void GoodWizardWoodElfPercentile()
         {
-            AssertContentOnSingleRoll(RaceConstants.BaseRaces.WoodElf, 42);
+            AssertContent(RaceConstants.BaseRaces.WoodElf, 42);
         }
 
         [Test]
         public void GoodWizardForestGnomePercentile()
         {
-            AssertContentOnSingleRoll(RaceConstants.BaseRaces.ForestGnome, 43);
+            AssertContent(RaceConstants.BaseRaces.ForestGnome, 43);
         }
 
         [Test]
         public void GoodWizardRockGnomeDwarfPercentile()
         {
-            AssertContentIsInRange(RaceConstants.BaseRaces.RockGnome, 44, 48);
+            AssertContent(RaceConstants.BaseRaces.RockGnome, 44, 48);
         }
 
         [Test]
         public void GoodWizardHalfElfPercentile()
         {
-            AssertContentIsInRange(RaceConstants.BaseRaces.HalfElf, 49, 58);
+            AssertContent(RaceConstants.BaseRaces.HalfElf, 49, 58);
         }
 
         [Test]
         public void GoodWizardLightfootHalflingPercentile()
         {
-            AssertContentIsInRange(RaceConstants.BaseRaces.LightfootHalfling, 59, 63);
+            AssertContent(RaceConstants.BaseRaces.LightfootHalfling, 59, 63);
         }
 
         [Test]
         public void GoodWizardDeepHalflingPercentile()
         {
-            AssertContentOnSingleRoll(RaceConstants.BaseRaces.DeepHalfling, 64);
+            AssertContent(RaceConstants.BaseRaces.DeepHalfling, 64);
         }
 
         [Test]
         public void GoodWizardTallfellowHalflingPercentile()
         {
-            AssertContentIsInRange(RaceConstants.BaseRaces.TallfellowHalfling, 65, 67);
+            AssertContent(RaceConstants.BaseRaces.TallfellowHalfling, 65, 67);
         }
 
         [Test]
         public void GoodWizardHalfOrcPercentile()
         {
-            AssertContentOnSingleRoll(RaceConstants.BaseRaces.HalfOrc, 68);
+            AssertContent(RaceConstants.BaseRaces.HalfOrc, 68);
         }
 
         [Test]
         public void GoodWizardHumanPercentile()
         {
-            AssertContentIsInRange(RaceConstants.BaseRaces.Human, 69, 96);
+            AssertContent(RaceConstants.BaseRaces.Human, 69, 96);
         }
 
         [Test]
         public void GoodWizardSvirfneblinPercentile()
         {
-            AssertContentOnSingleRoll(RaceConstants.BaseRaces.Svirfneblin, 97);
+            AssertContent(RaceConstants.BaseRaces.Svirfneblin, 97);
         }
 
         [Test]

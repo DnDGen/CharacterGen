@@ -28,15 +28,15 @@ namespace NPCGen.Tests.Generation.Xml.Data
 
         protected void AssertEmpty(Int32 roll)
         {
-            AssertContentOnSingleRoll(String.Empty, roll);
+            AssertContent(String.Empty, roll);
         }
 
         protected void AssertEmpty(Int32 minInclusive, Int32 maxInclusive)
         {
-            AssertContentIsInRange(String.Empty, minInclusive, maxInclusive);
+            AssertContent(String.Empty, minInclusive, maxInclusive);
         }
 
-        protected void AssertContentIsInRange(String content, Int32 minInclusive, Int32 maxInclusive)
+        protected void AssertContent(String content, Int32 minInclusive, Int32 maxInclusive)
         {
             for (var roll = 1; roll <= 100; roll++)
             {
@@ -47,9 +47,9 @@ namespace NPCGen.Tests.Generation.Xml.Data
             }
         }
 
-        protected void AssertContentOnSingleRoll(String content, Int32 roll)
+        protected void AssertContent(String content, Int32 roll)
         {
-            AssertContentIsInRange(content, roll, roll);
+            AssertContent(content, roll, roll);
         }
 
         private void AssertRollGrantsContent(Int32 roll, String content)

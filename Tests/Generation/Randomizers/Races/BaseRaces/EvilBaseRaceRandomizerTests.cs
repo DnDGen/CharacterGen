@@ -135,9 +135,9 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.BaseRaces
         }
 
         [Test]
-        public void LizardfolkIsNotAllowed()
+        public void LizardfolkIsAllowed()
         {
-            AssertRaceIsNotAllowed(RaceConstants.BaseRaces.Lizardfolk);
+            AssertRaceIsAllowed(RaceConstants.BaseRaces.Lizardfolk);
         }
 
         [Test]

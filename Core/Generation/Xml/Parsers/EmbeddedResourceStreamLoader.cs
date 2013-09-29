@@ -1,8 +1,8 @@
-﻿using System;
+﻿using NPCGen.Core.Generation.Xml.Parsers.Interfaces;
+using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using NPCGen.Core.Generation.Xml.Parsers.Interfaces;
 
 namespace NPCGen.Core.Generation.Xml.Parsers
 {
@@ -14,7 +14,7 @@ namespace NPCGen.Core.Generation.Xml.Parsers
             var resources = executingAssembly.GetManifestResourceNames();
 
             if (!resources.Any(r => r.Contains(filename)))
-                throw new FileNotFoundException();
+                throw new FileNotFoundException(filename);
 
             var streamSource = resources.First(r => r.Contains(filename));
 
