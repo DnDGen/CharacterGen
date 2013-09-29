@@ -12,13 +12,13 @@ namespace NPCGen.Core.Generation.Providers
     {
         private IPercentileXmlParser percentileXmlParser;
         private IDice dice;
-        private Dictionary<String, List<PercentileObject>> cachedTables;
+        private Dictionary<String, IEnumerable<PercentileObject>> cachedTables;
 
         public PercentileResultProvider(IPercentileXmlParser percentileXmlParser, IDice dice)
         {
             this.percentileXmlParser = percentileXmlParser;
             this.dice = dice;
-            cachedTables = new Dictionary<String, List<PercentileObject>>();
+            cachedTables = new Dictionary<String, IEnumerable<PercentileObject>>();
         }
 
         public String GetPercentileResult(String tableName)

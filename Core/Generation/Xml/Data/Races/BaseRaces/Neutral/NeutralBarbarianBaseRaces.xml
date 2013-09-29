@@ -1,5 +1,50 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <percentile>
-  <object><lower>1</lower><content>Hill Dwarf</content><upper>2</upper></object>
+  <object>
+    <lower>1</lower>
+    <content>Deep Dwarf</content>
+    <upper>1</upper>
+  </object>
+  <object><lower>2</lower><content>Hill Dwarf</content><upper>2</upper></object>
+  <object>
+    <lower>3</lower>
+    <content>Wild Elf</content>
+    <upper>13</upper>
+  </object>
+  <object>
+    <lower>14</lower>
+    <content>Wood Elf</content>
+    <upper>14</upper>
+  </object>
+  <object>
+    <lower>15</lower>
+    <content>Half-Elf</content>
+    <upper>16</upper>
+  </object>
+  <object>
+    <lower>17</lower>
+    <content>Lightfoot Halfling</content>
+    <upper>18</upper>
+  </object>
+  <object>
+    <lower>19</lower>
+    <content>Deep Halfling</content>
+    <upper>19</upper>
+  </object>
+  <object>
+    <lower>20</lower>
+    <content>Half-Orc</content>
+    <upper>58</upper>
+  </object>
+  <object>
+    <lower>59</lower>
+    <content>Human</content>
+    <upper>87</upper>
+  </object>
+  <object>
+    <lower>88</lower>
+    <content>Lizardfolk</content>
+    <upper>98</upper>
+  </object>
 </percentile>

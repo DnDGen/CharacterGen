@@ -135,6 +135,8 @@
     <Compile Include="Generation\Xml\Data\Races\BaseRaces\Good\GoodRangerBaseRacesTests.cs" />
     <Compile Include="Generation\Xml\Data\Races\BaseRaces\Good\GoodRogueBaseRacesTests.cs" />
     <Compile Include="Generation\Xml\Data\Races\BaseRaces\Good\GoodSorcererBaseRacesTests.cs" />
+    <Compile Include="Generation\Xml\Data\Races\BaseRaces\Good\GoodWizardBaseRacesTests.cs" />
+    <Compile Include="Generation\Xml\Data\Races\BaseRaces\Neutral\NeutralBarbarianBaseRacesTests.cs" />
     <Compile Include="Generation\Xml\Parsers\EmbeddedResourceStreamLoaderTests.cs" />
     <Compile Include="Generation\Xml\Parsers\PercentileXmlParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

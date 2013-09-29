@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Xml;
-using NPCGen.Core.Generation.Xml.Parsers.Interfaces;
+﻿using NPCGen.Core.Generation.Xml.Parsers.Interfaces;
 using NPCGen.Core.Generation.Xml.Parsers.Objects;
+using System;
+using System.Collections.Generic;
+using System.Xml;
 
 namespace NPCGen.Core.Generation.Xml.Parsers
 {
@@ -18,7 +15,7 @@ namespace NPCGen.Core.Generation.Xml.Parsers
             this.streamLoader = streamLoader;
         }
 
-        public List<PercentileObject> Parse(String filename)
+        public IEnumerable<PercentileObject> Parse(String filename)
         {
             var results = new List<PercentileObject>();
 
