@@ -14,10 +14,10 @@
   <object>
     <lower>49</lower>
     <content>Human</content>
-    <upper>96</upper>
+    <upper>95</upper>
   </object>
   <object>
-    <lower>97</lower>
+    <lower>96</lower>
     <content>Lizardfolk</content>
     <upper>97</upper>
   </object>

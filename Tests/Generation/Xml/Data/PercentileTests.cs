@@ -38,15 +38,36 @@ namespace NPCGen.Tests.Generation.Xml.Data
 
         protected void AssertContentIsInRange(String content, Int32 minInclusive, Int32 maxInclusive)
         {
-            for (var roll = minInclusive; roll <= maxInclusive; roll++)
-                AssertContentOnSingleRoll(content, roll);
+            for (var roll = 1; roll <= 100; roll++)
+            {
+                if (roll >= minInclusive && roll <= maxInclusive)
+                    AssertRollGrantsContent(roll, content);
+                else
+                    AssertRollDoesNotGrantContent(roll, content);
+            }
         }
 
         protected void AssertContentOnSingleRoll(String content, Int32 roll)
         {
-            mockDice.Setup(d => d.Percentile(1, 0)).Returns(roll);
-            var result = percentileResultProvider.GetPercentileResult(tableName);
+            AssertContentIsInRange(content, roll, roll);
+        }
+
+        private void AssertRollGrantsContent(Int32 roll, String content)
+        {
+            var result = GetResult(roll);
             Assert.That(result, Is.EqualTo(content), String.Format("Roll: {0}", roll));
+        }
+
+        private void AssertRollDoesNotGrantContent(Int32 roll, String content)
+        {
+            var result = GetResult(roll);
+            Assert.That(result, Is.Not.EqualTo(content), String.Format("Roll: {0}", roll));
+        }
+
+        private String GetResult(Int32 roll)
+        {
+            mockDice.Setup(d => d.Percentile(1, 0)).Returns(roll);
+            return percentileResultProvider.GetPercentileResult(tableName);
         }
     }
 }

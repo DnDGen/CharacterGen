@@ -1,5 +1,35 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <percentile>
-  <object><lower>1</lower><content>Aasimar</content><upper>2</upper></object>
+  <object><lower>1</lower><content>High Elf</content><upper>2</upper></object>
+  <object>
+    <lower>3</lower>
+    <content>Wood Elf</content>
+    <upper>3</upper>
+  </object>
+  <object>
+    <lower>4</lower>
+    <content>Half-Elf</content>
+    <upper>13</upper>
+  </object>
+  <object>
+    <lower>14</lower>
+    <content>Lightfoot Halfling</content>
+    <upper>14</upper>
+  </object>
+  <object>
+    <lower>15</lower>
+    <content>Deep Halfling</content>
+    <upper>15</upper>
+  </object>
+  <object>
+    <lower>16</lower>
+    <content>Half-Orc</content>
+    <upper>25</upper>
+  </object>
+  <object>
+    <lower>26</lower>
+    <content>Human</content>
+    <upper>100</upper>
+  </object>
 </percentile>

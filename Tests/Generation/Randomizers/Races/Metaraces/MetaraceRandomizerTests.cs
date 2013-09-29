@@ -1,7 +1,8 @@
-﻿using System;
-using Moq;
+﻿using Moq;
+using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Generation.Randomizers.Races.Metaraces;
 using NUnit.Framework;
+using System;
 
 namespace NPCGen.Tests.Generation.Randomizers.Races.Metaraces
 {
@@ -16,7 +17,7 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.Metaraces
                 .Returns(metarace)
                 .Returns(controlCase);
 
-            return randomizer.Randomize(alignment, String.Empty);
+            return randomizer.Randomize(new Alignment(), String.Empty);
         }
     }
 }

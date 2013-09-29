@@ -1,7 +1,6 @@
-﻿using System;
-using NPCGen.Core.Data.Alignments;
-using NPCGen.Core.Data.Races;
+﻿using NPCGen.Core.Data.Races;
 using NPCGen.Core.Generation.Providers.Interfaces;
+using System;
 
 namespace NPCGen.Core.Generation.Randomizers.Races.BaseRaces
 {
@@ -9,7 +8,7 @@ namespace NPCGen.Core.Generation.Randomizers.Races.BaseRaces
     {
         public EvilBaseRaceRandomizer(IPercentileResultProvider percentileResultProvider) : base(percentileResultProvider) { }
 
-        protected override Boolean BaseRaceIsAllowed(String baseRace, Alignment alignment)
+        protected override Boolean BaseRaceIsAllowed(String baseRace)
         {
             switch (baseRace)
             {
@@ -29,21 +28,21 @@ namespace NPCGen.Core.Generation.Randomizers.Races.BaseRaces
                 case RaceConstants.BaseRaces.Troglodyte:
                 case RaceConstants.BaseRaces.MindFlayer:
                 case RaceConstants.BaseRaces.Minotaur:
-                case RaceConstants.BaseRaces.Tiefling: return alignment.IsEvil();
+                case RaceConstants.BaseRaces.Tiefling: return true;
                 case RaceConstants.BaseRaces.Doppelganger:
                 case RaceConstants.BaseRaces.Lizardfolk: return false;
                 case RaceConstants.BaseRaces.DeepDwarf:
-                case RaceConstants.BaseRaces.DeepHalfling:
+                case RaceConstants.BaseRaces.DeepHalfling: return true;
                 case RaceConstants.BaseRaces.ForestGnome:
-                case RaceConstants.BaseRaces.GrayElf:
+                case RaceConstants.BaseRaces.GrayElf: return false;
                 case RaceConstants.BaseRaces.HalfElf:
                 case RaceConstants.BaseRaces.HalfOrc:
                 case RaceConstants.BaseRaces.HighElf:
                 case RaceConstants.BaseRaces.HillDwarf:
                 case RaceConstants.BaseRaces.Human:
-                case RaceConstants.BaseRaces.LightfootHalfling:
+                case RaceConstants.BaseRaces.LightfootHalfling: return true;
                 case RaceConstants.BaseRaces.MountainDwarf:
-                case RaceConstants.BaseRaces.RockGnome:
+                case RaceConstants.BaseRaces.RockGnome: return false;
                 case RaceConstants.BaseRaces.TallfellowHalfling:
                 case RaceConstants.BaseRaces.WildElf:
                 case RaceConstants.BaseRaces.WoodElf: return true;

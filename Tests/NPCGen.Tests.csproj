@@ -138,6 +138,13 @@
     <Compile Include="Generation\Xml\Data\Races\BaseRaces\Good\GoodWizardBaseRacesTests.cs" />
     <Compile Include="Generation\Xml\Data\Races\BaseRaces\Neutral\NeutralBarbarianBaseRacesTests.cs" />
     <Compile Include="Generation\Xml\Data\Races\BaseRaces\Neutral\NeutralBardBaseRacesTests.cs" />
+    <Compile Include="Generation\Xml\Data\Races\BaseRaces\Neutral\NeutralClericBaseRacesTests.cs" />
+    <Compile Include="Generation\Xml\Data\Races\BaseRaces\Neutral\NeutralDruidBaseRacesTests.cs" />
+    <Compile Include="Generation\Xml\Data\Races\BaseRaces\Neutral\NeutralFighterBaseRacesTests.cs" />
+    <Compile Include="Generation\Xml\Data\Races\BaseRaces\Neutral\NeutralMonkBaseRacesTests.cs" />
+    <Compile Include="Generation\Xml\Data\Races\BaseRaces\Neutral\NeutralRangerBaseRacesTests.cs" />
+    <Compile Include="Generation\Xml\Data\Races\BaseRaces\Neutral\NeutralRogueBaseRacesTests.cs" />
+    <Compile Include="Generation\Xml\Data\Races\BaseRaces\Neutral\NeutralSorcererBaseRacesTests.cs" />
     <Compile Include="Generation\Xml\Parsers\EmbeddedResourceStreamLoaderTests.cs" />
     <Compile Include="Generation\Xml\Parsers\PercentileXmlParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

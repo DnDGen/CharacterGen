@@ -1,5 +1,4 @@
-﻿using NPCGen.Core.Data.Alignments;
-using NPCGen.Core.Data.Races;
+﻿using NPCGen.Core.Data.Races;
 using NPCGen.Core.Generation.Providers.Interfaces;
 using System;
 
@@ -9,7 +8,7 @@ namespace NPCGen.Core.Generation.Randomizers.Races.BaseRaces
     {
         public StandardBaseRaceRandomizer(IPercentileResultProvider percentileResultProvider) : base(percentileResultProvider) { }
 
-        protected override Boolean BaseRaceIsAllowed(String baseRace, Alignment alignment)
+        protected override Boolean BaseRaceIsAllowed(String baseRace)
         {
             switch (baseRace)
             {

@@ -61,7 +61,7 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.BaseRaces
 
             public TestBaseRaceRandomizer(IPercentileResultProvider percentileResultProvider) : base(percentileResultProvider) { }
 
-            protected override Boolean BaseRaceIsAllowed(String baseRace, Alignment alignment)
+            protected override Boolean BaseRaceIsAllowed(String baseRace)
             {
                 var toReturn = Allowed;
                 Allowed = !Allowed;

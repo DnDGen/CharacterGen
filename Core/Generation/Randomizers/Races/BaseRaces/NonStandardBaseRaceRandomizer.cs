@@ -1,5 +1,4 @@
-﻿using NPCGen.Core.Data.Alignments;
-using NPCGen.Core.Data.Races;
+﻿using NPCGen.Core.Data.Races;
 using NPCGen.Core.Generation.Providers.Interfaces;
 using System;
 
@@ -9,7 +8,7 @@ namespace NPCGen.Core.Generation.Randomizers.Races.BaseRaces
     {
         public NonStandardBaseRaceRandomizer(IPercentileResultProvider percentileResultProvider) : base(percentileResultProvider) { }
 
-        protected override Boolean BaseRaceIsAllowed(String baseRace, Alignment alignment)
+        protected override Boolean BaseRaceIsAllowed(String baseRace)
         {
             switch (baseRace)
             {
@@ -21,7 +20,7 @@ namespace NPCGen.Core.Generation.Randomizers.Races.BaseRaces
                 case RaceConstants.BaseRaces.HalfElf:
                 case RaceConstants.BaseRaces.RockGnome: return false;
                 case RaceConstants.BaseRaces.Svirfneblin:
-                case RaceConstants.BaseRaces.Aasimar: return alignment.IsGood();
+                case RaceConstants.BaseRaces.Aasimar: return true;
                 case RaceConstants.BaseRaces.DerroDwarf:
                 case RaceConstants.BaseRaces.Drow:
                 case RaceConstants.BaseRaces.Duergar:
@@ -36,9 +35,9 @@ namespace NPCGen.Core.Generation.Randomizers.Races.BaseRaces
                 case RaceConstants.BaseRaces.Gnoll:
                 case RaceConstants.BaseRaces.Bugbear:
                 case RaceConstants.BaseRaces.Tiefling:
-                case RaceConstants.BaseRaces.Kobold: return alignment.IsEvil();
+                case RaceConstants.BaseRaces.Kobold: return true;
                 case RaceConstants.BaseRaces.Doppelganger:
-                case RaceConstants.BaseRaces.Lizardfolk: return alignment.Goodness == AlignmentConstants.Neutral;
+                case RaceConstants.BaseRaces.Lizardfolk: return true;
                 case RaceConstants.BaseRaces.MountainDwarf:
                 case RaceConstants.BaseRaces.ForestGnome:
                 case RaceConstants.BaseRaces.TallfellowHalfling:

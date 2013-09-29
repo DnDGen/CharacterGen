@@ -1,5 +1,4 @@
-﻿using NPCGen.Core.Data.Alignments;
-using NPCGen.Core.Data.Races;
+﻿using NPCGen.Core.Data.Races;
 using NPCGen.Core.Generation.Randomizers.Races.BaseRaces;
 using NUnit.Framework;
 
@@ -16,207 +15,207 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.BaseRaces
         }
 
         [Test]
-        public void AasimarIsNeverAllowed()
+        public void AasimarIsNotAllowed()
         {
-            AssertRaceIsNeverAllowed(RaceConstants.BaseRaces.Aasimar);
+            AssertRaceIsNotAllowed(RaceConstants.BaseRaces.Aasimar);
         }
 
         [Test]
-        public void BugbearIsAllowedOnlyIfAlignmentIsEvil()
+        public void BugbearIsAllowed()
         {
-            AssertRaceIsAllowedOnlyForAlignment(RaceConstants.BaseRaces.Bugbear, AlignmentConstants.Evil);
+            AssertRaceIsAllowed(RaceConstants.BaseRaces.Bugbear);
         }
 
         [Test]
-        public void DeepDwarfIsAlwaysAllowed()
+        public void DeepDwarfIsAllowed()
         {
-            AssertRaceIsAlwaysAllowed(RaceConstants.BaseRaces.DeepDwarf);
+            AssertRaceIsAllowed(RaceConstants.BaseRaces.DeepDwarf);
         }
 
         [Test]
-        public void DeepHalflingIsAlwaysAllowed()
+        public void DeepHalflingIsAllowed()
         {
-            AssertRaceIsAlwaysAllowed(RaceConstants.BaseRaces.DeepHalfling);
+            AssertRaceIsAllowed(RaceConstants.BaseRaces.DeepHalfling);
         }
 
         [Test]
-        public void DerroDwarfIsAllowedOnlyIfAlignmentIsEvil()
+        public void DerroDwarfIsAllowed()
         {
-            AssertRaceIsAllowedOnlyForAlignment(RaceConstants.BaseRaces.DerroDwarf, AlignmentConstants.Evil);
+            AssertRaceIsAllowed(RaceConstants.BaseRaces.DerroDwarf);
         }
 
         [Test]
-        public void DoppelgangerIsNeverAllowed()
+        public void DoppelgangerIsNotAllowed()
         {
-            AssertRaceIsNeverAllowed(RaceConstants.BaseRaces.Doppelganger);
+            AssertRaceIsNotAllowed(RaceConstants.BaseRaces.Doppelganger);
         }
 
         [Test]
-        public void DrowIsAllowedOnlyIfAlignmentIsEvil()
+        public void DrowIsAllowed()
         {
-            AssertRaceIsAllowedOnlyForAlignment(RaceConstants.BaseRaces.Drow, AlignmentConstants.Evil);
+            AssertRaceIsAllowed(RaceConstants.BaseRaces.Drow);
         }
 
         [Test]
-        public void DuergarIsAllowedOnlyIfAlignmentIsEvil()
+        public void DuergarIsAllowed()
         {
-            AssertRaceIsAllowedOnlyForAlignment(RaceConstants.BaseRaces.Duergar, AlignmentConstants.Evil);
+            AssertRaceIsAllowed(RaceConstants.BaseRaces.Duergar);
         }
 
         [Test]
-        public void ForestGnomeIsAlwaysAllowed()
+        public void ForestGnomeIsNotAllowed()
         {
-            AssertRaceIsAlwaysAllowed(RaceConstants.BaseRaces.ForestGnome);
+            AssertRaceIsNotAllowed(RaceConstants.BaseRaces.ForestGnome);
         }
 
         [Test]
-        public void GnollIsAllowedOnlyIfAlignmentIsEvil()
+        public void GnollIsAllowed()
         {
-            AssertRaceIsAllowedOnlyForAlignment(RaceConstants.BaseRaces.Gnoll, AlignmentConstants.Evil);
+            AssertRaceIsAllowed(RaceConstants.BaseRaces.Gnoll);
         }
 
         [Test]
-        public void GoblinIsAllowedOnlyIfAlignmentIsEvil()
+        public void GoblinIsAllowed()
         {
-            AssertRaceIsAllowedOnlyForAlignment(RaceConstants.BaseRaces.Goblin, AlignmentConstants.Evil);
+            AssertRaceIsAllowed(RaceConstants.BaseRaces.Goblin);
         }
 
         [Test]
-        public void GrayElfIsAlwaysAllowed()
+        public void GrayElfIsNotAllowed()
         {
-            AssertRaceIsAlwaysAllowed(RaceConstants.BaseRaces.GrayElf);
+            AssertRaceIsNotAllowed(RaceConstants.BaseRaces.GrayElf);
         }
 
         [Test]
-        public void HalfElfIsAlwaysAllowed()
+        public void HalfElfIsAllowed()
         {
-            AssertRaceIsAlwaysAllowed(RaceConstants.BaseRaces.HalfElf);
+            AssertRaceIsAllowed(RaceConstants.BaseRaces.HalfElf);
         }
 
         [Test]
-        public void HalfOrcIsAlwaysAllowed()
+        public void HalfOrcIsAllowed()
         {
-            AssertRaceIsAlwaysAllowed(RaceConstants.BaseRaces.HalfOrc);
+            AssertRaceIsAllowed(RaceConstants.BaseRaces.HalfOrc);
         }
 
         [Test]
-        public void HighElfIsAlwaysAllowed()
+        public void HighElfIsAllowed()
         {
-            AssertRaceIsAlwaysAllowed(RaceConstants.BaseRaces.HighElf);
+            AssertRaceIsAllowed(RaceConstants.BaseRaces.HighElf);
         }
 
         [Test]
-        public void HillDwarfIsAlwaysAllowed()
+        public void HillDwarfIsAllowed()
         {
-            AssertRaceIsAlwaysAllowed(RaceConstants.BaseRaces.HillDwarf);
+            AssertRaceIsAllowed(RaceConstants.BaseRaces.HillDwarf);
         }
 
         [Test]
-        public void HobgoblinIsAllowedOnlyIfAlignmentIsEvil()
+        public void HobgoblinIsAllowed()
         {
-            AssertRaceIsAllowedOnlyForAlignment(RaceConstants.BaseRaces.Hobgoblin, AlignmentConstants.Evil);
+            AssertRaceIsAllowed(RaceConstants.BaseRaces.Hobgoblin);
         }
 
         [Test]
-        public void HumanIsAlwaysAllowed()
+        public void HumanIsAllowed()
         {
-            AssertControlIsAlwaysAllowed(RaceConstants.BaseRaces.HighElf);
+            AssertControlIsAllowed(RaceConstants.BaseRaces.HighElf);
         }
 
         [Test]
-        public void KoboldIsAllowedOnlyIfAlignmentIsEvil()
+        public void KoboldIsAllowed()
         {
-            AssertRaceIsAllowedOnlyForAlignment(RaceConstants.BaseRaces.Kobold, AlignmentConstants.Evil);
+            AssertRaceIsAllowed(RaceConstants.BaseRaces.Kobold);
         }
 
         [Test]
-        public void LightfootHalflingIsAlwaysAllowed()
+        public void LightfootHalflingIsAllowed()
         {
-            AssertRaceIsAlwaysAllowed(RaceConstants.BaseRaces.LightfootHalfling);
+            AssertRaceIsAllowed(RaceConstants.BaseRaces.LightfootHalfling);
         }
 
         [Test]
-        public void LizardfolkIsNeverAllowed()
+        public void LizardfolkIsNotAllowed()
         {
-            AssertRaceIsNeverAllowed(RaceConstants.BaseRaces.Lizardfolk);
+            AssertRaceIsNotAllowed(RaceConstants.BaseRaces.Lizardfolk);
         }
 
         [Test]
-        public void MindFlayerIsAllowedOnlyIfAlignmentIsEvil()
+        public void MindFlayerIsAllowed()
         {
-            AssertRaceIsAllowedOnlyForAlignment(RaceConstants.BaseRaces.MindFlayer, AlignmentConstants.Evil);
+            AssertRaceIsAllowed(RaceConstants.BaseRaces.MindFlayer);
         }
 
         [Test]
-        public void MinotaurIsAllowedOnlyIfAlignmentIsEvil()
+        public void MinotaurIsAllowed()
         {
-            AssertRaceIsAllowedOnlyForAlignment(RaceConstants.BaseRaces.Minotaur, AlignmentConstants.Evil);
+            AssertRaceIsAllowed(RaceConstants.BaseRaces.Minotaur);
         }
 
         [Test]
-        public void MountainDwarfIsAlwaysAllowed()
+        public void MountainDwarfIsNotAllowed()
         {
-            AssertRaceIsAlwaysAllowed(RaceConstants.BaseRaces.MountainDwarf);
+            AssertRaceIsNotAllowed(RaceConstants.BaseRaces.MountainDwarf);
         }
 
         [Test]
-        public void OgreIsAllowedOnlyIfAlignmentIsEvil()
+        public void OgreIsAllowed()
         {
-            AssertRaceIsAllowedOnlyForAlignment(RaceConstants.BaseRaces.Ogre, AlignmentConstants.Evil);
+            AssertRaceIsAllowed(RaceConstants.BaseRaces.Ogre);
         }
 
         [Test]
-        public void OgreMageIsAllowedOnlyIfAlignmentIsEvil()
+        public void OgreMageIsAllowed()
         {
-            AssertRaceIsAllowedOnlyForAlignment(RaceConstants.BaseRaces.OgreMage, AlignmentConstants.Evil);
+            AssertRaceIsAllowed(RaceConstants.BaseRaces.OgreMage);
         }
 
         [Test]
-        public void OrcIsAllowedOnlyIfAlignmentIsEvil()
+        public void OrcIsAllowed()
         {
-            AssertRaceIsAllowedOnlyForAlignment(RaceConstants.BaseRaces.Orc, AlignmentConstants.Evil);
+            AssertRaceIsAllowed(RaceConstants.BaseRaces.Orc);
         }
 
         [Test]
-        public void RockGnomeIsAlwaysAllowed()
+        public void RockGnomeIsNotAllowed()
         {
-            AssertRaceIsAlwaysAllowed(RaceConstants.BaseRaces.RockGnome);
+            AssertRaceIsNotAllowed(RaceConstants.BaseRaces.RockGnome);
         }
 
         [Test]
-        public void SvirfneblinIsNeverAllowed()
+        public void SvirfneblinIsNotAllowed()
         {
-            AssertRaceIsNeverAllowed(RaceConstants.BaseRaces.Svirfneblin);
+            AssertRaceIsNotAllowed(RaceConstants.BaseRaces.Svirfneblin);
         }
 
         [Test]
-        public void TallfellowHalflingIsAlwaysAllowed()
+        public void TallfellowHalflingIsAllowed()
         {
-            AssertRaceIsAlwaysAllowed(RaceConstants.BaseRaces.TallfellowHalfling);
+            AssertRaceIsAllowed(RaceConstants.BaseRaces.TallfellowHalfling);
         }
 
         [Test]
-        public void TieflingIsAllowedOnlyIfAlignmentIsEvil()
+        public void TieflingIsAllowed()
         {
-            AssertRaceIsAllowedOnlyForAlignment(RaceConstants.BaseRaces.Tiefling, AlignmentConstants.Evil);
+            AssertRaceIsAllowed(RaceConstants.BaseRaces.Tiefling);
         }
 
         [Test]
-        public void TroglodyteIsAllowedOnlyIfAlignmentIsEvil()
+        public void TroglodyteIsAllowed()
         {
-            AssertRaceIsAllowedOnlyForAlignment(RaceConstants.BaseRaces.Troglodyte, AlignmentConstants.Evil);
+            AssertRaceIsAllowed(RaceConstants.BaseRaces.Troglodyte);
         }
 
         [Test]
-        public void WildElfIsAlwaysAllowed()
+        public void WildElfIsAllowed()
         {
-            AssertRaceIsAlwaysAllowed(RaceConstants.BaseRaces.WildElf);
+            AssertRaceIsAllowed(RaceConstants.BaseRaces.WildElf);
         }
 
         [Test]
-        public void WoodElfIsAlwaysAllowed()
+        public void WoodElfIsAllowed()
         {
-            AssertRaceIsAlwaysAllowed(RaceConstants.BaseRaces.WoodElf);
+            AssertRaceIsAllowed(RaceConstants.BaseRaces.WoodElf);
         }
     }
 }
