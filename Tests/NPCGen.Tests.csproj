@@ -127,6 +127,7 @@
     <Compile Include="Generation\Xml\Data\PercentileTests.cs" />
     <Compile Include="Generation\Xml\Data\Races\BaseRaces\Evil\EvilBarbarianBaseRacesTests.cs" />
     <Compile Include="Generation\Xml\Data\Races\BaseRaces\Evil\EvilBardBaseRacesTests.cs" />
+    <Compile Include="Generation\Xml\Data\Races\BaseRaces\Evil\EvilClericBaseRacesTests.cs" />
     <Compile Include="Generation\Xml\Data\Races\BaseRaces\Good\GoodClericBaseRacesTests.cs" />
     <Compile Include="Generation\Xml\Data\Races\BaseRaces\Good\GoodBarbarianBaseRacesTests.cs" />
     <Compile Include="Generation\Xml\Data\Races\BaseRaces\Good\GoodBardBaseRacesTests.cs" />
