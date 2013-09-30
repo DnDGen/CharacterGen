@@ -1,5 +1,4 @@
-﻿using System;
-using NPCGen.Core.Data;
+﻿using NPCGen.Core.Data;
 using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Data.Stats;
 using NPCGen.Core.Generation.Factories.Interfaces;
@@ -7,6 +6,7 @@ using NPCGen.Core.Generation.Verifiers;
 using NPCGen.Core.Generation.Verifiers.BaseRaces;
 using NPCGen.Core.Generation.Verifiers.CharacterClasses;
 using NPCGen.Core.Generation.Verifiers.Exceptions;
+using System;
 
 namespace NPCGen.Core.Generation.Factories
 {

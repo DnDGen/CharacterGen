@@ -3,53 +3,53 @@
 <percentile>
   <object>
     <lower>1</lower>
-    <content>Gray Elf</content>
-    <upper>1</upper>
+    <content>Wood Elf</content>
+    <upper>2</upper>
   </object>
   <object>
-    <lower>2</lower>
-    <content>High Elf</content>
+    <lower>3</lower>
+    <content>Half-Elf</content>
+    <upper>3</upper>
+  </object>
+  <object>
+    <lower>4</lower>
+    <content>Tallfellow Halfling</content>
+    <upper>4</upper>
+  </object>
+  <object>
+    <lower>5</lower>
+    <content>Half-Orc</content>
     <upper>6</upper>
   </object>
+  <object><lower>7</lower><content>Human</content><upper>56</upper></object>
   <object>
-    <lower>7</lower>
-    <content>Wild Elf</content>
-    <upper>11</upper>
-  </object>
-  <object>
-    <lower>12</lower>
-    <content>Wood Elf</content>
-    <upper>31</upper>
-  </object>
-  <object>
-    <lower>32</lower>
-    <content>Forest Gnome</content>
-    <upper>32</upper>
-  </object>
-  <object>
-    <lower>33</lower>
-    <content>Half-Elf</content>
-    <upper>37</upper>
-  </object>
-  <object>
-    <lower>38</lower>
-    <content>Lightfoot Halfling</content>
-    <upper>38</upper>
-  </object>
-  <object>
-    <lower>39</lower>
-    <content>Tallfellow Halfling</content>
-    <upper>39</upper>
-  </object>
-  <object>
-    <lower>40</lower>
-    <content>Half-Orc</content>
-    <upper>40</upper>
-  </object>
-  <object><lower>41</lower><content>Human</content><upper>88</upper></object>
-  <object>
-    <lower>89</lower>
+    <lower>57</lower>
     <content>Lizardfolk</content>
-    <upper>98</upper>
+    <upper>71</upper>
+  </object>
+  <object>
+    <lower>72</lower>
+    <content>Goblin</content>
+    <upper>72</upper>
+  </object>
+  <object>
+    <lower>73</lower>
+    <content>Hobgoblin</content>
+    <upper>73</upper>
+  </object>
+  <object>
+    <lower>74</lower>
+    <content>Kobold</content>
+    <upper>74</upper>
+  </object>
+  <object>
+    <lower>75</lower>
+    <content>Orc</content>
+    <upper>75</upper>
+  </object>
+  <object>
+    <lower>76</lower>
+    <content>Gnoll</content>
+    <upper>100</upper>
   </object>
 </percentile>

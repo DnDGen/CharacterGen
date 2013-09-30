@@ -2,31 +2,54 @@
 
 <percentile>
   <object><lower>1</lower><content>Deep Dwarf</content><upper>1</upper></object>
-  <object><lower>2</lower><content>Hill Dwarf</content><upper>4</upper></object>
-  <object><lower>5</lower><content>High Elf</content><upper>8</upper></object>
-  <object><lower>9</lower><content>Wood Elf</content><upper>9</upper></object>
-  <object><lower>10</lower><content>Rock Gnome</content><upper>10</upper></object>
-  <object><lower>11</lower><content>Half-Elf</content><upper>25</upper></object>
-  <object><lower>26</lower><content>Lightfoot Halfling</content><upper>53</upper></object>
-  <object><lower>54</lower><content>Deep Halfling</content><upper>58</upper></object>
+  <object><lower>2</lower><content>High Elf</content><upper>2</upper></object>
+  <object><lower>3</lower><content>Wood Elf</content><upper>3</upper></object>
+  <object><lower>4</lower><content>Half-Elf</content><upper>18</upper></object>
+  <object><lower>19</lower><content>Lightfoot Halfling</content><upper>38</upper></object>
+  <object><lower>39</lower><content>Deep Halfling</content><upper>39</upper></object>
   <object>
-    <lower>59</lower>
+    <lower>40</lower>
     <content>Tallfellow Halfling</content>
-    <upper>63</upper>
+    <upper>40</upper>
   </object>
   <object>
-    <lower>64</lower>
+    <lower>41</lower>
     <content>Half-Orc</content>
-    <upper>73</upper>
+    <upper>50</upper>
   </object>
   <object>
-    <lower>74</lower>
+    <lower>51</lower>
     <content>Human</content>
-    <upper>97</upper>
+    <upper>70</upper>
   </object>
   <object>
-    <lower>98</lower>
-    <content>Doppelganger</content>
-    <upper>98</upper>
+    <lower>71</lower>
+    <content>Goblin</content>
+    <upper>85</upper>
+  </object>
+  <object>
+    <lower>86</lower>
+    <content>Hobgoblin</content>
+    <upper>86</upper>
+  </object>
+  <object>
+    <lower>87</lower>
+    <content>Kobold</content>
+    <upper>87</upper>
+  </object>
+  <object>
+    <lower>88</lower>
+    <content>Tiefling</content>
+    <upper>89</upper>
+  </object>
+  <object>
+    <lower>90</lower>
+    <content>Bugbear</content>
+    <upper>93</upper>
+  </object>
+  <object>
+    <lower>94</lower>
+    <content>Mind Flayer</content>
+    <upper>94</upper>
   </object>
 </percentile>
