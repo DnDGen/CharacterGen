@@ -8,8 +8,8 @@ namespace NPCGen.Core.Generation.Factories.Interfaces
 {
     public interface IRaceFactory
     {
-        IBaseRaceRandomizer BaseRaceRandomizer { get; }
-        IMetaraceRandomizer MetaraceRandomizer { get; }
+        IBaseRaceRandomizer BaseRaceRandomizer { get; set; }
+        IMetaraceRandomizer MetaraceRandomizer { get; set; }
 
         Race Generate(Alignment alignment, CharacterClass characterClass);
     }

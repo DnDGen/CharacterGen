@@ -65,6 +65,7 @@
     <Compile Include="Generation\Factories\Interfaces\ICharacterFactory.cs" />
     <Compile Include="Generation\Factories\Interfaces\IRaceFactory.cs" />
     <Compile Include="Generation\Factories\Interfaces\IStatsFactory.cs" />
+    <Compile Include="Generation\Factories\RaceFactory.cs" />
     <Compile Include="Generation\Factories\StatsFactory.cs" />
     <Compile Include="Generation\Randomizers\Alignments\AnyAlignmentRandomizer.cs" />
     <Compile Include="Generation\Randomizers\Alignments\BaseAlignmentRandomizer.cs" />
