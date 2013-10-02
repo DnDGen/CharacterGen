@@ -1,13 +1,12 @@
-﻿using D20Dice.Dice;
+﻿using System;
+using D20Dice.Dice;
 using Moq;
 using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Generation.Factories;
 using NPCGen.Core.Generation.Factories.Interfaces;
-using NPCGen.Core.Generation.Randomizers.ClassNames;
-using NPCGen.Core.Generation.Randomizers.Level;
+using NPCGen.Core.Generation.Randomizers.CharacterClasses.Interfaces;
 using NUnit.Framework;
-using System;
 
 namespace NPCGen.Tests.Generation.Factories
 {

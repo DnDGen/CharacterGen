@@ -2,7 +2,7 @@
 using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Generation.Factories;
 using NPCGen.Core.Generation.Factories.Interfaces;
-using NPCGen.Core.Generation.Randomizers.Alignments;
+using NPCGen.Core.Generation.Randomizers.Alignments.Interfaces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Generation.Factories

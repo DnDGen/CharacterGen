@@ -1,17 +1,17 @@
 ﻿using NPCGen.Core.Data.CharacterClasses;
-using NPCGen.Core.Generation.Randomizers.ClassNames;
+using NPCGen.Core.Generation.Randomizers.CharacterClasses.ClassNames;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Generation.Randomizers.ClassNames
+namespace NPCGen.Tests.Generation.Randomizers.CharacterClasses.ClassNames
 {
     [TestFixture]
-    public class StealthClassNameRandomizerTests : ClassNameRandomizerTests
+    public class MageClassNameRandomizerTests : ClassNameRandomizerTests
     {
         [SetUp]
         public void Setup()
         {
-            randomizer = new StealthClassNameRandomizer(mockPercentileResultProvider.Object);
-            controlCase = CharacterClassConstants.Rogue;
+            randomizer = new MageClassNameRandomizer(mockPercentileResultProvider.Object);
+            controlCase = CharacterClassConstants.Wizard;
         }
 
         [Test]
@@ -33,21 +33,21 @@ namespace NPCGen.Tests.Generation.Randomizers.ClassNames
         }
 
         [Test]
-        public void SorcererNeverAllowed()
+        public void SorcererAlwaysAllowed()
         {
-            AssertClassIsNeverAllowed(CharacterClassConstants.Sorcerer);
+            AssertClassIsAlwaysAllowed(CharacterClassConstants.Sorcerer);
         }
 
         [Test]
-        public void RogueAlwaysAllowed()
+        public void RogueNeverAllowed()
         {
-            AssertControlIsAlwaysAllowed(CharacterClassConstants.Ranger);
+            AssertClassIsNeverAllowed(CharacterClassConstants.Rogue);
         }
 
         [Test]
-        public void WizardNeverAllowed()
+        public void WizardAlwaysAllowed()
         {
-            AssertClassIsNeverAllowed(CharacterClassConstants.Wizard);
+            AssertControlIsAlwaysAllowed(CharacterClassConstants.Sorcerer);
         }
 
         [Test]

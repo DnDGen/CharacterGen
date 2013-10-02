@@ -2,7 +2,7 @@
 using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Generation.Randomizers.Races.Interfaces;
 
-namespace NPCGen.Core.Generation.Verifiers.BaseRaces
+namespace NPCGen.Core.Generation.Verifiers.Interfaces
 {
     public interface IBaseRaceVerifier
     {

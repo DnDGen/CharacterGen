@@ -3,7 +3,7 @@ using NPCGen.Core.Generation.Randomizers.Alignments.Interfaces;
 using NPCGen.Core.Generation.Randomizers.CharacterClasses.Interfaces;
 using NPCGen.Core.Generation.Randomizers.Races.Interfaces;
 
-namespace NPCGen.Core.Generation.Verifiers
+namespace NPCGen.Core.Generation.Verifiers.Interfaces
 {
     public interface IRandomizerVerifier
     {

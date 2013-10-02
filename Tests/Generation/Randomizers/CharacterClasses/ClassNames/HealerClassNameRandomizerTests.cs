@@ -1,17 +1,17 @@
 ﻿using NPCGen.Core.Data.CharacterClasses;
-using NPCGen.Core.Generation.Randomizers.ClassNames;
+using NPCGen.Core.Generation.Randomizers.CharacterClasses.ClassNames;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Generation.Randomizers.ClassNames
+namespace NPCGen.Tests.Generation.Randomizers.CharacterClasses.ClassNames
 {
     [TestFixture]
-    public class SpellcasterClassNameRandomizerTests : ClassNameRandomizerTests
+    public class HealerClassNameRandomizerTests : ClassNameRandomizerTests
     {
         [SetUp]
         public void Setup()
         {
-            randomizer = new SpellcasterClassNameRandomizer(mockPercentileResultProvider.Object);
-            controlCase = CharacterClassConstants.Wizard;
+            randomizer = new HealerClassNameRandomizer(mockPercentileResultProvider.Object);
+            controlCase = CharacterClassConstants.Cleric;
         }
 
         [Test]
@@ -23,7 +23,7 @@ namespace NPCGen.Tests.Generation.Randomizers.ClassNames
         [Test]
         public void ClericAlwaysAllowed()
         {
-            AssertClassIsAlwaysAllowed(CharacterClassConstants.Cleric);
+            AssertControlIsAlwaysAllowed(CharacterClassConstants.Ranger);
         }
 
         [Test]
@@ -33,9 +33,9 @@ namespace NPCGen.Tests.Generation.Randomizers.ClassNames
         }
 
         [Test]
-        public void SorcererAlwaysAllowed()
+        public void SorcererNeverAllowed()
         {
-            AssertClassIsAlwaysAllowed(CharacterClassConstants.Sorcerer);
+            AssertClassIsNeverAllowed(CharacterClassConstants.Sorcerer);
         }
 
         [Test]
@@ -45,9 +45,9 @@ namespace NPCGen.Tests.Generation.Randomizers.ClassNames
         }
 
         [Test]
-        public void WizardAlwaysAllowed()
+        public void WizardNeverAllowed()
         {
-            AssertControlIsAlwaysAllowed(CharacterClassConstants.Sorcerer);
+            AssertClassIsNeverAllowed(CharacterClassConstants.Wizard);
         }
 
         [Test]
@@ -57,7 +57,7 @@ namespace NPCGen.Tests.Generation.Randomizers.ClassNames
         }
 
         [Test]
-        public void BardNotAllowedIfAlignmentIsLawful()
+        public void BardAllowedIfAlignmentIsNotLawful()
         {
             AssertClassMustNotBeLawful(CharacterClassConstants.Bard);
         }
@@ -75,7 +75,7 @@ namespace NPCGen.Tests.Generation.Randomizers.ClassNames
         }
 
         [Test]
-        public void PaladinAllowedIfAlignmentIsLawfulGood()
+        public void PaladinNotAllowedIfAlignmentIsNotLawful()
         {
             AssertPaladinIsAllowed();
         }

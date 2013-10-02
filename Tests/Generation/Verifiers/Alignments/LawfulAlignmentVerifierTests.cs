@@ -1,5 +1,5 @@
 ﻿using NPCGen.Core.Data.CharacterClasses;
-using NPCGen.Core.Generation.Randomizers.ClassNames;
+using NPCGen.Core.Generation.Randomizers.CharacterClasses.ClassNames;
 using NPCGen.Core.Generation.Verifiers.Alignments;
 using NUnit.Framework;
 

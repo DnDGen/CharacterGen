@@ -81,24 +81,24 @@
     <Compile Include="Generation\Randomizers\Alignments\NonLawfulAlignmentRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\Alignments\NonNeutralAlignmentRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\Alignments\SetAlignmentRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\ClassNames\AnyClassNameRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\ClassNames\BaseClassNameRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\ClassNames\AnyClassNameRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\ClassNames\BaseClassNameRandomizerTests.cs" />
     <Compile Include="Generation\Providers\PercentileResultProviderTests.cs" />
-    <Compile Include="Generation\Randomizers\ClassNames\ClassNameRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\ClassNames\HealerClassNameRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\ClassNames\MageClassNameRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\ClassNames\NonSpellcasterClassNameRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\ClassNames\SetClassNameRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\ClassNames\SpellcasterClassNameRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\ClassNames\StealthClassNameRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\ClassNames\WarriorClassNameRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\Level\AnyLevelRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\Level\HighLevelRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\Level\LowLevelRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\Level\MediumLevelRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\Level\RangedLevelRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\Level\SetLevelRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\Level\VeryHighLevelRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\ClassNames\ClassNameRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\ClassNames\HealerClassNameRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\ClassNames\MageClassNameRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\ClassNames\NonSpellcasterClassNameRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\ClassNames\SetClassNameRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\ClassNames\SpellcasterClassNameRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\ClassNames\StealthClassNameRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\ClassNames\WarriorClassNameRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\Levels\AnyLevelRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\Levels\HighLevelRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\Levels\LowLevelRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\Levels\MediumLevelRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\Levels\RangedLevelRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\Levels\SetLevelRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\Levels\VeryHighLevelRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\Races\BaseRaces\AnyBaseRaceRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\Races\BaseRaces\BaseBaseRaceRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\Races\BaseRaces\BaseRaceRandomizerTests.cs" />
@@ -170,6 +170,7 @@
       <Name>NPCGen.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

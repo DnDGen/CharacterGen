@@ -7,14 +7,11 @@ using NPCGen.Core.Data.Races;
 using NPCGen.Core.Data.Stats;
 using NPCGen.Core.Generation.Factories;
 using NPCGen.Core.Generation.Factories.Interfaces;
-using NPCGen.Core.Generation.Randomizers.Alignments;
-using NPCGen.Core.Generation.Randomizers.ClassNames;
-using NPCGen.Core.Generation.Randomizers.Races.BaseRaces;
-using NPCGen.Core.Generation.Randomizers.Races.Metaraces;
-using NPCGen.Core.Generation.Verifiers;
-using NPCGen.Core.Generation.Verifiers.BaseRaces;
-using NPCGen.Core.Generation.Verifiers.CharacterClasses;
+using NPCGen.Core.Generation.Randomizers.Alignments.Interfaces;
+using NPCGen.Core.Generation.Randomizers.CharacterClasses.Interfaces;
+using NPCGen.Core.Generation.Randomizers.Races.Interfaces;
 using NPCGen.Core.Generation.Verifiers.Exceptions;
+using NPCGen.Core.Generation.Verifiers.Interfaces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Generation.Factories
@@ -30,7 +27,7 @@ namespace NPCGen.Tests.Generation.Factories
         private Mock<IRaceFactory> mockRaceFactory;
 
         private Mock<IRandomizerVerifier> mockRandomizerVerifier;
-        private Mock<ICharacterClassVerifier> mockCharacterClassVerifier;
+        private Mock<IClassNameVerifier> mockCharacterClassVerifier;
         private Mock<IBaseRaceVerifier> mockBaseRaceVerifier;
 
         private Dictionary<String, Stat> stats;
@@ -56,7 +53,7 @@ namespace NPCGen.Tests.Generation.Factories
 
             mockRaceFactory = new Mock<IRaceFactory>();
             race = new Race();
-            mockRaceFactory.Setup(f => f.Generate(alignment, characterClass)).Returns(race);
+            mockRaceFactory.Setup(f => f.Generate(It.IsAny<String>(), It.IsAny<String>())).Returns(race);
 
             mockRandomizerVerifier = new Mock<IRandomizerVerifier>();
             mockRandomizerVerifier.Setup(v => v.VerifyCompatibility(It.IsAny<IAlignmentRandomizer>(),
@@ -64,7 +61,7 @@ namespace NPCGen.Tests.Generation.Factories
                                                                     It.IsAny<IBaseRaceRandomizer>(),
                                                                     It.IsAny<IMetaraceRandomizer>())).Returns(true);
 
-            mockCharacterClassVerifier = new Mock<ICharacterClassVerifier>();
+            mockCharacterClassVerifier = new Mock<IClassNameVerifier>();
             mockCharacterClassVerifier.Setup(v => v.VerifyCompatibility(alignment)).Returns(true);
 
             mockBaseRaceVerifier = new Mock<IBaseRaceVerifier>();

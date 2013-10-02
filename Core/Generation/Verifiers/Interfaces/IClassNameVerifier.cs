@@ -1,12 +1,12 @@
 ﻿using System;
-using NPCGen.Core.Generation.Randomizers.CharacterClasses.Interfaces;
+using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Generation.Randomizers.Races.Interfaces;
 
-namespace NPCGen.Core.Generation.Verifiers.Alignments
+namespace NPCGen.Core.Generation.Verifiers.Interfaces
 {
-    public interface IAlignmentVerifier
+    public interface IClassNameVerifier
     {
-        Boolean VerifyCompatibility(IClassNameRandomizer classRandomizer);
+        Boolean VerifyCompatibility(Alignment alignment);
         Boolean VerifyCompatibility(IBaseRaceRandomizer baseRaceRandomizer);
         Boolean VerifyCompatibility(IMetaraceRandomizer metaraceRandomizer);
     }

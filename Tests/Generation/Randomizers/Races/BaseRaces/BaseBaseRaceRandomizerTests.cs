@@ -1,10 +1,10 @@
-﻿using Moq;
+﻿using System;
+using Moq;
 using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Generation.Providers.Interfaces;
 using NPCGen.Core.Generation.Randomizers.Races.BaseRaces;
 using NUnit.Framework;
-using System;
 
 namespace NPCGen.Tests.Generation.Randomizers.Races.BaseRaces
 {
@@ -31,7 +31,7 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.BaseRaces
             randomizer.Allowed = false;
             mockPercentileResultProvider.Setup(p => p.GetPercentileResult("GoodBarbarianBaseRaces")).Returns("result");
 
-            randomizer.Randomize(alignment, CharacterClassConstants.Barbarian);
+            randomizer.Randomize(alignment.GetGoodnessString(), CharacterClassConstants.Barbarian);
             mockPercentileResultProvider.Verify(p => p.GetPercentileResult("GoodBarbarianBaseRaces"), Times.Exactly(2));
         }
 
@@ -41,7 +41,7 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.BaseRaces
             randomizer.Allowed = true;
             mockPercentileResultProvider.Setup(p => p.GetPercentileResult("GoodBarbarianBaseRaces")).Returns("result");
 
-            var result = randomizer.Randomize(alignment, CharacterClassConstants.Barbarian);
+            var result = randomizer.Randomize(alignment.GetGoodnessString(), CharacterClassConstants.Barbarian);
             Assert.That(result, Is.EqualTo("result"));
         }
 
@@ -51,7 +51,7 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.BaseRaces
             randomizer.Allowed = true;
             mockPercentileResultProvider.SetupSequence(p => p.GetPercentileResult("GoodBarbarianBaseRaces")).Returns(String.Empty).Returns("result");
 
-            randomizer.Randomize(alignment, CharacterClassConstants.Barbarian);
+            randomizer.Randomize(alignment.GetGoodnessString(), CharacterClassConstants.Barbarian);
             mockPercentileResultProvider.Verify(p => p.GetPercentileResult("GoodBarbarianBaseRaces"), Times.Exactly(2));
         }
 

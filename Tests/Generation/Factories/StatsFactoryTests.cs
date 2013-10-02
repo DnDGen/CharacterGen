@@ -1,11 +1,11 @@
-﻿using Moq;
+﻿using System;
+using System.Collections.Generic;
+using Moq;
 using NPCGen.Core.Data.Stats;
 using NPCGen.Core.Generation.Factories;
 using NPCGen.Core.Generation.Factories.Interfaces;
-using NPCGen.Core.Generation.Randomizers.Stats;
+using NPCGen.Core.Generation.Randomizers.Stats.Interfaces;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
 
 namespace NPCGen.Tests.Generation.Factories
 {

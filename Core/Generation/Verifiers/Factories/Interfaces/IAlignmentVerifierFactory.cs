@@ -1,5 +1,5 @@
 ﻿using NPCGen.Core.Generation.Randomizers.Alignments.Interfaces;
-using NPCGen.Core.Generation.Verifiers.Alignments;
+using NPCGen.Core.Generation.Verifiers.Interfaces;
 
 namespace NPCGen.Core.Generation.Verifiers.Factories.Interfaces
 {

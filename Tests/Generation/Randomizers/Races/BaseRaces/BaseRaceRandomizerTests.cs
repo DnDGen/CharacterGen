@@ -1,8 +1,7 @@
-﻿using Moq;
-using NPCGen.Core.Data.Alignments;
-using NPCGen.Core.Generation.Randomizers.Races.BaseRaces;
+﻿using System;
+using Moq;
+using NPCGen.Core.Generation.Randomizers.Races.Interfaces;
 using NUnit.Framework;
-using System;
 
 namespace NPCGen.Tests.Generation.Randomizers.Races.BaseRaces
 {
@@ -17,7 +16,7 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.BaseRaces
                 .Returns(baseRace)
                 .Returns(controlCase);
 
-            return randomizer.Randomize(new Alignment(), String.Empty);
+            return randomizer.Randomize(String.Empty, String.Empty);
         }
     }
 }

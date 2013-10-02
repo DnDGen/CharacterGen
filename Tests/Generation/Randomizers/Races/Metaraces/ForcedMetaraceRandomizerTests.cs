@@ -1,7 +1,7 @@
 ﻿using System;
 using Moq;
-using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Generation.Providers.Interfaces;
+using NPCGen.Core.Generation.Randomizers.Races.Interfaces;
 using NPCGen.Core.Generation.Randomizers.Races.Metaraces;
 using NUnit.Framework;
 
@@ -25,7 +25,7 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.Metaraces
         {
             mockPercentileResultProvider.SetupSequence(p => p.GetPercentileResult(It.IsAny<String>())).Returns(String.Empty).Returns("metarace");
 
-            randomizer.Randomize(new Alignment(), String.Empty);
+            randomizer.Randomize(String.Empty, String.Empty);
             mockPercentileResultProvider.Verify(p => p.GetPercentileResult(It.IsAny<String>()), Times.Exactly(2));
         }
 
@@ -34,7 +34,7 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.Metaraces
         {
             mockPercentileResultProvider.Setup(p => p.GetPercentileResult(It.IsAny<String>())).Returns("metarace");
 
-            var metarace = randomizer.Randomize(new Alignment(), String.Empty);
+            var metarace = randomizer.Randomize(String.Empty, String.Empty);
             Assert.That(metarace, Is.EqualTo("metarace"));
         }
 
@@ -42,7 +42,7 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.Metaraces
         {
             public TestForcedMetaraceRandomizer(IPercentileResultProvider percentileResultProvider) : base(percentileResultProvider) { }
 
-            protected override Boolean MetaraceIsAllowed(String metarace, Alignment alignment)
+            protected override Boolean MetaraceIsAllowed(String metarace)
             {
                 return true;
             }

@@ -1,11 +1,11 @@
-﻿using Moq;
+﻿using System;
+using Moq;
 using NPCGen.Core.Data.Alignments;
-using NPCGen.Core.Generation.Randomizers.ClassNames;
 using NPCGen.Core.Generation.Providers.Interfaces;
+using NPCGen.Core.Generation.Randomizers.CharacterClasses.ClassNames;
 using NUnit.Framework;
-using System;
 
-namespace NPCGen.Tests.Generation.Randomizers.ClassNames
+namespace NPCGen.Tests.Generation.Randomizers.CharacterClasses.ClassNames
 {
     [TestFixture]
     public class BaseClassNameRandomizerTests

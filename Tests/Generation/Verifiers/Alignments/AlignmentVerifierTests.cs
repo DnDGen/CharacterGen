@@ -1,9 +1,10 @@
 ﻿using System;
 using Moq;
 using NPCGen.Core.Generation.Providers.Interfaces;
-using NPCGen.Core.Generation.Randomizers.ClassNames;
-using NPCGen.Core.Generation.Randomizers.Races.BaseRaces;
-using NPCGen.Core.Generation.Verifiers.Alignments;
+using NPCGen.Core.Generation.Randomizers.CharacterClasses.ClassNames;
+using NPCGen.Core.Generation.Randomizers.CharacterClasses.Interfaces;
+using NPCGen.Core.Generation.Randomizers.Races.Interfaces;
+using NPCGen.Core.Generation.Verifiers.Interfaces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Generation.Verifiers.Alignments

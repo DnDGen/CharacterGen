@@ -1,7 +1,7 @@
 ﻿using NPCGen.Core.Generation.Randomizers.Levels;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Generation.Randomizers.Level
+namespace NPCGen.Tests.Generation.Randomizers.CharacterClasses.Levels
 {
     [TestFixture]
     public class SetLevelRandomizerTests

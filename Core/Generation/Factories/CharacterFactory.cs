@@ -3,10 +3,8 @@ using NPCGen.Core.Data;
 using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Data.Stats;
 using NPCGen.Core.Generation.Factories.Interfaces;
-using NPCGen.Core.Generation.Verifiers;
-using NPCGen.Core.Generation.Verifiers.BaseRaces;
-using NPCGen.Core.Generation.Verifiers.CharacterClasses;
 using NPCGen.Core.Generation.Verifiers.Exceptions;
+using NPCGen.Core.Generation.Verifiers.Interfaces;
 
 namespace NPCGen.Core.Generation.Factories
 {
@@ -18,12 +16,12 @@ namespace NPCGen.Core.Generation.Factories
         private IRaceFactory raceFactory;
 
         private IRandomizerVerifier randomizerVerifier;
-        private ICharacterClassVerifier characterClassVerifier;
+        private IClassNameVerifier characterClassVerifier;
         private IBaseRaceVerifier baseRaceVerifier;
 
         public CharacterFactory(ICharacterClassFactory characterClassFactory, IAlignmentFactory alignmentFactory,
             IRaceFactory raceFactory, IRandomizerVerifier randomizerVerifier, IStatsFactory statFactory,
-            ICharacterClassVerifier characterClassVerifier, IBaseRaceVerifier baseRaceVerifier)
+            IClassNameVerifier characterClassVerifier, IBaseRaceVerifier baseRaceVerifier)
         {
             this.statFactory = statFactory;
             this.alignmentFactory = alignmentFactory;

@@ -122,17 +122,17 @@
     <Compile Include="Generation\Verifiers\Alignments\ChaoticAlignmentVerifier.cs" />
     <Compile Include="Generation\Verifiers\Alignments\EvilAlignmentVerifier.cs" />
     <Compile Include="Generation\Verifiers\Alignments\GoodAlignmentVerifier.cs" />
-    <Compile Include="Generation\Verifiers\Alignments\IAlignmentVerifier.cs" />
+    <Compile Include="Generation\Verifiers\Interfaces\IAlignmentVerifier.cs" />
     <Compile Include="Generation\Verifiers\Alignments\LawfulAlignmentVerifier.cs" />
     <Compile Include="Generation\Verifiers\Alignments\NeutralAlignmentVerifier.cs" />
-    <Compile Include="Generation\Verifiers\BaseRaces\IBaseRaceVerifier.cs" />
-    <Compile Include="Generation\Verifiers\CharacterClasses\ICharacterClassVerifier.cs" />
+    <Compile Include="Generation\Verifiers\Interfaces\IBaseRaceVerifier.cs" />
+    <Compile Include="Generation\Verifiers\Interfaces\IClassNameVerifier.cs" />
     <Compile Include="Generation\Verifiers\Exceptions\IncompatibleRandomizersException.cs" />
     <Compile Include="Generation\Verifiers\Factories\AlignmentVerifierFactory.cs" />
     <Compile Include="Generation\Verifiers\Factories\CharacterClassVerifierFactory.cs" />
     <Compile Include="Generation\Verifiers\Factories\Interfaces\IAlignmentVerifierFactory.cs" />
     <Compile Include="Generation\Verifiers\Factories\Interfaces\ICharacterClassVerifierFactory.cs" />
-    <Compile Include="Generation\Verifiers\IRandomizerVerifier.cs" />
+    <Compile Include="Generation\Verifiers\Interfaces\IRandomizerVerifier.cs" />
     <Compile Include="Generation\Verifiers\RandomizerVerifier.cs" />
     <Compile Include="Generation\Xml\Parsers\Interfaces\IPercentileXmlParser.cs" />
     <Compile Include="Generation\Xml\Parsers\Interfaces\IStreamLoader.cs" />
@@ -142,7 +142,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Generation\Verifiers\Metaraces\" />
+    <Folder Include="Generation\Verifiers\CharacterClasses\" />
+    <Folder Include="Generation\Verifiers\Races\BaseRaces\" />
+    <Folder Include="Generation\Verifiers\Races\Metaraces\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

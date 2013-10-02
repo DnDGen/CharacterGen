@@ -1,5 +1,4 @@
 ﻿using System;
-using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Generation.Randomizers.Races.Metaraces;
 using NUnit.Framework;
 
@@ -14,7 +13,7 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.Metaraces
             var randomizer = new SetMetaraceRandomizer();
             randomizer.Metarace = "metarace";
 
-            var metarace = randomizer.Randomize(new Alignment(), String.Empty);
+            var metarace = randomizer.Randomize(String.Empty, String.Empty);
             Assert.That(metarace, Is.EqualTo("metarace"));
         }
     }

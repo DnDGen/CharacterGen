@@ -1,10 +1,11 @@
-﻿using D20Dice.Dice;
+﻿using System;
+using D20Dice.Dice;
 using Moq;
-using NPCGen.Core.Generation.Randomizers.Level;
+using NPCGen.Core.Generation.Randomizers.CharacterClasses.Interfaces;
+using NPCGen.Core.Generation.Randomizers.Levels;
 using NUnit.Framework;
-using System;
 
-namespace NPCGen.Tests.Generation.Randomizers.Level
+namespace NPCGen.Tests.Generation.Randomizers.CharacterClasses.Levels
 {
     [TestFixture]
     public class RangedLevelRandomizerTests
