@@ -2,14 +2,13 @@
 using NPCGen.Core.Generation.Randomizers.Alignments;
 using NPCGen.Core.Generation.Randomizers.Alignments.Interfaces;
 using NPCGen.Core.Generation.Verifiers.Alignments;
-using NPCGen.Core.Generation.Verifiers.Factories.Interfaces;
 using NPCGen.Core.Generation.Verifiers.Interfaces;
 
 namespace NPCGen.Core.Generation.Verifiers.Factories
 {
-    public class AlignmentVerifierFactory : IAlignmentVerifierFactory
+    public class AlignmentVerifierFactory
     {
-        public IAlignmentVerifier Create(IAlignmentRandomizer alignmentRandomizer)
+        public static IAlignmentVerifier CreateUsing(IAlignmentRandomizer alignmentRandomizer)
         {
             if (alignmentRandomizer is AnyAlignmentRandomizer)
                 throw new NotImplementedException();

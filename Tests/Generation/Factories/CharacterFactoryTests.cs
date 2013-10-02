@@ -56,10 +56,8 @@ namespace NPCGen.Tests.Generation.Factories
             mockRaceFactory.Setup(f => f.Generate(It.IsAny<String>(), It.IsAny<String>())).Returns(race);
 
             mockRandomizerVerifier = new Mock<IRandomizerVerifier>();
-            mockRandomizerVerifier.Setup(v => v.VerifyCompatibility(It.IsAny<IAlignmentRandomizer>(),
-                                                                    It.IsAny<IClassNameRandomizer>(),
-                                                                    It.IsAny<IBaseRaceRandomizer>(),
-                                                                    It.IsAny<IMetaraceRandomizer>())).Returns(true);
+            mockRandomizerVerifier.Setup(v => v.VerifyCompatibility(It.IsAny<IAlignmentRandomizer>(), It.IsAny<IClassNameRandomizer>(),
+                It.IsAny<IBaseRaceRandomizer>(), It.IsAny<IMetaraceRandomizer>())).Returns(true);
 
             mockCharacterClassVerifier = new Mock<IClassNameVerifier>();
             mockCharacterClassVerifier.Setup(v => v.VerifyCompatibility(alignment)).Returns(true);
@@ -74,10 +72,8 @@ namespace NPCGen.Tests.Generation.Factories
         [Test, ExpectedException(typeof(IncompatibleRandomizersException))]
         public void InvalidRandomizersThrowsException()
         {
-            mockRandomizerVerifier.Setup(v => v.VerifyCompatibility(It.IsAny<IAlignmentRandomizer>(), 
-                                                                    It.IsAny<IClassNameRandomizer>(), 
-                                                                    It.IsAny<IBaseRaceRandomizer>(), 
-                                                                    It.IsAny<IMetaraceRandomizer>())).Returns(false);
+            mockRandomizerVerifier.Setup(v => v.VerifyCompatibility(It.IsAny<IAlignmentRandomizer>(), It.IsAny<IClassNameRandomizer>(), 
+                It.IsAny<IBaseRaceRandomizer>(), It.IsAny<IMetaraceRandomizer>())).Returns(false);
 
             characterFactory.Generate();
         }

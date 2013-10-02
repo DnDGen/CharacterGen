@@ -3,37 +3,28 @@ using NPCGen.Core.Generation.Randomizers.Alignments.Interfaces;
 using NPCGen.Core.Generation.Randomizers.CharacterClasses.ClassNames;
 using NPCGen.Core.Generation.Randomizers.CharacterClasses.Interfaces;
 using NPCGen.Core.Generation.Randomizers.Races.Interfaces;
-using NPCGen.Core.Generation.Verifiers.Factories.Interfaces;
+using NPCGen.Core.Generation.Verifiers.Factories;
 using NPCGen.Core.Generation.Verifiers.Interfaces;
 
 namespace NPCGen.Core.Generation.Verifiers
 {
     public class RandomizerVerifier : IRandomizerVerifier
     {
-        private IAlignmentVerifierFactory alignmentVerifierFactory;
-        private ICharacterClassVerifierFactory characterClassVerifierFactory;
-
-        public RandomizerVerifier(IAlignmentVerifierFactory alignmentVerifierFactory, ICharacterClassVerifierFactory characterClassVerifierFactory)
-        {
-            this.alignmentVerifierFactory = alignmentVerifierFactory;
-            this.characterClassVerifierFactory = characterClassVerifierFactory;
-        }
-
-        public Boolean VerifyCompatibility(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classRandomizer,
+        public static Boolean VerifyCompatibility(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classNameRandomizer,
             IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer)
         {
-            if (!VerifyAlignment(alignmentRandomizer, classRandomizer, baseRaceRandomizer, metaraceRandomizer))
+            if (!VerifyAlignment(alignmentRandomizer, classNameRandomizer, baseRaceRandomizer, metaraceRandomizer))
                 return false;
 
-            if (!VerifyClass(classRandomizer))
+            if (!VerifyClass(classNameRandomizer))
                 return false;
 
             return true;
         }
 
-        private Boolean VerifyAlignment(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classRandomizer, IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer)
+        private static Boolean VerifyAlignment(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classRandomizer, IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer)
         {
-            var alignmentVerifier = alignmentVerifierFactory.Create(alignmentRandomizer);
+            var alignmentVerifier = AlignmentVerifierFactory.CreateUsing(alignmentRandomizer);
 
             if (!alignmentVerifier.VerifyCompatibility(classRandomizer))
                 return false;
@@ -47,7 +38,7 @@ namespace NPCGen.Core.Generation.Verifiers
             return true;
         }
 
-        private Boolean VerifyClass(IClassNameRandomizer classRandomizer)
+        private static Boolean VerifyClass(IClassNameRandomizer classRandomizer)
         {
             if (classRandomizer is HealerClassNameRandomizer)
             {

@@ -1,9 +1,9 @@
-﻿using NPCGen.Core.Data.Alignments;
+﻿using System;
+using System.Collections.Generic;
+using NPCGen.Core.Data.Alignments;
+using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Data.Races;
 using NPCGen.Core.Data.Stats;
-using System;
-using System.Collections.Generic;
-using NPCGen.Core.Data.CharacterClasses;
 
 namespace NPCGen.Core.Data
 {
@@ -16,5 +16,6 @@ namespace NPCGen.Core.Data
         public List<String> Languages { get; set; }
         public List<Skill> Skills { get; set; }
         public List<Feat> Feats { get; set; }
+        public Int32 HitPoints { get; set; }
     }
 }

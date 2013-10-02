@@ -1,13 +1,12 @@
 ﻿using System;
 using NPCGen.Core.Generation.Randomizers.CharacterClasses.Interfaces;
-using NPCGen.Core.Generation.Verifiers.Factories.Interfaces;
 using NPCGen.Core.Generation.Verifiers.Interfaces;
 
 namespace NPCGen.Core.Generation.Verifiers.Factories
 {
-    public class CharacterClassVerifierFactory : ICharacterClassVerifierFactory
+    public static class CharacterClassVerifierFactory
     {
-        public IClassNameVerifier Create(IClassNameRandomizer alignmentRandomizer)
+        public static IClassNameVerifier CreateUsing(IClassNameRandomizer classNameRandomizer)
         {
             throw new NotImplementedException();
         }
