@@ -1,6 +1,6 @@
 ﻿using System;
-using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Generation.Providers.Interfaces;
+using NPCGen.Core.Generation.Randomizers.Races.Interfaces;
 
 namespace NPCGen.Core.Generation.Randomizers.Races.Metaraces
 {
@@ -13,17 +13,17 @@ namespace NPCGen.Core.Generation.Randomizers.Races.Metaraces
             this.percentileResultProvider = percentileResultProvider;
         }
 
-        public String Randomize(Alignment alignment, String className)
+        public String Randomize(String goodnessString, String className)
         {
-            var tableName = String.Format("{0}{1}Metaraces", alignment.GetGoodnessString(), className);
+            var tableName = String.Format("{0}{1}Metaraces", goodnessString, className);
             var metarace = String.Empty;
 
             do metarace = percentileResultProvider.GetPercentileResult(tableName);
-            while (!RaceIsAllowed(metarace, alignment));
+            while (!RaceIsAllowed(metarace));
 
             return metarace;
         }
 
-        protected abstract Boolean RaceIsAllowed(String metarace, Alignment alignment);
+        protected abstract Boolean RaceIsAllowed(String metarace);
     }
 }

@@ -1,11 +1,8 @@
 ﻿using System;
 using Moq;
-using NPCGen.Core.Data.Alignments;
-using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Generation.Factories;
 using NPCGen.Core.Generation.Factories.Interfaces;
-using NPCGen.Core.Generation.Randomizers.Races.BaseRaces;
-using NPCGen.Core.Generation.Randomizers.Races.Metaraces;
+using NPCGen.Core.Generation.Randomizers.Races.Interfaces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Generation.Factories
@@ -16,8 +13,6 @@ namespace NPCGen.Tests.Generation.Factories
         private IRaceFactory raceFactory;
         private Mock<IBaseRaceRandomizer> mockBaseRaceRandomizer;
         private Mock<IMetaraceRandomizer> mockMetaraceRandomizer;
-        private Alignment alignment;
-        private CharacterClass characterClass;
 
         [SetUp]
         public void Setup()
@@ -38,9 +33,9 @@ namespace NPCGen.Tests.Generation.Factories
         [Test]
         public void FactoryReturnsRandomizedBaseRace()
         {
-            mockBaseRaceRandomizer.Setup(r => r.Randomize(alignment, It.IsAny<String>())).Returns("base race");
+            mockBaseRaceRandomizer.Setup(r => r.Randomize(It.IsAny<String>(), It.IsAny<String>())).Returns("base race");
 
-            var race = raceFactory.Generate(alignment, characterClass);
+            var race = raceFactory.Generate(String.Empty, String.Empty);
             Assert.That(race.BaseRace, Is.EqualTo("base race"));
         }
 
@@ -48,19 +43,19 @@ namespace NPCGen.Tests.Generation.Factories
         public void ChangeBaseRaceRandomizer()
         {
             var differentRandomizer = new Mock<IBaseRaceRandomizer>();
-            differentRandomizer.Setup(r => r.Randomize(alignment, It.IsAny<String>())).Returns("different base race");
+            differentRandomizer.Setup(r => r.Randomize(It.IsAny<String>(), It.IsAny<String>())).Returns("different base race");
             raceFactory.BaseRaceRandomizer = differentRandomizer.Object;
 
-            var race = raceFactory.Generate(alignment, characterClass);
+            var race = raceFactory.Generate(String.Empty, String.Empty);
             Assert.That(race.BaseRace, Is.EqualTo("different base race"));
         }
 
         [Test]
         public void FactoryReturnsRandomizedMetarace()
         {
-            mockMetaraceRandomizer.Setup(r => r.Randomize(alignment, It.IsAny<String>())).Returns("metarace");
+            mockMetaraceRandomizer.Setup(r => r.Randomize(It.IsAny<String>(), It.IsAny<String>())).Returns("metarace");
 
-            var race = raceFactory.Generate(alignment, characterClass);
+            var race = raceFactory.Generate(String.Empty, String.Empty);
             Assert.That(race.Metarace, Is.EqualTo("metarace"));
         }
 
@@ -68,10 +63,10 @@ namespace NPCGen.Tests.Generation.Factories
         public void ChangeMetaraceRandomizer()
         {
             var differentRandomizer = new Mock<IMetaraceRandomizer>();
-            differentRandomizer.Setup(r => r.Randomize(alignment, It.IsAny<String>())).Returns("different metarace");
+            differentRandomizer.Setup(r => r.Randomize(It.IsAny<String>(), It.IsAny<String>())).Returns("different metarace");
             raceFactory.MetaraceRandomizer = differentRandomizer.Object;
 
-            var race = raceFactory.Generate(alignment, characterClass);
+            var race = raceFactory.Generate(String.Empty, String.Empty);
             Assert.That(race.Metarace, Is.EqualTo("different metarace"));
         }
     }

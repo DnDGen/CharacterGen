@@ -1,5 +1,5 @@
 ﻿using System;
-using NPCGen.Core.Generation.Randomizers.ClassNames;
+using NPCGen.Core.Generation.Randomizers.CharacterClasses.Interfaces;
 using NPCGen.Core.Generation.Verifiers.CharacterClasses;
 using NPCGen.Core.Generation.Verifiers.Factories.Interfaces;
 

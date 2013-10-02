@@ -1,5 +1,5 @@
 ﻿using System;
-using NPCGen.Core.Data.Alignments;
+using NPCGen.Core.Generation.Randomizers.Races.Interfaces;
 
 namespace NPCGen.Core.Generation.Randomizers.Races.BaseRaces
 {
@@ -7,7 +7,7 @@ namespace NPCGen.Core.Generation.Randomizers.Races.BaseRaces
     {
         public String BaseRace { get; set; }
 
-        public String Randomize(Alignment alignment, String characterClass)
+        public String Randomize(String goodnessString, String characterClass)
         {
             return BaseRace;
         }

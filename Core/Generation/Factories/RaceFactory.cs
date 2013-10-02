@@ -1,10 +1,7 @@
 ﻿using System;
-using NPCGen.Core.Data.Alignments;
-using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Data.Races;
 using NPCGen.Core.Generation.Factories.Interfaces;
-using NPCGen.Core.Generation.Randomizers.Races.BaseRaces;
-using NPCGen.Core.Generation.Randomizers.Races.Metaraces;
+using NPCGen.Core.Generation.Randomizers.Races.Interfaces;
 
 namespace NPCGen.Core.Generation.Factories
 {
@@ -19,9 +16,14 @@ namespace NPCGen.Core.Generation.Factories
             MetaraceRandomizer = metaraceRandomizer;
         }
 
-        public Race Generate(Alignment alignment, CharacterClass characterClass)
+        public Race Generate(String goodnessString, String className)
         {
-            throw new NotImplementedException();
+            var race = new Race();
+
+            race.BaseRace = BaseRaceRandomizer.Randomize(goodnessString, className);
+            race.Metarace = MetaraceRandomizer.Randomize(goodnessString, className);
+
+            return race;
         }
     }
 }

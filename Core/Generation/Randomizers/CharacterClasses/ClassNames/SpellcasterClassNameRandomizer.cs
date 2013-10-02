@@ -3,7 +3,7 @@ using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Generation.Providers.Interfaces;
 
-namespace NPCGen.Core.Generation.Randomizers.ClassNames
+namespace NPCGen.Core.Generation.Randomizers.CharacterClasses.ClassNames
 {
     public class SpellcasterClassNameRandomizer : BaseClassNameRandomizer
     {

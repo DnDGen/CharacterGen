@@ -3,8 +3,7 @@ using D20Dice.Dice;
 using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Generation.Factories.Interfaces;
-using NPCGen.Core.Generation.Randomizers.ClassNames;
-using NPCGen.Core.Generation.Randomizers.Level;
+using NPCGen.Core.Generation.Randomizers.CharacterClasses.Interfaces;
 
 namespace NPCGen.Core.Generation.Factories
 {

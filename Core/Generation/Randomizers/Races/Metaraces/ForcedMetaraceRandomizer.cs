@@ -1,5 +1,4 @@
 ﻿using System;
-using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Generation.Providers.Interfaces;
 
 namespace NPCGen.Core.Generation.Randomizers.Races.Metaraces
@@ -8,11 +7,11 @@ namespace NPCGen.Core.Generation.Randomizers.Races.Metaraces
     {
         public ForcedMetaraceRandomizer(IPercentileResultProvider percentileResultProvider) : base(percentileResultProvider) { }
 
-        protected override Boolean RaceIsAllowed(String metarace, Alignment alignment)
+        protected override Boolean RaceIsAllowed(String metarace)
         {
-            return !String.IsNullOrEmpty(metarace) && MetaraceIsAllowed(metarace, alignment);
+            return !String.IsNullOrEmpty(metarace) && MetaraceIsAllowed(metarace);
         }
 
-        protected abstract Boolean MetaraceIsAllowed(String metarace, Alignment alignment);
+        protected abstract Boolean MetaraceIsAllowed(String metarace);
     }
 }

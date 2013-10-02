@@ -1,6 +1,6 @@
-﻿using NPCGen.Core.Data.Alignments;
+﻿using System;
 using NPCGen.Core.Generation.Providers.Interfaces;
-using System;
+using NPCGen.Core.Generation.Randomizers.Races.Interfaces;
 
 namespace NPCGen.Core.Generation.Randomizers.Races.BaseRaces
 {
@@ -13,9 +13,9 @@ namespace NPCGen.Core.Generation.Randomizers.Races.BaseRaces
             this.percentileResultProvider = percentileResultProvider;
         }
 
-        public String Randomize(Alignment alignment, String className)
+        public String Randomize(String goodnessString, String className)
         {
-            var tableName = String.Format("{0}{1}BaseRaces", alignment.GetGoodnessString(), className);
+            var tableName = String.Format("{0}{1}BaseRaces", goodnessString, className);
             var baseRace = String.Empty;
 
             do baseRace = percentileResultProvider.GetPercentileResult(tableName);

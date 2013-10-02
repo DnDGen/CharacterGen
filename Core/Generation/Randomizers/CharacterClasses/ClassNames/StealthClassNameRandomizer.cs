@@ -3,26 +3,26 @@ using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Generation.Providers.Interfaces;
 
-namespace NPCGen.Core.Generation.Randomizers.ClassNames
+namespace NPCGen.Core.Generation.Randomizers.CharacterClasses.ClassNames
 {
-    public class NonSpellcasterClassNameRandomizer : BaseClassNameRandomizer
+    public class StealthClassNameRandomizer : BaseClassNameRandomizer
     {
-        public NonSpellcasterClassNameRandomizer(IPercentileResultProvider percentileResultProvider) : base(percentileResultProvider) { }
+        public StealthClassNameRandomizer(IPercentileResultProvider percentileResultProvider) : base(percentileResultProvider) { }
 
         protected override Boolean CharacterClassIsAllowed(String characterClass, Alignment alignment)
         {
             switch (characterClass)
             {
-                case CharacterClassConstants.Fighter:
+                case CharacterClassConstants.Ranger:
                 case CharacterClassConstants.Rogue: return true;
-                case CharacterClassConstants.Monk: return alignment.IsLawful();
-                case CharacterClassConstants.Barbarian: return !alignment.IsLawful();
+                case CharacterClassConstants.Bard: return !alignment.IsLawful();
+                case CharacterClassConstants.Monk:
+                case CharacterClassConstants.Barbarian:
                 case CharacterClassConstants.Sorcerer:
                 case CharacterClassConstants.Wizard:
-                case CharacterClassConstants.Ranger:
-                case CharacterClassConstants.Bard:
                 case CharacterClassConstants.Druid:
                 case CharacterClassConstants.Paladin:
+                case CharacterClassConstants.Fighter:
                 case CharacterClassConstants.Cleric: return false;
                 default: throw new ArgumentOutOfRangeException();
             }

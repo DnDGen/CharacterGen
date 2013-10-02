@@ -1,29 +1,29 @@
-﻿using System;
-using NPCGen.Core.Data.Alignments;
+﻿using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Generation.Providers.Interfaces;
+using System;
 
-namespace NPCGen.Core.Generation.Randomizers.ClassNames
+namespace NPCGen.Core.Generation.Randomizers.CharacterClasses.ClassNames
 {
-    public class HealerClassNameRandomizer : BaseClassNameRandomizer
+    public class AnyClassNameRandomizer : BaseClassNameRandomizer
     {
-        public HealerClassNameRandomizer(IPercentileResultProvider percentileResultProvider) : base(percentileResultProvider) { }
+        public AnyClassNameRandomizer(IPercentileResultProvider percentileResultProvider) : base(percentileResultProvider) { }
 
         protected override Boolean CharacterClassIsAllowed(String className, Alignment alignment)
         {
             switch (className)
             {
+                case CharacterClassConstants.Barbarian:
                 case CharacterClassConstants.Bard: return !alignment.IsLawful();
                 case CharacterClassConstants.Druid: return alignment.IsNeutral();
+                case CharacterClassConstants.Monk: return alignment.IsLawful();
                 case CharacterClassConstants.Paladin: return alignment.IsLawful() && alignment.IsGood();
                 case CharacterClassConstants.Fighter:
-                case CharacterClassConstants.Rogue:
-                case CharacterClassConstants.Barbarian:
-                case CharacterClassConstants.Sorcerer:
-                case CharacterClassConstants.Wizard:
-                case CharacterClassConstants.Monk: return false;
+                case CharacterClassConstants.Cleric:
                 case CharacterClassConstants.Ranger:
-                case CharacterClassConstants.Cleric: return true;
+                case CharacterClassConstants.Sorcerer:
+                case CharacterClassConstants.Rogue:
+                case CharacterClassConstants.Wizard: return true;
                 default: throw new ArgumentOutOfRangeException();
             }
         }

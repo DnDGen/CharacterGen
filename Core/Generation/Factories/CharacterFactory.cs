@@ -1,4 +1,5 @@
-﻿using NPCGen.Core.Data;
+﻿using System;
+using NPCGen.Core.Data;
 using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Data.Stats;
 using NPCGen.Core.Generation.Factories.Interfaces;
@@ -6,7 +7,6 @@ using NPCGen.Core.Generation.Verifiers;
 using NPCGen.Core.Generation.Verifiers.BaseRaces;
 using NPCGen.Core.Generation.Verifiers.CharacterClasses;
 using NPCGen.Core.Generation.Verifiers.Exceptions;
-using System;
 
 namespace NPCGen.Core.Generation.Factories
 {
@@ -44,11 +44,15 @@ namespace NPCGen.Core.Generation.Factories
             character.Stats = statFactory.Generate();
 
             //need to verify each alignment, class as rolled with randomizers
-            character.Alignment = GenerateAlignment();
-            character.Class = characterClassFactory.Generate(character.Alignment, character.Stats[StatConstants.Constitution].Bonus);
-            character.Race = raceFactory.Generate(character.Alignment, character.Class);
+            var alignment = GenerateAlignment();
+            var characterClass = characterClassFactory.Generate(alignment, character.Stats[StatConstants.Constitution].Bonus);
+            var race = raceFactory.Generate(alignment.GetGoodnessString(), characterClass.ClassName);
 
             //move HP out of class, put in character, make HitPointFactory(characterClass, constitutionBonus, metarace)
+
+            character.Alignment = alignment;
+            character.Class = characterClass;
+            character.Race = race;
 
             //******************
 

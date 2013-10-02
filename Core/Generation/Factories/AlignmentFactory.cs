@@ -1,7 +1,6 @@
-﻿using NPCGen.Core.Data;
-using NPCGen.Core.Data.Alignments;
+﻿using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Generation.Factories.Interfaces;
-using NPCGen.Core.Generation.Randomizers.Alignments;
+using NPCGen.Core.Generation.Randomizers.Alignments.Interfaces;
 
 namespace NPCGen.Core.Generation.Factories
 {

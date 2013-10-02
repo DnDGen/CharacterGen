@@ -1,7 +1,6 @@
 ﻿using System;
-using NPCGen.Core.Generation.Randomizers.ClassNames;
-using NPCGen.Core.Generation.Randomizers.Races.BaseRaces;
-using NPCGen.Core.Generation.Randomizers.Races.Metaraces;
+using NPCGen.Core.Generation.Randomizers.CharacterClasses.Interfaces;
+using NPCGen.Core.Generation.Randomizers.Races.Interfaces;
 
 namespace NPCGen.Core.Generation.Verifiers.Alignments
 {

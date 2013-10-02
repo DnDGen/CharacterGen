@@ -1,5 +1,6 @@
 ﻿using System;
 using NPCGen.Core.Generation.Randomizers.Alignments;
+using NPCGen.Core.Generation.Randomizers.Alignments.Interfaces;
 using NPCGen.Core.Generation.Verifiers.Alignments;
 using NPCGen.Core.Generation.Verifiers.Factories.Interfaces;
 

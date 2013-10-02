@@ -1,6 +1,6 @@
 ﻿using D20Dice.Dice;
 
-namespace NPCGen.Core.Generation.Randomizers.Level
+namespace NPCGen.Core.Generation.Randomizers.Levels
 {
     public class HighLevelRandomizer : RangedLevelRandomizer
     {
