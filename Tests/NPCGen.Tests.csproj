@@ -67,6 +67,8 @@
     <Compile Include="Generation\Factories\AlignmentFactoryTests.cs" />
     <Compile Include="Generation\Factories\CharacterClassFactoryTests.cs" />
     <Compile Include="Generation\Factories\CharacterFactoryTests.cs" />
+    <Compile Include="Generation\Factories\FullRunTests.cs" />
+    <Compile Include="Generation\Factories\HitPointsFactoryTests.cs" />
     <Compile Include="Generation\Factories\RaceFactoryTests.cs" />
     <Compile Include="Generation\Factories\StatsFactoryTests.cs" />
     <Compile Include="Generation\Randomizers\Alignments\AnyAlignmentRandomizerTests.cs" />
@@ -112,11 +114,15 @@
     <Compile Include="Generation\Randomizers\Races\BaseRaces\SetBaseRaceRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\Races\BaseRaces\StandardBaseRaceRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\Races\Metaraces\BaseMetaraceRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Races\Metaraces\ForcedAnyMetaraceRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Races\Metaraces\ForcedEvilMetaraceRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\Races\Metaraces\ForcedMetaraceRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\Races\Metaraces\MetaraceRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\Races\Metaraces\NoMetaraceRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\Races\Metaraces\SetMetaraceRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\Races\RaceRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Stats\BaseStatsRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Stats\RawStatsRandomizerTests.cs" />
     <Compile Include="Generation\Verifiers\Alignments\AlignmentVerifierTests.cs" />
     <Compile Include="Generation\Verifiers\Alignments\ChaoticAlignmentVerifierTests.cs" />
     <Compile Include="Generation\Verifiers\Alignments\EvilAlignmentVerifierTests.cs" />

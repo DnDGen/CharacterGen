@@ -2,7 +2,6 @@
 using NPCGen.Core.Data;
 using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Data.Stats;
-using NPCGen.Core.Generation.Factories.Interfaces;
 using NPCGen.Core.Generation.Randomizers.Alignments.Interfaces;
 using NPCGen.Core.Generation.Randomizers.CharacterClasses.Interfaces;
 using NPCGen.Core.Generation.Randomizers.Races.Interfaces;
