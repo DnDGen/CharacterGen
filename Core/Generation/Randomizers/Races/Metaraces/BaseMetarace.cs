@@ -4,11 +4,13 @@ using NPCGen.Core.Generation.Randomizers.Races.Interfaces;
 
 namespace NPCGen.Core.Generation.Randomizers.Races.Metaraces
 {
-    public abstract class BaseMetaraceRandomizer : IMetaraceRandomizer
+    public abstract class BaseMetarace : IMetaraceRandomizer
     {
+        protected Boolean forcedMetarace;
+
         private IPercentileResultProvider percentileResultProvider;
 
-        public BaseMetaraceRandomizer(IPercentileResultProvider percentileResultProvider)
+        public BaseMetarace(IPercentileResultProvider percentileResultProvider)
         {
             this.percentileResultProvider = percentileResultProvider;
         }
@@ -24,6 +26,16 @@ namespace NPCGen.Core.Generation.Randomizers.Races.Metaraces
             return metarace;
         }
 
-        protected abstract Boolean RaceIsAllowed(String metarace);
+        private Boolean RaceIsAllowed(String metarace)
+        {
+            return NoMetaraceAllowed(metarace) && MetaraceIsAllowed(metarace);
+        }
+
+        private Boolean NoMetaraceAllowed(String metarace)
+        {
+            return !forcedMetarace || !String.IsNullOrEmpty(metarace);
+        }
+
+        protected abstract Boolean MetaraceIsAllowed(String metarace);
     }
 }

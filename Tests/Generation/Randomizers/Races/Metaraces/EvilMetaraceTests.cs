@@ -1,0 +1,71 @@
+﻿using NPCGen.Core.Data.Races;
+using NPCGen.Core.Generation.Providers.Interfaces;
+using NPCGen.Core.Generation.Randomizers.Races.Metaraces;
+using NUnit.Framework;
+
+namespace NPCGen.Tests.Generation.Randomizers.Races.Metaraces
+{
+    [TestFixture]
+    public class EvilMetaraceTests : MetaraceRandomizerTests
+    {
+        [SetUp]
+        public void Setup()
+        {
+            randomizer = new TestEvilMetarace(mockPercentileResultProvider.Object);
+            controlCase = RaceConstants.Metaraces.HalfDragon;
+        }
+
+        [Test]
+        public void HalfCelestialIsNotAllowed()
+        {
+            AssertRaceIsNotAllowed(RaceConstants.Metaraces.HalfCelestial);
+        }
+
+        [Test]
+        public void HalfDragonIsAllowed()
+        {
+            AssertControlIsAllowed(RaceConstants.Metaraces.HalfFiend);
+        }
+
+        [Test]
+        public void HalfFiendIsAllowed()
+        {
+            AssertRaceIsAllowed(RaceConstants.Metaraces.HalfFiend);
+        }
+
+        [Test]
+        public void WerebearIsNotAllowed()
+        {
+            AssertRaceIsNotAllowed(RaceConstants.Metaraces.Werebear);
+        }
+
+        [Test]
+        public void WereboreIsNotAllowed()
+        {
+            AssertRaceIsNotAllowed(RaceConstants.Metaraces.Wereboar);
+        }
+
+        [Test]
+        public void WereratIsAllowed()
+        {
+            AssertRaceIsAllowed(RaceConstants.Metaraces.Wererat);
+        }
+
+        [Test]
+        public void WeretigerIsNotAllowed()
+        {
+            AssertRaceIsNotAllowed(RaceConstants.Metaraces.Weretiger);
+        }
+
+        [Test]
+        public void WerewolfIsAllowed()
+        {
+            AssertRaceIsAllowed(RaceConstants.Metaraces.Werewolf);
+        }
+
+        private class TestEvilMetarace : EvilMetarace
+        {
+            public TestEvilMetarace(IPercentileResultProvider percentileResultProvider) : base(percentileResultProvider) { }
+        }
+    }
+}

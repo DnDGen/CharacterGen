@@ -107,10 +107,12 @@
     <Compile Include="Generation\Randomizers\Races\BaseRaces\NonNeutralBaseRaceRandomizer.cs" />
     <Compile Include="Generation\Randomizers\Races\BaseRaces\NonStandardBaseRaceRandomizer.cs" />
     <Compile Include="Generation\Randomizers\Races\BaseRaces\StandardBaseRaceRandomizer.cs" />
-    <Compile Include="Generation\Randomizers\Races\Metaraces\BaseMetaraceRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Races\Metaraces\AllowedAnyMetaraceRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Races\Metaraces\AnyMetarace.cs" />
+    <Compile Include="Generation\Randomizers\Races\Metaraces\BaseMetarace.cs" />
+    <Compile Include="Generation\Randomizers\Races\Metaraces\EvilMetarace.cs" />
     <Compile Include="Generation\Randomizers\Races\Metaraces\ForcedAnyMetaraceRandomizer.cs" />
     <Compile Include="Generation\Randomizers\Races\Metaraces\ForcedEvilMetaraceRandomizer.cs" />
-    <Compile Include="Generation\Randomizers\Races\Metaraces\ForcedMetaraceRandomizer.cs" />
     <Compile Include="Generation\Randomizers\Races\Interfaces\IMetaraceRandomizer.cs" />
     <Compile Include="Generation\Randomizers\Races\Interfaces\IBaseRaceRandomizer.cs" />
     <Compile Include="Generation\Randomizers\Races\BaseRaces\SetBaseRaceRandomizer.cs" />

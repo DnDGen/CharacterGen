@@ -1,15 +1,12 @@
-﻿using System;
-using NPCGen.Core.Generation.Providers.Interfaces;
+﻿using NPCGen.Core.Generation.Providers.Interfaces;
 
 namespace NPCGen.Core.Generation.Randomizers.Races.Metaraces
 {
-    public class ForcedAnyMetaraceRandomizer : ForcedMetaraceRandomizer
+    public class ForcedAnyMetaraceRandomizer : AnyMetarace
     {
-        public ForcedAnyMetaraceRandomizer(IPercentileResultProvider provider) : base(provider) { }
-
-        protected override Boolean MetaraceIsAllowed(String metarace)
+        public ForcedAnyMetaraceRandomizer(IPercentileResultProvider provider) : base(provider)
         {
-            return true;
+            forcedMetarace = true;
         }
     }
 }

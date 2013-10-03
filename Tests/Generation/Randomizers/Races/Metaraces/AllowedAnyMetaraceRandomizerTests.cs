@@ -6,19 +6,19 @@ using NUnit.Framework;
 namespace NPCGen.Tests.Generation.Randomizers.Races.Metaraces
 {
     [TestFixture]
-    public class ForcedEvilMetaraceRandomizerTests : MetaraceRandomizerTests
+    public class AllowedAnyMetaraceRandomizerTests : MetaraceRandomizerTests
     {
         [SetUp]
         public void Setup()
         {
-            randomizer = new ForcedEvilMetaraceRandomizer(mockPercentileResultProvider.Object);
+            randomizer = new AllowedAnyMetaraceRandomizer(mockPercentileResultProvider.Object);
             controlCase = RaceConstants.Metaraces.HalfDragon;
         }
 
         [Test]
-        public void NoMetaraceIsNotAllowed()
+        public void NoMetaraceIsAllowed()
         {
-            AssertRaceIsNotAllowed(String.Empty);
+            AssertRaceIsAllowed(String.Empty);
         }
     }
 }
