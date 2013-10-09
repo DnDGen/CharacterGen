@@ -17,6 +17,7 @@ namespace NPCGen.Tests.Generation.Factories
         {
             mockDice = new Mock<IDice>();
             characterClass = new CharacterClass();
+            characterClass.ClassName = CharacterClassConstants.Barbarian;
         }
 
         [Test]
@@ -132,8 +133,6 @@ namespace NPCGen.Tests.Generation.Factories
         [Test]
         public void RollHitPointsPerLevel()
         {
-            characterClass.ClassName = CharacterClassConstants.Barbarian;
-
             for (var level = 1; level <= 20; level++)
             {
                 mockDice.ResetCalls();
@@ -150,7 +149,7 @@ namespace NPCGen.Tests.Generation.Factories
             characterClass.Level = 1;
             var constitutionBonus = 2;
 
-            HitPointsFactory.CreateUsing(mockDice.Object, characterClass, 0);
+            HitPointsFactory.CreateUsing(mockDice.Object, characterClass, constitutionBonus);
             mockDice.Verify(d => d.d12(1, constitutionBonus), Times.Exactly(1));
         }
 

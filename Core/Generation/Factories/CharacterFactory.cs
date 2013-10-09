@@ -219,7 +219,8 @@ namespace NPCGen.Core.Generation.Factories
         private static Boolean AlignmentIsAllowed(VerifierCollection verifierCollection, Alignment alignment)
         {
             return verifierCollection.ClassNameVerifier.VerifyCompatibility(alignment)
-                   && verifierCollection.BaseRaceVerifier.VerifyCompatibility(alignment);
+                   && verifierCollection.BaseRaceVerifier.VerifyCompatibility(alignment)
+                   && verifierCollection.MetaraceVerifier.VerifyCompatibility(alignment);
         }
     }
 }

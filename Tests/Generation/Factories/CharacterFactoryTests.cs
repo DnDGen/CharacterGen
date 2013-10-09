@@ -2,6 +2,7 @@
 using Moq;
 using NPCGen.Core.Data;
 using NPCGen.Core.Data.Alignments;
+using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Generation.Factories;
 using NPCGen.Core.Generation.Randomizers.Alignments.Interfaces;
 using NPCGen.Core.Generation.Randomizers.CharacterClasses.Interfaces;
@@ -39,7 +40,11 @@ namespace NPCGen.Tests.Generation.Factories
         private void SetupMockRandomizers()
         {
             mockAlignmentRandomizer = new Mock<IAlignmentRandomizer>();
+            mockAlignmentRandomizer.Setup(r => r.Randomize()).Returns(new Alignment());
+
             mockClassNameRandomizer = new Mock<IClassNameRandomizer>();
+            mockClassNameRandomizer.Setup(r => r.Randomize(It.IsAny<Alignment>())).Returns(CharacterClassConstants.Barbarian);
+
             mockLevelRandomizer = new Mock<ILevelRandomizer>();
             mockBaseRaceRandomizer = new Mock<IBaseRaceRandomizer>();
             mockMetaraceRandomizer = new Mock<IMetaraceRandomizer>();
@@ -132,28 +137,28 @@ namespace NPCGen.Tests.Generation.Factories
         [Test]
         public void AlignmentIncompatibleWithCharacterClassIsRegenerated()
         {
-            mockAlignmentVerifier.SetupSequence(v => v.VerifyCompatibility(mockClassNameRandomizer.Object)).Returns(false).Returns(true);
+            mockClassNameVerifier.SetupSequence(v => v.VerifyCompatibility(It.IsAny<Alignment>())).Returns(false).Returns(true);
 
             CreateCharacter();
-            mockAlignmentVerifier.Verify(v => v.VerifyCompatibility(mockClassNameRandomizer.Object), Times.Exactly(2));
+            mockClassNameVerifier.Verify(v => v.VerifyCompatibility(It.IsAny<Alignment>()), Times.Exactly(2));
         }
 
         [Test]
         public void AlignmentIncompatibleWithBaseRaceIsRegenerated()
         {
-            mockAlignmentVerifier.SetupSequence(v => v.VerifyCompatibility(mockBaseRaceRandomizer.Object)).Returns(false).Returns(true);
+            mockBaseRaceVerifier.SetupSequence(v => v.VerifyCompatibility(It.IsAny<Alignment>())).Returns(false).Returns(true);
 
             CreateCharacter();
-            mockAlignmentVerifier.Verify(v => v.VerifyCompatibility(mockBaseRaceRandomizer.Object), Times.Exactly(2));
+            mockClassNameVerifier.Verify(v => v.VerifyCompatibility(It.IsAny<Alignment>()), Times.Exactly(2));
         }
 
         [Test]
         public void AlignmentIncompatibleWithMetaraceIsRegnerated()
         {
-            mockAlignmentVerifier.SetupSequence(v => v.VerifyCompatibility(mockMetaraceRandomizer.Object)).Returns(false).Returns(true);
+            mockMetaraceVerifier.SetupSequence(v => v.VerifyCompatibility(It.IsAny<Alignment>())).Returns(false).Returns(true);
 
             CreateCharacter();
-            mockAlignmentVerifier.Verify(v => v.VerifyCompatibility(mockMetaraceRandomizer.Object), Times.Exactly(2));
+            mockClassNameVerifier.Verify(v => v.VerifyCompatibility(It.IsAny<Alignment>()), Times.Exactly(2));
         }
 
         private Character CreateCharacter()
