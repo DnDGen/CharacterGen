@@ -135,6 +135,7 @@
     <Compile Include="Generation\Verifiers\Interfaces\IMetaraceVerifier.cs" />
     <Compile Include="Generation\Verifiers\Interfaces\IRandomizerVerifier.cs" />
     <Compile Include="Generation\Verifiers\RandomizerVerifier.cs" />
+    <Compile Include="Generation\Verifiers\Interfaces\VerifierCollection.cs" />
     <Compile Include="Generation\Xml\Parsers\Interfaces\IPercentileXmlParser.cs" />
     <Compile Include="Generation\Xml\Parsers\Interfaces\IStreamLoader.cs" />
     <Compile Include="Generation\Xml\Parsers\Objects\PercentileObject.cs" />

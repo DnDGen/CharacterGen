@@ -10,7 +10,7 @@ namespace NPCGen.Core.Generation.Verifiers
 {
     public class RandomizerVerifier : IRandomizerVerifier
     {
-        public static Boolean VerifyCompatibility(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classNameRandomizer,
+        public Boolean VerifyCompatibility(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classNameRandomizer,
             IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer)
         {
             if (!VerifyAlignment(alignmentRandomizer, classNameRandomizer, baseRaceRandomizer, metaraceRandomizer))
@@ -22,7 +22,7 @@ namespace NPCGen.Core.Generation.Verifiers
             return true;
         }
 
-        private static Boolean VerifyAlignment(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classRandomizer, IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer)
+        private Boolean VerifyAlignment(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classRandomizer, IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer)
         {
             var alignmentVerifier = AlignmentVerifierFactory.CreateUsing(alignmentRandomizer);
 
@@ -38,7 +38,7 @@ namespace NPCGen.Core.Generation.Verifiers
             return true;
         }
 
-        private static Boolean VerifyClass(IClassNameRandomizer classRandomizer)
+        private Boolean VerifyClass(IClassNameRandomizer classRandomizer)
         {
             if (classRandomizer is HealerClassNameRandomizer)
             {

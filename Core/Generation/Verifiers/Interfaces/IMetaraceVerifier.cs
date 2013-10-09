@@ -6,7 +6,7 @@ namespace NPCGen.Core.Generation.Verifiers.Interfaces
     public interface IMetaraceVerifier
     {
         Boolean VerifyCompatibility(Alignment alignment);
-        Boolean VerifyCompatibility(String className);
-        Boolean VerifyCompatibility(String baseRace);
+        Boolean VerifyClassNameCompatibility(String className);
+        Boolean VerifyBaseRaceCompatibility(String baseRace);
     }
 }
