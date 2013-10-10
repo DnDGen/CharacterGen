@@ -17,7 +17,7 @@ namespace NPCGen.Core.Generation.Factories
             IClassNameRandomizer classNameRandomizer, ILevelRandomizer levelRandomizer, IBaseRaceRandomizer baseRaceRandomizer, 
             IMetaraceRandomizer metaraceRandomizer, IStatsRandomizer statsRandomizer, IDice dice)
         {
-            VerifyRandomizers(verifierCollection, alignmentRandomizer, classNameRandomizer, baseRaceRandomizer, metaraceRandomizer);
+            VerifyRandomizers(verifierCollection, classNameRandomizer, baseRaceRandomizer, metaraceRandomizer);
 
             var character = new Character();
 
@@ -197,11 +197,11 @@ namespace NPCGen.Core.Generation.Factories
             return character;
         }
 
-        private static void VerifyRandomizers(VerifierCollection verifierCollection, IAlignmentRandomizer alignmentRandomizer, 
-            IClassNameRandomizer classNameRandomizer, IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer)
+        private static void VerifyRandomizers(VerifierCollection verifierCollection, IClassNameRandomizer classNameRandomizer,
+            IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer)
         {
-            var verified = verifierCollection.RandomizerVerifier.VerifyCompatibility(alignmentRandomizer, classNameRandomizer, baseRaceRandomizer,
-                metaraceRandomizer);
+            var verified = verifierCollection.RandomizerVerifier.VerifyCompatibility(verifierCollection, classNameRandomizer,
+                baseRaceRandomizer, metaraceRandomizer);
 
             if (!verified)
                 throw new IncompatibleRandomizersException();
