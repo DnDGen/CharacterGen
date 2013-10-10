@@ -1,4 +1,5 @@
-﻿using D20Dice.Dice;
+﻿using System;
+using D20Dice.Dice;
 using Moq;
 using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Generation.Factories;
@@ -11,6 +12,7 @@ namespace NPCGen.Tests.Generation.Factories
     {
         private Mock<IDice> mockDice;
         private CharacterClass characterClass;
+        private Int32 constitutionBonus;
 
         [SetUp]
         public void Setup()
@@ -18,6 +20,7 @@ namespace NPCGen.Tests.Generation.Factories
             mockDice = new Mock<IDice>();
             characterClass = new CharacterClass();
             characterClass.ClassName = CharacterClassConstants.Barbarian;
+            constitutionBonus = 0;
         }
 
         [Test]
@@ -26,8 +29,8 @@ namespace NPCGen.Tests.Generation.Factories
             characterClass.Level = 1;
             characterClass.ClassName = CharacterClassConstants.Fighter;
 
-            HitPointsFactory.CreateUsing(mockDice.Object, characterClass, 0);
-            mockDice.Verify(d => d.d10(1, 0), Times.Once());
+            HitPointsFactory.CreateUsing(mockDice.Object, characterClass, constitutionBonus);
+            mockDice.Verify(d => d.d10(1, constitutionBonus), Times.Once());
         }
 
         [Test]
@@ -36,8 +39,8 @@ namespace NPCGen.Tests.Generation.Factories
             characterClass.Level = 1;
             characterClass.ClassName = CharacterClassConstants.Paladin;
 
-            HitPointsFactory.CreateUsing(mockDice.Object, characterClass, 0);
-            mockDice.Verify(d => d.d10(1, 0), Times.Once());
+            HitPointsFactory.CreateUsing(mockDice.Object, characterClass, constitutionBonus);
+            mockDice.Verify(d => d.d10(1, constitutionBonus), Times.Once());
         }
 
         [Test]
@@ -46,8 +49,8 @@ namespace NPCGen.Tests.Generation.Factories
             characterClass.Level = 1;
             characterClass.ClassName = CharacterClassConstants.Barbarian;
 
-            HitPointsFactory.CreateUsing(mockDice.Object, characterClass, 0);
-            mockDice.Verify(d => d.d12(1, 0), Times.Once());
+            HitPointsFactory.CreateUsing(mockDice.Object, characterClass, constitutionBonus);
+            mockDice.Verify(d => d.d12(1, constitutionBonus), Times.Once());
         }
 
         [Test]
@@ -56,8 +59,8 @@ namespace NPCGen.Tests.Generation.Factories
             characterClass.Level = 1;
             characterClass.ClassName = CharacterClassConstants.Cleric;
 
-            HitPointsFactory.CreateUsing(mockDice.Object, characterClass, 0);
-            mockDice.Verify(d => d.d8(1, 0), Times.Once());
+            HitPointsFactory.CreateUsing(mockDice.Object, characterClass, constitutionBonus);
+            mockDice.Verify(d => d.d8(1, constitutionBonus), Times.Once());
         }
 
         [Test]
@@ -66,8 +69,8 @@ namespace NPCGen.Tests.Generation.Factories
             characterClass.Level = 1;
             characterClass.ClassName = CharacterClassConstants.Druid;
 
-            HitPointsFactory.CreateUsing(mockDice.Object, characterClass, 0);
-            mockDice.Verify(d => d.d8(1, 0), Times.Once());
+            HitPointsFactory.CreateUsing(mockDice.Object, characterClass, constitutionBonus);
+            mockDice.Verify(d => d.d8(1, constitutionBonus), Times.Once());
         }
 
         [Test]
@@ -76,8 +79,8 @@ namespace NPCGen.Tests.Generation.Factories
             characterClass.Level = 1;
             characterClass.ClassName = CharacterClassConstants.Monk;
 
-            HitPointsFactory.CreateUsing(mockDice.Object, characterClass, 0);
-            mockDice.Verify(d => d.d8(1, 0), Times.Once());
+            HitPointsFactory.CreateUsing(mockDice.Object, characterClass, constitutionBonus);
+            mockDice.Verify(d => d.d8(1, constitutionBonus), Times.Once());
         }
 
         [Test]
@@ -86,8 +89,8 @@ namespace NPCGen.Tests.Generation.Factories
             characterClass.Level = 1;
             characterClass.ClassName = CharacterClassConstants.Ranger;
 
-            HitPointsFactory.CreateUsing(mockDice.Object, characterClass, 0);
-            mockDice.Verify(d => d.d8(1, 0), Times.Once());
+            HitPointsFactory.CreateUsing(mockDice.Object, characterClass, constitutionBonus);
+            mockDice.Verify(d => d.d8(1, constitutionBonus), Times.Once());
         }
 
         [Test]
@@ -96,8 +99,8 @@ namespace NPCGen.Tests.Generation.Factories
             characterClass.Level = 1;
             characterClass.ClassName = CharacterClassConstants.Bard;
 
-            HitPointsFactory.CreateUsing(mockDice.Object, characterClass, 0);
-            mockDice.Verify(d => d.d6(1, 0), Times.Once());
+            HitPointsFactory.CreateUsing(mockDice.Object, characterClass, constitutionBonus);
+            mockDice.Verify(d => d.d6(1, constitutionBonus), Times.Once());
         }
 
         [Test]
@@ -106,8 +109,8 @@ namespace NPCGen.Tests.Generation.Factories
             characterClass.Level = 1;
             characterClass.ClassName = CharacterClassConstants.Rogue;
 
-            HitPointsFactory.CreateUsing(mockDice.Object, characterClass, 0);
-            mockDice.Verify(d => d.d6(1, 0), Times.Once());
+            HitPointsFactory.CreateUsing(mockDice.Object, characterClass, constitutionBonus);
+            mockDice.Verify(d => d.d6(1, constitutionBonus), Times.Once());
         }
 
         [Test]
@@ -116,8 +119,8 @@ namespace NPCGen.Tests.Generation.Factories
             characterClass.Level = 1;
             characterClass.ClassName = CharacterClassConstants.Sorcerer;
 
-            HitPointsFactory.CreateUsing(mockDice.Object, characterClass, 0);
-            mockDice.Verify(d => d.d4(1, 0), Times.Once());
+            HitPointsFactory.CreateUsing(mockDice.Object, characterClass, constitutionBonus);
+            mockDice.Verify(d => d.d4(1, constitutionBonus), Times.Once());
         }
 
         [Test]
@@ -126,8 +129,8 @@ namespace NPCGen.Tests.Generation.Factories
             characterClass.Level = 1;
             characterClass.ClassName = CharacterClassConstants.Wizard;
 
-            HitPointsFactory.CreateUsing(mockDice.Object, characterClass, 0);
-            mockDice.Verify(d => d.d4(1, 0), Times.Once());
+            HitPointsFactory.CreateUsing(mockDice.Object, characterClass, constitutionBonus);
+            mockDice.Verify(d => d.d4(1, constitutionBonus), Times.Once());
         }
 
         [Test]
@@ -138,8 +141,8 @@ namespace NPCGen.Tests.Generation.Factories
                 mockDice.ResetCalls();
                 characterClass.Level = level;
 
-                HitPointsFactory.CreateUsing(mockDice.Object, characterClass, 0);
-                mockDice.Verify(d => d.d12(1, 0), Times.Exactly(level));
+                HitPointsFactory.CreateUsing(mockDice.Object, characterClass, constitutionBonus);
+                mockDice.Verify(d => d.d12(1, constitutionBonus), Times.Exactly(level));
             }
         }
 
@@ -147,7 +150,7 @@ namespace NPCGen.Tests.Generation.Factories
         public void ConstitutionBonusApplied()
         {
             characterClass.Level = 1;
-            var constitutionBonus = 2;
+            constitutionBonus = 2;
 
             HitPointsFactory.CreateUsing(mockDice.Object, characterClass, constitutionBonus);
             mockDice.Verify(d => d.d12(1, constitutionBonus), Times.Exactly(1));
@@ -160,7 +163,7 @@ namespace NPCGen.Tests.Generation.Factories
             {
                 characterClass.Level = level;
 
-                var hitPoints = HitPointsFactory.CreateUsing(mockDice.Object, characterClass, -9000);
+                var hitPoints = HitPointsFactory.CreateUsing(mockDice.Object, characterClass, Int32.MinValue);
                 Assert.That(hitPoints, Is.EqualTo(level));
             }
         }

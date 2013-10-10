@@ -1,4 +1,5 @@
 ﻿using System;
+using D20Dice.Dice;
 using Moq;
 using NPCGen.Core.Generation.Factories;
 using NPCGen.Core.Generation.Randomizers.Races.Interfaces;
@@ -11,12 +12,14 @@ namespace NPCGen.Tests.Generation.Factories
     {
         private Mock<IBaseRaceRandomizer> mockBaseRaceRandomizer;
         private Mock<IMetaraceRandomizer> mockMetaraceRandomizer;
+        private Mock<IDice> mockDice;
 
         [SetUp]
         public void Setup()
         {
             mockBaseRaceRandomizer = new Mock<IBaseRaceRandomizer>();
             mockMetaraceRandomizer = new Mock<IMetaraceRandomizer>();
+            mockDice = new Mock<IDice>();
         }
 
         [Test]
@@ -24,7 +27,8 @@ namespace NPCGen.Tests.Generation.Factories
         {
             mockBaseRaceRandomizer.Setup(r => r.Randomize(It.IsAny<String>(), It.IsAny<String>())).Returns("base race");
 
-            var race = RaceFactory.CreateUsing(String.Empty, String.Empty, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
+            var race = RaceFactory.CreateUsing(String.Empty, String.Empty, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object,
+                mockDice.Object);
             Assert.That(race.BaseRace, Is.EqualTo("base race"));
         }
 
@@ -33,8 +37,29 @@ namespace NPCGen.Tests.Generation.Factories
         {
             mockMetaraceRandomizer.Setup(r => r.Randomize(It.IsAny<String>(), It.IsAny<String>())).Returns("metarace");
 
-            var race = RaceFactory.CreateUsing(String.Empty, String.Empty, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
+            var race = RaceFactory.CreateUsing(String.Empty, String.Empty, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object,
+                mockDice.Object);
             Assert.That(race.Metarace, Is.EqualTo("metarace"));
+        }
+
+        [Test]
+        public void FactoryReturnsMaleOnLowRoll()
+        {
+            mockDice.Setup(d => d.d2(1, 0)).Returns(1);
+
+            var race = RaceFactory.CreateUsing(String.Empty, String.Empty, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, 
+                mockDice.Object);
+            Assert.That(race.Male, Is.True);
+        }
+
+        [Test]
+        public void FactoryReturnsFemaleOnHighRoll()
+        {
+            mockDice.Setup(d => d.d2(1, 0)).Returns(2);
+
+            var race = RaceFactory.CreateUsing(String.Empty, String.Empty, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object,
+                mockDice.Object);
+            Assert.That(race.Male, Is.False);
         }
     }
 }

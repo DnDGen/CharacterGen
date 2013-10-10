@@ -1,4 +1,5 @@
 ﻿using System;
+using D20Dice.Dice;
 using NPCGen.Core.Data;
 using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Generation.Randomizers.Alignments.Interfaces;
@@ -12,9 +13,9 @@ namespace NPCGen.Core.Generation.Factories
 {
     public static class CharacterFactory
     {
-        public static Character CreateUsing(VerifierCollection verifierCollection, IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classNameRandomizer,
-            ILevelRandomizer levelRandomizer, IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer,
-            IStatsRandomizer statsRandomizer)
+        public static Character CreateUsing(VerifierCollection verifierCollection, IAlignmentRandomizer alignmentRandomizer,
+            IClassNameRandomizer classNameRandomizer, ILevelRandomizer levelRandomizer, IBaseRaceRandomizer baseRaceRandomizer, 
+            IMetaraceRandomizer metaraceRandomizer, IStatsRandomizer statsRandomizer, IDice dice)
         {
             VerifyRandomizers(verifierCollection, alignmentRandomizer, classNameRandomizer, baseRaceRandomizer, metaraceRandomizer);
 
@@ -25,7 +26,7 @@ namespace NPCGen.Core.Generation.Factories
             //need to verify each alignment, class as rolled with randomizers
             var alignment = GenerateAlignment(verifierCollection, alignmentRandomizer);
             var characterClass = CharacterClassFactory.CreateUsing(alignment, levelRandomizer, classNameRandomizer);
-            var race = RaceFactory.CreateUsing(alignment.GetGoodnessString(), characterClass.ClassName, baseRaceRandomizer, metaraceRandomizer);
+            var race = RaceFactory.CreateUsing(alignment.GetGoodnessString(), characterClass.ClassName, baseRaceRandomizer, metaraceRandomizer, dice);
 
             //move HP out of class, put in character, make HitPointFactory(characterClass, constitutionBonus, metarace)
 

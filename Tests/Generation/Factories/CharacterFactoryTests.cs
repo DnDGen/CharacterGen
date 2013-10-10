@@ -1,4 +1,5 @@
 ﻿using System;
+using D20Dice.Dice;
 using Moq;
 using NPCGen.Core.Data;
 using NPCGen.Core.Data.Alignments;
@@ -29,10 +30,13 @@ namespace NPCGen.Tests.Generation.Factories
         private Mock<IBaseRaceRandomizer> mockBaseRaceRandomizer;
         private Mock<IMetaraceRandomizer> mockMetaraceRandomizer;
         private Mock<IStatsRandomizer> mockStatsRandomizer;
+        private Mock<IDice> mockDice;
 
         [SetUp]
         public void Setup()
         {
+            mockDice = new Mock<IDice>();
+
             SetupMockRandomizers();
             SetupMockVerifiers();
         }
@@ -130,7 +134,7 @@ namespace NPCGen.Tests.Generation.Factories
             var alignment = AlignmentFactory.CreateUsing(mockAlignmentRandomizer.Object);
             var characterClass = CharacterClassFactory.CreateUsing(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
             var race = RaceFactory.CreateUsing(alignment.GetGoodnessString(), characterClass.ClassName, mockBaseRaceRandomizer.Object,
-                mockMetaraceRandomizer.Object);
+                mockMetaraceRandomizer.Object, mockDice.Object);
             
             var character = CreateCharacter();
             Assert.That(character.Race.BaseRace, Is.EqualTo(race.BaseRace));
@@ -168,7 +172,7 @@ namespace NPCGen.Tests.Generation.Factories
         private Character CreateCharacter()
         {
             return CharacterFactory.CreateUsing(verifierCollection, mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object,
-                mockLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
+                mockLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object, mockDice.Object);
         }
     }
 }

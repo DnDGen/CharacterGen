@@ -1,4 +1,5 @@
 ﻿using System;
+using D20Dice.Dice;
 using NPCGen.Core.Data.Races;
 using NPCGen.Core.Generation.Randomizers.Races.Interfaces;
 
@@ -7,7 +8,7 @@ namespace NPCGen.Core.Generation.Factories
     public static class RaceFactory
     {
         public static Race CreateUsing(String goodnessString, String className, IBaseRaceRandomizer baseRaceRandomizer, 
-            IMetaraceRandomizer metaraceRandomizer)
+            IMetaraceRandomizer metaraceRandomizer, IDice dice)
         {
             var race = new Race();
 
