@@ -1,6 +1,8 @@
 ﻿using System;
 using D20Dice.Dice;
 using Moq;
+using NPCGen.Core.Data.CharacterClasses;
+using NPCGen.Core.Data.Races;
 using NPCGen.Core.Generation.Factories;
 using NPCGen.Core.Generation.Randomizers.Races.Interfaces;
 using NUnit.Framework;
@@ -58,6 +60,26 @@ namespace NPCGen.Tests.Generation.Factories
             mockDice.Setup(d => d.d2(1, 0)).Returns(2);
 
             var race = RaceFactory.CreateUsing(String.Empty, String.Empty, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object,
+                mockDice.Object);
+            Assert.That(race.Male, Is.False);
+        }
+
+        [Test]
+        public void FactoryReturnsMaleForDrowWizard()
+        {
+            mockBaseRaceRandomizer.Setup(r => r.Randomize(It.IsAny<String>(), It.IsAny<String>())).Returns(RaceConstants.BaseRaces.Drow);
+
+            var race = RaceFactory.CreateUsing(String.Empty, CharacterClassConstants.Wizard, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object,
+                mockDice.Object);
+            Assert.That(race.Male, Is.True);
+        }
+
+        [Test]
+        public void FactoryReturnsFemaleForDrowCleric()
+        {
+            mockBaseRaceRandomizer.Setup(r => r.Randomize(It.IsAny<String>(), It.IsAny<String>())).Returns(RaceConstants.BaseRaces.Drow);
+
+            var race = RaceFactory.CreateUsing(String.Empty, CharacterClassConstants.Cleric, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object,
                 mockDice.Object);
             Assert.That(race.Male, Is.False);
         }
