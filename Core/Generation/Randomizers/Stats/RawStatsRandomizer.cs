@@ -16,7 +16,7 @@ namespace NPCGen.Core.Generation.Randomizers.Stats
 
         protected override Int32 RollStat()
         {
-            throw new NotImplementedException();
+            return dice.d6(3, 0);
         }
 
         protected override Boolean StatsAreAllowed(IEnumerable<Stat> stats)

@@ -15,6 +15,8 @@ namespace NPCGen.Tests.Generation.Randomizers.Stats
         public void Setup()
         {
             randomizer = new TestStatRandomizer();
+            randomizer.Allowed = true;
+            randomizer.SwitchAllowed = false;
         }
 
         [Test]
@@ -65,6 +67,7 @@ namespace NPCGen.Tests.Generation.Randomizers.Stats
             randomizer.Roll = 10;
             randomizer.Reroll = 12;
             randomizer.Allowed = false;
+            randomizer.SwitchAllowed = true;
 
             var stats = randomizer.Randomize();
 
@@ -81,6 +84,7 @@ namespace NPCGen.Tests.Generation.Randomizers.Stats
             public Int32 Roll { get; set; }
             public Int32 Reroll { get; set; }
             public Boolean Allowed { get; set; }
+            public Boolean SwitchAllowed { get; set; }
 
             private Boolean firstRoll;
 
@@ -91,7 +95,7 @@ namespace NPCGen.Tests.Generation.Randomizers.Stats
 
             protected override Int32 RollStat()
             {
-                if (firstRoll)
+                if (firstRoll || Reroll == 0)
                     return Roll;
 
                 return Reroll;
@@ -100,8 +104,11 @@ namespace NPCGen.Tests.Generation.Randomizers.Stats
             protected override Boolean StatsAreAllowed(IEnumerable<Stat> stats)
             {
                 var retunValue = Allowed;
-                Allowed = !Allowed;
-                firstRoll = !firstRoll;
+                firstRoll &= !firstRoll;
+                
+                if (SwitchAllowed)
+                    Allowed = !Allowed;
+
                 return retunValue;
             }
         }

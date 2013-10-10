@@ -119,7 +119,9 @@ namespace NPCGen.Tests.Generation.Factories
             var characterClass = CharacterClassFactory.CreateUsing(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
             
             var character = CreateCharacter();
-            Assert.That(character.Class, Is.EqualTo(characterClass));
+            Assert.That(character.Class.BaseAttack.BaseAttackBonus, Is.EqualTo(characterClass.BaseAttack.BaseAttackBonus));
+            Assert.That(character.Class.ClassName, Is.EqualTo(characterClass.ClassName));
+            Assert.That(character.Class.Level, Is.EqualTo(characterClass.Level));
         }
 
         [Test]
@@ -131,7 +133,9 @@ namespace NPCGen.Tests.Generation.Factories
                 mockMetaraceRandomizer.Object);
             
             var character = CreateCharacter();
-            Assert.That(character.Race, Is.EqualTo(race));
+            Assert.That(character.Race.BaseRace, Is.EqualTo(race.BaseRace));
+            Assert.That(character.Race.Male, Is.EqualTo(race.Male));
+            Assert.That(character.Race.Metarace, Is.EqualTo(race.Metarace));
         }
 
         [Test]

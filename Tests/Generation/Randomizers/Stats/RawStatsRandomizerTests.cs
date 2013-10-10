@@ -41,31 +41,17 @@ namespace NPCGen.Tests.Generation.Randomizers.Stats
         [Test]
         public void RolledStatsAreAlwaysAllowed()
         {
-            var minStatValue = 3;
-            var maxStatValue = 18;
-
-            for (var strength = minStatValue; strength <= maxStatValue; strength++)
-                for (var constitution = minStatValue; constitution <= maxStatValue; constitution++)
-                    for (var dexterity = minStatValue; dexterity <= maxStatValue; dexterity++)
-                        for (var intelligence = minStatValue; intelligence <= maxStatValue; intelligence++)
-                            for (var wisdom = minStatValue; wisdom <= maxStatValue; wisdom++)
-                                for (var charisma = minStatValue; charisma <= maxStatValue; charisma++)
-                                    AssertStatValues(strength, constitution, dexterity, intelligence, wisdom, charisma);
-        }
-
-        private void AssertStatValues(Int32 strength, Int32 constitution, Int32 dexterity, Int32 intelligence, Int32 wisdom, Int32 charisma)
-        {
-            mockDice.SetupSequence(d => d.d6(3, 0)).Returns(strength).Returns(constitution).Returns(dexterity).Returns(intelligence)
-                .Returns(wisdom).Returns(charisma);
+            mockDice.SetupSequence(d => d.d6(3, 0)).Returns(9266).Returns(-42).Returns(Int32.MaxValue).Returns(Int32.MinValue).Returns(0)
+                .Returns(1337);
 
             var stats = randomizer.Randomize();
 
-            Assert.That(stats[StatConstants.Strength].Value, Is.EqualTo(strength));
-            Assert.That(stats[StatConstants.Constitution].Value, Is.EqualTo(constitution));
-            Assert.That(stats[StatConstants.Dexterity].Value, Is.EqualTo(dexterity));
-            Assert.That(stats[StatConstants.Intelligence].Value, Is.EqualTo(intelligence));
-            Assert.That(stats[StatConstants.Wisdom].Value, Is.EqualTo(wisdom));
-            Assert.That(stats[StatConstants.Charisma].Value, Is.EqualTo(charisma));
+            Assert.That(stats[StatConstants.Strength].Value, Is.EqualTo(9266));
+            Assert.That(stats[StatConstants.Constitution].Value, Is.EqualTo(-42));
+            Assert.That(stats[StatConstants.Dexterity].Value, Is.EqualTo(Int32.MaxValue));
+            Assert.That(stats[StatConstants.Intelligence].Value, Is.EqualTo(Int32.MinValue));
+            Assert.That(stats[StatConstants.Wisdom].Value, Is.EqualTo(0));
+            Assert.That(stats[StatConstants.Charisma].Value, Is.EqualTo(1337));
         }
     }
 }
