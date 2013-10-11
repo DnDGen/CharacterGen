@@ -1,5 +1,4 @@
 ﻿using System;
-using NPCGen.Core.Generation.Randomizers.CharacterClasses.ClassNames;
 using NPCGen.Core.Generation.Randomizers.CharacterClasses.Interfaces;
 using NPCGen.Core.Generation.Randomizers.Races.Interfaces;
 using NPCGen.Core.Generation.Verifiers.Interfaces;
@@ -12,49 +11,28 @@ namespace NPCGen.Core.Generation.Verifiers
             IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer)
         {
             return VerifyAlignment(verifierCollection.AlignmentVerifier, classNameRandomizer, baseRaceRandomizer, metaraceRandomizer)
-                && VerifyClassName(classNameRandomizer);
+                && VerifyClassName(verifierCollection.ClassNameVerifier, baseRaceRandomizer, metaraceRandomizer)
+                && VerifyBaseRace(verifierCollection.BaseRaceVerifier, metaraceRandomizer);
         }
 
-        private Boolean VerifyAlignment(IAlignmentVerifier alignmentVerifier, IClassNameRandomizer classRandomizer, 
+        private Boolean VerifyAlignment(IAlignmentVerifier alignmentVerifier, IClassNameRandomizer classNameRandomizer, 
             IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer)
         {
-            return alignmentVerifier.VerifyCompatibility(classRandomizer)
+            return alignmentVerifier.VerifyCompatibility(classNameRandomizer)
                 && alignmentVerifier.VerifyCompatibility(baseRaceRandomizer)
                 && alignmentVerifier.VerifyCompatibility(metaraceRandomizer);
         }
 
-        private Boolean VerifyClassName(IClassNameRandomizer classRandomizer)
+        private Boolean VerifyClassName(IClassNameVerifier classNameVerifier, IBaseRaceRandomizer baseRaceRandomizer,
+            IMetaraceRandomizer metaraceRandomizer)
         {
-            if (classRandomizer is HealerClassNameRandomizer)
-            {
-                throw new NotImplementedException();
-            }
-            else if (classRandomizer is MageClassNameRandomizer)
-            {
-                throw new NotImplementedException();
-            }
-            else if (classRandomizer is NonSpellcasterClassNameRandomizer)
-            {
-                throw new NotImplementedException();
-            }
-            else if (classRandomizer is SpellcasterClassNameRandomizer)
-            {
-                throw new NotImplementedException();
-            }
-            else if (classRandomizer is StealthClassNameRandomizer)
-            {
-                throw new NotImplementedException();
-            }
-            else if (classRandomizer is WarriorClassNameRandomizer)
-            {
-                throw new NotImplementedException();
-            }
-            else if (classRandomizer is SetClassNameRandomizer)
-            {
-                throw new NotImplementedException();
-            }
+            return classNameVerifier.VerifyCompatibility(baseRaceRandomizer)
+                && classNameVerifier.VerifyCompatibility(metaraceRandomizer);
+        }
 
-            return true;
+        private Boolean VerifyBaseRace(IBaseRaceVerifier baseRaceVerifier, IMetaraceRandomizer metaraceRandomizer)
+        {
+            return baseRaceVerifier.VerifyCompatibility(metaraceRandomizer);
         }
     }
 }

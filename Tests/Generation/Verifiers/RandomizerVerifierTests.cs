@@ -14,16 +14,36 @@ namespace NPCGen.Tests.Generation.Verifiers
         private IRandomizerVerifier verifier;
         private VerifierCollection verifiers;
         private Mock<IAlignmentVerifier> mockAlignmentVerifier;
+        private Mock<IClassNameVerifier> mockClassNameVerifier;
+        private Mock<IBaseRaceVerifier> mockBaseRaceVerifier;
 
         [SetUp]
         public void Setup()
         {
             mockAlignmentVerifier = new Mock<IAlignmentVerifier>();
+            mockClassNameVerifier = new Mock<IClassNameVerifier>();
+            mockBaseRaceVerifier = new Mock<IBaseRaceVerifier>();
+
+            mockAlignmentVerifier.Setup(v => v.VerifyCompatibility(It.IsAny<IClassNameRandomizer>())).Returns(true);
+            mockAlignmentVerifier.Setup(v => v.VerifyCompatibility(It.IsAny<IBaseRaceRandomizer>())).Returns(true);
+            mockAlignmentVerifier.Setup(v => v.VerifyCompatibility(It.IsAny<IMetaraceRandomizer>())).Returns(true);
+            mockClassNameVerifier.Setup(v => v.VerifyCompatibility(It.IsAny<IBaseRaceRandomizer>())).Returns(true);
+            mockClassNameVerifier.Setup(v => v.VerifyCompatibility(It.IsAny<IMetaraceRandomizer>())).Returns(true);
+            mockBaseRaceVerifier.Setup(v => v.VerifyCompatibility(It.IsAny<IMetaraceRandomizer>())).Returns(true);
 
             verifiers = new VerifierCollection();
             verifiers.AlignmentVerifier = mockAlignmentVerifier.Object;
+            verifiers.ClassNameVerifier = mockClassNameVerifier.Object;
+            verifiers.BaseRaceVerifier = mockBaseRaceVerifier.Object;
 
             verifier = new RandomizerVerifier();
+        }
+
+        [Test]
+        public void RandomizerVerifierVerifiesAlignmentRandomizerAgainstClassNameRandomizer()
+        {
+            Verify();
+            mockAlignmentVerifier.Verify(v => v.VerifyCompatibility(It.IsAny<IClassNameRandomizer>()), Times.Once);
         }
 
         [Test]
@@ -33,6 +53,93 @@ namespace NPCGen.Tests.Generation.Verifiers
 
             var verified = Verify();
             Assert.That(verified, Is.False);
+        }
+
+        [Test]
+        public void RandomizerVerifierVerifiesAlignmentRandomizerAgainstBaseRaceRandomizer()
+        {
+            Verify();
+            mockAlignmentVerifier.Verify(v => v.VerifyCompatibility(It.IsAny<IBaseRaceRandomizer>()), Times.Once);
+        }
+
+        [Test]
+        public void NotVerifiedIfAlignmentRandomizerAndBaseRaceRandomizerAreIncompatible()
+        {
+            mockAlignmentVerifier.Setup(v => v.VerifyCompatibility(It.IsAny<IBaseRaceRandomizer>())).Returns(false);
+
+            var verified = Verify();
+            Assert.That(verified, Is.False);
+        }
+
+        [Test]
+        public void RandomizerVerifierVerifiesAlignmentRandomizerAgainstMetaraceRandomizer()
+        {
+            Verify();
+            mockAlignmentVerifier.Verify(v => v.VerifyCompatibility(It.IsAny<IMetaraceRandomizer>()), Times.Once);
+        }
+
+        [Test]
+        public void NotVerifiedIfAlignmentRandomizerAndMetaraceRandomizerAreIncompatible()
+        {
+            mockAlignmentVerifier.Setup(v => v.VerifyCompatibility(It.IsAny<IMetaraceRandomizer>())).Returns(false);
+
+            var verified = Verify();
+            Assert.That(verified, Is.False);
+        }
+
+        [Test]
+        public void RandomizerVerifierVerifiesClassNameRandomizerAgainstBaseRaceRandomizer()
+        {
+            Verify();
+            mockClassNameVerifier.Verify(v => v.VerifyCompatibility(It.IsAny<IBaseRaceRandomizer>()), Times.Once);
+        }
+
+        [Test]
+        public void NotVerifiedIfClassNameRandomizerAndBaseRaceRandomizerAreIncompatible()
+        {
+            mockClassNameVerifier.Setup(v => v.VerifyCompatibility(It.IsAny<IBaseRaceRandomizer>())).Returns(false);
+
+            var verified = Verify();
+            Assert.That(verified, Is.False);
+        }
+
+        [Test]
+        public void RandomizerVerifierVerifiesClassNameRandomizerAgainstMetaraceRandomizer()
+        {
+            Verify();
+            mockClassNameVerifier.Verify(v => v.VerifyCompatibility(It.IsAny<IMetaraceRandomizer>()), Times.Once);
+        }
+
+        [Test]
+        public void NotVerifiedIfClassNameRandomizerAndMetaraceRandomizerAreIncompatible()
+        {
+            mockClassNameVerifier.Setup(v => v.VerifyCompatibility(It.IsAny<IMetaraceRandomizer>())).Returns(false);
+
+            var verified = Verify();
+            Assert.That(verified, Is.False);
+        }
+
+        [Test]
+        public void RandomizerVerifierVerifiesBaseRaceRandomizerAgainstMetaraceRandomizer()
+        {
+            Verify();
+            mockBaseRaceVerifier.Verify(v => v.VerifyCompatibility(It.IsAny<IMetaraceRandomizer>()), Times.Once);
+        }
+
+        [Test]
+        public void NotVerifiedIfBaseRaceRandomizerAndMetaraceRandomizerAreIncompatible()
+        {
+            mockBaseRaceVerifier.Setup(v => v.VerifyCompatibility(It.IsAny<IMetaraceRandomizer>())).Returns(false);
+
+            var verified = Verify();
+            Assert.That(verified, Is.False);
+        }
+
+        [Test]
+        public void VerifiedIfAllRandomizersAreCompatible()
+        {
+            var verified = Verify();
+            Assert.That(verified, Is.True);
         }
 
         private Boolean Verify()
