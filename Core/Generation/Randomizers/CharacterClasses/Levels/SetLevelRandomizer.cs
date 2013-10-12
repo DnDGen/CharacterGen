@@ -1,7 +1,7 @@
-﻿using System;
-using NPCGen.Core.Generation.Randomizers.CharacterClasses.Interfaces;
+﻿using NPCGen.Core.Generation.Randomizers.CharacterClasses.Interfaces;
+using System;
 
-namespace NPCGen.Core.Generation.Randomizers.Levels
+namespace NPCGen.Core.Generation.Randomizers.CharacterClasses.Levels
 {
     public class SetLevelRandomizer : ILevelRandomizer
     {

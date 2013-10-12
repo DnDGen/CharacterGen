@@ -1,4 +1,4 @@
-﻿using NPCGen.Core.Generation.Randomizers.Levels;
+﻿using NPCGen.Core.Generation.Randomizers.CharacterClasses.Levels;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Generation.Randomizers.CharacterClasses.Levels

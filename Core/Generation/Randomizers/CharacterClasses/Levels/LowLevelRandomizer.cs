@@ -1,8 +1,8 @@
 ﻿using D20Dice.Dice;
 
-namespace NPCGen.Core.Generation.Randomizers.Levels
+namespace NPCGen.Core.Generation.Randomizers.CharacterClasses.Levels
 {
-    public class LowLevelRandomizer : RangedLevelRandomizer
+    public class LowLevelRandomizer : RangedLevel
     {
         public LowLevelRandomizer(IDice dice)
             : base(dice)

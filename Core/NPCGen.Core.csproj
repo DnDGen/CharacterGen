@@ -93,7 +93,7 @@
     <Compile Include="Generation\Randomizers\CharacterClasses\Interfaces\ILevelRandomizer.cs" />
     <Compile Include="Generation\Randomizers\CharacterClasses\Levels\LowLevelRandomizer.cs" />
     <Compile Include="Generation\Randomizers\CharacterClasses\Levels\MediumLevelRandomizer.cs" />
-    <Compile Include="Generation\Randomizers\CharacterClasses\Levels\RangedLevelRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\Levels\RangedLevel.cs" />
     <Compile Include="Generation\Randomizers\CharacterClasses\Levels\SetLevelRandomizer.cs" />
     <Compile Include="Generation\Randomizers\CharacterClasses\Levels\VeryHighLevelRandomizer.cs" />
     <Compile Include="Generation\Providers\PercentileResultProvider.cs" />

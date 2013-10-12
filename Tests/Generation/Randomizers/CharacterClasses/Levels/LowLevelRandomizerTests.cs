@@ -1,6 +1,6 @@
 ﻿using D20Dice.Dice;
 using Moq;
-using NPCGen.Core.Generation.Randomizers.Levels;
+using NPCGen.Core.Generation.Randomizers.CharacterClasses.Levels;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Generation.Randomizers.CharacterClasses.Levels
@@ -14,9 +14,8 @@ namespace NPCGen.Tests.Generation.Randomizers.CharacterClasses.Levels
             var mockDice = new Mock<IDice>();
             var randomizer = new LowLevelRandomizer(mockDice.Object);
 
-            mockDice.Setup(d => d.d6(1, 0)).Returns(1);
             var level = randomizer.Randomize();
-            Assert.That(level, Is.EqualTo(1));
+            Assert.That(level, Is.EqualTo(0));
         }
     }
 }
