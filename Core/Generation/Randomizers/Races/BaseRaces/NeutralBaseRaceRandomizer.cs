@@ -4,7 +4,7 @@ using System;
 
 namespace NPCGen.Core.Generation.Randomizers.Races.BaseRaces
 {
-    public class NeutralBaseRaceRandomizer : BaseBaseRaceRandomizer
+    public class NeutralBaseRaceRandomizer : BaseBaseRace
     {
         public NeutralBaseRaceRandomizer(IPercentileResultProvider percentileResultProvider) : base(percentileResultProvider) { }
 

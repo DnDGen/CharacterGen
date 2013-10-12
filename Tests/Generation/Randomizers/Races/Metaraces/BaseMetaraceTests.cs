@@ -1,8 +1,8 @@
-﻿using System;
-using Moq;
+﻿using Moq;
 using NPCGen.Core.Generation.Providers.Interfaces;
 using NPCGen.Core.Generation.Randomizers.Races.Metaraces;
 using NUnit.Framework;
+using System;
 
 namespace NPCGen.Tests.Generation.Randomizers.Races.Metaraces
 {
@@ -26,6 +26,7 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.Metaraces
         {
             randomizer.MetaraceAllowed = false;
             randomizer.SwitchAllowed = true;
+            mockPercentileResultProvider.Setup(p => p.GetPercentileResult(It.IsAny<String>())).Returns("metarace");
 
             randomizer.Randomize(String.Empty, String.Empty);
             mockPercentileResultProvider.Verify(p => p.GetPercentileResult(It.IsAny<String>()), Times.Exactly(2));
@@ -80,6 +81,15 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.Metaraces
             Assert.That(result, Is.EqualTo("metarace"));
         }
 
+        [Test]
+        public void AccessesTableAlignmentGoodnessClassMetaraces()
+        {
+            var result = randomizer.Randomize("goodness", "className");
+
+            mockPercentileResultProvider.Verify(p => p.GetPercentileResult("goodnessclassNameMetaraces")
+                , Times.Once());
+        }
+
         private class TestMetaraceRandomizer : BaseMetarace
         {
             public Boolean MetaraceAllowed { get; set; }
@@ -95,10 +105,10 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.Metaraces
             protected override Boolean MetaraceIsAllowed(String metarace)
             {
                 var toReturn = MetaraceAllowed;
-                
+
                 if (SwitchAllowed)
                     MetaraceAllowed = !MetaraceAllowed;
-                
+
                 return toReturn;
             }
         }

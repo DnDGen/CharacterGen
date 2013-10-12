@@ -4,11 +4,11 @@ using NPCGen.Core.Generation.Randomizers.Races.Interfaces;
 
 namespace NPCGen.Core.Generation.Randomizers.Races.BaseRaces
 {
-    public abstract class BaseBaseRaceRandomizer : IBaseRaceRandomizer
+    public abstract class BaseBaseRace : IBaseRaceRandomizer
     {
         private IPercentileResultProvider percentileResultProvider;
 
-        public BaseBaseRaceRandomizer(IPercentileResultProvider percentileResultProvider)
+        public BaseBaseRace(IPercentileResultProvider percentileResultProvider)
         {
             this.percentileResultProvider = percentileResultProvider;
         }

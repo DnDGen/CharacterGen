@@ -3,7 +3,7 @@ using System;
 
 namespace NPCGen.Core.Generation.Randomizers.Races.BaseRaces
 {
-    public class AnyBaseRaceRandomizer : BaseBaseRaceRandomizer
+    public class AnyBaseRaceRandomizer : BaseBaseRace
     {
         public AnyBaseRaceRandomizer(IPercentileResultProvider percentileResultProvider) : base(percentileResultProvider) { }
 

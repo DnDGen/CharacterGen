@@ -1,6 +1,6 @@
-﻿using System;
-using NPCGen.Core.Generation.Providers.Interfaces;
+﻿using NPCGen.Core.Generation.Providers.Interfaces;
 using NPCGen.Core.Generation.Randomizers.Races.Interfaces;
+using System;
 
 namespace NPCGen.Core.Generation.Randomizers.Races.Metaraces
 {
@@ -28,12 +28,10 @@ namespace NPCGen.Core.Generation.Randomizers.Races.Metaraces
 
         private Boolean RaceIsAllowed(String metarace)
         {
-            return NoMetaraceAllowed(metarace) && MetaraceIsAllowed(metarace);
-        }
+            if (String.IsNullOrEmpty(metarace))
+                return !forcedMetarace;
 
-        private Boolean NoMetaraceAllowed(String metarace)
-        {
-            return !forcedMetarace || !String.IsNullOrEmpty(metarace);
+            return MetaraceIsAllowed(metarace);
         }
 
         protected abstract Boolean MetaraceIsAllowed(String metarace);

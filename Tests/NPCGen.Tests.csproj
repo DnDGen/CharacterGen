@@ -101,7 +101,7 @@
     <Compile Include="Generation\Randomizers\CharacterClasses\Levels\SetLevelRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\CharacterClasses\Levels\VeryHighLevelRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\Races\BaseRaces\AnyBaseRaceRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\Races\BaseRaces\BaseBaseRaceRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Races\BaseRaces\BaseBaseRaceTests.cs" />
     <Compile Include="Generation\Randomizers\Races\BaseRaces\BaseRaceRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\Races\BaseRaces\EvilBaseRaceRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\Races\BaseRaces\GoodBaseRaceRandomizerTests.cs" />
@@ -113,6 +113,7 @@
     <Compile Include="Generation\Randomizers\Races\BaseRaces\SetBaseRaceRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\Races\BaseRaces\StandardBaseRaceRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\Races\Metaraces\AllowedAnyMetaraceRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Races\Metaraces\AllowedEvilMetaraceRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\Races\Metaraces\AnyMetaraceTests.cs" />
     <Compile Include="Generation\Randomizers\Races\Metaraces\BaseMetaraceTests.cs" />
     <Compile Include="Generation\Randomizers\Races\Metaraces\EvilMetaraceTests.cs" />
