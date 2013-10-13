@@ -1,42 +1,41 @@
 ﻿using NPCGen.Core.Data.Races;
-using NPCGen.Core.Generation.Providers.Interfaces;
 using NPCGen.Core.Generation.Randomizers.Races.Metaraces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Generation.Randomizers.Races.Metaraces
 {
     [TestFixture]
-    public class AnyMetaraceTests : MetaraceRandomizerTests
+    public class LycanthropeMetaraceRandomizerTests : MetaraceRandomizerTests
     {
         [SetUp]
         public void Setup()
         {
-            randomizer = new TestAnyMetarace(mockPercentileResultProvider.Object);
-            controlCase = RaceConstants.Metaraces.HalfDragon;
+            randomizer = new LycanthropeMetaraceRandomizer(mockPercentileResultProvider.Object);
+            controlCase = RaceConstants.Metaraces.Werebear;
         }
 
         [Test]
-        public void HalfCelestialIsAllowed()
+        public void HalfCelestialIsNotAllowed()
         {
-            AssertRaceIsAllowed(RaceConstants.Metaraces.HalfCelestial);
+            AssertRaceIsNotAllowed(RaceConstants.Metaraces.HalfCelestial);
         }
 
         [Test]
-        public void HalfDragonIsAllowed()
+        public void HalfDragonIsNotAllowed()
         {
-            AssertControlIsAllowed(RaceConstants.Metaraces.HalfCelestial);
+            AssertRaceIsNotAllowed(RaceConstants.Metaraces.HalfFiend);
         }
 
         [Test]
-        public void HalfFiendIsAllowed()
+        public void HalfFiendIsNotAllowed()
         {
-            AssertRaceIsAllowed(RaceConstants.Metaraces.HalfFiend);
+            AssertRaceIsNotAllowed(RaceConstants.Metaraces.HalfFiend);
         }
 
         [Test]
         public void WerebearIsAllowed()
         {
-            AssertRaceIsAllowed(RaceConstants.Metaraces.Werebear);
+            AssertControlIsAllowed(RaceConstants.Metaraces.Wereboar);
         }
 
         [Test]
@@ -61,11 +60,6 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.Metaraces
         public void WerewolfIsAllowed()
         {
             AssertRaceIsAllowed(RaceConstants.Metaraces.Werewolf);
-        }
-
-        private class TestAnyMetarace : AnyMetarace
-        {
-            public TestAnyMetarace(IPercentileResultProvider percentileResultProvider) : base(percentileResultProvider) { }
         }
     }
 }

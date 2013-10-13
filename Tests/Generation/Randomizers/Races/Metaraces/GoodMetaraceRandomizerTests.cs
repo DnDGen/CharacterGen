@@ -1,42 +1,41 @@
 ﻿using NPCGen.Core.Data.Races;
-using NPCGen.Core.Generation.Providers.Interfaces;
 using NPCGen.Core.Generation.Randomizers.Races.Metaraces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Generation.Randomizers.Races.Metaraces
 {
     [TestFixture]
-    public class GeneticMetaraceTests : MetaraceRandomizerTests
+    public class GoodMetaraceRandomizerTests : MetaraceRandomizerTests
     {
         [SetUp]
         public void Setup()
         {
-            randomizer = new TestGeneticMetarace(mockPercentileResultProvider.Object);
-            controlCase = RaceConstants.Metaraces.HalfCelestial;
+            randomizer = new GoodMetaraceRandomizer(mockPercentileResultProvider.Object);
+            controlCase = RaceConstants.Metaraces.HalfDragon;
         }
 
         [Test]
         public void HalfCelestialIsAllowed()
         {
-            AssertControlIsAllowed(RaceConstants.Metaraces.HalfFiend);
+            AssertRaceIsAllowed(RaceConstants.Metaraces.HalfCelestial);
         }
 
         [Test]
         public void HalfDragonIsAllowed()
         {
-            AssertRaceIsAllowed(RaceConstants.Metaraces.HalfFiend);
+            AssertControlIsAllowed(RaceConstants.Metaraces.HalfFiend);
         }
 
         [Test]
-        public void HalfFiendIsAllowed()
+        public void HalfFiendIsNotAllowed()
         {
-            AssertRaceIsAllowed(RaceConstants.Metaraces.HalfFiend);
+            AssertRaceIsNotAllowed(RaceConstants.Metaraces.HalfFiend);
         }
 
         [Test]
-        public void WerebearIsNotAllowed()
+        public void WerebearIsAllowed()
         {
-            AssertRaceIsNotAllowed(RaceConstants.Metaraces.Werebear);
+            AssertRaceIsAllowed(RaceConstants.Metaraces.Werebear);
         }
 
         [Test]
@@ -61,11 +60,6 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.Metaraces
         public void WerewolfIsNotAllowed()
         {
             AssertRaceIsNotAllowed(RaceConstants.Metaraces.Werewolf);
-        }
-
-        private class TestGeneticMetarace : GeneticMetarace
-        {
-            public TestGeneticMetarace(IPercentileResultProvider percentileResultProvider) : base(percentileResultProvider) { }
         }
     }
 }

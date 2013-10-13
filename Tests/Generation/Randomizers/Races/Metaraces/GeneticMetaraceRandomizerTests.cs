@@ -1,30 +1,29 @@
 ﻿using NPCGen.Core.Data.Races;
-using NPCGen.Core.Generation.Providers.Interfaces;
 using NPCGen.Core.Generation.Randomizers.Races.Metaraces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Generation.Randomizers.Races.Metaraces
 {
     [TestFixture]
-    public class EvilMetaraceTests : MetaraceRandomizerTests
+    public class GeneticMetaraceRandomizerTests : MetaraceRandomizerTests
     {
         [SetUp]
         public void Setup()
         {
-            randomizer = new TestEvilMetarace(mockPercentileResultProvider.Object);
-            controlCase = RaceConstants.Metaraces.HalfDragon;
+            randomizer = new GeneticMetaraceRandomizer(mockPercentileResultProvider.Object);
+            controlCase = RaceConstants.Metaraces.HalfCelestial;
         }
 
         [Test]
-        public void HalfCelestialIsNotAllowed()
+        public void HalfCelestialIsAllowed()
         {
-            AssertRaceIsNotAllowed(RaceConstants.Metaraces.HalfCelestial);
+            AssertControlIsAllowed(RaceConstants.Metaraces.HalfFiend);
         }
 
         [Test]
         public void HalfDragonIsAllowed()
         {
-            AssertControlIsAllowed(RaceConstants.Metaraces.HalfFiend);
+            AssertRaceIsAllowed(RaceConstants.Metaraces.HalfFiend);
         }
 
         [Test]
@@ -46,9 +45,9 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.Metaraces
         }
 
         [Test]
-        public void WereratIsAllowed()
+        public void WereratIsNotAllowed()
         {
-            AssertRaceIsAllowed(RaceConstants.Metaraces.Wererat);
+            AssertRaceIsNotAllowed(RaceConstants.Metaraces.Wererat);
         }
 
         [Test]
@@ -58,14 +57,9 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.Metaraces
         }
 
         [Test]
-        public void WerewolfIsAllowed()
+        public void WerewolfIsNotAllowed()
         {
-            AssertRaceIsAllowed(RaceConstants.Metaraces.Werewolf);
-        }
-
-        private class TestEvilMetarace : EvilMetarace
-        {
-            public TestEvilMetarace(IPercentileResultProvider percentileResultProvider) : base(percentileResultProvider) { }
+            AssertRaceIsNotAllowed(RaceConstants.Metaraces.Werewolf);
         }
     }
 }

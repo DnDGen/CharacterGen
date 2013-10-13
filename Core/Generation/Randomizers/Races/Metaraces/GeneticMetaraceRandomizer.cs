@@ -4,9 +4,9 @@ using System;
 
 namespace NPCGen.Core.Generation.Randomizers.Races.Metaraces
 {
-    public abstract class LycanthropeMetarace : BaseMetarace
+    public class GeneticMetaraceRandomizer : BaseMetarace
     {
-        public LycanthropeMetarace(IPercentileResultProvider provider) : base(provider) { }
+        public GeneticMetaraceRandomizer(IPercentileResultProvider provider) : base(provider) { }
 
         protected override Boolean MetaraceIsAllowed(String metarace)
         {
@@ -14,12 +14,12 @@ namespace NPCGen.Core.Generation.Randomizers.Races.Metaraces
             {
                 case RaceConstants.Metaraces.HalfDragon:
                 case RaceConstants.Metaraces.HalfCelestial:
-                case RaceConstants.Metaraces.HalfFiend: return false;
+                case RaceConstants.Metaraces.HalfFiend: return true;
                 case RaceConstants.Metaraces.Wererat:
                 case RaceConstants.Metaraces.Werewolf:
                 case RaceConstants.Metaraces.Werebear:
                 case RaceConstants.Metaraces.Wereboar:
-                case RaceConstants.Metaraces.Weretiger: return true;
+                case RaceConstants.Metaraces.Weretiger: return false;
                 default: throw new ArgumentOutOfRangeException();
             }
         }

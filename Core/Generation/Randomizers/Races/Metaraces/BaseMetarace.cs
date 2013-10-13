@@ -6,7 +6,7 @@ namespace NPCGen.Core.Generation.Randomizers.Races.Metaraces
 {
     public abstract class BaseMetarace : IMetaraceRandomizer
     {
-        protected Boolean forcedMetarace;
+        public Boolean AllowNoMetarace { get; set; }
 
         private IPercentileResultProvider percentileResultProvider;
 
@@ -29,7 +29,7 @@ namespace NPCGen.Core.Generation.Randomizers.Races.Metaraces
         private Boolean RaceIsAllowed(String metarace)
         {
             if (String.IsNullOrEmpty(metarace))
-                return !forcedMetarace;
+                return AllowNoMetarace;
 
             return MetaraceIsAllowed(metarace);
         }

@@ -1,24 +1,23 @@
 ﻿using NPCGen.Core.Data.Races;
-using NPCGen.Core.Generation.Providers.Interfaces;
 using NPCGen.Core.Generation.Randomizers.Races.Metaraces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Generation.Randomizers.Races.Metaraces
 {
     [TestFixture]
-    public class GoodMetaraceTests : MetaraceRandomizerTests
+    public class EvilMetaraceRandomizerTests : MetaraceRandomizerTests
     {
         [SetUp]
         public void Setup()
         {
-            randomizer = new TestGoodMetarace(mockPercentileResultProvider.Object);
+            randomizer = new EvilMetaraceRandomizer(mockPercentileResultProvider.Object);
             controlCase = RaceConstants.Metaraces.HalfDragon;
         }
 
         [Test]
-        public void HalfCelestialIsAllowed()
+        public void HalfCelestialIsNotAllowed()
         {
-            AssertRaceIsAllowed(RaceConstants.Metaraces.HalfCelestial);
+            AssertRaceIsNotAllowed(RaceConstants.Metaraces.HalfCelestial);
         }
 
         [Test]
@@ -28,15 +27,15 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.Metaraces
         }
 
         [Test]
-        public void HalfFiendIsNotAllowed()
+        public void HalfFiendIsAllowed()
         {
-            AssertRaceIsNotAllowed(RaceConstants.Metaraces.HalfFiend);
+            AssertRaceIsAllowed(RaceConstants.Metaraces.HalfFiend);
         }
 
         [Test]
-        public void WerebearIsAllowed()
+        public void WerebearIsNotAllowed()
         {
-            AssertRaceIsAllowed(RaceConstants.Metaraces.Werebear);
+            AssertRaceIsNotAllowed(RaceConstants.Metaraces.Werebear);
         }
 
         [Test]
@@ -46,9 +45,9 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.Metaraces
         }
 
         [Test]
-        public void WereratIsNotAllowed()
+        public void WereratIsAllowed()
         {
-            AssertRaceIsNotAllowed(RaceConstants.Metaraces.Wererat);
+            AssertRaceIsAllowed(RaceConstants.Metaraces.Wererat);
         }
 
         [Test]
@@ -58,14 +57,9 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.Metaraces
         }
 
         [Test]
-        public void WerewolfIsNotAllowed()
+        public void WerewolfIsAllowed()
         {
-            AssertRaceIsNotAllowed(RaceConstants.Metaraces.Werewolf);
-        }
-
-        private class TestGoodMetarace : GoodMetarace
-        {
-            public TestGoodMetarace(IPercentileResultProvider percentileResultProvider) : base(percentileResultProvider) { }
+            AssertRaceIsAllowed(RaceConstants.Metaraces.Werewolf);
         }
     }
 }
