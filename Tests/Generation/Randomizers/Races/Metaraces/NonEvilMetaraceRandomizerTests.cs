@@ -27,9 +27,9 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.Metaraces
         }
 
         [Test]
-        public void HalfFiendIsAllowed()
+        public void HalfFiendIsNotAllowed()
         {
-            AssertRaceIsAllowed(RaceConstants.Metaraces.HalfFiend);
+            AssertRaceIsNotAllowed(RaceConstants.Metaraces.HalfFiend);
         }
 
         [Test]

@@ -1,79 +1,46 @@
 ﻿using D20Dice.Dice;
 using Moq;
 using NPCGen.Core.Data.Alignments;
+using NPCGen.Core.Generation.Providers.Interfaces;
 using NPCGen.Core.Generation.Randomizers.Alignments;
-using NPCGen.Core.Generation.Randomizers.Alignments.Interfaces;
 using NUnit.Framework;
+using System;
 
 namespace NPCGen.Tests.Generation.Randomizers.Alignments
 {
     [TestFixture]
     public class AnyAlignmentRandomizerTests
     {
-        private IAlignmentRandomizer alignmentRandomizer;
-        private Mock<IDice> mockDice;
-
-        [SetUp]
-        public void Setup()
+        [Test]
+        public void ReturnsUnalteredAlignmentFromBase()
         {
-            mockDice = new Mock<IDice>();
-            alignmentRandomizer = new AnyAlignmentRandomizer(mockDice.Object);
+            var mockDice = new Mock<IDice>();
+            mockDice.Setup(d => d.d3(1, 0)).Returns(42);
+
+            var mockPercentileResultProvider = new Mock<IPercentileResultProvider>();
+            mockPercentileResultProvider.Setup(p => p.GetPercentileResult(It.IsAny<String>())).Returns("9266");
+
+            var randomizer = new AnyAlignmentRandomizer(mockDice.Object, mockPercentileResultProvider.Object);
+            var testRandomizer = new TestAlignmentRandomizer(mockDice.Object, mockPercentileResultProvider.Object);
+
+            var alignment = randomizer.Randomize();
+            var testAlignment = testRandomizer.Randomize();
+            Assert.That(alignment.Lawfulness, Is.EqualTo(testAlignment.Lawfulness));
+            Assert.That(alignment.Goodness, Is.EqualTo(testAlignment.Goodness));
         }
 
-        [Test]
-        public void LawfulIs3OnD3()
+        private class TestAlignmentRandomizer : BaseAlignmentRandomizer
         {
-            mockDice.Setup(d => d.d3(1, 0)).Returns(3);
-            var alignment = alignmentRandomizer.Randomize();
-            Assert.That(alignment.Lawfulness, Is.EqualTo(AlignmentConstants.Lawful));
-        }
+            public TestAlignmentRandomizer(IDice dice, IPercentileResultProvider provider) : base(dice, provider) { }
 
-        [Test]
-        public void NeutralLawfulnessIs2OnD3()
-        {
-            mockDice.Setup(d => d.d3(1, 0)).Returns(2);
-            var alignment = alignmentRandomizer.Randomize();
-            Assert.That(alignment.Lawfulness, Is.EqualTo(AlignmentConstants.Neutral));
-        }
-
-        [Test]
-        public void ChaoticIs1OnD3()
-        {
-            mockDice.Setup(d => d.d3(1, 0)).Returns(1);
-            var alignment = alignmentRandomizer.Randomize();
-            Assert.That(alignment.Lawfulness, Is.EqualTo(AlignmentConstants.Chaotic));
-        }
-
-        [Test]
-        public void GoodPercentile()
-        {
-            for (var roll = 1; roll <= 20; roll++)
+            public override Alignment Randomize()
             {
-                mockDice.Setup(d => d.Percentile(1, 0)).Returns(roll);
-                var alignment = alignmentRandomizer.Randomize();
-                Assert.That(alignment.Goodness, Is.EqualTo(AlignmentConstants.Good));
-            }
-        }
+                var alignment = new Alignment();
 
-        [Test]
-        public void NeutralGoodnessPercentile()
-        {
-            for (var roll = 21; roll <= 50; roll++)
-            {
-                mockDice.Setup(d => d.Percentile(1, 0)).Returns(roll);
-                var alignment = alignmentRandomizer.Randomize();
-                Assert.That(alignment.Goodness, Is.EqualTo(AlignmentConstants.Neutral));
-            }
-        }
+                alignment.Goodness = RollGoodness();
+                alignment.Lawfulness = RollLawfulness();
 
-        [Test]
-        public void EvilPercentile()
-        {
-            for (var roll = 51; roll <= 100; roll++)
-            {
-                mockDice.Setup(d => d.Percentile(1, 0)).Returns(roll);
-                var alignment = alignmentRandomizer.Randomize();
-                Assert.That(alignment.Goodness, Is.EqualTo(AlignmentConstants.Evil));
+                return alignment;
             }
         }
     }

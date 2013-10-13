@@ -1,17 +1,20 @@
-﻿using System;
-using D20Dice.Dice;
+﻿using D20Dice.Dice;
 using NPCGen.Core.Data.Alignments;
+using NPCGen.Core.Generation.Providers.Interfaces;
 using NPCGen.Core.Generation.Randomizers.Alignments.Interfaces;
+using System;
 
 namespace NPCGen.Core.Generation.Randomizers.Alignments
 {
     public abstract class BaseAlignmentRandomizer : IAlignmentRandomizer
     {
         private IDice dice;
+        private IPercentileResultProvider percentileResultProvider;
 
-        public BaseAlignmentRandomizer(IDice dice)
+        public BaseAlignmentRandomizer(IDice dice, IPercentileResultProvider percentileResultProvider)
         {
             this.dice = dice;
+            this.percentileResultProvider = percentileResultProvider;
         }
 
         public abstract Alignment Randomize();
@@ -30,14 +33,8 @@ namespace NPCGen.Core.Generation.Randomizers.Alignments
 
         protected Int32 RollGoodness()
         {
-            var roll = dice.Percentile();
-
-            if (roll <= 20)
-                return AlignmentConstants.Good;
-            else if (roll <= 50)
-                return AlignmentConstants.Neutral;
-
-            return AlignmentConstants.Evil;
+            var result = percentileResultProvider.GetPercentileResult("AlignmentGoodness");
+            return Convert.ToInt32(result);
         }
     }
 }

@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<percentile>
+  <object><lower>1</lower><content>1</content><upper>20</upper></object>
+  <object><lower>21</lower><content>0</content><upper>50</upper></object>
+  <object><lower>51</lower><content>-1</content><upper>100</upper></object>
+</percentile>
