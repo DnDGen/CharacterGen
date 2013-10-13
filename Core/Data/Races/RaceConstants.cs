@@ -44,9 +44,9 @@ namespace NPCGen.Core.Data.Races
 
         public class Metaraces
         {
-            public const String HalfCelestial = "Half Celestial";
-            public const String HalfDragon = "Half Dragon";
-            public const String HalfFiend = "Half Fiend";
+            public const String HalfCelestial = "Half-Celestial";
+            public const String HalfDragon = "Half-Dragon";
+            public const String HalfFiend = "Half-Fiend";
             public const String Werebear = "Werebear";
             public const String Wereboar = "Wereboar";
             public const String Weretiger = "Weretiger";

@@ -116,7 +116,11 @@
     <Compile Include="Generation\Randomizers\Races\Metaraces\GeneticMetaraceRandomizer.cs" />
     <Compile Include="Generation\Randomizers\Races\Metaraces\GoodMetaraceRandomizer.cs" />
     <Compile Include="Generation\Randomizers\Races\Metaraces\LycanthropeMetaraceRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Races\Metaraces\NeutralMetaraceRandomizer.cs" />
     <Compile Include="Generation\Randomizers\Races\Metaraces\NoMetaraceRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Races\Metaraces\NonEvilMetaraceRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Races\Metaraces\NonGoodMetaraceRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Races\Metaraces\NonNeutralMetaraceRandomizer.cs" />
     <Compile Include="Generation\Randomizers\Races\Metaraces\SetMetaraceRandomizer.cs" />
     <Compile Include="Generation\Randomizers\Stats\BaseStatsRandomizer.cs" />
     <Compile Include="Generation\Randomizers\Stats\Interfaces\IStatsRandomizer.cs" />

@@ -1,11 +1,9 @@
-﻿using System;
-using Moq;
+﻿using Moq;
 using NPCGen.Core.Generation.Randomizers.Races.Interfaces;
-using NUnit.Framework;
+using System;
 
 namespace NPCGen.Tests.Generation.Randomizers.Races.Metaraces
 {
-    [TestFixture]
     public abstract class MetaraceRandomizerTests : RaceRandomizerTests
     {
         protected IMetaraceRandomizer randomizer;
