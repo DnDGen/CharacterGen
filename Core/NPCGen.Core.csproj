@@ -276,6 +276,99 @@
   <ItemGroup>
     <EmbeddedResource Include="Generation\Xml\Data\Alignments\AlignmentGoodness.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Evil\EvilBarbarianMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Evil\EvilBardMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Evil\EvilMonkMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Evil\EvilRangerMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Evil\EvilRogueMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Evil\EvilSorcererMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Evil\EvilWizardMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Evil\EvilClericMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Evil\EvilDruidMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Evil\EvilFighterMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Neutral\NeutralBarbarianMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Neutral\NeutralBardMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Neutral\NeutralClericMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Neutral\NeutralDruidMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Neutral\NeutralFighterMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Neutral\NeutralMonkMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Neutral\NeutralRangerMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Neutral\NeutralRogueMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Neutral\NeutralSorcererMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Neutral\NeutralWizardMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Good\GoodBarbarianMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Good\GoodBardMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Good\GoodClericMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Good\GoodDruidMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Good\GoodFighterMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Good\GoodMonkMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Good\GoodRangerMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Good\GoodRogueMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Good\GoodSorcererMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Good\GoodWizardMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Good\GoodPaladinMetaraces.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

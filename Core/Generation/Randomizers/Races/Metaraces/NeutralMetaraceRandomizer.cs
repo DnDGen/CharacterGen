@@ -12,10 +12,10 @@ namespace NPCGen.Core.Generation.Randomizers.Races.Metaraces
         {
             switch (metarace)
             {
-                case RaceConstants.Metaraces.HalfDragon:
                 case RaceConstants.Metaraces.Wereboar:
                 case RaceConstants.Metaraces.Weretiger: return true;
                 case RaceConstants.Metaraces.HalfFiend:
+                case RaceConstants.Metaraces.HalfDragon:
                 case RaceConstants.Metaraces.Werebear:
                 case RaceConstants.Metaraces.HalfCelestial:
                 case RaceConstants.Metaraces.Wererat:

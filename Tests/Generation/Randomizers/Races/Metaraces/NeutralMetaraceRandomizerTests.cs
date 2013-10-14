@@ -11,7 +11,7 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.Metaraces
         public void Setup()
         {
             randomizer = new NeutralMetaraceRandomizer(mockPercentileResultProvider.Object);
-            controlCase = RaceConstants.Metaraces.HalfDragon;
+            controlCase = RaceConstants.Metaraces.Wereboar;
         }
 
         [Test]
@@ -21,9 +21,9 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.Metaraces
         }
 
         [Test]
-        public void HalfDragonIsAllowed()
+        public void HalfDragonIsNotAllowed()
         {
-            AssertControlIsAllowed(RaceConstants.Metaraces.HalfFiend);
+            AssertRaceIsNotAllowed(RaceConstants.Metaraces.HalfDragon);
         }
 
         [Test]
@@ -41,7 +41,7 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.Metaraces
         [Test]
         public void WereboreIsAllowed()
         {
-            AssertRaceIsAllowed(RaceConstants.Metaraces.Wereboar);
+            AssertControlIsAllowed(RaceConstants.Metaraces.Weretiger);
         }
 
         [Test]
