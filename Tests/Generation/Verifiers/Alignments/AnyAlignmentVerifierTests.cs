@@ -1,5 +1,4 @@
-﻿using NPCGen.Core.Data.CharacterClasses;
-using NPCGen.Core.Generation.Randomizers.CharacterClasses.ClassNames;
+﻿using NPCGen.Core.Generation.Randomizers.CharacterClasses.ClassNames;
 using NPCGen.Core.Generation.Randomizers.Races.BaseRaces;
 using NPCGen.Core.Generation.Randomizers.Races.Metaraces;
 using NPCGen.Core.Generation.Verifiers.Alignments;
@@ -8,12 +7,12 @@ using NUnit.Framework;
 namespace NPCGen.Tests.Generation.Verifiers.Alignments
 {
     [TestFixture]
-    public class ChaoticAlignmentVerifierTests : AlignmentVerifierTests
+    public class AnyAlignmentVerifierTests : AlignmentVerifierTests
     {
         [SetUp]
         public void Setup()
         {
-            verifier = new ChaoticAlignmentVerifier();
+            verifier = new AnyAlignmentVerifier();
         }
 
         [Test]
@@ -66,69 +65,10 @@ namespace NPCGen.Tests.Generation.Verifiers.Alignments
         }
 
         [Test]
-        public void BarbarianIsAllowed()
+        public void SetClassNameRandomizerIsAllowed()
         {
-            AssertClassNameIsAllowed(CharacterClassConstants.Barbarian);
-        }
-
-        [Test]
-        public void BardIsAllowed()
-        {
-            AssertClassNameIsAllowed(CharacterClassConstants.Bard);
-        }
-
-        [Test]
-        public void ClericIsAllowed()
-        {
-            AssertClassNameIsAllowed(CharacterClassConstants.Cleric);
-        }
-
-        [Test]
-        public void DruidIsAllowed()
-        {
-            AssertClassNameIsAllowed(CharacterClassConstants.Druid);
-        }
-
-        [Test]
-        public void FighterIsAllowed()
-        {
-            AssertClassNameIsAllowed(CharacterClassConstants.Fighter);
-        }
-
-        [Test]
-        public void MonkIsNotAllowed()
-        {
-            AssertClassNameIsNotAllowed(CharacterClassConstants.Monk);
-        }
-
-        [Test]
-        public void PaladinIsNotAllowed()
-        {
-            AssertClassNameIsNotAllowed(CharacterClassConstants.Paladin);
-        }
-
-        [Test]
-        public void RangerIsAllowed()
-        {
-            AssertClassNameIsAllowed(CharacterClassConstants.Ranger);
-        }
-
-        [Test]
-        public void RogueIsAllowed()
-        {
-            AssertClassNameIsAllowed(CharacterClassConstants.Rogue);
-        }
-
-        [Test]
-        public void SorcererIsAllowed()
-        {
-            AssertClassNameIsAllowed(CharacterClassConstants.Sorcerer);
-        }
-
-        [Test]
-        public void WizardIsAllowed()
-        {
-            AssertClassNameIsAllowed(CharacterClassConstants.Wizard);
+            var randomizer = new SetClassNameRandomizer();
+            AssertRandomizerIsAllowed(randomizer);
         }
 
         [Test]

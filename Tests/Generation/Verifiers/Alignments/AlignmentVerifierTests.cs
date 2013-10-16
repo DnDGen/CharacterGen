@@ -33,18 +33,6 @@ namespace NPCGen.Tests.Generation.Verifiers.Alignments
             Assert.That(allowed, Is.False);
         }
 
-        protected void AssertRandomizerIsAllowed(IBaseRaceRandomizer randomizer)
-        {
-            var allowed = verifier.VerifyCompatibility(randomizer);
-            Assert.That(allowed, Is.True);
-        }
-
-        protected void AssertRandomizerIsNotAllowed(IBaseRaceRandomizer randomizer)
-        {
-            var allowed = verifier.VerifyCompatibility(randomizer);
-            Assert.That(allowed, Is.False);
-        }
-
         protected void AssertClassNameIsAllowed(String className)
         {
             var allowed = GetAllowed(className);
@@ -63,6 +51,30 @@ namespace NPCGen.Tests.Generation.Verifiers.Alignments
             randomizer.ClassName = className;
 
             return verifier.VerifyCompatibility(randomizer);
+        }
+
+        protected void AssertRandomizerIsAllowed(IBaseRaceRandomizer randomizer)
+        {
+            var allowed = verifier.VerifyCompatibility(randomizer);
+            Assert.That(allowed, Is.True);
+        }
+
+        protected void AssertRandomizerIsNotAllowed(IBaseRaceRandomizer randomizer)
+        {
+            var allowed = verifier.VerifyCompatibility(randomizer);
+            Assert.That(allowed, Is.False);
+        }
+
+        protected void AssertRandomizerIsAllowed(IMetaraceRandomizer randomizer)
+        {
+            var allowed = verifier.VerifyCompatibility(randomizer);
+            Assert.That(allowed, Is.True);
+        }
+
+        protected void AssertRandomizerIsNotAllowed(IMetaraceRandomizer randomizer)
+        {
+            var allowed = verifier.VerifyCompatibility(randomizer);
+            Assert.That(allowed, Is.False);
         }
     }
 }

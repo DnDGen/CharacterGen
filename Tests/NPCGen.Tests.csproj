@@ -130,6 +130,7 @@
     <Compile Include="Generation\Randomizers\Stats\BaseStatsRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\Stats\RawStatsRandomizerTests.cs" />
     <Compile Include="Generation\Verifiers\Alignments\AlignmentVerifierTests.cs" />
+    <Compile Include="Generation\Verifiers\Alignments\AnyAlignmentVerifierTests.cs" />
     <Compile Include="Generation\Verifiers\Alignments\ChaoticAlignmentVerifierTests.cs" />
     <Compile Include="Generation\Verifiers\Alignments\EvilAlignmentVerifierTests.cs" />
     <Compile Include="Generation\Verifiers\Alignments\LawfulAlignmentVerifierTests.cs" />

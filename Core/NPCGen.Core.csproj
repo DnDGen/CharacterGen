@@ -125,6 +125,7 @@
     <Compile Include="Generation\Randomizers\Stats\BaseStatsRandomizer.cs" />
     <Compile Include="Generation\Randomizers\Stats\Interfaces\IStatsRandomizer.cs" />
     <Compile Include="Generation\Randomizers\Stats\RawStatsRandomizer.cs" />
+    <Compile Include="Generation\Verifiers\Alignments\AnyAlignmentVerifier.cs" />
     <Compile Include="Generation\Verifiers\Alignments\ChaoticAlignmentVerifier.cs" />
     <Compile Include="Generation\Verifiers\Alignments\EvilAlignmentVerifier.cs" />
     <Compile Include="Generation\Verifiers\Alignments\GoodAlignmentVerifier.cs" />
