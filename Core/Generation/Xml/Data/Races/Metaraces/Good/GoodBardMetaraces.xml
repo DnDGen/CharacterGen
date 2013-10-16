@@ -3,12 +3,12 @@
 <percentile>
   <object>
     <lower>99</lower>
-    <content>Wereboar</content>
+    <content>Half-Celestial</content>
     <upper>99</upper>
   </object>
   <object>
     <lower>100</lower>
-    <content>Weretiger</content>
+    <content>Half-Dragon</content>
     <upper>100</upper>
   </object>
 </percentile>
