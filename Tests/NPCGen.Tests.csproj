@@ -133,7 +133,10 @@
     <Compile Include="Generation\Verifiers\Alignments\AnyAlignmentVerifierTests.cs" />
     <Compile Include="Generation\Verifiers\Alignments\ChaoticAlignmentVerifierTests.cs" />
     <Compile Include="Generation\Verifiers\Alignments\EvilAlignmentVerifierTests.cs" />
+    <Compile Include="Generation\Verifiers\Alignments\GoodAlignmentVerifierTests.cs" />
     <Compile Include="Generation\Verifiers\Alignments\LawfulAlignmentVerifierTests.cs" />
+    <Compile Include="Generation\Verifiers\Alignments\NeutralAlignmentVerifierTests.cs" />
+    <Compile Include="Generation\Verifiers\Alignments\NonChaoticAlignmentVerifierTests.cs" />
     <Compile Include="Generation\Verifiers\Factories\AlignmentVerifierFactoryTests.cs" />
     <Compile Include="Generation\Verifiers\RandomizerVerifierTests.cs" />
     <Compile Include="Generation\Xml\Data\Alignments\AlignmentGoodnessTests.cs" />
