@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace NPCGen.Core.Data.Races
 {
     public class RaceConstants
     {
-        public class BaseRaces
+        public static class BaseRaces
         {
             public const String Aasimar = "Aasimar";
             public const String Bugbear = "Bugbear";
@@ -40,6 +41,47 @@ namespace NPCGen.Core.Data.Races
             public const String Troglodyte = "Troglodyte";
             public const String WildElf = "Wild Elf";
             public const String WoodElf = "Wood Elf";
+
+            public static IEnumerable<String> GetBaseRaces()
+            {
+                return new[]
+                {
+                    Aasimar,
+                    Bugbear,
+                    DeepDwarf,
+                    DeepHalfling,
+                    DerroDwarf,
+                    Doppelganger,
+                    Drow,
+                    Duergar,
+                    ForestGnome,
+                    Gnoll,
+                    Goblin,
+                    GrayElf,
+                    HalfElf,
+                    HalfOrc,
+                    HighElf,
+                    HillDwarf,
+                    Hobgoblin,
+                    Human,
+                    Kobold,
+                    LightfootHalfling,
+                    Lizardfolk,
+                    MindFlayer,
+                    Minotaur,
+                    MountainDwarf,
+                    Ogre,
+                    OgreMage,
+                    Orc,
+                    RockGnome,
+                    Svirfneblin,
+                    TallfellowHalfling,
+                    Tiefling,
+                    Troglodyte,
+                    WildElf,
+                    WoodElf
+                };
+            }
         }
 
         public class Metaraces
@@ -52,6 +94,21 @@ namespace NPCGen.Core.Data.Races
             public const String Weretiger = "Weretiger";
             public const String Wererat = "Wererat";
             public const String Werewolf = "Werewolf";
+
+            public static IEnumerable<String> GetMetaraces()
+            {
+                return new[]
+                {
+                    HalfCelestial,
+                    HalfDragon,
+                    HalfFiend,
+                    Werebear,
+                    Wereboar,
+                    Wererat,
+                    Weretiger,
+                    Werewolf
+                };
+            }
         }
     }
 }

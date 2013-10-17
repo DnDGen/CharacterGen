@@ -1,7 +1,5 @@
-﻿using System;
-using Moq;
+﻿using Moq;
 using NPCGen.Core.Generation.Providers.Interfaces;
-using NPCGen.Core.Generation.Randomizers.CharacterClasses.ClassNames;
 using NPCGen.Core.Generation.Randomizers.CharacterClasses.Interfaces;
 using NPCGen.Core.Generation.Randomizers.Races.Interfaces;
 using NPCGen.Core.Generation.Verifiers.Interfaces;
@@ -31,26 +29,6 @@ namespace NPCGen.Tests.Generation.Verifiers.Alignments
         {
             var allowed = verifier.VerifyCompatibility(randomizer);
             Assert.That(allowed, Is.False);
-        }
-
-        protected void AssertClassNameIsAllowed(String className)
-        {
-            var allowed = GetAllowed(className);
-            Assert.That(allowed, Is.True);
-        }
-
-        protected void AssertClassNameIsNotAllowed(String className)
-        {
-            var allowed = GetAllowed(className);
-            Assert.That(allowed, Is.False);
-        }
-
-        private Boolean GetAllowed(String className)
-        {
-            var randomizer = new SetClassNameRandomizer();
-            randomizer.ClassName = className;
-
-            return verifier.VerifyCompatibility(randomizer);
         }
 
         protected void AssertRandomizerIsAllowed(IBaseRaceRandomizer randomizer)

@@ -1,4 +1,5 @@
 ﻿using NPCGen.Core.Data.CharacterClasses;
+using NPCGen.Core.Data.Races;
 using NPCGen.Core.Generation.Randomizers.CharacterClasses.ClassNames;
 using NPCGen.Core.Generation.Randomizers.Races.BaseRaces;
 using NPCGen.Core.Generation.Randomizers.Races.Metaraces;
@@ -68,67 +69,100 @@ namespace NPCGen.Tests.Generation.Verifiers.Alignments
         [Test]
         public void BarbarianIsAllowed()
         {
-            AssertClassNameIsAllowed(CharacterClassConstants.Barbarian);
+            var randomizer = new SetClassNameRandomizer();
+            randomizer.ClassName = CharacterClassConstants.Barbarian;
+
+            AssertRandomizerIsAllowed(randomizer);
         }
 
         [Test]
         public void BardIsAllowed()
         {
-            AssertClassNameIsAllowed(CharacterClassConstants.Bard);
+            var randomizer = new SetClassNameRandomizer();
+            randomizer.ClassName = CharacterClassConstants.Bard;
+
+            AssertRandomizerIsAllowed(randomizer);
         }
 
         [Test]
         public void ClericIsAllowed()
         {
-            AssertClassNameIsAllowed(CharacterClassConstants.Cleric);
+            var randomizer = new SetClassNameRandomizer();
+            randomizer.ClassName = CharacterClassConstants.Cleric;
+
+            AssertRandomizerIsAllowed(randomizer);
         }
 
         [Test]
         public void DruidIsAllowed()
         {
-            AssertClassNameIsAllowed(CharacterClassConstants.Druid);
+            var randomizer = new SetClassNameRandomizer();
+            randomizer.ClassName = CharacterClassConstants.Druid;
+
+            AssertRandomizerIsAllowed(randomizer);
         }
 
         [Test]
         public void FighterIsAllowed()
         {
-            AssertClassNameIsAllowed(CharacterClassConstants.Fighter);
+            var randomizer = new SetClassNameRandomizer();
+            randomizer.ClassName = CharacterClassConstants.Fighter;
+
+            AssertRandomizerIsAllowed(randomizer);
         }
 
         [Test]
         public void MonkIsNotAllowed()
         {
-            AssertClassNameIsNotAllowed(CharacterClassConstants.Monk);
+            var randomizer = new SetClassNameRandomizer();
+            randomizer.ClassName = CharacterClassConstants.Monk;
+
+            AssertRandomizerIsNotAllowed(randomizer);
         }
 
         [Test]
         public void PaladinIsNotAllowed()
         {
-            AssertClassNameIsNotAllowed(CharacterClassConstants.Paladin);
+            var randomizer = new SetClassNameRandomizer();
+            randomizer.ClassName = CharacterClassConstants.Paladin;
+
+            AssertRandomizerIsNotAllowed(randomizer);
         }
 
         [Test]
         public void RangerIsAllowed()
         {
-            AssertClassNameIsAllowed(CharacterClassConstants.Ranger);
+            var randomizer = new SetClassNameRandomizer();
+            randomizer.ClassName = CharacterClassConstants.Ranger;
+
+            AssertRandomizerIsAllowed(randomizer);
         }
 
         [Test]
         public void RogueIsAllowed()
         {
-            AssertClassNameIsAllowed(CharacterClassConstants.Rogue);
+            var randomizer = new SetClassNameRandomizer();
+            randomizer.ClassName = CharacterClassConstants.Rogue;
+
+            AssertRandomizerIsAllowed(randomizer);
         }
 
         [Test]
         public void SorcererIsAllowed()
         {
-            AssertClassNameIsAllowed(CharacterClassConstants.Sorcerer);
+            var randomizer = new SetClassNameRandomizer();
+            randomizer.ClassName = CharacterClassConstants.Sorcerer;
+
+            AssertRandomizerIsAllowed(randomizer);
         }
 
         [Test]
         public void WizardIsAllowed()
         {
-            AssertClassNameIsAllowed(CharacterClassConstants.Wizard);
+            var randomizer = new SetClassNameRandomizer();
+            randomizer.ClassName = CharacterClassConstants.Wizard;
+
+            AssertRandomizerIsAllowed(randomizer);
         }
 
         [Test]
@@ -195,87 +229,178 @@ namespace NPCGen.Tests.Generation.Verifiers.Alignments
         }
 
         [Test]
-        public void SetBaseRaceRandomizerIsAllowed()
+        public void AllSetBaseRacesAreAllowed()
         {
             var randomizer = new SetBaseRaceRandomizer();
-            AssertRandomizerIsAllowed(randomizer);
+
+            foreach (var baseRace in RaceConstants.BaseRaces.GetBaseRaces())
+            {
+                randomizer.BaseRace = baseRace;
+                AssertRandomizerIsAllowed(randomizer);
+            }
         }
 
         [Test]
-        public void AnyMetaraceRandomizerIsAllowed()
+        public void AllowedAnyMetaraceRandomizerIsAllowed()
         {
             var randomizer = new AnyMetaraceRandomizer(mockPercentileResultProvider.Object);
+            randomizer.AllowNoMetarace = true;
             AssertRandomizerIsAllowed(randomizer);
         }
 
         [Test]
-        public void EvilMetaraceRandomizerIsallowed()
+        public void ForcedAnyMetaraceRandomizerIsAllowed()
+        {
+            var randomizer = new AnyMetaraceRandomizer(mockPercentileResultProvider.Object);
+            randomizer.AllowNoMetarace = false;
+            AssertRandomizerIsAllowed(randomizer);
+        }
+
+        [Test]
+        public void AllowedEvilMetaraceRandomizerIsAllowed()
         {
             var randomizer = new EvilMetaraceRandomizer(mockPercentileResultProvider.Object);
+            randomizer.AllowNoMetarace = true;
             AssertRandomizerIsAllowed(randomizer);
         }
 
         [Test]
-        public void GeneticMetaraceRandomizerIsallowed()
+        public void ForcedEvilMetaraceRandomizerIsAllowed()
+        {
+            var randomizer = new EvilMetaraceRandomizer(mockPercentileResultProvider.Object);
+            randomizer.AllowNoMetarace = false;
+            AssertRandomizerIsAllowed(randomizer);
+        }
+
+        [Test]
+        public void AllowedGeneticMetaraceRandomizerIsAllowed()
         {
             var randomizer = new GeneticMetaraceRandomizer(mockPercentileResultProvider.Object);
+            randomizer.AllowNoMetarace = true;
             AssertRandomizerIsAllowed(randomizer);
         }
 
         [Test]
-        public void GoodMetaraceRandomizerIsallowed()
+        public void ForcedGeneticMetaraceRandomizerIsAllowed()
+        {
+            var randomizer = new GeneticMetaraceRandomizer(mockPercentileResultProvider.Object);
+            randomizer.AllowNoMetarace = false;
+            AssertRandomizerIsAllowed(randomizer);
+        }
+
+        [Test]
+        public void AllowedGoodMetaraceRandomizerIsAllowed()
         {
             var randomizer = new GoodMetaraceRandomizer(mockPercentileResultProvider.Object);
+            randomizer.AllowNoMetarace = true;
             AssertRandomizerIsAllowed(randomizer);
         }
 
         [Test]
-        public void LycanthropeMetaraceRandomizerIsallowed()
+        public void ForcedGoodMetaraceRandomizerIsAllowed()
+        {
+            var randomizer = new GoodMetaraceRandomizer(mockPercentileResultProvider.Object);
+            randomizer.AllowNoMetarace = false;
+            AssertRandomizerIsAllowed(randomizer);
+        }
+
+        [Test]
+        public void AllowedLycanthropeMetaraceRandomizerIsAllowed()
         {
             var randomizer = new LycanthropeMetaraceRandomizer(mockPercentileResultProvider.Object);
+            randomizer.AllowNoMetarace = true;
             AssertRandomizerIsAllowed(randomizer);
         }
 
         [Test]
-        public void NeutralMetaraceRandomizerIsallowed()
+        public void ForcedLycanthropeMetaraceRandomizerIsAllowed()
+        {
+            var randomizer = new LycanthropeMetaraceRandomizer(mockPercentileResultProvider.Object);
+            randomizer.AllowNoMetarace = false;
+            AssertRandomizerIsAllowed(randomizer);
+        }
+
+        [Test]
+        public void AllowedNeutralMetaraceRandomizerIsAllowed()
         {
             var randomizer = new NeutralMetaraceRandomizer(mockPercentileResultProvider.Object);
+            randomizer.AllowNoMetarace = true;
             AssertRandomizerIsAllowed(randomizer);
         }
 
         [Test]
-        public void NonEvilMetaraceRandomizerIsallowed()
+        public void ForcedNeutralMetaraceRandomizerIsAllowed()
+        {
+            var randomizer = new NeutralMetaraceRandomizer(mockPercentileResultProvider.Object);
+            randomizer.AllowNoMetarace = false;
+            AssertRandomizerIsAllowed(randomizer);
+        }
+
+        [Test]
+        public void AllowedNonEvilMetaraceRandomizerIsAllowed()
         {
             var randomizer = new NonEvilMetaraceRandomizer(mockPercentileResultProvider.Object);
+            randomizer.AllowNoMetarace = true;
             AssertRandomizerIsAllowed(randomizer);
         }
 
         [Test]
-        public void NoMetaraceRandomizerIsallowed()
+        public void ForcedNonEvilMetaraceRandomizerIsAllowed()
+        {
+            var randomizer = new NonEvilMetaraceRandomizer(mockPercentileResultProvider.Object);
+            randomizer.AllowNoMetarace = false;
+            AssertRandomizerIsAllowed(randomizer);
+        }
+
+        [Test]
+        public void NoMetaraceRandomizerIsAllowed()
         {
             var randomizer = new NoMetaraceRandomizer();
             AssertRandomizerIsAllowed(randomizer);
         }
 
         [Test]
-        public void NonGoodMetaraceRandomizerIsallowed()
+        public void AllowedNonGoodMetaraceRandomizerIsAllowed()
         {
             var randomizer = new NonGoodMetaraceRandomizer(mockPercentileResultProvider.Object);
+            randomizer.AllowNoMetarace = true;
             AssertRandomizerIsAllowed(randomizer);
         }
 
         [Test]
-        public void NonNeutralMetaraceRandomizerIsallowed()
+        public void ForcedNonGoodMetaraceRandomizerIsAllowed()
+        {
+            var randomizer = new NonGoodMetaraceRandomizer(mockPercentileResultProvider.Object);
+            randomizer.AllowNoMetarace = false;
+            AssertRandomizerIsAllowed(randomizer);
+        }
+
+        [Test]
+        public void AllowedNonNeutralMetaraceRandomizerIsAllowed()
         {
             var randomizer = new NonNeutralMetaraceRandomizer(mockPercentileResultProvider.Object);
+            randomizer.AllowNoMetarace = true;
             AssertRandomizerIsAllowed(randomizer);
         }
 
         [Test]
-        public void SetMetaraceRandomizerIsallowed()
+        public void ForcedNonNeutralMetaraceRandomizerIsAllowed()
+        {
+            var randomizer = new NonNeutralMetaraceRandomizer(mockPercentileResultProvider.Object);
+            randomizer.AllowNoMetarace = false;
+            AssertRandomizerIsAllowed(randomizer);
+        }
+
+        [Test]
+        public void AllSetMetaracesAreAllowed()
         {
             var randomizer = new SetMetaraceRandomizer();
-            AssertRandomizerIsAllowed(randomizer);
+
+            foreach (var metarace in RaceConstants.Metaraces.GetMetaraces())
+            {
+                randomizer.Metarace = metarace;
+                AssertRandomizerIsAllowed(randomizer);
+            }
         }
     }
 }

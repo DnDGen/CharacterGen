@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace NPCGen.Core.Data.CharacterClasses
 {
-    public class CharacterClassConstants
+    public static class CharacterClassConstants
     {
         public const String Barbarian = "Barbarian";
         public const String Bard = "Bard";
@@ -15,5 +16,22 @@ namespace NPCGen.Core.Data.CharacterClasses
         public const String Rogue = "Rogue";
         public const String Sorcerer = "Sorcerer";
         public const String Wizard = "Wizard";
+
+        public static IEnumerable<String> GetClassNames()
+        {
+            return new[]
+            {
+                Barbarian,
+                Bard,
+                Cleric,
+                Druid,
+                Monk,
+                Paladin,
+                Ranger,
+                Rogue,
+                Sorcerer,
+                Wizard
+            };
+        }
     }
 }

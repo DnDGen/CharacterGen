@@ -1,9 +1,9 @@
-﻿using System;
-using NPCGen.Core.Data.CharacterClasses;
+﻿using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Generation.Randomizers.CharacterClasses.ClassNames;
 using NPCGen.Core.Generation.Randomizers.CharacterClasses.Interfaces;
 using NPCGen.Core.Generation.Randomizers.Races.Interfaces;
 using NPCGen.Core.Generation.Verifiers.Interfaces;
+using System;
 
 namespace NPCGen.Core.Generation.Verifiers.Alignments
 {
@@ -24,12 +24,12 @@ namespace NPCGen.Core.Generation.Verifiers.Alignments
 
         public Boolean VerifyCompatibility(IBaseRaceRandomizer baseRaceRandomizer)
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         public Boolean VerifyCompatibility(IMetaraceRandomizer metaraceRandomizer)
         {
-            throw new NotImplementedException();
+            return true;
         }
     }
 }
