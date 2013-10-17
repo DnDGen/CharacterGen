@@ -130,6 +130,7 @@
     <Compile Include="Generation\Verifiers\Alignments\EvilAlignmentVerifier.cs" />
     <Compile Include="Generation\Verifiers\Alignments\GoodAlignmentVerifier.cs" />
     <Compile Include="Generation\Verifiers\Alignments\NonChaoticAlignmentVerifier.cs" />
+    <Compile Include="Generation\Verifiers\Alignments\NonEvilAlignmentVerifier.cs" />
     <Compile Include="Generation\Verifiers\Interfaces\IAlignmentVerifier.cs" />
     <Compile Include="Generation\Verifiers\Alignments\LawfulAlignmentVerifier.cs" />
     <Compile Include="Generation\Verifiers\Alignments\NeutralAlignmentVerifier.cs" />
