@@ -1,10 +1,10 @@
-﻿using D20Dice.Dice;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using D20Dice.Dice;
 using NPCGen.Core.Generation.Providers.Interfaces;
 using NPCGen.Core.Generation.Xml.Parsers.Interfaces;
 using NPCGen.Core.Generation.Xml.Parsers.Objects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace NPCGen.Core.Generation.Providers
 {
@@ -50,6 +50,19 @@ namespace NPCGen.Core.Generation.Providers
         private Boolean RollIsInRange(Int32 roll, PercentileObject percentileObject)
         {
             return percentileObject.LowerLimit <= roll && roll <= percentileObject.UpperLimit;
+        }
+
+        public IEnumerable<String> GetAllResults(String tableName)
+        {
+            if (!cachedTables.ContainsKey(tableName))
+                CacheTable(tableName);
+
+            var results = new List<String>();
+
+            foreach (var percentileObject in cachedTables[tableName])
+                results.Add(percentileObject.Content);
+
+            return results;
         }
     }
 }

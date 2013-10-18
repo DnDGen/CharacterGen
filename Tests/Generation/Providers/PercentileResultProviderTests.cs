@@ -1,12 +1,13 @@
-﻿using D20Dice.Dice;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using D20Dice.Dice;
 using Moq;
 using NPCGen.Core.Generation.Providers;
 using NPCGen.Core.Generation.Providers.Interfaces;
 using NPCGen.Core.Generation.Xml.Parsers.Interfaces;
 using NPCGen.Core.Generation.Xml.Parsers.Objects;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
 
 namespace NPCGen.Tests.Generation.Providers
 {
@@ -78,6 +79,26 @@ namespace NPCGen.Tests.Generation.Providers
             mockDice.Setup(d => d.Percentile(1, 0)).Returns(max / 2);
             var result = percentileResultProvider.GetPercentileResult(tableName);
             Assert.That(result, Is.EqualTo("content"));
+        }
+
+        [Test]
+        public void GetAllResultsReturnsEmptyEnumerableForEmptyTable()
+        {
+            table.Clear();
+            var results = percentileResultProvider.GetAllResults(tableName);
+
+            Assert.That(results.Any(), Is.False);
+        }
+
+        [Test]
+        public void GetAllResultsReturnsAllContentValues()
+        {
+            var results = percentileResultProvider.GetAllResults(tableName);
+
+            foreach(var percentileObject in table)
+                Assert.That(results.Contains(percentileObject.Content), Is.True);
+
+            Assert.That(results.Count(), Is.EqualTo(table.Count));
         }
     }
 }
