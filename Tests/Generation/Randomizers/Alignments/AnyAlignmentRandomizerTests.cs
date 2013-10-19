@@ -3,31 +3,54 @@ using Moq;
 using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Generation.Providers.Interfaces;
 using NPCGen.Core.Generation.Randomizers.Alignments;
+using NPCGen.Core.Generation.Randomizers.Alignments.Interfaces;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace NPCGen.Tests.Generation.Randomizers.Alignments
 {
     [TestFixture]
     public class AnyAlignmentRandomizerTests
     {
+        private IAlignmentRandomizer randomizer;
+        private Mock<IPercentileResultProvider> mockPercentileResultProvider;
+        private Mock<IDice> mockDice;
+        private IAlignmentRandomizer testRandomizer;
+
+        [SetUp]
+        public void Setup()
+        {
+            mockDice = new Mock<IDice>();
+            mockPercentileResultProvider = new Mock<IPercentileResultProvider>();
+
+            randomizer = new AnyAlignmentRandomizer(mockDice.Object, mockPercentileResultProvider.Object);
+            testRandomizer = new TestAlignmentRandomizer(mockDice.Object, mockPercentileResultProvider.Object);
+        }
+
         [Test]
         public void ReturnsUnalteredAlignmentFromBase()
         {
-            var mockDice = new Mock<IDice>();
             mockDice.Setup(d => d.d3(1, 0)).Returns(42);
-
-            var mockPercentileResultProvider = new Mock<IPercentileResultProvider>();
             mockPercentileResultProvider.Setup(p => p.GetPercentileResult(It.IsAny<String>())).Returns("9266");
-
-            var randomizer = new AnyAlignmentRandomizer(mockDice.Object, mockPercentileResultProvider.Object);
-            var testRandomizer = new TestAlignmentRandomizer(mockDice.Object, mockPercentileResultProvider.Object);
 
             var alignment = randomizer.Randomize();
             var testAlignment = testRandomizer.Randomize();
             Assert.That(alignment.Lawfulness, Is.EqualTo(testAlignment.Lawfulness));
             Assert.That(alignment.Goodness, Is.EqualTo(testAlignment.Goodness));
+        }
+
+        [Test]
+        public void ReturnUnfilteredAlignments()
+        {
+            var alignments = randomizer.GetAllPossibleResults();
+            var testAlignments = testRandomizer.GetAllPossibleResults();
+
+            foreach (var testAlignment in testAlignments)
+                Assert.That(alignments.Contains(testAlignment), Is.True);
+
+            Assert.That(alignments.Count(), Is.EqualTo(testAlignments.Count()));
         }
 
         private class TestAlignmentRandomizer : BaseAlignmentRandomizer
@@ -50,7 +73,11 @@ namespace NPCGen.Tests.Generation.Randomizers.Alignments
                 var alignments = new List<Alignment>();
 
                 foreach (var goodness in goodnesses)
-                    alignments.Add(new Alignment() { Goodness = goodness });
+                {
+                    alignments.Add(new Alignment() { Goodness = goodness, Lawfulness = AlignmentConstants.Chaotic });
+                    alignments.Add(new Alignment() { Goodness = goodness, Lawfulness = AlignmentConstants.Lawful });
+                    alignments.Add(new Alignment() { Goodness = goodness, Lawfulness = AlignmentConstants.Neutral });
+                }
 
                 return alignments;
             }

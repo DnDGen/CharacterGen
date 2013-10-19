@@ -1,6 +1,7 @@
 ﻿using D20Dice.Dice;
 using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Generation.Providers.Interfaces;
+using System.Collections.Generic;
 
 namespace NPCGen.Core.Generation.Randomizers.Alignments
 {
@@ -16,6 +17,17 @@ namespace NPCGen.Core.Generation.Randomizers.Alignments
             alignment.Goodness = AlignmentConstants.Evil;
 
             return alignment;
+        }
+
+        public override IEnumerable<Alignment> GetAllPossibleResults()
+        {
+            var alignments = new List<Alignment>();
+
+            alignments.Add(new Alignment() { Goodness = AlignmentConstants.Evil, Lawfulness = AlignmentConstants.Chaotic });
+            alignments.Add(new Alignment() { Goodness = AlignmentConstants.Evil, Lawfulness = AlignmentConstants.Neutral });
+            alignments.Add(new Alignment() { Goodness = AlignmentConstants.Evil, Lawfulness = AlignmentConstants.Lawful });
+
+            return alignments;
         }
     }
 }
