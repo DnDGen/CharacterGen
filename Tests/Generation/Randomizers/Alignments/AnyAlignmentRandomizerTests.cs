@@ -5,6 +5,7 @@ using NPCGen.Core.Generation.Providers.Interfaces;
 using NPCGen.Core.Generation.Randomizers.Alignments;
 using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 
 namespace NPCGen.Tests.Generation.Randomizers.Alignments
 {
@@ -41,6 +42,17 @@ namespace NPCGen.Tests.Generation.Randomizers.Alignments
                 alignment.Lawfulness = RollLawfulness();
 
                 return alignment;
+            }
+
+            public override IEnumerable<Alignment> GetAllPossibleResults()
+            {
+                var goodnesses = GetAllGoodnesses();
+                var alignments = new List<Alignment>();
+
+                foreach (var goodness in goodnesses)
+                    alignments.Add(new Alignment() { Goodness = goodness });
+
+                return alignments;
             }
         }
     }

@@ -3,6 +3,7 @@ using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Generation.Providers.Interfaces;
 using NPCGen.Core.Generation.Randomizers.Alignments.Interfaces;
 using System;
+using System.Collections.Generic;
 
 namespace NPCGen.Core.Generation.Randomizers.Alignments
 {
@@ -10,6 +11,8 @@ namespace NPCGen.Core.Generation.Randomizers.Alignments
     {
         private IDice dice;
         private IPercentileResultProvider percentileResultProvider;
+
+        private const String table = "AlignmentGoodness";
 
         public BaseAlignmentRandomizer(IDice dice, IPercentileResultProvider percentileResultProvider)
         {
@@ -33,8 +36,21 @@ namespace NPCGen.Core.Generation.Randomizers.Alignments
 
         protected Int32 RollGoodness()
         {
-            var result = percentileResultProvider.GetPercentileResult("AlignmentGoodness");
+            var result = percentileResultProvider.GetPercentileResult(table);
             return Convert.ToInt32(result);
+        }
+
+        public abstract IEnumerable<Alignment> GetAllPossibleResults();
+
+        protected IEnumerable<Int32> GetAllGoodnesses()
+        {
+            var stringGoodnesses = percentileResultProvider.GetAllResults(table);
+            var intGoodnesses = new List<Int32>();
+
+            foreach (var goodness in stringGoodnesses)
+                intGoodnesses.Add(Convert.ToInt32(goodness));
+
+            return intGoodnesses;
         }
     }
 }
