@@ -48,10 +48,10 @@ namespace NPCGen.Tests.Generation.Randomizers.Alignments
             var alignments = randomizer.GetAllPossibleResults();
 
             Assert.That(alignments.All(a => a.Goodness == AlignmentConstants.Good), Is.True);
+            Assert.That(alignments.Any(a => a.Lawfulness == AlignmentConstants.Lawful), Is.True);
+            Assert.That(alignments.Any(a => a.Lawfulness == AlignmentConstants.Neutral), Is.True);
+            Assert.That(alignments.Any(a => a.Lawfulness == AlignmentConstants.Chaotic), Is.True);
             Assert.That(alignments.Count(), Is.EqualTo(3));
-            Assert.That(alignments.Count(a => a.Lawfulness == AlignmentConstants.Lawful), Is.EqualTo(1));
-            Assert.That(alignments.Count(a => a.Lawfulness == AlignmentConstants.Neutral), Is.EqualTo(1));
-            Assert.That(alignments.Count(a => a.Lawfulness == AlignmentConstants.Chaotic), Is.EqualTo(1));
         }
     }
 }

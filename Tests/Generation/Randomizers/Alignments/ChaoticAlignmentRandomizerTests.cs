@@ -49,10 +49,10 @@ namespace NPCGen.Tests.Generation.Randomizers.Alignments
             var alignments = randomizer.GetAllPossibleResults();
 
             Assert.That(alignments.All(a => a.Lawfulness == AlignmentConstants.Chaotic), Is.True);
+            Assert.That(alignments.Any(a => a.Goodness == AlignmentConstants.Good), Is.True);
+            Assert.That(alignments.Any(a => a.Goodness == AlignmentConstants.Neutral), Is.True);
+            Assert.That(alignments.Any(a => a.Goodness == AlignmentConstants.Evil), Is.True);
             Assert.That(alignments.Count(), Is.EqualTo(3));
-            Assert.That(alignments.Count(a => a.Goodness == AlignmentConstants.Good), Is.EqualTo(1));
-            Assert.That(alignments.Count(a => a.Goodness == AlignmentConstants.Neutral), Is.EqualTo(1));
-            Assert.That(alignments.Count(a => a.Goodness == AlignmentConstants.Evil), Is.EqualTo(1));
         }
     }
 }

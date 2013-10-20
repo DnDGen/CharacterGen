@@ -63,11 +63,11 @@ namespace NPCGen.Tests.Generation.Randomizers.Alignments
 
             var alignments = randomizer.GetAllPossibleResults();
 
-            Assert.That(alignments.Count(a => a.Goodness == AlignmentConstants.Good && a.Lawfulness == AlignmentConstants.Neutral), Is.EqualTo(1));
-            Assert.That(alignments.Count(a => a.Goodness == AlignmentConstants.Neutral && a.Lawfulness == AlignmentConstants.Good), Is.EqualTo(1));
-            Assert.That(alignments.Count(a => a.Goodness == AlignmentConstants.Neutral && a.Lawfulness == AlignmentConstants.Neutral), Is.EqualTo(1));
-            Assert.That(alignments.Count(a => a.Goodness == AlignmentConstants.Neutral && a.Lawfulness == AlignmentConstants.Evil), Is.EqualTo(1));
-            Assert.That(alignments.Count(a => a.Goodness == AlignmentConstants.Evil && a.Lawfulness == AlignmentConstants.Neutral), Is.EqualTo(1));
+            Assert.That(alignments.Any(a => a.Goodness == AlignmentConstants.Good && a.Lawfulness == AlignmentConstants.Neutral), Is.True);
+            Assert.That(alignments.Any(a => a.Goodness == AlignmentConstants.Neutral && a.Lawfulness == AlignmentConstants.Lawful), Is.True);
+            Assert.That(alignments.Any(a => a.Goodness == AlignmentConstants.Neutral && a.Lawfulness == AlignmentConstants.Neutral), Is.True);
+            Assert.That(alignments.Any(a => a.Goodness == AlignmentConstants.Neutral && a.Lawfulness == AlignmentConstants.Chaotic), Is.True);
+            Assert.That(alignments.Any(a => a.Goodness == AlignmentConstants.Evil && a.Lawfulness == AlignmentConstants.Neutral), Is.True);
             Assert.That(alignments.Count(), Is.EqualTo(5));
         }
     }
