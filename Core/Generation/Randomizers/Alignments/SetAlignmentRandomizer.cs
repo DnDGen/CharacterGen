@@ -1,6 +1,5 @@
 ﻿using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Generation.Randomizers.Alignments.Interfaces;
-using System;
 using System.Collections.Generic;
 
 namespace NPCGen.Core.Generation.Randomizers.Alignments
@@ -21,7 +20,7 @@ namespace NPCGen.Core.Generation.Randomizers.Alignments
 
         public IEnumerable<Alignment> GetAllPossibleResults()
         {
-            throw new NotImplementedException();
+            return new[] { Alignment };
         }
     }
 }

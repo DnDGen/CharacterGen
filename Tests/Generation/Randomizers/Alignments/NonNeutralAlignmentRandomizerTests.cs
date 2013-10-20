@@ -6,13 +6,14 @@ using NPCGen.Core.Generation.Randomizers.Alignments;
 using NPCGen.Core.Generation.Randomizers.Alignments.Interfaces;
 using NUnit.Framework;
 using System;
+using System.Linq;
 
 namespace NPCGen.Tests.Generation.Randomizers.Alignments
 {
     [TestFixture]
     public class NonNeutralAlignmentRandomizerTests
     {
-        private IAlignmentRandomizer alignmentRandomizer;
+        private IAlignmentRandomizer randomizer;
         private Mock<IDice> mockDice;
         private Mock<IPercentileResultProvider> mockPercentileResultProvider;
 
@@ -21,8 +22,7 @@ namespace NPCGen.Tests.Generation.Randomizers.Alignments
         {
             mockDice = new Mock<IDice>();
             mockPercentileResultProvider = new Mock<IPercentileResultProvider>();
-            alignmentRandomizer = new NonNeutralAlignmentRandomizer(mockDice.Object,
-                mockPercentileResultProvider.Object);
+            randomizer = new NonNeutralAlignmentRandomizer(mockDice.Object, mockPercentileResultProvider.Object);
         }
 
         [Test]
@@ -32,7 +32,7 @@ namespace NPCGen.Tests.Generation.Randomizers.Alignments
                 .Returns(AlignmentConstants.Neutral.ToString()).Returns(AlignmentConstants.Good.ToString());
             mockDice.Setup(d => d.d3(1, 0)).Returns(1);
 
-            var alignment = alignmentRandomizer.Randomize();
+            var alignment = randomizer.Randomize();
             Assert.That(alignment.Goodness, Is.EqualTo(AlignmentConstants.Good));
             mockPercentileResultProvider.Verify(p => p.GetPercentileResult(It.IsAny<String>()), Times.Exactly(2));
         }
@@ -44,9 +44,30 @@ namespace NPCGen.Tests.Generation.Randomizers.Alignments
             mockPercentileResultProvider.Setup(p => p.GetPercentileResult(It.IsAny<String>()))
                 .Returns(AlignmentConstants.Good.ToString());
 
-            var alignment = alignmentRandomizer.Randomize();
+            var alignment = randomizer.Randomize();
             Assert.That(alignment.Lawfulness, Is.EqualTo(AlignmentConstants.Chaotic));
             mockDice.Verify(d => d.d3(1, 0), Times.Exactly(2));
+        }
+
+        [Test]
+        public void ReturnFilteredAlignments()
+        {
+            var goodnesses = new[] 
+            { 
+                AlignmentConstants.Good.ToString(),
+                AlignmentConstants.Neutral.ToString(), 
+                AlignmentConstants.Evil.ToString() 
+            };
+
+            mockPercentileResultProvider.Setup(p => p.GetAllResults(It.IsAny<String>())).Returns(goodnesses);
+
+            var alignments = randomizer.GetAllPossibleResults();
+
+            Assert.That(alignments.Any(a => a.Goodness == AlignmentConstants.Good && a.Lawfulness == AlignmentConstants.Lawful), Is.True);
+            Assert.That(alignments.Any(a => a.Goodness == AlignmentConstants.Good && a.Lawfulness == AlignmentConstants.Chaotic), Is.True);
+            Assert.That(alignments.Any(a => a.Goodness == AlignmentConstants.Evil && a.Lawfulness == AlignmentConstants.Lawful), Is.True);
+            Assert.That(alignments.Any(a => a.Goodness == AlignmentConstants.Evil && a.Lawfulness == AlignmentConstants.Chaotic), Is.True);
+            Assert.That(alignments.Count(), Is.EqualTo(4));
         }
     }
 }
