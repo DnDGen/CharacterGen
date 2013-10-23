@@ -11,13 +11,12 @@ namespace NPCGen.Tests.Generation.Randomizers.CharacterClasses.ClassNames
         public void Setup()
         {
             randomizer = new AnyClassNameRandomizer(mockPercentileResultProvider.Object);
-            controlCase = CharacterClassConstants.Fighter;
         }
 
         [Test]
         public void FighterAlwaysAllowed()
         {
-            AssertControlIsAlwaysAllowed(CharacterClassConstants.Barbarian);
+            AssertClassIsAlwaysAllowed(CharacterClassConstants.Fighter);
         }
 
         [Test]

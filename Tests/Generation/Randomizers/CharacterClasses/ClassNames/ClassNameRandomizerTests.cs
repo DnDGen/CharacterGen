@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Moq;
 using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Data.CharacterClasses;
@@ -13,7 +14,6 @@ namespace NPCGen.Tests.Generation.Randomizers.CharacterClasses.ClassNames
     {
         protected Mock<IPercentileResultProvider> mockPercentileResultProvider;
         protected IClassNameRandomizer randomizer;
-        protected String controlCase;
 
         private Alignment alignment;
 
@@ -21,17 +21,15 @@ namespace NPCGen.Tests.Generation.Randomizers.CharacterClasses.ClassNames
         public void Setup()
         {
             mockPercentileResultProvider = new Mock<IPercentileResultProvider>();
+            mockPercentileResultProvider.Setup(p => p.GetAllResults(It.IsAny<String>())).Returns(CharacterClassConstants.GetClassNames());
             alignment = new Alignment();
         }
 
         protected void AssertClassIsAlwaysAllowed(String className)
         {
-            var goodnesses = new[] { AlignmentConstants.Evil, AlignmentConstants.Neutral, AlignmentConstants.Good };
-            var lawfulnesses = new[] { AlignmentConstants.Chaotic, AlignmentConstants.Neutral, AlignmentConstants.Lawful };
-
-            foreach (var lawfulness in lawfulnesses)
+            foreach (var lawfulness in AlignmentConstants.GetLawfulnesses())
             {
-                foreach (var goodness in goodnesses)
+                foreach (var goodness in AlignmentConstants.GetGoodnesses())
                 {
                     alignment.Lawfulness = lawfulness;
                     alignment.Goodness = goodness;
@@ -43,12 +41,9 @@ namespace NPCGen.Tests.Generation.Randomizers.CharacterClasses.ClassNames
 
         protected void AssertPaladinIsAllowed()
         {
-            var goodnesses = new[] { AlignmentConstants.Evil, AlignmentConstants.Neutral, AlignmentConstants.Good };
-            var lawfulnesses = new[] { AlignmentConstants.Chaotic, AlignmentConstants.Neutral, AlignmentConstants.Lawful };
-
-            foreach (var lawfulness in lawfulnesses)
+            foreach (var lawfulness in AlignmentConstants.GetLawfulnesses())
             {
-                foreach (var goodness in goodnesses)
+                foreach (var goodness in AlignmentConstants.GetGoodnesses())
                 {
                     alignment.Lawfulness = lawfulness;
                     alignment.Goodness = goodness;
@@ -63,12 +58,9 @@ namespace NPCGen.Tests.Generation.Randomizers.CharacterClasses.ClassNames
 
         protected void AssertDruidIsAllowed()
         {
-            var goodnesses = new[] { AlignmentConstants.Evil, AlignmentConstants.Neutral, AlignmentConstants.Good };
-            var lawfulnesses = new[] { AlignmentConstants.Chaotic, AlignmentConstants.Neutral, AlignmentConstants.Lawful };
-
-            foreach (var lawfulness in lawfulnesses)
+            foreach (var lawfulness in AlignmentConstants.GetLawfulnesses())
             {
-                foreach (var goodness in goodnesses)
+                foreach (var goodness in AlignmentConstants.GetGoodnesses())
                 {
                     alignment.Lawfulness = lawfulness;
                     alignment.Goodness = goodness;
@@ -83,12 +75,9 @@ namespace NPCGen.Tests.Generation.Randomizers.CharacterClasses.ClassNames
 
         protected void AssertMonkIsAllowed()
         {
-            var goodnesses = new[] { AlignmentConstants.Evil, AlignmentConstants.Neutral, AlignmentConstants.Good };
-            var lawfulnesses = new[] { AlignmentConstants.Chaotic, AlignmentConstants.Neutral, AlignmentConstants.Lawful };
-
-            foreach (var lawfulness in lawfulnesses)
+            foreach (var lawfulness in AlignmentConstants.GetLawfulnesses())
             {
-                foreach (var goodness in goodnesses)
+                foreach (var goodness in AlignmentConstants.GetGoodnesses())
                 {
                     alignment.Lawfulness = lawfulness;
                     alignment.Goodness = goodness;
@@ -103,12 +92,9 @@ namespace NPCGen.Tests.Generation.Randomizers.CharacterClasses.ClassNames
 
         protected void AssertClassMustNotBeLawful(String className)
         {
-            var goodnesses = new[] { AlignmentConstants.Evil, AlignmentConstants.Neutral, AlignmentConstants.Good };
-            var lawfulnesses = new[] { AlignmentConstants.Chaotic, AlignmentConstants.Neutral, AlignmentConstants.Lawful };
-
-            foreach (var lawfulness in lawfulnesses)
+            foreach (var lawfulness in AlignmentConstants.GetLawfulnesses())
             {
-                foreach (var goodness in goodnesses)
+                foreach (var goodness in AlignmentConstants.GetGoodnesses())
                 {
                     alignment.Lawfulness = lawfulness;
                     alignment.Goodness = goodness;
@@ -123,12 +109,9 @@ namespace NPCGen.Tests.Generation.Randomizers.CharacterClasses.ClassNames
 
         protected void AssertClassIsNeverAllowed(String className)
         {
-            var goodnesses = new[] { AlignmentConstants.Evil, AlignmentConstants.Neutral, AlignmentConstants.Good };
-            var lawfulnesses = new[] { AlignmentConstants.Chaotic, AlignmentConstants.Neutral, AlignmentConstants.Lawful };
-
-            foreach (var lawfulness in lawfulnesses)
+            foreach (var lawfulness in AlignmentConstants.GetLawfulnesses())
             {
-                foreach (var goodness in goodnesses)
+                foreach (var goodness in AlignmentConstants.GetGoodnesses())
                 {
                     alignment.Lawfulness = lawfulness;
                     alignment.Goodness = goodness;
@@ -138,35 +121,16 @@ namespace NPCGen.Tests.Generation.Randomizers.CharacterClasses.ClassNames
             }
         }
 
-        protected void AssertControlIsAlwaysAllowed(String secondaryControl)
-        {
-            var storedControlCase = controlCase;
-            controlCase = secondaryControl;
-
-            AssertClassIsAlwaysAllowed(storedControlCase);
-
-            controlCase = storedControlCase;
-        }
-
         private void AssertClassIsAllowed(String className)
         {
-            var result = GetResult(className, controlCase);
-            Assert.That(result, Is.EqualTo(className));
+            var results = randomizer.GetAllPossibleResults(alignment);
+            Assert.That(results.Contains(className), Is.True);
         }
 
         private void AssertClassIsNotAllowed(String className)
         {
-            var result = GetResult(className, controlCase);
-            Assert.That(result, Is.EqualTo(controlCase));
-        }
-
-        private String GetResult(String testCase, String controlCase)
-        {
-            mockPercentileResultProvider.SetupSequence(p => p.GetPercentileResult(It.IsAny<String>()))
-                .Returns(testCase)
-                .Returns(controlCase);
-
-            return randomizer.Randomize(alignment);
+            var results = randomizer.GetAllPossibleResults(alignment);
+            Assert.That(results.Contains(className), Is.False);
         }
     }
 }

@@ -1,14 +1,24 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace NPCGen.Core.Data.Alignments
 {
     public class AlignmentConstants
     {
-        public const Int32 Lawful = 1;
-        public const Int32 Good = 1;
-        public const Int32 Neutral = 0;
-        public const Int32 Chaotic = -1;
-        public const Int32 Evil = -1;
+        public const String Lawful = "Lawful";
+        public const String Good = "Good";
+        public const String Neutral = "Neutral";
+        public const String Chaotic = "Chaotic";
+        public const String Evil = "Evil";
 
+        public static IEnumerable<String> GetLawfulnesses()
+        {
+            return new[] { Lawful, Neutral, Chaotic };
+        }
+
+        public static IEnumerable<String> GetGoodnesses()
+        {
+            return new[] { Good, Neutral, Evil };
+        }
     }
 }

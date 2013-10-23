@@ -1,9 +1,11 @@
-﻿using D20Dice.Dice;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using D20Dice.Dice;
 using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Generation.Providers.Interfaces;
 using NPCGen.Core.Generation.Randomizers.Alignments.Interfaces;
-using System;
-using System.Collections.Generic;
+using NPCGen.Core.Generation.Verifiers.Exceptions;
 
 namespace NPCGen.Core.Generation.Randomizers.Alignments
 {
@@ -20,37 +22,52 @@ namespace NPCGen.Core.Generation.Randomizers.Alignments
             this.percentileResultProvider = percentileResultProvider;
         }
 
-        public abstract Alignment Randomize();
-
-        protected Int32 RollLawfulness()
+        public Alignment Randomize()
         {
-            var roll = dice.d3();
+            var possibleAlignments = GetAllPossibleResults();
+            if (!possibleAlignments.Any())
+                throw new IncompatibleRandomizersException();
 
-            if (roll == 1)
-                return AlignmentConstants.Chaotic;
-            else if (roll == 2)
-                return AlignmentConstants.Neutral;
+            var alignment = new Alignment();
 
-            return AlignmentConstants.Lawful;
+            do
+            {
+                alignment.Lawfulness = RollLawfulness();
+                alignment.Goodness = RollGoodness();
+            } while (!possibleAlignments.Any(a => a.Lawfulness == alignment.Lawfulness && a.Goodness == alignment.Goodness));
+
+            return alignment;
         }
 
-        protected Int32 RollGoodness()
+        private String RollLawfulness()
+        {
+            switch (dice.d3())
+            {
+                case 1: return AlignmentConstants.Chaotic;
+                case 2: return AlignmentConstants.Neutral;
+                case 3: return AlignmentConstants.Lawful;
+                default: throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        private String RollGoodness()
         {
             var result = percentileResultProvider.GetPercentileResult(table);
-            return Convert.ToInt32(result);
+            return result;
         }
 
-        public abstract IEnumerable<Alignment> GetAllPossibleResults();
-
-        protected IEnumerable<Int32> GetAllGoodnesses()
+        public IEnumerable<Alignment> GetAllPossibleResults()
         {
-            var stringGoodnesses = percentileResultProvider.GetAllResults(table);
-            var intGoodnesses = new List<Int32>();
+            var alignments = new List<Alignment>();
+            var goodnesses = percentileResultProvider.GetAllResults(table);
 
-            foreach (var goodness in stringGoodnesses)
-                intGoodnesses.Add(Convert.ToInt32(goodness));
+            foreach (var goodness in goodnesses)
+                foreach(var lawfulness in AlignmentConstants.GetLawfulnesses())
+                    alignments.Add(new Alignment() { Goodness = goodness, Lawfulness = lawfulness });
 
-            return intGoodnesses;
+            return alignments.Where(a => AlignmentIsAllowed(a));
         }
+
+        protected abstract Boolean AlignmentIsAllowed(Alignment alignment);
     }
 }

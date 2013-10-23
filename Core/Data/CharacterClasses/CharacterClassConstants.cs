@@ -25,6 +25,7 @@ namespace NPCGen.Core.Data.CharacterClasses
                 Bard,
                 Cleric,
                 Druid,
+                Fighter,
                 Monk,
                 Paladin,
                 Ranger,

@@ -11,7 +11,6 @@ namespace NPCGen.Tests.Generation.Randomizers.CharacterClasses.ClassNames
         public void Setup()
         {
             randomizer = new StealthClassNameRandomizer(mockPercentileResultProvider.Object);
-            controlCase = CharacterClassConstants.Rogue;
         }
 
         [Test]
@@ -41,7 +40,7 @@ namespace NPCGen.Tests.Generation.Randomizers.CharacterClasses.ClassNames
         [Test]
         public void RogueAlwaysAllowed()
         {
-            AssertControlIsAlwaysAllowed(CharacterClassConstants.Ranger);
+            AssertClassIsAlwaysAllowed(CharacterClassConstants.Rogue);
         }
 
         [Test]

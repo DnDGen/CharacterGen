@@ -11,7 +11,6 @@ namespace NPCGen.Tests.Generation.Randomizers.CharacterClasses.ClassNames
         public void Setup()
         {
             randomizer = new MageClassNameRandomizer(mockPercentileResultProvider.Object);
-            controlCase = CharacterClassConstants.Wizard;
         }
 
         [Test]
@@ -47,7 +46,7 @@ namespace NPCGen.Tests.Generation.Randomizers.CharacterClasses.ClassNames
         [Test]
         public void WizardAlwaysAllowed()
         {
-            AssertControlIsAlwaysAllowed(CharacterClassConstants.Sorcerer);
+            AssertClassIsAlwaysAllowed(CharacterClassConstants.Wizard);
         }
 
         [Test]

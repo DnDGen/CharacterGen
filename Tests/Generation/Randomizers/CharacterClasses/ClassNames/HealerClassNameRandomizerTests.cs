@@ -11,7 +11,6 @@ namespace NPCGen.Tests.Generation.Randomizers.CharacterClasses.ClassNames
         public void Setup()
         {
             randomizer = new HealerClassNameRandomizer(mockPercentileResultProvider.Object);
-            controlCase = CharacterClassConstants.Cleric;
         }
 
         [Test]
@@ -23,7 +22,7 @@ namespace NPCGen.Tests.Generation.Randomizers.CharacterClasses.ClassNames
         [Test]
         public void ClericAlwaysAllowed()
         {
-            AssertControlIsAlwaysAllowed(CharacterClassConstants.Ranger);
+            AssertClassIsAlwaysAllowed(CharacterClassConstants.Cleric);
         }
 
         [Test]

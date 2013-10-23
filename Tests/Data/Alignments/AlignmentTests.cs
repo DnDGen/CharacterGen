@@ -1,6 +1,5 @@
 ﻿using NPCGen.Core.Data.Alignments;
 using NUnit.Framework;
-using System;
 
 namespace NPCGen.Tests.Data.Alignments
 {
@@ -160,77 +159,11 @@ namespace NPCGen.Tests.Data.Alignments
         }
 
         [Test]
-        public void ChaoticLawfulnessShowsChaotic()
+        public void ToStringIsLawfulnessPlusGoodness()
         {
-            alignment.Lawfulness = AlignmentConstants.Chaotic;
-            Assert.That(alignment.GetLawfulnessString(), Is.EqualTo("Chaotic"));
-        }
-
-        [Test]
-        public void NeutralLawfulnessShowsNeutral()
-        {
-            alignment.Lawfulness = AlignmentConstants.Neutral;
-            Assert.That(alignment.GetLawfulnessString(), Is.EqualTo("Neutral"));
-        }
-
-        [Test]
-        public void LawfulLawfulnessShowsLawful()
-        {
-            alignment.Lawfulness = AlignmentConstants.Lawful;
-            Assert.That(alignment.GetLawfulnessString(), Is.EqualTo("Lawful"));
-        }
-
-        [Test]
-        public void GoodGoodnessShowsGood()
-        {
-            alignment.Goodness = AlignmentConstants.Good;
-            Assert.That(alignment.GetGoodnessString(), Is.EqualTo("Good"));
-        }
-
-        [Test]
-        public void NeutralGoodnessShowsNeutral()
-        {
-            alignment.Goodness = AlignmentConstants.Neutral;
-            Assert.That(alignment.GetGoodnessString(), Is.EqualTo("Neutral"));
-        }
-
-        [Test]
-        public void EvilGoodnessShowsEvil()
-        {
-            alignment.Goodness = AlignmentConstants.Evil;
-            Assert.That(alignment.GetGoodnessString(), Is.EqualTo("Evil"));
-        }
-
-        [Test]
-        public void LawfulGoodToString()
-        {
-            alignment.Lawfulness = AlignmentConstants.Lawful;
-            alignment.Goodness = AlignmentConstants.Good;
-            Assert.That(alignment.ToString(), Is.EqualTo("Lawful Good"));
-        }
-
-        [Test]
-        public void NeutralGoodToString()
-        {
-            alignment.Lawfulness = AlignmentConstants.Neutral;
-            alignment.Goodness = AlignmentConstants.Good;
-            Assert.That(alignment.ToString(), Is.EqualTo("Neutral Good"));
-        }
-
-        [Test]
-        public void ChaoticGoodToString()
-        {
-            alignment.Lawfulness = AlignmentConstants.Chaotic;
-            alignment.Goodness = AlignmentConstants.Good;
-            Assert.That(alignment.ToString(), Is.EqualTo("Chaotic Good"));
-        }
-
-        [Test]
-        public void LawfulNeutralToString()
-        {
-            alignment.Lawfulness = AlignmentConstants.Lawful;
-            alignment.Goodness = AlignmentConstants.Neutral;
-            Assert.That(alignment.ToString(), Is.EqualTo("Lawful Neutral"));
+            alignment.Lawfulness = "lawfulness";
+            alignment.Goodness = "goodness";
+            Assert.That(alignment.ToString(), Is.EqualTo("lawfulness goodness"));
         }
 
         [Test]
@@ -239,66 +172,6 @@ namespace NPCGen.Tests.Data.Alignments
             alignment.Lawfulness = AlignmentConstants.Neutral;
             alignment.Goodness = AlignmentConstants.Neutral;
             Assert.That(alignment.ToString(), Is.EqualTo("True Neutral"));
-        }
-
-        [Test]
-        public void ChaoticNeutralToString()
-        {
-            alignment.Lawfulness = AlignmentConstants.Chaotic;
-            alignment.Goodness = AlignmentConstants.Neutral;
-            Assert.That(alignment.ToString(), Is.EqualTo("Chaotic Neutral"));
-        }
-
-        [Test]
-        public void LawfulEvilToString()
-        {
-            alignment.Lawfulness = AlignmentConstants.Lawful;
-            alignment.Goodness = AlignmentConstants.Evil;
-            Assert.That(alignment.ToString(), Is.EqualTo("Lawful Evil"));
-        }
-
-        [Test]
-        public void NeutralEvilToString()
-        {
-            alignment.Lawfulness = AlignmentConstants.Neutral;
-            alignment.Goodness = AlignmentConstants.Evil;
-            Assert.That(alignment.ToString(), Is.EqualTo("Neutral Evil"));
-        }
-
-        [Test]
-        public void ChaoticEvilToString()
-        {
-            alignment.Lawfulness = AlignmentConstants.Chaotic;
-            alignment.Goodness = AlignmentConstants.Evil;
-            Assert.That(alignment.ToString(), Is.EqualTo("Chaotic Evil"));
-        }
-
-        [Test, ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void InvalidLawfulnessThrowsErrorOnGetLawfulnessString()
-        {
-            alignment.Lawfulness = 2;
-            alignment.GetLawfulnessString();
-        }
-
-        [Test, ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void InvalidGoodnessThrowsErrorOnGetGoodnessString()
-        {
-            alignment.Goodness = 2;
-            alignment.GetGoodnessString();
-        }
-
-        [Test, ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void InvalidLawfulnessThrowsErrorOnToString()
-        {
-            alignment.Lawfulness = 2;
-            alignment.ToString();
-        }
-
-        [Test, ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void InvalidGoodnessThrowsErrorOnToString()
-        {
-            alignment.Goodness = 2;
-            alignment.ToString();
         }
     }
 }

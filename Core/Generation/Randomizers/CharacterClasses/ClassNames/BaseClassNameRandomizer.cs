@@ -1,10 +1,10 @@
-﻿using NPCGen.Core.Data.Alignments;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Generation.Providers.Interfaces;
 using NPCGen.Core.Generation.Randomizers.CharacterClasses.Interfaces;
 using NPCGen.Core.Generation.Verifiers.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace NPCGen.Core.Generation.Randomizers.CharacterClasses.ClassNames
 {
@@ -23,7 +23,7 @@ namespace NPCGen.Core.Generation.Randomizers.CharacterClasses.ClassNames
             if (!possibleClassNames.Any())
                 throw new IncompatibleRandomizersException();
 
-            var tableName = String.Format("{0}CharacterClasses", alignment.GetGoodnessString());
+            var tableName = String.Format("{0}CharacterClasses", alignment.Goodness);
             var className = String.Empty;
 
             do className = percentileResultProvider.GetPercentileResult(tableName);
@@ -36,7 +36,9 @@ namespace NPCGen.Core.Generation.Randomizers.CharacterClasses.ClassNames
 
         public IEnumerable<String> GetAllPossibleResults(Alignment alignment)
         {
-            throw new NotImplementedException();
+            var tableName = String.Format("{0}CharacterClasses", alignment.Goodness);
+            var classNames = percentileResultProvider.GetAllResults(tableName);
+            return classNames.Where(c => CharacterClassIsAllowed(c, alignment));
         }
     }
 }

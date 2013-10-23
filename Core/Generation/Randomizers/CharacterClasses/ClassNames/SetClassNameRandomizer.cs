@@ -1,7 +1,7 @@
-﻿using NPCGen.Core.Data.Alignments;
-using NPCGen.Core.Generation.Randomizers.CharacterClasses.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using NPCGen.Core.Data.Alignments;
+using NPCGen.Core.Generation.Randomizers.CharacterClasses.Interfaces;
 
 namespace NPCGen.Core.Generation.Randomizers.CharacterClasses.ClassNames
 {
@@ -16,7 +16,7 @@ namespace NPCGen.Core.Generation.Randomizers.CharacterClasses.ClassNames
 
         public IEnumerable<String> GetAllPossibleResults(Alignment alignment)
         {
-            throw new NotImplementedException();
+            return new[] { ClassName };
         }
     }
 }

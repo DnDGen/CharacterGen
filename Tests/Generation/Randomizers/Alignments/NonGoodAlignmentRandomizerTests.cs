@@ -1,62 +1,84 @@
-﻿using D20Dice.Dice;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using D20Dice.Dice;
 using Moq;
 using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Generation.Providers.Interfaces;
 using NPCGen.Core.Generation.Randomizers.Alignments;
-using NPCGen.Core.Generation.Randomizers.Alignments.Interfaces;
 using NUnit.Framework;
-using System;
-using System.Linq;
 
 namespace NPCGen.Tests.Generation.Randomizers.Alignments
 {
     [TestFixture]
     public class NonGoodAlignmentRandomizerTests
     {
-        private IAlignmentRandomizer randomizer;
-        private Mock<IDice> mockDice;
-        private Mock<IPercentileResultProvider> mockPercentileResultProvider;
+        private IEnumerable<Alignment> alignments;
 
         [SetUp]
         public void Setup()
         {
-            mockDice = new Mock<IDice>();
-            mockPercentileResultProvider = new Mock<IPercentileResultProvider>();
-            randomizer = new NonGoodAlignmentRandomizer(mockDice.Object, mockPercentileResultProvider.Object);
+            var mockDice = new Mock<IDice>();
+            var mockPercentileResultProvider = new Mock<IPercentileResultProvider>();
+            mockPercentileResultProvider.Setup(p => p.GetAllResults(It.IsAny<String>())).Returns(AlignmentConstants.GetGoodnesses());
+
+            var randomizer = new NonGoodAlignmentRandomizer(mockDice.Object, mockPercentileResultProvider.Object);
+
+            alignments = randomizer.GetAllPossibleResults();
         }
 
         [Test]
-        public void ForcedNotGood()
+        public void LawfulGoodIsNotAllowed()
         {
-            mockPercentileResultProvider.SetupSequence(p => p.GetPercentileResult(It.IsAny<String>()))
-                .Returns(AlignmentConstants.Good.ToString()).Returns(AlignmentConstants.Neutral.ToString());
-
-            var alignment = randomizer.Randomize();
-            Assert.That(alignment.Goodness, Is.EqualTo(AlignmentConstants.Neutral));
-            mockPercentileResultProvider.Verify(p => p.GetPercentileResult(It.IsAny<String>()), Times.Exactly(2));
+            Assert.That(alignments.Any(a => a.Lawfulness == AlignmentConstants.Lawful && a.Goodness == AlignmentConstants.Good), Is.False);
         }
 
         [Test]
-        public void ReturnFilteredAlignments()
+        public void NeutralGoodIsNotAllowed()
         {
-            var goodnesses = new[] 
-            { 
-                AlignmentConstants.Good.ToString(),
-                AlignmentConstants.Neutral.ToString(), 
-                AlignmentConstants.Evil.ToString() 
-            };
+            Assert.That(alignments.Any(a => a.Lawfulness == AlignmentConstants.Neutral && a.Goodness == AlignmentConstants.Good), Is.False);
+        }
 
-            mockPercentileResultProvider.Setup(p => p.GetAllResults(It.IsAny<String>())).Returns(goodnesses);
+        [Test]
+        public void ChaoticGoodIsNotAllowed()
+        {
+            Assert.That(alignments.Any(a => a.Lawfulness == AlignmentConstants.Chaotic && a.Goodness == AlignmentConstants.Good), Is.False);
+        }
 
-            var alignments = randomizer.GetAllPossibleResults();
+        [Test]
+        public void LawfulNeutralIsAllowed()
+        {
+            Assert.That(alignments.Any(a => a.Lawfulness == AlignmentConstants.Lawful && a.Goodness == AlignmentConstants.Neutral), Is.True);
+        }
 
-            Assert.That(alignments.Any(a => a.Goodness == AlignmentConstants.Evil && a.Lawfulness == AlignmentConstants.Neutral), Is.True);
-            Assert.That(alignments.Any(a => a.Goodness == AlignmentConstants.Evil && a.Lawfulness == AlignmentConstants.Lawful), Is.True);
-            Assert.That(alignments.Any(a => a.Goodness == AlignmentConstants.Neutral && a.Lawfulness == AlignmentConstants.Neutral), Is.True);
-            Assert.That(alignments.Any(a => a.Goodness == AlignmentConstants.Neutral && a.Lawfulness == AlignmentConstants.Lawful), Is.True);
-            Assert.That(alignments.Any(a => a.Goodness == AlignmentConstants.Evil && a.Lawfulness == AlignmentConstants.Chaotic), Is.True);
-            Assert.That(alignments.Any(a => a.Goodness == AlignmentConstants.Neutral && a.Lawfulness == AlignmentConstants.Chaotic), Is.True);
-            Assert.That(alignments.Count(), Is.EqualTo(6));
+        [Test]
+        public void TrueNeutralIsAllowed()
+        {
+            Assert.That(alignments.Any(a => a.Lawfulness == AlignmentConstants.Neutral && a.Goodness == AlignmentConstants.Neutral), Is.True);
+        }
+
+        [Test]
+        public void ChaoticNeutralIsAllowed()
+        {
+            Assert.That(alignments.Any(a => a.Lawfulness == AlignmentConstants.Chaotic && a.Goodness == AlignmentConstants.Neutral), Is.True);
+        }
+
+        [Test]
+        public void LawfulEvilIsAllowed()
+        {
+            Assert.That(alignments.Any(a => a.Lawfulness == AlignmentConstants.Lawful && a.Goodness == AlignmentConstants.Evil), Is.True);
+        }
+
+        [Test]
+        public void NeutralEvilIsAllowed()
+        {
+            Assert.That(alignments.Any(a => a.Lawfulness == AlignmentConstants.Neutral && a.Goodness == AlignmentConstants.Evil), Is.True);
+        }
+
+        [Test]
+        public void ChaoticEvilIsAllowed()
+        {
+            Assert.That(alignments.Any(a => a.Lawfulness == AlignmentConstants.Chaotic && a.Goodness == AlignmentConstants.Evil), Is.True);
         }
     }
 }

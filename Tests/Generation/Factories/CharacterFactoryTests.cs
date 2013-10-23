@@ -133,7 +133,7 @@ namespace NPCGen.Tests.Generation.Factories
         {
             var alignment = AlignmentFactory.CreateUsing(mockAlignmentRandomizer.Object);
             var characterClass = CharacterClassFactory.CreateUsing(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
-            var race = RaceFactory.CreateUsing(alignment.GetGoodnessString(), characterClass.ClassName, mockBaseRaceRandomizer.Object,
+            var race = RaceFactory.CreateUsing(alignment.Goodness, characterClass.ClassName, mockBaseRaceRandomizer.Object,
                 mockMetaraceRandomizer.Object, mockDice.Object);
             
             var character = CreateCharacter();

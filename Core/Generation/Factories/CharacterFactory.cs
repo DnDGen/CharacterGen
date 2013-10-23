@@ -26,7 +26,7 @@ namespace NPCGen.Core.Generation.Factories
             //need to verify each alignment, class as rolled with randomizers
             var alignment = GenerateAlignment(verifierCollection, alignmentRandomizer);
             var characterClass = CharacterClassFactory.CreateUsing(alignment, levelRandomizer, classNameRandomizer);
-            var race = RaceFactory.CreateUsing(alignment.GetGoodnessString(), characterClass.ClassName, baseRaceRandomizer, metaraceRandomizer, dice);
+            var race = RaceFactory.CreateUsing(alignment.Goodness, characterClass.ClassName, baseRaceRandomizer, metaraceRandomizer, dice);
 
             //move HP out of class, put in character, make HitPointFactory(characterClass, constitutionBonus, metarace)
 

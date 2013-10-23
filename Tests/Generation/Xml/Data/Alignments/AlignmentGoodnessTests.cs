@@ -15,19 +15,19 @@ namespace NPCGen.Tests.Generation.Xml.Data.Alignments
         [Test]
         public void GoodPercentile()
         {
-            AssertContent(AlignmentConstants.Good.ToString(), 1, 20);
+            AssertContent(AlignmentConstants.Good, 1, 20);
         }
 
         [Test]
         public void NeutralPercentile()
         {
-            AssertContent(AlignmentConstants.Neutral.ToString(), 21, 50);
+            AssertContent(AlignmentConstants.Neutral, 21, 50);
         }
 
         [Test]
         public void EvilPercentile()
         {
-            AssertContent(AlignmentConstants.Evil.ToString(), 51, 100);
+            AssertContent(AlignmentConstants.Evil, 51, 100);
         }
     }
 }
