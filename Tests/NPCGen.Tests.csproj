@@ -64,6 +64,9 @@
     <Compile Include="Data\Alignments\AlignmentConstantsTests.cs" />
     <Compile Include="Data\Alignments\AlignmentTests.cs" />
     <Compile Include="Data\Classes\BaseAttackTests.cs" />
+    <Compile Include="Data\Classes\CharacterClassConstantsTests.cs" />
+    <Compile Include="Data\Races\RaceConstantsTests.cs" />
+    <Compile Include="Data\Stats\StatConstantsTests.cs" />
     <Compile Include="Data\Stats\StatTests.cs" />
     <Compile Include="Generation\Factories\AlignmentFactoryTests.cs" />
     <Compile Include="Generation\Factories\CharacterClassFactoryTests.cs" />
