@@ -1,20 +1,26 @@
-﻿using Moq;
+﻿using System;
+using System.Collections.Generic;
+using Moq;
+using NPCGen.Core.Data.Races;
 using NPCGen.Core.Generation.Randomizers.Races.Interfaces;
-using System;
+using NUnit.Framework;
 
 namespace NPCGen.Tests.Generation.Randomizers.Races.Metaraces
 {
+    [TestFixture]
     public abstract class MetaraceRandomizerTests : RaceRandomizerTests
     {
         protected IMetaraceRandomizer randomizer;
 
-        protected override String GetResult(String metarace, String controlCase)
+        [SetUp]
+        public void Setup()
         {
-            mockPercentileResultProvider.SetupSequence(p => p.GetPercentileResult(It.IsAny<String>()))
-                .Returns(metarace)
-                .Returns(controlCase);
+            mockPercentileResultProvider.Setup(p => p.GetAllResults(It.IsAny<String>())).Returns(RaceConstants.Metaraces.GetMetaraces());
+        }
 
-            return randomizer.Randomize(String.Empty, String.Empty);
+        protected override IEnumerable<String> GetResults()
+        {
+            return randomizer.GetAllPossibleResults(String.Empty, String.Empty);
         }
     }
 }

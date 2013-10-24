@@ -11,7 +11,6 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.BaseRaces
         public void Setup()
         {
             randomizer = new NonStandardBaseRaceRandomizer(mockPercentileResultProvider.Object);
-            controlCase = RaceConstants.BaseRaces.DeepDwarf;
         }
 
         [Test]
@@ -29,7 +28,7 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.BaseRaces
         [Test]
         public void DeepDwarfIsAllowed()
         {
-            AssertControlIsAllowed(RaceConstants.BaseRaces.DeepHalfling);
+            AssertRaceIsAllowed(RaceConstants.BaseRaces.DeepDwarf);
         }
 
         [Test]

@@ -1,6 +1,9 @@
-﻿using NPCGen.Core.Generation.Providers.Interfaces;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using NPCGen.Core.Generation.Providers.Interfaces;
 using NPCGen.Core.Generation.Randomizers.Races.Interfaces;
-using System;
+using NPCGen.Core.Generation.Verifiers.Exceptions;
 
 namespace NPCGen.Core.Generation.Randomizers.Races.Metaraces
 {
@@ -15,13 +18,17 @@ namespace NPCGen.Core.Generation.Randomizers.Races.Metaraces
             this.percentileResultProvider = percentileResultProvider;
         }
 
-        public String Randomize(String goodnessString, String className)
+        public String Randomize(String goodness, String className)
         {
-            var tableName = String.Format("{0}{1}Metaraces", goodnessString, className);
+            var results = GetAllPossibleResults(goodness, className);
+            if (!results.Any())
+                throw new IncompatibleRandomizersException();
+
+            var tableName = String.Format("{0}{1}Metaraces", goodness, className);
             var metarace = String.Empty;
 
             do metarace = percentileResultProvider.GetPercentileResult(tableName);
-            while (!RaceIsAllowed(metarace));
+            while (!results.Contains(metarace));
 
             return metarace;
         }
@@ -35,5 +42,12 @@ namespace NPCGen.Core.Generation.Randomizers.Races.Metaraces
         }
 
         protected abstract Boolean MetaraceIsAllowed(String metarace);
+
+        public IEnumerable<String> GetAllPossibleResults(String goodness, String className)
+        {
+            var tableName = String.Format("{0}{1}Metaraces", goodness, className);
+            var results = percentileResultProvider.GetAllResults(tableName);
+            return results.Where(r => RaceIsAllowed(r));
+        }
     }
 }

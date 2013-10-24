@@ -11,7 +11,6 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.BaseRaces
         public void Setup()
         {
             randomizer = new NonGoodBaseRaceRandomizer(mockPercentileResultProvider.Object);
-            controlCase = RaceConstants.BaseRaces.Human;
         }
 
         [Test]
@@ -119,7 +118,7 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.BaseRaces
         [Test]
         public void HumanIsAllowed()
         {
-            AssertControlIsAllowed(RaceConstants.BaseRaces.HighElf);
+            AssertRaceIsAllowed(RaceConstants.BaseRaces.Human);
         }
 
         [Test]

@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using NPCGen.Core.Generation.Providers.Interfaces;
 using NPCGen.Core.Generation.Randomizers.Races.Interfaces;
+using NPCGen.Core.Generation.Verifiers.Exceptions;
 
 namespace NPCGen.Core.Generation.Randomizers.Races.BaseRaces
 {
@@ -13,13 +16,17 @@ namespace NPCGen.Core.Generation.Randomizers.Races.BaseRaces
             this.percentileResultProvider = percentileResultProvider;
         }
 
-        public String Randomize(String goodnessString, String className)
+        public String Randomize(String goodness, String className)
         {
-            var tableName = String.Format("{0}{1}BaseRaces", goodnessString, className);
+            var results = GetAllPossibleResults(goodness, className);
+            if (!results.Any())
+                throw new IncompatibleRandomizersException();
+
+            var tableName = String.Format("{0}{1}BaseRaces", goodness, className);
             var baseRace = String.Empty;
 
             do baseRace = percentileResultProvider.GetPercentileResult(tableName);
-            while (!RaceIsAllowed(baseRace));
+            while (!results.Contains(baseRace));
 
             return baseRace;
         }
@@ -30,5 +37,12 @@ namespace NPCGen.Core.Generation.Randomizers.Races.BaseRaces
         }
 
         protected abstract Boolean BaseRaceIsAllowed(String baseRace);
+
+        public IEnumerable<String> GetAllPossibleResults(String goodness, String className)
+        {
+            var tableName = String.Format("{0}{1}BaseRaces", goodness, className);
+            var baseRaces = percentileResultProvider.GetAllResults(tableName);
+            return baseRaces.Where(r => RaceIsAllowed(r));
+        }
     }
 }

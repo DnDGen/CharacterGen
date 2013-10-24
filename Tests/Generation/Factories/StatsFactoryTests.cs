@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using Moq;
+using NPCGen.Core.Data.Races;
 using NPCGen.Core.Data.Stats;
 using NPCGen.Core.Generation.Factories;
+using NPCGen.Core.Generation.Providers.Interfaces;
 using NPCGen.Core.Generation.Randomizers.Stats.Interfaces;
 using NUnit.Framework;
 
@@ -13,6 +15,8 @@ namespace NPCGen.Tests.Generation.Factories
     {
         private Mock<IStatsRandomizer> mockStatRandomizer;
         private Dictionary<String, Stat> expectedStats;
+        private Mock<IStatAdjustmentsProvider> mockStatAdjustmentsProvider;
+        private Race race;
 
         [SetUp]
         public void Setup()
@@ -20,13 +24,23 @@ namespace NPCGen.Tests.Generation.Factories
             mockStatRandomizer = new Mock<IStatsRandomizer>();
             expectedStats = new Dictionary<String, Stat>();
             mockStatRandomizer.Setup(r => r.Randomize()).Returns(expectedStats);
+
+            mockStatAdjustmentsProvider = new Mock<IStatAdjustmentsProvider>();
+            race = new Race();
         }
 
         [Test]
         public void RandomizesStatValues()
         {
-            var stats = StatsFactory.CreateUsing(mockStatRandomizer.Object);
-            Assert.That(stats, Is.EqualTo(expectedStats));
+            StatsFactory.CreateUsing(mockStatRandomizer.Object, mockStatAdjustmentsProvider.Object, race);
+            mockStatRandomizer.Verify(r => r.Randomize(), Times.Once);
+        }
+
+        [Test]
+        public void UsesStatAdjustmentProviderToAdjustStatsByRace()
+        {
+            StatsFactory.CreateUsing(mockStatRandomizer.Object, mockStatAdjustmentsProvider.Object, race);
+            mockStatAdjustmentsProvider.Verify(p => p.GetAdjustments(It.IsAny<Race>()), Times.Once);
         }
     }
 }

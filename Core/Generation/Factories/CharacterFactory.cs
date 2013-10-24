@@ -1,46 +1,50 @@
-﻿using System;
-using D20Dice.Dice;
+﻿using D20Dice.Dice;
 using NPCGen.Core.Data;
 using NPCGen.Core.Data.Alignments;
+using NPCGen.Core.Data.CharacterClasses;
+using NPCGen.Core.Generation.Providers;
 using NPCGen.Core.Generation.Randomizers.Alignments.Interfaces;
 using NPCGen.Core.Generation.Randomizers.CharacterClasses.Interfaces;
 using NPCGen.Core.Generation.Randomizers.Races.Interfaces;
 using NPCGen.Core.Generation.Randomizers.Stats.Interfaces;
+using NPCGen.Core.Generation.Verifiers;
 using NPCGen.Core.Generation.Verifiers.Exceptions;
 using NPCGen.Core.Generation.Verifiers.Interfaces;
+using NPCGen.Core.Generation.Xml.Parsers;
 
 namespace NPCGen.Core.Generation.Factories
 {
     public static class CharacterFactory
     {
-        public static Character CreateUsing(VerifierCollection verifierCollection, IAlignmentRandomizer alignmentRandomizer,
-            IClassNameRandomizer classNameRandomizer, ILevelRandomizer levelRandomizer, IBaseRaceRandomizer baseRaceRandomizer, 
-            IMetaraceRandomizer metaraceRandomizer, IStatsRandomizer statsRandomizer, IDice dice)
+        public static Character CreateUsing(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classNameRandomizer,
+            ILevelRandomizer levelRandomizer, IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer,
+            IStatsRandomizer statsRandomizer, IDice dice)
         {
-            VerifyRandomizers(verifierCollection, classNameRandomizer, baseRaceRandomizer, metaraceRandomizer);
+            var randomizerVerifier = new RandomizerVerifier(alignmentRandomizer, classNameRandomizer, baseRaceRandomizer, metaraceRandomizer);
+
+            VerifyRandomizers(randomizerVerifier);
 
             var character = new Character();
 
-            character.Stats = StatsFactory.CreateUsing(statsRandomizer);
-
-            //need to verify each alignment, class as rolled with randomizers
-            var alignment = GenerateAlignment(verifierCollection, alignmentRandomizer);
-            var characterClass = CharacterClassFactory.CreateUsing(alignment, levelRandomizer, classNameRandomizer);
+            var alignment = GenerateAlignment(randomizerVerifier, alignmentRandomizer);
+            var characterClass = GenerateCharacterClass(randomizerVerifier, classNameRandomizer, levelRandomizer, alignment);
+            //check for level adjustments
             var race = RaceFactory.CreateUsing(alignment.Goodness, characterClass.ClassName, baseRaceRandomizer, metaraceRandomizer, dice);
-
-            //move HP out of class, put in character, make HitPointFactory(characterClass, constitutionBonus, metarace)
 
             character.Alignment = alignment;
             character.Class = characterClass;
             character.Race = race;
 
+            var streamLoader = new EmbeddedResourceStreamLoader();
+            var statAdjustmentXmlParser = new StatAdjustmentXmlParser(streamLoader);
+            var statAdjustmentsProvider = new StatAdjustmentsProvider(statAdjustmentXmlParser);
+            character.Stats = StatsFactory.CreateUsing(statsRandomizer, statAdjustmentsProvider, race);
+
+            //make HitPointFactory(characterClass, constitutionBonus, metarace)
+
+
             //******************
 
-            //StatScores = StatDice.Roll(rollMethod);
-            //foreach (var stat in StatScores)
-            //    progress.Text += " " + stat.ToString();
-
-            //Application.DoEvents();
             //progress.Text += "\nPrioritizing and adjusting stats...";
             //StatScores = Classes.Prioritize(charClass, StatScores);
             //StrengthPercentile = 0;
@@ -197,31 +201,33 @@ namespace NPCGen.Core.Generation.Factories
             return character;
         }
 
-        private static void VerifyRandomizers(VerifierCollection verifierCollection, IClassNameRandomizer classNameRandomizer,
-            IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer)
+        private static void VerifyRandomizers(IRandomizerVerifier randomizerVerifier)
         {
-            var verified = verifierCollection.RandomizerVerifier.VerifyCompatibility(verifierCollection, classNameRandomizer,
-                baseRaceRandomizer, metaraceRandomizer);
+            var verified = randomizerVerifier.VerifyCompatibility();
 
             if (!verified)
                 throw new IncompatibleRandomizersException();
         }
 
-        private static Alignment GenerateAlignment(VerifierCollection verifierCollection, IAlignmentRandomizer alignmentRandomizer)
+        private static Alignment GenerateAlignment(IRandomizerVerifier randomizerVerifier, IAlignmentRandomizer alignmentRandomizer)
         {
             Alignment alignment;
 
             do alignment = AlignmentFactory.CreateUsing(alignmentRandomizer);
-            while (!AlignmentIsAllowed(verifierCollection, alignment));
+            while (!randomizerVerifier.VerifyAlignmentCompatibility(alignment));
 
             return alignment;
         }
 
-        private static Boolean AlignmentIsAllowed(VerifierCollection verifierCollection, Alignment alignment)
+        private static CharacterClass GenerateCharacterClass(IRandomizerVerifier randomizerVerifier, IClassNameRandomizer classNameRandomizer,
+            ILevelRandomizer levelRandomizer, Alignment alignment)
         {
-            return verifierCollection.ClassNameVerifier.VerifyCompatibility(alignment)
-                   && verifierCollection.BaseRaceVerifier.VerifyCompatibility(alignment)
-                   && verifierCollection.MetaraceVerifier.VerifyCompatibility(alignment);
+            CharacterClass characterClass;
+
+            do characterClass = CharacterClassFactory.CreateUsing(alignment, levelRandomizer, classNameRandomizer);
+            while (!randomizerVerifier.VerifyClassNameCompatibility(alignment.Goodness, characterClass.ClassName));
+
+            return characterClass;
         }
     }
 }

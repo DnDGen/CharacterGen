@@ -11,13 +11,12 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.Metaraces
         public void Setup()
         {
             randomizer = new GeneticMetaraceRandomizer(mockPercentileResultProvider.Object);
-            controlCase = RaceConstants.Metaraces.HalfCelestial;
         }
 
         [Test]
         public void HalfCelestialIsAllowed()
         {
-            AssertControlIsAllowed(RaceConstants.Metaraces.HalfFiend);
+            AssertRaceIsAllowed(RaceConstants.Metaraces.HalfCelestial);
         }
 
         [Test]
@@ -39,7 +38,7 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.Metaraces
         }
 
         [Test]
-        public void WereboreIsNotAllowed()
+        public void WereboarIsNotAllowed()
         {
             AssertRaceIsNotAllowed(RaceConstants.Metaraces.Wereboar);
         }

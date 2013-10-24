@@ -11,7 +11,6 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.Metaraces
         public void Setup()
         {
             randomizer = new LycanthropeMetaraceRandomizer(mockPercentileResultProvider.Object);
-            controlCase = RaceConstants.Metaraces.Werebear;
         }
 
         [Test]
@@ -35,11 +34,11 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.Metaraces
         [Test]
         public void WerebearIsAllowed()
         {
-            AssertControlIsAllowed(RaceConstants.Metaraces.Wereboar);
+            AssertRaceIsAllowed(RaceConstants.Metaraces.Werebear);
         }
 
         [Test]
-        public void WereboreIsAllowed()
+        public void WereboarIsAllowed()
         {
             AssertRaceIsAllowed(RaceConstants.Metaraces.Wereboar);
         }

@@ -1,8 +1,10 @@
-﻿using Moq;
+﻿using System;
+using System.Linq;
+using Moq;
 using NPCGen.Core.Generation.Providers.Interfaces;
 using NPCGen.Core.Generation.Randomizers.Races.Metaraces;
+using NPCGen.Core.Generation.Verifiers.Exceptions;
 using NUnit.Framework;
-using System;
 
 namespace NPCGen.Tests.Generation.Randomizers.Races.Metaraces
 {
@@ -12,96 +14,117 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.Metaraces
         private TestMetaraceRandomizer randomizer;
         private Mock<IPercentileResultProvider> mockPercentileResultProvider;
 
+        private String firstMetarace = "first metarace";
+        private String secondMetarace = "second metarace";
+
         [SetUp]
         public void Setup()
         {
             mockPercentileResultProvider = new Mock<IPercentileResultProvider>();
-            mockPercentileResultProvider.Setup(p => p.GetPercentileResult(It.IsAny<String>())).Returns("metarace");
+            mockPercentileResultProvider.Setup(p => p.GetAllResults(It.IsAny<String>())).Returns(new[] { firstMetarace, secondMetarace, String.Empty });
+            mockPercentileResultProvider.Setup(p => p.GetPercentileResult(It.IsAny<String>())).Returns(firstMetarace);
 
             randomizer = new TestMetaraceRandomizer(mockPercentileResultProvider.Object);
-            randomizer.SwitchAllowed = false;
-            randomizer.MetaraceAllowed = true;
         }
 
         [Test]
-        public void LoopUntilMetaraceIsAllowed()
+        public void RandomizeGetsAllPossibleResultsFromGetAllPossibleResults()
         {
-            randomizer.MetaraceAllowed = false;
-            randomizer.SwitchAllowed = true;
+            randomizer.Randomize(String.Empty, String.Empty);
+            mockPercentileResultProvider.Verify(p => p.GetAllResults(It.IsAny<String>()), Times.Once);
+        }
+
+        [Test, ExpectedException(typeof(IncompatibleRandomizersException))]
+        public void RandomizeThrowsErrorIfNoPossibleResults()
+        {
+            mockPercentileResultProvider.Setup(p => p.GetAllResults(It.IsAny<String>())).Returns(Enumerable.Empty<String>());
+            randomizer.Randomize(String.Empty, String.Empty);
+        }
+
+        [Test]
+        public void RandomizeReturnsBaseRaceFromPercentileResultProvider()
+        {
+            var result = randomizer.Randomize(String.Empty, String.Empty);
+            Assert.That(result, Is.EqualTo(firstMetarace));
+        }
+
+        [Test]
+        public void RandomizeAccessesTableAlignmentGoodnessClassNameBaseRaces()
+        {
+            randomizer.Randomize("goodness", "className");
+            mockPercentileResultProvider.Verify(p => p.GetPercentileResult("goodnessclassNameMetaraces"), Times.Once);
+        }
+
+        [Test]
+        public void RandomizeLoopsUntilAllowedBaseRaceIsRolled()
+        {
+            mockPercentileResultProvider.SetupSequence(p => p.GetPercentileResult(It.IsAny<String>())).Returns("invalid metarace")
+                .Returns(firstMetarace);
 
             randomizer.Randomize(String.Empty, String.Empty);
             mockPercentileResultProvider.Verify(p => p.GetPercentileResult(It.IsAny<String>()), Times.Exactly(2));
         }
 
         [Test]
-        public void ReturnMetaraceFromPercentileResultProvider()
+        public void GetAllPossibleResultsGetsResultsFromProvider()
         {
-            var result = randomizer.Randomize(String.Empty, String.Empty);
-            Assert.That(result, Is.EqualTo("metarace"));
+            randomizer.GetAllPossibleResults(String.Empty, String.Empty);
+            mockPercentileResultProvider.Verify(p => p.GetAllResults(It.IsAny<String>()), Times.Once);
+        }
+
+        [Test]
+        public void GetAllPossibleResultsGetsNonEmptyResults()
+        {
+            var classNames = randomizer.GetAllPossibleResults(String.Empty, String.Empty);
+
+            Assert.That(classNames.Contains(firstMetarace), Is.True);
+            Assert.That(classNames.Contains(secondMetarace), Is.True);
+        }
+
+        [Test]
+        public void GetAllPossibleResultsAccessesTableAlignmentGoodnessClassNameBaseRaces()
+        {
+            randomizer.GetAllPossibleResults("goodness", "className");
+            mockPercentileResultProvider.Verify(p => p.GetAllResults("goodnessclassNameMetaraces"), Times.Once);
+        }
+
+        [Test]
+        public void GetAllPossibleResultsFiltersOutUnallowedBaseRaces()
+        {
+            randomizer.NotAllowedMetarace = firstMetarace;
+            var results = randomizer.GetAllPossibleResults(String.Empty, String.Empty);
+
+            Assert.That(results.Contains(secondMetarace), Is.True);
         }
 
         [Test]
         public void IfAllowNoMetaraceIsTrueThenEmptyMetaraceIsAllowed()
         {
             randomizer.AllowNoMetarace = true;
-            mockPercentileResultProvider.Setup(p => p.GetPercentileResult(It.IsAny<String>())).Returns(String.Empty);
 
-            var result = randomizer.Randomize(String.Empty, String.Empty);
-            Assert.That(result, Is.EqualTo(String.Empty));
-        }
-
-        [Test]
-        public void IfAllowNoMetaraceIsTrueThenNonEmptyMetaraceIsAllowed()
-        {
-            randomizer.AllowNoMetarace = true;
-
-            var result = randomizer.Randomize(String.Empty, String.Empty);
-            Assert.That(result, Is.EqualTo("metarace"));
+            var results = randomizer.GetAllPossibleResults(String.Empty, String.Empty);
+            Assert.That(results.Contains(String.Empty), Is.True);
         }
 
         [Test]
         public void IfAllowNoMetaraceIsFalseThenEmptyMetaraceIsNotAllowed()
         {
             randomizer.AllowNoMetarace = false;
-            mockPercentileResultProvider.SetupSequence(p => p.GetPercentileResult(It.IsAny<String>())).Returns(String.Empty).Returns("metarace");
 
-            var result = randomizer.Randomize(String.Empty, String.Empty);
-            Assert.That(result, Is.EqualTo("metarace"));
-        }
-
-        [Test]
-        public void IfAllowNoMetaraceIsFalseThenNonEmptyMetaraceIsAllowed()
-        {
-            randomizer.AllowNoMetarace = false;
-
-            var result = randomizer.Randomize(String.Empty, String.Empty);
-            Assert.That(result, Is.EqualTo("metarace"));
-        }
-
-        [Test]
-        public void AccessesTableAlignmentGoodnessClassNameMetaraces()
-        {
-            var result = randomizer.Randomize("goodness", "className");
-
-            mockPercentileResultProvider.Verify(p => p.GetPercentileResult("goodnessclassNameMetaraces"),
-                Times.Once());
+            var results = randomizer.GetAllPossibleResults(String.Empty, String.Empty);
+            Assert.That(results.Contains(String.Empty), Is.False);
         }
 
         private class TestMetaraceRandomizer : BaseMetarace
         {
-            public Boolean MetaraceAllowed { get; set; }
-            public Boolean SwitchAllowed { get; set; }
+            public String NotAllowedMetarace { get; set; }
 
-            public TestMetaraceRandomizer(IPercentileResultProvider percentileResultProvider) : base(percentileResultProvider) { }
+            public TestMetaraceRandomizer(IPercentileResultProvider percentileResultProvider)
+                : base(percentileResultProvider) { }
 
             protected override Boolean MetaraceIsAllowed(String metarace)
             {
-                var toReturn = MetaraceAllowed;
-
-                if (SwitchAllowed)
-                    MetaraceAllowed = !MetaraceAllowed;
-
-                return toReturn;
+                return metarace != NotAllowedMetarace;
             }
         }
     }

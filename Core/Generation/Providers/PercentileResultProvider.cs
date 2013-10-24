@@ -62,7 +62,22 @@ namespace NPCGen.Core.Generation.Providers
             foreach (var percentileObject in cachedTables[tableName])
                 results.Add(percentileObject.Content);
 
+            if (!CompleteTable(cachedTables[tableName]))
+                results.Add(String.Empty);
+
             return results;
+        }
+
+        private Boolean CompleteTable(IEnumerable<PercentileObject> table)
+        {
+            if (!table.Any())
+                return false;
+
+            var percentileRolls = new List<Int32>();
+            for (var i = 1; i <= 100; i++)
+                percentileRolls.Add(i);
+
+            return percentileRolls.All(r => table.Any(p => RollIsInRange(r, p)));
         }
     }
 }

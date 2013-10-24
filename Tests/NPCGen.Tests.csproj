@@ -74,6 +74,7 @@
     <Compile Include="Generation\Factories\HitPointsFactoryTests.cs" />
     <Compile Include="Generation\Factories\RaceFactoryTests.cs" />
     <Compile Include="Generation\Factories\StatsFactoryTests.cs" />
+    <Compile Include="Generation\Providers\StatAdjustmentsProviderTests.cs" />
     <Compile Include="Generation\Randomizers\Alignments\AnyAlignmentRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\Alignments\BaseAlignmentTests.cs" />
     <Compile Include="Generation\Randomizers\Alignments\ChaoticAlignmentRandomizerTests.cs" />
@@ -133,16 +134,6 @@
     <Compile Include="Generation\Randomizers\Races\RaceRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\Stats\BaseStatsRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\Stats\RawStatsRandomizerTests.cs" />
-    <Compile Include="Generation\Verifiers\Alignments\AlignmentVerifierTests.cs" />
-    <Compile Include="Generation\Verifiers\Alignments\AnyAlignmentVerifierTests.cs" />
-    <Compile Include="Generation\Verifiers\Alignments\ChaoticAlignmentVerifierTests.cs" />
-    <Compile Include="Generation\Verifiers\Alignments\EvilAlignmentVerifierTests.cs" />
-    <Compile Include="Generation\Verifiers\Alignments\GoodAlignmentVerifierTests.cs" />
-    <Compile Include="Generation\Verifiers\Alignments\LawfulAlignmentVerifierTests.cs" />
-    <Compile Include="Generation\Verifiers\Alignments\NeutralAlignmentVerifierTests.cs" />
-    <Compile Include="Generation\Verifiers\Alignments\NonChaoticAlignmentVerifierTests.cs" />
-    <Compile Include="Generation\Verifiers\Alignments\NonEvilAlignmentVerifierTests.cs" />
-    <Compile Include="Generation\Verifiers\Factories\AlignmentVerifierFactoryTests.cs" />
     <Compile Include="Generation\Verifiers\RandomizerVerifierTests.cs" />
     <Compile Include="Generation\Xml\Data\Alignments\AlignmentGoodnessTests.cs" />
     <Compile Include="Generation\Xml\Data\CharacterClasses\EvilCharacterClassesTests.cs" />
@@ -211,6 +202,7 @@
     <Compile Include="Generation\Xml\Data\Races\Metaraces\Neutral\NeutralWizardMetaracesTests.cs" />
     <Compile Include="Generation\Xml\Data\Races\Metaraces\Neutral\NeutralBarbarianMetaracesTests.cs" />
     <Compile Include="Generation\Xml\Data\Races\Metaraces\Neutral\NeutralBardMetaracesTests.cs" />
+    <Compile Include="Generation\Xml\Data\Stats\StrengthStatAdjustmentsTests.cs" />
     <Compile Include="Generation\Xml\Parsers\EmbeddedResourceStreamLoaderTests.cs" />
     <Compile Include="Generation\Xml\Parsers\PercentileXmlParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

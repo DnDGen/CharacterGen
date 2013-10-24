@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Linq;
+using NPCGen.Core.Data.Alignments;
+using NPCGen.Core.Generation.Randomizers.Alignments.Interfaces;
 using NPCGen.Core.Generation.Randomizers.CharacterClasses.Interfaces;
 using NPCGen.Core.Generation.Randomizers.Races.Interfaces;
 using NPCGen.Core.Generation.Verifiers.Interfaces;
@@ -7,32 +10,38 @@ namespace NPCGen.Core.Generation.Verifiers
 {
     public class RandomizerVerifier : IRandomizerVerifier
     {
-        public Boolean VerifyCompatibility(VerifierCollection verifierCollection, IClassNameRandomizer classNameRandomizer,
+        private IAlignmentRandomizer alignmentRandomizer;
+        private IClassNameRandomizer classNameRandomizer;
+        private IBaseRaceRandomizer baseRaceRandomizer;
+        private IMetaraceRandomizer metaraceRandomizer;
+
+        public RandomizerVerifier(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classNameRandomizer,
             IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer)
         {
-            return VerifyAlignment(verifierCollection.AlignmentVerifier, classNameRandomizer, baseRaceRandomizer, metaraceRandomizer)
-                && VerifyClassName(verifierCollection.ClassNameVerifier, baseRaceRandomizer, metaraceRandomizer)
-                && VerifyBaseRace(verifierCollection.BaseRaceVerifier, metaraceRandomizer);
+            this.alignmentRandomizer = alignmentRandomizer;
+            this.classNameRandomizer = classNameRandomizer;
+            this.baseRaceRandomizer = baseRaceRandomizer;
+            this.metaraceRandomizer = metaraceRandomizer;
         }
 
-        private Boolean VerifyAlignment(IAlignmentVerifier alignmentVerifier, IClassNameRandomizer classNameRandomizer, 
-            IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer)
+        public Boolean VerifyCompatibility()
         {
-            return alignmentVerifier.VerifyCompatibility(classNameRandomizer)
-                && alignmentVerifier.VerifyCompatibility(baseRaceRandomizer)
-                && alignmentVerifier.VerifyCompatibility(metaraceRandomizer);
+            var alignments = alignmentRandomizer.GetAllPossibleResults();
+            return alignments.Any() && alignments.Any(a => VerifyAlignmentCompatibility(a));
         }
 
-        private Boolean VerifyClassName(IClassNameVerifier classNameVerifier, IBaseRaceRandomizer baseRaceRandomizer,
-            IMetaraceRandomizer metaraceRandomizer)
+        public Boolean VerifyAlignmentCompatibility(Alignment alignment)
         {
-            return classNameVerifier.VerifyCompatibility(baseRaceRandomizer)
-                && classNameVerifier.VerifyCompatibility(metaraceRandomizer);
+            var classNames = classNameRandomizer.GetAllPossibleResults(alignment);
+            return classNames.Any() && classNames.Any(c => VerifyClassNameCompatibility(alignment.Goodness, c));
         }
 
-        private Boolean VerifyBaseRace(IBaseRaceVerifier baseRaceVerifier, IMetaraceRandomizer metaraceRandomizer)
+        public Boolean VerifyClassNameCompatibility(String goodness, String className)
         {
-            return baseRaceVerifier.VerifyCompatibility(metaraceRandomizer);
+            var baseRaces = baseRaceRandomizer.GetAllPossibleResults(goodness, className);
+            var metaraces = metaraceRandomizer.GetAllPossibleResults(goodness, className);
+
+            return baseRaces.Any() && metaraces.Any();
         }
     }
 }

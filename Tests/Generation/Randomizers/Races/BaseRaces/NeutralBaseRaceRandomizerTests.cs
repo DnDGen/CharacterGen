@@ -1,5 +1,4 @@
-﻿using NPCGen.Core.Data.Alignments;
-using NPCGen.Core.Data.Races;
+﻿using NPCGen.Core.Data.Races;
 using NPCGen.Core.Generation.Randomizers.Races.BaseRaces;
 using NUnit.Framework;
 
@@ -12,7 +11,6 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.BaseRaces
         public void Setup()
         {
             randomizer = new NeutralBaseRaceRandomizer(mockPercentileResultProvider.Object);
-            controlCase = RaceConstants.BaseRaces.Human;
         }
 
         [Test]
@@ -120,7 +118,7 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.BaseRaces
         [Test]
         public void HumanIsAllowed()
         {
-            AssertControlIsAllowed(RaceConstants.BaseRaces.HighElf);
+            AssertRaceIsAllowed(RaceConstants.BaseRaces.Human);
         }
 
         [Test]

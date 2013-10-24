@@ -1,7 +1,9 @@
-﻿using Moq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Moq;
 using NPCGen.Core.Generation.Providers.Interfaces;
 using NUnit.Framework;
-using System;
 
 namespace NPCGen.Tests.Generation.Randomizers.Races
 {
@@ -9,7 +11,6 @@ namespace NPCGen.Tests.Generation.Randomizers.Races
     public abstract class RaceRandomizerTests
     {
         protected Mock<IPercentileResultProvider> mockPercentileResultProvider;
-        protected String controlCase;
 
         [SetUp]
         public void Setup()
@@ -17,28 +18,18 @@ namespace NPCGen.Tests.Generation.Randomizers.Races
             mockPercentileResultProvider = new Mock<IPercentileResultProvider>();
         }
 
-        protected void AssertControlIsAllowed(String secondaryControl)
-        {
-            var storedControlCase = controlCase;
-            controlCase = secondaryControl;
-
-            AssertRaceIsAllowed(storedControlCase);
-
-            controlCase = storedControlCase;
-        }
-
         protected void AssertRaceIsAllowed(String race)
         {
-            var result = GetResult(race, controlCase);
-            Assert.That(result, Is.EqualTo(race));
+            var results = GetResults();
+            Assert.That(results.Contains(race), Is.True);
         }
 
         protected void AssertRaceIsNotAllowed(String race)
         {
-            var result = GetResult(race, controlCase);
-            Assert.That(result, Is.EqualTo(controlCase));
+            var results = GetResults();
+            Assert.That(results.Contains(race), Is.False);
         }
 
-        protected abstract String GetResult(String race, String controlCase);
+        protected abstract IEnumerable<String> GetResults();
     }
 }
