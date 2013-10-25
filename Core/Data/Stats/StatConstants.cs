@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace NPCGen.Core.Data.Stats
 {
-    public class StatConstants
+    public static class StatConstants
     {
         public const String Strength = "Strength";
         public const String Constitution = "Constitution";
@@ -10,5 +11,18 @@ namespace NPCGen.Core.Data.Stats
         public const String Intelligence = "Intelligence";
         public const String Wisdom = "Wisdom";
         public const String Charisma = "Charisma";
+
+        public static IEnumerable<String> GetStats()
+        {
+            return new[]
+            {
+                Strength,
+                Dexterity,
+                Constitution,
+                Intelligence,
+                Wisdom,
+                Charisma
+            };
+        }
     }
 }

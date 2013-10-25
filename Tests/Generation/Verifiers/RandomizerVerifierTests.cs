@@ -2,6 +2,7 @@
 using System.Linq;
 using Moq;
 using NPCGen.Core.Data.Alignments;
+using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Generation.Randomizers.Alignments.Interfaces;
 using NPCGen.Core.Generation.Randomizers.CharacterClasses.Interfaces;
 using NPCGen.Core.Generation.Randomizers.Races.Interfaces;
@@ -17,6 +18,7 @@ namespace NPCGen.Tests.Generation.Verifiers
         private IRandomizerVerifier verifier;
         private Mock<IAlignmentRandomizer> mockAlignmentRandomizer;
         private Mock<IClassNameRandomizer> mockClassNameRandomizer;
+        private Mock<ILevelRandomizer> mockLevelRandomizer;
         private Mock<IBaseRaceRandomizer> mockBaseRaceRandomizer;
         private Mock<IMetaraceRandomizer> mockMetaraceRandomizer;
 
@@ -29,14 +31,17 @@ namespace NPCGen.Tests.Generation.Verifiers
             mockClassNameRandomizer = new Mock<IClassNameRandomizer>();
             mockClassNameRandomizer.Setup(r => r.GetAllPossibleResults(It.IsAny<Alignment>())).Returns(new[] { "class name" });
 
+            mockLevelRandomizer = new Mock<ILevelRandomizer>();
+            mockLevelRandomizer.Setup(r => r.GetAllPossibleResults()).Returns(new[] { 1 });
+
             mockBaseRaceRandomizer = new Mock<IBaseRaceRandomizer>();
-            mockBaseRaceRandomizer.Setup(r => r.GetAllPossibleResults(It.IsAny<String>(), It.IsAny<String>())).Returns(new[] { "base race" });
+            mockBaseRaceRandomizer.Setup(r => r.GetAllPossibleResults(It.IsAny<String>(), It.IsAny<CharacterClass>())).Returns(new[] { "base race" });
 
             mockMetaraceRandomizer = new Mock<IMetaraceRandomizer>();
-            mockMetaraceRandomizer.Setup(r => r.GetAllPossibleResults(It.IsAny<String>(), It.IsAny<String>())).Returns(new[] { "metarace" });
+            mockMetaraceRandomizer.Setup(r => r.GetAllPossibleResults(It.IsAny<String>(), It.IsAny<CharacterClass>())).Returns(new[] { "metarace" });
 
-            verifier = new RandomizerVerifier(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockBaseRaceRandomizer.Object,
-                mockMetaraceRandomizer.Object);
+            verifier = new RandomizerVerifier(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object,
+                mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
         }
 
         [Test]
@@ -51,9 +56,7 @@ namespace NPCGen.Tests.Generation.Verifiers
         public void NotVerifiedIfNoAlignments()
         {
             mockAlignmentRandomizer.Setup(r => r.GetAllPossibleResults()).Returns(Enumerable.Empty<Alignment>());
-
             var verified = verifier.VerifyCompatibility();
-
             Assert.That(verified, Is.False);
         }
 
@@ -61,9 +64,7 @@ namespace NPCGen.Tests.Generation.Verifiers
         public void NotVerifiedIfNoClassNamesForAnyAlignment()
         {
             mockClassNameRandomizer.Setup(r => r.GetAllPossibleResults(It.IsAny<Alignment>())).Returns(Enumerable.Empty<String>());
-
             var verified = verifier.VerifyCompatibility();
-
             Assert.That(verified, Is.False);
         }
 
@@ -77,27 +78,34 @@ namespace NPCGen.Tests.Generation.Verifiers
                 .Returns(Enumerable.Empty<String>()).Returns(new[] { "class name" });
 
             var verified = verifier.VerifyCompatibility();
-
             Assert.That(verified, Is.True);
         }
 
         [Test]
-        public void NotVerifiedIfNoBaseRacesForAnyClassName()
+        public void NotVerifiedIfNoLevels()
         {
-            mockBaseRaceRandomizer.Setup(r => r.GetAllPossibleResults(It.IsAny<String>(), It.IsAny<String>())).Returns(Enumerable.Empty<String>());
-
+            mockLevelRandomizer.Setup(r => r.GetAllPossibleResults()).Returns(Enumerable.Empty<Int32>());
             var verified = verifier.VerifyCompatibility();
-
             Assert.That(verified, Is.False);
         }
 
         [Test]
-        public void VerifiedIfAtLeastOneBaseRaceForAClassName()
+        public void NotVerifiedIfNoBaseRacesForAnyCharacterClass()
+        {
+            mockBaseRaceRandomizer.Setup(r => r.GetAllPossibleResults(It.IsAny<String>(), It.IsAny<CharacterClass>()))
+                .Returns(Enumerable.Empty<String>());
+
+            var verified = verifier.VerifyCompatibility();
+            Assert.That(verified, Is.False);
+        }
+
+        [Test]
+        public void VerifiedIfAtLeastOneBaseRaceForACharacterClass()
         {
             var classNames = new[] { "first class name", "second class name", "third class name" };
             mockClassNameRandomizer.Setup(r => r.GetAllPossibleResults(It.IsAny<Alignment>())).Returns(classNames);
 
-            mockBaseRaceRandomizer.SetupSequence(r => r.GetAllPossibleResults(It.IsAny<String>(), It.IsAny<String>()))
+            mockBaseRaceRandomizer.SetupSequence(r => r.GetAllPossibleResults(It.IsAny<String>(), It.IsAny<CharacterClass>()))
                 .Returns(Enumerable.Empty<String>()).Returns(Enumerable.Empty<String>()).Returns(new[] { "base race" });
 
             var verified = verifier.VerifyCompatibility();
@@ -106,9 +114,10 @@ namespace NPCGen.Tests.Generation.Verifiers
         }
 
         [Test]
-        public void NotVerifiedIfNoMetaracesForAnyClassName()
+        public void NotVerifiedIfNoMetaracesForAnyCharacterClass()
         {
-            mockMetaraceRandomizer.Setup(r => r.GetAllPossibleResults(It.IsAny<String>(), It.IsAny<String>())).Returns(Enumerable.Empty<String>());
+            mockMetaraceRandomizer.Setup(r => r.GetAllPossibleResults(It.IsAny<String>(), It.IsAny<CharacterClass>()))
+                .Returns(Enumerable.Empty<String>());
 
             var verified = verifier.VerifyCompatibility();
 
@@ -116,12 +125,12 @@ namespace NPCGen.Tests.Generation.Verifiers
         }
 
         [Test]
-        public void VerifiedIfAtLeastOneMetaraceForAClassName()
+        public void VerifiedIfAtLeastOneMetaraceForACharacterClass()
         {
             var classNames = new[] { "first class name", "second class name", "third class name" };
             mockClassNameRandomizer.Setup(r => r.GetAllPossibleResults(It.IsAny<Alignment>())).Returns(classNames);
 
-            mockMetaraceRandomizer.SetupSequence(r => r.GetAllPossibleResults(It.IsAny<String>(), It.IsAny<String>()))
+            mockMetaraceRandomizer.SetupSequence(r => r.GetAllPossibleResults(It.IsAny<String>(), It.IsAny<CharacterClass>()))
                 .Returns(Enumerable.Empty<String>()).Returns(Enumerable.Empty<String>()).Returns(new[] { "metarace" });
 
             var verified = verifier.VerifyCompatibility();

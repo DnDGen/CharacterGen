@@ -30,6 +30,15 @@ namespace NPCGen.Tests.Generation.Factories
         }
 
         [Test]
+        public void StatsContainAllStats()
+        {
+            var stats = StatsFactory.CreateUsing(mockStatRandomizer.Object, mockStatAdjustmentsProvider.Object, race);
+
+            foreach (var stat in StatConstants.GetStats())
+                Assert.That(stats.ContainsKey(stat), Is.True);
+        }
+
+        [Test]
         public void RandomizesStatValues()
         {
             StatsFactory.CreateUsing(mockStatRandomizer.Object, mockStatAdjustmentsProvider.Object, race);

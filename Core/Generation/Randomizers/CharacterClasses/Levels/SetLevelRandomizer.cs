@@ -1,5 +1,6 @@
-﻿using NPCGen.Core.Generation.Randomizers.CharacterClasses.Interfaces;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using NPCGen.Core.Generation.Randomizers.CharacterClasses.Interfaces;
 
 namespace NPCGen.Core.Generation.Randomizers.CharacterClasses.Levels
 {
@@ -10,6 +11,11 @@ namespace NPCGen.Core.Generation.Randomizers.CharacterClasses.Levels
         public Int32 Randomize()
         {
             return Level;
+        }
+
+        public IEnumerable<Int32> GetAllPossibleResults()
+        {
+            return new[] { Level };
         }
     }
 }

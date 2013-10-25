@@ -31,9 +31,6 @@ namespace NPCGen.Core.Generation.Randomizers.Stats
             stats.Add(StatConstants.Wisdom, new Stat());
             stats.Add(StatConstants.Charisma, new Stat());
 
-            foreach (var kvp in stats)
-                kvp.Value.Name = kvp.Key;
-
             return stats;
         }
 

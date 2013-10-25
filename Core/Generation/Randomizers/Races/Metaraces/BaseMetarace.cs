@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Generation.Providers.Interfaces;
 using NPCGen.Core.Generation.Randomizers.Races.Interfaces;
 using NPCGen.Core.Generation.Verifiers.Exceptions;
@@ -18,13 +19,13 @@ namespace NPCGen.Core.Generation.Randomizers.Races.Metaraces
             this.percentileResultProvider = percentileResultProvider;
         }
 
-        public String Randomize(String goodness, String className)
+        public String Randomize(String goodness, CharacterClass characterClass)
         {
-            var results = GetAllPossibleResults(goodness, className);
+            var results = GetAllPossibleResults(goodness, characterClass);
             if (!results.Any())
                 throw new IncompatibleRandomizersException();
 
-            var tableName = String.Format("{0}{1}Metaraces", goodness, className);
+            var tableName = String.Format("{0}{1}Metaraces", goodness, characterClass.ClassName);
             var metarace = String.Empty;
 
             do metarace = percentileResultProvider.GetPercentileResult(tableName);
@@ -33,7 +34,7 @@ namespace NPCGen.Core.Generation.Randomizers.Races.Metaraces
             return metarace;
         }
 
-        private Boolean RaceIsAllowed(String metarace)
+        private Boolean RaceIsAllowed(String metarace, Int32 level)
         {
             if (String.IsNullOrEmpty(metarace))
                 return AllowNoMetarace;
@@ -43,11 +44,11 @@ namespace NPCGen.Core.Generation.Randomizers.Races.Metaraces
 
         protected abstract Boolean MetaraceIsAllowed(String metarace);
 
-        public IEnumerable<String> GetAllPossibleResults(String goodness, String className)
+        public IEnumerable<String> GetAllPossibleResults(String goodness, CharacterClass characterClass)
         {
-            var tableName = String.Format("{0}{1}Metaraces", goodness, className);
+            var tableName = String.Format("{0}{1}Metaraces", goodness, characterClass.ClassName);
             var results = percentileResultProvider.GetAllResults(tableName);
-            return results.Where(r => RaceIsAllowed(r));
+            return results.Where(r => RaceIsAllowed(r, characterClass.Level));
         }
     }
 }

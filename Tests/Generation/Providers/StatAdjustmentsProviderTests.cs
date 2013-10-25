@@ -38,12 +38,8 @@ namespace NPCGen.Tests.Generation.Providers
         {
             var adjustments = provider.GetAdjustments(race);
 
-            Assert.That(adjustments.ContainsKey(StatConstants.Strength), Is.True);
-            Assert.That(adjustments.ContainsKey(StatConstants.Constitution), Is.True);
-            Assert.That(adjustments.ContainsKey(StatConstants.Dexterity), Is.True);
-            Assert.That(adjustments.ContainsKey(StatConstants.Intelligence), Is.True);
-            Assert.That(adjustments.ContainsKey(StatConstants.Wisdom), Is.True);
-            Assert.That(adjustments.ContainsKey(StatConstants.Charisma), Is.True);
+            foreach(var stat in StatConstants.GetStats())
+                Assert.That(adjustments.ContainsKey(stat), Is.True);
         }
 
         [Test]
@@ -51,12 +47,11 @@ namespace NPCGen.Tests.Generation.Providers
         {
             provider.GetAdjustments(race);
 
-            mockStatAdjustmentXmlParser.Verify(p => p.Parse("StrengthStatAdjustments"), Times.Once);
-            mockStatAdjustmentXmlParser.Verify(p => p.Parse("ConstitutionStatAdjustments"), Times.Once);
-            mockStatAdjustmentXmlParser.Verify(p => p.Parse("DexterityStatAdjustments"), Times.Once);
-            mockStatAdjustmentXmlParser.Verify(p => p.Parse("IntelligenceStatAdjustments"), Times.Once);
-            mockStatAdjustmentXmlParser.Verify(p => p.Parse("WisdomStatAdjustments"), Times.Once);
-            mockStatAdjustmentXmlParser.Verify(p => p.Parse("CharismaStatAdjustments"), Times.Once);
+            foreach (var stat in StatConstants.GetStats())
+            {
+                var filename = String.Format("{0}StatAdjustments.xml", stat);
+                mockStatAdjustmentXmlParser.Verify(p => p.Parse(filename), Times.Once);
+            }
         }
     }
 }

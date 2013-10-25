@@ -20,19 +20,12 @@ namespace NPCGen.Core.Generation.Providers
         {
             var adjustments = new Dictionary<String, Int32>();
 
-            var strengthAdjustments = statAdjustmentXmlParser.Parse("StrengthStatAdjustments.xml");
-            var constitutionAdjustments = statAdjustmentXmlParser.Parse("ConstitutionStatAdjustments.xml");
-            var dexterityAdjustments = statAdjustmentXmlParser.Parse("DexterityStatAdjustments.xml");
-            var intelligenceAdjustments = statAdjustmentXmlParser.Parse("IntelligenceStatAdjustments.xml");
-            var wisdomAdjustments = statAdjustmentXmlParser.Parse("WisdomStatAdjustments.xml");
-            var charismaAdjustments = statAdjustmentXmlParser.Parse("CharismaStatAdjustments.xml");
-
-            adjustments.Add(StatConstants.Strength, strengthAdjustments[race.BaseRace] + strengthAdjustments[race.Metarace]);
-            adjustments.Add(StatConstants.Constitution, constitutionAdjustments[race.BaseRace] + constitutionAdjustments[race.Metarace]);
-            adjustments.Add(StatConstants.Dexterity, dexterityAdjustments[race.BaseRace] + dexterityAdjustments[race.Metarace]);
-            adjustments.Add(StatConstants.Intelligence, intelligenceAdjustments[race.BaseRace] + intelligenceAdjustments[race.Metarace]);
-            adjustments.Add(StatConstants.Wisdom, wisdomAdjustments[race.BaseRace] + wisdomAdjustments[race.Metarace]);
-            adjustments.Add(StatConstants.Charisma, charismaAdjustments[race.BaseRace] + charismaAdjustments[race.Metarace]);
+            foreach (var stat in StatConstants.GetStats())
+            {
+                var filename = String.Format("{0}StatAdjustments.xml", stat);
+                var statAdjustments = statAdjustmentXmlParser.Parse(filename);
+                adjustments.Add(stat, statAdjustments[race.BaseRace] + statAdjustments[race.Metarace]);
+            }
 
             return adjustments;
         }

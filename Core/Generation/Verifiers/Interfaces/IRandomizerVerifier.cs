@@ -1,5 +1,6 @@
 ﻿using System;
 using NPCGen.Core.Data.Alignments;
+using NPCGen.Core.Data.CharacterClasses;
 
 namespace NPCGen.Core.Generation.Verifiers.Interfaces
 {
@@ -7,6 +8,6 @@ namespace NPCGen.Core.Generation.Verifiers.Interfaces
     {
         Boolean VerifyCompatibility();
         Boolean VerifyAlignmentCompatibility(Alignment alignment);
-        Boolean VerifyClassNameCompatibility(String goodness, String className);
+        Boolean VerifyCharacterClassCompatibility(String goodness, CharacterClass characterClass);
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using NPCGen.Core.Data.Alignments;
+using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Generation.Randomizers.Alignments.Interfaces;
 using NPCGen.Core.Generation.Randomizers.CharacterClasses.Interfaces;
 using NPCGen.Core.Generation.Randomizers.Races.Interfaces;
@@ -14,12 +16,14 @@ namespace NPCGen.Core.Generation.Verifiers
         private IClassNameRandomizer classNameRandomizer;
         private IBaseRaceRandomizer baseRaceRandomizer;
         private IMetaraceRandomizer metaraceRandomizer;
+        private ILevelRandomizer levelRandomizer;
 
         public RandomizerVerifier(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classNameRandomizer,
-            IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer)
+            ILevelRandomizer levelRandomizer, IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer)
         {
             this.alignmentRandomizer = alignmentRandomizer;
             this.classNameRandomizer = classNameRandomizer;
+            this.levelRandomizer = levelRandomizer;
             this.baseRaceRandomizer = baseRaceRandomizer;
             this.metaraceRandomizer = metaraceRandomizer;
         }
@@ -33,13 +37,27 @@ namespace NPCGen.Core.Generation.Verifiers
         public Boolean VerifyAlignmentCompatibility(Alignment alignment)
         {
             var classNames = classNameRandomizer.GetAllPossibleResults(alignment);
-            return classNames.Any() && classNames.Any(c => VerifyClassNameCompatibility(alignment.Goodness, c));
+            var levels = levelRandomizer.GetAllPossibleResults();
+
+            var characterClasses = GetAllCharacterClasses(classNames, levels);
+            return characterClasses.Any() && characterClasses.Any(c => VerifyCharacterClassCompatibility(alignment.Goodness, c));
         }
 
-        public Boolean VerifyClassNameCompatibility(String goodness, String className)
+        private IEnumerable<CharacterClass> GetAllCharacterClasses(IEnumerable<String> classNames, IEnumerable<Int32> levels)
         {
-            var baseRaces = baseRaceRandomizer.GetAllPossibleResults(goodness, className);
-            var metaraces = metaraceRandomizer.GetAllPossibleResults(goodness, className);
+            var characterClasses = new List<CharacterClass>();
+
+            foreach (var className in classNames)
+                foreach (var level in levels)
+                    characterClasses.Add(new CharacterClass() { ClassName = className, Level = level });
+
+            return characterClasses;
+        }
+
+        public Boolean VerifyCharacterClassCompatibility(String goodness, CharacterClass characterClass)
+        {
+            var baseRaces = baseRaceRandomizer.GetAllPossibleResults(goodness, characterClass);
+            var metaraces = metaraceRandomizer.GetAllPossibleResults(goodness, characterClass);
 
             return baseRaces.Any() && metaraces.Any();
         }

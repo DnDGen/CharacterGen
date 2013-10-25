@@ -124,7 +124,7 @@ namespace NPCGen.Tests.Generation.Xml.Data.Stats
         [Test]
         public void GoblinStrengthAdjustmentIsMinusTwo()
         {
-            Assert.That(strengthAdjustments[RaceConstants.BaseRaces.WildElf], Is.EqualTo(-2));
+            Assert.That(strengthAdjustments[RaceConstants.BaseRaces.Goblin], Is.EqualTo(-2));
         }
 
         [Test]

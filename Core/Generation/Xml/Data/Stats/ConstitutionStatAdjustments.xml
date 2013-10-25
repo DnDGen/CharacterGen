@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<statAdjustments>
+  <object><race>Aasimar</race><adjustment>0</adjustment></object>
+    <object>
+        <race>Bugbear</race>
+        <adjustment>2</adjustment>
+    </object>
+    <object>
+        <race>Derro Dwarf</race>
+        <adjustment>2</adjustment>
+    </object>
+    <object>
+        <race>Deep Halfling</race>
+        <adjustment>0</adjustment>
+    </object>
+    <object>
+        <race>Deep Dwarf</race>
+        <adjustment>2</adjustment>
+    </object>
+    <object>
+        <race>Doppelganger</race>
+        <adjustment>2</adjustment>
+    </object>
+  <object><race>Drow</race><adjustment>-2</adjustment></object>
+    <object>
+        <race>Duergar</race>
+        <adjustment>2</adjustment>
+    </object>
+    <object>
+        <race>Forest Gnome</race>
+        <adjustment>2</adjustment>
+    </object>
+    <object>
+        <race>Gnoll</race>
+        <adjustment>2</adjustment>
+    </object>
+    <object>
+        <race>Goblin</race>
+        <adjustment>0</adjustment>
+    </object>
+    <object>
+        <race>Gray Elf</race>
+        <adjustment>-2</adjustment>
+    </object>
+    <object>
+        <race>Half-Celestial</race>
+        <adjustment>4</adjustment>
+    </object>
+    <object>
+        <race>Half-Dragon</race>
+        <adjustment>2</adjustment>
+    </object>
+    <object>
+        <race>Half-Elf</race>
+        <adjustment>0</adjustment>
+    </object>
+    <object>
+        <race>Half-Fiend</race>
+        <adjustment>2</adjustment>
+    </object>
+    <object>
+        <race>Half-Orc</race>
+        <adjustment>0</adjustment>
+    </object>
+    <object>
+        <race>High Elf</race>
+        <adjustment>-2</adjustment>
+    </object>
+    <object>
+        <race>Hill Dwarf</race>
+        <adjustment>2</adjustment>
+    </object>
+    <object>
+        <race>Hobgoblin</race>
+        <adjustment>2</adjustment>
+    </object>
+    <object>
+        <race>Human</race>
+        <adjustment>0</adjustment>
+    </object>
+    <object>
+        <race>Kobold</race>
+        <adjustment>-2</adjustment>
+    </object>
+    <object>
+        <race>Lightfoot Halfling</race>
+        <adjustment>0</adjustment>
+    </object>
+    <object>
+        <race>Lizardfolk</race>
+        <adjustment>2</adjustment>
+    </object>
+    <object>
+        <race>Mind Flayer</race>
+        <adjustment>2</adjustment>
+    </object>
+    <object>
+        <race>Minotaur</race>
+        <adjustment>4</adjustment>
+    </object>
+    <object>
+        <race>Mountain Dwarf</race>
+        <adjustment>2</adjustment>
+    </object>
+    <object>
+        <race>Ogre Mage</race>
+        <adjustment>6</adjustment>
+    </object>
+    <object>
+        <race>Ogre</race>
+        <adjustment>4</adjustment>
+    </object>
+    <object>
+        <race>Orc</race>
+        <adjustment>0</adjustment>
+    </object>
+    <object>
+        <race>Rock Gnome</race>
+        <adjustment>2</adjustment>
+    </object>
+    <object>
+        <race>Svirfneblin</race>
+        <adjustment>0</adjustment>
+    </object>
+    <object>
+        <race>Tallfellow Halfling</race>
+        <adjustment>0</adjustment>
+    </object>
+    <object>
+        <race>Tiefling</race>
+        <adjustment>0</adjustment>
+    </object>
+    <object>
+        <race>Troglodyte</race>
+        <adjustment>4</adjustment>
+    </object>
+    <object>
+        <race>Werebear</race>
+        <adjustment>2</adjustment>
+    </object>
+    <object>
+        <race>Wereboar</race>
+        <adjustment>2</adjustment>
+    </object>
+    <object>
+        <race>Wererat</race>
+        <adjustment>2</adjustment>
+    </object>
+    <object>
+        <race>Weretiger</race>
+        <adjustment>2</adjustment>
+    </object>
+    <object>
+        <race>Werewolf</race>
+        <adjustment>0</adjustment>
+    </object>
+    <object>
+        <race>Wild Elf</race>
+        <adjustment>0</adjustment>
+    </object>
+    <object>
+        <race>Wood Elf</race>
+        <adjustment>-2</adjustment>
+    </object>
+</statAdjustments>

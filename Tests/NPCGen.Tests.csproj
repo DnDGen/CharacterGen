@@ -70,6 +70,7 @@
     <Compile Include="Data\Stats\StatTests.cs" />
     <Compile Include="Generation\Factories\AlignmentFactoryTests.cs" />
     <Compile Include="Generation\Factories\CharacterClassFactoryTests.cs" />
+    <Compile Include="Generation\Factories\CharacterFactoryIntegrationTests.cs" />
     <Compile Include="Generation\Factories\CharacterFactoryTests.cs" />
     <Compile Include="Generation\Factories\HitPointsFactoryTests.cs" />
     <Compile Include="Generation\Factories\RaceFactoryTests.cs" />
@@ -202,6 +203,9 @@
     <Compile Include="Generation\Xml\Data\Races\Metaraces\Neutral\NeutralWizardMetaracesTests.cs" />
     <Compile Include="Generation\Xml\Data\Races\Metaraces\Neutral\NeutralBarbarianMetaracesTests.cs" />
     <Compile Include="Generation\Xml\Data\Races\Metaraces\Neutral\NeutralBardMetaracesTests.cs" />
+    <Compile Include="Generation\Xml\Data\Stats\ConstitutionStatAdjustmentsTests.cs" />
+    <Compile Include="Generation\Xml\Data\Stats\DexterityStatAdjustmentsTests.cs" />
+    <Compile Include="Generation\Xml\Data\Stats\IntelligenceStatAdjustmentsTests.cs" />
     <Compile Include="Generation\Xml\Data\Stats\StrengthStatAdjustmentsTests.cs" />
     <Compile Include="Generation\Xml\Parsers\EmbeddedResourceStreamLoaderTests.cs" />
     <Compile Include="Generation\Xml\Parsers\PercentileXmlParserTests.cs" />

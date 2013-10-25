@@ -1,8 +1,9 @@
-﻿using D20Dice.Dice;
+﻿using System;
+using System.Linq;
+using D20Dice.Dice;
 using Moq;
 using NPCGen.Core.Generation.Randomizers.CharacterClasses.Levels;
 using NUnit.Framework;
-using System;
 
 namespace NPCGen.Tests.Generation.Randomizers.CharacterClasses.Levels
 {
@@ -109,6 +110,19 @@ namespace NPCGen.Tests.Generation.Randomizers.CharacterClasses.Levels
 
             var level = randomizer.Randomize();
             Assert.That(level, Is.EqualTo(roll + bonus));
+        }
+
+        [Test]
+        public void GetAllPossibleResultsReturnsAllPossibleRolls()
+        {
+            randomizer.RollBonus = 9266;
+
+            var levels = randomizer.GetAllPossibleResults();
+
+            for (var level = randomizer.RollBonus + 1; level <= randomizer.RollBonus + 5; level++)
+                Assert.That(levels.Contains(level), Is.True);
+
+            Assert.That(levels.Count(), Is.EqualTo(5));
         }
 
         private class TestRangedLevelRandomizer : RangedLevel

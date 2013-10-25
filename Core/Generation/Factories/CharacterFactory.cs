@@ -20,7 +20,8 @@ namespace NPCGen.Core.Generation.Factories
             ILevelRandomizer levelRandomizer, IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer,
             IStatsRandomizer statsRandomizer, IDice dice)
         {
-            var randomizerVerifier = new RandomizerVerifier(alignmentRandomizer, classNameRandomizer, baseRaceRandomizer, metaraceRandomizer);
+            var randomizerVerifier = new RandomizerVerifier(alignmentRandomizer, classNameRandomizer, levelRandomizer, baseRaceRandomizer, 
+                metaraceRandomizer);
 
             VerifyRandomizers(randomizerVerifier);
 
@@ -29,7 +30,7 @@ namespace NPCGen.Core.Generation.Factories
             var alignment = GenerateAlignment(randomizerVerifier, alignmentRandomizer);
             var characterClass = GenerateCharacterClass(randomizerVerifier, classNameRandomizer, levelRandomizer, alignment);
             //check for level adjustments
-            var race = RaceFactory.CreateUsing(alignment.Goodness, characterClass.ClassName, baseRaceRandomizer, metaraceRandomizer, dice);
+            var race = RaceFactory.CreateUsing(alignment.Goodness, characterClass, baseRaceRandomizer, metaraceRandomizer, dice);
 
             character.Alignment = alignment;
             character.Class = characterClass;
@@ -225,7 +226,7 @@ namespace NPCGen.Core.Generation.Factories
             CharacterClass characterClass;
 
             do characterClass = CharacterClassFactory.CreateUsing(alignment, levelRandomizer, classNameRandomizer);
-            while (!randomizerVerifier.VerifyClassNameCompatibility(alignment.Goodness, characterClass.ClassName));
+            while (!randomizerVerifier.VerifyCharacterClassCompatibility(alignment.Goodness, characterClass));
 
             return characterClass;
         }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Generation.Randomizers.Races.Metaraces;
 using NUnit.Framework;
 
@@ -7,14 +9,28 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.Metaraces
     [TestFixture]
     public class SetMetaraceRandomizerTests
     {
-        [Test]
-        public void ReturnSetMetarace()
-        {
-            var randomizer = new SetMetaraceRandomizer();
-            randomizer.Metarace = "metarace";
+        private SetMetaraceRandomizer randomizer;
 
-            var metarace = randomizer.Randomize(String.Empty, String.Empty);
+        [SetUp]
+        public void Setup()
+        {
+            randomizer = new SetMetaraceRandomizer();
+            randomizer.Metarace = "metarace";
+        }
+
+        [Test]
+        public void RandomizeReturnsSetMetarace()
+        {
+            var metarace = randomizer.Randomize(String.Empty, new CharacterClass());
             Assert.That(metarace, Is.EqualTo("metarace"));
+        }
+
+        [Test]
+        public void GetAllPossibleResultsReturnsEnmuerableOfSetMetarace()
+        {
+            var metaraces = randomizer.GetAllPossibleResults(String.Empty, new CharacterClass());
+            Assert.That(metaraces.First(), Is.EqualTo("metarace"));
+            Assert.That(metaraces.Count(), Is.EqualTo(1));
         }
     }
 }

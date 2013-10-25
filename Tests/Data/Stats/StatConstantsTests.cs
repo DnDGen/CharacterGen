@@ -1,4 +1,5 @@
-﻿using NPCGen.Core.Data.Stats;
+﻿using System.Linq;
+using NPCGen.Core.Data.Stats;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Data.Stats
@@ -40,6 +41,20 @@ namespace NPCGen.Tests.Data.Stats
         public void CharismaConstant()
         {
             Assert.That(StatConstants.Charisma, Is.EqualTo("Charisma"));
+        }
+
+        [Test]
+        public void GetStatConstants()
+        {
+            var stats = StatConstants.GetStats();
+
+            Assert.That(stats.Contains(StatConstants.Charisma), Is.True);
+            Assert.That(stats.Contains(StatConstants.Constitution), Is.True);
+            Assert.That(stats.Contains(StatConstants.Dexterity), Is.True);
+            Assert.That(stats.Contains(StatConstants.Intelligence), Is.True);
+            Assert.That(stats.Contains(StatConstants.Strength), Is.True);
+            Assert.That(stats.Contains(StatConstants.Wisdom), Is.True);
+            Assert.That(stats.Count(), Is.EqualTo(6));
         }
     }
 }

@@ -34,19 +34,6 @@ namespace NPCGen.Tests.Generation.Randomizers.Stats
         }
 
         [Test]
-        public void StatsAreProperlyNamed()
-        {
-            var stats = randomizer.Randomize();
-
-            Assert.That(stats[StatConstants.Strength].Name, Is.EqualTo(StatConstants.Strength));
-            Assert.That(stats[StatConstants.Constitution].Name, Is.EqualTo(StatConstants.Constitution));
-            Assert.That(stats[StatConstants.Dexterity].Name, Is.EqualTo(StatConstants.Dexterity));
-            Assert.That(stats[StatConstants.Intelligence].Name, Is.EqualTo(StatConstants.Intelligence));
-            Assert.That(stats[StatConstants.Wisdom].Name, Is.EqualTo(StatConstants.Wisdom));
-            Assert.That(stats[StatConstants.Charisma].Name, Is.EqualTo(StatConstants.Charisma));
-        }
-
-        [Test]
         public void StatsRolledTheSamePerStat()
         {
             randomizer.Roll = 10;

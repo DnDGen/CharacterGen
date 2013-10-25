@@ -1,6 +1,7 @@
-﻿using D20Dice.Dice;
+﻿using System;
+using System.Collections.Generic;
+using D20Dice.Dice;
 using NPCGen.Core.Generation.Randomizers.CharacterClasses.Interfaces;
-using System;
 
 namespace NPCGen.Core.Generation.Randomizers.CharacterClasses.Levels
 {
@@ -24,6 +25,17 @@ namespace NPCGen.Core.Generation.Randomizers.CharacterClasses.Levels
         {
             Double roll = dice.d10();
             return Convert.ToInt32(Math.Ceiling(roll / 2));
+        }
+
+
+        public IEnumerable<Int32> GetAllPossibleResults()
+        {
+            var levels = new List<Int32>();
+
+            for (var roll = 1; roll <= 5; roll++)
+                levels.Add(roll + rollBonus);
+
+            return levels;
         }
     }
 }
