@@ -203,6 +203,7 @@
     <Compile Include="Generation\Xml\Data\Races\Metaraces\Neutral\NeutralWizardMetaracesTests.cs" />
     <Compile Include="Generation\Xml\Data\Races\Metaraces\Neutral\NeutralBarbarianMetaracesTests.cs" />
     <Compile Include="Generation\Xml\Data\Races\Metaraces\Neutral\NeutralBardMetaracesTests.cs" />
+    <Compile Include="Generation\Xml\Data\Stats\CharismaStatAdjustmentsTests.cs" />
     <Compile Include="Generation\Xml\Data\Stats\ConstitutionStatAdjustmentsTests.cs" />
     <Compile Include="Generation\Xml\Data\Stats\DexterityStatAdjustmentsTests.cs" />
     <Compile Include="Generation\Xml\Data\Stats\IntelligenceStatAdjustmentsTests.cs" />
