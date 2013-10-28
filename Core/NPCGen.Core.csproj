@@ -64,8 +64,10 @@
     <Compile Include="Generation\Factories\RaceFactory.cs" />
     <Compile Include="Generation\Factories\StatsFactory.cs" />
     <Compile Include="Generation\Providers\Interfaces\IStatAdjustmentsProvider.cs" />
+    <Compile Include="Generation\Providers\Interfaces\IStatPriorityProvider.cs" />
     <Compile Include="Generation\Providers\ProviderFactory.cs" />
     <Compile Include="Generation\Providers\StatAdjustmentsProvider.cs" />
+    <Compile Include="Generation\Providers\StatPriorityProvider.cs" />
     <Compile Include="Generation\Randomizers\Alignments\AnyAlignmentRandomizer.cs" />
     <Compile Include="Generation\Randomizers\Alignments\BaseAlignmentRandomizer.cs" />
     <Compile Include="Generation\Randomizers\Alignments\ChaoticAlignmentRandomizer.cs" />
@@ -140,11 +142,14 @@
     <Compile Include="Generation\Verifiers\RandomizerVerifier.cs" />
     <Compile Include="Generation\Xml\Parsers\Interfaces\IPercentileXmlParser.cs" />
     <Compile Include="Generation\Xml\Parsers\Interfaces\IStatAdjustmentXmlParser.cs" />
+    <Compile Include="Generation\Xml\Parsers\Interfaces\IStatPriorityXmlParser.cs" />
     <Compile Include="Generation\Xml\Parsers\Interfaces\IStreamLoader.cs" />
     <Compile Include="Generation\Xml\Parsers\Objects\PercentileObject.cs" />
+    <Compile Include="Generation\Xml\Parsers\Objects\StatPriorityObject.cs" />
     <Compile Include="Generation\Xml\Parsers\StatAdjustmentXmlParser.cs" />
     <Compile Include="Generation\Xml\Parsers\PercentileXmlParser.cs" />
     <Compile Include="Generation\Xml\Parsers\EmbeddedResourceStreamLoader.cs" />
+    <Compile Include="Generation\Xml\Parsers\StatPriorityXmlParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -381,6 +386,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Generation\Xml\Data\Stats\CharismaStatAdjustments.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Stats\StatPriorities.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

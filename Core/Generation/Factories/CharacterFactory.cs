@@ -34,7 +34,7 @@ namespace NPCGen.Core.Generation.Factories
             character.Class = characterClass;
             character.Race = race;
 
-            character.Stats = StatsFactory.CreateUsing(statsRandomizer, race);
+            character.Stats = StatsFactory.CreateUsing(statsRandomizer, characterClass, race, dice);
 
             //make HitPointFactory(characterClass, constitutionBonus, metarace)
 

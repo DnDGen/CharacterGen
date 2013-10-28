@@ -75,6 +75,7 @@
     <Compile Include="Generation\Factories\RaceFactoryTests.cs" />
     <Compile Include="Generation\Factories\StatsFactoryTests.cs" />
     <Compile Include="Generation\Providers\StatAdjustmentsProviderTests.cs" />
+    <Compile Include="Generation\Providers\StatPriorityProviderTests.cs" />
     <Compile Include="Generation\Randomizers\Alignments\AnyAlignmentRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\Alignments\BaseAlignmentTests.cs" />
     <Compile Include="Generation\Randomizers\Alignments\ChaoticAlignmentRandomizerTests.cs" />
@@ -213,10 +214,13 @@
     <Compile Include="Generation\Xml\Data\Stats\ConstitutionStatAdjustmentsTests.cs" />
     <Compile Include="Generation\Xml\Data\Stats\DexterityStatAdjustmentsTests.cs" />
     <Compile Include="Generation\Xml\Data\Stats\IntelligenceStatAdjustmentsTests.cs" />
+    <Compile Include="Generation\Xml\Data\Stats\StatPrioritiesTests.cs" />
     <Compile Include="Generation\Xml\Data\Stats\StrengthStatAdjustmentsTests.cs" />
     <Compile Include="Generation\Xml\Data\Stats\WisdomStatAdjustmentsTests.cs" />
     <Compile Include="Generation\Xml\Parsers\EmbeddedResourceStreamLoaderTests.cs" />
     <Compile Include="Generation\Xml\Parsers\PercentileXmlParserTests.cs" />
+    <Compile Include="Generation\Xml\Parsers\StatAdjustmentXmlParserTests.cs" />
+    <Compile Include="Generation\Xml\Parsers\StatPriorityXmlParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

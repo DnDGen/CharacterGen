@@ -19,5 +19,12 @@ namespace NPCGen.Core.Generation.Providers
             var xmlParser = new StatAdjustmentXmlParser(streamLoader);
             return new StatAdjustmentsProvider(xmlParser);
         }
+
+        public static IStatPriorityProvider CreateStatPriorityProvider()
+        {
+            var streamLoader = new EmbeddedResourceStreamLoader();
+            var xmlParser = new StatPriorityXmlParser(streamLoader);
+            return new StatPriorityProvider(xmlParser);
+        }
     }
 }
