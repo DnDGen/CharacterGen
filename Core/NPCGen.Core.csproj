@@ -64,6 +64,7 @@
     <Compile Include="Generation\Factories\RaceFactory.cs" />
     <Compile Include="Generation\Factories\StatsFactory.cs" />
     <Compile Include="Generation\Providers\Interfaces\IStatAdjustmentsProvider.cs" />
+    <Compile Include="Generation\Providers\ProviderFactory.cs" />
     <Compile Include="Generation\Providers\StatAdjustmentsProvider.cs" />
     <Compile Include="Generation\Randomizers\Alignments\AnyAlignmentRandomizer.cs" />
     <Compile Include="Generation\Randomizers\Alignments\BaseAlignmentRandomizer.cs" />
@@ -124,9 +125,16 @@
     <Compile Include="Generation\Randomizers\Races\Metaraces\NonGoodMetaraceRandomizer.cs" />
     <Compile Include="Generation\Randomizers\Races\Metaraces\NonNeutralMetaraceRandomizer.cs" />
     <Compile Include="Generation\Randomizers\Races\Metaraces\SetMetaraceRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Stats\AverageStatsRandomizer.cs" />
     <Compile Include="Generation\Randomizers\Stats\BaseStatsRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Stats\BestOfFourStatsRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Stats\GoodStatsRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Stats\HeroicStatsRandomizer.cs" />
     <Compile Include="Generation\Randomizers\Stats\Interfaces\IStatsRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Stats\OnesAsSixesStatsRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Stats\PoorStatsRandomizer.cs" />
     <Compile Include="Generation\Randomizers\Stats\RawStatsRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Stats\TwoTenSidedDiceStatsRandomizer.cs" />
     <Compile Include="Generation\Verifiers\Exceptions\IncompatibleRandomizersException.cs" />
     <Compile Include="Generation\Verifiers\Interfaces\IRandomizerVerifier.cs" />
     <Compile Include="Generation\Verifiers\RandomizerVerifier.cs" />

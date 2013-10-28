@@ -1,8 +1,8 @@
-﻿using NPCGen.Core.Data.Races;
+﻿using System;
+using System.Collections.Generic;
+using NPCGen.Core.Data.Races;
 using NPCGen.Core.Generation.Xml.Parsers;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
 
 namespace NPCGen.Tests.Generation.Xml.Data.Stats
 {
@@ -17,8 +17,6 @@ namespace NPCGen.Tests.Generation.Xml.Data.Stats
             var streamLoader = new EmbeddedResourceStreamLoader();
             var parser = new StatAdjustmentXmlParser(streamLoader);
             charismaAdjustments = parser.Parse("CharismaStatAdjustments.xml");
-
-            Assert.Fail("Need to adjust these tests from the wisdom ones they were copied from.");
         }
 
         [Test]
@@ -28,9 +26,9 @@ namespace NPCGen.Tests.Generation.Xml.Data.Stats
         }
 
         [Test]
-        public void BugbearCharismaAdjustmentIsZero()
+        public void BugbearCharismaAdjustmentIsMinusTwo()
         {
-            Assert.That(charismaAdjustments[RaceConstants.BaseRaces.Bugbear], Is.EqualTo(0));
+            Assert.That(charismaAdjustments[RaceConstants.BaseRaces.Bugbear], Is.EqualTo(-2));
         }
 
         [Test]
@@ -40,39 +38,39 @@ namespace NPCGen.Tests.Generation.Xml.Data.Stats
         }
 
         [Test]
-        public void DoppelgangerCharismaAdjustmentIsFour()
+        public void DoppelgangerCharismaAdjustmentIsTwo()
         {
-            Assert.That(charismaAdjustments[RaceConstants.BaseRaces.Doppelganger], Is.EqualTo(4));
+            Assert.That(charismaAdjustments[RaceConstants.BaseRaces.Doppelganger], Is.EqualTo(2));
         }
 
         [Test]
-        public void DrowCharismaAdjustmentIsZero()
+        public void DrowCharismaAdjustmentIsTwo()
         {
-            Assert.That(charismaAdjustments[RaceConstants.BaseRaces.Drow], Is.EqualTo(0));
+            Assert.That(charismaAdjustments[RaceConstants.BaseRaces.Drow], Is.EqualTo(2));
         }
 
         [Test]
-        public void DuergarCharismaAdjustmentIsZero()
+        public void DuergarCharismaAdjustmentIsMinusFour()
         {
-            Assert.That(charismaAdjustments[RaceConstants.BaseRaces.Duergar], Is.EqualTo(0));
+            Assert.That(charismaAdjustments[RaceConstants.BaseRaces.Duergar], Is.EqualTo(-4));
         }
 
         [Test]
-        public void DeepDwarfCharismaAdjustmentIsZero()
+        public void DeepDwarfCharismaAdjustmentIsMinusTwo()
         {
-            Assert.That(charismaAdjustments[RaceConstants.BaseRaces.DeepDwarf], Is.EqualTo(0));
+            Assert.That(charismaAdjustments[RaceConstants.BaseRaces.DeepDwarf], Is.EqualTo(-2));
         }
 
         [Test]
-        public void HillDwarfCharismaAdjustmentIsZero()
+        public void HillDwarfCharismaAdjustmentIsMinusTwo()
         {
-            Assert.That(charismaAdjustments[RaceConstants.BaseRaces.HillDwarf], Is.EqualTo(0));
+            Assert.That(charismaAdjustments[RaceConstants.BaseRaces.HillDwarf], Is.EqualTo(-2));
         }
 
         [Test]
-        public void MountainDwarfCharismaAdjustmentIsZero()
+        public void MountainDwarfCharismaAdjustmentIsMinusTwo()
         {
-            Assert.That(charismaAdjustments[RaceConstants.BaseRaces.MountainDwarf], Is.EqualTo(0));
+            Assert.That(charismaAdjustments[RaceConstants.BaseRaces.MountainDwarf], Is.EqualTo(-2));
         }
 
         [Test]
@@ -100,15 +98,15 @@ namespace NPCGen.Tests.Generation.Xml.Data.Stats
         }
 
         [Test]
-        public void GnollCharismaAdjustmentIsZero()
+        public void GnollCharismaAdjustmentIsMinusTwo()
         {
-            Assert.That(charismaAdjustments[RaceConstants.BaseRaces.Gnoll], Is.EqualTo(0));
+            Assert.That(charismaAdjustments[RaceConstants.BaseRaces.Gnoll], Is.EqualTo(-2));
         }
 
         [Test]
-        public void ForestGnomeCharismaAdjustmentIsZero()
+        public void ForestGnomeCharismaAdjustmentIsTwo()
         {
-            Assert.That(charismaAdjustments[RaceConstants.BaseRaces.ForestGnome], Is.EqualTo(0));
+            Assert.That(charismaAdjustments[RaceConstants.BaseRaces.ForestGnome], Is.EqualTo(2));
         }
 
         [Test]
@@ -118,15 +116,15 @@ namespace NPCGen.Tests.Generation.Xml.Data.Stats
         }
 
         [Test]
-        public void SvirfneblinCharismaAdjustmentIsTwo()
+        public void SvirfneblinCharismaAdjustmentIsMinusFour()
         {
-            Assert.That(charismaAdjustments[RaceConstants.BaseRaces.Svirfneblin], Is.EqualTo(2));
+            Assert.That(charismaAdjustments[RaceConstants.BaseRaces.Svirfneblin], Is.EqualTo(-4));
         }
 
         [Test]
-        public void GoblinCharismaAdjustmentIsZero()
+        public void GoblinCharismaAdjustmentIsMinusTwo()
         {
-            Assert.That(charismaAdjustments[RaceConstants.BaseRaces.Goblin], Is.EqualTo(0));
+            Assert.That(charismaAdjustments[RaceConstants.BaseRaces.Goblin], Is.EqualTo(-2));
         }
 
         [Test]
@@ -136,9 +134,9 @@ namespace NPCGen.Tests.Generation.Xml.Data.Stats
         }
 
         [Test]
-        public void HalfDragonCharismaAdjustmentIsZero()
+        public void HalfDragonCharismaAdjustmentIsTwo()
         {
-            Assert.That(charismaAdjustments[RaceConstants.Metaraces.HalfDragon], Is.EqualTo(0));
+            Assert.That(charismaAdjustments[RaceConstants.Metaraces.HalfDragon], Is.EqualTo(2));
         }
 
         [Test]
@@ -148,15 +146,15 @@ namespace NPCGen.Tests.Generation.Xml.Data.Stats
         }
 
         [Test]
-        public void HalfFiendCharismaAdjustmentIsZero()
+        public void HalfFiendCharismaAdjustmentIsTwo()
         {
-            Assert.That(charismaAdjustments[RaceConstants.Metaraces.HalfFiend], Is.EqualTo(0));
+            Assert.That(charismaAdjustments[RaceConstants.Metaraces.HalfFiend], Is.EqualTo(2));
         }
 
         [Test]
-        public void HalfOrcCharismaAdjustmentIsZero()
+        public void HalfOrcCharismaAdjustmentIsMinusTwo()
         {
-            Assert.That(charismaAdjustments[RaceConstants.BaseRaces.HalfOrc], Is.EqualTo(0));
+            Assert.That(charismaAdjustments[RaceConstants.BaseRaces.HalfOrc], Is.EqualTo(-2));
         }
 
         [Test]
@@ -208,9 +206,9 @@ namespace NPCGen.Tests.Generation.Xml.Data.Stats
         }
 
         [Test]
-        public void MinotaurCharismaAdjustmentIsZero()
+        public void MinotaurCharismaAdjustmentIsMinusTwo()
         {
-            Assert.That(charismaAdjustments[RaceConstants.BaseRaces.Minotaur], Is.EqualTo(0));
+            Assert.That(charismaAdjustments[RaceConstants.BaseRaces.Minotaur], Is.EqualTo(-2));
         }
 
         [Test]
@@ -220,9 +218,9 @@ namespace NPCGen.Tests.Generation.Xml.Data.Stats
         }
 
         [Test]
-        public void OgreMageCharismaAdjustmentIsFour()
+        public void OgreMageCharismaAdjustmentIsSix()
         {
-            Assert.That(charismaAdjustments[RaceConstants.BaseRaces.OgreMage], Is.EqualTo(4));
+            Assert.That(charismaAdjustments[RaceConstants.BaseRaces.OgreMage], Is.EqualTo(6));
         }
 
         [Test]
@@ -232,9 +230,9 @@ namespace NPCGen.Tests.Generation.Xml.Data.Stats
         }
 
         [Test]
-        public void TieflingCharismaAdjustmentIsZero()
+        public void TieflingCharismaAdjustmentIsMinusTwo()
         {
-            Assert.That(charismaAdjustments[RaceConstants.BaseRaces.Tiefling], Is.EqualTo(0));
+            Assert.That(charismaAdjustments[RaceConstants.BaseRaces.Tiefling], Is.EqualTo(-2));
         }
 
         [Test]
@@ -244,21 +242,21 @@ namespace NPCGen.Tests.Generation.Xml.Data.Stats
         }
 
         [Test]
-        public void WerebearCharismaAdjustmentIsZero()
+        public void WerebearCharismaAdjustmentIsMinusTwo()
         {
-            Assert.That(charismaAdjustments[RaceConstants.Metaraces.Werebear], Is.EqualTo(0));
+            Assert.That(charismaAdjustments[RaceConstants.Metaraces.Werebear], Is.EqualTo(-2));
         }
 
         [Test]
-        public void WereboarCharismaAdjustmentIsZero()
+        public void WereboarCharismaAdjustmentIsMinusTwo()
         {
-            Assert.That(charismaAdjustments[RaceConstants.Metaraces.Wereboar], Is.EqualTo(0));
+            Assert.That(charismaAdjustments[RaceConstants.Metaraces.Wereboar], Is.EqualTo(-2));
         }
 
         [Test]
-        public void WereratCharismaAdjustmentIsZero()
+        public void WereratCharismaAdjustmentIsMinusTwo()
         {
-            Assert.That(charismaAdjustments[RaceConstants.Metaraces.Wererat], Is.EqualTo(0));
+            Assert.That(charismaAdjustments[RaceConstants.Metaraces.Wererat], Is.EqualTo(-2));
         }
 
         [Test]
@@ -268,9 +266,9 @@ namespace NPCGen.Tests.Generation.Xml.Data.Stats
         }
 
         [Test]
-        public void WerewolfCharismaAdjustmentIsFour()
+        public void WerewolfCharismaAdjustmentIsMinusTwo()
         {
-            Assert.That(charismaAdjustments[RaceConstants.Metaraces.Werewolf], Is.EqualTo(4));
+            Assert.That(charismaAdjustments[RaceConstants.Metaraces.Werewolf], Is.EqualTo(-2));
         }
     }
 }

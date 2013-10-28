@@ -13,8 +13,8 @@ namespace NPCGen.Core.Generation.Randomizers.Stats
 
             do
             {
-                foreach (var kvp in stats)
-                    kvp.Value.Value = RollStat();
+                foreach (var stat in stats.Values)
+                    stat.Value = RollStat();
             } while (!StatsAreAllowed(stats.Values));
 
             return stats;

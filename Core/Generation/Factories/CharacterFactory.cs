@@ -2,7 +2,6 @@
 using NPCGen.Core.Data;
 using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Data.CharacterClasses;
-using NPCGen.Core.Generation.Providers;
 using NPCGen.Core.Generation.Randomizers.Alignments.Interfaces;
 using NPCGen.Core.Generation.Randomizers.CharacterClasses.Interfaces;
 using NPCGen.Core.Generation.Randomizers.Races.Interfaces;
@@ -10,7 +9,6 @@ using NPCGen.Core.Generation.Randomizers.Stats.Interfaces;
 using NPCGen.Core.Generation.Verifiers;
 using NPCGen.Core.Generation.Verifiers.Exceptions;
 using NPCGen.Core.Generation.Verifiers.Interfaces;
-using NPCGen.Core.Generation.Xml.Parsers;
 
 namespace NPCGen.Core.Generation.Factories
 {
@@ -29,17 +27,14 @@ namespace NPCGen.Core.Generation.Factories
 
             var alignment = GenerateAlignment(randomizerVerifier, alignmentRandomizer);
             var characterClass = GenerateCharacterClass(randomizerVerifier, classNameRandomizer, levelRandomizer, alignment);
-            //check for level adjustments
+            //check for level adjustments in race factory
             var race = RaceFactory.CreateUsing(alignment.Goodness, characterClass, baseRaceRandomizer, metaraceRandomizer, dice);
 
             character.Alignment = alignment;
             character.Class = characterClass;
             character.Race = race;
 
-            var streamLoader = new EmbeddedResourceStreamLoader();
-            var statAdjustmentXmlParser = new StatAdjustmentXmlParser(streamLoader);
-            var statAdjustmentsProvider = new StatAdjustmentsProvider(statAdjustmentXmlParser);
-            character.Stats = StatsFactory.CreateUsing(statsRandomizer, statAdjustmentsProvider, race);
+            character.Stats = StatsFactory.CreateUsing(statsRandomizer, race);
 
             //make HitPointFactory(characterClass, constitutionBonus, metarace)
 

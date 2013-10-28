@@ -24,7 +24,11 @@ namespace NPCGen.Core.Generation.Providers
             {
                 var filename = String.Format("{0}StatAdjustments.xml", stat);
                 var statAdjustments = statAdjustmentXmlParser.Parse(filename);
-                adjustments.Add(stat, statAdjustments[race.BaseRace] + statAdjustments[race.Metarace]);
+
+                adjustments.Add(stat, statAdjustments[race.BaseRace]);
+
+                if (!String.IsNullOrEmpty(race.Metarace))
+                    adjustments[stat] += statAdjustments[race.Metarace];
             }
 
             return adjustments;

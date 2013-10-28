@@ -32,9 +32,9 @@ namespace NPCGen.Tests.Generation.Xml.Data.Stats
         }
 
         [Test]
-        public void DerroDwarfWisdomAdjustmentIsSix()
+        public void DerroDwarfWisdomAdjustmentIsMinusSix()
         {
-            Assert.That(wisdomAdjustments[RaceConstants.BaseRaces.DerroDwarf], Is.EqualTo(6));
+            Assert.That(wisdomAdjustments[RaceConstants.BaseRaces.DerroDwarf], Is.EqualTo(-6));
         }
 
         [Test]

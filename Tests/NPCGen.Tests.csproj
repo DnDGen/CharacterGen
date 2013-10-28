@@ -70,7 +70,6 @@
     <Compile Include="Data\Stats\StatTests.cs" />
     <Compile Include="Generation\Factories\AlignmentFactoryTests.cs" />
     <Compile Include="Generation\Factories\CharacterClassFactoryTests.cs" />
-    <Compile Include="Generation\Factories\CharacterFactoryIntegrationTests.cs" />
     <Compile Include="Generation\Factories\CharacterFactoryTests.cs" />
     <Compile Include="Generation\Factories\HitPointsFactoryTests.cs" />
     <Compile Include="Generation\Factories\RaceFactoryTests.cs" />
@@ -133,8 +132,15 @@
     <Compile Include="Generation\Randomizers\Races\Metaraces\NonNeutralMetaraceRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\Races\Metaraces\SetMetaraceRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\Races\RaceRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Stats\AverageStatsRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\Stats\BaseStatsRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Stats\BestOfFourStatsRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Stats\GoodStatsRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Stats\HeroicStatsRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Stats\OnesAsSixesStatsRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Stats\PoorStatsRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\Stats\RawStatsRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Stats\TwoTenSidedDiceStatsRandomizerTests.cs" />
     <Compile Include="Generation\Verifiers\RandomizerVerifierTests.cs" />
     <Compile Include="Generation\Xml\Data\Alignments\AlignmentGoodnessTests.cs" />
     <Compile Include="Generation\Xml\Data\CharacterClasses\EvilCharacterClassesTests.cs" />

@@ -5,18 +5,18 @@ using NPCGen.Core.Data.Stats;
 
 namespace NPCGen.Core.Generation.Randomizers.Stats
 {
-    public class RawStatsRandomizer : BaseStatsRandomizer
+    public class TwoTenSidedDiceStatsRandomizer : BaseStatsRandomizer
     {
         private IDice dice;
 
-        public RawStatsRandomizer(IDice dice)
+        public TwoTenSidedDiceStatsRandomizer(IDice dice)
         {
             this.dice = dice;
         }
 
         protected override Int32 RollStat()
         {
-            return dice.d6(3);
+            return dice.d10(2);
         }
 
         protected override Boolean StatsAreAllowed(IEnumerable<Stat> stats)
