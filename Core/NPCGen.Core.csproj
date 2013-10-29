@@ -51,6 +51,7 @@
     <Compile Include="Data\CharacterClasses\BaseAttack.cs" />
     <Compile Include="Data\CharacterClasses\CharacterClass.cs" />
     <Compile Include="Data\CharacterClasses\CharacterClassConstants.cs" />
+    <Compile Include="Data\CharacterClasses\CharacterClassPrototype.cs" />
     <Compile Include="Data\Feat.cs" />
     <Compile Include="Data\Races\Race.cs" />
     <Compile Include="Data\Races\RaceConstants.cs" />

@@ -19,13 +19,13 @@ namespace NPCGen.Core.Generation.Randomizers.Races.BaseRaces
             this.levelAdjustmentProvider = levelAdjustmentProvider;
         }
 
-        public String Randomize(String goodness, CharacterClass characterClass)
+        public String Randomize(String goodness, CharacterClassPrototype prototype)
         {
-            var results = GetAllPossibleResults(goodness, characterClass);
+            var results = GetAllPossibleResults(goodness, prototype);
             if (!results.Any())
                 throw new IncompatibleRandomizersException();
 
-            var tableName = String.Format("{0}{1}BaseRaces", goodness, characterClass.ClassName);
+            var tableName = String.Format("{0}{1}BaseRaces", goodness, prototype.ClassName);
             var baseRace = String.Empty;
 
             do baseRace = percentileResultProvider.GetPercentileResult(tableName);
@@ -47,11 +47,11 @@ namespace NPCGen.Core.Generation.Randomizers.Races.BaseRaces
 
         protected abstract Boolean BaseRaceIsAllowed(String baseRace);
 
-        public IEnumerable<String> GetAllPossibleResults(String goodness, CharacterClass characterClass)
+        public IEnumerable<String> GetAllPossibleResults(String goodness, CharacterClassPrototype prototype)
         {
-            var tableName = String.Format("{0}{1}BaseRaces", goodness, characterClass.ClassName);
+            var tableName = String.Format("{0}{1}BaseRaces", goodness, prototype.ClassName);
             var baseRaces = percentileResultProvider.GetAllResults(tableName);
-            return baseRaces.Where(r => RaceIsAllowed(r, characterClass.Level));
+            return baseRaces.Where(r => RaceIsAllowed(r, prototype.Level));
         }
     }
 }

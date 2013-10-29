@@ -13,7 +13,7 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.BaseRaces
     {
         protected IBaseRaceRandomizer randomizer;
 
-        private CharacterClass characterClass;
+        private CharacterClassPrototype prototype;
 
         [SetUp]
         public void Setup()
@@ -27,13 +27,13 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.BaseRaces
 
             mockLevelAdjustmentsProvider.Setup(p => p.GetLevelAdjustments()).Returns(adjustments);
 
-            characterClass = new CharacterClass();
-            characterClass.Level = 1;
+            prototype = new CharacterClassPrototype();
+            prototype.Level = 1;
         }
 
         protected override IEnumerable<String> GetResults()
         {
-            return randomizer.GetAllPossibleResults(String.Empty, characterClass);
+            return randomizer.GetAllPossibleResults(String.Empty, prototype);
         }
     }
 }

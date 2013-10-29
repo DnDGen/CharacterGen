@@ -27,9 +27,9 @@ namespace NPCGen.Tests.Generation.Factories
         [Test]
         public void RaceFactoryReturnsRandomizedBaseRace()
         {
-            mockBaseRaceRandomizer.Setup(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClass>())).Returns("base race");
+            mockBaseRaceRandomizer.Setup(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>())).Returns("base race");
 
-            var race = RaceFactory.CreateUsing(String.Empty, new CharacterClass(), mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object,
+            var race = RaceFactory.CreateUsing(String.Empty, new CharacterClassPrototype(), mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object,
                 mockDice.Object);
             Assert.That(race.BaseRace, Is.EqualTo("base race"));
         }
@@ -37,9 +37,9 @@ namespace NPCGen.Tests.Generation.Factories
         [Test]
         public void RaceFactoryReturnsRandomizedMetarace()
         {
-            mockMetaraceRandomizer.Setup(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClass>())).Returns("metarace");
+            mockMetaraceRandomizer.Setup(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>())).Returns("metarace");
 
-            var race = RaceFactory.CreateUsing(String.Empty, new CharacterClass(), mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object,
+            var race = RaceFactory.CreateUsing(String.Empty, new CharacterClassPrototype(), mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object,
                 mockDice.Object);
             Assert.That(race.Metarace, Is.EqualTo("metarace"));
         }
@@ -49,7 +49,7 @@ namespace NPCGen.Tests.Generation.Factories
         {
             mockDice.Setup(d => d.d2(1, 0)).Returns(1);
 
-            var race = RaceFactory.CreateUsing(String.Empty, new CharacterClass(), mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, 
+            var race = RaceFactory.CreateUsing(String.Empty, new CharacterClassPrototype(), mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, 
                 mockDice.Object);
             Assert.That(race.Male, Is.True);
         }
@@ -59,7 +59,7 @@ namespace NPCGen.Tests.Generation.Factories
         {
             mockDice.Setup(d => d.d2(1, 0)).Returns(2);
 
-            var race = RaceFactory.CreateUsing(String.Empty, new CharacterClass(), mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object,
+            var race = RaceFactory.CreateUsing(String.Empty, new CharacterClassPrototype(), mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object,
                 mockDice.Object);
             Assert.That(race.Male, Is.False);
         }
@@ -67,9 +67,9 @@ namespace NPCGen.Tests.Generation.Factories
         [Test]
         public void RaceFactoryReturnsMaleForDrowWizard()
         {
-            mockBaseRaceRandomizer.Setup(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClass>())).Returns(RaceConstants.BaseRaces.Drow);
+            mockBaseRaceRandomizer.Setup(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>())).Returns(RaceConstants.BaseRaces.Drow);
 
-            var race = RaceFactory.CreateUsing(String.Empty, new CharacterClass() { ClassName = CharacterClassConstants.Wizard },
+            var race = RaceFactory.CreateUsing(String.Empty, new CharacterClassPrototype() { ClassName = CharacterClassConstants.Wizard },
                 mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockDice.Object);
             Assert.That(race.Male, Is.True);
         }
@@ -77,9 +77,9 @@ namespace NPCGen.Tests.Generation.Factories
         [Test]
         public void RaceFactoryReturnsFemaleForDrowCleric()
         {
-            mockBaseRaceRandomizer.Setup(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClass>())).Returns(RaceConstants.BaseRaces.Drow);
+            mockBaseRaceRandomizer.Setup(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>())).Returns(RaceConstants.BaseRaces.Drow);
 
-            var race = RaceFactory.CreateUsing(String.Empty, new CharacterClass() { ClassName = CharacterClassConstants.Cleric },
+            var race = RaceFactory.CreateUsing(String.Empty, new CharacterClassPrototype() { ClassName = CharacterClassConstants.Cleric },
                 mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockDice.Object);
             Assert.That(race.Male, Is.False);
         }

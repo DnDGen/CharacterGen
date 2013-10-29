@@ -21,14 +21,14 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.BaseRaces
         [Test]
         public void RandomizeReturnsSetBaseRace()
         {
-            var baseRace = randomizer.Randomize(String.Empty, new CharacterClass());
+            var baseRace = randomizer.Randomize(String.Empty, new CharacterClassPrototype());
             Assert.That(baseRace, Is.EqualTo("base race"));
         }
 
         [Test]
         public void GetAllPossibleResultsReturnsSetBaseRace()
         {
-            var baseRaces = randomizer.GetAllPossibleResults(String.Empty, new CharacterClass());
+            var baseRaces = randomizer.GetAllPossibleResults(String.Empty, new CharacterClassPrototype());
             Assert.That(baseRaces.First(), Is.EqualTo("base race"));
             Assert.That(baseRaces.Count(), Is.EqualTo(1));
         }

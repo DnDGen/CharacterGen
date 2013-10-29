@@ -50,13 +50,13 @@ namespace NPCGen.Tests.Generation.Factories
             mockLevelRandomizer.Setup(r => r.GetAllPossibleResults()).Returns(new[] { 1 });
 
             mockBaseRaceRandomizer = new Mock<IBaseRaceRandomizer>();
-            mockBaseRaceRandomizer.Setup(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClass>())).Returns(RaceConstants.BaseRaces.Human);
-            mockBaseRaceRandomizer.Setup(r => r.GetAllPossibleResults(It.IsAny<String>(), It.IsAny<CharacterClass>()))
+            mockBaseRaceRandomizer.Setup(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>())).Returns(RaceConstants.BaseRaces.Human);
+            mockBaseRaceRandomizer.Setup(r => r.GetAllPossibleResults(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>()))
                 .Returns(new[] { RaceConstants.BaseRaces.Human });
 
             mockMetaraceRandomizer = new Mock<IMetaraceRandomizer>();
-            mockMetaraceRandomizer.Setup(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClass>())).Returns(String.Empty);
-            mockMetaraceRandomizer.Setup(r => r.GetAllPossibleResults(It.IsAny<String>(), It.IsAny<CharacterClass>()))
+            mockMetaraceRandomizer.Setup(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>())).Returns(String.Empty);
+            mockMetaraceRandomizer.Setup(r => r.GetAllPossibleResults(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>()))
                 .Returns(new[] { String.Empty });
 
             var stats = new Dictionary<String, Stat>();
@@ -94,7 +94,7 @@ namespace NPCGen.Tests.Generation.Factories
         public void IncompatibleCharacterClassIsRegenerated()
         {
             var possibleResults = new[] { RaceConstants.BaseRaces.Human };
-            mockBaseRaceRandomizer.SetupSequence(r => r.GetAllPossibleResults(It.IsAny<String>(), It.IsAny<CharacterClass>()))
+            mockBaseRaceRandomizer.SetupSequence(r => r.GetAllPossibleResults(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>()))
                 .Returns(possibleResults) //initial verification
                 .Returns(possibleResults) //alignment verification
                 .Returns(Enumerable.Empty<String>()) // incompatible character class
@@ -108,59 +108,99 @@ namespace NPCGen.Tests.Generation.Factories
         [Test]
         public void IncompatibleBaseRaceIsRegenerated()
         {
-            mockBaseRaceRandomizer.SetupSequence(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClass>()))
+            mockBaseRaceRandomizer.SetupSequence(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>()))
                 .Returns(RaceConstants.BaseRaces.Svirfneblin).Returns(RaceConstants.BaseRaces.Human);
 
             CharacterFactory.CreateUsing(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object,
                 mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object, mockDice.Object);
-            mockBaseRaceRandomizer.Verify(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClass>()), Times.Exactly(2));
-            mockMetaraceRandomizer.Verify(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClass>()), Times.Exactly(2));
+            mockBaseRaceRandomizer.Verify(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>()), Times.Exactly(2));
+            mockMetaraceRandomizer.Verify(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>()), Times.Exactly(2));
         }
 
         [Test]
         public void IncompatibleMetaraceIsRegenerated()
         {
-            mockMetaraceRandomizer.SetupSequence(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClass>()))
+            mockMetaraceRandomizer.SetupSequence(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>()))
                 .Returns(RaceConstants.Metaraces.HalfDragon).Returns(String.Empty);
 
             CharacterFactory.CreateUsing(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object,
                 mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object, mockDice.Object);
-            mockBaseRaceRandomizer.Verify(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClass>()), Times.Exactly(2));
-            mockMetaraceRandomizer.Verify(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClass>()), Times.Exactly(2));
+            mockBaseRaceRandomizer.Verify(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>()), Times.Exactly(2));
+            mockMetaraceRandomizer.Verify(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>()), Times.Exactly(2));
         }
 
         [Test]
         public void IncompatibleComboOfBaseRaceAndMetaraceIsRegeneratedWithCompatibleBaseRace()
         {
-            mockBaseRaceRandomizer.SetupSequence(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClass>()))
+            mockBaseRaceRandomizer.SetupSequence(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>()))
                 .Returns(RaceConstants.BaseRaces.Svirfneblin).Returns(RaceConstants.BaseRaces.Human);
 
-            mockMetaraceRandomizer.Setup(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClass>()))
+            mockMetaraceRandomizer.Setup(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>()))
                 .Returns(RaceConstants.Metaraces.HalfDragon);
 
             mockLevelRandomizer.Setup(r => r.Randomize()).Returns(3);
 
             CharacterFactory.CreateUsing(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object,
                 mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object, mockDice.Object);
-            mockBaseRaceRandomizer.Verify(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClass>()), Times.Exactly(2));
-            mockMetaraceRandomizer.Verify(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClass>()), Times.Exactly(2));
+            mockBaseRaceRandomizer.Verify(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>()), Times.Exactly(2));
+            mockMetaraceRandomizer.Verify(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>()), Times.Exactly(2));
         }
 
         [Test]
         public void IncompatibleComboOfBaseRaceAndMetaraceIsRegeneratedWithCompatibleMetarace()
         {
-            mockBaseRaceRandomizer.Setup(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClass>()))
+            mockBaseRaceRandomizer.Setup(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>()))
                 .Returns(RaceConstants.BaseRaces.Svirfneblin);
 
-            mockMetaraceRandomizer.SetupSequence(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClass>()))
+            mockMetaraceRandomizer.SetupSequence(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>()))
                 .Returns(RaceConstants.Metaraces.HalfDragon).Returns(String.Empty);
 
             mockLevelRandomizer.Setup(r => r.Randomize()).Returns(3);
 
             CharacterFactory.CreateUsing(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object,
                 mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object, mockDice.Object);
-            mockBaseRaceRandomizer.Verify(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClass>()), Times.Exactly(2));
-            mockMetaraceRandomizer.Verify(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClass>()), Times.Exactly(2));
+            mockBaseRaceRandomizer.Verify(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>()), Times.Exactly(2));
+            mockMetaraceRandomizer.Verify(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>()), Times.Exactly(2));
+        }
+
+        [Test]
+        public void AppliesBaseRaceLevelAdjustment()
+        {
+            mockLevelRandomizer.Setup(r => r.Randomize()).Returns(2);
+            mockBaseRaceRandomizer.Setup(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>()))
+                .Returns(RaceConstants.BaseRaces.Svirfneblin);
+
+            var character = CharacterFactory.CreateUsing(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object,
+                mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object, mockDice.Object);
+            Assert.That(character.Class.Level, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void AppliesMetaraceLevelAdjustment()
+        {
+            mockLevelRandomizer.Setup(r => r.Randomize()).Returns(3);
+            mockMetaraceRandomizer.Setup(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>()))
+                .Returns(RaceConstants.Metaraces.HalfDragon);
+
+            var character = CharacterFactory.CreateUsing(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object,
+                mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object, mockDice.Object);
+            Assert.That(character.Class.Level, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void ApplyBaseRaceAndMetaraceLevelAdjustments()
+        {
+            mockBaseRaceRandomizer.Setup(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>()))
+                .Returns(RaceConstants.BaseRaces.Svirfneblin);
+
+            mockMetaraceRandomizer.Setup(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>()))
+                .Returns(RaceConstants.Metaraces.HalfDragon);
+
+            mockLevelRandomizer.Setup(r => r.Randomize()).Returns(4);
+
+            var character = CharacterFactory.CreateUsing(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object,
+                mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object, mockDice.Object);
+            Assert.That(character.Class.Level, Is.EqualTo(1));
         }
 
         [Test]

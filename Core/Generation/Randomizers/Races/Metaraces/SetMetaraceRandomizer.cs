@@ -9,12 +9,12 @@ namespace NPCGen.Core.Generation.Randomizers.Races.Metaraces
     {
         public String Metarace { get; set; }
 
-        public String Randomize(String goodnessString, CharacterClass characterClass)
+        public String Randomize(String goodnessString, CharacterClassPrototype prototype)
         {
             return Metarace;
         }
 
-        public IEnumerable<String> GetAllPossibleResults(String goodness, CharacterClass characterClass)
+        public IEnumerable<String> GetAllPossibleResults(String goodness, CharacterClassPrototype prototype)
         {
             return new[] { Metarace };
         }

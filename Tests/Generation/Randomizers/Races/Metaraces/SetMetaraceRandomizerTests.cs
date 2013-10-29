@@ -21,14 +21,14 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.Metaraces
         [Test]
         public void RandomizeReturnsSetMetarace()
         {
-            var metarace = randomizer.Randomize(String.Empty, new CharacterClass());
+            var metarace = randomizer.Randomize(String.Empty, new CharacterClassPrototype());
             Assert.That(metarace, Is.EqualTo("metarace"));
         }
 
         [Test]
         public void GetAllPossibleResultsReturnsEnmuerableOfSetMetarace()
         {
-            var metaraces = randomizer.GetAllPossibleResults(String.Empty, new CharacterClass());
+            var metaraces = randomizer.GetAllPossibleResults(String.Empty, new CharacterClassPrototype());
             Assert.That(metaraces.First(), Is.EqualTo("metarace"));
             Assert.That(metaraces.Count(), Is.EqualTo(1));
         }

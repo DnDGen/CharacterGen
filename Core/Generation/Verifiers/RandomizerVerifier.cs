@@ -43,27 +43,27 @@ namespace NPCGen.Core.Generation.Verifiers
             var classNames = classNameRandomizer.GetAllPossibleResults(alignment);
             var levels = levelRandomizer.GetAllPossibleResults();
 
-            var characterClasses = GetAllCharacterClasses(classNames, levels);
+            var characterClasses = GetAllCharacterClassPrototypes(classNames, levels);
             return characterClasses.Any() && characterClasses.Any(c => VerifyCharacterClassCompatibility(alignment.Goodness, c));
         }
 
-        private IEnumerable<CharacterClass> GetAllCharacterClasses(IEnumerable<String> classNames, IEnumerable<Int32> levels)
+        private IEnumerable<CharacterClassPrototype> GetAllCharacterClassPrototypes(IEnumerable<String> classNames, IEnumerable<Int32> levels)
         {
-            var characterClasses = new List<CharacterClass>();
+            var characterClasses = new List<CharacterClassPrototype>();
 
             foreach (var className in classNames)
                 foreach (var level in levels)
-                    characterClasses.Add(new CharacterClass() { ClassName = className, Level = level });
+                    characterClasses.Add(new CharacterClassPrototype() { ClassName = className, Level = level });
 
             return characterClasses;
         }
 
-        public Boolean VerifyCharacterClassCompatibility(String goodness, CharacterClass characterClass)
+        public Boolean VerifyCharacterClassCompatibility(String goodness, CharacterClassPrototype prototype)
         {
-            var baseRaces = baseRaceRandomizer.GetAllPossibleResults(goodness, characterClass);
-            var metaraces = metaraceRandomizer.GetAllPossibleResults(goodness, characterClass);
+            var baseRaces = baseRaceRandomizer.GetAllPossibleResults(goodness, prototype);
+            var metaraces = metaraceRandomizer.GetAllPossibleResults(goodness, prototype);
 
-            return baseRaces.Any() && metaraces.Any() && LevelAdjustmentsAreAllowed(baseRaces, metaraces, characterClass.Level);
+            return baseRaces.Any() && metaraces.Any() && LevelAdjustmentsAreAllowed(baseRaces, metaraces, prototype.Level);
         }
 
         private Boolean LevelAdjustmentsAreAllowed(IEnumerable<String> baseRaces, IEnumerable<String> metaraces, Int32 level)

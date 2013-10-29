@@ -13,7 +13,7 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.Metaraces
     {
         protected IMetaraceRandomizer randomizer;
 
-        private CharacterClass characterClass;
+        private CharacterClassPrototype characterClass;
 
         [SetUp]
         public void Setup()
@@ -27,7 +27,7 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.Metaraces
 
             mockLevelAdjustmentsProvider.Setup(p => p.GetLevelAdjustments()).Returns(adjustments);
 
-            characterClass = new CharacterClass();
+            characterClass = new CharacterClassPrototype();
             characterClass.Level = 1;
         }
 

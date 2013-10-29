@@ -7,40 +7,50 @@ namespace NPCGen.Core.Generation.Factories
 {
     public static class CharacterClassFactory
     {
-        public static CharacterClass CreateUsing(Alignment alignment, ILevelRandomizer levelRandomizer, 
+        public static CharacterClassPrototype CreatePrototypeUsing(Alignment alignment, ILevelRandomizer levelRandomizer, 
             IClassNameRandomizer classNameRandomizer)
+        {
+            var prototype = new CharacterClassPrototype();
+
+            prototype.Level = levelRandomizer.Randomize();
+            prototype.ClassName = classNameRandomizer.Randomize(alignment);
+
+            return prototype;
+        }
+
+        public static CharacterClass CreateUsing(CharacterClassPrototype prototype)
         {
             var characterClass = new CharacterClass();
 
-            characterClass.Level = levelRandomizer.Randomize();
-            characterClass.ClassName = classNameRandomizer.Randomize(alignment);
-            characterClass.BaseAttack = GetBaseAttack(characterClass);
+            characterClass.ClassName = prototype.ClassName;
+            characterClass.Level = prototype.Level;
+            characterClass.BaseAttack = GetBaseAttack(prototype);
 
             return characterClass;
         }
 
-        private static BaseAttack GetBaseAttack(CharacterClass characterClass)
+        private static BaseAttack GetBaseAttack(CharacterClassPrototype prototype)
         {
             var baseAttack = new BaseAttack();
-            baseAttack.BaseAttackBonus = GetBaseAttackBonus(characterClass);
+            baseAttack.BaseAttackBonus = GetBaseAttackBonus(prototype);
             return baseAttack;
         }
 
-        private static Int32 GetBaseAttackBonus(CharacterClass characterClass)
+        private static Int32 GetBaseAttackBonus(CharacterClassPrototype prototype)
         {
-            switch (characterClass.ClassName)
+            switch (prototype.ClassName)
             {
                 case CharacterClassConstants.Fighter:
                 case CharacterClassConstants.Paladin:
                 case CharacterClassConstants.Ranger:
-                case CharacterClassConstants.Barbarian: return GetGoodBaseAttackBonus(characterClass.Level);
+                case CharacterClassConstants.Barbarian: return GetGoodBaseAttackBonus(prototype.Level);
                 case CharacterClassConstants.Bard:
                 case CharacterClassConstants.Cleric:
                 case CharacterClassConstants.Monk:
                 case CharacterClassConstants.Rogue:
-                case CharacterClassConstants.Druid: return GetAverageBaseAttackBonus(characterClass.Level);
+                case CharacterClassConstants.Druid: return GetAverageBaseAttackBonus(prototype.Level);
                 case CharacterClassConstants.Sorcerer:
-                case CharacterClassConstants.Wizard: return GetPoorBaseAttackBonus(characterClass.Level);
+                case CharacterClassConstants.Wizard: return GetPoorBaseAttackBonus(prototype.Level);
                 default: throw new ArgumentOutOfRangeException();
             }
         }

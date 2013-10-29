@@ -1,5 +1,4 @@
-﻿using System;
-using D20Dice.Dice;
+﻿using D20Dice.Dice;
 using Moq;
 using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Data.CharacterClasses;
@@ -26,7 +25,6 @@ namespace NPCGen.Tests.Generation.Factories
             mockClassNameRandomizer = new Mock<IClassNameRandomizer>();
 
             alignment = new Alignment();
-            mockClassNameRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Barbarian);
         }
 
         [Test]
@@ -34,131 +32,137 @@ namespace NPCGen.Tests.Generation.Factories
         {
             mockLevelRandomizer.Setup(r => r.Randomize()).Returns(9266);
 
-            var characterClass = CharacterClassFactory.CreateUsing(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
+            var characterClass = CharacterClassFactory.CreatePrototypeUsing(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
             Assert.That(characterClass.Level, Is.EqualTo(9266));
         }
 
         [Test]
         public void FactoryReturnsRandomizedClass()
         {
-            var characterClass = CharacterClassFactory.CreateUsing(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
+            mockClassNameRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Barbarian);
+
+            var characterClass = CharacterClassFactory.CreatePrototypeUsing(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
             Assert.That(characterClass.ClassName, Is.EqualTo(CharacterClassConstants.Barbarian));
         }
 
         [Test]
         public void FighterGetsGoodBaseAttackBonus()
         {
-            mockClassNameRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Fighter);
-            mockLevelRandomizer.Setup(r => r.Randomize()).Returns(20);
+            var prototype = new CharacterClassPrototype();
+            prototype.ClassName = CharacterClassConstants.Fighter;
+            prototype.Level = 20;
 
-            var characterClass = CharacterClassFactory.CreateUsing(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
+            var characterClass = CharacterClassFactory.CreateUsing(prototype);
             Assert.That(characterClass.BaseAttack.BaseAttackBonus, Is.EqualTo(20));
         }
 
         [Test]
         public void PaladinGetsGoodBaseAttackBonus()
         {
-            mockClassNameRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Paladin);
-            mockLevelRandomizer.Setup(r => r.Randomize()).Returns(20);
+            var prototype = new CharacterClassPrototype();
+            prototype.ClassName = CharacterClassConstants.Paladin;
+            prototype.Level = 20;
 
-            var characterClass = CharacterClassFactory.CreateUsing(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
+            var characterClass = CharacterClassFactory.CreateUsing(prototype);
             Assert.That(characterClass.BaseAttack.BaseAttackBonus, Is.EqualTo(20));
         }
 
         [Test]
         public void RangerGetsGoodBaseAttackBonus()
         {
-            mockClassNameRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Ranger);
-            mockLevelRandomizer.Setup(r => r.Randomize()).Returns(20);
+            var prototype = new CharacterClassPrototype();
+            prototype.ClassName = CharacterClassConstants.Ranger;
+            prototype.Level = 20;
 
-            var characterClass = CharacterClassFactory.CreateUsing(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
+            var characterClass = CharacterClassFactory.CreateUsing(prototype);
             Assert.That(characterClass.BaseAttack.BaseAttackBonus, Is.EqualTo(20));
         }
 
         [Test]
         public void BarbarianGetsGoodBaseAttackBonus()
         {
-            mockClassNameRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Barbarian);
-            mockLevelRandomizer.Setup(r => r.Randomize()).Returns(20);
+            var prototype = new CharacterClassPrototype();
+            prototype.ClassName = CharacterClassConstants.Barbarian;
+            prototype.Level = 20;
 
-            var characterClass = CharacterClassFactory.CreateUsing(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
+            var characterClass = CharacterClassFactory.CreateUsing(prototype);
             Assert.That(characterClass.BaseAttack.BaseAttackBonus, Is.EqualTo(20));
-        }
-
-        [Test, ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void InvalidClassNameThrowsError()
-        {
-            mockClassNameRandomizer.Setup(r => r.Randomize(alignment)).Returns("invalid class");
-            var characterClass = CharacterClassFactory.CreateUsing(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
         }
 
         [Test]
         public void BardGetsAverageBaseAttackBonus()
         {
-            mockClassNameRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Bard);
-            mockLevelRandomizer.Setup(r => r.Randomize()).Returns(20);
+            var prototype = new CharacterClassPrototype();
+            prototype.ClassName = CharacterClassConstants.Bard;
+            prototype.Level = 20;
 
-            var characterClass = CharacterClassFactory.CreateUsing(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
+            var characterClass = CharacterClassFactory.CreateUsing(prototype);
             Assert.That(characterClass.BaseAttack.BaseAttackBonus, Is.EqualTo(15));
         }
 
         [Test]
         public void ClericGetsAverageBaseAttackBonus()
         {
-            mockClassNameRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Cleric);
-            mockLevelRandomizer.Setup(r => r.Randomize()).Returns(20);
+            var prototype = new CharacterClassPrototype();
+            prototype.ClassName = CharacterClassConstants.Cleric;
+            prototype.Level = 20;
 
-            var characterClass = CharacterClassFactory.CreateUsing(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
+            var characterClass = CharacterClassFactory.CreateUsing(prototype);
             Assert.That(characterClass.BaseAttack.BaseAttackBonus, Is.EqualTo(15));
         }
 
         [Test]
         public void MonkGetsAverageBaseAttackBonus()
         {
-            mockClassNameRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Monk);
-            mockLevelRandomizer.Setup(r => r.Randomize()).Returns(20);
+            var prototype = new CharacterClassPrototype();
+            prototype.ClassName = CharacterClassConstants.Monk;
+            prototype.Level = 20;
 
-            var characterClass = CharacterClassFactory.CreateUsing(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
+            var characterClass = CharacterClassFactory.CreateUsing(prototype);
             Assert.That(characterClass.BaseAttack.BaseAttackBonus, Is.EqualTo(15));
         }
 
         [Test]
         public void RogueGetsAverageBaseAttackBonus()
         {
-            mockClassNameRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Rogue);
-            mockLevelRandomizer.Setup(r => r.Randomize()).Returns(20);
+            var prototype = new CharacterClassPrototype();
+            prototype.ClassName = CharacterClassConstants.Rogue;
+            prototype.Level = 20;
 
-            var characterClass = CharacterClassFactory.CreateUsing(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
+            var characterClass = CharacterClassFactory.CreateUsing(prototype);
             Assert.That(characterClass.BaseAttack.BaseAttackBonus, Is.EqualTo(15));
         }
 
         [Test]
         public void DruidGetsAverageBaseAttackBonus()
         {
-            mockClassNameRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Druid);
-            mockLevelRandomizer.Setup(r => r.Randomize()).Returns(20);
+            var prototype = new CharacterClassPrototype();
+            prototype.ClassName = CharacterClassConstants.Druid;
+            prototype.Level = 20;
 
-            var characterClass = CharacterClassFactory.CreateUsing(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
+            var characterClass = CharacterClassFactory.CreateUsing(prototype);
             Assert.That(characterClass.BaseAttack.BaseAttackBonus, Is.EqualTo(15));
         }
 
         [Test]
         public void SorcererGetsPoorBaseAttackBonus()
         {
-            mockClassNameRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Sorcerer);
-            mockLevelRandomizer.Setup(r => r.Randomize()).Returns(20);
+            var prototype = new CharacterClassPrototype();
+            prototype.ClassName = CharacterClassConstants.Sorcerer;
+            prototype.Level = 20;
 
-            var characterClass = CharacterClassFactory.CreateUsing(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
+            var characterClass = CharacterClassFactory.CreateUsing(prototype);
             Assert.That(characterClass.BaseAttack.BaseAttackBonus, Is.EqualTo(10));
         }
 
         [Test]
         public void WizardGetsPoorBaseAttackBonus()
         {
-            mockClassNameRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Wizard);
-            mockLevelRandomizer.Setup(r => r.Randomize()).Returns(20);
+            var prototype = new CharacterClassPrototype();
+            prototype.ClassName = CharacterClassConstants.Wizard;
+            prototype.Level = 20;
 
-            var characterClass = CharacterClassFactory.CreateUsing(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
+            var characterClass = CharacterClassFactory.CreateUsing(prototype);
             Assert.That(characterClass.BaseAttack.BaseAttackBonus, Is.EqualTo(10));
         }
 
@@ -167,8 +171,11 @@ namespace NPCGen.Tests.Generation.Factories
         {
             for (var level = 1; level <= 20; level++)
             {
-                mockLevelRandomizer.Setup(r => r.Randomize()).Returns(level);
-                var characterClass = CharacterClassFactory.CreateUsing(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
+                var prototype = new CharacterClassPrototype();
+                prototype.ClassName = CharacterClassConstants.Fighter;
+                prototype.Level = level;
+
+                var characterClass = CharacterClassFactory.CreateUsing(prototype);
                 Assert.That(characterClass.BaseAttack.BaseAttackBonus, Is.EqualTo(level));
             }
         }
@@ -176,12 +183,13 @@ namespace NPCGen.Tests.Generation.Factories
         [Test]
         public void AverageBaseAttackBonus()
         {
-            mockClassNameRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Cleric);
-
             for (var level = 1; level <= 20; level++)
             {
-                mockLevelRandomizer.Setup(r => r.Randomize()).Returns(level);
-                var characterClass = CharacterClassFactory.CreateUsing(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
+                var prototype = new CharacterClassPrototype();
+                prototype.ClassName = CharacterClassConstants.Cleric;
+                prototype.Level = level;
+
+                var characterClass = CharacterClassFactory.CreateUsing(prototype);
                 Assert.That(characterClass.BaseAttack.BaseAttackBonus, Is.EqualTo(level * 3 / 4));
             }
         }
@@ -189,12 +197,13 @@ namespace NPCGen.Tests.Generation.Factories
         [Test]
         public void PoorBaseAttackBonus()
         {
-            mockClassNameRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Wizard);
-
             for (var level = 1; level <= 20; level++)
             {
-                mockLevelRandomizer.Setup(r => r.Randomize()).Returns(level);
-                var characterClass = CharacterClassFactory.CreateUsing(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
+                var prototype = new CharacterClassPrototype();
+                prototype.ClassName = CharacterClassConstants.Wizard;
+                prototype.Level = level;
+
+                var characterClass = CharacterClassFactory.CreateUsing(prototype);
                 Assert.That(characterClass.BaseAttack.BaseAttackBonus, Is.EqualTo(level / 2));
             }
         }

@@ -8,6 +8,6 @@ namespace NPCGen.Core.Generation.Verifiers.Interfaces
     {
         Boolean VerifyCompatibility();
         Boolean VerifyAlignmentCompatibility(Alignment alignment);
-        Boolean VerifyCharacterClassCompatibility(String goodness, CharacterClass characterClass);
+        Boolean VerifyCharacterClassCompatibility(String goodness, CharacterClassPrototype prototype);
     }
 }

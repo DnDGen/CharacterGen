@@ -8,15 +8,15 @@ namespace NPCGen.Core.Generation.Factories
 {
     public static class RaceFactory
     {
-        public static Race CreateUsing(String goodnessString, CharacterClass characterClass, IBaseRaceRandomizer baseRaceRandomizer, 
+        public static Race CreateUsing(String goodnessString, CharacterClassPrototype prototype, IBaseRaceRandomizer baseRaceRandomizer, 
             IMetaraceRandomizer metaraceRandomizer, IDice dice)
         {
             var race = new Race();
 
-            race.BaseRace = baseRaceRandomizer.Randomize(goodnessString, characterClass);
-            race.Metarace = metaraceRandomizer.Randomize(goodnessString, characterClass);
+            race.BaseRace = baseRaceRandomizer.Randomize(goodnessString, prototype);
+            race.Metarace = metaraceRandomizer.Randomize(goodnessString, prototype);
 
-            race.Male = GenerateGender(dice, race.BaseRace, characterClass.ClassName);
+            race.Male = GenerateGender(dice, race.BaseRace, prototype.ClassName);
 
             return race;
         }

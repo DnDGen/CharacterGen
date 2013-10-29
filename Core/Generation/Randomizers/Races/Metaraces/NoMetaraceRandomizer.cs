@@ -7,12 +7,12 @@ namespace NPCGen.Core.Generation.Randomizers.Races.Metaraces
 {
     public class NoMetaraceRandomizer : IMetaraceRandomizer
     {
-        public String Randomize(String goodnessString, CharacterClass characterClass)
+        public String Randomize(String goodnessString, CharacterClassPrototype prototype)
         {
             return String.Empty;
         }
 
-        public IEnumerable<String> GetAllPossibleResults(String goodness, CharacterClass characterClass)
+        public IEnumerable<String> GetAllPossibleResults(String goodness, CharacterClassPrototype prototype)
         {
             return new[] { String.Empty };
         }

@@ -31,16 +31,19 @@ namespace NPCGen.Core.Generation.Factories
             var character = new Character();
 
             var alignment = GenerateAlignment(randomizerVerifier, alignmentRandomizer);
-            var characterClass = GenerateCharacterClass(randomizerVerifier, classNameRandomizer, levelRandomizer, alignment);
+            var prototype = GenerateCharacterClassPrototype(randomizerVerifier, classNameRandomizer, levelRandomizer, alignment);
 
             var levelAdjustments = levelAdjustmentsProvider.GetLevelAdjustments();
-            var race = GenerateRace(baseRaceRandomizer, metaraceRandomizer, levelAdjustments, alignment, characterClass, dice);
+            var race = GenerateRace(baseRaceRandomizer, metaraceRandomizer, levelAdjustments, alignment, prototype, dice);
+
+            prototype.Level -= levelAdjustments[race.BaseRace];
+            prototype.Level -= levelAdjustments[race.Metarace];
 
             character.Alignment = alignment;
-            character.Class = characterClass;
+            character.Class = CharacterClassFactory.CreateUsing(prototype);
             character.Race = race;
 
-            character.Stats = StatsFactory.CreateUsing(statsRandomizer, characterClass, race, dice);
+            character.Stats = StatsFactory.CreateUsing(statsRandomizer, character.Class, race, dice);
 
             //make HitPointFactory(characterClass, constitutionBonus, metarace)
 
@@ -221,24 +224,24 @@ namespace NPCGen.Core.Generation.Factories
             return alignment;
         }
 
-        private static CharacterClass GenerateCharacterClass(IRandomizerVerifier randomizerVerifier, IClassNameRandomizer classNameRandomizer,
+        private static CharacterClassPrototype GenerateCharacterClassPrototype(IRandomizerVerifier randomizerVerifier, IClassNameRandomizer classNameRandomizer,
             ILevelRandomizer levelRandomizer, Alignment alignment)
         {
-            CharacterClass characterClass;
+            CharacterClassPrototype prototype;
 
-            do characterClass = CharacterClassFactory.CreateUsing(alignment, levelRandomizer, classNameRandomizer);
-            while (!randomizerVerifier.VerifyCharacterClassCompatibility(alignment.Goodness, characterClass));
+            do prototype = CharacterClassFactory.CreatePrototypeUsing(alignment, levelRandomizer, classNameRandomizer);
+            while (!randomizerVerifier.VerifyCharacterClassCompatibility(alignment.Goodness, prototype));
 
-            return characterClass;
+            return prototype;
         }
 
         private static Race GenerateRace(IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer,
-            Dictionary<String, Int32> levelAdjustments, Alignment alignment, CharacterClass characterClass, IDice dice)
+            Dictionary<String, Int32> levelAdjustments, Alignment alignment, CharacterClassPrototype prototype, IDice dice)
         {
             Race race;
 
-            do race = RaceFactory.CreateUsing(alignment.Goodness, characterClass, baseRaceRandomizer, metaraceRandomizer, dice);
-            while (levelAdjustments[race.BaseRace] + levelAdjustments[race.Metarace] >= characterClass.Level);
+            do race = RaceFactory.CreateUsing(alignment.Goodness, prototype, baseRaceRandomizer, metaraceRandomizer, dice);
+            while (levelAdjustments[race.BaseRace] + levelAdjustments[race.Metarace] >= prototype.Level);
 
             return race;
         }

@@ -9,12 +9,12 @@ namespace NPCGen.Core.Generation.Randomizers.Races.BaseRaces
     {
         public String BaseRace { get; set; }
 
-        public String Randomize(String goodness, CharacterClass characterClass)
+        public String Randomize(String goodness, CharacterClassPrototype prototype)
         {
             return BaseRace;
         }
 
-        public IEnumerable<String> GetAllPossibleResults(String goodness, CharacterClass characterClass)
+        public IEnumerable<String> GetAllPossibleResults(String goodness, CharacterClassPrototype prototype)
         {
             return new[] { BaseRace };
         }
