@@ -10,7 +10,7 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.BaseRaces
         [SetUp]
         public void Setup()
         {
-            randomizer = new EvilBaseRaceRandomizer(mockPercentileResultProvider.Object);
+            randomizer = new EvilBaseRaceRandomizer(mockPercentileResultProvider.Object, mockLevelAdjustmentsProvider.Object);
         }
 
         [Test]

@@ -1,166 +1,166 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<statAdjustments>
-  <object><race>Aasimar</race><adjustment>0</adjustment></object>
+<adjustments>
+  <object><key>Aasimar</key><adjustment>0</adjustment></object>
     <object>
-        <race>Bugbear</race>
+        <key>Bugbear</key>
         <adjustment>2</adjustment>
     </object>
     <object>
-        <race>Derro Dwarf</race>
+        <key>Derro Dwarf</key>
         <adjustment>2</adjustment>
     </object>
     <object>
-        <race>Deep Halfling</race>
+        <key>Deep Halfling</key>
         <adjustment>0</adjustment>
     </object>
     <object>
-        <race>Deep Dwarf</race>
+        <key>Deep Dwarf</key>
         <adjustment>2</adjustment>
     </object>
     <object>
-        <race>Doppelganger</race>
+        <key>Doppelganger</key>
         <adjustment>2</adjustment>
     </object>
-  <object><race>Drow</race><adjustment>-2</adjustment></object>
+  <object><key>Drow</key><adjustment>-2</adjustment></object>
     <object>
-        <race>Duergar</race>
-        <adjustment>2</adjustment>
-    </object>
-    <object>
-        <race>Forest Gnome</race>
+        <key>Duergar</key>
         <adjustment>2</adjustment>
     </object>
     <object>
-        <race>Gnoll</race>
+        <key>Forest Gnome</key>
         <adjustment>2</adjustment>
     </object>
     <object>
-        <race>Goblin</race>
+        <key>Gnoll</key>
+        <adjustment>2</adjustment>
+    </object>
+    <object>
+        <key>Goblin</key>
         <adjustment>0</adjustment>
     </object>
     <object>
-        <race>Gray Elf</race>
+        <key>Gray Elf</key>
         <adjustment>-2</adjustment>
     </object>
     <object>
-        <race>Half-Celestial</race>
+        <key>Half-Celestial</key>
         <adjustment>4</adjustment>
     </object>
     <object>
-        <race>Half-Dragon</race>
+        <key>Half-Dragon</key>
         <adjustment>2</adjustment>
     </object>
     <object>
-        <race>Half-Elf</race>
+        <key>Half-Elf</key>
         <adjustment>0</adjustment>
     </object>
     <object>
-        <race>Half-Fiend</race>
+        <key>Half-Fiend</key>
         <adjustment>2</adjustment>
     </object>
     <object>
-        <race>Half-Orc</race>
+        <key>Half-Orc</key>
         <adjustment>0</adjustment>
     </object>
     <object>
-        <race>High Elf</race>
+        <key>High Elf</key>
         <adjustment>-2</adjustment>
     </object>
     <object>
-        <race>Hill Dwarf</race>
+        <key>Hill Dwarf</key>
         <adjustment>2</adjustment>
     </object>
     <object>
-        <race>Hobgoblin</race>
+        <key>Hobgoblin</key>
         <adjustment>2</adjustment>
     </object>
     <object>
-        <race>Human</race>
+        <key>Human</key>
         <adjustment>0</adjustment>
     </object>
     <object>
-        <race>Kobold</race>
+        <key>Kobold</key>
         <adjustment>-2</adjustment>
     </object>
     <object>
-        <race>Lightfoot Halfling</race>
+        <key>Lightfoot Halfling</key>
         <adjustment>0</adjustment>
     </object>
     <object>
-        <race>Lizardfolk</race>
+        <key>Lizardfolk</key>
         <adjustment>2</adjustment>
     </object>
     <object>
-        <race>Mind Flayer</race>
+        <key>Mind Flayer</key>
         <adjustment>2</adjustment>
     </object>
     <object>
-        <race>Minotaur</race>
+        <key>Minotaur</key>
         <adjustment>4</adjustment>
     </object>
     <object>
-        <race>Mountain Dwarf</race>
+        <key>Mountain Dwarf</key>
         <adjustment>2</adjustment>
     </object>
     <object>
-        <race>Ogre Mage</race>
+        <key>Ogre Mage</key>
         <adjustment>6</adjustment>
     </object>
     <object>
-        <race>Ogre</race>
+        <key>Ogre</key>
         <adjustment>4</adjustment>
     </object>
     <object>
-        <race>Orc</race>
+        <key>Orc</key>
         <adjustment>0</adjustment>
     </object>
     <object>
-        <race>Rock Gnome</race>
+        <key>Rock Gnome</key>
         <adjustment>2</adjustment>
     </object>
     <object>
-        <race>Svirfneblin</race>
+        <key>Svirfneblin</key>
         <adjustment>0</adjustment>
     </object>
     <object>
-        <race>Tallfellow Halfling</race>
+        <key>Tallfellow Halfling</key>
         <adjustment>0</adjustment>
     </object>
     <object>
-        <race>Tiefling</race>
+        <key>Tiefling</key>
         <adjustment>0</adjustment>
     </object>
     <object>
-        <race>Troglodyte</race>
+        <key>Troglodyte</key>
         <adjustment>4</adjustment>
     </object>
     <object>
-        <race>Werebear</race>
+        <key>Werebear</key>
         <adjustment>2</adjustment>
     </object>
     <object>
-        <race>Wereboar</race>
+        <key>Wereboar</key>
         <adjustment>2</adjustment>
     </object>
     <object>
-        <race>Wererat</race>
+        <key>Wererat</key>
         <adjustment>2</adjustment>
     </object>
     <object>
-        <race>Weretiger</race>
+        <key>Weretiger</key>
         <adjustment>2</adjustment>
     </object>
     <object>
-        <race>Werewolf</race>
+        <key>Werewolf</key>
         <adjustment>0</adjustment>
     </object>
     <object>
-        <race>Wild Elf</race>
+        <key>Wild Elf</key>
         <adjustment>0</adjustment>
     </object>
     <object>
-        <race>Wood Elf</race>
+        <key>Wood Elf</key>
         <adjustment>-2</adjustment>
     </object>
-</statAdjustments>
+</adjustments>

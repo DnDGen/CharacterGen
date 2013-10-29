@@ -63,12 +63,16 @@ namespace NPCGen.Core.Generation.Verifiers
             var baseRaces = baseRaceRandomizer.GetAllPossibleResults(goodness, characterClass);
             var metaraces = metaraceRandomizer.GetAllPossibleResults(goodness, characterClass);
 
+            return baseRaces.Any() && metaraces.Any() && LevelAdjustmentsAreAllowed(baseRaces, metaraces, characterClass.Level);
+        }
+
+        private Boolean LevelAdjustmentsAreAllowed(IEnumerable<String> baseRaces, IEnumerable<String> metaraces, Int32 level)
+        {
             var levelAdjustments = levelAdjustmentsProvider.GetLevelAdjustments();
             var minBaseRaceLevelAdjustment = levelAdjustments.Where(kvp => baseRaces.Contains(kvp.Key)).Min(kvp => kvp.Value);
             var minMetaraceLevelAdjustment = levelAdjustments.Where(kvp => metaraces.Contains(kvp.Key)).Min(kvp => kvp.Value);
-            var minLevel = characterClass.Level - minBaseRaceLevelAdjustment - minMetaraceLevelAdjustment;
 
-            return baseRaces.Any() && metaraces.Any() && minLevel > 0;
+            return minBaseRaceLevelAdjustment + minMetaraceLevelAdjustment < level;
         }
     }
 }

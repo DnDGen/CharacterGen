@@ -10,7 +10,7 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.Metaraces
         [SetUp]
         public void Setup()
         {
-            randomizer = new AnyMetaraceRandomizer(mockPercentileResultProvider.Object);
+            randomizer = new AnyMetaraceRandomizer(mockPercentileResultProvider.Object, mockLevelAdjustmentsProvider.Object);
         }
 
         [Test]

@@ -1,7 +1,10 @@
-﻿using D20Dice.Dice;
+﻿using System;
+using System.Collections.Generic;
+using D20Dice.Dice;
 using NPCGen.Core.Data;
 using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Data.CharacterClasses;
+using NPCGen.Core.Data.Races;
 using NPCGen.Core.Generation.Providers;
 using NPCGen.Core.Generation.Randomizers.Alignments.Interfaces;
 using NPCGen.Core.Generation.Randomizers.CharacterClasses.Interfaces;
@@ -29,8 +32,9 @@ namespace NPCGen.Core.Generation.Factories
 
             var alignment = GenerateAlignment(randomizerVerifier, alignmentRandomizer);
             var characterClass = GenerateCharacterClass(randomizerVerifier, classNameRandomizer, levelRandomizer, alignment);
-            //check for level adjustments in race factory
-            var race = RaceFactory.CreateUsing(alignment.Goodness, characterClass, baseRaceRandomizer, metaraceRandomizer, dice);
+
+            var levelAdjustments = levelAdjustmentsProvider.GetLevelAdjustments();
+            var race = GenerateRace(baseRaceRandomizer, metaraceRandomizer, levelAdjustments, alignment, characterClass, dice);
 
             character.Alignment = alignment;
             character.Class = characterClass;
@@ -226,6 +230,17 @@ namespace NPCGen.Core.Generation.Factories
             while (!randomizerVerifier.VerifyCharacterClassCompatibility(alignment.Goodness, characterClass));
 
             return characterClass;
+        }
+
+        private static Race GenerateRace(IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer,
+            Dictionary<String, Int32> levelAdjustments, Alignment alignment, CharacterClass characterClass, IDice dice)
+        {
+            Race race;
+
+            do race = RaceFactory.CreateUsing(alignment.Goodness, characterClass, baseRaceRandomizer, metaraceRandomizer, dice);
+            while (levelAdjustments[race.BaseRace] + levelAdjustments[race.Metarace] >= characterClass.Level);
+
+            return race;
         }
     }
 }

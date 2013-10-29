@@ -10,12 +10,12 @@ namespace NPCGen.Tests.Generation.Providers
     public class LevelAdjustmentsProviderTests
     {
         private ILevelAdjustmentsProvider provider;
-        private Mock<ILevelAdjustmentXmlParser> mockLevelAdjustmentXmlParser;
+        private Mock<IAdjustmentXmlParser> mockLevelAdjustmentXmlParser;
 
         [SetUp]
         public void Setup()
         {
-            mockLevelAdjustmentXmlParser = new Mock<ILevelAdjustmentXmlParser>();
+            mockLevelAdjustmentXmlParser = new Mock<IAdjustmentXmlParser>();
             provider = new LevelAdjustmentsProvider(mockLevelAdjustmentXmlParser.Object);
         }
 

@@ -43,7 +43,11 @@ namespace NPCGen.Tests.Generation.Verifiers
             mockMetaraceRandomizer = new Mock<IMetaraceRandomizer>();
             mockMetaraceRandomizer.Setup(r => r.GetAllPossibleResults(It.IsAny<String>(), It.IsAny<CharacterClass>())).Returns(new[] { "metarace" });
 
+            var adjustments = new Dictionary<String, Int32>();
+            adjustments.Add("base race", 0);
+            adjustments.Add("metarace", 0);
             mockLevelAdjustmentsProvider = new Mock<ILevelAdjustmentsProvider>();
+            mockLevelAdjustmentsProvider.Setup(p => p.GetLevelAdjustments()).Returns(adjustments);
 
             verifier = new RandomizerVerifier(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object,
                 mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockLevelAdjustmentsProvider.Object);

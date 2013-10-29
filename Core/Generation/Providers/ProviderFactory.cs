@@ -16,7 +16,7 @@ namespace NPCGen.Core.Generation.Providers
         public static IStatAdjustmentsProvider CreateStatAdjustmentsProvider()
         {
             var streamLoader = new EmbeddedResourceStreamLoader();
-            var xmlParser = new StatAdjustmentXmlParser(streamLoader);
+            var xmlParser = new AdjustmentXmlParser(streamLoader);
             return new StatAdjustmentsProvider(xmlParser);
         }
 
@@ -30,7 +30,7 @@ namespace NPCGen.Core.Generation.Providers
         public static ILevelAdjustmentsProvider CreateLevelAdjustmentProvider()
         {
             var streamLoader = new EmbeddedResourceStreamLoader();
-            var xmlParser = new LevelAdjustmentXmlParser(streamLoader);
+            var xmlParser = new AdjustmentXmlParser(streamLoader);
             return new LevelAdjustmentsProvider(xmlParser);
         }
     }

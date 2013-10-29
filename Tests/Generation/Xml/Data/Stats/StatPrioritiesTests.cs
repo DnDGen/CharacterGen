@@ -174,5 +174,12 @@ namespace NPCGen.Tests.Generation.Xml.Data.Stats
             var priorities = statPriorities[CharacterClassConstants.Wizard];
             Assert.That(priorities.SecondPriority, Is.EqualTo(StatConstants.Dexterity));
         }
+
+        [Test]
+        public void PrioritiesContainsAllClasses()
+        {
+            foreach (var className in CharacterClassConstants.GetClassNames())
+                Assert.That(statPriorities.ContainsKey(className), Is.True);
+        }
     }
 }

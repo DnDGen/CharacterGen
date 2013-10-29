@@ -7,16 +7,16 @@ namespace NPCGen.Core.Generation.Providers
 {
     public class LevelAdjustmentsProvider : ILevelAdjustmentsProvider
     {
-        private ILevelAdjustmentXmlParser adjustmentXmlParser;
+        private IAdjustmentXmlParser adjustmentXmlParser;
 
-        public LevelAdjustmentsProvider(ILevelAdjustmentXmlParser adjustmentXmlParser)
+        public LevelAdjustmentsProvider(IAdjustmentXmlParser adjustmentXmlParser)
         {
             this.adjustmentXmlParser = adjustmentXmlParser;
         }
 
         public Dictionary<String, Int32> GetLevelAdjustments()
         {
-            throw new NotImplementedException();
+            return adjustmentXmlParser.Parse("LevelAdjustments.xml");
         }
     }
 }

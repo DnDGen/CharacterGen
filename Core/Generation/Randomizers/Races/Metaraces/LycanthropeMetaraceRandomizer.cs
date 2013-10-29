@@ -6,7 +6,8 @@ namespace NPCGen.Core.Generation.Randomizers.Races.Metaraces
 {
     public class LycanthropeMetaraceRandomizer : BaseMetarace
     {
-        public LycanthropeMetaraceRandomizer(IPercentileResultProvider provider) : base(provider) { }
+        public LycanthropeMetaraceRandomizer(IPercentileResultProvider percentileResultProvider, ILevelAdjustmentsProvider levelAdjustmentsProvider)
+            : base(percentileResultProvider, levelAdjustmentsProvider) { }
 
         protected override Boolean MetaraceIsAllowed(String metarace)
         {

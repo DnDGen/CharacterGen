@@ -1,14 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <adjustments>
-  <object><key>Aasimar</key><adjustment>0</adjustment></object>
     <object>
-        <key>Bugbear</key>
+        <key>Aasimar</key>
         <adjustment>0</adjustment>
     </object>
     <object>
+        <key>Bugbear</key>
+        <adjustment>2</adjustment>
+    </object>
+    <object>
         <key>Derro Dwarf</key>
-        <adjustment>0</adjustment>
+        <adjustment>1</adjustment>
     </object>
     <object>
         <key>Deep Halfling</key>
@@ -20,12 +23,15 @@
     </object>
     <object>
         <key>Doppelganger</key>
-        <adjustment>2</adjustment>
+        <adjustment>3</adjustment>
     </object>
-  <object><key>Drow</key><adjustment>2</adjustment></object>
+    <object>
+        <key>Drow</key>
+        <adjustment>1</adjustment>
+    </object>
     <object>
         <key>Duergar</key>
-        <adjustment>0</adjustment>
+        <adjustment>1</adjustment>
     </object>
     <object>
         <key>Forest Gnome</key>
@@ -33,7 +39,7 @@
     </object>
     <object>
         <key>Gnoll</key>
-        <adjustment>-2</adjustment>
+        <adjustment>1</adjustment>
     </object>
     <object>
         <key>Goblin</key>
@@ -41,15 +47,15 @@
     </object>
     <object>
         <key>Gray Elf</key>
-        <adjustment>2</adjustment>
+        <adjustment>0</adjustment>
     </object>
     <object>
         <key>Half-Celestial</key>
-        <adjustment>2</adjustment>
+        <adjustment>1</adjustment>
     </object>
     <object>
         <key>Half-Dragon</key>
-        <adjustment>0</adjustment>
+        <adjustment>2</adjustment>
     </object>
     <object>
         <key>Half-Elf</key>
@@ -57,11 +63,11 @@
     </object>
     <object>
         <key>Half-Fiend</key>
-        <adjustment>4</adjustment>
+        <adjustment>2</adjustment>
     </object>
     <object>
         <key>Half-Orc</key>
-        <adjustment>-2</adjustment>
+        <adjustment>0</adjustment>
     </object>
     <object>
         <key>High Elf</key>
@@ -89,7 +95,7 @@
     </object>
     <object>
         <key>Lizardfolk</key>
-        <adjustment>-2</adjustment>
+        <adjustment>0</adjustment>
     </object>
     <object>
         <key>Mind Flayer</key>
@@ -97,7 +103,7 @@
     </object>
     <object>
         <key>Minotaur</key>
-        <adjustment>-4</adjustment>
+        <adjustment>4</adjustment>
     </object>
     <object>
         <key>Mountain Dwarf</key>
@@ -105,15 +111,15 @@
     </object>
     <object>
         <key>Ogre Mage</key>
-        <adjustment>4</adjustment>
+        <adjustment>8</adjustment>
     </object>
     <object>
         <key>Ogre</key>
-        <adjustment>-4</adjustment>
+        <adjustment>2</adjustment>
     </object>
     <object>
         <key>Orc</key>
-        <adjustment>-2</adjustment>
+        <adjustment>0</adjustment>
     </object>
     <object>
         <key>Rock Gnome</key>
@@ -121,7 +127,7 @@
     </object>
     <object>
         <key>Svirfneblin</key>
-        <adjustment>0</adjustment>
+        <adjustment>1</adjustment>
     </object>
     <object>
         <key>Tallfellow Halfling</key>
@@ -129,38 +135,38 @@
     </object>
     <object>
         <key>Tiefling</key>
-        <adjustment>2</adjustment>
+        <adjustment>0</adjustment>
     </object>
     <object>
         <key>Troglodyte</key>
-        <adjustment>-2</adjustment>
+        <adjustment>1</adjustment>
     </object>
     <object>
         <key>Werebear</key>
-        <adjustment>0</adjustment>
-    </object>
-    <object>
-        <key>Wereboar</key>
-        <adjustment>0</adjustment>
-    </object>
-    <object>
-        <key>Wererat</key>
         <adjustment>2</adjustment>
     </object>
     <object>
+        <key>Wereboar</key>
+        <adjustment>1</adjustment>
+    </object>
+    <object>
+        <key>Wererat</key>
+        <adjustment>1</adjustment>
+    </object>
+    <object>
         <key>Weretiger</key>
-        <adjustment>-2</adjustment>
+        <adjustment>1</adjustment>
     </object>
     <object>
         <key>Werewolf</key>
-        <adjustment>-2</adjustment>
+        <adjustment>1</adjustment>
     </object>
     <object>
         <key>Wild Elf</key>
-        <adjustment>-2</adjustment>
+        <adjustment>0</adjustment>
     </object>
     <object>
         <key>Wood Elf</key>
-        <adjustment>-2</adjustment>
+        <adjustment>0</adjustment>
     </object>
 </adjustments>

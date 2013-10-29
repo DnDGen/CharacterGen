@@ -9,11 +9,11 @@ namespace NPCGen.Core.Generation.Providers
 {
     public class StatAdjustmentsProvider : IStatAdjustmentsProvider
     {
-        private IStatAdjustmentXmlParser statAdjustmentXmlParser;
+        private IAdjustmentXmlParser adjustmentXmlParser;
 
-        public StatAdjustmentsProvider(IStatAdjustmentXmlParser statAdjustmentXmlParser)
+        public StatAdjustmentsProvider(IAdjustmentXmlParser adjustmentXmlParser)
         {
-            this.statAdjustmentXmlParser = statAdjustmentXmlParser;
+            this.adjustmentXmlParser = adjustmentXmlParser;
         }
 
         public Dictionary<String, Int32> GetAdjustments(Race race)
@@ -23,7 +23,7 @@ namespace NPCGen.Core.Generation.Providers
             foreach (var stat in StatConstants.GetStats())
             {
                 var filename = String.Format("{0}StatAdjustments.xml", stat);
-                var statAdjustments = statAdjustmentXmlParser.Parse(filename);
+                var statAdjustments = adjustmentXmlParser.Parse(filename);
 
                 adjustments.Add(stat, statAdjustments[race.BaseRace]);
 

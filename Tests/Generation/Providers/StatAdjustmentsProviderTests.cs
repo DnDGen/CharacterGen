@@ -15,22 +15,22 @@ namespace NPCGen.Tests.Generation.Providers
     {
         private IStatAdjustmentsProvider provider;
         private Race race;
-        private Mock<IStatAdjustmentXmlParser> mockStatAdjustmentXmlParser;
+        private Mock<IAdjustmentXmlParser> mockAdjustmentXmlParser;
         private Dictionary<String, Int32> adjustments;
 
         [SetUp]
         public void Setup()
         {
-            mockStatAdjustmentXmlParser = new Mock<IStatAdjustmentXmlParser>();
+            mockAdjustmentXmlParser = new Mock<IAdjustmentXmlParser>();
             race = new Race();
             race.BaseRace = "base race";
             race.Metarace = "metarace";
             adjustments = new Dictionary<String, Int32>();
             adjustments.Add(race.BaseRace, 0);
             adjustments.Add(race.Metarace, 0);
-            mockStatAdjustmentXmlParser.Setup(p => p.Parse(It.IsAny<String>())).Returns(adjustments);
+            mockAdjustmentXmlParser.Setup(p => p.Parse(It.IsAny<String>())).Returns(adjustments);
 
-            provider = new StatAdjustmentsProvider(mockStatAdjustmentXmlParser.Object);
+            provider = new StatAdjustmentsProvider(mockAdjustmentXmlParser.Object);
         }
 
         [Test]
@@ -50,7 +50,7 @@ namespace NPCGen.Tests.Generation.Providers
             foreach (var stat in StatConstants.GetStats())
             {
                 var filename = String.Format("{0}StatAdjustments.xml", stat);
-                mockStatAdjustmentXmlParser.Verify(p => p.Parse(filename), Times.Once);
+                mockAdjustmentXmlParser.Verify(p => p.Parse(filename), Times.Once);
             }
         }
     }

@@ -220,9 +220,8 @@
     <Compile Include="Generation\Xml\Data\Stats\StrengthStatAdjustmentsTests.cs" />
     <Compile Include="Generation\Xml\Data\Stats\WisdomStatAdjustmentsTests.cs" />
     <Compile Include="Generation\Xml\Parsers\EmbeddedResourceStreamLoaderTests.cs" />
-    <Compile Include="Generation\Xml\Parsers\LevelAdjustmentXmlParserTests.cs" />
+    <Compile Include="Generation\Xml\Parsers\AdjustmentXmlParserTests.cs" />
     <Compile Include="Generation\Xml\Parsers\PercentileXmlParserTests.cs" />
-    <Compile Include="Generation\Xml\Parsers\StatAdjustmentXmlParserTests.cs" />
     <Compile Include="Generation\Xml\Parsers\StatPriorityXmlParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

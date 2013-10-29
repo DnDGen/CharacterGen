@@ -5,11 +5,11 @@ using NPCGen.Core.Generation.Xml.Parsers.Interfaces;
 
 namespace NPCGen.Core.Generation.Xml.Parsers
 {
-    public class StatAdjustmentXmlParser : IStatAdjustmentXmlParser
+    public class AdjustmentXmlParser : IAdjustmentXmlParser
     {
         private IStreamLoader streamLoader;
 
-        public StatAdjustmentXmlParser(IStreamLoader streamLoader)
+        public AdjustmentXmlParser(IStreamLoader streamLoader)
         {
             this.streamLoader = streamLoader;
         }
@@ -26,12 +26,14 @@ namespace NPCGen.Core.Generation.Xml.Parsers
                 var objects = xmlDocument.DocumentElement.ChildNodes;
                 foreach (XmlNode node in objects)
                 {
-                    var race = node.SelectSingleNode("race").InnerText;
+                    var key = node.SelectSingleNode("key").InnerText;
                     var adjustment = Convert.ToInt32(node.SelectSingleNode("adjustment").InnerText);
 
-                    results.Add(race, adjustment);
+                    results.Add(key, adjustment);
                 }
             }
+
+            results.Add(String.Empty, 0);
 
             return results;
         }

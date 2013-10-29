@@ -13,15 +13,27 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.BaseRaces
     {
         protected IBaseRaceRandomizer randomizer;
 
+        private CharacterClass characterClass;
+
         [SetUp]
         public void Setup()
         {
-            mockPercentileResultProvider.Setup(p => p.GetAllResults(It.IsAny<String>())).Returns(RaceConstants.BaseRaces.GetBaseRaces());
+            var baseRaces = RaceConstants.BaseRaces.GetBaseRaces();
+            mockPercentileResultProvider.Setup(p => p.GetAllResults(It.IsAny<String>())).Returns(baseRaces);
+
+            var adjustments = new Dictionary<String, Int32>();
+            foreach(var baseRace in baseRaces)
+                adjustments.Add(baseRace, 0);
+
+            mockLevelAdjustmentsProvider.Setup(p => p.GetLevelAdjustments()).Returns(adjustments);
+
+            characterClass = new CharacterClass();
+            characterClass.Level = 1;
         }
 
         protected override IEnumerable<String> GetResults()
         {
-            return randomizer.GetAllPossibleResults(String.Empty, new CharacterClass());
+            return randomizer.GetAllPossibleResults(String.Empty, characterClass);
         }
     }
 }
