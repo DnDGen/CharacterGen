@@ -63,8 +63,10 @@
     <Compile Include="Generation\Factories\HitPointsFactory.cs" />
     <Compile Include="Generation\Factories\RaceFactory.cs" />
     <Compile Include="Generation\Factories\StatsFactory.cs" />
+    <Compile Include="Generation\Providers\Interfaces\ILevelAdjustmentsProvider.cs" />
     <Compile Include="Generation\Providers\Interfaces\IStatAdjustmentsProvider.cs" />
     <Compile Include="Generation\Providers\Interfaces\IStatPriorityProvider.cs" />
+    <Compile Include="Generation\Providers\LevelAdjustmentsProvider.cs" />
     <Compile Include="Generation\Providers\ProviderFactory.cs" />
     <Compile Include="Generation\Providers\StatAdjustmentsProvider.cs" />
     <Compile Include="Generation\Providers\StatPriorityProvider.cs" />
@@ -140,10 +142,12 @@
     <Compile Include="Generation\Verifiers\Exceptions\IncompatibleRandomizersException.cs" />
     <Compile Include="Generation\Verifiers\Interfaces\IRandomizerVerifier.cs" />
     <Compile Include="Generation\Verifiers\RandomizerVerifier.cs" />
+    <Compile Include="Generation\Xml\Parsers\Interfaces\ILevelAdjustmentXmlParser.cs" />
     <Compile Include="Generation\Xml\Parsers\Interfaces\IPercentileXmlParser.cs" />
     <Compile Include="Generation\Xml\Parsers\Interfaces\IStatAdjustmentXmlParser.cs" />
     <Compile Include="Generation\Xml\Parsers\Interfaces\IStatPriorityXmlParser.cs" />
     <Compile Include="Generation\Xml\Parsers\Interfaces\IStreamLoader.cs" />
+    <Compile Include="Generation\Xml\Parsers\LevelAdjustmentXmlParser.cs" />
     <Compile Include="Generation\Xml\Parsers\Objects\PercentileObject.cs" />
     <Compile Include="Generation\Xml\Parsers\Objects\StatPriorityObject.cs" />
     <Compile Include="Generation\Xml\Parsers\StatAdjustmentXmlParser.cs" />

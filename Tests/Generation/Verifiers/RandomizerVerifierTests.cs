@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Moq;
 using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Data.CharacterClasses;
+using NPCGen.Core.Generation.Providers.Interfaces;
 using NPCGen.Core.Generation.Randomizers.Alignments.Interfaces;
 using NPCGen.Core.Generation.Randomizers.CharacterClasses.Interfaces;
 using NPCGen.Core.Generation.Randomizers.Races.Interfaces;
@@ -21,6 +23,7 @@ namespace NPCGen.Tests.Generation.Verifiers
         private Mock<ILevelRandomizer> mockLevelRandomizer;
         private Mock<IBaseRaceRandomizer> mockBaseRaceRandomizer;
         private Mock<IMetaraceRandomizer> mockMetaraceRandomizer;
+        private Mock<ILevelAdjustmentsProvider> mockLevelAdjustmentsProvider;
 
         [SetUp]
         public void Setup()
@@ -40,15 +43,16 @@ namespace NPCGen.Tests.Generation.Verifiers
             mockMetaraceRandomizer = new Mock<IMetaraceRandomizer>();
             mockMetaraceRandomizer.Setup(r => r.GetAllPossibleResults(It.IsAny<String>(), It.IsAny<CharacterClass>())).Returns(new[] { "metarace" });
 
+            mockLevelAdjustmentsProvider = new Mock<ILevelAdjustmentsProvider>();
+
             verifier = new RandomizerVerifier(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object,
-                mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
+                mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockLevelAdjustmentsProvider.Object);
         }
 
         [Test]
         public void VerifiedIfAllRandomizersAreCompatible()
         {
             var verified = verifier.VerifyCompatibility();
-
             Assert.That(verified, Is.True);
         }
 
@@ -109,7 +113,6 @@ namespace NPCGen.Tests.Generation.Verifiers
                 .Returns(Enumerable.Empty<String>()).Returns(Enumerable.Empty<String>()).Returns(new[] { "base race" });
 
             var verified = verifier.VerifyCompatibility();
-
             Assert.That(verified, Is.True);
         }
 
@@ -120,7 +123,6 @@ namespace NPCGen.Tests.Generation.Verifiers
                 .Returns(Enumerable.Empty<String>());
 
             var verified = verifier.VerifyCompatibility();
-
             Assert.That(verified, Is.False);
         }
 
@@ -134,8 +136,20 @@ namespace NPCGen.Tests.Generation.Verifiers
                 .Returns(Enumerable.Empty<String>()).Returns(Enumerable.Empty<String>()).Returns(new[] { "metarace" });
 
             var verified = verifier.VerifyCompatibility();
-
             Assert.That(verified, Is.True);
+        }
+
+        [Test]
+        public void NotVerifiedIfSumOfLevelAdjustmentsIsNotLessThanLevel()
+        {
+            var results = new Dictionary<String, Int32>();
+            results.Add("base race", 1);
+            results.Add("metarace", 1);
+            mockLevelAdjustmentsProvider.Setup(p => p.GetLevelAdjustments()).Returns(results);
+            mockLevelRandomizer.Setup(r => r.GetAllPossibleResults()).Returns(new[] { 2 });
+
+            var verified = verifier.VerifyCompatibility();
+            Assert.That(verified, Is.False);
         }
     }
 }

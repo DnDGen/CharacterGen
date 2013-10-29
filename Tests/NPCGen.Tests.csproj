@@ -74,6 +74,7 @@
     <Compile Include="Generation\Factories\HitPointsFactoryTests.cs" />
     <Compile Include="Generation\Factories\RaceFactoryTests.cs" />
     <Compile Include="Generation\Factories\StatsFactoryTests.cs" />
+    <Compile Include="Generation\Providers\LevelAdjustmentsProviderTests.cs" />
     <Compile Include="Generation\Providers\StatAdjustmentsProviderTests.cs" />
     <Compile Include="Generation\Providers\StatPriorityProviderTests.cs" />
     <Compile Include="Generation\Randomizers\Alignments\AnyAlignmentRandomizerTests.cs" />
@@ -146,6 +147,7 @@
     <Compile Include="Generation\Xml\Data\Alignments\AlignmentGoodnessTests.cs" />
     <Compile Include="Generation\Xml\Data\CharacterClasses\EvilCharacterClassesTests.cs" />
     <Compile Include="Generation\Xml\Data\CharacterClasses\GoodCharacterClassesTests.cs" />
+    <Compile Include="Generation\Xml\Data\CharacterClasses\LevelAdjustmentsTests.cs" />
     <Compile Include="Generation\Xml\Data\CharacterClasses\NeutralCharacterClassesTests.cs" />
     <Compile Include="Generation\Xml\Data\PercentileTests.cs" />
     <Compile Include="Generation\Xml\Data\Races\BaseRaces\Evil\EvilBarbarianBaseRacesTests.cs" />
@@ -218,6 +220,7 @@
     <Compile Include="Generation\Xml\Data\Stats\StrengthStatAdjustmentsTests.cs" />
     <Compile Include="Generation\Xml\Data\Stats\WisdomStatAdjustmentsTests.cs" />
     <Compile Include="Generation\Xml\Parsers\EmbeddedResourceStreamLoaderTests.cs" />
+    <Compile Include="Generation\Xml\Parsers\LevelAdjustmentXmlParserTests.cs" />
     <Compile Include="Generation\Xml\Parsers\PercentileXmlParserTests.cs" />
     <Compile Include="Generation\Xml\Parsers\StatAdjustmentXmlParserTests.cs" />
     <Compile Include="Generation\Xml\Parsers\StatPriorityXmlParserTests.cs" />

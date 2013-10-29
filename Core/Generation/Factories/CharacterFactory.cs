@@ -2,6 +2,7 @@
 using NPCGen.Core.Data;
 using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Data.CharacterClasses;
+using NPCGen.Core.Generation.Providers;
 using NPCGen.Core.Generation.Randomizers.Alignments.Interfaces;
 using NPCGen.Core.Generation.Randomizers.CharacterClasses.Interfaces;
 using NPCGen.Core.Generation.Randomizers.Races.Interfaces;
@@ -18,8 +19,9 @@ namespace NPCGen.Core.Generation.Factories
             ILevelRandomizer levelRandomizer, IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer,
             IStatsRandomizer statsRandomizer, IDice dice)
         {
-            var randomizerVerifier = new RandomizerVerifier(alignmentRandomizer, classNameRandomizer, levelRandomizer, baseRaceRandomizer, 
-                metaraceRandomizer);
+            var levelAdjustmentsProvider = ProviderFactory.CreateLevelAdjustmentProvider();
+            var randomizerVerifier = new RandomizerVerifier(alignmentRandomizer, classNameRandomizer, levelRandomizer, baseRaceRandomizer,
+                metaraceRandomizer, levelAdjustmentsProvider);
 
             VerifyRandomizers(randomizerVerifier);
 
