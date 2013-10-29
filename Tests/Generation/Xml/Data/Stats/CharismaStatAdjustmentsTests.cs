@@ -34,7 +34,7 @@ namespace NPCGen.Tests.Generation.Xml.Data.Stats
         [Test]
         public void DerroDwarfCharismaAdjustmentIsSix()
         {
-            Assert.That(adjustments[RaceConstants.BaseRaces.DerroDwarf], Is.EqualTo(6));
+            Assert.That(adjustments[RaceConstants.BaseRaces.Derro], Is.EqualTo(6));
         }
 
         [Test]
@@ -52,7 +52,7 @@ namespace NPCGen.Tests.Generation.Xml.Data.Stats
         [Test]
         public void DuergarCharismaAdjustmentIsMinusFour()
         {
-            Assert.That(adjustments[RaceConstants.BaseRaces.Duergar], Is.EqualTo(-4));
+            Assert.That(adjustments[RaceConstants.BaseRaces.DuergarDwarf], Is.EqualTo(-4));
         }
 
         [Test]

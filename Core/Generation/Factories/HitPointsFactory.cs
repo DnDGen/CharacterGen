@@ -1,12 +1,13 @@
 ﻿using System;
 using D20Dice.Dice;
 using NPCGen.Core.Data.CharacterClasses;
+using NPCGen.Core.Data.Races;
 
 namespace NPCGen.Core.Generation.Factories
 {
     public static class HitPointsFactory
     {
-        public static Int32 CreateUsing(IDice dice, CharacterClass characterClass, Int32 constitutionBonus)
+        public static Int32 CreateUsing(IDice dice, CharacterClass characterClass, Int32 constitutionBonus, Race race)
         {
             var hitPoints = 0;
 

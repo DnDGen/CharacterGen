@@ -40,7 +40,7 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.BaseRaces
         [Test]
         public void DerroDwarfIsAllowed()
         {
-            AssertRaceIsAllowed(RaceConstants.BaseRaces.DerroDwarf);
+            AssertRaceIsAllowed(RaceConstants.BaseRaces.Derro);
         }
 
         [Test]
@@ -58,7 +58,7 @@ namespace NPCGen.Tests.Generation.Randomizers.Races.BaseRaces
         [Test]
         public void DuergarIsAllowed()
         {
-            AssertRaceIsAllowed(RaceConstants.BaseRaces.Duergar);
+            AssertRaceIsAllowed(RaceConstants.BaseRaces.DuergarDwarf);
         }
 
         [Test]

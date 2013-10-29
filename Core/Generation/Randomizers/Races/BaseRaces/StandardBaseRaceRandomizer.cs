@@ -24,10 +24,10 @@ namespace NPCGen.Core.Generation.Randomizers.Races.BaseRaces
                 case RaceConstants.BaseRaces.Bugbear:
                 case RaceConstants.BaseRaces.DeepDwarf:
                 case RaceConstants.BaseRaces.DeepHalfling:
-                case RaceConstants.BaseRaces.DerroDwarf:
+                case RaceConstants.BaseRaces.Derro:
                 case RaceConstants.BaseRaces.Doppelganger:
                 case RaceConstants.BaseRaces.Drow:
-                case RaceConstants.BaseRaces.Duergar:
+                case RaceConstants.BaseRaces.DuergarDwarf:
                 case RaceConstants.BaseRaces.Gnoll:
                 case RaceConstants.BaseRaces.Goblin:
                 case RaceConstants.BaseRaces.GrayElf:

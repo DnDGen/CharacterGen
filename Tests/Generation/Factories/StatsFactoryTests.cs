@@ -48,6 +48,16 @@ namespace NPCGen.Tests.Generation.Factories
         }
 
         [Test]
+        public void StatsContainAllStats()
+        {
+            var stats = StatsFactory.CreateUsing(mockStatRandomizer.Object, characterClass, race, mockDice.Object);
+            foreach (var stat in StatConstants.GetStats())
+                Assert.That(stats.ContainsKey(stat), Is.True);
+
+            Assert.That(stats.Count, Is.EqualTo(6));
+        }
+
+        [Test]
         public void PrioritizesStatsByClass()
         {
             characterClass.ClassName = CharacterClassConstants.Barbarian;

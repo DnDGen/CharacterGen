@@ -30,10 +30,9 @@ namespace NPCGen.Core.Generation.Factories
             return prioritizedStats;
         }
 
-        private static Dictionary<String, Stat> IncreaseStats(Dictionary<String, Stat> prioritizedStats, StatPriorityObject priorities, Int32 level,
-            IDice dice)
+        private static Dictionary<String, Stat> IncreaseStats(Dictionary<String, Stat> stats, StatPriorityObject priorities, Int32 level, IDice dice)
         {
-            var increasedStats = new Dictionary<String, Stat>(prioritizedStats);
+            var increasedStats = new Dictionary<String, Stat>(stats);
 
             var count = level / 4;
             while (count-- > 0)
@@ -49,22 +48,22 @@ namespace NPCGen.Core.Generation.Factories
             return increasedStats;
         }
 
-        private static Dictionary<String, Stat> PrioritizeStats(Dictionary<String, Stat> stats, StatPriorityObject statPriorities)
+        private static Dictionary<String, Stat> PrioritizeStats(Dictionary<String, Stat> stats, StatPriorityObject priorities)
         {
             var prioritizedStats = new Dictionary<String, Stat>(stats);
 
             var maxStat = prioritizedStats.Keys.First(k => prioritizedStats[k].Value == prioritizedStats.Values.Max(s => s.Value));
 
             var temp = prioritizedStats[maxStat];
-            prioritizedStats[maxStat] = prioritizedStats[statPriorities.FirstPriority];
-            prioritizedStats[statPriorities.FirstPriority] = temp;
+            prioritizedStats[maxStat] = prioritizedStats[priorities.FirstPriority];
+            prioritizedStats[priorities.FirstPriority] = temp;
 
             var secondMaxStat = prioritizedStats.Keys.First(k => prioritizedStats[k].Value == prioritizedStats.Values
-                .Where(s => s != prioritizedStats[statPriorities.FirstPriority]).Max(s => s.Value));
+                .Where(s => s != prioritizedStats[priorities.FirstPriority]).Max(s => s.Value));
 
             temp = prioritizedStats[secondMaxStat];
-            prioritizedStats[secondMaxStat] = prioritizedStats[statPriorities.SecondPriority];
-            prioritizedStats[statPriorities.SecondPriority] = temp;
+            prioritizedStats[secondMaxStat] = prioritizedStats[priorities.SecondPriority];
+            prioritizedStats[priorities.SecondPriority] = temp;
 
             return prioritizedStats;
         }

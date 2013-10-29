@@ -123,7 +123,7 @@ namespace NPCGen.Tests.Generation.Xml.Data.Races.BaseRaces.Evil
         [Test]
         public void EvilClericDuergarPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.Duergar, 72);
+            AssertContent(RaceConstants.BaseRaces.DuergarDwarf, 72);
         }
 
         [Test]

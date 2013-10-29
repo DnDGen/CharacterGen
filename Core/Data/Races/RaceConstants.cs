@@ -11,10 +11,10 @@ namespace NPCGen.Core.Data.Races
             public const String Bugbear = "Bugbear";
             public const String DeepDwarf = "Deep Dwarf";
             public const String DeepHalfling = "Deep Halfling";
-            public const String DerroDwarf = "Derro Dwarf";
+            public const String Derro = "Derro";
             public const String Doppelganger = "Doppelganger";
             public const String Drow = "Drow";
-            public const String Duergar = "Duergar";
+            public const String DuergarDwarf = "Duergar Dwarf";
             public const String ForestGnome = "Forest Gnome";
             public const String Goblin = "Goblin";
             public const String Gnoll = "Gnoll";
@@ -50,10 +50,10 @@ namespace NPCGen.Core.Data.Races
                     Bugbear,
                     DeepDwarf,
                     DeepHalfling,
-                    DerroDwarf,
+                    Derro,
                     Doppelganger,
                     Drow,
-                    Duergar,
+                    DuergarDwarf,
                     ForestGnome,
                     Gnoll,
                     Goblin,

@@ -34,7 +34,7 @@ namespace NPCGen.Tests.Data.Races
         [Test]
         public void DerroDwarfConstant()
         {
-            Assert.That(RaceConstants.BaseRaces.DerroDwarf, Is.EqualTo("Derro Dwarf"));
+            Assert.That(RaceConstants.BaseRaces.Derro, Is.EqualTo("Derro Dwarf"));
         }
 
         [Test]
@@ -52,7 +52,7 @@ namespace NPCGen.Tests.Data.Races
         [Test]
         public void DuergarConstant()
         {
-            Assert.That(RaceConstants.BaseRaces.Duergar, Is.EqualTo("Duergar"));
+            Assert.That(RaceConstants.BaseRaces.DuergarDwarf, Is.EqualTo("Duergar"));
         }
 
         [Test]
@@ -220,10 +220,10 @@ namespace NPCGen.Tests.Data.Races
             Assert.That(baseRaces.Contains(RaceConstants.BaseRaces.Bugbear), Is.True);
             Assert.That(baseRaces.Contains(RaceConstants.BaseRaces.DeepDwarf), Is.True);
             Assert.That(baseRaces.Contains(RaceConstants.BaseRaces.DeepHalfling), Is.True);
-            Assert.That(baseRaces.Contains(RaceConstants.BaseRaces.DerroDwarf), Is.True);
+            Assert.That(baseRaces.Contains(RaceConstants.BaseRaces.Derro), Is.True);
             Assert.That(baseRaces.Contains(RaceConstants.BaseRaces.Doppelganger), Is.True);
             Assert.That(baseRaces.Contains(RaceConstants.BaseRaces.Drow), Is.True);
-            Assert.That(baseRaces.Contains(RaceConstants.BaseRaces.Duergar), Is.True);
+            Assert.That(baseRaces.Contains(RaceConstants.BaseRaces.DuergarDwarf), Is.True);
             Assert.That(baseRaces.Contains(RaceConstants.BaseRaces.ForestGnome), Is.True);
             Assert.That(baseRaces.Contains(RaceConstants.BaseRaces.Gnoll), Is.True);
             Assert.That(baseRaces.Contains(RaceConstants.BaseRaces.Goblin), Is.True);

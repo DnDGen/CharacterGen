@@ -22,9 +22,9 @@ namespace NPCGen.Core.Generation.Randomizers.Races.BaseRaces
                 case RaceConstants.BaseRaces.RockGnome: return false;
                 case RaceConstants.BaseRaces.Svirfneblin:
                 case RaceConstants.BaseRaces.Aasimar: return true;
-                case RaceConstants.BaseRaces.DerroDwarf:
+                case RaceConstants.BaseRaces.Derro:
                 case RaceConstants.BaseRaces.Drow:
-                case RaceConstants.BaseRaces.Duergar:
+                case RaceConstants.BaseRaces.DuergarDwarf:
                 case RaceConstants.BaseRaces.Goblin:
                 case RaceConstants.BaseRaces.Hobgoblin:
                 case RaceConstants.BaseRaces.Ogre:

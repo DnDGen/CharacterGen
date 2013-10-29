@@ -34,7 +34,7 @@ namespace NPCGen.Tests.Generation.Xml.Data.Stats
         [Test]
         public void DerroDwarfWisdomAdjustmentIsMinusSix()
         {
-            Assert.That(adjustments[RaceConstants.BaseRaces.DerroDwarf], Is.EqualTo(-6));
+            Assert.That(adjustments[RaceConstants.BaseRaces.Derro], Is.EqualTo(-6));
         }
 
         [Test]
@@ -52,7 +52,7 @@ namespace NPCGen.Tests.Generation.Xml.Data.Stats
         [Test]
         public void DuergarWisdomAdjustmentIsZero()
         {
-            Assert.That(adjustments[RaceConstants.BaseRaces.Duergar], Is.EqualTo(0));
+            Assert.That(adjustments[RaceConstants.BaseRaces.DuergarDwarf], Is.EqualTo(0));
         }
 
         [Test]

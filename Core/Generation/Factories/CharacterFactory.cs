@@ -5,6 +5,7 @@ using NPCGen.Core.Data;
 using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Data.Races;
+using NPCGen.Core.Data.Stats;
 using NPCGen.Core.Generation.Providers;
 using NPCGen.Core.Generation.Randomizers.Alignments.Interfaces;
 using NPCGen.Core.Generation.Randomizers.CharacterClasses.Interfaces;
@@ -30,38 +31,22 @@ namespace NPCGen.Core.Generation.Factories
 
             var character = new Character();
 
-            var alignment = GenerateAlignment(randomizerVerifier, alignmentRandomizer);
-            var prototype = GenerateCharacterClassPrototype(randomizerVerifier, classNameRandomizer, levelRandomizer, alignment);
+            character.Alignment = GenerateAlignment(randomizerVerifier, alignmentRandomizer);
+            var prototype = GenerateCharacterClassPrototype(randomizerVerifier, classNameRandomizer, levelRandomizer, character.Alignment);
 
             var levelAdjustments = levelAdjustmentsProvider.GetLevelAdjustments();
-            var race = GenerateRace(baseRaceRandomizer, metaraceRandomizer, levelAdjustments, alignment, prototype, dice);
+            character.Race = GenerateRace(baseRaceRandomizer, metaraceRandomizer, levelAdjustments, character.Alignment, prototype, dice);
 
-            prototype.Level -= levelAdjustments[race.BaseRace];
-            prototype.Level -= levelAdjustments[race.Metarace];
+            prototype.Level -= levelAdjustments[character.Race.BaseRace];
+            prototype.Level -= levelAdjustments[character.Race.Metarace];
 
-            character.Alignment = alignment;
             character.Class = CharacterClassFactory.CreateUsing(prototype);
-            character.Race = race;
 
-            character.Stats = StatsFactory.CreateUsing(statsRandomizer, character.Class, race, dice);
-
-            //make HitPointFactory(characterClass, constitutionBonus, metarace)
-
+            character.Stats = StatsFactory.CreateUsing(statsRandomizer, character.Class, character.Race, dice);
+            character.HitPoints = HitPointsFactory.CreateUsing(dice, character.Class, character.Stats[StatConstants.Constitution].Bonus,
+                character.Race);
 
             //******************
-
-            //progress.Text += "\nPrioritizing and adjusting stats...";
-            //StatScores = Classes.Prioritize(charClass, StatScores);
-            //StrengthPercentile = 0;
-
-            //if (IsFighter(charClass))
-            //    if (StatScores[Stats.Strength] > 17 && StatScores[Stats.Strength] < 19)
-            //        StrengthPercentile = Dice.Percentile();
-
-            //StatAdjustment();
-            //foreach (var stat in StatScores)
-            //    progress.Text += " " + stat.ToString();
-            //progress.Text += " " + StrengthPercentile.ToString();
 
             //Application.DoEvents();
             //progress.Text += "\nDetermining HP...";

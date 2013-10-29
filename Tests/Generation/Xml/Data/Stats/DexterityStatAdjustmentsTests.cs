@@ -34,7 +34,7 @@ namespace NPCGen.Tests.Generation.Xml.Data.Stats
         [Test]
         public void DerroDwarfDexterityAdjustmentIsFour()
         {
-            Assert.That(adjustments[RaceConstants.BaseRaces.DerroDwarf], Is.EqualTo(4));
+            Assert.That(adjustments[RaceConstants.BaseRaces.Derro], Is.EqualTo(4));
         }
 
         [Test]
@@ -52,7 +52,7 @@ namespace NPCGen.Tests.Generation.Xml.Data.Stats
         [Test]
         public void DuergarDexterityAdjustmentIsZero()
         {
-            Assert.That(adjustments[RaceConstants.BaseRaces.Duergar], Is.EqualTo(0));
+            Assert.That(adjustments[RaceConstants.BaseRaces.DuergarDwarf], Is.EqualTo(0));
         }
 
         [Test]

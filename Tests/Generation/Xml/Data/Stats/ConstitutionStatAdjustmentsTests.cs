@@ -34,7 +34,7 @@ namespace NPCGen.Tests.Generation.Xml.Data.Stats
         [Test]
         public void DerroDwarfConstitutionAdjustmentIsTwo()
         {
-            Assert.That(adjustments[RaceConstants.BaseRaces.DerroDwarf], Is.EqualTo(2));
+            Assert.That(adjustments[RaceConstants.BaseRaces.Derro], Is.EqualTo(2));
         }
 
         [Test]
@@ -52,7 +52,7 @@ namespace NPCGen.Tests.Generation.Xml.Data.Stats
         [Test]
         public void DuergarConstitutionAdjustmentIsTwo()
         {
-            Assert.That(adjustments[RaceConstants.BaseRaces.Duergar], Is.EqualTo(2));
+            Assert.That(adjustments[RaceConstants.BaseRaces.DuergarDwarf], Is.EqualTo(2));
         }
 
         [Test]
