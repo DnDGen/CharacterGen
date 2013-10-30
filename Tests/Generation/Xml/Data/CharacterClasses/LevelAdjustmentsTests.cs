@@ -32,7 +32,7 @@ namespace NPCGen.Tests.Generation.Xml.Data.CharacterClasses
         }
 
         [Test]
-        public void DerroDwarfLevelAdjustmentIsOne()
+        public void DerroLevelAdjustmentIsOne()
         {
             Assert.That(adjustments[RaceConstants.BaseRaces.Derro], Is.EqualTo(1));
         }
@@ -50,7 +50,7 @@ namespace NPCGen.Tests.Generation.Xml.Data.CharacterClasses
         }
 
         [Test]
-        public void DuergarLevelAdjustmentIsOne()
+        public void DuergarDwarfLevelAdjustmentIsOne()
         {
             Assert.That(adjustments[RaceConstants.BaseRaces.DuergarDwarf], Is.EqualTo(1));
         }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using D20Dice.Dice;
+using NPCGen.Core.Data;
 using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Data.Races;
 using NPCGen.Core.Generation.Providers;
@@ -9,7 +11,7 @@ namespace NPCGen.Core.Generation.Factories
 {
     public static class LanguageFactory
     {
-        public static IEnumerable<String> CreateUsing(Race race, CharacterClass characterClass, IDice dice)
+        public static IEnumerable<String> CreateUsing(Race race, String className, IDice dice, Int32 intelligenceBonus)
         {
             var languages = new List<String>();
             var languagesProvider = ProviderFactory.CreateLanguagesProvider();
@@ -17,64 +19,21 @@ namespace NPCGen.Core.Generation.Factories
             var automaticLanguages = languagesProvider.GetAutomaticLanguagesFor(race);
             languages.AddRange(automaticLanguages);
 
-            //var NumberOfLanguages = (StatScores[Stats.Intelligence] - 10) / 2;
+            if (className == CharacterClassConstants.Druid)
+                languages.Add(LanguageConstants.Druidic);
 
-            //switch (Race.Race)
-            //{
-            //    case RACE.AASIMAR: languages = "Common, Celestial"; break;
-            //    case RACE.GOBLIN:
-            //    case RACE.HOBGOBLIN:
-            //    case RACE.BUGBEAR: languages = "Common, Goblin"; break;
-            //    case RACE.DUERGAR: languages = "Common, Dwarven, Undercommon"; break;
-            //    case RACE.HILL_DWARF:
-            //    case RACE.MOUNTAIN_DWARF:
-            //    case RACE.DEEP_DWARF:
-            //    case RACE.DERRO_DWARF: languages = "Common, Dwarven"; break;
-            //    case RACE.DROW: languages = "Common, Elven, Undercommon"; break;
-            //    case RACE.FOREST_GNOME: languages = "Common, Gnome, Elven, Sylvan"; break;
-            //    case RACE.GNOLL: languages = "Gnoll"; break;
-            //    case RACE.GRAY_ELF:
-            //    case RACE.HIGH_ELF:
-            //    case RACE.WILD_ELF:
-            //    case RACE.WOOD_ELF:
-            //    case RACE.HALFELF: languages = "Common, Elven"; break;
-            //    case RACE.ORC:
-            //    case RACE.HALFORC: languages = "Common, Orc"; break;
-            //    case RACE.LIZARDFOLK: languages = "Common, Draconic"; break;
-            //    case RACE.TROGLODYTE:
-            //    case RACE.KOBOLD: languages = "Draconic"; break;
-            //    case RACE.DEEP_HALFLING:
-            //    case RACE.TALLFELLOW_HALFLING:
-            //    case RACE.LIGHTFOOT_HALFLING: languages = "Common, Halfling"; break;
-            //    case RACE.MIND_FLAYER: languages = "Common, Undercommon"; break;
-            //    case RACE.OGRE:
-            //    case RACE.OGRE_MAGE:
-            //    case RACE.MINOTAUR: languages = "Common, Giant"; break;
-            //    case RACE.ROCK_GNOME: languages = "Common, Gnome"; break;
-            //    case RACE.SVIRFNEBLIN: languages = "Common, Gnome, Undercommon"; break;
-            //    case RACE.TIEFLING: languages = "Common, Infernal"; break;
-            //    default: languages = "Common"; break;
-            //}
+            var bonusLanguages = languagesProvider.GetBonusLanguagesFor(race.BaseRace, className);
+            var numberOfLanguages = intelligenceBonus;
+            while(numberOfLanguages > 0 && bonusLanguages.Except(languages).Any())
+            {
+                var language = GetBonusLanguage();
 
-            //switch (Race.MetaRace)
-            //{
-            //    case METARACE.HALF_CELESTIAL:
-            //        if (!languages.Contains("Celestial"))
-            //            languages += ", Celestial";
-            //        break;
-            //    case METARACE.HALF_DRAGON:
-            //        if (!languages.Contains("Draconic"))
-            //            languages += ", Draconic";
-            //        break;
-            //    case METARACE.HALF_FIEND:
-            //        if (!languages.Contains("Infernal"))
-            //            languages += ", Infernal";
-            //        break;
-            //    default: break;
-            //}
-
-            //if (Class == CLASS.DRUID)
-            //    languages += ", Druidic";
+                if (!languages.Contains(language) && bonusLanguages.Contains(language))
+                {
+                    languages.Add(language);
+                    numberOfLanguages--;
+                }
+            }
 
             //while (NumberOfLanguages > 0)
             //{
@@ -272,7 +231,242 @@ namespace NPCGen.Core.Generation.Factories
             //    }
             //}
 
+        //    public Boolean CanSpeak(String Language)
+        //{
+        //    switch (Race)
+        //    {
+        //        case RACE.AASIMAR:
+        //            switch (Language)
+        //            {
+        //                case "Draconic":
+        //                case "Dwarven":
+        //                case "Elven":
+        //                case "Gnome":
+        //                case "Halfling":
+        //                case "Sylvan": return true;
+        //                default: return false;
+        //            }
+        //        case RACE.BUGBEAR:
+        //        case RACE.GOBLIN:
+        //            switch (Language)
+        //            {
+        //                case "Draconic":
+        //                case "Elven":
+        //                case "Giant":
+        //                case "Gnoll":
+        //                case "Orc": return true;
+        //                default: return false;
+        //            }
+        //        case RACE.DEEP_DWARF:
+        //        case RACE.HILL_DWARF:
+        //        case RACE.DERRO_DWARF:
+        //        case RACE.MOUNTAIN_DWARF:
+        //            switch (Language)
+        //            {
+        //                case "Giant":
+        //                case "Goblin":
+        //                case "Orc":
+        //                case "Gnome":
+        //                case "Terran":
+        //                case "Undercommon": return true;
+        //                default: return false;
+        //            }
+        //        case RACE.DOPPELGANGER:
+        //            switch (Language)
+        //            {
+        //                case "Auran":
+        //                case "Dwarven":
+        //                case "Elven":
+        //                case "Gnome":
+        //                case "Giant":
+        //                case "Halfling":
+        //                case "Terran": return true;
+        //                default: return false;
+        //            }
+        //        case RACE.DROW:
+        //            switch (Language)
+        //            {
+        //                case "Abyssal":
+        //                case "Aquan":
+        //                case "Draconic":
+        //                case "Gnome":
+        //                case "Goblin": return true;
+        //                default: return false;
+        //            }
+        //        case RACE.DUERGAR:
+        //            switch (Language)
+        //            {
+        //                case "Giant":
+        //                case "Goblin":
+        //                case "Orc":
+        //                case "Draconic":
+        //                case "Terran": return true;
+        //                default: return false;
+        //            }
+        //        case RACE.GNOLL:
+        //            switch (Language)
+        //            {
+        //                case "Common":
+        //                case "Goblin":
+        //                case "Orc":
+        //                case "Draconic":
+        //                case "Elven": return true;
+        //                default: return false;
+        //            }
+        //        case RACE.MIND_FLAYER:
+        //        case RACE.HUMAN:
+        //        case RACE.HALFELF: return true;
+        //        case RACE.HALFORC:
+        //            switch (Language)
+        //            {
+        //                case "Abyssal":
+        //                case "Goblin":
+        //                case "Gnoll":
+        //                case "Draconic":
+        //                case "Giant": return true;
+        //                default: return false;
+        //            }
+        //        case RACE.HIGH_ELF:
+        //        case RACE.GRAY_ELF:
+        //        case RACE.WILD_ELF:
+        //        case RACE.WOOD_ELF:
+        //            switch (Language)
+        //            {
+        //                case "Draconic":
+        //                case "Gnoll":
+        //                case "Goblin":
+        //                case "Gnome":
+        //                case "Orc":
+        //                case "Sylvan": return true;
+        //                default: return false;
+        //            }
+        //        case RACE.HOBGOBLIN:
+        //            switch (Language)
+        //            {
+        //                case "Dwarven":
+        //                case "Infernal":
+        //                case "Orc":
+        //                case "Draconic":
+        //                case "Giant": return true;
+        //                default: return false;
+        //            }
+        //        case RACE.KOBOLD:
+        //            switch (Language)
+        //            {
+        //                case "Common":
+        //                case "Undercommon":return true;
+        //                default: return false;
+        //            }
+        //        case RACE.LIGHTFOOT_HALFLING:
+        //        case RACE.TALLFELLOW_HALFLING:
+        //        case RACE.DEEP_HALFLING:
+        //            switch (Language)
+        //            {
+        //                case "Dwarven":
+        //                case "Elven":
+        //                case "Gnome":
+        //                case "Goblin":
+        //                case "Orc": return true;
+        //                default: return false;
+        //            }
+        //        case RACE.LIZARDFOLK:
+        //            switch (Language)
+        //            {
+        //                case "Aquan":
+        //                case "Goblin":
+        //                case "Orc":
+        //                case "Gnoll": return true;
+        //                default: return false;
+        //            }
+        //        case RACE.MINOTAUR:
+        //            switch (Language)
+        //            {
+        //                case "Terran":
+        //                case "Goblin":
+        //                case "Orc": return true;
+        //                default: return false;
+        //            }
+        //        case RACE.OGRE:
+        //            switch (Language)
+        //            {
+        //                case "Dwarven":
+        //                case "Goblin":
+        //                case "Terran":
+        //                case "Orc": return true;
+        //                default: return false;
+        //            }
+        //        case RACE.OGRE_MAGE:
+        //            switch (Language)
+        //            {
+        //                case "Dwarven":
+        //                case "Goblin":
+        //                case "Orc":
+        //                case "Infernal": return true;
+        //                default: return false;
+        //            }
+        //        case RACE.ORC:
+        //            switch (Language)
+        //            {
+        //                case "Dwarven":
+        //                case "Giant":
+        //                case "Gnoll":
+        //                case "Goblin":
+        //                case "Undercommon": return true;
+        //                default: return false;
+        //            }
+        //        case RACE.FOREST_GNOME:
+        //        case RACE.ROCK_GNOME:
+        //            switch (Language)
+        //            {
+        //                case "Dwarven":
+        //                case "Elven":
+        //                case "Draconic":
+        //                case "Goblin":
+        //                case "Giant":
+        //                case "Orc": return true;
+        //                default: return false;
+        //            }
+        //        case RACE.SVIRFNEBLIN:
+        //            switch (Language)
+        //            {
+        //                case "Dwarven":
+        //                case "Elven":
+        //                case "Terran":
+        //                case "Goblin":
+        //                case "Giant":
+        //                case "Orc": return true;
+        //                default: return false;
+        //            }
+        //        case RACE.TIEFLING:
+        //            switch (Language)
+        //            {
+        //                case "Draconic":
+        //                case "Dwarven":
+        //                case "Elven":
+        //                case "Gnome":
+        //                case "Goblin":
+        //                case "Halfling":
+        //                case "Orc": return true;
+        //                default: return false;
+        //            }
+        //        case RACE.TROGLODYTE:
+        //            switch (Language)
+        //            {
+        //                case "Common":
+        //                case "Goblin":
+        //                case "Orc":
+        //                case "Giant": return true;
+        //                default: return false;
+        //            }
+        //        default: return true;
+        //    }
+
             return languages;
+        }
+
+        private static String GetBonusLanguage()
+        {
+            throw new NotImplementedException();
         }
     }
 }

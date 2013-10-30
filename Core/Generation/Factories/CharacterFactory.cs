@@ -49,7 +49,8 @@ namespace NPCGen.Core.Generation.Factories
             var percentileResultProvider = ProviderFactory.CreatePercentileResultProviderUsing(dice);
             character.InterestingTrait = percentileResultProvider.GetPercentileResult("Traits");
 
-            character.Languages = LanguageFactory.CreateUsing(character.Race, character.Class, dice);
+            character.Languages = LanguageFactory.CreateUsing(character.Race, character.Class.ClassName, dice, 
+                character.Stats[StatConstants.Intelligence].Bonus);
 
             //******************
 

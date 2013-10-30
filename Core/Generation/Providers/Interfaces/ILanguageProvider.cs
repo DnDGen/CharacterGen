@@ -7,6 +7,6 @@ namespace NPCGen.Core.Generation.Providers.Interfaces
     public interface ILanguageProvider
     {
         IEnumerable<String> GetAutomaticLanguagesFor(Race race);
-        IEnumerable<String> GetBonusLanguagesFor(Race race);
+        IEnumerable<String> GetBonusLanguagesFor(String baseRace, String className);
     }
 }

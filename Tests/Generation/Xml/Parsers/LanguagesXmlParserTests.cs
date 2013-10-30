@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Moq;
+using NPCGen.Core.Data.Races;
 using NPCGen.Core.Generation.Xml.Parsers;
 using NPCGen.Core.Generation.Xml.Parsers.Interfaces;
 using NUnit.Framework;
@@ -44,6 +45,16 @@ namespace NPCGen.Tests.Generation.Xml.Parsers
         {
             Assert.That(results.ContainsKey(String.Empty), Is.True);
             Assert.That(results[String.Empty].Any(), Is.False);
+        }
+
+        [Test]
+        public void MetaracesNotInTableGivenEmptyEnumerableOfString()
+        {
+            foreach (var metarace in RaceConstants.Metaraces.GetMetaraces())
+            {
+                Assert.That(results.ContainsKey(metarace), Is.True);
+                Assert.That(results[String.Empty].Any(), Is.False);
+            }
         }
 
         private Stream GetStream()

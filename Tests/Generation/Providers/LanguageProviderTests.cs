@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Moq;
 using NPCGen.Core.Data;
+using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Data.Races;
 using NPCGen.Core.Generation.Providers;
 using NPCGen.Core.Generation.Providers.Interfaces;
@@ -17,12 +18,20 @@ namespace NPCGen.Tests.Generation.Providers
         private ILanguageProvider provider;
         private Race race;
         private Mock<ILanguagesXmlParser> mockLanguagesXmlParser;
+        private Dictionary<String, IEnumerable<String>> parsedLanguages;
 
         [SetUp]
         public void Setup()
         {
             race = new Race();
+            race.BaseRace = String.Empty;
+            race.Metarace = String.Empty;
+
+            parsedLanguages = new Dictionary<String, IEnumerable<String>>();
+            parsedLanguages.Add(String.Empty, Enumerable.Empty<String>());
             mockLanguagesXmlParser = new Mock<ILanguagesXmlParser>();
+            mockLanguagesXmlParser.Setup(p => p.Parse(It.IsAny<String>())).Returns(parsedLanguages);
+
             provider = new LanguagesProvider(mockLanguagesXmlParser.Object);
         }
 
@@ -37,10 +46,8 @@ namespace NPCGen.Tests.Generation.Providers
         public void GetAutomaticLanguagesReturnsLanguagesForBaseRace()
         {
             race.BaseRace = "base race";
-            var parsedLanguages = new Dictionary<String, IEnumerable<String>>();
             parsedLanguages.Add(race.BaseRace, new[] { LanguageConstants.Common });
             parsedLanguages.Add("other base race", new[] { LanguageConstants.Draconic });
-            mockLanguagesXmlParser.Setup(p => p.Parse(It.IsAny<String>())).Returns(parsedLanguages);
 
             var languages = provider.GetAutomaticLanguagesFor(race);
             Assert.That(languages.Contains(LanguageConstants.Common), Is.True);
@@ -52,10 +59,8 @@ namespace NPCGen.Tests.Generation.Providers
         public void GetAutomaticLanguagesReturnsLanguagesForMetarace()
         {
             race.Metarace = "metarace";
-            var parsedLanguages = new Dictionary<String, IEnumerable<String>>();
             parsedLanguages.Add(race.Metarace, new[] { LanguageConstants.Draconic });
             parsedLanguages.Add("other metarace", new[] { LanguageConstants.Celestial });
-            mockLanguagesXmlParser.Setup(p => p.Parse(It.IsAny<String>())).Returns(parsedLanguages);
 
             var languages = provider.GetAutomaticLanguagesFor(race);
             Assert.That(languages.Contains(LanguageConstants.Draconic), Is.True);
@@ -68,10 +73,8 @@ namespace NPCGen.Tests.Generation.Providers
         {
             race.BaseRace = "base race";
             race.Metarace = "metarace";
-            var parsedLanguages = new Dictionary<String, IEnumerable<String>>();
             parsedLanguages.Add(race.BaseRace, new[] { LanguageConstants.Common });
             parsedLanguages.Add(race.Metarace, new[] { LanguageConstants.Draconic });
-            mockLanguagesXmlParser.Setup(p => p.Parse(It.IsAny<String>())).Returns(parsedLanguages);
 
             var languages = provider.GetAutomaticLanguagesFor(race);
             Assert.That(languages.Contains(LanguageConstants.Draconic), Is.True);
@@ -80,9 +83,22 @@ namespace NPCGen.Tests.Generation.Providers
         }
 
         [Test]
+        public void GetAutomaticLanguagesFiltersOutDuplicateLanguages()
+        {
+            race.BaseRace = "base race";
+            race.Metarace = "metarace";
+            parsedLanguages.Add(race.BaseRace, new[] { LanguageConstants.Common });
+            parsedLanguages.Add(race.Metarace, new[] { LanguageConstants.Common });
+
+            var languages = provider.GetAutomaticLanguagesFor(race);
+            Assert.That(languages.Contains(LanguageConstants.Common), Is.True);
+            Assert.That(languages.Count(), Is.EqualTo(1));
+        }
+
+        [Test]
         public void GetBonusLanguagesAccessesBonusLanguagesTable()
         {
-            provider.GetAutomaticLanguagesFor(race);
+            provider.GetBonusLanguagesFor(String.Empty, String.Empty);
             mockLanguagesXmlParser.Verify(p => p.Parse("BonusLanguages.xml"), Times.Once);
         }
 
@@ -90,15 +106,52 @@ namespace NPCGen.Tests.Generation.Providers
         public void GetBonusLanguagesReturnsLanguages()
         {
             race.BaseRace = "base race";
-            var parsedLanguages = new Dictionary<String, IEnumerable<String>>();
             parsedLanguages.Add(race.BaseRace, new[] { LanguageConstants.Common });
             parsedLanguages.Add("other base race", new[] { LanguageConstants.Draconic });
-            mockLanguagesXmlParser.Setup(p => p.Parse(It.IsAny<String>())).Returns(parsedLanguages);
 
-            var languages = provider.GetBonusLanguagesFor(race);
+            var languages = provider.GetBonusLanguagesFor(race.BaseRace, String.Empty);
             Assert.That(languages.Contains(LanguageConstants.Common), Is.True);
             Assert.That(languages.Contains(LanguageConstants.Draconic), Is.False);
             Assert.That(languages.Count(), Is.EqualTo(1));
+        }
+
+        [Test]
+        public void ClericBonusLanguages()
+        {
+            var languages = provider.GetBonusLanguagesFor(String.Empty, CharacterClassConstants.Cleric);
+            Assert.That(languages.Contains(LanguageConstants.Abyssal), Is.True);
+            Assert.That(languages.Contains(LanguageConstants.Celestial), Is.True);
+            Assert.That(languages.Contains(LanguageConstants.Infernal), Is.True);
+            Assert.That(languages.Count(), Is.EqualTo(3));
+        }
+
+        [Test]
+        public void WizardBonusLanguages()
+        {
+            var languages = provider.GetBonusLanguagesFor(String.Empty, CharacterClassConstants.Wizard);
+            Assert.That(languages.Contains(LanguageConstants.Draconic), Is.True);
+            Assert.That(languages.Count(), Is.EqualTo(1));
+        }
+
+        [Test]
+        public void DruidBonusLanguages()
+        {
+            var languages = provider.GetBonusLanguagesFor(String.Empty, CharacterClassConstants.Druid);
+            Assert.That(languages.Contains(LanguageConstants.Sylvan), Is.True);
+            Assert.That(languages.Count(), Is.EqualTo(1));
+        }
+
+        [Test]
+        public void DuplicateBonusLanguagesAreFilteredOut()
+        {
+            race.BaseRace = "base race";
+            parsedLanguages.Add(race.BaseRace, new[] { LanguageConstants.Abyssal });
+
+            var languages = provider.GetBonusLanguagesFor(race.BaseRace, CharacterClassConstants.Cleric);
+            Assert.That(languages.Contains(LanguageConstants.Abyssal), Is.True);
+            Assert.That(languages.Contains(LanguageConstants.Celestial), Is.True);
+            Assert.That(languages.Contains(LanguageConstants.Infernal), Is.True);
+            Assert.That(languages.Count(), Is.EqualTo(3));
         }
     }
 }
