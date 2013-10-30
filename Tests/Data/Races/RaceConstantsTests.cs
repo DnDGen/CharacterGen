@@ -32,9 +32,9 @@ namespace NPCGen.Tests.Data.Races
         }
 
         [Test]
-        public void DerroDwarfConstant()
+        public void DerroConstant()
         {
-            Assert.That(RaceConstants.BaseRaces.Derro, Is.EqualTo("Derro Dwarf"));
+            Assert.That(RaceConstants.BaseRaces.Derro, Is.EqualTo("Derro"));
         }
 
         [Test]
@@ -50,9 +50,9 @@ namespace NPCGen.Tests.Data.Races
         }
 
         [Test]
-        public void DuergarConstant()
+        public void DuergarDwarfConstant()
         {
-            Assert.That(RaceConstants.BaseRaces.DuergarDwarf, Is.EqualTo("Duergar"));
+            Assert.That(RaceConstants.BaseRaces.DuergarDwarf, Is.EqualTo("Duergar Dwarf"));
         }
 
         [Test]

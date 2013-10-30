@@ -13,9 +13,10 @@ namespace NPCGen.Core.Data
         public CharacterClass Class { get; set; }
         public Race Race { get; set; }
         public Dictionary<String, Stat> Stats { get; set; }
-        public List<String> Languages { get; set; }
-        public List<Skill> Skills { get; set; }
-        public List<Feat> Feats { get; set; }
+        public IEnumerable<String> Languages { get; set; }
+        public IEnumerable<Skill> Skills { get; set; }
+        public IEnumerable<Feat> Feats { get; set; }
         public Int32 HitPoints { get; set; }
+        public String InterestingTrait { get; set; }
     }
 }

@@ -275,16 +275,16 @@ namespace NPCGen.Tests.Generation.Xml.Data.Stats
         public void AllBaseRacesInTable()
         {
             foreach (var baseRace in RaceConstants.BaseRaces.GetBaseRaces())
-                Assert.That(adjustments.ContainsKey(baseRace), Is.True);
+                Assert.That(adjustments.ContainsKey(baseRace), Is.True, baseRace);
         }
 
         [Test]
         public void AllMetaracesInTable()
         {
             foreach (var metarace in RaceConstants.Metaraces.GetMetaraces())
-                Assert.That(adjustments.ContainsKey(metarace), Is.True);
+                Assert.That(adjustments.ContainsKey(metarace), Is.True, metarace);
 
-            Assert.That(adjustments.ContainsKey(String.Empty), Is.True);
+            Assert.That(adjustments.ContainsKey(String.Empty), Is.True, String.Empty);
         }
     }
 }

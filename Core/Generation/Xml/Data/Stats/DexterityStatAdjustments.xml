@@ -7,7 +7,7 @@
         <adjustment>2</adjustment>
     </object>
     <object>
-        <key>Derro Dwarf</key>
+        <key>Derro</key>
         <adjustment>4</adjustment>
     </object>
     <object>
@@ -24,7 +24,7 @@
     </object>
   <object><key>Drow</key><adjustment>2</adjustment></object>
     <object>
-        <key>Duergar</key>
+        <key>Duergar Dwarf</key>
         <adjustment>0</adjustment>
     </object>
     <object>

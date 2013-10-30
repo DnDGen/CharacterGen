@@ -219,6 +219,7 @@
     <Compile Include="Generation\Xml\Data\Stats\StatPrioritiesTests.cs" />
     <Compile Include="Generation\Xml\Data\Stats\StrengthStatAdjustmentsTests.cs" />
     <Compile Include="Generation\Xml\Data\Stats\WisdomStatAdjustmentsTests.cs" />
+    <Compile Include="Generation\Xml\Data\TraitsTests.cs" />
     <Compile Include="Generation\Xml\Parsers\EmbeddedResourceStreamLoaderTests.cs" />
     <Compile Include="Generation\Xml\Parsers\AdjustmentXmlParserTests.cs" />
     <Compile Include="Generation\Xml\Parsers\PercentileXmlParserTests.cs" />

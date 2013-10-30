@@ -17,6 +17,8 @@ namespace NPCGen.Core.Generation.Factories
                 hitPoints += Math.Max(rolledHitPoints, 1);
             }
 
+            hitPoints += GetAdditionalMonsterHitDice(race, dice);
+
             return hitPoints;
         }
 
@@ -36,6 +38,34 @@ namespace NPCGen.Core.Generation.Factories
                 case CharacterClassConstants.Sorcerer:
                 case CharacterClassConstants.Wizard: return dice.d4(bonus: constitutionBonus);
                 default: throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        private static Int32 GetAdditionalMonsterHitDice(Race race, IDice dice)
+        {
+            var numberOfRolls = GetNumberOfRolls(race);
+
+            if (race.Metarace == RaceConstants.Metaraces.HalfDragon)
+                return dice.d10(numberOfRolls);
+
+            return dice.d8(numberOfRolls);
+        }
+
+        private static Int32 GetNumberOfRolls(Race race)
+        {
+            switch (race.BaseRace)
+            {
+                case RaceConstants.BaseRaces.Bugbear:
+                case RaceConstants.BaseRaces.Derro: return 3;
+                case RaceConstants.BaseRaces.Ogre:
+                case RaceConstants.BaseRaces.Doppelganger: return 4;
+                case RaceConstants.BaseRaces.Gnoll:
+                case RaceConstants.BaseRaces.Lizardfolk:
+                case RaceConstants.BaseRaces.Troglodyte: return 2;
+                case RaceConstants.BaseRaces.MindFlayer: return 8;
+                case RaceConstants.BaseRaces.Minotaur: return 6;
+                case RaceConstants.BaseRaces.OgreMage: return 5;
+                default: return 0;
             }
         }
     }

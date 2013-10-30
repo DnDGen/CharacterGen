@@ -214,7 +214,14 @@ namespace NPCGen.Tests.Generation.Factories
             race.BaseRace = RaceConstants.BaseRaces.Derro;
 
             var hitPoints = HitPointsFactory.CreateUsing(mockDice.Object, characterClass, constitutionBonus, race);
-            mockDice.Verify(d => d.d10(3, 0), Times.Once);
+            mockDice.Verify(d => d.d10(It.IsAny<Int32>(), 0), Times.Once);
+        }
+
+        [Test]
+        public void AnyMetaraceExceptHalfDragonGetsD8HitDice()
+        {
+            var hitPoints = HitPointsFactory.CreateUsing(mockDice.Object, characterClass, constitutionBonus, race);
+            mockDice.Verify(d => d.d8(It.IsAny<Int32>(), 0), Times.Once);
         }
 
         [Test]
@@ -238,7 +245,7 @@ namespace NPCGen.Tests.Generation.Factories
         [Test]
         public void MinotaurGains6d8HitDice()
         {
-            race.BaseRace = RaceConstants.BaseRaces.Derro;
+            race.BaseRace = RaceConstants.BaseRaces.Minotaur;
 
             var hitPoints = HitPointsFactory.CreateUsing(mockDice.Object, characterClass, constitutionBonus, race);
             mockDice.Verify(d => d.d8(6, 0), Times.Once);
@@ -256,7 +263,7 @@ namespace NPCGen.Tests.Generation.Factories
         [Test]
         public void OgreMageGains5d8HitDice()
         {
-            race.BaseRace = RaceConstants.BaseRaces.Derro;
+            race.BaseRace = RaceConstants.BaseRaces.OgreMage;
 
             var hitPoints = HitPointsFactory.CreateUsing(mockDice.Object, characterClass, constitutionBonus, race);
             mockDice.Verify(d => d.d8(5, 0), Times.Once);
@@ -265,7 +272,7 @@ namespace NPCGen.Tests.Generation.Factories
         [Test]
         public void TroglodyteGains2d8HitDice()
         {
-            race.BaseRace = RaceConstants.BaseRaces.Derro;
+            race.BaseRace = RaceConstants.BaseRaces.Troglodyte;
 
             var hitPoints = HitPointsFactory.CreateUsing(mockDice.Object, characterClass, constitutionBonus, race);
             mockDice.Verify(d => d.d8(2, 0), Times.Once);

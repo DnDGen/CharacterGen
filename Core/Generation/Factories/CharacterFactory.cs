@@ -46,12 +46,10 @@ namespace NPCGen.Core.Generation.Factories
             character.HitPoints = HitPointsFactory.CreateUsing(dice, character.Class, character.Stats[StatConstants.Constitution].Bonus,
                 character.Race);
 
-            //******************
+            var percentileResultProvider = ProviderFactory.CreatePercentileResultProviderUsing(dice);
+            character.InterestingTrait = percentileResultProvider.GetPercentileResult("Traits");
 
-            //Application.DoEvents();
-            //progress.Text += "\nDetermining HP...";
-            //HP = Classes.HitPoints(charClass, level, StatScores[Stats.Constitution], race);
-            //progress.Text += HP.ToString();
+            //******************
 
             //Application.DoEvents();
             //progress.Text += "\nDetermining Languages...";
