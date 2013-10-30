@@ -65,6 +65,7 @@
     <Compile Include="Data\Alignments\AlignmentTests.cs" />
     <Compile Include="Data\Classes\BaseAttackTests.cs" />
     <Compile Include="Data\Classes\CharacterClassConstantsTests.cs" />
+    <Compile Include="Data\LanguageConstantsTests.cs" />
     <Compile Include="Data\Races\RaceConstantsTests.cs" />
     <Compile Include="Data\Stats\StatConstantsTests.cs" />
     <Compile Include="Data\Stats\StatTests.cs" />
@@ -72,8 +73,10 @@
     <Compile Include="Generation\Factories\CharacterClassFactoryTests.cs" />
     <Compile Include="Generation\Factories\CharacterFactoryTests.cs" />
     <Compile Include="Generation\Factories\HitPointsFactoryTests.cs" />
+    <Compile Include="Generation\Factories\LanguageFactoryTests.cs" />
     <Compile Include="Generation\Factories\RaceFactoryTests.cs" />
     <Compile Include="Generation\Factories\StatsFactoryTests.cs" />
+    <Compile Include="Generation\Providers\LanguageProviderTests.cs" />
     <Compile Include="Generation\Providers\LevelAdjustmentsProviderTests.cs" />
     <Compile Include="Generation\Providers\StatAdjustmentsProviderTests.cs" />
     <Compile Include="Generation\Providers\StatPriorityProviderTests.cs" />
@@ -222,6 +225,7 @@
     <Compile Include="Generation\Xml\Data\TraitsTests.cs" />
     <Compile Include="Generation\Xml\Parsers\EmbeddedResourceStreamLoaderTests.cs" />
     <Compile Include="Generation\Xml\Parsers\AdjustmentXmlParserTests.cs" />
+    <Compile Include="Generation\Xml\Parsers\LanguagesXmlParserTests.cs" />
     <Compile Include="Generation\Xml\Parsers\PercentileXmlParserTests.cs" />
     <Compile Include="Generation\Xml\Parsers\StatPriorityXmlParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

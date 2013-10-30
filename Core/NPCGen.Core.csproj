@@ -53,6 +53,7 @@
     <Compile Include="Data\CharacterClasses\CharacterClassConstants.cs" />
     <Compile Include="Data\CharacterClasses\CharacterClassPrototype.cs" />
     <Compile Include="Data\Feat.cs" />
+    <Compile Include="Data\LanguageConstants.cs" />
     <Compile Include="Data\Races\Race.cs" />
     <Compile Include="Data\Races\RaceConstants.cs" />
     <Compile Include="Data\Skill.cs" />
@@ -62,11 +63,14 @@
     <Compile Include="Generation\Factories\CharacterClassFactory.cs" />
     <Compile Include="Generation\Factories\CharacterFactory.cs" />
     <Compile Include="Generation\Factories\HitPointsFactory.cs" />
+    <Compile Include="Generation\Factories\LanguageFactory.cs" />
     <Compile Include="Generation\Factories\RaceFactory.cs" />
     <Compile Include="Generation\Factories\StatsFactory.cs" />
+    <Compile Include="Generation\Providers\Interfaces\ILanguageProvider.cs" />
     <Compile Include="Generation\Providers\Interfaces\ILevelAdjustmentsProvider.cs" />
     <Compile Include="Generation\Providers\Interfaces\IStatAdjustmentsProvider.cs" />
     <Compile Include="Generation\Providers\Interfaces\IStatPriorityProvider.cs" />
+    <Compile Include="Generation\Providers\LanguagesProvider.cs" />
     <Compile Include="Generation\Providers\LevelAdjustmentsProvider.cs" />
     <Compile Include="Generation\Providers\ProviderFactory.cs" />
     <Compile Include="Generation\Providers\StatAdjustmentsProvider.cs" />
@@ -144,10 +148,12 @@
     <Compile Include="Generation\Verifiers\Interfaces\IRandomizerVerifier.cs" />
     <Compile Include="Generation\Verifiers\RandomizerVerifier.cs" />
     <Compile Include="Generation\Xml\Parsers\Interfaces\IAdjustmentXmlParser.cs" />
+    <Compile Include="Generation\Xml\Parsers\Interfaces\ILanguagesXmlParser.cs" />
     <Compile Include="Generation\Xml\Parsers\Interfaces\IPercentileXmlParser.cs" />
     <Compile Include="Generation\Xml\Parsers\Interfaces\IStatPriorityXmlParser.cs" />
     <Compile Include="Generation\Xml\Parsers\Interfaces\IStreamLoader.cs" />
     <Compile Include="Generation\Xml\Parsers\AdjustmentXmlParser.cs" />
+    <Compile Include="Generation\Xml\Parsers\LanguagesXmlParser.cs" />
     <Compile Include="Generation\Xml\Parsers\Objects\PercentileObject.cs" />
     <Compile Include="Generation\Xml\Parsers\Objects\StatPriorityObject.cs" />
     <Compile Include="Generation\Xml\Parsers\PercentileXmlParser.cs" />

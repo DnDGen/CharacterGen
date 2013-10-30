@@ -33,5 +33,12 @@ namespace NPCGen.Core.Generation.Providers
             var xmlParser = new AdjustmentXmlParser(streamLoader);
             return new LevelAdjustmentsProvider(xmlParser);
         }
+
+        public static ILanguageProvider CreateLanguagesProvider()
+        {
+            var streamLoader = new EmbeddedResourceStreamLoader();
+            var languagesXmlParser = new LanguagesXmlParser(streamLoader);
+            return new LanguagesProvider(languagesXmlParser);
+        }
     }
 }
