@@ -149,6 +149,7 @@
     <Compile Include="Generation\Verifiers\RandomizerVerifierTests.cs" />
     <Compile Include="Generation\Xml\Data\Alignments\AlignmentGoodnessTests.cs" />
     <Compile Include="Generation\Xml\Data\AutomaticLanguagesTests.cs" />
+    <Compile Include="Generation\Xml\Data\BonusLanguagesTests.cs" />
     <Compile Include="Generation\Xml\Data\CharacterClasses\EvilCharacterClassesTests.cs" />
     <Compile Include="Generation\Xml\Data\CharacterClasses\GoodCharacterClassesTests.cs" />
     <Compile Include="Generation\Xml\Data\CharacterClasses\LevelAdjustmentsTests.cs" />
