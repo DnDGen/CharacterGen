@@ -80,155 +80,71 @@ namespace NPCGen.Tests.Generation.Xml.Data
         [Test]
         public void MountainDwarfBonusLanguages()
         {
-            var bonusLanguages = languages[RaceConstants.BaseRaces.MountainDwarf];
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Goblin), Is.True);
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Gnome), Is.True);
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Giant), Is.True);
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Orc), Is.True);
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Terran), Is.True);
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Undercommon), Is.True);
-            Assert.That(bonusLanguages.Count(), Is.EqualTo(6));
+            AssertLanguagesAreBonusLanguages(RaceConstants.BaseRaces.MountainDwarf, LanguageConstants.Goblin, LanguageConstants.Gnome,
+                LanguageConstants.Giant, LanguageConstants.Orc, LanguageConstants.Terran, LanguageConstants.Undercommon);
         }
 
         [Test]
         public void GrayElfBonusLanguages()
         {
-            var bonusLanguages = languages[RaceConstants.BaseRaces.GrayElf];
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Draconic), Is.True);
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Gnoll), Is.True);
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Goblin), Is.True);
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Orc), Is.True);
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Gnome), Is.True);
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Sylvan), Is.True);
-            Assert.That(bonusLanguages.Count(), Is.EqualTo(6));
+            AssertLanguagesAreBonusLanguages(RaceConstants.BaseRaces.GrayElf, LanguageConstants.Draconic, LanguageConstants.Gnoll,
+                LanguageConstants.Goblin, LanguageConstants.Orc, LanguageConstants.Gnome, LanguageConstants.Sylvan);
         }
 
         [Test]
         public void HighElfBonusLanguages()
         {
-            var bonusLanguages = languages[RaceConstants.BaseRaces.HighElf];
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Draconic), Is.True);
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Gnoll), Is.True);
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Goblin), Is.True);
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Orc), Is.True);
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Gnome), Is.True);
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Sylvan), Is.True);
-            Assert.That(bonusLanguages.Count(), Is.EqualTo(6));
+            AssertLanguagesAreBonusLanguages(RaceConstants.BaseRaces.HighElf, LanguageConstants.Draconic, LanguageConstants.Gnoll,
+                LanguageConstants.Goblin, LanguageConstants.Orc, LanguageConstants.Gnome, LanguageConstants.Sylvan);
         }
 
         [Test]
         public void WildElfBonusLanguages()
         {
-            var bonusLanguages = languages[RaceConstants.BaseRaces.WildElf];
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Draconic), Is.True);
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Gnoll), Is.True);
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Goblin), Is.True);
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Orc), Is.True);
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Gnome), Is.True);
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Sylvan), Is.True);
-            Assert.That(bonusLanguages.Count(), Is.EqualTo(6));
+            AssertLanguagesAreBonusLanguages(RaceConstants.BaseRaces.WildElf, LanguageConstants.Draconic, LanguageConstants.Gnoll,
+                LanguageConstants.Goblin, LanguageConstants.Orc, LanguageConstants.Gnome, LanguageConstants.Sylvan);
         }
 
         [Test]
         public void WoodElfBonusLanguages()
         {
-            var bonusLanguages = languages[RaceConstants.BaseRaces.WoodElf];
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Draconic), Is.True);
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Gnoll), Is.True);
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Goblin), Is.True);
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Orc), Is.True);
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Gnome), Is.True);
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Sylvan), Is.True);
-            Assert.That(bonusLanguages.Count(), Is.EqualTo(6));
+            AssertLanguagesAreBonusLanguages(RaceConstants.BaseRaces.WoodElf, LanguageConstants.Draconic, LanguageConstants.Gnoll,
+                LanguageConstants.Goblin, LanguageConstants.Orc, LanguageConstants.Gnome, LanguageConstants.Sylvan);
         }
 
         [Test]
         public void GnollBonusLanguages()
         {
-            var bonusLanguages = languages[RaceConstants.BaseRaces.Gnoll];
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Common), Is.True);
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Goblin), Is.True);
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Orc), Is.True);
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Draconic), Is.True);
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Elven), Is.True);
-            Assert.That(bonusLanguages.Count(), Is.EqualTo(5));
+            AssertLanguagesAreBonusLanguages(RaceConstants.BaseRaces.Gnoll, LanguageConstants.Common, LanguageConstants.Goblin,
+                LanguageConstants.Orc, LanguageConstants.Draconic, LanguageConstants.Elven);
         }
 
         [Test]
         public void ForestGnomeBonusLanguagesZero()
         {
-            var BonusLanguages = languages[RaceConstants.BaseRaces.ForestGnome];
-            Assert.That(BonusLanguages.Contains(LanguageConstants.Common), Is.True);
-            Assert.That(BonusLanguages.Contains(LanguageConstants.Elven), Is.True);
-            Assert.That(BonusLanguages.Contains(LanguageConstants.Gnome), Is.True);
-            Assert.That(BonusLanguages.Contains(LanguageConstants.Sylvan), Is.True);
-            Assert.That(BonusLanguages.Count(), Is.EqualTo(4));
-
-            //            switch (Language)
-            //            {
-            //                case "Dwarven":
-            //                case "Elven":
-            //                case "Draconic":
-            //                case "Goblin":
-            //                case "Giant":
-            //                case "Orc": return true;
-            //                default: return false;
-            //            }
+            AssertLanguagesAreBonusLanguages(RaceConstants.BaseRaces.ForestGnome, LanguageConstants.Dwarven, LanguageConstants.Elven,
+                LanguageConstants.Draconic, LanguageConstants.Goblin, LanguageConstants.Giant);
         }
 
         [Test]
         public void RockGnomeBonusLanguages()
         {
-            var BonusLanguages = languages[RaceConstants.BaseRaces.RockGnome];
-            Assert.That(BonusLanguages.Contains(LanguageConstants.Common), Is.True);
-            Assert.That(BonusLanguages.Contains(LanguageConstants.Gnome), Is.True);
-            Assert.That(BonusLanguages.Count(), Is.EqualTo(2));
-
-            //            switch (Language)
-            //            {
-            //                case "Dwarven":
-            //                case "Elven":
-            //                case "Draconic":
-            //                case "Goblin":
-            //                case "Giant":
-            //                case "Orc": return true;
-            //                default: return false;
-            //            }
+            AssertLanguagesAreBonusLanguages(RaceConstants.BaseRaces.RockGnome, LanguageConstants.Dwarven, LanguageConstants.Elven,
+                LanguageConstants.Draconic, LanguageConstants.Goblin, LanguageConstants.Giant, LanguageConstants.Orc);
         }
 
         [Test]
         public void SvirfneblinBonusLanguages()
         {
-            var BonusLanguages = languages[RaceConstants.BaseRaces.Svirfneblin];
-            Assert.That(BonusLanguages.Contains(LanguageConstants.Common), Is.True);
-            Assert.That(BonusLanguages.Contains(LanguageConstants.Gnome), Is.True);
-            Assert.That(BonusLanguages.Contains(LanguageConstants.Undercommon), Is.True);
-            Assert.That(BonusLanguages.Count(), Is.EqualTo(3));
-
-
-            //        case RACE.SVIRFNEBLIN:
-            //            switch (Language)
-            //            {
-            //                case "Dwarven":
-            //                case "Elven":
-            //                case "Terran":
-            //                case "Goblin":
-            //                case "Giant":
-            //                case "Orc": return true;
-            //                default: return false;
-            //            }
+            AssertLanguagesAreBonusLanguages(RaceConstants.BaseRaces.Svirfneblin, LanguageConstants.Dwarven, LanguageConstants.Elven,
+                LanguageConstants.Terran, LanguageConstants.Goblin, LanguageConstants.Giant, LanguageConstants.Orc);
         }
 
         [Test]
         public void GoblinBonusLanguages()
         {
-            var bonusLanguages = languages[RaceConstants.BaseRaces.Goblin];
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Draconic), Is.True);
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Elven), Is.True);
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Giant), Is.True);
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Gnoll), Is.True);
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Orc), Is.True);
-            Assert.That(bonusLanguages.Count(), Is.EqualTo(5));
+            AssertLanguagesAreBonusLanguages(RaceConstants.BaseRaces.Goblin, LanguageConstants.Draconic, LanguageConstants.Elven,
+                LanguageConstants.Giant, LanguageConstants.Gnoll, LanguageConstants.Orc);
         }
 
         [Test]
@@ -240,13 +156,8 @@ namespace NPCGen.Tests.Generation.Xml.Data
         [Test]
         public void HalfOrcBonusLanguages()
         {
-            var bonusLanguages = languages[RaceConstants.BaseRaces.HalfOrc];
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Abyssal), Is.True);
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Goblin), Is.True);
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Gnoll), Is.True);
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Draconic), Is.True);
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Giant), Is.True);
-            Assert.That(bonusLanguages.Count(), Is.EqualTo(5));
+            AssertLanguagesAreBonusLanguages(RaceConstants.BaseRaces.HalfOrc, LanguageConstants.Abyssal, LanguageConstants.Goblin,
+                LanguageConstants.Giant, LanguageConstants.Gnoll, LanguageConstants.Draconic);
         }
 
         [Test]
@@ -273,13 +184,8 @@ namespace NPCGen.Tests.Generation.Xml.Data
         [Test]
         public void HobgoblinBonusLanguages()
         {
-            var bonusLanguages = languages[RaceConstants.BaseRaces.Hobgoblin];
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Dwarven), Is.True);
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Infernal), Is.True);
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Orc), Is.True);
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Draconic), Is.True);
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Giant), Is.True);
-            Assert.That(bonusLanguages.Count(), Is.EqualTo(5));
+            AssertLanguagesAreBonusLanguages(RaceConstants.BaseRaces.Hobgoblin, LanguageConstants.Dwarven, LanguageConstants.Infernal,
+                LanguageConstants.Orc, LanguageConstants.Draconic, LanguageConstants.Giant);
         }
 
         [Test]
@@ -297,20 +203,8 @@ namespace NPCGen.Tests.Generation.Xml.Data
         [Test]
         public void LizardfolkBonusLanguages()
         {
-            var BonusLanguages = languages[RaceConstants.BaseRaces.Lizardfolk];
-            Assert.That(BonusLanguages.Contains(LanguageConstants.Common), Is.True);
-            Assert.That(BonusLanguages.Contains(LanguageConstants.Draconic), Is.True);
-            Assert.That(BonusLanguages.Count(), Is.EqualTo(2));
-
-            //        case RACE.LIZARDFOLK:
-            //            switch (Language)
-            //            {
-            //                case "Aquan":
-            //                case "Goblin":
-            //                case "Orc":
-            //                case "Gnoll": return true;
-            //                default: return false;
-            //            }
+            AssertLanguagesAreBonusLanguages(RaceConstants.BaseRaces.Lizardfolk, LanguageConstants.Aquan, LanguageConstants.Goblin,
+                LanguageConstants.Orc, LanguageConstants.Gnoll);
         }
 
         [Test]
@@ -322,110 +216,43 @@ namespace NPCGen.Tests.Generation.Xml.Data
         [Test]
         public void MinotaurBonusLanguages()
         {
-            var BonusLanguages = languages[RaceConstants.BaseRaces.Minotaur];
-            Assert.That(BonusLanguages.Contains(LanguageConstants.Common), Is.True);
-            Assert.That(BonusLanguages.Contains(LanguageConstants.Giant), Is.True);
-            Assert.That(BonusLanguages.Count(), Is.EqualTo(2));
-
-            //        case RACE.MINOTAUR:
-            //            switch (Language)
-            //            {
-            //                case "Terran":
-            //                case "Goblin":
-            //                case "Orc": return true;
-            //                default: return false;
-            //            }
+            AssertLanguagesAreBonusLanguages(RaceConstants.BaseRaces.Minotaur, LanguageConstants.Terran, LanguageConstants.Goblin,
+                LanguageConstants.Orc);
         }
 
         [Test]
         public void OgreBonusLanguages()
         {
-            var BonusLanguages = languages[RaceConstants.BaseRaces.Ogre];
-            Assert.That(BonusLanguages.Contains(LanguageConstants.Common), Is.True);
-            Assert.That(BonusLanguages.Contains(LanguageConstants.Giant), Is.True);
-            Assert.That(BonusLanguages.Count(), Is.EqualTo(2));
-
-            //        case RACE.OGRE:
-            //            switch (Language)
-            //            {
-            //                case "Dwarven":
-            //                case "Goblin":
-            //                case "Terran":
-            //                case "Orc": return true;
-            //                default: return false;
-            //            }
+            AssertLanguagesAreBonusLanguages(RaceConstants.BaseRaces.Ogre, LanguageConstants.Terran, LanguageConstants.Goblin,
+                LanguageConstants.Orc, LanguageConstants.Dwarven);
         }
 
         [Test]
         public void OgreMageBonusLanguages()
         {
-            var BonusLanguages = languages[RaceConstants.BaseRaces.OgreMage];
-            Assert.That(BonusLanguages.Contains(LanguageConstants.Common), Is.True);
-            Assert.That(BonusLanguages.Contains(LanguageConstants.Giant), Is.True);
-            Assert.That(BonusLanguages.Count(), Is.EqualTo(2));
-
-            //        case RACE.OGRE_MAGE:
-            //            switch (Language)
-            //            {
-            //                case "Dwarven":
-            //                case "Goblin":
-            //                case "Orc":
-            //                case "Infernal": return true;
-            //                default: return false;
-            //            } 
+            AssertLanguagesAreBonusLanguages(RaceConstants.BaseRaces.OgreMage, LanguageConstants.Infernal, LanguageConstants.Goblin,
+                LanguageConstants.Orc, LanguageConstants.Dwarven);
         }
 
         [Test]
         public void OrcBonusLanguages()
         {
-            var BonusLanguages = languages[RaceConstants.BaseRaces.Orc];
-            Assert.That(BonusLanguages.Contains(LanguageConstants.Common), Is.True);
-            Assert.That(BonusLanguages.Contains(LanguageConstants.Orc), Is.True);
-            Assert.That(BonusLanguages.Count(), Is.EqualTo(2));
-
-            //        case RACE.ORC:
-            //            switch (Language)
-            //            {
-            //                case "Dwarven":
-            //                case "Giant":
-            //                case "Gnoll":
-            //                case "Goblin":
-            //                case "Undercommon": return true;
-            //                default: return false;
-            //            }
+            AssertLanguagesAreBonusLanguages(RaceConstants.BaseRaces.Orc, LanguageConstants.Giant, LanguageConstants.Goblin,
+                LanguageConstants.Gnoll, LanguageConstants.Dwarven, LanguageConstants.Undercommon);
         }
 
         [Test]
         public void TieflingBonusLanguages()
         {
-            var BonusLanguages = languages[RaceConstants.BaseRaces.Tiefling];
-            Assert.That(BonusLanguages.Contains(LanguageConstants.Common), Is.True);
-            Assert.That(BonusLanguages.Contains(LanguageConstants.Infernal), Is.True);
-            Assert.That(BonusLanguages.Count(), Is.EqualTo(2));
-
-            //        case RACE.TIEFLING:
-            //            switch (Language)
-            //            {
-            //                case "Draconic":
-            //                case "Dwarven":
-            //                case "Elven":
-            //                case "Gnome":
-            //                case "Goblin":
-            //                case "Halfling":
-            //                case "Orc": return true;
-            //                default: return false;
-            //            }
+            AssertLanguagesAreBonusLanguages(RaceConstants.BaseRaces.Tiefling, LanguageConstants.Draconic, LanguageConstants.Dwarven,
+                LanguageConstants.Elven, LanguageConstants.Gnome, LanguageConstants.Goblin, LanguageConstants.Halfling, LanguageConstants.Orc);
         }
 
         [Test]
         public void TroglodyteBonusLanguages()
         {
-            var bonusLanguages = languages[RaceConstants.BaseRaces.Troglodyte];
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Common), Is.True);
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Goblin), Is.True);
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Orc), Is.True);
-            Assert.That(bonusLanguages.Contains(LanguageConstants.Giant), Is.True);
-            Assert.That(bonusLanguages.Count(), Is.EqualTo(4));
+            AssertLanguagesAreBonusLanguages(RaceConstants.BaseRaces.Troglodyte, LanguageConstants.Common, LanguageConstants.Goblin,
+                LanguageConstants.Giant, LanguageConstants.Orc);
         }
 
         [Test]
@@ -440,7 +267,7 @@ namespace NPCGen.Tests.Generation.Xml.Data
             var bonusLanguages = languages[baseRace];
 
             foreach (var language in expectedLanguages)
-                Assert.That(bonusLanguages.Contains(language), Is.True);
+                Assert.That(bonusLanguages.Contains(language), Is.True, language);
 
             Assert.That(bonusLanguages.Count(), Is.EqualTo(expectedLanguages.Length));
         }
@@ -452,7 +279,7 @@ namespace NPCGen.Tests.Generation.Xml.Data
             var applicableLanguages = allLanguages.Except(new[] { LanguageConstants.Druidic });
 
             foreach (var language in applicableLanguages)
-                Assert.That(bonusLanguages.Contains(language), Is.True);
+                Assert.That(bonusLanguages.Contains(language), Is.True, language);
 
             Assert.That(bonusLanguages.Count(), Is.EqualTo(applicableLanguages.Count()));
         }
