@@ -164,7 +164,7 @@ namespace NPCGen.Tests.Generation.Xml.Data
         public void DeepHalflingBonusLanguages()
         {
             AssertLanguagesAreBonusLanguages(RaceConstants.BaseRaces.DeepHalfling, LanguageConstants.Dwarven, LanguageConstants.Elven,
-                LanguageConstants.Gnome, LanguageConstants.Goblin, LanguageConstants.Orc);
+                LanguageConstants.Gnome, LanguageConstants.Goblin, LanguageConstants.Orc, LanguageConstants.Undercommon);
         }
 
         [Test]

@@ -7,6 +7,8 @@
         <language>Elven</language>
         <language>Gnome</language>
         <language>Draconic</language>
+        <language>Halfling</language>
+        <language>Sylvan</language>
     </object>
     <object>
         <key>Bugbear</key>
@@ -14,6 +16,7 @@
         <language>Elven</language>
         <language>Gnoll</language>
         <language>Draconic</language>
+        <language>Orc</language>
     </object>
     <object>
         <key>Deep Dwarf</key>
@@ -22,6 +25,7 @@
         <language>Giant</language>
         <language>Orc</language>
         <language>Terran</language>
+        <language>Undercommon</language>
     </object>
     <object>
         <key>Hill Dwarf</key>
@@ -30,6 +34,7 @@
         <language>Giant</language>
         <language>Orc</language>
         <language>Terran</language>
+        <language>Undercommon</language>
     </object>
     <object>
         <key>Mountain Dwarf</key>
@@ -38,6 +43,7 @@
         <language>Giant</language>
         <language>Orc</language>
         <language>Terran</language>
+        <language>Undercommon</language>
     </object>
     <object>
         <key>Deep Halfling</key>
@@ -46,6 +52,7 @@
         <language>Gnome</language>
         <language>Goblin</language>
         <language>Orc</language>
+        <language>Undercommon</language>
     </object>
     <object>
         <key>Derro</key>
@@ -54,12 +61,17 @@
         <language>Giant</language>
         <language>Orc</language>
         <language>Terran</language>
+        <language>Undercommon</language>
     </object>
     <object>
         <key>Doppelganger</key>
         <language>Auran</language>
         <language>Dwarven</language>
         <language>Elven</language>
+        <language>Gnome</language>
+        <language>Giant</language>
+        <language>Halfling</language>
+        <language>Terran</language>
     </object>
     <object>
         <key>Drow</key>
@@ -67,6 +79,7 @@
         <language>Aquan</language>
         <language>Draconic</language>
         <language>Gnome</language>
+        <language>Goblin</language>
     </object>
     <object>
         <key>Duergar Dwarf</key>
@@ -106,6 +119,7 @@
         <language>Infernal</language>
         <language>Orc</language>
         <language>Draconic</language>
+        <language>Giant</language>
     </object>
     <object>
         <key>Gray Elf</key>
@@ -114,6 +128,7 @@
         <language>Goblin</language>
         <language>Orc</language>
         <language>Gnome</language>
+        <language>Sylvan</language>
     </object>
     <object>
         <key>High Elf</key>
@@ -122,6 +137,7 @@
         <language>Goblin</language>
         <language>Orc</language>
         <language>Gnome</language>
+        <language>Sylvan</language>
     </object>
     <object>
         <key>Wild Elf</key>
@@ -130,6 +146,7 @@
         <language>Goblin</language>
         <language>Orc</language>
         <language>Gnome</language>
+        <language>Sylvan</language>
     </object>
     <object>
         <key>Wood Elf</key>
@@ -138,6 +155,7 @@
         <language>Goblin</language>
         <language>Orc</language>
         <language>Gnome</language>
+        <language>Sylvan</language>
     </object>
     <object>
         <key>Half-Elf</key>
@@ -154,6 +172,12 @@
         <language>Gnome</language>
         <language>Sylvan</language>
         <language>Gnoll</language>
+        <language>Orc</language>
+        <language>Halfling</language>
+        <language>Aquan</language>
+        <language>Auran</language>
+        <language>Ignan</language>
+        <language>Terran</language>
     </object>
     <object>
         <key>Half-Orc</key>
@@ -186,6 +210,12 @@
         <language>Gnome</language>
         <language>Sylvan</language>
         <language>Gnoll</language>
+        <language>Orc</language>
+        <language>Halfling</language>
+        <language>Aquan</language>
+        <language>Auran</language>
+        <language>Ignan</language>
+        <language>Terran</language>
     </object>
     <object>
         <key>Kobold</key>
@@ -223,6 +253,12 @@
         <language>Gnome</language>
         <language>Sylvan</language>
         <language>Gnoll</language>
+        <language>Orc</language>
+        <language>Halfling</language>
+        <language>Aquan</language>
+        <language>Auran</language>
+        <language>Ignan</language>
+        <language>Terran</language>
     </object>
     <object>
         <key>Minotaur</key>
@@ -242,6 +278,7 @@
         <language>Infernal</language>
         <language>Goblin</language>
         <language>Orc</language>
+        <language>Dwarven</language>
     </object>
     <object>
         <key>Rock Gnome</key>
@@ -250,6 +287,7 @@
         <language>Draconic</language>
         <language>Goblin</language>
         <language>Giant</language>
+        <language>Orc</language>
     </object>
     <object>
         <key>Svirfneblin</key>
@@ -258,6 +296,7 @@
         <language>Terran</language>
         <language>Goblin</language>
         <language>Giant</language>
+        <language>Orc</language>
     </object>
     <object>
         <key>Tiefling</key>
@@ -266,6 +305,8 @@
         <language>Elven</language>
         <language>Gnome</language>
         <language>Goblin</language>
+        <language>Halfling</language>
+        <language>Orc</language>
     </object>
     <object>
         <key>Troglodyte</key>
