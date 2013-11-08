@@ -52,18 +52,6 @@ namespace NPCGen.Core.Generation.Factories
             character.Languages = LanguageFactory.CreateUsing(character.Race, character.Class.ClassName, dice, 
                 character.Stats[StatConstants.Intelligence].Bonus);
 
-            //******************
-
-            //Application.DoEvents();
-            //progress.Text += "\nDetermining Languages...";
-            //Languages = SetLanguages();
-            //progress.Text += Languages;
-
-            //Application.DoEvents();
-            //progress.Text += "\nDetermining THAC0...";
-            //SetTHACO();
-            //progress.Text += THACO[0].ToString() + ", " + THACO[1].ToString();
-
             //Application.DoEvents();
             //progress.Text += "\nDetermining gear...";
             ////Variables for determining magical abilities of NPC's items
