@@ -1,8 +1,8 @@
-﻿using D20Dice;
-using Moq;
+﻿using Moq;
 using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Generation.Factories;
+using NPCGen.Core.Generation.Factories.Interfaces;
 using NPCGen.Core.Generation.Randomizers.CharacterClasses.Interfaces;
 using NUnit.Framework;
 
@@ -11,20 +11,20 @@ namespace NPCGen.Tests.Generation.Factories
     [TestFixture]
     public class CharacterClassFactoryTests
     {
-        private Mock<IDice> mockDice;
         private Mock<ILevelRandomizer> mockLevelRandomizer;
         private Mock<IClassNameRandomizer> mockClassNameRandomizer;
+        private ICharacterClassFactory characterClassFactory;
 
         private Alignment alignment;
 
         [SetUp]
         public void Setup()
         {
-            mockDice = new Mock<IDice>();
-            mockLevelRandomizer = new Mock<ILevelRandomizer>();
-            mockClassNameRandomizer = new Mock<IClassNameRandomizer>();
+            characterClassFactory = new CharacterClassFactory();
 
             alignment = new Alignment();
+            mockLevelRandomizer = new Mock<ILevelRandomizer>();
+            mockClassNameRandomizer = new Mock<IClassNameRandomizer>();
         }
 
         [Test]
@@ -32,7 +32,7 @@ namespace NPCGen.Tests.Generation.Factories
         {
             mockLevelRandomizer.Setup(r => r.Randomize()).Returns(9266);
 
-            var characterClass = CharacterClassFactory.CreatePrototypeUsing(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
+            var characterClass = characterClassFactory.CreatePrototypeWith(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
             Assert.That(characterClass.Level, Is.EqualTo(9266));
         }
 
@@ -41,7 +41,7 @@ namespace NPCGen.Tests.Generation.Factories
         {
             mockClassNameRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Barbarian);
 
-            var characterClass = CharacterClassFactory.CreatePrototypeUsing(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
+            var characterClass = characterClassFactory.CreatePrototypeWith(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
             Assert.That(characterClass.ClassName, Is.EqualTo(CharacterClassConstants.Barbarian));
         }
 
@@ -52,7 +52,7 @@ namespace NPCGen.Tests.Generation.Factories
             prototype.ClassName = CharacterClassConstants.Fighter;
             prototype.Level = 20;
 
-            var characterClass = CharacterClassFactory.CreateUsing(prototype);
+            var characterClass = characterClassFactory.CreateWith(prototype);
             Assert.That(characterClass.BaseAttack.BaseAttackBonus, Is.EqualTo(20));
         }
 
@@ -63,7 +63,7 @@ namespace NPCGen.Tests.Generation.Factories
             prototype.ClassName = CharacterClassConstants.Paladin;
             prototype.Level = 20;
 
-            var characterClass = CharacterClassFactory.CreateUsing(prototype);
+            var characterClass = characterClassFactory.CreateWith(prototype);
             Assert.That(characterClass.BaseAttack.BaseAttackBonus, Is.EqualTo(20));
         }
 
@@ -74,7 +74,7 @@ namespace NPCGen.Tests.Generation.Factories
             prototype.ClassName = CharacterClassConstants.Ranger;
             prototype.Level = 20;
 
-            var characterClass = CharacterClassFactory.CreateUsing(prototype);
+            var characterClass = characterClassFactory.CreateWith(prototype);
             Assert.That(characterClass.BaseAttack.BaseAttackBonus, Is.EqualTo(20));
         }
 
@@ -85,7 +85,7 @@ namespace NPCGen.Tests.Generation.Factories
             prototype.ClassName = CharacterClassConstants.Barbarian;
             prototype.Level = 20;
 
-            var characterClass = CharacterClassFactory.CreateUsing(prototype);
+            var characterClass = characterClassFactory.CreateWith(prototype);
             Assert.That(characterClass.BaseAttack.BaseAttackBonus, Is.EqualTo(20));
         }
 
@@ -96,7 +96,7 @@ namespace NPCGen.Tests.Generation.Factories
             prototype.ClassName = CharacterClassConstants.Bard;
             prototype.Level = 20;
 
-            var characterClass = CharacterClassFactory.CreateUsing(prototype);
+            var characterClass = characterClassFactory.CreateWith(prototype);
             Assert.That(characterClass.BaseAttack.BaseAttackBonus, Is.EqualTo(15));
         }
 
@@ -107,7 +107,7 @@ namespace NPCGen.Tests.Generation.Factories
             prototype.ClassName = CharacterClassConstants.Cleric;
             prototype.Level = 20;
 
-            var characterClass = CharacterClassFactory.CreateUsing(prototype);
+            var characterClass = characterClassFactory.CreateWith(prototype);
             Assert.That(characterClass.BaseAttack.BaseAttackBonus, Is.EqualTo(15));
         }
 
@@ -118,7 +118,7 @@ namespace NPCGen.Tests.Generation.Factories
             prototype.ClassName = CharacterClassConstants.Monk;
             prototype.Level = 20;
 
-            var characterClass = CharacterClassFactory.CreateUsing(prototype);
+            var characterClass = characterClassFactory.CreateWith(prototype);
             Assert.That(characterClass.BaseAttack.BaseAttackBonus, Is.EqualTo(15));
         }
 
@@ -129,7 +129,7 @@ namespace NPCGen.Tests.Generation.Factories
             prototype.ClassName = CharacterClassConstants.Rogue;
             prototype.Level = 20;
 
-            var characterClass = CharacterClassFactory.CreateUsing(prototype);
+            var characterClass = characterClassFactory.CreateWith(prototype);
             Assert.That(characterClass.BaseAttack.BaseAttackBonus, Is.EqualTo(15));
         }
 
@@ -140,7 +140,7 @@ namespace NPCGen.Tests.Generation.Factories
             prototype.ClassName = CharacterClassConstants.Druid;
             prototype.Level = 20;
 
-            var characterClass = CharacterClassFactory.CreateUsing(prototype);
+            var characterClass = characterClassFactory.CreateWith(prototype);
             Assert.That(characterClass.BaseAttack.BaseAttackBonus, Is.EqualTo(15));
         }
 
@@ -151,7 +151,7 @@ namespace NPCGen.Tests.Generation.Factories
             prototype.ClassName = CharacterClassConstants.Sorcerer;
             prototype.Level = 20;
 
-            var characterClass = CharacterClassFactory.CreateUsing(prototype);
+            var characterClass = characterClassFactory.CreateWith(prototype);
             Assert.That(characterClass.BaseAttack.BaseAttackBonus, Is.EqualTo(10));
         }
 
@@ -162,7 +162,7 @@ namespace NPCGen.Tests.Generation.Factories
             prototype.ClassName = CharacterClassConstants.Wizard;
             prototype.Level = 20;
 
-            var characterClass = CharacterClassFactory.CreateUsing(prototype);
+            var characterClass = characterClassFactory.CreateWith(prototype);
             Assert.That(characterClass.BaseAttack.BaseAttackBonus, Is.EqualTo(10));
         }
 
@@ -175,7 +175,7 @@ namespace NPCGen.Tests.Generation.Factories
                 prototype.ClassName = CharacterClassConstants.Fighter;
                 prototype.Level = level;
 
-                var characterClass = CharacterClassFactory.CreateUsing(prototype);
+                var characterClass = characterClassFactory.CreateWith(prototype);
                 Assert.That(characterClass.BaseAttack.BaseAttackBonus, Is.EqualTo(level));
             }
         }
@@ -189,7 +189,7 @@ namespace NPCGen.Tests.Generation.Factories
                 prototype.ClassName = CharacterClassConstants.Cleric;
                 prototype.Level = level;
 
-                var characterClass = CharacterClassFactory.CreateUsing(prototype);
+                var characterClass = characterClassFactory.CreateWith(prototype);
                 Assert.That(characterClass.BaseAttack.BaseAttackBonus, Is.EqualTo(level * 3 / 4));
             }
         }
@@ -203,7 +203,7 @@ namespace NPCGen.Tests.Generation.Factories
                 prototype.ClassName = CharacterClassConstants.Wizard;
                 prototype.Level = level;
 
-                var characterClass = CharacterClassFactory.CreateUsing(prototype);
+                var characterClass = characterClassFactory.CreateWith(prototype);
                 Assert.That(characterClass.BaseAttack.BaseAttackBonus, Is.EqualTo(level / 2));
             }
         }

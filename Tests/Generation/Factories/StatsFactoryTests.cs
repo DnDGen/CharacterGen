@@ -6,6 +6,7 @@ using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Data.Races;
 using NPCGen.Core.Data.Stats;
 using NPCGen.Core.Generation.Factories;
+using NPCGen.Core.Generation.Factories.Interfaces;
 using NPCGen.Core.Generation.Randomizers.Stats.Interfaces;
 using NUnit.Framework;
 
@@ -16,6 +17,8 @@ namespace NPCGen.Tests.Generation.Factories
     {
         private Mock<IStatsRandomizer> mockStatRandomizer;
         private Mock<IDice> mockDice;
+        private IStatsFactory statsFactory;
+
         private Dictionary<String, Stat> expectedStats;
         private Race race;
         private CharacterClass characterClass;
@@ -30,7 +33,9 @@ namespace NPCGen.Tests.Generation.Factories
 
             mockStatRandomizer = new Mock<IStatsRandomizer>();
             mockStatRandomizer.Setup(r => r.Randomize()).Returns(expectedStats);
+
             mockDice = new Mock<IDice>();
+            statsFactory = new StatsFactory(mockDice.Object);
 
             race = new Race();
             race.BaseRace = RaceConstants.BaseRaces.Human;
@@ -43,14 +48,14 @@ namespace NPCGen.Tests.Generation.Factories
         [Test]
         public void RandomizesStatValues()
         {
-            StatsFactory.CreateUsing(mockStatRandomizer.Object, characterClass, race, mockDice.Object);
+            statsFactory.CreateWith(mockStatRandomizer.Object, characterClass, race);
             mockStatRandomizer.Verify(r => r.Randomize(), Times.Once);
         }
 
         [Test]
         public void StatsContainAllStats()
         {
-            var stats = StatsFactory.CreateUsing(mockStatRandomizer.Object, characterClass, race, mockDice.Object);
+            var stats = statsFactory.CreateWith(mockStatRandomizer.Object, characterClass, race);
             foreach (var stat in StatConstants.GetStats())
                 Assert.That(stats.ContainsKey(stat), Is.True);
 
@@ -64,7 +69,7 @@ namespace NPCGen.Tests.Generation.Factories
             expectedStats[StatConstants.Charisma].Value = 18;
             expectedStats[StatConstants.Intelligence].Value = 16;
 
-            var stats = StatsFactory.CreateUsing(mockStatRandomizer.Object, characterClass, race, mockDice.Object);
+            var stats = statsFactory.CreateWith(mockStatRandomizer.Object, characterClass, race);
             Assert.That(stats[StatConstants.Strength].Value, Is.EqualTo(18));
             Assert.That(stats[StatConstants.Dexterity].Value, Is.EqualTo(16));
             Assert.That(stats[StatConstants.Constitution].Value, Is.EqualTo(baseStat));
@@ -78,7 +83,7 @@ namespace NPCGen.Tests.Generation.Factories
         {
             race.BaseRace = RaceConstants.BaseRaces.Aasimar;
 
-            var stats = StatsFactory.CreateUsing(mockStatRandomizer.Object, characterClass, race, mockDice.Object);
+            var stats = statsFactory.CreateWith(mockStatRandomizer.Object, characterClass, race);
             Assert.That(stats[StatConstants.Strength].Value, Is.EqualTo(baseStat), StatConstants.Strength);
             Assert.That(stats[StatConstants.Dexterity].Value, Is.EqualTo(baseStat), StatConstants.Dexterity);
             Assert.That(stats[StatConstants.Constitution].Value, Is.EqualTo(baseStat), StatConstants.Constitution);
@@ -92,7 +97,7 @@ namespace NPCGen.Tests.Generation.Factories
         {
             race.Metarace = RaceConstants.Metaraces.HalfCelestial;
 
-            var stats = StatsFactory.CreateUsing(mockStatRandomizer.Object, characterClass, race, mockDice.Object);
+            var stats = statsFactory.CreateWith(mockStatRandomizer.Object, characterClass, race);
             Assert.That(stats[StatConstants.Strength].Value, Is.EqualTo(baseStat + 4), StatConstants.Strength);
             Assert.That(stats[StatConstants.Dexterity].Value, Is.EqualTo(baseStat + 2), StatConstants.Dexterity);
             Assert.That(stats[StatConstants.Constitution].Value, Is.EqualTo(baseStat + 4), StatConstants.Constitution);
@@ -107,7 +112,7 @@ namespace NPCGen.Tests.Generation.Factories
             race.BaseRace = RaceConstants.BaseRaces.Aasimar;
             race.Metarace = RaceConstants.Metaraces.HalfCelestial;
 
-            var stats = StatsFactory.CreateUsing(mockStatRandomizer.Object, characterClass, race, mockDice.Object);
+            var stats = statsFactory.CreateWith(mockStatRandomizer.Object, characterClass, race);
             Assert.That(stats[StatConstants.Strength].Value, Is.EqualTo(baseStat + 4), StatConstants.Strength);
             Assert.That(stats[StatConstants.Dexterity].Value, Is.EqualTo(baseStat + 2), StatConstants.Dexterity);
             Assert.That(stats[StatConstants.Constitution].Value, Is.EqualTo(baseStat + 4), StatConstants.Constitution);
@@ -122,7 +127,7 @@ namespace NPCGen.Tests.Generation.Factories
             characterClass.Level = 4;
             mockDice.Setup(d => d.d2(1)).Returns(1);
 
-            var stats = StatsFactory.CreateUsing(mockStatRandomizer.Object, characterClass, race, mockDice.Object);
+            var stats = statsFactory.CreateWith(mockStatRandomizer.Object, characterClass, race);
             Assert.That(stats[StatConstants.Strength].Value, Is.EqualTo(baseStat + 1), StatConstants.Strength);
             Assert.That(stats[StatConstants.Constitution].Value, Is.EqualTo(baseStat), StatConstants.Constitution);
         }
@@ -133,7 +138,7 @@ namespace NPCGen.Tests.Generation.Factories
             characterClass.Level = 4;
             mockDice.Setup(d => d.d2(1)).Returns(2);
 
-            var stats = StatsFactory.CreateUsing(mockStatRandomizer.Object, characterClass, race, mockDice.Object);
+            var stats = statsFactory.CreateWith(mockStatRandomizer.Object, characterClass, race);
             Assert.That(stats[StatConstants.Strength].Value, Is.EqualTo(baseStat), StatConstants.Strength);
             Assert.That(stats[StatConstants.Constitution].Value, Is.EqualTo(baseStat + 1), StatConstants.Constitution);
         }
@@ -149,7 +154,7 @@ namespace NPCGen.Tests.Generation.Factories
 
                 characterClass.Level = level;
 
-                var stats = StatsFactory.CreateUsing(mockStatRandomizer.Object, characterClass, race, mockDice.Object);
+                var stats = statsFactory.CreateWith(mockStatRandomizer.Object, characterClass, race);
                 Assert.That(stats[StatConstants.Strength].Value, Is.EqualTo(baseStat), level.ToString());
             }
         }
@@ -165,7 +170,7 @@ namespace NPCGen.Tests.Generation.Factories
 
                 characterClass.Level = level;
 
-                var stats = StatsFactory.CreateUsing(mockStatRandomizer.Object, characterClass, race, mockDice.Object);
+                var stats = statsFactory.CreateWith(mockStatRandomizer.Object, characterClass, race);
                 Assert.That(stats[StatConstants.Strength].Value, Is.EqualTo(baseStat + 1), level.ToString());
             }
         }
@@ -181,7 +186,7 @@ namespace NPCGen.Tests.Generation.Factories
 
                 characterClass.Level = level;
 
-                var stats = StatsFactory.CreateUsing(mockStatRandomizer.Object, characterClass, race, mockDice.Object);
+                var stats = statsFactory.CreateWith(mockStatRandomizer.Object, characterClass, race);
                 Assert.That(stats[StatConstants.Strength].Value, Is.EqualTo(baseStat + 2), level.ToString());
             }
         }
@@ -197,7 +202,7 @@ namespace NPCGen.Tests.Generation.Factories
 
                 characterClass.Level = level;
 
-                var stats = StatsFactory.CreateUsing(mockStatRandomizer.Object, characterClass, race, mockDice.Object);
+                var stats = statsFactory.CreateWith(mockStatRandomizer.Object, characterClass, race);
                 Assert.That(stats[StatConstants.Strength].Value, Is.EqualTo(baseStat + 3), level.ToString());
             }
         }
@@ -213,7 +218,7 @@ namespace NPCGen.Tests.Generation.Factories
 
                 characterClass.Level = level;
 
-                var stats = StatsFactory.CreateUsing(mockStatRandomizer.Object, characterClass, race, mockDice.Object);
+                var stats = statsFactory.CreateWith(mockStatRandomizer.Object, characterClass, race);
                 Assert.That(stats[StatConstants.Strength].Value, Is.EqualTo(baseStat + 4), level.ToString());
             }
         }
@@ -224,7 +229,7 @@ namespace NPCGen.Tests.Generation.Factories
             mockDice.Setup(d => d.d2(1)).Returns(1);
             characterClass.Level = 20;
 
-            var stats = StatsFactory.CreateUsing(mockStatRandomizer.Object, characterClass, race, mockDice.Object);
+            var stats = statsFactory.CreateWith(mockStatRandomizer.Object, characterClass, race);
             Assert.That(stats[StatConstants.Strength].Value, Is.EqualTo(baseStat + 5));
         }
     }

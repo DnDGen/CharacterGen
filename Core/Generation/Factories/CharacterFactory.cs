@@ -8,11 +8,11 @@ using NPCGen.Core.Data.Races;
 using NPCGen.Core.Data.Stats;
 using NPCGen.Core.Generation.Factories.Interfaces;
 using NPCGen.Core.Generation.Providers;
+using NPCGen.Core.Generation.Providers.Interfaces;
 using NPCGen.Core.Generation.Randomizers.Alignments.Interfaces;
 using NPCGen.Core.Generation.Randomizers.CharacterClasses.Interfaces;
 using NPCGen.Core.Generation.Randomizers.Races.Interfaces;
 using NPCGen.Core.Generation.Randomizers.Stats.Interfaces;
-using NPCGen.Core.Generation.Verifiers;
 using NPCGen.Core.Generation.Verifiers.Exceptions;
 using NPCGen.Core.Generation.Verifiers.Interfaces;
 
@@ -21,11 +21,25 @@ namespace NPCGen.Core.Generation.Factories
     public class CharacterFactory : ICharacterFactory
     {
         private ILanguageFactory languageFactory;
+        private IAlignmentFactory alignmentFactory;
+        private ICharacterClassFactory characterClassFactory;
+        private IStatsFactory statsFactory;
+
+        private ILevelAdjustmentsProvider levelAdjustmentsProvider;
+        private IRandomizerVerifier randomizerVerifier;
+
         private IDice dice;
 
-        public CharacterFactory(ILanguageFactory languageFactory, IDice dice)
+        public CharacterFactory(ILanguageFactory languageFactory, IAlignmentFactory alignmentFactory, ICharacterClassFactory characterClassFactory, 
+            IStatsFactory statsFactory, ILevelAdjustmentsProvider levelAdjustmentsProvider, IRandomizerVerifier randomizerVerifier, IDice dice)
         {
             this.languageFactory = languageFactory;
+            this.alignmentFactory = alignmentFactory;
+            this.characterClassFactory = characterClassFactory;
+            this.statsFactory = statsFactory;
+
+            this.levelAdjustmentsProvider = levelAdjustmentsProvider;
+            this.randomizerVerifier = randomizerVerifier;
             this.dice = dice;
         }
 
@@ -33,26 +47,24 @@ namespace NPCGen.Core.Generation.Factories
             ILevelRandomizer levelRandomizer, IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer,
             IStatsRandomizer statsRandomizer)
         {
-            var levelAdjustmentsProvider = ProviderFactory.CreateLevelAdjustmentProvider();
-            var randomizerVerifier = new RandomizerVerifier(alignmentRandomizer, classNameRandomizer, levelRandomizer, baseRaceRandomizer,
-                metaraceRandomizer, levelAdjustmentsProvider);
-
-            VerifyRandomizers(randomizerVerifier);
+            VerifyRandomizers(alignmentRandomizer, classNameRandomizer, levelRandomizer, baseRaceRandomizer, metaraceRandomizer);
 
             var character = new Character();
 
-            character.Alignment = GenerateAlignment(randomizerVerifier, alignmentRandomizer);
-            var prototype = GenerateCharacterClassPrototype(randomizerVerifier, classNameRandomizer, levelRandomizer, character.Alignment);
+            character.Alignment = GenerateAlignment(alignmentRandomizer, classNameRandomizer, levelRandomizer, baseRaceRandomizer, 
+                metaraceRandomizer);
+            var characterClassPrototype = GenerateCharacterClassPrototype(classNameRandomizer, levelRandomizer, character.Alignment,
+                baseRaceRandomizer, metaraceRandomizer);
 
             var levelAdjustments = levelAdjustmentsProvider.GetLevelAdjustments();
-            character.Race = GenerateRace(baseRaceRandomizer, metaraceRandomizer, levelAdjustments, character.Alignment, prototype, dice);
+            character.Race = GenerateRace(baseRaceRandomizer, metaraceRandomizer, levelAdjustments, character.Alignment, characterClassPrototype, dice);
 
-            prototype.Level -= levelAdjustments[character.Race.BaseRace];
-            prototype.Level -= levelAdjustments[character.Race.Metarace];
+            characterClassPrototype.Level -= levelAdjustments[character.Race.BaseRace];
+            characterClassPrototype.Level -= levelAdjustments[character.Race.Metarace];
 
-            character.Class = CharacterClassFactory.CreateUsing(prototype);
+            character.Class = characterClassFactory.CreateWith(characterClassPrototype);
 
-            character.Stats = StatsFactory.CreateUsing(statsRandomizer, character.Class, character.Race, dice);
+            character.Stats = statsFactory.CreateWith(statsRandomizer, character.Class, character.Race);
             character.HitPoints = HitPointsFactory.CreateUsing(dice, character.Class, character.Stats[StatConstants.Constitution].Bonus,
                 character.Race);
 
@@ -189,36 +201,40 @@ namespace NPCGen.Core.Generation.Factories
             return character;
         }
 
-        private static void VerifyRandomizers(IRandomizerVerifier randomizerVerifier)
+        private void VerifyRandomizers(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classNameRandomizer,
+            ILevelRandomizer levelRandomizer, IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer)
         {
-            var verified = randomizerVerifier.VerifyCompatibility();
+            var verified = randomizerVerifier.VerifyCompatibility(alignmentRandomizer, classNameRandomizer, levelRandomizer, 
+                baseRaceRandomizer, metaraceRandomizer);
 
             if (!verified)
                 throw new IncompatibleRandomizersException();
         }
 
-        private static Alignment GenerateAlignment(IRandomizerVerifier randomizerVerifier, IAlignmentRandomizer alignmentRandomizer)
+        private Alignment GenerateAlignment(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classNameRandomizer,
+            ILevelRandomizer levelRandomizer, IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer)
         {
             Alignment alignment;
 
-            do alignment = AlignmentFactory.CreateUsing(alignmentRandomizer);
-            while (!randomizerVerifier.VerifyAlignmentCompatibility(alignment));
+            do alignment = alignmentFactory.CreateWith(alignmentRandomizer);
+            while (!randomizerVerifier.VerifyAlignmentCompatibility(alignment, classNameRandomizer, levelRandomizer, baseRaceRandomizer, 
+                metaraceRandomizer));
 
             return alignment;
         }
 
-        private static CharacterClassPrototype GenerateCharacterClassPrototype(IRandomizerVerifier randomizerVerifier, IClassNameRandomizer classNameRandomizer,
-            ILevelRandomizer levelRandomizer, Alignment alignment)
+        private CharacterClassPrototype GenerateCharacterClassPrototype(IClassNameRandomizer classNameRandomizer, ILevelRandomizer levelRandomizer,
+            Alignment alignment, IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer)
         {
             CharacterClassPrototype prototype;
 
-            do prototype = CharacterClassFactory.CreatePrototypeUsing(alignment, levelRandomizer, classNameRandomizer);
-            while (!randomizerVerifier.VerifyCharacterClassCompatibility(alignment.Goodness, prototype));
+            do prototype = characterClassFactory.CreatePrototypeWith(alignment, levelRandomizer, classNameRandomizer);
+            while (!randomizerVerifier.VerifyCharacterClassCompatibility(alignment.Goodness, prototype, baseRaceRandomizer, metaraceRandomizer));
 
             return prototype;
         }
 
-        private static Race GenerateRace(IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer,
+        private Race GenerateRace(IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer,
             Dictionary<String, Int32> levelAdjustments, Alignment alignment, CharacterClassPrototype prototype, IDice dice)
         {
             Race race;

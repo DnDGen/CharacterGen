@@ -13,38 +13,30 @@ namespace NPCGen.Core.Generation.Verifiers
 {
     public class RandomizerVerifier : IRandomizerVerifier
     {
-        private IAlignmentRandomizer alignmentRandomizer;
-        private IClassNameRandomizer classNameRandomizer;
-        private IBaseRaceRandomizer baseRaceRandomizer;
-        private IMetaraceRandomizer metaraceRandomizer;
-        private ILevelRandomizer levelRandomizer;
         private ILevelAdjustmentsProvider levelAdjustmentsProvider;
 
-        public RandomizerVerifier(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classNameRandomizer,
-            ILevelRandomizer levelRandomizer, IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer,
-            ILevelAdjustmentsProvider levelAdjustmentsProvider)
+        public RandomizerVerifier(ILevelAdjustmentsProvider levelAdjustmentsProvider)
         {
-            this.alignmentRandomizer = alignmentRandomizer;
-            this.classNameRandomizer = classNameRandomizer;
-            this.levelRandomizer = levelRandomizer;
-            this.baseRaceRandomizer = baseRaceRandomizer;
-            this.metaraceRandomizer = metaraceRandomizer;
             this.levelAdjustmentsProvider = levelAdjustmentsProvider;
         }
 
-        public Boolean VerifyCompatibility()
+        public Boolean VerifyCompatibility(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classNameRandomizer,
+            ILevelRandomizer levelRandomizer, IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer)
         {
             var alignments = alignmentRandomizer.GetAllPossibleResults();
-            return alignments.Any() && alignments.Any(a => VerifyAlignmentCompatibility(a));
+            return alignments.Any() && alignments.Any(a => VerifyAlignmentCompatibility(a, classNameRandomizer, levelRandomizer,
+                baseRaceRandomizer, metaraceRandomizer));
         }
 
-        public Boolean VerifyAlignmentCompatibility(Alignment alignment)
+        public Boolean VerifyAlignmentCompatibility(Alignment alignment, IClassNameRandomizer classNameRandomizer,
+            ILevelRandomizer levelRandomizer, IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer)
         {
             var classNames = classNameRandomizer.GetAllPossibleResults(alignment);
             var levels = levelRandomizer.GetAllPossibleResults();
 
             var characterClasses = GetAllCharacterClassPrototypes(classNames, levels);
-            return characterClasses.Any() && characterClasses.Any(c => VerifyCharacterClassCompatibility(alignment.Goodness, c));
+            return characterClasses.Any() && characterClasses.Any(c => VerifyCharacterClassCompatibility(alignment.Goodness, c,
+                baseRaceRandomizer, metaraceRandomizer));
         }
 
         private IEnumerable<CharacterClassPrototype> GetAllCharacterClassPrototypes(IEnumerable<String> classNames, IEnumerable<Int32> levels)
@@ -58,7 +50,8 @@ namespace NPCGen.Core.Generation.Verifiers
             return characterClasses;
         }
 
-        public Boolean VerifyCharacterClassCompatibility(String goodness, CharacterClassPrototype prototype)
+        public Boolean VerifyCharacterClassCompatibility(String goodness, CharacterClassPrototype prototype, 
+            IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer)
         {
             var baseRaces = baseRaceRandomizer.GetAllPossibleResults(goodness, prototype);
             var metaraces = metaraceRandomizer.GetAllPossibleResults(goodness, prototype);

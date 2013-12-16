@@ -1,13 +1,14 @@
 ﻿using System;
 using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Data.CharacterClasses;
+using NPCGen.Core.Generation.Factories.Interfaces;
 using NPCGen.Core.Generation.Randomizers.CharacterClasses.Interfaces;
 
 namespace NPCGen.Core.Generation.Factories
 {
-    public static class CharacterClassFactory
+    public class CharacterClassFactory : ICharacterClassFactory
     {
-        public static CharacterClassPrototype CreatePrototypeUsing(Alignment alignment, ILevelRandomizer levelRandomizer, 
+        public CharacterClassPrototype CreatePrototypeWith(Alignment alignment, ILevelRandomizer levelRandomizer, 
             IClassNameRandomizer classNameRandomizer)
         {
             var prototype = new CharacterClassPrototype();
@@ -18,7 +19,7 @@ namespace NPCGen.Core.Generation.Factories
             return prototype;
         }
 
-        public static CharacterClass CreateUsing(CharacterClassPrototype prototype)
+        public CharacterClass CreateWith(CharacterClassPrototype prototype)
         {
             var characterClass = new CharacterClass();
 
@@ -29,14 +30,14 @@ namespace NPCGen.Core.Generation.Factories
             return characterClass;
         }
 
-        private static BaseAttack GetBaseAttack(CharacterClassPrototype prototype)
+        private BaseAttack GetBaseAttack(CharacterClassPrototype prototype)
         {
             var baseAttack = new BaseAttack();
             baseAttack.BaseAttackBonus = GetBaseAttackBonus(prototype);
             return baseAttack;
         }
 
-        private static Int32 GetBaseAttackBonus(CharacterClassPrototype prototype)
+        private Int32 GetBaseAttackBonus(CharacterClassPrototype prototype)
         {
             switch (prototype.ClassName)
             {
@@ -55,17 +56,17 @@ namespace NPCGen.Core.Generation.Factories
             }
         }
 
-        private static Int32 GetGoodBaseAttackBonus(Int32 level)
+        private Int32 GetGoodBaseAttackBonus(Int32 level)
         {
             return level;
         }
 
-        private static Int32 GetAverageBaseAttackBonus(Int32 level)
+        private Int32 GetAverageBaseAttackBonus(Int32 level)
         {
             return level * 3 / 4;
         }
 
-        private static Int32 GetPoorBaseAttackBonus(Int32 level)
+        private Int32 GetPoorBaseAttackBonus(Int32 level)
         {
             return level / 2;
         }

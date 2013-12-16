@@ -43,6 +43,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Moq.4.2.1312.1615\lib\net40\Moq.dll</HintPath>
     </Reference>
+    <Reference Include="Ninject">
+      <HintPath>..\packages\Ninject.3.0.1.10\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework, Version=2.6.3.13283, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
@@ -73,6 +76,7 @@
     <Compile Include="Data\Stats\StatTests.cs" />
     <Compile Include="Generation\Factories\AlignmentFactoryTests.cs" />
     <Compile Include="Generation\Factories\CharacterClassFactoryTests.cs" />
+    <Compile Include="Generation\Factories\CharacterFactoryIntegrationTests.cs" />
     <Compile Include="Generation\Factories\CharacterFactoryTests.cs" />
     <Compile Include="Generation\Factories\HitPointsFactoryTests.cs" />
     <Compile Include="Generation\Factories\LanguageFactoryTests.cs" />

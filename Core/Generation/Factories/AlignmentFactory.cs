@@ -1,11 +1,12 @@
 ﻿using NPCGen.Core.Data.Alignments;
+using NPCGen.Core.Generation.Factories.Interfaces;
 using NPCGen.Core.Generation.Randomizers.Alignments.Interfaces;
 
 namespace NPCGen.Core.Generation.Factories
 {
-    public static class AlignmentFactory
+    public class AlignmentFactory : IAlignmentFactory
     {
-        public static Alignment CreateUsing(IAlignmentRandomizer alignmentRandomizer)
+        public Alignment CreateWith(IAlignmentRandomizer alignmentRandomizer)
         {
             return alignmentRandomizer.Randomize();
         }

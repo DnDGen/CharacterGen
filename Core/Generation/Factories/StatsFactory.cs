@@ -5,15 +5,23 @@ using D20Dice;
 using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Data.Races;
 using NPCGen.Core.Data.Stats;
+using NPCGen.Core.Generation.Factories.Interfaces;
 using NPCGen.Core.Generation.Providers;
 using NPCGen.Core.Generation.Randomizers.Stats.Interfaces;
 using NPCGen.Core.Generation.Xml.Parsers.Objects;
 
 namespace NPCGen.Core.Generation.Factories
 {
-    public static class StatsFactory
+    public class StatsFactory : IStatsFactory
     {
-        public static Dictionary<String, Stat> CreateUsing(IStatsRandomizer statsRandomizer, CharacterClass characterClass, Race race, IDice dice)
+        private IDice dice;
+
+        public StatsFactory(IDice dice)
+        {
+            this.dice = dice;
+        }
+
+        public Dictionary<String, Stat> CreateWith(IStatsRandomizer statsRandomizer, CharacterClass characterClass, Race race)
         {
             var stats = statsRandomizer.Randomize();
 
@@ -25,12 +33,12 @@ namespace NPCGen.Core.Generation.Factories
             foreach (var stat in StatConstants.GetStats())
                 prioritizedStats[stat].Value += statAdjustments[stat];
 
-            var increasedStats = IncreaseStats(prioritizedStats, statPriorities, characterClass.Level, dice);
+            var increasedStats = IncreaseStats(prioritizedStats, statPriorities, characterClass.Level);
 
             return prioritizedStats;
         }
 
-        private static Dictionary<String, Stat> IncreaseStats(Dictionary<String, Stat> stats, StatPriorityObject priorities, Int32 level, IDice dice)
+        private Dictionary<String, Stat> IncreaseStats(Dictionary<String, Stat> stats, StatPriorityObject priorities, Int32 level)
         {
             var increasedStats = new Dictionary<String, Stat>(stats);
 
@@ -48,7 +56,7 @@ namespace NPCGen.Core.Generation.Factories
             return increasedStats;
         }
 
-        private static Dictionary<String, Stat> PrioritizeStats(Dictionary<String, Stat> stats, StatPriorityObject priorities)
+        private Dictionary<String, Stat> PrioritizeStats(Dictionary<String, Stat> stats, StatPriorityObject priorities)
         {
             var prioritizedStats = new Dictionary<String, Stat>(stats);
 
@@ -68,13 +76,13 @@ namespace NPCGen.Core.Generation.Factories
             return prioritizedStats;
         }
 
-        private static StatPriorityObject GetStatPriorities(String className)
+        private StatPriorityObject GetStatPriorities(String className)
         {
             var statPriorityProvider = ProviderFactory.CreateStatPriorityProvider();
             return statPriorityProvider.GetStatPriorities(className);
         }
 
-        private static Dictionary<String, Int32> GetStatAdjustments(Race race)
+        private Dictionary<String, Int32> GetStatAdjustments(Race race)
         {
             var statAdjustmentsProvider = ProviderFactory.CreateStatAdjustmentsProvider();
             return statAdjustmentsProvider.GetAdjustments(race);

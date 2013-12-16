@@ -64,8 +64,11 @@
     <Compile Include="Generation\Factories\CharacterClassFactory.cs" />
     <Compile Include="Generation\Factories\CharacterFactory.cs" />
     <Compile Include="Generation\Factories\HitPointsFactory.cs" />
+    <Compile Include="Generation\Factories\Interfaces\IAlignmentFactory.cs" />
+    <Compile Include="Generation\Factories\Interfaces\ICharacterClassFactory.cs" />
     <Compile Include="Generation\Factories\Interfaces\ICharacterFactory.cs" />
     <Compile Include="Generation\Factories\Interfaces\ILanguageFactory.cs" />
+    <Compile Include="Generation\Factories\Interfaces\IStatsFactory.cs" />
     <Compile Include="Generation\Factories\LanguageFactory.cs" />
     <Compile Include="Generation\Factories\RaceFactory.cs" />
     <Compile Include="Generation\Factories\StatsFactory.cs" />
