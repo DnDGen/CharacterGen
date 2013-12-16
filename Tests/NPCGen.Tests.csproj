@@ -246,6 +246,10 @@
       <Project>{83f2b67c-3eb0-4e46-aad5-bafaa2e35689}</Project>
       <Name>NPCGen.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NPCGen.Bootstrap\NPCGen.Bootstrap.csproj">
+      <Project>{18c602e6-823c-4cec-85d3-5edddca545db}</Project>
+      <Name>NPCGen.Bootstrap</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Choose>
