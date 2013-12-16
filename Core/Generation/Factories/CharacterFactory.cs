@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using D20Dice.Dice;
+using D20Dice;
 using NPCGen.Core.Data;
 using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Data.Races;
 using NPCGen.Core.Data.Stats;
+using NPCGen.Core.Generation.Factories.Interfaces;
 using NPCGen.Core.Generation.Providers;
 using NPCGen.Core.Generation.Randomizers.Alignments.Interfaces;
 using NPCGen.Core.Generation.Randomizers.CharacterClasses.Interfaces;
@@ -17,11 +18,20 @@ using NPCGen.Core.Generation.Verifiers.Interfaces;
 
 namespace NPCGen.Core.Generation.Factories
 {
-    public static class CharacterFactory
+    public class CharacterFactory : ICharacterFactory
     {
-        public static Character CreateUsing(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classNameRandomizer,
+        private ILanguageFactory languageFactory;
+        private IDice dice;
+
+        public CharacterFactory(ILanguageFactory languageFactory, IDice dice)
+        {
+            this.languageFactory = languageFactory;
+            this.dice = dice;
+        }
+
+        public Character CreateUsing(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classNameRandomizer,
             ILevelRandomizer levelRandomizer, IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer,
-            IStatsRandomizer statsRandomizer, IDice dice)
+            IStatsRandomizer statsRandomizer)
         {
             var levelAdjustmentsProvider = ProviderFactory.CreateLevelAdjustmentProvider();
             var randomizerVerifier = new RandomizerVerifier(alignmentRandomizer, classNameRandomizer, levelRandomizer, baseRaceRandomizer,
@@ -49,8 +59,7 @@ namespace NPCGen.Core.Generation.Factories
             var percentileResultProvider = ProviderFactory.CreatePercentileResultProviderUsing(dice);
             character.InterestingTrait = percentileResultProvider.GetPercentileResult("Traits");
 
-            character.Languages = LanguageFactory.CreateUsing(character.Race, character.Class.ClassName, dice, 
-                character.Stats[StatConstants.Intelligence].Bonus);
+            character.Languages = languageFactory.CreateWith(character.Race, character.Class.ClassName, character.Stats[StatConstants.Intelligence].Bonus);
 
             //Application.DoEvents();
             //progress.Text += "\nDetermining gear...";

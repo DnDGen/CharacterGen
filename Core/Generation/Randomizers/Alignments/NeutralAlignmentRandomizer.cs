@@ -1,5 +1,5 @@
 ﻿using System;
-using D20Dice.Dice;
+using D20Dice;
 using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Generation.Providers.Interfaces;
 

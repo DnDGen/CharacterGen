@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using D20Dice.Dice;
+using D20Dice;
 using Moq;
 using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Generation.Providers.Interfaces;

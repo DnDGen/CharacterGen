@@ -1,5 +1,5 @@
 ﻿using System;
-using D20Dice.Dice;
+using D20Dice;
 using Moq;
 using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Data.Races;
@@ -47,7 +47,7 @@ namespace NPCGen.Tests.Generation.Factories
         [Test]
         public void RaceFactoryReturnsMaleOnLowRoll()
         {
-            mockDice.Setup(d => d.d2(1, 0)).Returns(1);
+            mockDice.Setup(d => d.d2(1)).Returns(1);
 
             var race = RaceFactory.CreateUsing(String.Empty, new CharacterClassPrototype(), mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, 
                 mockDice.Object);
@@ -57,7 +57,7 @@ namespace NPCGen.Tests.Generation.Factories
         [Test]
         public void RaceFactoryReturnsFemaleOnHighRoll()
         {
-            mockDice.Setup(d => d.d2(1, 0)).Returns(2);
+            mockDice.Setup(d => d.d2(1)).Returns(2);
 
             var race = RaceFactory.CreateUsing(String.Empty, new CharacterClassPrototype(), mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object,
                 mockDice.Object);

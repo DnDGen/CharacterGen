@@ -1,5 +1,5 @@
 ﻿using System;
-using D20Dice.Dice;
+using D20Dice;
 using Moq;
 using NPCGen.Core.Generation.Providers;
 using NPCGen.Core.Generation.Providers.Interfaces;
@@ -62,7 +62,7 @@ namespace NPCGen.Tests.Generation.Xml.Data
 
         private String GetResult(Int32 roll)
         {
-            mockDice.Setup(d => d.Percentile(1, 0)).Returns(roll);
+            mockDice.Setup(d => d.Percentile(1)).Returns(roll);
             return percentileResultProvider.GetPercentileResult(tableName);
         }
     }

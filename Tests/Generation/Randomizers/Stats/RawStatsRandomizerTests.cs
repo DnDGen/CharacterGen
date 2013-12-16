@@ -1,5 +1,5 @@
 ﻿using System;
-using D20Dice.Dice;
+using D20Dice;
 using Moq;
 using NPCGen.Core.Data.Stats;
 using NPCGen.Core.Generation.Randomizers.Stats;
@@ -25,13 +25,13 @@ namespace NPCGen.Tests.Generation.Randomizers.Stats
         public void RawStatsCalls3d6PerStat()
         {
             var stats = randomizer.Randomize();
-            mockDice.Verify(d => d.d6(3, 0), Times.Exactly(stats.Count));
+            mockDice.Verify(d => d.d6(3), Times.Exactly(stats.Count));
         }
 
         [Test]
         public void RawStatsReturnsUnmodified3d6PerStat()
         {
-            mockDice.Setup(d => d.d6(3, 0)).Returns(12);
+            mockDice.Setup(d => d.d6(3)).Returns(12);
             var stats = randomizer.Randomize();
 
             foreach (var stat in stats.Values)
@@ -41,7 +41,7 @@ namespace NPCGen.Tests.Generation.Randomizers.Stats
         [Test]
         public void RolledStatsAreAlwaysAllowed()
         {
-            mockDice.SetupSequence(d => d.d6(3, 0)).Returns(9266).Returns(-42).Returns(Int32.MaxValue).Returns(Int32.MinValue).Returns(0)
+            mockDice.SetupSequence(d => d.d6(3)).Returns(9266).Returns(-42).Returns(Int32.MaxValue).Returns(Int32.MinValue).Returns(0)
                 .Returns(1337);
 
             var stats = randomizer.Randomize();

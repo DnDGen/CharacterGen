@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using D20Dice.Dice;
+using D20Dice;
 using Moq;
 using NPCGen.Core.Generation.Randomizers.CharacterClasses.Interfaces;
 using NPCGen.Core.Generation.Randomizers.CharacterClasses.Levels;
@@ -24,7 +24,7 @@ namespace NPCGen.Tests.Generation.Randomizers.CharacterClasses.Levels
         public void RandomizeReturnD20Result()
         {
             var roll = 1;
-            mockDice.Setup(d => d.d20(1, 0)).Returns(roll);
+            mockDice.Setup(d => d.d20(1)).Returns(roll);
 
             var level = randomizer.Randomize();
             Assert.That(level, Is.EqualTo(roll));

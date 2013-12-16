@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Linq;
-using D20Dice.Dice;
+using D20Dice;
 using Moq;
 using NPCGen.Core.Data;
 using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Data.Races;
 using NPCGen.Core.Generation.Factories;
+using NPCGen.Core.Generation.Factories.Interfaces;
+using NPCGen.Core.Generation.Providers.Interfaces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Generation.Factories
@@ -14,23 +16,28 @@ namespace NPCGen.Tests.Generation.Factories
     public class LanguageFactoryTests
     {
         private Mock<IDice> mockDice;
+        private Mock<ILanguageProvider> mockLanguageProvider;
+        private ILanguageFactory languageFactory;
+
         private Race race;
 
         [SetUp]
         public void Setup()
         {
             mockDice = new Mock<IDice>();
+            mockLanguageProvider = new Mock<ILanguageProvider>();
+            languageFactory = new LanguageFactory(mockDice.Object, mockLanguageProvider.Object);
+
             race = new Race();
-            race.BaseRace = RaceConstants.BaseRaces.Human;
-            race.Metarace = String.Empty;
+            race.BaseRace = "base race";
+            race.Metarace = "metarace";
         }
 
         [Test]
         public void FactoryGetsAutomaticLanguagesFromProvider()
         {
-            var languages = LanguageFactory.CreateUsing(race, String.Empty, mockDice.Object, 0);
-            Assert.That(languages.Contains(LanguageConstants.Common), Is.True);
-            Assert.That(languages.Count(), Is.EqualTo(1));
+            var languages = languageFactory.CreateWith(race, String.Empty, 0);
+            mockLanguageProvider.Verify(p => p.GetAutomaticLanguagesFor(race), Times.Once);
         }
 
         [Test]
@@ -43,7 +50,7 @@ namespace NPCGen.Tests.Generation.Factories
                     race.BaseRace = baseRace;
                     race.Metarace = metarace;
 
-                    var languages = LanguageFactory.CreateUsing(race, CharacterClassConstants.Druid, mockDice.Object, 0);
+                    var languages = languageFactory.CreateWith(race, CharacterClassConstants.Druid, 0);
                     Assert.That(languages.Contains(LanguageConstants.Druidic), Is.True);
                 }
             }
@@ -63,7 +70,7 @@ namespace NPCGen.Tests.Generation.Factories
                             race.BaseRace = baseRace;
                             race.Metarace = metarace;
 
-                            var languages = LanguageFactory.CreateUsing(race, className, mockDice.Object, 0);
+                            var languages = languageFactory.CreateWith(race, className, 0);
                             Assert.That(languages.Contains(LanguageConstants.Druidic), Is.False);
                         }
                     }
@@ -74,27 +81,28 @@ namespace NPCGen.Tests.Generation.Factories
         [Test]
         public void GetBonusLanguagesFromProvider()
         {
-            var expectedLanguage = LanguageConstants.GetLanguages().ElementAt(0);
+            var className = "class";
 
-            var languages = LanguageFactory.CreateUsing(race, String.Empty, mockDice.Object, 1);
-            Assert.That(languages.Contains(expectedLanguage), Is.True, expectedLanguage);
+            var languages = languageFactory.CreateWith(race, className, 1);
+            mockLanguageProvider.Verify(p => p.GetBonusLanguagesFor(race.BaseRace, className), Times.Once);
         }
 
         [Test]
         public void GetNumberOfBonusLanguagesEqualToIntelligenceModifier()
         {
-            var languages = LanguageFactory.CreateUsing(race, String.Empty, mockDice.Object, 2);
-            Assert.That(languages.Count(), Is.EqualTo(3)); //+1 for Human automatic language
+            mockLanguageProvider.Setup(p => p.GetBonusLanguagesFor(race.BaseRace, It.IsAny<String>())).Returns(new[] { "lang 1", "lang 2" });
+
+            var languages = languageFactory.CreateWith(race, String.Empty, 1);
+            mockDice.Verify(d => d.Roll(It.IsAny<String>()), Times.Exactly(1));
         }
 
         [Test]
         public void StopIfAllBonusLanguagesLearned()
         {
-            race.BaseRace = RaceConstants.BaseRaces.Minotaur;
+            mockLanguageProvider.Setup(p => p.GetBonusLanguagesFor(race.BaseRace, It.IsAny<String>())).Returns(new[] { "lang 1", "lang 2" });
 
-            var languages = LanguageFactory.CreateUsing(race, String.Empty, mockDice.Object, 9266);
-            Assert.That(languages.Count(), Is.EqualTo(5)); //Minotaur has 2 automatic languages
-            mockDice.Verify(d => d.d20(1, -1), Times.Exactly(3));
+            var languages = languageFactory.CreateWith(race, String.Empty, 9266);
+            Assert.That(languages.Count(), Is.EqualTo(2));
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using D20Dice.Dice;
+using D20Dice;
 using Moq;
 using NPCGen.Core.Generation.Randomizers.CharacterClasses.Levels;
 using NUnit.Framework;
@@ -23,7 +23,7 @@ namespace NPCGen.Tests.Generation.Randomizers.CharacterClasses.Levels
         [Test]
         public void RollOf1Returns1()
         {
-            mockDice.Setup(d => d.d10(1, 0)).Returns(1);
+            mockDice.Setup(d => d.d10(1)).Returns(1);
             var level = randomizer.Randomize();
             Assert.That(level, Is.EqualTo(1));
         }
@@ -31,7 +31,7 @@ namespace NPCGen.Tests.Generation.Randomizers.CharacterClasses.Levels
         [Test]
         public void RollOf2Returns1()
         {
-            mockDice.Setup(d => d.d10(1, 0)).Returns(2);
+            mockDice.Setup(d => d.d10(1)).Returns(2);
             var level = randomizer.Randomize();
             Assert.That(level, Is.EqualTo(1));
         }
@@ -39,7 +39,7 @@ namespace NPCGen.Tests.Generation.Randomizers.CharacterClasses.Levels
         [Test]
         public void RollOf3Returns2()
         {
-            mockDice.Setup(d => d.d10(1, 0)).Returns(3);
+            mockDice.Setup(d => d.d10(1)).Returns(3);
             var level = randomizer.Randomize();
             Assert.That(level, Is.EqualTo(2));
         }
@@ -47,7 +47,7 @@ namespace NPCGen.Tests.Generation.Randomizers.CharacterClasses.Levels
         [Test]
         public void RollOf4Returns2()
         {
-            mockDice.Setup(d => d.d10(1, 0)).Returns(4);
+            mockDice.Setup(d => d.d10(1)).Returns(4);
             var level = randomizer.Randomize();
             Assert.That(level, Is.EqualTo(2));
         }
@@ -55,7 +55,7 @@ namespace NPCGen.Tests.Generation.Randomizers.CharacterClasses.Levels
         [Test]
         public void RollOf5Returns3()
         {
-            mockDice.Setup(d => d.d10(1, 0)).Returns(5);
+            mockDice.Setup(d => d.d10(1)).Returns(5);
             var level = randomizer.Randomize();
             Assert.That(level, Is.EqualTo(3));
         }
@@ -63,7 +63,7 @@ namespace NPCGen.Tests.Generation.Randomizers.CharacterClasses.Levels
         [Test]
         public void RollOf6Returns3()
         {
-            mockDice.Setup(d => d.d10(1, 0)).Returns(6);
+            mockDice.Setup(d => d.d10(1)).Returns(6);
             var level = randomizer.Randomize();
             Assert.That(level, Is.EqualTo(3));
         }
@@ -71,7 +71,7 @@ namespace NPCGen.Tests.Generation.Randomizers.CharacterClasses.Levels
         [Test]
         public void RollOf7Returns4()
         {
-            mockDice.Setup(d => d.d10(1, 0)).Returns(7);
+            mockDice.Setup(d => d.d10(1)).Returns(7);
             var level = randomizer.Randomize();
             Assert.That(level, Is.EqualTo(4));
         }
@@ -79,7 +79,7 @@ namespace NPCGen.Tests.Generation.Randomizers.CharacterClasses.Levels
         [Test]
         public void RollOf8Returns4()
         {
-            mockDice.Setup(d => d.d10(1, 0)).Returns(8);
+            mockDice.Setup(d => d.d10(1)).Returns(8);
             var level = randomizer.Randomize();
             Assert.That(level, Is.EqualTo(4));
         }
@@ -87,7 +87,7 @@ namespace NPCGen.Tests.Generation.Randomizers.CharacterClasses.Levels
         [Test]
         public void RollOf9Returns5()
         {
-            mockDice.Setup(d => d.d10(1, 0)).Returns(9);
+            mockDice.Setup(d => d.d10(1)).Returns(9);
             var level = randomizer.Randomize();
             Assert.That(level, Is.EqualTo(5));
         }
@@ -95,7 +95,7 @@ namespace NPCGen.Tests.Generation.Randomizers.CharacterClasses.Levels
         [Test]
         public void RollOf10Returns5()
         {
-            mockDice.Setup(d => d.d10(1, 0)).Returns(10);
+            mockDice.Setup(d => d.d10(1)).Returns(10);
             var level = randomizer.Randomize();
             Assert.That(level, Is.EqualTo(5));
         }
@@ -105,7 +105,7 @@ namespace NPCGen.Tests.Generation.Randomizers.CharacterClasses.Levels
         {
             var roll = 1;
             var bonus = 9266;
-            mockDice.Setup(d => d.d10(1, 0)).Returns(roll);
+            mockDice.Setup(d => d.d10(1)).Returns(roll);
             randomizer.RollBonus = bonus;
 
             var level = randomizer.Randomize();

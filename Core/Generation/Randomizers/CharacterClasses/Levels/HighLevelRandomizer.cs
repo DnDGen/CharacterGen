@@ -1,4 +1,4 @@
-﻿using D20Dice.Dice;
+﻿using D20Dice;
 
 namespace NPCGen.Core.Generation.Randomizers.CharacterClasses.Levels
 {

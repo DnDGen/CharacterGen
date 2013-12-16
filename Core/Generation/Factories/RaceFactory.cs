@@ -1,5 +1,5 @@
 ﻿using System;
-using D20Dice.Dice;
+using D20Dice;
 using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Data.Races;
 using NPCGen.Core.Generation.Randomizers.Races.Interfaces;

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using D20Dice.Dice;
+using D20Dice;
 using Moq;
 using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Data.Races;
@@ -120,7 +120,7 @@ namespace NPCGen.Tests.Generation.Factories
         public void LowOnD2IncreasesFirstPriorityStat()
         {
             characterClass.Level = 4;
-            mockDice.Setup(d => d.d2(1, 0)).Returns(1);
+            mockDice.Setup(d => d.d2(1)).Returns(1);
 
             var stats = StatsFactory.CreateUsing(mockStatRandomizer.Object, characterClass, race, mockDice.Object);
             Assert.That(stats[StatConstants.Strength].Value, Is.EqualTo(baseStat + 1), StatConstants.Strength);
@@ -131,7 +131,7 @@ namespace NPCGen.Tests.Generation.Factories
         public void HighOnD2IncreasesSecondPriorityStat()
         {
             characterClass.Level = 4;
-            mockDice.Setup(d => d.d2(1, 0)).Returns(2);
+            mockDice.Setup(d => d.d2(1)).Returns(2);
 
             var stats = StatsFactory.CreateUsing(mockStatRandomizer.Object, characterClass, race, mockDice.Object);
             Assert.That(stats[StatConstants.Strength].Value, Is.EqualTo(baseStat), StatConstants.Strength);
@@ -141,7 +141,7 @@ namespace NPCGen.Tests.Generation.Factories
         [Test]
         public void DoNotIncreaseStat()
         {
-            mockDice.Setup(d => d.d2(1, 0)).Returns(1);
+            mockDice.Setup(d => d.d2(1)).Returns(1);
             for (var level = 1; level < 4; level++)
             {
                 foreach (var stat in expectedStats.Values)
@@ -157,7 +157,7 @@ namespace NPCGen.Tests.Generation.Factories
         [Test]
         public void IncreaseStatByOne()
         {
-            mockDice.Setup(d => d.d2(1, 0)).Returns(1);
+            mockDice.Setup(d => d.d2(1)).Returns(1);
             for (var level = 4; level < 8; level++)
             {
                 foreach (var stat in expectedStats.Values)
@@ -173,7 +173,7 @@ namespace NPCGen.Tests.Generation.Factories
         [Test]
         public void IncreaseStatByTwo()
         {
-            mockDice.Setup(d => d.d2(1, 0)).Returns(1);
+            mockDice.Setup(d => d.d2(1)).Returns(1);
             for (var level = 8; level < 12; level++)
             {
                 foreach (var stat in expectedStats.Values)
@@ -189,7 +189,7 @@ namespace NPCGen.Tests.Generation.Factories
         [Test]
         public void IncreaseStatByThree()
         {
-            mockDice.Setup(d => d.d2(1, 0)).Returns(1);
+            mockDice.Setup(d => d.d2(1)).Returns(1);
             for (var level = 12; level < 16; level++)
             {
                 foreach (var stat in expectedStats.Values)
@@ -205,7 +205,7 @@ namespace NPCGen.Tests.Generation.Factories
         [Test]
         public void IncreaseStatByFour()
         {
-            mockDice.Setup(d => d.d2(1, 0)).Returns(1);
+            mockDice.Setup(d => d.d2(1)).Returns(1);
             for (var level = 16; level < 20; level++)
             {
                 foreach (var stat in expectedStats.Values)
@@ -221,7 +221,7 @@ namespace NPCGen.Tests.Generation.Factories
         [Test]
         public void IncreaseStatByFive()
         {
-            mockDice.Setup(d => d.d2(1, 0)).Returns(1);
+            mockDice.Setup(d => d.d2(1)).Returns(1);
             characterClass.Level = 20;
 
             var stats = StatsFactory.CreateUsing(mockStatRandomizer.Object, characterClass, race, mockDice.Object);

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using D20Dice.Dice;
+using D20Dice;
 using Moq;
 using NPCGen.Core.Generation.Randomizers.Stats;
 using NPCGen.Core.Generation.Randomizers.Stats.Interfaces;
@@ -22,7 +22,7 @@ namespace NPCGen.Tests.Generation.Randomizers.Stats
         public void Setup()
         {
             mockDice = new Mock<IDice>();
-            mockDice.SetupSequence(d => d.d6(3, 0)).Returns(min).Returns(max).Returns(middle).Returns(min - 1).Returns(max + 1).Returns(middle);
+            mockDice.SetupSequence(d => d.d6(3)).Returns(min).Returns(max).Returns(middle).Returns(min - 1).Returns(max + 1).Returns(middle);
 
             randomizer = new AverageStatsRandomizer(mockDice.Object);
         }
@@ -31,7 +31,7 @@ namespace NPCGen.Tests.Generation.Randomizers.Stats
         public void AverageCalls3d6PerStat()
         {
             var stats = randomizer.Randomize();
-            mockDice.Verify(d => d.d6(3, 0), Times.Exactly(stats.Count));
+            mockDice.Verify(d => d.d6(3), Times.Exactly(stats.Count));
         }
 
         [Test]
@@ -46,23 +46,23 @@ namespace NPCGen.Tests.Generation.Randomizers.Stats
         [Test]
         public void RerollIfStatAverageIsGreaterThanTwelve()
         {
-            mockDice.SetupSequence(d => d.d6(3, 0))
+            mockDice.SetupSequence(d => d.d6(3))
                 .Returns(min).Returns(max).Returns(middle).Returns(min - 1).Returns(max + 1).Returns(18) //invalid average
                 .Returns(min).Returns(max).Returns(middle).Returns(min - 1).Returns(max + 1).Returns(middle); //valid average
 
             var stats = randomizer.Randomize();
-            mockDice.Verify(d => d.d6(3, 0), Times.Exactly(stats.Count * 2));
+            mockDice.Verify(d => d.d6(3), Times.Exactly(stats.Count * 2));
         }
 
         [Test]
         public void RerollIfStatAverageIsLessThanTen()
         {
-            mockDice.SetupSequence(d => d.d6(3, 0))
+            mockDice.SetupSequence(d => d.d6(3))
                 .Returns(min).Returns(max).Returns(middle).Returns(min - 1).Returns(max + 1).Returns(3) //invalid average
                 .Returns(min).Returns(max).Returns(middle).Returns(min - 1).Returns(max + 1).Returns(middle); //valid average
 
             var stats = randomizer.Randomize();
-            mockDice.Verify(d => d.d6(3, 0), Times.Exactly(stats.Count * 2));
+            mockDice.Verify(d => d.d6(3), Times.Exactly(stats.Count * 2));
         }
     }
 }

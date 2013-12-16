@@ -1,5 +1,5 @@
 ﻿using System;
-using D20Dice.Dice;
+using D20Dice;
 using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Data.Races;
 
@@ -27,23 +27,23 @@ namespace NPCGen.Core.Generation.Factories
             switch (className)
             {
                 case CharacterClassConstants.Fighter:
-                case CharacterClassConstants.Paladin: return dice.d10(bonus: constitutionBonus);
-                case CharacterClassConstants.Barbarian: return dice.d12(bonus: constitutionBonus);
+                case CharacterClassConstants.Paladin: return dice.d10() + constitutionBonus;
+                case CharacterClassConstants.Barbarian: return dice.d12() + constitutionBonus;
                 case CharacterClassConstants.Cleric:
                 case CharacterClassConstants.Druid:
                 case CharacterClassConstants.Monk:
-                case CharacterClassConstants.Ranger: return dice.d8(bonus: constitutionBonus);
+                case CharacterClassConstants.Ranger: return dice.d8() + constitutionBonus;
                 case CharacterClassConstants.Bard:
-                case CharacterClassConstants.Rogue: return dice.d6(bonus: constitutionBonus);
+                case CharacterClassConstants.Rogue: return dice.d6() + constitutionBonus;
                 case CharacterClassConstants.Sorcerer:
-                case CharacterClassConstants.Wizard: return dice.d4(bonus: constitutionBonus);
+                case CharacterClassConstants.Wizard: return dice.d4() + constitutionBonus;
                 default: throw new ArgumentOutOfRangeException();
             }
         }
 
         private static Int32 GetAdditionalMonsterHitDice(Race race, IDice dice)
         {
-            var numberOfRolls = GetNumberOfRolls(race);
+            var numberOfRolls = GetNumberOfAdditionalMonsterHitDice(race);
 
             if (race.Metarace == RaceConstants.Metaraces.HalfDragon)
                 return dice.d10(numberOfRolls);
@@ -51,7 +51,7 @@ namespace NPCGen.Core.Generation.Factories
             return dice.d8(numberOfRolls);
         }
 
-        private static Int32 GetNumberOfRolls(Race race)
+        private static Int32 GetNumberOfAdditionalMonsterHitDice(Race race)
         {
             switch (race.BaseRace)
             {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using D20Dice.Dice;
+using D20Dice;
 using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Data.Races;
 using NPCGen.Core.Data.Stats;

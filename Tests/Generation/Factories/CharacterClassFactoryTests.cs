@@ -1,4 +1,4 @@
-﻿using D20Dice.Dice;
+﻿using D20Dice;
 using Moq;
 using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Data.CharacterClasses;

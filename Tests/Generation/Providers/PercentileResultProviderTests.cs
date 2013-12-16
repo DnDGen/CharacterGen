@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using D20Dice.Dice;
+using D20Dice;
 using Moq;
 using NPCGen.Core.Generation.Providers;
 using NPCGen.Core.Generation.Providers.Interfaces;
@@ -60,7 +60,7 @@ namespace NPCGen.Tests.Generation.Providers
         [Test]
         public void GetPercentileResultReturnsEmptyStringIfBelowRange()
         {
-            mockDice.Setup(d => d.Percentile(1, 0)).Returns(min - 1);
+            mockDice.Setup(d => d.Percentile(1)).Returns(min - 1);
             var result = percentileResultProvider.GetPercentileResult(tableName);
             Assert.That(result, Is.EqualTo(String.Empty));
         }
@@ -68,7 +68,7 @@ namespace NPCGen.Tests.Generation.Providers
         [Test]
         public void GetPercentileResultReturnsEmptyStringIfAboveRange()
         {
-            mockDice.Setup(d => d.Percentile(1, 0)).Returns(max + 1);
+            mockDice.Setup(d => d.Percentile(1)).Returns(max + 1);
             var result = percentileResultProvider.GetPercentileResult(tableName);
             Assert.That(result, Is.EqualTo(String.Empty));
         }
@@ -78,7 +78,7 @@ namespace NPCGen.Tests.Generation.Providers
         {
             for (var roll = min; roll <= max; roll++)
             {
-                mockDice.Setup(d => d.Percentile(1, 0)).Returns(roll);
+                mockDice.Setup(d => d.Percentile(1)).Returns(roll);
 
                 var result = percentileResultProvider.GetPercentileResult(tableName);
                 Assert.That(result, Is.EqualTo("content"));

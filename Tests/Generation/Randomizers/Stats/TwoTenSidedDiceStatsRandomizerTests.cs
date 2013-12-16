@@ -1,5 +1,5 @@
 ﻿using System;
-using D20Dice.Dice;
+using D20Dice;
 using Moq;
 using NPCGen.Core.Data.Stats;
 using NPCGen.Core.Generation.Randomizers.Stats;
@@ -25,13 +25,13 @@ namespace NPCGen.Tests.Generation.Randomizers.Stats
         public void TwoTenSidedDiceCalls2d10PerStat()
         {
             var stats = randomizer.Randomize();
-            mockDice.Verify(d => d.d10(2, 0), Times.Exactly(stats.Count));
+            mockDice.Verify(d => d.d10(2), Times.Exactly(stats.Count));
         }
 
         [Test]
         public void TwoTenSidedDiceReturnsUnmodified2d10PerStat()
         {
-            mockDice.Setup(d => d.d10(2, 0)).Returns(10);
+            mockDice.Setup(d => d.d10(2)).Returns(10);
 
             var stats = randomizer.Randomize();
             foreach (var stat in stats.Values)
@@ -41,7 +41,7 @@ namespace NPCGen.Tests.Generation.Randomizers.Stats
         [Test]
         public void RolledStatsAreAlwaysAllowed()
         {
-            mockDice.SetupSequence(d => d.d10(2, 0)).Returns(9266).Returns(-42).Returns(Int32.MaxValue).Returns(Int32.MinValue).Returns(0)
+            mockDice.SetupSequence(d => d.d10(2)).Returns(9266).Returns(-42).Returns(Int32.MaxValue).Returns(Int32.MinValue).Returns(0)
                 .Returns(1337);
 
             var stats = randomizer.Randomize();

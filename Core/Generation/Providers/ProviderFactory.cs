@@ -1,4 +1,4 @@
-﻿using D20Dice.Dice;
+﻿using D20Dice;
 using NPCGen.Core.Generation.Providers.Interfaces;
 using NPCGen.Core.Generation.Xml.Parsers;
 

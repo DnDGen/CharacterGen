@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using D20Dice.Dice;
+using D20Dice;
 using Moq;
 using NPCGen.Core.Generation.Randomizers.Stats;
 using NPCGen.Core.Generation.Randomizers.Stats.Interfaces;
@@ -24,13 +24,13 @@ namespace NPCGen.Tests.Generation.Randomizers.Stats
         public void OnesAsSixesStatsCalls1d6ThreeTimesPerStat()
         {
             var stats = randomizer.Randomize();
-            mockDice.Verify(d => d.d6(1, 0), Times.Exactly(stats.Count * 3));
+            mockDice.Verify(d => d.d6(1), Times.Exactly(stats.Count * 3));
         }
 
         [Test]
         public void OnesAsSixesTreatsOnesAsSixes()
         {
-            mockDice.SetupSequence(d => d.d6(1, 0)).Returns(1).Returns(2).Returns(3);
+            mockDice.SetupSequence(d => d.d6(1)).Returns(1).Returns(2).Returns(3);
 
             var stats = randomizer.Randomize();
             var stat = stats.Values.First();
