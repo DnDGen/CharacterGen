@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using D20Dice;
-using NPCGen.Core.Data;
+﻿using NPCGen.Core.Data;
 using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Data.Races;
 using NPCGen.Core.Data.Stats;
 using NPCGen.Core.Generation.Factories.Interfaces;
-using NPCGen.Core.Generation.Providers;
 using NPCGen.Core.Generation.Providers.Interfaces;
 using NPCGen.Core.Generation.Randomizers.Alignments.Interfaces;
 using NPCGen.Core.Generation.Randomizers.CharacterClasses.Interfaces;
@@ -15,6 +11,8 @@ using NPCGen.Core.Generation.Randomizers.Races.Interfaces;
 using NPCGen.Core.Generation.Randomizers.Stats.Interfaces;
 using NPCGen.Core.Generation.Verifiers.Exceptions;
 using NPCGen.Core.Generation.Verifiers.Interfaces;
+using System;
+using System.Collections.Generic;
 
 namespace NPCGen.Core.Generation.Factories
 {
@@ -24,23 +22,25 @@ namespace NPCGen.Core.Generation.Factories
         private IAlignmentFactory alignmentFactory;
         private ICharacterClassFactory characterClassFactory;
         private IStatsFactory statsFactory;
+        private IHitPointsFactory hitPointsFactory;
+        private IRaceFactory raceFactory;
 
         private ILevelAdjustmentsProvider levelAdjustmentsProvider;
         private IRandomizerVerifier randomizerVerifier;
+        private IPercentileResultProvider percentileResultProvider;
 
-        private IDice dice;
-
-        public CharacterFactory(ILanguageFactory languageFactory, IAlignmentFactory alignmentFactory, ICharacterClassFactory characterClassFactory, 
-            IStatsFactory statsFactory, ILevelAdjustmentsProvider levelAdjustmentsProvider, IRandomizerVerifier randomizerVerifier, IDice dice)
+        public CharacterFactory(IAlignmentFactory alignmentFactory, ICharacterClassFactory characterClassFactory, IRaceFactory raceFactory, IStatsFactory statsFactory, ILanguageFactory languageFactory, IHitPointsFactory hitPointsFactory, ILevelAdjustmentsProvider levelAdjustmentsProvider, IRandomizerVerifier randomizerVerifier, IPercentileResultProvider percentileResultProvider)
         {
-            this.languageFactory = languageFactory;
             this.alignmentFactory = alignmentFactory;
             this.characterClassFactory = characterClassFactory;
+            this.raceFactory = raceFactory;
             this.statsFactory = statsFactory;
+            this.languageFactory = languageFactory;
+            this.hitPointsFactory = hitPointsFactory;
 
             this.levelAdjustmentsProvider = levelAdjustmentsProvider;
             this.randomizerVerifier = randomizerVerifier;
-            this.dice = dice;
+            this.percentileResultProvider = percentileResultProvider;
         }
 
         public Character CreateUsing(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classNameRandomizer,
@@ -51,13 +51,13 @@ namespace NPCGen.Core.Generation.Factories
 
             var character = new Character();
 
-            character.Alignment = GenerateAlignment(alignmentRandomizer, classNameRandomizer, levelRandomizer, baseRaceRandomizer, 
+            character.Alignment = GenerateAlignment(alignmentRandomizer, classNameRandomizer, levelRandomizer, baseRaceRandomizer,
                 metaraceRandomizer);
             var characterClassPrototype = GenerateCharacterClassPrototype(classNameRandomizer, levelRandomizer, character.Alignment,
                 baseRaceRandomizer, metaraceRandomizer);
 
             var levelAdjustments = levelAdjustmentsProvider.GetLevelAdjustments();
-            character.Race = GenerateRace(baseRaceRandomizer, metaraceRandomizer, levelAdjustments, character.Alignment, characterClassPrototype, dice);
+            character.Race = GenerateRace(baseRaceRandomizer, metaraceRandomizer, levelAdjustments, character.Alignment, characterClassPrototype);
 
             characterClassPrototype.Level -= levelAdjustments[character.Race.BaseRace];
             characterClassPrototype.Level -= levelAdjustments[character.Race.Metarace];
@@ -65,12 +65,8 @@ namespace NPCGen.Core.Generation.Factories
             character.Class = characterClassFactory.CreateWith(characterClassPrototype);
 
             character.Stats = statsFactory.CreateWith(statsRandomizer, character.Class, character.Race);
-            character.HitPoints = HitPointsFactory.CreateUsing(dice, character.Class, character.Stats[StatConstants.Constitution].Bonus,
-                character.Race);
-
-            var percentileResultProvider = ProviderFactory.CreatePercentileResultProviderUsing(dice);
+            character.HitPoints = hitPointsFactory.CreateWith(character.Class, character.Stats[StatConstants.Constitution].Bonus, character.Race);
             character.InterestingTrait = percentileResultProvider.GetPercentileResult("Traits");
-
             character.Languages = languageFactory.CreateWith(character.Race, character.Class.ClassName, character.Stats[StatConstants.Intelligence].Bonus);
 
             //Application.DoEvents();
@@ -204,7 +200,7 @@ namespace NPCGen.Core.Generation.Factories
         private void VerifyRandomizers(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classNameRandomizer,
             ILevelRandomizer levelRandomizer, IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer)
         {
-            var verified = randomizerVerifier.VerifyCompatibility(alignmentRandomizer, classNameRandomizer, levelRandomizer, 
+            var verified = randomizerVerifier.VerifyCompatibility(alignmentRandomizer, classNameRandomizer, levelRandomizer,
                 baseRaceRandomizer, metaraceRandomizer);
 
             if (!verified)
@@ -217,7 +213,7 @@ namespace NPCGen.Core.Generation.Factories
             Alignment alignment;
 
             do alignment = alignmentFactory.CreateWith(alignmentRandomizer);
-            while (!randomizerVerifier.VerifyAlignmentCompatibility(alignment, classNameRandomizer, levelRandomizer, baseRaceRandomizer, 
+            while (!randomizerVerifier.VerifyAlignmentCompatibility(alignment, classNameRandomizer, levelRandomizer, baseRaceRandomizer,
                 metaraceRandomizer));
 
             return alignment;
@@ -234,12 +230,11 @@ namespace NPCGen.Core.Generation.Factories
             return prototype;
         }
 
-        private Race GenerateRace(IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer,
-            Dictionary<String, Int32> levelAdjustments, Alignment alignment, CharacterClassPrototype prototype, IDice dice)
+        private Race GenerateRace(IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer, Dictionary<String, Int32> levelAdjustments, Alignment alignment, CharacterClassPrototype prototype)
         {
             Race race;
 
-            do race = RaceFactory.CreateUsing(alignment.Goodness, prototype, baseRaceRandomizer, metaraceRandomizer, dice);
+            do race = raceFactory.CreateWith(alignment.Goodness, prototype, baseRaceRandomizer, metaraceRandomizer);
             while (levelAdjustments[race.BaseRace] + levelAdjustments[race.Metarace] >= prototype.Level);
 
             return race;

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using D20Dice;
-using Moq;
+﻿using Moq;
 using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Data.Races;
@@ -16,19 +13,23 @@ using NPCGen.Core.Generation.Randomizers.Stats.Interfaces;
 using NPCGen.Core.Generation.Verifiers.Exceptions;
 using NPCGen.Core.Generation.Verifiers.Interfaces;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
 
 namespace NPCGen.Tests.Unit.Generation.Factories
 {
     [TestFixture]
     public class CharacterFactoryTests
     {
-        private Mock<ILanguageFactory> mockLanguageFactory;
         private Mock<IAlignmentFactory> mockAlignmentFactory;
         private Mock<ICharacterClassFactory> mockCharacterClassFactory;
+        private Mock<IRaceFactory> mockRaceFactory;
         private Mock<IStatsFactory> mockStatsFactory;
+        private Mock<ILanguageFactory> mockLanguageFactory;
+        private Mock<IHitPointsFactory> mockHitPointsFactory;
         private Mock<ILevelAdjustmentsProvider> mockLevelAdjustmentsProvider;
         private Mock<IRandomizerVerifier> mockRandomizerVerifier;
-        private Mock<IDice> mockDice;
+        private Mock<IPercentileResultProvider> mockPercentileResultProvider;
         private ICharacterFactory characterFactory;
 
         private Mock<IAlignmentRandomizer> mockAlignmentRandomizer;
@@ -39,6 +40,7 @@ namespace NPCGen.Tests.Unit.Generation.Factories
         private Mock<IStatsRandomizer> mockStatsRandomizer;
 
         private CharacterClassPrototype characterClassPrototype;
+        private Race race;
         private Dictionary<String, Int32> adjustments;
         private const String BaseRace = "base race";
         private const String BaseRacePlusOne = "base race +1";
@@ -66,9 +68,9 @@ namespace NPCGen.Tests.Unit.Generation.Factories
             mockRandomizerVerifier.Setup(v => v.VerifyCharacterClassCompatibility(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>(),
                 mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(true);
 
-            mockDice = new Mock<IDice>();
-            characterFactory = new CharacterFactory(mockLanguageFactory.Object, mockAlignmentFactory.Object, mockCharacterClassFactory.Object,
-                mockStatsFactory.Object, mockLevelAdjustmentsProvider.Object, mockRandomizerVerifier.Object, mockDice.Object);
+            mockPercentileResultProvider = new Mock<IPercentileResultProvider>();
+
+            characterFactory = new CharacterFactory(mockAlignmentFactory.Object, mockCharacterClassFactory.Object, mockRaceFactory.Object, mockStatsFactory.Object, mockLanguageFactory.Object, mockHitPointsFactory.Object, mockLevelAdjustmentsProvider.Object, mockRandomizerVerifier.Object, mockPercentileResultProvider.Object);
         }
 
         private void SetUpMockRandomizers()
@@ -77,22 +79,12 @@ namespace NPCGen.Tests.Unit.Generation.Factories
             mockClassNameRandomizer = new Mock<IClassNameRandomizer>();
             mockLevelRandomizer = new Mock<ILevelRandomizer>();
             mockStatsRandomizer = new Mock<IStatsRandomizer>();
-
             mockBaseRaceRandomizer = new Mock<IBaseRaceRandomizer>();
-            mockBaseRaceRandomizer.Setup(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>())).Returns(BaseRace);
-            mockBaseRaceRandomizer.Setup(r => r.GetAllPossibleResults(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>()))
-                .Returns(new[] { BaseRace });
-
             mockMetaraceRandomizer = new Mock<IMetaraceRandomizer>();
-            mockMetaraceRandomizer.Setup(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>())).Returns(String.Empty);
-            mockMetaraceRandomizer.Setup(r => r.GetAllPossibleResults(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>()))
-                .Returns(new[] { String.Empty });
         }
 
         private void SetUpFactories()
         {
-            mockLanguageFactory = new Mock<ILanguageFactory>();
-
             mockAlignmentFactory = new Mock<IAlignmentFactory>();
             mockAlignmentFactory.Setup(f => f.CreateWith(mockAlignmentRandomizer.Object)).Returns(new Alignment());
 
@@ -101,13 +93,23 @@ namespace NPCGen.Tests.Unit.Generation.Factories
             mockCharacterClassFactory = new Mock<ICharacterClassFactory>();
             mockCharacterClassFactory.Setup(f => f.CreatePrototypeWith(It.IsAny<Alignment>(), mockLevelRandomizer.Object,
                 mockClassNameRandomizer.Object)).Returns(characterClassPrototype);
-            mockCharacterClassFactory.Setup(f => f.CreateWith(It.IsAny<CharacterClassPrototype>())).Returns(new CharacterClass());
+            mockCharacterClassFactory.Setup(f => f.CreateWith(characterClassPrototype)).Returns(new CharacterClass());
+
+            race = new Race();
+            race.BaseRace = BaseRace;
+            race.Metarace = String.Empty;
+            mockRaceFactory = new Mock<IRaceFactory>();
+            mockRaceFactory.Setup(f => f.CreateWith(It.IsAny<String>(), characterClassPrototype, mockBaseRaceRandomizer.Object,
+                mockMetaraceRandomizer.Object)).Returns(race);
 
             var stats = new Dictionary<String, Stat>();
             foreach (var stat in StatConstants.GetStats())
                 stats.Add(stat, new Stat());
             mockStatsFactory = new Mock<IStatsFactory>();
             mockStatsFactory.Setup(f => f.CreateWith(mockStatsRandomizer.Object, It.IsAny<CharacterClass>(), It.IsAny<Race>())).Returns(stats);
+
+            mockHitPointsFactory = new Mock<IHitPointsFactory>();
+            mockLanguageFactory = new Mock<ILanguageFactory>();
         }
 
         [Test, ExpectedException(typeof(IncompatibleRandomizersException))]
@@ -146,67 +148,62 @@ namespace NPCGen.Tests.Unit.Generation.Factories
         [Test]
         public void IncompatibleBaseRaceIsRegenerated()
         {
-            mockBaseRaceRandomizer.SetupSequence(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>()))
-                .Returns(BaseRacePlusOne).Returns(BaseRace);
+            mockRaceFactory.SetupSequence(f => f.CreateWith(It.IsAny<String>(), characterClassPrototype, mockBaseRaceRandomizer.Object,
+                mockMetaraceRandomizer.Object)).Returns(new Race() { BaseRace = BaseRacePlusOne, Metarace = String.Empty }).Returns(race);
 
             characterFactory.CreateUsing(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object,
                 mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
-            mockBaseRaceRandomizer.Verify(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>()), Times.Exactly(2));
-            mockMetaraceRandomizer.Verify(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>()), Times.Exactly(2));
+            mockRaceFactory.Verify(f => f.CreateWith(It.IsAny<String>(), characterClassPrototype, mockBaseRaceRandomizer.Object,
+                mockMetaraceRandomizer.Object), Times.Exactly(2));
         }
 
         [Test]
         public void IncompatibleMetaraceIsRegenerated()
         {
-            mockMetaraceRandomizer.SetupSequence(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>()))
-                .Returns(Metarace).Returns(String.Empty);
+            mockRaceFactory.SetupSequence(f => f.CreateWith(It.IsAny<String>(), characterClassPrototype, mockBaseRaceRandomizer.Object,
+                mockMetaraceRandomizer.Object)).Returns(new Race() { BaseRace = BaseRace, Metarace = Metarace }).Returns(race);
 
             characterFactory.CreateUsing(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object,
                 mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
-            mockBaseRaceRandomizer.Verify(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>()), Times.Exactly(2));
-            mockMetaraceRandomizer.Verify(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>()), Times.Exactly(2));
+            mockRaceFactory.Verify(f => f.CreateWith(It.IsAny<String>(), characterClassPrototype, mockBaseRaceRandomizer.Object,
+                mockMetaraceRandomizer.Object), Times.Exactly(2));
         }
 
         [Test]
         public void IncompatibleComboOfBaseRaceAndMetaraceIsRegeneratedWithCompatibleBaseRace()
         {
-            mockBaseRaceRandomizer.SetupSequence(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>()))
-                .Returns(BaseRacePlusOne).Returns(BaseRace);
-
-            mockMetaraceRandomizer.Setup(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>()))
-                .Returns(Metarace);
+            mockRaceFactory.SetupSequence(f => f.CreateWith(It.IsAny<String>(), characterClassPrototype, mockBaseRaceRandomizer.Object,
+                mockMetaraceRandomizer.Object)).Returns(new Race() { BaseRace = BaseRacePlusOne, Metarace = Metarace })
+                .Returns(new Race() { BaseRace = BaseRace, Metarace = Metarace });
 
             characterClassPrototype.Level = 2;
 
             characterFactory.CreateUsing(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object,
                 mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
-            mockBaseRaceRandomizer.Verify(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>()), Times.Exactly(2));
-            mockMetaraceRandomizer.Verify(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>()), Times.Exactly(2));
+            mockRaceFactory.Verify(f => f.CreateWith(It.IsAny<String>(), characterClassPrototype, mockBaseRaceRandomizer.Object,
+                mockMetaraceRandomizer.Object), Times.Exactly(2));
         }
 
         [Test]
         public void IncompatibleComboOfBaseRaceAndMetaraceIsRegeneratedWithCompatibleMetarace()
         {
-            mockBaseRaceRandomizer.Setup(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>()))
-                .Returns(BaseRacePlusOne);
-
-            mockMetaraceRandomizer.SetupSequence(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>()))
-                .Returns(Metarace).Returns(String.Empty);
+            mockRaceFactory.SetupSequence(f => f.CreateWith(It.IsAny<String>(), characterClassPrototype, mockBaseRaceRandomizer.Object,
+                mockMetaraceRandomizer.Object)).Returns(new Race() { BaseRace = BaseRacePlusOne, Metarace = Metarace })
+                .Returns(new Race() { BaseRace = BaseRacePlusOne, Metarace = String.Empty });
 
             characterClassPrototype.Level = 2;
 
             characterFactory.CreateUsing(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object,
                 mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
-            mockBaseRaceRandomizer.Verify(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>()), Times.Exactly(2));
-            mockMetaraceRandomizer.Verify(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>()), Times.Exactly(2));
+            mockRaceFactory.Verify(f => f.CreateWith(It.IsAny<String>(), characterClassPrototype, mockBaseRaceRandomizer.Object,
+                mockMetaraceRandomizer.Object), Times.Exactly(2));
         }
 
         [Test]
         public void AppliesBaseRaceLevelAdjustment()
         {
             characterClassPrototype.Level = 2;
-            mockBaseRaceRandomizer.Setup(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>()))
-                .Returns(BaseRacePlusOne);
+            race.BaseRace = BaseRacePlusOne;
 
             characterFactory.CreateUsing(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object,
                 mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
@@ -217,8 +214,7 @@ namespace NPCGen.Tests.Unit.Generation.Factories
         public void AppliesMetaraceLevelAdjustment()
         {
             characterClassPrototype.Level = 2;
-            mockMetaraceRandomizer.Setup(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>()))
-                .Returns(Metarace);
+            race.Metarace = Metarace;
 
             characterFactory.CreateUsing(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object,
                 mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
@@ -228,13 +224,22 @@ namespace NPCGen.Tests.Unit.Generation.Factories
         [Test]
         public void ApplyBaseRaceAndMetaraceLevelAdjustments()
         {
-            mockBaseRaceRandomizer.Setup(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>())).Returns(BaseRacePlusOne);
-            mockMetaraceRandomizer.Setup(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>())).Returns(Metarace);
+            race.BaseRace = BaseRacePlusOne;
+            race.Metarace = Metarace;
             characterClassPrototype.Level = 3;
 
             characterFactory.CreateUsing(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object,
                 mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
             Assert.That(characterClassPrototype.Level, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void GetsInterestingTraitFromPercentileResultProvider()
+        {
+            mockPercentileResultProvider.Setup(p => p.GetPercentileResult("Traits")).Returns("interesting trait");
+            var character = characterFactory.CreateUsing(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object,
+                mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
+            Assert.That(character.InterestingTrait, Is.EqualTo("interesting trait"));
         }
     }
 }

@@ -1,9 +1,10 @@
-﻿using System;
-using D20Dice;
+﻿using D20Dice;
 using Moq;
 using NPCGen.Core.Generation.Providers;
 using NPCGen.Core.Generation.Providers.Interfaces;
+using NPCGen.Core.Generation.Xml.Parsers;
 using NUnit.Framework;
+using System;
 
 namespace NPCGen.Tests.Unit.Generation.Xml.Data
 {
@@ -19,7 +20,9 @@ namespace NPCGen.Tests.Unit.Generation.Xml.Data
         public void Setup()
         {
             mockDice = new Mock<IDice>();
-            percentileResultProvider = ProviderFactory.CreatePercentileResultProviderUsing(mockDice.Object);
+            var streamLoader = new EmbeddedResourceStreamLoader();
+            var percentileXmlParser = new PercentileXmlParser(streamLoader);
+            percentileResultProvider = new PercentileResultProvider(percentileXmlParser, mockDice.Object);
         }
 
         protected void AssertEmpty(Int32 roll)

@@ -20,14 +20,19 @@ namespace NPCGen.Bootstrap
             Bind<ICharacterClassFactory>().To<CharacterClassFactory>();
             Bind<ICharacterFactory>().To<CharacterFactory>();
             Bind<IDice>().ToMethod(c => DiceFactory.Create()).InSingletonScope();
+            Bind<IHitPointsFactory>().To<HitPointsFactory>();
             Bind<ILanguageFactory>().To<LanguageFactory>();
             Bind<ILanguageProvider>().To<LanguagesProvider>();
             Bind<ILanguagesXmlParser>().To<LanguagesXmlParser>();
             Bind<ILevelAdjustmentsProvider>().To<LevelAdjustmentsProvider>();
             Bind<IPercentileResultProvider>().To<PercentileResultProvider>();
             Bind<IPercentileXmlParser>().To<PercentileXmlParser>();
+            Bind<IRaceFactory>().To<RaceFactory>();
             Bind<IRandomizerVerifier>().To<RandomizerVerifier>();
             Bind<IStatsFactory>().To<StatsFactory>();
+            Bind<IStatPriorityProvider>().To<StatPriorityProvider>();
+            Bind<IStatPriorityXmlParser>().To<StatPriorityXmlParser>();
+            Bind<IStatAdjustmentsProvider>().To<StatAdjustmentsProvider>();
             Bind<IStreamLoader>().To<EmbeddedResourceStreamLoader>();
         }
     }

@@ -1,28 +1,36 @@
-﻿using System;
-using D20Dice;
+﻿using D20Dice;
 using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Data.Races;
+using NPCGen.Core.Generation.Factories.Interfaces;
+using System;
 
 namespace NPCGen.Core.Generation.Factories
 {
-    public static class HitPointsFactory
+    public class HitPointsFactory : IHitPointsFactory
     {
-        public static Int32 CreateUsing(IDice dice, CharacterClass characterClass, Int32 constitutionBonus, Race race)
+        private IDice dice;
+
+        public HitPointsFactory(IDice dice)
+        {
+            this.dice = dice;
+        }
+
+        public Int32 CreateWith(CharacterClass characterClass, Int32 constitutionBonus, Race race)
         {
             var hitPoints = 0;
 
             for (var i = 0; i < characterClass.Level; i++)
             {
-                var rolledHitPoints = RollHitPoints(dice, characterClass.ClassName, constitutionBonus);
+                var rolledHitPoints = RollHitPoints(characterClass.ClassName, constitutionBonus);
                 hitPoints += Math.Max(rolledHitPoints, 1);
             }
 
-            hitPoints += GetAdditionalMonsterHitDice(race, dice);
+            hitPoints += GetAdditionalMonsterHitDice(race);
 
             return hitPoints;
         }
 
-        private static Int32 RollHitPoints(IDice dice, String className, Int32 constitutionBonus)
+        private Int32 RollHitPoints(String className, Int32 constitutionBonus)
         {
             switch (className)
             {
@@ -41,7 +49,7 @@ namespace NPCGen.Core.Generation.Factories
             }
         }
 
-        private static Int32 GetAdditionalMonsterHitDice(Race race, IDice dice)
+        private Int32 GetAdditionalMonsterHitDice(Race race)
         {
             var numberOfRolls = GetNumberOfAdditionalMonsterHitDice(race);
 
@@ -51,7 +59,7 @@ namespace NPCGen.Core.Generation.Factories
             return dice.d8(numberOfRolls);
         }
 
-        private static Int32 GetNumberOfAdditionalMonsterHitDice(Race race)
+        private Int32 GetNumberOfAdditionalMonsterHitDice(Race race)
         {
             switch (race.BaseRace)
             {

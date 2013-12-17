@@ -39,7 +39,7 @@ namespace NPCGen.Tests.Integration.Generation.Factories
         [SetUp]
         public void Setup()
         {
-            kernel.Inject(this);
+            Inject(this);
 
             character = CharacterFactory.CreateUsing(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
                 MetaraceRandomizer, StatsRandomizer);

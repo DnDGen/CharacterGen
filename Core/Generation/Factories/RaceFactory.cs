@@ -1,27 +1,33 @@
-﻿using System;
-using D20Dice;
+﻿using D20Dice;
 using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Data.Races;
+using NPCGen.Core.Generation.Factories.Interfaces;
 using NPCGen.Core.Generation.Randomizers.Races.Interfaces;
+using System;
 
 namespace NPCGen.Core.Generation.Factories
 {
-    public static class RaceFactory
+    public class RaceFactory : IRaceFactory
     {
-        public static Race CreateUsing(String goodnessString, CharacterClassPrototype prototype, IBaseRaceRandomizer baseRaceRandomizer, 
-            IMetaraceRandomizer metaraceRandomizer, IDice dice)
+        private IDice dice;
+
+        public RaceFactory(IDice dice)
+        {
+            this.dice = dice;
+        }
+
+        public Race CreateWith(String goodnessString, CharacterClassPrototype prototype, IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer)
         {
             var race = new Race();
 
             race.BaseRace = baseRaceRandomizer.Randomize(goodnessString, prototype);
             race.Metarace = metaraceRandomizer.Randomize(goodnessString, prototype);
-
-            race.Male = GenerateGender(dice, race.BaseRace, prototype.ClassName);
+            race.Male = DetermineIfMale(race.BaseRace, prototype.ClassName);
 
             return race;
         }
 
-        private static Boolean GenerateGender(IDice dice, String baseRace, String className)
+        private Boolean DetermineIfMale(String baseRace, String className)
         {
             if (baseRace == RaceConstants.BaseRaces.Drow)
             {

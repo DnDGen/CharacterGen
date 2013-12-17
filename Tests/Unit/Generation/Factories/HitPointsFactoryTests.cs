@@ -5,6 +5,7 @@ using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Data.Races;
 using NPCGen.Core.Generation.Factories;
 using NUnit.Framework;
+using NPCGen.Core.Generation.Factories.Interfaces;
 
 namespace NPCGen.Tests.Unit.Generation.Factories
 {
@@ -12,6 +13,8 @@ namespace NPCGen.Tests.Unit.Generation.Factories
     public class HitPointsFactoryTests
     {
         private Mock<IDice> mockDice;
+        private IHitPointsFactory hitPointsFactory;
+
         private CharacterClass characterClass;
         private Race race;
         private Int32 constitutionBonus;
@@ -20,6 +23,8 @@ namespace NPCGen.Tests.Unit.Generation.Factories
         public void Setup()
         {
             mockDice = new Mock<IDice>();
+            hitPointsFactory = new HitPointsFactory(mockDice.Object);
+
             characterClass = new CharacterClass();
             characterClass.ClassName = CharacterClassConstants.Barbarian;
             race = new Race();
@@ -32,7 +37,7 @@ namespace NPCGen.Tests.Unit.Generation.Factories
             characterClass.Level = 1;
             characterClass.ClassName = CharacterClassConstants.Fighter;
 
-            HitPointsFactory.CreateUsing(mockDice.Object, characterClass, constitutionBonus, race);
+            hitPointsFactory.CreateWith(characterClass, constitutionBonus, race);
             mockDice.Verify(d => d.d10(1), Times.Once());
         }
 
@@ -42,7 +47,7 @@ namespace NPCGen.Tests.Unit.Generation.Factories
             characterClass.Level = 1;
             characterClass.ClassName = CharacterClassConstants.Paladin;
 
-            HitPointsFactory.CreateUsing(mockDice.Object, characterClass, constitutionBonus, race);
+            hitPointsFactory.CreateWith(characterClass, constitutionBonus, race);
             mockDice.Verify(d => d.d10(1), Times.Once());
         }
 
@@ -52,7 +57,7 @@ namespace NPCGen.Tests.Unit.Generation.Factories
             characterClass.Level = 1;
             characterClass.ClassName = CharacterClassConstants.Barbarian;
 
-            HitPointsFactory.CreateUsing(mockDice.Object, characterClass, constitutionBonus, race);
+            hitPointsFactory.CreateWith(characterClass, constitutionBonus, race);
             mockDice.Verify(d => d.d12(1), Times.Once());
         }
 
@@ -62,7 +67,7 @@ namespace NPCGen.Tests.Unit.Generation.Factories
             characterClass.Level = 1;
             characterClass.ClassName = CharacterClassConstants.Cleric;
 
-            HitPointsFactory.CreateUsing(mockDice.Object, characterClass, constitutionBonus, race);
+            hitPointsFactory.CreateWith(characterClass, constitutionBonus, race);
             mockDice.Verify(d => d.d8(1), Times.Once());
         }
 
@@ -72,7 +77,7 @@ namespace NPCGen.Tests.Unit.Generation.Factories
             characterClass.Level = 1;
             characterClass.ClassName = CharacterClassConstants.Druid;
 
-            HitPointsFactory.CreateUsing(mockDice.Object, characterClass, constitutionBonus, race);
+            hitPointsFactory.CreateWith(characterClass, constitutionBonus, race);
             mockDice.Verify(d => d.d8(1), Times.Once());
         }
 
@@ -82,7 +87,7 @@ namespace NPCGen.Tests.Unit.Generation.Factories
             characterClass.Level = 1;
             characterClass.ClassName = CharacterClassConstants.Monk;
 
-            HitPointsFactory.CreateUsing(mockDice.Object, characterClass, constitutionBonus, race);
+            hitPointsFactory.CreateWith(characterClass, constitutionBonus, race);
             mockDice.Verify(d => d.d8(1), Times.Once());
         }
 
@@ -92,7 +97,7 @@ namespace NPCGen.Tests.Unit.Generation.Factories
             characterClass.Level = 1;
             characterClass.ClassName = CharacterClassConstants.Ranger;
 
-            HitPointsFactory.CreateUsing(mockDice.Object, characterClass, constitutionBonus, race);
+            hitPointsFactory.CreateWith(characterClass, constitutionBonus, race);
             mockDice.Verify(d => d.d8(1), Times.Once());
         }
 
@@ -102,7 +107,7 @@ namespace NPCGen.Tests.Unit.Generation.Factories
             characterClass.Level = 1;
             characterClass.ClassName = CharacterClassConstants.Bard;
 
-            HitPointsFactory.CreateUsing(mockDice.Object, characterClass, constitutionBonus, race);
+            hitPointsFactory.CreateWith(characterClass, constitutionBonus, race);
             mockDice.Verify(d => d.d6(1), Times.Once());
         }
 
@@ -112,7 +117,7 @@ namespace NPCGen.Tests.Unit.Generation.Factories
             characterClass.Level = 1;
             characterClass.ClassName = CharacterClassConstants.Rogue;
 
-            HitPointsFactory.CreateUsing(mockDice.Object, characterClass, constitutionBonus, race);
+            hitPointsFactory.CreateWith(characterClass, constitutionBonus, race);
             mockDice.Verify(d => d.d6(1), Times.Once());
         }
 
@@ -122,7 +127,7 @@ namespace NPCGen.Tests.Unit.Generation.Factories
             characterClass.Level = 1;
             characterClass.ClassName = CharacterClassConstants.Sorcerer;
 
-            HitPointsFactory.CreateUsing(mockDice.Object, characterClass, constitutionBonus, race);
+            hitPointsFactory.CreateWith(characterClass, constitutionBonus, race);
             mockDice.Verify(d => d.d4(1), Times.Once());
         }
 
@@ -132,7 +137,7 @@ namespace NPCGen.Tests.Unit.Generation.Factories
             characterClass.Level = 1;
             characterClass.ClassName = CharacterClassConstants.Wizard;
 
-            HitPointsFactory.CreateUsing(mockDice.Object, characterClass, constitutionBonus, race);
+            hitPointsFactory.CreateWith(characterClass, constitutionBonus, race);
             mockDice.Verify(d => d.d4(1), Times.Once());
         }
 
@@ -144,7 +149,7 @@ namespace NPCGen.Tests.Unit.Generation.Factories
                 mockDice.ResetCalls();
                 characterClass.Level = level;
 
-                HitPointsFactory.CreateUsing(mockDice.Object, characterClass, constitutionBonus, race);
+                hitPointsFactory.CreateWith(characterClass, constitutionBonus, race);
                 mockDice.Verify(d => d.d12(1), Times.Exactly(level));
             }
         }
@@ -157,7 +162,7 @@ namespace NPCGen.Tests.Unit.Generation.Factories
             var roll = 4;
             mockDice.Setup(d => d.d12(1)).Returns(roll);
 
-            var hitPoints = HitPointsFactory.CreateUsing(mockDice.Object, characterClass, constitutionBonus, race);
+            var hitPoints = hitPointsFactory.CreateWith(characterClass, constitutionBonus, race);
             Assert.That(hitPoints, Is.EqualTo(roll + constitutionBonus));
         }
 
@@ -168,7 +173,7 @@ namespace NPCGen.Tests.Unit.Generation.Factories
             {
                 characterClass.Level = level;
 
-                var hitPoints = HitPointsFactory.CreateUsing(mockDice.Object, characterClass, Int32.MinValue, race);
+                var hitPoints = hitPointsFactory.CreateWith(characterClass, Int32.MinValue, race);
                 Assert.That(hitPoints, Is.EqualTo(level));
             }
         }
@@ -178,7 +183,7 @@ namespace NPCGen.Tests.Unit.Generation.Factories
         {
             race.BaseRace = RaceConstants.BaseRaces.Bugbear;
 
-            var hitPoints = HitPointsFactory.CreateUsing(mockDice.Object, characterClass, constitutionBonus, race);
+            var hitPoints = hitPointsFactory.CreateWith(characterClass, constitutionBonus, race);
             mockDice.Verify(d => d.d8(3), Times.Once);
         }
 
@@ -187,7 +192,7 @@ namespace NPCGen.Tests.Unit.Generation.Factories
         {
             race.BaseRace = RaceConstants.BaseRaces.Derro;
 
-            var hitPoints = HitPointsFactory.CreateUsing(mockDice.Object, characterClass, constitutionBonus, race);
+            var hitPoints = hitPointsFactory.CreateWith(characterClass, constitutionBonus, race);
             mockDice.Verify(d => d.d8(3), Times.Once);
         }
 
@@ -196,7 +201,7 @@ namespace NPCGen.Tests.Unit.Generation.Factories
         {
             race.BaseRace = RaceConstants.BaseRaces.Doppelganger;
 
-            var hitPoints = HitPointsFactory.CreateUsing(mockDice.Object, characterClass, constitutionBonus, race);
+            var hitPoints = hitPointsFactory.CreateWith(characterClass, constitutionBonus, race);
             mockDice.Verify(d => d.d8(4), Times.Once);
         }
 
@@ -205,7 +210,7 @@ namespace NPCGen.Tests.Unit.Generation.Factories
         {
             race.BaseRace = RaceConstants.BaseRaces.Gnoll;
 
-            var hitPoints = HitPointsFactory.CreateUsing(mockDice.Object, characterClass, constitutionBonus, race);
+            var hitPoints = hitPointsFactory.CreateWith(characterClass, constitutionBonus, race);
             mockDice.Verify(d => d.d8(2), Times.Once);
         }
 
@@ -215,14 +220,14 @@ namespace NPCGen.Tests.Unit.Generation.Factories
             race.Metarace = RaceConstants.Metaraces.HalfDragon;
             race.BaseRace = RaceConstants.BaseRaces.Derro;
 
-            var hitPoints = HitPointsFactory.CreateUsing(mockDice.Object, characterClass, constitutionBonus, race);
+            var hitPoints = hitPointsFactory.CreateWith(characterClass, constitutionBonus, race);
             mockDice.Verify(d => d.d10(It.IsAny<Int32>()), Times.Once);
         }
 
         [Test]
         public void AnyMetaraceExceptHalfDragonGetsD8HitDice()
         {
-            var hitPoints = HitPointsFactory.CreateUsing(mockDice.Object, characterClass, constitutionBonus, race);
+            var hitPoints = hitPointsFactory.CreateWith(characterClass, constitutionBonus, race);
             mockDice.Verify(d => d.d8(It.IsAny<Int32>()), Times.Once);
         }
 
@@ -231,7 +236,7 @@ namespace NPCGen.Tests.Unit.Generation.Factories
         {
             race.BaseRace = RaceConstants.BaseRaces.Lizardfolk;
 
-            var hitPoints = HitPointsFactory.CreateUsing(mockDice.Object, characterClass, constitutionBonus, race);
+            var hitPoints = hitPointsFactory.CreateWith(characterClass, constitutionBonus, race);
             mockDice.Verify(d => d.d8(2), Times.Once);
         }
 
@@ -240,7 +245,7 @@ namespace NPCGen.Tests.Unit.Generation.Factories
         {
             race.BaseRace = RaceConstants.BaseRaces.MindFlayer;
 
-            var hitPoints = HitPointsFactory.CreateUsing(mockDice.Object, characterClass, constitutionBonus, race);
+            var hitPoints = hitPointsFactory.CreateWith(characterClass, constitutionBonus, race);
             mockDice.Verify(d => d.d8(8), Times.Once);
         }
 
@@ -249,7 +254,7 @@ namespace NPCGen.Tests.Unit.Generation.Factories
         {
             race.BaseRace = RaceConstants.BaseRaces.Minotaur;
 
-            var hitPoints = HitPointsFactory.CreateUsing(mockDice.Object, characterClass, constitutionBonus, race);
+            var hitPoints = hitPointsFactory.CreateWith(characterClass, constitutionBonus, race);
             mockDice.Verify(d => d.d8(6), Times.Once);
         }
 
@@ -258,7 +263,7 @@ namespace NPCGen.Tests.Unit.Generation.Factories
         {
             race.BaseRace = RaceConstants.BaseRaces.Ogre;
 
-            var hitPoints = HitPointsFactory.CreateUsing(mockDice.Object, characterClass, constitutionBonus, race);
+            var hitPoints = hitPointsFactory.CreateWith(characterClass, constitutionBonus, race);
             mockDice.Verify(d => d.d8(4), Times.Once);
         }
 
@@ -267,7 +272,7 @@ namespace NPCGen.Tests.Unit.Generation.Factories
         {
             race.BaseRace = RaceConstants.BaseRaces.OgreMage;
 
-            var hitPoints = HitPointsFactory.CreateUsing(mockDice.Object, characterClass, constitutionBonus, race);
+            var hitPoints = hitPointsFactory.CreateWith(characterClass, constitutionBonus, race);
             mockDice.Verify(d => d.d8(5), Times.Once);
         }
 
@@ -276,7 +281,7 @@ namespace NPCGen.Tests.Unit.Generation.Factories
         {
             race.BaseRace = RaceConstants.BaseRaces.Troglodyte;
 
-            var hitPoints = HitPointsFactory.CreateUsing(mockDice.Object, characterClass, constitutionBonus, race);
+            var hitPoints = hitPointsFactory.CreateWith(characterClass, constitutionBonus, race);
             mockDice.Verify(d => d.d8(2), Times.Once);
         }
     }

@@ -67,7 +67,9 @@
     <Compile Include="Generation\Factories\Interfaces\IAlignmentFactory.cs" />
     <Compile Include="Generation\Factories\Interfaces\ICharacterClassFactory.cs" />
     <Compile Include="Generation\Factories\Interfaces\ICharacterFactory.cs" />
+    <Compile Include="Generation\Factories\Interfaces\IHitPointsFactory.cs" />
     <Compile Include="Generation\Factories\Interfaces\ILanguageFactory.cs" />
+    <Compile Include="Generation\Factories\Interfaces\IRaceFactory.cs" />
     <Compile Include="Generation\Factories\Interfaces\IStatsFactory.cs" />
     <Compile Include="Generation\Factories\LanguageFactory.cs" />
     <Compile Include="Generation\Factories\RaceFactory.cs" />
@@ -78,7 +80,6 @@
     <Compile Include="Generation\Providers\Interfaces\IStatPriorityProvider.cs" />
     <Compile Include="Generation\Providers\LanguagesProvider.cs" />
     <Compile Include="Generation\Providers\LevelAdjustmentsProvider.cs" />
-    <Compile Include="Generation\Providers\ProviderFactory.cs" />
     <Compile Include="Generation\Providers\StatAdjustmentsProvider.cs" />
     <Compile Include="Generation\Providers\StatPriorityProvider.cs" />
     <Compile Include="Generation\Randomizers\Alignments\AnyAlignmentRandomizer.cs" />
