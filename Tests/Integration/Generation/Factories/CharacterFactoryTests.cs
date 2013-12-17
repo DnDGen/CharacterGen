@@ -1,5 +1,6 @@
-﻿using Ninject;
-using NPCGen.Core.Data;
+﻿using System;
+using System.Linq;
+using Ninject;
 using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Data.Stats;
@@ -11,8 +12,6 @@ using NPCGen.Core.Generation.Randomizers.Races.BaseRaces;
 using NPCGen.Core.Generation.Randomizers.Races.Metaraces;
 using NPCGen.Core.Generation.Randomizers.Stats;
 using NUnit.Framework;
-using System;
-using System.Linq;
 
 namespace NPCGen.Tests.Integration.Generation.Factories
 {
@@ -34,21 +33,15 @@ namespace NPCGen.Tests.Integration.Generation.Factories
         [Inject]
         public RawStatsRandomizer StatsRandomizer { get; set; }
 
-        private Character character;
-
-        [SetUp]
-        public void Setup()
-        {
-            Inject(this);
-
-            character = CharacterFactory.CreateUsing(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
-                MetaraceRandomizer, StatsRandomizer);
-        }
-
         [Test]
         public void CharacterFactoryReturnsACharacter()
         {
-            Assert.That(character, Is.Not.Null);
+            for (var i = 0; i < ConfidenceLevel; i++)
+            {
+                var character = CharacterFactory.CreateUsing(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
+                    MetaraceRandomizer, StatsRandomizer);
+                Assert.That(character, Is.Not.Null);
+            }
         }
 
         [Test]
@@ -57,9 +50,15 @@ namespace NPCGen.Tests.Integration.Generation.Factories
             var goodnesses = AlignmentConstants.GetGoodnesses();
             var lawfulnesses = AlignmentConstants.GetLawfulnesses();
 
-            Assert.That(character.Alignment, Is.Not.Null);
-            Assert.That(goodnesses.Contains(character.Alignment.Goodness), Is.True);
-            Assert.That(lawfulnesses.Contains(character.Alignment.Lawfulness), Is.True);
+            for (var i = 0; i < ConfidenceLevel; i++)
+            {
+                var character = CharacterFactory.CreateUsing(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
+                    MetaraceRandomizer, StatsRandomizer);
+
+                Assert.That(character.Alignment, Is.Not.Null);
+                Assert.That(goodnesses.Contains(character.Alignment.Goodness), Is.True);
+                Assert.That(lawfulnesses.Contains(character.Alignment.Lawfulness), Is.True);
+            }
         }
 
         [Test]
@@ -67,55 +66,92 @@ namespace NPCGen.Tests.Integration.Generation.Factories
         {
             var classes = CharacterClassConstants.GetClassNames();
 
-            Assert.That(character.Class, Is.Not.Null);
-            Assert.That(classes.Contains(character.Class.ClassName), Is.True);
-            Assert.That(character.Class.Level, Is.GreaterThan(0));
+            for (var i = 0; i < ConfidenceLevel; i++)
+            {
+                var character = CharacterFactory.CreateUsing(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
+                    MetaraceRandomizer, StatsRandomizer);
+
+                Assert.That(character.Class, Is.Not.Null);
+                Assert.That(classes.Contains(character.Class.ClassName), Is.True);
+                Assert.That(character.Class.Level, Is.GreaterThan(0));
+            }
         }
 
         [Test]
         public void CharacterFactoryReturnsCharacterWithFeats()
         {
-            Assert.That(character.Feats, Is.Not.Null);
+            for (var i = 0; i < ConfidenceLevel; i++)
+            {
+                var character = CharacterFactory.CreateUsing(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
+                    MetaraceRandomizer, StatsRandomizer);
+                Assert.That(character.Feats, Is.Not.Null);
+            }
         }
 
         [Test]
         public void CharacterFactoryReturnsCharacterWithHitPointsGreaterThanZero()
         {
-            Assert.That(character.HitPoints, Is.GreaterThan(0));
+            for (var i = 0; i < ConfidenceLevel; i++)
+            {
+                var character = CharacterFactory.CreateUsing(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
+                    MetaraceRandomizer, StatsRandomizer);
+                Assert.That(character.HitPoints, Is.GreaterThan(0));
+            }
         }
 
         [Test]
         public void CharacterFactoryReturnsCharacterWithLanguages()
         {
-            Assert.That(character.Languages, Is.Not.Null);
+            for (var i = 0; i < ConfidenceLevel; i++)
+            {
+                var character = CharacterFactory.CreateUsing(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
+                    MetaraceRandomizer, StatsRandomizer);
+                Assert.That(character.Languages, Is.Not.Null);
+            }
         }
 
         [Test]
         public void CharacterFactoryReturnsCharacterWithRace()
         {
-            Assert.That(character.Race, Is.Not.Null);
-            Assert.That(character.Race.BaseRace, Is.Not.EqualTo(String.Empty));
+            for (var i = 0; i < ConfidenceLevel; i++)
+            {
+                var character = CharacterFactory.CreateUsing(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
+                    MetaraceRandomizer, StatsRandomizer);
+                Assert.That(character.Race, Is.Not.Null);
+                Assert.That(character.Race.BaseRace, Is.Not.EqualTo(String.Empty));
+            }
         }
 
         [Test]
         public void CharacterFactoryReturnsCharacterWithSkills()
         {
-            Assert.That(character.Skills, Is.Not.Null);
+            for (var i = 0; i < ConfidenceLevel; i++)
+            {
+                var character = CharacterFactory.CreateUsing(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
+                    MetaraceRandomizer, StatsRandomizer);
+                Assert.That(character.Skills, Is.Not.Null);
+            }
         }
 
         [Test]
         public void CharacterFactoryReturnsCharacterWithStats()
         {
-            Assert.That(character.Stats, Is.Not.Null);
-
             var statNames = StatConstants.GetStats();
-            foreach (var statName in statNames)
-            {
-                Assert.That(character.Stats.ContainsKey(statName), Is.True);
 
-                var stat = character.Stats[statName];
-                Assert.That(stat, Is.Not.Null);
-                Assert.That(stat.Value, Is.GreaterThan(0));
+            for (var i = 0; i < ConfidenceLevel; i++)
+            {
+                var character = CharacterFactory.CreateUsing(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
+                    MetaraceRandomizer, StatsRandomizer);
+                Assert.That(character.Stats, Is.Not.Null);
+
+                foreach (var statName in statNames)
+                {
+                    Assert.That(character.Stats.ContainsKey(statName), Is.True);
+
+                    var stat = character.Stats[statName];
+                    Assert.That(stat, Is.Not.Null);
+                    Assert.That(stat.Value, Is.GreaterThan(0));
+                }
             }
         }
     }

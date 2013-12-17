@@ -36,10 +36,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Ninject">
-      <HintPath>..\..\..\packages\Ninject.3.0.1.10\lib\net45-full\Ninject.dll</HintPath>
+      <HintPath>..\..\packages\Ninject.3.0.1.10\lib\net45-full\Ninject.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
-      <HintPath>..\..\..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
+      <HintPath>..\..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
   </ItemGroup>
@@ -56,7 +56,25 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Generation\Factories\CharacterClassFactoryTests.cs" />
     <Compile Include="Generation\Factories\CharacterFactoryTests.cs" />
+    <Compile Include="Generation\Factories\AlignmentFactoryTests.cs" />
+    <Compile Include="Generation\Factories\HitPointsFactoryTests.cs" />
+    <Compile Include="Generation\Factories\LanguageFactoryTests.cs" />
+    <Compile Include="Generation\Factories\RaceFactoryTests.cs" />
+    <Compile Include="Generation\Factories\StatsFactoryTests.cs" />
+    <Compile Include="Generation\Randomizers\Alignments\AnyAlignmentRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Alignments\ChaoticAlignmentRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Alignments\EvilAlignmentRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Alignments\GoodAlignmentRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Alignments\LawfulAlignmentRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Alignments\NeutralAlignmentRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Alignments\NonChaoticAlignmentRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Alignments\NonEvilAlignmentRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Alignments\NonGoodAlignmentRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Alignments\NonLawfulAlignmentRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Alignments\NonNeutralAlignmentRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Alignments\SetAlignmentRandomizerTests.cs" />
     <Compile Include="IntegrationTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
