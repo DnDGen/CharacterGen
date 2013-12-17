@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Ninject;
 using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Generation.Randomizers.Alignments;
@@ -16,10 +12,16 @@ namespace NPCGen.Tests.Integration.Generation.Randomizers.Alignments
         [Inject]
         public NonLawfulAlignmentRandomizer AlignmentRandomizer { get; set; }
 
+        [SetUp]
+        public void Setup()
+        {
+            StartTest();
+        }
+
         [Test]
         public void NonLawfulAlignmentRandomizerReturnsAlignment()
         {
-            for (var i = 0; i < ConfidenceLevel; i++)
+            while (TestShouldKeepRunning())
             {
                 var alignment = AlignmentRandomizer.Randomize();
                 Assert.That(alignment, Is.Not.Null);
@@ -31,7 +33,7 @@ namespace NPCGen.Tests.Integration.Generation.Randomizers.Alignments
         {
             var goodnesses = AlignmentConstants.GetGoodnesses();
 
-            for (var i = 0; i < ConfidenceLevel; i++)
+            while (TestShouldKeepRunning())
             {
                 var alignment = AlignmentRandomizer.Randomize();
                 Assert.That(goodnesses.Contains(alignment.Goodness), Is.True);
@@ -43,7 +45,7 @@ namespace NPCGen.Tests.Integration.Generation.Randomizers.Alignments
         {
             var lawfulnesses = AlignmentConstants.GetLawfulnesses();
 
-            for (var i = 0; i < ConfidenceLevel; i++)
+            while (TestShouldKeepRunning())
             {
                 var alignment = AlignmentRandomizer.Randomize();
                 Assert.That(lawfulnesses.Contains(alignment.Lawfulness), Is.True);
@@ -53,7 +55,7 @@ namespace NPCGen.Tests.Integration.Generation.Randomizers.Alignments
         [Test]
         public void NonLawfulAlignmentRandomizerAlwaysReturnsNonLawfulAlignment()
         {
-            for (var i = 0; i < ConfidenceLevel; i++)
+            while (TestShouldKeepRunning())
             {
                 var alignment = AlignmentRandomizer.Randomize();
                 Assert.That(alignment.IsLawful(), Is.False);

@@ -1,4 +1,6 @@
-﻿using D20Dice;
+﻿using System;
+using System.Collections.Generic;
+using D20Dice;
 using Moq;
 using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Data.Races;
@@ -9,8 +11,6 @@ using NPCGen.Core.Generation.Providers.Interfaces;
 using NPCGen.Core.Generation.Randomizers.Stats.Interfaces;
 using NPCGen.Core.Generation.Xml.Parsers.Objects;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
 
 namespace NPCGen.Tests.Unit.Generation.Factories
 {
@@ -214,6 +214,15 @@ namespace NPCGen.Tests.Unit.Generation.Factories
 
             var stats = statsFactory.CreateWith(mockStatRandomizer.Object, characterClass, race);
             Assert.That(stats[statPriority.FirstPriority].Value, Is.EqualTo(baseStat + 5));
+        }
+
+        [Test]
+        public void CannotHaveStatLessThanOne()
+        {
+            adjustments[statPriority.FirstPriority] = -9266;
+
+            var stats = statsFactory.CreateWith(mockStatRandomizer.Object, characterClass, race);
+            Assert.That(stats[statPriority.FirstPriority].Value, Is.EqualTo(1));
         }
     }
 }

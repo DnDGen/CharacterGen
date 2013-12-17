@@ -22,10 +22,16 @@ namespace NPCGen.Tests.Integration.Generation.Factories
         [Inject]
         public AnyMetaraceRandomizer MetaraceRandomizer { get; set; }
 
+        [SetUp]
+        public void Setup()
+        {
+            StartTest();
+        }
+
         [Test]
         public void RaceFactoryReturnsRace()
         {
-            for (var i = 0; i < ConfidenceLevel; i++)
+            while (TestShouldKeepRunning())
             {
                 var race = RaceFactory.CreateWith(Alignment.Goodness, CharacterClassPrototype, BaseRaceRandomizer, MetaraceRandomizer);
                 Assert.That(race, Is.Not.Null);
@@ -35,7 +41,7 @@ namespace NPCGen.Tests.Integration.Generation.Factories
         [Test]
         public void RaceFactoryReturnsRaceWithBaseRace()
         {
-            for (var i = 0; i < ConfidenceLevel; i++)
+            while (TestShouldKeepRunning())
             {
                 var race = RaceFactory.CreateWith(Alignment.Goodness, CharacterClassPrototype, BaseRaceRandomizer, MetaraceRandomizer);
                 Assert.That(race.BaseRace, Is.Not.Null);
@@ -46,7 +52,7 @@ namespace NPCGen.Tests.Integration.Generation.Factories
         [Test]
         public void RaceFactoryReturnsRaceWithMetarace()
         {
-            for (var i = 0; i < ConfidenceLevel; i++)
+            while (TestShouldKeepRunning())
             {
                 var race = RaceFactory.CreateWith(Alignment.Goodness, CharacterClassPrototype, BaseRaceRandomizer, MetaraceRandomizer);
                 Assert.That(race.Metarace, Is.Not.Null);

@@ -1,4 +1,7 @@
-﻿using D20Dice;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using D20Dice;
 using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Data.Races;
 using NPCGen.Core.Data.Stats;
@@ -6,9 +9,6 @@ using NPCGen.Core.Generation.Factories.Interfaces;
 using NPCGen.Core.Generation.Providers.Interfaces;
 using NPCGen.Core.Generation.Randomizers.Stats.Interfaces;
 using NPCGen.Core.Generation.Xml.Parsers.Objects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace NPCGen.Core.Generation.Factories
 {
@@ -35,7 +35,14 @@ namespace NPCGen.Core.Generation.Factories
             var statAdjustments = statAdjustmentsProvider.GetAdjustments(race);
 
             foreach (var stat in prioritizedStats.Keys)
-                prioritizedStats[stat].Value += statAdjustments[stat];
+            {
+                var statValue = prioritizedStats[stat].Value;
+
+                statValue += statAdjustments[stat];
+                statValue = Math.Max(statValue, 1);
+
+                prioritizedStats[stat].Value = statValue;
+            }
 
             var increasedStats = IncreaseStats(prioritizedStats, statPriorities, characterClass.Level);
 

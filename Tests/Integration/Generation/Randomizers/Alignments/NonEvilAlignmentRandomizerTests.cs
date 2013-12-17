@@ -12,10 +12,16 @@ namespace NPCGen.Tests.Integration.Generation.Randomizers.Alignments
         [Inject]
         public NonEvilAlignmentRandomizer AlignmentRandomizer { get; set; }
 
+        [SetUp]
+        public void Setup()
+        {
+            StartTest();
+        }
+
         [Test]
         public void NonEvilAlignmentRandomizerReturnsAlignment()
         {
-            for (var i = 0; i < ConfidenceLevel; i++)
+            while (TestShouldKeepRunning())
             {
                 var alignment = AlignmentRandomizer.Randomize();
                 Assert.That(alignment, Is.Not.Null);
@@ -27,7 +33,7 @@ namespace NPCGen.Tests.Integration.Generation.Randomizers.Alignments
         {
             var goodnesses = AlignmentConstants.GetGoodnesses();
 
-            for (var i = 0; i < ConfidenceLevel; i++)
+            while (TestShouldKeepRunning())
             {
                 var alignment = AlignmentRandomizer.Randomize();
                 Assert.That(goodnesses.Contains(alignment.Goodness), Is.True);
@@ -39,7 +45,7 @@ namespace NPCGen.Tests.Integration.Generation.Randomizers.Alignments
         {
             var lawfulnesses = AlignmentConstants.GetLawfulnesses();
 
-            for (var i = 0; i < ConfidenceLevel; i++)
+            while (TestShouldKeepRunning())
             {
                 var alignment = AlignmentRandomizer.Randomize();
                 Assert.That(lawfulnesses.Contains(alignment.Lawfulness), Is.True);
@@ -49,7 +55,7 @@ namespace NPCGen.Tests.Integration.Generation.Randomizers.Alignments
         [Test]
         public void NonEvilAlignmentRandomizerAlwaysReturnsNonEvilAlignment()
         {
-            for (var i = 0; i < ConfidenceLevel; i++)
+            while (TestShouldKeepRunning())
             {
                 var alignment = AlignmentRandomizer.Randomize();
                 Assert.That(alignment.IsEvil(), Is.False);

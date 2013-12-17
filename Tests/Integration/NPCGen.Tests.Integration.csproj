@@ -75,6 +75,21 @@
     <Compile Include="Generation\Randomizers\Alignments\NonLawfulAlignmentRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\Alignments\NonNeutralAlignmentRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\Alignments\SetAlignmentRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\ClassNames\AnyClassNameRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\ClassNames\HealerClassNameRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\ClassNames\MageClassNameRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\ClassNames\NonSpellcasterClassNameRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\ClassNames\SetClassNameRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\ClassNames\SpellcasterClassNameRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\ClassNames\StealthClassNameRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\ClassNames\WarriorClassNameRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\Levels\AnyLevelRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\Levels\HighLevelRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\Levels\LowLevelRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\Levels\MediumLevelRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\Levels\SetLevelRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\Levels\VeryHighLevelRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Races\BaseRaces\AnyBaseRaceRandomizerTests.cs" />
     <Compile Include="IntegrationTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

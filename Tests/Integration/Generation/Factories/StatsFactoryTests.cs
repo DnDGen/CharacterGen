@@ -1,4 +1,5 @@
-﻿using Ninject;
+﻿using System;
+using Ninject;
 using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Data.Races;
 using NPCGen.Core.Data.Stats;
@@ -20,10 +21,16 @@ namespace NPCGen.Tests.Integration.Generation.Factories
         [Inject]
         public Race Race { get; set; }
 
+        [SetUp]
+        public void Setup()
+        {
+            StartTest();
+        }
+
         [Test]
         public void StatsFactoryReturnsStats()
         {
-            for (var i = 0; i < ConfidenceLevel; i++)
+            while (TestShouldKeepRunning())
             {
                 var stats = StatsFactory.CreateWith(StatsRandomizer, CharacterClass, Race);
                 Assert.That(stats, Is.Not.Null);
@@ -35,7 +42,7 @@ namespace NPCGen.Tests.Integration.Generation.Factories
         {
             var statNames = StatConstants.GetStats();
 
-            for (var i = 0; i < ConfidenceLevel; i++)
+            while (TestShouldKeepRunning())
             {
                 var stats = StatsFactory.CreateWith(StatsRandomizer, CharacterClass, Race);
 
@@ -43,9 +50,15 @@ namespace NPCGen.Tests.Integration.Generation.Factories
                 {
                     Assert.That(stats.ContainsKey(statName), Is.True);
                     Assert.That(stats[statName], Is.Not.Null);
-                    Assert.That(stats[statName].Value, Is.GreaterThan(0));
+                    Assert.That(stats[statName].Value, Is.GreaterThan(0), GetErrorMessage(statName));
                 }
             }
+        }
+
+        private String GetErrorMessage(String statName)
+        {
+            return String.Format("Stat: {0}\nClass: {1} {2}\nRace: {3} {4}", statName, CharacterClass.ClassName, CharacterClass.Level,
+                Race.Metarace, Race.BaseRace);
         }
     }
 }

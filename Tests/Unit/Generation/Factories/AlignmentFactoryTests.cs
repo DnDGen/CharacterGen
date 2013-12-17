@@ -18,6 +18,7 @@ namespace NPCGen.Tests.Unit.Generation.Factories
         [SetUp]
         public void Setup()
         {
+            alignment = new Alignment();
             mockAlignmentRandomizer = new Mock<IAlignmentRandomizer>();
             mockAlignmentRandomizer.Setup(r => r.Randomize()).Returns(alignment);
             alignmentFactory = new AlignmentFactory();

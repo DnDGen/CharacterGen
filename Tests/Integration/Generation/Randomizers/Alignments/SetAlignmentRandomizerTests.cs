@@ -17,12 +17,13 @@ namespace NPCGen.Tests.Integration.Generation.Randomizers.Alignments
         public void Setup()
         {
             AlignmentRandomizer.Alignment = Alignment;
+            StartTest();
         }
 
         [Test]
         public void SetAlignmentRandomizerAlwaysReturnsSetAlignment()
         {
-            for (var i = 0; i < ConfidenceLevel; i++)
+            while (TestShouldKeepRunning())
             {
                 var alignment = AlignmentRandomizer.Randomize();
                 Assert.That(alignment, Is.EqualTo(Alignment));

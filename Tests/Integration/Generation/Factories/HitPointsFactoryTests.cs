@@ -21,10 +21,16 @@ namespace NPCGen.Tests.Integration.Generation.Factories
         [Inject]
         public Race Race { get; set; }
 
+        [SetUp]
+        public void Setup()
+        {
+            StartTest();
+        }
+
         [Test]
         public void HitPointsFactoryReturnsHitPointsGreaterThanZero()
         {
-            for (var i = 0; i < ConfidenceLevel; i++)
+            while (TestShouldKeepRunning())
             {
                 var hitPoints = HitPointsFactory.CreateWith(CharacterClass, Stats[StatConstants.Constitution].Bonus, Race);
                 Assert.That(hitPoints, Is.GreaterThan(0));

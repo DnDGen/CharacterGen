@@ -16,10 +16,16 @@ namespace NPCGen.Tests.Integration.Generation.Factories
         [Inject]
         public AnyAlignmentRandomizer AlignmentRandomizer { get; set; }
 
+        [SetUp]
+        public void Setup()
+        {
+            StartTest();
+        }
+
         [Test]
         public void AlignmentFactoryReturnsAlignment()
         {
-            for (var i = 0; i < ConfidenceLevel; i++)
+            while (TestShouldKeepRunning())
             {
                 var alignment = AlignmentFactory.CreateWith(AlignmentRandomizer);
                 Assert.That(alignment, Is.Not.Null);
@@ -31,7 +37,7 @@ namespace NPCGen.Tests.Integration.Generation.Factories
         {
             var goodnesses = AlignmentConstants.GetGoodnesses();
 
-            for (var i = 0; i < ConfidenceLevel; i++)
+            while (TestShouldKeepRunning())
             {
                 var alignment = AlignmentFactory.CreateWith(AlignmentRandomizer);
                 Assert.That(goodnesses.Contains(alignment.Goodness), Is.True);
@@ -43,7 +49,7 @@ namespace NPCGen.Tests.Integration.Generation.Factories
         {
             var lawfulnesses = AlignmentConstants.GetLawfulnesses();
 
-            for (var i = 0; i < ConfidenceLevel; i++)
+            while (TestShouldKeepRunning())
             {
                 var alignment = AlignmentFactory.CreateWith(AlignmentRandomizer);
                 Assert.That(lawfulnesses.Contains(alignment.Lawfulness), Is.True);

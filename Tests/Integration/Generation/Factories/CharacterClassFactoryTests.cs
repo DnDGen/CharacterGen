@@ -22,10 +22,16 @@ namespace NPCGen.Tests.Integration.Generation.Factories
         [Inject]
         public AnyClassNameRandomizer ClassNameRandomizer { get; set; }
 
+        [SetUp]
+        public void Setup()
+        {
+            StartTest();
+        }
+
         [Test]
         public void CharacterClassFactoryReturnsPrototype()
         {
-            for (var i = 0; i < ConfidenceLevel; i++)
+            while (TestShouldKeepRunning())
             {
                 var prototype = CharacterClassFactory.CreatePrototypeWith(Alignment, LevelRandomizer, ClassNameRandomizer);
                 Assert.That(prototype, Is.Not.Null);
@@ -37,7 +43,7 @@ namespace NPCGen.Tests.Integration.Generation.Factories
         {
             var classNames = CharacterClassConstants.GetClassNames();
 
-            for (var i = 0; i < ConfidenceLevel; i++)
+            while (TestShouldKeepRunning())
             {
                 var prototype = CharacterClassFactory.CreatePrototypeWith(Alignment, LevelRandomizer, ClassNameRandomizer);
                 Assert.That(classNames.Contains(prototype.ClassName), Is.True);
@@ -47,7 +53,7 @@ namespace NPCGen.Tests.Integration.Generation.Factories
         [Test]
         public void CharacterClassFactoryReturnsPrototypeWithLevel()
         {
-            for (var i = 0; i < ConfidenceLevel; i++)
+            while (TestShouldKeepRunning())
             {
                 var prototype = CharacterClassFactory.CreatePrototypeWith(Alignment, LevelRandomizer, ClassNameRandomizer);
                 Assert.That(prototype.Level, Is.GreaterThan(0));
@@ -57,7 +63,7 @@ namespace NPCGen.Tests.Integration.Generation.Factories
         [Test]
         public void CharacterClassFactoryReturnsCharacterClass()
         {
-            for (var i = 0; i < ConfidenceLevel; i++)
+            while (TestShouldKeepRunning())
             {
                 var prototype = CharacterClassFactory.CreatePrototypeWith(Alignment, LevelRandomizer, ClassNameRandomizer);
                 var characterClass = CharacterClassFactory.CreateWith(prototype);
@@ -68,7 +74,7 @@ namespace NPCGen.Tests.Integration.Generation.Factories
         [Test]
         public void CharacterClassFactoryReturnsCharacterClassWithClassNameFromPrototype()
         {
-            for (var i = 0; i < ConfidenceLevel; i++)
+            while (TestShouldKeepRunning())
             {
                 var prototype = CharacterClassFactory.CreatePrototypeWith(Alignment, LevelRandomizer, ClassNameRandomizer);
                 var characterClass = CharacterClassFactory.CreateWith(prototype);
@@ -79,7 +85,7 @@ namespace NPCGen.Tests.Integration.Generation.Factories
         [Test]
         public void CharacterClassFactoryReturnsCharacterClassWithLevelFromPrototype()
         {
-            for (var i = 0; i < ConfidenceLevel; i++)
+            while (TestShouldKeepRunning())
             {
                 var prototype = CharacterClassFactory.CreatePrototypeWith(Alignment, LevelRandomizer, ClassNameRandomizer);
                 var characterClass = CharacterClassFactory.CreateWith(prototype);
@@ -90,7 +96,7 @@ namespace NPCGen.Tests.Integration.Generation.Factories
         [Test]
         public void CharacterClassFactoryReturnsCharacterClassWithBaseAttack()
         {
-            for (var i = 0; i < ConfidenceLevel; i++)
+            while (TestShouldKeepRunning())
             {
                 var prototype = CharacterClassFactory.CreatePrototypeWith(Alignment, LevelRandomizer, ClassNameRandomizer);
                 var characterClass = CharacterClassFactory.CreateWith(prototype);

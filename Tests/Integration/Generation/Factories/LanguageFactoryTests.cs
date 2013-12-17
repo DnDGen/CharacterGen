@@ -21,10 +21,16 @@ namespace NPCGen.Tests.Integration.Generation.Factories
         [Inject]
         public Dictionary<String, Stat> Stats { get; set; }
 
+        [SetUp]
+        public void Setup()
+        {
+            StartTest();
+        }
+
         [Test]
         public void LanguageFactoryReturnsLanguages()
         {
-            for (var i = 0; i < ConfidenceLevel; i++)
+            while (TestShouldKeepRunning())
             {
                 var languages = LanguageFactory.CreateWith(Race, CharacterClass.ClassName, Stats[StatConstants.Intelligence].Bonus);
                 Assert.That(languages, Is.Not.Null);

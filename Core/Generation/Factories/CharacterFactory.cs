@@ -43,7 +43,7 @@ namespace NPCGen.Core.Generation.Factories
             this.percentileResultProvider = percentileResultProvider;
         }
 
-        public Character CreateUsing(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classNameRandomizer,
+        public Character CreateWith(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classNameRandomizer,
             ILevelRandomizer levelRandomizer, IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer,
             IStatsRandomizer statsRandomizer)
         {
