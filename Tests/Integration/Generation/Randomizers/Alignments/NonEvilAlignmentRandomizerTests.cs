@@ -19,6 +19,12 @@ namespace NPCGen.Tests.Integration.Generation.Randomizers.Alignments
         }
 
         [Test]
+        public void NonEvilAlignmentSingleRandomization()
+        {
+            AlignmentRandomizer.Randomize();
+        }
+
+        [Test]
         public void NonEvilAlignmentRandomizerReturnsAlignment()
         {
             while (TestShouldKeepRunning())

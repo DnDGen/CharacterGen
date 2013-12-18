@@ -28,6 +28,12 @@ namespace NPCGen.Tests.Integration.Generation.Factories
         }
 
         [Test]
+        public void SingleLanguagesGeneration()
+        {
+            LanguageFactory.CreateWith(Race, CharacterClass.ClassName, Stats[StatConstants.Intelligence].Bonus);
+        }
+
+        [Test]
         public void LanguageFactoryReturnsLanguages()
         {
             while (TestShouldKeepRunning())

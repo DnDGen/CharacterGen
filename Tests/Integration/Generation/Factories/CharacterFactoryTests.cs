@@ -40,6 +40,13 @@ namespace NPCGen.Tests.Integration.Generation.Factories
         }
 
         [Test]
+        public void SingleCharacterGeneration()
+        {
+            CharacterFactory.CreateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
+                    MetaraceRandomizer, StatsRandomizer);
+        }
+
+        [Test]
         public void CharacterFactoryReturnsACharacter()
         {
             while (TestShouldKeepRunning())

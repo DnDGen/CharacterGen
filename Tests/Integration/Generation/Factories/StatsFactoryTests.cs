@@ -28,6 +28,12 @@ namespace NPCGen.Tests.Integration.Generation.Factories
         }
 
         [Test]
+        public void SingleStatsGeneration()
+        {
+            StatsFactory.CreateWith(StatsRandomizer, CharacterClass, Race);
+        }
+
+        [Test]
         public void StatsFactoryReturnsStats()
         {
             while (TestShouldKeepRunning())

@@ -17,6 +17,12 @@ namespace NPCGen.Tests.Integration.Generation.Randomizers.CharacterClasses.Level
         }
 
         [Test]
+        public void LowLevelSingleRandomization()
+        {
+            LevelRandomizer.Randomize();
+        }
+
+        [Test]
         public void LowLevelRandomizerReturnsLevelGreaterThanZeroAndLessThanOrEqualToFive()
         {
             while (TestShouldKeepRunning())

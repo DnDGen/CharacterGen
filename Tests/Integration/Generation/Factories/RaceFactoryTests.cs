@@ -29,6 +29,12 @@ namespace NPCGen.Tests.Integration.Generation.Factories
         }
 
         [Test]
+        public void SingleRaceGeneration()
+        {
+            RaceFactory.CreateWith(Alignment.Goodness, CharacterClassPrototype, BaseRaceRandomizer, MetaraceRandomizer);
+        }
+
+        [Test]
         public void RaceFactoryReturnsRace()
         {
             while (TestShouldKeepRunning())

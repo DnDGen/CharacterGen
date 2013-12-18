@@ -29,6 +29,12 @@ namespace NPCGen.Tests.Integration.Generation.Factories
         }
 
         [Test]
+        public void SingleCharacterClassGeneration()
+        {
+            CharacterClassFactory.CreatePrototypeWith(Alignment, LevelRandomizer, ClassNameRandomizer);
+        }
+
+        [Test]
         public void CharacterClassFactoryReturnsPrototype()
         {
             while (TestShouldKeepRunning())

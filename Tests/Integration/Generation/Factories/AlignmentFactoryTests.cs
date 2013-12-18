@@ -23,6 +23,12 @@ namespace NPCGen.Tests.Integration.Generation.Factories
         }
 
         [Test]
+        public void SingleAlignmentGeneration()
+        {
+            AlignmentFactory.CreateWith(AlignmentRandomizer);
+        }
+
+        [Test]
         public void AlignmentFactoryReturnsAlignment()
         {
             while (TestShouldKeepRunning())

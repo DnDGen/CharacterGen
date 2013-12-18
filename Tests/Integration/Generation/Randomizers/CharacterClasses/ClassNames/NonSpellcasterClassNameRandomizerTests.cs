@@ -22,6 +22,12 @@ namespace NPCGen.Tests.Integration.Generation.Randomizers.CharacterClasses.Class
         }
 
         [Test]
+        public void NonSpellcasterClassNameSingleRandomization()
+        {
+            ClassNameRandomizer.Randomize(Alignment);
+        }
+
+        [Test]
         public void NonSpellcasterClassNameRandomizerReturnsClassName()
         {
             while (TestShouldKeepRunning())

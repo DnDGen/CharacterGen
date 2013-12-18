@@ -21,6 +21,12 @@ namespace NPCGen.Tests.Integration.Generation.Randomizers.CharacterClasses.Class
         }
 
         [Test]
+        public void SetClassNameSingleRandomization()
+        {
+            ClassNameRandomizer.Randomize(Alignment);
+        }
+
+        [Test]
         public void SetClassNameRandomizerReturnsClassName()
         {
             while (TestShouldKeepRunning())

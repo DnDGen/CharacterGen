@@ -28,6 +28,12 @@ namespace NPCGen.Tests.Integration.Generation.Factories
         }
 
         [Test]
+        public void SingleHitPointsGeneration()
+        {
+            HitPointsFactory.CreateWith(CharacterClass, Stats[StatConstants.Constitution].Bonus, Race);
+        }
+
+        [Test]
         public void HitPointsFactoryReturnsHitPointsGreaterThanZero()
         {
             while (TestShouldKeepRunning())

@@ -22,6 +22,12 @@ namespace NPCGen.Tests.Integration.Generation.Randomizers.CharacterClasses.Class
         }
 
         [Test]
+        public void WarriorClassNameSingleRandomization()
+        {
+            ClassNameRandomizer.Randomize(Alignment);
+        }
+
+        [Test]
         public void WarriorClassNameRandomizerReturnsClassName()
         {
             while (TestShouldKeepRunning())
