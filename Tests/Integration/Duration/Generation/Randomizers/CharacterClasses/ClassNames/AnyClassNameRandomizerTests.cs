@@ -26,7 +26,7 @@ namespace NPCGen.Tests.Integration.Duration.Generation.Randomizers.CharacterClas
         }
 
         [Test]
-        public void ANyClassNameRandomization()
+        public void AnyClassNameRandomization()
         {
             ClassNameRandomizer.Randomize(Alignment);
             AssertDuration();
