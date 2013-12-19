@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{18C602E6-823C-4CEC-85D3-5EDDDCA545DB}</ProjectGuid>
+    <ProjectGuid>{A9371758-2DE3-43AF-857D-7140B1C0A78C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NPCGen.Bootstrap</RootNamespace>
-    <AssemblyName>NPCGen.Bootstrap</AssemblyName>
+    <RootNamespace>NPCGen.Tests.Integration.Common</RootNamespace>
+    <AssemblyName>NPCGen.Tests.Integration.Common</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,13 +30,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="D20Dice, Version=1.0.5061.24260, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\D20Dice.3.1\lib\D20Dice.dll</HintPath>
+    <Reference Include="Ninject">
+      <HintPath>..\..\..\packages\Ninject.3.0.1.10\lib\net45-full\Ninject.dll</HintPath>
     </Reference>
-    <Reference Include="Ninject, Version=3.0.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Ninject.3.0.1.10\lib\net45-full\Ninject.dll</HintPath>
+    <Reference Include="nunit.framework">
+      <HintPath>..\..\..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -47,15 +45,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CoreModule.cs" />
-    <Compile Include="NPCGenModuleLoader.cs" />
+    <Compile Include="IntegrationTest.cs" />
+    <Compile Include="Modules\IntegrationTestModule.cs" />
+    <Compile Include="Modules\IntegrationTestModuleLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core\NPCGen.Core.csproj">
+    <ProjectReference Include="..\..\..\Bootstrap\NPCGen.Bootstrap.csproj">
+      <Project>{18c602e6-823c-4cec-85d3-5edddca545db}</Project>
+      <Name>NPCGen.Bootstrap</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Core\NPCGen.Core.csproj">
       <Project>{83f2b67c-3eb0-4e46-aad5-bafaa2e35689}</Project>
       <Name>NPCGen.Core</Name>
     </ProjectReference>
