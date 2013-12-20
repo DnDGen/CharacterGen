@@ -13,6 +13,7 @@ namespace NPCGen.Tests.Integration.Duration.Generation.Factories
         public ICharacterClassFactory CharacterClassFactory { get; set; }
         [Inject]
         public Alignment Alignment { get; set; }
+        
 
         [SetUp]
         public void Setup()
@@ -29,7 +30,7 @@ namespace NPCGen.Tests.Integration.Duration.Generation.Factories
         [Test]
         public void CharacterClassGeneration()
         {
-            CharacterClassFactory.CreatePrototypeWith(Alignment, LevelRandomizer, ClassNameRandomizer);
+            CharacterClassFactory.CreatePrototypeWith(Alignment, GetLevelRandomizer(kernel), GetClassNameRandomizer(kernel));
             AssertDuration();
         }
     }
