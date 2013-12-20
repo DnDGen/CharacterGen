@@ -25,7 +25,7 @@ namespace NPCGen.Bootstrap
             Bind<ILanguageProvider>().To<LanguagesProvider>();
             Bind<ILanguagesXmlParser>().To<LanguagesXmlParser>();
             Bind<ILevelAdjustmentsProvider>().To<LevelAdjustmentsProvider>();
-            Bind<IPercentileResultProvider>().To<PercentileResultProvider>();
+            Bind<IPercentileResultProvider>().To<PercentileResultProvider>().InSingletonScope();
             Bind<IPercentileXmlParser>().To<PercentileXmlParser>();
             Bind<IRaceFactory>().To<RaceFactory>();
             Bind<IRandomizerVerifier>().To<RandomizerVerifier>();

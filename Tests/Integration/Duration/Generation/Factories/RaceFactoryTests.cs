@@ -2,8 +2,6 @@
 using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Generation.Factories.Interfaces;
-using NPCGen.Core.Generation.Randomizers.Races.BaseRaces;
-using NPCGen.Core.Generation.Randomizers.Races.Metaraces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Duration.Generation.Factories
@@ -17,10 +15,6 @@ namespace NPCGen.Tests.Integration.Duration.Generation.Factories
         public Alignment Alignment { get; set; }
         [Inject]
         public CharacterClassPrototype CharacterClassPrototype { get; set; }
-        [Inject]
-        public AnyBaseRaceRandomizer BaseRaceRandomizer { get; set; }
-        [Inject]
-        public AnyMetaraceRandomizer MetaraceRandomizer { get; set; }
 
         [SetUp]
         public void Setup()

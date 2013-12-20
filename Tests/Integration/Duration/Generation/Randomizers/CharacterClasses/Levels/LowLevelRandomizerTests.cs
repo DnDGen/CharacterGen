@@ -7,8 +7,10 @@ namespace NPCGen.Tests.Integration.Duration.Generation.Randomizers.CharacterClas
     [TestFixture]
     public class LowLevelRandomizerTests : DurationTest
     {
-        [Inject]
-        public LowLevelRandomizer LevelRandomizer { get; set; }
+        public LowLevelRandomizerTests()
+        {
+            LevelRandomizer = kernel.Get<LowLevelRandomizer>();
+        }
 
         [SetUp]
         public void Setup()

@@ -9,9 +9,12 @@ namespace NPCGen.Tests.Integration.Duration.Generation.Randomizers.CharacterClas
     public class StealthClassNameRandomizerTests : DurationTest
     {
         [Inject]
-        public StealthClassNameRandomizer ClassNameRandomizer { get; set; }
-        [Inject]
         public Alignment Alignment { get; set; }
+
+        public StealthClassNameRandomizerTests()
+        {
+            ClassNameRandomizer = kernel.Get<StealthClassNameRandomizer>();
+        }
 
         [SetUp]
         public void Setup()

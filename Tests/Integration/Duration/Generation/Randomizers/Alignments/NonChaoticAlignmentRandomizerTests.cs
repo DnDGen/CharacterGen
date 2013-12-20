@@ -7,8 +7,10 @@ namespace NPCGen.Tests.Integration.Duration.Generation.Randomizers.Alignments
     [TestFixture]
     public class NonChaoticAlignmentRandomizerTests : DurationTest
     {
-        [Inject]
-        public NonChaoticAlignmentRandomizer AlignmentRandomizer { get; set; }
+        public NonChaoticAlignmentRandomizerTests()
+        {
+            AlignmentRandomizer = kernel.Get<NonChaoticAlignmentRandomizer>();
+        }
 
         [SetUp]
         public void Setup()

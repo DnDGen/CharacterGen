@@ -9,9 +9,12 @@ namespace NPCGen.Tests.Integration.Duration.Generation.Randomizers.CharacterClas
     public class MageClassNameRandomizerTests : DurationTest
     {
         [Inject]
-        public MageClassNameRandomizer ClassNameRandomizer { get; set; }
-        [Inject]
         public Alignment Alignment { get; set; }
+
+        public MageClassNameRandomizerTests()
+        {
+            ClassNameRandomizer = kernel.Get<MageClassNameRandomizer>();
+        }
 
         [SetUp]
         public void Setup()
