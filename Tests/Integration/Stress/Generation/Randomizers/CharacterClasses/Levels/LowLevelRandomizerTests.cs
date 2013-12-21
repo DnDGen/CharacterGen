@@ -31,6 +31,8 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Randomizers.CharacterClasse
                 Assert.That(level, Is.GreaterThan(0));
                 Assert.That(level, Is.LessThanOrEqualTo(5));
             }
+
+            AssertIterations();
         }
     }
 }

@@ -10,13 +10,10 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Randomizers.Alignments
     {
         [Inject]
         public SetAlignmentRandomizer AlignmentRandomizer { get; set; }
-        [Inject]
-        public Alignment Alignment { get; set; }
 
         [SetUp]
         public void Setup()
         {
-            AlignmentRandomizer.Alignment = Alignment;
             StartTest();
         }
 
@@ -31,9 +28,12 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Randomizers.Alignments
         {
             while (TestShouldKeepRunning())
             {
+                AlignmentRandomizer.Alignment = GetNewInstanceOf<Alignment>();
                 var alignment = AlignmentRandomizer.Randomize();
-                Assert.That(alignment, Is.EqualTo(Alignment));
+                Assert.That(alignment, Is.EqualTo(AlignmentRandomizer.Alignment));
             }
+
+            AssertIterations();
         }
     }
 }

@@ -2,6 +2,7 @@
 using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Generation.Factories;
 using NPCGen.Core.Generation.Factories.Interfaces;
+using NPCGen.Core.Generation.Randomizers.CharacterClasses.Interfaces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Duration.Generation.Factories
@@ -12,8 +13,12 @@ namespace NPCGen.Tests.Integration.Duration.Generation.Factories
         [Inject]
         public ICharacterClassFactory CharacterClassFactory { get; set; }
         [Inject]
+        public IClassNameRandomizer ClassNameRandomizer { get; set; }
+        [Inject]
+        public ILevelRandomizer LevelRandomizer { get; set; }
+        [Inject]
         public Alignment Alignment { get; set; }
-        
+
 
         [SetUp]
         public void Setup()
@@ -30,7 +35,7 @@ namespace NPCGen.Tests.Integration.Duration.Generation.Factories
         [Test]
         public void CharacterClassGeneration()
         {
-            CharacterClassFactory.CreatePrototypeWith(Alignment, GetLevelRandomizer(kernel), GetClassNameRandomizer(kernel));
+            CharacterClassFactory.CreatePrototypeWith(Alignment, LevelRandomizer, ClassNameRandomizer);
             AssertDuration();
         }
     }

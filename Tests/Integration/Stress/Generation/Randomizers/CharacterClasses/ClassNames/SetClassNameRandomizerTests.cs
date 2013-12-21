@@ -1,5 +1,6 @@
 ﻿using Ninject;
 using NPCGen.Core.Data.Alignments;
+using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Generation.Randomizers.CharacterClasses.ClassNames;
 using NUnit.Framework;
 
@@ -10,13 +11,10 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Randomizers.CharacterClasse
     {
         [Inject]
         public SetClassNameRandomizer ClassNameRandomizer { get; set; }
-        [Inject]
-        public Alignment Alignment { get; set; }
 
         [SetUp]
         public void Setup()
         {
-            ClassNameRandomizer.ClassName = "class name";
             StartTest();
         }
 
@@ -31,10 +29,16 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Randomizers.CharacterClasse
         {
             while (TestShouldKeepRunning())
             {
-                var className = ClassNameRandomizer.Randomize(Alignment);
+                var prototype = GetNewInstanceOf<CharacterClassPrototype>();
+                var alignment = GetNewInstanceOf<Alignment>();
+                ClassNameRandomizer.ClassName = prototype.ClassName;
+
+                var className = ClassNameRandomizer.Randomize(alignment);
                 Assert.That(className, Is.Not.Null);
                 Assert.That(className, Is.Not.Empty);
             }
+
+            AssertIterations();
         }
 
         [Test]
@@ -42,9 +46,15 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Randomizers.CharacterClasse
         {
             while (TestShouldKeepRunning())
             {
-                var className = ClassNameRandomizer.Randomize(Alignment);
-                Assert.That(className, Is.EqualTo("class name"));
+                var prototype = GetNewInstanceOf<CharacterClassPrototype>();
+                var alignment = GetNewInstanceOf<Alignment>();
+                ClassNameRandomizer.ClassName = prototype.ClassName;
+
+                var className = ClassNameRandomizer.Randomize(alignment);
+                Assert.That(className, Is.EqualTo(ClassNameRandomizer.ClassName));
             }
+
+            AssertIterations();
         }
     }
 }

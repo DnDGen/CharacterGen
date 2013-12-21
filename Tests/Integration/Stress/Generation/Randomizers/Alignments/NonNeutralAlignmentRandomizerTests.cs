@@ -32,6 +32,8 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Randomizers.Alignments
                 var alignment = AlignmentRandomizer.Randomize();
                 Assert.That(alignment, Is.Not.Null);
             }
+
+            AssertIterations();
         }
 
         [Test]
@@ -44,6 +46,8 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Randomizers.Alignments
                 var alignment = AlignmentRandomizer.Randomize();
                 Assert.That(goodnesses.Contains(alignment.Goodness), Is.True);
             }
+
+            AssertIterations();
         }
 
         [Test]
@@ -56,6 +60,8 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Randomizers.Alignments
                 var alignment = AlignmentRandomizer.Randomize();
                 Assert.That(lawfulnesses.Contains(alignment.Lawfulness), Is.True);
             }
+
+            AssertIterations();
         }
 
         [Test]
@@ -66,6 +72,8 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Randomizers.Alignments
                 var alignment = AlignmentRandomizer.Randomize();
                 Assert.That(alignment.IsNeutral(), Is.False);
             }
+
+            AssertIterations();
         }
     }
 }

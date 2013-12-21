@@ -10,8 +10,6 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Randomizers.CharacterClasse
     {
         [Inject]
         public AnyClassNameRandomizer ClassNameRandomizer { get; set; }
-        [Inject]
-        public Alignment Alignment { get; set; }
 
         [SetUp]
         public void Setup()
@@ -30,10 +28,13 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Randomizers.CharacterClasse
         {
             while (TestShouldKeepRunning())
             {
-                var className = ClassNameRandomizer.Randomize(Alignment);
+                var alignment = GetNewInstanceOf<Alignment>();
+                var className = ClassNameRandomizer.Randomize(alignment);
                 Assert.That(className, Is.Not.Null);
                 Assert.That(className, Is.Not.Empty);
             }
+
+            AssertIterations();
         }
     }
 }

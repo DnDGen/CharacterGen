@@ -11,10 +11,6 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Randomizers.Races.BaseRaces
     {
         [Inject]
         public AnyBaseRaceRandomizer BaseRaceRandomizer { get; set; }
-        [Inject]
-        public Alignment Alignment { get; set; }
-        [Inject]
-        public CharacterClassPrototype CharacterClassPrototype { get; set; }
 
         [SetUp]
         public void Setup()
@@ -33,10 +29,15 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Randomizers.Races.BaseRaces
         {
             while (TestShouldKeepRunning())
             {
-                var baseRace = BaseRaceRandomizer.Randomize(Alignment.Goodness, CharacterClassPrototype);
+                var alignment = GetNewInstanceOf<Alignment>();
+                var prototype = GetNewInstanceOf<CharacterClassPrototype>();
+
+                var baseRace = BaseRaceRandomizer.Randomize(alignment.Goodness, prototype);
                 Assert.That(baseRace, Is.Not.Null);
                 Assert.That(baseRace, Is.Not.Empty);
             }
+
+            AssertIterations();
         }
     }
 }

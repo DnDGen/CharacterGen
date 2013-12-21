@@ -2,6 +2,7 @@
 using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Generation.Factories.Interfaces;
+using NPCGen.Core.Generation.Randomizers.Races.Interfaces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Stress.Generation.Factories
@@ -12,9 +13,9 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Factories
         [Inject]
         public IRaceFactory RaceFactory { get; set; }
         [Inject]
-        public Alignment Alignment { get; set; }
+        public IBaseRaceRandomizer BaseRaceRandomizer { get; set; }
         [Inject]
-        public CharacterClassPrototype CharacterClassPrototype { get; set; }
+        public IMetaraceRandomizer MetaraceRandomizer { get; set; }
 
         [SetUp]
         public void Setup()
@@ -33,7 +34,9 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Factories
         {
             while (TestShouldKeepRunning())
             {
-                var race = RaceFactory.CreateWith(Alignment.Goodness, CharacterClassPrototype, GetBaseRaceRandomizer(kernel), GetMetaraceRandomizer(kernel));
+                var alignment = GetNewInstanceOf<Alignment>();
+                var prototype = GetNewInstanceOf<CharacterClassPrototype>();
+                var race = RaceFactory.CreateWith(alignment.Goodness, prototype, BaseRaceRandomizer, MetaraceRandomizer);
                 Assert.That(race, Is.Not.Null);
             }
 
@@ -45,7 +48,9 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Factories
         {
             while (TestShouldKeepRunning())
             {
-                var race = RaceFactory.CreateWith(Alignment.Goodness, CharacterClassPrototype, GetBaseRaceRandomizer(kernel), GetMetaraceRandomizer(kernel));
+                var alignment = GetNewInstanceOf<Alignment>();
+                var prototype = GetNewInstanceOf<CharacterClassPrototype>();
+                var race = RaceFactory.CreateWith(alignment.Goodness, prototype, BaseRaceRandomizer, MetaraceRandomizer);
                 Assert.That(race.BaseRace, Is.Not.Null);
                 Assert.That(race.BaseRace, Is.Not.Empty);
             }
@@ -58,7 +63,9 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Factories
         {
             while (TestShouldKeepRunning())
             {
-                var race = RaceFactory.CreateWith(Alignment.Goodness, CharacterClassPrototype, GetBaseRaceRandomizer(kernel), GetMetaraceRandomizer(kernel));
+                var alignment = GetNewInstanceOf<Alignment>();
+                var prototype = GetNewInstanceOf<CharacterClassPrototype>();
+                var race = RaceFactory.CreateWith(alignment.Goodness, prototype, BaseRaceRandomizer, MetaraceRandomizer);
                 Assert.That(race.Metarace, Is.Not.Null);
             }
 

@@ -30,6 +30,8 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Randomizers.CharacterClasse
                 var level = LevelRandomizer.Randomize();
                 Assert.That(level, Is.GreaterThan(0));
             }
+
+            AssertIterations();
         }
     }
 }

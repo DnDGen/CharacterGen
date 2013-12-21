@@ -1,5 +1,6 @@
 ﻿using D20Dice;
 using Ninject;
+using NPCGen.Bootstrap;
 using NPCGen.Core.Generation.Factories.Interfaces;
 using NPCGen.Core.Generation.Providers.Interfaces;
 using NPCGen.Core.Generation.Verifiers.Interfaces;
@@ -9,8 +10,19 @@ using NUnit.Framework;
 namespace NPCGen.Tests.Integration.Common
 {
     [TestFixture]
-    public class BootstrapTests : IntegrationTest
+    public class BootstrapTests
     {
+        private IKernel kernel;
+
+        [SetUp]
+        public void Setup()
+        {
+            kernel = new StandardKernel();
+
+            var npcGenLoader = new NPCGenModuleLoader();
+            npcGenLoader.LoadModules(kernel);
+        }
+
         [Test]
         public void AdjustmentXmlParsersAreNotGeneratedAsSingletons()
         {

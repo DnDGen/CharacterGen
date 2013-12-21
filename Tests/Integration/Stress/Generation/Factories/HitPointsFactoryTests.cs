@@ -14,12 +14,6 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Factories
     {
         [Inject]
         public IHitPointsFactory HitPointsFactory { get; set; }
-        [Inject]
-        public CharacterClass CharacterClass { get; set; }
-        [Inject]
-        public Dictionary<String, Stat> Stats { get; set; }
-        [Inject]
-        public Race Race { get; set; }
 
         [SetUp]
         public void Setup()
@@ -38,7 +32,10 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Factories
         {
             while (TestShouldKeepRunning())
             {
-                var hitPoints = HitPointsFactory.CreateWith(CharacterClass, Stats[StatConstants.Constitution].Bonus, Race);
+                var characterClass = GetNewInstanceOf<CharacterClass>();
+                var stats = GetNewInstanceOf<Dictionary<String, Stat>>();
+                var race = GetNewInstanceOf<Race>();
+                var hitPoints = HitPointsFactory.CreateWith(characterClass, stats[StatConstants.Constitution].Bonus, race);
                 Assert.That(hitPoints, Is.GreaterThan(0));
             }
 

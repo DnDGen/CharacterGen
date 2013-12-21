@@ -14,12 +14,6 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Factories
     {
         [Inject]
         public ILanguageFactory LanguageFactory { get; set; }
-        [Inject]
-        public Race Race { get; set; }
-        [Inject]
-        public CharacterClass CharacterClass { get; set; }
-        [Inject]
-        public Dictionary<String, Stat> Stats { get; set; }
 
         [SetUp]
         public void Setup()
@@ -38,7 +32,10 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Factories
         {
             while (TestShouldKeepRunning())
             {
-                var languages = LanguageFactory.CreateWith(Race, CharacterClass.ClassName, Stats[StatConstants.Intelligence].Bonus);
+                var characterClass = GetNewInstanceOf<CharacterClass>();
+                var stats = GetNewInstanceOf<Dictionary<String, Stat>>();
+                var race = GetNewInstanceOf<Race>();
+                var languages = LanguageFactory.CreateWith(race, characterClass.ClassName, stats[StatConstants.Intelligence].Bonus);
                 Assert.That(languages, Is.Not.Null);
             }
 

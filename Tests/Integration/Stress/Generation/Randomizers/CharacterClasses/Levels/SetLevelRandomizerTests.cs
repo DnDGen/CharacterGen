@@ -1,4 +1,5 @@
-﻿using Ninject;
+﻿using System;
+using Ninject;
 using NPCGen.Core.Generation.Randomizers.CharacterClasses.Levels;
 using NUnit.Framework;
 
@@ -10,10 +11,12 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Randomizers.CharacterClasse
         [Inject]
         public SetLevelRandomizer LevelRandomizer { get; set; }
 
+        private Random random;
+
         [SetUp]
         public void Setup()
         {
-            LevelRandomizer.Level = 9266;
+            random = new Random();
             StartTest();
         }
 
@@ -28,9 +31,12 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Randomizers.CharacterClasse
         {
             while (TestShouldKeepRunning())
             {
+                LevelRandomizer.Level = random.Next();
                 var level = LevelRandomizer.Randomize();
-                Assert.That(level, Is.EqualTo(9266));
+                Assert.That(level, Is.EqualTo(LevelRandomizer.Level));
             }
+
+            AssertIterations();
         }
     }
 }
