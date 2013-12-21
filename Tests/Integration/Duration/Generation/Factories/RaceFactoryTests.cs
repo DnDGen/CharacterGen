@@ -31,7 +31,7 @@ namespace NPCGen.Tests.Integration.Duration.Generation.Factories
         [Test]
         public void RaceGeneration()
         {
-            RaceFactory.CreateWith(Alignment.Goodness, CharacterClassPrototype, BaseRaceRandomizer, MetaraceRandomizer);
+            RaceFactory.CreateWith(Alignment.Goodness, CharacterClassPrototype, GetBaseRaceRandomizer(kernel), GetMetaraceRandomizer(kernel));
             AssertDuration();
         }
     }

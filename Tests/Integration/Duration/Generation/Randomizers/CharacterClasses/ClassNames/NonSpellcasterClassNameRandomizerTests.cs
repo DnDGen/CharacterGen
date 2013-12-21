@@ -1,6 +1,7 @@
 ﻿using Ninject;
 using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Generation.Randomizers.CharacterClasses.ClassNames;
+using NPCGen.Core.Generation.Randomizers.CharacterClasses.Interfaces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Duration.Generation.Randomizers.CharacterClasses.ClassNames
@@ -9,11 +10,13 @@ namespace NPCGen.Tests.Integration.Duration.Generation.Randomizers.CharacterClas
     public class NonSpellcasterClassNameRandomizerTests : DurationTest
     {
         [Inject]
+        public NonSpellcasterClassNameRandomizer ClassNameRandomizer { get; set; }
+        [Inject]
         public Alignment Alignment { get; set; }
 
-        public NonSpellcasterClassNameRandomizerTests()
+        protected override IClassNameRandomizer GetClassNameRandomizer(IKernel kernel)
         {
-            ClassNameRandomizer = kernel.Get<NonSpellcasterClassNameRandomizer>();
+            return kernel.Get<NonSpellcasterClassNameRandomizer>();
         }
 
         [SetUp]
