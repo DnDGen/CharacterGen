@@ -4,8 +4,6 @@ using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Generation.Factories;
 using NPCGen.Core.Generation.Factories.Interfaces;
-using NPCGen.Core.Generation.Randomizers.CharacterClasses.ClassNames;
-using NPCGen.Core.Generation.Randomizers.CharacterClasses.Levels;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Stress.Generation.Factories
@@ -17,10 +15,6 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Factories
         public ICharacterClassFactory CharacterClassFactory { get; set; }
         [Inject]
         public Alignment Alignment { get; set; }
-        [Inject]
-        public AnyLevelRandomizer LevelRandomizer { get; set; }
-        [Inject]
-        public AnyClassNameRandomizer ClassNameRandomizer { get; set; }
 
         [SetUp]
         public void Setup()
@@ -39,9 +33,11 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Factories
         {
             while (TestShouldKeepRunning())
             {
-                var prototype = CharacterClassFactory.CreatePrototypeWith(Alignment, LevelRandomizer, ClassNameRandomizer);
+                var prototype = CharacterClassFactory.CreatePrototypeWith(Alignment, GetLevelRandomizer(kernel), GetClassNameRandomizer(kernel));
                 Assert.That(prototype, Is.Not.Null);
             }
+
+            AssertIterations();
         }
 
         [Test]
@@ -51,9 +47,11 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Factories
 
             while (TestShouldKeepRunning())
             {
-                var prototype = CharacterClassFactory.CreatePrototypeWith(Alignment, LevelRandomizer, ClassNameRandomizer);
+                var prototype = CharacterClassFactory.CreatePrototypeWith(Alignment, GetLevelRandomizer(kernel), GetClassNameRandomizer(kernel));
                 Assert.That(classNames.Contains(prototype.ClassName), Is.True);
             }
+
+            AssertIterations();
         }
 
         [Test]
@@ -61,9 +59,11 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Factories
         {
             while (TestShouldKeepRunning())
             {
-                var prototype = CharacterClassFactory.CreatePrototypeWith(Alignment, LevelRandomizer, ClassNameRandomizer);
+                var prototype = CharacterClassFactory.CreatePrototypeWith(Alignment, GetLevelRandomizer(kernel), GetClassNameRandomizer(kernel));
                 Assert.That(prototype.Level, Is.GreaterThan(0));
             }
+
+            AssertIterations();
         }
 
         [Test]
@@ -71,10 +71,12 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Factories
         {
             while (TestShouldKeepRunning())
             {
-                var prototype = CharacterClassFactory.CreatePrototypeWith(Alignment, LevelRandomizer, ClassNameRandomizer);
+                var prototype = CharacterClassFactory.CreatePrototypeWith(Alignment, GetLevelRandomizer(kernel), GetClassNameRandomizer(kernel));
                 var characterClass = CharacterClassFactory.CreateWith(prototype);
                 Assert.That(characterClass, Is.Not.Null);
             }
+
+            AssertIterations();
         }
 
         [Test]
@@ -82,10 +84,12 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Factories
         {
             while (TestShouldKeepRunning())
             {
-                var prototype = CharacterClassFactory.CreatePrototypeWith(Alignment, LevelRandomizer, ClassNameRandomizer);
+                var prototype = CharacterClassFactory.CreatePrototypeWith(Alignment, GetLevelRandomizer(kernel), GetClassNameRandomizer(kernel));
                 var characterClass = CharacterClassFactory.CreateWith(prototype);
                 Assert.That(characterClass.ClassName, Is.EqualTo(prototype.ClassName));
             }
+
+            AssertIterations();
         }
 
         [Test]
@@ -93,10 +97,12 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Factories
         {
             while (TestShouldKeepRunning())
             {
-                var prototype = CharacterClassFactory.CreatePrototypeWith(Alignment, LevelRandomizer, ClassNameRandomizer);
+                var prototype = CharacterClassFactory.CreatePrototypeWith(Alignment, GetLevelRandomizer(kernel), GetClassNameRandomizer(kernel));
                 var characterClass = CharacterClassFactory.CreateWith(prototype);
                 Assert.That(characterClass.Level, Is.EqualTo(prototype.Level));
             }
+
+            AssertIterations();
         }
 
         [Test]
@@ -104,11 +110,13 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Factories
         {
             while (TestShouldKeepRunning())
             {
-                var prototype = CharacterClassFactory.CreatePrototypeWith(Alignment, LevelRandomizer, ClassNameRandomizer);
+                var prototype = CharacterClassFactory.CreatePrototypeWith(Alignment, GetLevelRandomizer(kernel), GetClassNameRandomizer(kernel));
                 var characterClass = CharacterClassFactory.CreateWith(prototype);
                 Assert.That(characterClass.BaseAttack, Is.Not.Null);
                 Assert.That(characterClass.BaseAttack.BaseAttackBonus, Is.Not.Negative);
             }
+
+            AssertIterations();
         }
     }
 }

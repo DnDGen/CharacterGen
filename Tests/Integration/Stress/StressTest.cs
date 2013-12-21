@@ -35,5 +35,10 @@ namespace NPCGen.Tests.Integration.Stress
         {
             return stopwatch.Elapsed.Seconds < TimeLimitInSeconds && iterations++ < ConfidentIterations;
         }
+
+        protected void AssertIterations()
+        {
+            Assert.Pass("Iterations: {0}", iterations);
+        }
     }
 }

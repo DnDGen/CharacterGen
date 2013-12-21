@@ -41,6 +41,8 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Factories
                 var stats = StatsFactory.CreateWith(StatsRandomizer, CharacterClass, Race);
                 Assert.That(stats, Is.Not.Null);
             }
+
+            AssertIterations();
         }
 
         [Test]
@@ -59,6 +61,8 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Factories
                     Assert.That(stats[statName].Value, Is.GreaterThan(0), GetErrorMessage(statName));
                 }
             }
+
+            AssertIterations();
         }
 
         private String GetErrorMessage(String statName)

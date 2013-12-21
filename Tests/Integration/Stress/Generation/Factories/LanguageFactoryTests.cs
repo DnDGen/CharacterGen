@@ -41,6 +41,8 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Factories
                 var languages = LanguageFactory.CreateWith(Race, CharacterClass.ClassName, Stats[StatConstants.Intelligence].Bonus);
                 Assert.That(languages, Is.Not.Null);
             }
+
+            AssertIterations();
         }
     }
 }

@@ -41,6 +41,8 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Factories
                 var hitPoints = HitPointsFactory.CreateWith(CharacterClass, Stats[StatConstants.Constitution].Bonus, Race);
                 Assert.That(hitPoints, Is.GreaterThan(0));
             }
+
+            AssertIterations();
         }
     }
 }

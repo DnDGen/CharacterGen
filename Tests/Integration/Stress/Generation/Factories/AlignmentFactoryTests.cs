@@ -3,7 +3,6 @@ using Ninject;
 using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Generation.Factories;
 using NPCGen.Core.Generation.Factories.Interfaces;
-using NPCGen.Core.Generation.Randomizers.Alignments;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Stress.Generation.Factories
@@ -13,8 +12,6 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Factories
     {
         [Inject]
         public IAlignmentFactory AlignmentFactory { get; set; }
-        [Inject]
-        public AnyAlignmentRandomizer AlignmentRandomizer { get; set; }
 
         [SetUp]
         public void Setup()
@@ -33,9 +30,11 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Factories
         {
             while (TestShouldKeepRunning())
             {
-                var alignment = AlignmentFactory.CreateWith(AlignmentRandomizer);
+                var alignment = AlignmentFactory.CreateWith(GetAlignmentRandomizer(kernel));
                 Assert.That(alignment, Is.Not.Null);
             }
+
+            AssertIterations();
         }
 
         [Test]
@@ -45,9 +44,11 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Factories
 
             while (TestShouldKeepRunning())
             {
-                var alignment = AlignmentFactory.CreateWith(AlignmentRandomizer);
+                var alignment = AlignmentFactory.CreateWith(GetAlignmentRandomizer(kernel));
                 Assert.That(goodnesses.Contains(alignment.Goodness), Is.True);
             }
+
+            AssertIterations();
         }
 
         [Test]
@@ -57,9 +58,11 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Factories
 
             while (TestShouldKeepRunning())
             {
-                var alignment = AlignmentFactory.CreateWith(AlignmentRandomizer);
+                var alignment = AlignmentFactory.CreateWith(GetAlignmentRandomizer(kernel));
                 Assert.That(lawfulnesses.Contains(alignment.Lawfulness), Is.True);
             }
+
+            AssertIterations();
         }
     }
 }
