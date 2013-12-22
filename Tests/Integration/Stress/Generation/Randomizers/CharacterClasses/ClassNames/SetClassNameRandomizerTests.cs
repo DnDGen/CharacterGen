@@ -1,7 +1,6 @@
 ﻿using Ninject;
-using NPCGen.Core.Data.Alignments;
-using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Generation.Randomizers.CharacterClasses.ClassNames;
+using NPCGen.Tests.Integration.Common;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Stress.Generation.Randomizers.CharacterClasses.ClassNames
@@ -29,11 +28,10 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Randomizers.CharacterClasse
         {
             while (TestShouldKeepRunning())
             {
-                var prototype = GetNewInstanceOf<CharacterClassPrototype>();
-                var alignment = GetNewInstanceOf<Alignment>();
-                ClassNameRandomizer.ClassName = prototype.ClassName;
+                var data = GetNewInstanceOf<DependentDataCollection>();
+                ClassNameRandomizer.ClassName = data.CharacterClassPrototype.ClassName;
 
-                var className = ClassNameRandomizer.Randomize(alignment);
+                var className = ClassNameRandomizer.Randomize(data.Alignment);
                 Assert.That(className, Is.Not.Null);
                 Assert.That(className, Is.Not.Empty);
             }
@@ -46,11 +44,10 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Randomizers.CharacterClasse
         {
             while (TestShouldKeepRunning())
             {
-                var prototype = GetNewInstanceOf<CharacterClassPrototype>();
-                var alignment = GetNewInstanceOf<Alignment>();
-                ClassNameRandomizer.ClassName = prototype.ClassName;
+                var data = GetNewInstanceOf<DependentDataCollection>();
+                ClassNameRandomizer.ClassName = data.CharacterClassPrototype.ClassName;
 
-                var className = ClassNameRandomizer.Randomize(alignment);
+                var className = ClassNameRandomizer.Randomize(data.Alignment);
                 Assert.That(className, Is.EqualTo(ClassNameRandomizer.ClassName));
             }
 

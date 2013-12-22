@@ -1,6 +1,6 @@
 ﻿using Ninject;
-using NPCGen.Core.Data.Alignments;
 using NPCGen.Core.Generation.Randomizers.CharacterClasses.ClassNames;
+using NPCGen.Tests.Integration.Common;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Stress.Generation.Randomizers.CharacterClasses.ClassNames
@@ -28,8 +28,8 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Randomizers.CharacterClasse
         {
             while (TestShouldKeepRunning())
             {
-                var alignment = GetNewInstanceOf<Alignment>();
-                var className = ClassNameRandomizer.Randomize(alignment);
+                var data = GetNewInstanceOf<DependentDataCollection>();
+                var className = ClassNameRandomizer.Randomize(data.Alignment);
                 Assert.That(className, Is.Not.Null);
                 Assert.That(className, Is.Not.Empty);
             }

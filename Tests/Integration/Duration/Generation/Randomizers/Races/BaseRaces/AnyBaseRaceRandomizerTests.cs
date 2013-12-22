@@ -1,8 +1,7 @@
 ﻿using Ninject;
-using NPCGen.Core.Data.Alignments;
-using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Generation.Randomizers.Races.BaseRaces;
 using NPCGen.Core.Generation.Randomizers.Races.Interfaces;
+using NPCGen.Tests.Integration.Common;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Duration.Generation.Randomizers.Races.BaseRaces
@@ -13,9 +12,7 @@ namespace NPCGen.Tests.Integration.Duration.Generation.Randomizers.Races.BaseRac
         [Inject]
         public AnyBaseRaceRandomizer BaseRaceRandomizer { get; set; }
         [Inject]
-        public Alignment Alignment { get; set; }
-        [Inject]
-        public CharacterClassPrototype CharacterClassPrototype { get; set; }
+        public DependentDataCollection DependentData { get; set; }
 
         protected override IBaseRaceRandomizer GetBaseRaceRandomizer(IKernel kernel)
         {
@@ -37,7 +34,7 @@ namespace NPCGen.Tests.Integration.Duration.Generation.Randomizers.Races.BaseRac
         [Test]
         public void AnyBaseRaceRandomization()
         {
-            BaseRaceRandomizer.Randomize(Alignment.Goodness, CharacterClassPrototype);
+            BaseRaceRandomizer.Randomize(DependentData.Alignment.Goodness, DependentData.CharacterClassPrototype);
             AssertDuration();
         }
     }

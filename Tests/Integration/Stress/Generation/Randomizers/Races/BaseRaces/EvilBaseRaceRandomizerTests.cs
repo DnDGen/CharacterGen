@@ -1,9 +1,8 @@
 ﻿using System.Linq;
 using Ninject;
-using NPCGen.Core.Data.Alignments;
-using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Data.Races;
 using NPCGen.Core.Generation.Randomizers.Races.BaseRaces;
+using NPCGen.Tests.Integration.Common;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Stress.Generation.Randomizers.Races.BaseRaces
@@ -31,10 +30,8 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Randomizers.Races.BaseRaces
         {
             while (TestShouldKeepRunning())
             {
-                var alignment = GetNewInstanceOf<Alignment>();
-                var prototype = GetNewInstanceOf<CharacterClassPrototype>();
-
-                var baseRace = BaseRaceRandomizer.Randomize(alignment.Goodness, prototype);
+                var data = GetNewInstanceOf<DependentDataCollection>();
+                var baseRace = BaseRaceRandomizer.Randomize(data.Alignment.Goodness, data.CharacterClassPrototype);
                 Assert.That(baseRace, Is.Not.Null);
                 Assert.That(baseRace, Is.Not.Empty);
             }
@@ -78,10 +75,8 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Randomizers.Races.BaseRaces
 
             while (TestShouldKeepRunning())
             {
-                var alignment = GetNewInstanceOf<Alignment>();
-                var prototype = GetNewInstanceOf<CharacterClassPrototype>();
-
-                var baseRace = BaseRaceRandomizer.Randomize(alignment.Goodness, prototype);
+                var data = GetNewInstanceOf<DependentDataCollection>();
+                var baseRace = BaseRaceRandomizer.Randomize(data.Alignment.Goodness, data.CharacterClassPrototype);
                 Assert.That(evilBaseRaces.Contains(baseRace), Is.True);
             }
 

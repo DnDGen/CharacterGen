@@ -50,7 +50,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BootstrapTests.cs" />
+    <Compile Include="DependentDataCollection.cs" />
     <Compile Include="IntegrationTest.cs" />
+    <Compile Include="GenericIntegrationTestTests.cs" />
+    <Compile Include="OverriddenIntegrationTestTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

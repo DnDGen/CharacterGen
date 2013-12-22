@@ -1,8 +1,7 @@
 ﻿using Ninject;
-using NPCGen.Core.Data.CharacterClasses;
-using NPCGen.Core.Data.Races;
 using NPCGen.Core.Generation.Factories.Interfaces;
 using NPCGen.Core.Generation.Randomizers.Stats;
+using NPCGen.Tests.Integration.Common;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Duration.Generation.Factories
@@ -15,9 +14,7 @@ namespace NPCGen.Tests.Integration.Duration.Generation.Factories
         [Inject]
         public RawStatsRandomizer StatsRandomizer { get; set; }
         [Inject]
-        public CharacterClass CharacterClass { get; set; }
-        [Inject]
-        public Race Race { get; set; }
+        public DependentDataCollection DependentData { get; set; }
 
         [SetUp]
         public void Setup()
@@ -34,7 +31,7 @@ namespace NPCGen.Tests.Integration.Duration.Generation.Factories
         [Test]
         public void StatsGeneration()
         {
-            StatsFactory.CreateWith(StatsRandomizer, CharacterClass, Race);
+            StatsFactory.CreateWith(StatsRandomizer, DependentData.CharacterClass, DependentData.Race);
             AssertDuration();
         }
     }

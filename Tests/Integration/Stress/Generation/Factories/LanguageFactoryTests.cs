@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Ninject;
-using NPCGen.Core.Data.CharacterClasses;
-using NPCGen.Core.Data.Races;
 using NPCGen.Core.Data.Stats;
 using NPCGen.Core.Generation.Factories.Interfaces;
+using NPCGen.Tests.Integration.Common;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Stress.Generation.Factories
@@ -32,10 +31,9 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Factories
         {
             while (TestShouldKeepRunning())
             {
-                var characterClass = GetNewInstanceOf<CharacterClass>();
+                var data = GetNewInstanceOf<DependentDataCollection>();
                 var stats = GetNewInstanceOf<Dictionary<String, Stat>>();
-                var race = GetNewInstanceOf<Race>();
-                var languages = LanguageFactory.CreateWith(race, characterClass.ClassName, stats[StatConstants.Intelligence].Bonus);
+                var languages = LanguageFactory.CreateWith(data.Race, data.CharacterClass.ClassName, stats[StatConstants.Intelligence].Bonus);
                 Assert.That(languages, Is.Not.Null);
             }
 

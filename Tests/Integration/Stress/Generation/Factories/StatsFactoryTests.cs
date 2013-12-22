@@ -1,9 +1,8 @@
 ﻿using Ninject;
-using NPCGen.Core.Data.CharacterClasses;
-using NPCGen.Core.Data.Races;
 using NPCGen.Core.Data.Stats;
 using NPCGen.Core.Generation.Factories.Interfaces;
 using NPCGen.Core.Generation.Randomizers.Stats.Interfaces;
+using NPCGen.Tests.Integration.Common;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Stress.Generation.Factories
@@ -33,9 +32,8 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Factories
         {
             while (TestShouldKeepRunning())
             {
-                var characterClass = GetNewInstanceOf<CharacterClass>();
-                var race = GetNewInstanceOf<Race>();
-                var stats = StatsFactory.CreateWith(StatsRandomizer, characterClass, race);
+                var data = GetNewInstanceOf<DependentDataCollection>();
+                var stats = StatsFactory.CreateWith(StatsRandomizer, data.CharacterClass, data.Race);
                 Assert.That(stats, Is.Not.Null);
             }
 
@@ -49,9 +47,8 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Factories
 
             while (TestShouldKeepRunning())
             {
-                var characterClass = GetNewInstanceOf<CharacterClass>();
-                var race = GetNewInstanceOf<Race>();
-                var stats = StatsFactory.CreateWith(StatsRandomizer, characterClass, race);
+                var data = GetNewInstanceOf<DependentDataCollection>();
+                var stats = StatsFactory.CreateWith(StatsRandomizer, data.CharacterClass, data.Race);
 
                 foreach (var statName in statNames)
                 {

@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Ninject;
-using NPCGen.Core.Data.CharacterClasses;
-using NPCGen.Core.Data.Races;
 using NPCGen.Core.Data.Stats;
 using NPCGen.Core.Generation.Factories.Interfaces;
+using NPCGen.Tests.Integration.Common;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Duration.Generation.Factories
@@ -15,9 +14,7 @@ namespace NPCGen.Tests.Integration.Duration.Generation.Factories
         [Inject]
         public ILanguageFactory LanguageFactory { get; set; }
         [Inject]
-        public Race Race { get; set; }
-        [Inject]
-        public CharacterClass CharacterClass { get; set; }
+        public DependentDataCollection DependentData { get; set; }
         [Inject]
         public Dictionary<String, Stat> Stats { get; set; }
 
@@ -36,7 +33,7 @@ namespace NPCGen.Tests.Integration.Duration.Generation.Factories
         [Test]
         public void LanguagesGeneration()
         {
-            LanguageFactory.CreateWith(Race, CharacterClass.ClassName, Stats[StatConstants.Intelligence].Bonus);
+            LanguageFactory.CreateWith(DependentData.Race, DependentData.CharacterClass.ClassName, Stats[StatConstants.Intelligence].Bonus);
             AssertDuration();
         }
     }

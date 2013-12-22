@@ -43,27 +43,17 @@ namespace NPCGen.Tests.Integration.Common
 
         private void LoadRandomizerBindings()
         {
-            kernel.Bind<IAlignmentRandomizer>().ToMethod(c => GetAlignmentRandomizer(c.Kernel));
+            kernel.Bind<IAlignmentRandomizer>().To<AnyAlignmentRandomizer>();
             kernel.Bind<IClassNameRandomizer>().ToMethod(c => GetClassNameRandomizer(c.Kernel));
-            kernel.Bind<ILevelRandomizer>().ToMethod(c => GetLevelRandomizer(c.Kernel));
+            kernel.Bind<ILevelRandomizer>().To<AnyLevelRandomizer>();
             kernel.Bind<IBaseRaceRandomizer>().ToMethod(c => GetBaseRaceRandomizer(c.Kernel));
             kernel.Bind<IMetaraceRandomizer>().ToMethod(c => GetMetaraceRandomizer(c.Kernel));
             kernel.Bind<IStatsRandomizer>().To<RawStatsRandomizer>();
         }
 
-        protected virtual IAlignmentRandomizer GetAlignmentRandomizer(IKernel kernel)
-        {
-            return kernel.Get<AnyAlignmentRandomizer>();
-        }
-
         protected virtual IClassNameRandomizer GetClassNameRandomizer(IKernel kernel)
         {
             return kernel.Get<AnyClassNameRandomizer>();
-        }
-
-        protected virtual ILevelRandomizer GetLevelRandomizer(IKernel kernel)
-        {
-            return kernel.Get<AnyLevelRandomizer>();
         }
 
         protected virtual IBaseRaceRandomizer GetBaseRaceRandomizer(IKernel kernel)
@@ -80,12 +70,17 @@ namespace NPCGen.Tests.Integration.Common
 
         private void LoadDataBindings()
         {
-            kernel.Bind<Alignment>().ToMethod(c => GenerateAlignment(c.Kernel));
-            kernel.Bind<CharacterClass>().ToMethod(c => c.Kernel.Get<ICharacterClassFactory>().CreateWith(c.Kernel.Get<CharacterClassPrototype>()));
-            kernel.Bind<CharacterClassPrototype>().ToMethod(c => GenerateCharacterClassPrototype(c.Kernel));
-            kernel.Bind<Race>().ToMethod(c => GenerateRace(c.Kernel));
-            kernel.Bind<Dictionary<String, Stat>>().ToMethod(c => c.Kernel.Get<IStatsFactory>().CreateWith(c.Kernel.Get<IStatsRandomizer>(),
-                c.Kernel.Get<CharacterClass>(), c.Kernel.Get<Race>()));
+            kernel.Bind<DependentDataCollection>().ToMethod(c => GetNewInstanceOfDependentData(c.Kernel));
+            kernel.Bind<Dictionary<String, Stat>>().ToMethod(c => GetStats(c.Kernel));
+        }
+
+        private Dictionary<String, Stat> GetStats(IKernel kernel)
+        {
+            var factory = kernel.Get<IStatsFactory>();
+            var randomizer = kernel.Get<IStatsRandomizer>();
+            var data = kernel.Get<DependentDataCollection>();
+
+            return factory.CreateWith(randomizer, data.CharacterClass, data.Race);
         }
 
         private Alignment GenerateAlignment(IKernel kernel)
@@ -105,10 +100,9 @@ namespace NPCGen.Tests.Integration.Common
             return alignment;
         }
 
-        private CharacterClassPrototype GenerateCharacterClassPrototype(IKernel kernel)
+        private CharacterClassPrototype GenerateCharacterClassPrototype(IKernel kernel, Alignment alignment)
         {
             CharacterClassPrototype prototype;
-            var alignment = kernel.Get<Alignment>();
             var factory = kernel.Get<ICharacterClassFactory>();
             var verifier = kernel.Get<IRandomizerVerifier>();
             var classNameRandomizer = kernel.Get<IClassNameRandomizer>();
@@ -122,11 +116,9 @@ namespace NPCGen.Tests.Integration.Common
             return prototype;
         }
 
-        private Race GenerateRace(IKernel kernel)
+        private Race GenerateRace(IKernel kernel, Alignment alignment, CharacterClassPrototype prototype)
         {
             Race race;
-            var alignment = kernel.Get<Alignment>();
-            var prototype = kernel.Get<CharacterClassPrototype>();
             var levelAdjustments = kernel.Get<ILevelAdjustmentsProvider>().GetLevelAdjustments();
             var factory = kernel.Get<IRaceFactory>();
             var baseRaceRandomizer = kernel.Get<IBaseRaceRandomizer>();
@@ -143,21 +135,18 @@ namespace NPCGen.Tests.Integration.Common
             return kernel.Get<T>();
         }
 
-        [Test]
-        public void GetNewInstanceOfReturnsNewInstances()
+        private DependentDataCollection GetNewInstanceOfDependentData(IKernel kernel)
         {
-            var different = false;
+            var collection = new DependentDataCollection();
 
-            for (var i = 0; i < 10; i++)
-            {
-                var first = GetNewInstanceOf<Race>();
-                var second = GetNewInstanceOf<Race>();
+            collection.Alignment = GenerateAlignment(kernel);
+            collection.CharacterClassPrototype = GenerateCharacterClassPrototype(kernel, collection.Alignment);
+            collection.Race = GenerateRace(kernel, collection.Alignment, collection.CharacterClassPrototype);
 
-                Assert.That(first, Is.Not.EqualTo(second));
-                different |= first.BaseRace != second.BaseRace || first.Male != second.Male || first.Metarace != second.Metarace;
-            }
+            var factory = kernel.Get<ICharacterClassFactory>();
+            collection.CharacterClass = factory.CreateWith(collection.CharacterClassPrototype);
 
-            Assert.That(different, Is.True);
+            return collection;
         }
     }
 }
