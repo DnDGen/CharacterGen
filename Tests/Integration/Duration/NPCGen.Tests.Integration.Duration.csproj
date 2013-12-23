@@ -51,11 +51,7 @@
         <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
       </ItemGroup>
     </When>
-    <Otherwise>
-      <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
-      </ItemGroup>
-    </Otherwise>
+    <Otherwise />
   </Choose>
   <ItemGroup>
     <Compile Include="Generation\Factories\CharacterClassFactoryTests.cs" />
@@ -92,8 +88,35 @@
     <Compile Include="Generation\Randomizers\CharacterClasses\Levels\SetLevelRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\CharacterClasses\Levels\VeryHighLevelRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\Races\BaseRaces\AnyBaseRaceRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Races\BaseRaces\NonEvilBaseRaceRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\Races\BaseRaces\EvilBaseRaceRandomizerTests.cs" />
     <Compile Include="DurationTest.cs" />
+    <Compile Include="Generation\Randomizers\Races\BaseRaces\NonGoodBaseRaceRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Races\BaseRaces\GoodBaseRaceRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Races\BaseRaces\NonNeutralBaseRaceRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Races\BaseRaces\NeutralBaseRaceRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Races\BaseRaces\SetBaseRaceRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Races\BaseRaces\StandardBaseRaceRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Races\BaseRaces\NonStandardBaseRaceRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Races\Metaraces\AnyMetaraceRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Races\Metaraces\NonEvilMetaraceRandomizationTests.cs" />
+    <Compile Include="Generation\Randomizers\Races\Metaraces\EvilMetaraceRandomizationTests.cs" />
+    <Compile Include="Generation\Randomizers\Races\Metaraces\GeneticMetaraceRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Races\Metaraces\NonGoodMetaraceRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Races\Metaraces\GoodMetaraceRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Races\Metaraces\LycanthropeMetaraceRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Races\Metaraces\NonNeutralMetaraceRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Races\Metaraces\NeutralMetaraceRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Races\Metaraces\NoMetaraceRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Races\Metaraces\SetMetaraceRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Stats\AverageStatsRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Stats\TwoTenSidedDiceStatsRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Stats\RawStatsRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Stats\PoorStatsRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Stats\OnesAsSixesStatsRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Stats\HeroicStatsRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Stats\GoodStatsRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Stats\BestOfFourStatsRandomizerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -113,6 +136,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
