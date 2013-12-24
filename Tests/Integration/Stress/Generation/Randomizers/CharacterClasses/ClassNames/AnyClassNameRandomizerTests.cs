@@ -1,5 +1,10 @@
-﻿using Ninject;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Ninject;
+using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Generation.Randomizers.CharacterClasses.ClassNames;
+using NPCGen.Core.Generation.Randomizers.CharacterClasses.Interfaces;
 using NPCGen.Tests.Integration.Common;
 using NUnit.Framework;
 
@@ -11,9 +16,17 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Randomizers.CharacterClasse
         [Inject]
         public AnyClassNameRandomizer ClassNameRandomizer { get; set; }
 
+        private IEnumerable<String> classNames;
+
+        protected override IClassNameRandomizer GetClassNameRandomizer(IKernel kernel)
+        {
+            return kernel.Get<AnyClassNameRandomizer>();
+        }
+
         [SetUp]
         public void Setup()
         {
+            classNames = CharacterClassConstants.GetClassNames();
             StartTest();
         }
 
@@ -30,8 +43,7 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Randomizers.CharacterClasse
             {
                 var data = GetNewInstanceOf<DependentDataCollection>();
                 var className = ClassNameRandomizer.Randomize(data.Alignment);
-                Assert.That(className, Is.Not.Null);
-                Assert.That(className, Is.Not.Empty);
+                Assert.That(classNames.Contains(className), Is.True);
             }
 
             AssertIterations();

@@ -1,32 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Ninject;
-using NPCGen.Core.Data.Races;
+﻿using Ninject;
 using NPCGen.Core.Generation.Randomizers.Races.BaseRaces;
-using NPCGen.Core.Generation.Randomizers.Races.Interfaces;
 using NPCGen.Tests.Integration.Common;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Stress.Generation.Randomizers.Races.BaseRaces
 {
     [TestFixture]
-    public class AnyBaseRaceRandomizerTests : StressTest
+    public class SetBaseRaceRandomizerTests : StressTest
     {
         [Inject]
-        public AnyBaseRaceRandomizer BaseRaceRandomizer { get; set; }
-
-        private IEnumerable<String> baseRaces;
-
-        protected override IBaseRaceRandomizer GetBaseRaceRandomizer(IKernel kernel)
-        {
-            return kernel.Get<AnyBaseRaceRandomizer>();
-        }
+        public SetBaseRaceRandomizer BaseRaceRandomizer { get; set; }
 
         [SetUp]
         public void Setup()
         {
-            baseRaces = RaceConstants.BaseRaces.GetBaseRaces();
             StartTest();
         }
 
@@ -37,13 +24,17 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Randomizers.Races.BaseRaces
         }
 
         [Test]
-        public void AnyBaseRaceRandomizationReturnsBaseRace()
+        public void SetClassNameRandomizerAlwaysReturnsSetClassName()
         {
             while (TestShouldKeepRunning())
             {
                 var data = GetNewInstanceOf<DependentDataCollection>();
+                BaseRaceRandomizer.BaseRace = data.Race.BaseRace;
+
                 var baseRace = BaseRaceRandomizer.Randomize(data.Alignment.Goodness, data.CharacterClassPrototype);
-                Assert.That(baseRaces.Contains(baseRace), Is.True);
+                Assert.That(baseRace, Is.Not.Null);
+                Assert.That(baseRace, Is.Not.Empty);
+                Assert.That(baseRace, Is.EqualTo(BaseRaceRandomizer.BaseRace));
             }
 
             AssertIterations();

@@ -11,22 +11,32 @@ using NUnit.Framework;
 namespace NPCGen.Tests.Integration.Stress.Generation.Randomizers.Races.BaseRaces
 {
     [TestFixture]
-    public class AnyBaseRaceRandomizerTests : StressTest
+    public class StandardBaseRaceRandomizerTests : StressTest
     {
         [Inject]
-        public AnyBaseRaceRandomizer BaseRaceRandomizer { get; set; }
+        public StandardBaseRaceRandomizer BaseRaceRandomizer { get; set; }
 
         private IEnumerable<String> baseRaces;
 
         protected override IBaseRaceRandomizer GetBaseRaceRandomizer(IKernel kernel)
         {
-            return kernel.Get<AnyBaseRaceRandomizer>();
+            return kernel.Get<StandardBaseRaceRandomizer>();
         }
 
         [SetUp]
         public void Setup()
         {
-            baseRaces = RaceConstants.BaseRaces.GetBaseRaces();
+            baseRaces = new[]
+                {
+                    RaceConstants.BaseRaces.RockGnome,
+                    RaceConstants.BaseRaces.HalfElf,
+                    RaceConstants.BaseRaces.HalfOrc,
+                    RaceConstants.BaseRaces.HighElf,
+                    RaceConstants.BaseRaces.HillDwarf,
+                    RaceConstants.BaseRaces.Human,
+                    RaceConstants.BaseRaces.LightfootHalfling
+                };
+
             StartTest();
         }
 
@@ -37,7 +47,7 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Randomizers.Races.BaseRaces
         }
 
         [Test]
-        public void AnyBaseRaceRandomizationReturnsBaseRace()
+        public void StandardBaseRaceRandomizerAlwaysReturnsStandardBaseRace()
         {
             while (TestShouldKeepRunning())
             {

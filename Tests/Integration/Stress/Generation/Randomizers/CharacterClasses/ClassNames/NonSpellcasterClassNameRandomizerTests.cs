@@ -1,7 +1,10 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Ninject;
 using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Generation.Randomizers.CharacterClasses.ClassNames;
+using NPCGen.Core.Generation.Randomizers.CharacterClasses.Interfaces;
 using NPCGen.Tests.Integration.Common;
 using NUnit.Framework;
 
@@ -13,9 +16,24 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Randomizers.CharacterClasse
         [Inject]
         public NonSpellcasterClassNameRandomizer ClassNameRandomizer { get; set; }
 
+        private IEnumerable<String> classNames;
+
+        protected override IClassNameRandomizer GetClassNameRandomizer(IKernel kernel)
+        {
+            return kernel.Get<NonSpellcasterClassNameRandomizer>();
+        }
+
         [SetUp]
         public void Setup()
         {
+            classNames = new[]
+                {
+                    CharacterClassConstants.Fighter,
+                    CharacterClassConstants.Rogue,
+                    CharacterClassConstants.Monk,
+                    CharacterClassConstants.Barbarian
+                };
+
             StartTest();
         }
 
@@ -26,35 +44,13 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Randomizers.CharacterClasse
         }
 
         [Test]
-        public void NonSpellcasterClassNameRandomizerReturnsClassName()
-        {
-            while (TestShouldKeepRunning())
-            {
-                var data = GetNewInstanceOf<DependentDataCollection>();
-                var className = ClassNameRandomizer.Randomize(data.Alignment);
-                Assert.That(className, Is.Not.Null);
-                Assert.That(className, Is.Not.Empty);
-            }
-
-            AssertIterations();
-        }
-
-        [Test]
         public void NonSpellcasterClassNameRandomizerAlwaysReturnsNonSpellcaster()
         {
-            var nonSpellcasters = new[]
-                {
-                    CharacterClassConstants.Fighter,
-                    CharacterClassConstants.Rogue,
-                    CharacterClassConstants.Monk,
-                    CharacterClassConstants.Barbarian
-                };
-
             while (TestShouldKeepRunning())
             {
                 var data = GetNewInstanceOf<DependentDataCollection>();
                 var className = ClassNameRandomizer.Randomize(data.Alignment);
-                Assert.That(nonSpellcasters.Contains(className), Is.True);
+                Assert.That(classNames.Contains(className), Is.True);
             }
 
             AssertIterations();

@@ -11,16 +11,16 @@ using NUnit.Framework;
 namespace NPCGen.Tests.Integration.Stress.Generation.Randomizers.Races.BaseRaces
 {
     [TestFixture]
-    public class EvilBaseRaceRandomizerTests : StressTest
+    public class NonStandardBaseRaceRandomizerTests : StressTest
     {
         [Inject]
-        public EvilBaseRaceRandomizer BaseRaceRandomizer { get; set; }
+        public NonStandardBaseRaceRandomizer BaseRaceRandomizer { get; set; }
 
         private IEnumerable<String> baseRaces;
 
         protected override IBaseRaceRandomizer GetBaseRaceRandomizer(IKernel kernel)
         {
-            return kernel.Get<EvilBaseRaceRandomizer>();
+            return kernel.Get<NonStandardBaseRaceRandomizer>();
         }
 
         [SetUp]
@@ -28,32 +28,32 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Randomizers.Races.BaseRaces
         {
             baseRaces = new[]
                 {
-                    RaceConstants.BaseRaces.Bugbear,
+                    RaceConstants.BaseRaces.Svirfneblin,
+                    RaceConstants.BaseRaces.Aasimar,
                     RaceConstants.BaseRaces.Derro,
                     RaceConstants.BaseRaces.Drow,
                     RaceConstants.BaseRaces.DuergarDwarf,
-                    RaceConstants.BaseRaces.Gnoll,
                     RaceConstants.BaseRaces.Goblin,
                     RaceConstants.BaseRaces.Hobgoblin,
-                    RaceConstants.BaseRaces.Kobold,
                     RaceConstants.BaseRaces.Ogre,
                     RaceConstants.BaseRaces.OgreMage,
                     RaceConstants.BaseRaces.Orc,
                     RaceConstants.BaseRaces.Troglodyte,
                     RaceConstants.BaseRaces.MindFlayer,
                     RaceConstants.BaseRaces.Minotaur,
+                    RaceConstants.BaseRaces.Gnoll,
+                    RaceConstants.BaseRaces.Bugbear,
                     RaceConstants.BaseRaces.Tiefling,
+                    RaceConstants.BaseRaces.Kobold,
+                    RaceConstants.BaseRaces.Doppelganger,
                     RaceConstants.BaseRaces.Lizardfolk,
-                    RaceConstants.BaseRaces.DeepDwarf,
-                    RaceConstants.BaseRaces.DeepHalfling,
-                    RaceConstants.BaseRaces.HalfElf,
-                    RaceConstants.BaseRaces.HalfOrc,
-                    RaceConstants.BaseRaces.HighElf,
-                    RaceConstants.BaseRaces.HillDwarf,
-                    RaceConstants.BaseRaces.Human,
-                    RaceConstants.BaseRaces.LightfootHalfling,
+                    RaceConstants.BaseRaces.MountainDwarf,
+                    RaceConstants.BaseRaces.ForestGnome,
                     RaceConstants.BaseRaces.TallfellowHalfling,
                     RaceConstants.BaseRaces.WildElf,
+                    RaceConstants.BaseRaces.DeepDwarf,
+                    RaceConstants.BaseRaces.DeepHalfling,
+                    RaceConstants.BaseRaces.GrayElf,
                     RaceConstants.BaseRaces.WoodElf
                 };
 
@@ -67,7 +67,7 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Randomizers.Races.BaseRaces
         }
 
         [Test]
-        public void EvilBaseRaceRandomizerAlwaysReturnsEvilBaseRace()
+        public void NonStandardBaseRaceRandomizerAlwaysReturnsNonStandardBaseRace()
         {
             while (TestShouldKeepRunning())
             {

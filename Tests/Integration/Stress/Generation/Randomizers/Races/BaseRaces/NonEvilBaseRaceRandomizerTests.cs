@@ -11,22 +11,22 @@ using NUnit.Framework;
 namespace NPCGen.Tests.Integration.Stress.Generation.Randomizers.Races.BaseRaces
 {
     [TestFixture]
-    public class EvilBaseRaceRandomizerTests : StressTest
+    public class NonEvilBaseRaceRandomizerTests : StressTest
     {
         [Inject]
-        public EvilBaseRaceRandomizer BaseRaceRandomizer { get; set; }
+        public NonEvilBaseRaceRandomizer BaseRaceRandomizer { get; set; }
 
         private IEnumerable<String> baseRaces;
 
         protected override IBaseRaceRandomizer GetBaseRaceRandomizer(IKernel kernel)
         {
-            return kernel.Get<EvilBaseRaceRandomizer>();
+            return kernel.Get<NonEvilBaseRaceRandomizer>();
         }
 
         [SetUp]
         public void Setup()
         {
-            baseRaces = new[]
+            var evilBaseRaces = new[]
                 {
                     RaceConstants.BaseRaces.Bugbear,
                     RaceConstants.BaseRaces.Derro,
@@ -42,20 +42,10 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Randomizers.Races.BaseRaces
                     RaceConstants.BaseRaces.Troglodyte,
                     RaceConstants.BaseRaces.MindFlayer,
                     RaceConstants.BaseRaces.Minotaur,
-                    RaceConstants.BaseRaces.Tiefling,
-                    RaceConstants.BaseRaces.Lizardfolk,
-                    RaceConstants.BaseRaces.DeepDwarf,
-                    RaceConstants.BaseRaces.DeepHalfling,
-                    RaceConstants.BaseRaces.HalfElf,
-                    RaceConstants.BaseRaces.HalfOrc,
-                    RaceConstants.BaseRaces.HighElf,
-                    RaceConstants.BaseRaces.HillDwarf,
-                    RaceConstants.BaseRaces.Human,
-                    RaceConstants.BaseRaces.LightfootHalfling,
-                    RaceConstants.BaseRaces.TallfellowHalfling,
-                    RaceConstants.BaseRaces.WildElf,
-                    RaceConstants.BaseRaces.WoodElf
+                    RaceConstants.BaseRaces.Tiefling
                 };
+
+            baseRaces = RaceConstants.BaseRaces.GetBaseRaces().Except(evilBaseRaces);
 
             StartTest();
         }
@@ -67,7 +57,7 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Randomizers.Races.BaseRaces
         }
 
         [Test]
-        public void EvilBaseRaceRandomizerAlwaysReturnsEvilBaseRace()
+        public void NonEvilBaseRaceRandomizerAlwaysReturnsNonEvilBaseRace()
         {
             while (TestShouldKeepRunning())
             {

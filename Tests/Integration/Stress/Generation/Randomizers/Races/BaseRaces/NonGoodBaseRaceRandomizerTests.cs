@@ -11,22 +11,29 @@ using NUnit.Framework;
 namespace NPCGen.Tests.Integration.Stress.Generation.Randomizers.Races.BaseRaces
 {
     [TestFixture]
-    public class AnyBaseRaceRandomizerTests : StressTest
+    public class BaseRaceRandomizerTests : StressTest
     {
         [Inject]
-        public AnyBaseRaceRandomizer BaseRaceRandomizer { get; set; }
+        public NonGoodBaseRaceRandomizer BaseRaceRandomizer { get; set; }
 
         private IEnumerable<String> baseRaces;
 
         protected override IBaseRaceRandomizer GetBaseRaceRandomizer(IKernel kernel)
         {
-            return kernel.Get<AnyBaseRaceRandomizer>();
+            return kernel.Get<NonGoodBaseRaceRandomizer>();
         }
 
         [SetUp]
         public void Setup()
         {
-            baseRaces = RaceConstants.BaseRaces.GetBaseRaces();
+            var goodBaseRaces = new[]
+                {
+                    RaceConstants.BaseRaces.Aasimar,
+                    RaceConstants.BaseRaces.Svirfneblin
+                };
+
+            baseRaces = RaceConstants.BaseRaces.GetBaseRaces().Except(goodBaseRaces);
+
             StartTest();
         }
 
@@ -37,7 +44,7 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Randomizers.Races.BaseRaces
         }
 
         [Test]
-        public void AnyBaseRaceRandomizationReturnsBaseRace()
+        public void NonGoodBaseRaceRandomizerAlwaysReturnsNonGoodBaseRace()
         {
             while (TestShouldKeepRunning())
             {

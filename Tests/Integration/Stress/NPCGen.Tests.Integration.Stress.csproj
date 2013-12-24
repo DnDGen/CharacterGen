@@ -92,7 +92,15 @@
     <Compile Include="Generation\Randomizers\CharacterClasses\Levels\SetLevelRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\CharacterClasses\Levels\VeryHighLevelRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\Races\BaseRaces\AnyBaseRaceRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Races\BaseRaces\NonEvilBaseRaceRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\Races\BaseRaces\EvilBaseRaceRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Races\BaseRaces\NonGoodBaseRaceRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Races\BaseRaces\GoodBaseRaceRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Races\BaseRaces\NonNeutralBaseRaceRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Races\BaseRaces\NeutralBaseRaceRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Races\BaseRaces\NonStandardBaseRaceRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Races\BaseRaces\SetBaseRaceRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Races\BaseRaces\StandardBaseRaceRandomizerTests.cs" />
     <Compile Include="StressTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

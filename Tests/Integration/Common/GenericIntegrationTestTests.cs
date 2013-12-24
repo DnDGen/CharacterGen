@@ -116,7 +116,7 @@ namespace NPCGen.Tests.Integration.Common
 
             stopwatch.Start();
 
-            while (iterations++ < 1000000 && stopwatch.Elapsed.Seconds < 10)
+            while (iterations++ < 1000000 && stopwatch.Elapsed.Seconds < 1)
             {
                 var data = GetNewInstanceOf<DependentDataCollection>();
 

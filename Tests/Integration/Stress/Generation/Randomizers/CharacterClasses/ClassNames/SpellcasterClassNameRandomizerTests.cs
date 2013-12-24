@@ -1,7 +1,10 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Ninject;
 using NPCGen.Core.Data.CharacterClasses;
 using NPCGen.Core.Generation.Randomizers.CharacterClasses.ClassNames;
+using NPCGen.Core.Generation.Randomizers.CharacterClasses.Interfaces;
 using NPCGen.Tests.Integration.Common;
 using NUnit.Framework;
 
@@ -13,36 +16,17 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Randomizers.CharacterClasse
         [Inject]
         public SpellcasterClassNameRandomizer ClassNameRandomizer { get; set; }
 
+        private IEnumerable<String> classNames;
+
+        protected override IClassNameRandomizer GetClassNameRandomizer(IKernel kernel)
+        {
+            return kernel.Get<SpellcasterClassNameRandomizer>();
+        }
+
         [SetUp]
         public void Setup()
         {
-            StartTest();
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            StopTest();
-        }
-
-        [Test]
-        public void SpellcasterClassNameRandomizerReturnsClassName()
-        {
-            while (TestShouldKeepRunning())
-            {
-                var data = GetNewInstanceOf<DependentDataCollection>();
-                var className = ClassNameRandomizer.Randomize(data.Alignment);
-                Assert.That(className, Is.Not.Null);
-                Assert.That(className, Is.Not.Empty);
-            }
-
-            AssertIterations();
-        }
-
-        [Test]
-        public void SpellcasterClassNameRandomizerAlwaysReturnsSpellcaster()
-        {
-            var spellcasters = new[]
+            classNames = new[]
                 {
                     CharacterClassConstants.Bard,
                     CharacterClassConstants.Druid,
@@ -53,11 +37,23 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Randomizers.CharacterClasse
                     CharacterClassConstants.Wizard
                 };
 
+            StartTest();
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            StopTest();
+        }
+
+        [Test]
+        public void SpellcasterClassNameRandomizerAlwaysReturnsSpellcaster()
+        {
             while (TestShouldKeepRunning())
             {
                 var data = GetNewInstanceOf<DependentDataCollection>();
                 var className = ClassNameRandomizer.Randomize(data.Alignment);
-                Assert.That(spellcasters.Contains(className), Is.True);
+                Assert.That(classNames.Contains(className), Is.True);
             }
 
             AssertIterations();

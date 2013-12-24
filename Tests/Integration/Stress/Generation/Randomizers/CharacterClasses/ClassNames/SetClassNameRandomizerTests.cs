@@ -24,7 +24,7 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Randomizers.CharacterClasse
         }
 
         [Test]
-        public void SetClassNameRandomizerReturnsClassName()
+        public void SetClassNameRandomizerAlwaysReturnsSetClassName()
         {
             while (TestShouldKeepRunning())
             {
@@ -34,20 +34,6 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Randomizers.CharacterClasse
                 var className = ClassNameRandomizer.Randomize(data.Alignment);
                 Assert.That(className, Is.Not.Null);
                 Assert.That(className, Is.Not.Empty);
-            }
-
-            AssertIterations();
-        }
-
-        [Test]
-        public void SetClassNameRandomizerAlwaysReturnsSetClassName()
-        {
-            while (TestShouldKeepRunning())
-            {
-                var data = GetNewInstanceOf<DependentDataCollection>();
-                ClassNameRandomizer.ClassName = data.CharacterClassPrototype.ClassName;
-
-                var className = ClassNameRandomizer.Randomize(data.Alignment);
                 Assert.That(className, Is.EqualTo(ClassNameRandomizer.ClassName));
             }
 

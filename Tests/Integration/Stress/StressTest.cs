@@ -9,7 +9,7 @@ namespace NPCGen.Tests.Integration.Stress
     public abstract class StressTest : IntegrationTest
     {
         private const Int32 ConfidentIterations = 1000000;
-        private const Int32 TimeLimitInSeconds = 10;
+        private const Int32 TimeLimitInSeconds = 1;
 
         private Stopwatch stopwatch;
         private Int32 iterations;
@@ -38,6 +38,7 @@ namespace NPCGen.Tests.Integration.Stress
 
         protected void AssertIterations()
         {
+            Assert.That(iterations, Is.GreaterThan(0));
             Assert.Pass("Iterations: {0}", iterations);
         }
     }

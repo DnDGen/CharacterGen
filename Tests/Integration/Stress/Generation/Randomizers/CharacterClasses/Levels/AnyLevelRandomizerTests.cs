@@ -23,12 +23,13 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Randomizers.CharacterClasse
         }
 
         [Test]
-        public void AnyLevelRandomizerReturnsLevelGreaterThanZero()
+        public void AnyLevelRandomizerReturnsLevel()
         {
             while (TestShouldKeepRunning())
             {
                 var level = LevelRandomizer.Randomize();
                 Assert.That(level, Is.GreaterThan(0));
+                Assert.That(level, Is.LessThanOrEqualTo(20));
             }
 
             AssertIterations();
