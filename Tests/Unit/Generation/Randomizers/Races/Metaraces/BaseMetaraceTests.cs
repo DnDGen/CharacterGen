@@ -44,7 +44,7 @@ namespace NPCGen.Tests.Unit.Generation.Randomizers.Races.Metaraces
         }
 
         [Test]
-        public void RandomizeGetsAllPossibleResultsFromGetAllPossibleResults()
+        public void RandomizeGetsAllPossibleResultsFromPercentileResultProvider()
         {
             randomizer.Randomize(String.Empty, prototype);
             mockPercentileResultProvider.Verify(p => p.GetAllResults(It.IsAny<String>()), Times.Once);
@@ -58,14 +58,14 @@ namespace NPCGen.Tests.Unit.Generation.Randomizers.Races.Metaraces
         }
 
         [Test]
-        public void RandomizeReturnsBaseRaceFromPercentileResultProvider()
+        public void RandomizeReturnsMetaraceFromPercentileResultProvider()
         {
             var result = randomizer.Randomize(String.Empty, prototype);
             Assert.That(result, Is.EqualTo(firstMetarace));
         }
 
         [Test]
-        public void RandomizeAccessesTableAlignmentGoodnessClassNameBaseRaces()
+        public void RandomizeAccessesTableAlignmentGoodnessClassNameMetaraces()
         {
             prototype.ClassName = "className";
             randomizer.Randomize("goodness", prototype);
@@ -73,7 +73,7 @@ namespace NPCGen.Tests.Unit.Generation.Randomizers.Races.Metaraces
         }
 
         [Test]
-        public void RandomizeLoopsUntilAllowedBaseRaceIsRolled()
+        public void RandomizeLoopsUntilAllowedMetaraceIsRolled()
         {
             mockPercentileResultProvider.SetupSequence(p => p.GetPercentileResult(It.IsAny<String>())).Returns("invalid metarace")
                 .Returns(firstMetarace);

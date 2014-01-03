@@ -11,16 +11,16 @@ using NUnit.Framework;
 namespace NPCGen.Tests.Integration.Stress.Generation.Randomizers.Races.Metaraces
 {
     [TestFixture]
-    public class EvilMetaraceRandomizerTests : StressTest
+    public class GoodMetaraceRandomizerTests : StressTest
     {
         [Inject]
-        public EvilMetaraceRandomizer MetaraceRandomizer { get; set; }
+        public GoodMetaraceRandomizer MetaraceRandomizer { get; set; }
 
         private IEnumerable<String> metaraces;
 
         protected override IMetaraceRandomizer GetMetaraceRandomizer(IKernel kernel)
         {
-            var randomizer = kernel.Get<EvilMetaraceRandomizer>();
+            var randomizer = kernel.Get<GoodMetaraceRandomizer>();
             randomizer.AllowNoMetarace = false;
             return randomizer;
         }
@@ -31,9 +31,8 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Randomizers.Races.Metaraces
             metaraces = new[]
                 {
                     RaceConstants.Metaraces.HalfDragon,
-                    RaceConstants.Metaraces.HalfFiend,
-                    RaceConstants.Metaraces.Wererat,
-                    RaceConstants.Metaraces.Werewolf,
+                    RaceConstants.Metaraces.HalfCelestial,
+                    RaceConstants.Metaraces.Werebear,
                     String.Empty
                 };
 
@@ -47,7 +46,7 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Randomizers.Races.Metaraces
         }
 
         [Test]
-        public void EvilMetaraceRandomizerReturnsMetaraceOrEmpty()
+        public void GoodMetaraceRandomizerReturnsMetaraceOrEmpty()
         {
             MetaraceRandomizer.AllowNoMetarace = true;
 
@@ -62,7 +61,7 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Randomizers.Races.Metaraces
         }
 
         [Test]
-        public void EvilMetaraceRandomizerReturnsMetarace()
+        public void GoodMetaraceRandomizerReturnsMetarace()
         {
             MetaraceRandomizer.AllowNoMetarace = false;
 
