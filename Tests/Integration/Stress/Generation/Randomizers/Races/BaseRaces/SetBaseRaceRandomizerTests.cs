@@ -24,7 +24,7 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Randomizers.Races.BaseRaces
         }
 
         [Test]
-        public void SetClassNameRandomizerAlwaysReturnsSetClassName()
+        public void SetBaseRaceRandomizerAlwaysReturnsSetBaseRace()
         {
             while (TestShouldKeepRunning())
             {
