@@ -173,11 +173,21 @@ namespace NPCGen.Tests.Integration.Stress.Generation.Factories
                 foreach (var statName in statNames)
                 {
                     Assert.That(character.Stats.ContainsKey(statName), Is.True);
-
-                    var stat = character.Stats[statName];
-                    Assert.That(stat, Is.Not.Null);
-                    Assert.That(stat.Value, Is.GreaterThan(0));
+                    Assert.That(character.Stats[statName], Is.GreaterThan(0));
                 }
+            }
+
+            AssertIterations();
+        }
+
+        [Test]
+        public void CharacterFactoryReturnsCharacterWithFamiliar()
+        {
+            while (TestShouldKeepRunning())
+            {
+                var character = CharacterFactory.CreateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
+                    MetaraceRandomizer, StatsRandomizer);
+                Assert.That(character.Familiar, Is.Not.Null);
             }
 
             AssertIterations();

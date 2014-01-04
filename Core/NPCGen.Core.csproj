@@ -53,6 +53,7 @@
     <Compile Include="Data\CharacterClasses\CharacterClass.cs" />
     <Compile Include="Data\CharacterClasses\CharacterClassConstants.cs" />
     <Compile Include="Data\CharacterClasses\CharacterClassPrototype.cs" />
+    <Compile Include="Data\Familiar.cs" />
     <Compile Include="Data\Feat.cs" />
     <Compile Include="Data\LanguageConstants.cs" />
     <Compile Include="Data\Races\Race.cs" />
