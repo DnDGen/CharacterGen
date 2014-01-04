@@ -112,6 +112,13 @@
     <Compile Include="Generation\Randomizers\Races\Metaraces\GoodMetaraceRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\Races\Metaraces\GeneticMetaraceRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\Races\Metaraces\EvilMetaraceRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Stats\TwoTenSidedDiceStatsRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Stats\RawStatsRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Stats\PoorStatsRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Stats\OnesAsSixesStatsRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Stats\HeroicStatsRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Stats\GoodStatsRandomizerTests.cs" />
+    <Compile Include="Generation\Randomizers\Stats\BestOfFourStatsRandomizerTests.cs" />
     <Compile Include="Generation\Randomizers\Stats\AverageStatsRandomizerTests.cs" />
     <Compile Include="StressTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

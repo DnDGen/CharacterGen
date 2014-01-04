@@ -16,11 +16,13 @@ namespace NPCGen.Tests.Unit.Generation.Randomizers.Stats
 
         private const Int32 min = 16;
         private const Int32 max = 18;
-        private Int32 middle { get { return (min + max) / 2; } }
+        private Int32 middle;
 
         [SetUp]
         public void Setup()
         {
+            middle = (max + min) / 2;
+
             mockDice = new Mock<IDice>();
             mockDice.SetupSequence(d => d.d6(3)).Returns(min).Returns(max).Returns(middle).Returns(min - 1).Returns(max + 1).Returns(middle);
 
@@ -39,7 +41,7 @@ namespace NPCGen.Tests.Unit.Generation.Randomizers.Stats
         {
             var stats = randomizer.Randomize();
             var average = stats.Values.Average(s => s.Value);
-            Assert.That(average, Is.GreaterThanOrEqualTo(min));
+            Assert.That(average, Is.InRange<Double>(min, max));
         }
 
         [Test]
