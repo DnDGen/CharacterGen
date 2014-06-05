@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<percentile>
+  <object><lower>1</lower><content>High Elf</content><upper>1</upper></object>
+  <object><lower>2</lower><content>Wood Elf</content><upper>11</upper></object>
+  <object><lower>12</lower><content>Half-Elf</content><upper>28</upper></object>
+  <object>
+    <lower>29</lower>
+    <content>Lightfoot Halfling</content>
+    <upper>29</upper>
+  </object>
+  <object>
+    <lower>30</lower>
+    <content>Tallfellow Halfling</content>
+    <upper>30</upper>
+  </object>
+  <object>
+    <lower>31</lower>
+    <content>Half-Orc</content>
+    <upper>39</upper>
+  </object>
+  <object>
+    <lower>40</lower>
+    <content>Human</content>
+    <upper>69</upper>
+  </object>
+  <object>
+    <lower>70</lower>
+    <content>Lizardfolk</content>
+    <upper>71</upper>
+  </object>
+  <object>
+    <lower>72</lower>
+    <content>Hobgoblin</content>
+    <upper>72</upper>
+  </object>
+  <object>
+    <lower>73</lower>
+    <content>Gnoll</content>
+    <upper>92</upper>
+  </object>
+  <object>
+    <lower>93</lower>
+    <content>Troglodyte</content>
+    <upper>93</upper>
+  </object>
+  <object>
+    <lower>94</lower>
+    <content>Bugbear</content>
+    <upper>94</upper>
+  </object>
+  <object>
+    <lower>95</lower>
+    <content>Ogre</content>
+    <upper>95</upper>
+  </object>
+</percentile>

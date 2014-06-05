@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<languages>
+    <object>
+        <key>Aasimar</key>
+        <language>Common</language>
+        <language>Celestial</language>
+    </object>
+    <object>
+        <key>Bugbear</key>
+        <language>Common</language>
+        <language>Goblin</language>
+    </object>
+    <object>
+        <key>Deep Dwarf</key>
+        <language>Common</language>
+        <language>Dwarven</language>
+    </object>
+    <object>
+        <key>Hill Dwarf</key>
+        <language>Common</language>
+        <language>Dwarven</language>
+    </object>
+    <object>
+        <key>Mountain Dwarf</key>
+        <language>Common</language>
+        <language>Dwarven</language>
+    </object>
+    <object>
+        <key>Deep Halfling</key>
+        <language>Common</language>
+        <language>Halfling</language>
+    </object>
+    <object>
+        <key>Derro</key>
+        <language>Common</language>
+        <language>Dwarven</language>
+    </object>
+    <object>
+        <key>Doppelganger</key>
+        <language>Common</language>
+    </object>
+    <object>
+        <key>Drow</key>
+        <language>Common</language>
+        <language>Elven</language>
+        <language>Undercommon</language>
+    </object>
+    <object>
+        <key>Duergar Dwarf</key>
+        <language>Common</language>
+        <language>Dwarven</language>
+        <language>Undercommon</language>
+    </object>
+    <object>
+        <key>Forest Gnome</key>
+        <language>Common</language>
+        <language>Elven</language>
+        <language>Gnome</language>
+        <language>Sylvan</language>
+    </object>
+    <object>
+        <key>Gnoll</key>
+        <language>Gnoll</language>
+    </object>
+    <object>
+        <key>Goblin</key>
+        <language>Common</language>
+        <language>Goblin</language>
+    </object>
+    <object>
+        <key>Hobgoblin</key>
+        <language>Common</language>
+        <language>Goblin</language>
+    </object>
+    <object>
+        <key>Gray Elf</key>
+        <language>Common</language>
+        <language>Elven</language>
+    </object>
+    <object>
+        <key>High Elf</key>
+        <language>Common</language>
+        <language>Elven</language>
+    </object>
+    <object>
+        <key>Wild Elf</key>
+        <language>Common</language>
+        <language>Elven</language>
+    </object>
+    <object>
+        <key>Wood Elf</key>
+        <language>Common</language>
+        <language>Elven</language>
+    </object>
+    <object>
+        <key>Half-Elf</key>
+        <language>Common</language>
+        <language>Elven</language>
+    </object>
+    <object>
+        <key>Half-Fiend</key>
+        <language>Infernal</language>
+    </object>
+    <object>
+        <key>Half-Celestial</key>
+        <language>Celestial</language>
+    </object>
+    <object>
+        <key>Half-Dragon</key>
+        <language>Draconic</language>
+    </object>
+    <object>
+        <key>Half-Orc</key>
+        <language>Common</language>
+        <language>Orc</language>
+    </object>
+    <object>
+        <key>Orc</key>
+        <language>Common</language>
+        <language>Orc</language>
+    </object>
+    <object>
+        <key>Human</key>
+        <language>Common</language>
+    </object>
+    <object>
+        <key>Kobold</key>
+        <language>Draconic</language>
+    </object>
+    <object>
+        <key>Lightfoot Halfling</key>
+        <language>Common</language>
+        <language>Halfling</language>
+    </object>
+    <object>
+        <key>Tallfellow Halfling</key>
+        <language>Common</language>
+        <language>Halfling</language>
+    </object>
+    <object>
+        <key>Mind Flayer</key>
+        <language>Common</language>
+        <language>Undercommon</language>
+    </object>
+    <object>
+        <key>Minotaur</key>
+        <language>Common</language>
+        <language>Giant</language>
+    </object>
+    <object>
+        <key>Ogre</key>
+        <language>Common</language>
+        <language>Giant</language>
+    </object>
+    <object>
+        <key>Ogre Mage</key>
+        <language>Common</language>
+        <language>Giant</language>
+    </object>
+    <object>
+        <key>Rock Gnome</key>
+        <language>Common</language>
+        <language>Gnome</language>
+    </object>
+    <object>
+        <key>Svirfneblin</key>
+        <language>Common</language>
+        <language>Gnome</language>
+        <language>Undercommon</language>
+    </object>
+    <object>
+        <key>Tiefling</key>
+        <language>Common</language>
+        <language>Infernal</language>
+    </object>
+    <object>
+        <key>Troglodyte</key>
+        <language>Draconic</language>
+    </object>
+    <object>
+        <key>Lizardfolk</key>
+        <language>Common</language>
+        <language>Draconic</language>
+    </object>
+</languages>

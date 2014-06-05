@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<percentile>
+  <object>
+    <lower>1</lower>
+    <content>Half-Elf</content>
+    <upper>10</upper>
+  </object>
+  <object>
+    <lower>11</lower>
+    <content>Half-Orc</content>
+    <upper>20</upper>
+  </object>
+  <object>
+    <lower>21</lower>
+    <content>Human</content>
+    <upper>90</upper>
+  </object>
+  <object>
+    <lower>91</lower>
+    <content>Hobgoblin</content>
+    <upper>93</upper>
+  </object>
+  <object>
+    <lower>94</lower>
+    <content>Tiefling</content>
+    <upper>94</upper>
+  </object>
+  <object>
+    <lower>95</lower>
+    <content>Ogre Mage</content>
+    <upper>96</upper>
+  </object>
+</percentile>

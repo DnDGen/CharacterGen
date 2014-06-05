@@ -30,12 +30,47 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="D20Dice, Version=1.0.5061.24260, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\D20Dice.3.1\lib\D20Dice.dll</HintPath>
+    <Reference Include="Ciloci.Flee">
+      <HintPath>..\..\..\packages\Trove.FLEE.0.9.26.0\lib\net20\Ciloci.Flee.dll</HintPath>
+    </Reference>
+    <Reference Include="D20Dice">
+      <HintPath>..\..\..\packages\D20Dice.6.2\lib\D20Dice.dll</HintPath>
+    </Reference>
+    <Reference Include="D20Dice.Bootstrap">
+      <HintPath>..\..\..\packages\D20Dice.Bootstrap.6.2\lib\D20Dice.Bootstrap.dll</HintPath>
+    </Reference>
+    <Reference Include="EquipmentGen.Bootstrap">
+      <HintPath>..\..\..\packages\EquipmentGen.Bootstrap.1.0.0\lib\EquipmentGen.Bootstrap.dll</HintPath>
+    </Reference>
+    <Reference Include="EquipmentGen.Common">
+      <HintPath>..\..\..\packages\EquipmentGen.1.0.0\lib\EquipmentGen.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="EquipmentGen.Generators">
+      <HintPath>..\..\..\packages\EquipmentGen.1.0.0\lib\EquipmentGen.Generators.dll</HintPath>
+    </Reference>
+    <Reference Include="EquipmentGen.Generators.Interfaces">
+      <HintPath>..\..\..\packages\EquipmentGen.1.0.0\lib\EquipmentGen.Generators.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="EquipmentGen.Mappers">
+      <HintPath>..\..\..\packages\EquipmentGen.1.0.0\lib\EquipmentGen.Mappers.dll</HintPath>
+    </Reference>
+    <Reference Include="EquipmentGen.Mappers.Interfaces">
+      <HintPath>..\..\..\packages\EquipmentGen.1.0.0\lib\EquipmentGen.Mappers.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="EquipmentGen.Selectors">
+      <HintPath>..\..\..\packages\EquipmentGen.1.0.0\lib\EquipmentGen.Selectors.dll</HintPath>
+    </Reference>
+    <Reference Include="EquipmentGen.Selectors.Interfaces">
+      <HintPath>..\..\..\packages\EquipmentGen.1.0.0\lib\EquipmentGen.Selectors.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="EquipmentGen.Tables">
+      <HintPath>..\..\..\packages\EquipmentGen.1.0.0\lib\EquipmentGen.Tables.dll</HintPath>
+    </Reference>
+    <Reference Include="EquipmentGen.Tables.Interfaces">
+      <HintPath>..\..\..\packages\EquipmentGen.1.0.0\lib\EquipmentGen.Tables.Interfaces.dll</HintPath>
     </Reference>
     <Reference Include="Ninject">
-      <HintPath>..\..\..\packages\Ninject.3.0.1.10\lib\net45-full\Ninject.dll</HintPath>
+      <HintPath>..\..\..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\..\..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
@@ -49,7 +84,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BootstrapTests.cs" />
     <Compile Include="DependentDataCollection.cs" />
     <Compile Include="IntegrationTest.cs" />
     <Compile Include="GenericIntegrationTestTests.cs" />
@@ -64,9 +98,9 @@
       <Project>{18c602e6-823c-4cec-85d3-5edddca545db}</Project>
       <Name>NPCGen.Bootstrap</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Core\NPCGen.Core.csproj">
+    <ProjectReference Include="..\..\..\Core\NPCGen.Common.csproj">
       <Project>{83f2b67c-3eb0-4e46-aad5-bafaa2e35689}</Project>
-      <Name>NPCGen.Core</Name>
+      <Name>NPCGen.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

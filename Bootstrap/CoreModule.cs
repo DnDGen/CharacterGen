@@ -1,5 +1,4 @@
-﻿using D20Dice;
-using Ninject.Modules;
+﻿using Ninject.Modules;
 using NPCGen.Core.Generation.Factories;
 using NPCGen.Core.Generation.Factories.Interfaces;
 using NPCGen.Core.Generation.Providers;
@@ -19,7 +18,6 @@ namespace NPCGen.Bootstrap
             Bind<IAlignmentFactory>().To<AlignmentFactory>();
             Bind<ICharacterClassFactory>().To<CharacterClassFactory>();
             Bind<ICharacterFactory>().To<CharacterFactory>();
-            Bind<IDice>().ToMethod(c => DiceFactory.Create()).InSingletonScope();
             Bind<IHitPointsFactory>().To<HitPointsFactory>();
             Bind<ILanguageFactory>().To<LanguageFactory>();
             Bind<ILanguageProvider>().To<LanguagesProvider>();

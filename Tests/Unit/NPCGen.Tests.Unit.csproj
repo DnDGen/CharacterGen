@@ -35,11 +35,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Ciloci.Flee">
+      <HintPath>..\..\packages\Trove.FLEE.0.9.26.0\lib\net20\Ciloci.Flee.dll</HintPath>
+    </Reference>
     <Reference Include="D20Dice">
-      <HintPath>..\..\packages\D20Dice.3.1\lib\D20Dice.dll</HintPath>
+      <HintPath>..\..\packages\D20Dice.6.2\lib\D20Dice.dll</HintPath>
     </Reference>
     <Reference Include="Moq">
-      <HintPath>..\..\packages\Moq.4.2.1312.1615\lib\net40\Moq.dll</HintPath>
+      <HintPath>..\..\packages\Moq.4.2.1402.2112\lib\net40\Moq.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
@@ -231,9 +234,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Core\NPCGen.Core.csproj">
+    <ProjectReference Include="..\..\Core\NPCGen.Common.csproj">
       <Project>{83f2b67c-3eb0-4e46-aad5-bafaa2e35689}</Project>
-      <Name>NPCGen.Core</Name>
+      <Name>NPCGen.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

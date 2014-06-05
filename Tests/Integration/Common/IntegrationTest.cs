@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using D20Dice.Bootstrap;
+using EquipmentGen.Bootstrap;
 using Ninject;
 using NPCGen.Bootstrap;
 using NPCGen.Core.Data.Alignments;
@@ -31,6 +33,12 @@ namespace NPCGen.Tests.Integration.Common
         public IntegrationTest()
         {
             kernel = new StandardKernel();
+
+            var diceLoader = new D20DiceModuleLoader();
+            diceLoader.LoadModules(kernel);
+
+            var equipmentGenLoader = new EquipmentGenModuleLoader();
+            equipmentGenLoader.LoadModules(kernel);
 
             var npcGenLoader = new NPCGenModuleLoader();
             npcGenLoader.LoadModules(kernel);

@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<percentile>
+  <object><lower>1</lower><content>Barbarian</content><upper>5</upper></object>
+  <object><lower>6</lower><content>Bard</content><upper>10</upper></object>
+  <object><lower>11</lower><content>Cleric</content><upper>15</upper></object>
+  <object><lower>16</lower><content>Druid</content><upper>25</upper></object>
+  <object><lower>26</lower><content>Fighter</content><upper>45</upper></object>
+  <object><lower>46</lower><content>Monk</content><upper>50</upper></object>
+  <object><lower>51</lower><content>Ranger</content><upper>55</upper></object>
+  <object><lower>56</lower><content>Rogue</content><upper>75</upper></object>
+  <object><lower>76</lower><content>Sorcerer</content><upper>80</upper></object>
+  <object><lower>81</lower><content>Wizard</content><upper>100</upper></object>
+</percentile>

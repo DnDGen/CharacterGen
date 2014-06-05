@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<percentile>
+  <object><lower>1</lower><content>Deep Dwarf</content><upper>2</upper></object>
+  <object>
+    <lower>3</lower>
+    <content>Hill Dwarf</content>
+    <upper>3</upper>
+  </object>
+  <object>
+    <lower>4</lower>
+    <content>High Elf</content>
+    <upper>4</upper>
+  </object>
+  <object>
+    <lower>5</lower>
+    <content>Wild Elf</content>
+    <upper>5</upper>
+  </object>
+  <object>
+    <lower>6</lower>
+    <content>Wood Elf</content>
+    <upper>8</upper>
+  </object>
+  <object>
+    <lower>9</lower>
+    <content>Half-Elf</content>
+    <upper>18</upper>
+  </object>
+  <object>
+    <lower>19</lower>
+    <content>Lightfoot Halfling</content>
+    <upper>20</upper>
+  </object>
+  <object>
+    <lower>21</lower>
+    <content>Deep Halfling</content>
+    <upper>21</upper>
+  </object>
+  <object>
+    <lower>22</lower>
+    <content>Tallfellow Halfling</content>
+    <upper>22</upper>
+  </object>
+  <object>
+    <lower>23</lower>
+    <content>Half-Orc</content>
+    <upper>25</upper>
+  </object>
+  <object>
+    <lower>26</lower>
+    <content>Human</content>
+    <upper>56</upper>
+  </object>
+  <object>
+    <lower>57</lower>
+    <content>Lizardfolk</content>
+    <upper>63</upper>
+  </object>
+  <object>
+    <lower>64</lower>
+    <content>Goblin</content>
+    <upper>64</upper>
+  </object>
+  <object>
+    <lower>65</lower>
+    <content>Hobgoblin</content>
+    <upper>65</upper>
+  </object>
+  <object>
+    <lower>66</lower>
+    <content>Kobold</content>
+    <upper>66</upper>
+  </object>
+  <object>
+    <lower>67</lower>
+    <content>Orc</content>
+    <upper>67</upper>
+  </object>
+  <object>
+    <lower>68</lower>
+    <content>Tiefling</content>
+    <upper>68</upper>
+  </object>
+  <object>
+    <lower>69</lower>
+    <content>Drow</content>
+    <upper>71</upper>
+  </object>
+  <object>
+    <lower>72</lower>
+    <content>Duergar Dwarf</content>
+    <upper>72</upper>
+  </object>
+  <object>
+    <lower>73</lower>
+    <content>Gnoll</content>
+    <upper>74</upper>
+  </object>
+  <object>
+    <lower>75</lower>
+    <content>Troglodyte</content>
+    <upper>89</upper>
+  </object>
+  <object>
+    <lower>90</lower>
+    <content>Bugbear</content>
+    <upper>91</upper>
+  </object>
+  <object>
+    <lower>92</lower>
+    <content>Ogre</content>
+    <upper>92</upper>
+  </object>
+  <object>
+    <lower>93</lower>
+    <content>Minotaur</content>
+    <upper>93</upper>
+  </object>
+  <object>
+    <lower>94</lower>
+    <content>Mind Flayer</content>
+    <upper>94</upper>
+  </object>
+  <object>
+    <lower>95</lower>
+    <content>Ogre Mage</content>
+    <upper>95</upper>
+  </object>
+</percentile>

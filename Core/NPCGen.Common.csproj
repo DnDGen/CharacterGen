@@ -1,0 +1,434 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{83F2B67C-3EB0-4E46-AAD5-BAFAA2E35689}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NPCGen.Common</RootNamespace>
+    <AssemblyName>NPCGen.Common</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Ciloci.Flee">
+      <HintPath>..\packages\Trove.FLEE.0.9.26.0\lib\net20\Ciloci.Flee.dll</HintPath>
+    </Reference>
+    <Reference Include="D20Dice">
+      <HintPath>..\packages\D20Dice.6.2\lib\D20Dice.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Data\Alignments\Alignment.cs" />
+    <Compile Include="Data\Alignments\AlignmentConstants.cs" />
+    <Compile Include="Data\Character.cs" />
+    <Compile Include="Data\CharacterClasses\BaseAttack.cs" />
+    <Compile Include="Data\CharacterClasses\CharacterClass.cs" />
+    <Compile Include="Data\CharacterClasses\CharacterClassConstants.cs" />
+    <Compile Include="Data\CharacterClasses\CharacterClassPrototype.cs" />
+    <Compile Include="Data\Familiar.cs" />
+    <Compile Include="Data\Feat.cs" />
+    <Compile Include="Data\LanguageConstants.cs" />
+    <Compile Include="Data\Races\Race.cs" />
+    <Compile Include="Data\Races\RaceConstants.cs" />
+    <Compile Include="Data\Skill.cs" />
+    <Compile Include="Data\Stats\Stat.cs" />
+    <Compile Include="Data\Stats\StatConstants.cs" />
+    <Compile Include="Generation\Factories\AlignmentFactory.cs" />
+    <Compile Include="Generation\Factories\CharacterClassFactory.cs" />
+    <Compile Include="Generation\Factories\CharacterFactory.cs" />
+    <Compile Include="Generation\Factories\HitPointsFactory.cs" />
+    <Compile Include="Generation\Factories\Interfaces\IAlignmentFactory.cs" />
+    <Compile Include="Generation\Factories\Interfaces\ICharacterClassFactory.cs" />
+    <Compile Include="Generation\Factories\Interfaces\ICharacterFactory.cs" />
+    <Compile Include="Generation\Factories\Interfaces\IHitPointsFactory.cs" />
+    <Compile Include="Generation\Factories\Interfaces\ILanguageFactory.cs" />
+    <Compile Include="Generation\Factories\Interfaces\IRaceFactory.cs" />
+    <Compile Include="Generation\Factories\Interfaces\IStatsFactory.cs" />
+    <Compile Include="Generation\Factories\LanguageFactory.cs" />
+    <Compile Include="Generation\Factories\RaceFactory.cs" />
+    <Compile Include="Generation\Factories\StatsFactory.cs" />
+    <Compile Include="Generation\Providers\Interfaces\ILanguageProvider.cs" />
+    <Compile Include="Generation\Providers\Interfaces\ILevelAdjustmentsProvider.cs" />
+    <Compile Include="Generation\Providers\Interfaces\IStatAdjustmentsProvider.cs" />
+    <Compile Include="Generation\Providers\Interfaces\IStatPriorityProvider.cs" />
+    <Compile Include="Generation\Providers\LanguagesProvider.cs" />
+    <Compile Include="Generation\Providers\LevelAdjustmentsProvider.cs" />
+    <Compile Include="Generation\Providers\StatAdjustmentsProvider.cs" />
+    <Compile Include="Generation\Providers\StatPriorityProvider.cs" />
+    <Compile Include="Generation\Randomizers\Alignments\AnyAlignmentRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Alignments\BaseAlignmentRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Alignments\ChaoticAlignmentRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Alignments\EvilAlignmentRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Alignments\GoodAlignmentRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Alignments\Interfaces\IAlignmentRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Alignments\LawfulAlignmentRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Alignments\NeutralAlignmentRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Alignments\NonChaoticAlignmentRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Alignments\NonEvilAlignmentRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Alignments\NonGoodAlignmentRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Alignments\NonLawfulAlignmentRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Alignments\NonNeutralAlignmentRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Alignments\SetAlignmentRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\ClassNames\AnyClassNameRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\ClassNames\BaseClassNameRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\ClassNames\HealerClassNameRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\Interfaces\IClassNameRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\ClassNames\MageClassNameRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\ClassNames\NonSpellcasterClassNameRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\ClassNames\StealthClassNameRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\ClassNames\SetClassNameRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\ClassNames\SpellcasterClassNameRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\ClassNames\WarriorClassNameRandomizer.cs" />
+    <Compile Include="Generation\Providers\Interfaces\IPercentileResultProvider.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\Levels\AnyLevelRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\Levels\HighLevelRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\Interfaces\ILevelRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\Levels\LowLevelRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\Levels\MediumLevelRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\Levels\RangedLevel.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\Levels\SetLevelRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\CharacterClasses\Levels\VeryHighLevelRandomizer.cs" />
+    <Compile Include="Generation\Providers\PercentileResultProvider.cs" />
+    <Compile Include="Generation\Randomizers\Races\BaseRaces\AnyBaseRaceRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Races\BaseRaces\BaseBaseRace.cs" />
+    <Compile Include="Generation\Randomizers\Races\BaseRaces\EvilBaseRaceRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Races\BaseRaces\GoodBaseRaceRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Races\BaseRaces\NeutralBaseRaceRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Races\BaseRaces\NonEvilBaseRaceRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Races\BaseRaces\NonGoodBaseRaceRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Races\BaseRaces\NonNeutralBaseRaceRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Races\BaseRaces\NonStandardBaseRaceRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Races\BaseRaces\StandardBaseRaceRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Races\Metaraces\AnyMetaraceRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Races\Metaraces\BaseMetarace.cs" />
+    <Compile Include="Generation\Randomizers\Races\Metaraces\EvilMetaraceRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Races\Interfaces\IMetaraceRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Races\Interfaces\IBaseRaceRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Races\BaseRaces\SetBaseRaceRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Races\Metaraces\GeneticMetaraceRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Races\Metaraces\GoodMetaraceRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Races\Metaraces\LycanthropeMetaraceRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Races\Metaraces\NeutralMetaraceRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Races\Metaraces\NoMetaraceRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Races\Metaraces\NonEvilMetaraceRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Races\Metaraces\NonGoodMetaraceRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Races\Metaraces\NonNeutralMetaraceRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Races\Metaraces\SetMetaraceRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Stats\AverageStatsRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Stats\BaseStatsRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Stats\BestOfFourStatsRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Stats\GoodStatsRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Stats\HeroicStatsRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Stats\Interfaces\IStatsRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Stats\OnesAsSixesStatsRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Stats\PoorStatsRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Stats\RawStatsRandomizer.cs" />
+    <Compile Include="Generation\Randomizers\Stats\TwoTenSidedDiceStatsRandomizer.cs" />
+    <Compile Include="Generation\Verifiers\Exceptions\IncompatibleRandomizersException.cs" />
+    <Compile Include="Generation\Verifiers\Interfaces\IRandomizerVerifier.cs" />
+    <Compile Include="Generation\Verifiers\RandomizerVerifier.cs" />
+    <Compile Include="Generation\Xml\Parsers\Interfaces\IAdjustmentXmlParser.cs" />
+    <Compile Include="Generation\Xml\Parsers\Interfaces\ILanguagesXmlParser.cs" />
+    <Compile Include="Generation\Xml\Parsers\Interfaces\IPercentileXmlParser.cs" />
+    <Compile Include="Generation\Xml\Parsers\Interfaces\IStatPriorityXmlParser.cs" />
+    <Compile Include="Generation\Xml\Parsers\Interfaces\IStreamLoader.cs" />
+    <Compile Include="Generation\Xml\Parsers\AdjustmentXmlParser.cs" />
+    <Compile Include="Generation\Xml\Parsers\LanguagesXmlParser.cs" />
+    <Compile Include="Generation\Xml\Parsers\Objects\PercentileObject.cs" />
+    <Compile Include="Generation\Xml\Parsers\Objects\StatPriorityObject.cs" />
+    <Compile Include="Generation\Xml\Parsers\PercentileXmlParser.cs" />
+    <Compile Include="Generation\Xml\Parsers\EmbeddedResourceStreamLoader.cs" />
+    <Compile Include="Generation\Xml\Parsers\StatPriorityXmlParser.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Stats\StrengthStatAdjustments.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Good\GoodWizardBaseRaces.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Good\GoodSorcererBaseRaces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Good\GoodRogueBaseRaces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Good\GoodRangerBaseRaces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Good\GoodPaladinBaseRaces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Good\GoodMonkBaseRaces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Good\GoodFighterBaseRaces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Good\GoodDruidBaseRaces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Good\GoodClericBaseRaces.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Good\GoodBardBaseRaces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Good\GoodBarbarianBaseRaces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Neutral\NeutralBarbarianBaseRaces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Neutral\NeutralBardBaseRaces.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Neutral\NeutralClericBaseRaces.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Neutral\NeutralDruidBaseRaces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Neutral\NeutralFighterBaseRaces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Neutral\NeutralMonkBaseRaces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Neutral\NeutralRangerBaseRaces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Neutral\NeutralRogueBaseRaces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Neutral\NeutralSorcererBaseRaces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Neutral\NeutralWizardBaseRaces.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\CharacterClasses\GoodCharacterClasses.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\CharacterClasses\NeutralCharacterClasses.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\CharacterClasses\EvilCharacterClasses.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Evil\EvilBarbarianBaseRaces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Evil\EvilBardBaseRaces.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Evil\EvilClericBaseRaces.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Evil\EvilDruidBaseRaces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Evil\EvilFighterBaseRaces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Evil\EvilMonkBaseRaces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Evil\EvilRangerBaseRaces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Evil\EvilRogueBaseRaces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Evil\EvilSorcererBaseRaces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\BaseRaces\Evil\EvilWizardBaseRaces.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Alignments\AlignmentGoodness.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Evil\EvilBarbarianMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Evil\EvilBardMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Evil\EvilMonkMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Evil\EvilRangerMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Evil\EvilRogueMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Evil\EvilSorcererMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Evil\EvilWizardMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Evil\EvilClericMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Evil\EvilDruidMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Evil\EvilFighterMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Neutral\NeutralBarbarianMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Neutral\NeutralBardMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Neutral\NeutralClericMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Neutral\NeutralDruidMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Neutral\NeutralFighterMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Neutral\NeutralMonkMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Neutral\NeutralRangerMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Neutral\NeutralRogueMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Neutral\NeutralSorcererMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Neutral\NeutralWizardMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Good\GoodBarbarianMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Good\GoodBardMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Good\GoodClericMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Good\GoodDruidMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Good\GoodFighterMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Good\GoodMonkMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Good\GoodRangerMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Good\GoodRogueMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Good\GoodSorcererMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Good\GoodWizardMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Races\Metaraces\Good\GoodPaladinMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Stats\ConstitutionStatAdjustments.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Stats\DexterityStatAdjustments.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Stats\IntelligenceStatAdjustments.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Stats\WisdomStatAdjustments.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Stats\CharismaStatAdjustments.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Stats\StatPriorities.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\CharacterClasses\LevelAdjustments.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\Traits.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\AutomaticLanguages.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generation\Xml\Data\BonusLanguages.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
