@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NPCGen.Core.Data.CharacterClasses
+namespace NPCGen.Common.CharacterClasses
 {
     public class BaseAttack
     {

@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Xml;
-using NPCGen.Core.Generation.Xml.Parsers.Interfaces;
+using NPCGen.Mappers.Interfaces;
+using NPCGen.Tables.Interfaces;
 
-namespace NPCGen.Core.Generation.Xml.Parsers
+namespace NPCGen.Mappers
 {
     public class AdjustmentXmlParser : IAdjustmentXmlParser
     {

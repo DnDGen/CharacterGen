@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using NPCGen.Core.Data.Races;
+using NPCGen.Common.Races;
 
-namespace NPCGen.Core.Generation.Factories.Interfaces
+namespace NPCGen.Generators.Interfaces
 {
     public interface ILanguageFactory
     {

@@ -46,6 +46,16 @@
     <Compile Include="IStatPriorityProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core\NPCGen.Common.csproj">
+      <Project>{83f2b67c-3eb0-4e46-aad5-bafaa2e35689}</Project>
+      <Name>NPCGen.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NPCGen.Mappers.Interfaces\NPCGen.Mappers.Interfaces.csproj">
+      <Project>{0bc49af8-8c54-46b4-80a4-9cda1c14282c}</Project>
+      <Name>NPCGen.Mappers.Interfaces</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

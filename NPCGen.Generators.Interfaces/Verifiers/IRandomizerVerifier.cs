@@ -1,11 +1,11 @@
 ﻿using System;
-using NPCGen.Core.Data.Alignments;
-using NPCGen.Core.Data.CharacterClasses;
-using NPCGen.Core.Generation.Randomizers.Alignments.Interfaces;
-using NPCGen.Core.Generation.Randomizers.CharacterClasses.Interfaces;
-using NPCGen.Core.Generation.Randomizers.Races.Interfaces;
+using NPCGen.Common.Alignments;
+using NPCGen.Common.CharacterClasses;
+using NPCGen.Generators.Interfaces.Randomizers.Alignments;
+using NPCGen.Generators.Interfaces.Randomizers.CharacterClasses;
+using NPCGen.Generators.Interfaces.Randomizers.Races;
 
-namespace NPCGen.Core.Generation.Verifiers.Interfaces
+namespace NPCGen.Generators.Interfaces.Verifiers
 {
     public interface IRandomizerVerifier
     {

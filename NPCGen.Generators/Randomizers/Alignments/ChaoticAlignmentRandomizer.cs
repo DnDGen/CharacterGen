@@ -1,9 +1,9 @@
 ﻿using System;
 using D20Dice;
-using NPCGen.Core.Data.Alignments;
-using NPCGen.Core.Generation.Providers.Interfaces;
+using NPCGen.Common.Alignments;
+using NPCGen.Generators.Providers.Interfaces;
 
-namespace NPCGen.Core.Generation.Randomizers.Alignments
+namespace NPCGen.Generators.Randomizers.Alignments
 {
     public class ChaoticAlignmentRandomizer : BaseAlignmentRandomizer
     {

@@ -44,8 +44,13 @@
     <Compile Include="IPercentileXmlParser.cs" />
     <Compile Include="IStatPriorityXmlParser.cs" />
     <Compile Include="Objects\PercentileObject.cs" />
-    <Compile Include="Objects\StatPriorityObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core\NPCGen.Common.csproj">
+      <Project>{83f2b67c-3eb0-4e46-aad5-bafaa2e35689}</Project>
+      <Name>NPCGen.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

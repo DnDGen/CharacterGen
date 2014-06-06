@@ -39,13 +39,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Generators\IAlignmentFactory.cs" />
-    <Compile Include="Generators\ICharacterClassFactory.cs" />
-    <Compile Include="Generators\ICharacterFactory.cs" />
-    <Compile Include="Generators\IHitPointsFactory.cs" />
-    <Compile Include="Generators\ILanguageFactory.cs" />
-    <Compile Include="Generators\IRaceFactory.cs" />
-    <Compile Include="Generators\IStatsFactory.cs" />
+    <Compile Include="IAlignmentFactory.cs" />
+    <Compile Include="ICharacterClassFactory.cs" />
+    <Compile Include="ICharacterFactory.cs" />
+    <Compile Include="IHitPointsFactory.cs" />
+    <Compile Include="ILanguageFactory.cs" />
+    <Compile Include="IRaceFactory.cs" />
+    <Compile Include="IStatsFactory.cs" />
     <Compile Include="Randomizers\Alignments\IAlignmentRandomizer.cs" />
     <Compile Include="Randomizers\CharacterClasses\IClassNameRandomizer.cs" />
     <Compile Include="Randomizers\CharacterClasses\ILevelRandomizer.cs" />
@@ -55,6 +55,12 @@
     <Compile Include="Verifiers\Exceptions\IncompatibleRandomizersException.cs" />
     <Compile Include="Verifiers\IRandomizerVerifier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core\NPCGen.Common.csproj">
+      <Project>{83f2b67c-3eb0-4e46-aad5-bafaa2e35689}</Project>
+      <Name>NPCGen.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

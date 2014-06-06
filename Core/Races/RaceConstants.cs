@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace NPCGen.Core.Data.Races
+namespace NPCGen.Common.Races
 {
     public class RaceConstants
     {

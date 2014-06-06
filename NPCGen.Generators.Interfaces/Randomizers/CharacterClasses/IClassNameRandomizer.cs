@@ -1,8 +1,8 @@
-﻿using NPCGen.Core.Data.Alignments;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using NPCGen.Common.Alignments;
 
-namespace NPCGen.Core.Generation.Randomizers.CharacterClasses.Interfaces
+namespace NPCGen.Generators.Interfaces.Randomizers.CharacterClasses
 {
     public interface IClassNameRandomizer
     {

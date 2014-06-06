@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using D20Dice;
-using NPCGen.Core.Data.Stats;
+using NPCGen.Common.Stats;
 
-namespace NPCGen.Core.Generation.Randomizers.Stats
+namespace NPCGen.Generators.Randomizers.Stats
 {
     public class RawStatsRandomizer : BaseStatsRandomizer
     {

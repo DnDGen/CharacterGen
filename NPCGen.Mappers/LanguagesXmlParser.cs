@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
-using NPCGen.Core.Data.Races;
-using NPCGen.Core.Generation.Xml.Parsers.Interfaces;
+using NPCGen.Common.Races;
+using NPCGen.Mappers.Interfaces;
+using NPCGen.Tables.Interfaces;
 
-namespace NPCGen.Core.Generation.Xml.Parsers
+namespace NPCGen.Mappers
 {
     public class LanguagesXmlParser : ILanguagesXmlParser
     {

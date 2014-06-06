@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using D20Dice;
-using NPCGen.Core.Data.Stats;
+using NPCGen.Common.Stats;
 
-namespace NPCGen.Core.Generation.Randomizers.Stats
+namespace NPCGen.Generators.Randomizers.Stats
 {
     public class OnesAsSixesStatsRandomizer : BaseStatsRandomizer
     {
@@ -20,13 +20,18 @@ namespace NPCGen.Core.Generation.Randomizers.Stats
             var rolls = new List<Int32>();
 
             for (var i = 0; i < 3; i++)
-                rolls.Add(dice.d6());
+            {
+                var roll = GetRollToAdd();
+                rolls.Add(roll);
+            }
 
-            return rolls.Sum(r => GetValueToAdd(r));
+            return rolls.Sum();
         }
 
-        private Int32 GetValueToAdd(Int32 roll)
+        private Int32 GetRollToAdd()
         {
+            var roll = dice.d6();
+
             if (roll == 1)
                 return 6;
 

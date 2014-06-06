@@ -30,6 +30,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Ciloci.Flee">
+      <HintPath>..\packages\Trove.FLEE.0.9.26.0\lib\net20\Ciloci.Flee.dll</HintPath>
+    </Reference>
+    <Reference Include="D20Dice">
+      <HintPath>..\packages\D20Dice.6.2\lib\D20Dice.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -39,13 +45,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Generators\AlignmentFactory.cs" />
-    <Compile Include="Generators\CharacterClassFactory.cs" />
-    <Compile Include="Generators\CharacterFactory.cs" />
-    <Compile Include="Generators\HitPointsFactory.cs" />
-    <Compile Include="Generators\LanguageFactory.cs" />
-    <Compile Include="Generators\RaceFactory.cs" />
-    <Compile Include="Generators\StatsFactory.cs" />
+    <Compile Include="AlignmentFactory.cs" />
+    <Compile Include="CharacterClassFactory.cs" />
+    <Compile Include="CharacterFactory.cs" />
+    <Compile Include="HitPointsFactory.cs" />
+    <Compile Include="LanguageFactory.cs" />
+    <Compile Include="RaceFactory.cs" />
+    <Compile Include="StatsFactory.cs" />
     <Compile Include="Randomizers\Alignments\AnyAlignmentRandomizer.cs" />
     <Compile Include="Randomizers\Alignments\BaseAlignmentRandomizer.cs" />
     <Compile Include="Randomizers\Alignments\ChaoticAlignmentRandomizer.cs" />
@@ -123,6 +129,9 @@
       <Project>{98848dc9-c901-4189-8559-54d68215f3a7}</Project>
       <Name>NPCGen.Selectors.Interfaces</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

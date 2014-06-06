@@ -1,8 +1,8 @@
-﻿using NPCGen.Core.Data.Races;
-using NPCGen.Core.Generation.Providers.Interfaces;
+﻿using NPCGen.Common.Races;
 using System;
+using NPCGen.Selectors.Interfaces;
 
-namespace NPCGen.Core.Generation.Randomizers.Races.Metaraces
+namespace NPCGen.Generators.Randomizers.Races.Metaraces
 {
     public class NonNeutralMetaraceRandomizer : BaseMetarace
     {

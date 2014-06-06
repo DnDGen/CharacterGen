@@ -1,9 +1,9 @@
-﻿using NPCGen.Core.Data.CharacterClasses;
-using NPCGen.Core.Data.Races;
-using NPCGen.Core.Generation.Randomizers.Races.Interfaces;
+﻿using NPCGen.Generators.Interfaces.Randomizers.Races;
 using System;
+using NPCGen.Common.CharacterClasses;
+using NPCGen.Common.Races;
 
-namespace NPCGen.Core.Generation.Factories.Interfaces
+namespace NPCGen.Generators.Interfaces
 {
     public interface IRaceFactory
     {

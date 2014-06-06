@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NPCGen.Core.Data
+namespace NPCGen.Common
 {
     public class Familiar
     {

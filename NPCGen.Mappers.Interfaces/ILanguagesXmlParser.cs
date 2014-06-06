@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace NPCGen.Core.Generation.Xml.Parsers.Interfaces
+namespace NPCGen.Mappers.Interfaces
 {
     public interface ILanguagesXmlParser
     {

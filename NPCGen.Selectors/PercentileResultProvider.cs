@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using D20Dice;
-using NPCGen.Core.Generation.Providers.Interfaces;
-using NPCGen.Core.Generation.Xml.Parsers.Interfaces;
-using NPCGen.Core.Generation.Xml.Parsers.Objects;
+using NPCGen.Mappers.Interfaces.Objects;
+using NPCGen.Mappers.Interfaces;
+using NPCGen.Selectors.Interfaces;
 
-namespace NPCGen.Core.Generation.Providers
+namespace NPCGen.Selectors
 {
     public class PercentileResultProvider : IPercentileResultProvider
     {

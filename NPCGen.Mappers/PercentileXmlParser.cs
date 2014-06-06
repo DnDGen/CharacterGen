@@ -1,10 +1,11 @@
-﻿using NPCGen.Core.Generation.Xml.Parsers.Interfaces;
-using NPCGen.Core.Generation.Xml.Parsers.Objects;
+﻿using NPCGen.Mappers.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Xml;
+using NPCGen.Tables.Interfaces;
+using NPCGen.Mappers.Interfaces.Objects;
 
-namespace NPCGen.Core.Generation.Xml.Parsers
+namespace NPCGen.Mappers
 {
     public class PercentileXmlParser : IPercentileXmlParser
     {

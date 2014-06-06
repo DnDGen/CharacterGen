@@ -1,8 +1,8 @@
 ﻿using System;
-using NPCGen.Core.Data.Races;
-using NPCGen.Core.Generation.Providers.Interfaces;
+using NPCGen.Common.Races;
+using NPCGen.Generators.Providers.Interfaces;
 
-namespace NPCGen.Core.Generation.Randomizers.Races.BaseRaces
+namespace NPCGen.Generators.Randomizers.Races.BaseRaces
 {
     public class EvilBaseRaceRandomizer : BaseBaseRace
     {

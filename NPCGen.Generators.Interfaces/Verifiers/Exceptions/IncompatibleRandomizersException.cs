@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NPCGen.Core.Generation.Verifiers.Exceptions
+namespace NPCGen.Generators.Interfaces.Verifiers.Exceptions
 {
     public class IncompatibleRandomizersException : Exception
     {

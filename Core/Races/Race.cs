@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NPCGen.Core.Data.Races
+namespace NPCGen.Common.Races
 {
     public class Race
     {

@@ -1,10 +1,10 @@
-﻿using NPCGen.Core.Generation.Xml.Parsers.Interfaces;
+﻿using NPCGen.Tables.Interfaces;
 using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 
-namespace NPCGen.Core.Generation.Xml.Parsers
+namespace NPCGen.Tables
 {
     public class EmbeddedResourceStreamLoader : IStreamLoader
     {

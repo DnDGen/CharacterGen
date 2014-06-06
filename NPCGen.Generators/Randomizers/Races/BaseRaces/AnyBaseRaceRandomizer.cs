@@ -1,7 +1,7 @@
 ﻿using System;
-using NPCGen.Core.Generation.Providers.Interfaces;
+using NPCGen.Generators.Providers.Interfaces;
 
-namespace NPCGen.Core.Generation.Randomizers.Races.BaseRaces
+namespace NPCGen.Generators.Randomizers.Races.BaseRaces
 {
     public class AnyBaseRaceRandomizer : BaseBaseRace
     {

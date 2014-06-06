@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using NPCGen.Core.Data.Races;
-using NPCGen.Core.Data.Stats;
-using NPCGen.Core.Generation.Providers.Interfaces;
-using NPCGen.Core.Generation.Xml.Parsers.Interfaces;
+using NPCGen.Mappers.Interfaces;
+using NPCGen.Common.Races;
+using NPCGen.Common.Stats;
+using NPCGen.Selectors.Interfaces;
 
-namespace NPCGen.Core.Generation.Providers
+namespace NPCGen.Selectors
 {
     public class StatAdjustmentsProvider : IStatAdjustmentsProvider
     {

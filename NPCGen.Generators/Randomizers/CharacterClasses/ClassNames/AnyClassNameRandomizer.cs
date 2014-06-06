@@ -1,9 +1,9 @@
-﻿using NPCGen.Core.Data.Alignments;
-using NPCGen.Core.Data.CharacterClasses;
-using NPCGen.Core.Generation.Providers.Interfaces;
+﻿using NPCGen.Common.Alignments;
+using NPCGen.Common.CharacterClasses;
+using NPCGen.Generators.Providers.Interfaces;
 using System;
 
-namespace NPCGen.Core.Generation.Randomizers.CharacterClasses.ClassNames
+namespace NPCGen.Generators.Randomizers.CharacterClasses.ClassNames
 {
     public class AnyClassNameRandomizer : BaseClassNameRandomizer
     {

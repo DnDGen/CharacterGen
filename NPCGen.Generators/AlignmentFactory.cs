@@ -1,8 +1,8 @@
-﻿using NPCGen.Core.Data.Alignments;
-using NPCGen.Core.Generation.Factories.Interfaces;
-using NPCGen.Core.Generation.Randomizers.Alignments.Interfaces;
+﻿using NPCGen.Common.Alignments;
+using NPCGen.Generators.Interfaces;
+using NPCGen.Generators.Interfaces.Randomizers.Alignments;
 
-namespace NPCGen.Core.Generation.Factories
+namespace NPCGen.Generators
 {
     public class AlignmentFactory : IAlignmentFactory
     {

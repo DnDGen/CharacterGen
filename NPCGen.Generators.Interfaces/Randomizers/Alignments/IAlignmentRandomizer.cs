@@ -1,7 +1,7 @@
-﻿using NPCGen.Core.Data.Alignments;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using NPCGen.Common.Alignments;
 
-namespace NPCGen.Core.Generation.Randomizers.Alignments.Interfaces
+namespace NPCGen.Generators.Interfaces.Randomizers.Alignments
 {
     public interface IAlignmentRandomizer
     {

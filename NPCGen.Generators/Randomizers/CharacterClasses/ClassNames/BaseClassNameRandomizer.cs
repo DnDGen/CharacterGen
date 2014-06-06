@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using NPCGen.Core.Data.Alignments;
-using NPCGen.Core.Generation.Providers.Interfaces;
-using NPCGen.Core.Generation.Randomizers.CharacterClasses.Interfaces;
-using NPCGen.Core.Generation.Verifiers.Exceptions;
+using NPCGen.Common.Alignments;
+using NPCGen.Generators.Providers.Interfaces;
+using NPCGen.Generators.Randomizers.CharacterClasses.Interfaces;
+using NPCGen.Generators.Verifiers.Exceptions;
 
-namespace NPCGen.Core.Generation.Randomizers.CharacterClasses.ClassNames
+namespace NPCGen.Generators.Randomizers.CharacterClasses.ClassNames
 {
     public abstract class BaseClassNameRandomizer : IClassNameRandomizer
     {

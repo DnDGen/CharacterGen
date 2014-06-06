@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using NPCGen.Core.Generation.Xml.Parsers.Objects;
+using NPCGen.Common;
+using NPCGen.Mappers.Interfaces.Objects;
 
-namespace NPCGen.Core.Generation.Xml.Parsers.Interfaces
+namespace NPCGen.Mappers.Interfaces
 {
     public interface IStatPriorityXmlParser
     {
-        Dictionary<String, StatPriorityObject> Parse(String filename);
+        Dictionary<String, StatPriority> Parse(String filename);
     }
 }

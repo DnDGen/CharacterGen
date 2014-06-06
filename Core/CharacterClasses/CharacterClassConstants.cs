@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace NPCGen.Core.Data.CharacterClasses
+namespace NPCGen.Common.CharacterClasses
 {
     public static class CharacterClassConstants
     {

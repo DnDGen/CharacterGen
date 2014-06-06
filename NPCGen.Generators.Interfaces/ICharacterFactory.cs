@@ -1,10 +1,10 @@
-﻿using NPCGen.Core.Data;
-using NPCGen.Core.Generation.Randomizers.Alignments.Interfaces;
-using NPCGen.Core.Generation.Randomizers.CharacterClasses.Interfaces;
-using NPCGen.Core.Generation.Randomizers.Races.Interfaces;
-using NPCGen.Core.Generation.Randomizers.Stats.Interfaces;
+﻿using NPCGen.Common;
+using NPCGen.Generators.Interfaces.Randomizers.Alignments;
+using NPCGen.Generators.Interfaces.Randomizers.CharacterClasses;
+using NPCGen.Generators.Interfaces.Randomizers.Races;
+using NPCGen.Generators.Interfaces.Randomizers.Stats;
 
-namespace NPCGen.Core.Generation.Factories.Interfaces
+namespace NPCGen.Generators.Interfaces
 {
     public interface ICharacterFactory
     {

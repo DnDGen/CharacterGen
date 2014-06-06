@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using D20Dice;
-using NPCGen.Core.Data.Alignments;
-using NPCGen.Core.Generation.Providers.Interfaces;
-using NPCGen.Core.Generation.Randomizers.Alignments.Interfaces;
-using NPCGen.Core.Generation.Verifiers.Exceptions;
+using NPCGen.Common.Alignments;
+using NPCGen.Generators.Providers.Interfaces;
+using NPCGen.Generators.Randomizers.Alignments.Interfaces;
+using NPCGen.Generators.Verifiers.Exceptions;
 
-namespace NPCGen.Core.Generation.Randomizers.Alignments
+namespace NPCGen.Generators.Randomizers.Alignments
 {
     public abstract class BaseAlignmentRandomizer : IAlignmentRandomizer
     {

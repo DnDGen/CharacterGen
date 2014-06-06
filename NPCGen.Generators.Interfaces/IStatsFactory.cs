@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using NPCGen.Core.Data.CharacterClasses;
-using NPCGen.Core.Data.Races;
-using NPCGen.Core.Data.Stats;
-using NPCGen.Core.Generation.Randomizers.Stats.Interfaces;
+using NPCGen.Common.CharacterClasses;
+using NPCGen.Common.Races;
+using NPCGen.Common.Stats;
+using NPCGen.Generators.Interfaces.Randomizers.Stats;
 
-namespace NPCGen.Core.Generation.Factories.Interfaces
+namespace NPCGen.Generators.Interfaces
 {
     public interface IStatsFactory
     {

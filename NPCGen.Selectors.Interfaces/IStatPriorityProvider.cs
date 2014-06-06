@@ -1,10 +1,10 @@
 ﻿using System;
-using NPCGen.Core.Generation.Xml.Parsers.Objects;
+using NPCGen.Common;
 
-namespace NPCGen.Core.Generation.Providers.Interfaces
+namespace NPCGen.Selectors.Interfaces
 {
     public interface IStatPriorityProvider
     {
-        StatPriorityObject GetStatPriorities(String className);
+        StatPriority GetStatPriorities(String className);
     }
 }

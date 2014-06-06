@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using NPCGen.Core.Data.Alignments;
-using NPCGen.Core.Data.CharacterClasses;
-using NPCGen.Core.Data.Races;
-using NPCGen.Core.Data.Stats;
+using NPCGen.Common.Alignments;
+using NPCGen.Common.CharacterClasses;
+using NPCGen.Common.Races;
+using NPCGen.Common.Stats;
 
-namespace NPCGen.Core.Data
+namespace NPCGen.Common
 {
     public class Character
     {

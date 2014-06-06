@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using NPCGen.Core.Data.Alignments;
-using NPCGen.Core.Data.CharacterClasses;
-using NPCGen.Core.Generation.Providers.Interfaces;
-using NPCGen.Core.Generation.Randomizers.Alignments.Interfaces;
-using NPCGen.Core.Generation.Randomizers.CharacterClasses.Interfaces;
-using NPCGen.Core.Generation.Randomizers.Races.Interfaces;
-using NPCGen.Core.Generation.Verifiers.Interfaces;
+using NPCGen.Common.Alignments;
+using NPCGen.Common.CharacterClasses;
+using NPCGen.Generators.Interfaces.Randomizers.Alignments;
+using NPCGen.Generators.Interfaces.Randomizers.CharacterClasses;
+using NPCGen.Generators.Interfaces.Randomizers.Races;
+using NPCGen.Generators.Interfaces.Verifiers;
+using NPCGen.Selectors.Interfaces;
 
-namespace NPCGen.Core.Generation.Verifiers
+namespace NPCGen.Generators.Verifiers
 {
     public class RandomizerVerifier : IRandomizerVerifier
     {

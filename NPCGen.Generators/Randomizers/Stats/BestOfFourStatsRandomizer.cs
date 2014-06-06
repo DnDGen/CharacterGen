@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using D20Dice;
-using NPCGen.Core.Data.Stats;
+using NPCGen.Common.Stats;
 
-namespace NPCGen.Core.Generation.Randomizers.Stats
+namespace NPCGen.Generators.Randomizers.Stats
 {
     public class BestOfFourStatsRandomizer : BaseStatsRandomizer
     {
@@ -20,12 +20,15 @@ namespace NPCGen.Core.Generation.Randomizers.Stats
             var rolls = new List<Int32>();
 
             for (var i = 0; i < 4; i++)
-                rolls.Add(dice.d6());
+            {
+                var roll = dice.d6();
+                rolls.Add(roll);
+            }
 
             var lowest = rolls.Min();
-            var total = rolls.Sum();
+            rolls.Remove(lowest);
 
-            return total - lowest;
+            return rolls.Sum();
         }
 
         protected override Boolean StatsAreAllowed(IEnumerable<Stat> stats)

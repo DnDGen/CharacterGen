@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace NPCGen.Core.Generation.Xml.Parsers.Objects
+namespace NPCGen.Common
 {
-    public class StatPriorityObject
+    public class StatPriority
     {
         public String FirstPriority { get; set; }
         public String SecondPriority { get; set; }

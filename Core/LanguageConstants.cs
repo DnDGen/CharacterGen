@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace NPCGen.Core.Data
+namespace NPCGen.Common
 {
     public static class LanguageConstants
     {

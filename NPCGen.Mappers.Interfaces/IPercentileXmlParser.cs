@@ -1,8 +1,8 @@
-﻿using NPCGen.Core.Generation.Xml.Parsers.Objects;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using NPCGen.Mappers.Interfaces.Objects;
 
-namespace NPCGen.Core.Generation.Xml.Parsers.Interfaces
+namespace NPCGen.Mappers.Interfaces
 {
     public interface IPercentileXmlParser
     {

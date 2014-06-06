@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace NPCGen.Core.Generation.Providers.Interfaces
+namespace NPCGen.Selectors.Interfaces
 {
     public interface ILevelAdjustmentsProvider
     {

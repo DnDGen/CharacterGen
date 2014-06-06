@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Xml;
-using NPCGen.Core.Generation.Xml.Parsers.Interfaces;
-using NPCGen.Core.Generation.Xml.Parsers.Objects;
+using NPCGen.Common;
+using NPCGen.Mappers.Interfaces;
+using NPCGen.Tables.Interfaces;
 
-namespace NPCGen.Core.Generation.Xml.Parsers
+namespace NPCGen.Mappers
 {
     public class StatPriorityXmlParser : IStatPriorityXmlParser
     {
@@ -15,9 +16,9 @@ namespace NPCGen.Core.Generation.Xml.Parsers
             this.streamLoader = streamLoader;
         }
 
-        public Dictionary<String, StatPriorityObject> Parse(String filename)
+        public Dictionary<String, StatPriority> Parse(String filename)
         {
-            var results = new Dictionary<String, StatPriorityObject>();
+            var results = new Dictionary<String, StatPriority>();
 
             using (var stream = streamLoader.LoadStream(filename))
             {
@@ -29,7 +30,7 @@ namespace NPCGen.Core.Generation.Xml.Parsers
                 {
                     var className = node.SelectSingleNode("className").InnerText;
 
-                    var statPriorityObject = new StatPriorityObject();
+                    var statPriorityObject = new StatPriority();
                     statPriorityObject.FirstPriority = node.SelectSingleNode("first").InnerText;
                     statPriorityObject.SecondPriority = node.SelectSingleNode("second").InnerText;
 

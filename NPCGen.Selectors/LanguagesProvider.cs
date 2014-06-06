@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using NPCGen.Core.Data;
-using NPCGen.Core.Data.CharacterClasses;
-using NPCGen.Core.Data.Races;
-using NPCGen.Core.Generation.Providers.Interfaces;
-using NPCGen.Core.Generation.Xml.Parsers.Interfaces;
+using NPCGen.Mappers.Interfaces;
+using NPCGen.Common.Races;
+using NPCGen.Selectors.Interfaces;
+using NPCGen.Common.CharacterClasses;
+using NPCGen.Common;
 
-namespace NPCGen.Core.Generation.Providers
+namespace NPCGen.Selectors
 {
     public class LanguagesProvider : ILanguageProvider
     {

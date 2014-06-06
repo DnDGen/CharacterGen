@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using NPCGen.Core.Data.Alignments;
-using NPCGen.Core.Generation.Randomizers.CharacterClasses.Interfaces;
+using NPCGen.Common.Alignments;
+using NPCGen.Generators.Randomizers.CharacterClasses.Interfaces;
 
-namespace NPCGen.Core.Generation.Randomizers.CharacterClasses.ClassNames
+namespace NPCGen.Generators.Randomizers.CharacterClasses.ClassNames
 {
     public class SetClassNameRandomizer : IClassNameRandomizer
     {

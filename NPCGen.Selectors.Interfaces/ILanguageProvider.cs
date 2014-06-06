@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using NPCGen.Core.Data.Races;
+using NPCGen.Common.Races;
 
-namespace NPCGen.Core.Generation.Providers.Interfaces
+namespace NPCGen.Selectors.Interfaces
 {
     public interface ILanguageProvider
     {

@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using D20Dice;
-using NPCGen.Core.Data;
-using NPCGen.Core.Data.CharacterClasses;
-using NPCGen.Core.Data.Races;
-using NPCGen.Core.Generation.Factories.Interfaces;
-using NPCGen.Core.Generation.Providers.Interfaces;
+using NPCGen.Common;
+using NPCGen.Common.CharacterClasses;
+using NPCGen.Common.Races;
+using NPCGen.Generators.Interfaces;
+using NPCGen.Generators.Providers.Interfaces;
 
-namespace NPCGen.Core.Generation.Factories
+namespace NPCGen.Generators
 {
     public class LanguageFactory : ILanguageFactory
     {

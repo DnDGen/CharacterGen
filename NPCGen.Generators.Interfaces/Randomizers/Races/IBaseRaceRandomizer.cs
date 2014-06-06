@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using NPCGen.Core.Data.CharacterClasses;
+using NPCGen.Common.CharacterClasses;
 
-namespace NPCGen.Core.Generation.Randomizers.Races.Interfaces
+namespace NPCGen.Generators.Interfaces.Randomizers.Races
 {
     public interface IBaseRaceRandomizer
     {

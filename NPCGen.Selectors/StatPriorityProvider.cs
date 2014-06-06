@@ -1,9 +1,10 @@
 ﻿using System;
-using NPCGen.Core.Generation.Providers.Interfaces;
-using NPCGen.Core.Generation.Xml.Parsers.Interfaces;
-using NPCGen.Core.Generation.Xml.Parsers.Objects;
+using NPCGen.Common;
+using NPCGen.Mappers.Interfaces;
+using NPCGen.Mappers.Interfaces.Objects;
+using NPCGen.Selectors.Interfaces;
 
-namespace NPCGen.Core.Generation.Providers
+namespace NPCGen.Selectors
 {
     public class StatPriorityProvider : IStatPriorityProvider
     {
@@ -14,7 +15,7 @@ namespace NPCGen.Core.Generation.Providers
             this.statPriorityXmlParser = statPriorityXmlParser;
         }
 
-        public StatPriorityObject GetStatPriorities(String className)
+        public StatPriority GetStatPriorities(String className)
         {
             var priorities = statPriorityXmlParser.Parse("StatPriorities.xml");
             return priorities[className];

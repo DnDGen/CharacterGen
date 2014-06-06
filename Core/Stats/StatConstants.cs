@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace NPCGen.Core.Data.Stats
+namespace NPCGen.Common.Stats
 {
     public static class StatConstants
     {

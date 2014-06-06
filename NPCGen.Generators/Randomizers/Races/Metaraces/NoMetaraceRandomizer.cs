@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using NPCGen.Core.Data.CharacterClasses;
-using NPCGen.Core.Generation.Randomizers.Races.Interfaces;
+using NPCGen.Common.CharacterClasses;
+using NPCGen.Generators.Randomizers.Races.Interfaces;
 
-namespace NPCGen.Core.Generation.Randomizers.Races.Metaraces
+namespace NPCGen.Generators.Randomizers.Races.Metaraces
 {
     public class NoMetaraceRandomizer : IMetaraceRandomizer
     {

@@ -1,6 +1,6 @@
 ﻿using D20Dice;
 
-namespace NPCGen.Core.Generation.Randomizers.CharacterClasses.Levels
+namespace NPCGen.Generators.Randomizers.CharacterClasses.Levels
 {
     public class LowLevelRandomizer : RangedLevel
     {

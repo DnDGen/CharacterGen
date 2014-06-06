@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using D20Dice;
-using NPCGen.Core.Generation.Randomizers.CharacterClasses.Interfaces;
+using NPCGen.Generators.Randomizers.CharacterClasses.Interfaces;
 
-namespace NPCGen.Core.Generation.Randomizers.CharacterClasses.Levels
+namespace NPCGen.Generators.Randomizers.CharacterClasses.Levels
 {
     public class AnyLevelRandomizer : ILevelRandomizer
     {

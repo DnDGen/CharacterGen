@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using NPCGen.Core.Generation.Randomizers.CharacterClasses.Interfaces;
+using NPCGen.Generators.Randomizers.CharacterClasses.Interfaces;
 
-namespace NPCGen.Core.Generation.Randomizers.CharacterClasses.Levels
+namespace NPCGen.Generators.Randomizers.CharacterClasses.Levels
 {
     public class SetLevelRandomizer : ILevelRandomizer
     {

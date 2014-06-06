@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using NPCGen.Core.Data.Stats;
-using NPCGen.Core.Generation.Randomizers.Stats.Interfaces;
+using NPCGen.Common.Stats;
+using NPCGen.Generators.Interfaces.Randomizers.Stats;
 
-namespace NPCGen.Core.Generation.Randomizers.Stats
+namespace NPCGen.Generators.Randomizers.Stats
 {
     public abstract class BaseStatsRandomizer : IStatsRandomizer
     {
