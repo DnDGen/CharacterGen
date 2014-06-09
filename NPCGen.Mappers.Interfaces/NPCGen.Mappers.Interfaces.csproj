@@ -43,7 +43,6 @@
     <Compile Include="ILanguagesXmlParser.cs" />
     <Compile Include="IPercentileXmlParser.cs" />
     <Compile Include="IStatPriorityXmlParser.cs" />
-    <Compile Include="Objects\PercentileObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

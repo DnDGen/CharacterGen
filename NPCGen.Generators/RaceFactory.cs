@@ -1,9 +1,9 @@
-﻿using D20Dice;
+﻿using System;
+using D20Dice;
 using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Races;
 using NPCGen.Generators.Interfaces;
-using NPCGen.Generators.Randomizers.Races.Interfaces;
-using System;
+using NPCGen.Generators.Interfaces.Randomizers.Races;
 
 namespace NPCGen.Generators
 {

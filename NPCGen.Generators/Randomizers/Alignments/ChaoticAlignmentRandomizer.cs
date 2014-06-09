@@ -1,7 +1,7 @@
 ﻿using System;
 using D20Dice;
 using NPCGen.Common.Alignments;
-using NPCGen.Generators.Providers.Interfaces;
+using NPCGen.Selectors.Interfaces;
 
 namespace NPCGen.Generators.Randomizers.Alignments
 {

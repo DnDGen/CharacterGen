@@ -57,68 +57,68 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Generation\Factories\CharacterClassFactoryTests.cs" />
-    <Compile Include="Generation\Factories\CharacterFactoryTests.cs" />
-    <Compile Include="Generation\Factories\AlignmentFactoryTests.cs" />
-    <Compile Include="Generation\Factories\HitPointsFactoryTests.cs" />
-    <Compile Include="Generation\Factories\LanguageFactoryTests.cs" />
-    <Compile Include="Generation\Factories\RaceFactoryTests.cs" />
-    <Compile Include="Generation\Factories\StatsFactoryTests.cs" />
-    <Compile Include="Generation\Randomizers\Alignments\AnyAlignmentRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\Alignments\ChaoticAlignmentRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\Alignments\EvilAlignmentRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\Alignments\GoodAlignmentRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\Alignments\LawfulAlignmentRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\Alignments\NeutralAlignmentRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\Alignments\NonChaoticAlignmentRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\Alignments\NonEvilAlignmentRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\Alignments\NonGoodAlignmentRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\Alignments\NonLawfulAlignmentRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\Alignments\NonNeutralAlignmentRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\Alignments\SetAlignmentRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\CharacterClasses\ClassNames\AnyClassNameRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\CharacterClasses\ClassNames\HealerClassNameRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\CharacterClasses\ClassNames\MageClassNameRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\CharacterClasses\ClassNames\NonSpellcasterClassNameRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\CharacterClasses\ClassNames\SetClassNameRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\CharacterClasses\ClassNames\SpellcasterClassNameRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\CharacterClasses\ClassNames\StealthClassNameRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\CharacterClasses\ClassNames\WarriorClassNameRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\CharacterClasses\Levels\AnyLevelRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\CharacterClasses\Levels\HighLevelRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\CharacterClasses\Levels\LowLevelRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\CharacterClasses\Levels\MediumLevelRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\CharacterClasses\Levels\SetLevelRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\CharacterClasses\Levels\VeryHighLevelRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\Races\BaseRaces\AnyBaseRaceRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\Races\BaseRaces\NonEvilBaseRaceRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\Races\BaseRaces\EvilBaseRaceRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\Races\BaseRaces\NonGoodBaseRaceRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\Races\BaseRaces\GoodBaseRaceRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\Races\BaseRaces\NonNeutralBaseRaceRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\Races\BaseRaces\NeutralBaseRaceRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\Races\BaseRaces\NonStandardBaseRaceRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\Races\BaseRaces\SetBaseRaceRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\Races\BaseRaces\StandardBaseRaceRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\Races\Metaraces\AnyMetaraceRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\Races\Metaraces\SetMetaraceRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\Races\Metaraces\NonNeutralMetaraceRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\Races\Metaraces\NonGoodMetaraceRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\Races\Metaraces\NonEvilMetaraceRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\Races\Metaraces\NoMetaraceRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\Races\Metaraces\NeutralMetaraceRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\Races\Metaraces\LycanthropeMetaraceRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\Races\Metaraces\GoodMetaraceRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\Races\Metaraces\GeneticMetaraceRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\Races\Metaraces\EvilMetaraceRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\Stats\TwoTenSidedDiceStatsRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\Stats\RawStatsRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\Stats\PoorStatsRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\Stats\OnesAsSixesStatsRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\Stats\HeroicStatsRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\Stats\GoodStatsRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\Stats\BestOfFourStatsRandomizerTests.cs" />
-    <Compile Include="Generation\Randomizers\Stats\AverageStatsRandomizerTests.cs" />
+    <Compile Include="CharacterClassFactoryTests.cs" />
+    <Compile Include="CharacterFactoryTests.cs" />
+    <Compile Include="AlignmentFactoryTests.cs" />
+    <Compile Include="HitPointsFactoryTests.cs" />
+    <Compile Include="LanguageFactoryTests.cs" />
+    <Compile Include="RaceFactoryTests.cs" />
+    <Compile Include="StatsFactoryTests.cs" />
+    <Compile Include="Randomizers\Alignments\AnyAlignmentRandomizerTests.cs" />
+    <Compile Include="Randomizers\Alignments\ChaoticAlignmentRandomizerTests.cs" />
+    <Compile Include="Randomizers\Alignments\EvilAlignmentRandomizerTests.cs" />
+    <Compile Include="Randomizers\Alignments\GoodAlignmentRandomizerTests.cs" />
+    <Compile Include="Randomizers\Alignments\LawfulAlignmentRandomizerTests.cs" />
+    <Compile Include="Randomizers\Alignments\NeutralAlignmentRandomizerTests.cs" />
+    <Compile Include="Randomizers\Alignments\NonChaoticAlignmentRandomizerTests.cs" />
+    <Compile Include="Randomizers\Alignments\NonEvilAlignmentRandomizerTests.cs" />
+    <Compile Include="Randomizers\Alignments\NonGoodAlignmentRandomizerTests.cs" />
+    <Compile Include="Randomizers\Alignments\NonLawfulAlignmentRandomizerTests.cs" />
+    <Compile Include="Randomizers\Alignments\NonNeutralAlignmentRandomizerTests.cs" />
+    <Compile Include="Randomizers\Alignments\SetAlignmentRandomizerTests.cs" />
+    <Compile Include="Randomizers\CharacterClasses\ClassNames\AnyClassNameRandomizerTests.cs" />
+    <Compile Include="Randomizers\CharacterClasses\ClassNames\HealerClassNameRandomizerTests.cs" />
+    <Compile Include="Randomizers\CharacterClasses\ClassNames\MageClassNameRandomizerTests.cs" />
+    <Compile Include="Randomizers\CharacterClasses\ClassNames\NonSpellcasterClassNameRandomizerTests.cs" />
+    <Compile Include="Randomizers\CharacterClasses\ClassNames\SetClassNameRandomizerTests.cs" />
+    <Compile Include="Randomizers\CharacterClasses\ClassNames\SpellcasterClassNameRandomizerTests.cs" />
+    <Compile Include="Randomizers\CharacterClasses\ClassNames\StealthClassNameRandomizerTests.cs" />
+    <Compile Include="Randomizers\CharacterClasses\ClassNames\WarriorClassNameRandomizerTests.cs" />
+    <Compile Include="Randomizers\CharacterClasses\Levels\AnyLevelRandomizerTests.cs" />
+    <Compile Include="Randomizers\CharacterClasses\Levels\HighLevelRandomizerTests.cs" />
+    <Compile Include="Randomizers\CharacterClasses\Levels\LowLevelRandomizerTests.cs" />
+    <Compile Include="Randomizers\CharacterClasses\Levels\MediumLevelRandomizerTests.cs" />
+    <Compile Include="Randomizers\CharacterClasses\Levels\SetLevelRandomizerTests.cs" />
+    <Compile Include="Randomizers\CharacterClasses\Levels\VeryHighLevelRandomizerTests.cs" />
+    <Compile Include="Randomizers\Races\BaseRaces\AnyBaseRaceRandomizerTests.cs" />
+    <Compile Include="Randomizers\Races\BaseRaces\NonEvilBaseRaceRandomizerTests.cs" />
+    <Compile Include="Randomizers\Races\BaseRaces\EvilBaseRaceRandomizerTests.cs" />
+    <Compile Include="Randomizers\Races\BaseRaces\NonGoodBaseRaceRandomizerTests.cs" />
+    <Compile Include="Randomizers\Races\BaseRaces\GoodBaseRaceRandomizerTests.cs" />
+    <Compile Include="Randomizers\Races\BaseRaces\NonNeutralBaseRaceRandomizerTests.cs" />
+    <Compile Include="Randomizers\Races\BaseRaces\NeutralBaseRaceRandomizerTests.cs" />
+    <Compile Include="Randomizers\Races\BaseRaces\NonStandardBaseRaceRandomizerTests.cs" />
+    <Compile Include="Randomizers\Races\BaseRaces\SetBaseRaceRandomizerTests.cs" />
+    <Compile Include="Randomizers\Races\BaseRaces\StandardBaseRaceRandomizerTests.cs" />
+    <Compile Include="Randomizers\Races\Metaraces\AnyMetaraceRandomizerTests.cs" />
+    <Compile Include="Randomizers\Races\Metaraces\SetMetaraceRandomizerTests.cs" />
+    <Compile Include="Randomizers\Races\Metaraces\NonNeutralMetaraceRandomizerTests.cs" />
+    <Compile Include="Randomizers\Races\Metaraces\NonGoodMetaraceRandomizerTests.cs" />
+    <Compile Include="Randomizers\Races\Metaraces\NonEvilMetaraceRandomizerTests.cs" />
+    <Compile Include="Randomizers\Races\Metaraces\NoMetaraceRandomizerTests.cs" />
+    <Compile Include="Randomizers\Races\Metaraces\NeutralMetaraceRandomizerTests.cs" />
+    <Compile Include="Randomizers\Races\Metaraces\LycanthropeMetaraceRandomizerTests.cs" />
+    <Compile Include="Randomizers\Races\Metaraces\GoodMetaraceRandomizerTests.cs" />
+    <Compile Include="Randomizers\Races\Metaraces\GeneticMetaraceRandomizerTests.cs" />
+    <Compile Include="Randomizers\Races\Metaraces\EvilMetaraceRandomizerTests.cs" />
+    <Compile Include="Randomizers\Stats\TwoTenSidedDiceStatsRandomizerTests.cs" />
+    <Compile Include="Randomizers\Stats\RawStatsRandomizerTests.cs" />
+    <Compile Include="Randomizers\Stats\PoorStatsRandomizerTests.cs" />
+    <Compile Include="Randomizers\Stats\OnesAsSixesStatsRandomizerTests.cs" />
+    <Compile Include="Randomizers\Stats\HeroicStatsRandomizerTests.cs" />
+    <Compile Include="Randomizers\Stats\GoodStatsRandomizerTests.cs" />
+    <Compile Include="Randomizers\Stats\BestOfFourStatsRandomizerTests.cs" />
+    <Compile Include="Randomizers\Stats\AverageStatsRandomizerTests.cs" />
     <Compile Include="StressTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -131,12 +131,21 @@
       <Project>{83f2b67c-3eb0-4e46-aad5-bafaa2e35689}</Project>
       <Name>NPCGen.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\NPCGen.Generators.Interfaces\NPCGen.Generators.Interfaces.csproj">
+      <Project>{7f262696-287c-4308-8bb3-c6563b7f4878}</Project>
+      <Name>NPCGen.Generators.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\NPCGen.Generators\NPCGen.Generators.csproj">
+      <Project>{8611f130-c7bf-4ef9-be78-e2624c58861f}</Project>
+      <Name>NPCGen.Generators</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Common\NPCGen.Tests.Integration.Common.csproj">
       <Project>{a9371758-2de3-43af-857d-7140b1c0a78c}</Project>
       <Name>NPCGen.Tests.Integration.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Choose>

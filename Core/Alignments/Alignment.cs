@@ -39,5 +39,14 @@ namespace NPCGen.Common.Alignments
 
             return String.Format("{0} {1}", Lawfulness, Goodness);
         }
+
+        public override Boolean Equals(Object toCompare)
+        {
+            if (!(toCompare is Alignment))
+                return false;
+
+            var alignment = toCompare as Alignment;
+            return Goodness == alignment.Goodness && Lawfulness == alignment.Lawfulness;
+        }
     }
 }

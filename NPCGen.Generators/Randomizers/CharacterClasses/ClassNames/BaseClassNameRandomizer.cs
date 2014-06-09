@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using NPCGen.Common.Alignments;
-using NPCGen.Generators.Providers.Interfaces;
-using NPCGen.Generators.Randomizers.CharacterClasses.Interfaces;
-using NPCGen.Generators.Verifiers.Exceptions;
+using NPCGen.Generators.Interfaces.Randomizers.CharacterClasses;
+using NPCGen.Generators.Interfaces.Verifiers.Exceptions;
+using NPCGen.Selectors.Interfaces;
 
 namespace NPCGen.Generators.Randomizers.CharacterClasses.ClassNames
 {

@@ -1,4 +1,5 @@
 ﻿using Ninject;
+using NPCGen.Bootstrap.Modules;
 
 namespace NPCGen.Bootstrap
 {
@@ -6,7 +7,10 @@ namespace NPCGen.Bootstrap
     {
         public void LoadModules(IKernel kernel)
         {
-            kernel.Load<CoreModule>();
+            kernel.Load<GeneratorsModule>();
+            kernel.Load<SelectorsModule>();
+            kernel.Load<MappersModule>();
+            kernel.Load<TablesModule>();
         }
     }
 }

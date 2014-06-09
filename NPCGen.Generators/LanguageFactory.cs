@@ -6,7 +6,7 @@ using NPCGen.Common;
 using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Races;
 using NPCGen.Generators.Interfaces;
-using NPCGen.Generators.Providers.Interfaces;
+using NPCGen.Selectors.Interfaces;
 
 namespace NPCGen.Generators
 {
@@ -37,8 +37,8 @@ namespace NPCGen.Generators
 
             while(numberOfBonusLanguages-- > 0 && remainingBonusLanguages.Any())
             {
-                var rollString = String.Format("1d{0}-1", remainingBonusLanguages.Count);
-                var roll = dice.Roll(rollString);
+                var indexRoll = String.Format("1d{0}-1", remainingBonusLanguages.Count);
+                var roll = dice.Roll(indexRoll);
                 var language = remainingBonusLanguages[roll];
 
                 languages.Add(language);

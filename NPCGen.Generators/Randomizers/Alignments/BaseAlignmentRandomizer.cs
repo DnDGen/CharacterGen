@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using D20Dice;
 using NPCGen.Common.Alignments;
-using NPCGen.Generators.Providers.Interfaces;
-using NPCGen.Generators.Randomizers.Alignments.Interfaces;
-using NPCGen.Generators.Verifiers.Exceptions;
+using NPCGen.Generators.Interfaces.Randomizers.Alignments;
+using NPCGen.Generators.Interfaces.Verifiers.Exceptions;
+using NPCGen.Selectors.Interfaces;
 
 namespace NPCGen.Generators.Randomizers.Alignments
 {
@@ -62,7 +62,7 @@ namespace NPCGen.Generators.Randomizers.Alignments
             var goodnesses = percentileResultProvider.GetAllResults(table);
 
             foreach (var goodness in goodnesses)
-                foreach(var lawfulness in AlignmentConstants.GetLawfulnesses())
+                foreach (var lawfulness in AlignmentConstants.GetLawfulnesses())
                     alignments.Add(new Alignment() { Goodness = goodness, Lawfulness = lawfulness });
 
             return alignments.Where(a => AlignmentIsAllowed(a));

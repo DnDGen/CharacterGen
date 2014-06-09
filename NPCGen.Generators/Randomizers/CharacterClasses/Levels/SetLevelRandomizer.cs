@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using NPCGen.Generators.Randomizers.CharacterClasses.Interfaces;
+using NPCGen.Generators.Interfaces.Randomizers.CharacterClasses;
 
 namespace NPCGen.Generators.Randomizers.CharacterClasses.Levels
 {

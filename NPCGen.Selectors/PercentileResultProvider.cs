@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using D20Dice;
-using NPCGen.Mappers.Interfaces.Objects;
 using NPCGen.Mappers.Interfaces;
 using NPCGen.Selectors.Interfaces;
 
@@ -12,13 +11,13 @@ namespace NPCGen.Selectors
     {
         private IPercentileXmlParser percentileXmlParser;
         private IDice dice;
-        private Dictionary<String, IEnumerable<PercentileObject>> cachedTables;
+        private Dictionary<String, Dictionary<Int32, String>> cachedTables;
 
         public PercentileResultProvider(IPercentileXmlParser percentileXmlParser, IDice dice)
         {
             this.percentileXmlParser = percentileXmlParser;
             this.dice = dice;
-            cachedTables = new Dictionary<String, IEnumerable<PercentileObject>>();
+            cachedTables = new Dictionary<String, Dictionary<Int32, String>>();
         }
 
         public String GetPercentileResult(String tableName)
@@ -26,12 +25,8 @@ namespace NPCGen.Selectors
             if (!cachedTables.ContainsKey(tableName))
                 CacheTable(tableName);
 
-            var percentileObject = GetPercentileObject(tableName);
-
-            if (percentileObject == null)
-                return String.Empty;
-
-            return percentileObject.Content;
+            var roll = dice.Percentile();
+            return cachedTables[tableName][roll];
         }
 
         private void CacheTable(String tableName)
@@ -41,43 +36,12 @@ namespace NPCGen.Selectors
             cachedTables.Add(tableName, table);
         }
 
-        private PercentileObject GetPercentileObject(String tableName)
-        {
-            var roll = dice.Percentile();
-            return cachedTables[tableName].FirstOrDefault(o => RollIsInRange(roll, o));
-        }
-
-        private Boolean RollIsInRange(Int32 roll, PercentileObject percentileObject)
-        {
-            return percentileObject.LowerLimit <= roll && roll <= percentileObject.UpperLimit;
-        }
-
         public IEnumerable<String> GetAllResults(String tableName)
         {
             if (!cachedTables.ContainsKey(tableName))
                 CacheTable(tableName);
 
-            var results = new List<String>();
-
-            foreach (var percentileObject in cachedTables[tableName])
-                results.Add(percentileObject.Content);
-
-            if (!CompleteTable(cachedTables[tableName]))
-                results.Add(String.Empty);
-
-            return results;
-        }
-
-        private Boolean CompleteTable(IEnumerable<PercentileObject> table)
-        {
-            if (!table.Any())
-                return false;
-
-            var percentileRolls = new List<Int32>();
-            for (var i = 1; i <= 100; i++)
-                percentileRolls.Add(i);
-
-            return percentileRolls.All(r => table.Any(p => RollIsInRange(r, p)));
+            return cachedTables[tableName].Values.Distinct();
         }
     }
 }

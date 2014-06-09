@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E0107845-B6DA-463C-A9D5-237FCD19A366}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NPCGen.Tests.Integration.Tables</RootNamespace>
+    <AssemblyName>NPCGen.Tests.Integration.Tables</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
+    <IsCodedUITest>False</IsCodedUITest>
+    <TestProjectType>UnitTest</TestProjectType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Ninject">
+      <HintPath>..\..\..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.6.3.13283, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.XML" />
+  </ItemGroup>
+  <Choose>
+    <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+      </ItemGroup>
+    </When>
+    <Otherwise />
+  </Choose>
+  <ItemGroup>
+    <Compile Include="Alignments\AlignmentGoodnessTests.cs" />
+    <Compile Include="AutomaticLanguagesTests.cs" />
+    <Compile Include="BonusLanguagesTests.cs" />
+    <Compile Include="CharacterClasses\EvilCharacterClassesTests.cs" />
+    <Compile Include="CharacterClasses\GoodCharacterClassesTests.cs" />
+    <Compile Include="CharacterClasses\LevelAdjustmentsTests.cs" />
+    <Compile Include="CharacterClasses\NeutralCharacterClassesTests.cs" />
+    <Compile Include="EmbeddedResourceStreamLoaderTests.cs" />
+    <Compile Include="PercentileTests.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Races\BaseRaces\Evil\EvilBarbarianBaseRacesTests.cs" />
+    <Compile Include="Races\BaseRaces\Evil\EvilBardBaseRacesTests.cs" />
+    <Compile Include="Races\BaseRaces\Evil\EvilClericBaseRacesTests.cs" />
+    <Compile Include="Races\BaseRaces\Evil\EvilDruidBaseRacesTests.cs" />
+    <Compile Include="Races\BaseRaces\Evil\EvilFighterBaseRacesTests.cs" />
+    <Compile Include="Races\BaseRaces\Evil\EvilMonkBaseRacesTests.cs" />
+    <Compile Include="Races\BaseRaces\Evil\EvilRangerBaseRacesTests.cs" />
+    <Compile Include="Races\BaseRaces\Evil\EvilRogueBaseRacesTests.cs" />
+    <Compile Include="Races\BaseRaces\Evil\EvilSorcererBaseRacesTests.cs" />
+    <Compile Include="Races\BaseRaces\Evil\EvilWizardBaseRacesTests.cs" />
+    <Compile Include="Races\BaseRaces\Good\GoodBarbarianBaseRacesTests.cs" />
+    <Compile Include="Races\BaseRaces\Good\GoodBardBaseRacesTests.cs" />
+    <Compile Include="Races\BaseRaces\Good\GoodClericBaseRacesTests.cs" />
+    <Compile Include="Races\BaseRaces\Good\GoodDruidBaseRacesTests.cs" />
+    <Compile Include="Races\BaseRaces\Good\GoodFighterBaseRacesTests.cs" />
+    <Compile Include="Races\BaseRaces\Good\GoodMonkBaseRacesTests.cs" />
+    <Compile Include="Races\BaseRaces\Good\GoodPaladinBaseRacesTests.cs" />
+    <Compile Include="Races\BaseRaces\Good\GoodRangerBaseRacesTests.cs" />
+    <Compile Include="Races\BaseRaces\Good\GoodRogueBaseRacesTests.cs" />
+    <Compile Include="Races\BaseRaces\Good\GoodSorcererBaseRacesTests.cs" />
+    <Compile Include="Races\BaseRaces\Good\GoodWizardBaseRacesTests.cs" />
+    <Compile Include="Races\BaseRaces\Neutral\NeutralBarbarianBaseRacesTests.cs" />
+    <Compile Include="Races\BaseRaces\Neutral\NeutralBardBaseRacesTests.cs" />
+    <Compile Include="Races\BaseRaces\Neutral\NeutralClericBaseRacesTests.cs" />
+    <Compile Include="Races\BaseRaces\Neutral\NeutralDruidBaseRacesTests.cs" />
+    <Compile Include="Races\BaseRaces\Neutral\NeutralFighterBaseRacesTests.cs" />
+    <Compile Include="Races\BaseRaces\Neutral\NeutralMonkBaseRacesTests.cs" />
+    <Compile Include="Races\BaseRaces\Neutral\NeutralRangerBaseRacesTests.cs" />
+    <Compile Include="Races\BaseRaces\Neutral\NeutralRogueBaseRacesTests.cs" />
+    <Compile Include="Races\BaseRaces\Neutral\NeutralSorcererBaseRacesTests.cs" />
+    <Compile Include="Races\BaseRaces\Neutral\NeutralWizardBaseRacesTests.cs" />
+    <Compile Include="Races\Metaraces\Evil\EvilBarbarianMetaracesTests.cs" />
+    <Compile Include="Races\Metaraces\Evil\EvilBardMetaracesTests.cs" />
+    <Compile Include="Races\Metaraces\Evil\EvilClericMetaracesTests.cs" />
+    <Compile Include="Races\Metaraces\Evil\EvilDruidMetaracesTests.cs" />
+    <Compile Include="Races\Metaraces\Evil\EvilFighterMetaracesTests.cs" />
+    <Compile Include="Races\Metaraces\Evil\EvilMonkMetaracesTests.cs" />
+    <Compile Include="Races\Metaraces\Evil\EvilRangerMetaracesTests.cs" />
+    <Compile Include="Races\Metaraces\Evil\EvilRogueMetaracesTests.cs" />
+    <Compile Include="Races\Metaraces\Evil\EvilSorcererMetaracesTests.cs" />
+    <Compile Include="Races\Metaraces\Evil\EvilWizardMetaracesTests.cs" />
+    <Compile Include="Races\Metaraces\Good\GoodBarbarianMetaracesTests.cs" />
+    <Compile Include="Races\Metaraces\Good\GoodBardMetaracesTests.cs" />
+    <Compile Include="Races\Metaraces\Good\GoodClericMetaracesTests.cs" />
+    <Compile Include="Races\Metaraces\Good\GoodDruidMetaracesTests.cs" />
+    <Compile Include="Races\Metaraces\Good\GoodFighterMetaracesTests.cs" />
+    <Compile Include="Races\Metaraces\Good\GoodMonkMetaracesTests.cs" />
+    <Compile Include="Races\Metaraces\Good\GoodPaladinMetaracesTests.cs" />
+    <Compile Include="Races\Metaraces\Good\GoodRangerMetaracesTests.cs" />
+    <Compile Include="Races\Metaraces\Good\GoodRogueMetaracesTests.cs" />
+    <Compile Include="Races\Metaraces\Good\GoodSorcererMetaracesTests.cs" />
+    <Compile Include="Races\Metaraces\Good\GoodWizardMetaracesTests.cs" />
+    <Compile Include="Races\Metaraces\Neutral\NeutralBarbarianMetaracesTests.cs" />
+    <Compile Include="Races\Metaraces\Neutral\NeutralBardMetaracesTests.cs" />
+    <Compile Include="Races\Metaraces\Neutral\NeutralClericMetaracesTests.cs" />
+    <Compile Include="Races\Metaraces\Neutral\NeutralDruidMetaracesTests.cs" />
+    <Compile Include="Races\Metaraces\Neutral\NeutralFighterMetaracesTests.cs" />
+    <Compile Include="Races\Metaraces\Neutral\NeutralMonkMetaracesTests.cs" />
+    <Compile Include="Races\Metaraces\Neutral\NeutralRangerMetaracesTests.cs" />
+    <Compile Include="Races\Metaraces\Neutral\NeutralRogueMetaracesTests.cs" />
+    <Compile Include="Races\Metaraces\Neutral\NeutralSorcererMetaracesTests.cs" />
+    <Compile Include="Races\Metaraces\Neutral\NeutralWizardMetaracesTests.cs" />
+    <Compile Include="Stats\CharismaStatAdjustmentsTests.cs" />
+    <Compile Include="Stats\ConstitutionStatAdjustmentsTests.cs" />
+    <Compile Include="Stats\DexterityStatAdjustmentsTests.cs" />
+    <Compile Include="Stats\IntelligenceStatAdjustmentsTests.cs" />
+    <Compile Include="Stats\StatPrioritiesTests.cs" />
+    <Compile Include="Stats\StrengthStatAdjustmentsTests.cs" />
+    <Compile Include="Stats\WisdomStatAdjustmentsTests.cs" />
+    <Compile Include="TraitsTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Bootstrap\NPCGen.Bootstrap.csproj">
+      <Project>{18c602e6-823c-4cec-85d3-5edddca545db}</Project>
+      <Name>NPCGen.Bootstrap</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Core\NPCGen.Common.csproj">
+      <Project>{83f2b67c-3eb0-4e46-aad5-bafaa2e35689}</Project>
+      <Name>NPCGen.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\NPCGen.Mappers.Interfaces\NPCGen.Mappers.Interfaces.csproj">
+      <Project>{0bc49af8-8c54-46b4-80a4-9cda1c14282c}</Project>
+      <Name>NPCGen.Mappers.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\NPCGen.Tables.Interfaces\NPCGen.Tables.Interfaces.csproj">
+      <Project>{b0abd6a7-a3f9-456b-b820-0e90426c5fa8}</Project>
+      <Name>NPCGen.Tables.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\NPCGen.Tests.Integration.Common.csproj">
+      <Project>{a9371758-2de3-43af-857d-7140b1c0a78c}</Project>
+      <Name>NPCGen.Tests.Integration.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Choose>
+    <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.CodedUITestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Extension, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITesting, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

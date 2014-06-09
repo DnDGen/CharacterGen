@@ -1,9 +1,9 @@
 ﻿using Ninject;
-using NPCGen.Core.Generation.Randomizers.CharacterClasses.ClassNames;
-using NPCGen.Core.Generation.Randomizers.CharacterClasses.Interfaces;
-using NPCGen.Core.Generation.Randomizers.Races.BaseRaces;
-using NPCGen.Core.Generation.Randomizers.Races.Interfaces;
-using NPCGen.Core.Generation.Randomizers.Races.Metaraces;
+using NPCGen.Generators.Interfaces.Randomizers.CharacterClasses;
+using NPCGen.Generators.Interfaces.Randomizers.Races;
+using NPCGen.Generators.Randomizers.CharacterClasses.ClassNames;
+using NPCGen.Generators.Randomizers.Races.BaseRaces;
+using NPCGen.Generators.Randomizers.Races.Metaraces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Common

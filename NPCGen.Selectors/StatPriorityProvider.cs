@@ -1,7 +1,6 @@
 ﻿using System;
 using NPCGen.Common;
 using NPCGen.Mappers.Interfaces;
-using NPCGen.Mappers.Interfaces.Objects;
 using NPCGen.Selectors.Interfaces;
 
 namespace NPCGen.Selectors

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using NPCGen.Common.CharacterClasses;
-using NPCGen.Generators.Providers.Interfaces;
-using NPCGen.Generators.Randomizers.Races.Interfaces;
-using NPCGen.Generators.Verifiers.Exceptions;
+using NPCGen.Generators.Interfaces.Randomizers.Races;
+using NPCGen.Generators.Interfaces.Verifiers.Exceptions;
+using NPCGen.Selectors.Interfaces;
 
 namespace NPCGen.Generators.Randomizers.Races.BaseRaces
 {

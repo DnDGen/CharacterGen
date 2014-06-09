@@ -1,7 +1,7 @@
 ﻿using System;
 using NPCGen.Common.Alignments;
 using NPCGen.Common.CharacterClasses;
-using NPCGen.Generators.Providers.Interfaces;
+using NPCGen.Selectors.Interfaces;
 
 namespace NPCGen.Generators.Randomizers.CharacterClasses.ClassNames
 {

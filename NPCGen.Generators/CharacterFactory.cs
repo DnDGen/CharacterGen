@@ -4,15 +4,15 @@ using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Races;
 using NPCGen.Common.Stats;
 using NPCGen.Generators.Interfaces;
-using NPCGen.Generators.Providers.Interfaces;
-using NPCGen.Generators.Randomizers.Alignments.Interfaces;
-using NPCGen.Generators.Randomizers.CharacterClasses.Interfaces;
-using NPCGen.Generators.Randomizers.Races.Interfaces;
-using NPCGen.Generators.Randomizers.Stats.Interfaces;
-using NPCGen.Generators.Verifiers.Exceptions;
-using NPCGen.Generators.Verifiers.Interfaces;
 using System;
 using System.Collections.Generic;
+using NPCGen.Selectors.Interfaces;
+using NPCGen.Generators.Interfaces.Verifiers;
+using NPCGen.Generators.Interfaces.Randomizers.Alignments;
+using NPCGen.Generators.Interfaces.Randomizers.CharacterClasses;
+using NPCGen.Generators.Interfaces.Randomizers.Races;
+using NPCGen.Generators.Interfaces.Randomizers.Stats;
+using NPCGen.Generators.Interfaces.Verifiers.Exceptions;
 
 namespace NPCGen.Generators
 {
@@ -24,7 +24,6 @@ namespace NPCGen.Generators
         private IStatsFactory statsFactory;
         private IHitPointsFactory hitPointsFactory;
         private IRaceFactory raceFactory;
-
         private ILevelAdjustmentsProvider levelAdjustmentsProvider;
         private IRandomizerVerifier randomizerVerifier;
         private IPercentileResultProvider percentileResultProvider;

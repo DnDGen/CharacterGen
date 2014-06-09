@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using Ninject;
 using NPCGen.Tests.Integration.Common;
 using NUnit.Framework;
 
@@ -8,38 +9,37 @@ namespace NPCGen.Tests.Integration.Stress
     [TestFixture]
     public abstract class StressTest : IntegrationTest
     {
+        [Inject]
+        public Stopwatch Stopwatch { get; set; }
+
         private const Int32 ConfidentIterations = 1000000;
         private const Int32 TimeLimitInSeconds = 1;
 
-        private Stopwatch stopwatch;
         private Int32 iterations;
 
         [SetUp]
-        public void Setup()
+        public void StressSetup()
         {
-            stopwatch = new Stopwatch();
-        }
-
-        protected void StartTest()
-        {
-            stopwatch.Start();
             iterations = 0;
+            Stopwatch.Start();
         }
 
-        protected void StopTest()
+        [TearDown]
+        protected void StressTearDown()
         {
-            stopwatch.Reset();
+            Stopwatch.Reset();
         }
 
         protected Boolean TestShouldKeepRunning()
         {
-            return stopwatch.Elapsed.Seconds < TimeLimitInSeconds && iterations++ < ConfidentIterations;
+            iterations++;
+            return Stopwatch.Elapsed.TotalSeconds < TimeLimitInSeconds && iterations < ConfidentIterations;
         }
 
         protected void AssertIterations()
         {
             Assert.That(iterations, Is.GreaterThan(0));
-            Assert.Pass("Iterations: {0}", iterations);
+            Assert.Pass("Iterations: {0}\nTimes: {1:hh.\\mm.\\ss}", iterations, Stopwatch.Elapsed);
         }
     }
 }

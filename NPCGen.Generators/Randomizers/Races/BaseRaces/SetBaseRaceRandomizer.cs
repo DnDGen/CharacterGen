@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using NPCGen.Common.CharacterClasses;
-using NPCGen.Generators.Randomizers.Races.Interfaces;
+using NPCGen.Generators.Interfaces.Randomizers.Races;
 
 namespace NPCGen.Generators.Randomizers.Races.BaseRaces
 {

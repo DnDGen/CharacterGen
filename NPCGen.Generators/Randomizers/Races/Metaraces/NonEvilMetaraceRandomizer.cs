@@ -1,6 +1,6 @@
 ﻿using System;
 using NPCGen.Common.Races;
-using NPCGen.Generators.Providers.Interfaces;
+using NPCGen.Selectors.Interfaces;
 
 namespace NPCGen.Generators.Randomizers.Races.Metaraces
 {

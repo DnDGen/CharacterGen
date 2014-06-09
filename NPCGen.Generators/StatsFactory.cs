@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using D20Dice;
+using NPCGen.Common;
 using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Races;
 using NPCGen.Common.Stats;
 using NPCGen.Generators.Interfaces;
-using NPCGen.Generators.Providers.Interfaces;
-using NPCGen.Generators.Randomizers.Stats.Interfaces;
-using NPCGen.Generators.Xml.Parsers.Objects;
+using NPCGen.Generators.Interfaces.Randomizers.Stats;
+using NPCGen.Selectors.Interfaces;
 
 namespace NPCGen.Generators
 {
@@ -49,7 +49,7 @@ namespace NPCGen.Generators
             return increasedStats;
         }
 
-        private Dictionary<String, Stat> PrioritizeStats(Dictionary<String, Stat> stats, StatPriorityObject priorities)
+        private Dictionary<String, Stat> PrioritizeStats(Dictionary<String, Stat> stats, StatPriority priorities)
         {
             var prioritizedStats = new Dictionary<String, Stat>(stats);
 
@@ -69,7 +69,7 @@ namespace NPCGen.Generators
             return prioritizedStats;
         }
 
-        private Dictionary<String, Stat> IncreaseStats(Dictionary<String, Stat> stats, StatPriorityObject priorities, Int32 level)
+        private Dictionary<String, Stat> IncreaseStats(Dictionary<String, Stat> stats, StatPriority priorities, Int32 level)
         {
             var increasedStats = new Dictionary<String, Stat>(stats);
 

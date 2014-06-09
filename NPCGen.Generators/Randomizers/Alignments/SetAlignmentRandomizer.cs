@@ -1,6 +1,6 @@
 ﻿using NPCGen.Common.Alignments;
-using NPCGen.Generators.Randomizers.Alignments.Interfaces;
 using System.Collections.Generic;
+using NPCGen.Generators.Interfaces.Randomizers.Alignments;
 
 namespace NPCGen.Generators.Randomizers.Alignments
 {

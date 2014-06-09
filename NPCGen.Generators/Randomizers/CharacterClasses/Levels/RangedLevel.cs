@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using D20Dice;
-using NPCGen.Generators.Randomizers.CharacterClasses.Interfaces;
+using NPCGen.Generators.Interfaces.Randomizers.CharacterClasses;
 
 namespace NPCGen.Generators.Randomizers.CharacterClasses.Levels
 {
@@ -17,16 +17,9 @@ namespace NPCGen.Generators.Randomizers.CharacterClasses.Levels
 
         public Int32 Randomize()
         {
-            var roll = Roll1to5();
+            var roll = dice.Roll("1d5");
             return roll + rollBonus;
         }
-
-        private Int32 Roll1to5()
-        {
-            Double roll = dice.d10();
-            return Convert.ToInt32(Math.Ceiling(roll / 2));
-        }
-
 
         public IEnumerable<Int32> GetAllPossibleResults()
         {
