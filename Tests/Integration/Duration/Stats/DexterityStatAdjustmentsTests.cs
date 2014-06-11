@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using NPCGen.Core.Data.Races;
-using NPCGen.Core.Generation.Xml.Parsers;
+using Ninject;
+using NPCGen.Common.Races;
+using NPCGen.Mappers.Interfaces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Unit.Generation.Xml.Data.Stats
@@ -9,14 +10,15 @@ namespace NPCGen.Tests.Unit.Generation.Xml.Data.Stats
     [TestFixture]
     public class DexterityStatAdjustmentsTests
     {
+        [Inject]
+        public IAdjustmentXmlParser AdjustmentXmlParser { get; set; }
+
         private Dictionary<String, Int32> adjustments;
 
         [SetUp]
         public void Setup()
         {
-            var streamLoader = new EmbeddedResourceStreamLoader();
-            var parser = new AdjustmentXmlParser(streamLoader);
-            adjustments = parser.Parse("DexterityStatAdjustments.xml");
+            adjustments = AdjustmentXmlParser.Parse("DexterityStatAdjustments.xml");
         }
 
         [Test]

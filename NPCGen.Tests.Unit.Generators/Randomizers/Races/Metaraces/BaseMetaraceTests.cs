@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using Moq;
-using NPCGen.Core.Data.CharacterClasses;
-using NPCGen.Core.Generators.Providers.Interfaces;
-using NPCGen.Core.Generators.Randomizers.Races.Metaraces;
-using NPCGen.Core.Generators.Verifiers.Exceptions;
+using NPCGen.Common.CharacterClasses;
+using NPCGen.Generators.Interfaces.Verifiers.Exceptions;
+using NPCGen.Generators.Randomizers.Races.Metaraces;
+using NPCGen.Selectors.Interfaces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces

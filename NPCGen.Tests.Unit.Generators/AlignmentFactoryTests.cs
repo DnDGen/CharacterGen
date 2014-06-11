@@ -1,8 +1,8 @@
 ﻿using Moq;
-using NPCGen.Core.Data.Alignments;
-using NPCGen.Core.Generators;
-using NPCGen.Core.Generators.Interfaces;
-using NPCGen.Core.Generators.Randomizers.Alignments.Interfaces;
+using NPCGen.Common.Alignments;
+using NPCGen.Generators;
+using NPCGen.Generators.Interfaces;
+using NPCGen.Generators.Interfaces.Randomizers.Alignments;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Unit.Generators

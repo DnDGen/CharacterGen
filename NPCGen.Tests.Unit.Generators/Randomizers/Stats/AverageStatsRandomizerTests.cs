@@ -2,8 +2,8 @@
 using System.Linq;
 using D20Dice;
 using Moq;
-using NPCGen.Core.Generators.Randomizers.Stats;
-using NPCGen.Core.Generators.Randomizers.Stats.Interfaces;
+using NPCGen.Generators.Interfaces.Randomizers.Stats;
+using NPCGen.Generators.Randomizers.Stats;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Unit.Generators.Randomizers.Stats

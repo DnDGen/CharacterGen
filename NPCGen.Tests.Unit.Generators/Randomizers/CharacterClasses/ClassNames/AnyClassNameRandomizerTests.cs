@@ -1,5 +1,5 @@
-﻿using NPCGen.Core.Data.CharacterClasses;
-using NPCGen.Core.Generators.Randomizers.CharacterClasses.ClassNames;
+﻿using NPCGen.Common.CharacterClasses;
+using NPCGen.Generators.Randomizers.CharacterClasses.ClassNames;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassNames

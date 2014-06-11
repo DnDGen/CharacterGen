@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
 using Moq;
-using NPCGen.Core.Data.Alignments;
-using NPCGen.Core.Generators.Providers.Interfaces;
-using NPCGen.Core.Generators.Randomizers.CharacterClasses.ClassNames;
-using NPCGen.Core.Generators.Verifiers.Exceptions;
+using NPCGen.Common.Alignments;
+using NPCGen.Generators.Interfaces.Verifiers.Exceptions;
+using NPCGen.Generators.Randomizers.CharacterClasses.ClassNames;
+using NPCGen.Selectors.Interfaces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassNames

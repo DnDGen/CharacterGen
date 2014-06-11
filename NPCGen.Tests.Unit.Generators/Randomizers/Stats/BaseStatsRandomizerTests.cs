@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using NPCGen.Core.Data.Stats;
-using NPCGen.Core.Generators.Randomizers.Stats;
+using NPCGen.Common.Stats;
+using NPCGen.Generators.Randomizers.Stats;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Unit.Generators.Randomizers.Stats

@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using D20Dice;
 using Moq;
-using NPCGen.Core.Generators.Randomizers.CharacterClasses.Interfaces;
-using NPCGen.Core.Generators.Randomizers.CharacterClasses.Levels;
+using NPCGen.Generators.Interfaces.Randomizers.CharacterClasses;
+using NPCGen.Generators.Randomizers.CharacterClasses.Levels;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Unit.Generators.Randomizers.CharacterClasses.Levels

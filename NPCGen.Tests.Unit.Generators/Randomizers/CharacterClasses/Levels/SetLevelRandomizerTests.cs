@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using NPCGen.Core.Generators.Randomizers.CharacterClasses.Levels;
+using NPCGen.Generators.Randomizers.CharacterClasses.Levels;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Unit.Generators.Randomizers.CharacterClasses.Levels

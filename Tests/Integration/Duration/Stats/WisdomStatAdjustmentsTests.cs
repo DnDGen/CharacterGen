@@ -1,22 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using NPCGen.Core.Data.Races;
-using NPCGen.Core.Generation.Xml.Parsers;
+using Ninject;
+using NPCGen.Common.Races;
+using NPCGen.Mappers.Interfaces;
+using NPCGen.Tests.Integration.Common;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Unit.Generation.Xml.Data.Stats
 {
     [TestFixture]
-    public class WisdomStatAdjustmentsTests
+    public class WisdomStatAdjustmentsTests : IntegrationTest
     {
+        [Inject]
+        public IAdjustmentXmlParser AdjustmentXmlParser { get; set; }
+
         private Dictionary<String, Int32> adjustments;
 
         [SetUp]
         public void Setup()
         {
-            var streamLoader = new EmbeddedResourceStreamLoader();
-            var parser = new AdjustmentXmlParser(streamLoader);
-            adjustments = parser.Parse("WisdomStatAdjustments.xml");
+            adjustments = AdjustmentXmlParser.Parse("WisdomStatAdjustments.xml");
         }
 
         [Test]

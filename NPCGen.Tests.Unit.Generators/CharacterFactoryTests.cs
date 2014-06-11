@@ -1,20 +1,20 @@
 ﻿using Moq;
-using NPCGen.Core.Data.Alignments;
-using NPCGen.Core.Data.CharacterClasses;
-using NPCGen.Core.Data.Races;
-using NPCGen.Core.Data.Stats;
-using NPCGen.Core.Generators;
-using NPCGen.Core.Generators.Interfaces;
-using NPCGen.Core.Generators.Providers.Interfaces;
-using NPCGen.Core.Generators.Randomizers.Alignments.Interfaces;
-using NPCGen.Core.Generators.Randomizers.CharacterClasses.Interfaces;
-using NPCGen.Core.Generators.Randomizers.Races.Interfaces;
-using NPCGen.Core.Generators.Randomizers.Stats.Interfaces;
-using NPCGen.Core.Generators.Verifiers.Exceptions;
-using NPCGen.Core.Generators.Verifiers.Interfaces;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using NPCGen.Generators.Interfaces;
+using NPCGen.Selectors.Interfaces;
+using NPCGen.Generators.Interfaces.Verifiers;
+using NPCGen.Generators.Interfaces.Randomizers.Alignments;
+using NPCGen.Generators.Interfaces.Randomizers.CharacterClasses;
+using NPCGen.Generators.Interfaces.Randomizers.Races;
+using NPCGen.Generators.Interfaces.Randomizers.Stats;
+using NPCGen.Common.CharacterClasses;
+using NPCGen.Common.Races;
+using NPCGen.Common.Alignments;
+using NPCGen.Generators;
+using NPCGen.Common.Stats;
+using NPCGen.Generators.Interfaces.Verifiers.Exceptions;
 
 namespace NPCGen.Tests.Unit.Generators
 {

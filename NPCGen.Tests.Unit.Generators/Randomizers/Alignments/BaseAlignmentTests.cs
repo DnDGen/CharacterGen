@@ -3,6 +3,7 @@ using System.Linq;
 using D20Dice;
 using Moq;
 using NPCGen.Common.Alignments;
+using NPCGen.Generators.Interfaces.Verifiers.Exceptions;
 using NPCGen.Generators.Randomizers.Alignments;
 using NPCGen.Selectors.Interfaces;
 using NUnit.Framework;

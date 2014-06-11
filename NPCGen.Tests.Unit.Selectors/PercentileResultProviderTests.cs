@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using D20Dice;
 using Moq;
-using NPCGen.Core.Selectors;
-using NPCGen.Core.Selectors.Interfaces;
-using NPCGen.Core.Generation.Xml.Parsers.Interfaces;
-using NPCGen.Core.Generation.Xml.Parsers.Objects;
+using NPCGen.Mappers.Interfaces;
+using NPCGen.Selectors;
+using NPCGen.Selectors.Interfaces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Unit.Selectors
@@ -14,24 +13,21 @@ namespace NPCGen.Tests.Unit.Selectors
     [TestFixture]
     public class PercentileResultProviderTests
     {
-        private IPercentileResultProvider percentileResultProvider;
-        private List<PercentileObject> table;
-        private Mock<IDice> mockDice;
-        private Mock<IPercentileXmlParser> mockPercentileXmlParser;
         private const String tableName = "table";
         private const Int32 min = 1;
         private const Int32 max = 50;
 
+        private IPercentileResultProvider percentileResultProvider;
+        private Dictionary<Int32, String> table;
+        private Mock<IDice> mockDice;
+        private Mock<IPercentileXmlParser> mockPercentileXmlParser;
+
         [SetUp]
         public void Setup()
         {
-            var percentileObject = new PercentileObject();
-            percentileObject.Content = "content";
-            percentileObject.LowerLimit = min;
-            percentileObject.UpperLimit = max;
-
-            table = new List<PercentileObject>();
-            table.Add(percentileObject);
+            table = new Dictionary<Int32, String>();
+            for (var i = min; i <= max; i++)
+                table.Add(i, "content");
 
             mockPercentileXmlParser = new Mock<IPercentileXmlParser>();
             mockPercentileXmlParser.Setup(p => p.Parse(tableName + ".xml")).Returns(table);
@@ -98,13 +94,20 @@ namespace NPCGen.Tests.Unit.Selectors
         [Test]
         public void GetAllResultsReturnsAllContentValues()
         {
-            for (var i = 1; i < 10; i++)
-                table.Add(new PercentileObject() { Content = String.Format("Item {0}", i) });
+            for (var i = max + 1; i < max + 10; i++)
+            {
+                var content = String.Format("Item {0}", i);
+                table.Add(i, content);
+            }
 
             var results = percentileResultProvider.GetAllResults(tableName);
+            var distinctContent = table.Values.Distinct();
 
-            foreach (var percentileObject in table)
-                Assert.That(results.Contains(percentileObject.Content), Is.True);
+            foreach (var content in distinctContent)
+                Assert.That(results, Contains.Item(content));
+
+            var extras = distinctContent.Except(results);
+            Assert.That(extras, Is.Empty);
         }
 
         [Test]
@@ -121,62 +124,6 @@ namespace NPCGen.Tests.Unit.Selectors
             percentileResultProvider.GetAllResults(tableName);
 
             mockPercentileXmlParser.Verify(p => p.Parse(tableName + ".xml"), Times.Once());
-        }
-
-        [Test]
-        public void CompleteTableWithOneEntryIsSeenAsComplete()
-        {
-            DetermineUpperLimits(1);
-        }
-
-        [Test]
-        public void CompleteTableWithTwoEntriesIsSeenAsComplete()
-        {
-            DetermineUpperLimits(2);
-        }
-
-        [Test]
-        public void CompleteTableWithThreeEntriesIsSeenAsComplete()
-        {
-            DetermineUpperLimits(3);
-        }
-
-        private void DetermineUpperLimits(Int32 numberOfLimits)
-        {
-            var upperLimits = new[] { 100 };
-
-            if (numberOfLimits == 1)
-                AssertPercentileObjects(upperLimits);
-            else
-                DetermineUpperLimits(numberOfLimits, upperLimits);
-        }
-
-        private void DetermineUpperLimits(Int32 numberOfLimits, IEnumerable<Int32> upperLimits)
-        {
-            for (var newUpperLimit = upperLimits.First() - 1; newUpperLimit > 0; newUpperLimit--)
-            {
-                var addedUpperLimits = upperLimits.Union(new[] { newUpperLimit }).OrderBy(l => l);
-
-                if (numberOfLimits <= addedUpperLimits.Count())
-                    AssertPercentileObjects(addedUpperLimits);
-                else
-                    DetermineUpperLimits(numberOfLimits, addedUpperLimits);
-            }
-        }
-
-        private void AssertPercentileObjects(IEnumerable<Int32> upperLimits)
-        {
-            if (upperLimits.Last() != 100 || upperLimits.Distinct().Count() != upperLimits.Count())
-                throw new ArgumentException();
-
-            table.Clear();
-            table.Add(new PercentileObject() { LowerLimit = 1, UpperLimit = upperLimits.First() });
-
-            for (var i = 1; i < upperLimits.Count(); i++)
-                table.Add(new PercentileObject() { LowerLimit = upperLimits.ElementAt(i - 1) + 1, UpperLimit = upperLimits.ElementAt(i)});
-
-            var results = percentileResultProvider.GetAllResults(tableName);
-            Assert.That(results.Contains(String.Empty), Is.False);
         }
     }
 }

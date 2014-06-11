@@ -2,12 +2,12 @@
 using System.Linq;
 using D20Dice;
 using Moq;
-using NPCGen.Core.Data;
-using NPCGen.Core.Data.CharacterClasses;
-using NPCGen.Core.Data.Races;
-using NPCGen.Core.Generators;
-using NPCGen.Core.Generators.Interfaces;
-using NPCGen.Core.Generators.Providers.Interfaces;
+using NPCGen.Common;
+using NPCGen.Common.CharacterClasses;
+using NPCGen.Common.Races;
+using NPCGen.Generators;
+using NPCGen.Generators.Interfaces;
+using NPCGen.Selectors.Interfaces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Unit.Generators

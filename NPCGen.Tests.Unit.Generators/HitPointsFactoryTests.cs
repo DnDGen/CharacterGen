@@ -1,11 +1,11 @@
 ﻿using System;
 using D20Dice;
 using Moq;
-using NPCGen.Core.Data.CharacterClasses;
-using NPCGen.Core.Data.Races;
-using NPCGen.Core.Generators;
+using NPCGen.Common.CharacterClasses;
+using NPCGen.Common.Races;
+using NPCGen.Generators;
+using NPCGen.Generators.Interfaces;
 using NUnit.Framework;
-using NPCGen.Core.Generators.Interfaces;
 
 namespace NPCGen.Tests.Unit.Generators
 {

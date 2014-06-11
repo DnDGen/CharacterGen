@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
-using NPCGen.Core.Data.CharacterClasses;
-using NPCGen.Core.Generators.Randomizers.Races.BaseRaces;
+using NPCGen.Common.CharacterClasses;
+using NPCGen.Generators.Randomizers.Races.BaseRaces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces

@@ -1,5 +1,5 @@
-﻿using NPCGen.Core.Data.Races;
-using NPCGen.Core.Generators.Randomizers.Races.Metaraces;
+﻿using NPCGen.Common.Races;
+using NPCGen.Generators.Randomizers.Races.Metaraces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces

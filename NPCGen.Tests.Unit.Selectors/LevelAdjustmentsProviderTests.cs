@@ -1,7 +1,7 @@
 ﻿using Moq;
-using NPCGen.Core.Selectors;
-using NPCGen.Core.Selectors.Interfaces;
-using NPCGen.Core.Generation.Xml.Parsers.Interfaces;
+using NPCGen.Mappers.Interfaces;
+using NPCGen.Selectors;
+using NPCGen.Selectors.Interfaces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Unit.Selectors

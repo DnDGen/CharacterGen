@@ -1,6 +1,6 @@
 ﻿using System.Linq;
-using NPCGen.Core.Data.Alignments;
-using NPCGen.Core.Generators.Randomizers.CharacterClasses.ClassNames;
+using NPCGen.Common.Alignments;
+using NPCGen.Generators.Randomizers.CharacterClasses.ClassNames;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassNames

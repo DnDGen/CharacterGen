@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using Moq;
-using NPCGen.Core.Data.Races;
-using NPCGen.Core.Data.Stats;
-using NPCGen.Core.Selectors;
-using NPCGen.Core.Selectors.Interfaces;
-using NPCGen.Core.Generation.Xml.Parsers.Interfaces;
+using NPCGen.Common.Races;
+using NPCGen.Common.Stats;
+using NPCGen.Mappers.Interfaces;
+using NPCGen.Selectors;
+using NPCGen.Selectors.Interfaces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Unit.Selectors
@@ -38,7 +38,7 @@ namespace NPCGen.Tests.Unit.Selectors
         {
             var adjustments = provider.GetAdjustments(race);
 
-            foreach(var stat in StatConstants.GetStats())
+            foreach (var stat in StatConstants.GetStats())
                 Assert.That(adjustments.ContainsKey(stat), Is.True);
         }
 

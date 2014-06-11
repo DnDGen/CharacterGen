@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Moq;
-using NPCGen.Core.Data.CharacterClasses;
-using NPCGen.Core.Data.Races;
-using NPCGen.Core.Generators.Randomizers.Races.Interfaces;
+using NPCGen.Common.CharacterClasses;
+using NPCGen.Common.Races;
+using NPCGen.Generators.Interfaces.Randomizers.Races;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces

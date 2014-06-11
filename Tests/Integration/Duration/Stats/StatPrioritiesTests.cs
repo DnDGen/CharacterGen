@@ -1,24 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
-using NPCGen.Core.Data.CharacterClasses;
-using NPCGen.Core.Data.Stats;
-using NPCGen.Core.Generation.Xml.Parsers;
-using NPCGen.Core.Generation.Xml.Parsers.Objects;
+using Ninject;
+using NPCGen.Common;
+using NPCGen.Common.CharacterClasses;
+using NPCGen.Common.Stats;
+using NPCGen.Mappers.Interfaces;
+using NPCGen.Tests.Integration.Common;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Unit.Generation.Xml.Data.Stats
 {
     [TestFixture]
-    public class StatPrioritiesTests
+    public class StatPrioritiesTests : IntegrationTest
     {
-        private Dictionary<String, StatPriorityObject> statPriorities;
+        [Inject]
+        public IStatPriorityXmlParser StatPriorityXmlParser { get; set; }
+
+        private Dictionary<String, StatPriority> statPriorities;
 
         [SetUp]
         public void Setup()
         {
-            var streamLoader = new EmbeddedResourceStreamLoader();
-            var parser = new StatPriorityXmlParser(streamLoader);
-            statPriorities = parser.Parse("StatPriorities.xml");
+            statPriorities = StatPriorityXmlParser.Parse("StatPriorities.xml");
         }
 
         [Test]

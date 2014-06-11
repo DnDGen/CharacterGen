@@ -1,24 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using NPCGen.Core.Data;
-using NPCGen.Core.Data.Races;
-using NPCGen.Core.Generation.Xml.Parsers;
+using Ninject;
+using NPCGen.Common;
+using NPCGen.Common.Races;
+using NPCGen.Mappers.Interfaces;
+using NPCGen.Tests.Integration.Common;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Unit.Generation.Xml.Data
 {
     [TestFixture]
-    public class AutomaticLanguagesTests
+    public class AutomaticLanguagesTests : IntegrationTest
     {
+        [Inject]
+        public ILanguagesXmlParser LanguagesXmlParser { get; set; }
+
         private Dictionary<String, IEnumerable<String>> languages;
 
         [SetUp]
         public void Setup()
         {
-            var streamLoader = new EmbeddedResourceStreamLoader();
-            var parser = new LanguagesXmlParser(streamLoader);
-            languages = parser.Parse("AutomaticLanguages.xml");
+            languages = LanguagesXmlParser.Parse("AutomaticLanguages.xml");
         }
 
         [Test]
