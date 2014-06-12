@@ -5,7 +5,7 @@ using NPCGen.Common.Races;
 using NPCGen.Mappers.Interfaces;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Generation.Xml.Data.CharacterClasses
+namespace NPCGen.Tests.Integration.Tables.CharacterClasses
 {
     [TestFixture]
     public class LevelAdjustmentsTests

@@ -6,7 +6,7 @@ using NPCGen.Mappers.Interfaces;
 using NPCGen.Tests.Integration.Common;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Generation.Xml.Data.Stats
+namespace NPCGen.Tests.Integration.Tables.Stats
 {
     [TestFixture]
     public class WisdomStatAdjustmentsTests : IntegrationTest

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NPCGen.Tests.Unit.Generation.Xml.Data.Races.BaseRaces.Good
+namespace NPCGen.Tests.Integration.Tables.Races.BaseRaces.Good
 {
     [TestFixture]
     public class GoodMonkBaseRacesTests : PercentileTests

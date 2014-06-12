@@ -1,177 +1,52 @@
-﻿using NPCGen.Core.Data.Races;
+﻿using System;
+using NPCGen.Common.Races;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Generation.Xml.Data.Races.BaseRaces.Evil
+namespace NPCGen.Tests.Integration.Tables.Races.BaseRaces.Evil
 {
     [TestFixture]
     public class EvilClericBaseRacesTests : PercentileTests
     {
-        [SetUp]
-        public void Setup()
+        protected override String tableName
         {
-            tableName = "EvilClericBaseRaces";
+            get { return "EvilClericBaseRaces"; }
         }
 
-        [Test]
-        public void EvilClericDeepDwarfPercentile()
+        [TestCase(RaceConstants.BaseRaces.DeepDwarf, 1, 2)]
+        [TestCase(RaceConstants.BaseRaces.WoodElf, 6, 8)]
+        [TestCase(RaceConstants.BaseRaces.HalfElf, 9, 18)]
+        [TestCase(RaceConstants.BaseRaces.LightfootHalfling, 19, 20)]
+        [TestCase(RaceConstants.BaseRaces.HalfOrc, 23, 25)]
+        [TestCase(RaceConstants.BaseRaces.Human, 26, 56)]
+        [TestCase(RaceConstants.BaseRaces.Lizardfolk, 57, 63)]
+        [TestCase(RaceConstants.BaseRaces.Drow, 69, 71)]
+        [TestCase(RaceConstants.BaseRaces.Gnoll, 73, 74)]
+        [TestCase(RaceConstants.BaseRaces.Troglodyte, 75, 89)]
+        [TestCase(RaceConstants.BaseRaces.Bugbear, 90, 91)]
+        [TestCase(EmptyContent, 96, 100)]
+        public void Percentile(String content, Int32 lower, Int32 upper)
         {
-            AssertContent(RaceConstants.BaseRaces.DeepDwarf, 1, 2);
+            AssertPercentile(content, lower, upper);
         }
 
-        [Test]
-        public void EvilClericHillDwarfPercentile()
+        [TestCase(RaceConstants.BaseRaces.HillDwarf, 3)]
+        [TestCase(RaceConstants.BaseRaces.HighElf, 4)]
+        [TestCase(RaceConstants.BaseRaces.WildElf, 5)]
+        [TestCase(RaceConstants.BaseRaces.DeepHalfling, 21)]
+        [TestCase(RaceConstants.BaseRaces.TallfellowHalfling, 22)]
+        [TestCase(RaceConstants.BaseRaces.Goblin, 64)]
+        [TestCase(RaceConstants.BaseRaces.Hobgoblin, 65)]
+        [TestCase(RaceConstants.BaseRaces.Kobold, 66)]
+        [TestCase(RaceConstants.BaseRaces.Orc, 67)]
+        [TestCase(RaceConstants.BaseRaces.Tiefling, 68)]
+        [TestCase(RaceConstants.BaseRaces.DuergarDwarf, 72)]
+        [TestCase(RaceConstants.BaseRaces.Ogre, 92)]
+        [TestCase(RaceConstants.BaseRaces.Minotaur, 93)]
+        [TestCase(RaceConstants.BaseRaces.MindFlayer, 94)]
+        [TestCase(RaceConstants.BaseRaces.OgreMage, 95)]
+        public void Percentile(String content, Int32 roll)
         {
-            AssertContent(RaceConstants.BaseRaces.HillDwarf, 3);
-        }
-
-        [Test]
-        public void EvilClericHighElfPercentile()
-        {
-            AssertContent(RaceConstants.BaseRaces.HighElf, 4);
-        }
-
-        [Test]
-        public void EvilClericWildElfPercentile()
-        {
-            AssertContent(RaceConstants.BaseRaces.WildElf, 5);
-        }
-
-        [Test]
-        public void EvilClericWoodElfPercentile()
-        {
-            AssertContent(RaceConstants.BaseRaces.WoodElf, 6, 8);
-        }
-
-        [Test]
-        public void EvilClericHalfElfPercentile()
-        {
-            AssertContent(RaceConstants.BaseRaces.HalfElf, 9, 18);
-        }
-
-        [Test]
-        public void EvilClericLightfootHalflingPercentile()
-        {
-            AssertContent(RaceConstants.BaseRaces.LightfootHalfling, 19, 20);
-        }
-
-        [Test]
-        public void EvilClericDeepHalflingPercentile()
-        {
-            AssertContent(RaceConstants.BaseRaces.DeepHalfling, 21);
-        }
-
-        [Test]
-        public void EvilClericTallfellowHalflingPercentile()
-        {
-            AssertContent(RaceConstants.BaseRaces.TallfellowHalfling, 22);
-        }
-
-        [Test]
-        public void EvilClericHalfOrcPercentile()
-        {
-            AssertContent(RaceConstants.BaseRaces.HalfOrc, 23, 25);
-        }
-
-        [Test]
-        public void EvilClericHumanPercentile()
-        {
-            AssertContent(RaceConstants.BaseRaces.Human, 26, 56);
-        }
-
-        [Test]
-        public void EvilClericLizardfolkPercentile()
-        {
-            AssertContent(RaceConstants.BaseRaces.Lizardfolk, 57, 63);
-        }
-
-        [Test]
-        public void EvilClericGoblinPercentile()
-        {
-            AssertContent(RaceConstants.BaseRaces.Goblin, 64);
-        }
-
-        [Test]
-        public void EvilClericHobgoblinPercentile()
-        {
-            AssertContent(RaceConstants.BaseRaces.Hobgoblin, 65);
-        }
-
-        [Test]
-        public void EvilClericKoboldPercentile()
-        {
-            AssertContent(RaceConstants.BaseRaces.Kobold, 66);
-        }
-
-        [Test]
-        public void EvilClericOrcPercentile()
-        {
-            AssertContent(RaceConstants.BaseRaces.Orc, 67);
-        }
-
-        [Test]
-        public void EvilClericTieflingPercentile()
-        {
-            AssertContent(RaceConstants.BaseRaces.Tiefling, 68);
-        }
-
-        [Test]
-        public void EvilClericDrowPercentile()
-        {
-            AssertContent(RaceConstants.BaseRaces.Drow, 69, 71);
-        }
-
-        [Test]
-        public void EvilClericDuergarDwarfPercentile()
-        {
-            AssertContent(RaceConstants.BaseRaces.DuergarDwarf, 72);
-        }
-
-        [Test]
-        public void EvilClericGnollPercentile()
-        {
-            AssertContent(RaceConstants.BaseRaces.Gnoll, 73, 74);
-        }
-
-        [Test]
-        public void EvilClericTrogolodytePercentile()
-        {
-            AssertContent(RaceConstants.BaseRaces.Troglodyte, 75, 89);
-        }
-
-        [Test]
-        public void EvilClericBugbearPercentile()
-        {
-            AssertContent(RaceConstants.BaseRaces.Bugbear, 90, 91);
-        }
-
-        [Test]
-        public void EvilClericOgrePercentile()
-        {
-            AssertContent(RaceConstants.BaseRaces.Ogre, 92);
-        }
-
-        [Test]
-        public void EvilClericMinotaurPercentile()
-        {
-            AssertContent(RaceConstants.BaseRaces.Minotaur, 93);
-        }
-
-        [Test]
-        public void EvilClericMindFlayerPercentile()
-        {
-            AssertContent(RaceConstants.BaseRaces.MindFlayer, 94);
-        }
-
-        [Test]
-        public void EvilClericOgreMagePercentile()
-        {
-            AssertContent(RaceConstants.BaseRaces.OgreMage, 95);
-        }
-
-        [Test]
-        public void EvilClericEmptyPercentile()
-        {
-            AssertEmpty(96, 100);
+            AssertPercentile(content, roll);
         }
     }
 }

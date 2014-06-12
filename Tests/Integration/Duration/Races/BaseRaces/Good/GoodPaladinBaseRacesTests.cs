@@ -1,7 +1,7 @@
 ﻿using NPCGen.Core.Data.Races;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Generation.Xml.Data.Races.BaseRaces.Good
+namespace NPCGen.Tests.Integration.Tables.Races.BaseRaces.Good
 {
     [TestFixture]
     public class GoodPaladinBaseRacesTests : PercentileTests

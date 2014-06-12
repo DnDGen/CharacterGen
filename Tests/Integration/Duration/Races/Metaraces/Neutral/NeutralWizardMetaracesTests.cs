@@ -1,33 +1,28 @@
-﻿using NPCGen.Core.Data.Races;
+﻿using System;
+using NPCGen.Common.Races;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Generation.Xml.Data.Races.Metaraces.Neutral
+namespace NPCGen.Tests.Integration.Tables.Races.Metaraces.Neutral
 {
     [TestFixture]
     public class NeutralWizardMetaracesTests : PercentileTests
     {
-        [SetUp]
-        public void Setup()
+        protected override String tableName
         {
-            tableName = "NeutralWizardMetaraces";
+            get { return "NeutralWizardMetaraces"; }
         }
 
-        [Test]
-        public void NeutralWizardEmptyPercentile()
+        [TestCase(EmptyContent, 1, 98)]
+        public void Percentile(String content, Int32 lower, Int32 upper)
         {
-            AssertEmpty(1, 98);
+            AssertPercentile(content, lower, upper);
         }
 
-        [Test]
-        public void NeutralWizardWereboarPercentile()
+        [TestCase(RaceConstants.Metaraces.Wereboar, 99)]
+        [TestCase(RaceConstants.Metaraces.Weretiger, 100)]
+        public void Percentile(String content, Int32 roll)
         {
-            AssertContent(RaceConstants.Metaraces.Wereboar, 99);
-        }
-
-        [Test]
-        public void NeutralWizardWeretigerPercentile()
-        {
-            AssertContent(RaceConstants.Metaraces.Weretiger, 100);
+            AssertPercentile(content, roll);
         }
     }
 }

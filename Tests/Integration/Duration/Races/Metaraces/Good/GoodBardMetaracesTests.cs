@@ -1,7 +1,7 @@
 ﻿using NPCGen.Core.Data.Races;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Generation.Xml.Data.Races.Metaraces.Good
+namespace NPCGen.Tests.Integration.Tables.Races.Metaraces.Good
 {
     [TestFixture]
     public class GoodBardMetaracesTests : PercentileTests

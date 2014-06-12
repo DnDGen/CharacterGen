@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Generation.Xml.Data.Races.Metaraces.Evil
+namespace NPCGen.Tests.Integration.Tables.Races.Metaraces.Evil
 {
     [TestFixture]
     public class EvilDruidMetaracesTests : PercentileTests

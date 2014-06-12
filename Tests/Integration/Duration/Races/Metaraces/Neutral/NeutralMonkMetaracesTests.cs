@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Generation.Xml.Data.Races.Metaraces.Neutral
+namespace NPCGen.Tests.Integration.Tables.Races.Metaraces.Neutral
 {
     [TestFixture]
     public class NeutralMonkMetaracesTests : PercentileTests

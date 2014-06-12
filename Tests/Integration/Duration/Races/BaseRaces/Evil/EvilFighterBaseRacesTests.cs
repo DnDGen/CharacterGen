@@ -1,7 +1,6 @@
-﻿using NPCGen.Core.Data.Races;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Generation.Xml.Data.Races.BaseRaces.Evil
+namespace NPCGen.Tests.Integration.Tables.Races.BaseRaces.Evil
 {
     [TestFixture]
     public class EvilFighterBaseRacesTests : PercentileTests

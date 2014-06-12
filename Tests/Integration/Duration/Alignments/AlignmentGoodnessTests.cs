@@ -2,7 +2,7 @@
 using NPCGen.Common.Alignments;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Generation.Xml.Data.Alignments
+namespace NPCGen.Tests.Integration.Tables.Alignments
 {
     [TestFixture]
     public class AlignmentGoodnessTests : PercentileTests

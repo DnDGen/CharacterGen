@@ -1,7 +1,7 @@
 ﻿using NPCGen.Core.Data.Races;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Generation.Xml.Data.Races.BaseRaces.Neutral
+namespace NPCGen.Tests.Integration.Tables.Races.BaseRaces.Neutral
 {
     [TestFixture]
     public class NeutralSorcererBaseRacesTests : PercentileTests

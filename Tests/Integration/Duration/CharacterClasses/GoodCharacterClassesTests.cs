@@ -2,7 +2,7 @@
 using NPCGen.Common.CharacterClasses;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Generation.Xml.Data.CharacterClasses
+namespace NPCGen.Tests.Integration.Tables.CharacterClasses
 {
     [TestFixture]
     public class GoodCharacterClassesTests : PercentileTests
