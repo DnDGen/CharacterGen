@@ -45,11 +45,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdjustmentXmlParserTests.cs" />
-    <Compile Include="LanguagesXmlParserTests.cs" />
-    <Compile Include="PercentileXmlParserTests.cs" />
+    <Compile Include="AdjustmentXmlMapperTests.cs" />
+    <Compile Include="LanguagesXmlMapperTests.cs" />
+    <Compile Include="PercentileXmlMapperTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StatPriorityXmlParserTests.cs" />
+    <Compile Include="StatPriorityXmlMapperTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

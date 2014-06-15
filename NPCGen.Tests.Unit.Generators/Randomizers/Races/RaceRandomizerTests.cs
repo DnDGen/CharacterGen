@@ -10,14 +10,14 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races
     [TestFixture]
     public abstract class RaceRandomizerTests
     {
-        protected Mock<IPercentileResultProvider> mockPercentileResultProvider;
-        protected Mock<ILevelAdjustmentsProvider> mockLevelAdjustmentsProvider;
+        protected Mock<IPercentileSelector> mockPercentileResultProvider;
+        protected Mock<ILevelAdjustmentsSelector> mockLevelAdjustmentsProvider;
 
         [SetUp]
         public void Setup()
         {
-            mockPercentileResultProvider = new Mock<IPercentileResultProvider>();
-            mockLevelAdjustmentsProvider = new Mock<ILevelAdjustmentsProvider>();
+            mockPercentileResultProvider = new Mock<IPercentileSelector>();
+            mockLevelAdjustmentsProvider = new Mock<ILevelAdjustmentsSelector>();
         }
 
         protected void AssertRaceIsAllowed(String race)

@@ -1,4 +1,5 @@
-﻿using NPCGen.Core.Data.Races;
+﻿using System;
+using NPCGen.Common.Races;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Tables.Races.BaseRaces.Evil
@@ -6,106 +7,105 @@ namespace NPCGen.Tests.Integration.Tables.Races.BaseRaces.Evil
     [TestFixture]
     public class EvilRogueBaseRacesTests : PercentileTests
     {
-        [SetUp]
-        public void Setup()
+        protected override String tableName
         {
-            tableName = "EvilRogueBaseRaces";
+            get { return "EvilRogueBaseRaces"; }
         }
 
         [Test]
         public void EvilRogueDeepDwarfPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.DeepDwarf, 1);
+            AssertPercentile(RaceConstants.BaseRaces.DeepDwarf, 1);
         }
 
         [Test]
         public void EvilRogueHighElfPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.HighElf, 2);
+            AssertPercentile(RaceConstants.BaseRaces.HighElf, 2);
         }
 
         [Test]
         public void EvilRogueWoodElfPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.WoodElf, 3);
+            AssertPercentile(RaceConstants.BaseRaces.WoodElf, 3);
         }
 
         [Test]
         public void EvilRogueHalfElfPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.HalfElf, 4, 18);
+            AssertPercentile(RaceConstants.BaseRaces.HalfElf, 4, 18);
         }
 
         [Test]
         public void EvilRogueLightfootHalflingPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.LightfootHalfling, 19, 38);
+            AssertPercentile(RaceConstants.BaseRaces.LightfootHalfling, 19, 38);
         }
 
         [Test]
         public void EvilRogueDeepHalflingPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.DeepHalfling, 39);
+            AssertPercentile(RaceConstants.BaseRaces.DeepHalfling, 39);
         }
 
         [Test]
         public void EvilRogueTallfellowHalflingPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.TallfellowHalfling, 40);
+            AssertPercentile(RaceConstants.BaseRaces.TallfellowHalfling, 40);
         }
 
         [Test]
         public void EvilRogueHalfOrcPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.HalfOrc, 41, 50);
+            AssertPercentile(RaceConstants.BaseRaces.HalfOrc, 41, 50);
         }
 
         [Test]
         public void EvilRogueHumanPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.Human, 51, 70);
+            AssertPercentile(RaceConstants.BaseRaces.Human, 51, 70);
         }
 
         [Test]
         public void EvilRogueGoblinPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.Goblin, 71, 85);
+            AssertPercentile(RaceConstants.BaseRaces.Goblin, 71, 85);
         }
 
         [Test]
         public void EvilRogueHobgoblinPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.Hobgoblin, 86);
+            AssertPercentile(RaceConstants.BaseRaces.Hobgoblin, 86);
         }
 
         [Test]
         public void EvilRogueKoboldPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.Kobold, 87);
+            AssertPercentile(RaceConstants.BaseRaces.Kobold, 87);
         }
 
         [Test]
         public void EvilRogueTieflingPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.Tiefling, 88, 89);
+            AssertPercentile(RaceConstants.BaseRaces.Tiefling, 88, 89);
         }
 
         [Test]
         public void EvilRogueBugbearPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.Bugbear, 90, 93);
+            AssertPercentile(RaceConstants.BaseRaces.Bugbear, 90, 93);
         }
 
         [Test]
         public void EvilRogueMindFlayerPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.MindFlayer, 94);
+            AssertPercentile(RaceConstants.BaseRaces.MindFlayer, 94);
         }
 
         [Test]
         public void EvilRogueEmptyPercentile()
         {
-            AssertEmpty(95, 100);
+            AssertPercentile(EmptyContent, 95, 100);
         }
     }
 }

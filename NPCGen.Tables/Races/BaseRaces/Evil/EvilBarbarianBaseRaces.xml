@@ -91,4 +91,9 @@
     <content>Minotaur</content>
     <upper>94</upper>
   </object>
+  <object>
+    <lower>95</lower>
+    <content></content>
+    <upper>100</upper>
+  </object>
 </percentile>

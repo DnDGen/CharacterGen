@@ -1,4 +1,5 @@
-﻿using NPCGen.Core.Data.Races;
+﻿using System;
+using NPCGen.Common.Races;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Tables.Races.BaseRaces.Neutral
@@ -6,106 +7,105 @@ namespace NPCGen.Tests.Integration.Tables.Races.BaseRaces.Neutral
     [TestFixture]
     public class NeutralClericBaseRacesTests : PercentileTests
     {
-        [SetUp]
-        public void Setup()
+        protected override String tableName
         {
-            tableName = "NeutralClericBaseRaces";
+            get { return "NeutralClericBaseRaces"; }
         }
 
         [Test]
         public void NeutralClericDeepDwarfPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.DeepDwarf, 1, 15);
+            AssertPercentile(RaceConstants.BaseRaces.DeepDwarf, 1, 15);
         }
 
         [Test]
         public void NeutralClericHillDwarfPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.HillDwarf, 16, 25);
+            AssertPercentile(RaceConstants.BaseRaces.HillDwarf, 16, 25);
         }
 
         [Test]
         public void NeutralClericMountainDwarfPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.MountainDwarf, 26);
+            AssertPercentile(RaceConstants.BaseRaces.MountainDwarf, 26);
         }
 
         [Test]
         public void NeutralClericHighElfPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.HighElf, 27);
+            AssertPercentile(RaceConstants.BaseRaces.HighElf, 27);
         }
 
         [Test]
         public void NeutralClericWildElfPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.WildElf, 28);
+            AssertPercentile(RaceConstants.BaseRaces.WildElf, 28);
         }
 
         [Test]
         public void NeutralClericWoodElfPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.WoodElf, 29, 38);
+            AssertPercentile(RaceConstants.BaseRaces.WoodElf, 29, 38);
         }
 
         [Test]
         public void NeutralClericRockGnomePercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.RockGnome, 39);
+            AssertPercentile(RaceConstants.BaseRaces.RockGnome, 39);
         }
 
         [Test]
         public void NeutralClericHalfElfPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.HalfElf, 40, 48);
+            AssertPercentile(RaceConstants.BaseRaces.HalfElf, 40, 48);
         }
 
         [Test]
         public void NeutralClericLightfootHalflingPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.LightfootHalfling, 49, 58);
+            AssertPercentile(RaceConstants.BaseRaces.LightfootHalfling, 49, 58);
         }
 
         [Test]
         public void NeutralClericDeepHalflingPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.DeepHalfling, 59);
+            AssertPercentile(RaceConstants.BaseRaces.DeepHalfling, 59);
         }
 
         [Test]
         public void NeutralClericTallfellowHalflingPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.TallfellowHalfling, 60);
+            AssertPercentile(RaceConstants.BaseRaces.TallfellowHalfling, 60);
         }
 
         [Test]
         public void NeutralClericHalfOrcPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.HalfOrc, 61, 62);
+            AssertPercentile(RaceConstants.BaseRaces.HalfOrc, 61, 62);
         }
 
         [Test]
         public void NeutralClericHumanPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.Human, 63, 90);
+            AssertPercentile(RaceConstants.BaseRaces.Human, 63, 90);
         }
 
         [Test]
         public void NeutralClericLizardfolkPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.Lizardfolk, 91, 97);
+            AssertPercentile(RaceConstants.BaseRaces.Lizardfolk, 91, 97);
         }
 
         [Test]
         public void NeutralClericDoppelgangerPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.Doppelganger, 98);
+            AssertPercentile(RaceConstants.BaseRaces.Doppelganger, 98);
         }
 
         [Test]
         public void NeutralClericEmptyPercentile()
         {
-            AssertEmpty(99, 100);
+            AssertPercentile(EmptyContent, 99, 100);
         }
     }
 }

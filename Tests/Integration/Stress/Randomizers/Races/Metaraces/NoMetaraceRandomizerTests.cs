@@ -7,7 +7,7 @@ using NUnit.Framework;
 namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
 {
     [TestFixture]
-    public class NoMetaraceRandomizerTests : StressTest
+    public class NoMetaraceRandomizerTests : StressTests
     {
         [Inject]
         public NoMetaraceRandomizer MetaraceRandomizer { get; set; }

@@ -12,10 +12,10 @@ namespace NPCGen.Generators.Randomizers.Races.Metaraces
     {
         public Boolean AllowNoMetarace { get; set; }
 
-        private IPercentileResultProvider percentileResultProvider;
-        private ILevelAdjustmentsProvider levelAdjustmentsProvider;
+        private IPercentileSelector percentileResultProvider;
+        private ILevelAdjustmentsSelector levelAdjustmentsProvider;
 
-        public BaseMetarace(IPercentileResultProvider percentileResultProvider, ILevelAdjustmentsProvider levelAdjustmentsProvider)
+        public BaseMetarace(IPercentileSelector percentileResultProvider, ILevelAdjustmentsSelector levelAdjustmentsProvider)
         {
             this.percentileResultProvider = percentileResultProvider;
             this.levelAdjustmentsProvider = levelAdjustmentsProvider;

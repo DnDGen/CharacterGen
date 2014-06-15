@@ -54,4 +54,9 @@
     <content>Ogre</content>
     <upper>95</upper>
   </object>
+    <object>
+        <lower>96</lower>
+        <content></content>
+        <upper>100</upper>
+    </object>
 </percentile>

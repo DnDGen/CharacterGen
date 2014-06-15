@@ -9,10 +9,10 @@ using NUnit.Framework;
 namespace NPCGen.Tests.Integration.Tables.Stats
 {
     [TestFixture]
-    public class StrengthStatAdjustmentsTests : IntegrationTest
+    public class StrengthStatAdjustmentsTests : IntegrationTests
     {
         [Inject]
-        public IAdjustmentXmlParser AdjustmentXmlParser { get; set; }
+        public IAdjustmentMapper AdjustmentXmlParser { get; set; }
 
         private Dictionary<String, Int32> adjustments;
 

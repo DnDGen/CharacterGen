@@ -10,10 +10,10 @@ namespace NPCGen.Generators.Randomizers.Races.BaseRaces
 {
     public abstract class BaseBaseRace : IBaseRaceRandomizer
     {
-        private IPercentileResultProvider percentileResultProvider;
-        private ILevelAdjustmentsProvider levelAdjustmentProvider;
+        private IPercentileSelector percentileResultProvider;
+        private ILevelAdjustmentsSelector levelAdjustmentProvider;
 
-        public BaseBaseRace(IPercentileResultProvider percentileResultProvider, ILevelAdjustmentsProvider levelAdjustmentProvider)
+        public BaseBaseRace(IPercentileSelector percentileResultProvider, ILevelAdjustmentsSelector levelAdjustmentProvider)
         {
             this.percentileResultProvider = percentileResultProvider;
             this.levelAdjustmentProvider = levelAdjustmentProvider;

@@ -1,4 +1,5 @@
-﻿using NPCGen.Core.Data.Races;
+﻿using System;
+using NPCGen.Common.Races;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Tables.Races.BaseRaces.Neutral
@@ -6,52 +7,51 @@ namespace NPCGen.Tests.Integration.Tables.Races.BaseRaces.Neutral
     [TestFixture]
     public class NeutralMonkBaseRacesTests : PercentileTests
     {
-        [SetUp]
-        public void Setup()
+        protected override String tableName
         {
-            tableName = "NeutralMonkBaseRaces";
+            get { return "NeutralMonkBaseRaces"; }
         }
 
         [Test]
         public void NeutralMonkHighElfPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.HighElf, 1, 2);
+            AssertPercentile(RaceConstants.BaseRaces.HighElf, 1, 2);
         }
 
         [Test]
         public void NeutralMonkWoodElfPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.WoodElf, 3);
+            AssertPercentile(RaceConstants.BaseRaces.WoodElf, 3);
         }
 
         [Test]
         public void NeutralMonkHalfElfPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.HalfElf, 4, 13);
+            AssertPercentile(RaceConstants.BaseRaces.HalfElf, 4, 13);
         }
 
         [Test]
         public void NeutralMonkLightfootHalflingPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.LightfootHalfling, 14);
+            AssertPercentile(RaceConstants.BaseRaces.LightfootHalfling, 14);
         }
 
         [Test]
         public void NeutralMonkDeepHalflingPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.DeepHalfling, 15);
+            AssertPercentile(RaceConstants.BaseRaces.DeepHalfling, 15);
         }
 
         [Test]
         public void NeutralMonkHalfOrcPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.HalfOrc, 16, 25);
+            AssertPercentile(RaceConstants.BaseRaces.HalfOrc, 16, 25);
         }
 
         [Test]
         public void NeutralMonkHumanPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.Human, 26, 100);
+            AssertPercentile(RaceConstants.BaseRaces.Human, 26, 100);
         }
     }
 }

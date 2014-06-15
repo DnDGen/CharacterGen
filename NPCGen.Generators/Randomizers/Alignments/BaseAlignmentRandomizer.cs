@@ -12,11 +12,11 @@ namespace NPCGen.Generators.Randomizers.Alignments
     public abstract class BaseAlignmentRandomizer : IAlignmentRandomizer
     {
         private IDice dice;
-        private IPercentileResultProvider percentileResultProvider;
+        private IPercentileSelector percentileResultProvider;
 
         private const String table = "AlignmentGoodness";
 
-        public BaseAlignmentRandomizer(IDice dice, IPercentileResultProvider percentileResultProvider)
+        public BaseAlignmentRandomizer(IDice dice, IPercentileSelector percentileResultProvider)
         {
             this.dice = dice;
             this.percentileResultProvider = percentileResultProvider;

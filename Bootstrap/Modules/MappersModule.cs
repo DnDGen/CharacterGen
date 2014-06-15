@@ -14,10 +14,10 @@ namespace NPCGen.Bootstrap.Modules
     {
         public override void Load()
         {
-            Bind<IAdjustmentXmlParser>().To<AdjustmentXmlParser>();
-            Bind<ILanguagesXmlParser>().To<LanguagesXmlParser>();
-            Bind<IPercentileXmlParser>().To<PercentileXmlParser>();
-            Bind<IStatPriorityXmlParser>().To<StatPriorityXmlParser>();
+            Bind<IAdjustmentMapper>().To<AdjustmentXmlMapper>();
+            Bind<ILanguagesMapper>().To<LanguagesXmlMapper>();
+            Bind<IPercentileMapper>().To<PercentileXmlMapper>();
+            Bind<IStatPriorityMapper>().To<StatPriorityXmlMapper>();
         }
     }
 }

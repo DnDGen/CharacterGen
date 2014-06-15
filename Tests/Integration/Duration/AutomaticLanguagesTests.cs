@@ -11,10 +11,10 @@ using NUnit.Framework;
 namespace NPCGen.Tests.Integration.Tables
 {
     [TestFixture]
-    public class AutomaticLanguagesTests : IntegrationTest
+    public class AutomaticLanguagesTests : IntegrationTests
     {
         [Inject]
-        public ILanguagesXmlParser LanguagesXmlParser { get; set; }
+        public ILanguagesMapper LanguagesXmlParser { get; set; }
 
         private Dictionary<String, IEnumerable<String>> languages;
 

@@ -9,31 +9,31 @@ namespace NPCGen.Tests.Integration.Bootstrap.Modules
         [Test]
         public void LanguageProvidersAreNotGeneratedAsSingletons()
         {
-            AssertNotSingleton<ILanguageProvider>();
+            AssertNotSingleton<ILanguagesSelector>();
         }
 
         [Test]
         public void LevelAdjustmentsProvidersAreNotGeneratedAsSingletons()
         {
-            AssertNotSingleton<ILevelAdjustmentsProvider>();
+            AssertNotSingleton<ILevelAdjustmentsSelector>();
         }
 
         [Test]
-        public void PercentileResultProvidersAreGeneratedAsSingletons()
+        public void PercentileResultProvidersAreNotGeneratedAsSingletons()
         {
-            AssertNotSingleton<IPercentileResultProvider>();
+            AssertNotSingleton<IPercentileSelector>();
         }
 
         [Test]
         public void StatPriorityProvidersAreNotGeneratedAsSingletons()
         {
-            AssertNotSingleton<IStatPriorityProvider>();
+            AssertNotSingleton<IStatPrioritySelector>();
         }
 
         [Test]
         public void StatAdjustmentsProvidersAreNotGeneratedAsSingletons()
         {
-            AssertNotSingleton<IStatAdjustmentsProvider>();
+            AssertNotSingleton<IStatAdjustmentsSelector>();
         }
     }
 }

@@ -19,7 +19,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Alignments
         public void Setup()
         {
             var mockDice = new Mock<IDice>();
-            var mockPercentileResultProvider = new Mock<IPercentileResultProvider>();
+            var mockPercentileResultProvider = new Mock<IPercentileSelector>();
             mockPercentileResultProvider.Setup(p => p.GetAllResults(It.IsAny<String>())).Returns(AlignmentConstants.GetGoodnesses());
 
             var randomizer = new NonChaoticAlignmentRandomizer(mockDice.Object, mockPercentileResultProvider.Object);

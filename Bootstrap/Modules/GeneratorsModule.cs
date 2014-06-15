@@ -16,14 +16,14 @@ namespace NPCGen.Bootstrap.Modules
     {
         public override void Load()
         {
-            Bind<IAlignmentFactory>().To<AlignmentFactory>();
-            Bind<ICharacterClassFactory>().To<CharacterClassFactory>();
-            Bind<ICharacterFactory>().To<CharacterFactory>();
-            Bind<IHitPointsFactory>().To<HitPointsFactory>();
-            Bind<ILanguageFactory>().To<LanguageFactory>();
-            Bind<IRaceFactory>().To<RaceFactory>();
+            Bind<IAlignmentGenerator>().To<AlignmentGenerator>();
+            Bind<ICharacterClassGenerator>().To<CharacterClassGenerator>();
+            Bind<ICharacterGenerator>().To<CharacterGenerator>();
+            Bind<IHitPointsGenerator>().To<HitPointsGenerator>();
+            Bind<ILanguageGenerator>().To<LanguageGenerator>();
+            Bind<IRaceGenerator>().To<RaceGenerator>();
             Bind<IRandomizerVerifier>().To<RandomizerVerifier>();
-            Bind<IStatsFactory>().To<StatsFactory>();
+            Bind<IStatsGenerator>().To<StatsGenerator>();
         }
     }
 }

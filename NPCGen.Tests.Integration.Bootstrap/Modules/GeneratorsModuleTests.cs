@@ -10,37 +10,37 @@ namespace NPCGen.Tests.Integration.Bootstrap.Modules
         [Test]
         public void AlignmentFactoriesAreNotGeneratedAsSingletons()
         {
-            AssertNotSingleton<IAlignmentFactory>();
+            AssertNotSingleton<IAlignmentGenerator>();
         }
 
         [Test]
         public void CharacterFactoriesAreNotGeneratedAsSingletons()
         {
-            AssertNotSingleton<ICharacterFactory>();
+            AssertNotSingleton<ICharacterGenerator>();
         }
 
         [Test]
         public void CharacterClassFactoriesAreNotGeneratedAsSingletons()
         {
-            AssertNotSingleton<ICharacterClassFactory>();
+            AssertNotSingleton<ICharacterClassGenerator>();
         }
 
         [Test]
         public void HitPointsFactoriesAreNotGeneratedAsSingletons()
         {
-            AssertNotSingleton<IHitPointsFactory>();
+            AssertNotSingleton<IHitPointsGenerator>();
         }
 
         [Test]
         public void LanguageFactoriesAreNotGeneratedAsSingletons()
         {
-            AssertNotSingleton<ILanguageFactory>();
+            AssertNotSingleton<ILanguageGenerator>();
         }
 
         [Test]
         public void RaceFactoriesAreNotGeneratedAsSingletons()
         {
-            AssertNotSingleton<IRaceFactory>();
+            AssertNotSingleton<IRaceGenerator>();
         }
 
         [Test]
@@ -52,7 +52,7 @@ namespace NPCGen.Tests.Integration.Bootstrap.Modules
         [Test]
         public void StatsFactoriesAreNotGeneratedAsSingletons()
         {
-            AssertNotSingleton<IStatsFactory>();
+            AssertNotSingleton<IStatsGenerator>();
         }
     }
 }

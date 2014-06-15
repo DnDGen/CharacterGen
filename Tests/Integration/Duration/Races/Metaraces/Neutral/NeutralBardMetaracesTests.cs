@@ -1,4 +1,5 @@
-﻿using NPCGen.Core.Data.Races;
+﻿using System;
+using NPCGen.Common.Races;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Tables.Races.Metaraces.Neutral
@@ -6,28 +7,27 @@ namespace NPCGen.Tests.Integration.Tables.Races.Metaraces.Neutral
     [TestFixture]
     public class NeutralBardMetaracesTests : PercentileTests
     {
-        [SetUp]
-        public void Setup()
+        protected override String tableName
         {
-            tableName = "NeutralBardMetaraces";
+            get { return "NeutralBardMetaraces"; }
         }
 
         [Test]
         public void NeutralBardEmptyPercentile()
         {
-            AssertEmpty(1, 98);
+            AssertPercentile(EmptyContent, 1, 98);
         }
 
         [Test]
         public void NeutralBardWereboarPercentile()
         {
-            AssertContent(RaceConstants.Metaraces.Wereboar, 99);
+            AssertPercentile(RaceConstants.Metaraces.Wereboar, 99);
         }
 
         [Test]
         public void NeutralBardWeretigerPercentile()
         {
-            AssertContent(RaceConstants.Metaraces.Weretiger, 100);
+            AssertPercentile(RaceConstants.Metaraces.Weretiger, 100);
         }
     }
 }

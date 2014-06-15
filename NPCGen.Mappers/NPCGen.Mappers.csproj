@@ -39,10 +39,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdjustmentXmlParser.cs" />
-    <Compile Include="LanguagesXmlParser.cs" />
-    <Compile Include="PercentileXmlParser.cs" />
-    <Compile Include="StatPriorityXmlParser.cs" />
+    <Compile Include="AdjustmentXmlMapper.cs" />
+    <Compile Include="LanguagesXmlMapper.cs" />
+    <Compile Include="PercentileXmlMapper.cs" />
+    <Compile Include="StatPriorityXmlMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

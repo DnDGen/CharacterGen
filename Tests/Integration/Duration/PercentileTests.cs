@@ -9,10 +9,10 @@ using NUnit.Framework;
 namespace NPCGen.Tests.Integration.Tables
 {
     [TestFixture]
-    public abstract class PercentileTests : IntegrationTest
+    public abstract class PercentileTests : IntegrationTests
     {
         [Inject]
-        public IPercentileXmlParser PercentileMapper { get; set; }
+        public IPercentileMapper PercentileMapper { get; set; }
 
         protected const String EmptyContent = "";
 
@@ -27,7 +27,7 @@ namespace NPCGen.Tests.Integration.Tables
         }
 
         [SetUp]
-        public void Setup()
+        public void PercentileSetup()
         {
             table = PercentileMapper.Parse(tableName);
         }

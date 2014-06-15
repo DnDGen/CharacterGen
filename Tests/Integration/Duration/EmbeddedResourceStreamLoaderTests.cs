@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Xml;
 using Ninject;
+using NPCGen.Common.Alignments;
 using NPCGen.Tables.Interfaces;
 using NPCGen.Tests.Integration.Common;
 using NUnit.Framework;
@@ -10,7 +11,7 @@ using NUnit.Framework;
 namespace NPCGen.Tests.Integration.Tables
 {
     [TestFixture]
-    public class EmbeddedResourceStreamLoaderTests : IntegrationTest
+    public class EmbeddedResourceStreamLoaderTests : IntegrationTests
     {
         [Inject]
         public IStreamLoader StreamLoader { get; set; }
@@ -18,30 +19,24 @@ namespace NPCGen.Tests.Integration.Tables
         [Test]
         public void GetsFileIfItIsAnEmbeddedResource()
         {
-            var table = LoadStreamOf("Level1Coins.xml");
+            var table = Load("AlignmentGoodness.xml");
 
-            for (var i = 1; i <= 14; i++)
-                Assert.That(table[i], Is.Empty);
+            for (var i = 1; i <= 20; i++)
+                Assert.That(table[i], Is.EqualTo(AlignmentConstants.Good));
 
-            for (var i = 15; i <= 29; i++)
-                Assert.That(table[i], Is.EqualTo("Copper,1d6*1000"));
+            for (var i = 21; i <= 50; i++)
+                Assert.That(table[i], Is.EqualTo(AlignmentConstants.Neutral));
 
-            for (var i = 30; i <= 52; i++)
-                Assert.That(table[i], Is.EqualTo("Silver,1d8*100"));
-
-            for (var i = 53; i <= 95; i++)
-                Assert.That(table[i], Is.EqualTo("Gold,2d8*10"));
-
-            for (var i = 96; i <= 100; i++)
-                Assert.That(table[i], Is.EqualTo("Platinum,1d4*10"));
+            for (var i = 51; i <= 100; i++)
+                Assert.That(table[i], Is.EqualTo(AlignmentConstants.Evil));
         }
 
-        private Dictionary<Int32, String> LoadStreamOf(String filename)
+        private Dictionary<Int32, String> Load(String filename)
         {
             var table = new Dictionary<Int32, String>();
             var xmlDocument = new XmlDocument();
 
-            using (var stream = StreamLoader.LoadStream(filename))
+            using (var stream = StreamLoader.LoadFor(filename))
                 xmlDocument.Load(stream);
 
             var objects = xmlDocument.DocumentElement.ChildNodes;
@@ -61,39 +56,19 @@ namespace NPCGen.Tests.Integration.Tables
         [Test]
         public void ThrowErrorIfFileIsNotFormattedCorrectly()
         {
-            Assert.That(() => StreamLoader.LoadStream("invalid filename"), Throws.ArgumentException.With.Message.EqualTo("\"invalid filename\" is not a valid file"));
+            Assert.That(() => StreamLoader.LoadFor("invalid filename"), Throws.ArgumentException.With.Message.EqualTo("\"invalid filename\" is not a valid file"));
         }
 
         [Test]
         public void ThrowErrorIfFileIsNotAnEmbeddedResource()
         {
-            Assert.That(() => StreamLoader.LoadStream("invalid filename.xml"), Throws.InstanceOf<FileNotFoundException>().With.Message.EqualTo("invalid filename.xml"));
+            Assert.That(() => StreamLoader.LoadFor("invalid filename.xml"), Throws.InstanceOf<FileNotFoundException>().With.Message.EqualTo("invalid filename.xml"));
         }
 
         [Test]
         public void MatchWholeFileName()
         {
-            Assert.That(() => StreamLoader.LoadStream("Coins.xml"), Throws.InstanceOf<FileNotFoundException>().With.Message.EqualTo("Coins.xml"));
-        }
-
-        [Test]
-        public void DifferentiateAgainstDifferentFilesWithSimilarFilenameEndings()
-        {
-            var table = LoadStreamOf("SpellTypes.xml");
-
-            for (var i = 1; i <= 70; i++)
-                Assert.That(table[i], Is.EqualTo("Arcane"));
-
-            for (var i = 71; i <= 100; i++)
-                Assert.That(table[i], Is.EqualTo("Divine"));
-
-            table = LoadStreamOf("CastersShieldSpellTypes.xml");
-
-            for (var i = 1; i <= 80; i++)
-                Assert.That(table[i], Is.EqualTo("Divine"));
-
-            for (var i = 81; i <= 100; i++)
-                Assert.That(table[i], Is.EqualTo("Arcane"));
+            Assert.That(() => StreamLoader.LoadFor("Goodness.xml"), Throws.InstanceOf<FileNotFoundException>().With.Message.EqualTo("Goodness.xml"));
         }
     }
 }

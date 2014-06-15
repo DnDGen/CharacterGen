@@ -7,7 +7,7 @@ namespace NPCGen.Generators.Randomizers.CharacterClasses.ClassNames
 {
     public class SpellcasterClassNameRandomizer : BaseClassNameRandomizer
     {
-        public SpellcasterClassNameRandomizer(IPercentileResultProvider percentileResultProvider) : base(percentileResultProvider) { }
+        public SpellcasterClassNameRandomizer(IPercentileSelector percentileResultProvider) : base(percentileResultProvider) { }
 
         protected override Boolean CharacterClassIsAllowed(String characterClass, Alignment alignment)
         {

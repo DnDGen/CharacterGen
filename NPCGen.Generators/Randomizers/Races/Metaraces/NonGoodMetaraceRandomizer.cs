@@ -6,7 +6,7 @@ namespace NPCGen.Generators.Randomizers.Races.Metaraces
 {
     public class NonGoodMetaraceRandomizer : BaseMetarace
     {
-        public NonGoodMetaraceRandomizer(IPercentileResultProvider percentileResultProvider, ILevelAdjustmentsProvider levelAdjustmentsProvider)
+        public NonGoodMetaraceRandomizer(IPercentileSelector percentileResultProvider, ILevelAdjustmentsSelector levelAdjustmentsProvider)
             : base(percentileResultProvider, levelAdjustmentsProvider) { }
 
         protected override Boolean MetaraceIsAllowed(String metarace)

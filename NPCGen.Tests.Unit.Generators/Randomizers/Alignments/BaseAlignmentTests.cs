@@ -15,7 +15,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Alignments
     {
         private TestAlignmentRandomizer randomizer;
         private Mock<IDice> mockDice;
-        private Mock<IPercentileResultProvider> mockPercentileResultProvider;
+        private Mock<IPercentileSelector> mockPercentileResultProvider;
 
         [SetUp]
         public void Setup()
@@ -23,7 +23,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Alignments
             mockDice = new Mock<IDice>();
             mockDice.Setup(d => d.d3(1)).Returns(1);
 
-            mockPercentileResultProvider = new Mock<IPercentileResultProvider>();
+            mockPercentileResultProvider = new Mock<IPercentileSelector>();
             mockPercentileResultProvider.Setup(p => p.GetAllResults(It.IsAny<String>())).Returns(AlignmentConstants.GetGoodnesses());
             mockPercentileResultProvider.Setup(p => p.GetPercentileResult(It.IsAny<String>())).Returns(AlignmentConstants.Good);
 
@@ -128,7 +128,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Alignments
         {
             public String NotAllowedLawfulness { get; set; }
 
-            public TestAlignmentRandomizer(IDice dice, IPercentileResultProvider provider) : base(dice, provider) { }
+            public TestAlignmentRandomizer(IDice dice, IPercentileSelector provider) : base(dice, provider) { }
 
             protected override Boolean AlignmentIsAllowed(Alignment alignment)
             {

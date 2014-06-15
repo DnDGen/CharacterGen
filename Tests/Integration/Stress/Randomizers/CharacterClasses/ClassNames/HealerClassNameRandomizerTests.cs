@@ -11,7 +11,7 @@ using NUnit.Framework;
 namespace NPCGen.Tests.Integration.Stress.Randomizers.CharacterClasses.ClassNames
 {
     [TestFixture]
-    public class HealerClassNameRandomizerTests : StressTest
+    public class HealerClassNameRandomizerTests : StressTests
     {
         [Inject]
         public HealerClassNameRandomizer ClassNameRandomizer { get; set; }

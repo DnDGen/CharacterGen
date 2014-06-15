@@ -39,11 +39,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ILanguageProvider.cs" />
-    <Compile Include="ILevelAdjustmentsProvider.cs" />
-    <Compile Include="IPercentileResultProvider.cs" />
-    <Compile Include="IStatAdjustmentsProvider.cs" />
-    <Compile Include="IStatPriorityProvider.cs" />
+    <Compile Include="ILanguagesSelector.cs" />
+    <Compile Include="ILevelAdjustmentsSelector.cs" />
+    <Compile Include="IPercentileSelector.cs" />
+    <Compile Include="IStatAdjustmentsSelector.cs" />
+    <Compile Include="IStatPrioritySelector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

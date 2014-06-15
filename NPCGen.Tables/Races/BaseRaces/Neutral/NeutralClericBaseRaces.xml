@@ -72,4 +72,9 @@
     <content>Doppelganger</content>
     <upper>98</upper>
   </object>
+    <object>
+        <lower>99</lower>
+        <content></content>
+        <upper>100</upper>
+    </object>
 </percentile>

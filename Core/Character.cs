@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using EquipmentGen.Common;
+using EquipmentGen.Common.Items;
 using NPCGen.Common.Alignments;
 using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Races;
@@ -18,7 +20,12 @@ namespace NPCGen.Common
         public String InterestingTrait { get; set; }
         public IEnumerable<String> Languages { get; set; }
         public Race Race { get; set; }
-        public IEnumerable<Skill> Skills { get; set; }
+        public Dictionary<String, Skill> Skills { get; set; }
         public Dictionary<String, Stat> Stats { get; set; }
+        public Item PrimaryHand { get; set; }
+        public Item OffHand { get; set; }
+        public Item Armor { get; set; }
+        public Treasure Treasure { get; set; }
+        public Dictionary<Int32, IEnumerable<String>> Spells { get; set; }
     }
 }

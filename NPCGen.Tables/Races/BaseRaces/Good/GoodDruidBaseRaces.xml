@@ -28,4 +28,9 @@
   <object><lower>48</lower><content>Tallfellow Halfling</content><upper>48</upper></object>
   <object><lower>49</lower><content>Half-Orc</content><upper>49</upper></object>
   <object><lower>50</lower><content>Human</content><upper>99</upper></object>
+    <object>
+        <lower>100</lower>
+        <content></content>
+        <upper>100</upper>
+    </object>
 </percentile>

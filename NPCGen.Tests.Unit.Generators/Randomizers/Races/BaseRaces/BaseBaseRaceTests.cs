@@ -14,8 +14,8 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
     public class BaseBaseRaceTests
     {
         private TestBaseRaceRandomizer randomizer;
-        private Mock<IPercentileResultProvider> mockPercentileResultProvider;
-        private Mock<ILevelAdjustmentsProvider> mockLevelAdjustmentsProvider;
+        private Mock<IPercentileSelector> mockPercentileResultProvider;
+        private Mock<ILevelAdjustmentsSelector> mockLevelAdjustmentsProvider;
 
         private String firstBaseRace = "first base race";
         private String secondBaseRace = "second base race";
@@ -26,7 +26,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         public void Setup()
         {
             var baseRaces = new[] { firstBaseRace, secondBaseRace, String.Empty };
-            mockPercentileResultProvider = new Mock<IPercentileResultProvider>();
+            mockPercentileResultProvider = new Mock<IPercentileSelector>();
             mockPercentileResultProvider.Setup(p => p.GetAllResults(It.IsAny<String>())).Returns(baseRaces);
             mockPercentileResultProvider.Setup(p => p.GetPercentileResult(It.IsAny<String>())).Returns(firstBaseRace);
 
@@ -34,7 +34,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
             foreach(var baseRace in baseRaces)
                 adjustments.Add(baseRace, 0);
 
-            mockLevelAdjustmentsProvider = new Mock<ILevelAdjustmentsProvider>();
+            mockLevelAdjustmentsProvider = new Mock<ILevelAdjustmentsSelector>();
             mockLevelAdjustmentsProvider.Setup(p => p.GetLevelAdjustments()).Returns(adjustments);
 
             prototype = new CharacterClassPrototype();
@@ -130,7 +130,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         {
             public String NotAllowedBaseRace { get; set; }
 
-            public TestBaseRaceRandomizer(IPercentileResultProvider percentileResultProvider, ILevelAdjustmentsProvider levelAdjustmentProvider)
+            public TestBaseRaceRandomizer(IPercentileSelector percentileResultProvider, ILevelAdjustmentsSelector levelAdjustmentProvider)
                 : base(percentileResultProvider, levelAdjustmentProvider) { }
 
             protected override Boolean BaseRaceIsAllowed(String baseRace)

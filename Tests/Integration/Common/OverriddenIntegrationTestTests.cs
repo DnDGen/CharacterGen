@@ -9,7 +9,7 @@ using NUnit.Framework;
 namespace NPCGen.Tests.Integration.Common
 {
     [TestFixture]
-    public class OverriddenIntegrationTestTests : IntegrationTest
+    public class OverriddenIntegrationTestTests : IntegrationTests
     {
         [Inject]
         public IClassNameRandomizer ClassNameRandomizer { get; set; }

@@ -1,4 +1,5 @@
-﻿using NPCGen.Core.Data.Races;
+﻿using System;
+using NPCGen.Common.Races;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Tables.Races.BaseRaces.Good
@@ -6,88 +7,87 @@ namespace NPCGen.Tests.Integration.Tables.Races.BaseRaces.Good
     [TestFixture]
     public class GoodRogueBaseRacesTests : PercentileTests
     {
-        [SetUp]
-        public void Setup()
+        protected override String tableName
         {
-            tableName = "GoodRogueBaseRaces";
+            get { return "GoodRogueBaseRaces"; }
         }
 
         [Test]
         public void GoodRogueHillDwarfPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.HillDwarf, 1, 5);
+            AssertPercentile(RaceConstants.BaseRaces.HillDwarf, 1, 5);
         }
 
         [Test]
         public void GoodRogueMountainDwarfPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.MountainDwarf, 6);
+            AssertPercentile(RaceConstants.BaseRaces.MountainDwarf, 6);
         }
 
         [Test]
         public void GoodRogueHighElfPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.HighElf, 7, 19);
+            AssertPercentile(RaceConstants.BaseRaces.HighElf, 7, 19);
         }
 
         [Test]
         public void GoodRogueForestGnomePercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.ForestGnome, 20);
+            AssertPercentile(RaceConstants.BaseRaces.ForestGnome, 20);
         }
 
         [Test]
         public void GoodRogueRockGnomeDwarfPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.RockGnome, 21, 25);
+            AssertPercentile(RaceConstants.BaseRaces.RockGnome, 21, 25);
         }
 
         [Test]
         public void GoodRogueHalfElfPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.HalfElf, 26, 35);
+            AssertPercentile(RaceConstants.BaseRaces.HalfElf, 26, 35);
         }
 
         [Test]
         public void GoodRogueLightfootHalflingPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.LightfootHalfling, 36, 60);
+            AssertPercentile(RaceConstants.BaseRaces.LightfootHalfling, 36, 60);
         }
 
         [Test]
         public void GoodRogueDeepHalflingPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.DeepHalfling, 61, 66);
+            AssertPercentile(RaceConstants.BaseRaces.DeepHalfling, 61, 66);
         }
 
         [Test]
         public void GoodRogueTallfellowHalflingPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.TallfellowHalfling, 67, 72);
+            AssertPercentile(RaceConstants.BaseRaces.TallfellowHalfling, 67, 72);
         }
 
         [Test]
         public void GoodRogueHalfOrcPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.HalfOrc, 73, 77);
+            AssertPercentile(RaceConstants.BaseRaces.HalfOrc, 73, 77);
         }
 
         [Test]
         public void GoodRogueHumanPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.Human, 78, 96);
+            AssertPercentile(RaceConstants.BaseRaces.Human, 78, 96);
         }
 
         [Test]
         public void GoodRogueSvirfneblinPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.Svirfneblin, 97);
+            AssertPercentile(RaceConstants.BaseRaces.Svirfneblin, 97);
         }
 
         [Test]
         public void GoodRogueEmptyPercentile()
         {
-            AssertEmpty(98, 100);
+            AssertPercentile(EmptyContent, 98, 100);
         }
     }
 }

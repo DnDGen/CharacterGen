@@ -1,20 +1,20 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Tables.Races.Metaraces.Evil
 {
     [TestFixture]
     public class EvilDruidMetaracesTests : PercentileTests
     {
-        [SetUp]
-        public void Setup()
+        protected override String tableName
         {
-            tableName = "EvilDruidMetaraces";
+            get { return "EvilDruidMetaraces"; }
         }
 
         [Test]
         public void EvilDruidEmptyPercentile()
         {
-            AssertEmpty(1, 100);
+            AssertPercentile(EmptyContent, 1, 100);
         }
     }
 }

@@ -23,7 +23,7 @@ namespace NPCGen.Tests.Unit.Generators.Verifiers
         private Mock<ILevelRandomizer> mockLevelRandomizer;
         private Mock<IBaseRaceRandomizer> mockBaseRaceRandomizer;
         private Mock<IMetaraceRandomizer> mockMetaraceRandomizer;
-        private Mock<ILevelAdjustmentsProvider> mockLevelAdjustmentsProvider;
+        private Mock<ILevelAdjustmentsSelector> mockLevelAdjustmentsProvider;
 
         private Alignment alignment;
         private CharacterClassPrototype characterClassPrototype;
@@ -51,7 +51,7 @@ namespace NPCGen.Tests.Unit.Generators.Verifiers
             var adjustments = new Dictionary<String, Int32>();
             adjustments.Add("base race", 0);
             adjustments.Add("metarace", 0);
-            mockLevelAdjustmentsProvider = new Mock<ILevelAdjustmentsProvider>();
+            mockLevelAdjustmentsProvider = new Mock<ILevelAdjustmentsSelector>();
             mockLevelAdjustmentsProvider.Setup(p => p.GetLevelAdjustments()).Returns(adjustments);
 
             verifier = new RandomizerVerifier(mockLevelAdjustmentsProvider.Object);

@@ -39,10 +39,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IAdjustmentXmlParser.cs" />
-    <Compile Include="ILanguagesXmlParser.cs" />
-    <Compile Include="IPercentileXmlParser.cs" />
-    <Compile Include="IStatPriorityXmlParser.cs" />
+    <Compile Include="IAdjustmentMapper.cs" />
+    <Compile Include="ILanguagesMapper.cs" />
+    <Compile Include="IPercentileMapper.cs" />
+    <Compile Include="IStatPriorityMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -45,13 +45,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AlignmentFactory.cs" />
-    <Compile Include="CharacterClassFactory.cs" />
-    <Compile Include="CharacterFactory.cs" />
-    <Compile Include="HitPointsFactory.cs" />
-    <Compile Include="LanguageFactory.cs" />
-    <Compile Include="RaceFactory.cs" />
-    <Compile Include="StatsFactory.cs" />
+    <Compile Include="AlignmentGenerator.cs" />
+    <Compile Include="CharacterClassGenerator.cs" />
+    <Compile Include="CharacterGenerator.cs" />
+    <Compile Include="HitPointsGenerator.cs" />
+    <Compile Include="LanguageGenerator.cs" />
+    <Compile Include="RaceGenerator.cs" />
+    <Compile Include="StatsGenerator.cs" />
     <Compile Include="Randomizers\Alignments\AnyAlignmentRandomizer.cs" />
     <Compile Include="Randomizers\Alignments\BaseAlignmentRandomizer.cs" />
     <Compile Include="Randomizers\Alignments\ChaoticAlignmentRandomizer.cs" />

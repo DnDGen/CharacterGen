@@ -123,6 +123,11 @@
         <upper>25</upper>
     </object>
     <object>
+        <lower>26</lower>
+        <content></content>
+        <upper>26</upper>
+    </object>
+    <object>
         <lower>27</lower>
         <content>Unusual hair color</content>
         <upper>27</upper>

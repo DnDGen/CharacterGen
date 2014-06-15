@@ -35,7 +35,7 @@
     </Reference>
     <Reference Include="D20Dice, Version=1.0.5267.24678, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\D20Dice.6.1\lib\D20Dice.dll</HintPath>
+      <HintPath>..\..\..\packages\D20Dice.6.2\lib\D20Dice.dll</HintPath>
     </Reference>
     <Reference Include="D20Dice.Bootstrap">
       <HintPath>..\..\..\packages\D20Dice.Bootstrap.6.2\lib\D20Dice.Bootstrap.dll</HintPath>
@@ -87,7 +87,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DependentDataCollection.cs" />
-    <Compile Include="IntegrationTest.cs" />
+    <Compile Include="IntegrationTests.cs" />
     <Compile Include="GenericIntegrationTestTests.cs" />
     <Compile Include="OverriddenIntegrationTestTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

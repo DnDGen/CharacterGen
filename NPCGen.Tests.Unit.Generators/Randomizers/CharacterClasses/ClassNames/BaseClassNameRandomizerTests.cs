@@ -13,7 +13,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassNames
     public class BaseClassNameRandomizerTests
     {
         private TestClassRandomizer randomizer;
-        private Mock<IPercentileResultProvider> mockPercentileResultProvider;
+        private Mock<IPercentileSelector> mockPercentileResultProvider;
         private Alignment alignment;
 
         private String firstClass = "first class";
@@ -25,7 +25,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassNames
             alignment = new Alignment();
             alignment.Goodness = AlignmentConstants.Good;
 
-            mockPercentileResultProvider = new Mock<IPercentileResultProvider>();
+            mockPercentileResultProvider = new Mock<IPercentileSelector>();
             mockPercentileResultProvider.Setup(p => p.GetAllResults(It.IsAny<String>())).Returns(new[] { firstClass, secondClass });
             mockPercentileResultProvider.Setup(p => p.GetPercentileResult(It.IsAny<String>())).Returns(firstClass);
 
@@ -105,7 +105,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassNames
         {
             public String NotAllowedClassName { get; set; }
 
-            public TestClassRandomizer(IPercentileResultProvider percentileResultProvider)
+            public TestClassRandomizer(IPercentileSelector percentileResultProvider)
                 : base(percentileResultProvider) { }
 
             protected override Boolean CharacterClassIsAllowed(String className, Alignment alignment)

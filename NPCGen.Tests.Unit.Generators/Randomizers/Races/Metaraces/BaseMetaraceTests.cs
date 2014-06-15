@@ -14,8 +14,8 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
     public class BaseMetaraceTests
     {
         private TestMetaraceRandomizer randomizer;
-        private Mock<IPercentileResultProvider> mockPercentileResultProvider;
-        private Mock<ILevelAdjustmentsProvider> mockLevelAdjustmentsProvider;
+        private Mock<IPercentileSelector> mockPercentileResultProvider;
+        private Mock<ILevelAdjustmentsSelector> mockLevelAdjustmentsProvider;
 
         private String firstMetarace = "first metarace";
         private String secondMetarace = "second metarace";
@@ -26,7 +26,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         public void Setup()
         {
             var metaraces = new[] { firstMetarace, secondMetarace, String.Empty };
-            mockPercentileResultProvider = new Mock<IPercentileResultProvider>();
+            mockPercentileResultProvider = new Mock<IPercentileSelector>();
             mockPercentileResultProvider.Setup(p => p.GetAllResults(It.IsAny<String>())).Returns(metaraces);
             mockPercentileResultProvider.Setup(p => p.GetPercentileResult(It.IsAny<String>())).Returns(firstMetarace);
 
@@ -34,7 +34,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
             foreach (var metarace in metaraces)
                 adjustments.Add(metarace, 0);
 
-            mockLevelAdjustmentsProvider = new Mock<ILevelAdjustmentsProvider>();
+            mockLevelAdjustmentsProvider = new Mock<ILevelAdjustmentsSelector>();
             mockLevelAdjustmentsProvider.Setup(p => p.GetLevelAdjustments()).Returns(adjustments);
 
             prototype = new CharacterClassPrototype();
@@ -147,7 +147,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         {
             public String NotAllowedMetarace { get; set; }
 
-            public TestMetaraceRandomizer(IPercentileResultProvider percentileResultProvider, ILevelAdjustmentsProvider levelAdjustmentsProvider)
+            public TestMetaraceRandomizer(IPercentileSelector percentileResultProvider, ILevelAdjustmentsSelector levelAdjustmentsProvider)
                 : base(percentileResultProvider, levelAdjustmentsProvider) { }
 
             protected override Boolean MetaraceIsAllowed(String metarace)

@@ -10,9 +10,9 @@ namespace NPCGen.Generators.Randomizers.CharacterClasses.ClassNames
 {
     public abstract class BaseClassNameRandomizer : IClassNameRandomizer
     {
-        private IPercentileResultProvider percentileResultProvider;
+        private IPercentileSelector percentileResultProvider;
 
-        public BaseClassNameRandomizer(IPercentileResultProvider percentileResultProvider)
+        public BaseClassNameRandomizer(IPercentileSelector percentileResultProvider)
         {
             this.percentileResultProvider = percentileResultProvider;
         }

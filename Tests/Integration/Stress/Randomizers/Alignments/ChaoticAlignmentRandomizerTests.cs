@@ -7,7 +7,7 @@ using NUnit.Framework;
 namespace NPCGen.Tests.Integration.Stress.Randomizers.Alignments
 {
     [TestFixture]
-    public class ChaoticAlignmentRandomizerTests : StressTest
+    public class ChaoticAlignmentRandomizerTests : StressTests
     {
         [Inject]
         public ChaoticAlignmentRandomizer AlignmentRandomizer { get; set; }

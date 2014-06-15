@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace NPCGen.Tests.Integration.Bootstrap
 {
     [TestFixture]
-    public abstract class BootstrapTests : IntegrationTest
+    public abstract class BootstrapTests : IntegrationTests
     {
         protected void AssertSingleton<T>()
         {

@@ -2,6 +2,11 @@
 
 <percentile>
     <object>
+        <lower>1</lower>
+        <content></content>
+        <upper>97</upper>
+    </object>
+    <object>
         <lower>98</lower>
         <content>Half-Celestial</content>
         <upper>98</upper>

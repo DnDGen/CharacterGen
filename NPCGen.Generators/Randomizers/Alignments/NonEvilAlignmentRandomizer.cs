@@ -7,7 +7,7 @@ namespace NPCGen.Generators.Randomizers.Alignments
 {
     public class NonEvilAlignmentRandomizer : BaseAlignmentRandomizer
     {
-        public NonEvilAlignmentRandomizer(IDice dice, IPercentileResultProvider provider) : base(dice, provider) { }
+        public NonEvilAlignmentRandomizer(IDice dice, IPercentileSelector provider) : base(dice, provider) { }
 
         protected override Boolean AlignmentIsAllowed(Alignment alignment)
         {

@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using Ninject;
 using NPCGen.Common.Races;
 using NPCGen.Mappers.Interfaces;
+using NPCGen.Tests.Integration.Common;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Tables.Stats
 {
     [TestFixture]
-    public class ConstitutionStatAdjustmentsTests
+    public class ConstitutionStatAdjustmentsTests : IntegrationTests
     {
         [Inject]
-        public IAdjustmentXmlParser AdjustmentXmlParser { get; set; }
+        public IAdjustmentMapper AdjustmentXmlParser { get; set; }
 
         private Dictionary<String, Int32> adjustments;
 

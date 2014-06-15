@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using Ninject;
 using NPCGen.Common.Races;
 using NPCGen.Mappers.Interfaces;
+using NPCGen.Tests.Integration.Common;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Tables.CharacterClasses
 {
     [TestFixture]
-    public class LevelAdjustmentsTests
+    public class LevelAdjustmentsTests : IntegrationTests
     {
         [Inject]
-        public IAdjustmentXmlParser AdjustmentMapper { get; set; }
+        public IAdjustmentMapper AdjustmentMapper { get; set; }
 
         private Dictionary<String, Int32> adjustments;
 

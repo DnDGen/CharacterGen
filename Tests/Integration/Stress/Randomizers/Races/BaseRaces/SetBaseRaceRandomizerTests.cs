@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
 {
     [TestFixture]
-    public class SetBaseRaceRandomizerTests : StressTest
+    public class SetBaseRaceRandomizerTests : StressTests
     {
         [Inject]
         public SetBaseRaceRandomizer BaseRaceRandomizer { get; set; }

@@ -1,20 +1,20 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Tables.Races.Metaraces.Neutral
 {
     [TestFixture]
     public class NeutralMonkMetaracesTests : PercentileTests
     {
-        [SetUp]
-        public void Setup()
+        protected override String tableName
         {
-            tableName = "NeutralMonkMetaraces";
+            get { return "NeutralMonkMetaraces"; }
         }
 
         [Test]
         public void NeutralMonkEmptyPercentile()
         {
-            AssertEmpty(1, 100);
+            AssertPercentile(EmptyContent, 1, 100);
         }
     }
 }

@@ -11,10 +11,10 @@ using NUnit.Framework;
 namespace NPCGen.Tests.Integration.Tables.Stats
 {
     [TestFixture]
-    public class StatPrioritiesTests : IntegrationTest
+    public class StatPrioritiesTests : IntegrationTests
     {
         [Inject]
-        public IStatPriorityXmlParser StatPriorityXmlParser { get; set; }
+        public IStatPriorityMapper StatPriorityXmlParser { get; set; }
 
         private Dictionary<String, StatPriority> statPriorities;
 

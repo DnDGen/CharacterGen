@@ -13,9 +13,9 @@ namespace NPCGen.Generators.Verifiers
 {
     public class RandomizerVerifier : IRandomizerVerifier
     {
-        private ILevelAdjustmentsProvider levelAdjustmentsProvider;
+        private ILevelAdjustmentsSelector levelAdjustmentsProvider;
 
-        public RandomizerVerifier(ILevelAdjustmentsProvider levelAdjustmentsProvider)
+        public RandomizerVerifier(ILevelAdjustmentsSelector levelAdjustmentsProvider)
         {
             this.levelAdjustmentsProvider = levelAdjustmentsProvider;
         }

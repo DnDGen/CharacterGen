@@ -39,13 +39,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IAlignmentFactory.cs" />
-    <Compile Include="ICharacterClassFactory.cs" />
-    <Compile Include="ICharacterFactory.cs" />
-    <Compile Include="IHitPointsFactory.cs" />
-    <Compile Include="ILanguageFactory.cs" />
-    <Compile Include="IRaceFactory.cs" />
-    <Compile Include="IStatsFactory.cs" />
+    <Compile Include="IAlignmentGenerator.cs" />
+    <Compile Include="ICharacterClassGenerator.cs" />
+    <Compile Include="ICharacterGenerator.cs" />
+    <Compile Include="IHitPointsGenerator.cs" />
+    <Compile Include="ILanguageGenerator.cs" />
+    <Compile Include="IRaceGenerator.cs" />
+    <Compile Include="IStatsGenerator.cs" />
     <Compile Include="Randomizers\Alignments\IAlignmentRandomizer.cs" />
     <Compile Include="Randomizers\CharacterClasses\IClassNameRandomizer.cs" />
     <Compile Include="Randomizers\CharacterClasses\ILevelRandomizer.cs" />

@@ -9,7 +9,7 @@ using NUnit.Framework;
 namespace NPCGen.Tests.Integration.Stress.Randomizers.Stats
 {
     [TestFixture]
-    public class RawStatsRandomizerTests : StressTest
+    public class RawStatsRandomizerTests : StressTests
     {
         [Inject]
         public RawStatsRandomizer StatsRandomizer { get; set; }

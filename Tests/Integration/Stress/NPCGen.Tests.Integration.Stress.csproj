@@ -35,6 +35,50 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Ciloci.Flee, Version=0.9.26.0, Culture=neutral, PublicKeyToken=c8526a021ef298ed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Trove.FLEE.0.9.26.0\lib\net20\Ciloci.Flee.dll</HintPath>
+    </Reference>
+    <Reference Include="D20Dice, Version=1.0.5267.24678, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\D20Dice.6.2\lib\D20Dice.dll</HintPath>
+    </Reference>
+    <Reference Include="EquipmentGen.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\EquipmentGen.1.0.0\lib\EquipmentGen.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="EquipmentGen.Generators, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\EquipmentGen.1.0.0\lib\EquipmentGen.Generators.dll</HintPath>
+    </Reference>
+    <Reference Include="EquipmentGen.Generators.Interfaces, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\EquipmentGen.1.0.0\lib\EquipmentGen.Generators.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="EquipmentGen.Mappers, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\EquipmentGen.1.0.0\lib\EquipmentGen.Mappers.dll</HintPath>
+    </Reference>
+    <Reference Include="EquipmentGen.Mappers.Interfaces, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\EquipmentGen.1.0.0\lib\EquipmentGen.Mappers.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="EquipmentGen.Selectors, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\EquipmentGen.1.0.0\lib\EquipmentGen.Selectors.dll</HintPath>
+    </Reference>
+    <Reference Include="EquipmentGen.Selectors.Interfaces, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\EquipmentGen.1.0.0\lib\EquipmentGen.Selectors.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="EquipmentGen.Tables, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\EquipmentGen.1.0.0\lib\EquipmentGen.Tables.dll</HintPath>
+    </Reference>
+    <Reference Include="EquipmentGen.Tables.Interfaces, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\EquipmentGen.1.0.0\lib\EquipmentGen.Tables.Interfaces.dll</HintPath>
+    </Reference>
     <Reference Include="Ninject">
       <HintPath>..\..\..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
     </Reference>
@@ -57,13 +101,13 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="CharacterClassFactoryTests.cs" />
-    <Compile Include="CharacterFactoryTests.cs" />
-    <Compile Include="AlignmentFactoryTests.cs" />
-    <Compile Include="HitPointsFactoryTests.cs" />
-    <Compile Include="LanguageFactoryTests.cs" />
-    <Compile Include="RaceFactoryTests.cs" />
-    <Compile Include="StatsFactoryTests.cs" />
+    <Compile Include="CharacterClassGeneratorTests.cs" />
+    <Compile Include="CharacterGeneratorTests.cs" />
+    <Compile Include="AlignmentGeneratorTests.cs" />
+    <Compile Include="HitPointsGeneratorTests.cs" />
+    <Compile Include="LanguageGeneratorTests.cs" />
+    <Compile Include="RaceGeneratorTests.cs" />
+    <Compile Include="StatsGeneratorTests.cs" />
     <Compile Include="Randomizers\Alignments\AnyAlignmentRandomizerTests.cs" />
     <Compile Include="Randomizers\Alignments\ChaoticAlignmentRandomizerTests.cs" />
     <Compile Include="Randomizers\Alignments\EvilAlignmentRandomizerTests.cs" />
@@ -119,7 +163,7 @@
     <Compile Include="Randomizers\Stats\GoodStatsRandomizerTests.cs" />
     <Compile Include="Randomizers\Stats\BestOfFourStatsRandomizerTests.cs" />
     <Compile Include="Randomizers\Stats\AverageStatsRandomizerTests.cs" />
-    <Compile Include="StressTest.cs" />
+    <Compile Include="StressTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

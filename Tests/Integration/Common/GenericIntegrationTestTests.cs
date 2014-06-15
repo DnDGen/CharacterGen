@@ -16,7 +16,7 @@ using NUnit.Framework;
 namespace NPCGen.Tests.Integration.Common
 {
     [TestFixture]
-    public class GenericIntegrationTestTests : IntegrationTest
+    public class GenericIntegrationTestTests : IntegrationTests
     {
         [Inject]
         public IAlignmentRandomizer AlignmentRandomizer { get; set; }

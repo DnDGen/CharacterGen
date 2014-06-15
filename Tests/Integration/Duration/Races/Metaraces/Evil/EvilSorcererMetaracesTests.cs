@@ -1,4 +1,5 @@
-﻿using NPCGen.Core.Data.Races;
+﻿using System;
+using NPCGen.Common.Races;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Tables.Races.Metaraces.Evil
@@ -6,40 +7,39 @@ namespace NPCGen.Tests.Integration.Tables.Races.Metaraces.Evil
     [TestFixture]
     public class EvilSorcererMetaracesTests : PercentileTests
     {
-        [SetUp]
-        public void Setup()
+        protected override String tableName
         {
-            tableName = "EvilSorcererMetaraces";
+            get { return "EvilSorcererMetaraces"; }
         }
 
         [Test]
         public void EvilSorcererEmptyPercentile()
         {
-            AssertEmpty(1, 95);
+            AssertPercentile(EmptyContent, 1, 95);
         }
 
         [Test]
         public void EvilSorcererWereratPercentile()
         {
-            AssertContent(RaceConstants.Metaraces.Wererat, 96);
+            AssertPercentile(RaceConstants.Metaraces.Wererat, 96);
         }
 
         [Test]
         public void EvilSorcererWerewolfPercentile()
         {
-            AssertContent(RaceConstants.Metaraces.Werewolf, 97);
+            AssertPercentile(RaceConstants.Metaraces.Werewolf, 97);
         }
 
         [Test]
         public void EvilSorcererHalfFiendPercentile()
         {
-            AssertContent(RaceConstants.Metaraces.HalfFiend, 98);
+            AssertPercentile(RaceConstants.Metaraces.HalfFiend, 98);
         }
 
         [Test]
         public void EvilSorcererHalfDragonPercentile()
         {
-            AssertContent(RaceConstants.Metaraces.HalfDragon, 99, 100);
+            AssertPercentile(RaceConstants.Metaraces.HalfDragon, 99, 100);
         }
     }
 }

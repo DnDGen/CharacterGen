@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace NPCGen.Tests.Integration.Stress.Randomizers.CharacterClasses.Levels
 {
     [TestFixture]
-    public class AnyLevelRandomizerTests : StressTest
+    public class AnyLevelRandomizerTests : StressTests
     {
         [Inject]
         public AnyLevelRandomizer LevelRandomizer { get; set; }

@@ -9,25 +9,25 @@ namespace NPCGen.Tests.Integration.Bootstrap.Modules
         [Test]
         public void AdjustmentXmlParsersAreNotGeneratedAsSingletons()
         {
-            AssertNotSingleton<IAdjustmentXmlParser>();
+            AssertNotSingleton<IAdjustmentMapper>();
         }
 
         [Test]
         public void LanguagesXmlParsersAreNotGeneratedAsSingletons()
         {
-            AssertNotSingleton<ILanguagesXmlParser>();
+            AssertNotSingleton<ILanguagesMapper>();
         }
 
         [Test]
         public void PercentileXmlParsersAreNotGeneratedAsSingletons()
         {
-            AssertNotSingleton<IPercentileXmlParser>();
+            AssertNotSingleton<IPercentileMapper>();
         }
 
         [Test]
         public void StatPriorityXmlParsersAreNotGeneratedAsSingletons()
         {
-            AssertNotSingleton<IStatPriorityXmlParser>();
+            AssertNotSingleton<IStatPriorityMapper>();
         }
     }
 }

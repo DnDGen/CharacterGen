@@ -1,4 +1,5 @@
-﻿using NPCGen.Core.Data.Races;
+﻿using System;
+using NPCGen.Common.Races;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Tables.Races.Metaraces.Good
@@ -6,34 +7,33 @@ namespace NPCGen.Tests.Integration.Tables.Races.Metaraces.Good
     [TestFixture]
     public class GoodSorcererMetaracesTests : PercentileTests
     {
-        [SetUp]
-        public void Setup()
+        protected override String tableName
         {
-            tableName = "GoodSorcererMetaraces";
+            get { return "GoodSorcererMetaraces"; }
         }
 
         [Test]
         public void GoodSorcererEmptyPercentile()
         {
-            AssertEmpty(1, 96);
+            AssertPercentile(EmptyContent, 1, 96);
         }
 
         [Test]
         public void GoodSorcererHalfCelestialPercentile()
         {
-            AssertContent(RaceConstants.Metaraces.HalfCelestial, 97);
+            AssertPercentile(RaceConstants.Metaraces.HalfCelestial, 97);
         }
 
         [Test]
         public void GoodSorcererHalfDragonPercentile()
         {
-            AssertContent(RaceConstants.Metaraces.HalfDragon, 98, 99);
+            AssertPercentile(RaceConstants.Metaraces.HalfDragon, 98, 99);
         }
 
         [Test]
         public void GoodSorcererWerebearPercentile()
         {
-            AssertContent(RaceConstants.Metaraces.Werebear, 100);
+            AssertPercentile(RaceConstants.Metaraces.Werebear, 100);
         }
     }
 }

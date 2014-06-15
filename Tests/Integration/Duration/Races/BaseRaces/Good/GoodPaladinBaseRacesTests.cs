@@ -1,4 +1,5 @@
-﻿using NPCGen.Core.Data.Races;
+﻿using System;
+using NPCGen.Common.Races;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Tables.Races.BaseRaces.Good
@@ -6,70 +7,69 @@ namespace NPCGen.Tests.Integration.Tables.Races.BaseRaces.Good
     [TestFixture]
     public class GoodPaladinBaseRacesTests : PercentileTests
     {
-        [SetUp]
-        public void Setup()
+        protected override String tableName
         {
-            tableName = "GoodPaladinBaseRaces";
+            get { return "GoodPaladinBaseRaces"; }
         }
 
         [Test]
         public void GoodPaladinAasimarPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.Aasimar, 1, 10);
+            AssertPercentile(RaceConstants.BaseRaces.Aasimar, 1, 10);
         }
 
         [Test]
         public void GoodPaladinHillDwarfPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.HillDwarf, 11, 20);
+            AssertPercentile(RaceConstants.BaseRaces.HillDwarf, 11, 20);
         }
 
         [Test]
         public void GoodPaladinMountainDwarfPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.MountainDwarf, 21);
+            AssertPercentile(RaceConstants.BaseRaces.MountainDwarf, 21);
         }
 
         [Test]
         public void GoodPaladinRockGnomeDwarfPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.RockGnome, 22);
+            AssertPercentile(RaceConstants.BaseRaces.RockGnome, 22);
         }
 
         [Test]
         public void GoodPaladinHalfElfPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.HalfElf, 23, 27);
+            AssertPercentile(RaceConstants.BaseRaces.HalfElf, 23, 27);
         }
 
         [Test]
         public void GoodPaladinLightfootHalflingPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.LightfootHalfling, 28);
+            AssertPercentile(RaceConstants.BaseRaces.LightfootHalfling, 28);
         }
 
         [Test]
         public void GoodPaladinDeepHalflingPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.DeepHalfling, 29);
+            AssertPercentile(RaceConstants.BaseRaces.DeepHalfling, 29);
         }
 
         [Test]
         public void GoodPaladinHalfOrcPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.HalfOrc, 30);
+            AssertPercentile(RaceConstants.BaseRaces.HalfOrc, 30);
         }
 
         [Test]
         public void GoodPaladinHumanPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.Human, 31, 97);
+            AssertPercentile(RaceConstants.BaseRaces.Human, 31, 97);
         }
 
         [Test]
         public void GoodPaladinEmptyPercentile()
         {
-            AssertEmpty(98, 100);
+            AssertPercentile(EmptyContent, 98, 100);
         }
     }
 }

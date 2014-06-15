@@ -45,11 +45,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LanguagesProvider.cs" />
-    <Compile Include="LevelAdjustmentsProvider.cs" />
-    <Compile Include="PercentileResultProvider.cs" />
-    <Compile Include="StatAdjustmentsProvider.cs" />
-    <Compile Include="StatPriorityProvider.cs" />
+    <Compile Include="LanguagesSelector.cs" />
+    <Compile Include="LevelAdjustmentsSelector.cs" />
+    <Compile Include="PercentileSelector.cs" />
+    <Compile Include="StatAdjustmentsSelector.cs" />
+    <Compile Include="StatPrioritySelector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

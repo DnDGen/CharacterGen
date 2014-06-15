@@ -10,4 +10,9 @@
   <object><lower>29</lower><content>Deep Halfling</content><upper>29</upper></object>
   <object><lower>30</lower><content>Half-Orc</content><upper>30</upper></object>
   <object><lower>31</lower><content>Human</content><upper>97</upper></object>
+    <object>
+        <lower>98</lower>
+        <content></content>
+        <upper>100</upper>
+    </object>
 </percentile>

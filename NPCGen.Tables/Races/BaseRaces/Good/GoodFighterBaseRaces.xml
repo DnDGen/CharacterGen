@@ -24,4 +24,9 @@
   <object><lower>52</lower><content>Deep Halfling</content><upper>52</upper></object>
   <object><lower>53</lower><content>Half-Orc</content><upper>57</upper></object>
   <object><lower>58</lower><content>Human</content><upper>97</upper></object>
+    <object>
+        <lower>98</lower>
+        <content></content>
+        <upper>100</upper>
+    </object>
 </percentile>

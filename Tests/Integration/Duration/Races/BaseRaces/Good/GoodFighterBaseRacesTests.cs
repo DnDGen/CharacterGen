@@ -1,4 +1,5 @@
-﻿using NPCGen.Core.Data.Races;
+﻿using System;
+using NPCGen.Common.Races;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Tables.Races.BaseRaces.Good
@@ -6,82 +7,81 @@ namespace NPCGen.Tests.Integration.Tables.Races.BaseRaces.Good
     [TestFixture]
     public class GoodFighterBaseRacesTests : PercentileTests
     {
-        [SetUp]
-        public void Setup()
+        protected override String tableName
         {
-            tableName = "GoodFighterBaseRaces";
+            get { return "GoodFighterBaseRaces"; }
         }
 
         [Test]
         public void GoodFighterDeepDwarfPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.DeepDwarf, 1, 3);
+            AssertPercentile(RaceConstants.BaseRaces.DeepDwarf, 1, 3);
         }
 
         [Test]
         public void GoodFighterHillDwarfPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.HillDwarf, 4, 33);
+            AssertPercentile(RaceConstants.BaseRaces.HillDwarf, 4, 33);
         }
 
         [Test]
         public void GoodFighterMountainDwarfPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.MountainDwarf, 34, 41);
+            AssertPercentile(RaceConstants.BaseRaces.MountainDwarf, 34, 41);
         }
 
         [Test]
         public void GoodFighterGrayElfPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.GrayElf, 42);
+            AssertPercentile(RaceConstants.BaseRaces.GrayElf, 42);
         }
 
         [Test]
         public void GoodFighterHighElfPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.HighElf, 43, 47);
+            AssertPercentile(RaceConstants.BaseRaces.HighElf, 43, 47);
         }
 
         [Test]
         public void GoodFighterRockGnomePercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.RockGnome, 48);
+            AssertPercentile(RaceConstants.BaseRaces.RockGnome, 48);
         }
 
         [Test]
         public void GoodFighterHalfElfPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.HalfElf, 49, 50);
+            AssertPercentile(RaceConstants.BaseRaces.HalfElf, 49, 50);
         }
 
         [Test]
         public void GoodFighterLightfootHalflingPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.LightfootHalfling, 51);
+            AssertPercentile(RaceConstants.BaseRaces.LightfootHalfling, 51);
         }
 
         [Test]
         public void GoodFighterDeepHalflingPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.DeepHalfling, 52);
+            AssertPercentile(RaceConstants.BaseRaces.DeepHalfling, 52);
         }
 
         [Test]
         public void GoodFighterHalfOrcPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.HalfOrc, 53, 57);
+            AssertPercentile(RaceConstants.BaseRaces.HalfOrc, 53, 57);
         }
 
         [Test]
         public void GoodFighterHumanPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.Human, 58, 97);
+            AssertPercentile(RaceConstants.BaseRaces.Human, 58, 97);
         }
 
         [Test]
         public void GoodFighterEmptyPercentile()
         {
-            AssertEmpty(98, 100);
+            AssertPercentile(EmptyContent, 98, 100);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using NPCGen.Core.Data.Races;
+﻿using System;
+using NPCGen.Common.Races;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Tables.Races.BaseRaces.Neutral
@@ -6,76 +7,75 @@ namespace NPCGen.Tests.Integration.Tables.Races.BaseRaces.Neutral
     [TestFixture]
     public class NeutralWizardBaseRacesTests : PercentileTests
     {
-        [SetUp]
-        public void Setup()
+        protected override String tableName
         {
-            tableName = "NeutralWizardBaseRaces";
+            get { return "NeutralWizardBaseRaces"; }
         }
 
         [Test]
         public void NeutralWizardGrayElfPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.GrayElf, 1);
+            AssertPercentile(RaceConstants.BaseRaces.GrayElf, 1);
         }
 
         [Test]
         public void NeutralWizardHighElfPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.HighElf, 2, 26);
+            AssertPercentile(RaceConstants.BaseRaces.HighElf, 2, 26);
         }
 
         [Test]
         public void NeutralWizardWoodElfPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.WoodElf, 27, 28);
+            AssertPercentile(RaceConstants.BaseRaces.WoodElf, 27, 28);
         }
 
         [Test]
         public void NeutralWizardRockGnomePercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.RockGnome, 29);
+            AssertPercentile(RaceConstants.BaseRaces.RockGnome, 29);
         }
 
         [Test]
         public void NeutralWizardHalfElfPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.HalfElf, 30, 44);
+            AssertPercentile(RaceConstants.BaseRaces.HalfElf, 30, 44);
         }
 
         [Test]
         public void NeutralWizardLightfootHalflingPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.LightfootHalfling, 45, 47);
+            AssertPercentile(RaceConstants.BaseRaces.LightfootHalfling, 45, 47);
         }
 
         [Test]
         public void NeutralWizardTallfellowHalflingPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.TallfellowHalfling, 48, 49);
+            AssertPercentile(RaceConstants.BaseRaces.TallfellowHalfling, 48, 49);
         }
 
         [Test]
         public void NeutralWizardHalfOrcPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.HalfOrc, 50);
+            AssertPercentile(RaceConstants.BaseRaces.HalfOrc, 50);
         }
 
         [Test]
         public void NeutralWizardHumanPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.Human, 51, 97);
+            AssertPercentile(RaceConstants.BaseRaces.Human, 51, 97);
         }
 
         [Test]
         public void NeutralWizardDoppelgangerPercentile()
         {
-            AssertContent(RaceConstants.BaseRaces.Doppelganger, 98);
+            AssertPercentile(RaceConstants.BaseRaces.Doppelganger, 98);
         }
 
         [Test]
         public void NeutralWizardEmptyPercentile()
         {
-            AssertEmpty(99, 100);
+            AssertPercentile(EmptyContent, 99, 100);
         }
     }
 }
