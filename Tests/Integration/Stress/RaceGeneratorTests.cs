@@ -10,19 +10,19 @@ namespace NPCGen.Tests.Integration.Stress
     public class RaceGeneratorTests : StressTests
     {
         [Inject]
-        public IRaceGenerator RaceFactory { get; set; }
+        public IRaceGenerator RaceGenerator { get; set; }
         [Inject]
         public IBaseRaceRandomizer BaseRaceRandomizer { get; set; }
         [Inject]
         public IMetaraceRandomizer MetaraceRandomizer { get; set; }
 
         [Test]
-        public void RaceFactoryReturnsRace()
+        public void RaceGeneratorReturnsRace()
         {
             while (TestShouldKeepRunning())
             {
                 var data = GetNewInstanceOf<DependentDataCollection>();
-                var race = RaceFactory.CreateWith(data.Alignment.Goodness, data.CharacterClassPrototype, BaseRaceRandomizer, MetaraceRandomizer);
+                var race = RaceGenerator.CreateWith(data.Alignment.Goodness, data.CharacterClassPrototype, BaseRaceRandomizer, MetaraceRandomizer);
                 Assert.That(race, Is.Not.Null);
             }
 
@@ -30,12 +30,12 @@ namespace NPCGen.Tests.Integration.Stress
         }
 
         [Test]
-        public void RaceFactoryReturnsRaceWithBaseRace()
+        public void RaceGeneratorReturnsRaceWithBaseRace()
         {
             while (TestShouldKeepRunning())
             {
                 var data = GetNewInstanceOf<DependentDataCollection>();
-                var race = RaceFactory.CreateWith(data.Alignment.Goodness, data.CharacterClassPrototype, BaseRaceRandomizer, MetaraceRandomizer);
+                var race = RaceGenerator.CreateWith(data.Alignment.Goodness, data.CharacterClassPrototype, BaseRaceRandomizer, MetaraceRandomizer);
                 Assert.That(race.BaseRace, Is.Not.Null);
                 Assert.That(race.BaseRace, Is.Not.Empty);
             }
@@ -44,12 +44,12 @@ namespace NPCGen.Tests.Integration.Stress
         }
 
         [Test]
-        public void RaceFactoryReturnsRaceWithMetarace()
+        public void RaceGeneratorReturnsRaceWithMetarace()
         {
             while (TestShouldKeepRunning())
             {
                 var data = GetNewInstanceOf<DependentDataCollection>();
-                var race = RaceFactory.CreateWith(data.Alignment.Goodness, data.CharacterClassPrototype, BaseRaceRandomizer, MetaraceRandomizer);
+                var race = RaceGenerator.CreateWith(data.Alignment.Goodness, data.CharacterClassPrototype, BaseRaceRandomizer, MetaraceRandomizer);
                 Assert.That(race.Metarace, Is.Not.Null);
             }
 

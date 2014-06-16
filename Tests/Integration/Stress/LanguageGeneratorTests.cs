@@ -12,16 +12,16 @@ namespace NPCGen.Tests.Integration.Stress
     public class LanguageGeneratorTests : StressTests
     {
         [Inject]
-        public ILanguageGenerator LanguageFactory { get; set; }
+        public ILanguageGenerator LanguageGenerator { get; set; }
 
         [Test]
-        public void LanguageFactoryReturnsLanguages()
+        public void LanguageGeneratorReturnsLanguages()
         {
             while (TestShouldKeepRunning())
             {
                 var data = GetNewInstanceOf<DependentDataCollection>();
                 var stats = GetNewInstanceOf<Dictionary<String, Stat>>();
-                var languages = LanguageFactory.CreateWith(data.Race, data.CharacterClass.ClassName, stats[StatConstants.Intelligence].Bonus);
+                var languages = LanguageGenerator.CreateWith(data.Race, data.CharacterClass.ClassName, stats[StatConstants.Intelligence].Bonus);
                 Assert.That(languages, Is.Not.Null);
             }
 

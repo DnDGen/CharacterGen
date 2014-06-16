@@ -1059,7 +1059,7 @@ namespace NPCGen.Characters
                         case 12:
                         case 13: return "Toad: wide-angle vision";
                         case 14:
-                        case 15: return "Weasel: Superior hearing & very superior olfactory power";
+                        case 15: return "Weasel: Superior hearing & very superior olGenerator power";
                         case 16:
                         case 17: 
                         case 18: 

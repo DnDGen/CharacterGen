@@ -19,7 +19,7 @@ namespace NPCGen.Tests.Integration.Stress
     public class CharacterGeneratorTests : StressTests
     {
         [Inject]
-        public ICharacterGenerator CharacterFactory { get; set; }
+        public ICharacterGenerator CharacterGenerator { get; set; }
         [Inject]
         public IAlignmentRandomizer AlignmentRandomizer { get; set; }
         [Inject]
@@ -44,7 +44,7 @@ namespace NPCGen.Tests.Integration.Stress
 
             while (TestShouldKeepRunning())
             {
-                var character = CharacterFactory.CreateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
+                var character = CharacterGenerator.CreateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
                     MetaraceRandomizer, StatsRandomizer);
 
                 Assert.That(goodnesses, Contains.Item(character.Alignment.Goodness));

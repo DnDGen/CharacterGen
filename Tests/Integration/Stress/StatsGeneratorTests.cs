@@ -11,17 +11,17 @@ namespace NPCGen.Tests.Integration.Stress
     public class StatsGeneratorTests : StressTests
     {
         [Inject]
-        public IStatsGenerator StatsFactory { get; set; }
+        public IStatsGenerator StatsGenerator { get; set; }
         [Inject]
         public IStatsRandomizer StatsRandomizer { get; set; }
 
         [Test]
-        public void StatsFactoryReturnsStats()
+        public void StatsGeneratorReturnsStats()
         {
             while (TestShouldKeepRunning())
             {
                 var data = GetNewInstanceOf<DependentDataCollection>();
-                var stats = StatsFactory.CreateWith(StatsRandomizer, data.CharacterClass, data.Race);
+                var stats = StatsGenerator.CreateWith(StatsRandomizer, data.CharacterClass, data.Race);
                 Assert.That(stats, Is.Not.Null);
             }
 
@@ -29,14 +29,14 @@ namespace NPCGen.Tests.Integration.Stress
         }
 
         [Test]
-        public void StatsFactoryReturnsStatsWithAllStats()
+        public void StatsGeneratorReturnsStatsWithAllStats()
         {
             var statNames = StatConstants.GetStats();
 
             while (TestShouldKeepRunning())
             {
                 var data = GetNewInstanceOf<DependentDataCollection>();
-                var stats = StatsFactory.CreateWith(StatsRandomizer, data.CharacterClass, data.Race);
+                var stats = StatsGenerator.CreateWith(StatsRandomizer, data.CharacterClass, data.Race);
 
                 foreach (var statName in statNames)
                 {

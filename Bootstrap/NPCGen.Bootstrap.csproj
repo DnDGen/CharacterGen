@@ -50,45 +50,41 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core\NPCGen.Common.csproj">
-      <Project>{83f2b67c-3eb0-4e46-aad5-bafaa2e35689}</Project>
-      <Name>NPCGen.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NPCGen.Generators.Interfaces\NPCGen.Generators.Interfaces.csproj">
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NPCGen\Generators\NPCGen.Generators.Interfaces\NPCGen.Generators.Interfaces.csproj">
       <Project>{7f262696-287c-4308-8bb3-c6563b7f4878}</Project>
       <Name>NPCGen.Generators.Interfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NPCGen.Generators\NPCGen.Generators.csproj">
+    <ProjectReference Include="..\NPCGen\Generators\NPCGen.Generators\NPCGen.Generators.csproj">
       <Project>{8611f130-c7bf-4ef9-be78-e2624c58861f}</Project>
       <Name>NPCGen.Generators</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NPCGen.Mappers.Interfaces\NPCGen.Mappers.Interfaces.csproj">
+    <ProjectReference Include="..\NPCGen\Mappers\NPCGen.Mappers.Interfaces\NPCGen.Mappers.Interfaces.csproj">
       <Project>{0bc49af8-8c54-46b4-80a4-9cda1c14282c}</Project>
       <Name>NPCGen.Mappers.Interfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NPCGen.Mappers\NPCGen.Mappers.csproj">
+    <ProjectReference Include="..\NPCGen\Mappers\NPCGen.Mappers\NPCGen.Mappers.csproj">
       <Project>{6b1ee880-6c92-43be-9941-1836bc188159}</Project>
       <Name>NPCGen.Mappers</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NPCGen.Selectors.Interfaces\NPCGen.Selectors.Interfaces.csproj">
+    <ProjectReference Include="..\NPCGen\Selectors\NPCGen.Selectors.Interfaces\NPCGen.Selectors.Interfaces.csproj">
       <Project>{98848dc9-c901-4189-8559-54d68215f3a7}</Project>
       <Name>NPCGen.Selectors.Interfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NPCGen.Selectors\NPCGen.Selectors.csproj">
+    <ProjectReference Include="..\NPCGen\Selectors\NPCGen.Selectors\NPCGen.Selectors.csproj">
       <Project>{6c924e33-08a7-4f1e-98e0-9e03eb614237}</Project>
       <Name>NPCGen.Selectors</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NPCGen.Tables.Interfaces\NPCGen.Tables.Interfaces.csproj">
+    <ProjectReference Include="..\NPCGen\Tables\NPCGen.Tables.Interfaces\NPCGen.Tables.Interfaces.csproj">
       <Project>{b0abd6a7-a3f9-456b-b820-0e90426c5fa8}</Project>
       <Name>NPCGen.Tables.Interfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NPCGen.Tables\NPCGen.Tables.csproj">
+    <ProjectReference Include="..\NPCGen\Tables\NPCGen.Tables\NPCGen.Tables.csproj">
       <Project>{5a8ac6cd-4caf-4c7d-af02-001b3663e751}</Project>
       <Name>NPCGen.Tables</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

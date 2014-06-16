@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{77A67270-F5FB-40C9-B5BC-E0D3595F511A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NPCGen.Tests.Unit.Generators</RootNamespace>
+    <AssemblyName>NPCGen.Tests.Unit.Generators</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Ciloci.Flee">
+      <HintPath>..\packages\Trove.FLEE.0.9.26.0\lib\net20\Ciloci.Flee.dll</HintPath>
+    </Reference>
+    <Reference Include="D20Dice">
+      <HintPath>..\packages\D20Dice.6.2\lib\D20Dice.dll</HintPath>
+    </Reference>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.2.1402.2112\lib\net40\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AlignmentGeneratorTests.cs" />
+    <Compile Include="CharacterClassGeneratorTests.cs" />
+    <Compile Include="CharacterGeneratorTests.cs" />
+    <Compile Include="HitPointsGeneratorTests.cs" />
+    <Compile Include="LanguageGeneratorTests.cs" />
+    <Compile Include="RaceGeneratorTests.cs" />
+    <Compile Include="StatsGeneratorTests.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Randomizers\Alignments\AnyAlignmentRandomizerTests.cs" />
+    <Compile Include="Randomizers\Alignments\BaseAlignmentTests.cs" />
+    <Compile Include="Randomizers\Alignments\ChaoticAlignmentRandomizerTests.cs" />
+    <Compile Include="Randomizers\Alignments\EvilAlignmentRandomizerTests.cs" />
+    <Compile Include="Randomizers\Alignments\GoodAlignmentRandomizerTests.cs" />
+    <Compile Include="Randomizers\Alignments\LawfulAlignmentRandomizerTests.cs" />
+    <Compile Include="Randomizers\Alignments\NeutralAlignmentRandomizerTests.cs" />
+    <Compile Include="Randomizers\Alignments\NonChaoticAlignmentRandomizerTests.cs" />
+    <Compile Include="Randomizers\Alignments\NonEvilAlignmentRandomizerTests.cs" />
+    <Compile Include="Randomizers\Alignments\NonGoodAlignmentRandomizerTests.cs" />
+    <Compile Include="Randomizers\Alignments\NonLawfulAlignmentRandomizerTests.cs" />
+    <Compile Include="Randomizers\Alignments\NonNeutralAlignmentRandomizerTests.cs" />
+    <Compile Include="Randomizers\Alignments\SetAlignmentRandomizerTests.cs" />
+    <Compile Include="Randomizers\CharacterClasses\ClassNames\AnyClassNameRandomizerTests.cs" />
+    <Compile Include="Randomizers\CharacterClasses\ClassNames\BaseClassNameRandomizerTests.cs" />
+    <Compile Include="Randomizers\CharacterClasses\ClassNames\ClassNameRandomizerTests.cs" />
+    <Compile Include="Randomizers\CharacterClasses\ClassNames\HealerClassNameRandomizerTests.cs" />
+    <Compile Include="Randomizers\CharacterClasses\ClassNames\MageClassNameRandomizerTests.cs" />
+    <Compile Include="Randomizers\CharacterClasses\ClassNames\NonSpellcasterClassNameRandomizerTests.cs" />
+    <Compile Include="Randomizers\CharacterClasses\ClassNames\SetClassNameRandomizerTests.cs" />
+    <Compile Include="Randomizers\CharacterClasses\ClassNames\SpellcasterClassNameRandomizerTests.cs" />
+    <Compile Include="Randomizers\CharacterClasses\ClassNames\StealthClassNameRandomizerTests.cs" />
+    <Compile Include="Randomizers\CharacterClasses\ClassNames\WarriorClassNameRandomizerTests.cs" />
+    <Compile Include="Randomizers\CharacterClasses\Levels\AnyLevelRandomizerTests.cs" />
+    <Compile Include="Randomizers\CharacterClasses\Levels\HighLevelRandomizerTests.cs" />
+    <Compile Include="Randomizers\CharacterClasses\Levels\LowLevelRandomizerTests.cs" />
+    <Compile Include="Randomizers\CharacterClasses\Levels\MediumLevelRandomizerTests.cs" />
+    <Compile Include="Randomizers\CharacterClasses\Levels\RangedLevelRandomizerTests.cs" />
+    <Compile Include="Randomizers\CharacterClasses\Levels\SetLevelRandomizerTests.cs" />
+    <Compile Include="Randomizers\CharacterClasses\Levels\VeryHighLevelRandomizerTests.cs" />
+    <Compile Include="Randomizers\Races\BaseRaces\AnyBaseRaceRandomizerTests.cs" />
+    <Compile Include="Randomizers\Races\BaseRaces\BaseBaseRaceTests.cs" />
+    <Compile Include="Randomizers\Races\BaseRaces\BaseRaceRandomizerTests.cs" />
+    <Compile Include="Randomizers\Races\BaseRaces\EvilBaseRaceRandomizerTests.cs" />
+    <Compile Include="Randomizers\Races\BaseRaces\GoodBaseRaceRandomizerTests.cs" />
+    <Compile Include="Randomizers\Races\BaseRaces\NeutralBaseRaceRandomizerTests.cs" />
+    <Compile Include="Randomizers\Races\BaseRaces\NonEvilBaseRaceRandomizerTests.cs" />
+    <Compile Include="Randomizers\Races\BaseRaces\NonGoodBaseRaceRandomizerTests.cs" />
+    <Compile Include="Randomizers\Races\BaseRaces\NonNeutralBaseRaceRandomizerTests.cs" />
+    <Compile Include="Randomizers\Races\BaseRaces\NonStandardBaseRaceRandomizerTests.cs" />
+    <Compile Include="Randomizers\Races\BaseRaces\SetBaseRaceRandomizerTests.cs" />
+    <Compile Include="Randomizers\Races\BaseRaces\StandardBaseRaceRandomizerTests.cs" />
+    <Compile Include="Randomizers\Races\Metaraces\AnyMetaraceRandomizerTests.cs" />
+    <Compile Include="Randomizers\Races\Metaraces\BaseMetaraceTests.cs" />
+    <Compile Include="Randomizers\Races\Metaraces\EvilMetaraceRandomizerTests.cs" />
+    <Compile Include="Randomizers\Races\Metaraces\GeneticMetaraceRandomizerTests.cs" />
+    <Compile Include="Randomizers\Races\Metaraces\GoodMetaraceRandomizerTests.cs" />
+    <Compile Include="Randomizers\Races\Metaraces\LycanthropeMetaraceRandomizerTests.cs" />
+    <Compile Include="Randomizers\Races\Metaraces\MetaraceRandomizerTests.cs" />
+    <Compile Include="Randomizers\Races\Metaraces\NeutralMetaraceRandomizerTests.cs" />
+    <Compile Include="Randomizers\Races\Metaraces\NoMetaraceRandomizerTests.cs" />
+    <Compile Include="Randomizers\Races\Metaraces\NonEvilMetaraceRandomizerTests.cs" />
+    <Compile Include="Randomizers\Races\Metaraces\NonGoodMetaraceRandomizerTests.cs" />
+    <Compile Include="Randomizers\Races\Metaraces\NonNeutralMetaraceRandomizerTests.cs" />
+    <Compile Include="Randomizers\Races\Metaraces\SetMetaraceRandomizerTests.cs" />
+    <Compile Include="Randomizers\Races\RaceRandomizerTests.cs" />
+    <Compile Include="Randomizers\Stats\AverageStatsRandomizerTests.cs" />
+    <Compile Include="Randomizers\Stats\BaseStatsRandomizerTests.cs" />
+    <Compile Include="Randomizers\Stats\BestOfFourStatsRandomizerTests.cs" />
+    <Compile Include="Randomizers\Stats\GoodStatsRandomizerTests.cs" />
+    <Compile Include="Randomizers\Stats\HeroicStatsRandomizerTests.cs" />
+    <Compile Include="Randomizers\Stats\OnesAsSixesStatsRandomizerTests.cs" />
+    <Compile Include="Randomizers\Stats\PoorStatsRandomizerTests.cs" />
+    <Compile Include="Randomizers\Stats\RawStatsRandomizerTests.cs" />
+    <Compile Include="Randomizers\Stats\TwoTenSidedDiceStatsRandomizerTests.cs" />
+    <Compile Include="Verifiers\RandomizerVerifierTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\NPCGen\Common\NPCGen.Common.csproj">
+      <Project>{83f2b67c-3eb0-4e46-aad5-bafaa2e35689}</Project>
+      <Name>NPCGen.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\NPCGen\Generators\NPCGen.Generators.Interfaces\NPCGen.Generators.Interfaces.csproj">
+      <Project>{7f262696-287c-4308-8bb3-c6563b7f4878}</Project>
+      <Name>NPCGen.Generators.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\NPCGen\Generators\NPCGen.Generators\NPCGen.Generators.csproj">
+      <Project>{8611f130-c7bf-4ef9-be78-e2624c58861f}</Project>
+      <Name>NPCGen.Generators</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\NPCGen\Selectors\NPCGen.Selectors.Interfaces\NPCGen.Selectors.Interfaces.csproj">
+      <Project>{98848dc9-c901-4189-8559-54d68215f3a7}</Project>
+      <Name>NPCGen.Selectors.Interfaces</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

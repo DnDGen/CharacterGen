@@ -12,16 +12,16 @@ namespace NPCGen.Tests.Integration.Stress
     public class HitPointsGeneratorTests : StressTests
     {
         [Inject]
-        public IHitPointsGenerator HitPointsFactory { get; set; }
+        public IHitPointsGenerator HitPointsGenerator { get; set; }
 
         [Test]
-        public void HitPointsFactoryReturnsHitPointsGreaterThanZero()
+        public void HitPointsGeneratorReturnsHitPointsGreaterThanZero()
         {
             while (TestShouldKeepRunning())
             {
                 var data = GetNewInstanceOf<DependentDataCollection>();
                 var stats = GetNewInstanceOf<Dictionary<String, Stat>>();
-                var hitPoints = HitPointsFactory.CreateWith(data.CharacterClass, stats[StatConstants.Constitution].Bonus, data.Race);
+                var hitPoints = HitPointsGenerator.CreateWith(data.CharacterClass, stats[StatConstants.Constitution].Bonus, data.Race);
                 Assert.That(hitPoints, Is.GreaterThan(0));
             }
 

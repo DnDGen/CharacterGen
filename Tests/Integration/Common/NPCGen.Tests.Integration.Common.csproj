@@ -100,19 +100,19 @@
       <Project>{18c602e6-823c-4cec-85d3-5edddca545db}</Project>
       <Name>NPCGen.Bootstrap</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Core\NPCGen.Common.csproj">
+    <ProjectReference Include="..\..\..\NPCGen\Common\NPCGen.Common.csproj">
       <Project>{83f2b67c-3eb0-4e46-aad5-bafaa2e35689}</Project>
       <Name>NPCGen.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\NPCGen.Generators.Interfaces\NPCGen.Generators.Interfaces.csproj">
+    <ProjectReference Include="..\..\..\NPCGen\Generators\NPCGen.Generators.Interfaces\NPCGen.Generators.Interfaces.csproj">
       <Project>{7f262696-287c-4308-8bb3-c6563b7f4878}</Project>
       <Name>NPCGen.Generators.Interfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\NPCGen.Generators\NPCGen.Generators.csproj">
+    <ProjectReference Include="..\..\..\NPCGen\Generators\NPCGen.Generators\NPCGen.Generators.csproj">
       <Project>{8611f130-c7bf-4ef9-be78-e2624c58861f}</Project>
       <Name>NPCGen.Generators</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\NPCGen.Selectors.Interfaces\NPCGen.Selectors.Interfaces.csproj">
+    <ProjectReference Include="..\..\..\NPCGen\Selectors\NPCGen.Selectors.Interfaces\NPCGen.Selectors.Interfaces.csproj">
       <Project>{98848dc9-c901-4189-8559-54d68215f3a7}</Project>
       <Name>NPCGen.Selectors.Interfaces</Name>
     </ProjectReference>

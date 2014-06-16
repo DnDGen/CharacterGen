@@ -84,17 +84,17 @@ namespace NPCGen.Tests.Integration.Common
 
         private Dictionary<String, Stat> GetStats(IKernel kernel)
         {
-            var factory = kernel.Get<IStatsGenerator>();
+            var Generator = kernel.Get<IStatsGenerator>();
             var randomizer = kernel.Get<IStatsRandomizer>();
             var data = kernel.Get<DependentDataCollection>();
 
-            return factory.CreateWith(randomizer, data.CharacterClass, data.Race);
+            return Generator.CreateWith(randomizer, data.CharacterClass, data.Race);
         }
 
         private Alignment GenerateAlignment(IKernel kernel)
         {
             Alignment alignment;
-            var factory = kernel.Get<IAlignmentGenerator>();
+            var Generator = kernel.Get<IAlignmentGenerator>();
             var verifier = kernel.Get<IRandomizerVerifier>();
             var alignmentRandomizer = kernel.Get<IAlignmentRandomizer>();
             var classNameRandomizer = kernel.Get<IClassNameRandomizer>();
@@ -102,7 +102,7 @@ namespace NPCGen.Tests.Integration.Common
             var baseRaceRandomizer = kernel.Get<IBaseRaceRandomizer>();
             var metaraceRandomizer = kernel.Get<IMetaraceRandomizer>();
 
-            do alignment = factory.CreateWith(alignmentRandomizer);
+            do alignment = Generator.CreateWith(alignmentRandomizer);
             while (!verifier.VerifyAlignmentCompatibility(alignment, classNameRandomizer, levelRandomizer, baseRaceRandomizer, metaraceRandomizer));
 
             return alignment;
@@ -111,14 +111,14 @@ namespace NPCGen.Tests.Integration.Common
         private CharacterClassPrototype GenerateCharacterClassPrototype(IKernel kernel, Alignment alignment)
         {
             CharacterClassPrototype prototype;
-            var factory = kernel.Get<ICharacterClassGenerator>();
+            var Generator = kernel.Get<ICharacterClassGenerator>();
             var verifier = kernel.Get<IRandomizerVerifier>();
             var classNameRandomizer = kernel.Get<IClassNameRandomizer>();
             var levelRandomizer = kernel.Get<ILevelRandomizer>();
             var baseRaceRandomizer = kernel.Get<IBaseRaceRandomizer>();
             var metaraceRandomizer = kernel.Get<IMetaraceRandomizer>();
 
-            do prototype = factory.CreatePrototypeWith(alignment, levelRandomizer, classNameRandomizer);
+            do prototype = Generator.CreatePrototypeWith(alignment, levelRandomizer, classNameRandomizer);
             while (!verifier.VerifyCharacterClassCompatibility(alignment.Goodness, prototype, baseRaceRandomizer, metaraceRandomizer));
 
             return prototype;
@@ -128,11 +128,11 @@ namespace NPCGen.Tests.Integration.Common
         {
             Race race;
             var levelAdjustments = kernel.Get<ILevelAdjustmentsSelector>().GetLevelAdjustments();
-            var factory = kernel.Get<IRaceGenerator>();
+            var Generator = kernel.Get<IRaceGenerator>();
             var baseRaceRandomizer = kernel.Get<IBaseRaceRandomizer>();
             var metaraceRandomizer = kernel.Get<IMetaraceRandomizer>();
 
-            do race = factory.CreateWith(alignment.Goodness, prototype, baseRaceRandomizer, metaraceRandomizer);
+            do race = Generator.CreateWith(alignment.Goodness, prototype, baseRaceRandomizer, metaraceRandomizer);
             while (levelAdjustments[race.BaseRace] + levelAdjustments[race.Metarace] >= prototype.Level);
 
             return race;
@@ -151,8 +151,8 @@ namespace NPCGen.Tests.Integration.Common
             collection.CharacterClassPrototype = GenerateCharacterClassPrototype(kernel, collection.Alignment);
             collection.Race = GenerateRace(kernel, collection.Alignment, collection.CharacterClassPrototype);
 
-            var factory = kernel.Get<ICharacterClassGenerator>();
-            collection.CharacterClass = factory.CreateWith(collection.CharacterClassPrototype);
+            var Generator = kernel.Get<ICharacterClassGenerator>();
+            collection.CharacterClass = Generator.CreateWith(collection.CharacterClassPrototype);
 
             return collection;
         }

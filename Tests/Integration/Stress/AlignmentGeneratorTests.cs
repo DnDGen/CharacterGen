@@ -11,16 +11,16 @@ namespace NPCGen.Tests.Integration.Stress
     public class AlignmentGeneratorTests : StressTests
     {
         [Inject]
-        public IAlignmentGenerator AlignmentFactory { get; set; }
+        public IAlignmentGenerator AlignmentGenerator { get; set; }
         [Inject]
         public IAlignmentRandomizer AlignmentRandomizer { get; set; }
 
         [Test]
-        public void AlignmentFactoryReturnsAlignment()
+        public void AlignmentGeneratorReturnsAlignment()
         {
             while (TestShouldKeepRunning())
             {
-                var alignment = AlignmentFactory.CreateWith(AlignmentRandomizer);
+                var alignment = AlignmentGenerator.CreateWith(AlignmentRandomizer);
                 Assert.That(alignment, Is.Not.Null);
             }
 
@@ -28,13 +28,13 @@ namespace NPCGen.Tests.Integration.Stress
         }
 
         [Test]
-        public void AlignmentFactoryReturnsAlignmentWithGoodness()
+        public void AlignmentGeneratorReturnsAlignmentWithGoodness()
         {
             var goodnesses = AlignmentConstants.GetGoodnesses();
 
             while (TestShouldKeepRunning())
             {
-                var alignment = AlignmentFactory.CreateWith(AlignmentRandomizer);
+                var alignment = AlignmentGenerator.CreateWith(AlignmentRandomizer);
                 Assert.That(goodnesses.Contains(alignment.Goodness), Is.True);
             }
 
@@ -42,13 +42,13 @@ namespace NPCGen.Tests.Integration.Stress
         }
 
         [Test]
-        public void AlignmentFactoryReturnsAlignmentWithLawfulness()
+        public void AlignmentGeneratorReturnsAlignmentWithLawfulness()
         {
             var lawfulnesses = AlignmentConstants.GetLawfulnesses();
 
             while (TestShouldKeepRunning())
             {
-                var alignment = AlignmentFactory.CreateWith(AlignmentRandomizer);
+                var alignment = AlignmentGenerator.CreateWith(AlignmentRandomizer);
                 Assert.That(lawfulnesses.Contains(alignment.Lawfulness), Is.True);
             }
 

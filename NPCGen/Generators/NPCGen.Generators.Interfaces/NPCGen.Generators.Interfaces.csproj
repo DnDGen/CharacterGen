@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7F262696-287C-4308-8BB3-C6563B7F4878}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NPCGen.Generators.Interfaces</RootNamespace>
+    <AssemblyName>NPCGen.Generators.Interfaces</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="IAlignmentGenerator.cs" />
+    <Compile Include="ICharacterClassGenerator.cs" />
+    <Compile Include="ICharacterGenerator.cs" />
+    <Compile Include="IHitPointsGenerator.cs" />
+    <Compile Include="ILanguageGenerator.cs" />
+    <Compile Include="IRaceGenerator.cs" />
+    <Compile Include="IStatsGenerator.cs" />
+    <Compile Include="Randomizers\Alignments\IAlignmentRandomizer.cs" />
+    <Compile Include="Randomizers\CharacterClasses\IClassNameRandomizer.cs" />
+    <Compile Include="Randomizers\CharacterClasses\ILevelRandomizer.cs" />
+    <Compile Include="Randomizers\Races\IBaseRaceRandomizer.cs" />
+    <Compile Include="Randomizers\Races\IMetaraceRandomizer.cs" />
+    <Compile Include="Randomizers\Stats\IStatsRandomizer.cs" />
+    <Compile Include="Verifiers\Exceptions\IncompatibleRandomizersException.cs" />
+    <Compile Include="Verifiers\IRandomizerVerifier.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\NPCGen.Common.csproj">
+      <Project>{83f2b67c-3eb0-4e46-aad5-bafaa2e35689}</Project>
+      <Name>NPCGen.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
