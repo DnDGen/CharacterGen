@@ -34,7 +34,7 @@
       <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
-      <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
+      <HintPath>..\..\..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -64,6 +64,10 @@
     <ProjectReference Include="..\..\..\NPCGen\Mappers\NPCGen.Mappers.Interfaces\NPCGen.Mappers.Interfaces.csproj">
       <Project>{0bc49af8-8c54-46b4-80a4-9cda1c14282c}</Project>
       <Name>NPCGen.Mappers.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\NPCGen\Mappers\NPCGen.Mappers\NPCGen.Mappers.csproj">
+      <Project>{6b1ee880-6c92-43be-9941-1836bc188159}</Project>
+      <Name>NPCGen.Mappers</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\NPCGen\Selectors\NPCGen.Selectors.Interfaces\NPCGen.Selectors.Interfaces.csproj">
       <Project>{98848dc9-c901-4189-8559-54d68215f3a7}</Project>

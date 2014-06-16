@@ -1,4 +1,5 @@
 ﻿using NPCGen.Mappers.Interfaces;
+using NPCGen.Mappers.Percentiles;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Bootstrap.Modules
@@ -15,13 +16,20 @@ namespace NPCGen.Tests.Integration.Bootstrap.Modules
         [Test]
         public void LanguagesXmlMappersAreNotGeneratedAsSingletons()
         {
-            AssertNotSingleton<ILanguagesMapper>();
+            AssertNotSingleton<ICollectionsMapper>();
         }
 
         [Test]
-        public void PercentileXmlMappersAreNotGeneratedAsSingletons()
+        public void PercentileXmlMappersAreGeneratedAsSingletons()
         {
-            AssertNotSingleton<IPercentileMapper>();
+            AssertSingleton<IPercentileMapper>();
+        }
+
+        [Test]
+        public void PercentileXmlMappersAreDecorated()
+        {
+            var mapper = GetNewInstanceOf<IPercentileMapper>();
+            Assert.That(mapper, Is.InstanceOf<PercentileMapperCachingProxy>());
         }
 
         [Test]

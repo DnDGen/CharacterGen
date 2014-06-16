@@ -4,6 +4,7 @@ using System.Linq;
 using Moq;
 using NPCGen.Mappers;
 using NPCGen.Mappers.Interfaces;
+using NPCGen.Mappers.Percentiles;
 using NPCGen.Tables.Interfaces;
 using NUnit.Framework;
 

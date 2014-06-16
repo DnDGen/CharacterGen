@@ -11,9 +11,9 @@ namespace NPCGen.Selectors
 {
     public class LanguagesSelector : ILanguagesSelector
     {
-        private ILanguagesMapper languagesXmlMapper;
+        private ICollectionsMapper languagesXmlMapper;
 
-        public LanguagesSelector(ILanguagesMapper languagesXmlMapper)
+        public LanguagesSelector(ICollectionsMapper languagesXmlMapper)
         {
             this.languagesXmlMapper = languagesXmlMapper;
         }

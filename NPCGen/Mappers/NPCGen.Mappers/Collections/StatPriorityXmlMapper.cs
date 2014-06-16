@@ -5,7 +5,7 @@ using NPCGen.Common;
 using NPCGen.Mappers.Interfaces;
 using NPCGen.Tables.Interfaces;
 
-namespace NPCGen.Mappers
+namespace NPCGen.Mappers.Collections
 {
     public class StatPriorityXmlMapper : IStatPriorityMapper
     {

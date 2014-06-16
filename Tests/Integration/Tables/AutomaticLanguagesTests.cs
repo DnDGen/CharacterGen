@@ -1,408 +1,98 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Ninject;
 using NPCGen.Common;
 using NPCGen.Common.Races;
-using NPCGen.Mappers.Interfaces;
-using NPCGen.Tests.Integration.Common;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Tables
 {
     [TestFixture]
-    public class AutomaticLanguagesTests : IntegrationTests
+    public class AutomaticLanguagesTests : CollectionTests
     {
-        [Inject]
-        public ILanguagesMapper LanguagesXmlMapper { get; set; }
-
-        private Dictionary<String, IEnumerable<String>> languages;
-
-        [SetUp]
-        public void Setup()
+        protected override String tableName
         {
-            languages = LanguagesXmlMapper.Map("AutomaticLanguages.xml");
+            get { return "AutomaticLanguages"; }
         }
 
-        [Test]
-        public void AasimarAutomaticLanguages()
+        [TestCase(RaceConstants.BaseRaces.Aasimar, LanguageConstants.Common,
+                                                   LanguageConstants.Celestial)]
+        [TestCase(RaceConstants.BaseRaces.Bugbear, LanguageConstants.Common,
+                                                   LanguageConstants.Dwarven)]
+        [TestCase(RaceConstants.BaseRaces.Derro, LanguageConstants.Common,
+                                                 LanguageConstants.Celestial)]
+        [TestCase(RaceConstants.BaseRaces.Doppelganger, LanguageConstants.Common)]
+        [TestCase(RaceConstants.BaseRaces.Drow, LanguageConstants.Common,
+                                                LanguageConstants.Elven,
+                                                LanguageConstants.Undercommon)]
+        [TestCase(RaceConstants.BaseRaces.DuergarDwarf, LanguageConstants.Common,
+                                                        LanguageConstants.Dwarven,
+                                                        LanguageConstants.Undercommon)]
+        [TestCase(RaceConstants.BaseRaces.DeepDwarf, LanguageConstants.Common,
+                                                     LanguageConstants.Dwarven)]
+        [TestCase(RaceConstants.BaseRaces.HillDwarf, LanguageConstants.Common,
+                                                     LanguageConstants.Dwarven)]
+        [TestCase(RaceConstants.BaseRaces.MountainDwarf, LanguageConstants.Common,
+                                                         LanguageConstants.Dwarven)]
+        [TestCase(RaceConstants.BaseRaces.GrayElf, LanguageConstants.Common,
+                                                   LanguageConstants.Elven)]
+        [TestCase(RaceConstants.BaseRaces.HighElf, LanguageConstants.Common,
+                                                   LanguageConstants.Elven)]
+        [TestCase(RaceConstants.BaseRaces.WildElf, LanguageConstants.Common,
+                                                   LanguageConstants.Elven)]
+        [TestCase(RaceConstants.BaseRaces.WoodElf, LanguageConstants.Common,
+                                                   LanguageConstants.Elven)]
+        [TestCase(RaceConstants.BaseRaces.Gnoll, LanguageConstants.Gnoll)]
+        [TestCase(RaceConstants.BaseRaces.ForestGnome, LanguageConstants.Common,
+                                                       LanguageConstants.Elven,
+                                                       LanguageConstants.Gnome,
+                                                       LanguageConstants.Sylvan)]
+        [TestCase(RaceConstants.BaseRaces.RockGnome, LanguageConstants.Common,
+                                                     LanguageConstants.Gnome)]
+        [TestCase(RaceConstants.BaseRaces.Svirfneblin, LanguageConstants.Common,
+                                                       LanguageConstants.Gnome,
+                                                       LanguageConstants.Undercommon)]
+        [TestCase(RaceConstants.BaseRaces.Goblin, LanguageConstants.Common,
+                                                  LanguageConstants.Goblin)]
+        [TestCase(RaceConstants.Metaraces.HalfCelestial, LanguageConstants.Celestial)]
+        [TestCase(RaceConstants.Metaraces.HalfDragon, LanguageConstants.Draconic)]
+        [TestCase(RaceConstants.BaseRaces.HalfElf, LanguageConstants.Common,
+                                                   LanguageConstants.Elven)]
+        [TestCase(RaceConstants.Metaraces.HalfFiend, LanguageConstants.Infernal)]
+        [TestCase(RaceConstants.BaseRaces.HalfOrc, LanguageConstants.Common,
+                                                   LanguageConstants.Orc)]
+        [TestCase(RaceConstants.BaseRaces.DeepHalfling, LanguageConstants.Common,
+                                                        LanguageConstants.Halfling)]
+        [TestCase(RaceConstants.BaseRaces.LightfootHalfling, LanguageConstants.Common,
+                                                             LanguageConstants.Halfling)]
+        [TestCase(RaceConstants.BaseRaces.TallfellowHalfling, LanguageConstants.Common,
+                                                              LanguageConstants.Halfling)]
+        [TestCase(RaceConstants.BaseRaces.Hobgoblin, LanguageConstants.Common,
+                                                     LanguageConstants.Goblin)]
+        [TestCase(RaceConstants.BaseRaces.Human, LanguageConstants.Common)]
+        [TestCase(RaceConstants.BaseRaces.Kobold, LanguageConstants.Draconic)]
+        [TestCase(RaceConstants.BaseRaces.Lizardfolk, LanguageConstants.Common,
+                                                      LanguageConstants.Draconic)]
+        [TestCase(RaceConstants.BaseRaces.MindFlayer, LanguageConstants.Common,
+                                                      LanguageConstants.Undercommon)]
+        [TestCase(RaceConstants.BaseRaces.Minotaur, LanguageConstants.Common,
+                                                    LanguageConstants.Giant)]
+        [TestCase(RaceConstants.BaseRaces.Ogre, LanguageConstants.Common,
+                                                LanguageConstants.Giant)]
+        [TestCase(RaceConstants.BaseRaces.OgreMage, LanguageConstants.Common,
+                                                    LanguageConstants.Giant)]
+        [TestCase(RaceConstants.BaseRaces.Orc, LanguageConstants.Common,
+                                               LanguageConstants.Orc)]
+        [TestCase(RaceConstants.BaseRaces.Tiefling, LanguageConstants.Common,
+                                                    LanguageConstants.Infernal)]
+        [TestCase(RaceConstants.BaseRaces.Troglodyte, LanguageConstants.Common,
+                                                      LanguageConstants.Draconic)]
+        [TestCase(RaceConstants.Metaraces.Werebear)]
+        [TestCase(RaceConstants.Metaraces.Wereboar)]
+        [TestCase(RaceConstants.Metaraces.Wererat)]
+        [TestCase(RaceConstants.Metaraces.Weretiger)]
+        [TestCase(RaceConstants.Metaraces.Werewolf)]
+        public void Collection(String name, params String[] languages)
         {
-            var automaticLanguages = languages[RaceConstants.BaseRaces.Aasimar];
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Common), Is.True);
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Celestial), Is.True);
-            Assert.That(automaticLanguages.Count(), Is.EqualTo(2));
-        }
-
-        [Test]
-        public void BugbearAutomaticLanguages()
-        {
-            var automaticLanguages = languages[RaceConstants.BaseRaces.Bugbear];
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Common), Is.True);
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Goblin), Is.True);
-            Assert.That(automaticLanguages.Count(), Is.EqualTo(2));
-        }
-
-        [Test]
-        public void DerroAutomaticLanguages()
-        {
-            var automaticLanguages = languages[RaceConstants.BaseRaces.Derro];
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Common), Is.True);
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Dwarven), Is.True);
-            Assert.That(automaticLanguages.Count(), Is.EqualTo(2));
-        }
-
-        [Test]
-        public void DoppelgangerAutomaticLanguages()
-        {
-            var automaticLanguages = languages[RaceConstants.BaseRaces.Doppelganger];
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Common), Is.True);
-            Assert.That(automaticLanguages.Count(), Is.EqualTo(1));
-        }
-
-        [Test]
-        public void DrowAutomaticLanguages()
-        {
-            var automaticLanguages = languages[RaceConstants.BaseRaces.Drow];
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Common), Is.True);
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Elven), Is.True);
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Undercommon), Is.True);
-            Assert.That(automaticLanguages.Count(), Is.EqualTo(3));
-        }
-
-        [Test]
-        public void DuergarDwarfAutomaticLanguages()
-        {
-            var automaticLanguages = languages[RaceConstants.BaseRaces.DuergarDwarf];
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Common), Is.True);
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Dwarven), Is.True);
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Undercommon), Is.True);
-            Assert.That(automaticLanguages.Count(), Is.EqualTo(3));
-        }
-
-        [Test]
-        public void DeepDwarfAutomaticLanguages()
-        {
-            var automaticLanguages = languages[RaceConstants.BaseRaces.DeepDwarf];
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Common), Is.True);
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Dwarven), Is.True);
-            Assert.That(automaticLanguages.Count(), Is.EqualTo(2));
-        }
-
-        [Test]
-        public void HillDwarfAutomaticLanguages()
-        {
-            var automaticLanguages = languages[RaceConstants.BaseRaces.HillDwarf];
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Common), Is.True);
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Dwarven), Is.True);
-            Assert.That(automaticLanguages.Count(), Is.EqualTo(2));
-        }
-
-        [Test]
-        public void MountainDwarfAutomaticLanguages()
-        {
-            var automaticLanguages = languages[RaceConstants.BaseRaces.MountainDwarf];
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Common), Is.True);
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Dwarven), Is.True);
-            Assert.That(automaticLanguages.Count(), Is.EqualTo(2));
-        }
-
-        [Test]
-        public void GrayElfAutomaticLanguages()
-        {
-            var automaticLanguages = languages[RaceConstants.BaseRaces.GrayElf];
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Common), Is.True);
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Elven), Is.True);
-            Assert.That(automaticLanguages.Count(), Is.EqualTo(2));
-        }
-
-        [Test]
-        public void HighElfAutomaticLanguages()
-        {
-            var automaticLanguages = languages[RaceConstants.BaseRaces.HighElf];
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Common), Is.True);
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Elven), Is.True);
-            Assert.That(automaticLanguages.Count(), Is.EqualTo(2));
-        }
-
-        [Test]
-        public void WildElfAutomaticLanguages()
-        {
-            var automaticLanguages = languages[RaceConstants.BaseRaces.WildElf];
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Common), Is.True);
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Elven), Is.True);
-            Assert.That(automaticLanguages.Count(), Is.EqualTo(2));
-        }
-
-        [Test]
-        public void WoodElfAutomaticLanguages()
-        {
-            var automaticLanguages = languages[RaceConstants.BaseRaces.WoodElf];
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Common), Is.True);
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Elven), Is.True);
-            Assert.That(automaticLanguages.Count(), Is.EqualTo(2));
-        }
-
-        [Test]
-        public void GnollAutomaticLanguages()
-        {
-            var automaticLanguages = languages[RaceConstants.BaseRaces.Gnoll];
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Gnoll), Is.True);
-            Assert.That(automaticLanguages.Count(), Is.EqualTo(1));
-        }
-
-        [Test]
-        public void ForestGnomeAutomaticLanguagesZero()
-        {
-            var automaticLanguages = languages[RaceConstants.BaseRaces.ForestGnome];
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Common), Is.True);
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Elven), Is.True);
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Gnome), Is.True);
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Sylvan), Is.True);
-            Assert.That(automaticLanguages.Count(), Is.EqualTo(4));
-        }
-
-        [Test]
-        public void RockGnomeAutomaticLanguages()
-        {
-            var automaticLanguages = languages[RaceConstants.BaseRaces.RockGnome];
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Common), Is.True);
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Gnome), Is.True);
-            Assert.That(automaticLanguages.Count(), Is.EqualTo(2));
-        }
-
-        [Test]
-        public void SvirfneblinAutomaticLanguages()
-        {
-            var automaticLanguages = languages[RaceConstants.BaseRaces.Svirfneblin];
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Common), Is.True);
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Gnome), Is.True);
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Undercommon), Is.True);
-            Assert.That(automaticLanguages.Count(), Is.EqualTo(3));
-        }
-
-        [Test]
-        public void GoblinAutomaticLanguages()
-        {
-            var automaticLanguages = languages[RaceConstants.BaseRaces.Goblin];
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Common), Is.True);
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Goblin), Is.True);
-            Assert.That(automaticLanguages.Count(), Is.EqualTo(2));
-        }
-
-        [Test]
-        public void HalfCelestialAutomaticLanguages()
-        {
-            var automaticLanguages = languages[RaceConstants.Metaraces.HalfCelestial];
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Celestial), Is.True);
-            Assert.That(automaticLanguages.Count(), Is.EqualTo(1));
-        }
-
-        [Test]
-        public void HalfDragonAutomaticLanguages()
-        {
-            var automaticLanguages = languages[RaceConstants.Metaraces.HalfDragon];
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Draconic), Is.True);
-            Assert.That(automaticLanguages.Count(), Is.EqualTo(1));
-        }
-
-        [Test]
-        public void HalfElfAutomaticLanguages()
-        {
-            var automaticLanguages = languages[RaceConstants.BaseRaces.HalfElf];
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Common), Is.True);
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Elven), Is.True);
-            Assert.That(automaticLanguages.Count(), Is.EqualTo(2));
-        }
-
-        [Test]
-        public void HalfFiendAutomaticLanguages()
-        {
-            var automaticLanguages = languages[RaceConstants.Metaraces.HalfFiend];
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Infernal), Is.True);
-            Assert.That(automaticLanguages.Count(), Is.EqualTo(1));
-        }
-
-        [Test]
-        public void HalfOrcAutomaticLanguages()
-        {
-            var automaticLanguages = languages[RaceConstants.BaseRaces.HalfOrc];
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Common), Is.True);
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Orc), Is.True);
-            Assert.That(automaticLanguages.Count(), Is.EqualTo(2));
-        }
-
-        [Test]
-        public void DeepHalflingAutomaticLanguages()
-        {
-            var automaticLanguages = languages[RaceConstants.BaseRaces.DeepHalfling];
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Common), Is.True);
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Halfling), Is.True);
-            Assert.That(automaticLanguages.Count(), Is.EqualTo(2));
-        }
-
-        [Test]
-        public void LightfootHalflingAutomaticLanguages()
-        {
-            var automaticLanguages = languages[RaceConstants.BaseRaces.LightfootHalfling];
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Common), Is.True);
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Halfling), Is.True);
-            Assert.That(automaticLanguages.Count(), Is.EqualTo(2));
-        }
-
-        [Test]
-        public void TallfellowHalflingAutomaticLanguages()
-        {
-            var automaticLanguages = languages[RaceConstants.BaseRaces.TallfellowHalfling];
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Common), Is.True);
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Halfling), Is.True);
-            Assert.That(automaticLanguages.Count(), Is.EqualTo(2));
-        }
-
-        [Test]
-        public void HobgoblinAutomaticLanguages()
-        {
-            var automaticLanguages = languages[RaceConstants.BaseRaces.Hobgoblin];
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Common), Is.True);
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Goblin), Is.True);
-            Assert.That(automaticLanguages.Count(), Is.EqualTo(2));
-        }
-
-        [Test]
-        public void HumanAutomaticLanguages()
-        {
-            var automaticLanguages = languages[RaceConstants.BaseRaces.Human];
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Common), Is.True);
-            Assert.That(automaticLanguages.Count(), Is.EqualTo(1));
-        }
-
-        [Test]
-        public void KoboldAutomaticLanguages()
-        {
-            var automaticLanguages = languages[RaceConstants.BaseRaces.Kobold];
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Draconic), Is.True);
-            Assert.That(automaticLanguages.Count(), Is.EqualTo(1));
-        }
-
-        [Test]
-        public void LizardfolkAutomaticLanguages()
-        {
-            var automaticLanguages = languages[RaceConstants.BaseRaces.Lizardfolk];
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Common), Is.True);
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Draconic), Is.True);
-            Assert.That(automaticLanguages.Count(), Is.EqualTo(2));
-        }
-
-        [Test]
-        public void MindFlayerAutomaticLanguages()
-        {
-            var automaticLanguages = languages[RaceConstants.BaseRaces.MindFlayer];
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Common), Is.True);
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Undercommon), Is.True);
-            Assert.That(automaticLanguages.Count(), Is.EqualTo(2));
-        }
-
-        [Test]
-        public void MinotaurAutomaticLanguages()
-        {
-            var automaticLanguages = languages[RaceConstants.BaseRaces.Minotaur];
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Common), Is.True);
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Giant), Is.True);
-            Assert.That(automaticLanguages.Count(), Is.EqualTo(2));
-        }
-
-        [Test]
-        public void OgreAutomaticLanguages()
-        {
-            var automaticLanguages = languages[RaceConstants.BaseRaces.Ogre];
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Common), Is.True);
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Giant), Is.True);
-            Assert.That(automaticLanguages.Count(), Is.EqualTo(2));
-        }
-
-        [Test]
-        public void OgreMageAutomaticLanguages()
-        {
-            var automaticLanguages = languages[RaceConstants.BaseRaces.OgreMage];
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Common), Is.True);
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Giant), Is.True);
-            Assert.That(automaticLanguages.Count(), Is.EqualTo(2));
-        }
-
-        [Test]
-        public void OrcAutomaticLanguages()
-        {
-            var automaticLanguages = languages[RaceConstants.BaseRaces.Orc];
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Common), Is.True);
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Orc), Is.True);
-            Assert.That(automaticLanguages.Count(), Is.EqualTo(2));
-        }
-
-        [Test]
-        public void TieflingAutomaticLanguages()
-        {
-            var automaticLanguages = languages[RaceConstants.BaseRaces.Tiefling];
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Common), Is.True);
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Infernal), Is.True);
-            Assert.That(automaticLanguages.Count(), Is.EqualTo(2));
-        }
-
-        [Test]
-        public void TroglodyteAutomaticLanguages()
-        {
-            var automaticLanguages = languages[RaceConstants.BaseRaces.Troglodyte];
-            Assert.That(automaticLanguages.Contains(LanguageConstants.Draconic), Is.True);
-            Assert.That(automaticLanguages.Count(), Is.EqualTo(1));
-        }
-
-        [Test]
-        public void WerebearAutomaticLanguages()
-        {
-            var automaticLanguages = languages[RaceConstants.Metaraces.Werebear];
-            Assert.That(automaticLanguages.Any(), Is.False);
-        }
-
-        [Test]
-        public void WereboarAutomaticLanguages()
-        {
-            var automaticLanguages = languages[RaceConstants.Metaraces.Wereboar];
-            Assert.That(automaticLanguages.Any(), Is.False);
-        }
-
-        [Test]
-        public void WereratAutomaticLanguages()
-        {
-            var automaticLanguages = languages[RaceConstants.Metaraces.Wererat];
-            Assert.That(automaticLanguages.Any(), Is.False);
-        }
-
-        [Test]
-        public void WeretigerAutomaticLanguages()
-        {
-            var automaticLanguages = languages[RaceConstants.Metaraces.Weretiger];
-            Assert.That(automaticLanguages.Any(), Is.False);
-        }
-
-        [Test]
-        public void WerewolfAutomaticLanguages()
-        {
-            var automaticLanguages = languages[RaceConstants.Metaraces.Werewolf];
-            Assert.That(automaticLanguages.Any(), Is.False);
-        }
-
-        [Test]
-        public void AllBaseRacesInTable()
-        {
-            foreach (var baseRace in RaceConstants.BaseRaces.GetBaseRaces())
-                Assert.That(languages.ContainsKey(baseRace), Is.True, baseRace);
-        }
-
-        [Test]
-        public void AllMetaracesInTable()
-        {
-            foreach (var metarace in RaceConstants.Metaraces.GetMetaraces())
-                Assert.That(languages.ContainsKey(metarace), Is.True, metarace);
-
-            Assert.That(languages.ContainsKey(String.Empty), Is.True, String.Empty);
+            AssertCollection(name, languages);
         }
     }
 }

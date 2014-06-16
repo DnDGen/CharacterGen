@@ -4,13 +4,13 @@ using System.Xml;
 using NPCGen.Mappers.Interfaces;
 using NPCGen.Tables.Interfaces;
 
-namespace NPCGen.Mappers
+namespace NPCGen.Mappers.Collections
 {
-    public class LanguagesXmlMapper : ILanguagesMapper
+    public class CollectionsXmlMapper : ICollectionsMapper
     {
         private IStreamLoader streamLoader;
 
-        public LanguagesXmlMapper(IStreamLoader streamLoader)
+        public CollectionsXmlMapper(IStreamLoader streamLoader)
         {
             this.streamLoader = streamLoader;
         }
@@ -24,8 +24,7 @@ namespace NPCGen.Mappers
             using (var stream = streamLoader.LoadFor(filename))
                 xmlDocument.Load(stream);
 
-            var objects = xmlDocument.DocumentElement.ChildNodes;
-            foreach (XmlNode node in objects)
+            foreach (XmlNode node in xmlDocument.DocumentElement.ChildNodes)
             {
                 var languages = new List<String>();
                 var languageNodes = node.SelectNodes("language");

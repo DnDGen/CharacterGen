@@ -17,7 +17,7 @@ namespace NPCGen.Tests.Unit.Selectors
     {
         private ILanguagesSelector Selector;
         private Race race;
-        private Mock<ILanguagesMapper> mockLanguagesXmlMapper;
+        private Mock<ICollectionsMapper> mockLanguagesXmlMapper;
         private Dictionary<String, IEnumerable<String>> parsedLanguages;
 
         [SetUp]
@@ -29,7 +29,7 @@ namespace NPCGen.Tests.Unit.Selectors
 
             parsedLanguages = new Dictionary<String, IEnumerable<String>>();
             parsedLanguages.Add(String.Empty, Enumerable.Empty<String>());
-            mockLanguagesXmlMapper = new Mock<ILanguagesMapper>();
+            mockLanguagesXmlMapper = new Mock<ICollectionsMapper>();
             mockLanguagesXmlMapper.Setup(p => p.Map(It.IsAny<String>())).Returns(parsedLanguages);
 
             Selector = new LanguagesSelector(mockLanguagesXmlMapper.Object);

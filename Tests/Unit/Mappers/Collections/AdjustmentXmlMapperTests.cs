@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using Moq;
 using NPCGen.Mappers;
+using NPCGen.Mappers.Collections;
 using NPCGen.Mappers.Interfaces;
 using NPCGen.Tables.Interfaces;
 using NUnit.Framework;
@@ -10,12 +10,12 @@ using NUnit.Framework;
 namespace NPCGen.Tests.Unit.Mappers
 {
     [TestFixture]
-    public class LanguagesXmlMapperTests
+    public class AdjustmentXmlMapperTests
     {
-        private const String tableName = "LanguagesXmlMapperTests";
+        private const String tableName = "AdjustmentXmlMapperTests";
 
         private String filename;
-        private ILanguagesMapper mapper;
+        private IAdjustmentMapper mapper;
         private Mock<IStreamLoader> mockStreamLoader;
 
         [SetUp]
@@ -25,9 +25,9 @@ namespace NPCGen.Tests.Unit.Mappers
             MakeXmlFile();
 
             mockStreamLoader = new Mock<IStreamLoader>();
-            mockStreamLoader.Setup(l => l.LoadFor(filename)).Returns(() => GetStream());
+            mockStreamLoader.Setup(l => l.LoadFor(filename)).Returns(GetStream());
 
-            mapper = new LanguagesXmlMapper(mockStreamLoader.Object);
+            mapper = new AdjustmentXmlMapper(mockStreamLoader.Object);
         }
 
         [Test]
@@ -42,11 +42,7 @@ namespace NPCGen.Tests.Unit.Mappers
         {
             var results = mapper.Map(tableName);
             Assert.That(results.ContainsKey("race"), Is.True);
-
-            var languages = results["race"];
-            Assert.That(languages.Contains("first language"), Is.True);
-            Assert.That(languages.Contains("second language"), Is.True);
-            Assert.That(languages.Count(), Is.EqualTo(2));
+            Assert.That(results["race"], Is.EqualTo(1));
         }
 
         private Stream GetStream()
@@ -56,7 +52,7 @@ namespace NPCGen.Tests.Unit.Mappers
 
         private void MakeXmlFile()
         {
-            var content = "<?xml version=\"1.0\" encoding=\"utf-8\" ?><languages><object><key>race</key><language>first language</language><language>second language</language></object></languages>";
+            var content = "<?xml version=\"1.0\" encoding=\"utf-8\" ?><adjustments><object><key>race</key><adjustment>1</adjustment></object></adjustments>";
             File.WriteAllText(filename, content);
         }
     }

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using Moq;
 using NPCGen.Mappers;
+using NPCGen.Mappers.Collections;
 using NPCGen.Mappers.Interfaces;
 using NPCGen.Tables.Interfaces;
 using NUnit.Framework;
@@ -9,13 +11,12 @@ using NUnit.Framework;
 namespace NPCGen.Tests.Unit.Mappers
 {
     [TestFixture]
-    public class AdjustmentXmlMapperTests
+    public class StatPriorityXmlMapperTests
     {
-        private const String tableName = "AdjustmentXmlMapperTests";
-
-        private String filename;
-        private IAdjustmentMapper mapper;
+        private IStatPriorityMapper mapper;
         private Mock<IStreamLoader> mockStreamLoader;
+        private const String tableName = "StatPriorityXmlMapperTests";
+        private String filename;
 
         [SetUp]
         public void Setup()
@@ -26,7 +27,7 @@ namespace NPCGen.Tests.Unit.Mappers
             mockStreamLoader = new Mock<IStreamLoader>();
             mockStreamLoader.Setup(l => l.LoadFor(filename)).Returns(GetStream());
 
-            mapper = new AdjustmentXmlMapper(mockStreamLoader.Object);
+            mapper = new StatPriorityXmlMapper(mockStreamLoader.Object);
         }
 
         [Test]
@@ -39,9 +40,14 @@ namespace NPCGen.Tests.Unit.Mappers
         [Test]
         public void LoadXmlFromStream()
         {
-            var results = mapper.Map(tableName);
-            Assert.That(results.ContainsKey("race"), Is.True);
-            Assert.That(results["race"], Is.EqualTo(1));
+            var objects = mapper.Map(tableName);
+
+            Assert.That(objects.Count(), Is.EqualTo(1));
+            Assert.That(objects.ContainsKey("class name"), Is.True);
+
+            var firstElement = objects["class name"];
+            Assert.That(firstElement.FirstPriority, Is.EqualTo("strength"));
+            Assert.That(firstElement.SecondPriority, Is.EqualTo("wisdom"));
         }
 
         private Stream GetStream()
@@ -51,7 +57,7 @@ namespace NPCGen.Tests.Unit.Mappers
 
         private void MakeXmlFile()
         {
-            var content = "<?xml version=\"1.0\" encoding=\"utf-8\" ?><adjustments><object><key>race</key><adjustment>1</adjustment></object></adjustments>";
+            var content = "<?xml version=\"1.0\" encoding=\"utf-8\" ?><statPriorities><object><className>class name</className><first>strength</first><second>wisdom</second></object></statPriorities>";
             File.WriteAllText(filename, content);
         }
     }

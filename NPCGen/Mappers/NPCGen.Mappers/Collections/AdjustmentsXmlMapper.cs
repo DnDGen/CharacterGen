@@ -4,7 +4,7 @@ using System.Xml;
 using NPCGen.Mappers.Interfaces;
 using NPCGen.Tables.Interfaces;
 
-namespace NPCGen.Mappers
+namespace NPCGen.Mappers.Collections
 {
     public class AdjustmentXmlMapper : IAdjustmentMapper
     {

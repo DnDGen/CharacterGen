@@ -39,11 +39,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Adjustments\AdjustmentsMapperCachingProxy.cs" />
-    <Compile Include="Adjustments\AdjustmentsXmlMapper.cs" />
-    <Compile Include="Languages\LanguagesXmlMapper.cs" />
+    <Compile Include="Percentiles\PercentileMapperCachingProxy.cs" />
+    <Compile Include="Collections\AdjustmentsXmlMapper.cs" />
+    <Compile Include="Collections\CollectionsXmlMapper.cs" />
     <Compile Include="Percentiles\PercentileXmlMapper.cs" />
-    <Compile Include="StatPriorities\StatPriorityXmlMapper.cs" />
+    <Compile Include="Collections\StatPriorityXmlMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

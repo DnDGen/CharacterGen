@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Ninject;
+﻿using Ninject;
 using Ninject.Modules;
-using NPCGen.Mappers;
+using NPCGen.Bootstrap.Factories;
+using NPCGen.Mappers.Collections;
 using NPCGen.Mappers.Interfaces;
+using NPCGen.Tables.Interfaces;
 
 namespace NPCGen.Bootstrap.Modules
 {
@@ -15,8 +12,8 @@ namespace NPCGen.Bootstrap.Modules
         public override void Load()
         {
             Bind<IAdjustmentMapper>().To<AdjustmentXmlMapper>();
-            Bind<ILanguagesMapper>().To<LanguagesXmlMapper>();
-            Bind<IPercentileMapper>().To<PercentileXmlMapper>();
+            Bind<ICollectionsMapper>().To<CollectionsXmlMapper>();
+            Bind<IPercentileMapper>().ToMethod(c => PercentileMapperFactory.CreateWith(c.Kernel.Get<IStreamLoader>())).InSingletonScope();
             Bind<IStatPriorityMapper>().To<StatPriorityXmlMapper>();
         }
     }
