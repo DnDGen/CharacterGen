@@ -32,14 +32,14 @@ namespace NPCGen.Tests.Unit.Mappers
         [Test]
         public void AppendXmlFileExtensionToTableName()
         {
-            percentileMapper.Parse(tableName);
+            percentileMapper.Map(tableName);
             mockStreamLoader.Verify(l => l.LoadFor(filename), Times.Once);
         }
 
         [Test]
         public void LoadXmlFromStream()
         {
-            var table = percentileMapper.Parse(tableName);
+            var table = percentileMapper.Map(tableName);
 
             Assert.That(table[1], Is.EqualTo("one through five"));
             Assert.That(table[2], Is.EqualTo("one through five"));

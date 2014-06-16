@@ -15,26 +15,22 @@ namespace NPCGen.Mappers
             this.streamLoader = streamLoader;
         }
 
-        public Dictionary<String, Int32> Parse(String filename)
+        public Dictionary<String, Int32> Map(String tableName)
         {
+            var filename = tableName + ".xml";
             var results = new Dictionary<String, Int32>();
+            var xmlDocument = new XmlDocument();
 
             using (var stream = streamLoader.LoadFor(filename))
-            {
-                var xmlDocument = new XmlDocument();
                 xmlDocument.Load(stream);
 
-                var objects = xmlDocument.DocumentElement.ChildNodes;
-                foreach (XmlNode node in objects)
-                {
-                    var key = node.SelectSingleNode("key").InnerText;
-                    var adjustment = Convert.ToInt32(node.SelectSingleNode("adjustment").InnerText);
+            foreach (XmlNode node in xmlDocument.DocumentElement.ChildNodes)
+            {
+                var key = node.SelectSingleNode("key").InnerText;
+                var adjustment = Convert.ToInt32(node.SelectSingleNode("adjustment").InnerText);
 
-                    results.Add(key, adjustment);
-                }
+                results.Add(key, adjustment);
             }
-
-            results.Add(String.Empty, 0);
 
             return results;
         }

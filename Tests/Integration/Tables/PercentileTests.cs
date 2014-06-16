@@ -29,7 +29,7 @@ namespace NPCGen.Tests.Integration.Tables
         [SetUp]
         public void PercentileSetup()
         {
-            table = PercentileMapper.Parse(tableName);
+            table = PercentileMapper.Map(tableName);
         }
 
         [Test]

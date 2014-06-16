@@ -30,7 +30,7 @@ namespace NPCGen.Tests.Unit.Selectors
                 table.Add(i, i.ToString());
 
             mockPercentileMapper = new Mock<IPercentileMapper>();
-            mockPercentileMapper.Setup(p => p.Parse(tableName)).Returns(table);
+            mockPercentileMapper.Setup(p => p.Map(tableName)).Returns(table);
 
             mockDice = new Mock<IDice>();
             mockDice.Setup(d => d.Percentile(1)).Returns(1);
@@ -43,7 +43,7 @@ namespace NPCGen.Tests.Unit.Selectors
             percentileSelector.GetPercentileResult(tableName);
             percentileSelector.GetPercentileResult(tableName);
 
-            mockPercentileMapper.Verify(p => p.Parse(tableName), Times.Once());
+            mockPercentileMapper.Verify(p => p.Map(tableName), Times.Once());
         }
 
         [Test]
@@ -87,7 +87,7 @@ namespace NPCGen.Tests.Unit.Selectors
             percentileSelector.GetAllResults(tableName);
             percentileSelector.GetAllResults(tableName);
 
-            mockPercentileMapper.Verify(p => p.Parse(tableName), Times.Once());
+            mockPercentileMapper.Verify(p => p.Map(tableName), Times.Once());
         }
     }
 }

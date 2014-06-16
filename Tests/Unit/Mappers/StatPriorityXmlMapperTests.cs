@@ -12,25 +12,34 @@ namespace NPCGen.Tests.Unit.Mappers
     [TestFixture]
     public class StatPriorityXmlMapperTests
     {
-        private IStatPriorityMapper Mapper;
+        private IStatPriorityMapper mapper;
         private Mock<IStreamLoader> mockStreamLoader;
-        private const String filename = "StatPriorityXmlMapperTests.xml";
+        private const String tableName = "StatPriorityXmlMapperTests";
+        private String filename;
 
         [SetUp]
         public void Setup()
         {
+            filename = tableName + ".xml";
             MakeXmlFile();
 
             mockStreamLoader = new Mock<IStreamLoader>();
             mockStreamLoader.Setup(l => l.LoadFor(filename)).Returns(GetStream());
 
-            Mapper = new StatPriorityXmlMapper(mockStreamLoader.Object);
+            mapper = new StatPriorityXmlMapper(mockStreamLoader.Object);
+        }
+
+        [Test]
+        public void AppendXmlFileExtensionToTableName()
+        {
+            mapper.Map(tableName);
+            mockStreamLoader.Verify(l => l.LoadFor(filename), Times.Once);
         }
 
         [Test]
         public void LoadXmlFromStream()
         {
-            var objects = Mapper.Parse(filename);
+            var objects = mapper.Map(tableName);
 
             Assert.That(objects.Count(), Is.EqualTo(1));
             Assert.That(objects.ContainsKey("class name"), Is.True);

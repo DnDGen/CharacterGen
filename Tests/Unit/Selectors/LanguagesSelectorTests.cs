@@ -30,7 +30,7 @@ namespace NPCGen.Tests.Unit.Selectors
             parsedLanguages = new Dictionary<String, IEnumerable<String>>();
             parsedLanguages.Add(String.Empty, Enumerable.Empty<String>());
             mockLanguagesXmlMapper = new Mock<ILanguagesMapper>();
-            mockLanguagesXmlMapper.Setup(p => p.Parse(It.IsAny<String>())).Returns(parsedLanguages);
+            mockLanguagesXmlMapper.Setup(p => p.Map(It.IsAny<String>())).Returns(parsedLanguages);
 
             Selector = new LanguagesSelector(mockLanguagesXmlMapper.Object);
         }
@@ -39,7 +39,7 @@ namespace NPCGen.Tests.Unit.Selectors
         public void GetAutomaticLanguagesAccessesAutomaticLanguagesTable()
         {
             Selector.GetAutomaticLanguagesFor(race);
-            mockLanguagesXmlMapper.Verify(p => p.Parse("AutomaticLanguages.xml"), Times.Once);
+            mockLanguagesXmlMapper.Verify(p => p.Map("AutomaticLanguages.xml"), Times.Once);
         }
 
         [Test]
@@ -99,7 +99,7 @@ namespace NPCGen.Tests.Unit.Selectors
         public void GetBonusLanguagesAccessesBonusLanguagesTable()
         {
             Selector.GetBonusLanguagesFor(String.Empty, String.Empty);
-            mockLanguagesXmlMapper.Verify(p => p.Parse("BonusLanguages.xml"), Times.Once);
+            mockLanguagesXmlMapper.Verify(p => p.Map("BonusLanguages.xml"), Times.Once);
         }
 
         [Test]

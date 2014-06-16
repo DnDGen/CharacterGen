@@ -28,7 +28,7 @@ namespace NPCGen.Tests.Unit.Selectors
             adjustments = new Dictionary<String, Int32>();
             adjustments.Add(race.BaseRace, 0);
             adjustments.Add(race.Metarace, 0);
-            mockAdjustmentXmlMapper.Setup(p => p.Parse(It.IsAny<String>())).Returns(adjustments);
+            mockAdjustmentXmlMapper.Setup(p => p.Map(It.IsAny<String>())).Returns(adjustments);
 
             Selector = new StatAdjustmentsSelector(mockAdjustmentXmlMapper.Object);
         }
@@ -50,7 +50,7 @@ namespace NPCGen.Tests.Unit.Selectors
             foreach (var stat in StatConstants.GetStats())
             {
                 var filename = String.Format("{0}StatAdjustments.xml", stat);
-                mockAdjustmentXmlMapper.Verify(p => p.Parse(filename), Times.Once);
+                mockAdjustmentXmlMapper.Verify(p => p.Map(filename), Times.Once);
             }
         }
     }

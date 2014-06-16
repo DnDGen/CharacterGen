@@ -19,7 +19,7 @@ namespace NPCGen.Tests.Integration.Tables.Stats
         [SetUp]
         public void Setup()
         {
-            adjustments = AdjustmentXmlMapper.Parse("DexterityStatAdjustments.xml");
+            adjustments = AdjustmentXmlMapper.Map("DexterityStatAdjustments.xml");
         }
 
         [Test]

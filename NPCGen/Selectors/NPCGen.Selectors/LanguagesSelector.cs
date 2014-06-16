@@ -20,7 +20,7 @@ namespace NPCGen.Selectors
 
         public IEnumerable<String> GetAutomaticLanguagesFor(Race race)
         {
-            var languages = languagesXmlMapper.Parse("AutomaticLanguages.xml");
+            var languages = languagesXmlMapper.Map("AutomaticLanguages.xml");
 
             var baseRaceLanguages = languages[race.BaseRace];
             var metaraceLanguages = languages[race.Metarace];
@@ -30,7 +30,7 @@ namespace NPCGen.Selectors
 
         public IEnumerable<String> GetBonusLanguagesFor(String baseRace, String className)
         {
-            var languages = languagesXmlMapper.Parse("BonusLanguages.xml");
+            var languages = languagesXmlMapper.Map("BonusLanguages.xml");
             var bonusLanguages = languages[baseRace];
 
             if (className == CharacterClassConstants.Cleric)

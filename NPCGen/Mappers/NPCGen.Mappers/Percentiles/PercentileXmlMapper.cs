@@ -15,7 +15,7 @@ namespace NPCGen.Mappers
             this.streamLoader = streamLoader;
         }
 
-        public Dictionary<Int32, String> Parse(String tableName)
+        public Dictionary<Int32, String> Map(String tableName)
         {
             var filename = String.Format("{0}.xml", tableName);
             var results = new Dictionary<Int32, String>();

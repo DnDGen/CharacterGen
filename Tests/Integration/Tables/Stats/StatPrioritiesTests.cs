@@ -21,7 +21,7 @@ namespace NPCGen.Tests.Integration.Tables.Stats
         [SetUp]
         public void Setup()
         {
-            statPriorities = StatPriorityXmlMapper.Parse("StatPriorities.xml");
+            statPriorities = StatPriorityXmlMapper.Map("StatPriorities.xml");
         }
 
         [Test]

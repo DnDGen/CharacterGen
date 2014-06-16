@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using Moq;
 using NPCGen.Mappers;
+using NPCGen.Mappers.Interfaces;
 using NPCGen.Tables.Interfaces;
 using NUnit.Framework;
 
@@ -11,34 +11,37 @@ namespace NPCGen.Tests.Unit.Mappers
     [TestFixture]
     public class AdjustmentXmlMapperTests
     {
-        private const String filename = "AdjustmentXmlMapperTests.xml";
+        private const String tableName = "AdjustmentXmlMapperTests";
 
-        private Dictionary<String, Int32> results;
+        private String filename;
+        private IAdjustmentMapper mapper;
+        private Mock<IStreamLoader> mockStreamLoader;
 
         [SetUp]
         public void Setup()
         {
+            filename = tableName + ".xml";
             MakeXmlFile();
 
-            var mockStreamLoader = new Mock<IStreamLoader>();
+            mockStreamLoader = new Mock<IStreamLoader>();
             mockStreamLoader.Setup(l => l.LoadFor(filename)).Returns(GetStream());
 
-            var Mapper = new AdjustmentXmlMapper(mockStreamLoader.Object);
-            results = Mapper.Parse(filename);
+            mapper = new AdjustmentXmlMapper(mockStreamLoader.Object);
+        }
+
+        [Test]
+        public void AppendXmlFileExtensionToTableName()
+        {
+            mapper.Map(tableName);
+            mockStreamLoader.Verify(l => l.LoadFor(filename), Times.Once);
         }
 
         [Test]
         public void LoadXmlFromStream()
         {
+            var results = mapper.Map(tableName);
             Assert.That(results.ContainsKey("race"), Is.True);
             Assert.That(results["race"], Is.EqualTo(1));
-        }
-
-        [Test]
-        public void ResultsContainsEmptyStringWithAdjustmentOfZero()
-        {
-            Assert.That(results.ContainsKey(String.Empty), Is.True);
-            Assert.That(results[String.Empty], Is.EqualTo(0));
         }
 
         private Stream GetStream()

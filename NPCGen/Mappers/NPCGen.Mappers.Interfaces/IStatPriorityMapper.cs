@@ -6,6 +6,6 @@ namespace NPCGen.Mappers.Interfaces
 {
     public interface IStatPriorityMapper
     {
-        Dictionary<String, StatPriority> Parse(String filename);
+        Dictionary<String, StatPriority> Map(String tableName);
     }
 }

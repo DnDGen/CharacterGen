@@ -31,7 +31,7 @@ namespace NPCGen.Selectors
 
         private void CacheTable(String tableName)
         {
-            var table = percentileXmlMapper.Parse(tableName);
+            var table = percentileXmlMapper.Map(tableName);
             cachedTables.Add(tableName, table);
         }
 

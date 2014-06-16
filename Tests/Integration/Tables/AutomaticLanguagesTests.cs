@@ -21,7 +21,7 @@ namespace NPCGen.Tests.Integration.Tables
         [SetUp]
         public void Setup()
         {
-            languages = LanguagesXmlMapper.Parse("AutomaticLanguages.xml");
+            languages = LanguagesXmlMapper.Map("AutomaticLanguages.xml");
         }
 
         [Test]

@@ -23,7 +23,7 @@ namespace NPCGen.Selectors
             foreach (var stat in StatConstants.GetStats())
             {
                 var filename = String.Format("{0}StatAdjustments.xml", stat);
-                var statAdjustments = adjustmentXmlMapper.Parse(filename);
+                var statAdjustments = adjustmentXmlMapper.Map(filename);
 
                 adjustments.Add(stat, statAdjustments[race.BaseRace]);
 

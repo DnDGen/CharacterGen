@@ -21,7 +21,7 @@ namespace NPCGen.Tests.Unit.Selectors
             var priorities = new Dictionary<String, StatPriority>();
             priorities.Add("class name", new StatPriority() { FirstPriority = "first priority", SecondPriority = "second priority" });
             mockStatPriorityMapper = new Mock<IStatPriorityMapper>();
-            mockStatPriorityMapper.Setup(p => p.Parse(It.IsAny<String>())).Returns(priorities);
+            mockStatPriorityMapper.Setup(p => p.Map(It.IsAny<String>())).Returns(priorities);
 
             Selector = new StatPrioritySelector(mockStatPriorityMapper.Object);
         }
@@ -30,7 +30,7 @@ namespace NPCGen.Tests.Unit.Selectors
         public void GetsStatPrioritiesFromMapper()
         {
             Selector.GetStatPriorities("class name");
-            mockStatPriorityMapper.Verify(p => p.Parse("StatPriorities.xml"), Times.Once);
+            mockStatPriorityMapper.Verify(p => p.Map("StatPriorities.xml"), Times.Once);
         }
 
         [Test]

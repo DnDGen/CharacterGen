@@ -16,7 +16,7 @@ namespace NPCGen.Selectors
 
         public Dictionary<String, Int32> GetLevelAdjustments()
         {
-            return adjustmentXmlMapper.Parse("LevelAdjustments.xml");
+            return adjustmentXmlMapper.Map("LevelAdjustments");
         }
     }
 }

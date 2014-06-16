@@ -5,6 +5,6 @@ namespace NPCGen.Mappers.Interfaces
 {
     public interface IPercentileMapper
     {
-        Dictionary<Int32, String> Parse(String filename);
+        Dictionary<Int32, String> Map(String tableName);
     }
 }

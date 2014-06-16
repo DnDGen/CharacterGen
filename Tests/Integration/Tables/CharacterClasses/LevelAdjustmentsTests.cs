@@ -19,7 +19,7 @@ namespace NPCGen.Tests.Integration.Tables.CharacterClasses
         [SetUp]
         public void Setup()
         {
-            adjustments = AdjustmentMapper.Parse("LevelAdjustments.xml");
+            adjustments = AdjustmentMapper.Map("LevelAdjustments.xml");
         }
 
         [Test]

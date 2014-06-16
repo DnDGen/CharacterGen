@@ -23,7 +23,7 @@ namespace NPCGen.Tests.Unit.Selectors
         public void GetResultsFromXmlMapper()
         {
             Selector.GetLevelAdjustments();
-            mockLevelAdjustmentXmlMapper.Verify(p => p.Parse("LevelAdjustments.xml"), Times.Once);
+            mockLevelAdjustmentXmlMapper.Verify(p => p.Map("LevelAdjustments.xml"), Times.Once);
         }
     }
 }

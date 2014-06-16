@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Moq;
-using NPCGen.Common.Races;
 using NPCGen.Mappers;
+using NPCGen.Mappers.Interfaces;
 using NPCGen.Tables.Interfaces;
 using NUnit.Framework;
 
@@ -13,48 +12,41 @@ namespace NPCGen.Tests.Unit.Mappers
     [TestFixture]
     public class LanguagesXmlMapperTests
     {
-        private const String filename = "LanguagesXmlMapperTests.xml";
+        private const String tableName = "LanguagesXmlMapperTests";
 
-        private Dictionary<String, IEnumerable<String>> results;
+        private String filename;
+        private ILanguagesMapper mapper;
+        private Mock<IStreamLoader> mockStreamLoader;
 
         [SetUp]
         public void Setup()
         {
+            filename = tableName + ".xml";
             MakeXmlFile();
 
-            var mockStreamLoader = new Mock<IStreamLoader>();
-            mockStreamLoader.Setup(l => l.LoadFor(filename)).Returns(GetStream());
+            mockStreamLoader = new Mock<IStreamLoader>();
+            mockStreamLoader.Setup(l => l.LoadFor(filename)).Returns(() => GetStream());
 
-            var Mapper = new LanguagesXmlMapper(mockStreamLoader.Object);
-            results = Mapper.Parse(filename);
+            mapper = new LanguagesXmlMapper(mockStreamLoader.Object);
+        }
+
+        [Test]
+        public void AppendXmlFileExtensionToTableName()
+        {
+            mapper.Map(tableName);
+            mockStreamLoader.Verify(l => l.LoadFor(filename), Times.Once);
         }
 
         [Test]
         public void LoadXmlFromStream()
         {
+            var results = mapper.Map(tableName);
             Assert.That(results.ContainsKey("race"), Is.True);
 
             var languages = results["race"];
             Assert.That(languages.Contains("first language"), Is.True);
             Assert.That(languages.Contains("second language"), Is.True);
             Assert.That(languages.Count(), Is.EqualTo(2));
-        }
-
-        [Test]
-        public void ResultsContainsEmptyStringWithNoLanguages()
-        {
-            Assert.That(results.ContainsKey(String.Empty), Is.True);
-            Assert.That(results[String.Empty].Any(), Is.False);
-        }
-
-        [Test]
-        public void MetaracesNotInTableGivenEmptyEnumerableOfString()
-        {
-            foreach (var metarace in RaceConstants.Metaraces.GetMetaraces())
-            {
-                Assert.That(results.ContainsKey(metarace), Is.True);
-                Assert.That(results[String.Empty].Any(), Is.False);
-            }
         }
 
         private Stream GetStream()

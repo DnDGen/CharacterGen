@@ -5,6 +5,6 @@ namespace NPCGen.Mappers.Interfaces
 {
     public interface IAdjustmentMapper
     {
-        Dictionary<String, Int32> Parse(String filename);
+        Dictionary<String, Int32> Map(String tableName);
     }
 }

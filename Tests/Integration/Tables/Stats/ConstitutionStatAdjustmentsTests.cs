@@ -19,7 +19,7 @@ namespace NPCGen.Tests.Integration.Tables.Stats
         [SetUp]
         public void Setup()
         {
-            adjustments = AdjustmentXmlMapper.Parse("ConstitutionStatAdjustments.xml");
+            adjustments = AdjustmentXmlMapper.Map("ConstitutionStatAdjustments.xml");
         }
 
         [Test]
