@@ -15,6 +15,7 @@ namespace NPCGen.Tests.Integration.Tables
         public ICollectionsMapper CollectionsMapper { get; set; }
 
         protected abstract String tableName { get; }
+        protected abstract IEnumerable<String> nameCollection { get; }
 
         private Dictionary<String, IEnumerable<String>> table;
         private List<String> testedNames;
@@ -28,6 +29,18 @@ namespace NPCGen.Tests.Integration.Tables
         public void CollectionSetup()
         {
             table = CollectionsMapper.Map(tableName);
+        }
+
+        [Test]
+        public void AllNamesInCollection()
+        {
+            var names = nameCollection;
+
+            foreach (var name in names)
+                Assert.That(table.Keys, Contains.Item(name));
+
+            var missingNames = names.Except(table.Keys);
+            Assert.That(missingNames, Is.Empty, tableName);
         }
 
         [Test, TestFixtureTearDown]

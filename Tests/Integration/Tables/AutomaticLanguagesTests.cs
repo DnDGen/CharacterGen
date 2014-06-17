@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using NPCGen.Common;
 using NPCGen.Common.Races;
 using NUnit.Framework;
@@ -11,6 +13,17 @@ namespace NPCGen.Tests.Integration.Tables
         protected override String tableName
         {
             get { return "AutomaticLanguages"; }
+        }
+
+        protected override IEnumerable<String> nameCollection
+        {
+            get
+            {
+                var baseRaces = RaceConstants.BaseRaces.GetBaseRaces();
+                var metaraces = RaceConstants.Metaraces.GetMetaraces();
+
+                return baseRaces.Union(metaraces);
+            }
         }
 
         [TestCase(RaceConstants.BaseRaces.Aasimar, LanguageConstants.Common,

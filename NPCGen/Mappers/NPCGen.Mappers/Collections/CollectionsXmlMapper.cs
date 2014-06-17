@@ -26,14 +26,14 @@ namespace NPCGen.Mappers.Collections
 
             foreach (XmlNode node in xmlDocument.DocumentElement.ChildNodes)
             {
-                var languages = new List<String>();
-                var languageNodes = node.SelectNodes("language");
+                var items = new List<String>();
+                var itemNodes = node.SelectNodes("item");
 
-                foreach (XmlNode languageNode in languageNodes)
-                    languages.Add(languageNode.InnerText);
+                foreach (XmlNode itemNode in itemNodes)
+                    items.Add(itemNode.InnerText);
 
-                var key = node.SelectSingleNode("key").InnerText;
-                results.Add(key, languages);
+                var name = node.SelectSingleNode("name").InnerText;
+                results.Add(name, items);
             }
 
             return results;
