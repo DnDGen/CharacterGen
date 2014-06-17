@@ -1,293 +1,76 @@
 ﻿using System;
 using System.Collections.Generic;
-using Ninject;
+using System.Linq;
 using NPCGen.Common.Races;
-using NPCGen.Mappers.Interfaces;
-using NPCGen.Tests.Integration.Common;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Tables.CharacterClasses
 {
     [TestFixture]
-    public class LevelAdjustmentsTests : IntegrationTests
+    public class LevelAdjustmentsTests : CollectionTests
     {
-        [Inject]
-        public IAdjustmentMapper AdjustmentMapper { get; set; }
-
-        private Dictionary<String, Int32> adjustments;
-
-        [SetUp]
-        public void Setup()
+        protected override String tableName
         {
-            adjustments = AdjustmentMapper.Map("LevelAdjustments.xml");
+            get { return "LevelAdjustments"; }
         }
 
-        [Test]
-        public void AasimarLevelAdjustmentIsZero()
+        protected override IEnumerable<String> nameCollection
         {
-            Assert.That(adjustments[RaceConstants.BaseRaces.Aasimar], Is.EqualTo(0));
+            get
+            {
+                var baseRaces = RaceConstants.BaseRaces.GetBaseRaces();
+                var metaraces = RaceConstants.Metaraces.GetMetaraces();
+
+                return baseRaces.Union(metaraces);
+            }
         }
 
-        [Test]
-        public void BugbearLevelAdjustmentIsTwo()
+        [TestCase(RaceConstants.BaseRaces.Aasimar, 0)]
+        [TestCase(RaceConstants.BaseRaces.Bugbear, 2)]
+        [TestCase(RaceConstants.BaseRaces.Derro, 1)]
+        [TestCase(RaceConstants.BaseRaces.Doppelganger, 3)]
+        [TestCase(RaceConstants.BaseRaces.Drow, 1)]
+        [TestCase(RaceConstants.BaseRaces.DuergarDwarf, 1)]
+        [TestCase(RaceConstants.BaseRaces.DeepDwarf, 0)]
+        [TestCase(RaceConstants.BaseRaces.HillDwarf, 0)]
+        [TestCase(RaceConstants.BaseRaces.MountainDwarf, 0)]
+        [TestCase(RaceConstants.BaseRaces.GrayElf, 0)]
+        [TestCase(RaceConstants.BaseRaces.HighElf, 0)]
+        [TestCase(RaceConstants.BaseRaces.WildElf, 0)]
+        [TestCase(RaceConstants.BaseRaces.WoodElf, 0)]
+        [TestCase(RaceConstants.BaseRaces.Gnoll, 1)]
+        [TestCase(RaceConstants.BaseRaces.ForestGnome, 0)]
+        [TestCase(RaceConstants.BaseRaces.RockGnome, 0)]
+        [TestCase(RaceConstants.BaseRaces.Svirfneblin, 1)]
+        [TestCase(RaceConstants.BaseRaces.Goblin, 0)]
+        [TestCase(RaceConstants.Metaraces.HalfCelestial, 1)]
+        [TestCase(RaceConstants.Metaraces.HalfDragon, 2)]
+        [TestCase(RaceConstants.BaseRaces.HalfElf, 0)]
+        [TestCase(RaceConstants.Metaraces.HalfFiend, 2)]
+        [TestCase(RaceConstants.BaseRaces.HalfOrc, 0)]
+        [TestCase(RaceConstants.BaseRaces.DeepHalfling, 0)]
+        [TestCase(RaceConstants.BaseRaces.LightfootHalfling, 0)]
+        [TestCase(RaceConstants.BaseRaces.TallfellowHalfling, 0)]
+        [TestCase(RaceConstants.BaseRaces.Hobgoblin, 0)]
+        [TestCase(RaceConstants.BaseRaces.Human, 0)]
+        [TestCase(RaceConstants.BaseRaces.Kobold, 0)]
+        [TestCase(RaceConstants.BaseRaces.Lizardfolk, 0)]
+        [TestCase(RaceConstants.BaseRaces.MindFlayer, 0)]
+        [TestCase(RaceConstants.BaseRaces.Minotaur, 0)]
+        [TestCase(RaceConstants.BaseRaces.Ogre, 2)]
+        [TestCase(RaceConstants.BaseRaces.OgreMage, 8)]
+        [TestCase(RaceConstants.BaseRaces.Orc, 0)]
+        [TestCase(RaceConstants.BaseRaces.Tiefling, 0)]
+        [TestCase(RaceConstants.BaseRaces.Troglodyte, 1)]
+        [TestCase(RaceConstants.Metaraces.Werebear, 2)]
+        [TestCase(RaceConstants.Metaraces.Wereboar, 1)]
+        [TestCase(RaceConstants.Metaraces.Wererat, 1)]
+        [TestCase(RaceConstants.Metaraces.Weretiger, 1)]
+        [TestCase(RaceConstants.Metaraces.Werewolf, 1)]
+        public void Collection(String name, Int32 adjustment)
         {
-            Assert.That(adjustments[RaceConstants.BaseRaces.Bugbear], Is.EqualTo(2));
-        }
-
-        [Test]
-        public void DerroLevelAdjustmentIsOne()
-        {
-            Assert.That(adjustments[RaceConstants.BaseRaces.Derro], Is.EqualTo(1));
-        }
-
-        [Test]
-        public void DoppelgangerLevelAdjustmentIsThree()
-        {
-            Assert.That(adjustments[RaceConstants.BaseRaces.Doppelganger], Is.EqualTo(3));
-        }
-
-        [Test]
-        public void DrowLevelAdjustmentIsOne()
-        {
-            Assert.That(adjustments[RaceConstants.BaseRaces.Drow], Is.EqualTo(1));
-        }
-
-        [Test]
-        public void DuergarDwarfLevelAdjustmentIsOne()
-        {
-            Assert.That(adjustments[RaceConstants.BaseRaces.DuergarDwarf], Is.EqualTo(1));
-        }
-
-        [Test]
-        public void DeepDwarfLevelAdjustmentIsZero()
-        {
-            Assert.That(adjustments[RaceConstants.BaseRaces.DeepDwarf], Is.EqualTo(0));
-        }
-
-        [Test]
-        public void HillDwarfLevelAdjustmentIsZero()
-        {
-            Assert.That(adjustments[RaceConstants.BaseRaces.HillDwarf], Is.EqualTo(0));
-        }
-
-        [Test]
-        public void MountainDwarfLevelAdjustmentIsZero()
-        {
-            Assert.That(adjustments[RaceConstants.BaseRaces.MountainDwarf], Is.EqualTo(0));
-        }
-
-        [Test]
-        public void GrayElfLevelAdjustmentIsZero()
-        {
-            Assert.That(adjustments[RaceConstants.BaseRaces.GrayElf], Is.EqualTo(0));
-        }
-
-        [Test]
-        public void HighElfLevelAdjustmentIsZero()
-        {
-            Assert.That(adjustments[RaceConstants.BaseRaces.HighElf], Is.EqualTo(0));
-        }
-
-        [Test]
-        public void WildElfLevelAdjustmentIsZero()
-        {
-            Assert.That(adjustments[RaceConstants.BaseRaces.WildElf], Is.EqualTo(0));
-        }
-
-        [Test]
-        public void WoodElfLevelAdjustmentIsZero()
-        {
-            Assert.That(adjustments[RaceConstants.BaseRaces.WoodElf], Is.EqualTo(0));
-        }
-
-        [Test]
-        public void GnollLevelAdjustmentIsOne()
-        {
-            Assert.That(adjustments[RaceConstants.BaseRaces.Gnoll], Is.EqualTo(1));
-        }
-
-        [Test]
-        public void ForestGnomeLevelAdjustmentZero()
-        {
-            Assert.That(adjustments[RaceConstants.BaseRaces.ForestGnome], Is.EqualTo(0));
-        }
-
-        [Test]
-        public void RockGnomeLevelAdjustmentIsZero()
-        {
-            Assert.That(adjustments[RaceConstants.BaseRaces.RockGnome], Is.EqualTo(0));
-        }
-
-        [Test]
-        public void SvirfneblinLevelAdjustmentIsOne()
-        {
-            Assert.That(adjustments[RaceConstants.BaseRaces.Svirfneblin], Is.EqualTo(1));
-        }
-
-        [Test]
-        public void GoblinLevelAdjustmentIsZero()
-        {
-            Assert.That(adjustments[RaceConstants.BaseRaces.Goblin], Is.EqualTo(0));
-        }
-
-        [Test]
-        public void HalfCelestialLevelAdjustmentIsOne()
-        {
-            Assert.That(adjustments[RaceConstants.Metaraces.HalfCelestial], Is.EqualTo(1));
-        }
-
-        [Test]
-        public void HalfDragonLevelAdjustmentIsTwo()
-        {
-            Assert.That(adjustments[RaceConstants.Metaraces.HalfDragon], Is.EqualTo(2));
-        }
-
-        [Test]
-        public void HalfElfLevelAdjustmentIsZero()
-        {
-            Assert.That(adjustments[RaceConstants.BaseRaces.HalfElf], Is.EqualTo(0));
-        }
-
-        [Test]
-        public void HalfFiendLevelAdjustmentIsTwo()
-        {
-            Assert.That(adjustments[RaceConstants.Metaraces.HalfFiend], Is.EqualTo(2));
-        }
-
-        [Test]
-        public void HalfOrcLevelAdjustmentIsZero()
-        {
-            Assert.That(adjustments[RaceConstants.BaseRaces.HalfOrc], Is.EqualTo(0));
-        }
-
-        [Test]
-        public void DeepHalflingLevelAdjustmentIsZero()
-        {
-            Assert.That(adjustments[RaceConstants.BaseRaces.DeepHalfling], Is.EqualTo(0));
-        }
-
-        [Test]
-        public void LightfootHalflingLevelAdjustmentIsZero()
-        {
-            Assert.That(adjustments[RaceConstants.BaseRaces.LightfootHalfling], Is.EqualTo(0));
-        }
-
-        [Test]
-        public void TallfellowHalflingLevelAdjustmentIsZero()
-        {
-            Assert.That(adjustments[RaceConstants.BaseRaces.TallfellowHalfling], Is.EqualTo(0));
-        }
-
-        [Test]
-        public void HobgoblinLevelAdjustmentIsZero()
-        {
-            Assert.That(adjustments[RaceConstants.BaseRaces.Hobgoblin], Is.EqualTo(0));
-        }
-
-        [Test]
-        public void HumanLevelAdjustmentIsZero()
-        {
-            Assert.That(adjustments[RaceConstants.BaseRaces.Human], Is.EqualTo(0));
-        }
-
-        [Test]
-        public void KoboldLevelAdjustmentIsZero()
-        {
-            Assert.That(adjustments[RaceConstants.BaseRaces.Kobold], Is.EqualTo(0));
-        }
-
-        [Test]
-        public void LizardfolkLevelAdjustmentIsZero()
-        {
-            Assert.That(adjustments[RaceConstants.BaseRaces.Lizardfolk], Is.EqualTo(0));
-        }
-
-        [Test]
-        public void MindFlayerLevelAdjustmentIsEight()
-        {
-            Assert.That(adjustments[RaceConstants.BaseRaces.MindFlayer], Is.EqualTo(8));
-        }
-
-        [Test]
-        public void MinotaurLevelAdjustmentIsFour()
-        {
-            Assert.That(adjustments[RaceConstants.BaseRaces.Minotaur], Is.EqualTo(4));
-        }
-
-        [Test]
-        public void OgreLevelAdjustmentIsTwo()
-        {
-            Assert.That(adjustments[RaceConstants.BaseRaces.Ogre], Is.EqualTo(2));
-        }
-
-        [Test]
-        public void OgreMageLevelAdjustmentIsEight()
-        {
-            Assert.That(adjustments[RaceConstants.BaseRaces.OgreMage], Is.EqualTo(8));
-        }
-
-        [Test]
-        public void OrcLevelAdjustmentIsZero()
-        {
-            Assert.That(adjustments[RaceConstants.BaseRaces.Orc], Is.EqualTo(0));
-        }
-
-        [Test]
-        public void TieflingLevelAdjustmentIsZero()
-        {
-            Assert.That(adjustments[RaceConstants.BaseRaces.Tiefling], Is.EqualTo(0));
-        }
-
-        [Test]
-        public void TroglodyteLevelAdjustmentIsOne()
-        {
-            Assert.That(adjustments[RaceConstants.BaseRaces.Troglodyte], Is.EqualTo(1));
-        }
-
-        [Test]
-        public void WerebearLevelAdjustmentIsTwo()
-        {
-            Assert.That(adjustments[RaceConstants.Metaraces.Werebear], Is.EqualTo(2));
-        }
-
-        [Test]
-        public void WereboarLevelAdjustmentIsOne()
-        {
-            Assert.That(adjustments[RaceConstants.Metaraces.Wereboar], Is.EqualTo(1));
-        }
-
-        [Test]
-        public void WereratLevelAdjustmentIsOne()
-        {
-            Assert.That(adjustments[RaceConstants.Metaraces.Wererat], Is.EqualTo(1));
-        }
-
-        [Test]
-        public void WeretigerLevelAdjustmentIsOne()
-        {
-            Assert.That(adjustments[RaceConstants.Metaraces.Weretiger], Is.EqualTo(1));
-        }
-
-        [Test]
-        public void WerewolfLevelAdjustmentIsOne()
-        {
-            Assert.That(adjustments[RaceConstants.Metaraces.Werewolf], Is.EqualTo(1));
-        }
-
-        [Test]
-        public void AllBaseRacesInTable()
-        {
-            foreach (var baseRace in RaceConstants.BaseRaces.GetBaseRaces())
-                Assert.That(adjustments.ContainsKey(baseRace), Is.True, baseRace);
-        }
-
-        [Test]
-        public void AllMetaracesInTable()
-        {
-            foreach (var metarace in RaceConstants.Metaraces.GetMetaraces())
-                Assert.That(adjustments.ContainsKey(metarace), Is.True, metarace);
-
-            Assert.That(adjustments.ContainsKey(String.Empty), Is.True, String.Empty);
+            var collection = new[] { Convert.ToString(adjustment) };
+            AssertCollection(name, collection);
         }
     }
 }
