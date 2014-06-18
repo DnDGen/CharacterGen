@@ -4,29 +4,21 @@ using System.Linq;
 using Ninject;
 using NPCGen.Common.Races;
 using NPCGen.Generators.Interfaces.Randomizers.Races;
-using NPCGen.Generators.Randomizers.Races.BaseRaces;
-using NPCGen.Tests.Integration.Common;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
 {
     [TestFixture]
-    public class NonEvilBaseRaceRandomizerTests : StressTests
+    public class NonEvilBaseRaceRandomizerTests : BaseRaceRandomizerTests
     {
-        [Inject]
-        public NonEvilBaseRaceRandomizer BaseRaceRandomizer { get; set; }
+        [Inject, Named(BaseRaceRandomizerTypeConstants.NonEvil)]
+        public override IBaseRaceRandomizer BaseRaceRandomizer { get; set; }
 
-        private IEnumerable<String> baseRaces;
-
-        protected override IBaseRaceRandomizer GetBaseRaceRandomizer(IKernel kernel)
+        protected override IEnumerable<String> particularBaseRaces
         {
-            return kernel.Get<NonEvilBaseRaceRandomizer>();
-        }
-
-        [SetUp]
-        public void Setup()
-        {
-            var evilBaseRaces = new[]
+            get
+            {
+                var evilBaseRaces = new[]
                 {
                     RaceConstants.BaseRaces.Bugbear,
                     RaceConstants.BaseRaces.Derro,
@@ -45,20 +37,8 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
                     RaceConstants.BaseRaces.Tiefling
                 };
 
-            baseRaces = RaceConstants.BaseRaces.GetBaseRaces().Except(evilBaseRaces);
-        }
-
-        [Test]
-        public void NonEvilBaseRaceRandomizerAlwaysReturnsNonEvilBaseRace()
-        {
-            while (TestShouldKeepRunning())
-            {
-                var data = GetNewInstanceOf<DependentDataCollection>();
-                var baseRace = BaseRaceRandomizer.Randomize(data.Alignment.Goodness, data.CharacterClassPrototype);
-                Assert.That(baseRaces.Contains(baseRace), Is.True);
+                return RaceConstants.BaseRaces.GetBaseRaces().Except(evilBaseRaces);
             }
-
-            AssertIterations();
         }
     }
 }

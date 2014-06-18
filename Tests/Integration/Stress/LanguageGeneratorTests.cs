@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Linq;
 using Ninject;
 using NPCGen.Common.Stats;
 using NPCGen.Generators.Interfaces;
-using NPCGen.Tests.Integration.Common;
+using NPCGen.Generators.Interfaces.Randomizers.Stats;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Stress
@@ -13,19 +12,18 @@ namespace NPCGen.Tests.Integration.Stress
     {
         [Inject]
         public ILanguageGenerator LanguageGenerator { get; set; }
+        [Inject]
+        public IStatsGenerator StatsGenerator { get; set; }
+        [Inject]
+        public IStatsRandomizer StatsRandomizer { get; set; }
 
-        [Test]
-        public void LanguageGeneratorReturnsLanguages()
+        protected override void MakeAssertions()
         {
-            while (TestShouldKeepRunning())
-            {
-                var data = GetNewInstanceOf<DependentDataCollection>();
-                var stats = GetNewInstanceOf<Dictionary<String, Stat>>();
-                var languages = LanguageGenerator.CreateWith(data.Race, data.CharacterClass.ClassName, stats[StatConstants.Intelligence].Bonus);
-                Assert.That(languages, Is.Not.Null);
-            }
+            var dependentData = GetNewDependentData();
+            var stats = StatsGenerator.CreateWith(StatsRandomizer, dependentData.CharacterClass, dependentData.Race);
 
-            AssertIterations();
+            var languages = LanguageGenerator.CreateWith(dependentData.Race, dependentData.CharacterClass.ClassName, stats[StatConstants.Intelligence].Bonus);
+            Assert.That(languages.Count(), Is.AtLeast(1));
         }
     }
 }

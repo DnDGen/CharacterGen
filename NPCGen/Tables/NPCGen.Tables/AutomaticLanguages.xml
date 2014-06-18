@@ -1,186 +1,186 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<languages>
+<items>
     <object>
-        <key>Aasimar</key>
-        <language>Common</language>
-        <language>Celestial</language>
+        <name>Aasimar</name>
+        <item>Common</item>
+        <item>Celestial</item>
     </object>
     <object>
-        <key>Bugbear</key>
-        <language>Common</language>
-        <language>Goblin</language>
+        <name>Bugbear</name>
+        <item>Common</item>
+        <item>Goblin</item>
     </object>
     <object>
-        <key>Deep Dwarf</key>
-        <language>Common</language>
-        <language>Dwarven</language>
+        <name>Deep Dwarf</name>
+        <item>Common</item>
+        <item>Dwarven</item>
     </object>
     <object>
-        <key>Hill Dwarf</key>
-        <language>Common</language>
-        <language>Dwarven</language>
+        <name>Hill Dwarf</name>
+        <item>Common</item>
+        <item>Dwarven</item>
     </object>
     <object>
-        <key>Mountain Dwarf</key>
-        <language>Common</language>
-        <language>Dwarven</language>
+        <name>Mountain Dwarf</name>
+        <item>Common</item>
+        <item>Dwarven</item>
     </object>
     <object>
-        <key>Deep Halfling</key>
-        <language>Common</language>
-        <language>Halfling</language>
+        <name>Deep Halfling</name>
+        <item>Common</item>
+        <item>Halfling</item>
     </object>
     <object>
-        <key>Derro</key>
-        <language>Common</language>
-        <language>Dwarven</language>
+        <name>Derro</name>
+        <item>Common</item>
+        <item>Dwarven</item>
     </object>
     <object>
-        <key>Doppelganger</key>
-        <language>Common</language>
+        <name>Doppelganger</name>
+        <item>Common</item>
     </object>
     <object>
-        <key>Drow</key>
-        <language>Common</language>
-        <language>Elven</language>
-        <language>Undercommon</language>
+        <name>Drow</name>
+        <item>Common</item>
+        <item>Elven</item>
+        <item>Undercommon</item>
     </object>
     <object>
-        <key>Duergar Dwarf</key>
-        <language>Common</language>
-        <language>Dwarven</language>
-        <language>Undercommon</language>
+        <name>Duergar Dwarf</name>
+        <item>Common</item>
+        <item>Dwarven</item>
+        <item>Undercommon</item>
     </object>
     <object>
-        <key>Forest Gnome</key>
-        <language>Common</language>
-        <language>Elven</language>
-        <language>Gnome</language>
-        <language>Sylvan</language>
+        <name>Forest Gnome</name>
+        <item>Common</item>
+        <item>Elven</item>
+        <item>Gnome</item>
+        <item>Sylvan</item>
     </object>
     <object>
-        <key>Gnoll</key>
-        <language>Gnoll</language>
+        <name>Gnoll</name>
+        <item>Gnoll</item>
     </object>
     <object>
-        <key>Goblin</key>
-        <language>Common</language>
-        <language>Goblin</language>
+        <name>Goblin</name>
+        <item>Common</item>
+        <item>Goblin</item>
     </object>
     <object>
-        <key>Hobgoblin</key>
-        <language>Common</language>
-        <language>Goblin</language>
+        <name>Hobgoblin</name>
+        <item>Common</item>
+        <item>Goblin</item>
     </object>
     <object>
-        <key>Gray Elf</key>
-        <language>Common</language>
-        <language>Elven</language>
+        <name>Gray Elf</name>
+        <item>Common</item>
+        <item>Elven</item>
     </object>
     <object>
-        <key>High Elf</key>
-        <language>Common</language>
-        <language>Elven</language>
+        <name>High Elf</name>
+        <item>Common</item>
+        <item>Elven</item>
     </object>
     <object>
-        <key>Wild Elf</key>
-        <language>Common</language>
-        <language>Elven</language>
+        <name>Wild Elf</name>
+        <item>Common</item>
+        <item>Elven</item>
     </object>
     <object>
-        <key>Wood Elf</key>
-        <language>Common</language>
-        <language>Elven</language>
+        <name>Wood Elf</name>
+        <item>Common</item>
+        <item>Elven</item>
     </object>
     <object>
-        <key>Half-Elf</key>
-        <language>Common</language>
-        <language>Elven</language>
+        <name>Half-Elf</name>
+        <item>Common</item>
+        <item>Elven</item>
     </object>
     <object>
-        <key>Half-Fiend</key>
-        <language>Infernal</language>
+        <name>Half-Fiend</name>
+        <item>Infernal</item>
     </object>
     <object>
-        <key>Half-Celestial</key>
-        <language>Celestial</language>
+        <name>Half-Celestial</name>
+        <item>Celestial</item>
     </object>
     <object>
-        <key>Half-Dragon</key>
-        <language>Draconic</language>
+        <name>Half-Dragon</name>
+        <item>Draconic</item>
     </object>
     <object>
-        <key>Half-Orc</key>
-        <language>Common</language>
-        <language>Orc</language>
+        <name>Half-Orc</name>
+        <item>Common</item>
+        <item>Orc</item>
     </object>
     <object>
-        <key>Orc</key>
-        <language>Common</language>
-        <language>Orc</language>
+        <name>Orc</name>
+        <item>Common</item>
+        <item>Orc</item>
     </object>
     <object>
-        <key>Human</key>
-        <language>Common</language>
+        <name>Human</name>
+        <item>Common</item>
     </object>
     <object>
-        <key>Kobold</key>
-        <language>Draconic</language>
+        <name>Kobold</name>
+        <item>Draconic</item>
     </object>
     <object>
-        <key>Lightfoot Halfling</key>
-        <language>Common</language>
-        <language>Halfling</language>
+        <name>Lightfoot Halfling</name>
+        <item>Common</item>
+        <item>Halfling</item>
     </object>
     <object>
-        <key>Tallfellow Halfling</key>
-        <language>Common</language>
-        <language>Halfling</language>
+        <name>Tallfellow Halfling</name>
+        <item>Common</item>
+        <item>Halfling</item>
     </object>
     <object>
-        <key>Mind Flayer</key>
-        <language>Common</language>
-        <language>Undercommon</language>
+        <name>Mind Flayer</name>
+        <item>Common</item>
+        <item>Undercommon</item>
     </object>
     <object>
-        <key>Minotaur</key>
-        <language>Common</language>
-        <language>Giant</language>
+        <name>Minotaur</name>
+        <item>Common</item>
+        <item>Giant</item>
     </object>
     <object>
-        <key>Ogre</key>
-        <language>Common</language>
-        <language>Giant</language>
+        <name>Ogre</name>
+        <item>Common</item>
+        <item>Giant</item>
     </object>
     <object>
-        <key>Ogre Mage</key>
-        <language>Common</language>
-        <language>Giant</language>
+        <name>Ogre Mage</name>
+        <item>Common</item>
+        <item>Giant</item>
     </object>
     <object>
-        <key>Rock Gnome</key>
-        <language>Common</language>
-        <language>Gnome</language>
+        <name>Rock Gnome</name>
+        <item>Common</item>
+        <item>Gnome</item>
     </object>
     <object>
-        <key>Svirfneblin</key>
-        <language>Common</language>
-        <language>Gnome</language>
-        <language>Undercommon</language>
+        <name>Svirfneblin</name>
+        <item>Common</item>
+        <item>Gnome</item>
+        <item>Undercommon</item>
     </object>
     <object>
-        <key>Tiefling</key>
-        <language>Common</language>
-        <language>Infernal</language>
+        <name>Tiefling</name>
+        <item>Common</item>
+        <item>Infernal</item>
     </object>
     <object>
-        <key>Troglodyte</key>
-        <language>Draconic</language>
+        <name>Troglodyte</name>
+        <item>Draconic</item>
     </object>
     <object>
-        <key>Lizardfolk</key>
-        <language>Common</language>
-        <language>Draconic</language>
+        <name>Lizardfolk</name>
+        <item>Common</item>
+        <item>Draconic</item>
     </object>
-</languages>
+</items>

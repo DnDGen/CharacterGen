@@ -4,48 +4,28 @@ using System.Linq;
 using Ninject;
 using NPCGen.Common.Races;
 using NPCGen.Generators.Interfaces.Randomizers.Races;
-using NPCGen.Generators.Randomizers.Races.BaseRaces;
-using NPCGen.Tests.Integration.Common;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
 {
     [TestFixture]
-    public class BaseRaceRandomizerTests : StressTests
+    public class NonGoodBaseRaceRandomizerTests : BaseRaceRandomizerTests
     {
-        [Inject]
-        public NonGoodBaseRaceRandomizer BaseRaceRandomizer { get; set; }
+        [Inject, Named(BaseRaceRandomizerTypeConstants.NonGood)]
+        public override IBaseRaceRandomizer BaseRaceRandomizer { get; set; }
 
-        private IEnumerable<String> baseRaces;
-
-        protected override IBaseRaceRandomizer GetBaseRaceRandomizer(IKernel kernel)
+        protected override IEnumerable<String> particularBaseRaces
         {
-            return kernel.Get<NonGoodBaseRaceRandomizer>();
-        }
-
-        [SetUp]
-        public void Setup()
-        {
-            var goodBaseRaces = new[]
+            get
+            {
+                var goodBaseRaces = new[]
                 {
                     RaceConstants.BaseRaces.Aasimar,
                     RaceConstants.BaseRaces.Svirfneblin
                 };
 
-            baseRaces = RaceConstants.BaseRaces.GetBaseRaces().Except(goodBaseRaces);
-        }
-
-        [Test]
-        public void NonGoodBaseRaceRandomizerAlwaysReturnsNonGoodBaseRace()
-        {
-            while (TestShouldKeepRunning())
-            {
-                var data = GetNewInstanceOf<DependentDataCollection>();
-                var baseRace = BaseRaceRandomizer.Randomize(data.Alignment.Goodness, data.CharacterClassPrototype);
-                Assert.That(baseRaces.Contains(baseRace), Is.True);
+                return RaceConstants.BaseRaces.GetBaseRaces().Except(goodBaseRaces);
             }
-
-            AssertIterations();
         }
     }
 }

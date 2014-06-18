@@ -1,6 +1,5 @@
 ﻿using Ninject;
 using NPCGen.Generators.Randomizers.Races.BaseRaces;
-using NPCGen.Tests.Integration.Common;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
@@ -9,21 +8,15 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
     public class SetBaseRaceRandomizerTests : StressTests
     {
         [Inject]
-        public SetBaseRaceRandomizer BaseRaceRandomizer { get; set; }
+        public SetBaseRaceRandomizer SetBaseRaceRandomizer { get; set; }
 
-        [Test]
-        public void SetBaseRaceRandomizerAlwaysReturnsSetBaseRace()
+        protected override void MakeAssertions()
         {
-            while (TestShouldKeepRunning())
-            {
-                var data = GetNewInstanceOf<DependentDataCollection>();
-                BaseRaceRandomizer.BaseRace = data.Race.BaseRace;
+            var data = GetNewDependentData();
+            SetBaseRaceRandomizer.BaseRace = data.Race.BaseRace;
 
-                var baseRace = BaseRaceRandomizer.Randomize(data.Alignment.Goodness, data.CharacterClassPrototype);
-                Assert.That(baseRace, Is.EqualTo(BaseRaceRandomizer.BaseRace));
-            }
-
-            AssertIterations();
+            var baseRace = SetBaseRaceRandomizer.Randomize(data.Alignment.Goodness, data.CharacterClassPrototype);
+            Assert.That(baseRace, Is.EqualTo(data.Race.BaseRace));
         }
     }
 }

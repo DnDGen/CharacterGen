@@ -65,5 +65,26 @@ namespace NPCGen.Tests.Integration.Tables
             var extras = table[name].Except(collection);
             Assert.That(extras, Is.Empty);
         }
+
+        protected void AssertCollectionAndOrder(String name, IEnumerable<String> collection)
+        {
+            var testedBefore = testedNames.Contains(name);
+            Assert.That(testedBefore, Is.False);
+
+            testedNames.Add(name);
+
+            Assert.That(table.Keys, Contains.Item(name), tableName);
+
+            for (var i = 0; i < collection.Count(); i++)
+            {
+                var actualItem = table[name].ElementAt(i);
+                var expectedItem = collection.ElementAt(i);
+
+                Assert.That(actualItem, Is.EqualTo(expectedItem));
+            }
+
+            var extras = table[name].Except(collection);
+            Assert.That(extras, Is.Empty);
+        }
     }
 }

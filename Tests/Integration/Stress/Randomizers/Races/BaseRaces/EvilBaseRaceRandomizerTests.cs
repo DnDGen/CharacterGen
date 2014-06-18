@@ -11,22 +11,16 @@ using NUnit.Framework;
 namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
 {
     [TestFixture]
-    public class EvilBaseRaceRandomizerTests : StressTests
+    public class EvilBaseRaceRandomizerTests : BaseRaceRandomizerTests
     {
-        [Inject]
-        public EvilBaseRaceRandomizer BaseRaceRandomizer { get; set; }
+        [Inject, Named(BaseRaceRandomizerTypeConstants.Evil)]
+        public override IBaseRaceRandomizer BaseRaceRandomizer { get; set; }
 
-        private IEnumerable<String> baseRaces;
-
-        protected override IBaseRaceRandomizer GetBaseRaceRandomizer(IKernel kernel)
+        protected override IEnumerable<String> particularBaseRaces
         {
-            return kernel.Get<EvilBaseRaceRandomizer>();
-        }
-
-        [SetUp]
-        public void Setup()
-        {
-            baseRaces = new[]
+            get
+            {
+                return new[]
                 {
                     RaceConstants.BaseRaces.Bugbear,
                     RaceConstants.BaseRaces.Derro,
@@ -56,19 +50,7 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
                     RaceConstants.BaseRaces.WildElf,
                     RaceConstants.BaseRaces.WoodElf
                 };
-        }
-
-        [Test]
-        public void EvilBaseRaceRandomizerAlwaysReturnsEvilBaseRace()
-        {
-            while (TestShouldKeepRunning())
-            {
-                var data = GetNewInstanceOf<DependentDataCollection>();
-                var baseRace = BaseRaceRandomizer.Randomize(data.Alignment.Goodness, data.CharacterClassPrototype);
-                Assert.That(baseRaces.Contains(baseRace), Is.True);
             }
-
-            AssertIterations();
         }
     }
 }

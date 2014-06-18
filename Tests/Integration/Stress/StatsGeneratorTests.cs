@@ -1,8 +1,10 @@
-﻿using Ninject;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Ninject;
 using NPCGen.Common.Stats;
 using NPCGen.Generators.Interfaces;
 using NPCGen.Generators.Interfaces.Randomizers.Stats;
-using NPCGen.Tests.Integration.Common;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Stress
@@ -15,38 +17,27 @@ namespace NPCGen.Tests.Integration.Stress
         [Inject]
         public IStatsRandomizer StatsRandomizer { get; set; }
 
-        [Test]
-        public void StatsGeneratorReturnsStats()
-        {
-            while (TestShouldKeepRunning())
-            {
-                var data = GetNewInstanceOf<DependentDataCollection>();
-                var stats = StatsGenerator.CreateWith(StatsRandomizer, data.CharacterClass, data.Race);
-                Assert.That(stats, Is.Not.Null);
-            }
+        private IEnumerable<String> statNames;
 
-            AssertIterations();
+        [SetUp]
+        public void Setup()
+        {
+            statNames = StatConstants.GetStats();
         }
 
-        [Test]
-        public void StatsGeneratorReturnsStatsWithAllStats()
+        protected override void MakeAssertions()
         {
-            var statNames = StatConstants.GetStats();
+            var data = GetNewDependentData();
+            var stats = StatsGenerator.CreateWith(StatsRandomizer, data.CharacterClass, data.Race);
 
-            while (TestShouldKeepRunning())
+            foreach (var statName in statNames)
             {
-                var data = GetNewInstanceOf<DependentDataCollection>();
-                var stats = StatsGenerator.CreateWith(StatsRandomizer, data.CharacterClass, data.Race);
-
-                foreach (var statName in statNames)
-                {
-                    Assert.That(stats.ContainsKey(statName), Is.True);
-                    Assert.That(stats[statName], Is.Not.Null);
-                    Assert.That(stats[statName].Value, Is.GreaterThan(0));
-                }
+                Assert.That(stats.Keys, Contains.Item(statName));
+                Assert.That(stats[statName].Value, Is.Positive);
             }
 
-            AssertIterations();
+            var extras = stats.Keys.Except(statNames);
+            Assert.That(extras, Is.Empty);
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Ninject;
 using NPCGen.Common.Stats;
+using NPCGen.Generators.Interfaces.Randomizers.Stats;
 using NPCGen.Generators.Randomizers.Stats;
 using NUnit.Framework;
 
@@ -11,8 +12,8 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Stats
     [TestFixture]
     public class AverageStatsRandomizerTests : StressTests
     {
-        [Inject]
-        public AverageStatsRandomizer StatsRandomizer { get; set; }
+        [Inject, Named(StatsRandomizerTypeConstants.Average)]
+        public IStatsRandomizer AverageStatsRandomizer { get; set; }
 
         private IEnumerable<String> statNames;
 
@@ -22,27 +23,19 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Stats
             statNames = StatConstants.GetStats();
         }
 
-        [Test]
-        public void AverageStatsRandomizerReturnsAverageStats()
+        protected override void MakeAssertions()
         {
-            while (TestShouldKeepRunning())
+            var stats = AverageStatsRandomizer.Randomize();
+
+            foreach (var name in statNames)
             {
-                var stats = StatsRandomizer.Randomize();
-                Assert.That(stats, Is.Not.Null);
-
-                foreach (var name in statNames)
-                {
-                    Assert.That(stats.Keys.Contains(name), Is.True);
-                    Assert.That(stats[name].Value, Is.InRange<Int32>(3, 18));
-                }
-
-                Assert.That(stats.Keys.Count, Is.EqualTo(statNames.Count()));
-
-                var average = stats.Values.Average(s => s.Value);
-                Assert.That(average, Is.InRange<Double>(10, 12));
+                Assert.That(stats.Keys, Contains.Item(name));
+                Assert.That(stats[name].Value, Is.InRange<Int32>(3, 18));
             }
 
-            AssertIterations();
+            Assert.That(stats.Count, Is.EqualTo(6));
+            var average = stats.Values.Average(s => s.Value);
+            Assert.That(average, Is.InRange<Double>(10, 12));
         }
     }
 }

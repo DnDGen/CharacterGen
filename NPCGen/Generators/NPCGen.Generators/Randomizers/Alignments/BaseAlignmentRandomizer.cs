@@ -33,8 +33,8 @@ namespace NPCGen.Generators.Randomizers.Alignments
             do
             {
                 alignment.Lawfulness = RollLawfulness();
-                alignment.Goodness = RollGoodness();
-            } while (!possibleAlignments.Any(a => a.Lawfulness == alignment.Lawfulness && a.Goodness == alignment.Goodness));
+                alignment.Goodness = percentileResultSelector.GetPercentileResult(table);
+            } while (!possibleAlignments.Any(a => a.Equals(alignment)));
 
             return alignment;
         }
@@ -50,12 +50,6 @@ namespace NPCGen.Generators.Randomizers.Alignments
             }
         }
 
-        private String RollGoodness()
-        {
-            var result = percentileResultSelector.GetPercentileResult(table);
-            return result;
-        }
-
         public IEnumerable<Alignment> GetAllPossibleResults()
         {
             var alignments = new List<Alignment>();
@@ -63,7 +57,7 @@ namespace NPCGen.Generators.Randomizers.Alignments
 
             foreach (var goodness in goodnesses)
                 foreach (var lawfulness in AlignmentConstants.GetLawfulnesses())
-                    alignments.Add(new Alignment() { Goodness = goodness, Lawfulness = lawfulness });
+                    alignments.Add(new Alignment { Goodness = goodness, Lawfulness = lawfulness });
 
             return alignments.Where(a => AlignmentIsAllowed(a));
         }

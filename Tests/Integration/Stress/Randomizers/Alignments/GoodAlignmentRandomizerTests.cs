@@ -1,7 +1,8 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
 using Ninject;
 using NPCGen.Common.Alignments;
-using NPCGen.Generators.Randomizers.Alignments;
+using NPCGen.Generators.Interfaces.Randomizers.Alignments;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Stress.Randomizers.Alignments
@@ -9,59 +10,22 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Alignments
     [TestFixture]
     public class GoodAlignmentRandomizerTests : StressTests
     {
-        [Inject]
-        public GoodAlignmentRandomizer AlignmentRandomizer { get; set; }
+        [Inject, Named(AlignmentRandomizerTypeConstants.Good)]
+        public override IAlignmentRandomizer AlignmentRandomizer { get; set; }
 
-        [Test]
-        public void GoodAlignmentRandomizerReturnsAlignment()
+        private IEnumerable<String> lawfulnesses;
+
+        [SetUp]
+        public void Setup()
         {
-            while (TestShouldKeepRunning())
-            {
-                var alignment = AlignmentRandomizer.Randomize();
-                Assert.That(alignment, Is.Not.Null);
-            }
-
-            AssertIterations();
+            lawfulnesses = AlignmentConstants.GetLawfulnesses();
         }
 
-        [Test]
-        public void GoodAlignmentRandomizerReturnsAlignmentWithGoodness()
+        protected override void MakeAssertions()
         {
-            var goodnesses = AlignmentConstants.GetGoodnesses();
-
-            while (TestShouldKeepRunning())
-            {
-                var alignment = AlignmentRandomizer.Randomize();
-                Assert.That(goodnesses.Contains(alignment.Goodness), Is.True);
-            }
-
-            AssertIterations();
-        }
-
-        [Test]
-        public void GoodAlignmentRandomizerReturnsAlignmentWithLawfulness()
-        {
-            var lawfulnesses = AlignmentConstants.GetLawfulnesses();
-
-            while (TestShouldKeepRunning())
-            {
-                var alignment = AlignmentRandomizer.Randomize();
-                Assert.That(lawfulnesses.Contains(alignment.Lawfulness), Is.True);
-            }
-
-            AssertIterations();
-        }
-
-        [Test]
-        public void GoodAlignmentRandomizerAlwaysReturnsGoodAlignment()
-        {
-            while (TestShouldKeepRunning())
-            {
-                var alignment = AlignmentRandomizer.Randomize();
-                Assert.That(alignment.IsGood(), Is.True);
-            }
-
-            AssertIterations();
+            var alignment = AlignmentRandomizer.Randomize();
+            Assert.That(alignment.Goodness, Is.EqualTo(AlignmentConstants.Good));
+            Assert.That(lawfulnesses, Contains.Item(alignment.Lawfulness));
         }
     }
 }

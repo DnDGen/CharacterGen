@@ -1,32 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Ninject;
 using NPCGen.Common.Races;
 using NPCGen.Generators.Interfaces.Randomizers.Races;
-using NPCGen.Generators.Randomizers.Races.BaseRaces;
-using NPCGen.Tests.Integration.Common;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
 {
     [TestFixture]
-    public class NeutralBaseRaceRandomizerTests : StressTests
+    public class NeutralBaseRaceRandomizerTests : BaseRaceRandomizerTests
     {
-        [Inject]
-        public NeutralBaseRaceRandomizer BaseRaceRandomizer { get; set; }
+        [Inject, Named(BaseRaceRandomizerTypeConstants.Neutral)]
+        public override IBaseRaceRandomizer BaseRaceRandomizer { get; set; }
 
-        private IEnumerable<String> baseRaces;
-
-        protected override IBaseRaceRandomizer GetBaseRaceRandomizer(IKernel kernel)
+        protected override IEnumerable<String> particularBaseRaces
         {
-            return kernel.Get<NeutralBaseRaceRandomizer>();
-        }
-
-        [SetUp]
-        public void Setup()
-        {
-            baseRaces = new[]
+            get
+            {
+                return new[]
                 {
                     RaceConstants.BaseRaces.Doppelganger,
                     RaceConstants.BaseRaces.Lizardfolk,
@@ -46,19 +37,7 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
                     RaceConstants.BaseRaces.WildElf,
                     RaceConstants.BaseRaces.WoodElf
                 };
-        }
-
-        [Test]
-        public void NeutralBaseRaceRandomizerAlwaysReturnsNeutralBaseRace()
-        {
-            while (TestShouldKeepRunning())
-            {
-                var data = GetNewInstanceOf<DependentDataCollection>();
-                var baseRace = BaseRaceRandomizer.Randomize(data.Alignment.Goodness, data.CharacterClassPrototype);
-                Assert.That(baseRaces.Contains(baseRace), Is.True);
             }
-
-            AssertIterations();
         }
     }
 }

@@ -9,21 +9,15 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.CharacterClasses.Levels
     public class SetLevelRandomizerTests : StressTests
     {
         [Inject]
-        public SetLevelRandomizer LevelRandomizer { get; set; }
+        public SetLevelRandomizer SetLevelRandomizer { get; set; }
         [Inject]
         public Random Random { get; set; }
 
-        [Test]
-        public void SetLevelRandomizerReturnsSetLevel()
+        protected override void MakeAssertions()
         {
-            while (TestShouldKeepRunning())
-            {
-                LevelRandomizer.Level = Random.Next();
-                var level = LevelRandomizer.Randomize();
-                Assert.That(level, Is.EqualTo(LevelRandomizer.Level));
-            }
-
-            AssertIterations();
+            SetLevelRandomizer.Level = Random.Next();
+            var level = SetLevelRandomizer.Randomize();
+            Assert.That(level, Is.EqualTo(SetLevelRandomizer.Level));
         }
     }
 }

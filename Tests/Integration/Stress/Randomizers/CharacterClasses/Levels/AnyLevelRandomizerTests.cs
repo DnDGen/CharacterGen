@@ -1,5 +1,6 @@
-﻿using Ninject;
-using NPCGen.Generators.Randomizers.CharacterClasses.Levels;
+﻿using System;
+using Ninject;
+using NPCGen.Generators.Interfaces.Randomizers.CharacterClasses;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Stress.Randomizers.CharacterClasses.Levels
@@ -7,20 +8,13 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.CharacterClasses.Levels
     [TestFixture]
     public class AnyLevelRandomizerTests : StressTests
     {
-        [Inject]
-        public AnyLevelRandomizer LevelRandomizer { get; set; }
+        [Inject, Named(LevelRandomizerTypeConstants.Any)]
+        public ILevelRandomizer AnyLevelRandomizer { get; set; }
 
-        [Test]
-        public void AnyLevelRandomizerReturnsLevel()
+        protected override void MakeAssertions()
         {
-            while (TestShouldKeepRunning())
-            {
-                var level = LevelRandomizer.Randomize();
-                Assert.That(level, Is.GreaterThan(0));
-                Assert.That(level, Is.LessThanOrEqualTo(20));
-            }
-
-            AssertIterations();
+            var level = LevelRandomizer.Randomize();
+            Assert.That(level, Is.InRange<Int32>(1, 20));
         }
     }
 }

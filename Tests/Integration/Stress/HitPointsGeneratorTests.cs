@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Ninject;
 using NPCGen.Common.Stats;
 using NPCGen.Generators.Interfaces;
+using NPCGen.Generators.Interfaces.Randomizers.Stats;
 using NPCGen.Tests.Integration.Common;
 using NUnit.Framework;
 
@@ -13,19 +14,18 @@ namespace NPCGen.Tests.Integration.Stress
     {
         [Inject]
         public IHitPointsGenerator HitPointsGenerator { get; set; }
+        [Inject]
+        public IStatsGenerator StatsGenerator { get; set; }
+        [Inject]
+        public IStatsRandomizer StatsRandomizer { get; set; }
 
-        [Test]
-        public void HitPointsGeneratorReturnsHitPointsGreaterThanZero()
+        protected override void MakeAssertions()
         {
-            while (TestShouldKeepRunning())
-            {
-                var data = GetNewInstanceOf<DependentDataCollection>();
-                var stats = GetNewInstanceOf<Dictionary<String, Stat>>();
-                var hitPoints = HitPointsGenerator.CreateWith(data.CharacterClass, stats[StatConstants.Constitution].Bonus, data.Race);
-                Assert.That(hitPoints, Is.GreaterThan(0));
-            }
+            var dependentData = GetNewDependentData();
+            var stats = StatsGenerator.CreateWith(StatsRandomizer, dependentData.CharacterClass, dependentData.Race);
 
-            AssertIterations();
+            var hitPoints = HitPointsGenerator.CreateWith(dependentData.CharacterClass, stats[StatConstants.Constitution].Bonus, dependentData.Race);
+            Assert.That(hitPoints, Is.AtLeast(dependentData.CharacterClass.Level));
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Ninject;
-using NPCGen.Common.Alignments;
 using NPCGen.Generators.Randomizers.Alignments;
 using NUnit.Framework;
 
@@ -9,19 +8,15 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Alignments
     public class SetAlignmentRandomizerTests : StressTests
     {
         [Inject]
-        public SetAlignmentRandomizer AlignmentRandomizer { get; set; }
+        public SetAlignmentRandomizer SetAlignmentRandomizer { get; set; }
 
-        [Test]
-        public void SetAlignmentRandomizerAlwaysReturnsSetAlignment()
+        protected override void MakeAssertions()
         {
-            while (TestShouldKeepRunning())
-            {
-                AlignmentRandomizer.Alignment = GetNewInstanceOf<Alignment>();
-                var alignment = AlignmentRandomizer.Randomize();
-                Assert.That(alignment, Is.EqualTo(AlignmentRandomizer.Alignment));
-            }
+            var dependentData = GetNewDependentData();
+            SetAlignmentRandomizer.Alignment = dependentData.Alignment;
 
-            AssertIterations();
+            var alignment = AlignmentRandomizer.Randomize();
+            Assert.That(alignment, Is.EqualTo(dependentData.Alignment));
         }
     }
 }

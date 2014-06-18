@@ -1,325 +1,325 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<languages>
+<items>
     <object>
-        <key>Aasimar</key>
-        <language>Dwarven</language>
-        <language>Elven</language>
-        <language>Gnome</language>
-        <language>Draconic</language>
-        <language>Halfling</language>
-        <language>Sylvan</language>
+        <name>Aasimar</name>
+        <item>Dwarven</item>
+        <item>Elven</item>
+        <item>Gnome</item>
+        <item>Draconic</item>
+        <item>Halfling</item>
+        <item>Sylvan</item>
     </object>
     <object>
-        <key>Bugbear</key>
-        <language>Giant</language>
-        <language>Elven</language>
-        <language>Gnoll</language>
-        <language>Draconic</language>
-        <language>Orc</language>
+        <name>Bugbear</name>
+        <item>Giant</item>
+        <item>Elven</item>
+        <item>Gnoll</item>
+        <item>Draconic</item>
+        <item>Orc</item>
     </object>
     <object>
-        <key>Deep Dwarf</key>
-        <language>Goblin</language>
-        <language>Gnome</language>
-        <language>Giant</language>
-        <language>Orc</language>
-        <language>Terran</language>
-        <language>Undercommon</language>
+        <name>Deep Dwarf</name>
+        <item>Goblin</item>
+        <item>Gnome</item>
+        <item>Giant</item>
+        <item>Orc</item>
+        <item>Terran</item>
+        <item>Undercommon</item>
     </object>
     <object>
-        <key>Hill Dwarf</key>
-        <language>Goblin</language>
-        <language>Gnome</language>
-        <language>Giant</language>
-        <language>Orc</language>
-        <language>Terran</language>
-        <language>Undercommon</language>
+        <name>Hill Dwarf</name>
+        <item>Goblin</item>
+        <item>Gnome</item>
+        <item>Giant</item>
+        <item>Orc</item>
+        <item>Terran</item>
+        <item>Undercommon</item>
     </object>
     <object>
-        <key>Mountain Dwarf</key>
-        <language>Goblin</language>
-        <language>Gnome</language>
-        <language>Giant</language>
-        <language>Orc</language>
-        <language>Terran</language>
-        <language>Undercommon</language>
+        <name>Mountain Dwarf</name>
+        <item>Goblin</item>
+        <item>Gnome</item>
+        <item>Giant</item>
+        <item>Orc</item>
+        <item>Terran</item>
+        <item>Undercommon</item>
     </object>
     <object>
-        <key>Deep Halfling</key>
-        <language>Dwarven</language>
-        <language>Elven</language>
-        <language>Gnome</language>
-        <language>Goblin</language>
-        <language>Orc</language>
-        <language>Undercommon</language>
+        <name>Deep Halfling</name>
+        <item>Dwarven</item>
+        <item>Elven</item>
+        <item>Gnome</item>
+        <item>Goblin</item>
+        <item>Orc</item>
+        <item>Undercommon</item>
     </object>
     <object>
-        <key>Derro</key>
-        <language>Goblin</language>
-        <language>Gnome</language>
-        <language>Giant</language>
-        <language>Orc</language>
-        <language>Terran</language>
-        <language>Undercommon</language>
+        <name>Derro</name>
+        <item>Goblin</item>
+        <item>Gnome</item>
+        <item>Giant</item>
+        <item>Orc</item>
+        <item>Terran</item>
+        <item>Undercommon</item>
     </object>
     <object>
-        <key>Doppelganger</key>
-        <language>Auran</language>
-        <language>Dwarven</language>
-        <language>Elven</language>
-        <language>Gnome</language>
-        <language>Giant</language>
-        <language>Halfling</language>
-        <language>Terran</language>
+        <name>Doppelganger</name>
+        <item>Auran</item>
+        <item>Dwarven</item>
+        <item>Elven</item>
+        <item>Gnome</item>
+        <item>Giant</item>
+        <item>Halfling</item>
+        <item>Terran</item>
     </object>
     <object>
-        <key>Drow</key>
-        <language>Abyssal</language>
-        <language>Aquan</language>
-        <language>Draconic</language>
-        <language>Gnome</language>
-        <language>Goblin</language>
+        <name>Drow</name>
+        <item>Abyssal</item>
+        <item>Aquan</item>
+        <item>Draconic</item>
+        <item>Gnome</item>
+        <item>Goblin</item>
     </object>
     <object>
-        <key>Duergar Dwarf</key>
-        <language>Giant</language>
-        <language>Goblin</language>
-        <language>Orc</language>
-        <language>Draconic</language>
-        <language>Terran</language>
+        <name>Duergar Dwarf</name>
+        <item>Giant</item>
+        <item>Goblin</item>
+        <item>Orc</item>
+        <item>Draconic</item>
+        <item>Terran</item>
     </object>
     <object>
-        <key>Forest Gnome</key>
-        <language>Dwarven</language>
-        <language>Elven</language>
-        <language>Draconic</language>
-        <language>Goblin</language>
-        <language>Giant</language>
+        <name>Forest Gnome</name>
+        <item>Dwarven</item>
+        <item>Elven</item>
+        <item>Draconic</item>
+        <item>Goblin</item>
+        <item>Giant</item>
     </object>
     <object>
-        <key>Gnoll</key>
-        <language>Common</language>
-        <language>Goblin</language>
-        <language>Orc</language>
-        <language>Draconic</language>
-        <language>Elven</language>
+        <name>Gnoll</name>
+        <item>Common</item>
+        <item>Goblin</item>
+        <item>Orc</item>
+        <item>Draconic</item>
+        <item>Elven</item>
     </object>
     <object>
-        <key>Goblin</key>
-        <language>Draconic</language>
-        <language>Elven</language>
-        <language>Giant</language>
-        <language>Orc</language>
-        <language>Gnoll</language>
+        <name>Goblin</name>
+        <item>Draconic</item>
+        <item>Elven</item>
+        <item>Giant</item>
+        <item>Orc</item>
+        <item>Gnoll</item>
     </object>
     <object>
-        <key>Hobgoblin</key>
-        <language>Dwarven</language>
-        <language>Infernal</language>
-        <language>Orc</language>
-        <language>Draconic</language>
-        <language>Giant</language>
+        <name>Hobgoblin</name>
+        <item>Dwarven</item>
+        <item>Infernal</item>
+        <item>Orc</item>
+        <item>Draconic</item>
+        <item>Giant</item>
     </object>
     <object>
-        <key>Gray Elf</key>
-        <language>Draconic</language>
-        <language>Gnoll</language>
-        <language>Goblin</language>
-        <language>Orc</language>
-        <language>Gnome</language>
-        <language>Sylvan</language>
+        <name>Gray Elf</name>
+        <item>Draconic</item>
+        <item>Gnoll</item>
+        <item>Goblin</item>
+        <item>Orc</item>
+        <item>Gnome</item>
+        <item>Sylvan</item>
     </object>
     <object>
-        <key>High Elf</key>
-        <language>Draconic</language>
-        <language>Gnoll</language>
-        <language>Goblin</language>
-        <language>Orc</language>
-        <language>Gnome</language>
-        <language>Sylvan</language>
+        <name>High Elf</name>
+        <item>Draconic</item>
+        <item>Gnoll</item>
+        <item>Goblin</item>
+        <item>Orc</item>
+        <item>Gnome</item>
+        <item>Sylvan</item>
     </object>
     <object>
-        <key>Wild Elf</key>
-        <language>Draconic</language>
-        <language>Gnoll</language>
-        <language>Goblin</language>
-        <language>Orc</language>
-        <language>Gnome</language>
-        <language>Sylvan</language>
+        <name>Wild Elf</name>
+        <item>Draconic</item>
+        <item>Gnoll</item>
+        <item>Goblin</item>
+        <item>Orc</item>
+        <item>Gnome</item>
+        <item>Sylvan</item>
     </object>
     <object>
-        <key>Wood Elf</key>
-        <language>Draconic</language>
-        <language>Gnoll</language>
-        <language>Goblin</language>
-        <language>Orc</language>
-        <language>Gnome</language>
-        <language>Sylvan</language>
+        <name>Wood Elf</name>
+        <item>Draconic</item>
+        <item>Gnoll</item>
+        <item>Goblin</item>
+        <item>Orc</item>
+        <item>Gnome</item>
+        <item>Sylvan</item>
     </object>
     <object>
-        <key>Half-Elf</key>
-        <language>Abyssal</language>
-        <language>Common</language>
-        <language>Elven</language>
-        <language>Celestial</language>
-        <language>Undercommon</language>
-        <language>Goblin</language>
-        <language>Dwarven</language>
-        <language>Draconic</language>
-        <language>Giant</language>
-        <language>Infernal</language>
-        <language>Gnome</language>
-        <language>Sylvan</language>
-        <language>Gnoll</language>
-        <language>Orc</language>
-        <language>Halfling</language>
-        <language>Aquan</language>
-        <language>Auran</language>
-        <language>Ignan</language>
-        <language>Terran</language>
+        <name>Half-Elf</name>
+        <item>Abyssal</item>
+        <item>Common</item>
+        <item>Elven</item>
+        <item>Celestial</item>
+        <item>Undercommon</item>
+        <item>Goblin</item>
+        <item>Dwarven</item>
+        <item>Draconic</item>
+        <item>Giant</item>
+        <item>Infernal</item>
+        <item>Gnome</item>
+        <item>Sylvan</item>
+        <item>Gnoll</item>
+        <item>Orc</item>
+        <item>Halfling</item>
+        <item>Aquan</item>
+        <item>Auran</item>
+        <item>Ignan</item>
+        <item>Terran</item>
     </object>
     <object>
-        <key>Half-Orc</key>
-        <language>Abyssal</language>
-        <language>Goblin</language>
-        <language>Giant</language>
-        <language>Gnoll</language>
-        <language>Draconic</language>
+        <name>Half-Orc</name>
+        <item>Abyssal</item>
+        <item>Goblin</item>
+        <item>Giant</item>
+        <item>Gnoll</item>
+        <item>Draconic</item>
     </object>
     <object>
-        <key>Orc</key>
-        <language>Giant</language>
-        <language>Goblin</language>
-        <language>Gnoll</language>
-        <language>Dwarven</language>
-        <language>Undercommon</language>
+        <name>Orc</name>
+        <item>Giant</item>
+        <item>Goblin</item>
+        <item>Gnoll</item>
+        <item>Dwarven</item>
+        <item>Undercommon</item>
     </object>
     <object>
-        <key>Human</key>
-        <language>Abyssal</language>
-        <language>Common</language>
-        <language>Elven</language>
-        <language>Celestial</language>
-        <language>Undercommon</language>
-        <language>Goblin</language>
-        <language>Dwarven</language>
-        <language>Draconic</language>
-        <language>Giant</language>
-        <language>Infernal</language>
-        <language>Gnome</language>
-        <language>Sylvan</language>
-        <language>Gnoll</language>
-        <language>Orc</language>
-        <language>Halfling</language>
-        <language>Aquan</language>
-        <language>Auran</language>
-        <language>Ignan</language>
-        <language>Terran</language>
+        <name>Human</name>
+        <item>Abyssal</item>
+        <item>Common</item>
+        <item>Elven</item>
+        <item>Celestial</item>
+        <item>Undercommon</item>
+        <item>Goblin</item>
+        <item>Dwarven</item>
+        <item>Draconic</item>
+        <item>Giant</item>
+        <item>Infernal</item>
+        <item>Gnome</item>
+        <item>Sylvan</item>
+        <item>Gnoll</item>
+        <item>Orc</item>
+        <item>Halfling</item>
+        <item>Aquan</item>
+        <item>Auran</item>
+        <item>Ignan</item>
+        <item>Terran</item>
     </object>
     <object>
-        <key>Kobold</key>
-        <language>Common</language>
-        <language>Undercommon</language>
+        <name>Kobold</name>
+        <item>Common</item>
+        <item>Undercommon</item>
     </object>
     <object>
-        <key>Lightfoot Halfling</key>
-        <language>Dwarven</language>
-        <language>Elven</language>
-        <language>Gnome</language>
-        <language>Goblin</language>
-        <language>Orc</language>
+        <name>Lightfoot Halfling</name>
+        <item>Dwarven</item>
+        <item>Elven</item>
+        <item>Gnome</item>
+        <item>Goblin</item>
+        <item>Orc</item>
     </object>
     <object>
-        <key>Tallfellow Halfling</key>
-        <language>Dwarven</language>
-        <language>Elven</language>
-        <language>Gnome</language>
-        <language>Goblin</language>
-        <language>Orc</language>
+        <name>Tallfellow Halfling</name>
+        <item>Dwarven</item>
+        <item>Elven</item>
+        <item>Gnome</item>
+        <item>Goblin</item>
+        <item>Orc</item>
     </object>
     <object>
-        <key>Mind Flayer</key>
-        <language>Abyssal</language>
-        <language>Common</language>
-        <language>Elven</language>
-        <language>Celestial</language>
-        <language>Undercommon</language>
-        <language>Goblin</language>
-        <language>Dwarven</language>
-        <language>Draconic</language>
-        <language>Giant</language>
-        <language>Infernal</language>
-        <language>Gnome</language>
-        <language>Sylvan</language>
-        <language>Gnoll</language>
-        <language>Orc</language>
-        <language>Halfling</language>
-        <language>Aquan</language>
-        <language>Auran</language>
-        <language>Ignan</language>
-        <language>Terran</language>
+        <name>Mind Flayer</name>
+        <item>Abyssal</item>
+        <item>Common</item>
+        <item>Elven</item>
+        <item>Celestial</item>
+        <item>Undercommon</item>
+        <item>Goblin</item>
+        <item>Dwarven</item>
+        <item>Draconic</item>
+        <item>Giant</item>
+        <item>Infernal</item>
+        <item>Gnome</item>
+        <item>Sylvan</item>
+        <item>Gnoll</item>
+        <item>Orc</item>
+        <item>Halfling</item>
+        <item>Aquan</item>
+        <item>Auran</item>
+        <item>Ignan</item>
+        <item>Terran</item>
     </object>
     <object>
-        <key>Minotaur</key>
-        <language>Terran</language>
-        <language>Goblin</language>
-        <language>Orc</language>
+        <name>Minotaur</name>
+        <item>Terran</item>
+        <item>Goblin</item>
+        <item>Orc</item>
     </object>
     <object>
-        <key>Ogre</key>
-        <language>Terran</language>
-        <language>Goblin</language>
-        <language>Orc</language>
-        <language>Dwarven</language>
+        <name>Ogre</name>
+        <item>Terran</item>
+        <item>Goblin</item>
+        <item>Orc</item>
+        <item>Dwarven</item>
     </object>
     <object>
-        <key>Ogre Mage</key>
-        <language>Infernal</language>
-        <language>Goblin</language>
-        <language>Orc</language>
-        <language>Dwarven</language>
+        <name>Ogre Mage</name>
+        <item>Infernal</item>
+        <item>Goblin</item>
+        <item>Orc</item>
+        <item>Dwarven</item>
     </object>
     <object>
-        <key>Rock Gnome</key>
-        <language>Dwarven</language>
-        <language>Elven</language>
-        <language>Draconic</language>
-        <language>Goblin</language>
-        <language>Giant</language>
-        <language>Orc</language>
+        <name>Rock Gnome</name>
+        <item>Dwarven</item>
+        <item>Elven</item>
+        <item>Draconic</item>
+        <item>Goblin</item>
+        <item>Giant</item>
+        <item>Orc</item>
     </object>
     <object>
-        <key>Svirfneblin</key>
-        <language>Dwarven</language>
-        <language>Elven</language>
-        <language>Terran</language>
-        <language>Goblin</language>
-        <language>Giant</language>
-        <language>Orc</language>
+        <name>Svirfneblin</name>
+        <item>Dwarven</item>
+        <item>Elven</item>
+        <item>Terran</item>
+        <item>Goblin</item>
+        <item>Giant</item>
+        <item>Orc</item>
     </object>
     <object>
-        <key>Tiefling</key>
-        <language>Draconic</language>
-        <language>Dwarven</language>
-        <language>Elven</language>
-        <language>Gnome</language>
-        <language>Goblin</language>
-        <language>Halfling</language>
-        <language>Orc</language>
+        <name>Tiefling</name>
+        <item>Draconic</item>
+        <item>Dwarven</item>
+        <item>Elven</item>
+        <item>Gnome</item>
+        <item>Goblin</item>
+        <item>Halfling</item>
+        <item>Orc</item>
     </object>
     <object>
-        <key>Troglodyte</key>
-        <language>Common</language>
-        <language>Goblin</language>
-        <language>Giant</language>
-        <language>Orc</language>
+        <name>Troglodyte</name>
+        <item>Common</item>
+        <item>Goblin</item>
+        <item>Giant</item>
+        <item>Orc</item>
     </object>
     <object>
-        <key>Lizardfolk</key>
-        <language>Aquan</language>
-        <language>Goblin</language>
-        <language>Orc</language>
-        <language>Gnoll</language>
+        <name>Lizardfolk</name>
+        <item>Aquan</item>
+        <item>Goblin</item>
+        <item>Orc</item>
+        <item>Gnoll</item>
     </object>
-</languages>
+</items>

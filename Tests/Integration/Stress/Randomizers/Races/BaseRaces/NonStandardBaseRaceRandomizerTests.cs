@@ -1,32 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Ninject;
 using NPCGen.Common.Races;
 using NPCGen.Generators.Interfaces.Randomizers.Races;
-using NPCGen.Generators.Randomizers.Races.BaseRaces;
-using NPCGen.Tests.Integration.Common;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
 {
     [TestFixture]
-    public class NonStandardBaseRaceRandomizerTests : StressTests
+    public class NonStandardBaseRaceRandomizerTests : BaseRaceRandomizerTests
     {
-        [Inject]
-        public NonStandardBaseRaceRandomizer BaseRaceRandomizer { get; set; }
+        [Inject, Named(BaseRaceRandomizerTypeConstants.NonStandard)]
+        public override IBaseRaceRandomizer BaseRaceRandomizer { get; set; }
 
-        private IEnumerable<String> baseRaces;
-
-        protected override IBaseRaceRandomizer GetBaseRaceRandomizer(IKernel kernel)
+        protected override IEnumerable<String> particularBaseRaces
         {
-            return kernel.Get<NonStandardBaseRaceRandomizer>();
-        }
-
-        [SetUp]
-        public void Setup()
-        {
-            baseRaces = new[]
+            get
+            {
+                return new[]
                 {
                     RaceConstants.BaseRaces.Svirfneblin,
                     RaceConstants.BaseRaces.Aasimar,
@@ -56,19 +47,7 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
                     RaceConstants.BaseRaces.GrayElf,
                     RaceConstants.BaseRaces.WoodElf
                 };
-        }
-
-        [Test]
-        public void NonStandardBaseRaceRandomizerAlwaysReturnsNonStandardBaseRace()
-        {
-            while (TestShouldKeepRunning())
-            {
-                var data = GetNewInstanceOf<DependentDataCollection>();
-                var baseRace = BaseRaceRandomizer.Randomize(data.Alignment.Goodness, data.CharacterClassPrototype);
-                Assert.That(baseRaces.Contains(baseRace), Is.True);
             }
-
-            AssertIterations();
         }
     }
 }

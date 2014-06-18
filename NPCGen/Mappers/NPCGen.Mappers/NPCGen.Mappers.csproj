@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collections\CollectionsMapperCachingProxy.cs" />
     <Compile Include="Percentiles\PercentileMapperCachingProxy.cs" />
     <Compile Include="Collections\AdjustmentsXmlMapper.cs" />
     <Compile Include="Collections\CollectionsXmlMapper.cs" />

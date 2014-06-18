@@ -1,32 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Ninject;
 using NPCGen.Common.Races;
 using NPCGen.Generators.Interfaces.Randomizers.Races;
-using NPCGen.Generators.Randomizers.Races.BaseRaces;
-using NPCGen.Tests.Integration.Common;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
 {
     [TestFixture]
-    public class StandardBaseRaceRandomizerTests : StressTests
+    public class StandardBaseRaceRandomizerTests : BaseRaceRandomizerTests
     {
-        [Inject]
-        public StandardBaseRaceRandomizer BaseRaceRandomizer { get; set; }
+        [Inject, Named(BaseRaceRandomizerTypeConstants.Standard)]
+        public override IBaseRaceRandomizer BaseRaceRandomizer { get; set; }
 
-        private IEnumerable<String> baseRaces;
-
-        protected override IBaseRaceRandomizer GetBaseRaceRandomizer(IKernel kernel)
+        protected override IEnumerable<String> particularBaseRaces
         {
-            return kernel.Get<StandardBaseRaceRandomizer>();
-        }
-
-        [SetUp]
-        public void Setup()
-        {
-            baseRaces = new[]
+            get
+            {
+                return new[]
                 {
                     RaceConstants.BaseRaces.RockGnome,
                     RaceConstants.BaseRaces.HalfElf,
@@ -36,19 +27,7 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
                     RaceConstants.BaseRaces.Human,
                     RaceConstants.BaseRaces.LightfootHalfling
                 };
-        }
-
-        [Test]
-        public void StandardBaseRaceRandomizerAlwaysReturnsStandardBaseRace()
-        {
-            while (TestShouldKeepRunning())
-            {
-                var data = GetNewInstanceOf<DependentDataCollection>();
-                var baseRace = BaseRaceRandomizer.Randomize(data.Alignment.Goodness, data.CharacterClassPrototype);
-                Assert.That(baseRaces.Contains(baseRace), Is.True);
             }
-
-            AssertIterations();
         }
     }
 }

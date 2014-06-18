@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Collections\AdjustmentXmlMapperTests.cs" />
+    <Compile Include="Collections\CollectionsMapperCachingProxyTests.cs" />
     <Compile Include="Collections\CollectionsXmlMapperTests.cs" />
     <Compile Include="Percentiles\PercentileMapperCachingProxyTests.cs" />
     <Compile Include="Percentiles\PercentileXmlMapperTests.cs" />

@@ -1,6 +1,5 @@
 ﻿using Ninject;
 using NPCGen.Generators.Randomizers.CharacterClasses.ClassNames;
-using NPCGen.Tests.Integration.Common;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Stress.Randomizers.CharacterClasses.ClassNames
@@ -9,23 +8,15 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.CharacterClasses.ClassName
     public class SetClassNameRandomizerTests : StressTests
     {
         [Inject]
-        public SetClassNameRandomizer ClassNameRandomizer { get; set; }
+        public SetClassNameRandomizer SetClassNameRandomizer { get; set; }
 
-        [Test]
-        public void SetClassNameRandomizerAlwaysReturnsSetClassName()
+        protected override void MakeAssertions()
         {
-            while (TestShouldKeepRunning())
-            {
-                var data = GetNewInstanceOf<DependentDataCollection>();
-                ClassNameRandomizer.ClassName = data.CharacterClassPrototype.ClassName;
+            var data = GetNewDependentData();
+            SetClassNameRandomizer.ClassName = data.CharacterClassPrototype.ClassName;
 
-                var className = ClassNameRandomizer.Randomize(data.Alignment);
-                Assert.That(className, Is.Not.Null);
-                Assert.That(className, Is.Not.Empty);
-                Assert.That(className, Is.EqualTo(ClassNameRandomizer.ClassName));
-            }
-
-            AssertIterations();
+            var className = ClassNameRandomizer.Randomize(data.Alignment);
+            Assert.That(className, Is.EqualTo(data.CharacterClassPrototype.ClassName));
         }
     }
 }

@@ -1,8 +1,6 @@
-﻿using Ninject;
+﻿using System;
+using System.Collections.Generic;
 using NPCGen.Common.CharacterClasses;
-using NPCGen.Generators.Interfaces;
-using NPCGen.Generators.Interfaces.Randomizers.CharacterClasses;
-using NPCGen.Tests.Integration.Common;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Stress
@@ -10,45 +8,26 @@ namespace NPCGen.Tests.Integration.Stress
     [TestFixture]
     public class CharacterClassGeneratorTests : StressTests
     {
-        [Inject]
-        public ICharacterClassGenerator CharacterClassGenerator { get; set; }
-        [Inject]
-        public IClassNameRandomizer ClassNameRandomizer { get; set; }
-        [Inject]
-        public ILevelRandomizer LevelRandomizer { get; set; }
+        private IEnumerable<String> classNames;
 
-        [Test]
-        public void StressCharacterClassGeneratorForPrototypes()
+        [SetUp]
+        public void Setup()
         {
-            var classNames = CharacterClassConstants.GetClassNames();
-
-            while (TestShouldKeepRunning())
-            {
-                var dependentData = GetNewInstanceOf<DependentDataCollection>();
-
-                var prototype = CharacterClassGenerator.CreatePrototypeWith(dependentData.Alignment, LevelRandomizer, ClassNameRandomizer);
-                Assert.That(classNames, Contains.Item(prototype.ClassName));
-                Assert.That(prototype.Level, Is.GreaterThan(0));
-            }
-
-            AssertIterations();
+            classNames = CharacterClassConstants.GetClassNames();
         }
 
-        [Test]
-        public void StressCharacterClassGeneratorForCharacterClass()
+        protected override void MakeAssertions()
         {
-            while (TestShouldKeepRunning())
-            {
-                var dependentData = GetNewInstanceOf<DependentDataCollection>();
-                var prototype = CharacterClassGenerator.CreatePrototypeWith(dependentData.Alignment, LevelRandomizer, ClassNameRandomizer);
+            var dependentData = GetNewDependentData();
 
-                var characterClass = CharacterClassGenerator.CreateWith(prototype);
-                Assert.That(characterClass.ClassName, Is.EqualTo(prototype.ClassName));
-                Assert.That(characterClass.Level, Is.EqualTo(prototype.Level));
-                Assert.That(characterClass.BaseAttack.BaseAttackBonus, Is.Not.Negative);
-            }
+            var prototype = CharacterClassGenerator.CreatePrototypeWith(dependentData.Alignment, LevelRandomizer, ClassNameRandomizer);
+            Assert.That(classNames, Contains.Item(prototype.ClassName));
+            Assert.That(prototype.Level, Is.GreaterThan(0));
 
-            AssertIterations();
+            var characterClass = CharacterClassGenerator.CreateWith(prototype);
+            Assert.That(characterClass.ClassName, Is.EqualTo(prototype.ClassName));
+            Assert.That(characterClass.Level, Is.EqualTo(prototype.Level));
+            Assert.That(characterClass.BaseAttack.BaseAttackBonus, Is.Not.Negative);
         }
     }
 }

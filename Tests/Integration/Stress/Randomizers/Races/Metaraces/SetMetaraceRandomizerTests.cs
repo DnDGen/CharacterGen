@@ -1,6 +1,5 @@
 ﻿using Ninject;
 using NPCGen.Generators.Randomizers.Races.Metaraces;
-using NPCGen.Tests.Integration.Common;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
@@ -9,21 +8,15 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
     public class SetMetaraceRandomizerTests : StressTests
     {
         [Inject]
-        public SetMetaraceRandomizer MetaraceRandomizer { get; set; }
+        public SetMetaraceRandomizer SetMetaraceRandomizer { get; set; }
 
-        [Test]
-        public void SetBaseRaceRandomizerAlwaysReturnsSetBaseRace()
+        protected override void MakeAssertions()
         {
-            while (TestShouldKeepRunning())
-            {
-                var data = GetNewInstanceOf<DependentDataCollection>();
-                MetaraceRandomizer.Metarace = data.Race.Metarace;
+            var data = GetNewDependentData();
+            SetMetaraceRandomizer.Metarace = data.Race.Metarace;
 
-                var metarace = MetaraceRandomizer.Randomize(data.Alignment.Goodness, data.CharacterClassPrototype);
-                Assert.That(metarace, Is.EqualTo(MetaraceRandomizer.Metarace));
-            }
-
-            AssertIterations();
+            var metarace = SetMetaraceRandomizer.Randomize(data.Alignment.Goodness, data.CharacterClassPrototype);
+            Assert.That(metarace, Is.EqualTo(data.Race.Metarace));
         }
     }
 }

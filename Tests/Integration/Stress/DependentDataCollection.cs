@@ -2,7 +2,7 @@
 using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Races;
 
-namespace NPCGen.Tests.Integration.Common
+namespace NPCGen.Tests.Integration.Stress
 {
     public class DependentDataCollection
     {

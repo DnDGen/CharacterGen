@@ -1,4 +1,5 @@
-﻿using NPCGen.Mappers.Interfaces;
+﻿using NPCGen.Mappers.Collections;
+using NPCGen.Mappers.Interfaces;
 using NPCGen.Mappers.Percentiles;
 using NUnit.Framework;
 
@@ -14,9 +15,16 @@ namespace NPCGen.Tests.Integration.Bootstrap.Modules
         }
 
         [Test]
-        public void LanguagesXmlMappersAreNotGeneratedAsSingletons()
+        public void CollectionsXmlMappersAreGeneratedAsSingletons()
         {
-            AssertNotSingleton<ICollectionsMapper>();
+            AssertSingleton<ICollectionsMapper>();
+        }
+
+        [Test]
+        public void CollectionsXmlMappersAreDecorated()
+        {
+            var mapper = GetNewInstanceOf<ICollectionsMapper>();
+            Assert.That(mapper, Is.InstanceOf<CollectionsMapperCachingProxy>());
         }
 
         [Test]

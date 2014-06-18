@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Ninject;
 using NPCGen.Common.Stats;
+using NPCGen.Generators.Interfaces.Randomizers.Stats;
 using NPCGen.Generators.Randomizers.Stats;
 using NUnit.Framework;
 
@@ -11,8 +11,8 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Stats
     [TestFixture]
     public class TwoTenSidedDiceStatsRandomizerTests : StressTests
     {
-        [Inject]
-        public TwoTenSidedDiceStatsRandomizer StatsRandomizer { get; set; }
+        [Inject, Named(StatsRandomizerTypeConstants.TwoTenSidedDice)]
+        public IStatsRandomizer TwoTenSidedDiceStatsRandomizer { get; set; }
 
         private IEnumerable<String> statNames;
 
@@ -22,24 +22,17 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Stats
             statNames = StatConstants.GetStats();
         }
 
-        [Test]
-        public void TwoTenSidedDiceStatsRandomizerReturnsTwoTenSidedDiceStats()
+        protected override void MakeAssertions()
         {
-            while (TestShouldKeepRunning())
+            var stats = TwoTenSidedDiceStatsRandomizer.Randomize();
+
+            foreach (var name in statNames)
             {
-                var stats = StatsRandomizer.Randomize();
-                Assert.That(stats, Is.Not.Null);
-
-                foreach (var name in statNames)
-                {
-                    Assert.That(stats.Keys.Contains(name), Is.True);
-                    Assert.That(stats[name].Value, Is.InRange<Int32>(2, 20));
-                }
-
-                Assert.That(stats.Keys.Count, Is.EqualTo(statNames.Count()));
+                Assert.That(stats.Keys, Contains.Item(name));
+                Assert.That(stats[name].Value, Is.InRange<Int32>(2, 20));
             }
 
-            AssertIterations();
+            Assert.That(stats.Count, Is.EqualTo(6));
         }
     }
 }

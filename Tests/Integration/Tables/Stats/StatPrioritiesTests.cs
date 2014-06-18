@@ -1,188 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
-using Ninject;
-using NPCGen.Common;
 using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Stats;
-using NPCGen.Mappers.Interfaces;
-using NPCGen.Tests.Integration.Common;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Tables.Stats
 {
     [TestFixture]
-    public class StatPrioritiesTests : IntegrationTests
+    public class StatPrioritiesTests : CollectionTests
     {
-        [Inject]
-        public IStatPriorityMapper StatPriorityXmlMapper { get; set; }
-
-        private Dictionary<String, StatPriority> statPriorities;
-
-        [SetUp]
-        public void Setup()
+        protected override String tableName
         {
-            statPriorities = StatPriorityXmlMapper.Map("StatPriorities.xml");
+            get { return "StatPriorities"; }
         }
 
-        [Test]
-        public void BarbarianFirstPriorityIsStrength()
+        protected override IEnumerable<String> nameCollection
         {
-            var priorities = statPriorities[CharacterClassConstants.Barbarian];
-            Assert.That(priorities.FirstPriority, Is.EqualTo(StatConstants.Strength));
+            get { return CharacterClassConstants.GetClassNames(); }
         }
 
-        [Test]
-        public void BarbarianSecondPriorityIsDexterity()
+        [TestCase(CharacterClassConstants.Barbarian, StatConstants.Strength, StatConstants.Dexterity)]
+        [TestCase(CharacterClassConstants.Bard, StatConstants.Charisma, StatConstants.Intelligence)]
+        [TestCase(CharacterClassConstants.Cleric, StatConstants.Wisdom, StatConstants.Constitution)]
+        [TestCase(CharacterClassConstants.Druid, StatConstants.Wisdom, StatConstants.Dexterity)]
+        [TestCase(CharacterClassConstants.Fighter, StatConstants.Strength, StatConstants.Constitution)]
+        [TestCase(CharacterClassConstants.Monk, StatConstants.Wisdom, StatConstants.Strength)]
+        [TestCase(CharacterClassConstants.Paladin, StatConstants.Charisma, StatConstants.Strength)]
+        [TestCase(CharacterClassConstants.Ranger, StatConstants.Dexterity, StatConstants.Strength)]
+        [TestCase(CharacterClassConstants.Rogue, StatConstants.Dexterity, StatConstants.Intelligence)]
+        [TestCase(CharacterClassConstants.Sorcerer, StatConstants.Charisma, StatConstants.Dexterity)]
+        [TestCase(CharacterClassConstants.Wizard, StatConstants.Intelligence, StatConstants.Dexterity)]
+        public void Collection(String name, params String[] items)
         {
-            var priorities = statPriorities[CharacterClassConstants.Barbarian];
-            Assert.That(priorities.SecondPriority, Is.EqualTo(StatConstants.Dexterity));
-        }
-
-        [Test]
-        public void BardFirstPriorityIsCharisma()
-        {
-            var priorities = statPriorities[CharacterClassConstants.Bard];
-            Assert.That(priorities.FirstPriority, Is.EqualTo(StatConstants.Charisma));
-        }
-
-        [Test]
-        public void BardSecondPriorityIsIntelligence()
-        {
-            var priorities = statPriorities[CharacterClassConstants.Bard];
-            Assert.That(priorities.SecondPriority, Is.EqualTo(StatConstants.Intelligence));
-        }
-
-        [Test]
-        public void ClericFirstPriorityIsWisdom()
-        {
-            var priorities = statPriorities[CharacterClassConstants.Cleric];
-            Assert.That(priorities.FirstPriority, Is.EqualTo(StatConstants.Wisdom));
-        }
-
-        [Test]
-        public void ClericSecondPriorityIsConstitution()
-        {
-            var priorities = statPriorities[CharacterClassConstants.Cleric];
-            Assert.That(priorities.SecondPriority, Is.EqualTo(StatConstants.Constitution));
-        }
-
-        [Test]
-        public void DruidFirstPriorityIsWisdom()
-        {
-            var priorities = statPriorities[CharacterClassConstants.Druid];
-            Assert.That(priorities.FirstPriority, Is.EqualTo(StatConstants.Wisdom));
-        }
-
-        [Test]
-        public void DruidSecondPriorityIsDexterity()
-        {
-            var priorities = statPriorities[CharacterClassConstants.Druid];
-            Assert.That(priorities.SecondPriority, Is.EqualTo(StatConstants.Dexterity));
-        }
-
-        [Test]
-        public void FighterFirstPriorityIsStrength()
-        {
-            var priorities = statPriorities[CharacterClassConstants.Fighter];
-            Assert.That(priorities.FirstPriority, Is.EqualTo(StatConstants.Strength));
-        }
-
-        [Test]
-        public void FighterSecondPriorityIsConstitution()
-        {
-            var priorities = statPriorities[CharacterClassConstants.Fighter];
-            Assert.That(priorities.SecondPriority, Is.EqualTo(StatConstants.Constitution));
-        }
-
-        [Test]
-        public void MonkFirstPriorityIsWisdom()
-        {
-            var priorities = statPriorities[CharacterClassConstants.Monk];
-            Assert.That(priorities.FirstPriority, Is.EqualTo(StatConstants.Wisdom));
-        }
-
-        [Test]
-        public void MonkSecondPriorityIsStrength()
-        {
-            var priorities = statPriorities[CharacterClassConstants.Monk];
-            Assert.That(priorities.SecondPriority, Is.EqualTo(StatConstants.Strength));
-        }
-
-        [Test]
-        public void PaladinFirstPriorityIsCharisma()
-        {
-            var priorities = statPriorities[CharacterClassConstants.Paladin];
-            Assert.That(priorities.FirstPriority, Is.EqualTo(StatConstants.Charisma));
-        }
-
-        [Test]
-        public void PaladinSecondPriorityIsStrength()
-        {
-            var priorities = statPriorities[CharacterClassConstants.Paladin];
-            Assert.That(priorities.SecondPriority, Is.EqualTo(StatConstants.Strength));
-        }
-
-        [Test]
-        public void RangerFirstPriorityIsDexterity()
-        {
-            var priorities = statPriorities[CharacterClassConstants.Ranger];
-            Assert.That(priorities.FirstPriority, Is.EqualTo(StatConstants.Dexterity));
-        }
-
-        [Test]
-        public void RangerSecondPriorityIsStrength()
-        {
-            var priorities = statPriorities[CharacterClassConstants.Ranger];
-            Assert.That(priorities.SecondPriority, Is.EqualTo(StatConstants.Strength));
-        }
-
-        [Test]
-        public void RogueFirstPriorityIsDexterity()
-        {
-            var priorities = statPriorities[CharacterClassConstants.Rogue];
-            Assert.That(priorities.FirstPriority, Is.EqualTo(StatConstants.Dexterity));
-        }
-
-        [Test]
-        public void RogueSecondPriorityIsIntelligence()
-        {
-            var priorities = statPriorities[CharacterClassConstants.Rogue];
-            Assert.That(priorities.SecondPriority, Is.EqualTo(StatConstants.Intelligence));
-        }
-
-        [Test]
-        public void SorcererFirstPriorityIsCharisma()
-        {
-            var priorities = statPriorities[CharacterClassConstants.Sorcerer];
-            Assert.That(priorities.FirstPriority, Is.EqualTo(StatConstants.Charisma));
-        }
-
-        [Test]
-        public void SorcererSecondPriorityIsDexterity()
-        {
-            var priorities = statPriorities[CharacterClassConstants.Sorcerer];
-            Assert.That(priorities.SecondPriority, Is.EqualTo(StatConstants.Dexterity));
-        }
-
-        [Test]
-        public void WizardFirstPriorityIsIntelligence()
-        {
-            var priorities = statPriorities[CharacterClassConstants.Wizard];
-            Assert.That(priorities.FirstPriority, Is.EqualTo(StatConstants.Intelligence));
-        }
-
-        [Test]
-        public void WizardSecondPriorityIsDexterity()
-        {
-            var priorities = statPriorities[CharacterClassConstants.Wizard];
-            Assert.That(priorities.SecondPriority, Is.EqualTo(StatConstants.Dexterity));
-        }
-
-        [Test]
-        public void PrioritiesContainsAllClasses()
-        {
-            foreach (var className in CharacterClassConstants.GetClassNames())
-                Assert.That(statPriorities.ContainsKey(className), Is.True);
+            AssertCollectionAndOrder(name, items);
         }
     }
 }

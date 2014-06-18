@@ -1,7 +1,5 @@
-﻿using Ninject;
-using NPCGen.Generators.Interfaces;
-using NPCGen.Generators.Interfaces.Randomizers.Races;
-using NPCGen.Tests.Integration.Common;
+﻿using System;
+using NPCGen.Common.Races;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Stress
@@ -9,50 +7,45 @@ namespace NPCGen.Tests.Integration.Stress
     [TestFixture]
     public class RaceGeneratorTests : StressTests
     {
-        [Inject]
-        public IRaceGenerator RaceGenerator { get; set; }
-        [Inject]
-        public IBaseRaceRandomizer BaseRaceRandomizer { get; set; }
-        [Inject]
-        public IMetaraceRandomizer MetaraceRandomizer { get; set; }
+        protected override void MakeAssertions()
+        {
+            var dependentData = GetNewDependentData();
+
+            var race = RaceGenerator.CreateWith(dependentData.Alignment.Goodness, dependentData.CharacterClassPrototype, BaseRaceRandomizer,
+                MetaraceRandomizer);
+            Assert.That(race.BaseRace, Is.Not.Empty);
+            Assert.That(race.Metarace, Is.Not.Null);
+        }
 
         [Test]
-        public void RaceGeneratorReturnsRace()
+        public void MetaraceHappens()
         {
-            while (TestShouldKeepRunning())
-            {
-                var data = GetNewInstanceOf<DependentDataCollection>();
-                var race = RaceGenerator.CreateWith(data.Alignment.Goodness, data.CharacterClassPrototype, BaseRaceRandomizer, MetaraceRandomizer);
-                Assert.That(race, Is.Not.Null);
-            }
+            var race = new Race();
 
+            do
+            {
+                var dependentData = GetNewDependentData();
+                race = RaceGenerator.CreateWith(dependentData.Alignment.Goodness, dependentData.CharacterClassPrototype, BaseRaceRandomizer,
+                    MetaraceRandomizer);
+            } while (TestShouldKeepRunning() && String.IsNullOrEmpty(race.Metarace));
+
+            Assert.That(race.Metarace, Is.Not.Empty);
             AssertIterations();
         }
 
         [Test]
-        public void RaceGeneratorReturnsRaceWithBaseRace()
+        public void MetaraceDoesNotHappen()
         {
-            while (TestShouldKeepRunning())
+            var race = new Race();
+
+            do
             {
-                var data = GetNewInstanceOf<DependentDataCollection>();
-                var race = RaceGenerator.CreateWith(data.Alignment.Goodness, data.CharacterClassPrototype, BaseRaceRandomizer, MetaraceRandomizer);
-                Assert.That(race.BaseRace, Is.Not.Null);
-                Assert.That(race.BaseRace, Is.Not.Empty);
-            }
+                var dependentData = GetNewDependentData();
+                race = RaceGenerator.CreateWith(dependentData.Alignment.Goodness, dependentData.CharacterClassPrototype, BaseRaceRandomizer,
+                    MetaraceRandomizer);
+            } while (TestShouldKeepRunning() && !String.IsNullOrEmpty(race.Metarace));
 
-            AssertIterations();
-        }
-
-        [Test]
-        public void RaceGeneratorReturnsRaceWithMetarace()
-        {
-            while (TestShouldKeepRunning())
-            {
-                var data = GetNewInstanceOf<DependentDataCollection>();
-                var race = RaceGenerator.CreateWith(data.Alignment.Goodness, data.CharacterClassPrototype, BaseRaceRandomizer, MetaraceRandomizer);
-                Assert.That(race.Metarace, Is.Not.Null);
-            }
-
+            Assert.That(race.Metarace, Is.Empty);
             AssertIterations();
         }
     }

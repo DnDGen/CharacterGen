@@ -1,51 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Ninject;
 using NPCGen.Common.CharacterClasses;
 using NPCGen.Generators.Interfaces.Randomizers.CharacterClasses;
-using NPCGen.Generators.Randomizers.CharacterClasses.ClassNames;
-using NPCGen.Tests.Integration.Common;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Stress.Randomizers.CharacterClasses.ClassNames
 {
     [TestFixture]
-    public class MageClassNameRandomizerTests : StressTests
+    public class MageClassNameRandomizerTests : ClassNameRandomizerTests
     {
-        [Inject]
-        public MageClassNameRandomizer ClassNameRandomizer { get; set; }
+        [Inject, Named(ClassNameRandomizerTypeConstants.Mage)]
+        public override IClassNameRandomizer ClassNameRandomizer { get; set; }
 
-        private IEnumerable<String> classNames;
-
-        protected override IClassNameRandomizer GetClassNameRandomizer(IKernel kernel)
+        protected override IEnumerable<String> particularClassNames
         {
-            return kernel.Get<MageClassNameRandomizer>();
-        }
-
-        [SetUp]
-        public void Setup()
-        {
-            classNames = new[]
+            get
+            {
+                return new[]
                 {
                     CharacterClassConstants.Bard,
                     CharacterClassConstants.Ranger,
                     CharacterClassConstants.Sorcerer,
                     CharacterClassConstants.Wizard
                 };
-        }
-
-        [Test]
-        public void MageClassNameRandomizerAlwaysReturnsMage()
-        {
-            while (TestShouldKeepRunning())
-            {
-                var data = GetNewInstanceOf<DependentDataCollection>();
-                var className = ClassNameRandomizer.Randomize(data.Alignment);
-                Assert.That(classNames.Contains(className), Is.True);
             }
-
-            AssertIterations();
         }
     }
 }
