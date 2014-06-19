@@ -11,7 +11,7 @@ namespace NPCGen.Tests.Integration.Tables.Stats
     {
         protected override String tableName
         {
-            get { return "ConstituationStatAdjustments"; }
+            get { return "ConstitutionStatAdjustments"; }
         }
 
         protected override IEnumerable<String> nameCollection

@@ -2,58 +2,58 @@
 
 <statPriorities>
     <object>
-        <className>Barbarian</className>
-        <first>Strength</first>
-        <second>Dexterity</second>
+        <name>Barbarian</name>
+        <item>Strength</item>
+        <item>Dexterity</item>
     </object>
     <object>
-        <className>Bard</className>
-        <first>Charisma</first>
-        <second>Intelligence</second>
+        <name>Bard</name>
+        <item>Charisma</item>
+        <item>Intelligence</item>
     </object>
     <object>
-        <className>Cleric</className>
-        <first>Wisdom</first>
-        <second>Constitution</second>
+        <name>Cleric</name>
+        <item>Wisdom</item>
+        <item>Constitution</item>
     </object>
     <object>
-        <className>Druid</className>
-        <first>Wisdom</first>
-        <second>Dexterity</second>
+        <name>Druid</name>
+        <item>Wisdom</item>
+        <item>Dexterity</item>
     </object>
     <object>
-        <className>Fighter</className>
-        <first>Strength</first>
-        <second>Constitution</second>
+        <name>Fighter</name>
+        <item>Strength</item>
+        <item>Constitution</item>
     </object>
     <object>
-        <className>Monk</className>
-        <first>Wisdom</first>
-        <second>Strength</second>
+        <name>Monk</name>
+        <item>Wisdom</item>
+        <item>Strength</item>
     </object>
     <object>
-        <className>Paladin</className>
-        <first>Charisma</first>
-        <second>Strength</second>
+        <name>Paladin</name>
+        <item>Charisma</item>
+        <item>Strength</item>
     </object>
     <object>
-        <className>Ranger</className>
-        <first>Dexterity</first>
-        <second>Strength</second>
+        <name>Ranger</name>
+        <item>Dexterity</item>
+        <item>Strength</item>
     </object>
     <object>
-        <className>Rogue</className>
-        <first>Dexterity</first>
-        <second>Intelligence</second>
+        <name>Rogue</name>
+        <item>Dexterity</item>
+        <item>Intelligence</item>
     </object>
     <object>
-        <className>Sorcerer</className>
-        <first>Charisma</first>
-        <second>Dexterity</second>
+        <name>Sorcerer</name>
+        <item>Charisma</item>
+        <item>Dexterity</item>
     </object>
     <object>
-        <className>Wizard</className>
-        <first>Intelligence</first>
-        <second>Dexterity</second>
+        <name>Wizard</name>
+        <item>Intelligence</item>
+        <item>Dexterity</item>
     </object>
 </statPriorities>

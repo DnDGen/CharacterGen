@@ -16,13 +16,13 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         private CharacterClassPrototype prototype;
 
         [SetUp]
-        public void Setup()
+        public void BaseRaceRandomizerSetup()
         {
             var baseRaces = RaceConstants.BaseRaces.GetBaseRaces();
             mockPercentileResultSelector.Setup(p => p.GetAllResults(It.IsAny<String>())).Returns(baseRaces);
 
             var adjustments = new Dictionary<String, Int32>();
-            foreach(var baseRace in baseRaces)
+            foreach (var baseRace in baseRaces)
                 adjustments.Add(baseRace, 0);
 
             mockLevelAdjustmentsSelector.Setup(p => p.GetLevelAdjustments()).Returns(adjustments);
