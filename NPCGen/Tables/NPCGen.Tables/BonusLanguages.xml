@@ -322,4 +322,31 @@
         <item>Orc</item>
         <item>Gnoll</item>
     </object>
+    <object>
+        <name>Half-Celestial</name>
+    </object>
+    <object>
+        <name>Half-Dragon</name>
+    </object>
+    <object>
+        <name>Half-Fiend</name>
+    </object>
+    <object>
+        <name>Werebear</name>
+    </object>
+    <object>
+        <name>Wereboar</name>
+    </object>
+    <object>
+        <name>Wererat</name>
+    </object>
+    <object>
+        <name>Weretiger</name>
+    </object>
+    <object>
+        <name>Werewolf</name>
+    </object>
+    <object>
+        <name></name>
+    </object>
 </items>

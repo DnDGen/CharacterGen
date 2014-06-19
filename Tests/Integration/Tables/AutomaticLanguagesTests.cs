@@ -29,9 +29,9 @@ namespace NPCGen.Tests.Integration.Tables
         [TestCase(RaceConstants.BaseRaces.Aasimar, LanguageConstants.Common,
                                                    LanguageConstants.Celestial)]
         [TestCase(RaceConstants.BaseRaces.Bugbear, LanguageConstants.Common,
-                                                   LanguageConstants.Dwarven)]
+                                                   LanguageConstants.Goblin)]
         [TestCase(RaceConstants.BaseRaces.Derro, LanguageConstants.Common,
-                                                 LanguageConstants.Celestial)]
+                                                 LanguageConstants.Dwarven)]
         [TestCase(RaceConstants.BaseRaces.Doppelganger, LanguageConstants.Common)]
         [TestCase(RaceConstants.BaseRaces.Drow, LanguageConstants.Common,
                                                 LanguageConstants.Elven,
@@ -96,8 +96,7 @@ namespace NPCGen.Tests.Integration.Tables
                                                LanguageConstants.Orc)]
         [TestCase(RaceConstants.BaseRaces.Tiefling, LanguageConstants.Common,
                                                     LanguageConstants.Infernal)]
-        [TestCase(RaceConstants.BaseRaces.Troglodyte, LanguageConstants.Common,
-                                                      LanguageConstants.Draconic)]
+        [TestCase(RaceConstants.BaseRaces.Troglodyte, LanguageConstants.Draconic)]
         [TestCase(RaceConstants.Metaraces.Werebear)]
         [TestCase(RaceConstants.Metaraces.Wereboar)]
         [TestCase(RaceConstants.Metaraces.Wererat)]

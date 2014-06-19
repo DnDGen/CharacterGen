@@ -1,5 +1,7 @@
 ﻿using NPCGen.Generators.Interfaces;
+using NPCGen.Generators.Interfaces.Randomizers.Alignments;
 using NPCGen.Generators.Interfaces.Verifiers;
+using NPCGen.Generators.Randomizers.Alignments;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Bootstrap.Modules
@@ -53,6 +55,19 @@ namespace NPCGen.Tests.Integration.Bootstrap.Modules
         public void StatsFactoriesAreNotGeneratedAsSingletons()
         {
             AssertNotSingleton<IStatsGenerator>();
+        }
+
+        [Test]
+        public void AlignmentRandomzierNamedAnyIsAnyAlignmentRandomizer()
+        {
+            var randomizer = GetNewInstanceOf<IAlignmentRandomizer>(AlignmentRandomizerTypeConstants.Any);
+            Assert.That(randomizer, Is.InstanceOf<AnyAlignmentRandomizer>());
+        }
+
+        [Test]
+        public void AnyAlignmentRandomzierIsNotGeneratedAsSingleton()
+        {
+            AssertNotSingleton<IAlignmentRandomizer>(AlignmentRandomizerTypeConstants.Any);
         }
     }
 }

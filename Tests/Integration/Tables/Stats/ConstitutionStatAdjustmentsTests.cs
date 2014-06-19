@@ -60,7 +60,7 @@ namespace NPCGen.Tests.Integration.Tables.Stats
         [TestCase(RaceConstants.BaseRaces.Ogre, 4)]
         [TestCase(RaceConstants.BaseRaces.OgreMage, 6)]
         [TestCase(RaceConstants.BaseRaces.Orc, 0)]
-        [TestCase(RaceConstants.BaseRaces.Tiefling, 4)]
+        [TestCase(RaceConstants.BaseRaces.Tiefling, 0)]
         [TestCase(RaceConstants.BaseRaces.Troglodyte, 4)]
         [TestCase(RaceConstants.Metaraces.Werebear, 2)]
         [TestCase(RaceConstants.Metaraces.Wereboar, 2)]

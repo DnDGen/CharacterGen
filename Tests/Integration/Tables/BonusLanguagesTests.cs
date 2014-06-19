@@ -219,6 +219,15 @@ namespace NPCGen.Tests.Integration.Tables
             LanguageConstants.Goblin,
             LanguageConstants.Giant,
             LanguageConstants.Orc)]
+        [TestCase("")]
+        [TestCase(RaceConstants.Metaraces.HalfCelestial)]
+        [TestCase(RaceConstants.Metaraces.HalfDragon)]
+        [TestCase(RaceConstants.Metaraces.HalfFiend)]
+        [TestCase(RaceConstants.Metaraces.Werebear)]
+        [TestCase(RaceConstants.Metaraces.Wereboar)]
+        [TestCase(RaceConstants.Metaraces.Wererat)]
+        [TestCase(RaceConstants.Metaraces.Weretiger)]
+        [TestCase(RaceConstants.Metaraces.Werewolf)]
         public void Collection(String name, params String[] collection)
         {
             AssertCollection(name, collection);

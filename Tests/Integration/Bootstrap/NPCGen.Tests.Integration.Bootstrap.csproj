@@ -61,6 +61,10 @@
       <Project>{7f262696-287c-4308-8bb3-c6563b7f4878}</Project>
       <Name>NPCGen.Generators.Interfaces</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\NPCGen\Generators\NPCGen.Generators\NPCGen.Generators.csproj">
+      <Project>{8611f130-c7bf-4ef9-be78-e2624c58861f}</Project>
+      <Name>NPCGen.Generators</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\NPCGen\Mappers\NPCGen.Mappers.Interfaces\NPCGen.Mappers.Interfaces.csproj">
       <Project>{0bc49af8-8c54-46b4-80a4-9cda1c14282c}</Project>
       <Name>NPCGen.Mappers.Interfaces</Name>

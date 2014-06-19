@@ -37,7 +37,7 @@ namespace NPCGen.Tests.Integration.Tables
             var names = nameCollection;
 
             foreach (var name in names)
-                Assert.That(table.Keys, Contains.Item(name));
+                Assert.That(table.Keys, Contains.Item(name), tableName);
 
             var missingNames = names.Except(table.Keys);
             Assert.That(missingNames, Is.Empty, tableName);

@@ -183,4 +183,19 @@
         <item>Common</item>
         <item>Draconic</item>
     </object>
+    <object>
+        <name>Werebear</name>
+    </object>
+    <object>
+        <name>Wereboar</name>
+    </object>
+    <object>
+        <name>Wererat</name>
+    </object>
+    <object>
+        <name>Weretiger</name>
+    </object>
+    <object>
+        <name>Werewolf</name>
+    </object>
 </items>

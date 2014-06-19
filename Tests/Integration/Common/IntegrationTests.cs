@@ -1,4 +1,5 @@
-﻿using D20Dice.Bootstrap;
+﻿using System;
+using D20Dice.Bootstrap;
 using EquipmentGen.Bootstrap;
 using Ninject;
 using NPCGen.Bootstrap;
@@ -30,6 +31,11 @@ namespace NPCGen.Tests.Integration.Common
         protected T GetNewInstanceOf<T>()
         {
             return kernel.Get<T>();
+        }
+
+        protected T GetNewInstanceOf<T>(String name)
+        {
+            return kernel.Get<T>(name);
         }
     }
 }
