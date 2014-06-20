@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Ninject;
+﻿using Ninject;
 using NPCGen.Common.Stats;
 using NPCGen.Generators.Interfaces;
 using NPCGen.Generators.Interfaces.Randomizers.Stats;
-using NPCGen.Tests.Integration.Common;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Stress
@@ -16,7 +13,7 @@ namespace NPCGen.Tests.Integration.Stress
         public IHitPointsGenerator HitPointsGenerator { get; set; }
         [Inject]
         public IStatsGenerator StatsGenerator { get; set; }
-        [Inject]
+        [Inject, Named(StatsRandomizerTypeConstants.Raw)]
         public IStatsRandomizer StatsRandomizer { get; set; }
 
         protected override void MakeAssertions()

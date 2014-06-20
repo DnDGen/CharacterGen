@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
 using Ninject;
 using NPCGen.Generators.Interfaces;
 using NPCGen.Generators.Interfaces.Randomizers.Alignments;
@@ -35,10 +36,20 @@ namespace NPCGen.Tests.Integration.Stress
         [Inject]
         public IRaceGenerator RaceGenerator { get; set; }
 
+        protected String type;
+
         private const Int32 ConfidentIterations = 1000000;
         private const Int32 TimeLimitInSeconds = 1;
 
         private Int32 iterations;
+
+        public StressTests()
+        {
+            var classType = GetType();
+            var classTypeString = Convert.ToString(classType);
+            var segments = classTypeString.Split('.');
+            type = segments.Last();
+        }
 
         [SetUp]
         public void StressSetup()
@@ -73,7 +84,7 @@ namespace NPCGen.Tests.Integration.Stress
         protected void AssertIterations()
         {
             Assert.That(iterations, Is.GreaterThan(0));
-            Assert.Pass("Iterations: {0}\nTime: {1:hh\\:mm\\:ss}", iterations, Stopwatch.Elapsed);
+            Assert.Pass("Type: {0}\nIterations: {1}\nTime: {2:hh\\:mm\\:ss}", type, iterations, Stopwatch.Elapsed);
         }
 
         protected DependentDataCollection GetNewDependentData()

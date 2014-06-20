@@ -45,12 +45,12 @@ namespace NPCGen.Generators.Verifiers
 
             foreach (var className in classNames)
                 foreach (var level in levels)
-                    characterClasses.Add(new CharacterClassPrototype() { ClassName = className, Level = level });
+                    characterClasses.Add(new CharacterClassPrototype { ClassName = className, Level = level });
 
             return characterClasses;
         }
 
-        public Boolean VerifyCharacterClassCompatibility(String goodness, CharacterClassPrototype prototype, 
+        public Boolean VerifyCharacterClassCompatibility(String goodness, CharacterClassPrototype prototype,
             IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer)
         {
             var baseRaces = baseRaceRandomizer.GetAllPossibleResults(goodness, prototype);

@@ -21,7 +21,7 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
         {
             var data = GetNewDependentData();
             var metarace = MetaraceRandomizer.Randomize(data.Alignment.Goodness, data.CharacterClassPrototype);
-            Assert.That(metaraces, Contains.Item(metarace));
+            Assert.That(metaraces, Contains.Item(metarace), type);
         }
     }
 }

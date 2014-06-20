@@ -10,7 +10,7 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
     [TestFixture]
     public class NonGoodMetaraceRandomizerTests : MetaraceRandomizerTests
     {
-        [Inject, Named(MetaraceRandomizerTypeConstants.Any)]
+        [Inject, Named(MetaraceRandomizerTypeConstants.NonGood)]
         public override IMetaraceRandomizer MetaraceRandomizer { get; set; }
 
         protected override IEnumerable<String> particularMetaraces

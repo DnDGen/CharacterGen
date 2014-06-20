@@ -51,6 +51,15 @@
     <Compile Include="HitPointsGenerator.cs" />
     <Compile Include="LanguageGenerator.cs" />
     <Compile Include="RaceGenerator.cs" />
+    <Compile Include="Randomizers\Races\Metaraces\AnyForcedMetaraceRandomizer.cs" />
+    <Compile Include="Randomizers\Races\Metaraces\EvilForcedMetaraceRandomizer.cs" />
+    <Compile Include="Randomizers\Races\Metaraces\GeneticForcedMetaraceRandomizer.cs" />
+    <Compile Include="Randomizers\Races\Metaraces\GoodForcedMetaraceRandomizer.cs" />
+    <Compile Include="Randomizers\Races\Metaraces\LycanthropeForcedMetaraceRandomizer.cs" />
+    <Compile Include="Randomizers\Races\Metaraces\NeutralForcedMetaraceRandomizer.cs" />
+    <Compile Include="Randomizers\Races\Metaraces\NonEvilForcedMetaraceRandomizer.cs" />
+    <Compile Include="Randomizers\Races\Metaraces\NonGoodForcedMetaraceRandomizer.cs" />
+    <Compile Include="Randomizers\Races\Metaraces\NonNeutralForcedMetaraceRandomizer.cs" />
     <Compile Include="StatsGenerator.cs" />
     <Compile Include="Randomizers\Alignments\AnyAlignmentRandomizer.cs" />
     <Compile Include="Randomizers\Alignments\BaseAlignmentRandomizer.cs" />
@@ -64,13 +73,11 @@
     <Compile Include="Randomizers\Alignments\NonGoodAlignmentRandomizer.cs" />
     <Compile Include="Randomizers\Alignments\NonLawfulAlignmentRandomizer.cs" />
     <Compile Include="Randomizers\Alignments\NonNeutralAlignmentRandomizer.cs" />
-    <Compile Include="Randomizers\Alignments\SetAlignmentRandomizer.cs" />
     <Compile Include="Randomizers\CharacterClasses\ClassNames\AnyClassNameRandomizer.cs" />
     <Compile Include="Randomizers\CharacterClasses\ClassNames\BaseClassNameRandomizer.cs" />
     <Compile Include="Randomizers\CharacterClasses\ClassNames\HealerClassNameRandomizer.cs" />
     <Compile Include="Randomizers\CharacterClasses\ClassNames\MageClassNameRandomizer.cs" />
     <Compile Include="Randomizers\CharacterClasses\ClassNames\NonSpellcasterClassNameRandomizer.cs" />
-    <Compile Include="Randomizers\CharacterClasses\ClassNames\SetClassNameRandomizer.cs" />
     <Compile Include="Randomizers\CharacterClasses\ClassNames\SpellcasterClassNameRandomizer.cs" />
     <Compile Include="Randomizers\CharacterClasses\ClassNames\StealthClassNameRandomizer.cs" />
     <Compile Include="Randomizers\CharacterClasses\ClassNames\WarriorClassNameRandomizer.cs" />
@@ -79,7 +86,6 @@
     <Compile Include="Randomizers\CharacterClasses\Levels\LowLevelRandomizer.cs" />
     <Compile Include="Randomizers\CharacterClasses\Levels\MediumLevelRandomizer.cs" />
     <Compile Include="Randomizers\CharacterClasses\Levels\RangedLevel.cs" />
-    <Compile Include="Randomizers\CharacterClasses\Levels\SetLevelRandomizer.cs" />
     <Compile Include="Randomizers\CharacterClasses\Levels\VeryHighLevelRandomizer.cs" />
     <Compile Include="Randomizers\Races\BaseRaces\AnyBaseRaceRandomizer.cs" />
     <Compile Include="Randomizers\Races\BaseRaces\BaseBaseRace.cs" />
@@ -90,7 +96,6 @@
     <Compile Include="Randomizers\Races\BaseRaces\NonGoodBaseRaceRandomizer.cs" />
     <Compile Include="Randomizers\Races\BaseRaces\NonNeutralBaseRaceRandomizer.cs" />
     <Compile Include="Randomizers\Races\BaseRaces\NonStandardBaseRaceRandomizer.cs" />
-    <Compile Include="Randomizers\Races\BaseRaces\SetBaseRaceRandomizer.cs" />
     <Compile Include="Randomizers\Races\BaseRaces\StandardBaseRaceRandomizer.cs" />
     <Compile Include="Randomizers\Races\Metaraces\AnyMetaraceRandomizer.cs" />
     <Compile Include="Randomizers\Races\Metaraces\BaseMetarace.cs" />
@@ -103,7 +108,6 @@
     <Compile Include="Randomizers\Races\Metaraces\NonEvilMetaraceRandomizer.cs" />
     <Compile Include="Randomizers\Races\Metaraces\NonGoodMetaraceRandomizer.cs" />
     <Compile Include="Randomizers\Races\Metaraces\NonNeutralMetaraceRandomizer.cs" />
-    <Compile Include="Randomizers\Races\Metaraces\SetMetaraceRandomizer.cs" />
     <Compile Include="Randomizers\Stats\AverageStatsRandomizer.cs" />
     <Compile Include="Randomizers\Stats\BaseStatsRandomizer.cs" />
     <Compile Include="Randomizers\Stats\BestOfFourStatsRandomizer.cs" />

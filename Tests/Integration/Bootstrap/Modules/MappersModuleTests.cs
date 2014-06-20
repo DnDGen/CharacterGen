@@ -23,8 +23,7 @@ namespace NPCGen.Tests.Integration.Bootstrap.Modules
         [Test]
         public void CollectionsXmlMappersAreDecorated()
         {
-            var mapper = GetNewInstanceOf<ICollectionsMapper>();
-            Assert.That(mapper, Is.InstanceOf<CollectionsMapperCachingProxy>());
+            AssertIsInstanceOf<ICollectionsMapper, CollectionsMapperCachingProxy>();
         }
 
         [Test]
@@ -36,8 +35,7 @@ namespace NPCGen.Tests.Integration.Bootstrap.Modules
         [Test]
         public void PercentileXmlMappersAreDecorated()
         {
-            var mapper = GetNewInstanceOf<IPercentileMapper>();
-            Assert.That(mapper, Is.InstanceOf<PercentileMapperCachingProxy>());
+            AssertIsInstanceOf<IPercentileMapper, PercentileMapperCachingProxy>();
         }
 
         [Test]

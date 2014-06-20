@@ -16,7 +16,7 @@ namespace NPCGen.Selectors
 
         public StatPriority GetStatPriorities(String className)
         {
-            var priorities = statPriorityXmlMapper.Map("StatPriorities.xml");
+            var priorities = statPriorityXmlMapper.Map("StatPriorities");
             return priorities[className];
         }
     }

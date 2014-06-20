@@ -6,6 +6,11 @@ namespace NPCGen.Generators.Randomizers.Races.Metaraces
 {
     public class GeneticMetaraceRandomizer : BaseMetarace
     {
+        protected override Boolean allowNoMetarace
+        {
+            get { return true; }
+        }
+
         public GeneticMetaraceRandomizer(IPercentileSelector percentileResultSelector, ILevelAdjustmentsSelector levelAdjustmentsSelector)
             : base(percentileResultSelector, levelAdjustmentsSelector) { }
 

@@ -33,5 +33,11 @@ namespace NPCGen.Tests.Integration.Bootstrap
             var item = GetNewInstanceOf<I>(name);
             Assert.That(item, Is.InstanceOf<T>());
         }
+
+        protected void AssertIsInstanceOf<I, T>()
+        {
+            var item = GetNewInstanceOf<I>();
+            Assert.That(item, Is.InstanceOf<T>());
+        }
     }
 }

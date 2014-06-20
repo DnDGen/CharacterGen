@@ -28,6 +28,23 @@ namespace NPCGen.Tests.Integration.Common
             kernel.Inject(this);
         }
 
+        //[SetUp]
+        //public void BindingVerification()
+        //{
+        //    kernel = new StandardKernel();
+
+        //    var diceLoader = new D20DiceModuleLoader();
+        //    diceLoader.LoadModules(kernel);
+
+        //    var equipmentGenLoader = new EquipmentGenModuleLoader();
+        //    equipmentGenLoader.LoadModules(kernel);
+
+        //    var npcGenLoader = new NPCGenModuleLoader();
+        //    npcGenLoader.LoadModules(kernel);
+
+        //    kernel.Inject(this);
+        //}
+
         protected T GetNewInstanceOf<T>()
         {
             return kernel.Get<T>();

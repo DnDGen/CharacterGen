@@ -1,38 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Xml;
+using System.Linq;
 using NPCGen.Mappers.Interfaces;
-using NPCGen.Tables.Interfaces;
 
 namespace NPCGen.Mappers.Collections
 {
     public class AdjustmentXmlMapper : IAdjustmentMapper
     {
-        private IStreamLoader streamLoader;
+        private ICollectionsMapper innerMapper;
 
-        public AdjustmentXmlMapper(IStreamLoader streamLoader)
+        public AdjustmentXmlMapper(ICollectionsMapper innerMapper)
         {
-            this.streamLoader = streamLoader;
+            this.innerMapper = innerMapper;
         }
 
         public Dictionary<String, Int32> Map(String tableName)
         {
-            var filename = tableName + ".xml";
-            var results = new Dictionary<String, Int32>();
-            var xmlDocument = new XmlDocument();
+            var collectionTable = innerMapper.Map(tableName);
+            var adjustmentTable = new Dictionary<String, Int32>();
 
-            using (var stream = streamLoader.LoadFor(filename))
-                xmlDocument.Load(stream);
-
-            foreach (XmlNode node in xmlDocument.DocumentElement.ChildNodes)
+            foreach (var kvp in collectionTable)
             {
-                var key = node.SelectSingleNode("key").InnerText;
-                var adjustment = Convert.ToInt32(node.SelectSingleNode("adjustment").InnerText);
+                var firstItem = kvp.Value.First();
+                var adjustment = Convert.ToInt32(firstItem);
 
-                results.Add(key, adjustment);
+                adjustmentTable.Add(kvp.Key, adjustment);
             }
 
-            return results;
+            return adjustmentTable;
         }
     }
 }

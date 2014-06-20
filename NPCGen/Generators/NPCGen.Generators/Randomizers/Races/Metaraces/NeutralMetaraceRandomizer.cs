@@ -6,6 +6,11 @@ namespace NPCGen.Generators.Randomizers.Races.Metaraces
 {
     public class NeutralMetaraceRandomizer : BaseMetarace
     {
+        protected override Boolean allowNoMetarace
+        {
+            get { return true; }
+        }
+
         public NeutralMetaraceRandomizer(IPercentileSelector percentileResultSelector, ILevelAdjustmentsSelector levelAdjustmentsSelector)
             : base(percentileResultSelector, levelAdjustmentsSelector) { }
 

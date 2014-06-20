@@ -146,6 +146,12 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         private class TestMetaraceRandomizer : BaseMetarace
         {
             public String NotAllowedMetarace { get; set; }
+            public Boolean AllowNoMetarace { get; set; }
+
+            protected override Boolean allowNoMetarace
+            {
+                get { return AllowNoMetarace; }
+            }
 
             public TestMetaraceRandomizer(IPercentileSelector percentileResultSelector, ILevelAdjustmentsSelector levelAdjustmentsSelector)
                 : base(percentileResultSelector, levelAdjustmentsSelector) { }

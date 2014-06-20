@@ -19,7 +19,7 @@ namespace NPCGen.Tests.Integration.Stress
     {
         [Inject]
         public ICharacterGenerator CharacterGenerator { get; set; }
-        [Inject]
+        [Inject, Named(StatsRandomizerTypeConstants.Raw)]
         public IStatsRandomizer StatsRandomizer { get; set; }
 
         IEnumerable<String> goodnesses;

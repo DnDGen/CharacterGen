@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Moq;
 using NPCGen.Mappers;
 using NPCGen.Mappers.Collections;
@@ -12,48 +14,41 @@ namespace NPCGen.Tests.Unit.Mappers
     [TestFixture]
     public class AdjustmentXmlMapperTests
     {
-        private const String tableName = "AdjustmentXmlMapperTests";
-
-        private String filename;
         private IAdjustmentMapper mapper;
-        private Mock<IStreamLoader> mockStreamLoader;
+        private Mock<ICollectionsMapper> mockInnerMapper;
+        private Dictionary<String, IEnumerable<String>> table;
 
         [SetUp]
         public void Setup()
         {
-            filename = tableName + ".xml";
-            MakeXmlFile();
+            table = new Dictionary<String, IEnumerable<String>>();
+            mockInnerMapper = new Mock<ICollectionsMapper>();
+            mapper = new AdjustmentXmlMapper(mockInnerMapper.Object);
 
-            mockStreamLoader = new Mock<IStreamLoader>();
-            mockStreamLoader.Setup(l => l.LoadFor(filename)).Returns(GetStream());
-
-            mapper = new AdjustmentXmlMapper(mockStreamLoader.Object);
+            table.Add("name", new[] { "9266" });
+            mockInnerMapper.Setup(m => m.Map("table name")).Returns(table);
         }
 
         [Test]
-        public void AppendXmlFileExtensionToTableName()
+        public void GetCollectionFromInnerMapper()
         {
-            mapper.Map(tableName);
-            mockStreamLoader.Verify(l => l.LoadFor(filename), Times.Once);
+            mapper.Map("table name");
+            mockInnerMapper.Verify(l => l.Map("table name"), Times.Once);
         }
 
         [Test]
-        public void LoadXmlFromStream()
+        public void ThrowExceptionIfAnyEmptyCollections()
         {
-            var results = mapper.Map(tableName);
-            Assert.That(results.ContainsKey("race"), Is.True);
-            Assert.That(results["race"], Is.EqualTo(1));
+            table.Add("empty", Enumerable.Empty<String>());
+            Assert.That(() => mapper.Map("table name"), Throws.Exception);
         }
 
-        private Stream GetStream()
+        [Test]
+        public void ConvertColelctionToAdjustment()
         {
-            return new FileStream(filename, FileMode.Open);
-        }
-
-        private void MakeXmlFile()
-        {
-            var content = "<?xml version=\"1.0\" encoding=\"utf-8\" ?><adjustments><object><key>race</key><adjustment>1</adjustment></object></adjustments>";
-            File.WriteAllText(filename, content);
+            var results = mapper.Map("table name");
+            Assert.That(results.ContainsKey("name"), Is.True);
+            Assert.That(results["name"], Is.EqualTo(9266));
         }
     }
 }

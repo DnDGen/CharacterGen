@@ -9,21 +9,21 @@ namespace NPCGen.Tests.Unit.Selectors
     [TestFixture]
     public class LevelAdjustmentsSelectorTests
     {
-        private ILevelAdjustmentsSelector Selector;
-        private Mock<IAdjustmentMapper> mockLevelAdjustmentXmlMapper;
+        private ILevelAdjustmentsSelector levelAdjustmentsSelector;
+        private Mock<IAdjustmentMapper> mockLevelAdjustmentMapper;
 
         [SetUp]
         public void Setup()
         {
-            mockLevelAdjustmentXmlMapper = new Mock<IAdjustmentMapper>();
-            Selector = new LevelAdjustmentsSelector(mockLevelAdjustmentXmlMapper.Object);
+            mockLevelAdjustmentMapper = new Mock<IAdjustmentMapper>();
+            levelAdjustmentsSelector = new LevelAdjustmentsSelector(mockLevelAdjustmentMapper.Object);
         }
 
         [Test]
         public void GetResultsFromXmlMapper()
         {
-            Selector.GetLevelAdjustments();
-            mockLevelAdjustmentXmlMapper.Verify(p => p.Map("LevelAdjustments.xml"), Times.Once);
+            levelAdjustmentsSelector.GetLevelAdjustments();
+            mockLevelAdjustmentMapper.Verify(p => p.Map("LevelAdjustments"), Times.Once);
         }
     }
 }

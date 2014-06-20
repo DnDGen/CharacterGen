@@ -14,7 +14,7 @@ namespace NPCGen.Tests.Integration.Stress
     {
         [Inject]
         public IStatsGenerator StatsGenerator { get; set; }
-        [Inject]
+        [Inject, Named(StatsRandomizerTypeConstants.Raw)]
         public IStatsRandomizer StatsRandomizer { get; set; }
 
         private IEnumerable<String> statNames;
