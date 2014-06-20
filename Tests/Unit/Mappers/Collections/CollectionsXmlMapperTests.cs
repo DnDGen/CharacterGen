@@ -41,18 +41,17 @@ namespace NPCGen.Tests.Unit.Mappers
         public void LoadXmlFromStream()
         {
             var results = mapper.Map(tableName);
-            Assert.That(results.ContainsKey("race"), Is.True);
 
             var items = results["first name"];
-            Assert.That(items.Contains("first item"), Is.True);
-            Assert.That(items.Contains("second item"), Is.True);
+            Assert.That(items, Contains.Item("first item"));
+            Assert.That(items, Contains.Item("second item"));
             Assert.That(items.Count(), Is.EqualTo(2));
 
             items = results["second name"];
-            Assert.That(items.Contains("third item"), Is.True);
+            Assert.That(items, Contains.Item("third item"));
             Assert.That(items.Count(), Is.EqualTo(1));
 
-            items = results["first name"];
+            items = results["empty name"];
             Assert.That(items, Is.Empty);
         }
 
