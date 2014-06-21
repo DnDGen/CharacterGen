@@ -20,11 +20,11 @@ namespace NPCGen.Tests.Integration.Stress
         {
             var dependentData = GetNewDependentData();
 
-            var prototype = CharacterClassGenerator.CreatePrototypeWith(dependentData.Alignment, LevelRandomizer, ClassNameRandomizer);
+            var prototype = CharacterClassGenerator.GeneratePrototypeWith(dependentData.Alignment, LevelRandomizer, ClassNameRandomizer);
             Assert.That(classNames, Contains.Item(prototype.ClassName));
-            Assert.That(prototype.Level, Is.GreaterThan(0));
+            Assert.That(prototype.Level, Is.Positive);
 
-            var characterClass = CharacterClassGenerator.CreateWith(prototype);
+            var characterClass = CharacterClassGenerator.GenerateWith(prototype);
             Assert.That(characterClass.ClassName, Is.EqualTo(prototype.ClassName));
             Assert.That(characterClass.Level, Is.EqualTo(prototype.Level));
             Assert.That(characterClass.BaseAttack.Bonus, Is.Not.Negative);

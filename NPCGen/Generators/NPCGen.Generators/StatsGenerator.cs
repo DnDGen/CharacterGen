@@ -25,23 +25,19 @@ namespace NPCGen.Generators
             this.statAdjustmentsSelector = statAdjustmentsSelector;
         }
 
-        public Dictionary<String, Stat> CreateWith(IStatsRandomizer statsRandomizer, CharacterClass characterClass, Race race)
+        public Dictionary<String, Stat> GenerateWith(IStatsRandomizer statsRandomizer, CharacterClass characterClass, Race race)
         {
             var stats = statsRandomizer.Randomize();
 
-            var statPriorities = statPrioritySelector.GetStatPriorities(characterClass.ClassName);
+            var statPriorities = statPrioritySelector.GetStatPrioritiesFor(characterClass.ClassName);
             var prioritizedStats = PrioritizeStats(stats, statPriorities);
 
-            var statAdjustments = statAdjustmentsSelector.GetAdjustments(race);
+            var statAdjustments = statAdjustmentsSelector.GetAdjustmentsFor(race);
 
             foreach (var stat in prioritizedStats.Keys)
             {
-                var statValue = prioritizedStats[stat].Value;
-
-                statValue += statAdjustments[stat];
-                statValue = Math.Max(statValue, 1);
-
-                prioritizedStats[stat].Value = statValue;
+                prioritizedStats[stat].Value += statAdjustments[stat];
+                prioritizedStats[stat].Value = Math.Max(prioritizedStats[stat].Value, 1);
             }
 
             var increasedStats = IncreaseStats(prioritizedStats, statPriorities, characterClass.Level);
@@ -71,20 +67,18 @@ namespace NPCGen.Generators
 
         private Dictionary<String, Stat> IncreaseStats(Dictionary<String, Stat> stats, StatPriority priorities, Int32 level)
         {
-            var increasedStats = new Dictionary<String, Stat>(stats);
-
             var count = level / 4;
             while (count-- > 0)
             {
                 var roll = dice.d2();
 
                 if (roll == 1)
-                    increasedStats[priorities.FirstPriority].Value++;
+                    stats[priorities.FirstPriority].Value++;
                 else
-                    increasedStats[priorities.SecondPriority].Value++;
+                    stats[priorities.SecondPriority].Value++;
             }
 
-            return increasedStats;
+            return stats;
         }
     }
 }

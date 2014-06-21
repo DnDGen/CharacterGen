@@ -52,7 +52,7 @@ namespace NPCGen.Tests.Unit.Generators.Verifiers
             adjustments.Add("base race", 0);
             adjustments.Add("metarace", 0);
             mockLevelAdjustmentsSelector = new Mock<ILevelAdjustmentsSelector>();
-            mockLevelAdjustmentsSelector.Setup(p => p.GetLevelAdjustments()).Returns(adjustments);
+            mockLevelAdjustmentsSelector.Setup(p => p.GetAdjustments()).Returns(adjustments);
 
             verifier = new RandomizerVerifier(mockLevelAdjustmentsSelector.Object);
 
@@ -166,7 +166,7 @@ namespace NPCGen.Tests.Unit.Generators.Verifiers
             var results = new Dictionary<String, Int32>();
             results.Add("base race", 1);
             results.Add("metarace", 1);
-            mockLevelAdjustmentsSelector.Setup(p => p.GetLevelAdjustments()).Returns(results);
+            mockLevelAdjustmentsSelector.Setup(p => p.GetAdjustments()).Returns(results);
             mockLevelRandomizer.Setup(r => r.GetAllPossibleResults()).Returns(new[] { 2 });
 
             var verified = verifier.VerifyCompatibility(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object,
@@ -259,7 +259,7 @@ namespace NPCGen.Tests.Unit.Generators.Verifiers
             var results = new Dictionary<String, Int32>();
             results.Add("base race", 1);
             results.Add("metarace", 1);
-            mockLevelAdjustmentsSelector.Setup(p => p.GetLevelAdjustments()).Returns(results);
+            mockLevelAdjustmentsSelector.Setup(p => p.GetAdjustments()).Returns(results);
             mockLevelRandomizer.Setup(r => r.GetAllPossibleResults()).Returns(new[] { 2 });
 
             var verified = verifier.VerifyAlignmentCompatibility(alignment, mockClassNameRandomizer.Object, mockLevelRandomizer.Object,
@@ -317,7 +317,7 @@ namespace NPCGen.Tests.Unit.Generators.Verifiers
             var results = new Dictionary<String, Int32>();
             results.Add("base race", 1);
             results.Add("metarace", 1);
-            mockLevelAdjustmentsSelector.Setup(p => p.GetLevelAdjustments()).Returns(results);
+            mockLevelAdjustmentsSelector.Setup(p => p.GetAdjustments()).Returns(results);
             mockLevelRandomizer.Setup(r => r.GetAllPossibleResults()).Returns(new[] { 2 });
 
             var verified = verifier.VerifyCharacterClassCompatibility(String.Empty, characterClassPrototype, mockBaseRaceRandomizer.Object,

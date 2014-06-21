@@ -36,7 +36,7 @@ namespace NPCGen.Tests.Integration.Stress
         [Inject]
         public IRaceGenerator RaceGenerator { get; set; }
 
-        protected readonly String type;
+        protected readonly String testType;
 
         private const Int32 ConfidentIterations = 1000000;
         private const Int32 TimeLimitInSeconds = 1;
@@ -47,7 +47,7 @@ namespace NPCGen.Tests.Integration.Stress
         {
             var classType = GetType().ToString();
             var segments = classType.Split('.');
-            type = segments.Last();
+            testType = segments.Last();
         }
 
         [SetUp]
@@ -83,24 +83,24 @@ namespace NPCGen.Tests.Integration.Stress
         protected void AssertIterations()
         {
             Assert.That(iterations, Is.GreaterThan(0));
-            Assert.Pass("Type: {0}\nIterations: {1}\nTime: {2:hh\\:mm\\:ss}", type, iterations, Stopwatch.Elapsed);
+            Assert.Pass("Type: {0}\nIterations: {1}\nTime: {2:hh\\:mm\\:ss}", testType, iterations, Stopwatch.Elapsed);
         }
 
         protected DependentDataCollection GetNewDependentData()
         {
             var collection = new DependentDataCollection();
 
-            do collection.Alignment = AlignmentGenerator.CreateWith(AlignmentRandomizer);
+            do collection.Alignment = AlignmentGenerator.GenerateWith(AlignmentRandomizer);
             while (!RandomizerVerifier.VerifyAlignmentCompatibility(collection.Alignment, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
                 MetaraceRandomizer));
 
-            do collection.CharacterClassPrototype = CharacterClassGenerator.CreatePrototypeWith(collection.Alignment, LevelRandomizer,
+            do collection.CharacterClassPrototype = CharacterClassGenerator.GeneratePrototypeWith(collection.Alignment, LevelRandomizer,
                 ClassNameRandomizer);
             while (!RandomizerVerifier.VerifyCharacterClassCompatibility(collection.Alignment.Goodness, collection.CharacterClassPrototype,
                 BaseRaceRandomizer, MetaraceRandomizer));
 
-            collection.CharacterClass = CharacterClassGenerator.CreateWith(collection.CharacterClassPrototype);
-            collection.Race = RaceGenerator.CreateWith(collection.Alignment.Goodness, collection.CharacterClassPrototype, BaseRaceRandomizer,
+            collection.CharacterClass = CharacterClassGenerator.GenerateWith(collection.CharacterClassPrototype);
+            collection.Race = RaceGenerator.GenerateWith(collection.Alignment.Goodness, collection.CharacterClassPrototype, BaseRaceRandomizer,
                 MetaraceRandomizer);
 
             return collection;

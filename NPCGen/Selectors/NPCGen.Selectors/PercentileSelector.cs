@@ -20,7 +20,7 @@ namespace NPCGen.Selectors
             cachedTables = new Dictionary<String, Dictionary<Int32, String>>();
         }
 
-        public String GetPercentileResult(String tableName)
+        public String GetPercentileFrom(String tableName)
         {
             if (!cachedTables.ContainsKey(tableName))
                 CacheTable(tableName);

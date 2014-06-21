@@ -25,7 +25,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Alignments
 
             mockPercentileResultSelector = new Mock<IPercentileSelector>();
             mockPercentileResultSelector.Setup(p => p.GetAllResults(It.IsAny<String>())).Returns(AlignmentConstants.GetGoodnesses());
-            mockPercentileResultSelector.Setup(p => p.GetPercentileResult(It.IsAny<String>())).Returns(AlignmentConstants.Good);
+            mockPercentileResultSelector.Setup(p => p.GetPercentileFrom(It.IsAny<String>())).Returns(AlignmentConstants.Good);
 
             randomizer = new TestAlignmentRandomizer(mockDice.Object, mockPercentileResultSelector.Object);
         }
@@ -58,20 +58,20 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Alignments
         public void GetsGoodnessFromSelector()
         {
             randomizer.Randomize();
-            mockPercentileResultSelector.Verify(p => p.GetPercentileResult(It.IsAny<String>()), Times.Once);
+            mockPercentileResultSelector.Verify(p => p.GetPercentileFrom(It.IsAny<String>()), Times.Once);
         }
 
         [Test]
         public void RandomizerAccessesTableAlignmentGoodness()
         {
             randomizer.Randomize();
-            mockPercentileResultSelector.Verify(p => p.GetPercentileResult("AlignmentGoodness"), Times.Once);
+            mockPercentileResultSelector.Verify(p => p.GetPercentileFrom("AlignmentGoodness"), Times.Once);
         }
 
         [Test]
         public void ReturnsGoodnessFromSelector()
         {
-            mockPercentileResultSelector.Setup(p => p.GetPercentileResult(It.IsAny<String>())).Returns(AlignmentConstants.Good);
+            mockPercentileResultSelector.Setup(p => p.GetPercentileFrom(It.IsAny<String>())).Returns(AlignmentConstants.Good);
 
             var alignment = randomizer.Randomize();
             Assert.That(alignment.Goodness, Is.EqualTo(AlignmentConstants.Good));
@@ -94,11 +94,11 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Alignments
         [Test]
         public void RandomizeLoopsUntilAlignmentWithAllowedGoodnessIsRolled()
         {
-            mockPercentileResultSelector.SetupSequence(p => p.GetPercentileResult(It.IsAny<String>())).Returns("invalid class name")
+            mockPercentileResultSelector.SetupSequence(p => p.GetPercentileFrom(It.IsAny<String>())).Returns("invalid class name")
                 .Returns(AlignmentConstants.Good);
 
             randomizer.Randomize();
-            mockPercentileResultSelector.Verify(p => p.GetPercentileResult(It.IsAny<String>()), Times.Exactly(2));
+            mockPercentileResultSelector.Verify(p => p.GetPercentileFrom(It.IsAny<String>()), Times.Exactly(2));
         }
 
         [Test]

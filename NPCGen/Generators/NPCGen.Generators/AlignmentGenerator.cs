@@ -6,7 +6,7 @@ namespace NPCGen.Generators
 {
     public class AlignmentGenerator : IAlignmentGenerator
     {
-        public Alignment CreateWith(IAlignmentRandomizer alignmentRandomizer)
+        public Alignment GenerateWith(IAlignmentRandomizer alignmentRandomizer)
         {
             return alignmentRandomizer.Randomize();
         }

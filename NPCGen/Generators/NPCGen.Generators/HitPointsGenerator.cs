@@ -15,7 +15,7 @@ namespace NPCGen.Generators
             this.dice = dice;
         }
 
-        public Int32 CreateWith(CharacterClass characterClass, Int32 constitutionBonus, Race race)
+        public Int32 GenerateWith(CharacterClass characterClass, Int32 constitutionBonus, Race race)
         {
             var hitPoints = 0;
 

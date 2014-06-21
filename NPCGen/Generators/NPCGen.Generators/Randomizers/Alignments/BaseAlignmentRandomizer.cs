@@ -33,7 +33,7 @@ namespace NPCGen.Generators.Randomizers.Alignments
             do
             {
                 alignment.Lawfulness = RollLawfulness();
-                alignment.Goodness = percentileResultSelector.GetPercentileResult(table);
+                alignment.Goodness = percentileResultSelector.GetPercentileFrom(table);
             } while (!possibleAlignments.Any(a => a.Equals(alignment)));
 
             return alignment;

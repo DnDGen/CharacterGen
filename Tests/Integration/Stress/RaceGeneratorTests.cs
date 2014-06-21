@@ -11,7 +11,7 @@ namespace NPCGen.Tests.Integration.Stress
         {
             var dependentData = GetNewDependentData();
 
-            var race = RaceGenerator.CreateWith(dependentData.Alignment.Goodness, dependentData.CharacterClassPrototype, BaseRaceRandomizer,
+            var race = RaceGenerator.GenerateWith(dependentData.Alignment.Goodness, dependentData.CharacterClassPrototype, BaseRaceRandomizer,
                 MetaraceRandomizer);
             Assert.That(race.BaseRace, Is.Not.Empty);
             Assert.That(race.Metarace, Is.Not.Null);
@@ -25,7 +25,7 @@ namespace NPCGen.Tests.Integration.Stress
             do
             {
                 var dependentData = GetNewDependentData();
-                race = RaceGenerator.CreateWith(dependentData.Alignment.Goodness, dependentData.CharacterClassPrototype, BaseRaceRandomizer,
+                race = RaceGenerator.GenerateWith(dependentData.Alignment.Goodness, dependentData.CharacterClassPrototype, BaseRaceRandomizer,
                     MetaraceRandomizer);
             } while (TestShouldKeepRunning() && String.IsNullOrEmpty(race.Metarace));
 
@@ -41,7 +41,7 @@ namespace NPCGen.Tests.Integration.Stress
             do
             {
                 var dependentData = GetNewDependentData();
-                race = RaceGenerator.CreateWith(dependentData.Alignment.Goodness, dependentData.CharacterClassPrototype, BaseRaceRandomizer,
+                race = RaceGenerator.GenerateWith(dependentData.Alignment.Goodness, dependentData.CharacterClassPrototype, BaseRaceRandomizer,
                     MetaraceRandomizer);
             } while (TestShouldKeepRunning() && !String.IsNullOrEmpty(race.Metarace));
 

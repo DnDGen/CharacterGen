@@ -5,6 +5,6 @@ namespace NPCGen.Generators.Interfaces
 {
     public interface IAlignmentGenerator
     {
-        Alignment CreateWith(IAlignmentRandomizer alignmentRandomizer);
+        Alignment GenerateWith(IAlignmentRandomizer alignmentRandomizer);
     }
 }

@@ -36,16 +36,16 @@ namespace NPCGen.Tests.Unit.Selectors
         [Test]
         public void AdjustmentsContainAllStats()
         {
-            var adjustments = Selector.GetAdjustments(race);
+            var adjustments = Selector.GetAdjustmentsFor(race);
 
             foreach (var stat in StatConstants.GetStats())
-                Assert.That(adjustments.ContainsKey(stat), Is.True);
+                Assert.That(adjustments.Keys, Contains.Item(stat));
         }
 
         [Test]
         public void GetAdjustmentsFromMapper()
         {
-            Selector.GetAdjustments(race);
+            Selector.GetAdjustmentsFor(race);
 
             foreach (var stat in StatConstants.GetStats())
             {

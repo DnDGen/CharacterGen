@@ -9,6 +9,6 @@ namespace NPCGen.Generators.Interfaces
 {
     public interface IStatsGenerator
     {
-        Dictionary<String, Stat> CreateWith(IStatsRandomizer statsRandomizer, CharacterClass characterClass, Race race);
+        Dictionary<String, Stat> GenerateWith(IStatsRandomizer statsRandomizer, CharacterClass characterClass, Race race);
     }
 }

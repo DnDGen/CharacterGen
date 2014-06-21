@@ -39,7 +39,7 @@ namespace NPCGen.Tests.Unit.Generators
             statPriority.FirstPriority = "first priority";
             statPriority.SecondPriority = "second priority";
             mockStatPrioritySelector = new Mock<IStatPrioritySelector>();
-            mockStatPrioritySelector.Setup(p => p.GetStatPriorities(It.IsAny<String>())).Returns(statPriority);
+            mockStatPrioritySelector.Setup(p => p.GetStatPrioritiesFor(It.IsAny<String>())).Returns(statPriority);
 
             race = new Race();
             race.BaseRace = "base race";
@@ -49,7 +49,7 @@ namespace NPCGen.Tests.Unit.Generators
             adjustments.Add(statPriority.SecondPriority, 0);
             adjustments.Add("other stat", 0);
             mockStatAdjustmentsSelector = new Mock<IStatAdjustmentsSelector>();
-            mockStatAdjustmentsSelector.Setup(p => p.GetAdjustments(race)).Returns(adjustments);
+            mockStatAdjustmentsSelector.Setup(p => p.GetAdjustmentsFor(race)).Returns(adjustments);
 
             statsGenerator = new StatsGenerator(mockDice.Object, mockStatPrioritySelector.Object,
                 mockStatAdjustmentsSelector.Object);
@@ -69,15 +69,15 @@ namespace NPCGen.Tests.Unit.Generators
         [Test]
         public void RandomizesStatValues()
         {
-            statsGenerator.CreateWith(mockStatRandomizer.Object, characterClass, race);
+            statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
             mockStatRandomizer.Verify(r => r.Randomize(), Times.Once);
         }
 
         [Test]
         public void GetPrioritiesByClassName()
         {
-            statsGenerator.CreateWith(mockStatRandomizer.Object, characterClass, race);
-            mockStatPrioritySelector.Verify(p => p.GetStatPriorities(characterClass.ClassName), Times.Once);
+            statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
+            mockStatPrioritySelector.Verify(p => p.GetStatPrioritiesFor(characterClass.ClassName), Times.Once);
         }
 
         [Test]
@@ -86,7 +86,7 @@ namespace NPCGen.Tests.Unit.Generators
             expectedStats["other stat"].Value = 18;
             expectedStats[statPriority.FirstPriority].Value = 16;
 
-            var stats = statsGenerator.CreateWith(mockStatRandomizer.Object, characterClass, race);
+            var stats = statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
             Assert.That(stats[statPriority.FirstPriority].Value, Is.EqualTo(18));
             Assert.That(stats[statPriority.SecondPriority].Value, Is.EqualTo(16));
             Assert.That(stats["other stat"].Value, Is.EqualTo(baseStat));
@@ -98,7 +98,7 @@ namespace NPCGen.Tests.Unit.Generators
             adjustments["other stat"] = 1;
             adjustments[statPriority.FirstPriority] = -1;
 
-            var stats = statsGenerator.CreateWith(mockStatRandomizer.Object, characterClass, race);
+            var stats = statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
             Assert.That(stats[statPriority.FirstPriority].Value, Is.EqualTo(baseStat - 1));
             Assert.That(stats[statPriority.SecondPriority].Value, Is.EqualTo(baseStat));
             Assert.That(stats["other stat"].Value, Is.EqualTo(baseStat + 1));
@@ -110,7 +110,7 @@ namespace NPCGen.Tests.Unit.Generators
             characterClass.Level = 4;
             mockDice.Setup(d => d.d2(1)).Returns(1);
 
-            var stats = statsGenerator.CreateWith(mockStatRandomizer.Object, characterClass, race);
+            var stats = statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
             Assert.That(stats[statPriority.FirstPriority].Value, Is.EqualTo(baseStat + 1), StatConstants.Strength);
             Assert.That(stats[statPriority.SecondPriority].Value, Is.EqualTo(baseStat), StatConstants.Constitution);
         }
@@ -121,7 +121,7 @@ namespace NPCGen.Tests.Unit.Generators
             characterClass.Level = 4;
             mockDice.Setup(d => d.d2(1)).Returns(2);
 
-            var stats = statsGenerator.CreateWith(mockStatRandomizer.Object, characterClass, race);
+            var stats = statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
             Assert.That(stats[statPriority.FirstPriority].Value, Is.EqualTo(baseStat), StatConstants.Strength);
             Assert.That(stats[statPriority.SecondPriority].Value, Is.EqualTo(baseStat + 1), StatConstants.Constitution);
         }
@@ -137,7 +137,7 @@ namespace NPCGen.Tests.Unit.Generators
 
                 characterClass.Level = level;
 
-                var stats = statsGenerator.CreateWith(mockStatRandomizer.Object, characterClass, race);
+                var stats = statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
                 Assert.That(stats[statPriority.FirstPriority].Value, Is.EqualTo(baseStat), level.ToString());
             }
         }
@@ -153,7 +153,7 @@ namespace NPCGen.Tests.Unit.Generators
 
                 characterClass.Level = level;
 
-                var stats = statsGenerator.CreateWith(mockStatRandomizer.Object, characterClass, race);
+                var stats = statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
                 Assert.That(stats[statPriority.FirstPriority].Value, Is.EqualTo(baseStat + 1), level.ToString());
             }
         }
@@ -169,7 +169,7 @@ namespace NPCGen.Tests.Unit.Generators
 
                 characterClass.Level = level;
 
-                var stats = statsGenerator.CreateWith(mockStatRandomizer.Object, characterClass, race);
+                var stats = statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
                 Assert.That(stats[statPriority.FirstPriority].Value, Is.EqualTo(baseStat + 2), level.ToString());
             }
         }
@@ -185,7 +185,7 @@ namespace NPCGen.Tests.Unit.Generators
 
                 characterClass.Level = level;
 
-                var stats = statsGenerator.CreateWith(mockStatRandomizer.Object, characterClass, race);
+                var stats = statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
                 Assert.That(stats[statPriority.FirstPriority].Value, Is.EqualTo(baseStat + 3), level.ToString());
             }
         }
@@ -201,7 +201,7 @@ namespace NPCGen.Tests.Unit.Generators
 
                 characterClass.Level = level;
 
-                var stats = statsGenerator.CreateWith(mockStatRandomizer.Object, characterClass, race);
+                var stats = statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
                 Assert.That(stats[statPriority.FirstPriority].Value, Is.EqualTo(baseStat + 4), level.ToString());
             }
         }
@@ -212,7 +212,7 @@ namespace NPCGen.Tests.Unit.Generators
             mockDice.Setup(d => d.d2(1)).Returns(1);
             characterClass.Level = 20;
 
-            var stats = statsGenerator.CreateWith(mockStatRandomizer.Object, characterClass, race);
+            var stats = statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
             Assert.That(stats[statPriority.FirstPriority].Value, Is.EqualTo(baseStat + 5));
         }
 
@@ -221,7 +221,7 @@ namespace NPCGen.Tests.Unit.Generators
         {
             adjustments[statPriority.FirstPriority] = -9266;
 
-            var stats = statsGenerator.CreateWith(mockStatRandomizer.Object, characterClass, race);
+            var stats = statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
             Assert.That(stats[statPriority.FirstPriority].Value, Is.EqualTo(1));
         }
     }

@@ -6,6 +6,6 @@ namespace NPCGen.Generators.Interfaces
 {
     public interface IHitPointsGenerator
     {
-        Int32 CreateWith(CharacterClass characterClass, Int32 constitutionBonus, Race race);
+        Int32 GenerateWith(CharacterClass characterClass, Int32 constitutionBonus, Race race);
     }
 }

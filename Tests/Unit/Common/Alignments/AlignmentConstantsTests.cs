@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using NPCGen.Common.Alignments;
 using NUnit.Framework;
 
@@ -7,34 +8,14 @@ namespace NPCGen.Tests.Unit.Common.Alignments
     [TestFixture]
     public class AlignmentConstantsTests
     {
-        [Test]
-        public void LawfulConstant()
+        [TestCase(AlignmentConstants.Neutral, "Neutral")]
+        [TestCase(AlignmentConstants.Chaotic, "Chaotic")]
+        [TestCase(AlignmentConstants.Good, "Good")]
+        [TestCase(AlignmentConstants.Evil, "Evil")]
+        [TestCase(AlignmentConstants.Lawful, "Lawful")]
+        public void Constant(String constant, String value)
         {
-            Assert.That(AlignmentConstants.Lawful, Is.EqualTo("Lawful"));
-        }
-
-        [Test]
-        public void NeutralConstant()
-        {
-            Assert.That(AlignmentConstants.Neutral, Is.EqualTo("Neutral"));
-        }
-
-        [Test]
-        public void ChaoticConstant()
-        {
-            Assert.That(AlignmentConstants.Chaotic, Is.EqualTo("Chaotic"));
-        }
-
-        [Test]
-        public void GoodConstant()
-        {
-            Assert.That(AlignmentConstants.Good, Is.EqualTo("Good"));
-        }
-
-        [Test]
-        public void EvilConstant()
-        {
-            Assert.That(AlignmentConstants.Evil, Is.EqualTo("Evil"));
+            Assert.That(constant, Is.EqualTo(value));
         }
 
         [Test]
@@ -42,9 +23,9 @@ namespace NPCGen.Tests.Unit.Common.Alignments
         {
             var lawfulnesses = AlignmentConstants.GetLawfulnesses();
 
-            Assert.That(lawfulnesses.Contains(AlignmentConstants.Lawful), Is.True);
-            Assert.That(lawfulnesses.Contains(AlignmentConstants.Neutral), Is.True);
-            Assert.That(lawfulnesses.Contains(AlignmentConstants.Chaotic), Is.True);
+            Assert.That(lawfulnesses, Contains.Item(AlignmentConstants.Lawful));
+            Assert.That(lawfulnesses, Contains.Item(AlignmentConstants.Neutral));
+            Assert.That(lawfulnesses, Contains.Item(AlignmentConstants.Chaotic));
             Assert.That(lawfulnesses.Count(), Is.EqualTo(3));
         }
 
@@ -53,9 +34,9 @@ namespace NPCGen.Tests.Unit.Common.Alignments
         {
             var goodnesses = AlignmentConstants.GetGoodnesses();
 
-            Assert.That(goodnesses.Contains(AlignmentConstants.Good), Is.True);
-            Assert.That(goodnesses.Contains(AlignmentConstants.Neutral), Is.True);
-            Assert.That(goodnesses.Contains(AlignmentConstants.Evil), Is.True);
+            Assert.That(goodnesses, Contains.Item(AlignmentConstants.Good));
+            Assert.That(goodnesses, Contains.Item(AlignmentConstants.Neutral));
+            Assert.That(goodnesses, Contains.Item(AlignmentConstants.Evil));
             Assert.That(goodnesses.Count(), Is.EqualTo(3));
         }
     }

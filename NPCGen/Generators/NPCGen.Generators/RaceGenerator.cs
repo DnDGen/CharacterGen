@@ -16,7 +16,7 @@ namespace NPCGen.Generators
             this.dice = dice;
         }
 
-        public Race CreateWith(String goodnessString, CharacterClassPrototype prototype, IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer)
+        public Race GenerateWith(String goodnessString, CharacterClassPrototype prototype, IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer)
         {
             var race = new Race();
 
@@ -29,13 +29,11 @@ namespace NPCGen.Generators
 
         private Boolean DetermineIfMale(String baseRace, String className)
         {
-            if (baseRace == RaceConstants.BaseRaces.Drow)
-            {
-                if (className == CharacterClassConstants.Wizard)
-                    return true;
-                else if (className == CharacterClassConstants.Cleric)
-                    return false;
-            }
+            if (baseRace == RaceConstants.BaseRaces.Drow && className == CharacterClassConstants.Wizard)
+                return true;
+
+            if (baseRace == RaceConstants.BaseRaces.Drow && className == CharacterClassConstants.Cleric)
+                return false;
 
             return dice.d2() == 1;
         }

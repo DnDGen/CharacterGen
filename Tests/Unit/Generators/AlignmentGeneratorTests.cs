@@ -27,7 +27,7 @@ namespace NPCGen.Tests.Unit.Generators
         [Test]
         public void GeneratorReturnsRandomizedAlignment()
         {
-            var generatedAlignment = alignmentGenerator.CreateWith(mockAlignmentRandomizer.Object);
+            var generatedAlignment = alignmentGenerator.GenerateWith(mockAlignmentRandomizer.Object);
             Assert.That(generatedAlignment, Is.EqualTo(alignment));
         }
     }

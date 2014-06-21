@@ -29,14 +29,14 @@ namespace NPCGen.Tests.Unit.Selectors
         [Test]
         public void GetsStatPrioritiesFromMapper()
         {
-            statPrioritySelector.GetStatPriorities("class name");
+            statPrioritySelector.GetStatPrioritiesFor("class name");
             mockStatPriorityMapper.Verify(p => p.Map("StatPriorities"), Times.Once);
         }
 
         [Test]
         public void ReturnsStatPriortyReleventToClass()
         {
-            var parsedPriorities = statPrioritySelector.GetStatPriorities("class name");
+            var parsedPriorities = statPrioritySelector.GetStatPrioritiesFor("class name");
             Assert.That(parsedPriorities.FirstPriority, Is.EqualTo("first priority"));
             Assert.That(parsedPriorities.SecondPriority, Is.EqualTo("second priority"));
         }

@@ -26,7 +26,7 @@ namespace NPCGen.Generators.Randomizers.CharacterClasses.ClassNames
             var tableName = String.Format("{0}CharacterClasses", alignment.Goodness);
             var className = String.Empty;
 
-            do className = percentileResultSelector.GetPercentileResult(tableName);
+            do className = percentileResultSelector.GetPercentileFrom(tableName);
             while (!possibleClassNames.Contains(className));
 
             return className;

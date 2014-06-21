@@ -40,8 +40,8 @@ namespace NPCGen.Tests.Unit.Selectors
         [Test]
         public void GetPercentileResultCachesTable()
         {
-            percentileSelector.GetPercentileResult(tableName);
-            percentileSelector.GetPercentileResult(tableName);
+            percentileSelector.GetPercentileFrom(tableName);
+            percentileSelector.GetPercentileFrom(tableName);
 
             mockPercentileMapper.Verify(p => p.Map(tableName), Times.Once());
         }
@@ -52,7 +52,7 @@ namespace NPCGen.Tests.Unit.Selectors
             for (var roll = 1; roll <= 50; roll++)
             {
                 mockDice.Setup(d => d.Percentile(1)).Returns(roll);
-                var result = percentileSelector.GetPercentileResult(tableName);
+                var result = percentileSelector.GetPercentileFrom(tableName);
                 Assert.That(result, Is.EqualTo("content"));
             }
         }
@@ -63,7 +63,7 @@ namespace NPCGen.Tests.Unit.Selectors
             for (var roll = 51; roll <= 100; roll++)
             {
                 mockDice.Setup(d => d.Percentile(1)).Returns(roll);
-                var result = percentileSelector.GetPercentileResult(tableName);
+                var result = percentileSelector.GetPercentileFrom(tableName);
                 Assert.That(result, Is.EqualTo(roll.ToString()));
             }
         }

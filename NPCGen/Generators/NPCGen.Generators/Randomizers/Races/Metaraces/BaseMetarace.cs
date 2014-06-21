@@ -30,7 +30,7 @@ namespace NPCGen.Generators.Randomizers.Races.Metaraces
             var tableName = String.Format("{0}{1}Metaraces", goodness, prototype.ClassName);
             var metarace = String.Empty;
 
-            do metarace = percentileResultSelector.GetPercentileResult(tableName);
+            do metarace = percentileResultSelector.GetPercentileFrom(tableName);
             while (!results.Contains(metarace));
 
             return metarace;
@@ -53,7 +53,7 @@ namespace NPCGen.Generators.Randomizers.Races.Metaraces
 
         private Boolean LevelAdjustmentIsAllowed(String metarace, Int32 level)
         {
-            var adjustments = levelAdjustmentsSelector.GetLevelAdjustments();
+            var adjustments = levelAdjustmentsSelector.GetAdjustments();
             return adjustments[metarace] < level;
         }
 

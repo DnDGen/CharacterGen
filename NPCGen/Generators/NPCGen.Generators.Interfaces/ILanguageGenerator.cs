@@ -6,6 +6,6 @@ namespace NPCGen.Generators.Interfaces
 {
     public interface ILanguageGenerator
     {
-        IEnumerable<String> CreateWith(Race race, String className, Int32 intelligenceBonus);
+        IEnumerable<String> GenerateWith(Race race, String className, Int32 intelligenceBonus);
     }
 }

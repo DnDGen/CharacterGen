@@ -5,6 +5,6 @@ namespace NPCGen.Selectors.Interfaces
 {
     public interface ILevelAdjustmentsSelector
     {
-        Dictionary<String, Int32> GetLevelAdjustments();
+        Dictionary<String, Int32> GetAdjustments();
     }
 }

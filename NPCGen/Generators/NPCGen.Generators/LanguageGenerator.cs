@@ -21,7 +21,7 @@ namespace NPCGen.Generators
             this.languagesSelector = languagesSelector;
         }
 
-        public IEnumerable<String> CreateWith(Race race, String className, Int32 intelligenceBonus)
+        public IEnumerable<String> GenerateWith(Race race, String className, Int32 intelligenceBonus)
         {
             var languages = new List<String>();
 
@@ -32,10 +32,16 @@ namespace NPCGen.Generators
                 languages.Add(LanguageConstants.Druidic);
 
             var bonusLanguages = languagesSelector.GetBonusLanguagesFor(race.BaseRace, className);
-            var remainingBonusLanguages = new List<String>(bonusLanguages.Except(languages));
+            var remainingBonusLanguages = bonusLanguages.Except(languages).ToList();
             var numberOfBonusLanguages = intelligenceBonus;
 
-            while(numberOfBonusLanguages-- > 0 && remainingBonusLanguages.Any())
+            if (numberOfBonusLanguages >= remainingBonusLanguages.Count)
+            {
+                languages.AddRange(remainingBonusLanguages);
+                return languages;
+            }
+
+            while (numberOfBonusLanguages-- > 0 && remainingBonusLanguages.Any())
             {
                 var indexRoll = String.Format("1d{0}-1", remainingBonusLanguages.Count);
                 var roll = dice.Roll(indexRoll);

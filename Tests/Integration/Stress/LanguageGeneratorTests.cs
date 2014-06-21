@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Ninject;
+﻿using Ninject;
 using NPCGen.Common.Stats;
 using NPCGen.Generators.Interfaces;
 using NPCGen.Generators.Interfaces.Randomizers.Stats;
@@ -20,10 +19,10 @@ namespace NPCGen.Tests.Integration.Stress
         protected override void MakeAssertions()
         {
             var dependentData = GetNewDependentData();
-            var stats = StatsGenerator.CreateWith(StatsRandomizer, dependentData.CharacterClass, dependentData.Race);
+            var stats = StatsGenerator.GenerateWith(StatsRandomizer, dependentData.CharacterClass, dependentData.Race);
 
-            var languages = LanguageGenerator.CreateWith(dependentData.Race, dependentData.CharacterClass.ClassName, stats[StatConstants.Intelligence].Bonus);
-            Assert.That(languages.Count(), Is.AtLeast(1));
+            var languages = LanguageGenerator.GenerateWith(dependentData.Race, dependentData.CharacterClass.ClassName, stats[StatConstants.Intelligence].Bonus);
+            Assert.That(languages, Is.Not.Empty);
         }
     }
 }

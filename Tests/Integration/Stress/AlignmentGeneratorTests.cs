@@ -20,7 +20,7 @@ namespace NPCGen.Tests.Integration.Stress
 
         protected override void MakeAssertions()
         {
-            var alignment = AlignmentGenerator.CreateWith(AlignmentRandomizer);
+            var alignment = AlignmentGenerator.GenerateWith(AlignmentRandomizer);
             Assert.That(goodnesses, Contains.Item(alignment.Goodness));
             Assert.That(lawfulnesses, Contains.Item(alignment.Lawfulness));
         }

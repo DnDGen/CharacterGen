@@ -8,7 +8,7 @@ namespace NPCGen.Generators
 {
     public class CharacterClassGenerator : ICharacterClassGenerator
     {
-        public CharacterClassPrototype CreatePrototypeWith(Alignment alignment, ILevelRandomizer levelRandomizer, 
+        public CharacterClassPrototype GeneratePrototypeWith(Alignment alignment, ILevelRandomizer levelRandomizer, 
             IClassNameRandomizer classNameRandomizer)
         {
             var prototype = new CharacterClassPrototype();
@@ -19,7 +19,7 @@ namespace NPCGen.Generators
             return prototype;
         }
 
-        public CharacterClass CreateWith(CharacterClassPrototype prototype)
+        public CharacterClass GenerateWith(CharacterClassPrototype prototype)
         {
             var characterClass = new CharacterClass();
 

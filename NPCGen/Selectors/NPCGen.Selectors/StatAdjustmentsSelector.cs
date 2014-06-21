@@ -16,7 +16,7 @@ namespace NPCGen.Selectors
             this.adjustmentMapper = adjustmentMapper;
         }
 
-        public Dictionary<String, Int32> GetAdjustments(Race race)
+        public Dictionary<String, Int32> GetAdjustmentsFor(Race race)
         {
             var adjustments = new Dictionary<String, Int32>();
 

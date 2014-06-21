@@ -19,9 +19,9 @@ namespace NPCGen.Tests.Integration.Stress
         protected override void MakeAssertions()
         {
             var dependentData = GetNewDependentData();
-            var stats = StatsGenerator.CreateWith(StatsRandomizer, dependentData.CharacterClass, dependentData.Race);
+            var stats = StatsGenerator.GenerateWith(StatsRandomizer, dependentData.CharacterClass, dependentData.Race);
 
-            var hitPoints = HitPointsGenerator.CreateWith(dependentData.CharacterClass, stats[StatConstants.Constitution].Bonus, dependentData.Race);
+            var hitPoints = HitPointsGenerator.GenerateWith(dependentData.CharacterClass, stats[StatConstants.Constitution].Bonus, dependentData.Race);
             Assert.That(hitPoints, Is.AtLeast(dependentData.CharacterClass.Level));
         }
     }

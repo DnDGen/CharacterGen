@@ -7,16 +7,16 @@ namespace NPCGen.Selectors
 {
     public class LevelAdjustmentsSelector : ILevelAdjustmentsSelector
     {
-        private IAdjustmentMapper adjustmentXmlMapper;
+        private IAdjustmentMapper adjustmentMapper;
 
-        public LevelAdjustmentsSelector(IAdjustmentMapper adjustmentXmlMapper)
+        public LevelAdjustmentsSelector(IAdjustmentMapper adjustmentMapper)
         {
-            this.adjustmentXmlMapper = adjustmentXmlMapper;
+            this.adjustmentMapper = adjustmentMapper;
         }
 
-        public Dictionary<String, Int32> GetLevelAdjustments()
+        public Dictionary<String, Int32> GetAdjustments()
         {
-            return adjustmentXmlMapper.Map("LevelAdjustments");
+            return adjustmentMapper.Map("LevelAdjustments");
         }
     }
 }

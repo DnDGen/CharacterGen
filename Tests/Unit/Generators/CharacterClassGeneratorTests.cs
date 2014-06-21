@@ -32,7 +32,7 @@ namespace NPCGen.Tests.Unit.Generators
         {
             mockLevelRandomizer.Setup(r => r.Randomize()).Returns(9266);
 
-            var characterClass = characterClassGenerator.CreatePrototypeWith(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
+            var characterClass = characterClassGenerator.GeneratePrototypeWith(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
             Assert.That(characterClass.Level, Is.EqualTo(9266));
         }
 
@@ -41,7 +41,7 @@ namespace NPCGen.Tests.Unit.Generators
         {
             mockClassNameRandomizer.Setup(r => r.Randomize(alignment)).Returns(CharacterClassConstants.Barbarian);
 
-            var characterClass = characterClassGenerator.CreatePrototypeWith(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
+            var characterClass = characterClassGenerator.GeneratePrototypeWith(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
             Assert.That(characterClass.ClassName, Is.EqualTo(CharacterClassConstants.Barbarian));
         }
 
@@ -52,7 +52,7 @@ namespace NPCGen.Tests.Unit.Generators
             prototype.ClassName = CharacterClassConstants.Fighter;
             prototype.Level = 20;
 
-            var characterClass = characterClassGenerator.CreateWith(prototype);
+            var characterClass = characterClassGenerator.GenerateWith(prototype);
             Assert.That(characterClass.BaseAttack.Bonus, Is.EqualTo(20));
         }
 
@@ -63,7 +63,7 @@ namespace NPCGen.Tests.Unit.Generators
             prototype.ClassName = CharacterClassConstants.Paladin;
             prototype.Level = 20;
 
-            var characterClass = characterClassGenerator.CreateWith(prototype);
+            var characterClass = characterClassGenerator.GenerateWith(prototype);
             Assert.That(characterClass.BaseAttack.Bonus, Is.EqualTo(20));
         }
 
@@ -74,7 +74,7 @@ namespace NPCGen.Tests.Unit.Generators
             prototype.ClassName = CharacterClassConstants.Ranger;
             prototype.Level = 20;
 
-            var characterClass = characterClassGenerator.CreateWith(prototype);
+            var characterClass = characterClassGenerator.GenerateWith(prototype);
             Assert.That(characterClass.BaseAttack.Bonus, Is.EqualTo(20));
         }
 
@@ -85,7 +85,7 @@ namespace NPCGen.Tests.Unit.Generators
             prototype.ClassName = CharacterClassConstants.Barbarian;
             prototype.Level = 20;
 
-            var characterClass = characterClassGenerator.CreateWith(prototype);
+            var characterClass = characterClassGenerator.GenerateWith(prototype);
             Assert.That(characterClass.BaseAttack.Bonus, Is.EqualTo(20));
         }
 
@@ -96,7 +96,7 @@ namespace NPCGen.Tests.Unit.Generators
             prototype.ClassName = CharacterClassConstants.Bard;
             prototype.Level = 20;
 
-            var characterClass = characterClassGenerator.CreateWith(prototype);
+            var characterClass = characterClassGenerator.GenerateWith(prototype);
             Assert.That(characterClass.BaseAttack.Bonus, Is.EqualTo(15));
         }
 
@@ -107,7 +107,7 @@ namespace NPCGen.Tests.Unit.Generators
             prototype.ClassName = CharacterClassConstants.Cleric;
             prototype.Level = 20;
 
-            var characterClass = characterClassGenerator.CreateWith(prototype);
+            var characterClass = characterClassGenerator.GenerateWith(prototype);
             Assert.That(characterClass.BaseAttack.Bonus, Is.EqualTo(15));
         }
 
@@ -118,7 +118,7 @@ namespace NPCGen.Tests.Unit.Generators
             prototype.ClassName = CharacterClassConstants.Monk;
             prototype.Level = 20;
 
-            var characterClass = characterClassGenerator.CreateWith(prototype);
+            var characterClass = characterClassGenerator.GenerateWith(prototype);
             Assert.That(characterClass.BaseAttack.Bonus, Is.EqualTo(15));
         }
 
@@ -129,7 +129,7 @@ namespace NPCGen.Tests.Unit.Generators
             prototype.ClassName = CharacterClassConstants.Rogue;
             prototype.Level = 20;
 
-            var characterClass = characterClassGenerator.CreateWith(prototype);
+            var characterClass = characterClassGenerator.GenerateWith(prototype);
             Assert.That(characterClass.BaseAttack.Bonus, Is.EqualTo(15));
         }
 
@@ -140,7 +140,7 @@ namespace NPCGen.Tests.Unit.Generators
             prototype.ClassName = CharacterClassConstants.Druid;
             prototype.Level = 20;
 
-            var characterClass = characterClassGenerator.CreateWith(prototype);
+            var characterClass = characterClassGenerator.GenerateWith(prototype);
             Assert.That(characterClass.BaseAttack.Bonus, Is.EqualTo(15));
         }
 
@@ -151,7 +151,7 @@ namespace NPCGen.Tests.Unit.Generators
             prototype.ClassName = CharacterClassConstants.Sorcerer;
             prototype.Level = 20;
 
-            var characterClass = characterClassGenerator.CreateWith(prototype);
+            var characterClass = characterClassGenerator.GenerateWith(prototype);
             Assert.That(characterClass.BaseAttack.Bonus, Is.EqualTo(10));
         }
 
@@ -162,7 +162,7 @@ namespace NPCGen.Tests.Unit.Generators
             prototype.ClassName = CharacterClassConstants.Wizard;
             prototype.Level = 20;
 
-            var characterClass = characterClassGenerator.CreateWith(prototype);
+            var characterClass = characterClassGenerator.GenerateWith(prototype);
             Assert.That(characterClass.BaseAttack.Bonus, Is.EqualTo(10));
         }
 
@@ -175,7 +175,7 @@ namespace NPCGen.Tests.Unit.Generators
                 prototype.ClassName = CharacterClassConstants.Fighter;
                 prototype.Level = level;
 
-                var characterClass = characterClassGenerator.CreateWith(prototype);
+                var characterClass = characterClassGenerator.GenerateWith(prototype);
                 Assert.That(characterClass.BaseAttack.Bonus, Is.EqualTo(level));
             }
         }
@@ -189,7 +189,7 @@ namespace NPCGen.Tests.Unit.Generators
                 prototype.ClassName = CharacterClassConstants.Cleric;
                 prototype.Level = level;
 
-                var characterClass = characterClassGenerator.CreateWith(prototype);
+                var characterClass = characterClassGenerator.GenerateWith(prototype);
                 Assert.That(characterClass.BaseAttack.Bonus, Is.EqualTo(level * 3 / 4));
             }
         }
@@ -203,7 +203,7 @@ namespace NPCGen.Tests.Unit.Generators
                 prototype.ClassName = CharacterClassConstants.Wizard;
                 prototype.Level = level;
 
-                var characterClass = characterClassGenerator.CreateWith(prototype);
+                var characterClass = characterClassGenerator.GenerateWith(prototype);
                 Assert.That(characterClass.BaseAttack.Bonus, Is.EqualTo(level / 2));
             }
         }

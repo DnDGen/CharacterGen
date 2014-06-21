@@ -25,7 +25,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
             foreach (var baseRace in metaraces)
                 adjustments.Add(baseRace, 0);
 
-            mockLevelAdjustmentsSelector.Setup(p => p.GetLevelAdjustments()).Returns(adjustments);
+            mockLevelAdjustmentsSelector.Setup(p => p.GetAdjustments()).Returns(adjustments);
 
             characterClass = new CharacterClassPrototype();
             characterClass.Level = 1;

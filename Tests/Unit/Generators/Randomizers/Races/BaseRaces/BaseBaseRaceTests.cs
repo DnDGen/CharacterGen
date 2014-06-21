@@ -28,14 +28,14 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
             var baseRaces = new[] { firstBaseRace, secondBaseRace, String.Empty };
             mockPercentileResultSelector = new Mock<IPercentileSelector>();
             mockPercentileResultSelector.Setup(p => p.GetAllResults(It.IsAny<String>())).Returns(baseRaces);
-            mockPercentileResultSelector.Setup(p => p.GetPercentileResult(It.IsAny<String>())).Returns(firstBaseRace);
+            mockPercentileResultSelector.Setup(p => p.GetPercentileFrom(It.IsAny<String>())).Returns(firstBaseRace);
 
             adjustments = new Dictionary<String, Int32>();
             foreach(var baseRace in baseRaces)
                 adjustments.Add(baseRace, 0);
 
             mockLevelAdjustmentsSelector = new Mock<ILevelAdjustmentsSelector>();
-            mockLevelAdjustmentsSelector.Setup(p => p.GetLevelAdjustments()).Returns(adjustments);
+            mockLevelAdjustmentsSelector.Setup(p => p.GetAdjustments()).Returns(adjustments);
 
             prototype = new CharacterClassPrototype();
             prototype.Level = 1;
@@ -69,17 +69,17 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         {
             prototype.ClassName = "className";
             randomizer.Randomize("goodness", prototype);
-            mockPercentileResultSelector.Verify(p => p.GetPercentileResult("goodnessclassNameBaseRaces"), Times.Once);
+            mockPercentileResultSelector.Verify(p => p.GetPercentileFrom("goodnessclassNameBaseRaces"), Times.Once);
         }
 
         [Test]
         public void RandomizeLoopsUntilAllowedBaseRaceIsRolled()
         {
-            mockPercentileResultSelector.SetupSequence(p => p.GetPercentileResult(It.IsAny<String>())).Returns("invalid base race")
+            mockPercentileResultSelector.SetupSequence(p => p.GetPercentileFrom(It.IsAny<String>())).Returns("invalid base race")
                 .Returns(firstBaseRace);
 
             randomizer.Randomize(String.Empty, prototype);
-            mockPercentileResultSelector.Verify(p => p.GetPercentileResult(It.IsAny<String>()), Times.Exactly(2));
+            mockPercentileResultSelector.Verify(p => p.GetPercentileFrom(It.IsAny<String>()), Times.Exactly(2));
         }
 
         [Test]

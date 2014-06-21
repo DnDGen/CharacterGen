@@ -28,7 +28,7 @@ namespace NPCGen.Generators.Randomizers.Races.BaseRaces
             var tableName = String.Format("{0}{1}BaseRaces", goodness, prototype.ClassName);
             var baseRace = String.Empty;
 
-            do baseRace = percentileResultSelector.GetPercentileResult(tableName);
+            do baseRace = percentileResultSelector.GetPercentileFrom(tableName);
             while (!results.Contains(baseRace));
 
             return baseRace;
@@ -41,7 +41,7 @@ namespace NPCGen.Generators.Randomizers.Races.BaseRaces
 
         private Boolean LevelAdjustmentIsAllowed(String baseRace, Int32 level)
         {
-            var levelAdjustments = levelAdjustmentSelector.GetLevelAdjustments();
+            var levelAdjustments = levelAdjustmentSelector.GetAdjustments();
             return levelAdjustments[baseRace] < level;
         }
 

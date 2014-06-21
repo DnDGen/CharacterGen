@@ -8,7 +8,7 @@ namespace NPCGen.Generators.Interfaces
 {
     public interface ICharacterGenerator
     {
-        Character CreateWith(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classNameRandomizer,
+        Character GenerateWith(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classNameRandomizer,
             ILevelRandomizer levelRandomizer, IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer,
             IStatsRandomizer statsRandomizer);
     }
