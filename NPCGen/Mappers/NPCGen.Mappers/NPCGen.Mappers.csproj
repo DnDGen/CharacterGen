@@ -41,10 +41,10 @@
   <ItemGroup>
     <Compile Include="Collections\CollectionsMapperCachingProxy.cs" />
     <Compile Include="Percentiles\PercentileMapperCachingProxy.cs" />
-    <Compile Include="Collections\AdjustmentsXmlMapper.cs" />
+    <Compile Include="Collections\AdjustmentsMapper.cs" />
     <Compile Include="Collections\CollectionsXmlMapper.cs" />
     <Compile Include="Percentiles\PercentileXmlMapper.cs" />
-    <Compile Include="Collections\StatPriorityXmlMapper.cs" />
+    <Compile Include="Collections\StatPriorityMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

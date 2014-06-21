@@ -4,11 +4,11 @@ namespace NPCGen.Common.CharacterClasses
 {
     public class BaseAttack
     {
-        public Int32 BaseAttackBonus { get; set; }
+        public Int32 Bonus { get; set; }
 
         public override String ToString()
         {
-            var attackBonus = BaseAttackBonus;
+            var attackBonus = Bonus;
             var output = String.Format("+{0}", attackBonus);
 
             attackBonus -= 5;

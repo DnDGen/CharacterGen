@@ -1,6 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <items>
+    <object>
+        <name></name>
+        <item>0</item>
+    </object>
   <object><name>Aasimar</name><item>2</item></object>
     <object>
         <name>Bugbear</name>

@@ -1,18 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using Moq;
-using NPCGen.Mappers;
 using NPCGen.Mappers.Collections;
 using NPCGen.Mappers.Interfaces;
-using NPCGen.Tables.Interfaces;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Mappers
+namespace NPCGen.Tests.Unit.Mappers.Collections
 {
     [TestFixture]
-    public class AdjustmentXmlMapperTests
+    public class AdjustmentMapperTests
     {
         private IAdjustmentMapper mapper;
         private Mock<ICollectionsMapper> mockInnerMapper;
@@ -23,7 +20,7 @@ namespace NPCGen.Tests.Unit.Mappers
         {
             table = new Dictionary<String, IEnumerable<String>>();
             mockInnerMapper = new Mock<ICollectionsMapper>();
-            mapper = new AdjustmentXmlMapper(mockInnerMapper.Object);
+            mapper = new AdjustmentsMapper(mockInnerMapper.Object);
 
             table.Add("name", new[] { "9266" });
             mockInnerMapper.Setup(m => m.Map("table name")).Returns(table);
@@ -44,7 +41,7 @@ namespace NPCGen.Tests.Unit.Mappers
         }
 
         [Test]
-        public void ConvertColelctionToAdjustment()
+        public void ConvertCollectionToAdjustment()
         {
             var results = mapper.Map("table name");
             Assert.That(results.ContainsKey("name"), Is.True);

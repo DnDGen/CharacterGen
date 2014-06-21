@@ -102,6 +102,7 @@ namespace NPCGen.Tests.Integration.Tables
         [TestCase(RaceConstants.Metaraces.Wererat)]
         [TestCase(RaceConstants.Metaraces.Weretiger)]
         [TestCase(RaceConstants.Metaraces.Werewolf)]
+        [TestCase("")]
         public void Collection(String name, params String[] languages)
         {
             AssertCollection(name, languages);

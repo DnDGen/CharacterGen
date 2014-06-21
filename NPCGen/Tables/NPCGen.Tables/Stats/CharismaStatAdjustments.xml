@@ -163,4 +163,8 @@
         <name>Wood Elf</name>
         <item>0</item>
     </object>
+    <object>
+        <name></name>
+        <item>0</item>
+    </object>
 </items>

@@ -1,26 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using NPCGen.Mappers.Interfaces;
-using NPCGen.Common.Races;
-using NPCGen.Selectors.Interfaces;
-using NPCGen.Common.CharacterClasses;
 using NPCGen.Common;
+using NPCGen.Common.CharacterClasses;
+using NPCGen.Common.Races;
+using NPCGen.Mappers.Interfaces;
+using NPCGen.Selectors.Interfaces;
 
 namespace NPCGen.Selectors
 {
     public class LanguagesSelector : ILanguagesSelector
     {
-        private ICollectionsMapper languagesXmlMapper;
+        private ICollectionsMapper collectionsMapper;
 
-        public LanguagesSelector(ICollectionsMapper languagesXmlMapper)
+        public LanguagesSelector(ICollectionsMapper collectionsMapper)
         {
-            this.languagesXmlMapper = languagesXmlMapper;
+            this.collectionsMapper = collectionsMapper;
         }
 
         public IEnumerable<String> GetAutomaticLanguagesFor(Race race)
         {
-            var languages = languagesXmlMapper.Map("AutomaticLanguages.xml");
+            var languages = collectionsMapper.Map("AutomaticLanguages");
 
             var baseRaceLanguages = languages[race.BaseRace];
             var metaraceLanguages = languages[race.Metarace];
@@ -30,17 +30,25 @@ namespace NPCGen.Selectors
 
         public IEnumerable<String> GetBonusLanguagesFor(String baseRace, String className)
         {
-            var languages = languagesXmlMapper.Map("BonusLanguages.xml");
-            var bonusLanguages = languages[baseRace];
+            var languages = collectionsMapper.Map("BonusLanguages");
+            var bonusLanguages = new List<String>(languages[baseRace]);
 
             if (className == CharacterClassConstants.Cleric)
-                bonusLanguages = bonusLanguages.Union(new[] { LanguageConstants.Abyssal, LanguageConstants.Celestial, LanguageConstants.Infernal });
+            {
+                bonusLanguages.Add(LanguageConstants.Abyssal);
+                bonusLanguages.Add(LanguageConstants.Celestial);
+                bonusLanguages.Add(LanguageConstants.Infernal);
+            }
             else if (className == CharacterClassConstants.Wizard)
-                bonusLanguages = bonusLanguages.Union(new[] { LanguageConstants.Draconic });
+            {
+                bonusLanguages.Add(LanguageConstants.Draconic);
+            }
             else if (className == CharacterClassConstants.Druid)
-                bonusLanguages = bonusLanguages.Union(new[] { LanguageConstants.Sylvan });
+            {
+                bonusLanguages.Add(LanguageConstants.Sylvan);
+            }
 
-            return bonusLanguages;
+            return bonusLanguages.Distinct();
         }
     }
 }

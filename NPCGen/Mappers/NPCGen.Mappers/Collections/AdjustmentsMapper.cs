@@ -5,11 +5,11 @@ using NPCGen.Mappers.Interfaces;
 
 namespace NPCGen.Mappers.Collections
 {
-    public class AdjustmentXmlMapper : IAdjustmentMapper
+    public class AdjustmentsMapper : IAdjustmentMapper
     {
         private ICollectionsMapper innerMapper;
 
-        public AdjustmentXmlMapper(ICollectionsMapper innerMapper)
+        public AdjustmentsMapper(ICollectionsMapper innerMapper)
         {
             this.innerMapper = innerMapper;
         }

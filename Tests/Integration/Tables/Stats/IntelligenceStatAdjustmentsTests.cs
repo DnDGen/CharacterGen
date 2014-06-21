@@ -67,6 +67,7 @@ namespace NPCGen.Tests.Integration.Tables.Stats
         [TestCase(RaceConstants.Metaraces.Wererat, 2)]
         [TestCase(RaceConstants.Metaraces.Weretiger, -2)]
         [TestCase(RaceConstants.Metaraces.Werewolf, -2)]
+        [TestCase("", 0)]
         public void Collection(String name, Int32 adjustment)
         {
             var collection = new[] { Convert.ToString(adjustment) };

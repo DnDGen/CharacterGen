@@ -12,31 +12,31 @@ namespace NPCGen.Tests.Unit.Selectors
     [TestFixture]
     public class StatPrioritySelectorTests
     {
-        private IStatPrioritySelector Selector;
+        private IStatPrioritySelector statPrioritySelector;
         private Mock<IStatPriorityMapper> mockStatPriorityMapper;
 
         [SetUp]
         public void Setup()
         {
             var priorities = new Dictionary<String, StatPriority>();
-            priorities.Add("class name", new StatPriority() { FirstPriority = "first priority", SecondPriority = "second priority" });
             mockStatPriorityMapper = new Mock<IStatPriorityMapper>();
-            mockStatPriorityMapper.Setup(p => p.Map(It.IsAny<String>())).Returns(priorities);
+            statPrioritySelector = new StatPrioritySelector(mockStatPriorityMapper.Object);
 
-            Selector = new StatPrioritySelector(mockStatPriorityMapper.Object);
+            priorities.Add("class name", new StatPriority() { FirstPriority = "first priority", SecondPriority = "second priority" });
+            mockStatPriorityMapper.Setup(p => p.Map(It.IsAny<String>())).Returns(priorities);
         }
 
         [Test]
         public void GetsStatPrioritiesFromMapper()
         {
-            Selector.GetStatPriorities("class name");
-            mockStatPriorityMapper.Verify(p => p.Map("StatPriorities.xml"), Times.Once);
+            statPrioritySelector.GetStatPriorities("class name");
+            mockStatPriorityMapper.Verify(p => p.Map("StatPriorities"), Times.Once);
         }
 
         [Test]
-        public void ReturnsStatPriortyObjectReleventToClass()
+        public void ReturnsStatPriortyReleventToClass()
         {
-            var parsedPriorities = Selector.GetStatPriorities("class name");
+            var parsedPriorities = statPrioritySelector.GetStatPriorities("class name");
             Assert.That(parsedPriorities.FirstPriority, Is.EqualTo("first priority"));
             Assert.That(parsedPriorities.SecondPriority, Is.EqualTo("second priority"));
         }

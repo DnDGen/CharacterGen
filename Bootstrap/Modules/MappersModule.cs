@@ -11,10 +11,10 @@ namespace NPCGen.Bootstrap.Modules
     {
         public override void Load()
         {
-            Bind<IAdjustmentMapper>().To<AdjustmentXmlMapper>();
+            Bind<IAdjustmentMapper>().To<AdjustmentsMapper>();
             Bind<ICollectionsMapper>().ToMethod(c => CollectionsMapperFactory.CreateWith(c.Kernel.Get<IStreamLoader>())).InSingletonScope();
             Bind<IPercentileMapper>().ToMethod(c => PercentileMapperFactory.CreateWith(c.Kernel.Get<IStreamLoader>())).InSingletonScope();
-            Bind<IStatPriorityMapper>().To<StatPriorityXmlMapper>();
+            Bind<IStatPriorityMapper>().To<StatPriorityMapper>();
         }
     }
 }

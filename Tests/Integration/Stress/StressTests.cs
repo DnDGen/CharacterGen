@@ -36,7 +36,7 @@ namespace NPCGen.Tests.Integration.Stress
         [Inject]
         public IRaceGenerator RaceGenerator { get; set; }
 
-        protected String type;
+        protected readonly String type;
 
         private const Int32 ConfidentIterations = 1000000;
         private const Int32 TimeLimitInSeconds = 1;
@@ -45,9 +45,8 @@ namespace NPCGen.Tests.Integration.Stress
 
         public StressTests()
         {
-            var classType = GetType();
-            var classTypeString = Convert.ToString(classType);
-            var segments = classTypeString.Split('.');
+            var classType = GetType().ToString();
+            var segments = classType.Split('.');
             type = segments.Last();
         }
 

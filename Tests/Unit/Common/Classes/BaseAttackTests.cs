@@ -24,7 +24,7 @@ namespace NPCGen.Tests.Unit.Common.Classes
 
         private void AssertOneAttack(Int32 baseAttackBonus)
         {
-            baseAttack.BaseAttackBonus = baseAttackBonus;
+            baseAttack.Bonus = baseAttackBonus;
             var expected = String.Format("+{0}", baseAttackBonus);
             Assert.That(baseAttack.ToString(), Is.EqualTo(expected));
         }
@@ -38,7 +38,7 @@ namespace NPCGen.Tests.Unit.Common.Classes
 
         private void AssertTwoAttacks(Int32 baseAttackBonus)
         {
-            baseAttack.BaseAttackBonus = baseAttackBonus;
+            baseAttack.Bonus = baseAttackBonus;
             var expected = String.Format("+{0}/+{1}", baseAttackBonus, baseAttackBonus - 5);
             Assert.That(baseAttack.ToString(), Is.EqualTo(expected));
         }
@@ -52,7 +52,7 @@ namespace NPCGen.Tests.Unit.Common.Classes
 
         private void AssertThreeAttacks(Int32 baseAttackBonus)
         {
-            baseAttack.BaseAttackBonus = baseAttackBonus;
+            baseAttack.Bonus = baseAttackBonus;
             var expected = String.Format("+{0}/+{1}/+{2}", baseAttackBonus, baseAttackBonus - 5, baseAttackBonus - 10);
             Assert.That(baseAttack.ToString(), Is.EqualTo(expected));
         }
@@ -66,7 +66,7 @@ namespace NPCGen.Tests.Unit.Common.Classes
 
         private void AssertFourAttacks(Int32 baseAttackBonus)
         {
-            baseAttack.BaseAttackBonus = baseAttackBonus;
+            baseAttack.Bonus = baseAttackBonus;
             var expected = String.Format("+{0}/+{1}/+{2}/+{3}", baseAttackBonus, baseAttackBonus - 5, baseAttackBonus - 10, baseAttackBonus - 15);
             Assert.That(baseAttack.ToString(), Is.EqualTo(expected));
         }

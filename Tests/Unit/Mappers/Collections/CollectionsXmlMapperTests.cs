@@ -7,7 +7,7 @@ using NPCGen.Mappers.Interfaces;
 using NPCGen.Tables.Interfaces;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Mappers
+namespace NPCGen.Tests.Unit.Mappers.Collections
 {
     [TestFixture]
     public class CollectionsXmlMapperTests

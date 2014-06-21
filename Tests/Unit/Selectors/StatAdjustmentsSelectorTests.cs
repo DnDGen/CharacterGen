@@ -49,8 +49,8 @@ namespace NPCGen.Tests.Unit.Selectors
 
             foreach (var stat in StatConstants.GetStats())
             {
-                var filename = String.Format("{0}StatAdjustments.xml", stat);
-                mockAdjustmentXmlMapper.Verify(p => p.Map(filename), Times.Once);
+                var tableName = String.Format("{0}StatAdjustments", stat);
+                mockAdjustmentXmlMapper.Verify(p => p.Map(tableName), Times.Once);
             }
         }
     }

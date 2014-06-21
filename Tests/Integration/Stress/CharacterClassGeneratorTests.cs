@@ -27,7 +27,7 @@ namespace NPCGen.Tests.Integration.Stress
             var characterClass = CharacterClassGenerator.CreateWith(prototype);
             Assert.That(characterClass.ClassName, Is.EqualTo(prototype.ClassName));
             Assert.That(characterClass.Level, Is.EqualTo(prototype.Level));
-            Assert.That(characterClass.BaseAttack.BaseAttackBonus, Is.Not.Negative);
+            Assert.That(characterClass.BaseAttack.Bonus, Is.Not.Negative);
         }
     }
 }

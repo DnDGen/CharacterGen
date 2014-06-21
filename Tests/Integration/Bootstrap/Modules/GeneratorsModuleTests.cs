@@ -19,37 +19,37 @@ namespace NPCGen.Tests.Integration.Bootstrap.Modules
     public class GeneratorsModuleTests : BootstrapTests
     {
         [Test]
-        public void AlignmentFactoriesAreNotGeneratedAsSingletons()
+        public void AlignmentGeneratorsAreNotGeneratedAsSingletons()
         {
             AssertNotSingleton<IAlignmentGenerator>();
         }
 
         [Test]
-        public void CharacterFactoriesAreNotGeneratedAsSingletons()
+        public void CharacterGeneratorsAreNotGeneratedAsSingletons()
         {
             AssertNotSingleton<ICharacterGenerator>();
         }
 
         [Test]
-        public void CharacterClassFactoriesAreNotGeneratedAsSingletons()
+        public void CharacterClassGeneratorsAreNotGeneratedAsSingletons()
         {
             AssertNotSingleton<ICharacterClassGenerator>();
         }
 
         [Test]
-        public void HitPointsFactoriesAreNotGeneratedAsSingletons()
+        public void HitPointsGeneratorsAreNotGeneratedAsSingletons()
         {
             AssertNotSingleton<IHitPointsGenerator>();
         }
 
         [Test]
-        public void LanguageFactoriesAreNotGeneratedAsSingletons()
+        public void LanguageGeneratorsAreNotGeneratedAsSingletons()
         {
             AssertNotSingleton<ILanguageGenerator>();
         }
 
         [Test]
-        public void RaceFactoriesAreNotGeneratedAsSingletons()
+        public void RaceGeneratorsAreNotGeneratedAsSingletons()
         {
             AssertNotSingleton<IRaceGenerator>();
         }
@@ -61,7 +61,7 @@ namespace NPCGen.Tests.Integration.Bootstrap.Modules
         }
 
         [Test]
-        public void StatsFactoriesAreNotGeneratedAsSingletons()
+        public void StatsGeneratorsAreNotGeneratedAsSingletons()
         {
             AssertNotSingleton<IStatsGenerator>();
         }

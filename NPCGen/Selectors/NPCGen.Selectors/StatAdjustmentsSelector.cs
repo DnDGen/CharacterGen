@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using NPCGen.Mappers.Interfaces;
 using NPCGen.Common.Races;
 using NPCGen.Common.Stats;
+using NPCGen.Mappers.Interfaces;
 using NPCGen.Selectors.Interfaces;
 
 namespace NPCGen.Selectors
 {
     public class StatAdjustmentsSelector : IStatAdjustmentsSelector
     {
-        private IAdjustmentMapper adjustmentXmlMapper;
+        private IAdjustmentMapper adjustmentMapper;
 
-        public StatAdjustmentsSelector(IAdjustmentMapper adjustmentXmlMapper)
+        public StatAdjustmentsSelector(IAdjustmentMapper adjustmentMapper)
         {
-            this.adjustmentXmlMapper = adjustmentXmlMapper;
+            this.adjustmentMapper = adjustmentMapper;
         }
 
         public Dictionary<String, Int32> GetAdjustments(Race race)
@@ -22,13 +22,10 @@ namespace NPCGen.Selectors
 
             foreach (var stat in StatConstants.GetStats())
             {
-                var filename = String.Format("{0}StatAdjustments.xml", stat);
-                var statAdjustments = adjustmentXmlMapper.Map(filename);
+                var tableName = String.Format("{0}StatAdjustments", stat);
+                var statAdjustments = adjustmentMapper.Map(tableName);
 
-                adjustments.Add(stat, statAdjustments[race.BaseRace]);
-
-                if (!String.IsNullOrEmpty(race.Metarace))
-                    adjustments[stat] += statAdjustments[race.Metarace];
+                adjustments[stat] = statAdjustments[race.BaseRace] + statAdjustments[race.Metarace];
             }
 
             return adjustments;

@@ -33,7 +33,7 @@ namespace NPCGen.Generators
         private BaseAttack GetBaseAttack(CharacterClassPrototype prototype)
         {
             var baseAttack = new BaseAttack();
-            baseAttack.BaseAttackBonus = GetBaseAttackBonus(prototype);
+            baseAttack.Bonus = GetBaseAttackBonus(prototype);
             return baseAttack;
         }
 

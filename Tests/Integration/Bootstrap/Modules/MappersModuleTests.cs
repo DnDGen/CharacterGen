@@ -9,7 +9,7 @@ namespace NPCGen.Tests.Integration.Bootstrap.Modules
     public class MappersModuleTests : BootstrapTests
     {
         [Test]
-        public void AdjustmentXmlMappersAreNotGeneratedAsSingletons()
+        public void AdjustmentMappersAreNotGeneratedAsSingletons()
         {
             AssertNotSingleton<IAdjustmentMapper>();
         }
@@ -39,7 +39,7 @@ namespace NPCGen.Tests.Integration.Bootstrap.Modules
         }
 
         [Test]
-        public void StatPriorityXmlMappersAreNotGeneratedAsSingletons()
+        public void StatPriorityMappersAreNotGeneratedAsSingletons()
         {
             AssertNotSingleton<IStatPriorityMapper>();
         }

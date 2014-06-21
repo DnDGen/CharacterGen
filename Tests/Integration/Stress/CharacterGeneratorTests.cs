@@ -35,7 +35,7 @@ namespace NPCGen.Tests.Integration.Stress
             lawfulnesses = AlignmentConstants.GetLawfulnesses();
             classNames = CharacterClassConstants.GetClassNames();
             baseRaces = RaceConstants.BaseRaces.GetBaseRaces();
-            metaraces = RaceConstants.Metaraces.GetMetaraces();
+            metaraces = RaceConstants.Metaraces.GetMetaraces().Union(new[] { String.Empty });
         }
 
         protected override void MakeAssertions()
@@ -47,16 +47,12 @@ namespace NPCGen.Tests.Integration.Stress
             Assert.That(lawfulnesses, Contains.Item(character.Alignment.Lawfulness));
             Assert.That(classNames, Contains.Item(character.Class.ClassName));
             Assert.That(character.Class.Level, Is.Positive);
-            Assert.That(character.ArmorClass, Is.AtLeast(5));
-            Assert.That(character.Class.BaseAttack.BaseAttackBonus, Is.Not.Negative);
-            Assert.That(character.Familiar, Is.Not.Null);
-            Assert.That(character.Feats.Count(), Is.AtLeast(1));
+            Assert.That(character.Class.BaseAttack.Bonus, Is.Not.Negative);
             Assert.That(character.HitPoints, Is.AtLeast(character.Class.Level));
             Assert.That(character.InterestingTrait, Is.Not.Null);
             Assert.That(character.Languages.Count(), Is.AtLeast(1));
             Assert.That(baseRaces, Contains.Item(character.Race.BaseRace));
             Assert.That(metaraces, Contains.Item(character.Race.Metarace));
-            Assert.That(character.Skills.Count(), Is.AtLeast(1));
 
             Assert.That(character.Stats.Count, Is.EqualTo(6));
             Assert.That(character.Stats.Keys, Contains.Item(StatConstants.Charisma));
@@ -65,17 +61,22 @@ namespace NPCGen.Tests.Integration.Stress
             Assert.That(character.Stats.Keys, Contains.Item(StatConstants.Intelligence));
             Assert.That(character.Stats.Keys, Contains.Item(StatConstants.Strength));
             Assert.That(character.Stats.Keys, Contains.Item(StatConstants.Wisdom));
-            Assert.That(character.Stats[StatConstants.Charisma], Is.Positive);
-            Assert.That(character.Stats[StatConstants.Constitution], Is.Positive);
-            Assert.That(character.Stats[StatConstants.Dexterity], Is.Positive);
-            Assert.That(character.Stats[StatConstants.Intelligence], Is.Positive);
-            Assert.That(character.Stats[StatConstants.Strength], Is.Positive);
-            Assert.That(character.Stats[StatConstants.Wisdom], Is.Positive);
+            Assert.That(character.Stats[StatConstants.Charisma].Value, Is.Positive);
+            Assert.That(character.Stats[StatConstants.Constitution].Value, Is.Positive);
+            Assert.That(character.Stats[StatConstants.Dexterity].Value, Is.Positive);
+            Assert.That(character.Stats[StatConstants.Intelligence].Value, Is.Positive);
+            Assert.That(character.Stats[StatConstants.Strength].Value, Is.Positive);
+            Assert.That(character.Stats[StatConstants.Wisdom].Value, Is.Positive);
+
+            Assert.That(character.Skills.Count(), Is.AtLeast(1));
+            Assert.That(character.Feats.Count(), Is.AtLeast(1));
 
             Assert.That(character.Armor.ItemType, Is.EqualTo(ItemTypeConstants.Armor));
             Assert.That(character.Armor.Name, Is.Not.Empty);
+            Assert.That(character.ArmorClass, Is.AtLeast(5));
             Assert.That(character.PrimaryHand.ItemType, Is.EqualTo(ItemTypeConstants.Weapon));
             Assert.That(character.PrimaryHand.Name, Is.Not.Empty);
+            Assert.That(character.Familiar, Is.Not.Null);
             Assert.That(character.OffHand, Is.Not.Null);
 
             if (!String.IsNullOrEmpty(character.OffHand.Name))
@@ -149,9 +150,23 @@ namespace NPCGen.Tests.Integration.Stress
 
             do character = CharacterGenerator.CreateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
                 MetaraceRandomizer, StatsRandomizer);
-            while (TestShouldKeepRunning() && String.IsNullOrEmpty(character.OffHand.Name));
+            while (TestShouldKeepRunning() && (String.IsNullOrEmpty(character.OffHand.Name) || character.OffHand == character.PrimaryHand));
 
             Assert.That(character.OffHand.Name, Is.Not.Empty);
+            Assert.That(character.OffHand, Is.Not.EqualTo(character.PrimaryHand));
+            AssertIterations();
+        }
+
+        [Test]
+        public void TwoHandedHappens()
+        {
+            var character = new Character();
+
+            do character = CharacterGenerator.CreateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
+                MetaraceRandomizer, StatsRandomizer);
+            while (TestShouldKeepRunning() && character.OffHand != character.PrimaryHand);
+
+            Assert.That(character.OffHand, Is.EqualTo(character.PrimaryHand));
             AssertIterations();
         }
 
