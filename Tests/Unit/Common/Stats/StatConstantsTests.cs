@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using NPCGen.Common.Stats;
 using NUnit.Framework;
 
@@ -7,53 +8,28 @@ namespace NPCGen.Tests.Unit.Common.Stats
     [TestFixture]
     public class StatConstantsTests
     {
-        [Test]
-        public void StrengthConstant()
+        [TestCase(StatConstants.Strength, "Strength")]
+        [TestCase(StatConstants.Charisma, "Charisma")]
+        [TestCase(StatConstants.Constitution, "Constitution")]
+        [TestCase(StatConstants.Dexterity, "Dexterity")]
+        [TestCase(StatConstants.Intelligence, "Intelligence")]
+        [TestCase(StatConstants.Wisdom, "Wisdom")]
+        public void Constant(String constant, String value)
         {
-            Assert.That(StatConstants.Strength, Is.EqualTo("Strength"));
+            Assert.That(constant, Is.EqualTo(value));
         }
 
         [Test]
-        public void ConstitutionConstant()
-        {
-            Assert.That(StatConstants.Constitution, Is.EqualTo("Constitution"));
-        }
-
-        [Test]
-        public void DexterityConstant()
-        {
-            Assert.That(StatConstants.Dexterity, Is.EqualTo("Dexterity"));
-        }
-
-        [Test]
-        public void IntelligenceConstant()
-        {
-            Assert.That(StatConstants.Intelligence, Is.EqualTo("Intelligence"));
-        }
-
-        [Test]
-        public void WisdomConstant()
-        {
-            Assert.That(StatConstants.Wisdom, Is.EqualTo("Wisdom"));
-        }
-
-        [Test]
-        public void CharismaConstant()
-        {
-            Assert.That(StatConstants.Charisma, Is.EqualTo("Charisma"));
-        }
-
-        [Test]
-        public void GetStatConstants()
+        public void AllStatConstants()
         {
             var stats = StatConstants.GetStats();
 
-            Assert.That(stats.Contains(StatConstants.Charisma), Is.True);
-            Assert.That(stats.Contains(StatConstants.Constitution), Is.True);
-            Assert.That(stats.Contains(StatConstants.Dexterity), Is.True);
-            Assert.That(stats.Contains(StatConstants.Intelligence), Is.True);
-            Assert.That(stats.Contains(StatConstants.Strength), Is.True);
-            Assert.That(stats.Contains(StatConstants.Wisdom), Is.True);
+            Assert.That(stats, Contains.Item(StatConstants.Charisma));
+            Assert.That(stats, Contains.Item(StatConstants.Constitution));
+            Assert.That(stats, Contains.Item(StatConstants.Dexterity));
+            Assert.That(stats, Contains.Item(StatConstants.Intelligence));
+            Assert.That(stats, Contains.Item(StatConstants.Strength));
+            Assert.That(stats, Contains.Item(StatConstants.Wisdom));
             Assert.That(stats.Count(), Is.EqualTo(6));
         }
     }

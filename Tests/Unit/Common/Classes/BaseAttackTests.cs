@@ -16,6 +16,12 @@ namespace NPCGen.Tests.Unit.Common.Classes
         }
 
         [Test]
+        public void BaseAttackInitialized()
+        {
+            Assert.That(baseAttack.Bonus, Is.EqualTo(0));
+        }
+
+        [Test]
         public void OneAttack()
         {
             for (var a = 0; a < 6; a++)

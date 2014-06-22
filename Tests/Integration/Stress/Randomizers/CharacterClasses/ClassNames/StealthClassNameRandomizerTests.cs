@@ -13,7 +13,7 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.CharacterClasses.ClassName
         [Inject, Named(ClassNameRandomizerTypeConstants.Stealth)]
         public override IClassNameRandomizer ClassNameRandomizer { get; set; }
 
-        protected override IEnumerable<String> particularClassNames
+        protected override IEnumerable<String> allowedClassNames
         {
             get
             {

@@ -18,9 +18,9 @@ namespace NPCGen.Tests.Integration.Stress
 
         protected override void MakeAssertions()
         {
-            var dependentData = GetNewDependentData();
+            var alignment = GetNewAlignment();
 
-            var prototype = CharacterClassGenerator.GeneratePrototypeWith(dependentData.Alignment, LevelRandomizer, ClassNameRandomizer);
+            var prototype = CharacterClassGenerator.GeneratePrototypeWith(alignment, LevelRandomizer, ClassNameRandomizer);
             Assert.That(classNames, Contains.Item(prototype.ClassName));
             Assert.That(prototype.Level, Is.Positive);
 

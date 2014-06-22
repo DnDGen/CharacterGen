@@ -50,11 +50,11 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
             mockPercentileResultSelector.Verify(p => p.GetAllResults(It.IsAny<String>()), Times.Once);
         }
 
-        [Test, ExpectedException(typeof(IncompatibleRandomizersException))]
+        [Test]
         public void RandomizeThrowsErrorIfNoPossibleResults()
         {
             mockPercentileResultSelector.Setup(p => p.GetAllResults(It.IsAny<String>())).Returns(Enumerable.Empty<String>());
-            randomizer.Randomize(String.Empty, prototype);
+            Assert.That(() => randomizer.Randomize(String.Empty, prototype), Throws.InstanceOf<IncompatibleRandomizersException>());
         }
 
         [Test]
@@ -94,8 +94,8 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         {
             var classNames = randomizer.GetAllPossibleResults(String.Empty, prototype);
 
-            Assert.That(classNames.Contains(firstMetarace), Is.True);
-            Assert.That(classNames.Contains(secondMetarace), Is.True);
+            Assert.That(classNames, Contains.Item(firstMetarace));
+            Assert.That(classNames, Contains.Item(secondMetarace));
         }
 
         [Test]
@@ -112,7 +112,8 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
             randomizer.NotAllowedMetarace = firstMetarace;
             var results = randomizer.GetAllPossibleResults(String.Empty, prototype);
 
-            Assert.That(results.Contains(secondMetarace), Is.True);
+            Assert.That(results, Contains.Item(secondMetarace));
+            Assert.That(results, Is.Not.Contains(firstMetarace));
         }
 
         [Test]
@@ -121,7 +122,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
             randomizer.AllowNoMetarace = true;
 
             var results = randomizer.GetAllPossibleResults(String.Empty, prototype);
-            Assert.That(results.Contains(String.Empty), Is.True);
+            Assert.That(results, Contains.Item(String.Empty));
         }
 
         [Test]
@@ -130,7 +131,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
             randomizer.AllowNoMetarace = false;
 
             var results = randomizer.GetAllPossibleResults(String.Empty, prototype);
-            Assert.That(results.Contains(String.Empty), Is.False);
+            Assert.That(results, Is.Not.Contains(String.Empty));
         }
 
         [Test]
@@ -139,8 +140,8 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
             adjustments[firstMetarace] = 1;
 
             var results = randomizer.GetAllPossibleResults(String.Empty, prototype);
-            Assert.That(results.Contains(secondMetarace), Is.True);
-            Assert.That(results.Contains(firstMetarace), Is.False);
+            Assert.That(results, Contains.Item(secondMetarace));
+            Assert.That(results, Is.Not.Contains(firstMetarace));
         }
 
         private class TestMetaraceRandomizer : BaseMetarace

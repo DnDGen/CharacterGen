@@ -7,20 +7,22 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
     [TestFixture]
     public abstract class BaseRaceRandomizerTests : StressTests
     {
-        protected abstract IEnumerable<String> particularBaseRaces { get; }
+        protected abstract IEnumerable<String> allowedBaseRaces { get; }
 
         private IEnumerable<String> baseRaces;
 
         [SetUp]
         public void Setup()
         {
-            baseRaces = particularBaseRaces;
+            baseRaces = allowedBaseRaces;
         }
 
         protected override void MakeAssertions()
         {
-            var data = GetNewDependentData();
-            var baseRace = BaseRaceRandomizer.Randomize(data.Alignment.Goodness, data.CharacterClassPrototype);
+            var alignment = GetNewAlignment();
+            var prototype = GetNewCharacterClassPrototype(alignment);
+
+            var baseRace = BaseRaceRandomizer.Randomize(alignment.Goodness, prototype);
             Assert.That(baseRaces, Contains.Item(baseRace));
         }
     }

@@ -28,7 +28,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         public void GetAllPossibleResultsReturnsEnumerableOfEmptyString()
         {
             var metaraces = randomizer.GetAllPossibleResults(String.Empty, new CharacterClassPrototype());
-            Assert.That(metaraces.First(), Is.EqualTo(String.Empty));
+            Assert.That(metaraces, Contains.Item(String.Empty));
             Assert.That(metaraces.Count(), Is.EqualTo(1));
         }
     }

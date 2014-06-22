@@ -14,13 +14,11 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Alignments
         public override IAlignmentRandomizer AlignmentRandomizer { get; set; }
 
         private IEnumerable<String> goodnesses;
-        private IEnumerable<String> lawfulnesses;
 
         [SetUp]
         public void Setup()
         {
             goodnesses = AlignmentConstants.GetGoodnesses();
-            lawfulnesses = AlignmentConstants.GetLawfulnesses();
         }
 
         protected override void MakeAssertions()

@@ -105,8 +105,6 @@
     <Compile Include="CharacterClassGeneratorTests.cs" />
     <Compile Include="CharacterGeneratorTests.cs" />
     <Compile Include="AlignmentGeneratorTests.cs" />
-    <Compile Include="DependentDataCollection.cs" />
-    <Compile Include="DependentDataCollectionTests.cs" />
     <Compile Include="HitPointsGeneratorTests.cs" />
     <Compile Include="LanguageGeneratorTests.cs" />
     <Compile Include="RaceGeneratorTests.cs" />

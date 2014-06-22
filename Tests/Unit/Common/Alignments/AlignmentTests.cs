@@ -1,4 +1,5 @@
-﻿using NPCGen.Common.Alignments;
+﻿using System;
+using NPCGen.Common.Alignments;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Unit.Common.Alignments
@@ -12,6 +13,13 @@ namespace NPCGen.Tests.Unit.Common.Alignments
         public void Setup()
         {
             alignment = new Alignment();
+        }
+
+        [Test]
+        public void AlignmentInitialized()
+        {
+            Assert.That(alignment.Goodness, Is.Empty);
+            Assert.That(alignment.Lawfulness, Is.Empty);
         }
 
         [Test]
@@ -172,6 +180,54 @@ namespace NPCGen.Tests.Unit.Common.Alignments
             alignment.Lawfulness = AlignmentConstants.Neutral;
             alignment.Goodness = AlignmentConstants.Neutral;
             Assert.That(alignment.ToString(), Is.EqualTo("True Neutral"));
+        }
+
+        [Test]
+        public void AlignmentIsNotEqualIfOtherItemNotAlignment()
+        {
+            alignment.Lawfulness = "lawfulness";
+            var otherAlignment = new Object();
+
+            Assert.That(alignment, Is.Not.EqualTo(otherAlignment));
+        }
+
+        [Test]
+        public void AlignmentIsNotEqualIfLawfulnessDiffers()
+        {
+            alignment.Lawfulness = "lawfulness";
+            alignment.Goodness = "goodness";
+
+            var otherAlignment = new Alignment();
+            otherAlignment.Lawfulness = "other lawfulness";
+            otherAlignment.Goodness = "goodness";
+
+            Assert.That(alignment, Is.Not.EqualTo(otherAlignment));
+        }
+
+        [Test]
+        public void AlignmentIsNotEqualIfGoodnessDiffers()
+        {
+            alignment.Lawfulness = "lawfulness";
+            alignment.Goodness = "goodness";
+
+            var otherAlignment = new Alignment();
+            otherAlignment.Lawfulness = "lawfulness";
+            otherAlignment.Goodness = "other goodness";
+
+            Assert.That(alignment, Is.Not.EqualTo(otherAlignment));
+        }
+
+        [Test]
+        public void AlignmentIsEqualIfGoodnessesAndLawfulnessesMatch()
+        {
+            alignment.Lawfulness = "lawfulness";
+            alignment.Goodness = "goodness";
+
+            var otherAlignment = new Alignment();
+            otherAlignment.Lawfulness = "lawfulness";
+            otherAlignment.Goodness = "goodness";
+
+            Assert.That(alignment, Is.EqualTo(otherAlignment));
         }
     }
 }

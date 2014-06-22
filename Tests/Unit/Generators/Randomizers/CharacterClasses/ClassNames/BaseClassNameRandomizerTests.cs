@@ -39,11 +39,11 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassNames
             mockPercentileResultSelector.Verify(p => p.GetAllResults(It.IsAny<String>()), Times.Once);
         }
 
-        [Test, ExpectedException(typeof(IncompatibleRandomizersException))]
+        [Test]
         public void RandomizeThrowsErrorIfNoPossibleResults()
         {
             mockPercentileResultSelector.Setup(p => p.GetAllResults(It.IsAny<String>())).Returns(Enumerable.Empty<String>());
-            randomizer.Randomize(alignment);
+            Assert.That(() => randomizer.Randomize(alignment), Throws.InstanceOf<IncompatibleRandomizersException>());
         }
 
         [Test]
@@ -77,8 +77,8 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassNames
         {
             var classNames = randomizer.GetAllPossibleResults(alignment);
 
-            Assert.That(classNames.Contains(firstClass), Is.True);
-            Assert.That(classNames.Contains(secondClass), Is.True);
+            Assert.That(classNames, Contains.Item(firstClass));
+            Assert.That(classNames, Contains.Item(secondClass));
             Assert.That(classNames.Count(), Is.EqualTo(2));
         }
 
@@ -97,7 +97,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassNames
             randomizer.NotAllowedClassName = firstClass;
             var results = randomizer.GetAllPossibleResults(alignment);
 
-            Assert.That(results.Contains(secondClass), Is.True);
+            Assert.That(results, Contains.Item(secondClass));
             Assert.That(results.Count(), Is.EqualTo(1));
         }
 

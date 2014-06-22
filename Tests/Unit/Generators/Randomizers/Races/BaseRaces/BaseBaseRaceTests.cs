@@ -31,7 +31,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
             mockPercentileResultSelector.Setup(p => p.GetPercentileFrom(It.IsAny<String>())).Returns(firstBaseRace);
 
             adjustments = new Dictionary<String, Int32>();
-            foreach(var baseRace in baseRaces)
+            foreach (var baseRace in baseRaces)
                 adjustments.Add(baseRace, 0);
 
             mockLevelAdjustmentsSelector = new Mock<ILevelAdjustmentsSelector>();
@@ -50,11 +50,11 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
             mockPercentileResultSelector.Verify(p => p.GetAllResults(It.IsAny<String>()), Times.Once);
         }
 
-        [Test, ExpectedException(typeof(IncompatibleRandomizersException))]
+        [Test]
         public void RandomizeThrowsErrorIfNoPossibleResults()
         {
             mockPercentileResultSelector.Setup(p => p.GetAllResults(It.IsAny<String>())).Returns(Enumerable.Empty<String>());
-            randomizer.Randomize(String.Empty, prototype);
+            Assert.That(() => randomizer.Randomize(String.Empty, prototype), Throws.InstanceOf<IncompatibleRandomizersException>());
         }
 
         [Test]
@@ -93,8 +93,8 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         public void GetAllPossibleResultsFiltersOutEmptyStrings()
         {
             var classNames = randomizer.GetAllPossibleResults(String.Empty, prototype);
-            Assert.That(classNames.Contains(firstBaseRace), Is.True);
-            Assert.That(classNames.Contains(secondBaseRace), Is.True);
+            Assert.That(classNames, Contains.Item(firstBaseRace));
+            Assert.That(classNames, Contains.Item(secondBaseRace));
             Assert.That(classNames.Count(), Is.EqualTo(2));
         }
 
@@ -112,7 +112,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
             randomizer.NotAllowedBaseRace = firstBaseRace;
 
             var results = randomizer.GetAllPossibleResults(String.Empty, prototype);
-            Assert.That(results.Contains(secondBaseRace), Is.True);
+            Assert.That(results, Contains.Item(secondBaseRace));
             Assert.That(results.Count(), Is.EqualTo(1));
         }
 
@@ -122,7 +122,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
             adjustments[firstBaseRace] = 1;
 
             var results = randomizer.GetAllPossibleResults(String.Empty, prototype);
-            Assert.That(results.Contains(secondBaseRace), Is.True);
+            Assert.That(results, Contains.Item(secondBaseRace));
             Assert.That(results.Count(), Is.EqualTo(1));
         }
 

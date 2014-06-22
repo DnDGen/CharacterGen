@@ -9,9 +9,10 @@ namespace NPCGen.Tests.Integration.Stress
     {
         protected override void MakeAssertions()
         {
-            var dependentData = GetNewDependentData();
+            var alignment = GetNewAlignment();
+            var prototype = GetNewCharacterClassPrototype(alignment);
 
-            var race = RaceGenerator.GenerateWith(dependentData.Alignment.Goodness, dependentData.CharacterClassPrototype, BaseRaceRandomizer,
+            var race = RaceGenerator.GenerateWith(alignment.Goodness, prototype, BaseRaceRandomizer,
                 MetaraceRandomizer);
             Assert.That(race.BaseRace, Is.Not.Empty);
             Assert.That(race.Metarace, Is.Not.Null);
@@ -24,9 +25,9 @@ namespace NPCGen.Tests.Integration.Stress
 
             do
             {
-                var dependentData = GetNewDependentData();
-                race = RaceGenerator.GenerateWith(dependentData.Alignment.Goodness, dependentData.CharacterClassPrototype, BaseRaceRandomizer,
-                    MetaraceRandomizer);
+                var alignment = GetNewAlignment();
+                var prototype = GetNewCharacterClassPrototype(alignment);
+                race = RaceGenerator.GenerateWith(alignment.Goodness, prototype, BaseRaceRandomizer, MetaraceRandomizer);
             } while (TestShouldKeepRunning() && String.IsNullOrEmpty(race.Metarace));
 
             Assert.That(race.Metarace, Is.Not.Empty);
@@ -40,9 +41,9 @@ namespace NPCGen.Tests.Integration.Stress
 
             do
             {
-                var dependentData = GetNewDependentData();
-                race = RaceGenerator.GenerateWith(dependentData.Alignment.Goodness, dependentData.CharacterClassPrototype, BaseRaceRandomizer,
-                    MetaraceRandomizer);
+                var alignment = GetNewAlignment();
+                var prototype = GetNewCharacterClassPrototype(alignment);
+                race = RaceGenerator.GenerateWith(alignment.Goodness, prototype, BaseRaceRandomizer, MetaraceRandomizer);
             } while (TestShouldKeepRunning() && !String.IsNullOrEmpty(race.Metarace));
 
             Assert.That(race.Metarace, Is.Empty);

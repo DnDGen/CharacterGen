@@ -12,7 +12,7 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
         [Inject, Named(MetaraceRandomizerTypeConstants.None)]
         public override IMetaraceRandomizer MetaraceRandomizer { get; set; }
 
-        protected override IEnumerable<String> particularMetaraces
+        protected override IEnumerable<String> allowedMetaraces
         {
             get { return new[] { String.Empty }; }
         }

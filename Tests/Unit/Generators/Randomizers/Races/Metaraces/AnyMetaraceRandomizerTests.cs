@@ -1,4 +1,5 @@
-﻿using NPCGen.Common.Races;
+﻿using System;
+using NPCGen.Common.Races;
 using NPCGen.Generators.Randomizers.Races.Metaraces;
 using NUnit.Framework;
 
@@ -13,52 +14,18 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
             randomizer = new AnyMetaraceRandomizer(mockPercentileResultSelector.Object, mockLevelAdjustmentsSelector.Object);
         }
 
-        [Test]
-        public void HalfCelestialIsAllowed()
+        [TestCase(RaceConstants.Metaraces.HalfCelestial)]
+        [TestCase(RaceConstants.Metaraces.HalfDragon)]
+        [TestCase(RaceConstants.Metaraces.HalfFiend)]
+        [TestCase(RaceConstants.Metaraces.Werebear)]
+        [TestCase(RaceConstants.Metaraces.Wereboar)]
+        [TestCase(RaceConstants.Metaraces.Wererat)]
+        [TestCase(RaceConstants.Metaraces.Weretiger)]
+        [TestCase(RaceConstants.Metaraces.Werewolf)]
+        [TestCase("")]
+        public void Allowed(String race)
         {
-            AssertRaceIsAllowed(RaceConstants.Metaraces.HalfCelestial);
-        }
-
-        [Test]
-        public void HalfDragonIsAllowed()
-        {
-            AssertRaceIsAllowed(RaceConstants.Metaraces.HalfDragon);
-        }
-
-        [Test]
-        public void HalfFiendIsAllowed()
-        {
-            AssertRaceIsAllowed(RaceConstants.Metaraces.HalfFiend);
-        }
-
-        [Test]
-        public void WerebearIsAllowed()
-        {
-            AssertRaceIsAllowed(RaceConstants.Metaraces.Werebear);
-        }
-
-        [Test]
-        public void WereboarIsAllowed()
-        {
-            AssertRaceIsAllowed(RaceConstants.Metaraces.Wereboar);
-        }
-
-        [Test]
-        public void WereratIsAllowed()
-        {
-            AssertRaceIsAllowed(RaceConstants.Metaraces.Wererat);
-        }
-
-        [Test]
-        public void WeretigerIsAllowed()
-        {
-            AssertRaceIsAllowed(RaceConstants.Metaraces.Weretiger);
-        }
-
-        [Test]
-        public void WerewolfIsAllowed()
-        {
-            AssertRaceIsAllowed(RaceConstants.Metaraces.Werewolf);
+            AssertRaceIsAllowed(race);
         }
     }
 }

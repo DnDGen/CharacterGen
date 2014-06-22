@@ -1,4 +1,5 @@
-﻿using NPCGen.Common.CharacterClasses;
+﻿using System;
+using NPCGen.Common.CharacterClasses;
 using NPCGen.Generators.Randomizers.CharacterClasses.ClassNames;
 using NUnit.Framework;
 
@@ -13,58 +14,28 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassNames
             randomizer = new WarriorClassNameRandomizer(mockPercentileResultSelector.Object);
         }
 
-        [Test]
-        public void FighterAlwaysAllowed()
+        [TestCase(CharacterClassConstants.Fighter)]
+        [TestCase(CharacterClassConstants.Ranger)]
+        public void AlwaysAllowed(String className)
         {
-            AssertClassIsAlwaysAllowed(CharacterClassConstants.Fighter);
+            AssertClassIsAlwaysAllowed(className);
         }
 
-        [Test]
-        public void ClericNeverAllowed()
+        [TestCase(CharacterClassConstants.Barbarian)]
+        public void AllowedIfNotLawful(String className)
         {
-            AssertClassIsNeverAllowed(CharacterClassConstants.Cleric);
+            AssertClassMustNotBeLawful(className);
         }
 
-        [Test]
-        public void RangerAlwaysAllowed()
+        [TestCase(CharacterClassConstants.Cleric)]
+        [TestCase(CharacterClassConstants.Rogue)]
+        [TestCase(CharacterClassConstants.Sorcerer)]
+        [TestCase(CharacterClassConstants.Wizard)]
+        [TestCase(CharacterClassConstants.Bard)]
+        [TestCase(CharacterClassConstants.Druid)]
+        public void NeverAllowed(String className)
         {
-            AssertClassIsAlwaysAllowed(CharacterClassConstants.Ranger);
-        }
-
-        [Test]
-        public void SorcererNeverAllowed()
-        {
-            AssertClassIsNeverAllowed(CharacterClassConstants.Sorcerer);
-        }
-
-        [Test]
-        public void RogueNeverAllowed()
-        {
-            AssertClassIsNeverAllowed(CharacterClassConstants.Rogue);
-        }
-
-        [Test]
-        public void WizardNeverAllowed()
-        {
-            AssertClassIsNeverAllowed(CharacterClassConstants.Wizard);
-        }
-
-        [Test]
-        public void BarbarianAllowedIfAlignmentIsNotLawful()
-        {
-            AssertClassMustNotBeLawful(CharacterClassConstants.Barbarian);
-        }
-
-        [Test]
-        public void BardNeverAllowed()
-        {
-            AssertClassIsNeverAllowed(CharacterClassConstants.Bard);
-        }
-
-        [Test]
-        public void DruidNeverAllowed()
-        {
-            AssertClassIsNeverAllowed(CharacterClassConstants.Druid);
+            AssertClassIsNeverAllowed(className);
         }
 
         [Test]

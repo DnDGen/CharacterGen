@@ -24,13 +24,13 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Stats
         {
             var stats = randomizer.Randomize();
 
+            Assert.That(stats.Keys, Contains.Item(StatConstants.Strength));
+            Assert.That(stats.Keys, Contains.Item(StatConstants.Constitution));
+            Assert.That(stats.Keys, Contains.Item(StatConstants.Dexterity));
+            Assert.That(stats.Keys, Contains.Item(StatConstants.Intelligence));
+            Assert.That(stats.Keys, Contains.Item(StatConstants.Wisdom));
+            Assert.That(stats.Keys, Contains.Item(StatConstants.Charisma));
             Assert.That(stats.Count, Is.EqualTo(6));
-            Assert.That(stats.ContainsKey(StatConstants.Strength), Is.True);
-            Assert.That(stats.ContainsKey(StatConstants.Constitution), Is.True);
-            Assert.That(stats.ContainsKey(StatConstants.Dexterity), Is.True);
-            Assert.That(stats.ContainsKey(StatConstants.Intelligence), Is.True);
-            Assert.That(stats.ContainsKey(StatConstants.Wisdom), Is.True);
-            Assert.That(stats.ContainsKey(StatConstants.Charisma), Is.True);
         }
 
         [Test]
@@ -92,7 +92,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Stats
             {
                 var retunValue = Allowed;
                 firstRoll &= !firstRoll;
-                
+
                 if (SwitchAllowed)
                     Allowed = !Allowed;
 

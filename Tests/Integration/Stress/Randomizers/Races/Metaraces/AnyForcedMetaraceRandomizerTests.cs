@@ -13,7 +13,7 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
         [Inject, Named(MetaraceRandomizerTypeConstants.AnyForced)]
         public override IMetaraceRandomizer MetaraceRandomizer { get; set; }
 
-        protected override IEnumerable<String> particularMetaraces
+        protected override IEnumerable<String> allowedMetaraces
         {
             get { return RaceConstants.Metaraces.GetMetaraces(); }
         }

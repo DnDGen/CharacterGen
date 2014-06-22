@@ -18,11 +18,14 @@ namespace NPCGen.Tests.Integration.Stress
 
         protected override void MakeAssertions()
         {
-            var dependentData = GetNewDependentData();
-            var stats = StatsGenerator.GenerateWith(StatsRandomizer, dependentData.CharacterClass, dependentData.Race);
+            var alignment = GetNewAlignment();
+            var prototype = GetNewCharacterClassPrototype(alignment);
+            var characterClass = GetNewCharacterClass(prototype);
+            var race = GetNewRace(alignment, prototype);
+            var stats = StatsGenerator.GenerateWith(StatsRandomizer, characterClass, race);
 
-            var hitPoints = HitPointsGenerator.GenerateWith(dependentData.CharacterClass, stats[StatConstants.Constitution].Bonus, dependentData.Race);
-            Assert.That(hitPoints, Is.AtLeast(dependentData.CharacterClass.Level));
+            var hitPoints = HitPointsGenerator.GenerateWith(characterClass, stats[StatConstants.Constitution].Bonus, race);
+            Assert.That(hitPoints, Is.AtLeast(characterClass.Level));
         }
     }
 }

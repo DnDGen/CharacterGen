@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Moq;
 using NPCGen.Selectors.Interfaces;
 using NUnit.Framework;
@@ -14,7 +13,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races
         protected Mock<ILevelAdjustmentsSelector> mockLevelAdjustmentsSelector;
 
         [SetUp]
-        public void Setup()
+        public void RaceRandomizerTestsSetup()
         {
             mockPercentileResultSelector = new Mock<IPercentileSelector>();
             mockLevelAdjustmentsSelector = new Mock<ILevelAdjustmentsSelector>();
@@ -23,13 +22,13 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races
         protected void AssertRaceIsAllowed(String race)
         {
             var results = GetResults();
-            Assert.That(results.Contains(race), Is.True);
+            Assert.That(results, Contains.Item(race));
         }
 
         protected void AssertRaceIsNotAllowed(String race)
         {
             var results = GetResults();
-            Assert.That(results.Contains(race), Is.False);
+            Assert.That(results, Is.Not.Contains(race));
         }
 
         protected abstract IEnumerable<String> GetResults();

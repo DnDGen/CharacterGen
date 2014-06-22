@@ -33,7 +33,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         [TestCase(RaceConstants.BaseRaces.TallfellowHalfling)]
         [TestCase(RaceConstants.BaseRaces.WildElf)]
         [TestCase(RaceConstants.BaseRaces.WoodElf)]
-        public void RaceIsAllowed(String race)
+        public void Allowed(String race)
         {
             AssertRaceIsAllowed(race);
         }
@@ -53,7 +53,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         [TestCase(RaceConstants.BaseRaces.Orc)]
         [TestCase(RaceConstants.BaseRaces.Tiefling)]
         [TestCase(RaceConstants.BaseRaces.Troglodyte)]
-        public void RaceIsNotAllowed(String race)
+        public void NotAllowed(String race)
         {
             AssertRaceIsNotAllowed(race);
         }

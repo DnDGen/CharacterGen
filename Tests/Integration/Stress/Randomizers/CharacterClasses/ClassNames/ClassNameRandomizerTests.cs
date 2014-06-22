@@ -7,20 +7,20 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.CharacterClasses.ClassName
     [TestFixture]
     public abstract class ClassNameRandomizerTests : StressTests
     {
-        protected abstract IEnumerable<String> particularClassNames { get; }
+        protected abstract IEnumerable<String> allowedClassNames { get; }
 
         private IEnumerable<String> classNames;
 
         [SetUp]
         public void Setup()
         {
-            classNames = particularClassNames;
+            classNames = allowedClassNames;
         }
 
         protected override void MakeAssertions()
         {
-            var data = GetNewDependentData();
-            var className = ClassNameRandomizer.Randomize(data.Alignment);
+            var alignment = GetNewAlignment();
+            var className = ClassNameRandomizer.Randomize(alignment);
             Assert.That(classNames, Contains.Item(className));
         }
     }

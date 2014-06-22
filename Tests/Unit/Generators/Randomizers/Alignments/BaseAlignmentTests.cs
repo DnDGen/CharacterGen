@@ -55,26 +55,12 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Alignments
         }
 
         [Test]
-        public void GetsGoodnessFromSelector()
-        {
-            randomizer.Randomize();
-            mockPercentileResultSelector.Verify(p => p.GetPercentileFrom(It.IsAny<String>()), Times.Once);
-        }
-
-        [Test]
-        public void RandomizerAccessesTableAlignmentGoodness()
-        {
-            randomizer.Randomize();
-            mockPercentileResultSelector.Verify(p => p.GetPercentileFrom("AlignmentGoodness"), Times.Once);
-        }
-
-        [Test]
         public void ReturnsGoodnessFromSelector()
         {
-            mockPercentileResultSelector.Setup(p => p.GetPercentileFrom(It.IsAny<String>())).Returns(AlignmentConstants.Good);
+            mockPercentileResultSelector.Setup(p => p.GetPercentileFrom("AlignmentGoodness")).Returns(AlignmentConstants.Evil);
 
             var alignment = randomizer.Randomize();
-            Assert.That(alignment.Goodness, Is.EqualTo(AlignmentConstants.Good));
+            Assert.That(alignment.Goodness, Is.EqualTo(AlignmentConstants.Evil));
         }
 
         [Test]
@@ -84,11 +70,11 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Alignments
             mockPercentileResultSelector.Verify(p => p.GetAllResults(It.IsAny<String>()), Times.Once);
         }
 
-        [Test, ExpectedException(typeof(IncompatibleRandomizersException))]
+        [Test]
         public void RandomizeThrowsErrorIfNoPossibleResults()
         {
             mockPercentileResultSelector.Setup(p => p.GetAllResults(It.IsAny<String>())).Returns(Enumerable.Empty<String>());
-            randomizer.Randomize();
+            Assert.That(() => randomizer.Randomize(), Throws.InstanceOf<IncompatibleRandomizersException>());
         }
 
         [Test]
@@ -99,13 +85,6 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Alignments
 
             randomizer.Randomize();
             mockPercentileResultSelector.Verify(p => p.GetPercentileFrom(It.IsAny<String>()), Times.Exactly(2));
-        }
-
-        [Test]
-        public void GetAllPossibleResultsGetsGoodnessesFromSelector()
-        {
-            var classNames = randomizer.GetAllPossibleResults();
-            mockPercentileResultSelector.Verify(p => p.GetAllResults(It.IsAny<String>()), Times.Once);
         }
 
         [Test]

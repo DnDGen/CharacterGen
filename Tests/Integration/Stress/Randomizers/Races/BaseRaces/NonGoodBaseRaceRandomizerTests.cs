@@ -14,7 +14,7 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
         [Inject, Named(BaseRaceRandomizerTypeConstants.NonGood)]
         public override IBaseRaceRandomizer BaseRaceRandomizer { get; set; }
 
-        protected override IEnumerable<String> particularBaseRaces
+        protected override IEnumerable<String> allowedBaseRaces
         {
             get
             {

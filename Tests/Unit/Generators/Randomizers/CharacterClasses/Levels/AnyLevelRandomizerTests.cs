@@ -23,11 +23,9 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.CharacterClasses.Levels
         [Test]
         public void RandomizeReturnD20Result()
         {
-            var roll = 1;
-            mockDice.Setup(d => d.d20(1)).Returns(roll);
-
+            mockDice.Setup(d => d.d20(1)).Returns(9266);
             var level = randomizer.Randomize();
-            Assert.That(level, Is.EqualTo(roll));
+            Assert.That(level, Is.EqualTo(9266));
         }
 
         [Test]
@@ -36,7 +34,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.CharacterClasses.Levels
             var levels = randomizer.GetAllPossibleResults();
 
             for (var level = 1; level <= 20; level++)
-                Assert.That(levels.Contains(level), Is.True);
+                Assert.That(levels, Contains.Item(level));
 
             Assert.That(levels.Count(), Is.EqualTo(20));
         }

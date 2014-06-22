@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using Moq;
 using NPCGen.Common.Alignments;
 using NPCGen.Common.CharacterClasses;
@@ -18,7 +17,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassNames
         private Alignment alignment;
 
         [SetUp]
-        public void Setup()
+        public void ClassNameRandomizerTestsSetup()
         {
             mockPercentileResultSelector = new Mock<IPercentileSelector>();
             mockPercentileResultSelector.Setup(p => p.GetAllResults(It.IsAny<String>())).Returns(CharacterClassConstants.GetClassNames());
@@ -33,7 +32,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassNames
                 {
                     alignment.Lawfulness = lawfulness;
                     alignment.Goodness = goodness;
-                    
+
                     AssertClassIsAllowed(className);
                 }
             }
@@ -124,13 +123,13 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassNames
         private void AssertClassIsAllowed(String className)
         {
             var results = randomizer.GetAllPossibleResults(alignment);
-            Assert.That(results.Contains(className), Is.True);
+            Assert.That(results, Contains.Item(className));
         }
 
         private void AssertClassIsNotAllowed(String className)
         {
             var results = randomizer.GetAllPossibleResults(alignment);
-            Assert.That(results.Contains(className), Is.False);
+            Assert.That(results, Is.Not.Contains(className));
         }
     }
 }

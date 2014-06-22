@@ -27,8 +27,11 @@ namespace NPCGen.Tests.Integration.Stress
 
         protected override void MakeAssertions()
         {
-            var data = GetNewDependentData();
-            var stats = StatsGenerator.GenerateWith(StatsRandomizer, data.CharacterClass, data.Race);
+            var alignment = GetNewAlignment();
+            var prototype = GetNewCharacterClassPrototype(alignment);
+            var characterClass = GetNewCharacterClass(prototype);
+            var race = GetNewRace(alignment, prototype);
+            var stats = StatsGenerator.GenerateWith(StatsRandomizer, characterClass, race);
 
             foreach (var statName in statNames)
             {

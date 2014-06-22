@@ -31,11 +31,11 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.CharacterClasses.Levels
         [Test]
         public void AddRollBonusToRoll()
         {
-            mockDice.Setup(d => d.Roll("1d5")).Returns(1);
-            randomizer.RollBonus = 9266;
+            mockDice.Setup(d => d.Roll("1d5")).Returns(9200);
+            randomizer.RollBonus = 66;
 
             var level = randomizer.Randomize();
-            Assert.That(level, Is.EqualTo(9267));
+            Assert.That(level, Is.EqualTo(9266));
         }
 
         [Test]
@@ -46,7 +46,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.CharacterClasses.Levels
             var levels = randomizer.GetAllPossibleResults();
 
             for (var level = randomizer.RollBonus + 1; level <= randomizer.RollBonus + 5; level++)
-                Assert.That(levels.Contains(level), Is.True);
+                Assert.That(levels, Contains.Item(level));
 
             Assert.That(levels.Count(), Is.EqualTo(5));
         }
