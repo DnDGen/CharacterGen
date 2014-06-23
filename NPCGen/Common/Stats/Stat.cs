@@ -5,11 +5,13 @@ namespace NPCGen.Common.Stats
     public class Stat
     {
         public Int32 Value { get; set; }
-        public Int32 Bonus { get { return (Value - 10) / 2; } }
-
-        public override String ToString()
+        public Int32 Bonus
         {
-            return String.Format("{0} ({1})", Value, Bonus);
+            get
+            {
+                var even = Value - Value % 2;
+                return (even - 10) / 2;
+            }
         }
     }
 }

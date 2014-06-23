@@ -7,6 +7,12 @@ namespace NPCGen.Common.Alignments
         public String Lawfulness { get; set; }
         public String Goodness { get; set; }
 
+        public Alignment()
+        {
+            Lawfulness = String.Empty;
+            Goodness = String.Empty;
+        }
+
         public Boolean IsNeutral()
         {
             return Goodness == AlignmentConstants.Neutral || Lawfulness == AlignmentConstants.Neutral;

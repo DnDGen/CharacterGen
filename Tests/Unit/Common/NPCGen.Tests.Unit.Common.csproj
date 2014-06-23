@@ -30,6 +30,40 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Ciloci.Flee">
+      <HintPath>..\..\..\packages\Trove.FLEE.0.9.26.0\lib\net20\Ciloci.Flee.dll</HintPath>
+    </Reference>
+    <Reference Include="D20Dice">
+      <HintPath>..\..\..\packages\D20Dice.6.2\lib\D20Dice.dll</HintPath>
+    </Reference>
+    <Reference Include="EquipmentGen.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\EquipmentGen.1.0.0\lib\EquipmentGen.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="EquipmentGen.Generators">
+      <HintPath>..\..\..\packages\EquipmentGen.1.0.0\lib\EquipmentGen.Generators.dll</HintPath>
+    </Reference>
+    <Reference Include="EquipmentGen.Generators.Interfaces">
+      <HintPath>..\..\..\packages\EquipmentGen.1.0.0\lib\EquipmentGen.Generators.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="EquipmentGen.Mappers">
+      <HintPath>..\..\..\packages\EquipmentGen.1.0.0\lib\EquipmentGen.Mappers.dll</HintPath>
+    </Reference>
+    <Reference Include="EquipmentGen.Mappers.Interfaces">
+      <HintPath>..\..\..\packages\EquipmentGen.1.0.0\lib\EquipmentGen.Mappers.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="EquipmentGen.Selectors">
+      <HintPath>..\..\..\packages\EquipmentGen.1.0.0\lib\EquipmentGen.Selectors.dll</HintPath>
+    </Reference>
+    <Reference Include="EquipmentGen.Selectors.Interfaces">
+      <HintPath>..\..\..\packages\EquipmentGen.1.0.0\lib\EquipmentGen.Selectors.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="EquipmentGen.Tables">
+      <HintPath>..\..\..\packages\EquipmentGen.1.0.0\lib\EquipmentGen.Tables.dll</HintPath>
+    </Reference>
+    <Reference Include="EquipmentGen.Tables.Interfaces">
+      <HintPath>..\..\..\packages\EquipmentGen.1.0.0\lib\EquipmentGen.Tables.Interfaces.dll</HintPath>
+    </Reference>
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.2.1402.2112\lib\net40\Moq.dll</HintPath>
     </Reference>
@@ -47,6 +81,7 @@
   <ItemGroup>
     <Compile Include="Alignments\AlignmentConstantsTests.cs" />
     <Compile Include="Alignments\AlignmentTests.cs" />
+    <Compile Include="CharacterTests.cs" />
     <Compile Include="Classes\BaseAttackTests.cs" />
     <Compile Include="Classes\CharacterClassConstantsTests.cs" />
     <Compile Include="LanguageConstantsTests.cs" />
