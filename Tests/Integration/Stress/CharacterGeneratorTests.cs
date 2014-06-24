@@ -70,10 +70,15 @@ namespace NPCGen.Tests.Integration.Stress
 
             Assert.That(character.Skills, Is.Not.Empty);
             Assert.That(character.Feats, Is.Not.Empty);
+            Assert.That(character.SavingThrows.Reflex, Is.Not.Negative);
+            Assert.That(character.SavingThrows.Fortitude, Is.Not.Negative);
+            Assert.That(character.SavingThrows.Will, Is.Not.Negative);
 
             Assert.That(character.Armor.ItemType, Is.EqualTo(ItemTypeConstants.Armor));
             Assert.That(character.Armor.Name, Is.Not.Empty);
-            Assert.That(character.ArmorClass, Is.Positive);
+            Assert.That(character.ArmorClass.Full, Is.Positive);
+            Assert.That(character.ArmorClass.FlatFooted, Is.Positive);
+            Assert.That(character.ArmorClass.Touch, Is.Positive);
             Assert.That(character.PrimaryHand.ItemType, Is.EqualTo(ItemTypeConstants.Weapon));
             Assert.That(character.PrimaryHand.Name, Is.Not.Empty);
             Assert.That(character.Familiar, Is.Not.Null);

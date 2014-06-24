@@ -1,5 +1,5 @@
-﻿using NPCGen.Common.Stats;
-using System;
+﻿using System;
+using NPCGen.Common.Stats;
 
 namespace NPCGen.Common
 {
@@ -11,5 +11,11 @@ namespace NPCGen.Common
         public Int32 FeatBonus { get; set; }
         public Boolean CanLearn { get; set; }
         public Boolean ClassSkill { get; set; }
+
+        public Skill()
+        {
+            Name = String.Empty;
+            BaseStat = new Stat();
+        }
     }
 }

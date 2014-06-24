@@ -78,6 +78,7 @@
   <ItemGroup>
     <Compile Include="Alignments\Alignment.cs" />
     <Compile Include="Alignments\AlignmentConstants.cs" />
+    <Compile Include="ArmorClass.cs" />
     <Compile Include="Character.cs" />
     <Compile Include="CharacterClasses\BaseAttack.cs" />
     <Compile Include="CharacterClasses\CharacterClass.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="LanguageConstants.cs" />
     <Compile Include="Races\Race.cs" />
     <Compile Include="Races\RaceConstants.cs" />
+    <Compile Include="SavingThrows.cs" />
     <Compile Include="Skill.cs" />
     <Compile Include="Stats\Stat.cs" />
     <Compile Include="Stats\StatConstants.cs" />

@@ -15,6 +15,12 @@ namespace NPCGen.Tests.Unit.Common.Stats
             stat = new Stat();
         }
 
+        [Test]
+        public void StatInitialized()
+        {
+            Assert.That(stat.Value, Is.EqualTo(0));
+        }
+
         [TestCase(1, -5)]
         [TestCase(2, -4)]
         [TestCase(3, -4)]

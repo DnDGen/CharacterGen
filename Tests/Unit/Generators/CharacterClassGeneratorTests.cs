@@ -22,7 +22,6 @@ namespace NPCGen.Tests.Unit.Generators
         public void Setup()
         {
             characterClassGenerator = new CharacterClassGenerator();
-
             alignment = new Alignment();
             mockLevelRandomizer = new Mock<ILevelRandomizer>();
             mockClassNameRandomizer = new Mock<IClassNameRandomizer>();

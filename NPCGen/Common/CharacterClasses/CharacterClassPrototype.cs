@@ -6,5 +6,10 @@ namespace NPCGen.Common.CharacterClasses
     {
         public String ClassName { get; set; }
         public Int32 Level { get; set; }
+
+        public CharacterClassPrototype()
+        {
+            ClassName = String.Empty;
+        }
     }
 }

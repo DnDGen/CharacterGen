@@ -19,7 +19,7 @@ namespace NPCGen.Tests.Unit.Common
         {
             Assert.That(character.Alignment, Is.Not.Null);
             Assert.That(character.Armor, Is.Not.Null);
-            Assert.That(character.ArmorClass, Is.EqualTo(0));
+            Assert.That(character.ArmorClass, Is.Not.Null);
             Assert.That(character.Class, Is.Not.Null);
             Assert.That(character.Familiar, Is.Not.Null);
             Assert.That(character.Feats, Is.Empty);
@@ -33,6 +33,7 @@ namespace NPCGen.Tests.Unit.Common
             Assert.That(character.Spells, Is.Empty);
             Assert.That(character.Stats, Is.Empty);
             Assert.That(character.Treasure, Is.Not.Null);
+            Assert.That(character.SavingThrows, Is.Not.Null);
         }
     }
 }

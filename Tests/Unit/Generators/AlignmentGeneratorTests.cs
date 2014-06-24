@@ -20,8 +20,9 @@ namespace NPCGen.Tests.Unit.Generators
         {
             alignment = new Alignment();
             mockAlignmentRandomizer = new Mock<IAlignmentRandomizer>();
-            mockAlignmentRandomizer.Setup(r => r.Randomize()).Returns(alignment);
             alignmentGenerator = new AlignmentGenerator();
+
+            mockAlignmentRandomizer.Setup(r => r.Randomize()).Returns(alignment);
         }
 
         [Test]
