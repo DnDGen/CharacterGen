@@ -10,20 +10,20 @@ namespace NPCGen.Tests.Unit.Selectors
     public class LevelAdjustmentsSelectorTests
     {
         private ILevelAdjustmentsSelector levelAdjustmentsSelector;
-        private Mock<IAdjustmentMapper> mockLevelAdjustmentMapper;
+        private Mock<IAdjustmentMapper> mockAdjustmentMapper;
 
         [SetUp]
         public void Setup()
         {
-            mockLevelAdjustmentMapper = new Mock<IAdjustmentMapper>();
-            levelAdjustmentsSelector = new LevelAdjustmentsSelector(mockLevelAdjustmentMapper.Object);
+            mockAdjustmentMapper = new Mock<IAdjustmentMapper>();
+            levelAdjustmentsSelector = new LevelAdjustmentsSelector(mockAdjustmentMapper.Object);
         }
 
         [Test]
-        public void GetResultsFromXmlMapper()
+        public void GetResultsFromMapper()
         {
             levelAdjustmentsSelector.GetAdjustments();
-            mockLevelAdjustmentMapper.Verify(p => p.Map("LevelAdjustments"), Times.Once);
+            mockAdjustmentMapper.Verify(p => p.Map("LevelAdjustments"), Times.Once);
         }
     }
 }

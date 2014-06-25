@@ -17,18 +17,19 @@ namespace NPCGen.Tests.Unit.Generators
     [TestFixture]
     public class StatsGeneratorTests
     {
+        private const Int32 baseStat = 10;
+
         private Mock<IDice> mockDice;
         private Mock<IStatPrioritySelector> mockStatPrioritySelector;
         private Mock<IStatAdjustmentsSelector> mockStatAdjustmentsSelector;
         private IStatsGenerator statsGenerator;
 
         private Mock<IStatsRandomizer> mockStatRandomizer;
-        private Dictionary<String, Stat> expectedStats;
+        private Dictionary<String, Stat> randomizedStats;
         private Dictionary<String, Int32> adjustments;
         private Race race;
         private CharacterClass characterClass;
         private StatPriority statPriority;
-        private const Int32 baseStat = 10;
 
         [SetUp]
         public void Setup()
@@ -54,13 +55,12 @@ namespace NPCGen.Tests.Unit.Generators
             statsGenerator = new StatsGenerator(mockDice.Object, mockStatPrioritySelector.Object,
                 mockStatAdjustmentsSelector.Object);
 
-            expectedStats = new Dictionary<String, Stat>();
-            expectedStats.Add(statPriority.FirstPriority, new Stat() { Value = baseStat });
-            expectedStats.Add(statPriority.SecondPriority, new Stat() { Value = baseStat });
-            expectedStats.Add("other stat", new Stat() { Value = baseStat });
+            randomizedStats = new Dictionary<String, Stat>();
+            randomizedStats.Add(statPriority.FirstPriority, new Stat() { Value = baseStat });
+            randomizedStats.Add(statPriority.SecondPriority, new Stat() { Value = baseStat });
+            randomizedStats.Add("other stat", new Stat() { Value = baseStat });
             mockStatRandomizer = new Mock<IStatsRandomizer>();
-            mockStatRandomizer.Setup(r => r.Randomize()).Returns(expectedStats);
-
+            mockStatRandomizer.Setup(r => r.Randomize()).Returns(randomizedStats);
 
             characterClass = new CharacterClass();
             characterClass.ClassName = "class name";
@@ -83,8 +83,8 @@ namespace NPCGen.Tests.Unit.Generators
         [Test]
         public void PrioritizesStatsByClass()
         {
-            expectedStats["other stat"].Value = 18;
-            expectedStats[statPriority.FirstPriority].Value = 16;
+            randomizedStats["other stat"].Value = 18;
+            randomizedStats[statPriority.FirstPriority].Value = 16;
 
             var stats = statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
             Assert.That(stats[statPriority.FirstPriority].Value, Is.EqualTo(18));
@@ -105,14 +105,30 @@ namespace NPCGen.Tests.Unit.Generators
         }
 
         [Test]
+        public void AdjustStatsAfterPrioritizing()
+        {
+            randomizedStats["other stat"].Value = 18;
+            randomizedStats[statPriority.FirstPriority].Value = 16;
+            adjustments["other stat"] = 9266;
+            adjustments[statPriority.FirstPriority] = -10;
+            adjustments[statPriority.SecondPriority] = -7;
+
+            var stats = statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
+            Assert.That(stats[statPriority.FirstPriority].Value, Is.EqualTo(8));
+            Assert.That(stats[statPriority.SecondPriority].Value, Is.EqualTo(9));
+            Assert.That(stats["other stat"].Value, Is.EqualTo(baseStat + 9266));
+        }
+
+        [Test]
         public void LowOnD2IncreasesFirstPriorityStat()
         {
             characterClass.Level = 4;
             mockDice.Setup(d => d.d2(1)).Returns(1);
 
             var stats = statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
-            Assert.That(stats[statPriority.FirstPriority].Value, Is.EqualTo(baseStat + 1), StatConstants.Strength);
-            Assert.That(stats[statPriority.SecondPriority].Value, Is.EqualTo(baseStat), StatConstants.Constitution);
+            Assert.That(stats[statPriority.FirstPriority].Value, Is.EqualTo(baseStat + 1));
+            Assert.That(stats[statPriority.SecondPriority].Value, Is.EqualTo(baseStat));
+            Assert.That(stats["other stat"].Value, Is.EqualTo(baseStat));
         }
 
         [Test]
@@ -122,98 +138,82 @@ namespace NPCGen.Tests.Unit.Generators
             mockDice.Setup(d => d.d2(1)).Returns(2);
 
             var stats = statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
-            Assert.That(stats[statPriority.FirstPriority].Value, Is.EqualTo(baseStat), StatConstants.Strength);
-            Assert.That(stats[statPriority.SecondPriority].Value, Is.EqualTo(baseStat + 1), StatConstants.Constitution);
+            Assert.That(stats[statPriority.FirstPriority].Value, Is.EqualTo(baseStat));
+            Assert.That(stats[statPriority.SecondPriority].Value, Is.EqualTo(baseStat + 1));
+            Assert.That(stats["other stat"].Value, Is.EqualTo(baseStat));
         }
 
         [Test]
-        public void DoNotIncreaseStat()
+        public void IncreasingIsAfterPrioritizaionAndAdjustments()
         {
+            randomizedStats["other stat"].Value = 18;
+            randomizedStats[statPriority.FirstPriority].Value = 16;
+            adjustments["other stat"] = 9266;
+            adjustments[statPriority.FirstPriority] = -10;
+            adjustments[statPriority.SecondPriority] = -7;
             mockDice.Setup(d => d.d2(1)).Returns(1);
-            for (var level = 1; level < 4; level++)
-            {
-                foreach (var stat in expectedStats.Values)
-                    stat.Value = baseStat;
-
-                characterClass.Level = level;
-
-                var stats = statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
-                Assert.That(stats[statPriority.FirstPriority].Value, Is.EqualTo(baseStat), level.ToString());
-            }
-        }
-
-        [Test]
-        public void IncreaseStatByOne()
-        {
-            mockDice.Setup(d => d.d2(1)).Returns(1);
-            for (var level = 4; level < 8; level++)
-            {
-                foreach (var stat in expectedStats.Values)
-                    stat.Value = baseStat;
-
-                characterClass.Level = level;
-
-                var stats = statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
-                Assert.That(stats[statPriority.FirstPriority].Value, Is.EqualTo(baseStat + 1), level.ToString());
-            }
-        }
-
-        [Test]
-        public void IncreaseStatByTwo()
-        {
-            mockDice.Setup(d => d.d2(1)).Returns(1);
-            for (var level = 8; level < 12; level++)
-            {
-                foreach (var stat in expectedStats.Values)
-                    stat.Value = baseStat;
-
-                characterClass.Level = level;
-
-                var stats = statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
-                Assert.That(stats[statPriority.FirstPriority].Value, Is.EqualTo(baseStat + 2), level.ToString());
-            }
-        }
-
-        [Test]
-        public void IncreaseStatByThree()
-        {
-            mockDice.Setup(d => d.d2(1)).Returns(1);
-            for (var level = 12; level < 16; level++)
-            {
-                foreach (var stat in expectedStats.Values)
-                    stat.Value = baseStat;
-
-                characterClass.Level = level;
-
-                var stats = statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
-                Assert.That(stats[statPriority.FirstPriority].Value, Is.EqualTo(baseStat + 3), level.ToString());
-            }
-        }
-
-        [Test]
-        public void IncreaseStatByFour()
-        {
-            mockDice.Setup(d => d.d2(1)).Returns(1);
-            for (var level = 16; level < 20; level++)
-            {
-                foreach (var stat in expectedStats.Values)
-                    stat.Value = baseStat;
-
-                characterClass.Level = level;
-
-                var stats = statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
-                Assert.That(stats[statPriority.FirstPriority].Value, Is.EqualTo(baseStat + 4), level.ToString());
-            }
-        }
-
-        [Test]
-        public void IncreaseStatByFive()
-        {
-            mockDice.Setup(d => d.d2(1)).Returns(1);
-            characterClass.Level = 20;
+            characterClass.Level = 4;
 
             var stats = statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
-            Assert.That(stats[statPriority.FirstPriority].Value, Is.EqualTo(baseStat + 5));
+            Assert.That(stats[statPriority.FirstPriority].Value, Is.EqualTo(9));
+            Assert.That(stats[statPriority.SecondPriority].Value, Is.EqualTo(9));
+            Assert.That(stats["other stat"].Value, Is.EqualTo(baseStat + 9266));
+        }
+
+        [TestCase(1, 0)]
+        [TestCase(2, 0)]
+        [TestCase(3, 0)]
+        [TestCase(4, 1)]
+        [TestCase(5, 1)]
+        [TestCase(6, 1)]
+        [TestCase(7, 1)]
+        [TestCase(8, 2)]
+        [TestCase(9, 2)]
+        [TestCase(10, 2)]
+        [TestCase(11, 2)]
+        [TestCase(12, 3)]
+        [TestCase(13, 3)]
+        [TestCase(14, 3)]
+        [TestCase(15, 3)]
+        [TestCase(16, 4)]
+        [TestCase(17, 4)]
+        [TestCase(18, 4)]
+        [TestCase(19, 4)]
+        [TestCase(20, 5)]
+        public void IncreaseStat(Int32 level, Int32 increase)
+        {
+            characterClass.Level = level;
+            mockDice.Setup(d => d.d2(1)).Returns(1);
+
+            var stats = statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
+            Assert.That(stats[statPriority.FirstPriority].Value, Is.EqualTo(baseStat + increase));
+        }
+
+        [Test]
+        public void RollWhichStatToIncreasePerLevel()
+        {
+            characterClass.Level = 3;
+            mockDice.SetupSequence(d => d.d2(1)).Returns(1).Returns(2).Returns(1);
+
+            var stats = statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
+            Assert.That(stats[statPriority.FirstPriority].Value, Is.EqualTo(baseStat + 2));
+            Assert.That(stats[statPriority.SecondPriority].Value, Is.EqualTo(baseStat + 1));
+            Assert.That(stats["other stat"].Value, Is.EqualTo(baseStat));
+        }
+
+        [Test]
+        public void IncreasesIgnorePrioritization()
+        {
+            characterClass.Level = 3;
+            mockDice.SetupSequence(d => d.d2(1)).Returns(1).Returns(2).Returns(2);
+
+            foreach (var stat in randomizedStats.Values)
+                stat.Value = baseStat;
+
+            var stats = statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
+            Assert.That(stats[statPriority.FirstPriority].Value, Is.EqualTo(baseStat + 1));
+            Assert.That(stats[statPriority.SecondPriority].Value, Is.EqualTo(baseStat + 2));
+            Assert.That(stats["other stat"].Value, Is.EqualTo(baseStat));
         }
 
         [Test]

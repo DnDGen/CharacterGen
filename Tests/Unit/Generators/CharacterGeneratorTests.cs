@@ -296,5 +296,111 @@ namespace NPCGen.Tests.Unit.Generators
         {
             Assert.Fail();
         }
+
+        [Test]
+        public void GetSavingThrowsFromSelector()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void GetArmorFromGenerator()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void GetArmorClassFromGenerator()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void GetPrimaryHandFromGenerator()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void NotHavingPrimaryHandIsNotAllowed()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void GetFamiliarFromGenerator()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void GetTreasureFromGenerator()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void IfPrimaryHandIsTwoHanded_OffHandIsEqualToPrimaryHand()
+        {
+            //set it up for both two-handed and shields
+
+            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object,
+                mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
+            Assert.That(character.OffHand, Is.EqualTo(character.PrimaryHand));
+        }
+
+        [Test]
+        public void IfCharacterHasTwoWeaponFighting_GenerateSecondaryWeapon()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void IfCharacterHasTwoWeaponFighting_NotHavingASecondWeaponIsAllowed()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void IfCharacterDoesNotHaveTwoWeaponFighting_DoNotGenerateSecondaryWeapon()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void IfCharacterHasTwoWeaponFighting_SecondWeaponCannotBeTwoHanded()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void IfCharacterHasShieldProficiencyAndNoSecondWeapon_GenerateShield()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void IfCharacterHasShieldProficiencyAndSecondWeapon_DoNotGenerateShield()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void IfCharacterHasShieldProficiencyAndNoSecondWeapon_NotHavingAShieldIsAllowed()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void IfCharacterDoesNotHaveShieldProficiency_DoNotGenerateShield()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void GetSpellsFromGenerator()
+        {
+            Assert.Fail();
+        }
     }
 }

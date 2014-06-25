@@ -1,7 +1,7 @@
-﻿using NPCGen.Common;
+﻿using NPCGen.Common.Skills;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Common
+namespace NPCGen.Tests.Unit.Common.Skills
 {
     [TestFixture]
     public class SkillTests

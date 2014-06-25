@@ -24,9 +24,9 @@ namespace NPCGen.Tests.Unit.Selectors
         public void Setup()
         {
             table = new Dictionary<Int32, String>();
-            for (var i = 1; i <= 50; i++)
+            for (var i = 1; i <= 5; i++)
                 table.Add(i, "content");
-            for (var i = 51; i <= 100; i++)
+            for (var i = 6; i <= 10; i++)
                 table.Add(i, i.ToString());
 
             mockPercentileMapper = new Mock<IPercentileMapper>();
@@ -37,35 +37,21 @@ namespace NPCGen.Tests.Unit.Selectors
             percentileSelector = new PercentileSelector(mockPercentileMapper.Object, mockDice.Object);
         }
 
-        [Test]
-        public void GetPercentileResultCachesTable()
+        [TestCase(1, "content")]
+        [TestCase(2, "content")]
+        [TestCase(3, "content")]
+        [TestCase(4, "content")]
+        [TestCase(5, "content")]
+        [TestCase(6, "6")]
+        [TestCase(7, "7")]
+        [TestCase(8, "8")]
+        [TestCase(9, "9")]
+        [TestCase(10, "10")]
+        public void GetPercentile(Int32 roll, String content)
         {
-            percentileSelector.GetPercentileFrom(tableName);
-            percentileSelector.GetPercentileFrom(tableName);
-
-            mockPercentileMapper.Verify(p => p.Map(tableName), Times.Once());
-        }
-
-        [Test]
-        public void GetRange()
-        {
-            for (var roll = 1; roll <= 50; roll++)
-            {
-                mockDice.Setup(d => d.Percentile(1)).Returns(roll);
-                var result = percentileSelector.GetPercentileFrom(tableName);
-                Assert.That(result, Is.EqualTo("content"));
-            }
-        }
-
-        [Test]
-        public void GetSingles()
-        {
-            for (var roll = 51; roll <= 100; roll++)
-            {
-                mockDice.Setup(d => d.Percentile(1)).Returns(roll);
-                var result = percentileSelector.GetPercentileFrom(tableName);
-                Assert.That(result, Is.EqualTo(roll.ToString()));
-            }
+            mockDice.Setup(d => d.Percentile(1)).Returns(roll);
+            var result = percentileSelector.GetPercentileFrom(tableName);
+            Assert.That(result, Is.EqualTo(content));
         }
 
         [Test]
@@ -79,15 +65,6 @@ namespace NPCGen.Tests.Unit.Selectors
 
             var extras = distinctContent.Except(results);
             Assert.That(extras, Is.Empty);
-        }
-
-        [Test]
-        public void GetAllResultsCachesTable()
-        {
-            percentileSelector.GetAllResults(tableName);
-            percentileSelector.GetAllResults(tableName);
-
-            mockPercentileMapper.Verify(p => p.Map(tableName), Times.Once());
         }
     }
 }

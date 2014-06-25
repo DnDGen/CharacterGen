@@ -85,12 +85,13 @@
     <Compile Include="CharacterClasses\CharacterClassConstants.cs" />
     <Compile Include="CharacterClasses\CharacterClassPrototype.cs" />
     <Compile Include="Familiar.cs" />
-    <Compile Include="Feat.cs" />
+    <Compile Include="Feats\Feat.cs" />
+    <Compile Include="Items\WeaponAttributeConstants.cs" />
     <Compile Include="LanguageConstants.cs" />
     <Compile Include="Races\Race.cs" />
     <Compile Include="Races\RaceConstants.cs" />
     <Compile Include="SavingThrows.cs" />
-    <Compile Include="Skill.cs" />
+    <Compile Include="Skills\Skill.cs" />
     <Compile Include="Stats\Stat.cs" />
     <Compile Include="Stats\StatConstants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -99,6 +100,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

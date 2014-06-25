@@ -9,38 +9,26 @@ namespace NPCGen.Selectors
 {
     public class PercentileSelector : IPercentileSelector
     {
-        private IPercentileMapper percentileXmlMapper;
+        private IPercentileMapper percentileMapper;
         private IDice dice;
-        private Dictionary<String, Dictionary<Int32, String>> cachedTables;
 
-        public PercentileSelector(IPercentileMapper percentileXmlMapper, IDice dice)
+        public PercentileSelector(IPercentileMapper percentileMapper, IDice dice)
         {
-            this.percentileXmlMapper = percentileXmlMapper;
+            this.percentileMapper = percentileMapper;
             this.dice = dice;
-            cachedTables = new Dictionary<String, Dictionary<Int32, String>>();
         }
 
         public String GetPercentileFrom(String tableName)
         {
-            if (!cachedTables.ContainsKey(tableName))
-                CacheTable(tableName);
-
+            var table = percentileMapper.Map(tableName);
             var roll = dice.Percentile();
-            return cachedTables[tableName][roll];
-        }
-
-        private void CacheTable(String tableName)
-        {
-            var table = percentileXmlMapper.Map(tableName);
-            cachedTables.Add(tableName, table);
+            return table[roll];
         }
 
         public IEnumerable<String> GetAllResults(String tableName)
         {
-            if (!cachedTables.ContainsKey(tableName))
-                CacheTable(tableName);
-
-            return cachedTables[tableName].Values.Distinct();
+            var table = percentileMapper.Map(tableName);
+            return table.Values.Distinct();
         }
     }
 }

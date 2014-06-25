@@ -6,6 +6,7 @@ using Ninject;
 using NPCGen.Common;
 using NPCGen.Common.Alignments;
 using NPCGen.Common.CharacterClasses;
+using NPCGen.Common.Items;
 using NPCGen.Common.Races;
 using NPCGen.Common.Stats;
 using NPCGen.Generators.Interfaces;
@@ -50,7 +51,7 @@ namespace NPCGen.Tests.Integration.Stress
             Assert.That(character.Class.BaseAttack.Bonus, Is.Not.Negative);
             Assert.That(character.HitPoints, Is.AtLeast(character.Class.Level));
             Assert.That(character.InterestingTrait, Is.Not.Null);
-            Assert.That(character.Languages.Count(), Is.AtLeast(1));
+            Assert.That(character.Languages, Is.Not.Empty);
             Assert.That(baseRaces, Contains.Item(character.Race.BaseRace));
             Assert.That(metaraces, Contains.Item(character.Race.Metarace));
 
@@ -85,13 +86,12 @@ namespace NPCGen.Tests.Integration.Stress
             Assert.That(character.Treasure, Is.Not.Null);
             Assert.That(character.OffHand, Is.Not.Null);
 
-            if (!String.IsNullOrEmpty(character.OffHand.Name))
-            {
-                Assert.That(character.OffHand.ItemType, Is.EqualTo(ItemTypeConstants.Armor).Or.EqualTo(ItemTypeConstants.Weapon));
-
-                if (character.OffHand.ItemType == ItemTypeConstants.Armor)
-                    Assert.That(character.OffHand.Attributes, Contains.Item(AttributeConstants.Shield));
-            }
+            if (character.OffHand.ItemType == ItemTypeConstants.Armor)
+                Assert.That(character.OffHand.Attributes, Contains.Item(AttributeConstants.Shield));
+            else if (character.OffHand.ItemType == ItemTypeConstants.Weapon && character.OffHand != character.PrimaryHand)
+                Assert.That(character.OffHand.Attributes, Is.Not.Contains(WeaponAttributeConstants.TwoHanded));
+            else if (character.OffHand != character.PrimaryHand)
+                Assert.That(character.OffHand.Name, Is.Empty);
 
             foreach (var level in character.Spells.Keys)
                 Assert.That(character.Spells[level], Is.Not.Empty, level.ToString());
@@ -150,7 +150,7 @@ namespace NPCGen.Tests.Integration.Stress
         }
 
         [Test]
-        public void OffHandHappens()
+        public void OffHandShieldHappens()
         {
             var character = new Character();
 
@@ -160,6 +160,23 @@ namespace NPCGen.Tests.Integration.Stress
 
             Assert.That(character.OffHand.Name, Is.Not.Empty);
             Assert.That(character.OffHand, Is.Not.EqualTo(character.PrimaryHand));
+            Assert.That(character.OffHand.ItemType, Is.EqualTo(ItemTypeConstants.Armor));
+            Assert.That(character.OffHand.Attributes, Contains.Item(AttributeConstants.Shield));
+            AssertIterations();
+        }
+
+        [Test]
+        public void OffHandWeaponHappens()
+        {
+            var character = new Character();
+
+            do character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
+                MetaraceRandomizer, StatsRandomizer);
+            while (TestShouldKeepRunning() && (String.IsNullOrEmpty(character.OffHand.Name) || character.OffHand == character.PrimaryHand));
+
+            Assert.That(character.OffHand.Name, Is.Not.Empty);
+            Assert.That(character.OffHand, Is.Not.EqualTo(character.PrimaryHand));
+            Assert.That(character.OffHand.ItemType, Is.EqualTo(ItemTypeConstants.Weapon));
             AssertIterations();
         }
 

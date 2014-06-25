@@ -5,7 +5,9 @@ using EquipmentGen.Common;
 using EquipmentGen.Common.Items;
 using NPCGen.Common.Alignments;
 using NPCGen.Common.CharacterClasses;
+using NPCGen.Common.Feats;
 using NPCGen.Common.Races;
+using NPCGen.Common.Skills;
 using NPCGen.Common.Stats;
 
 namespace NPCGen.Common
@@ -46,6 +48,8 @@ namespace NPCGen.Common
             Armor = new Item();
             Treasure = new Treasure();
             Spells = new Dictionary<Int32, IEnumerable<String>>();
+            ArmorClass = new ArmorClass();
+            SavingThrows = new SavingThrows();
         }
     }
 }

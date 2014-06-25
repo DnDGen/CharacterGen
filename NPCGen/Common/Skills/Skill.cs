@@ -1,7 +1,7 @@
 ﻿using System;
 using NPCGen.Common.Stats;
 
-namespace NPCGen.Common
+namespace NPCGen.Common.Skills
 {
     public class Skill
     {

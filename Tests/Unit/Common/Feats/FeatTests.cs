@@ -1,7 +1,7 @@
-﻿using NPCGen.Common;
+﻿using NPCGen.Common.Feats;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Common
+namespace NPCGen.Tests.Unit.Common.Feats
 {
     [TestFixture]
     public class FeatTests
