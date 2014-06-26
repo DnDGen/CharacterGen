@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using Moq;
+using NPCGen.Common;
 using NPCGen.Common.Alignments;
 using NPCGen.Common.CharacterClasses;
+using NPCGen.Common.Feats;
 using NPCGen.Common.Races;
+using NPCGen.Common.Skills;
 using NPCGen.Common.Stats;
 using NPCGen.Generators;
 using NPCGen.Generators.Interfaces;
@@ -35,6 +38,8 @@ namespace NPCGen.Tests.Unit.Generators
         private Mock<IRandomizerVerifier> mockRandomizerVerifier;
         private Mock<IPercentileSelector> mockPercentileSelector;
         private ICharacterGenerator characterGenerator;
+        private Mock<ISkillsGenerator> mockSkillsGenerator;
+        private Mock<IFeatsGenerator> mockFeatsGenerator;
 
         private Mock<IAlignmentRandomizer> mockAlignmentRandomizer;
         private Mock<IClassNameRandomizer> mockClassNameRandomizer;
@@ -52,25 +57,25 @@ namespace NPCGen.Tests.Unit.Generators
         public void Setup()
         {
             SetUpMockRandomizers();
-            SetUpGeenrators();
+            SetUpGenerators();
 
-            adjustments = new Dictionary<String, Int32>();
-            adjustments.Add(BaseRace, 0);
-            adjustments.Add(String.Empty, 0);
-            adjustments.Add(BaseRacePlusOne, 1);
-            adjustments.Add(Metarace, 1);
             mockLevelAdjustmentsSelector = new Mock<ILevelAdjustmentsSelector>();
+            adjustments = new Dictionary<String, Int32>();
+            mockRandomizerVerifier = new Mock<IRandomizerVerifier>();
+            mockPercentileSelector = new Mock<IPercentileSelector>();
+
+            adjustments.Add(BaseRace, 0);
+            adjustments.Add(BaseRacePlusOne, 1);
+            adjustments.Add(String.Empty, 0);
+            adjustments.Add(Metarace, 1);
             mockLevelAdjustmentsSelector.Setup(p => p.GetAdjustments()).Returns(adjustments);
 
-            mockRandomizerVerifier = new Mock<IRandomizerVerifier>();
             mockRandomizerVerifier.Setup(v => v.VerifyCompatibility(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object,
                 mockLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(true);
             mockRandomizerVerifier.Setup(v => v.VerifyAlignmentCompatibility(It.IsAny<Alignment>(), mockClassNameRandomizer.Object,
                 mockLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(true);
             mockRandomizerVerifier.Setup(v => v.VerifyCharacterClassCompatibility(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>(),
                 mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(true);
-
-            mockPercentileSelector = new Mock<IPercentileSelector>();
 
             characterGenerator = new CharacterGenerator(mockAlignmentGenerator.Object, mockCharacterClassGenerator.Object, mockRaceGenerator.Object, mockStatsGenerator.Object, mockLanguageGenerator.Object, mockHitPointsGenerator.Object, mockLevelAdjustmentsSelector.Object, mockRandomizerVerifier.Object, mockPercentileSelector.Object);
         }
@@ -85,33 +90,35 @@ namespace NPCGen.Tests.Unit.Generators
             mockMetaraceRandomizer = new Mock<IMetaraceRandomizer>();
         }
 
-        private void SetUpGeenrators()
+        private void SetUpGenerators()
         {
             mockAlignmentGenerator = new Mock<IAlignmentGenerator>();
+            characterClassPrototype = new CharacterClassPrototype();
+            mockCharacterClassGenerator = new Mock<ICharacterClassGenerator>();
+            race = new Race();
+            mockRaceGenerator = new Mock<IRaceGenerator>();
+            stats = new Dictionary<String, Stat>();
+            mockStatsGenerator = new Mock<IStatsGenerator>();
+            mockHitPointsGenerator = new Mock<IHitPointsGenerator>();
+            mockLanguageGenerator = new Mock<ILanguageGenerator>();
+            mockSkillsGenerator = new Mock<ISkillsGenerator>();
+            mockFeatsGenerator = new Mock<IFeatsGenerator>();
+
             mockAlignmentGenerator.Setup(f => f.GenerateWith(mockAlignmentRandomizer.Object)).Returns(new Alignment());
 
-            characterClassPrototype = new CharacterClassPrototype();
             characterClassPrototype.Level = 1;
-            mockCharacterClassGenerator = new Mock<ICharacterClassGenerator>();
             mockCharacterClassGenerator.Setup(f => f.GeneratePrototypeWith(It.IsAny<Alignment>(), mockLevelRandomizer.Object,
                 mockClassNameRandomizer.Object)).Returns(characterClassPrototype);
             mockCharacterClassGenerator.Setup(f => f.GenerateWith(characterClassPrototype)).Returns(new CharacterClass());
 
-            race = new Race();
             race.BaseRace = BaseRace;
             race.Metarace = String.Empty;
-            mockRaceGenerator = new Mock<IRaceGenerator>();
             mockRaceGenerator.Setup(f => f.GenerateWith(It.IsAny<String>(), characterClassPrototype, mockBaseRaceRandomizer.Object,
                 mockMetaraceRandomizer.Object)).Returns(race);
 
-            stats = new Dictionary<String, Stat>();
             foreach (var stat in StatConstants.GetStats())
                 stats.Add(stat, new Stat());
-            mockStatsGenerator = new Mock<IStatsGenerator>();
             mockStatsGenerator.Setup(f => f.GenerateWith(mockStatsRandomizer.Object, It.IsAny<CharacterClass>(), race)).Returns(stats);
-
-            mockHitPointsGenerator = new Mock<IHitPointsGenerator>();
-            mockLanguageGenerator = new Mock<ILanguageGenerator>();
         }
 
         [Test]
@@ -120,8 +127,13 @@ namespace NPCGen.Tests.Unit.Generators
             mockRandomizerVerifier.Setup(v => v.VerifyCompatibility(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object,
                 mockLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(false);
 
-            Assert.That(() => characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object,
-                mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object), Throws.InstanceOf<IncompatibleRandomizersException>());
+            Assert.That(() => GenerateCharacter(), Throws.InstanceOf<IncompatibleRandomizersException>());
+        }
+
+        private Character GenerateCharacter()
+        {
+            return characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object,
+                mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
         }
 
         [Test]
@@ -130,8 +142,7 @@ namespace NPCGen.Tests.Unit.Generators
             mockRandomizerVerifier.SetupSequence(v => v.VerifyAlignmentCompatibility(It.IsAny<Alignment>(), mockClassNameRandomizer.Object,
                 mockLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(false).Returns(true);
 
-            characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object,
-                mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
+            GenerateCharacter();
             mockAlignmentGenerator.Verify(f => f.GenerateWith(mockAlignmentRandomizer.Object), Times.Exactly(2));
         }
 
@@ -141,8 +152,7 @@ namespace NPCGen.Tests.Unit.Generators
             mockRandomizerVerifier.SetupSequence(v => v.VerifyCharacterClassCompatibility(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>(),
                 mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(false).Returns(true);
 
-            characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object,
-                mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
+            GenerateCharacter();
             mockCharacterClassGenerator.Verify(f => f.GeneratePrototypeWith(It.IsAny<Alignment>(), mockLevelRandomizer.Object,
                 mockClassNameRandomizer.Object), Times.Exactly(2));
         }
@@ -153,8 +163,7 @@ namespace NPCGen.Tests.Unit.Generators
             mockRaceGenerator.SetupSequence(f => f.GenerateWith(It.IsAny<String>(), characterClassPrototype, mockBaseRaceRandomizer.Object,
                 mockMetaraceRandomizer.Object)).Returns(new Race() { BaseRace = BaseRacePlusOne, Metarace = String.Empty }).Returns(race);
 
-            characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object,
-                mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
+            GenerateCharacter();
             mockRaceGenerator.Verify(f => f.GenerateWith(It.IsAny<String>(), characterClassPrototype, mockBaseRaceRandomizer.Object,
                 mockMetaraceRandomizer.Object), Times.Exactly(2));
         }
@@ -165,8 +174,7 @@ namespace NPCGen.Tests.Unit.Generators
             mockRaceGenerator.SetupSequence(f => f.GenerateWith(It.IsAny<String>(), characterClassPrototype, mockBaseRaceRandomizer.Object,
                 mockMetaraceRandomizer.Object)).Returns(new Race() { BaseRace = BaseRace, Metarace = Metarace }).Returns(race);
 
-            characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object,
-                mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
+            GenerateCharacter();
             mockRaceGenerator.Verify(f => f.GenerateWith(It.IsAny<String>(), characterClassPrototype, mockBaseRaceRandomizer.Object,
                 mockMetaraceRandomizer.Object), Times.Exactly(2));
         }
@@ -174,14 +182,15 @@ namespace NPCGen.Tests.Unit.Generators
         [Test]
         public void IncompatibleComboOfBaseRaceAndMetaraceIsRegeneratedWithCompatibleBaseRace()
         {
+            var higherRace = new Race { BaseRace = BaseRacePlusOne, Metarace = Metarace };
+            var normalRace = new Race { BaseRace = BaseRace, Metarace = Metarace };
+
             mockRaceGenerator.SetupSequence(f => f.GenerateWith(It.IsAny<String>(), characterClassPrototype, mockBaseRaceRandomizer.Object,
-                mockMetaraceRandomizer.Object)).Returns(new Race() { BaseRace = BaseRacePlusOne, Metarace = Metarace })
-                .Returns(new Race() { BaseRace = BaseRace, Metarace = Metarace });
+                mockMetaraceRandomizer.Object)).Returns(higherRace).Returns(normalRace);
 
             characterClassPrototype.Level = 2;
 
-            characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object,
-                mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
+            GenerateCharacter();
             mockRaceGenerator.Verify(f => f.GenerateWith(It.IsAny<String>(), characterClassPrototype, mockBaseRaceRandomizer.Object,
                 mockMetaraceRandomizer.Object), Times.Exactly(2));
         }
@@ -189,14 +198,15 @@ namespace NPCGen.Tests.Unit.Generators
         [Test]
         public void IncompatibleComboOfBaseRaceAndMetaraceIsRegeneratedWithCompatibleMetarace()
         {
+            var higherRace = new Race { BaseRace = BaseRacePlusOne, Metarace = Metarace };
+            var normalRace = new Race { BaseRace = BaseRacePlusOne, Metarace = String.Empty };
+
             mockRaceGenerator.SetupSequence(f => f.GenerateWith(It.IsAny<String>(), characterClassPrototype, mockBaseRaceRandomizer.Object,
-                mockMetaraceRandomizer.Object)).Returns(new Race() { BaseRace = BaseRacePlusOne, Metarace = Metarace })
-                .Returns(new Race() { BaseRace = BaseRacePlusOne, Metarace = String.Empty });
+                mockMetaraceRandomizer.Object)).Returns(higherRace).Returns(normalRace);
 
             characterClassPrototype.Level = 2;
 
-            characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object,
-                mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
+            GenerateCharacter();
             mockRaceGenerator.Verify(f => f.GenerateWith(It.IsAny<String>(), characterClassPrototype, mockBaseRaceRandomizer.Object,
                 mockMetaraceRandomizer.Object), Times.Exactly(2));
         }
@@ -207,8 +217,7 @@ namespace NPCGen.Tests.Unit.Generators
             characterClassPrototype.Level = 2;
             race.BaseRace = BaseRacePlusOne;
 
-            characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object,
-                mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
+            GenerateCharacter();
             Assert.That(characterClassPrototype.Level, Is.EqualTo(1));
         }
 
@@ -218,8 +227,7 @@ namespace NPCGen.Tests.Unit.Generators
             characterClassPrototype.Level = 2;
             race.Metarace = Metarace;
 
-            characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object,
-                mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
+            GenerateCharacter();
             Assert.That(characterClassPrototype.Level, Is.EqualTo(1));
         }
 
@@ -230,8 +238,7 @@ namespace NPCGen.Tests.Unit.Generators
             race.Metarace = Metarace;
             characterClassPrototype.Level = 3;
 
-            characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object,
-                mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
+            GenerateCharacter();
             Assert.That(characterClassPrototype.Level, Is.EqualTo(1));
         }
 
@@ -239,16 +246,14 @@ namespace NPCGen.Tests.Unit.Generators
         public void GetsInterestingTraitFromPercentileResultSelector()
         {
             mockPercentileSelector.Setup(p => p.GetPercentileFrom("Traits")).Returns("interesting trait");
-            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object,
-                mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
+            var character = GenerateCharacter();
             Assert.That(character.InterestingTrait, Is.EqualTo("interesting trait"));
         }
 
         [Test]
         public void GetStatsFromGenerator()
         {
-            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object,
-                mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
+            var character = GenerateCharacter();
             Assert.That(character.Stats, Is.EqualTo(stats));
         }
 
@@ -258,8 +263,7 @@ namespace NPCGen.Tests.Unit.Generators
             var languages = new List<String>();
             mockLanguageGenerator.Setup(g => g.GenerateWith(race, characterClassPrototype.ClassName, It.IsAny<Int32>())).Returns(languages);
 
-            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object,
-                mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
+            var character = GenerateCharacter();
             Assert.That(character.Languages, Is.EqualTo(languages));
         }
 
@@ -267,22 +271,28 @@ namespace NPCGen.Tests.Unit.Generators
         public void GetHitPointsFromGenerator()
         {
             mockHitPointsGenerator.Setup(g => g.GenerateWith(It.IsAny<CharacterClass>(), It.IsAny<Int32>(), race)).Returns(9266);
-
-            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object,
-                mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
+            var character = GenerateCharacter();
             Assert.That(character.HitPoints, Is.EqualTo(9266));
         }
 
         [Test]
         public void GetSkillsFromSkillsGenerator()
         {
-            Assert.Fail();
+            var skills = new Dictionary<String, Skill>();
+            mockSkillsGenerator.Setup(g => g.GenerateWith(It.IsAny<CharacterClass>(), race, stats)).Returns(skills);
+
+            var character = GenerateCharacter();
+            Assert.That(character.Skills, Is.EqualTo(skills));
         }
 
         [Test]
         public void GetFeatsFromFeatsGenerator()
         {
-            Assert.Fail();
+            var feats = new List<Feat>();
+            mockFeatsGenerator.Setup(g => g.GenerateWith(It.IsAny<CharacterClass>(), race, stats)).Returns(feats);
+
+            var character = GenerateCharacter();
+            Assert.That(character.Feats, Is.EqualTo(feats));
         }
 
         [Test]
@@ -305,6 +315,18 @@ namespace NPCGen.Tests.Unit.Generators
 
         [Test]
         public void GetArmorFromGenerator()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void AdjustSkillsWithArmorCheckPenalty()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void DoNotAdjustSkillsWithoutArmorCheckPenalty()
         {
             Assert.Fail();
         }

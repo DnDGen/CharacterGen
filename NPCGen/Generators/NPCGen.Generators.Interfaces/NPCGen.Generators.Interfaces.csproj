@@ -42,9 +42,11 @@
     <Compile Include="IAlignmentGenerator.cs" />
     <Compile Include="ICharacterClassGenerator.cs" />
     <Compile Include="ICharacterGenerator.cs" />
+    <Compile Include="IFeatsGenerator.cs" />
     <Compile Include="IHitPointsGenerator.cs" />
     <Compile Include="ILanguageGenerator.cs" />
     <Compile Include="IRaceGenerator.cs" />
+    <Compile Include="ISkillsGenerator.cs" />
     <Compile Include="IStatsGenerator.cs" />
     <Compile Include="Randomizers\Alignments\AlignmentRandomizerTypeConstants.cs" />
     <Compile Include="Randomizers\Alignments\IAlignmentRandomizer.cs" />
