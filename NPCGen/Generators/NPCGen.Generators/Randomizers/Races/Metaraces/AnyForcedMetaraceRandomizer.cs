@@ -10,7 +10,7 @@ namespace NPCGen.Generators.Randomizers.Races.Metaraces
             get { return false; }
         }
 
-        public AnyForcedMetaraceRandomizer(IPercentileSelector percentileResultSelector, ILevelAdjustmentsSelector levelAdjustmentsSelector)
+        public AnyForcedMetaraceRandomizer(IPercentileSelector percentileResultSelector, IAdjustmentsSelector levelAdjustmentsSelector)
             : base(percentileResultSelector, levelAdjustmentsSelector) { }
 
         protected override Boolean MetaraceIsAllowed(String metarace)

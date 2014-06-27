@@ -22,10 +22,5 @@ namespace NPCGen.Common.Skills
                 return total + Ranks / 2;
             }
         }
-
-        public Skill()
-        {
-            BaseStat = new Stat();
-        }
     }
 }

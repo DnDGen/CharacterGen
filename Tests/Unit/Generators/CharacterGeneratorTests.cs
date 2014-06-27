@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using EquipmentGen.Common.Items;
 using Moq;
 using NPCGen.Common;
 using NPCGen.Common.Alignments;
@@ -34,19 +35,20 @@ namespace NPCGen.Tests.Unit.Generators
         private Mock<IStatsGenerator> mockStatsGenerator;
         private Mock<ILanguageGenerator> mockLanguageGenerator;
         private Mock<IHitPointsGenerator> mockHitPointsGenerator;
-        private Mock<ILevelAdjustmentsSelector> mockLevelAdjustmentsSelector;
+        private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
         private Mock<IRandomizerVerifier> mockRandomizerVerifier;
         private Mock<IPercentileSelector> mockPercentileSelector;
         private ICharacterGenerator characterGenerator;
         private Mock<ISkillsGenerator> mockSkillsGenerator;
         private Mock<IFeatsGenerator> mockFeatsGenerator;
-
         private Mock<IAlignmentRandomizer> mockAlignmentRandomizer;
         private Mock<IClassNameRandomizer> mockClassNameRandomizer;
         private Mock<ILevelRandomizer> mockLevelRandomizer;
         private Mock<IBaseRaceRandomizer> mockBaseRaceRandomizer;
         private Mock<IMetaraceRandomizer> mockMetaraceRandomizer;
         private Mock<IStatsRandomizer> mockStatsRandomizer;
+        private Mock<ISavingThrowsSelector> mockSavingThrowsSelector;
+        private Mock<IArmorGenerator> mockArmorGenerator;
 
         private CharacterClassPrototype characterClassPrototype;
         private Race race;
@@ -59,16 +61,17 @@ namespace NPCGen.Tests.Unit.Generators
             SetUpMockRandomizers();
             SetUpGenerators();
 
-            mockLevelAdjustmentsSelector = new Mock<ILevelAdjustmentsSelector>();
+            mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
             adjustments = new Dictionary<String, Int32>();
             mockRandomizerVerifier = new Mock<IRandomizerVerifier>();
             mockPercentileSelector = new Mock<IPercentileSelector>();
+            mockSavingThrowsSelector = new Mock<ISavingThrowsSelector>();
 
             adjustments.Add(BaseRace, 0);
             adjustments.Add(BaseRacePlusOne, 1);
             adjustments.Add(String.Empty, 0);
             adjustments.Add(Metarace, 1);
-            mockLevelAdjustmentsSelector.Setup(p => p.GetAdjustments()).Returns(adjustments);
+            mockAdjustmentsSelector.Setup(p => p.GetAdjustmentsFrom("LevelAdjustments")).Returns(adjustments);
 
             mockRandomizerVerifier.Setup(v => v.VerifyCompatibility(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object,
                 mockLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(true);
@@ -77,7 +80,7 @@ namespace NPCGen.Tests.Unit.Generators
             mockRandomizerVerifier.Setup(v => v.VerifyCharacterClassCompatibility(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>(),
                 mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(true);
 
-            characterGenerator = new CharacterGenerator(mockAlignmentGenerator.Object, mockCharacterClassGenerator.Object, mockRaceGenerator.Object, mockStatsGenerator.Object, mockLanguageGenerator.Object, mockHitPointsGenerator.Object, mockLevelAdjustmentsSelector.Object, mockRandomizerVerifier.Object, mockPercentileSelector.Object);
+            characterGenerator = new CharacterGenerator(mockAlignmentGenerator.Object, mockCharacterClassGenerator.Object, mockRaceGenerator.Object, mockStatsGenerator.Object, mockLanguageGenerator.Object, mockHitPointsGenerator.Object, mockAdjustmentsSelector.Object, mockRandomizerVerifier.Object, mockPercentileSelector.Object);
         }
 
         private void SetUpMockRandomizers()
@@ -296,39 +299,118 @@ namespace NPCGen.Tests.Unit.Generators
         }
 
         [Test]
-        public void AdjustSkillsByFeat()
+        public void AdjustSkillBonusesByFeat()
         {
-            Assert.Fail();
-        }
+            var feats = new List<Feat>();
+            var feat = new Feat { Name = "feat" };
+            feats.Add(feat);
+            mockFeatsGenerator.Setup(g => g.GenerateWith(It.IsAny<CharacterClass>(), race, stats)).Returns(feats);
 
-        [Test]
-        public void AdjustSavesByFeat()
-        {
-            Assert.Fail();
+            var skills = new Dictionary<String, Skill>();
+            var skill = new Skill { Bonus = 9200 };
+            skills.Add("skill", skill);
+            mockSkillsGenerator.Setup(g => g.GenerateWith(It.IsAny<CharacterClass>(), race, stats)).Returns(skills);
+
+            var skillAdjustments = new Dictionary<String, Int32>();
+            skillAdjustments.Add(feat.Name, 66);
+            mockAdjustmentsSelector.Setup(s => s.GetAdjustmentsFrom("skillAdjustments")).Returns(skillAdjustments);
+
+            var character = GenerateCharacter();
+            Assert.That(character.Skills["skill"].Bonus, Is.EqualTo(9266));
         }
 
         [Test]
         public void GetSavingThrowsFromSelector()
         {
-            Assert.Fail();
+            var saves = new SavingThrows();
+            mockSavingThrowsSelector.Setup(s => s.SelectFor(It.IsAny<CharacterClass>())).Returns(saves);
+
+            var character = GenerateCharacter();
+            Assert.That(character.SavingThrows, Is.EqualTo(saves));
+        }
+
+        [Test]
+        public void AdjustSavesByFeat()
+        {
+            var feats = new List<Feat>();
+            var feat = new Feat { Name = "feat" };
+            feats.Add(feat);
+            mockFeatsGenerator.Setup(g => g.GenerateWith(It.IsAny<CharacterClass>(), race, stats)).Returns(feats);
+
+            var saves = new SavingThrows { Fortitude = 9200, Reflex = 40, Will = 90000 };
+            mockSavingThrowsSelector.Setup(s => s.SelectFor(It.IsAny<CharacterClass>())).Returns(saves);
+
+            var fortitudeAdjustments = new Dictionary<String, Int32>();
+            fortitudeAdjustments.Add(feat.Name, 66);
+            mockAdjustmentsSelector.Setup(s => s.GetAdjustmentsFrom("FortitudeAdjustments")).Returns(fortitudeAdjustments);
+
+            var reflexAdjustments = new Dictionary<String, Int32>();
+            reflexAdjustments.Add(feat.Name, 2);
+            mockAdjustmentsSelector.Setup(s => s.GetAdjustmentsFrom("ReflexAdjustments")).Returns(reflexAdjustments);
+
+            var willAdjustments = new Dictionary<String, Int32>();
+            willAdjustments.Add(feat.Name, 210);
+            mockAdjustmentsSelector.Setup(s => s.GetAdjustmentsFrom("WillAdjustments")).Returns(willAdjustments);
+
+            var character = GenerateCharacter();
+            Assert.That(character.SavingThrows.Fortitude, Is.EqualTo(9266));
+            Assert.That(character.SavingThrows.Reflex, Is.EqualTo(42));
+            Assert.That(character.SavingThrows.Will, Is.EqualTo(90210));
         }
 
         [Test]
         public void GetArmorFromGenerator()
         {
-            Assert.Fail();
+            var armor = new Item();
+            mockArmorGenerator.Setup(g => g.GenerateAtLevel(It.IsAny<Int32>())).Returns(armor);
+
+            var character = GenerateCharacter();
+            Assert.That(character.Armor, Is.EqualTo(armor));
         }
 
         [Test]
         public void AdjustSkillsWithArmorCheckPenalty()
         {
-            Assert.Fail();
+            var skills = new Dictionary<String, Skill>();
+            var skillWithPenalty = new Skill { ArmorCheckPenalty = true };
+            var skill = new Skill { ArmorCheckPenalty = false };
+
+            skills.Add("no penalty", skill);
+            skills.Add("penalty", skillWithPenalty);
+
+            mockSkillsGenerator.Setup(g => g.GenerateWith(It.IsAny<CharacterClass>(), race, stats)).Returns(skills);
+
+            var armor = new Item { Name = "armor name" };
+            mockArmorGenerator.Setup(g => g.GenerateAtLevel(It.IsAny<Int32>())).Returns(armor);
+
+            var skillAdjustments = new Dictionary<String, Int32>();
+            skillAdjustments.Add(armor.Name, 5);
+            skillAdjustments.Add("other armor", 10);
+            mockAdjustmentsSelector.Setup(s => s.GetAdjustmentsFrom("ArmorCheckPenalties")).Returns(skillAdjustments);
+
+            var character = GenerateCharacter();
+            Assert.That(character.Skills["no penalty"].Bonus, Is.EqualTo(0));
+            Assert.That(character.Skills["penalty"].Bonus, Is.EqualTo(-5));
         }
 
         [Test]
-        public void DoNotAdjustSkillsWithoutArmorCheckPenalty()
+        public void SwimmingTakesDoubleArmorCheckPenalty()
         {
-            Assert.Fail();
+            var skills = new Dictionary<String, Skill>();
+            var swimming = new Skill { ArmorCheckPenalty = true };
+            skills.Add(SkillConstants.Swim, swimming);
+
+            mockSkillsGenerator.Setup(g => g.GenerateWith(It.IsAny<CharacterClass>(), race, stats)).Returns(skills);
+
+            var armor = new Item { Name = "armor name" };
+            mockArmorGenerator.Setup(g => g.GenerateAtLevel(It.IsAny<Int32>())).Returns(armor);
+
+            var skillAdjustments = new Dictionary<String, Int32>();
+            skillAdjustments.Add(armor.Name, 5);
+            mockAdjustmentsSelector.Setup(s => s.GetAdjustmentsFrom("ArmorCheckPenalties")).Returns(skillAdjustments);
+
+            var character = GenerateCharacter();
+            Assert.That(character.Skills[SkillConstants.Swim].Bonus, Is.EqualTo(-10));
         }
 
         [Test]

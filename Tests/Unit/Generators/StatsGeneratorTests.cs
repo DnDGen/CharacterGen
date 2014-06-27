@@ -192,7 +192,7 @@ namespace NPCGen.Tests.Unit.Generators
         [Test]
         public void RollWhichStatToIncreasePerLevel()
         {
-            characterClass.Level = 3;
+            characterClass.Level = 12;
             mockDice.SetupSequence(d => d.d2(1)).Returns(1).Returns(2).Returns(1);
 
             var stats = statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
@@ -204,7 +204,7 @@ namespace NPCGen.Tests.Unit.Generators
         [Test]
         public void IncreasesIgnorePrioritization()
         {
-            characterClass.Level = 3;
+            characterClass.Level = 12;
             mockDice.SetupSequence(d => d.d2(1)).Returns(1).Returns(2).Returns(2);
 
             foreach (var stat in randomizedStats.Values)

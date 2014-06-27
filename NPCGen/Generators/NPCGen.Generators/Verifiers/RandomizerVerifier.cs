@@ -13,11 +13,11 @@ namespace NPCGen.Generators.Verifiers
 {
     public class RandomizerVerifier : IRandomizerVerifier
     {
-        private ILevelAdjustmentsSelector levelAdjustmentsSelector;
+        private IAdjustmentsSelector adjustmentsSelector;
 
-        public RandomizerVerifier(ILevelAdjustmentsSelector levelAdjustmentsSelector)
+        public RandomizerVerifier(IAdjustmentsSelector adjustmentsSelector)
         {
-            this.levelAdjustmentsSelector = levelAdjustmentsSelector;
+            this.adjustmentsSelector = adjustmentsSelector;
         }
 
         public Boolean VerifyCompatibility(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classNameRandomizer,
@@ -61,7 +61,7 @@ namespace NPCGen.Generators.Verifiers
 
         private Boolean LevelAdjustmentsAreAllowed(IEnumerable<String> baseRaces, IEnumerable<String> metaraces, Int32 level)
         {
-            var levelAdjustments = levelAdjustmentsSelector.GetAdjustments();
+            var levelAdjustments = adjustmentsSelector.GetAdjustmentsFrom("LevelAdjustments");
             var minBaseRaceLevelAdjustment = levelAdjustments.Where(kvp => baseRaces.Contains(kvp.Key)).Min(kvp => kvp.Value);
             var minMetaraceLevelAdjustment = levelAdjustments.Where(kvp => metaraces.Contains(kvp.Key)).Min(kvp => kvp.Value);
 

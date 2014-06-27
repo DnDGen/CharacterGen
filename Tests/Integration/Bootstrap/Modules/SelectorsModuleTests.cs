@@ -15,7 +15,7 @@ namespace NPCGen.Tests.Integration.Bootstrap.Modules
         [Test]
         public void LevelAdjustmentsSelectorsAreNotGeneratedAsSingletons()
         {
-            AssertNotSingleton<ILevelAdjustmentsSelector>();
+            AssertNotSingleton<IAdjustmentsSelector>();
         }
 
         [Test]

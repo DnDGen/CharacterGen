@@ -13,12 +13,12 @@ namespace NPCGen.Generators.Randomizers.Races.Metaraces
         protected abstract Boolean allowNoMetarace { get; }
 
         private IPercentileSelector percentileResultSelector;
-        private ILevelAdjustmentsSelector levelAdjustmentsSelector;
+        private IAdjustmentsSelector adjustmentsSelector;
 
-        public BaseMetarace(IPercentileSelector percentileResultSelector, ILevelAdjustmentsSelector levelAdjustmentsSelector)
+        public BaseMetarace(IPercentileSelector percentileResultSelector, IAdjustmentsSelector adjustmentsSelector)
         {
             this.percentileResultSelector = percentileResultSelector;
-            this.levelAdjustmentsSelector = levelAdjustmentsSelector;
+            this.adjustmentsSelector = adjustmentsSelector;
         }
 
         public String Randomize(String goodness, CharacterClassPrototype prototype)
@@ -53,7 +53,7 @@ namespace NPCGen.Generators.Randomizers.Races.Metaraces
 
         private Boolean LevelAdjustmentIsAllowed(String metarace, Int32 level)
         {
-            var adjustments = levelAdjustmentsSelector.GetAdjustments();
+            var adjustments = adjustmentsSelector.GetAdjustmentsFrom("LevelAdjustments");
             return adjustments[metarace] < level;
         }
 

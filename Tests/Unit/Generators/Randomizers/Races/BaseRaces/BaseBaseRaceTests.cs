@@ -15,7 +15,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
     {
         private TestBaseRaceRandomizer randomizer;
         private Mock<IPercentileSelector> mockPercentileResultSelector;
-        private Mock<ILevelAdjustmentsSelector> mockLevelAdjustmentsSelector;
+        private Mock<IAdjustmentsSelector> mockLevelAdjustmentsSelector;
 
         private String firstBaseRace = "first base race";
         private String secondBaseRace = "second base race";
@@ -34,8 +34,8 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
             foreach (var baseRace in baseRaces)
                 adjustments.Add(baseRace, 0);
 
-            mockLevelAdjustmentsSelector = new Mock<ILevelAdjustmentsSelector>();
-            mockLevelAdjustmentsSelector.Setup(p => p.GetAdjustments()).Returns(adjustments);
+            mockLevelAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
+            mockLevelAdjustmentsSelector.Setup(p => p.GetAdjustmentsFrom("LevelAdjustments")).Returns(adjustments);
 
             prototype = new CharacterClassPrototype();
             prototype.Level = 1;
@@ -130,7 +130,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         {
             public String NotAllowedBaseRace { get; set; }
 
-            public TestBaseRaceRandomizer(IPercentileSelector percentileResultSelector, ILevelAdjustmentsSelector levelAdjustmentSelector)
+            public TestBaseRaceRandomizer(IPercentileSelector percentileResultSelector, IAdjustmentsSelector levelAdjustmentSelector)
                 : base(percentileResultSelector, levelAdjustmentSelector) { }
 
             protected override Boolean BaseRaceIsAllowed(String baseRace)

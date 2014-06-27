@@ -40,8 +40,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ILanguagesSelector.cs" />
-    <Compile Include="ILevelAdjustmentsSelector.cs" />
+    <Compile Include="IAdjustmentsSelector.cs" />
     <Compile Include="IPercentileSelector.cs" />
+    <Compile Include="ISavingThrowsSelector.cs" />
     <Compile Include="IStatAdjustmentsSelector.cs" />
     <Compile Include="IStatPrioritySelector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

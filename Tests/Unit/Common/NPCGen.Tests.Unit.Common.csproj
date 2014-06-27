@@ -95,6 +95,7 @@
     <Compile Include="Races\RaceConstantsTests.cs" />
     <Compile Include="Races\RaceTests.cs" />
     <Compile Include="SavingThrowTests.cs" />
+    <Compile Include="Skills\SkillConstantsTests.cs" />
     <Compile Include="Skills\SkillTests.cs" />
     <Compile Include="Stats\StatConstantsTests.cs" />
     <Compile Include="Stats\StatPriorityTests.cs" />

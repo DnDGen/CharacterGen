@@ -92,6 +92,7 @@
     <Compile Include="Races\RaceConstants.cs" />
     <Compile Include="SavingThrows.cs" />
     <Compile Include="Skills\Skill.cs" />
+    <Compile Include="Skills\SkillConstants.cs" />
     <Compile Include="Stats\Stat.cs" />
     <Compile Include="Stats\StatConstants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

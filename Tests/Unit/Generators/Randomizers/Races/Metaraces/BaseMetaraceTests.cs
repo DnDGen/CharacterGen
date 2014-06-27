@@ -15,7 +15,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
     {
         private TestMetaraceRandomizer randomizer;
         private Mock<IPercentileSelector> mockPercentileResultSelector;
-        private Mock<ILevelAdjustmentsSelector> mockLevelAdjustmentsSelector;
+        private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
 
         private String firstMetarace = "first metarace";
         private String secondMetarace = "second metarace";
@@ -34,13 +34,13 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
             foreach (var metarace in metaraces)
                 adjustments.Add(metarace, 0);
 
-            mockLevelAdjustmentsSelector = new Mock<ILevelAdjustmentsSelector>();
-            mockLevelAdjustmentsSelector.Setup(p => p.GetAdjustments()).Returns(adjustments);
+            mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
+            mockAdjustmentsSelector.Setup(p => p.GetAdjustmentsFrom("LevelAdjustments")).Returns(adjustments);
 
             prototype = new CharacterClassPrototype();
             prototype.Level = 1;
 
-            randomizer = new TestMetaraceRandomizer(mockPercentileResultSelector.Object, mockLevelAdjustmentsSelector.Object);
+            randomizer = new TestMetaraceRandomizer(mockPercentileResultSelector.Object, mockAdjustmentsSelector.Object);
         }
 
         [Test]
@@ -154,7 +154,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
                 get { return AllowNoMetarace; }
             }
 
-            public TestMetaraceRandomizer(IPercentileSelector percentileResultSelector, ILevelAdjustmentsSelector levelAdjustmentsSelector)
+            public TestMetaraceRandomizer(IPercentileSelector percentileResultSelector, IAdjustmentsSelector levelAdjustmentsSelector)
                 : base(percentileResultSelector, levelAdjustmentsSelector) { }
 
             protected override Boolean MetaraceIsAllowed(String metarace)

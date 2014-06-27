@@ -46,7 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LanguagesSelector.cs" />
-    <Compile Include="LevelAdjustmentsSelector.cs" />
+    <Compile Include="AdjustmentsSelector.cs" />
     <Compile Include="PercentileSelector.cs" />
     <Compile Include="StatAdjustmentsSelector.cs" />
     <Compile Include="StatPrioritySelector.cs" />

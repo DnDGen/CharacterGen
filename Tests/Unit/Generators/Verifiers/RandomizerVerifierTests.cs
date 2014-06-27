@@ -23,7 +23,7 @@ namespace NPCGen.Tests.Unit.Generators.Verifiers
         private Mock<ILevelRandomizer> mockLevelRandomizer;
         private Mock<IBaseRaceRandomizer> mockBaseRaceRandomizer;
         private Mock<IMetaraceRandomizer> mockMetaraceRandomizer;
-        private Mock<ILevelAdjustmentsSelector> mockLevelAdjustmentsSelector;
+        private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
 
         private CharacterClassPrototype characterClassPrototype;
         private List<Alignment> alignments;
@@ -41,8 +41,8 @@ namespace NPCGen.Tests.Unit.Generators.Verifiers
             mockLevelRandomizer = new Mock<ILevelRandomizer>();
             mockBaseRaceRandomizer = new Mock<IBaseRaceRandomizer>();
             mockMetaraceRandomizer = new Mock<IMetaraceRandomizer>();
-            mockLevelAdjustmentsSelector = new Mock<ILevelAdjustmentsSelector>();
-            verifier = new RandomizerVerifier(mockLevelAdjustmentsSelector.Object);
+            mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
+            verifier = new RandomizerVerifier(mockAdjustmentsSelector.Object);
 
             alignments = new List<Alignment>();
             characterClassPrototype = new CharacterClassPrototype();
@@ -59,7 +59,7 @@ namespace NPCGen.Tests.Unit.Generators.Verifiers
                 .Returns(baseRaces);
             mockMetaraceRandomizer.Setup(r => r.GetAllPossibleResults(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>()))
                 .Returns(metaraces);
-            mockLevelAdjustmentsSelector.Setup(p => p.GetAdjustments()).Returns(adjustments);
+            mockAdjustmentsSelector.Setup(p => p.GetAdjustmentsFrom("LevelAdjustments")).Returns(adjustments);
 
             var alignment = new Alignment();
             alignments.Add(alignment);
