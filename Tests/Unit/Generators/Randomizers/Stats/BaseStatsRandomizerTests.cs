@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using NPCGen.Common.Stats;
+using NPCGen.Common.Abilities;
 using NPCGen.Generators.Randomizers.Stats;
 using NUnit.Framework;
 

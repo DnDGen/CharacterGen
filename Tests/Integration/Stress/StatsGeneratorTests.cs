@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Ninject;
-using NPCGen.Common.Stats;
+using NPCGen.Common.Abilities;
 using NPCGen.Generators.Interfaces;
 using NPCGen.Generators.Interfaces.Randomizers.Stats;
 using NUnit.Framework;

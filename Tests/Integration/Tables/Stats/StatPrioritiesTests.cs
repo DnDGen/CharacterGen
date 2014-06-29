@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using NPCGen.Common.CharacterClasses;
-using NPCGen.Common.Stats;
+using NPCGen.Common.Abilities;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Tables.Stats

@@ -5,7 +5,7 @@ using D20Dice;
 using NPCGen.Common;
 using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Races;
-using NPCGen.Common.Stats;
+using NPCGen.Common.Abilities;
 using NPCGen.Generators.Interfaces;
 using NPCGen.Generators.Interfaces.Randomizers.Stats;
 using NPCGen.Selectors.Interfaces;

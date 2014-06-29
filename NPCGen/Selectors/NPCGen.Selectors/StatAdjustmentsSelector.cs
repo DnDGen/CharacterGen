@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using NPCGen.Common.Races;
-using NPCGen.Common.Stats;
+using NPCGen.Common.Abilities;
 using NPCGen.Mappers.Interfaces;
 using NPCGen.Selectors.Interfaces;
 

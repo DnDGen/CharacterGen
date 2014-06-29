@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NPCGen.Common
+namespace NPCGen.Common.Abilities
 {
     public class StatPriority
     {

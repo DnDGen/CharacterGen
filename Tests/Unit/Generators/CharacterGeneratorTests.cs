@@ -7,7 +7,7 @@ using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Feats;
 using NPCGen.Common.Races;
 using NPCGen.Common.Skills;
-using NPCGen.Common.Stats;
+using NPCGen.Common.Abilities;
 using NPCGen.Generators;
 using NPCGen.Generators.Interfaces;
 using NPCGen.Generators.Interfaces.Randomizers.Alignments;

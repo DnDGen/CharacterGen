@@ -1,5 +1,5 @@
 ﻿using System;
-using NPCGen.Common.Stats;
+using NPCGen.Common.Abilities;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Unit.Common.Stats

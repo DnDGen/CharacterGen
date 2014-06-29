@@ -1,7 +1,7 @@
 ﻿using System;
-using NPCGen.Common.Stats;
+using NPCGen.Common.Abilities.Stats;
 
-namespace NPCGen.Common.Skills
+namespace NPCGen.Common.Abilities.Skills
 {
     public class Skill
     {
@@ -23,9 +23,13 @@ namespace NPCGen.Common.Skills
             }
         }
 
-        public Skill()
+        public Boolean IsMaxedOutFor(Int32 level)
         {
-            BaseStat = new Stat();
+            if (ClassSkill)
+                return Ranks >= level + 3;
+
+            var partialRanks = Convert.ToDouble(Ranks) / 2;
+            return partialRanks >= level + 1.5;
         }
     }
 }

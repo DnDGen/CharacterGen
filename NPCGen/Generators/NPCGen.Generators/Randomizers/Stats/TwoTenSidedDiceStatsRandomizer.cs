@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using D20Dice;
-using NPCGen.Common.Stats;
+using NPCGen.Common.Abilities;
 
 namespace NPCGen.Generators.Randomizers.Stats
 {
