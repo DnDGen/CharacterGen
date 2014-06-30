@@ -25,7 +25,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
             foreach (var baseRace in baseRaces)
                 adjustments.Add(baseRace, 0);
 
-            mockLevelAdjustmentsSelector.Setup(p => p.GetAdjustments()).Returns(adjustments);
+            mockAdjustmentsSelector.Setup(p => p.GetAdjustmentsFrom("LevelAdjustments")).Returns(adjustments);
 
             prototype = new CharacterClassPrototype();
             prototype.Level = 1;

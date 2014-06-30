@@ -11,7 +11,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         [SetUp]
         public void Setup()
         {
-            randomizer = new NonStandardBaseRaceRandomizer(mockPercentileResultSelector.Object, mockLevelAdjustmentsSelector.Object);
+            randomizer = new NonStandardBaseRaceRandomizer(mockPercentileResultSelector.Object, mockAdjustmentsSelector.Object);
         }
 
         [TestCase(RaceConstants.BaseRaces.Aasimar)]

@@ -11,7 +11,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         [SetUp]
         public void Setup()
         {
-            randomizer = new NonNeutralMetaraceRandomizer(mockPercentileResultSelector.Object, mockLevelAdjustmentsSelector.Object);
+            randomizer = new NonNeutralMetaraceRandomizer(mockPercentileResultSelector.Object, mockAdjustmentsSelector.Object);
         }
 
         [TestCase(RaceConstants.Metaraces.HalfDragon)]

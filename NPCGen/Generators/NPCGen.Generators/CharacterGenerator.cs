@@ -24,11 +24,13 @@ namespace NPCGen.Generators
         private IStatsGenerator statsGenerator;
         private IHitPointsGenerator hitPointsGenerator;
         private IRaceGenerator raceGenerator;
-        private ILevelAdjustmentsSelector levelAdjustmentsSelector;
+        private IAdjustmentsSelector adjustmentsSelector;
         private IRandomizerVerifier randomizerVerifier;
         private IPercentileSelector percentileSelector;
 
-        public CharacterGenerator(IAlignmentGenerator alignmentGenerator, ICharacterClassGenerator characterClassGenerator, IRaceGenerator raceGenerator, IStatsGenerator statsGenerator, ILanguageGenerator languageGenerator, IHitPointsGenerator hitPointsGenerator, ILevelAdjustmentsSelector levelAdjustmentsSelector, IRandomizerVerifier randomizerVerifier, IPercentileSelector percentileSelector)
+        public CharacterGenerator(IAlignmentGenerator alignmentGenerator, ICharacterClassGenerator characterClassGenerator, IRaceGenerator raceGenerator,
+            IStatsGenerator statsGenerator, ILanguageGenerator languageGenerator, IHitPointsGenerator hitPointsGenerator, IAdjustmentsSelector adjustmentsSelector,
+            IRandomizerVerifier randomizerVerifier, IPercentileSelector percentileSelector)
         {
             this.alignmentGenerator = alignmentGenerator;
             this.characterClassGenerator = characterClassGenerator;
@@ -37,7 +39,7 @@ namespace NPCGen.Generators
             this.languageGenerator = languageGenerator;
             this.hitPointsGenerator = hitPointsGenerator;
 
-            this.levelAdjustmentsSelector = levelAdjustmentsSelector;
+            this.adjustmentsSelector = adjustmentsSelector;
             this.randomizerVerifier = randomizerVerifier;
             this.percentileSelector = percentileSelector;
         }
@@ -55,7 +57,7 @@ namespace NPCGen.Generators
             var characterClassPrototype = GenerateCharacterClassPrototype(classNameRandomizer, levelRandomizer, character.Alignment,
                 baseRaceRandomizer, metaraceRandomizer);
 
-            var levelAdjustments = levelAdjustmentsSelector.GetAdjustments();
+            var levelAdjustments = adjustmentsSelector.GetAdjustmentsFrom("LevelAdjustments");
             character.Race = GenerateRace(baseRaceRandomizer, metaraceRandomizer, levelAdjustments, character.Alignment, characterClassPrototype);
 
             characterClassPrototype.Level -= levelAdjustments[character.Race.BaseRace];

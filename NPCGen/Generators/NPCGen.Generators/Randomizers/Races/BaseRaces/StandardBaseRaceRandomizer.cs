@@ -6,7 +6,7 @@ namespace NPCGen.Generators.Randomizers.Races.BaseRaces
 {
     public class StandardBaseRaceRandomizer : BaseBaseRace
     {
-        public StandardBaseRaceRandomizer(IPercentileSelector percentileResultSelector, ILevelAdjustmentsSelector levelAdjustmentSelector)
+        public StandardBaseRaceRandomizer(IPercentileSelector percentileResultSelector, IAdjustmentsSelector levelAdjustmentSelector)
             : base(percentileResultSelector, levelAdjustmentSelector) { }
 
         protected override Boolean BaseRaceIsAllowed(String baseRace)

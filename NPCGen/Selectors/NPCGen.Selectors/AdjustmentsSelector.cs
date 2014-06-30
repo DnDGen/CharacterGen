@@ -5,18 +5,18 @@ using NPCGen.Selectors.Interfaces;
 
 namespace NPCGen.Selectors
 {
-    public class LevelAdjustmentsSelector : ILevelAdjustmentsSelector
+    public class AdjustmentsSelector : IAdjustmentsSelector
     {
         private IAdjustmentMapper adjustmentMapper;
 
-        public LevelAdjustmentsSelector(IAdjustmentMapper adjustmentMapper)
+        public AdjustmentsSelector(IAdjustmentMapper adjustmentMapper)
         {
             this.adjustmentMapper = adjustmentMapper;
         }
 
-        public Dictionary<String, Int32> GetAdjustments()
+        public Dictionary<String, Int32> GetAdjustmentsFrom(String tableName)
         {
-            return adjustmentMapper.Map("LevelAdjustments");
+            return adjustmentMapper.Map(tableName);
         }
     }
 }

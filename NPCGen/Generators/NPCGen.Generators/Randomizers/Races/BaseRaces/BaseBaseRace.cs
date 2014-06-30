@@ -11,12 +11,12 @@ namespace NPCGen.Generators.Randomizers.Races.BaseRaces
     public abstract class BaseBaseRace : IBaseRaceRandomizer
     {
         private IPercentileSelector percentileResultSelector;
-        private ILevelAdjustmentsSelector levelAdjustmentSelector;
+        private IAdjustmentsSelector adjustmentSelector;
 
-        public BaseBaseRace(IPercentileSelector percentileResultSelector, ILevelAdjustmentsSelector levelAdjustmentSelector)
+        public BaseBaseRace(IPercentileSelector percentileResultSelector, IAdjustmentsSelector adjustmentSelector)
         {
             this.percentileResultSelector = percentileResultSelector;
-            this.levelAdjustmentSelector = levelAdjustmentSelector;
+            this.adjustmentSelector = adjustmentSelector;
         }
 
         public String Randomize(String goodness, CharacterClassPrototype prototype)
@@ -41,7 +41,7 @@ namespace NPCGen.Generators.Randomizers.Races.BaseRaces
 
         private Boolean LevelAdjustmentIsAllowed(String baseRace, Int32 level)
         {
-            var levelAdjustments = levelAdjustmentSelector.GetAdjustments();
+            var levelAdjustments = adjustmentSelector.GetAdjustmentsFrom("LevelAdjustments");
             return levelAdjustments[baseRace] < level;
         }
 

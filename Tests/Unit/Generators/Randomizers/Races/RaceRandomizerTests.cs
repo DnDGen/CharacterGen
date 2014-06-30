@@ -10,13 +10,13 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races
     public abstract class RaceRandomizerTests
     {
         protected Mock<IPercentileSelector> mockPercentileResultSelector;
-        protected Mock<ILevelAdjustmentsSelector> mockLevelAdjustmentsSelector;
+        protected Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
 
         [SetUp]
         public void RaceRandomizerTestsSetup()
         {
             mockPercentileResultSelector = new Mock<IPercentileSelector>();
-            mockLevelAdjustmentsSelector = new Mock<ILevelAdjustmentsSelector>();
+            mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
         }
 
         protected void AssertRaceIsAllowed(String race)

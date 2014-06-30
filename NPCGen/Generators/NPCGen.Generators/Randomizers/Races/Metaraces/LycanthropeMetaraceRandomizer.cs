@@ -11,7 +11,7 @@ namespace NPCGen.Generators.Randomizers.Races.Metaraces
             get { return true; }
         }
 
-        public LycanthropeMetaraceRandomizer(IPercentileSelector percentileResultSelector, ILevelAdjustmentsSelector levelAdjustmentsSelector)
+        public LycanthropeMetaraceRandomizer(IPercentileSelector percentileResultSelector, IAdjustmentsSelector levelAdjustmentsSelector)
             : base(percentileResultSelector, levelAdjustmentsSelector) { }
 
         protected override Boolean MetaraceIsAllowed(String metarace)
