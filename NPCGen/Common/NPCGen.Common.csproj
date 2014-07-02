@@ -33,39 +33,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Ciloci.Flee">
-      <HintPath>..\packages\Trove.FLEE.0.9.26.0\lib\net20\Ciloci.Flee.dll</HintPath>
-    </Reference>
-    <Reference Include="D20Dice, Version=1.0.5267.24678, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="EquipmentGen.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\D20Dice.6.2\lib\D20Dice.dll</HintPath>
-    </Reference>
-    <Reference Include="EquipmentGen.Common">
-      <HintPath>..\..\packages\EquipmentGen.1.0.0\lib\EquipmentGen.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="EquipmentGen.Generators">
-      <HintPath>..\..\packages\EquipmentGen.1.0.0\lib\EquipmentGen.Generators.dll</HintPath>
-    </Reference>
-    <Reference Include="EquipmentGen.Generators.Interfaces">
-      <HintPath>..\..\packages\EquipmentGen.1.0.0\lib\EquipmentGen.Generators.Interfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="EquipmentGen.Mappers">
-      <HintPath>..\..\packages\EquipmentGen.1.0.0\lib\EquipmentGen.Mappers.dll</HintPath>
-    </Reference>
-    <Reference Include="EquipmentGen.Mappers.Interfaces">
-      <HintPath>..\..\packages\EquipmentGen.1.0.0\lib\EquipmentGen.Mappers.Interfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="EquipmentGen.Selectors">
-      <HintPath>..\..\packages\EquipmentGen.1.0.0\lib\EquipmentGen.Selectors.dll</HintPath>
-    </Reference>
-    <Reference Include="EquipmentGen.Selectors.Interfaces">
-      <HintPath>..\..\packages\EquipmentGen.1.0.0\lib\EquipmentGen.Selectors.Interfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="EquipmentGen.Tables">
-      <HintPath>..\..\packages\EquipmentGen.1.0.0\lib\EquipmentGen.Tables.dll</HintPath>
-    </Reference>
-    <Reference Include="EquipmentGen.Tables.Interfaces">
-      <HintPath>..\..\packages\EquipmentGen.1.0.0\lib\EquipmentGen.Tables.Interfaces.dll</HintPath>
+      <HintPath>..\..\packages\EquipmentGen.Common.1.1\lib\EquipmentGen.Common.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -76,34 +46,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abilities\Ability.cs" />
+    <Compile Include="Abilities\Feats\Feat.cs" />
+    <Compile Include="Abilities\LanguageConstants.cs" />
+    <Compile Include="Abilities\Skills\Skill.cs" />
+    <Compile Include="Abilities\Stats\Stat.cs" />
+    <Compile Include="Abilities\Stats\StatConstants.cs" />
+    <Compile Include="Abilities\Stats\StatPriority.cs" />
     <Compile Include="Alignments\Alignment.cs" />
     <Compile Include="Alignments\AlignmentConstants.cs" />
-    <Compile Include="ArmorClass.cs" />
     <Compile Include="Character.cs" />
-    <Compile Include="CharacterClasses\BaseAttack.cs" />
     <Compile Include="CharacterClasses\CharacterClass.cs" />
     <Compile Include="CharacterClasses\CharacterClassConstants.cs" />
-    <Compile Include="CharacterClasses\CharacterClassPrototype.cs" />
-    <Compile Include="Equipments\Equipment.cs" />
-    <Compile Include="Familiar.cs" />
-    <Compile Include="Feats\Feat.cs" />
-    <Compile Include="Equipments\WeaponAttributeConstants.cs" />
-    <Compile Include="LanguageConstants.cs" />
+    <Compile Include="Combats\ArmorClass.cs" />
+    <Compile Include="Combats\BaseAttack.cs" />
+    <Compile Include="Combats\Combat.cs" />
+    <Compile Include="Combats\SavingThrows.cs" />
+    <Compile Include="Magics\Familiar.cs" />
+    <Compile Include="Items\Equipment.cs" />
+    <Compile Include="Items\WeaponAttributeConstants.cs" />
+    <Compile Include="Magics\Magic.cs" />
     <Compile Include="Races\Race.cs" />
     <Compile Include="Races\RaceConstants.cs" />
-    <Compile Include="SavingThrows.cs" />
-    <Compile Include="Skills\Skill.cs" />
-    <Compile Include="Skills\SkillConstants.cs" />
-    <Compile Include="Stats\Stat.cs" />
-    <Compile Include="Stats\StatConstants.cs" />
+    <Compile Include="Abilities\Skills\SkillConstants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Stats\StatPriority.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Character\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

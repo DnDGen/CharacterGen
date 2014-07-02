@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NPCGen.Common.Feats
+namespace NPCGen.Common.Abilities.Feats
 {
     public class Feat
     {

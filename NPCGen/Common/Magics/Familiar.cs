@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NPCGen.Common
+namespace NPCGen.Common.Magics
 {
     public class Familiar
     {

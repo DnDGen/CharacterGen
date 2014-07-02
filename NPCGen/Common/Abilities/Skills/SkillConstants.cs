@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NPCGen.Common.Skills
+namespace NPCGen.Common.Abilities.Skills
 {
     public static class SkillConstants
     {

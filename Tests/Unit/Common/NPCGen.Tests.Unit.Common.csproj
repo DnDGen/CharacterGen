@@ -30,39 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Ciloci.Flee">
-      <HintPath>..\..\..\packages\Trove.FLEE.0.9.26.0\lib\net20\Ciloci.Flee.dll</HintPath>
-    </Reference>
-    <Reference Include="D20Dice">
-      <HintPath>..\..\..\packages\D20Dice.6.2\lib\D20Dice.dll</HintPath>
-    </Reference>
     <Reference Include="EquipmentGen.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\EquipmentGen.1.0.0\lib\EquipmentGen.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="EquipmentGen.Generators">
-      <HintPath>..\..\..\packages\EquipmentGen.1.0.0\lib\EquipmentGen.Generators.dll</HintPath>
-    </Reference>
-    <Reference Include="EquipmentGen.Generators.Interfaces">
-      <HintPath>..\..\..\packages\EquipmentGen.1.0.0\lib\EquipmentGen.Generators.Interfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="EquipmentGen.Mappers">
-      <HintPath>..\..\..\packages\EquipmentGen.1.0.0\lib\EquipmentGen.Mappers.dll</HintPath>
-    </Reference>
-    <Reference Include="EquipmentGen.Mappers.Interfaces">
-      <HintPath>..\..\..\packages\EquipmentGen.1.0.0\lib\EquipmentGen.Mappers.Interfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="EquipmentGen.Selectors">
-      <HintPath>..\..\..\packages\EquipmentGen.1.0.0\lib\EquipmentGen.Selectors.dll</HintPath>
-    </Reference>
-    <Reference Include="EquipmentGen.Selectors.Interfaces">
-      <HintPath>..\..\..\packages\EquipmentGen.1.0.0\lib\EquipmentGen.Selectors.Interfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="EquipmentGen.Tables">
-      <HintPath>..\..\..\packages\EquipmentGen.1.0.0\lib\EquipmentGen.Tables.dll</HintPath>
-    </Reference>
-    <Reference Include="EquipmentGen.Tables.Interfaces">
-      <HintPath>..\..\..\packages\EquipmentGen.1.0.0\lib\EquipmentGen.Tables.Interfaces.dll</HintPath>
+      <HintPath>..\..\..\packages\EquipmentGen.Common.1.1\lib\EquipmentGen.Common.dll</HintPath>
     </Reference>
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.2.1402.2112\lib\net40\Moq.dll</HintPath>
@@ -81,25 +51,24 @@
   <ItemGroup>
     <Compile Include="Alignments\AlignmentConstantsTests.cs" />
     <Compile Include="Alignments\AlignmentTests.cs" />
-    <Compile Include="ArmorClassTests.cs" />
+    <Compile Include="Combats\ArmorClassTests.cs" />
     <Compile Include="CharacterTests.cs" />
-    <Compile Include="Classes\BaseAttackTests.cs" />
+    <Compile Include="Combats\BaseAttackTests.cs" />
     <Compile Include="Classes\CharacterClassConstantsTests.cs" />
-    <Compile Include="Classes\CharacterClassPrototypeTests.cs" />
     <Compile Include="Classes\CharacterClassTests.cs" />
-    <Compile Include="FamiliarTests.cs" />
-    <Compile Include="Feats\FeatTests.cs" />
+    <Compile Include="Magics\FamiliarTests.cs" />
+    <Compile Include="Abilities\Feats\FeatTests.cs" />
     <Compile Include="Items\WeaponAttributeConstantsTests.cs" />
-    <Compile Include="LanguageConstantsTests.cs" />
+    <Compile Include="Abilities\LanguageConstantsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Races\RaceConstantsTests.cs" />
     <Compile Include="Races\RaceTests.cs" />
-    <Compile Include="SavingThrowTests.cs" />
-    <Compile Include="Skills\SkillConstantsTests.cs" />
-    <Compile Include="Skills\SkillTests.cs" />
-    <Compile Include="Stats\StatConstantsTests.cs" />
-    <Compile Include="Stats\StatPriorityTests.cs" />
-    <Compile Include="Stats\StatTests.cs" />
+    <Compile Include="Combats\SavingThrowTests.cs" />
+    <Compile Include="Abilities\Skills\SkillConstantsTests.cs" />
+    <Compile Include="Abilities\Skills\SkillTests.cs" />
+    <Compile Include="Abilities\Stats\StatConstantsTests.cs" />
+    <Compile Include="Abilities\Stats\StatPriorityTests.cs" />
+    <Compile Include="Abilities\Stats\StatTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

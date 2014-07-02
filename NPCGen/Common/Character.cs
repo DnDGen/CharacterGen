@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using NPCGen.Common.Abilities;
 using NPCGen.Common.Alignments;
 using NPCGen.Common.CharacterClasses;
-using NPCGen.Common.Items;
-using NPCGen.Common.Feats;
-using NPCGen.Common.Races;
-using NPCGen.Common.Skills;
-using NPCGen.Common.Abilities;
 using NPCGen.Common.Combats;
+using NPCGen.Common.Items;
+using NPCGen.Common.Magics;
+using NPCGen.Common.Races;
 
 namespace NPCGen.Common
 {
@@ -20,16 +17,9 @@ namespace NPCGen.Common
         public String InterestingTrait { get; set; }
 
         public Combat Combat { get; set; }
-
-        public Dictionary<String, Skill> Skills { get; set; }
-        public IEnumerable<String> Languages { get; set; }
-        public IEnumerable<Feat> Feats { get; set; }
-        public Dictionary<String, Stat> Stats { get; set; }
-
+        public Ability Ability { get; set; }
         public Equipment Equipment { get; set; }
-
-        public Dictionary<Int32, IEnumerable<String>> Spells { get; set; }
-        public Familiar Familiar { get; set; }
+        public Magic Magic { get; set; }
 
         public Character()
         {
@@ -37,16 +27,10 @@ namespace NPCGen.Common
             Class = new CharacterClass();
             Race = new Race();
             InterestingTrait = String.Empty;
-
-            Familiar = new Familiar();
-            Feats = Enumerable.Empty<Feat>();
-            Languages = Enumerable.Empty<String>();
-            Skills = new Dictionary<String, Skill>();
-            Stats = new Dictionary<String, Stat>();
-            Spells = new Dictionary<Int32, IEnumerable<String>>();
-            ArmorClass = new ArmorClass();
-            SavingThrows = new SavingThrows();
+            Combat = new Combat();
+            Ability = new Ability();
             Equipment = new Equipment();
+            Magic = new Magic();
         }
     }
 }
