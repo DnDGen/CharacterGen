@@ -1,6 +1,10 @@
 ﻿using Ninject.Modules;
 using NPCGen.Generators;
+using NPCGen.Generators.Abilities;
+using NPCGen.Generators.Combats;
 using NPCGen.Generators.Interfaces;
+using NPCGen.Generators.Interfaces.Abilities;
+using NPCGen.Generators.Interfaces.Combats;
 using NPCGen.Generators.Interfaces.Randomizers.Alignments;
 using NPCGen.Generators.Interfaces.Randomizers.CharacterClasses;
 using NPCGen.Generators.Interfaces.Randomizers.Races;

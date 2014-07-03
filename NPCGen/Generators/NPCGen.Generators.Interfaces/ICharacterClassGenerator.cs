@@ -6,8 +6,6 @@ namespace NPCGen.Generators.Interfaces
 {
     public interface ICharacterClassGenerator
     {
-        CharacterClassPrototype GeneratePrototypeWith(Alignment alignment, ILevelRandomizer levelRandomizer,
-            IClassNameRandomizer classNameRandomizer);
-        CharacterClass GenerateWith(CharacterClassPrototype prototype);
+        CharacterClass GenerateWith(Alignment alignment, ILevelRandomizer levelRandomizer, IClassNameRandomizer classNameRandomizer);
     }
 }

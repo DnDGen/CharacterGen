@@ -43,16 +43,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abilities\IAbilitiesGenerator.cs" />
+    <Compile Include="Combats\ICombatGenerator.cs" />
     <Compile Include="IAlignmentGenerator.cs" />
-    <Compile Include="IArmorGenerator.cs" />
+    <Compile Include="Items\IArmorGenerator.cs" />
     <Compile Include="ICharacterClassGenerator.cs" />
     <Compile Include="ICharacterGenerator.cs" />
-    <Compile Include="IFeatsGenerator.cs" />
-    <Compile Include="IHitPointsGenerator.cs" />
-    <Compile Include="ILanguageGenerator.cs" />
+    <Compile Include="Abilities\IFeatsGenerator.cs" />
+    <Compile Include="Combats\IHitPointsGenerator.cs" />
+    <Compile Include="Abilities\ILanguageGenerator.cs" />
     <Compile Include="IRaceGenerator.cs" />
-    <Compile Include="ISkillsGenerator.cs" />
-    <Compile Include="IStatsGenerator.cs" />
+    <Compile Include="Abilities\ISkillsGenerator.cs" />
+    <Compile Include="Abilities\IStatsGenerator.cs" />
     <Compile Include="Randomizers\Alignments\AlignmentRandomizerTypeConstants.cs" />
     <Compile Include="Randomizers\Alignments\IAlignmentRandomizer.cs" />
     <Compile Include="Randomizers\CharacterClasses\ClassNameRandomizerTypeConstants.cs" />

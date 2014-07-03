@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using D20Dice;
-using NPCGen.Common;
+using NPCGen.Common.Abilities.Stats;
 using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Races;
-using NPCGen.Common.Abilities;
-using NPCGen.Generators.Interfaces;
+using NPCGen.Generators.Interfaces.Abilities;
 using NPCGen.Generators.Interfaces.Randomizers.Stats;
 using NPCGen.Selectors.Interfaces;
 
-namespace NPCGen.Generators
+namespace NPCGen.Generators.Abilities
 {
     public class StatsGenerator : IStatsGenerator
     {

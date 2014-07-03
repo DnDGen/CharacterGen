@@ -21,13 +21,13 @@ namespace NPCGen.Generators.Randomizers.Races.Metaraces
             this.adjustmentsSelector = adjustmentsSelector;
         }
 
-        public String Randomize(String goodness, CharacterClassPrototype prototype)
+        public String Randomize(String goodness, CharacterClass characterClass)
         {
-            var results = GetAllPossibleResults(goodness, prototype);
+            var results = GetAllPossibleResults(goodness, characterClass);
             if (!results.Any())
                 throw new IncompatibleRandomizersException();
 
-            var tableName = String.Format("{0}{1}Metaraces", goodness, prototype.ClassName);
+            var tableName = String.Format("{0}{1}Metaraces", goodness, characterClass.ClassName);
             var metarace = String.Empty;
 
             do metarace = percentileResultSelector.GetPercentileFrom(tableName);
@@ -36,11 +36,11 @@ namespace NPCGen.Generators.Randomizers.Races.Metaraces
             return metarace;
         }
 
-        public IEnumerable<String> GetAllPossibleResults(String goodness, CharacterClassPrototype prototype)
+        public IEnumerable<String> GetAllPossibleResults(String goodness, CharacterClass characterClass)
         {
-            var tableName = String.Format("{0}{1}Metaraces", goodness, prototype.ClassName);
+            var tableName = String.Format("{0}{1}Metaraces", goodness, characterClass.ClassName);
             var results = percentileResultSelector.GetAllResults(tableName);
-            return results.Where(r => RaceIsAllowed(r, prototype.Level));
+            return results.Where(r => RaceIsAllowed(r, characterClass.Level));
         }
 
         private Boolean RaceIsAllowed(String metarace, Int32 level)

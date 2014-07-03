@@ -94,6 +94,7 @@ namespace NPCGen.Common.Races
             public const String Weretiger = "Weretiger";
             public const String Wererat = "Wererat";
             public const String Werewolf = "Werewolf";
+            public const String None = "";
 
             public static IEnumerable<String> GetMetaraces()
             {

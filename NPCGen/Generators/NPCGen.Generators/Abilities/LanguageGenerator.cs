@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using D20Dice;
-using NPCGen.Common;
+using NPCGen.Common.Abilities;
 using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Races;
-using NPCGen.Generators.Interfaces;
+using NPCGen.Generators.Interfaces.Abilities;
 using NPCGen.Selectors.Interfaces;
 
-namespace NPCGen.Generators
+namespace NPCGen.Generators.Abilities
 {
     public class LanguageGenerator : ILanguageGenerator
     {

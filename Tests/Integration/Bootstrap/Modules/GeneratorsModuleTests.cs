@@ -1,5 +1,7 @@
 ﻿using System;
 using NPCGen.Generators.Interfaces;
+using NPCGen.Generators.Interfaces.Abilities;
+using NPCGen.Generators.Interfaces.Combats;
 using NPCGen.Generators.Interfaces.Randomizers.Alignments;
 using NPCGen.Generators.Interfaces.Randomizers.CharacterClasses;
 using NPCGen.Generators.Interfaces.Randomizers.Races;

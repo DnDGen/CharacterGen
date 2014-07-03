@@ -1,7 +1,7 @@
 ﻿using System;
 using EquipmentGen.Common.Items;
 
-namespace NPCGen.Generators.Interfaces
+namespace NPCGen.Generators.Interfaces.Items
 {
     public interface IArmorGenerator
     {

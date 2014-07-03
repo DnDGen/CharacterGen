@@ -20,9 +20,9 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
         protected override void MakeAssertions()
         {
             var alignment = GetNewAlignment();
-            var prototype = GetNewCharacterClassPrototype(alignment);
+            var characterClass = GetNewCharacterClass(alignment);
 
-            var baseRace = BaseRaceRandomizer.Randomize(alignment.Goodness, prototype);
+            var baseRace = BaseRaceRandomizer.Randomize(alignment.Goodness, characterClass);
             Assert.That(baseRaces, Contains.Item(baseRace));
         }
     }

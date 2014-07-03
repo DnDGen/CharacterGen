@@ -4,8 +4,9 @@ using NPCGen.Common;
 using NPCGen.Common.Alignments;
 using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Races;
-using NPCGen.Common.Abilities;
 using NPCGen.Generators.Interfaces;
+using NPCGen.Generators.Interfaces.Abilities;
+using NPCGen.Generators.Interfaces.Combats;
 using NPCGen.Generators.Interfaces.Randomizers.Alignments;
 using NPCGen.Generators.Interfaces.Randomizers.CharacterClasses;
 using NPCGen.Generators.Interfaces.Randomizers.Races;
@@ -18,26 +19,24 @@ namespace NPCGen.Generators
 {
     public class CharacterGenerator : ICharacterGenerator
     {
-        private ILanguageGenerator languageGenerator;
         private IAlignmentGenerator alignmentGenerator;
         private ICharacterClassGenerator characterClassGenerator;
-        private IStatsGenerator statsGenerator;
-        private IHitPointsGenerator hitPointsGenerator;
         private IRaceGenerator raceGenerator;
         private IAdjustmentsSelector adjustmentsSelector;
         private IRandomizerVerifier randomizerVerifier;
         private IPercentileSelector percentileSelector;
+        private IAbilitiesGenerator abilitiesGenerator;
+        private ICombatGenerator combatGenerator;
 
         public CharacterGenerator(IAlignmentGenerator alignmentGenerator, ICharacterClassGenerator characterClassGenerator, IRaceGenerator raceGenerator,
-            IStatsGenerator statsGenerator, ILanguageGenerator languageGenerator, IHitPointsGenerator hitPointsGenerator, IAdjustmentsSelector adjustmentsSelector,
-            IRandomizerVerifier randomizerVerifier, IPercentileSelector percentileSelector)
+            IAdjustmentsSelector adjustmentsSelector, IRandomizerVerifier randomizerVerifier, IPercentileSelector percentileSelector,
+            IAbilitiesGenerator abilitiesGenerator, ICombatGenerator combatGenerator)
         {
             this.alignmentGenerator = alignmentGenerator;
             this.characterClassGenerator = characterClassGenerator;
             this.raceGenerator = raceGenerator;
-            this.statsGenerator = statsGenerator;
-            this.languageGenerator = languageGenerator;
-            this.hitPointsGenerator = hitPointsGenerator;
+            this.abilitiesGenerator = abilitiesGenerator;
+            this.combatGenerator = combatGenerator;
 
             this.adjustmentsSelector = adjustmentsSelector;
             this.randomizerVerifier = randomizerVerifier;
@@ -52,23 +51,18 @@ namespace NPCGen.Generators
 
             var character = new Character();
 
-            character.Alignment = GenerateAlignment(alignmentRandomizer, classNameRandomizer, levelRandomizer, baseRaceRandomizer,
-                metaraceRandomizer);
-            var characterClassPrototype = GenerateCharacterClassPrototype(classNameRandomizer, levelRandomizer, character.Alignment,
-                baseRaceRandomizer, metaraceRandomizer);
+            character.Alignment = GenerateAlignment(alignmentRandomizer, classNameRandomizer, levelRandomizer, baseRaceRandomizer, metaraceRandomizer);
+            character.Class = GenerateCharacterClass(classNameRandomizer, levelRandomizer, character.Alignment, baseRaceRandomizer, metaraceRandomizer);
 
             var levelAdjustments = adjustmentsSelector.GetAdjustmentsFrom("LevelAdjustments");
-            character.Race = GenerateRace(baseRaceRandomizer, metaraceRandomizer, levelAdjustments, character.Alignment, characterClassPrototype);
+            character.Race = GenerateRace(baseRaceRandomizer, metaraceRandomizer, levelAdjustments, character.Alignment, character.Class);
 
-            characterClassPrototype.Level -= levelAdjustments[character.Race.BaseRace];
-            characterClassPrototype.Level -= levelAdjustments[character.Race.Metarace];
+            character.Class.Level -= levelAdjustments[character.Race.BaseRace];
+            character.Class.Level -= levelAdjustments[character.Race.Metarace];
 
-            character.Class = characterClassGenerator.GenerateWith(characterClassPrototype);
-
-            character.Stats = statsGenerator.GenerateWith(statsRandomizer, character.Class, character.Race);
-            character.HitPoints = hitPointsGenerator.GenerateWith(character.Class, character.Stats[StatConstants.Constitution].Bonus, character.Race);
+            character.Ability = abilitiesGenerator.GenerateWith(character.Class, character.Race, statsRandomizer);
+            character.Combat = combatGenerator.GenerateWith(character.Class, character.Ability.Feats, character.Ability.Stats);
             character.InterestingTrait = percentileSelector.GetPercentileFrom("Traits");
-            character.Languages = languageGenerator.GenerateWith(character.Race, character.Class.ClassName, character.Stats[StatConstants.Intelligence].Bonus);
 
             return character;
         }
@@ -95,23 +89,24 @@ namespace NPCGen.Generators
             return alignment;
         }
 
-        private CharacterClassPrototype GenerateCharacterClassPrototype(IClassNameRandomizer classNameRandomizer, ILevelRandomizer levelRandomizer,
+        private CharacterClass GenerateCharacterClass(IClassNameRandomizer classNameRandomizer, ILevelRandomizer levelRandomizer,
             Alignment alignment, IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer)
         {
-            CharacterClassPrototype prototype;
+            CharacterClass characterClass;
 
-            do prototype = characterClassGenerator.GeneratePrototypeWith(alignment, levelRandomizer, classNameRandomizer);
-            while (!randomizerVerifier.VerifyCharacterClassCompatibility(alignment.Goodness, prototype, baseRaceRandomizer, metaraceRandomizer));
+            do characterClass = characterClassGenerator.GenerateWith(alignment, levelRandomizer, classNameRandomizer);
+            while (!randomizerVerifier.VerifyCharacterClassCompatibility(alignment.Goodness, characterClass, baseRaceRandomizer, metaraceRandomizer));
 
-            return prototype;
+            return characterClass;
         }
 
-        private Race GenerateRace(IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer, Dictionary<String, Int32> levelAdjustments, Alignment alignment, CharacterClassPrototype prototype)
+        private Race GenerateRace(IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer, Dictionary<String, Int32> levelAdjustments,
+            Alignment alignment, CharacterClass characterClass)
         {
             Race race;
 
-            do race = raceGenerator.GenerateWith(alignment.Goodness, prototype, baseRaceRandomizer, metaraceRandomizer);
-            while (levelAdjustments[race.BaseRace] + levelAdjustments[race.Metarace] >= prototype.Level);
+            do race = raceGenerator.GenerateWith(alignment.Goodness, characterClass, baseRaceRandomizer, metaraceRandomizer);
+            while (levelAdjustments[race.BaseRace] + levelAdjustments[race.Metarace] >= characterClass.Level);
 
             return race;
         }

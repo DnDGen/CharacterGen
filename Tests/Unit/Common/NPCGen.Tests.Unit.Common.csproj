@@ -58,10 +58,12 @@
     <Compile Include="Classes\CharacterClassConstantsTests.cs" />
     <Compile Include="Classes\CharacterClassTests.cs" />
     <Compile Include="Combats\CombatTests.cs" />
+    <Compile Include="Items\EquipmentTests.cs" />
     <Compile Include="Magics\FamiliarTests.cs" />
     <Compile Include="Abilities\Feats\FeatTests.cs" />
     <Compile Include="Items\WeaponAttributeConstantsTests.cs" />
     <Compile Include="Abilities\LanguageConstantsTests.cs" />
+    <Compile Include="Magics\MagicTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Races\RaceConstantsTests.cs" />
     <Compile Include="Races\RaceTests.cs" />

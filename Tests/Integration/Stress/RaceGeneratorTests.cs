@@ -10,10 +10,9 @@ namespace NPCGen.Tests.Integration.Stress
         protected override void MakeAssertions()
         {
             var alignment = GetNewAlignment();
-            var prototype = GetNewCharacterClassPrototype(alignment);
+            var characterClass = GetNewCharacterClass(alignment);
 
-            var race = RaceGenerator.GenerateWith(alignment.Goodness, prototype, BaseRaceRandomizer,
-                MetaraceRandomizer);
+            var race = RaceGenerator.GenerateWith(alignment.Goodness, characterClass, BaseRaceRandomizer, MetaraceRandomizer);
             Assert.That(race.BaseRace, Is.Not.Empty);
             Assert.That(race.Metarace, Is.Not.Null);
         }
@@ -26,8 +25,9 @@ namespace NPCGen.Tests.Integration.Stress
             do
             {
                 var alignment = GetNewAlignment();
-                var prototype = GetNewCharacterClassPrototype(alignment);
-                race = RaceGenerator.GenerateWith(alignment.Goodness, prototype, BaseRaceRandomizer, MetaraceRandomizer);
+                var characterClass = GetNewCharacterClass(alignment);
+
+                race = RaceGenerator.GenerateWith(alignment.Goodness, characterClass, BaseRaceRandomizer, MetaraceRandomizer);
             } while (TestShouldKeepRunning() && String.IsNullOrEmpty(race.Metarace));
 
             Assert.That(race.Metarace, Is.Not.Empty);
@@ -42,8 +42,9 @@ namespace NPCGen.Tests.Integration.Stress
             do
             {
                 var alignment = GetNewAlignment();
-                var prototype = GetNewCharacterClassPrototype(alignment);
-                race = RaceGenerator.GenerateWith(alignment.Goodness, prototype, BaseRaceRandomizer, MetaraceRandomizer);
+                var characterClass = GetNewCharacterClass(alignment);
+
+                race = RaceGenerator.GenerateWith(alignment.Goodness, characterClass, BaseRaceRandomizer, MetaraceRandomizer);
             } while (TestShouldKeepRunning() && !String.IsNullOrEmpty(race.Metarace));
 
             Assert.That(race.Metarace, Is.Empty);

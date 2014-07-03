@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using NPCGen.Common;
+using NPCGen.Common.Abilities;
 using NPCGen.Common.Races;
 using NUnit.Framework;
 
@@ -219,7 +219,7 @@ namespace NPCGen.Tests.Integration.Tables
             LanguageConstants.Goblin,
             LanguageConstants.Giant,
             LanguageConstants.Orc)]
-        [TestCase("")]
+        [TestCase(RaceConstants.Metaraces.None)]
         [TestCase(RaceConstants.Metaraces.HalfCelestial)]
         [TestCase(RaceConstants.Metaraces.HalfDragon)]
         [TestCase(RaceConstants.Metaraces.HalfFiend)]
@@ -236,7 +236,7 @@ namespace NPCGen.Tests.Integration.Tables
         [TestCase(RaceConstants.BaseRaces.HalfElf)]
         [TestCase(RaceConstants.BaseRaces.Human)]
         [TestCase(RaceConstants.BaseRaces.MindFlayer)]
-        public void AllLanguagesAreBonusLanguages(String name)
+        public void AllLanguagesExceptDruidicAreBonusLanguages(String name)
         {
             var allLanguages = LanguageConstants.GetLanguages();
             var bonusLanguages = allLanguages.Except(new[] { LanguageConstants.Druidic });

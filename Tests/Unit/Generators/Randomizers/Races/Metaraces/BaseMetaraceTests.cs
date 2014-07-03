@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Moq;
 using NPCGen.Common.CharacterClasses;
+using NPCGen.Common.Races;
 using NPCGen.Generators.Interfaces.Verifiers.Exceptions;
 using NPCGen.Generators.Randomizers.Races.Metaraces;
 using NPCGen.Selectors.Interfaces;
@@ -19,13 +20,13 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
 
         private String firstMetarace = "first metarace";
         private String secondMetarace = "second metarace";
-        private CharacterClassPrototype prototype;
+        private CharacterClass characterClass;
         private Dictionary<String, Int32> adjustments;
 
         [SetUp]
         public void Setup()
         {
-            var metaraces = new[] { firstMetarace, secondMetarace, String.Empty };
+            var metaraces = new[] { firstMetarace, secondMetarace, RaceConstants.Metaraces.None };
             mockPercentileResultSelector = new Mock<IPercentileSelector>();
             mockPercentileResultSelector.Setup(p => p.GetAllResults(It.IsAny<String>())).Returns(metaraces);
             mockPercentileResultSelector.Setup(p => p.GetPercentileFrom(It.IsAny<String>())).Returns(firstMetarace);
@@ -37,8 +38,8 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
             mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
             mockAdjustmentsSelector.Setup(p => p.GetAdjustmentsFrom("LevelAdjustments")).Returns(adjustments);
 
-            prototype = new CharacterClassPrototype();
-            prototype.Level = 1;
+            characterClass = new CharacterClass();
+            characterClass.Level = 1;
 
             randomizer = new TestMetaraceRandomizer(mockPercentileResultSelector.Object, mockAdjustmentsSelector.Object);
         }
@@ -46,7 +47,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         [Test]
         public void RandomizeGetsAllPossibleResultsFromPercentileResultSelector()
         {
-            randomizer.Randomize(String.Empty, prototype);
+            randomizer.Randomize(String.Empty, characterClass);
             mockPercentileResultSelector.Verify(p => p.GetAllResults(It.IsAny<String>()), Times.Once);
         }
 
@@ -54,21 +55,21 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         public void RandomizeThrowsErrorIfNoPossibleResults()
         {
             mockPercentileResultSelector.Setup(p => p.GetAllResults(It.IsAny<String>())).Returns(Enumerable.Empty<String>());
-            Assert.That(() => randomizer.Randomize(String.Empty, prototype), Throws.InstanceOf<IncompatibleRandomizersException>());
+            Assert.That(() => randomizer.Randomize(String.Empty, characterClass), Throws.InstanceOf<IncompatibleRandomizersException>());
         }
 
         [Test]
         public void RandomizeReturnsMetaraceFromPercentileResultSelector()
         {
-            var result = randomizer.Randomize(String.Empty, prototype);
+            var result = randomizer.Randomize(String.Empty, characterClass);
             Assert.That(result, Is.EqualTo(firstMetarace));
         }
 
         [Test]
         public void RandomizeAccessesTableAlignmentGoodnessClassNameMetaraces()
         {
-            prototype.ClassName = "className";
-            randomizer.Randomize("goodness", prototype);
+            characterClass.ClassName = "className";
+            randomizer.Randomize("goodness", characterClass);
             mockPercentileResultSelector.Verify(p => p.GetPercentileFrom("goodnessclassNameMetaraces"), Times.Once);
         }
 
@@ -78,21 +79,21 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
             mockPercentileResultSelector.SetupSequence(p => p.GetPercentileFrom(It.IsAny<String>())).Returns("invalid metarace")
                 .Returns(firstMetarace);
 
-            randomizer.Randomize(String.Empty, prototype);
+            randomizer.Randomize(String.Empty, characterClass);
             mockPercentileResultSelector.Verify(p => p.GetPercentileFrom(It.IsAny<String>()), Times.Exactly(2));
         }
 
         [Test]
         public void GetAllPossibleResultsGetsResultsFromSelector()
         {
-            randomizer.GetAllPossibleResults(String.Empty, prototype);
+            randomizer.GetAllPossibleResults(String.Empty, characterClass);
             mockPercentileResultSelector.Verify(p => p.GetAllResults(It.IsAny<String>()), Times.Once);
         }
 
         [Test]
         public void GetAllPossibleResultsGetsNonEmptyResults()
         {
-            var classNames = randomizer.GetAllPossibleResults(String.Empty, prototype);
+            var classNames = randomizer.GetAllPossibleResults(String.Empty, characterClass);
 
             Assert.That(classNames, Contains.Item(firstMetarace));
             Assert.That(classNames, Contains.Item(secondMetarace));
@@ -101,8 +102,8 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         [Test]
         public void GetAllPossibleResultsAccessesTableAlignmentGoodnessClassNameBaseRaces()
         {
-            prototype.ClassName = "className";
-            randomizer.GetAllPossibleResults("goodness", prototype);
+            characterClass.ClassName = "className";
+            randomizer.GetAllPossibleResults("goodness", characterClass);
             mockPercentileResultSelector.Verify(p => p.GetAllResults("goodnessclassNameMetaraces"), Times.Once);
         }
 
@@ -110,7 +111,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         public void GetAllPossibleResultsFiltersOutUnallowedBaseRaces()
         {
             randomizer.NotAllowedMetarace = firstMetarace;
-            var results = randomizer.GetAllPossibleResults(String.Empty, prototype);
+            var results = randomizer.GetAllPossibleResults(String.Empty, characterClass);
 
             Assert.That(results, Contains.Item(secondMetarace));
             Assert.That(results, Is.Not.Contains(firstMetarace));
@@ -121,7 +122,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         {
             randomizer.AllowNoMetarace = true;
 
-            var results = randomizer.GetAllPossibleResults(String.Empty, prototype);
+            var results = randomizer.GetAllPossibleResults(String.Empty, characterClass);
             Assert.That(results, Contains.Item(String.Empty));
         }
 
@@ -130,7 +131,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         {
             randomizer.AllowNoMetarace = false;
 
-            var results = randomizer.GetAllPossibleResults(String.Empty, prototype);
+            var results = randomizer.GetAllPossibleResults(String.Empty, characterClass);
             Assert.That(results, Is.Not.Contains(String.Empty));
         }
 
@@ -139,7 +140,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         {
             adjustments[firstMetarace] = 1;
 
-            var results = randomizer.GetAllPossibleResults(String.Empty, prototype);
+            var results = randomizer.GetAllPossibleResults(String.Empty, characterClass);
             Assert.That(results, Contains.Item(secondMetarace));
             Assert.That(results, Is.Not.Contains(firstMetarace));
         }

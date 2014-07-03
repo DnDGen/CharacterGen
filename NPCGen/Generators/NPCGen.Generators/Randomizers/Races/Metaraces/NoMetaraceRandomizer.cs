@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using NPCGen.Common.CharacterClasses;
+using NPCGen.Common.Races;
 using NPCGen.Generators.Interfaces.Randomizers.Races;
 
 namespace NPCGen.Generators.Randomizers.Races.Metaraces
 {
     public class NoMetaraceRandomizer : IMetaraceRandomizer
     {
-        public String Randomize(String goodnessString, CharacterClassPrototype prototype)
+        public String Randomize(String goodnessString, CharacterClass characterClass)
         {
-            return String.Empty;
+            return RaceConstants.Metaraces.None;
         }
 
-        public IEnumerable<String> GetAllPossibleResults(String goodness, CharacterClassPrototype prototype)
+        public IEnumerable<String> GetAllPossibleResults(String goodness, CharacterClass characterClass)
         {
-            return new[] { String.Empty };
+            return new[] { RaceConstants.Metaraces.None };
         }
     }
 }

@@ -20,9 +20,9 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
         protected override void MakeAssertions()
         {
             var alignment = GetNewAlignment();
-            var prototype = GetNewCharacterClassPrototype(alignment);
+            var characterClass = GetNewCharacterClass(alignment);
 
-            var metarace = MetaraceRandomizer.Randomize(alignment.Goodness, prototype);
+            var metarace = MetaraceRandomizer.Randomize(alignment.Goodness, characterClass);
             Assert.That(metaraces, Contains.Item(metarace), testType);
         }
     }

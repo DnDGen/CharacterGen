@@ -3,11 +3,11 @@ using D20Dice;
 using Moq;
 using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Races;
-using NPCGen.Generators;
-using NPCGen.Generators.Interfaces;
+using NPCGen.Generators.Combats;
+using NPCGen.Generators.Interfaces.Combats;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Generators
+namespace NPCGen.Tests.Unit.Generators.Combats
 {
     [TestFixture]
     public class HitPointsGeneratorTests
@@ -206,7 +206,7 @@ namespace NPCGen.Tests.Unit.Generators
         [TestCase(RaceConstants.Metaraces.Wererat)]
         [TestCase(RaceConstants.Metaraces.Weretiger)]
         [TestCase(RaceConstants.Metaraces.Werewolf)]
-        [TestCase("")]
+        [TestCase(RaceConstants.Metaraces.None)]
         public void MetaraceDoesNotIncreaseHitDice(String metarace)
         {
             race.Metarace = metarace;

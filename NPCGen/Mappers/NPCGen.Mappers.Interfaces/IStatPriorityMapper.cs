@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using NPCGen.Common;
+using NPCGen.Common.Abilities.Stats;
 
 namespace NPCGen.Mappers.Interfaces
 {

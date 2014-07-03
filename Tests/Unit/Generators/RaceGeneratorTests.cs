@@ -17,7 +17,7 @@ namespace NPCGen.Tests.Unit.Generators
         private Mock<IMetaraceRandomizer> mockMetaraceRandomizer;
         private Mock<IDice> mockDice;
         private IRaceGenerator raceGenerator;
-        private CharacterClassPrototype prototype;
+        private CharacterClass characterClass;
 
         [SetUp]
         public void Setup()
@@ -27,24 +27,24 @@ namespace NPCGen.Tests.Unit.Generators
 
             mockBaseRaceRandomizer = new Mock<IBaseRaceRandomizer>();
             mockMetaraceRandomizer = new Mock<IMetaraceRandomizer>();
-            prototype = new CharacterClassPrototype();
+            characterClass = new CharacterClass();
         }
 
         [Test]
         public void RandomizeBaseRace()
         {
-            mockBaseRaceRandomizer.Setup(r => r.Randomize("goodness", prototype)).Returns("base race");
+            mockBaseRaceRandomizer.Setup(r => r.Randomize("goodness", characterClass)).Returns("base race");
 
-            var race = raceGenerator.GenerateWith("goodness", prototype, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
+            var race = raceGenerator.GenerateWith("goodness", characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
             Assert.That(race.BaseRace, Is.EqualTo("base race"));
         }
 
         [Test]
         public void RandomizeMetarace()
         {
-            mockMetaraceRandomizer.Setup(r => r.Randomize("goodness", prototype)).Returns("metarace");
+            mockMetaraceRandomizer.Setup(r => r.Randomize("goodness", characterClass)).Returns("metarace");
 
-            var race = raceGenerator.GenerateWith("goodness", prototype, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
+            var race = raceGenerator.GenerateWith("goodness", characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
             Assert.That(race.Metarace, Is.EqualTo("metarace"));
         }
 
@@ -53,7 +53,7 @@ namespace NPCGen.Tests.Unit.Generators
         {
             mockDice.Setup(d => d.d2(1)).Returns(1);
 
-            var race = raceGenerator.GenerateWith(String.Empty, prototype, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
+            var race = raceGenerator.GenerateWith(String.Empty, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
             Assert.That(race.Male, Is.True);
         }
 
@@ -62,17 +62,17 @@ namespace NPCGen.Tests.Unit.Generators
         {
             mockDice.Setup(d => d.d2(1)).Returns(2);
 
-            var race = raceGenerator.GenerateWith(String.Empty, prototype, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
+            var race = raceGenerator.GenerateWith(String.Empty, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
             Assert.That(race.Male, Is.False);
         }
 
         [Test]
         public void RaceGeneratorReturnsMaleForDrowWizard()
         {
-            prototype.ClassName = CharacterClassConstants.Wizard;
-            mockBaseRaceRandomizer.Setup(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>())).Returns(RaceConstants.BaseRaces.Drow);
+            characterClass.ClassName = CharacterClassConstants.Wizard;
+            mockBaseRaceRandomizer.Setup(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClass>())).Returns(RaceConstants.BaseRaces.Drow);
 
-            var race = raceGenerator.GenerateWith(String.Empty, prototype, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
+            var race = raceGenerator.GenerateWith(String.Empty, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
             mockDice.Verify(d => d.d2(1), Times.Never);
             Assert.That(race.Male, Is.True);
         }
@@ -80,10 +80,10 @@ namespace NPCGen.Tests.Unit.Generators
         [Test]
         public void RaceGeneratorReturnsFemaleForDrowCleric()
         {
-            prototype.ClassName = CharacterClassConstants.Cleric;
-            mockBaseRaceRandomizer.Setup(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>())).Returns(RaceConstants.BaseRaces.Drow);
+            characterClass.ClassName = CharacterClassConstants.Cleric;
+            mockBaseRaceRandomizer.Setup(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClass>())).Returns(RaceConstants.BaseRaces.Drow);
 
-            var race = raceGenerator.GenerateWith(String.Empty, prototype, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
+            var race = raceGenerator.GenerateWith(String.Empty, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
             mockDice.Verify(d => d.d2(1), Times.Never);
             Assert.That(race.Male, Is.False);
         }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using NPCGen.Common.Races;
 
-namespace NPCGen.Generators.Interfaces
+namespace NPCGen.Generators.Interfaces.Abilities
 {
     public interface ILanguageGenerator
     {

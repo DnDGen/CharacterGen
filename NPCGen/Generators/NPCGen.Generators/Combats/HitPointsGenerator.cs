@@ -3,8 +3,9 @@ using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Races;
 using NPCGen.Generators.Interfaces;
 using System;
+using NPCGen.Generators.Interfaces.Combats;
 
-namespace NPCGen.Generators
+namespace NPCGen.Generators.Combats
 {
     public class HitPointsGenerator : IHitPointsGenerator
     {

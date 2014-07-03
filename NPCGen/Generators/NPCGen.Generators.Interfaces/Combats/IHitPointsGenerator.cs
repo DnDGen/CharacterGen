@@ -2,7 +2,7 @@
 using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Races;
 
-namespace NPCGen.Generators.Interfaces
+namespace NPCGen.Generators.Interfaces.Combats
 {
     public interface IHitPointsGenerator
     {

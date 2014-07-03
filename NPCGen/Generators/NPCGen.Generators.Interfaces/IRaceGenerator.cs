@@ -7,6 +7,6 @@ namespace NPCGen.Generators.Interfaces
 {
     public interface IRaceGenerator
     {
-        Race GenerateWith(String goodnessString, CharacterClassPrototype prototype, IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer);
+        Race GenerateWith(String goodnessString, CharacterClass characterClass, IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer);
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Moq;
-using NPCGen.Common;
+using NPCGen.Common.Abilities.Stats;
 using NPCGen.Mappers.Interfaces;
 using NPCGen.Selectors;
 using NPCGen.Selectors.Interfaces;
@@ -22,7 +22,7 @@ namespace NPCGen.Tests.Unit.Selectors
             mockStatPriorityMapper = new Mock<IStatPriorityMapper>();
             statPrioritySelector = new StatPrioritySelector(mockStatPriorityMapper.Object);
 
-            priorities.Add("class name", new StatPriority() { FirstPriority = "first priority", SecondPriority = "second priority" });
+            priorities.Add("class name", new StatPriority { FirstPriority = "first priority", SecondPriority = "second priority" });
             mockStatPriorityMapper.Setup(p => p.Map(It.IsAny<String>())).Returns(priorities);
         }
 

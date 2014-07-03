@@ -1,10 +1,10 @@
 ﻿using Ninject;
-using NPCGen.Common.Abilities;
-using NPCGen.Generators.Interfaces;
+using NPCGen.Common.Abilities.Stats;
+using NPCGen.Generators.Interfaces.Abilities;
 using NPCGen.Generators.Interfaces.Randomizers.Stats;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Integration.Stress
+namespace NPCGen.Tests.Integration.Stress.Abilities
 {
     [TestFixture]
     public class LanguageGeneratorTests : StressTests
@@ -19,9 +19,8 @@ namespace NPCGen.Tests.Integration.Stress
         protected override void MakeAssertions()
         {
             var alignment = GetNewAlignment();
-            var prototype = GetNewCharacterClassPrototype(alignment);
-            var characterClass = GetNewCharacterClass(prototype);
-            var race = GetNewRace(alignment, prototype);
+            var characterClass = GetNewCharacterClass(alignment);
+            var race = GetNewRace(alignment, characterClass);
             var stats = StatsGenerator.GenerateWith(StatsRandomizer, characterClass, race);
 
             var languages = LanguageGenerator.GenerateWith(race, characterClass.ClassName, stats[StatConstants.Intelligence].Bonus);

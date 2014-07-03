@@ -17,7 +17,10 @@ namespace NPCGen.Tests.Unit.Common.Combats
         [Test]
         public void CombatInitialized()
         {
-            Assert.Fail();
+            Assert.That(combat.ArmorClass, Is.Not.Null);
+            Assert.That(combat.BaseAttack, Is.Not.Null);
+            Assert.That(combat.HitPoints, Is.EqualTo(0));
+            Assert.That(combat.SavingThrows, Is.Not.Null);
         }
     }
 }

@@ -65,8 +65,8 @@
     <Compile Include="CharacterClassGeneratorTests.cs" />
     <Compile Include="CharacterGeneratorTests.cs" />
     <Compile Include="AlignmentGeneratorTests.cs" />
-    <Compile Include="HitPointsGeneratorTests.cs" />
-    <Compile Include="LanguageGeneratorTests.cs" />
+    <Compile Include="Combats\HitPointsGeneratorTests.cs" />
+    <Compile Include="Abilities\LanguageGeneratorTests.cs" />
     <Compile Include="RaceGeneratorTests.cs" />
     <Compile Include="Randomizers\CharacterClasses\ClassNames\ClassNameRandomizerTests.cs" />
     <Compile Include="Randomizers\Races\BaseRaces\BaseRaceRandomizerTests.cs" />
@@ -80,7 +80,7 @@
     <Compile Include="Randomizers\Races\Metaraces\NonEvilForcedMetaraceRandomizerTests.cs" />
     <Compile Include="Randomizers\Races\Metaraces\NonGoodForcedMetaraceRandomizerTests.cs" />
     <Compile Include="Randomizers\Races\Metaraces\NonNeutralForcedMetaraceRandomizerTests.cs" />
-    <Compile Include="StatsGeneratorTests.cs" />
+    <Compile Include="Abilities\StatsGeneratorTests.cs" />
     <Compile Include="Randomizers\Alignments\AnyAlignmentRandomizerTests.cs" />
     <Compile Include="Randomizers\Alignments\ChaoticAlignmentRandomizerTests.cs" />
     <Compile Include="Randomizers\Alignments\EvilAlignmentRandomizerTests.cs" />
@@ -163,6 +163,10 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Items\" />
+    <Folder Include="Magics\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

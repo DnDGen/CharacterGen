@@ -13,7 +13,7 @@ namespace NPCGen.Generators.Interfaces.Verifiers
             ILevelRandomizer levelRandomizer, IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer);
         Boolean VerifyAlignmentCompatibility(Alignment alignment, IClassNameRandomizer classNameRandomizer, ILevelRandomizer levelRandomizer,
             IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer);
-        Boolean VerifyCharacterClassCompatibility(String goodness, CharacterClassPrototype prototype, IBaseRaceRandomizer baseRaceRandomizer,
+        Boolean VerifyCharacterClassCompatibility(String goodness, CharacterClass characterClass, IBaseRaceRandomizer baseRaceRandomizer,
             IMetaraceRandomizer metaraceRandomizer);
     }
 }

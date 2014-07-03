@@ -50,6 +50,7 @@ namespace NPCGen.Tests.Unit.Common.Races
         [TestCase(RaceConstants.Metaraces.Wererat, "Wererat")]
         [TestCase(RaceConstants.Metaraces.Weretiger, "Weretiger")]
         [TestCase(RaceConstants.Metaraces.Werewolf, "Werewolf")]
+        [TestCase(RaceConstants.Metaraces.None, "")]
         public void Constant(String constant, String value)
         {
             Assert.That(constant, Is.EqualTo(value));

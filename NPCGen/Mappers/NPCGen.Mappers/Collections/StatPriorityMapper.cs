@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using NPCGen.Common;
+using NPCGen.Common.Abilities.Stats;
 using NPCGen.Mappers.Interfaces;
 
 namespace NPCGen.Mappers.Collections

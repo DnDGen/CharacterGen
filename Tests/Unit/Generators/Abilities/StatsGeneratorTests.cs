@@ -2,17 +2,16 @@
 using System.Collections.Generic;
 using D20Dice;
 using Moq;
-using NPCGen.Common;
+using NPCGen.Common.Abilities.Stats;
 using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Races;
-using NPCGen.Common.Abilities;
-using NPCGen.Generators;
-using NPCGen.Generators.Interfaces;
+using NPCGen.Generators.Abilities;
+using NPCGen.Generators.Interfaces.Abilities;
 using NPCGen.Generators.Interfaces.Randomizers.Stats;
 using NPCGen.Selectors.Interfaces;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Generators
+namespace NPCGen.Tests.Unit.Generators.Abilities
 {
     [TestFixture]
     public class StatsGeneratorTests
@@ -56,9 +55,9 @@ namespace NPCGen.Tests.Unit.Generators
                 mockStatAdjustmentsSelector.Object);
 
             randomizedStats = new Dictionary<String, Stat>();
-            randomizedStats.Add(statPriority.FirstPriority, new Stat() { Value = baseStat });
-            randomizedStats.Add(statPriority.SecondPriority, new Stat() { Value = baseStat });
-            randomizedStats.Add("other stat", new Stat() { Value = baseStat });
+            randomizedStats.Add(statPriority.FirstPriority, new Stat { Value = baseStat });
+            randomizedStats.Add(statPriority.SecondPriority, new Stat { Value = baseStat });
+            randomizedStats.Add("other stat", new Stat { Value = baseStat });
             mockStatRandomizer = new Mock<IStatsRandomizer>();
             mockStatRandomizer.Setup(r => r.Randomize()).Returns(randomizedStats);
 

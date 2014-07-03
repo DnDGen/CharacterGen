@@ -16,13 +16,13 @@ namespace NPCGen.Generators
             this.dice = dice;
         }
 
-        public Race GenerateWith(String goodnessString, CharacterClassPrototype prototype, IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer)
+        public Race GenerateWith(String goodnessString, CharacterClass characterClass, IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer)
         {
             var race = new Race();
 
-            race.BaseRace = baseRaceRandomizer.Randomize(goodnessString, prototype);
-            race.Metarace = metaraceRandomizer.Randomize(goodnessString, prototype);
-            race.Male = DetermineIfMale(race.BaseRace, prototype.ClassName);
+            race.BaseRace = baseRaceRandomizer.Randomize(goodnessString, characterClass);
+            race.Metarace = metaraceRandomizer.Randomize(goodnessString, characterClass);
+            race.Male = DetermineIfMale(race.BaseRace, characterClass.ClassName);
 
             return race;
         }

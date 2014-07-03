@@ -2,15 +2,15 @@
 using System.Linq;
 using D20Dice;
 using Moq;
-using NPCGen.Common;
+using NPCGen.Common.Abilities;
 using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Races;
-using NPCGen.Generators;
-using NPCGen.Generators.Interfaces;
+using NPCGen.Generators.Abilities;
+using NPCGen.Generators.Interfaces.Abilities;
 using NPCGen.Selectors.Interfaces;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Generators
+namespace NPCGen.Tests.Unit.Generators.Abilities
 {
     [TestFixture]
     public class LanguageGeneratorTests

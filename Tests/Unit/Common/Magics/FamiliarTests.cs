@@ -1,4 +1,4 @@
-﻿using NPCGen.Common;
+﻿using NPCGen.Common.Magics;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Unit.Common

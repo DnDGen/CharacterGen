@@ -4,11 +4,11 @@ using System.Linq;
 using EquipmentGen.Common.Items;
 using Ninject;
 using NPCGen.Common;
+using NPCGen.Common.Abilities.Stats;
 using NPCGen.Common.Alignments;
 using NPCGen.Common.CharacterClasses;
-using NPCGen.Common.Equipment;
+using NPCGen.Common.Items;
 using NPCGen.Common.Races;
-using NPCGen.Common.Abilities;
 using NPCGen.Generators.Interfaces;
 using NPCGen.Generators.Interfaces.Randomizers.Stats;
 using NUnit.Framework;
@@ -48,53 +48,54 @@ namespace NPCGen.Tests.Integration.Stress
             Assert.That(lawfulnesses, Contains.Item(character.Alignment.Lawfulness));
             Assert.That(classNames, Contains.Item(character.Class.ClassName));
             Assert.That(character.Class.Level, Is.Positive);
-            Assert.That(character.Class.BaseAttack.Bonus, Is.Not.Negative);
-            Assert.That(character.HitPoints, Is.AtLeast(character.Class.Level));
             Assert.That(character.InterestingTrait, Is.Not.Null);
-            Assert.That(character.Languages, Is.Not.Empty);
             Assert.That(baseRaces, Contains.Item(character.Race.BaseRace));
             Assert.That(metaraces, Contains.Item(character.Race.Metarace));
 
-            Assert.That(character.Stats.Count, Is.EqualTo(6));
-            Assert.That(character.Stats.Keys, Contains.Item(StatConstants.Charisma));
-            Assert.That(character.Stats.Keys, Contains.Item(StatConstants.Constitution));
-            Assert.That(character.Stats.Keys, Contains.Item(StatConstants.Dexterity));
-            Assert.That(character.Stats.Keys, Contains.Item(StatConstants.Intelligence));
-            Assert.That(character.Stats.Keys, Contains.Item(StatConstants.Strength));
-            Assert.That(character.Stats.Keys, Contains.Item(StatConstants.Wisdom));
-            Assert.That(character.Stats[StatConstants.Charisma].Value, Is.Positive);
-            Assert.That(character.Stats[StatConstants.Constitution].Value, Is.Positive);
-            Assert.That(character.Stats[StatConstants.Dexterity].Value, Is.Positive);
-            Assert.That(character.Stats[StatConstants.Intelligence].Value, Is.Positive);
-            Assert.That(character.Stats[StatConstants.Strength].Value, Is.Positive);
-            Assert.That(character.Stats[StatConstants.Wisdom].Value, Is.Positive);
+            Assert.That(character.Ability.Stats.Count, Is.EqualTo(6));
+            Assert.That(character.Ability.Stats.Keys, Contains.Item(StatConstants.Charisma));
+            Assert.That(character.Ability.Stats.Keys, Contains.Item(StatConstants.Constitution));
+            Assert.That(character.Ability.Stats.Keys, Contains.Item(StatConstants.Dexterity));
+            Assert.That(character.Ability.Stats.Keys, Contains.Item(StatConstants.Intelligence));
+            Assert.That(character.Ability.Stats.Keys, Contains.Item(StatConstants.Strength));
+            Assert.That(character.Ability.Stats.Keys, Contains.Item(StatConstants.Wisdom));
+            Assert.That(character.Ability.Stats[StatConstants.Charisma].Value, Is.Positive);
+            Assert.That(character.Ability.Stats[StatConstants.Constitution].Value, Is.Positive);
+            Assert.That(character.Ability.Stats[StatConstants.Dexterity].Value, Is.Positive);
+            Assert.That(character.Ability.Stats[StatConstants.Intelligence].Value, Is.Positive);
+            Assert.That(character.Ability.Stats[StatConstants.Strength].Value, Is.Positive);
+            Assert.That(character.Ability.Stats[StatConstants.Wisdom].Value, Is.Positive);
+            Assert.That(character.Ability.Languages, Is.Not.Empty);
+            Assert.That(character.Ability.Skills, Is.Not.Empty);
+            Assert.That(character.Ability.Feats, Is.Not.Empty);
 
-            Assert.That(character.Skills, Is.Not.Empty);
-            Assert.That(character.Feats, Is.Not.Empty);
-            Assert.That(character.SavingThrows.Reflex, Is.Not.Negative);
-            Assert.That(character.SavingThrows.Fortitude, Is.Not.Negative);
-            Assert.That(character.SavingThrows.Will, Is.Not.Negative);
+            Assert.That(character.Equipment.Armor.ItemType, Is.EqualTo(ItemTypeConstants.Armor));
+            Assert.That(character.Equipment.Armor.Name, Is.Not.Empty);
+            Assert.That(character.Equipment.PrimaryHand.ItemType, Is.EqualTo(ItemTypeConstants.Weapon));
+            Assert.That(character.Equipment.PrimaryHand.Name, Is.Not.Empty);
+            Assert.That(character.Equipment.Treasure, Is.Not.Null);
+            Assert.That(character.Equipment.OffHand, Is.Not.Null);
 
-            Assert.That(character.Armor.ItemType, Is.EqualTo(ItemTypeConstants.Armor));
-            Assert.That(character.Armor.Name, Is.Not.Empty);
-            Assert.That(character.ArmorClass.Full, Is.Positive);
-            Assert.That(character.ArmorClass.FlatFooted, Is.Positive);
-            Assert.That(character.ArmorClass.Touch, Is.Positive);
-            Assert.That(character.PrimaryHand.ItemType, Is.EqualTo(ItemTypeConstants.Weapon));
-            Assert.That(character.PrimaryHand.Name, Is.Not.Empty);
-            Assert.That(character.Familiar, Is.Not.Null);
-            Assert.That(character.Treasure, Is.Not.Null);
-            Assert.That(character.OffHand, Is.Not.Null);
+            if (character.Equipment.OffHand.ItemType == ItemTypeConstants.Armor)
+                Assert.That(character.Equipment.OffHand.Attributes, Contains.Item(AttributeConstants.Shield));
+            else if (character.Equipment.OffHand.ItemType == ItemTypeConstants.Weapon && character.Equipment.OffHand != character.Equipment.PrimaryHand)
+                Assert.That(character.Equipment.OffHand.Attributes, Is.Not.Contains(WeaponAttributeConstants.TwoHanded));
+            else if (character.Equipment.OffHand != character.Equipment.PrimaryHand)
+                Assert.That(character.Equipment.OffHand.Name, Is.Empty);
 
-            if (character.OffHand.ItemType == ItemTypeConstants.Armor)
-                Assert.That(character.OffHand.Attributes, Contains.Item(AttributeConstants.Shield));
-            else if (character.OffHand.ItemType == ItemTypeConstants.Weapon && character.OffHand != character.PrimaryHand)
-                Assert.That(character.OffHand.Attributes, Is.Not.Contains(WeaponAttributeConstants.TwoHanded));
-            else if (character.OffHand != character.PrimaryHand)
-                Assert.That(character.OffHand.Name, Is.Empty);
+            Assert.That(character.Magic.Familiar, Is.Not.Null);
 
-            foreach (var level in character.Spells.Keys)
-                Assert.That(character.Spells[level], Is.Not.Empty, level.ToString());
+            foreach (var level in character.Magic.Spells.Keys)
+                Assert.That(character.Magic.Spells[level], Is.Not.Empty, level.ToString());
+
+            Assert.That(character.Combat.BaseAttack.Bonus, Is.Not.Negative);
+            Assert.That(character.Combat.HitPoints, Is.AtLeast(character.Class.Level));
+            Assert.That(character.Combat.SavingThrows.Reflex, Is.Not.Negative);
+            Assert.That(character.Combat.SavingThrows.Fortitude, Is.Not.Negative);
+            Assert.That(character.Combat.SavingThrows.Will, Is.Not.Negative);
+            Assert.That(character.Combat.ArmorClass.Full, Is.Positive);
+            Assert.That(character.Combat.ArmorClass.FlatFooted, Is.Positive);
+            Assert.That(character.Combat.ArmorClass.Touch, Is.Positive);
         }
 
         [Test]
@@ -104,9 +105,9 @@ namespace NPCGen.Tests.Integration.Stress
 
             do character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
                 MetaraceRandomizer, StatsRandomizer);
-            while (TestShouldKeepRunning() && String.IsNullOrEmpty(character.Familiar.Animal));
+            while (TestShouldKeepRunning() && String.IsNullOrEmpty(character.Magic.Familiar.Animal));
 
-            Assert.That(character.Familiar.Animal, Is.Not.Empty);
+            Assert.That(character.Magic.Familiar.Animal, Is.Not.Empty);
             AssertIterations();
         }
 
@@ -117,9 +118,9 @@ namespace NPCGen.Tests.Integration.Stress
 
             do character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
                 MetaraceRandomizer, StatsRandomizer);
-            while (TestShouldKeepRunning() && !String.IsNullOrEmpty(character.Familiar.Animal));
+            while (TestShouldKeepRunning() && !String.IsNullOrEmpty(character.Magic.Familiar.Animal));
 
-            Assert.That(character.Familiar.Animal, Is.Empty);
+            Assert.That(character.Magic.Familiar.Animal, Is.Empty);
             AssertIterations();
         }
 
@@ -156,12 +157,12 @@ namespace NPCGen.Tests.Integration.Stress
 
             do character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
                 MetaraceRandomizer, StatsRandomizer);
-            while (TestShouldKeepRunning() && (String.IsNullOrEmpty(character.OffHand.Name) || character.OffHand == character.PrimaryHand));
+            while (TestShouldKeepRunning() && (String.IsNullOrEmpty(character.Equipment.OffHand.Name) || character.Equipment.OffHand == character.Equipment.PrimaryHand));
 
-            Assert.That(character.OffHand.Name, Is.Not.Empty);
-            Assert.That(character.OffHand, Is.Not.EqualTo(character.PrimaryHand));
-            Assert.That(character.OffHand.ItemType, Is.EqualTo(ItemTypeConstants.Armor));
-            Assert.That(character.OffHand.Attributes, Contains.Item(AttributeConstants.Shield));
+            Assert.That(character.Equipment.OffHand.Name, Is.Not.Empty);
+            Assert.That(character.Equipment.OffHand, Is.Not.EqualTo(character.Equipment.PrimaryHand));
+            Assert.That(character.Equipment.OffHand.ItemType, Is.EqualTo(ItemTypeConstants.Armor));
+            Assert.That(character.Equipment.OffHand.Attributes, Contains.Item(AttributeConstants.Shield));
             AssertIterations();
         }
 
@@ -172,11 +173,11 @@ namespace NPCGen.Tests.Integration.Stress
 
             do character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
                 MetaraceRandomizer, StatsRandomizer);
-            while (TestShouldKeepRunning() && (String.IsNullOrEmpty(character.OffHand.Name) || character.OffHand == character.PrimaryHand));
+            while (TestShouldKeepRunning() && (String.IsNullOrEmpty(character.Equipment.OffHand.Name) || character.Equipment.OffHand == character.Equipment.PrimaryHand));
 
-            Assert.That(character.OffHand.Name, Is.Not.Empty);
-            Assert.That(character.OffHand, Is.Not.EqualTo(character.PrimaryHand));
-            Assert.That(character.OffHand.ItemType, Is.EqualTo(ItemTypeConstants.Weapon));
+            Assert.That(character.Equipment.OffHand.Name, Is.Not.Empty);
+            Assert.That(character.Equipment.OffHand, Is.Not.EqualTo(character.Equipment.PrimaryHand));
+            Assert.That(character.Equipment.OffHand.ItemType, Is.EqualTo(ItemTypeConstants.Weapon));
             AssertIterations();
         }
 
@@ -187,9 +188,9 @@ namespace NPCGen.Tests.Integration.Stress
 
             do character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
                 MetaraceRandomizer, StatsRandomizer);
-            while (TestShouldKeepRunning() && character.OffHand != character.PrimaryHand);
+            while (TestShouldKeepRunning() && character.Equipment.OffHand != character.Equipment.PrimaryHand);
 
-            Assert.That(character.OffHand, Is.EqualTo(character.PrimaryHand));
+            Assert.That(character.Equipment.OffHand, Is.EqualTo(character.Equipment.PrimaryHand));
             AssertIterations();
         }
 
@@ -200,9 +201,9 @@ namespace NPCGen.Tests.Integration.Stress
 
             do character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
                 MetaraceRandomizer, StatsRandomizer);
-            while (TestShouldKeepRunning() && !String.IsNullOrEmpty(character.OffHand.Name));
+            while (TestShouldKeepRunning() && !String.IsNullOrEmpty(character.Equipment.OffHand.Name));
 
-            Assert.That(character.OffHand.Name, Is.Empty);
+            Assert.That(character.Equipment.OffHand.Name, Is.Empty);
             AssertIterations();
         }
 
@@ -213,9 +214,9 @@ namespace NPCGen.Tests.Integration.Stress
 
             do character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
                 MetaraceRandomizer, StatsRandomizer);
-            while (TestShouldKeepRunning() && !character.Spells.Any());
+            while (TestShouldKeepRunning() && !character.Magic.Spells.Any());
 
-            Assert.That(character.Spells, Is.Not.Empty);
+            Assert.That(character.Magic.Spells, Is.Not.Empty);
             AssertIterations();
         }
 
@@ -226,9 +227,9 @@ namespace NPCGen.Tests.Integration.Stress
 
             do character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
                 MetaraceRandomizer, StatsRandomizer);
-            while (TestShouldKeepRunning() && character.Spells.Any());
+            while (TestShouldKeepRunning() && character.Magic.Spells.Any());
 
-            Assert.That(character.Spells, Is.Empty);
+            Assert.That(character.Magic.Spells, Is.Empty);
             AssertIterations();
         }
 
@@ -239,9 +240,9 @@ namespace NPCGen.Tests.Integration.Stress
 
             do character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
                 MetaraceRandomizer, StatsRandomizer);
-            while (TestShouldKeepRunning() && character.Treasure.Coin.Quantity == 0);
+            while (TestShouldKeepRunning() && character.Equipment.Treasure.Coin.Quantity == 0);
 
-            Assert.That(character.Treasure.Coin.Quantity, Is.Positive);
+            Assert.That(character.Equipment.Treasure.Coin.Quantity, Is.Positive);
             AssertIterations();
         }
 
@@ -252,9 +253,9 @@ namespace NPCGen.Tests.Integration.Stress
 
             do character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
                 MetaraceRandomizer, StatsRandomizer);
-            while (TestShouldKeepRunning() && !character.Treasure.Goods.Any());
+            while (TestShouldKeepRunning() && !character.Equipment.Treasure.Goods.Any());
 
-            Assert.That(character.Treasure.Goods, Is.Not.Empty);
+            Assert.That(character.Equipment.Treasure.Goods, Is.Not.Empty);
             AssertIterations();
         }
 
@@ -265,9 +266,9 @@ namespace NPCGen.Tests.Integration.Stress
 
             do character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
                 MetaraceRandomizer, StatsRandomizer);
-            while (TestShouldKeepRunning() && !character.Treasure.Items.Any());
+            while (TestShouldKeepRunning() && !character.Equipment.Treasure.Items.Any());
 
-            Assert.That(character.Treasure.Items, Is.Not.Empty);
+            Assert.That(character.Equipment.Treasure.Items, Is.Not.Empty);
             AssertIterations();
         }
 
@@ -278,12 +279,12 @@ namespace NPCGen.Tests.Integration.Stress
 
             do character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
                 MetaraceRandomizer, StatsRandomizer);
-            while (TestShouldKeepRunning() && (character.Treasure.Items.Any() || character.Treasure.Goods.Any()
-                || character.Treasure.Coin.Quantity > 0));
+            while (TestShouldKeepRunning() && (character.Equipment.Treasure.Items.Any() || character.Equipment.Treasure.Goods.Any()
+                || character.Equipment.Treasure.Coin.Quantity > 0));
 
-            Assert.That(character.Treasure.Items, Is.Empty);
-            Assert.That(character.Treasure.Goods, Is.Empty);
-            Assert.That(character.Treasure.Coin.Quantity, Is.EqualTo(0));
+            Assert.That(character.Equipment.Treasure.Items, Is.Empty);
+            Assert.That(character.Equipment.Treasure.Goods, Is.Empty);
+            Assert.That(character.Equipment.Treasure.Coin.Quantity, Is.EqualTo(0));
             AssertIterations();
         }
     }

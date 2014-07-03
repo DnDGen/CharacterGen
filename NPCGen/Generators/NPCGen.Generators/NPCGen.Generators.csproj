@@ -55,8 +55,8 @@
     <Compile Include="AlignmentGenerator.cs" />
     <Compile Include="CharacterClassGenerator.cs" />
     <Compile Include="CharacterGenerator.cs" />
-    <Compile Include="HitPointsGenerator.cs" />
-    <Compile Include="LanguageGenerator.cs" />
+    <Compile Include="Combats\HitPointsGenerator.cs" />
+    <Compile Include="Abilities\LanguageGenerator.cs" />
     <Compile Include="RaceGenerator.cs" />
     <Compile Include="Randomizers\Races\Metaraces\AnyForcedMetaraceRandomizer.cs" />
     <Compile Include="Randomizers\Races\Metaraces\EvilForcedMetaraceRandomizer.cs" />
@@ -67,7 +67,7 @@
     <Compile Include="Randomizers\Races\Metaraces\NonEvilForcedMetaraceRandomizer.cs" />
     <Compile Include="Randomizers\Races\Metaraces\NonGoodForcedMetaraceRandomizer.cs" />
     <Compile Include="Randomizers\Races\Metaraces\NonNeutralForcedMetaraceRandomizer.cs" />
-    <Compile Include="StatsGenerator.cs" />
+    <Compile Include="Abilities\StatsGenerator.cs" />
     <Compile Include="Randomizers\Alignments\AnyAlignmentRandomizer.cs" />
     <Compile Include="Randomizers\Alignments\BaseAlignmentRandomizer.cs" />
     <Compile Include="Randomizers\Alignments\ChaoticAlignmentRandomizer.cs" />
@@ -143,6 +143,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Items\" />
+    <Folder Include="Magics\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

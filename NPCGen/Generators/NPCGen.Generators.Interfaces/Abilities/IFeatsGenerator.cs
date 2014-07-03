@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using NPCGen.Common.Abilities.Feats;
+using NPCGen.Common.Abilities.Stats;
 using NPCGen.Common.CharacterClasses;
-using NPCGen.Common.Feats;
 using NPCGen.Common.Races;
-using NPCGen.Common.Abilities;
 
-namespace NPCGen.Generators.Interfaces
+namespace NPCGen.Generators.Interfaces.Abilities
 {
     public interface IFeatsGenerator
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using NPCGen.Common;
+using NPCGen.Common.Abilities;
 using NPCGen.Common.Races;
 using NUnit.Framework;
 
@@ -102,7 +102,7 @@ namespace NPCGen.Tests.Integration.Tables
         [TestCase(RaceConstants.Metaraces.Wererat)]
         [TestCase(RaceConstants.Metaraces.Weretiger)]
         [TestCase(RaceConstants.Metaraces.Werewolf)]
-        [TestCase("")]
+        [TestCase(RaceConstants.Metaraces.None)]
         public void Collection(String name, params String[] languages)
         {
             AssertCollection(name, languages);

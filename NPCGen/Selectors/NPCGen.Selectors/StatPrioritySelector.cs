@@ -1,5 +1,5 @@
 ﻿using System;
-using NPCGen.Common;
+using NPCGen.Common.Abilities.Stats;
 using NPCGen.Mappers.Interfaces;
 using NPCGen.Selectors.Interfaces;
 
@@ -7,16 +7,16 @@ namespace NPCGen.Selectors
 {
     public class StatPrioritySelector : IStatPrioritySelector
     {
-        private IStatPriorityMapper statPriorityXmlMapper;
+        private IStatPriorityMapper statPriorityMapper;
 
-        public StatPrioritySelector(IStatPriorityMapper statPriorityXmlMapper)
+        public StatPrioritySelector(IStatPriorityMapper statPriorityMapper)
         {
-            this.statPriorityXmlMapper = statPriorityXmlMapper;
+            this.statPriorityMapper = statPriorityMapper;
         }
 
         public StatPriority GetStatPrioritiesFor(String className)
         {
-            var priorities = statPriorityXmlMapper.Map("StatPriorities");
+            var priorities = statPriorityMapper.Map("StatPriorities");
             return priorities[className];
         }
     }

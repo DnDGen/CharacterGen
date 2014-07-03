@@ -6,7 +6,7 @@ namespace NPCGen.Generators.Interfaces.Randomizers.Races
 {
     public interface IBaseRaceRandomizer
     {
-        String Randomize(String goodness, CharacterClassPrototype prototype);
-        IEnumerable<String> GetAllPossibleResults(String goodness, CharacterClassPrototype prototype);
+        String Randomize(String goodness, CharacterClass characterClass);
+        IEnumerable<String> GetAllPossibleResults(String goodness, CharacterClass characterClass);
     }
 }

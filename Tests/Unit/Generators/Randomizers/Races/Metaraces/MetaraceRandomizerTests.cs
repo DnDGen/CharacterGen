@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Moq;
-using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Races;
 using NPCGen.Generators.Interfaces.Randomizers.Races;
 using NUnit.Framework;
@@ -14,22 +13,14 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
     {
         protected IMetaraceRandomizer randomizer;
 
-        private CharacterClassPrototype characterClass;
-
         [SetUp]
         public void MetaraceRandomizerTestsSetup()
         {
-            var metaraces = RaceConstants.Metaraces.GetMetaraces().Union(new[] { String.Empty });
+            var metaraces = RaceConstants.Metaraces.GetMetaraces().Union(new[] { RaceConstants.Metaraces.None });
             mockPercentileResultSelector.Setup(p => p.GetAllResults(It.IsAny<String>())).Returns(metaraces);
 
-            var adjustments = new Dictionary<String, Int32>();
             foreach (var metarace in metaraces)
                 adjustments.Add(metarace, 0);
-
-            mockAdjustmentsSelector.Setup(p => p.GetAdjustmentsFrom("LevelAdjustments")).Returns(adjustments);
-
-            characterClass = new CharacterClassPrototype();
-            characterClass.Level = 1;
         }
 
         protected override IEnumerable<String> GetResults()

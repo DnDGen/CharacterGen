@@ -100,25 +100,20 @@ namespace NPCGen.Tests.Integration.Stress
             return alignment;
         }
 
-        protected CharacterClassPrototype GetNewCharacterClassPrototype(Alignment alignment)
+        protected CharacterClass GetNewCharacterClass(Alignment alignment)
         {
-            var prototype = new CharacterClassPrototype();
+            var characterClass = new CharacterClass();
 
-            do prototype = CharacterClassGenerator.GeneratePrototypeWith(alignment, LevelRandomizer, ClassNameRandomizer);
-            while (!RandomizerVerifier.VerifyCharacterClassCompatibility(alignment.Goodness, prototype,
+            do characterClass = CharacterClassGenerator.GenerateWith(alignment, LevelRandomizer, ClassNameRandomizer);
+            while (!RandomizerVerifier.VerifyCharacterClassCompatibility(alignment.Goodness, characterClass,
                 BaseRaceRandomizer, MetaraceRandomizer));
 
-            return prototype;
+            return characterClass;
         }
 
-        protected CharacterClass GetNewCharacterClass(CharacterClassPrototype prototype)
+        protected Race GetNewRace(Alignment alignment, CharacterClass characterClass)
         {
-            return CharacterClassGenerator.GenerateWith(prototype);
-        }
-
-        protected Race GetNewRace(Alignment alignment, CharacterClassPrototype prototype)
-        {
-            return RaceGenerator.GenerateWith(alignment.Goodness, prototype, BaseRaceRandomizer, MetaraceRandomizer);
+            return RaceGenerator.GenerateWith(alignment.Goodness, characterClass, BaseRaceRandomizer, MetaraceRandomizer);
         }
     }
 }
