@@ -1,8 +1,8 @@
 ﻿using System;
-using NPCGen.Common.Skills;
+using NPCGen.Common.Abilities.Skills;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Common.Skills
+namespace NPCGen.Tests.Unit.Common.Abilities.Skills
 {
     [TestFixture]
     public class SkillConstantsTests

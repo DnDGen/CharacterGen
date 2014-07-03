@@ -7,21 +7,18 @@ namespace NPCGen.Common.Combats
     {
         public Int32 Bonus { get; set; }
 
-        public List<Int32> Bonuses
+        public List<Int32> GetAllBonuses()
         {
-            get
+            var bonuses = new List<Int32>();
+            var attackBonus = Bonus;
+
+            do
             {
-                var bonuses = new List<Int32>();
-                var attackBonus = Bonus;
+                bonuses.Add(attackBonus);
+                attackBonus -= 5;
+            } while (attackBonus > 0);
 
-                do
-                {
-                    bonuses.Add(attackBonus);
-                    attackBonus -= 5;
-                } while (attackBonus > 0);
-
-                return bonuses;
-            }
+            return bonuses;
         }
     }
 }

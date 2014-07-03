@@ -1,7 +1,7 @@
-﻿using NPCGen.Common;
+﻿using NPCGen.Common.Abilities.Stats;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Common.Stats
+namespace NPCGen.Tests.Unit.Common.Abilities.Stats
 {
     [TestFixture]
     public class StatPriorityTests

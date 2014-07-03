@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abilities\AbilityTests.cs" />
     <Compile Include="Alignments\AlignmentConstantsTests.cs" />
     <Compile Include="Alignments\AlignmentTests.cs" />
     <Compile Include="Combats\ArmorClassTests.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="Combats\BaseAttackTests.cs" />
     <Compile Include="Classes\CharacterClassConstantsTests.cs" />
     <Compile Include="Classes\CharacterClassTests.cs" />
+    <Compile Include="Combats\CombatTests.cs" />
     <Compile Include="Magics\FamiliarTests.cs" />
     <Compile Include="Abilities\Feats\FeatTests.cs" />
     <Compile Include="Items\WeaponAttributeConstantsTests.cs" />

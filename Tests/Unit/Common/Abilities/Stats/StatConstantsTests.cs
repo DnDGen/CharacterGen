@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
-using NPCGen.Common.Abilities;
+using NPCGen.Common.Abilities.Stats;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Common.Stats
+namespace NPCGen.Tests.Unit.Common.Abilities.Stats
 {
     [TestFixture]
     public class StatConstantsTests

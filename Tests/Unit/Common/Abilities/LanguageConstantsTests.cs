@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
-using NPCGen.Common;
+using NPCGen.Common.Abilities;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Common
+namespace NPCGen.Tests.Unit.Common.Abilities
 {
     [TestFixture]
     public class LanguageConstantsTests

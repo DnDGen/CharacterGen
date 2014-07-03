@@ -1,8 +1,9 @@
-﻿using NUnit.Framework;
-using System;
-using NPCGen.Common.CharacterClasses;
+﻿using System;
+using System.Linq;
+using NPCGen.Common.Combats;
+using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Common.Classes
+namespace NPCGen.Tests.Unit.Common.Combats
 {
     [TestFixture]
     public class BaseAttackTests
@@ -21,60 +22,37 @@ namespace NPCGen.Tests.Unit.Common.Classes
             Assert.That(baseAttack.Bonus, Is.EqualTo(0));
         }
 
-        [Test]
-        public void OneAttack()
+        [TestCase(0, 0)]
+        [TestCase(1, 1)]
+        [TestCase(2, 2)]
+        [TestCase(3, 3)]
+        [TestCase(4, 4)]
+        [TestCase(5, 5)]
+        [TestCase(6, 6, 1)]
+        [TestCase(7, 7, 2)]
+        [TestCase(8, 8, 3)]
+        [TestCase(9, 9, 4)]
+        [TestCase(10, 10, 5)]
+        [TestCase(11, 11, 6, 1)]
+        [TestCase(12, 12, 7, 2)]
+        [TestCase(13, 13, 8, 3)]
+        [TestCase(14, 14, 9, 4)]
+        [TestCase(15, 15, 10, 5)]
+        [TestCase(16, 16, 11, 6, 1)]
+        [TestCase(17, 17, 12, 7, 2)]
+        [TestCase(18, 18, 13, 8, 3)]
+        [TestCase(19, 19, 14, 9, 4)]
+        [TestCase(20, 20, 15, 10, 5)]
+        public void Bonuses(Int32 bonus, params Int32[] bonuses)
         {
-            for (var a = 0; a < 6; a++)
-                AssertOneAttack(a);
-        }
+            baseAttack.Bonus = bonus;
+            var attacks = baseAttack.GetAllBonuses();
 
-        private void AssertOneAttack(Int32 baseAttackBonus)
-        {
-            baseAttack.Bonus = baseAttackBonus;
-            var expected = String.Format("+{0}", baseAttackBonus);
-            Assert.That(baseAttack.ToString(), Is.EqualTo(expected));
-        }
+            foreach (var attack in bonuses)
+                Assert.That(attacks, Contains.Item(attack));
 
-        [Test]
-        public void TwoAttacks()
-        {
-            for (var a = 6; a < 11; a++)
-                AssertTwoAttacks(a);
-        }
-
-        private void AssertTwoAttacks(Int32 baseAttackBonus)
-        {
-            baseAttack.Bonus = baseAttackBonus;
-            var expected = String.Format("+{0}/+{1}", baseAttackBonus, baseAttackBonus - 5);
-            Assert.That(baseAttack.ToString(), Is.EqualTo(expected));
-        }
-
-        [Test]
-        public void ThreeAttacks()
-        {
-            for (var a = 11; a < 16; a++)
-                AssertThreeAttacks(a);
-        }
-
-        private void AssertThreeAttacks(Int32 baseAttackBonus)
-        {
-            baseAttack.Bonus = baseAttackBonus;
-            var expected = String.Format("+{0}/+{1}/+{2}", baseAttackBonus, baseAttackBonus - 5, baseAttackBonus - 10);
-            Assert.That(baseAttack.ToString(), Is.EqualTo(expected));
-        }
-
-        [Test]
-        public void FourAttacks()
-        {
-            for (var a = 16; a < 21; a++)
-                AssertFourAttacks(a);
-        }
-
-        private void AssertFourAttacks(Int32 baseAttackBonus)
-        {
-            baseAttack.Bonus = baseAttackBonus;
-            var expected = String.Format("+{0}/+{1}/+{2}/+{3}", baseAttackBonus, baseAttackBonus - 5, baseAttackBonus - 10, baseAttackBonus - 15);
-            Assert.That(baseAttack.ToString(), Is.EqualTo(expected));
+            var extras = attacks.Except(bonuses);
+            Assert.That(extras, Is.Empty);
         }
     }
 }

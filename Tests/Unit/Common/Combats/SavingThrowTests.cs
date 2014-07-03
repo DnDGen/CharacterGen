@@ -1,7 +1,7 @@
-﻿using NPCGen.Common;
+﻿using NPCGen.Common.Combats;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Common
+namespace NPCGen.Tests.Unit.Common.Combats
 {
     [TestFixture]
     public class SavingThrowTests
