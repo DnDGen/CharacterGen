@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using NPCGen.Common;
+using NPCGen.Common.Abilities.Skills;
 using NPCGen.Common.Alignments;
 using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Races;
 using NPCGen.Generators.Interfaces;
 using NPCGen.Generators.Interfaces.Abilities;
 using NPCGen.Generators.Interfaces.Combats;
+using NPCGen.Generators.Interfaces.Items;
 using NPCGen.Generators.Interfaces.Randomizers.Alignments;
 using NPCGen.Generators.Interfaces.Randomizers.CharacterClasses;
 using NPCGen.Generators.Interfaces.Randomizers.Races;
@@ -27,16 +29,18 @@ namespace NPCGen.Generators
         private IPercentileSelector percentileSelector;
         private IAbilitiesGenerator abilitiesGenerator;
         private ICombatGenerator combatGenerator;
+        private IEquipmentGenerator equipmentGenerator;
 
         public CharacterGenerator(IAlignmentGenerator alignmentGenerator, ICharacterClassGenerator characterClassGenerator, IRaceGenerator raceGenerator,
             IAdjustmentsSelector adjustmentsSelector, IRandomizerVerifier randomizerVerifier, IPercentileSelector percentileSelector,
-            IAbilitiesGenerator abilitiesGenerator, ICombatGenerator combatGenerator)
+            IAbilitiesGenerator abilitiesGenerator, ICombatGenerator combatGenerator, IEquipmentGenerator equipmentGenerator)
         {
             this.alignmentGenerator = alignmentGenerator;
             this.characterClassGenerator = characterClassGenerator;
             this.raceGenerator = raceGenerator;
             this.abilitiesGenerator = abilitiesGenerator;
             this.combatGenerator = combatGenerator;
+            this.equipmentGenerator = equipmentGenerator;
 
             this.adjustmentsSelector = adjustmentsSelector;
             this.randomizerVerifier = randomizerVerifier;
@@ -61,7 +65,20 @@ namespace NPCGen.Generators
             character.Class.Level -= levelAdjustments[character.Race.Metarace];
 
             character.Ability = abilitiesGenerator.GenerateWith(character.Class, character.Race, statsRandomizer);
-            character.Combat = combatGenerator.GenerateWith(character.Class, character.Ability.Feats, character.Ability.Stats);
+            character.Equipment = equipmentGenerator.GenerateWith(character.Ability.Feats, character.Class);
+
+            var armorCheckPenalties = adjustmentsSelector.GetAdjustmentsFrom("ArmorCheckPenalties");
+
+            foreach (var skill in character.Ability.Skills)
+            {
+                if (skill.Value.ArmorCheckPenalty)
+                    skill.Value.Bonus -= armorCheckPenalties[character.Equipment.Armor.Name];
+
+                if (skill.Key == SkillConstants.Swim)
+                    skill.Value.Bonus -= armorCheckPenalties[character.Equipment.Armor.Name];
+            }
+
+            character.Combat = combatGenerator.GenerateWith(character.Class, character.Ability.Feats, character.Ability.Stats, character.Equipment);
             character.InterestingTrait = percentileSelector.GetPercentileFrom("Traits");
 
             return character;

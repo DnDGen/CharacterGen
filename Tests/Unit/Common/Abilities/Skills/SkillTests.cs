@@ -96,7 +96,7 @@ namespace NPCGen.Tests.Unit.Common.Abilities.Skills
         [TestCase(20, 23)]
         public void MaxedOutClassSkill(Int32 level, Int32 maxRanks)
         {
-            skill.BaseStat = new Stat();
+            skill.BaseStat = new Stat { Value = 10 };
             skill.ClassSkill = true;
 
             skill.Ranks = maxRanks;
@@ -113,7 +113,7 @@ namespace NPCGen.Tests.Unit.Common.Abilities.Skills
             }
         }
 
-        [TestCase(1, 3)]
+        [TestCase(1, 4)]
         [TestCase(2, 5)]
         [TestCase(3, 6)]
         [TestCase(4, 7)]
@@ -135,7 +135,7 @@ namespace NPCGen.Tests.Unit.Common.Abilities.Skills
         [TestCase(20, 23)]
         public void MaxedOutNonClassSkill(Int32 level, Int32 maxRanks)
         {
-            skill.BaseStat = new Stat();
+            skill.BaseStat = new Stat { Value = 10 };
             skill.ClassSkill = false;
 
             skill.Ranks = maxRanks;

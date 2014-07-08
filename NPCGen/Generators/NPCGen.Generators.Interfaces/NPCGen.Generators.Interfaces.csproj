@@ -55,6 +55,7 @@
     <Compile Include="IRaceGenerator.cs" />
     <Compile Include="Abilities\ISkillsGenerator.cs" />
     <Compile Include="Abilities\IStatsGenerator.cs" />
+    <Compile Include="Items\IEquipmentGenerator.cs" />
     <Compile Include="Randomizers\Alignments\AlignmentRandomizerTypeConstants.cs" />
     <Compile Include="Randomizers\Alignments\IAlignmentRandomizer.cs" />
     <Compile Include="Randomizers\CharacterClasses\ClassNameRandomizerTypeConstants.cs" />

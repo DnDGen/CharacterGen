@@ -13,11 +13,7 @@ namespace NPCGen.Common.Abilities.Skills
 
         public Boolean IsMaxedOutFor(Int32 level)
         {
-            if (ClassSkill)
-                return Ranks >= level + 3;
-
-            var partialRanks = Convert.ToDouble(Ranks) / 2;
-            return partialRanks >= level + 1.5;
+            return Ranks >= level + 3;
         }
 
         public Int32 GetTotalSkillBonus()

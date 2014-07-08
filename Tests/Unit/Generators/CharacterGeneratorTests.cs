@@ -1,14 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using EquipmentGen.Common.Items;
 using Moq;
 using NPCGen.Common;
+using NPCGen.Common.Abilities;
+using NPCGen.Common.Abilities.Skills;
+using NPCGen.Common.Abilities.Stats;
 using NPCGen.Common.Alignments;
 using NPCGen.Common.CharacterClasses;
+using NPCGen.Common.Combats;
+using NPCGen.Common.Items;
 using NPCGen.Common.Races;
-using NPCGen.Common.Abilities;
 using NPCGen.Generators;
 using NPCGen.Generators.Interfaces;
+using NPCGen.Generators.Interfaces.Abilities;
+using NPCGen.Generators.Interfaces.Combats;
+using NPCGen.Generators.Interfaces.Items;
 using NPCGen.Generators.Interfaces.Randomizers.Alignments;
 using NPCGen.Generators.Interfaces.Randomizers.CharacterClasses;
 using NPCGen.Generators.Interfaces.Randomizers.Races;
@@ -17,11 +23,6 @@ using NPCGen.Generators.Interfaces.Verifiers;
 using NPCGen.Generators.Interfaces.Verifiers.Exceptions;
 using NPCGen.Selectors.Interfaces;
 using NUnit.Framework;
-using NPCGen.Common.Abilities.Stats;
-using NPCGen.Generators.Interfaces.Abilities;
-using NPCGen.Generators.Interfaces.Combats;
-using NPCGen.Common.Combats;
-using NPCGen.Common.Abilities.Feats;
 
 namespace NPCGen.Tests.Unit.Generators
 {
@@ -47,6 +48,7 @@ namespace NPCGen.Tests.Unit.Generators
         private Mock<IBaseRaceRandomizer> mockBaseRaceRandomizer;
         private Mock<IMetaraceRandomizer> mockMetaraceRandomizer;
         private Mock<IStatsRandomizer> mockStatsRandomizer;
+        private Mock<IEquipmentGenerator> mockEquipmentGenerator;
 
         private CharacterClass characterClass;
         private Race race;
@@ -74,10 +76,12 @@ namespace NPCGen.Tests.Unit.Generators
                 mockLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(true);
             mockRandomizerVerifier.Setup(v => v.VerifyAlignmentCompatibility(It.IsAny<Alignment>(), mockClassNameRandomizer.Object,
                 mockLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(true);
-            mockRandomizerVerifier.Setup(v => v.VerifyCharacterClassCompatibility(It.IsAny<String>(), It.IsAny<CharacterClassPrototype>(),
+            mockRandomizerVerifier.Setup(v => v.VerifyCharacterClassCompatibility(It.IsAny<String>(), It.IsAny<CharacterClass>(),
                 mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(true);
 
-            characterGenerator = new CharacterGenerator(mockAlignmentGenerator.Object, mockCharacterClassGenerator.Object, mockRaceGenerator.Object, mockStatsGenerator.Object, mockLanguageGenerator.Object, mockHitPointsGenerator.Object, mockAdjustmentsSelector.Object, mockRandomizerVerifier.Object, mockPercentileSelector.Object);
+            characterGenerator = new CharacterGenerator(mockAlignmentGenerator.Object, mockCharacterClassGenerator.Object,
+                mockRaceGenerator.Object, mockAdjustmentsSelector.Object, mockRandomizerVerifier.Object, mockPercentileSelector.Object,
+                mockAbilitiesGenerator.Object, mockCombatGenerator.Object, mockEquipmentGenerator.Object);
         }
 
         private void SetUpMockRandomizers()
@@ -100,6 +104,7 @@ namespace NPCGen.Tests.Unit.Generators
             stats = new Dictionary<String, Stat>();
             mockAbilitiesGenerator = new Mock<IAbilitiesGenerator>();
             mockCombatGenerator = new Mock<ICombatGenerator>();
+            mockEquipmentGenerator = new Mock<IEquipmentGenerator>();
 
             mockAlignmentGenerator.Setup(f => f.GenerateWith(mockAlignmentRandomizer.Object)).Returns(new Alignment());
 
@@ -253,164 +258,72 @@ namespace NPCGen.Tests.Unit.Generators
         }
 
         [Test]
+        public void GetEquipmentFromGenerator()
+        {
+            var ability = new Ability();
+            mockAbilitiesGenerator.Setup(g => g.GenerateWith(characterClass, race, mockStatsRandomizer.Object)).Returns(ability);
+            var equipment = new Equipment();
+            mockEquipmentGenerator.Setup(g => g.GenerateWith(ability.Feats, characterClass)).Returns(equipment);
+
+            var character = GenerateCharacter();
+            Assert.That(character.Equipment, Is.EqualTo(equipment));
+        }
+
+        [Test]
         public void GetCombatFromGenerator()
         {
             var ability = new Ability();
             mockAbilitiesGenerator.Setup(g => g.GenerateWith(characterClass, race, mockStatsRandomizer.Object)).Returns(ability);
-
+            var equipment = new Equipment();
+            mockEquipmentGenerator.Setup(g => g.GenerateWith(ability.Feats, characterClass)).Returns(equipment);
             var combat = new Combat();
-            mockCombatGenerator.Setup(g => g.GenerateWith(characterClass, ability.Feats, ability.Stats)).Returns(combat);
+            mockCombatGenerator.Setup(g => g.GenerateWith(characterClass, ability.Feats, ability.Stats, equipment)).Returns(combat);
+
             var character = GenerateCharacter();
             Assert.That(character.Combat, Is.EqualTo(combat));
         }
 
         [Test]
-        public void GetEquipmentFromGenerator()
-        {
-            var armor = new Item();
-            mockArmorGenerator.Setup(g => g.GenerateAtLevel(It.IsAny<Int32>())).Returns(armor);
-
-            var character = GenerateCharacter();
-            Assert.That(character.Armor, Is.EqualTo(armor));
-        }
-
-        [Test]
         public void AdjustSkillsWithArmorCheckPenalty()
         {
-            var skills = new Dictionary<String, Skill>();
-            var skillWithPenalty = new Skill { ArmorCheckPenalty = true };
-            var skill = new Skill { ArmorCheckPenalty = false };
+            var ability = new Ability();
+            mockAbilitiesGenerator.Setup(g => g.GenerateWith(characterClass, race, mockStatsRandomizer.Object)).Returns(ability);
 
-            skills.Add("no penalty", skill);
-            skills.Add("penalty", skillWithPenalty);
+            ability.Skills.Add("no penalty", new Skill { ArmorCheckPenalty = false });
+            ability.Skills.Add("penalty", new Skill { ArmorCheckPenalty = true });
 
-            mockSkillsGenerator.Setup(g => g.GenerateWith(It.IsAny<CharacterClass>(), race, stats)).Returns(skills);
-
-            var armor = new Item { Name = "armor name" };
-            mockArmorGenerator.Setup(g => g.GenerateAtLevel(It.IsAny<Int32>())).Returns(armor);
+            var equipment = new Equipment();
+            mockEquipmentGenerator.Setup(g => g.GenerateWith(ability.Feats, characterClass)).Returns(equipment);
+            equipment.Armor.Name = "armor name";
 
             var skillAdjustments = new Dictionary<String, Int32>();
-            skillAdjustments.Add(armor.Name, 5);
+            skillAdjustments.Add(equipment.Armor.Name, 5);
             skillAdjustments.Add("other armor", 10);
             mockAdjustmentsSelector.Setup(s => s.GetAdjustmentsFrom("ArmorCheckPenalties")).Returns(skillAdjustments);
 
             var character = GenerateCharacter();
-            Assert.That(character.Skills["no penalty"].Bonus, Is.EqualTo(0));
-            Assert.That(character.Skills["penalty"].Bonus, Is.EqualTo(-5));
+            Assert.That(character.Ability.Skills["no penalty"].Bonus, Is.EqualTo(0));
+            Assert.That(character.Ability.Skills["penalty"].Bonus, Is.EqualTo(-5));
         }
 
         [Test]
         public void SwimmingTakesDoubleArmorCheckPenalty()
         {
-            var skills = new Dictionary<String, Skill>();
-            var swimming = new Skill { ArmorCheckPenalty = true };
-            skills.Add(SkillConstants.Swim, swimming);
+            var ability = new Ability();
+            mockAbilitiesGenerator.Setup(g => g.GenerateWith(characterClass, race, mockStatsRandomizer.Object)).Returns(ability);
 
-            mockSkillsGenerator.Setup(g => g.GenerateWith(It.IsAny<CharacterClass>(), race, stats)).Returns(skills);
+            ability.Skills.Add(SkillConstants.Swim, new Skill { ArmorCheckPenalty = true });
 
-            var armor = new Item { Name = "armor name" };
-            mockArmorGenerator.Setup(g => g.GenerateAtLevel(It.IsAny<Int32>())).Returns(armor);
+            var equipment = new Equipment();
+            mockEquipmentGenerator.Setup(g => g.GenerateWith(ability.Feats, characterClass)).Returns(equipment);
+            equipment.Armor.Name = "armor name";
 
             var skillAdjustments = new Dictionary<String, Int32>();
-            skillAdjustments.Add(armor.Name, 5);
+            skillAdjustments.Add(equipment.Armor.Name, 5);
             mockAdjustmentsSelector.Setup(s => s.GetAdjustmentsFrom("ArmorCheckPenalties")).Returns(skillAdjustments);
 
             var character = GenerateCharacter();
-            Assert.That(character.Skills[SkillConstants.Swim].Bonus, Is.EqualTo(-10));
-        }
-
-        [Test]
-        public void GetArmorClassFromGenerator()
-        {
-            Assert.Fail();
-        }
-
-        [Test]
-        public void GetPrimaryHandFromGenerator()
-        {
-            Assert.Fail();
-        }
-
-        [Test]
-        public void NotHavingPrimaryHandIsNotAllowed()
-        {
-            Assert.Fail();
-        }
-
-        [Test]
-        public void GetFamiliarFromGenerator()
-        {
-            Assert.Fail();
-        }
-
-        [Test]
-        public void GetTreasureFromGenerator()
-        {
-            Assert.Fail();
-        }
-
-        [Test]
-        public void IfPrimaryHandIsTwoHanded_OffHandIsEqualToPrimaryHand()
-        {
-            //set it up for both two-handed and shields
-
-            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object,
-                mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
-            Assert.That(character.OffHand, Is.EqualTo(character.PrimaryHand));
-        }
-
-        [Test]
-        public void IfCharacterHasTwoWeaponFighting_GenerateSecondaryWeapon()
-        {
-            Assert.Fail();
-        }
-
-        [Test]
-        public void IfCharacterHasTwoWeaponFighting_NotHavingASecondWeaponIsAllowed()
-        {
-            Assert.Fail();
-        }
-
-        [Test]
-        public void IfCharacterDoesNotHaveTwoWeaponFighting_DoNotGenerateSecondaryWeapon()
-        {
-            Assert.Fail();
-        }
-
-        [Test]
-        public void IfCharacterHasTwoWeaponFighting_SecondWeaponCannotBeTwoHanded()
-        {
-            Assert.Fail();
-        }
-
-        [Test]
-        public void IfCharacterHasShieldProficiencyAndNoSecondWeapon_GenerateShield()
-        {
-            Assert.Fail();
-        }
-
-        [Test]
-        public void IfCharacterHasShieldProficiencyAndSecondWeapon_DoNotGenerateShield()
-        {
-            Assert.Fail();
-        }
-
-        [Test]
-        public void IfCharacterHasShieldProficiencyAndNoSecondWeapon_NotHavingAShieldIsAllowed()
-        {
-            Assert.Fail();
-        }
-
-        [Test]
-        public void IfCharacterDoesNotHaveShieldProficiency_DoNotGenerateShield()
-        {
-            Assert.Fail();
-        }
-
-        [Test]
-        public void GetSpellsFromGenerator()
-        {
-            Assert.Fail();
+            Assert.That(character.Ability.Skills[SkillConstants.Swim].Bonus, Is.EqualTo(-10));
         }
     }
 }
