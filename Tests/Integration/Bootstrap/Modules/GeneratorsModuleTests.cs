@@ -511,5 +511,10 @@ namespace NPCGen.Tests.Integration.Bootstrap.Modules
         {
             AssertNotSingleton<IStatsRandomizer>(name);
         }
+
+        public void AbilitiesGeneratorIsNotGeneratedAsSingleton()
+        {
+            AssertNotSingleton<IAbilitiesGenerator>();
+        }
     }
 }

@@ -62,6 +62,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Abilities\AbilitiesGeneratorTests.cs" />
     <Compile Include="CharacterClassGeneratorTests.cs" />
     <Compile Include="CharacterGeneratorTests.cs" />
     <Compile Include="AlignmentGeneratorTests.cs" />

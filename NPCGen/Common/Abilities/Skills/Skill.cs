@@ -11,11 +11,6 @@ namespace NPCGen.Common.Abilities.Skills
         public Boolean ClassSkill { get; set; }
         public Boolean ArmorCheckPenalty { get; set; }
 
-        public Boolean IsMaxedOutFor(Int32 level)
-        {
-            return Ranks >= level + 3;
-        }
-
         public Int32 GetTotalSkillBonus()
         {
             var total = Bonus + BaseStat.Bonus;

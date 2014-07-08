@@ -32,6 +32,7 @@ namespace NPCGen.Bootstrap.Modules
             Bind<IRaceGenerator>().To<RaceGenerator>();
             Bind<IRandomizerVerifier>().To<RandomizerVerifier>();
             Bind<IStatsGenerator>().To<StatsGenerator>();
+            Bind<IAbilitiesGenerator>().To<AbilitiesGenerator>();
 
             Bind<IAlignmentRandomizer>().To<AnyAlignmentRandomizer>().Named(AlignmentRandomizerTypeConstants.Any);
             Bind<IAlignmentRandomizer>().To<ChaoticAlignmentRandomizer>().Named(AlignmentRandomizerTypeConstants.Chaotic);
