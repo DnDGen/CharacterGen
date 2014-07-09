@@ -5,11 +5,13 @@ using NPCGen.Generators.Combats;
 using NPCGen.Generators.Interfaces;
 using NPCGen.Generators.Interfaces.Abilities;
 using NPCGen.Generators.Interfaces.Combats;
+using NPCGen.Generators.Interfaces.Items;
 using NPCGen.Generators.Interfaces.Randomizers.Alignments;
 using NPCGen.Generators.Interfaces.Randomizers.CharacterClasses;
 using NPCGen.Generators.Interfaces.Randomizers.Races;
 using NPCGen.Generators.Interfaces.Randomizers.Stats;
 using NPCGen.Generators.Interfaces.Verifiers;
+using NPCGen.Generators.Items;
 using NPCGen.Generators.Randomizers.Alignments;
 using NPCGen.Generators.Randomizers.CharacterClasses.ClassNames;
 using NPCGen.Generators.Randomizers.CharacterClasses.Levels;
@@ -33,6 +35,8 @@ namespace NPCGen.Bootstrap.Modules
             Bind<IRandomizerVerifier>().To<RandomizerVerifier>();
             Bind<IStatsGenerator>().To<StatsGenerator>();
             Bind<IAbilitiesGenerator>().To<AbilitiesGenerator>();
+            Bind<ICombatGenerator>().To<CombatGenerator>();
+            Bind<IEquipmentGenerator>().To<EquipmentGenerator>();
 
             Bind<IAlignmentRandomizer>().To<AnyAlignmentRandomizer>().Named(AlignmentRandomizerTypeConstants.Any);
             Bind<IAlignmentRandomizer>().To<ChaoticAlignmentRandomizer>().Named(AlignmentRandomizerTypeConstants.Chaotic);

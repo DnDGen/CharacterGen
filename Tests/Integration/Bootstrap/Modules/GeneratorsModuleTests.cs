@@ -2,6 +2,7 @@
 using NPCGen.Generators.Interfaces;
 using NPCGen.Generators.Interfaces.Abilities;
 using NPCGen.Generators.Interfaces.Combats;
+using NPCGen.Generators.Interfaces.Items;
 using NPCGen.Generators.Interfaces.Randomizers.Alignments;
 using NPCGen.Generators.Interfaces.Randomizers.CharacterClasses;
 using NPCGen.Generators.Interfaces.Randomizers.Races;
@@ -512,9 +513,22 @@ namespace NPCGen.Tests.Integration.Bootstrap.Modules
             AssertNotSingleton<IStatsRandomizer>(name);
         }
 
+        [Test]
         public void AbilitiesGeneratorIsNotGeneratedAsSingleton()
         {
             AssertNotSingleton<IAbilitiesGenerator>();
+        }
+
+        [Test]
+        public void CombatGeneratorIsNotGeneratedAsSingleton()
+        {
+            AssertNotSingleton<ICombatGenerator>();
+        }
+
+        [Test]
+        public void EquipmentGeneratorIsNotGeneratedAsSingleton()
+        {
+            AssertNotSingleton<IEquipmentGenerator>();
         }
     }
 }

@@ -56,8 +56,10 @@
     <Compile Include="AlignmentGenerator.cs" />
     <Compile Include="CharacterClassGenerator.cs" />
     <Compile Include="CharacterGenerator.cs" />
+    <Compile Include="Combats\CombatGenerator.cs" />
     <Compile Include="Combats\HitPointsGenerator.cs" />
     <Compile Include="Abilities\LanguageGenerator.cs" />
+    <Compile Include="Items\EquipmentGenerator.cs" />
     <Compile Include="RaceGenerator.cs" />
     <Compile Include="Randomizers\Races\Metaraces\AnyForcedMetaraceRandomizer.cs" />
     <Compile Include="Randomizers\Races\Metaraces\EvilForcedMetaraceRandomizer.cs" />
@@ -146,7 +148,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Items\" />
     <Folder Include="Magics\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -66,8 +66,10 @@
     <Compile Include="CharacterClassGeneratorTests.cs" />
     <Compile Include="CharacterGeneratorTests.cs" />
     <Compile Include="AlignmentGeneratorTests.cs" />
+    <Compile Include="Combats\CombatGeneratorTests.cs" />
     <Compile Include="Combats\HitPointsGeneratorTests.cs" />
     <Compile Include="Abilities\LanguageGeneratorTests.cs" />
+    <Compile Include="Items\EquipmentGeneratorTests.cs" />
     <Compile Include="RaceGeneratorTests.cs" />
     <Compile Include="Randomizers\CharacterClasses\ClassNames\ClassNameRandomizerTests.cs" />
     <Compile Include="Randomizers\Races\BaseRaces\BaseRaceRandomizerTests.cs" />
@@ -166,7 +168,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Items\" />
     <Folder Include="Magics\" />
   </ItemGroup>
   <Choose>

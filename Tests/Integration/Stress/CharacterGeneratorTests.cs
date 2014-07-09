@@ -151,63 +151,6 @@ namespace NPCGen.Tests.Integration.Stress
         }
 
         [Test]
-        public void OffHandShieldHappens()
-        {
-            var character = new Character();
-
-            do character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
-                MetaraceRandomizer, StatsRandomizer);
-            while (TestShouldKeepRunning() && (String.IsNullOrEmpty(character.Equipment.OffHand.Name) || character.Equipment.OffHand == character.Equipment.PrimaryHand));
-
-            Assert.That(character.Equipment.OffHand.Name, Is.Not.Empty);
-            Assert.That(character.Equipment.OffHand, Is.Not.EqualTo(character.Equipment.PrimaryHand));
-            Assert.That(character.Equipment.OffHand.ItemType, Is.EqualTo(ItemTypeConstants.Armor));
-            Assert.That(character.Equipment.OffHand.Attributes, Contains.Item(AttributeConstants.Shield));
-            AssertIterations();
-        }
-
-        [Test]
-        public void OffHandWeaponHappens()
-        {
-            var character = new Character();
-
-            do character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
-                MetaraceRandomizer, StatsRandomizer);
-            while (TestShouldKeepRunning() && (String.IsNullOrEmpty(character.Equipment.OffHand.Name) || character.Equipment.OffHand == character.Equipment.PrimaryHand));
-
-            Assert.That(character.Equipment.OffHand.Name, Is.Not.Empty);
-            Assert.That(character.Equipment.OffHand, Is.Not.EqualTo(character.Equipment.PrimaryHand));
-            Assert.That(character.Equipment.OffHand.ItemType, Is.EqualTo(ItemTypeConstants.Weapon));
-            AssertIterations();
-        }
-
-        [Test]
-        public void TwoHandedHappens()
-        {
-            var character = new Character();
-
-            do character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
-                MetaraceRandomizer, StatsRandomizer);
-            while (TestShouldKeepRunning() && character.Equipment.OffHand != character.Equipment.PrimaryHand);
-
-            Assert.That(character.Equipment.OffHand, Is.EqualTo(character.Equipment.PrimaryHand));
-            AssertIterations();
-        }
-
-        [Test]
-        public void OffHandDoesNotHappen()
-        {
-            var character = new Character();
-
-            do character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
-                MetaraceRandomizer, StatsRandomizer);
-            while (TestShouldKeepRunning() && !String.IsNullOrEmpty(character.Equipment.OffHand.Name));
-
-            Assert.That(character.Equipment.OffHand.Name, Is.Empty);
-            AssertIterations();
-        }
-
-        [Test]
         public void SpellsHappen()
         {
             var character = new Character();
@@ -230,61 +173,6 @@ namespace NPCGen.Tests.Integration.Stress
             while (TestShouldKeepRunning() && character.Magic.Spells.Any());
 
             Assert.That(character.Magic.Spells, Is.Empty);
-            AssertIterations();
-        }
-
-        [Test]
-        public void CoinHappens()
-        {
-            var character = new Character();
-
-            do character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
-                MetaraceRandomizer, StatsRandomizer);
-            while (TestShouldKeepRunning() && character.Equipment.Treasure.Coin.Quantity == 0);
-
-            Assert.That(character.Equipment.Treasure.Coin.Quantity, Is.Positive);
-            AssertIterations();
-        }
-
-        [Test]
-        public void GoodsHappen()
-        {
-            var character = new Character();
-
-            do character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
-                MetaraceRandomizer, StatsRandomizer);
-            while (TestShouldKeepRunning() && !character.Equipment.Treasure.Goods.Any());
-
-            Assert.That(character.Equipment.Treasure.Goods, Is.Not.Empty);
-            AssertIterations();
-        }
-
-        [Test]
-        public void ItemsHappen()
-        {
-            var character = new Character();
-
-            do character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
-                MetaraceRandomizer, StatsRandomizer);
-            while (TestShouldKeepRunning() && !character.Equipment.Treasure.Items.Any());
-
-            Assert.That(character.Equipment.Treasure.Items, Is.Not.Empty);
-            AssertIterations();
-        }
-
-        [Test]
-        public void TreasureDoesNotHappen()
-        {
-            var character = new Character();
-
-            do character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
-                MetaraceRandomizer, StatsRandomizer);
-            while (TestShouldKeepRunning() && (character.Equipment.Treasure.Items.Any() || character.Equipment.Treasure.Goods.Any()
-                || character.Equipment.Treasure.Coin.Quantity > 0));
-
-            Assert.That(character.Equipment.Treasure.Items, Is.Empty);
-            Assert.That(character.Equipment.Treasure.Goods, Is.Empty);
-            Assert.That(character.Equipment.Treasure.Coin.Quantity, Is.EqualTo(0));
             AssertIterations();
         }
     }
