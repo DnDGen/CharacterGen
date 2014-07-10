@@ -60,6 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abilities\AbilitiesGeneratorTests.cs" />
     <Compile Include="AlignmentGeneratorTests.cs" />
     <Compile Include="CharacterClassGeneratorTests.cs" />
     <Compile Include="CharacterGeneratorTests.cs" />
