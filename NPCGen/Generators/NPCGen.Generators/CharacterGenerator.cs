@@ -64,6 +64,8 @@ namespace NPCGen.Generators
             character.Class.Level -= levelAdjustments[character.Race.BaseRace];
             character.Class.Level -= levelAdjustments[character.Race.Metarace];
 
+            var baseAttack = combatGenerator.GenerateBaseAttackWith(character.Class);
+
             character.Ability = abilitiesGenerator.GenerateWith(character.Class, character.Race, statsRandomizer);
             character.Equipment = equipmentGenerator.GenerateWith(character.Ability.Feats, character.Class);
 
@@ -78,7 +80,7 @@ namespace NPCGen.Generators
                     skill.Value.Bonus -= armorCheckPenalties[character.Equipment.Armor.Name];
             }
 
-            character.Combat = combatGenerator.GenerateWith(character.Class, character.Ability.Feats, character.Ability.Stats, character.Equipment);
+            character.Combat = combatGenerator.GenerateWith(baseAttack, character.Ability.Feats, character.Ability.Stats, character.Equipment);
             character.InterestingTrait = percentileSelector.GetPercentileFrom("Traits");
 
             return character;

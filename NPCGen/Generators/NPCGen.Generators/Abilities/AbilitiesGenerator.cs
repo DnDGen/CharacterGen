@@ -1,6 +1,7 @@
 ﻿using NPCGen.Common.Abilities;
 using NPCGen.Common.Abilities.Stats;
 using NPCGen.Common.CharacterClasses;
+using NPCGen.Common.Combats;
 using NPCGen.Common.Races;
 using NPCGen.Generators.Interfaces.Abilities;
 using NPCGen.Generators.Interfaces.Randomizers.Stats;
@@ -18,7 +19,7 @@ namespace NPCGen.Generators.Abilities
             this.languageGenerator = languageGenerator;
         }
 
-        public Ability GenerateWith(CharacterClass characterClass, Race race, IStatsRandomizer statsRandomizer)
+        public Ability GenerateWith(CharacterClass characterClass, Race race, IStatsRandomizer statsRandomizer, BaseAttack baseAttack)
         {
             var ability = new Ability();
 

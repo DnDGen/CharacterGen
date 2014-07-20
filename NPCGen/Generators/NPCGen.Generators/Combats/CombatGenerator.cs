@@ -11,7 +11,12 @@ namespace NPCGen.Generators.Combats
 {
     public class CombatGenerator : ICombatGenerator
     {
-        public Combat GenerateWith(CharacterClass characterClass, IEnumerable<Feat> feats, Dictionary<String, Stat> stats, Equipment equipment)
+        public Combat GenerateWith(BaseAttack baseAttack, IEnumerable<Feat> feats, Dictionary<String, Stat> stats, Equipment equipment)
+        {
+            throw new NotImplementedException();
+        }
+
+        public BaseAttack GenerateBaseAttackWith(CharacterClass characterClass)
         {
             throw new NotImplementedException();
         }

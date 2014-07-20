@@ -27,15 +27,18 @@ namespace NPCGen.Tests.Integration.Stress.Combats
             var ability = AbilitiesGenerator.GenerateWith(characterClass, race, StatsRandomizer);
             var equipment = EquipmentGenerator.GenerateWith(ability.Feats, characterClass);
 
-            var combat = CombatGenerator.GenerateWith(characterClass, ability.Feats, ability.Stats, equipment);
+            var baseAttack = CombatGenerator.GenerateBaseAttackWith(characterClass);
+            Assert.That(baseAttack.Bonus, Is.Not.Negative);
+
+            var combat = CombatGenerator.GenerateWith(baseAttack, ability.Feats, ability.Stats, equipment);
             Assert.That(combat.ArmorClass.FlatFooted, Is.Positive);
             Assert.That(combat.ArmorClass.Full, Is.Positive);
             Assert.That(combat.ArmorClass.Touch, Is.Positive);
-            Assert.That(combat.BaseAttack.Bonus, Is.Not.Negative);
             Assert.That(combat.HitPoints, Is.AtLeast(characterClass.Level));
             Assert.That(combat.SavingThrows.Fortitude, Is.Positive);
             Assert.That(combat.SavingThrows.Reflex, Is.Positive);
             Assert.That(combat.SavingThrows.Will, Is.Positive);
+            Assert.That(combat.BaseAttack, Is.EqualTo(baseAttack));
         }
     }
 }

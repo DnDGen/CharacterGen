@@ -10,6 +10,7 @@ namespace NPCGen.Generators.Interfaces.Combats
 {
     public interface ICombatGenerator
     {
-        Combat GenerateWith(CharacterClass characterClass, IEnumerable<Feat> feats, Dictionary<String, Stat> stats, Equipment equipment);
+        Combat GenerateWith(BaseAttack baseAttack, IEnumerable<Feat> feats, Dictionary<String, Stat> stats, Equipment equipment);
+        BaseAttack GenerateBaseAttackWith(CharacterClass characterClass);
     }
 }

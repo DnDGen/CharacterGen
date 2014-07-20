@@ -56,6 +56,7 @@ namespace NPCGen.Tests.Unit.Generators
         private Ability ability;
         private Combat combat;
         private Equipment equipment;
+        private BaseAttack baseAttack;
 
         [SetUp]
         public void Setup()
@@ -110,6 +111,7 @@ namespace NPCGen.Tests.Unit.Generators
             ability = new Ability();
             equipment = new Equipment();
             combat = new Combat();
+            baseAttack = new BaseAttack();
 
             alignment.Goodness = "goodness";
             alignment.Lawfulness = "lawfulness";
@@ -125,7 +127,8 @@ namespace NPCGen.Tests.Unit.Generators
                 mockMetaraceRandomizer.Object)).Returns(race);
             mockAbilitiesGenerator.Setup(g => g.GenerateWith(characterClass, race, mockStatsRandomizer.Object)).Returns(ability);
             mockEquipmentGenerator.Setup(g => g.GenerateWith(ability.Feats, characterClass)).Returns(equipment);
-            mockCombatGenerator.Setup(g => g.GenerateWith(characterClass, ability.Feats, ability.Stats, equipment)).Returns(combat);
+            mockCombatGenerator.Setup(g => g.GenerateWith(baseAttack, ability.Feats, ability.Stats, equipment)).Returns(combat);
+            mockCombatGenerator.Setup(g => g.GenerateBaseAttackWith(characterClass)).Returns(baseAttack);
         }
 
         [Test]
@@ -257,6 +260,13 @@ namespace NPCGen.Tests.Unit.Generators
             mockPercentileSelector.Setup(p => p.GetPercentileFrom("Traits")).Returns("interesting trait");
             var character = GenerateCharacter();
             Assert.That(character.InterestingTrait, Is.EqualTo("interesting trait"));
+        }
+
+        [Test]
+        public void GetBaseAttackFromCombatGenerator()
+        {
+            GenerateCharacter();
+            mockCombatGenerator.Verify(g => g.GenerateBaseAttackWith(characterClass), Times.Once);
         }
 
         [Test]
