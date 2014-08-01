@@ -14,7 +14,7 @@ namespace NPCGen.Selectors
             this.adjustmentMapper = adjustmentMapper;
         }
 
-        public Dictionary<String, Int32> GetAdjustmentsFrom(String tableName)
+        public Dictionary<String, Int32> SelectAdjustmentsFrom(String tableName)
         {
             return adjustmentMapper.Map(tableName);
         }

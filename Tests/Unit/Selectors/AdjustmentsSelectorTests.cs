@@ -27,7 +27,7 @@ namespace NPCGen.Tests.Unit.Selectors
             var adjustments = new Dictionary<String, Int32>();
             mockAdjustmentMapper.Setup(m => m.Map("table name")).Returns(adjustments);
 
-            var selectedAdjustments = adjustmentsSelector.GetAdjustmentsFrom("table name");
+            var selectedAdjustments = adjustmentsSelector.SelectAdjustmentsFrom("table name");
             Assert.That(selectedAdjustments, Is.EqualTo(adjustments));
         }
     }

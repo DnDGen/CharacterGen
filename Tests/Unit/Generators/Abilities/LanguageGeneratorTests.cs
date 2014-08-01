@@ -36,7 +36,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         [Test]
         public void GetAutomaticLanguagesFromSelector()
         {
-            mockLanguageSelector.Setup(s => s.GetAutomaticLanguagesFor(race)).Returns(new[] { "lang 1", "lang 2" });
+            mockLanguageSelector.Setup(s => s.SelectAutomaticLanguagesFor(race)).Returns(new[] { "lang 1", "lang 2" });
 
             var languages = languageGenerator.GenerateWith(race, String.Empty, 0);
             Assert.That(languages, Contains.Item("lang 1"));
@@ -85,7 +85,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         [Test]
         public void GetNumberOfBonusLanguagesEqualToIntelligenceModifier()
         {
-            mockLanguageSelector.Setup(p => p.GetBonusLanguagesFor(race.BaseRace, "class")).Returns(new[] { "lang 1", "lang 2", "lang 3" });
+            mockLanguageSelector.Setup(p => p.SelectBonusLanguagesFor(race.BaseRace, "class")).Returns(new[] { "lang 1", "lang 2", "lang 3" });
 
             var languages = languageGenerator.GenerateWith(race, "class", 2);
             mockDice.Verify(d => d.Roll(It.IsAny<String>()), Times.Exactly(2));
@@ -97,7 +97,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         [Test]
         public void GetAllBonusLanguagesIfIntelligenceBonusIsHigher()
         {
-            mockLanguageSelector.Setup(p => p.GetBonusLanguagesFor(race.BaseRace, "class")).Returns(new[] { "lang 1", "lang 2" });
+            mockLanguageSelector.Setup(p => p.SelectBonusLanguagesFor(race.BaseRace, "class")).Returns(new[] { "lang 1", "lang 2" });
 
             var languages = languageGenerator.GenerateWith(race, "class", 9266);
             mockDice.Verify(d => d.Roll(It.IsAny<String>()), Times.Exactly(0));
@@ -109,8 +109,8 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         [Test]
         public void LanguagesContainAutomaticLanguagesAndBonusLanguages()
         {
-            mockLanguageSelector.Setup(s => s.GetAutomaticLanguagesFor(race)).Returns(new[] { "automatic language" });
-            mockLanguageSelector.Setup(p => p.GetBonusLanguagesFor(race.BaseRace, "class")).Returns(new[] { "bonus language" });
+            mockLanguageSelector.Setup(s => s.SelectAutomaticLanguagesFor(race)).Returns(new[] { "automatic language" });
+            mockLanguageSelector.Setup(p => p.SelectBonusLanguagesFor(race.BaseRace, "class")).Returns(new[] { "bonus language" });
 
             var languages = languageGenerator.GenerateWith(race, "class", 1);
             Assert.That(languages, Contains.Item("automatic language"));
@@ -121,8 +121,8 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         [Test]
         public void DruidsHaveAutomaticLanguagesAndBonusLanguagesAndDruidic()
         {
-            mockLanguageSelector.Setup(s => s.GetAutomaticLanguagesFor(race)).Returns(new[] { "automatic language" });
-            mockLanguageSelector.Setup(p => p.GetBonusLanguagesFor(race.BaseRace, CharacterClassConstants.Druid)).Returns(new[] { "bonus language" });
+            mockLanguageSelector.Setup(s => s.SelectAutomaticLanguagesFor(race)).Returns(new[] { "automatic language" });
+            mockLanguageSelector.Setup(p => p.SelectBonusLanguagesFor(race.BaseRace, CharacterClassConstants.Druid)).Returns(new[] { "bonus language" });
 
             var languages = languageGenerator.GenerateWith(race, CharacterClassConstants.Druid, 1);
             Assert.That(languages, Contains.Item("automatic language"));
@@ -134,8 +134,8 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         [Test]
         public void LanguagesAreNotDuplicated()
         {
-            mockLanguageSelector.Setup(s => s.GetAutomaticLanguagesFor(race)).Returns(new[] { "automatic language" });
-            mockLanguageSelector.Setup(p => p.GetBonusLanguagesFor(race.BaseRace, CharacterClassConstants.Druid))
+            mockLanguageSelector.Setup(s => s.SelectAutomaticLanguagesFor(race)).Returns(new[] { "automatic language" });
+            mockLanguageSelector.Setup(p => p.SelectBonusLanguagesFor(race.BaseRace, CharacterClassConstants.Druid))
                 .Returns(new[] { "automatic language", LanguageConstants.Druidic, "bonus language" });
 
             var languages = languageGenerator.GenerateWith(race, CharacterClassConstants.Druid, 1);

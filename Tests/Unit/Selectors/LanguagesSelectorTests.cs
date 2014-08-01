@@ -38,7 +38,7 @@ namespace NPCGen.Tests.Unit.Selectors
         [Test]
         public void GetAutomaticLanguagesAccessesAutomaticLanguagesTable()
         {
-            Selector.GetAutomaticLanguagesFor(race);
+            Selector.SelectAutomaticLanguagesFor(race);
             mockLanguagesMapper.Verify(p => p.Map("AutomaticLanguages"), Times.Once);
         }
 
@@ -49,7 +49,7 @@ namespace NPCGen.Tests.Unit.Selectors
             parsedLanguages.Add(race.BaseRace, new[] { LanguageConstants.Common });
             parsedLanguages.Add("other base race", new[] { LanguageConstants.Draconic });
 
-            var languages = Selector.GetAutomaticLanguagesFor(race);
+            var languages = Selector.SelectAutomaticLanguagesFor(race);
             Assert.That(languages, Contains.Item(LanguageConstants.Common));
             Assert.That(languages, Is.Not.Contains(LanguageConstants.Draconic));
             Assert.That(languages.Count(), Is.EqualTo(1));
@@ -62,7 +62,7 @@ namespace NPCGen.Tests.Unit.Selectors
             parsedLanguages.Add(race.Metarace, new[] { LanguageConstants.Draconic });
             parsedLanguages.Add("other metarace", new[] { LanguageConstants.Celestial });
 
-            var languages = Selector.GetAutomaticLanguagesFor(race);
+            var languages = Selector.SelectAutomaticLanguagesFor(race);
             Assert.That(languages, Contains.Item(LanguageConstants.Draconic));
             Assert.That(languages, Is.Not.Contains(LanguageConstants.Celestial));
             Assert.That(languages.Count(), Is.EqualTo(1));
@@ -76,7 +76,7 @@ namespace NPCGen.Tests.Unit.Selectors
             parsedLanguages.Add(race.BaseRace, new[] { LanguageConstants.Common });
             parsedLanguages.Add(race.Metarace, new[] { LanguageConstants.Draconic });
 
-            var languages = Selector.GetAutomaticLanguagesFor(race);
+            var languages = Selector.SelectAutomaticLanguagesFor(race);
             Assert.That(languages, Contains.Item(LanguageConstants.Draconic));
             Assert.That(languages, Contains.Item(LanguageConstants.Common));
             Assert.That(languages.Count(), Is.EqualTo(2));
@@ -90,7 +90,7 @@ namespace NPCGen.Tests.Unit.Selectors
             parsedLanguages.Add(race.BaseRace, new[] { LanguageConstants.Common });
             parsedLanguages.Add(race.Metarace, new[] { LanguageConstants.Common });
 
-            var languages = Selector.GetAutomaticLanguagesFor(race);
+            var languages = Selector.SelectAutomaticLanguagesFor(race);
             Assert.That(languages, Contains.Item(LanguageConstants.Common));
             Assert.That(languages.Count(), Is.EqualTo(1));
         }
@@ -98,7 +98,7 @@ namespace NPCGen.Tests.Unit.Selectors
         [Test]
         public void GetBonusLanguagesAccessesBonusLanguagesTable()
         {
-            Selector.GetBonusLanguagesFor(String.Empty, String.Empty);
+            Selector.SelectBonusLanguagesFor(String.Empty, String.Empty);
             mockLanguagesMapper.Verify(p => p.Map("BonusLanguages"), Times.Once);
         }
 
@@ -109,7 +109,7 @@ namespace NPCGen.Tests.Unit.Selectors
             parsedLanguages.Add(race.BaseRace, new[] { LanguageConstants.Common });
             parsedLanguages.Add("other base race", new[] { LanguageConstants.Draconic });
 
-            var languages = Selector.GetBonusLanguagesFor(race.BaseRace, String.Empty);
+            var languages = Selector.SelectBonusLanguagesFor(race.BaseRace, String.Empty);
             Assert.That(languages, Contains.Item(LanguageConstants.Common));
             Assert.That(languages, Is.Not.Contains(LanguageConstants.Draconic));
             Assert.That(languages.Count(), Is.EqualTo(1));
@@ -118,7 +118,7 @@ namespace NPCGen.Tests.Unit.Selectors
         [Test]
         public void ClericBonusLanguages()
         {
-            var languages = Selector.GetBonusLanguagesFor(String.Empty, CharacterClassConstants.Cleric);
+            var languages = Selector.SelectBonusLanguagesFor(String.Empty, CharacterClassConstants.Cleric);
             Assert.That(languages, Contains.Item(LanguageConstants.Abyssal));
             Assert.That(languages, Contains.Item(LanguageConstants.Celestial));
             Assert.That(languages, Contains.Item(LanguageConstants.Infernal));
@@ -128,7 +128,7 @@ namespace NPCGen.Tests.Unit.Selectors
         [Test]
         public void WizardBonusLanguages()
         {
-            var languages = Selector.GetBonusLanguagesFor(String.Empty, CharacterClassConstants.Wizard);
+            var languages = Selector.SelectBonusLanguagesFor(String.Empty, CharacterClassConstants.Wizard);
             Assert.That(languages, Contains.Item(LanguageConstants.Draconic));
             Assert.That(languages.Count(), Is.EqualTo(1));
         }
@@ -136,7 +136,7 @@ namespace NPCGen.Tests.Unit.Selectors
         [Test]
         public void DruidBonusLanguages()
         {
-            var languages = Selector.GetBonusLanguagesFor(String.Empty, CharacterClassConstants.Druid);
+            var languages = Selector.SelectBonusLanguagesFor(String.Empty, CharacterClassConstants.Druid);
             Assert.That(languages, Contains.Item(LanguageConstants.Sylvan));
             Assert.That(languages.Count(), Is.EqualTo(1));
         }
@@ -147,7 +147,7 @@ namespace NPCGen.Tests.Unit.Selectors
             race.BaseRace = "base race";
             parsedLanguages.Add(race.BaseRace, new[] { LanguageConstants.Abyssal });
 
-            var languages = Selector.GetBonusLanguagesFor(race.BaseRace, CharacterClassConstants.Cleric);
+            var languages = Selector.SelectBonusLanguagesFor(race.BaseRace, CharacterClassConstants.Cleric);
             Assert.That(languages, Contains.Item(LanguageConstants.Abyssal));
             Assert.That(languages, Contains.Item(LanguageConstants.Celestial));
             Assert.That(languages, Contains.Item(LanguageConstants.Infernal));

@@ -6,6 +6,6 @@ namespace NPCGen.Selectors.Interfaces
 {
     public interface IStatPrioritySelector
     {
-        StatPriority GetStatPrioritiesFor(String className);
+        StatPriority SelectStatPrioritiesFor(String className);
     }
 }

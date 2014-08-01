@@ -4,6 +4,7 @@ using EquipmentGen.Common.Items;
 using Ninject;
 using NPCGen.Common.Items;
 using NPCGen.Generators.Interfaces.Abilities;
+using NPCGen.Generators.Interfaces.Combats;
 using NPCGen.Generators.Interfaces.Items;
 using NPCGen.Generators.Interfaces.Randomizers.Stats;
 using NUnit.Framework;
@@ -19,6 +20,8 @@ namespace NPCGen.Tests.Integration.Stress.Items
         public IStatsRandomizer StatsRandomizer { get; set; }
         [Inject]
         public IEquipmentGenerator EquipmentGenerator { get; set; }
+        [Inject]
+        public ICombatGenerator CombatGenerator { get; set; }
 
         protected override void MakeAssertions()
         {
@@ -38,7 +41,8 @@ namespace NPCGen.Tests.Integration.Stress.Items
             var alignment = GetNewAlignment();
             var characterClass = GetNewCharacterClass(alignment);
             var race = GetNewRace(alignment, characterClass);
-            var ability = AbilitiesGenerator.GenerateWith(characterClass, race, StatsRandomizer);
+            var baseAttack = CombatGenerator.GenerateBaseAttackWith(characterClass);
+            var ability = AbilitiesGenerator.GenerateWith(characterClass, race, StatsRandomizer, baseAttack);
 
             return EquipmentGenerator.GenerateWith(ability.Feats, characterClass);
         }

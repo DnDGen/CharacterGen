@@ -17,7 +17,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         public void MetaraceRandomizerTestsSetup()
         {
             var metaraces = RaceConstants.Metaraces.GetMetaraces().Union(new[] { RaceConstants.Metaraces.None });
-            mockPercentileResultSelector.Setup(p => p.GetAllResults(It.IsAny<String>())).Returns(metaraces);
+            mockPercentileResultSelector.Setup(p => p.SelectAllResults(It.IsAny<String>())).Returns(metaraces);
 
             foreach (var metarace in metaraces)
                 adjustments.Add(metarace, 0);

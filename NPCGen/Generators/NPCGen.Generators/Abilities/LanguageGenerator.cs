@@ -25,13 +25,13 @@ namespace NPCGen.Generators.Abilities
         {
             var languages = new List<String>();
 
-            var automaticLanguages = languagesSelector.GetAutomaticLanguagesFor(race);
+            var automaticLanguages = languagesSelector.SelectAutomaticLanguagesFor(race);
             languages.AddRange(automaticLanguages);
 
             if (className == CharacterClassConstants.Druid)
                 languages.Add(LanguageConstants.Druidic);
 
-            var bonusLanguages = languagesSelector.GetBonusLanguagesFor(race.BaseRace, className);
+            var bonusLanguages = languagesSelector.SelectBonusLanguagesFor(race.BaseRace, className);
             var remainingBonusLanguages = bonusLanguages.Except(languages).ToList();
             var numberOfBonusLanguages = intelligenceBonus;
 

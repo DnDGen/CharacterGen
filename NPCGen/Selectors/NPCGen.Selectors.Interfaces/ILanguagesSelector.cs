@@ -6,7 +6,7 @@ namespace NPCGen.Selectors.Interfaces
 {
     public interface ILanguagesSelector
     {
-        IEnumerable<String> GetAutomaticLanguagesFor(Race race);
-        IEnumerable<String> GetBonusLanguagesFor(String baseRace, String className);
+        IEnumerable<String> SelectAutomaticLanguagesFor(Race race);
+        IEnumerable<String> SelectBonusLanguagesFor(String baseRace, String className);
     }
 }

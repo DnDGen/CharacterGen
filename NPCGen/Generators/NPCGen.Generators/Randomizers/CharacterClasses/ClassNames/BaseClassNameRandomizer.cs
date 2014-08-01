@@ -26,7 +26,7 @@ namespace NPCGen.Generators.Randomizers.CharacterClasses.ClassNames
             var tableName = String.Format("{0}CharacterClasses", alignment.Goodness);
             var className = String.Empty;
 
-            do className = percentileResultSelector.GetPercentileFrom(tableName);
+            do className = percentileResultSelector.SelectPercentileFrom(tableName);
             while (!possibleClassNames.Contains(className));
 
             return className;
@@ -37,7 +37,7 @@ namespace NPCGen.Generators.Randomizers.CharacterClasses.ClassNames
         public IEnumerable<String> GetAllPossibleResults(Alignment alignment)
         {
             var tableName = String.Format("{0}CharacterClasses", alignment.Goodness);
-            var classNames = percentileResultSelector.GetAllResults(tableName);
+            var classNames = percentileResultSelector.SelectAllResults(tableName);
             return classNames.Where(c => CharacterClassIsAllowed(c, alignment));
         }
     }

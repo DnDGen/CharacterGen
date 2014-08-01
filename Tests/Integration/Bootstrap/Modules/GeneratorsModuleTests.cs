@@ -530,5 +530,17 @@ namespace NPCGen.Tests.Integration.Bootstrap.Modules
         {
             AssertNotSingleton<IEquipmentGenerator>();
         }
+
+        [Test]
+        public void SkillsGeneratorIsNotGeneratedAsSingleton()
+        {
+            AssertNotSingleton<ISkillsGenerator>();
+        }
+
+        [Test]
+        public void FeatsGeneratorIsNotGeneratedAsSingleton()
+        {
+            AssertNotSingleton<IFeatsGenerator>();
+        }
     }
 }

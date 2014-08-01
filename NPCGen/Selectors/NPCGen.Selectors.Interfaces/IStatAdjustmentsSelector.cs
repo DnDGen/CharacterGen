@@ -6,6 +6,6 @@ namespace NPCGen.Selectors.Interfaces
 {
     public interface IStatAdjustmentsSelector
     {
-        Dictionary<String, Int32> GetAdjustmentsFor(Race race);
+        Dictionary<String, Int32> SelectAdjustmentsFor(Race race);
     }
 }

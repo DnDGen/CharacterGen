@@ -61,7 +61,7 @@ namespace NPCGen.Generators.Verifiers
 
         private Boolean LevelAdjustmentsAreAllowed(IEnumerable<String> baseRaces, IEnumerable<String> metaraces, Int32 level)
         {
-            var levelAdjustments = adjustmentsSelector.GetAdjustmentsFrom("LevelAdjustments");
+            var levelAdjustments = adjustmentsSelector.SelectAdjustmentsFrom("LevelAdjustments");
             var minBaseRaceLevelAdjustment = levelAdjustments.Where(kvp => baseRaces.Contains(kvp.Key)).Min(kvp => kvp.Value);
             var minMetaraceLevelAdjustment = levelAdjustments.Where(kvp => metaraces.Contains(kvp.Key)).Min(kvp => kvp.Value);
 

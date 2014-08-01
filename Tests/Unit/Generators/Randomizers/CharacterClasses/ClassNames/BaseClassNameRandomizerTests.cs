@@ -26,8 +26,8 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassNames
             alignment.Goodness = AlignmentConstants.Good;
 
             mockPercentileResultSelector = new Mock<IPercentileSelector>();
-            mockPercentileResultSelector.Setup(p => p.GetAllResults(It.IsAny<String>())).Returns(new[] { firstClass, secondClass });
-            mockPercentileResultSelector.Setup(p => p.GetPercentileFrom(It.IsAny<String>())).Returns(firstClass);
+            mockPercentileResultSelector.Setup(p => p.SelectAllResults(It.IsAny<String>())).Returns(new[] { firstClass, secondClass });
+            mockPercentileResultSelector.Setup(p => p.SelectPercentileFrom(It.IsAny<String>())).Returns(firstClass);
 
             randomizer = new TestClassRandomizer(mockPercentileResultSelector.Object);
         }
@@ -36,13 +36,13 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassNames
         public void RandomizeGetsAllPossibleResultsFromGetAllPossibleResults()
         {
             randomizer.Randomize(alignment);
-            mockPercentileResultSelector.Verify(p => p.GetAllResults(It.IsAny<String>()), Times.Once);
+            mockPercentileResultSelector.Verify(p => p.SelectAllResults(It.IsAny<String>()), Times.Once);
         }
 
         [Test]
         public void RandomizeThrowsErrorIfNoPossibleResults()
         {
-            mockPercentileResultSelector.Setup(p => p.GetAllResults(It.IsAny<String>())).Returns(Enumerable.Empty<String>());
+            mockPercentileResultSelector.Setup(p => p.SelectAllResults(It.IsAny<String>())).Returns(Enumerable.Empty<String>());
             Assert.That(() => randomizer.Randomize(alignment), Throws.InstanceOf<IncompatibleRandomizersException>());
         }
 
@@ -59,17 +59,17 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassNames
             randomizer.Randomize(alignment);
 
             var tableName = String.Format("{0}CharacterClasses", alignment.Goodness);
-            mockPercentileResultSelector.Verify(p => p.GetPercentileFrom(tableName), Times.Once);
+            mockPercentileResultSelector.Verify(p => p.SelectPercentileFrom(tableName), Times.Once);
         }
 
         [Test]
         public void RandomizeLoopsUntilAllowedClassNameIsRolled()
         {
-            mockPercentileResultSelector.SetupSequence(p => p.GetPercentileFrom(It.IsAny<String>())).Returns("invalid class name")
+            mockPercentileResultSelector.SetupSequence(p => p.SelectPercentileFrom(It.IsAny<String>())).Returns("invalid class name")
                 .Returns(firstClass);
 
             randomizer.Randomize(alignment);
-            mockPercentileResultSelector.Verify(p => p.GetPercentileFrom(It.IsAny<String>()), Times.Exactly(2));
+            mockPercentileResultSelector.Verify(p => p.SelectPercentileFrom(It.IsAny<String>()), Times.Exactly(2));
         }
 
         [Test]
@@ -88,7 +88,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassNames
             randomizer.GetAllPossibleResults(alignment);
 
             var tableName = String.Format("{0}CharacterClasses", alignment.Goodness);
-            mockPercentileResultSelector.Verify(p => p.GetAllResults(tableName), Times.Once);
+            mockPercentileResultSelector.Verify(p => p.SelectAllResults(tableName), Times.Once);
         }
 
         [Test]

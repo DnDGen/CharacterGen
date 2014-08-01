@@ -24,11 +24,12 @@ namespace NPCGen.Tests.Integration.Stress.Combats
             var alignment = GetNewAlignment();
             var characterClass = GetNewCharacterClass(alignment);
             var race = GetNewRace(alignment, characterClass);
-            var ability = AbilitiesGenerator.GenerateWith(characterClass, race, StatsRandomizer);
-            var equipment = EquipmentGenerator.GenerateWith(ability.Feats, characterClass);
 
             var baseAttack = CombatGenerator.GenerateBaseAttackWith(characterClass);
             Assert.That(baseAttack.Bonus, Is.Not.Negative);
+
+            var ability = AbilitiesGenerator.GenerateWith(characterClass, race, StatsRandomizer, baseAttack);
+            var equipment = EquipmentGenerator.GenerateWith(ability.Feats, characterClass);
 
             var combat = CombatGenerator.GenerateWith(baseAttack, ability.Feats, ability.Stats, equipment);
             Assert.That(combat.ArmorClass.FlatFooted, Is.Positive);

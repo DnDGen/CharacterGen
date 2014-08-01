@@ -73,7 +73,7 @@ namespace NPCGen.Tests.Unit.Generators
             adjustments.Add(BaseRacePlusOne, 1);
             adjustments.Add(String.Empty, 0);
             adjustments.Add(Metarace, 1);
-            mockAdjustmentsSelector.Setup(p => p.GetAdjustmentsFrom("LevelAdjustments")).Returns(adjustments);
+            mockAdjustmentsSelector.Setup(p => p.SelectAdjustmentsFrom("LevelAdjustments")).Returns(adjustments);
 
             mockRandomizerVerifier.Setup(v => v.VerifyCompatibility(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object,
                 mockLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(true);
@@ -125,7 +125,7 @@ namespace NPCGen.Tests.Unit.Generators
                 mockClassNameRandomizer.Object)).Returns(characterClass);
             mockRaceGenerator.Setup(f => f.GenerateWith(alignment.Goodness, characterClass, mockBaseRaceRandomizer.Object,
                 mockMetaraceRandomizer.Object)).Returns(race);
-            mockAbilitiesGenerator.Setup(g => g.GenerateWith(characterClass, race, mockStatsRandomizer.Object)).Returns(ability);
+            mockAbilitiesGenerator.Setup(g => g.GenerateWith(characterClass, race, mockStatsRandomizer.Object, baseAttack)).Returns(ability);
             mockEquipmentGenerator.Setup(g => g.GenerateWith(ability.Feats, characterClass)).Returns(equipment);
             mockCombatGenerator.Setup(g => g.GenerateWith(baseAttack, ability.Feats, ability.Stats, equipment)).Returns(combat);
             mockCombatGenerator.Setup(g => g.GenerateBaseAttackWith(characterClass)).Returns(baseAttack);
@@ -257,7 +257,7 @@ namespace NPCGen.Tests.Unit.Generators
         [Test]
         public void GetsInterestingTraitFromPercentileResultSelector()
         {
-            mockPercentileSelector.Setup(p => p.GetPercentileFrom("Traits")).Returns("interesting trait");
+            mockPercentileSelector.Setup(p => p.SelectPercentileFrom("Traits")).Returns("interesting trait");
             var character = GenerateCharacter();
             Assert.That(character.InterestingTrait, Is.EqualTo("interesting trait"));
         }
@@ -300,7 +300,7 @@ namespace NPCGen.Tests.Unit.Generators
             var skillAdjustments = new Dictionary<String, Int32>();
             skillAdjustments.Add(equipment.Armor.Name, 5);
             skillAdjustments.Add("other armor", 10);
-            mockAdjustmentsSelector.Setup(s => s.GetAdjustmentsFrom("ArmorCheckPenalties")).Returns(skillAdjustments);
+            mockAdjustmentsSelector.Setup(s => s.SelectAdjustmentsFrom("ArmorCheckPenalties")).Returns(skillAdjustments);
 
             var character = GenerateCharacter();
             Assert.That(character.Ability.Skills["no penalty"].Bonus, Is.EqualTo(0));
@@ -315,7 +315,7 @@ namespace NPCGen.Tests.Unit.Generators
 
             var skillAdjustments = new Dictionary<String, Int32>();
             skillAdjustments.Add(equipment.Armor.Name, 5);
-            mockAdjustmentsSelector.Setup(s => s.GetAdjustmentsFrom("ArmorCheckPenalties")).Returns(skillAdjustments);
+            mockAdjustmentsSelector.Setup(s => s.SelectAdjustmentsFrom("ArmorCheckPenalties")).Returns(skillAdjustments);
 
             var character = GenerateCharacter();
             Assert.That(character.Ability.Skills[SkillConstants.Swim].Bonus, Is.EqualTo(-10));

@@ -39,7 +39,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             statPriority.FirstPriority = "first priority";
             statPriority.SecondPriority = "second priority";
             mockStatPrioritySelector = new Mock<IStatPrioritySelector>();
-            mockStatPrioritySelector.Setup(p => p.GetStatPrioritiesFor(It.IsAny<String>())).Returns(statPriority);
+            mockStatPrioritySelector.Setup(p => p.SelectStatPrioritiesFor(It.IsAny<String>())).Returns(statPriority);
 
             race = new Race();
             race.BaseRace = "base race";
@@ -49,7 +49,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             adjustments.Add(statPriority.SecondPriority, 0);
             adjustments.Add("other stat", 0);
             mockStatAdjustmentsSelector = new Mock<IStatAdjustmentsSelector>();
-            mockStatAdjustmentsSelector.Setup(p => p.GetAdjustmentsFor(race)).Returns(adjustments);
+            mockStatAdjustmentsSelector.Setup(p => p.SelectAdjustmentsFor(race)).Returns(adjustments);
 
             statsGenerator = new StatsGenerator(mockDice.Object, mockStatPrioritySelector.Object,
                 mockStatAdjustmentsSelector.Object);
@@ -76,7 +76,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         public void GetPrioritiesByClassName()
         {
             statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
-            mockStatPrioritySelector.Verify(p => p.GetStatPrioritiesFor(characterClass.ClassName), Times.Once);
+            mockStatPrioritySelector.Verify(p => p.SelectStatPrioritiesFor(characterClass.ClassName), Times.Once);
         }
 
         [Test]

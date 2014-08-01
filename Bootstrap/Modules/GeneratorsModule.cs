@@ -37,6 +37,8 @@ namespace NPCGen.Bootstrap.Modules
             Bind<IAbilitiesGenerator>().To<AbilitiesGenerator>();
             Bind<ICombatGenerator>().To<CombatGenerator>();
             Bind<IEquipmentGenerator>().To<EquipmentGenerator>();
+            Bind<ISkillsGenerator>().To<SkillsGenerator>();
+            Bind<IFeatsGenerator>().To<FeatsGenerator>();
 
             Bind<IAlignmentRandomizer>().To<AnyAlignmentRandomizer>().Named(AlignmentRandomizerTypeConstants.Any);
             Bind<IAlignmentRandomizer>().To<ChaoticAlignmentRandomizer>().Named(AlignmentRandomizerTypeConstants.Chaotic);

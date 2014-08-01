@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ICollectionsSelector.cs" />
     <Compile Include="ILanguagesSelector.cs" />
     <Compile Include="IAdjustmentsSelector.cs" />
     <Compile Include="IPercentileSelector.cs" />

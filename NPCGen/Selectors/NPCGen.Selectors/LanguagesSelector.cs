@@ -18,7 +18,7 @@ namespace NPCGen.Selectors
             this.collectionsMapper = collectionsMapper;
         }
 
-        public IEnumerable<String> GetAutomaticLanguagesFor(Race race)
+        public IEnumerable<String> SelectAutomaticLanguagesFor(Race race)
         {
             var languages = collectionsMapper.Map("AutomaticLanguages");
 
@@ -28,7 +28,7 @@ namespace NPCGen.Selectors
             return baseRaceLanguages.Union(metaraceLanguages);
         }
 
-        public IEnumerable<String> GetBonusLanguagesFor(String baseRace, String className)
+        public IEnumerable<String> SelectBonusLanguagesFor(String baseRace, String className)
         {
             var languages = collectionsMapper.Map("BonusLanguages");
             var bonusLanguages = new List<String>(languages[baseRace]);

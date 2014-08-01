@@ -28,10 +28,10 @@ namespace NPCGen.Generators.Abilities
         {
             var stats = statsRandomizer.Randomize();
 
-            var statPriorities = statPrioritySelector.GetStatPrioritiesFor(characterClass.ClassName);
+            var statPriorities = statPrioritySelector.SelectStatPrioritiesFor(characterClass.ClassName);
             var prioritizedStats = PrioritizeStats(stats, statPriorities);
 
-            var statAdjustments = statAdjustmentsSelector.GetAdjustmentsFor(race);
+            var statAdjustments = statAdjustmentsSelector.SelectAdjustmentsFor(race);
 
             foreach (var stat in prioritizedStats.Keys)
             {

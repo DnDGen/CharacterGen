@@ -18,14 +18,14 @@ namespace NPCGen.Selectors
             this.dice = dice;
         }
 
-        public String GetPercentileFrom(String tableName)
+        public String SelectPercentileFrom(String tableName)
         {
             var table = percentileMapper.Map(tableName);
             var roll = dice.Percentile();
             return table[roll];
         }
 
-        public IEnumerable<String> GetAllResults(String tableName)
+        public IEnumerable<String> SelectAllResults(String tableName)
         {
             var table = percentileMapper.Map(tableName);
             return table.Values.Distinct();

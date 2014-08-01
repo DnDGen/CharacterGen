@@ -3,6 +3,7 @@ using Ninject;
 using NPCGen.Common.Abilities.Skills;
 using NPCGen.Common.Abilities.Stats;
 using NPCGen.Generators.Interfaces.Abilities;
+using NPCGen.Generators.Interfaces.Combats;
 using NPCGen.Generators.Interfaces.Randomizers.Stats;
 using NUnit.Framework;
 
@@ -15,25 +16,19 @@ namespace NPCGen.Tests.Integration.Stress.Abilities
         public IAbilitiesGenerator AbilitiesGenerator { get; set; }
         [Inject, Named(StatsRandomizerTypeConstants.Raw)]
         public IStatsRandomizer StatsRandomizer { get; set; }
+        [Inject]
+        public ICombatGenerator CombatGenerator { get; set; }
 
         protected override void MakeAssertions()
         {
             var alignment = GetNewAlignment();
             var characterClass = GetNewCharacterClass(alignment);
             var race = GetNewRace(alignment, characterClass);
+            var baseAttack = CombatGenerator.GenerateBaseAttackWith(characterClass);
 
-            var ability = AbilitiesGenerator.GenerateWith(characterClass, race, StatsRandomizer);
+            var ability = AbilitiesGenerator.GenerateWith(characterClass, race, StatsRandomizer, baseAttack);
             Assert.That(ability.Feats, Is.Not.Empty);
             Assert.That(ability.Languages, Is.Not.Empty);
-
-            Assert.That(ability.Skills, Is.Not.Empty);
-
-            var skillNames = SkillConstants.GetSkills();
-            var extras = ability.Skills.Keys.Except(skillNames);
-            Assert.That(extras, Is.Empty);
-
-            foreach (var skill in ability.Skills.Values)
-                Assert.That(skill.BaseStat, Is.Not.Null);
 
             Assert.That(ability.Stats.Count, Is.EqualTo(6));
             Assert.That(ability.Stats.Keys, Contains.Item(StatConstants.Charisma));
@@ -48,6 +43,18 @@ namespace NPCGen.Tests.Integration.Stress.Abilities
             Assert.That(ability.Stats[StatConstants.Intelligence].Value, Is.Positive);
             Assert.That(ability.Stats[StatConstants.Strength].Value, Is.Positive);
             Assert.That(ability.Stats[StatConstants.Wisdom].Value, Is.Positive);
+
+            Assert.That(ability.Skills, Is.Not.Empty);
+
+            var skillNames = SkillConstants.GetSkills();
+            var extras = ability.Skills.Keys.Except(skillNames);
+            Assert.That(extras, Is.Empty);
+
+            foreach (var skill in ability.Skills.Values)
+            {
+                Assert.That(skill.BaseStat, Is.Not.Null);
+                Assert.That(ability.Stats.Values, Contains.Item(skill.BaseStat));
+            }
         }
     }
 }
