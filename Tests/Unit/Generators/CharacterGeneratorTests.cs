@@ -127,7 +127,7 @@ namespace NPCGen.Tests.Unit.Generators
                 mockMetaraceRandomizer.Object)).Returns(race);
             mockAbilitiesGenerator.Setup(g => g.GenerateWith(characterClass, race, mockStatsRandomizer.Object, baseAttack)).Returns(ability);
             mockEquipmentGenerator.Setup(g => g.GenerateWith(ability.Feats, characterClass)).Returns(equipment);
-            mockCombatGenerator.Setup(g => g.GenerateWith(baseAttack, ability.Feats, ability.Stats, equipment)).Returns(combat);
+            mockCombatGenerator.Setup(g => g.GenerateWith(baseAttack, characterClass, race, ability.Feats, ability.Stats, equipment)).Returns(combat);
             mockCombatGenerator.Setup(g => g.GenerateBaseAttackWith(characterClass)).Returns(baseAttack);
         }
 

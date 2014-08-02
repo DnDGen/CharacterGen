@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using EquipmentGen.Common.Items;
 using Moq;
 using NPCGen.Common.Abilities.Feats;
 using NPCGen.Common.Abilities.Stats;
 using NPCGen.Common.CharacterClasses;
+using NPCGen.Common.Combats;
 using NPCGen.Common.Items;
+using NPCGen.Common.Races;
 using NPCGen.Generators.Combats;
 using NPCGen.Generators.Interfaces.Combats;
 using NPCGen.Selectors.Interfaces;
@@ -25,21 +26,34 @@ namespace NPCGen.Tests.Unit.Generators.Combats
         private List<Feat> feats;
         private Dictionary<String, Stat> stats;
         private Equipment equipment;
+        private Mock<IArmorClassGenerator> mockArmorClassGenerator;
+        private Mock<IHitPointsGenerator> mockHitPointsGenerator;
+        private Race race;
+        private Mock<ISavingThrowsGenerator> mockSavingThrowsGenerator;
         private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
-        private Mock<ICollectionsSelector> mockCollectionsSelector;
+        private Dictionary<String, Int32> maxDexterityBonuses;
 
         [SetUp]
         public void Setup()
         {
+            mockArmorClassGenerator = new Mock<IArmorClassGenerator>();
+            mockHitPointsGenerator = new Mock<IHitPointsGenerator>();
+            mockSavingThrowsGenerator = new Mock<ISavingThrowsGenerator>();
             mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
-            mockCollectionsSelector = new Mock<ICollectionsSelector>();
-            combatGenerator = new CombatGenerator();
+            combatGenerator = new CombatGenerator(mockArmorClassGenerator.Object, mockHitPointsGenerator.Object, mockSavingThrowsGenerator.Object,
+                mockAdjustmentsSelector.Object);
             characterClass = new CharacterClass();
             feats = new List<Feat>();
             stats = new Dictionary<String, Stat>();
             equipment = new Equipment();
+            race = new Race();
+            maxDexterityBonuses = new Dictionary<String, Int32>();
 
             characterClass.ClassName = CharacterClassConstants.Fighter;
+            stats[StatConstants.Constitution] = new Stat { Value = 9266 };
+            stats[StatConstants.Dexterity] = new Stat { Value = 42 };
+            mockAdjustmentsSelector.Setup(s => s.SelectAdjustmentsFrom("MaxDexterityBonuses")).Returns(maxDexterityBonuses);
+            maxDexterityBonuses[String.Empty] = 42;
         }
 
         [Test]
@@ -160,72 +174,82 @@ namespace NPCGen.Tests.Unit.Generators.Combats
         public void ReturnCombatWithBaseAttack()
         {
             var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass);
-            var combat = combatGenerator.GenerateWith(baseAttack, feats, stats, equipment);
+            var combat = combatGenerator.GenerateWith(baseAttack, characterClass, race, feats, stats, equipment);
 
             Assert.That(combat.BaseAttack, Is.EqualTo(baseAttack));
         }
 
         [Test]
-        public void ArmorClassesStartsAt10()
+        public void AdjustedDexterityBonusIsBonus()
         {
-            var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass);
+            equipment.Armor.Name = "armor";
+            maxDexterityBonuses[equipment.Armor.Name] = 17;
 
-            var combat = combatGenerator.GenerateWith(baseAttack, feats, stats, equipment);
-            Assert.That(combat.ArmorClass.FlatFooted, Is.EqualTo(10));
-            Assert.That(combat.ArmorClass.Full, Is.EqualTo(10));
-            Assert.That(combat.ArmorClass.Touch, Is.EqualTo(10));
+            var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass);
+            var combat = combatGenerator.GenerateWith(baseAttack, characterClass, race, feats, stats, equipment);
+
+            Assert.That(combat.AdjustedDexterityBonus, Is.EqualTo(16));
         }
 
         [Test]
-        public void FullArmorClassInvolvesEverything()
+        public void AdjustedDexterityBonusIsMaxBonusOfArmor()
         {
-            var armorBonuses = new Dictionary<String, Int32>();
-            armorBonuses["shield"] = 1;
-            armorBonuses["armor"] = 3;
-            armorBonuses["other armor"] = -1;
-            mockAdjustmentsSelector.Setup(s => s.SelectAdjustmentsFrom("ArmorBonuses")).Returns(armorBonuses);
-
-            stats[StatConstants.Dexterity] = new Stat { Value = 24 };
-
-            var featAdjustments = new Dictionary<String, Int32>();
-            featAdjustments["feat 1"] = 2;
-            featAdjustments["feat 2"] = 4;
-            featAdjustments["feat 4"] = -2;
-            mockAdjustmentsSelector.Setup(s => s.SelectAdjustmentsFrom("FeatArmorAdjustments")).Returns(featAdjustments);
-
-            mockCollectionsSelector.Setup(s => s.SelectFrom("DeflectionBonuses")).Returns(new[] { "ring", "other ring" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom("NaturalArmor")).Returns(new[] { "feat 1", "amulet", "other feat" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom("DodgeBonuses")).Returns(new[] { "feat 2", "other feat" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom("SizeModifier")).Returns(new[] { "feat 2", "other feat" });
-
-            feats.Add(new Feat { Name = "feat 1" });
-            feats.Add(new Feat { Name = "feat 2" });
-            feats.Add(new Feat { Name = "feat 3" });
-
             equipment.Armor.Name = "armor";
-            equipment.Armor.Magic.Bonus = 5;
-            equipment.OffHand.Name = "shield";
-            equipment.OffHand.Magic.Bonus = 6;
-
-            var ring = new Item();
-            ring.Name = "ring";
-            ring.Magic.Bonus = 7;
-
-            var amulet = new Item();
-            amulet.Name = "amulet";
-            amulet.Magic.Bonus = 8;
-
-            equipment.Treasure.Items = new[]
-                {
-                    ring,
-                    amulet,
-                    new Item { Name = "thing" }
-                };
+            maxDexterityBonuses[equipment.Armor.Name] = 5;
 
             var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass);
+            var combat = combatGenerator.GenerateWith(baseAttack, characterClass, race, feats, stats, equipment);
 
-            var combat = combatGenerator.GenerateWith(baseAttack, feats, stats, equipment);
-            Assert.That(combat.ArmorClass.Full, Is.EqualTo(55));
+            Assert.That(combat.AdjustedDexterityBonus, Is.EqualTo(5));
+        }
+
+        [Test]
+        public void GetArmorClassFromGeneratorWithMaxDexterityBonus()
+        {
+            equipment.Armor.Name = "armor";
+            maxDexterityBonuses[equipment.Armor.Name] = 5;
+            var armorClass = new ArmorClass();
+            mockArmorClassGenerator.Setup(g => g.GenerateWith(equipment, 5, feats)).Returns(armorClass);
+
+            var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass);
+            var combat = combatGenerator.GenerateWith(baseAttack, characterClass, race, feats, stats, equipment);
+
+            Assert.That(combat.ArmorClass, Is.EqualTo(armorClass));
+        }
+
+        [Test]
+        public void GetArmorClassFromGeneratorWithDexterityBonus()
+        {
+            var armorClass = new ArmorClass();
+            mockArmorClassGenerator.Setup(g => g.GenerateWith(equipment, 16, feats)).Returns(armorClass);
+
+            var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass);
+            var combat = combatGenerator.GenerateWith(baseAttack, characterClass, race, feats, stats, equipment);
+
+            Assert.That(combat.ArmorClass, Is.EqualTo(armorClass));
+        }
+
+        [Test]
+        public void GetHitPointsFromGenerator()
+        {
+            mockHitPointsGenerator.Setup(g => g.GenerateWith(characterClass, stats[StatConstants.Constitution].Bonus, race)).Returns(90210);
+
+            var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass);
+            var combat = combatGenerator.GenerateWith(baseAttack, characterClass, race, feats, stats, equipment);
+
+            Assert.That(combat.HitPoints, Is.EqualTo(90210));
+        }
+
+        [Test]
+        public void GetSavingThrowsFromGenerator()
+        {
+            var savingThrows = new SavingThrows();
+            mockSavingThrowsGenerator.Setup(g => g.GenerateWith(characterClass, feats, stats)).Returns(savingThrows);
+
+            var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass);
+            var combat = combatGenerator.GenerateWith(baseAttack, characterClass, race, feats, stats, equipment);
+
+            Assert.That(combat.SavingThrows, Is.EqualTo(savingThrows));
         }
     }
 }

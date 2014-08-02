@@ -5,12 +5,28 @@ using NPCGen.Common.Abilities.Stats;
 using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Combats;
 using NPCGen.Common.Items;
+using NPCGen.Common.Races;
 using NPCGen.Generators.Interfaces.Combats;
+using NPCGen.Selectors.Interfaces;
 
 namespace NPCGen.Generators.Combats
 {
     public class CombatGenerator : ICombatGenerator
     {
+        private IArmorClassGenerator armorClassGenerator;
+        private IHitPointsGenerator hitPointsGenerator;
+        private ISavingThrowsGenerator savingThrowsGenerator;
+        private IAdjustmentsSelector adjustmentsSelector;
+
+        public CombatGenerator(IArmorClassGenerator armorClassGenerator, IHitPointsGenerator hitPointsGenerator, ISavingThrowsGenerator savingThrowsGenerator,
+            IAdjustmentsSelector adjustmentsSelector)
+        {
+            this.armorClassGenerator = armorClassGenerator;
+            this.hitPointsGenerator = hitPointsGenerator;
+            this.savingThrowsGenerator = savingThrowsGenerator;
+            this.adjustmentsSelector = adjustmentsSelector;
+        }
+
         public BaseAttack GenerateBaseAttackWith(CharacterClass characterClass)
         {
             var baseAttack = new BaseAttack();
@@ -52,9 +68,26 @@ namespace NPCGen.Generators.Combats
             return level / 2;
         }
 
-        public Combat GenerateWith(BaseAttack baseAttack, IEnumerable<Feat> feats, Dictionary<String, Stat> stats, Equipment equipment)
+        public Combat GenerateWith(BaseAttack baseAttack, CharacterClass characterClass, Race race, IEnumerable<Feat> feats, Dictionary<String, Stat> stats, Equipment equipment)
         {
-            throw new NotImplementedException();
+            var combat = new Combat();
+
+            combat.BaseAttack = baseAttack;
+            combat.AdjustedDexterityBonus = GetAdjustedDexterityBonus(stats, equipment);
+            combat.ArmorClass = armorClassGenerator.GenerateWith(equipment, combat.AdjustedDexterityBonus, feats);
+            combat.HitPoints = hitPointsGenerator.GenerateWith(characterClass, stats[StatConstants.Constitution].Bonus, race);
+            combat.SavingThrows = savingThrowsGenerator.GenerateWith(characterClass, feats, stats);
+
+            return combat;
+        }
+
+        private Int32 GetAdjustedDexterityBonus(Dictionary<String, Stat> stats, Equipment equipment)
+        {
+            var maxDexterityBonuses = adjustmentsSelector.SelectAdjustmentsFrom("MaxDexterityBonuses");
+            var dexterityBonus = stats[StatConstants.Dexterity].Bonus;
+            var maxArmorBonus = maxDexterityBonuses[equipment.Armor.Name];
+
+            return Math.Min(dexterityBonus, maxArmorBonus);
         }
     }
 }

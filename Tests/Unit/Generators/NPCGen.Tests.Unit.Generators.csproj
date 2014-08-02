@@ -64,6 +64,7 @@
     <Compile Include="AlignmentGeneratorTests.cs" />
     <Compile Include="CharacterClassGeneratorTests.cs" />
     <Compile Include="CharacterGeneratorTests.cs" />
+    <Compile Include="Combats\ArmorClassGeneratorTests.cs" />
     <Compile Include="Combats\CombatGeneratorTests.cs" />
     <Compile Include="Combats\HitPointsGeneratorTests.cs" />
     <Compile Include="Abilities\LanguageGeneratorTests.cs" />

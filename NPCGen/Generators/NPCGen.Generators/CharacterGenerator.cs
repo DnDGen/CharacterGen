@@ -80,7 +80,7 @@ namespace NPCGen.Generators
                     skill.Value.Bonus -= armorCheckPenalties[character.Equipment.Armor.Name];
             }
 
-            character.Combat = combatGenerator.GenerateWith(baseAttack, character.Ability.Feats, character.Ability.Stats, character.Equipment);
+            character.Combat = combatGenerator.GenerateWith(baseAttack, character.Class, character.Race, character.Ability.Feats, character.Ability.Stats, character.Equipment);
             character.InterestingTrait = percentileSelector.SelectPercentileFrom("Traits");
 
             return character;

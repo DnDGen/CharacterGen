@@ -58,6 +58,7 @@
     <Compile Include="AlignmentGenerator.cs" />
     <Compile Include="CharacterClassGenerator.cs" />
     <Compile Include="CharacterGenerator.cs" />
+    <Compile Include="Combats\ArmorClassGenerator.cs" />
     <Compile Include="Combats\CombatGenerator.cs" />
     <Compile Include="Combats\HitPointsGenerator.cs" />
     <Compile Include="Abilities\LanguageGenerator.cs" />
