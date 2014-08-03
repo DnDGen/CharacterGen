@@ -1,0 +1,22 @@
+﻿using System;
+using System.Collections.Generic;
+using NPCGen.Common.CharacterClasses;
+using NPCGen.Generators.Interfaces.Randomizers.Races;
+
+namespace NPCGen.Generators.Randomizers.Races.BaseRaces
+{
+    public class SetBaseRaceRandomizer : ISetBaseRaceRandomizer
+    {
+        public String SetBaseRace { get; set; }
+
+        public String Randomize(String goodness, CharacterClass characterClass)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<String> GetAllPossibleResults(String goodness, CharacterClass characterClass)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}

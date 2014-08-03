@@ -152,6 +152,12 @@ namespace NPCGen.Tests.Integration.Bootstrap.Modules
         }
 
         [Test]
+        public void SetAlignmentRandomizerIsNotGeneratedAsSingleton()
+        {
+            AssertNotSingleton<ISetAlignmentRandomizer>();
+        }
+
+        [Test]
         public void ClassNameRandomizerNamedAnyIsAnyClassNameRandomizer()
         {
             AssertNamedIsInstanceOf<IClassNameRandomizer, AnyClassNameRandomizer>(ClassNameRandomizerTypeConstants.Any);
@@ -206,6 +212,12 @@ namespace NPCGen.Tests.Integration.Bootstrap.Modules
         }
 
         [Test]
+        public void SetClassNameRandomizerIsNotGeneratedAsSingleton()
+        {
+            AssertNotSingleton<ISetClassNameRandomizer>();
+        }
+
+        [Test]
         public void LevelRandomizerNamedAnyIsAnyLevelRandomizer()
         {
             AssertNamedIsInstanceOf<ILevelRandomizer, AnyLevelRandomizer>(LevelRandomizerTypeConstants.Any);
@@ -243,6 +255,12 @@ namespace NPCGen.Tests.Integration.Bootstrap.Modules
         public void LevelRandomizerIsNotGeneratedAsSingleton(String name)
         {
             AssertNotSingleton<ILevelRandomizer>(name);
+        }
+
+        [Test]
+        public void SetLevelRandomizerIsNotGeneratedAsSingleton()
+        {
+            AssertNotSingleton<ISetLevelRandomizer>();
         }
 
         [Test]
@@ -311,6 +329,12 @@ namespace NPCGen.Tests.Integration.Bootstrap.Modules
         public void BaseRaceRandomizerIsNotGeneratedAsSingleton(String name)
         {
             AssertNotSingleton<IBaseRaceRandomizer>(name);
+        }
+
+        [Test]
+        public void SetBaseRaceRandomizerIsNotGeneratedAsSingleton()
+        {
+            AssertNotSingleton<ISetBaseRaceRandomizer>();
         }
 
         [Test]
@@ -453,6 +477,12 @@ namespace NPCGen.Tests.Integration.Bootstrap.Modules
         }
 
         [Test]
+        public void SetMetaraceRandomizerIsNotGeneratedAsSingleton()
+        {
+            AssertNotSingleton<ISetMetaraceRandomizer>();
+        }
+
+        [Test]
         public void StatsRandomizerNamedAverageIsAverageStatsRandomizer()
         {
             AssertNamedIsInstanceOf<IStatsRandomizer, AverageStatsRandomizer>(StatsRandomizerTypeConstants.Average);
@@ -514,6 +544,12 @@ namespace NPCGen.Tests.Integration.Bootstrap.Modules
         }
 
         [Test]
+        public void SetStatsRandomizerIsNotGeneratedAsSingleton()
+        {
+            AssertNotSingleton<ISetStatsRandomizer>();
+        }
+
+        [Test]
         public void AbilitiesGeneratorIsNotGeneratedAsSingleton()
         {
             AssertNotSingleton<IAbilitiesGenerator>();
@@ -541,6 +577,12 @@ namespace NPCGen.Tests.Integration.Bootstrap.Modules
         public void FeatsGeneratorIsNotGeneratedAsSingleton()
         {
             AssertNotSingleton<IFeatsGenerator>();
+        }
+
+        [Test]
+        public void SavingThrowsGeneratorIsNotGeneratedAsSingleton()
+        {
+            AssertNotSingleton<ISavingThrowsGenerator>();
         }
     }
 }

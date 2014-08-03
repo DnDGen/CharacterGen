@@ -34,6 +34,7 @@ namespace NPCGen.Tests.Unit.Generators.Combats
             feats = new List<Feat>();
             armorBonuses = new Dictionary<String, Int32>();
             featAdjustments = new Dictionary<String, Int32>();
+            adjustedDexterityBonus = 0;
 
             armorBonuses[String.Empty] = 0;
             mockAdjustmentsSelector.Setup(s => s.SelectAdjustmentsFrom("ArmorBonuses")).Returns(armorBonuses);
@@ -332,18 +333,6 @@ namespace NPCGen.Tests.Unit.Generators.Combats
         }
 
         [Test]
-        public void OnlyHighestDodgeBonusApplies()
-        {
-            feats.Add(new Feat { Name = "feat 1" });
-            feats.Add(new Feat { Name = "feat 2" });
-            featAdjustments["feat 1"] = 1;
-            featAdjustments["feat 2"] = 2;
-            mockCollectionsSelector.Setup(s => s.SelectFrom("DodgeBonuses")).Returns(new[] { "feat 1", "feat 2", "other feat" });
-
-            AssertArmorClass(10, 12, 12);
-        }
-
-        [Test]
         public void DodgeBonusesStack()
         {
             feats.Add(new Feat { Name = "feat 1" });
@@ -370,12 +359,12 @@ namespace NPCGen.Tests.Unit.Generators.Combats
             mockCollectionsSelector.Setup(s => s.SelectFrom("DodgeBonuses")).Returns(new[] { "feat 1" });
             mockCollectionsSelector.Setup(s => s.SelectFrom("SizeModifiers")).Returns(new[] { "feat 1" });
 
-            feats.Add(new Feat { Name = "feat 1" });
-
             equipment.Armor.Name = "armor";
             equipment.Armor.Magic.Bonus = 1;
             equipment.OffHand.Name = "shield";
             equipment.OffHand.Magic.Bonus = 1;
+            equipment.OffHand.ItemType = ItemTypeConstants.Armor;
+            equipment.OffHand.Attributes = new[] { AttributeConstants.Shield };
 
             var ring = new Item();
             ring.Name = "ring";

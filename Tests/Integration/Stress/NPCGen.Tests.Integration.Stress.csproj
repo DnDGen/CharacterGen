@@ -37,7 +37,7 @@
   <ItemGroup>
     <Reference Include="EquipmentGen.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\EquipmentGen.Common.1.1\lib\EquipmentGen.Common.dll</HintPath>
+      <HintPath>..\..\..\packages\EquipmentGen.Common.1.2\lib\EquipmentGen.Common.dll</HintPath>
     </Reference>
     <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -72,8 +72,12 @@
     <Compile Include="Abilities\LanguageGeneratorTests.cs" />
     <Compile Include="Items\EquipmentGeneratorTests.cs" />
     <Compile Include="RaceGeneratorTests.cs" />
+    <Compile Include="Randomizers\Alignments\SetAlignmentRandomizerTests.cs" />
     <Compile Include="Randomizers\CharacterClasses\ClassNames\ClassNameRandomizerTests.cs" />
+    <Compile Include="Randomizers\CharacterClasses\ClassNames\SetClassNameRandomizerTests.cs" />
+    <Compile Include="Randomizers\CharacterClasses\Levels\SetLevelRandomizerTests.cs" />
     <Compile Include="Randomizers\Races\BaseRaces\BaseRaceRandomizerTests.cs" />
+    <Compile Include="Randomizers\Races\BaseRaces\SetBaseRaceRandomizerTests.cs" />
     <Compile Include="Randomizers\Races\Metaraces\AnyForcedMetaraceRandomizerTests.cs" />
     <Compile Include="Randomizers\Races\Metaraces\EvilForcedMetaraceRandomizerTests.cs" />
     <Compile Include="Randomizers\Races\Metaraces\GeneticForcedMetaraceRandomizerTests.cs" />
@@ -127,6 +131,8 @@
     <Compile Include="Randomizers\Races\Metaraces\GoodMetaraceRandomizerTests.cs" />
     <Compile Include="Randomizers\Races\Metaraces\GeneticMetaraceRandomizerTests.cs" />
     <Compile Include="Randomizers\Races\Metaraces\EvilMetaraceRandomizerTests.cs" />
+    <Compile Include="Randomizers\Races\Metaraces\SetMetaraceRandomizerTests.cs" />
+    <Compile Include="Randomizers\Stats\SetStatsRandomizerTests.cs" />
     <Compile Include="Randomizers\Stats\TwoTenSidedDiceStatsRandomizerTests.cs" />
     <Compile Include="Randomizers\Stats\RawStatsRandomizerTests.cs" />
     <Compile Include="Randomizers\Stats\PoorStatsRandomizerTests.cs" />

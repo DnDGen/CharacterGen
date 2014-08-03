@@ -48,11 +48,11 @@
     </Reference>
     <Reference Include="EquipmentGen.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\EquipmentGen.Common.1.1\lib\EquipmentGen.Common.dll</HintPath>
+      <HintPath>..\..\..\packages\EquipmentGen.Common.1.2\lib\EquipmentGen.Common.dll</HintPath>
     </Reference>
     <Reference Include="EquipmentGen.Generators, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\EquipmentGen.Generators.1.1\lib\EquipmentGen.Generators.dll</HintPath>
+      <HintPath>..\..\..\packages\EquipmentGen.Generators.1.2\lib\EquipmentGen.Generators.dll</HintPath>
     </Reference>
     <Reference Include="EquipmentGen.Generators.Interfaces, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

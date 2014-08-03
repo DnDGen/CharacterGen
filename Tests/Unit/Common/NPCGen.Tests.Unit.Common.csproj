@@ -32,7 +32,7 @@
   <ItemGroup>
     <Reference Include="EquipmentGen.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\EquipmentGen.Common.1.1\lib\EquipmentGen.Common.dll</HintPath>
+      <HintPath>..\..\..\packages\EquipmentGen.Common.1.2\lib\EquipmentGen.Common.dll</HintPath>
     </Reference>
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.2.1402.2112\lib\net40\Moq.dll</HintPath>

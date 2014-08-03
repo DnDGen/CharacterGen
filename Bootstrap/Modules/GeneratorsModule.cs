@@ -40,6 +40,7 @@ namespace NPCGen.Bootstrap.Modules
             Bind<ISkillsGenerator>().To<SkillsGenerator>();
             Bind<IFeatsGenerator>().To<FeatsGenerator>();
             Bind<IArmorClassGenerator>().To<ArmorClassGenerator>();
+            Bind<ISavingThrowsGenerator>().To<SavingThrowsGenerator>();
 
             Bind<IAlignmentRandomizer>().To<AnyAlignmentRandomizer>().Named(AlignmentRandomizerTypeConstants.Any);
             Bind<IAlignmentRandomizer>().To<ChaoticAlignmentRandomizer>().Named(AlignmentRandomizerTypeConstants.Chaotic);
@@ -105,6 +106,13 @@ namespace NPCGen.Bootstrap.Modules
             Bind<IStatsRandomizer>().To<PoorStatsRandomizer>().Named(StatsRandomizerTypeConstants.Poor);
             Bind<IStatsRandomizer>().To<RawStatsRandomizer>().Named(StatsRandomizerTypeConstants.Raw);
             Bind<IStatsRandomizer>().To<TwoTenSidedDiceStatsRandomizer>().Named(StatsRandomizerTypeConstants.TwoTenSidedDice);
+
+            Bind<ISetAlignmentRandomizer>().To<SetAlignmentRandomizer>();
+            Bind<ISetClassNameRandomizer>().To<SetClassNameRandomizer>();
+            Bind<ISetLevelRandomizer>().To<SetLevelRandomizer>();
+            Bind<ISetBaseRaceRandomizer>().To<SetBaseRaceRandomizer>();
+            Bind<ISetMetaraceRandomizer>().To<SetMetaraceRandomizer>();
+            Bind<ISetStatsRandomizer>().To<SetStatsRandomizer>();
         }
     }
 }

@@ -13,6 +13,7 @@ namespace NPCGen.Bootstrap.Modules
             Bind<IPercentileSelector>().To<PercentileSelector>();
             Bind<IStatPrioritySelector>().To<StatPrioritySelector>();
             Bind<IStatAdjustmentsSelector>().To<StatAdjustmentsSelector>();
+            Bind<ICollectionsSelector>().To<CollectionsSelector>();
         }
     }
 }

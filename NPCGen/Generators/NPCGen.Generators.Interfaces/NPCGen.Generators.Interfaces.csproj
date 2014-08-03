@@ -32,7 +32,7 @@
   <ItemGroup>
     <Reference Include="EquipmentGen.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\EquipmentGen.Common.1.1\lib\EquipmentGen.Common.dll</HintPath>
+      <HintPath>..\..\..\packages\EquipmentGen.Common.1.2\lib\EquipmentGen.Common.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -60,14 +60,20 @@
     <Compile Include="Items\IEquipmentGenerator.cs" />
     <Compile Include="Randomizers\Alignments\AlignmentRandomizerTypeConstants.cs" />
     <Compile Include="Randomizers\Alignments\IAlignmentRandomizer.cs" />
+    <Compile Include="Randomizers\Alignments\ISetAlignmentRandomizer.cs" />
     <Compile Include="Randomizers\CharacterClasses\ClassNameRandomizerTypeConstants.cs" />
     <Compile Include="Randomizers\CharacterClasses\IClassNameRandomizer.cs" />
     <Compile Include="Randomizers\CharacterClasses\ILevelRandomizer.cs" />
+    <Compile Include="Randomizers\CharacterClasses\ISetClassNameRandomizer.cs" />
+    <Compile Include="Randomizers\CharacterClasses\ISetLevelRandomizer.cs" />
     <Compile Include="Randomizers\CharacterClasses\LevelRandomizerTypeConstants.cs" />
     <Compile Include="Randomizers\Races\BaseRaceRandomizerTypeConstants.cs" />
     <Compile Include="Randomizers\Races\IBaseRaceRandomizer.cs" />
     <Compile Include="Randomizers\Races\IMetaraceRandomizer.cs" />
+    <Compile Include="Randomizers\Races\ISetBaseRaceRandomizer.cs" />
+    <Compile Include="Randomizers\Races\ISetMetaraceRandomizer.cs" />
     <Compile Include="Randomizers\Races\MetaraceRandomizerTypeConstants.cs" />
+    <Compile Include="Randomizers\Stats\ISetStatsRandomizer.cs" />
     <Compile Include="Randomizers\Stats\IStatsRandomizer.cs" />
     <Compile Include="Randomizers\Stats\StatsRandomizerTypeConstants.cs" />
     <Compile Include="Verifiers\Exceptions\IncompatibleRandomizersException.cs" />

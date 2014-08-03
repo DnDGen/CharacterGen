@@ -30,7 +30,7 @@ namespace NPCGen.Generators.Combats
             var dodgeBonus = GetDodgeBonus(feats);
 
             var armorClass = new ArmorClass();
-            armorClass.Full = armorBonuses + sizeModifier + deflectionBonus + naturalArmorBonus + adjustedDexterityBonus + dodgeBonus;
+            armorClass.Full = 10 + armorBonuses + sizeModifier + deflectionBonus + naturalArmorBonus + adjustedDexterityBonus + dodgeBonus;
             armorClass.Touch = armorClass.Full - armorBonuses - naturalArmorBonus;
             armorClass.FlatFooted = armorClass.Full - adjustedDexterityBonus - dodgeBonus;
 
@@ -87,6 +87,9 @@ namespace NPCGen.Generators.Combats
             var deflectionBonuses = collectionsSelector.SelectFrom("DeflectionBonuses");
             var itemsWithDeflectionBonuses = items.Where(i => deflectionBonuses.Contains(i.Name));
 
+            if (!itemsWithDeflectionBonuses.Any())
+                return 0;
+
             return itemsWithDeflectionBonuses.Max(i => i.Magic.Bonus);
         }
 
@@ -102,6 +105,9 @@ namespace NPCGen.Generators.Combats
             var featNaturalArmorBonuses = featNaturalArmorAdjustments.Select(kvp => kvp.Value);
 
             var naturalArmorBonuses = featNaturalArmorBonuses.Union(itemNaturalArmorBonuses);
+            if (!naturalArmorBonuses.Any())
+                return 0;
+
             return naturalArmorBonuses.Max();
         }
 

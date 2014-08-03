@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CollectionsSelector.cs" />
     <Compile Include="LanguagesSelector.cs" />
     <Compile Include="AdjustmentsSelector.cs" />
     <Compile Include="PercentileSelector.cs" />

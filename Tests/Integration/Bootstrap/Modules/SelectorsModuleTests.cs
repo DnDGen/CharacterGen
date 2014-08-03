@@ -35,5 +35,11 @@ namespace NPCGen.Tests.Integration.Bootstrap.Modules
         {
             AssertNotSingleton<IStatAdjustmentsSelector>();
         }
+
+        [Test]
+        public void CollectionsSelectorsAreNotGeneratedAsSingletons()
+        {
+            AssertNotSingleton<ICollectionsSelector>();
+        }
     }
 }
