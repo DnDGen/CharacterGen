@@ -72,5 +72,23 @@ namespace NPCGen.Tests.Unit.Common.Abilities.Skills
 
             Assert.That(skill.GetTotalSkillBonus(), Is.EqualTo(9266));
         }
+
+        [Test]
+        public void EffectiveRanksIsRanksIfClassSkill()
+        {
+            skill.Ranks = 5;
+            skill.ClassSkill = true;
+
+            Assert.That(skill.EffectiveRanks, Is.EqualTo(5));
+        }
+
+        [Test]
+        public void EffectiveRanksIsHalfIfCrossClassSkill()
+        {
+            skill.Ranks = 5;
+            skill.ClassSkill = false;
+
+            Assert.That(skill.EffectiveRanks, Is.EqualTo(2.5));
+        }
     }
 }

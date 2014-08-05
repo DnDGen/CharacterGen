@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using D20Dice;
 using Moq;
 using NPCGen.Common.Abilities.Stats;
 using NPCGen.Common.CharacterClasses;
@@ -22,14 +23,16 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         private Dictionary<String, Stat> stats;
         private List<String> classSkills;
         private List<String> crossClassSkills;
-        private Mock<ISkillStatSelector> mockSkillStatSelector;
+        private Mock<ISkillSelector> mockSkillSelector;
+        private Mock<IDice> mockDice;
 
         [SetUp]
         public void Setup()
         {
             mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
-            mockSkillStatSelector = new Mock<ISkillStatSelector>();
+            mockSkillSelector = new Mock<ISkillSelector>();
+            mockDice = new Mock<IDice>();
             skillsGenerator = new SkillsGenerator();
             characterClass = new CharacterClass();
             race = new Race();
@@ -110,13 +113,19 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         }
 
         [Test]
-        public void GetAndAssignStatsToSkills()
+        public void AssignStatsToSkills()
         {
             classSkills.Add("class skill");
             crossClassSkills.Add("cross class skill");
 
-            mockSkillStatSelector.Setup(s => s.SelectFor("class skill")).Returns("stat 1");
-            mockSkillStatSelector.Setup(s => s.SelectFor("cross class skill")).Returns("stat 2");
+            var classSkillSelection = new SkillSelection();
+            classSkillSelection.BaseStatName = "stat 1";
+
+            var crossClassSkillSelection = new SkillSelection();
+            crossClassSkillSelection.BaseStatName = "stat 2";
+
+            mockSkillSelector.Setup(s => s.SelectFor("class skill")).Returns(classSkillSelection);
+            mockSkillSelector.Setup(s => s.SelectFor("cross class skill")).Returns(crossClassSkillSelection);
 
             stats["stat 1"] = new Stat();
             stats["stat 2"] = new Stat();
@@ -129,13 +138,37 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         [Test]
         public void SetArmorCheckPenalty()
         {
-            Assert.Fail();
+            classSkills.Add("penalty");
+            crossClassSkills.Add("no penalty");
+
+            var penaltySkillSelection = new SkillSelection();
+            penaltySkillSelection.ArmorCheckPenalty = true;
+
+            var noPenaltySkillSelection = new SkillSelection();
+            noPenaltySkillSelection.ArmorCheckPenalty = false;
+
+            mockSkillSelector.Setup(s => s.SelectFor("penalty")).Returns(penaltySkillSelection);
+            mockSkillSelector.Setup(s => s.SelectFor("no penalty")).Returns(noPenaltySkillSelection);
+
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
+            Assert.That(skills["penalty"].ArmorCheckPenalty, Is.True);
+            Assert.That(skills["no penalty"].ArmorCheckPenalty, Is.False);
         }
 
         [Test]
         public void SetClassSkill()
         {
-            Assert.Fail();
+            classSkills.Add("skill 1");
+            classSkills.Add("skill 2");
+            crossClassSkills.Add("skill 3");
+            crossClassSkills.Add("skill 4");
+
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
+
+            Assert.That(skills["skill 1"].ClassSkill, Is.True);
+            Assert.That(skills["skill 2"].ClassSkill, Is.True);
+            Assert.That(skills["skill 3"].ClassSkill, Is.False);
+            Assert.That(skills["skill 4"].ClassSkill, Is.False);
         }
 
         [Test]

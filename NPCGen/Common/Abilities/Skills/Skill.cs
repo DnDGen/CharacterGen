@@ -10,15 +10,21 @@ namespace NPCGen.Common.Abilities.Skills
         public Int32 Bonus { get; set; }
         public Boolean ClassSkill { get; set; }
         public Boolean ArmorCheckPenalty { get; set; }
+        public Double EffectiveRanks
+        {
+            get
+            {
+                if (ClassSkill)
+                    return Ranks;
+
+                return (Double)Ranks / 2;
+            }
+        }
 
         public Int32 GetTotalSkillBonus()
         {
-            var total = Bonus + BaseStat.Bonus;
-
-            if (ClassSkill)
-                return total + Ranks;
-
-            return total + Ranks / 2;
+            var roundedEffectiveRanks = Math.Floor(EffectiveRanks);
+            return Bonus + BaseStat.Bonus + Convert.ToInt32(roundedEffectiveRanks);
         }
     }
 }

@@ -44,10 +44,11 @@
     <Compile Include="IAdjustmentsSelector.cs" />
     <Compile Include="IPercentileSelector.cs" />
     <Compile Include="ISavingThrowsSelector.cs" />
-    <Compile Include="ISkillStatSelector.cs" />
+    <Compile Include="ISkillSelector.cs" />
     <Compile Include="IStatAdjustmentsSelector.cs" />
     <Compile Include="IStatPrioritySelector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SkillSelection.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Common\NPCGen.Common.csproj">
