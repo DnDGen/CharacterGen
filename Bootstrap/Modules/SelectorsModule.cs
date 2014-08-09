@@ -14,6 +14,7 @@ namespace NPCGen.Bootstrap.Modules
             Bind<IStatPrioritySelector>().To<StatPrioritySelector>();
             Bind<IStatAdjustmentsSelector>().To<StatAdjustmentsSelector>();
             Bind<ICollectionsSelector>().To<CollectionsSelector>();
+            Bind<ISkillSelector>().To<SkillSelector>();
         }
     }
 }

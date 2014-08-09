@@ -41,5 +41,11 @@ namespace NPCGen.Tests.Integration.Bootstrap.Modules
         {
             AssertNotSingleton<ICollectionsSelector>();
         }
+
+        [Test]
+        public void SkillSelectorsAreNotGeneratedAsSingletons()
+        {
+            AssertNotSingleton<ISkillSelector>();
+        }
     }
 }

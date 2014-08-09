@@ -73,7 +73,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         public void GetSkillsFromSkillGenerator()
         {
             var skills = new Dictionary<String, Skill>();
-            mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats)).Returns(skills);
+            mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, stats)).Returns(skills);
 
             var ability = abilitiesGenerator.GenerateWith(characterClass, race, mockStatsRandomizer.Object, baseAttack);
             Assert.That(ability.Skills, Is.EqualTo(skills));
@@ -83,7 +83,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         public void GetFeatsFromFeatGenerator()
         {
             var skills = new Dictionary<String, Skill>();
-            mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats)).Returns(skills);
+            mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, stats)).Returns(skills);
 
             var feats = new List<Feat>();
             mockFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills)).Returns(feats);
@@ -99,7 +99,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             skills["skill 1"] = new Skill();
             skills["skill 2"] = new Skill();
             skills["skill 3"] = new Skill();
-            mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats)).Returns(skills);
+            mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, stats)).Returns(skills);
 
             var feats = new List<Feat>();
             var featWithNoSkills = new Feat { Name = "no adjust" };
