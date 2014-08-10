@@ -42,8 +42,8 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
 
             characterClass.ClassName = "class name";
             characterClass.Level = 5;
-            mockCollectionsSelector.Setup(s => s.SelectFrom("class nameClassSkills")).Returns(classSkills);
-            mockCollectionsSelector.Setup(s => s.SelectFrom("class nameCrossClassSkills")).Returns(crossClassSkills);
+            mockCollectionsSelector.Setup(s => s.SelectFrom("ClassSkills", "class name")).Returns(classSkills);
+            mockCollectionsSelector.Setup(s => s.SelectFrom("CrossClassSkills", "class name")).Returns(crossClassSkills);
             var selection = new SkillSelection { BaseStatName = StatConstants.Intelligence };
             mockSkillSelector.Setup(s => s.SelectFor(It.IsAny<String>())).Returns(selection);
             stats[StatConstants.Intelligence] = intelligence;

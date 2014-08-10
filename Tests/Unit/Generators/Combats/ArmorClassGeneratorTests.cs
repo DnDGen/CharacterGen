@@ -39,10 +39,10 @@ namespace NPCGen.Tests.Unit.Generators.Combats
             armorBonuses[String.Empty] = 0;
             mockAdjustmentsSelector.Setup(s => s.SelectAdjustmentsFrom("ArmorBonuses")).Returns(armorBonuses);
             mockAdjustmentsSelector.Setup(s => s.SelectAdjustmentsFrom("FeatArmorAdjustments")).Returns(featAdjustments);
-            mockCollectionsSelector.Setup(s => s.SelectFrom("SizeModifiers")).Returns(Enumerable.Empty<String>());
-            mockCollectionsSelector.Setup(s => s.SelectFrom("NaturalArmorBonuses")).Returns(Enumerable.Empty<String>());
-            mockCollectionsSelector.Setup(s => s.SelectFrom("DodgeBonuses")).Returns(Enumerable.Empty<String>());
-            mockCollectionsSelector.Setup(s => s.SelectFrom("DeflectionBonuses")).Returns(Enumerable.Empty<String>());
+            mockCollectionsSelector.Setup(s => s.SelectFrom("ArmorClassModifiers", "Size")).Returns(Enumerable.Empty<String>());
+            mockCollectionsSelector.Setup(s => s.SelectFrom("ArmorClassModifiers", "NaturalArmor")).Returns(Enumerable.Empty<String>());
+            mockCollectionsSelector.Setup(s => s.SelectFrom("ArmorClassModifiers", "Dodge")).Returns(Enumerable.Empty<String>());
+            mockCollectionsSelector.Setup(s => s.SelectFrom("ArmorClassModifiers", "Deflection")).Returns(Enumerable.Empty<String>());
 
         }
 
@@ -113,7 +113,7 @@ namespace NPCGen.Tests.Unit.Generators.Combats
             feats.Add(new Feat { Name = "feat 1" });
             featAdjustments["feat 1"] = 1;
             featAdjustments["feat 2"] = -1;
-            mockCollectionsSelector.Setup(s => s.SelectFrom("SizeModifiers")).Returns(new[] { "feat 1", "feat 2", "other feat" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom("ArmorClassModifiers", "Size")).Returns(new[] { "feat 1", "feat 2", "other feat" });
 
             AssertArmorClass(11, 11, 11);
         }
@@ -125,7 +125,7 @@ namespace NPCGen.Tests.Unit.Generators.Combats
             feats.Add(new Feat { Name = "feat 2" });
             featAdjustments["feat 1"] = 1;
             featAdjustments["feat 2"] = 1;
-            mockCollectionsSelector.Setup(s => s.SelectFrom("SizeModifiers")).Returns(new[] { "feat 1", "feat 2", "other feat" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom("ArmorClassModifiers", "Size")).Returns(new[] { "feat 1", "feat 2", "other feat" });
 
             AssertArmorClass(12, 12, 12);
         }
@@ -136,7 +136,7 @@ namespace NPCGen.Tests.Unit.Generators.Combats
             feats.Add(new Feat { Name = "feat 2" });
             featAdjustments["feat 1"] = 1;
             featAdjustments["feat 2"] = -1;
-            mockCollectionsSelector.Setup(s => s.SelectFrom("SizeModifiers")).Returns(new[] { "feat 1", "feat 2", "other feat" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom("ArmorClassModifiers", "Size")).Returns(new[] { "feat 1", "feat 2", "other feat" });
 
             AssertArmorClass(9, 9, 9);
         }
@@ -175,7 +175,7 @@ namespace NPCGen.Tests.Unit.Generators.Combats
         [Test]
         public void DeflectionBonusApplied()
         {
-            mockCollectionsSelector.Setup(s => s.SelectFrom("DeflectionBonuses")).Returns(new[] { "ring", "other ring" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom("ArmorClassModifiers", "Deflection")).Returns(new[] { "ring", "other ring" });
 
             var ring = new Item();
             ring.Name = "ring";
@@ -193,7 +193,7 @@ namespace NPCGen.Tests.Unit.Generators.Combats
         [Test]
         public void OnlyHighestDeflectionBonusApplies()
         {
-            mockCollectionsSelector.Setup(s => s.SelectFrom("DeflectionBonuses")).Returns(new[] { "ring", "other ring" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom("ArmorClassModifiers", "Deflection")).Returns(new[] { "ring", "other ring" });
 
             var ring = new Item();
             ring.Name = "ring";
@@ -211,7 +211,7 @@ namespace NPCGen.Tests.Unit.Generators.Combats
         [Test]
         public void DeflectionBonusesDoNotStack()
         {
-            mockCollectionsSelector.Setup(s => s.SelectFrom("DeflectionBonuses")).Returns(new[] { "ring", "other ring" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom("ArmorClassModifiers", "Deflection")).Returns(new[] { "ring", "other ring" });
 
             var ring = new Item();
             ring.Name = "ring";
@@ -232,7 +232,7 @@ namespace NPCGen.Tests.Unit.Generators.Combats
             feats.Add(new Feat { Name = "feat 1" });
             featAdjustments["feat 1"] = 1;
             featAdjustments["feat 2"] = -1;
-            mockCollectionsSelector.Setup(s => s.SelectFrom("NaturalArmorBonuses")).Returns(new[] { "feat 1", "feat 2", "other feat" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom("ArmorClassModifiers", "NaturalArmor")).Returns(new[] { "feat 1", "feat 2", "other feat" });
 
             AssertArmorClass(11, 11, 10);
         }
@@ -240,7 +240,7 @@ namespace NPCGen.Tests.Unit.Generators.Combats
         [Test]
         public void NaturalArmorBonusFromItemsApplied()
         {
-            mockCollectionsSelector.Setup(s => s.SelectFrom("NaturalArmorBonuses")).Returns(new[] { "ring", "other ring" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom("ArmorClassModifiers", "NaturalArmor")).Returns(new[] { "ring", "other ring" });
 
             var ring = new Item();
             ring.Name = "ring";
@@ -262,7 +262,7 @@ namespace NPCGen.Tests.Unit.Generators.Combats
             feats.Add(new Feat { Name = "feat 2" });
             featAdjustments["feat 1"] = 1;
             featAdjustments["feat 2"] = 2;
-            mockCollectionsSelector.Setup(s => s.SelectFrom("NaturalArmorBonuses")).Returns(new[] { "feat 1", "feat 2", "ring", "other ring" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom("ArmorClassModifiers", "NaturalArmor")).Returns(new[] { "feat 1", "feat 2", "ring", "other ring" });
 
             var ring = new Item();
             ring.Name = "ring";
@@ -284,7 +284,7 @@ namespace NPCGen.Tests.Unit.Generators.Combats
             feats.Add(new Feat { Name = "feat 2" });
             featAdjustments["feat 1"] = 1;
             featAdjustments["feat 2"] = 1;
-            mockCollectionsSelector.Setup(s => s.SelectFrom("NaturalArmorBonuses")).Returns(new[] { "feat 1", "feat 2", "ring", "other ring" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom("ArmorClassModifiers", "NaturalArmor")).Returns(new[] { "feat 1", "feat 2", "ring", "other ring" });
 
             var ring = new Item();
             ring.Name = "ring";
@@ -306,7 +306,7 @@ namespace NPCGen.Tests.Unit.Generators.Combats
             feats.Add(new Feat { Name = "feat 2" });
             featAdjustments["feat 1"] = 1;
             featAdjustments["feat 2"] = 1;
-            mockCollectionsSelector.Setup(s => s.SelectFrom("NaturalArmorBonuses")).Returns(new[] { "feat 1", "feat 2", "ring", "other ring" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom("ArmorClassModifiers", "NaturalArmor")).Returns(new[] { "feat 1", "feat 2", "ring", "other ring" });
 
             var ring = new Item();
             ring.Name = "ring";
@@ -327,7 +327,7 @@ namespace NPCGen.Tests.Unit.Generators.Combats
             feats.Add(new Feat { Name = "feat 1" });
             featAdjustments["feat 1"] = 1;
             featAdjustments["feat 2"] = -1;
-            mockCollectionsSelector.Setup(s => s.SelectFrom("DodgeBonuses")).Returns(new[] { "feat 1", "feat 2", "other feat" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom("ArmorClassModifiers", "Dodge")).Returns(new[] { "feat 1", "feat 2", "other feat" });
 
             AssertArmorClass(10, 11, 11);
         }
@@ -339,7 +339,7 @@ namespace NPCGen.Tests.Unit.Generators.Combats
             feats.Add(new Feat { Name = "feat 2" });
             featAdjustments["feat 1"] = 1;
             featAdjustments["feat 2"] = 1;
-            mockCollectionsSelector.Setup(s => s.SelectFrom("DodgeBonuses")).Returns(new[] { "feat 1", "feat 2", "other feat" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom("ArmorClassModifiers", "Dodge")).Returns(new[] { "feat 1", "feat 2", "other feat" });
 
             AssertArmorClass(10, 12, 12);
         }
@@ -354,10 +354,10 @@ namespace NPCGen.Tests.Unit.Generators.Combats
             feats.Add(new Feat { Name = "feat 1" });
             featAdjustments["feat 1"] = 1;
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom("DeflectionBonuses")).Returns(new[] { "ring" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom("NaturalArmorBonuses")).Returns(new[] { "feat 1" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom("DodgeBonuses")).Returns(new[] { "feat 1" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom("SizeModifiers")).Returns(new[] { "feat 1" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom("ArmorClassModifiers", "Deflection")).Returns(new[] { "ring" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom("ArmorClassModifiers", "NaturalArmor")).Returns(new[] { "feat 1" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom("ArmorClassModifiers", "Dodge")).Returns(new[] { "feat 1" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom("ArmorClassModifiers", "Size")).Returns(new[] { "feat 1" });
 
             equipment.Armor.Name = "armor";
             equipment.Armor.Magic.Bonus = 1;

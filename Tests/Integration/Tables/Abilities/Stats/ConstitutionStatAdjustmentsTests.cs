@@ -4,7 +4,7 @@ using System.Linq;
 using NPCGen.Common.Races;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Integration.Tables.Stats
+namespace NPCGen.Tests.Integration.Tables.Abilities.Stats
 {
     [TestFixture]
     public class ConstitutionStatAdjustmentsTests : CollectionTests

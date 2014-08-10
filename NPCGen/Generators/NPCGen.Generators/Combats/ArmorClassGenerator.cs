@@ -72,7 +72,7 @@ namespace NPCGen.Generators.Combats
         private Int32 GetSizeModifier(IEnumerable<Feat> feats)
         {
             var featAdjustments = adjustmentsSelector.SelectAdjustmentsFrom("FeatArmorAdjustments");
-            var sizeModifiers = collectionsSelector.SelectFrom("SizeModifiers");
+            var sizeModifiers = collectionsSelector.SelectFrom("ArmorClassModifiers", "Size");
             var modifier = 0;
 
             foreach (var feat in feats)
@@ -84,7 +84,7 @@ namespace NPCGen.Generators.Combats
 
         private Int32 GetDeflectionBonus(IEnumerable<Item> items)
         {
-            var deflectionBonuses = collectionsSelector.SelectFrom("DeflectionBonuses");
+            var deflectionBonuses = collectionsSelector.SelectFrom("ArmorClassModifiers", "Deflection");
             var itemsWithDeflectionBonuses = items.Where(i => deflectionBonuses.Contains(i.Name));
 
             if (!itemsWithDeflectionBonuses.Any())
@@ -95,7 +95,7 @@ namespace NPCGen.Generators.Combats
 
         private Int32 GetNaturalArmorBonus(IEnumerable<Item> items, IEnumerable<Feat> feats)
         {
-            var thingsThatGrantNaturalArmorBonuses = collectionsSelector.SelectFrom("NaturalArmorBonuses");
+            var thingsThatGrantNaturalArmorBonuses = collectionsSelector.SelectFrom("ArmorClassModifiers", "NaturalArmor");
             var itemsWithNaturalArmorBonuses = items.Where(i => thingsThatGrantNaturalArmorBonuses.Contains(i.Name));
             var itemNaturalArmorBonuses = itemsWithNaturalArmorBonuses.Select(i => i.Magic.Bonus);
 
@@ -114,7 +114,7 @@ namespace NPCGen.Generators.Combats
         private Int32 GetDodgeBonus(IEnumerable<Feat> feats)
         {
             var featAdjustments = adjustmentsSelector.SelectAdjustmentsFrom("FeatArmorAdjustments");
-            var dodgeBonuses = collectionsSelector.SelectFrom("DodgeBonuses");
+            var dodgeBonuses = collectionsSelector.SelectFrom("ArmorClassModifiers", "Dodge");
             var bonus = 0;
 
             foreach (var feat in feats)

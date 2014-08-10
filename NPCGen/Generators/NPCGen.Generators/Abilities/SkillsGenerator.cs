@@ -27,11 +27,8 @@ namespace NPCGen.Generators.Abilities
 
         public Dictionary<String, Skill> GenerateWith(CharacterClass characterClass, Dictionary<String, Stat> stats)
         {
-            var tableName = String.Format("{0}ClassSkills", characterClass.ClassName);
-            var classSkills = collectionsSelector.SelectFrom(tableName);
-
-            tableName = String.Format("{0}CrossClassSkills", characterClass.ClassName);
-            var crossClassSkills = collectionsSelector.SelectFrom(tableName);
+            var classSkills = collectionsSelector.SelectFrom("ClassSkills", characterClass.ClassName);
+            var crossClassSkills = collectionsSelector.SelectFrom("CrossClassSkills", characterClass.ClassName);
 
             var skills = new Dictionary<String, Skill>();
 

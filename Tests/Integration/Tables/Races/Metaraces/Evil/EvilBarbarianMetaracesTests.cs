@@ -12,28 +12,13 @@ namespace NPCGen.Tests.Integration.Tables.Races.Metaraces.Evil
             get { return "EvilBarbarianMetaraces"; }
         }
 
-        [Test]
-        public void EvilBarbarianEmptyPercentile()
+        [TestCase(EmptyContent, 1, 94)]
+        [TestCase(RaceConstants.Metaraces.Werewolf, 95, 96)]
+        [TestCase(RaceConstants.Metaraces.HalfFiend, 97, 98)]
+        [TestCase(RaceConstants.Metaraces.HalfDragon, 99, 100)]
+        public void Percentile(String content, Int32 lower, Int32 upper)
         {
-            AssertPercentile(EmptyContent, 1, 94);
-        }
-
-        [Test]
-        public void EvilBarbarianWerewolfPercentile()
-        {
-            AssertPercentile(RaceConstants.Metaraces.Werewolf, 95, 96);
-        }
-
-        [Test]
-        public void EvilBarbarianHalfFiendPercentile()
-        {
-            AssertPercentile(RaceConstants.Metaraces.HalfFiend, 97, 98);
-        }
-
-        [Test]
-        public void EvilBarbarianHalfDragonPercentile()
-        {
-            AssertPercentile(RaceConstants.Metaraces.HalfDragon, 99, 100);
+            AssertPercentile(content, lower, upper);
         }
     }
 }

@@ -18,28 +18,13 @@ namespace NPCGen.Tests.Integration.Tables.Races.Metaraces.Evil
             AssertPercentile(EmptyContent, 1, 96);
         }
 
-        [Test]
-        public void EvilFighterWereratPercentile()
+        [TestCase(RaceConstants.Metaraces.Wererat, 97)]
+        [TestCase(RaceConstants.Metaraces.Werewolf, 98)]
+        [TestCase(RaceConstants.Metaraces.HalfFiend, 99)]
+        [TestCase(RaceConstants.Metaraces.HalfDragon, 100)]
+        public void Percentile(String content, Int32 roll)
         {
-            AssertPercentile(RaceConstants.Metaraces.Wererat, 97);
-        }
-
-        [Test]
-        public void EvilFighterWerewolfPercentile()
-        {
-            AssertPercentile(RaceConstants.Metaraces.Werewolf, 98);
-        }
-
-        [Test]
-        public void EvilFighterHalfFiendPercentile()
-        {
-            AssertPercentile(RaceConstants.Metaraces.HalfFiend, 99);
-        }
-
-        [Test]
-        public void EvilFighterHalfDragonPercentile()
-        {
-            AssertPercentile(RaceConstants.Metaraces.HalfDragon, 100);
+            AssertPercentile(content, roll);
         }
     }
 }

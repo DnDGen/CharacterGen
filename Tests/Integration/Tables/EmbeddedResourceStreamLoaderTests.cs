@@ -56,7 +56,7 @@ namespace NPCGen.Tests.Integration.Tables
         [Test]
         public void ThrowErrorIfFileIsNotFormattedCorrectly()
         {
-            Assert.That(() => StreamLoader.LoadFor("invalid filename"), Throws.ArgumentException.With.Message.EqualTo("\"invalid filename\" is not a valid file"));
+            Assert.That(() => StreamLoader.LoadFor("AlignmentGoodness"), Throws.ArgumentException.With.Message.EqualTo("\"AlignmentGoodness\" is not a valid file"));
         }
 
         [Test]

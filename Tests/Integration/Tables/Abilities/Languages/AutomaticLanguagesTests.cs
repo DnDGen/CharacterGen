@@ -5,7 +5,7 @@ using NPCGen.Common.Abilities;
 using NPCGen.Common.Races;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Integration.Tables
+namespace NPCGen.Tests.Integration.Tables.Abilities.Languages
 {
     [TestFixture]
     public class AutomaticLanguagesTests : CollectionTests

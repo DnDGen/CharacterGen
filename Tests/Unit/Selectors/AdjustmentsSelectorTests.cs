@@ -22,7 +22,7 @@ namespace NPCGen.Tests.Unit.Selectors
         }
 
         [Test]
-        public void GetResultsFromMapper()
+        public void SelectAdjustments()
         {
             var adjustments = new Dictionary<String, Int32>();
             mockAdjustmentMapper.Setup(m => m.Map("table name")).Returns(adjustments);

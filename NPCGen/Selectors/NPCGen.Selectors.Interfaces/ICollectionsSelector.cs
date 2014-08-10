@@ -5,6 +5,6 @@ namespace NPCGen.Selectors.Interfaces
 {
     public interface ICollectionsSelector
     {
-        IEnumerable<String> SelectFrom(String tableName);
+        IEnumerable<String> SelectFrom(String tableName, String tableEntry);
     }
 }

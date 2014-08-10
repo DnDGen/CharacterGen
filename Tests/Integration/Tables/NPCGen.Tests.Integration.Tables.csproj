@@ -54,9 +54,10 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Abilities\Skills\ClassSkillsTests.cs" />
     <Compile Include="Alignments\AlignmentGoodnessTests.cs" />
-    <Compile Include="AutomaticLanguagesTests.cs" />
-    <Compile Include="BonusLanguagesTests.cs" />
+    <Compile Include="Abilities\Languages\AutomaticLanguagesTests.cs" />
+    <Compile Include="Abilities\Languages\BonusLanguagesTests.cs" />
     <Compile Include="CharacterClasses\EvilCharacterClassesTests.cs" />
     <Compile Include="CharacterClasses\GoodCharacterClassesTests.cs" />
     <Compile Include="CharacterClasses\LevelAdjustmentsTests.cs" />
@@ -127,13 +128,13 @@
     <Compile Include="Races\Metaraces\Neutral\NeutralRogueMetaracesTests.cs" />
     <Compile Include="Races\Metaraces\Neutral\NeutralSorcererMetaracesTests.cs" />
     <Compile Include="Races\Metaraces\Neutral\NeutralWizardMetaracesTests.cs" />
-    <Compile Include="Stats\CharismaStatAdjustmentsTests.cs" />
-    <Compile Include="Stats\ConstitutionStatAdjustmentsTests.cs" />
-    <Compile Include="Stats\DexterityStatAdjustmentsTests.cs" />
-    <Compile Include="Stats\IntelligenceStatAdjustmentsTests.cs" />
-    <Compile Include="Stats\StatPrioritiesTests.cs" />
-    <Compile Include="Stats\StrengthStatAdjustmentsTests.cs" />
-    <Compile Include="Stats\WisdomStatAdjustmentsTests.cs" />
+    <Compile Include="Abilities\Stats\CharismaStatAdjustmentsTests.cs" />
+    <Compile Include="Abilities\Stats\ConstitutionStatAdjustmentsTests.cs" />
+    <Compile Include="Abilities\Stats\DexterityStatAdjustmentsTests.cs" />
+    <Compile Include="Abilities\Stats\IntelligenceStatAdjustmentsTests.cs" />
+    <Compile Include="Abilities\Stats\StatPrioritiesTests.cs" />
+    <Compile Include="Abilities\Stats\StrengthStatAdjustmentsTests.cs" />
+    <Compile Include="Abilities\Stats\WisdomStatAdjustmentsTests.cs" />
     <Compile Include="TraitsTests.cs" />
   </ItemGroup>
   <ItemGroup>
