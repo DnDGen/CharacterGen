@@ -12,46 +12,21 @@ namespace NPCGen.Tests.Integration.Tables.Races.BaseRaces.Evil
             get { return "EvilMonkBaseRaces"; }
         }
 
-        [Test]
-        public void EvilMonkHalfElfPercentile()
+        [TestCase(RaceConstants.BaseRaces.HalfElf, 1, 10)]
+        [TestCase(RaceConstants.BaseRaces.HalfOrc, 11, 20)]
+        [TestCase(RaceConstants.BaseRaces.Human, 21, 90)]
+        [TestCase(RaceConstants.BaseRaces.Hobgoblin, 91, 93)]
+        [TestCase(RaceConstants.BaseRaces.OgreMage, 95, 96)]
+        [TestCase(EmptyContent, 97, 100)]
+        public void Percentile(String content, Int32 lower, Int32 upper)
         {
-            AssertPercentile(RaceConstants.BaseRaces.HalfElf, 1, 10);
-        }
-
-        [Test]
-        public void EvilMonkHalfOrcPercentile()
-        {
-            AssertPercentile(RaceConstants.BaseRaces.HalfOrc, 11, 20);
-        }
-
-        [Test]
-        public void EvilMonkHumanPercentile()
-        {
-            AssertPercentile(RaceConstants.BaseRaces.Human, 21, 90);
-        }
-
-        [Test]
-        public void EvilMonkHobgoblinPercentile()
-        {
-            AssertPercentile(RaceConstants.BaseRaces.Hobgoblin, 91, 93);
+            AssertPercentile(content, lower, upper);
         }
 
         [Test]
         public void EvilMonkTieflingPercentile()
         {
             AssertPercentile(RaceConstants.BaseRaces.Tiefling, 94);
-        }
-
-        [Test]
-        public void EvilMonkOgreMagePercentile()
-        {
-            AssertPercentile(RaceConstants.BaseRaces.OgreMage, 95, 96);
-        }
-
-        [Test]
-        public void EvilMonkEmptyPercentile()
-        {
-            AssertPercentile(EmptyContent, 97, 100);
         }
     }
 }

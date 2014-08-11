@@ -11,12 +11,12 @@ namespace NPCGen.Generators.Randomizers.Races.Metaraces
 
         public String Randomize(String goodness, CharacterClass characterClass)
         {
-            throw new NotImplementedException();
+            return SetMetarace;
         }
 
         public IEnumerable<String> GetAllPossibleResults(String goodness, CharacterClass characterClass)
         {
-            throw new NotImplementedException();
+            return new[] { SetMetarace };
         }
     }
 }

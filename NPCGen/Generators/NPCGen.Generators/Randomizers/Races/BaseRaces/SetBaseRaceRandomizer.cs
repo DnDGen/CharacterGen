@@ -11,12 +11,12 @@ namespace NPCGen.Generators.Randomizers.Races.BaseRaces
 
         public String Randomize(String goodness, CharacterClass characterClass)
         {
-            throw new NotImplementedException();
+            return SetBaseRace;
         }
 
         public IEnumerable<String> GetAllPossibleResults(String goodness, CharacterClass characterClass)
         {
-            throw new NotImplementedException();
+            return new[] { SetBaseRace };
         }
     }
 }
