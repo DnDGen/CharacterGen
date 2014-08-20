@@ -24,12 +24,12 @@ namespace NPCGen.Generators.Randomizers.Stats
         {
             var stats = new Dictionary<String, Stat>();
 
-            stats.Add(StatConstants.Strength, new Stat());
-            stats.Add(StatConstants.Constitution, new Stat());
-            stats.Add(StatConstants.Dexterity, new Stat());
-            stats.Add(StatConstants.Intelligence, new Stat());
-            stats.Add(StatConstants.Wisdom, new Stat());
-            stats.Add(StatConstants.Charisma, new Stat());
+            stats[StatConstants.Charisma] = new Stat();
+            stats[StatConstants.Constitution] = new Stat();
+            stats[StatConstants.Dexterity] = new Stat();
+            stats[StatConstants.Intelligence] = new Stat();
+            stats[StatConstants.Strength] = new Stat();
+            stats[StatConstants.Wisdom] = new Stat();
 
             return stats;
         }

@@ -16,7 +16,30 @@ namespace NPCGen.Generators.Randomizers.Stats
 
         public Dictionary<String, Stat> Randomize()
         {
-            throw new NotImplementedException();
+            var stats = InitializeStats();
+
+            stats[StatConstants.Charisma].Value = SetCharisma;
+            stats[StatConstants.Constitution].Value = SetConstitution;
+            stats[StatConstants.Dexterity].Value = SetDexterity;
+            stats[StatConstants.Intelligence].Value = SetIntelligence;
+            stats[StatConstants.Strength].Value = SetStrength;
+            stats[StatConstants.Wisdom].Value = SetWisdom;
+
+            return stats;
+        }
+
+        private Dictionary<String, Stat> InitializeStats()
+        {
+            var stats = new Dictionary<String, Stat>();
+
+            stats[StatConstants.Charisma] = new Stat();
+            stats[StatConstants.Constitution] = new Stat();
+            stats[StatConstants.Dexterity] = new Stat();
+            stats[StatConstants.Intelligence] = new Stat();
+            stats[StatConstants.Strength] = new Stat();
+            stats[StatConstants.Wisdom] = new Stat();
+
+            return stats;
         }
     }
 }

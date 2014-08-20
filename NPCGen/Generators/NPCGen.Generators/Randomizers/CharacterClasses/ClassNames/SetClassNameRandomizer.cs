@@ -11,12 +11,12 @@ namespace NPCGen.Generators.Randomizers.CharacterClasses.ClassNames
 
         public String Randomize(Alignment alignment)
         {
-            throw new NotImplementedException();
+            return SetClassName;
         }
 
         public IEnumerable<String> GetAllPossibleResults(Alignment alignment)
         {
-            throw new NotImplementedException();
+            return new[] { SetClassName };
         }
     }
 }

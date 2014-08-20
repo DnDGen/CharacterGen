@@ -70,6 +70,9 @@
     <Compile Include="Combats\HitPointsGeneratorTests.cs" />
     <Compile Include="Abilities\LanguageGeneratorTests.cs" />
     <Compile Include="RaceGeneratorTests.cs" />
+    <Compile Include="Randomizers\Alignments\SetAlignmentRandomizerTests.cs" />
+    <Compile Include="Randomizers\CharacterClasses\ClassNames\SetClassNameRandomizerTests.cs" />
+    <Compile Include="Randomizers\CharacterClasses\Levels\SetLevelRandomizerTests.cs" />
     <Compile Include="Randomizers\Races\BaseRaces\SetBaseRaceRandomizerTests.cs" />
     <Compile Include="Randomizers\Races\Metaraces\AnyForcedMetaraceRandomizerTests.cs" />
     <Compile Include="Randomizers\Races\Metaraces\EvilForcedMetaraceRandomizerTests.cs" />
@@ -142,6 +145,7 @@
     <Compile Include="Randomizers\Stats\OnesAsSixesStatsRandomizerTests.cs" />
     <Compile Include="Randomizers\Stats\PoorStatsRandomizerTests.cs" />
     <Compile Include="Randomizers\Stats\RawStatsRandomizerTests.cs" />
+    <Compile Include="Randomizers\Stats\SetStatsRandomizerTests.cs" />
     <Compile Include="Randomizers\Stats\TwoTenSidedDiceStatsRandomizerTests.cs" />
     <Compile Include="Verifiers\RandomizerVerifierTests.cs" />
   </ItemGroup>

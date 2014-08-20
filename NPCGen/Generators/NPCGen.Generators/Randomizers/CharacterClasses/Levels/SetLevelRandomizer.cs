@@ -10,12 +10,12 @@ namespace NPCGen.Generators.Randomizers.CharacterClasses.Levels
 
         public Int32 Randomize()
         {
-            throw new NotImplementedException();
+            return SetLevel;
         }
 
         public IEnumerable<Int32> GetAllPossibleResults()
         {
-            throw new NotImplementedException();
+            return new[] { SetLevel };
         }
     }
 }
