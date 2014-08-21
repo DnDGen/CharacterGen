@@ -71,7 +71,7 @@ namespace NPCGen.Tests.Integration.Tables.CharacterClasses
         public void Collection(String name, Int32 adjustment)
         {
             var collection = new[] { Convert.ToString(adjustment) };
-            AssertCollection(name, collection);
+            base.Collection(name, collection);
         }
     }
 }

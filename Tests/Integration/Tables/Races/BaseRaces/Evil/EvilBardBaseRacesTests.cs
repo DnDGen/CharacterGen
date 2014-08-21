@@ -20,17 +20,17 @@ namespace NPCGen.Tests.Integration.Tables.Races.BaseRaces.Evil
         [TestCase(RaceConstants.BaseRaces.Goblin, 98)]
         [TestCase(RaceConstants.BaseRaces.Tiefling, 99)]
         [TestCase(EmptyContent, 100)]
-        public void Percentile(String content, Int32 roll)
+        public override void Percentile(String content, Int32 roll)
         {
-            AssertPercentile(content, roll);
+            base.Percentile(content, roll);
         }
 
         [TestCase(RaceConstants.BaseRaces.HalfElf, 3, 17)]
         [TestCase(RaceConstants.BaseRaces.HalfOrc, 21, 22)]
         [TestCase(RaceConstants.BaseRaces.Human, 23, 97)]
-        public void Percentile(String content, Int32 lower, Int32 upper)
+        public override void Percentile(String content, Int32 lower, Int32 upper)
         {
-            AssertPercentile(content, lower, upper);
+            base.Percentile(content, lower, upper);
         }
     }
 }

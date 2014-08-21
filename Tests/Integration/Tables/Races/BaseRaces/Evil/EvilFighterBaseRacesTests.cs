@@ -22,9 +22,9 @@ namespace NPCGen.Tests.Integration.Tables.Races.BaseRaces.Evil
         [TestCase(RaceConstants.BaseRaces.Orc, 82, 86)]
         [TestCase(RaceConstants.BaseRaces.Drow, 87, 88)]
         [TestCase(EmptyContent, 97, 100)]
-        public void Percentile(String content, Int32 lower, Int32 upper)
+        public override void Percentile(String content, Int32 lower, Int32 upper)
         {
-            AssertPercentile(content, lower, upper);
+            base.Percentile(content, lower, upper);
         }
 
         [TestCase(RaceConstants.BaseRaces.HighElf, 5)]
@@ -41,9 +41,9 @@ namespace NPCGen.Tests.Integration.Tables.Races.BaseRaces.Evil
         [TestCase(RaceConstants.BaseRaces.Ogre, 94)]
         [TestCase(RaceConstants.BaseRaces.MindFlayer, 95)]
         [TestCase(RaceConstants.BaseRaces.OgreMage, 96)]
-        public void Percentile(String content, Int32 roll)
+        public override void Percentile(String content, Int32 roll)
         {
-            AssertPercentile(content, roll);
+            base.Percentile(content, roll);
         }
     }
 }

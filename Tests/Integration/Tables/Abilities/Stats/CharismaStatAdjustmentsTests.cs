@@ -71,7 +71,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Stats
         public void Collection(String name, Int32 adjustment)
         {
             var collection = new[] { Convert.ToString(adjustment) };
-            AssertCollection(name, collection);
+            Collection(name, collection);
         }
     }
 }

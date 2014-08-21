@@ -103,9 +103,9 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Languages
         [TestCase(RaceConstants.Metaraces.Weretiger)]
         [TestCase(RaceConstants.Metaraces.Werewolf)]
         [TestCase(RaceConstants.Metaraces.None)]
-        public void Collection(String name, params String[] languages)
+        public override void Collection(String name, params String[] languages)
         {
-            AssertCollection(name, languages);
+            base.Collection(name, languages);
         }
     }
 }

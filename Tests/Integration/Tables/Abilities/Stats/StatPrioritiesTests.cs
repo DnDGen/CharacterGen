@@ -30,9 +30,9 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Stats
         [TestCase(CharacterClassConstants.Rogue, StatConstants.Dexterity, StatConstants.Intelligence)]
         [TestCase(CharacterClassConstants.Sorcerer, StatConstants.Charisma, StatConstants.Dexterity)]
         [TestCase(CharacterClassConstants.Wizard, StatConstants.Intelligence, StatConstants.Dexterity)]
-        public void Collection(String name, params String[] items)
+        public override void OrderedCollection(String name, params String[] items)
         {
-            AssertCollectionAndOrder(name, items);
+            base.OrderedCollection(name, items);
         }
     }
 }

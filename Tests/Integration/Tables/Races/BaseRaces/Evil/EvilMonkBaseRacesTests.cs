@@ -18,15 +18,15 @@ namespace NPCGen.Tests.Integration.Tables.Races.BaseRaces.Evil
         [TestCase(RaceConstants.BaseRaces.Hobgoblin, 91, 93)]
         [TestCase(RaceConstants.BaseRaces.OgreMage, 95, 96)]
         [TestCase(EmptyContent, 97, 100)]
-        public void Percentile(String content, Int32 lower, Int32 upper)
+        public override void Percentile(String content, Int32 lower, Int32 upper)
         {
-            AssertPercentile(content, lower, upper);
+            base.Percentile(content, lower, upper);
         }
 
-        [Test]
-        public void EvilMonkTieflingPercentile()
+        [TestCase(RaceConstants.BaseRaces.Tiefling, 94)]
+        public override void Percentile(String content, Int32 roll)
         {
-            AssertPercentile(RaceConstants.BaseRaces.Tiefling, 94);
+            base.Percentile(content, roll);
         }
     }
 }

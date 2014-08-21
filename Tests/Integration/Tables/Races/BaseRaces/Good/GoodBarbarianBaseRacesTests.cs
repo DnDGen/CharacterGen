@@ -12,52 +12,22 @@ namespace NPCGen.Tests.Integration.Tables.Races.BaseRaces.Good
             get { return "GoodBarbarianBaseRaces"; }
         }
 
-        [Test]
-        public void GoodBarbarianHillDwarfPercentile()
+        [TestCase(RaceConstants.BaseRaces.HillDwarf, 1, 2)]
+        [TestCase(RaceConstants.BaseRaces.WildElf, 3, 32)]
+        [TestCase(RaceConstants.BaseRaces.WoodElf, 33, 34)]
+        [TestCase(RaceConstants.BaseRaces.HalfOrc, 37, 61)]
+        [TestCase(RaceConstants.BaseRaces.Human, 62, 98)]
+        [TestCase(EmptyContent, 99, 100)]
+        public override void Percentile(String content, Int32 lower, Int32 upper)
         {
-            AssertPercentile(RaceConstants.BaseRaces.HillDwarf, 1, 2);
+            base.Percentile(content, lower, upper);
         }
 
-        [Test]
-        public void GoodBarbarianWildElfPercentile()
+        [TestCase(RaceConstants.BaseRaces.HalfElf, 35)]
+        [TestCase(RaceConstants.BaseRaces.LightfootHalfling, 36)]
+        public override void Percentile(String content, Int32 roll)
         {
-            AssertPercentile(RaceConstants.BaseRaces.WildElf, 3, 32);
-        }
-
-        [Test]
-        public void GoodBarbarianWoodElfPercentile()
-        {
-            AssertPercentile(RaceConstants.BaseRaces.WoodElf, 33, 34);
-        }
-
-        [Test]
-        public void GoodBarbarianHalfElfPercentile()
-        {
-            AssertPercentile(RaceConstants.BaseRaces.HalfElf, 35);
-        }
-
-        [Test]
-        public void GoodBarbarianLightfootHalflingPercentile()
-        {
-            AssertPercentile(RaceConstants.BaseRaces.LightfootHalfling, 36);
-        }
-
-        [Test]
-        public void GoodBarbarianHalfOrcPercentile()
-        {
-            AssertPercentile(RaceConstants.BaseRaces.HalfOrc, 37, 61);
-        }
-
-        [Test]
-        public void GoodBarbarianHumanPercentile()
-        {
-            AssertPercentile(RaceConstants.BaseRaces.Human, 62, 98);
-        }
-
-        [Test]
-        public void GoodBarbarianEmptyPercentile()
-        {
-            AssertPercentile(EmptyContent, 99, 100);
+            base.Percentile(content, roll);
         }
     }
 }

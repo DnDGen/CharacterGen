@@ -18,11 +18,11 @@ namespace NPCGen.Tests.Integration.Tables
         protected abstract IEnumerable<String> nameCollection { get; }
 
         private Dictionary<String, IEnumerable<String>> table;
-        private List<String> testedNames;
+        private HashSet<String> testedNames;
 
         public CollectionTests()
         {
-            testedNames = new List<String>();
+            testedNames = new HashSet<String>();
         }
 
         [SetUp]
@@ -50,41 +50,42 @@ namespace NPCGen.Tests.Integration.Tables
             Assert.That(missingNames, Is.Empty, tableName);
         }
 
-        protected void AssertCollection(String name, IEnumerable<String> collection)
+        public virtual void Collection(String name, params String[] collection)
         {
-            var testedBefore = testedNames.Contains(name);
-            Assert.That(testedBefore, Is.False);
-
-            testedNames.Add(name);
-
-            Assert.That(table.Keys, Contains.Item(name), tableName);
+            AssertNewNameToTest(name);
 
             foreach (var item in collection)
                 Assert.That(table[name], Contains.Item(item));
 
+            AssertExtraItems(name, collection);
+        }
+
+        private void AssertNewNameToTest(String name)
+        {
+            var newNameToTest = testedNames.Add(name);
+            Assert.That(newNameToTest, Is.True);
+            Assert.That(table.Keys, Contains.Item(name), tableName);
+        }
+
+        private void AssertExtraItems(String name, IEnumerable<String> collection)
+        {
             var extras = table[name].Except(collection);
             Assert.That(extras, Is.Empty);
         }
 
-        protected void AssertCollectionAndOrder(String name, IEnumerable<String> collection)
+        public virtual void OrderedCollection(String name, params String[] collection)
         {
-            var testedBefore = testedNames.Contains(name);
-            Assert.That(testedBefore, Is.False);
+            AssertNewNameToTest(name);
 
-            testedNames.Add(name);
-
-            Assert.That(table.Keys, Contains.Item(name), tableName);
-
-            for (var i = 0; i < collection.Count(); i++)
+            for (var i = 0; i < collection.Length; i++)
             {
                 var actualItem = table[name].ElementAt(i);
-                var expectedItem = collection.ElementAt(i);
+                var expectedItem = collection[i];
 
                 Assert.That(actualItem, Is.EqualTo(expectedItem));
             }
 
-            var extras = table[name].Except(collection);
-            Assert.That(extras, Is.Empty);
+            AssertExtraItems(name, collection);
         }
     }
 }
