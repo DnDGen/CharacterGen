@@ -12,88 +12,28 @@ namespace NPCGen.Tests.Integration.Tables.Races.BaseRaces.Neutral
             get { return "NeutralSorcererBaseRaces"; }
         }
 
-        [Test]
-        public void NeutralSorcererHillDwarfPercentile()
+        [TestCase(RaceConstants.BaseRaces.WildElf, 3, 12)]
+        [TestCase(RaceConstants.BaseRaces.WoodElf, 13, 15)]
+        [TestCase(RaceConstants.BaseRaces.HalfElf, 17, 31)]
+        [TestCase(RaceConstants.BaseRaces.LightfootHalfling, 32, 41)]
+        [TestCase(RaceConstants.BaseRaces.HalfOrc, 44, 48)]
+        [TestCase(RaceConstants.BaseRaces.Human, 49, 95)]
+        [TestCase(RaceConstants.BaseRaces.Lizardfolk, 96, 97)]
+        [TestCase(EmptyContent, 99, 100)]
+        public override void Percentile(String content, Int32 lower, Int32 upper)
         {
-            AssertPercentile(RaceConstants.BaseRaces.HillDwarf, 1);
+            base.Percentile(content, lower, upper);
         }
 
-        [Test]
-        public void NeutralSorcererHighElfPercentile()
+        [TestCase(RaceConstants.BaseRaces.HillDwarf, 1)]
+        [TestCase(RaceConstants.BaseRaces.HighElf, 2)]
+        [TestCase(RaceConstants.BaseRaces.RockGnome, 16)]
+        [TestCase(RaceConstants.BaseRaces.DeepHalfling, 42)]
+        [TestCase(RaceConstants.BaseRaces.TallfellowHalfling, 43)]
+        [TestCase(RaceConstants.BaseRaces.Doppelganger, 98)]
+        public override void Percentile(String content, Int32 roll)
         {
-            AssertPercentile(RaceConstants.BaseRaces.HighElf, 2);
-        }
-
-        [Test]
-        public void NeutralSorcererWildElfPercentile()
-        {
-            AssertPercentile(RaceConstants.BaseRaces.WildElf, 3, 12);
-        }
-
-        [Test]
-        public void NeutralSorcererWoodElfPercentile()
-        {
-            AssertPercentile(RaceConstants.BaseRaces.WoodElf, 13, 15);
-        }
-
-        [Test]
-        public void NeutralSorcererRockGnomePercentile()
-        {
-            AssertPercentile(RaceConstants.BaseRaces.RockGnome, 16);
-        }
-
-        [Test]
-        public void NeutralSorcererHalfElfPercentile()
-        {
-            AssertPercentile(RaceConstants.BaseRaces.HalfElf, 17, 31);
-        }
-
-        [Test]
-        public void NeutralSorcererLightfootHalflingPercentile()
-        {
-            AssertPercentile(RaceConstants.BaseRaces.LightfootHalfling, 32, 41);
-        }
-
-        [Test]
-        public void NeutralSorcererDeepHalflingPercentile()
-        {
-            AssertPercentile(RaceConstants.BaseRaces.DeepHalfling, 42);
-        }
-
-        [Test]
-        public void NeutralSorcererTallfellowHalflingPercentile()
-        {
-            AssertPercentile(RaceConstants.BaseRaces.TallfellowHalfling, 43);
-        }
-
-        [Test]
-        public void NeutralSorcererHalfOrcPercentile()
-        {
-            AssertPercentile(RaceConstants.BaseRaces.HalfOrc, 44, 48);
-        }
-
-        [Test]
-        public void NeutralSorcererHumanPercentile()
-        {
-            AssertPercentile(RaceConstants.BaseRaces.Human, 49, 95);
-        }
-
-        [Test]
-        public void NeutralSorcererLizardfolkPercentile()
-        {
-            AssertPercentile(RaceConstants.BaseRaces.Lizardfolk, 96, 97);
-        }
-
-        [Test]
-        public void NeutralSorcererDoppelgangerPercentile()
-        {
-            AssertPercentile(RaceConstants.BaseRaces.Doppelganger, 98);
-        }
-
-        [Test]
-        public void NeutralSorcererEmptyPercentile()
-        {
-            AssertPercentile(EmptyContent, 99, 100);
+            base.Percentile(content, roll);
         }
     }
 }

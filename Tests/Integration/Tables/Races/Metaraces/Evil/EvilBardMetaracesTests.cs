@@ -12,16 +12,16 @@ namespace NPCGen.Tests.Integration.Tables.Races.Metaraces.Evil
             get { return "EvilBardMetaraces"; }
         }
 
-        [Test]
-        public void EvilBardEmptyPercentile()
+        [TestCase(EmptyContent, 1, 99)]
+        public override void Percentile(String content, Int32 lower, Int32 upper)
         {
-            AssertPercentile(EmptyContent, 1, 99);
+            base.Percentile(content, lower, upper);
         }
 
-        [Test]
-        public void EvilBardWerewolfPercentile()
+        [TestCase(RaceConstants.Metaraces.Werewolf, 100)]
+        public override void Percentile(String content, Int32 roll)
         {
-            AssertPercentile(RaceConstants.Metaraces.Werewolf, 100);
+            base.Percentile(content, roll);
         }
     }
 }

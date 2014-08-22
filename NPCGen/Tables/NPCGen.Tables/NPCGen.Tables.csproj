@@ -52,10 +52,10 @@
     <EmbeddedResource Include="Alignments\AlignmentGoodness.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="AutomaticLanguages.xml" />
+    <EmbeddedResource Include="Abilities\Languages\AutomaticLanguages.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="BonusLanguages.xml">
+    <EmbeddedResource Include="Abilities\Languages\BonusLanguages.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
@@ -274,30 +274,32 @@
     <EmbeddedResource Include="Races\Metaraces\Neutral\NeutralWizardMetaraces.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Stats\CharismaStatAdjustments.xml" />
+    <EmbeddedResource Include="Abilities\Stats\CharismaStatAdjustments.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Stats\ConstitutionStatAdjustments.xml" />
+    <EmbeddedResource Include="Abilities\Stats\ConstitutionStatAdjustments.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Stats\DexterityStatAdjustments.xml" />
+    <EmbeddedResource Include="Abilities\Stats\DexterityStatAdjustments.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Stats\IntelligenceStatAdjustments.xml" />
+    <EmbeddedResource Include="Abilities\Stats\IntelligenceStatAdjustments.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Stats\StatPriorities.xml" />
+    <EmbeddedResource Include="Abilities\Stats\StatPriorities.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Stats\StrengthStatAdjustments.xml" />
+    <EmbeddedResource Include="Abilities\Stats\StrengthStatAdjustments.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Stats\WisdomStatAdjustments.xml" />
+    <EmbeddedResource Include="Abilities\Stats\WisdomStatAdjustments.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Traits.xml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Skills\ClassSkills.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

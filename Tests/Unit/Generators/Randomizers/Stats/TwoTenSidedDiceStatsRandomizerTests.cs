@@ -1,7 +1,6 @@
 ﻿using System;
 using D20Dice;
 using Moq;
-using NPCGen.Common.Abilities;
 using NPCGen.Common.Abilities.Stats;
 using NPCGen.Generators.Interfaces.Randomizers.Stats;
 using NPCGen.Generators.Randomizers.Stats;
@@ -47,12 +46,12 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Stats
 
             var stats = randomizer.Randomize();
 
-            Assert.That(stats[StatConstants.Strength].Value, Is.EqualTo(9266));
+            Assert.That(stats[StatConstants.Charisma].Value, Is.EqualTo(9266));
             Assert.That(stats[StatConstants.Constitution].Value, Is.EqualTo(-42));
             Assert.That(stats[StatConstants.Dexterity].Value, Is.EqualTo(Int32.MaxValue));
             Assert.That(stats[StatConstants.Intelligence].Value, Is.EqualTo(Int32.MinValue));
-            Assert.That(stats[StatConstants.Wisdom].Value, Is.EqualTo(0));
-            Assert.That(stats[StatConstants.Charisma].Value, Is.EqualTo(1337));
+            Assert.That(stats[StatConstants.Strength].Value, Is.EqualTo(0));
+            Assert.That(stats[StatConstants.Wisdom].Value, Is.EqualTo(1337));
         }
     }
 }

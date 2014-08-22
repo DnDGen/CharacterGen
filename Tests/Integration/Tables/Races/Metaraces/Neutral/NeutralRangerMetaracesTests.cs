@@ -12,22 +12,17 @@ namespace NPCGen.Tests.Integration.Tables.Races.Metaraces.Neutral
             get { return "NeutralRangerMetaraces"; }
         }
 
-        [Test]
-        public void NeutralRangerEmptyPercentile()
+        [TestCase(EmptyContent, 1, 98)]
+        public override void Percentile(String content, Int32 lower, Int32 upper)
         {
-            AssertPercentile(EmptyContent, 1, 98);
+            base.Percentile(content, lower, upper);
         }
 
-        [Test]
-        public void NeutralRangerWereboarPercentile()
+        [TestCase(RaceConstants.Metaraces.Wereboar, 99)]
+        [TestCase(RaceConstants.Metaraces.Weretiger, 100)]
+        public override void Percentile(String content, Int32 roll)
         {
-            AssertPercentile(RaceConstants.Metaraces.Wereboar, 99);
-        }
-
-        [Test]
-        public void NeutralRangerWeretigerPercentile()
-        {
-            AssertPercentile(RaceConstants.Metaraces.Weretiger, 100);
+            base.Percentile(content, roll);
         }
     }
 }

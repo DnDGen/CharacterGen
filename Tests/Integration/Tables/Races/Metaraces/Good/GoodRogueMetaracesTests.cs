@@ -12,28 +12,18 @@ namespace NPCGen.Tests.Integration.Tables.Races.Metaraces.Good
             get { return "GoodRogueMetaraces"; }
         }
 
-        [Test]
-        public void GoodRogueEmptyPercentile()
+        [TestCase(EmptyContent, 1, 97)]
+        public override void Percentile(String content, Int32 lower, Int32 upper)
         {
-            AssertPercentile(EmptyContent, 1, 97);
+            base.Percentile(content, lower, upper);
         }
 
-        [Test]
-        public void GoodRogueHalfCelestialPercentile()
+        [TestCase(RaceConstants.Metaraces.HalfCelestial, 98)]
+        [TestCase(RaceConstants.Metaraces.HalfDragon, 99)]
+        [TestCase(RaceConstants.Metaraces.Werebear, 100)]
+        public override void Percentile(String content, Int32 roll)
         {
-            AssertPercentile(RaceConstants.Metaraces.HalfCelestial, 98);
-        }
-
-        [Test]
-        public void GoodRogueHalfDragonPercentile()
-        {
-            AssertPercentile(RaceConstants.Metaraces.HalfDragon, 99);
-        }
-
-        [Test]
-        public void GoodRogueWerebearPercentile()
-        {
-            AssertPercentile(RaceConstants.Metaraces.Werebear, 100);
+            base.Percentile(content, roll);
         }
     }
 }

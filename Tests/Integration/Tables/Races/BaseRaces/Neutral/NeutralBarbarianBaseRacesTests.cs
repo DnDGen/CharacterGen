@@ -12,70 +12,25 @@ namespace NPCGen.Tests.Integration.Tables.Races.BaseRaces.Neutral
             get { return "NeutralBarbarianBaseRaces"; }
         }
 
-        [Test]
-        public void NeutralBarbarianDeepDwarfPercentile()
+        [TestCase(RaceConstants.BaseRaces.WildElf, 3, 13)]
+        [TestCase(RaceConstants.BaseRaces.HalfElf, 15, 16)]
+        [TestCase(RaceConstants.BaseRaces.LightfootHalfling, 17, 18)]
+        [TestCase(RaceConstants.BaseRaces.HalfOrc, 20, 58)]
+        [TestCase(RaceConstants.BaseRaces.Human, 59, 87)]
+        [TestCase(RaceConstants.BaseRaces.Lizardfolk, 88, 98)]
+        [TestCase(EmptyContent, 99, 100)]
+        public override void Percentile(String content, Int32 lower, Int32 upper)
         {
-            AssertPercentile(RaceConstants.BaseRaces.DeepDwarf, 1);
+            base.Percentile(content, lower, upper);
         }
 
-        [Test]
-        public void NeutralBarbarianHillDwarfPercentile()
+        [TestCase(RaceConstants.BaseRaces.DeepDwarf, 1)]
+        [TestCase(RaceConstants.BaseRaces.HillDwarf, 2)]
+        [TestCase(RaceConstants.BaseRaces.WoodElf, 14)]
+        [TestCase(RaceConstants.BaseRaces.DeepHalfling, 19)]
+        public override void Percentile(String content, Int32 roll)
         {
-            AssertPercentile(RaceConstants.BaseRaces.HillDwarf, 2);
-        }
-
-        [Test]
-        public void NeutralBarbarianWildElfPercentile()
-        {
-            AssertPercentile(RaceConstants.BaseRaces.WildElf, 3, 13);
-        }
-
-        [Test]
-        public void NeutralBarbarianWoodElfPercentile()
-        {
-            AssertPercentile(RaceConstants.BaseRaces.WoodElf, 14);
-        }
-
-        [Test]
-        public void NeutralBarbarianHalfElfPercentile()
-        {
-            AssertPercentile(RaceConstants.BaseRaces.HalfElf, 15, 16);
-        }
-
-        [Test]
-        public void NeutralBarbarianLightfootHalflingPercentile()
-        {
-            AssertPercentile(RaceConstants.BaseRaces.LightfootHalfling, 17, 18);
-        }
-
-        [Test]
-        public void NeutralBarbarianDeepHalflingPercentile()
-        {
-            AssertPercentile(RaceConstants.BaseRaces.DeepHalfling, 19);
-        }
-
-        [Test]
-        public void NeutralBarbarianHalfOrcPercentile()
-        {
-            AssertPercentile(RaceConstants.BaseRaces.HalfOrc, 20, 58);
-        }
-
-        [Test]
-        public void NeutralBarbarianHumanPercentile()
-        {
-            AssertPercentile(RaceConstants.BaseRaces.Human, 59, 87);
-        }
-
-        [Test]
-        public void NeutralBarbarianLizardfolkPercentile()
-        {
-            AssertPercentile(RaceConstants.BaseRaces.Lizardfolk, 88, 98);
-        }
-
-        [Test]
-        public void NeutralBarbarianEmptyPercentile()
-        {
-            AssertPercentile(EmptyContent, 99, 100);
+            base.Percentile(content, roll);
         }
     }
 }
