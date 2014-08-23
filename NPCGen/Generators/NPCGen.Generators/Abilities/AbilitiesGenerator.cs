@@ -39,7 +39,7 @@ namespace NPCGen.Generators.Abilities
 
             foreach (var feat in ability.Feats)
             {
-                var tableName = String.Format("{0}SkillAdjustments", feat.Name);
+                var tableName = String.Format("{0}SkillAdjustments", feat);
                 var adjustments = adjustmentsSelector.SelectAdjustmentsFrom(tableName);
 
                 foreach (var adjustment in adjustments)

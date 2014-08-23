@@ -228,9 +228,9 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Languages
         [TestCase(RaceConstants.Metaraces.Wererat)]
         [TestCase(RaceConstants.Metaraces.Weretiger)]
         [TestCase(RaceConstants.Metaraces.Werewolf)]
-        public override void Collection(String name, params String[] collection)
+        public override void DistinctCollection(String name, params String[] collection)
         {
-            base.Collection(name, collection);
+            base.DistinctCollection(name, collection);
         }
 
         [TestCase(RaceConstants.BaseRaces.HalfElf)]
@@ -241,7 +241,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Languages
             var allLanguages = LanguageConstants.GetLanguages();
             var bonusLanguages = allLanguages.Except(new[] { LanguageConstants.Druidic }).ToArray();
 
-            base.Collection(name, bonusLanguages);
+            base.DistinctCollection(name, bonusLanguages);
         }
     }
 }

@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+    <object>
+        <name>Appraise</name>
+        <item>Intelligence</item>
+        <item>False</item>
+    </object>
+    <object>
+        <name>Balance</name>
+        <item>Dexterity</item>
+        <item>True</item>
+    </object>
+    <object>
+        <name>Bluff</name>
+        <item>Charisma</item>
+        <item>False</item>
+    </object>
+    <object>
+        <name>Climb</name>
+        <item>Strength</item>
+        <item>True</item>
+    </object>
+    <object>
+        <name>Concentration</name>
+        <item>Constitution</item>
+        <item>False</item>
+    </object>
+    <object>
+        <name>Decipher Script</name>
+        <item>Intelligence</item>
+        <item>False</item>
+    </object>
+    <object>
+        <name>Diplomacy</name>
+        <item>Charisma</item>
+        <item>False</item>
+    </object>
+    <object>
+        <name>Disable Device</name>
+        <item>Intelligence</item>
+        <item>False</item>
+    </object>
+    <object>
+        <name>Disguise</name>
+        <item>Charisma</item>
+        <item>False</item>
+    </object>
+    <object>
+        <name>Escape Artist</name>
+        <item>Dexterity</item>
+        <item>True</item>
+    </object>
+    <object>
+        <name>Forgery</name>
+        <item>Intelligence</item>
+        <item>False</item>
+    </object>
+    <object>
+        <name>Gather Information</name>
+        <item>Charisma</item>
+        <item>False</item>
+    </object>
+    <object>
+        <name>Handle Animal</name>
+        <item>Charisma</item>
+        <item>False</item>
+    </object>
+    <object>
+        <name>Heal</name>
+        <item>Wisdom</item>
+        <item>False</item>
+    </object>
+    <object>
+        <name>Hide</name>
+        <item>Dexterity</item>
+        <item>True</item>
+    </object>
+    <object>
+        <name>Intimidate</name>
+        <item>Charisma</item>
+        <item>False</item>
+    </object>
+    <object>
+        <name>Jump</name>
+        <item>Strength</item>
+        <item>True</item>
+    </object>
+    <object>
+        <name>Knowledge (Arcana)</name>
+        <item>Intelligence</item>
+        <item>False</item>
+    </object>
+    <object>
+        <name>Knowledge (Architecture and Engineering)</name>
+        <item>Intelligence</item>
+        <item>False</item>
+    </object>
+    <object>
+        <name>Knowledge (Dungeoneering)</name>
+        <item>Intelligence</item>
+        <item>False</item>
+    </object>
+    <object>
+        <name>Knowledge (Geography)</name>
+        <item>Intelligence</item>
+        <item>False</item>
+    </object>
+    <object>
+        <name>Knowledge (History)</name>
+        <item>Intelligence</item>
+        <item>False</item>
+    </object>
+    <object>
+        <name>Knowledge (Local)</name>
+        <item>Intelligence</item>
+        <item>False</item>
+    </object>
+    <object>
+        <name>Knowledge (Nature)</name>
+        <item>Intelligence</item>
+        <item>False</item>
+    </object>
+    <object>
+        <name>Knowledge (Nobility and Royalty)</name>
+        <item>Intelligence</item>
+        <item>False</item>
+    </object>
+    <object>
+        <name>Knowledge (Religion)</name>
+        <item>Intelligence</item>
+        <item>False</item>
+    </object>
+    <object>
+        <name>Knowledge (The Planes)</name>
+        <item>Intelligence</item>
+        <item>False</item>
+    </object>
+    <object>
+        <name>Listen</name>
+        <item>Wisdom</item>
+        <item>False</item>
+    </object>
+    <object>
+        <name>Move Silently</name>
+        <item>Dexterity</item>
+        <item>True</item>
+    </object>
+    <object>
+        <name>Open Lock</name>
+        <item>Dexterity</item>
+        <item>False</item>
+    </object>
+    <object>
+        <name>Perform</name>
+        <item>Charisma</item>
+        <item>False</item>
+    </object>
+    <object>
+        <name>Ride</name>
+        <item>Dexterity</item>
+        <item>False</item>
+    </object>
+    <object>
+        <name>Search</name>
+        <item>Intelligence</item>
+        <item>False</item>
+    </object>
+    <object>
+        <name>Sense Motive</name>
+        <item>Wisdom</item>
+        <item>False</item>
+    </object>
+    <object>
+        <name>Sleight of Hand</name>
+        <item>Dexterity</item>
+        <item>True</item>
+    </object>
+    <object>
+        <name>Spellcraft</name>
+        <item>Intelligence</item>
+        <item>False</item>
+    </object>
+    <object>
+        <name>Spot</name>
+        <item>Wisdom</item>
+        <item>False</item>
+    </object>
+    <object>
+        <name>Survival</name>
+        <item>Wisdom</item>
+        <item>False</item>
+    </object>
+    <object>
+        <name>Swim</name>
+        <item>Strength</item>
+        <item>True</item>
+    </object>
+    <object>
+        <name>Tumble</name>
+        <item>Dexterity</item>
+        <item>True</item>
+    </object>
+    <object>
+        <name>Use Magic Device</name>
+        <item>Charisma</item>
+        <item>False</item>
+    </object>
+    <object>
+        <name>Use Rope</name>
+        <item>Dexterity</item>
+        <item>False</item>
+    </object>
+</items>

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Moq;
-using NPCGen.Common.Abilities.Feats;
 using NPCGen.Common.Abilities.Skills;
 using NPCGen.Common.Abilities.Stats;
 using NPCGen.Common.CharacterClasses;
@@ -85,7 +84,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             var skills = new Dictionary<String, Skill>();
             mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, stats)).Returns(skills);
 
-            var feats = new List<Feat>();
+            var feats = new List<String>();
             mockFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills)).Returns(feats);
 
             var ability = abilitiesGenerator.GenerateWith(characterClass, race, mockStatsRandomizer.Object, baseAttack);
@@ -101,11 +100,9 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             skills["skill 3"] = new Skill();
             mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, stats)).Returns(skills);
 
-            var feats = new List<Feat>();
-            var featWithNoSkills = new Feat { Name = "no adjust" };
-            var featWithSkills = new Feat { Name = "adjust" };
-            feats.Add(featWithNoSkills);
-            feats.Add(featWithSkills);
+            var feats = new List<String>();
+            feats.Add("no adjust");
+            feats.Add("adjust");
             mockFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills)).Returns(feats);
 
             var noAdjustments = new Dictionary<String, Int32>();

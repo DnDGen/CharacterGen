@@ -63,6 +63,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Abilities\AbilitiesGeneratorTests.cs" />
+    <Compile Include="Abilities\FeatsGeneratorTests.cs" />
+    <Compile Include="Abilities\SkillsGeneratorTests.cs" />
     <Compile Include="CharacterClassGeneratorTests.cs" />
     <Compile Include="CharacterGeneratorTests.cs" />
     <Compile Include="AlignmentGeneratorTests.cs" />

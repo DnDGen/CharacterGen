@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using EquipmentGen.Common.Items;
-using NPCGen.Common.Abilities.Feats;
 using NPCGen.Common.Combats;
 using NPCGen.Common.Items;
 using NPCGen.Generators.Interfaces.Combats;
@@ -21,7 +20,7 @@ namespace NPCGen.Generators.Combats
             this.adjustmentsSelector = adjustmentsSelector;
         }
 
-        public ArmorClass GenerateWith(Equipment equipment, Int32 adjustedDexterityBonus, IEnumerable<Feat> feats)
+        public ArmorClass GenerateWith(Equipment equipment, Int32 adjustedDexterityBonus, IEnumerable<String> feats)
         {
             var armorBonuses = GetArmorBonuses(equipment);
             var sizeModifier = GetSizeModifier(feats);
@@ -69,15 +68,15 @@ namespace NPCGen.Generators.Combats
             return offHand.Magic.Bonus;
         }
 
-        private Int32 GetSizeModifier(IEnumerable<Feat> feats)
+        private Int32 GetSizeModifier(IEnumerable<String> feats)
         {
             var featAdjustments = adjustmentsSelector.SelectAdjustmentsFrom("FeatArmorAdjustments");
             var sizeModifiers = collectionsSelector.SelectFrom("ArmorClassModifiers", "Size");
             var modifier = 0;
 
             foreach (var feat in feats)
-                if (sizeModifiers.Contains(feat.Name))
-                    modifier += featAdjustments[feat.Name];
+                if (sizeModifiers.Contains(feat))
+                    modifier += featAdjustments[feat];
 
             return modifier;
         }
@@ -93,14 +92,14 @@ namespace NPCGen.Generators.Combats
             return itemsWithDeflectionBonuses.Max(i => i.Magic.Bonus);
         }
 
-        private Int32 GetNaturalArmorBonus(IEnumerable<Item> items, IEnumerable<Feat> feats)
+        private Int32 GetNaturalArmorBonus(IEnumerable<Item> items, IEnumerable<String> feats)
         {
             var thingsThatGrantNaturalArmorBonuses = collectionsSelector.SelectFrom("ArmorClassModifiers", "NaturalArmor");
             var itemsWithNaturalArmorBonuses = items.Where(i => thingsThatGrantNaturalArmorBonuses.Contains(i.Name));
             var itemNaturalArmorBonuses = itemsWithNaturalArmorBonuses.Select(i => i.Magic.Bonus);
 
             var featAdjustments = adjustmentsSelector.SelectAdjustmentsFrom("FeatArmorAdjustments");
-            var featsWithNaturalArmorBonuses = feats.Where(f => thingsThatGrantNaturalArmorBonuses.Contains(f.Name)).Select(f => f.Name);
+            var featsWithNaturalArmorBonuses = feats.Where(f => thingsThatGrantNaturalArmorBonuses.Contains(f));
             var featNaturalArmorAdjustments = featAdjustments.Where(kvp => featsWithNaturalArmorBonuses.Contains(kvp.Key));
             var featNaturalArmorBonuses = featNaturalArmorAdjustments.Select(kvp => kvp.Value);
 
@@ -111,15 +110,15 @@ namespace NPCGen.Generators.Combats
             return naturalArmorBonuses.Max();
         }
 
-        private Int32 GetDodgeBonus(IEnumerable<Feat> feats)
+        private Int32 GetDodgeBonus(IEnumerable<String> feats)
         {
             var featAdjustments = adjustmentsSelector.SelectAdjustmentsFrom("FeatArmorAdjustments");
             var dodgeBonuses = collectionsSelector.SelectFrom("ArmorClassModifiers", "Dodge");
             var bonus = 0;
 
             foreach (var feat in feats)
-                if (dodgeBonuses.Contains(feat.Name))
-                    bonus += featAdjustments[feat.Name];
+                if (dodgeBonuses.Contains(feat))
+                    bonus += featAdjustments[feat];
 
             return bonus;
         }

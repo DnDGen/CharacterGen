@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+    <object>
+        <name>Barbarian</name>
+        <item>Appraise</item>
+        <item>Balance</item>
+        <item>Bluff</item>
+        <item>Concentration</item>
+        <item>Diplomacy</item>
+        <item>Disguise</item>
+        <item>Escape Artist</item>
+        <item>Forgery</item>
+        <item>Gather Information</item>
+        <item>Heal</item>
+        <item>Hide</item>
+        <item>Move Silently</item>
+        <item>Perform</item>
+        <item>Search</item>
+        <item>Sense Motive</item>
+        <item>Spot</item>
+        <item>Use Rope</item>
+    </object>
+    <object>
+        <name>Bard</name>
+        <item>Forgery</item>
+        <item>Heal</item>
+        <item>Intimidate</item>
+        <item>Ride</item>
+        <item>Search</item>
+        <item>Spot</item>
+        <item>Survival</item>
+        <item>Use Rope</item>
+    </object>
+    <object>
+        <name>Cleric</name>
+        <item>Appraise</item>
+        <item>Balance</item>
+        <item>Bluff</item>
+        <item>Climb</item>
+        <item>Disguise</item>
+        <item>Escape Artist</item>
+        <item>Forgery</item>
+        <item>Gather Information</item>
+        <item>Hide</item>
+        <item>Intimidate</item>
+        <item>Jump</item>
+        <item>Listen</item>
+        <item>Move Silently</item>
+        <item>Perform</item>
+        <item>Ride</item>
+        <item>Search</item>
+        <item>Sense Motive</item>
+        <item>Spot</item>
+        <item>Survival</item>
+        <item>Swim</item>
+        <item>Use Rope</item>
+    </object>
+    <object>
+        <name>Druid</name>
+        <item>Appraise</item>
+        <item>Balance</item>
+        <item>Bluff</item>
+        <item>Climb</item>
+        <item>Disguise</item>
+        <item>Escape Artist</item>
+        <item>Forgery</item>
+        <item>Gather Information</item>
+        <item>Hide</item>
+        <item>Intimidate</item>
+        <item>Jump</item>
+        <item>Move Silently</item>
+        <item>Perform</item>
+        <item>Search</item>
+        <item>Sense Motive</item>
+        <item>Use Rope</item>
+    </object>
+    <object>
+        <name>Fighter</name>
+        <item>Appraise</item>
+        <item>Balance</item>
+        <item>Bluff</item>
+        <item>Concentration</item>
+        <item>Diplomacy</item>
+        <item>Disguise</item>
+        <item>Escape Artist</item>
+        <item>Forgery</item>
+        <item>Gather Information</item>
+        <item>Heal</item>
+        <item>Hide</item>
+        <item>Listen</item>
+        <item>Move Silently</item>
+        <item>Perform</item>
+        <item>Search</item>
+        <item>Sense Motive</item>
+        <item>Spot</item>
+        <item>Survival</item>
+        <item>Use Rope</item>
+    </object>
+    <object>
+        <name>Monk</name>
+        <item>Appraise</item>
+        <item>Bluff</item>
+        <item>Disguise</item>
+        <item>Forgery</item>
+        <item>Gather Information</item>
+        <item>Heal</item>
+        <item>Intimidate</item>
+        <item>Ride</item>
+        <item>Search</item>
+        <item>Survival</item>
+        <item>Use Rope</item>
+    </object>
+    <object>
+        <name>Paladin</name>
+        <item>Appraise</item>
+        <item>Balance</item>
+        <item>Bluff</item>
+        <item>Climb</item>
+        <item>Disguise</item>
+        <item>Escape Artist</item>
+        <item>Forgery</item>
+        <item>Gather Information</item>
+        <item>Hide</item>
+        <item>Intimidate</item>
+        <item>Jump</item>
+        <item>Listen</item>
+        <item>Move Silently</item>
+        <item>Perform</item>
+        <item>Search</item>
+        <item>Spot</item>
+        <item>Survival</item>
+        <item>Swim</item>
+        <item>Use Rope</item>
+    </object>
+    <object>
+        <name>Ranger</name>
+        <item>Appraise</item>
+        <item>Balance</item>
+        <item>Bluff</item>
+        <item>Diplomacy</item>
+        <item>Disguise</item>
+        <item>Escape Artist</item>
+        <item>Forgery</item>
+        <item>Gather Information</item>
+        <item>Intimidate</item>
+        <item>Perform</item>
+        <item>Sense Motive</item>
+    </object>
+    <object>
+        <name>Rogue</name>
+        <item>Concentration</item>
+        <item>Heal</item>
+        <item>Ride</item>
+        <item>Survival</item>
+    </object>
+    <object>
+        <name>Sorcerer</name>
+        <item>Appraise</item>
+        <item>Balance</item>
+        <item>Climb</item>
+        <item>Diplomacy</item>
+        <item>Disguise</item>
+        <item>Escape Artist</item>
+        <item>Forgery</item>
+        <item>Gather Information</item>
+        <item>Heal</item>
+        <item>Hide</item>
+        <item>Intimidate</item>
+        <item>Jump</item>
+        <item>Listen</item>
+        <item>Move Silently</item>
+        <item>Perform</item>
+        <item>Ride</item>
+        <item>Search</item>
+        <item>Sense Motive</item>
+        <item>Spot</item>
+        <item>Survival</item>
+        <item>Swim</item>
+        <item>Use Rope</item>
+    </object>
+    <object>
+        <name>Wizard</name>
+        <item>Appraise</item>
+        <item>Balance</item>
+        <item>Bluff</item>
+        <item>Climb</item>
+        <item>Diplomacy</item>
+        <item>Disguise</item>
+        <item>Escape Artist</item>
+        <item>Forgery</item>
+        <item>Gather Information</item>
+        <item>Heal</item>
+        <item>Hide</item>
+        <item>Intimidate</item>
+        <item>Jump</item>
+        <item>Listen</item>
+        <item>Move Silently</item>
+        <item>Perform</item>
+        <item>Ride</item>
+        <item>Search</item>
+        <item>Sense Motive</item>
+        <item>Spot</item>
+        <item>Survival</item>
+        <item>Swim</item>
+        <item>Use Rope</item>
+    </object>
+</items>

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using NPCGen.Common.Abilities.Feats;
 using NPCGen.Common.Abilities.Stats;
 using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Combats;
@@ -68,7 +67,7 @@ namespace NPCGen.Generators.Combats
             return level / 2;
         }
 
-        public Combat GenerateWith(BaseAttack baseAttack, CharacterClass characterClass, Race race, IEnumerable<Feat> feats, Dictionary<String, Stat> stats, Equipment equipment)
+        public Combat GenerateWith(BaseAttack baseAttack, CharacterClass characterClass, Race race, IEnumerable<String> feats, Dictionary<String, Stat> stats, Equipment equipment)
         {
             var combat = new Combat();
 

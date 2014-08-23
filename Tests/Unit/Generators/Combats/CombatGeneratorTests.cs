@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Moq;
-using NPCGen.Common.Abilities.Feats;
 using NPCGen.Common.Abilities.Stats;
 using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Combats;
@@ -23,7 +22,7 @@ namespace NPCGen.Tests.Unit.Generators.Combats
 
         private ICombatGenerator combatGenerator;
         private CharacterClass characterClass;
-        private List<Feat> feats;
+        private List<String> feats;
         private Dictionary<String, Stat> stats;
         private Equipment equipment;
         private Mock<IArmorClassGenerator> mockArmorClassGenerator;
@@ -43,7 +42,7 @@ namespace NPCGen.Tests.Unit.Generators.Combats
             combatGenerator = new CombatGenerator(mockArmorClassGenerator.Object, mockHitPointsGenerator.Object, mockSavingThrowsGenerator.Object,
                 mockAdjustmentsSelector.Object);
             characterClass = new CharacterClass();
-            feats = new List<Feat>();
+            feats = new List<String>();
             stats = new Dictionary<String, Stat>();
             equipment = new Equipment();
             race = new Race();

@@ -18,12 +18,6 @@ namespace NPCGen.Tests.Integration.Tables
         protected abstract IEnumerable<String> nameCollection { get; }
 
         private Dictionary<String, IEnumerable<String>> table;
-        private HashSet<String> testedNames;
-
-        public CollectionTests()
-        {
-            testedNames = new HashSet<String>();
-        }
 
         [SetUp]
         public void CollectionSetup()
@@ -34,37 +28,21 @@ namespace NPCGen.Tests.Integration.Tables
         [Test]
         public void AllNamesInCollection()
         {
-            var names = nameCollection;
-
-            foreach (var name in names)
+            foreach (var name in nameCollection)
                 Assert.That(table.Keys, Contains.Item(name), tableName);
 
-            var missingNames = names.Except(table.Keys);
-            Assert.That(missingNames, Is.Empty, tableName);
-        }
-
-        [Test, TestFixtureTearDown]
-        public void AllNamesTested()
-        {
-            var missingNames = table.Keys.Except(testedNames);
+            var missingNames = nameCollection.Except(table.Keys);
             Assert.That(missingNames, Is.Empty, tableName);
         }
 
         public virtual void Collection(String name, params String[] collection)
         {
-            AssertNewNameToTest(name);
+            Assert.That(table.Keys, Contains.Item(name), tableName);
 
             foreach (var item in collection)
                 Assert.That(table[name], Contains.Item(item));
 
             AssertExtraItems(name, collection);
-        }
-
-        private void AssertNewNameToTest(String name)
-        {
-            var newNameToTest = testedNames.Add(name);
-            Assert.That(newNameToTest, Is.True);
-            Assert.That(table.Keys, Contains.Item(name), tableName);
         }
 
         private void AssertExtraItems(String name, IEnumerable<String> collection)
@@ -75,7 +53,7 @@ namespace NPCGen.Tests.Integration.Tables
 
         public virtual void OrderedCollection(String name, params String[] collection)
         {
-            AssertNewNameToTest(name);
+            Assert.That(table.Keys, Contains.Item(name), tableName);
 
             for (var i = 0; i < collection.Length; i++)
             {
@@ -86,6 +64,17 @@ namespace NPCGen.Tests.Integration.Tables
             }
 
             AssertExtraItems(name, collection);
+        }
+
+        public virtual void DistinctCollection(String name, params String[] collection)
+        {
+            var distinctCollection = collection.Distinct();
+            Assert.That(distinctCollection.Count(), Is.EqualTo(collection.Count()));
+
+            Collection(name, collection);
+
+            distinctCollection = table[name].Distinct();
+            Assert.That(distinctCollection.Count(), Is.EqualTo(table[name].Count()));
         }
     }
 }

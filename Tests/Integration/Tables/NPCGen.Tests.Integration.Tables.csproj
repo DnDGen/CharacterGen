@@ -55,7 +55,10 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Abilities\Skills\ClassSkillsTests.cs" />
-    <Compile Include="Abilities\Skills\SkillIntersectionTests.cs" />
+    <Compile Include="Abilities\Skills\CrossClassSkillsTests.cs" />
+    <Compile Include="Abilities\Skills\SkillCollectionTests.cs" />
+    <Compile Include="Abilities\Skills\SkillDataTests.cs" />
+    <Compile Include="Abilities\Skills\SkillPointsForClassesTests.cs" />
     <Compile Include="Alignments\AlignmentGoodnessTests.cs" />
     <Compile Include="Abilities\Languages\AutomaticLanguagesTests.cs" />
     <Compile Include="Abilities\Languages\BonusLanguagesTests.cs" />

@@ -179,9 +179,9 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Skills
             SkillConstants.KnowledgeReligion,
             SkillConstants.KnowledgeThePlanes,
             SkillConstants.Spellcraft)]
-        public override void Collection(String name, params String[] collection)
+        public override void DistinctCollection(String name, params String[] collection)
         {
-            base.Collection(name, collection);
+            base.DistinctCollection(name, collection);
         }
     }
 }
