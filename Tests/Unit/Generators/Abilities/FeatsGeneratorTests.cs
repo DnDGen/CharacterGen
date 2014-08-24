@@ -87,6 +87,25 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             Assert.That(feats, Is.Not.Contains("feat 4"));
         }
 
+        [Test]
+        public void GetSkillSynergyFeatsWithMatchingRankRequirement()
+        {
+            skills["skill 1"] = new Skill { Ranks = 5, ClassSkill = true };
+            skills["skill 2"] = new Skill { Ranks = 4, ClassSkill = true };
+            skills["skill 3"] = new Skill { Ranks = 10, ClassSkill = false };
+            skills["skill 4"] = new Skill { Ranks = 9, ClassSkill = false };
+            mockCollectionsSelector.Setup(s => s.SelectFrom("SkillSynergyFeats", "feat 1")).Returns(new[] { "skill 1" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom("SkillSynergyFeats", "feat 2")).Returns(new[] { "skill 2" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom("SkillSynergyFeats", "feat 3")).Returns(new[] { "skill 3" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom("SkillSynergyFeats", "feat 4")).Returns(new[] { "skill 4" });
+
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills);
+            Assert.That(feats, Contains.Item("feat 1"));
+            Assert.That(feats, Is.Not.Contains("feat 2"));
+            Assert.That(feats, Contains.Item("feat 3"));
+            Assert.That(feats, Is.Not.Contains("feat 4"));
+        }
+
         [TestCase(1, 1)]
         [TestCase(2, 1)]
         [TestCase(3, 2)]
