@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Moq;
 using NPCGen.Common.Abilities.Skills;
 using NPCGen.Common.Abilities.Stats;
@@ -22,12 +23,14 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         private Dictionary<String, Skill> skills;
         private Mock<ICollectionsSelector> mockCollectionsSelector;
         private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
+        private Mock<IFeatsSelector> mockFeatsSelector;
 
         [SetUp]
         public void Setup()
         {
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
             mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
+            mockFeatsSelector = new Mock<IFeatsSelector>();
             featsGenerator = new FeatsGenerator();
             characterClass = new CharacterClass();
             race = new Race();
@@ -84,8 +87,36 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             Assert.That(feats, Is.Not.Contains("feat 4"));
         }
 
-        [Test]
-        public void GetAdditionalFeats()
+        [TestCase(1, 1)]
+        [TestCase(2, 1)]
+        [TestCase(3, 2)]
+        [TestCase(4, 2)]
+        [TestCase(5, 2)]
+        [TestCase(6, 3)]
+        [TestCase(7, 3)]
+        [TestCase(8, 3)]
+        [TestCase(9, 4)]
+        [TestCase(10, 4)]
+        [TestCase(11, 4)]
+        [TestCase(12, 5)]
+        [TestCase(13, 5)]
+        [TestCase(14, 5)]
+        [TestCase(15, 6)]
+        [TestCase(16, 6)]
+        [TestCase(17, 6)]
+        [TestCase(18, 7)]
+        [TestCase(19, 7)]
+        [TestCase(20, 7)]
+        public void GetAdditionalFeats(Int32 level, Int32 numberOfFeats)
+        {
+            characterClass.Level = level;
+            //get feat selections set up
+
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills);
+            Assert.That(feats.Count(), Is.EqualTo(numberOfFeats));
+        }
+
+        public void AdditionalFeatsPickedAtRandom()
         {
             Assert.Fail();
         }
@@ -97,31 +128,31 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         }
 
         [Test]
+        public void DoNotGetFeatWithUnmetPrerequisite()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
         public void FightersGetBonusFighterFeat()
         {
             Assert.Fail();
         }
 
         [Test]
-        public void DoNotGetFeatWithUnmetFeatPrerequisite()
-        {
-            Assert.Fail();
-        }
-
-        [Test]
-        public void DoNotGetFeatWithUnmetStatPrerequisites()
-        {
-            Assert.Fail();
-        }
-
-        [Test]
-        public void DoNotGetFeatWithUnmetSkillRankPrerequisites()
+        public void DoNotGetFighterFeatWithUnmetPrerequisite()
         {
             Assert.Fail();
         }
 
         [Test]
         public void ReassessPrerequisitesEveryFeat()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void CannotGetDuplicateFeats()
         {
             Assert.Fail();
         }

@@ -39,11 +39,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FeatSelection.cs" />
     <Compile Include="ICollectionsSelector.cs" />
+    <Compile Include="IFeatsSelector.cs" />
     <Compile Include="ILanguagesSelector.cs" />
     <Compile Include="IAdjustmentsSelector.cs" />
     <Compile Include="IPercentileSelector.cs" />
-    <Compile Include="ISavingThrowsSelector.cs" />
     <Compile Include="ISkillSelector.cs" />
     <Compile Include="IStatAdjustmentsSelector.cs" />
     <Compile Include="IStatPrioritySelector.cs" />
