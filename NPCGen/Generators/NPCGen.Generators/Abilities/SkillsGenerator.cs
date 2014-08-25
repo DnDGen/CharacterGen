@@ -62,6 +62,18 @@ namespace NPCGen.Generators.Abilities
                 }
             }
 
+            foreach (var skill in skills)
+            {
+                if (skill.Value.EffectiveRanks < 5)
+                    continue;
+
+                var synergySkills = collectionsSelector.SelectFrom("SkillSynergy", skill.Key);
+
+                foreach (var synergySkill in synergySkills)
+                    if (skills.ContainsKey(synergySkill))
+                        skills[synergySkill].Bonus += 2;
+            }
+
             return skills;
         }
 

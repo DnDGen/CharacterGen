@@ -331,8 +331,8 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             mockCollectionsSelector.Setup(s => s.SelectFrom("SkillSynergy", "skill 3")).Returns(new[] { "synergy 4" });
             mockCollectionsSelector.Setup(s => s.SelectFrom("SkillSynergy", "skill 4")).Returns(new[] { "synergy 1" });
 
-            skillPoints[characterClass.ClassName] = 4;
-            characterClass.Level = 5;
+            skillPoints[characterClass.ClassName] = 2;
+            characterClass.Level = 13;
 
             var sequence = mockDice.SetupSequence(d => d.d3(1));
             for (var count = 0; count < 11; count++)
@@ -425,10 +425,10 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             mockCollectionsSelector.Setup(s => s.SelectFrom("SkillSynergy", "skill 3")).Returns(new[] { "synergy 3" });
 
             skillPoints[characterClass.ClassName] = 3;
-            characterClass.Level = 4;
+            characterClass.Level = 6;
 
             var sequence = mockDice.SetupSequence(d => d.d3(1));
-            for (var count = 0; count < 4; count++)
+            for (var count = 0; count < 10; count++)
                 sequence = sequence.Returns(1);
             for (var count = 0; count < 17; count++)
                 sequence = sequence.Returns(3);
@@ -436,6 +436,8 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             sequence = mockDice.SetupSequence(d => d.Roll("1d4-1"));
             for (var roll = 0; roll < 4; roll++)
                 sequence = sequence.Returns(0);
+            for (var roll = 0; roll < 6; roll++)
+                sequence = sequence.Returns(1);
 
             sequence = mockDice.SetupSequence(d => d.Roll("1d2-1")).Returns(0);
             for (var roll = 0; roll < 16; roll++)
@@ -453,13 +455,13 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             Assert.That(skills["skill 1"].Ranks, Is.EqualTo(4));
             Assert.That(skills["skill 2"].Ranks, Is.EqualTo(9));
             Assert.That(skills["skill 3"].Ranks, Is.EqualTo(8));
-            Assert.That(skills["synergy 1"].Ranks, Is.EqualTo(0));
+            Assert.That(skills["synergy 1"].Ranks, Is.EqualTo(6));
             Assert.That(skills["synergy 2"].Ranks, Is.EqualTo(0));
             Assert.That(skills["synergy 3"].Ranks, Is.EqualTo(0));
             Assert.That(skills["skill 1"].EffectiveRanks, Is.EqualTo(4));
             Assert.That(skills["skill 2"].EffectiveRanks, Is.EqualTo(4.5));
             Assert.That(skills["skill 3"].EffectiveRanks, Is.EqualTo(4));
-            Assert.That(skills["synergy 1"].EffectiveRanks, Is.EqualTo(0));
+            Assert.That(skills["synergy 1"].EffectiveRanks, Is.EqualTo(6));
             Assert.That(skills["synergy 2"].EffectiveRanks, Is.EqualTo(0));
             Assert.That(skills["synergy 3"].EffectiveRanks, Is.EqualTo(0));
             Assert.That(skills["skill 1"].Bonus, Is.EqualTo(0));
