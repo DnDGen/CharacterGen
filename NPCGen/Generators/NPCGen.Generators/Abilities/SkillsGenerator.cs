@@ -51,8 +51,7 @@ namespace NPCGen.Generators.Abilities
             while (points > 0 && skills.Values.Any(s => s.Ranks < rankCap))
             {
                 var skillCollection = GetSkillCollection(skills, rankCap, classSkills, crossClassSkills);
-                var roll = String.Format("1d{0}-1", skillCollection.Count());
-                var index = dice.Roll(roll);
+                var index = dice.RollIndex(skillCollection.Count());
 
                 var skill = skillCollection.ElementAt(index);
                 if (skills[skill].Ranks < characterClass.Level + 3)
