@@ -41,7 +41,7 @@ namespace NPCGen.Generators.Randomizers.Alignments
 
         private String RollLawfulness()
         {
-            switch (dice.d3())
+            switch (dice.Roll().d3())
             {
                 case 1: return AlignmentConstants.Chaotic;
                 case 2: return AlignmentConstants.Neutral;

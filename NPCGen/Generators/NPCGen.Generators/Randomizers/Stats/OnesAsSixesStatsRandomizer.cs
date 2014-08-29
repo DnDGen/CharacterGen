@@ -30,7 +30,7 @@ namespace NPCGen.Generators.Randomizers.Stats
 
         private Int32 GetRollToAdd()
         {
-            var roll = dice.d6();
+            var roll = dice.Roll().d6();
 
             if (roll == 1)
                 return 6;

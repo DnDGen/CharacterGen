@@ -88,7 +88,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             mockLanguageSelector.Setup(p => p.SelectBonusLanguagesFor(race.BaseRace, "class")).Returns(new[] { "lang 1", "lang 2", "lang 3" });
 
             var languages = languageGenerator.GenerateWith(race, "class", 2);
-            mockDice.Verify(d => d.Roll(It.IsAny<String>()), Times.Exactly(2));
+            mockDice.Verify(d => d.Roll(1).d(It.IsAny<Int32>()), Times.Exactly(2));
             Assert.That(languages, Contains.Item("lang 1"));
             Assert.That(languages, Contains.Item("lang 2"));
             Assert.That(languages.Count(), Is.EqualTo(2));
@@ -100,7 +100,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             mockLanguageSelector.Setup(p => p.SelectBonusLanguagesFor(race.BaseRace, "class")).Returns(new[] { "lang 1", "lang 2" });
 
             var languages = languageGenerator.GenerateWith(race, "class", 9266);
-            mockDice.Verify(d => d.Roll(It.IsAny<String>()), Times.Exactly(0));
+            mockDice.Verify(d => d.Roll(1).d(It.IsAny<Int32>()), Times.Exactly(0));
             Assert.That(languages, Contains.Item("lang 1"));
             Assert.That(languages, Contains.Item("lang 2"));
             Assert.That(languages.Count(), Is.EqualTo(2));

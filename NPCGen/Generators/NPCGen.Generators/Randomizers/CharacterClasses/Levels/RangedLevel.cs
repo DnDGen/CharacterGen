@@ -17,7 +17,7 @@ namespace NPCGen.Generators.Randomizers.CharacterClasses.Levels
 
         public Int32 Randomize()
         {
-            var roll = dice.RollIndex(5) + 1;
+            var roll = dice.Roll().d(5);
             return roll + rollBonus;
         }
 

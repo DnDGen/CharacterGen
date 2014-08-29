@@ -1,8 +1,7 @@
-﻿using D20Dice;
+﻿using System;
+using D20Dice;
 using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Races;
-using NPCGen.Generators.Interfaces;
-using System;
 using NPCGen.Generators.Interfaces.Combats;
 
 namespace NPCGen.Generators.Combats
@@ -36,16 +35,16 @@ namespace NPCGen.Generators.Combats
             switch (className)
             {
                 case CharacterClassConstants.Fighter:
-                case CharacterClassConstants.Paladin: return dice.d10() + constitutionBonus;
-                case CharacterClassConstants.Barbarian: return dice.d12() + constitutionBonus;
+                case CharacterClassConstants.Paladin: return dice.Roll().d10() + constitutionBonus;
+                case CharacterClassConstants.Barbarian: return dice.Roll().d12() + constitutionBonus;
                 case CharacterClassConstants.Cleric:
                 case CharacterClassConstants.Druid:
                 case CharacterClassConstants.Monk:
-                case CharacterClassConstants.Ranger: return dice.d8() + constitutionBonus;
+                case CharacterClassConstants.Ranger: return dice.Roll().d8() + constitutionBonus;
                 case CharacterClassConstants.Bard:
-                case CharacterClassConstants.Rogue: return dice.d6() + constitutionBonus;
+                case CharacterClassConstants.Rogue: return dice.Roll().d6() + constitutionBonus;
                 case CharacterClassConstants.Sorcerer:
-                case CharacterClassConstants.Wizard: return dice.d4() + constitutionBonus;
+                case CharacterClassConstants.Wizard: return dice.Roll().d4() + constitutionBonus;
                 default: throw new ArgumentOutOfRangeException();
             }
         }
@@ -55,9 +54,9 @@ namespace NPCGen.Generators.Combats
             var numberOfRolls = GetNumberOfAdditionalMonsterHitDice(race);
 
             if (race.Metarace == RaceConstants.Metaraces.HalfDragon)
-                return dice.d10(numberOfRolls);
+                return dice.Roll(numberOfRolls).d10();
 
-            return dice.d8(numberOfRolls);
+            return dice.Roll(numberOfRolls).d8();
         }
 
         private Int32 GetNumberOfAdditionalMonsterHitDice(Race race)

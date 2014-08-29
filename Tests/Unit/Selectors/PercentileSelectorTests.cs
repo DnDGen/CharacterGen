@@ -33,7 +33,7 @@ namespace NPCGen.Tests.Unit.Selectors
             mockPercentileMapper.Setup(p => p.Map(tableName)).Returns(table);
 
             mockDice = new Mock<IDice>();
-            mockDice.Setup(d => d.Percentile(1)).Returns(1);
+            mockDice.Setup(d => d.Roll(1).Percentile()).Returns(1);
             percentileSelector = new PercentileSelector(mockPercentileMapper.Object, mockDice.Object);
         }
 
@@ -49,7 +49,7 @@ namespace NPCGen.Tests.Unit.Selectors
         [TestCase(10, "10")]
         public void GetPercentile(Int32 roll, String content)
         {
-            mockDice.Setup(d => d.Percentile(1)).Returns(roll);
+            mockDice.Setup(d => d.Roll(1).Percentile()).Returns(roll);
             var result = percentileSelector.SelectPercentileFrom(tableName);
             Assert.That(result, Is.EqualTo(content));
         }

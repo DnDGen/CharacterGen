@@ -24,13 +24,13 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Stats
         public void BestOfFourStatsCalls1d6FourTimesPerStat()
         {
             var stats = randomizer.Randomize();
-            mockDice.Verify(d => d.d6(1), Times.Exactly(stats.Count * 4));
+            mockDice.Verify(d => d.Roll(1).d6(), Times.Exactly(stats.Count * 4));
         }
 
         [Test]
         public void BestOfFourIgnoresLowestRollPerStat()
         {
-            mockDice.SetupSequence(d => d.d6(1)).Returns(1).Returns(2).Returns(3).Returns(4);
+            mockDice.SetupSequence(d => d.Roll(1).d6()).Returns(2).Returns(1).Returns(3).Returns(4);
 
             var stats = randomizer.Randomize();
             var stat = stats.Values.First();

@@ -39,7 +39,7 @@ namespace NPCGen.Tests.Unit.Generators.Combats
             characterClass.ClassName = className;
 
             hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race);
-            mockDice.Verify(d => d.d10(1), Times.Once());
+            mockDice.Verify(d => d.Roll(1).d10(), Times.Once());
         }
 
         [TestCase(CharacterClassConstants.Barbarian)]
@@ -49,7 +49,7 @@ namespace NPCGen.Tests.Unit.Generators.Combats
             characterClass.ClassName = className;
 
             hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race);
-            mockDice.Verify(d => d.d12(1), Times.Once());
+            mockDice.Verify(d => d.Roll(1).d12(), Times.Once());
         }
 
         [TestCase(CharacterClassConstants.Cleric)]
@@ -62,7 +62,7 @@ namespace NPCGen.Tests.Unit.Generators.Combats
             characterClass.ClassName = className;
 
             hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race);
-            mockDice.Verify(d => d.d8(1), Times.Once());
+            mockDice.Verify(d => d.Roll(1).d8(), Times.Once());
         }
 
         [TestCase(CharacterClassConstants.Bard)]
@@ -73,7 +73,7 @@ namespace NPCGen.Tests.Unit.Generators.Combats
             characterClass.ClassName = className;
 
             hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race);
-            mockDice.Verify(d => d.d6(1), Times.Once());
+            mockDice.Verify(d => d.Roll(1).d6(), Times.Once());
         }
 
         [TestCase(CharacterClassConstants.Sorcerer)]
@@ -84,7 +84,7 @@ namespace NPCGen.Tests.Unit.Generators.Combats
             characterClass.ClassName = className;
 
             hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race);
-            mockDice.Verify(d => d.d4(1), Times.Once());
+            mockDice.Verify(d => d.Roll(1).d4(), Times.Once());
         }
 
         [Test]
@@ -93,14 +93,14 @@ namespace NPCGen.Tests.Unit.Generators.Combats
             characterClass.Level = 9266;
 
             hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race);
-            mockDice.Verify(d => d.d12(1), Times.Exactly(9266));
+            mockDice.Verify(d => d.Roll(1).d12(), Times.Exactly(9266));
         }
 
         [Test]
         public void ConstitutionBonusAppliedPerLevel()
         {
             characterClass.Level = 2;
-            mockDice.Setup(d => d.d12(1)).Returns(4600);
+            mockDice.Setup(d => d.Roll(1).d12()).Returns(4600);
 
             var hitPoints = hitPointsGenerator.GenerateWith(characterClass, 33, race);
             Assert.That(hitPoints, Is.EqualTo(9266));
@@ -152,7 +152,7 @@ namespace NPCGen.Tests.Unit.Generators.Combats
         {
             race.BaseRace = baseRace;
             hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race);
-            mockDice.Verify(d => d.d8(numberOfHitDice), Times.Once);
+            mockDice.Verify(d => d.Roll(numberOfHitDice).d8(), Times.Once);
         }
 
         [TestCase(RaceConstants.BaseRaces.Bugbear, 3)]
@@ -195,8 +195,8 @@ namespace NPCGen.Tests.Unit.Generators.Combats
             race.BaseRace = baseRace;
 
             var hitPoints = hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race);
-            mockDice.Verify(d => d.d10(numberOfHitDice), Times.Once);
-            mockDice.Verify(d => d.d8(It.IsAny<Int32>()), Times.Never);
+            mockDice.Verify(d => d.Roll(numberOfHitDice).d10(), Times.Once);
+            mockDice.Verify(d => d.Roll(It.IsAny<Int32>()).d8(), Times.Never);
         }
 
         [TestCase(RaceConstants.Metaraces.HalfCelestial)]
@@ -213,8 +213,8 @@ namespace NPCGen.Tests.Unit.Generators.Combats
             race.BaseRace = RaceConstants.BaseRaces.Derro;
 
             var hitPoints = hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race);
-            mockDice.Verify(d => d.d8(3), Times.Once);
-            mockDice.Verify(d => d.d10(It.IsAny<Int32>()), Times.Never);
+            mockDice.Verify(d => d.Roll(3).d8(), Times.Once);
+            mockDice.Verify(d => d.Roll(It.IsAny<Int32>()).d10(), Times.Never);
         }
     }
 }

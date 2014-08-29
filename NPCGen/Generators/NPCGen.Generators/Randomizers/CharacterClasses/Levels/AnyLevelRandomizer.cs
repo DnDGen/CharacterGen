@@ -16,7 +16,7 @@ namespace NPCGen.Generators.Randomizers.CharacterClasses.Levels
 
         public Int32 Randomize()
         {
-            return dice.d20();
+            return dice.Roll().d20();
         }
 
         public IEnumerable<Int32> GetAllPossibleResults()

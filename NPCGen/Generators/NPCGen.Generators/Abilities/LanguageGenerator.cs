@@ -43,7 +43,7 @@ namespace NPCGen.Generators.Abilities
 
             while (numberOfBonusLanguages-- > 0 && remainingBonusLanguages.Any())
             {
-                var index = dice.RollIndex(remainingBonusLanguages.Count);
+                var index = dice.Roll().d(remainingBonusLanguages.Count) - 1;
                 var language = remainingBonusLanguages[index];
 
                 languages.Add(language);

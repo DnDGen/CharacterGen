@@ -21,7 +21,7 @@ namespace NPCGen.Generators.Randomizers.Stats
 
             for (var i = 0; i < 4; i++)
             {
-                var roll = dice.d6();
+                var roll = dice.Roll().d6();
                 rolls.Add(roll);
             }
 

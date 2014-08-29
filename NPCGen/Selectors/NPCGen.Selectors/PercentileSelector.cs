@@ -21,7 +21,7 @@ namespace NPCGen.Selectors
         public String SelectPercentileFrom(String tableName)
         {
             var table = percentileMapper.Map(tableName);
-            var roll = dice.Percentile();
+            var roll = dice.Roll().Percentile();
             return table[roll];
         }
 

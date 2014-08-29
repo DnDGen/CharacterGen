@@ -21,7 +21,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Alignments
         public void Setup()
         {
             mockDice = new Mock<IDice>();
-            mockDice.Setup(d => d.d3(1)).Returns(1);
+            mockDice.Setup(d => d.Roll(1).d3()).Returns(1);
 
             mockPercentileResultSelector = new Mock<IPercentileSelector>();
             mockPercentileResultSelector.Setup(p => p.SelectAllResults(It.IsAny<String>())).Returns(AlignmentConstants.GetGoodnesses());
@@ -33,7 +33,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Alignments
         [Test]
         public void LawfulIs3OnD3()
         {
-            mockDice.Setup(d => d.d3(1)).Returns(3);
+            mockDice.Setup(d => d.Roll(1).d3()).Returns(3);
             var alignment = randomizer.Randomize();
             Assert.That(alignment.Lawfulness, Is.EqualTo(AlignmentConstants.Lawful));
         }
@@ -41,7 +41,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Alignments
         [Test]
         public void NeutralLawfulnessIs2OnD3()
         {
-            mockDice.Setup(d => d.d3(1)).Returns(2);
+            mockDice.Setup(d => d.Roll(1).d3()).Returns(2);
             var alignment = randomizer.Randomize();
             Assert.That(alignment.Lawfulness, Is.EqualTo(AlignmentConstants.Neutral));
         }
@@ -49,7 +49,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Alignments
         [Test]
         public void ChaoticIs1OnD3()
         {
-            mockDice.Setup(d => d.d3(1)).Returns(1);
+            mockDice.Setup(d => d.Roll(1).d3()).Returns(1);
             var alignment = randomizer.Randomize();
             Assert.That(alignment.Lawfulness, Is.EqualTo(AlignmentConstants.Chaotic));
         }
