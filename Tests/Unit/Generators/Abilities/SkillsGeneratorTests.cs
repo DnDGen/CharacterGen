@@ -52,7 +52,8 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             skillPoints = new Dictionary<String, Int32>();
             skillPoints[characterClass.ClassName] = 0;
             mockAdjustmentsSelector.Setup(s => s.SelectAdjustmentsFrom("SkillPointsForClasses")).Returns(skillPoints);
-
+            mockDice.Setup(d => d.Roll(1).d3()).Returns(1);
+            mockDice.Setup(d => d.Roll(1).d(It.IsAny<Int32>())).Returns(1);
         }
 
         [Test]
@@ -183,8 +184,8 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             skillPoints[characterClass.ClassName] = 1;
             characterClass.Level = 2;
 
-            mockDice.Setup(d => d.d3(1)).Returns(1);
-            mockDice.SetupSequence(d => d.Roll("1d2-1")).Returns(1).Returns(0).Returns(0).Returns(1).Returns(1);
+            mockDice.Setup(d => d.Roll(1).d3()).Returns(1);
+            mockDice.SetupSequence(d => d.Roll(1).d(2)).Returns(2).Returns(1).Returns(1).Returns(2).Returns(2);
 
             classSkills.Add("skill 1");
             classSkills.Add("skill 2");
@@ -203,8 +204,8 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             skillPoints[characterClass.ClassName] = 1;
             characterClass.Level = 2;
 
-            mockDice.Setup(d => d.d3(1)).Returns(3);
-            mockDice.SetupSequence(d => d.Roll("1d2-1")).Returns(1).Returns(0).Returns(0).Returns(1).Returns(1);
+            mockDice.Setup(d => d.Roll(1).d3()).Returns(3);
+            mockDice.SetupSequence(d => d.Roll(1).d(2)).Returns(2).Returns(1).Returns(1).Returns(2).Returns(2);
 
             crossClassSkills.Add("skill 1");
             crossClassSkills.Add("skill 2");
@@ -222,7 +223,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         public void AssignPointsToClassSkills(Int32 roll)
         {
             skillPoints[characterClass.ClassName] = 1;
-            mockDice.Setup(d => d.d3(1)).Returns(roll);
+            mockDice.Setup(d => d.Roll(1).d3()).Returns(roll);
             classSkills.Add("class skill");
             crossClassSkills.Add("cross-class skill");
 
@@ -236,7 +237,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         public void AssignPointsToCrossClassSkills()
         {
             skillPoints[characterClass.ClassName] = 1;
-            mockDice.Setup(d => d.d3(1)).Returns(3);
+            mockDice.Setup(d => d.Roll(1).d3()).Returns(3);
             classSkills.Add("class skill");
             crossClassSkills.Add("cross-class skill");
 
@@ -251,7 +252,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         {
             skillPoints[characterClass.ClassName] = 1;
             characterClass.Level = 2;
-            mockDice.SetupSequence(d => d.d3(1)).Returns(3).Returns(1).Returns(2).Returns(3).Returns(2);
+            mockDice.SetupSequence(d => d.Roll(1).d3()).Returns(3).Returns(1).Returns(2).Returns(3).Returns(2);
 
             classSkills.Add("class skill");
             crossClassSkills.Add("cross-class skill");
@@ -266,14 +267,14 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         public void CannotAssignMoreThanLevelPlusThreePointsPerClassSkill()
         {
             skillPoints[characterClass.ClassName] = 2;
-            mockDice.SetupSequence(d => d.d3(1)).Returns(1);
+            mockDice.SetupSequence(d => d.Roll(1).d3()).Returns(1);
 
-            var sequence = mockDice.SetupSequence(d => d.Roll("1d3-1"));
+            var sequence = mockDice.SetupSequence(d => d.Roll(1).d(3));
             for (var i = 0; i < 9; i++)
-                sequence = sequence.Returns(0);
+                sequence = sequence.Returns(1);
 
             for (var i = 0; i < 4; i++)
-                sequence = sequence.Returns(1).Returns(2);
+                sequence = sequence.Returns(2).Returns(3);
 
             classSkills.Add("skill 1");
             classSkills.Add("skill 2");
@@ -290,14 +291,14 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         public void CannotAssignMoreThanLevelPlusThreePointsPerCrossClassSkill()
         {
             skillPoints[characterClass.ClassName] = 2;
-            mockDice.SetupSequence(d => d.d3(1)).Returns(3);
+            mockDice.SetupSequence(d => d.Roll(1).d3()).Returns(3);
 
-            var sequence = mockDice.SetupSequence(d => d.Roll("1d3-1"));
+            var sequence = mockDice.SetupSequence(d => d.Roll(1).d(3));
             for (var i = 0; i < 9; i++)
-                sequence = sequence.Returns(0);
+                sequence = sequence.Returns(1);
 
             for (var i = 0; i < 4; i++)
-                sequence = sequence.Returns(1).Returns(2);
+                sequence = sequence.Returns(2).Returns(3);
 
             crossClassSkills.Add("skill 1");
             crossClassSkills.Add("skill 2");
@@ -334,19 +335,19 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             skillPoints[characterClass.ClassName] = 2;
             characterClass.Level = 13;
 
-            var sequence = mockDice.SetupSequence(d => d.d3(1));
+            var sequence = mockDice.SetupSequence(d => d.Roll(1).d3());
             for (var count = 0; count < 11; count++)
                 sequence = sequence.Returns(1);
             for (var count = 0; count < 21; count++)
                 sequence = sequence.Returns(3);
 
-            sequence = mockDice.SetupSequence(d => d.Roll("1d6-1")).Returns(0);
+            sequence = mockDice.SetupSequence(d => d.Roll(1).d(6)).Returns(1);
             for (var roll = 0; roll < 10; roll++)
-                sequence = sequence.Returns(roll % 2);
+                sequence = sequence.Returns(roll % 2 + 1);
 
-            sequence = mockDice.SetupSequence(d => d.Roll("1d2-1")).Returns(0);
+            sequence = mockDice.SetupSequence(d => d.Roll(1).d(2)).Returns(1);
             for (var roll = 0; roll < 20; roll++)
-                sequence = sequence.Returns(roll % 2);
+                sequence = sequence.Returns(roll % 2 + 1);
 
             classSkills.Add("skill 1");
             classSkills.Add("skill 2");
@@ -394,10 +395,10 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             skillPoints[characterClass.ClassName] = 2;
             characterClass.Level = 2;
 
-            mockDice.Setup(d => d.d3(1)).Returns(1);
-            var sequence = mockDice.SetupSequence(d => d.Roll("1d3-1"));
+            mockDice.Setup(d => d.Roll(1).d3()).Returns(1);
+            var sequence = mockDice.SetupSequence(d => d.Roll(1).d(3));
             for (var roll = 0; roll < 10; roll++)
-                sequence = sequence.Returns(roll % 2);
+                sequence = sequence.Returns(roll % 2 + 1);
 
             classSkills.Add("skill 1");
             classSkills.Add("skill 2");
@@ -427,21 +428,21 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             skillPoints[characterClass.ClassName] = 3;
             characterClass.Level = 6;
 
-            var sequence = mockDice.SetupSequence(d => d.d3(1));
+            var sequence = mockDice.SetupSequence(d => d.Roll(1).d3());
             for (var count = 0; count < 10; count++)
                 sequence = sequence.Returns(1);
             for (var count = 0; count < 17; count++)
                 sequence = sequence.Returns(3);
 
-            sequence = mockDice.SetupSequence(d => d.Roll("1d4-1"));
+            sequence = mockDice.SetupSequence(d => d.Roll(1).d(4));
             for (var roll = 0; roll < 4; roll++)
-                sequence = sequence.Returns(0);
-            for (var roll = 0; roll < 6; roll++)
                 sequence = sequence.Returns(1);
+            for (var roll = 0; roll < 6; roll++)
+                sequence = sequence.Returns(2);
 
-            sequence = mockDice.SetupSequence(d => d.Roll("1d2-1")).Returns(0);
+            sequence = mockDice.SetupSequence(d => d.Roll(1).d(2)).Returns(1);
             for (var roll = 0; roll < 16; roll++)
-                sequence = sequence.Returns(roll % 2);
+                sequence = sequence.Returns(roll % 2 + 1);
 
             classSkills.Add("skill 1");
             crossClassSkills.Add("skill 2");

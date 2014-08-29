@@ -12,10 +12,11 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.CharacterClasses.Levels
         public void Add15ToRoll()
         {
             var mockDice = new Mock<IDice>();
+            mockDice.Setup(d => d.Roll(1).d(5)).Returns(9266);
             var randomizer = new VeryHighLevelRandomizer(mockDice.Object);
 
             var level = randomizer.Randomize();
-            Assert.That(level, Is.EqualTo(15));
+            Assert.That(level, Is.EqualTo(9281));
         }
     }
 }

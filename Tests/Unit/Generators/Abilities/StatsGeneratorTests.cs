@@ -122,7 +122,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         public void LowOnD2IncreasesFirstPriorityStat()
         {
             characterClass.Level = 4;
-            mockDice.Setup(d => d.d2(1)).Returns(1);
+            mockDice.Setup(d => d.Roll(1).d2()).Returns(1);
 
             var stats = statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
             Assert.That(stats[statPriority.FirstPriority].Value, Is.EqualTo(baseStat + 1));
@@ -134,7 +134,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         public void HighOnD2IncreasesSecondPriorityStat()
         {
             characterClass.Level = 4;
-            mockDice.Setup(d => d.d2(1)).Returns(2);
+            mockDice.Setup(d => d.Roll(1).d2()).Returns(2);
 
             var stats = statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
             Assert.That(stats[statPriority.FirstPriority].Value, Is.EqualTo(baseStat));
@@ -150,7 +150,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             adjustments["other stat"] = 9266;
             adjustments[statPriority.FirstPriority] = -10;
             adjustments[statPriority.SecondPriority] = -7;
-            mockDice.Setup(d => d.d2(1)).Returns(1);
+            mockDice.Setup(d => d.Roll(1).d2()).Returns(1);
             characterClass.Level = 4;
 
             var stats = statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
@@ -182,7 +182,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         public void IncreaseStat(Int32 level, Int32 increase)
         {
             characterClass.Level = level;
-            mockDice.Setup(d => d.d2(1)).Returns(1);
+            mockDice.Setup(d => d.Roll(1).d2()).Returns(1);
 
             var stats = statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
             Assert.That(stats[statPriority.FirstPriority].Value, Is.EqualTo(baseStat + increase));
@@ -192,7 +192,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         public void RollWhichStatToIncreasePerLevel()
         {
             characterClass.Level = 12;
-            mockDice.SetupSequence(d => d.d2(1)).Returns(1).Returns(2).Returns(1);
+            mockDice.SetupSequence(d => d.Roll(1).d2()).Returns(1).Returns(2).Returns(1);
 
             var stats = statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
             Assert.That(stats[statPriority.FirstPriority].Value, Is.EqualTo(baseStat + 2));
@@ -204,7 +204,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         public void IncreasesIgnorePrioritization()
         {
             characterClass.Level = 12;
-            mockDice.SetupSequence(d => d.d2(1)).Returns(1).Returns(2).Returns(2);
+            mockDice.SetupSequence(d => d.Roll(1).d2()).Returns(1).Returns(2).Returns(2);
 
             foreach (var stat in randomizedStats.Values)
                 stat.Value = baseStat;

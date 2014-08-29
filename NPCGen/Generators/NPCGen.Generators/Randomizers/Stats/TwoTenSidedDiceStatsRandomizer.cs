@@ -16,7 +16,7 @@ namespace NPCGen.Generators.Randomizers.Stats
 
         protected override Int32 RollStat()
         {
-            return dice.d10(2);
+            return dice.Roll(2).d10();
         }
 
         protected override Boolean StatsAreAllowed(IEnumerable<Stat> stats)

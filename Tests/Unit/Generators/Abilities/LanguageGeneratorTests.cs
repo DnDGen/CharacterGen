@@ -31,6 +31,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             race = new Race();
             race.BaseRace = "base race";
             race.Metarace = "metarace";
+            mockDice.Setup(d => d.Roll(1).d(It.IsAny<Int32>())).Returns(1);
         }
 
         [Test]

@@ -28,6 +28,8 @@ namespace NPCGen.Tests.Unit.Generators
             mockBaseRaceRandomizer = new Mock<IBaseRaceRandomizer>();
             mockMetaraceRandomizer = new Mock<IMetaraceRandomizer>();
             characterClass = new CharacterClass();
+
+            mockDice.Setup(d => d.Roll(1).d2()).Returns(1);
         }
 
         [Test]
@@ -51,7 +53,7 @@ namespace NPCGen.Tests.Unit.Generators
         [Test]
         public void ReturnMaleOnLowRoll()
         {
-            mockDice.Setup(d => d.d2(1)).Returns(1);
+            mockDice.Setup(d => d.Roll(1).d2()).Returns(1);
 
             var race = raceGenerator.GenerateWith(String.Empty, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
             Assert.That(race.Male, Is.True);
@@ -60,7 +62,7 @@ namespace NPCGen.Tests.Unit.Generators
         [Test]
         public void ReturnFemaleOnHighRoll()
         {
-            mockDice.Setup(d => d.d2(1)).Returns(2);
+            mockDice.Setup(d => d.Roll(1).d2()).Returns(2);
 
             var race = raceGenerator.GenerateWith(String.Empty, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
             Assert.That(race.Male, Is.False);
@@ -73,7 +75,7 @@ namespace NPCGen.Tests.Unit.Generators
             mockBaseRaceRandomizer.Setup(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClass>())).Returns(RaceConstants.BaseRaces.Drow);
 
             var race = raceGenerator.GenerateWith(String.Empty, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
-            mockDice.Verify(d => d.d2(1), Times.Never);
+            mockDice.Verify(d => d.Roll(It.IsAny<Int32>()).d2(), Times.Never);
             Assert.That(race.Male, Is.True);
         }
 
@@ -84,7 +86,7 @@ namespace NPCGen.Tests.Unit.Generators
             mockBaseRaceRandomizer.Setup(r => r.Randomize(It.IsAny<String>(), It.IsAny<CharacterClass>())).Returns(RaceConstants.BaseRaces.Drow);
 
             var race = raceGenerator.GenerateWith(String.Empty, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
-            mockDice.Verify(d => d.d2(1), Times.Never);
+            mockDice.Verify(d => d.Roll(It.IsAny<Int32>()).d2(), Times.Never);
             Assert.That(race.Male, Is.False);
         }
     }

@@ -29,6 +29,7 @@ namespace NPCGen.Tests.Unit.Generators.Combats
             characterClass.ClassName = CharacterClassConstants.Barbarian;
             race = new Race();
             constitutionBonus = 0;
+            mockDice.Setup(d => d.Roll(0).d8()).Returns(0);
         }
 
         [TestCase(CharacterClassConstants.Fighter)]
@@ -39,7 +40,7 @@ namespace NPCGen.Tests.Unit.Generators.Combats
             characterClass.ClassName = className;
 
             hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race);
-            mockDice.Verify(d => d.Roll(1).d10(), Times.Once());
+            mockDice.Verify(d => d.Roll(1).d10(), Times.Once);
         }
 
         [TestCase(CharacterClassConstants.Barbarian)]
@@ -49,7 +50,7 @@ namespace NPCGen.Tests.Unit.Generators.Combats
             characterClass.ClassName = className;
 
             hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race);
-            mockDice.Verify(d => d.Roll(1).d12(), Times.Once());
+            mockDice.Verify(d => d.Roll(1).d12(), Times.Once);
         }
 
         [TestCase(CharacterClassConstants.Cleric)]
@@ -60,9 +61,12 @@ namespace NPCGen.Tests.Unit.Generators.Combats
         {
             characterClass.Level = 1;
             characterClass.ClassName = className;
+            var mockPartialRoll = new Mock<IPartialRoll>();
+            mockDice.Setup(d => d.Roll(1)).Returns(mockPartialRoll.Object);
 
             hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race);
-            mockDice.Verify(d => d.Roll(1).d8(), Times.Once());
+            mockDice.Verify(d => d.Roll(1), Times.Once);
+            mockPartialRoll.Verify(r => r.d8(), Times.Once);
         }
 
         [TestCase(CharacterClassConstants.Bard)]
@@ -73,7 +77,7 @@ namespace NPCGen.Tests.Unit.Generators.Combats
             characterClass.ClassName = className;
 
             hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race);
-            mockDice.Verify(d => d.Roll(1).d6(), Times.Once());
+            mockDice.Verify(d => d.Roll(1).d6(), Times.Once);
         }
 
         [TestCase(CharacterClassConstants.Sorcerer)]
@@ -84,7 +88,7 @@ namespace NPCGen.Tests.Unit.Generators.Combats
             characterClass.ClassName = className;
 
             hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race);
-            mockDice.Verify(d => d.Roll(1).d4(), Times.Once());
+            mockDice.Verify(d => d.Roll(1).d4(), Times.Once);
         }
 
         [Test]

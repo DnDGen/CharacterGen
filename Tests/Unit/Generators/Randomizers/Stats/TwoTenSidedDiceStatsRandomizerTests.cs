@@ -19,19 +19,21 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Stats
         {
             mockDice = new Mock<IDice>();
             randomizer = new TwoTenSidedDiceStatsRandomizer(mockDice.Object);
+
+            mockDice.Setup(d => d.Roll(It.IsAny<Int32>()).d10()).Returns(1);
         }
 
         [Test]
         public void TwoTenSidedDiceCalls2d10PerStat()
         {
             var stats = randomizer.Randomize();
-            mockDice.Verify(d => d.d10(2), Times.Exactly(stats.Count));
+            mockDice.Verify(d => d.Roll(2).d10(), Times.Exactly(stats.Count));
         }
 
         [Test]
         public void TwoTenSidedDiceReturnsUnmodified2d10PerStat()
         {
-            mockDice.Setup(d => d.d10(2)).Returns(10);
+            mockDice.Setup(d => d.Roll(2).d10()).Returns(10);
 
             var stats = randomizer.Randomize();
             foreach (var stat in stats.Values)
@@ -41,7 +43,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Stats
         [Test]
         public void RolledStatsAreAlwaysAllowed()
         {
-            mockDice.SetupSequence(d => d.d10(2)).Returns(9266).Returns(-42).Returns(Int32.MaxValue).Returns(Int32.MinValue).Returns(0)
+            mockDice.SetupSequence(d => d.Roll(2).d10()).Returns(9266).Returns(-42).Returns(Int32.MaxValue).Returns(Int32.MinValue).Returns(0)
                 .Returns(1337);
 
             var stats = randomizer.Randomize();

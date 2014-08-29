@@ -18,6 +18,8 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Stats
         {
             mockDice = new Mock<IDice>();
             randomizer = new BestOfFourStatsRandomizer(mockDice.Object);
+
+            mockDice.Setup(d => d.Roll(1).d6()).Returns(1);
         }
 
         [Test]

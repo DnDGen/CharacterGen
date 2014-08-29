@@ -69,7 +69,7 @@ namespace NPCGen.Generators.Abilities
             var count = level / 4;
             while (count-- > 0)
             {
-                var roll = dice.d2();
+                var roll = dice.Roll().d2();
 
                 if (roll == 1)
                     stats[priorities.FirstPriority].Value++;

@@ -35,7 +35,7 @@ namespace NPCGen.Generators
             if (baseRace == RaceConstants.BaseRaces.Drow && className == CharacterClassConstants.Cleric)
                 return false;
 
-            return dice.d2() == 1;
+            return dice.Roll().d2() == 1;
         }
     }
 }
