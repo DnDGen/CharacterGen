@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using NPCGen.Common.Abilities;
+using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Races;
 using NUnit.Framework;
 
@@ -20,9 +21,9 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Languages
             get
             {
                 var baseRaces = RaceConstants.BaseRaces.GetBaseRaces();
-                var metaraces = RaceConstants.Metaraces.GetMetaraces();
+                var classNames = CharacterClassConstants.GetClassNames();
 
-                return baseRaces.Union(metaraces);
+                return baseRaces.Union(classNames);
             }
         }
 
@@ -219,15 +220,22 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Languages
             LanguageConstants.Goblin,
             LanguageConstants.Giant,
             LanguageConstants.Orc)]
-        [TestCase(RaceConstants.Metaraces.None)]
-        [TestCase(RaceConstants.Metaraces.HalfCelestial)]
-        [TestCase(RaceConstants.Metaraces.HalfDragon)]
-        [TestCase(RaceConstants.Metaraces.HalfFiend)]
-        [TestCase(RaceConstants.Metaraces.Werebear)]
-        [TestCase(RaceConstants.Metaraces.Wereboar)]
-        [TestCase(RaceConstants.Metaraces.Wererat)]
-        [TestCase(RaceConstants.Metaraces.Weretiger)]
-        [TestCase(RaceConstants.Metaraces.Werewolf)]
+        [TestCase(CharacterClassConstants.Cleric,
+            LanguageConstants.Abyssal,
+            LanguageConstants.Celestial,
+            LanguageConstants.Infernal)]
+        [TestCase(CharacterClassConstants.Druid,
+            LanguageConstants.Sylvan)]
+        [TestCase(CharacterClassConstants.Wizard,
+            LanguageConstants.Draconic)]
+        [TestCase(CharacterClassConstants.Barbarian)]
+        [TestCase(CharacterClassConstants.Bard)]
+        [TestCase(CharacterClassConstants.Fighter)]
+        [TestCase(CharacterClassConstants.Monk)]
+        [TestCase(CharacterClassConstants.Paladin)]
+        [TestCase(CharacterClassConstants.Ranger)]
+        [TestCase(CharacterClassConstants.Rogue)]
+        [TestCase(CharacterClassConstants.Sorcerer)]
         public override void DistinctCollection(String name, params String[] collection)
         {
             base.DistinctCollection(name, collection);

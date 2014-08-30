@@ -71,7 +71,6 @@
     <Compile Include="Abilities\Skills\SkillConstantsTests.cs" />
     <Compile Include="Abilities\Skills\SkillTests.cs" />
     <Compile Include="Abilities\Stats\StatConstantsTests.cs" />
-    <Compile Include="Abilities\Stats\StatPriorityTests.cs" />
     <Compile Include="Abilities\Stats\StatTests.cs" />
   </ItemGroup>
   <ItemGroup>

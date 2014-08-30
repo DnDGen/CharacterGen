@@ -201,4 +201,38 @@
     <object>
         <name>Werewolf</name>
     </object>
+    <object>
+        <name>Barbarian</name>
+    </object>
+    <object>
+        <name>Bard</name>
+    </object>
+    <object>
+        <name>Cleric</name>
+    </object>
+    <object>
+        <name>Druid</name>
+        <item>Druidic</item>
+    </object>
+    <object>
+        <name>Fighter</name>
+    </object>
+    <object>
+        <name>Monk</name>
+    </object>
+    <object>
+        <name>Paladin</name>
+    </object>
+    <object>
+        <name>Ranger</name>
+    </object>
+    <object>
+        <name>Rogue</name>
+    </object>
+    <object>
+        <name>Sorcerer</name>
+    </object>
+    <object>
+        <name>Wizard</name>
+    </object>
 </items>

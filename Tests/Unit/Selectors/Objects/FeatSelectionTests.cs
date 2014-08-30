@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using NPCGen.Common.Abilities.Skills;
 using NPCGen.Common.Abilities.Stats;
-using NPCGen.Selectors.Interfaces;
+using NPCGen.Selectors.Interfaces.Objects;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Selectors
+namespace NPCGen.Tests.Unit.Selectors.Objects
 {
     [TestFixture]
     public class FeatSelectionTests

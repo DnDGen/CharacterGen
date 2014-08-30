@@ -30,7 +30,7 @@ namespace NPCGen.Generators.Randomizers.Races.Metaraces
             var tableName = String.Format("{0}{1}Metaraces", goodness, characterClass.ClassName);
             var metarace = String.Empty;
 
-            do metarace = percentileResultSelector.SelectPercentileFrom(tableName);
+            do metarace = percentileResultSelector.SelectFrom(tableName);
             while (!results.Contains(metarace));
 
             return metarace;
@@ -39,7 +39,7 @@ namespace NPCGen.Generators.Randomizers.Races.Metaraces
         public IEnumerable<String> GetAllPossibleResults(String goodness, CharacterClass characterClass)
         {
             var tableName = String.Format("{0}{1}Metaraces", goodness, characterClass.ClassName);
-            var results = percentileResultSelector.SelectAllResults(tableName);
+            var results = percentileResultSelector.SelectAllFrom(tableName);
             return results.Where(r => RaceIsAllowed(r, characterClass.Level));
         }
 
@@ -53,7 +53,7 @@ namespace NPCGen.Generators.Randomizers.Races.Metaraces
 
         private Boolean LevelAdjustmentIsAllowed(String metarace, Int32 level)
         {
-            var adjustments = adjustmentsSelector.SelectAdjustmentsFrom("LevelAdjustments");
+            var adjustments = adjustmentsSelector.SelectFrom("LevelAdjustments");
             return adjustments[metarace] < level;
         }
 

@@ -1,23 +1,28 @@
 ﻿using System;
-using NPCGen.Common.Abilities.Stats;
-using NPCGen.Mappers.Interfaces;
+using System.Linq;
 using NPCGen.Selectors.Interfaces;
+using NPCGen.Selectors.Interfaces.Objects;
 
 namespace NPCGen.Selectors
 {
     public class StatPrioritySelector : IStatPrioritySelector
     {
-        private IStatPriorityMapper statPriorityMapper;
+        private ICollectionsSelector innerSelector;
 
-        public StatPrioritySelector(IStatPriorityMapper statPriorityMapper)
+        public StatPrioritySelector(ICollectionsSelector innerSelector)
         {
-            this.statPriorityMapper = statPriorityMapper;
+            this.innerSelector = innerSelector;
         }
 
-        public StatPriority SelectStatPrioritiesFor(String className)
+        public StatPrioritySelection SelectFor(String className)
         {
-            var priorities = statPriorityMapper.Map("StatPriorities");
-            return priorities[className];
+            var priorities = innerSelector.SelectFrom("StatPriorities", className);
+
+            var statPriority = new StatPrioritySelection();
+            statPriority.First = priorities.First();
+            statPriority.Second = priorities.Last();
+
+            return statPriority;
         }
     }
 }

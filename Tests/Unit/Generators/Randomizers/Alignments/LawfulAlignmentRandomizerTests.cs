@@ -20,7 +20,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Alignments
         {
             var mockDice = new Mock<IDice>();
             var mockPercentileResultSelector = new Mock<IPercentileSelector>();
-            mockPercentileResultSelector.Setup(p => p.SelectAllResults(It.IsAny<String>())).Returns(AlignmentConstants.GetGoodnesses());
+            mockPercentileResultSelector.Setup(p => p.SelectAllFrom(It.IsAny<String>())).Returns(AlignmentConstants.GetGoodnesses());
 
             var randomizer = new LawfulAlignmentRandomizer(mockDice.Object, mockPercentileResultSelector.Object);
 

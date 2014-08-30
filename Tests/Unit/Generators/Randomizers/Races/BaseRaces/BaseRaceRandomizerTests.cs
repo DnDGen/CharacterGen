@@ -17,7 +17,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         public void BaseRaceRandomizerSetup()
         {
             var baseRaces = RaceConstants.BaseRaces.GetBaseRaces();
-            mockPercentileResultSelector.Setup(p => p.SelectAllResults(It.IsAny<String>())).Returns(baseRaces);
+            mockPercentileResultSelector.Setup(p => p.SelectAllFrom(It.IsAny<String>())).Returns(baseRaces);
 
             foreach (var baseRace in baseRaces)
                 adjustments.Add(baseRace, 0);

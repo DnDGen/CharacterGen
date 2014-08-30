@@ -8,6 +8,7 @@ using NPCGen.Common.CharacterClasses;
 using NPCGen.Generators.Abilities;
 using NPCGen.Generators.Interfaces.Abilities;
 using NPCGen.Selectors.Interfaces;
+using NPCGen.Selectors.Interfaces.Objects;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Unit.Generators.Abilities
@@ -51,7 +52,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
 
             skillPoints = new Dictionary<String, Int32>();
             skillPoints[characterClass.ClassName] = 0;
-            mockAdjustmentsSelector.Setup(s => s.SelectAdjustmentsFrom("SkillPointsForClasses")).Returns(skillPoints);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom("SkillPointsForClasses")).Returns(skillPoints);
             mockDice.Setup(d => d.Roll(1).d3()).Returns(1);
             mockDice.Setup(d => d.Roll(1).d(It.IsAny<Int32>())).Returns(1);
         }

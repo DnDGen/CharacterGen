@@ -32,7 +32,7 @@ namespace NPCGen.Mappers.Percentiles
                 var upperLimit = Convert.ToInt32(node.SelectSingleNode("upper").InnerText);
 
                 for (var roll = lowerLimit; roll <= upperLimit; roll++)
-                    results.Add(roll, content);
+                    results[roll] = content;
             }
 
             return results;

@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using D20Dice;
-using NPCGen.Common.Abilities;
-using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Races;
 using NPCGen.Generators.Interfaces.Abilities;
 using NPCGen.Selectors.Interfaces;
@@ -13,9 +11,9 @@ namespace NPCGen.Generators.Abilities
     public class LanguageGenerator : ILanguageGenerator
     {
         private IDice dice;
-        private ILanguagesSelector languagesSelector;
+        private ILanguageCollectionsSelector languagesSelector;
 
-        public LanguageGenerator(IDice dice, ILanguagesSelector languagesSelector)
+        public LanguageGenerator(IDice dice, ILanguageCollectionsSelector languagesSelector)
         {
             this.dice = dice;
             this.languagesSelector = languagesSelector;
@@ -25,11 +23,8 @@ namespace NPCGen.Generators.Abilities
         {
             var languages = new List<String>();
 
-            var automaticLanguages = languagesSelector.SelectAutomaticLanguagesFor(race);
+            var automaticLanguages = languagesSelector.SelectAutomaticLanguagesFor(race, className);
             languages.AddRange(automaticLanguages);
-
-            if (className == CharacterClassConstants.Druid)
-                languages.Add(LanguageConstants.Druidic);
 
             var bonusLanguages = languagesSelector.SelectBonusLanguagesFor(race.BaseRace, className);
             var remainingBonusLanguages = bonusLanguages.Except(languages).ToList();

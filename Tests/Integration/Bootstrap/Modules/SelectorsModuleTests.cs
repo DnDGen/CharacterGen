@@ -9,7 +9,7 @@ namespace NPCGen.Tests.Integration.Bootstrap.Modules
         [Test]
         public void LanguageSelectorsAreNotGeneratedAsSingletons()
         {
-            AssertNotSingleton<ILanguagesSelector>();
+            AssertNotSingleton<ILanguageCollectionsSelector>();
         }
 
         [Test]

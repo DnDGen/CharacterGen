@@ -4,7 +4,7 @@ using System.Linq;
 using NPCGen.Common.Abilities.Skills;
 using NPCGen.Common.Abilities.Stats;
 
-namespace NPCGen.Selectors.Interfaces
+namespace NPCGen.Selectors.Interfaces.Objects
 {
     public class FeatSelection
     {

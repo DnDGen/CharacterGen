@@ -50,14 +50,14 @@ namespace NPCGen.Tests.Unit.Selectors
         public void GetPercentile(Int32 roll, String content)
         {
             mockDice.Setup(d => d.Roll(1).Percentile()).Returns(roll);
-            var result = percentileSelector.SelectPercentileFrom(tableName);
+            var result = percentileSelector.SelectFrom(tableName);
             Assert.That(result, Is.EqualTo(content));
         }
 
         [Test]
         public void GetAllResultsReturnsAllContentValues()
         {
-            var results = percentileSelector.SelectAllResults(tableName);
+            var results = percentileSelector.SelectAllFrom(tableName);
             var distinctContent = table.Values.Distinct();
 
             foreach (var content in distinctContent)

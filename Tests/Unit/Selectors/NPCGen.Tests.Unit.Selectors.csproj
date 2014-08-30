@@ -50,9 +50,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CollectionsSelectorTests.cs" />
-    <Compile Include="FeatSelectionTests.cs" />
-    <Compile Include="LanguagesSelectorTests.cs" />
+    <Compile Include="Objects\FeatSelectionTests.cs" />
+    <Compile Include="LanguageCollectionsSelectorTests.cs" />
     <Compile Include="AdjustmentsSelectorTests.cs" />
+    <Compile Include="Objects\SkillSelectionTests.cs" />
+    <Compile Include="Objects\StatPrioritySelectionTests.cs" />
     <Compile Include="PercentileSelectorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SkillSelectorTests.cs" />

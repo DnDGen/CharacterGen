@@ -9,12 +9,6 @@ namespace NPCGen.Tests.Integration.Bootstrap.Modules
     public class MappersModuleTests : BootstrapTests
     {
         [Test]
-        public void AdjustmentMappersAreNotGeneratedAsSingletons()
-        {
-            AssertNotSingleton<IAdjustmentMapper>();
-        }
-
-        [Test]
         public void CollectionsXmlMappersAreGeneratedAsSingletons()
         {
             AssertSingleton<ICollectionsMapper>();
@@ -36,12 +30,6 @@ namespace NPCGen.Tests.Integration.Bootstrap.Modules
         public void PercentileXmlMappersAreDecorated()
         {
             AssertIsInstanceOf<IPercentileMapper, PercentileMapperCachingProxy>();
-        }
-
-        [Test]
-        public void StatPriorityMappersAreNotGeneratedAsSingletons()
-        {
-            AssertNotSingleton<IStatPriorityMapper>();
         }
     }
 }

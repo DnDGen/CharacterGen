@@ -323,30 +323,41 @@
         <item>Gnoll</item>
     </object>
     <object>
-        <name>Half-Celestial</name>
+        <name>Cleric</name>
+        <item>Abyssal</item>
+        <item>Celestial</item>
+        <item>Infernal</item>
     </object>
     <object>
-        <name>Half-Dragon</name>
+        <name>Druid</name>
+        <item>Sylvan</item>
     </object>
     <object>
-        <name>Half-Fiend</name>
+        <name>Wizard</name>
+        <item>Draconic</item>
     </object>
     <object>
-        <name>Werebear</name>
+        <name>Barbarian</name>
     </object>
     <object>
-        <name>Wereboar</name>
+        <name>Bard</name>
     </object>
     <object>
-        <name>Wererat</name>
+        <name>Fighter</name>
     </object>
     <object>
-        <name>Weretiger</name>
+        <name>Monk</name>
     </object>
     <object>
-        <name>Werewolf</name>
+        <name>Paladin</name>
     </object>
     <object>
-        <name></name>
+        <name>Ranger</name>
+    </object>
+    <object>
+        <name>Rogue</name>
+    </object>
+    <object>
+        <name>Sorcerer</name>
     </object>
 </items>

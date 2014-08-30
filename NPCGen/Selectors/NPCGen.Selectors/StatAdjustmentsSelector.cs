@@ -9,21 +9,21 @@ namespace NPCGen.Selectors
 {
     public class StatAdjustmentsSelector : IStatAdjustmentsSelector
     {
-        private IAdjustmentMapper adjustmentMapper;
+        private IAdjustmentsSelector innerSelector;
 
-        public StatAdjustmentsSelector(IAdjustmentMapper adjustmentMapper)
+        public StatAdjustmentsSelector(IAdjustmentsSelector innerSelector)
         {
-            this.adjustmentMapper = adjustmentMapper;
+            this.innerSelector = innerSelector;
         }
 
-        public Dictionary<String, Int32> SelectAdjustmentsFor(Race race)
+        public Dictionary<String, Int32> SelectFor(Race race)
         {
             var adjustments = new Dictionary<String, Int32>();
 
             foreach (var stat in StatConstants.GetStats())
             {
                 var tableName = String.Format("{0}StatAdjustments", stat);
-                var statAdjustments = adjustmentMapper.Map(tableName);
+                var statAdjustments = innerSelector.SelectFrom(tableName);
 
                 adjustments[stat] = statAdjustments[race.BaseRace] + statAdjustments[race.Metarace];
             }

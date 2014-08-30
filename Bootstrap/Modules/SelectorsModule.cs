@@ -8,7 +8,7 @@ namespace NPCGen.Bootstrap.Modules
     {
         public override void Load()
         {
-            Bind<ILanguagesSelector>().To<LanguagesSelector>();
+            Bind<ILanguageCollectionsSelector>().To<LanguageCollectionsSelector>();
             Bind<IAdjustmentsSelector>().To<AdjustmentsSelector>();
             Bind<IPercentileSelector>().To<PercentileSelector>();
             Bind<IStatPrioritySelector>().To<StatPrioritySelector>();

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using NPCGen.Common.Abilities;
+using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Races;
 using NUnit.Framework;
 
@@ -21,8 +22,9 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Languages
             {
                 var baseRaces = RaceConstants.BaseRaces.GetBaseRaces();
                 var metaraces = RaceConstants.Metaraces.GetMetaraces();
+                var classNames = CharacterClassConstants.GetClassNames();
 
-                return baseRaces.Union(metaraces);
+                return baseRaces.Union(metaraces).Union(classNames);
             }
         }
 
@@ -103,6 +105,18 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Languages
         [TestCase(RaceConstants.Metaraces.Weretiger)]
         [TestCase(RaceConstants.Metaraces.Werewolf)]
         [TestCase(RaceConstants.Metaraces.None)]
+        [TestCase(CharacterClassConstants.Barbarian)]
+        [TestCase(CharacterClassConstants.Bard)]
+        [TestCase(CharacterClassConstants.Cleric)]
+        [TestCase(CharacterClassConstants.Druid,
+            LanguageConstants.Druidic)]
+        [TestCase(CharacterClassConstants.Fighter)]
+        [TestCase(CharacterClassConstants.Monk)]
+        [TestCase(CharacterClassConstants.Paladin)]
+        [TestCase(CharacterClassConstants.Ranger)]
+        [TestCase(CharacterClassConstants.Rogue)]
+        [TestCase(CharacterClassConstants.Sorcerer)]
+        [TestCase(CharacterClassConstants.Wizard)]
         public override void DistinctCollection(String name, params String[] languages)
         {
             base.DistinctCollection(name, languages);

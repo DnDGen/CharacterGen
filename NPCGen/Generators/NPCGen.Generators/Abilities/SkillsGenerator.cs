@@ -78,7 +78,7 @@ namespace NPCGen.Generators.Abilities
 
         private Int32 GetTotalSkillPoints(CharacterClass characterClass, Stat intelligence)
         {
-            var pointsTable = adjustmentsSelector.SelectAdjustmentsFrom("SkillPointsForClasses");
+            var pointsTable = adjustmentsSelector.SelectFrom("SkillPointsForClasses");
             var perLevel = pointsTable[characterClass.ClassName] + intelligence.Bonus;
             var multiplier = characterClass.Level + 3;
 

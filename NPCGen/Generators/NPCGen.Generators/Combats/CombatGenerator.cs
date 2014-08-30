@@ -82,7 +82,7 @@ namespace NPCGen.Generators.Combats
 
         private Int32 GetAdjustedDexterityBonus(Dictionary<String, Stat> stats, Equipment equipment)
         {
-            var maxDexterityBonuses = adjustmentsSelector.SelectAdjustmentsFrom("MaxDexterityBonuses");
+            var maxDexterityBonuses = adjustmentsSelector.SelectFrom("MaxDexterityBonuses");
             var dexterityBonus = stats[StatConstants.Dexterity].Bonus;
             var maxArmorBonus = maxDexterityBonuses[equipment.Armor.Name];
 

@@ -1,11 +1,10 @@
 ﻿using System;
-using NPCGen.Common;
-using NPCGen.Common.Abilities.Stats;
+using NPCGen.Selectors.Interfaces.Objects;
 
 namespace NPCGen.Selectors.Interfaces
 {
     public interface IStatPrioritySelector
     {
-        StatPriority SelectStatPrioritiesFor(String className);
+        StatPrioritySelection SelectFor(String className);
     }
 }

@@ -51,7 +51,7 @@ namespace NPCGen.Tests.Unit.Generators.Combats
             characterClass.ClassName = CharacterClassConstants.Fighter;
             stats[StatConstants.Constitution] = new Stat { Value = 9266 };
             stats[StatConstants.Dexterity] = new Stat { Value = 42 };
-            mockAdjustmentsSelector.Setup(s => s.SelectAdjustmentsFrom("MaxDexterityBonuses")).Returns(maxDexterityBonuses);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom("MaxDexterityBonuses")).Returns(maxDexterityBonuses);
             maxDexterityBonuses[String.Empty] = 42;
         }
 

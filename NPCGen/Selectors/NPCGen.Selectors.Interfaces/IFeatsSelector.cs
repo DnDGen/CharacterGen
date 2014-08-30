@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using NPCGen.Selectors.Interfaces.Objects;
 
 namespace NPCGen.Selectors.Interfaces
 {

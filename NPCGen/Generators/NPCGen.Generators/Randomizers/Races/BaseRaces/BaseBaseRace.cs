@@ -28,7 +28,7 @@ namespace NPCGen.Generators.Randomizers.Races.BaseRaces
             var tableName = String.Format("{0}{1}BaseRaces", goodness, characterClass.ClassName);
             var baseRace = String.Empty;
 
-            do baseRace = percentileResultSelector.SelectPercentileFrom(tableName);
+            do baseRace = percentileResultSelector.SelectFrom(tableName);
             while (!results.Contains(baseRace));
 
             return baseRace;
@@ -41,7 +41,7 @@ namespace NPCGen.Generators.Randomizers.Races.BaseRaces
 
         private Boolean LevelAdjustmentIsAllowed(String baseRace, Int32 level)
         {
-            var levelAdjustments = adjustmentSelector.SelectAdjustmentsFrom("LevelAdjustments");
+            var levelAdjustments = adjustmentSelector.SelectFrom("LevelAdjustments");
             return levelAdjustments[baseRace] < level;
         }
 
@@ -50,7 +50,7 @@ namespace NPCGen.Generators.Randomizers.Races.BaseRaces
         public IEnumerable<String> GetAllPossibleResults(String goodness, CharacterClass characterClass)
         {
             var tableName = String.Format("{0}{1}BaseRaces", goodness, characterClass.ClassName);
-            var baseRaces = percentileResultSelector.SelectAllResults(tableName);
+            var baseRaces = percentileResultSelector.SelectAllFrom(tableName);
             return baseRaces.Where(r => RaceIsAllowed(r, characterClass.Level));
         }
     }

@@ -36,8 +36,8 @@ namespace NPCGen.Tests.Unit.Generators.Combats
             adjustedDexterityBonus = 0;
 
             armorBonuses[String.Empty] = 0;
-            mockAdjustmentsSelector.Setup(s => s.SelectAdjustmentsFrom("ArmorBonuses")).Returns(armorBonuses);
-            mockAdjustmentsSelector.Setup(s => s.SelectAdjustmentsFrom("FeatArmorAdjustments")).Returns(featAdjustments);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom("ArmorBonuses")).Returns(armorBonuses);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom("FeatArmorAdjustments")).Returns(featAdjustments);
             mockCollectionsSelector.Setup(s => s.SelectFrom("ArmorClassModifiers", "Size")).Returns(Enumerable.Empty<String>());
             mockCollectionsSelector.Setup(s => s.SelectFrom("ArmorClassModifiers", "NaturalArmor")).Returns(Enumerable.Empty<String>());
             mockCollectionsSelector.Setup(s => s.SelectFrom("ArmorClassModifiers", "Dodge")).Returns(Enumerable.Empty<String>());

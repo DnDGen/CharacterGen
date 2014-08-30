@@ -73,7 +73,7 @@ namespace NPCGen.Tests.Unit.Generators
             adjustments.Add(BaseRacePlusOne, 1);
             adjustments.Add(String.Empty, 0);
             adjustments.Add(Metarace, 1);
-            mockAdjustmentsSelector.Setup(p => p.SelectAdjustmentsFrom("LevelAdjustments")).Returns(adjustments);
+            mockAdjustmentsSelector.Setup(p => p.SelectFrom("LevelAdjustments")).Returns(adjustments);
 
             mockRandomizerVerifier.Setup(v => v.VerifyCompatibility(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object,
                 mockLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(true);
@@ -257,7 +257,7 @@ namespace NPCGen.Tests.Unit.Generators
         [Test]
         public void GetsInterestingTraitFromPercentileResultSelector()
         {
-            mockPercentileSelector.Setup(p => p.SelectPercentileFrom("Traits")).Returns("interesting trait");
+            mockPercentileSelector.Setup(p => p.SelectFrom("Traits")).Returns("interesting trait");
             var character = GenerateCharacter();
             Assert.That(character.InterestingTrait, Is.EqualTo("interesting trait"));
         }
@@ -300,7 +300,7 @@ namespace NPCGen.Tests.Unit.Generators
             var skillAdjustments = new Dictionary<String, Int32>();
             skillAdjustments.Add(equipment.Armor.Name, 5);
             skillAdjustments.Add("other armor", 10);
-            mockAdjustmentsSelector.Setup(s => s.SelectAdjustmentsFrom("ArmorCheckPenalties")).Returns(skillAdjustments);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom("ArmorCheckPenalties")).Returns(skillAdjustments);
 
             var character = GenerateCharacter();
             Assert.That(character.Ability.Skills["no penalty"].Bonus, Is.EqualTo(0));
@@ -315,7 +315,7 @@ namespace NPCGen.Tests.Unit.Generators
 
             var skillAdjustments = new Dictionary<String, Int32>();
             skillAdjustments.Add(equipment.Armor.Name, 5);
-            mockAdjustmentsSelector.Setup(s => s.SelectAdjustmentsFrom("ArmorCheckPenalties")).Returns(skillAdjustments);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom("ArmorCheckPenalties")).Returns(skillAdjustments);
 
             var character = GenerateCharacter();
             Assert.That(character.Ability.Skills[SkillConstants.Swim].Bonus, Is.EqualTo(-10));

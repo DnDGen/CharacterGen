@@ -5,6 +5,6 @@ namespace NPCGen.Selectors.Interfaces
 {
     public interface IAdjustmentsSelector
     {
-        Dictionary<String, Int32> SelectAdjustmentsFrom(String tableName);
+        Dictionary<String, Int32> SelectFrom(String tableName);
     }
 }

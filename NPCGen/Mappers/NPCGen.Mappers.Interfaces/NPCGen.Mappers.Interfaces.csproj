@@ -39,10 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IAdjustmentMapper.cs" />
     <Compile Include="ICollectionsMapper.cs" />
     <Compile Include="IPercentileMapper.cs" />
-    <Compile Include="IStatPriorityMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

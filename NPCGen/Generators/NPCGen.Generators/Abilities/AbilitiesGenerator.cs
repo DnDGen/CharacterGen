@@ -40,7 +40,7 @@ namespace NPCGen.Generators.Abilities
             foreach (var feat in ability.Feats)
             {
                 var tableName = String.Format("{0}SkillAdjustments", feat);
-                var adjustments = adjustmentsSelector.SelectAdjustmentsFrom(tableName);
+                var adjustments = adjustmentsSelector.SelectFrom(tableName);
 
                 foreach (var adjustment in adjustments)
                     ability.Skills[adjustment.Key].Bonus += adjustment.Value;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using NPCGen.Mappers.Interfaces;
 using NPCGen.Selectors.Interfaces;
 
@@ -7,16 +8,25 @@ namespace NPCGen.Selectors
 {
     public class AdjustmentsSelector : IAdjustmentsSelector
     {
-        private IAdjustmentMapper adjustmentMapper;
+        private ICollectionsMapper collectionsMapper;
 
-        public AdjustmentsSelector(IAdjustmentMapper adjustmentMapper)
+        public AdjustmentsSelector(ICollectionsMapper collectionsMapper)
         {
-            this.adjustmentMapper = adjustmentMapper;
+            this.collectionsMapper = collectionsMapper;
         }
 
-        public Dictionary<String, Int32> SelectAdjustmentsFrom(String tableName)
+        public Dictionary<String, Int32> SelectFrom(String tableName)
         {
-            return adjustmentMapper.Map(tableName);
+            var collectionTable = collectionsMapper.Map(tableName);
+            var adjustmentTable = new Dictionary<String, Int32>();
+
+            foreach (var kvp in collectionTable)
+            {
+                var firstItem = kvp.Value.First();
+                adjustmentTable[kvp.Key] = Convert.ToInt32(firstItem);
+            }
+
+            return adjustmentTable;
         }
     }
 }

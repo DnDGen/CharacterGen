@@ -58,7 +58,7 @@ namespace NPCGen.Generators
             character.Alignment = GenerateAlignment(alignmentRandomizer, classNameRandomizer, levelRandomizer, baseRaceRandomizer, metaraceRandomizer);
             character.Class = GenerateCharacterClass(classNameRandomizer, levelRandomizer, character.Alignment, baseRaceRandomizer, metaraceRandomizer);
 
-            var levelAdjustments = adjustmentsSelector.SelectAdjustmentsFrom("LevelAdjustments");
+            var levelAdjustments = adjustmentsSelector.SelectFrom("LevelAdjustments");
             character.Race = GenerateRace(baseRaceRandomizer, metaraceRandomizer, levelAdjustments, character.Alignment, character.Class);
 
             character.Class.Level -= levelAdjustments[character.Race.BaseRace];
@@ -69,7 +69,7 @@ namespace NPCGen.Generators
             character.Ability = abilitiesGenerator.GenerateWith(character.Class, character.Race, statsRandomizer, baseAttack);
             character.Equipment = equipmentGenerator.GenerateWith(character.Ability.Feats, character.Class);
 
-            var armorCheckPenalties = adjustmentsSelector.SelectAdjustmentsFrom("ArmorCheckPenalties");
+            var armorCheckPenalties = adjustmentsSelector.SelectFrom("ArmorCheckPenalties");
 
             foreach (var skill in character.Ability.Skills)
             {
@@ -81,7 +81,7 @@ namespace NPCGen.Generators
             }
 
             character.Combat = combatGenerator.GenerateWith(baseAttack, character.Class, character.Race, character.Ability.Feats, character.Ability.Stats, character.Equipment);
-            character.InterestingTrait = percentileSelector.SelectPercentileFrom("Traits");
+            character.InterestingTrait = percentileSelector.SelectFrom("Traits");
 
             return character;
         }

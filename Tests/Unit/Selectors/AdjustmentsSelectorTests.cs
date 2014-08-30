@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Moq;
 using NPCGen.Mappers.Interfaces;
 using NPCGen.Selectors;
@@ -12,23 +13,35 @@ namespace NPCGen.Tests.Unit.Selectors
     public class AdjustmentsSelectorTests
     {
         private IAdjustmentsSelector adjustmentsSelector;
-        private Mock<IAdjustmentMapper> mockAdjustmentMapper;
+        private Mock<ICollectionsMapper> mockCollectionsMapper;
+        private Dictionary<String, IEnumerable<String>> collections;
 
         [SetUp]
         public void Setup()
         {
-            mockAdjustmentMapper = new Mock<IAdjustmentMapper>();
-            adjustmentsSelector = new AdjustmentsSelector(mockAdjustmentMapper.Object);
+            mockCollectionsMapper = new Mock<ICollectionsMapper>();
+            adjustmentsSelector = new AdjustmentsSelector(mockCollectionsMapper.Object);
+            collections = new Dictionary<String, IEnumerable<String>>();
+
+            mockCollectionsMapper.Setup(m => m.Map("table name")).Returns(collections);
         }
 
         [Test]
         public void SelectAdjustments()
         {
-            var adjustments = new Dictionary<String, Int32>();
-            mockAdjustmentMapper.Setup(m => m.Map("table name")).Returns(adjustments);
+            collections["first"] = new[] { "9266" };
+            collections["second"] = new[] { "42" };
 
-            var selectedAdjustments = adjustmentsSelector.SelectAdjustmentsFrom("table name");
-            Assert.That(selectedAdjustments, Is.EqualTo(adjustments));
+            var adjustments = adjustmentsSelector.SelectFrom("table name");
+            Assert.That(adjustments["first"], Is.EqualTo(9266));
+            Assert.That(adjustments["second"], Is.EqualTo(42));
+        }
+
+        [Test]
+        public void ThrowExceptionIfAnyEmptyCollections()
+        {
+            collections["first"] = Enumerable.Empty<String>();
+            Assert.That(() => adjustmentsSelector.SelectFrom("table name"), Throws.Exception);
         }
     }
 }

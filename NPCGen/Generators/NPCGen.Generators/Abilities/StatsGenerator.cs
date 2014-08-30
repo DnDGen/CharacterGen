@@ -8,6 +8,7 @@ using NPCGen.Common.Races;
 using NPCGen.Generators.Interfaces.Abilities;
 using NPCGen.Generators.Interfaces.Randomizers.Stats;
 using NPCGen.Selectors.Interfaces;
+using NPCGen.Selectors.Interfaces.Objects;
 
 namespace NPCGen.Generators.Abilities
 {
@@ -28,56 +29,67 @@ namespace NPCGen.Generators.Abilities
         {
             var stats = statsRandomizer.Randomize();
 
-            var statPriorities = statPrioritySelector.SelectStatPrioritiesFor(characterClass.ClassName);
-            var prioritizedStats = PrioritizeStats(stats, statPriorities);
+            var statPriorities = statPrioritySelector.SelectFor(characterClass.ClassName);
+            stats = PrioritizeStats(stats, statPriorities);
+            stats = AdjustStats(race, stats);
+            stats = IncreaseStats(stats, characterClass.Level, statPriorities);
 
-            var statAdjustments = statAdjustmentsSelector.SelectAdjustmentsFor(race);
-
-            foreach (var stat in prioritizedStats.Keys)
-            {
-                prioritizedStats[stat].Value += statAdjustments[stat];
-                prioritizedStats[stat].Value = Math.Max(prioritizedStats[stat].Value, 1);
-            }
-
-            var increasedStats = IncreaseStats(prioritizedStats, statPriorities, characterClass.Level);
-
-            return increasedStats;
+            return stats;
         }
 
-        private Dictionary<String, Stat> PrioritizeStats(Dictionary<String, Stat> stats, StatPriority priorities)
+        private Dictionary<String, Stat> PrioritizeStats(Dictionary<String, Stat> stats, StatPrioritySelection priorities)
         {
-            var prioritizedStats = new Dictionary<String, Stat>(stats);
+            var max = stats.Values.Max(s => s.Value);
+            var maxStat = stats.Keys.First(k => stats[k].Value == max);
+            stats = SwapStat(stats, priorities.First, maxStat);
 
-            var maxStat = prioritizedStats.Keys.First(k => prioritizedStats[k].Value == prioritizedStats.Values.Max(s => s.Value));
+            max = stats.Values.Except(new[] { stats[priorities.First] }).Max(s => s.Value);
+            maxStat = stats.Keys.First(k => stats[k].Value == max);
+            stats = SwapStat(stats, priorities.Second, maxStat);
 
-            var temp = prioritizedStats[maxStat];
-            prioritizedStats[maxStat] = prioritizedStats[priorities.FirstPriority];
-            prioritizedStats[priorities.FirstPriority] = temp;
-
-            var secondMaxStat = prioritizedStats.Keys.First(k => prioritizedStats[k].Value == prioritizedStats.Values
-                .Where(s => s != prioritizedStats[priorities.FirstPriority]).Max(s => s.Value));
-
-            temp = prioritizedStats[secondMaxStat];
-            prioritizedStats[secondMaxStat] = prioritizedStats[priorities.SecondPriority];
-            prioritizedStats[priorities.SecondPriority] = temp;
-
-            return prioritizedStats;
+            return stats;
         }
 
-        private Dictionary<String, Stat> IncreaseStats(Dictionary<String, Stat> stats, StatPriority priorities, Int32 level)
+        private Dictionary<String, Stat> SwapStat(Dictionary<String, Stat> stats, String priorityStat, String otherStat)
         {
-            var count = level / 4;
-            while (count-- > 0)
-            {
-                var roll = dice.Roll().d2();
+            var temp = stats[otherStat];
+            stats[otherStat] = stats[priorityStat];
+            stats[priorityStat] = temp;
 
-                if (roll == 1)
-                    stats[priorities.FirstPriority].Value++;
-                else
-                    stats[priorities.SecondPriority].Value++;
+            return stats;
+        }
+
+        private Dictionary<String, Stat> AdjustStats(Race race, Dictionary<String, Stat> stats)
+        {
+            var statAdjustments = statAdjustmentsSelector.SelectFor(race);
+
+            foreach (var stat in stats.Keys)
+            {
+                stats[stat].Value += statAdjustments[stat];
+                stats[stat].Value = Math.Max(stats[stat].Value, 1);
             }
 
             return stats;
+        }
+
+        private Dictionary<String, Stat> IncreaseStats(Dictionary<String, Stat> stats, Int32 level, StatPrioritySelection priorities)
+        {
+            var count = level / 4;
+
+            while (count-- > 0)
+                IncreaseStat(stats, priorities);
+
+            return stats;
+        }
+
+        private void IncreaseStat(Dictionary<String, Stat> stats, StatPrioritySelection priorities)
+        {
+            var roll = dice.Roll().d2();
+
+            if (roll == 1)
+                stats[priorities.First].Value++;
+            else
+                stats[priorities.Second].Value++;
         }
     }
 }

@@ -21,7 +21,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Alignments
             var mockPercentileResultSelector = new Mock<IPercentileSelector>();
             var randomizer = new AnyAlignmentRandomizer(mockDice.Object, mockPercentileResultSelector.Object);
 
-            mockPercentileResultSelector.Setup(p => p.SelectAllResults(It.IsAny<String>())).Returns(AlignmentConstants.GetGoodnesses());
+            mockPercentileResultSelector.Setup(p => p.SelectAllFrom(It.IsAny<String>())).Returns(AlignmentConstants.GetGoodnesses());
             alignments = randomizer.GetAllPossibleResults();
         }
 

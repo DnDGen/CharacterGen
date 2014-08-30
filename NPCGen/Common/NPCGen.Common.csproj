@@ -52,7 +52,6 @@
     <Compile Include="Abilities\Skills\Skill.cs" />
     <Compile Include="Abilities\Stats\Stat.cs" />
     <Compile Include="Abilities\Stats\StatConstants.cs" />
-    <Compile Include="Abilities\Stats\StatPriority.cs" />
     <Compile Include="Alignments\Alignment.cs" />
     <Compile Include="Alignments\AlignmentConstants.cs" />
     <Compile Include="Character.cs" />

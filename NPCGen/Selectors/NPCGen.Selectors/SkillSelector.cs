@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using NPCGen.Selectors.Interfaces;
+using NPCGen.Selectors.Interfaces.Objects;
 
 namespace NPCGen.Selectors
 {

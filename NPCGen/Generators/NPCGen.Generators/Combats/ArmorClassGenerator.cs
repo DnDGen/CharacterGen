@@ -47,7 +47,7 @@ namespace NPCGen.Generators.Combats
 
         private Int32 GetArmorBonus(Item armor)
         {
-            var armorBonuses = adjustmentsSelector.SelectAdjustmentsFrom("ArmorBonuses");
+            var armorBonuses = adjustmentsSelector.SelectFrom("ArmorBonuses");
             return armorBonuses[armor.Name];
         }
 
@@ -56,7 +56,7 @@ namespace NPCGen.Generators.Combats
             if (offHand.ItemType != ItemTypeConstants.Armor || !offHand.Attributes.Contains(AttributeConstants.Shield))
                 return 0;
 
-            var armorBonuses = adjustmentsSelector.SelectAdjustmentsFrom("ArmorBonuses");
+            var armorBonuses = adjustmentsSelector.SelectFrom("ArmorBonuses");
             return armorBonuses[offHand.Name];
         }
 
@@ -70,7 +70,7 @@ namespace NPCGen.Generators.Combats
 
         private Int32 GetSizeModifier(IEnumerable<String> feats)
         {
-            var featAdjustments = adjustmentsSelector.SelectAdjustmentsFrom("FeatArmorAdjustments");
+            var featAdjustments = adjustmentsSelector.SelectFrom("FeatArmorAdjustments");
             var sizeModifiers = collectionsSelector.SelectFrom("ArmorClassModifiers", "Size");
             var modifier = 0;
 
@@ -98,7 +98,7 @@ namespace NPCGen.Generators.Combats
             var itemsWithNaturalArmorBonuses = items.Where(i => thingsThatGrantNaturalArmorBonuses.Contains(i.Name));
             var itemNaturalArmorBonuses = itemsWithNaturalArmorBonuses.Select(i => i.Magic.Bonus);
 
-            var featAdjustments = adjustmentsSelector.SelectAdjustmentsFrom("FeatArmorAdjustments");
+            var featAdjustments = adjustmentsSelector.SelectFrom("FeatArmorAdjustments");
             var featsWithNaturalArmorBonuses = feats.Where(f => thingsThatGrantNaturalArmorBonuses.Contains(f));
             var featNaturalArmorAdjustments = featAdjustments.Where(kvp => featsWithNaturalArmorBonuses.Contains(kvp.Key));
             var featNaturalArmorBonuses = featNaturalArmorAdjustments.Select(kvp => kvp.Value);
@@ -112,7 +112,7 @@ namespace NPCGen.Generators.Combats
 
         private Int32 GetDodgeBonus(IEnumerable<String> feats)
         {
-            var featAdjustments = adjustmentsSelector.SelectAdjustmentsFrom("FeatArmorAdjustments");
+            var featAdjustments = adjustmentsSelector.SelectFrom("FeatArmorAdjustments");
             var dodgeBonuses = collectionsSelector.SelectFrom("ArmorClassModifiers", "Dodge");
             var bonus = 0;
 

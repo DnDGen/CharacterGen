@@ -9,6 +9,7 @@ using NPCGen.Common.Races;
 using NPCGen.Generators.Abilities;
 using NPCGen.Generators.Interfaces.Abilities;
 using NPCGen.Selectors.Interfaces;
+using NPCGen.Selectors.Interfaces.Objects;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Unit.Generators.Abilities
@@ -24,6 +25,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         private Mock<ICollectionsSelector> mockCollectionsSelector;
         private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
         private Mock<IFeatsSelector> mockFeatsSelector;
+        private List<FeatSelection> featSelections;
 
         [SetUp]
         public void Setup()
@@ -36,6 +38,9 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             race = new Race();
             stats = new Dictionary<String, Stat>();
             skills = new Dictionary<String, Skill>();
+            featSelections = new List<FeatSelection>();
+
+            mockFeatsSelector.Setup(s => s.SelectAll()).Returns(featSelections);
         }
 
         [Test]
@@ -77,7 +82,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             levelRequirements["feat 2"] = 1;
             levelRequirements["feat 3"] = 2;
             levelRequirements["feat 4"] = 3;
-            mockAdjustmentsSelector.Setup(s => s.SelectAdjustmentsFrom("class nameFeatLevelRequirements")).Returns(levelRequirements);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom("class nameFeatLevelRequirements")).Returns(levelRequirements);
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills);
 

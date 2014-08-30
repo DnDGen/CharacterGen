@@ -59,7 +59,7 @@ namespace NPCGen.Tests.Unit.Generators.Verifiers
                 .Returns(baseRaces);
             mockMetaraceRandomizer.Setup(r => r.GetAllPossibleResults(It.IsAny<String>(), It.IsAny<CharacterClass>()))
                 .Returns(metaraces);
-            mockAdjustmentsSelector.Setup(p => p.SelectAdjustmentsFrom("LevelAdjustments")).Returns(adjustments);
+            mockAdjustmentsSelector.Setup(p => p.SelectFrom("LevelAdjustments")).Returns(adjustments);
 
             var alignment = new Alignment();
             alignments.Add(alignment);

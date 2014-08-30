@@ -5,7 +5,7 @@ namespace NPCGen.Selectors.Interfaces
 {
     public interface IPercentileSelector
     {
-        String SelectPercentileFrom(String tableName);
-        IEnumerable<String> SelectAllResults(String tableName);
+        String SelectFrom(String tableName);
+        IEnumerable<String> SelectAllFrom(String tableName);
     }
 }

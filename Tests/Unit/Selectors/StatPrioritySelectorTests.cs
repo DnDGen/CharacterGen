@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Moq;
-using NPCGen.Common.Abilities.Stats;
-using NPCGen.Mappers.Interfaces;
 using NPCGen.Selectors;
 using NPCGen.Selectors.Interfaces;
 using NUnit.Framework;
@@ -13,32 +11,27 @@ namespace NPCGen.Tests.Unit.Selectors
     public class StatPrioritySelectorTests
     {
         private IStatPrioritySelector statPrioritySelector;
-        private Mock<IStatPriorityMapper> mockStatPriorityMapper;
+        private Mock<ICollectionsSelector> mockInnerSelector;
+        private List<String> priorities;
 
         [SetUp]
         public void Setup()
         {
-            var priorities = new Dictionary<String, StatPriority>();
-            mockStatPriorityMapper = new Mock<IStatPriorityMapper>();
-            statPrioritySelector = new StatPrioritySelector(mockStatPriorityMapper.Object);
+            priorities = new List<String>();
+            mockInnerSelector = new Mock<ICollectionsSelector>();
+            statPrioritySelector = new StatPrioritySelector(mockInnerSelector.Object);
 
-            priorities.Add("class name", new StatPriority { FirstPriority = "first priority", SecondPriority = "second priority" });
-            mockStatPriorityMapper.Setup(p => p.Map(It.IsAny<String>())).Returns(priorities);
+            priorities.Add("first priority");
+            priorities.Add("second priority");
+            mockInnerSelector.Setup(s => s.SelectFrom("StatPriorities", "class name")).Returns(priorities);
         }
 
         [Test]
-        public void GetsStatPrioritiesFromMapper()
+        public void GetStatPriortySelection()
         {
-            statPrioritySelector.SelectStatPrioritiesFor("class name");
-            mockStatPriorityMapper.Verify(p => p.Map("StatPriorities"), Times.Once);
-        }
-
-        [Test]
-        public void ReturnsStatPriortyReleventToClass()
-        {
-            var parsedPriorities = statPrioritySelector.SelectStatPrioritiesFor("class name");
-            Assert.That(parsedPriorities.FirstPriority, Is.EqualTo("first priority"));
-            Assert.That(parsedPriorities.SecondPriority, Is.EqualTo("second priority"));
+            var priority = statPrioritySelector.SelectFor("class name");
+            Assert.That(priority.First, Is.EqualTo("first priority"));
+            Assert.That(priority.Second, Is.EqualTo("second priority"));
         }
     }
 }

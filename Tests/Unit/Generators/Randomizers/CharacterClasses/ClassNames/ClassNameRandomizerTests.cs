@@ -20,7 +20,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassNames
         public void ClassNameRandomizerTestsSetup()
         {
             mockPercentileResultSelector = new Mock<IPercentileSelector>();
-            mockPercentileResultSelector.Setup(p => p.SelectAllResults(It.IsAny<String>())).Returns(CharacterClassConstants.GetClassNames());
+            mockPercentileResultSelector.Setup(p => p.SelectAllFrom(It.IsAny<String>())).Returns(CharacterClassConstants.GetClassNames());
             alignment = new Alignment();
         }
 
