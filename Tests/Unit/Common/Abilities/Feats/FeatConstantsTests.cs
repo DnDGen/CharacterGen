@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
-using NPCGen.Common.Abilities;
+using NPCGen.Common.Abilities.Feats;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Common.Abilities
+namespace NPCGen.Tests.Unit.Common.Abilities.Feats
 {
     [TestFixture]
     public class FeatConstantsTests
@@ -11,6 +11,7 @@ namespace NPCGen.Tests.Unit.Common.Abilities
         [TestCase(FeatConstants.Ambidexterity, "Ambidexterity")]
         [TestCase(FeatConstants.LightArmorProficiency, "Light Armor Proficiency")]
         [TestCase(FeatConstants.ShieldProficiency, "Shield Proficiency")]
+        [TestCase(FeatConstants.SkillFocus, "Skill Focus")]
         public void Constant(String constant, String value)
         {
             Assert.That(constant, Is.EqualTo(value));
@@ -24,7 +25,8 @@ namespace NPCGen.Tests.Unit.Common.Abilities
             Assert.That(feats, Contains.Item(FeatConstants.Ambidexterity));
             Assert.That(feats, Contains.Item(FeatConstants.LightArmorProficiency));
             Assert.That(feats, Contains.Item(FeatConstants.ShieldProficiency));
-            Assert.That(feats.Count(), Is.EqualTo(3));
+            Assert.That(feats, Contains.Item(FeatConstants.SkillFocus));
+            Assert.That(feats.Count(), Is.EqualTo(4));
         }
     }
 }

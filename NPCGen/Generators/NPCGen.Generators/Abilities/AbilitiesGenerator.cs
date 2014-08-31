@@ -35,7 +35,7 @@ namespace NPCGen.Generators.Abilities
             ability.Stats = statsGenerator.GenerateWith(statsRandomizer, characterClass, race);
             ability.Languages = languageGenerator.GenerateWith(race, characterClass.ClassName, ability.Stats[StatConstants.Intelligence].Bonus);
             ability.Skills = skillsGenerator.GenerateWith(characterClass, ability.Stats);
-            ability.Feats = featsGenerator.GenerateWith(characterClass, race, ability.Stats, ability.Skills);
+            ability.Feats = featsGenerator.GenerateWith(characterClass, race, ability.Stats, ability.Skills, baseAttack);
 
             foreach (var feat in ability.Feats)
             {

@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace NPCGen.Common.Abilities
+namespace NPCGen.Common.Abilities.Feats
 {
     public static class FeatConstants
     {
         public const String Ambidexterity = "Ambidexterity";
-        public const String ShieldProficiency = "Shield Proficiency";
         public const String LightArmorProficiency = "Light Armor Proficiency";
+        public const String ShieldProficiency = "Shield Proficiency";
+        public const String SkillFocus = "Skill Focus";
 
         public static IEnumerable<String> GetAllFeats()
         {
@@ -15,7 +16,8 @@ namespace NPCGen.Common.Abilities
             {
                 Ambidexterity,
                 LightArmorProficiency,
-                ShieldProficiency
+                ShieldProficiency,
+                SkillFocus
             };
         }
     }

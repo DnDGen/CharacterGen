@@ -5,6 +5,7 @@ using D20Dice;
 using Moq;
 using NPCGen.Common.Abilities.Stats;
 using NPCGen.Common.CharacterClasses;
+using NPCGen.Common.Races;
 using NPCGen.Generators.Abilities;
 using NPCGen.Generators.Interfaces.Abilities;
 using NPCGen.Selectors.Interfaces;
@@ -27,6 +28,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         private Mock<IDice> mockDice;
         private Stat intelligence;
         private Dictionary<String, Int32> skillPoints;
+        private Race race;
 
         [SetUp]
         public void Setup()
@@ -41,6 +43,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             classSkills = new List<String>();
             crossClassSkills = new List<String>();
             intelligence = new Stat { Value = 10 };
+            race = new Race();
 
             characterClass.ClassName = "class name";
             characterClass.Level = 5;
@@ -57,24 +60,81 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             mockDice.Setup(d => d.Roll(1).d(It.IsAny<Int32>())).Returns(1);
         }
 
-        [Test]
-        public void GetSkillPointsForClass()
+        [TestCase(1, 4)]
+        [TestCase(2, 5)]
+        [TestCase(3, 6)]
+        [TestCase(4, 7)]
+        [TestCase(5, 8)]
+        [TestCase(6, 9)]
+        [TestCase(7, 10)]
+        [TestCase(8, 11)]
+        [TestCase(9, 12)]
+        [TestCase(10, 13)]
+        [TestCase(11, 14)]
+        [TestCase(12, 15)]
+        [TestCase(13, 16)]
+        [TestCase(14, 17)]
+        [TestCase(15, 18)]
+        [TestCase(16, 19)]
+        [TestCase(17, 20)]
+        [TestCase(18, 21)]
+        [TestCase(19, 22)]
+        [TestCase(20, 23)]
+        public void GetSkillPointsPerLevel(Int32 level, Int32 points)
         {
             skillPoints[characterClass.ClassName] = 1;
-            classSkills.Add("skill");
+            classSkills.Add("skill 1");
+            classSkills.Add("skill 2");
 
             var skills = skillsGenerator.GenerateWith(characterClass, stats);
-            Assert.That(skills["skill"].Ranks, Is.EqualTo(8));
+            Assert.That(skills["skill 1"].Ranks, Is.EqualTo(points));
+            Assert.That(skills["skill 2"].Ranks, Is.EqualTo(0));
         }
 
-        [Test]
-        public void AddIntelligenceBonusToSkillPoints()
+        public void GetSkillPointsForClass()
         {
-            classSkills.Add("skill");
+            skillPoints[characterClass.ClassName] = 2;
+            classSkills.Add("skill 1");
+            classSkills.Add("skill 2");
+            classSkills.Add("skill 3");
+
+            var skills = skillsGenerator.GenerateWith(characterClass, stats);
+            Assert.That(skills["skill 1"].Ranks, Is.EqualTo(8));
+            Assert.That(skills["skill 2"].Ranks, Is.EqualTo(8));
+            Assert.That(skills["skill 3"].Ranks, Is.EqualTo(0));
+        }
+
+        [TestCase(1, 4)]
+        [TestCase(2, 5)]
+        [TestCase(3, 6)]
+        [TestCase(4, 7)]
+        [TestCase(5, 8)]
+        [TestCase(6, 9)]
+        [TestCase(7, 10)]
+        [TestCase(8, 11)]
+        [TestCase(9, 12)]
+        [TestCase(10, 13)]
+        [TestCase(11, 14)]
+        [TestCase(12, 15)]
+        [TestCase(13, 16)]
+        [TestCase(14, 17)]
+        [TestCase(15, 18)]
+        [TestCase(16, 19)]
+        [TestCase(17, 20)]
+        [TestCase(18, 21)]
+        [TestCase(19, 22)]
+        [TestCase(20, 23)]
+        public void AddIntelligenceBonusToSkillPointsPerLevel(Int32 level, Int32 points)
+        {
+            characterClass.Level = level;
+            skillPoints[characterClass.ClassName] = 0;
+            classSkills.Add("skill 1");
+            classSkills.Add("skill 2");
             intelligence.Value = 12;
 
             var skills = skillsGenerator.GenerateWith(characterClass, stats);
-            Assert.That(skills["skill"].Ranks, Is.EqualTo(8));
+            Assert.That(skills["skill 1"].Ranks, Is.EqualTo(points));
+            Assert.That(skills["skill 2"].Ranks, Is.EqualTo(0));
         }
 
         [Test]
@@ -472,6 +532,79 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             Assert.That(skills["synergy 1"].Bonus, Is.EqualTo(0));
             Assert.That(skills["synergy 2"].Bonus, Is.EqualTo(0));
             Assert.That(skills["synergy 3"].Bonus, Is.EqualTo(0));
+        }
+
+        [TestCase(1, 4)]
+        [TestCase(2, 5)]
+        [TestCase(3, 6)]
+        [TestCase(4, 7)]
+        [TestCase(5, 8)]
+        [TestCase(6, 9)]
+        [TestCase(7, 10)]
+        [TestCase(8, 11)]
+        [TestCase(9, 12)]
+        [TestCase(10, 13)]
+        [TestCase(11, 14)]
+        [TestCase(12, 15)]
+        [TestCase(13, 16)]
+        [TestCase(14, 17)]
+        [TestCase(15, 18)]
+        [TestCase(16, 19)]
+        [TestCase(17, 20)]
+        [TestCase(18, 21)]
+        [TestCase(19, 22)]
+        [TestCase(20, 23)]
+        public void HumansGetExtraSkillPointsPerLevel(Int32 level, Int32 points)
+        {
+            characterClass.Level = level;
+            skillPoints[characterClass.ClassName] = 0;
+            classSkills.Add("skill 1");
+            classSkills.Add("skill 2");
+            race.BaseRace = RaceConstants.BaseRaces.Human;
+
+            var skills = skillsGenerator.GenerateWith(characterClass, stats);
+            Assert.That(skills["skill 1"].Ranks, Is.EqualTo(points));
+            Assert.That(skills["skill 2"].Ranks, Is.EqualTo(0));
+        }
+
+        [TestCase(1, 16)]
+        [TestCase(2, 20)]
+        [TestCase(3, 24)]
+        [TestCase(4, 28)]
+        [TestCase(5, 32)]
+        [TestCase(6, 36)]
+        [TestCase(7, 40)]
+        [TestCase(8, 44)]
+        [TestCase(9, 48)]
+        [TestCase(10, 52)]
+        [TestCase(11, 56)]
+        [TestCase(12, 60)]
+        [TestCase(13, 64)]
+        [TestCase(14, 68)]
+        [TestCase(15, 72)]
+        [TestCase(16, 76)]
+        [TestCase(17, 80)]
+        [TestCase(18, 84)]
+        [TestCase(19, 88)]
+        [TestCase(20, 92)]
+        public void AllPerLevelBonusesStack(Int32 level, Int32 points)
+        {
+            characterClass.Level = level;
+            skillPoints[characterClass.ClassName] = 2;
+            intelligence.Value = 12;
+            race.BaseRace = RaceConstants.BaseRaces.Human;
+            classSkills.Add("skill 1");
+            classSkills.Add("skill 2");
+            classSkills.Add("skill 3");
+            classSkills.Add("skill 4");
+            classSkills.Add("skill 5");
+
+            var skills = skillsGenerator.GenerateWith(characterClass, stats);
+            Assert.That(skills["skill 1"].Ranks, Is.EqualTo(points));
+            Assert.That(skills["skill 2"].Ranks, Is.EqualTo(points));
+            Assert.That(skills["skill 3"].Ranks, Is.EqualTo(points));
+            Assert.That(skills["skill 4"].Ranks, Is.EqualTo(points));
+            Assert.That(skills["skill 5"].Ranks, Is.EqualTo(0));
         }
     }
 }

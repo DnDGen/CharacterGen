@@ -50,7 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abilities\AbilityTests.cs" />
-    <Compile Include="Abilities\FeatConstantsTests.cs" />
+    <Compile Include="Abilities\Feats\FeatConstantsTests.cs" />
+    <Compile Include="Abilities\Feats\FeatTests.cs" />
     <Compile Include="Alignments\AlignmentConstantsTests.cs" />
     <Compile Include="Alignments\AlignmentTests.cs" />
     <Compile Include="Combats\ArmorClassTests.cs" />

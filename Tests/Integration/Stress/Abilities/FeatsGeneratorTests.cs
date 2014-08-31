@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using Ninject;
-using NPCGen.Common.Abilities;
+using NPCGen.Common.Abilities.Feats;
+using NPCGen.Common.CharacterClasses;
 using NPCGen.Generators.Interfaces.Abilities;
+using NPCGen.Generators.Interfaces.Combats;
 using NPCGen.Generators.Interfaces.Randomizers.Stats;
 using NUnit.Framework;
 
@@ -20,6 +22,8 @@ namespace NPCGen.Tests.Integration.Stress.Abilities
         public IStatsGenerator StatsGenerator { get; set; }
         [Inject, Named(StatsRandomizerTypeConstants.Raw)]
         public IStatsRandomizer StatsRandomizer { get; set; }
+        [Inject]
+        public ICombatGenerator CombatGenerator { get; set; }
 
         private IEnumerable<String> allFeats;
 
@@ -36,10 +40,14 @@ namespace NPCGen.Tests.Integration.Stress.Abilities
             var race = GetNewRace(alignment, characterClass);
             var stats = StatsGenerator.GenerateWith(StatsRandomizer, characterClass, race);
             var skills = SkillsGenerator.GenerateWith(characterClass, stats);
+            var baseAttack = CombatGenerator.GenerateBaseAttackWith(characterClass);
 
-            var feats = FeatsGenerator.GenerateWith(characterClass, race, stats, skills);
+            var feats = FeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
 
             var minimumFeats = characterClass.Level / 3 + 1;
+            if (characterClass.ClassName == CharacterClassConstants.Fighter)
+                minimumFeats += characterClass.Level / 2 + 1;
+
             Assert.That(feats.Count(), Is.AtLeast(minimumFeats));
 
             foreach (var feat in feats)
