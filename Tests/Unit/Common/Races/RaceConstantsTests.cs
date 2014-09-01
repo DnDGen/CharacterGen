@@ -57,7 +57,7 @@ namespace NPCGen.Tests.Unit.Common.Races
         }
 
         [Test]
-        public void AllBaseRaces()
+        public void BaseRaces()
         {
             var baseRaces = RaceConstants.BaseRaces.GetBaseRaces();
 

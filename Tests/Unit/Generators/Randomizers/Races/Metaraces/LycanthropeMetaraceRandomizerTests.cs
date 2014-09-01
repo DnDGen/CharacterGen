@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Moq;
 using NPCGen.Common.Races;
 using NPCGen.Generators.Randomizers.Races.Metaraces;
@@ -10,6 +11,18 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
     [TestFixture]
     public class LycanthropeMetaraceRandomizerTests : MetaraceRandomizerTests
     {
+        protected override IEnumerable<String> metaraces
+        {
+            get
+            {
+                return new[]
+                {
+                    "lycanthrope metarace",
+                    RaceConstants.Metaraces.None
+                };
+            }
+        }
+
         private Mock<ICollectionsSelector> mockCollectionsSelector;
 
         [SetUp]
@@ -19,7 +32,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
             randomizer = new LycanthropeMetaraceRandomizer(mockPercentileResultSelector.Object, mockAdjustmentsSelector.Object,
                 mockCollectionsSelector.Object);
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom("MetaraceGroups", "Lycanthrope")).Returns(new[] { "genetic metarace" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom("MetaraceGroups", "Lycanthrope")).Returns(new[] { "lycanthrope metarace" });
         }
 
         [TestCase("lycanthrope metarace")]

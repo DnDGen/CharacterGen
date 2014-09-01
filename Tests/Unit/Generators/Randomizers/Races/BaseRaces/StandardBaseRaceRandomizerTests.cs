@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Moq;
 using NPCGen.Common.Races;
 using NPCGen.Generators.Randomizers.Races.BaseRaces;
@@ -10,6 +11,17 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
     [TestFixture]
     public class StandardBaseRaceRandomizerTests : BaseRaceRandomizerTests
     {
+        protected override IEnumerable<String> baseRaces
+        {
+            get
+            {
+                return new[]
+                {
+                    "standard base race"
+                };
+            }
+        }
+
         private Mock<ICollectionsSelector> mockCollectionsSelector;
 
         [SetUp]

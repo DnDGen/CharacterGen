@@ -86,8 +86,11 @@ namespace NPCGen.Generators.Abilities
 
         private IEnumerable<String> GetSkillCollection(Dictionary<String, Skill> skills, Int32 rankCap, IEnumerable<String> classSkills, IEnumerable<String> crossClassSkills)
         {
-            if (!skills.Any(s => classSkills.Contains(s.Key) && s.Value.Ranks < rankCap))
+            if (!skills.Keys.Intersect(classSkills).Any(s => skills[s].Ranks < rankCap))
                 return crossClassSkills.Where(s => skills[s].Ranks < rankCap);
+
+            if (!skills.Keys.Intersect(crossClassSkills).Any(s => skills[s].Ranks < rankCap))
+                return classSkills.Where(s => skills[s].Ranks < rankCap);
 
             if (dice.Roll().d3() == 3)
                 return crossClassSkills.Where(s => skills[s].Ranks < rankCap);

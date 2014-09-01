@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using NPCGen.Common.CharacterClasses;
 using NPCGen.Generators.Randomizers.CharacterClasses.ClassNames;
 using NUnit.Framework;
@@ -8,6 +10,16 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassNames
     [TestFixture]
     public class AnyClassNameRandomizerTests : ClassNameRandomizerTests
     {
+        protected override IEnumerable<String> collectionClassNames
+        {
+            get { return Enumerable.Empty<String>(); }
+        }
+
+        protected override String classNameGroup
+        {
+            get { return String.Empty; }
+        }
+
         [SetUp]
         public void Setup()
         {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using NPCGen.Common.CharacterClasses;
 using NPCGen.Generators.Randomizers.CharacterClasses.ClassNames;
 using NUnit.Framework;
@@ -8,10 +9,28 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassNames
     [TestFixture]
     public class StealthClassNameRandomizerTests : ClassNameRandomizerTests
     {
+        protected override IEnumerable<String> collectionClassNames
+        {
+            get
+            {
+                return new[]
+                {
+                    CharacterClassConstants.Ranger,
+                    CharacterClassConstants.Rogue,
+                    CharacterClassConstants.Bard
+                };
+            }
+        }
+
+        protected override String classNameGroup
+        {
+            get { return "Stealth"; }
+        }
+
         [SetUp]
         public void Setup()
         {
-            randomizer = new StealthClassNameRandomizer(mockPercentileResultSelector.Object);
+            randomizer = new StealthClassNameRandomizer(mockPercentileResultSelector.Object, mockCollectionsSelector.Object);
         }
 
         [TestCase(CharacterClassConstants.Rogue)]

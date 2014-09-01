@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Moq;
 using NPCGen.Common.Alignments;
 using NPCGen.Common.Races;
@@ -11,6 +12,24 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
     [TestFixture]
     public class NonGoodMetaraceRandomizerTests : MetaraceRandomizerTests
     {
+        protected override IEnumerable<String> metaraces
+        {
+            get
+            {
+                return new[]
+                {
+                    "metarace",
+                    "good metarace",
+                    "neutral metarace",
+                    "evil metarace",
+                    "not good metarace",
+                    "not neutral metarace",
+                    "not evil metarace",
+                    RaceConstants.Metaraces.None
+                };
+            }
+        }
+
         private Mock<ICollectionsSelector> mockCollectionsSelector;
 
         [SetUp]

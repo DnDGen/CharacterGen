@@ -313,6 +313,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Abilities\Skills\SkillPointsForClasses.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CharacterClasses\ClassNameGroups.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\BaseRaces\BaseRaceGroups.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\Metaraces\MetaraceGroups.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

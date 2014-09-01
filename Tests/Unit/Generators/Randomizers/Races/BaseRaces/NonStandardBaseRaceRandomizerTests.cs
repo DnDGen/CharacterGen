@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using Moq;
+using NPCGen.Common.Races;
 using NPCGen.Generators.Randomizers.Races.BaseRaces;
 using NPCGen.Selectors.Interfaces;
 using NUnit.Framework;
@@ -9,6 +11,17 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
     [TestFixture]
     public class NonStandardBaseRaceRandomizerTests : BaseRaceRandomizerTests
     {
+        protected override IEnumerable<String> baseRaces
+        {
+            get
+            {
+                return new[]
+                {
+                    "nonstandard base race"
+                };
+            }
+        }
+
         private Mock<ICollectionsSelector> mockCollectionsSelector;
 
         [SetUp]

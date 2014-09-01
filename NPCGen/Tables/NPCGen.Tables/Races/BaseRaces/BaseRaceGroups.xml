@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+    <object>
+        <name>Evil</name>
+        <item>0</item>
+    </object>
+    <object>
+        <name>Neutral</name>
+        <item>2</item>
+    </object>
+    <object>
+        <name>Good</name>
+        <item>1</item>
+    </object>
+    <object>
+        <name>Standard</name>
+        <item>0</item>
+    </object>
+</items>

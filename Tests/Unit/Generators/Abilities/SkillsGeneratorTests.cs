@@ -92,6 +92,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             Assert.That(skills["skill 2"].Ranks, Is.EqualTo(0));
         }
 
+        [Test]
         public void GetSkillPointsForClass()
         {
             skillPoints[characterClass.ClassName] = 2;

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Moq;
 using NPCGen.Common.Races;
 using NPCGen.Generators.Randomizers.Races.Metaraces;
@@ -10,6 +11,18 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
     [TestFixture]
     public class GeneticMetaraceRandomizerTests : MetaraceRandomizerTests
     {
+        protected override IEnumerable<String> metaraces
+        {
+            get
+            {
+                return new[]
+                {
+                    "genetic metarace",
+                    RaceConstants.Metaraces.None
+                };
+            }
+        }
+
         private Mock<ICollectionsSelector> mockCollectionsSelector;
 
         [SetUp]

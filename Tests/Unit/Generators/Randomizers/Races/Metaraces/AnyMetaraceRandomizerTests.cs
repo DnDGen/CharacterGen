@@ -15,7 +15,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
             get { return RaceConstants.Metaraces.GetMetaraces(); }
         }
 
-        [[SetUp]
+        [SetUp]
         public void Setup()
         {
             randomizer = new AnyMetaraceRandomizer(mockPercentileResultSelector.Object, mockAdjustmentsSelector.Object);

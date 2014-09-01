@@ -118,21 +118,19 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         }
 
         [Test]
-        public void IfAllowNoMetaraceIsTrueThenEmptyMetaraceIsAllowed()
+        public void IfForceMetaraceIsTrueThenEmptyMetaraceIsNotAllowed()
         {
-            randomizer.AllowNoMetarace = true;
-
+            randomizer.ForceMetarace = true;
             var results = randomizer.GetAllPossibleResults(String.Empty, characterClass);
-            Assert.That(results, Contains.Item(String.Empty));
+            Assert.That(results, Is.Not.Contains(String.Empty));
         }
 
         [Test]
-        public void IfAllowNoMetaraceIsFalseThenEmptyMetaraceIsNotAllowed()
+        public void IfForceMetaraceIsFalseThenEmptyMetaraceIsAllowed()
         {
-            randomizer.AllowNoMetarace = false;
-
+            randomizer.ForceMetarace = false;
             var results = randomizer.GetAllPossibleResults(String.Empty, characterClass);
-            Assert.That(results, Is.Not.Contains(String.Empty));
+            Assert.That(results, Contains.Item(String.Empty));
         }
 
         [Test]
@@ -148,11 +146,11 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         private class TestMetaraceRandomizer : BaseMetarace
         {
             public String NotAllowedMetarace { get; set; }
-            public Boolean AllowNoMetarace { get; set; }
+            public Boolean ForceMetarace { get; set; }
 
             protected override Boolean forceMetarace
             {
-                get { return AllowNoMetarace; }
+                get { return ForceMetarace; }
             }
 
             public TestMetaraceRandomizer(IPercentileSelector percentileResultSelector, IAdjustmentsSelector levelAdjustmentsSelector)

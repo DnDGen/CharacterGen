@@ -699,7 +699,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             var onlyFeat = feats.Single();
 
             Assert.That(onlyFeat.Name, Is.EqualTo(featSelections[0].FeatName));
-            Assert.That(onlyFeat.SpecificApplication, Is.EqualTo("ray"));
+            Assert.That(onlyFeat.SpecificApplication, Is.EqualTo(WeaponProficiencyConstants.Ray));
         }
 
         [Test]

@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+    <object>
+        <name>Healers</name>
+        <item>0</item>
+    </object>
+    <object>
+        <name>Mages</name>
+        <item>2</item>
+    </object>
+    <object>
+        <name>Spellcasters</name>
+        <item>1</item>
+    </object>
+    <object>
+        <name>Stealth</name>
+        <item>0</item>
+    </object>
+    <object>
+        <name>Warriors</name>
+        <item>0</item>
+    </object>
+</items>

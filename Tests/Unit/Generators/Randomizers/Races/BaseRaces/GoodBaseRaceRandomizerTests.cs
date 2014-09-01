@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Moq;
 using NPCGen.Common.Alignments;
 using NPCGen.Generators.Randomizers.Races.BaseRaces;
@@ -10,6 +11,23 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
     [TestFixture]
     public class GoodBaseRaceRandomizerTests : BaseRaceRandomizerTests
     {
+        protected override IEnumerable<String> baseRaces
+        {
+            get
+            {
+                return new[]
+                {
+                    "base race",
+                    "good base race",
+                    "neutral base race",
+                    "evil base race",
+                    "not good base race",
+                    "not neutral base race",
+                    "not evil base race"
+                };
+            }
+        }
+
         private Mock<ICollectionsSelector> mockCollectionsSelector;
 
         [SetUp]

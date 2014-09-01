@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Moq;
 using NPCGen.Common.Alignments;
 using NPCGen.Common.CharacterClasses;
@@ -9,19 +10,26 @@ using NUnit.Framework;
 namespace NPCGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassNames
 {
     [TestFixture]
-    public class ClassNameRandomizerTests
+    public abstract class ClassNameRandomizerTests
     {
+        protected Mock<ICollectionsSelector> mockCollectionsSelector;
         protected Mock<IPercentileSelector> mockPercentileResultSelector;
         protected IClassNameRandomizer randomizer;
+
+        protected abstract IEnumerable<String> collectionClassNames { get; }
+        protected abstract String classNameGroup { get; }
 
         private Alignment alignment;
 
         [SetUp]
         public void ClassNameRandomizerTestsSetup()
         {
+            mockCollectionsSelector = new Mock<ICollectionsSelector>();
             mockPercentileResultSelector = new Mock<IPercentileSelector>();
-            mockPercentileResultSelector.Setup(p => p.SelectAllFrom(It.IsAny<String>())).Returns(CharacterClassConstants.GetClassNames());
             alignment = new Alignment();
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom("ClassNameGroups", classNameGroup)).Returns(collectionClassNames);
+            mockPercentileResultSelector.Setup(s => s.SelectAllFrom(It.IsAny<String>())).Returns(CharacterClassConstants.GetClassNames());
         }
 
         protected void AssertClassIsAlwaysAllowed(String className)
