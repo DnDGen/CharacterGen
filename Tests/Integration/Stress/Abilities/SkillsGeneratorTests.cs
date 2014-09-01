@@ -59,7 +59,7 @@ namespace NPCGen.Tests.Integration.Stress.Abilities
             var race = GetNewRace(alignment, characterClass);
             var stats = StatsGenerator.GenerateWith(StatsRandomizer, characterClass, race);
 
-            var skills = SkillsGenerator.GenerateWith(characterClass, stats);
+            var skills = SkillsGenerator.GenerateWith(characterClass, race, stats);
 
             foreach (var skill in untrainedSkills)
                 Assert.That(skills.Keys, Contains.Item(skill));

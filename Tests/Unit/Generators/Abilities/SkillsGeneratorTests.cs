@@ -82,11 +82,12 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         [TestCase(20, 23)]
         public void GetSkillPointsPerLevel(Int32 level, Int32 points)
         {
+            characterClass.Level = level;
             skillPoints[characterClass.ClassName] = 1;
             classSkills.Add("skill 1");
             classSkills.Add("skill 2");
 
-            var skills = skillsGenerator.GenerateWith(characterClass, stats);
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
             Assert.That(skills["skill 1"].Ranks, Is.EqualTo(points));
             Assert.That(skills["skill 2"].Ranks, Is.EqualTo(0));
         }
@@ -98,7 +99,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             classSkills.Add("skill 2");
             classSkills.Add("skill 3");
 
-            var skills = skillsGenerator.GenerateWith(characterClass, stats);
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
             Assert.That(skills["skill 1"].Ranks, Is.EqualTo(8));
             Assert.That(skills["skill 2"].Ranks, Is.EqualTo(8));
             Assert.That(skills["skill 3"].Ranks, Is.EqualTo(0));
@@ -132,7 +133,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             classSkills.Add("skill 2");
             intelligence.Value = 12;
 
-            var skills = skillsGenerator.GenerateWith(characterClass, stats);
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
             Assert.That(skills["skill 1"].Ranks, Is.EqualTo(points));
             Assert.That(skills["skill 2"].Ranks, Is.EqualTo(0));
         }
@@ -145,7 +146,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             classSkills.Add("skill 3");
             classSkills.Add("skill 4");
 
-            var skills = skillsGenerator.GenerateWith(characterClass, stats);
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
             foreach (var skill in classSkills)
                 Assert.That(skills.Keys, Contains.Item(skill));
             Assert.That(skills.Count, Is.EqualTo(4));
@@ -159,7 +160,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             crossClassSkills.Add("skill 3");
             crossClassSkills.Add("skill 4");
 
-            var skills = skillsGenerator.GenerateWith(characterClass, stats);
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
             foreach (var skill in crossClassSkills)
                 Assert.That(skills.Keys, Contains.Item(skill));
             Assert.That(skills.Count, Is.EqualTo(4));
@@ -173,7 +174,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             crossClassSkills.Add("skill 3");
             crossClassSkills.Add("skill 4");
 
-            var skills = skillsGenerator.GenerateWith(characterClass, stats);
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
 
             foreach (var skill in crossClassSkills)
                 Assert.That(skills.Keys, Contains.Item(skill));
@@ -201,7 +202,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             stats["stat 1"] = new Stat();
             stats["stat 2"] = new Stat();
 
-            var skills = skillsGenerator.GenerateWith(characterClass, stats);
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
             Assert.That(skills["class skill"].BaseStat, Is.EqualTo(stats["stat 1"]));
             Assert.That(skills["cross class skill"].BaseStat, Is.EqualTo(stats["stat 2"]));
         }
@@ -218,7 +219,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             mockSkillSelector.Setup(s => s.SelectFor("penalty")).Returns(penaltySkillSelection);
             mockSkillSelector.Setup(s => s.SelectFor("no penalty")).Returns(noPenaltySkillSelection);
 
-            var skills = skillsGenerator.GenerateWith(characterClass, stats);
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
             Assert.That(skills["penalty"].ArmorCheckPenalty, Is.True);
             Assert.That(skills["no penalty"].ArmorCheckPenalty, Is.False);
         }
@@ -231,7 +232,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             crossClassSkills.Add("skill 3");
             crossClassSkills.Add("skill 4");
 
-            var skills = skillsGenerator.GenerateWith(characterClass, stats);
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
 
             Assert.That(skills["skill 1"].ClassSkill, Is.True);
             Assert.That(skills["skill 2"].ClassSkill, Is.True);
@@ -251,7 +252,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             classSkills.Add("skill 1");
             classSkills.Add("skill 2");
 
-            var skills = skillsGenerator.GenerateWith(characterClass, stats);
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
 
             Assert.That(skills["skill 1"].Ranks, Is.EqualTo(2));
             Assert.That(skills["skill 2"].Ranks, Is.EqualTo(3));
@@ -271,7 +272,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             crossClassSkills.Add("skill 1");
             crossClassSkills.Add("skill 2");
 
-            var skills = skillsGenerator.GenerateWith(characterClass, stats);
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
 
             Assert.That(skills["skill 1"].Ranks, Is.EqualTo(2));
             Assert.That(skills["skill 2"].Ranks, Is.EqualTo(3));
@@ -288,7 +289,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             classSkills.Add("class skill");
             crossClassSkills.Add("cross-class skill");
 
-            var skills = skillsGenerator.GenerateWith(characterClass, stats);
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
 
             Assert.That(skills["class skill"].Ranks, Is.EqualTo(8));
             Assert.That(skills["cross-class skill"].Ranks, Is.EqualTo(0));
@@ -302,7 +303,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             classSkills.Add("class skill");
             crossClassSkills.Add("cross-class skill");
 
-            var skills = skillsGenerator.GenerateWith(characterClass, stats);
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
 
             Assert.That(skills["class skill"].Ranks, Is.EqualTo(0));
             Assert.That(skills["cross-class skill"].Ranks, Is.EqualTo(8));
@@ -318,7 +319,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             classSkills.Add("class skill");
             crossClassSkills.Add("cross-class skill");
 
-            var skills = skillsGenerator.GenerateWith(characterClass, stats);
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
 
             Assert.That(skills["class skill"].Ranks, Is.EqualTo(3));
             Assert.That(skills["cross-class skill"].Ranks, Is.EqualTo(2));
@@ -331,17 +332,14 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             mockDice.SetupSequence(d => d.Roll(1).d3()).Returns(1);
 
             var sequence = mockDice.SetupSequence(d => d.Roll(1).d(3));
-            for (var i = 0; i < 9; i++)
-                sequence = sequence.Returns(1);
-
-            for (var i = 0; i < 4; i++)
-                sequence = sequence.Returns(2).Returns(3);
+            for (var count = 4; count > 0; count--)
+                sequence = sequence.Returns(2).Returns(3).Returns(1).Returns(1);
 
             classSkills.Add("skill 1");
             classSkills.Add("skill 2");
             classSkills.Add("skill 3");
 
-            var skills = skillsGenerator.GenerateWith(characterClass, stats);
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
 
             Assert.That(skills["skill 1"].Ranks, Is.EqualTo(8));
             Assert.That(skills["skill 2"].Ranks, Is.EqualTo(4));
@@ -355,17 +353,14 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             mockDice.SetupSequence(d => d.Roll(1).d3()).Returns(3);
 
             var sequence = mockDice.SetupSequence(d => d.Roll(1).d(3));
-            for (var i = 0; i < 9; i++)
-                sequence = sequence.Returns(1);
-
-            for (var i = 0; i < 4; i++)
-                sequence = sequence.Returns(2).Returns(3);
+            for (var count = 4; count > 0; count--)
+                sequence = sequence.Returns(2).Returns(3).Returns(1).Returns(1);
 
             crossClassSkills.Add("skill 1");
             crossClassSkills.Add("skill 2");
             crossClassSkills.Add("skill 3");
 
-            var skills = skillsGenerator.GenerateWith(characterClass, stats);
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
 
             Assert.That(skills["skill 1"].Ranks, Is.EqualTo(8));
             Assert.That(skills["skill 2"].Ranks, Is.EqualTo(4));
@@ -379,7 +374,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             crossClassSkills.Add("skill 1");
             classSkills.Add("skill 2");
 
-            var skills = skillsGenerator.GenerateWith(characterClass, stats);
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
 
             Assert.That(skills["skill 1"].Ranks, Is.EqualTo(characterClass.Level + 3));
             Assert.That(skills["skill 2"].Ranks, Is.EqualTo(characterClass.Level + 3));
@@ -389,9 +384,9 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         public void ApplySkillSynergyIfSufficientRanks()
         {
             mockCollectionsSelector.Setup(s => s.SelectFrom("SkillSynergy", "skill 1")).Returns(new[] { "synergy 1", "synergy 2" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom("SkillSynergy", "skill 2")).Returns(new[] { "synergy 3", "synergy 2" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom("SkillSynergy", "skill 2")).Returns(new[] { "synergy 3" });
             mockCollectionsSelector.Setup(s => s.SelectFrom("SkillSynergy", "skill 3")).Returns(new[] { "synergy 4" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom("SkillSynergy", "skill 4")).Returns(new[] { "synergy 1" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom("SkillSynergy", "skill 4")).Returns(new[] { "synergy 5" });
 
             skillPoints[characterClass.ClassName] = 2;
             characterClass.Level = 13;
@@ -402,7 +397,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             for (var count = 0; count < 21; count++)
                 sequence = sequence.Returns(3);
 
-            sequence = mockDice.SetupSequence(d => d.Roll(1).d(6)).Returns(1);
+            sequence = mockDice.SetupSequence(d => d.Roll(1).d(8)).Returns(1);
             for (var roll = 0; roll < 10; roll++)
                 sequence = sequence.Returns(roll % 2 + 1);
 
@@ -418,8 +413,10 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             classSkills.Add("synergy 2");
             classSkills.Add("synergy 3");
             classSkills.Add("synergy 4");
+            classSkills.Add("synergy 5");
+            classSkills.Add("synergy 6");
 
-            var skills = skillsGenerator.GenerateWith(characterClass, stats);
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
 
             Assert.That(skills["skill 1"].Ranks, Is.EqualTo(6));
             Assert.That(skills["skill 2"].Ranks, Is.EqualTo(5));
@@ -441,10 +438,48 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             Assert.That(skills["skill 2"].Bonus, Is.EqualTo(0));
             Assert.That(skills["skill 3"].Bonus, Is.EqualTo(0));
             Assert.That(skills["skill 4"].Bonus, Is.EqualTo(0));
-            Assert.That(skills["synergy 1"].Bonus, Is.EqualTo(4));
-            Assert.That(skills["synergy 2"].Bonus, Is.EqualTo(4));
+            Assert.That(skills["synergy 1"].Bonus, Is.EqualTo(2));
+            Assert.That(skills["synergy 2"].Bonus, Is.EqualTo(2));
             Assert.That(skills["synergy 3"].Bonus, Is.EqualTo(2));
             Assert.That(skills["synergy 4"].Bonus, Is.EqualTo(2));
+            Assert.That(skills["synergy 5"].Bonus, Is.EqualTo(2));
+            Assert.That(skills["synergy 6"].Bonus, Is.EqualTo(0));
+        }
+
+        [Test]
+        public void SkillSynergyStacks()
+        {
+            mockCollectionsSelector.Setup(s => s.SelectFrom("SkillSynergy", "skill 1")).Returns(new[] { "synergy 1", "synergy 2" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom("SkillSynergy", "skill 2")).Returns(new[] { "synergy 1" });
+
+            skillPoints[characterClass.ClassName] = 2;
+            characterClass.Level = 2;
+
+            mockDice.Setup(d => d.Roll(1).d3()).Returns(1);
+
+            var sequence = mockDice.SetupSequence(d => d.Roll(1).d(4));
+            for (var roll = 0; roll < 5; roll++)
+                sequence = sequence.Returns(2).Returns(1);
+
+            classSkills.Add("skill 1");
+            classSkills.Add("skill 2");
+            classSkills.Add("synergy 1");
+            classSkills.Add("synergy 2");
+
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
+
+            Assert.That(skills["skill 1"].Ranks, Is.EqualTo(5));
+            Assert.That(skills["skill 2"].Ranks, Is.EqualTo(5));
+            Assert.That(skills["synergy 1"].Ranks, Is.EqualTo(0));
+            Assert.That(skills["synergy 2"].Ranks, Is.EqualTo(0));
+            Assert.That(skills["skill 1"].EffectiveRanks, Is.EqualTo(5));
+            Assert.That(skills["skill 2"].EffectiveRanks, Is.EqualTo(5));
+            Assert.That(skills["synergy 1"].EffectiveRanks, Is.EqualTo(0));
+            Assert.That(skills["synergy 2"].EffectiveRanks, Is.EqualTo(0));
+            Assert.That(skills["skill 1"].Bonus, Is.EqualTo(0));
+            Assert.That(skills["skill 2"].Bonus, Is.EqualTo(0));
+            Assert.That(skills["synergy 1"].Bonus, Is.EqualTo(4));
+            Assert.That(skills["synergy 2"].Bonus, Is.EqualTo(2));
         }
 
         [Test]
@@ -465,7 +500,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             classSkills.Add("skill 2");
             classSkills.Add("synergy 2");
 
-            var skills = skillsGenerator.GenerateWith(characterClass, stats);
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
 
             Assert.That(skills["skill 1"].Ranks, Is.EqualTo(5));
             Assert.That(skills["skill 2"].Ranks, Is.EqualTo(5));
@@ -512,7 +547,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             classSkills.Add("synergy 2");
             classSkills.Add("synergy 3");
 
-            var skills = skillsGenerator.GenerateWith(characterClass, stats);
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
 
             Assert.That(skills["skill 1"].Ranks, Is.EqualTo(4));
             Assert.That(skills["skill 2"].Ranks, Is.EqualTo(9));
@@ -562,7 +597,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             classSkills.Add("skill 2");
             race.BaseRace = RaceConstants.BaseRaces.Human;
 
-            var skills = skillsGenerator.GenerateWith(characterClass, stats);
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
             Assert.That(skills["skill 1"].Ranks, Is.EqualTo(points));
             Assert.That(skills["skill 2"].Ranks, Is.EqualTo(0));
         }
@@ -589,6 +624,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         [TestCase(20, 92)]
         public void AllPerLevelBonusesStack(Int32 level, Int32 points)
         {
+            var cap = level + 3;
             characterClass.Level = level;
             skillPoints[characterClass.ClassName] = 2;
             intelligence.Value = 12;
@@ -599,11 +635,14 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             classSkills.Add("skill 4");
             classSkills.Add("skill 5");
 
-            var skills = skillsGenerator.GenerateWith(characterClass, stats);
-            Assert.That(skills["skill 1"].Ranks, Is.EqualTo(points));
-            Assert.That(skills["skill 2"].Ranks, Is.EqualTo(points));
-            Assert.That(skills["skill 3"].Ranks, Is.EqualTo(points));
-            Assert.That(skills["skill 4"].Ranks, Is.EqualTo(points));
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
+            var sum = skills.Values.Sum(s => s.Ranks);
+
+            Assert.That(sum, Is.EqualTo(points));
+            Assert.That(skills["skill 1"].Ranks, Is.EqualTo(cap));
+            Assert.That(skills["skill 2"].Ranks, Is.EqualTo(cap));
+            Assert.That(skills["skill 3"].Ranks, Is.EqualTo(cap));
+            Assert.That(skills["skill 4"].Ranks, Is.EqualTo(cap));
             Assert.That(skills["skill 5"].Ranks, Is.EqualTo(0));
         }
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using NPCGen.Common.Alignments;
 using NPCGen.Common.CharacterClasses;
 using NPCGen.Selectors.Interfaces;
@@ -7,24 +8,26 @@ namespace NPCGen.Generators.Randomizers.CharacterClasses.ClassNames
 {
     public class HealerClassNameRandomizer : BaseClassNameRandomizer
     {
-        public HealerClassNameRandomizer(IPercentileSelector percentileResultSelector) : base(percentileResultSelector) { }
+        private ICollectionsSelector collectionsSelector;
+
+        public HealerClassNameRandomizer(IPercentileSelector percentileResultSelector, ICollectionsSelector collectionsSelector)
+            : base(percentileResultSelector)
+        {
+            this.collectionsSelector = collectionsSelector;
+        }
 
         protected override Boolean CharacterClassIsAllowed(String className, Alignment alignment)
         {
+            var classNames = collectionsSelector.SelectFrom("ClassNameGroups", "Healers");
+            if (!classNames.Contains(className))
+                return false;
+
             switch (className)
             {
                 case CharacterClassConstants.Bard: return !alignment.IsLawful();
                 case CharacterClassConstants.Druid: return alignment.IsNeutral();
                 case CharacterClassConstants.Paladin: return alignment.IsLawful() && alignment.IsGood();
-                case CharacterClassConstants.Fighter:
-                case CharacterClassConstants.Rogue:
-                case CharacterClassConstants.Barbarian:
-                case CharacterClassConstants.Sorcerer:
-                case CharacterClassConstants.Wizard:
-                case CharacterClassConstants.Monk: return false;
-                case CharacterClassConstants.Ranger:
-                case CharacterClassConstants.Cleric: return true;
-                default: throw new ArgumentOutOfRangeException();
+                default: return true;
             }
         }
     }

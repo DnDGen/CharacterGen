@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace NPCGen.Common.Races
 {
@@ -109,6 +110,11 @@ namespace NPCGen.Common.Races
                     Weretiger,
                     Werewolf
                 };
+            }
+
+            public static IEnumerable<String> GetAllMetaraces()
+            {
+                return GetMetaraces().Union(new[] { None });
             }
         }
     }

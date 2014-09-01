@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 using NPCGen.Common.Abilities;
+using NPCGen.Common.Abilities.Feats;
 using NPCGen.Common.Abilities.Stats;
 using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Combats;
@@ -34,17 +36,21 @@ namespace NPCGen.Generators.Abilities
 
             ability.Stats = statsGenerator.GenerateWith(statsRandomizer, characterClass, race);
             ability.Languages = languageGenerator.GenerateWith(race, characterClass.ClassName, ability.Stats[StatConstants.Intelligence].Bonus);
-            ability.Skills = skillsGenerator.GenerateWith(characterClass, ability.Stats);
+            ability.Skills = skillsGenerator.GenerateWith(characterClass, race, ability.Stats);
             ability.Feats = featsGenerator.GenerateWith(characterClass, race, ability.Stats, ability.Skills, baseAttack);
 
             foreach (var feat in ability.Feats)
             {
-                var tableName = String.Format("{0}SkillAdjustments", feat);
+                var tableName = String.Format("{0}SkillAdjustments", feat.Name);
                 var adjustments = adjustmentsSelector.SelectFrom(tableName);
 
                 foreach (var adjustment in adjustments)
                     ability.Skills[adjustment.Key].Bonus += adjustment.Value;
             }
+
+            var skillFoci = ability.Feats.Where(f => f.Name == FeatConstants.SkillFocus);
+            foreach (var feat in skillFoci)
+                ability.Skills[feat.SpecificApplication].Bonus += 3;
 
             return ability;
         }

@@ -1,5 +1,4 @@
-﻿using System;
-using NPCGen.Common.Races;
+﻿using NPCGen.Common.Races;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Stress
@@ -28,9 +27,9 @@ namespace NPCGen.Tests.Integration.Stress
                 var characterClass = GetNewCharacterClass(alignment);
 
                 race = RaceGenerator.GenerateWith(alignment.Goodness, characterClass, BaseRaceRandomizer, MetaraceRandomizer);
-            } while (TestShouldKeepRunning() && String.IsNullOrEmpty(race.Metarace));
+            } while (TestShouldKeepRunning() && race.Metarace == RaceConstants.Metaraces.None);
 
-            Assert.That(race.Metarace, Is.Not.Empty);
+            Assert.That(race.Metarace, Is.Not.EqualTo(RaceConstants.Metaraces.None));
             AssertIterations();
         }
 
@@ -45,9 +44,9 @@ namespace NPCGen.Tests.Integration.Stress
                 var characterClass = GetNewCharacterClass(alignment);
 
                 race = RaceGenerator.GenerateWith(alignment.Goodness, characterClass, BaseRaceRandomizer, MetaraceRandomizer);
-            } while (TestShouldKeepRunning() && !String.IsNullOrEmpty(race.Metarace));
+            } while (TestShouldKeepRunning() && race.Metarace != RaceConstants.Metaraces.None);
 
-            Assert.That(race.Metarace, Is.Empty);
+            Assert.That(race.Metarace, Is.EqualTo(RaceConstants.Metaraces.None));
             AssertIterations();
         }
     }

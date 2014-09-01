@@ -5,6 +5,7 @@ using D20Dice;
 using NPCGen.Common.Abilities.Skills;
 using NPCGen.Common.Abilities.Stats;
 using NPCGen.Common.CharacterClasses;
+using NPCGen.Common.Races;
 using NPCGen.Generators.Interfaces.Abilities;
 using NPCGen.Selectors.Interfaces;
 
@@ -25,7 +26,7 @@ namespace NPCGen.Generators.Abilities
             this.adjustmentsSelector = adjustmentsSelector;
         }
 
-        public Dictionary<String, Skill> GenerateWith(CharacterClass characterClass, Dictionary<String, Stat> stats)
+        public Dictionary<String, Skill> GenerateWith(CharacterClass characterClass, Race race, Dictionary<String, Stat> stats)
         {
             var classSkills = collectionsSelector.SelectFrom("ClassSkills", characterClass.ClassName);
             var crossClassSkills = collectionsSelector.SelectFrom("CrossClassSkills", characterClass.ClassName);
@@ -45,7 +46,7 @@ namespace NPCGen.Generators.Abilities
                 skill.Value.BaseStat = stats[selection.BaseStatName];
             }
 
-            var points = GetTotalSkillPoints(characterClass, stats[StatConstants.Intelligence]);
+            var points = GetTotalSkillPoints(characterClass, stats[StatConstants.Intelligence], race);
             var rankCap = characterClass.Level + 3;
 
             while (points > 0 && skills.Values.Any(s => s.Ranks < rankCap))
@@ -54,18 +55,13 @@ namespace NPCGen.Generators.Abilities
                 var index = dice.Roll().d(skillCollection.Count()) - 1;
 
                 var skill = skillCollection.ElementAt(index);
-                if (skills[skill].Ranks < characterClass.Level + 3)
-                {
-                    skills[skill].Ranks++;
-                    points--;
-                }
+                skills[skill].Ranks++;
+                points--;
             }
 
-            foreach (var skill in skills)
+            var skillsWarrantingSynergy = skills.Where(s => s.Value.EffectiveRanks >= 5);
+            foreach (var skill in skillsWarrantingSynergy)
             {
-                if (skill.Value.EffectiveRanks < 5)
-                    continue;
-
                 var synergySkills = collectionsSelector.SelectFrom("SkillSynergy", skill.Key);
 
                 foreach (var synergySkill in synergySkills)
@@ -76,11 +72,14 @@ namespace NPCGen.Generators.Abilities
             return skills;
         }
 
-        private Int32 GetTotalSkillPoints(CharacterClass characterClass, Stat intelligence)
+        private Int32 GetTotalSkillPoints(CharacterClass characterClass, Stat intelligence, Race race)
         {
             var pointsTable = adjustmentsSelector.SelectFrom("SkillPointsForClasses");
             var perLevel = pointsTable[characterClass.ClassName] + intelligence.Bonus;
             var multiplier = characterClass.Level + 3;
+
+            if (race.BaseRace == RaceConstants.BaseRaces.Human)
+                perLevel++;
 
             return perLevel * multiplier;
         }
@@ -88,12 +87,12 @@ namespace NPCGen.Generators.Abilities
         private IEnumerable<String> GetSkillCollection(Dictionary<String, Skill> skills, Int32 rankCap, IEnumerable<String> classSkills, IEnumerable<String> crossClassSkills)
         {
             if (!skills.Any(s => classSkills.Contains(s.Key) && s.Value.Ranks < rankCap))
-                return crossClassSkills;
+                return crossClassSkills.Where(s => skills[s].Ranks < rankCap);
 
             if (dice.Roll().d3() == 3)
-                return crossClassSkills;
+                return crossClassSkills.Where(s => skills[s].Ranks < rankCap);
 
-            return classSkills;
+            return classSkills.Where(s => skills[s].Ranks < rankCap);
         }
     }
 }

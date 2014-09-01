@@ -9,6 +9,6 @@ namespace NPCGen.Generators.Interfaces.Abilities
 {
     public interface ISkillsGenerator
     {
-        Dictionary<String, Skill> GenerateWith(CharacterClass characterClass, Dictionary<String, Stat> stats);
+        Dictionary<String, Skill> GenerateWith(CharacterClass characterClass, Race race, Dictionary<String, Stat> stats);
     }
 }

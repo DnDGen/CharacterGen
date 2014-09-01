@@ -5,9 +5,9 @@ namespace NPCGen.Generators.Randomizers.Races.Metaraces
 {
     public class AnyForcedMetaraceRandomizer : BaseMetarace
     {
-        protected override Boolean allowNoMetarace
+        protected override Boolean forceMetarace
         {
-            get { return false; }
+            get { return true; }
         }
 
         public AnyForcedMetaraceRandomizer(IPercentileSelector percentileResultSelector, IAdjustmentsSelector levelAdjustmentsSelector)

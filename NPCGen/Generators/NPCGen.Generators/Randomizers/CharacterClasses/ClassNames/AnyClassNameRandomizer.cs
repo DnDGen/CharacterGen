@@ -18,13 +18,7 @@ namespace NPCGen.Generators.Randomizers.CharacterClasses.ClassNames
                 case CharacterClassConstants.Druid: return alignment.IsNeutral();
                 case CharacterClassConstants.Monk: return alignment.IsLawful();
                 case CharacterClassConstants.Paladin: return alignment.IsLawful() && alignment.IsGood();
-                case CharacterClassConstants.Fighter:
-                case CharacterClassConstants.Cleric:
-                case CharacterClassConstants.Ranger:
-                case CharacterClassConstants.Sorcerer:
-                case CharacterClassConstants.Rogue:
-                case CharacterClassConstants.Wizard: return true;
-                default: throw new ArgumentOutOfRangeException();
+                default: return true;
             }
         }
     }

@@ -1,33 +1,29 @@
-﻿using NPCGen.Common.Races;
-using System;
+﻿using System;
+using System.Linq;
+using NPCGen.Common.Alignments;
 using NPCGen.Selectors.Interfaces;
 
 namespace NPCGen.Generators.Randomizers.Races.Metaraces
 {
     public class EvilMetaraceRandomizer : BaseMetarace
     {
-        protected override Boolean allowNoMetarace
+        protected override Boolean forceMetarace
         {
-            get { return true; }
+            get { return false; }
         }
 
-        public EvilMetaraceRandomizer(IPercentileSelector percentileResultSelector, IAdjustmentsSelector levelAdjustmentsSelector)
-            : base(percentileResultSelector, levelAdjustmentsSelector) { }
+        private ICollectionsSelector collectionsSelector;
+
+        public EvilMetaraceRandomizer(IPercentileSelector percentileResultSelector, IAdjustmentsSelector levelAdjustmentsSelector, ICollectionsSelector collectionsSelector)
+            : base(percentileResultSelector, levelAdjustmentsSelector)
+        {
+            this.collectionsSelector = collectionsSelector;
+        }
 
         protected override Boolean MetaraceIsAllowed(String metarace)
         {
-            switch (metarace)
-            {
-                case RaceConstants.Metaraces.HalfDragon:
-                case RaceConstants.Metaraces.Wererat:
-                case RaceConstants.Metaraces.Werewolf:
-                case RaceConstants.Metaraces.HalfFiend: return true;
-                case RaceConstants.Metaraces.Werebear:
-                case RaceConstants.Metaraces.HalfCelestial:
-                case RaceConstants.Metaraces.Wereboar:
-                case RaceConstants.Metaraces.Weretiger: return false;
-                default: throw new ArgumentOutOfRangeException();
-            }
+            var metaraces = collectionsSelector.SelectFrom("MetaraceGroups", AlignmentConstants.Evil);
+            return metaraces.Contains(metarace);
         }
     }
 }

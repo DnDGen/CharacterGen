@@ -62,6 +62,7 @@
     <Compile Include="Combats\BaseAttack.cs" />
     <Compile Include="Combats\Combat.cs" />
     <Compile Include="Combats\SavingThrows.cs" />
+    <Compile Include="Items\WeaponProficiencyConstants.cs" />
     <Compile Include="Magics\Familiar.cs" />
     <Compile Include="Items\Equipment.cs" />
     <Compile Include="Items\WeaponAttributeConstants.cs" />

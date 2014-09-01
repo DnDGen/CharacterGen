@@ -150,7 +150,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
             public String NotAllowedMetarace { get; set; }
             public Boolean AllowNoMetarace { get; set; }
 
-            protected override Boolean allowNoMetarace
+            protected override Boolean forceMetarace
             {
                 get { return AllowNoMetarace; }
             }

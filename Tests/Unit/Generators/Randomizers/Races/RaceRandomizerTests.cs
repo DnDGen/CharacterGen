@@ -28,19 +28,5 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races
             characterClass = new CharacterClass();
             characterClass.Level = 1;
         }
-
-        protected void AssertRaceIsAllowed(String race)
-        {
-            var results = GetResults();
-            Assert.That(results, Contains.Item(race));
-        }
-
-        protected void AssertRaceIsNotAllowed(String race)
-        {
-            var results = GetResults();
-            Assert.That(results, Is.Not.Contains(race));
-        }
-
-        protected abstract IEnumerable<String> GetResults();
     }
 }

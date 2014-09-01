@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using NPCGen.Common.Alignments;
 using NPCGen.Common.CharacterClasses;
 using NPCGen.Selectors.Interfaces;
@@ -7,24 +8,25 @@ namespace NPCGen.Generators.Randomizers.CharacterClasses.ClassNames
 {
     public class NonSpellcasterClassNameRandomizer : BaseClassNameRandomizer
     {
-        public NonSpellcasterClassNameRandomizer(IPercentileSelector percentileResultSelector) : base(percentileResultSelector) { }
+        private ICollectionsSelector collectionsSelector;
 
-        protected override Boolean CharacterClassIsAllowed(String characterClass, Alignment alignment)
+        public NonSpellcasterClassNameRandomizer(IPercentileSelector percentileResultSelector, ICollectionsSelector collectionsSelector)
+            : base(percentileResultSelector)
         {
-            switch (characterClass)
+            this.collectionsSelector = collectionsSelector;
+        }
+
+        protected override Boolean CharacterClassIsAllowed(String className, Alignment alignment)
+        {
+            var classNames = collectionsSelector.SelectFrom("ClassNameGroups", "Spellcasters");
+            if (classNames.Contains(className))
+                return false;
+
+            switch (className)
             {
-                case CharacterClassConstants.Fighter:
-                case CharacterClassConstants.Rogue: return true;
                 case CharacterClassConstants.Monk: return alignment.IsLawful();
                 case CharacterClassConstants.Barbarian: return !alignment.IsLawful();
-                case CharacterClassConstants.Sorcerer:
-                case CharacterClassConstants.Wizard:
-                case CharacterClassConstants.Ranger:
-                case CharacterClassConstants.Bard:
-                case CharacterClassConstants.Druid:
-                case CharacterClassConstants.Paladin:
-                case CharacterClassConstants.Cleric: return false;
-                default: throw new ArgumentOutOfRangeException();
+                default: return true;
             }
         }
     }

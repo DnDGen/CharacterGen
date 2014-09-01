@@ -28,38 +28,6 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Skills
             SkillConstants.Ride,
             SkillConstants.Survival,
             SkillConstants.Swim)]
-        [TestCase(CharacterClassConstants.Bard,
-            SkillConstants.Appraise,
-            SkillConstants.Balance,
-            SkillConstants.Bluff,
-            SkillConstants.Climb,
-            SkillConstants.Concentration,
-            SkillConstants.DecipherScript,
-            SkillConstants.Diplomacy,
-            SkillConstants.Disguise,
-            SkillConstants.EscapeArtist,
-            SkillConstants.GatherInformation,
-            SkillConstants.Hide,
-            SkillConstants.Jump,
-            SkillConstants.KnowledgeArcana,
-            SkillConstants.KnowledgeArchitectureAndEngineering,
-            SkillConstants.KnowledgeDungeoneering,
-            SkillConstants.KnowledgeGeography,
-            SkillConstants.KnowledgeHistory,
-            SkillConstants.KnowledgeLocal,
-            SkillConstants.KnowledgeNature,
-            SkillConstants.KnowledgeNobilityAndRoyalty,
-            SkillConstants.KnowledgeReligion,
-            SkillConstants.KnowledgeThePlanes,
-            SkillConstants.Listen,
-            SkillConstants.MoveSilently,
-            SkillConstants.Perform,
-            SkillConstants.SenseMotive,
-            SkillConstants.SleightOfHand,
-            SkillConstants.Spellcraft,
-            SkillConstants.Swim,
-            SkillConstants.Tumble,
-            SkillConstants.UseMagicDevice)]
         [TestCase(CharacterClassConstants.Cleric,
             SkillConstants.Concentration,
             SkillConstants.Diplomacy,
@@ -182,6 +150,48 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Skills
         public override void DistinctCollection(String name, params String[] collection)
         {
             base.DistinctCollection(name, collection);
+        }
+
+        //HACK: Doing this as a test case is too long a name for NUnit
+        public void BardClassSkills()
+        {
+
+            var classSkills = new[] 
+            {
+                SkillConstants.Appraise,
+                SkillConstants.Balance,
+                SkillConstants.Bluff,
+                SkillConstants.Climb,
+                SkillConstants.Concentration,
+                SkillConstants.DecipherScript,
+                SkillConstants.Diplomacy,
+                SkillConstants.Disguise,
+                SkillConstants.EscapeArtist,
+                SkillConstants.GatherInformation,
+                SkillConstants.Hide,
+                SkillConstants.Jump,
+                SkillConstants.KnowledgeArcana,
+                SkillConstants.KnowledgeArchitectureAndEngineering,
+                SkillConstants.KnowledgeDungeoneering,
+                SkillConstants.KnowledgeGeography,
+                SkillConstants.KnowledgeHistory,
+                SkillConstants.KnowledgeLocal,
+                SkillConstants.KnowledgeNature,
+                SkillConstants.KnowledgeNobilityAndRoyalty,
+                SkillConstants.KnowledgeReligion,
+                SkillConstants.KnowledgeThePlanes,
+                SkillConstants.Listen,
+                SkillConstants.MoveSilently,
+                SkillConstants.Perform,
+                SkillConstants.SenseMotive,
+                SkillConstants.SleightOfHand,
+                SkillConstants.Spellcraft,
+                SkillConstants.Swim,
+                SkillConstants.Tumble,
+                SkillConstants.UseMagicDevice
+            };
+
+            DistinctCollection(CharacterClassConstants.Bard, classSkills);
         }
     }
 }

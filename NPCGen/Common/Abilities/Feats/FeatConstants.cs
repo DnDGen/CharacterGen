@@ -9,6 +9,7 @@ namespace NPCGen.Common.Abilities.Feats
         public const String LightArmorProficiency = "Light Armor Proficiency";
         public const String ShieldProficiency = "Shield Proficiency";
         public const String SkillFocus = "Skill Focus";
+        public const String SpellMastery = "Spell Mastery";
 
         public static IEnumerable<String> GetAllFeats()
         {
@@ -17,7 +18,8 @@ namespace NPCGen.Common.Abilities.Feats
                 Ambidexterity,
                 LightArmorProficiency,
                 ShieldProficiency,
-                SkillFocus
+                SkillFocus,
+                SpellMastery
             };
         }
     }

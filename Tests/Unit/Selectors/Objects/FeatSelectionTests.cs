@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using NPCGen.Common.Abilities.Feats;
 using NPCGen.Common.Abilities.Skills;
 using NPCGen.Common.Abilities.Stats;
 using NPCGen.Selectors.Interfaces.Objects;
@@ -11,7 +12,7 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
     public class FeatSelectionTests
     {
         private FeatSelection selection;
-        private List<String> feats;
+        private List<Feat> feats;
         private Dictionary<String, Stat> stats;
         private Dictionary<String, Skill> skills;
 
@@ -19,7 +20,7 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
         public void Setup()
         {
             selection = new FeatSelection();
-            feats = new List<String>();
+            feats = new List<Feat>();
             stats = new Dictionary<String, Stat>();
             skills = new Dictionary<String, Skill>();
         }
@@ -34,12 +35,20 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
             Assert.That(selection.RequiredStats, Is.Empty);
             Assert.That(selection.RequiredClassNames, Is.Empty);
             Assert.That(selection.IsFighterFeat, Is.False);
+            Assert.That(selection.SpecificApplicationType, Is.Empty);
         }
 
         [Test]
-        public void AllRequirementsMetIfNoRequirements()
+        public void ImmutableRequirementsMetIfNoRequirements()
         {
-            var met = selection.RequirementsMet(feats, 0, stats, skills, String.Empty);
+            var met = selection.ImmutableRequirementsMet(0, stats, skills, String.Empty);
+            Assert.That(met, Is.True);
+        }
+
+        [Test]
+        public void MutableRequirementsMetIfNoRequirements()
+        {
+            var met = selection.MutableRequirementsMet(feats);
             Assert.That(met, Is.True);
         }
 
@@ -47,7 +56,7 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
         public void BaseAttackRequirementNotMet()
         {
             selection.RequiredBaseAttack = 2;
-            var met = selection.RequirementsMet(feats, 1, stats, skills, String.Empty);
+            var met = selection.ImmutableRequirementsMet(1, stats, skills, String.Empty);
             Assert.That(met, Is.False);
         }
 
@@ -58,7 +67,7 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
             stats["stat"] = new Stat { Value = 15 };
             stats["other stat"] = new Stat { Value = 17 };
 
-            var met = selection.RequirementsMet(feats, 1, stats, skills, String.Empty);
+            var met = selection.ImmutableRequirementsMet(1, stats, skills, String.Empty);
             Assert.That(met, Is.False);
         }
 
@@ -69,34 +78,33 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
             skills["skill"] = new Skill { Ranks = 9, ClassSkill = false };
             skills["other skill"] = new Skill { Ranks = 9, ClassSkill = true };
 
-            var met = selection.RequirementsMet(feats, 1, stats, skills, String.Empty);
-            Assert.That(met, Is.False);
-        }
-
-        [Test]
-        public void FeatRequirementsNotMet()
-        {
-            feats.Add("feat");
-            feats.Add("other feat");
-            selection.RequiredFeats.Add("feat");
-            selection.RequiredFeats.Add("other required feat");
-
-            var met = selection.RequirementsMet(feats, 1, stats, skills, String.Empty);
+            var met = selection.ImmutableRequirementsMet(1, stats, skills, String.Empty);
             Assert.That(met, Is.False);
         }
 
         [Test]
         public void ClassNameRequirementsNotMet()
         {
-            selection.RequiredClassNames.Add("class name");
-            selection.RequiredClassNames.Add("other class name");
+            selection.RequiredClassNames = new[] { "class name", "other class name" };
 
-            var met = selection.RequirementsMet(feats, 1, stats, skills, "different class name");
+            var met = selection.ImmutableRequirementsMet(1, stats, skills, "different class name");
             Assert.That(met, Is.False);
         }
 
         [Test]
-        public void AllRequirementsMet()
+        public void AnyMatchingCLassNameMeetsRequirement()
+        {
+            selection.RequiredClassNames = new[] { "class name", "other class name" };
+
+            var met = selection.ImmutableRequirementsMet(2, stats, skills, "other class name");
+            Assert.That(met, Is.True);
+
+            met = selection.ImmutableRequirementsMet(2, stats, skills, "class name");
+            Assert.That(met, Is.True);
+        }
+
+        [Test]
+        public void AllImmutableRequirementsMet()
         {
             selection.RequiredBaseAttack = 2;
 
@@ -108,16 +116,42 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
             skills["skill"] = new Skill { Ranks = 10, ClassSkill = false };
             skills["other skill"] = new Skill { Ranks = 1 };
 
-            feats.Add("feat");
-            feats.Add("other required feat");
-            feats.Add("other feat");
-            selection.RequiredFeats.Add("feat");
-            selection.RequiredFeats.Add("other required feat");
+            selection.RequiredClassNames = new[] { "class name", "other class name" };
 
-            selection.RequiredClassNames.Add("class name");
-            selection.RequiredClassNames.Add("other class name");
+            var met = selection.ImmutableRequirementsMet(2, stats, skills, "class name");
+            Assert.That(met, Is.True);
+        }
 
-            var met = selection.RequirementsMet(feats, 2, stats, skills, "class name");
+        [Test]
+        public void FeatRequirementsNotMet()
+        {
+            feats.Add(new Feat { Name = "feat" });
+            selection.RequiredFeats = new[] { "feat", "other required feat" };
+
+            var met = selection.MutableRequirementsMet(feats);
+            Assert.That(met, Is.False);
+        }
+
+        [Test]
+        public void AllMutableRequirementsMet()
+        {
+            feats.Add(new Feat { Name = "feat" });
+            feats.Add(new Feat { Name = "other required feat" });
+            selection.RequiredFeats = new[] { "feat", "other required feat" };
+
+            var met = selection.MutableRequirementsMet(feats);
+            Assert.That(met, Is.True);
+        }
+
+        [Test]
+        public void ExtraFeatDoNotMatter()
+        {
+            feats.Add(new Feat { Name = "feat" });
+            feats.Add(new Feat { Name = "other required feat" });
+            feats.Add(new Feat { Name = "yet another feat" });
+            selection.RequiredFeats = new[] { "feat", "other required feat" };
+
+            var met = selection.MutableRequirementsMet(feats);
             Assert.That(met, Is.True);
         }
     }

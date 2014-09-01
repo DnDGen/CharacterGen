@@ -1,6 +1,9 @@
 ﻿using System;
+using Moq;
+using NPCGen.Common.Alignments;
 using NPCGen.Common.Races;
 using NPCGen.Generators.Randomizers.Races.Metaraces;
+using NPCGen.Selectors.Interfaces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
@@ -8,29 +11,38 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
     [TestFixture]
     public class GoodMetaraceRandomizerTests : MetaraceRandomizerTests
     {
+        private Mock<ICollectionsSelector> mockCollectionsSelector;
+
         [SetUp]
         public void Setup()
         {
-            randomizer = new GoodMetaraceRandomizer(mockPercentileResultSelector.Object, mockAdjustmentsSelector.Object);
+            mockCollectionsSelector = new Mock<ICollectionsSelector>();
+            randomizer = new GoodMetaraceRandomizer(mockPercentileResultSelector.Object, mockAdjustmentsSelector.Object,
+                mockCollectionsSelector.Object);
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom("MetaraceGroups", AlignmentConstants.Good)).Returns(new[] { "good metarace", "metarace", "not neutral metarace", "not evil metarace" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom("MetaraceGroups", AlignmentConstants.Evil)).Returns(new[] { "evil metarace", "metarace", "not good metarace", "not neutral metarace" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom("MetaraceGroups", AlignmentConstants.Neutral)).Returns(new[] { "neutral metarace", "metarace", "not evil metarace", "not good metarace" });
         }
 
-        [TestCase(RaceConstants.Metaraces.HalfCelestial)]
-        [TestCase(RaceConstants.Metaraces.HalfDragon)]
-        [TestCase(RaceConstants.Metaraces.Werebear)]
-        [TestCase("")]
-        public void Allowed(String race)
+        [TestCase("metarace")]
+        [TestCase("good metarace")]
+        [TestCase("not neutral metarace")]
+        [TestCase("not evil metarace")]
+        [TestCase(RaceConstants.Metaraces.None)]
+        public void Allowed(String metarace)
         {
-            AssertRaceIsAllowed(race);
+            var metaraces = randomizer.GetAllPossibleResults(String.Empty, characterClass);
+            Assert.That(metaraces, Contains.Item(metarace));
         }
 
-        [TestCase(RaceConstants.Metaraces.Wereboar)]
-        [TestCase(RaceConstants.Metaraces.Weretiger)]
-        [TestCase(RaceConstants.Metaraces.Wererat)]
-        [TestCase(RaceConstants.Metaraces.Werewolf)]
-        [TestCase(RaceConstants.Metaraces.HalfFiend)]
-        public void NotAllowed(String race)
+        [TestCase("evil metarace")]
+        [TestCase("neutral metarace")]
+        [TestCase("not good metarace")]
+        public void NotAllowed(String metarace)
         {
-            AssertRaceIsNotAllowed(race);
+            var metaraces = randomizer.GetAllPossibleResults(String.Empty, characterClass);
+            Assert.That(metaraces, Is.Not.Contains(metarace));
         }
     }
 }

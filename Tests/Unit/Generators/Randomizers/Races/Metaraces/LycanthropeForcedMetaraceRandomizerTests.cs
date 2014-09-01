@@ -1,6 +1,8 @@
 ﻿using System;
+using Moq;
 using NPCGen.Common.Races;
 using NPCGen.Generators.Randomizers.Races.Metaraces;
+using NPCGen.Selectors.Interfaces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
@@ -8,29 +10,31 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
     [TestFixture]
     public class LycanthropeForcedMetaraceRandomizerTests : MetaraceRandomizerTests
     {
+        private Mock<ICollectionsSelector> mockCollectionsSelector;
+
         [SetUp]
         public void Setup()
         {
-            randomizer = new LycanthropeForcedMetaraceRandomizer(mockPercentileResultSelector.Object, mockAdjustmentsSelector.Object);
+            mockCollectionsSelector = new Mock<ICollectionsSelector>();
+            randomizer = new LycanthropeForcedMetaraceRandomizer(mockPercentileResultSelector.Object, mockAdjustmentsSelector.Object,
+                mockCollectionsSelector.Object);
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom("MetaraceGroups", "Lycanthrope")).Returns(new[] { "genetic metarace" });
         }
 
-        [TestCase(RaceConstants.Metaraces.Werebear)]
-        [TestCase(RaceConstants.Metaraces.Wereboar)]
-        [TestCase(RaceConstants.Metaraces.Weretiger)]
-        [TestCase(RaceConstants.Metaraces.Wererat)]
-        [TestCase(RaceConstants.Metaraces.Werewolf)]
-        public void Allowed(String race)
+        [TestCase("lycanthrope metarace")]
+        public void Allowed(String metarace)
         {
-            AssertRaceIsAllowed(race);
+            var metaraces = randomizer.GetAllPossibleResults(String.Empty, characterClass);
+            Assert.That(metaraces, Contains.Item(metarace));
         }
 
-        [TestCase(RaceConstants.Metaraces.HalfFiend)]
-        [TestCase(RaceConstants.Metaraces.HalfCelestial)]
-        [TestCase(RaceConstants.Metaraces.HalfDragon)]
-        [TestCase("")]
-        public void NotAllowed(String race)
+        [TestCase("genetic metarace")]
+        [TestCase(RaceConstants.Metaraces.None)]
+        public void NotAllowed(String metarace)
         {
-            AssertRaceIsNotAllowed(race);
+            var metaraces = randomizer.GetAllPossibleResults(String.Empty, characterClass);
+            Assert.That(metaraces, Is.Not.Contains(metarace));
         }
     }
 }

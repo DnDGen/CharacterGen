@@ -99,7 +99,7 @@ namespace NPCGen.Tests.Unit.Common.Races
         }
 
         [Test]
-        public void AllMetaraces()
+        public void Metaraces()
         {
             var metaraces = RaceConstants.Metaraces.GetMetaraces();
 
@@ -112,6 +112,23 @@ namespace NPCGen.Tests.Unit.Common.Races
             Assert.That(metaraces, Contains.Item(RaceConstants.Metaraces.Weretiger));
             Assert.That(metaraces, Contains.Item(RaceConstants.Metaraces.Werewolf));
             Assert.That(metaraces.Count(), Is.EqualTo(8));
+        }
+
+        [Test]
+        public void AllMetaraces()
+        {
+            var metaraces = RaceConstants.Metaraces.GetAllMetaraces();
+
+            Assert.That(metaraces, Contains.Item(RaceConstants.Metaraces.HalfCelestial));
+            Assert.That(metaraces, Contains.Item(RaceConstants.Metaraces.HalfDragon));
+            Assert.That(metaraces, Contains.Item(RaceConstants.Metaraces.HalfFiend));
+            Assert.That(metaraces, Contains.Item(RaceConstants.Metaraces.Werebear));
+            Assert.That(metaraces, Contains.Item(RaceConstants.Metaraces.Wereboar));
+            Assert.That(metaraces, Contains.Item(RaceConstants.Metaraces.Wererat));
+            Assert.That(metaraces, Contains.Item(RaceConstants.Metaraces.Weretiger));
+            Assert.That(metaraces, Contains.Item(RaceConstants.Metaraces.Werewolf));
+            Assert.That(metaraces, Contains.Item(RaceConstants.Metaraces.None));
+            Assert.That(metaraces.Count(), Is.EqualTo(9));
         }
     }
 }

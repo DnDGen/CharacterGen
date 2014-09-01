@@ -39,7 +39,7 @@ namespace NPCGen.Tests.Integration.Stress.Abilities
             var characterClass = GetNewCharacterClass(alignment);
             var race = GetNewRace(alignment, characterClass);
             var stats = StatsGenerator.GenerateWith(StatsRandomizer, characterClass, race);
-            var skills = SkillsGenerator.GenerateWith(characterClass, stats);
+            var skills = SkillsGenerator.GenerateWith(characterClass, race, stats);
             var baseAttack = CombatGenerator.GenerateBaseAttackWith(characterClass);
 
             var feats = FeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
@@ -48,10 +48,19 @@ namespace NPCGen.Tests.Integration.Stress.Abilities
             if (characterClass.ClassName == CharacterClassConstants.Fighter)
                 minimumFeats += characterClass.Level / 2 + 1;
 
-            Assert.That(feats.Count(), Is.AtLeast(minimumFeats));
+            var count = feats.Count();
+            Assert.That(count, Is.AtLeast(minimumFeats));
+            Assert.That(feats.Distinct().Count(), Is.EqualTo(count));
 
             foreach (var feat in feats)
-                Assert.That(allFeats, Contains.Item(feat));
+            {
+                Assert.That(allFeats, Contains.Item(feat.Name));
+                Assert.That(feat.SpecificApplication, Is.Not.Null);
+            }
+
+            var specifics = feats.Where(f => feats.Count(c => c.Name == f.Name) > 1);
+            foreach (var feat in specifics)
+                Assert.That(feat.SpecificApplication, Is.Not.Empty, feat.Name);
         }
     }
 }

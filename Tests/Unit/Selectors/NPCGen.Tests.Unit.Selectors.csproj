@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CollectionsSelectorTests.cs" />
+    <Compile Include="Objects\FeatSelectionConstantsTests.cs" />
     <Compile Include="Objects\FeatSelectionTests.cs" />
     <Compile Include="LanguageCollectionsSelectorTests.cs" />
     <Compile Include="AdjustmentsSelectorTests.cs" />

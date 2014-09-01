@@ -12,5 +12,18 @@ namespace NPCGen.Common.Abilities.Feats
             Name = String.Empty;
             SpecificApplication = String.Empty;
         }
+        public override Boolean Equals(Object obj)
+        {
+            if (!(obj is Feat))
+                return false;
+
+            var otherFeat = obj as Feat;
+            return Name == otherFeat.Name && SpecificApplication == otherFeat.SpecificApplication;
+        }
+
+        public override Int32 GetHashCode()
+        {
+            return Name.GetHashCode() + SpecificApplication.GetHashCode();
+        }
     }
 }

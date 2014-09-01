@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using D20Dice;
 using Moq;
+using NPCGen.Common.Abilities.Feats;
 using NPCGen.Common.Abilities.Skills;
 using NPCGen.Common.Abilities.Stats;
 using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Combats;
+using NPCGen.Common.Items;
 using NPCGen.Common.Races;
 using NPCGen.Generators.Abilities;
 using NPCGen.Generators.Interfaces.Abilities;
@@ -46,8 +48,10 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             skills = new Dictionary<String, Skill>();
             featSelections = new List<FeatSelection>();
             baseAttack = new BaseAttack();
+            stats[StatConstants.Intelligence] = new Stat();
 
             mockFeatsSelector.Setup(s => s.SelectAll()).Returns(featSelections);
+            mockDice.Setup(d => d.Roll(1).d(It.IsAny<Int32>())).Returns(1);
         }
 
         [Test]
@@ -216,19 +220,39 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             AddFeatSelections(8);
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
-            for (var i = 0; i < numberOfFeats; i++)
-                Assert.That(feats, Contains.Item(featSelections[i].FeatName));
+            var featNames = feats.Select(f => f.Name);
 
-            Assert.That(feats.Count(), Is.EqualTo(numberOfFeats));
+            for (var i = 0; i < numberOfFeats; i++)
+                Assert.That(featNames, Contains.Item(featSelections[i].FeatName));
+
+            Assert.That(featNames.Count(), Is.EqualTo(numberOfFeats));
         }
 
         private void AddFeatSelections(Int32 quantity)
         {
-            for (var i = quantity; i > 0; i--)
+            for (var i = 0; i < quantity; i++)
             {
-                var name = String.Format("feat {0}", i);
+                var name = String.Format("feat {0}", i + 1);
                 featSelections.Add(new FeatSelection { FeatName = name });
             }
+        }
+
+        [Test]
+        public void DoNotGetAdditionalFeatIfNoneAvailable()
+        {
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            Assert.That(feats, Is.Empty);
+        }
+
+        [Test]
+        public void DoNotGetMoreAdditionalFeatsIfNoneAvailable()
+        {
+            characterClass.Level = 1;
+            AddFeatSelections(1);
+            featSelections[0].RequiredBaseAttack = 9266;
+
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            Assert.That(feats, Is.Empty);
         }
 
         [Test]
@@ -320,18 +344,67 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             characterClass.ClassName = CharacterClassConstants.Fighter;
             characterClass.Level = level;
             AddFeatSelections(20);
-            for (var i = 0; i < 12; i++)
-                featSelections[i].IsFighterFeat = true;
+            foreach (var selection in featSelections)
+                selection.IsFighterFeat = true;
+
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            var featNames = feats.Select(f => f.Name);
+            var additionalFeats = level / 3 + 1;
+            var totalFeats = numberOfBonusFeats + additionalFeats;
+
+            for (var i = 0; i < totalFeats; i++)
+                Assert.That(featNames, Contains.Item(featSelections[i].FeatName));
+
+            Assert.That(featNames.Count(), Is.EqualTo(totalFeats));
+        }
+
+        [Test]
+        public void DoNotGetNonFighterFeats()
+        {
+            characterClass.ClassName = CharacterClassConstants.Fighter;
+            characterClass.Level = 1;
+            AddFeatSelections(3);
+            featSelections[2].IsFighterFeat = true;
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
             var featNames = feats.Select(f => f.Name);
 
-            for (var i = 0; i < numberOfBonusFeats; i++)
-                Assert.That(featNames, Contains.Item(featSelections[i].FeatName));
+            Assert.That(featNames, Contains.Item(featSelections[0].FeatName));
+            Assert.That(featNames, Contains.Item(featSelections[2].FeatName));
+            Assert.That(featNames.Count(), Is.EqualTo(2));
+        }
 
-            var fighterFeats = featSelections.Where(f => f.IsFighterFeat);
-            for (var i = numberOfBonusFeats; i < fighterFeats.Count(); i++)
-                Assert.That(featNames, Is.Not.Contains(featSelections[i].FeatName));
+        [Test]
+        public void DoNotGetFighterFeatsIfNoneAvailable()
+        {
+            characterClass.ClassName = CharacterClassConstants.Fighter;
+            characterClass.Level = 1;
+            AddFeatSelections(1);
+            featSelections[0].IsFighterFeat = true;
+
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            var featNames = feats.Select(f => f.Name);
+
+            Assert.That(featNames, Contains.Item(featSelections[0].FeatName));
+            Assert.That(featNames.Count(), Is.EqualTo(1));
+        }
+
+        [Test]
+        public void DoNotGetMoreFighterFeatsIfNoneAvailable()
+        {
+            characterClass.ClassName = CharacterClassConstants.Fighter;
+            characterClass.Level = 2;
+            AddFeatSelections(3);
+            featSelections[1].RequiredBaseAttack = 9266;
+            featSelections[1].IsFighterFeat = true;
+            featSelections[2].IsFighterFeat = true;
+
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            var featNames = feats.Select(f => f.Name);
+
+            Assert.That(featNames, Contains.Item(featSelections[0].FeatName));
+            Assert.That(featNames, Contains.Item(featSelections[2].FeatName));
+            Assert.That(featNames.Count(), Is.EqualTo(2));
         }
 
         [Test]
@@ -362,18 +435,15 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             characterClass.ClassName = CharacterClassConstants.Fighter;
             characterClass.Level = 1;
             AddFeatSelections(3);
-            featSelections[0].IsFighterFeat = true;
             featSelections[1].IsFighterFeat = true;
-            featSelections[1].RequiredFeats.Add(featSelections[0].FeatName);
-            featSelections[1].RequiredFeats.Add("other feat");
-
-            mockDice.Setup(d => d.Roll(1).d(3)).Returns(3);
+            featSelections[1].RequiredFeats = new[] { "other feat" };
+            featSelections[2].IsFighterFeat = true;
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
             var featNames = feats.Select(f => f.Name);
 
+            Assert.That(featNames, Contains.Item(featSelections[0].FeatName));
             Assert.That(featNames, Contains.Item(featSelections[2].FeatName));
-            Assert.That(featNames, Contains.Item(featSelections[1].FeatName));
             Assert.That(featNames.Count(), Is.EqualTo(2));
         }
 
@@ -384,9 +454,9 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             characterClass.Level = 1;
             AddFeatSelections(3);
             featSelections[1].IsFighterFeat = true;
-            featSelections[1].RequiredFeats.Add("other feat");
+            featSelections[1].RequiredFeats = new[] { "other feat" };
 
-            mockDice.Setup(d => d.Roll(1).d(3)).Returns(3);
+            mockDice.Setup(d => d.Roll(1).d(2)).Returns(2);
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
             var featNames = feats.Select(f => f.Name);
@@ -400,7 +470,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         {
             characterClass.Level = 3;
             AddFeatSelections(3);
-            featSelections[1].RequiredFeats.Add(featSelections[0].FeatName);
+            featSelections[1].RequiredFeats = new[] { featSelections[0].FeatName };
 
             mockDice.Setup(d => d.Roll(1).d(3)).Returns(1);
             mockDice.Setup(d => d.Roll(1).d(2)).Returns(1);
@@ -510,63 +580,221 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         }
 
         [Test]
-        public void FeatsWithSpecificApplicationsOfSchoolsOfMagicAreFilled()
+        public void FeatsWithoutSpecificApplicationsDoNotFill()
         {
-            Assert.Fail();
+            AddFeatSelections(1);
+
+            var schools = new[] { "school 1" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom("FeatSpecificApplications", "specific application")).Returns(schools);
+
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            var onlyFeat = feats.Single();
+
+            mockCollectionsSelector.Verify(s => s.SelectFrom("FeatSpecificApplications", It.IsAny<String>()), Times.Never);
+            Assert.That(onlyFeat.Name, Is.EqualTo(featSelections[0].FeatName));
+            Assert.That(onlyFeat.SpecificApplication, Is.Empty);
         }
 
         [Test]
-        public void FeatsWithSpecificApplicationsOfSkillsAreFilled()
+        public void FeatsWithSpecificApplicationsAreFilled()
         {
-            Assert.Fail();
+            AddFeatSelections(1);
+            featSelections[0].SpecificApplicationType = "specific application";
+
+            var schools = new[] { "school 1" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom("FeatSpecificApplications", "specific application")).Returns(schools);
+
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            var onlyFeat = feats.Single();
+
+            Assert.That(onlyFeat.Name, Is.EqualTo(featSelections[0].FeatName));
+            Assert.That(onlyFeat.SpecificApplication, Is.EqualTo("school 1"));
         }
 
         [Test]
-        public void SpellMasteryIsRepeatable()
+        public void FeatsWithSpecificApplicationsAreFilledRandomly()
         {
-            Assert.Fail();
+            AddFeatSelections(1);
+            featSelections[0].SpecificApplicationType = "specific application";
+
+            var schools = new[] { "school 1", "school 2" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom("FeatSpecificApplications", "specific application")).Returns(schools);
+
+            mockDice.Setup(d => d.Roll(1).d(2)).Returns(2);
+
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            var onlyFeat = feats.Single();
+            Assert.That(onlyFeat.Name, Is.EqualTo(featSelections[0].FeatName));
+            Assert.That(onlyFeat.SpecificApplication, Is.EqualTo("school 2"));
         }
 
         [Test]
-        public void FeatsWithSpecificApplicationsOfWeaponProficienciesAreFilled()
+        public void FeatsWithSpecificApplicationsCanBeFilledMoreThanOnce()
         {
-            Assert.Fail();
+            characterClass.Level = 3;
+            AddFeatSelections(1);
+            featSelections[0].SpecificApplicationType = "specific application";
+
+            var schools = new[] { "school 1", "school 2" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom("FeatSpecificApplications", "specific application")).Returns(schools);
+
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            var firstFeat = feats.First();
+            var lastFeat = feats.Last();
+
+            Assert.That(firstFeat.Name, Is.EqualTo(featSelections[0].FeatName));
+            Assert.That(firstFeat.SpecificApplication, Is.EqualTo("school 1"));
+            Assert.That(lastFeat.Name, Is.EqualTo(featSelections[0].FeatName));
+            Assert.That(lastFeat.SpecificApplication, Is.EqualTo("school 2"));
+            Assert.That(feats.Count(), Is.EqualTo(2));
         }
 
         [Test]
-        public void FeatsWithSpecificApplicationsOfWeaponsAreFilled()
+        public void SpellMasterySpecificApplicationIsNumberOfSpellsLearned()
         {
-            Assert.Fail();
+            characterClass.Level = 1;
+            AddFeatSelections(1);
+            featSelections[0].FeatName = FeatConstants.SpellMastery;
+            stats[StatConstants.Intelligence].Value = 14;
+
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            var firstFeat = feats.First();
+            var lastFeat = feats.Last();
+
+            Assert.That(firstFeat.Name, Is.EqualTo(FeatConstants.SpellMastery));
+            Assert.That(firstFeat.SpecificApplication, Is.EqualTo("2"));
+            Assert.That(feats.Count(), Is.EqualTo(1));
         }
 
         [Test]
-        public void FeatsWithSpecificApplicationsOfWeaponsIncludeUnarmedStrike()
+        public void SpellMasteryCanIncreaseSpellsKnown()
         {
-            Assert.Fail();
+            characterClass.Level = 3;
+            AddFeatSelections(1);
+            featSelections[0].FeatName = FeatConstants.SpellMastery;
+            stats[StatConstants.Intelligence].Value = 14;
+
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            var firstFeat = feats.First();
+            var lastFeat = feats.Last();
+
+            Assert.That(firstFeat.Name, Is.EqualTo(FeatConstants.SpellMastery));
+            Assert.That(firstFeat.SpecificApplication, Is.EqualTo("4"));
+            Assert.That(feats.Count(), Is.EqualTo(1));
         }
 
         [Test]
-        public void FeatsWithSpecificApplicationsOfWeaponsIncludeGrapple()
+        public void SpellcastersCanSelectRayForSpecificApplications()
         {
-            Assert.Fail();
+            AddFeatSelections(1);
+            featSelections[0].SpecificApplicationType = FeatSelectionConstants.WeaponsWithUnarmedAndGrappleAndRay;
+
+            var weapons = new[] { WeaponProficiencyConstants.Ray, "weapon" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom("FeatSpecificApplications", FeatSelectionConstants.WeaponsWithUnarmedAndGrappleAndRay))
+                .Returns(weapons);
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom("ClassNameGroups", "Spellcasters")).Returns(new[] { characterClass.ClassName });
+
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            var onlyFeat = feats.Single();
+
+            Assert.That(onlyFeat.Name, Is.EqualTo(featSelections[0].FeatName));
+            Assert.That(onlyFeat.SpecificApplication, Is.EqualTo("ray"));
         }
 
         [Test]
-        public void SpellcastersCanSelectRayAsAWeaponFocus()
+        public void NonSpellcastersCannotSelectRayForSpecificApplications()
         {
-            Assert.Fail();
+            AddFeatSelections(1);
+            featSelections[0].SpecificApplicationType = FeatSelectionConstants.WeaponsWithUnarmedAndGrappleAndRay;
+
+            var weapons = new[] { WeaponProficiencyConstants.Ray, "weapon" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom("FeatSpecificApplications", FeatSelectionConstants.WeaponsWithUnarmedAndGrappleAndRay))
+                .Returns(weapons);
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom("ClassNameGroups", "Spellcasters")).Returns(new[] { "other class name" });
+
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            var onlyFeat = feats.Single();
+
+            Assert.That(onlyFeat.Name, Is.EqualTo(featSelections[0].FeatName));
+            Assert.That(onlyFeat.SpecificApplication, Is.EqualTo("weapon"));
         }
 
         [Test]
-        public void FeatsWithRequirementsThatHaveSpecificApplicationsUseSameSpecificApplication()
+        public void FeatsWithoutSpecificApplicationsButWithRequirementsThatHaveSpecificApplicationsDoNotUseSameSpecificApplication()
         {
-            Assert.Fail();
+            characterClass.Level = 3;
+            AddFeatSelections(2);
+            featSelections[0].SpecificApplicationType = "specific application";
+            featSelections[1].RequiredFeats = new[] { featSelections[0].FeatName };
+
+            var schools = new[] { "school 1" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom("FeatSpecificApplications", "specific application")).Returns(schools);
+
+            mockDice.SetupSequence(d => d.Roll(1).d(2)).Returns(2);
+
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            var firstFeat = feats.First();
+            var lastFeat = feats.Last();
+
+            Assert.That(firstFeat.Name, Is.EqualTo(featSelections[0].FeatName));
+            Assert.That(firstFeat.SpecificApplication, Is.EqualTo("school 1"));
+            Assert.That(lastFeat.Name, Is.EqualTo(featSelections[1].FeatName));
+            Assert.That(lastFeat.SpecificApplication, Is.Empty);
+        }
+
+        [Test]
+        public void FeatsWithSpecificApplicationsAndRequirementsThatHaveSpecificApplicationsUseSameSpecificApplication()
+        {
+            characterClass.Level = 3;
+            AddFeatSelections(2);
+            featSelections[0].SpecificApplicationType = "specific application";
+            featSelections[1].RequiredFeats = new[] { featSelections[0].FeatName };
+            featSelections[1].SpecificApplicationType = "specific application";
+
+            var schools = new[] { "school 1", "school 2", "school 3" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom("FeatSpecificApplications", "specific application")).Returns(schools);
+
+            mockDice.SetupSequence(d => d.Roll(1).d(2)).Returns(2);
+            mockDice.SetupSequence(d => d.Roll(1).d(3)).Returns(3).Returns(1);
+
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            var firstFeat = feats.First();
+            var lastFeat = feats.Last();
+
+            Assert.That(firstFeat.Name, Is.EqualTo(featSelections[0].FeatName));
+            Assert.That(firstFeat.SpecificApplication, Is.EqualTo("school 3"));
+            Assert.That(lastFeat.Name, Is.EqualTo(featSelections[1].FeatName));
+            Assert.That(lastFeat.SpecificApplication, Is.EqualTo("school 3"));
         }
 
         [Test]
         public void IfFeatRequirementHasMultipleSpecificApplications_PickRandomlyAmongThem()
         {
-            Assert.Fail();
+            characterClass.Level = 6;
+            AddFeatSelections(2);
+            featSelections[0].SpecificApplicationType = "specific application";
+            featSelections[1].RequiredFeats = new[] { featSelections[0].FeatName };
+            featSelections[1].SpecificApplicationType = "specific application";
+
+            var schools = new[] { "school 1", "school 2", "school 3" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom("FeatSpecificApplications", "specific application")).Returns(schools);
+
+            mockDice.SetupSequence(d => d.Roll(1).d(2)).Returns(1).Returns(1).Returns(2).Returns(2);
+            mockDice.SetupSequence(d => d.Roll(1).d(3)).Returns(3).Returns(1);
+
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            var firstFeat = feats.First();
+            var secondFeat = feats.ElementAt(1);
+            var lastFeat = feats.Last();
+
+            Assert.That(firstFeat.Name, Is.EqualTo(featSelections[0].FeatName));
+            Assert.That(firstFeat.SpecificApplication, Is.EqualTo("school 3"));
+            Assert.That(secondFeat.Name, Is.EqualTo(featSelections[0].FeatName));
+            Assert.That(secondFeat.SpecificApplication, Is.EqualTo("school 1"));
+            Assert.That(lastFeat.Name, Is.EqualTo(featSelections[1].FeatName));
+            Assert.That(lastFeat.SpecificApplication, Is.EqualTo("school 1"));
         }
     }
 }
