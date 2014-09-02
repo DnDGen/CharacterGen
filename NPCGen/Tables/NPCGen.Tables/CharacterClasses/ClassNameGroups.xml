@@ -3,22 +3,41 @@
 <items>
     <object>
         <name>Healers</name>
-        <item>0</item>
+        <item>Cleric</item>
+        <item>Druid</item>
+        <item>Paladin</item>
+        <item>Ranger</item>
+        <item>Bard</item>
     </object>
     <object>
         <name>Mages</name>
-        <item>2</item>
+        <item>Bard</item>
+        <item>Sorcerer</item>
+        <item>Wizard</item>
+        <item>Ranger</item>
     </object>
     <object>
         <name>Spellcasters</name>
-        <item>1</item>
+        <item>Bard</item>
+        <item>Cleric</item>
+        <item>Druid</item>
+        <item>Paladin</item>
+        <item>Ranger</item>
+        <item>Sorcerer</item>
+        <item>Wizard</item>
     </object>
     <object>
         <name>Stealth</name>
-        <item>0</item>
+        <item>Bard</item>
+        <item>Rogue</item>
+        <item>Ranger</item>
     </object>
     <object>
         <name>Warriors</name>
-        <item>0</item>
+        <item>Fighter</item>
+        <item>Monk</item>
+        <item>Paladin</item>
+        <item>Ranger</item>
+        <item>Barbarian</item>
     </object>
 </items>

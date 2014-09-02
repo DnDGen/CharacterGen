@@ -171,6 +171,12 @@ namespace NPCGen.Tests.Unit.Generators.Combats
         }
 
         [Test]
+        public void GetRacialBaseAttackAdjustment()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
         public void ReturnCombatWithBaseAttack()
         {
             var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass);

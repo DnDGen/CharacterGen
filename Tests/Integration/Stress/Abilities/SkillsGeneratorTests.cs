@@ -22,11 +22,12 @@ namespace NPCGen.Tests.Integration.Stress.Abilities
 
         private IEnumerable<String> untrainedSkills;
         private IEnumerable<String> allSkills;
+        private IEnumerable<String> trainedSkills;
 
         [SetUp]
         public void Setup()
         {
-            var trainedSkills = new[]
+            trainedSkills = new[]
             {
                 SkillConstants.DecipherScript,
                 SkillConstants.DisableDevice,
@@ -64,14 +65,21 @@ namespace NPCGen.Tests.Integration.Stress.Abilities
             foreach (var skill in untrainedSkills)
                 Assert.That(skills.Keys, Contains.Item(skill));
 
+            foreach (var skill in trainedSkills)
+                if (skills.Keys.Contains(skill))
+                    Assert.That(skills[skill].ClassSkill, Is.True);
+
             foreach (var skill in skills.Keys)
                 Assert.That(allSkills, Contains.Item(skill));
 
             foreach (var skill in skills.Values)
             {
-                Assert.That(stats.Values, Contains.Item(skill.BaseStat));
                 Assert.That(skill.BaseStat, Is.Not.Null);
-                Assert.That(skill.Bonus, Is.EqualTo(0));
+                Assert.That(stats.Values, Contains.Item(skill.BaseStat));
+                Assert.That(skill.Bonus, Is.Not.Negative);
+
+                //HACK: Only bonuses at this point are from skill synergy
+                Assert.That(skill.Bonus % 2, Is.EqualTo(0));
             }
 
             var sum = skills.Values.Sum(s => s.Ranks);

@@ -117,5 +117,10 @@ namespace NPCGen.Common.Races
                 return GetMetaraces().Union(new[] { None });
             }
         }
+
+        public static IEnumerable<String> GetAllRaces()
+        {
+            return BaseRaces.GetBaseRaces().Union(Metaraces.GetAllMetaraces());
+        }
     }
 }

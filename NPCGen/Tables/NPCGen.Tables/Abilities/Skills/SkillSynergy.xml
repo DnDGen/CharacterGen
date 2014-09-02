@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+    <object>
+        <name>Appraise</name>
+    </object>
+    <object>
+        <name>Balance</name>
+    </object>
+    <object>
+        <name>Bluff</name>
+        <item>Diplomacy</item>
+        <item>Intimidate</item>
+        <item>Sleight of Hand</item>
+    </object>
+    <object>
+        <name>Climb</name>
+    </object>
+    <object>
+        <name>Concentration</name>
+    </object>
+    <object>
+        <name>Decipher Script</name>
+    </object>
+    <object>
+        <name>Diplomacy</name>
+    </object>
+    <object>
+        <name>Disable Device</name>
+    </object>
+    <object>
+        <name>Disguise</name>
+    </object>
+    <object>
+        <name>Escape Artist</name>
+    </object>
+    <object>
+        <name>Forgery</name>
+    </object>
+    <object>
+        <name>Gather Information</name>
+    </object>
+    <object>
+        <name>Handle Animal</name>
+        <item>Ride</item>
+    </object>
+    <object>
+        <name>Heal</name>
+    </object>
+    <object>
+        <name>Hide</name>
+    </object>
+    <object>
+        <name>Intimidate</name>
+    </object>
+    <object>
+        <name>Jump</name>
+        <item>Tumble</item>
+    </object>
+    <object>
+        <name>Knowledge (Arcana)</name>
+        <item>Spellcraft</item>
+    </object>
+    <object>
+        <name>Knowledge (Architecture and Engineering)</name>
+    </object>
+    <object>
+        <name>Knowledge (Dungeoneering)</name>
+    </object>
+    <object>
+        <name>Knowledge (Geography)</name>
+    </object>
+    <object>
+        <name>Knowledge (History)</name>
+    </object>
+    <object>
+        <name>Knowledge (Local)</name>
+        <item>Gather Information</item>
+    </object>
+    <object>
+        <name>Knowledge (Nature)</name>
+    </object>
+    <object>
+        <name>Knowledge (Nobility and Royalty)</name>
+        <item>Diplomacy</item>
+    </object>
+    <object>
+        <name>Knowledge (Religion)</name>
+    </object>
+    <object>
+        <name>Knowledge (The Planes)</name>
+    </object>
+    <object>
+        <name>Listen</name>
+    </object>
+    <object>
+        <name>Move Silently</name>
+    </object>
+    <object>
+        <name>Open Lock</name>
+    </object>
+    <object>
+        <name>Perform</name>
+    </object>
+    <object>
+        <name>Ride</name>
+    </object>
+    <object>
+        <name>Search</name>
+    </object>
+    <object>
+        <name>Sense Motive</name>
+        <item>Diplomacy</item>
+    </object>
+    <object>
+        <name>Sleight of Hand</name>
+    </object>
+    <object>
+        <name>Spellcraft</name>
+    </object>
+    <object>
+        <name>Spot</name>
+    </object>
+    <object>
+        <name>Survival</name>
+        <item>Knowledge (Nature)</item>
+    </object>
+    <object>
+        <name>Swim</name>
+    </object>
+    <object>
+        <name>Tumble</name>
+        <item>Balance</item>
+        <item>Jump</item>
+    </object>
+    <object>
+        <name>Use Magic Device</name>
+    </object>
+    <object>
+        <name>Use Rope</name>
+    </object>
+</items>
