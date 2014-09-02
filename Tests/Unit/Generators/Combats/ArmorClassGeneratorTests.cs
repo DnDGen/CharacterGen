@@ -5,6 +5,7 @@ using EquipmentGen.Common.Items;
 using Moq;
 using NPCGen.Common.Abilities.Feats;
 using NPCGen.Common.Items;
+using NPCGen.Common.Races;
 using NPCGen.Generators.Combats;
 using NPCGen.Generators.Interfaces.Combats;
 using NPCGen.Selectors.Interfaces;
@@ -23,6 +24,7 @@ namespace NPCGen.Tests.Unit.Generators.Combats
         private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
         private Dictionary<String, Int32> armorBonuses;
         private Dictionary<String, Int32> featAdjustments;
+        private Race race;
 
         [SetUp]
         public void Setup()
@@ -35,6 +37,7 @@ namespace NPCGen.Tests.Unit.Generators.Combats
             armorBonuses = new Dictionary<String, Int32>();
             featAdjustments = new Dictionary<String, Int32>();
             adjustedDexterityBonus = 0;
+            race = new Race();
 
             armorBonuses[String.Empty] = 0;
             mockAdjustmentsSelector.Setup(s => s.SelectFrom("ArmorBonuses")).Returns(armorBonuses);
@@ -342,6 +345,22 @@ namespace NPCGen.Tests.Unit.Generators.Combats
             mockCollectionsSelector.Setup(s => s.SelectFrom("ArmorClassModifiers", "Dodge")).Returns(new[] { "feat 1", "feat 2", "other feat" });
 
             AssertArmorClass(10, 12, 12);
+        }
+
+        [Test]
+        public void LargeCreaturesAreMinusOneOnArmorClass()
+        {
+            race.BaseRace = "base race";
+            mockCollectionsSelector.Setup(s => s.SelectFrom("BaseRaceGroups", "Large")).Returns(new[] { "other base race", "base race" });
+            AssertArmorClass(9, 9, 9);
+        }
+
+        [Test]
+        public void SmallCreaturesArePlusOneOnArmorClass()
+        {
+            race.BaseRace = "base race";
+            mockCollectionsSelector.Setup(s => s.SelectFrom("BaseRaceGroups", "Small")).Returns(new[] { "other base race", "base race" });
+            AssertArmorClass(11, 11, 11);
         }
 
         [Test]

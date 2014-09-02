@@ -51,6 +51,9 @@ namespace NPCGen.Tests.Unit.Common.Races
         [TestCase(RaceConstants.Metaraces.Weretiger, "Weretiger")]
         [TestCase(RaceConstants.Metaraces.Werewolf, "Werewolf")]
         [TestCase(RaceConstants.Metaraces.None, "")]
+        [TestCase(RaceConstants.Sizes.Large, "Large")]
+        [TestCase(RaceConstants.Sizes.Medium, "Medium")]
+        [TestCase(RaceConstants.Sizes.Small, "Small")]
         public void Constant(String constant, String value)
         {
             Assert.That(constant, Is.EqualTo(value));
@@ -129,6 +132,17 @@ namespace NPCGen.Tests.Unit.Common.Races
             Assert.That(metaraces, Contains.Item(RaceConstants.Metaraces.Werewolf));
             Assert.That(metaraces, Contains.Item(RaceConstants.Metaraces.None));
             Assert.That(metaraces.Count(), Is.EqualTo(9));
+        }
+
+        [Test]
+        public void Sizes()
+        {
+            var sizes = RaceConstants.Sizes.GetSizes();
+
+            Assert.That(sizes, Contains.Item(RaceConstants.Sizes.Large));
+            Assert.That(sizes, Contains.Item(RaceConstants.Sizes.Medium));
+            Assert.That(sizes, Contains.Item(RaceConstants.Sizes.Small));
+            Assert.That(sizes.Count(), Is.EqualTo(3));
         }
     }
 }

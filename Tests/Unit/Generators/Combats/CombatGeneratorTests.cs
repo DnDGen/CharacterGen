@@ -177,6 +177,18 @@ namespace NPCGen.Tests.Unit.Generators.Combats
         }
 
         [Test]
+        public void LargeCreaturesAreMinusOneOnBaseAttack()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void SmallCreaturesArePlusOneOnBaseAttack()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
         public void ReturnCombatWithBaseAttack()
         {
             var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass);

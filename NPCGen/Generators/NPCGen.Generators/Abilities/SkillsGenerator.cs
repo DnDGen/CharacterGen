@@ -31,6 +31,16 @@ namespace NPCGen.Generators.Abilities
             var classSkills = collectionsSelector.SelectFrom("ClassSkills", characterClass.ClassName);
             var crossClassSkills = collectionsSelector.SelectFrom("CrossClassSkills", characterClass.ClassName);
 
+            var skills = InitializeSkills(stats, classSkills, crossClassSkills);
+            skills = AddRanks(characterClass, race, stats, classSkills, crossClassSkills, skills);
+            skills = ApplySkillSynergies(skills);
+            skills = ApplyRacialAdjustments(skills, race);
+
+            return skills;
+        }
+
+        private Dictionary<String, Skill> InitializeSkills(Dictionary<String, Stat> stats, IEnumerable<String> classSkills, IEnumerable<String> crossClassSkills)
+        {
             var skills = new Dictionary<String, Skill>();
 
             foreach (var skill in classSkills)
@@ -46,6 +56,11 @@ namespace NPCGen.Generators.Abilities
                 skill.Value.BaseStat = stats[selection.BaseStatName];
             }
 
+            return skills;
+        }
+
+        private Dictionary<String, Skill> AddRanks(CharacterClass characterClass, Race race, Dictionary<String, Stat> stats, IEnumerable<String> classSkills, IEnumerable<String> crossClassSkills, Dictionary<String, Skill> skills)
+        {
             var points = GetTotalSkillPoints(characterClass, stats[StatConstants.Intelligence], race);
             var rankCap = characterClass.Level + 3;
 
@@ -59,16 +74,6 @@ namespace NPCGen.Generators.Abilities
                 points--;
             }
 
-            var skillsWarrantingSynergy = skills.Where(s => s.Value.EffectiveRanks >= 5);
-            foreach (var skill in skillsWarrantingSynergy)
-            {
-                var synergySkills = collectionsSelector.SelectFrom("SkillSynergy", skill.Key);
-
-                foreach (var synergySkill in synergySkills)
-                    if (skills.ContainsKey(synergySkill))
-                        skills[synergySkill].Bonus += 2;
-            }
-
             return skills;
         }
 
@@ -76,7 +81,11 @@ namespace NPCGen.Generators.Abilities
         {
             var pointsTable = adjustmentsSelector.SelectFrom("SkillPointsForClasses");
             var perLevel = pointsTable[characterClass.ClassName] + intelligence.Bonus;
-            var multiplier = characterClass.Level + 3;
+            var multiplier = characterClass.Level;
+
+            var monsters = collectionsSelector.SelectFrom("BaseRaceGroups", "Monsters");
+            if (!monsters.Contains(race.BaseRace))
+                multiplier += 3;
 
             if (race.BaseRace == RaceConstants.BaseRaces.Human)
                 perLevel++;
@@ -96,6 +105,33 @@ namespace NPCGen.Generators.Abilities
                 return crossClassSkills.Where(s => skills[s].Ranks < rankCap);
 
             return classSkills.Where(s => skills[s].Ranks < rankCap);
+        }
+
+        private Dictionary<String, Skill> ApplySkillSynergies(Dictionary<String, Skill> skills)
+        {
+            var skillsWarrantingSynergy = skills.Where(s => s.Value.EffectiveRanks >= 5);
+            foreach (var skill in skillsWarrantingSynergy)
+            {
+                var synergySkills = collectionsSelector.SelectFrom("SkillSynergy", skill.Key);
+
+                foreach (var synergySkill in synergySkills)
+                    if (skills.ContainsKey(synergySkill))
+                        skills[synergySkill].Bonus += 2;
+            }
+
+            return skills;
+        }
+
+        private Dictionary<String, Skill> ApplyRacialAdjustments(Dictionary<String, Skill> skills, Race race)
+        {
+            var tableName = String.Format("{0}SkillAdjustments", race.BaseRace);
+            var adjustments = adjustmentsSelector.SelectFrom(tableName);
+
+            foreach (var adjustment in adjustments)
+                if (skills.ContainsKey(adjustment.Key))
+                    skills[adjustment.Key].Bonus = adjustment.Value;
+
+            return skills;
         }
     }
 }

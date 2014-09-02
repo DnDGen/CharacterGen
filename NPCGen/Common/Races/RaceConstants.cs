@@ -6,6 +6,18 @@ namespace NPCGen.Common.Races
 {
     public class RaceConstants
     {
+        public static class Sizes
+        {
+            public const String Large = "Large";
+            public const String Medium = "Medium";
+            public const String Small = "Small";
+
+            public static IEnumerable<String> GetSizes()
+            {
+                return new[] { Large, Medium, Small };
+            }
+        }
+
         public static class BaseRaces
         {
             public const String Aasimar = "Aasimar";

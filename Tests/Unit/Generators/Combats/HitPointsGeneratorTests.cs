@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using D20Dice;
 using Moq;
 using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Races;
 using NPCGen.Generators.Combats;
 using NPCGen.Generators.Interfaces.Combats;
+using NPCGen.Selectors.Interfaces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Unit.Generators.Combats
@@ -13,212 +15,125 @@ namespace NPCGen.Tests.Unit.Generators.Combats
     public class HitPointsGeneratorTests
     {
         private Mock<IDice> mockDice;
+        private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
+        private Mock<ICollectionsSelector> mockCollectionsSelector;
         private IHitPointsGenerator hitPointsGenerator;
 
         private CharacterClass characterClass;
         private Race race;
         private Int32 constitutionBonus;
+        private Dictionary<String, Int32> hitDice;
 
         [SetUp]
         public void Setup()
         {
             mockDice = new Mock<IDice>();
-            hitPointsGenerator = new HitPointsGenerator(mockDice.Object);
+            mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
+            mockCollectionsSelector = new Mock<ICollectionsSelector>();
+            hitPointsGenerator = new HitPointsGenerator(mockDice.Object, mockAdjustmentsSelector.Object, mockCollectionsSelector.Object);
 
             characterClass = new CharacterClass();
-            characterClass.ClassName = CharacterClassConstants.Barbarian;
+            characterClass.ClassName = "class name";
             race = new Race();
+            race.Metarace = "metarace";
             constitutionBonus = 0;
             mockDice.Setup(d => d.Roll(0).d8()).Returns(0);
+
+            hitDice = new Dictionary<String, Int32>();
+            hitDice[characterClass.ClassName] = 9266;
+            hitDice["other class name"] = 42;
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom("ClassHitDice")).Returns(hitDice);
         }
 
-        [TestCase(CharacterClassConstants.Fighter)]
-        [TestCase(CharacterClassConstants.Paladin)]
-        public void D10ForHitPoints(String className)
+        [Test]
+        public void GetHitDieFromAdjustments()
         {
             characterClass.Level = 1;
-            characterClass.ClassName = className;
-
             hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race);
-            mockDice.Verify(d => d.Roll(1).d10(), Times.Once);
-        }
-
-        [TestCase(CharacterClassConstants.Barbarian)]
-        public void D12ForHitPoints(String className)
-        {
-            characterClass.Level = 1;
-            characterClass.ClassName = className;
-
-            hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race);
-            mockDice.Verify(d => d.Roll(1).d12(), Times.Once);
-        }
-
-        [TestCase(CharacterClassConstants.Cleric)]
-        [TestCase(CharacterClassConstants.Druid)]
-        [TestCase(CharacterClassConstants.Monk)]
-        [TestCase(CharacterClassConstants.Ranger)]
-        public void D8ForHitPoints(String className)
-        {
-            characterClass.Level = 1;
-            characterClass.ClassName = className;
-            var mockPartialRoll = new Mock<IPartialRoll>();
-            mockDice.Setup(d => d.Roll(1)).Returns(mockPartialRoll.Object);
-
-            hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race);
-            mockDice.Verify(d => d.Roll(1), Times.Once);
-            mockPartialRoll.Verify(r => r.d8(), Times.Once);
-        }
-
-        [TestCase(CharacterClassConstants.Bard)]
-        [TestCase(CharacterClassConstants.Rogue)]
-        public void D6ForHitPoints(String className)
-        {
-            characterClass.Level = 1;
-            characterClass.ClassName = className;
-
-            hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race);
-            mockDice.Verify(d => d.Roll(1).d6(), Times.Once);
-        }
-
-        [TestCase(CharacterClassConstants.Sorcerer)]
-        [TestCase(CharacterClassConstants.Wizard)]
-        public void D4ForHitPoints(String className)
-        {
-            characterClass.Level = 1;
-            characterClass.ClassName = className;
-
-            hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race);
-            mockDice.Verify(d => d.Roll(1).d4(), Times.Once);
+            mockDice.Verify(d => d.Roll(1).d(9266), Times.Once);
         }
 
         [Test]
         public void RollHitPointsPerLevel()
         {
-            characterClass.Level = 9266;
-
+            characterClass.Level = 600;
             hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race);
-            mockDice.Verify(d => d.Roll(1).d12(), Times.Exactly(9266));
+            mockDice.Verify(d => d.Roll(1).d(9266), Times.Exactly(600));
         }
 
         [Test]
         public void ConstitutionBonusAppliedPerLevel()
         {
             characterClass.Level = 2;
-            mockDice.Setup(d => d.Roll(1).d12()).Returns(4600);
+            mockDice.Setup(d => d.Roll(1).d(9266)).Returns(45100);
 
-            var hitPoints = hitPointsGenerator.GenerateWith(characterClass, 33, race);
-            Assert.That(hitPoints, Is.EqualTo(9266));
+            var hitPoints = hitPointsGenerator.GenerateWith(characterClass, 5, race);
+            Assert.That(hitPoints, Is.EqualTo(90210));
         }
 
         [Test]
         public void CannotGainFewerThan1HitPointPerLevel()
         {
-            characterClass.Level = 9266;
+            characterClass.Level = 90210;
             var hitPoints = hitPointsGenerator.GenerateWith(characterClass, Int32.MinValue, race);
-            Assert.That(hitPoints, Is.EqualTo(9266));
+            Assert.That(hitPoints, Is.EqualTo(90210));
         }
 
-        [TestCase(RaceConstants.BaseRaces.Bugbear, 3)]
-        [TestCase(RaceConstants.BaseRaces.Derro, 3)]
-        [TestCase(RaceConstants.BaseRaces.Doppelganger, 4)]
-        [TestCase(RaceConstants.BaseRaces.Gnoll, 2)]
-        [TestCase(RaceConstants.BaseRaces.Lizardfolk, 2)]
-        [TestCase(RaceConstants.BaseRaces.MindFlayer, 8)]
-        [TestCase(RaceConstants.BaseRaces.Minotaur, 6)]
-        [TestCase(RaceConstants.BaseRaces.Ogre, 4)]
-        [TestCase(RaceConstants.BaseRaces.OgreMage, 5)]
-        [TestCase(RaceConstants.BaseRaces.Troglodyte, 2)]
-        [TestCase(RaceConstants.BaseRaces.Aasimar, 0)]
-        [TestCase(RaceConstants.BaseRaces.DeepDwarf, 0)]
-        [TestCase(RaceConstants.BaseRaces.DeepHalfling, 0)]
-        [TestCase(RaceConstants.BaseRaces.Drow, 0)]
-        [TestCase(RaceConstants.BaseRaces.DuergarDwarf, 0)]
-        [TestCase(RaceConstants.BaseRaces.ForestGnome, 0)]
-        [TestCase(RaceConstants.BaseRaces.Goblin, 0)]
-        [TestCase(RaceConstants.BaseRaces.GrayElf, 0)]
-        [TestCase(RaceConstants.BaseRaces.HalfElf, 0)]
-        [TestCase(RaceConstants.BaseRaces.HalfOrc, 0)]
-        [TestCase(RaceConstants.BaseRaces.HighElf, 0)]
-        [TestCase(RaceConstants.BaseRaces.HillDwarf, 0)]
-        [TestCase(RaceConstants.BaseRaces.Hobgoblin, 0)]
-        [TestCase(RaceConstants.BaseRaces.Human, 0)]
-        [TestCase(RaceConstants.BaseRaces.Kobold, 0)]
-        [TestCase(RaceConstants.BaseRaces.LightfootHalfling, 0)]
-        [TestCase(RaceConstants.BaseRaces.MountainDwarf, 0)]
-        [TestCase(RaceConstants.BaseRaces.Orc, 0)]
-        [TestCase(RaceConstants.BaseRaces.RockGnome, 0)]
-        [TestCase(RaceConstants.BaseRaces.Svirfneblin, 0)]
-        [TestCase(RaceConstants.BaseRaces.TallfellowHalfling, 0)]
-        [TestCase(RaceConstants.BaseRaces.Tiefling, 0)]
-        [TestCase(RaceConstants.BaseRaces.WildElf, 0)]
-        [TestCase(RaceConstants.BaseRaces.WoodElf, 0)]
-        public void AdditionalHitDice(String baseRace, Int32 numberOfHitDice)
+        [Test]
+        public void NonMonsterDoNotGetadditionalHitDice()
         {
-            race.BaseRace = baseRace;
-            hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race);
-            mockDice.Verify(d => d.Roll(numberOfHitDice).d8(), Times.Once);
+            characterClass.Level = 2;
+            race.BaseRace = "different base race";
+            mockCollectionsSelector.Setup(s => s.SelectFrom("BaseRaceGroups", "Monsters")).Returns(new[] { "other base race", "base race" });
+            mockDice.Setup(d => d.Roll(1).d(9266)).Returns(7);
+
+            var monsterHitDice = new Dictionary<String, Int32>();
+            monsterHitDice["monster"] = 1234;
+            monsterHitDice["base race"] = 2345;
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom("MonsterHitDice")).Returns(monsterHitDice);
+
+            var hitPoints = hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race);
+            Assert.That(hitPoints, Is.EqualTo(14));
+            mockAdjustmentsSelector.Verify(s => s.SelectFrom("MonsterHitDice"), Times.Never);
         }
 
-        [TestCase(RaceConstants.BaseRaces.Bugbear, 3)]
-        [TestCase(RaceConstants.BaseRaces.Derro, 3)]
-        [TestCase(RaceConstants.BaseRaces.Doppelganger, 4)]
-        [TestCase(RaceConstants.BaseRaces.Gnoll, 2)]
-        [TestCase(RaceConstants.BaseRaces.Lizardfolk, 2)]
-        [TestCase(RaceConstants.BaseRaces.MindFlayer, 8)]
-        [TestCase(RaceConstants.BaseRaces.Minotaur, 6)]
-        [TestCase(RaceConstants.BaseRaces.Ogre, 4)]
-        [TestCase(RaceConstants.BaseRaces.OgreMage, 5)]
-        [TestCase(RaceConstants.BaseRaces.Troglodyte, 2)]
-        [TestCase(RaceConstants.BaseRaces.Aasimar, 0)]
-        [TestCase(RaceConstants.BaseRaces.DeepDwarf, 0)]
-        [TestCase(RaceConstants.BaseRaces.DeepHalfling, 0)]
-        [TestCase(RaceConstants.BaseRaces.Drow, 0)]
-        [TestCase(RaceConstants.BaseRaces.DuergarDwarf, 0)]
-        [TestCase(RaceConstants.BaseRaces.ForestGnome, 0)]
-        [TestCase(RaceConstants.BaseRaces.Goblin, 0)]
-        [TestCase(RaceConstants.BaseRaces.GrayElf, 0)]
-        [TestCase(RaceConstants.BaseRaces.HalfElf, 0)]
-        [TestCase(RaceConstants.BaseRaces.HalfOrc, 0)]
-        [TestCase(RaceConstants.BaseRaces.HighElf, 0)]
-        [TestCase(RaceConstants.BaseRaces.HillDwarf, 0)]
-        [TestCase(RaceConstants.BaseRaces.Hobgoblin, 0)]
-        [TestCase(RaceConstants.BaseRaces.Human, 0)]
-        [TestCase(RaceConstants.BaseRaces.Kobold, 0)]
-        [TestCase(RaceConstants.BaseRaces.LightfootHalfling, 0)]
-        [TestCase(RaceConstants.BaseRaces.MountainDwarf, 0)]
-        [TestCase(RaceConstants.BaseRaces.Orc, 0)]
-        [TestCase(RaceConstants.BaseRaces.RockGnome, 0)]
-        [TestCase(RaceConstants.BaseRaces.Svirfneblin, 0)]
-        [TestCase(RaceConstants.BaseRaces.TallfellowHalfling, 0)]
-        [TestCase(RaceConstants.BaseRaces.Tiefling, 0)]
-        [TestCase(RaceConstants.BaseRaces.WildElf, 0)]
-        [TestCase(RaceConstants.BaseRaces.WoodElf, 0)]
-        public void HalfDragonIncreasesHitDieFromD8ToD10(String baseRace, Int32 numberOfHitDice)
+        [Test]
+        public void MonstersGetAdditionalHitDice()
         {
+            characterClass.Level = 2;
+            race.BaseRace = "base race";
+            mockCollectionsSelector.Setup(s => s.SelectFrom("BaseRaceGroups", "Monsters")).Returns(new[] { "other base race", "base race" });
+            mockDice.Setup(d => d.Roll(1).d(9266)).Returns(7);
+
+            var monsterHitDice = new Dictionary<String, Int32>();
+            monsterHitDice["monster"] = 1234;
+            monsterHitDice["base race"] = 2345;
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom("MonsterHitDice")).Returns(monsterHitDice);
+            mockDice.Setup(d => d.Roll(2345).d8()).Returns(5);
+
+            var hitPoints = hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race);
+            Assert.That(hitPoints, Is.EqualTo(19));
+        }
+
+        [Test]
+        public void HalfDragonIncreasesMonsterHitDie()
+        {
+            characterClass.Level = 2;
+            race.BaseRace = "base race";
             race.Metarace = RaceConstants.Metaraces.HalfDragon;
-            race.BaseRace = baseRace;
+            mockCollectionsSelector.Setup(s => s.SelectFrom("BaseRaceGroups", "Monsters")).Returns(new[] { "other base race", "base race" });
+            mockDice.Setup(d => d.Roll(1).d(9266)).Returns(7);
+
+            var monsterHitDice = new Dictionary<String, Int32>();
+            monsterHitDice["monster"] = 1234;
+            monsterHitDice["base race"] = 2345;
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom("MonsterHitDice")).Returns(monsterHitDice);
+            mockDice.Setup(d => d.Roll(2345).d10()).Returns(5);
+            mockDice.Setup(d => d.Roll(2345).d8()).Returns(9);
 
             var hitPoints = hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race);
-            mockDice.Verify(d => d.Roll(numberOfHitDice).d10(), Times.Once);
-            mockDice.Verify(d => d.Roll(It.IsAny<Int32>()).d8(), Times.Never);
-        }
-
-        [TestCase(RaceConstants.Metaraces.HalfCelestial)]
-        [TestCase(RaceConstants.Metaraces.HalfFiend)]
-        [TestCase(RaceConstants.Metaraces.Werebear)]
-        [TestCase(RaceConstants.Metaraces.Wereboar)]
-        [TestCase(RaceConstants.Metaraces.Wererat)]
-        [TestCase(RaceConstants.Metaraces.Weretiger)]
-        [TestCase(RaceConstants.Metaraces.Werewolf)]
-        [TestCase(RaceConstants.Metaraces.None)]
-        public void MetaraceDoesNotIncreaseHitDice(String metarace)
-        {
-            race.Metarace = metarace;
-            race.BaseRace = RaceConstants.BaseRaces.Derro;
-
-            var hitPoints = hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race);
-            mockDice.Verify(d => d.Roll(3).d8(), Times.Once);
-            mockDice.Verify(d => d.Roll(It.IsAny<Int32>()).d10(), Times.Never);
+            Assert.That(hitPoints, Is.EqualTo(19));
+            mockDice.Verify(d => d.Roll(2345).d8(), Times.Never);
         }
     }
 }

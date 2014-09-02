@@ -8,11 +8,13 @@ namespace NPCGen.Common.Races
         public String Metarace { get; set; }
         public Boolean Male { get; set; }
         public Boolean HasWings { get; set; }
+        public String Size { get; set; }
 
         public Race()
         {
             BaseRace = String.Empty;
             Metarace = String.Empty;
+            Size = String.Empty;
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using D20Dice;
 using Moq;
+using NPCGen.Common.Abilities.Skills;
 using NPCGen.Common.Abilities.Stats;
 using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Races;
@@ -52,6 +53,9 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             var selection = new SkillSelection { BaseStatName = StatConstants.Intelligence };
             mockSkillSelector.Setup(s => s.SelectFor(It.IsAny<String>())).Returns(selection);
             stats[StatConstants.Intelligence] = intelligence;
+
+            var emptyAdjustments = new Dictionary<String, Int32>();
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(It.IsAny<String>())).Returns(emptyAdjustments);
 
             skillPoints = new Dictionary<String, Int32>();
             skillPoints[characterClass.ClassName] = 0;
@@ -645,6 +649,105 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             Assert.That(skills["skill 3"].Ranks, Is.EqualTo(cap));
             Assert.That(skills["skill 4"].Ranks, Is.EqualTo(cap));
             Assert.That(skills["skill 5"].Ranks, Is.EqualTo(0));
+        }
+
+        [Test]
+        public void GetRacialSkillAdjustments()
+        {
+            race.BaseRace = "base race";
+            classSkills.Add("skill 1");
+            classSkills.Add("skill 2");
+            classSkills.Add("skill 3");
+            crossClassSkills.Add("skill 4");
+            crossClassSkills.Add("skill 5");
+
+            var bonuses = new Dictionary<String, Int32>();
+            bonuses["skill 1"] = 2;
+            bonuses["skill 2"] = 0;
+            bonuses["skill 3"] = 3;
+            bonuses["skill 4"] = 0;
+            bonuses["skill 5"] = 1;
+            bonuses["skill 6"] = 8;
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom("base raceSkillAdjustments")).Returns(bonuses);
+
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
+            Assert.That(skills["skill 1"].Bonus, Is.EqualTo(2));
+            Assert.That(skills["skill 2"].Bonus, Is.EqualTo(0));
+            Assert.That(skills["skill 3"].Bonus, Is.EqualTo(3));
+            Assert.That(skills["skill 4"].Bonus, Is.EqualTo(0));
+            Assert.That(skills["skill 5"].Bonus, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void RacialSkillAdjustmentsAreNotPerLevel()
+        {
+            characterClass.Level = 9266;
+            race.BaseRace = "base race";
+            classSkills.Add("skill");
+
+            var bonuses = new Dictionary<String, Int32>();
+            bonuses["skill"] = 2;
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom("base raceSkillAdjustments")).Returns(bonuses);
+
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
+            Assert.That(skills["skill"].Bonus, Is.EqualTo(2));
+        }
+
+        [Test]
+        public void MindFlayerKnowledgeBonusIsRandom()
+        {
+            race.BaseRace = RaceConstants.BaseRaces.MindFlayer;
+            classSkills.Add(SkillConstants.KnowledgeArcana);
+            classSkills.Add(SkillConstants.KnowledgeDungeoneering);
+            classSkills.Add(SkillConstants.KnowledgeGeography);
+            classSkills.Add(SkillConstants.KnowledgeNature);
+            classSkills.Add("other skill");
+            crossClassSkills.Add("other other skill");
+
+            mockDice.Setup(d => d.Roll(1).d(4)).Returns(3);
+
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
+            Assert.That(skills[SkillConstants.KnowledgeArcana].Bonus, Is.EqualTo(0));
+            Assert.That(skills[SkillConstants.KnowledgeDungeoneering].Bonus, Is.EqualTo(0));
+            Assert.That(skills[SkillConstants.KnowledgeGeography].Bonus, Is.EqualTo(0));
+            Assert.That(skills[SkillConstants.KnowledgeNature].Bonus, Is.EqualTo(8));
+            Assert.That(skills["other skill"].Bonus, Is.EqualTo(0));
+            Assert.That(skills["other other skill"].Bonus, Is.EqualTo(0));
+        }
+
+        [TestCase(1)]
+        [TestCase(2)]
+        [TestCase(3)]
+        [TestCase(4)]
+        [TestCase(5)]
+        [TestCase(6)]
+        [TestCase(7)]
+        [TestCase(8)]
+        [TestCase(9)]
+        [TestCase(10)]
+        [TestCase(11)]
+        [TestCase(12)]
+        [TestCase(13)]
+        [TestCase(14)]
+        [TestCase(15)]
+        [TestCase(16)]
+        [TestCase(17)]
+        [TestCase(18)]
+        [TestCase(19)]
+        [TestCase(20)]
+        public void MonstersDoNotGetMoreSkillPointsAtFirstLevel(Int32 level)
+        {
+            race.BaseRace = "base race";
+            mockCollectionsSelector.Setup(s => s.SelectFrom("BaseRaceGroups", "Monsters")).Returns(new[] { "base race", "other base race" });
+
+            characterClass.Level = level;
+            skillPoints[characterClass.ClassName] = 1;
+            classSkills.Add("skill 1");
+            classSkills.Add("skill 2");
+
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
+            Assert.That(skills["skill 1"].Ranks, Is.EqualTo(level));
+            Assert.That(skills["skill 2"].Ranks, Is.EqualTo(0));
         }
     }
 }
