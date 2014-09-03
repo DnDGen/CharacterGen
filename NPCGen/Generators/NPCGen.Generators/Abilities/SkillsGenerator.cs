@@ -124,12 +124,21 @@ namespace NPCGen.Generators.Abilities
 
         private Dictionary<String, Skill> ApplyRacialAdjustments(Dictionary<String, Skill> skills, Race race)
         {
-            var tableName = String.Format("{0}SkillAdjustments", race.BaseRace);
+            var formattedBaseRace = race.BaseRace.Replace(" ", String.Empty).Replace("-", String.Empty);
+            var tableName = String.Format("{0}SkillAdjustments", formattedBaseRace);
             var adjustments = adjustmentsSelector.SelectFrom(tableName);
 
             foreach (var adjustment in adjustments)
                 if (skills.ContainsKey(adjustment.Key))
                     skills[adjustment.Key].Bonus = adjustment.Value;
+
+            if (!(race.BaseRace == RaceConstants.BaseRaces.MindFlayer) || !skills.Keys.Any(s => s.StartsWith("Knowledge")))
+                return skills;
+
+            var knowledgeSkills = skills.Keys.Where(s => s.StartsWith("Knowledge"));
+            var index = dice.Roll().d(knowledgeSkills.Count()) - 1;
+            var knowledgeSkill = knowledgeSkills.ElementAt(index);
+            skills[knowledgeSkill].Bonus += 8;
 
             return skills;
         }

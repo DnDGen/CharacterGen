@@ -57,6 +57,20 @@ namespace NPCGen.Tests.Integration.Tables.CharacterClasses
             CharacterClassConstants.Monk,
             CharacterClassConstants.Paladin,
             CharacterClassConstants.Ranger)]
+        [TestCase("GoodBaseAttack",
+            CharacterClassConstants.Barbarian,
+            CharacterClassConstants.Fighter,
+            CharacterClassConstants.Paladin,
+            CharacterClassConstants.Ranger)]
+        [TestCase("AverageBaseAttack",
+            CharacterClassConstants.Bard,
+            CharacterClassConstants.Cleric,
+            CharacterClassConstants.Druid,
+            CharacterClassConstants.Monk,
+            CharacterClassConstants.Rogue)]
+        [TestCase("PoorBaseAttack",
+            CharacterClassConstants.Sorcerer,
+            CharacterClassConstants.Wizard)]
         public override void DistinctCollection(String name, params String[] collection)
         {
             base.DistinctCollection(name, collection);

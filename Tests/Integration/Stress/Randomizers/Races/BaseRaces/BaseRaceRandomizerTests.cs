@@ -23,7 +23,7 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
             var characterClass = GetNewCharacterClass(alignment);
 
             var baseRace = BaseRaceRandomizer.Randomize(alignment.Goodness, characterClass);
-            Assert.That(baseRaces, Contains.Item(baseRace));
+            Assert.That(baseRaces, Contains.Item(baseRace), testType);
         }
     }
 }

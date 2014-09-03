@@ -57,6 +57,7 @@
     <Compile Include="Abilities\Feats\RacialFeatsTests.cs" />
     <Compile Include="Abilities\Skills\ClassSkillsTests.cs" />
     <Compile Include="Abilities\Skills\CrossClassSkillsTests.cs" />
+    <Compile Include="Abilities\Skills\RacialAdjustments\TallfellowHalflingSkillAdjustmentsTests.cs" />
     <Compile Include="Abilities\Skills\SkillCollectionTests.cs" />
     <Compile Include="Abilities\Skills\SkillDataTests.cs" />
     <Compile Include="Abilities\Skills\SkillPointsForClassesTests.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="CharacterClasses\LevelAdjustmentsTests.cs" />
     <Compile Include="CharacterClasses\NeutralCharacterClassesTests.cs" />
     <Compile Include="CollectionTests.cs" />
+    <Compile Include="Combats\RacialBaseAttackAdjustmentsTests.cs" />
     <Compile Include="EmbeddedResourceStreamLoaderTests.cs" />
     <Compile Include="PercentileTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

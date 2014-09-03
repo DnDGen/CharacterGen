@@ -81,4 +81,35 @@
         <item>Lightfoot Halfling</item>
         <item>Rock Gnome</item>
     </object>
+    <object>
+        <name>Large</name>
+        <item>Minotaur</item>
+        <item>Ogre</item>
+        <item>Ogre Mage</item>
+    </object>
+    <object>
+        <name>Small</name>
+        <item>Derro</item>
+        <item>Forest Gnome</item>
+        <item>Rock Gnome</item>
+        <item>Svirfneblin</item>
+        <item>Deep Halfling</item>
+        <item>Lightfoot Halfling</item>
+        <item>Tallfellow Halfling</item>
+        <item>Kobold</item>
+        <item>Goblin</item>
+    </object>
+    <object>
+        <name>Monsters</name>
+        <item>Bugbear</item>
+        <item>Derro</item>
+        <item>Doppelganger</item>
+        <item>Gnoll</item>
+        <item>Lizardfolk</item>
+        <item>Mind Flayer</item>
+        <item>Minotaur</item>
+        <item>Ogre</item>
+        <item>Ogre Mage</item>
+        <item>Troglodyte</item>
+    </object>
 </items>

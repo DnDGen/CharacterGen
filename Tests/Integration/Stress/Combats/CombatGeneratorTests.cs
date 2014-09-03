@@ -26,7 +26,7 @@ namespace NPCGen.Tests.Integration.Stress.Combats
             var characterClass = GetNewCharacterClass(alignment);
             var race = GetNewRace(alignment, characterClass);
 
-            var baseAttack = CombatGenerator.GenerateBaseAttackWith(characterClass);
+            var baseAttack = CombatGenerator.GenerateBaseAttackWith(characterClass, race);
             Assert.That(baseAttack.Bonus, Is.Not.Negative);
 
             var ability = AbilitiesGenerator.GenerateWith(characterClass, race, StatsRandomizer, baseAttack);

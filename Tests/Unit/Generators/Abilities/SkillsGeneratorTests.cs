@@ -654,7 +654,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         [Test]
         public void GetRacialSkillAdjustments()
         {
-            race.BaseRace = "base race";
+            race.BaseRace = "base race-toformat";
             classSkills.Add("skill 1");
             classSkills.Add("skill 2");
             classSkills.Add("skill 3");
@@ -668,7 +668,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             bonuses["skill 4"] = 0;
             bonuses["skill 5"] = 1;
             bonuses["skill 6"] = 8;
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom("base raceSkillAdjustments")).Returns(bonuses);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom("baseracetoformatSkillAdjustments")).Returns(bonuses);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
             Assert.That(skills["skill 1"].Bonus, Is.EqualTo(2));
@@ -676,6 +676,27 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             Assert.That(skills["skill 3"].Bonus, Is.EqualTo(3));
             Assert.That(skills["skill 4"].Bonus, Is.EqualTo(0));
             Assert.That(skills["skill 5"].Bonus, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void HandleNoRacialAdjustments()
+        {
+            race.BaseRace = "base race";
+            classSkills.Add("skill 1");
+            classSkills.Add("skill 2");
+            classSkills.Add("skill 3");
+            crossClassSkills.Add("skill 4");
+            crossClassSkills.Add("skill 5");
+
+            var bonuses = new Dictionary<String, Int32>();
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom("baseraceSkillAdjustments")).Returns(bonuses);
+
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
+            Assert.That(skills["skill 1"].Bonus, Is.EqualTo(0));
+            Assert.That(skills["skill 2"].Bonus, Is.EqualTo(0));
+            Assert.That(skills["skill 3"].Bonus, Is.EqualTo(0));
+            Assert.That(skills["skill 4"].Bonus, Is.EqualTo(0));
+            Assert.That(skills["skill 5"].Bonus, Is.EqualTo(0));
         }
 
         [Test]
@@ -709,8 +730,8 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
             Assert.That(skills[SkillConstants.KnowledgeArcana].Bonus, Is.EqualTo(0));
             Assert.That(skills[SkillConstants.KnowledgeDungeoneering].Bonus, Is.EqualTo(0));
-            Assert.That(skills[SkillConstants.KnowledgeGeography].Bonus, Is.EqualTo(0));
-            Assert.That(skills[SkillConstants.KnowledgeNature].Bonus, Is.EqualTo(8));
+            Assert.That(skills[SkillConstants.KnowledgeGeography].Bonus, Is.EqualTo(8));
+            Assert.That(skills[SkillConstants.KnowledgeNature].Bonus, Is.EqualTo(0));
             Assert.That(skills["other skill"].Bonus, Is.EqualTo(0));
             Assert.That(skills["other other skill"].Bonus, Is.EqualTo(0));
         }

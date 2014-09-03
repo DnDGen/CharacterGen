@@ -27,6 +27,7 @@ namespace NPCGen.Generators
             race.BaseRace = baseRaceRandomizer.Randomize(goodnessString, characterClass);
             race.Metarace = metaraceRandomizer.Randomize(goodnessString, characterClass);
             race.Male = DetermineIfMale(race.BaseRace, characterClass.ClassName);
+            race.Size = DetermineSize(race.BaseRace);
             race.HasWings = DetermineIfRaceHasWings(race);
 
             return race;
@@ -43,16 +44,27 @@ namespace NPCGen.Generators
             return dice.Roll().d2() == 1;
         }
 
+        private String DetermineSize(String baseRace)
+        {
+            var largeRaces = collectionsSelector.SelectFrom("BaseRaceGroups", RaceConstants.Sizes.Large);
+            if (largeRaces.Contains(baseRace))
+                return RaceConstants.Sizes.Large;
+
+            var smallRaces = collectionsSelector.SelectFrom("BaseRaceGroups", RaceConstants.Sizes.Small);
+            if (smallRaces.Contains(baseRace))
+                return RaceConstants.Sizes.Small;
+
+            return RaceConstants.Sizes.Medium;
+        }
+
         private Boolean DetermineIfRaceHasWings(Race race)
         {
             if (race.Metarace == RaceConstants.Metaraces.HalfCelestial || race.Metarace == RaceConstants.Metaraces.HalfFiend)
                 return true;
+            else if (race.Metarace == RaceConstants.Metaraces.HalfDragon)
+                return race.Size == RaceConstants.Sizes.Large;
 
-            if (race.Metarace != RaceConstants.Metaraces.HalfDragon)
-                return false;
-
-            var largeRaces = collectionsSelector.SelectFrom("BaseRaceGroups", "Large");
-            return largeRaces.Contains(race.BaseRace);
+            return false;
         }
     }
 }

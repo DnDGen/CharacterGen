@@ -40,4 +40,24 @@
         <item>Ranger</item>
         <item>Barbarian</item>
     </object>
+    <object>
+        <name>GoodBaseAttack</name>
+        <item>Fighter</item>
+        <item>Paladin</item>
+        <item>Ranger</item>
+        <item>Barbarian</item>
+    </object>
+    <object>
+        <name>AverageBaseAttack</name>
+        <item>Cleric</item>
+        <item>Monk</item>
+        <item>Druid</item>
+        <item>Rogue</item>
+        <item>Bard</item>
+    </object>
+    <object>
+        <name>PoorBaseAttack</name>
+        <item>Sorcerer</item>
+        <item>Wizard</item>
+    </object>
 </items>

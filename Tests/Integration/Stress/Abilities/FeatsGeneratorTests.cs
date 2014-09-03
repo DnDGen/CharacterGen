@@ -40,7 +40,7 @@ namespace NPCGen.Tests.Integration.Stress.Abilities
             var race = GetNewRace(alignment, characterClass);
             var stats = StatsGenerator.GenerateWith(StatsRandomizer, characterClass, race);
             var skills = SkillsGenerator.GenerateWith(characterClass, race, stats);
-            var baseAttack = CombatGenerator.GenerateBaseAttackWith(characterClass);
+            var baseAttack = CombatGenerator.GenerateBaseAttackWith(characterClass, race);
 
             var feats = FeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
 

@@ -24,7 +24,7 @@ namespace NPCGen.Tests.Integration.Stress.Abilities
             var alignment = GetNewAlignment();
             var characterClass = GetNewCharacterClass(alignment);
             var race = GetNewRace(alignment, characterClass);
-            var baseAttack = CombatGenerator.GenerateBaseAttackWith(characterClass);
+            var baseAttack = CombatGenerator.GenerateBaseAttackWith(characterClass, race);
 
             var ability = AbilitiesGenerator.GenerateWith(characterClass, race, StatsRandomizer, baseAttack);
             Assert.That(ability.Feats, Is.Not.Empty);

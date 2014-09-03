@@ -41,7 +41,7 @@ namespace NPCGen.Tests.Integration.Stress.Items
             var alignment = GetNewAlignment();
             var characterClass = GetNewCharacterClass(alignment);
             var race = GetNewRace(alignment, characterClass);
-            var baseAttack = CombatGenerator.GenerateBaseAttackWith(characterClass);
+            var baseAttack = CombatGenerator.GenerateBaseAttackWith(characterClass, race);
             var ability = AbilitiesGenerator.GenerateWith(characterClass, race, StatsRandomizer, baseAttack);
 
             return EquipmentGenerator.GenerateWith(ability.Feats, characterClass);

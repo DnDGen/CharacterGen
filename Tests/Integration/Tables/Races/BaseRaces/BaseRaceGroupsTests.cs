@@ -100,6 +100,31 @@ namespace NPCGen.Tests.Integration.Tables.Races.BaseRaces
             RaceConstants.BaseRaces.Human,
             RaceConstants.BaseRaces.Lizardfolk,
             RaceConstants.BaseRaces.Doppelganger)]
+        [TestCase(RaceConstants.Sizes.Large,
+            RaceConstants.BaseRaces.Minotaur,
+            RaceConstants.BaseRaces.Ogre,
+            RaceConstants.BaseRaces.OgreMage)]
+        [TestCase(RaceConstants.Sizes.Small,
+            RaceConstants.BaseRaces.Derro,
+            RaceConstants.BaseRaces.ForestGnome,
+            RaceConstants.BaseRaces.RockGnome,
+            RaceConstants.BaseRaces.Svirfneblin,
+            RaceConstants.BaseRaces.Goblin,
+            RaceConstants.BaseRaces.DeepHalfling,
+            RaceConstants.BaseRaces.LightfootHalfling,
+            RaceConstants.BaseRaces.TallfellowHalfling,
+            RaceConstants.BaseRaces.Kobold)]
+        [TestCase("Monsters",
+            RaceConstants.BaseRaces.Bugbear,
+            RaceConstants.BaseRaces.Derro,
+            RaceConstants.BaseRaces.Doppelganger,
+            RaceConstants.BaseRaces.Gnoll,
+            RaceConstants.BaseRaces.Lizardfolk,
+            RaceConstants.BaseRaces.MindFlayer,
+            RaceConstants.BaseRaces.Minotaur,
+            RaceConstants.BaseRaces.Ogre,
+            RaceConstants.BaseRaces.OgreMage,
+            RaceConstants.BaseRaces.Troglodyte)]
         public override void DistinctCollection(String name, params String[] collection)
         {
             base.DistinctCollection(name, collection);

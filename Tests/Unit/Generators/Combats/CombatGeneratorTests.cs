@@ -31,6 +31,7 @@ namespace NPCGen.Tests.Unit.Generators.Combats
         private Dictionary<String, Int32> maxDexterityBonuses;
         private List<String> averageBaseAttacks;
         private List<String> goodBaseAttacks;
+        private Dictionary<String, Int32> racialAdjustments;
 
         [SetUp]
         public void Setup()
@@ -61,6 +62,11 @@ namespace NPCGen.Tests.Unit.Generators.Combats
             mockCollectionsSelector.Setup(s => s.SelectFrom("ClassNameGroups", "AverageBaseAttack")).Returns(averageBaseAttacks);
             averageBaseAttacks.Add("other class name");
             goodBaseAttacks.Add("other class name");
+
+
+            racialAdjustments = new Dictionary<String, Int32>();
+            racialAdjustments[String.Empty] = 0;
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom("RacialBaseAttackAdjustments")).Returns(racialAdjustments);
         }
 
         [Test]
