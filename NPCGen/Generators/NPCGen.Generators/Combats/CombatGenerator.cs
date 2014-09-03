@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using NPCGen.Common.Abilities.Feats;
 using NPCGen.Common.Abilities.Stats;
 using NPCGen.Common.CharacterClasses;
@@ -17,40 +18,39 @@ namespace NPCGen.Generators.Combats
         private IHitPointsGenerator hitPointsGenerator;
         private ISavingThrowsGenerator savingThrowsGenerator;
         private IAdjustmentsSelector adjustmentsSelector;
+        private ICollectionsSelector collectionsSelector;
 
         public CombatGenerator(IArmorClassGenerator armorClassGenerator, IHitPointsGenerator hitPointsGenerator, ISavingThrowsGenerator savingThrowsGenerator,
-            IAdjustmentsSelector adjustmentsSelector)
+            IAdjustmentsSelector adjustmentsSelector, ICollectionsSelector collectionsSelector)
         {
             this.armorClassGenerator = armorClassGenerator;
             this.hitPointsGenerator = hitPointsGenerator;
             this.savingThrowsGenerator = savingThrowsGenerator;
             this.adjustmentsSelector = adjustmentsSelector;
+            this.collectionsSelector = collectionsSelector;
         }
 
-        public BaseAttack GenerateBaseAttackWith(CharacterClass characterClass)
+        public BaseAttack GenerateBaseAttackWith(CharacterClass characterClass, Race race)
         {
             var baseAttack = new BaseAttack();
             baseAttack.Bonus = GetBaseAttackBonus(characterClass);
+            baseAttack.Bonus += GetRacialAdjustments(race);
+            baseAttack.Bonus += GetSizeAdjustments(race);
+
             return baseAttack;
         }
 
         private Int32 GetBaseAttackBonus(CharacterClass characterClass)
         {
-            switch (characterClass.ClassName)
-            {
-                case CharacterClassConstants.Fighter:
-                case CharacterClassConstants.Paladin:
-                case CharacterClassConstants.Ranger:
-                case CharacterClassConstants.Barbarian: return GetGoodBaseAttackBonus(characterClass.Level);
-                case CharacterClassConstants.Bard:
-                case CharacterClassConstants.Cleric:
-                case CharacterClassConstants.Monk:
-                case CharacterClassConstants.Rogue:
-                case CharacterClassConstants.Druid: return GetAverageBaseAttackBonus(characterClass.Level);
-                case CharacterClassConstants.Sorcerer:
-                case CharacterClassConstants.Wizard: return GetPoorBaseAttackBonus(characterClass.Level);
-                default: throw new ArgumentOutOfRangeException();
-            }
+            var goodBaseAttacks = collectionsSelector.SelectFrom("ClassNameGroups", "GoodBaseAttack");
+            if (goodBaseAttacks.Contains(characterClass.ClassName))
+                return GetGoodBaseAttackBonus(characterClass.Level);
+
+            var averageBaseAttacks = collectionsSelector.SelectFrom("ClassNameGroups", "AverageBaseAttack");
+            if (averageBaseAttacks.Contains(characterClass.ClassName))
+                return GetAverageBaseAttackBonus(characterClass.Level);
+
+            return GetPoorBaseAttackBonus(characterClass.Level);
         }
 
         private Int32 GetGoodBaseAttackBonus(Int32 level)
@@ -68,13 +68,29 @@ namespace NPCGen.Generators.Combats
             return level / 2;
         }
 
+        private Int32 GetRacialAdjustments(Race race)
+        {
+            var racialAdjustments = adjustmentsSelector.SelectFrom("RacialBaseAttackAdjustments");
+            return racialAdjustments[race.BaseRace] + racialAdjustments[race.Metarace];
+        }
+
+        private Int32 GetSizeAdjustments(Race race)
+        {
+            if (race.Size == RaceConstants.Sizes.Large)
+                return -1;
+            else if (race.Size == RaceConstants.Sizes.Small)
+                return 1;
+
+            return 0;
+        }
+
         public Combat GenerateWith(BaseAttack baseAttack, CharacterClass characterClass, Race race, IEnumerable<Feat> feats, Dictionary<String, Stat> stats, Equipment equipment)
         {
             var combat = new Combat();
 
             combat.BaseAttack = baseAttack;
             combat.AdjustedDexterityBonus = GetAdjustedDexterityBonus(stats, equipment);
-            combat.ArmorClass = armorClassGenerator.GenerateWith(equipment, combat.AdjustedDexterityBonus, feats);
+            combat.ArmorClass = armorClassGenerator.GenerateWith(equipment, combat.AdjustedDexterityBonus, feats, race);
             combat.HitPoints = hitPointsGenerator.GenerateWith(characterClass, stats[StatConstants.Constitution].Bonus, race);
             combat.SavingThrows = savingThrowsGenerator.GenerateWith(characterClass, feats, stats);
 

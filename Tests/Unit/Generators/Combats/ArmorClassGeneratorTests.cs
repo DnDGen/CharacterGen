@@ -57,7 +57,7 @@ namespace NPCGen.Tests.Unit.Generators.Combats
 
         private void AssertArmorClass(Int32 flatFooted, Int32 full, Int32 touch)
         {
-            var armorClass = armorClassGenerator.GenerateWith(equipment, adjustedDexterityBonus, feats);
+            var armorClass = armorClassGenerator.GenerateWith(equipment, adjustedDexterityBonus, feats, race);
             Assert.That(armorClass.FlatFooted, Is.EqualTo(flatFooted));
             Assert.That(armorClass.Full, Is.EqualTo(full));
             Assert.That(armorClass.Touch, Is.EqualTo(touch));
@@ -108,40 +108,6 @@ namespace NPCGen.Tests.Unit.Generators.Combats
         {
             adjustedDexterityBonus = -1;
             AssertArmorClass(10, 9, 9);
-        }
-
-        [Test]
-        public void SizeModifierApplied()
-        {
-            feats.Add(new Feat { Name = "feat 1" });
-            featAdjustments["feat 1"] = 1;
-            featAdjustments["feat 2"] = -1;
-            mockCollectionsSelector.Setup(s => s.SelectFrom("ArmorClassModifiers", "Size")).Returns(new[] { "feat 1", "feat 2", "other feat" });
-
-            AssertArmorClass(11, 11, 11);
-        }
-
-        [Test]
-        public void SizeModifersStack()
-        {
-            feats.Add(new Feat { Name = "feat 1" });
-            feats.Add(new Feat { Name = "feat 2" });
-            featAdjustments["feat 1"] = 1;
-            featAdjustments["feat 2"] = 1;
-            mockCollectionsSelector.Setup(s => s.SelectFrom("ArmorClassModifiers", "Size")).Returns(new[] { "feat 1", "feat 2", "other feat" });
-
-            AssertArmorClass(12, 12, 12);
-        }
-
-        [Test]
-        public void NegativeSizeModierApplied()
-        {
-            feats.Add(new Feat { Name = "feat 2" });
-            featAdjustments["feat 1"] = 1;
-            featAdjustments["feat 2"] = -1;
-            mockCollectionsSelector.Setup(s => s.SelectFrom("ArmorClassModifiers", "Size")).Returns(new[] { "feat 1", "feat 2", "other feat" });
-
-            AssertArmorClass(9, 9, 9);
         }
 
         [Test]
@@ -350,16 +316,14 @@ namespace NPCGen.Tests.Unit.Generators.Combats
         [Test]
         public void LargeCreaturesAreMinusOneOnArmorClass()
         {
-            race.BaseRace = "base race";
-            mockCollectionsSelector.Setup(s => s.SelectFrom("BaseRaceGroups", "Large")).Returns(new[] { "other base race", "base race" });
+            race.Size = RaceConstants.Sizes.Large;
             AssertArmorClass(9, 9, 9);
         }
 
         [Test]
         public void SmallCreaturesArePlusOneOnArmorClass()
         {
-            race.BaseRace = "base race";
-            mockCollectionsSelector.Setup(s => s.SelectFrom("BaseRaceGroups", "Small")).Returns(new[] { "other base race", "base race" });
+            race.Size = RaceConstants.Sizes.Small;
             AssertArmorClass(11, 11, 11);
         }
 
@@ -376,7 +340,6 @@ namespace NPCGen.Tests.Unit.Generators.Combats
             mockCollectionsSelector.Setup(s => s.SelectFrom("ArmorClassModifiers", "Deflection")).Returns(new[] { "ring" });
             mockCollectionsSelector.Setup(s => s.SelectFrom("ArmorClassModifiers", "NaturalArmor")).Returns(new[] { "feat 1" });
             mockCollectionsSelector.Setup(s => s.SelectFrom("ArmorClassModifiers", "Dodge")).Returns(new[] { "feat 1" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom("ArmorClassModifiers", "Size")).Returns(new[] { "feat 1" });
 
             equipment.Armor.Name = "armor";
             equipment.Armor.Magic.Bonus = 1;
@@ -389,6 +352,7 @@ namespace NPCGen.Tests.Unit.Generators.Combats
             ring.Name = "ring";
             ring.Magic.Bonus = 1;
 
+            race.Size = RaceConstants.Sizes.Small;
             equipment.Treasure.Items = new[] { ring };
 
             AssertArmorClass(17, 19, 14);

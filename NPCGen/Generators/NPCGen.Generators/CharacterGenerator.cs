@@ -64,7 +64,7 @@ namespace NPCGen.Generators
             character.Class.Level -= levelAdjustments[character.Race.BaseRace];
             character.Class.Level -= levelAdjustments[character.Race.Metarace];
 
-            var baseAttack = combatGenerator.GenerateBaseAttackWith(character.Class);
+            var baseAttack = combatGenerator.GenerateBaseAttackWith(character.Class, character.Race);
 
             character.Ability = abilitiesGenerator.GenerateWith(character.Class, character.Race, statsRandomizer, baseAttack);
             character.Equipment = equipmentGenerator.GenerateWith(character.Ability.Feats, character.Class);

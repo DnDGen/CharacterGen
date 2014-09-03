@@ -5,6 +5,7 @@ using EquipmentGen.Common.Items;
 using NPCGen.Common.Abilities.Feats;
 using NPCGen.Common.Combats;
 using NPCGen.Common.Items;
+using NPCGen.Common.Races;
 using NPCGen.Generators.Interfaces.Combats;
 using NPCGen.Selectors.Interfaces;
 
@@ -21,10 +22,10 @@ namespace NPCGen.Generators.Combats
             this.adjustmentsSelector = adjustmentsSelector;
         }
 
-        public ArmorClass GenerateWith(Equipment equipment, Int32 adjustedDexterityBonus, IEnumerable<Feat> feats)
+        public ArmorClass GenerateWith(Equipment equipment, Int32 adjustedDexterityBonus, IEnumerable<Feat> feats, Race race)
         {
             var armorBonuses = GetArmorBonuses(equipment);
-            var sizeModifier = GetSizeModifier(feats);
+            var sizeModifier = GetSizeModifier(race);
             var deflectionBonus = GetDeflectionBonus(equipment.Treasure.Items);
             var naturalArmorBonus = GetNaturalArmorBonus(equipment.Treasure.Items, feats);
             var dodgeBonus = GetDodgeBonus(feats);
@@ -69,17 +70,14 @@ namespace NPCGen.Generators.Combats
             return offHand.Magic.Bonus;
         }
 
-        private Int32 GetSizeModifier(IEnumerable<Feat> feats)
+        private Int32 GetSizeModifier(Race race)
         {
-            var featAdjustments = adjustmentsSelector.SelectFrom("FeatArmorAdjustments");
-            var sizeModifiers = collectionsSelector.SelectFrom("ArmorClassModifiers", "Size");
-            var modifier = 0;
+            if (race.Size == RaceConstants.Sizes.Large)
+                return -1;
+            else if (race.Size == RaceConstants.Sizes.Small)
+                return 1;
 
-            foreach (var feat in feats.Select(f => f.Name))
-                if (sizeModifiers.Contains(feat))
-                    modifier += featAdjustments[feat];
-
-            return modifier;
+            return 0;
         }
 
         private Int32 GetDeflectionBonus(IEnumerable<Item> items)

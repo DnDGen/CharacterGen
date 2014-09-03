@@ -17,10 +17,6 @@ namespace NPCGen.Tests.Unit.Generators.Combats
     [TestFixture]
     public class CombatGeneratorTests
     {
-        private const Int32 Good = 20;
-        private const Int32 Average = 15;
-        private const Int32 Poor = 10;
-
         private ICombatGenerator combatGenerator;
         private CharacterClass characterClass;
         private List<Feat> feats;
@@ -31,7 +27,10 @@ namespace NPCGen.Tests.Unit.Generators.Combats
         private Race race;
         private Mock<ISavingThrowsGenerator> mockSavingThrowsGenerator;
         private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
+        private Mock<ICollectionsSelector> mockCollectionsSelector;
         private Dictionary<String, Int32> maxDexterityBonuses;
+        private List<String> averageBaseAttacks;
+        private List<String> goodBaseAttacks;
 
         [SetUp]
         public void Setup()
@@ -40,47 +39,51 @@ namespace NPCGen.Tests.Unit.Generators.Combats
             mockHitPointsGenerator = new Mock<IHitPointsGenerator>();
             mockSavingThrowsGenerator = new Mock<ISavingThrowsGenerator>();
             mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
+            mockCollectionsSelector = new Mock<ICollectionsSelector>();
             combatGenerator = new CombatGenerator(mockArmorClassGenerator.Object, mockHitPointsGenerator.Object, mockSavingThrowsGenerator.Object,
-                mockAdjustmentsSelector.Object);
+                mockAdjustmentsSelector.Object, mockCollectionsSelector.Object);
             characterClass = new CharacterClass();
             feats = new List<Feat>();
             stats = new Dictionary<String, Stat>();
             equipment = new Equipment();
             race = new Race();
             maxDexterityBonuses = new Dictionary<String, Int32>();
+            averageBaseAttacks = new List<String>();
+            goodBaseAttacks = new List<String>();
 
-            characterClass.ClassName = CharacterClassConstants.Fighter;
+            characterClass.ClassName = "class name";
+            characterClass.Level = 20;
             stats[StatConstants.Constitution] = new Stat { Value = 9266 };
             stats[StatConstants.Dexterity] = new Stat { Value = 42 };
             mockAdjustmentsSelector.Setup(s => s.SelectFrom("MaxDexterityBonuses")).Returns(maxDexterityBonuses);
             maxDexterityBonuses[String.Empty] = 42;
+            mockCollectionsSelector.Setup(s => s.SelectFrom("ClassNameGroups", "GoodBaseAttack")).Returns(goodBaseAttacks);
+            mockCollectionsSelector.Setup(s => s.SelectFrom("ClassNameGroups", "AverageBaseAttack")).Returns(averageBaseAttacks);
+            averageBaseAttacks.Add("other class name");
+            goodBaseAttacks.Add("other class name");
         }
 
         [Test]
-        public void InvalidClassNameThrowsError()
+        public void GetGoodBaseAttack()
         {
-            characterClass.ClassName = "invalid name";
-            Assert.That(() => combatGenerator.GenerateBaseAttackWith(characterClass), Throws.InstanceOf<ArgumentOutOfRangeException>());
+            goodBaseAttacks.Add(characterClass.ClassName);
+            var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass, race);
+            Assert.That(baseAttack.Bonus, Is.EqualTo(20));
         }
 
-        [TestCase(CharacterClassConstants.Fighter, Good)]
-        [TestCase(CharacterClassConstants.Paladin, Good)]
-        [TestCase(CharacterClassConstants.Ranger, Good)]
-        [TestCase(CharacterClassConstants.Barbarian, Good)]
-        [TestCase(CharacterClassConstants.Bard, Average)]
-        [TestCase(CharacterClassConstants.Cleric, Average)]
-        [TestCase(CharacterClassConstants.Monk, Average)]
-        [TestCase(CharacterClassConstants.Rogue, Average)]
-        [TestCase(CharacterClassConstants.Druid, Average)]
-        [TestCase(CharacterClassConstants.Sorcerer, Poor)]
-        [TestCase(CharacterClassConstants.Wizard, Poor)]
-        public void FullAttackBonus(String className, Int32 attackBonus)
+        [Test]
+        public void GetAverageBaseAttack()
         {
-            characterClass.ClassName = className;
-            characterClass.Level = 20;
+            averageBaseAttacks.Add(characterClass.ClassName);
+            var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass, race);
+            Assert.That(baseAttack.Bonus, Is.EqualTo(15));
+        }
 
-            var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass);
-            Assert.That(baseAttack.Bonus, Is.EqualTo(attackBonus));
+        [Test]
+        public void DefaultIsPoorBaseAttack()
+        {
+            var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass, race);
+            Assert.That(baseAttack.Bonus, Is.EqualTo(10));
         }
 
         [TestCase(1, 1)]
@@ -105,10 +108,10 @@ namespace NPCGen.Tests.Unit.Generators.Combats
         [TestCase(20, 20)]
         public void GoodBaseAttackBonus(Int32 level, Int32 bonus)
         {
-            characterClass.ClassName = CharacterClassConstants.Fighter;
             characterClass.Level = level;
+            goodBaseAttacks.Add(characterClass.ClassName);
 
-            var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass);
+            var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass, race);
             Assert.That(baseAttack.Bonus, Is.EqualTo(bonus));
         }
 
@@ -134,10 +137,10 @@ namespace NPCGen.Tests.Unit.Generators.Combats
         [TestCase(20, 15)]
         public void AverageBaseAttackBonus(Int32 level, Int32 bonus)
         {
-            characterClass.ClassName = CharacterClassConstants.Cleric;
             characterClass.Level = level;
+            averageBaseAttacks.Add(characterClass.ClassName);
 
-            var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass);
+            var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass, race);
             Assert.That(baseAttack.Bonus, Is.EqualTo(bonus));
         }
 
@@ -163,37 +166,49 @@ namespace NPCGen.Tests.Unit.Generators.Combats
         [TestCase(20, 10)]
         public void PoorBaseAttackBonus(Int32 level, Int32 bonus)
         {
-            characterClass.ClassName = CharacterClassConstants.Wizard;
             characterClass.Level = level;
-
-            var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass);
+            var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass, race);
             Assert.That(baseAttack.Bonus, Is.EqualTo(bonus));
         }
 
         [Test]
-        public void GetRacialBaseAttackAdjustment()
+        public void GetAllRacialBaseAttackAdjustment()
         {
-            Assert.Fail();
+            race.BaseRace = "base race";
+            race.Metarace = "metarace";
+
+            var racialAdjustments = new Dictionary<String, Int32>();
+            racialAdjustments["base race"] = 1;
+            racialAdjustments["other base race"] = 7;
+            racialAdjustments["metarace"] = 3;
+            racialAdjustments["other metarace"] = 5;
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom("RacialBaseAttackAdjustments")).Returns(racialAdjustments);
+
+            var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass, race);
+            Assert.That(baseAttack.Bonus, Is.EqualTo(14));
         }
 
         [Test]
         public void LargeCreaturesAreMinusOneOnBaseAttack()
         {
-            Assert.Fail();
+            race.Size = RaceConstants.Sizes.Large;
+            var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass, race);
+            Assert.That(baseAttack.Bonus, Is.EqualTo(9));
         }
 
         [Test]
         public void SmallCreaturesArePlusOneOnBaseAttack()
         {
-            Assert.Fail();
+            race.Size = RaceConstants.Sizes.Small;
+            var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass, race);
+            Assert.That(baseAttack.Bonus, Is.EqualTo(11));
         }
 
         [Test]
         public void ReturnCombatWithBaseAttack()
         {
-            var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass);
+            var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass, race);
             var combat = combatGenerator.GenerateWith(baseAttack, characterClass, race, feats, stats, equipment);
-
             Assert.That(combat.BaseAttack, Is.EqualTo(baseAttack));
         }
 
@@ -203,7 +218,7 @@ namespace NPCGen.Tests.Unit.Generators.Combats
             equipment.Armor.Name = "armor";
             maxDexterityBonuses[equipment.Armor.Name] = 17;
 
-            var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass);
+            var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass, race);
             var combat = combatGenerator.GenerateWith(baseAttack, characterClass, race, feats, stats, equipment);
 
             Assert.That(combat.AdjustedDexterityBonus, Is.EqualTo(16));
@@ -215,7 +230,7 @@ namespace NPCGen.Tests.Unit.Generators.Combats
             equipment.Armor.Name = "armor";
             maxDexterityBonuses[equipment.Armor.Name] = 5;
 
-            var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass);
+            var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass, race);
             var combat = combatGenerator.GenerateWith(baseAttack, characterClass, race, feats, stats, equipment);
 
             Assert.That(combat.AdjustedDexterityBonus, Is.EqualTo(5));
@@ -227,9 +242,9 @@ namespace NPCGen.Tests.Unit.Generators.Combats
             equipment.Armor.Name = "armor";
             maxDexterityBonuses[equipment.Armor.Name] = 5;
             var armorClass = new ArmorClass();
-            mockArmorClassGenerator.Setup(g => g.GenerateWith(equipment, 5, feats)).Returns(armorClass);
+            mockArmorClassGenerator.Setup(g => g.GenerateWith(equipment, 5, feats, race)).Returns(armorClass);
 
-            var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass);
+            var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass, race);
             var combat = combatGenerator.GenerateWith(baseAttack, characterClass, race, feats, stats, equipment);
 
             Assert.That(combat.ArmorClass, Is.EqualTo(armorClass));
@@ -239,9 +254,9 @@ namespace NPCGen.Tests.Unit.Generators.Combats
         public void GetArmorClassFromGeneratorWithDexterityBonus()
         {
             var armorClass = new ArmorClass();
-            mockArmorClassGenerator.Setup(g => g.GenerateWith(equipment, 16, feats)).Returns(armorClass);
+            mockArmorClassGenerator.Setup(g => g.GenerateWith(equipment, 16, feats, race)).Returns(armorClass);
 
-            var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass);
+            var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass, race);
             var combat = combatGenerator.GenerateWith(baseAttack, characterClass, race, feats, stats, equipment);
 
             Assert.That(combat.ArmorClass, Is.EqualTo(armorClass));
@@ -252,7 +267,7 @@ namespace NPCGen.Tests.Unit.Generators.Combats
         {
             mockHitPointsGenerator.Setup(g => g.GenerateWith(characterClass, stats[StatConstants.Constitution].Bonus, race)).Returns(90210);
 
-            var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass);
+            var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass, race);
             var combat = combatGenerator.GenerateWith(baseAttack, characterClass, race, feats, stats, equipment);
 
             Assert.That(combat.HitPoints, Is.EqualTo(90210));
@@ -264,7 +279,7 @@ namespace NPCGen.Tests.Unit.Generators.Combats
             var savingThrows = new SavingThrows();
             mockSavingThrowsGenerator.Setup(g => g.GenerateWith(characterClass, feats, stats)).Returns(savingThrows);
 
-            var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass);
+            var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass, race);
             var combat = combatGenerator.GenerateWith(baseAttack, characterClass, race, feats, stats, equipment);
 
             Assert.That(combat.SavingThrows, Is.EqualTo(savingThrows));
