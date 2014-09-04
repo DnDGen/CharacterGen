@@ -30,36 +30,6 @@ namespace NPCGen.Tests.Unit.Mappers.Collections
             mapper = new CollectionsXmlMapper(mockStreamLoader.Object);
         }
 
-        [Test]
-        public void AppendXmlFileExtensionToTableName()
-        {
-            mapper.Map(tableName);
-            mockStreamLoader.Verify(l => l.LoadFor(filename), Times.Once);
-        }
-
-        [Test]
-        public void LoadXmlFromStream()
-        {
-            var results = mapper.Map(tableName);
-
-            var items = results["first name"];
-            Assert.That(items, Contains.Item("first item"));
-            Assert.That(items, Contains.Item("second item"));
-            Assert.That(items.Count(), Is.EqualTo(2));
-
-            items = results["second name"];
-            Assert.That(items, Contains.Item("third item"));
-            Assert.That(items.Count(), Is.EqualTo(1));
-
-            items = results["empty name"];
-            Assert.That(items, Is.Empty);
-        }
-
-        private Stream GetStream()
-        {
-            return new FileStream(filename, FileMode.Open);
-        }
-
         private void MakeXmlFile()
         {
             var content = @"<?xml version=""1.0"" encoding=""utf-8"" ?>
@@ -76,6 +46,52 @@ namespace NPCGen.Tests.Unit.Mappers.Collections
                                 <object>
                                     <name>empty name</name>
                                 </object>
+                            </collections>";
+            File.WriteAllText(filename, content);
+        }
+
+        private Stream GetStream()
+        {
+            return new FileStream(filename, FileMode.Open);
+        }
+
+        [Test]
+        public void AppendXmlFileExtensionToTableName()
+        {
+            mapper.Map(tableName);
+            mockStreamLoader.Verify(l => l.LoadFor(filename), Times.Once);
+        }
+
+        [Test]
+        public void LoadXmlFromStream()
+        {
+            var table = mapper.Map(tableName);
+
+            var items = table["first name"];
+            Assert.That(items, Contains.Item("first item"));
+            Assert.That(items, Contains.Item("second item"));
+            Assert.That(items.Count(), Is.EqualTo(2));
+
+            items = table["second name"];
+            Assert.That(items, Contains.Item("third item"));
+            Assert.That(items.Count(), Is.EqualTo(1));
+
+            items = table["empty name"];
+            Assert.That(items, Is.Empty);
+        }
+
+        [Test]
+        public void EmptyFileReturnsEmptyMapping()
+        {
+            MakeEmptyXmlFile();
+            var table = mapper.Map(tableName);
+            Assert.That(table, Is.Empty);
+        }
+
+        private void MakeEmptyXmlFile()
+        {
+            var content = @"<?xml version=""1.0"" encoding=""utf-8"" ?>
+                            <collections>
                             </collections>";
             File.WriteAllText(filename, content);
         }

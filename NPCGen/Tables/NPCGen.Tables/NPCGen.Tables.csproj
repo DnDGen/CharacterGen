@@ -334,6 +334,27 @@
   <ItemGroup>
     <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\TallfellowHalflingSkillAdjustments.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\HalfOrcSkillAdjustments.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\ForestGnomeSkillAdjustments.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\TroglodyteSkillAdjustments.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\HalfElfSkillAdjustments.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\HighElfSkillAdjustments.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\HumanSkillAdjustments.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\OrcSkillAdjustments.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

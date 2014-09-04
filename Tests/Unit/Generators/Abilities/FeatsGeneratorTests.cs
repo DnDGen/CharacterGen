@@ -69,13 +69,19 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         }
 
         [Test]
-        public void DoNotGetBaseRacialFeatIfNone()
+        public void DoNotGetBaseRacialFeatsIfNone()
         {
             race.BaseRace = "base race";
             mockCollectionsSelector.Setup(s => s.SelectFrom("RacialFeats", "base race")).Returns(Enumerable.Empty<String>());
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
             Assert.That(feats, Is.Empty);
+        }
+
+        [Test]
+        public void GetStrengthOfBaseRacialFeats()
+        {
+            Assert.Fail();
         }
 
         [Test]
@@ -93,13 +99,19 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         }
 
         [Test]
-        public void DoNotGetMetaracialFeatIfNone()
+        public void DoNotGetMetaracialFeatsIfNone()
         {
             race.Metarace = "metarace";
             mockCollectionsSelector.Setup(s => s.SelectFrom("RacialFeats", race.Metarace)).Returns(Enumerable.Empty<String>());
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
             Assert.That(feats, Is.Empty);
+        }
+
+        [Test]
+        public void GetStrengthOfMetaracialFeats()
+        {
+            Assert.Fail();
         }
 
         [Test]

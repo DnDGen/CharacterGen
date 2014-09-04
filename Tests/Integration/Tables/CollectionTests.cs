@@ -76,5 +76,10 @@ namespace NPCGen.Tests.Integration.Tables
             distinctCollection = table[name].Distinct();
             Assert.That(distinctCollection.Count(), Is.EqualTo(table[name].Count()));
         }
+
+        public virtual void EmptyCollection()
+        {
+            Assert.That(table, Is.Empty, tableName);
+        }
     }
 }
