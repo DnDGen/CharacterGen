@@ -48,14 +48,19 @@ namespace NPCGen.Generators.Abilities
 
         private IEnumerable<Feat> GetAutomaticFeats(CharacterClass characterClass, Race race, Dictionary<String, Skill> skills)
         {
-            var baseRacialFeats = collectionsSelector.SelectFrom("RacialFeats", race.BaseRace).Select(f => new Feat { Name = f });
-            var metaracialFeats = collectionsSelector.SelectFrom("RacialFeats", race.Metarace).Select(f => new Feat { Name = f });
+            var racialFeats = GetRacialFeats(race);
             var classFeats = GetClassFeats(characterClass);
             var skillSynergyFeats = GetSkillSynergyFeats(skills);
 
-            return baseRacialFeats.Union(metaracialFeats)
-                                  .Union(classFeats)
-                                  .Union(skillSynergyFeats);
+            return racialFeats.Union(classFeats).Union(skillSynergyFeats);
+        }
+
+        private IEnumerable<Feat> GetRacialFeats(Race race)
+        {
+            var baseRacialFeats = collectionsSelector.SelectFrom("RacialFeats", race.BaseRace).Select(f => new Feat { Name = f });
+            var metaracialFeats = collectionsSelector.SelectFrom("RacialFeats", race.Metarace).Select(f => new Feat { Name = f });
+
+            return baseRacialFeats.Union(metaracialFeats);
         }
 
         private IEnumerable<Feat> GetClassFeats(CharacterClass characterClass)

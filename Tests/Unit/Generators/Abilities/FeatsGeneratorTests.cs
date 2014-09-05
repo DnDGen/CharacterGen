@@ -81,7 +81,32 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         [Test]
         public void GetStrengthOfBaseRacialFeats()
         {
-            Assert.Fail();
+            race.BaseRace = "base race-format";
+            var racialFeats = new[] { "feat 1", "feat 2", "feat 3" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom("RacialFeats", race.BaseRace)).Returns(racialFeats);
+            mockCollectionsSelector.Setup(s => s.SelectFrom("RacialFeatStrengths", race.BaseRace)).Returns(new[] { "feat 1", "feat 3" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom("baseraceformatFeatStrengths", "feat 1")).Returns(new[] { "+9266" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom("baseraceformatFeatStrengths", "feat 3")).Returns(new[] { "90210 ft." });
+
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            Assert.That(feats.First().SpecificApplication, Is.EqualTo("+9266"));
+            Assert.That(feats.Last().SpecificApplication, Is.EqualTo("90210 ft."));
+            Assert.That(feats.Where(f => !String.IsNullOrEmpty(f.SpecificApplication)), Is.EqualTo(2));
+            Assert.That(feats.Where(f => String.IsNullOrEmpty(f.SpecificApplication)).Single().Name, Is.EqualTo("feat 2"));
+            Assert.That(feats.Count(), Is.EqualTo(3));
+        }
+
+        [Test]
+        public void DoNotGetStrengthsOfBaseRacialFeatsIfNone()
+        {
+            race.BaseRace = "base race-format";
+            var racialFeats = new[] { "feat 1", "feat 2", "feat 3" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom("RacialFeats", race.BaseRace)).Returns(racialFeats);
+            mockCollectionsSelector.Setup(s => s.SelectFrom("RacialFeatStrengths", race.BaseRace)).Returns(Enumerable.Empty<String>());
+            mockCollectionsSelector.Setup(s => s.SelectFrom("baseraceformatFeatStrengths", It.IsAny<String>())).Returns(new[] { "strength" });
+
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            Assert.That(feats.All(f => String.IsNullOrEmpty(f.SpecificApplication)), Is.True);
         }
 
         [Test]
@@ -110,6 +135,43 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
 
         [Test]
         public void GetStrengthOfMetaracialFeats()
+        {
+            race.Metarace = "metarace-fo rmat";
+            var racialFeats = new[] { "feat 1", "feat 2", "feat 3" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom("RacialFeats", race.Metarace)).Returns(racialFeats);
+            mockCollectionsSelector.Setup(s => s.SelectFrom("RacialFeatStrengths", race.Metarace)).Returns(new[] { "feat 1", "feat 3" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom("metaraceformatFeatStrengths", "feat 1")).Returns(new[] { "+9266" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom("metaraceformatFeatStrengths", "feat 3")).Returns(new[] { "90210 ft." });
+
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            Assert.That(feats.First().SpecificApplication, Is.EqualTo("+9266"));
+            Assert.That(feats.Last().SpecificApplication, Is.EqualTo("90210 ft."));
+            Assert.That(feats.Where(f => !String.IsNullOrEmpty(f.SpecificApplication)), Is.EqualTo(2));
+            Assert.That(feats.Where(f => String.IsNullOrEmpty(f.SpecificApplication)).Single().Name, Is.EqualTo("feat 2"));
+            Assert.That(feats.Count(), Is.EqualTo(3));
+        }
+
+        [Test]
+        public void DoNotGetStrengthsOfMetaracialFeatsIfNone()
+        {
+            race.Metarace = "metarace-fo rmat";
+            var racialFeats = new[] { "feat 1", "feat 2", "feat 3" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom("RacialFeats", race.Metarace)).Returns(racialFeats);
+            mockCollectionsSelector.Setup(s => s.SelectFrom("RacialFeatStrengths", race.Metarace)).Returns(Enumerable.Empty<String>());
+            mockCollectionsSelector.Setup(s => s.SelectFrom("metaraceformatFeatStrengths", It.IsAny<String>())).Returns(new[] { "strength" });
+
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            Assert.That(feats.All(f => String.IsNullOrEmpty(f.SpecificApplication)), Is.True);
+        }
+
+        [Test]
+        public void IfDuplicateRacialFeatsWithStrengthThatCanBeANumber_OnlyKeepStrongest()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void IfDuplicateRacialFeatsWithStrengthThatCannotBeANumber_KeepBoth()
         {
             Assert.Fail();
         }
