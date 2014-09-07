@@ -22,6 +22,9 @@ namespace NPCGen.Tests.Unit.Common.Races
             Assert.That(race.Male, Is.False);
             Assert.That(race.HasWings, Is.False);
             Assert.That(race.Size, Is.Empty);
+            Assert.That(race.AerialSpeed, Is.EqualTo(0));
+            Assert.That(race.LandSpeed, Is.EqualTo(0));
+            Assert.That(race.MetaraceSpecies, Is.Empty);
         }
     }
 }

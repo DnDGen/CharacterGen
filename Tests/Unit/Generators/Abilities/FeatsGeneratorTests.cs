@@ -189,6 +189,12 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         }
 
         [Test]
+        public void NonMonstersHaveOneMonsterHitDie()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
         public void DoNotMeetMonsterHitDiceRequirementsForMetaracialFeats()
         {
             Assert.Fail();

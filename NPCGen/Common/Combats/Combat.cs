@@ -9,6 +9,7 @@ namespace NPCGen.Common.Combats
         public Int32 HitPoints { get; set; }
         public BaseAttack BaseAttack { get; set; }
         public Int32 AdjustedDexterityBonus { get; set; }
+        public Int32 InitiativeBonus { get; set; }
 
         public Combat()
         {

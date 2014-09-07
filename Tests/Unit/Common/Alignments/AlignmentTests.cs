@@ -23,150 +23,6 @@ namespace NPCGen.Tests.Unit.Common.Alignments
         }
 
         [Test]
-        public void AlignmentIsNeutralIfLawfulnessIsNeutral()
-        {
-            alignment.Lawfulness = AlignmentConstants.Neutral;
-            alignment.Goodness = AlignmentConstants.Good;
-            Assert.That(alignment.IsNeutral(), Is.True);
-
-            alignment.Goodness = AlignmentConstants.Neutral;
-            Assert.That(alignment.IsNeutral(), Is.True);
-
-            alignment.Goodness = AlignmentConstants.Evil;
-            Assert.That(alignment.IsNeutral(), Is.True);
-        }
-
-        [Test]
-        public void AlignmentIsNeutralIfGoodnessIsNeutral()
-        {
-            alignment.Goodness = AlignmentConstants.Neutral;
-            alignment.Lawfulness = AlignmentConstants.Lawful;
-            Assert.That(alignment.IsNeutral(), Is.True);
-
-            alignment.Lawfulness = AlignmentConstants.Neutral;
-            Assert.That(alignment.IsNeutral(), Is.True);
-
-            alignment.Lawfulness = AlignmentConstants.Chaotic;
-            Assert.That(alignment.IsNeutral(), Is.True);
-        }
-
-        [Test]
-        public void LawfulGoodIsNotNeutral()
-        {
-            alignment.Lawfulness = AlignmentConstants.Lawful;
-            alignment.Goodness = AlignmentConstants.Good;
-            Assert.That(alignment.IsNeutral(), Is.False);
-        }
-
-        [Test]
-        public void ChaoticGoodIsNotNeutral()
-        {
-            alignment.Lawfulness = AlignmentConstants.Chaotic;
-            alignment.Goodness = AlignmentConstants.Good;
-            Assert.That(alignment.IsNeutral(), Is.False);
-        }
-
-        [Test]
-        public void LawfulEvilIsNotNeutral()
-        {
-            alignment.Lawfulness = AlignmentConstants.Lawful;
-            alignment.Goodness = AlignmentConstants.Evil;
-            Assert.That(alignment.IsNeutral(), Is.False);
-        }
-
-        [Test]
-        public void ChaoticEvilIsNotNeutral()
-        {
-            alignment.Lawfulness = AlignmentConstants.Chaotic;
-            alignment.Goodness = AlignmentConstants.Evil;
-            Assert.That(alignment.IsNeutral(), Is.False);
-        }
-
-        [Test]
-        public void AlignmentIsLawfulIfLawfulnessIsLawful()
-        {
-            alignment.Lawfulness = AlignmentConstants.Lawful;
-            Assert.That(alignment.IsLawful(), Is.True);
-        }
-
-        [Test]
-        public void AlignmentIsNotLawfulIfLawfulnessIsNeutral()
-        {
-            alignment.Lawfulness = AlignmentConstants.Neutral;
-            Assert.That(alignment.IsLawful(), Is.False);
-        }
-
-        [Test]
-        public void AlignmentIsNotLawfulIfLawfulnessIsChaotic()
-        {
-            alignment.Lawfulness = AlignmentConstants.Chaotic;
-            Assert.That(alignment.IsLawful(), Is.False);
-        }
-
-        [Test]
-        public void AlignmentIsChaoticIfLawfulnessIsChaotic()
-        {
-            alignment.Lawfulness = AlignmentConstants.Chaotic;
-            Assert.That(alignment.IsChaotic(), Is.True);
-        }
-
-        [Test]
-        public void AlignmentIsNotChaoticIfLawfulnessIsNeutral()
-        {
-            alignment.Lawfulness = AlignmentConstants.Neutral;
-            Assert.That(alignment.IsChaotic(), Is.False);
-        }
-
-        [Test]
-        public void AlignmentIsNotChaoticIfLawfulnessIsLawful()
-        {
-            alignment.Lawfulness = AlignmentConstants.Lawful;
-            Assert.That(alignment.IsChaotic(), Is.False);
-        }
-
-        [Test]
-        public void AlignmentIsGoodIfGoodnessIsGood()
-        {
-            alignment.Goodness = AlignmentConstants.Good;
-            Assert.That(alignment.IsGood(), Is.True);
-        }
-
-        [Test]
-        public void AlignmentIsNotGoodIfGoodnessIsNeutral()
-        {
-            alignment.Goodness = AlignmentConstants.Neutral;
-            Assert.That(alignment.IsGood(), Is.False);
-        }
-
-        [Test]
-        public void AlignmentIsNotGoodIfGoodnessIsEvil()
-        {
-            alignment.Goodness = AlignmentConstants.Evil;
-            Assert.That(alignment.IsGood(), Is.False);
-        }
-
-        [Test]
-        public void AlignmentIsEvilIfGoodnessIsEvil()
-        {
-            alignment.Goodness = AlignmentConstants.Evil;
-            Assert.That(alignment.IsEvil(), Is.True);
-        }
-
-        [Test]
-        public void AlignmentIsNotEvilIfGoodnessIsNeutral()
-        {
-            alignment.Goodness = AlignmentConstants.Neutral;
-            Assert.That(alignment.IsEvil(), Is.False);
-        }
-
-        [Test]
-        public void AlignmentIsNotEvilIfGoodnessIsGood()
-        {
-            alignment.Goodness = AlignmentConstants.Good;
-            Assert.That(alignment.IsEvil(), Is.False);
-        }
-
-        [Test]
         public void ToStringIsLawfulnessPlusGoodness()
         {
             alignment.Lawfulness = "lawfulness";
@@ -180,6 +36,16 @@ namespace NPCGen.Tests.Unit.Common.Alignments
             alignment.Lawfulness = AlignmentConstants.Neutral;
             alignment.Goodness = AlignmentConstants.Neutral;
             Assert.That(alignment.ToString(), Is.EqualTo("True Neutral"));
+        }
+
+        [Test]
+        public void ConvertingToStringUsesToString()
+        {
+            alignment.Lawfulness = "lawfulness";
+            alignment.Goodness = "goodness";
+
+            var alignmentString = Convert.ToString(alignment);
+            Assert.That(alignmentString, Is.EqualTo("lawfulness goodness"));
         }
 
         [Test]
@@ -228,6 +94,18 @@ namespace NPCGen.Tests.Unit.Common.Alignments
             otherAlignment.Goodness = "goodness";
 
             Assert.That(alignment, Is.EqualTo(otherAlignment));
+        }
+
+        [Test]
+        public void HashCodeIsHashOfToString()
+        {
+            alignment.Lawfulness = "lawfulness";
+            alignment.Goodness = "goodness";
+
+            var alignmentHash = alignment.GetHashCode();
+            var alignmentToStringHash = alignment.ToString().GetHashCode();
+
+            Assert.That(alignmentHash, Is.EqualTo(alignmentToStringHash));
         }
     }
 }

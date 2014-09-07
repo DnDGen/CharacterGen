@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using NPCGen.Common.Alignments;
-using NPCGen.Common.CharacterClasses;
 using NPCGen.Selectors.Interfaces;
 
 namespace NPCGen.Generators.Randomizers.CharacterClasses.ClassNames
@@ -18,16 +17,10 @@ namespace NPCGen.Generators.Randomizers.CharacterClasses.ClassNames
 
         protected override Boolean CharacterClassIsAllowed(String className, Alignment alignment)
         {
-            var classNames = collectionsSelector.SelectFrom("ClassNameGroups", "Spellcasters");
-            if (classNames.Contains(className))
-                return false;
+            var spellcasters = collectionsSelector.SelectFrom("ClassNameGroups", "Spellcasters");
+            var alignmentClasses = collectionsSelector.SelectFrom("ClassNameGroups", alignment.ToString());
 
-            switch (className)
-            {
-                case CharacterClassConstants.Monk: return alignment.IsLawful();
-                case CharacterClassConstants.Barbarian: return !alignment.IsLawful();
-                default: return true;
-            }
+            return alignmentClasses.Contains(className) && !spellcasters.Contains(className);
         }
     }
 }

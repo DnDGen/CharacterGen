@@ -11,7 +11,7 @@ namespace NPCGen.Generators.Randomizers.Alignments
 
         protected override Boolean AlignmentIsAllowed(Alignment alignment)
         {
-            return !alignment.IsChaotic();
+            return alignment.Lawfulness != AlignmentConstants.Chaotic;
         }
     }
 }

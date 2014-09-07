@@ -34,7 +34,7 @@ namespace NPCGen.Generators.Combats
         {
             var baseAttack = new BaseAttack();
             baseAttack.Bonus = GetBaseAttackBonus(characterClass);
-            baseAttack.Bonus += GetRacialAdjustments(race);
+            baseAttack.Bonus += GetRacialBaseAttackAdjustments(race);
             baseAttack.Bonus += GetSizeAdjustments(race);
 
             return baseAttack;
@@ -68,7 +68,7 @@ namespace NPCGen.Generators.Combats
             return level / 2;
         }
 
-        private Int32 GetRacialAdjustments(Race race)
+        private Int32 GetRacialBaseAttackAdjustments(Race race)
         {
             var racialAdjustments = adjustmentsSelector.SelectFrom("RacialBaseAttackAdjustments");
             return racialAdjustments[race.BaseRace] + racialAdjustments[race.Metarace];
@@ -93,6 +93,7 @@ namespace NPCGen.Generators.Combats
             combat.ArmorClass = armorClassGenerator.GenerateWith(equipment, combat.AdjustedDexterityBonus, feats, race);
             combat.HitPoints = hitPointsGenerator.GenerateWith(characterClass, stats[StatConstants.Constitution].Bonus, race);
             combat.SavingThrows = savingThrowsGenerator.GenerateWith(characterClass, feats, stats);
+            combat.InitiativeBonus = GetInitiativeBonus(race, feats);
 
             return combat;
         }
@@ -104,6 +105,18 @@ namespace NPCGen.Generators.Combats
             var maxArmorBonus = maxDexterityBonuses[equipment.Armor.Name];
 
             return Math.Min(dexterityBonus, maxArmorBonus);
+        }
+
+        private Int32 GetInitiativeBonus(Race race, IEnumerable<Feat> feats)
+        {
+            var racialBonuses = adjustmentsSelector.SelectFrom("RacialInitiativeBonuses");
+            var featBonuses = adjustmentsSelector.SelectFrom("FeatInitiativeBonuses");
+
+            var raceBonus = racialBonuses[race.BaseRace] + racialBonuses[race.Metarace];
+            var relevantFeatBonuses = featBonuses.Where(kvp => feats.Any(f => f.Name == kvp.Key));
+            var featBonus = relevantFeatBonuses.Sum(kvp => kvp.Value);
+
+            return raceBonus + featBonus;
         }
     }
 }

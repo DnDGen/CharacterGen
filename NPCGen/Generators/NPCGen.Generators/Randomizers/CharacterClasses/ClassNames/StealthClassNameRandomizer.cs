@@ -18,15 +18,11 @@ namespace NPCGen.Generators.Randomizers.CharacterClasses.ClassNames
 
         protected override Boolean CharacterClassIsAllowed(String className, Alignment alignment)
         {
-            var classNames = collectionsSelector.SelectFrom("ClassNameGroups", "Stealth");
-            if (!classNames.Contains(className))
-                return false;
+            var stealthClasses = collectionsSelector.SelectFrom("ClassNameGroups", "Stealth");
+            var alignmentClasses = collectionsSelector.SelectFrom("ClassNameGroups", alignment.ToString());
 
-            switch (className)
-            {
-                case CharacterClassConstants.Bard: return !alignment.IsLawful();
-                default: return true;
-            }
+            var classes = stealthClasses.Intersect(alignmentClasses);
+            return classes.Contains(className);
         }
     }
 }

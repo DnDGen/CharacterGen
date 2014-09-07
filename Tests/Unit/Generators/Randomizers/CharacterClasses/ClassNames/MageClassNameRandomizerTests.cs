@@ -9,7 +9,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassNames
     [TestFixture]
     public class MageClassNameRandomizerTests : ClassNameRandomizerTests
     {
-        protected override IEnumerable<String> collectionClassNames
+        protected override IEnumerable<String> classNamesInGroup
         {
             get
             {

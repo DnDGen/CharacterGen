@@ -31,7 +31,9 @@ namespace NPCGen.Tests.Unit.Generators.Combats
         private Dictionary<String, Int32> maxDexterityBonuses;
         private List<String> averageBaseAttacks;
         private List<String> goodBaseAttacks;
-        private Dictionary<String, Int32> racialAdjustments;
+        private Dictionary<String, Int32> racialBaseAttackAdjustments;
+        private Dictionary<String, Int32> racialInitiativeAdjustments;
+        private Dictionary<String, Int32> featInitiativeAdjustments;
 
         [SetUp]
         public void Setup()
@@ -51,6 +53,9 @@ namespace NPCGen.Tests.Unit.Generators.Combats
             maxDexterityBonuses = new Dictionary<String, Int32>();
             averageBaseAttacks = new List<String>();
             goodBaseAttacks = new List<String>();
+            racialBaseAttackAdjustments = new Dictionary<String, Int32>();
+            racialInitiativeAdjustments = new Dictionary<String, Int32>();
+            featInitiativeAdjustments = new Dictionary<String, Int32>();
 
             characterClass.ClassName = "class name";
             characterClass.Level = 20;
@@ -63,10 +68,11 @@ namespace NPCGen.Tests.Unit.Generators.Combats
             averageBaseAttacks.Add("other class name");
             goodBaseAttacks.Add("other class name");
 
-
-            racialAdjustments = new Dictionary<String, Int32>();
-            racialAdjustments[String.Empty] = 0;
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom("RacialBaseAttackAdjustments")).Returns(racialAdjustments);
+            racialBaseAttackAdjustments[String.Empty] = 0;
+            racialInitiativeAdjustments[String.Empty] = 0;
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom("RacialBaseAttackAdjustments")).Returns(racialBaseAttackAdjustments);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom("RacialInitiativeBonuses")).Returns(racialInitiativeAdjustments);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom("FeatInitiativeBonuses")).Returns(featInitiativeAdjustments);
         }
 
         [Test]
@@ -178,7 +184,7 @@ namespace NPCGen.Tests.Unit.Generators.Combats
         }
 
         [Test]
-        public void GetAllRacialBaseAttackAdjustment()
+        public void GetAllRacialBaseAttackAdjustments()
         {
             race.BaseRace = "base race";
             race.Metarace = "metarace";
@@ -289,6 +295,32 @@ namespace NPCGen.Tests.Unit.Generators.Combats
             var combat = combatGenerator.GenerateWith(baseAttack, characterClass, race, feats, stats, equipment);
 
             Assert.That(combat.SavingThrows, Is.EqualTo(savingThrows));
+        }
+
+        [Test]
+        public void InitiativeBonusIsSumOfBonuses()
+        {
+            race.BaseRace = "base race";
+            race.Metarace = "metarace";
+            feats.Add(new Feat { Name = "feat 1" });
+            feats.Add(new Feat { Name = "feat 2" });
+            feats.Add(new Feat { Name = "feat 3" });
+
+            racialInitiativeAdjustments[race.BaseRace] = 1;
+            racialInitiativeAdjustments[race.Metarace] = 1;
+            racialInitiativeAdjustments["other race"] = 5;
+
+            featInitiativeAdjustments[feats[0].Name] = 1;
+            featInitiativeAdjustments[feats[1].Name] = 0;
+            featInitiativeAdjustments[feats[2].Name] = 1;
+
+            racialBaseAttackAdjustments[race.BaseRace] = 0;
+            racialBaseAttackAdjustments[race.Metarace] = 0;
+
+            var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass, race);
+            var combat = combatGenerator.GenerateWith(baseAttack, characterClass, race, feats, stats, equipment);
+
+            Assert.That(combat.InitiativeBonus, Is.EqualTo(4));
         }
     }
 }

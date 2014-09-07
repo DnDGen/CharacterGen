@@ -21,6 +21,8 @@ namespace NPCGen.Tests.Unit.Common.Combats
             Assert.That(combat.BaseAttack, Is.Not.Null);
             Assert.That(combat.HitPoints, Is.EqualTo(0));
             Assert.That(combat.SavingThrows, Is.Not.Null);
+            Assert.That(combat.AdjustedDexterityBonus, Is.EqualTo(0));
+            Assert.That(combat.InitiativeBonus, Is.EqualTo(0));
         }
     }
 }

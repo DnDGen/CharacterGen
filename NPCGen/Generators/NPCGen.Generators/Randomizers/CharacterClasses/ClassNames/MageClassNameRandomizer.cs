@@ -18,15 +18,11 @@ namespace NPCGen.Generators.Randomizers.CharacterClasses.ClassNames
 
         protected override Boolean CharacterClassIsAllowed(String className, Alignment alignment)
         {
-            var classNames = collectionsSelector.SelectFrom("ClassNameGroups", "Mages");
-            if (!classNames.Contains(className))
-                return false;
+            var mages = collectionsSelector.SelectFrom("ClassNameGroups", "Mages");
+            var alignmentClasses = collectionsSelector.SelectFrom("ClassNameGroups", alignment.ToString());
 
-            switch (className)
-            {
-                case CharacterClassConstants.Bard: return !alignment.IsLawful();
-                default: return true;
-            }
+            var classes = mages.Intersect(alignmentClasses);
+            return classes.Contains(className);
         }
     }
 }

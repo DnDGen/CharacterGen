@@ -164,7 +164,31 @@ namespace NPCGen.Tests.Unit.Generators
         }
 
         [Test]
-        public void DetermineTypeOfHalfDragon()
+        public void DetermineSpeciesOfHalfDragonByAlignment()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void DetermineSpeciesOfHalfDragonByRandomWithinAlignment()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void DetermineLandSpeed()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void IfNoWings_AerialSpeedIsZero()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void IfWings_DetermineAerialSpeed()
         {
             Assert.Fail();
         }
