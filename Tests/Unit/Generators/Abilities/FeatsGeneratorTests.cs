@@ -165,13 +165,43 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         }
 
         [Test]
-        public void IfDuplicateRacialFeatsWithStrengthThatCanBeANumber_OnlyKeepStrongest()
+        public void OnlyKeepStrongestFeat()
         {
             Assert.Fail();
         }
 
         [Test]
-        public void IfDuplicateRacialFeatsWithStrengthThatCannotBeANumber_KeepBoth()
+        public void KeepBothFeats()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void AddStrengthsOfBothFeats()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void MeetMonsterHitDiceRequirementsForMetaracialFeats()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void DoNotMeetMonsterHitDiceRequirementsForMetaracialFeats()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void IfGreaterThanMonsterHitDiceRequirementsForMetaracialFeat_DoNotGetFeat()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void MetaracialFeatForTypeOfHalfDragon()
         {
             Assert.Fail();
         }

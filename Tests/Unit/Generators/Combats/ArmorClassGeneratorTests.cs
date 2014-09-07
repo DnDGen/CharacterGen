@@ -225,6 +225,24 @@ namespace NPCGen.Tests.Unit.Generators.Combats
         }
 
         [Test]
+        public void NaturalArmorBonusFromBaseRaceApplied()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void NaturalArmorBonusFromMetaraceApplied()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void NaturalArmorBonusFromBaseRaceAndMetaraceApplied()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
         public void OnlyHighestNaturalArmorBonusAppliesWhenHighestIsFeat()
         {
             feats.Add(new Feat { Name = "feat 1" });
@@ -266,6 +284,12 @@ namespace NPCGen.Tests.Unit.Generators.Combats
             equipment.Treasure.Items = new[] { ring, otherRing };
 
             AssertArmorClass(12, 12, 10);
+        }
+
+        [Test]
+        public void OnlyHighestNaturalArmorBonusAppliesWhenHighestIsRacial()
+        {
+            Assert.Fail();
         }
 
         [Test]

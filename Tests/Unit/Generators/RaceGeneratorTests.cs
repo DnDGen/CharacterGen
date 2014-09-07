@@ -147,6 +147,7 @@ namespace NPCGen.Tests.Unit.Generators
             mockCollectionsSelector.Setup(s => s.SelectFrom("BaseRaceGroups", RaceConstants.Sizes.Large)).Returns(new[] { "base race", "other base race" });
 
             var race = raceGenerator.GenerateWith(String.Empty, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
+            mockCollectionsSelector.Verify(s => s.SelectFrom("BaseRaceGroups", RaceConstants.Sizes.Large), Times.Once);
             Assert.That(race.HasWings, Is.True);
         }
 
@@ -158,7 +159,14 @@ namespace NPCGen.Tests.Unit.Generators
             mockCollectionsSelector.Setup(s => s.SelectFrom("BaseRaceGroups", RaceConstants.Sizes.Large)).Returns(new[] { "different base race", "other base race" });
 
             var race = raceGenerator.GenerateWith(String.Empty, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
+            mockCollectionsSelector.Verify(s => s.SelectFrom("BaseRaceGroups", RaceConstants.Sizes.Large), Times.Once);
             Assert.That(race.HasWings, Is.False);
+        }
+
+        [Test]
+        public void DetermineTypeOfHalfDragon()
+        {
+            Assert.Fail();
         }
     }
 }
