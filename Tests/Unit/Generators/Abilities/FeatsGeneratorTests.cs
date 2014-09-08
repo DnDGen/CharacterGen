@@ -32,6 +32,8 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         private List<FeatSelection> featSelections;
         private Mock<IDice> mockDice;
         private BaseAttack baseAttack;
+        private List<String> overwrittenStrengthFeats;
+        private List<String> cumulativeStrengthFeats;
 
         [SetUp]
         public void Setup()
@@ -49,9 +51,13 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             featSelections = new List<FeatSelection>();
             baseAttack = new BaseAttack();
             stats[StatConstants.Intelligence] = new Stat();
+            overwrittenStrengthFeats = new List<String>();
+            cumulativeStrengthFeats = new List<String>();
 
             mockFeatsSelector.Setup(s => s.SelectAll()).Returns(featSelections);
             mockDice.Setup(d => d.Roll(1).d(It.IsAny<Int32>())).Returns(1);
+            mockCollectionsSelector.Setup(s => s.SelectFrom("FeatGroups", "Overwritten Strengths")).Returns(overwrittenStrengthFeats);
+            mockCollectionsSelector.Setup(s => s.SelectFrom("FeatGroups", "Cumulative Strengths")).Returns(cumulativeStrengthFeats);
         }
 
         [Test]
@@ -84,13 +90,16 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             race.BaseRace = "base race-format";
             var racialFeats = new[] { "feat 1", "feat 2", "feat 3" };
             mockCollectionsSelector.Setup(s => s.SelectFrom("RacialFeats", race.BaseRace)).Returns(racialFeats);
-            mockCollectionsSelector.Setup(s => s.SelectFrom("RacialFeatStrengths", race.BaseRace)).Returns(new[] { "feat 1", "feat 3" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom("baseraceformatFeatStrengths", "feat 1")).Returns(new[] { "+9266" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom("baseraceformatFeatStrengths", "feat 3")).Returns(new[] { "90210 ft." });
+            mockCollectionsSelector.Setup(s => s.SelectFrom("RacialFeatWithStrengths", race.BaseRace)).Returns(new[] { "feat 1", "feat 3" });
+
+            var featStrengths = new Dictionary<String, Int32>();
+            featStrengths["feat 1"] = 9266;
+            featStrengths["feat 3"] = 90210;
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom("baseraceformatFeatStrengths")).Returns(featStrengths);
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
-            Assert.That(feats.First().SpecificApplication, Is.EqualTo("+9266"));
-            Assert.That(feats.Last().SpecificApplication, Is.EqualTo("90210 ft."));
+            Assert.That(feats.First().SpecificApplication, Is.EqualTo("9266"));
+            Assert.That(feats.Last().SpecificApplication, Is.EqualTo("90210"));
             Assert.That(feats.Where(f => !String.IsNullOrEmpty(f.SpecificApplication)), Is.EqualTo(2));
             Assert.That(feats.Where(f => String.IsNullOrEmpty(f.SpecificApplication)).Single().Name, Is.EqualTo("feat 2"));
             Assert.That(feats.Count(), Is.EqualTo(3));
@@ -102,8 +111,12 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             race.BaseRace = "base race-format";
             var racialFeats = new[] { "feat 1", "feat 2", "feat 3" };
             mockCollectionsSelector.Setup(s => s.SelectFrom("RacialFeats", race.BaseRace)).Returns(racialFeats);
-            mockCollectionsSelector.Setup(s => s.SelectFrom("RacialFeatStrengths", race.BaseRace)).Returns(Enumerable.Empty<String>());
-            mockCollectionsSelector.Setup(s => s.SelectFrom("baseraceformatFeatStrengths", It.IsAny<String>())).Returns(new[] { "strength" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom("RacialFeatWithStrengths", race.BaseRace)).Returns(Enumerable.Empty<String>());
+
+            var featStrengths = new Dictionary<String, Int32>();
+            featStrengths["feat 1"] = 9266;
+            featStrengths["feat 3"] = 90210;
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom("baseraceformatFeatStrengths")).Returns(featStrengths);
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
             Assert.That(feats.All(f => String.IsNullOrEmpty(f.SpecificApplication)), Is.True);
@@ -139,13 +152,16 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             race.Metarace = "metarace-fo rmat";
             var racialFeats = new[] { "feat 1", "feat 2", "feat 3" };
             mockCollectionsSelector.Setup(s => s.SelectFrom("RacialFeats", race.Metarace)).Returns(racialFeats);
-            mockCollectionsSelector.Setup(s => s.SelectFrom("RacialFeatStrengths", race.Metarace)).Returns(new[] { "feat 1", "feat 3" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom("metaraceformatFeatStrengths", "feat 1")).Returns(new[] { "+9266" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom("metaraceformatFeatStrengths", "feat 3")).Returns(new[] { "90210 ft." });
+            mockCollectionsSelector.Setup(s => s.SelectFrom("RacialFeatWithStrengths", race.Metarace)).Returns(new[] { "feat 1", "feat 3" });
+
+            var featStrengths = new Dictionary<String, Int32>();
+            featStrengths["feat 1"] = 9266;
+            featStrengths["feat 3"] = 90210;
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom("metaraceformatFeatStrengths")).Returns(featStrengths);
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
-            Assert.That(feats.First().SpecificApplication, Is.EqualTo("+9266"));
-            Assert.That(feats.Last().SpecificApplication, Is.EqualTo("90210 ft."));
+            Assert.That(feats.First().SpecificApplication, Is.EqualTo("9266"));
+            Assert.That(feats.Last().SpecificApplication, Is.EqualTo("90210"));
             Assert.That(feats.Where(f => !String.IsNullOrEmpty(f.SpecificApplication)), Is.EqualTo(2));
             Assert.That(feats.Where(f => String.IsNullOrEmpty(f.SpecificApplication)).Single().Name, Is.EqualTo("feat 2"));
             Assert.That(feats.Count(), Is.EqualTo(3));
@@ -157,8 +173,12 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             race.Metarace = "metarace-fo rmat";
             var racialFeats = new[] { "feat 1", "feat 2", "feat 3" };
             mockCollectionsSelector.Setup(s => s.SelectFrom("RacialFeats", race.Metarace)).Returns(racialFeats);
-            mockCollectionsSelector.Setup(s => s.SelectFrom("RacialFeatStrengths", race.Metarace)).Returns(Enumerable.Empty<String>());
-            mockCollectionsSelector.Setup(s => s.SelectFrom("metaraceformatFeatStrengths", It.IsAny<String>())).Returns(new[] { "strength" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom("RacialFeatWithStrengths", race.Metarace)).Returns(Enumerable.Empty<String>());
+
+            var featStrengths = new Dictionary<String, Int32>();
+            featStrengths["feat 1"] = 9266;
+            featStrengths["feat 3"] = 90210;
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom("baseraceformatFeatStrengths")).Returns(featStrengths);
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
             Assert.That(feats.All(f => String.IsNullOrEmpty(f.SpecificApplication)), Is.True);
@@ -167,24 +187,94 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         [Test]
         public void OnlyKeepStrongestFeat()
         {
-            Assert.Fail();
-        }
+            race.BaseRace = "base race";
+            race.Metarace = "metarace";
+            var racialFeats = new[] { "feat 1" };
+            overwrittenStrengthFeats.Add("feat 1");
 
-        [Test]
-        public void KeepBothFeats()
-        {
-            Assert.Fail();
+            mockCollectionsSelector.Setup(s => s.SelectFrom("RacialFeats", race.Metarace)).Returns(racialFeats);
+            mockCollectionsSelector.Setup(s => s.SelectFrom("RacialFeats", race.BaseRace)).Returns(racialFeats);
+            mockCollectionsSelector.Setup(s => s.SelectFrom("RacialFeatWithStrengths", race.Metarace)).Returns(new[] { "feat 1" });
+
+            var baseRaceFeatStrengths = new Dictionary<String, Int32>();
+            baseRaceFeatStrengths["feat 1"] = 90;
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom("baseraceFeatStrengths")).Returns(baseRaceFeatStrengths);
+
+            var metaraceFeatStrengths = new Dictionary<String, Int32>();
+            metaraceFeatStrengths["feat 1"] = 60;
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom("metaraceFeatStrengths")).Returns(metaraceFeatStrengths);
+
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            var onlyFeat = feats.Single();
+
+            Assert.That(onlyFeat.Name, Is.EqualTo("feat 1"));
+            Assert.That(onlyFeat.SpecificApplication, Is.EqualTo("90 ft"));
         }
 
         [Test]
         public void AddStrengthsOfBothFeats()
         {
-            Assert.Fail();
+            race.BaseRace = "base race";
+            race.Metarace = "metarace";
+            var racialFeats = new[] { "feat 1" };
+            cumulativeStrengthFeats.Add("feat 1");
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom("RacialFeats", race.Metarace)).Returns(racialFeats);
+            mockCollectionsSelector.Setup(s => s.SelectFrom("RacialFeats", race.BaseRace)).Returns(racialFeats);
+            mockCollectionsSelector.Setup(s => s.SelectFrom("RacialFeatWithStrengths", race.Metarace)).Returns(new[] { "feat 1" });
+
+            var baseRaceFeatStrengths = new Dictionary<String, Int32>();
+            baseRaceFeatStrengths["feat 1"] = 90;
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom("baseraceFeatStrengths")).Returns(baseRaceFeatStrengths);
+
+            var metaraceFeatStrengths = new Dictionary<String, Int32>();
+            metaraceFeatStrengths["feat 1"] = 60;
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom("metaraceFeatStrengths")).Returns(metaraceFeatStrengths);
+
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            var onlyFeat = feats.Single();
+
+            Assert.That(onlyFeat.Name, Is.EqualTo("feat 1"));
+            Assert.That(onlyFeat.SpecificApplication, Is.EqualTo("150"));
+        }
+
+        [Test]
+        public void KeepBothFeats()
+        {
+            race.BaseRace = "base race";
+            race.Metarace = "metarace";
+            var racialFeats = new[] { "feat 1" };
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom("RacialFeats", race.Metarace)).Returns(racialFeats);
+            mockCollectionsSelector.Setup(s => s.SelectFrom("RacialFeats", race.BaseRace)).Returns(racialFeats);
+            mockCollectionsSelector.Setup(s => s.SelectFrom("RacialFeatWithStrengths", race.Metarace)).Returns(new[] { "feat 1" });
+
+            var baseRaceFeatStrengths = new Dictionary<String, Int32>();
+            baseRaceFeatStrengths["feat 1"] = 90;
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom("baseraceFeatStrengths")).Returns(baseRaceFeatStrengths);
+
+            var metaraceFeatStrengths = new Dictionary<String, Int32>();
+            metaraceFeatStrengths["feat 1"] = 60;
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom("metaraceFeatStrengths")).Returns(metaraceFeatStrengths);
+
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            var firstFeat = feats.First();
+            var lastFeat = feats.Last();
+
+            Assert.That(firstFeat.Name, Is.EqualTo("feat 1"));
+            Assert.That(firstFeat.SpecificApplication, Is.EqualTo("60"));
+            Assert.That(lastFeat.Name, Is.EqualTo("feat 1"));
+            Assert.That(lastFeat.SpecificApplication, Is.EqualTo("90"));
+            Assert.That(feats.Count(), Is.EqualTo(2));
         }
 
         [Test]
         public void MeetMonsterHitDiceRequirementsForMetaracialFeats()
         {
+            race.Metarace = "metarace";
+            var racialFeats = new[] { "feat 1" };
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom("RacialFeats", race.Metarace)).Returns(racialFeats);
             Assert.Fail();
         }
 
