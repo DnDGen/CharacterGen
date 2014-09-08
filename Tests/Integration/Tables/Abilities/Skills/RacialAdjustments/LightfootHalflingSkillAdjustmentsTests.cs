@@ -13,20 +13,6 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Skills.RacialAdjustments
             get { return "LightfootHalflingSkillAdjustments"; }
         }
 
-        protected override IEnumerable<String> nameCollection
-        {
-            get
-            {
-                return new[]
-                {
-                    SkillConstants.Climb,
-                    SkillConstants.Jump,
-                    SkillConstants.Listen,
-                    SkillConstants.MoveSilently
-                };
-            }
-        }
-
         [TestCase(SkillConstants.Climb, 2)]
         [TestCase(SkillConstants.Jump, 2)]
         [TestCase(SkillConstants.Listen, 2)]

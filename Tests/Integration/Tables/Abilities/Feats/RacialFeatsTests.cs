@@ -14,11 +14,6 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
             get { return "RacialFeats"; }
         }
 
-        protected override IEnumerable<String> nameCollection
-        {
-            get { return RaceConstants.GetAllRaces(); }
-        }
-
         [TestCase(RaceConstants.BaseRaces.Aasimar,
             FeatConstants.Darkvision,
             FeatConstants.AasimarDaylight,

@@ -36,6 +36,7 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
             Assert.That(selection.RequiredClassNames, Is.Empty);
             Assert.That(selection.IsFighterFeat, Is.False);
             Assert.That(selection.SpecificApplicationType, Is.Empty);
+            Assert.That(selection.IsMetamagicFeat, Is.False);
         }
 
         [Test]
@@ -72,11 +73,22 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
         }
 
         [Test]
-        public void SkillRequirementsNotMet()
+        public void SkillRequirementsWithCrossClassSkillNotMet()
         {
             selection.RequiredSkillRanks["skill"] = 5;
             skills["skill"] = new Skill { Ranks = 9, ClassSkill = false };
-            skills["other skill"] = new Skill { Ranks = 9, ClassSkill = true };
+            skills["other skill"] = new Skill { Ranks = 10, ClassSkill = false };
+
+            var met = selection.ImmutableRequirementsMet(1, stats, skills, String.Empty);
+            Assert.That(met, Is.False);
+        }
+
+        [Test]
+        public void SkillRequirementsWithClassSkillNotMet()
+        {
+            selection.RequiredSkillRanks["skill"] = 5;
+            skills["skill"] = new Skill { Ranks = 4, ClassSkill = true };
+            skills["other skill"] = new Skill { Ranks = 5, ClassSkill = true };
 
             var met = selection.ImmutableRequirementsMet(1, stats, skills, String.Empty);
             Assert.That(met, Is.False);
@@ -91,15 +103,13 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
             Assert.That(met, Is.False);
         }
 
-        [Test]
-        public void AnyMatchingCLassNameMeetsRequirement()
+        [TestCase("class name")]
+        [TestCase("other class name")]
+        public void AnyMatchingClassNameMeetsRequirement(String className)
         {
             selection.RequiredClassNames = new[] { "class name", "other class name" };
 
-            var met = selection.ImmutableRequirementsMet(2, stats, skills, "other class name");
-            Assert.That(met, Is.True);
-
-            met = selection.ImmutableRequirementsMet(2, stats, skills, "class name");
+            var met = selection.ImmutableRequirementsMet(2, stats, skills, className);
             Assert.That(met, Is.True);
         }
 
@@ -112,9 +122,12 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
             stats["stat"] = new Stat { Value = 16 };
             stats["other stat"] = new Stat { Value = 15 };
 
-            selection.RequiredSkillRanks["skill"] = 5;
-            skills["skill"] = new Skill { Ranks = 10, ClassSkill = false };
-            skills["other skill"] = new Skill { Ranks = 1 };
+            selection.RequiredSkillRanks["class skill"] = 5;
+            selection.RequiredSkillRanks["cross-class skill"] = 5;
+            skills["class skill"] = new Skill { Ranks = 10, ClassSkill = false };
+            skills["other class skill"] = new Skill { Ranks = 9, ClassSkill = false };
+            skills["cross-class skill"] = new Skill { Ranks = 5, ClassSkill = true };
+            skills["other cross-class skill"] = new Skill { Ranks = 4, ClassSkill = true };
 
             selection.RequiredClassNames = new[] { "class name", "other class name" };
 

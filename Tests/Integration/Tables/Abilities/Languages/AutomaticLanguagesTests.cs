@@ -16,18 +16,6 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Languages
             get { return "AutomaticLanguages"; }
         }
 
-        protected override IEnumerable<String> nameCollection
-        {
-            get
-            {
-                var baseRaces = RaceConstants.BaseRaces.GetBaseRaces();
-                var metaraces = RaceConstants.Metaraces.GetMetaraces();
-                var classNames = CharacterClassConstants.GetClassNames();
-
-                return baseRaces.Union(metaraces).Union(classNames);
-            }
-        }
-
         [TestCase(RaceConstants.BaseRaces.Aasimar, LanguageConstants.Common,
                                                    LanguageConstants.Celestial)]
         [TestCase(RaceConstants.BaseRaces.Bugbear, LanguageConstants.Common,

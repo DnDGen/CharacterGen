@@ -13,11 +13,6 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Skills
             get { return "SkillSynergy"; }
         }
 
-        protected override IEnumerable<String> nameCollection
-        {
-            get { return SkillConstants.GetSkills(); }
-        }
-
         [TestCase(SkillConstants.Bluff,
             SkillConstants.Diplomacy,
             SkillConstants.Intimidate,

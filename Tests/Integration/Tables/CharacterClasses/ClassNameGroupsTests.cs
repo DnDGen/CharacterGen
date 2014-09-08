@@ -13,21 +13,6 @@ namespace NPCGen.Tests.Integration.Tables.CharacterClasses
             get { return "ClassNameGroups"; }
         }
 
-        protected override IEnumerable<String> nameCollection
-        {
-            get
-            {
-                return new[]
-                {
-                    "Healers",
-                    "Spellcasters",
-                    "Stealth",
-                    "Warriors",
-                    "Mages"
-                };
-            }
-        }
-
         [TestCase("Healers",
             CharacterClassConstants.Bard,
             CharacterClassConstants.Cleric,
@@ -57,18 +42,102 @@ namespace NPCGen.Tests.Integration.Tables.CharacterClasses
             CharacterClassConstants.Monk,
             CharacterClassConstants.Paladin,
             CharacterClassConstants.Ranger)]
-        [TestCase("GoodBaseAttack",
+        [TestCase("Good Base Attack",
             CharacterClassConstants.Barbarian,
             CharacterClassConstants.Fighter,
             CharacterClassConstants.Paladin,
             CharacterClassConstants.Ranger)]
-        [TestCase("AverageBaseAttack",
+        [TestCase("Average Base Attack",
             CharacterClassConstants.Bard,
             CharacterClassConstants.Cleric,
             CharacterClassConstants.Druid,
             CharacterClassConstants.Monk,
             CharacterClassConstants.Rogue)]
-        [TestCase("PoorBaseAttack",
+        [TestCase("Poor Base Attack",
+            CharacterClassConstants.Sorcerer,
+            CharacterClassConstants.Wizard)]
+        [TestCase("Lawful Good",
+            CharacterClassConstants.Cleric,
+            CharacterClassConstants.Fighter,
+            CharacterClassConstants.Monk,
+            CharacterClassConstants.Paladin,
+            CharacterClassConstants.Ranger,
+            CharacterClassConstants.Rogue,
+            CharacterClassConstants.Sorcerer,
+            CharacterClassConstants.Wizard)]
+        [TestCase("Neutral Good",
+            CharacterClassConstants.Cleric,
+            CharacterClassConstants.Fighter,
+            CharacterClassConstants.Barbarian,
+            CharacterClassConstants.Bard,
+            CharacterClassConstants.Ranger,
+            CharacterClassConstants.Rogue,
+            CharacterClassConstants.Sorcerer,
+            CharacterClassConstants.Wizard,
+            CharacterClassConstants.Druid)]
+        [TestCase("Chaotic Good",
+            CharacterClassConstants.Cleric,
+            CharacterClassConstants.Fighter,
+            CharacterClassConstants.Barbarian,
+            CharacterClassConstants.Bard,
+            CharacterClassConstants.Ranger,
+            CharacterClassConstants.Rogue,
+            CharacterClassConstants.Sorcerer,
+            CharacterClassConstants.Wizard)]
+        [TestCase("Lawful Neutral",
+            CharacterClassConstants.Cleric,
+            CharacterClassConstants.Fighter,
+            CharacterClassConstants.Monk,
+            CharacterClassConstants.Ranger,
+            CharacterClassConstants.Rogue,
+            CharacterClassConstants.Sorcerer,
+            CharacterClassConstants.Wizard,
+            CharacterClassConstants.Druid)]
+        [TestCase("True Neutral",
+            CharacterClassConstants.Cleric,
+            CharacterClassConstants.Fighter,
+            CharacterClassConstants.Barbarian,
+            CharacterClassConstants.Bard,
+            CharacterClassConstants.Ranger,
+            CharacterClassConstants.Rogue,
+            CharacterClassConstants.Sorcerer,
+            CharacterClassConstants.Wizard,
+            CharacterClassConstants.Druid)]
+        [TestCase("Chaotic Neutral",
+            CharacterClassConstants.Cleric,
+            CharacterClassConstants.Fighter,
+            CharacterClassConstants.Barbarian,
+            CharacterClassConstants.Bard,
+            CharacterClassConstants.Ranger,
+            CharacterClassConstants.Rogue,
+            CharacterClassConstants.Sorcerer,
+            CharacterClassConstants.Wizard,
+            CharacterClassConstants.Druid)]
+        [TestCase("Lawful Evil",
+            CharacterClassConstants.Cleric,
+            CharacterClassConstants.Fighter,
+            CharacterClassConstants.Monk,
+            CharacterClassConstants.Ranger,
+            CharacterClassConstants.Rogue,
+            CharacterClassConstants.Sorcerer,
+            CharacterClassConstants.Wizard)]
+        [TestCase("Neutral Evil",
+            CharacterClassConstants.Cleric,
+            CharacterClassConstants.Fighter,
+            CharacterClassConstants.Barbarian,
+            CharacterClassConstants.Bard,
+            CharacterClassConstants.Ranger,
+            CharacterClassConstants.Rogue,
+            CharacterClassConstants.Sorcerer,
+            CharacterClassConstants.Wizard,
+            CharacterClassConstants.Druid)]
+        [TestCase("Chaotic Evil",
+            CharacterClassConstants.Cleric,
+            CharacterClassConstants.Fighter,
+            CharacterClassConstants.Barbarian,
+            CharacterClassConstants.Bard,
+            CharacterClassConstants.Ranger,
+            CharacterClassConstants.Rogue,
             CharacterClassConstants.Sorcerer,
             CharacterClassConstants.Wizard)]
         public override void DistinctCollection(String name, params String[] collection)

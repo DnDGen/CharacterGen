@@ -16,17 +16,6 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Languages
             get { return "BonusLanguages"; }
         }
 
-        protected override IEnumerable<String> nameCollection
-        {
-            get
-            {
-                var baseRaces = RaceConstants.BaseRaces.GetBaseRaces();
-                var classNames = CharacterClassConstants.GetClassNames();
-
-                return baseRaces.Union(classNames);
-            }
-        }
-
         [TestCase(RaceConstants.BaseRaces.Aasimar,
             LanguageConstants.Dwarven,
             LanguageConstants.Elven,

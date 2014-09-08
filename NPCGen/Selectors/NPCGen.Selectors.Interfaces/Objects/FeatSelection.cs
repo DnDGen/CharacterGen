@@ -15,6 +15,7 @@ namespace NPCGen.Selectors.Interfaces.Objects
         public Dictionary<String, Int32> RequiredStats { get; set; }
         public Dictionary<String, Int32> RequiredSkillRanks { get; set; }
         public Boolean IsFighterFeat { get; set; }
+        public Boolean IsMetamagicFeat { get; set; }
         public IEnumerable<String> RequiredClassNames { get; set; }
         public String SpecificApplicationType { get; set; }
 

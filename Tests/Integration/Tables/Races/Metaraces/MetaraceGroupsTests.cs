@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using NPCGen.Common.Alignments;
 using NPCGen.Common.Races;
 using NUnit.Framework;
@@ -12,21 +11,6 @@ namespace NPCGen.Tests.Integration.Tables.Races.Metaraces
         protected override String tableName
         {
             get { return "MetaraceGroups"; }
-        }
-
-        protected override IEnumerable<String> nameCollection
-        {
-            get
-            {
-                return new[]
-                {
-                    AlignmentConstants.Evil,
-                    AlignmentConstants.Good,
-                    AlignmentConstants.Neutral,
-                    "Genetic",
-                    "Lycanthrope"
-                };
-            }
         }
 
         [TestCase(AlignmentConstants.Evil,

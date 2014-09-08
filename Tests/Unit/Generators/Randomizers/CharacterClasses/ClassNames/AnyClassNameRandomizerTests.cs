@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using NPCGen.Generators.Randomizers.CharacterClasses.ClassNames;
 using NUnit.Framework;
 
@@ -9,11 +7,6 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassNames
     [TestFixture]
     public class AnyClassNameRandomizerTests : ClassNameRandomizerTests
     {
-        protected override IEnumerable<String> classNamesInGroup
-        {
-            get { return Enumerable.Empty<String>(); }
-        }
-
         protected override String classNameGroup
         {
             get { return String.Empty; }
@@ -29,7 +22,6 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassNames
         public void ClassIsAllowed()
         {
             alignmentClasses.Add(ClassName);
-            alignmentClasses.Add(OtherClassName);
             var classNames = randomizer.GetAllPossibleResults(alignment);
             Assert.That(classNames, Contains.Item(ClassName));
         }
@@ -37,7 +29,6 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassNames
         [Test]
         public void ClassIsNotAllowed()
         {
-            alignmentClasses.Add(OtherClassName);
             var classNames = randomizer.GetAllPossibleResults(alignment);
             Assert.That(classNames, Is.Not.Contains(ClassName));
         }

@@ -14,11 +14,6 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Skills
             get { return "ClassSkills"; }
         }
 
-        protected override IEnumerable<String> nameCollection
-        {
-            get { return CharacterClassConstants.GetClassNames(); }
-        }
-
         [TestCase(CharacterClassConstants.Barbarian,
             SkillConstants.Climb,
             SkillConstants.HandleAnimal,

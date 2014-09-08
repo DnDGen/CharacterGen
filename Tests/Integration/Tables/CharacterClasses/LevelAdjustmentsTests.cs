@@ -13,11 +13,6 @@ namespace NPCGen.Tests.Integration.Tables.CharacterClasses
             get { return "LevelAdjustments"; }
         }
 
-        protected override IEnumerable<String> nameCollection
-        {
-            get { return RaceConstants.GetAllRaces(); }
-        }
-
         [TestCase(RaceConstants.BaseRaces.Aasimar, 0)]
         [TestCase(RaceConstants.BaseRaces.Bugbear, 2)]
         [TestCase(RaceConstants.BaseRaces.Derro, 1)]

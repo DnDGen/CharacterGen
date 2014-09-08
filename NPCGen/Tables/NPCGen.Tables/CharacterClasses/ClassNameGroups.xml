@@ -41,14 +41,14 @@
         <item>Barbarian</item>
     </object>
     <object>
-        <name>GoodBaseAttack</name>
+        <name>Good Base Attack</name>
         <item>Fighter</item>
         <item>Paladin</item>
         <item>Ranger</item>
         <item>Barbarian</item>
     </object>
     <object>
-        <name>AverageBaseAttack</name>
+        <name>Average Base Attack</name>
         <item>Cleric</item>
         <item>Monk</item>
         <item>Druid</item>
@@ -56,7 +56,109 @@
         <item>Bard</item>
     </object>
     <object>
-        <name>PoorBaseAttack</name>
+        <name>Poor Base Attack</name>
+        <item>Sorcerer</item>
+        <item>Wizard</item>
+    </object>
+    <object>
+        <name>Lawful Good</name>
+        <item>Cleric</item>
+        <item>Fighter</item>
+        <item>Monk</item>
+        <item>Paladin</item>
+        <item>Ranger</item>
+        <item>Rogue</item>
+        <item>Sorcerer</item>
+        <item>Wizard</item>
+    </object>
+    <object>
+        <name>Neutral Good</name>
+        <item>Barbarian</item>
+        <item>Bard</item>
+        <item>Cleric</item>
+        <item>Druid</item>
+        <item>Fighter</item>
+        <item>Ranger</item>
+        <item>Rogue</item>
+        <item>Sorcerer</item>
+        <item>Wizard</item>
+    </object>
+    <object>
+        <name>Chaotic Good</name>
+        <item>Barbarian</item>
+        <item>Bard</item>
+        <item>Cleric</item>
+        <item>Fighter</item>
+        <item>Ranger</item>
+        <item>Rogue</item>
+        <item>Sorcerer</item>
+        <item>Wizard</item>
+    </object>
+    <object>
+        <name>Lawful Neutral</name>
+        <item>Cleric</item>
+        <item>Druid</item>
+        <item>Fighter</item>
+        <item>Monk</item>
+        <item>Ranger</item>
+        <item>Rogue</item>
+        <item>Sorcerer</item>
+        <item>Wizard</item>
+    </object>
+    <object>
+        <name>True Neutral</name>
+        <item>Barbarian</item>
+        <item>Bard</item>
+        <item>Cleric</item>
+        <item>Druid</item>
+        <item>Fighter</item>
+        <item>Ranger</item>
+        <item>Rogue</item>
+        <item>Sorcerer</item>
+        <item>Wizard</item>
+    </object>
+    <object>
+        <name>Chaotic Neutral</name>
+        <item>Barbarian</item>
+        <item>Bard</item>
+        <item>Cleric</item>
+        <item>Druid</item>
+        <item>Fighter</item>
+        <item>Ranger</item>
+        <item>Rogue</item>
+        <item>Sorcerer</item>
+        <item>Wizard</item>
+    </object>
+    <object>
+        <name>Lawful Evil</name>
+        <item>Cleric</item>
+        <item>Fighter</item>
+        <item>Monk</item>
+        <item>Ranger</item>
+        <item>Rogue</item>
+        <item>Sorcerer</item>
+        <item>Wizard</item>
+    </object>
+    <object>
+        <name>Neutral Evil</name>
+        <item>Barbarian</item>
+        <item>Bard</item>
+        <item>Cleric</item>
+        <item>Druid</item>
+        <item>Fighter</item>
+        <item>Ranger</item>
+        <item>Rogue</item>
+        <item>Sorcerer</item>
+        <item>Wizard</item>
+    </object>
+    <object>
+        <name>Chaotic Evil</name>
+        <item>Barbarian</item>
+        <item>Bard</item>
+        <item>Cleric</item>
+        <item>Fighter</item>
+        <item>Ranger</item>
+        <item>Rogue</item>
         <item>Sorcerer</item>
         <item>Wizard</item>
     </object>

@@ -189,7 +189,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         }
 
         [Test]
-        public void NonMonstersHaveOneMonsterHitDie()
+        public void NonMonstersHaveOneMonsterHitDieForSakeOfHitDiceRequirements()
         {
             Assert.Fail();
         }
@@ -573,6 +573,128 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
 
             Assert.That(featNames, Contains.Item(featSelections[2].FeatName));
             Assert.That(featNames.Count(), Is.EqualTo(1));
+        }
+
+        [TestCase(1, 0)]
+        [TestCase(2, 0)]
+        [TestCase(3, 0)]
+        [TestCase(4, 0)]
+        [TestCase(5, 1)]
+        [TestCase(6, 1)]
+        [TestCase(7, 1)]
+        [TestCase(8, 1)]
+        [TestCase(9, 1)]
+        [TestCase(10, 2)]
+        [TestCase(11, 2)]
+        [TestCase(12, 2)]
+        [TestCase(13, 2)]
+        [TestCase(14, 2)]
+        [TestCase(15, 3)]
+        [TestCase(16, 3)]
+        [TestCase(17, 3)]
+        [TestCase(18, 3)]
+        [TestCase(19, 3)]
+        [TestCase(20, 4)]
+        public void WizardsGetBonusMetamagicFeats(Int32 level, Int32 numberOfBonusFeats)
+        {
+            characterClass.ClassName = CharacterClassConstants.Wizard;
+            characterClass.Level = level;
+            AddFeatSelections(20);
+            foreach (var selection in featSelections)
+                selection.IsMetamagicFeat = true;
+
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            var featNames = feats.Select(f => f.Name);
+            var additionalFeats = level / 3 + 1;
+            var totalFeats = numberOfBonusFeats + additionalFeats;
+
+            for (var i = 0; i < totalFeats; i++)
+                Assert.That(featNames, Contains.Item(featSelections[i].FeatName));
+
+            Assert.That(featNames.Count(), Is.EqualTo(totalFeats));
+        }
+
+        [Test]
+        public void DoNotGetNonMetamagicFeats()
+        {
+            characterClass.ClassName = CharacterClassConstants.Wizard;
+            characterClass.Level = 5;
+            AddFeatSelections(5);
+            featSelections[3].IsMetamagicFeat = true;
+
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            var featNames = feats.Select(f => f.Name);
+
+            Assert.That(featNames, Contains.Item(featSelections[0].FeatName));
+            Assert.That(featNames, Contains.Item(featSelections[1].FeatName));
+            Assert.That(featNames, Contains.Item(featSelections[2].FeatName));
+            Assert.That(featNames, Contains.Item(featSelections[4].FeatName));
+            Assert.That(featNames.Count(), Is.EqualTo(4));
+        }
+
+        [Test]
+        public void DoNotGetMetamagicFeatsIfNoneAvailable()
+        {
+            characterClass.ClassName = CharacterClassConstants.Wizard;
+            characterClass.Level = 5;
+            AddFeatSelections(4);
+            featSelections[0].IsMetamagicFeat = true;
+
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            var featNames = feats.Select(f => f.Name);
+
+            Assert.That(featNames, Contains.Item(featSelections[0].FeatName));
+            Assert.That(featNames, Contains.Item(featSelections[1].FeatName));
+            Assert.That(featNames, Contains.Item(featSelections[2].FeatName));
+            Assert.That(featNames.Count(), Is.EqualTo(3));
+        }
+
+        [Test]
+        public void DoNotGetMoreMetamagicFeatsIfNoneAvailable()
+        {
+            characterClass.ClassName = CharacterClassConstants.Wizard;
+            characterClass.Level = 10;
+            AddFeatSelections(6);
+            featSelections[1].IsMetamagicFeat = true;
+            featSelections[5].IsMetamagicFeat = true;
+
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            var featNames = feats.Select(f => f.Name);
+
+            Assert.That(featNames, Contains.Item(featSelections[0].FeatName));
+            Assert.That(featNames, Contains.Item(featSelections[1].FeatName));
+            Assert.That(featNames, Contains.Item(featSelections[2].FeatName));
+            Assert.That(featNames, Contains.Item(featSelections[3].FeatName));
+            Assert.That(featNames, Contains.Item(featSelections[5].FeatName));
+            Assert.That(featNames.Count(), Is.EqualTo(5));
+        }
+
+        [Test]
+        public void MetamagicFeatsPickedAtRandom()
+        {
+            characterClass.ClassName = CharacterClassConstants.Wizard;
+            characterClass.Level = 10;
+            AddFeatSelections(7);
+            foreach (var feat in featSelections)
+                feat.IsMetamagicFeat = true;
+
+            mockDice.Setup(d => d.Roll(1).d(7)).Returns(7);
+            mockDice.Setup(d => d.Roll(1).d(6)).Returns(6);
+            mockDice.Setup(d => d.Roll(1).d(5)).Returns(5);
+            mockDice.Setup(d => d.Roll(1).d(4)).Returns(4);
+            mockDice.Setup(d => d.Roll(1).d(3)).Returns(1);
+            mockDice.Setup(d => d.Roll(1).d(2)).Returns(2);
+
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            var featNames = feats.Select(f => f.Name);
+
+            Assert.That(featNames, Contains.Item(featSelections[0].FeatName));
+            Assert.That(featNames, Contains.Item(featSelections[2].FeatName));
+            Assert.That(featNames, Contains.Item(featSelections[3].FeatName));
+            Assert.That(featNames, Contains.Item(featSelections[4].FeatName));
+            Assert.That(featNames, Contains.Item(featSelections[5].FeatName));
+            Assert.That(featNames, Contains.Item(featSelections[6].FeatName));
+            Assert.That(featNames.Count(), Is.EqualTo(3));
         }
 
         [Test]

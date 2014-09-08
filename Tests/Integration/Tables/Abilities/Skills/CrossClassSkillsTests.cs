@@ -14,11 +14,6 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Skills
             get { return "CrossClassSkills"; }
         }
 
-        protected override IEnumerable<String> nameCollection
-        {
-            get { return CharacterClassConstants.GetClassNames(); }
-        }
-
         [TestCase(CharacterClassConstants.Barbarian,
             SkillConstants.Appraise,
             SkillConstants.Balance,

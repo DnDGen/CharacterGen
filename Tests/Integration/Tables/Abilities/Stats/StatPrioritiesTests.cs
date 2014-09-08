@@ -14,11 +14,6 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Stats
             get { return "StatPriorities"; }
         }
 
-        protected override IEnumerable<String> nameCollection
-        {
-            get { return CharacterClassConstants.GetClassNames(); }
-        }
-
         [TestCase(CharacterClassConstants.Barbarian, StatConstants.Strength, StatConstants.Dexterity)]
         [TestCase(CharacterClassConstants.Bard, StatConstants.Charisma, StatConstants.Intelligence)]
         [TestCase(CharacterClassConstants.Cleric, StatConstants.Wisdom, StatConstants.Constitution)]

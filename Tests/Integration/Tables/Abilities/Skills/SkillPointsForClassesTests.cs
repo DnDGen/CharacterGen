@@ -13,11 +13,6 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Skills
             get { return "SkillPointsForClasses"; }
         }
 
-        protected override IEnumerable<String> nameCollection
-        {
-            get { return CharacterClassConstants.GetClassNames(); }
-        }
-
         [TestCase(CharacterClassConstants.Barbarian, 4)]
         [TestCase(CharacterClassConstants.Bard, 6)]
         [TestCase(CharacterClassConstants.Cleric, 2)]

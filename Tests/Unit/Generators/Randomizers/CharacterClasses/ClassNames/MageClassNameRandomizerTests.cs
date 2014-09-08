@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using NPCGen.Common.CharacterClasses;
 using NPCGen.Generators.Randomizers.CharacterClasses.ClassNames;
 using NUnit.Framework;
 
@@ -9,20 +7,6 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassNames
     [TestFixture]
     public class MageClassNameRandomizerTests : ClassNameRandomizerTests
     {
-        protected override IEnumerable<String> classNamesInGroup
-        {
-            get
-            {
-                return new[]
-                {
-                    CharacterClassConstants.Bard,
-                    CharacterClassConstants.Ranger,
-                    CharacterClassConstants.Sorcerer,
-                    CharacterClassConstants.Wizard
-                };
-            }
-        }
-
         protected override String classNameGroup
         {
             get { return "Mages"; }
@@ -34,30 +18,29 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassNames
             randomizer = new MageClassNameRandomizer(mockPercentileResultSelector.Object, mockCollectionsSelector.Object);
         }
 
-        [TestCase(CharacterClassConstants.Ranger)]
-        [TestCase(CharacterClassConstants.Sorcerer)]
-        [TestCase(CharacterClassConstants.Wizard)]
-        public void AlwaysAllowed(String className)
+        [Test]
+        public void ClassIsAllowed()
         {
-            AssertClassIsAlwaysAllowed(className);
+            alignmentClasses.Add(ClassName);
+            groupClasses.Add(ClassName);
+            var classNames = randomizer.GetAllPossibleResults(alignment);
+            Assert.That(classNames, Contains.Item(ClassName));
         }
 
-        [TestCase(CharacterClassConstants.Bard)]
-        public void AllowedIfNotLawful(String className)
+        [Test]
+        public void ClassIsNotInAlignment()
         {
-            AssertClassMustNotBeLawful(className);
+            groupClasses.Add(ClassName);
+            var classNames = randomizer.GetAllPossibleResults(alignment);
+            Assert.That(classNames, Is.Not.Contains(ClassName));
         }
 
-        [TestCase(CharacterClassConstants.Fighter)]
-        [TestCase(CharacterClassConstants.Cleric)]
-        [TestCase(CharacterClassConstants.Rogue)]
-        [TestCase(CharacterClassConstants.Barbarian)]
-        [TestCase(CharacterClassConstants.Druid)]
-        [TestCase(CharacterClassConstants.Monk)]
-        [TestCase(CharacterClassConstants.Paladin)]
-        public void NeverAllowed(String className)
+        [Test]
+        public void ClassIsNotInGroup()
         {
-            AssertClassIsNeverAllowed(className);
+            alignmentClasses.Add(ClassName);
+            var classNames = randomizer.GetAllPossibleResults(alignment);
+            Assert.That(classNames, Is.Not.Contains(ClassName));
         }
     }
 }

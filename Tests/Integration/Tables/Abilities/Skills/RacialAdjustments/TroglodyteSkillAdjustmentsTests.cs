@@ -13,11 +13,6 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Skills.RacialAdjustments
             get { return "TroglodyteSkillAdjustments"; }
         }
 
-        protected override IEnumerable<String> nameCollection
-        {
-            get { return new[] { SkillConstants.Hide, SkillConstants.Listen }; }
-        }
-
         [TestCase(SkillConstants.Hide, 6)]
         [TestCase(SkillConstants.Listen, 3)]
         public void DistinctCollection(String name, Int32 adjustment)

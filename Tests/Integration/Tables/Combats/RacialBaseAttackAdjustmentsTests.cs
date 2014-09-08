@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using NPCGen.Common.Races;
 using NUnit.Framework;
 
@@ -11,11 +10,6 @@ namespace NPCGen.Tests.Integration.Tables.Combats
         protected override String tableName
         {
             get { return "RacialBaseAttackAdjustments"; }
-        }
-
-        protected override IEnumerable<String> nameCollection
-        {
-            get { return RaceConstants.GetAllRaces(); }
         }
 
         [TestCase(RaceConstants.BaseRaces.Aasimar, 0)]

@@ -13,11 +13,6 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Skills.RacialAdjustments
             get { return "ForestGnomeSkillAdjustments"; }
         }
 
-        protected override IEnumerable<String> nameCollection
-        {
-            get { return new[] { SkillConstants.Hide, SkillConstants.Listen }; }
-        }
-
         [TestCase(SkillConstants.Hide, 4)]
         [TestCase(SkillConstants.Listen, 2)]
         public void DistinctCollection(String name, Int32 adjustment)

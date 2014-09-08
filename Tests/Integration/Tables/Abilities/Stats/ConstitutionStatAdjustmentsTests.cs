@@ -14,17 +14,6 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Stats
             get { return "ConstitutionStatAdjustments"; }
         }
 
-        protected override IEnumerable<String> nameCollection
-        {
-            get
-            {
-                var baseRaces = RaceConstants.BaseRaces.GetBaseRaces();
-                var metaraces = RaceConstants.Metaraces.GetMetaraces();
-
-                return baseRaces.Union(metaraces);
-            }
-        }
-
         [TestCase(RaceConstants.BaseRaces.Aasimar, 0)]
         [TestCase(RaceConstants.BaseRaces.Bugbear, 2)]
         [TestCase(RaceConstants.BaseRaces.Derro, 2)]

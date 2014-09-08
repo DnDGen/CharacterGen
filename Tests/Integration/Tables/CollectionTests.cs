@@ -15,7 +15,6 @@ namespace NPCGen.Tests.Integration.Tables
         public ICollectionsMapper CollectionsMapper { get; set; }
 
         protected abstract String tableName { get; }
-        protected abstract IEnumerable<String> nameCollection { get; }
 
         private Dictionary<String, IEnumerable<String>> table;
 
@@ -25,22 +24,12 @@ namespace NPCGen.Tests.Integration.Tables
             table = CollectionsMapper.Map(tableName);
         }
 
-        [Test]
-        public void AllNamesInCollection()
-        {
-            foreach (var name in nameCollection)
-                Assert.That(table.Keys, Contains.Item(name), tableName);
-
-            var missingNames = nameCollection.Except(table.Keys);
-            Assert.That(missingNames, Is.Empty, tableName);
-        }
-
         public virtual void Collection(String name, params String[] collection)
         {
             Assert.That(table.Keys, Contains.Item(name), tableName);
 
             foreach (var item in collection)
-                Assert.That(table[name], Contains.Item(item));
+                Assert.That(table[name], Contains.Item(item), tableName);
 
             AssertExtraItems(name, collection);
         }
@@ -48,7 +37,7 @@ namespace NPCGen.Tests.Integration.Tables
         private void AssertExtraItems(String name, IEnumerable<String> collection)
         {
             var extras = table[name].Except(collection);
-            Assert.That(extras, Is.Empty);
+            Assert.That(extras, Is.Empty, name);
         }
 
         public virtual void OrderedCollection(String name, params String[] collection)

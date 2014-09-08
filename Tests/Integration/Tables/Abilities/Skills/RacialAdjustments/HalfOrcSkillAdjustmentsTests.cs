@@ -13,11 +13,6 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Skills.RacialAdjustments
             get { return "HalfOrcSkillAdjustments"; }
         }
 
-        protected override IEnumerable<String> nameCollection
-        {
-            get { return Enumerable.Empty<String>(); }
-        }
-
         [Test]
         public override void EmptyCollection()
         {

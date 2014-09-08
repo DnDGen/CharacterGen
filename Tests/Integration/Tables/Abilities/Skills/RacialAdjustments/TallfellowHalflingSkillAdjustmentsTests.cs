@@ -13,19 +13,6 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Skills.RacialAdjustments
             get { return "TallfellowHalflingSkillAdjustments"; }
         }
 
-        protected override IEnumerable<String> nameCollection
-        {
-            get
-            {
-                return new[]
-                {
-                    SkillConstants.Listen,
-                    SkillConstants.Search,
-                    SkillConstants.Spot
-                };
-            }
-        }
-
         [TestCase(SkillConstants.Listen, 2)]
         [TestCase(SkillConstants.Search, 2)]
         [TestCase(SkillConstants.Spot, 2)]

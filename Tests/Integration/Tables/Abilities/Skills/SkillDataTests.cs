@@ -14,11 +14,6 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Skills
             get { return "SkillData"; }
         }
 
-        protected override IEnumerable<String> nameCollection
-        {
-            get { return SkillConstants.GetSkills(); }
-        }
-
         [TestCase(SkillConstants.Appraise, StatConstants.Intelligence, false)]
         [TestCase(SkillConstants.Balance, StatConstants.Dexterity, true)]
         [TestCase(SkillConstants.Bluff, StatConstants.Charisma, false)]
