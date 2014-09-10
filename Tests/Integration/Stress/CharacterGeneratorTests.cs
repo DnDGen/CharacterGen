@@ -107,8 +107,8 @@ namespace NPCGen.Tests.Integration.Stress
                 MetaraceRandomizer, StatsRandomizer);
             while (TestShouldKeepRunning() && String.IsNullOrEmpty(character.Magic.Familiar.Animal));
 
-            Assert.That(character.Magic.Familiar.Animal, Is.Not.Empty);
             AssertIterations();
+            Assert.That(character.Magic.Familiar.Animal, Is.Not.Empty);
         }
 
         [Test]
@@ -120,8 +120,8 @@ namespace NPCGen.Tests.Integration.Stress
                 MetaraceRandomizer, StatsRandomizer);
             while (TestShouldKeepRunning() && !String.IsNullOrEmpty(character.Magic.Familiar.Animal));
 
-            Assert.That(character.Magic.Familiar.Animal, Is.Empty);
             AssertIterations();
+            Assert.That(character.Magic.Familiar.Animal, Is.Empty);
         }
 
         [Test]
@@ -133,8 +133,8 @@ namespace NPCGen.Tests.Integration.Stress
                 MetaraceRandomizer, StatsRandomizer);
             while (TestShouldKeepRunning() && String.IsNullOrEmpty(character.InterestingTrait));
 
-            Assert.That(character.InterestingTrait, Is.Not.Empty);
             AssertIterations();
+            Assert.That(character.InterestingTrait, Is.Not.Empty);
         }
 
         [Test]
@@ -146,8 +146,8 @@ namespace NPCGen.Tests.Integration.Stress
                 MetaraceRandomizer, StatsRandomizer);
             while (TestShouldKeepRunning() && !String.IsNullOrEmpty(character.InterestingTrait));
 
-            Assert.That(character.InterestingTrait, Is.Empty);
             AssertIterations();
+            Assert.That(character.InterestingTrait, Is.Empty);
         }
 
         [Test]
@@ -159,8 +159,8 @@ namespace NPCGen.Tests.Integration.Stress
                 MetaraceRandomizer, StatsRandomizer);
             while (TestShouldKeepRunning() && !character.Magic.Spells.Any());
 
-            Assert.That(character.Magic.Spells, Is.Not.Empty);
             AssertIterations();
+            Assert.That(character.Magic.Spells, Is.Not.Empty);
         }
 
         [Test]
@@ -172,8 +172,8 @@ namespace NPCGen.Tests.Integration.Stress
                 MetaraceRandomizer, StatsRandomizer);
             while (TestShouldKeepRunning() && character.Magic.Spells.Any());
 
-            Assert.That(character.Magic.Spells, Is.Empty);
             AssertIterations();
+            Assert.That(character.Magic.Spells, Is.Empty);
         }
     }
 }

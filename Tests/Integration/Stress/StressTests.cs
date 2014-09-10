@@ -85,8 +85,7 @@ namespace NPCGen.Tests.Integration.Stress
 
         protected void AssertIterations()
         {
-            Assert.That(iterations, Is.GreaterThan(0));
-            Assert.Pass("Type: {0}\nIterations: {1}\nTime: {2:hh\\:mm\\:ss}", testType, iterations, Stopwatch.Elapsed);
+            Assert.That(iterations, Is.GreaterThan(1), testType);
         }
 
         protected Alignment GetNewAlignment()
@@ -113,7 +112,7 @@ namespace NPCGen.Tests.Integration.Stress
 
         protected Race GetNewRace(Alignment alignment, CharacterClass characterClass)
         {
-            return RaceGenerator.GenerateWith(alignment.Goodness, characterClass, BaseRaceRandomizer, MetaraceRandomizer);
+            return RaceGenerator.GenerateWith(alignment, characterClass, BaseRaceRandomizer, MetaraceRandomizer);
         }
     }
 }

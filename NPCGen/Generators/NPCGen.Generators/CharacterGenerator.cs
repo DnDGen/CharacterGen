@@ -124,7 +124,7 @@ namespace NPCGen.Generators
         {
             Race race;
 
-            do race = raceGenerator.GenerateWith(alignment.Goodness, characterClass, baseRaceRandomizer, metaraceRandomizer);
+            do race = raceGenerator.GenerateWith(alignment, characterClass, baseRaceRandomizer, metaraceRandomizer);
             while (levelAdjustments[race.BaseRace] + levelAdjustments[race.Metarace] >= characterClass.Level);
 
             return race;
