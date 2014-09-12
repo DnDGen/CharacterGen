@@ -89,7 +89,7 @@ namespace NPCGen.Tests.Integration.Stress.Abilities
             }
 
             var sum = skills.Values.Sum(s => s.Ranks);
-            var minimumRanks = (2 + stats[StatConstants.Intelligence].Bonus) * (characterClass.Level + 3);
+            var minimumRanks = (2 + stats[StatConstants.Intelligence].Bonus) * characterClass.Level;
             Assert.That(sum, Is.AtLeast(minimumRanks));
         }
     }

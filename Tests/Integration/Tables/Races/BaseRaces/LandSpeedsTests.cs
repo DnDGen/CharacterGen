@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace NPCGen.Tests.Integration.Tables.Races.BaseRaces
 {
     [TestFixture]
-    public class LandSpeedsTests : CollectionTests
+    public class LandSpeedsTests : AdjustmentsTests
     {
         protected override String tableName
         {
@@ -46,10 +46,9 @@ namespace NPCGen.Tests.Integration.Tables.Races.BaseRaces
         [TestCase(RaceConstants.BaseRaces.Troglodyte, 30)]
         [TestCase(RaceConstants.BaseRaces.WildElf, 30)]
         [TestCase(RaceConstants.BaseRaces.WoodElf, 30)]
-        public void Collection(String name, Int32 speed)
+        public override void Adjustment(String name, Int32 adjustment)
         {
-            var collection = new[] { Convert.ToString(speed) };
-            Collection(name, collection);
+            base.Adjustment(name, adjustment);
         }
     }
 }

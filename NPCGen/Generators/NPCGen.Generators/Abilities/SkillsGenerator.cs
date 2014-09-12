@@ -124,17 +124,32 @@ namespace NPCGen.Generators.Abilities
 
         private Dictionary<String, Skill> ApplyRacialAdjustments(Dictionary<String, Skill> skills, Race race)
         {
-            var formattedBaseRace = race.BaseRace.Replace(" ", String.Empty).Replace("-", String.Empty);
+            skills = GetRacialBonuses(skills, race.BaseRace);
+
+            if (race.Metarace != RaceConstants.Metaraces.None)
+                skills = GetRacialBonuses(skills, race.Metarace);
+
+            if (race.BaseRace == RaceConstants.BaseRaces.MindFlayer && skills.Keys.Any(s => s.StartsWith("Knowledge")))
+                skills = ApplyMindFlayerKnowledgeBonus(skills);
+
+            return skills;
+        }
+
+        private Dictionary<String, Skill> GetRacialBonuses(Dictionary<String, Skill> skills, String race)
+        {
+            var formattedBaseRace = race.Replace(" ", String.Empty).Replace("-", String.Empty);
             var tableName = String.Format("{0}SkillAdjustments", formattedBaseRace);
             var adjustments = adjustmentsSelector.SelectFrom(tableName);
 
             foreach (var adjustment in adjustments)
                 if (skills.ContainsKey(adjustment.Key))
-                    skills[adjustment.Key].Bonus = adjustment.Value;
+                    skills[adjustment.Key].Bonus += adjustment.Value;
 
-            if (!(race.BaseRace == RaceConstants.BaseRaces.MindFlayer) || !skills.Keys.Any(s => s.StartsWith("Knowledge")))
-                return skills;
+            return skills;
+        }
 
+        private Dictionary<String, Skill> ApplyMindFlayerKnowledgeBonus(Dictionary<String, Skill> skills)
+        {
             var knowledgeSkills = skills.Keys.Where(s => s.StartsWith("Knowledge"));
             var index = dice.Roll().d(knowledgeSkills.Count()) - 1;
             var knowledgeSkill = knowledgeSkills.ElementAt(index);

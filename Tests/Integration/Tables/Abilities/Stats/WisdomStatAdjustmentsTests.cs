@@ -7,7 +7,7 @@ using NUnit.Framework;
 namespace NPCGen.Tests.Integration.Tables.Abilities.Stats
 {
     [TestFixture]
-    public class WisdomStatAdjustmentsTests : CollectionTests
+    public class WisdomStatAdjustmentsTests : AdjustmentsTests
     {
         protected override String tableName
         {
@@ -56,11 +56,10 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Stats
         [TestCase(RaceConstants.Metaraces.Wererat, 0)]
         [TestCase(RaceConstants.Metaraces.Weretiger, 0)]
         [TestCase(RaceConstants.Metaraces.Werewolf, 4)]
-        [TestCase("", 0)]
-        public void Collection(String name, Int32 adjustment)
+        [TestCase(RaceConstants.Metaraces.None, 0)]
+        public override void Adjustment(String name, Int32 adjustment)
         {
-            var collection = new[] { Convert.ToString(adjustment) };
-            Collection(name, collection);
+            base.Adjustment(name, adjustment);
         }
     }
 }

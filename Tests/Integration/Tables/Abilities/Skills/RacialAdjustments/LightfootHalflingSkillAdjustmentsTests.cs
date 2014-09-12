@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace NPCGen.Tests.Integration.Tables.Abilities.Skills.RacialAdjustments
 {
     [TestFixture]
-    public class LightfootHalflingSkillAdjustmentsTests : CollectionTests
+    public class LightfootHalflingSkillAdjustmentsTests : AdjustmentsTests
     {
         protected override String tableName
         {
@@ -17,10 +17,9 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Skills.RacialAdjustments
         [TestCase(SkillConstants.Jump, 2)]
         [TestCase(SkillConstants.Listen, 2)]
         [TestCase(SkillConstants.MoveSilently, 2)]
-        public void Collection(String name, Int32 adjustment)
+        public override void Adjustment(String name, Int32 adjustment)
         {
-            var collection = new[] { Convert.ToString(adjustment) };
-            base.Collection(name, collection);
+            base.Adjustment(name, adjustment);
         }
     }
 }

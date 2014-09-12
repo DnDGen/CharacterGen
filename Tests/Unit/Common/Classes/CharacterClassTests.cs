@@ -19,6 +19,8 @@ namespace NPCGen.Tests.Unit.Common.Classes
         {
             Assert.That(characterClass.ClassName, Is.Empty);
             Assert.That(characterClass.Level, Is.EqualTo(0));
+            Assert.That(characterClass.SpecialistFields, Is.Empty);
+            Assert.That(characterClass.ProhibitedFields, Is.Empty);
         }
     }
 }

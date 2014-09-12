@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace NPCGen.Tests.Integration.Tables.Abilities.Skills.RacialAdjustments
 {
     [TestFixture]
-    public class HalfOrcSkillAdjustmentsTests : CollectionTests
+    public class HalfOrcSkillAdjustmentsTests : AdjustmentsTests
     {
         protected override String tableName
         {
@@ -14,9 +14,9 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Skills.RacialAdjustments
         }
 
         [Test]
-        public override void EmptyCollection()
+        public override void NoAdjustments()
         {
-            base.EmptyCollection();
+            base.NoAdjustments();
         }
     }
 }

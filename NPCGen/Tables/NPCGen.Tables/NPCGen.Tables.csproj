@@ -361,6 +361,66 @@
   <ItemGroup>
     <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\LightfootHalflingSkillAdjustments.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\GnollSkillAdjustments.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\Metaraces\DragonSpecies.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Combats\ClassHitDice.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Combats\MonsterHitDice.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\KoboldSkillAdjustments.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\GoblinSkillAdjustments.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\WoodElfSkillAdjustments.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\DeepHalflingSkillAdjustments.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\HillDwarfSkillAdjustments.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\TieflingSkillAdjustments.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\HobgoblinSkillAdjustments.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\DrowSkillAdjustments.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\WildElfSkillAdjustments.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\BugbearSkillAdjustments.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\OgreSkillAdjustments.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\LizardfolkSkillAdjustments.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\GrayElfSkillAdjustments.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\MindFlayerSkillAdjustments.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\RockGnomeSkillAdjustments.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\WereboarSkillAdjustments.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

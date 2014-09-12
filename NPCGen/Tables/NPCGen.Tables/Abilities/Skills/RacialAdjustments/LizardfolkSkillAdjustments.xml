@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+    <object>
+        <name>Balance</name>
+        <item>5</item>
+    </object>
+    <object>
+        <name>Jump</name>
+        <item>6</item>
+    </object>
+    <object>
+        <name>Swim</name>
+        <item>6</item>
+    </object>
+</items>

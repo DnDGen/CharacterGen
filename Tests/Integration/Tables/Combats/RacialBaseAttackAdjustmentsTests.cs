@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace NPCGen.Tests.Integration.Tables.Combats
 {
     [TestFixture]
-    public class RacialBaseAttackAdjustmentsTests : CollectionTests
+    public class RacialBaseAttackAdjustmentsTests : AdjustmentsTests
     {
         protected override String tableName
         {
@@ -55,10 +55,9 @@ namespace NPCGen.Tests.Integration.Tables.Combats
         [TestCase(RaceConstants.Metaraces.Weretiger, 4)]
         [TestCase(RaceConstants.Metaraces.Werewolf, 1)]
         [TestCase(RaceConstants.Metaraces.None, 0)]
-        public void Collection(String name, Int32 adjustment)
+        public override void Adjustment(String name, Int32 adjustment)
         {
-            var collection = new[] { Convert.ToString(adjustment) };
-            base.Collection(name, collection);
+            base.Adjustment(name, adjustment);
         }
     }
 }

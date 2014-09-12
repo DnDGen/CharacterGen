@@ -655,27 +655,33 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         public void GetRacialSkillAdjustments()
         {
             race.BaseRace = "base race-toformat";
+            race.Metarace = "metarace-to format";
             classSkills.Add("skill 1");
             classSkills.Add("skill 2");
             classSkills.Add("skill 3");
             crossClassSkills.Add("skill 4");
             crossClassSkills.Add("skill 5");
 
-            var bonuses = new Dictionary<String, Int32>();
-            bonuses["skill 1"] = 2;
-            bonuses["skill 2"] = 0;
-            bonuses["skill 3"] = 3;
-            bonuses["skill 4"] = 0;
-            bonuses["skill 5"] = 1;
-            bonuses["skill 6"] = 8;
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom("baseracetoformatSkillAdjustments")).Returns(bonuses);
+            var baseBonuses = new Dictionary<String, Int32>();
+            baseBonuses["skill 1"] = 2;
+            baseBonuses["skill 3"] = 3;
+            baseBonuses["skill 5"] = 1;
+            baseBonuses["skill 6"] = 8;
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom("baseracetoformatSkillAdjustments")).Returns(baseBonuses);
+
+            var metaBonuses = new Dictionary<String, Int32>();
+            metaBonuses["skill 1"] = 2;
+            metaBonuses["skill 2"] = 1;
+            metaBonuses["skill 6"] = 1;
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom("metaracetoformatSkillAdjustments")).Returns(metaBonuses);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
-            Assert.That(skills["skill 1"].Bonus, Is.EqualTo(2));
-            Assert.That(skills["skill 2"].Bonus, Is.EqualTo(0));
+            Assert.That(skills["skill 1"].Bonus, Is.EqualTo(4));
+            Assert.That(skills["skill 2"].Bonus, Is.EqualTo(1));
             Assert.That(skills["skill 3"].Bonus, Is.EqualTo(3));
             Assert.That(skills["skill 4"].Bonus, Is.EqualTo(0));
             Assert.That(skills["skill 5"].Bonus, Is.EqualTo(1));
+            Assert.That(skills.Count, Is.EqualTo(5));
         }
 
         [Test]

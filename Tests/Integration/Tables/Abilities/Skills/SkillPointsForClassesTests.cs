@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace NPCGen.Tests.Integration.Tables.Abilities.Skills
 {
     [TestFixture]
-    public class SkillPointsForClassesTests : CollectionTests
+    public class SkillPointsForClassesTests : AdjustmentsTests
     {
         protected override String tableName
         {
@@ -24,10 +24,9 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Skills
         [TestCase(CharacterClassConstants.Rogue, 8)]
         [TestCase(CharacterClassConstants.Sorcerer, 2)]
         [TestCase(CharacterClassConstants.Wizard, 2)]
-        public void Collection(String name, Int32 adjustment)
+        public override void Adjustment(String name, Int32 adjustment)
         {
-            var collection = new[] { Convert.ToString(adjustment) };
-            Collection(name, collection);
+            base.Adjustment(name, adjustment);
         }
     }
 }

@@ -42,5 +42,17 @@ namespace NPCGen.Tests.Unit.Generators
             var characterClass = characterClassGenerator.GenerateWith(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
             Assert.That(characterClass.ClassName, Is.EqualTo("class name"));
         }
+
+        [Test]
+        public void GetSpecialtyFields()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void GetProhibitedFields()
+        {
+            Assert.Fail();
+        }
     }
 }

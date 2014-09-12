@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+    <object>
+        <name>Listen</name>
+        <item>2</item>
+    </object>
+    <object>
+        <name>Search</name>
+        <item>2</item>
+    </object>
+    <object>
+        <name>Spot</name>
+        <item>2</item>
+    </object>
+</items>

@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+    <object>
+        <name>Bluff</name>
+        <item>8</item>
+    </object>
+    <object>
+        <name>Concentration</name>
+        <item>6</item>
+    </object>
+    <object>
+        <name>Hide</name>
+        <item>8</item>
+    </object>
+    <object>
+        <name>Intimidate</name>
+        <item>4</item>
+    </object>
+    <object>
+        <name>Listen</name>
+        <item>8</item>
+    </object>
+    <object>
+        <name>Move Silently</name>
+        <item>8</item>
+    </object>
+    <object>
+        <name>Sense Motive</name>
+        <item>4</item>
+    </object>
+    <object>
+        <name>Spot</name>
+        <item>8</item>
+    </object>
+</items>

@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+    <object>
+        <name>Lawful Evil</name>
+        <item>Blue</item>
+        <item>Green</item>
+    </object>
+    <object>
+        <name>Neutral Evil</name>
+        <item>Black</item>
+        <item>Blue</item>
+        <item>Red</item>
+        <item>Green</item>
+        <item>White</item>
+    </object>
+    <object>
+        <name>Chaotic Evil</name>
+        <item>Black</item>
+        <item>Red</item>
+        <item>White</item>
+    </object>
+    <object>
+        <name>Lawful Good</name>
+        <item>Bronze</item>
+        <item>Gold</item>
+        <item>Silver</item>
+    </object>
+    <object>
+        <name>Neutral Good</name>
+        <item>Brass</item>
+        <item>Bronze</item>
+        <item>Copper</item>
+        <item>Gold</item>
+        <item>Silver</item>
+    </object>
+    <object>
+        <name>Chaotic Good</name>
+        <item>Brass</item>
+        <item>Copper</item>
+    </object>
+</items>

@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace NPCGen.Tests.Integration.Tables.CharacterClasses
 {
     [TestFixture]
-    public class LevelAdjustmentsTests : CollectionTests
+    public class LevelAdjustmentsTests : AdjustmentsTests
     {
         protected override String tableName
         {
@@ -55,11 +55,10 @@ namespace NPCGen.Tests.Integration.Tables.CharacterClasses
         [TestCase(RaceConstants.Metaraces.Wererat, 1)]
         [TestCase(RaceConstants.Metaraces.Weretiger, 1)]
         [TestCase(RaceConstants.Metaraces.Werewolf, 1)]
-        [TestCase("", 0)]
-        public void Collection(String name, Int32 adjustment)
+        [TestCase(RaceConstants.Metaraces.None, 0)]
+        public override void Adjustment(String name, Int32 adjustment)
         {
-            var collection = new[] { Convert.ToString(adjustment) };
-            base.Collection(name, collection);
+            base.Adjustment(name, adjustment);
         }
     }
 }
