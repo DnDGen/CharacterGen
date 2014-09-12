@@ -26,7 +26,7 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.CharacterClasses.ClassName
             AssertIterations();
         }
 
-        private void MakeAssertions()
+        protected void MakeAssertions()
         {
             var alignment = GetNewAlignment();
             var className = ClassNameRandomizer.Randomize(alignment);

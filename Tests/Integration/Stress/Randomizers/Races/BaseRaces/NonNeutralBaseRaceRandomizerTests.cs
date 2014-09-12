@@ -20,8 +20,7 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
             {
                 var neutralBaseRaces = new[]
                 {
-                    RaceConstants.BaseRaces.Doppelganger,
-                    RaceConstants.BaseRaces.Lizardfolk
+                    RaceConstants.BaseRaces.Doppelganger
                 };
 
                 return RaceConstants.BaseRaces.GetBaseRaces().Except(neutralBaseRaces);

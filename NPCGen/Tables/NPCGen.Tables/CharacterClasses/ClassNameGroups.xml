@@ -56,11 +56,6 @@
         <item>Bard</item>
     </object>
     <object>
-        <name>Poor Base Attack</name>
-        <item>Sorcerer</item>
-        <item>Wizard</item>
-    </object>
-    <object>
         <name>Lawful Good</name>
         <item>Cleric</item>
         <item>Fighter</item>

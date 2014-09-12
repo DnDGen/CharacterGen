@@ -86,9 +86,6 @@ namespace NPCGen.Tests.Integration.Stress.Abilities
                 Assert.That(skill.BaseStat, Is.Not.Null);
                 Assert.That(stats.Values, Contains.Item(skill.BaseStat));
                 Assert.That(skill.Bonus, Is.Not.Negative);
-
-                //HACK: Only bonuses at this point are from skill synergy
-                Assert.That(skill.Bonus % 2, Is.EqualTo(0));
             }
 
             var sum = skills.Values.Sum(s => s.Ranks);

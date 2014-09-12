@@ -3,20 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using Ninject;
 using NPCGen.Mappers.Interfaces;
-using NPCGen.Tests.Integration.Common;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Tables
 {
     [TestFixture]
-    public abstract class PercentileTests : IntegrationTests
+    public abstract class PercentileTests : TableTests
     {
         [Inject]
         public IPercentileMapper PercentileMapper { get; set; }
 
         protected const String EmptyContent = "";
-
-        protected abstract String tableName { get; }
 
         private Dictionary<Int32, String> table;
         private HashSet<Int32> testedRolls;
@@ -67,6 +64,11 @@ namespace NPCGen.Tests.Integration.Tables
 
             var message = String.Format("Roll: {0}", roll);
             Assert.That(table[roll], Is.EqualTo(content), message);
+        }
+
+        protected override string tableName
+        {
+            get { throw new NotImplementedException(); }
         }
     }
 }

@@ -116,8 +116,8 @@ namespace NPCGen.Tests.Integration.Stress
                 MetaraceRandomizer, StatsRandomizer);
             while (TestShouldKeepRunning() && String.IsNullOrEmpty(character.Magic.Familiar.Animal));
 
-            AssertIterations();
             Assert.That(character.Magic.Familiar.Animal, Is.Not.Empty);
+            AssertIterations();
         }
 
         [Test]
@@ -129,8 +129,8 @@ namespace NPCGen.Tests.Integration.Stress
                 MetaraceRandomizer, StatsRandomizer);
             while (TestShouldKeepRunning() && !String.IsNullOrEmpty(character.Magic.Familiar.Animal));
 
-            AssertIterations();
             Assert.That(character.Magic.Familiar.Animal, Is.Empty);
+            AssertIterations();
         }
 
         [Test]
@@ -142,8 +142,8 @@ namespace NPCGen.Tests.Integration.Stress
                 MetaraceRandomizer, StatsRandomizer);
             while (TestShouldKeepRunning() && String.IsNullOrEmpty(character.InterestingTrait));
 
-            AssertIterations();
             Assert.That(character.InterestingTrait, Is.Not.Empty);
+            AssertIterations();
         }
 
         [Test]
@@ -155,8 +155,8 @@ namespace NPCGen.Tests.Integration.Stress
                 MetaraceRandomizer, StatsRandomizer);
             while (TestShouldKeepRunning() && !String.IsNullOrEmpty(character.InterestingTrait));
 
-            AssertIterations();
             Assert.That(character.InterestingTrait, Is.Empty);
+            AssertIterations();
         }
 
         [Test]
@@ -168,8 +168,8 @@ namespace NPCGen.Tests.Integration.Stress
                 MetaraceRandomizer, StatsRandomizer);
             while (TestShouldKeepRunning() && !character.Magic.Spells.Any());
 
-            AssertIterations();
             Assert.That(character.Magic.Spells, Is.Not.Empty);
+            AssertIterations();
         }
 
         [Test]
@@ -181,8 +181,8 @@ namespace NPCGen.Tests.Integration.Stress
                 MetaraceRandomizer, StatsRandomizer);
             while (TestShouldKeepRunning() && character.Magic.Spells.Any());
 
-            AssertIterations();
             Assert.That(character.Magic.Spells, Is.Empty);
+            AssertIterations();
         }
     }
 }

@@ -57,8 +57,8 @@ namespace NPCGen.Tests.Integration.Stress
             do race = GenerateRace();
             while (TestShouldKeepRunning() && race.Metarace == RaceConstants.Metaraces.None);
 
-            AssertIterations();
             Assert.That(race.Metarace, Is.Not.EqualTo(RaceConstants.Metaraces.None));
+            AssertIterations();
         }
 
         [Test]
@@ -69,8 +69,8 @@ namespace NPCGen.Tests.Integration.Stress
             do race = GenerateRace();
             while (TestShouldKeepRunning() && race.Metarace != RaceConstants.Metaraces.None);
 
-            AssertIterations();
             Assert.That(race.Metarace, Is.EqualTo(RaceConstants.Metaraces.None));
+            AssertIterations();
         }
 
         [Test]
@@ -81,9 +81,9 @@ namespace NPCGen.Tests.Integration.Stress
             do race = GenerateRace();
             while (TestShouldKeepRunning() && !race.HasWings);
 
-            AssertIterations();
             Assert.That(race.HasWings, Is.True);
             Assert.That(race.AerialSpeed, Is.Positive);
+            AssertIterations();
         }
 
         [Test]
@@ -94,9 +94,9 @@ namespace NPCGen.Tests.Integration.Stress
             do race = GenerateRace();
             while (TestShouldKeepRunning() && race.HasWings);
 
-            AssertIterations();
             Assert.That(race.HasWings, Is.False);
             Assert.That(race.AerialSpeed, Is.EqualTo(0));
+            AssertIterations();
         }
 
         [Test]
@@ -107,8 +107,8 @@ namespace NPCGen.Tests.Integration.Stress
             do race = GenerateRace();
             while (TestShouldKeepRunning() && !race.Male);
 
-            AssertIterations();
             Assert.That(race.Male, Is.True);
+            AssertIterations();
         }
 
         [Test]
@@ -119,8 +119,8 @@ namespace NPCGen.Tests.Integration.Stress
             do race = GenerateRace();
             while (TestShouldKeepRunning() && race.Male);
 
-            AssertIterations();
             Assert.That(race.Male, Is.False);
+            AssertIterations();
         }
 
         [Test]
@@ -131,8 +131,8 @@ namespace NPCGen.Tests.Integration.Stress
             do race = GenerateRace();
             while (TestShouldKeepRunning() && String.IsNullOrEmpty(race.MetaraceSpecies));
 
-            AssertIterations();
             Assert.That(race.MetaraceSpecies, Is.Not.Empty);
+            AssertIterations();
         }
 
         [Test]
@@ -143,8 +143,8 @@ namespace NPCGen.Tests.Integration.Stress
             do race = GenerateRace();
             while (TestShouldKeepRunning() && !String.IsNullOrEmpty(race.MetaraceSpecies));
 
-            AssertIterations();
             Assert.That(race.MetaraceSpecies, Is.Empty);
+            AssertIterations();
         }
     }
 }

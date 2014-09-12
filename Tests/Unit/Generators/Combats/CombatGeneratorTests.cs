@@ -63,8 +63,8 @@ namespace NPCGen.Tests.Unit.Generators.Combats
             stats[StatConstants.Dexterity] = new Stat { Value = 42 };
             mockAdjustmentsSelector.Setup(s => s.SelectFrom("MaxDexterityBonuses")).Returns(maxDexterityBonuses);
             maxDexterityBonuses[String.Empty] = 42;
-            mockCollectionsSelector.Setup(s => s.SelectFrom("ClassNameGroups", "GoodBaseAttack")).Returns(goodBaseAttacks);
-            mockCollectionsSelector.Setup(s => s.SelectFrom("ClassNameGroups", "AverageBaseAttack")).Returns(averageBaseAttacks);
+            mockCollectionsSelector.Setup(s => s.SelectFrom("ClassNameGroups", "Good Base Attack")).Returns(goodBaseAttacks);
+            mockCollectionsSelector.Setup(s => s.SelectFrom("ClassNameGroups", "Average Base Attack")).Returns(averageBaseAttacks);
             averageBaseAttacks.Add("other class name");
             goodBaseAttacks.Add("other class name");
 

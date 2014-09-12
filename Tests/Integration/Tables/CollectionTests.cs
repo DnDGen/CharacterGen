@@ -3,18 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using Ninject;
 using NPCGen.Mappers.Interfaces;
-using NPCGen.Tests.Integration.Common;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Tables
 {
     [TestFixture]
-    public abstract class CollectionTests : IntegrationTests
+    public abstract class CollectionTests : TableTests
     {
         [Inject]
         public ICollectionsMapper CollectionsMapper { get; set; }
-
-        protected abstract String tableName { get; }
 
         private Dictionary<String, IEnumerable<String>> table;
 

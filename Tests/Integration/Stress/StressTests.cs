@@ -76,7 +76,8 @@ namespace NPCGen.Tests.Integration.Stress
 
         protected void AssertIterations()
         {
-            Assert.That(iterations, Is.GreaterThan(1), testType);
+            Assert.That(iterations, Is.Positive);
+            Assert.Pass("Type: {0}\nIterations: {1}\nTime: {2:hh\\:mm\\:ss}", testType, iterations, Stopwatch.Elapsed);
         }
 
         protected Alignment GetNewAlignment()

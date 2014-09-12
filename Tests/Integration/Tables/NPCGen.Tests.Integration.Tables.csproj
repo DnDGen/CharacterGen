@@ -104,6 +104,7 @@
     <Compile Include="Races\BaseRaces\Good\GoodRogueBaseRacesTests.cs" />
     <Compile Include="Races\BaseRaces\Good\GoodSorcererBaseRacesTests.cs" />
     <Compile Include="Races\BaseRaces\Good\GoodWizardBaseRacesTests.cs" />
+    <Compile Include="Races\BaseRaces\LandSpeedsTests.cs" />
     <Compile Include="Races\BaseRaces\Neutral\NeutralBarbarianBaseRacesTests.cs" />
     <Compile Include="Races\BaseRaces\Neutral\NeutralBardBaseRacesTests.cs" />
     <Compile Include="Races\BaseRaces\Neutral\NeutralClericBaseRacesTests.cs" />
@@ -153,6 +154,7 @@
     <Compile Include="Abilities\Stats\StatPrioritiesTests.cs" />
     <Compile Include="Abilities\Stats\StrengthStatAdjustmentsTests.cs" />
     <Compile Include="Abilities\Stats\WisdomStatAdjustmentsTests.cs" />
+    <Compile Include="TableTests.cs" />
     <Compile Include="TraitsTests.cs" />
   </ItemGroup>
   <ItemGroup>

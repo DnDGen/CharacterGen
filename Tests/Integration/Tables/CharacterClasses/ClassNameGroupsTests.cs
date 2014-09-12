@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using NPCGen.Common.CharacterClasses;
 using NUnit.Framework;
 
@@ -53,9 +52,6 @@ namespace NPCGen.Tests.Integration.Tables.CharacterClasses
             CharacterClassConstants.Druid,
             CharacterClassConstants.Monk,
             CharacterClassConstants.Rogue)]
-        [TestCase("Poor Base Attack",
-            CharacterClassConstants.Sorcerer,
-            CharacterClassConstants.Wizard)]
         [TestCase("Lawful Good",
             CharacterClassConstants.Cleric,
             CharacterClassConstants.Fighter,

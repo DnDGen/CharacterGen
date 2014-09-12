@@ -47,8 +47,8 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Alignments
             do alignment = AlignmentRandomizer.Randomize();
             while (TestShouldKeepRunning() && alignment.Goodness != AlignmentConstants.Neutral);
 
-            AssertIterations();
             Assert.That(alignment.Goodness, Is.EqualTo(AlignmentConstants.Neutral));
+            AssertIterations();
         }
 
         [Test]
@@ -59,8 +59,8 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Alignments
             do alignment = AlignmentRandomizer.Randomize();
             while (TestShouldKeepRunning() && alignment.Lawfulness != AlignmentConstants.Neutral);
 
-            AssertIterations();
             Assert.That(alignment.Lawfulness, Is.EqualTo(AlignmentConstants.Neutral));
+            AssertIterations();
         }
 
         [Test]
@@ -71,9 +71,9 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Alignments
             do alignment = AlignmentRandomizer.Randomize();
             while (TestShouldKeepRunning() && (alignment.Lawfulness != AlignmentConstants.Neutral || alignment.Goodness != AlignmentConstants.Neutral));
 
-            AssertIterations();
             Assert.That(alignment.Lawfulness, Is.EqualTo(AlignmentConstants.Neutral));
             Assert.That(alignment.Goodness, Is.EqualTo(AlignmentConstants.Neutral));
+            AssertIterations();
         }
     }
 }
