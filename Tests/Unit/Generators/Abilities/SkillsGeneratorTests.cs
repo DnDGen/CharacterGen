@@ -708,7 +708,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
 
             var bonuses = new Dictionary<String, Int32>();
             bonuses["skill"] = 2;
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom("base raceSkillAdjustments")).Returns(bonuses);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom("baseraceSkillAdjustments")).Returns(bonuses);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
             Assert.That(skills["skill"].Bonus, Is.EqualTo(2));

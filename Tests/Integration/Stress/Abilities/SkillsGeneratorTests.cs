@@ -53,7 +53,16 @@ namespace NPCGen.Tests.Integration.Stress.Abilities
             untrainedSkills = allSkills.Except(trainedSkills);
         }
 
-        protected override void MakeAssertions()
+        [Test]
+        public override void Stress()
+        {
+            do MakeAssertions();
+            while (TestShouldKeepRunning());
+
+            AssertIterations();
+        }
+
+        private void MakeAssertions()
         {
             var alignment = GetNewAlignment();
             var characterClass = GetNewCharacterClass(alignment);

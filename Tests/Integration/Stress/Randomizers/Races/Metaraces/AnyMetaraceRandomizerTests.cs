@@ -16,7 +16,16 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
 
         protected override IEnumerable<String> allowedMetaraces
         {
-            get { return RaceConstants.Metaraces.GetMetaraces().Union(new[] { String.Empty }); }
+            get { return RaceConstants.Metaraces.GetAllMetaraces(); }
+        }
+
+        [Test]
+        public override void Stress()
+        {
+            do MakeAssertions();
+            while (TestShouldKeepRunning());
+
+            AssertIterations();
         }
     }
 }

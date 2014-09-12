@@ -66,16 +66,7 @@ namespace NPCGen.Tests.Integration.Stress
             Stopwatch.Reset();
         }
 
-        [Test]
-        public void Stress()
-        {
-            do MakeAssertions();
-            while (TestShouldKeepRunning());
-
-            AssertIterations();
-        }
-
-        protected abstract void MakeAssertions();
+        public abstract void Stress();
 
         protected Boolean TestShouldKeepRunning()
         {

@@ -29,5 +29,14 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
                 };
             }
         }
+
+        [Test]
+        public override void Stress()
+        {
+            do MakeAssertions();
+            while (TestShouldKeepRunning());
+
+            AssertIterations();
+        }
     }
 }

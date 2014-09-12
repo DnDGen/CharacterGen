@@ -2,7 +2,7 @@
 
 namespace NPCGen.Selectors.Interfaces.Objects
 {
-    public static class FeatSelectionConstants
+    public static class AdditionalFeatSelectionConstants
     {
         public const String SchoolsOfMagic = "Schools of magic";
         public const String Weapons = "Weapons";

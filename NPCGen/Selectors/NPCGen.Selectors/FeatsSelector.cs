@@ -7,7 +7,12 @@ namespace NPCGen.Selectors
 {
     public class FeatsSelector : IFeatsSelector
     {
-        public IEnumerable<FeatSelection> SelectAll()
+        public IEnumerable<RacialFeatSelection> SelectRacial()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<AdditionalFeatSelection> SelectAdditional()
         {
             throw new NotImplementedException();
         }

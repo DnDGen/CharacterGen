@@ -12,7 +12,16 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.CharacterClasses.Levels
         [Inject, Named(LevelRandomizerTypeConstants.Low)]
         public ILevelRandomizer LowLevelRandomizer { get; set; }
 
-        protected override void MakeAssertions()
+        [Test]
+        public override void Stress()
+        {
+            do MakeAssertions();
+            while (TestShouldKeepRunning());
+
+            AssertIterations();
+        }
+
+        private void MakeAssertions()
         {
             var level = LowLevelRandomizer.Randomize();
             Assert.That(level, Is.InRange<Int32>(1, 5));

@@ -23,7 +23,16 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Alignments
             lawfulnesses = AlignmentConstants.GetLawfulnesses();
         }
 
-        protected override void MakeAssertions()
+        [Test]
+        public override void Stress()
+        {
+            do MakeAssertions();
+            while (TestShouldKeepRunning());
+
+            AssertIterations();
+        }
+
+        private void MakeAssertions()
         {
             var alignment = AlignmentRandomizer.Randomize();
             Assert.That(goodnesses, Contains.Item(alignment.Goodness));
@@ -38,8 +47,8 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Alignments
             do alignment = AlignmentRandomizer.Randomize();
             while (TestShouldKeepRunning() && alignment.Goodness != AlignmentConstants.Neutral);
 
-            Assert.That(alignment.Goodness, Is.EqualTo(AlignmentConstants.Neutral));
             AssertIterations();
+            Assert.That(alignment.Goodness, Is.EqualTo(AlignmentConstants.Neutral));
         }
 
         [Test]
@@ -50,8 +59,8 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Alignments
             do alignment = AlignmentRandomizer.Randomize();
             while (TestShouldKeepRunning() && alignment.Lawfulness != AlignmentConstants.Neutral);
 
-            Assert.That(alignment.Lawfulness, Is.EqualTo(AlignmentConstants.Neutral));
             AssertIterations();
+            Assert.That(alignment.Lawfulness, Is.EqualTo(AlignmentConstants.Neutral));
         }
 
         [Test]
@@ -62,9 +71,9 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Alignments
             do alignment = AlignmentRandomizer.Randomize();
             while (TestShouldKeepRunning() && (alignment.Lawfulness != AlignmentConstants.Neutral || alignment.Goodness != AlignmentConstants.Neutral));
 
+            AssertIterations();
             Assert.That(alignment.Lawfulness, Is.EqualTo(AlignmentConstants.Neutral));
             Assert.That(alignment.Goodness, Is.EqualTo(AlignmentConstants.Neutral));
-            AssertIterations();
         }
     }
 }

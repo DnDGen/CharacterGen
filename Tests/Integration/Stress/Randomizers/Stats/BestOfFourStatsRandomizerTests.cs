@@ -23,7 +23,16 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Stats
             statNames = StatConstants.GetStats();
         }
 
-        protected override void MakeAssertions()
+        [Test]
+        public override void Stress()
+        {
+            do MakeAssertions();
+            while (TestShouldKeepRunning());
+
+            AssertIterations();
+        }
+
+        private void MakeAssertions()
         {
             var stats = BestOfFourStatsRandomizer.Randomize();
 

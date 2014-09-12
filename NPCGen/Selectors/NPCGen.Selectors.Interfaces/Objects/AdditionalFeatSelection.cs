@@ -7,7 +7,7 @@ using NPCGen.Common.Abilities.Stats;
 
 namespace NPCGen.Selectors.Interfaces.Objects
 {
-    public class FeatSelection
+    public class AdditionalFeatSelection
     {
         public String FeatName { get; set; }
         public IEnumerable<String> RequiredFeats { get; set; }
@@ -15,11 +15,11 @@ namespace NPCGen.Selectors.Interfaces.Objects
         public Dictionary<String, Int32> RequiredStats { get; set; }
         public Dictionary<String, Int32> RequiredSkillRanks { get; set; }
         public Boolean IsFighterFeat { get; set; }
-        public Boolean IsMetamagicFeat { get; set; }
+        public Boolean IsWizardFeat { get; set; }
         public IEnumerable<String> RequiredClassNames { get; set; }
         public String SpecificApplicationType { get; set; }
 
-        public FeatSelection()
+        public AdditionalFeatSelection()
         {
             FeatName = String.Empty;
             RequiredFeats = Enumerable.Empty<String>();

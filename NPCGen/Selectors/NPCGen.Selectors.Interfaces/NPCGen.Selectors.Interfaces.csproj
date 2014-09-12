@@ -39,7 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Objects\FeatSelection.cs" />
+    <Compile Include="Objects\AdditionalFeatSelection.cs" />
     <Compile Include="ICollectionsSelector.cs" />
     <Compile Include="IFeatsSelector.cs" />
     <Compile Include="ILanguageCollectionsSelector.cs" />
@@ -48,7 +48,8 @@
     <Compile Include="ISkillSelector.cs" />
     <Compile Include="IStatAdjustmentsSelector.cs" />
     <Compile Include="IStatPrioritySelector.cs" />
-    <Compile Include="Objects\FeatSelectionConstants.cs" />
+    <Compile Include="Objects\AdditionalFeatSelectionConstants.cs" />
+    <Compile Include="Objects\RacialFeatSelection.cs" />
     <Compile Include="Objects\StatPrioritySelection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Objects\SkillSelection.cs" />

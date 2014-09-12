@@ -13,7 +13,16 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Alignments
         [Inject]
         public Random Random { get; set; }
 
-        protected override void MakeAssertions()
+        [Test]
+        public override void Stress()
+        {
+            do MakeAssertions();
+            while (TestShouldKeepRunning());
+
+            AssertIterations();
+        }
+
+        private void MakeAssertions()
         {
             SetAlignmentRandomizer.SetAlignment.Goodness = Random.Next().ToString();
             SetAlignmentRandomizer.SetAlignment.Lawfulness = Random.Next().ToString();

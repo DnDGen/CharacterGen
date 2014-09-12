@@ -23,7 +23,16 @@ namespace NPCGen.Tests.Integration.Stress.Items
         [Inject]
         public ICombatGenerator CombatGenerator { get; set; }
 
-        protected override void MakeAssertions()
+        [Test]
+        public override void Stress()
+        {
+            do MakeAssertions();
+            while (TestShouldKeepRunning());
+
+            AssertIterations();
+        }
+
+        private void MakeAssertions()
         {
             var equipment = GetEquipment();
             Assert.That(equipment.Armor, Is.Not.Null);

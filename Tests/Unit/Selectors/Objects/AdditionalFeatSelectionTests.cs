@@ -9,9 +9,9 @@ using NUnit.Framework;
 namespace NPCGen.Tests.Unit.Selectors.Objects
 {
     [TestFixture]
-    public class FeatSelectionTests
+    public class AdditionalFeatSelectionTests
     {
-        private FeatSelection selection;
+        private AdditionalFeatSelection selection;
         private List<Feat> feats;
         private Dictionary<String, Stat> stats;
         private Dictionary<String, Skill> skills;
@@ -19,7 +19,7 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
         [SetUp]
         public void Setup()
         {
-            selection = new FeatSelection();
+            selection = new AdditionalFeatSelection();
             feats = new List<Feat>();
             stats = new Dictionary<String, Stat>();
             skills = new Dictionary<String, Skill>();
@@ -36,7 +36,7 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
             Assert.That(selection.RequiredClassNames, Is.Empty);
             Assert.That(selection.IsFighterFeat, Is.False);
             Assert.That(selection.SpecificApplicationType, Is.Empty);
-            Assert.That(selection.IsMetamagicFeat, Is.False);
+            Assert.That(selection.IsWizardFeat, Is.False);
         }
 
         [Test]

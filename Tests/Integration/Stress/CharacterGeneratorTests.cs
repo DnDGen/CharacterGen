@@ -39,7 +39,16 @@ namespace NPCGen.Tests.Integration.Stress
             metaraces = RaceConstants.Metaraces.GetMetaraces().Union(new[] { String.Empty });
         }
 
-        protected override void MakeAssertions()
+        [Test]
+        public override void Stress()
+        {
+            do MakeAssertions();
+            while (TestShouldKeepRunning());
+
+            AssertIterations();
+        }
+
+        private void MakeAssertions()
         {
             var character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
                     MetaraceRandomizer, StatsRandomizer);

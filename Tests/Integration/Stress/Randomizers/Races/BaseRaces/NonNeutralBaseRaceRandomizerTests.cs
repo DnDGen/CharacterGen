@@ -27,5 +27,14 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
                 return RaceConstants.BaseRaces.GetBaseRaces().Except(neutralBaseRaces);
             }
         }
+
+        [Test]
+        public override void Stress()
+        {
+            do MakeAssertions();
+            while (TestShouldKeepRunning());
+
+            AssertIterations();
+        }
     }
 }

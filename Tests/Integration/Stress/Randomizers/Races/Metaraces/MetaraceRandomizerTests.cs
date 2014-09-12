@@ -17,7 +17,7 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
             metaraces = allowedMetaraces;
         }
 
-        protected override void MakeAssertions()
+        protected void MakeAssertions()
         {
             var alignment = GetNewAlignment();
             var characterClass = GetNewCharacterClass(alignment);

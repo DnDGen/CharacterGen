@@ -13,7 +13,16 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.CharacterClasses.ClassName
         [Inject]
         public Random Random { get; set; }
 
-        protected override void MakeAssertions()
+        [Test]
+        public override void Stress()
+        {
+            do MakeAssertions();
+            while (TestShouldKeepRunning());
+
+            AssertIterations();
+        }
+
+        private void MakeAssertions()
         {
             SetClassNameRandomizer.SetClassName = Random.Next().ToString();
             var alignment = GetNewAlignment();

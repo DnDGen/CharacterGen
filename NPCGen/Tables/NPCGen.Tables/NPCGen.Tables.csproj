@@ -326,9 +326,6 @@
     <EmbeddedResource Include="Abilities\Skills\SkillSynergy.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Abilities\Feats\RacialFeats.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Combats\RacialBaseAttackAdjustments.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -354,6 +351,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\OrcSkillAdjustments.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Abilities\Feats\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

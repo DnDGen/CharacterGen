@@ -16,7 +16,16 @@ namespace NPCGen.Tests.Integration.Stress
             classNames = CharacterClassConstants.GetClassNames();
         }
 
-        protected override void MakeAssertions()
+        [Test]
+        public override void Stress()
+        {
+            do MakeAssertions();
+            while (TestShouldKeepRunning());
+
+            AssertIterations();
+        }
+
+        private void MakeAssertions()
         {
             var alignment = GetNewAlignment();
 

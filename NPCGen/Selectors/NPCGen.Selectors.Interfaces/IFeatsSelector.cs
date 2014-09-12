@@ -5,6 +5,7 @@ namespace NPCGen.Selectors.Interfaces
 {
     public interface IFeatsSelector
     {
-        IEnumerable<FeatSelection> SelectAll();
+        IEnumerable<RacialFeatSelection> SelectRacial();
+        IEnumerable<AdditionalFeatSelection> SelectAdditional();
     }
 }

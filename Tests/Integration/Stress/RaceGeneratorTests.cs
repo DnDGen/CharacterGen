@@ -20,7 +20,16 @@ namespace NPCGen.Tests.Integration.Stress
             sizes = RaceConstants.Sizes.GetSizes();
         }
 
-        protected override void MakeAssertions()
+        [Test]
+        public override void Stress()
+        {
+            do MakeAssertions();
+            while (TestShouldKeepRunning());
+
+            AssertIterations();
+        }
+
+        private void MakeAssertions()
         {
             var race = GenerateRace();
             Assert.That(baseRaces, Contains.Item(race.BaseRace));

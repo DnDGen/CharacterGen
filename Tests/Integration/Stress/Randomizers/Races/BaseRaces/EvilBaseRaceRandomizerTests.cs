@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Ninject;
 using NPCGen.Common.Races;
 using NPCGen.Generators.Interfaces.Randomizers.Races;
-using NPCGen.Generators.Randomizers.Races.BaseRaces;
-using NPCGen.Tests.Integration.Common;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
@@ -51,6 +48,15 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
                     RaceConstants.BaseRaces.WoodElf
                 };
             }
+        }
+
+        [Test]
+        public override void Stress()
+        {
+            do MakeAssertions();
+            while (TestShouldKeepRunning());
+
+            AssertIterations();
         }
     }
 }

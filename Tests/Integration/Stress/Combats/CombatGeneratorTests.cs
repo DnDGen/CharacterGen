@@ -20,7 +20,16 @@ namespace NPCGen.Tests.Integration.Stress.Combats
         [Inject]
         public IEquipmentGenerator EquipmentGenerator { get; set; }
 
-        protected override void MakeAssertions()
+        [Test]
+        public override void Stress()
+        {
+            do MakeAssertions();
+            while (TestShouldKeepRunning());
+
+            AssertIterations();
+        }
+
+        private void MakeAssertions()
         {
             var alignment = GetNewAlignment();
             var characterClass = GetNewCharacterClass(alignment);
