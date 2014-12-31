@@ -44,7 +44,7 @@ namespace NPCGen.Tests.Unit.Generators
         }
 
         [Test]
-        public void GetSpecialtyFields()
+        public void DoNotGetSpecialtyFieldsIfNone()
         {
             Assert.Fail();
         }

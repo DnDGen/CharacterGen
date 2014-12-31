@@ -30,11 +30,44 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="D20Dice, Version=1.0.5350.36368, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\D20Dice.8.0\lib\D20Dice.dll</HintPath>
+    </Reference>
+    <Reference Include="EquipmentGen.Common, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\EquipmentGen.2.1.1\lib\EquipmentGen.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="EquipmentGen.Generators">
+      <HintPath>..\..\..\packages\EquipmentGen.Backend.2.0\lib\EquipmentGen.Generators.dll</HintPath>
+    </Reference>
+    <Reference Include="EquipmentGen.Generators.Interfaces">
+      <HintPath>..\..\..\packages\EquipmentGen.2.1.1\lib\EquipmentGen.Generators.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="EquipmentGen.Mappers">
+      <HintPath>..\..\..\packages\EquipmentGen.Backend.2.0\lib\EquipmentGen.Mappers.dll</HintPath>
+    </Reference>
+    <Reference Include="EquipmentGen.Mappers.Interfaces">
+      <HintPath>..\..\..\packages\EquipmentGen.Backend.2.0\lib\EquipmentGen.Mappers.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="EquipmentGen.Selectors">
+      <HintPath>..\..\..\packages\EquipmentGen.Backend.2.0\lib\EquipmentGen.Selectors.dll</HintPath>
+    </Reference>
+    <Reference Include="EquipmentGen.Selectors.Interfaces">
+      <HintPath>..\..\..\packages\EquipmentGen.Backend.2.0\lib\EquipmentGen.Selectors.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="EquipmentGen.Tables">
+      <HintPath>..\..\..\packages\EquipmentGen.Backend.2.0\lib\EquipmentGen.Tables.dll</HintPath>
+    </Reference>
+    <Reference Include="EquipmentGen.Tables.Interfaces">
+      <HintPath>..\..\..\packages\EquipmentGen.Backend.2.0\lib\EquipmentGen.Tables.Interfaces.dll</HintPath>
+    </Reference>
     <Reference Include="Ninject">
       <HintPath>..\..\..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.framework">
-      <HintPath>..\..\..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
+    <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

@@ -1,10 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NPCGen.Legacy", "Legacy\NPCGen.Legacy.csproj", "{6F667C1C-C443-4878-B99F-7677BDFD93AB}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NPCGen.Bootstrap", "Bootstrap\NPCGen.Bootstrap.csproj", "{18C602E6-823C-4CEC-85D3-5EDDDCA545DB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{7121D619-B8F2-4D63-86AE-43A8D504F3EB}"
@@ -61,16 +59,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NPCGen.Tests.Unit.Mappers",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NPCGen.Tests.Unit.Selectors", "Tests\Unit\Selectors\NPCGen.Tests.Unit.Selectors.csproj", "{A6FA133C-C725-423C-A5B5-791C62676980}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NPCGen.Tests.Unit.Tables", "Tests\Unit\Tables\NPCGen.Tests.Unit.Tables.csproj", "{FC3663B0-60EF-4EC8-A815-68FFBDF972DA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{6F667C1C-C443-4878-B99F-7677BDFD93AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6F667C1C-C443-4878-B99F-7677BDFD93AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6F667C1C-C443-4878-B99F-7677BDFD93AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6F667C1C-C443-4878-B99F-7677BDFD93AB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{18C602E6-823C-4CEC-85D3-5EDDDCA545DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{18C602E6-823C-4CEC-85D3-5EDDDCA545DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{18C602E6-823C-4CEC-85D3-5EDDDCA545DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -143,6 +139,10 @@ Global
 		{A6FA133C-C725-423C-A5B5-791C62676980}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6FA133C-C725-423C-A5B5-791C62676980}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A6FA133C-C725-423C-A5B5-791C62676980}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC3663B0-60EF-4EC8-A815-68FFBDF972DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC3663B0-60EF-4EC8-A815-68FFBDF972DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC3663B0-60EF-4EC8-A815-68FFBDF972DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC3663B0-60EF-4EC8-A815-68FFBDF972DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -173,5 +173,6 @@ Global
 		{77A67270-F5FB-40C9-B5BC-E0D3595F511A} = {CFBA617E-6E73-4FA8-9F8E-AABD8C170CE4}
 		{339E6EC2-4D48-4B22-A386-643BDF828D20} = {CFBA617E-6E73-4FA8-9F8E-AABD8C170CE4}
 		{A6FA133C-C725-423C-A5B5-791C62676980} = {CFBA617E-6E73-4FA8-9F8E-AABD8C170CE4}
+		{FC3663B0-60EF-4EC8-A815-68FFBDF972DA} = {CFBA617E-6E73-4FA8-9F8E-AABD8C170CE4}
 	EndGlobalSection
 EndGlobal
