@@ -12,6 +12,7 @@ using NPCGen.Common.Races;
 using NPCGen.Generators.Interfaces.Abilities;
 using NPCGen.Selectors.Interfaces;
 using NPCGen.Selectors.Interfaces.Objects;
+using NPCGen.Tables.Interfaces;
 
 namespace NPCGen.Generators.Abilities
 {
@@ -81,17 +82,19 @@ namespace NPCGen.Generators.Abilities
 
         private Int32 GetMonsterHitDice(String baseRace)
         {
-            var monsters = collectionsSelector.SelectFrom("BaseRaceGroups", "Monsters");
+            var monsters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups,
+                TableNameConstants.Set.Collection.Groups.Monsters);
             if (!monsters.Contains(baseRace))
                 return 1;
 
-            var hitDice = adjustmentsSelector.SelectFrom("MonsterHitDice");
+            var hitDice = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Collection.MonsterHitDice);
             return hitDice[baseRace];
         }
 
         private IEnumerable<RacialFeatSelection> OverwriteOverwritableStrengths(IEnumerable<RacialFeatSelection> racialFeats)
         {
-            var overwritableStrengthNames = collectionsSelector.SelectFrom("FeatGroups", "Overwritten Strengths");
+            var overwritableStrengthNames = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups,
+                TableNameConstants.Set.Collection.Groups.OverwrittenStrengths);
             var featToOverwrite = racialFeats.Where(f => overwritableStrengthNames.Contains(f.FeatName));
             var notOverwrittenStrengths = racialFeats.Except(featToOverwrite);
 
@@ -110,7 +113,8 @@ namespace NPCGen.Generators.Abilities
 
         private IEnumerable<RacialFeatSelection> AddCumulativeStrengths(IEnumerable<RacialFeatSelection> racialFeats)
         {
-            var cumulativeStrengthNames = collectionsSelector.SelectFrom("FeatGroups", "Cumulative Strengths");
+            var cumulativeStrengthNames = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups,
+                TableNameConstants.Set.Collection.Groups.CumulativeStrengths);
             var featToSum = racialFeats.Where(f => cumulativeStrengthNames.Contains(f.FeatName));
             var unsummedStrengths = racialFeats.Except(featToSum);
             var featNamesToSum = featToSum.Select(f => f.FeatName).Distinct();
@@ -140,8 +144,9 @@ namespace NPCGen.Generators.Abilities
 
         private IEnumerable<Feat> GetClassFeats(CharacterClass characterClass)
         {
-            var allClassFeats = collectionsSelector.SelectFrom("ClassFeats", characterClass.ClassName);
-            var tableName = String.Format("{0}FeatLevelRequirements", characterClass.ClassName);
+            var allClassFeats = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassFeats,
+                characterClass.ClassName);
+            var tableName = String.Format(TableNameConstants.Formattable.Collection.CLASSFeatLevelRequirements, characterClass.ClassName);
             var levelRequirements = adjustmentsSelector.SelectFrom(tableName);
 
             return allClassFeats.Where(f => levelRequirements[f] <= characterClass.Level)
@@ -155,7 +160,7 @@ namespace NPCGen.Generators.Abilities
 
             foreach (var skill in synergyQualifyingSkills)
             {
-                var synergy = collectionsSelector.SelectFrom("SkillSynergyFeats", skill);
+                var synergy = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillSynergyFeats, skill);
                 synergyFeats.AddRange(synergy);
             }
 
@@ -236,11 +241,11 @@ namespace NPCGen.Generators.Abilities
                 specificApplications = feats.Where(f => RequirementsHaveSpecificApplications(sourceFeat, f))
                                             .Select(f => f.SpecificApplication);
             else
-                specificApplications = collectionsSelector.SelectFrom("FeatSpecificApplications", feat.SpecificApplication);
+                specificApplications = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatSpecificApplications, feat.SpecificApplication);
 
             specificApplications = specificApplications.Except(usedSpecificApplications);
 
-            var spellcasters = collectionsSelector.SelectFrom("ClassNameGroups", "Spellcasters");
+            var spellcasters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, TableNameConstants.Set.Collection.Groups.Spellcasters);
             if (!spellcasters.Contains(className))
                 specificApplications = specificApplications.Except(new[] { WeaponProficiencyConstants.Ray });
 

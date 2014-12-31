@@ -14,8 +14,23 @@ namespace NPCGen.Tables.Interfaces
 
             public static class Collection
             {
-                public const String LevelAdjustments = "LevelAdjustments";
                 public const String ArmorCheckPenalties = "ArmorCheckPenalties";
+                public const String BaseRaceGroups = "BaseRaceGroups";
+                public const String ClassFeats = "ClassFeats";
+                public const String ClassNameGroups = "ClassNameGroups";
+                public const String FeatGroups = "FeatGroups";
+                public const String FeatSpecificApplications = "FeatSpecificApplications";
+                public const String LevelAdjustments = "LevelAdjustments";
+                public const String MonsterHitDice = "MonsterHitDice";
+                public const String SkillSynergyFeats = "SkillSynergyFeats";
+
+                public static class Groups
+                {
+                    public const String CumulativeStrengths = "Cumulative Strengths";
+                    public const String Monsters = "Monsters";
+                    public const String OverwrittenStrengths = "Overwritten Strengths";
+                    public const String Spellcasters = "Spellcasters";
+                }
             }
         }
 
@@ -30,7 +45,9 @@ namespace NPCGen.Tables.Interfaces
 
             public static class Collection
             {
-
+                public const String BASERACESkillAdjustments = "{0}SkillAdjustments";
+                public const String FEATSkillAdjustments = "{0}SkillAdjustments";
+                public const String CLASSFeatLevelRequirements = "{0}FeatLevelRequirements";
             }
         }
     }

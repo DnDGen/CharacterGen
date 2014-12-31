@@ -148,6 +148,10 @@
       <Project>{98848dc9-c901-4189-8559-54d68215f3a7}</Project>
       <Name>NPCGen.Selectors.Interfaces</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Tables\NPCGen.Tables.Interfaces\NPCGen.Tables.Interfaces.csproj">
+      <Project>{b0abd6a7-a3f9-456b-b820-0e90426c5fa8}</Project>
+      <Name>NPCGen.Tables.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NPCGen.Generators.Interfaces\NPCGen.Generators.Interfaces.csproj">
       <Project>{7f262696-287c-4308-8bb3-c6563b7f4878}</Project>
       <Name>NPCGen.Generators.Interfaces</Name>

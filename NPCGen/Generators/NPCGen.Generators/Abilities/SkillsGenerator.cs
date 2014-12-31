@@ -8,6 +8,7 @@ using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Races;
 using NPCGen.Generators.Interfaces.Abilities;
 using NPCGen.Selectors.Interfaces;
+using NPCGen.Tables.Interfaces;
 
 namespace NPCGen.Generators.Abilities
 {
@@ -138,7 +139,7 @@ namespace NPCGen.Generators.Abilities
         private Dictionary<String, Skill> GetRacialBonuses(Dictionary<String, Skill> skills, String race)
         {
             var formattedBaseRace = race.Replace(" ", String.Empty).Replace("-", String.Empty);
-            var tableName = String.Format("{0}SkillAdjustments", formattedBaseRace);
+            var tableName = String.Format(TableNameConstants.Formattable.Collection.BASERACESkillAdjustments, formattedBaseRace);
             var adjustments = adjustmentsSelector.SelectFrom(tableName);
 
             foreach (var adjustment in adjustments)

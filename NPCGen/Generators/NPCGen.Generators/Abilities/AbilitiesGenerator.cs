@@ -9,6 +9,7 @@ using NPCGen.Common.Races;
 using NPCGen.Generators.Interfaces.Abilities;
 using NPCGen.Generators.Interfaces.Randomizers.Stats;
 using NPCGen.Selectors.Interfaces;
+using NPCGen.Tables.Interfaces;
 
 namespace NPCGen.Generators.Abilities
 {
@@ -41,7 +42,7 @@ namespace NPCGen.Generators.Abilities
 
             foreach (var feat in ability.Feats)
             {
-                var tableName = String.Format("{0}SkillAdjustments", feat.Name);
+                var tableName = String.Format(TableNameConstants.Formattable.Collection.FEATSkillAdjustments, feat.Name);
                 var adjustments = adjustmentsSelector.SelectFrom(tableName);
 
                 foreach (var adjustment in adjustments)
