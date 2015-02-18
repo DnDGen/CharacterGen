@@ -29,8 +29,8 @@ namespace NPCGen.Generators.Abilities
 
         public Dictionary<String, Skill> GenerateWith(CharacterClass characterClass, Race race, Dictionary<String, Stat> stats)
         {
-            var classSkills = collectionsSelector.SelectFrom("ClassSkills", characterClass.ClassName);
-            var crossClassSkills = collectionsSelector.SelectFrom("CrossClassSkills", characterClass.ClassName);
+            var classSkills = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassSkills, characterClass.ClassName);
+            var crossClassSkills = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.CrossClassSkills, characterClass.ClassName);
 
             var skills = InitializeSkills(stats, classSkills, crossClassSkills);
             skills = AddRanks(characterClass, race, stats, classSkills, crossClassSkills, skills);
@@ -80,11 +80,11 @@ namespace NPCGen.Generators.Abilities
 
         private Int32 GetTotalSkillPoints(CharacterClass characterClass, Stat intelligence, Race race)
         {
-            var pointsTable = adjustmentsSelector.SelectFrom("SkillPointsForClasses");
+            var pointsTable = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillPointsForClasses);
             var perLevel = pointsTable[characterClass.ClassName] + intelligence.Bonus;
             var multiplier = characterClass.Level;
 
-            var monsters = collectionsSelector.SelectFrom("BaseRaceGroups", "Monsters");
+            var monsters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, TableNameConstants.Set.Collection.Groups.Monsters);
             if (!monsters.Contains(race.BaseRace))
                 multiplier += 3;
 
@@ -113,7 +113,7 @@ namespace NPCGen.Generators.Abilities
             var skillsWarrantingSynergy = skills.Where(s => s.Value.EffectiveRanks >= 5);
             foreach (var skill in skillsWarrantingSynergy)
             {
-                var synergySkills = collectionsSelector.SelectFrom("SkillSynergy", skill.Key);
+                var synergySkills = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillSynergy, skill.Key);
 
                 foreach (var synergySkill in synergySkills)
                     if (skills.ContainsKey(synergySkill))
@@ -127,11 +127,14 @@ namespace NPCGen.Generators.Abilities
         {
             skills = GetRacialBonuses(skills, race.BaseRace);
 
+            var allKnowledgeSkills = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, TableNameConstants.Set.Collection.Groups.Knowledge);
+            var knowledgeSkills = allKnowledgeSkills.Intersect(skills.Keys);
+
             if (race.Metarace != RaceConstants.Metaraces.None)
                 skills = GetRacialBonuses(skills, race.Metarace);
 
-            if (race.BaseRace == RaceConstants.BaseRaces.MindFlayer && skills.Keys.Any(s => s.StartsWith("Knowledge")))
-                skills = ApplyMindFlayerKnowledgeBonus(skills);
+            if (race.BaseRace == RaceConstants.BaseRaces.MindFlayer && knowledgeSkills.Any())
+                skills = ApplyMindFlayerKnowledgeBonus(skills, knowledgeSkills);
 
             return skills;
         }
@@ -149,9 +152,8 @@ namespace NPCGen.Generators.Abilities
             return skills;
         }
 
-        private Dictionary<String, Skill> ApplyMindFlayerKnowledgeBonus(Dictionary<String, Skill> skills)
+        private Dictionary<String, Skill> ApplyMindFlayerKnowledgeBonus(Dictionary<String, Skill> skills, IEnumerable<String> knowledgeSkills)
         {
-            var knowledgeSkills = skills.Keys.Where(s => s.StartsWith("Knowledge"));
             var index = dice.Roll().d(knowledgeSkills.Count()) - 1;
             var knowledgeSkill = knowledgeSkills.ElementAt(index);
             skills[knowledgeSkill].Bonus += 8;

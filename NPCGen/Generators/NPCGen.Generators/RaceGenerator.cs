@@ -44,7 +44,7 @@ namespace NPCGen.Generators
             if (metarace != RaceConstants.Metaraces.HalfDragon)
                 return String.Empty;
 
-            var species = collectionsSelector.SelectFrom("DragonSpecies", alignment.ToString());
+            var species = collectionsSelector.SelectFrom(INVALID"DragonSpecies", alignment.ToString());
             var index = dice.Roll().d(species.Count()) - 1;
 
             return species.ElementAt(index);
@@ -63,11 +63,11 @@ namespace NPCGen.Generators
 
         private String DetermineSize(String baseRace)
         {
-            var largeRaces = collectionsSelector.SelectFrom("BaseRaceGroups", RaceConstants.Sizes.Large);
+            var largeRaces = collectionsSelector.SelectFrom(INVALID"BaseRaceGroups", RaceConstants.Sizes.Large);
             if (largeRaces.Contains(baseRace))
                 return RaceConstants.Sizes.Large;
 
-            var smallRaces = collectionsSelector.SelectFrom("BaseRaceGroups", RaceConstants.Sizes.Small);
+            var smallRaces = collectionsSelector.SelectFrom(INVALID"BaseRaceGroups", RaceConstants.Sizes.Small);
             if (smallRaces.Contains(baseRace))
                 return RaceConstants.Sizes.Small;
 
@@ -86,7 +86,7 @@ namespace NPCGen.Generators
 
         private Int32 DetermineLandSpeed(Race race)
         {
-            var speeds = adjustmentsSelector.SelectFrom("LandSpeeds");
+            var speeds = adjustmentsSelector.SelectFrom(INVALID"LandSpeeds");
             return speeds[race.BaseRace];
         }
 

@@ -17,17 +17,17 @@ namespace NPCGen.Selectors
 
         public IEnumerable<String> SelectAutomaticLanguagesFor(Race race, String className)
         {
-            var baseRaceLanguages = innerSelector.SelectFrom("AutomaticLanguages", race.BaseRace);
-            var metaraceLanguages = innerSelector.SelectFrom("AutomaticLanguages", race.Metarace);
-            var classLanguages = innerSelector.SelectFrom("AutomaticLanguages", className);
+            var baseRaceLanguages = innerSelector.SelectFrom(INVALID"AutomaticLanguages", race.BaseRace);
+            var metaraceLanguages = innerSelector.SelectFrom(INVALID"AutomaticLanguages", race.Metarace);
+            var classLanguages = innerSelector.SelectFrom(INVALID"AutomaticLanguages", className);
 
             return baseRaceLanguages.Union(metaraceLanguages).Union(classLanguages);
         }
 
         public IEnumerable<String> SelectBonusLanguagesFor(String baseRace, String className)
         {
-            var baseRaceLanguages = innerSelector.SelectFrom("BonusLanguages", baseRace);
-            var classLanguages = innerSelector.SelectFrom("BonusLanguages", className);
+            var baseRaceLanguages = innerSelector.SelectFrom(INVALID"BonusLanguages", baseRace);
+            var classLanguages = innerSelector.SelectFrom(INVALID"BonusLanguages", className);
 
             return baseRaceLanguages.Union(classLanguages);
         }

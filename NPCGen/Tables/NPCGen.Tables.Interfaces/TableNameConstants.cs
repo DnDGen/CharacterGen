@@ -14,22 +14,31 @@ namespace NPCGen.Tables.Interfaces
 
             public static class Collection
             {
+                public const String ArmorBonuses = "ArmorBonuses";
                 public const String ArmorCheckPenalties = "ArmorCheckPenalties";
+                public const String ArmorClassModifiers = "ArmorClassModifiers";
                 public const String BaseRaceGroups = "BaseRaceGroups";
                 public const String ClassFeats = "ClassFeats";
                 public const String ClassNameGroups = "ClassNameGroups";
+                public const String ClassSkills = "ClassSkills";
+                public const String CrossClassSkills = "CrossClassSkills";
                 public const String FeatGroups = "FeatGroups";
                 public const String FeatSpecificApplications = "FeatSpecificApplications";
                 public const String LevelAdjustments = "LevelAdjustments";
                 public const String MonsterHitDice = "MonsterHitDice";
+                public const String SkillGroups = "SkillGroups";
+                public const String SkillPointsForClasses = "SkillPointsForClasses";
+                public const String SkillSynergy = "SkillSynergy";
                 public const String SkillSynergyFeats = "SkillSynergyFeats";
 
                 public static class Groups
                 {
                     public const String CumulativeStrengths = "Cumulative Strengths";
+                    public const String Deflection = "Deflection";
                     public const String Monsters = "Monsters";
                     public const String OverwrittenStrengths = "Overwritten Strengths";
                     public const String Spellcasters = "Spellcasters";
+                    public const String Knowledge = "Knowledge";
                 }
             }
         }

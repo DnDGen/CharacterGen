@@ -27,7 +27,7 @@ namespace NPCGen.Tests.Unit.Selectors
                 "true"
             };
 
-            mockInnerSelector.Setup(s => s.SelectFrom("SkillData", "skill")).Returns(skillData);
+            mockInnerSelector.Setup(s => s.SelectFrom(INVALID"SkillData", "skill")).Returns(skillData);
 
             var selection = skillSelector.SelectFor("skill");
             Assert.That(selection.ArmorCheckPenalty, Is.True);
@@ -43,7 +43,7 @@ namespace NPCGen.Tests.Unit.Selectors
                 "false"
             };
 
-            mockInnerSelector.Setup(s => s.SelectFrom("SkillData", "skill")).Returns(skillData);
+            mockInnerSelector.Setup(s => s.SelectFrom(INVALID"SkillData", "skill")).Returns(skillData);
 
             var selection = skillSelector.SelectFor("skill");
             Assert.That(selection.ArmorCheckPenalty, Is.False);

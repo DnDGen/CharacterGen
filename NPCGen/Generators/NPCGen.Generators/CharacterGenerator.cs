@@ -16,6 +16,7 @@ using NPCGen.Generators.Interfaces.Randomizers.Stats;
 using NPCGen.Generators.Interfaces.Verifiers;
 using NPCGen.Generators.Interfaces.Verifiers.Exceptions;
 using NPCGen.Selectors.Interfaces;
+using NPCGen.Tables.Interfaces;
 
 namespace NPCGen.Generators
 {
@@ -58,7 +59,7 @@ namespace NPCGen.Generators
             character.Alignment = GenerateAlignment(alignmentRandomizer, classNameRandomizer, levelRandomizer, baseRaceRandomizer, metaraceRandomizer);
             character.Class = GenerateCharacterClass(classNameRandomizer, levelRandomizer, character.Alignment, baseRaceRandomizer, metaraceRandomizer);
 
-            var levelAdjustments = adjustmentsSelector.SelectFrom("LevelAdjustments");
+            var levelAdjustments = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Collection.LevelAdjustments);
             character.Race = GenerateRace(baseRaceRandomizer, metaraceRandomizer, levelAdjustments, character.Alignment, character.Class);
 
             character.Class.Level -= levelAdjustments[character.Race.BaseRace];
@@ -69,7 +70,7 @@ namespace NPCGen.Generators
             character.Ability = abilitiesGenerator.GenerateWith(character.Class, character.Race, statsRandomizer, baseAttack);
             character.Equipment = equipmentGenerator.GenerateWith(character.Ability.Feats, character.Class);
 
-            var armorCheckPenalties = adjustmentsSelector.SelectFrom("ArmorCheckPenalties");
+            var armorCheckPenalties = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Collection.ArmorCheckPenalties);
 
             foreach (var skill in character.Ability.Skills)
             {
@@ -81,7 +82,7 @@ namespace NPCGen.Generators
             }
 
             character.Combat = combatGenerator.GenerateWith(baseAttack, character.Class, character.Race, character.Ability.Feats, character.Ability.Stats, character.Equipment);
-            character.InterestingTrait = percentileSelector.SelectFrom("Traits");
+            character.InterestingTrait = percentileSelector.SelectFrom(TableNameConstants.Set.Percentile.Traits);
 
             return character;
         }

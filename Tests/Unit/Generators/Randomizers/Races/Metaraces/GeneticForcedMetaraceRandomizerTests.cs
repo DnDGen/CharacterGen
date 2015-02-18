@@ -32,7 +32,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
             randomizer = new GeneticForcedMetaraceRandomizer(mockPercentileResultSelector.Object, mockAdjustmentsSelector.Object,
                 mockCollectionsSelector.Object);
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom("MetaraceGroups", "Genetic")).Returns(new[] { "genetic metarace" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(INVALID"MetaraceGroups", "Genetic")).Returns(new[] { "genetic metarace" });
         }
 
         [TestCase("genetic metarace")]

@@ -57,7 +57,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Alignments
         [Test]
         public void ReturnsGoodnessFromSelector()
         {
-            mockPercentileResultSelector.Setup(p => p.SelectFrom("AlignmentGoodness")).Returns(AlignmentConstants.Evil);
+            mockPercentileResultSelector.Setup(p => p.SelectFrom(INVALID"AlignmentGoodness")).Returns(AlignmentConstants.Evil);
 
             var alignment = randomizer.Randomize();
             Assert.That(alignment.Goodness, Is.EqualTo(AlignmentConstants.Evil));

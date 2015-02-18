@@ -21,7 +21,7 @@ namespace NPCGen.Generators.Randomizers.Races.Metaraces
 
         protected override Boolean MetaraceIsAllowed(String metarace)
         {
-            var metaraces = collectionsSelector.SelectFrom("MetaraceGroups", "Genetic");
+            var metaraces = collectionsSelector.SelectFrom(INVALID"MetaraceGroups", "Genetic");
             return metaraces.Contains(metarace);
         }
     }

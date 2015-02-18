@@ -32,7 +32,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
             randomizer = new LycanthropeMetaraceRandomizer(mockPercentileResultSelector.Object, mockAdjustmentsSelector.Object,
                 mockCollectionsSelector.Object);
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom("MetaraceGroups", "Lycanthrope")).Returns(new[] { "lycanthrope metarace" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(INVALID"MetaraceGroups", "Lycanthrope")).Returns(new[] { "lycanthrope metarace" });
         }
 
         [TestCase("lycanthrope metarace")]

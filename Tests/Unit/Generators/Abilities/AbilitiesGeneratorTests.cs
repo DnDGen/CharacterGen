@@ -107,12 +107,12 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             mockFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills, baseAttack)).Returns(feats);
 
             var noAdjustments = new Dictionary<String, Int32>();
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom("no adjustSkillAdjustments")).Returns(noAdjustments);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(INVALID"no adjustSkillAdjustments")).Returns(noAdjustments);
 
             var adjustments = new Dictionary<String, Int32>();
             adjustments["skill 1"] = 92;
             adjustments["skill 2"] = 66;
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom("adjustSkillAdjustments")).Returns(adjustments);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(INVALID"adjustSkillAdjustments")).Returns(adjustments);
 
             var ability = abilitiesGenerator.GenerateWith(characterClass, race, mockStatsRandomizer.Object, baseAttack);
             Assert.That(ability.Skills["skill 1"].Bonus, Is.EqualTo(adjustments["skill 1"]));

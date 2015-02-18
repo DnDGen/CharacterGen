@@ -24,7 +24,7 @@ namespace NPCGen.Generators.Combats
         public Int32 GenerateWith(CharacterClass characterClass, Int32 constitutionBonus, Race race)
         {
             var hitPoints = 0;
-            var hitDice = adjustmentsSelector.SelectFrom("ClassHitDice");
+            var hitDice = adjustmentsSelector.SelectFrom(INVALID"ClassHitDice");
 
             for (var i = 0; i < characterClass.Level; i++)
             {
@@ -32,7 +32,7 @@ namespace NPCGen.Generators.Combats
                 hitPoints += Math.Max(rolledHitPoints, 1);
             }
 
-            var monsters = collectionsSelector.SelectFrom("BaseRaceGroups", "Monsters");
+            var monsters = collectionsSelector.SelectFrom(INVALID"BaseRaceGroups", "Monsters");
             if (!monsters.Contains(race.BaseRace))
                 return hitPoints;
 
@@ -42,7 +42,7 @@ namespace NPCGen.Generators.Combats
 
         private Int32 GetAdditionalMonsterHitDice(Race race)
         {
-            var hitDice = adjustmentsSelector.SelectFrom("MonsterHitDice");
+            var hitDice = adjustmentsSelector.SelectFrom(INVALID"MonsterHitDice");
 
             if (race.Metarace == RaceConstants.Metaraces.HalfDragon)
                 return dice.Roll(hitDice[race.BaseRace]).d10();

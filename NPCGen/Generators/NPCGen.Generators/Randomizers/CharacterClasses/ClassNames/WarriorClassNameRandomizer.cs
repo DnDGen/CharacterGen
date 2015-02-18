@@ -17,8 +17,8 @@ namespace NPCGen.Generators.Randomizers.CharacterClasses.ClassNames
 
         protected override Boolean CharacterClassIsAllowed(String className, Alignment alignment)
         {
-            var warriors = collectionsSelector.SelectFrom("ClassNameGroups", "Warriors");
-            var alignmentClasses = collectionsSelector.SelectFrom("ClassNameGroups", alignment.ToString());
+            var warriors = collectionsSelector.SelectFrom(INVALID"ClassNameGroups", "Warriors");
+            var alignmentClasses = collectionsSelector.SelectFrom(INVALID"ClassNameGroups", alignment.ToString());
 
             var classes = warriors.Intersect(alignmentClasses);
             return classes.Contains(className);

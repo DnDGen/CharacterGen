@@ -35,7 +35,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
                 adjustments.Add(baseRace, 0);
 
             mockLevelAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
-            mockLevelAdjustmentsSelector.Setup(p => p.SelectFrom("LevelAdjustments")).Returns(adjustments);
+            mockLevelAdjustmentsSelector.Setup(p => p.SelectFrom(INVALID"LevelAdjustments")).Returns(adjustments);
 
             characterClass = new CharacterClass();
             characterClass.Level = 1;
@@ -69,7 +69,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         {
             characterClass.ClassName = "className";
             randomizer.Randomize("goodness", characterClass);
-            mockPercentileResultSelector.Verify(p => p.SelectFrom("goodnessclassNameBaseRaces"), Times.Once);
+            mockPercentileResultSelector.Verify(p => p.SelectFrom(INVALID"goodnessclassNameBaseRaces"), Times.Once);
         }
 
         [Test]

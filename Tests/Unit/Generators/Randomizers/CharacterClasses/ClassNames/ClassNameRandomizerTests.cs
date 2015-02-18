@@ -35,9 +35,9 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassNames
 
             alignment.Goodness = "goodness";
             alignment.Lawfulness = "lawfulness";
-            mockCollectionsSelector.Setup(s => s.SelectFrom("ClassNameGroups", classNameGroup)).Returns(groupClasses);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(INVALID"ClassNameGroups", classNameGroup)).Returns(groupClasses);
             mockPercentileResultSelector.Setup(s => s.SelectAllFrom(It.IsAny<String>())).Returns(new[] { ClassName, AlignmentClassName, GroupClassName });
-            mockCollectionsSelector.Setup(s => s.SelectFrom("ClassNameGroups", alignment.ToString())).Returns(alignmentClasses);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(INVALID"ClassNameGroups", alignment.ToString())).Returns(alignmentClasses);
             alignmentClasses.Add(AlignmentClassName);
             groupClasses.Add(GroupClassName);
         }

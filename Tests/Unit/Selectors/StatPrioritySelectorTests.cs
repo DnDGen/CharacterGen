@@ -23,7 +23,7 @@ namespace NPCGen.Tests.Unit.Selectors
 
             priorities.Add("first priority");
             priorities.Add("second priority");
-            mockInnerSelector.Setup(s => s.SelectFrom("StatPriorities", "class name")).Returns(priorities);
+            mockInnerSelector.Setup(s => s.SelectFrom(INVALID"StatPriorities", "class name")).Returns(priorities);
         }
 
         [Test]

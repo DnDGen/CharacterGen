@@ -31,7 +31,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
             randomizer = new NonStandardBaseRaceRandomizer(mockPercentileResultSelector.Object, mockAdjustmentsSelector.Object,
                 mockCollectionsSelector.Object);
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom("BaseRaceGroups", "Standard")).Returns(new[] { "standard base race" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(INVALID"BaseRaceGroups", "Standard")).Returns(new[] { "standard base race" });
         }
 
         [TestCase("nonstandard base race")]

@@ -18,8 +18,8 @@ namespace NPCGen.Generators.Randomizers.CharacterClasses.ClassNames
 
         protected override Boolean CharacterClassIsAllowed(String className, Alignment alignment)
         {
-            var stealthClasses = collectionsSelector.SelectFrom("ClassNameGroups", "Stealth");
-            var alignmentClasses = collectionsSelector.SelectFrom("ClassNameGroups", alignment.ToString());
+            var stealthClasses = collectionsSelector.SelectFrom(INVALID"ClassNameGroups", "Stealth");
+            var alignmentClasses = collectionsSelector.SelectFrom(INVALID"ClassNameGroups", alignment.ToString());
 
             var classes = stealthClasses.Intersect(alignmentClasses);
             return classes.Contains(className);

@@ -41,7 +41,7 @@ namespace NPCGen.Generators.Randomizers.Races.BaseRaces
 
         private Boolean LevelAdjustmentIsAllowed(String baseRace, Int32 level)
         {
-            var levelAdjustments = adjustmentSelector.SelectFrom("LevelAdjustments");
+            var levelAdjustments = adjustmentSelector.SelectFrom(INVALID"LevelAdjustments");
             return levelAdjustments[baseRace] < level;
         }
 

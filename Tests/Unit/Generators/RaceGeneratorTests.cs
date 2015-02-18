@@ -46,9 +46,9 @@ namespace NPCGen.Tests.Unit.Generators
             mockDice.Setup(d => d.Roll(1).d(It.IsAny<Int32>())).Returns(1);
             alignment.Goodness = "goodness";
             speeds["base race"] = 9266;
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom("LandSpeeds")).Returns(speeds);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(INVALID"LandSpeeds")).Returns(speeds);
             mockBaseRaceRandomizer.Setup(r => r.Randomize(alignment.Goodness, characterClass)).Returns("base race");
-            mockCollectionsSelector.Setup(s => s.SelectFrom("DragonSpecies", alignment.ToString())).Returns(dragonSpecies);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(INVALID"DragonSpecies", alignment.ToString())).Returns(dragonSpecies);
             dragonSpecies.Add("dragon species");
         }
 
@@ -114,7 +114,7 @@ namespace NPCGen.Tests.Unit.Generators
         public void LargeIfInLargeGroup()
         {
             mockBaseRaceRandomizer.Setup(r => r.Randomize(It.IsAny<String>(), characterClass)).Returns("base race");
-            mockCollectionsSelector.Setup(s => s.SelectFrom("BaseRaceGroups", RaceConstants.Sizes.Large)).Returns(new[] { "other base race", "base race" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(INVALID"BaseRaceGroups", RaceConstants.Sizes.Large)).Returns(new[] { "other base race", "base race" });
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
             Assert.That(race.Size, Is.EqualTo(RaceConstants.Sizes.Large));
@@ -123,7 +123,7 @@ namespace NPCGen.Tests.Unit.Generators
         [Test]
         public void MediumSizeIsDefault()
         {
-            mockCollectionsSelector.Setup(s => s.SelectFrom("BaseRaceGroups", It.IsAny<String>())).Returns(new[] { "other base race" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(INVALID"BaseRaceGroups", It.IsAny<String>())).Returns(new[] { "other base race" });
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
             Assert.That(race.Size, Is.EqualTo(RaceConstants.Sizes.Medium));
         }
@@ -131,7 +131,7 @@ namespace NPCGen.Tests.Unit.Generators
         [Test]
         public void SmallIfInSmallGroup()
         {
-            mockCollectionsSelector.Setup(s => s.SelectFrom("BaseRaceGroups", RaceConstants.Sizes.Small)).Returns(new[] { "other base race", "base race" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(INVALID"BaseRaceGroups", RaceConstants.Sizes.Small)).Returns(new[] { "other base race", "base race" });
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
             Assert.That(race.Size, Is.EqualTo(RaceConstants.Sizes.Small));
@@ -158,10 +158,10 @@ namespace NPCGen.Tests.Unit.Generators
         public void HalfDragonsHaveWingsIfLarge()
         {
             mockMetaraceRandomizer.Setup(r => r.Randomize(It.IsAny<String>(), characterClass)).Returns(RaceConstants.Metaraces.HalfDragon);
-            mockCollectionsSelector.Setup(s => s.SelectFrom("BaseRaceGroups", RaceConstants.Sizes.Large)).Returns(new[] { "base race", "other base race" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(INVALID"BaseRaceGroups", RaceConstants.Sizes.Large)).Returns(new[] { "base race", "other base race" });
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
-            mockCollectionsSelector.Verify(s => s.SelectFrom("BaseRaceGroups", RaceConstants.Sizes.Large), Times.Once);
+            mockCollectionsSelector.Verify(s => s.SelectFrom(INVALID"BaseRaceGroups", RaceConstants.Sizes.Large), Times.Once);
             Assert.That(race.HasWings, Is.True);
         }
 
@@ -169,10 +169,10 @@ namespace NPCGen.Tests.Unit.Generators
         public void HalfDragonsDoNotHaveWingsIfNotLarge()
         {
             mockMetaraceRandomizer.Setup(r => r.Randomize(It.IsAny<String>(), characterClass)).Returns(RaceConstants.Metaraces.HalfDragon);
-            mockCollectionsSelector.Setup(s => s.SelectFrom("BaseRaceGroups", RaceConstants.Sizes.Large)).Returns(new[] { "different base race", "other base race" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(INVALID"BaseRaceGroups", RaceConstants.Sizes.Large)).Returns(new[] { "different base race", "other base race" });
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
-            mockCollectionsSelector.Verify(s => s.SelectFrom("BaseRaceGroups", RaceConstants.Sizes.Large), Times.Once);
+            mockCollectionsSelector.Verify(s => s.SelectFrom(INVALID"BaseRaceGroups", RaceConstants.Sizes.Large), Times.Once);
             Assert.That(race.HasWings, Is.False);
         }
 
@@ -208,7 +208,7 @@ namespace NPCGen.Tests.Unit.Generators
             alignment.Lawfulness = "lawfulness";
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
-            mockCollectionsSelector.Verify(s => s.SelectFrom("DragonSpecies", It.IsAny<String>()), Times.Never);
+            mockCollectionsSelector.Verify(s => s.SelectFrom(INVALID"DragonSpecies", It.IsAny<String>()), Times.Never);
             Assert.That(race.MetaraceSpecies, Is.Empty);
         }
 
@@ -255,7 +255,7 @@ namespace NPCGen.Tests.Unit.Generators
         public void HalfDragonsWithWingsHaveAerialSpeedOfTwiceLandSpeed()
         {
             mockMetaraceRandomizer.Setup(r => r.Randomize(It.IsAny<String>(), characterClass)).Returns(RaceConstants.Metaraces.HalfDragon);
-            mockCollectionsSelector.Setup(s => s.SelectFrom("BaseRaceGroups", RaceConstants.Sizes.Large)).Returns(new[] { "base race", "other base race" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(INVALID"BaseRaceGroups", RaceConstants.Sizes.Large)).Returns(new[] { "base race", "other base race" });
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
             Assert.That(race.HasWings, Is.True);

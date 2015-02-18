@@ -42,7 +42,7 @@ namespace NPCGen.Tests.Unit.Generators.Combats
             hitDice = new Dictionary<String, Int32>();
             hitDice[characterClass.ClassName] = 9266;
             hitDice["other class name"] = 42;
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom("ClassHitDice")).Returns(hitDice);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(INVALID"ClassHitDice")).Returns(hitDice);
         }
 
         [Test]
@@ -84,17 +84,17 @@ namespace NPCGen.Tests.Unit.Generators.Combats
         {
             characterClass.Level = 2;
             race.BaseRace = "different base race";
-            mockCollectionsSelector.Setup(s => s.SelectFrom("BaseRaceGroups", "Monsters")).Returns(new[] { "other base race", "base race" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(INVALID"BaseRaceGroups", "Monsters")).Returns(new[] { "other base race", "base race" });
             mockDice.Setup(d => d.Roll(1).d(9266)).Returns(7);
 
             var monsterHitDice = new Dictionary<String, Int32>();
             monsterHitDice["monster"] = 1234;
             monsterHitDice["base race"] = 2345;
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom("MonsterHitDice")).Returns(monsterHitDice);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(INVALID"MonsterHitDice")).Returns(monsterHitDice);
 
             var hitPoints = hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race);
             Assert.That(hitPoints, Is.EqualTo(14));
-            mockAdjustmentsSelector.Verify(s => s.SelectFrom("MonsterHitDice"), Times.Never);
+            mockAdjustmentsSelector.Verify(s => s.SelectFrom(INVALID"MonsterHitDice"), Times.Never);
         }
 
         [Test]
@@ -102,13 +102,13 @@ namespace NPCGen.Tests.Unit.Generators.Combats
         {
             characterClass.Level = 2;
             race.BaseRace = "base race";
-            mockCollectionsSelector.Setup(s => s.SelectFrom("BaseRaceGroups", "Monsters")).Returns(new[] { "other base race", "base race" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(INVALID"BaseRaceGroups", "Monsters")).Returns(new[] { "other base race", "base race" });
             mockDice.Setup(d => d.Roll(1).d(9266)).Returns(7);
 
             var monsterHitDice = new Dictionary<String, Int32>();
             monsterHitDice["monster"] = 1234;
             monsterHitDice["base race"] = 2345;
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom("MonsterHitDice")).Returns(monsterHitDice);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(INVALID"MonsterHitDice")).Returns(monsterHitDice);
             mockDice.Setup(d => d.Roll(2345).d8()).Returns(5);
 
             var hitPoints = hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race);
@@ -121,13 +121,13 @@ namespace NPCGen.Tests.Unit.Generators.Combats
             characterClass.Level = 2;
             race.BaseRace = "base race";
             race.Metarace = RaceConstants.Metaraces.HalfDragon;
-            mockCollectionsSelector.Setup(s => s.SelectFrom("BaseRaceGroups", "Monsters")).Returns(new[] { "other base race", "base race" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(INVALID"BaseRaceGroups", "Monsters")).Returns(new[] { "other base race", "base race" });
             mockDice.Setup(d => d.Roll(1).d(9266)).Returns(7);
 
             var monsterHitDice = new Dictionary<String, Int32>();
             monsterHitDice["monster"] = 1234;
             monsterHitDice["base race"] = 2345;
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom("MonsterHitDice")).Returns(monsterHitDice);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(INVALID"MonsterHitDice")).Returns(monsterHitDice);
             mockDice.Setup(d => d.Roll(2345).d10()).Returns(5);
             mockDice.Setup(d => d.Roll(2345).d8()).Returns(9);
 

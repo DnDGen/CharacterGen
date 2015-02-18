@@ -53,7 +53,7 @@ namespace NPCGen.Generators.Randomizers.Races.Metaraces
 
         private Boolean LevelAdjustmentIsAllowed(String metarace, Int32 level)
         {
-            var adjustments = adjustmentsSelector.SelectFrom("LevelAdjustments");
+            var adjustments = adjustmentsSelector.SelectFrom(INVALID"LevelAdjustments");
             return adjustments[metarace] < level;
         }
 

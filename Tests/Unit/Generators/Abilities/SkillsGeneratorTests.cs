@@ -48,8 +48,8 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
 
             characterClass.ClassName = "class name";
             characterClass.Level = 5;
-            mockCollectionsSelector.Setup(s => s.SelectFrom("ClassSkills", "class name")).Returns(classSkills);
-            mockCollectionsSelector.Setup(s => s.SelectFrom("CrossClassSkills", "class name")).Returns(crossClassSkills);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(INVALID"ClassSkills", "class name")).Returns(classSkills);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(INVALID"CrossClassSkills", "class name")).Returns(crossClassSkills);
             var selection = new SkillSelection { BaseStatName = StatConstants.Intelligence };
             mockSkillSelector.Setup(s => s.SelectFor(It.IsAny<String>())).Returns(selection);
             stats[StatConstants.Intelligence] = intelligence;
@@ -59,7 +59,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
 
             skillPoints = new Dictionary<String, Int32>();
             skillPoints[characterClass.ClassName] = 0;
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom("SkillPointsForClasses")).Returns(skillPoints);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(INVALID"SkillPointsForClasses")).Returns(skillPoints);
             mockDice.Setup(d => d.Roll(1).d3()).Returns(1);
             mockDice.Setup(d => d.Roll(1).d(It.IsAny<Int32>())).Returns(1);
         }
@@ -388,10 +388,10 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         [Test]
         public void ApplySkillSynergyIfSufficientRanks()
         {
-            mockCollectionsSelector.Setup(s => s.SelectFrom("SkillSynergy", "skill 1")).Returns(new[] { "synergy 1", "synergy 2" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom("SkillSynergy", "skill 2")).Returns(new[] { "synergy 3" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom("SkillSynergy", "skill 3")).Returns(new[] { "synergy 4" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom("SkillSynergy", "skill 4")).Returns(new[] { "synergy 5" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(INVALID"SkillSynergy", "skill 1")).Returns(new[] { "synergy 1", "synergy 2" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(INVALID"SkillSynergy", "skill 2")).Returns(new[] { "synergy 3" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(INVALID"SkillSynergy", "skill 3")).Returns(new[] { "synergy 4" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(INVALID"SkillSynergy", "skill 4")).Returns(new[] { "synergy 5" });
 
             skillPoints[characterClass.ClassName] = 2;
             characterClass.Level = 13;
@@ -454,8 +454,8 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         [Test]
         public void SkillSynergyStacks()
         {
-            mockCollectionsSelector.Setup(s => s.SelectFrom("SkillSynergy", "skill 1")).Returns(new[] { "synergy 1", "synergy 2" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom("SkillSynergy", "skill 2")).Returns(new[] { "synergy 1" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(INVALID"SkillSynergy", "skill 1")).Returns(new[] { "synergy 1", "synergy 2" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(INVALID"SkillSynergy", "skill 2")).Returns(new[] { "synergy 1" });
 
             skillPoints[characterClass.ClassName] = 2;
             characterClass.Level = 2;
@@ -490,8 +490,8 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         [Test]
         public void DoNotApplySkillSynergyIfThereIsNoSynergisticSkill()
         {
-            mockCollectionsSelector.Setup(s => s.SelectFrom("SkillSynergy", "skill 1")).Returns(Enumerable.Empty<String>());
-            mockCollectionsSelector.Setup(s => s.SelectFrom("SkillSynergy", "skill 2")).Returns(new[] { "synergy 1" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(INVALID"SkillSynergy", "skill 1")).Returns(Enumerable.Empty<String>());
+            mockCollectionsSelector.Setup(s => s.SelectFrom(INVALID"SkillSynergy", "skill 2")).Returns(new[] { "synergy 1" });
 
             skillPoints[characterClass.ClassName] = 2;
             characterClass.Level = 2;
@@ -522,9 +522,9 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         [Test]
         public void DoNotApplySkillSynergyIfInsufficientRanks()
         {
-            mockCollectionsSelector.Setup(s => s.SelectFrom("SkillSynergy", "skill 1")).Returns(new[] { "synergy 1" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom("SkillSynergy", "skill 2")).Returns(new[] { "synergy 2" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom("SkillSynergy", "skill 3")).Returns(new[] { "synergy 3" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(INVALID"SkillSynergy", "skill 1")).Returns(new[] { "synergy 1" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(INVALID"SkillSynergy", "skill 2")).Returns(new[] { "synergy 2" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(INVALID"SkillSynergy", "skill 3")).Returns(new[] { "synergy 3" });
 
             skillPoints[characterClass.ClassName] = 3;
             characterClass.Level = 6;
@@ -667,13 +667,13 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             baseBonuses["skill 3"] = 3;
             baseBonuses["skill 5"] = 1;
             baseBonuses["skill 6"] = 8;
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom("baseracetoformatSkillAdjustments")).Returns(baseBonuses);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(INVALID"baseracetoformatSkillAdjustments")).Returns(baseBonuses);
 
             var metaBonuses = new Dictionary<String, Int32>();
             metaBonuses["skill 1"] = 2;
             metaBonuses["skill 2"] = 1;
             metaBonuses["skill 6"] = 1;
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom("metaracetoformatSkillAdjustments")).Returns(metaBonuses);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(INVALID"metaracetoformatSkillAdjustments")).Returns(metaBonuses);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
             Assert.That(skills["skill 1"].Bonus, Is.EqualTo(4));
@@ -695,7 +695,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             crossClassSkills.Add("skill 5");
 
             var bonuses = new Dictionary<String, Int32>();
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom("baseraceSkillAdjustments")).Returns(bonuses);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(INVALID"baseraceSkillAdjustments")).Returns(bonuses);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
             Assert.That(skills["skill 1"].Bonus, Is.EqualTo(0));
@@ -714,7 +714,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
 
             var bonuses = new Dictionary<String, Int32>();
             bonuses["skill"] = 2;
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom("baseraceSkillAdjustments")).Returns(bonuses);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(INVALID"baseraceSkillAdjustments")).Returns(bonuses);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
             Assert.That(skills["skill"].Bonus, Is.EqualTo(2));
@@ -765,7 +765,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         public void MonstersDoNotGetMoreSkillPointsAtFirstLevel(Int32 level)
         {
             race.BaseRace = "base race";
-            mockCollectionsSelector.Setup(s => s.SelectFrom("BaseRaceGroups", "Monsters")).Returns(new[] { "base race", "other base race" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(INVALID"BaseRaceGroups", "Monsters")).Returns(new[] { "base race", "other base race" });
 
             characterClass.Level = level;
             skillPoints[characterClass.ClassName] = 1;

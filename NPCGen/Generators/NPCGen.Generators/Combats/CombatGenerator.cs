@@ -42,11 +42,11 @@ namespace NPCGen.Generators.Combats
 
         private Int32 GetBaseAttackBonus(CharacterClass characterClass)
         {
-            var goodBaseAttacks = collectionsSelector.SelectFrom("ClassNameGroups", "Good Base Attack");
+            var goodBaseAttacks = collectionsSelector.SelectFrom(INVALID"ClassNameGroups", "Good Base Attack");
             if (goodBaseAttacks.Contains(characterClass.ClassName))
                 return GetGoodBaseAttackBonus(characterClass.Level);
 
-            var averageBaseAttacks = collectionsSelector.SelectFrom("ClassNameGroups", "Average Base Attack");
+            var averageBaseAttacks = collectionsSelector.SelectFrom(INVALID"ClassNameGroups", "Average Base Attack");
             if (averageBaseAttacks.Contains(characterClass.ClassName))
                 return GetAverageBaseAttackBonus(characterClass.Level);
 
@@ -70,7 +70,7 @@ namespace NPCGen.Generators.Combats
 
         private Int32 GetRacialBaseAttackAdjustments(Race race)
         {
-            var racialAdjustments = adjustmentsSelector.SelectFrom("RacialBaseAttackAdjustments");
+            var racialAdjustments = adjustmentsSelector.SelectFrom(INVALID"RacialBaseAttackAdjustments");
             return racialAdjustments[race.BaseRace] + racialAdjustments[race.Metarace];
         }
 
@@ -100,7 +100,7 @@ namespace NPCGen.Generators.Combats
 
         private Int32 GetAdjustedDexterityBonus(Dictionary<String, Stat> stats, Equipment equipment)
         {
-            var maxDexterityBonuses = adjustmentsSelector.SelectFrom("MaxDexterityBonuses");
+            var maxDexterityBonuses = adjustmentsSelector.SelectFrom(INVALID"MaxDexterityBonuses");
             var dexterityBonus = stats[StatConstants.Dexterity].Bonus;
             var maxArmorBonus = maxDexterityBonuses[equipment.Armor.Name];
 
@@ -109,8 +109,8 @@ namespace NPCGen.Generators.Combats
 
         private Int32 GetInitiativeBonus(Race race, IEnumerable<Feat> feats)
         {
-            var racialBonuses = adjustmentsSelector.SelectFrom("RacialInitiativeBonuses");
-            var featBonuses = adjustmentsSelector.SelectFrom("FeatInitiativeBonuses");
+            var racialBonuses = adjustmentsSelector.SelectFrom(INVALID"RacialInitiativeBonuses");
+            var featBonuses = adjustmentsSelector.SelectFrom(INVALID"FeatInitiativeBonuses");
 
             var raceBonus = racialBonuses[race.BaseRace] + racialBonuses[race.Metarace];
             var relevantFeatBonuses = featBonuses.Where(kvp => feats.Any(f => f.Name == kvp.Key));

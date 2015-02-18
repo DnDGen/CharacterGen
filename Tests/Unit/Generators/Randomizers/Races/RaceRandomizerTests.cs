@@ -23,7 +23,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races
             mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
 
             adjustments = new Dictionary<String, Int32>();
-            mockAdjustmentsSelector.Setup(p => p.SelectFrom("LevelAdjustments")).Returns(adjustments);
+            mockAdjustmentsSelector.Setup(p => p.SelectFrom(INVALID"LevelAdjustments")).Returns(adjustments);
 
             characterClass = new CharacterClass();
             characterClass.Level = 1;

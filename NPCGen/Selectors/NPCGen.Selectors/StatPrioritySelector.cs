@@ -16,7 +16,7 @@ namespace NPCGen.Selectors
 
         public StatPrioritySelection SelectFor(String className)
         {
-            var priorities = innerSelector.SelectFrom("StatPriorities", className);
+            var priorities = innerSelector.SelectFrom(INVALID"StatPriorities", className);
 
             var statPriority = new StatPrioritySelection();
             statPriority.First = priorities.First();

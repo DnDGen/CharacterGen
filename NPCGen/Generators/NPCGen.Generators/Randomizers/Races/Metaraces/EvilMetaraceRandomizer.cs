@@ -22,7 +22,7 @@ namespace NPCGen.Generators.Randomizers.Races.Metaraces
 
         protected override Boolean MetaraceIsAllowed(String metarace)
         {
-            var metaraces = collectionsSelector.SelectFrom("MetaraceGroups", AlignmentConstants.Evil);
+            var metaraces = collectionsSelector.SelectFrom(INVALID"MetaraceGroups", AlignmentConstants.Evil);
             return metaraces.Contains(metarace);
         }
     }
