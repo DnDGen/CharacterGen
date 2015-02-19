@@ -2,6 +2,7 @@
 using System.Linq;
 using NPCGen.Selectors.Interfaces;
 using NPCGen.Selectors.Interfaces.Objects;
+using NPCGen.Tables.Interfaces;
 
 namespace NPCGen.Selectors
 {
@@ -16,7 +17,7 @@ namespace NPCGen.Selectors
 
         public StatPrioritySelection SelectFor(String className)
         {
-            var priorities = innerSelector.SelectFrom(INVALID"StatPriorities", className);
+            var priorities = innerSelector.SelectFrom(TableNameConstants.Set.Collection.StatPriorities, className);
 
             var statPriority = new StatPrioritySelection();
             statPriority.First = priorities.First();

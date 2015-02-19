@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Moq;
-using NPCGen.Common.Races;
 using NPCGen.Generators.Randomizers.Races.BaseRaces;
 using NPCGen.Selectors.Interfaces;
+using NPCGen.Tables.Interfaces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
@@ -13,13 +13,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
     {
         protected override IEnumerable<String> baseRaces
         {
-            get
-            {
-                return new[]
-                {
-                    "standard base race"
-                };
-            }
+            get { return new[] { "standard base race" }; }
         }
 
         private Mock<ICollectionsSelector> mockCollectionsSelector;
@@ -31,7 +25,8 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
             randomizer = new StandardBaseRaceRandomizer(mockPercentileResultSelector.Object, mockAdjustmentsSelector.Object,
                 mockCollectionsSelector.Object);
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(INVALID"BaseRaceGroups", "Standard")).Returns(new[] { "standard base race" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, TableNameConstants.Set.Collection.Groups.Standard))
+                .Returns(new[] { "standard base race" });
         }
 
         [TestCase("standard base race")]

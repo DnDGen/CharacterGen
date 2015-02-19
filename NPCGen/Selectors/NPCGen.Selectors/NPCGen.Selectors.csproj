@@ -62,6 +62,10 @@
       <Project>{0bc49af8-8c54-46b4-80a4-9cda1c14282c}</Project>
       <Name>NPCGen.Mappers.Interfaces</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Tables\NPCGen.Tables.Interfaces\NPCGen.Tables.Interfaces.csproj">
+      <Project>{b0abd6a7-a3f9-456b-b820-0e90426c5fa8}</Project>
+      <Name>NPCGen.Tables.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NPCGen.Selectors.Interfaces\NPCGen.Selectors.Interfaces.csproj">
       <Project>{98848dc9-c901-4189-8559-54d68215f3a7}</Project>
       <Name>NPCGen.Selectors.Interfaces</Name>

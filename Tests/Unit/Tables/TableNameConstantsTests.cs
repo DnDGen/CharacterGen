@@ -33,6 +33,7 @@ namespace NPCGen.Tests.Unit.Tables
         [TestCase(TableNameConstants.Set.Collection.SkillPointsForClasses, "SkillPointsForClasses")]
         [TestCase(TableNameConstants.Set.Collection.SkillSynergy, "SkillSynergy")]
         [TestCase(TableNameConstants.Set.Collection.SkillSynergyFeats, "SkillSynergyFeats")]
+        [TestCase(TableNameConstants.Set.Collection.StatPriorities, "StatPriorities")]
         [TestCase(TableNameConstants.Set.Collection.Groups.AverageBaseAttack, "AverageBaseAttack")]
         [TestCase(TableNameConstants.Set.Collection.Groups.CumulativeStrengths, "CumulativeStrengths")]
         [TestCase(TableNameConstants.Set.Collection.Groups.Deflection, "Deflection")]
@@ -58,6 +59,7 @@ namespace NPCGen.Tests.Unit.Tables
         [TestCase(TableNameConstants.Formattable.Collection.BASERACESkillAdjustments, "{0}SkillAdjustments")]
         [TestCase(TableNameConstants.Formattable.Collection.CLASSFeatLevelRequirements, "{0}FeatLevelRequirements")]
         [TestCase(TableNameConstants.Formattable.Collection.FEATSkillAdjustments, "{0}SkillAdjustments")]
+        [TestCase(TableNameConstants.Formattable.Collection.METARACESkillAdjustments, "{0}SkillAdjustments")]
         public void Constant(String constant, String value)
         {
             Assert.That(constant, Is.EqualTo(value));

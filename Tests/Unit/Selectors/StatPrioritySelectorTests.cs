@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Moq;
 using NPCGen.Selectors;
 using NPCGen.Selectors.Interfaces;
+using NPCGen.Tables.Interfaces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Unit.Selectors
@@ -23,7 +24,7 @@ namespace NPCGen.Tests.Unit.Selectors
 
             priorities.Add("first priority");
             priorities.Add("second priority");
-            mockInnerSelector.Setup(s => s.SelectFrom(INVALID"StatPriorities", "class name")).Returns(priorities);
+            mockInnerSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.StatPriorities, "class name")).Returns(priorities);
         }
 
         [Test]

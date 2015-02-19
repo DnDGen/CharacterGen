@@ -85,6 +85,10 @@
       <Project>{6c924e33-08a7-4f1e-98e0-9e03eb614237}</Project>
       <Name>NPCGen.Selectors</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\NPCGen\Tables\NPCGen.Tables.Interfaces\NPCGen.Tables.Interfaces.csproj">
+      <Project>{b0abd6a7-a3f9-456b-b820-0e90426c5fa8}</Project>
+      <Name>NPCGen.Tables.Interfaces</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
