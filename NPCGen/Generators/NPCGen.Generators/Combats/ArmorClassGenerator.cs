@@ -94,16 +94,17 @@ namespace NPCGen.Generators.Combats
 
         private Int32 GetNaturalArmorBonus(IEnumerable<Item> items, IEnumerable<Feat> feats, Race race)
         {
-            var thingsThatGrantNaturalArmorBonuses = collectionsSelector.SelectFrom(INVALID"ArmorClassModifiers", "NaturalArmor");
+            var thingsThatGrantNaturalArmorBonuses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers,
+                TableNameConstants.Set.Collection.Groups.NaturalArmor);
             var itemsWithNaturalArmorBonuses = items.Where(i => thingsThatGrantNaturalArmorBonuses.Contains(i.Name));
             var itemNaturalArmorBonuses = itemsWithNaturalArmorBonuses.Select(i => i.Magic.Bonus);
 
-            var featAdjustments = adjustmentsSelector.SelectFrom(INVALID"FeatArmorAdjustments");
+            var featAdjustments = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatArmorAdjustments);
             var featsWithNaturalArmorBonuses = feats.Select(f => f.Name).Intersect(thingsThatGrantNaturalArmorBonuses);
             var featNaturalArmorAdjustments = featAdjustments.Where(kvp => featsWithNaturalArmorBonuses.Contains(kvp.Key));
             var featNaturalArmorBonuses = featNaturalArmorAdjustments.Select(kvp => kvp.Value);
 
-            var racialBonuses = adjustmentsSelector.SelectFrom(INVALID"RacialNaturalArmorBonuses");
+            var racialBonuses = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Collection.RacialNaturalArmorBonuses);
             var racialBonus = racialBonuses[race.BaseRace] + racialBonuses[race.Metarace];
             var racialNaturalArmorBonuses = new[] { racialBonus };
 
@@ -117,8 +118,10 @@ namespace NPCGen.Generators.Combats
 
         private Int32 GetDodgeBonus(IEnumerable<Feat> feats)
         {
-            var featAdjustments = adjustmentsSelector.SelectFrom(INVALID"FeatArmorAdjustments");
-            var dodgeBonuses = collectionsSelector.SelectFrom(INVALID"ArmorClassModifiers", "Dodge");
+            var featAdjustments = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatArmorAdjustments);
+            var dodgeBonuses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers,
+                TableNameConstants.Set.Collection.Groups.Dodge);
+
             var bonus = 0;
 
             foreach (var feat in feats.Select(f => f.Name))

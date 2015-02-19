@@ -2,6 +2,7 @@
 using System.Linq;
 using NPCGen.Common.Alignments;
 using NPCGen.Selectors.Interfaces;
+using NPCGen.Tables.Interfaces;
 
 namespace NPCGen.Generators.Randomizers.CharacterClasses.ClassNames
 {
@@ -17,7 +18,7 @@ namespace NPCGen.Generators.Randomizers.CharacterClasses.ClassNames
 
         protected override Boolean CharacterClassIsAllowed(String className, Alignment alignment)
         {
-            var alignmentClasses = collectionsSelector.SelectFrom(INVALID"ClassNameGroups", alignment.ToString());
+            var alignmentClasses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, alignment.ToString());
             return alignmentClasses.Contains(className);
         }
     }

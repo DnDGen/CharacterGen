@@ -7,6 +7,7 @@ using NPCGen.Common.Races;
 using NPCGen.Generators.Interfaces;
 using NPCGen.Generators.Interfaces.Randomizers.Races;
 using NPCGen.Selectors.Interfaces;
+using NPCGen.Tables.Interfaces;
 
 namespace NPCGen.Generators
 {
@@ -44,7 +45,7 @@ namespace NPCGen.Generators
             if (metarace != RaceConstants.Metaraces.HalfDragon)
                 return String.Empty;
 
-            var species = collectionsSelector.SelectFrom(INVALID"DragonSpecies", alignment.ToString());
+            var species = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.DragonSpecies, alignment.ToString());
             var index = dice.Roll().d(species.Count()) - 1;
 
             return species.ElementAt(index);
@@ -63,11 +64,13 @@ namespace NPCGen.Generators
 
         private String DetermineSize(String baseRace)
         {
-            var largeRaces = collectionsSelector.SelectFrom(INVALID"BaseRaceGroups", RaceConstants.Sizes.Large);
+            var largeRaces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups,
+                RaceConstants.Sizes.Large);
             if (largeRaces.Contains(baseRace))
                 return RaceConstants.Sizes.Large;
 
-            var smallRaces = collectionsSelector.SelectFrom(INVALID"BaseRaceGroups", RaceConstants.Sizes.Small);
+            var smallRaces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups,
+                RaceConstants.Sizes.Small);
             if (smallRaces.Contains(baseRace))
                 return RaceConstants.Sizes.Small;
 
@@ -76,9 +79,13 @@ namespace NPCGen.Generators
 
         private Boolean DetermineIfRaceHasWings(Race race)
         {
+            if (race.Metarace == RaceConstants.Metaraces.None)
+                return false;
+
             if (race.Metarace == RaceConstants.Metaraces.HalfCelestial || race.Metarace == RaceConstants.Metaraces.HalfFiend)
                 return true;
-            else if (race.Metarace == RaceConstants.Metaraces.HalfDragon)
+
+            if (race.Metarace == RaceConstants.Metaraces.HalfDragon)
                 return race.Size == RaceConstants.Sizes.Large;
 
             return false;
@@ -86,7 +93,7 @@ namespace NPCGen.Generators
 
         private Int32 DetermineLandSpeed(Race race)
         {
-            var speeds = adjustmentsSelector.SelectFrom(INVALID"LandSpeeds");
+            var speeds = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Collection.LandSpeeds);
             return speeds[race.BaseRace];
         }
 

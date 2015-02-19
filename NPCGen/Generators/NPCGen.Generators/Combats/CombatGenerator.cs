@@ -9,6 +9,7 @@ using NPCGen.Common.Items;
 using NPCGen.Common.Races;
 using NPCGen.Generators.Interfaces.Combats;
 using NPCGen.Selectors.Interfaces;
+using NPCGen.Tables.Interfaces;
 
 namespace NPCGen.Generators.Combats
 {
@@ -42,11 +43,13 @@ namespace NPCGen.Generators.Combats
 
         private Int32 GetBaseAttackBonus(CharacterClass characterClass)
         {
-            var goodBaseAttacks = collectionsSelector.SelectFrom(INVALID"ClassNameGroups", "Good Base Attack");
+            var goodBaseAttacks = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups,
+                TableNameConstants.Set.Collection.Groups.GoodBaseAttack);
             if (goodBaseAttacks.Contains(characterClass.ClassName))
                 return GetGoodBaseAttackBonus(characterClass.Level);
 
-            var averageBaseAttacks = collectionsSelector.SelectFrom(INVALID"ClassNameGroups", "Average Base Attack");
+            var averageBaseAttacks = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups,
+                TableNameConstants.Set.Collection.Groups.AverageBaseAttack);
             if (averageBaseAttacks.Contains(characterClass.ClassName))
                 return GetAverageBaseAttackBonus(characterClass.Level);
 
@@ -70,7 +73,7 @@ namespace NPCGen.Generators.Combats
 
         private Int32 GetRacialBaseAttackAdjustments(Race race)
         {
-            var racialAdjustments = adjustmentsSelector.SelectFrom(INVALID"RacialBaseAttackAdjustments");
+            var racialAdjustments = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Collection.RacialBaseAttackAdjustments);
             return racialAdjustments[race.BaseRace] + racialAdjustments[race.Metarace];
         }
 
@@ -100,7 +103,7 @@ namespace NPCGen.Generators.Combats
 
         private Int32 GetAdjustedDexterityBonus(Dictionary<String, Stat> stats, Equipment equipment)
         {
-            var maxDexterityBonuses = adjustmentsSelector.SelectFrom(INVALID"MaxDexterityBonuses");
+            var maxDexterityBonuses = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Collection.MaxDexterityBonus);
             var dexterityBonus = stats[StatConstants.Dexterity].Bonus;
             var maxArmorBonus = maxDexterityBonuses[equipment.Armor.Name];
 
@@ -109,12 +112,12 @@ namespace NPCGen.Generators.Combats
 
         private Int32 GetInitiativeBonus(Race race, IEnumerable<Feat> feats)
         {
-            var racialBonuses = adjustmentsSelector.SelectFrom(INVALID"RacialInitiativeBonuses");
-            var featBonuses = adjustmentsSelector.SelectFrom(INVALID"FeatInitiativeBonuses");
+            var racialBonuses = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Collection.RacialInitiativeBonuses);
+            var featBonuses = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatInitiativeBonuses);
 
             var raceBonus = racialBonuses[race.BaseRace] + racialBonuses[race.Metarace];
-            var relevantFeatBonuses = featBonuses.Where(kvp => feats.Any(f => f.Name == kvp.Key));
-            var featBonus = relevantFeatBonuses.Sum(kvp => kvp.Value);
+            var initiativeFeats = featBonuses.Where(kvp => feats.Any(f => f.Name == kvp.Key));
+            var featBonus = initiativeFeats.Sum(kvp => kvp.Value);
 
             return raceBonus + featBonus;
         }

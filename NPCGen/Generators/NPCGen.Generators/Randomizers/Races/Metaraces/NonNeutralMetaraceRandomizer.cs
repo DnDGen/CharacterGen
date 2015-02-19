@@ -2,6 +2,7 @@
 using System.Linq;
 using NPCGen.Common.Alignments;
 using NPCGen.Selectors.Interfaces;
+using NPCGen.Tables.Interfaces;
 
 namespace NPCGen.Generators.Randomizers.Races.Metaraces
 {
@@ -22,12 +23,15 @@ namespace NPCGen.Generators.Randomizers.Races.Metaraces
 
         protected override Boolean MetaraceIsAllowed(String metarace)
         {
-            var evilMetaraces = collectionsSelector.SelectFrom(INVALID"MetaraceGroups", AlignmentConstants.Evil);
-            var neutralMetaraces = collectionsSelector.SelectFrom(INVALID"MetaraceGroups", AlignmentConstants.Neutral);
-            var goodMetaraces = collectionsSelector.SelectFrom(INVALID"MetaraceGroups", AlignmentConstants.Good);
-            var metaraces = neutralMetaraces.Except(goodMetaraces).Except(evilMetaraces);
+            var evilMetaraces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups,
+                AlignmentConstants.Evil);
+            var neutralMetaraces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups,
+                AlignmentConstants.Neutral);
+            var goodMetaraces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups,
+                AlignmentConstants.Good);
+            var forbiddenMetaraces = neutralMetaraces.Except(goodMetaraces).Except(evilMetaraces);
 
-            return !metaraces.Contains(metarace);
+            return !forbiddenMetaraces.Contains(metarace);
         }
     }
 }

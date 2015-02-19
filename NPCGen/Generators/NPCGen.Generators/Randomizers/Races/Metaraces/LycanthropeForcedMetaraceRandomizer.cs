@@ -1,7 +1,7 @@
-﻿using NPCGen.Common.Races;
-using System;
-using NPCGen.Selectors.Interfaces;
+﻿using System;
 using System.Linq;
+using NPCGen.Selectors.Interfaces;
+using NPCGen.Tables.Interfaces;
 
 namespace NPCGen.Generators.Randomizers.Races.Metaraces
 {
@@ -22,7 +22,8 @@ namespace NPCGen.Generators.Randomizers.Races.Metaraces
 
         protected override Boolean MetaraceIsAllowed(String metarace)
         {
-            var metaraces = collectionsSelector.SelectFrom(INVALID"MetaraceGroups", "Lycanthrope");
+            var metaraces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups,
+                TableNameConstants.Set.Collection.Groups.Lycanthrope);
             return metaraces.Contains(metarace);
         }
     }

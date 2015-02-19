@@ -2,6 +2,7 @@
 using System.Linq;
 using NPCGen.Common.Alignments;
 using NPCGen.Selectors.Interfaces;
+using NPCGen.Tables.Interfaces;
 
 namespace NPCGen.Generators.Randomizers.CharacterClasses.ClassNames
 {
@@ -17,11 +18,13 @@ namespace NPCGen.Generators.Randomizers.CharacterClasses.ClassNames
 
         protected override Boolean CharacterClassIsAllowed(String className, Alignment alignment)
         {
-            var healers = collectionsSelector.SelectFrom(INVALID"ClassNameGroups", "Healers");
-            var alignmentClasses = collectionsSelector.SelectFrom(INVALID"ClassNameGroups", alignment.ToString());
+            var healers = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups,
+                TableNameConstants.Set.Collection.Groups.Healers);
+            var alignmentClasses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups,
+                alignment.ToString());
 
-            var classes = healers.Intersect(alignmentClasses);
-            return classes.Contains(className);
+            var allowedClasses = healers.Intersect(alignmentClasses);
+            return allowedClasses.Contains(className);
         }
     }
 }

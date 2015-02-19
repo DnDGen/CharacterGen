@@ -5,6 +5,7 @@ using NPCGen.Common.CharacterClasses;
 using NPCGen.Generators.Interfaces.Randomizers.Races;
 using NPCGen.Generators.Interfaces.Verifiers.Exceptions;
 using NPCGen.Selectors.Interfaces;
+using NPCGen.Tables.Interfaces;
 
 namespace NPCGen.Generators.Randomizers.Races.Metaraces
 {
@@ -27,7 +28,8 @@ namespace NPCGen.Generators.Randomizers.Races.Metaraces
             if (!results.Any())
                 throw new IncompatibleRandomizersException();
 
-            var tableName = String.Format("{0}{1}Metaraces", goodness, characterClass.ClassName);
+            var tableName = String.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSMetaraces,
+                goodness, characterClass.ClassName);
             var metarace = String.Empty;
 
             do metarace = percentileResultSelector.SelectFrom(tableName);
@@ -38,7 +40,8 @@ namespace NPCGen.Generators.Randomizers.Races.Metaraces
 
         public IEnumerable<String> GetAllPossibleResults(String goodness, CharacterClass characterClass)
         {
-            var tableName = String.Format("{0}{1}Metaraces", goodness, characterClass.ClassName);
+            var tableName = String.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSMetaraces,
+                goodness, characterClass.ClassName);
             var results = percentileResultSelector.SelectAllFrom(tableName);
             return results.Where(r => RaceIsAllowed(r, characterClass.Level));
         }
@@ -53,7 +56,7 @@ namespace NPCGen.Generators.Randomizers.Races.Metaraces
 
         private Boolean LevelAdjustmentIsAllowed(String metarace, Int32 level)
         {
-            var adjustments = adjustmentsSelector.SelectFrom(INVALID"LevelAdjustments");
+            var adjustments = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Collection.LevelAdjustments);
             return adjustments[metarace] < level;
         }
 

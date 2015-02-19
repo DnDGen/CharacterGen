@@ -8,6 +8,7 @@ using NPCGen.Generators.Interfaces.Randomizers.CharacterClasses;
 using NPCGen.Generators.Interfaces.Randomizers.Races;
 using NPCGen.Generators.Interfaces.Verifiers;
 using NPCGen.Selectors.Interfaces;
+using NPCGen.Tables.Interfaces;
 
 namespace NPCGen.Generators.Verifiers
 {
@@ -61,7 +62,7 @@ namespace NPCGen.Generators.Verifiers
 
         private Boolean LevelAdjustmentsAreAllowed(IEnumerable<String> baseRaces, IEnumerable<String> metaraces, Int32 level)
         {
-            var levelAdjustments = adjustmentsSelector.SelectFrom(INVALID"LevelAdjustments");
+            var levelAdjustments = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Collection.LevelAdjustments);
             var minBaseRaceLevelAdjustment = levelAdjustments.Where(kvp => baseRaces.Contains(kvp.Key)).Min(kvp => kvp.Value);
             var minMetaraceLevelAdjustment = levelAdjustments.Where(kvp => metaraces.Contains(kvp.Key)).Min(kvp => kvp.Value);
 

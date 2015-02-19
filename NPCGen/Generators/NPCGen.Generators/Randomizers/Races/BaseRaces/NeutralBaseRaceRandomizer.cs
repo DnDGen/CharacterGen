@@ -2,6 +2,7 @@
 using System.Linq;
 using NPCGen.Common.Alignments;
 using NPCGen.Selectors.Interfaces;
+using NPCGen.Tables.Interfaces;
 
 namespace NPCGen.Generators.Randomizers.Races.BaseRaces
 {
@@ -17,8 +18,9 @@ namespace NPCGen.Generators.Randomizers.Races.BaseRaces
 
         protected override Boolean BaseRaceIsAllowed(String baseRace)
         {
-            var baseRaces = collectionsSelector.SelectFrom(INVALID"BaseRaceGroups", AlignmentConstants.Neutral);
-            return baseRaces.Contains(baseRace);
+            var allowedBaseRaces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups,
+                AlignmentConstants.Neutral);
+            return allowedBaseRaces.Contains(baseRace);
         }
     }
 }

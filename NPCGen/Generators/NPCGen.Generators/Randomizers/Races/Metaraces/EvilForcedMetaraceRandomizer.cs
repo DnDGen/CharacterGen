@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
 using NPCGen.Common.Alignments;
-using NPCGen.Common.Races;
 using NPCGen.Selectors.Interfaces;
+using NPCGen.Tables.Interfaces;
 
 namespace NPCGen.Generators.Randomizers.Races.Metaraces
 {
@@ -23,7 +23,8 @@ namespace NPCGen.Generators.Randomizers.Races.Metaraces
 
         protected override Boolean MetaraceIsAllowed(String metarace)
         {
-            var metaraces = collectionsSelector.SelectFrom(INVALID"MetaraceGroups", AlignmentConstants.Evil);
+            var metaraces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups,
+                AlignmentConstants.Evil);
             return metaraces.Contains(metarace);
         }
     }
