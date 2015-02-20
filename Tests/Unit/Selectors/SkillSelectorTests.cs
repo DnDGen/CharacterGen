@@ -1,6 +1,7 @@
 ﻿using Moq;
 using NPCGen.Selectors;
 using NPCGen.Selectors.Interfaces;
+using NPCGen.Tables.Interfaces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Unit.Selectors
@@ -27,7 +28,7 @@ namespace NPCGen.Tests.Unit.Selectors
                 "true"
             };
 
-            mockInnerSelector.Setup(s => s.SelectFrom(INVALID"SkillData", "skill")).Returns(skillData);
+            mockInnerSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillData, "skill")).Returns(skillData);
 
             var selection = skillSelector.SelectFor("skill");
             Assert.That(selection.ArmorCheckPenalty, Is.True);
@@ -43,7 +44,7 @@ namespace NPCGen.Tests.Unit.Selectors
                 "false"
             };
 
-            mockInnerSelector.Setup(s => s.SelectFrom(INVALID"SkillData", "skill")).Returns(skillData);
+            mockInnerSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillData, "skill")).Returns(skillData);
 
             var selection = skillSelector.SelectFor("skill");
             Assert.That(selection.ArmorCheckPenalty, Is.False);

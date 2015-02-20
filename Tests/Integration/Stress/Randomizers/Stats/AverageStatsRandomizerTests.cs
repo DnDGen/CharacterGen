@@ -23,16 +23,13 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Stats
             statNames = StatConstants.GetStats();
         }
 
-        [Test]
-        public override void Stress()
+        [TestCase("AverageStatsRandomizer")]
+        public override void Stress(String stressSubject)
         {
-            do MakeAssertions();
-            while (TestShouldKeepRunning());
-
-            AssertIterations();
+            Stress();
         }
 
-        private void MakeAssertions()
+        protected override void MakeAssertions()
         {
             var stats = AverageStatsRandomizer.Randomize();
 

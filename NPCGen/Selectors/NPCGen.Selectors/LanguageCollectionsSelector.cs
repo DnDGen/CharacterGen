@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using NPCGen.Common.Races;
 using NPCGen.Selectors.Interfaces;
+using NPCGen.Tables.Interfaces;
 
 namespace NPCGen.Selectors
 {
@@ -17,17 +18,17 @@ namespace NPCGen.Selectors
 
         public IEnumerable<String> SelectAutomaticLanguagesFor(Race race, String className)
         {
-            var baseRaceLanguages = innerSelector.SelectFrom(INVALID"AutomaticLanguages", race.BaseRace);
-            var metaraceLanguages = innerSelector.SelectFrom(INVALID"AutomaticLanguages", race.Metarace);
-            var classLanguages = innerSelector.SelectFrom(INVALID"AutomaticLanguages", className);
+            var baseRaceLanguages = innerSelector.SelectFrom(TableNameConstants.Set.Collection.AutomaticLanguages, race.BaseRace);
+            var metaraceLanguages = innerSelector.SelectFrom(TableNameConstants.Set.Collection.AutomaticLanguages, race.Metarace);
+            var classLanguages = innerSelector.SelectFrom(TableNameConstants.Set.Collection.AutomaticLanguages, className);
 
             return baseRaceLanguages.Union(metaraceLanguages).Union(classLanguages);
         }
 
         public IEnumerable<String> SelectBonusLanguagesFor(String baseRace, String className)
         {
-            var baseRaceLanguages = innerSelector.SelectFrom(INVALID"BonusLanguages", baseRace);
-            var classLanguages = innerSelector.SelectFrom(INVALID"BonusLanguages", className);
+            var baseRaceLanguages = innerSelector.SelectFrom(TableNameConstants.Set.Collection.BonusLanguages, baseRace);
+            var classLanguages = innerSelector.SelectFrom(TableNameConstants.Set.Collection.BonusLanguages, className);
 
             return baseRaceLanguages.Union(classLanguages);
         }

@@ -6,6 +6,7 @@ using NPCGen.Common.CharacterClasses;
 using NPCGen.Generators.Interfaces.Verifiers.Exceptions;
 using NPCGen.Generators.Randomizers.Races.BaseRaces;
 using NPCGen.Selectors.Interfaces;
+using NPCGen.Tables.Interfaces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
@@ -35,7 +36,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
                 adjustments.Add(baseRace, 0);
 
             mockLevelAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
-            mockLevelAdjustmentsSelector.Setup(p => p.SelectFrom(INVALID"LevelAdjustments")).Returns(adjustments);
+            mockLevelAdjustmentsSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Collection.LevelAdjustments)).Returns(adjustments);
 
             characterClass = new CharacterClass();
             characterClass.Level = 1;
@@ -69,7 +70,8 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         {
             characterClass.ClassName = "className";
             randomizer.Randomize("goodness", characterClass);
-            mockPercentileResultSelector.Verify(p => p.SelectFrom(INVALID"goodnessclassNameBaseRaces"), Times.Once);
+            var tableName = String.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSBaseRaces, "goodness", characterClass.ClassName);
+            mockPercentileResultSelector.Verify(p => p.SelectFrom(tableName), Times.Once);
         }
 
         [Test]

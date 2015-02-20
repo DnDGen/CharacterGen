@@ -23,16 +23,13 @@ namespace NPCGen.Tests.Integration.Stress.Items
         [Inject]
         public ICombatGenerator CombatGenerator { get; set; }
 
-        [Test]
-        public override void Stress()
+        [TestCase("EquipmentGenerator")]
+        public override void Stress(String stressSubject)
         {
-            do MakeAssertions();
-            while (TestShouldKeepRunning());
-
-            AssertIterations();
+            Stress();
         }
 
-        private void MakeAssertions()
+        protected override void MakeAssertions()
         {
             var equipment = GetEquipment();
             Assert.That(equipment.Armor, Is.Not.Null);
@@ -65,7 +62,6 @@ namespace NPCGen.Tests.Integration.Stress.Items
             while (TestShouldKeepRunning() && equipment.Treasure.Coin.Quantity == 0);
 
             Assert.That(equipment.Treasure.Coin.Quantity, Is.Positive);
-            AssertIterations();
         }
 
         [Test]
@@ -77,7 +73,6 @@ namespace NPCGen.Tests.Integration.Stress.Items
             while (TestShouldKeepRunning() && !equipment.Treasure.Goods.Any());
 
             Assert.That(equipment.Treasure.Goods, Is.Not.Empty);
-            AssertIterations();
         }
 
         [Test]
@@ -89,7 +84,6 @@ namespace NPCGen.Tests.Integration.Stress.Items
             while (TestShouldKeepRunning() && !equipment.Treasure.Items.Any());
 
             Assert.That(equipment.Treasure.Items, Is.Not.Empty);
-            AssertIterations();
         }
 
         [Test]
@@ -104,7 +98,6 @@ namespace NPCGen.Tests.Integration.Stress.Items
             Assert.That(equipment.Treasure.Items, Is.Empty);
             Assert.That(equipment.Treasure.Goods, Is.Empty);
             Assert.That(equipment.Treasure.Coin.Quantity, Is.EqualTo(0));
-            AssertIterations();
         }
 
         [Test]
@@ -119,7 +112,6 @@ namespace NPCGen.Tests.Integration.Stress.Items
             Assert.That(equipment.OffHand, Is.Not.EqualTo(equipment.PrimaryHand));
             Assert.That(equipment.OffHand.ItemType, Is.EqualTo(ItemTypeConstants.Armor));
             Assert.That(equipment.OffHand.Attributes, Contains.Item(AttributeConstants.Shield));
-            AssertIterations();
         }
 
         [Test]
@@ -134,7 +126,6 @@ namespace NPCGen.Tests.Integration.Stress.Items
             Assert.That(equipment.OffHand, Is.Not.EqualTo(equipment.PrimaryHand));
             Assert.That(equipment.OffHand.ItemType, Is.EqualTo(ItemTypeConstants.Weapon));
             Assert.That(equipment.OffHand.Attributes, Is.Not.Contains(WeaponAttributeConstants.TwoHanded));
-            AssertIterations();
         }
 
         [Test]
@@ -147,7 +138,6 @@ namespace NPCGen.Tests.Integration.Stress.Items
 
             Assert.That(equipment.OffHand, Is.EqualTo(equipment.PrimaryHand));
             Assert.That(equipment.OffHand.Attributes, Contains.Item(WeaponAttributeConstants.TwoHanded));
-            AssertIterations();
         }
 
         [Test]
@@ -159,7 +149,6 @@ namespace NPCGen.Tests.Integration.Stress.Items
             while (TestShouldKeepRunning() && !String.IsNullOrEmpty(equipment.OffHand.Name));
 
             Assert.That(equipment.OffHand.Name, Is.Empty);
-            AssertIterations();
         }
 
         [Test]
@@ -172,7 +161,6 @@ namespace NPCGen.Tests.Integration.Stress.Items
 
             Assert.That(equipment.Armor.ItemType, Is.EqualTo(ItemTypeConstants.Armor));
             Assert.That(equipment.Armor.Name, Is.Not.Empty);
-            AssertIterations();
         }
 
         [Test]
@@ -184,7 +172,6 @@ namespace NPCGen.Tests.Integration.Stress.Items
             while (TestShouldKeepRunning() && !String.IsNullOrEmpty(equipment.Armor.Name));
 
             Assert.That(equipment.Armor.Name, Is.Empty);
-            AssertIterations();
         }
     }
 }

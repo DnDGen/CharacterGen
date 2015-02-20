@@ -43,8 +43,8 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             mockStatPrioritySelector.Setup(p => p.SelectFor(It.IsAny<String>())).Returns(statPrioritySelection);
 
             race = new Race();
-            race.BaseRace = "base race";
-            race.Metarace = String.Empty;
+            race.BaseRace.Name = "base race";
+            race.Metarace.Name = String.Empty;
             adjustments = new Dictionary<String, Int32>();
             adjustments.Add(statPrioritySelection.First, 0);
             adjustments.Add(statPrioritySelection.Second, 0);

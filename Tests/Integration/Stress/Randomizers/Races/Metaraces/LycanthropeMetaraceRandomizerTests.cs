@@ -29,13 +29,10 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
             }
         }
 
-        [Test]
-        public override void Stress()
+        [TestCase("LycanthropeMetaraceRandomizer")]
+        public override void Stress(String stressSubject)
         {
-            do MakeAssertions();
-            while (TestShouldKeepRunning());
-
-            AssertIterations();
+            Stress();
         }
     }
 }

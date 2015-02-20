@@ -17,13 +17,10 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
             get { return new[] { String.Empty }; }
         }
 
-        [Test]
-        public override void Stress()
+        [TestCase("NoMetaraceRandomizer")]
+        public override void Stress(String stressSubject)
         {
-            do MakeAssertions();
-            while (TestShouldKeepRunning());
-
-            AssertIterations();
+            Stress();
         }
     }
 }

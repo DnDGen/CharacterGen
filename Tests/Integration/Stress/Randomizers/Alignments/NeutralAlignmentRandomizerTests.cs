@@ -23,16 +23,13 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Alignments
             lawfulnesses = AlignmentConstants.GetLawfulnesses();
         }
 
-        [Test]
-        public override void Stress()
+        [TestCase("NeutralAlignmentRandomizer")]
+        public override void Stress(String stressSubject)
         {
-            do MakeAssertions();
-            while (TestShouldKeepRunning());
-
-            AssertIterations();
+            Stress();
         }
 
-        private void MakeAssertions()
+        protected override void MakeAssertions()
         {
             var alignment = AlignmentRandomizer.Randomize();
             Assert.That(goodnesses, Contains.Item(alignment.Goodness));
@@ -48,7 +45,6 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Alignments
             while (TestShouldKeepRunning() && alignment.Goodness != AlignmentConstants.Neutral);
 
             Assert.That(alignment.Goodness, Is.EqualTo(AlignmentConstants.Neutral));
-            AssertIterations();
         }
 
         [Test]
@@ -60,7 +56,6 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Alignments
             while (TestShouldKeepRunning() && alignment.Lawfulness != AlignmentConstants.Neutral);
 
             Assert.That(alignment.Lawfulness, Is.EqualTo(AlignmentConstants.Neutral));
-            AssertIterations();
         }
 
         [Test]
@@ -73,7 +68,6 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Alignments
 
             Assert.That(alignment.Lawfulness, Is.EqualTo(AlignmentConstants.Neutral));
             Assert.That(alignment.Goodness, Is.EqualTo(AlignmentConstants.Neutral));
-            AssertIterations();
         }
     }
 }

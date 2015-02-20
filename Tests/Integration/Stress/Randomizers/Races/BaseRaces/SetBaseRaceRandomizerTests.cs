@@ -10,21 +10,16 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
     {
         [Inject]
         public ISetBaseRaceRandomizer SetBaseRaceRandomizer { get; set; }
-        [Inject]
-        public Random Random { get; set; }
 
-        [Test]
-        public override void Stress()
+        [TestCase("SetBaseRaceRandomizer")]
+        public override void Stress(String stressSubject)
         {
-            do MakeAssertions();
-            while (TestShouldKeepRunning());
-
-            AssertIterations();
+            Stress();
         }
 
-        private void MakeAssertions()
+        protected override void MakeAssertions()
         {
-            SetBaseRaceRandomizer.SetBaseRace = Random.Next().ToString();
+            SetBaseRaceRandomizer.SetBaseRace = Guid.NewGuid().ToString();
             var alignment = GetNewAlignment();
             var characterClass = GetNewCharacterClass(alignment);
 

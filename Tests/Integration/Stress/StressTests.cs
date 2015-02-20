@@ -61,23 +61,25 @@ namespace NPCGen.Tests.Integration.Stress
         }
 
         [TearDown]
-        protected void StressTearDown()
+        public void StressTearDown()
         {
             Stopwatch.Reset();
         }
 
-        public abstract void Stress();
+        public abstract void Stress(String stressSubject);
+
+        protected void Stress()
+        {
+            do MakeAssertions();
+            while (TestShouldKeepRunning());
+        }
+
+        protected abstract void MakeAssertions();
 
         protected Boolean TestShouldKeepRunning()
         {
             iterations++;
             return Stopwatch.Elapsed.TotalSeconds < TimeLimitInSeconds && iterations < ConfidentIterations;
-        }
-
-        protected void AssertIterations()
-        {
-            Assert.That(iterations, Is.Positive);
-            Assert.Pass("Type: {0}\nIterations: {1}\nTime: {2:hh\\:mm\\:ss}", testType, iterations, Stopwatch.Elapsed);
         }
 
         protected Alignment GetNewAlignment()

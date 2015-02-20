@@ -30,7 +30,7 @@ namespace NPCGen.Tests.Unit.Selectors
         public void SelectCollection()
         {
             collections["entry"] = Enumerable.Empty<String>();
-            var collection = selector.SelectFrom(INVALID"table name", "entry");
+            var collection = selector.SelectFrom("table name", "entry");
             Assert.That(collection, Is.EqualTo(collections["entry"]));
         }
     }

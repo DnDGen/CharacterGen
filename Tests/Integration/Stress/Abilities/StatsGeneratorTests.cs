@@ -25,16 +25,13 @@ namespace NPCGen.Tests.Integration.Stress.Abilities
             statNames = StatConstants.GetStats();
         }
 
-        [Test]
-        public override void Stress()
+        [TestCase("StatsGenerator")]
+        public override void Stress(String stressSubject)
         {
-            do MakeAssertions();
-            while (TestShouldKeepRunning());
-
-            AssertIterations();
+            Stress();
         }
 
-        private void MakeAssertions()
+        protected override void MakeAssertions()
         {
             var alignment = GetNewAlignment();
             var characterClass = GetNewCharacterClass(alignment);

@@ -18,13 +18,10 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
             get { return RaceConstants.BaseRaces.GetBaseRaces(); }
         }
 
-        [Test]
-        public override void Stress()
+        [TestCase("AnyBaseRaceRandomizer")]
+        public override void Stress(String stressSubject)
         {
-            do MakeAssertions();
-            while (TestShouldKeepRunning());
-
-            AssertIterations();
+            Stress();
         }
     }
 }

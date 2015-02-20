@@ -39,16 +39,13 @@ namespace NPCGen.Tests.Integration.Stress
             metaraces = RaceConstants.Metaraces.GetMetaraces().Union(new[] { String.Empty });
         }
 
-        [Test]
-        public override void Stress()
+        [TestCase("CharacterGenerator")]
+        public override void Stress(String stressSubject)
         {
-            do MakeAssertions();
-            while (TestShouldKeepRunning());
-
-            AssertIterations();
+            Stress();
         }
 
-        private void MakeAssertions()
+        protected override void MakeAssertions()
         {
             var character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
                     MetaraceRandomizer, StatsRandomizer);
@@ -117,7 +114,6 @@ namespace NPCGen.Tests.Integration.Stress
             while (TestShouldKeepRunning() && String.IsNullOrEmpty(character.Magic.Familiar.Animal));
 
             Assert.That(character.Magic.Familiar.Animal, Is.Not.Empty);
-            AssertIterations();
         }
 
         [Test]
@@ -130,7 +126,6 @@ namespace NPCGen.Tests.Integration.Stress
             while (TestShouldKeepRunning() && !String.IsNullOrEmpty(character.Magic.Familiar.Animal));
 
             Assert.That(character.Magic.Familiar.Animal, Is.Empty);
-            AssertIterations();
         }
 
         [Test]
@@ -143,7 +138,6 @@ namespace NPCGen.Tests.Integration.Stress
             while (TestShouldKeepRunning() && String.IsNullOrEmpty(character.InterestingTrait));
 
             Assert.That(character.InterestingTrait, Is.Not.Empty);
-            AssertIterations();
         }
 
         [Test]
@@ -156,7 +150,6 @@ namespace NPCGen.Tests.Integration.Stress
             while (TestShouldKeepRunning() && !String.IsNullOrEmpty(character.InterestingTrait));
 
             Assert.That(character.InterestingTrait, Is.Empty);
-            AssertIterations();
         }
 
         [Test]
@@ -169,7 +162,6 @@ namespace NPCGen.Tests.Integration.Stress
             while (TestShouldKeepRunning() && !character.Magic.Spells.Any());
 
             Assert.That(character.Magic.Spells, Is.Not.Empty);
-            AssertIterations();
         }
 
         [Test]
@@ -182,7 +174,6 @@ namespace NPCGen.Tests.Integration.Stress
             while (TestShouldKeepRunning() && character.Magic.Spells.Any());
 
             Assert.That(character.Magic.Spells, Is.Empty);
-            AssertIterations();
         }
     }
 }

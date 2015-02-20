@@ -27,13 +27,10 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.CharacterClasses.ClassName
             }
         }
 
-        [Test]
-        public override void Stress()
+        [TestCase("NonSpellcasterClassNameRandomizer")]
+        public override void Stress(String stressSubject)
         {
-            do MakeAssertions();
-            while (TestShouldKeepRunning());
-
-            AssertIterations();
+            Stress();
         }
     }
 }

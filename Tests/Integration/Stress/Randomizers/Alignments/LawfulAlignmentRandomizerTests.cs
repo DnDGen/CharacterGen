@@ -21,16 +21,13 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Alignments
             goodnesses = AlignmentConstants.GetGoodnesses();
         }
 
-        [Test]
-        public override void Stress()
+        [TestCase("LawfulAlignmentRandomizer")]
+        public override void Stress(String stressSubject)
         {
-            do MakeAssertions();
-            while (TestShouldKeepRunning());
-
-            AssertIterations();
+            Stress();
         }
 
-        private void MakeAssertions()
+        protected override void MakeAssertions()
         {
             var alignment = AlignmentRandomizer.Randomize();
             Assert.That(goodnesses, Contains.Item(alignment.Goodness));

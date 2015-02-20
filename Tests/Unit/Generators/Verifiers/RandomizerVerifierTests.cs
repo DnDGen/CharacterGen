@@ -10,6 +10,7 @@ using NPCGen.Generators.Interfaces.Randomizers.Races;
 using NPCGen.Generators.Interfaces.Verifiers;
 using NPCGen.Generators.Verifiers;
 using NPCGen.Selectors.Interfaces;
+using NPCGen.Tables.Interfaces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Unit.Generators.Verifiers
@@ -59,7 +60,7 @@ namespace NPCGen.Tests.Unit.Generators.Verifiers
                 .Returns(baseRaces);
             mockMetaraceRandomizer.Setup(r => r.GetAllPossibleResults(It.IsAny<String>(), It.IsAny<CharacterClass>()))
                 .Returns(metaraces);
-            mockAdjustmentsSelector.Setup(p => p.SelectFrom(INVALID"LevelAdjustments")).Returns(adjustments);
+            mockAdjustmentsSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Collection.LevelAdjustments)).Returns(adjustments);
 
             var alignment = new Alignment();
             alignments.Add(alignment);

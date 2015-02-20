@@ -18,16 +18,13 @@ namespace NPCGen.Tests.Integration.Stress
             lawfulnesses = AlignmentConstants.GetLawfulnesses();
         }
 
-        [Test]
-        public override void Stress()
+        [TestCase("AlignmentGenerator")]
+        public override void Stress(String stressSubject)
         {
-            do MakeAssertions();
-            while (TestShouldKeepRunning());
-
-            AssertIterations();
+            Stress();
         }
 
-        private void MakeAssertions()
+        protected override void MakeAssertions()
         {
             var alignment = AlignmentGenerator.GenerateWith(AlignmentRandomizer);
             Assert.That(goodnesses, Contains.Item(alignment.Goodness));

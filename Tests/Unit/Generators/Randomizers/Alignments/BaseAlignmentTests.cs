@@ -6,6 +6,7 @@ using NPCGen.Common.Alignments;
 using NPCGen.Generators.Interfaces.Verifiers.Exceptions;
 using NPCGen.Generators.Randomizers.Alignments;
 using NPCGen.Selectors.Interfaces;
+using NPCGen.Tables.Interfaces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Unit.Generators.Randomizers.Alignments
@@ -57,7 +58,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Alignments
         [Test]
         public void ReturnsGoodnessFromSelector()
         {
-            mockPercentileResultSelector.Setup(p => p.SelectFrom(INVALID"AlignmentGoodness")).Returns(AlignmentConstants.Evil);
+            mockPercentileResultSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Percentile.AlignmentGoodness)).Returns(AlignmentConstants.Evil);
 
             var alignment = randomizer.Randomize();
             Assert.That(alignment.Goodness, Is.EqualTo(AlignmentConstants.Evil));

@@ -20,16 +20,13 @@ namespace NPCGen.Tests.Integration.Stress
             sizes = RaceConstants.Sizes.GetSizes();
         }
 
-        [Test]
-        public override void Stress()
+        [TestCase("RaceGenerator")]
+        public override void Stress(String stressSubject)
         {
-            do MakeAssertions();
-            while (TestShouldKeepRunning());
-
-            AssertIterations();
+            Stress();
         }
 
-        private void MakeAssertions()
+        protected override void MakeAssertions()
         {
             var race = GenerateRace();
             Assert.That(baseRaces, Contains.Item(race.BaseRace));
@@ -58,7 +55,6 @@ namespace NPCGen.Tests.Integration.Stress
             while (TestShouldKeepRunning() && race.Metarace == RaceConstants.Metaraces.None);
 
             Assert.That(race.Metarace, Is.Not.EqualTo(RaceConstants.Metaraces.None));
-            AssertIterations();
         }
 
         [Test]
@@ -70,7 +66,6 @@ namespace NPCGen.Tests.Integration.Stress
             while (TestShouldKeepRunning() && race.Metarace != RaceConstants.Metaraces.None);
 
             Assert.That(race.Metarace, Is.EqualTo(RaceConstants.Metaraces.None));
-            AssertIterations();
         }
 
         [Test]
@@ -83,7 +78,6 @@ namespace NPCGen.Tests.Integration.Stress
 
             Assert.That(race.HasWings, Is.True);
             Assert.That(race.AerialSpeed, Is.Positive);
-            AssertIterations();
         }
 
         [Test]
@@ -96,7 +90,6 @@ namespace NPCGen.Tests.Integration.Stress
 
             Assert.That(race.HasWings, Is.False);
             Assert.That(race.AerialSpeed, Is.EqualTo(0));
-            AssertIterations();
         }
 
         [Test]
@@ -108,7 +101,6 @@ namespace NPCGen.Tests.Integration.Stress
             while (TestShouldKeepRunning() && !race.Male);
 
             Assert.That(race.Male, Is.True);
-            AssertIterations();
         }
 
         [Test]
@@ -120,7 +112,6 @@ namespace NPCGen.Tests.Integration.Stress
             while (TestShouldKeepRunning() && race.Male);
 
             Assert.That(race.Male, Is.False);
-            AssertIterations();
         }
 
         [Test]
@@ -132,7 +123,6 @@ namespace NPCGen.Tests.Integration.Stress
             while (TestShouldKeepRunning() && String.IsNullOrEmpty(race.MetaraceSpecies));
 
             Assert.That(race.MetaraceSpecies, Is.Not.Empty);
-            AssertIterations();
         }
 
         [Test]
@@ -144,7 +134,6 @@ namespace NPCGen.Tests.Integration.Stress
             while (TestShouldKeepRunning() && !String.IsNullOrEmpty(race.MetaraceSpecies));
 
             Assert.That(race.MetaraceSpecies, Is.Empty);
-            AssertIterations();
         }
     }
 }

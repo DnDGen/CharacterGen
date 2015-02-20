@@ -33,16 +33,13 @@ namespace NPCGen.Tests.Integration.Stress.Abilities
             allFeats = FeatConstants.GetAllFeats();
         }
 
-        [Test]
-        public override void Stress()
+        [TestCase("FeatsGenerator")]
+        public override void Stress(String stressSubject)
         {
-            do MakeAssertions();
-            while (TestShouldKeepRunning());
-
-            AssertIterations();
+            Stress();
         }
 
-        private void MakeAssertions()
+        protected override void MakeAssertions()
         {
             var alignment = GetNewAlignment();
             var characterClass = GetNewCharacterClass(alignment);

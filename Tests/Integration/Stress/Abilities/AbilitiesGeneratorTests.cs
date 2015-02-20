@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Ninject;
 using NPCGen.Common.Abilities.Skills;
 using NPCGen.Common.Abilities.Stats;
@@ -19,16 +20,13 @@ namespace NPCGen.Tests.Integration.Stress.Abilities
         [Inject]
         public ICombatGenerator CombatGenerator { get; set; }
 
-        [Test]
-        public override void Stress()
+        [TestCase("AbilitiesGenerator")]
+        public override void Stress(String stressSubject)
         {
-            do MakeAssertions();
-            while (TestShouldKeepRunning());
-
-            AssertIterations();
+            Stress();
         }
 
-        private void MakeAssertions()
+        protected override void MakeAssertions()
         {
             var alignment = GetNewAlignment();
             var characterClass = GetNewCharacterClass(alignment);

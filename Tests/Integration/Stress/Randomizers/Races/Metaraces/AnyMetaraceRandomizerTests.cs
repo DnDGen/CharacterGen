@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Ninject;
 using NPCGen.Common.Races;
 using NPCGen.Generators.Interfaces.Randomizers.Races;
@@ -19,13 +18,10 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
             get { return RaceConstants.Metaraces.GetAllMetaraces(); }
         }
 
-        [Test]
-        public override void Stress()
+        [TestCase("AnyMetaraceRandomizer")]
+        public override void Stress(String stressSubject)
         {
-            do MakeAssertions();
-            while (TestShouldKeepRunning());
-
-            AssertIterations();
+            Stress();
         }
     }
 }

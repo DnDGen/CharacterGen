@@ -32,7 +32,7 @@ namespace NPCGen.Tests.Unit.Selectors
             collections["first"] = new[] { "9266" };
             collections["second"] = new[] { "42" };
 
-            var adjustments = adjustmentsSelector.SelectFrom(INVALID"table name");
+            var adjustments = adjustmentsSelector.SelectFrom("table name");
             Assert.That(adjustments["first"], Is.EqualTo(9266));
             Assert.That(adjustments["second"], Is.EqualTo(42));
         }
@@ -41,7 +41,7 @@ namespace NPCGen.Tests.Unit.Selectors
         public void ThrowExceptionIfAnyEmptyCollections()
         {
             collections["first"] = Enumerable.Empty<String>();
-            Assert.That(() => adjustmentsSelector.SelectFrom(INVALID"table name"), Throws.Exception);
+            Assert.That(() => adjustmentsSelector.SelectFrom("table name"), Throws.Exception);
         }
     }
 }

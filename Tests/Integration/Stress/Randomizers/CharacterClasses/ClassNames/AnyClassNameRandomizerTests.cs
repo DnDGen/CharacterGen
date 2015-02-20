@@ -18,13 +18,10 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.CharacterClasses.ClassName
             get { return CharacterClassConstants.GetClassNames(); }
         }
 
-        [Test]
-        public override void Stress()
+        [TestCase("AnyClassNameRandomizer")]
+        public override void Stress(String stressSubject)
         {
-            do MakeAssertions();
-            while (TestShouldKeepRunning());
-
-            AssertIterations();
+            Stress();
         }
     }
 }

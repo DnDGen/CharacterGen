@@ -13,16 +13,13 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
         [Inject]
         public Random Random { get; set; }
 
-        [Test]
-        public override void Stress()
+        [TestCase("SetMetaraceRandomizer")]
+        public override void Stress(String stressSubject)
         {
-            do MakeAssertions();
-            while (TestShouldKeepRunning());
-
-            AssertIterations();
+            Stress();
         }
 
-        private void MakeAssertions()
+        protected override void MakeAssertions()
         {
             SetMetaraceRandomizer.SetMetarace = Random.Next().ToString();
             var alignment = GetNewAlignment();

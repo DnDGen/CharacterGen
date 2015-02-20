@@ -25,10 +25,10 @@ namespace NPCGen.Tests.Unit.Selectors
             race = new Race();
             defaultAdjustments = new Dictionary<String, Int32>();
 
-            race.BaseRace = "base race";
-            race.Metarace = "metarace";
-            defaultAdjustments[race.BaseRace] = 0;
-            defaultAdjustments[race.Metarace] = 0;
+            race.BaseRace.Id = "base race";
+            race.Metarace.Id = "metarace";
+            defaultAdjustments[race.BaseRace.Id] = 0;
+            defaultAdjustments[race.Metarace.Id] = 0;
             mockInnerSelector.Setup(s => s.SelectFrom(It.IsAny<String>())).Returns(defaultAdjustments);
         }
 
@@ -48,18 +48,18 @@ namespace NPCGen.Tests.Unit.Selectors
             foreach (var stat in StatConstants.GetStats())
                 allAdjustments[stat] = new Dictionary<String, Int32>();
 
-            allAdjustments[StatConstants.Charisma][race.BaseRace] = 9266;
-            allAdjustments[StatConstants.Charisma][race.Metarace] = 42;
-            allAdjustments[StatConstants.Constitution][race.BaseRace] = 90210;
-            allAdjustments[StatConstants.Constitution][race.Metarace] = -9266;
-            allAdjustments[StatConstants.Dexterity][race.BaseRace] = -42;
-            allAdjustments[StatConstants.Dexterity][race.Metarace] = -90210;
-            allAdjustments[StatConstants.Intelligence][race.BaseRace] = 92;
-            allAdjustments[StatConstants.Intelligence][race.Metarace] = 66;
-            allAdjustments[StatConstants.Strength][race.BaseRace] = 600;
-            allAdjustments[StatConstants.Strength][race.Metarace] = -92;
-            allAdjustments[StatConstants.Wisdom][race.BaseRace] = -66;
-            allAdjustments[StatConstants.Wisdom][race.Metarace] = -400;
+            allAdjustments[StatConstants.Charisma][race.BaseRace.Id] = 9266;
+            allAdjustments[StatConstants.Charisma][race.Metarace.Id] = 42;
+            allAdjustments[StatConstants.Constitution][race.BaseRace.Id] = 90210;
+            allAdjustments[StatConstants.Constitution][race.Metarace.Id] = -9266;
+            allAdjustments[StatConstants.Dexterity][race.BaseRace.Id] = -42;
+            allAdjustments[StatConstants.Dexterity][race.Metarace.Id] = -90210;
+            allAdjustments[StatConstants.Intelligence][race.BaseRace.Id] = 92;
+            allAdjustments[StatConstants.Intelligence][race.Metarace.Id] = 66;
+            allAdjustments[StatConstants.Strength][race.BaseRace.Id] = 600;
+            allAdjustments[StatConstants.Strength][race.Metarace.Id] = -92;
+            allAdjustments[StatConstants.Wisdom][race.BaseRace.Id] = -66;
+            allAdjustments[StatConstants.Wisdom][race.Metarace.Id] = -400;
 
             foreach (var stat in StatConstants.GetStats())
             {

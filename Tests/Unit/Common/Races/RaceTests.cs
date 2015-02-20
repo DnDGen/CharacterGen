@@ -17,8 +17,8 @@ namespace NPCGen.Tests.Unit.Common.Races
         [Test]
         public void RaceInitialized()
         {
-            Assert.That(race.BaseRace, Is.Empty);
-            Assert.That(race.Metarace, Is.Empty);
+            Assert.That(race.BaseRace, Is.Not.Null);
+            Assert.That(race.Metarace, Is.Not.Null);
             Assert.That(race.Male, Is.False);
             Assert.That(race.HasWings, Is.False);
             Assert.That(race.Size, Is.Empty);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Moq;
 using NPCGen.Common.CharacterClasses;
 using NPCGen.Selectors.Interfaces;
+using NPCGen.Tables.Interfaces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Unit.Generators.Randomizers.Races
@@ -23,7 +24,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races
             mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
 
             adjustments = new Dictionary<String, Int32>();
-            mockAdjustmentsSelector.Setup(p => p.SelectFrom(INVALID"LevelAdjustments")).Returns(adjustments);
+            mockAdjustmentsSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Collection.LevelAdjustments)).Returns(adjustments);
 
             characterClass = new CharacterClass();
             characterClass.Level = 1;

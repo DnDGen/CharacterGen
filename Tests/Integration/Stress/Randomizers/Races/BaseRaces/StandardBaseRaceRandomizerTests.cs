@@ -30,13 +30,10 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
             }
         }
 
-        [Test]
-        public override void Stress()
+        [TestCase("StandardBaseRaceRandomizer")]
+        public override void Stress(String stressSubject)
         {
-            do MakeAssertions();
-            while (TestShouldKeepRunning());
-
-            AssertIterations();
+            Stress();
         }
     }
 }
