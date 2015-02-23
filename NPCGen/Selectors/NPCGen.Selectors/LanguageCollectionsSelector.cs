@@ -18,8 +18,8 @@ namespace NPCGen.Selectors
 
         public IEnumerable<String> SelectAutomaticLanguagesFor(Race race, String className)
         {
-            var baseRaceLanguages = innerSelector.SelectFrom(TableNameConstants.Set.Collection.AutomaticLanguages, race.BaseRace);
-            var metaraceLanguages = innerSelector.SelectFrom(TableNameConstants.Set.Collection.AutomaticLanguages, race.Metarace);
+            var baseRaceLanguages = innerSelector.SelectFrom(TableNameConstants.Set.Collection.AutomaticLanguages, race.BaseRace.Id);
+            var metaraceLanguages = innerSelector.SelectFrom(TableNameConstants.Set.Collection.AutomaticLanguages, race.Metarace.Id);
             var classLanguages = innerSelector.SelectFrom(TableNameConstants.Set.Collection.AutomaticLanguages, className);
 
             return baseRaceLanguages.Union(metaraceLanguages).Union(classLanguages);

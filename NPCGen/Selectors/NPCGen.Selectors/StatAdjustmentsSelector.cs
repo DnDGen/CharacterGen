@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using NPCGen.Common.Abilities.Stats;
 using NPCGen.Common.Races;
-using NPCGen.Mappers.Interfaces;
 using NPCGen.Selectors.Interfaces;
 
 namespace NPCGen.Selectors
@@ -25,7 +24,7 @@ namespace NPCGen.Selectors
                 var tableName = String.Format("{0}StatAdjustments", stat);
                 var statAdjustments = innerSelector.SelectFrom(tableName);
 
-                adjustments[stat] = statAdjustments[race.BaseRace] + statAdjustments[race.Metarace];
+                adjustments[stat] = statAdjustments[race.BaseRace.Id] + statAdjustments[race.Metarace.Id];
             }
 
             return adjustments;

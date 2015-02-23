@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using NPCGen.Common.Races;
 using NUnit.Framework;
 
@@ -51,98 +50,55 @@ namespace NPCGen.Tests.Unit.Common.Races
         [TestCase(RaceConstants.Metaraces.Weretiger, "Weretiger")]
         [TestCase(RaceConstants.Metaraces.Werewolf, "Werewolf")]
         [TestCase(RaceConstants.Metaraces.None, "")]
+        [TestCase(RaceConstants.BaseRaces.AasimarId, "Aasimar")]
+        [TestCase(RaceConstants.BaseRaces.BugbearId, "Bugbear")]
+        [TestCase(RaceConstants.BaseRaces.DeepDwarfId, "DeepDwarf")]
+        [TestCase(RaceConstants.BaseRaces.DeepHalflingId, "DeepHalfling")]
+        [TestCase(RaceConstants.BaseRaces.DerroId, "Derro")]
+        [TestCase(RaceConstants.BaseRaces.DoppelgangerId, "Doppelganger")]
+        [TestCase(RaceConstants.BaseRaces.DrowId, "Drow")]
+        [TestCase(RaceConstants.BaseRaces.DuergarDwarfId, "DuergarDwarf")]
+        [TestCase(RaceConstants.BaseRaces.ForestGnomeId, "ForestGnome")]
+        [TestCase(RaceConstants.BaseRaces.GnollId, "Gnoll")]
+        [TestCase(RaceConstants.BaseRaces.GoblinId, "Goblin")]
+        [TestCase(RaceConstants.BaseRaces.GrayElfId, "GrayElf")]
+        [TestCase(RaceConstants.BaseRaces.HalfElfId, "HalfElf")]
+        [TestCase(RaceConstants.BaseRaces.HalfOrcId, "HalfOrc")]
+        [TestCase(RaceConstants.BaseRaces.HighElfId, "HighElf")]
+        [TestCase(RaceConstants.BaseRaces.HillDwarfId, "HillDwarf")]
+        [TestCase(RaceConstants.BaseRaces.HobgoblinId, "Hobgoblin")]
+        [TestCase(RaceConstants.BaseRaces.HumanId, "Human")]
+        [TestCase(RaceConstants.BaseRaces.KoboldId, "Kobold")]
+        [TestCase(RaceConstants.BaseRaces.LightfootHalflingId, "LightfootHalfling")]
+        [TestCase(RaceConstants.BaseRaces.LizardfolkId, "Lizardfolk")]
+        [TestCase(RaceConstants.BaseRaces.MindFlayerId, "MindFlayer")]
+        [TestCase(RaceConstants.BaseRaces.MinotaurId, "Minotaur")]
+        [TestCase(RaceConstants.BaseRaces.MountainDwarfId, "MountainDwarf")]
+        [TestCase(RaceConstants.BaseRaces.OgreId, "Ogre")]
+        [TestCase(RaceConstants.BaseRaces.OgreMageId, "OgreMage")]
+        [TestCase(RaceConstants.BaseRaces.OrcId, "Orc")]
+        [TestCase(RaceConstants.BaseRaces.RockGnomeId, "RockGnome")]
+        [TestCase(RaceConstants.BaseRaces.SvirfneblinId, "Svirfneblin")]
+        [TestCase(RaceConstants.BaseRaces.TallfellowHalflingId, "TallfellowHalfling")]
+        [TestCase(RaceConstants.BaseRaces.TieflingId, "Tiefling")]
+        [TestCase(RaceConstants.BaseRaces.TroglodyteId, "Troglodyte")]
+        [TestCase(RaceConstants.BaseRaces.WildElfId, "WildElf")]
+        [TestCase(RaceConstants.BaseRaces.WoodElfId, "WoodElf")]
+        [TestCase(RaceConstants.Metaraces.HalfCelestialId, "HalfCelestial")]
+        [TestCase(RaceConstants.Metaraces.HalfDragonId, "HalfDragon")]
+        [TestCase(RaceConstants.Metaraces.HalfFiendId, "HalfFiend")]
+        [TestCase(RaceConstants.Metaraces.WerebearId, "Werebear")]
+        [TestCase(RaceConstants.Metaraces.WereboarId, "Wereboar")]
+        [TestCase(RaceConstants.Metaraces.WereratId, "Wererat")]
+        [TestCase(RaceConstants.Metaraces.WeretigerId, "Weretiger")]
+        [TestCase(RaceConstants.Metaraces.WerewolfId, "Werewolf")]
+        [TestCase(RaceConstants.Metaraces.NoneId, "None")]
         [TestCase(RaceConstants.Sizes.Large, "Large")]
         [TestCase(RaceConstants.Sizes.Medium, "Medium")]
         [TestCase(RaceConstants.Sizes.Small, "Small")]
         public void Constant(String constant, String value)
         {
             Assert.That(constant, Is.EqualTo(value));
-        }
-
-        [Test]
-        public void BaseRaces()
-        {
-            var baseRaces = RaceConstants.BaseRaces.GetBaseRaces();
-
-            Assert.That(baseRaces, Contains.Item(RaceConstants.BaseRaces.Aasimar));
-            Assert.That(baseRaces, Contains.Item(RaceConstants.BaseRaces.Bugbear));
-            Assert.That(baseRaces, Contains.Item(RaceConstants.BaseRaces.DeepDwarf));
-            Assert.That(baseRaces, Contains.Item(RaceConstants.BaseRaces.DeepHalfling));
-            Assert.That(baseRaces, Contains.Item(RaceConstants.BaseRaces.Derro));
-            Assert.That(baseRaces, Contains.Item(RaceConstants.BaseRaces.Doppelganger));
-            Assert.That(baseRaces, Contains.Item(RaceConstants.BaseRaces.Drow));
-            Assert.That(baseRaces, Contains.Item(RaceConstants.BaseRaces.DuergarDwarf));
-            Assert.That(baseRaces, Contains.Item(RaceConstants.BaseRaces.ForestGnome));
-            Assert.That(baseRaces, Contains.Item(RaceConstants.BaseRaces.Gnoll));
-            Assert.That(baseRaces, Contains.Item(RaceConstants.BaseRaces.Goblin));
-            Assert.That(baseRaces, Contains.Item(RaceConstants.BaseRaces.GrayElf));
-            Assert.That(baseRaces, Contains.Item(RaceConstants.BaseRaces.HalfElf));
-            Assert.That(baseRaces, Contains.Item(RaceConstants.BaseRaces.HalfOrc));
-            Assert.That(baseRaces, Contains.Item(RaceConstants.BaseRaces.HighElf));
-            Assert.That(baseRaces, Contains.Item(RaceConstants.BaseRaces.HillDwarf));
-            Assert.That(baseRaces, Contains.Item(RaceConstants.BaseRaces.Hobgoblin));
-            Assert.That(baseRaces, Contains.Item(RaceConstants.BaseRaces.Human));
-            Assert.That(baseRaces, Contains.Item(RaceConstants.BaseRaces.Kobold));
-            Assert.That(baseRaces, Contains.Item(RaceConstants.BaseRaces.LightfootHalfling));
-            Assert.That(baseRaces, Contains.Item(RaceConstants.BaseRaces.Lizardfolk));
-            Assert.That(baseRaces, Contains.Item(RaceConstants.BaseRaces.MindFlayer));
-            Assert.That(baseRaces, Contains.Item(RaceConstants.BaseRaces.Minotaur));
-            Assert.That(baseRaces, Contains.Item(RaceConstants.BaseRaces.MountainDwarf));
-            Assert.That(baseRaces, Contains.Item(RaceConstants.BaseRaces.Ogre));
-            Assert.That(baseRaces, Contains.Item(RaceConstants.BaseRaces.OgreMage));
-            Assert.That(baseRaces, Contains.Item(RaceConstants.BaseRaces.Orc));
-            Assert.That(baseRaces, Contains.Item(RaceConstants.BaseRaces.RockGnome));
-            Assert.That(baseRaces, Contains.Item(RaceConstants.BaseRaces.Svirfneblin));
-            Assert.That(baseRaces, Contains.Item(RaceConstants.BaseRaces.TallfellowHalfling));
-            Assert.That(baseRaces, Contains.Item(RaceConstants.BaseRaces.Tiefling));
-            Assert.That(baseRaces, Contains.Item(RaceConstants.BaseRaces.Troglodyte));
-            Assert.That(baseRaces, Contains.Item(RaceConstants.BaseRaces.WildElf));
-            Assert.That(baseRaces, Contains.Item(RaceConstants.BaseRaces.WoodElf));
-            Assert.That(baseRaces.Count(), Is.EqualTo(34));
-        }
-
-        [Test]
-        public void Metaraces()
-        {
-            var metaraces = RaceConstants.Metaraces.GetMetaraces();
-
-            Assert.That(metaraces, Contains.Item(RaceConstants.Metaraces.HalfCelestial));
-            Assert.That(metaraces, Contains.Item(RaceConstants.Metaraces.HalfDragon));
-            Assert.That(metaraces, Contains.Item(RaceConstants.Metaraces.HalfFiend));
-            Assert.That(metaraces, Contains.Item(RaceConstants.Metaraces.Werebear));
-            Assert.That(metaraces, Contains.Item(RaceConstants.Metaraces.Wereboar));
-            Assert.That(metaraces, Contains.Item(RaceConstants.Metaraces.Wererat));
-            Assert.That(metaraces, Contains.Item(RaceConstants.Metaraces.Weretiger));
-            Assert.That(metaraces, Contains.Item(RaceConstants.Metaraces.Werewolf));
-            Assert.That(metaraces.Count(), Is.EqualTo(8));
-        }
-
-        [Test]
-        public void AllMetaraces()
-        {
-            var metaraces = RaceConstants.Metaraces.GetAllMetaraces();
-
-            Assert.That(metaraces, Contains.Item(RaceConstants.Metaraces.HalfCelestial));
-            Assert.That(metaraces, Contains.Item(RaceConstants.Metaraces.HalfDragon));
-            Assert.That(metaraces, Contains.Item(RaceConstants.Metaraces.HalfFiend));
-            Assert.That(metaraces, Contains.Item(RaceConstants.Metaraces.Werebear));
-            Assert.That(metaraces, Contains.Item(RaceConstants.Metaraces.Wereboar));
-            Assert.That(metaraces, Contains.Item(RaceConstants.Metaraces.Wererat));
-            Assert.That(metaraces, Contains.Item(RaceConstants.Metaraces.Weretiger));
-            Assert.That(metaraces, Contains.Item(RaceConstants.Metaraces.Werewolf));
-            Assert.That(metaraces, Contains.Item(RaceConstants.Metaraces.None));
-            Assert.That(metaraces.Count(), Is.EqualTo(9));
-        }
-
-        [Test]
-        public void Sizes()
-        {
-            var sizes = RaceConstants.Sizes.GetSizes();
-
-            Assert.That(sizes, Contains.Item(RaceConstants.Sizes.Large));
-            Assert.That(sizes, Contains.Item(RaceConstants.Sizes.Medium));
-            Assert.That(sizes, Contains.Item(RaceConstants.Sizes.Small));
-            Assert.That(sizes.Count(), Is.EqualTo(3));
         }
     }
 }

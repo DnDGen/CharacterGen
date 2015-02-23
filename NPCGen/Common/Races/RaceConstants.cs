@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace NPCGen.Common.Races
 {
@@ -11,11 +9,6 @@ namespace NPCGen.Common.Races
             public const String Large = "Large";
             public const String Medium = "Medium";
             public const String Small = "Small";
-
-            public static IEnumerable<String> GetSizes()
-            {
-                return new[] { Large, Medium, Small };
-            }
         }
 
         public static class BaseRaces
@@ -55,46 +48,40 @@ namespace NPCGen.Common.Races
             public const String WildElf = "Wild Elf";
             public const String WoodElf = "Wood Elf";
 
-            public static IEnumerable<String> GetBaseRaces()
-            {
-                return new[]
-                {
-                    Aasimar,
-                    Bugbear,
-                    DeepDwarf,
-                    DeepHalfling,
-                    Derro,
-                    Doppelganger,
-                    Drow,
-                    DuergarDwarf,
-                    ForestGnome,
-                    Gnoll,
-                    Goblin,
-                    GrayElf,
-                    HalfElf,
-                    HalfOrc,
-                    HighElf,
-                    HillDwarf,
-                    Hobgoblin,
-                    Human,
-                    Kobold,
-                    LightfootHalfling,
-                    Lizardfolk,
-                    MindFlayer,
-                    Minotaur,
-                    MountainDwarf,
-                    Ogre,
-                    OgreMage,
-                    Orc,
-                    RockGnome,
-                    Svirfneblin,
-                    TallfellowHalfling,
-                    Tiefling,
-                    Troglodyte,
-                    WildElf,
-                    WoodElf
-                };
-            }
+            public const String AasimarId = "Aasimar";
+            public const String BugbearId = "Bugbear";
+            public const String DeepDwarfId = "DeepDwarf";
+            public const String DeepHalflingId = "DeepHalfling";
+            public const String DerroId = "Derro";
+            public const String DoppelgangerId = "Doppelganger";
+            public const String DrowId = "Drow";
+            public const String DuergarDwarfId = "DuergarDwarf";
+            public const String ForestGnomeId = "ForestGnome";
+            public const String GoblinId = "Goblin";
+            public const String GnollId = "Gnoll";
+            public const String GrayElfId = "GrayElf";
+            public const String HalfElfId = "HalfElf";
+            public const String HalfOrcId = "HalfOrc";
+            public const String HighElfId = "HighElf";
+            public const String HillDwarfId = "HillDwarf";
+            public const String HobgoblinId = "Hobgoblin";
+            public const String HumanId = "Human";
+            public const String KoboldId = "Kobold";
+            public const String LightfootHalflingId = "LightfootHalfling";
+            public const String LizardfolkId = "Lizardfolk";
+            public const String MindFlayerId = "MindFlayer";
+            public const String MinotaurId = "Minotaur";
+            public const String MountainDwarfId = "MountainDwarf";
+            public const String OgreId = "Ogre";
+            public const String OgreMageId = "OgreMage";
+            public const String OrcId = "Orc";
+            public const String RockGnomeId = "RockGnome";
+            public const String SvirfneblinId = "Svirfneblin";
+            public const String TallfellowHalflingId = "TallfellowHalfling";
+            public const String TieflingId = "Tiefling";
+            public const String TroglodyteId = "Troglodyte";
+            public const String WildElfId = "WildElf";
+            public const String WoodElfId = "WoodElf";
         }
 
         public class Metaraces
@@ -109,30 +96,15 @@ namespace NPCGen.Common.Races
             public const String Werewolf = "Werewolf";
             public const String None = "";
 
-            public static IEnumerable<String> GetMetaraces()
-            {
-                return new[]
-                {
-                    HalfCelestial,
-                    HalfDragon,
-                    HalfFiend,
-                    Werebear,
-                    Wereboar,
-                    Wererat,
-                    Weretiger,
-                    Werewolf
-                };
-            }
-
-            public static IEnumerable<String> GetAllMetaraces()
-            {
-                return GetMetaraces().Union(new[] { None });
-            }
-        }
-
-        public static IEnumerable<String> GetAllRaces()
-        {
-            return BaseRaces.GetBaseRaces().Union(Metaraces.GetAllMetaraces());
+            public const String HalfCelestialId = "HalfCelestial";
+            public const String HalfDragonId = "HalfDragon";
+            public const String HalfFiendId = "HalfFiend";
+            public const String WerebearId = "Werebear";
+            public const String WereboarId = "Wereboar";
+            public const String WeretigerId = "Weretiger";
+            public const String WereratId = "Wererat";
+            public const String WerewolfId = "Werewolf";
+            public const String NoneId = "None";
         }
     }
 }

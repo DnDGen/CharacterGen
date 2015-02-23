@@ -601,7 +601,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             skillPoints[characterClass.ClassName] = 0;
             classSkills.Add("skill 1");
             classSkills.Add("skill 2");
-            race.BaseRace = RaceConstants.BaseRaces.Human;
+            race.BaseRace.Id = RaceConstants.BaseRaces.Human;
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
             Assert.That(skills["skill 1"].Ranks, Is.EqualTo(points));
@@ -634,7 +634,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             characterClass.Level = level;
             skillPoints[characterClass.ClassName] = 2;
             intelligence.Value = 12;
-            race.BaseRace = RaceConstants.BaseRaces.Human;
+            race.BaseRace.Id = RaceConstants.BaseRaces.Human;
             classSkills.Add("skill 1");
             classSkills.Add("skill 2");
             classSkills.Add("skill 3");
@@ -655,8 +655,8 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         [Test]
         public void GetRacialSkillAdjustments()
         {
-            race.BaseRace = "base race-toformat";
-            race.Metarace = "metarace-to format";
+            race.BaseRace.Id = "base race id";
+            race.Metarace.Id = "metarace id";
             classSkills.Add("skill 1");
             classSkills.Add("skill 2");
             classSkills.Add("skill 3");
