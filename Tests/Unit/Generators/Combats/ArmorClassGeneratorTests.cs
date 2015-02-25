@@ -44,9 +44,9 @@ namespace NPCGen.Tests.Unit.Generators.Combats
 
             armorBonuses[String.Empty] = 0;
             racialArmorBonuses[String.Empty] = 0;
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorBonuses)).Returns(armorBonuses);
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.RacialNaturalArmorBonuses)).Returns(racialArmorBonuses);
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatArmorAdjustments)).Returns(featAdjustments);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.ArmorBonuses)).Returns(armorBonuses);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.RacialNaturalArmorBonuses)).Returns(racialArmorBonuses);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.FeatArmorAdjustments)).Returns(featAdjustments);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, TableNameConstants.Set.Collection.Groups.Size)).Returns(Enumerable.Empty<String>());
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, TableNameConstants.Set.Collection.Groups.NaturalArmor))
                 .Returns(Enumerable.Empty<String>());
@@ -240,26 +240,26 @@ namespace NPCGen.Tests.Unit.Generators.Combats
         [Test]
         public void NaturalArmorBonusFromBaseRaceApplied()
         {
-            race.BaseRace = "base race";
-            racialArmorBonuses[race.BaseRace] = 1;
+            race.BaseRace.Id = "baserace";
+            racialArmorBonuses[race.BaseRace.Id] = 1;
             AssertArmorClass(11, 11, 10);
         }
 
         [Test]
         public void NaturalArmorBonusFromMetaraceApplied()
         {
-            race.Metarace = "metarace";
-            racialArmorBonuses[race.Metarace] = 1;
+            race.Metarace.Id = "metarace";
+            racialArmorBonuses[race.Metarace.Id] = 1;
             AssertArmorClass(11, 11, 10);
         }
 
         [Test]
         public void NaturalArmorBonusFromBaseRaceAndMetaraceApplied()
         {
-            race.BaseRace = "base race";
-            race.Metarace = "metarace";
-            racialArmorBonuses[race.BaseRace] = 1;
-            racialArmorBonuses[race.Metarace] = 1;
+            race.BaseRace.Id = "base race";
+            race.Metarace.Id = "metarace";
+            racialArmorBonuses[race.BaseRace.Id] = 1;
+            racialArmorBonuses[race.Metarace.Id] = 1;
 
             AssertArmorClass(12, 12, 10);
         }
@@ -284,10 +284,10 @@ namespace NPCGen.Tests.Unit.Generators.Combats
 
             equipment.Treasure.Items = new[] { ring, otherRing };
 
-            race.BaseRace = "base race";
-            race.Metarace = "metarace";
-            racialArmorBonuses[race.BaseRace] = 0;
-            racialArmorBonuses[race.Metarace] = 1;
+            race.BaseRace.Id = "base race";
+            race.Metarace.Id = "metarace";
+            racialArmorBonuses[race.BaseRace.Id] = 0;
+            racialArmorBonuses[race.Metarace.Id] = 1;
 
             AssertArmorClass(12, 12, 10);
         }
@@ -312,10 +312,10 @@ namespace NPCGen.Tests.Unit.Generators.Combats
 
             equipment.Treasure.Items = new[] { ring, otherRing };
 
-            race.BaseRace = "base race";
-            race.Metarace = "metarace";
-            racialArmorBonuses[race.BaseRace] = 0;
-            racialArmorBonuses[race.Metarace] = 1;
+            race.BaseRace.Id = "baserace";
+            race.Metarace.Id = "metarace";
+            racialArmorBonuses[race.BaseRace.Id] = 0;
+            racialArmorBonuses[race.Metarace.Id] = 1;
 
             AssertArmorClass(12, 12, 10);
         }
@@ -340,10 +340,10 @@ namespace NPCGen.Tests.Unit.Generators.Combats
 
             equipment.Treasure.Items = new[] { ring, otherRing };
 
-            race.BaseRace = "base race";
-            race.Metarace = "metarace";
-            racialArmorBonuses[race.BaseRace] = 1;
-            racialArmorBonuses[race.Metarace] = 1;
+            race.BaseRace.Id = "baserace";
+            race.Metarace.Id = "metarace";
+            racialArmorBonuses[race.BaseRace.Id] = 1;
+            racialArmorBonuses[race.Metarace.Id] = 1;
 
             AssertArmorClass(12, 12, 10);
         }
@@ -368,8 +368,8 @@ namespace NPCGen.Tests.Unit.Generators.Combats
 
             equipment.Treasure.Items = new[] { ring, otherRing };
 
-            race.BaseRace = "base race";
-            racialArmorBonuses[race.BaseRace] = 1;
+            race.BaseRace.Id = "baserace";
+            racialArmorBonuses[race.BaseRace.Id] = 1;
 
             AssertArmorClass(11, 11, 10);
         }
@@ -394,8 +394,8 @@ namespace NPCGen.Tests.Unit.Generators.Combats
 
             equipment.Treasure.Items = new[] { ring, otherRing };
 
-            race.Metarace = "metarace";
-            racialArmorBonuses[race.Metarace] = 1;
+            race.Metarace.Id = "metarace";
+            racialArmorBonuses[race.Metarace.Id] = 1;
 
             AssertArmorClass(11, 11, 10);
         }
@@ -468,10 +468,10 @@ namespace NPCGen.Tests.Unit.Generators.Combats
             equipment.Treasure.Items = new[] { ring };
 
             race.Size = RaceConstants.Sizes.Small;
-            race.BaseRace = "base race";
-            race.Metarace = "metarace";
-            racialArmorBonuses[race.BaseRace] = 1;
-            racialArmorBonuses[race.Metarace] = 1;
+            race.BaseRace.Id = "baserace";
+            race.Metarace.Id = "metarace";
+            racialArmorBonuses[race.BaseRace.Id] = 1;
+            racialArmorBonuses[race.Metarace.Id] = 1;
 
             AssertArmorClass(18, 20, 14);
         }

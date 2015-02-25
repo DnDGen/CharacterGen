@@ -15,7 +15,20 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
 
         protected override IEnumerable<String> allowedMetaraces
         {
-            get { return RaceConstants.Metaraces.GetAllMetaraces(); }
+            get
+            {
+                return new[] {
+                    RaceConstants.Metaraces.HalfCelestialId,
+                    RaceConstants.Metaraces.HalfDragonId,
+                    RaceConstants.Metaraces.HalfFiendId,
+                    RaceConstants.Metaraces.WerebearId,
+                    RaceConstants.Metaraces.WereboarId,
+                    RaceConstants.Metaraces.WereratId,
+                    RaceConstants.Metaraces.WeretigerId,
+                    RaceConstants.Metaraces.WerewolfId,
+                    RaceConstants.Metaraces.NoneId
+                };
+            }
         }
 
         [TestCase("AnyMetaraceRandomizer")]

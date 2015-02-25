@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Ninject;
 using NPCGen.Common.Races;
 using NPCGen.Generators.Interfaces.Randomizers.Races;
@@ -18,26 +17,27 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
         {
             get
             {
-                var evilBaseRaces = new[]
-                {
-                    RaceConstants.BaseRaces.Bugbear,
-                    RaceConstants.BaseRaces.Derro,
-                    RaceConstants.BaseRaces.Drow,
-                    RaceConstants.BaseRaces.DuergarDwarf,
-                    RaceConstants.BaseRaces.Gnoll,
-                    RaceConstants.BaseRaces.Goblin,
-                    RaceConstants.BaseRaces.Hobgoblin,
-                    RaceConstants.BaseRaces.Kobold,
-                    RaceConstants.BaseRaces.Ogre,
-                    RaceConstants.BaseRaces.OgreMage,
-                    RaceConstants.BaseRaces.Orc,
-                    RaceConstants.BaseRaces.Troglodyte,
-                    RaceConstants.BaseRaces.MindFlayer,
-                    RaceConstants.BaseRaces.Minotaur,
-                    RaceConstants.BaseRaces.Tiefling
+                return new[] {
+                    RaceConstants.BaseRaces.AasimarId,
+                    RaceConstants.BaseRaces.DeepDwarfId,
+                    RaceConstants.BaseRaces.DeepHalflingId,
+                    RaceConstants.BaseRaces.DoppelgangerId,
+                    RaceConstants.BaseRaces.ForestGnomeId,
+                    RaceConstants.BaseRaces.GrayElfId,
+                    RaceConstants.BaseRaces.HalfElfId,
+                    RaceConstants.BaseRaces.HalfOrcId,
+                    RaceConstants.BaseRaces.HighElfId,
+                    RaceConstants.BaseRaces.HillDwarfId,
+                    RaceConstants.BaseRaces.HumanId,
+                    RaceConstants.BaseRaces.LightfootHalflingId,
+                    RaceConstants.BaseRaces.LizardfolkId,
+                    RaceConstants.BaseRaces.MountainDwarfId,
+                    RaceConstants.BaseRaces.RockGnomeId,
+                    RaceConstants.BaseRaces.SvirfneblinId,
+                    RaceConstants.BaseRaces.TallfellowHalflingId,
+                    RaceConstants.BaseRaces.WildElfId,
+                    RaceConstants.BaseRaces.WoodElfId
                 };
-
-                return RaceConstants.BaseRaces.GetBaseRaces().Except(evilBaseRaces);
             }
         }
 

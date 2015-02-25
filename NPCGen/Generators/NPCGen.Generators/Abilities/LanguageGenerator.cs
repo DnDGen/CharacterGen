@@ -26,7 +26,7 @@ namespace NPCGen.Generators.Abilities
             var automaticLanguages = languagesSelector.SelectAutomaticLanguagesFor(race, className);
             languages.AddRange(automaticLanguages);
 
-            var bonusLanguages = languagesSelector.SelectBonusLanguagesFor(race.BaseRace, className);
+            var bonusLanguages = languagesSelector.SelectBonusLanguagesFor(race.BaseRace.Id, className);
             var remainingBonusLanguages = bonusLanguages.Except(languages).ToList();
             var numberOfBonusLanguages = intelligenceBonus;
 

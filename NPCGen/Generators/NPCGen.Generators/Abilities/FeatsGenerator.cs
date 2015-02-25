@@ -61,7 +61,7 @@ namespace NPCGen.Generators.Abilities
         private IEnumerable<Feat> GetRacialFeats(Race race)
         {
             var racialFeats = featsSelector.SelectRacial();
-            var monsterHitDice = GetMonsterHitDice(race.BaseRace);
+            var monsterHitDice = GetMonsterHitDice(race.BaseRace.Id);
 
             var applicableRacialFeats = racialFeats.Where(f => f.RequirementsMet(race, monsterHitDice));
             applicableRacialFeats = OverwriteOverwritableStrengths(applicableRacialFeats);
@@ -87,7 +87,7 @@ namespace NPCGen.Generators.Abilities
             if (!monsters.Contains(baseRace))
                 return 1;
 
-            var hitDice = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Collection.MonsterHitDice);
+            var hitDice = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice);
             return hitDice[baseRace];
         }
 
@@ -146,7 +146,7 @@ namespace NPCGen.Generators.Abilities
         {
             var allClassFeats = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassFeats,
                 characterClass.ClassName);
-            var tableName = String.Format(TableNameConstants.Formattable.Collection.CLASSFeatLevelRequirements, characterClass.ClassName);
+            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.CLASSFeatLevelRequirements, characterClass.ClassName);
             var levelRequirements = adjustmentsSelector.SelectFrom(tableName);
 
             return allClassFeats.Where(f => levelRequirements[f] <= characterClass.Level)
@@ -174,7 +174,7 @@ namespace NPCGen.Generators.Abilities
             var availableFeats = additionalFeats.Where(f => f.ImmutableRequirementsMet(baseAttack.Bonus, stats, skills, characterClass.ClassName));
 
             var numberOfAdditionalFeats = characterClass.Level / 3 + 1;
-            if (race.BaseRace == RaceConstants.BaseRaces.Human)
+            if (race.BaseRace.Id == RaceConstants.BaseRaces.HumanId)
                 numberOfAdditionalFeats++;
 
             var feats = PopulateFeatsFrom(characterClass, stats, skills, baseAttack, automaticFeats, availableFeats, numberOfAdditionalFeats);

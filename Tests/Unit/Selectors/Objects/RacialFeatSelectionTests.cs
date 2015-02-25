@@ -41,8 +41,8 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
         [Test]
         public void RequirementsNotMetIfWrongBaseRace()
         {
-            race.BaseRace = "base race";
-            selection.BaseRaceRequirements = new[] { "other base race" };
+            race.BaseRace.Id = "baserace";
+            selection.BaseRaceRequirements = new[] { "otherbaserace" };
 
             var met = selection.RequirementsMet(race, 0);
             Assert.That(met, Is.False);
@@ -51,8 +51,8 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
         [Test]
         public void RequirementsNotMetIfWrongMetarace()
         {
-            race.Metarace = "metarace";
-            selection.MetaraceRequirements = new[] { "other metarace" };
+            race.Metarace.Id = "metarace";
+            selection.MetaraceRequirements = new[] { "othermetarace" };
 
             var met = selection.RequirementsMet(race, 0);
             Assert.That(met, Is.False);
@@ -62,7 +62,7 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
         public void RequirementsNotMetIfWrongMetaraceSpecies()
         {
             race.MetaraceSpecies = "metarace species";
-            selection.MetaraceRequirements = new[] { "other metarace species" };
+            selection.MetaraceRequirements = new[] { "othermetaracespecies" };
 
             var met = selection.RequirementsMet(race, 0);
             Assert.That(met, Is.False);
@@ -110,13 +110,13 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
         [Test]
         public void AllRequirementsMet()
         {
-            race.BaseRace = "base race";
-            race.Metarace = "metarace";
+            race.BaseRace.Id = "baserace";
+            race.Metarace.Id = "metarace";
             race.MetaraceSpecies = "metarace species";
             race.Size = "big";
 
-            selection.BaseRaceRequirements = new[] { race.BaseRace, "other" };
-            selection.MetaraceRequirements = new[] { race.Metarace, "other" };
+            selection.BaseRaceRequirements = new[] { race.BaseRace.Id, "other" };
+            selection.MetaraceRequirements = new[] { race.Metarace.Id, "other" };
             selection.MetaraceSpeciesRequirements = new[] { race.MetaraceSpecies, "other" };
             selection.SizeRequirement = race.Size;
             selection.HitDieRequirements = Enumerable.Range(3, 3);

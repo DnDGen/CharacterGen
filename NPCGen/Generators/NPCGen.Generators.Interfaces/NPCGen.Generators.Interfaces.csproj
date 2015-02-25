@@ -72,6 +72,7 @@
     <Compile Include="Randomizers\CharacterClasses\LevelRandomizerTypeConstants.cs" />
     <Compile Include="Randomizers\Races\BaseRaceRandomizerTypeConstants.cs" />
     <Compile Include="Randomizers\Races\IBaseRaceRandomizer.cs" />
+    <Compile Include="Randomizers\Races\IForcableMetaraceRandomizer.cs" />
     <Compile Include="Randomizers\Races\IMetaraceRandomizer.cs" />
     <Compile Include="Randomizers\Races\ISetBaseRaceRandomizer.cs" />
     <Compile Include="Randomizers\Races\ISetMetaraceRandomizer.cs" />

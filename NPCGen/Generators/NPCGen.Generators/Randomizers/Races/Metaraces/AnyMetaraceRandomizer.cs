@@ -3,13 +3,8 @@ using NPCGen.Selectors.Interfaces;
 
 namespace NPCGen.Generators.Randomizers.Races.Metaraces
 {
-    public class AnyMetaraceRandomizer : BaseMetarace
+    public class AnyMetaraceRandomizer : BaseForcableMetarace
     {
-        protected override Boolean forceMetarace
-        {
-            get { return false; }
-        }
-
         public AnyMetaraceRandomizer(IPercentileSelector percentileResultSelector, IAdjustmentsSelector levelAdjustmentsSelector)
             : base(percentileResultSelector, levelAdjustmentsSelector) { }
 

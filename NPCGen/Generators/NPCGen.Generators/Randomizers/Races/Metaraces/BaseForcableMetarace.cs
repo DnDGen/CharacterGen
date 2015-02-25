@@ -9,14 +9,14 @@ using NPCGen.Tables.Interfaces;
 
 namespace NPCGen.Generators.Randomizers.Races.Metaraces
 {
-    public abstract class BaseMetarace : IMetaraceRandomizer
+    public abstract class BaseForcableMetarace : IForcableMetaraceRandomizer
     {
-        protected abstract Boolean forceMetarace { get; }
+        public Boolean ForceMetarace { get; set; }
 
         private IPercentileSelector percentileResultSelector;
         private IAdjustmentsSelector adjustmentsSelector;
 
-        public BaseMetarace(IPercentileSelector percentileResultSelector, IAdjustmentsSelector adjustmentsSelector)
+        public BaseForcableMetarace(IPercentileSelector percentileResultSelector, IAdjustmentsSelector adjustmentsSelector)
         {
             this.percentileResultSelector = percentileResultSelector;
             this.adjustmentsSelector = adjustmentsSelector;
@@ -49,14 +49,14 @@ namespace NPCGen.Generators.Randomizers.Races.Metaraces
         private Boolean RaceIsAllowed(String metarace, Int32 level)
         {
             if (String.IsNullOrEmpty(metarace))
-                return !forceMetarace;
+                return !ForceMetarace;
 
             return LevelAdjustmentIsAllowed(metarace, level) && MetaraceIsAllowed(metarace);
         }
 
         private Boolean LevelAdjustmentIsAllowed(String metarace, Int32 level)
         {
-            var adjustments = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Collection.LevelAdjustments);
+            var adjustments = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments);
             return adjustments[metarace] < level;
         }
 

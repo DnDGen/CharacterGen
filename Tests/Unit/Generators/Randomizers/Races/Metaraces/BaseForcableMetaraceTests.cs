@@ -13,7 +13,7 @@ using NUnit.Framework;
 namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
 {
     [TestFixture]
-    public class BaseMetaraceTests
+    public class BaseForcableMetaraceTests
     {
         private TestMetaraceRandomizer randomizer;
         private Mock<IPercentileSelector> mockPercentileResultSelector;
@@ -37,7 +37,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
                 adjustments.Add(metarace, 0);
 
             mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
-            mockAdjustmentsSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Collection.LevelAdjustments)).Returns(adjustments);
+            mockAdjustmentsSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments)).Returns(adjustments);
 
             characterClass = new CharacterClass();
             characterClass.Level = 1;
@@ -145,15 +145,9 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
             Assert.That(results, Is.Not.Contains(firstMetarace));
         }
 
-        private class TestMetaraceRandomizer : BaseMetarace
+        private class TestMetaraceRandomizer : BaseForcableMetarace
         {
             public String NotAllowedMetarace { get; set; }
-            public Boolean ForceMetarace { get; set; }
-
-            protected override Boolean forceMetarace
-            {
-                get { return ForceMetarace; }
-            }
 
             public TestMetaraceRandomizer(IPercentileSelector percentileResultSelector, IAdjustmentsSelector levelAdjustmentsSelector)
                 : base(percentileResultSelector, levelAdjustmentsSelector) { }

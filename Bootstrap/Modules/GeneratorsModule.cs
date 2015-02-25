@@ -78,25 +78,16 @@ namespace NPCGen.Bootstrap.Modules
             Bind<IBaseRaceRandomizer>().To<NonStandardBaseRaceRandomizer>().Named(BaseRaceRandomizerTypeConstants.NonStandard);
             Bind<IBaseRaceRandomizer>().To<StandardBaseRaceRandomizer>().Named(BaseRaceRandomizerTypeConstants.Standard);
 
-            Bind<IMetaraceRandomizer>().To<AnyMetaraceRandomizer>().Named(MetaraceRandomizerTypeConstants.Any);
-            Bind<IMetaraceRandomizer>().To<EvilMetaraceRandomizer>().Named(MetaraceRandomizerTypeConstants.Evil);
-            Bind<IMetaraceRandomizer>().To<GeneticMetaraceRandomizer>().Named(MetaraceRandomizerTypeConstants.Genetic);
-            Bind<IMetaraceRandomizer>().To<GoodMetaraceRandomizer>().Named(MetaraceRandomizerTypeConstants.Good);
-            Bind<IMetaraceRandomizer>().To<LycanthropeMetaraceRandomizer>().Named(MetaraceRandomizerTypeConstants.Lycanthrope);
-            Bind<IMetaraceRandomizer>().To<NeutralMetaraceRandomizer>().Named(MetaraceRandomizerTypeConstants.Neutral);
+            Bind<IForcableMetaraceRandomizer>().To<AnyMetaraceRandomizer>().Named(MetaraceRandomizerTypeConstants.Any);
+            Bind<IForcableMetaraceRandomizer>().To<EvilMetaraceRandomizer>().Named(MetaraceRandomizerTypeConstants.Evil);
+            Bind<IForcableMetaraceRandomizer>().To<GeneticMetaraceRandomizer>().Named(MetaraceRandomizerTypeConstants.Genetic);
+            Bind<IForcableMetaraceRandomizer>().To<GoodMetaraceRandomizer>().Named(MetaraceRandomizerTypeConstants.Good);
+            Bind<IForcableMetaraceRandomizer>().To<LycanthropeMetaraceRandomizer>().Named(MetaraceRandomizerTypeConstants.Lycanthrope);
+            Bind<IForcableMetaraceRandomizer>().To<NeutralMetaraceRandomizer>().Named(MetaraceRandomizerTypeConstants.Neutral);
             Bind<IMetaraceRandomizer>().To<NoMetaraceRandomizer>().Named(MetaraceRandomizerTypeConstants.None);
-            Bind<IMetaraceRandomizer>().To<NonEvilMetaraceRandomizer>().Named(MetaraceRandomizerTypeConstants.NonEvil);
-            Bind<IMetaraceRandomizer>().To<NonGoodMetaraceRandomizer>().Named(MetaraceRandomizerTypeConstants.NonGood);
-            Bind<IMetaraceRandomizer>().To<NonNeutralMetaraceRandomizer>().Named(MetaraceRandomizerTypeConstants.NonNeutral);
-            Bind<IMetaraceRandomizer>().To<AnyForcedMetaraceRandomizer>().Named(MetaraceRandomizerTypeConstants.AnyForced);
-            Bind<IMetaraceRandomizer>().To<EvilForcedMetaraceRandomizer>().Named(MetaraceRandomizerTypeConstants.EvilForced);
-            Bind<IMetaraceRandomizer>().To<GeneticForcedMetaraceRandomizer>().Named(MetaraceRandomizerTypeConstants.GeneticForced);
-            Bind<IMetaraceRandomizer>().To<GoodForcedMetaraceRandomizer>().Named(MetaraceRandomizerTypeConstants.GoodForced);
-            Bind<IMetaraceRandomizer>().To<LycanthropeForcedMetaraceRandomizer>().Named(MetaraceRandomizerTypeConstants.LycanthropeForced);
-            Bind<IMetaraceRandomizer>().To<NeutralForcedMetaraceRandomizer>().Named(MetaraceRandomizerTypeConstants.NeutralForced);
-            Bind<IMetaraceRandomizer>().To<NonEvilForcedMetaraceRandomizer>().Named(MetaraceRandomizerTypeConstants.NonEvilForced);
-            Bind<IMetaraceRandomizer>().To<NonGoodForcedMetaraceRandomizer>().Named(MetaraceRandomizerTypeConstants.NonGoodForced);
-            Bind<IMetaraceRandomizer>().To<NonNeutralForcedMetaraceRandomizer>().Named(MetaraceRandomizerTypeConstants.NonNeutralForced);
+            Bind<IForcableMetaraceRandomizer>().To<NonEvilMetaraceRandomizer>().Named(MetaraceRandomizerTypeConstants.NonEvil);
+            Bind<IForcableMetaraceRandomizer>().To<NonGoodMetaraceRandomizer>().Named(MetaraceRandomizerTypeConstants.NonGood);
+            Bind<IForcableMetaraceRandomizer>().To<NonNeutralMetaraceRandomizer>().Named(MetaraceRandomizerTypeConstants.NonNeutral);
 
             Bind<IStatsRandomizer>().To<AverageStatsRandomizer>().Named(StatsRandomizerTypeConstants.Average);
             Bind<IStatsRandomizer>().To<BestOfFourStatsRandomizer>().Named(StatsRandomizerTypeConstants.BestOfFour);

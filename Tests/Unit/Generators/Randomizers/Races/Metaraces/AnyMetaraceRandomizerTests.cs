@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using NPCGen.Common.Races;
 using NPCGen.Generators.Randomizers.Races.Metaraces;
 using NUnit.Framework;
@@ -12,7 +11,20 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
     {
         protected override IEnumerable<String> metaraces
         {
-            get { return RaceConstants.Metaraces.GetMetaraces(); }
+            get
+            {
+                return new[] {
+                    RaceConstants.Metaraces.HalfCelestialId,
+                    RaceConstants.Metaraces.HalfDragonId,
+                    RaceConstants.Metaraces.HalfFiendId,
+                    RaceConstants.Metaraces.WerebearId,
+                    RaceConstants.Metaraces.WereboarId,
+                    RaceConstants.Metaraces.WereratId,
+                    RaceConstants.Metaraces.WeretigerId,
+                    RaceConstants.Metaraces.WerewolfId,
+                    RaceConstants.Metaraces.NoneId
+                };
+            }
         }
 
         [SetUp]

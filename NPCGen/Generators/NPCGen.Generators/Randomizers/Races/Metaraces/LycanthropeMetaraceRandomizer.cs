@@ -1,18 +1,12 @@
-﻿using NPCGen.Common.Races;
-using System;
-using NPCGen.Selectors.Interfaces;
+﻿using System;
 using System.Linq;
+using NPCGen.Selectors.Interfaces;
 using NPCGen.Tables.Interfaces;
 
 namespace NPCGen.Generators.Randomizers.Races.Metaraces
 {
-    public class LycanthropeMetaraceRandomizer : BaseMetarace
+    public class LycanthropeMetaraceRandomizer : BaseForcableMetarace
     {
-        protected override Boolean forceMetarace
-        {
-            get { return false; }
-        }
-
         private ICollectionsSelector collectionsSelector;
 
         public LycanthropeMetaraceRandomizer(IPercentileSelector percentileResultSelector, IAdjustmentsSelector levelAdjustmentsSelector, ICollectionsSelector collectionsSelector)

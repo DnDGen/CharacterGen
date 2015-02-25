@@ -73,8 +73,8 @@ namespace NPCGen.Generators.Combats
 
         private Int32 GetRacialBaseAttackAdjustments(Race race)
         {
-            var racialAdjustments = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Collection.RacialBaseAttackAdjustments);
-            return racialAdjustments[race.BaseRace] + racialAdjustments[race.Metarace];
+            var racialAdjustments = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.RacialBaseAttackAdjustments);
+            return racialAdjustments[race.BaseRace.Id] + racialAdjustments[race.Metarace.Id];
         }
 
         private Int32 GetSizeAdjustments(Race race)
@@ -103,7 +103,7 @@ namespace NPCGen.Generators.Combats
 
         private Int32 GetAdjustedDexterityBonus(Dictionary<String, Stat> stats, Equipment equipment)
         {
-            var maxDexterityBonuses = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Collection.MaxDexterityBonus);
+            var maxDexterityBonuses = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.MaxDexterityBonus);
             var dexterityBonus = stats[StatConstants.Dexterity].Bonus;
             var maxArmorBonus = maxDexterityBonuses[equipment.Armor.Name];
 
@@ -112,10 +112,10 @@ namespace NPCGen.Generators.Combats
 
         private Int32 GetInitiativeBonus(Race race, IEnumerable<Feat> feats)
         {
-            var racialBonuses = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Collection.RacialInitiativeBonuses);
-            var featBonuses = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatInitiativeBonuses);
+            var racialBonuses = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.RacialInitiativeBonuses);
+            var featBonuses = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.FeatInitiativeBonuses);
 
-            var raceBonus = racialBonuses[race.BaseRace] + racialBonuses[race.Metarace];
+            var raceBonus = racialBonuses[race.BaseRace.Id] + racialBonuses[race.Metarace.Id];
             var initiativeFeats = featBonuses.Where(kvp => feats.Any(f => f.Name == kvp.Key));
             var featBonus = initiativeFeats.Sum(kvp => kvp.Value);
 

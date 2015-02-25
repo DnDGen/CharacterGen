@@ -29,9 +29,9 @@ namespace NPCGen.Tests.Unit.Generators
     [TestFixture]
     public class CharacterGeneratorTests
     {
-        private const String BaseRace = "base race";
-        private const String BaseRacePlusOne = "base race +1";
-        private const String Metarace = "metarace";
+        private const String BaseRaceId = "baserace";
+        private const String BaseRacePlusOneId = "baserace+1";
+        private const String MetaraceId = "metarace";
 
         private Mock<IAlignmentGenerator> mockAlignmentGenerator;
         private Mock<ICharacterClassGenerator> mockCharacterClassGenerator;
@@ -70,11 +70,11 @@ namespace NPCGen.Tests.Unit.Generators
             mockRandomizerVerifier = new Mock<IRandomizerVerifier>();
             mockPercentileSelector = new Mock<IPercentileSelector>();
 
-            adjustments.Add(BaseRace, 0);
-            adjustments.Add(BaseRacePlusOne, 1);
+            adjustments.Add(BaseRaceId, 0);
+            adjustments.Add(BaseRacePlusOneId, 1);
             adjustments.Add(String.Empty, 0);
-            adjustments.Add(Metarace, 1);
-            mockAdjustmentsSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Collection.LevelAdjustments)).Returns(adjustments);
+            adjustments.Add(MetaraceId, 1);
+            mockAdjustmentsSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments)).Returns(adjustments);
 
             mockRandomizerVerifier.Setup(v => v.VerifyCompatibility(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object,
                 mockLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(true);
@@ -118,8 +118,8 @@ namespace NPCGen.Tests.Unit.Generators
             alignment.Lawfulness = "lawfulness";
             characterClass.Level = 1;
             characterClass.ClassName = "class name";
-            race.BaseRace = BaseRace;
-            race.Metarace = String.Empty;
+            race.BaseRace.Id = BaseRaceId;
+            race.Metarace.Id = RaceConstants.Metaraces.NoneId;
 
             mockAlignmentGenerator.Setup(f => f.GenerateWith(mockAlignmentRandomizer.Object)).Returns(alignment);
             mockCharacterClassGenerator.Setup(f => f.GenerateWith(alignment, mockLevelRandomizer.Object,
@@ -171,8 +171,8 @@ namespace NPCGen.Tests.Unit.Generators
         [Test]
         public void IncompatibleBaseRaceIsRegenerated()
         {
-            mockRaceGenerator.SetupSequence(f => f.GenerateWith(It.IsAny<Alignment>(), It.IsAny<CharacterClass>(), mockBaseRaceRandomizer.Object,
-                mockMetaraceRandomizer.Object)).Returns(new Race() { BaseRace = BaseRacePlusOne, Metarace = String.Empty }).Returns(race);
+            race.BaseRace.Id = BaseRacePlusOneId;
+            race.Metarace.Id = RaceConstants.Metaraces.NoneId;
 
             GenerateCharacter();
             mockRaceGenerator.Verify(f => f.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object,
@@ -182,8 +182,8 @@ namespace NPCGen.Tests.Unit.Generators
         [Test]
         public void IncompatibleMetaraceIsRegenerated()
         {
-            mockRaceGenerator.SetupSequence(f => f.GenerateWith(It.IsAny<Alignment>(), It.IsAny<CharacterClass>(), mockBaseRaceRandomizer.Object,
-                mockMetaraceRandomizer.Object)).Returns(new Race() { BaseRace = BaseRace, Metarace = Metarace }).Returns(race);
+            race.BaseRace.Id = BaseRaceId;
+            race.Metarace.Id = MetaraceId;
 
             GenerateCharacter();
             mockRaceGenerator.Verify(f => f.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object,
@@ -193,9 +193,11 @@ namespace NPCGen.Tests.Unit.Generators
         [Test]
         public void IncompatibleComboOfBaseRaceAndMetaraceIsRegeneratedWithCompatibleBaseRace()
         {
-            var higherRace = new Race { BaseRace = BaseRacePlusOne, Metarace = Metarace };
-            race.BaseRace = BaseRace;
-            race.Metarace = Metarace;
+            var higherRace = new Race();
+            higherRace.BaseRace.Id = BaseRacePlusOneId;
+            higherRace.Metarace.Id = MetaraceId;
+            race.BaseRace.Id = BaseRaceId;
+            race.Metarace.Id = MetaraceId;
 
             mockRaceGenerator.SetupSequence(f => f.GenerateWith(It.IsAny<Alignment>(), It.IsAny<CharacterClass>(), mockBaseRaceRandomizer.Object,
                 mockMetaraceRandomizer.Object)).Returns(higherRace).Returns(race);
@@ -210,9 +212,11 @@ namespace NPCGen.Tests.Unit.Generators
         [Test]
         public void IncompatibleComboOfBaseRaceAndMetaraceIsRegeneratedWithCompatibleMetarace()
         {
-            var higherRace = new Race { BaseRace = BaseRacePlusOne, Metarace = Metarace };
-            race.BaseRace = BaseRacePlusOne;
-            race.Metarace = String.Empty;
+            var higherRace = new Race();
+            higherRace.BaseRace.Id = BaseRacePlusOneId;
+            higherRace.Metarace.Id = MetaraceId;
+            race.BaseRace.Id = BaseRacePlusOneId;
+            race.Metarace.Id = RaceConstants.Metaraces.NoneId;
 
             mockRaceGenerator.SetupSequence(f => f.GenerateWith(It.IsAny<Alignment>(), It.IsAny<CharacterClass>(), mockBaseRaceRandomizer.Object,
                 mockMetaraceRandomizer.Object)).Returns(higherRace).Returns(race);
@@ -228,7 +232,7 @@ namespace NPCGen.Tests.Unit.Generators
         public void AppliesBaseRaceLevelAdjustment()
         {
             characterClass.Level = 2;
-            race.BaseRace = BaseRacePlusOne;
+            race.BaseRace.Id = BaseRacePlusOneId;
 
             GenerateCharacter();
             Assert.That(characterClass.Level, Is.EqualTo(1));
@@ -238,7 +242,7 @@ namespace NPCGen.Tests.Unit.Generators
         public void AppliesMetaraceLevelAdjustment()
         {
             characterClass.Level = 2;
-            race.Metarace = Metarace;
+            race.Metarace.Id = MetaraceId;
 
             GenerateCharacter();
             Assert.That(characterClass.Level, Is.EqualTo(1));
@@ -247,8 +251,8 @@ namespace NPCGen.Tests.Unit.Generators
         [Test]
         public void ApplyBaseRaceAndMetaraceLevelAdjustments()
         {
-            race.BaseRace = BaseRacePlusOne;
-            race.Metarace = Metarace;
+            race.BaseRace.Id = BaseRacePlusOneId;
+            race.Metarace.Id = MetaraceId;
             characterClass.Level = 3;
 
             GenerateCharacter();
@@ -301,7 +305,7 @@ namespace NPCGen.Tests.Unit.Generators
             var skillAdjustments = new Dictionary<String, Int32>();
             skillAdjustments.Add(equipment.Armor.Name, 5);
             skillAdjustments.Add("other armor", 10);
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorCheckPenalties)).Returns(skillAdjustments);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.ArmorCheckPenalties)).Returns(skillAdjustments);
 
             var character = GenerateCharacter();
             Assert.That(character.Ability.Skills["no penalty"].Bonus, Is.EqualTo(0));
@@ -316,7 +320,7 @@ namespace NPCGen.Tests.Unit.Generators
 
             var skillAdjustments = new Dictionary<String, Int32>();
             skillAdjustments.Add(equipment.Armor.Name, 5);
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorCheckPenalties)).Returns(skillAdjustments);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.ArmorCheckPenalties)).Returns(skillAdjustments);
 
             var character = GenerateCharacter();
             Assert.That(character.Ability.Skills[SkillConstants.Swim].Bonus, Is.EqualTo(-10));

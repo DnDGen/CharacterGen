@@ -6,13 +6,8 @@ using NPCGen.Tables.Interfaces;
 
 namespace NPCGen.Generators.Randomizers.Races.Metaraces
 {
-    public class GoodMetaraceRandomizer : BaseMetarace
+    public class GoodMetaraceRandomizer : BaseForcableMetarace
     {
-        protected override Boolean forceMetarace
-        {
-            get { return false; }
-        }
-
         private ICollectionsSelector collectionsSelector;
 
         public GoodMetaraceRandomizer(IPercentileSelector percentileResultSelector, IAdjustmentsSelector levelAdjustmentsSelector, ICollectionsSelector collectionsSelector)

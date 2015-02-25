@@ -36,7 +36,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
                 adjustments.Add(baseRace, 0);
 
             mockLevelAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
-            mockLevelAdjustmentsSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Collection.LevelAdjustments)).Returns(adjustments);
+            mockLevelAdjustmentsSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments)).Returns(adjustments);
 
             characterClass = new CharacterClass();
             characterClass.Level = 1;

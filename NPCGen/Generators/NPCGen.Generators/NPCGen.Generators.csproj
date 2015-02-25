@@ -68,15 +68,6 @@
     <Compile Include="Randomizers\CharacterClasses\ClassNames\SetClassNameRandomizer.cs" />
     <Compile Include="Randomizers\CharacterClasses\Levels\SetLevelRandomizer.cs" />
     <Compile Include="Randomizers\Races\BaseRaces\SetBaseRaceRandomizer.cs" />
-    <Compile Include="Randomizers\Races\Metaraces\AnyForcedMetaraceRandomizer.cs" />
-    <Compile Include="Randomizers\Races\Metaraces\EvilForcedMetaraceRandomizer.cs" />
-    <Compile Include="Randomizers\Races\Metaraces\GeneticForcedMetaraceRandomizer.cs" />
-    <Compile Include="Randomizers\Races\Metaraces\GoodForcedMetaraceRandomizer.cs" />
-    <Compile Include="Randomizers\Races\Metaraces\LycanthropeForcedMetaraceRandomizer.cs" />
-    <Compile Include="Randomizers\Races\Metaraces\NeutralForcedMetaraceRandomizer.cs" />
-    <Compile Include="Randomizers\Races\Metaraces\NonEvilForcedMetaraceRandomizer.cs" />
-    <Compile Include="Randomizers\Races\Metaraces\NonGoodForcedMetaraceRandomizer.cs" />
-    <Compile Include="Randomizers\Races\Metaraces\NonNeutralForcedMetaraceRandomizer.cs" />
     <Compile Include="Abilities\StatsGenerator.cs" />
     <Compile Include="Randomizers\Alignments\AnyAlignmentRandomizer.cs" />
     <Compile Include="Randomizers\Alignments\BaseAlignmentRandomizer.cs" />
@@ -115,7 +106,7 @@
     <Compile Include="Randomizers\Races\BaseRaces\NonStandardBaseRaceRandomizer.cs" />
     <Compile Include="Randomizers\Races\BaseRaces\StandardBaseRaceRandomizer.cs" />
     <Compile Include="Randomizers\Races\Metaraces\AnyMetaraceRandomizer.cs" />
-    <Compile Include="Randomizers\Races\Metaraces\BaseMetarace.cs" />
+    <Compile Include="Randomizers\Races\Metaraces\BaseForcableMetarace.cs" />
     <Compile Include="Randomizers\Races\Metaraces\EvilMetaraceRandomizer.cs" />
     <Compile Include="Randomizers\Races\Metaraces\GeneticMetaraceRandomizer.cs" />
     <Compile Include="Randomizers\Races\Metaraces\GoodMetaraceRandomizer.cs" />

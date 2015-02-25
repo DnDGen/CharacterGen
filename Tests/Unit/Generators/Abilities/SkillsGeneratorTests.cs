@@ -668,14 +668,14 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             baseBonuses["skill 3"] = 3;
             baseBonuses["skill 5"] = 1;
             baseBonuses["skill 6"] = 8;
-            var tableName = String.Format(TableNameConstants.Formattable.Collection.BASERACESkillAdjustments, "baseracetoformat");
+            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.BASERACESkillAdjustments, "baseracetoformat");
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(baseBonuses);
 
             var metaBonuses = new Dictionary<String, Int32>();
             metaBonuses["skill 1"] = 2;
             metaBonuses["skill 2"] = 1;
             metaBonuses["skill 6"] = 1;
-            tableName = String.Format(TableNameConstants.Formattable.Collection.BASERACESkillAdjustments, "metaracetoformat");
+            tableName = String.Format(TableNameConstants.Formattable.Adjustments.BASERACESkillAdjustments, "metaracetoformat");
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(metaBonuses);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
@@ -698,7 +698,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             crossClassSkills.Add("skill 5");
 
             var bonuses = new Dictionary<String, Int32>();
-            var tableName = String.Format(TableNameConstants.Formattable.Collection.BASERACESkillAdjustments, "baserace");
+            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.BASERACESkillAdjustments, "baserace");
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(bonuses);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
@@ -718,7 +718,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
 
             var bonuses = new Dictionary<String, Int32>();
             bonuses["skill"] = 2;
-            var tableName = String.Format(TableNameConstants.Formattable.Collection.BASERACESkillAdjustments, "baserace");
+            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.BASERACESkillAdjustments, "baserace");
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(bonuses);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);

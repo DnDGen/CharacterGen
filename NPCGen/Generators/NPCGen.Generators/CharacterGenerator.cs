@@ -59,18 +59,18 @@ namespace NPCGen.Generators
             character.Alignment = GenerateAlignment(alignmentRandomizer, classNameRandomizer, levelRandomizer, baseRaceRandomizer, metaraceRandomizer);
             character.Class = GenerateCharacterClass(classNameRandomizer, levelRandomizer, character.Alignment, baseRaceRandomizer, metaraceRandomizer);
 
-            var levelAdjustments = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Collection.LevelAdjustments);
+            var levelAdjustments = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments);
             character.Race = GenerateRace(baseRaceRandomizer, metaraceRandomizer, levelAdjustments, character.Alignment, character.Class);
 
-            character.Class.Level -= levelAdjustments[character.Race.BaseRace];
-            character.Class.Level -= levelAdjustments[character.Race.Metarace];
+            character.Class.Level -= levelAdjustments[character.Race.BaseRace.Id];
+            character.Class.Level -= levelAdjustments[character.Race.Metarace.Id];
 
             var baseAttack = combatGenerator.GenerateBaseAttackWith(character.Class, character.Race);
 
             character.Ability = abilitiesGenerator.GenerateWith(character.Class, character.Race, statsRandomizer, baseAttack);
             character.Equipment = equipmentGenerator.GenerateWith(character.Ability.Feats, character.Class);
 
-            var armorCheckPenalties = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Collection.ArmorCheckPenalties);
+            var armorCheckPenalties = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.ArmorCheckPenalties);
 
             foreach (var skill in character.Ability.Skills)
             {
@@ -126,7 +126,7 @@ namespace NPCGen.Generators
             Race race;
 
             do race = raceGenerator.GenerateWith(alignment, characterClass, baseRaceRandomizer, metaraceRandomizer);
-            while (levelAdjustments[race.BaseRace] + levelAdjustments[race.Metarace] >= characterClass.Level);
+            while (levelAdjustments[race.BaseRace.Id] + levelAdjustments[race.Metarace.Id] >= characterClass.Level);
 
             return race;
         }

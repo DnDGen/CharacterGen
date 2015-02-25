@@ -12,36 +12,40 @@ namespace NPCGen.Tables.Interfaces
                 public const String Traits = "Traits";
             }
 
-            public static class Collection
+            public static class Adjustments
             {
                 public const String ArmorBonuses = "ArmorBonuses";
                 public const String ArmorCheckPenalties = "ArmorCheckPenalties";
-                public const String ArmorClassModifiers = "ArmorClassModifiers";
-                public const String AutomaticLanguages = "AutomaticLanguages";
-                public const String BaseRaceGroups = "BaseRaceGroups";
-                public const String BonusLanguages = "BonusLanguages";
-                public const String ClassFeats = "ClassFeats";
                 public const String ClassHitDice = "ClassHitDice";
-                public const String ClassNameGroups = "ClassNameGroups";
-                public const String ClassSkills = "ClassSkills";
-                public const String CrossClassSkills = "CrossClassSkills";
-                public const String DragonSpecies = "DragonSpecies";
                 public const String FeatArmorAdjustments = "FeatArmorAdjustments";
-                public const String FeatGroups = "FeatGroups";
                 public const String FeatInitiativeBonuses = "FeatInitiativeBonuses";
-                public const String FeatSpecificApplications = "FeatSpecificApplications";
                 public const String FighterFeatLevelRequirements = "FighterFeatLevelRequirements";
                 public const String LandSpeeds = "LandSpeeds";
                 public const String LevelAdjustments = "LevelAdjustments";
                 public const String MaxDexterityBonus = "MaxDexterityBonus";
-                public const String MetaraceGroups = "MetaraceGroups";
                 public const String MonsterHitDice = "MonsterHitDice";
                 public const String RacialBaseAttackAdjustments = "RacialBaseAttackAdjustments";
                 public const String RacialInitiativeBonuses = "RacialInitiativeBonuses";
                 public const String RacialNaturalArmorBonuses = "RacialNaturalArmorBonuses";
+                public const String SkillPointsForClasses = "SkillPointsForClasses";
+            }
+
+            public static class Collection
+            {
+                public const String AutomaticLanguages = "AutomaticLanguages";
+                public const String ArmorClassModifiers = "ArmorClassModifiers";
+                public const String BaseRaceGroups = "BaseRaceGroups";
+                public const String BonusLanguages = "BonusLanguages";
+                public const String ClassFeats = "ClassFeats";
+                public const String ClassNameGroups = "ClassNameGroups";
+                public const String ClassSkills = "ClassSkills";
+                public const String CrossClassSkills = "CrossClassSkills";
+                public const String DragonSpecies = "DragonSpecies";
+                public const String FeatGroups = "FeatGroups";
+                public const String FeatSpecificApplications = "FeatSpecificApplications";
+                public const String MetaraceGroups = "MetaraceGroups";
                 public const String SkillData = "SkillData";
                 public const String SkillGroups = "SkillGroups";
-                public const String SkillPointsForClasses = "SkillPointsForClasses";
                 public const String SkillSynergy = "SkillSynergy";
                 public const String SkillSynergyFeats = "SkillSynergyFeats";
                 public const String StatPriorities = "StatPriorities";
@@ -79,7 +83,7 @@ namespace NPCGen.Tables.Interfaces
                 public const String GOODNESSCLASSMetaraces = "{0}{1}Metaraces";
             }
 
-            public static class Collection
+            public static class Adjustments
             {
                 public const String BASERACESkillAdjustments = "{0}SkillAdjustments";
                 public const String CLASSFeatLevelRequirements = "{0}FeatLevelRequirements";

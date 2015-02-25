@@ -27,10 +27,10 @@ namespace NPCGen.Selectors.Interfaces.Objects
 
         public Boolean RequirementsMet(Race race, Int32 monsterHitDice)
         {
-            if (BaseRaceRequirements.Any() && !BaseRaceRequirements.Contains(race.BaseRace))
+            if (BaseRaceRequirements.Any() && !BaseRaceRequirements.Contains(race.BaseRace.Id))
                 return false;
 
-            if (MetaraceRequirements.Any() && !MetaraceRequirements.Contains(race.Metarace))
+            if (MetaraceRequirements.Any() && !MetaraceRequirements.Contains(race.Metarace.Id))
                 return false;
 
             if (MetaraceSpeciesRequirements.Any() && !MetaraceSpeciesRequirements.Contains(race.MetaraceSpecies))

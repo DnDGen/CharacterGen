@@ -8,7 +8,6 @@ using NPCGen.Common.Abilities.Stats;
 using NPCGen.Common.Alignments;
 using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Items;
-using NPCGen.Common.Races;
 using NPCGen.Generators.Interfaces;
 using NPCGen.Generators.Interfaces.Randomizers.Stats;
 using NUnit.Framework;
@@ -26,8 +25,6 @@ namespace NPCGen.Tests.Integration.Stress
         IEnumerable<String> goodnesses;
         IEnumerable<String> lawfulnesses;
         IEnumerable<String> classNames;
-        IEnumerable<String> baseRaces;
-        IEnumerable<String> metaraces;
 
         [SetUp]
         public void Setup()
@@ -35,8 +32,6 @@ namespace NPCGen.Tests.Integration.Stress
             goodnesses = AlignmentConstants.GetGoodnesses();
             lawfulnesses = AlignmentConstants.GetLawfulnesses();
             classNames = CharacterClassConstants.GetClassNames();
-            baseRaces = RaceConstants.BaseRaces.GetBaseRaces();
-            metaraces = RaceConstants.Metaraces.GetMetaraces().Union(new[] { String.Empty });
         }
 
         [TestCase("CharacterGenerator")]
@@ -55,8 +50,10 @@ namespace NPCGen.Tests.Integration.Stress
             Assert.That(classNames, Contains.Item(character.Class.ClassName));
             Assert.That(character.Class.Level, Is.Positive);
             Assert.That(character.InterestingTrait, Is.Not.Null);
-            Assert.That(baseRaces, Contains.Item(character.Race.BaseRace));
-            Assert.That(metaraces, Contains.Item(character.Race.Metarace));
+            Assert.That(character.Race.BaseRace.Name, Is.Not.Empty);
+            Assert.That(character.Race.BaseRace.Id, Is.Not.Empty);
+            Assert.That(character.Race.Metarace.Name, Is.Not.Null);
+            Assert.That(character.Race.Metarace.Id, Is.Not.Empty);
 
             Assert.That(character.Ability.Stats.Count, Is.EqualTo(6));
             Assert.That(character.Ability.Stats.Keys, Contains.Item(StatConstants.Charisma));

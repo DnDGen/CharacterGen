@@ -340,109 +340,55 @@ namespace NPCGen.Tests.Integration.Bootstrap.Modules
         [Test]
         public void MetaraceRandomizerNamedAnyIsAnyMetaraceRandomizer()
         {
-            AssertNamedIsInstanceOf<IMetaraceRandomizer, AnyMetaraceRandomizer>(MetaraceRandomizerTypeConstants.Any);
+            AssertNamedIsInstanceOf<IForcableMetaraceRandomizer, AnyMetaraceRandomizer>(MetaraceRandomizerTypeConstants.Any);
         }
 
         [Test]
         public void MetaraceRandomizerNamedGeneticIsGeneticMetaraceRandomizer()
         {
-            AssertNamedIsInstanceOf<IMetaraceRandomizer, GeneticMetaraceRandomizer>(MetaraceRandomizerTypeConstants.Genetic);
+            AssertNamedIsInstanceOf<IForcableMetaraceRandomizer, GeneticMetaraceRandomizer>(MetaraceRandomizerTypeConstants.Genetic);
         }
 
         [Test]
         public void MetaraceRandomizerNamedEvilIsEvilMetaraceRandomizer()
         {
-            AssertNamedIsInstanceOf<IMetaraceRandomizer, EvilMetaraceRandomizer>(MetaraceRandomizerTypeConstants.Evil);
+            AssertNamedIsInstanceOf<IForcableMetaraceRandomizer, EvilMetaraceRandomizer>(MetaraceRandomizerTypeConstants.Evil);
         }
 
         [Test]
         public void MetaraceRandomizerNamedGoodIsGoodMetaraceRandomizer()
         {
-            AssertNamedIsInstanceOf<IMetaraceRandomizer, GoodMetaraceRandomizer>(MetaraceRandomizerTypeConstants.Good);
+            AssertNamedIsInstanceOf<IForcableMetaraceRandomizer, GoodMetaraceRandomizer>(MetaraceRandomizerTypeConstants.Good);
         }
 
         [Test]
         public void MetaraceRandomizerNamedLycanthropeIsLycanthropeMetaraceRandomizer()
         {
-            AssertNamedIsInstanceOf<IMetaraceRandomizer, LycanthropeMetaraceRandomizer>(MetaraceRandomizerTypeConstants.Lycanthrope);
+            AssertNamedIsInstanceOf<IForcableMetaraceRandomizer, LycanthropeMetaraceRandomizer>(MetaraceRandomizerTypeConstants.Lycanthrope);
         }
 
         [Test]
         public void MetaraceRandomizerNamedNeutralIsNeutralMetaraceRandomizer()
         {
-            AssertNamedIsInstanceOf<IMetaraceRandomizer, NeutralMetaraceRandomizer>(MetaraceRandomizerTypeConstants.Neutral);
+            AssertNamedIsInstanceOf<IForcableMetaraceRandomizer, NeutralMetaraceRandomizer>(MetaraceRandomizerTypeConstants.Neutral);
         }
 
         [Test]
         public void MetaraceRandomizerNamedNonEvilIsNonEvilMetaraceRandomizer()
         {
-            AssertNamedIsInstanceOf<IMetaraceRandomizer, NonEvilMetaraceRandomizer>(MetaraceRandomizerTypeConstants.NonEvil);
+            AssertNamedIsInstanceOf<IForcableMetaraceRandomizer, NonEvilMetaraceRandomizer>(MetaraceRandomizerTypeConstants.NonEvil);
         }
 
         [Test]
         public void MetaraceRandomizerNamedNonGoodIsNonGoodMetaraceRandomizer()
         {
-            AssertNamedIsInstanceOf<IMetaraceRandomizer, NonGoodMetaraceRandomizer>(MetaraceRandomizerTypeConstants.NonGood);
+            AssertNamedIsInstanceOf<IForcableMetaraceRandomizer, NonGoodMetaraceRandomizer>(MetaraceRandomizerTypeConstants.NonGood);
         }
 
         [Test]
         public void MetaraceRandomizerNamedNonNeutralIsNonNeutralMetaraceRandomizer()
         {
-            AssertNamedIsInstanceOf<IMetaraceRandomizer, NonNeutralMetaraceRandomizer>(MetaraceRandomizerTypeConstants.NonNeutral);
-        }
-
-        [Test]
-        public void MetaraceRandomizerNamedAnyForcedIsAnyForcedMetaraceRandomizer()
-        {
-            AssertNamedIsInstanceOf<IMetaraceRandomizer, AnyForcedMetaraceRandomizer>(MetaraceRandomizerTypeConstants.AnyForced);
-        }
-
-        [Test]
-        public void MetaraceRandomizerNamedGeneticForcedIsGeneticForcedMetaraceRandomizer()
-        {
-            AssertNamedIsInstanceOf<IMetaraceRandomizer, GeneticForcedMetaraceRandomizer>(MetaraceRandomizerTypeConstants.GeneticForced);
-        }
-
-        [Test]
-        public void MetaraceRandomizerNamedEvilForcedIsEvilForcedMetaraceRandomizer()
-        {
-            AssertNamedIsInstanceOf<IMetaraceRandomizer, EvilForcedMetaraceRandomizer>(MetaraceRandomizerTypeConstants.EvilForced);
-        }
-
-        [Test]
-        public void MetaraceRandomizerNamedGoodForcedIsGoodForcedMetaraceRandomizer()
-        {
-            AssertNamedIsInstanceOf<IMetaraceRandomizer, GoodForcedMetaraceRandomizer>(MetaraceRandomizerTypeConstants.GoodForced);
-        }
-
-        [Test]
-        public void MetaraceRandomizerNamedLycanthropeForcedIsLycanthropeForcedMetaraceRandomizer()
-        {
-            AssertNamedIsInstanceOf<IMetaraceRandomizer, LycanthropeForcedMetaraceRandomizer>(MetaraceRandomizerTypeConstants.LycanthropeForced);
-        }
-
-        [Test]
-        public void MetaraceRandomizerNamedNeutralForcedIsNeutralForcedMetaraceRandomizer()
-        {
-            AssertNamedIsInstanceOf<IMetaraceRandomizer, NeutralForcedMetaraceRandomizer>(MetaraceRandomizerTypeConstants.NeutralForced);
-        }
-
-        [Test]
-        public void MetaraceRandomizerNamedNonEvilForcedIsNonEvilForcedMetaraceRandomizer()
-        {
-            AssertNamedIsInstanceOf<IMetaraceRandomizer, NonEvilForcedMetaraceRandomizer>(MetaraceRandomizerTypeConstants.NonEvilForced);
-        }
-
-        [Test]
-        public void MetaraceRandomizerNamedNonGoodForcedIsNonGoodForcedMetaraceRandomizer()
-        {
-            AssertNamedIsInstanceOf<IMetaraceRandomizer, NonGoodForcedMetaraceRandomizer>(MetaraceRandomizerTypeConstants.NonGoodForced);
-        }
-
-        [Test]
-        public void MetaraceRandomizerNamedNonNeutralForcedIsNonNeutralForcedMetaraceRandomizer()
-        {
-            AssertNamedIsInstanceOf<IMetaraceRandomizer, NonNeutralForcedMetaraceRandomizer>(MetaraceRandomizerTypeConstants.NonNeutralForced);
+            AssertNamedIsInstanceOf<IForcableMetaraceRandomizer, NonNeutralMetaraceRandomizer>(MetaraceRandomizerTypeConstants.NonNeutral);
         }
 
         [Test]
@@ -453,27 +399,18 @@ namespace NPCGen.Tests.Integration.Bootstrap.Modules
 
 
         [TestCase(MetaraceRandomizerTypeConstants.Any)]
-        [TestCase(MetaraceRandomizerTypeConstants.AnyForced)]
         [TestCase(MetaraceRandomizerTypeConstants.Evil)]
-        [TestCase(MetaraceRandomizerTypeConstants.EvilForced)]
         [TestCase(MetaraceRandomizerTypeConstants.Genetic)]
-        [TestCase(MetaraceRandomizerTypeConstants.GeneticForced)]
         [TestCase(MetaraceRandomizerTypeConstants.Good)]
-        [TestCase(MetaraceRandomizerTypeConstants.GoodForced)]
         [TestCase(MetaraceRandomizerTypeConstants.Lycanthrope)]
-        [TestCase(MetaraceRandomizerTypeConstants.LycanthropeForced)]
         [TestCase(MetaraceRandomizerTypeConstants.Neutral)]
-        [TestCase(MetaraceRandomizerTypeConstants.NeutralForced)]
         [TestCase(MetaraceRandomizerTypeConstants.None)]
         [TestCase(MetaraceRandomizerTypeConstants.NonEvil)]
-        [TestCase(MetaraceRandomizerTypeConstants.NonEvilForced)]
         [TestCase(MetaraceRandomizerTypeConstants.NonGood)]
-        [TestCase(MetaraceRandomizerTypeConstants.NonGoodForced)]
         [TestCase(MetaraceRandomizerTypeConstants.NonNeutral)]
-        [TestCase(MetaraceRandomizerTypeConstants.NonNeutralForced)]
         public void MetaraceRandomizerIsNotGeneratedAsSingleton(String name)
         {
-            AssertNotSingleton<IMetaraceRandomizer>(name);
+            AssertNotSingleton<IForcableMetaraceRandomizer>(name);
         }
 
         [Test]

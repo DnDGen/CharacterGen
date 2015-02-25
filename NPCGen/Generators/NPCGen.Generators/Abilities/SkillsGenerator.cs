@@ -80,15 +80,15 @@ namespace NPCGen.Generators.Abilities
 
         private Int32 GetTotalSkillPoints(CharacterClass characterClass, Stat intelligence, Race race)
         {
-            var pointsTable = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillPointsForClasses);
+            var pointsTable = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.SkillPointsForClasses);
             var perLevel = pointsTable[characterClass.ClassName] + intelligence.Bonus;
             var multiplier = characterClass.Level;
 
             var monsters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, TableNameConstants.Set.Collection.Groups.Monsters);
-            if (!monsters.Contains(race.BaseRace))
+            if (!monsters.Contains(race.BaseRace.Id))
                 multiplier += 3;
 
-            if (race.BaseRace == RaceConstants.BaseRaces.Human)
+            if (race.BaseRace.Id == RaceConstants.BaseRaces.HumanId)
                 perLevel++;
 
             return perLevel * multiplier;
@@ -125,15 +125,15 @@ namespace NPCGen.Generators.Abilities
 
         private Dictionary<String, Skill> ApplyRacialAdjustments(Dictionary<String, Skill> skills, Race race)
         {
-            skills = GetRacialBonuses(skills, race.BaseRace);
+            skills = GetRacialBonuses(skills, race.BaseRace.Id);
 
             var allKnowledgeSkills = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, TableNameConstants.Set.Collection.Groups.Knowledge);
             var knowledgeSkills = allKnowledgeSkills.Intersect(skills.Keys);
 
-            if (race.Metarace != RaceConstants.Metaraces.None)
-                skills = GetRacialBonuses(skills, race.Metarace);
+            if (race.Metarace.Id != RaceConstants.Metaraces.NoneId)
+                skills = GetRacialBonuses(skills, race.Metarace.Id);
 
-            if (race.BaseRace == RaceConstants.BaseRaces.MindFlayer && knowledgeSkills.Any())
+            if (race.BaseRace.Id == RaceConstants.BaseRaces.MindFlayerId && knowledgeSkills.Any())
                 skills = ApplyMindFlayerKnowledgeBonus(skills, knowledgeSkills);
 
             return skills;
@@ -142,7 +142,7 @@ namespace NPCGen.Generators.Abilities
         private Dictionary<String, Skill> GetRacialBonuses(Dictionary<String, Skill> skills, String race)
         {
             var formattedBaseRace = race.Replace(" ", String.Empty).Replace("-", String.Empty);
-            var tableName = String.Format(TableNameConstants.Formattable.Collection.BASERACESkillAdjustments, formattedBaseRace);
+            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.BASERACESkillAdjustments, formattedBaseRace);
             var adjustments = adjustmentsSelector.SelectFrom(tableName);
 
             foreach (var adjustment in adjustments)

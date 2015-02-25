@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using NPCGen.Common.Races;
 using NUnit.Framework;
 
@@ -8,18 +7,6 @@ namespace NPCGen.Tests.Integration.Stress
     [TestFixture]
     public class RaceGeneratorTests : StressTests
     {
-        private IEnumerable<String> baseRaces;
-        private IEnumerable<String> metaraces;
-        private IEnumerable<String> sizes;
-
-        [SetUp]
-        public void Setup()
-        {
-            baseRaces = RaceConstants.BaseRaces.GetBaseRaces();
-            metaraces = RaceConstants.Metaraces.GetAllMetaraces();
-            sizes = RaceConstants.Sizes.GetSizes();
-        }
-
         [TestCase("RaceGenerator")]
         public override void Stress(String stressSubject)
         {
@@ -29,9 +16,11 @@ namespace NPCGen.Tests.Integration.Stress
         protected override void MakeAssertions()
         {
             var race = GenerateRace();
-            Assert.That(baseRaces, Contains.Item(race.BaseRace));
-            Assert.That(metaraces, Contains.Item(race.Metarace));
-            Assert.That(sizes, Contains.Item(race.Size));
+            Assert.That(race.BaseRace.Id, Is.Not.Empty);
+            Assert.That(race.BaseRace.Name, Is.Not.Empty);
+            Assert.That(race.Metarace.Id, Is.Not.Empty);
+            Assert.That(race.Metarace.Name, Is.Not.Null);
+            Assert.That(race.Size, Is.EqualTo(RaceConstants.Sizes.Large).Or.EqualTo(RaceConstants.Sizes.Medium).Or.EqualTo(RaceConstants.Sizes.Small));
             Assert.That(race.LandSpeed, Is.AtLeast(20));
             Assert.That(race.LandSpeed % 10, Is.EqualTo(0));
             Assert.That(race.AerialSpeed, Is.Not.Negative);
@@ -52,7 +41,7 @@ namespace NPCGen.Tests.Integration.Stress
             var race = new Race();
 
             do race = GenerateRace();
-            while (TestShouldKeepRunning() && race.Metarace == RaceConstants.Metaraces.None);
+            while (TestShouldKeepRunning() && race.Metarace.Id == RaceConstants.Metaraces.NoneId);
 
             Assert.That(race.Metarace, Is.Not.EqualTo(RaceConstants.Metaraces.None));
         }
@@ -63,7 +52,7 @@ namespace NPCGen.Tests.Integration.Stress
             var race = new Race();
 
             do race = GenerateRace();
-            while (TestShouldKeepRunning() && race.Metarace != RaceConstants.Metaraces.None);
+            while (TestShouldKeepRunning() && race.Metarace.Id != RaceConstants.Metaraces.NoneId);
 
             Assert.That(race.Metarace, Is.EqualTo(RaceConstants.Metaraces.None));
         }

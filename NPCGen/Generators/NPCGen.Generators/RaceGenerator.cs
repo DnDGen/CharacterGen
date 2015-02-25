@@ -28,11 +28,11 @@ namespace NPCGen.Generators
         {
             var race = new Race();
 
-            race.BaseRace = baseRaceRandomizer.Randomize(alignment.Goodness, characterClass);
-            race.Metarace = metaraceRandomizer.Randomize(alignment.Goodness, characterClass);
-            race.MetaraceSpecies = DetermineMetaraceSpecies(alignment, race.Metarace);
-            race.Male = DetermineIfMale(race.BaseRace, characterClass.ClassName);
-            race.Size = DetermineSize(race.BaseRace);
+            race.BaseRace.Id = baseRaceRandomizer.Randomize(alignment.Goodness, characterClass);
+            race.Metarace.Id = metaraceRandomizer.Randomize(alignment.Goodness, characterClass);
+            race.MetaraceSpecies = DetermineMetaraceSpecies(alignment, race.Metarace.Id);
+            race.Male = DetermineIfMale(race.BaseRace.Id, characterClass.ClassName);
+            race.Size = DetermineSize(race.BaseRace.Id);
             race.HasWings = DetermineIfRaceHasWings(race);
             race.LandSpeed = DetermineLandSpeed(race);
             race.AerialSpeed = DetermineAerialSpeed(race);
@@ -79,13 +79,13 @@ namespace NPCGen.Generators
 
         private Boolean DetermineIfRaceHasWings(Race race)
         {
-            if (race.Metarace == RaceConstants.Metaraces.None)
+            if (race.Metarace.Id == RaceConstants.Metaraces.NoneId)
                 return false;
 
-            if (race.Metarace == RaceConstants.Metaraces.HalfCelestial || race.Metarace == RaceConstants.Metaraces.HalfFiend)
+            if (race.Metarace.Id == RaceConstants.Metaraces.HalfCelestialId || race.Metarace.Id == RaceConstants.Metaraces.HalfFiendId)
                 return true;
 
-            if (race.Metarace == RaceConstants.Metaraces.HalfDragon)
+            if (race.Metarace.Id == RaceConstants.Metaraces.HalfDragon)
                 return race.Size == RaceConstants.Sizes.Large;
 
             return false;
@@ -93,8 +93,8 @@ namespace NPCGen.Generators
 
         private Int32 DetermineLandSpeed(Race race)
         {
-            var speeds = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Collection.LandSpeeds);
-            return speeds[race.BaseRace];
+            var speeds = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.LandSpeeds);
+            return speeds[race.BaseRace.Id];
         }
 
         private Int32 DetermineAerialSpeed(Race race)
@@ -102,7 +102,7 @@ namespace NPCGen.Generators
             if (!race.HasWings)
                 return 0;
 
-            if (race.Metarace == RaceConstants.Metaraces.HalfFiend)
+            if (race.Metarace.Id == RaceConstants.Metaraces.HalfFiendId)
                 return race.LandSpeed;
 
             return race.LandSpeed * 2;

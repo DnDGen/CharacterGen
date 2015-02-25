@@ -50,7 +50,7 @@ namespace NPCGen.Generators.Combats
 
         private Int32 GetArmorBonus(Item armor)
         {
-            var armorBonuses = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Collection.ArmorBonuses);
+            var armorBonuses = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.ArmorBonuses);
             return armorBonuses[armor.Name];
         }
 
@@ -59,7 +59,7 @@ namespace NPCGen.Generators.Combats
             if (offHand.ItemType != ItemTypeConstants.Armor || !offHand.Attributes.Contains(AttributeConstants.Shield))
                 return 0;
 
-            var armorBonuses = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Collection.ArmorBonuses);
+            var armorBonuses = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.ArmorBonuses);
             return armorBonuses[offHand.Name];
         }
 
@@ -99,13 +99,13 @@ namespace NPCGen.Generators.Combats
             var itemsWithNaturalArmorBonuses = items.Where(i => thingsThatGrantNaturalArmorBonuses.Contains(i.Name));
             var itemNaturalArmorBonuses = itemsWithNaturalArmorBonuses.Select(i => i.Magic.Bonus);
 
-            var featAdjustments = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatArmorAdjustments);
+            var featAdjustments = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.FeatArmorAdjustments);
             var featsWithNaturalArmorBonuses = feats.Select(f => f.Name).Intersect(thingsThatGrantNaturalArmorBonuses);
             var featNaturalArmorAdjustments = featAdjustments.Where(kvp => featsWithNaturalArmorBonuses.Contains(kvp.Key));
             var featNaturalArmorBonuses = featNaturalArmorAdjustments.Select(kvp => kvp.Value);
 
-            var racialBonuses = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Collection.RacialNaturalArmorBonuses);
-            var racialBonus = racialBonuses[race.BaseRace] + racialBonuses[race.Metarace];
+            var racialBonuses = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.RacialNaturalArmorBonuses);
+            var racialBonus = racialBonuses[race.BaseRace.Id] + racialBonuses[race.Metarace.Id];
             var racialNaturalArmorBonuses = new[] { racialBonus };
 
             var naturalArmorBonuses = featNaturalArmorBonuses.Union(itemNaturalArmorBonuses)
@@ -118,7 +118,7 @@ namespace NPCGen.Generators.Combats
 
         private Int32 GetDodgeBonus(IEnumerable<Feat> feats)
         {
-            var featAdjustments = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatArmorAdjustments);
+            var featAdjustments = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.FeatArmorAdjustments);
             var dodgeBonuses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers,
                 TableNameConstants.Set.Collection.Groups.Dodge);
 
