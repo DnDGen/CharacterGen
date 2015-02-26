@@ -139,10 +139,9 @@ namespace NPCGen.Generators.Abilities
             return skills;
         }
 
-        private Dictionary<String, Skill> GetRacialBonuses(Dictionary<String, Skill> skills, String race)
+        private Dictionary<String, Skill> GetRacialBonuses(Dictionary<String, Skill> skills, String raceId)
         {
-            var formattedBaseRace = race.Replace(" ", String.Empty).Replace("-", String.Empty);
-            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.BASERACESkillAdjustments, formattedBaseRace);
+            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.BASERACESkillAdjustments, raceId);
             var adjustments = adjustmentsSelector.SelectFrom(tableName);
 
             foreach (var adjustment in adjustments)

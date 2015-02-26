@@ -84,10 +84,20 @@ namespace NPCGen.Bootstrap.Modules
             Bind<IForcableMetaraceRandomizer>().To<GoodMetaraceRandomizer>().Named(MetaraceRandomizerTypeConstants.Good);
             Bind<IForcableMetaraceRandomizer>().To<LycanthropeMetaraceRandomizer>().Named(MetaraceRandomizerTypeConstants.Lycanthrope);
             Bind<IForcableMetaraceRandomizer>().To<NeutralMetaraceRandomizer>().Named(MetaraceRandomizerTypeConstants.Neutral);
-            Bind<IMetaraceRandomizer>().To<NoMetaraceRandomizer>().Named(MetaraceRandomizerTypeConstants.None);
             Bind<IForcableMetaraceRandomizer>().To<NonEvilMetaraceRandomizer>().Named(MetaraceRandomizerTypeConstants.NonEvil);
             Bind<IForcableMetaraceRandomizer>().To<NonGoodMetaraceRandomizer>().Named(MetaraceRandomizerTypeConstants.NonGood);
             Bind<IForcableMetaraceRandomizer>().To<NonNeutralMetaraceRandomizer>().Named(MetaraceRandomizerTypeConstants.NonNeutral);
+
+            Bind<IMetaraceRandomizer>().To<AnyMetaraceRandomizer>().Named(MetaraceRandomizerTypeConstants.Any);
+            Bind<IMetaraceRandomizer>().To<EvilMetaraceRandomizer>().Named(MetaraceRandomizerTypeConstants.Evil);
+            Bind<IMetaraceRandomizer>().To<GeneticMetaraceRandomizer>().Named(MetaraceRandomizerTypeConstants.Genetic);
+            Bind<IMetaraceRandomizer>().To<GoodMetaraceRandomizer>().Named(MetaraceRandomizerTypeConstants.Good);
+            Bind<IMetaraceRandomizer>().To<LycanthropeMetaraceRandomizer>().Named(MetaraceRandomizerTypeConstants.Lycanthrope);
+            Bind<IMetaraceRandomizer>().To<NeutralMetaraceRandomizer>().Named(MetaraceRandomizerTypeConstants.Neutral);
+            Bind<IMetaraceRandomizer>().To<NonEvilMetaraceRandomizer>().Named(MetaraceRandomizerTypeConstants.NonEvil);
+            Bind<IMetaraceRandomizer>().To<NonGoodMetaraceRandomizer>().Named(MetaraceRandomizerTypeConstants.NonGood);
+            Bind<IMetaraceRandomizer>().To<NonNeutralMetaraceRandomizer>().Named(MetaraceRandomizerTypeConstants.NonNeutral);
+            Bind<IMetaraceRandomizer>().To<NoMetaraceRandomizer>().Named(MetaraceRandomizerTypeConstants.None);
 
             Bind<IStatsRandomizer>().To<AverageStatsRandomizer>().Named(StatsRandomizerTypeConstants.Average);
             Bind<IStatsRandomizer>().To<BestOfFourStatsRandomizer>().Named(StatsRandomizerTypeConstants.BestOfFour);

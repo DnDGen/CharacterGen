@@ -47,7 +47,7 @@ namespace NPCGen.Tests.Unit.Generators
             mockDice.Setup(d => d.Roll(1).d(It.IsAny<Int32>())).Returns(1);
             alignment.Goodness = "goodness";
             speeds["base race"] = 9266;
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.LandSpeeds)).Returns(speeds);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.LandSpeeds)).Returns(speeds);
             mockBaseRaceRandomizer.Setup(r => r.Randomize(alignment.Goodness, characterClass)).Returns("base race");
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.DragonSpecies, alignment.ToString())).Returns(dragonSpecies);
             dragonSpecies.Add("dragon species");

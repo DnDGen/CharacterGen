@@ -72,7 +72,7 @@ namespace NPCGen.Tests.Unit.Generators
 
             adjustments.Add(BaseRaceId, 0);
             adjustments.Add(BaseRacePlusOneId, 1);
-            adjustments.Add(String.Empty, 0);
+            adjustments.Add(RaceConstants.Metaraces.NoneId, 0);
             adjustments.Add(MetaraceId, 1);
             mockAdjustmentsSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments)).Returns(adjustments);
 
@@ -166,28 +166,6 @@ namespace NPCGen.Tests.Unit.Generators
             GenerateCharacter();
             mockCharacterClassGenerator.Verify(f => f.GenerateWith(alignment, mockLevelRandomizer.Object,
                 mockClassNameRandomizer.Object), Times.Exactly(2));
-        }
-
-        [Test]
-        public void IncompatibleBaseRaceIsRegenerated()
-        {
-            race.BaseRace.Id = BaseRacePlusOneId;
-            race.Metarace.Id = RaceConstants.Metaraces.NoneId;
-
-            GenerateCharacter();
-            mockRaceGenerator.Verify(f => f.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object,
-                mockMetaraceRandomizer.Object), Times.Exactly(2));
-        }
-
-        [Test]
-        public void IncompatibleMetaraceIsRegenerated()
-        {
-            race.BaseRace.Id = BaseRaceId;
-            race.Metarace.Id = MetaraceId;
-
-            GenerateCharacter();
-            mockRaceGenerator.Verify(f => f.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object,
-                mockMetaraceRandomizer.Object), Times.Exactly(2));
         }
 
         [Test]

@@ -4,8 +4,8 @@ namespace NPCGen.Common.Races
 {
     public class Race
     {
-        public RaceName BaseRace { get; set; }
-        public RaceName Metarace { get; set; }
+        public NameModel BaseRace { get; set; }
+        public NameModel Metarace { get; set; }
         public String MetaraceSpecies { get; set; }
         public Boolean Male { get; set; }
         public Boolean HasWings { get; set; }
@@ -15,8 +15,8 @@ namespace NPCGen.Common.Races
 
         public Race()
         {
-            BaseRace = new RaceName();
-            Metarace = new RaceName();
+            BaseRace = new NameModel();
+            Metarace = new NameModel();
             Size = String.Empty;
             MetaraceSpecies = String.Empty;
         }

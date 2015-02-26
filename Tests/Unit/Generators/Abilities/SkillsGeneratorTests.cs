@@ -60,7 +60,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
 
             skillPoints = new Dictionary<String, Int32>();
             skillPoints[characterClass.ClassName] = 0;
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillPointsForClasses)).Returns(skillPoints);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.SkillPointsForClasses)).Returns(skillPoints);
             mockDice.Setup(d => d.Roll(1).d3()).Returns(1);
             mockDice.Setup(d => d.Roll(1).d(It.IsAny<Int32>())).Returns(1);
         }
@@ -655,8 +655,8 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         [Test]
         public void GetRacialSkillAdjustments()
         {
-            race.BaseRace.Id = "base race id";
-            race.Metarace.Id = "metarace id";
+            race.BaseRace.Id = "baseraceid";
+            race.Metarace.Id = "metaraceid";
             classSkills.Add("skill 1");
             classSkills.Add("skill 2");
             classSkills.Add("skill 3");
@@ -668,14 +668,14 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             baseBonuses["skill 3"] = 3;
             baseBonuses["skill 5"] = 1;
             baseBonuses["skill 6"] = 8;
-            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.BASERACESkillAdjustments, "baseracetoformat");
+            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.BASERACESkillAdjustments, race.BaseRace.Id);
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(baseBonuses);
 
             var metaBonuses = new Dictionary<String, Int32>();
             metaBonuses["skill 1"] = 2;
             metaBonuses["skill 2"] = 1;
             metaBonuses["skill 6"] = 1;
-            tableName = String.Format(TableNameConstants.Formattable.Adjustments.BASERACESkillAdjustments, "metaracetoformat");
+            tableName = String.Format(TableNameConstants.Formattable.Adjustments.BASERACESkillAdjustments, race.Metarace.Id);
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(metaBonuses);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
@@ -690,7 +690,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         [Test]
         public void HandleNoRacialAdjustments()
         {
-            race.BaseRace = "base race";
+            race.BaseRace.Id = "baserace";
             classSkills.Add("skill 1");
             classSkills.Add("skill 2");
             classSkills.Add("skill 3");
@@ -713,7 +713,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         public void RacialSkillAdjustmentsAreNotPerLevel()
         {
             characterClass.Level = 9266;
-            race.BaseRace = "base race";
+            race.BaseRace.Id = "baserace";
             classSkills.Add("skill");
 
             var bonuses = new Dictionary<String, Int32>();
@@ -728,7 +728,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         [Test]
         public void MindFlayerKnowledgeBonusIsRandom()
         {
-            race.BaseRace = RaceConstants.BaseRaces.MindFlayer;
+            race.BaseRace.Id = RaceConstants.BaseRaces.MindFlayerId;
             classSkills.Add(SkillConstants.KnowledgeArcana);
             classSkills.Add(SkillConstants.KnowledgeDungeoneering);
             classSkills.Add(SkillConstants.KnowledgeGeography);
@@ -769,9 +769,9 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         [TestCase(20)]
         public void MonstersDoNotGetMoreSkillPointsAtFirstLevel(Int32 level)
         {
-            race.BaseRace = "base race";
+            race.BaseRace.Id = "baserace";
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, TableNameConstants.Set.Collection.Groups.Monsters))
-                .Returns(new[] { "base race", "other base race" });
+                .Returns(new[] { "baserace", "otherbaserace" });
 
             characterClass.Level = level;
             skillPoints[characterClass.ClassName] = 1;

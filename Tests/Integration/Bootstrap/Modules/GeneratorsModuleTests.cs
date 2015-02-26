@@ -341,54 +341,63 @@ namespace NPCGen.Tests.Integration.Bootstrap.Modules
         public void MetaraceRandomizerNamedAnyIsAnyMetaraceRandomizer()
         {
             AssertNamedIsInstanceOf<IForcableMetaraceRandomizer, AnyMetaraceRandomizer>(MetaraceRandomizerTypeConstants.Any);
+            AssertNamedIsInstanceOf<IMetaraceRandomizer, AnyMetaraceRandomizer>(MetaraceRandomizerTypeConstants.Any);
         }
 
         [Test]
         public void MetaraceRandomizerNamedGeneticIsGeneticMetaraceRandomizer()
         {
             AssertNamedIsInstanceOf<IForcableMetaraceRandomizer, GeneticMetaraceRandomizer>(MetaraceRandomizerTypeConstants.Genetic);
+            AssertNamedIsInstanceOf<IMetaraceRandomizer, GeneticMetaraceRandomizer>(MetaraceRandomizerTypeConstants.Genetic);
         }
 
         [Test]
         public void MetaraceRandomizerNamedEvilIsEvilMetaraceRandomizer()
         {
             AssertNamedIsInstanceOf<IForcableMetaraceRandomizer, EvilMetaraceRandomizer>(MetaraceRandomizerTypeConstants.Evil);
+            AssertNamedIsInstanceOf<IMetaraceRandomizer, EvilMetaraceRandomizer>(MetaraceRandomizerTypeConstants.Evil);
         }
 
         [Test]
         public void MetaraceRandomizerNamedGoodIsGoodMetaraceRandomizer()
         {
             AssertNamedIsInstanceOf<IForcableMetaraceRandomizer, GoodMetaraceRandomizer>(MetaraceRandomizerTypeConstants.Good);
+            AssertNamedIsInstanceOf<IMetaraceRandomizer, GoodMetaraceRandomizer>(MetaraceRandomizerTypeConstants.Good);
         }
 
         [Test]
         public void MetaraceRandomizerNamedLycanthropeIsLycanthropeMetaraceRandomizer()
         {
             AssertNamedIsInstanceOf<IForcableMetaraceRandomizer, LycanthropeMetaraceRandomizer>(MetaraceRandomizerTypeConstants.Lycanthrope);
+            AssertNamedIsInstanceOf<IMetaraceRandomizer, LycanthropeMetaraceRandomizer>(MetaraceRandomizerTypeConstants.Lycanthrope);
         }
 
         [Test]
         public void MetaraceRandomizerNamedNeutralIsNeutralMetaraceRandomizer()
         {
             AssertNamedIsInstanceOf<IForcableMetaraceRandomizer, NeutralMetaraceRandomizer>(MetaraceRandomizerTypeConstants.Neutral);
+            AssertNamedIsInstanceOf<IMetaraceRandomizer, NeutralMetaraceRandomizer>(MetaraceRandomizerTypeConstants.Neutral);
         }
 
         [Test]
         public void MetaraceRandomizerNamedNonEvilIsNonEvilMetaraceRandomizer()
         {
             AssertNamedIsInstanceOf<IForcableMetaraceRandomizer, NonEvilMetaraceRandomizer>(MetaraceRandomizerTypeConstants.NonEvil);
+            AssertNamedIsInstanceOf<IMetaraceRandomizer, NonEvilMetaraceRandomizer>(MetaraceRandomizerTypeConstants.NonEvil);
         }
 
         [Test]
         public void MetaraceRandomizerNamedNonGoodIsNonGoodMetaraceRandomizer()
         {
             AssertNamedIsInstanceOf<IForcableMetaraceRandomizer, NonGoodMetaraceRandomizer>(MetaraceRandomizerTypeConstants.NonGood);
+            AssertNamedIsInstanceOf<IMetaraceRandomizer, NonGoodMetaraceRandomizer>(MetaraceRandomizerTypeConstants.NonGood);
         }
 
         [Test]
         public void MetaraceRandomizerNamedNonNeutralIsNonNeutralMetaraceRandomizer()
         {
             AssertNamedIsInstanceOf<IForcableMetaraceRandomizer, NonNeutralMetaraceRandomizer>(MetaraceRandomizerTypeConstants.NonNeutral);
+            AssertNamedIsInstanceOf<IMetaraceRandomizer, NonNeutralMetaraceRandomizer>(MetaraceRandomizerTypeConstants.NonNeutral);
         }
 
         [Test]
@@ -411,6 +420,7 @@ namespace NPCGen.Tests.Integration.Bootstrap.Modules
         public void MetaraceRandomizerIsNotGeneratedAsSingleton(String name)
         {
             AssertNotSingleton<IForcableMetaraceRandomizer>(name);
+            AssertNotSingleton<IMetaraceRandomizer>(name);
         }
 
         [Test]
