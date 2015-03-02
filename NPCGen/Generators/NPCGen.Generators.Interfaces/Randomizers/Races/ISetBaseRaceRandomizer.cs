@@ -4,6 +4,6 @@ namespace NPCGen.Generators.Interfaces.Randomizers.Races
 {
     public interface ISetBaseRaceRandomizer : IBaseRaceRandomizer
     {
-        String SetBaseRace { get; set; }
+        String SetBaseRaceId { get; set; }
     }
 }

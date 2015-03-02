@@ -19,12 +19,12 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
 
         protected override void MakeAssertions()
         {
-            SetBaseRaceRandomizer.SetBaseRace = Guid.NewGuid().ToString();
+            SetBaseRaceRandomizer.SetBaseRaceId = Guid.NewGuid().ToString();
             var alignment = GetNewAlignment();
             var characterClass = GetNewCharacterClass(alignment);
 
             var baseRace = SetBaseRaceRandomizer.Randomize(alignment.Goodness, characterClass);
-            Assert.That(baseRace, Is.EqualTo(SetBaseRaceRandomizer.SetBaseRace));
+            Assert.That(baseRace, Is.EqualTo(SetBaseRaceRandomizer.SetBaseRaceId));
         }
     }
 }

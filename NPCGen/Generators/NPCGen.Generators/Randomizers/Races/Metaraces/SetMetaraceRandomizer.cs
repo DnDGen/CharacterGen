@@ -1,22 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
 using NPCGen.Common.CharacterClasses;
+using NPCGen.Common.Races;
 using NPCGen.Generators.Interfaces.Randomizers.Races;
+using NPCGen.Selectors.Interfaces;
 
 namespace NPCGen.Generators.Randomizers.Races.Metaraces
 {
     public class SetMetaraceRandomizer : ISetMetaraceRandomizer
     {
-        public String SetMetarace { get; set; }
+        public String SetMetaraceId { get; set; }
 
-        public String Randomize(String goodness, CharacterClass characterClass)
+        private INameSelector nameSelector;
+
+        public SetMetaraceRandomizer(INameSelector nameSelector)
         {
-            return SetMetarace;
+            this.nameSelector = nameSelector;
         }
 
-        public IEnumerable<String> GetAllPossibleResults(String goodness, CharacterClass characterClass)
+        public NameModel Randomize(String goodness, CharacterClass characterClass)
         {
-            return new[] { SetMetarace };
+            var metarace = new NameModel();
+            metarace.Id = SetMetaraceId;
+            metarace.Name = nameSelector.Select(SetMetaraceId);
+
+            return metarace;
+        }
+
+        public IEnumerable<String> GetAllPossibleIds(String goodness, CharacterClass characterClass)
+        {
+            return new[] { SetMetaraceId };
         }
     }
 }

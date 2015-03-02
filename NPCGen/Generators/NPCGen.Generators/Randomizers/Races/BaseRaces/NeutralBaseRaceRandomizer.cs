@@ -10,8 +10,9 @@ namespace NPCGen.Generators.Randomizers.Races.BaseRaces
     {
         private ICollectionsSelector collectionsSelector;
 
-        public NeutralBaseRaceRandomizer(IPercentileSelector percentileResultSelector, IAdjustmentsSelector levelAdjustmentSelector, ICollectionsSelector collectionsSelector)
-            : base(percentileResultSelector, levelAdjustmentSelector)
+        public NeutralBaseRaceRandomizer(IPercentileSelector percentileResultSelector, IAdjustmentsSelector levelAdjustmentSelector, INameSelector nameSelector,
+            ICollectionsSelector collectionsSelector)
+            : base(percentileResultSelector, levelAdjustmentSelector, nameSelector)
         {
             this.collectionsSelector = collectionsSelector;
         }

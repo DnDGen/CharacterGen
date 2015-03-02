@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Linq;
+using Moq;
 using NPCGen.Common.CharacterClasses;
 using NPCGen.Generators.Interfaces.Randomizers.Races;
 using NPCGen.Generators.Randomizers.Races.Metaraces;
+using NPCGen.Selectors.Interfaces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
@@ -12,11 +14,13 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
     {
         private ISetMetaraceRandomizer randomizer;
         private CharacterClass characterclass;
+        private Mock<INameSelector> mockNameSelector;
 
         [SetUp]
         public void Setup()
         {
-            randomizer = new SetMetaraceRandomizer();
+            mockNameSelector = new Mock<INameSelector>();
+            randomizer = new SetMetaraceRandomizer(mockNameSelector.Object);
             characterclass = new CharacterClass();
         }
 
@@ -29,15 +33,18 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         [Test]
         public void ReturnSetMetarace()
         {
-            randomizer.SetMetarace = "metarace";
+            randomizer.SetMetaraceId = "metarace";
+            mockNameSelector.Setup(s => s.Select("metarace")).Returns("Meta-race");
+
             var baseRace = randomizer.Randomize(String.Empty, characterclass);
-            Assert.That(baseRace, Is.EqualTo("metarace"));
+            Assert.That(baseRace.Id, Is.EqualTo("metarace"));
+            Assert.That(baseRace.Name, Is.EqualTo("Meta-race"));
         }
 
         [Test]
         public void ReturnJustSetMetarace()
         {
-            randomizer.SetMetarace = "metarace";
+            randomizer.SetMetaraceId = "metarace";
 
             var baseRaces = randomizer.GetAllPossibleIds(String.Empty, characterclass);
             Assert.That(baseRaces, Contains.Item("metarace"));

@@ -1,22 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
 using NPCGen.Common.CharacterClasses;
+using NPCGen.Common.Races;
 using NPCGen.Generators.Interfaces.Randomizers.Races;
+using NPCGen.Selectors.Interfaces;
 
 namespace NPCGen.Generators.Randomizers.Races.BaseRaces
 {
     public class SetBaseRaceRandomizer : ISetBaseRaceRandomizer
     {
-        public String SetBaseRace { get; set; }
+        public String SetBaseRaceId { get; set; }
 
-        public String Randomize(String goodness, CharacterClass characterClass)
+        private INameSelector nameSelector;
+
+        public SetBaseRaceRandomizer(INameSelector nameSelector)
         {
-            return SetBaseRace;
+            this.nameSelector = nameSelector;
+        }
+
+        public NameModel Randomize(String goodness, CharacterClass characterClass)
+        {
+            var baseRace = new NameModel();
+            baseRace.Id = SetBaseRaceId;
+            baseRace.Name = nameSelector.Select(SetBaseRaceId);
+
+            return baseRace;
         }
 
         public IEnumerable<String> GetAllPossibleIds(String goodness, CharacterClass characterClass)
         {
-            return new[] { SetBaseRace };
+            return new[] { SetBaseRaceId };
         }
     }
 }

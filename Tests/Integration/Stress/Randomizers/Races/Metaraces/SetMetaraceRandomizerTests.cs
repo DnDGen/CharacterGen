@@ -21,12 +21,12 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
 
         protected override void MakeAssertions()
         {
-            SetMetaraceRandomizer.SetMetarace = Random.Next().ToString();
+            SetMetaraceRandomizer.SetMetaraceId = Random.Next().ToString();
             var alignment = GetNewAlignment();
             var characterClass = GetNewCharacterClass(alignment);
 
             var metarace = SetMetaraceRandomizer.Randomize(alignment.Goodness, characterClass);
-            Assert.That(metarace, Is.EqualTo(SetMetaraceRandomizer.SetMetarace));
+            Assert.That(metarace, Is.EqualTo(SetMetaraceRandomizer.SetMetaraceId));
         }
     }
 }

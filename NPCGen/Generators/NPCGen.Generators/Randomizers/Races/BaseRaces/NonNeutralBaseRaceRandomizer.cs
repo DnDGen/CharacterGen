@@ -10,8 +10,9 @@ namespace NPCGen.Generators.Randomizers.Races.BaseRaces
     {
         private ICollectionsSelector collectionsSelector;
 
-        public NonNeutralBaseRaceRandomizer(IPercentileSelector percentileResultSelector, IAdjustmentsSelector levelAdjustmentSelector, ICollectionsSelector collectionsSelector)
-            : base(percentileResultSelector, levelAdjustmentSelector)
+        public NonNeutralBaseRaceRandomizer(IPercentileSelector percentileResultSelector, IAdjustmentsSelector levelAdjustmentSelector, INameSelector nameSelector,
+            ICollectionsSelector collectionsSelector)
+            : base(percentileResultSelector, levelAdjustmentSelector, nameSelector)
         {
             this.collectionsSelector = collectionsSelector;
         }
@@ -20,9 +21,9 @@ namespace NPCGen.Generators.Randomizers.Races.BaseRaces
         {
             var evilBaseRaces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.Names,
                 AlignmentConstants.Evil);
-            var goodBaseRaces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.Names, 
+            var goodBaseRaces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.Names,
                 AlignmentConstants.Good);
-            var neutralBaseRaces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.Names, 
+            var neutralBaseRaces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.Names,
                 AlignmentConstants.Neutral);
             var forbiddenBaseRaces = neutralBaseRaces.Except(goodBaseRaces).Except(evilBaseRaces);
 

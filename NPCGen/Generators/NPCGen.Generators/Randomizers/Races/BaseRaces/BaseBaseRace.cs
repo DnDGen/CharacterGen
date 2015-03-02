@@ -29,7 +29,7 @@ namespace NPCGen.Generators.Randomizers.Races.BaseRaces
             if (!results.Any())
                 throw new IncompatibleRandomizersException();
 
-            var tableName = String.Format("{0}{1}BaseRaces", goodness, characterClass.ClassName);
+            var tableName = String.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSBaseRaces, goodness, characterClass.ClassName);
             var baseRace = new NameModel();
 
             do baseRace.Id = percentileResultSelector.SelectFrom(tableName);
@@ -40,18 +40,18 @@ namespace NPCGen.Generators.Randomizers.Races.BaseRaces
             return baseRace;
         }
 
-        private Boolean RaceIsAllowed(String baseRace, Int32 level)
+        private Boolean RaceIsAllowed(String baseRaceId, Int32 level)
         {
-            return !String.IsNullOrEmpty(baseRace) && LevelAdjustmentIsAllowed(baseRace, level) && BaseRaceIsAllowed(baseRace);
+            return !String.IsNullOrEmpty(baseRaceId) && LevelAdjustmentIsAllowed(baseRaceId, level) && BaseRaceIsAllowed(baseRaceId);
         }
 
-        private Boolean LevelAdjustmentIsAllowed(String baseRace, Int32 level)
+        private Boolean LevelAdjustmentIsAllowed(String baseRaceId, Int32 level)
         {
             var levelAdjustments = adjustmentSelector.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments);
-            return levelAdjustments[baseRace] < level;
+            return levelAdjustments[baseRaceId] < level;
         }
 
-        protected abstract Boolean BaseRaceIsAllowed(String baseRace);
+        protected abstract Boolean BaseRaceIsAllowed(String baseRaceId);
 
         public IEnumerable<String> GetAllPossibleIds(String goodness, CharacterClass characterClass)
         {

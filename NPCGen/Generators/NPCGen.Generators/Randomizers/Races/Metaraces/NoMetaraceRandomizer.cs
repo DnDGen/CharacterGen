@@ -8,14 +8,14 @@ namespace NPCGen.Generators.Randomizers.Races.Metaraces
 {
     public class NoMetaraceRandomizer : IMetaraceRandomizer
     {
-        public String Randomize(String goodnessString, CharacterClass characterClass)
+        public NameModel Randomize(String goodnessString, CharacterClass characterClass)
         {
-            return RaceConstants.Metaraces.None;
+            return new NameModel { Id = RaceConstants.Metaraces.NoneId, Name = RaceConstants.Metaraces.None };
         }
 
-        public IEnumerable<String> GetAllPossibleResults(String goodness, CharacterClass characterClass)
+        public IEnumerable<String> GetAllPossibleIds(String goodness, CharacterClass characterClass)
         {
-            return new[] { RaceConstants.Metaraces.None };
+            return new[] { RaceConstants.Metaraces.NoneId };
         }
     }
 }

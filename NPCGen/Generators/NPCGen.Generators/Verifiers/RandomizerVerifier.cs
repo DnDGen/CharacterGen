@@ -54,17 +54,17 @@ namespace NPCGen.Generators.Verifiers
         public Boolean VerifyCharacterClassCompatibility(String goodness, CharacterClass characterClass, IBaseRaceRandomizer baseRaceRandomizer,
             IMetaraceRandomizer metaraceRandomizer)
         {
-            var baseRaces = baseRaceRandomizer.GetAllPossibleIds(goodness, characterClass);
-            var metaraces = metaraceRandomizer.GetAllPossibleResults(goodness, characterClass);
+            var baseRaceIds = baseRaceRandomizer.GetAllPossibleIds(goodness, characterClass);
+            var metaraceIds = metaraceRandomizer.GetAllPossibleIds(goodness, characterClass);
 
-            return baseRaces.Any() && metaraces.Any() && LevelAdjustmentsAreAllowed(baseRaces, metaraces, characterClass.Level);
+            return baseRaceIds.Any() && metaraceIds.Any() && LevelAdjustmentsAreAllowed(baseRaceIds, metaraceIds, characterClass.Level);
         }
 
-        private Boolean LevelAdjustmentsAreAllowed(IEnumerable<String> baseRaces, IEnumerable<String> metaraces, Int32 level)
+        private Boolean LevelAdjustmentsAreAllowed(IEnumerable<String> baseRaceIds, IEnumerable<String> metaraceIds, Int32 level)
         {
             var levelAdjustments = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments);
-            var minBaseRaceLevelAdjustment = levelAdjustments.Where(kvp => baseRaces.Contains(kvp.Key)).Min(kvp => kvp.Value);
-            var minMetaraceLevelAdjustment = levelAdjustments.Where(kvp => metaraces.Contains(kvp.Key)).Min(kvp => kvp.Value);
+            var minBaseRaceLevelAdjustment = levelAdjustments.Where(kvp => baseRaceIds.Contains(kvp.Key)).Min(kvp => kvp.Value);
+            var minMetaraceLevelAdjustment = levelAdjustments.Where(kvp => metaraceIds.Contains(kvp.Key)).Min(kvp => kvp.Value);
 
             return minBaseRaceLevelAdjustment + minMetaraceLevelAdjustment < level;
         }

@@ -13,6 +13,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races
     {
         protected Mock<IPercentileSelector> mockPercentileResultSelector;
         protected Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
+        protected Mock<INameSelector> mockNameSelector;
 
         protected CharacterClass characterClass;
         protected Dictionary<String, Int32> adjustments;
@@ -22,6 +23,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races
         {
             mockPercentileResultSelector = new Mock<IPercentileSelector>();
             mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
+            mockNameSelector = new Mock<INameSelector>();
 
             adjustments = new Dictionary<String, Int32>();
             mockAdjustmentsSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments)).Returns(adjustments);

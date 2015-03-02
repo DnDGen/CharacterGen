@@ -28,8 +28,8 @@ namespace NPCGen.Generators
         {
             var race = new Race();
 
-            race.BaseRace.Id = baseRaceRandomizer.Randomize(alignment.Goodness, characterClass);
-            race.Metarace.Id = metaraceRandomizer.Randomize(alignment.Goodness, characterClass);
+            race.BaseRace = baseRaceRandomizer.Randomize(alignment.Goodness, characterClass);
+            race.Metarace = metaraceRandomizer.Randomize(alignment.Goodness, characterClass);
             race.MetaraceSpecies = DetermineMetaraceSpecies(alignment, race.Metarace.Id);
             race.Male = DetermineIfMale(race.BaseRace.Id, characterClass.ClassName);
             race.Size = DetermineSize(race.BaseRace.Id);

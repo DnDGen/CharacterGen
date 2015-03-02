@@ -4,6 +4,6 @@ namespace NPCGen.Generators.Interfaces.Randomizers.Races
 {
     public interface ISetMetaraceRandomizer : IMetaraceRandomizer
     {
-        String SetMetarace { get; set; }
+        String SetMetaraceId { get; set; }
     }
 }
