@@ -14,7 +14,7 @@ namespace NPCGen.Generators.Randomizers.Races.BaseRaces
             return SetBaseRace;
         }
 
-        public IEnumerable<String> GetAllPossibleResults(String goodness, CharacterClass characterClass)
+        public IEnumerable<String> GetAllPossibleIds(String goodness, CharacterClass characterClass)
         {
             return new[] { SetBaseRace };
         }

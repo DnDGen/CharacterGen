@@ -61,7 +61,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         [Test]
         public void AllBaseRacesAllowed()
         {
-            var allBaseRaces = randomizer.GetAllPossibleResults(String.Empty, characterClass);
+            var allBaseRaces = randomizer.GetAllPossibleIds(String.Empty, characterClass);
             foreach (var baseRace in baseRaces)
                 Assert.That(allBaseRaces, Contains.Item(baseRace));
         }

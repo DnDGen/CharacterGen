@@ -38,9 +38,9 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
             randomizer = new NonGoodBaseRaceRandomizer(mockPercentileResultSelector.Object, mockAdjustmentsSelector.Object,
                 mockCollectionsSelector.Object);
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, AlignmentConstants.Good)).Returns(new[] { "good base race", "base race", "not neutral base race", "not evil base race" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, AlignmentConstants.Evil)).Returns(new[] { "evil base race", "base race", "not good base race", "not neutral base race" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, AlignmentConstants.Neutral)).Returns(new[] { "neutral base race", "base race", "not evil base race", "not good base race" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.Names, AlignmentConstants.Good)).Returns(new[] { "good base race", "base race", "not neutral base race", "not evil base race" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.Names, AlignmentConstants.Evil)).Returns(new[] { "evil base race", "base race", "not good base race", "not neutral base race" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.Names, AlignmentConstants.Neutral)).Returns(new[] { "neutral base race", "base race", "not evil base race", "not good base race" });
         }
 
         [TestCase("base race")]
@@ -51,14 +51,14 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         [TestCase("not evil base race")]
         public void Allowed(String baseRace)
         {
-            var baseRaces = randomizer.GetAllPossibleResults(String.Empty, characterClass);
+            var baseRaces = randomizer.GetAllPossibleIds(String.Empty, characterClass);
             Assert.That(baseRaces, Contains.Item(baseRace));
         }
 
         [TestCase("good base race")]
         public void NotAllowed(String baseRace)
         {
-            var baseRaces = randomizer.GetAllPossibleResults(String.Empty, characterClass);
+            var baseRaces = randomizer.GetAllPossibleIds(String.Empty, characterClass);
             Assert.That(baseRaces, Is.Not.Contains(baseRace));
         }
     }

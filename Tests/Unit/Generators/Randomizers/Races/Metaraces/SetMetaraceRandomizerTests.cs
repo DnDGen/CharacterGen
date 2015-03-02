@@ -39,7 +39,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         {
             randomizer.SetMetarace = "metarace";
 
-            var baseRaces = randomizer.GetAllPossibleResults(String.Empty, characterclass);
+            var baseRaces = randomizer.GetAllPossibleIds(String.Empty, characterclass);
             Assert.That(baseRaces, Contains.Item("metarace"));
             Assert.That(baseRaces.Count(), Is.EqualTo(1));
         }

@@ -64,12 +64,12 @@ namespace NPCGen.Generators
 
         private String DetermineSize(String baseRace)
         {
-            var largeRaces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups,
+            var largeRaces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.Names,
                 RaceConstants.Sizes.Large);
             if (largeRaces.Contains(baseRace))
                 return RaceConstants.Sizes.Large;
 
-            var smallRaces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups,
+            var smallRaces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.Names,
                 RaceConstants.Sizes.Small);
             if (smallRaces.Contains(baseRace))
                 return RaceConstants.Sizes.Small;

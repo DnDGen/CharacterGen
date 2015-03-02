@@ -82,7 +82,7 @@ namespace NPCGen.Generators.Abilities
 
         private Int32 GetMonsterHitDice(String baseRace)
         {
-            var monsters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups,
+            var monsters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.Names,
                 TableNameConstants.Set.Collection.Groups.Monsters);
             if (!monsters.Contains(baseRace))
                 return 1;

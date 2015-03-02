@@ -1,26 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
 using Ninject;
+using NPCGen.Common.Races;
 using NPCGen.Generators.Interfaces.Randomizers.Races;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
 {
     [TestFixture]
-    public class NoMetaraceRandomizerTests : MetaraceRandomizerTests
+    public class NoMetaraceRandomizerTests : StressTests
     {
         [Inject, Named(MetaraceRandomizerTypeConstants.None)]
-        public override IMetaraceRandomizer MetaraceRandomizer { get; set; }
-
-        protected override IEnumerable<String> allowedMetaraces
-        {
-            get { return new[] { String.Empty }; }
-        }
+        public IMetaraceRandomizer MetaraceRandomizer { get; set; }
 
         [TestCase("NoMetaraceRandomizer")]
         public override void Stress(String stressSubject)
         {
             Stress();
+        }
+
+        protected override void MakeAssertions()
+        {
+            var alignment = GetNewAlignment();
+            var characterClass = GetNewCharacterClass(alignment);
+
+            var metarace = MetaraceRandomizer.Randomize(alignment.Goodness, characterClass);
+            Assert.That(metarace, Is.EqualTo(RaceConstants.Metaraces.NoneId));
         }
     }
 }

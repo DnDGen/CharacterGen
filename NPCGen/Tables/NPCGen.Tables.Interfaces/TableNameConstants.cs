@@ -35,6 +35,7 @@ namespace NPCGen.Tables.Interfaces
                 public const String AutomaticLanguages = "AutomaticLanguages";
                 public const String ArmorClassModifiers = "ArmorClassModifiers";
                 public const String BaseRaceGroups = "BaseRaceGroups";
+                public const String Names = "Names";
                 public const String BonusLanguages = "BonusLanguages";
                 public const String ClassFeats = "ClassFeats";
                 public const String ClassNameGroups = "ClassNameGroups";

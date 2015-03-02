@@ -31,21 +31,21 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
             randomizer = new NonStandardBaseRaceRandomizer(mockPercentileResultSelector.Object, mockAdjustmentsSelector.Object,
                 mockCollectionsSelector.Object);
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, TableNameConstants.Set.Collection.Groups.Standard))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.Names, TableNameConstants.Set.Collection.Groups.Standard))
                 .Returns(new[] { "standard base race" });
         }
 
         [TestCase("nonstandard base race")]
         public void Allowed(String baseRace)
         {
-            var baseRaces = randomizer.GetAllPossibleResults(String.Empty, characterClass);
+            var baseRaces = randomizer.GetAllPossibleIds(String.Empty, characterClass);
             Assert.That(baseRaces, Contains.Item(baseRace));
         }
 
         [TestCase("standard base race")]
         public void NotAllowed(String baseRace)
         {
-            var baseRaces = randomizer.GetAllPossibleResults(String.Empty, characterClass);
+            var baseRaces = randomizer.GetAllPossibleIds(String.Empty, characterClass);
             Assert.That(baseRaces, Is.Not.Contains(baseRace));
         }
     }

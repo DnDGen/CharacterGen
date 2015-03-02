@@ -85,7 +85,7 @@ namespace NPCGen.Tests.Unit.Generators.Combats
         {
             characterClass.Level = 2;
             race.BaseRace.Id = "differentbaserace";
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, TableNameConstants.Set.Collection.Groups.Monsters))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.Names, TableNameConstants.Set.Collection.Groups.Monsters))
                 .Returns(new[] { "otherbaserace", "baserace" });
             mockDice.Setup(d => d.Roll(1).d(9266)).Returns(7);
 
@@ -104,7 +104,7 @@ namespace NPCGen.Tests.Unit.Generators.Combats
         {
             characterClass.Level = 2;
             race.BaseRace.Id = "baserace";
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, TableNameConstants.Set.Collection.Groups.Monsters))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.Names, TableNameConstants.Set.Collection.Groups.Monsters))
                 .Returns(new[] { "other base race", "base race" });
             mockDice.Setup(d => d.Roll(1).d(9266)).Returns(7);
 
@@ -124,7 +124,7 @@ namespace NPCGen.Tests.Unit.Generators.Combats
             characterClass.Level = 2;
             race.BaseRace.Id = "baserace";
             race.Metarace.Id = RaceConstants.Metaraces.HalfDragonId;
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, TableNameConstants.Set.Collection.Groups.Monsters))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.Names, TableNameConstants.Set.Collection.Groups.Monsters))
                 .Returns(new[] { "other base race", "base race" });
             mockDice.Setup(d => d.Roll(1).d(9266)).Returns(7);
 

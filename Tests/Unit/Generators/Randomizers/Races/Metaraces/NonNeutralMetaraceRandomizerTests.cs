@@ -54,14 +54,14 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         [TestCase(RaceConstants.Metaraces.None)]
         public void Allowed(String metarace)
         {
-            var metaraces = randomizer.GetAllPossibleResults(String.Empty, characterClass);
+            var metaraces = randomizer.GetAllPossibleIds(String.Empty, characterClass);
             Assert.That(metaraces, Contains.Item(metarace));
         }
 
         [TestCase("neutral metarace")]
         public void NotAllowed(String metarace)
         {
-            var metaraces = randomizer.GetAllPossibleResults(String.Empty, characterClass);
+            var metaraces = randomizer.GetAllPossibleIds(String.Empty, characterClass);
             Assert.That(metaraces, Is.Not.Contains(metarace));
         }
     }

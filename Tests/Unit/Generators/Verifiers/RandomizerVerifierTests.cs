@@ -56,7 +56,7 @@ namespace NPCGen.Tests.Unit.Generators.Verifiers
             mockAlignmentRandomizer.Setup(r => r.GetAllPossibleResults()).Returns(alignments);
             mockClassNameRandomizer.Setup(r => r.GetAllPossibleResults(It.IsAny<Alignment>())).Returns(classNames);
             mockLevelRandomizer.Setup(r => r.GetAllPossibleResults()).Returns(levels);
-            mockBaseRaceRandomizer.Setup(r => r.GetAllPossibleResults(It.IsAny<String>(), It.IsAny<CharacterClass>()))
+            mockBaseRaceRandomizer.Setup(r => r.GetAllPossibleIds(It.IsAny<String>(), It.IsAny<CharacterClass>()))
                 .Returns(baseRaces);
             mockMetaraceRandomizer.Setup(r => r.GetAllPossibleResults(It.IsAny<String>(), It.IsAny<CharacterClass>()))
                 .Returns(metaraces);
@@ -138,7 +138,7 @@ namespace NPCGen.Tests.Unit.Generators.Verifiers
             classNames.Add("second class name");
             classNames.Add("third class name");
 
-            mockBaseRaceRandomizer.SetupSequence(r => r.GetAllPossibleResults(It.IsAny<String>(), It.IsAny<CharacterClass>()))
+            mockBaseRaceRandomizer.SetupSequence(r => r.GetAllPossibleIds(It.IsAny<String>(), It.IsAny<CharacterClass>()))
                 .Returns(Enumerable.Empty<String>()).Returns(Enumerable.Empty<String>()).Returns(baseRaces);
 
             var verified = verifier.VerifyCompatibility(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object,
@@ -227,7 +227,7 @@ namespace NPCGen.Tests.Unit.Generators.Verifiers
             classNames.Add("second class name");
             classNames.Add("third class name");
 
-            mockBaseRaceRandomizer.SetupSequence(r => r.GetAllPossibleResults(It.IsAny<String>(), It.IsAny<CharacterClass>()))
+            mockBaseRaceRandomizer.SetupSequence(r => r.GetAllPossibleIds(It.IsAny<String>(), It.IsAny<CharacterClass>()))
                 .Returns(Enumerable.Empty<String>()).Returns(Enumerable.Empty<String>()).Returns(baseRaces);
 
             var verified = verifier.VerifyAlignmentCompatibility(alignments[0], mockClassNameRandomizer.Object, mockLevelRandomizer.Object,

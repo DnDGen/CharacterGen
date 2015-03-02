@@ -33,7 +33,7 @@ namespace NPCGen.Generators.Combats
                 hitPoints += Math.Max(rolledHitPoints, 1);
             }
 
-            var monsters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups,
+            var monsters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.Names,
                 TableNameConstants.Set.Collection.Groups.Monsters);
             if (!monsters.Contains(race.BaseRace.Id))
                 return hitPoints;

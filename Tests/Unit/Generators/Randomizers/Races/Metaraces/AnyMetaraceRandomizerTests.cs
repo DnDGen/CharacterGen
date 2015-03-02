@@ -36,7 +36,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         [Test]
         public void AllMetaracesAllowed()
         {
-            var allMetaraces = randomizer.GetAllPossibleResults(String.Empty, characterClass);
+            var allMetaraces = randomizer.GetAllPossibleIds(String.Empty, characterClass);
             foreach (var metarace in metaraces)
                 Assert.That(allMetaraces, Contains.Item(metarace));
         }

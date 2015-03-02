@@ -43,7 +43,7 @@ namespace NPCGen.Tests.Integration.Stress
             do race = GenerateRace();
             while (TestShouldKeepRunning() && race.Metarace.Id == RaceConstants.Metaraces.NoneId);
 
-            Assert.That(race.Metarace, Is.Not.EqualTo(RaceConstants.Metaraces.None));
+            Assert.That(race.Metarace.Id, Is.Not.EqualTo(RaceConstants.Metaraces.NoneId));
         }
 
         [Test]
@@ -54,7 +54,7 @@ namespace NPCGen.Tests.Integration.Stress
             do race = GenerateRace();
             while (TestShouldKeepRunning() && race.Metarace.Id != RaceConstants.Metaraces.NoneId);
 
-            Assert.That(race.Metarace, Is.EqualTo(RaceConstants.Metaraces.None));
+            Assert.That(race.Metarace.Id, Is.EqualTo(RaceConstants.Metaraces.NoneId));
         }
 
         [Test]

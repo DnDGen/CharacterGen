@@ -18,7 +18,7 @@ namespace NPCGen.Generators.Randomizers.Races.BaseRaces
 
         protected override Boolean BaseRaceIsAllowed(String baseRace)
         {
-            var allowedBaseRaces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups,
+            var allowedBaseRaces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.Names,
                 AlignmentConstants.Neutral);
             return allowedBaseRaces.Contains(baseRace);
         }

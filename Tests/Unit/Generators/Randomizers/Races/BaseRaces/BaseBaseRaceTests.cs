@@ -87,14 +87,14 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         [Test]
         public void GetAllPossibleResultsGetsResultsFromSelector()
         {
-            randomizer.GetAllPossibleResults(String.Empty, characterClass);
+            randomizer.GetAllPossibleIds(String.Empty, characterClass);
             mockPercentileResultSelector.Verify(p => p.SelectAllFrom(It.IsAny<String>()), Times.Once);
         }
 
         [Test]
         public void GetAllPossibleResultsFiltersOutEmptyStrings()
         {
-            var classNames = randomizer.GetAllPossibleResults(String.Empty, characterClass);
+            var classNames = randomizer.GetAllPossibleIds(String.Empty, characterClass);
             Assert.That(classNames, Contains.Item(firstBaseRace));
             Assert.That(classNames, Contains.Item(secondBaseRace));
             Assert.That(classNames.Count(), Is.EqualTo(2));
@@ -104,7 +104,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         public void GetAllPossibleResultsAccessesTableAlignmentGoodnessClassNameBaseRaces()
         {
             characterClass.ClassName = "className";
-            randomizer.GetAllPossibleResults("goodness", characterClass);
+            randomizer.GetAllPossibleIds("goodness", characterClass);
             mockPercentileResultSelector.Verify(p => p.SelectAllFrom("goodnessclassNameBaseRaces"), Times.Once);
         }
 
@@ -113,7 +113,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         {
             randomizer.NotAllowedBaseRace = firstBaseRace;
 
-            var results = randomizer.GetAllPossibleResults(String.Empty, characterClass);
+            var results = randomizer.GetAllPossibleIds(String.Empty, characterClass);
             Assert.That(results, Contains.Item(secondBaseRace));
             Assert.That(results.Count(), Is.EqualTo(1));
         }
@@ -123,7 +123,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         {
             adjustments[firstBaseRace] = 1;
 
-            var results = randomizer.GetAllPossibleResults(String.Empty, characterClass);
+            var results = randomizer.GetAllPossibleIds(String.Empty, characterClass);
             Assert.That(results, Contains.Item(secondBaseRace));
             Assert.That(results.Count(), Is.EqualTo(1));
         }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using NPCGen.Common.CharacterClasses;
+using NPCGen.Common.Races;
 using NPCGen.Generators.Interfaces.Randomizers.Races;
 using NPCGen.Generators.Interfaces.Verifiers.Exceptions;
 using NPCGen.Selectors.Interfaces;
@@ -13,24 +14,28 @@ namespace NPCGen.Generators.Randomizers.Races.BaseRaces
     {
         private IPercentileSelector percentileResultSelector;
         private IAdjustmentsSelector adjustmentSelector;
+        private INameSelector nameSelector;
 
-        public BaseBaseRace(IPercentileSelector percentileResultSelector, IAdjustmentsSelector adjustmentSelector)
+        public BaseBaseRace(IPercentileSelector percentileResultSelector, IAdjustmentsSelector adjustmentSelector, INameSelector nameSelector)
         {
             this.percentileResultSelector = percentileResultSelector;
             this.adjustmentSelector = adjustmentSelector;
+            this.nameSelector = nameSelector;
         }
 
-        public String Randomize(String goodness, CharacterClass characterClass)
+        public NameModel Randomize(String goodness, CharacterClass characterClass)
         {
-            var results = GetAllPossibleResults(goodness, characterClass);
+            var results = GetAllPossibleIds(goodness, characterClass);
             if (!results.Any())
                 throw new IncompatibleRandomizersException();
 
             var tableName = String.Format("{0}{1}BaseRaces", goodness, characterClass.ClassName);
-            var baseRace = String.Empty;
+            var baseRace = new NameModel();
 
-            do baseRace = percentileResultSelector.SelectFrom(tableName);
-            while (!results.Contains(baseRace));
+            do baseRace.Id = percentileResultSelector.SelectFrom(tableName);
+            while (!results.Contains(baseRace.Id));
+
+            baseRace.Name = nameSelector.Select(baseRace.Id);
 
             return baseRace;
         }
@@ -48,7 +53,7 @@ namespace NPCGen.Generators.Randomizers.Races.BaseRaces
 
         protected abstract Boolean BaseRaceIsAllowed(String baseRace);
 
-        public IEnumerable<String> GetAllPossibleResults(String goodness, CharacterClass characterClass)
+        public IEnumerable<String> GetAllPossibleIds(String goodness, CharacterClass characterClass)
         {
             var tableName = String.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSBaseRaces,
                 goodness, characterClass.ClassName);

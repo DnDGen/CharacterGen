@@ -54,7 +54,7 @@ namespace NPCGen.Generators.Verifiers
         public Boolean VerifyCharacterClassCompatibility(String goodness, CharacterClass characterClass, IBaseRaceRandomizer baseRaceRandomizer,
             IMetaraceRandomizer metaraceRandomizer)
         {
-            var baseRaces = baseRaceRandomizer.GetAllPossibleResults(goodness, characterClass);
+            var baseRaces = baseRaceRandomizer.GetAllPossibleIds(goodness, characterClass);
             var metaraces = metaraceRandomizer.GetAllPossibleResults(goodness, characterClass);
 
             return baseRaces.Any() && metaraces.Any() && LevelAdjustmentsAreAllowed(baseRaces, metaraces, characterClass.Level);

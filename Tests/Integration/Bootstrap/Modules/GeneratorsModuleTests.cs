@@ -413,7 +413,6 @@ namespace NPCGen.Tests.Integration.Bootstrap.Modules
         [TestCase(MetaraceRandomizerTypeConstants.Good)]
         [TestCase(MetaraceRandomizerTypeConstants.Lycanthrope)]
         [TestCase(MetaraceRandomizerTypeConstants.Neutral)]
-        [TestCase(MetaraceRandomizerTypeConstants.None)]
         [TestCase(MetaraceRandomizerTypeConstants.NonEvil)]
         [TestCase(MetaraceRandomizerTypeConstants.NonGood)]
         [TestCase(MetaraceRandomizerTypeConstants.NonNeutral)]

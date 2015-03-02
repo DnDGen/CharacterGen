@@ -168,7 +168,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             racialFeatSelections.Add(selection);
 
             race.BaseRace.Id = "baserace";
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, TableNameConstants.Set.Collection.Groups.Monsters))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.Names, TableNameConstants.Set.Collection.Groups.Monsters))
                 .Returns(new[] { race.BaseRace.Id });
 
             var monsterHitDice = new Dictionary<String, Int32>();
@@ -188,7 +188,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             racialFeatSelections.Add(selection);
 
             race.BaseRace.Id = "baserace";
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, TableNameConstants.Set.Collection.Groups.Monsters)).Returns(new[] { "other base race" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.Names, TableNameConstants.Set.Collection.Groups.Monsters)).Returns(new[] { "other base race" });
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
             Assert.That(feats.Single().Name, Is.EqualTo("racial feat"));

@@ -8,10 +8,10 @@ using NUnit.Framework;
 namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
 {
     [TestFixture]
-    public class NeutralMetaraceRandomizerTests : MetaraceRandomizerTests
+    public class NeutralMetaraceRandomizerTests : ForcableMetaraceRandomizerTests
     {
         [Inject, Named(MetaraceRandomizerTypeConstants.Neutral)]
-        public override IMetaraceRandomizer MetaraceRandomizer { get; set; }
+        public override IForcableMetaraceRandomizer ForcableMetaraceRandomizer { get; set; }
 
         protected override IEnumerable<String> allowedMetaraces
         {
@@ -30,6 +30,18 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
         public override void Stress(String stressSubject)
         {
             Stress();
+        }
+
+        [Test]
+        public override void MetaraceForced()
+        {
+            AssertForcedMetarace();
+        }
+
+        [Test]
+        public override void MetaraceNotForced()
+        {
+            AssertUnforcedMetarace();
         }
     }
 }
