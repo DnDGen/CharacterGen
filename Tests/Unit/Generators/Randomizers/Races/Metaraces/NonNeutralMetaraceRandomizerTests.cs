@@ -13,7 +13,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
     [TestFixture]
     public class NonNeutralMetaraceRandomizerTests : MetaraceRandomizerTests
     {
-        protected override IEnumerable<String> metaraces
+        protected override IEnumerable<String> metaraceIds
         {
             get
             {

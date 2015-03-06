@@ -1,5 +1,8 @@
 ﻿using System;
+using NPCGen.Common.Alignments;
+using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Races;
+using NPCGen.Tables.Interfaces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Tables.Races.BaseRaces.Neutral
@@ -9,7 +12,7 @@ namespace NPCGen.Tests.Integration.Tables.Races.BaseRaces.Neutral
     {
         protected override String tableName
         {
-            get { return "NeutralMonkBaseRaces"; }
+            get { return String.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSBaseRaces, AlignmentConstants.Neutral, CharacterClassConstants.Monk); }
         }
 
         [TestCase(RaceConstants.BaseRaces.HighElf, 1, 2)]

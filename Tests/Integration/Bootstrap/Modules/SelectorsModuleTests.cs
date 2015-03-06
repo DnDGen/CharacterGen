@@ -53,5 +53,11 @@ namespace NPCGen.Tests.Integration.Bootstrap.Modules
         {
             AssertNotSingleton<IFeatsSelector>();
         }
+
+        [Test]
+        public void NameSelectorsAreNotGeneratedAsSingletons()
+        {
+            AssertNotSingleton<INameSelector>();
+        }
     }
 }

@@ -31,8 +31,7 @@ namespace NPCGen.Generators.Randomizers.Races.Metaraces
             if (!results.Any())
                 throw new IncompatibleRandomizersException();
 
-            var tableName = String.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSMetaraces,
-                goodness, characterClass.ClassName);
+            var tableName = String.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSMetaraces, goodness, characterClass.ClassName);
             var metarace = new NameModel();
 
             do metarace.Id = percentileResultSelector.SelectFrom(tableName);
@@ -45,8 +44,7 @@ namespace NPCGen.Generators.Randomizers.Races.Metaraces
 
         public IEnumerable<String> GetAllPossibleIds(String goodness, CharacterClass characterClass)
         {
-            var tableName = String.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSMetaraces,
-                goodness, characterClass.ClassName);
+            var tableName = String.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSMetaraces, goodness, characterClass.ClassName);
             var results = percentileResultSelector.SelectAllFrom(tableName);
             return results.Where(r => RaceIsAllowed(r, characterClass.Level));
         }

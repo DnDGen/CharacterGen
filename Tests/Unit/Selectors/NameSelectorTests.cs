@@ -23,7 +23,7 @@ namespace NPCGen.Tests.Unit.Selectors
             names = new List<String>();
 
             names.Add("name");
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceNames, "id")).Returns(names);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.Names, "id")).Returns(names);
         }
 
         [Test]

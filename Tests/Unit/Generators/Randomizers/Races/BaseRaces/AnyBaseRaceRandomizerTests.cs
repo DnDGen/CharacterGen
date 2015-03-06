@@ -9,7 +9,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
     [TestFixture]
     public class AnyBaseRaceRandomizerTests : BaseRaceRandomizerTests
     {
-        protected override IEnumerable<String> baseRaces
+        protected override IEnumerable<String> baseRaceIds
         {
             get
             {
@@ -55,14 +55,14 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         [SetUp]
         public void Setup()
         {
-            randomizer = new AnyBaseRaceRandomizer(mockPercentileResultSelector.Object, mockAdjustmentsSelector.Object);
+            randomizer = new AnyBaseRaceRandomizer(mockPercentileResultSelector.Object, mockAdjustmentsSelector.Object, mockNameSelector.Object);
         }
 
         [Test]
         public void AllBaseRacesAllowed()
         {
             var allBaseRaces = randomizer.GetAllPossibleIds(String.Empty, characterClass);
-            foreach (var baseRace in baseRaces)
+            foreach (var baseRace in baseRaceIds)
                 Assert.That(allBaseRaces, Contains.Item(baseRace));
         }
     }

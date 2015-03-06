@@ -1,5 +1,8 @@
 ﻿using System;
+using NPCGen.Common.Alignments;
+using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Races;
+using NPCGen.Tables.Interfaces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Tables.Races.BaseRaces.Good
@@ -9,7 +12,7 @@ namespace NPCGen.Tests.Integration.Tables.Races.BaseRaces.Good
     {
         protected override String tableName
         {
-            get { return "GoodRangerBaseRaces"; }
+            get { return String.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSBaseRaces, AlignmentConstants.Good, CharacterClassConstants.Ranger); }
         }
 
         [TestCase(RaceConstants.BaseRaces.HillDwarf, 1, 5)]

@@ -40,9 +40,9 @@ namespace NPCGen.Generators
             return race;
         }
 
-        private String DetermineMetaraceSpecies(Alignment alignment, String metarace)
+        private String DetermineMetaraceSpecies(Alignment alignment, String metaraceId)
         {
-            if (metarace != RaceConstants.Metaraces.HalfDragon)
+            if (metaraceId != RaceConstants.Metaraces.HalfDragonId)
                 return String.Empty;
 
             var species = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.DragonSpecies, alignment.ToString());
@@ -62,16 +62,14 @@ namespace NPCGen.Generators
             return dice.Roll().d2() == 1;
         }
 
-        private String DetermineSize(String baseRace)
+        private String DetermineSize(String baseRaceId)
         {
-            var largeRaces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.Names,
-                RaceConstants.Sizes.Large);
-            if (largeRaces.Contains(baseRace))
+            var largeRaces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, RaceConstants.Sizes.Large);
+            if (largeRaces.Contains(baseRaceId))
                 return RaceConstants.Sizes.Large;
 
-            var smallRaces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.Names,
-                RaceConstants.Sizes.Small);
-            if (smallRaces.Contains(baseRace))
+            var smallRaces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, RaceConstants.Sizes.Small);
+            if (smallRaces.Contains(baseRaceId))
                 return RaceConstants.Sizes.Small;
 
             return RaceConstants.Sizes.Medium;
@@ -85,7 +83,7 @@ namespace NPCGen.Generators
             if (race.Metarace.Id == RaceConstants.Metaraces.HalfCelestialId || race.Metarace.Id == RaceConstants.Metaraces.HalfFiendId)
                 return true;
 
-            if (race.Metarace.Id == RaceConstants.Metaraces.HalfDragon)
+            if (race.Metarace.Id == RaceConstants.Metaraces.HalfDragonId)
                 return race.Size == RaceConstants.Sizes.Large;
 
             return false;

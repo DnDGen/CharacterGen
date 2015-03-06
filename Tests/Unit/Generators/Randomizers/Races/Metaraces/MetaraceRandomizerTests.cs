@@ -10,14 +10,14 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
     public abstract class MetaraceRandomizerTests : RaceRandomizerTests
     {
         protected IMetaraceRandomizer randomizer;
-        protected abstract IEnumerable<String> metaraces { get; }
+        protected abstract IEnumerable<String> metaraceIds { get; }
 
         [SetUp]
         public void MetaraceRandomizerTestsSetup()
         {
-            mockPercentileResultSelector.Setup(p => p.SelectAllFrom(It.IsAny<String>())).Returns(metaraces);
+            mockPercentileResultSelector.Setup(p => p.SelectAllFrom(It.IsAny<String>())).Returns(metaraceIds);
 
-            foreach (var metarace in metaraces)
+            foreach (var metarace in metaraceIds)
                 adjustments[metarace] = 0;
         }
     }

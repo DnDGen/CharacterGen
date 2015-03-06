@@ -16,7 +16,7 @@ namespace NPCGen.Selectors
 
         public String Select(String id)
         {
-            return collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceNames, id).Single();
+            return collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.Names, id).Single();
         }
     }
 }

@@ -103,8 +103,8 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         public void GetAllPossibleResultsFiltersOutEmptyStrings()
         {
             var classNames = randomizer.GetAllPossibleIds(String.Empty, characterClass);
-            Assert.That(classNames, Contains.Item(firstBaseRace));
-            Assert.That(classNames, Contains.Item(secondBaseRace));
+            Assert.That(classNames, Contains.Item(firstBaseRaceId));
+            Assert.That(classNames, Contains.Item(secondBaseRaceId));
             Assert.That(classNames.Count(), Is.EqualTo(2));
         }
 
@@ -119,20 +119,20 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         [Test]
         public void GetAllPossibleResultsFiltersOutUnallowedBaseRaces()
         {
-            randomizer.NotAllowedBaseRaceId = firstBaseRace;
+            randomizer.NotAllowedBaseRaceId = firstBaseRaceId;
 
             var results = randomizer.GetAllPossibleIds(String.Empty, characterClass);
-            Assert.That(results, Contains.Item(secondBaseRace));
+            Assert.That(results, Contains.Item(secondBaseRaceId));
             Assert.That(results.Count(), Is.EqualTo(1));
         }
 
         [Test]
         public void GetAllPossibleResultsFiltersOutBaseRacesWithTooHighLevelAdjustments()
         {
-            adjustments[firstBaseRace] = 1;
+            adjustments[firstBaseRaceId] = 1;
 
             var results = randomizer.GetAllPossibleIds(String.Empty, characterClass);
-            Assert.That(results, Contains.Item(secondBaseRace));
+            Assert.That(results, Contains.Item(secondBaseRaceId));
             Assert.That(results.Count(), Is.EqualTo(1));
         }
 

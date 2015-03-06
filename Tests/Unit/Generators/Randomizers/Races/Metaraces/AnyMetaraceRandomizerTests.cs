@@ -9,7 +9,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
     [TestFixture]
     public class AnyMetaraceRandomizerTests : MetaraceRandomizerTests
     {
-        protected override IEnumerable<String> metaraces
+        protected override IEnumerable<String> metaraceIds
         {
             get
             {
@@ -30,14 +30,14 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         [SetUp]
         public void Setup()
         {
-            randomizer = new AnyMetaraceRandomizer(mockPercentileResultSelector.Object, mockAdjustmentsSelector.Object);
+            randomizer = new AnyMetaraceRandomizer(mockPercentileResultSelector.Object, mockAdjustmentsSelector.Object, mockNameSelector.Object);
         }
 
         [Test]
         public void AllMetaracesAllowed()
         {
             var allMetaraces = randomizer.GetAllPossibleIds(String.Empty, characterClass);
-            foreach (var metarace in metaraces)
+            foreach (var metarace in metaraceIds)
                 Assert.That(allMetaraces, Contains.Item(metarace));
         }
     }

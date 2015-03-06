@@ -11,7 +11,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
     [TestFixture]
     public class StandardBaseRaceRandomizerTests : BaseRaceRandomizerTests
     {
-        protected override IEnumerable<String> baseRaces
+        protected override IEnumerable<String> baseRaceIds
         {
             get { return new[] { "standard base race" }; }
         }

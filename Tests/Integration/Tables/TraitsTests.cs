@@ -1,4 +1,5 @@
 ﻿using System;
+using NPCGen.Tables.Interfaces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Tables
@@ -8,7 +9,7 @@ namespace NPCGen.Tests.Integration.Tables
     {
         protected override String tableName
         {
-            get { return "Traits"; }
+            get { return TableNameConstants.Set.Percentile.Traits; }
         }
 
         [TestCase("Distinctive scar", 1)]
@@ -114,6 +115,12 @@ namespace NPCGen.Tests.Integration.Tables
         public override void Percentile(String content, Int32 roll)
         {
             base.Percentile(content, roll);
+        }
+
+        [Test]
+        public override void TableIsComplete()
+        {
+            AssertTableIsComplete();
         }
     }
 }

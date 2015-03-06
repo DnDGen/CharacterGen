@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Ninject;
 using NPCGen.Mappers.Interfaces;
 using NUnit.Framework;
@@ -29,20 +28,14 @@ namespace NPCGen.Tests.Integration.Tables
             table = PercentileMapper.Map(tableName);
         }
 
-        [Test]
-        public void TableIsComplete()
+        public abstract void TableIsComplete();
+
+        protected void AssertTableIsComplete()
         {
             for (var roll = 100; roll > 0; roll--)
                 Assert.That(table.Keys, Contains.Item(roll), tableName);
 
             Assert.That(table.Keys.Count, Is.EqualTo(100), tableName);
-        }
-
-        [Test, TestFixtureTearDown]
-        public void AllRollsTested()
-        {
-            var missingRolls = table.Keys.Except(testedRolls);
-            Assert.That(missingRolls, Is.Empty, tableName);
         }
 
         public virtual void Percentile(String content, Int32 roll)

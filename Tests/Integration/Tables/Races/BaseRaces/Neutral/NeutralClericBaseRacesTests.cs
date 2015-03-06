@@ -1,5 +1,8 @@
 ﻿using System;
+using NPCGen.Common.Alignments;
+using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Races;
+using NPCGen.Tables.Interfaces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Tables.Races.BaseRaces.Neutral
@@ -9,7 +12,7 @@ namespace NPCGen.Tests.Integration.Tables.Races.BaseRaces.Neutral
     {
         protected override String tableName
         {
-            get { return "NeutralClericBaseRaces"; }
+            get { return String.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSBaseRaces, AlignmentConstants.Neutral, CharacterClassConstants.Cleric); }
         }
 
         [TestCase(RaceConstants.BaseRaces.DeepDwarf, 1, 15)]

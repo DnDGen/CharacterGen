@@ -19,6 +19,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         [SetUp]
         public void Setup()
         {
+            mockNameSelector = new Mock<INameSelector>();
             randomizer = new SetBaseRaceRandomizer(mockNameSelector.Object);
             characterclass = new CharacterClass();
         }

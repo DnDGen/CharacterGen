@@ -10,14 +10,14 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
     public abstract class BaseRaceRandomizerTests : RaceRandomizerTests
     {
         protected IBaseRaceRandomizer randomizer;
-        protected abstract IEnumerable<String> baseRaces { get; }
+        protected abstract IEnumerable<String> baseRaceIds { get; }
 
         [SetUp]
         public void BaseRaceRandomizerSetup()
         {
-            mockPercentileResultSelector.Setup(p => p.SelectAllFrom(It.IsAny<String>())).Returns(baseRaces);
+            mockPercentileResultSelector.Setup(p => p.SelectAllFrom(It.IsAny<String>())).Returns(baseRaceIds);
 
-            foreach (var baseRace in baseRaces)
+            foreach (var baseRace in baseRaceIds)
                 adjustments.Add(baseRace, 0);
         }
     }
