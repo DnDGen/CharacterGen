@@ -27,7 +27,7 @@ namespace NPCGen.Tests.Integration.Tables.Races.Metaraces.Evil
             base.Percentile(content, lower, upper);
         }
 
-        [TestCase(RaceConstants.Metaraces.Werewolf, 100)]
+        [TestCase(RaceConstants.Metaraces.WerewolfId, 100)]
         public override void Percentile(String content, Int32 roll)
         {
             base.Percentile(content, roll);

@@ -1,5 +1,7 @@
 ﻿using System;
+using NPCGen.Common.Alignments;
 using NPCGen.Common.CharacterClasses;
+using NPCGen.Tables.Interfaces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Tables.CharacterClasses
@@ -9,7 +11,13 @@ namespace NPCGen.Tests.Integration.Tables.CharacterClasses
     {
         protected override String tableName
         {
-            get { return "NeutralCharacterClasses"; }
+            get { return String.Format(TableNameConstants.Formattable.Percentile.GOODNESSCharacterClasses, AlignmentConstants.Neutral); }
+        }
+
+        [Test]
+        public override void TableIsComplete()
+        {
+            AssertTableIsComplete();
         }
 
         [TestCase(CharacterClassConstants.Barbarian, 1, 5)]

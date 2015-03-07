@@ -1,4 +1,7 @@
 ﻿using System;
+using NPCGen.Common.Alignments;
+using NPCGen.Common.CharacterClasses;
+using NPCGen.Tables.Interfaces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Tables.Races.Metaraces.Neutral
@@ -8,7 +11,13 @@ namespace NPCGen.Tests.Integration.Tables.Races.Metaraces.Neutral
     {
         protected override String tableName
         {
-            get { return "NeutralMonkMetaraces"; }
+            get { return String.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSMetaraces, AlignmentConstants.Neutral, CharacterClassConstants.Monk); }
+        }
+
+        [Test]
+        public override void TableIsComplete()
+        {
+            AssertTableIsComplete();
         }
 
         [TestCase(EmptyContent, 1, 100)]

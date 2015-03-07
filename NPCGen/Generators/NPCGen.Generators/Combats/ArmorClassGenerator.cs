@@ -121,12 +121,12 @@ namespace NPCGen.Generators.Combats
             var featAdjustments = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.FeatArmorAdjustments);
             var dodgeBonuses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers,
                 TableNameConstants.Set.Collection.Groups.Dodge);
+            var dodgeFeats = feats.Select(f => f.Name).Intersect(dodgeBonuses);
 
             var bonus = 0;
 
-            foreach (var feat in feats.Select(f => f.Name))
-                if (dodgeBonuses.Contains(feat))
-                    bonus += featAdjustments[feat];
+            foreach (var feat in dodgeFeats)
+                bonus += featAdjustments[feat];
 
             return bonus;
         }

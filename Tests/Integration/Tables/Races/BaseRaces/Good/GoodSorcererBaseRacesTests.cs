@@ -15,29 +15,35 @@ namespace NPCGen.Tests.Integration.Tables.Races.BaseRaces.Good
             get { return String.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSBaseRaces, AlignmentConstants.Good, CharacterClassConstants.Sorcerer); }
         }
 
-        [TestCase(RaceConstants.BaseRaces.Aasimar, 1, 2)]
-        [TestCase(RaceConstants.BaseRaces.HillDwarf, 4, 5)]
-        [TestCase(RaceConstants.BaseRaces.GrayElf, 7, 8)]
-        [TestCase(RaceConstants.BaseRaces.HighElf, 9, 11)]
-        [TestCase(RaceConstants.BaseRaces.WildElf, 12, 36)]
-        [TestCase(RaceConstants.BaseRaces.RockGnome, 39, 40)]
-        [TestCase(RaceConstants.BaseRaces.HalfElf, 41, 45)]
-        [TestCase(RaceConstants.BaseRaces.LightfootHalfling, 46, 54)]
-        [TestCase(RaceConstants.BaseRaces.HalfOrc, 57, 58)]
-        [TestCase(RaceConstants.BaseRaces.Human, 59, 95)]
+        [Test]
+        public override void TableIsComplete()
+        {
+            AssertTableIsComplete();
+        }
+
+        [TestCase(RaceConstants.BaseRaces.AasimarId, 1, 2)]
+        [TestCase(RaceConstants.BaseRaces.HillDwarfId, 4, 5)]
+        [TestCase(RaceConstants.BaseRaces.GrayElfId, 7, 8)]
+        [TestCase(RaceConstants.BaseRaces.HighElfId, 9, 11)]
+        [TestCase(RaceConstants.BaseRaces.WildElfId, 12, 36)]
+        [TestCase(RaceConstants.BaseRaces.RockGnomeId, 39, 40)]
+        [TestCase(RaceConstants.BaseRaces.HalfElfId, 41, 45)]
+        [TestCase(RaceConstants.BaseRaces.LightfootHalflingId, 46, 54)]
+        [TestCase(RaceConstants.BaseRaces.HalfOrcId, 57, 58)]
+        [TestCase(RaceConstants.BaseRaces.HumanId, 59, 95)]
         [TestCase(EmptyContent, 97, 100)]
         public override void Percentile(String content, Int32 lower, Int32 upper)
         {
             base.Percentile(content, lower, upper);
         }
 
-        [TestCase(RaceConstants.BaseRaces.DeepDwarf, 3)]
-        [TestCase(RaceConstants.BaseRaces.MountainDwarf, 6)]
-        [TestCase(RaceConstants.BaseRaces.WoodElf, 37)]
-        [TestCase(RaceConstants.BaseRaces.ForestGnome, 38)]
-        [TestCase(RaceConstants.BaseRaces.DeepHalfling, 55)]
-        [TestCase(RaceConstants.BaseRaces.TallfellowHalfling, 56)]
-        [TestCase(RaceConstants.BaseRaces.Svirfneblin, 96)]
+        [TestCase(RaceConstants.BaseRaces.DeepDwarfId, 3)]
+        [TestCase(RaceConstants.BaseRaces.MountainDwarfId, 6)]
+        [TestCase(RaceConstants.BaseRaces.WoodElfId, 37)]
+        [TestCase(RaceConstants.BaseRaces.ForestGnomeId, 38)]
+        [TestCase(RaceConstants.BaseRaces.DeepHalflingId, 55)]
+        [TestCase(RaceConstants.BaseRaces.TallfellowHalflingId, 56)]
+        [TestCase(RaceConstants.BaseRaces.SvirfneblinId, 96)]
         public override void Percentile(String content, Int32 roll)
         {
             base.Percentile(content, roll);
