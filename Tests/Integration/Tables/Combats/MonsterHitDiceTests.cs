@@ -1,5 +1,6 @@
 ﻿using System;
 using NPCGen.Common.Races;
+using NPCGen.Tables.Interfaces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Tables.Combats
@@ -9,7 +10,7 @@ namespace NPCGen.Tests.Integration.Tables.Combats
     {
         protected override String tableName
         {
-            get { return "MonsterHitDice"; }
+            get { return TableNameConstants.Set.Adjustments.MonsterHitDice; }
         }
 
         [TestCase(RaceConstants.BaseRaces.Bugbear, 3)]

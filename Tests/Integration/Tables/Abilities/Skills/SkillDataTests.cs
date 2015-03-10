@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using NPCGen.Common.Abilities.Skills;
 using NPCGen.Common.Abilities.Stats;
+using NPCGen.Tables.Interfaces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Tables.Abilities.Skills
@@ -11,7 +11,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Skills
     {
         protected override String tableName
         {
-            get { return "SkillData"; }
+            get { return TableNameConstants.Set.Collection.SkillData; }
         }
 
         [TestCase(SkillConstants.Appraise, StatConstants.Intelligence, false)]

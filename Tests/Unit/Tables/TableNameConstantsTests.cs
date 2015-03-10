@@ -66,6 +66,7 @@ namespace NPCGen.Tests.Unit.Tables
         [TestCase(TableNameConstants.Formattable.Adjustments.CLASSFeatLevelRequirements, "{0}FeatLevelRequirements")]
         [TestCase(TableNameConstants.Formattable.Adjustments.FEATSkillAdjustments, "{0}SkillAdjustments")]
         [TestCase(TableNameConstants.Formattable.Adjustments.METARACESkillAdjustments, "{0}SkillAdjustments")]
+        [TestCase(TableNameConstants.Formattable.Adjustments.STATStatAdjustments, "{0}StatAdjustments")]
         public void Constant(String constant, String value)
         {
             Assert.That(constant, Is.EqualTo(value));

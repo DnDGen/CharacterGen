@@ -33,8 +33,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EquipmentGen.Common, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="EquipmentGen.Common">
       <HintPath>..\..\packages\EquipmentGen.2.1.1\lib\EquipmentGen.Common.dll</HintPath>
     </Reference>
     <Reference Include="EquipmentGen.Generators.Interfaces">

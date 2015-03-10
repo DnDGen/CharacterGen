@@ -84,7 +84,7 @@ namespace NPCGen.Common.Races
             public const String WoodElfId = "WoodElf";
         }
 
-        public class Metaraces
+        public static class Metaraces
         {
             public const String HalfCelestial = "Half-Celestial";
             public const String HalfDragon = "Half-Dragon";
@@ -105,6 +105,20 @@ namespace NPCGen.Common.Races
             public const String WereratId = "Wererat";
             public const String WerewolfId = "Werewolf";
             public const String NoneId = "None";
+
+            public static class Species
+            {
+                public const String Black = "Black";
+                public const String Blue = "Blue";
+                public const String Brass = "Brass";
+                public const String Bronze = "Bronze";
+                public const String Copper = "Copper";
+                public const String Green = "Green";
+                public const String Gold = "Gold";
+                public const String Red = "Red";
+                public const String Silver = "Silver";
+                public const String White = "White";
+            }
         }
     }
 }

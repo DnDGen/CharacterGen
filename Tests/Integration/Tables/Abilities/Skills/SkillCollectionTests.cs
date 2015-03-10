@@ -5,6 +5,7 @@ using Ninject;
 using NPCGen.Common.Abilities.Skills;
 using NPCGen.Common.CharacterClasses;
 using NPCGen.Mappers.Interfaces;
+using NPCGen.Tables.Interfaces;
 using NPCGen.Tests.Integration.Common;
 using NUnit.Framework;
 
@@ -22,8 +23,8 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Skills
         [SetUp]
         public void Setup()
         {
-            classSkills = Mapper.Map("ClassSkills");
-            crossClassSkills = Mapper.Map("CrossClassSkills");
+            classSkills = Mapper.Map(TableNameConstants.Set.Collection.ClassSkills);
+            crossClassSkills = Mapper.Map(TableNameConstants.Set.Collection.CrossClassSkills);
         }
 
         [TestCase(CharacterClassConstants.Barbarian)]

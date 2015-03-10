@@ -1,5 +1,6 @@
 ﻿using System;
 using NPCGen.Common.CharacterClasses;
+using NPCGen.Tables.Interfaces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Tables.CharacterClasses
@@ -9,21 +10,21 @@ namespace NPCGen.Tests.Integration.Tables.CharacterClasses
     {
         protected override String tableName
         {
-            get { return "ClassNameGroups"; }
+            get { return TableNameConstants.Set.Collection.ClassNameGroups; }
         }
 
-        [TestCase("Healers",
+        [TestCase(TableNameConstants.Set.Collection.Groups.Healers,
             CharacterClassConstants.Bard,
             CharacterClassConstants.Cleric,
             CharacterClassConstants.Druid,
             CharacterClassConstants.Paladin,
             CharacterClassConstants.Ranger)]
-        [TestCase("Mages",
+        [TestCase(TableNameConstants.Set.Collection.Groups.Mages,
             CharacterClassConstants.Bard,
             CharacterClassConstants.Ranger,
             CharacterClassConstants.Sorcerer,
             CharacterClassConstants.Wizard)]
-        [TestCase("Spellcasters",
+        [TestCase(TableNameConstants.Set.Collection.Groups.Spellcasters,
             CharacterClassConstants.Bard,
             CharacterClassConstants.Cleric,
             CharacterClassConstants.Druid,
@@ -31,22 +32,22 @@ namespace NPCGen.Tests.Integration.Tables.CharacterClasses
             CharacterClassConstants.Ranger,
             CharacterClassConstants.Wizard,
             CharacterClassConstants.Sorcerer)]
-        [TestCase("Stealth",
+        [TestCase(TableNameConstants.Set.Collection.Groups.Stealth,
             CharacterClassConstants.Bard,
             CharacterClassConstants.Rogue,
             CharacterClassConstants.Ranger)]
-        [TestCase("Warriors",
+        [TestCase(TableNameConstants.Set.Collection.Groups.Warriors,
             CharacterClassConstants.Barbarian,
             CharacterClassConstants.Fighter,
             CharacterClassConstants.Monk,
             CharacterClassConstants.Paladin,
             CharacterClassConstants.Ranger)]
-        [TestCase("Good Base Attack",
+        [TestCase(TableNameConstants.Set.Collection.Groups.GoodBaseAttack,
             CharacterClassConstants.Barbarian,
             CharacterClassConstants.Fighter,
             CharacterClassConstants.Paladin,
             CharacterClassConstants.Ranger)]
-        [TestCase("Average Base Attack",
+        [TestCase(TableNameConstants.Set.Collection.Groups.AverageBaseAttack,
             CharacterClassConstants.Bard,
             CharacterClassConstants.Cleric,
             CharacterClassConstants.Druid,

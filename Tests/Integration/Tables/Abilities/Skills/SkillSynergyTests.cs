@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using NPCGen.Common.Abilities.Skills;
+using NPCGen.Tables.Interfaces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Tables.Abilities.Skills
@@ -10,7 +10,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Skills
     {
         protected override String tableName
         {
-            get { return "SkillSynergy"; }
+            get { return TableNameConstants.Set.Collection.SkillSynergy; }
         }
 
         [TestCase(SkillConstants.Bluff,

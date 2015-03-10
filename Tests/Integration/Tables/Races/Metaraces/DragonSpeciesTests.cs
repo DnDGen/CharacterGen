@@ -1,4 +1,6 @@
 ﻿using System;
+using NPCGen.Common.Races;
+using NPCGen.Tables.Interfaces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Tables.Races.Metaraces
@@ -8,35 +10,35 @@ namespace NPCGen.Tests.Integration.Tables.Races.Metaraces
     {
         protected override String tableName
         {
-            get { return "DragonSpecies"; }
+            get { return TableNameConstants.Set.Collection.DragonSpecies; }
         }
 
         [TestCase("Lawful Good",
-            "Bronze",
-            "Gold",
-            "Silver")]
+            RaceConstants.Metaraces.Species.Bronze,
+            RaceConstants.Metaraces.Species.Gold,
+            RaceConstants.Metaraces.Species.Silver)]
         [TestCase("Neutral Good",
-            "Bronze",
-            "Gold",
-            "Silver",
-            "Brass",
-            "Copper")]
+            RaceConstants.Metaraces.Species.Bronze,
+            RaceConstants.Metaraces.Species.Gold,
+            RaceConstants.Metaraces.Species.Silver,
+            RaceConstants.Metaraces.Species.Brass,
+            RaceConstants.Metaraces.Species.Copper)]
         [TestCase("Chaotic Good",
-            "Brass",
-            "Copper")]
+            RaceConstants.Metaraces.Species.Brass,
+            RaceConstants.Metaraces.Species.Copper)]
         [TestCase("Lawful Evil",
-            "Blue",
-            "Green")]
+            RaceConstants.Metaraces.Species.Blue,
+            RaceConstants.Metaraces.Species.Green)]
         [TestCase("Neutral Evil",
-            "Blue",
-            "Green",
-            "Black",
-            "Red",
-            "White")]
+            RaceConstants.Metaraces.Species.Blue,
+            RaceConstants.Metaraces.Species.Green,
+            RaceConstants.Metaraces.Species.Black,
+            RaceConstants.Metaraces.Species.Red,
+            RaceConstants.Metaraces.Species.White)]
         [TestCase("Chaotic Evil",
-            "Black",
-            "Red",
-            "White")]
+            RaceConstants.Metaraces.Species.Black,
+            RaceConstants.Metaraces.Species.Red,
+            RaceConstants.Metaraces.Species.White)]
         public override void DistinctCollection(String name, params String[] collection)
         {
             base.DistinctCollection(name, collection);

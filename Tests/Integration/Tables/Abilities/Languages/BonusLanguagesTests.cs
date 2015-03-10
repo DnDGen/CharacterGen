@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using NPCGen.Common.Abilities;
 using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Races;
+using NPCGen.Tables.Interfaces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Tables.Abilities.Languages
@@ -13,30 +13,30 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Languages
     {
         protected override String tableName
         {
-            get { return "BonusLanguages"; }
+            get { return TableNameConstants.Set.Collection.BonusLanguages; }
         }
 
-        [TestCase(RaceConstants.BaseRaces.Aasimar,
+        [TestCase(RaceConstants.BaseRaces.AasimarId,
             LanguageConstants.Dwarven,
             LanguageConstants.Elven,
             LanguageConstants.Gnome,
             LanguageConstants.Draconic,
             LanguageConstants.Halfling,
             LanguageConstants.Sylvan)]
-        [TestCase(RaceConstants.BaseRaces.Bugbear,
+        [TestCase(RaceConstants.BaseRaces.BugbearId,
             LanguageConstants.Giant,
             LanguageConstants.Elven,
             LanguageConstants.Gnoll,
             LanguageConstants.Draconic,
             LanguageConstants.Orc)]
-        [TestCase(RaceConstants.BaseRaces.Derro,
+        [TestCase(RaceConstants.BaseRaces.DerroId,
             LanguageConstants.Goblin,
             LanguageConstants.Gnome,
             LanguageConstants.Giant,
             LanguageConstants.Orc,
             LanguageConstants.Terran,
             LanguageConstants.Undercommon)]
-        [TestCase(RaceConstants.BaseRaces.Doppelganger,
+        [TestCase(RaceConstants.BaseRaces.DoppelgangerId,
             LanguageConstants.Auran,
             LanguageConstants.Dwarven,
             LanguageConstants.Elven,
@@ -44,159 +44,159 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Languages
             LanguageConstants.Giant,
             LanguageConstants.Halfling,
             LanguageConstants.Terran)]
-        [TestCase(RaceConstants.BaseRaces.Drow,
+        [TestCase(RaceConstants.BaseRaces.DrowId,
             LanguageConstants.Abyssal,
             LanguageConstants.Aquan,
             LanguageConstants.Draconic,
             LanguageConstants.Gnome,
             LanguageConstants.Goblin)]
-        [TestCase(RaceConstants.BaseRaces.DuergarDwarf,
+        [TestCase(RaceConstants.BaseRaces.DuergarDwarfId,
             LanguageConstants.Giant,
             LanguageConstants.Goblin,
             LanguageConstants.Orc,
             LanguageConstants.Draconic,
             LanguageConstants.Terran)]
-        [TestCase(RaceConstants.BaseRaces.DeepDwarf,
+        [TestCase(RaceConstants.BaseRaces.DeepDwarfId,
             LanguageConstants.Goblin,
             LanguageConstants.Gnome,
             LanguageConstants.Giant,
             LanguageConstants.Orc,
             LanguageConstants.Terran,
             LanguageConstants.Undercommon)]
-        [TestCase(RaceConstants.BaseRaces.HillDwarf,
+        [TestCase(RaceConstants.BaseRaces.HillDwarfId,
             LanguageConstants.Goblin,
             LanguageConstants.Gnome,
             LanguageConstants.Giant,
             LanguageConstants.Orc,
             LanguageConstants.Terran,
             LanguageConstants.Undercommon)]
-        [TestCase(RaceConstants.BaseRaces.MountainDwarf,
+        [TestCase(RaceConstants.BaseRaces.MountainDwarfId,
             LanguageConstants.Goblin,
             LanguageConstants.Gnome,
             LanguageConstants.Giant,
             LanguageConstants.Orc,
             LanguageConstants.Terran,
             LanguageConstants.Undercommon)]
-        [TestCase(RaceConstants.BaseRaces.GrayElf,
+        [TestCase(RaceConstants.BaseRaces.GrayElfId,
             LanguageConstants.Draconic,
             LanguageConstants.Gnoll,
             LanguageConstants.Goblin,
             LanguageConstants.Orc,
             LanguageConstants.Gnome,
             LanguageConstants.Sylvan)]
-        [TestCase(RaceConstants.BaseRaces.HighElf,
+        [TestCase(RaceConstants.BaseRaces.HighElfId,
             LanguageConstants.Draconic,
             LanguageConstants.Gnoll,
             LanguageConstants.Goblin,
             LanguageConstants.Orc,
             LanguageConstants.Gnome,
             LanguageConstants.Sylvan)]
-        [TestCase(RaceConstants.BaseRaces.WildElf,
+        [TestCase(RaceConstants.BaseRaces.WildElfId,
             LanguageConstants.Draconic,
             LanguageConstants.Gnoll,
             LanguageConstants.Goblin,
             LanguageConstants.Orc,
             LanguageConstants.Gnome,
             LanguageConstants.Sylvan)]
-        [TestCase(RaceConstants.BaseRaces.WoodElf,
+        [TestCase(RaceConstants.BaseRaces.WoodElfId,
             LanguageConstants.Draconic,
             LanguageConstants.Gnoll,
             LanguageConstants.Goblin,
             LanguageConstants.Orc,
             LanguageConstants.Gnome,
             LanguageConstants.Sylvan)]
-        [TestCase(RaceConstants.BaseRaces.Gnoll,
+        [TestCase(RaceConstants.BaseRaces.GnollId,
             LanguageConstants.Common,
             LanguageConstants.Goblin,
             LanguageConstants.Orc,
             LanguageConstants.Draconic,
             LanguageConstants.Elven)]
-        [TestCase(RaceConstants.BaseRaces.ForestGnome,
+        [TestCase(RaceConstants.BaseRaces.ForestGnomeId,
             LanguageConstants.Dwarven,
             LanguageConstants.Elven,
             LanguageConstants.Draconic,
             LanguageConstants.Goblin,
             LanguageConstants.Giant)]
-        [TestCase(RaceConstants.BaseRaces.RockGnome,
+        [TestCase(RaceConstants.BaseRaces.RockGnomeId,
             LanguageConstants.Dwarven,
             LanguageConstants.Elven,
             LanguageConstants.Draconic,
             LanguageConstants.Goblin,
             LanguageConstants.Giant,
             LanguageConstants.Orc)]
-        [TestCase(RaceConstants.BaseRaces.Svirfneblin,
+        [TestCase(RaceConstants.BaseRaces.SvirfneblinId,
             LanguageConstants.Dwarven,
             LanguageConstants.Elven,
             LanguageConstants.Terran,
             LanguageConstants.Goblin,
             LanguageConstants.Giant,
             LanguageConstants.Orc)]
-        [TestCase(RaceConstants.BaseRaces.Goblin,
+        [TestCase(RaceConstants.BaseRaces.GoblinId,
             LanguageConstants.Draconic,
             LanguageConstants.Elven,
             LanguageConstants.Giant,
             LanguageConstants.Gnoll,
             LanguageConstants.Orc)]
-        [TestCase(RaceConstants.BaseRaces.HalfOrc,
+        [TestCase(RaceConstants.BaseRaces.HalfOrcId,
             LanguageConstants.Abyssal,
             LanguageConstants.Goblin,
             LanguageConstants.Giant,
             LanguageConstants.Gnoll,
             LanguageConstants.Draconic)]
-        [TestCase(RaceConstants.BaseRaces.DeepHalfling,
+        [TestCase(RaceConstants.BaseRaces.DeepHalflingId,
             LanguageConstants.Dwarven,
             LanguageConstants.Elven,
             LanguageConstants.Gnome,
             LanguageConstants.Goblin,
             LanguageConstants.Orc,
             LanguageConstants.Undercommon)]
-        [TestCase(RaceConstants.BaseRaces.LightfootHalfling,
+        [TestCase(RaceConstants.BaseRaces.LightfootHalflingId,
             LanguageConstants.Dwarven,
             LanguageConstants.Elven,
             LanguageConstants.Gnome,
             LanguageConstants.Goblin,
             LanguageConstants.Orc)]
-        [TestCase(RaceConstants.BaseRaces.TallfellowHalfling,
+        [TestCase(RaceConstants.BaseRaces.TallfellowHalflingId,
             LanguageConstants.Dwarven,
             LanguageConstants.Elven,
             LanguageConstants.Gnome,
             LanguageConstants.Goblin,
             LanguageConstants.Orc)]
-        [TestCase(RaceConstants.BaseRaces.Hobgoblin,
+        [TestCase(RaceConstants.BaseRaces.HobgoblinId,
             LanguageConstants.Dwarven,
             LanguageConstants.Infernal,
             LanguageConstants.Orc,
             LanguageConstants.Draconic,
             LanguageConstants.Giant)]
-        [TestCase(RaceConstants.BaseRaces.Kobold,
+        [TestCase(RaceConstants.BaseRaces.KoboldId,
             LanguageConstants.Common,
             LanguageConstants.Undercommon)]
-        [TestCase(RaceConstants.BaseRaces.Lizardfolk,
+        [TestCase(RaceConstants.BaseRaces.LizardfolkId,
             LanguageConstants.Aquan,
             LanguageConstants.Goblin,
             LanguageConstants.Orc,
             LanguageConstants.Gnoll)]
-        [TestCase(RaceConstants.BaseRaces.Minotaur,
+        [TestCase(RaceConstants.BaseRaces.MinotaurId,
             LanguageConstants.Terran,
             LanguageConstants.Goblin,
             LanguageConstants.Orc)]
-        [TestCase(RaceConstants.BaseRaces.Ogre,
+        [TestCase(RaceConstants.BaseRaces.OgreId,
             LanguageConstants.Terran,
             LanguageConstants.Goblin,
             LanguageConstants.Orc,
             LanguageConstants.Dwarven)]
-        [TestCase(RaceConstants.BaseRaces.OgreMage,
+        [TestCase(RaceConstants.BaseRaces.OgreMageId,
             LanguageConstants.Infernal,
             LanguageConstants.Goblin,
             LanguageConstants.Orc,
             LanguageConstants.Dwarven)]
-        [TestCase(RaceConstants.BaseRaces.Orc,
+        [TestCase(RaceConstants.BaseRaces.OrcId,
             LanguageConstants.Giant,
             LanguageConstants.Goblin,
             LanguageConstants.Gnoll,
             LanguageConstants.Dwarven,
             LanguageConstants.Undercommon)]
-        [TestCase(RaceConstants.BaseRaces.Tiefling,
+        [TestCase(RaceConstants.BaseRaces.TieflingId,
             LanguageConstants.Draconic,
             LanguageConstants.Dwarven,
             LanguageConstants.Elven,
@@ -204,7 +204,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Languages
             LanguageConstants.Goblin,
             LanguageConstants.Halfling,
             LanguageConstants.Orc)]
-        [TestCase(RaceConstants.BaseRaces.Troglodyte,
+        [TestCase(RaceConstants.BaseRaces.TroglodyteId,
             LanguageConstants.Common,
             LanguageConstants.Goblin,
             LanguageConstants.Giant,
@@ -230,9 +230,9 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Languages
             base.DistinctCollection(name, collection);
         }
 
-        [TestCase(RaceConstants.BaseRaces.HalfElf)]
-        [TestCase(RaceConstants.BaseRaces.Human)]
-        [TestCase(RaceConstants.BaseRaces.MindFlayer)]
+        [TestCase(RaceConstants.BaseRaces.HalfElfId)]
+        [TestCase(RaceConstants.BaseRaces.HumanId)]
+        [TestCase(RaceConstants.BaseRaces.MindFlayerId)]
         public void AllLanguagesExceptDruidicAreBonusLanguages(String name)
         {
             var allLanguages = LanguageConstants.GetLanguages();

@@ -96,6 +96,16 @@ namespace NPCGen.Tests.Unit.Common.Races
         [TestCase(RaceConstants.Sizes.Large, "Large")]
         [TestCase(RaceConstants.Sizes.Medium, "Medium")]
         [TestCase(RaceConstants.Sizes.Small, "Small")]
+        [TestCase(RaceConstants.Metaraces.Species.Bronze, "Bronze")]
+        [TestCase(RaceConstants.Metaraces.Species.Black, "Black")]
+        [TestCase(RaceConstants.Metaraces.Species.Blue, "Blue")]
+        [TestCase(RaceConstants.Metaraces.Species.Brass, "Brass")]
+        [TestCase(RaceConstants.Metaraces.Species.Copper, "Copper")]
+        [TestCase(RaceConstants.Metaraces.Species.Gold, "Gold")]
+        [TestCase(RaceConstants.Metaraces.Species.Green, "Green")]
+        [TestCase(RaceConstants.Metaraces.Species.Red, "Red")]
+        [TestCase(RaceConstants.Metaraces.Species.Silver, "Silver")]
+        [TestCase(RaceConstants.Metaraces.Species.White, "White")]
         public void Constant(String constant, String value)
         {
             Assert.That(constant, Is.EqualTo(value));

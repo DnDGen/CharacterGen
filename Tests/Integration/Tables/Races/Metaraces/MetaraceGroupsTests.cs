@@ -1,6 +1,7 @@
 ﻿using System;
 using NPCGen.Common.Alignments;
 using NPCGen.Common.Races;
+using NPCGen.Tables.Interfaces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Tables.Races.Metaraces
@@ -10,7 +11,7 @@ namespace NPCGen.Tests.Integration.Tables.Races.Metaraces
     {
         protected override String tableName
         {
-            get { return "MetaraceGroups"; }
+            get { return TableNameConstants.Set.Collection.MetaraceGroups; }
         }
 
         [TestCase(AlignmentConstants.Evil,
@@ -25,11 +26,11 @@ namespace NPCGen.Tests.Integration.Tables.Races.Metaraces
         [TestCase(AlignmentConstants.Neutral,
             RaceConstants.Metaraces.Wereboar,
             RaceConstants.Metaraces.Weretiger)]
-        [TestCase("Genetic",
+        [TestCase(TableNameConstants.Set.Collection.Groups.Genetic,
             RaceConstants.Metaraces.HalfDragon,
             RaceConstants.Metaraces.HalfFiend,
             RaceConstants.Metaraces.HalfCelestial)]
-        [TestCase("Lycanthrope",
+        [TestCase(TableNameConstants.Set.Collection.Groups.Lycanthrope,
             RaceConstants.Metaraces.Werebear,
             RaceConstants.Metaraces.Wereboar,
             RaceConstants.Metaraces.Weretiger,

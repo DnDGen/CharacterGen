@@ -1,5 +1,7 @@
 ﻿using System;
 using NPCGen.Common.Abilities.Skills;
+using NPCGen.Common.Races;
+using NPCGen.Tables.Interfaces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Tables.Abilities.Skills.RacialAdjustments
@@ -9,7 +11,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Skills.RacialAdjustments
     {
         protected override String tableName
         {
-            get { return "DrowSkillAdjustments"; }
+            get { return String.Format(TableNameConstants.Formattable.Adjustments.BASERACESkillAdjustments, RaceConstants.BaseRaces.DrowId); }
         }
 
         [TestCase(SkillConstants.Listen, 2)]

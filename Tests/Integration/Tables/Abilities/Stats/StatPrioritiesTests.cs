@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using NPCGen.Common.Abilities.Stats;
 using NPCGen.Common.CharacterClasses;
+using NPCGen.Tables.Interfaces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Tables.Abilities.Stats
@@ -11,7 +11,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Stats
     {
         protected override String tableName
         {
-            get { return "StatPriorities"; }
+            get { return TableNameConstants.Set.Collection.StatPriorities; }
         }
 
         [TestCase(CharacterClassConstants.Barbarian, StatConstants.Strength, StatConstants.Dexterity)]
