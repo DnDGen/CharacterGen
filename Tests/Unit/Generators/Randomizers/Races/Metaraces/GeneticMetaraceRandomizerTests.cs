@@ -38,7 +38,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         }
 
         [TestCase("genetic metarace")]
-        [TestCase(RaceConstants.Metaraces.None)]
+        [TestCase(RaceConstants.Metaraces.NoneId)]
         public void Allowed(String metarace)
         {
             var metaraces = randomizer.GetAllPossibleIds(String.Empty, characterClass);

@@ -2,7 +2,7 @@
 
 <items>
     <object>
-        <name></name>
+        <name>None</name>
     </object>
     <object>
         <name>Aasimar</name>
@@ -15,22 +15,22 @@
         <item>Goblin</item>
     </object>
     <object>
-        <name>Deep Dwarf</name>
+        <name>DeepDwarf</name>
         <item>Common</item>
         <item>Dwarven</item>
     </object>
     <object>
-        <name>Hill Dwarf</name>
+        <name>HillDwarf</name>
         <item>Common</item>
         <item>Dwarven</item>
     </object>
     <object>
-        <name>Mountain Dwarf</name>
+        <name>MountainDwarf</name>
         <item>Common</item>
         <item>Dwarven</item>
     </object>
     <object>
-        <name>Deep Halfling</name>
+        <name>DeepHalfling</name>
         <item>Common</item>
         <item>Halfling</item>
     </object>
@@ -50,13 +50,13 @@
         <item>Undercommon</item>
     </object>
     <object>
-        <name>Duergar Dwarf</name>
+        <name>DuergarDwarf</name>
         <item>Common</item>
         <item>Dwarven</item>
         <item>Undercommon</item>
     </object>
     <object>
-        <name>Forest Gnome</name>
+        <name>ForestGnome</name>
         <item>Common</item>
         <item>Elven</item>
         <item>Gnome</item>
@@ -77,44 +77,44 @@
         <item>Goblin</item>
     </object>
     <object>
-        <name>Gray Elf</name>
+        <name>GrayElf</name>
         <item>Common</item>
         <item>Elven</item>
     </object>
     <object>
-        <name>High Elf</name>
+        <name>HighElf</name>
         <item>Common</item>
         <item>Elven</item>
     </object>
     <object>
-        <name>Wild Elf</name>
+        <name>WildElf</name>
         <item>Common</item>
         <item>Elven</item>
     </object>
     <object>
-        <name>Wood Elf</name>
+        <name>WoodElf</name>
         <item>Common</item>
         <item>Elven</item>
     </object>
     <object>
-        <name>Half-Elf</name>
+        <name>HalfElf</name>
         <item>Common</item>
         <item>Elven</item>
     </object>
     <object>
-        <name>Half-Fiend</name>
+        <name>HalfFiend</name>
         <item>Infernal</item>
     </object>
     <object>
-        <name>Half-Celestial</name>
+        <name>HalfCelestial</name>
         <item>Celestial</item>
     </object>
     <object>
-        <name>Half-Dragon</name>
+        <name>HalfDragon</name>
         <item>Draconic</item>
     </object>
     <object>
-        <name>Half-Orc</name>
+        <name>HalfOrc</name>
         <item>Common</item>
         <item>Orc</item>
     </object>
@@ -132,17 +132,17 @@
         <item>Draconic</item>
     </object>
     <object>
-        <name>Lightfoot Halfling</name>
+        <name>LightfootHalfling</name>
         <item>Common</item>
         <item>Halfling</item>
     </object>
     <object>
-        <name>Tallfellow Halfling</name>
+        <name>TallfellowHalfling</name>
         <item>Common</item>
         <item>Halfling</item>
     </object>
     <object>
-        <name>Mind Flayer</name>
+        <name>MindFlayer</name>
         <item>Common</item>
         <item>Undercommon</item>
     </object>
@@ -157,12 +157,12 @@
         <item>Giant</item>
     </object>
     <object>
-        <name>Ogre Mage</name>
+        <name>OgreMage</name>
         <item>Common</item>
         <item>Giant</item>
     </object>
     <object>
-        <name>Rock Gnome</name>
+        <name>RockGnome</name>
         <item>Common</item>
         <item>Gnome</item>
     </object>

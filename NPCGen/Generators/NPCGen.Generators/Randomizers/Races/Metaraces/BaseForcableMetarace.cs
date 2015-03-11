@@ -49,20 +49,20 @@ namespace NPCGen.Generators.Randomizers.Races.Metaraces
             return results.Where(r => RaceIsAllowed(r, characterClass.Level));
         }
 
-        private Boolean RaceIsAllowed(String metarace, Int32 level)
+        private Boolean RaceIsAllowed(String metaraceId, Int32 level)
         {
-            if (String.IsNullOrEmpty(metarace))
+            if (metaraceId == RaceConstants.Metaraces.NoneId)
                 return !ForceMetarace;
 
-            return LevelAdjustmentIsAllowed(metarace, level) && MetaraceIsAllowed(metarace);
+            return LevelAdjustmentIsAllowed(metaraceId, level) && MetaraceIsAllowed(metaraceId);
         }
 
-        private Boolean LevelAdjustmentIsAllowed(String metarace, Int32 level)
+        private Boolean LevelAdjustmentIsAllowed(String metaraceId, Int32 level)
         {
             var adjustments = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments);
-            return adjustments[metarace] < level;
+            return adjustments[metaraceId] < level;
         }
 
-        protected abstract Boolean MetaraceIsAllowed(String metarace);
+        protected abstract Boolean MetaraceIsAllowed(String metaraceId);
     }
 }
