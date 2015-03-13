@@ -1,20 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <percentile>
-  <object><lower>1</lower><content>Deep Dwarf</content><upper>1</upper></object>
-  <object><lower>2</lower><content>High Elf</content><upper>2</upper></object>
-  <object><lower>3</lower><content>Wood Elf</content><upper>3</upper></object>
-  <object><lower>4</lower><content>Half-Elf</content><upper>18</upper></object>
-  <object><lower>19</lower><content>Lightfoot Halfling</content><upper>38</upper></object>
-  <object><lower>39</lower><content>Deep Halfling</content><upper>39</upper></object>
+  <object><lower>1</lower><content>DeepDwarf</content><upper>1</upper></object>
+  <object><lower>2</lower><content>HighElf</content><upper>2</upper></object>
+  <object><lower>3</lower><content>WoodElf</content><upper>3</upper></object>
+  <object><lower>4</lower><content>HalfElf</content><upper>18</upper></object>
+  <object><lower>19</lower><content>LightfootHalfling</content><upper>38</upper></object>
+  <object><lower>39</lower><content>DeepHalfling</content><upper>39</upper></object>
   <object>
     <lower>40</lower>
-    <content>Tallfellow Halfling</content>
+    <content>TallfellowHalfling</content>
     <upper>40</upper>
   </object>
   <object>
     <lower>41</lower>
-    <content>Half-Orc</content>
+    <content>HalfOrc</content>
     <upper>50</upper>
   </object>
   <object>
@@ -49,7 +49,7 @@
   </object>
   <object>
     <lower>94</lower>
-    <content>Mind Flayer</content>
+    <content>MindFlayer</content>
     <upper>94</upper>
   </object>
     <object>

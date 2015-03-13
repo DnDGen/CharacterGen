@@ -12,7 +12,7 @@ namespace NPCGen.Tests.Integration.Tables.Races.Metaraces.Evil
     {
         protected override String tableName
         {
-            get { return String.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSMetaraces, AlignmentConstants.Evil, CharacterClassConstants.Monk); }
+            get { return String.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSMetaraces, AlignmentConstants.Evil, CharacterClassConstants.Ranger); }
         }
 
         [Test]
@@ -21,8 +21,8 @@ namespace NPCGen.Tests.Integration.Tables.Races.Metaraces.Evil
             AssertTableIsComplete();
         }
 
-        [TestCase(EmptyContent, 1, 95)]
-        [TestCase(RaceConstants.Metaraces.Werewolf, 97, 98)]
+        [TestCase(RaceConstants.Metaraces.NoneId, 1, 95)]
+        [TestCase(RaceConstants.Metaraces.WerewolfId, 97, 98)]
         public override void Percentile(String content, Int32 lower, Int32 upper)
         {
             base.Percentile(content, lower, upper);

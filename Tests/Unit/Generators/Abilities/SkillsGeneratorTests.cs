@@ -772,7 +772,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         public void MonstersDoNotGetMoreSkillPointsAtFirstLevel(Int32 level)
         {
             race.BaseRace.Id = "baserace";
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.Names, TableNameConstants.Set.Collection.Groups.Monsters))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, TableNameConstants.Set.Collection.Groups.Monsters))
                 .Returns(new[] { "baserace", "otherbaserace" });
 
             characterClass.Level = level;

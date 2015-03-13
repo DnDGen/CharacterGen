@@ -17,11 +17,10 @@ namespace NPCGen.Generators.Randomizers.Races.BaseRaces
             this.collectionsSelector = collectionsSelector;
         }
 
-        protected override Boolean BaseRaceIsAllowed(String baseRace)
+        protected override Boolean BaseRaceIsAllowed(String baseRaceId)
         {
-            var baseRaces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.Names,
-                AlignmentConstants.Evil);
-            return baseRaces.Contains(baseRace);
+            var baseRaceIds = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, AlignmentConstants.Evil);
+            return baseRaceIds.Contains(baseRaceId);
         }
     }
 }

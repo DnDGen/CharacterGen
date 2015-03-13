@@ -19,7 +19,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
                 return new[]
                 {
                     "lycanthrope metarace",
-                    RaceConstants.Metaraces.None
+                    RaceConstants.Metaraces.NoneId
                 };
             }
         }

@@ -3,32 +3,32 @@
 <percentile>
   <object>
     <lower>1</lower>
-    <content>Wild Elf</content>
+    <content>WildElf</content>
     <upper>1</upper>
   </object>
   <object>
     <lower>2</lower>
-    <content>Wood Elf</content>
+    <content>WoodElf</content>
     <upper>3</upper>
   </object>
   <object>
     <lower>4</lower>
-    <content>Half-Elf</content>
+    <content>HalfElf</content>
     <upper>4</upper>
   </object>
   <object>
     <lower>5</lower>
-    <content>Lightfoot Halfling</content>
+    <content>LightfootHalfling</content>
     <upper>5</upper>
   </object>
   <object>
     <lower>6</lower>
-    <content>Deep Halfling</content>
+    <content>DeepHalfling</content>
     <upper>6</upper>
   </object>
   <object>
     <lower>7</lower>
-    <content>Half-Orc</content>
+    <content>HalfOrc</content>
     <upper>29</upper>
   </object>
   <object>

@@ -21,7 +21,7 @@ namespace NPCGen.Tests.Integration.Tables.Races.Metaraces.Evil
             AssertTableIsComplete();
         }
 
-        [TestCase(EmptyContent, 1, 94)]
+        [TestCase(RaceConstants.Metaraces.NoneId, 1, 94)]
         [TestCase(RaceConstants.Metaraces.WerewolfId, 95, 96)]
         [TestCase(RaceConstants.Metaraces.HalfFiendId, 97, 98)]
         [TestCase(RaceConstants.Metaraces.HalfDragonId, 99, 100)]

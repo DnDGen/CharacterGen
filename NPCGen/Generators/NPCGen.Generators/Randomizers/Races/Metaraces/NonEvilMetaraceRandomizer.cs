@@ -19,12 +19,9 @@ namespace NPCGen.Generators.Randomizers.Races.Metaraces
 
         protected override Boolean MetaraceIsAllowed(String metarace)
         {
-            var evilMetaraces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups,
-                AlignmentConstants.Evil);
-            var neutralMetaraces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups,
-                AlignmentConstants.Neutral);
-            var goodMetaraces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups,
-                AlignmentConstants.Good);
+            var evilMetaraces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, AlignmentConstants.Evil);
+            var neutralMetaraces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, AlignmentConstants.Neutral);
+            var goodMetaraces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, AlignmentConstants.Good);
             var forbiddenMetaraces = evilMetaraces.Except(neutralMetaraces).Except(goodMetaraces);
 
             return !forbiddenMetaraces.Contains(metarace);

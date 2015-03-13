@@ -26,7 +26,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
                     "not good metarace",
                     "not neutral metarace",
                     "not evil metarace",
-                    RaceConstants.Metaraces.None
+                    RaceConstants.Metaraces.NoneId
                 };
             }
         }

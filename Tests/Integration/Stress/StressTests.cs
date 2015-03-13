@@ -10,6 +10,7 @@ using NPCGen.Generators.Interfaces.Randomizers.Alignments;
 using NPCGen.Generators.Interfaces.Randomizers.CharacterClasses;
 using NPCGen.Generators.Interfaces.Randomizers.Races;
 using NPCGen.Generators.Interfaces.Verifiers;
+using NPCGen.Generators.Interfaces.Verifiers.Exceptions;
 using NPCGen.Tests.Integration.Common;
 using NUnit.Framework;
 
@@ -85,6 +86,9 @@ namespace NPCGen.Tests.Integration.Stress
         protected Alignment GetNewAlignment()
         {
             var alignment = new Alignment();
+
+            if (!RandomizerVerifier.VerifyCompatibility(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer))
+                throw new IncompatibleRandomizersException();
 
             do alignment = AlignmentGenerator.GenerateWith(AlignmentRandomizer);
             while (!RandomizerVerifier.VerifyAlignmentCompatibility(alignment, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,

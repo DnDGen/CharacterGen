@@ -19,23 +19,23 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
             {
                 return new[]
                 {
-                    RaceConstants.BaseRaces.Doppelganger,
-                    RaceConstants.BaseRaces.Lizardfolk,
-                    RaceConstants.BaseRaces.DeepDwarf,
-                    RaceConstants.BaseRaces.DeepHalfling,
-                    RaceConstants.BaseRaces.ForestGnome,
-                    RaceConstants.BaseRaces.GrayElf,
-                    RaceConstants.BaseRaces.HalfElf,
-                    RaceConstants.BaseRaces.HalfOrc,
-                    RaceConstants.BaseRaces.HighElf,
-                    RaceConstants.BaseRaces.HillDwarf,
-                    RaceConstants.BaseRaces.Human,
-                    RaceConstants.BaseRaces.LightfootHalfling,
-                    RaceConstants.BaseRaces.MountainDwarf,
-                    RaceConstants.BaseRaces.RockGnome,
-                    RaceConstants.BaseRaces.TallfellowHalfling,
-                    RaceConstants.BaseRaces.WildElf,
-                    RaceConstants.BaseRaces.WoodElf
+                    RaceConstants.BaseRaces.DoppelgangerId,
+                    RaceConstants.BaseRaces.LizardfolkId,
+                    RaceConstants.BaseRaces.DeepDwarfId,
+                    RaceConstants.BaseRaces.DeepHalflingId,
+                    RaceConstants.BaseRaces.ForestGnomeId,
+                    RaceConstants.BaseRaces.GrayElfId,
+                    RaceConstants.BaseRaces.HalfElfId,
+                    RaceConstants.BaseRaces.HalfOrcId,
+                    RaceConstants.BaseRaces.HighElfId,
+                    RaceConstants.BaseRaces.HillDwarfId,
+                    RaceConstants.BaseRaces.HumanId,
+                    RaceConstants.BaseRaces.LightfootHalflingId,
+                    RaceConstants.BaseRaces.MountainDwarfId,
+                    RaceConstants.BaseRaces.RockGnomeId,
+                    RaceConstants.BaseRaces.TallfellowHalflingId,
+                    RaceConstants.BaseRaces.WildElfId,
+                    RaceConstants.BaseRaces.WoodElfId
                 };
             }
         }

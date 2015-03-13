@@ -1,30 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <percentile>
-  <object><lower>1</lower><content>High Elf</content><upper>2</upper></object>
+  <object><lower>1</lower><content>HighElf</content><upper>2</upper></object>
   <object>
     <lower>3</lower>
-    <content>Wood Elf</content>
+    <content>WoodElf</content>
     <upper>3</upper>
   </object>
   <object>
     <lower>4</lower>
-    <content>Half-Elf</content>
+    <content>HalfElf</content>
     <upper>13</upper>
   </object>
   <object>
     <lower>14</lower>
-    <content>Lightfoot Halfling</content>
+    <content>LightfootHalfling</content>
     <upper>14</upper>
   </object>
   <object>
     <lower>15</lower>
-    <content>Deep Halfling</content>
+    <content>DeepHalfling</content>
     <upper>15</upper>
   </object>
   <object>
     <lower>16</lower>
-    <content>Half-Orc</content>
+    <content>HalfOrc</content>
     <upper>25</upper>
   </object>
   <object>

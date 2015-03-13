@@ -3,8 +3,8 @@
 <items>
     <object>
         <name>Evil</name>
-        <item>Half-Dragon</item>
-        <item>Half-Fiend</item>
+        <item>HalfDragon</item>
+        <item>HalfFiend</item>
         <item>Wererat</item>
         <item>Werewolf</item>
     </object>
@@ -15,15 +15,15 @@
     </object>
     <object>
         <name>Good</name>
-        <item>Half-Dragon</item>
-        <item>Half-Celestial</item>
+        <item>HalfDragon</item>
+        <item>HalfCelestial</item>
         <item>Werebear</item>
     </object>
     <object>
         <name>Genetic</name>
-        <item>Half-Dragon</item>
-        <item>Half-Celestial</item>
-        <item>Half-Fiend</item>
+        <item>HalfDragon</item>
+        <item>HalfCelestial</item>
+        <item>HalfFiend</item>
     </object>
     <object>
         <name>Lycanthrope</name>

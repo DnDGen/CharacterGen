@@ -13,16 +13,16 @@ namespace NPCGen.Tests.Integration.Tables.Combats
             get { return TableNameConstants.Set.Adjustments.MonsterHitDice; }
         }
 
-        [TestCase(RaceConstants.BaseRaces.Bugbear, 3)]
-        [TestCase(RaceConstants.BaseRaces.Derro, 3)]
-        [TestCase(RaceConstants.BaseRaces.Doppelganger, 4)]
-        [TestCase(RaceConstants.BaseRaces.Gnoll, 2)]
-        [TestCase(RaceConstants.BaseRaces.Lizardfolk, 2)]
-        [TestCase(RaceConstants.BaseRaces.MindFlayer, 8)]
-        [TestCase(RaceConstants.BaseRaces.Minotaur, 6)]
-        [TestCase(RaceConstants.BaseRaces.Ogre, 4)]
-        [TestCase(RaceConstants.BaseRaces.OgreMage, 5)]
-        [TestCase(RaceConstants.BaseRaces.Troglodyte, 2)]
+        [TestCase(RaceConstants.BaseRaces.BugbearId, 3)]
+        [TestCase(RaceConstants.BaseRaces.DerroId, 3)]
+        [TestCase(RaceConstants.BaseRaces.DoppelgangerId, 4)]
+        [TestCase(RaceConstants.BaseRaces.GnollId, 2)]
+        [TestCase(RaceConstants.BaseRaces.LizardfolkId, 2)]
+        [TestCase(RaceConstants.BaseRaces.MindFlayerId, 8)]
+        [TestCase(RaceConstants.BaseRaces.MinotaurId, 6)]
+        [TestCase(RaceConstants.BaseRaces.OgreId, 4)]
+        [TestCase(RaceConstants.BaseRaces.OgreMageId, 5)]
+        [TestCase(RaceConstants.BaseRaces.TroglodyteId, 2)]
         public override void Adjustment(String name, Int32 adjustment)
         {
             base.Adjustment(name, adjustment);

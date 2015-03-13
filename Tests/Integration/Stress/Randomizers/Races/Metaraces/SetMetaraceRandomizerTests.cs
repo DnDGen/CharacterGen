@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Ninject;
 using NPCGen.Generators.Interfaces.Randomizers.Races;
 using NUnit.Framework;
@@ -21,12 +22,16 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
 
         protected override void MakeAssertions()
         {
-            SetMetaraceRandomizer.SetMetaraceId = Random.Next().ToString();
             var alignment = GetNewAlignment();
             var characterClass = GetNewCharacterClass(alignment);
 
+            var metaraceIds = BaseRaceRandomizer.GetAllPossibleIds(alignment.Goodness, characterClass);
+            var metaraceCount = metaraceIds.Count();
+            var randomIndex = Random.Next(metaraceCount);
+            SetMetaraceRandomizer.SetMetaraceId = metaraceIds.ElementAt(randomIndex);
+
             var metarace = SetMetaraceRandomizer.Randomize(alignment.Goodness, characterClass);
-            Assert.That(metarace, Is.EqualTo(SetMetaraceRandomizer.SetMetaraceId));
+            Assert.That(metarace.Id, Is.EqualTo(SetMetaraceRandomizer.SetMetaraceId));
         }
     }
 }

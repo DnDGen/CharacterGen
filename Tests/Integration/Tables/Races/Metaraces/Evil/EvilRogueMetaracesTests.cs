@@ -21,9 +21,9 @@ namespace NPCGen.Tests.Integration.Tables.Races.Metaraces.Evil
             AssertTableIsComplete();
         }
 
-        [TestCase(EmptyContent, 1, 94)]
-        [TestCase(RaceConstants.Metaraces.Wererat, 95, 96)]
-        [TestCase(RaceConstants.Metaraces.HalfFiend, 98, 99)]
+        [TestCase(RaceConstants.Metaraces.NoneId, 1, 94)]
+        [TestCase(RaceConstants.Metaraces.WereratId, 95, 96)]
+        [TestCase(RaceConstants.Metaraces.HalfFiendId, 98, 99)]
         public override void Percentile(String content, Int32 lower, Int32 upper)
         {
             base.Percentile(content, lower, upper);

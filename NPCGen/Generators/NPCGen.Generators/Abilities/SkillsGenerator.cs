@@ -84,7 +84,7 @@ namespace NPCGen.Generators.Abilities
             var perLevel = pointsTable[characterClass.ClassName] + intelligence.Bonus;
             var multiplier = characterClass.Level;
 
-            var monsters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.Names, TableNameConstants.Set.Collection.Groups.Monsters);
+            var monsters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, TableNameConstants.Set.Collection.Groups.Monsters);
             if (!monsters.Contains(race.BaseRace.Id))
                 multiplier += 3;
 

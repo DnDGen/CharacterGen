@@ -51,7 +51,7 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
             do metarace = GenerateMetarace();
             while (TestShouldKeepRunning() && metarace.Id != RaceConstants.Metaraces.NoneId);
 
-            Assert.That(metarace, Is.EqualTo(RaceConstants.Metaraces.NoneId));
+            Assert.That(metarace.Id, Is.EqualTo(RaceConstants.Metaraces.NoneId));
         }
     }
 }

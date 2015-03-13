@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Ninject;
 using NPCGen.Generators.Interfaces.Randomizers.Races;
 using NUnit.Framework;
@@ -10,6 +11,8 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
     {
         [Inject]
         public ISetBaseRaceRandomizer SetBaseRaceRandomizer { get; set; }
+        [Inject]
+        public Random Random { get; set; }
 
         [TestCase("SetBaseRaceRandomizer")]
         public override void Stress(String stressSubject)
@@ -19,12 +22,16 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
 
         protected override void MakeAssertions()
         {
-            SetBaseRaceRandomizer.SetBaseRaceId = Guid.NewGuid().ToString();
             var alignment = GetNewAlignment();
             var characterClass = GetNewCharacterClass(alignment);
 
+            var baseRaceIds = BaseRaceRandomizer.GetAllPossibleIds(alignment.Goodness, characterClass);
+            var baseRaceCount = baseRaceIds.Count();
+            var randomIndex = Random.Next(baseRaceCount);
+            SetBaseRaceRandomizer.SetBaseRaceId = baseRaceIds.ElementAt(randomIndex);
+
             var baseRace = SetBaseRaceRandomizer.Randomize(alignment.Goodness, characterClass);
-            Assert.That(baseRace, Is.EqualTo(SetBaseRaceRandomizer.SetBaseRaceId));
+            Assert.That(baseRace.Id, Is.EqualTo(SetBaseRaceRandomizer.SetBaseRaceId));
         }
     }
 }

@@ -19,12 +19,9 @@ namespace NPCGen.Generators.Randomizers.Races.BaseRaces
 
         protected override Boolean BaseRaceIsAllowed(String baseRace)
         {
-            var evilBaseRaces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.Names,
-                AlignmentConstants.Evil);
-            var goodBaseRaces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.Names,
-                AlignmentConstants.Good);
-            var neutralBaseRaces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.Names,
-                AlignmentConstants.Neutral);
+            var evilBaseRaces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, AlignmentConstants.Evil);
+            var goodBaseRaces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, AlignmentConstants.Good);
+            var neutralBaseRaces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, AlignmentConstants.Neutral);
             var forbiddenBaseRaces = neutralBaseRaces.Except(goodBaseRaces).Except(evilBaseRaces);
 
             return !forbiddenBaseRaces.Contains(baseRace);

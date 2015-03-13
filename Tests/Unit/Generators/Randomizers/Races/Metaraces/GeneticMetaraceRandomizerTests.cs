@@ -19,7 +19,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
                 return new[]
                 {
                     "genetic metarace",
-                    RaceConstants.Metaraces.None
+                    RaceConstants.Metaraces.NoneId
                 };
             }
         }

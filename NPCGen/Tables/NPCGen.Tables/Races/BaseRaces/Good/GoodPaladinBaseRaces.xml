@@ -2,13 +2,13 @@
 
 <percentile>
   <object><lower>1</lower><content>Aasimar</content><upper>10</upper></object>
-  <object><lower>11</lower><content>Hill Dwarf</content><upper>20</upper></object>
-  <object><lower>21</lower><content>Mountain Dwarf</content><upper>21</upper></object>
-  <object><lower>22</lower><content>Rock Gnome</content><upper>22</upper></object>
-  <object><lower>23</lower><content>Half-Elf</content><upper>27</upper></object>
-  <object><lower>28</lower><content>Lightfoot Halfling</content><upper>28</upper></object>
-  <object><lower>29</lower><content>Deep Halfling</content><upper>29</upper></object>
-  <object><lower>30</lower><content>Half-Orc</content><upper>30</upper></object>
+  <object><lower>11</lower><content>HillDwarf</content><upper>20</upper></object>
+  <object><lower>21</lower><content>MountainDwarf</content><upper>21</upper></object>
+  <object><lower>22</lower><content>RockGnome</content><upper>22</upper></object>
+  <object><lower>23</lower><content>HalfElf</content><upper>27</upper></object>
+  <object><lower>28</lower><content>LightfootHalfling</content><upper>28</upper></object>
+  <object><lower>29</lower><content>DeepHalfling</content><upper>29</upper></object>
+  <object><lower>30</lower><content>HalfOrc</content><upper>30</upper></object>
   <object><lower>31</lower><content>Human</content><upper>97</upper></object>
     <object>
         <lower>98</lower>

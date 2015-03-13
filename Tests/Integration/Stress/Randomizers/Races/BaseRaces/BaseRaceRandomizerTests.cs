@@ -9,12 +9,12 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
     {
         protected abstract IEnumerable<String> allowedBaseRaces { get; }
 
-        private IEnumerable<String> baseRaces;
+        private IEnumerable<String> baseRaceIds;
 
         [SetUp]
         public void Setup()
         {
-            baseRaces = allowedBaseRaces;
+            baseRaceIds = allowedBaseRaces;
         }
 
         protected override void MakeAssertions()
@@ -23,7 +23,7 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
             var characterClass = GetNewCharacterClass(alignment);
 
             var baseRace = BaseRaceRandomizer.Randomize(alignment.Goodness, characterClass);
-            Assert.That(baseRaces, Contains.Item(baseRace), testType);
+            Assert.That(baseRaceIds, Contains.Item(baseRace.Id), testType);
         }
     }
 }

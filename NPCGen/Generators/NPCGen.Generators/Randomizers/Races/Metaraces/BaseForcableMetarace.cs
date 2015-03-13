@@ -45,8 +45,8 @@ namespace NPCGen.Generators.Randomizers.Races.Metaraces
         public IEnumerable<String> GetAllPossibleIds(String goodness, CharacterClass characterClass)
         {
             var tableName = String.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSMetaraces, goodness, characterClass.ClassName);
-            var results = percentileResultSelector.SelectAllFrom(tableName);
-            return results.Where(r => RaceIsAllowed(r, characterClass.Level));
+            var metaraceIds = percentileResultSelector.SelectAllFrom(tableName);
+            return metaraceIds.Where(r => RaceIsAllowed(r, characterClass.Level));
         }
 
         private Boolean RaceIsAllowed(String metaraceId, Int32 level)

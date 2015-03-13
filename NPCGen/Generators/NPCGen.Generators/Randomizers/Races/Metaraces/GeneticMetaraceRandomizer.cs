@@ -16,11 +16,10 @@ namespace NPCGen.Generators.Randomizers.Races.Metaraces
             this.collectionsSelector = collectionsSelector;
         }
 
-        protected override Boolean MetaraceIsAllowed(String metarace)
+        protected override Boolean MetaraceIsAllowed(String metaraceId)
         {
-            var metaraces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups,
-                TableNameConstants.Set.Collection.Groups.Genetic);
-            return metaraces.Contains(metarace);
+            var metaraceIds = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, TableNameConstants.Set.Collection.Groups.Genetic);
+            return metaraceIds.Contains(metaraceId);
         }
     }
 }

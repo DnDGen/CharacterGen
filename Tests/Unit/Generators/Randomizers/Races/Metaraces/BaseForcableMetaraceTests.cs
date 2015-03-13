@@ -87,7 +87,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         public void RandomizeLoopsUntilAllowedMetaraceIsRolled()
         {
             mockPercentileResultSelector.SetupSequence(p => p.SelectFrom(It.IsAny<String>())).Returns("invalid metarace")
-                .Returns(firstMetarace);
+                .Returns(firstMetaraceId);
 
             randomizer.Randomize(String.Empty, characterClass);
             mockPercentileResultSelector.Verify(p => p.SelectFrom(It.IsAny<String>()), Times.Exactly(2));

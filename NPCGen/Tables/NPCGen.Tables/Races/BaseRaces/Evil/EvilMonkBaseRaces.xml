@@ -3,12 +3,12 @@
 <percentile>
   <object>
     <lower>1</lower>
-    <content>Half-Elf</content>
+    <content>HalfElf</content>
     <upper>10</upper>
   </object>
   <object>
     <lower>11</lower>
-    <content>Half-Orc</content>
+    <content>HalfOrc</content>
     <upper>20</upper>
   </object>
   <object>
@@ -28,7 +28,7 @@
   </object>
   <object>
     <lower>95</lower>
-    <content>Ogre Mage</content>
+    <content>OgreMage</content>
     <upper>96</upper>
   </object>
     <object>

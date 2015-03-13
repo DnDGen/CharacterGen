@@ -19,11 +19,11 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
             {
                 return new[]
                 {
-                    RaceConstants.Metaraces.HalfDragon,
-                    RaceConstants.Metaraces.HalfFiend,
-                    RaceConstants.Metaraces.Wererat,
-                    RaceConstants.Metaraces.Werewolf,
-                    String.Empty
+                    RaceConstants.Metaraces.HalfDragonId,
+                    RaceConstants.Metaraces.HalfFiendId,
+                    RaceConstants.Metaraces.WereratId,
+                    RaceConstants.Metaraces.WerewolfId,
+                    RaceConstants.Metaraces.NoneId
                 };
             }
         }

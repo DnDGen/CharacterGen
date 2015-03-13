@@ -3,52 +3,52 @@
 <percentile>
   <object>
     <lower>1</lower>
-    <content>Hill Dwarf</content>
+    <content>HillDwarf</content>
     <upper>5</upper>
   </object>
   <object>
     <lower>6</lower>
-    <content>High Elf</content>
+    <content>HighElf</content>
     <upper>20</upper>
   </object>
   <object>
     <lower>21</lower>
-    <content>Wild Elf</content>
+    <content>WildElf</content>
     <upper>21</upper>
   </object>
   <object>
     <lower>22</lower>
-    <content>Wood Elf</content>
+    <content>WoodElf</content>
     <upper>36</upper>
   </object>
   <object>
     <lower>37</lower>
-    <content>Forest Gnome</content>
+    <content>ForestGnome</content>
     <upper>41</upper>
   </object>
   <object>
     <lower>42</lower>
-    <content>Rock Gnome</content>
+    <content>RockGnome</content>
     <upper>42</upper>
   </object>
   <object>
     <lower>43</lower>
-    <content>Half-Elf</content>
+    <content>HalfElf</content>
     <upper>57</upper>
   </object>
   <object>
     <lower>58</lower>
-    <content>Lightfoot Halfling</content>
+    <content>LightfootHalfling</content>
     <upper>58</upper>
   </object>
   <object>
     <lower>59</lower>
-    <content>Tallfellow Halfling</content>
+    <content>TallfellowHalfling</content>
     <upper>59</upper>
   </object>
   <object>
     <lower>60</lower>
-    <content>Half-Orc</content>
+    <content>HalfOrc</content>
     <upper>64</upper>
   </object>
   <object>

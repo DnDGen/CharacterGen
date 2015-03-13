@@ -19,9 +19,9 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
             {
                 return new[]
                 {
-                    RaceConstants.Metaraces.Wereboar,
-                    RaceConstants.Metaraces.Weretiger,
-                    String.Empty
+                    RaceConstants.Metaraces.WereboarId,
+                    RaceConstants.Metaraces.WeretigerId,
+                    RaceConstants.Metaraces.NoneId
                 };
             }
         }

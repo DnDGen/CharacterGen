@@ -17,17 +17,14 @@ namespace NPCGen.Generators.Randomizers.Races.BaseRaces
             this.collectionsSelector = collectionsSelector;
         }
 
-        protected override Boolean BaseRaceIsAllowed(String baseRace)
+        protected override Boolean BaseRaceIsAllowed(String baseRaceId)
         {
-            var evilBaseRaces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.Names,
-                AlignmentConstants.Evil);
-            var goodBaseRaces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.Names,
-                AlignmentConstants.Good);
-            var neutralBaseRaces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.Names,
-                AlignmentConstants.Neutral);
-            var forbiddenBaseRaces = evilBaseRaces.Except(neutralBaseRaces).Except(goodBaseRaces);
+            var evilBaseRaceIds = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, AlignmentConstants.Evil);
+            var goodBaseRaceIds = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, AlignmentConstants.Good);
+            var neutralBaseRaceIds = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, AlignmentConstants.Neutral);
+            var forbiddenBaseRaceIds = evilBaseRaceIds.Except(neutralBaseRaceIds).Except(goodBaseRaceIds);
 
-            return !forbiddenBaseRaces.Contains(baseRace);
+            return !forbiddenBaseRaceIds.Contains(baseRaceId);
         }
     }
 }
