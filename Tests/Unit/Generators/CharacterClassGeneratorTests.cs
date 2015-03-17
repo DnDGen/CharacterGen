@@ -3,6 +3,7 @@ using NPCGen.Common.Alignments;
 using NPCGen.Generators;
 using NPCGen.Generators.Interfaces;
 using NPCGen.Generators.Interfaces.Randomizers.CharacterClasses;
+using NPCGen.Selectors.Interfaces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Unit.Generators
@@ -12,14 +13,18 @@ namespace NPCGen.Tests.Unit.Generators
     {
         private Mock<ILevelRandomizer> mockLevelRandomizer;
         private Mock<IClassNameRandomizer> mockClassNameRandomizer;
+        private Mock<IBooleanPercentileSelector> mockBooleanPercentileSelector;
+        private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
         private ICharacterClassGenerator characterClassGenerator;
-
         private Alignment alignment;
 
         [SetUp]
         public void Setup()
         {
+            mockBooleanPercentileSelector = new Mock<IBooleanPercentileSelector>();
+            mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
             characterClassGenerator = new CharacterClassGenerator();
+
             alignment = new Alignment();
             mockLevelRandomizer = new Mock<ILevelRandomizer>();
             mockClassNameRandomizer = new Mock<IClassNameRandomizer>();
@@ -44,7 +49,13 @@ namespace NPCGen.Tests.Unit.Generators
         }
 
         [Test]
-        public void DoNotGetSpecialtyFieldsIfNone()
+        public void DoNotGetSpecialistFieldsIfNone()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void GetSpecialistFields()
         {
             Assert.Fail();
         }
