@@ -28,6 +28,12 @@ namespace NPCGen.Tables.Interfaces
                 public const String RacialInitiativeBonuses = "RacialInitiativeBonuses";
                 public const String RacialNaturalArmorBonuses = "RacialNaturalArmorBonuses";
                 public const String SkillPointsForClasses = "SkillPointsForClasses";
+                public const String SpecialistFields = "SpecialistFields";
+            }
+
+            public static class TrueOrFalse
+            {
+                public const String HasSpecialistFields = "HasSpecialistFields";
             }
 
             public static class Collection
