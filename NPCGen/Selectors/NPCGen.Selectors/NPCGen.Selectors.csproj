@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BooleanPercentileSelector.cs" />
     <Compile Include="CollectionsSelector.cs" />
     <Compile Include="FeatsSelector.cs" />
     <Compile Include="LanguageCollectionsSelector.cs" />

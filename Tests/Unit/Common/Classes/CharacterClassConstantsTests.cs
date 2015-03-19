@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using NPCGen.Common.CharacterClasses;
 using NUnit.Framework;
 
@@ -19,28 +18,39 @@ namespace NPCGen.Tests.Unit.Common.Classes
         [TestCase(CharacterClassConstants.Rogue, "Rogue")]
         [TestCase(CharacterClassConstants.Sorcerer, "Sorcerer")]
         [TestCase(CharacterClassConstants.Wizard, "Wizard")]
+        [TestCase(CharacterClassConstants.Domains.Air, "Air")]
+        [TestCase(CharacterClassConstants.Domains.Animal, "Animal")]
+        [TestCase(CharacterClassConstants.Domains.Chaos, "Chaos")]
+        [TestCase(CharacterClassConstants.Domains.Death, "Death")]
+        [TestCase(CharacterClassConstants.Domains.Destruction, "Destruction")]
+        [TestCase(CharacterClassConstants.Domains.Earth, "Earth")]
+        [TestCase(CharacterClassConstants.Domains.Evil, "Evil")]
+        [TestCase(CharacterClassConstants.Domains.Fire, "Fire")]
+        [TestCase(CharacterClassConstants.Domains.Good, "Good")]
+        [TestCase(CharacterClassConstants.Domains.Healing, "Healing")]
+        [TestCase(CharacterClassConstants.Domains.Knowledge, "Knowledge")]
+        [TestCase(CharacterClassConstants.Domains.Law, "Law")]
+        [TestCase(CharacterClassConstants.Domains.Luck, "Luck")]
+        [TestCase(CharacterClassConstants.Domains.Magic, "Magic")]
+        [TestCase(CharacterClassConstants.Domains.Plant, "Plant")]
+        [TestCase(CharacterClassConstants.Domains.Protection, "Protection")]
+        [TestCase(CharacterClassConstants.Domains.Strength, "Strength")]
+        [TestCase(CharacterClassConstants.Domains.Sun, "Sun")]
+        [TestCase(CharacterClassConstants.Domains.Travel, "Travel")]
+        [TestCase(CharacterClassConstants.Domains.Trickery, "Trickery")]
+        [TestCase(CharacterClassConstants.Domains.War, "War")]
+        [TestCase(CharacterClassConstants.Domains.Water, "Water")]
+        [TestCase(CharacterClassConstants.Schools.Abjuration, "Abjuration")]
+        [TestCase(CharacterClassConstants.Schools.Conjuration, "Conjuration")]
+        [TestCase(CharacterClassConstants.Schools.Divination, "Divination")]
+        [TestCase(CharacterClassConstants.Schools.Enchantment, "Enchantment")]
+        [TestCase(CharacterClassConstants.Schools.Evocation, "Evocation")]
+        [TestCase(CharacterClassConstants.Schools.Illusion, "Illusion")]
+        [TestCase(CharacterClassConstants.Schools.Necromancy, "Necromancy")]
+        [TestCase(CharacterClassConstants.Schools.Transmutation, "Transmutation")]
         public void Constant(String constant, String value)
         {
             Assert.That(constant, Is.EqualTo(value));
-        }
-
-        [Test]
-        public void ClassNames()
-        {
-            var classNames = CharacterClassConstants.GetClassNames();
-
-            Assert.That(classNames, Contains.Item(CharacterClassConstants.Barbarian));
-            Assert.That(classNames, Contains.Item(CharacterClassConstants.Bard));
-            Assert.That(classNames, Contains.Item(CharacterClassConstants.Cleric));
-            Assert.That(classNames, Contains.Item(CharacterClassConstants.Druid));
-            Assert.That(classNames, Contains.Item(CharacterClassConstants.Fighter));
-            Assert.That(classNames, Contains.Item(CharacterClassConstants.Monk));
-            Assert.That(classNames, Contains.Item(CharacterClassConstants.Paladin));
-            Assert.That(classNames, Contains.Item(CharacterClassConstants.Ranger));
-            Assert.That(classNames, Contains.Item(CharacterClassConstants.Rogue));
-            Assert.That(classNames, Contains.Item(CharacterClassConstants.Sorcerer));
-            Assert.That(classNames, Contains.Item(CharacterClassConstants.Wizard));
-            Assert.That(classNames.Count(), Is.EqualTo(11));
         }
     }
 }

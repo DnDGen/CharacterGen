@@ -17,6 +17,7 @@ namespace NPCGen.Bootstrap.Modules
             Bind<ISkillSelector>().To<SkillSelector>();
             Bind<IFeatsSelector>().To<FeatsSelector>();
             Bind<INameSelector>().To<NameSelector>();
+            Bind<IBooleanPercentileSelector>().To<BooleanPercentileSelector>();
         }
     }
 }

@@ -13,7 +13,19 @@ namespace NPCGen.Tests.Integration.Stress
         [SetUp]
         public void Setup()
         {
-            classNames = CharacterClassConstants.GetClassNames();
+            classNames = new[] {
+                CharacterClassConstants.Barbarian,
+                CharacterClassConstants.Bard,
+                CharacterClassConstants.Cleric,
+                CharacterClassConstants.Druid,
+                CharacterClassConstants.Fighter,
+                CharacterClassConstants.Monk,
+                CharacterClassConstants.Paladin,
+                CharacterClassConstants.Ranger,
+                CharacterClassConstants.Rogue,
+                CharacterClassConstants.Sorcerer,
+                CharacterClassConstants.Wizard
+            };
         }
 
         [TestCase("CharacterClassGenerator")]

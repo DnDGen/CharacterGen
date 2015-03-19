@@ -424,6 +424,48 @@
   <ItemGroup>
     <EmbeddedResource Include="Names.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CharacterClasses\HasSpecialistFields\ClericHasSpecialistFields.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CharacterClasses\HasSpecialistFields\WizardHasSpecialistFields.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CharacterClasses\HasSpecialistFields\BardHasSpecialistFields.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CharacterClasses\HasSpecialistFields\FighterHasSpecialistFields.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CharacterClasses\HasSpecialistFields\DruidHasSpecialistFields.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CharacterClasses\HasSpecialistFields\MonkHasSpecialistFields.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CharacterClasses\HasSpecialistFields\PaladinHasSpecialistFields.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CharacterClasses\HasSpecialistFields\RangerHasSpecialistFields.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CharacterClasses\HasSpecialistFields\RogueHasSpecialistFields.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CharacterClasses\HasSpecialistFields\SorcererHasSpecialistFields.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CharacterClasses\HasSpecialistFields\BarbarianHasSpecialistFields.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CharacterClasses\SpecialistFields.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CharacterClasses\SpecialistFieldQuantities.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CharacterClasses\ProhibitedFields.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

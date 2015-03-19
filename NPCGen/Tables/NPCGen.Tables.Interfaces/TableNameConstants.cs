@@ -24,16 +24,12 @@ namespace NPCGen.Tables.Interfaces
                 public const String LevelAdjustments = "LevelAdjustments";
                 public const String MaxDexterityBonus = "MaxDexterityBonus";
                 public const String MonsterHitDice = "MonsterHitDice";
+                public const String ProhibitedFieldQuantities = "ProhibitedFieldQuantities";
                 public const String RacialBaseAttackAdjustments = "RacialBaseAttackAdjustments";
                 public const String RacialInitiativeBonuses = "RacialInitiativeBonuses";
                 public const String RacialNaturalArmorBonuses = "RacialNaturalArmorBonuses";
                 public const String SkillPointsForClasses = "SkillPointsForClasses";
-                public const String SpecialistFields = "SpecialistFields";
-            }
-
-            public static class TrueOrFalse
-            {
-                public const String HasSpecialistFields = "HasSpecialistFields";
+                public const String SpecialistFieldQuantities = "SpecialistFieldQuantities";
             }
 
             public static class Collection
@@ -51,10 +47,12 @@ namespace NPCGen.Tables.Interfaces
                 public const String FeatGroups = "FeatGroups";
                 public const String FeatSpecificApplications = "FeatSpecificApplications";
                 public const String MetaraceGroups = "MetaraceGroups";
+                public const String ProhibitedFields = "ProhibitedFields";
                 public const String SkillData = "SkillData";
                 public const String SkillGroups = "SkillGroups";
                 public const String SkillSynergy = "SkillSynergy";
                 public const String SkillSynergyFeats = "SkillSynergyFeats";
+                public const String SpecialistFields = "SpecialistFields";
                 public const String StatPriorities = "StatPriorities";
 
                 public static class Groups
@@ -83,13 +81,6 @@ namespace NPCGen.Tables.Interfaces
 
         public static class Formattable
         {
-            public static class Percentile
-            {
-                public const String GOODNESSCharacterClasses = "{0}CharacterClasses";
-                public const String GOODNESSCLASSBaseRaces = "{0}{1}BaseRaces";
-                public const String GOODNESSCLASSMetaraces = "{0}{1}Metaraces";
-            }
-
             public static class Adjustments
             {
                 public const String BASERACESkillAdjustments = "{0}SkillAdjustments";
@@ -97,6 +88,18 @@ namespace NPCGen.Tables.Interfaces
                 public const String FEATSkillAdjustments = "{0}SkillAdjustments";
                 public const String METARACESkillAdjustments = "{0}SkillAdjustments";
                 public const String STATStatAdjustments = "{0}StatAdjustments";
+            }
+
+            public static class Percentile
+            {
+                public const String GOODNESSCharacterClasses = "{0}CharacterClasses";
+                public const String GOODNESSCLASSBaseRaces = "{0}{1}BaseRaces";
+                public const String GOODNESSCLASSMetaraces = "{0}{1}Metaraces";
+            }
+
+            public static class TrueOrFalse
+            {
+                public const String CLASSHasSpecialistFields = "{0}HasSpecialistFields";
             }
         }
     }

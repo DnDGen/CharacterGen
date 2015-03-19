@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace NPCGen.Common.CharacterClasses
 {
@@ -17,22 +16,42 @@ namespace NPCGen.Common.CharacterClasses
         public const String Sorcerer = "Sorcerer";
         public const String Wizard = "Wizard";
 
-        public static IEnumerable<String> GetClassNames()
+        public static class Domains
         {
-            return new[]
-            {
-                Barbarian,
-                Bard,
-                Cleric,
-                Druid,
-                Fighter,
-                Monk,
-                Paladin,
-                Ranger,
-                Rogue,
-                Sorcerer,
-                Wizard
-            };
+            public const String Air = "Air";
+            public const String Animal = "Animal";
+            public const String Chaos = "Chaos";
+            public const String Death = "Death";
+            public const String Destruction = "Destruction";
+            public const String Earth = "Earth";
+            public const String Evil = "Evil";
+            public const String Fire = "Fire";
+            public const String Good = "Good";
+            public const String Healing = "Healing";
+            public const String Knowledge = "Knowledge";
+            public const String Law = "Law";
+            public const String Luck = "Luck";
+            public const String Magic = "Magic";
+            public const String Plant = "Plant";
+            public const String Protection = "Protection";
+            public const String Strength = "Strength";
+            public const String Sun = "Sun";
+            public const String Travel = "Travel";
+            public const String Trickery = "Trickery";
+            public const String War = "War";
+            public const String Water = "Water";
+        }
+
+        public static class Schools
+        {
+            public const String Abjuration = "Abjuration";
+            public const String Conjuration = "Conjuration";
+            public const String Divination = "Divination";
+            public const String Enchantment = "Enchantment";
+            public const String Evocation = "Evocation";
+            public const String Illusion = "Illusion";
+            public const String Necromancy = "Necromancy";
+            public const String Transmutation = "Transmutation";
         }
     }
 }

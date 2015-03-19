@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+    <object>
+        <name>Barbarian</name>
+    </object>
+    <object>
+        <name>Bard</name>
+    </object>
+    <object>
+        <name>Cleric</name>
+    </object>
+    <object>
+        <name>Druid</name>
+    </object>
+    <object>
+        <name>Fighter</name>
+    </object>
+    <object>
+        <name>Monk</name>
+    </object>
+    <object>
+        <name>Paladin</name>
+    </object>
+    <object>
+        <name>Ranger</name>
+    </object>
+    <object>
+        <name>Rogue</name>
+    </object>
+    <object>
+        <name>Sorcerer</name>
+    </object>
+    <object>
+        <name>Wizard</name>
+        <item>Abjuration</item>
+        <item>Conjuration</item>
+        <item>Enchantment</item>
+        <item>Evocation</item>
+        <item>Illusion</item>
+        <item>Necromancy</item>
+        <item>Transmutation</item>
+    </object>
+    <object>
+        <name>Lawful Good</name>
+        <item>Chaos</item>
+        <item>Evil</item>
+    </object>
+    <object>
+        <name>Neutral Good</name>
+        <item>Law</item>
+        <item>Chaos</item>
+        <item>Evil</item>
+    </object>
+    <object>
+        <name>Chaotic Good</name>
+        <item>Law</item>
+        <item>Evil</item>
+    </object>
+    <object>
+        <name>Lawful Neutral</name>
+        <item>Chaos</item>
+        <item>Evil</item>
+        <item>Good</item>
+    </object>
+    <object>
+        <name>True Neutral</name>
+        <item>Chaos</item>
+        <item>Law</item>
+        <item>Evil</item>
+        <item>Good</item>
+    </object>
+    <object>
+        <name>Chaotic Neutral</name>
+        <item>Law</item>
+        <item>Evil</item>
+        <item>Good</item>
+    </object>
+    <object>
+        <name>Lawful Evil</name>
+        <item>Chaos</item>
+        <item>Good</item>
+    </object>
+    <object>
+        <name>Neutral Evil</name>
+        <item>Chaos</item>
+        <item>Law</item>
+        <item>Good</item>
+    </object>
+    <object>
+        <name>Chaotic Evil</name>
+        <item>Law</item>
+        <item>Good</item>
+    </object>
+</items>

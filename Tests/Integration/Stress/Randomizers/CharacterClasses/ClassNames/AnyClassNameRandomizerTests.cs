@@ -15,7 +15,22 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.CharacterClasses.ClassName
 
         protected override IEnumerable<String> allowedClassNames
         {
-            get { return CharacterClassConstants.GetClassNames(); }
+            get
+            {
+                return new[] {
+                    CharacterClassConstants.Barbarian,
+                    CharacterClassConstants.Bard,
+                    CharacterClassConstants.Cleric,
+                    CharacterClassConstants.Druid,
+                    CharacterClassConstants.Fighter,
+                    CharacterClassConstants.Monk,
+                    CharacterClassConstants.Paladin,
+                    CharacterClassConstants.Ranger,
+                    CharacterClassConstants.Rogue,
+                    CharacterClassConstants.Sorcerer,
+                    CharacterClassConstants.Wizard
+                };
+            }
         }
 
         [TestCase("AnyClassNameRandomizer")]

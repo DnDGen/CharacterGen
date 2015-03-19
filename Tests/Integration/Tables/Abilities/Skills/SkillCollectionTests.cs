@@ -64,7 +64,21 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Skills
         [TestCase(SkillConstants.UseMagicDevice)]
         public void TrainedSkills(String skill)
         {
-            foreach (var className in CharacterClassConstants.GetClassNames())
+            var classNames = new[] {
+                CharacterClassConstants.Barbarian,
+                CharacterClassConstants.Bard,
+                CharacterClassConstants.Cleric,
+                CharacterClassConstants.Druid,
+                CharacterClassConstants.Fighter,
+                CharacterClassConstants.Monk,
+                CharacterClassConstants.Paladin,
+                CharacterClassConstants.Ranger,
+                CharacterClassConstants.Rogue,
+                CharacterClassConstants.Sorcerer,
+                CharacterClassConstants.Wizard
+            };
+
+            foreach (var className in classNames)
                 Assert.That(crossClassSkills[className], Is.Not.Contains(skill));
         }
 
