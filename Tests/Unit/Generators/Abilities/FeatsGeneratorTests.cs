@@ -884,7 +884,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         }
 
         [Test]
-        public void SpellcastersCanSelectRayForSpecificApplications()
+        public void SpellcastersCanSelectRayForWeaponSpecificApplications()
         {
             AddFeatSelections(1);
             additionalFeatSelections[0].SpecificApplicationType = AdditionalFeatSelectionConstants.WeaponsWithUnarmedAndGrappleAndRay;
@@ -904,7 +904,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         }
 
         [Test]
-        public void NonSpellcastersCannotSelectRayForSpecificApplications()
+        public void NonSpellcastersCannotSelectRayForWeaponSpecificApplications()
         {
             AddFeatSelections(1);
             additionalFeatSelections[0].SpecificApplicationType = AdditionalFeatSelectionConstants.WeaponsWithUnarmedAndGrappleAndRay;
@@ -997,6 +997,18 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             Assert.That(secondFeat.SpecificApplication, Is.EqualTo("school 1"));
             Assert.That(lastFeat.Name, Is.EqualTo(additionalFeatSelections[1].FeatName));
             Assert.That(lastFeat.SpecificApplication, Is.EqualTo("school 1"));
+        }
+
+        [Test]
+        public void GetFeatFromSpecialistFields()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void GetFeatWithSpecializationFromSpecialistFields()
+        {
+            Assert.Fail();
         }
     }
 }

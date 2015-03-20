@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+    <object>
+        <name>Knowledge</name>
+        <item>Knowledge (Arcana)</item>
+        <item>Knowledge (Architecture and Engineering)</item>
+        <item>Knowledge (Dungeoneering)</item>
+        <item>Knowledge (Geography)</item>
+        <item>Knowledge (History)</item>
+        <item>Knowledge (Local)</item>
+        <item>Knowledge (Nature)</item>
+        <item>Knowledge (Nobility and Royalty)</item>
+        <item>Knowledge (Religion)</item>
+        <item>Knowledge (The Planes)</item>
+    </object>
+</items>

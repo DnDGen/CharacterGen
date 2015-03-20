@@ -97,6 +97,7 @@
     <Compile Include="Abilities\Skills\RacialAdjustments\WoodElfSkillAdjustmentsTests.cs" />
     <Compile Include="Abilities\Skills\SkillCollectionTests.cs" />
     <Compile Include="Abilities\Skills\SkillDataTests.cs" />
+    <Compile Include="Abilities\Skills\SkillGroupsTests.cs" />
     <Compile Include="Abilities\Skills\SkillPointsForClassesTests.cs" />
     <Compile Include="Abilities\Skills\SkillSynergyTests.cs" />
     <Compile Include="AdjustmentsTests.cs" />

@@ -784,5 +784,11 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             Assert.That(skills["skill 1"].Ranks, Is.EqualTo(level));
             Assert.That(skills["skill 2"].Ranks, Is.EqualTo(0));
         }
+
+        [Test]
+        public void GetSkillsFromSpecialistFields()
+        {
+            Assert.Fail();
+        }
     }
 }
