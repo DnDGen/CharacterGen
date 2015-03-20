@@ -12,26 +12,35 @@ namespace NPCGen.Tests.Unit.Selectors
     [TestFixture]
     public class CollectionsSelectorTests
     {
+        private const String TableName = "table name";
+
         private ICollectionsSelector selector;
         private Mock<ICollectionsMapper> mockMapper;
-        private Dictionary<String, IEnumerable<String>> collections;
+        private Dictionary<String, IEnumerable<String>> allCollections;
 
         [SetUp]
         public void Setup()
         {
             mockMapper = new Mock<ICollectionsMapper>();
             selector = new CollectionsSelector(mockMapper.Object);
-            collections = new Dictionary<String, IEnumerable<String>>();
+            allCollections = new Dictionary<String, IEnumerable<String>>();
 
-            mockMapper.Setup(m => m.Map("table name")).Returns(collections);
+            mockMapper.Setup(m => m.Map(TableName)).Returns(allCollections);
         }
 
         [Test]
         public void SelectCollection()
         {
-            collections["entry"] = Enumerable.Empty<String>();
-            var collection = selector.SelectFrom("table name", "entry");
-            Assert.That(collection, Is.EqualTo(collections["entry"]));
+            allCollections["entry"] = Enumerable.Empty<String>();
+            var collection = selector.SelectFrom(TableName, "entry");
+            Assert.That(collection, Is.EqualTo(allCollections["entry"]));
+        }
+
+        [Test]
+        public void SelectAllCollections()
+        {
+            var collections = selector.SelectAllFrom(TableName);
+            Assert.That(collections, Is.EqualTo(allCollections));
         }
     }
 }

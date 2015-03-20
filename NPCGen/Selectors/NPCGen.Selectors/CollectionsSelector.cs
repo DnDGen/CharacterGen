@@ -16,8 +16,13 @@ namespace NPCGen.Selectors
 
         public IEnumerable<String> SelectFrom(String tableName, String tableEntry)
         {
-            var tables = mapper.Map(tableName);
-            return tables[tableEntry];
+            var table = mapper.Map(tableName);
+            return table[tableEntry];
+        }
+
+        public Dictionary<String, IEnumerable<String>> SelectAllFrom(String tableName)
+        {
+            return mapper.Map(tableName);
         }
     }
 }

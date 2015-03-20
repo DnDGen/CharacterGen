@@ -1,23 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using NPCGen.Mappers.Interfaces;
 using NPCGen.Selectors.Interfaces;
 
 namespace NPCGen.Selectors
 {
     public class AdjustmentsSelector : IAdjustmentsSelector
     {
-        private ICollectionsMapper collectionsMapper;
+        private ICollectionsSelector collectionsSelector;
 
-        public AdjustmentsSelector(ICollectionsMapper collectionsMapper)
+        public AdjustmentsSelector(ICollectionsSelector collectionsSelector)
         {
-            this.collectionsMapper = collectionsMapper;
+            this.collectionsSelector = collectionsSelector;
         }
 
         public Dictionary<String, Int32> SelectFrom(String tableName)
         {
-            var collectionTable = collectionsMapper.Map(tableName);
+            var collectionTable = collectionsSelector.SelectAllFrom(tableName);
             var adjustmentTable = new Dictionary<String, Int32>();
 
             foreach (var kvp in collectionTable)
