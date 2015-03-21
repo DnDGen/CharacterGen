@@ -18,19 +18,31 @@ namespace NPCGen.Generators.Abilities
         private IDice dice;
         private ICollectionsSelector collectionsSelector;
         private IAdjustmentsSelector adjustmentsSelector;
+        private IBooleanPercentileSelector booleanPercentileSelector;
 
-        public SkillsGenerator(ISkillSelector skillSelector, IDice dice, ICollectionsSelector collectionsSelector, IAdjustmentsSelector adjustmentsSelector)
+        public SkillsGenerator(ISkillSelector skillSelector, IDice dice, ICollectionsSelector collectionsSelector, IAdjustmentsSelector adjustmentsSelector,
+            IBooleanPercentileSelector booleanPercentileSelector)
         {
             this.skillSelector = skillSelector;
             this.dice = dice;
             this.collectionsSelector = collectionsSelector;
             this.adjustmentsSelector = adjustmentsSelector;
+            this.booleanPercentileSelector = booleanPercentileSelector;
         }
 
         public Dictionary<String, Skill> GenerateWith(CharacterClass characterClass, Race race, Dictionary<String, Stat> stats)
         {
             var classSkills = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassSkills, characterClass.ClassName);
             var crossClassSkills = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.CrossClassSkills, characterClass.ClassName);
+
+            var specialistSkills = Enumerable.Empty<String>();
+            foreach (var specialistField in characterClass.SpecialistFields)
+            {
+                var newSpecialistSkills = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, specialistField);
+                specialistSkills = specialistSkills.Union(newSpecialistSkills);
+            }
+
+            classSkills = classSkills.Union(specialistSkills);
 
             var skills = InitializeSkills(stats, classSkills, crossClassSkills);
             skills = AddRanks(characterClass, race, stats, classSkills, crossClassSkills, skills);
@@ -44,11 +56,11 @@ namespace NPCGen.Generators.Abilities
         {
             var skills = new Dictionary<String, Skill>();
 
-            foreach (var skill in classSkills)
-                skills[skill] = new Skill { ClassSkill = true };
-
             foreach (var skill in crossClassSkills)
                 skills[skill] = new Skill { ClassSkill = false };
+
+            foreach (var skill in classSkills)
+                skills[skill] = new Skill { ClassSkill = true };
 
             foreach (var skill in skills)
             {
@@ -102,7 +114,8 @@ namespace NPCGen.Generators.Abilities
             if (!skills.Keys.Intersect(crossClassSkills).Any(s => skills[s].Ranks < rankCap))
                 return classSkills.Where(s => skills[s].Ranks < rankCap);
 
-            if (dice.Roll().d3() == 3)
+            var shouldAddPointToCrossClassSkill = booleanPercentileSelector.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill);
+            if (shouldAddPointToCrossClassSkill)
                 return crossClassSkills.Where(s => skills[s].Ranks < rankCap);
 
             return classSkills.Where(s => skills[s].Ranks < rankCap);

@@ -41,7 +41,8 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             mockSkillSelector = new Mock<ISkillSelector>();
             mockDice = new Mock<IDice>();
             mockBooleanPercentileSelector = new Mock<IBooleanPercentileSelector>();
-            skillsGenerator = new SkillsGenerator(mockSkillSelector.Object, mockDice.Object, mockCollectionsSelector.Object, mockAdjustmentsSelector.Object);
+            skillsGenerator = new SkillsGenerator(mockSkillSelector.Object, mockDice.Object, mockCollectionsSelector.Object, mockAdjustmentsSelector.Object,
+                mockBooleanPercentileSelector.Object);
             characterClass = new CharacterClass();
             stats = new Dictionary<String, Stat>();
             classSkills = new List<String>();
@@ -236,7 +237,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         {
             classSkills.Add("class skill");
             crossClassSkills.Add("cross class skill");
-            specialistSkills.Add("special skill");
+            specialistSkills.Add("specialist skill");
 
             var classSkillSelection = new SkillSelection();
             classSkillSelection.BaseStatName = "stat 1";
@@ -354,12 +355,13 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             Assert.That(skills["skill 2"].EffectiveRanks, Is.EqualTo(1.5));
         }
 
-        [TestCase(1)]
-        [TestCase(2)]
-        public void AssignPointsToClassSkills(Int32 roll)
+        [Test]
+        public void AssignPointsToClassSkills()
         {
             skillPoints[characterClass.ClassName] = 1;
-            mockDice.Setup(d => d.Roll(1).d3()).Returns(roll);
+            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
+                .Returns(false);
+
             classSkills.Add("class skill");
             crossClassSkills.Add("cross-class skill");
 
@@ -373,7 +375,9 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         public void AssignPointsToCrossClassSkills()
         {
             skillPoints[characterClass.ClassName] = 1;
-            mockDice.Setup(d => d.Roll(1).d3()).Returns(3);
+            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
+                .Returns(true);
+
             classSkills.Add("class skill");
             crossClassSkills.Add("cross-class skill");
 
