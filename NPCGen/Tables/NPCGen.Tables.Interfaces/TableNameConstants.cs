@@ -6,12 +6,6 @@ namespace NPCGen.Tables.Interfaces
     {
         public static class Set
         {
-            public static class Percentile
-            {
-                public const String AlignmentGoodness = "AlignmentGoodness";
-                public const String Traits = "Traits";
-            }
-
             public static class Adjustments
             {
                 public const String ArmorBonuses = "ArmorBonuses";
@@ -76,6 +70,17 @@ namespace NPCGen.Tables.Interfaces
                     public const String Stealth = "Stealth";
                     public const String Warriors = "Warriors";
                 }
+            }
+
+            public static class Percentile
+            {
+                public const String AlignmentGoodness = "AlignmentGoodness";
+                public const String Traits = "Traits";
+            }
+
+            public static class TrueOrFalse
+            {
+                public const String AssignPointToCrossClassSkill = "AssignPointToCrossClassSkill";
             }
         }
 

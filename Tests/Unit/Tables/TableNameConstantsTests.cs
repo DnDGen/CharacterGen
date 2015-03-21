@@ -63,6 +63,7 @@ namespace NPCGen.Tests.Unit.Tables
         [TestCase(TableNameConstants.Set.Collection.Groups.Warriors, "Warriors")]
         [TestCase(TableNameConstants.Set.Percentile.AlignmentGoodness, "AlignmentGoodness")]
         [TestCase(TableNameConstants.Set.Percentile.Traits, "Traits")]
+        [TestCase(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill, "AssignPointToCrossClassSkill")]
         [TestCase(TableNameConstants.Formattable.Adjustments.BASERACESkillAdjustments, "{0}SkillAdjustments")]
         [TestCase(TableNameConstants.Formattable.Adjustments.CLASSFeatLevelRequirements, "{0}FeatLevelRequirements")]
         [TestCase(TableNameConstants.Formattable.Adjustments.FEATSkillAdjustments, "{0}SkillAdjustments")]
