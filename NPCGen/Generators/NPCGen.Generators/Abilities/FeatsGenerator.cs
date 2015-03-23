@@ -54,8 +54,14 @@ namespace NPCGen.Generators.Abilities
             var racialFeats = GetRacialFeats(race);
             var classFeats = GetClassFeats(characterClass);
             var skillSynergyFeats = GetSkillSynergyFeats(skills);
+            var specialistFeats = GetSpecialistFeats(characterClass);
 
-            return racialFeats.Union(classFeats).Union(skillSynergyFeats);
+            return racialFeats.Union(classFeats).Union(skillSynergyFeats).Union(specialistFeats);
+        }
+
+        private IEnumerable<Feat> GetSpecialistFeats(CharacterClass characterClass)
+        {
+            throw new NotImplementedException();
         }
 
         private IEnumerable<Feat> GetRacialFeats(Race race)

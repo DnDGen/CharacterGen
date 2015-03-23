@@ -290,6 +290,83 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             Assert.That(feats, Is.Empty);
         }
 
+        [Test]
+        public void GetFeatFromSpecialistFields()
+        {
+            characterClass.ClassName = "class name";
+            characterClass.SpecialistFields = new[] { "specialist" };
+            var specialistFeats = new[] { "feat 1", "feat 2" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassFeats, "specialist")).Returns(specialistFeats);
+
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            var featNames = feats.Select(f => f.Name);
+
+            Assert.That(featNames, Contains.Item("feat 1"));
+            Assert.That(featNames, Contains.Item("feat 2"));
+        }
+
+        [Test]
+        public void GetFeatWithSpecializationFromSpecialistFields()
+        {
+            AddFeatSelections(1);
+            additionalFeatSelections[0].SpecificApplicationType = "weapon";
+
+            var weapons = new[] { "battleaxe" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatSpecificApplications, "weapon")).Returns(weapons);
+
+            characterClass.ClassName = "class name";
+            characterClass.SpecialistFields = new[] { "specialist" };
+            var specialistFeats = new[] { "feat 1" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassFeats, "specialist")).Returns(specialistFeats);
+
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            var feat = feats.Single();
+
+            Assert.That(feat.Name, Is.EqualTo("feat 1"));
+            Assert.That(feat.SpecificApplication, Is.EqualTo("battleaxe"));
+        }
+
+        [Test]
+        public void GetFeatWithSpecializationAndPrerequisiteFromSpecialistFields()
+        {
+            AddFeatSelections(2);
+            additionalFeatSelections[0].SpecificApplicationType = "weapon";
+            additionalFeatSelections[1].RequiredFeats = new[] { additionalFeatSelections[0].FeatName };
+            additionalFeatSelections[1].SpecificApplicationType = "weapon";
+
+            var weapons = new[] { "battleaxe", "kitten", "stick" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatSpecificApplications, "weapon")).Returns(weapons);
+
+            mockDice.SetupSequence(d => d.Roll(1).d(2)).Returns(2);
+            mockDice.SetupSequence(d => d.Roll(1).d(3)).Returns(3).Returns(1);
+
+            characterClass.ClassName = "class name";
+            characterClass.SpecialistFields = new[] { "specialist" };
+            var specialistFeats = new[] { "feat 1", "feat 2" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassFeats, "specialist")).Returns(specialistFeats);
+
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            var firstFeat = feats.First();
+            var secondFeat = feats.Last();
+
+            Assert.That(firstFeat.Name, Is.EqualTo("feat 1"));
+            Assert.That(firstFeat.SpecificApplication, Is.EqualTo("stick"));
+            Assert.That(secondFeat.Name, Is.EqualTo("feat 1"));
+            Assert.That(secondFeat.SpecificApplication, Is.EqualTo("stick"));
+        }
+
+        [Test]
+        public void DoNotGetFeatFromSpecialistFieldsIfNone()
+        {
+            characterClass.ClassName = "class name";
+            characterClass.SpecialistFields = new[] { "specialist" };
+            var specialistFeats = Enumerable.Empty<String>();
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassFeats, "specialist")).Returns(specialistFeats);
+
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            Assert.That(feats, Is.Empty);
+        }
+
         [TestCase(1, 1)]
         [TestCase(2, 1)]
         [TestCase(3, 2)]
@@ -997,18 +1074,6 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             Assert.That(secondFeat.SpecificApplication, Is.EqualTo("school 1"));
             Assert.That(lastFeat.Name, Is.EqualTo(additionalFeatSelections[1].FeatName));
             Assert.That(lastFeat.SpecificApplication, Is.EqualTo("school 1"));
-        }
-
-        [Test]
-        public void GetFeatFromSpecialistFields()
-        {
-            Assert.Fail();
-        }
-
-        [Test]
-        public void GetFeatWithSpecializationFromSpecialistFields()
-        {
-            Assert.Fail();
         }
     }
 }
