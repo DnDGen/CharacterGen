@@ -54,14 +54,8 @@ namespace NPCGen.Generators.Abilities
             var racialFeats = GetRacialFeats(race);
             var classFeats = GetClassFeats(characterClass);
             var skillSynergyFeats = GetSkillSynergyFeats(skills);
-            var specialistFeats = GetSpecialistFeats(characterClass);
 
-            return racialFeats.Union(classFeats).Union(skillSynergyFeats).Union(specialistFeats);
-        }
-
-        private IEnumerable<Feat> GetSpecialistFeats(CharacterClass characterClass)
-        {
-            throw new NotImplementedException();
+            return racialFeats.Union(classFeats).Union(skillSynergyFeats);
         }
 
         private IEnumerable<Feat> GetRacialFeats(Race race)
@@ -88,8 +82,7 @@ namespace NPCGen.Generators.Abilities
 
         private Int32 GetMonsterHitDice(String baseRace)
         {
-            var monsters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.Names,
-                TableNameConstants.Set.Collection.Groups.Monsters);
+            var monsters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.Names, TableNameConstants.Set.Collection.Groups.Monsters);
             if (!monsters.Contains(baseRace))
                 return 1;
 
@@ -150,12 +143,20 @@ namespace NPCGen.Generators.Abilities
 
         private IEnumerable<Feat> GetClassFeats(CharacterClass characterClass)
         {
-            var allClassFeats = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassFeats,
-                characterClass.ClassName);
+            var allClassFeats = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassFeats, characterClass.ClassName);
+            var specialistClassFeats = Enumerable.Empty<String>();
+
+            foreach (var specialistField in characterClass.SpecialistFields)
+            {
+                var specialistFeats = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassFeats, specialistField);
+                specialistClassFeats = specialistClassFeats.Union(specialistFeats);
+            }
+
             var tableName = String.Format(TableNameConstants.Formattable.Adjustments.CLASSFeatLevelRequirements, characterClass.ClassName);
             var levelRequirements = adjustmentsSelector.SelectFrom(tableName);
 
             return allClassFeats.Where(f => levelRequirements[f] <= characterClass.Level)
+                                .Union(specialistClassFeats)
                                 .Select(f => new Feat { Name = f });
         }
 

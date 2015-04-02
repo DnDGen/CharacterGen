@@ -782,6 +782,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             race.BaseRace.Id = RaceConstants.BaseRaces.HumanId;
             characterClass.ClassName = CharacterClassConstants.Fighter;
             characterClass.Level = 20;
+            characterClass.SpecialistFields = new[] { "specialist" };
 
             racialFeatSelections.Add(new RacialFeatSelection { FeatName = "racial feat 1" });
 
@@ -791,6 +792,9 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
 
             var classFeats = new[] { "class feat 1", "class feat 2", "class feat 3", "class feat 4" };
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassFeats, characterClass.ClassName)).Returns(classFeats);
+            var specialistFeats = new[] { "class feat 1", "class feat 5" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassFeats, "specialist")).Returns(specialistFeats);
+
 
             var levelRequirements = new Dictionary<String, Int32>();
             levelRequirements["class feat 1"] = 1;
@@ -816,6 +820,12 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             Assert.That(featNames, Contains.Item("synergy feat 1"));
             Assert.That(featNames, Contains.Item("synergy feat 2"));
             Assert.That(featNames, Contains.Item("synergy feat 3"));
+            Assert.That(featNames, Contains.Item("class feat 1"));
+            Assert.That(featNames, Contains.Item("class feat 2"));
+            Assert.That(featNames, Contains.Item("class feat 3"));
+            Assert.That(featNames, Contains.Item("class feat 4"));
+            Assert.That(featNames, Contains.Item("class feat 5"));
+            Assert.That(featNames.Count(), Is.EqualTo(28));
         }
 
         [Test]
