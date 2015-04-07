@@ -35,7 +35,7 @@ namespace NPCGen.Generators.Abilities
         public IEnumerable<Feat> GenerateWith(CharacterClass characterClass, Race race, Dictionary<String, Stat> stats,
             Dictionary<String, Skill> skills, BaseAttack baseAttack)
         {
-            var automaticFeats = GetAutomaticFeats(characterClass, race, skills);
+            var automaticFeats = GetAutomaticFeats(characterClass, race, skills, stats);
             var additionalFeats = GetAdditionalFeats(characterClass, race, stats, skills, baseAttack, automaticFeats);
 
             var feats = automaticFeats.Union(additionalFeats);
@@ -49,10 +49,10 @@ namespace NPCGen.Generators.Abilities
             return feats.Union(bonusFeats);
         }
 
-        private IEnumerable<Feat> GetAutomaticFeats(CharacterClass characterClass, Race race, Dictionary<String, Skill> skills)
+        private IEnumerable<Feat> GetAutomaticFeats(CharacterClass characterClass, Race race, Dictionary<String, Skill> skills, Dictionary<String, Stat> stats)
         {
             var racialFeats = GetRacialFeats(race);
-            var classFeats = GetClassFeats(characterClass);
+            var classFeats = GetClassFeats(characterClass, stats);
             var skillSynergyFeats = GetSkillSynergyFeats(skills);
 
             return racialFeats.Union(classFeats).Union(skillSynergyFeats);
@@ -141,23 +141,81 @@ namespace NPCGen.Generators.Abilities
             return Convert.ToString(strength);
         }
 
-        private IEnumerable<Feat> GetClassFeats(CharacterClass characterClass)
+        private IEnumerable<Feat> GetClassFeats(CharacterClass characterClass, Dictionary<String, Stat> stats)
         {
             var allClassFeats = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassFeats, characterClass.ClassName);
+            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.CLASSFeatLevelRequirements, characterClass.ClassName);
+            var levelRequirements = adjustmentsSelector.SelectFrom(tableName);
+            var specialistFeats = GetSpecialistFeats(characterClass, stats);
+
+            return allClassFeats.Where(f => levelRequirements[f] <= characterClass.Level)
+                                .Select(f => new Feat { Name = f })
+                                .Union(specialistFeats);
+        }
+
+        private IEnumerable<Feat> GetSpecialistFeats(CharacterClass characterClass, Dictionary<String, Stat> stats)
+        {
             var specialistClassFeats = Enumerable.Empty<String>();
 
             foreach (var specialistField in characterClass.SpecialistFields)
             {
-                var specialistFeats = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassFeats, specialistField);
-                specialistClassFeats = specialistClassFeats.Union(specialistFeats);
+                var specialistFeatNames = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassFeats, specialistField);
+                specialistClassFeats = specialistClassFeats.Union(specialistFeatNames);
             }
 
-            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.CLASSFeatLevelRequirements, characterClass.ClassName);
-            var levelRequirements = adjustmentsSelector.SelectFrom(tableName);
+            var specialistFeats = new List<Feat>();
 
-            return allClassFeats.Where(f => levelRequirements[f] <= characterClass.Level)
-                                .Union(specialistClassFeats)
-                                .Select(f => new Feat { Name = f });
+            foreach (var specialistFeatName in specialistClassFeats)
+            {
+                var specialistFeat = new Feat();
+                specialistFeat.Name = specialistFeatName;
+
+                var sourceFeat = featsSelector.SelectAdditional(specialistFeatName);
+                specialistFeat.SpecificApplication = GetSpecificApplicationOf(specialistFeat, sourceFeat, specialistFeats, characterClass.ClassName, stats[StatConstants.Intelligence].Bonus);
+
+                specialistFeats.Add(specialistFeat);
+            }
+
+            return specialistFeats;
+        }
+
+        private String GetSpecificApplicationOf(Feat feat, AdditionalFeatSelection sourceFeat, IEnumerable<Feat> feats, String className, Int32 intelligenceBonus)
+        {
+            if (feat.Name == FeatConstants.SpellMastery)
+            {
+                if (!feats.Any(f => f.Name == FeatConstants.SpellMastery))
+                    return Convert.ToString(intelligenceBonus);
+
+                var previousSpellMastery = feats.First(f => f.Name == FeatConstants.SpellMastery);
+                var previousSpellCount = Convert.ToInt32(previousSpellMastery.SpecificApplication);
+                var newSpellCount = previousSpellCount + intelligenceBonus;
+
+                return Convert.ToString(newSpellCount);
+            }
+
+            if (String.IsNullOrEmpty(sourceFeat.SpecificApplicationType))
+                return String.Empty;
+
+            var specificApplications = GetSpecificApplications(feats, sourceFeat);
+            var usedSpecificApplications = feats.Where(f => f.Name == feat.Name).Select(f => f.SpecificApplication);
+            specificApplications = specificApplications.Except(usedSpecificApplications);
+
+            var spellcasters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, TableNameConstants.Set.Collection.Groups.Spellcasters);
+            if (!spellcasters.Contains(className))
+                specificApplications = specificApplications.Except(new[] { WeaponProficiencyConstants.Ray });
+
+            var index = GetRandomIndexOf(specificApplications);
+            var specificApplication = specificApplications.ElementAt(index);
+
+            return specificApplication;
+        }
+
+        private IEnumerable<String> GetSpecificApplications(IEnumerable<Feat> otherFeats, AdditionalFeatSelection sourceFeat)
+        {
+            if (otherFeats.Any(f => RequirementsHaveSpecificApplications(sourceFeat, f)))
+                return otherFeats.Where(f => RequirementsHaveSpecificApplications(sourceFeat, f)).Select(f => f.SpecificApplication);
+
+            return collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatSpecificApplications, sourceFeat.SpecificApplicationType);
         }
 
         private IEnumerable<Feat> GetSkillSynergyFeats(Dictionary<String, Skill> skills)
@@ -210,7 +268,10 @@ namespace NPCGen.Generators.Abilities
                 feat.SpecificApplication = GetSpecificApplicationOf(feat, sourceFeat, feats, characterClass.ClassName, stats[StatConstants.Intelligence].Bonus);
 
                 if (feat.Name == FeatConstants.SpellMastery && feats.Any(f => f.Name == FeatConstants.SpellMastery))
-                    feats.Remove(feats.First(f => f.Name == FeatConstants.SpellMastery));
+                {
+                    var spellMasteryFeat = feats.First(f => f.Name == FeatConstants.SpellMastery);
+                    feats.Remove(spellMasteryFeat);
+                }
 
                 feats.Add(feat);
             }
@@ -222,44 +283,6 @@ namespace NPCGen.Generators.Abilities
         {
             var die = collection.Count();
             return dice.Roll().d(die) - 1;
-        }
-
-        private String GetSpecificApplicationOf(Feat feat, AdditionalFeatSelection sourceFeat, IEnumerable<Feat> feats, String className, Int32 intelligenceBonus)
-        {
-            if (feat.Name == FeatConstants.SpellMastery)
-            {
-                if (!feats.Any(f => f.Name == FeatConstants.SpellMastery))
-                    return Convert.ToString(intelligenceBonus);
-
-                var previousSpellMastery = feats.First(f => f.Name == FeatConstants.SpellMastery);
-                var previousSpellCount = Convert.ToInt32(previousSpellMastery.SpecificApplication);
-                var newSpellCount = previousSpellCount + intelligenceBonus;
-
-                return Convert.ToString(newSpellCount);
-            }
-
-            if (String.IsNullOrEmpty(feat.SpecificApplication))
-                return String.Empty;
-
-            IEnumerable<String> specificApplications;
-            var usedSpecificApplications = feats.Where(f => f.Name == feat.Name).Select(f => f.SpecificApplication);
-
-            if (feats.Any(f => RequirementsHaveSpecificApplications(sourceFeat, f)))
-                specificApplications = feats.Where(f => RequirementsHaveSpecificApplications(sourceFeat, f))
-                                            .Select(f => f.SpecificApplication);
-            else
-                specificApplications = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatSpecificApplications, feat.SpecificApplication);
-
-            specificApplications = specificApplications.Except(usedSpecificApplications);
-
-            var spellcasters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, TableNameConstants.Set.Collection.Groups.Spellcasters);
-            if (!spellcasters.Contains(className))
-                specificApplications = specificApplications.Except(new[] { WeaponProficiencyConstants.Ray });
-
-            var index = GetRandomIndexOf(specificApplications);
-            var specificApplication = specificApplications.ElementAt(index);
-
-            return specificApplication;
         }
 
         private Boolean RequirementsHaveSpecificApplications(AdditionalFeatSelection sourceFeat, Feat feat)

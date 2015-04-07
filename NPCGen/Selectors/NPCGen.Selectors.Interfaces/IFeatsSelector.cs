@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using NPCGen.Selectors.Interfaces.Objects;
 
 namespace NPCGen.Selectors.Interfaces
@@ -7,5 +8,6 @@ namespace NPCGen.Selectors.Interfaces
     {
         IEnumerable<RacialFeatSelection> SelectRacial();
         IEnumerable<AdditionalFeatSelection> SelectAdditional();
+        AdditionalFeatSelection SelectAdditional(String featName);
     }
 }

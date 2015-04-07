@@ -12,6 +12,7 @@ namespace NPCGen.Common.Abilities.Feats
             Name = String.Empty;
             SpecificApplication = String.Empty;
         }
+
         public override Boolean Equals(Object obj)
         {
             if (!(obj is Feat))

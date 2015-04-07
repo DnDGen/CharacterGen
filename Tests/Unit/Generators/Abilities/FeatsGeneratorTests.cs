@@ -293,6 +293,8 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         [Test]
         public void GetFeatFromSpecialistFields()
         {
+            AddFeatSelections(2);
+
             characterClass.ClassName = "class name";
             characterClass.SpecialistFields = new[] { "specialist" };
             var specialistFeats = new[] { "feat 1", "feat 2" };
@@ -346,12 +348,12 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassFeats, "specialist")).Returns(specialistFeats);
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
-            var firstFeat = feats.First();
-            var secondFeat = feats.Last();
+            var firstFeat = feats.First(f => f.Name == "feat 1");
+            var secondFeat = feats.Last(f => f.Name == "feat 2");
 
             Assert.That(firstFeat.Name, Is.EqualTo("feat 1"));
             Assert.That(firstFeat.SpecificApplication, Is.EqualTo("stick"));
-            Assert.That(secondFeat.Name, Is.EqualTo("feat 1"));
+            Assert.That(secondFeat.Name, Is.EqualTo("feat 2"));
             Assert.That(secondFeat.SpecificApplication, Is.EqualTo("stick"));
         }
 
@@ -406,8 +408,15 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             for (var i = 0; i < quantity; i++)
             {
                 var name = String.Format("feat {0}", i + 1);
-                additionalFeatSelections.Add(new AdditionalFeatSelection { FeatName = name });
+                AddAdditionalFeat(name);
             }
+        }
+
+        private void AddAdditionalFeat(String featName)
+        {
+            var selection = new AdditionalFeatSelection { FeatName = featName };
+            additionalFeatSelections.Add(selection);
+            mockFeatsSelector.Setup(s => s.SelectAdditional(featName)).Returns(selection);
         }
 
         [Test]
@@ -794,7 +803,8 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassFeats, characterClass.ClassName)).Returns(classFeats);
             var specialistFeats = new[] { "class feat 1", "class feat 5" };
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassFeats, "specialist")).Returns(specialistFeats);
-
+            AddAdditionalFeat("class feat 1");
+            AddAdditionalFeat("class feat 5");
 
             var levelRequirements = new Dictionary<String, Int32>();
             levelRequirements["class feat 1"] = 1;
