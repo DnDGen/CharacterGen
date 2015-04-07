@@ -67,6 +67,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Abilities\Skills\AssignPointToCrossClassSkillTests.cs" />
     <Compile Include="Abilities\Skills\ClassSkillsTests.cs" />
     <Compile Include="Abilities\Skills\CrossClassSkillsTests.cs" />
     <Compile Include="Abilities\Skills\RacialAdjustments\BugbearSkillAdjustmentsTests.cs" />
@@ -121,8 +122,9 @@
     <Compile Include="CharacterClasses\HasSpecialistFields\WizardHasSpecialistFieldsTests.cs" />
     <Compile Include="CharacterClasses\LevelAdjustmentsTests.cs" />
     <Compile Include="CharacterClasses\NeutralCharacterClassesTests.cs" />
+    <Compile Include="CharacterClasses\ProhibitedFieldQuantitiesTests.cs" />
     <Compile Include="CharacterClasses\ProhibitedFieldsTests.cs" />
-    <Compile Include="CharacterClasses\SpecialistFieldQuantities.cs" />
+    <Compile Include="CharacterClasses\SpecialistFieldQuantitiesTests.cs" />
     <Compile Include="CharacterClasses\SpecialistFieldsTests.cs" />
     <Compile Include="CollectionTests.cs" />
     <Compile Include="Combats\ClassHitDiceTests.cs" />

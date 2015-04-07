@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace NPCGen.Tests.Integration.Tables.CharacterClasses
 {
     [TestFixture]
-    public class SpecialistFieldQuantities : AdjustmentsTests
+    public class SpecialistFieldQuantitiesTests : AdjustmentsTests
     {
         protected override string tableName
         {
