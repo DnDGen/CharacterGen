@@ -9,5 +9,6 @@ namespace NPCGen.Selectors.Interfaces
         IEnumerable<RacialFeatSelection> SelectRacial();
         IEnumerable<AdditionalFeatSelection> SelectAdditional();
         AdditionalFeatSelection SelectAdditional(String featName);
+        IEnumerable<CharacterClassFeatSelection> SelectClassFeats();
     }
 }

@@ -17,8 +17,12 @@ namespace NPCGen.Selectors
             throw new NotImplementedException();
         }
 
-
         public AdditionalFeatSelection SelectAdditional(String featName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<CharacterClassFeatSelection> SelectClassFeats()
         {
             throw new NotImplementedException();
         }

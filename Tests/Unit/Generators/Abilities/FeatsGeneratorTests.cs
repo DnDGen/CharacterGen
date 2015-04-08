@@ -32,6 +32,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         private Mock<IFeatsSelector> mockFeatsSelector;
         private List<RacialFeatSelection> racialFeatSelections;
         private List<AdditionalFeatSelection> additionalFeatSelections;
+        private List<CharacterClassFeatSelection> classFeatSelections;
         private Mock<IDice> mockDice;
         private BaseAttack baseAttack;
         private List<String> overwrittenStrengthFeats;
@@ -44,14 +45,14 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
             mockFeatsSelector = new Mock<IFeatsSelector>();
             mockDice = new Mock<IDice>();
-            featsGenerator = new FeatsGenerator(mockCollectionsSelector.Object, mockAdjustmentsSelector.Object,
-                mockFeatsSelector.Object, mockDice.Object);
+            featsGenerator = new FeatsGenerator(mockCollectionsSelector.Object, mockAdjustmentsSelector.Object, mockFeatsSelector.Object, mockDice.Object);
             characterClass = new CharacterClass();
             race = new Race();
             stats = new Dictionary<String, Stat>();
             skills = new Dictionary<String, Skill>();
             racialFeatSelections = new List<RacialFeatSelection>();
             additionalFeatSelections = new List<AdditionalFeatSelection>();
+            classFeatSelections = new List<CharacterClassFeatSelection>();
             baseAttack = new BaseAttack();
             stats[StatConstants.Intelligence] = new Stat();
             overwrittenStrengthFeats = new List<String>();
@@ -59,6 +60,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
 
             mockFeatsSelector.Setup(s => s.SelectRacial()).Returns(racialFeatSelections);
             mockFeatsSelector.Setup(s => s.SelectAdditional()).Returns(additionalFeatSelections);
+            mockFeatsSelector.Setup(s => s.SelectClassFeats()).Returns(classFeatSelections);
             mockDice.Setup(d => d.Roll(1).d(It.IsAny<Int32>())).Returns(1);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, TableNameConstants.Set.Collection.Groups.OverwrittenStrengths))
                 .Returns(overwrittenStrengthFeats);
@@ -196,40 +198,85 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         }
 
         [Test]
-        public void GetClassFeatsWithMatchingLevelRequirement()
+        public void GetClassFeatsForClass()
         {
             characterClass.ClassName = "class name";
             characterClass.Level = 2;
-            var classFeats = new[] { "feat 1", "feat 2", "feat 3", "feat 4" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassFeats, "class name")).Returns(classFeats);
 
-            var levelRequirements = new Dictionary<String, Int32>();
-            levelRequirements["feat 1"] = 1;
-            levelRequirements["feat 2"] = 1;
-            levelRequirements["feat 3"] = 2;
-            levelRequirements["feat 4"] = 3;
-            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.CLASSFeatLevelRequirements, "class name");
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(levelRequirements);
+            AddClassFeat("feat 1", characterClass.ClassName, characterClass.Level, 1);
+
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            var featNames = feats.Select(f => f.Name);
+            Assert.That(featNames, Contains.Item("feat 1"));
+        }
+
+        [Test]
+        public void GetMultipleClassFeatsForSameLevel()
+        {
+            characterClass.ClassName = "class name";
+            characterClass.Level = 2;
+
+            AddClassFeat("feat 1", characterClass.ClassName, characterClass.Level, 1);
+            AddClassFeat("feat 2", characterClass.ClassName, characterClass.Level, 1);
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
             var featNames = feats.Select(f => f.Name);
 
             Assert.That(featNames, Contains.Item("feat 1"));
             Assert.That(featNames, Contains.Item("feat 2"));
-            Assert.That(featNames, Contains.Item("feat 3"));
-            Assert.That(featNames, Is.Not.Contains("feat 4"));
+        }
+
+        [Test]
+        public void GetClassFeatsWithMatchingLevelRequirement()
+        {
+            characterClass.ClassName = "class name";
+            characterClass.Level = 2;
+
+            AddClassFeat("feat 1", characterClass.ClassName, characterClass.Level, 1);
+            AddClassFeat("feat 2", characterClass.ClassName, characterClass.Level, 2);
+
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            var featNames = feats.Select(f => f.Name);
+
+            Assert.That(featNames, Contains.Item("feat 1"));
+            Assert.That(featNames, Contains.Item("feat 2"));
+        }
+
+        private void AddClassFeat(String name, String className, Int32 levelRequirement, Int32 strength)
+        {
+            var selection = new CharacterClassFeatSelection();
+            selection.FeatName = name;
+            selection.LevelRequirements[className] = levelRequirement;
+            selection.Strength = strength;
+
+            classFeatSelections.Add(selection);
+
+            AddAdditionalFeat(name);
+        }
+
+        [Test]
+        public void GetOnlyStrongestClassFeat()
+        {
+            AddFeatSelections(1);
+
+            characterClass.ClassName = "class name";
+            characterClass.Level = 2;
+
+            AddClassFeat("class feat", characterClass.ClassName, 1, 1);
+            AddClassFeat("class feat", characterClass.ClassName, 2, 3);
+
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            var classFeat = feats.First(f => f.Name == "class feat");
+
+            Assert.That(classFeat.SpecificApplication, Is.EqualTo("3"));
+            Assert.That(feats.Count(f => f.Name == "class feat"), Is.EqualTo(1));
         }
 
         [Test]
         public void DoNotGetClassFeatsIfNone()
         {
             characterClass.ClassName = "class name";
-            characterClass.Level = 2;
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassFeats, "class name")).Returns(Enumerable.Empty<String>());
-
-            var levelRequirements = new Dictionary<String, Int32>();
-            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.CLASSFeatLevelRequirements, "class name");
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(levelRequirements);
+            characterClass.Level = 1;
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
             Assert.That(feats, Is.Empty);
@@ -238,21 +285,19 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         [Test]
         public void DoNotGetClassFeatsIfNoneMatchRequirements()
         {
+            AddFeatSelections(1);
+
             characterClass.ClassName = "class name";
             characterClass.Level = 2;
-            var classFeats = new[] { "feat 1", "feat 2", "feat 3", "feat 4" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassFeats, "class name")).Returns(classFeats);
 
-            var levelRequirements = new Dictionary<String, Int32>();
-            levelRequirements["feat 1"] = 3;
-            levelRequirements["feat 2"] = 3;
-            levelRequirements["feat 3"] = 3;
-            levelRequirements["feat 4"] = 3;
-            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.CLASSFeatLevelRequirements, "class name");
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(levelRequirements);
+            AddClassFeat("class feat 1", "other class", 1, 1);
+            AddClassFeat("class feat 2", characterClass.ClassName, 3, 1);
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
-            Assert.That(feats, Is.Empty);
+            var featNames = feats.Select(f => f.Name);
+
+            Assert.That(featNames, Is.Not.Contains("class feat 1"));
+            Assert.That(featNames, Is.Not.Contains("class feat 2"));
         }
 
         [Test]
@@ -297,8 +342,9 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
 
             characterClass.ClassName = "class name";
             characterClass.SpecialistFields = new[] { "specialist" };
-            var specialistFeats = new[] { "feat 1", "feat 2" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassFeats, "specialist")).Returns(specialistFeats);
+
+            AddClassFeat("feat 1", "specialist", 0, 0);
+            AddClassFeat("feat 2", "specialist", 0, 0);
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
             var featNames = feats.Select(f => f.Name);
@@ -311,30 +357,26 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         public void GetFeatWithSpecializationFromSpecialistFields()
         {
             AddFeatSelections(1);
-            additionalFeatSelections[0].SpecificApplicationType = "weapon";
 
             var weapons = new[] { "battleaxe" };
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatSpecificApplications, "weapon")).Returns(weapons);
 
             characterClass.ClassName = "class name";
             characterClass.SpecialistFields = new[] { "specialist" };
-            var specialistFeats = new[] { "feat 1" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassFeats, "specialist")).Returns(specialistFeats);
+
+            AddClassFeat("class feat", "specialist", 0, 0);
+            additionalFeatSelections[1].SpecificApplicationType = "weapon";
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
-            var feat = feats.Single();
+            var feat = feats.First(f => f.Name == "class feat");
 
-            Assert.That(feat.Name, Is.EqualTo("feat 1"));
             Assert.That(feat.SpecificApplication, Is.EqualTo("battleaxe"));
         }
 
         [Test]
         public void GetFeatWithSpecializationAndPrerequisiteFromSpecialistFields()
         {
-            AddFeatSelections(2);
-            additionalFeatSelections[0].SpecificApplicationType = "weapon";
-            additionalFeatSelections[1].RequiredFeats = new[] { additionalFeatSelections[0].FeatName };
-            additionalFeatSelections[1].SpecificApplicationType = "weapon";
+            AddFeatSelections(1);
 
             var weapons = new[] { "battleaxe", "kitten", "stick" };
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatSpecificApplications, "weapon")).Returns(weapons);
@@ -344,29 +386,37 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
 
             characterClass.ClassName = "class name";
             characterClass.SpecialistFields = new[] { "specialist" };
-            var specialistFeats = new[] { "feat 1", "feat 2" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassFeats, "specialist")).Returns(specialistFeats);
+
+            AddClassFeat("class feat 1", "specialist", 0, 0);
+            AddClassFeat("class feat 2", "specialist", 0, 0);
+            additionalFeatSelections[1].SpecificApplicationType = "weapon";
+            additionalFeatSelections[2].RequiredFeats = new[] { additionalFeatSelections[1].FeatName };
+            additionalFeatSelections[2].SpecificApplicationType = "weapon";
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
-            var firstFeat = feats.First(f => f.Name == "feat 1");
-            var secondFeat = feats.Last(f => f.Name == "feat 2");
+            var firstFeat = feats.First(f => f.Name == "class feat 1");
+            var secondFeat = feats.Last(f => f.Name == "class feat 2");
 
-            Assert.That(firstFeat.Name, Is.EqualTo("feat 1"));
             Assert.That(firstFeat.SpecificApplication, Is.EqualTo("stick"));
-            Assert.That(secondFeat.Name, Is.EqualTo("feat 2"));
             Assert.That(secondFeat.SpecificApplication, Is.EqualTo("stick"));
         }
 
         [Test]
-        public void DoNotGetFeatFromSpecialistFieldsIfNone()
+        public void DoNotGetFeatFromSpecialistFieldsIfNoneThatMatchRequirements()
         {
+            AddFeatSelections(1);
+
             characterClass.ClassName = "class name";
             characterClass.SpecialistFields = new[] { "specialist" };
-            var specialistFeats = Enumerable.Empty<String>();
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassFeats, "specialist")).Returns(specialistFeats);
+
+            AddClassFeat("class feat 1", "other specialist", 0, 0);
+            AddClassFeat("class feat 2", "other class", 1, 0);
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
-            Assert.That(feats, Is.Empty);
+            var featNames = feats.Select(f => f.Name);
+
+            Assert.That(featNames, Is.Not.Contains("class feat 1"));
+            Assert.That(featNames, Is.Not.Contains("class feat 2"));
         }
 
         [TestCase(1, 1)]
@@ -799,19 +849,11 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             foreach (var feat in additionalFeatSelections)
                 feat.IsFighterFeat = true;
 
-            var classFeats = new[] { "class feat 1", "class feat 2", "class feat 3", "class feat 4" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassFeats, characterClass.ClassName)).Returns(classFeats);
-            var specialistFeats = new[] { "class feat 1", "class feat 5" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassFeats, "specialist")).Returns(specialistFeats);
-            AddAdditionalFeat("class feat 1");
-            AddAdditionalFeat("class feat 5");
-
-            var levelRequirements = new Dictionary<String, Int32>();
-            levelRequirements["class feat 1"] = 1;
-            levelRequirements["class feat 2"] = 10;
-            levelRequirements["class feat 3"] = 15;
-            levelRequirements["class feat 4"] = 20;
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.FighterFeatLevelRequirements)).Returns(levelRequirements);
+            AddClassFeat("class feat 1", characterClass.ClassName, 1, 1);
+            AddClassFeat("class feat 2", characterClass.ClassName, 2, 3);
+            AddClassFeat("class feat 3", characterClass.ClassName, 20, 20);
+            AddClassFeat("class feat 4", "specialist", 0, 0);
+            AddClassFeat("class feat 5", "specialist", 2, 3);
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillSynergyFeats, "skill 1")).Returns(new[] { "synergy feat 1", "synergy feat 2" });
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillSynergyFeats, "skill 2")).Returns(new[] { "synergy feat 3" });
@@ -843,6 +885,8 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         {
             characterClass.ClassName = CharacterClassConstants.Fighter;
             characterClass.Level = 1;
+            characterClass.SpecialistFields = new[] { "specialist" };
+
             AddFeatSelections(6);
             foreach (var feat in additionalFeatSelections)
                 feat.IsFighterFeat = true;
@@ -851,13 +895,10 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             racialFeatSelections.Add(new RacialFeatSelection { FeatName = "auto feat 1" });
             racialFeatSelections.Add(new RacialFeatSelection { FeatName = "auto feat 2" });
 
-            var classFeats = new[] { "feat 2", "auto feat 1", "auto feat 3" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassFeats, characterClass.ClassName)).Returns(classFeats);
-
-            var levelRequirements = new Dictionary<String, Int32>();
-            foreach (var feat in classFeats)
-                levelRequirements[feat] = 0;
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.FighterFeatLevelRequirements)).Returns(levelRequirements);
+            AddClassFeat("feat 2", characterClass.ClassName, 0, 0);
+            AddClassFeat("auto feat 1", characterClass.ClassName, 0, 0);
+            AddClassFeat("auto feat 3", characterClass.ClassName, 0, 0);
+            AddClassFeat("auto feat 3", "specialist", 0, 0);
 
             //NOTE: Skill Synergy feats are unique and cannot be selected or earned
             //in any way except through rank requirements.

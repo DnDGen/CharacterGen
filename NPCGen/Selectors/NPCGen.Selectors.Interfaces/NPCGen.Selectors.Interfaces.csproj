@@ -51,6 +51,7 @@
     <Compile Include="IStatAdjustmentsSelector.cs" />
     <Compile Include="IStatPrioritySelector.cs" />
     <Compile Include="Objects\AdditionalFeatSelectionConstants.cs" />
+    <Compile Include="Objects\CharacterClassFeatSelection.cs" />
     <Compile Include="Objects\RacialFeatSelection.cs" />
     <Compile Include="Objects\StatPrioritySelection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

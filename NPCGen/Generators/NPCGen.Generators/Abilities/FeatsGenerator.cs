@@ -143,40 +143,58 @@ namespace NPCGen.Generators.Abilities
 
         private IEnumerable<Feat> GetClassFeats(CharacterClass characterClass, Dictionary<String, Stat> stats)
         {
-            var allClassFeats = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassFeats, characterClass.ClassName);
-            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.CLASSFeatLevelRequirements, characterClass.ClassName);
-            var levelRequirements = adjustmentsSelector.SelectFrom(tableName);
-            var specialistFeats = GetSpecialistFeats(characterClass, stats);
+            var allClassFeats = featsSelector.SelectClassFeats();
+            var relevantClassFeats = allClassFeats.Where(f => f.RequirementsSatisfied(characterClass));
+            var classFeats = new List<Feat>();
 
-            return allClassFeats.Where(f => levelRequirements[f] <= characterClass.Level)
-                                .Select(f => new Feat { Name = f })
-                                .Union(specialistFeats);
+            foreach (var classFeatSelection in relevantClassFeats)
+            {
+                var classFeat = new Feat();
+                classFeat.Name = classFeatSelection.FeatName;
+
+                var sourceFeat = featsSelector.SelectAdditional(classFeatSelection.FeatName);
+
+                if (!String.IsNullOrEmpty(sourceFeat.SpecificApplicationType))
+                    classFeat.SpecificApplication = GetSpecificApplicationOf(classFeat, sourceFeat, classFeats, characterClass.ClassName, stats[StatConstants.Intelligence].Bonus);
+                else
+                    classFeat.SpecificApplication = GetSpecificApplicationFromStrength(classFeatSelection.Strength);
+
+                if (classFeats.Any(f => AlreadyHaveStrongerFeat(f, classFeatSelection)) == false)
+                    classFeats.Add(classFeat);
+
+                var weakerFeats = classFeats.Where(f => FeatIsWeaker(f, classFeatSelection));
+                if (weakerFeats.Any())
+                {
+                    var newFeats = classFeats.Except(weakerFeats);
+                    classFeats = new List<Feat>(newFeats);
+                }
+            }
+
+            return classFeats;
         }
 
-        private IEnumerable<Feat> GetSpecialistFeats(CharacterClass characterClass, Dictionary<String, Stat> stats)
+        private Boolean AlreadyHaveStrongerFeat(Feat feat, CharacterClassFeatSelection classFeatSelection)
         {
-            var specialistClassFeats = Enumerable.Empty<String>();
+            if (feat.Name != classFeatSelection.FeatName)
+                return false;
 
-            foreach (var specialistField in characterClass.SpecialistFields)
-            {
-                var specialistFeatNames = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassFeats, specialistField);
-                specialistClassFeats = specialistClassFeats.Union(specialistFeatNames);
-            }
+            var strength = 0;
+            if (!Int32.TryParse(feat.SpecificApplication, out strength))
+                return false;
 
-            var specialistFeats = new List<Feat>();
+            return strength >= classFeatSelection.Strength;
+        }
 
-            foreach (var specialistFeatName in specialistClassFeats)
-            {
-                var specialistFeat = new Feat();
-                specialistFeat.Name = specialistFeatName;
+        private Boolean FeatIsWeaker(Feat feat, CharacterClassFeatSelection classFeatSelection)
+        {
+            if (feat.Name != classFeatSelection.FeatName)
+                return false;
 
-                var sourceFeat = featsSelector.SelectAdditional(specialistFeatName);
-                specialistFeat.SpecificApplication = GetSpecificApplicationOf(specialistFeat, sourceFeat, specialistFeats, characterClass.ClassName, stats[StatConstants.Intelligence].Bonus);
+            var strength = 0;
+            if (!Int32.TryParse(feat.SpecificApplication, out strength))
+                return false;
 
-                specialistFeats.Add(specialistFeat);
-            }
-
-            return specialistFeats;
+            return strength < classFeatSelection.Strength;
         }
 
         private String GetSpecificApplicationOf(Feat feat, AdditionalFeatSelection sourceFeat, IEnumerable<Feat> feats, String className, Int32 intelligenceBonus)
