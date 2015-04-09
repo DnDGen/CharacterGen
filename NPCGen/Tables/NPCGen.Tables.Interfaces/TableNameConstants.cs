@@ -56,6 +56,7 @@ namespace NPCGen.Tables.Interfaces
                 public static class Groups
                 {
                     public const String AverageBaseAttack = "Average Base Attack";
+                    public const String CharacterClasses = "CharacterClasses";
                     public const String CumulativeStrengths = "CumulativeStrengths";
                     public const String Deflection = "Deflection";
                     public const String Dodge = "Dodge";

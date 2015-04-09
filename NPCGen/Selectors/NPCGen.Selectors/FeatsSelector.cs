@@ -10,10 +10,12 @@ namespace NPCGen.Selectors
     public class FeatsSelector : IFeatsSelector
     {
         private ICollectionsSelector collectionsSelector;
+        private IAdjustmentsSelector adjustmentsSelector;
 
-        public FeatsSelector(ICollectionsSelector collectionsSelector)
+        public FeatsSelector(ICollectionsSelector collectionsSelector, IAdjustmentsSelector adjustmentsSelector)
         {
             this.collectionsSelector = collectionsSelector;
+            this.adjustmentsSelector = adjustmentsSelector;
         }
 
         public IEnumerable<RacialFeatSelection> SelectRacial()
@@ -54,7 +56,31 @@ namespace NPCGen.Selectors
 
         public IEnumerable<CharacterClassFeatSelection> SelectClassFeats()
         {
-            throw new NotImplementedException();
+            var classFeatNames = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, TableNameConstants.Set.Collection.Groups.CharacterClasses);
+            var classFeatSelections = new List<CharacterClassFeatSelection>();
+
+            foreach (var classFeatName in classFeatNames)
+            {
+                var classFeatSelection = new CharacterClassFeatSelection();
+                classFeatSelection.FeatName = classFeatName;
+
+                var featData = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatData, classFeatName);
+                var strength = featData.First();
+                classFeatSelection.Strength = Convert.ToInt32(strength);
+
+                var classes = featData.Except(new[] { strength });
+                foreach (var className in classes)
+                {
+                    var tableName = String.Format(TableNameConstants.Formattable.Adjustments.CLASSFeatLevelRequirements, className);
+                    var levelRequirements = adjustmentsSelector.SelectFrom(tableName);
+
+                    classFeatSelection.LevelRequirements[className] = levelRequirements[classFeatName];
+                }
+
+                classFeatSelections.Add(classFeatSelection);
+            }
+
+            return classFeatSelections;
         }
     }
 }

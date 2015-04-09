@@ -48,6 +48,7 @@ namespace NPCGen.Tests.Unit.Tables
         [TestCase(TableNameConstants.Set.Collection.SpecialistFields, "SpecialistFields")]
         [TestCase(TableNameConstants.Set.Collection.StatPriorities, "StatPriorities")]
         [TestCase(TableNameConstants.Set.Collection.Groups.AverageBaseAttack, "Average Base Attack")]
+        [TestCase(TableNameConstants.Set.Collection.Groups.CharacterClasses, "CharacterClasses")]
         [TestCase(TableNameConstants.Set.Collection.Groups.CumulativeStrengths, "CumulativeStrengths")]
         [TestCase(TableNameConstants.Set.Collection.Groups.Deflection, "Deflection")]
         [TestCase(TableNameConstants.Set.Collection.Groups.Dodge, "Dodge")]
