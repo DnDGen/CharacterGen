@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace NPCGen.Common.Abilities.Feats
 {
@@ -20,25 +19,19 @@ namespace NPCGen.Common.Abilities.Feats
         public const String Stonecunning = "Stonecunning";
         public const String WeaponFamiliarity = "Weapon Familiarity";
 
-        public static IEnumerable<String> GetAllFeats()
-        {
-            return new[] 
-            {
-                AasimarDaylight,
-                Ambidexterity,
-                Darkvision,
-                LightArmorProficiency,
-                ResistanceToAcid,
-                ResistanceToCold,
-                ResistanceToElectricity,
-                Scent,
-                ShieldProficiency,
-                SkillFocus,
-                SpellMastery,
-                Stability,
-                Stonecunning,
-                WeaponFamiliarity
-            };
-        }
+        public const String AasimarDaylightId = "AasimarDaylight";
+        public const String AmbidexterityId = "Ambidexterity";
+        public const String DarkvisionId = "Darkvision";
+        public const String LightArmorProficiencyId = "LightArmorProficiency";
+        public const String ResistanceToAcidId = "ResistanceToAcid";
+        public const String ResistanceToColdId = "ResistanceToCold";
+        public const String ResistanceToElectricityId = "ResistanceToElectricity";
+        public const String ScentId = "Scent";
+        public const String ShieldProficiencyId = "ShieldProficiency";
+        public const String SkillFocusId = "SkillFocus";
+        public const String SpellMasteryId = "SpellMastery";
+        public const String StabilityId = "Stability";
+        public const String StonecunningId = "Stonecunning";
+        public const String WeaponFamiliarityId = "WeaponFamiliarity";
     }
 }

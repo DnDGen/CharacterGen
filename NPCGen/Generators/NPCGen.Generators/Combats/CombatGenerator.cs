@@ -116,7 +116,7 @@ namespace NPCGen.Generators.Combats
             var featBonuses = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.FeatInitiativeBonuses);
 
             var raceBonus = racialBonuses[race.BaseRace.Id] + racialBonuses[race.Metarace.Id];
-            var initiativeFeats = featBonuses.Where(kvp => feats.Any(f => f.Name == kvp.Key));
+            var initiativeFeats = featBonuses.Where(kvp => feats.Any(f => f.Name.Id == kvp.Key));
             var featBonus = initiativeFeats.Sum(kvp => kvp.Value);
 
             return raceBonus + featBonus;

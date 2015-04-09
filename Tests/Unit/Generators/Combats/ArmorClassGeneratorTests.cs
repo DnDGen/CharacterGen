@@ -209,7 +209,10 @@ namespace NPCGen.Tests.Unit.Generators.Combats
         [Test]
         public void NaturalArmorBonusFromFeatApplied()
         {
-            feats.Add(new Feat { Name = "feat 1" });
+            var feat = new Feat();
+            feat.Name.Id = "feat 1";
+            feats.Add(feat);
+
             featAdjustments["feat 1"] = 1;
             featAdjustments["feat 2"] = -1;
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, TableNameConstants.Set.Collection.Groups.NaturalArmor))
@@ -267,8 +270,14 @@ namespace NPCGen.Tests.Unit.Generators.Combats
         [Test]
         public void OnlyHighestNaturalArmorBonusAppliesWhenHighestIsFeat()
         {
-            feats.Add(new Feat { Name = "feat 1" });
-            feats.Add(new Feat { Name = "feat 2" });
+            var feat = new Feat();
+            feat.Name.Id = "feat 1";
+            feats.Add(feat);
+
+            var feat2 = new Feat();
+            feat2.Name.Id = "feat 2";
+            feats.Add(feat2);
+
             featAdjustments["feat 1"] = 1;
             featAdjustments["feat 2"] = 2;
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, TableNameConstants.Set.Collection.Groups.NaturalArmor))
@@ -295,8 +304,14 @@ namespace NPCGen.Tests.Unit.Generators.Combats
         [Test]
         public void OnlyHighestNaturalArmorBonusAppliesWhenHighestIsItem()
         {
-            feats.Add(new Feat { Name = "feat 1" });
-            feats.Add(new Feat { Name = "feat 2" });
+            var feat = new Feat();
+            feat.Name.Id = "feat 1";
+            feats.Add(feat);
+
+            var feat2 = new Feat();
+            feat2.Name.Id = "feat 2";
+            feats.Add(feat2);
+
             featAdjustments["feat 1"] = 1;
             featAdjustments["feat 2"] = 1;
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, TableNameConstants.Set.Collection.Groups.NaturalArmor))
@@ -323,8 +338,14 @@ namespace NPCGen.Tests.Unit.Generators.Combats
         [Test]
         public void OnlyHighestNaturalArmorBonusAppliesWhenHighestIsRacial()
         {
-            feats.Add(new Feat { Name = "feat 1" });
-            feats.Add(new Feat { Name = "feat 2" });
+            var feat = new Feat();
+            feat.Name.Id = "feat 1";
+            feats.Add(feat);
+
+            var feat2 = new Feat();
+            feat2.Name.Id = "feat 2";
+            feats.Add(feat2);
+
             featAdjustments["feat 1"] = 1;
             featAdjustments["feat 2"] = 2;
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, TableNameConstants.Set.Collection.Groups.NaturalArmor))
@@ -351,8 +372,14 @@ namespace NPCGen.Tests.Unit.Generators.Combats
         [Test]
         public void NaturalArmorBonusesDoNotStackWithBaseRace()
         {
-            feats.Add(new Feat { Name = "feat 1" });
-            feats.Add(new Feat { Name = "feat 2" });
+            var feat = new Feat();
+            feat.Name.Id = "feat 1";
+            feats.Add(feat);
+
+            var feat2 = new Feat();
+            feat2.Name.Id = "feat 2";
+            feats.Add(feat2);
+
             featAdjustments["feat 1"] = 1;
             featAdjustments["feat 2"] = 1;
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, TableNameConstants.Set.Collection.Groups.NaturalArmor))
@@ -377,8 +404,14 @@ namespace NPCGen.Tests.Unit.Generators.Combats
         [Test]
         public void NaturalArmorBonusesDoNotStackWithMetarace()
         {
-            feats.Add(new Feat { Name = "feat 1" });
-            feats.Add(new Feat { Name = "feat 2" });
+            var feat = new Feat();
+            feat.Name.Id = "feat 1";
+            feats.Add(feat);
+
+            var feat2 = new Feat();
+            feat2.Name.Id = "feat 2";
+            feats.Add(feat2);
+
             featAdjustments["feat 1"] = 1;
             featAdjustments["feat 2"] = 1;
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, TableNameConstants.Set.Collection.Groups.NaturalArmor))
@@ -403,7 +436,10 @@ namespace NPCGen.Tests.Unit.Generators.Combats
         [Test]
         public void DodgeBonusApplied()
         {
-            feats.Add(new Feat { Name = "feat 1" });
+            var feat = new Feat();
+            feat.Name.Id = "feat 1";
+            feats.Add(feat);
+
             featAdjustments["feat 1"] = 1;
             featAdjustments["feat 2"] = -1;
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, TableNameConstants.Set.Collection.Groups.Dodge))
@@ -415,8 +451,14 @@ namespace NPCGen.Tests.Unit.Generators.Combats
         [Test]
         public void DodgeBonusesStack()
         {
-            feats.Add(new Feat { Name = "feat 1" });
-            feats.Add(new Feat { Name = "feat 2" });
+            var feat = new Feat();
+            feat.Name.Id = "feat 1";
+            feats.Add(feat);
+
+            var feat2 = new Feat();
+            feat2.Name.Id = "feat 2";
+            feats.Add(feat2);
+
             featAdjustments["feat 1"] = 1;
             featAdjustments["feat 2"] = 1;
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, TableNameConstants.Set.Collection.Groups.Dodge))
@@ -446,7 +488,10 @@ namespace NPCGen.Tests.Unit.Generators.Combats
             armorBonuses["armor"] = 1;
             adjustedDexterityBonus = 1;
 
-            feats.Add(new Feat { Name = "feat 1" });
+            var feat = new Feat();
+            feat.Name.Id = "feat 1";
+            feats.Add(feat);
+
             featAdjustments["feat 1"] = 1;
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, TableNameConstants.Set.Collection.Groups.Deflection))

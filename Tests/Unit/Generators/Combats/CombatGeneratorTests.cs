@@ -305,17 +305,26 @@ namespace NPCGen.Tests.Unit.Generators.Combats
         {
             race.BaseRace.Id = "baserace";
             race.Metarace.Id = "metarace";
-            feats.Add(new Feat { Name = "feat 1" });
-            feats.Add(new Feat { Name = "feat 2" });
-            feats.Add(new Feat { Name = "feat 3" });
+
+            var feat1 = new Feat();
+            feat1.Name.Id = "feat 1";
+            feats.Add(feat1);
+
+            var feat2 = new Feat();
+            feat2.Name.Id = "feat 2";
+            feats.Add(feat2);
+
+            var feat3 = new Feat();
+            feat3.Name.Id = "feat 3";
+            feats.Add(feat3);
 
             racialInitiativeAdjustments[race.BaseRace.Id] = 1;
             racialInitiativeAdjustments[race.Metarace.Id] = 1;
             racialInitiativeAdjustments["other race"] = 5;
 
-            featInitiativeAdjustments[feats[0].Name] = 1;
-            featInitiativeAdjustments[feats[1].Name] = 0;
-            featInitiativeAdjustments[feats[2].Name] = 1;
+            featInitiativeAdjustments[feats[0].Name.Id] = 1;
+            featInitiativeAdjustments[feats[1].Name.Id] = 0;
+            featInitiativeAdjustments[feats[2].Name.Id] = 1;
 
             racialBaseAttackAdjustments[race.BaseRace.Id] = 0;
             racialBaseAttackAdjustments[race.Metarace.Id] = 0;

@@ -18,7 +18,7 @@ namespace NPCGen.Tests.Unit.Common.Abilities.Feats
         [Test]
         public void FeatInitialized()
         {
-            Assert.That(feat.Name, Is.Empty);
+            Assert.That(feat.Name, Is.Not.Null);
             Assert.That(feat.SpecificApplication, Is.Empty);
         }
 
@@ -30,13 +30,13 @@ namespace NPCGen.Tests.Unit.Common.Abilities.Feats
         }
 
         [Test]
-        public void NotEqualIfNamesDoNotMatch()
+        public void NotEqualIfIdsDoNotMatch()
         {
-            feat.Name = "name";
+            feat.Name.Id = "name";
             feat.SpecificApplication = "spec app";
 
             var otherFeat = new Feat();
-            otherFeat.Name = "other name";
+            otherFeat.Name.Id = "other name";
             otherFeat.SpecificApplication = "spec app";
 
             Assert.That(feat, Is.Not.EqualTo(otherFeat));
@@ -46,11 +46,11 @@ namespace NPCGen.Tests.Unit.Common.Abilities.Feats
         [Test]
         public void NotEqualIfSpecificApplicationsDoNotMatch()
         {
-            feat.Name = "name";
+            feat.Name.Id = "name";
             feat.SpecificApplication = "spec app";
 
             var otherFeat = new Feat();
-            otherFeat.Name = "name";
+            otherFeat.Name.Id = "name";
             otherFeat.SpecificApplication = "other spec app";
 
             Assert.That(feat, Is.Not.EqualTo(otherFeat));
@@ -58,13 +58,13 @@ namespace NPCGen.Tests.Unit.Common.Abilities.Feats
         }
 
         [Test]
-        public void EqualIfNamesAndSpecificiApplicationsMatch()
+        public void EqualIfIdsAndSpecificiApplicationsMatch()
         {
-            feat.Name = "name";
+            feat.Name.Id = "name";
             feat.SpecificApplication = "spec app";
 
             var otherFeat = new Feat();
-            otherFeat.Name = "name";
+            otherFeat.Name.Id = "name";
             otherFeat.SpecificApplication = "spec app";
 
             Assert.That(feat, Is.EqualTo(otherFeat));
@@ -72,9 +72,9 @@ namespace NPCGen.Tests.Unit.Common.Abilities.Feats
         }
 
         [Test]
-        public void HashCodeIsHashOfNameANdHashOfSpecificApplicationAdded()
+        public void HashCodeIsHashOfIdAndHashOfSpecificApplicationAdded()
         {
-            feat.Name = "name";
+            feat.Name.Id = "name";
             feat.SpecificApplication = "specific application";
 
             var nameHash = feat.Name.GetHashCode();

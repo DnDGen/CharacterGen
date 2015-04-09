@@ -28,10 +28,11 @@ namespace NPCGen.Tables.Interfaces
 
             public static class Collection
             {
-                public const String AutomaticLanguages = "AutomaticLanguages";
+                public const String AdditionalFeatClassNameRequirements = "AdditionalFeatClassNameRequirements";
+                public const String AdditionalFeatFeatRequirements = "AdditionalFeatFeatRequirements";
                 public const String ArmorClassModifiers = "ArmorClassModifiers";
+                public const String AutomaticLanguages = "AutomaticLanguages";
                 public const String BaseRaceGroups = "BaseRaceGroups";
-                public const String Names = "Names";
                 public const String BonusLanguages = "BonusLanguages";
                 public const String ClassNameGroups = "ClassNameGroups";
                 public const String ClassSkills = "ClassSkills";
@@ -41,6 +42,7 @@ namespace NPCGen.Tables.Interfaces
                 public const String FeatGroups = "FeatGroups";
                 public const String FeatSpecificApplications = "FeatSpecificApplications";
                 public const String MetaraceGroups = "MetaraceGroups";
+                public const String Names = "Names";
                 public const String ProhibitedFields = "ProhibitedFields";
                 public const String RacialFeatBaseRaceRequirements = "RacialFeatBaseRaceRequirements";
                 public const String RacialFeatHitDieRequirements = "RacialFeatHitDieRequirements";

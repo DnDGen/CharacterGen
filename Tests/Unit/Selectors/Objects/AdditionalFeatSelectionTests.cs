@@ -28,9 +28,9 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
         [Test]
         public void FeatSelectionInitialized()
         {
-            Assert.That(selection.FeatName, Is.Empty);
+            Assert.That(selection.Name, Is.Not.Null);
             Assert.That(selection.RequiredBaseAttack, Is.EqualTo(0));
-            Assert.That(selection.RequiredFeats, Is.Empty);
+            Assert.That(selection.RequiredFeatIds, Is.Empty);
             Assert.That(selection.RequiredSkillRanks, Is.Empty);
             Assert.That(selection.RequiredStats, Is.Empty);
             Assert.That(selection.RequiredClassNames, Is.Empty);
@@ -138,8 +138,11 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
         [Test]
         public void FeatRequirementsNotMet()
         {
-            feats.Add(new Feat { Name = "feat" });
-            selection.RequiredFeats = new[] { "feat", "other required feat" };
+            var feat = new Feat();
+            feat.Name.Id = "feat";
+            feats.Add(feat);
+
+            selection.RequiredFeatIds = new[] { "feat", "other required feat" };
 
             var met = selection.MutableRequirementsMet(feats);
             Assert.That(met, Is.False);
@@ -148,9 +151,15 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
         [Test]
         public void AllMutableRequirementsMet()
         {
-            feats.Add(new Feat { Name = "feat" });
-            feats.Add(new Feat { Name = "other required feat" });
-            selection.RequiredFeats = new[] { "feat", "other required feat" };
+            var feat = new Feat();
+            feat.Name.Id = "feat";
+            feats.Add(feat);
+
+            var otherFeat = new Feat();
+            otherFeat.Name.Id = "other required feat";
+            feats.Add(otherFeat);
+
+            selection.RequiredFeatIds = new[] { "feat", "other required feat" };
 
             var met = selection.MutableRequirementsMet(feats);
             Assert.That(met, Is.True);
@@ -159,10 +168,19 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
         [Test]
         public void ExtraFeatDoNotMatter()
         {
-            feats.Add(new Feat { Name = "feat" });
-            feats.Add(new Feat { Name = "other required feat" });
-            feats.Add(new Feat { Name = "yet another feat" });
-            selection.RequiredFeats = new[] { "feat", "other required feat" };
+            var feat = new Feat();
+            feat.Name.Id = "feat";
+            feats.Add(feat);
+
+            var otherFeat = new Feat();
+            otherFeat.Name.Id = "other required feat";
+            feats.Add(otherFeat);
+
+            var anotherFeat = new Feat();
+            anotherFeat.Name.Id = "yet another feat";
+            feats.Add(anotherFeat);
+
+            selection.RequiredFeatIds = new[] { "feat", "other required feat" };
 
             var met = selection.MutableRequirementsMet(feats);
             Assert.That(met, Is.True);

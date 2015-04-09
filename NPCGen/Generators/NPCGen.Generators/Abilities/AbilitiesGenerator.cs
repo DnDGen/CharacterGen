@@ -49,7 +49,7 @@ namespace NPCGen.Generators.Abilities
                     ability.Skills[adjustment.Key].Bonus += adjustment.Value;
             }
 
-            var skillFoci = ability.Feats.Where(f => f.Name == FeatConstants.SkillFocus);
+            var skillFoci = ability.Feats.Where(f => f.Name.Id == FeatConstants.SkillFocus);
             foreach (var feat in skillFoci)
                 ability.Skills[feat.SpecificApplication].Bonus += 3;
 

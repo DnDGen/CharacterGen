@@ -4,13 +4,14 @@ using System.Linq;
 using NPCGen.Common.Abilities.Feats;
 using NPCGen.Common.Abilities.Skills;
 using NPCGen.Common.Abilities.Stats;
+using NPCGen.Common.Races;
 
 namespace NPCGen.Selectors.Interfaces.Objects
 {
     public class AdditionalFeatSelection
     {
-        public String FeatName { get; set; }
-        public IEnumerable<String> RequiredFeats { get; set; }
+        public NameModel Name { get; set; }
+        public IEnumerable<String> RequiredFeatIds { get; set; }
         public Int32 RequiredBaseAttack { get; set; }
         public Dictionary<String, Int32> RequiredStats { get; set; }
         public Dictionary<String, Int32> RequiredSkillRanks { get; set; }
@@ -21,8 +22,8 @@ namespace NPCGen.Selectors.Interfaces.Objects
 
         public AdditionalFeatSelection()
         {
-            FeatName = String.Empty;
-            RequiredFeats = Enumerable.Empty<String>();
+            Name = new NameModel();
+            RequiredFeatIds = Enumerable.Empty<String>();
             RequiredStats = new Dictionary<String, Int32>();
             RequiredSkillRanks = new Dictionary<String, Int32>();
             RequiredClassNames = Enumerable.Empty<String>();
@@ -48,7 +49,10 @@ namespace NPCGen.Selectors.Interfaces.Objects
 
         public Boolean MutableRequirementsMet(IEnumerable<Feat> feats)
         {
-            return RequiredFeats.All(rf => feats.Any(f => f.Name == rf));
+            var featIds = feats.Select(f => f.Name.Id);
+            var missedRequirements = RequiredFeatIds.Except(featIds);
+
+            return missedRequirements.Any() == false;
         }
     }
 }

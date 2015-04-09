@@ -23,7 +23,7 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
         [Test]
         public void SelectionIsInitialized()
         {
-            Assert.That(selection.FeatName, Is.Empty);
+            Assert.That(selection.Name, Is.Not.Null);
             Assert.That(selection.LevelRequirements, Is.Empty);
             Assert.That(selection.Strength, Is.EqualTo(0));
         }

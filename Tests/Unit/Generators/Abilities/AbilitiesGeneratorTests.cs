@@ -103,8 +103,13 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats)).Returns(skills);
 
             var feats = new List<Feat>();
-            feats.Add(new Feat { Name = "no adjust" });
-            feats.Add(new Feat { Name = "adjust" });
+            var noAdjustmentFeat = new Feat();
+            var adjustmentFeat = new Feat();
+
+            noAdjustmentFeat.Name.Id = "noAdjust";
+            adjustmentFeat.Name.Id = "adjust";
+            feats.Add(noAdjustmentFeat);
+            feats.Add(adjustmentFeat);
             mockFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills, baseAttack)).Returns(feats);
 
             var noAdjustments = new Dictionary<String, Int32>();
@@ -133,8 +138,15 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats)).Returns(skills);
 
             var feats = new List<Feat>();
-            feats.Add(new Feat { Name = FeatConstants.SkillFocus, SpecificApplication = "skill 1" });
-            feats.Add(new Feat { Name = FeatConstants.SkillFocus, SpecificApplication = "skill 3" });
+            var firstSkillFocus = new Feat();
+            var secondSkillFocus = new Feat();
+
+            firstSkillFocus.Name.Id = FeatConstants.SkillFocusId;
+            firstSkillFocus.SpecificApplication = "skill 1";
+            secondSkillFocus.Name.Id = FeatConstants.SkillFocusId;
+            secondSkillFocus.SpecificApplication = "skill 3";
+            feats.Add(firstSkillFocus);
+            feats.Add(secondSkillFocus);
             mockFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills, baseAttack)).Returns(feats);
 
             var noAdjustments = new Dictionary<String, Int32>();

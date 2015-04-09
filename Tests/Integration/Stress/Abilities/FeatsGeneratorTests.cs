@@ -25,12 +25,28 @@ namespace NPCGen.Tests.Integration.Stress.Abilities
         [Inject]
         public ICombatGenerator CombatGenerator { get; set; }
 
-        private IEnumerable<String> allFeats;
+        private IEnumerable<String> allFeatIds;
 
         [SetUp]
         public void Setup()
         {
-            allFeats = FeatConstants.GetAllFeats();
+            allFeatIds = new[]
+            {
+                FeatConstants.AasimarDaylightId,
+                FeatConstants.AmbidexterityId,
+                FeatConstants.DarkvisionId,
+                FeatConstants.LightArmorProficiencyId,
+                FeatConstants.ResistanceToAcidId,
+                FeatConstants.ResistanceToColdId,
+                FeatConstants.ResistanceToElectricityId,
+                FeatConstants.ScentId,
+                FeatConstants.ShieldProficiencyId,
+                FeatConstants.SkillFocusId,
+                FeatConstants.SpellMasteryId,
+                FeatConstants.StabilityId,
+                FeatConstants.StonecunningId,
+                FeatConstants.WeaponFamiliarityId
+            };
         }
 
         [TestCase("FeatsGenerator")]
@@ -60,13 +76,14 @@ namespace NPCGen.Tests.Integration.Stress.Abilities
 
             foreach (var feat in feats)
             {
-                Assert.That(allFeats, Contains.Item(feat.Name));
+                Assert.That(allFeatIds, Contains.Item(feat.Name.Id));
+                Assert.That(feat.Name.Name, Is.Not.Empty);
                 Assert.That(feat.SpecificApplication, Is.Not.Null);
             }
 
-            var specifics = feats.Where(f => feats.Count(c => c.Name == f.Name) > 1);
+            var specifics = feats.Where(f => feats.Count(c => c.Name.Id == f.Name.Id) > 1);
             foreach (var feat in specifics)
-                Assert.That(feat.SpecificApplication, Is.Not.Empty, feat.Name);
+                Assert.That(feat.SpecificApplication, Is.Not.Empty, feat.Name.Name);
         }
     }
 }

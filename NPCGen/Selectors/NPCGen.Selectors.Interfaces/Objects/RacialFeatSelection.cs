@@ -7,19 +7,19 @@ namespace NPCGen.Selectors.Interfaces.Objects
 {
     public class RacialFeatSelection
     {
-        public String FeatName { get; set; }
+        public NameModel Name { get; set; }
         public Int32 FeatStrength { get; set; }
-        public IEnumerable<String> BaseRaceRequirements { get; set; }
-        public IEnumerable<String> MetaraceRequirements { get; set; }
+        public IEnumerable<String> BaseRaceIdRequirements { get; set; }
+        public IEnumerable<String> MetaraceIdRequirements { get; set; }
         public IEnumerable<String> MetaraceSpeciesRequirements { get; set; }
         public IEnumerable<Int32> HitDieRequirements { get; set; }
         public String SizeRequirement { get; set; }
 
         public RacialFeatSelection()
         {
-            FeatName = String.Empty;
-            BaseRaceRequirements = Enumerable.Empty<String>();
-            MetaraceRequirements = Enumerable.Empty<String>();
+            Name = new NameModel();
+            BaseRaceIdRequirements = Enumerable.Empty<String>();
+            MetaraceIdRequirements = Enumerable.Empty<String>();
             MetaraceSpeciesRequirements = Enumerable.Empty<String>();
             HitDieRequirements = Enumerable.Empty<Int32>();
             SizeRequirement = String.Empty;
@@ -27,10 +27,10 @@ namespace NPCGen.Selectors.Interfaces.Objects
 
         public Boolean RequirementsMet(Race race, Int32 monsterHitDice)
         {
-            if (BaseRaceRequirements.Any() && !BaseRaceRequirements.Contains(race.BaseRace.Id))
+            if (BaseRaceIdRequirements.Any() && !BaseRaceIdRequirements.Contains(race.BaseRace.Id))
                 return false;
 
-            if (MetaraceRequirements.Any() && !MetaraceRequirements.Contains(race.Metarace.Id))
+            if (MetaraceIdRequirements.Any() && !MetaraceIdRequirements.Contains(race.Metarace.Id))
                 return false;
 
             if (MetaraceSpeciesRequirements.Any() && !MetaraceSpeciesRequirements.Contains(race.MetaraceSpecies))

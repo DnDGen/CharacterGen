@@ -1,15 +1,16 @@
 ﻿using System;
+using NPCGen.Common.Races;
 
 namespace NPCGen.Common.Abilities.Feats
 {
     public class Feat
     {
-        public String Name { get; set; }
+        public NameModel Name { get; set; }
         public String SpecificApplication { get; set; }
 
         public Feat()
         {
-            Name = String.Empty;
+            Name = new NameModel();
             SpecificApplication = String.Empty;
         }
 
@@ -19,12 +20,12 @@ namespace NPCGen.Common.Abilities.Feats
                 return false;
 
             var otherFeat = obj as Feat;
-            return Name == otherFeat.Name && SpecificApplication == otherFeat.SpecificApplication;
+            return Name.Id == otherFeat.Name.Id && SpecificApplication == otherFeat.SpecificApplication;
         }
 
         public override Int32 GetHashCode()
         {
-            return Name.GetHashCode() + SpecificApplication.GetHashCode();
+            return Name.Id.GetHashCode() + SpecificApplication.GetHashCode();
         }
     }
 }

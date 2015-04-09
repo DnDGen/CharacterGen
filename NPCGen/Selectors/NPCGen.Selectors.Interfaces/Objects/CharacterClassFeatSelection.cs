@@ -2,18 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using NPCGen.Common.CharacterClasses;
+using NPCGen.Common.Races;
 
 namespace NPCGen.Selectors.Interfaces.Objects
 {
     public class CharacterClassFeatSelection
     {
-        public String FeatName { get; set; }
+        public NameModel Name { get; set; }
         public Dictionary<String, Int32> LevelRequirements { get; set; }
         public Int32 Strength { get; set; }
 
         public CharacterClassFeatSelection()
         {
-            FeatName = String.Empty;
+            Name = new NameModel();
             LevelRequirements = new Dictionary<String, Int32>();
         }
 

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using NPCGen.Common.Abilities.Feats;
 using NUnit.Framework;
 
@@ -22,31 +21,23 @@ namespace NPCGen.Tests.Unit.Common.Abilities.Feats
         [TestCase(FeatConstants.Stability, "Stability")]
         [TestCase(FeatConstants.Stonecunning, "Stonecunning")]
         [TestCase(FeatConstants.WeaponFamiliarity, "Weapon Familiarity")]
+        [TestCase(FeatConstants.AasimarDaylightId, "AasimarDaylight")]
+        [TestCase(FeatConstants.AmbidexterityId, "Ambidexterity")]
+        [TestCase(FeatConstants.DarkvisionId, "Darkvision")]
+        [TestCase(FeatConstants.LightArmorProficiencyId, "LightArmorProficiency")]
+        [TestCase(FeatConstants.ResistanceToAcidId, "ResistanceToAcid")]
+        [TestCase(FeatConstants.ResistanceToColdId, "ResistanceToCold")]
+        [TestCase(FeatConstants.ResistanceToElectricityId, "ResistanceToElectricity")]
+        [TestCase(FeatConstants.ScentId, "Scent")]
+        [TestCase(FeatConstants.ShieldProficiencyId, "ShieldProficiency")]
+        [TestCase(FeatConstants.SkillFocusId, "SkillFocus")]
+        [TestCase(FeatConstants.SpellMasteryId, "SpellMastery")]
+        [TestCase(FeatConstants.StabilityId, "Stability")]
+        [TestCase(FeatConstants.StonecunningId, "Stonecunning")]
+        [TestCase(FeatConstants.WeaponFamiliarityId, "WeaponFamiliarity")]
         public void Constant(String constant, String value)
         {
             Assert.That(constant, Is.EqualTo(value));
-        }
-
-        [Test]
-        public void AllFeats()
-        {
-            var feats = FeatConstants.GetAllFeats();
-
-            Assert.That(feats, Contains.Item(FeatConstants.AasimarDaylight));
-            Assert.That(feats, Contains.Item(FeatConstants.Ambidexterity));
-            Assert.That(feats, Contains.Item(FeatConstants.Darkvision));
-            Assert.That(feats, Contains.Item(FeatConstants.LightArmorProficiency));
-            Assert.That(feats, Contains.Item(FeatConstants.ResistanceToAcid));
-            Assert.That(feats, Contains.Item(FeatConstants.ResistanceToCold));
-            Assert.That(feats, Contains.Item(FeatConstants.ResistanceToElectricity));
-            Assert.That(feats, Contains.Item(FeatConstants.Scent));
-            Assert.That(feats, Contains.Item(FeatConstants.ShieldProficiency));
-            Assert.That(feats, Contains.Item(FeatConstants.SkillFocus));
-            Assert.That(feats, Contains.Item(FeatConstants.SpellMastery));
-            Assert.That(feats, Contains.Item(FeatConstants.Stability));
-            Assert.That(feats, Contains.Item(FeatConstants.Stonecunning));
-            Assert.That(feats, Contains.Item(FeatConstants.WeaponFamiliarity));
-            Assert.That(feats.Count(), Is.EqualTo(14));
         }
     }
 }

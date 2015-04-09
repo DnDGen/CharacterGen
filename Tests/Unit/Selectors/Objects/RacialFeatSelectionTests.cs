@@ -22,11 +22,11 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
         [Test]
         public void RacialFeatSelectionInitialization()
         {
-            Assert.That(selection.BaseRaceRequirements, Is.Empty);
-            Assert.That(selection.FeatName, Is.Empty);
+            Assert.That(selection.BaseRaceIdRequirements, Is.Empty);
+            Assert.That(selection.Name, Is.Not.Null);
             Assert.That(selection.FeatStrength, Is.EqualTo(0));
             Assert.That(selection.HitDieRequirements, Is.Empty);
-            Assert.That(selection.MetaraceRequirements, Is.Empty);
+            Assert.That(selection.MetaraceIdRequirements, Is.Empty);
             Assert.That(selection.MetaraceSpeciesRequirements, Is.Empty);
             Assert.That(selection.SizeRequirement, Is.Empty);
         }
@@ -42,7 +42,7 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
         public void RequirementsNotMetIfWrongBaseRace()
         {
             race.BaseRace.Id = "baserace";
-            selection.BaseRaceRequirements = new[] { "otherbaserace" };
+            selection.BaseRaceIdRequirements = new[] { "otherbaserace" };
 
             var met = selection.RequirementsMet(race, 0);
             Assert.That(met, Is.False);
@@ -52,7 +52,7 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
         public void RequirementsNotMetIfWrongMetarace()
         {
             race.Metarace.Id = "metarace";
-            selection.MetaraceRequirements = new[] { "othermetarace" };
+            selection.MetaraceIdRequirements = new[] { "othermetarace" };
 
             var met = selection.RequirementsMet(race, 0);
             Assert.That(met, Is.False);
@@ -62,7 +62,7 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
         public void RequirementsNotMetIfWrongMetaraceSpecies()
         {
             race.MetaraceSpecies = "metarace species";
-            selection.MetaraceRequirements = new[] { "othermetaracespecies" };
+            selection.MetaraceIdRequirements = new[] { "othermetaracespecies" };
 
             var met = selection.RequirementsMet(race, 0);
             Assert.That(met, Is.False);
@@ -115,8 +115,8 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
             race.MetaraceSpecies = "metarace species";
             race.Size = "big";
 
-            selection.BaseRaceRequirements = new[] { race.BaseRace.Id, "other" };
-            selection.MetaraceRequirements = new[] { race.Metarace.Id, "other" };
+            selection.BaseRaceIdRequirements = new[] { race.BaseRace.Id, "other" };
+            selection.MetaraceIdRequirements = new[] { race.Metarace.Id, "other" };
             selection.MetaraceSpeciesRequirements = new[] { race.MetaraceSpecies, "other" };
             selection.SizeRequirement = race.Size;
             selection.HitDieRequirements = Enumerable.Range(3, 3);

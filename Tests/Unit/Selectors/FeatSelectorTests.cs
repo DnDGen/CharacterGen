@@ -44,26 +44,26 @@ namespace NPCGen.Tests.Unit.Selectors
             var first = racialFeats.First();
             var last = racialFeats.Last();
 
-            Assert.That(first.FeatName, Is.EqualTo("racial feat 1"));
+            Assert.That(first.Name, Is.EqualTo("racial feat 1"));
             Assert.That(first.FeatStrength, Is.EqualTo(9266));
             Assert.That(first.SizeRequirement, Is.EqualTo("ginormous"));
-            Assert.That(first.BaseRaceRequirements, Contains.Item("base race 1"));
-            Assert.That(first.BaseRaceRequirements, Contains.Item("base race 2"));
-            Assert.That(first.BaseRaceRequirements.Count(), Is.EqualTo(2));
+            Assert.That(first.BaseRaceIdRequirements, Contains.Item("base race 1"));
+            Assert.That(first.BaseRaceIdRequirements, Contains.Item("base race 2"));
+            Assert.That(first.BaseRaceIdRequirements.Count(), Is.EqualTo(2));
             Assert.That(first.HitDieRequirements, Contains.Item(42));
             Assert.That(first.HitDieRequirements, Contains.Item(90210));
             Assert.That(first.HitDieRequirements.Count(), Is.EqualTo(2));
-            Assert.That(first.MetaraceRequirements, Is.Empty);
+            Assert.That(first.MetaraceIdRequirements, Is.Empty);
             Assert.That(first.MetaraceSpeciesRequirements, Is.Empty);
 
-            Assert.That(last.FeatName, Is.EqualTo("racial feat 2"));
+            Assert.That(last.Name, Is.EqualTo("racial feat 2"));
             Assert.That(last.FeatStrength, Is.EqualTo(0));
             Assert.That(last.SizeRequirement, Is.Empty);
-            Assert.That(last.BaseRaceRequirements, Is.Empty);
+            Assert.That(last.BaseRaceIdRequirements, Is.Empty);
             Assert.That(last.HitDieRequirements, Is.Empty);
-            Assert.That(last.MetaraceRequirements, Contains.Item("metarace 2"));
-            Assert.That(last.MetaraceRequirements, Contains.Item("metarace 3"));
-            Assert.That(last.MetaraceRequirements.Count(), Is.EqualTo(2));
+            Assert.That(last.MetaraceIdRequirements, Contains.Item("metarace 2"));
+            Assert.That(last.MetaraceIdRequirements, Contains.Item("metarace 3"));
+            Assert.That(last.MetaraceIdRequirements.Count(), Is.EqualTo(2));
             Assert.That(last.MetaraceSpeciesRequirements, Contains.Item("species 3"));
             Assert.That(last.MetaraceSpeciesRequirements, Contains.Item("species 2"));
             Assert.That(last.MetaraceSpeciesRequirements.Count(), Is.EqualTo(2));
@@ -111,12 +111,12 @@ namespace NPCGen.Tests.Unit.Selectors
             var first = classFeats.First();
             var last = classFeats.Last();
 
-            Assert.That(first.FeatName, Is.EqualTo("class feat 1"));
+            Assert.That(first.Name, Is.EqualTo("class feat 1"));
             Assert.That(first.LevelRequirements["class 1"], Is.EqualTo(1));
             Assert.That(first.LevelRequirements["class 3"], Is.EqualTo(5));
             Assert.That(first.Strength, Is.EqualTo(0));
 
-            Assert.That(last.FeatName, Is.EqualTo("class feat 2"));
+            Assert.That(last.Name, Is.EqualTo("class feat 2"));
             Assert.That(last.LevelRequirements["class 2"], Is.EqualTo(15));
             Assert.That(last.LevelRequirements["class 3"], Is.EqualTo(3));
             Assert.That(last.LevelRequirements["specialist"], Is.EqualTo(0));
@@ -126,13 +126,69 @@ namespace NPCGen.Tests.Unit.Selectors
         [Test]
         public void GetAdditionalFeats()
         {
-            Assert.Fail();
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, TableNameConstants.Set.Collection.Groups.Racial))
+                .Returns(new[] { "additional feat 1", "additional feat 2" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatData, "additional feat 1")).Returns(new[] { "True", "False", "9266", String.Empty });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatData, "additional feat 2")).Returns(new[] { "False", "True", "0", "specifics" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AdditionalFeatClassNameRequirements, "additional feat 1")).Returns(new[] { "class 1", "class 3" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AdditionalFeatFeatRequirements, "additional feat 1")).Returns(new[] { "feat 1", "feat 2" });
+
+            //TODO adjustment setup
+
+            var additionalFeats = selector.SelectAdditional();
+            Assert.That(additionalFeats.Count(), Is.EqualTo(2));
+
+            var first = additionalFeats.First();
+            var last = additionalFeats.Last();
+
+            Assert.That(first.Name, Is.EqualTo("additional feat 1"));
+            Assert.That(first.IsFighterFeat, Is.True);
+            Assert.That(first.IsWizardFeat, Is.False);
+            Assert.That(first.RequiredBaseAttack, Is.EqualTo(9266));
+            Assert.That(first.RequiredClassNames, Contains.Item("class 1"));
+            Assert.That(first.RequiredClassNames, Contains.Item("class 3"));
+            Assert.That(first.RequiredClassNames.Count(), Is.EqualTo(2));
+            Assert.That(first.RequiredFeatIds, Contains.Item("feat 1"));
+            Assert.That(first.RequiredFeatIds, Contains.Item("feat 2"));
+            Assert.That(first.RequiredFeatIds.Count(), Is.EqualTo(2));
+            Assert.That(first.RequiredSkillRanks, Is.Empty);
+            Assert.That(first.RequiredStats, Is.Empty);
+            Assert.That(first.SpecificApplicationType, Is.Empty);
+
+            Assert.That(last.Name, Is.EqualTo("additional feat 2"));
+            Assert.That(last.IsFighterFeat, Is.False);
+            Assert.That(last.IsWizardFeat, Is.True);
+            Assert.That(last.RequiredBaseAttack, Is.EqualTo(0));
+            Assert.That(last.RequiredClassNames, Is.Empty);
+            Assert.That(last.RequiredFeatIds, Is.Empty);
+            Assert.That(last.RequiredSkillRanks["skill 1"], Is.EqualTo(5));
+            Assert.That(last.RequiredSkillRanks["skill 2"], Is.EqualTo(4));
+            Assert.That(last.RequiredSkillRanks.Count, Is.EqualTo(2));
+            Assert.That(last.RequiredStats["stat 1"], Is.EqualTo(13));
+            Assert.That(last.RequiredStats["stat 2"], Is.EqualTo(16));
+            Assert.That(last.RequiredStats.Count, Is.EqualTo(2));
+            Assert.That(last.SpecificApplicationType, Is.EqualTo("specifics"));
         }
 
         [Test]
         public void GetAdditionalFeat()
         {
-            Assert.Fail();
+            //TODO: setup
+
+            var additionalFeat = selector.SelectAdditional("additional feat 1");
+            Assert.That(additionalFeat.Name, Is.EqualTo("additional feat 1"));
+            Assert.That(additionalFeat.IsFighterFeat, Is.True);
+            Assert.That(additionalFeat.IsWizardFeat, Is.False);
+            Assert.That(additionalFeat.RequiredBaseAttack, Is.EqualTo(9266));
+            Assert.That(additionalFeat.RequiredClassNames, Contains.Item("class 1"));
+            Assert.That(additionalFeat.RequiredClassNames, Contains.Item("class 3"));
+            Assert.That(additionalFeat.RequiredClassNames.Count(), Is.EqualTo(2));
+            Assert.That(additionalFeat.RequiredFeatIds, Contains.Item("feat 1"));
+            Assert.That(additionalFeat.RequiredFeatIds, Contains.Item("feat 2"));
+            Assert.That(additionalFeat.RequiredFeatIds.Count(), Is.EqualTo(2));
+            Assert.That(additionalFeat.RequiredSkillRanks, Is.Empty);
+            Assert.That(additionalFeat.RequiredStats, Is.Empty);
+            Assert.That(additionalFeat.SpecificApplicationType, Is.Empty);
         }
     }
 }
