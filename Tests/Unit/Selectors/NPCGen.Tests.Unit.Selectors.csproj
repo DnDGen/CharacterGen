@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="BooleanPercentileSelectorTests.cs" />
     <Compile Include="CollectionsSelectorTests.cs" />
+    <Compile Include="FeatSelectorTests.cs" />
     <Compile Include="NameSelectorTests.cs" />
     <Compile Include="Objects\AdditionalFeatSelectionConstantsTests.cs" />
     <Compile Include="Objects\AdditionalFeatSelectionTests.cs" />
