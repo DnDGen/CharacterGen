@@ -67,6 +67,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Abilities\Feats\FeatGroupsTests.cs" />
     <Compile Include="Abilities\Skills\AssignPointToCrossClassSkillTests.cs" />
     <Compile Include="Abilities\Skills\ClassSkillsTests.cs" />
     <Compile Include="Abilities\Skills\CrossClassSkillsTests.cs" />
@@ -235,9 +236,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Abilities\Feats\" />
-  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

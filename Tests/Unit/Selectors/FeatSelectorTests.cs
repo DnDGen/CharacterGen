@@ -123,7 +123,7 @@ namespace NPCGen.Tests.Unit.Selectors
             var last = classFeats.Last();
 
             Assert.That(first.Name.Id, Is.EqualTo("class feat 1"));
-            Assert.That(first.Name.Name, Is.EqualTo("class feat 2 name"));
+            Assert.That(first.Name.Name, Is.EqualTo("class feat 1 name"));
             Assert.That(first.LevelRequirements["class 1"], Is.EqualTo(1));
             Assert.That(first.LevelRequirements["class 3"], Is.EqualTo(5));
             Assert.That(first.Strength, Is.EqualTo(0));

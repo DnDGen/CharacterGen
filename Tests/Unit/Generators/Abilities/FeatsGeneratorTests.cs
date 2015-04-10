@@ -207,7 +207,8 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.Names, TableNameConstants.Set.Collection.Groups.Monsters)).Returns(new[] { "other base race" });
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
-            Assert.That(feats.Single().Name, Is.EqualTo("racial feat"));
+            var onlyFeat = feats.Single();
+            Assert.That(onlyFeat.Name.Id, Is.EqualTo("racial feat"));
             mockAdjustmentsSelector.Verify(s => s.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice), Times.Never);
         }
 
@@ -485,6 +486,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
 
             additionalFeatSelections.Add(selection);
             mockFeatsSelector.Setup(s => s.SelectAdditional(featId)).Returns(selection);
+            mockNameSelector.Setup(s => s.Select(featId)).Returns(selection.Name.Name);
         }
 
         [Test]
@@ -1038,7 +1040,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             var firstFeat = feats.First();
             var lastFeat = feats.Last();
 
-            Assert.That(firstFeat.Name, Is.EqualTo(FeatConstants.SpellMastery));
+            Assert.That(firstFeat.Name.Id, Is.EqualTo(FeatConstants.SpellMasteryId));
             Assert.That(firstFeat.SpecificApplication, Is.EqualTo("2"));
             Assert.That(feats.Count(), Is.EqualTo(1));
         }
@@ -1055,9 +1057,21 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             var firstFeat = feats.First();
             var lastFeat = feats.Last();
 
-            Assert.That(firstFeat.Name, Is.EqualTo(FeatConstants.SpellMastery));
+            Assert.That(firstFeat.Name.Id, Is.EqualTo(FeatConstants.SpellMasteryId));
             Assert.That(firstFeat.SpecificApplication, Is.EqualTo("4"));
             Assert.That(feats.Count(), Is.EqualTo(1));
+        }
+
+        [Test]
+        public void ToughnessCanBeTakenMultipleTimes()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void ToughnessSpecificApplicationIsnumberOftimesTaken()
+        {
+            Assert.Fail();
         }
 
         [Test]

@@ -102,7 +102,7 @@ namespace NPCGen.Generators.Abilities
             var overwrittenStrengths = new List<RacialFeatSelection>();
             foreach (var feat in featToOverwrite)
             {
-                var overwritableFeats = featToOverwrite.Where(f => f.Name == feat.Name);
+                var overwritableFeats = featToOverwrite.Where(f => f.Name.Id == feat.Name.Id);
                 var max = overwritableFeats.Max(f => f.FeatStrength);
 
                 if (feat.FeatStrength == max)
