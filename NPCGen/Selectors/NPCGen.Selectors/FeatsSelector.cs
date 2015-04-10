@@ -11,11 +11,13 @@ namespace NPCGen.Selectors
     {
         private ICollectionsSelector collectionsSelector;
         private IAdjustmentsSelector adjustmentsSelector;
+        private INameSelector nameSelector;
 
-        public FeatsSelector(ICollectionsSelector collectionsSelector, IAdjustmentsSelector adjustmentsSelector)
+        public FeatsSelector(ICollectionsSelector collectionsSelector, IAdjustmentsSelector adjustmentsSelector, INameSelector nameSelector)
         {
             this.collectionsSelector = collectionsSelector;
             this.adjustmentsSelector = adjustmentsSelector;
+            this.nameSelector = nameSelector;
         }
 
         public IEnumerable<RacialFeatSelection> SelectRacial()
@@ -27,6 +29,7 @@ namespace NPCGen.Selectors
             {
                 var racialFeatSelection = new RacialFeatSelection();
                 racialFeatSelection.Name.Id = racialFeatId;
+                racialFeatSelection.Name.Name = nameSelector.Select(racialFeatId);
 
                 var featData = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatData, racialFeatId);
                 racialFeatSelection.SizeRequirement = featData.First();
@@ -46,12 +49,40 @@ namespace NPCGen.Selectors
 
         public IEnumerable<AdditionalFeatSelection> SelectAdditional()
         {
-            throw new NotImplementedException();
+            var additionalFeatIds = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, TableNameConstants.Set.Collection.Groups.Additional);
+            var additionalFeatSelections = new List<AdditionalFeatSelection>();
+
+            foreach (var additionalFeatId in additionalFeatIds)
+            {
+                var additionalFeatSelection = SelectAdditional(additionalFeatId);
+                additionalFeatSelections.Add(additionalFeatSelection);
+            }
+
+            return additionalFeatSelections;
         }
 
-        public AdditionalFeatSelection SelectAdditional(String featName)
+        public AdditionalFeatSelection SelectAdditional(String featId)
         {
-            throw new NotImplementedException();
+            var additionalFeatSelection = new AdditionalFeatSelection();
+            additionalFeatSelection.Name.Id = featId;
+            additionalFeatSelection.Name.Name = nameSelector.Select(featId);
+
+            var featData = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatData, featId).ToArray();
+            additionalFeatSelection.IsFighterFeat = Convert.ToBoolean(featData[0]);
+            additionalFeatSelection.IsWizardFeat = Convert.ToBoolean(featData[1]);
+            additionalFeatSelection.RequiredBaseAttack = Convert.ToInt32(featData[2]);
+            additionalFeatSelection.SpecificApplicationType = featData[3];
+
+            additionalFeatSelection.RequiredClassNames = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AdditionalFeatClassNameRequirements, featId);
+            additionalFeatSelection.RequiredFeatIds = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AdditionalFeatFeatRequirements, featId);
+
+            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.FEATSkillRankRequirements, featId);
+            additionalFeatSelection.RequiredSkillRanks = adjustmentsSelector.SelectFrom(tableName);
+
+            tableName = String.Format(TableNameConstants.Formattable.Adjustments.FEATStatRequirements, featId);
+            additionalFeatSelection.RequiredStats = adjustmentsSelector.SelectFrom(tableName);
+
+            return additionalFeatSelection;
         }
 
         public IEnumerable<CharacterClassFeatSelection> SelectClassFeats()
@@ -63,6 +94,7 @@ namespace NPCGen.Selectors
             {
                 var classFeatSelection = new CharacterClassFeatSelection();
                 classFeatSelection.Name.Id = classFeatId;
+                classFeatSelection.Name.Name = nameSelector.Select(classFeatId);
 
                 var featData = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatData, classFeatId);
                 var strength = featData.First();

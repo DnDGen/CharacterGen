@@ -42,14 +42,14 @@ namespace NPCGen.Generators.Abilities
 
             foreach (var feat in ability.Feats)
             {
-                var tableName = String.Format(TableNameConstants.Formattable.Adjustments.FEATSkillAdjustments, feat.Name);
+                var tableName = String.Format(TableNameConstants.Formattable.Adjustments.FEATSkillAdjustments, feat.Name.Id);
                 var adjustments = adjustmentsSelector.SelectFrom(tableName);
 
                 foreach (var adjustment in adjustments)
                     ability.Skills[adjustment.Key].Bonus += adjustment.Value;
             }
 
-            var skillFoci = ability.Feats.Where(f => f.Name.Id == FeatConstants.SkillFocus);
+            var skillFoci = ability.Feats.Where(f => f.Name.Id == FeatConstants.SkillFocusId);
             foreach (var feat in skillFoci)
                 ability.Skills[feat.SpecificApplication].Bonus += 3;
 

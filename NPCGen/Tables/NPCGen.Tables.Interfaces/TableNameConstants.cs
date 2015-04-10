@@ -57,6 +57,7 @@ namespace NPCGen.Tables.Interfaces
 
                 public static class Groups
                 {
+                    public const String Additional = "Additional";
                     public const String AverageBaseAttack = "Average Base Attack";
                     public const String CharacterClasses = "CharacterClasses";
                     public const String CumulativeStrengths = "CumulativeStrengths";
@@ -99,6 +100,8 @@ namespace NPCGen.Tables.Interfaces
                 public const String BASERACESkillAdjustments = "{0}SkillAdjustments";
                 public const String CLASSFeatLevelRequirements = "{0}FeatLevelRequirements";
                 public const String FEATSkillAdjustments = "{0}SkillAdjustments";
+                public const String FEATSkillRankRequirements = "{0}SkillRankRequirements";
+                public const String FEATStatRequirements = "{0}StatRequirements";
                 public const String METARACESkillAdjustments = "{0}SkillAdjustments";
                 public const String STATStatAdjustments = "{0}StatAdjustments";
             }

@@ -25,12 +25,13 @@ namespace NPCGen.Generators.Abilities
         private INameSelector nameSelector;
 
         public FeatsGenerator(ICollectionsSelector collectionsSelector, IAdjustmentsSelector adjustmentsSelector,
-            IFeatsSelector featsSelector, IDice dice)
+            IFeatsSelector featsSelector, IDice dice, INameSelector nameSelector)
         {
             this.collectionsSelector = collectionsSelector;
             this.adjustmentsSelector = adjustmentsSelector;
             this.featsSelector = featsSelector;
             this.dice = dice;
+            this.nameSelector = nameSelector;
         }
 
         public IEnumerable<Feat> GenerateWith(CharacterClass characterClass, Race race, Dictionary<String, Stat> stats,
@@ -113,19 +114,18 @@ namespace NPCGen.Generators.Abilities
 
         private IEnumerable<RacialFeatSelection> AddCumulativeStrengths(IEnumerable<RacialFeatSelection> racialFeats)
         {
-            var cumulativeStrengthIds = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups,
-                TableNameConstants.Set.Collection.Groups.CumulativeStrengths);
+            var cumulativeStrengthIds = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, TableNameConstants.Set.Collection.Groups.CumulativeStrengths);
             var featToSum = racialFeats.Where(f => cumulativeStrengthIds.Contains(f.Name.Id));
             var unsummedStrengths = racialFeats.Except(featToSum);
-            var featNamesToSum = featToSum.Select(f => f.Name).Distinct();
+            var featIdsToSum = featToSum.Select(f => f.Name.Id).Distinct();
 
             var summedStrengths = new List<RacialFeatSelection>();
-            foreach (var featName in featNamesToSum)
+            foreach (var featId in featIdsToSum)
             {
-                var summableFeats = featToSum.Where(f => f.Name == featName);
+                var summableFeats = featToSum.Where(f => f.Name.Id == featId);
 
                 var selection = new RacialFeatSelection();
-                selection.Name = featName;
+                selection.Name.Id = featId;
                 selection.FeatStrength = summableFeats.Sum(f => f.FeatStrength);
 
                 summedStrengths.Add(selection);
@@ -156,7 +156,7 @@ namespace NPCGen.Generators.Abilities
                 var sourceFeat = featsSelector.SelectAdditional(classFeatSelection.Name.Id);
 
                 if (!String.IsNullOrEmpty(sourceFeat.SpecificApplicationType))
-                    classFeat.SpecificApplication = GetSpecificApplicationOf(classFeat, sourceFeat, classFeats, characterClass.ClassName, stats[StatConstants.Intelligence].Bonus);
+                    classFeat.SpecificApplication = GetSpecificApplicationOf(classFeat, sourceFeat, classFeats, characterClass, stats[StatConstants.Intelligence].Bonus);
                 else
                     classFeat.SpecificApplication = GetSpecificApplicationFromStrength(classFeatSelection.Strength);
 
@@ -176,7 +176,7 @@ namespace NPCGen.Generators.Abilities
 
         private Boolean AlreadyHaveStrongerFeat(Feat feat, CharacterClassFeatSelection classFeatSelection)
         {
-            if (feat.Name != classFeatSelection.Name)
+            if (feat.Name.Id != classFeatSelection.Name.Id)
                 return false;
 
             var strength = 0;
@@ -188,7 +188,7 @@ namespace NPCGen.Generators.Abilities
 
         private Boolean FeatIsWeaker(Feat feat, CharacterClassFeatSelection classFeatSelection)
         {
-            if (feat.Name != classFeatSelection.Name)
+            if (feat.Name.Id != classFeatSelection.Name.Id)
                 return false;
 
             var strength = 0;
@@ -198,7 +198,7 @@ namespace NPCGen.Generators.Abilities
             return strength < classFeatSelection.Strength;
         }
 
-        private String GetSpecificApplicationOf(Feat feat, AdditionalFeatSelection sourceFeat, IEnumerable<Feat> feats, String className, Int32 intelligenceBonus)
+        private String GetSpecificApplicationOf(Feat feat, AdditionalFeatSelection sourceFeat, IEnumerable<Feat> feats, CharacterClass characterClass, Int32 intelligenceBonus)
         {
             if (feat.Name.Id == FeatConstants.SpellMasteryId)
             {
@@ -219,8 +219,11 @@ namespace NPCGen.Generators.Abilities
             var usedSpecificApplications = feats.Where(f => f.Name == feat.Name).Select(f => f.SpecificApplication);
             specificApplications = specificApplications.Except(usedSpecificApplications);
 
+            if (sourceFeat.SpecificApplicationType == AdditionalFeatSelectionConstants.SchoolsOfMagic)
+                specificApplications = specificApplications.Except(characterClass.ProhibitedFields);
+
             var spellcasters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, TableNameConstants.Set.Collection.Groups.Spellcasters);
-            if (!spellcasters.Contains(className))
+            if (!spellcasters.Contains(characterClass.ClassName))
                 specificApplications = specificApplications.Except(new[] { WeaponProficiencyConstants.Ray });
 
             var index = GetRandomIndexOf(specificApplications);
@@ -293,7 +296,7 @@ namespace NPCGen.Generators.Abilities
                 var feat = availableFeats.ElementAt(index);
                 var sourceFeat = sourceFeats.First(f => f.Name == feat.Name);
 
-                feat.SpecificApplication = GetSpecificApplicationOf(feat, sourceFeat, feats, characterClass.ClassName, stats[StatConstants.Intelligence].Bonus);
+                feat.SpecificApplication = GetSpecificApplicationOf(feat, sourceFeat, feats, characterClass, stats[StatConstants.Intelligence].Bonus);
 
                 if (feat.Name.Id == FeatConstants.SpellMasteryId && feats.Any(f => f.Name.Id == FeatConstants.SpellMasteryId))
                 {

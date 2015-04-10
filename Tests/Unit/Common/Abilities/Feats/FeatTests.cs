@@ -77,11 +77,11 @@ namespace NPCGen.Tests.Unit.Common.Abilities.Feats
             feat.Name.Id = "name";
             feat.SpecificApplication = "specific application";
 
-            var nameHash = feat.Name.GetHashCode();
+            var idHash = feat.Name.Id.GetHashCode();
             var specificApplicationHash = feat.SpecificApplication.GetHashCode();
             var featHashCode = feat.GetHashCode();
 
-            Assert.That(featHashCode, Is.EqualTo(nameHash + specificApplicationHash));
+            Assert.That(featHashCode, Is.EqualTo(idHash + specificApplicationHash));
         }
     }
 }

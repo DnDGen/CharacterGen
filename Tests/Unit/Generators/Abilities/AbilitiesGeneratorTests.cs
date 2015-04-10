@@ -113,13 +113,13 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             mockFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills, baseAttack)).Returns(feats);
 
             var noAdjustments = new Dictionary<String, Int32>();
-            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.FEATSkillAdjustments, feats[0].Name);
+            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.FEATSkillAdjustments, feats[0].Name.Id);
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(noAdjustments);
 
             var adjustments = new Dictionary<String, Int32>();
             adjustments["skill 1"] = 92;
             adjustments["skill 2"] = 66;
-            tableName = String.Format(TableNameConstants.Formattable.Adjustments.FEATSkillAdjustments, feats[1].Name);
+            tableName = String.Format(TableNameConstants.Formattable.Adjustments.FEATSkillAdjustments, feats[1].Name.Id);
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(adjustments);
 
             var ability = abilitiesGenerator.GenerateWith(characterClass, race, mockStatsRandomizer.Object, baseAttack);

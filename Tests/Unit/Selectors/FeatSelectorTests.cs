@@ -15,15 +15,18 @@ namespace NPCGen.Tests.Unit.Selectors
         private IFeatsSelector selector;
         private Mock<ICollectionsSelector> mockCollectionsSelector;
         private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
+        private Mock<INameSelector> mockNameSelector;
 
         [SetUp]
         public void Setup()
         {
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
             mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
-            selector = new FeatsSelector(mockCollectionsSelector.Object, mockAdjustmentsSelector.Object);
+            mockNameSelector = new Mock<INameSelector>();
+            selector = new FeatsSelector(mockCollectionsSelector.Object, mockAdjustmentsSelector.Object, mockNameSelector.Object);
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(It.IsAny<String>(), It.IsAny<String>())).Returns(Enumerable.Empty<String>());
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(It.IsAny<String>())).Returns(new Dictionary<String, Int32>());
         }
 
         [Test]
@@ -38,13 +41,17 @@ namespace NPCGen.Tests.Unit.Selectors
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.RacialFeatHitDieRequirements, "racial feat 1")).Returns(new[] { "42", "90210" });
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.RacialFeatMetaraceSpeciesRequirements, "racial feat 2")).Returns(new[] { "species 2", "species 3" });
 
+            mockNameSelector.Setup(s => s.Select("racial feat 1")).Returns("racial feat 1 name");
+            mockNameSelector.Setup(s => s.Select("racial feat 2")).Returns("racial feat 2 name");
+
             var racialFeats = selector.SelectRacial();
             Assert.That(racialFeats.Count(), Is.EqualTo(2));
 
             var first = racialFeats.First();
             var last = racialFeats.Last();
 
-            Assert.That(first.Name, Is.EqualTo("racial feat 1"));
+            Assert.That(first.Name.Id, Is.EqualTo("racial feat 1"));
+            Assert.That(first.Name.Name, Is.EqualTo("racial feat 1 name"));
             Assert.That(first.FeatStrength, Is.EqualTo(9266));
             Assert.That(first.SizeRequirement, Is.EqualTo("ginormous"));
             Assert.That(first.BaseRaceIdRequirements, Contains.Item("base race 1"));
@@ -56,7 +63,8 @@ namespace NPCGen.Tests.Unit.Selectors
             Assert.That(first.MetaraceIdRequirements, Is.Empty);
             Assert.That(first.MetaraceSpeciesRequirements, Is.Empty);
 
-            Assert.That(last.Name, Is.EqualTo("racial feat 2"));
+            Assert.That(last.Name.Id, Is.EqualTo("racial feat 2"));
+            Assert.That(last.Name.Name, Is.EqualTo("racial feat 2 name"));
             Assert.That(last.FeatStrength, Is.EqualTo(0));
             Assert.That(last.SizeRequirement, Is.Empty);
             Assert.That(last.BaseRaceIdRequirements, Is.Empty);
@@ -105,18 +113,23 @@ namespace NPCGen.Tests.Unit.Selectors
             tableName = String.Format(TableNameConstants.Formattable.Adjustments.CLASSFeatLevelRequirements, "specialist");
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(specialistLevelRequirements);
 
+            mockNameSelector.Setup(s => s.Select("class feat 1")).Returns("class feat 1 name");
+            mockNameSelector.Setup(s => s.Select("class feat 2")).Returns("class feat 2 name");
+
             var classFeats = selector.SelectClassFeats();
             Assert.That(classFeats.Count(), Is.EqualTo(2));
 
             var first = classFeats.First();
             var last = classFeats.Last();
 
-            Assert.That(first.Name, Is.EqualTo("class feat 1"));
+            Assert.That(first.Name.Id, Is.EqualTo("class feat 1"));
+            Assert.That(first.Name.Name, Is.EqualTo("class feat 2 name"));
             Assert.That(first.LevelRequirements["class 1"], Is.EqualTo(1));
             Assert.That(first.LevelRequirements["class 3"], Is.EqualTo(5));
             Assert.That(first.Strength, Is.EqualTo(0));
 
-            Assert.That(last.Name, Is.EqualTo("class feat 2"));
+            Assert.That(last.Name.Id, Is.EqualTo("class feat 2"));
+            Assert.That(last.Name.Name, Is.EqualTo("class feat 2 name"));
             Assert.That(last.LevelRequirements["class 2"], Is.EqualTo(15));
             Assert.That(last.LevelRequirements["class 3"], Is.EqualTo(3));
             Assert.That(last.LevelRequirements["specialist"], Is.EqualTo(0));
@@ -126,14 +139,29 @@ namespace NPCGen.Tests.Unit.Selectors
         [Test]
         public void GetAdditionalFeats()
         {
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, TableNameConstants.Set.Collection.Groups.Racial))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, TableNameConstants.Set.Collection.Groups.Additional))
                 .Returns(new[] { "additional feat 1", "additional feat 2" });
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatData, "additional feat 1")).Returns(new[] { "True", "False", "9266", String.Empty });
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatData, "additional feat 2")).Returns(new[] { "False", "True", "0", "specifics" });
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AdditionalFeatClassNameRequirements, "additional feat 1")).Returns(new[] { "class 1", "class 3" });
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AdditionalFeatFeatRequirements, "additional feat 1")).Returns(new[] { "feat 1", "feat 2" });
 
-            //TODO adjustment setup
+            var feat2SkillRankRequirements = new Dictionary<String, Int32>();
+            feat2SkillRankRequirements["skill 1"] = 5;
+            feat2SkillRankRequirements["skill 2"] = 4;
+
+            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.FEATSkillRankRequirements, "additional feat 2");
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(feat2SkillRankRequirements);
+
+            var feat2StatRequirements = new Dictionary<String, Int32>();
+            feat2StatRequirements["stat 1"] = 13;
+            feat2StatRequirements["stat 2"] = 16;
+
+            tableName = String.Format(TableNameConstants.Formattable.Adjustments.FEATStatRequirements, "additional feat 2");
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(feat2StatRequirements);
+
+            mockNameSelector.Setup(s => s.Select("additional feat 1")).Returns("additional feat 1 name");
+            mockNameSelector.Setup(s => s.Select("additional feat 2")).Returns("additional feat 2 name");
 
             var additionalFeats = selector.SelectAdditional();
             Assert.That(additionalFeats.Count(), Is.EqualTo(2));
@@ -141,7 +169,8 @@ namespace NPCGen.Tests.Unit.Selectors
             var first = additionalFeats.First();
             var last = additionalFeats.Last();
 
-            Assert.That(first.Name, Is.EqualTo("additional feat 1"));
+            Assert.That(first.Name.Id, Is.EqualTo("additional feat 1"));
+            Assert.That(first.Name.Name, Is.EqualTo("additional feat 1 name"));
             Assert.That(first.IsFighterFeat, Is.True);
             Assert.That(first.IsWizardFeat, Is.False);
             Assert.That(first.RequiredBaseAttack, Is.EqualTo(9266));
@@ -155,7 +184,8 @@ namespace NPCGen.Tests.Unit.Selectors
             Assert.That(first.RequiredStats, Is.Empty);
             Assert.That(first.SpecificApplicationType, Is.Empty);
 
-            Assert.That(last.Name, Is.EqualTo("additional feat 2"));
+            Assert.That(last.Name.Id, Is.EqualTo("additional feat 2"));
+            Assert.That(last.Name.Name, Is.EqualTo("additional feat 2 name"));
             Assert.That(last.IsFighterFeat, Is.False);
             Assert.That(last.IsWizardFeat, Is.True);
             Assert.That(last.RequiredBaseAttack, Is.EqualTo(0));
@@ -173,10 +203,15 @@ namespace NPCGen.Tests.Unit.Selectors
         [Test]
         public void GetAdditionalFeat()
         {
-            //TODO: setup
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatData, "additional feat 1")).Returns(new[] { "True", "False", "9266", String.Empty });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AdditionalFeatClassNameRequirements, "additional feat 1")).Returns(new[] { "class 1", "class 3" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AdditionalFeatFeatRequirements, "additional feat 1")).Returns(new[] { "feat 1", "feat 2" });
+
+            mockNameSelector.Setup(s => s.Select("additional feat 1")).Returns("additional feat 1 name");
 
             var additionalFeat = selector.SelectAdditional("additional feat 1");
-            Assert.That(additionalFeat.Name, Is.EqualTo("additional feat 1"));
+            Assert.That(additionalFeat.Name.Id, Is.EqualTo("additional feat 1"));
+            Assert.That(additionalFeat.Name.Name, Is.EqualTo("additional feat 1 name"));
             Assert.That(additionalFeat.IsFighterFeat, Is.True);
             Assert.That(additionalFeat.IsWizardFeat, Is.False);
             Assert.That(additionalFeat.RequiredBaseAttack, Is.EqualTo(9266));
