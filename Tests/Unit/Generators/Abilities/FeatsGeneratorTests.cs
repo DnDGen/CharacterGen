@@ -1069,7 +1069,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         }
 
         [Test]
-        public void ToughnessSpecificApplicationIsnumberOftimesTaken()
+        public void ToughnessSpecificApplicationIsNumberOftimesTaken()
         {
             Assert.Fail();
         }

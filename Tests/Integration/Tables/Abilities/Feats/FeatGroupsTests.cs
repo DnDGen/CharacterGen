@@ -118,9 +118,15 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.WeaponSpecializationId,
             FeatConstants.WhirlwindAttackId,
             FeatConstants.WidenSpellId)]
-        [TestCase(TableNameConstants.Set.Collection.Groups.OverwrittenStrengths)]
-        [TestCase(TableNameConstants.Set.Collection.Groups.CumulativeStrengths)]
-        [TestCase(TableNameConstants.Set.Collection.Groups.Racial)]
+        [TestCase(TableNameConstants.Set.Collection.Groups.OverwrittenStrengths,
+            FeatConstants.DarkvisionId)]
+        [TestCase(TableNameConstants.Set.Collection.Groups.CumulativeStrengths,
+            FeatConstants.SpellLikeAbilityId)]
+        [TestCase(TableNameConstants.Set.Collection.Groups.Racial,
+            FeatConstants.DarkvisionId,
+            FeatConstants.SpellLikeAbilityId,
+            FeatConstants.SneakAttackId,
+            FeatConstants.ScentId)]
         [TestCase(TableNameConstants.Set.Collection.Groups.CharacterClasses)]
         [TestCase(TableNameConstants.Set.Collection.Groups.NaturalArmor)]
         [TestCase(TableNameConstants.Set.Collection.Groups.Deflection)]
