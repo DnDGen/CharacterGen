@@ -7,6 +7,7 @@ namespace NPCGen.Common.Abilities.Feats
     {
         public NameModel Name { get; set; }
         public String SpecificApplication { get; set; }
+        public Int32 Strength { get; set; }
 
         public Feat()
         {

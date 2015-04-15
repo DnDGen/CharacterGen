@@ -123,10 +123,36 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
         [TestCase(TableNameConstants.Set.Collection.Groups.CumulativeStrengths,
             FeatConstants.SpellLikeAbilityId)]
         [TestCase(TableNameConstants.Set.Collection.Groups.Racial,
+            FeatConstants.AasimarDaylightId,
+            FeatConstants.AttackBonusId,
+            FeatConstants.ChangeShapeId,
             FeatConstants.DarkvisionId,
+            FeatConstants.DetectThoughtsId,
+            FeatConstants.DodgeBonusId,
+            FeatConstants.ElvenBloodId,
+            FeatConstants.HoldBreathId,
+            FeatConstants.ImmuneToEffectId,
+            FeatConstants.LightSensitivityId,
+            FeatConstants.LowLightVisionId,
+            FeatConstants.NaturalArmorId,
+            FeatConstants.OrcBloodId,
+            FeatConstants.PassWithoutTraceId,
+            FeatConstants.PoisonUseId,
+            FeatConstants.ResistanceToAcidId,
+            FeatConstants.ResistanceToColdId,
+            FeatConstants.ResistanceToElectricityId,
+            FeatConstants.SaveBonusId,
+            FeatConstants.ScentId,
+            FeatConstants.ShieldProficiencyId,
+            FeatConstants.SimpleWeaponProficiencyId,
+            FeatConstants.SkillBonusId,
             FeatConstants.SpellLikeAbilityId,
             FeatConstants.SneakAttackId,
-            FeatConstants.ScentId)]
+            FeatConstants.StabilityId,
+            FeatConstants.StonecunningId,
+            FeatConstants.VulnerabilityToSunlightId,
+            FeatConstants.WeaponFamiliarityId,
+            FeatConstants.WeaponProficiencyId)]
         [TestCase(TableNameConstants.Set.Collection.Groups.CharacterClasses)]
         [TestCase(TableNameConstants.Set.Collection.Groups.NaturalArmor)]
         [TestCase(TableNameConstants.Set.Collection.Groups.Deflection)]

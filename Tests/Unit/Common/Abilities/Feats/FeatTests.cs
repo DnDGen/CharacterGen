@@ -20,6 +20,7 @@ namespace NPCGen.Tests.Unit.Common.Abilities.Feats
         {
             Assert.That(feat.Name, Is.Not.Null);
             Assert.That(feat.SpecificApplication, Is.Empty);
+            Assert.That(feat.Strength, Is.EqualTo(0));
         }
 
         [Test]
@@ -34,10 +35,12 @@ namespace NPCGen.Tests.Unit.Common.Abilities.Feats
         {
             feat.Name.Id = "name";
             feat.SpecificApplication = "spec app";
+            feat.Strength = 9266;
 
             var otherFeat = new Feat();
             otherFeat.Name.Id = "other name";
             otherFeat.SpecificApplication = "spec app";
+            otherFeat.Strength = 9266;
 
             Assert.That(feat, Is.Not.EqualTo(otherFeat));
             Assert.That(otherFeat, Is.Not.EqualTo(feat));
@@ -48,40 +51,63 @@ namespace NPCGen.Tests.Unit.Common.Abilities.Feats
         {
             feat.Name.Id = "name";
             feat.SpecificApplication = "spec app";
+            feat.Strength = 9266;
 
             var otherFeat = new Feat();
             otherFeat.Name.Id = "name";
             otherFeat.SpecificApplication = "other spec app";
+            otherFeat.Strength = 9266;
 
             Assert.That(feat, Is.Not.EqualTo(otherFeat));
             Assert.That(otherFeat, Is.Not.EqualTo(feat));
         }
 
         [Test]
-        public void EqualIfIdsAndSpecificiApplicationsMatch()
+        public void NotEqualIfStrengthsDoNotMatch()
         {
             feat.Name.Id = "name";
             feat.SpecificApplication = "spec app";
+            feat.Strength = 9266;
+
+            var otherFeat = new Feat();
+            otherFeat.Name.Id = "name";
+            otherFeat.SpecificApplication = "other spec app";
+            otherFeat.Strength = 42;
+
+            Assert.That(feat, Is.Not.EqualTo(otherFeat));
+            Assert.That(otherFeat, Is.Not.EqualTo(feat));
+        }
+
+        [Test]
+        public void EqualIfIdsAndSpecificiApplicationsAndStrengthsMatch()
+        {
+            feat.Name.Id = "name";
+            feat.SpecificApplication = "spec app";
+            feat.Strength = 9266;
 
             var otherFeat = new Feat();
             otherFeat.Name.Id = "name";
             otherFeat.SpecificApplication = "spec app";
+            otherFeat.Strength = 9266;
 
             Assert.That(feat, Is.EqualTo(otherFeat));
             Assert.That(otherFeat, Is.EqualTo(feat));
         }
 
         [Test]
-        public void HashCodeIsHashOfIdAndHashOfSpecificApplicationAdded()
+        public void HashCodeIsHashOfNameAndHashOfSpecificApplicationAndHasOfStrengthAdded()
         {
-            feat.Name.Id = "name";
+            feat.Name.Id = "nameId";
+            feat.Name.Name = "name ID";
             feat.SpecificApplication = "specific application";
+            feat.Strength = 9266;
 
-            var idHash = feat.Name.Id.GetHashCode();
+            var nameHash = feat.Name.GetHashCode();
             var specificApplicationHash = feat.SpecificApplication.GetHashCode();
+            var strengthHash = feat.Strength.GetHashCode();
             var featHashCode = feat.GetHashCode();
 
-            Assert.That(featHashCode, Is.EqualTo(idHash + specificApplicationHash));
+            Assert.That(featHashCode, Is.EqualTo(nameHash + specificApplicationHash + strengthHash));
         }
     }
 }
