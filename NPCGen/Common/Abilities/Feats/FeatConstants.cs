@@ -4,14 +4,14 @@ namespace NPCGen.Common.Abilities.Feats
 {
     public static class FeatConstants
     {
-        public const String AasimarDaylight = "Aasimar Special Attack: Daylight";
-        public const String AasimarDaylightId = "AasimarDaylight";
         public const String Acrobatic = "Acrobatic";
         public const String AcrobaticId = "Acrobatic";
         public const String Agile = "Agile";
         public const String AgileId = "Agile";
         public const String Alertness = "Alertness";
         public const String AlertnessId = "Alertness";
+        public const String AlternateForm = "Alternate Form";
+        public const String AlternateFormId = "AlternateForm";
         public const String Ambidexterity = "Ambidexterity";
         public const String AmbidexterityId = "Ambidexterity";
         public const String AnimalAffinity = "Animal Affinity";
@@ -34,6 +34,8 @@ namespace NPCGen.Common.Abilities.Feats
         public const String CombatExpertiseId = "CombatExpertise";
         public const String CombatReflexes = "Combat Reflexes";
         public const String CombatReflexesId = "CombatReflexes";
+        public const String DamageReduction = "Damage Reduction";
+        public const String DamageReductionId = "DamageReduction";
         public const String Darkvision = "Darkvision";
         public const String DarkvisionId = "Darkvision";
         public const String Deceitful = "Deceitful";
@@ -42,8 +44,6 @@ namespace NPCGen.Common.Abilities.Feats
         public const String DeflectArrowsId = "DeflectArrows";
         public const String DeftHands = "Deft Hands";
         public const String DeftHandsId = "DeftHands";
-        public const String DetectThoughts = "Detect Thoughts";
-        public const String DetectThoughtsId = "DetectThoughts";
         public const String Diehard = "Diehard";
         public const String DiehardId = "Diehard";
         public const String Diligent = "Diligent";
@@ -54,6 +54,8 @@ namespace NPCGen.Common.Abilities.Feats
         public const String DodgeBonusId = "DodgeBonus";
         public const String ElvenBlood = "Elven Blood";
         public const String ElvenBloodId = "ElvenBlood";
+        public const String Empathy = "Empathy";
+        public const String EmpathyId = "Empathy";
         public const String EmpowerSpell = "Empower Spell";
         public const String EmpowerSpellId = "EmpowerSpell";
         public const String Endurance = "Endurance";
@@ -70,6 +72,8 @@ namespace NPCGen.Common.Abilities.Feats
         public const String ExtraTurningId = "ExtraTurning";
         public const String FarShot = "Far Shot";
         public const String FarShotId = "FarShot";
+        public const String Ferocity = "Ferocity";
+        public const String FerocityId = "Ferocity";
         public const String GreatCleave = "Great Cleave";
         public const String GreatCleaveId = "GreatCleave";
         public const String GreaterSpellFocus = "WeaponFamiliarity";
@@ -104,6 +108,8 @@ namespace NPCGen.Common.Abilities.Feats
         public const String ImprovedFamiliarId = "ImprovedFamiliar";
         public const String ImprovedFeint = "Improved Feint";
         public const String ImprovedFeintId = "ImprovedFeint";
+        public const String ImprovedGrab = "Improved Grab";
+        public const String ImprovedGrabId = "ImprovedGrab";
         public const String ImprovedGrapple = "Improved Grapple";
         public const String ImprovedGrappleId = "ImprovedGrapple";
         public const String ImprovedInitiative = "Improved Initiative";
@@ -138,10 +144,14 @@ namespace NPCGen.Common.Abilities.Feats
         public const String LightSensitivityId = "LightSensitivity";
         public const String LowLightVision = "Low-Light Vision";
         public const String LowLightVisionId = "LowLightVision";
+        public const String Lycanthropy = "Lycanthropy";
+        public const String LycanthropyId = "Lycanthropy";
         public const String Madness = "Madness";
         public const String MadnessId = "Madness";
         public const String MagicalAptitude = "Magical Aptitude";
         public const String MagicalAptitudeId = "MagicalAptitude";
+        public const String MagicNaturalWeapons = "Magic Natural Weapons";
+        public const String MagicNaturalWeaponsId = "MagicNaturalWeapons";
         public const String Manyshot = "Manyshot";
         public const String ManyshotId = "Manyshot";
         public const String MartialWeaponProficiency = "Martial Weapon Proficiency";
@@ -160,6 +170,8 @@ namespace NPCGen.Common.Abilities.Feats
         public const String NaturalArmorId = "NaturalArmor";
         public const String NaturalSpell = "Natural Spell";
         public const String NaturalSpellId = "NaturalSpell";
+        public const String NaturalWeapon = "Natural Weapon";
+        public const String NaturalWeaponId = "NaturalWeapon";
         public const String Negotiator = "Negotiator";
         public const String NegotiatorId = "Negotiator";
         public const String NimbleFingers = "Nimble Fingers";
@@ -214,6 +226,10 @@ namespace NPCGen.Common.Abilities.Feats
         public const String SkillBonusId = "SkillBonus";
         public const String SkillFocus = "Skill Focus";
         public const String SkillFocusId = "SkillFocus";
+        public const String SmiteEvil = "Smite Evil";
+        public const String SmiteEvilId = "SmiteEvil";
+        public const String SmiteGood = "Smite Good";
+        public const String SmiteGoodId = "SmiteGood";
         public const String SnatchArrows = "Snatch Arrows";
         public const String SnatchArrowsId = "SnatchArrows";
         public const String SneakAttack = "Sneak Attack";
@@ -228,6 +244,8 @@ namespace NPCGen.Common.Abilities.Feats
         public const String SpellPenetrationId = "SpellPenetration";
         public const String SpellResistance = "Spell Resistance";
         public const String SpellResistanceId = "SpellResistance";
+        public const String SpellStrength = "Spell Strength";
+        public const String SpellStrengthId = "SpellStrength";
         public const String SpiritedCharge = "Spirited Charge";
         public const String SpiritedChargeId = "SpiritedCharge";
         public const String SpringAttack = "Spring Attack";
@@ -270,5 +288,12 @@ namespace NPCGen.Common.Abilities.Feats
         public const String WhirlwindAttackId = "WhirlwindAttack";
         public const String WidenSpell = "Widen Spell";
         public const String WidenSpellId = "WidenSpell";
+
+        public static class Frequencies
+        {
+            public const String AtWill = "At Will";
+            public const String Constant = "Constant";
+            public const String Day = "Day";
+        }
     }
 }

@@ -74,7 +74,7 @@ namespace NPCGen.Generators.Abilities
             {
                 var feat = new Feat();
                 feat.Name = racialFeat.Name;
-                feat.SpecificApplication = GetSpecificApplicationFromStrength(racialFeat.FeatStrength);
+                feat.Focus = GetSpecificApplicationFromStrength(racialFeat.FeatStrength);
 
                 feats.Add(feat);
             }
@@ -156,9 +156,9 @@ namespace NPCGen.Generators.Abilities
                 var sourceFeat = featsSelector.SelectAdditional(classFeatSelection.Name.Id);
 
                 if (!String.IsNullOrEmpty(sourceFeat.SpecificApplicationType))
-                    classFeat.SpecificApplication = GetSpecificApplicationOf(classFeat, sourceFeat, classFeats, characterClass, stats[StatConstants.Intelligence].Bonus);
+                    classFeat.Focus = GetSpecificApplicationOf(classFeat, sourceFeat, classFeats, characterClass, stats[StatConstants.Intelligence].Bonus);
                 else
-                    classFeat.SpecificApplication = GetSpecificApplicationFromStrength(classFeatSelection.Strength);
+                    classFeat.Focus = GetSpecificApplicationFromStrength(classFeatSelection.Strength);
 
                 if (classFeats.Any(f => AlreadyHaveStrongerFeat(f, classFeatSelection)) == false)
                     classFeats.Add(classFeat);
@@ -180,7 +180,7 @@ namespace NPCGen.Generators.Abilities
                 return false;
 
             var strength = 0;
-            if (!Int32.TryParse(feat.SpecificApplication, out strength))
+            if (!Int32.TryParse(feat.Focus, out strength))
                 return false;
 
             return strength >= classFeatSelection.Strength;
@@ -192,7 +192,7 @@ namespace NPCGen.Generators.Abilities
                 return false;
 
             var strength = 0;
-            if (!Int32.TryParse(feat.SpecificApplication, out strength))
+            if (!Int32.TryParse(feat.Focus, out strength))
                 return false;
 
             return strength < classFeatSelection.Strength;
@@ -206,7 +206,7 @@ namespace NPCGen.Generators.Abilities
                     return Convert.ToString(intelligenceBonus);
 
                 var previousSpellMastery = feats.First(f => f.Name.Id == FeatConstants.SpellMasteryId);
-                var previousSpellCount = Convert.ToInt32(previousSpellMastery.SpecificApplication);
+                var previousSpellCount = Convert.ToInt32(previousSpellMastery.Focus);
                 var newSpellCount = previousSpellCount + intelligenceBonus;
 
                 return Convert.ToString(newSpellCount);
@@ -216,7 +216,7 @@ namespace NPCGen.Generators.Abilities
                 return String.Empty;
 
             var specificApplications = GetSpecificApplications(feats, sourceFeat);
-            var usedSpecificApplications = feats.Where(f => f.Name == feat.Name).Select(f => f.SpecificApplication);
+            var usedSpecificApplications = feats.Where(f => f.Name == feat.Name).Select(f => f.Focus);
             specificApplications = specificApplications.Except(usedSpecificApplications);
 
             if (sourceFeat.SpecificApplicationType == AdditionalFeatSelectionConstants.SchoolsOfMagic)
@@ -235,7 +235,7 @@ namespace NPCGen.Generators.Abilities
         private IEnumerable<String> GetSpecificApplications(IEnumerable<Feat> otherFeats, AdditionalFeatSelection sourceFeat)
         {
             if (otherFeats.Any(f => RequirementsHaveSpecificApplications(sourceFeat, f)))
-                return otherFeats.Where(f => RequirementsHaveSpecificApplications(sourceFeat, f)).Select(f => f.SpecificApplication);
+                return otherFeats.Where(f => RequirementsHaveSpecificApplications(sourceFeat, f)).Select(f => f.Focus);
 
             return collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatSpecificApplications, sourceFeat.SpecificApplicationType);
         }
@@ -285,7 +285,7 @@ namespace NPCGen.Generators.Abilities
             while (quantity-- > 0)
             {
                 var availableFeats = sourceFeats.Where(f => f.MutableRequirementsMet(feats))
-                                                .Select(f => new Feat { Name = f.Name, SpecificApplication = f.SpecificApplicationType })
+                                                .Select(f => new Feat { Name = f.Name, Focus = f.SpecificApplicationType })
                                                 .Except(feats)
                                                 .Except(preselectedFeats);
 
@@ -296,7 +296,7 @@ namespace NPCGen.Generators.Abilities
                 var feat = availableFeats.ElementAt(index);
                 var sourceFeat = sourceFeats.First(f => f.Name == feat.Name);
 
-                feat.SpecificApplication = GetSpecificApplicationOf(feat, sourceFeat, feats, characterClass, stats[StatConstants.Intelligence].Bonus);
+                feat.Focus = GetSpecificApplicationOf(feat, sourceFeat, feats, characterClass, stats[StatConstants.Intelligence].Bonus);
 
                 if (feat.Name.Id == FeatConstants.SpellMasteryId && feats.Any(f => f.Name.Id == FeatConstants.SpellMasteryId))
                 {
@@ -318,7 +318,7 @@ namespace NPCGen.Generators.Abilities
 
         private Boolean RequirementsHaveSpecificApplications(AdditionalFeatSelection sourceFeat, Feat feat)
         {
-            return sourceFeat.RequiredFeatIds.Contains(feat.Name.Id) && !String.IsNullOrEmpty(feat.SpecificApplication);
+            return sourceFeat.RequiredFeatIds.Contains(feat.Name.Id) && !String.IsNullOrEmpty(feat.Focus);
         }
 
         private IEnumerable<Feat> GetFighterFeats(CharacterClass characterClass, Race race, Dictionary<String, Stat> stats, Dictionary<String, Skill> skills,

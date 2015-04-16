@@ -142,9 +142,9 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             var secondSkillFocus = new Feat();
 
             firstSkillFocus.Name.Id = FeatConstants.SkillFocusId;
-            firstSkillFocus.SpecificApplication = "skill 1";
+            firstSkillFocus.Focus = "skill 1";
             secondSkillFocus.Name.Id = FeatConstants.SkillFocusId;
-            secondSkillFocus.SpecificApplication = "skill 3";
+            secondSkillFocus.Focus = "skill 3";
             feats.Add(firstSkillFocus);
             feats.Add(secondSkillFocus);
             mockFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills, baseAttack)).Returns(feats);

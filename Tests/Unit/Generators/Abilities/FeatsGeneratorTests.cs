@@ -81,9 +81,9 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             var last = feats.Last();
 
             Assert.That(first.Name.Id, Is.EqualTo("feat 1"));
-            Assert.That(first.SpecificApplication, Is.EqualTo("9266"));
+            Assert.That(first.Focus, Is.EqualTo("9266"));
             Assert.That(last.Name.Id, Is.EqualTo("feat 2"));
-            Assert.That(last.SpecificApplication, Is.Empty);
+            Assert.That(last.Focus, Is.Empty);
         }
 
         private void AddRacialFeat(String id, Int32 strength = 0)
@@ -123,9 +123,9 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             var lastFeat = feats.Last();
 
             Assert.That(firstFeat.Name.Id, Is.EqualTo("feat 1"));
-            Assert.That(firstFeat.SpecificApplication, Is.Empty);
+            Assert.That(firstFeat.Focus, Is.Empty);
             Assert.That(lastFeat.Name.Id, Is.EqualTo("feat 2"));
-            Assert.That(lastFeat.SpecificApplication, Is.EqualTo("42"));
+            Assert.That(lastFeat.Focus, Is.EqualTo("42"));
             Assert.That(feats.Count(), Is.EqualTo(2));
         }
 
@@ -140,7 +140,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             var onlyFeat = feats.Single();
 
             Assert.That(onlyFeat.Name.Id, Is.EqualTo("feat 1"));
-            Assert.That(onlyFeat.SpecificApplication, Is.EqualTo("9266"));
+            Assert.That(onlyFeat.Focus, Is.EqualTo("9266"));
         }
 
         [Test]
@@ -154,7 +154,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             var onlyFeat = feats.Single();
 
             Assert.That(onlyFeat.Name.Id, Is.EqualTo("feat 1"));
-            Assert.That(onlyFeat.SpecificApplication, Is.EqualTo("9308"));
+            Assert.That(onlyFeat.Focus, Is.EqualTo("9308"));
         }
 
         [Test]
@@ -168,9 +168,9 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             var lastFeat = feats.Last();
 
             Assert.That(firstFeat.Name.Id, Is.EqualTo("feat 1"));
-            Assert.That(firstFeat.SpecificApplication, Is.EqualTo("9266"));
+            Assert.That(firstFeat.Focus, Is.EqualTo("9266"));
             Assert.That(lastFeat.Name.Id, Is.EqualTo("feat 1"));
-            Assert.That(lastFeat.SpecificApplication, Is.EqualTo("42"));
+            Assert.That(lastFeat.Focus, Is.EqualTo("42"));
             Assert.That(feats.Count(), Is.EqualTo(2));
         }
 
@@ -283,7 +283,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
             var classFeat = feats.First(f => f.Name.Id == "class feat");
 
-            Assert.That(classFeat.SpecificApplication, Is.EqualTo("3"));
+            Assert.That(classFeat.Focus, Is.EqualTo("3"));
             Assert.That(feats.Count(f => f.Name.Id == "class feat"), Is.EqualTo(1));
         }
 
@@ -385,7 +385,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
             var feat = feats.First(f => f.Name.Id == "class feat");
 
-            Assert.That(feat.SpecificApplication, Is.EqualTo("battleaxe"));
+            Assert.That(feat.Focus, Is.EqualTo("battleaxe"));
         }
 
         [Test]
@@ -412,8 +412,8 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             var firstFeat = feats.First(f => f.Name.Id == "class feat 1");
             var secondFeat = feats.Last(f => f.Name.Id == "class feat 2");
 
-            Assert.That(firstFeat.SpecificApplication, Is.EqualTo("stick"));
-            Assert.That(secondFeat.SpecificApplication, Is.EqualTo("stick"));
+            Assert.That(firstFeat.Focus, Is.EqualTo("stick"));
+            Assert.That(secondFeat.Focus, Is.EqualTo("stick"));
         }
 
         [Test]
@@ -970,7 +970,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
 
             mockCollectionsSelector.Verify(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatSpecificApplications, It.IsAny<String>()), Times.Never);
             Assert.That(onlyFeat.Name, Is.EqualTo(additionalFeatSelections[0].Name));
-            Assert.That(onlyFeat.SpecificApplication, Is.Empty);
+            Assert.That(onlyFeat.Focus, Is.Empty);
         }
 
         [Test]
@@ -986,7 +986,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             var onlyFeat = feats.Single();
 
             Assert.That(onlyFeat.Name, Is.EqualTo(additionalFeatSelections[0].Name));
-            Assert.That(onlyFeat.SpecificApplication, Is.EqualTo("school 1"));
+            Assert.That(onlyFeat.Focus, Is.EqualTo("school 1"));
         }
 
         [Test]
@@ -1004,7 +1004,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             var onlyFeat = feats.Single();
 
             Assert.That(onlyFeat.Name, Is.EqualTo(additionalFeatSelections[0].Name));
-            Assert.That(onlyFeat.SpecificApplication, Is.EqualTo("school 2"));
+            Assert.That(onlyFeat.Focus, Is.EqualTo("school 2"));
         }
 
         [Test]
@@ -1022,9 +1022,9 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             var lastFeat = feats.Last();
 
             Assert.That(firstFeat.Name, Is.EqualTo(additionalFeatSelections[0].Name));
-            Assert.That(firstFeat.SpecificApplication, Is.EqualTo("school 1"));
+            Assert.That(firstFeat.Focus, Is.EqualTo("school 1"));
             Assert.That(lastFeat.Name, Is.EqualTo(additionalFeatSelections[0].Name));
-            Assert.That(lastFeat.SpecificApplication, Is.EqualTo("school 2"));
+            Assert.That(lastFeat.Focus, Is.EqualTo("school 2"));
             Assert.That(feats.Count(), Is.EqualTo(2));
         }
 
@@ -1041,7 +1041,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             var lastFeat = feats.Last();
 
             Assert.That(firstFeat.Name.Id, Is.EqualTo(FeatConstants.SpellMasteryId));
-            Assert.That(firstFeat.SpecificApplication, Is.EqualTo("2"));
+            Assert.That(firstFeat.Focus, Is.EqualTo("2"));
             Assert.That(feats.Count(), Is.EqualTo(1));
         }
 
@@ -1058,7 +1058,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             var lastFeat = feats.Last();
 
             Assert.That(firstFeat.Name.Id, Is.EqualTo(FeatConstants.SpellMasteryId));
-            Assert.That(firstFeat.SpecificApplication, Is.EqualTo("4"));
+            Assert.That(firstFeat.Focus, Is.EqualTo("4"));
             Assert.That(feats.Count(), Is.EqualTo(1));
         }
 
@@ -1091,7 +1091,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             var onlyFeat = feats.Single();
 
             Assert.That(onlyFeat.Name, Is.EqualTo(additionalFeatSelections[0].Name));
-            Assert.That(onlyFeat.SpecificApplication, Is.EqualTo(WeaponProficiencyConstants.Ray));
+            Assert.That(onlyFeat.Focus, Is.EqualTo(WeaponProficiencyConstants.Ray));
         }
 
         [Test]
@@ -1111,7 +1111,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             var onlyFeat = feats.Single();
 
             Assert.That(onlyFeat.Name, Is.EqualTo(additionalFeatSelections[0].Name));
-            Assert.That(onlyFeat.SpecificApplication, Is.EqualTo("weapon"));
+            Assert.That(onlyFeat.Focus, Is.EqualTo("weapon"));
         }
 
         [Test]
@@ -1132,9 +1132,9 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             var lastFeat = feats.Last();
 
             Assert.That(firstFeat.Name, Is.EqualTo(additionalFeatSelections[0].Name));
-            Assert.That(firstFeat.SpecificApplication, Is.EqualTo("school 1"));
+            Assert.That(firstFeat.Focus, Is.EqualTo("school 1"));
             Assert.That(lastFeat.Name, Is.EqualTo(additionalFeatSelections[1].Name));
-            Assert.That(lastFeat.SpecificApplication, Is.Empty);
+            Assert.That(lastFeat.Focus, Is.Empty);
         }
 
         [Test]
@@ -1157,9 +1157,9 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             var lastFeat = feats.Last();
 
             Assert.That(firstFeat.Name, Is.EqualTo(additionalFeatSelections[0].Name));
-            Assert.That(firstFeat.SpecificApplication, Is.EqualTo("school 3"));
+            Assert.That(firstFeat.Focus, Is.EqualTo("school 3"));
             Assert.That(lastFeat.Name, Is.EqualTo(additionalFeatSelections[1].Name));
-            Assert.That(lastFeat.SpecificApplication, Is.EqualTo("school 3"));
+            Assert.That(lastFeat.Focus, Is.EqualTo("school 3"));
         }
 
         [Test]
@@ -1183,11 +1183,11 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             var lastFeat = feats.Last();
 
             Assert.That(firstFeat.Name, Is.EqualTo(additionalFeatSelections[0].Name));
-            Assert.That(firstFeat.SpecificApplication, Is.EqualTo("school 3"));
+            Assert.That(firstFeat.Focus, Is.EqualTo("school 3"));
             Assert.That(secondFeat.Name, Is.EqualTo(additionalFeatSelections[0].Name));
-            Assert.That(secondFeat.SpecificApplication, Is.EqualTo("school 1"));
+            Assert.That(secondFeat.Focus, Is.EqualTo("school 1"));
             Assert.That(lastFeat.Name, Is.EqualTo(additionalFeatSelections[1].Name));
-            Assert.That(lastFeat.SpecificApplication, Is.EqualTo("school 1"));
+            Assert.That(lastFeat.Focus, Is.EqualTo("school 1"));
         }
 
         [Test]
@@ -1207,7 +1207,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             var onlyFeat = feats.Single();
 
             Assert.That(onlyFeat.Name, Is.EqualTo(additionalFeatSelections[0].Name));
-            Assert.That(onlyFeat.SpecificApplication, Is.EqualTo("school 4"));
+            Assert.That(onlyFeat.Focus, Is.EqualTo("school 4"));
         }
     }
 }

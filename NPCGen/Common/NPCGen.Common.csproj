@@ -51,6 +51,7 @@
     <Compile Include="Abilities\Ability.cs" />
     <Compile Include="Abilities\Feats\Feat.cs" />
     <Compile Include="Abilities\Feats\FeatConstants.cs" />
+    <Compile Include="Abilities\Feats\Frequency.cs" />
     <Compile Include="Abilities\LanguageConstants.cs" />
     <Compile Include="Abilities\Skills\Skill.cs" />
     <Compile Include="Abilities\Stats\Stat.cs" />

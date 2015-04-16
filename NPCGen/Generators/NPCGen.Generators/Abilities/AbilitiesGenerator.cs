@@ -51,7 +51,7 @@ namespace NPCGen.Generators.Abilities
 
             var skillFoci = ability.Feats.Where(f => f.Name.Id == FeatConstants.SkillFocusId);
             foreach (var feat in skillFoci)
-                ability.Skills[feat.SpecificApplication].Bonus += 3;
+                ability.Skills[feat.Focus].Bonus += 3;
 
             return ability;
         }
