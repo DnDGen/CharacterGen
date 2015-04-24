@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Ninject;
 using NPCGen.Common.Abilities.Feats;
@@ -24,30 +23,6 @@ namespace NPCGen.Tests.Integration.Stress.Abilities
         public IStatsRandomizer StatsRandomizer { get; set; }
         [Inject]
         public ICombatGenerator CombatGenerator { get; set; }
-
-        private IEnumerable<String> allFeatIds;
-
-        [SetUp]
-        public void Setup()
-        {
-            allFeatIds = new[]
-            {
-                FeatConstants.AasimarDaylightId,
-                FeatConstants.AmbidexterityId,
-                FeatConstants.DarkvisionId,
-                FeatConstants.LightArmorProficiencyId,
-                FeatConstants.ResistanceToAcidId,
-                FeatConstants.ResistanceToColdId,
-                FeatConstants.ResistanceToElectricityId,
-                FeatConstants.ScentId,
-                FeatConstants.ShieldProficiencyId,
-                FeatConstants.SkillFocusId,
-                FeatConstants.SpellMasteryId,
-                FeatConstants.StabilityId,
-                FeatConstants.StonecunningId,
-                FeatConstants.WeaponFamiliarityId
-            };
-        }
 
         [TestCase("FeatsGenerator")]
         public override void Stress(String stressSubject)
@@ -76,13 +51,18 @@ namespace NPCGen.Tests.Integration.Stress.Abilities
 
             foreach (var feat in feats)
             {
-                Assert.That(allFeatIds, Contains.Item(feat.Name.Id));
+                Assert.That(feat.Name.Id, Is.Not.Empty);
                 Assert.That(feat.Name.Name, Is.Not.Empty);
                 Assert.That(feat.Focus, Is.Not.Null);
+                Assert.That(feat.Strength, Is.Positive);
+                Assert.That(feat.Frequency.Quantity, Is.Positive);
+                Assert.That(feat.Frequency.TimePeriod, Is.EqualTo(FeatConstants.Frequencies.Constant)
+                    .Or.EqualTo(FeatConstants.Frequencies.AtWill)
+                    .Or.EqualTo(FeatConstants.Frequencies.Day));
             }
 
-            var specifics = feats.Where(f => feats.Count(c => c.Name.Id == f.Name.Id) > 1);
-            foreach (var feat in specifics)
+            var featWithFoci = feats.Where(f => feats.Count(c => c.Name.Id == f.Name.Id) > 1);
+            foreach (var feat in featWithFoci)
                 Assert.That(feat.Focus, Is.Not.Empty, feat.Name.Name);
         }
     }

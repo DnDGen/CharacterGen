@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Moq;
+using NPCGen.Common.CharacterClasses;
+using NPCGen.Common.Races;
 using NPCGen.Selectors;
 using NPCGen.Selectors.Interfaces;
 using NPCGen.Tables.Interfaces;
@@ -17,6 +19,9 @@ namespace NPCGen.Tests.Unit.Selectors
         private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
         private Mock<INameSelector> mockNameSelector;
 
+        private Race race;
+        private CharacterClass characterClass;
+
         [SetUp]
         public void Setup()
         {
@@ -24,57 +29,45 @@ namespace NPCGen.Tests.Unit.Selectors
             mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
             mockNameSelector = new Mock<INameSelector>();
             selector = new FeatsSelector(mockCollectionsSelector.Object, mockAdjustmentsSelector.Object, mockNameSelector.Object);
+            race = new Race();
+            characterClass = new CharacterClass();
+
+            race.BaseRace.Id = Guid.NewGuid().ToString();
+            race.Metarace.Id = Guid.NewGuid().ToString();
+            race.MetaraceSpecies = Guid.NewGuid().ToString();
+            characterClass.ClassName = Guid.NewGuid().ToString();
+            characterClass.SpecialistFields = new[] { Guid.NewGuid().ToString(), Guid.NewGuid().ToString() };
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(It.IsAny<String>(), It.IsAny<String>())).Returns(Enumerable.Empty<String>());
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(It.IsAny<String>())).Returns(new Dictionary<String, Int32>());
         }
 
         [Test]
-        public void GetRacialFeats()
+        public void GetBaseRaceFeats()
         {
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, TableNameConstants.Set.Collection.Groups.Racial))
-                .Returns(new[] { "racial feat 1", "racial feat 2" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatData, "racial feat 1")).Returns(new[] { "ginormous", "9266" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatData, "racial feat 2")).Returns(new[] { String.Empty, "0" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.RacialFeatBaseRaceRequirements, "racial feat 1")).Returns(new[] { "base race 1", "base race 2" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.RacialFeatMetaraceRequirements, "racial feat 2")).Returns(new[] { "metarace 2", "metarace 3" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.RacialFeatHitDieRequirements, "racial feat 1")).Returns(new[] { "42", "90210" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.RacialFeatMetaraceSpeciesRequirements, "racial feat 2")).Returns(new[] { "species 2", "species 3" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, race.BaseRace.Id)).Returns(new[] { "racial feat 1", "racial feat 2" });
+
+            var baseRaceFeatTableName = String.Format(TableNameConstants.Formattable.Collection.RACEFeatData, race.BaseRace.Id);
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(baseRaceFeatTableName, "racial feat 1")).Returns(new[] { "ginormous", "9266" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(baseRaceFeatTableName, "racial feat 2")).Returns(new[] { String.Empty, "0" });
 
             mockNameSelector.Setup(s => s.Select("racial feat 1")).Returns("racial feat 1 name");
             mockNameSelector.Setup(s => s.Select("racial feat 2")).Returns("racial feat 2 name");
 
-            var racialFeats = selector.SelectRacial();
+            var racialFeats = selector.SelectFor(race);
             Assert.That(racialFeats.Count(), Is.EqualTo(2));
 
             var first = racialFeats.First();
             var last = racialFeats.Last();
 
-            Assert.That(first.Name.Id, Is.EqualTo("racial feat 1"));
-            Assert.That(first.Name.Name, Is.EqualTo("racial feat 1 name"));
-            Assert.That(first.FeatStrength, Is.EqualTo(9266));
+            Assert.That(first.FeatId, Is.EqualTo("racial feat 1"));
             Assert.That(first.SizeRequirement, Is.EqualTo("ginormous"));
-            Assert.That(first.BaseRaceIdRequirements, Contains.Item("base race 1"));
-            Assert.That(first.BaseRaceIdRequirements, Contains.Item("base race 2"));
-            Assert.That(first.BaseRaceIdRequirements.Count(), Is.EqualTo(2));
-            Assert.That(first.HitDieRequirements, Contains.Item(42));
-            Assert.That(first.HitDieRequirements, Contains.Item(90210));
-            Assert.That(first.HitDieRequirements.Count(), Is.EqualTo(2));
-            Assert.That(first.MetaraceIdRequirements, Is.Empty);
-            Assert.That(first.MetaraceSpeciesRequirements, Is.Empty);
+            Assert.That(first.MinimumHitDieRequirement, Is.EqualTo(9266));
 
-            Assert.That(last.Name.Id, Is.EqualTo("racial feat 2"));
-            Assert.That(last.Name.Name, Is.EqualTo("racial feat 2 name"));
-            Assert.That(last.FeatStrength, Is.EqualTo(0));
+            Assert.That(last.FeatId, Is.EqualTo("racial feat 2"));
             Assert.That(last.SizeRequirement, Is.Empty);
-            Assert.That(last.BaseRaceIdRequirements, Is.Empty);
-            Assert.That(last.HitDieRequirements, Is.Empty);
-            Assert.That(last.MetaraceIdRequirements, Contains.Item("metarace 2"));
-            Assert.That(last.MetaraceIdRequirements, Contains.Item("metarace 3"));
-            Assert.That(last.MetaraceIdRequirements.Count(), Is.EqualTo(2));
-            Assert.That(last.MetaraceSpeciesRequirements, Contains.Item("species 3"));
-            Assert.That(last.MetaraceSpeciesRequirements, Contains.Item("species 2"));
-            Assert.That(last.MetaraceSpeciesRequirements.Count(), Is.EqualTo(2));
+            Assert.That(first.MinimumHitDieRequirement, Is.EqualTo(0));
         }
 
         [Test]
@@ -116,7 +109,7 @@ namespace NPCGen.Tests.Unit.Selectors
             mockNameSelector.Setup(s => s.Select("class feat 1")).Returns("class feat 1 name");
             mockNameSelector.Setup(s => s.Select("class feat 2")).Returns("class feat 2 name");
 
-            var classFeats = selector.SelectClassFeats();
+            var classFeats = selector.SelectFor(characterClass);
             Assert.That(classFeats.Count(), Is.EqualTo(2));
 
             var first = classFeats.First();

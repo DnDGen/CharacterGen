@@ -123,11 +123,9 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
         [TestCase(TableNameConstants.Set.Collection.Groups.CumulativeStrengths,
             FeatConstants.SpellLikeAbilityId)]
         [TestCase(TableNameConstants.Set.Collection.Groups.Racial,
-            FeatConstants.AasimarDaylightId,
             FeatConstants.AttackBonusId,
             FeatConstants.ChangeShapeId,
             FeatConstants.DarkvisionId,
-            FeatConstants.DetectThoughtsId,
             FeatConstants.DodgeBonusId,
             FeatConstants.ElvenBloodId,
             FeatConstants.HoldBreathId,

@@ -44,10 +44,7 @@ namespace NPCGen.Tables.Interfaces
                 public const String MetaraceGroups = "MetaraceGroups";
                 public const String Names = "Names";
                 public const String ProhibitedFields = "ProhibitedFields";
-                public const String RacialFeatBaseRaceRequirements = "RacialFeatBaseRaceRequirements";
                 public const String RacialFeatHitDieRequirements = "RacialFeatHitDieRequirements";
-                public const String RacialFeatMetaraceRequirements = "RacialFeatMetaraceRequirements";
-                public const String RacialFeatMetaraceSpeciesRequirements = "RacialFeatMetaraceSpeciesRequirements";
                 public const String SkillData = "SkillData";
                 public const String SkillGroups = "SkillGroups";
                 public const String SkillSynergy = "SkillSynergy";
@@ -104,6 +101,11 @@ namespace NPCGen.Tables.Interfaces
                 public const String FEATStatRequirements = "{0}StatRequirements";
                 public const String METARACESkillAdjustments = "{0}SkillAdjustments";
                 public const String STATStatAdjustments = "{0}StatAdjustments";
+            }
+
+            public static class Collection
+            {
+                public const String RACEFeatData = "{0}FeatData";
             }
 
             public static class Percentile

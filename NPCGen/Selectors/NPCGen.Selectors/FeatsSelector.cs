@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NPCGen.Common.CharacterClasses;
+using NPCGen.Common.Races;
 using NPCGen.Selectors.Interfaces;
 using NPCGen.Selectors.Interfaces.Objects;
 using NPCGen.Tables.Interfaces;
@@ -20,7 +22,7 @@ namespace NPCGen.Selectors
             this.nameSelector = nameSelector;
         }
 
-        public IEnumerable<RacialFeatSelection> SelectRacial()
+        public IEnumerable<RacialFeatSelection> SelectFor(Race race)
         {
             var racialFeatIds = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, TableNameConstants.Set.Collection.Groups.Racial);
             var racialFeatSelections = new List<RacialFeatSelection>();
@@ -85,7 +87,7 @@ namespace NPCGen.Selectors
             return additionalFeatSelection;
         }
 
-        public IEnumerable<CharacterClassFeatSelection> SelectClassFeats()
+        public IEnumerable<CharacterClassFeatSelection> SelectFor(CharacterClass characterClass)
         {
             var classFeatIds = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, TableNameConstants.Set.Collection.Groups.CharacterClasses);
             var classFeatSelections = new List<CharacterClassFeatSelection>();
