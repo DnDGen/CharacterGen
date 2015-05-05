@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using NPCGen.Common.Races;
 using NPCGen.Selectors.Interfaces.Objects;
 using NUnit.Framework;
@@ -22,13 +21,12 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
         [Test]
         public void RacialFeatSelectionInitialization()
         {
-            Assert.That(selection.BaseRaceIdRequirements, Is.Empty);
-            Assert.That(selection.Name, Is.Not.Null);
-            Assert.That(selection.FeatStrength, Is.EqualTo(0));
-            Assert.That(selection.HitDieRequirements, Is.Empty);
-            Assert.That(selection.MetaraceIdRequirements, Is.Empty);
-            Assert.That(selection.MetaraceSpeciesRequirements, Is.Empty);
+            Assert.That(selection.FeatId, Is.Empty);
+            Assert.That(selection.Strength, Is.EqualTo(0));
+            Assert.That(selection.MinimumHitDieRequirement, Is.EqualTo(0));
             Assert.That(selection.SizeRequirement, Is.Empty);
+            Assert.That(selection.Focus, Is.Empty);
+            Assert.That(selection.Frequency, Is.Not.Null);
         }
 
         [Test]
@@ -36,36 +34,6 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
         {
             var met = selection.RequirementsMet(race, 0);
             Assert.That(met, Is.True);
-        }
-
-        [Test]
-        public void RequirementsNotMetIfWrongBaseRace()
-        {
-            race.BaseRace.Id = "baserace";
-            selection.BaseRaceIdRequirements = new[] { "otherbaserace" };
-
-            var met = selection.RequirementsMet(race, 0);
-            Assert.That(met, Is.False);
-        }
-
-        [Test]
-        public void RequirementsNotMetIfWrongMetarace()
-        {
-            race.Metarace.Id = "metarace";
-            selection.MetaraceIdRequirements = new[] { "othermetarace" };
-
-            var met = selection.RequirementsMet(race, 0);
-            Assert.That(met, Is.False);
-        }
-
-        [Test]
-        public void RequirementsNotMetIfWrongMetaraceSpecies()
-        {
-            race.MetaraceSpecies = "metarace species";
-            selection.MetaraceIdRequirements = new[] { "othermetaracespecies" };
-
-            var met = selection.RequirementsMet(race, 0);
-            Assert.That(met, Is.False);
         }
 
         [Test]
@@ -81,7 +49,7 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
         [Test]
         public void RequirementsNotMetIfBelowHitDiceRange()
         {
-            selection.HitDieRequirements = Enumerable.Range(3, 3);
+            selection.MinimumHitDieRequirement = 3;
 
             var met = selection.RequirementsMet(race, 2);
             Assert.That(met, Is.False);
@@ -89,37 +57,21 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
 
         [TestCase(3)]
         [TestCase(4)]
-        [TestCase(5)]
-        public void RequirementsMetIfInHitDiceRange(Int32 hitDice)
+        public void RequirementsMetForMinimumHitDice(Int32 hitDice)
         {
-            selection.HitDieRequirements = Enumerable.Range(3, 3);
+            selection.MinimumHitDieRequirement = hitDice;
 
             var met = selection.RequirementsMet(race, hitDice);
             Assert.That(met, Is.True);
         }
 
         [Test]
-        public void RequirementsNotMetIfAboveHitDiceRange()
-        {
-            selection.HitDieRequirements = Enumerable.Range(3, 3);
-
-            var met = selection.RequirementsMet(race, 6);
-            Assert.That(met, Is.False);
-        }
-
-        [Test]
         public void AllRequirementsMet()
         {
-            race.BaseRace.Id = "baserace";
-            race.Metarace.Id = "metarace";
-            race.MetaraceSpecies = "metarace species";
             race.Size = "big";
 
-            selection.BaseRaceIdRequirements = new[] { race.BaseRace.Id, "other" };
-            selection.MetaraceIdRequirements = new[] { race.Metarace.Id, "other" };
-            selection.MetaraceSpeciesRequirements = new[] { race.MetaraceSpecies, "other" };
             selection.SizeRequirement = race.Size;
-            selection.HitDieRequirements = Enumerable.Range(3, 3);
+            selection.MinimumHitDieRequirement = 3;
 
             var met = selection.RequirementsMet(race, 4);
             Assert.That(met, Is.True);

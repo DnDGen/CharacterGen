@@ -11,18 +11,23 @@ namespace NPCGen.Selectors
 {
     public class FeatsSelector : IFeatsSelector
     {
+        private const Int32 SizeRequirementIndex = 0;
+        private const Int32 MinimumHitDiceRequirementIndex = 1;
+        private const Int32 StrengthIndex = 2;
+        private const Int32 FocusIndex = 3;
+        private const Int32 FrequencyQuantityIndex = 4;
+        private const Int32 FrequencyTimePeriodIndex = 5;
+
         private ICollectionsSelector collectionsSelector;
         private IAdjustmentsSelector adjustmentsSelector;
-        private INameSelector nameSelector;
 
-        public FeatsSelector(ICollectionsSelector collectionsSelector, IAdjustmentsSelector adjustmentsSelector, INameSelector nameSelector)
+        public FeatsSelector(ICollectionsSelector collectionsSelector, IAdjustmentsSelector adjustmentsSelector)
         {
             this.collectionsSelector = collectionsSelector;
             this.adjustmentsSelector = adjustmentsSelector;
-            this.nameSelector = nameSelector;
         }
 
-        public IEnumerable<RacialFeatSelection> SelectFor(Race race)
+        public IEnumerable<RacialFeatSelection> SelectRacial(String raceId)
         {
             var racialFeatIds = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, TableNameConstants.Set.Collection.Groups.Racial);
             var racialFeatSelections = new List<RacialFeatSelection>();
@@ -30,18 +35,14 @@ namespace NPCGen.Selectors
             foreach (var racialFeatId in racialFeatIds)
             {
                 var racialFeatSelection = new RacialFeatSelection();
-                racialFeatSelection.Name.Id = racialFeatId;
-                racialFeatSelection.Name.Name = nameSelector.Select(racialFeatId);
+                racialFeatSelection.FeatId = racialFeatId;
 
-                var featData = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatData, racialFeatId);
+                var featData = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatData, racialFeatId).ToList();
                 racialFeatSelection.SizeRequirement = featData.First();
-                racialFeatSelection.FeatStrength = Convert.ToInt32(featData.Last());
+                racialFeatSelection.Strength = Convert.ToInt32(featData.Last());
 
-                racialFeatSelection.BaseRaceIdRequirements = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.RacialFeatBaseRaceRequirements, racialFeatId);
-                racialFeatSelection.HitDieRequirements = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.RacialFeatHitDieRequirements, racialFeatId)
+                racialFeatSelection.MinimumHitDieRequirement = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.RacialFeatHitDieRequirements, racialFeatId)
                     .Select(r => Convert.ToInt32(r));
-                racialFeatSelection.MetaraceIdRequirements = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.RacialFeatMetaraceRequirements, racialFeatId);
-                racialFeatSelection.MetaraceSpeciesRequirements = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.RacialFeatMetaraceSpeciesRequirements, racialFeatId);
 
                 racialFeatSelections.Add(racialFeatSelection);
             }
@@ -67,7 +68,6 @@ namespace NPCGen.Selectors
         {
             var additionalFeatSelection = new AdditionalFeatSelection();
             additionalFeatSelection.Name.Id = featId;
-            additionalFeatSelection.Name.Name = nameSelector.Select(featId);
 
             var featData = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatData, featId).ToArray();
             additionalFeatSelection.IsFighterFeat = Convert.ToBoolean(featData[0]);
@@ -87,7 +87,7 @@ namespace NPCGen.Selectors
             return additionalFeatSelection;
         }
 
-        public IEnumerable<CharacterClassFeatSelection> SelectFor(CharacterClass characterClass)
+        public IEnumerable<CharacterClassFeatSelection> SelectClass(String characterClassName)
         {
             var classFeatIds = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, TableNameConstants.Set.Collection.Groups.CharacterClasses);
             var classFeatSelections = new List<CharacterClassFeatSelection>();
@@ -96,7 +96,6 @@ namespace NPCGen.Selectors
             {
                 var classFeatSelection = new CharacterClassFeatSelection();
                 classFeatSelection.Name.Id = classFeatId;
-                classFeatSelection.Name.Name = nameSelector.Select(classFeatId);
 
                 var featData = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatData, classFeatId);
                 var strength = featData.First();
