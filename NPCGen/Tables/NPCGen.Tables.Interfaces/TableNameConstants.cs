@@ -106,6 +106,7 @@ namespace NPCGen.Tables.Interfaces
             public static class Collection
             {
                 public const String RACEFeatData = "{0}FeatData";
+                public const String CLASSFeatData = "{0}FeatData";
             }
 
             public static class Percentile

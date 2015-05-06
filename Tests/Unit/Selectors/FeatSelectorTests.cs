@@ -79,36 +79,8 @@ namespace NPCGen.Tests.Unit.Selectors
                 .Returns(new[] { "class feat 1", "class feat 2" });
 
             var classFeatTableName = String.Format(TableNameConstants.Formattable.Collection.CLASSFeatData, characterClass.ClassName);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(classFeatTableName, "class feat 1")).Returns(new[] { "0", "class 1", "class 3" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom(classFeatTableName, "class feat 2")).Returns(new[] { "5", "class 2", "class 3", "specialist" });
-
-            var class1LevelRequirements = new Dictionary<String, Int32>();
-            class1LevelRequirements["class feat 1"] = 1;
-            class1LevelRequirements["class feat 2"] = 2;
-
-            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.CLASSFeatLevelRequirements, "class 1");
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(class1LevelRequirements);
-
-            var class2LevelRequirements = new Dictionary<String, Int32>();
-            class2LevelRequirements["class feat 1"] = 11;
-            class2LevelRequirements["class feat 2"] = 15;
-
-            tableName = String.Format(TableNameConstants.Formattable.Adjustments.CLASSFeatLevelRequirements, "class 2");
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(class2LevelRequirements);
-
-            var class3LevelRequirements = new Dictionary<String, Int32>();
-            class3LevelRequirements["class feat 1"] = 5;
-            class3LevelRequirements["class feat 2"] = 3;
-
-            tableName = String.Format(TableNameConstants.Formattable.Adjustments.CLASSFeatLevelRequirements, "class 3");
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(class3LevelRequirements);
-
-            var specialistLevelRequirements = new Dictionary<String, Int32>();
-            specialistLevelRequirements["class feat 1"] = 0;
-            specialistLevelRequirements["class feat 2"] = 0;
-
-            tableName = String.Format(TableNameConstants.Formattable.Adjustments.CLASSFeatLevelRequirements, "specialist");
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(specialistLevelRequirements);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(classFeatTableName, "class feat 1")).Returns(new[] { "1", "focus type A", "0", "3", "Daily" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(classFeatTableName, "class feat 2")).Returns(new[] { "5", String.Empty, "9266", "0", "never" });
 
             var classFeats = selector.SelectClass(characterClass.ClassName);
             Assert.That(classFeats.Count(), Is.EqualTo(2));
@@ -116,18 +88,19 @@ namespace NPCGen.Tests.Unit.Selectors
             var first = classFeats.First();
             var last = classFeats.Last();
 
-            Assert.That(first.Name.Id, Is.EqualTo("class feat 1"));
-            Assert.That(first.Name.Name, Is.EqualTo("class feat 1 name"));
-            Assert.That(first.LevelRequirements["class 1"], Is.EqualTo(1));
-            Assert.That(first.LevelRequirements["class 3"], Is.EqualTo(5));
+            Assert.That(first.FeatId, Is.EqualTo("class feat 1"));
+            Assert.That(first.FocusType, Is.EqualTo("focus type A"));
+            Assert.That(first.MinimumLevel, Is.EqualTo(1));
             Assert.That(first.Strength, Is.EqualTo(0));
+            Assert.That(first.Frequency.Quantity, Is.EqualTo(3));
+            Assert.That(first.Frequency.TimePeriod, Is.EqualTo("Daily"));
 
-            Assert.That(last.Name.Id, Is.EqualTo("class feat 2"));
-            Assert.That(last.Name.Name, Is.EqualTo("class feat 2 name"));
-            Assert.That(last.LevelRequirements["class 2"], Is.EqualTo(15));
-            Assert.That(last.LevelRequirements["class 3"], Is.EqualTo(3));
-            Assert.That(last.LevelRequirements["specialist"], Is.EqualTo(0));
-            Assert.That(last.Strength, Is.EqualTo(5));
+            Assert.That(last.FeatId, Is.EqualTo("class feat 2"));
+            Assert.That(last.FocusType, Is.Empty);
+            Assert.That(last.MinimumLevel, Is.EqualTo(5));
+            Assert.That(last.Strength, Is.EqualTo(9266));
+            Assert.That(last.Frequency.Quantity, Is.EqualTo(0));
+            Assert.That(last.Frequency.TimePeriod, Is.EqualTo("never"));
         }
 
         [Test]

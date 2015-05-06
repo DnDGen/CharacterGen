@@ -78,6 +78,7 @@ namespace NPCGen.Tests.Unit.Tables
         [TestCase(TableNameConstants.Formattable.Adjustments.METARACESkillAdjustments, "{0}SkillAdjustments")]
         [TestCase(TableNameConstants.Formattable.Adjustments.STATStatAdjustments, "{0}StatAdjustments")]
         [TestCase(TableNameConstants.Formattable.Collection.RACEFeatData, "{0}FeatData")]
+        [TestCase(TableNameConstants.Formattable.Collection.CLASSFeatData, "{0}FeatData")]
         [TestCase(TableNameConstants.Formattable.Percentile.GOODNESSCharacterClasses, "{0}CharacterClasses")]
         [TestCase(TableNameConstants.Formattable.Percentile.GOODNESSCLASSBaseRaces, "{0}{1}BaseRaces")]
         [TestCase(TableNameConstants.Formattable.Percentile.GOODNESSCLASSMetaraces, "{0}{1}Metaraces")]

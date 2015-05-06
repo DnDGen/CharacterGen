@@ -11,12 +11,17 @@ namespace NPCGen.Selectors
 {
     public class FeatsSelector : IFeatsSelector
     {
-        private const Int32 SizeRequirementIndex = 0;
-        private const Int32 MinimumHitDiceRequirementIndex = 1;
-        private const Int32 StrengthIndex = 2;
-        private const Int32 FocusIndex = 3;
-        private const Int32 FrequencyQuantityIndex = 4;
-        private const Int32 FrequencyTimePeriodIndex = 5;
+        private const Int32 RacialSizeRequirementIndex = 0;
+        private const Int32 RacialMinimumHitDiceRequirementIndex = 1;
+        private const Int32 RacialStrengthIndex = 2;
+        private const Int32 RacialFocusIndex = 3;
+        private const Int32 RacialFrequencyQuantityIndex = 4;
+        private const Int32 RacialFrequencyTimePeriodIndex = 5;
+        private const Int32 ClassMinimumLevelRequirementIndex = 0;
+        private const Int32 ClassFocusTypeIndex = 1;
+        private const Int32 ClassStrengthIndex = 2;
+        private const Int32 ClassFrequencyQuantityIndex = 3;
+        private const Int32 ClassFrequencyTimePeriodIndex = 4;
 
         private ICollectionsSelector collectionsSelector;
         private IAdjustmentsSelector adjustmentsSelector;
@@ -38,11 +43,9 @@ namespace NPCGen.Selectors
                 racialFeatSelection.FeatId = racialFeatId;
 
                 var featData = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatData, racialFeatId).ToList();
-                racialFeatSelection.SizeRequirement = featData.First();
-                racialFeatSelection.Strength = Convert.ToInt32(featData.Last());
-
-                racialFeatSelection.MinimumHitDieRequirement = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.RacialFeatHitDieRequirements, racialFeatId)
-                    .Select(r => Convert.ToInt32(r));
+                racialFeatSelection.SizeRequirement = featData[RacialSizeRequirementIndex];
+                racialFeatSelection.Strength = Convert.ToInt32(featData[RacialStrengthIndex]);
+                racialFeatSelection.MinimumHitDieRequirement = Convert.ToInt32(featData[RacialMinimumHitDiceRequirementIndex]);
 
                 racialFeatSelections.Add(racialFeatSelection);
             }
