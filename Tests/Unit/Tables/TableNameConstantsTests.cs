@@ -35,7 +35,7 @@ namespace NPCGen.Tests.Unit.Tables
         [TestCase(TableNameConstants.Set.Collection.DragonSpecies, "DragonSpecies")]
         [TestCase(TableNameConstants.Set.Collection.FeatData, "FeatData")]
         [TestCase(TableNameConstants.Set.Collection.FeatGroups, "FeatGroups")]
-        [TestCase(TableNameConstants.Set.Collection.FeatSpecificApplications, "FeatSpecificApplications")]
+        [TestCase(TableNameConstants.Set.Collection.FeatFoci, "FeatSpecificApplications")]
         [TestCase(TableNameConstants.Set.Collection.MetaraceGroups, "MetaraceGroups")]
         [TestCase(TableNameConstants.Set.Collection.Names, "Names")]
         [TestCase(TableNameConstants.Set.Collection.ProhibitedFields, "ProhibitedFields")]

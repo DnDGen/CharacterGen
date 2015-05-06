@@ -18,7 +18,7 @@ namespace NPCGen.Selectors.Interfaces.Objects
         public Boolean IsFighterFeat { get; set; }
         public Boolean IsWizardFeat { get; set; }
         public IEnumerable<String> RequiredClassNames { get; set; }
-        public String SpecificApplicationType { get; set; }
+        public String FocusType { get; set; }
 
         public AdditionalFeatSelection()
         {
@@ -27,7 +27,7 @@ namespace NPCGen.Selectors.Interfaces.Objects
             RequiredStats = new Dictionary<String, Int32>();
             RequiredSkillRanks = new Dictionary<String, Int32>();
             RequiredClassNames = Enumerable.Empty<String>();
-            SpecificApplicationType = String.Empty;
+            FocusType = String.Empty;
         }
 
         public Boolean ImmutableRequirementsMet(Int32 baseAttack, Dictionary<String, Stat> stats,

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using NPCGen.Common.CharacterClasses;
-using NPCGen.Common.Races;
 using NPCGen.Selectors.Interfaces;
 using NPCGen.Selectors.Interfaces.Objects;
 using NPCGen.Tables.Interfaces;
@@ -22,6 +20,10 @@ namespace NPCGen.Selectors
         private const Int32 ClassStrengthIndex = 2;
         private const Int32 ClassFrequencyQuantityIndex = 3;
         private const Int32 ClassFrequencyTimePeriodIndex = 4;
+        private const Int32 AdditionalIsFighterFeatIndex = 0;
+        private const Int32 AdditionalIsWizardFeatIndex = 1;
+        private const Int32 AdditionalBaseAttackRequirementIndex = 2;
+        private const Int32 AdditionalFocusTypeIndex = 3;
 
         private ICollectionsSelector collectionsSelector;
         private IAdjustmentsSelector adjustmentsSelector;
@@ -34,7 +36,7 @@ namespace NPCGen.Selectors
 
         public IEnumerable<RacialFeatSelection> SelectRacial(String raceId)
         {
-            var racialFeatIds = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, TableNameConstants.Set.Collection.Groups.Racial);
+            var racialFeatIds = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, raceId);
             var racialFeatSelections = new List<RacialFeatSelection>();
 
             foreach (var racialFeatId in racialFeatIds)
@@ -42,10 +44,14 @@ namespace NPCGen.Selectors
                 var racialFeatSelection = new RacialFeatSelection();
                 racialFeatSelection.FeatId = racialFeatId;
 
-                var featData = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatData, racialFeatId).ToList();
+                var tableName = String.Format(TableNameConstants.Formattable.Collection.RACEFeatData, racialFeatId);
+                var featData = collectionsSelector.SelectFrom(tableName, racialFeatId).ToArray();
                 racialFeatSelection.SizeRequirement = featData[RacialSizeRequirementIndex];
                 racialFeatSelection.Strength = Convert.ToInt32(featData[RacialStrengthIndex]);
                 racialFeatSelection.MinimumHitDieRequirement = Convert.ToInt32(featData[RacialMinimumHitDiceRequirementIndex]);
+                racialFeatSelection.Focus = featData[RacialFocusIndex];
+                racialFeatSelection.Frequency.Quantity = Convert.ToInt32(featData[RacialFrequencyQuantityIndex]);
+                racialFeatSelection.Frequency.TimePeriod = featData[RacialFrequencyTimePeriodIndex];
 
                 racialFeatSelections.Add(racialFeatSelection);
             }
@@ -72,11 +78,11 @@ namespace NPCGen.Selectors
             var additionalFeatSelection = new AdditionalFeatSelection();
             additionalFeatSelection.Name.Id = featId;
 
-            var featData = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatData, featId).ToArray();
-            additionalFeatSelection.IsFighterFeat = Convert.ToBoolean(featData[0]);
-            additionalFeatSelection.IsWizardFeat = Convert.ToBoolean(featData[1]);
-            additionalFeatSelection.RequiredBaseAttack = Convert.ToInt32(featData[2]);
-            additionalFeatSelection.SpecificApplicationType = featData[3];
+            var featData = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AdditionalFeatData, featId).ToArray();
+            additionalFeatSelection.IsFighterFeat = Convert.ToBoolean(featData[AdditionalIsFighterFeatIndex]);
+            additionalFeatSelection.IsWizardFeat = Convert.ToBoolean(featData[AdditionalIsWizardFeatIndex]);
+            additionalFeatSelection.RequiredBaseAttack = Convert.ToInt32(featData[AdditionalBaseAttackRequirementIndex]);
+            additionalFeatSelection.FocusType = featData[AdditionalFocusTypeIndex];
 
             additionalFeatSelection.RequiredClassNames = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AdditionalFeatClassNameRequirements, featId);
             additionalFeatSelection.RequiredFeatIds = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AdditionalFeatFeatRequirements, featId);
@@ -92,33 +98,27 @@ namespace NPCGen.Selectors
 
         public IEnumerable<CharacterClassFeatSelection> SelectClass(String characterClassName)
         {
-            var classFeatIds = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, TableNameConstants.Set.Collection.Groups.CharacterClasses);
+            var classFeatIds = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, characterClassName);
             var classFeatSelections = new List<CharacterClassFeatSelection>();
 
             foreach (var classFeatId in classFeatIds)
             {
                 var classFeatSelection = new CharacterClassFeatSelection();
-                classFeatSelection.Name.Id = classFeatId;
+                classFeatSelection.FeatId = classFeatId;
 
-                var featData = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatData, classFeatId);
-                var strength = featData.First();
-                classFeatSelection.Strength = Convert.ToInt32(strength);
+                var tableName = String.Format(TableNameConstants.Formattable.Collection.CLASSFeatData, classFeatId);
+                var featData = collectionsSelector.SelectFrom(tableName, classFeatId).ToArray();
 
-                var classes = featData.Except(new[] { strength });
-                foreach (var className in classes)
-                {
-                    var tableName = String.Format(TableNameConstants.Formattable.Adjustments.CLASSFeatLevelRequirements, className);
-                    var levelRequirements = adjustmentsSelector.SelectFrom(tableName);
-
-                    classFeatSelection.LevelRequirements[className] = levelRequirements[classFeatId];
-                }
+                classFeatSelection.FocusType = featData[ClassFocusTypeIndex];
+                classFeatSelection.Frequency.Quantity = Convert.ToInt32(featData[ClassFrequencyQuantityIndex]);
+                classFeatSelection.Frequency.TimePeriod = featData[ClassFrequencyTimePeriodIndex];
+                classFeatSelection.MinimumLevel = Convert.ToInt32(featData[ClassMinimumLevelRequirementIndex]);
+                classFeatSelection.Strength = Convert.ToInt32(featData[ClassStrengthIndex]);
 
                 classFeatSelections.Add(classFeatSelection);
             }
 
             return classFeatSelections;
         }
-
-        public IEnumerable<object> racialFeatIds { get; set; }
     }
 }

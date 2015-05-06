@@ -374,13 +374,13 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             AddFeatSelections(1);
 
             var weapons = new[] { "battleaxe" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatSpecificApplications, "weapon")).Returns(weapons);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, "weapon")).Returns(weapons);
 
             characterClass.ClassName = "class name";
             characterClass.SpecialistFields = new[] { "specialist" };
 
             AddClassFeat("class feat", "specialist", 0, 0);
-            additionalFeatSelections[1].SpecificApplicationType = "weapon";
+            additionalFeatSelections[1].FocusType = "weapon";
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
             var feat = feats.First(f => f.Name.Id == "class feat");
@@ -394,7 +394,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             AddFeatSelections(1);
 
             var weapons = new[] { "battleaxe", "kitten", "stick" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatSpecificApplications, "weapon")).Returns(weapons);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, "weapon")).Returns(weapons);
 
             mockDice.SetupSequence(d => d.Roll(1).d(2)).Returns(2);
             mockDice.SetupSequence(d => d.Roll(1).d(3)).Returns(3).Returns(1);
@@ -404,9 +404,9 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
 
             AddClassFeat("class feat 1", "specialist", 0, 0);
             AddClassFeat("class feat 2", "specialist", 0, 0);
-            additionalFeatSelections[1].SpecificApplicationType = "weapon";
+            additionalFeatSelections[1].FocusType = "weapon";
             additionalFeatSelections[2].RequiredFeatIds = new[] { additionalFeatSelections[1].Name.Id };
-            additionalFeatSelections[2].SpecificApplicationType = "weapon";
+            additionalFeatSelections[2].FocusType = "weapon";
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
             var firstFeat = feats.First(f => f.Name.Id == "class feat 1");
@@ -963,12 +963,12 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             AddFeatSelections(1);
 
             var schools = new[] { "school 1" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatSpecificApplications, "specific application")).Returns(schools);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, "specific application")).Returns(schools);
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
             var onlyFeat = feats.Single();
 
-            mockCollectionsSelector.Verify(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatSpecificApplications, It.IsAny<String>()), Times.Never);
+            mockCollectionsSelector.Verify(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, It.IsAny<String>()), Times.Never);
             Assert.That(onlyFeat.Name, Is.EqualTo(additionalFeatSelections[0].Name));
             Assert.That(onlyFeat.Focus, Is.Empty);
         }
@@ -977,10 +977,10 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         public void FeatsWithSpecificApplicationsAreFilled()
         {
             AddFeatSelections(1);
-            additionalFeatSelections[0].SpecificApplicationType = "specific application";
+            additionalFeatSelections[0].FocusType = "specific application";
 
             var schools = new[] { "school 1" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatSpecificApplications, "specific application")).Returns(schools);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, "specific application")).Returns(schools);
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
             var onlyFeat = feats.Single();
@@ -993,10 +993,10 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         public void FeatsWithSpecificApplicationsAreFilledRandomly()
         {
             AddFeatSelections(1);
-            additionalFeatSelections[0].SpecificApplicationType = "specific application";
+            additionalFeatSelections[0].FocusType = "specific application";
 
             var schools = new[] { "school 1", "school 2" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatSpecificApplications, "specific application")).Returns(schools);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, "specific application")).Returns(schools);
 
             mockDice.Setup(d => d.Roll(1).d(2)).Returns(2);
 
@@ -1012,10 +1012,10 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         {
             characterClass.Level = 3;
             AddFeatSelections(1);
-            additionalFeatSelections[0].SpecificApplicationType = "specific application";
+            additionalFeatSelections[0].FocusType = "specific application";
 
             var schools = new[] { "school 1", "school 2" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatSpecificApplications, "specific application")).Returns(schools);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, "specific application")).Returns(schools);
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
             var firstFeat = feats.First();
@@ -1078,10 +1078,10 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         public void SpellcastersCanSelectRayForWeaponSpecificApplications()
         {
             AddFeatSelections(1);
-            additionalFeatSelections[0].SpecificApplicationType = AdditionalFeatSelectionConstants.WeaponsWithUnarmedAndGrappleAndRay;
+            additionalFeatSelections[0].FocusType = AdditionalFeatSelectionConstants.WeaponsWithUnarmedAndGrappleAndRay;
 
             var weapons = new[] { WeaponProficiencyConstants.Ray, "weapon" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatSpecificApplications, AdditionalFeatSelectionConstants.WeaponsWithUnarmedAndGrappleAndRay))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, AdditionalFeatSelectionConstants.WeaponsWithUnarmedAndGrappleAndRay))
                 .Returns(weapons);
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, TableNameConstants.Set.Collection.Groups.Spellcasters))
@@ -1098,10 +1098,10 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         public void NonSpellcastersCannotSelectRayForWeaponSpecificApplications()
         {
             AddFeatSelections(1);
-            additionalFeatSelections[0].SpecificApplicationType = AdditionalFeatSelectionConstants.WeaponsWithUnarmedAndGrappleAndRay;
+            additionalFeatSelections[0].FocusType = AdditionalFeatSelectionConstants.WeaponsWithUnarmedAndGrappleAndRay;
 
             var weapons = new[] { WeaponProficiencyConstants.Ray, "weapon" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatSpecificApplications, AdditionalFeatSelectionConstants.WeaponsWithUnarmedAndGrappleAndRay))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, AdditionalFeatSelectionConstants.WeaponsWithUnarmedAndGrappleAndRay))
                 .Returns(weapons);
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, TableNameConstants.Set.Collection.Groups.Spellcasters))
@@ -1119,11 +1119,11 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         {
             characterClass.Level = 3;
             AddFeatSelections(2);
-            additionalFeatSelections[0].SpecificApplicationType = "specific application";
+            additionalFeatSelections[0].FocusType = "specific application";
             additionalFeatSelections[1].RequiredFeatIds = new[] { additionalFeatSelections[0].Name.Id };
 
             var schools = new[] { "school 1" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatSpecificApplications, "specific application")).Returns(schools);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, "specific application")).Returns(schools);
 
             mockDice.SetupSequence(d => d.Roll(1).d(2)).Returns(2);
 
@@ -1142,12 +1142,12 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         {
             characterClass.Level = 3;
             AddFeatSelections(2);
-            additionalFeatSelections[0].SpecificApplicationType = "specific application";
+            additionalFeatSelections[0].FocusType = "specific application";
             additionalFeatSelections[1].RequiredFeatIds = new[] { additionalFeatSelections[0].Name.Id };
-            additionalFeatSelections[1].SpecificApplicationType = "specific application";
+            additionalFeatSelections[1].FocusType = "specific application";
 
             var schools = new[] { "school 1", "school 2", "school 3" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatSpecificApplications, "specific application")).Returns(schools);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, "specific application")).Returns(schools);
 
             mockDice.SetupSequence(d => d.Roll(1).d(2)).Returns(2);
             mockDice.SetupSequence(d => d.Roll(1).d(3)).Returns(3).Returns(1);
@@ -1167,12 +1167,12 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         {
             characterClass.Level = 6;
             AddFeatSelections(2);
-            additionalFeatSelections[0].SpecificApplicationType = "specific application";
+            additionalFeatSelections[0].FocusType = "specific application";
             additionalFeatSelections[1].RequiredFeatIds = new[] { additionalFeatSelections[0].Name.Id };
-            additionalFeatSelections[1].SpecificApplicationType = "specific application";
+            additionalFeatSelections[1].FocusType = "specific application";
 
             var schools = new[] { "school 1", "school 2", "school 3" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatSpecificApplications, "specific application")).Returns(schools);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, "specific application")).Returns(schools);
 
             mockDice.SetupSequence(d => d.Roll(1).d(2)).Returns(1).Returns(1).Returns(2).Returns(2);
             mockDice.SetupSequence(d => d.Roll(1).d(3)).Returns(3).Returns(1);
@@ -1194,10 +1194,10 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         public void IfSpecificApplicationTypeIsSchoolOfMagic_CannotPickProhibitedFieldAsSpecificApplication()
         {
             AddFeatSelections(1);
-            additionalFeatSelections[0].SpecificApplicationType = AdditionalFeatSelectionConstants.SchoolsOfMagic;
+            additionalFeatSelections[0].FocusType = AdditionalFeatSelectionConstants.SchoolsOfMagic;
 
             var schools = new[] { "school 1", "school 2", "school 3", "school 4" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatSpecificApplications, AdditionalFeatSelectionConstants.SchoolsOfMagic)).Returns(schools);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, AdditionalFeatSelectionConstants.SchoolsOfMagic)).Returns(schools);
 
             mockDice.Setup(d => d.Roll(1).d(2)).Returns(2);
 

@@ -35,7 +35,7 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
             Assert.That(selection.RequiredStats, Is.Empty);
             Assert.That(selection.RequiredClassNames, Is.Empty);
             Assert.That(selection.IsFighterFeat, Is.False);
-            Assert.That(selection.SpecificApplicationType, Is.Empty);
+            Assert.That(selection.FocusType, Is.Empty);
             Assert.That(selection.IsWizardFeat, Is.False);
         }
 

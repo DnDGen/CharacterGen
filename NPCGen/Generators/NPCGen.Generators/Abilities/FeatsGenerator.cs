@@ -155,7 +155,7 @@ namespace NPCGen.Generators.Abilities
 
                 var sourceFeat = featsSelector.SelectAdditional(classFeatSelection.Name.Id);
 
-                if (!String.IsNullOrEmpty(sourceFeat.SpecificApplicationType))
+                if (!String.IsNullOrEmpty(sourceFeat.FocusType))
                     classFeat.Focus = GetSpecificApplicationOf(classFeat, sourceFeat, classFeats, characterClass, stats[StatConstants.Intelligence].Bonus);
                 else
                     classFeat.Focus = GetSpecificApplicationFromStrength(classFeatSelection.Strength);
@@ -212,14 +212,14 @@ namespace NPCGen.Generators.Abilities
                 return Convert.ToString(newSpellCount);
             }
 
-            if (String.IsNullOrEmpty(sourceFeat.SpecificApplicationType))
+            if (String.IsNullOrEmpty(sourceFeat.FocusType))
                 return String.Empty;
 
             var specificApplications = GetSpecificApplications(feats, sourceFeat);
             var usedSpecificApplications = feats.Where(f => f.Name == feat.Name).Select(f => f.Focus);
             specificApplications = specificApplications.Except(usedSpecificApplications);
 
-            if (sourceFeat.SpecificApplicationType == AdditionalFeatSelectionConstants.SchoolsOfMagic)
+            if (sourceFeat.FocusType == AdditionalFeatSelectionConstants.SchoolsOfMagic)
                 specificApplications = specificApplications.Except(characterClass.ProhibitedFields);
 
             var spellcasters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, TableNameConstants.Set.Collection.Groups.Spellcasters);
@@ -237,7 +237,7 @@ namespace NPCGen.Generators.Abilities
             if (otherFeats.Any(f => RequirementsHaveSpecificApplications(sourceFeat, f)))
                 return otherFeats.Where(f => RequirementsHaveSpecificApplications(sourceFeat, f)).Select(f => f.Focus);
 
-            return collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatSpecificApplications, sourceFeat.SpecificApplicationType);
+            return collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, sourceFeat.FocusType);
         }
 
         private IEnumerable<Feat> GetSkillSynergyFeats(Dictionary<String, Skill> skills)
@@ -285,7 +285,7 @@ namespace NPCGen.Generators.Abilities
             while (quantity-- > 0)
             {
                 var availableFeats = sourceFeats.Where(f => f.MutableRequirementsMet(feats))
-                                                .Select(f => new Feat { Name = f.Name, Focus = f.SpecificApplicationType })
+                                                .Select(f => new Feat { Name = f.Name, Focus = f.FocusType })
                                                 .Except(feats)
                                                 .Except(preselectedFeats);
 

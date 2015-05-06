@@ -146,7 +146,7 @@ namespace NPCGen.Tests.Unit.Selectors
             Assert.That(first.RequiredFeatIds.Count(), Is.EqualTo(2));
             Assert.That(first.RequiredSkillRanks, Is.Empty);
             Assert.That(first.RequiredStats, Is.Empty);
-            Assert.That(first.SpecificApplicationType, Is.Empty);
+            Assert.That(first.FocusType, Is.Empty);
 
             Assert.That(last.Name.Id, Is.EqualTo("additional feat 2"));
             Assert.That(last.Name.Name, Is.EqualTo("additional feat 2 name"));
@@ -161,7 +161,7 @@ namespace NPCGen.Tests.Unit.Selectors
             Assert.That(last.RequiredStats["stat 1"], Is.EqualTo(13));
             Assert.That(last.RequiredStats["stat 2"], Is.EqualTo(16));
             Assert.That(last.RequiredStats.Count, Is.EqualTo(2));
-            Assert.That(last.SpecificApplicationType, Is.EqualTo("specifics"));
+            Assert.That(last.FocusType, Is.EqualTo("specifics"));
         }
 
         [Test]
@@ -185,7 +185,7 @@ namespace NPCGen.Tests.Unit.Selectors
             Assert.That(additionalFeat.RequiredFeatIds.Count(), Is.EqualTo(2));
             Assert.That(additionalFeat.RequiredSkillRanks, Is.Empty);
             Assert.That(additionalFeat.RequiredStats, Is.Empty);
-            Assert.That(additionalFeat.SpecificApplicationType, Is.Empty);
+            Assert.That(additionalFeat.FocusType, Is.Empty);
         }
     }
 }
