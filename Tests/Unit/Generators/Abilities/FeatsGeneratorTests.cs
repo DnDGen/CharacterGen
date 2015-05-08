@@ -30,13 +30,9 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         private Mock<ICollectionsSelector> mockCollectionsSelector;
         private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
         private Mock<IFeatsSelector> mockFeatsSelector;
-        private List<RacialFeatSelection> racialFeatSelections;
         private List<AdditionalFeatSelection> additionalFeatSelections;
-        private List<CharacterClassFeatSelection> classFeatSelections;
         private Mock<IDice> mockDice;
         private BaseAttack baseAttack;
-        private List<String> overwrittenStrengthFeats;
-        private List<String> cumulativeStrengthFeats;
         private Mock<INameSelector> mockNameSelector;
 
         [SetUp]
@@ -52,49 +48,113 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             race = new Race();
             stats = new Dictionary<String, Stat>();
             skills = new Dictionary<String, Skill>();
-            racialFeatSelections = new List<RacialFeatSelection>();
             additionalFeatSelections = new List<AdditionalFeatSelection>();
-            classFeatSelections = new List<CharacterClassFeatSelection>();
             baseAttack = new BaseAttack();
             stats[StatConstants.Intelligence] = new Stat();
-            overwrittenStrengthFeats = new List<String>();
-            cumulativeStrengthFeats = new List<String>();
 
-            mockFeatsSelector.Setup(s => s.SelectRacial()).Returns(racialFeatSelections);
+            mockFeatsSelector.Setup(s => s.SelectRacial(It.IsAny<String>())).Returns(Enumerable.Empty<RacialFeatSelection>());
             mockFeatsSelector.Setup(s => s.SelectAdditional()).Returns(additionalFeatSelections);
-            mockFeatsSelector.Setup(s => s.SelectClassFeats()).Returns(classFeatSelections);
+            mockFeatsSelector.Setup(s => s.SelectClass(It.IsAny<String>())).Returns(Enumerable.Empty<CharacterClassFeatSelection>());
             mockDice.Setup(d => d.Roll(1).d(It.IsAny<Int32>())).Returns(1);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, TableNameConstants.Set.Collection.Groups.OverwrittenStrengths))
-                .Returns(overwrittenStrengthFeats);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, TableNameConstants.Set.Collection.Groups.CumulativeStrengths))
-                .Returns(cumulativeStrengthFeats);
         }
 
         [Test]
-        public void GetRacialFeats()
+        public void GetBaseRacialFeats()
         {
-            AddRacialFeat("feat 1", 9266);
-            AddRacialFeat("feat 2");
+            var baseRaceFeats = new[]
+            {
+                new RacialFeatSelection { FeatId = "base race feat 1", Focus = "focus" },
+                new RacialFeatSelection { FeatId = "base race feat 2", Strength = 9266, Frequency = new Frequency { Quantity = 42, TimePeriod = "fortnight" } };
+            };
+
+            race.BaseRace.Id = "baseRaceId";
+            mockFeatsSelector.Setup(s => s.SelectRacial("baseRaceId")).Returns(baseRaceFeats);
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
             var first = feats.First();
             var last = feats.Last();
 
-            Assert.That(first.Name.Id, Is.EqualTo("feat 1"));
-            Assert.That(first.Focus, Is.EqualTo("9266"));
-            Assert.That(last.Name.Id, Is.EqualTo("feat 2"));
+            Assert.That(first.Name.Id, Is.EqualTo("base race feat 1"));
+            Assert.That(first.Focus, Is.EqualTo("focus"));
+            Assert.That(first.Strength, Is.EqualTo(0));
+            Assert.That(first.Frequency.Quantity, Is.EqualTo(0));
+            Assert.That(first.Frequency.TimePeriod, Is.Empty);
+
+            Assert.That(last.Name.Id, Is.EqualTo("base race feat 2"));
             Assert.That(last.Focus, Is.Empty);
+            Assert.That(last.Strength, Is.EqualTo(9266));
+            Assert.That(last.Frequency.Quantity, Is.EqualTo(42));
+            Assert.That(last.Frequency.TimePeriod, Is.EqualTo("fortnight"));
         }
 
-        private void AddRacialFeat(String id, Int32 strength = 0)
+        [Test]
+        public void GetMetaracialFeats()
         {
-            var feat = new RacialFeatSelection();
-            feat.Name.Id = id;
-            feat.Name.Name = id + " name";
-            feat.FeatStrength = strength;
-            racialFeatSelections.Add(feat);
+            var metaraceFeats = new[]
+            {
+                new RacialFeatSelection { FeatId = "metarace feat 1", Focus = "focus" },
+                new RacialFeatSelection { FeatId = "metarace feat 2", Strength = 9266, Frequency = new Frequency { Quantity = 42, TimePeriod = "fortnight" } };
+            };
 
-            mockNameSelector.Setup(s => s.Select(id)).Returns(feat.Name.Name);
+            race.Metarace.Id = "metaraceId";
+            mockFeatsSelector.Setup(s => s.SelectRacial("metaraceId")).Returns(metaraceFeats);
+
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            var first = feats.First();
+            var last = feats.Last();
+
+            Assert.That(first.Name.Id, Is.EqualTo("metarace feat 1"));
+            Assert.That(first.Focus, Is.EqualTo("focus"));
+            Assert.That(first.Strength, Is.EqualTo(0));
+            Assert.That(first.Frequency.Quantity, Is.EqualTo(0));
+            Assert.That(first.Frequency.TimePeriod, Is.Empty);
+
+            Assert.That(last.Name.Id, Is.EqualTo("metarace feat 2"));
+            Assert.That(last.Focus, Is.Empty);
+            Assert.That(last.Strength, Is.EqualTo(9266));
+            Assert.That(last.Frequency.Quantity, Is.EqualTo(42));
+            Assert.That(last.Frequency.TimePeriod, Is.EqualTo("fortnight"));
+        }
+
+        [Test]
+        public void GetMetaracialSpeciesFeats()
+        {
+            var speciesFeats = new[]
+            {
+                new RacialFeatSelection { FeatId = "metarace species feat 1", Focus = "focus" },
+                new RacialFeatSelection { FeatId = "metarace species feat 2", Strength = 9266, Frequency = new Frequency { Quantity = 42, TimePeriod = "fortnight" } };
+            };
+
+            race.MetaraceSpecies = "metarace species";
+            mockFeatsSelector.Setup(s => s.SelectRacial("metarace species")).Returns(speciesFeats);
+
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            var first = feats.First();
+            var last = feats.Last();
+
+            Assert.That(first.Name.Id, Is.EqualTo("metarace species feat 1"));
+            Assert.That(first.Focus, Is.EqualTo("focus"));
+            Assert.That(first.Strength, Is.EqualTo(0));
+            Assert.That(first.Frequency.Quantity, Is.EqualTo(0));
+            Assert.That(first.Frequency.TimePeriod, Is.Empty);
+
+            Assert.That(last.Name.Id, Is.EqualTo("metarace species feat 2"));
+            Assert.That(last.Focus, Is.Empty);
+            Assert.That(last.Strength, Is.EqualTo(9266));
+            Assert.That(last.Frequency.Quantity, Is.EqualTo(42));
+            Assert.That(last.Frequency.TimePeriod, Is.EqualTo("fortnight"));
+        }
+
+        [Test]
+        public void GetAllRacialFeats()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void IfFeatIdAndStrengthAndFocusAndTimePeriodAreEqual_CombineFrequencyQuantity()
+        {
+            Assert.Fail();
         }
 
         [Test]
