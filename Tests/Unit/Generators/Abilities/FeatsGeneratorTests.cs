@@ -64,7 +64,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             var baseRaceFeats = new[]
             {
                 new RacialFeatSelection { FeatId = "base race feat 1", Focus = "focus" },
-                new RacialFeatSelection { FeatId = "base race feat 2", Strength = 9266, Frequency = new Frequency { Quantity = 42, TimePeriod = "fortnight" } };
+                new RacialFeatSelection { FeatId = "base race feat 2", Strength = 9266, Frequency = new Frequency { Quantity = 42, TimePeriod = "fortnight" } }
             };
 
             race.BaseRace.Id = "baseRaceId";
@@ -93,7 +93,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             var metaraceFeats = new[]
             {
                 new RacialFeatSelection { FeatId = "metarace feat 1", Focus = "focus" },
-                new RacialFeatSelection { FeatId = "metarace feat 2", Strength = 9266, Frequency = new Frequency { Quantity = 42, TimePeriod = "fortnight" } };
+                new RacialFeatSelection { FeatId = "metarace feat 2", Strength = 9266, Frequency = new Frequency { Quantity = 42, TimePeriod = "fortnight" } }
             };
 
             race.Metarace.Id = "metaraceId";
@@ -122,7 +122,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             var speciesFeats = new[]
             {
                 new RacialFeatSelection { FeatId = "metarace species feat 1", Focus = "focus" },
-                new RacialFeatSelection { FeatId = "metarace species feat 2", Strength = 9266, Frequency = new Frequency { Quantity = 42, TimePeriod = "fortnight" } };
+                new RacialFeatSelection { FeatId = "metarace species feat 2", Strength = 9266, Frequency = new Frequency { Quantity = 42, TimePeriod = "fortnight" } }
             };
 
             race.MetaraceSpecies = "metarace species";
@@ -158,116 +158,131 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         }
 
         [Test]
-        public void DoNotGetRacialFeatsThatDoNotHaveMetRequirements()
+        public void IfFeatIdNotEqual_DoNotCombineFrequencyQuantity()
         {
-            var selection = new RacialFeatSelection();
-            selection.Name.Id = "racial feat";
-            selection.BaseRaceIdRequirements = new[] { "otherbaserace" };
-            racialFeatSelections.Add(selection);
-            race.BaseRace.Id = "baserace";
+            Assert.Fail();
+        }
 
-            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
-            Assert.That(feats, Is.Empty);
+        [Test]
+        public void IfStrengthNotEqual_DoNotCombineFrequencyQuantity()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void IfFocusNotEqual_DoNotCombineFrequencyQuantity()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void IfFrequencyTimePeriodNotEqual_DoNotCombineFrequencyQuantity()
+        {
+            Assert.Fail();
+        }
+
+        [TestCase(FeatConstants.Frequencies.AtWill, FeatConstants.Frequencies.Day)]
+        [TestCase(FeatConstants.Frequencies.Constant, FeatConstants.Frequencies.Day)]
+        [TestCase(FeatConstants.Frequencies.Constant, FeatConstants.Frequencies.AtWill)]
+        public void FrequencyTimePeriodTrumps(String trumpTimePeriod, String losingTimePeriod)
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void DoNotGetRacialFeatThatDoNotMeetMinimumHitDiceRequirement()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void DoNotGetRacialFeatThatDoNotMeetSizeRequirement()
+        {
+            Assert.Fail();
         }
 
         [Test]
         public void DoNotDuplicateRacialFeats()
         {
-            AddRacialFeat("feat 1");
-            AddRacialFeat("feat 1");
-            AddRacialFeat("feat 2", 42);
-            AddRacialFeat("feat 2", 42);
+            var baseRaceFeats = new[]
+            {
+                new RacialFeatSelection { FeatId = "feat 1", Focus = "focus" },
+                new RacialFeatSelection { FeatId = "base race feat 2", Strength = 9266, Frequency = new Frequency { Quantity = 42, TimePeriod = "fortnight" } }
+            };
+
+            var metaraceFeats = new[]
+            {
+                new RacialFeatSelection { FeatId = "feat 1", Focus = "focus" },
+                new RacialFeatSelection { FeatId = "metarace feat 2", Strength = 9266, Frequency = new Frequency { Quantity = 42, TimePeriod = "fortnight" } }
+            };
+
+            race.BaseRace.Id = "baseRaceId";
+            race.Metarace.Id = "metaraceId";
+            mockFeatsSelector.Setup(s => s.SelectRacial("baseRaceId")).Returns(baseRaceFeats);
+            mockFeatsSelector.Setup(s => s.SelectRacial("metaraceId")).Returns(metaraceFeats);
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
-            var firstFeat = feats.First();
-            var lastFeat = feats.Last();
+            var featIds = feats.Select(s => s.Name.Id);
 
-            Assert.That(firstFeat.Name.Id, Is.EqualTo("feat 1"));
-            Assert.That(firstFeat.Focus, Is.Empty);
-            Assert.That(lastFeat.Name.Id, Is.EqualTo("feat 2"));
-            Assert.That(lastFeat.Focus, Is.EqualTo("42"));
-            Assert.That(feats.Count(), Is.EqualTo(2));
+            Assert.That(featIds, Contains.Item("feat 1"));
+            Assert.That(featIds, Contains.Item("base race feat 2"));
+            Assert.That(featIds, Contains.Item("metarace feat 2"));
+            Assert.That(feats.Count(), Is.EqualTo(3));
         }
 
-        [Test]
-        public void OnlyKeepStrongestFeat()
+        [TestCase(FeatConstants.Frequencies.AtWill)]
+        [TestCase(FeatConstants.Frequencies.Constant)]
+        public void IfFeatIdAndFocusAreEqualAndFrequencyTimePeriodAreStrongEnough_OnlyKeepStrongestFeat(String frequencyTimePeriod)
         {
-            AddRacialFeat("feat 1", 9266);
-            AddRacialFeat("feat 1", 42);
-            overwrittenStrengthFeats.Add("feat 1");
+            var baseRaceFeats = new[]
+            {
+                new RacialFeatSelection { FeatId = "racial feat", Focus = "focus", Strength = 42, Frequency = new Frequency { TimePeriod = frequencyTimePeriod } },
+                new RacialFeatSelection { FeatId = "racial feat", Focus = "focus", Strength = 9266, Frequency = new Frequency { TimePeriod = frequencyTimePeriod } }
+            };
+
+            race.BaseRace.Id = "baseRaceId";
+            mockFeatsSelector.Setup(s => s.SelectRacial("baseRaceId")).Returns(baseRaceFeats);
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
             var onlyFeat = feats.Single();
 
-            Assert.That(onlyFeat.Name.Id, Is.EqualTo("feat 1"));
-            Assert.That(onlyFeat.Focus, Is.EqualTo("9266"));
-        }
-
-        [Test]
-        public void AddStrengthsOfBothFeats()
-        {
-            AddRacialFeat("feat 1", 9266);
-            AddRacialFeat("feat 1", 42);
-            cumulativeStrengthFeats.Add("feat 1");
-
-            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
-            var onlyFeat = feats.Single();
-
-            Assert.That(onlyFeat.Name.Id, Is.EqualTo("feat 1"));
-            Assert.That(onlyFeat.Focus, Is.EqualTo("9308"));
-        }
-
-        [Test]
-        public void KeepBothFeatsIfNotOverwrittenOrCumulativeStrengths()
-        {
-            AddRacialFeat("feat 1", 9266);
-            AddRacialFeat("feat 1", 42);
-
-            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
-            var firstFeat = feats.First();
-            var lastFeat = feats.Last();
-
-            Assert.That(firstFeat.Name.Id, Is.EqualTo("feat 1"));
-            Assert.That(firstFeat.Focus, Is.EqualTo("9266"));
-            Assert.That(lastFeat.Name.Id, Is.EqualTo("feat 1"));
-            Assert.That(lastFeat.Focus, Is.EqualTo("42"));
-            Assert.That(feats.Count(), Is.EqualTo(2));
-        }
-
-        [Test]
-        public void GetMonsterHitDiceForRequirements()
-        {
-            var selection = new RacialFeatSelection();
-            selection.Name.Id = "racial feat";
-            selection.HitDieRequirements = Enumerable.Range(2, 2);
-            racialFeatSelections.Add(selection);
-
-            race.BaseRace.Id = "baserace";
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.Names, TableNameConstants.Set.Collection.Groups.Monsters))
-                .Returns(new[] { race.BaseRace.Id });
-
-            var monsterHitDice = new Dictionary<String, Int32>();
-            monsterHitDice[race.BaseRace.Id] = 3;
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice)).Returns(monsterHitDice);
-
-            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
-            var onlyFeat = feats.Single();
             Assert.That(onlyFeat.Name.Id, Is.EqualTo("racial feat"));
+            Assert.That(onlyFeat.Strength, Is.EqualTo(9266));
+        }
+
+        [Test]
+        public void IfFeatIdNotEqual_KeepBothFeat()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void IfFocusNotEqual_KeepBothFeat()
+        {
+            Assert.Fail();
+        }
+
+        [TestCase(FeatConstants.Frequencies.Day)]
+        public void IfFrequencyTimePeriodNotConstantOrAtWill_KeepBothFeat(String frequencyTimePeriod)
+        {
+            Assert.Fail();
         }
 
         [Test]
         public void NonMonstersHaveOneMonsterHitDieForSakeOfHitDiceRequirements()
         {
-            var selection = new RacialFeatSelection();
-            selection.Name.Id = "racial feat";
-            selection.HitDieRequirements = Enumerable.Range(1, 1);
-            racialFeatSelections.Add(selection);
+            var baseRaceFeats = new[]
+            {
+                new RacialFeatSelection { FeatId = "racial feat", MinimumHitDieRequirement = 1 }
+            };
 
-            race.BaseRace.Id = "baserace";
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.Names, TableNameConstants.Set.Collection.Groups.Monsters)).Returns(new[] { "other base race" });
+            race.BaseRace.Id = "baseRaceId";
+            mockFeatsSelector.Setup(s => s.SelectRacial("baseRaceId")).Returns(baseRaceFeats);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, TableNameConstants.Set.Collection.Groups.Monsters)).Returns(new[] { "other base race" });
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
             var onlyFeat = feats.Single();
+
             Assert.That(onlyFeat.Name.Id, Is.EqualTo("racial feat"));
             mockAdjustmentsSelector.Verify(s => s.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice), Times.Never);
         }
@@ -278,27 +293,39 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             characterClass.ClassName = "class name";
             characterClass.Level = 2;
 
-            AddClassFeat("feat 1", characterClass.ClassName, characterClass.Level, 1);
+            var classFeats = new[]
+            {
+                new CharacterClassFeatSelection { FeatId = "class feat 1", Strength = 9266, Frequency = new Frequency { Quantity = 0, TimePeriod = "constant" } },
+                new CharacterClassFeatSelection { FeatId = "class feat 2", Frequency = new Frequency { Quantity = 600, TimePeriod = "fortnight" } }
+            };
+
+            mockFeatsSelector.Setup(s => s.SelectClass("class name")).Returns(classFeats);
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
-            var featIds = feats.Select(f => f.Name.Id);
-            Assert.That(featIds, Contains.Item("feat 1"));
+            var first = feats.First();
+            var last = feats.Last();
+
+            Assert.That(first.Name.Id, Is.EqualTo("class feat 1"));
+            Assert.That(first.Strength, Is.EqualTo(9266));
+            Assert.That(first.Frequency.Quantity, Is.EqualTo(0));
+            Assert.That(first.Frequency.TimePeriod, Is.EqualTo("never"));
+
+            Assert.That(last.Name.Id, Is.EqualTo("class feat 2"));
+            Assert.That(last.Strength, Is.EqualTo(0));
+            Assert.That(last.Frequency.Quantity, Is.EqualTo(600));
+            Assert.That(last.Frequency.TimePeriod, Is.EqualTo("fortnight"));
         }
 
         [Test]
-        public void GetMultipleClassFeatsForSameLevel()
+        public void GetClassFeatForSpecializations()
         {
-            characterClass.ClassName = "class name";
-            characterClass.Level = 2;
+            Assert.Fail();
+        }
 
-            AddClassFeat("feat 1", characterClass.ClassName, characterClass.Level, 1);
-            AddClassFeat("feat 2", characterClass.ClassName, characterClass.Level, 1);
-
-            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
-            var featIds = feats.Select(f => f.Name.Id);
-
-            Assert.That(featIds, Contains.Item("feat 1"));
-            Assert.That(featIds, Contains.Item("feat 2"));
+        [Test]
+        public void GetAllClassFeats()
+        {
+            Assert.Fail();
         }
 
         [Test]
@@ -315,18 +342,6 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
 
             Assert.That(featIds, Contains.Item("feat 1"));
             Assert.That(featIds, Contains.Item("feat 2"));
-        }
-
-        private void AddClassFeat(String id, String className, Int32 levelRequirement, Int32 strength)
-        {
-            var selection = new CharacterClassFeatSelection();
-            selection.Name.Id = id;
-            selection.Name.Name = id + " name";
-            selection.LevelRequirements[className] = levelRequirement;
-            selection.Strength = strength;
-
-            classFeatSelections.Add(selection);
-            AddAdditionalFeat(id);
         }
 
         [Test]
