@@ -46,6 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abilities\Feats\IAdditionalFeatsGenerator.cs" />
+    <Compile Include="Abilities\Feats\IRacialFeatsGenerator.cs" />
+    <Compile Include="Abilities\Feats\IClassFeatsGenerator.cs" />
     <Compile Include="Abilities\IAbilitiesGenerator.cs" />
     <Compile Include="Combats\IArmorClassGenerator.cs" />
     <Compile Include="Combats\ICombatGenerator.cs" />
@@ -54,7 +57,7 @@
     <Compile Include="Items\IArmorGenerator.cs" />
     <Compile Include="ICharacterClassGenerator.cs" />
     <Compile Include="ICharacterGenerator.cs" />
-    <Compile Include="Abilities\IFeatsGenerator.cs" />
+    <Compile Include="Abilities\Feats\IFeatsGenerator.cs" />
     <Compile Include="Combats\IHitPointsGenerator.cs" />
     <Compile Include="Abilities\ILanguageGenerator.cs" />
     <Compile Include="IRaceGenerator.cs" />

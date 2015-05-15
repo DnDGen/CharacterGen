@@ -52,7 +52,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abilities\AbilitiesGenerator.cs" />
-    <Compile Include="Abilities\FeatsGenerator.cs" />
+    <Compile Include="Abilities\Feats\AdditionalFeatsGenerator.cs" />
+    <Compile Include="Abilities\Feats\ClassFeatsGenerator.cs" />
+    <Compile Include="Abilities\Feats\RacialFeatsGenerator.cs" />
+    <Compile Include="Abilities\Feats\FeatsGenerator.cs" />
     <Compile Include="Abilities\SkillsGenerator.cs" />
     <Compile Include="AlignmentGenerator.cs" />
     <Compile Include="CharacterClassGenerator.cs" />

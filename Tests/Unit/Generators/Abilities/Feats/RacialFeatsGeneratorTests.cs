@@ -11,7 +11,9 @@ using NPCGen.Common.Combats;
 using NPCGen.Common.Items;
 using NPCGen.Common.Races;
 using NPCGen.Generators.Abilities;
+using NPCGen.Generators.Abilities.Feats;
 using NPCGen.Generators.Interfaces.Abilities;
+using NPCGen.Generators.Interfaces.Abilities.Feats;
 using NPCGen.Selectors.Interfaces;
 using NPCGen.Selectors.Interfaces.Objects;
 using NPCGen.Tables.Interfaces;
@@ -43,7 +45,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             mockFeatsSelector = new Mock<IFeatsSelector>();
             mockDice = new Mock<IDice>();
             mockNameSelector = new Mock<INameSelector>();
-            racialFeatsGenerator = new FeatsGenerator(mockCollectionsSelector.Object, mockAdjustmentsSelector.Object, mockFeatsSelector.Object, mockDice.Object, mockNameSelector.Object);
+            racialFeatsGenerator = new RacialFeatsGenerator(mockCollectionsSelector.Object, mockAdjustmentsSelector.Object, mockFeatsSelector.Object, mockDice.Object, mockNameSelector.Object);
             characterClass = new CharacterClass();
             race = new Race();
             stats = new Dictionary<String, Stat>();

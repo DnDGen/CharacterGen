@@ -10,13 +10,14 @@ using NPCGen.Common.Combats;
 using NPCGen.Common.Items;
 using NPCGen.Common.Races;
 using NPCGen.Generators.Interfaces.Abilities;
+using NPCGen.Generators.Interfaces.Abilities.Feats;
 using NPCGen.Selectors.Interfaces;
 using NPCGen.Selectors.Interfaces.Objects;
 using NPCGen.Tables.Interfaces;
 
 namespace NPCGen.Generators.Abilities.Feats
 {
-    public class FeatsGenerator : IFeatsGenerator
+    public class RacialFeatsGenerator : IRacialFeatsGenerator
     {
         private ICollectionsSelector collectionsSelector;
         private IAdjustmentsSelector adjustmentsSelector;
@@ -24,7 +25,7 @@ namespace NPCGen.Generators.Abilities.Feats
         private IDice dice;
         private INameSelector nameSelector;
 
-        public FeatsGenerator(ICollectionsSelector collectionsSelector, IAdjustmentsSelector adjustmentsSelector,
+        public RacialFeatsGenerator(ICollectionsSelector collectionsSelector, IAdjustmentsSelector adjustmentsSelector,
             IFeatsSelector featsSelector, IDice dice, INameSelector nameSelector)
         {
             this.collectionsSelector = collectionsSelector;

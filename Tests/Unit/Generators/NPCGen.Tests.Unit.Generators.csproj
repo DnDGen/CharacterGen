@@ -60,7 +60,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abilities\AbilitiesGeneratorTests.cs" />
-    <Compile Include="Abilities\FeatsGeneratorTests.cs" />
+    <Compile Include="Abilities\Feats\AdditionalFeatsGeneratorTests.cs" />
+    <Compile Include="Abilities\Feats\ClassFeatsGeneratorTests.cs" />
+    <Compile Include="Abilities\Feats\RacialFeatsGeneratorTests.cs" />
+    <Compile Include="Abilities\Feats\FeatsGeneratorTests.cs" />
     <Compile Include="Abilities\SkillsGeneratorTests.cs" />
     <Compile Include="AlignmentGeneratorTests.cs" />
     <Compile Include="CharacterClassGeneratorTests.cs" />
