@@ -14,7 +14,7 @@ using NPCGen.Selectors.Interfaces;
 using NPCGen.Selectors.Interfaces.Objects;
 using NPCGen.Tables.Interfaces;
 
-namespace NPCGen.Generators.Abilities
+namespace NPCGen.Generators.Abilities.Feats
 {
     public class FeatsGenerator : IFeatsGenerator
     {

@@ -7,9 +7,9 @@ using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Combats;
 using NPCGen.Common.Races;
 
-namespace NPCGen.Generators.Interfaces.Abilities
+namespace NPCGen.Generators.Interfaces.Abilities.Feats
 {
-    public interface IFeatsGenerator
+    public interface IAdditionalFeatsGenerator
     {
         IEnumerable<Feat> GenerateWith(CharacterClass characterClass, Race race, Dictionary<String, Stat> stats, Dictionary<String, Skill> skills,
             BaseAttack baseAttack);
