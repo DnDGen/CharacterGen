@@ -108,8 +108,8 @@ namespace NPCGen.Tests.Unit.Selectors
         {
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, TableNameConstants.Set.Collection.Groups.Additional))
                 .Returns(new[] { "additional feat 1", "additional feat 2" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatData, "additional feat 1")).Returns(new[] { "True", "False", "9266", String.Empty });
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatData, "additional feat 2")).Returns(new[] { "False", "True", "0", "specifics" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AdditionalFeatData, "additional feat 1")).Returns(new[] { "True", "False", "9266", String.Empty });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AdditionalFeatData, "additional feat 2")).Returns(new[] { "False", "True", "0", "specifics" });
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AdditionalFeatClassNameRequirements, "additional feat 1")).Returns(new[] { "class 1", "class 3" });
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AdditionalFeatFeatRequirements, "additional feat 1")).Returns(new[] { "feat 1", "feat 2" });
 
@@ -167,7 +167,7 @@ namespace NPCGen.Tests.Unit.Selectors
         [Test]
         public void GetAdditionalFeat()
         {
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatData, "additional feat 1")).Returns(new[] { "True", "False", "9266", String.Empty });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AdditionalFeatData, "additional feat 1")).Returns(new[] { "True", "False", "9266", String.Empty });
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AdditionalFeatClassNameRequirements, "additional feat 1")).Returns(new[] { "class 1", "class 3" });
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AdditionalFeatFeatRequirements, "additional feat 1")).Returns(new[] { "feat 1", "feat 2" });
 

@@ -10,6 +10,7 @@ using NPCGen.Common.Combats;
 using NPCGen.Common.Races;
 using NPCGen.Generators.Abilities.Feats;
 using NPCGen.Generators.Interfaces.Abilities.Feats;
+using NPCGen.Selectors.Interfaces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
@@ -21,6 +22,8 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
         private Mock<IRacialFeatsGenerator> mockRacialFeatsGenerator;
         private Mock<IClassFeatsGenerator> mockClassFeatsGenerator;
         private Mock<IAdditionalFeatsGenerator> mockAdditionalFeatsGenerator;
+        private Mock<ICollectionsSelector> mockCollectionsSelector;
+        private Mock<INameSelector> mockNameSelector;
         private CharacterClass characterClass;
         private Race race;
         private Dictionary<String, Stat> stats;
@@ -33,7 +36,10 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             mockRacialFeatsGenerator = new Mock<IRacialFeatsGenerator>();
             mockClassFeatsGenerator = new Mock<IClassFeatsGenerator>();
             mockAdditionalFeatsGenerator = new Mock<IAdditionalFeatsGenerator>();
-            featsGenerator = new FeatsGenerator(mockRacialFeatsGenerator.Object, mockClassFeatsGenerator.Object, mockAdditionalFeatsGenerator.Object);
+            mockCollectionsSelector = new Mock<ICollectionsSelector>();
+            mockNameSelector = new Mock<INameSelector>();
+            featsGenerator = new FeatsGenerator(mockRacialFeatsGenerator.Object, mockClassFeatsGenerator.Object, mockAdditionalFeatsGenerator.Object,
+                mockCollectionsSelector.Object, mockNameSelector.Object);
 
             characterClass = new CharacterClass();
             race = new Race();
@@ -97,7 +103,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             classFeats[1].Name.Id = "classFeat2";
             classFeats[1].Name.Name = "class feat 2";
 
-            mockClassFeatsGenerator.Setup(g => g.GenerateWith(characterClass)).Returns(classFeats);
+            mockClassFeatsGenerator.Setup(g => g.GenerateWith(characterClass, stats)).Returns(classFeats);
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
             var first = feats.First();
@@ -136,7 +142,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             additionalFeats[1].Name.Id = "feat2";
             additionalFeats[1].Name.Name = "feat 2";
 
-            mockAdditionalFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills, baseAttack)).Returns(additionalFeats);
+            mockAdditionalFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills, baseAttack, It.IsAny<IEnumerable<Feat>>())).Returns(additionalFeats);
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
             var first = feats.First();
@@ -188,8 +194,8 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             classFeats[0].Strength = 9266;
 
             mockRacialFeatsGenerator.Setup(g => g.GenerateWith(race)).Returns(racialFeats);
-            mockClassFeatsGenerator.Setup(g => g.GenerateWith(characterClass)).Returns(classFeats);
-            mockAdditionalFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills, baseAttack)).Returns(additionalFeats);
+            mockClassFeatsGenerator.Setup(g => g.GenerateWith(characterClass, stats)).Returns(classFeats);
+            mockAdditionalFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills, baseAttack, It.IsAny<IEnumerable<Feat>>())).Returns(additionalFeats);
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
             Assert.That(feats.Count(), Is.EqualTo(3));
@@ -229,8 +235,8 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             classFeats[0].Frequency.TimePeriod = "fortnight";
 
             mockRacialFeatsGenerator.Setup(g => g.GenerateWith(race)).Returns(racialFeats);
-            mockClassFeatsGenerator.Setup(g => g.GenerateWith(characterClass)).Returns(classFeats);
-            mockAdditionalFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills, baseAttack)).Returns(additionalFeats);
+            mockClassFeatsGenerator.Setup(g => g.GenerateWith(characterClass, stats)).Returns(classFeats);
+            mockAdditionalFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills, baseAttack, It.IsAny<IEnumerable<Feat>>())).Returns(additionalFeats);
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
             var onlyFeat = feats.Single();
@@ -277,8 +283,8 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             classFeats[0].Frequency.TimePeriod = "fortnight";
 
             mockRacialFeatsGenerator.Setup(g => g.GenerateWith(race)).Returns(racialFeats);
-            mockClassFeatsGenerator.Setup(g => g.GenerateWith(characterClass)).Returns(classFeats);
-            mockAdditionalFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills, baseAttack)).Returns(additionalFeats);
+            mockClassFeatsGenerator.Setup(g => g.GenerateWith(characterClass, stats)).Returns(classFeats);
+            mockAdditionalFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills, baseAttack, It.IsAny<IEnumerable<Feat>>())).Returns(additionalFeats);
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
             var first = feats.First();
@@ -335,8 +341,8 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             classFeats[0].Frequency.TimePeriod = "fortnight";
 
             mockRacialFeatsGenerator.Setup(g => g.GenerateWith(race)).Returns(racialFeats);
-            mockClassFeatsGenerator.Setup(g => g.GenerateWith(characterClass)).Returns(classFeats);
-            mockAdditionalFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills, baseAttack)).Returns(additionalFeats);
+            mockClassFeatsGenerator.Setup(g => g.GenerateWith(characterClass, stats)).Returns(classFeats);
+            mockAdditionalFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills, baseAttack, It.IsAny<IEnumerable<Feat>>())).Returns(additionalFeats);
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
             var first = feats.First();
@@ -393,8 +399,8 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             classFeats[0].Frequency.TimePeriod = "fortnight";
 
             mockRacialFeatsGenerator.Setup(g => g.GenerateWith(race)).Returns(racialFeats);
-            mockClassFeatsGenerator.Setup(g => g.GenerateWith(characterClass)).Returns(classFeats);
-            mockAdditionalFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills, baseAttack)).Returns(additionalFeats);
+            mockClassFeatsGenerator.Setup(g => g.GenerateWith(characterClass, stats)).Returns(classFeats);
+            mockAdditionalFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills, baseAttack, It.IsAny<IEnumerable<Feat>>())).Returns(additionalFeats);
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
             var first = feats.First();
@@ -451,8 +457,8 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             classFeats[0].Frequency.TimePeriod = "fortnight";
 
             mockRacialFeatsGenerator.Setup(g => g.GenerateWith(race)).Returns(racialFeats);
-            mockClassFeatsGenerator.Setup(g => g.GenerateWith(characterClass)).Returns(classFeats);
-            mockAdditionalFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills, baseAttack)).Returns(additionalFeats);
+            mockClassFeatsGenerator.Setup(g => g.GenerateWith(characterClass, stats)).Returns(classFeats);
+            mockAdditionalFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills, baseAttack, It.IsAny<IEnumerable<Feat>>())).Returns(additionalFeats);
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
             var first = feats.First();

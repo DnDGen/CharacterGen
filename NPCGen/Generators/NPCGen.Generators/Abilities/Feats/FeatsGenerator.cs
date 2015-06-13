@@ -8,6 +8,8 @@ using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Combats;
 using NPCGen.Common.Races;
 using NPCGen.Generators.Interfaces.Abilities.Feats;
+using NPCGen.Selectors.Interfaces;
+using NPCGen.Tables.Interfaces;
 
 namespace NPCGen.Generators.Abilities.Feats
 {
@@ -16,13 +18,18 @@ namespace NPCGen.Generators.Abilities.Feats
         private IRacialFeatsGenerator racialFeatsGenerator;
         private IClassFeatsGenerator classFeatsGenerator;
         private IAdditionalFeatsGenerator additionalFeatsGenerator;
+        private ICollectionsSelector collectionsSelector;
+        private INameSelector nameSelector;
 
         public FeatsGenerator(IRacialFeatsGenerator racialFeatsGenerator, IClassFeatsGenerator classFeatsGenerator,
-            IAdditionalFeatsGenerator additionalFeatsGenerator)
+            IAdditionalFeatsGenerator additionalFeatsGenerator, ICollectionsSelector collectionsSelector,
+            INameSelector nameSelector)
         {
             this.racialFeatsGenerator = racialFeatsGenerator;
             this.classFeatsGenerator = classFeatsGenerator;
             this.additionalFeatsGenerator = additionalFeatsGenerator;
+            this.collectionsSelector = collectionsSelector;
+            this.nameSelector = nameSelector;
         }
 
         public IEnumerable<Feat> GenerateWith(CharacterClass characterClass, Race race, Dictionary<String, Stat> stats,
@@ -30,9 +37,13 @@ namespace NPCGen.Generators.Abilities.Feats
         {
             var racialFeats = racialFeatsGenerator.GenerateWith(race);
             var classFeats = classFeatsGenerator.GenerateWith(characterClass, stats);
-            var additionalFeats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            var automaticFeats = racialFeats.Union(classFeats);
+            var additionalFeats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, automaticFeats);
+            var skillSynergyFeats = GetSkillSynergyFeats(skills);
 
-            var allFeats = racialFeats.Union(classFeats).Union(additionalFeats);
+            var allFeats = racialFeats.Union(classFeats)
+                                      .Union(additionalFeats)
+                                      .Union(skillSynergyFeats);
 
             var featsToCombine = allFeats.Where(f => CanCombine(f, allFeats));
 
@@ -45,6 +56,9 @@ namespace NPCGen.Generators.Abilities.Feats
 
                 allFeats = allFeats.Except(otherFeats);
             }
+
+            foreach (var feat in allFeats)
+                feat.Name.Name = nameSelector.Select(feat.Name.Id);
 
             return allFeats;
         }
@@ -70,7 +84,16 @@ namespace NPCGen.Generators.Abilities.Feats
                 synergyFeatIds.AddRange(synergy);
             }
 
-            return synergyFeatIds.Select(f => CreateFeat(f));
+            var synergyFeats = new List<Feat>();
+            foreach (var synergyFeatId in synergyFeatIds)
+            {
+                var synergyFeat = new Feat();
+                synergyFeat.Name.Id = synergyFeatId;
+
+                synergyFeats.Add(synergyFeat);
+            }
+
+            return synergyFeats;
         }
     }
 }

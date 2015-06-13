@@ -12,6 +12,6 @@ namespace NPCGen.Generators.Interfaces.Abilities.Feats
     public interface IAdditionalFeatsGenerator
     {
         IEnumerable<Feat> GenerateWith(CharacterClass characterClass, Race race, Dictionary<String, Stat> stats, Dictionary<String, Skill> skills,
-            BaseAttack baseAttack);
+            BaseAttack baseAttack, IEnumerable<Feat> preselectedFeats);
     }
 }

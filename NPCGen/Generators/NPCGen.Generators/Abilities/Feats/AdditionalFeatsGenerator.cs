@@ -36,21 +36,17 @@ namespace NPCGen.Generators.Abilities.Feats
         }
 
         public IEnumerable<Feat> GenerateWith(CharacterClass characterClass, Race race, Dictionary<String, Stat> stats,
-            Dictionary<String, Skill> skills, BaseAttack baseAttack)
+            Dictionary<String, Skill> skills, BaseAttack baseAttack, IEnumerable<Feat> preselectedFeats)
         {
-            var additionalFeats = GetAdditionalFeats(characterClass, race, stats, skills, baseAttack, automaticFeats);
-            var bonusFeats = Enumerable.Empty<Feat>();
-
-            if (characterClass.ClassName == CharacterClassConstants.Fighter)
-                bonusFeats = GetFighterFeats(characterClass, race, stats, skills, baseAttack, feats);
-            else if (characterClass.ClassName == CharacterClassConstants.Wizard)
-                bonusFeats = GetWizardBonusFeats(characterClass, race, stats, skills, baseAttack, feats);
+            var additionalFeats = GetAdditionalFeats(characterClass, race, stats, skills, baseAttack, preselectedFeats);
+            var allButBonusFeats = preselectedFeats.Union(additionalFeats);
+            var bonusFeats = GetBonusFeats(characterClass, race, stats, skills, baseAttack, allButBonusFeats);
 
             return additionalFeats.Union(bonusFeats);
         }
 
         private IEnumerable<Feat> GetAdditionalFeats(CharacterClass characterClass, Race race, Dictionary<String, Stat> stats, Dictionary<String, Skill> skills,
-            BaseAttack baseAttack, IEnumerable<Feat> automaticFeats)
+            BaseAttack baseAttack, IEnumerable<Feat> preselectedFeats)
         {
             var additionalFeats = featsSelector.SelectAdditional();
             var availableFeats = additionalFeats.Where(f => f.ImmutableRequirementsMet(baseAttack.Bonus, stats, skills, characterClass.ClassName));
@@ -59,9 +55,20 @@ namespace NPCGen.Generators.Abilities.Feats
             if (race.BaseRace.Id == RaceConstants.BaseRaces.HumanId)
                 numberOfAdditionalFeats++;
 
-            var feats = PopulateFeatsFrom(characterClass, stats, skills, baseAttack, automaticFeats, availableFeats, numberOfAdditionalFeats);
+            var feats = PopulateFeatsFrom(characterClass, stats, skills, baseAttack, preselectedFeats, availableFeats, numberOfAdditionalFeats);
 
             return feats;
+        }
+
+        private IEnumerable<Feat> GetBonusFeats(CharacterClass characterClass, Race race, Dictionary<String, Stat> stats,
+            Dictionary<String, Skill> skills, BaseAttack baseAttack, IEnumerable<Feat> preselectedFeats)
+        {
+            if (characterClass.ClassName == CharacterClassConstants.Fighter)
+                return GetFighterFeats(characterClass, race, stats, skills, baseAttack, preselectedFeats);
+            else if (characterClass.ClassName == CharacterClassConstants.Wizard)
+                return GetWizardBonusFeats(characterClass, race, stats, skills, baseAttack, preselectedFeats);
+
+            return Enumerable.Empty<Feat>();
         }
 
         private String GetFocusOf(Feat feat, AdditionalFeatSelection sourceFeat, IEnumerable<Feat> feats, CharacterClass characterClass, Int32 intelligenceBonus)
