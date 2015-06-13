@@ -7,6 +7,7 @@ using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Combats;
 using NPCGen.Common.Races;
 using NPCGen.Generators.Interfaces.Abilities;
+using NPCGen.Generators.Interfaces.Abilities.Feats;
 using NPCGen.Generators.Interfaces.Randomizers.Stats;
 using NPCGen.Selectors.Interfaces;
 using NPCGen.Tables.Interfaces;

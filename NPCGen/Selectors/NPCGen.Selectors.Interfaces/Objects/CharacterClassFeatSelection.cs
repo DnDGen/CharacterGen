@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
 using NPCGen.Common.Abilities.Feats;
-using NPCGen.Common.CharacterClasses;
 
 namespace NPCGen.Selectors.Interfaces.Objects
 {
@@ -11,17 +11,13 @@ namespace NPCGen.Selectors.Interfaces.Objects
         public Int32 MinimumLevel { get; set; }
         public Int32 Strength { get; set; }
         public Frequency Frequency { get; set; }
+        public IEnumerable<String> RequiredFeatIds { get; set; }
 
         public CharacterClassFeatSelection()
         {
             FeatId = String.Empty;
             FocusType = String.Empty;
             Frequency = new Frequency();
-        }
-
-        public Boolean RequirementsSatisfied(CharacterClass characterClass)
-        {
-            return characterClass.Level > -MinimumLevel;
         }
     }
 }

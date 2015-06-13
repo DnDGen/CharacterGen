@@ -70,11 +70,16 @@ namespace NPCGen.Tables.Interfaces
                     public const String NaturalArmor = "NaturalArmor";
                     public const String OverwrittenStrengths = "OverwrittenStrengths";
                     public const String Racial = "Racial";
+                    public const String SchoolsOfMagic = "Schools of magic";
                     public const String Size = "Size";
+                    public const String Skills = "Skills";
                     public const String Spellcasters = "Spellcasters";
                     public const String Standard = "Standard";
                     public const String Stealth = "Stealth";
                     public const String Warriors = "Warriors";
+                    public const String Weapons = "Weapons";
+                    public const String WeaponsWithUnarmedAndGrapple = "Weapons with unarmed and grapple";
+                    public const String WeaponsWithUnarmedAndGrappleAndRay = "Weapons with unarmed, grapple, and ray";
                 }
             }
 

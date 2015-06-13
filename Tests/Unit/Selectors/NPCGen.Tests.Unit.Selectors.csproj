@@ -55,7 +55,6 @@
     <Compile Include="CollectionsSelectorTests.cs" />
     <Compile Include="FeatSelectorTests.cs" />
     <Compile Include="NameSelectorTests.cs" />
-    <Compile Include="Objects\AdditionalFeatSelectionConstantsTests.cs" />
     <Compile Include="Objects\AdditionalFeatSelectionTests.cs" />
     <Compile Include="LanguageCollectionsSelectorTests.cs" />
     <Compile Include="AdjustmentsSelectorTests.cs" />

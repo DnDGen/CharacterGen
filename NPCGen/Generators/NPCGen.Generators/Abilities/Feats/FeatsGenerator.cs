@@ -29,7 +29,7 @@ namespace NPCGen.Generators.Abilities.Feats
             Dictionary<String, Skill> skills, BaseAttack baseAttack)
         {
             var racialFeats = racialFeatsGenerator.GenerateWith(race);
-            var classFeats = classFeatsGenerator.GenerateWith(characterClass);
+            var classFeats = classFeatsGenerator.GenerateWith(characterClass, stats);
             var additionalFeats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
 
             var allFeats = racialFeats.Union(classFeats).Union(additionalFeats);
@@ -57,6 +57,20 @@ namespace NPCGen.Generators.Abilities.Feats
                                         && f.Frequency.TimePeriod == feat.Frequency.TimePeriod);
 
             return count > 1;
+        }
+
+        private IEnumerable<Feat> GetSkillSynergyFeats(Dictionary<String, Skill> skills)
+        {
+            var synergyFeatIds = new List<String>();
+            var synergyQualifyingSkills = skills.Where(kvp => kvp.Value.EffectiveRanks >= 5).Select(kvp => kvp.Key);
+
+            foreach (var skill in synergyQualifyingSkills)
+            {
+                var synergy = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillSynergyFeats, skill);
+                synergyFeatIds.AddRange(synergy);
+            }
+
+            return synergyFeatIds.Select(f => CreateFeat(f));
         }
     }
 }
