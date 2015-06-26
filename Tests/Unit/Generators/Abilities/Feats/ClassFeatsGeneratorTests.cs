@@ -63,7 +63,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             Assert.That(first.Name.Id, Is.EqualTo("class feat 1"));
             Assert.That(first.Strength, Is.EqualTo(9266));
             Assert.That(first.Frequency.Quantity, Is.EqualTo(0));
-            Assert.That(first.Frequency.TimePeriod, Is.EqualTo("never"));
+            Assert.That(first.Frequency.TimePeriod, Is.EqualTo("constant"));
 
             Assert.That(last.Name.Id, Is.EqualTo("class feat 2"));
             Assert.That(last.Strength, Is.EqualTo(0));
