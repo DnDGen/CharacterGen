@@ -35,7 +35,7 @@ namespace NPCGen.Tests.Unit.Tables
         [TestCase(TableNameConstants.Set.Collection.CrossClassSkills, "CrossClassSkills")]
         [TestCase(TableNameConstants.Set.Collection.DragonSpecies, "DragonSpecies")]
         [TestCase(TableNameConstants.Set.Collection.FeatGroups, "FeatGroups")]
-        [TestCase(TableNameConstants.Set.Collection.FeatFoci, "FeatSpecificApplications")]
+        [TestCase(TableNameConstants.Set.Collection.FeatFoci, "FeatFoci")]
         [TestCase(TableNameConstants.Set.Collection.MetaraceGroups, "MetaraceGroups")]
         [TestCase(TableNameConstants.Set.Collection.Names, "Names")]
         [TestCase(TableNameConstants.Set.Collection.ProhibitedFields, "ProhibitedFields")]
@@ -67,20 +67,15 @@ namespace NPCGen.Tests.Unit.Tables
         [TestCase(TableNameConstants.Set.Collection.Groups.Stealth, "Stealth")]
         [TestCase(TableNameConstants.Set.Collection.Groups.Warriors, "Warriors")]
         [TestCase(TableNameConstants.Set.Collection.Groups.Weapons, "Weapons")]
-        [TestCase(TableNameConstants.Set.Collection.Groups.WeaponsWithUnarmedAndGrapple, "Warriors")]
-        [TestCase(TableNameConstants.Set.Collection.Groups.WeaponsWithUnarmedAndGrappleAndRay, "Warriors")]
+        [TestCase(TableNameConstants.Set.Collection.Groups.WeaponsWithUnarmedAndGrapple, "Weapons with unarmed and grapple")]
+        [TestCase(TableNameConstants.Set.Collection.Groups.WeaponsWithUnarmedAndGrappleAndRay, "Weapons with unarmed and grapple and ray")]
         [TestCase(TableNameConstants.Set.Percentile.AlignmentGoodness, "AlignmentGoodness")]
         [TestCase(TableNameConstants.Set.Percentile.Traits, "Traits")]
         [TestCase(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill, "AssignPointToCrossClassSkill")]
-        [TestCase(TableNameConstants.Formattable.Adjustments.BASERACESkillAdjustments, "{0}SkillAdjustments")]
         [TestCase(TableNameConstants.Formattable.Adjustments.CLASSFeatLevelRequirements, "{0}FeatLevelRequirements")]
-        [TestCase(TableNameConstants.Formattable.Adjustments.FEATSkillAdjustments, "{0}SkillAdjustments")]
         [TestCase(TableNameConstants.Formattable.Adjustments.FEATSkillRankRequirements, "{0}SkillRankRequirements")]
         [TestCase(TableNameConstants.Formattable.Adjustments.FEATStatRequirements, "{0}StatRequirements")]
-        [TestCase(TableNameConstants.Formattable.Adjustments.METARACESkillAdjustments, "{0}SkillAdjustments")]
         [TestCase(TableNameConstants.Formattable.Adjustments.STATStatAdjustments, "{0}StatAdjustments")]
-        [TestCase(TableNameConstants.Formattable.Collection.RACEFeatData, "{0}FeatData")]
-        [TestCase(TableNameConstants.Formattable.Collection.CLASSFeatData, "{0}FeatData")]
         [TestCase(TableNameConstants.Formattable.Percentile.GOODNESSCharacterClasses, "{0}CharacterClasses")]
         [TestCase(TableNameConstants.Formattable.Percentile.GOODNESSCLASSBaseRaces, "{0}{1}BaseRaces")]
         [TestCase(TableNameConstants.Formattable.Percentile.GOODNESSCLASSMetaraces, "{0}{1}Metaraces")]
@@ -88,6 +83,36 @@ namespace NPCGen.Tests.Unit.Tables
         public void Constant(String constant, String value)
         {
             Assert.That(constant, Is.EqualTo(value));
+        }
+
+        [Test]
+        public void BaseRaceSkillAdjustmentsTable()
+        {
+            Assert.That(TableNameConstants.Formattable.Adjustments.BASERACESkillAdjustments, Is.EqualTo("{0}SkillAdjustments"));
+        }
+
+        [Test]
+        public void FeatSkillAdjustmentsTable()
+        {
+            Assert.That(TableNameConstants.Formattable.Adjustments.FEATSkillAdjustments, Is.EqualTo("{0}SkillAdjustments"));
+        }
+
+        [Test]
+        public void MetaraceSkillAdjustmentsTable()
+        {
+            Assert.That(TableNameConstants.Formattable.Adjustments.METARACESkillAdjustments, Is.EqualTo("{0}SkillAdjustments"));
+        }
+
+        [Test]
+        public void RaceFeatDataTable()
+        {
+            Assert.That(TableNameConstants.Formattable.Collection.RACEFeatData, Is.EqualTo("{0}FeatData"));
+        }
+
+        [Test]
+        public void ClassFeatDataTable()
+        {
+            Assert.That(TableNameConstants.Formattable.Collection.CLASSFeatData, Is.EqualTo("{0}FeatData"));
         }
     }
 }

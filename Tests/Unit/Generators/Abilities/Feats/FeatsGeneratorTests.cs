@@ -247,37 +247,20 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
         {
             var racialFeats = new List<Feat>();
             racialFeats.Add(new Feat());
+            racialFeats.Add(new Feat());
 
             racialFeats[0].Focus = "focus";
             racialFeats[0].Name.Id = "feat1";
-            racialFeats[0].Name.Name = "feat 1";
             racialFeats[0].Strength = 9266;
             racialFeats[0].Frequency.Quantity = 1;
             racialFeats[0].Frequency.TimePeriod = "fortnight";
-
-            var additionalFeats = new List<Feat>();
-            additionalFeats.Add(new Feat());
-
-            additionalFeats[0].Focus = "focus";
-            additionalFeats[0].Name.Id = "feat1";
-            additionalFeats[0].Name.Name = "feat 1";
-            additionalFeats[0].Strength = 9266;
-            additionalFeats[0].Frequency.Quantity = 2;
-            additionalFeats[0].Frequency.TimePeriod = "fortnight";
-
-            var classFeats = new List<Feat>();
-            classFeats.Add(new Feat());
-
-            classFeats[0].Focus = "focus";
-            classFeats[0].Name.Id = "feat1";
-            classFeats[0].Name.Name = "feat 1";
-            classFeats[0].Strength = 9266;
-            classFeats[0].Frequency.Quantity = 3;
-            classFeats[0].Frequency.TimePeriod = "fortnight";
+            racialFeats[1].Focus = "focus";
+            racialFeats[1].Name.Id = "feat1";
+            racialFeats[1].Strength = 9266;
+            racialFeats[1].Frequency.Quantity = 5;
+            racialFeats[1].Frequency.TimePeriod = "fortnight";
 
             mockRacialFeatsGenerator.Setup(g => g.GenerateWith(race)).Returns(racialFeats);
-            mockClassFeatsGenerator.Setup(g => g.GenerateWith(characterClass, stats)).Returns(classFeats);
-            mockAdditionalFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills, baseAttack, It.IsAny<IEnumerable<Feat>>())).Returns(additionalFeats);
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
             var onlyFeat = feats.Single();
@@ -286,7 +269,6 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             Assert.That(onlyFeat.Frequency.Quantity, Is.EqualTo(6));
             Assert.That(onlyFeat.Frequency.TimePeriod, Is.EqualTo("fortnight"));
             Assert.That(onlyFeat.Name.Id, Is.EqualTo("feat1"));
-            Assert.That(onlyFeat.Name.Name, Is.EqualTo("feat 1"));
             Assert.That(onlyFeat.Strength, Is.EqualTo(9266));
         }
 
@@ -295,37 +277,20 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
         {
             var racialFeats = new List<Feat>();
             racialFeats.Add(new Feat());
+            racialFeats.Add(new Feat());
 
             racialFeats[0].Focus = "focus";
-            racialFeats[0].Name.Id = "feat2";
-            racialFeats[0].Name.Name = "feat 1";
+            racialFeats[0].Name.Id = "feat1";
             racialFeats[0].Strength = 9266;
             racialFeats[0].Frequency.Quantity = 1;
             racialFeats[0].Frequency.TimePeriod = "fortnight";
-
-            var additionalFeats = new List<Feat>();
-            additionalFeats.Add(new Feat());
-
-            additionalFeats[0].Focus = "focus";
-            additionalFeats[0].Name.Id = "feat1";
-            additionalFeats[0].Name.Name = "feat 1";
-            additionalFeats[0].Strength = 9266;
-            additionalFeats[0].Frequency.Quantity = 2;
-            additionalFeats[0].Frequency.TimePeriod = "fortnight";
-
-            var classFeats = new List<Feat>();
-            classFeats.Add(new Feat());
-
-            classFeats[0].Focus = "focus";
-            classFeats[0].Name.Id = "feat1";
-            classFeats[0].Name.Name = "feat 1";
-            classFeats[0].Strength = 9266;
-            classFeats[0].Frequency.Quantity = 3;
-            classFeats[0].Frequency.TimePeriod = "fortnight";
+            racialFeats[1].Focus = "focus";
+            racialFeats[1].Name.Id = "feat2";
+            racialFeats[1].Strength = 9266;
+            racialFeats[1].Frequency.Quantity = 1;
+            racialFeats[1].Frequency.TimePeriod = "fortnight";
 
             mockRacialFeatsGenerator.Setup(g => g.GenerateWith(race)).Returns(racialFeats);
-            mockClassFeatsGenerator.Setup(g => g.GenerateWith(characterClass, stats)).Returns(classFeats);
-            mockAdditionalFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills, baseAttack, It.IsAny<IEnumerable<Feat>>())).Returns(additionalFeats);
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
             var first = feats.First();
@@ -353,37 +318,20 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
         {
             var racialFeats = new List<Feat>();
             racialFeats.Add(new Feat());
+            racialFeats.Add(new Feat());
 
             racialFeats[0].Focus = "focus";
             racialFeats[0].Name.Id = "feat1";
-            racialFeats[0].Name.Name = "feat 1";
             racialFeats[0].Strength = 9266;
             racialFeats[0].Frequency.Quantity = 1;
             racialFeats[0].Frequency.TimePeriod = "fortnight";
-
-            var additionalFeats = new List<Feat>();
-            additionalFeats.Add(new Feat());
-
-            additionalFeats[0].Focus = "focus 2";
-            additionalFeats[0].Name.Id = "feat1";
-            additionalFeats[0].Name.Name = "feat 1";
-            additionalFeats[0].Strength = 9266;
-            additionalFeats[0].Frequency.Quantity = 2;
-            additionalFeats[0].Frequency.TimePeriod = "fortnight";
-
-            var classFeats = new List<Feat>();
-            classFeats.Add(new Feat());
-
-            classFeats[0].Focus = "focus";
-            classFeats[0].Name.Id = "feat1";
-            classFeats[0].Name.Name = "feat 1";
-            classFeats[0].Strength = 9266;
-            classFeats[0].Frequency.Quantity = 3;
-            classFeats[0].Frequency.TimePeriod = "fortnight";
+            racialFeats[1].Focus = "focus2";
+            racialFeats[1].Name.Id = "feat1";
+            racialFeats[1].Strength = 9266;
+            racialFeats[1].Frequency.Quantity = 1;
+            racialFeats[1].Frequency.TimePeriod = "fortnight";
 
             mockRacialFeatsGenerator.Setup(g => g.GenerateWith(race)).Returns(racialFeats);
-            mockClassFeatsGenerator.Setup(g => g.GenerateWith(characterClass, stats)).Returns(classFeats);
-            mockAdditionalFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills, baseAttack, It.IsAny<IEnumerable<Feat>>())).Returns(additionalFeats);
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
             var first = feats.First();
@@ -392,15 +340,13 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             Assert.That(first.Focus, Is.EqualTo("focus"));
             Assert.That(first.Frequency.Quantity, Is.EqualTo(4));
             Assert.That(first.Frequency.TimePeriod, Is.EqualTo("fortnight"));
-            Assert.That(first.Name.Id, Is.EqualTo("feat2"));
-            Assert.That(first.Name.Name, Is.EqualTo("feat 1"));
+            Assert.That(first.Name.Id, Is.EqualTo("feat1"));
             Assert.That(first.Strength, Is.EqualTo(9266));
 
             Assert.That(last.Focus, Is.EqualTo("focus 2"));
             Assert.That(last.Frequency.Quantity, Is.EqualTo(2));
             Assert.That(last.Frequency.TimePeriod, Is.EqualTo("fortnight"));
             Assert.That(last.Name.Id, Is.EqualTo("feat1"));
-            Assert.That(last.Name.Name, Is.EqualTo("feat 1"));
             Assert.That(last.Strength, Is.EqualTo(9266));
 
             Assert.That(feats.Count(), Is.EqualTo(2));
@@ -411,37 +357,20 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
         {
             var racialFeats = new List<Feat>();
             racialFeats.Add(new Feat());
+            racialFeats.Add(new Feat());
 
             racialFeats[0].Focus = "focus";
             racialFeats[0].Name.Id = "feat1";
-            racialFeats[0].Name.Name = "feat 1";
             racialFeats[0].Strength = 9266;
-            racialFeats[0].Frequency.Quantity = 1;
+            racialFeats[0].Frequency.Quantity = 3;
             racialFeats[0].Frequency.TimePeriod = "fortnight";
-
-            var additionalFeats = new List<Feat>();
-            additionalFeats.Add(new Feat());
-
-            additionalFeats[0].Focus = "focus";
-            additionalFeats[0].Name.Id = "feat1";
-            additionalFeats[0].Name.Name = "feat 1";
-            additionalFeats[0].Strength = 9266;
-            additionalFeats[0].Frequency.Quantity = 2;
-            additionalFeats[0].Frequency.TimePeriod = "fortnight";
-
-            var classFeats = new List<Feat>();
-            classFeats.Add(new Feat());
-
-            classFeats[0].Focus = "focus";
-            classFeats[0].Name.Id = "feat1";
-            classFeats[0].Name.Name = "feat 1";
-            classFeats[0].Strength = 42;
-            classFeats[0].Frequency.Quantity = 3;
-            classFeats[0].Frequency.TimePeriod = "fortnight";
+            racialFeats[1].Focus = "focus";
+            racialFeats[1].Name.Id = "feat1";
+            racialFeats[1].Strength = 42;
+            racialFeats[1].Frequency.Quantity = 3;
+            racialFeats[1].Frequency.TimePeriod = "fortnight";
 
             mockRacialFeatsGenerator.Setup(g => g.GenerateWith(race)).Returns(racialFeats);
-            mockClassFeatsGenerator.Setup(g => g.GenerateWith(characterClass, stats)).Returns(classFeats);
-            mockAdditionalFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills, baseAttack, It.IsAny<IEnumerable<Feat>>())).Returns(additionalFeats);
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
             var first = feats.First();
@@ -469,37 +398,20 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
         {
             var racialFeats = new List<Feat>();
             racialFeats.Add(new Feat());
+            racialFeats.Add(new Feat());
 
             racialFeats[0].Focus = "focus";
             racialFeats[0].Name.Id = "feat1";
-            racialFeats[0].Name.Name = "feat 1";
             racialFeats[0].Strength = 9266;
-            racialFeats[0].Frequency.Quantity = 1;
+            racialFeats[0].Frequency.Quantity = 3;
             racialFeats[0].Frequency.TimePeriod = "day";
-
-            var additionalFeats = new List<Feat>();
-            additionalFeats.Add(new Feat());
-
-            additionalFeats[0].Focus = "focus";
-            additionalFeats[0].Name.Id = "feat1";
-            additionalFeats[0].Name.Name = "feat 1";
-            additionalFeats[0].Strength = 9266;
-            additionalFeats[0].Frequency.Quantity = 2;
-            additionalFeats[0].Frequency.TimePeriod = "fortnight";
-
-            var classFeats = new List<Feat>();
-            classFeats.Add(new Feat());
-
-            classFeats[0].Focus = "focus";
-            classFeats[0].Name.Id = "feat1";
-            classFeats[0].Name.Name = "feat 1";
-            classFeats[0].Strength = 42;
-            classFeats[0].Frequency.Quantity = 3;
-            classFeats[0].Frequency.TimePeriod = "fortnight";
+            racialFeats[1].Focus = "focus";
+            racialFeats[1].Name.Id = "feat1";
+            racialFeats[1].Strength = 9266;
+            racialFeats[1].Frequency.Quantity = 3;
+            racialFeats[1].Frequency.TimePeriod = "fortnight";
 
             mockRacialFeatsGenerator.Setup(g => g.GenerateWith(race)).Returns(racialFeats);
-            mockClassFeatsGenerator.Setup(g => g.GenerateWith(characterClass, stats)).Returns(classFeats);
-            mockAdditionalFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills, baseAttack, It.IsAny<IEnumerable<Feat>>())).Returns(additionalFeats);
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
             var first = feats.First();
@@ -509,15 +421,13 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             Assert.That(first.Frequency.Quantity, Is.EqualTo(1));
             Assert.That(first.Frequency.TimePeriod, Is.EqualTo("day"));
             Assert.That(first.Name.Id, Is.EqualTo("feat2"));
-            Assert.That(first.Name.Name, Is.EqualTo("feat 1"));
             Assert.That(first.Strength, Is.EqualTo(9266));
 
-            Assert.That(last.Focus, Is.EqualTo("focus 2"));
+            Assert.That(last.Focus, Is.EqualTo("focus"));
             Assert.That(last.Frequency.Quantity, Is.EqualTo(5));
             Assert.That(last.Frequency.TimePeriod, Is.EqualTo("fortnight"));
             Assert.That(last.Name.Id, Is.EqualTo("feat1"));
-            Assert.That(last.Name.Name, Is.EqualTo("feat 1"));
-            Assert.That(last.Strength, Is.EqualTo(42));
+            Assert.That(last.Strength, Is.EqualTo(9266));
 
             Assert.That(feats.Count(), Is.EqualTo(2));
         }
@@ -587,7 +497,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
         }
 
         [Test]
-        public void ConstantBeatsAtWill()
+        public void ConstantFrequencyBeatsAtWillFrequency()
         {
             var racialFeats = new List<Feat>();
             racialFeats.Add(new Feat());
@@ -619,7 +529,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
         }
 
         [Test]
-        public void IfNoFrequencyAndFeatIdsMatchAndFociMatchAndUnequalStrengths_HigherStrengthWinsOut()
+        public void IfNoFrequencyRestMatchesButUnequalStrengths_KeepHigherStrength()
         {
             var racialFeats = new List<Feat>();
             racialFeats.Add(new Feat());
@@ -645,7 +555,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
         }
 
         [Test]
-        public void IfFrequencyAndFeatIdsMatchAndFociMatchAndUnequalStrengths_DoNotRemoveStrengths()
+        public void IfHasFrequencyAndRestMatchesButUnequalStrengths_DoNotRemoveStrengths()
         {
             var racialFeats = new List<Feat>();
             racialFeats.Add(new Feat());
@@ -684,7 +594,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
         }
 
         [Test]
-        public void IfNoFrequencyAndFociMatchAndUnequalStrengthButFeatIdsDoNotMatch_DoNotRemoveStrengths()
+        public void IfNoFrequencyButStrengthsAndIdsDoNotMatch_DoNotRemoveStrengths()
         {
             var racialFeats = new List<Feat>();
             racialFeats.Add(new Feat());
@@ -715,7 +625,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
         }
 
         [Test]
-        public void IfNoFrequencyAndFeatIdMatchAndUnequalStrengthButFociDoNotMatch_DoNotRemoveStrengths()
+        public void IfNoFrequencyButStrengthAndFociDoNotMatch_DoNotRemoveStrengths()
         {
             var racialFeats = new List<Feat>();
             racialFeats.Add(new Feat());
@@ -769,6 +679,12 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             Assert.That(first.Strength, Is.EqualTo(42));
 
             Assert.That(feats.Count(), Is.EqualTo(1));
+        }
+
+        [Test]
+        public void GetNamesForFinalFeats()
+        {
+            throw new NotImplementedException();
         }
     }
 }

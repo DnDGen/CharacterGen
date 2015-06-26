@@ -151,44 +151,6 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
         }
 
         [Test]
-        public void IfFeatIdAndStrengthAndFocusAndTimePeriodAreEqual_CombineFrequencyQuantity()
-        {
-            Assert.Fail();
-        }
-
-        [Test]
-        public void IfFeatIdNotEqual_DoNotCombineFrequencyQuantity()
-        {
-            Assert.Fail();
-        }
-
-        [Test]
-        public void IfStrengthNotEqual_DoNotCombineFrequencyQuantity()
-        {
-            Assert.Fail();
-        }
-
-        [Test]
-        public void IfFocusNotEqual_DoNotCombineFrequencyQuantity()
-        {
-            Assert.Fail();
-        }
-
-        [Test]
-        public void IfFrequencyTimePeriodNotEqual_DoNotCombineFrequencyQuantity()
-        {
-            Assert.Fail();
-        }
-
-        [TestCase(FeatConstants.Frequencies.AtWill, FeatConstants.Frequencies.Day)]
-        [TestCase(FeatConstants.Frequencies.Constant, FeatConstants.Frequencies.Day)]
-        [TestCase(FeatConstants.Frequencies.Constant, FeatConstants.Frequencies.AtWill)]
-        public void FrequencyTimePeriodTrumps(String trumpTimePeriod, String losingTimePeriod)
-        {
-            Assert.Fail();
-        }
-
-        [Test]
         public void DoNotGetRacialFeatThatDoNotMeetMinimumHitDiceRequirement()
         {
             Assert.Fail();
@@ -196,73 +158,6 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
 
         [Test]
         public void DoNotGetRacialFeatThatDoNotMeetSizeRequirement()
-        {
-            Assert.Fail();
-        }
-
-        [Test]
-        public void DoNotDuplicateRacialFeats()
-        {
-            var baseRaceFeats = new[]
-            {
-                new RacialFeatSelection { FeatId = "feat 1", Focus = "focus" },
-                new RacialFeatSelection { FeatId = "base race feat 2", Strength = 9266, Frequency = new Frequency { Quantity = 42, TimePeriod = "fortnight" } }
-            };
-
-            var metaraceFeats = new[]
-            {
-                new RacialFeatSelection { FeatId = "feat 1", Focus = "focus" },
-                new RacialFeatSelection { FeatId = "metarace feat 2", Strength = 9266, Frequency = new Frequency { Quantity = 42, TimePeriod = "fortnight" } }
-            };
-
-            race.BaseRace.Id = "baseRaceId";
-            race.Metarace.Id = "metaraceId";
-            mockFeatsSelector.Setup(s => s.SelectRacial("baseRaceId")).Returns(baseRaceFeats);
-            mockFeatsSelector.Setup(s => s.SelectRacial("metaraceId")).Returns(metaraceFeats);
-
-            var feats = racialFeatsGenerator.GenerateWith(race);
-            var featIds = feats.Select(s => s.Name.Id);
-
-            Assert.That(featIds, Contains.Item("feat 1"));
-            Assert.That(featIds, Contains.Item("base race feat 2"));
-            Assert.That(featIds, Contains.Item("metarace feat 2"));
-            Assert.That(feats.Count(), Is.EqualTo(3));
-        }
-
-        [TestCase(FeatConstants.Frequencies.AtWill)]
-        [TestCase(FeatConstants.Frequencies.Constant)]
-        public void IfFeatIdAndFocusAreEqualAndFrequencyTimePeriodAreStrongEnough_OnlyKeepStrongestFeat(String frequencyTimePeriod)
-        {
-            var baseRaceFeats = new[]
-            {
-                new RacialFeatSelection { FeatId = "racial feat", Focus = "focus", Strength = 42, Frequency = new Frequency { TimePeriod = frequencyTimePeriod } },
-                new RacialFeatSelection { FeatId = "racial feat", Focus = "focus", Strength = 9266, Frequency = new Frequency { TimePeriod = frequencyTimePeriod } }
-            };
-
-            race.BaseRace.Id = "baseRaceId";
-            mockFeatsSelector.Setup(s => s.SelectRacial("baseRaceId")).Returns(baseRaceFeats);
-
-            var feats = racialFeatsGenerator.GenerateWith(race);
-            var onlyFeat = feats.Single();
-
-            Assert.That(onlyFeat.Name.Id, Is.EqualTo("racial feat"));
-            Assert.That(onlyFeat.Strength, Is.EqualTo(9266));
-        }
-
-        [Test]
-        public void IfFeatIdNotEqual_KeepBothFeat()
-        {
-            Assert.Fail();
-        }
-
-        [Test]
-        public void IfFocusNotEqual_KeepBothFeat()
-        {
-            Assert.Fail();
-        }
-
-        [TestCase(FeatConstants.Frequencies.Day)]
-        public void IfFrequencyTimePeriodNotConstantOrAtWill_KeepBothFeat(String frequencyTimePeriod)
         {
             Assert.Fail();
         }

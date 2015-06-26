@@ -46,16 +46,24 @@ namespace NPCGen.Generators.Abilities.Feats
                                       .Union(skillSynergyFeats);
 
             var featsToCombine = allFeats.Where(f => CanCombine(f, allFeats));
+            var featsToRemove = new List<Feat>();
+            var combinedFeatIds = new List<String>();
 
             foreach (var featToCombine in featsToCombine)
             {
-                var otherFeats = featsToCombine.Where(f => CanCombine(f, featsToCombine) && f != featsToCombine);
+                if (combinedFeatIds.Contains(featToCombine.Name.Id))
+                    continue;
+
+                var otherFeats = featsToCombine.Where(f => CanCombine(f, featsToCombine) && f != featToCombine);
 
                 foreach (var otherFeat in otherFeats)
                     featToCombine.Frequency.Quantity += otherFeat.Frequency.Quantity;
 
-                allFeats = allFeats.Except(otherFeats);
+                featsToRemove.AddRange(otherFeats);
+                combinedFeatIds.Add(featToCombine.Name.Id);
             }
+
+            allFeats = allFeats.Except(featsToRemove);
 
             foreach (var feat in allFeats)
                 feat.Name.Name = nameSelector.Select(feat.Name.Id);
