@@ -1,6 +1,7 @@
 ﻿using System;
 using NPCGen.Generators.Interfaces;
 using NPCGen.Generators.Interfaces.Abilities;
+using NPCGen.Generators.Interfaces.Abilities.Feats;
 using NPCGen.Generators.Interfaces.Combats;
 using NPCGen.Generators.Interfaces.Items;
 using NPCGen.Generators.Interfaces.Randomizers.Alignments;
@@ -523,6 +524,24 @@ namespace NPCGen.Tests.Integration.Bootstrap.Modules
         public void FeatsGeneratorIsNotGeneratedAsSingleton()
         {
             AssertNotSingleton<IFeatsGenerator>();
+        }
+
+        [Test]
+        public void AdditionalFeatsGeneratorIsNotGeneratedAsSingleton()
+        {
+            AssertNotSingleton<IAdditionalFeatsGenerator>();
+        }
+
+        [Test]
+        public void ClassFeatsGeneratorIsNotGeneratedAsSingleton()
+        {
+            AssertNotSingleton<IClassFeatsGenerator>();
+        }
+
+        [Test]
+        public void RacialFeatsGeneratorIsNotGeneratedAsSingleton()
+        {
+            AssertNotSingleton<IRacialFeatsGenerator>();
         }
 
         [Test]

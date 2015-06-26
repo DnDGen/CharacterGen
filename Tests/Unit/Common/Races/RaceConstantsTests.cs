@@ -50,6 +50,11 @@ namespace NPCGen.Tests.Unit.Common.Races
         [TestCase(RaceConstants.Metaraces.Weretiger, "Weretiger")]
         [TestCase(RaceConstants.Metaraces.Werewolf, "Werewolf")]
         [TestCase(RaceConstants.Metaraces.None, "")]
+        public void ConstantName(String constant, String value)
+        {
+            Assert.That(constant, Is.EqualTo(value));
+        }
+
         [TestCase(RaceConstants.BaseRaces.AasimarId, "Aasimar")]
         [TestCase(RaceConstants.BaseRaces.BugbearId, "Bugbear")]
         [TestCase(RaceConstants.BaseRaces.DeepDwarfId, "DeepDwarf")]
@@ -93,6 +98,11 @@ namespace NPCGen.Tests.Unit.Common.Races
         [TestCase(RaceConstants.Metaraces.WeretigerId, "Weretiger")]
         [TestCase(RaceConstants.Metaraces.WerewolfId, "Werewolf")]
         [TestCase(RaceConstants.Metaraces.NoneId, "None")]
+        public void ConstantId(String constant, String value)
+        {
+            Assert.That(constant, Is.EqualTo(value));
+        }
+
         [TestCase(RaceConstants.Sizes.Large, "Large")]
         [TestCase(RaceConstants.Sizes.Medium, "Medium")]
         [TestCase(RaceConstants.Sizes.Small, "Small")]

@@ -57,7 +57,6 @@ namespace NPCGen.Tables.Interfaces
                     public const String Additional = "Additional";
                     public const String AverageBaseAttack = "Average Base Attack";
                     public const String CharacterClasses = "CharacterClasses";
-                    public const String CumulativeStrengths = "CumulativeStrengths";
                     public const String Deflection = "Deflection";
                     public const String Dodge = "Dodge";
                     public const String Genetic = "Genetic";
@@ -68,8 +67,6 @@ namespace NPCGen.Tables.Interfaces
                     public const String Mages = "Mages";
                     public const String Monsters = "Monsters";
                     public const String NaturalArmor = "NaturalArmor";
-                    public const String OverwrittenStrengths = "OverwrittenStrengths";
-                    public const String Racial = "Racial";
                     public const String SchoolsOfMagic = "Schools of magic";
                     public const String Size = "Size";
                     public const String Skills = "Skills";

@@ -1,5 +1,6 @@
 ﻿using System;
 using NPCGen.Common.Races;
+using NPCGen.Generators.Interfaces.Randomizers.Races;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Stress
@@ -106,6 +107,9 @@ namespace NPCGen.Tests.Integration.Stress
         [Test]
         public void MetaraceSpeciesHappen()
         {
+            var forcableRandomizer = MetaraceRandomizer as IForcableMetaraceRandomizer;
+            forcableRandomizer.ForceMetarace = true;
+
             var race = new Race();
 
             do race = GenerateRace();
@@ -117,6 +121,9 @@ namespace NPCGen.Tests.Integration.Stress
         [Test]
         public void MetaraceSpeciesDoNotHappen()
         {
+            var forcableRandomizer = MetaraceRandomizer as IForcableMetaraceRandomizer;
+            forcableRandomizer.ForceMetarace = true;
+
             var race = new Race();
 
             do race = GenerateRace();

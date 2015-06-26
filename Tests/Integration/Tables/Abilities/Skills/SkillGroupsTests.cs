@@ -14,17 +14,6 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Skills
             get { return TableNameConstants.Set.Collection.SkillGroups; }
         }
 
-        [TestCase(TableNameConstants.Set.Collection.Groups.Knowledge,
-            SkillConstants.KnowledgeArcana,
-            SkillConstants.KnowledgeArchitectureAndEngineering,
-            SkillConstants.KnowledgeDungeoneering,
-            SkillConstants.KnowledgeGeography,
-            SkillConstants.KnowledgeHistory,
-            SkillConstants.KnowledgeLocal,
-            SkillConstants.KnowledgeNature,
-            SkillConstants.KnowledgeNobilityAndRoyalty,
-            SkillConstants.KnowledgeReligion,
-            SkillConstants.KnowledgeThePlanes)]
         [TestCase(CharacterClassConstants.Domains.Air)]
         [TestCase(CharacterClassConstants.Domains.Animal,
             SkillConstants.KnowledgeNature)]
@@ -36,17 +25,6 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Skills
         [TestCase(CharacterClassConstants.Domains.Fire)]
         [TestCase(CharacterClassConstants.Domains.Good)]
         [TestCase(CharacterClassConstants.Domains.Healing)]
-        [TestCase(CharacterClassConstants.Domains.Knowledge,
-            SkillConstants.KnowledgeArcana,
-            SkillConstants.KnowledgeArchitectureAndEngineering,
-            SkillConstants.KnowledgeDungeoneering,
-            SkillConstants.KnowledgeGeography,
-            SkillConstants.KnowledgeHistory,
-            SkillConstants.KnowledgeLocal,
-            SkillConstants.KnowledgeNature,
-            SkillConstants.KnowledgeNobilityAndRoyalty,
-            SkillConstants.KnowledgeReligion,
-            SkillConstants.KnowledgeThePlanes)]
         [TestCase(CharacterClassConstants.Domains.Law)]
         [TestCase(CharacterClassConstants.Domains.Luck)]
         [TestCase(CharacterClassConstants.Domains.Magic)]
@@ -74,6 +52,46 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Skills
         public override void DistinctCollection(String name, params String[] collection)
         {
             base.DistinctCollection(name, collection);
+        }
+
+        [Test]
+        public void KnowledgeSkills()
+        {
+            var skills = new[] 
+            {
+                SkillConstants.KnowledgeArcana,
+                SkillConstants.KnowledgeArchitectureAndEngineering,
+                SkillConstants.KnowledgeDungeoneering,
+                SkillConstants.KnowledgeGeography,
+                SkillConstants.KnowledgeHistory,
+                SkillConstants.KnowledgeLocal,
+                SkillConstants.KnowledgeNature,
+                SkillConstants.KnowledgeNobilityAndRoyalty,
+                SkillConstants.KnowledgeReligion,
+                SkillConstants.KnowledgeThePlanes
+            };
+
+            base.DistinctCollection(TableNameConstants.Set.Collection.Groups.Knowledge, skills);
+        }
+
+        [Test]
+        public void KnowledgeDomainSkills()
+        {
+            var skills = new[] 
+            {
+                SkillConstants.KnowledgeArcana,
+                SkillConstants.KnowledgeArchitectureAndEngineering,
+                SkillConstants.KnowledgeDungeoneering,
+                SkillConstants.KnowledgeGeography,
+                SkillConstants.KnowledgeHistory,
+                SkillConstants.KnowledgeLocal,
+                SkillConstants.KnowledgeNature,
+                SkillConstants.KnowledgeNobilityAndRoyalty,
+                SkillConstants.KnowledgeReligion,
+                SkillConstants.KnowledgeThePlanes
+            };
+
+            base.DistinctCollection(CharacterClassConstants.Domains.Knowledge, skills);
         }
     }
 }

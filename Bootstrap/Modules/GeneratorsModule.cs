@@ -1,9 +1,11 @@
 ﻿using Ninject.Modules;
 using NPCGen.Generators;
 using NPCGen.Generators.Abilities;
+using NPCGen.Generators.Abilities.Feats;
 using NPCGen.Generators.Combats;
 using NPCGen.Generators.Interfaces;
 using NPCGen.Generators.Interfaces.Abilities;
+using NPCGen.Generators.Interfaces.Abilities.Feats;
 using NPCGen.Generators.Interfaces.Combats;
 using NPCGen.Generators.Interfaces.Items;
 using NPCGen.Generators.Interfaces.Randomizers.Alignments;
@@ -41,6 +43,9 @@ namespace NPCGen.Bootstrap.Modules
             Bind<IFeatsGenerator>().To<FeatsGenerator>();
             Bind<IArmorClassGenerator>().To<ArmorClassGenerator>();
             Bind<ISavingThrowsGenerator>().To<SavingThrowsGenerator>();
+            Bind<IAdditionalFeatsGenerator>().To<AdditionalFeatsGenerator>();
+            Bind<IClassFeatsGenerator>().To<ClassFeatsGenerator>();
+            Bind<IRacialFeatsGenerator>().To<RacialFeatsGenerator>();
 
             Bind<IAlignmentRandomizer>().To<AnyAlignmentRandomizer>().Named(AlignmentRandomizerTypeConstants.Any);
             Bind<IAlignmentRandomizer>().To<ChaoticAlignmentRandomizer>().Named(AlignmentRandomizerTypeConstants.Chaotic);

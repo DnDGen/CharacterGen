@@ -16,19 +16,14 @@ namespace NPCGen.Generators.Abilities.Feats
     public class ClassFeatsGenerator : IClassFeatsGenerator
     {
         private ICollectionsSelector collectionsSelector;
-        private IAdjustmentsSelector adjustmentsSelector;
         private IFeatsSelector featsSelector;
         private IDice dice;
-        private INameSelector nameSelector;
 
-        public ClassFeatsGenerator(ICollectionsSelector collectionsSelector, IAdjustmentsSelector adjustmentsSelector,
-            IFeatsSelector featsSelector, IDice dice, INameSelector nameSelector)
+        public ClassFeatsGenerator(ICollectionsSelector collectionsSelector, IFeatsSelector featsSelector, IDice dice)
         {
             this.collectionsSelector = collectionsSelector;
-            this.adjustmentsSelector = adjustmentsSelector;
             this.featsSelector = featsSelector;
             this.dice = dice;
-            this.nameSelector = nameSelector;
         }
 
         public IEnumerable<Feat> GenerateWith(CharacterClass characterClass, Dictionary<String, Stat> stats)

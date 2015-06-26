@@ -76,10 +76,10 @@ namespace NPCGen.Common.Abilities.Feats
         public const String FerocityId = "Ferocity";
         public const String GreatCleave = "Great Cleave";
         public const String GreatCleaveId = "GreatCleave";
-        public const String GreaterSpellFocus = "WeaponFamiliarity";
-        public const String GreaterSpellFocusId = "WeaponFamiliarity";
-        public const String GreaterSpellPenetration = "WeaponFamiliarity";
-        public const String GreaterSpellPenetrationId = "WeaponFamiliarity";
+        public const String GreaterSpellFocus = "Greater Spell Focus";
+        public const String GreaterSpellFocusId = "GreaterSpellFocus";
+        public const String GreaterSpellPenetration = "Greater Spell Penetration";
+        public const String GreaterSpellPenetrationId = "GreaterSpellPenetration";
         public const String GreaterTwoWeaponFighting = "Greater Two-Weapon Fighting";
         public const String GreaterTwoWeaponFightingId = "GreaterTwoWeaponFighting";
         public const String GreaterWeaponFocus = "Greater Weapon Focus";

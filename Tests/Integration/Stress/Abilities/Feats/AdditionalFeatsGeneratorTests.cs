@@ -4,17 +4,22 @@ using Ninject;
 using NPCGen.Common.Abilities.Feats;
 using NPCGen.Common.CharacterClasses;
 using NPCGen.Generators.Interfaces.Abilities;
+using NPCGen.Generators.Interfaces.Abilities.Feats;
 using NPCGen.Generators.Interfaces.Combats;
 using NPCGen.Generators.Interfaces.Randomizers.Stats;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Integration.Stress.Abilities
+namespace NPCGen.Tests.Integration.Stress.Abilities.Feats
 {
     [TestFixture]
-    public class FeatsGeneratorTests : StressTests
+    public class AdditionalFeatsGeneratorTests : StressTests
     {
         [Inject]
-        public IFeatsGenerator FeatsGenerator { get; set; }
+        public IAdditionalFeatsGenerator AdditionalFeatsGenerator { get; set; }
+        [Inject]
+        public IRacialFeatsGenerator RacialFeatsGenerator { get; set; }
+        [Inject]
+        public IClassFeatsGenerator ClassFeatsGenerator { get; set; }
         [Inject]
         public ISkillsGenerator SkillsGenerator { get; set; }
         [Inject]
@@ -24,7 +29,7 @@ namespace NPCGen.Tests.Integration.Stress.Abilities
         [Inject]
         public ICombatGenerator CombatGenerator { get; set; }
 
-        [TestCase("FeatsGenerator")]
+        [TestCase("AdditionalFeatsGenerator")]
         public override void Stress(String stressSubject)
         {
             Stress();
@@ -38,21 +43,22 @@ namespace NPCGen.Tests.Integration.Stress.Abilities
             var stats = StatsGenerator.GenerateWith(StatsRandomizer, characterClass, race);
             var skills = SkillsGenerator.GenerateWith(characterClass, race, stats);
             var baseAttack = CombatGenerator.GenerateBaseAttackWith(characterClass, race);
+            var classFeats = ClassFeatsGenerator.GenerateWith(characterClass, stats);
+            var racialFeats = RacialFeatsGenerator.GenerateWith(race);
+            var preselectedFeats = classFeats.Union(racialFeats);
 
-            var feats = FeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            var feats = AdditionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
 
-            var minimumFeats = characterClass.Level / 3 + 1;
+            var additionalFeatCount = characterClass.Level / 3 + 1;
             if (characterClass.ClassName == CharacterClassConstants.Fighter)
-                minimumFeats += characterClass.Level / 2 + 1;
+                additionalFeatCount += characterClass.Level / 2 + 1;
 
             var count = feats.Count();
-            Assert.That(count, Is.AtLeast(minimumFeats));
-            Assert.That(feats.Distinct().Count(), Is.EqualTo(count));
+            Assert.That(count, Is.EqualTo(additionalFeatCount), characterClass.ClassName);
 
             foreach (var feat in feats)
             {
                 Assert.That(feat.Name.Id, Is.Not.Empty);
-                Assert.That(feat.Name.Name, Is.Not.Empty);
                 Assert.That(feat.Focus, Is.Not.Null);
                 Assert.That(feat.Strength, Is.Positive);
                 Assert.That(feat.Frequency.Quantity, Is.Positive);
@@ -60,10 +66,6 @@ namespace NPCGen.Tests.Integration.Stress.Abilities
                     .Or.EqualTo(FeatConstants.Frequencies.AtWill)
                     .Or.EqualTo(FeatConstants.Frequencies.Day));
             }
-
-            var featWithFoci = feats.Where(f => feats.Count(c => c.Name.Id == f.Name.Id) > 1);
-            foreach (var feat in featWithFoci)
-                Assert.That(feat.Focus, Is.Not.Empty, feat.Name.Name);
         }
     }
 }

@@ -157,11 +157,11 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             mockDice.Setup(d => d.Roll(1).d(2)).Returns(1);
 
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
-            var featNames = feats.Select(f => f.Name);
+            var featIds = feats.Select(f => f.Name.Id);
 
-            Assert.That(featNames, Contains.Item(additionalFeatSelections[0].Name));
-            Assert.That(featNames, Contains.Item(additionalFeatSelections[2].Name));
-            Assert.That(featNames.Count(), Is.EqualTo(2));
+            Assert.That(featIds, Contains.Item(additionalFeatSelections[0].Name.Id));
+            Assert.That(featIds, Contains.Item(additionalFeatSelections[2].Name.Id));
+            Assert.That(featIds.Count(), Is.EqualTo(2));
         }
 
         [Test]

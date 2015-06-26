@@ -12,24 +12,8 @@ namespace NPCGen.Tests.Integration.Common
     {
         private IKernel kernel;
 
-        //public IntegrationTests()
-        //{
-        //    kernel = new StandardKernel();
-
-        //    var diceLoader = new D20DiceModuleLoader();
-        //    diceLoader.LoadModules(kernel);
-
-        //    var equipmentGenLoader = new EquipmentGenModuleLoader();
-        //    equipmentGenLoader.LoadModules(kernel);
-
-        //    var npcGenLoader = new NPCGenModuleLoader();
-        //    npcGenLoader.LoadModules(kernel);
-
-        //    kernel.Inject(this);
-        //}
-
-        [SetUp]
-        public void SetupForNinjectDebugging()
+        [TestFixtureSetUp]
+        public void IntegrationTestsFixtureSetup()
         {
             kernel = new StandardKernel();
 
@@ -41,7 +25,11 @@ namespace NPCGen.Tests.Integration.Common
 
             var npcGenLoader = new NPCGenModuleLoader();
             npcGenLoader.LoadModules(kernel);
+        }
 
+        [SetUp]
+        public void IntegrationTestsSetup()
+        {
             kernel.Inject(this);
         }
 
