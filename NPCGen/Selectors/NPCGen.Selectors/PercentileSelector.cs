@@ -22,6 +22,13 @@ namespace NPCGen.Selectors
         {
             var table = percentileMapper.Map(tableName);
             var roll = dice.Roll().Percentile();
+
+            if (table.ContainsKey(roll) == false)
+            {
+                var message = String.Format("{0} is not a valid entry in the table {1}", roll, tableName);
+                throw new ArgumentException(message);
+            }
+
             return table[roll];
         }
 

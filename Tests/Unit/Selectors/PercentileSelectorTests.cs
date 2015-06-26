@@ -13,7 +13,7 @@ namespace NPCGen.Tests.Unit.Selectors
     [TestFixture]
     public class PercentileSelectorTests
     {
-        private const String tableName = "table";
+        private const String tableName = "table name";
 
         private IPercentileSelector percentileSelector;
         private Dictionary<Int32, String> table;
@@ -65,6 +65,13 @@ namespace NPCGen.Tests.Unit.Selectors
 
             var extras = distinctContent.Except(results);
             Assert.That(extras, Is.Empty);
+        }
+
+        [Test]
+        public void IfRollNotPresentInTable_ThrowException()
+        {
+            mockDice.Setup(d => d.Roll(1).Percentile()).Returns(11);
+            Assert.That(() => percentileSelector.SelectFrom(tableName), Throws.Exception.With.Message.EqualTo("11 is not a valid entry in the table table name"));
         }
     }
 }

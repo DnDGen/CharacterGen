@@ -74,13 +74,13 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
         [Test]
         public void GetClassFeatForSpecializations()
         {
-            Assert.Fail();
+            throw new NotImplementedException();
         }
 
         [Test]
         public void GetAllClassFeats()
         {
-            Assert.Fail();
+            throw new NotImplementedException();
         }
 
         [Test]

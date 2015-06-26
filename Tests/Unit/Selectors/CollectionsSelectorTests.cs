@@ -42,5 +42,11 @@ namespace NPCGen.Tests.Unit.Selectors
             var collections = selector.SelectAllFrom(TableName);
             Assert.That(collections, Is.EqualTo(allCollections));
         }
+
+        [Test]
+        public void IfEntryNotPresentInTable_ThrowException()
+        {
+            Assert.That(() => selector.SelectFrom(TableName, "entry"), Throws.Exception.With.Message.EqualTo("entry is not a valid entry in the table table name"));
+        }
     }
 }

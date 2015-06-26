@@ -68,7 +68,7 @@ namespace NPCGen.Tests.Unit.Tables
         [TestCase(TableNameConstants.Set.Collection.Groups.Warriors, "Warriors")]
         [TestCase(TableNameConstants.Set.Collection.Groups.Weapons, "Weapons")]
         [TestCase(TableNameConstants.Set.Collection.Groups.WeaponsWithUnarmedAndGrapple, "Weapons with unarmed and grapple")]
-        [TestCase(TableNameConstants.Set.Collection.Groups.WeaponsWithUnarmedAndGrappleAndRay, "Weapons with unarmed and grapple and ray")]
+        [TestCase(TableNameConstants.Set.Collection.Groups.WeaponsWithUnarmedAndGrappleAndRay, "Weapons with unarmed, grapple, and ray")]
         [TestCase(TableNameConstants.Set.Percentile.AlignmentGoodness, "AlignmentGoodness")]
         [TestCase(TableNameConstants.Set.Percentile.Traits, "Traits")]
         [TestCase(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill, "AssignPointToCrossClassSkill")]

@@ -9,7 +9,7 @@ namespace NPCGen.Common.Abilities.Feats
 
         public Frequency()
         {
-            TimePeriod = FeatConstants.Frequencies.Constant;
+            TimePeriod = String.Empty;
         }
     }
 }

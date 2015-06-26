@@ -18,7 +18,7 @@ namespace NPCGen.Tests.Unit.Common.Abilities.Feats
         public void FrequencyInitialized()
         {
             Assert.That(frequency.Quantity, Is.EqualTo(0));
-            Assert.That(frequency.TimePeriod, Is.EqualTo(FeatConstants.Frequencies.Constant));
+            Assert.That(frequency.TimePeriod, Is.Empty);
         }
     }
 }

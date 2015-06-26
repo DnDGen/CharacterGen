@@ -15,12 +15,6 @@ namespace NPCGen.Tests.Integration.Tables
         protected const String EmptyContent = "";
 
         private Dictionary<Int32, String> table;
-        private HashSet<Int32> testedRolls;
-
-        public PercentileTests()
-        {
-            testedRolls = new HashSet<Int32>();
-        }
 
         [SetUp]
         public void PercentileSetup()
@@ -51,17 +45,10 @@ namespace NPCGen.Tests.Integration.Tables
 
         private void AssertPercentile(String content, Int32 roll)
         {
-            var newRollToTest = testedRolls.Add(roll);
-            Assert.That(newRollToTest, Is.True);
             Assert.That(table.Keys, Contains.Item(roll), tableName);
 
             var message = String.Format("Roll: {0}", roll);
             Assert.That(table[roll], Is.EqualTo(content), message);
-        }
-
-        protected override string tableName
-        {
-            get { throw new NotImplementedException(); }
         }
     }
 }

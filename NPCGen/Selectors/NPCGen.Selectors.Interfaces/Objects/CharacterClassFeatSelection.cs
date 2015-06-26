@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using NPCGen.Common.Abilities.Feats;
 
 namespace NPCGen.Selectors.Interfaces.Objects
@@ -18,6 +19,7 @@ namespace NPCGen.Selectors.Interfaces.Objects
             FeatId = String.Empty;
             FocusType = String.Empty;
             Frequency = new Frequency();
+            RequiredFeatIds = Enumerable.Empty<String>();
         }
     }
 }

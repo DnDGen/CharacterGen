@@ -17,6 +17,13 @@ namespace NPCGen.Selectors
         public IEnumerable<String> SelectFrom(String tableName, String tableEntry)
         {
             var table = mapper.Map(tableName);
+
+            if (table.ContainsKey(tableEntry) == false)
+            {
+                var message = String.Format("{0} is not a valid entry in the table {1}", tableEntry, tableName);
+                throw new ArgumentException(message);
+            }
+
             return table[tableEntry];
         }
 

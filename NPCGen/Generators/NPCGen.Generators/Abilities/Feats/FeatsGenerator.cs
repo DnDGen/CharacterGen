@@ -54,13 +54,50 @@ namespace NPCGen.Generators.Abilities.Feats
                 if (combinedFeatIds.Contains(featToCombine.Name.Id))
                     continue;
 
-                var otherFeats = featsToCombine.Where(f => CanCombine(f, featsToCombine) && f != featToCombine);
+                var combinableFeats = featsToCombine.Where(f => CanCombine(f, featsToCombine));
+                if (combinableFeats.Count() < 2)
+                    continue;
 
-                foreach (var otherFeat in otherFeats)
-                    featToCombine.Frequency.Quantity += otherFeat.Frequency.Quantity;
+                var otherFeats = Enumerable.Empty<Feat>();
+
+                if (combinableFeats.Any(f => f.Frequency.TimePeriod == FeatConstants.Frequencies.Constant))
+                {
+                    var featToKeep = combinableFeats.First(f => f.Frequency.TimePeriod == FeatConstants.Frequencies.Constant);
+                    otherFeats = combinableFeats.Except(new[] { featToKeep });
+                }
+                else if (combinableFeats.Any(f => f.Frequency.TimePeriod == FeatConstants.Frequencies.AtWill))
+                {
+                    var featToKeep = combinableFeats.First(f => f.Frequency.TimePeriod == FeatConstants.Frequencies.AtWill);
+                    otherFeats = combinableFeats.Except(new[] { featToKeep });
+                }
+                else
+                {
+                    otherFeats = combinableFeats.Except(new[] { featToCombine });
+                    featToCombine.Frequency.Quantity = combinableFeats.Sum(f => f.Frequency.Quantity);
+                }
 
                 featsToRemove.AddRange(otherFeats);
                 combinedFeatIds.Add(featToCombine.Name.Id);
+            }
+
+            var featsWithRemovableStrengths = allFeats.Where(f => CanRemoveStrength(f, allFeats));
+            combinedFeatIds.Clear();
+
+            foreach (var featToRemove in featsWithRemovableStrengths)
+            {
+                if (combinedFeatIds.Contains(featToRemove.Name.Id))
+                    continue;
+
+                var removableFeats = featsWithRemovableStrengths.Where(f => CanRemoveStrength(f, featsWithRemovableStrengths));
+                if (removableFeats.Count() < 2)
+                    continue;
+
+                var maxStrength = featsWithRemovableStrengths.Max(f => f.Strength);
+                var featToKeep = featsWithRemovableStrengths.First(f => f.Strength == maxStrength);
+                var otherFeats = removableFeats.Except(new[] { featToKeep });
+
+                featsToRemove.AddRange(otherFeats);
+                combinedFeatIds.Add(featToRemove.Name.Id);
             }
 
             allFeats = allFeats.Except(featsToRemove);
@@ -71,14 +108,35 @@ namespace NPCGen.Generators.Abilities.Feats
             return allFeats;
         }
 
+        private Boolean CanRemoveStrength(Feat feat, IEnumerable<Feat> allFeats)
+        {
+            if (feat.Frequency.TimePeriod != String.Empty)
+                return false;
+
+            var count = allFeats.Count(f => f.Name.Id == feat.Name.Id
+                                        && f.Focus == feat.Focus
+                                        && f.Frequency.TimePeriod == String.Empty);
+
+            return count > 1;
+        }
+
         private Boolean CanCombine(Feat feat, IEnumerable<Feat> allFeats)
         {
             var count = allFeats.Count(f => f.Name.Id == feat.Name.Id
                                         && f.Focus == feat.Focus
                                         && f.Strength == feat.Strength
-                                        && f.Frequency.TimePeriod == feat.Frequency.TimePeriod);
+                                        && FrequenciesCanCombine(f.Frequency, feat.Frequency));
 
             return count > 1;
+        }
+
+        private Boolean FrequenciesCanCombine(Frequency firstFrequency, Frequency secondFrequency)
+        {
+            return firstFrequency.TimePeriod == secondFrequency.TimePeriod
+                || firstFrequency.TimePeriod == FeatConstants.Frequencies.AtWill
+                || secondFrequency.TimePeriod == FeatConstants.Frequencies.AtWill
+                || firstFrequency.TimePeriod == FeatConstants.Frequencies.Constant
+                || secondFrequency.TimePeriod == FeatConstants.Frequencies.Constant;
         }
 
         private IEnumerable<Feat> GetSkillSynergyFeats(Dictionary<String, Skill> skills)

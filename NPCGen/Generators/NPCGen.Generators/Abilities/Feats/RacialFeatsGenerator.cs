@@ -15,17 +15,13 @@ namespace NPCGen.Generators.Abilities.Feats
         private ICollectionsSelector collectionsSelector;
         private IAdjustmentsSelector adjustmentsSelector;
         private IFeatsSelector featsSelector;
-        private IDice dice;
-        private INameSelector nameSelector;
 
         public RacialFeatsGenerator(ICollectionsSelector collectionsSelector, IAdjustmentsSelector adjustmentsSelector,
-            IFeatsSelector featsSelector, IDice dice, INameSelector nameSelector)
+            IFeatsSelector featsSelector)
         {
             this.collectionsSelector = collectionsSelector;
             this.adjustmentsSelector = adjustmentsSelector;
             this.featsSelector = featsSelector;
-            this.dice = dice;
-            this.nameSelector = nameSelector;
         }
 
         public IEnumerable<Feat> GenerateWith(Race race)
@@ -54,14 +50,14 @@ namespace NPCGen.Generators.Abilities.Feats
             return feats;
         }
 
-        private Int32 GetMonsterHitDice(String baseRace)
+        private Int32 GetMonsterHitDice(String baseRaceId)
         {
-            var monsters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.Names, TableNameConstants.Set.Collection.Groups.Monsters);
-            if (!monsters.Contains(baseRace))
+            var monsters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, TableNameConstants.Set.Collection.Groups.Monsters);
+            if (!monsters.Contains(baseRaceId))
                 return 1;
 
             var hitDice = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice);
-            return hitDice[baseRace];
+            return hitDice[baseRaceId];
         }
     }
 }

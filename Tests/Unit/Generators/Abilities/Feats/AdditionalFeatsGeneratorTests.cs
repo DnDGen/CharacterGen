@@ -484,7 +484,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
         [Test]
         public void CannotPickAPreselectedFeat()
         {
-            Assert.Fail();
+            throw new NotImplementedException();
         }
 
         [Test]
@@ -595,13 +595,13 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
         [Test]
         public void ToughnessCanBeTakenMultipleTimes()
         {
-            Assert.Fail();
+            throw new NotImplementedException();
         }
 
         [Test]
         public void ToughnessFocusIsNumberOfTimesTaken()
         {
-            Assert.Fail();
+            throw new NotImplementedException();
         }
 
         [Test]
