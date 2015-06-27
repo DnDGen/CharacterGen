@@ -74,6 +74,7 @@ namespace NPCGen.Tests.Unit.Tables
         [TestCase(TableNameConstants.Set.Percentile.Traits, "Traits")]
         [TestCase(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill, "AssignPointToCrossClassSkill")]
         [TestCase(TableNameConstants.Formattable.Adjustments.CLASSFeatLevelRequirements, "{0}FeatLevelRequirements")]
+        [TestCase(TableNameConstants.Formattable.Adjustments.FEATClassRequirements, "{0}ClassRequirements")]
         [TestCase(TableNameConstants.Formattable.Adjustments.FEATSkillRankRequirements, "{0}SkillRankRequirements")]
         [TestCase(TableNameConstants.Formattable.Adjustments.FEATStatRequirements, "{0}StatRequirements")]
         [TestCase(TableNameConstants.Formattable.Adjustments.STATStatAdjustments, "{0}StatAdjustments")]

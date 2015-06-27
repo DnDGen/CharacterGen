@@ -1,5 +1,7 @@
 ﻿using System;
 using NPCGen.Common.Abilities.Feats;
+using NPCGen.Common.CharacterClasses;
+using NPCGen.Common.Races;
 using NPCGen.Tables.Interfaces;
 using NUnit.Framework;
 
@@ -13,9 +15,51 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
             get { return TableNameConstants.Set.Collection.FeatGroups; }
         }
 
-        [TestCase(TableNameConstants.Set.Collection.Groups.NaturalArmor)]
-        [TestCase(TableNameConstants.Set.Collection.Groups.Deflection)]
-        [TestCase(TableNameConstants.Set.Collection.Groups.Dodge)]
+        [TestCase(CharacterClassConstants.Rogue,
+            FeatConstants.SneakAttackId,
+            FeatConstants.TrapfindingId,
+            FeatConstants.EvasionId,
+            FeatConstants.UncannyDodgeId,
+            FeatConstants.TrapSenseId,
+            FeatConstants.ImprovedUncannyDodgeId)]
+        [TestCase(RaceConstants.BaseRaces.DeepHalflingId,
+            FeatConstants.SaveBonusId,
+            FeatConstants.AttackBonusId,
+            FeatConstants.SkillBonusId,
+            FeatConstants.DarkvisionId,
+            FeatConstants.StonecunningId)]
+        [TestCase(RaceConstants.BaseRaces.GoblinId,
+            FeatConstants.DarkvisionId,
+            FeatConstants.SkillBonusId)]
+        [TestCase(RaceConstants.BaseRaces.HalfElfId,
+            FeatConstants.ImmuneToEffectId,
+            FeatConstants.SaveBonusId,
+            FeatConstants.LowLightVisionId,
+            FeatConstants.ElvenBloodId,
+            FeatConstants.SkillBonusId)]
+        [TestCase(RaceConstants.BaseRaces.HighElfId,
+            FeatConstants.ImmuneToEffectId,
+            FeatConstants.SaveBonusId,
+            FeatConstants.LowLightVisionId,
+            FeatConstants.MartialWeaponProficiencyId,
+            FeatConstants.SkillBonusId)]
+        [TestCase(RaceConstants.BaseRaces.HillDwarfId,
+            FeatConstants.DarkvisionId,
+            FeatConstants.StonecunningId,
+            FeatConstants.WeaponFamiliarityId,
+            FeatConstants.StabilityId,
+            FeatConstants.SaveBonusId,
+            FeatConstants.AttackBonusId,
+            FeatConstants.DodgeBonusId,
+            FeatConstants.SkillBonusId)]
+        [TestCase(RaceConstants.BaseRaces.HumanId)]
+        [TestCase(RaceConstants.BaseRaces.LizardfolkId,
+            FeatConstants.NaturalArmorId,
+            FeatConstants.HoldBreathId,
+            FeatConstants.NaturalWeaponId)]
+        [TestCase(TableNameConstants.Set.Collection.Groups.TakenMultipleTimes,
+            FeatConstants.SpellMasteryId,
+            FeatConstants.ToughnessId)]
         public override void DistinctCollection(String name, params String[] collection)
         {
             base.DistinctCollection(name, collection);
@@ -38,7 +82,9 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
                 FeatConstants.CombatCastingId,
                 FeatConstants.CombatExpertiseId,
                 FeatConstants.CombatReflexesId,
+                FeatConstants.CripplingStrikeId,
                 FeatConstants.DeceitfulId,
+                FeatConstants.DefensiveRollId,
                 FeatConstants.DeflectArrowsId,
                 FeatConstants.DeftHandsId,
                 FeatConstants.DiehardId,
@@ -65,6 +111,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
                 FeatConstants.ImprovedCounterspellId,
                 FeatConstants.ImprovedCriticalId,
                 FeatConstants.ImprovedDisarmId,
+                FeatConstants.ImprovedEvasionId,
                 FeatConstants.ImprovedFamiliarId,
                 FeatConstants.ImprovedFeintId,
                 FeatConstants.ImprovedGrappleId,
@@ -93,6 +140,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
                 FeatConstants.NaturalSpellId,
                 FeatConstants.NegotiatorId,
                 FeatConstants.NimbleFingersId,
+                FeatConstants.OpportunistId,
                 FeatConstants.PersuasiveId,
                 FeatConstants.PointBlankShotId,
                 FeatConstants.PowerAttackId,
@@ -109,6 +157,8 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
                 FeatConstants.SilentSpellId,
                 FeatConstants.SimpleWeaponProficiencyId,
                 FeatConstants.SkillFocusId,
+                FeatConstants.SkillMasteryId,
+                FeatConstants.SlipperyMindId,
                 FeatConstants.SnatchArrowsId,
                 FeatConstants.SpellFocusId,
                 FeatConstants.SpellMasteryId,

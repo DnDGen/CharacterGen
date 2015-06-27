@@ -100,11 +100,19 @@ namespace NPCGen.Tests.Unit.Selectors
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AdditionalFeatClassNameRequirements, "additional feat 1")).Returns(new[] { "class 1", "class 3" });
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AdditionalFeatFeatRequirements, "additional feat 1")).Returns(new[] { "feat 1", "feat 2" });
 
+
+            var feat1ClassRequirements = new Dictionary<String, Int32>();
+            feat1ClassRequirements["class 1"] = 3;
+            feat1ClassRequirements["class 2"] = 5;
+
+            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.FEATClassRequirements, "additional feat 1");
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(feat1ClassRequirements);
+
             var feat2SkillRankRequirements = new Dictionary<String, Int32>();
             feat2SkillRankRequirements["skill 1"] = 5;
             feat2SkillRankRequirements["skill 2"] = 4;
 
-            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.FEATSkillRankRequirements, "additional feat 2");
+            tableName = String.Format(TableNameConstants.Formattable.Adjustments.FEATSkillRankRequirements, "additional feat 2");
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(feat2SkillRankRequirements);
 
             var feat2StatRequirements = new Dictionary<String, Int32>();
@@ -124,9 +132,9 @@ namespace NPCGen.Tests.Unit.Selectors
             Assert.That(first.IsFighterFeat, Is.True);
             Assert.That(first.IsWizardFeat, Is.False);
             Assert.That(first.RequiredBaseAttack, Is.EqualTo(9266));
-            Assert.That(first.RequiredClassNames, Contains.Item("class 1"));
-            Assert.That(first.RequiredClassNames, Contains.Item("class 3"));
-            Assert.That(first.RequiredClassNames.Count(), Is.EqualTo(2));
+            Assert.That(first.RequiredCharacterClasses["class 1"], Is.EqualTo(3));
+            Assert.That(first.RequiredCharacterClasses["class 3"], Is.EqualTo(5));
+            Assert.That(first.RequiredCharacterClasses.Count, Is.EqualTo(2));
             Assert.That(first.RequiredFeatIds, Contains.Item("feat 1"));
             Assert.That(first.RequiredFeatIds, Contains.Item("feat 2"));
             Assert.That(first.RequiredFeatIds.Count(), Is.EqualTo(2));
@@ -138,7 +146,7 @@ namespace NPCGen.Tests.Unit.Selectors
             Assert.That(last.IsFighterFeat, Is.False);
             Assert.That(last.IsWizardFeat, Is.True);
             Assert.That(last.RequiredBaseAttack, Is.EqualTo(0));
-            Assert.That(last.RequiredClassNames, Is.Empty);
+            Assert.That(last.RequiredCharacterClasses, Is.Empty);
             Assert.That(last.RequiredFeatIds, Is.Empty);
             Assert.That(last.RequiredSkillRanks["skill 1"], Is.EqualTo(5));
             Assert.That(last.RequiredSkillRanks["skill 2"], Is.EqualTo(4));

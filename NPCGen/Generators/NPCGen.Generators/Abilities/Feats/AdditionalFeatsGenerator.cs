@@ -43,7 +43,7 @@ namespace NPCGen.Generators.Abilities.Feats
             BaseAttack baseAttack, IEnumerable<Feat> preselectedFeats)
         {
             var additionalFeats = featsSelector.SelectAdditional();
-            var availableFeats = additionalFeats.Where(f => f.ImmutableRequirementsMet(baseAttack.Bonus, stats, skills, characterClass.ClassName));
+            var availableFeats = additionalFeats.Where(f => f.ImmutableRequirementsMet(baseAttack.Bonus, stats, skills, characterClass));
 
             var numberOfAdditionalFeats = characterClass.Level / 3 + 1;
             if (race.BaseRace.Id == RaceConstants.BaseRaces.HumanId)
@@ -151,7 +151,7 @@ namespace NPCGen.Generators.Abilities.Feats
             BaseAttack baseAttack, IEnumerable<Feat> selectedFeats)
         {
             var fighterFeats = featsSelector.SelectAdditional().Where(f => f.IsFighterFeat);
-            var availableFeats = fighterFeats.Where(f => f.ImmutableRequirementsMet(baseAttack.Bonus, stats, skills, characterClass.ClassName));
+            var availableFeats = fighterFeats.Where(f => f.ImmutableRequirementsMet(baseAttack.Bonus, stats, skills, characterClass));
 
             var numberOfFighterFeats = characterClass.Level / 2 + 1;
             var feats = PopulateFeatsFrom(characterClass, stats, skills, baseAttack, selectedFeats, availableFeats, numberOfFighterFeats);
@@ -163,7 +163,7 @@ namespace NPCGen.Generators.Abilities.Feats
             BaseAttack baseAttack, IEnumerable<Feat> selectedFeats)
         {
             var wizardFeats = featsSelector.SelectAdditional().Where(f => f.IsWizardFeat);
-            var availableFeats = wizardFeats.Where(f => f.ImmutableRequirementsMet(baseAttack.Bonus, stats, skills, characterClass.ClassName));
+            var availableFeats = wizardFeats.Where(f => f.ImmutableRequirementsMet(baseAttack.Bonus, stats, skills, characterClass));
 
             var numberOfWizardFeats = characterClass.Level / 5;
             var feats = PopulateFeatsFrom(characterClass, stats, skills, baseAttack, selectedFeats, availableFeats, numberOfWizardFeats);

@@ -4,6 +4,7 @@ using System.Linq;
 using NPCGen.Common.Abilities.Feats;
 using NPCGen.Common.Abilities.Skills;
 using NPCGen.Common.Abilities.Stats;
+using NPCGen.Common.CharacterClasses;
 
 namespace NPCGen.Selectors.Interfaces.Objects
 {
@@ -18,7 +19,7 @@ namespace NPCGen.Selectors.Interfaces.Objects
         public Dictionary<String, Int32> RequiredSkillRanks { get; set; }
         public Boolean IsFighterFeat { get; set; }
         public Boolean IsWizardFeat { get; set; }
-        public IEnumerable<String> RequiredClassNames { get; set; }
+        public Dictionary<String, Int32> RequiredCharacterClasses { get; set; }
         public String FocusType { get; set; }
 
         public AdditionalFeatSelection()
@@ -27,13 +28,13 @@ namespace NPCGen.Selectors.Interfaces.Objects
             RequiredFeatIds = Enumerable.Empty<String>();
             RequiredStats = new Dictionary<String, Int32>();
             RequiredSkillRanks = new Dictionary<String, Int32>();
-            RequiredClassNames = Enumerable.Empty<String>();
+            RequiredCharacterClasses = new Dictionary<String, Int32>();
             FocusType = String.Empty;
             Frequency = new Frequency();
         }
 
         public Boolean ImmutableRequirementsMet(Int32 baseAttack, Dictionary<String, Stat> stats,
-            Dictionary<String, Skill> skills, String className)
+            Dictionary<String, Skill> skills, CharacterClass characterClass)
         {
             foreach (var stat in RequiredStats)
                 if (stats[stat.Key].Value < stat.Value)
@@ -43,7 +44,7 @@ namespace NPCGen.Selectors.Interfaces.Objects
                 if (skills[skill.Key].EffectiveRanks < skill.Value)
                     return false;
 
-            if (RequiredClassNames.Any() && !RequiredClassNames.Contains(className))
+            if (RequiredCharacterClasses.Any() && RequiredCharacterClasses.ContainsKey(characterClass.ClassName) && RequiredCharacterClasses[characterClass.ClassName] > characterClass.Level)
                 return false;
 
             return baseAttack >= RequiredBaseAttack;

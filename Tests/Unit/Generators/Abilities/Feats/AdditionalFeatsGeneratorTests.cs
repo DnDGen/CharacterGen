@@ -725,5 +725,40 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             Assert.That(onlyFeat.Name.Id, Is.EqualTo(additionalFeatSelections[0].FeatId));
             Assert.That(onlyFeat.Focus, Is.EqualTo("school 4"));
         }
+
+        [TestCase(1, 1)]
+        [TestCase(2, 1)]
+        [TestCase(3, 2)]
+        [TestCase(4, 2)]
+        [TestCase(5, 2)]
+        [TestCase(6, 3)]
+        [TestCase(7, 3)]
+        [TestCase(8, 3)]
+        [TestCase(9, 4)]
+        [TestCase(10, 5)]
+        [TestCase(11, 5)]
+        [TestCase(12, 6)]
+        [TestCase(13, 7)]
+        [TestCase(14, 7)]
+        [TestCase(15, 8)]
+        [TestCase(16, 9)]
+        [TestCase(17, 9)]
+        [TestCase(18, 10)]
+        [TestCase(19, 11)]
+        [TestCase(20, 11)]
+        public void RoguesGetBonusFeats(Int32 level, Int32 quantity)
+        {
+            characterClass.Level = level;
+            characterClass.ClassName = CharacterClassConstants.Rogue;
+            AddFeatSelections(12);
+
+            var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
+            var featIds = feats.Select(f => f.Name.Id);
+
+            for (var i = 0; i < quantity; i++)
+                Assert.That(featIds, Contains.Item(additionalFeatSelections[i].FeatId));
+
+            Assert.That(featIds.Count(), Is.EqualTo(quantity));
+        }
     }
 }

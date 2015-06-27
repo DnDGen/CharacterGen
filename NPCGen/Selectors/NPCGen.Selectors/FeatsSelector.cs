@@ -85,10 +85,12 @@ namespace NPCGen.Selectors
             additionalFeatSelection.RequiredBaseAttack = Convert.ToInt32(featData[AdditionalBaseAttackRequirementIndex]);
             additionalFeatSelection.FocusType = featData[AdditionalFocusTypeIndex];
 
-            additionalFeatSelection.RequiredClassNames = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AdditionalFeatClassNameRequirements, featId);
             additionalFeatSelection.RequiredFeatIds = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AdditionalFeatFeatRequirements, featId);
 
-            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.FEATSkillRankRequirements, featId);
+            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.FEATClassRequirements, featId);
+            additionalFeatSelection.RequiredCharacterClasses = adjustmentsSelector.SelectFrom(tableName);
+            
+            tableName = String.Format(TableNameConstants.Formattable.Adjustments.FEATSkillRankRequirements, featId);
             additionalFeatSelection.RequiredSkillRanks = adjustmentsSelector.SelectFrom(tableName);
 
             tableName = String.Format(TableNameConstants.Formattable.Adjustments.FEATStatRequirements, featId);

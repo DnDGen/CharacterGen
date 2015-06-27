@@ -99,6 +99,7 @@ namespace NPCGen.Tables.Interfaces
             {
                 public const String BASERACESkillAdjustments = "{0}SkillAdjustments";
                 public const String CLASSFeatLevelRequirements = "{0}FeatLevelRequirements";
+                public const String FEATClassRequirements = "{0}ClassRequirements";
                 public const String FEATSkillAdjustments = "{0}SkillAdjustments";
                 public const String FEATSkillRankRequirements = "{0}SkillRankRequirements";
                 public const String FEATStatRequirements = "{0}StatRequirements";
