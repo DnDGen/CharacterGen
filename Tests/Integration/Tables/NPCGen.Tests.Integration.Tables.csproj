@@ -105,6 +105,7 @@
     <Compile Include="Abilities\Skills\SkillGroupsTests.cs" />
     <Compile Include="Abilities\Skills\SkillPointsForClassesTests.cs" />
     <Compile Include="Abilities\Skills\SkillSynergyTests.cs" />
+    <Compile Include="Abilities\Stats\IncreaseFirstPriorityStatTests.cs" />
     <Compile Include="AdjustmentsTests.cs" />
     <Compile Include="Alignments\AlignmentGoodnessTests.cs" />
     <Compile Include="Abilities\Languages\AutomaticLanguagesTests.cs" />

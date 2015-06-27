@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using D20Dice;
 using NPCGen.Common.Abilities.Stats;
 using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Races;
@@ -9,18 +8,19 @@ using NPCGen.Generators.Interfaces.Abilities;
 using NPCGen.Generators.Interfaces.Randomizers.Stats;
 using NPCGen.Selectors.Interfaces;
 using NPCGen.Selectors.Interfaces.Objects;
+using NPCGen.Tables.Interfaces;
 
 namespace NPCGen.Generators.Abilities
 {
     public class StatsGenerator : IStatsGenerator
     {
-        private IDice dice;
+        private IBooleanPercentileSelector booleanPercentileSelector;
         private IStatPrioritySelector statPrioritySelector;
         private IStatAdjustmentsSelector statAdjustmentsSelector;
 
-        public StatsGenerator(IDice dice, IStatPrioritySelector statPrioritySelector, IStatAdjustmentsSelector statAdjustmentsSelector)
+        public StatsGenerator(IBooleanPercentileSelector booleanPercentileSelector, IStatPrioritySelector statPrioritySelector, IStatAdjustmentsSelector statAdjustmentsSelector)
         {
-            this.dice = dice;
+            this.booleanPercentileSelector = booleanPercentileSelector;
             this.statPrioritySelector = statPrioritySelector;
             this.statAdjustmentsSelector = statAdjustmentsSelector;
         }
@@ -66,7 +66,7 @@ namespace NPCGen.Generators.Abilities
             foreach (var stat in stats.Keys)
             {
                 stats[stat].Value += statAdjustments[stat];
-                stats[stat].Value = Math.Max(stats[stat].Value, 1);
+                stats[stat].Value = Math.Max(stats[stat].Value, 3);
             }
 
             return stats;
@@ -84,9 +84,9 @@ namespace NPCGen.Generators.Abilities
 
         private void IncreaseStat(Dictionary<String, Stat> stats, StatPrioritySelection priorities)
         {
-            var roll = dice.Roll().d2();
+            var increaseFirst = booleanPercentileSelector.SelectFrom(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityStat);
 
-            if (roll == 1)
+            if (increaseFirst)
                 stats[priorities.First].Value++;
             else
                 stats[priorities.Second].Value++;

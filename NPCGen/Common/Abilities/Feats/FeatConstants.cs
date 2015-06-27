@@ -290,6 +290,8 @@ namespace NPCGen.Common.Abilities.Feats
         public const String TrapfindingId = "Trapfinding";
         public const String TrapSense = "Trap Sense";
         public const String TrapSenseId = "TrapSense";
+        public const String TurnUndead = "Turn Undead";
+        public const String TurnUndeadId = "TurnUndead";
         public const String TwoWeaponDefense = "Two-Weapon Defense";
         public const String TwoWeaponDefenseId = "TwoWeaponDefense";
         public const String TwoWeaponFighting = "Two-Weapon Fighting";

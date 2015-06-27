@@ -118,6 +118,15 @@
         <item>WidenSpell</item>
     </object>
     <object>
+        <name>Cleric</name>
+        <item>SimpleWeaponProficiency</item>
+        <item>LightArmorProficiency</item>
+        <item>MediumArmorProficiency</item>
+        <item>HeavyArmorProficiency</item>
+        <item>ShieldProficiency</item>
+        <item>TurnUndead</item>
+    </object>
+    <object>
         <name>DeepHalfling</name>
         <item>SkillBonusListen</item>
         <item>SkillBonusAppraise</item>
@@ -144,6 +153,11 @@
         <item>ImmuneToEffect</item>
         <item>LowLightVision</item>
         <item>ElvenBlood</item>
+    </object>
+    <object>
+        <name>HalfOrc</name>
+        <item>Darkvision</item>
+        <item>OrcBlood</item>
     </object>
     <object>
         <name>HighElf</name>
@@ -215,7 +229,7 @@
         <item>MartialWeaponProficiencyRapier</item>
         <item>MartialWeaponProficiencySap</item>
         <item>MartialWeaponProficiencyShortbow</item>
-        <item>MartialWeaponProficiencyShortSword</item>
+        <item>MartialWeaponProficiencyShort sword</item>
     </object>
     <object>
         <name>TakenMultipleTimes</name>

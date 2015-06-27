@@ -17,6 +17,13 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
             get { return TableNameConstants.Set.Collection.FeatGroups; }
         }
 
+        [TestCase(CharacterClassConstants.Cleric,
+            FeatConstants.SimpleWeaponProficiencyId,
+            FeatConstants.LightArmorProficiencyId,
+            FeatConstants.MediumArmorProficiencyId,
+            FeatConstants.HeavyArmorProficiencyId,
+            FeatConstants.ShieldProficiencyId,
+            FeatConstants.TurnUndeadId)]
         [TestCase(CharacterClassConstants.Wizard,
             FeatConstants.ScribeScrollId,
             FeatConstants.SimpleWeaponProficiencyId + WeaponConstants.Club,
@@ -46,6 +53,9 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.SkillBonusId + SkillConstants.Listen,
             FeatConstants.SkillBonusId + SkillConstants.Diplomacy,
             FeatConstants.SkillBonusId + SkillConstants.GatherInformation)]
+        [TestCase(RaceConstants.BaseRaces.HalfOrcId,
+            FeatConstants.DarkvisionId,
+            FeatConstants.OrcBloodId)]
         [TestCase(RaceConstants.BaseRaces.HighElfId,
             FeatConstants.ImmuneToEffectId,
             FeatConstants.SaveBonusId,
@@ -126,7 +136,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
                 FeatConstants.LightArmorProficiencyId
             };
 
-            base.DistinctCollection(TableNameConstants.Set.Collection.Groups.Additional, featIds);
+            base.DistinctCollection(CharacterClassConstants.Rogue, featIds);
         }
 
         [Test]

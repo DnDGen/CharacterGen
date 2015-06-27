@@ -89,6 +89,7 @@ namespace NPCGen.Tables.Interfaces
             public static class TrueOrFalse
             {
                 public const String AssignPointToCrossClassSkill = "AssignPointToCrossClassSkill";
+                public const String IncreaseFirstPriorityStat = "IncreaseFirstPriorityStat";
             }
         }
 

@@ -10,6 +10,7 @@ using NPCGen.Generators.Interfaces.Abilities;
 using NPCGen.Generators.Interfaces.Randomizers.Stats;
 using NPCGen.Selectors.Interfaces;
 using NPCGen.Selectors.Interfaces.Objects;
+using NPCGen.Tables.Interfaces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Unit.Generators.Abilities
@@ -19,9 +20,9 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
     {
         private const Int32 baseStat = 10;
 
-        private Mock<IDice> mockDice;
         private Mock<IStatPrioritySelector> mockStatPrioritySelector;
         private Mock<IStatAdjustmentsSelector> mockStatAdjustmentsSelector;
+        private Mock<IBooleanPercentileSelector> mockBooleanPercentileSelector;
         private IStatsGenerator statsGenerator;
 
         private Mock<IStatsRandomizer> mockStatRandomizer;
@@ -34,35 +35,34 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         [SetUp]
         public void Setup()
         {
-            mockDice = new Mock<IDice>();
-
             statPrioritySelection = new StatPrioritySelection();
+            mockStatPrioritySelector = new Mock<IStatPrioritySelector>();
+            race = new Race();
+            adjustments = new Dictionary<String, Int32>();
+            mockStatAdjustmentsSelector = new Mock<IStatAdjustmentsSelector>();
+            mockBooleanPercentileSelector = new Mock<IBooleanPercentileSelector>();
+            statsGenerator = new StatsGenerator(mockBooleanPercentileSelector.Object, mockStatPrioritySelector.Object,
+                mockStatAdjustmentsSelector.Object);
+            randomizedStats = new Dictionary<String, Stat>();
+            mockStatRandomizer = new Mock<IStatsRandomizer>();
+            characterClass = new CharacterClass();
+
             statPrioritySelection.First = "first priority";
             statPrioritySelection.Second = "second priority";
-            mockStatPrioritySelector = new Mock<IStatPrioritySelector>();
             mockStatPrioritySelector.Setup(p => p.SelectFor(It.IsAny<String>())).Returns(statPrioritySelection);
 
-            race = new Race();
             race.BaseRace.Name = "base race";
             race.Metarace.Name = String.Empty;
-            adjustments = new Dictionary<String, Int32>();
             adjustments.Add(statPrioritySelection.First, 0);
             adjustments.Add(statPrioritySelection.Second, 0);
             adjustments.Add("other stat", 0);
-            mockStatAdjustmentsSelector = new Mock<IStatAdjustmentsSelector>();
             mockStatAdjustmentsSelector.Setup(p => p.SelectFor(race)).Returns(adjustments);
 
-            statsGenerator = new StatsGenerator(mockDice.Object, mockStatPrioritySelector.Object,
-                mockStatAdjustmentsSelector.Object);
-
-            randomizedStats = new Dictionary<String, Stat>();
             randomizedStats.Add(statPrioritySelection.First, new Stat { Value = baseStat });
             randomizedStats.Add(statPrioritySelection.Second, new Stat { Value = baseStat });
             randomizedStats.Add("other stat", new Stat { Value = baseStat });
-            mockStatRandomizer = new Mock<IStatsRandomizer>();
             mockStatRandomizer.Setup(r => r.Randomize()).Returns(randomizedStats);
 
-            characterClass = new CharacterClass();
             characterClass.ClassName = "class name";
         }
 
@@ -120,10 +120,10 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         }
 
         [Test]
-        public void LowOnD2IncreasesFirstPriorityStat()
+        public void IncreaseFirstPriorityStat()
         {
             characterClass.Level = 4;
-            mockDice.Setup(d => d.Roll(1).d2()).Returns(1);
+            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityStat)).Returns(true);
 
             var stats = statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
             Assert.That(stats[statPrioritySelection.First].Value, Is.EqualTo(baseStat + 1));
@@ -132,10 +132,10 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         }
 
         [Test]
-        public void HighOnD2IncreasesSecondPriorityStat()
+        public void IncreaseSecondPriorityStat()
         {
             characterClass.Level = 4;
-            mockDice.Setup(d => d.Roll(1).d2()).Returns(2);
+            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityStat)).Returns(false);
 
             var stats = statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
             Assert.That(stats[statPrioritySelection.First].Value, Is.EqualTo(baseStat));
@@ -144,14 +144,14 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         }
 
         [Test]
-        public void IncreasingIsAfterPrioritizaionAndAdjustments()
+        public void IncreasingIsAfterPrioritizationAndAdjustments()
         {
             randomizedStats["other stat"].Value = 18;
             randomizedStats[statPrioritySelection.First].Value = 16;
             adjustments["other stat"] = 9266;
             adjustments[statPrioritySelection.First] = -10;
             adjustments[statPrioritySelection.Second] = -7;
-            mockDice.Setup(d => d.Roll(1).d2()).Returns(1);
+            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityStat)).Returns(true);
             characterClass.Level = 4;
 
             var stats = statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
@@ -183,17 +183,18 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         public void IncreaseStat(Int32 level, Int32 increase)
         {
             characterClass.Level = level;
-            mockDice.Setup(d => d.Roll(1).d2()).Returns(1);
+            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityStat)).Returns(true);
 
             var stats = statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
             Assert.That(stats[statPrioritySelection.First].Value, Is.EqualTo(baseStat + increase));
         }
 
         [Test]
-        public void RollWhichStatToIncreasePerLevel()
+        public void DetermineWhichStatToIncreasePerLevel()
         {
             characterClass.Level = 12;
-            mockDice.SetupSequence(d => d.Roll(1).d2()).Returns(1).Returns(2).Returns(1);
+            mockBooleanPercentileSelector.SetupSequence(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityStat))
+                .Returns(true).Returns(false).Returns(true);
 
             var stats = statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
             Assert.That(stats[statPrioritySelection.First].Value, Is.EqualTo(baseStat + 2));
@@ -205,7 +206,8 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         public void IncreasesIgnorePrioritization()
         {
             characterClass.Level = 12;
-            mockDice.SetupSequence(d => d.Roll(1).d2()).Returns(1).Returns(2).Returns(2);
+            mockBooleanPercentileSelector.SetupSequence(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityStat))
+                .Returns(true).Returns(false).Returns(false);
 
             foreach (var stat in randomizedStats.Values)
                 stat.Value = baseStat;
@@ -217,12 +219,12 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         }
 
         [Test]
-        public void CannotHaveStatLessThanOne()
+        public void CannotHaveStatLessThan3()
         {
             adjustments[statPrioritySelection.First] = -9266;
 
             var stats = statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
-            Assert.That(stats[statPrioritySelection.First].Value, Is.EqualTo(1));
+            Assert.That(stats[statPrioritySelection.First].Value, Is.EqualTo(3));
         }
     }
 }
