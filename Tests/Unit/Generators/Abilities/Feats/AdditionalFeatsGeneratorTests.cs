@@ -94,17 +94,11 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
         {
             for (var i = 0; i < quantity; i++)
             {
-                var id = String.Format("feat{0}", i + 1);
-                AddAdditionalFeat(id);
+                var selection = new AdditionalFeatSelection();
+                selection.FeatId = String.Format("feat{0}", i + 1);
+
+                additionalFeatSelections.Add(selection);
             }
-        }
-
-        private void AddAdditionalFeat(String featId)
-        {
-            var selection = new AdditionalFeatSelection();
-            selection.FeatId = featId;
-
-            additionalFeatSelections.Add(selection);
         }
 
         [Test]
@@ -571,6 +565,22 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
 
             Assert.That(firstFeat.Name.Id, Is.EqualTo(FeatConstants.SpellMasteryId));
             Assert.That(firstFeat.Strength, Is.EqualTo(stats[StatConstants.Intelligence].Bonus));
+            Assert.That(feats.Count(), Is.EqualTo(1));
+        }
+
+        [Test]
+        public void SkillMasteryStrengthIsIntelligenceBonusPlus3()
+        {
+            characterClass.Level = 1;
+            AddFeatSelections(1);
+            additionalFeatSelections[0].FeatId = FeatConstants.SkillMasteryId;
+            stats[StatConstants.Intelligence].Value = 14;
+
+            var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
+            var firstFeat = feats.First();
+
+            Assert.That(firstFeat.Name.Id, Is.EqualTo(FeatConstants.SkillMasteryId));
+            Assert.That(firstFeat.Strength, Is.EqualTo(stats[StatConstants.Intelligence].Bonus + 3));
             Assert.That(feats.Count(), Is.EqualTo(1));
         }
 

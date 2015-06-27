@@ -2,6 +2,9 @@
 
 <items>
     <object>
+        <name></name>
+    </object>
+    <object>
         <name>Additional</name>
         <item>Acrobatic</item>
         <item>Agile</item>
@@ -15,7 +18,9 @@
         <item>CombatCasting</item>
         <item>CombatExpertise</item>
         <item>CombatReflexes</item>
+        <item>CripplingStrike</item>
         <item>Deceitful</item>
+        <item>DefensiveRoll</item>
         <item>DeflectArrows</item>
         <item>DeftHands</item>
         <item>Diehard</item>
@@ -42,6 +47,7 @@
         <item>ImprovedCounterspell</item>
         <item>ImprovedCritical</item>
         <item>ImprovedDisarm</item>
+        <item>ImprovedEvasion</item>
         <item>ImprovedFamiliar</item>
         <item>ImprovedFeint</item>
         <item>ImprovedGrapple</item>
@@ -70,6 +76,7 @@
         <item>NaturalSpell</item>
         <item>Negotiator</item>
         <item>NimbleFingers</item>
+        <item>Opportunist</item>
         <item>Persuasive</item>
         <item>PointBlankShot</item>
         <item>PowerAttack</item>
@@ -86,6 +93,8 @@
         <item>SilentSpell</item>
         <item>SimpleWeaponProficiency</item>
         <item>SkillFocus</item>
+        <item>SkillMastery</item>
+        <item>SlipperyMind</item>
         <item>SnatchArrows</item>
         <item>SpellFocus</item>
         <item>SpellMastery</item>
@@ -110,26 +119,121 @@
     </object>
     <object>
         <name>DeepHalfling</name>
-        <item>SkillBonus</item>
-        <item>SaveBonus</item>
-        <item>AttackBonus</item>
+        <item>SkillBonusListen</item>
+        <item>SkillBonusAppraise</item>
+        <item>SaveBonusAll</item>
+        <item>SaveBonusFear</item>
+        <item>AttackBonusThrowOrSling</item>
         <item>Darkvision</item>
         <item>Stonecunning</item>
+    </object>
+    <object>
+        <name>Goblin</name>
+        <item>SkillBonusMove Silently</item>
+        <item>SkillBonusRide</item>
+        <item>Darkvision</item>
+    </object>
+    <object>
+        <name>HalfElf</name>
+        <item>SkillBonusSearch</item>
+        <item>SkillBonusSpot</item>
+        <item>SkillBonusListen</item>
+        <item>SkillBonusDiplomacy</item>
+        <item>SkillBonusGather Information</item>
+        <item>SaveBonus</item>
+        <item>ImmuneToEffect</item>
+        <item>LowLightVision</item>
+        <item>ElvenBlood</item>
+    </object>
+    <object>
+        <name>HighElf</name>
+        <item>SkillBonusSearch</item>
+        <item>SkillBonusSpot</item>
+        <item>SkillBonusListen</item>
+        <item>SaveBonus</item>
+        <item>ImmuneToEffect</item>
+        <item>LowLightVision</item>
+        <item>MartialWeaponProficiencyLongsword</item>
+        <item>MartialWeaponProficiencyRapier</item>
+        <item>MartialWeaponProficiencyLongbow</item>
+        <item>MartialWeaponProficiencyShortbow</item>
+    </object>
+    <object>
+        <name>HillDwarf</name>
+        <item>SkillBonusAppraise</item>
+        <item>SaveBonusPoison</item>
+        <item>SaveBonusSpell</item>
+        <item>AttackBonusOrc</item>
+        <item>AttackBonusGoblin</item>
+        <item>DodgeBonus</item>
+        <item>WeaponFamiliarityDwarven urgrosh</item>
+        <item>WeaponFamiliarityDwarven waraxe</item>
+        <item>Stonecunning</item>
+        <item>Darkvision</item>
+        <item>Stability</item>
     </object>
     <object>
         <name>Human</name>
     </object>
     <object>
         <name>Lizardfolk</name>
-        <item>SkillBonus</item>
-        <item>SaveBonus</item>
-        <item>AttackBonus</item>
-        <item>Darkvision</item>
-        <item>Stonecunning</item>
+        <item>NaturalWeaponClaw</item>
+        <item>NaturalWeaponBite</item>
+        <item>HoldBreath</item>
+        <item>NaturalArmor</item>
+        <item>SimpleWeaponProficiency</item>
+        <item>ShieldProficiency</item>
+    </object>
+    <object>
+        <name>None</name>
+    </object>
+    <object>
+        <name>Rogue</name>
+        <item>SneakAttack1</item>
+        <item>SneakAttack2</item>
+        <item>SneakAttack3</item>
+        <item>SneakAttack4</item>
+        <item>SneakAttack5</item>
+        <item>SneakAttack6</item>
+        <item>SneakAttack7</item>
+        <item>SneakAttack8</item>
+        <item>SneakAttack9</item>
+        <item>SneakAttack10</item>
+        <item>Trapfinding</item>
+        <item>TrapSense1</item>
+        <item>TrapSense2</item>
+        <item>TrapSense3</item>
+        <item>TrapSense4</item>
+        <item>TrapSense5</item>
+        <item>TrapSense6</item>
+        <item>Evasion</item>
+        <item>UncannyDodge</item>
+        <item>ImprovedUncannyDodge</item>
+        <item>SimpleWeaponProficiency</item>
+        <item>LightArmorProficiency</item>
+        <item>MartialWeaponProficiencyHand crossbow</item>
+        <item>MartialWeaponProficiencyRapier</item>
+        <item>MartialWeaponProficiencySap</item>
+        <item>MartialWeaponProficiencyShortbow</item>
+        <item>MartialWeaponProficiencyShortSword</item>
     </object>
     <object>
         <name>TakenMultipleTimes</name>
+        <item>SkillMastery</item>
         <item>SpellMastery</item>
         <item>Toughness</item>
+        <item>SkillBonus</item>
+        <item>AttackBonus</item>
+        <item>SaveBonus</item>
+        <item>DodgeBonus</item>
+    </object>
+    <object>
+        <name>Wizard</name>
+        <item>ScribeScroll</item>
+        <item>SimpleWeaponProficiencyHeavy crossbow</item>
+        <item>SimpleWeaponProficiencyLight crossbow</item>
+        <item>SimpleWeaponProficiencyClub</item>
+        <item>SimpleWeaponProficiencyDagger</item>
+        <item>SimpleWeaponProficiencyQuarterstaff</item>
     </object>
 </items>

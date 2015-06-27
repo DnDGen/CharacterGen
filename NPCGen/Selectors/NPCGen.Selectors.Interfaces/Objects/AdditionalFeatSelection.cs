@@ -44,7 +44,7 @@ namespace NPCGen.Selectors.Interfaces.Objects
                 if (skills[skill.Key].EffectiveRanks < skill.Value)
                     return false;
 
-            if (RequiredCharacterClasses.Any() && RequiredCharacterClasses.ContainsKey(characterClass.ClassName) && RequiredCharacterClasses[characterClass.ClassName] > characterClass.Level)
+            if (RequiredCharacterClasses.Any() && (RequiredCharacterClasses.ContainsKey(characterClass.ClassName) == false || RequiredCharacterClasses[characterClass.ClassName] > characterClass.Level))
                 return false;
 
             return baseAttack >= RequiredBaseAttack;

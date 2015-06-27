@@ -8,6 +8,7 @@ using NUnit.Framework;
 namespace NPCGen.Tests.Integration.Common
 {
     [TestFixture]
+    [Integration]
     public abstract class IntegrationTests
     {
         private IKernel kernel;

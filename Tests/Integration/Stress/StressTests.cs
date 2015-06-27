@@ -17,6 +17,7 @@ using NUnit.Framework;
 namespace NPCGen.Tests.Integration.Stress
 {
     [TestFixture]
+    [Stress]
     public abstract class StressTests : IntegrationTests
     {
         [Inject]

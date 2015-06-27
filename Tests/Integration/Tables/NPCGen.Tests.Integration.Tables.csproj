@@ -67,6 +67,8 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Abilities\Feats\Data\HalfElfFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\HighElfFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\FeatGroupsTests.cs" />
     <Compile Include="Abilities\Skills\AssignPointToCrossClassSkillTests.cs" />
     <Compile Include="Abilities\Skills\ClassSkillsTests.cs" />
@@ -95,6 +97,7 @@
     <Compile Include="Abilities\Skills\RacialAdjustments\TieflingSkillAdjustmentsTests.cs" />
     <Compile Include="Abilities\Skills\RacialAdjustments\TroglodyteSkillAdjustmentsTests.cs" />
     <Compile Include="Abilities\Skills\RacialAdjustments\WereboarSkillAdjustmentsTests.cs" />
+    <Compile Include="Abilities\Skills\RacialAdjustments\WerewolfSkillAdjustmentsTests.cs" />
     <Compile Include="Abilities\Skills\RacialAdjustments\WildElfSkillAdjustmentsTests.cs" />
     <Compile Include="Abilities\Skills\RacialAdjustments\WoodElfSkillAdjustmentsTests.cs" />
     <Compile Include="Abilities\Skills\SkillCollectionTests.cs" />
@@ -208,6 +211,7 @@
     <Compile Include="Abilities\Stats\StatPrioritiesTests.cs" />
     <Compile Include="Abilities\Stats\StrengthStatAdjustmentsTests.cs" />
     <Compile Include="Abilities\Stats\WisdomStatAdjustmentsTests.cs" />
+    <Compile Include="TableAttribute.cs" />
     <Compile Include="TableTests.cs" />
     <Compile Include="TraitsTests.cs" />
   </ItemGroup>

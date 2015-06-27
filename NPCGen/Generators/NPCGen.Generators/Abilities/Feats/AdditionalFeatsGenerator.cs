@@ -48,6 +48,8 @@ namespace NPCGen.Generators.Abilities.Feats
             var numberOfAdditionalFeats = characterClass.Level / 3 + 1;
             if (race.BaseRace.Id == RaceConstants.BaseRaces.HumanId)
                 numberOfAdditionalFeats++;
+            if (characterClass.ClassName == CharacterClassConstants.Rogue && characterClass.Level >= 10)
+                numberOfAdditionalFeats += (characterClass.Level - 10) / 3 + 1;
 
             var feats = PopulateFeatsFrom(characterClass, stats, skills, baseAttack, preselectedFeats, availableFeats, numberOfAdditionalFeats);
 
@@ -113,6 +115,8 @@ namespace NPCGen.Generators.Abilities.Feats
 
                 if (featSelection.FeatId == FeatConstants.SpellMasteryId)
                     feat.Strength = stats[StatConstants.Intelligence].Bonus;
+                else if (featSelection.FeatId == FeatConstants.SkillMasteryId)
+                    feat.Strength = stats[StatConstants.Intelligence].Bonus + 3;
 
                 feats.Add(feat);
 

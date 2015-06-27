@@ -1,5 +1,7 @@
 ﻿using System;
+using EquipmentGen.Common.Items;
 using NPCGen.Common.Abilities.Feats;
+using NPCGen.Common.Abilities.Skills;
 using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Races;
 using NPCGen.Tables.Interfaces;
@@ -15,54 +17,116 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
             get { return TableNameConstants.Set.Collection.FeatGroups; }
         }
 
-        [TestCase(CharacterClassConstants.Rogue,
-            FeatConstants.SneakAttackId,
-            FeatConstants.TrapfindingId,
-            FeatConstants.EvasionId,
-            FeatConstants.UncannyDodgeId,
-            FeatConstants.TrapSenseId,
-            FeatConstants.ImprovedUncannyDodgeId)]
+        [TestCase(CharacterClassConstants.Wizard,
+            FeatConstants.ScribeScrollId,
+            FeatConstants.SimpleWeaponProficiencyId + WeaponConstants.Club,
+            FeatConstants.SimpleWeaponProficiencyId + WeaponConstants.Dagger,
+            FeatConstants.SimpleWeaponProficiencyId + WeaponConstants.HeavyCrossbow,
+            FeatConstants.SimpleWeaponProficiencyId + WeaponConstants.LightCrossbow,
+            FeatConstants.SimpleWeaponProficiencyId + WeaponConstants.Quarterstaff)]
         [TestCase(RaceConstants.BaseRaces.DeepHalflingId,
-            FeatConstants.SaveBonusId,
-            FeatConstants.AttackBonusId,
-            FeatConstants.SkillBonusId,
+            FeatConstants.SaveBonusId + "All",
+            FeatConstants.SaveBonusId + "Fear",
+            FeatConstants.AttackBonusId + "ThrowOrSling",
+            FeatConstants.SkillBonusId + SkillConstants.Listen,
+            FeatConstants.SkillBonusId + SkillConstants.Appraise,
             FeatConstants.DarkvisionId,
             FeatConstants.StonecunningId)]
         [TestCase(RaceConstants.BaseRaces.GoblinId,
             FeatConstants.DarkvisionId,
-            FeatConstants.SkillBonusId)]
+            FeatConstants.SkillBonusId + SkillConstants.MoveSilently,
+            FeatConstants.SkillBonusId + SkillConstants.Ride)]
         [TestCase(RaceConstants.BaseRaces.HalfElfId,
             FeatConstants.ImmuneToEffectId,
             FeatConstants.SaveBonusId,
             FeatConstants.LowLightVisionId,
             FeatConstants.ElvenBloodId,
-            FeatConstants.SkillBonusId)]
+            FeatConstants.SkillBonusId + SkillConstants.Search,
+            FeatConstants.SkillBonusId + SkillConstants.Spot,
+            FeatConstants.SkillBonusId + SkillConstants.Listen,
+            FeatConstants.SkillBonusId + SkillConstants.Diplomacy,
+            FeatConstants.SkillBonusId + SkillConstants.GatherInformation)]
         [TestCase(RaceConstants.BaseRaces.HighElfId,
             FeatConstants.ImmuneToEffectId,
             FeatConstants.SaveBonusId,
             FeatConstants.LowLightVisionId,
-            FeatConstants.MartialWeaponProficiencyId,
-            FeatConstants.SkillBonusId)]
+            FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Longsword,
+            FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Rapier,
+            FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Longbow,
+            FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Shortbow,
+            FeatConstants.SkillBonusId + SkillConstants.Search,
+            FeatConstants.SkillBonusId + SkillConstants.Spot,
+            FeatConstants.SkillBonusId + SkillConstants.Listen)]
         [TestCase(RaceConstants.BaseRaces.HillDwarfId,
             FeatConstants.DarkvisionId,
             FeatConstants.StonecunningId,
-            FeatConstants.WeaponFamiliarityId,
+            FeatConstants.WeaponFamiliarityId + WeaponConstants.DwarvenUrgrosh,
+            FeatConstants.WeaponFamiliarityId + WeaponConstants.DwarvenWaraxe,
             FeatConstants.StabilityId,
-            FeatConstants.SaveBonusId,
-            FeatConstants.AttackBonusId,
+            FeatConstants.SaveBonusId + "Poison",
+            FeatConstants.SaveBonusId + "Spell",
+            FeatConstants.AttackBonusId + RaceConstants.BaseRaces.Orc,
+            FeatConstants.AttackBonusId + RaceConstants.BaseRaces.Goblin,
             FeatConstants.DodgeBonusId,
-            FeatConstants.SkillBonusId)]
+            FeatConstants.SkillBonusId + SkillConstants.Appraise)]
         [TestCase(RaceConstants.BaseRaces.HumanId)]
         [TestCase(RaceConstants.BaseRaces.LizardfolkId,
+            FeatConstants.SimpleWeaponProficiencyId,
+            FeatConstants.ShieldProficiencyId,
             FeatConstants.NaturalArmorId,
             FeatConstants.HoldBreathId,
-            FeatConstants.NaturalWeaponId)]
+            FeatConstants.NaturalWeaponId + "Claw",
+            FeatConstants.NaturalWeaponId + "Bite")]
+        [TestCase(RaceConstants.Metaraces.NoneId)]
+        [TestCase("")]
         [TestCase(TableNameConstants.Set.Collection.Groups.TakenMultipleTimes,
             FeatConstants.SpellMasteryId,
-            FeatConstants.ToughnessId)]
+            FeatConstants.ToughnessId,
+            FeatConstants.SkillMasteryId,
+            FeatConstants.SkillBonusId,
+            FeatConstants.AttackBonusId,
+            FeatConstants.DodgeBonusId,
+            FeatConstants.SaveBonusId)]
         public override void DistinctCollection(String name, params String[] collection)
         {
             base.DistinctCollection(name, collection);
+        }
+
+        [Test]
+        public void RogueFeatSelections()
+        {
+            var featIds = new[]
+            {
+                FeatConstants.SneakAttackId + "1",
+                FeatConstants.SneakAttackId + "2",
+                FeatConstants.SneakAttackId + "3",
+                FeatConstants.SneakAttackId + "4",
+                FeatConstants.SneakAttackId + "5",
+                FeatConstants.SneakAttackId + "6",
+                FeatConstants.SneakAttackId + "7",
+                FeatConstants.SneakAttackId + "8",
+                FeatConstants.SneakAttackId + "9",
+                FeatConstants.SneakAttackId + "10",
+                FeatConstants.TrapfindingId,
+                FeatConstants.EvasionId,
+                FeatConstants.UncannyDodgeId,
+                FeatConstants.TrapSenseId + "1",
+                FeatConstants.TrapSenseId + "2",
+                FeatConstants.TrapSenseId + "3",
+                FeatConstants.TrapSenseId + "4",
+                FeatConstants.TrapSenseId + "5",
+                FeatConstants.TrapSenseId + "6",
+                FeatConstants.ImprovedUncannyDodgeId,
+                FeatConstants.SimpleWeaponProficiencyId,
+                FeatConstants.MartialWeaponProficiencyId + WeaponConstants.HandCrossbow,
+                FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Rapier,
+                FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Sap,
+                FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Shortbow,
+                FeatConstants.MartialWeaponProficiencyId + WeaponConstants.ShortSword,
+                FeatConstants.LightArmorProficiencyId
+            };
+
+            base.DistinctCollection(TableNameConstants.Set.Collection.Groups.Additional, featIds);
         }
 
         [Test]

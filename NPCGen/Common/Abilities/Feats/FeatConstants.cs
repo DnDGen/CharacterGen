@@ -224,6 +224,8 @@ namespace NPCGen.Common.Abilities.Feats
         public const String SaveBonusId = "SaveBonus";
         public const String Scent = "Scent";
         public const String ScentId = "Scent";
+        public const String ScribeScroll = "Scribe Scroll";
+        public const String ScribeScrollId = "ScribeScroll";
         public const String SelfSufficient = "Self-Sufficient";
         public const String SelfSufficientId = "SelfSufficient";
         public const String ShieldProficiency = "Shield Proficiency";

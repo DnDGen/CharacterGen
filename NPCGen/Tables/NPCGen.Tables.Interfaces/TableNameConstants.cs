@@ -28,7 +28,6 @@ namespace NPCGen.Tables.Interfaces
 
             public static class Collection
             {
-                public const String AdditionalFeatClassNameRequirements = "AdditionalFeatClassNameRequirements";
                 public const String AdditionalFeatData = "AdditionalFeatData";
                 public const String AdditionalFeatFeatRequirements = "AdditionalFeatFeatRequirements";
                 public const String ArmorClassModifiers = "ArmorClassModifiers";
