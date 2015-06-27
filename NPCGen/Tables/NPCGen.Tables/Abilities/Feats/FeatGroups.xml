@@ -255,4 +255,17 @@
         <item>SimpleWeaponProficiencyDagger</item>
         <item>SimpleWeaponProficiencyQuarterstaff</item>
     </object>
+    <object>
+        <name>WoodElf</name>
+        <item>SkillBonusSearch</item>
+        <item>SkillBonusSpot</item>
+        <item>SkillBonusListen</item>
+        <item>SaveBonus</item>
+        <item>ImmuneToEffect</item>
+        <item>LowLightVision</item>
+        <item>MartialWeaponProficiencyLongsword</item>
+        <item>MartialWeaponProficiencyRapier</item>
+        <item>MartialWeaponProficiencyLongbow</item>
+        <item>MartialWeaponProficiencyShortbow</item>
+    </object>
 </items>

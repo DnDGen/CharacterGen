@@ -92,21 +92,44 @@ namespace NPCGen.Generators.Abilities.Feats
         private IEnumerable<String> GetFoci(IEnumerable<Feat> otherFeats, AdditionalFeatSelection sourceFeat)
         {
             var sourceFeatFoci = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, sourceFeat.FocusType);
+            var sourceRequiresProficiency = sourceFeat.RequiredFeatIds.Contains(TableNameConstants.Set.Collection.Groups.Proficiency);
 
-            if (otherFeats.Any(f => RequirementsHaveFoci(sourceFeat, f)) == false)
+            if (sourceFeat.FocusType == FeatConstants.MartialWeaponProficiencyId)
+            {
+                var weaponFamiliartyFeats = otherFeats.Where(f => f.Name.Id == FeatConstants.WeaponFamiliarityId);
+                var familiarityFoci = weaponFamiliartyFeats.Select(f => f.Focus);
+                sourceFeatFoci = sourceFeatFoci.Union(familiarityFoci);
+            }
+
+            if (sourceRequiresProficiency == false && otherFeats.Any(f => RequirementsHaveFoci(sourceFeat, f)) == false)
                 return sourceFeatFoci;
 
-            var requiredFeat = otherFeats.Where(f => RequirementsHaveFoci(sourceFeat, f));
-            var requirementFoci = requiredFeat.Where(f => f.Focus != WeaponProficiencyConstants.All).Select(f => f.Focus);
-            var featWithAllFoci = requiredFeat.Where(f => f.Focus == WeaponProficiencyConstants.All);
+            var proficiencyFeatIds = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, TableNameConstants.Set.Collection.Groups.Proficiency);
+            var proficiencyFeats = otherFeats.Where(f => proficiencyFeatIds.Contains(f.Name.Id));
 
-            foreach (var featWithAllFocus in featWithAllFoci)
+            var requiredFeats = otherFeats.Where(f => RequirementsHaveFoci(sourceFeat, f));
+            requiredFeats = requiredFeats.Union(proficiencyFeats);
+
+            var requirementFoci = requiredFeats.Where(f => f.Focus != WeaponProficiencyConstants.All).Select(f => f.Focus);
+            var featsWithAllFocus = requiredFeats.Where(f => f.Focus == WeaponProficiencyConstants.All);
+
+            foreach (var featWithAllFocus in featsWithAllFocus)
             {
                 var explodedFoci = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, featWithAllFocus.Name.Id);
+
+                if (featWithAllFocus.Name.Id == FeatConstants.MartialWeaponProficiencyId)
+                {
+                    var weaponFamiliartyFeats = otherFeats.Where(f => f.Name.Id == FeatConstants.WeaponFamiliarityId);
+                    var familiarityFoci = weaponFamiliartyFeats.Select(f => f.Focus);
+                    explodedFoci = explodedFoci.Union(familiarityFoci);
+                }
+
                 requirementFoci = requirementFoci.Union(explodedFoci);
             }
 
-            return requirementFoci.Intersect(sourceFeatFoci);
+            var applicableFoci = requirementFoci.Intersect(sourceFeatFoci);
+
+            return applicableFoci;
         }
 
         private List<Feat> PopulateFeatsFrom(CharacterClass characterClass, Dictionary<String, Stat> stats, Dictionary<String, Skill> skills, BaseAttack baseAttack, IEnumerable<Feat> preselectedFeats, IEnumerable<AdditionalFeatSelection> sourceFeats, Int32 quantity)

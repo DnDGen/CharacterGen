@@ -66,6 +66,7 @@ namespace NPCGen.Tables.Interfaces
                     public const String Mages = "Mages";
                     public const String Monsters = "Monsters";
                     public const String NaturalArmor = "NaturalArmor";
+                    public const String Proficiency = "Proficiency";
                     public const String SchoolsOfMagic = "Schools of Magic";
                     public const String Size = "Size";
                     public const String Skills = "Skills";

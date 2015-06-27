@@ -4,6 +4,7 @@ using NPCGen.Common.Abilities.Skills;
 using NPCGen.Common.Abilities.Stats;
 using NPCGen.Common.CharacterClasses;
 using NPCGen.Selectors.Interfaces.Objects;
+using NPCGen.Tables.Interfaces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Unit.Selectors.Objects
@@ -175,6 +176,34 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
             feats.Add("yet another feat");
 
             selection.RequiredFeatIds = new[] { "feat", "other required feat" };
+
+            var met = selection.MutableRequirementsMet(feats);
+            Assert.That(met, Is.True);
+        }
+
+        [Test]
+        public void ProficiencyRequirementDoesNotAffectMutableRequirements()
+        {
+            selection.RequiredFeatIds = new[] { TableNameConstants.Set.Collection.Groups.Proficiency };
+
+            var met = selection.MutableRequirementsMet(feats);
+            Assert.That(met, Is.True);
+        }
+
+        [Test]
+        public void WithProficiencyRequirement_OtherRequirementsNotIgnored()
+        {
+            selection.RequiredFeatIds = new[] { TableNameConstants.Set.Collection.Groups.Proficiency, "feat1" };
+
+            var met = selection.MutableRequirementsMet(feats);
+            Assert.That(met, Is.False);
+        }
+
+        [Test]
+        public void WithProficiencyRequirement_OtherRequirementsAreHonored()
+        {
+            feats.Add("feat1");
+            selection.RequiredFeatIds = new[] { TableNameConstants.Set.Collection.Groups.Proficiency, "feat1" };
 
             var met = selection.MutableRequirementsMet(feats);
             Assert.That(met, Is.True);

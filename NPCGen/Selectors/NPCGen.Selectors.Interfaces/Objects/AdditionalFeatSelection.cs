@@ -5,6 +5,7 @@ using NPCGen.Common.Abilities.Feats;
 using NPCGen.Common.Abilities.Skills;
 using NPCGen.Common.Abilities.Stats;
 using NPCGen.Common.CharacterClasses;
+using NPCGen.Tables.Interfaces;
 
 namespace NPCGen.Selectors.Interfaces.Objects
 {
@@ -52,7 +53,9 @@ namespace NPCGen.Selectors.Interfaces.Objects
 
         public Boolean MutableRequirementsMet(IEnumerable<String> featIds)
         {
-            var missedRequirements = RequiredFeatIds.Except(featIds);
+            var requirementsWithoutProficiency = RequiredFeatIds.Except(new[] { TableNameConstants.Set.Collection.Groups.Proficiency });
+
+            var missedRequirements = requirementsWithoutProficiency.Except(featIds);
             return missedRequirements.Any() == false;
         }
     }

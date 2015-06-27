@@ -796,5 +796,118 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             Assert.That(onlyFeat.Name.Id, Is.EqualTo(additionalFeatSelections[0].FeatId));
             Assert.That(onlyFeat.Focus, Is.EqualTo("school 2"));
         }
+
+        [Test]
+        public void IfWeaponFamiliarityAndAllMartialOnRequirement_AddInFamiliarityTypes()
+        {
+            characterClass.Level = 1;
+            AddFeatSelections(1);
+            additionalFeatSelections[0].FocusType = "specific application";
+            additionalFeatSelections[0].RequiredFeatIds = new[] { FeatConstants.MartialWeaponProficiencyId };
+
+            var schools = new[] { "school 2", "school 3", "weird weapon" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, "specific application")).Returns(schools);
+
+            var feat = new Feat();
+            feat.Focus = WeaponProficiencyConstants.All;
+            feat.Name.Id = FeatConstants.MartialWeaponProficiencyId;
+            preselectedFeats.Add(feat);
+
+            var familiarity = new Feat();
+            familiarity.Focus = "weird weapon";
+            familiarity.Name.Id = FeatConstants.WeaponFamiliarityId;
+            preselectedFeats.Add(familiarity);
+
+            var prereqSchools = new[] { "school 1", "school 2" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, FeatConstants.MartialWeaponProficiencyId)).Returns(prereqSchools);
+
+            mockDice.Setup(d => d.Roll(1).d(2)).Returns(2);
+
+            var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
+            var onlyFeat = feats.Single();
+
+            Assert.That(onlyFeat.Name.Id, Is.EqualTo(additionalFeatSelections[0].FeatId));
+            Assert.That(onlyFeat.Focus, Is.EqualTo("weird weapon"));
+        }
+
+        [Test]
+        public void ProficiencyFulfillsProficiencyRequirement()
+        {
+            characterClass.Level = 1;
+            AddFeatSelections(1);
+            additionalFeatSelections[0].FocusType = "focus type";
+            additionalFeatSelections[0].RequiredFeatIds = new[] { TableNameConstants.Set.Collection.Groups.Proficiency };
+
+            var schools = new[] { "school 2", "school 3" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, "focus type")).Returns(schools);
+
+            var proficiencyFeats = new[] { "proficiency1", "proficiency2" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, TableNameConstants.Set.Collection.Groups.Proficiency)).Returns(proficiencyFeats);
+
+            var proficiency = new Feat();
+            proficiency.Focus = "school 2";
+            proficiency.Name.Id = "proficiency2";
+            preselectedFeats.Add(proficiency);
+
+            var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
+            var onlyFeat = feats.Single();
+
+            Assert.That(onlyFeat.Name.Id, Is.EqualTo(additionalFeatSelections[0].FeatId));
+            Assert.That(onlyFeat.Focus, Is.EqualTo("school 2"));
+        }
+
+        [Test]
+        public void ProficiencyWithAllFulfillsProficiencyRequirement()
+        {
+            characterClass.Level = 1;
+            AddFeatSelections(1);
+            additionalFeatSelections[0].FocusType = "focus type";
+            additionalFeatSelections[0].RequiredFeatIds = new[] { TableNameConstants.Set.Collection.Groups.Proficiency };
+
+            var schools = new[] { "school 2", "school 3" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, "focus type")).Returns(schools);
+
+            var proficiencyFeats = new[] { "proficiency1", "proficiency2" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, TableNameConstants.Set.Collection.Groups.Proficiency)).Returns(proficiencyFeats);
+
+            var proficiency = new Feat();
+            proficiency.Focus = WeaponProficiencyConstants.All;
+            proficiency.Name.Id = "proficiency2";
+            preselectedFeats.Add(proficiency);
+
+            var proficiencySchools = new[] { "school 1", "school 2" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, "proficiency2")).Returns(proficiencySchools);
+
+            var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
+            var onlyFeat = feats.Single();
+
+            Assert.That(onlyFeat.Name.Id, Is.EqualTo(additionalFeatSelections[0].FeatId));
+            Assert.That(onlyFeat.Focus, Is.EqualTo("school 2"));
+        }
+
+        [Test]
+        public void IfWeaponFamiliarityAndMartialWeaponFocusType_AddInFamiliarityTypes()
+        {
+            characterClass.Level = 1;
+            AddFeatSelections(1);
+            additionalFeatSelections[0].FocusType = FeatConstants.MartialWeaponProficiencyId;
+            additionalFeatSelections[0].FeatId = FeatConstants.MartialWeaponProficiencyId;
+
+            var schools = new[] { "school 2", "school 3" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, FeatConstants.MartialWeaponProficiencyId)).Returns(schools);
+
+            var familiarity = new Feat();
+            familiarity.Focus = "weird weapon";
+            familiarity.Name.Id = FeatConstants.WeaponFamiliarityId;
+            preselectedFeats.Add(familiarity);
+
+            mockDice.Setup(d => d.Roll(1).d(3)).Returns(3);
+
+            var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
+            var onlyFeat = feats.Single();
+
+            Assert.That(onlyFeat.Name.Id, Is.EqualTo(additionalFeatSelections[0].FeatId));
+            Assert.That(onlyFeat.Focus, Is.EqualTo("weird weapon"));
+        }
     }
 }

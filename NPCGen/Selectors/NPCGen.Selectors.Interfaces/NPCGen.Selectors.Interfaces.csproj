@@ -66,6 +66,10 @@
       <Project>{0bc49af8-8c54-46b4-80a4-9cda1c14282c}</Project>
       <Name>NPCGen.Mappers.Interfaces</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Tables\NPCGen.Tables.Interfaces\NPCGen.Tables.Interfaces.csproj">
+      <Project>{b0abd6a7-a3f9-456b-b820-0e90426c5fa8}</Project>
+      <Name>NPCGen.Tables.Interfaces</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

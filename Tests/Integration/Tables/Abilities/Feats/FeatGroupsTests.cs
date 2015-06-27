@@ -17,6 +17,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
             get { return TableNameConstants.Set.Collection.FeatGroups; }
         }
 
+        [TestCase("")]
         [TestCase(CharacterClassConstants.Cleric,
             FeatConstants.SimpleWeaponProficiencyId,
             FeatConstants.LightArmorProficiencyId,
@@ -91,7 +92,17 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.NaturalWeaponId + "Claw",
             FeatConstants.NaturalWeaponId + "Bite")]
         [TestCase(RaceConstants.Metaraces.NoneId)]
-        [TestCase("")]
+        [TestCase(RaceConstants.BaseRaces.WoodElfId,
+            FeatConstants.ImmuneToEffectId,
+            FeatConstants.SaveBonusId,
+            FeatConstants.LowLightVisionId,
+            FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Longsword,
+            FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Rapier,
+            FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Longbow,
+            FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Shortbow,
+            FeatConstants.SkillBonusId + SkillConstants.Search,
+            FeatConstants.SkillBonusId + SkillConstants.Spot,
+            FeatConstants.SkillBonusId + SkillConstants.Listen)]
         [TestCase(TableNameConstants.Set.Collection.Groups.TakenMultipleTimes,
             FeatConstants.SpellMasteryId,
             FeatConstants.ToughnessId,

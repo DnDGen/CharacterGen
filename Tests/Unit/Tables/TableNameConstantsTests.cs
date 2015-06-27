@@ -58,6 +58,7 @@ namespace NPCGen.Tests.Unit.Tables
         [TestCase(TableNameConstants.Set.Collection.Groups.Mages, "Mages")]
         [TestCase(TableNameConstants.Set.Collection.Groups.Monsters, "Monsters")]
         [TestCase(TableNameConstants.Set.Collection.Groups.NaturalArmor, "NaturalArmor")]
+        [TestCase(TableNameConstants.Set.Collection.Groups.Proficiency, "Proficiency")]
         [TestCase(TableNameConstants.Set.Collection.Groups.SchoolsOfMagic, "Schools of Magic")]
         [TestCase(TableNameConstants.Set.Collection.Groups.Size, "Size")]
         [TestCase(TableNameConstants.Set.Collection.Groups.Skills, "Skills")]

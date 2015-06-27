@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+    <object>
+        <name>SkillBonusAppraise</name>
+        <item>SkillBonus</item>
+        <item></item>
+        <item>0</item>
+        <item>2</item>
+        <item>Appraise (Stone or metal items)</item>
+        <item>0</item>
+        <item></item>
+    </object>
+    <object>
+        <name>AttackBonusGoblin</name>
+        <item>AttackBonus</item>
+        <item></item>
+        <item>0</item>
+        <item>1</item>
+        <item>Goblinoids</item>
+        <item>0</item>
+        <item></item>
+    </object>
+    <object>
+        <name>AttackBonusOrc</name>
+        <item>AttackBonus</item>
+        <item></item>
+        <item>0</item>
+        <item>1</item>
+        <item>Orcs</item>
+        <item>0</item>
+        <item></item>
+    </object>
+    <object>
+        <name>SaveBonusSpell</name>
+        <item>SaveBonus</item>
+        <item></item>
+        <item>0</item>
+        <item>2</item>
+        <item>Spells and spell-like effects</item>
+        <item>0</item>
+        <item></item>
+    </object>
+    <object>
+        <name>SaveBonusPoison</name>
+        <item>SaveBonus</item>
+        <item></item>
+        <item>0</item>
+        <item>2</item>
+        <item>Poison</item>
+        <item>0</item>
+        <item></item>
+    </object>
+    <object>
+        <name>DodgeBonus</name>
+        <item>DodgeBonus</item>
+        <item></item>
+        <item>0</item>
+        <item>4</item>
+        <item>Giants</item>
+        <item>0</item>
+        <item></item>
+    </object>
+    <object>
+        <name>Stability</name>
+        <item>Stability</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+    </object>
+    <object>
+        <name>WeaponFamiliarityDwarven urgrosh</name>
+        <item>WeaponFamiliarity</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item>Dwarven urgrosh</item>
+        <item>0</item>
+        <item></item>
+    </object>
+    <object>
+        <name>WeaponFamiliarityDwarven waraxe</name>
+        <item>WeaponFamiliarity</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item>Dwarven waraxe</item>
+        <item>0</item>
+        <item></item>
+    </object>
+    <object>
+        <name>Stonecunning</name>
+        <item>Stonecunning</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+    </object>
+    <object>
+        <name>Darkvision</name>
+        <item>Darkvision</item>
+        <item></item>
+        <item>0</item>
+        <item>60</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+    </object>
+</items>
