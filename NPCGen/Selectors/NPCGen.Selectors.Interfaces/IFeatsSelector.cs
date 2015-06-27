@@ -8,7 +8,6 @@ namespace NPCGen.Selectors.Interfaces
     {
         IEnumerable<RacialFeatSelection> SelectRacial(String raceId);
         IEnumerable<AdditionalFeatSelection> SelectAdditional();
-        AdditionalFeatSelection SelectAdditional(String featId);
         IEnumerable<CharacterClassFeatSelection> SelectClass(String characterClassName);
     }
 }

@@ -28,23 +28,19 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
         private Dictionary<String, Stat> stats;
         private Dictionary<String, Skill> skills;
         private Mock<ICollectionsSelector> mockCollectionsSelector;
-        private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
         private Mock<IFeatsSelector> mockFeatsSelector;
         private List<AdditionalFeatSelection> additionalFeatSelections;
         private Mock<IDice> mockDice;
         private BaseAttack baseAttack;
-        private Mock<INameSelector> mockNameSelector;
         private List<Feat> preselectedFeats;
 
         [SetUp]
         public void Setup()
         {
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
-            mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
             mockFeatsSelector = new Mock<IFeatsSelector>();
             mockDice = new Mock<IDice>();
-            mockNameSelector = new Mock<INameSelector>();
-            additionalFeatsGenerator = new AdditionalFeatsGenerator(mockCollectionsSelector.Object, mockAdjustmentsSelector.Object, mockFeatsSelector.Object, mockDice.Object, mockNameSelector.Object);
+            additionalFeatsGenerator = new AdditionalFeatsGenerator(mockCollectionsSelector.Object, mockFeatsSelector.Object, mockDice.Object);
             characterClass = new CharacterClass();
             race = new Race();
             stats = new Dictionary<String, Stat>();
@@ -89,7 +85,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             var featIds = feats.Select(f => f.Name.Id);
 
             for (var i = 0; i < numberOfFeats; i++)
-                Assert.That(featIds, Contains.Item(additionalFeatSelections[i].Name.Id));
+                Assert.That(featIds, Contains.Item(additionalFeatSelections[i].FeatId));
 
             Assert.That(featIds.Count(), Is.EqualTo(numberOfFeats));
         }
@@ -100,19 +96,15 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             {
                 var id = String.Format("feat{0}", i + 1);
                 AddAdditionalFeat(id);
-                mockNameSelector.Setup(s => s.Select(id)).Returns(id + " name");
             }
         }
 
         private void AddAdditionalFeat(String featId)
         {
             var selection = new AdditionalFeatSelection();
-            selection.Name.Id = featId;
-            selection.Name.Name = featId + " name";
+            selection.FeatId = featId;
 
             additionalFeatSelections.Add(selection);
-            mockFeatsSelector.Setup(s => s.SelectAdditional(featId)).Returns(selection);
-            mockNameSelector.Setup(s => s.Select(featId)).Returns(selection.Name.Name);
         }
 
         [Test]
@@ -141,10 +133,10 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             additionalFeatSelections[0].IsFighterFeat = true;
 
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
-            var featNames = feats.Select(f => f.Name);
+            var featIds = feats.Select(f => f.Name.Id);
 
-            Assert.That(featNames, Contains.Item(additionalFeatSelections[0].Name));
-            Assert.That(featNames.Count(), Is.EqualTo(1));
+            Assert.That(featIds, Contains.Item(additionalFeatSelections[0].FeatId));
+            Assert.That(featIds.Count(), Is.EqualTo(1));
         }
 
         [Test]
@@ -159,8 +151,8 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             var featIds = feats.Select(f => f.Name.Id);
 
-            Assert.That(featIds, Contains.Item(additionalFeatSelections[0].Name.Id));
-            Assert.That(featIds, Contains.Item(additionalFeatSelections[2].Name.Id));
+            Assert.That(featIds, Contains.Item(additionalFeatSelections[0].FeatId));
+            Assert.That(featIds, Contains.Item(additionalFeatSelections[2].FeatId));
             Assert.That(featIds.Count(), Is.EqualTo(2));
         }
 
@@ -175,11 +167,11 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             mockDice.Setup(d => d.Roll(1).d(2)).Returns(1);
 
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
-            var featNames = feats.Select(f => f.Name);
+            var featIds = feats.Select(f => f.Name.Id);
 
-            Assert.That(featNames, Contains.Item(additionalFeatSelections[0].Name));
-            Assert.That(featNames, Contains.Item(additionalFeatSelections[2].Name));
-            Assert.That(featNames.Count(), Is.EqualTo(2));
+            Assert.That(featIds, Contains.Item(additionalFeatSelections[0].FeatId));
+            Assert.That(featIds, Contains.Item(additionalFeatSelections[2].FeatId));
+            Assert.That(featIds.Count(), Is.EqualTo(2));
         }
 
         [Test]
@@ -193,7 +185,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             var featIds = feats.Select(f => f.Name.Id);
 
-            Assert.That(featIds, Contains.Item(additionalFeatSelections[1].Name.Id));
+            Assert.That(featIds, Contains.Item(additionalFeatSelections[1].FeatId));
             Assert.That(featIds.Count(), Is.EqualTo(1));
         }
 
@@ -231,7 +223,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             var totalFeats = numberOfBonusFeats + additionalFeats;
 
             for (var i = 0; i < totalFeats; i++)
-                Assert.That(featIds, Contains.Item(additionalFeatSelections[i].Name.Id));
+                Assert.That(featIds, Contains.Item(additionalFeatSelections[i].FeatId));
 
             Assert.That(featIds.Count(), Is.EqualTo(totalFeats));
         }
@@ -247,8 +239,8 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             var featIds = feats.Select(f => f.Name.Id);
 
-            Assert.That(featIds, Contains.Item(additionalFeatSelections[0].Name.Id));
-            Assert.That(featIds, Contains.Item(additionalFeatSelections[2].Name.Id));
+            Assert.That(featIds, Contains.Item(additionalFeatSelections[0].FeatId));
+            Assert.That(featIds, Contains.Item(additionalFeatSelections[2].FeatId));
             Assert.That(featIds.Count(), Is.EqualTo(2));
         }
 
@@ -263,7 +255,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             var featIds = feats.Select(f => f.Name.Id);
 
-            Assert.That(featIds, Contains.Item(additionalFeatSelections[0].Name.Id));
+            Assert.That(featIds, Contains.Item(additionalFeatSelections[0].FeatId));
             Assert.That(featIds.Count(), Is.EqualTo(1));
         }
 
@@ -280,8 +272,8 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             var featIds = feats.Select(f => f.Name.Id);
 
-            Assert.That(featIds, Contains.Item(additionalFeatSelections[0].Name.Id));
-            Assert.That(featIds, Contains.Item(additionalFeatSelections[2].Name.Id));
+            Assert.That(featIds, Contains.Item(additionalFeatSelections[0].FeatId));
+            Assert.That(featIds, Contains.Item(additionalFeatSelections[2].FeatId));
             Assert.That(featIds.Count(), Is.EqualTo(2));
         }
 
@@ -299,11 +291,11 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             mockDice.Setup(d => d.Roll(1).d(2)).Returns(2);
 
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
-            var featIds = feats.Select(f => f.Name);
+            var featIds = feats.Select(f => f.Name.Id);
 
-            Assert.That(featIds, Contains.Item(additionalFeatSelections[0].Name.Id));
-            Assert.That(featIds, Contains.Item(additionalFeatSelections[2].Name.Id));
-            Assert.That(featIds, Contains.Item(additionalFeatSelections[3].Name.Id));
+            Assert.That(featIds, Contains.Item(additionalFeatSelections[0].FeatId));
+            Assert.That(featIds, Contains.Item(additionalFeatSelections[2].FeatId));
+            Assert.That(featIds, Contains.Item(additionalFeatSelections[3].FeatId));
             Assert.That(featIds.Count(), Is.EqualTo(3));
         }
 
@@ -320,8 +312,8 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             var featIds = feats.Select(f => f.Name.Id);
 
-            Assert.That(featIds, Contains.Item(additionalFeatSelections[0].Name.Id));
-            Assert.That(featIds, Contains.Item(additionalFeatSelections[2].Name.Id));
+            Assert.That(featIds, Contains.Item(additionalFeatSelections[0].FeatId));
+            Assert.That(featIds, Contains.Item(additionalFeatSelections[2].FeatId));
             Assert.That(featIds.Count(), Is.EqualTo(2));
         }
 
@@ -339,7 +331,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             var featIds = feats.Select(f => f.Name.Id);
 
-            Assert.That(featIds, Contains.Item(additionalFeatSelections[2].Name.Id));
+            Assert.That(featIds, Contains.Item(additionalFeatSelections[2].FeatId));
             Assert.That(featIds.Count(), Is.EqualTo(1));
         }
 
@@ -377,7 +369,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             var totalFeats = numberOfBonusFeats + additionalFeats;
 
             for (var i = 0; i < totalFeats; i++)
-                Assert.That(featIds, Contains.Item(additionalFeatSelections[i].Name.Id));
+                Assert.That(featIds, Contains.Item(additionalFeatSelections[i].FeatId));
 
             Assert.That(featIds.Count(), Is.EqualTo(totalFeats));
         }
@@ -393,9 +385,9 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             var featIds = feats.Select(f => f.Name.Id);
 
-            Assert.That(featIds, Contains.Item(additionalFeatSelections[0].Name.Id));
-            Assert.That(featIds, Contains.Item(additionalFeatSelections[1].Name.Id));
-            Assert.That(featIds, Contains.Item(additionalFeatSelections[3].Name.Id));
+            Assert.That(featIds, Contains.Item(additionalFeatSelections[0].FeatId));
+            Assert.That(featIds, Contains.Item(additionalFeatSelections[1].FeatId));
+            Assert.That(featIds, Contains.Item(additionalFeatSelections[3].FeatId));
             Assert.That(featIds.Count(), Is.EqualTo(3));
         }
 
@@ -410,8 +402,8 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             var featIds = feats.Select(f => f.Name.Id);
 
-            Assert.That(featIds, Contains.Item(additionalFeatSelections[0].Name.Id));
-            Assert.That(featIds, Contains.Item(additionalFeatSelections[1].Name.Id));
+            Assert.That(featIds, Contains.Item(additionalFeatSelections[0].FeatId));
+            Assert.That(featIds, Contains.Item(additionalFeatSelections[1].FeatId));
             Assert.That(featIds.Count(), Is.EqualTo(2));
         }
 
@@ -427,11 +419,11 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             var featIds = feats.Select(f => f.Name.Id);
 
-            Assert.That(featIds, Contains.Item(additionalFeatSelections[0].Name.Id));
-            Assert.That(featIds, Contains.Item(additionalFeatSelections[1].Name.Id));
-            Assert.That(featIds, Contains.Item(additionalFeatSelections[2].Name.Id));
-            Assert.That(featIds, Contains.Item(additionalFeatSelections[3].Name.Id));
-            Assert.That(featIds, Contains.Item(additionalFeatSelections[5].Name.Id));
+            Assert.That(featIds, Contains.Item(additionalFeatSelections[0].FeatId));
+            Assert.That(featIds, Contains.Item(additionalFeatSelections[1].FeatId));
+            Assert.That(featIds, Contains.Item(additionalFeatSelections[2].FeatId));
+            Assert.That(featIds, Contains.Item(additionalFeatSelections[3].FeatId));
+            Assert.That(featIds, Contains.Item(additionalFeatSelections[5].FeatId));
             Assert.That(featIds.Count(), Is.EqualTo(5));
         }
 
@@ -454,12 +446,12 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             var featIds = feats.Select(f => f.Name.Id);
 
-            Assert.That(featIds, Contains.Item(additionalFeatSelections[0].Name.Id));
-            Assert.That(featIds, Contains.Item(additionalFeatSelections[2].Name.Id));
-            Assert.That(featIds, Contains.Item(additionalFeatSelections[3].Name.Id));
-            Assert.That(featIds, Contains.Item(additionalFeatSelections[4].Name.Id));
-            Assert.That(featIds, Contains.Item(additionalFeatSelections[5].Name.Id));
-            Assert.That(featIds, Contains.Item(additionalFeatSelections[6].Name.Id));
+            Assert.That(featIds, Contains.Item(additionalFeatSelections[0].FeatId));
+            Assert.That(featIds, Contains.Item(additionalFeatSelections[2].FeatId));
+            Assert.That(featIds, Contains.Item(additionalFeatSelections[3].FeatId));
+            Assert.That(featIds, Contains.Item(additionalFeatSelections[4].FeatId));
+            Assert.That(featIds, Contains.Item(additionalFeatSelections[5].FeatId));
+            Assert.That(featIds, Contains.Item(additionalFeatSelections[6].FeatId));
             Assert.That(featIds.Count(), Is.EqualTo(6));
         }
 
@@ -468,7 +460,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
         {
             characterClass.Level = 3;
             AddFeatSelections(3);
-            additionalFeatSelections[1].RequiredFeatIds = new[] { additionalFeatSelections[0].Name.Id };
+            additionalFeatSelections[1].RequiredFeatIds = new[] { additionalFeatSelections[0].FeatId };
 
             mockDice.Setup(d => d.Roll(1).d(3)).Returns(1);
             mockDice.Setup(d => d.Roll(1).d(2)).Returns(1);
@@ -476,15 +468,23 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             var featIds = feats.Select(f => f.Name.Id);
 
-            Assert.That(featIds, Contains.Item(additionalFeatSelections[0].Name.Id));
-            Assert.That(featIds, Contains.Item(additionalFeatSelections[1].Name.Id));
+            Assert.That(featIds, Contains.Item(additionalFeatSelections[0].FeatId));
+            Assert.That(featIds, Contains.Item(additionalFeatSelections[1].FeatId));
             Assert.That(featIds.Count(), Is.EqualTo(2));
         }
 
         [Test]
         public void CannotPickAPreselectedFeat()
         {
-            throw new NotImplementedException();
+            var feat = new Feat();
+            feat.Name.Id = "feat1";
+            preselectedFeats.Add(feat);
+
+            AddFeatSelections(2);
+
+            var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
+            var featIds = feats.Select(f => f.Name.Id);
+            Assert.That(featIds.Single(), Is.EqualTo("feat2"));
         }
 
         [Test]
@@ -499,7 +499,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             var onlyFeat = feats.Single();
 
             mockCollectionsSelector.Verify(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, It.IsAny<String>()), Times.Never);
-            Assert.That(onlyFeat.Name, Is.EqualTo(additionalFeatSelections[0].Name));
+            Assert.That(onlyFeat.Name.Id, Is.EqualTo(additionalFeatSelections[0].FeatId));
             Assert.That(onlyFeat.Focus, Is.Empty);
         }
 
@@ -515,7 +515,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             var onlyFeat = feats.Single();
 
-            Assert.That(onlyFeat.Name, Is.EqualTo(additionalFeatSelections[0].Name));
+            Assert.That(onlyFeat.Name.Id, Is.EqualTo(additionalFeatSelections[0].FeatId));
             Assert.That(onlyFeat.Focus, Is.EqualTo("school 1"));
         }
 
@@ -533,7 +533,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             var onlyFeat = feats.Single();
 
-            Assert.That(onlyFeat.Name, Is.EqualTo(additionalFeatSelections[0].Name));
+            Assert.That(onlyFeat.Name.Id, Is.EqualTo(additionalFeatSelections[0].FeatId));
             Assert.That(onlyFeat.Focus, Is.EqualTo("school 2"));
         }
 
@@ -551,61 +551,47 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             var firstFeat = feats.First();
             var lastFeat = feats.Last();
 
-            Assert.That(firstFeat.Name, Is.EqualTo(additionalFeatSelections[0].Name));
+            Assert.That(firstFeat.Name.Id, Is.EqualTo(additionalFeatSelections[0].FeatId));
             Assert.That(firstFeat.Focus, Is.EqualTo("school 1"));
-            Assert.That(lastFeat.Name, Is.EqualTo(additionalFeatSelections[0].Name));
+            Assert.That(lastFeat.Name.Id, Is.EqualTo(additionalFeatSelections[0].FeatId));
             Assert.That(lastFeat.Focus, Is.EqualTo("school 2"));
             Assert.That(feats.Count(), Is.EqualTo(2));
         }
 
         [Test]
-        public void SpellMasteryStrengthIsNumberOfSpellsLearned()
+        public void SpellMasteryStrengthIsIntelligenceBonus()
         {
             characterClass.Level = 1;
             AddFeatSelections(1);
-            additionalFeatSelections[0].Name.Id = FeatConstants.SpellMasteryId;
+            additionalFeatSelections[0].FeatId = FeatConstants.SpellMasteryId;
             stats[StatConstants.Intelligence].Value = 14;
 
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             var firstFeat = feats.First();
-            var lastFeat = feats.Last();
 
             Assert.That(firstFeat.Name.Id, Is.EqualTo(FeatConstants.SpellMasteryId));
-            Assert.That(firstFeat.Focus, Is.EqualTo("2"));
+            Assert.That(firstFeat.Strength, Is.EqualTo(stats[StatConstants.Intelligence].Bonus));
             Assert.That(feats.Count(), Is.EqualTo(1));
         }
 
         [Test]
-        public void SpellMasteryCanIncreaseSpellsKnown()
+        public void FeatsThatCanBeTakenMultipleTimesWithoutFociAreAllowed()
         {
-            characterClass.Level = 3;
             AddFeatSelections(1);
-            additionalFeatSelections[0].Name.Id = FeatConstants.SpellMasteryId;
-            stats[StatConstants.Intelligence].Value = 14;
+            characterClass.Level = 3;
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, TableNameConstants.Set.Collection.Groups.TakenMultipleTimes)).Returns(new[] { "feat1" });
 
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
-            var firstFeat = feats.First();
-            var lastFeat = feats.Last();
+            var first = feats.First();
+            var last = feats.Last();
 
-            Assert.That(firstFeat.Name.Id, Is.EqualTo(FeatConstants.SpellMasteryId));
-            Assert.That(firstFeat.Focus, Is.EqualTo("4"));
-            Assert.That(feats.Count(), Is.EqualTo(1));
+            Assert.That(first.Name.Id, Is.EqualTo("feat1"));
+            Assert.That(last.Name.Id, Is.EqualTo("feat1"));
+            Assert.That(feats.Count(), Is.EqualTo(2));
         }
 
         [Test]
-        public void ToughnessCanBeTakenMultipleTimes()
-        {
-            throw new NotImplementedException();
-        }
-
-        [Test]
-        public void ToughnessFocusIsNumberOfTimesTaken()
-        {
-            throw new NotImplementedException();
-        }
-
-        [Test]
-        public void SpellcastersCanSelectRayForWeaponSpecificApplications()
+        public void SpellcastersCanSelectRayForWeaponFoci()
         {
             AddFeatSelections(1);
             additionalFeatSelections[0].FocusType = TableNameConstants.Set.Collection.Groups.WeaponsWithUnarmedAndGrappleAndRay;
@@ -620,12 +606,12 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             var onlyFeat = feats.Single();
 
-            Assert.That(onlyFeat.Name, Is.EqualTo(additionalFeatSelections[0].Name));
+            Assert.That(onlyFeat.Name.Id, Is.EqualTo(additionalFeatSelections[0].FeatId));
             Assert.That(onlyFeat.Focus, Is.EqualTo(WeaponProficiencyConstants.Ray));
         }
 
         [Test]
-        public void NonSpellcastersCannotSelectRayForWeaponSpecificApplications()
+        public void NonSpellcastersCannotSelectRayForWeaponFoci()
         {
             AddFeatSelections(1);
             additionalFeatSelections[0].FocusType = TableNameConstants.Set.Collection.Groups.WeaponsWithUnarmedAndGrappleAndRay;
@@ -640,17 +626,17 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             var onlyFeat = feats.Single();
 
-            Assert.That(onlyFeat.Name, Is.EqualTo(additionalFeatSelections[0].Name));
+            Assert.That(onlyFeat.Name.Id, Is.EqualTo(additionalFeatSelections[0].FeatId));
             Assert.That(onlyFeat.Focus, Is.EqualTo("weapon"));
         }
 
         [Test]
-        public void FeatsWithoutSpecificApplicationsButWithRequirementsThatHaveSpecificApplicationsDoNotUseSameSpecificApplication()
+        public void FeatsWithoutFociButWithRequirementsThatHaveFociDoNotUseSameFocus()
         {
             characterClass.Level = 3;
             AddFeatSelections(2);
             additionalFeatSelections[0].FocusType = "specific application";
-            additionalFeatSelections[1].RequiredFeatIds = new[] { additionalFeatSelections[0].Name.Id };
+            additionalFeatSelections[1].RequiredFeatIds = new[] { additionalFeatSelections[0].FeatId };
 
             var schools = new[] { "school 1" };
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, "specific application")).Returns(schools);
@@ -661,19 +647,19 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             var firstFeat = feats.First();
             var lastFeat = feats.Last();
 
-            Assert.That(firstFeat.Name, Is.EqualTo(additionalFeatSelections[0].Name));
+            Assert.That(firstFeat.Name.Id, Is.EqualTo(additionalFeatSelections[0].FeatId));
             Assert.That(firstFeat.Focus, Is.EqualTo("school 1"));
-            Assert.That(lastFeat.Name, Is.EqualTo(additionalFeatSelections[1].Name));
+            Assert.That(lastFeat.Name.Id, Is.EqualTo(additionalFeatSelections[1].FeatId));
             Assert.That(lastFeat.Focus, Is.Empty);
         }
 
         [Test]
-        public void FeatsWithSpecificApplicationsAndRequirementsThatHaveSpecificApplicationsUseSameSpecificApplication()
+        public void FeatsWithFociAndRequirementsThatHaveFociUseFocus()
         {
             characterClass.Level = 3;
             AddFeatSelections(2);
             additionalFeatSelections[0].FocusType = "specific application";
-            additionalFeatSelections[1].RequiredFeatIds = new[] { additionalFeatSelections[0].Name.Id };
+            additionalFeatSelections[1].RequiredFeatIds = new[] { additionalFeatSelections[0].FeatId };
             additionalFeatSelections[1].FocusType = "specific application";
 
             var schools = new[] { "school 1", "school 2", "school 3" };
@@ -686,19 +672,19 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             var firstFeat = feats.First();
             var lastFeat = feats.Last();
 
-            Assert.That(firstFeat.Name, Is.EqualTo(additionalFeatSelections[0].Name));
+            Assert.That(firstFeat.Name.Id, Is.EqualTo(additionalFeatSelections[0].FeatId));
             Assert.That(firstFeat.Focus, Is.EqualTo("school 3"));
-            Assert.That(lastFeat.Name, Is.EqualTo(additionalFeatSelections[1].Name));
+            Assert.That(lastFeat.Name.Id, Is.EqualTo(additionalFeatSelections[1].FeatId));
             Assert.That(lastFeat.Focus, Is.EqualTo("school 3"));
         }
 
         [Test]
-        public void IfFeatRequirementHasMultipleSpecificApplications_PickRandomlyAmongThem()
+        public void IfFeatRequirementHasMultipleFoci_PickRandomlyAmongThem()
         {
             characterClass.Level = 6;
             AddFeatSelections(2);
             additionalFeatSelections[0].FocusType = "specific application";
-            additionalFeatSelections[1].RequiredFeatIds = new[] { additionalFeatSelections[0].Name.Id };
+            additionalFeatSelections[1].RequiredFeatIds = new[] { additionalFeatSelections[0].FeatId };
             additionalFeatSelections[1].FocusType = "specific application";
 
             var schools = new[] { "school 1", "school 2", "school 3" };
@@ -712,16 +698,16 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             var secondFeat = feats.ElementAt(1);
             var lastFeat = feats.Last();
 
-            Assert.That(firstFeat.Name, Is.EqualTo(additionalFeatSelections[0].Name));
+            Assert.That(firstFeat.Name.Id, Is.EqualTo(additionalFeatSelections[0].FeatId));
             Assert.That(firstFeat.Focus, Is.EqualTo("school 3"));
-            Assert.That(secondFeat.Name, Is.EqualTo(additionalFeatSelections[0].Name));
+            Assert.That(secondFeat.Name.Id, Is.EqualTo(additionalFeatSelections[0].FeatId));
             Assert.That(secondFeat.Focus, Is.EqualTo("school 1"));
-            Assert.That(lastFeat.Name, Is.EqualTo(additionalFeatSelections[1].Name));
+            Assert.That(lastFeat.Name.Id, Is.EqualTo(additionalFeatSelections[1].FeatId));
             Assert.That(lastFeat.Focus, Is.EqualTo("school 1"));
         }
 
         [Test]
-        public void IfSpecificApplicationTypeIsSchoolOfMagic_CannotPickProhibitedFieldAsSpecificApplication()
+        public void IfFocusTypeIsSchoolOfMagic_CannotPickProhibitedFieldAsSpecificApplication()
         {
             AddFeatSelections(1);
             additionalFeatSelections[0].FocusType = TableNameConstants.Set.Collection.Groups.SchoolsOfMagic;
@@ -736,7 +722,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             var onlyFeat = feats.Single();
 
-            Assert.That(onlyFeat.Name, Is.EqualTo(additionalFeatSelections[0].Name));
+            Assert.That(onlyFeat.Name.Id, Is.EqualTo(additionalFeatSelections[0].FeatId));
             Assert.That(onlyFeat.Focus, Is.EqualTo("school 4"));
         }
     }

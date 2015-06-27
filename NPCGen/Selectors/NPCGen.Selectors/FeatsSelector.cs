@@ -44,8 +44,9 @@ namespace NPCGen.Selectors
                 var racialFeatSelection = new RacialFeatSelection();
                 racialFeatSelection.FeatId = racialFeatId;
 
-                var tableName = String.Format(TableNameConstants.Formattable.Collection.RACEFeatData, racialFeatId);
+                var tableName = String.Format(TableNameConstants.Formattable.Collection.RACEFeatData, raceId);
                 var featData = collectionsSelector.SelectFrom(tableName, racialFeatId).ToArray();
+
                 racialFeatSelection.SizeRequirement = featData[RacialSizeRequirementIndex];
                 racialFeatSelection.Strength = Convert.ToInt32(featData[RacialStrengthIndex]);
                 racialFeatSelection.MinimumHitDieRequirement = Convert.ToInt32(featData[RacialMinimumHitDiceRequirementIndex]);
@@ -73,10 +74,10 @@ namespace NPCGen.Selectors
             return additionalFeatSelections;
         }
 
-        public AdditionalFeatSelection SelectAdditional(String featId)
+        private AdditionalFeatSelection SelectAdditional(String featId)
         {
             var additionalFeatSelection = new AdditionalFeatSelection();
-            additionalFeatSelection.Name.Id = featId;
+            additionalFeatSelection.FeatId = featId;
 
             var featData = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AdditionalFeatData, featId).ToArray();
             additionalFeatSelection.IsFighterFeat = Convert.ToBoolean(featData[AdditionalIsFighterFeatIndex]);
@@ -106,7 +107,7 @@ namespace NPCGen.Selectors
                 var classFeatSelection = new CharacterClassFeatSelection();
                 classFeatSelection.FeatId = classFeatId;
 
-                var tableName = String.Format(TableNameConstants.Formattable.Collection.CLASSFeatData, classFeatId);
+                var tableName = String.Format(TableNameConstants.Formattable.Collection.CLASSFeatData, characterClassName);
                 var featData = collectionsSelector.SelectFrom(tableName, classFeatId).ToArray();
 
                 classFeatSelection.FocusType = featData[ClassFocusTypeIndex];

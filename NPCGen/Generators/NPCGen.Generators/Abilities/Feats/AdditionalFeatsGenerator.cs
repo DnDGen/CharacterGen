@@ -9,7 +9,6 @@ using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Combats;
 using NPCGen.Common.Items;
 using NPCGen.Common.Races;
-using NPCGen.Generators.Interfaces.Abilities;
 using NPCGen.Generators.Interfaces.Abilities.Feats;
 using NPCGen.Selectors.Interfaces;
 using NPCGen.Selectors.Interfaces.Objects;
@@ -20,19 +19,14 @@ namespace NPCGen.Generators.Abilities.Feats
     public class AdditionalFeatsGenerator : IAdditionalFeatsGenerator
     {
         private ICollectionsSelector collectionsSelector;
-        private IAdjustmentsSelector adjustmentsSelector;
         private IFeatsSelector featsSelector;
         private IDice dice;
-        private INameSelector nameSelector;
 
-        public AdditionalFeatsGenerator(ICollectionsSelector collectionsSelector, IAdjustmentsSelector adjustmentsSelector,
-            IFeatsSelector featsSelector, IDice dice, INameSelector nameSelector)
+        public AdditionalFeatsGenerator(ICollectionsSelector collectionsSelector, IFeatsSelector featsSelector, IDice dice)
         {
             this.collectionsSelector = collectionsSelector;
-            this.adjustmentsSelector = adjustmentsSelector;
             this.featsSelector = featsSelector;
             this.dice = dice;
-            this.nameSelector = nameSelector;
         }
 
         public IEnumerable<Feat> GenerateWith(CharacterClass characterClass, Race race, Dictionary<String, Stat> stats,
@@ -71,41 +65,29 @@ namespace NPCGen.Generators.Abilities.Feats
             return Enumerable.Empty<Feat>();
         }
 
-        private String GetFocusOf(Feat feat, AdditionalFeatSelection sourceFeat, IEnumerable<Feat> feats, CharacterClass characterClass, Int32 intelligenceBonus)
+        private String GetFocusOf(AdditionalFeatSelection featSelection, IEnumerable<Feat> feats, CharacterClass characterClass)
         {
-            if (feat.Name.Id == FeatConstants.SpellMasteryId)
-            {
-                if (!feats.Any(f => f.Name.Id == FeatConstants.SpellMasteryId))
-                    return Convert.ToString(intelligenceBonus);
-
-                var previousSpellMastery = feats.First(f => f.Name.Id == FeatConstants.SpellMasteryId);
-                var previousSpellCount = Convert.ToInt32(previousSpellMastery.Focus);
-                var newSpellCount = previousSpellCount + intelligenceBonus;
-
-                return Convert.ToString(newSpellCount);
-            }
-
-            if (String.IsNullOrEmpty(sourceFeat.FocusType))
+            if (String.IsNullOrEmpty(featSelection.FocusType))
                 return String.Empty;
 
-            var specificApplications = GetSpecificApplications(feats, sourceFeat);
-            var usedSpecificApplications = feats.Where(f => f.Name == feat.Name).Select(f => f.Focus);
-            specificApplications = specificApplications.Except(usedSpecificApplications);
+            var foci = GetFoci(feats, featSelection);
+            var usedFoci = feats.Where(f => f.Name.Id == featSelection.FeatId).Select(f => f.Focus);
+            foci = foci.Except(usedFoci);
 
-            if (sourceFeat.FocusType == TableNameConstants.Set.Collection.Groups.SchoolsOfMagic)
-                specificApplications = specificApplications.Except(characterClass.ProhibitedFields);
+            if (featSelection.FocusType == TableNameConstants.Set.Collection.Groups.SchoolsOfMagic)
+                foci = foci.Except(characterClass.ProhibitedFields);
 
             var spellcasters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, TableNameConstants.Set.Collection.Groups.Spellcasters);
-            if (!spellcasters.Contains(characterClass.ClassName))
-                specificApplications = specificApplications.Except(new[] { WeaponProficiencyConstants.Ray });
+            if (spellcasters.Contains(characterClass.ClassName) == false)
+                foci = foci.Except(new[] { WeaponProficiencyConstants.Ray });
 
-            var index = GetRandomIndexOf(specificApplications);
-            var specificApplication = specificApplications.ElementAt(index);
+            var index = GetRandomIndexOf(foci);
+            var focus = foci.ElementAt(index);
 
-            return specificApplication;
+            return focus;
         }
 
-        private IEnumerable<String> GetSpecificApplications(IEnumerable<Feat> otherFeats, AdditionalFeatSelection sourceFeat)
+        private IEnumerable<String> GetFoci(IEnumerable<Feat> otherFeats, AdditionalFeatSelection sourceFeat)
         {
             if (otherFeats.Any(f => RequirementsHaveFoci(sourceFeat, f)))
                 return otherFeats.Where(f => RequirementsHaveFoci(sourceFeat, f)).Select(f => f.Focus);
@@ -116,33 +98,42 @@ namespace NPCGen.Generators.Abilities.Feats
         private List<Feat> PopulateFeatsFrom(CharacterClass characterClass, Dictionary<String, Stat> stats, Dictionary<String, Skill> skills, BaseAttack baseAttack, IEnumerable<Feat> preselectedFeats, IEnumerable<AdditionalFeatSelection> sourceFeats, Int32 quantity)
         {
             var feats = new List<Feat>();
+            var chosenFeats = preselectedFeats;
+            var availableFeats = GetAvailableFeats(sourceFeats, chosenFeats);
 
-            while (quantity-- > 0)
+            while (quantity-- > 0 && availableFeats.Any())
             {
-                var availableFeats = sourceFeats.Where(f => f.MutableRequirementsMet(feats))
-                                                .Select(f => new Feat { Name = f.Name, Focus = f.FocusType })
-                                                .Except(feats)
-                                                .Except(preselectedFeats);
-
-                if (!availableFeats.Any())
-                    break;
-
                 var index = GetRandomIndexOf(availableFeats);
-                var feat = availableFeats.ElementAt(index);
-                var sourceFeat = sourceFeats.First(f => f.Name == feat.Name);
+                var featSelection = availableFeats.ElementAt(index);
 
-                feat.Focus = GetFocusOf(feat, sourceFeat, feats, characterClass, stats[StatConstants.Intelligence].Bonus);
+                var feat = new Feat();
+                feat.Name.Id = featSelection.FeatId;
+                feat.Focus = GetFocusOf(featSelection, chosenFeats, characterClass);
+                feat.Frequency = featSelection.Frequency;
 
-                if (feat.Name.Id == FeatConstants.SpellMasteryId && feats.Any(f => f.Name.Id == FeatConstants.SpellMasteryId))
-                {
-                    var spellMasteryFeat = feats.First(f => f.Name.Id == FeatConstants.SpellMasteryId);
-                    feats.Remove(spellMasteryFeat);
-                }
+                if (featSelection.FeatId == FeatConstants.SpellMasteryId)
+                    feat.Strength = stats[StatConstants.Intelligence].Bonus;
 
                 feats.Add(feat);
+
+                chosenFeats = preselectedFeats.Union(feats);
+                availableFeats = GetAvailableFeats(sourceFeats, chosenFeats);
             }
 
             return feats;
+        }
+
+        private IEnumerable<AdditionalFeatSelection> GetAvailableFeats(IEnumerable<AdditionalFeatSelection> sourceFeats, IEnumerable<Feat> chosenFeats)
+        {
+            var chosenFeatIds = chosenFeats.Select(f => f.Name.Id);
+            var featsWithRequirementsMet = sourceFeats.Where(f => f.MutableRequirementsMet(chosenFeatIds));
+            var alreadyChosenFeats = sourceFeats.Where(f => f.FocusType == String.Empty && chosenFeatIds.Contains(f.FeatId));
+
+            var featIdsAllowingMultipleTakes = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, TableNameConstants.Set.Collection.Groups.TakenMultipleTimes);
+            var featsAllowingMultipleTakes = alreadyChosenFeats.Where(f => featIdsAllowingMultipleTakes.Contains(f.FeatId));
+            var excludedFeats = alreadyChosenFeats.Except(featsAllowingMultipleTakes);
+
+            return featsWithRequirementsMet.Except(excludedFeats);
         }
 
         private Int32 GetRandomIndexOf(IEnumerable<Object> collection)

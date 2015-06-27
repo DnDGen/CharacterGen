@@ -113,6 +113,10 @@ namespace NPCGen.Generators.Abilities.Feats
             if (feat.Frequency.TimePeriod != String.Empty)
                 return false;
 
+            var featIdsAllowingMultipleTakes = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, TableNameConstants.Set.Collection.Groups.TakenMultipleTimes);
+            if (featIdsAllowingMultipleTakes.Contains(feat.Name.Id))
+                return false;
+
             var count = allFeats.Count(f => f.Name.Id == feat.Name.Id
                                         && f.Focus == feat.Focus
                                         && f.Frequency.TimePeriod == String.Empty);
@@ -122,6 +126,9 @@ namespace NPCGen.Generators.Abilities.Feats
 
         private Boolean CanCombine(Feat feat, IEnumerable<Feat> allFeats)
         {
+            if (feat.Frequency.TimePeriod == String.Empty)
+                return false;
+
             var count = allFeats.Count(f => f.Name.Id == feat.Name.Id
                                         && f.Focus == feat.Focus
                                         && f.Strength == feat.Strength

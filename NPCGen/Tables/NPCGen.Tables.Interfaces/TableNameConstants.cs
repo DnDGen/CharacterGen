@@ -73,6 +73,7 @@ namespace NPCGen.Tables.Interfaces
                     public const String Spellcasters = "Spellcasters";
                     public const String Standard = "Standard";
                     public const String Stealth = "Stealth";
+                    public const String TakenMultipleTimes = "TakenMultipleTimes";
                     public const String Warriors = "Warriors";
                     public const String Weapons = "Weapons";
                     public const String WeaponsWithUnarmedAndGrapple = "Weapons with unarmed and grapple";

@@ -65,6 +65,7 @@ namespace NPCGen.Tests.Unit.Tables
         [TestCase(TableNameConstants.Set.Collection.Groups.Spellcasters, "Spellcasters")]
         [TestCase(TableNameConstants.Set.Collection.Groups.Standard, "Standard")]
         [TestCase(TableNameConstants.Set.Collection.Groups.Stealth, "Stealth")]
+        [TestCase(TableNameConstants.Set.Collection.Groups.TakenMultipleTimes, "TakenMultipleTimes")]
         [TestCase(TableNameConstants.Set.Collection.Groups.Warriors, "Warriors")]
         [TestCase(TableNameConstants.Set.Collection.Groups.Weapons, "Weapons")]
         [TestCase(TableNameConstants.Set.Collection.Groups.WeaponsWithUnarmedAndGrapple, "Weapons with unarmed and grapple")]
