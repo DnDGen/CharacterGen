@@ -1,0 +1,260 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+    <object>
+        <name>Schools of Magic</name>
+        <item>Abjuration</item>
+        <item>Conjuration</item>
+        <item>Divination</item>
+        <item>Enchantment</item>
+        <item>Evocation</item>
+        <item>Illusion</item>
+        <item>Necromancy</item>
+        <item>Transmutation</item>
+    </object>
+    <object>
+        <name>Weapons</name>
+        <item>Bastard sword</item>
+        <item>Battleaxe</item>
+        <item>Club</item>
+        <item>Dagger</item>
+        <item>Dart</item>
+        <item>Dire flail</item>
+        <item>Dwarven urgrosh</item>
+        <item>Dwarven waraxe</item>
+        <item>Falchion</item>
+        <item>Gauntlet</item>
+        <item>Glaive</item>
+        <item>Gnome hooked hammer</item>
+        <item>Greataxe</item>
+        <item>Greatclub</item>
+        <item>Greatsword</item>
+        <item>Guisarme</item>
+        <item>Halberd</item>
+        <item>Halfspear</item>
+        <item>Handaxe</item>
+        <item>Hand crossbow</item>
+        <item>Heavy crossbow</item>
+        <item>Heavy flail</item>
+        <item>Heavy mace</item>
+        <item>Heavy pick</item>
+        <item>Javelin</item>
+        <item>Kama</item>
+        <item>Kukri</item>
+        <item>Lance</item>
+        <item>Light crossbow</item>
+        <item>Light flail</item>
+        <item>Light hammer</item>
+        <item>Light mace</item>
+        <item>Light pick</item>
+        <item>Longbow</item>
+        <item>Longspear</item>
+        <item>Longsword</item>
+        <item>Morningstar</item>
+        <item>Net</item>
+        <item>Nunchaku</item>
+        <item>Orc double axe</item>
+        <item>Punching dagger</item>
+        <item>Quarterstaff</item>
+        <item>Ranseur</item>
+        <item>Rapier</item>
+        <item>Repeating crossbow</item>
+        <item>Sap</item>
+        <item>Scimitar</item>
+        <item>Scythe</item>
+        <item>Shortbow</item>
+        <item>Shortspear</item>
+        <item>Short sword</item>
+        <item>Shuriken</item>
+        <item>Siangham</item>
+        <item>Sickle</item>
+        <item>Sling</item>
+        <item>Spiked chain</item>
+        <item>Spiked gauntlet</item>
+        <item>Throwing axe</item>
+        <item>Trident</item>
+        <item>Two-bladed sword</item>
+        <item>Warhammer</item>
+        <item>Whip</item>
+    </object>
+    <object>
+        <name>Weapons with unarmed and grapple</name>
+        <item>Bastard sword</item>
+        <item>Battleaxe</item>
+        <item>Club</item>
+        <item>Dagger</item>
+        <item>Dart</item>
+        <item>Dire flail</item>
+        <item>Dwarven urgrosh</item>
+        <item>Dwarven waraxe</item>
+        <item>Falchion</item>
+        <item>Gauntlet</item>
+        <item>Glaive</item>
+        <item>Gnome hooked hammer</item>
+        <item>Greataxe</item>
+        <item>Greatclub</item>
+        <item>Greatsword</item>
+        <item>Guisarme</item>
+        <item>Halberd</item>
+        <item>Halfspear</item>
+        <item>Handaxe</item>
+        <item>Hand crossbow</item>
+        <item>Heavy crossbow</item>
+        <item>Heavy flail</item>
+        <item>Heavy mace</item>
+        <item>Heavy pick</item>
+        <item>Javelin</item>
+        <item>Kama</item>
+        <item>Kukri</item>
+        <item>Lance</item>
+        <item>Light crossbow</item>
+        <item>Light flail</item>
+        <item>Light hammer</item>
+        <item>Light mace</item>
+        <item>Light pick</item>
+        <item>Longbow</item>
+        <item>Longspear</item>
+        <item>Longsword</item>
+        <item>Morningstar</item>
+        <item>Net</item>
+        <item>Nunchaku</item>
+        <item>Orc double axe</item>
+        <item>Punching dagger</item>
+        <item>Quarterstaff</item>
+        <item>Ranseur</item>
+        <item>Rapier</item>
+        <item>Repeating crossbow</item>
+        <item>Sap</item>
+        <item>Scimitar</item>
+        <item>Scythe</item>
+        <item>Shortbow</item>
+        <item>Shortspear</item>
+        <item>Short sword</item>
+        <item>Shuriken</item>
+        <item>Siangham</item>
+        <item>Sickle</item>
+        <item>Sling</item>
+        <item>Spiked chain</item>
+        <item>Spiked gauntlet</item>
+        <item>Throwing axe</item>
+        <item>Trident</item>
+        <item>Two-bladed sword</item>
+        <item>Warhammer</item>
+        <item>Whip</item>
+        <item>Unarmed Strike</item>
+        <item>Grapple</item>
+    </object>
+    <object>
+        <name>Weapons with unarmed, grapple, and ray</name>
+        <item>Bastard sword</item>
+        <item>Battleaxe</item>
+        <item>Club</item>
+        <item>Dagger</item>
+        <item>Dart</item>
+        <item>Dire flail</item>
+        <item>Dwarven urgrosh</item>
+        <item>Dwarven waraxe</item>
+        <item>Falchion</item>
+        <item>Gauntlet</item>
+        <item>Glaive</item>
+        <item>Gnome hooked hammer</item>
+        <item>Greataxe</item>
+        <item>Greatclub</item>
+        <item>Greatsword</item>
+        <item>Guisarme</item>
+        <item>Halberd</item>
+        <item>Halfspear</item>
+        <item>Handaxe</item>
+        <item>Hand crossbow</item>
+        <item>Heavy crossbow</item>
+        <item>Heavy flail</item>
+        <item>Heavy mace</item>
+        <item>Heavy pick</item>
+        <item>Javelin</item>
+        <item>Kama</item>
+        <item>Kukri</item>
+        <item>Lance</item>
+        <item>Light crossbow</item>
+        <item>Light flail</item>
+        <item>Light hammer</item>
+        <item>Light mace</item>
+        <item>Light pick</item>
+        <item>Longbow</item>
+        <item>Longspear</item>
+        <item>Longsword</item>
+        <item>Morningstar</item>
+        <item>Net</item>
+        <item>Nunchaku</item>
+        <item>Orc double axe</item>
+        <item>Punching dagger</item>
+        <item>Quarterstaff</item>
+        <item>Ranseur</item>
+        <item>Rapier</item>
+        <item>Repeating crossbow</item>
+        <item>Sap</item>
+        <item>Scimitar</item>
+        <item>Scythe</item>
+        <item>Shortbow</item>
+        <item>Shortspear</item>
+        <item>Short sword</item>
+        <item>Shuriken</item>
+        <item>Siangham</item>
+        <item>Sickle</item>
+        <item>Sling</item>
+        <item>Spiked chain</item>
+        <item>Spiked gauntlet</item>
+        <item>Throwing axe</item>
+        <item>Trident</item>
+        <item>Two-bladed sword</item>
+        <item>Warhammer</item>
+        <item>Whip</item>
+        <item>Unarmed Strike</item>
+        <item>Grapple</item>
+        <item>Ray</item>
+    </object>
+    <object>
+        <name>Skills</name>
+        <item>Appraise</item>
+        <item>Balance</item>
+        <item>Bluff</item>
+        <item>Climb</item>
+        <item>Concentration</item>
+        <item>Decipher Script</item>
+        <item>Diplomacy</item>
+        <item>Disable Device</item>
+        <item>Disguise</item>
+        <item>Escape Artist</item>
+        <item>Forgery</item>
+        <item>Gather Information</item>
+        <item>Handle Animal</item>
+        <item>Heal</item>
+        <item>Hide</item>
+        <item>Intimidate</item>
+        <item>Jump</item>
+        <item>Knowledge (Arcana)</item>
+        <item>Knowledge (Architecture and Engineering)</item>
+        <item>Knowledge (Dungeoneering)</item>
+        <item>Knowledge (Geography)</item>
+        <item>Knowledge (History)</item>
+        <item>Knowledge (Local)</item>
+        <item>Knowledge (Nature)</item>
+        <item>Knowledge (Nobility and Royalty)</item>
+        <item>Knowledge (Religion)</item>
+        <item>Knowledge (The Planes)</item>
+        <item>Listen</item>
+        <item>Move Silently</item>
+        <item>Open Lock</item>
+        <item>Perform</item>
+        <item>Ride</item>
+        <item>Search</item>
+        <item>Sense Motive</item>
+        <item>Sleight of Hand</item>
+        <item>Spellcraft</item>
+        <item>Spot</item>
+        <item>Survival</item>
+        <item>Swim</item>
+        <item>Tumble</item>
+        <item>Use Magic Device</item>
+        <item>Use Rope</item>
+    </object>
+</items>

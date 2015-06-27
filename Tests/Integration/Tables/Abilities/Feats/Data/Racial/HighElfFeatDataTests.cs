@@ -6,7 +6,7 @@ using NPCGen.Common.Races;
 using NPCGen.Tables.Interfaces;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data
+namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
 {
     [TestFixture]
     public class HighElfFeatDataTests : CollectionTests

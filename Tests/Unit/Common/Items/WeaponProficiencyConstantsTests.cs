@@ -7,6 +7,7 @@ namespace NPCGen.Tests.Unit.Common.Items
     [TestFixture]
     public class WeaponProficiencyConstantsTests
     {
+        [TestCase(WeaponProficiencyConstants.All, "All")]
         [TestCase(WeaponProficiencyConstants.Grapple, "Grapple")]
         [TestCase(WeaponProficiencyConstants.Ray, "Ray")]
         [TestCase(WeaponProficiencyConstants.UnarmedStrike, "Unarmed Strike")]

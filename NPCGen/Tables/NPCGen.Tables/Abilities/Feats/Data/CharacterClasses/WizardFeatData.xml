@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+    <object>
+        <name>SimpleWeaponProficiencyClub</name>
+        <item>SimpleWeaponProficiency</item>
+        <item>0</item>
+        <item>Club</item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+    </object>
+    <object>
+        <name>SimpleWeaponProficiencyDagger</name>
+        <item>SimpleWeaponProficiency</item>
+        <item>0</item>
+        <item>Dagger</item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+    </object>
+    <object>
+        <name>SimpleWeaponProficiencyHeavy crossbow</name>
+        <item>SimpleWeaponProficiency</item>
+        <item>0</item>
+        <item>Heavy crossbow</item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+    </object>
+    <object>
+        <name>SimpleWeaponProficiencyLight crossbow</name>
+        <item>SimpleWeaponProficiency</item>
+        <item>0</item>
+        <item>Light crossbow</item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+    </object>
+    <object>
+        <name>SimpleWeaponProficiencyQuarterstaff</name>
+        <item>SimpleWeaponProficiency</item>
+        <item>0</item>
+        <item>Quarterstaff</item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+    </object>
+    <object>
+        <name>ScribeScroll</name>
+        <item>ScribeScroll</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+    </object>
+</items>

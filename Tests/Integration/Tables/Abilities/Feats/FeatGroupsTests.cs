@@ -79,6 +79,9 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.AttackBonusId + RaceConstants.BaseRaces.Goblin,
             FeatConstants.DodgeBonusId,
             FeatConstants.SkillBonusId + SkillConstants.Appraise)]
+        [TestCase(RaceConstants.BaseRaces.HobgoblinId,
+            FeatConstants.DarkvisionId,
+            FeatConstants.SkillBonusId)]
         [TestCase(RaceConstants.BaseRaces.HumanId)]
         [TestCase(RaceConstants.BaseRaces.LizardfolkId,
             FeatConstants.SimpleWeaponProficiencyId,

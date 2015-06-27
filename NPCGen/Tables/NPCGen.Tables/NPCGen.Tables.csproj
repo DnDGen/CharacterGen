@@ -353,7 +353,7 @@
     <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\OrcSkillAdjustments.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Abilities\Feats\Data\HighElfFeatData.xml" />
+    <EmbeddedResource Include="Abilities\Feats\Data\Racial\HighElfFeatData.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Races\BaseRaces\LandSpeeds.xml" />
@@ -484,10 +484,25 @@
     <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\WerewolfSkillAdjustments.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Abilities\Feats\Data\HalfElfFeatData.xml" />
+    <EmbeddedResource Include="Abilities\Feats\Data\Racial\HalfElfFeatData.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Abilities\Stats\IncreaseFirstPriorityStat.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Feats\Data\CharacterClasses\ClericFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Abilities\Feats\Data\Additional\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\HalfFiendSkillAdjustments.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Feats\Data\CharacterClasses\WizardFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Feats\FeatFoci.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

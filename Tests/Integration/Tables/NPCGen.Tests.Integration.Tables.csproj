@@ -67,8 +67,11 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="Abilities\Feats\Data\HalfElfFeatDataTests.cs" />
-    <Compile Include="Abilities\Feats\Data\HighElfFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\CharacterClasses\ClericFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\CharacterClasses\WizardFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\HalfElfFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\HighElfFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\FeatFociTests.cs" />
     <Compile Include="Abilities\Feats\FeatGroupsTests.cs" />
     <Compile Include="Abilities\Skills\AssignPointToCrossClassSkillTests.cs" />
     <Compile Include="Abilities\Skills\ClassSkillsTests.cs" />
@@ -81,6 +84,7 @@
     <Compile Include="Abilities\Skills\RacialAdjustments\GoblinSkillAdjustmentsTests.cs" />
     <Compile Include="Abilities\Skills\RacialAdjustments\GrayElfSkillAdjustmentsTests.cs" />
     <Compile Include="Abilities\Skills\RacialAdjustments\HalfElfSkillAdjustmentsTests.cs" />
+    <Compile Include="Abilities\Skills\RacialAdjustments\HalfFiendSkillAdjustmentsTests.cs" />
     <Compile Include="Abilities\Skills\RacialAdjustments\HalfOrcSkillAdjustmentsTests.cs" />
     <Compile Include="Abilities\Skills\RacialAdjustments\HighElfSkillAdjustmentsTests.cs" />
     <Compile Include="Abilities\Skills\RacialAdjustments\HillDwarfSkillAdjustmentsTests.cs" />
@@ -241,7 +245,9 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Abilities\Feats\Data\Additional\" />
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

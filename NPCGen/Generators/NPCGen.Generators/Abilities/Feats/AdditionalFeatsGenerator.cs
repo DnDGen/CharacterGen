@@ -91,10 +91,22 @@ namespace NPCGen.Generators.Abilities.Feats
 
         private IEnumerable<String> GetFoci(IEnumerable<Feat> otherFeats, AdditionalFeatSelection sourceFeat)
         {
-            if (otherFeats.Any(f => RequirementsHaveFoci(sourceFeat, f)))
-                return otherFeats.Where(f => RequirementsHaveFoci(sourceFeat, f)).Select(f => f.Focus);
+            var sourceFeatFoci = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, sourceFeat.FocusType);
 
-            return collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, sourceFeat.FocusType);
+            if (otherFeats.Any(f => RequirementsHaveFoci(sourceFeat, f)) == false)
+                return sourceFeatFoci;
+
+            var requiredFeat = otherFeats.Where(f => RequirementsHaveFoci(sourceFeat, f));
+            var requirementFoci = requiredFeat.Where(f => f.Focus != WeaponProficiencyConstants.All).Select(f => f.Focus);
+            var featWithAllFoci = requiredFeat.Where(f => f.Focus == WeaponProficiencyConstants.All);
+
+            foreach (var featWithAllFocus in featWithAllFoci)
+            {
+                var explodedFoci = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, featWithAllFocus.Name.Id);
+                requirementFoci = requirementFoci.Union(explodedFoci);
+            }
+
+            return requirementFoci.Intersect(sourceFeatFoci);
         }
 
         private List<Feat> PopulateFeatsFrom(CharacterClass characterClass, Dictionary<String, Stat> stats, Dictionary<String, Skill> skills, BaseAttack baseAttack, IEnumerable<Feat> preselectedFeats, IEnumerable<AdditionalFeatSelection> sourceFeats, Int32 quantity)
@@ -148,7 +160,7 @@ namespace NPCGen.Generators.Abilities.Feats
 
         private Boolean RequirementsHaveFoci(AdditionalFeatSelection sourceFeat, Feat feat)
         {
-            return sourceFeat.RequiredFeatIds.Contains(feat.Name.Id) && !String.IsNullOrEmpty(feat.Focus);
+            return sourceFeat.RequiredFeatIds.Contains(feat.Name.Id) && String.IsNullOrEmpty(feat.Focus) == false;
         }
 
         private IEnumerable<Feat> GetFighterFeats(CharacterClass characterClass, Race race, Dictionary<String, Stat> stats, Dictionary<String, Skill> skills,

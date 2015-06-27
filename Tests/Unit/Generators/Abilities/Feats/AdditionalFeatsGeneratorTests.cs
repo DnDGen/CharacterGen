@@ -770,5 +770,31 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
 
             Assert.That(featIds.Count(), Is.EqualTo(quantity));
         }
+
+        [Test]
+        public void IfFeatRequirementHasAllAsFoci_ExplodeIt()
+        {
+            characterClass.Level = 1;
+            AddFeatSelections(1);
+            additionalFeatSelections[0].FocusType = "specific application";
+            additionalFeatSelections[0].RequiredFeatIds = new[] { "prereq feat" };
+
+            var schools = new[] { "school 2", "school 3" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, "specific application")).Returns(schools);
+
+            var feat = new Feat();
+            feat.Focus = WeaponProficiencyConstants.All;
+            feat.Name.Id = "prereq feat";
+            preselectedFeats.Add(feat);
+
+            var prereqSchools = new[] { "school 1", "school 2" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, "prereq feat")).Returns(prereqSchools);
+
+            var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
+            var onlyFeat = feats.Single();
+
+            Assert.That(onlyFeat.Name.Id, Is.EqualTo(additionalFeatSelections[0].FeatId));
+            Assert.That(onlyFeat.Focus, Is.EqualTo("school 2"));
+        }
     }
 }

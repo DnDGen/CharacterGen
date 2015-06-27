@@ -187,6 +187,11 @@
         <item>Stability</item>
     </object>
     <object>
+        <name>Hobgoblin</name>
+        <item>Darkvision</item>
+        <item>SkillBonus</item>
+    </object>
+    <object>
         <name>Human</name>
     </object>
     <object>
