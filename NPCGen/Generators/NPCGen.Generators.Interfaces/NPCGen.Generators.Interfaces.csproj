@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abilities\Feats\IAdditionalFeatsGenerator.cs" />
+    <Compile Include="Abilities\Feats\IFeatFocusGenerator.cs" />
     <Compile Include="Abilities\Feats\IRacialFeatsGenerator.cs" />
     <Compile Include="Abilities\Feats\IClassFeatsGenerator.cs" />
     <Compile Include="Abilities\IAbilitiesGenerator.cs" />

@@ -7,7 +7,6 @@ using NPCGen.Common.Abilities.Skills;
 using NPCGen.Common.Abilities.Stats;
 using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Combats;
-using NPCGen.Common.Items;
 using NPCGen.Common.Races;
 using NPCGen.Generators.Interfaces.Abilities.Feats;
 using NPCGen.Selectors.Interfaces;
@@ -21,12 +20,14 @@ namespace NPCGen.Generators.Abilities.Feats
         private ICollectionsSelector collectionsSelector;
         private IFeatsSelector featsSelector;
         private IDice dice;
+        private IFeatFocusGenerator featFocusGenerator;
 
-        public AdditionalFeatsGenerator(ICollectionsSelector collectionsSelector, IFeatsSelector featsSelector, IDice dice)
+        public AdditionalFeatsGenerator(ICollectionsSelector collectionsSelector, IFeatsSelector featsSelector, IDice dice, IFeatFocusGenerator featFocusGenerator)
         {
             this.collectionsSelector = collectionsSelector;
             this.featsSelector = featsSelector;
             this.dice = dice;
+            this.featFocusGenerator = featFocusGenerator;
         }
 
         public IEnumerable<Feat> GenerateWith(CharacterClass characterClass, Race race, Dictionary<String, Stat> stats,
@@ -67,71 +68,6 @@ namespace NPCGen.Generators.Abilities.Feats
             return Enumerable.Empty<Feat>();
         }
 
-        private String GetFocusOf(AdditionalFeatSelection featSelection, IEnumerable<Feat> feats, CharacterClass characterClass)
-        {
-            if (String.IsNullOrEmpty(featSelection.FocusType))
-                return String.Empty;
-
-            var foci = GetFoci(feats, featSelection);
-            var usedFoci = feats.Where(f => f.Name.Id == featSelection.FeatId).Select(f => f.Focus);
-            foci = foci.Except(usedFoci);
-
-            if (featSelection.FocusType == TableNameConstants.Set.Collection.Groups.SchoolsOfMagic)
-                foci = foci.Except(characterClass.ProhibitedFields);
-
-            var spellcasters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, TableNameConstants.Set.Collection.Groups.Spellcasters);
-            if (spellcasters.Contains(characterClass.ClassName) == false)
-                foci = foci.Except(new[] { WeaponProficiencyConstants.Ray });
-
-            var index = GetRandomIndexOf(foci);
-            var focus = foci.ElementAt(index);
-
-            return focus;
-        }
-
-        private IEnumerable<String> GetFoci(IEnumerable<Feat> otherFeats, AdditionalFeatSelection sourceFeat)
-        {
-            var sourceFeatFoci = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, sourceFeat.FocusType);
-            var sourceRequiresProficiency = sourceFeat.RequiredFeatIds.Contains(TableNameConstants.Set.Collection.Groups.Proficiency);
-
-            if (sourceFeat.FocusType == FeatConstants.MartialWeaponProficiencyId)
-            {
-                var weaponFamiliartyFeats = otherFeats.Where(f => f.Name.Id == FeatConstants.WeaponFamiliarityId);
-                var familiarityFoci = weaponFamiliartyFeats.Select(f => f.Focus);
-                sourceFeatFoci = sourceFeatFoci.Union(familiarityFoci);
-            }
-
-            if (sourceRequiresProficiency == false && otherFeats.Any(f => RequirementsHaveFoci(sourceFeat, f)) == false)
-                return sourceFeatFoci;
-
-            var proficiencyFeatIds = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, TableNameConstants.Set.Collection.Groups.Proficiency);
-            var proficiencyFeats = otherFeats.Where(f => proficiencyFeatIds.Contains(f.Name.Id));
-
-            var requiredFeats = otherFeats.Where(f => RequirementsHaveFoci(sourceFeat, f));
-            requiredFeats = requiredFeats.Union(proficiencyFeats);
-
-            var requirementFoci = requiredFeats.Where(f => f.Focus != WeaponProficiencyConstants.All).Select(f => f.Focus);
-            var featsWithAllFocus = requiredFeats.Where(f => f.Focus == WeaponProficiencyConstants.All);
-
-            foreach (var featWithAllFocus in featsWithAllFocus)
-            {
-                var explodedFoci = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, featWithAllFocus.Name.Id);
-
-                if (featWithAllFocus.Name.Id == FeatConstants.MartialWeaponProficiencyId)
-                {
-                    var weaponFamiliartyFeats = otherFeats.Where(f => f.Name.Id == FeatConstants.WeaponFamiliarityId);
-                    var familiarityFoci = weaponFamiliartyFeats.Select(f => f.Focus);
-                    explodedFoci = explodedFoci.Union(familiarityFoci);
-                }
-
-                requirementFoci = requirementFoci.Union(explodedFoci);
-            }
-
-            var applicableFoci = requirementFoci.Intersect(sourceFeatFoci);
-
-            return applicableFoci;
-        }
-
         private List<Feat> PopulateFeatsFrom(CharacterClass characterClass, Dictionary<String, Stat> stats, Dictionary<String, Skill> skills, BaseAttack baseAttack, IEnumerable<Feat> preselectedFeats, IEnumerable<AdditionalFeatSelection> sourceFeats, Int32 quantity)
         {
             var feats = new List<Feat>();
@@ -145,7 +81,7 @@ namespace NPCGen.Generators.Abilities.Feats
 
                 var feat = new Feat();
                 feat.Name.Id = featSelection.FeatId;
-                feat.Focus = GetFocusOf(featSelection, chosenFeats, characterClass);
+                feat.Focus = featFocusGenerator.GenerateFrom(featSelection.FeatId, featSelection.FocusType, featSelection.RequiredFeatIds, chosenFeats, characterClass);
                 feat.Frequency = featSelection.Frequency;
 
                 if (featSelection.FeatId == FeatConstants.SpellMasteryId)
@@ -179,11 +115,6 @@ namespace NPCGen.Generators.Abilities.Feats
         {
             var die = collection.Count();
             return dice.Roll().d(die) - 1;
-        }
-
-        private Boolean RequirementsHaveFoci(AdditionalFeatSelection sourceFeat, Feat feat)
-        {
-            return sourceFeat.RequiredFeatIds.Contains(feat.Name.Id) && String.IsNullOrEmpty(feat.Focus) == false;
         }
 
         private IEnumerable<Feat> GetFighterFeats(CharacterClass characterClass, Race race, Dictionary<String, Stat> stats, Dictionary<String, Skill> skills,

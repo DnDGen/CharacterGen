@@ -3,7 +3,6 @@ using Ninject;
 using NPCGen.Common.Abilities.Feats;
 using NPCGen.Generators.Interfaces.Abilities;
 using NPCGen.Generators.Interfaces.Abilities.Feats;
-using NPCGen.Generators.Interfaces.Combats;
 using NPCGen.Generators.Interfaces.Randomizers.Stats;
 using NUnit.Framework;
 
@@ -21,7 +20,7 @@ namespace NPCGen.Tests.Integration.Stress.Abilities.Feats
         [Inject, Named(StatsRandomizerTypeConstants.Raw)]
         public IStatsRandomizer StatsRandomizer { get; set; }
         [Inject]
-        public ICombatGenerator CombatGenerator { get; set; }
+        public IRacialFeatsGenerator RacialFeatsGenerator { get; set; }
 
         [TestCase("ClassFeatsGenerator")]
         public override void Stress(String stressSubject)
@@ -35,8 +34,9 @@ namespace NPCGen.Tests.Integration.Stress.Abilities.Feats
             var characterClass = GetNewCharacterClass(alignment);
             var race = GetNewRace(alignment, characterClass);
             var stats = StatsGenerator.GenerateWith(StatsRandomizer, characterClass, race);
+            var racialFeats = RacialFeatsGenerator.GenerateWith(race);
 
-            var feats = ClassFeatsGenerator.GenerateWith(characterClass, stats);
+            var feats = ClassFeatsGenerator.GenerateWith(characterClass, stats, racialFeats);
 
             foreach (var feat in feats)
             {
@@ -46,7 +46,8 @@ namespace NPCGen.Tests.Integration.Stress.Abilities.Feats
                 Assert.That(feat.Frequency.Quantity, Is.Positive);
                 Assert.That(feat.Frequency.TimePeriod, Is.EqualTo(FeatConstants.Frequencies.Constant)
                     .Or.EqualTo(FeatConstants.Frequencies.AtWill)
-                    .Or.EqualTo(FeatConstants.Frequencies.Day));
+                    .Or.EqualTo(FeatConstants.Frequencies.Day)
+                    .Or.Empty);
             }
         }
     }

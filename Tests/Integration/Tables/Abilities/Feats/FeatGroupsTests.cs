@@ -18,23 +18,6 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
         }
 
         [TestCase("")]
-        [TestCase(CharacterClassConstants.Barbarian,
-            FeatConstants.SimpleWeaponProficiencyId,
-            FeatConstants.MartialWeaponProficiencyId,
-            FeatConstants.LightArmorProficiencyId,
-            FeatConstants.MediumArmorProficiencyId,
-            FeatConstants.ShieldProficiencyId,
-            FeatConstants.FastMovementId,
-            FeatConstants.IlliteracyId,
-            FeatConstants.RageId,
-            FeatConstants.UncannyDodgeId,
-            FeatConstants.TrapSenseId,
-            FeatConstants.ImprovedUncannyDodgeId,
-            FeatConstants.DamageReductionId,
-            FeatConstants.GreaterRageId,
-            FeatConstants.IndomitableWillId,
-            FeatConstants.TirelessRageId,
-            FeatConstants.MightyRageId)]
         [TestCase(CharacterClassConstants.Cleric,
             FeatConstants.SimpleWeaponProficiencyId,
             FeatConstants.LightArmorProficiencyId,
@@ -139,7 +122,47 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
         }
 
         [Test]
-        public void BardFeatSelections()
+        public void BarbarianFeatGroup()
+        {
+            var featIds = new[]
+            {
+                FeatConstants.SimpleWeaponProficiencyId,
+                FeatConstants.MartialWeaponProficiencyId,
+                FeatConstants.LightArmorProficiencyId,
+                FeatConstants.MediumArmorProficiencyId,
+                FeatConstants.ShieldProficiencyId,
+                FeatConstants.FastMovementId,
+                FeatConstants.IlliteracyId,
+                FeatConstants.RageId + "1",
+                FeatConstants.RageId + "2",
+                FeatConstants.RageId + "3",
+                FeatConstants.RageId + "4",
+                FeatConstants.RageId + "5",
+                FeatConstants.RageId + "6",
+                FeatConstants.UncannyDodgeId,
+                FeatConstants.TrapSenseId + "1",
+                FeatConstants.TrapSenseId + "2",
+                FeatConstants.TrapSenseId + "3",
+                FeatConstants.TrapSenseId + "4",
+                FeatConstants.TrapSenseId + "5",
+                FeatConstants.TrapSenseId + "6",
+                FeatConstants.ImprovedUncannyDodgeId,
+                FeatConstants.DamageReductionId + "1",
+                FeatConstants.DamageReductionId + "2",
+                FeatConstants.DamageReductionId + "3",
+                FeatConstants.DamageReductionId + "4",
+                FeatConstants.DamageReductionId + "5",
+                FeatConstants.GreaterRageId,
+                FeatConstants.IndomitableWillId,
+                FeatConstants.TirelessRageId,
+                FeatConstants.MightyRageId
+            };
+
+            base.DistinctCollection(CharacterClassConstants.Bard, featIds);
+        }
+
+        [Test]
+        public void BardFeatGroup()
         {
             var featIds = new[]
             {
@@ -172,7 +195,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
         }
 
         [Test]
-        public void RogueFeatSelections()
+        public void RogueFeatGroup()
         {
             var featIds = new[]
             {
@@ -209,7 +232,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
         }
 
         [Test]
-        public void AdditionalFeatSelections()
+        public void AdditionalFeatGroup()
         {
             var featIds = new[]
             {

@@ -36,14 +36,12 @@ namespace NPCGen.Generators.Abilities.Feats
             Dictionary<String, Skill> skills, BaseAttack baseAttack)
         {
             var racialFeats = racialFeatsGenerator.GenerateWith(race);
-            var classFeats = classFeatsGenerator.GenerateWith(characterClass, stats);
+            var classFeats = classFeatsGenerator.GenerateWith(characterClass, stats, racialFeats);
             var automaticFeats = racialFeats.Union(classFeats);
             var additionalFeats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, automaticFeats);
             var skillSynergyFeats = GetSkillSynergyFeats(skills);
 
-            var allFeats = racialFeats.Union(classFeats)
-                                      .Union(additionalFeats)
-                                      .Union(skillSynergyFeats);
+            var allFeats = automaticFeats.Union(additionalFeats).Union(skillSynergyFeats);
 
             var featsToCombine = allFeats.Where(f => CanCombine(f, allFeats));
             var featsToRemove = new List<Feat>();

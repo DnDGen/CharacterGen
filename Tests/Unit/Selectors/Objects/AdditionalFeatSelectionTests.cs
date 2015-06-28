@@ -208,5 +208,17 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
             var met = selection.MutableRequirementsMet(feats);
             Assert.That(met, Is.True);
         }
+
+        [TestCase(AdditionalFeatSelection.IsFighterFeatIndex, 0)]
+        [TestCase(AdditionalFeatSelection.IsWizardFeatIndex, 1)]
+        [TestCase(AdditionalFeatSelection.BaseAttackRequirementIndex, 2)]
+        [TestCase(AdditionalFeatSelection.FocusTypeIndex, 3)]
+        [TestCase(AdditionalFeatSelection.StrengthIndex, 4)]
+        [TestCase(AdditionalFeatSelection.FrequencyQuantityIndex, 5)]
+        [TestCase(AdditionalFeatSelection.FrequencyTimePeriodIndex, 6)]
+        public void IndexConstant(Int32 constant, Int32 value)
+        {
+            Assert.That(constant, Is.EqualTo(value));
+        }
     }
 }

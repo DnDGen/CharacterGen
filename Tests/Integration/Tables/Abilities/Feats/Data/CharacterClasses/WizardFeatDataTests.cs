@@ -21,42 +21,48 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             "",
             "0",
             "0",
-            "")]
+            "",
+            "0")]
         [TestCase(FeatConstants.SimpleWeaponProficiencyId + WeaponConstants.Club,
             FeatConstants.SimpleWeaponProficiencyId,
             "0",
             WeaponConstants.Club,
             "0",
             "0",
-            "")]
+            "",
+            "0")]
         [TestCase(FeatConstants.SimpleWeaponProficiencyId + WeaponConstants.Dagger,
             FeatConstants.SimpleWeaponProficiencyId,
             "0",
             WeaponConstants.Dagger,
             "0",
             "0",
-            "")]
+            "",
+            "0")]
         [TestCase(FeatConstants.SimpleWeaponProficiencyId + WeaponConstants.HeavyCrossbow,
             FeatConstants.SimpleWeaponProficiencyId,
             "0",
             WeaponConstants.HeavyCrossbow,
             "0",
             "0",
-            "")]
+            "",
+            "0")]
         [TestCase(FeatConstants.SimpleWeaponProficiencyId + WeaponConstants.LightCrossbow,
             FeatConstants.SimpleWeaponProficiencyId,
             "0",
             WeaponConstants.LightCrossbow,
             "0",
             "0",
-            "")]
+            "",
+            "0")]
         [TestCase(FeatConstants.SimpleWeaponProficiencyId + WeaponConstants.Quarterstaff,
             FeatConstants.SimpleWeaponProficiencyId,
             "0",
             WeaponConstants.Quarterstaff,
             "0",
             "0",
-            "")]
+            "",
+            "0")]
         public override void OrderedCollection(String name, params String[] collection)
         {
             base.OrderedCollection(name, collection);

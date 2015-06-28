@@ -8,6 +8,6 @@ namespace NPCGen.Generators.Interfaces.Abilities.Feats
 {
     public interface IClassFeatsGenerator
     {
-        IEnumerable<Feat> GenerateWith(CharacterClass characterClass, Dictionary<String, Stat> stats);
+        IEnumerable<Feat> GenerateWith(CharacterClass characterClass, Dictionary<String, Stat> stats, IEnumerable<Feat> racialFeats);
     }
 }

@@ -46,6 +46,7 @@ namespace NPCGen.Bootstrap.Modules
             Bind<IAdditionalFeatsGenerator>().To<AdditionalFeatsGenerator>();
             Bind<IClassFeatsGenerator>().To<ClassFeatsGenerator>();
             Bind<IRacialFeatsGenerator>().To<RacialFeatsGenerator>();
+            Bind<IFeatFocusGenerator>().To<FeatFocusGenerator>();
 
             Bind<IAlignmentRandomizer>().To<AnyAlignmentRandomizer>().Named(AlignmentRandomizerTypeConstants.Any);
             Bind<IAlignmentRandomizer>().To<ChaoticAlignmentRandomizer>().Named(AlignmentRandomizerTypeConstants.Chaotic);

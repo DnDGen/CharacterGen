@@ -21,42 +21,48 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             WeaponProficiencyConstants.All,
             "0",
             "0",
-            "")]
+            "",
+            "0")]
         [TestCase(FeatConstants.LightArmorProficiencyId,
             FeatConstants.LightArmorProficiencyId,
             "0",
             "",
             "0",
             "0",
-            "")]
+            "",
+            "0")]
         [TestCase(FeatConstants.MediumArmorProficiencyId,
             FeatConstants.MediumArmorProficiencyId,
             "0",
             "",
             "0",
             "0",
-            "")]
+            "",
+            "0")]
         [TestCase(FeatConstants.HeavyArmorProficiencyId,
             FeatConstants.HeavyArmorProficiencyId,
             "0",
             "",
             "0",
             "0",
-            "")]
+            "",
+            "0")]
         [TestCase(FeatConstants.ShieldProficiencyId,
             FeatConstants.ShieldProficiencyId,
             "0",
             "",
             "0",
             "0",
-            "")]
+            "",
+            "0")]
         [TestCase(FeatConstants.TurnId,
             FeatConstants.TurnId,
             "0",
             "Undead",
             "0",
             "0",
-            "")]
+            "",
+            "0")]
         public override void OrderedCollection(String name, params String[] collection)
         {
             base.OrderedCollection(name, collection);

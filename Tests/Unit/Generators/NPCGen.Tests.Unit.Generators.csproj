@@ -62,6 +62,7 @@
     <Compile Include="Abilities\AbilitiesGeneratorTests.cs" />
     <Compile Include="Abilities\Feats\AdditionalFeatsGeneratorTests.cs" />
     <Compile Include="Abilities\Feats\ClassFeatsGeneratorTests.cs" />
+    <Compile Include="Abilities\Feats\FeatFocusGeneratorTests.cs" />
     <Compile Include="Abilities\Feats\RacialFeatsGeneratorTests.cs" />
     <Compile Include="Abilities\Feats\FeatsGeneratorTests.cs" />
     <Compile Include="Abilities\SkillsGeneratorTests.cs" />

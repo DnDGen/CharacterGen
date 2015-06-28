@@ -55,7 +55,6 @@
     <Compile Include="Objects\StatPrioritySelection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Objects\SkillSelection.cs" />
-    <Compile Include="SelectorConstants.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Common\NPCGen.Common.csproj">

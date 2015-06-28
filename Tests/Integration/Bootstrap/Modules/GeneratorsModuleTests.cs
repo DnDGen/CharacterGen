@@ -533,21 +533,27 @@ namespace NPCGen.Tests.Integration.Bootstrap.Modules
         }
 
         [Test]
-        public void ClassFeatsGeneratorIsNotGeneratedAsSingleton()
+        public void ClassFeatsGeneratorIsNotASingleton()
         {
             AssertNotSingleton<IClassFeatsGenerator>();
         }
 
         [Test]
-        public void RacialFeatsGeneratorIsNotGeneratedAsSingleton()
+        public void RacialFeatsGeneratorIsNotASingleton()
         {
             AssertNotSingleton<IRacialFeatsGenerator>();
         }
 
         [Test]
-        public void SavingThrowsGeneratorIsNotGeneratedAsSingleton()
+        public void SavingThrowsGeneratorIsNotASingleton()
         {
             AssertNotSingleton<ISavingThrowsGenerator>();
+        }
+
+        [Test]
+        public void FeatFocusGeneratoeIsNotASingleton()
+        {
+            AssertNotSingleton<IFeatFocusGenerator>();
         }
     }
 }

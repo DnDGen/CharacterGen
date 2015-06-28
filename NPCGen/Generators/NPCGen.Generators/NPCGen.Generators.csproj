@@ -54,6 +54,7 @@
     <Compile Include="Abilities\AbilitiesGenerator.cs" />
     <Compile Include="Abilities\Feats\AdditionalFeatsGenerator.cs" />
     <Compile Include="Abilities\Feats\ClassFeatsGenerator.cs" />
+    <Compile Include="Abilities\Feats\FeatFocusGenerator.cs" />
     <Compile Include="Abilities\Feats\RacialFeatsGenerator.cs" />
     <Compile Include="Abilities\Feats\FeatsGenerator.cs" />
     <Compile Include="Abilities\SkillsGenerator.cs" />

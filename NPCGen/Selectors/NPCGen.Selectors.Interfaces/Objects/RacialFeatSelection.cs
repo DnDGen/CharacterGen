@@ -6,6 +6,14 @@ namespace NPCGen.Selectors.Interfaces.Objects
 {
     public class RacialFeatSelection
     {
+        public const Int32 FeatIdIndex = 0;
+        public const Int32 SizeRequirementIndex = 1;
+        public const Int32 MinimumHitDiceRequirementIndex = 2;
+        public const Int32 StrengthIndex = 3;
+        public const Int32 FocusIndex = 4;
+        public const Int32 FrequencyQuantityIndex = 5;
+        public const Int32 FrequencyTimePeriodIndex = 6;
+
         public String FeatId { get; set; }
         public Int32 MinimumHitDieRequirement { get; set; }
         public String SizeRequirement { get; set; }
