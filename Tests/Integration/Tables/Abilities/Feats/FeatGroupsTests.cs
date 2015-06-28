@@ -108,7 +108,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.SkillBonusId + SkillConstants.Search,
             FeatConstants.SkillBonusId + SkillConstants.Spot,
             FeatConstants.SkillBonusId + SkillConstants.Listen)]
-        [TestCase(TableNameConstants.Set.Collection.Groups.TakenMultipleTimes,
+        [TestCase(GroupConstants.TakenMultipleTimes,
             FeatConstants.SpellMasteryId,
             FeatConstants.ToughnessId,
             FeatConstants.SkillMasteryId,
@@ -348,7 +348,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
                 FeatConstants.WidenSpellId
             };
 
-            base.DistinctCollection(TableNameConstants.Set.Collection.Groups.Additional, featIds);
+            base.DistinctCollection(GroupConstants.Additional, featIds);
         }
     }
 }

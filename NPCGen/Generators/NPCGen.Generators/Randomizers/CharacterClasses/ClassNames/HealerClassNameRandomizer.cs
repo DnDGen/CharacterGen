@@ -19,7 +19,7 @@ namespace NPCGen.Generators.Randomizers.CharacterClasses.ClassNames
         protected override Boolean CharacterClassIsAllowed(String className, Alignment alignment)
         {
             var healers = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups,
-                TableNameConstants.Set.Collection.Groups.Healers);
+                GroupConstants.Healers);
             var alignmentClasses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups,
                 alignment.ToString());
 

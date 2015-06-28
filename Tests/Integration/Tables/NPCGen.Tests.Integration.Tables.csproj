@@ -69,6 +69,7 @@
   <ItemGroup>
     <Compile Include="Abilities\Feats\Data\CharacterClasses\BarbarianFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\BardFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\CharacterClasses\CharacterClassFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\ClericFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\WizardFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\HalfElfFeatDataTests.cs" />
@@ -146,6 +147,7 @@
     <Compile Include="Combats\ClassHitDiceTests.cs" />
     <Compile Include="Combats\MonsterHitDiceTests.cs" />
     <Compile Include="Combats\RacialBaseAttackAdjustmentsTests.cs" />
+    <Compile Include="DataTests.cs" />
     <Compile Include="EmbeddedResourceStreamLoaderTests.cs" />
     <Compile Include="NamesTests.cs" />
     <Compile Include="PercentileTests.cs" />

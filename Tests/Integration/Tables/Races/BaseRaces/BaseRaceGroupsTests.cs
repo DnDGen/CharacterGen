@@ -14,7 +14,7 @@ namespace NPCGen.Tests.Integration.Tables.Races.BaseRaces
             get { return TableNameConstants.Set.Collection.BaseRaceGroups; }
         }
 
-        [TestCase(TableNameConstants.Set.Collection.Groups.Standard,
+        [TestCase(GroupConstants.Standard,
             RaceConstants.BaseRaces.HalfElfId,
             RaceConstants.BaseRaces.HalfOrcId,
             RaceConstants.BaseRaces.HighElfId,
@@ -100,7 +100,7 @@ namespace NPCGen.Tests.Integration.Tables.Races.BaseRaces
             RaceConstants.BaseRaces.LightfootHalflingId,
             RaceConstants.BaseRaces.TallfellowHalflingId,
             RaceConstants.BaseRaces.KoboldId)]
-        [TestCase(TableNameConstants.Set.Collection.Groups.Monsters,
+        [TestCase(GroupConstants.Monsters,
             RaceConstants.BaseRaces.BugbearId,
             RaceConstants.BaseRaces.DerroId,
             RaceConstants.BaseRaces.DoppelgangerId,

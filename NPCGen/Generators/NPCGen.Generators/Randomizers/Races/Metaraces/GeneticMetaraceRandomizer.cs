@@ -18,7 +18,7 @@ namespace NPCGen.Generators.Randomizers.Races.Metaraces
 
         protected override Boolean MetaraceIsAllowed(String metaraceId)
         {
-            var metaraceIds = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, TableNameConstants.Set.Collection.Groups.Genetic);
+            var metaraceIds = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Genetic);
             return metaraceIds.Contains(metaraceId);
         }
     }

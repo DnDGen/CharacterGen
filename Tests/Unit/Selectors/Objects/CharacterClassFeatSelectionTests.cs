@@ -28,6 +28,7 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
             Assert.That(selection.RequiredFeatIds, Is.Empty);
             Assert.That(selection.Strength, Is.EqualTo(0));
             Assert.That(selection.MaximumLevel, Is.EqualTo(0));
+            Assert.That(selection.FrequencyQuantityStat, Is.Empty);
         }
 
         [TestCase(1, false)]
@@ -53,18 +54,6 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
 
             var requirementsMet = selection.RequirementsMet(characterClass);
             Assert.That(requirementsMet, Is.True);
-        }
-
-        [TestCase(CharacterClassFeatSelection.FeatIdIndex, 0)]
-        [TestCase(CharacterClassFeatSelection.MinimumLevelRequirementIndex, 1)]
-        [TestCase(CharacterClassFeatSelection.FocusTypeIndex, 2)]
-        [TestCase(CharacterClassFeatSelection.StrengthIndex, 3)]
-        [TestCase(CharacterClassFeatSelection.FrequencyQuantityIndex, 4)]
-        [TestCase(CharacterClassFeatSelection.FrequencyTimePeriodIndex, 5)]
-        [TestCase(CharacterClassFeatSelection.MaximumLevelRequirementIndex, 6)]
-        public void IndexConstant(Int32 constant, Int32 value)
-        {
-            Assert.That(constant, Is.EqualTo(value));
         }
     }
 }

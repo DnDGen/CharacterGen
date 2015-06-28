@@ -88,13 +88,13 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
         public void SpellcastersCanSelectRayForWeaponFoci()
         {
             var weapons = new[] { WeaponProficiencyConstants.Ray, "weapon" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, TableNameConstants.Set.Collection.Groups.WeaponsWithUnarmedAndGrappleAndRay))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, GroupConstants.WeaponsWithUnarmedAndGrappleAndRay))
                 .Returns(weapons);
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, TableNameConstants.Set.Collection.Groups.Spellcasters))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Spellcasters))
                 .Returns(new[] { characterClass.ClassName });
 
-            var focus = featFocusGenerator.GenerateFrom("featToFill", TableNameConstants.Set.Collection.Groups.WeaponsWithUnarmedAndGrappleAndRay, requiredFeatIds, otherFeat, characterClass);
+            var focus = featFocusGenerator.GenerateFrom("featToFill", GroupConstants.WeaponsWithUnarmedAndGrappleAndRay, requiredFeatIds, otherFeat, characterClass);
             Assert.That(focus, Is.EqualTo(WeaponProficiencyConstants.Ray));
         }
 
@@ -102,13 +102,13 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
         public void NonSpellcastersCannotSelectRayForWeaponFoci()
         {
             var weapons = new[] { WeaponProficiencyConstants.Ray, "weapon" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, TableNameConstants.Set.Collection.Groups.WeaponsWithUnarmedAndGrappleAndRay))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, GroupConstants.WeaponsWithUnarmedAndGrappleAndRay))
                 .Returns(weapons);
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, TableNameConstants.Set.Collection.Groups.Spellcasters))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Spellcasters))
                 .Returns(new[] { "other class name" });
 
-            var focus = featFocusGenerator.GenerateFrom("featToFill", TableNameConstants.Set.Collection.Groups.WeaponsWithUnarmedAndGrappleAndRay, requiredFeatIds, otherFeat, characterClass);
+            var focus = featFocusGenerator.GenerateFrom("featToFill", GroupConstants.WeaponsWithUnarmedAndGrappleAndRay, requiredFeatIds, otherFeat, characterClass);
             Assert.That(focus, Is.EqualTo("weapon"));
         }
 
@@ -167,12 +167,12 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
         public void IfFocusTypeIsSchoolOfMagic_CannotPickProhibitedFieldAsFocus()
         {
             var schools = new[] { "school 1", "school 2", "school 3", "school 4" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, TableNameConstants.Set.Collection.Groups.SchoolsOfMagic)).Returns(schools);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, GroupConstants.SchoolsOfMagic)).Returns(schools);
 
             mockDice.Setup(d => d.Roll(1).d(2)).Returns(2);
             characterClass.ProhibitedFields = new[] { "school 1", "school 3" };
 
-            var focus = featFocusGenerator.GenerateFrom("featToFill", TableNameConstants.Set.Collection.Groups.SchoolsOfMagic, requiredFeatIds, otherFeat, characterClass);
+            var focus = featFocusGenerator.GenerateFrom("featToFill", GroupConstants.SchoolsOfMagic, requiredFeatIds, otherFeat, characterClass);
             Assert.That(focus, Is.EqualTo("school 4"));
         }
 
@@ -221,7 +221,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
         [Test]
         public void ProficiencyFulfillsProficiencyRequirement()
         {
-            requiredFeatIds.Add(TableNameConstants.Set.Collection.Groups.Proficiency);
+            requiredFeatIds.Add(GroupConstants.Proficiency);
             otherFeat.Add(new Feat());
             otherFeat[0].Name.Id = "proficiency2";
             otherFeat[0].Focus = "school 2";
@@ -230,7 +230,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, "focus type")).Returns(schools);
 
             var proficiencyFeats = new[] { "proficiency1", "proficiency2" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, TableNameConstants.Set.Collection.Groups.Proficiency)).Returns(proficiencyFeats);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.Proficiency)).Returns(proficiencyFeats);
 
             var focus = featFocusGenerator.GenerateFrom("featToFill", "focus type", requiredFeatIds, otherFeat, characterClass);
             Assert.That(focus, Is.EqualTo("school 2"));
@@ -239,7 +239,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
         [Test]
         public void ProficiencyWithAllFulfillsProficiencyRequirement()
         {
-            requiredFeatIds.Add(TableNameConstants.Set.Collection.Groups.Proficiency);
+            requiredFeatIds.Add(GroupConstants.Proficiency);
             otherFeat.Add(new Feat());
             otherFeat[0].Name.Id = "proficiency2";
             otherFeat[0].Focus = WeaponProficiencyConstants.All;
@@ -248,7 +248,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, "focus type")).Returns(schools);
 
             var proficiencyFeats = new[] { "proficiency1", "proficiency2" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, TableNameConstants.Set.Collection.Groups.Proficiency)).Returns(proficiencyFeats);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.Proficiency)).Returns(proficiencyFeats);
 
             var proficiencySchools = new[] { "school 2", "school 3" };
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, "proficiency2")).Returns(proficiencySchools);

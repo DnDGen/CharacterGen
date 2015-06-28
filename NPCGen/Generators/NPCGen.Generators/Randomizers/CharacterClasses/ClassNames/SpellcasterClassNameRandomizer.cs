@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using NPCGen.Common.Alignments;
-using NPCGen.Common.CharacterClasses;
 using NPCGen.Selectors.Interfaces;
 using NPCGen.Tables.Interfaces;
 
@@ -20,7 +19,7 @@ namespace NPCGen.Generators.Randomizers.CharacterClasses.ClassNames
         protected override Boolean CharacterClassIsAllowed(String className, Alignment alignment)
         {
             var spellcasters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups,
-                TableNameConstants.Set.Collection.Groups.Spellcasters);
+                GroupConstants.Spellcasters);
             var alignmentClasses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups,
                 alignment.ToString());
 

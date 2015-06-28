@@ -11,14 +11,6 @@ namespace NPCGen.Selectors.Interfaces.Objects
 {
     public class AdditionalFeatSelection
     {
-        public const Int32 IsFighterFeatIndex = 0;
-        public const Int32 IsWizardFeatIndex = 1;
-        public const Int32 BaseAttackRequirementIndex = 2;
-        public const Int32 FocusTypeIndex = 3;
-        public const Int32 StrengthIndex = 4;
-        public const Int32 FrequencyQuantityIndex = 5;
-        public const Int32 FrequencyTimePeriodIndex = 6;
-
         public String FeatId { get; set; }
         public Frequency Frequency { get; set; }
         public Int32 Strength { get; set; }
@@ -61,7 +53,7 @@ namespace NPCGen.Selectors.Interfaces.Objects
 
         public Boolean MutableRequirementsMet(IEnumerable<String> featIds)
         {
-            var requirementsWithoutProficiency = RequiredFeatIds.Except(new[] { TableNameConstants.Set.Collection.Groups.Proficiency });
+            var requirementsWithoutProficiency = RequiredFeatIds.Except(new[] { GroupConstants.Proficiency });
 
             var missedRequirements = requirementsWithoutProficiency.Except(featIds);
             return missedRequirements.Any() == false;

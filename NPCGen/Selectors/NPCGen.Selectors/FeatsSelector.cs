@@ -29,13 +29,13 @@ namespace NPCGen.Selectors
                 var featData = collectionsSelector.SelectFrom(tableName, racialFeatId).ToArray();
 
                 var racialFeatSelection = new RacialFeatSelection();
-                racialFeatSelection.FeatId = featData[RacialFeatSelection.FeatIdIndex];
-                racialFeatSelection.SizeRequirement = featData[RacialFeatSelection.SizeRequirementIndex];
-                racialFeatSelection.Strength = Convert.ToInt32(featData[RacialFeatSelection.StrengthIndex]);
-                racialFeatSelection.MinimumHitDieRequirement = Convert.ToInt32(featData[RacialFeatSelection.MinimumHitDiceRequirementIndex]);
-                racialFeatSelection.Focus = featData[RacialFeatSelection.FocusIndex];
-                racialFeatSelection.Frequency.Quantity = Convert.ToInt32(featData[RacialFeatSelection.FrequencyQuantityIndex]);
-                racialFeatSelection.Frequency.TimePeriod = featData[RacialFeatSelection.FrequencyTimePeriodIndex];
+                racialFeatSelection.FeatId = featData[DataIndexConstants.RacialFeatData.FeatIdIndex];
+                racialFeatSelection.SizeRequirement = featData[DataIndexConstants.RacialFeatData.SizeRequirementIndex];
+                racialFeatSelection.Strength = Convert.ToInt32(featData[DataIndexConstants.RacialFeatData.StrengthIndex]);
+                racialFeatSelection.MinimumHitDieRequirement = Convert.ToInt32(featData[DataIndexConstants.RacialFeatData.MinimumHitDiceRequirementIndex]);
+                racialFeatSelection.Focus = featData[DataIndexConstants.RacialFeatData.FocusIndex];
+                racialFeatSelection.Frequency.Quantity = Convert.ToInt32(featData[DataIndexConstants.RacialFeatData.FrequencyQuantityIndex]);
+                racialFeatSelection.Frequency.TimePeriod = featData[DataIndexConstants.RacialFeatData.FrequencyTimePeriodIndex];
 
                 racialFeatSelections.Add(racialFeatSelection);
             }
@@ -45,7 +45,7 @@ namespace NPCGen.Selectors
 
         public IEnumerable<AdditionalFeatSelection> SelectAdditional()
         {
-            var additionalFeatIds = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, TableNameConstants.Set.Collection.Groups.Additional);
+            var additionalFeatIds = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.Additional);
             var additionalFeatSelections = new List<AdditionalFeatSelection>();
 
             foreach (var additionalFeatId in additionalFeatIds)
@@ -63,13 +63,13 @@ namespace NPCGen.Selectors
             additionalFeatSelection.FeatId = featId;
 
             var featData = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AdditionalFeatData, featId).ToArray();
-            additionalFeatSelection.IsFighterFeat = Convert.ToBoolean(featData[AdditionalFeatSelection.IsFighterFeatIndex]);
-            additionalFeatSelection.IsWizardFeat = Convert.ToBoolean(featData[AdditionalFeatSelection.IsWizardFeatIndex]);
-            additionalFeatSelection.RequiredBaseAttack = Convert.ToInt32(featData[AdditionalFeatSelection.BaseAttackRequirementIndex]);
-            additionalFeatSelection.FocusType = featData[AdditionalFeatSelection.FocusTypeIndex];
-            additionalFeatSelection.Frequency.Quantity = Convert.ToInt32(featData[AdditionalFeatSelection.FrequencyQuantityIndex]);
-            additionalFeatSelection.Frequency.TimePeriod = featData[AdditionalFeatSelection.FrequencyTimePeriodIndex];
-            additionalFeatSelection.Strength = Convert.ToInt32(featData[AdditionalFeatSelection.StrengthIndex]);
+            additionalFeatSelection.IsFighterFeat = Convert.ToBoolean(featData[DataIndexConstants.AdditionalFeatData.IsFighterFeatIndex]);
+            additionalFeatSelection.IsWizardFeat = Convert.ToBoolean(featData[DataIndexConstants.AdditionalFeatData.IsWizardFeatIndex]);
+            additionalFeatSelection.RequiredBaseAttack = Convert.ToInt32(featData[DataIndexConstants.AdditionalFeatData.BaseAttackRequirementIndex]);
+            additionalFeatSelection.FocusType = featData[DataIndexConstants.AdditionalFeatData.FocusTypeIndex];
+            additionalFeatSelection.Frequency.Quantity = Convert.ToInt32(featData[DataIndexConstants.AdditionalFeatData.FrequencyQuantityIndex]);
+            additionalFeatSelection.Frequency.TimePeriod = featData[DataIndexConstants.AdditionalFeatData.FrequencyTimePeriodIndex];
+            additionalFeatSelection.Strength = Convert.ToInt32(featData[DataIndexConstants.AdditionalFeatData.StrengthIndex]);
 
             additionalFeatSelection.RequiredFeatIds = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AdditionalFeatFeatRequirements, featId);
 
@@ -96,13 +96,14 @@ namespace NPCGen.Selectors
                 var featData = collectionsSelector.SelectFrom(tableName, classFeatId).ToArray();
 
                 var classFeatSelection = new CharacterClassFeatSelection();
-                classFeatSelection.FeatId = featData[CharacterClassFeatSelection.FeatIdIndex];
-                classFeatSelection.FocusType = featData[CharacterClassFeatSelection.FocusTypeIndex];
-                classFeatSelection.Frequency.Quantity = Convert.ToInt32(featData[CharacterClassFeatSelection.FrequencyQuantityIndex]);
-                classFeatSelection.Frequency.TimePeriod = featData[CharacterClassFeatSelection.FrequencyTimePeriodIndex];
-                classFeatSelection.MinimumLevel = Convert.ToInt32(featData[CharacterClassFeatSelection.MinimumLevelRequirementIndex]);
-                classFeatSelection.Strength = Convert.ToInt32(featData[CharacterClassFeatSelection.StrengthIndex]);
-                classFeatSelection.MaximumLevel = Convert.ToInt32(featData[CharacterClassFeatSelection.MaximumLevelRequirementIndex]);
+                classFeatSelection.FeatId = featData[DataIndexConstants.CharacterClassFeatData.FeatIdIndex];
+                classFeatSelection.FocusType = featData[DataIndexConstants.CharacterClassFeatData.FocusTypeIndex];
+                classFeatSelection.Frequency.Quantity = Convert.ToInt32(featData[DataIndexConstants.CharacterClassFeatData.FrequencyQuantityIndex]);
+                classFeatSelection.Frequency.TimePeriod = featData[DataIndexConstants.CharacterClassFeatData.FrequencyTimePeriodIndex];
+                classFeatSelection.MinimumLevel = Convert.ToInt32(featData[DataIndexConstants.CharacterClassFeatData.MinimumLevelRequirementIndex]);
+                classFeatSelection.Strength = Convert.ToInt32(featData[DataIndexConstants.CharacterClassFeatData.StrengthIndex]);
+                classFeatSelection.MaximumLevel = Convert.ToInt32(featData[DataIndexConstants.CharacterClassFeatData.MaximumLevelRequirementIndex]);
+                classFeatSelection.FrequencyQuantityStat = featData[DataIndexConstants.CharacterClassFeatData.FrequencyQuantityStatIndex];
 
                 classFeatSelections.Add(classFeatSelection);
             }

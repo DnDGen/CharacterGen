@@ -31,10 +31,10 @@ namespace NPCGen.Generators.Abilities.Feats
             var usedFoci = otherFeats.Where(f => f.Name.Id == featId).Select(f => f.Focus);
             foci = foci.Except(usedFoci);
 
-            if (focusType == TableNameConstants.Set.Collection.Groups.SchoolsOfMagic)
+            if (focusType == GroupConstants.SchoolsOfMagic)
                 foci = foci.Except(characterClass.ProhibitedFields);
 
-            var spellcasters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, TableNameConstants.Set.Collection.Groups.Spellcasters);
+            var spellcasters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Spellcasters);
             if (spellcasters.Contains(characterClass.ClassName) == false)
                 foci = foci.Except(new[] { WeaponProficiencyConstants.Ray });
 
@@ -47,7 +47,7 @@ namespace NPCGen.Generators.Abilities.Feats
         private IEnumerable<String> GetFoci(String focusType, IEnumerable<Feat> otherFeats, IEnumerable<String> requiredFeatIds)
         {
             var sourceFeatFoci = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, focusType);
-            var proficiencyRequired = requiredFeatIds.Contains(TableNameConstants.Set.Collection.Groups.Proficiency);
+            var proficiencyRequired = requiredFeatIds.Contains(GroupConstants.Proficiency);
 
             if (focusType == FeatConstants.MartialWeaponProficiencyId)
             {
@@ -59,7 +59,7 @@ namespace NPCGen.Generators.Abilities.Feats
             if (proficiencyRequired == false && otherFeats.Any(f => RequirementHasFocus(requiredFeatIds, f)) == false)
                 return sourceFeatFoci;
 
-            var proficiencyFeatIds = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, TableNameConstants.Set.Collection.Groups.Proficiency);
+            var proficiencyFeatIds = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.Proficiency);
             var proficiencyFeats = otherFeats.Where(f => proficiencyFeatIds.Contains(f.Name.Id));
 
             var requiredFeats = otherFeats.Where(f => RequirementHasFocus(requiredFeatIds, f));

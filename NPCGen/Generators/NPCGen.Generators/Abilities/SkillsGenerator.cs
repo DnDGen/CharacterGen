@@ -96,7 +96,7 @@ namespace NPCGen.Generators.Abilities
             var perLevel = pointsTable[characterClass.ClassName] + intelligence.Bonus;
             var multiplier = characterClass.Level;
 
-            var monsters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, TableNameConstants.Set.Collection.Groups.Monsters);
+            var monsters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters);
             if (!monsters.Contains(race.BaseRace.Id))
                 multiplier += 3;
 
@@ -140,7 +140,7 @@ namespace NPCGen.Generators.Abilities
         {
             skills = GetRacialBonuses(skills, race.BaseRace.Id);
 
-            var allKnowledgeSkills = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, TableNameConstants.Set.Collection.Groups.Knowledge);
+            var allKnowledgeSkills = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.Knowledge);
             var knowledgeSkills = allKnowledgeSkills.Intersect(skills.Keys);
 
             if (race.Metarace.Id != RaceConstants.Metaraces.NoneId)

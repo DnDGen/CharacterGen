@@ -39,6 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataIndexConstants.cs" />
+    <Compile Include="GroupConstants.cs" />
     <Compile Include="IStreamLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TableNameConstants.cs" />

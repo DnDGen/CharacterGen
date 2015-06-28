@@ -44,12 +44,12 @@ namespace NPCGen.Generators.Combats
         private Int32 GetBaseAttackBonus(CharacterClass characterClass)
         {
             var goodBaseAttacks = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups,
-                TableNameConstants.Set.Collection.Groups.GoodBaseAttack);
+                GroupConstants.GoodBaseAttack);
             if (goodBaseAttacks.Contains(characterClass.ClassName))
                 return GetGoodBaseAttackBonus(characterClass.Level);
 
             var averageBaseAttacks = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups,
-                TableNameConstants.Set.Collection.Groups.AverageBaseAttack);
+                GroupConstants.AverageBaseAttack);
             if (averageBaseAttacks.Contains(characterClass.ClassName))
                 return GetAverageBaseAttackBonus(characterClass.Level);
 

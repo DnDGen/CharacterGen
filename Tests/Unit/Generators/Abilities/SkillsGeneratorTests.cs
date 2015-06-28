@@ -808,7 +808,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         public void MindFlayerKnowledgeBonusIsRandom()
         {
             race.BaseRace.Id = RaceConstants.BaseRaces.MindFlayerId;
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, TableNameConstants.Set.Collection.Groups.Knowledge))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.Knowledge))
                 .Returns(new[] { "knowledge skill", "other knowledge skill", "different knowledge skill", "skill of knowledge" });
 
             classSkills.Add("knowledge skill");
@@ -852,7 +852,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         public void MonstersDoNotGetMoreSkillPointsAtFirstLevel(Int32 level)
         {
             race.BaseRace.Id = "baserace";
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, TableNameConstants.Set.Collection.Groups.Monsters))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
                 .Returns(new[] { "baserace", "otherbaserace" });
 
             characterClass.Level = level;

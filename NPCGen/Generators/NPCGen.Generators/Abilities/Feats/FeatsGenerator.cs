@@ -111,7 +111,7 @@ namespace NPCGen.Generators.Abilities.Feats
             if (feat.Frequency.TimePeriod != String.Empty)
                 return false;
 
-            var featIdsAllowingMultipleTakes = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, TableNameConstants.Set.Collection.Groups.TakenMultipleTimes);
+            var featIdsAllowingMultipleTakes = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TakenMultipleTimes);
             if (featIdsAllowingMultipleTakes.Contains(feat.Name.Id))
                 return false;
 

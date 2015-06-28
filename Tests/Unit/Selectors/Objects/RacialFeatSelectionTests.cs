@@ -76,17 +76,5 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
             var met = selection.RequirementsMet(race, 4);
             Assert.That(met, Is.True);
         }
-
-        [TestCase(RacialFeatSelection.FeatIdIndex, 0)]
-        [TestCase(RacialFeatSelection.SizeRequirementIndex, 1)]
-        [TestCase(RacialFeatSelection.MinimumHitDiceRequirementIndex, 2)]
-        [TestCase(RacialFeatSelection.StrengthIndex, 3)]
-        [TestCase(RacialFeatSelection.FocusIndex, 4)]
-        [TestCase(RacialFeatSelection.FrequencyQuantityIndex, 5)]
-        [TestCase(RacialFeatSelection.FrequencyTimePeriodIndex, 6)]
-        public void IndexConstant(Int32 constant, Int32 value)
-        {
-            Assert.That(constant, Is.EqualTo(value));
-        }
     }
 }

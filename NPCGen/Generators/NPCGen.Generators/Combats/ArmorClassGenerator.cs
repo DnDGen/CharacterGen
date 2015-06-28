@@ -83,7 +83,7 @@ namespace NPCGen.Generators.Combats
 
         private Int32 GetDeflectionBonus(IEnumerable<Item> items)
         {
-            var deflectionBonuses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, TableNameConstants.Set.Collection.Groups.Deflection);
+            var deflectionBonuses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.Deflection);
             var itemsWithDeflectionBonuses = items.Where(i => deflectionBonuses.Contains(i.Name));
 
             if (!itemsWithDeflectionBonuses.Any())
@@ -95,7 +95,7 @@ namespace NPCGen.Generators.Combats
         private Int32 GetNaturalArmorBonus(IEnumerable<Item> items, IEnumerable<Feat> feats, Race race)
         {
             var thingsThatGrantNaturalArmorBonuses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers,
-                TableNameConstants.Set.Collection.Groups.NaturalArmor);
+                GroupConstants.NaturalArmor);
             var itemsWithNaturalArmorBonuses = items.Where(i => thingsThatGrantNaturalArmorBonuses.Contains(i.Name));
             var itemNaturalArmorBonuses = itemsWithNaturalArmorBonuses.Select(i => i.Magic.Bonus);
 
@@ -120,7 +120,7 @@ namespace NPCGen.Generators.Combats
         {
             var featAdjustments = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.FeatArmorAdjustments);
             var dodgeBonuses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers,
-                TableNameConstants.Set.Collection.Groups.Dodge);
+                GroupConstants.Dodge);
             var dodgeFeats = feats.Select(f => f.Name.Id).Intersect(dodgeBonuses);
 
             var bonus = 0;

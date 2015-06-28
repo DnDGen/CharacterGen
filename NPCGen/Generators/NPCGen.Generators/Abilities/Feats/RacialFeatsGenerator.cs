@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using D20Dice;
 using NPCGen.Common.Abilities.Feats;
 using NPCGen.Common.Races;
 using NPCGen.Generators.Interfaces.Abilities.Feats;
@@ -52,7 +51,7 @@ namespace NPCGen.Generators.Abilities.Feats
 
         private Int32 GetMonsterHitDice(String baseRaceId)
         {
-            var monsters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, TableNameConstants.Set.Collection.Groups.Monsters);
+            var monsters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters);
             if (!monsters.Contains(baseRaceId))
                 return 1;
 

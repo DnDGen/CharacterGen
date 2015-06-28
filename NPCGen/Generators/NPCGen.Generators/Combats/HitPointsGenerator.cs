@@ -34,7 +34,7 @@ namespace NPCGen.Generators.Combats
             }
 
             var monsters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups,
-                TableNameConstants.Set.Collection.Groups.Monsters);
+                GroupConstants.Monsters);
             if (!monsters.Contains(race.BaseRace.Id))
                 return hitPoints;
 

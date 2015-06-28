@@ -104,7 +104,7 @@ namespace NPCGen.Generators.Abilities.Feats
             var featsWithRequirementsMet = sourceFeats.Where(f => f.MutableRequirementsMet(chosenFeatIds));
             var alreadyChosenFeats = sourceFeats.Where(f => f.FocusType == String.Empty && chosenFeatIds.Contains(f.FeatId));
 
-            var featIdsAllowingMultipleTakes = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, TableNameConstants.Set.Collection.Groups.TakenMultipleTimes);
+            var featIdsAllowingMultipleTakes = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TakenMultipleTimes);
             var featsAllowingMultipleTakes = alreadyChosenFeats.Where(f => featIdsAllowingMultipleTakes.Contains(f.FeatId));
             var excludedFeats = alreadyChosenFeats.Except(featsAllowingMultipleTakes);
 

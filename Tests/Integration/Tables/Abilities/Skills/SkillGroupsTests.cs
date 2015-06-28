@@ -71,7 +71,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Skills
                 SkillConstants.KnowledgeThePlanes
             };
 
-            base.DistinctCollection(TableNameConstants.Set.Collection.Groups.Knowledge, skills);
+            base.DistinctCollection(GroupConstants.Knowledge, skills);
         }
 
         [Test]

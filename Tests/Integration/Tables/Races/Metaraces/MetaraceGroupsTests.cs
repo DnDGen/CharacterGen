@@ -26,11 +26,11 @@ namespace NPCGen.Tests.Integration.Tables.Races.Metaraces
         [TestCase(AlignmentConstants.Neutral,
             RaceConstants.Metaraces.WereboarId,
             RaceConstants.Metaraces.WeretigerId)]
-        [TestCase(TableNameConstants.Set.Collection.Groups.Genetic,
+        [TestCase(GroupConstants.Genetic,
             RaceConstants.Metaraces.HalfDragonId,
             RaceConstants.Metaraces.HalfFiendId,
             RaceConstants.Metaraces.HalfCelestialId)]
-        [TestCase(TableNameConstants.Set.Collection.Groups.Lycanthrope,
+        [TestCase(GroupConstants.Lycanthrope,
             RaceConstants.Metaraces.WerebearId,
             RaceConstants.Metaraces.WereboarId,
             RaceConstants.Metaraces.WeretigerId,

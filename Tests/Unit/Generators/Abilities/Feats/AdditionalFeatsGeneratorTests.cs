@@ -582,7 +582,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
         {
             AddFeatSelections(1);
             characterClass.Level = 3;
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, TableNameConstants.Set.Collection.Groups.TakenMultipleTimes)).Returns(new[] { "feat1" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TakenMultipleTimes)).Returns(new[] { "feat1" });
 
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             var first = feats.First();

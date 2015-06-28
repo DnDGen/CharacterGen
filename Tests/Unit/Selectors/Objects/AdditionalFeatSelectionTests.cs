@@ -184,7 +184,7 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
         [Test]
         public void ProficiencyRequirementDoesNotAffectMutableRequirements()
         {
-            selection.RequiredFeatIds = new[] { TableNameConstants.Set.Collection.Groups.Proficiency };
+            selection.RequiredFeatIds = new[] { GroupConstants.Proficiency };
 
             var met = selection.MutableRequirementsMet(feats);
             Assert.That(met, Is.True);
@@ -193,7 +193,7 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
         [Test]
         public void WithProficiencyRequirement_OtherRequirementsNotIgnored()
         {
-            selection.RequiredFeatIds = new[] { TableNameConstants.Set.Collection.Groups.Proficiency, "feat1" };
+            selection.RequiredFeatIds = new[] { GroupConstants.Proficiency, "feat1" };
 
             var met = selection.MutableRequirementsMet(feats);
             Assert.That(met, Is.False);
@@ -203,22 +203,10 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
         public void WithProficiencyRequirement_OtherRequirementsAreHonored()
         {
             feats.Add("feat1");
-            selection.RequiredFeatIds = new[] { TableNameConstants.Set.Collection.Groups.Proficiency, "feat1" };
+            selection.RequiredFeatIds = new[] { GroupConstants.Proficiency, "feat1" };
 
             var met = selection.MutableRequirementsMet(feats);
             Assert.That(met, Is.True);
-        }
-
-        [TestCase(AdditionalFeatSelection.IsFighterFeatIndex, 0)]
-        [TestCase(AdditionalFeatSelection.IsWizardFeatIndex, 1)]
-        [TestCase(AdditionalFeatSelection.BaseAttackRequirementIndex, 2)]
-        [TestCase(AdditionalFeatSelection.FocusTypeIndex, 3)]
-        [TestCase(AdditionalFeatSelection.StrengthIndex, 4)]
-        [TestCase(AdditionalFeatSelection.FrequencyQuantityIndex, 5)]
-        [TestCase(AdditionalFeatSelection.FrequencyTimePeriodIndex, 6)]
-        public void IndexConstant(Int32 constant, Int32 value)
-        {
-            Assert.That(constant, Is.EqualTo(value));
         }
     }
 }

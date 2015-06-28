@@ -13,12 +13,20 @@ namespace NPCGen.Tests.Integration.Tables
         [Inject]
         public ICollectionsMapper CollectionsMapper { get; set; }
 
-        private Dictionary<String, IEnumerable<String>> table;
+        protected Dictionary<String, IEnumerable<String>> table;
+        protected Dictionary<Int32, String> indices;
 
         [SetUp]
         public void CollectionSetup()
         {
             table = CollectionsMapper.Map(tableName);
+            indices = new Dictionary<Int32, String>();
+        }
+
+        protected virtual void PopulateIndices(IEnumerable<String> collection)
+        {
+            for (var i = 0; i < collection.Count(); i++)
+                indices[i] = String.Format("Index {0}", i);
         }
 
         public virtual void Collection(String name, params String[] collection)
@@ -31,7 +39,7 @@ namespace NPCGen.Tests.Integration.Tables
             AssertExtraItems(name, collection);
         }
 
-        private void AssertExtraItems(String name, IEnumerable<String> collection)
+        protected void AssertExtraItems(String name, IEnumerable<String> collection)
         {
             var extras = table[name].Except(collection);
             Assert.That(extras, Is.Empty, name);
@@ -40,6 +48,8 @@ namespace NPCGen.Tests.Integration.Tables
         public virtual void OrderedCollection(String name, params String[] collection)
         {
             Assert.That(table.Keys, Contains.Item(name), tableName);
+
+            PopulateIndices(collection);
 
             for (var i = 0; i < collection.Length; i++)
             {

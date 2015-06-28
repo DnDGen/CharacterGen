@@ -277,7 +277,15 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
         [Test]
         public void StatBasedFrequenciesAreSet()
         {
-            throw new NotImplementedException();
+            AddClassFeat(characterClass.ClassName, "feat1", frequencyQuantity: 1);
+            classFeatSelections[characterClass.ClassName][0].FrequencyQuantityStat = "stat";
+
+            stats["stat"] = new Stat();
+            stats["stat"].Value = 15;
+
+            var feats = classFeatsGenerator.GenerateWith(characterClass, stats, racialFeat);
+            var onlyFeat = feats.Single();
+            Assert.That(onlyFeat.Frequency.Quantity, Is.EqualTo(3));
         }
     }
 }

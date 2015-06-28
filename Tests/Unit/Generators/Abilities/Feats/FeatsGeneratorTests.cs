@@ -718,7 +718,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             racialFeats[0].Name.Id = "feat1";
             racialFeats[1].Name.Id = "feat1";
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, TableNameConstants.Set.Collection.Groups.TakenMultipleTimes)).Returns(new[] { "feat1" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TakenMultipleTimes)).Returns(new[] { "feat1" });
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
             Assert.That(feats.Count(), Is.EqualTo(2));

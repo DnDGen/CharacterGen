@@ -16,7 +16,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
             get { return TableNameConstants.Set.Collection.FeatFoci; }
         }
 
-        [TestCase(TableNameConstants.Set.Collection.Groups.SchoolsOfMagic,
+        [TestCase(GroupConstants.SchoolsOfMagic,
             CharacterClassConstants.Schools.Abjuration,
             CharacterClassConstants.Schools.Conjuration,
             CharacterClassConstants.Schools.Divination,
@@ -99,7 +99,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
                 WeaponConstants.Whip
             };
 
-            base.DistinctCollection(TableNameConstants.Set.Collection.Groups.Weapons, foci);
+            base.DistinctCollection(GroupConstants.Weapons, foci);
         }
 
         [Test]
@@ -173,7 +173,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
                 WeaponProficiencyConstants.Grapple
             };
 
-            base.DistinctCollection(TableNameConstants.Set.Collection.Groups.WeaponsWithUnarmedAndGrapple, foci);
+            base.DistinctCollection(GroupConstants.WeaponsWithUnarmedAndGrapple, foci);
         }
 
         [Test]
@@ -248,7 +248,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
                 WeaponProficiencyConstants.Ray
             };
 
-            base.DistinctCollection(TableNameConstants.Set.Collection.Groups.WeaponsWithUnarmedAndGrappleAndRay, foci);
+            base.DistinctCollection(GroupConstants.WeaponsWithUnarmedAndGrappleAndRay, foci);
         }
 
         [Test]
@@ -300,7 +300,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
                 SkillConstants.UseRope
             };
 
-            base.DistinctCollection(TableNameConstants.Set.Collection.Groups.Skills, foci);
+            base.DistinctCollection(GroupConstants.Skills, foci);
         }
     }
 }
