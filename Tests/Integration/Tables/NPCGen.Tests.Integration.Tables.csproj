@@ -67,11 +67,15 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Abilities\Feats\Data\CharacterClasses\BardFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\ClericFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\WizardFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\HalfElfFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\HalfOrcFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\HighElfFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\HillDwarfFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\HobgoblinFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\WoodElfFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\FeatFociTests.cs" />
     <Compile Include="Abilities\Feats\FeatGroupsTests.cs" />
     <Compile Include="Abilities\Skills\AssignPointToCrossClassSkillTests.cs" />

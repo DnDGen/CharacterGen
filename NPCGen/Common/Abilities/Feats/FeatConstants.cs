@@ -290,8 +290,8 @@ namespace NPCGen.Common.Abilities.Feats
         public const String TrapfindingId = "Trapfinding";
         public const String TrapSense = "Trap Sense";
         public const String TrapSenseId = "TrapSense";
-        public const String TurnUndead = "Turn Undead";
-        public const String TurnUndeadId = "TurnUndead";
+        public const String Turn = "Turn";
+        public const String TurnId = "Turn";
         public const String TwoWeaponDefense = "Two-Weapon Defense";
         public const String TwoWeaponDefenseId = "TwoWeaponDefense";
         public const String TwoWeaponFighting = "Two-Weapon Fighting";
@@ -314,6 +314,42 @@ namespace NPCGen.Common.Abilities.Feats
         public const String WhirlwindAttackId = "WhirlwindAttack";
         public const String WidenSpell = "Widen Spell";
         public const String WidenSpellId = "WidenSpell";
+        public const String FastMovementId = "FastMovement";
+        public const String IlliteracyId = "Illiteracy";
+        public const String RageId = "Rage";
+        public const String GreaterRageId = "GreaterRage";
+        public const String IndomitableWillId = "IndomitableWill";
+        public const String TirelessRageId = "TirelessRage";
+        public const String MightyRageId = "MightyRage";
+        public const String FastMovement = "Fast Movement";
+        public const String Illiteracy = "Illiteracy";
+        public const String Rage = "Rage";
+        public const String GreaterRage = "Greater Rage";
+        public const String IndomitableWill = "Indomitable Will";
+        public const String TirelessRage = "Tireless Rage";
+        public const String MightyRage = "Mighty Rage";
+        public const String BardicMusic = "Bardic Music";
+        public const String BardicKnowledge = "Bardic Knowledge";
+        public const String Countersong = "Countersong";
+        public const String Fascinate = "Fascinate";
+        public const String InspireCourage = "Inspire Courage";
+        public const String Suggestion = "Suggestion";
+        public const String InspireGreatness = "Inspire Greatness";
+        public const String SongOfFreedom = "Song of Freedom";
+        public const String InspireHeroics = "Inspire Heroics";
+        public const String MassSuggestion = "Mass Suggestion";
+        public const String BardicMusicId = "BardicMusic";
+        public const String BardicKnowledgeId = "BardicKnowledge";
+        public const String CountersongId = "Countersong";
+        public const String FascinateId = "Fascinate";
+        public const String InspireCourageId = "InspireCourage";
+        public const String SuggestionId = "Suggestion";
+        public const String InspireGreatnessId = "InspireGreatness";
+        public const String SongOfFreedomId = "SongOfFreedom";
+        public const String InspireHeroicsId = "InspireHeroics";
+        public const String MassSuggestionId = "MassSuggestion";
+        public const String InspireCompetence = "Inspire Competence";
+        public const String InspireCompetenceId = "InspireCompetence";
 
         public static class Frequencies
         {

@@ -118,13 +118,58 @@
         <item>WidenSpell</item>
     </object>
     <object>
+        <name>Barbarian</name>
+        <item>SimpleWeaponProficiency</item>
+        <item>MartialWeaponProficiency</item>
+        <item>LightArmorProficiency</item>
+        <item>MediumArmorProficiency</item>
+        <item>ShieldProficiency</item>
+        <item>FastMovement</item>
+        <item>Illiteracy</item>
+        <item>Rage</item>
+        <item>UncannyDodge</item>
+        <item>TrapSense</item>
+        <item>ImprovedUncannyDodge</item>
+        <item>DamageReduction</item>
+        <item>GreaterRage</item>
+        <item>IndomitableWill</item>
+        <item>TirelessRage</item>
+        <item>MightyRage</item>
+    </object>
+    <object>
+        <name>Bard</name>
+        <item>SimpleWeaponProficiency</item>
+        <item>MartialWeaponProficiencyLongsword</item>
+        <item>MartialWeaponProficiencyRapier</item>
+        <item>MartialWeaponProficiencySap</item>
+        <item>MartialWeaponProficiencyShort sword</item>
+        <item>MartialWeaponProficiencyShortbow</item>
+        <item>MartialWeaponProficiencyWhip</item>
+        <item>LightArmorProficiency</item>
+        <item>ShieldProficiency</item>
+        <item>BardicMusic</item>
+        <item>BardicKnowledge</item>
+        <item>Countersong</item>
+        <item>Fascinate</item>
+        <item>InspireCourage1</item>
+        <item>InspireCourage2</item>
+        <item>InspireCourage3</item>
+        <item>InspireCourage4</item>
+        <item>Suggestion</item>
+        <item>InspireGreatness</item>
+        <item>SongOfFreedom</item>
+        <item>InspireHeroics</item>
+        <item>MassSuggestion</item>
+        <item>InspireCompetence</item>
+    </object>
+    <object>
         <name>Cleric</name>
         <item>SimpleWeaponProficiency</item>
         <item>LightArmorProficiency</item>
         <item>MediumArmorProficiency</item>
         <item>HeavyArmorProficiency</item>
         <item>ShieldProficiency</item>
-        <item>TurnUndead</item>
+        <item>Turn</item>
     </object>
     <object>
         <name>DeepHalfling</name>
@@ -135,6 +180,10 @@
         <item>AttackBonusThrowOrSling</item>
         <item>Darkvision</item>
         <item>Stonecunning</item>
+    </object>
+    <object>
+        <name>Earth</name>
+        <item>Turn</item>
     </object>
     <object>
         <name>Goblin</name>
@@ -254,6 +303,11 @@
         <item>SimpleWeaponProficiencyClub</item>
         <item>SimpleWeaponProficiencyDagger</item>
         <item>SimpleWeaponProficiencyQuarterstaff</item>
+    </object>
+    <object>
+        <name>Werewolf</name>
+        <item>IronWill</item>
+        <item>Track</item>
     </object>
     <object>
         <name>WoodElf</name>

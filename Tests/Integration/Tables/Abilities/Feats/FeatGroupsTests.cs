@@ -18,13 +18,30 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
         }
 
         [TestCase("")]
+        [TestCase(CharacterClassConstants.Barbarian,
+            FeatConstants.SimpleWeaponProficiencyId,
+            FeatConstants.MartialWeaponProficiencyId,
+            FeatConstants.LightArmorProficiencyId,
+            FeatConstants.MediumArmorProficiencyId,
+            FeatConstants.ShieldProficiencyId,
+            FeatConstants.FastMovementId,
+            FeatConstants.IlliteracyId,
+            FeatConstants.RageId,
+            FeatConstants.UncannyDodgeId,
+            FeatConstants.TrapSenseId,
+            FeatConstants.ImprovedUncannyDodgeId,
+            FeatConstants.DamageReductionId,
+            FeatConstants.GreaterRageId,
+            FeatConstants.IndomitableWillId,
+            FeatConstants.TirelessRageId,
+            FeatConstants.MightyRageId)]
         [TestCase(CharacterClassConstants.Cleric,
             FeatConstants.SimpleWeaponProficiencyId,
             FeatConstants.LightArmorProficiencyId,
             FeatConstants.MediumArmorProficiencyId,
             FeatConstants.HeavyArmorProficiencyId,
             FeatConstants.ShieldProficiencyId,
-            FeatConstants.TurnUndeadId)]
+            FeatConstants.TurnId)]
         [TestCase(CharacterClassConstants.Wizard,
             FeatConstants.ScribeScrollId,
             FeatConstants.SimpleWeaponProficiencyId + WeaponConstants.Club,
@@ -32,6 +49,8 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.SimpleWeaponProficiencyId + WeaponConstants.HeavyCrossbow,
             FeatConstants.SimpleWeaponProficiencyId + WeaponConstants.LightCrossbow,
             FeatConstants.SimpleWeaponProficiencyId + WeaponConstants.Quarterstaff)]
+        [TestCase(CharacterClassConstants.Domains.Earth,
+            FeatConstants.TurnId)]
         [TestCase(RaceConstants.BaseRaces.DeepHalflingId,
             FeatConstants.SaveBonusId + "All",
             FeatConstants.SaveBonusId + "Fear",
@@ -92,6 +111,9 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.NaturalWeaponId + "Claw",
             FeatConstants.NaturalWeaponId + "Bite")]
         [TestCase(RaceConstants.Metaraces.NoneId)]
+        [TestCase(RaceConstants.Metaraces.WerewolfId,
+            FeatConstants.IronWillId,
+            FeatConstants.TrackId)]
         [TestCase(RaceConstants.BaseRaces.WoodElfId,
             FeatConstants.ImmuneToEffectId,
             FeatConstants.SaveBonusId,
@@ -114,6 +136,39 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
         public override void DistinctCollection(String name, params String[] collection)
         {
             base.DistinctCollection(name, collection);
+        }
+
+        [Test]
+        public void BardFeatSelections()
+        {
+            var featIds = new[]
+            {
+                FeatConstants.SimpleWeaponProficiencyId,
+                FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Longsword,
+                FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Rapier,
+                FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Sap,
+                FeatConstants.MartialWeaponProficiencyId + WeaponConstants.ShortSword,
+                FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Shortbow,
+                FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Whip,
+                FeatConstants.LightArmorProficiencyId,
+                FeatConstants.ShieldProficiencyId,
+                FeatConstants.BardicMusicId,
+                FeatConstants.BardicKnowledgeId,
+                FeatConstants.CountersongId,
+                FeatConstants.FascinateId,
+                FeatConstants.InspireCourageId + "1",
+                FeatConstants.InspireCourageId + "2",
+                FeatConstants.InspireCourageId + "3",
+                FeatConstants.InspireCourageId + "4",
+                FeatConstants.InspireCompetenceId,
+                FeatConstants.SuggestionId,
+                FeatConstants.InspireGreatnessId,
+                FeatConstants.SongOfFreedomId,
+                FeatConstants.InspireHeroicsId,
+                FeatConstants.MassSuggestionId
+            };
+
+            base.DistinctCollection(CharacterClassConstants.Bard, featIds);
         }
 
         [Test]

@@ -50,10 +50,10 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             "0",
             "0",
             "")]
-        [TestCase(FeatConstants.TurnUndeadId,
-            FeatConstants.TurnUndeadId,
+        [TestCase(FeatConstants.TurnId,
+            FeatConstants.TurnId,
             "0",
-            "",
+            "Undead",
             "0",
             "0",
             "")]

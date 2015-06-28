@@ -47,10 +47,10 @@
         <item></item>
     </object>
     <object>
-        <name>TurnUndead</name>
-        <item>TurnUndead</item>
+        <name>Turn</name>
+        <item>Turn</item>
         <item>0</item>
-        <item></item>
+        <item>Undead</item>
         <item>0</item>
         <item>0</item>
         <item></item>
