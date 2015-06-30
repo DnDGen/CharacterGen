@@ -126,11 +126,25 @@
         <item>ShieldProficiency</item>
         <item>FastMovement</item>
         <item>Illiteracy</item>
-        <item>Rage</item>
+        <item>Rage1</item>
+        <item>Rage2</item>
+        <item>Rage3</item>
+        <item>Rage4</item>
+        <item>Rage5</item>
+        <item>Rage6</item>
         <item>UncannyDodge</item>
-        <item>TrapSense</item>
+        <item>TrapSense1</item>
+        <item>TrapSense2</item>
+        <item>TrapSense3</item>
+        <item>TrapSense4</item>
+        <item>TrapSense5</item>
+        <item>TrapSense6</item>
         <item>ImprovedUncannyDodge</item>
-        <item>DamageReduction</item>
+        <item>DamageReduction1</item>
+        <item>DamageReduction2</item>
+        <item>DamageReduction3</item>
+        <item>DamageReduction4</item>
+        <item>DamageReduction5</item>
         <item>GreaterRage</item>
         <item>IndomitableWill</item>
         <item>TirelessRage</item>

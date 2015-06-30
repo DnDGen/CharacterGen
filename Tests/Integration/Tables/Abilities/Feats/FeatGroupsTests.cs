@@ -158,7 +158,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
                 FeatConstants.MightyRageId
             };
 
-            base.DistinctCollection(CharacterClassConstants.Bard, featIds);
+            base.DistinctCollection(CharacterClassConstants.Barbarian, featIds);
         }
 
         [Test]

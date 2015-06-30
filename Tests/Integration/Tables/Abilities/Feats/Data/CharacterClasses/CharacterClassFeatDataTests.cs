@@ -1,27 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using NPCGen.Tables.Interfaces;
-using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
 {
-    [TestFixture]
     public abstract class CharacterClassFeatDataTests : DataTests
     {
-        protected override Dictionary<Int32, String> PopulateDataIndices()
+        protected override void PopulateIndices(IEnumerable<String> collection)
         {
-            var classFeatSelectionIndices = new Dictionary<Int32, String>();
-
-            classFeatSelectionIndices[DataIndexConstants.CharacterClassFeatData.FeatIdIndex] = "FeatId";
-            classFeatSelectionIndices[DataIndexConstants.CharacterClassFeatData.FocusTypeIndex] = "FocusType";
-            classFeatSelectionIndices[DataIndexConstants.CharacterClassFeatData.FrequencyQuantityIndex] = "FrequencyQuantity";
-            classFeatSelectionIndices[DataIndexConstants.CharacterClassFeatData.FrequencyQuantityStatIndex] = "FrequencyQuantityStat";
-            classFeatSelectionIndices[DataIndexConstants.CharacterClassFeatData.FrequencyTimePeriodIndex] = "FrequencyTimePeriod";
-            classFeatSelectionIndices[DataIndexConstants.CharacterClassFeatData.MaximumLevelRequirementIndex] = "MaxLevel";
-            classFeatSelectionIndices[DataIndexConstants.CharacterClassFeatData.MinimumLevelRequirementIndex] = "MinLevel";
-            classFeatSelectionIndices[DataIndexConstants.CharacterClassFeatData.StrengthIndex] = "Strength";
-
-            return classFeatSelectionIndices;
+            indices[DataIndexConstants.CharacterClassFeatData.FeatIdIndex] = "FeatId";
+            indices[DataIndexConstants.CharacterClassFeatData.FocusTypeIndex] = "FocusType";
+            indices[DataIndexConstants.CharacterClassFeatData.FrequencyQuantityIndex] = "FrequencyQuantity";
+            indices[DataIndexConstants.CharacterClassFeatData.FrequencyQuantityStatIndex] = "FrequencyQuantityStat";
+            indices[DataIndexConstants.CharacterClassFeatData.FrequencyTimePeriodIndex] = "FrequencyTimePeriod";
+            indices[DataIndexConstants.CharacterClassFeatData.MaximumLevelRequirementIndex] = "MaxLevel";
+            indices[DataIndexConstants.CharacterClassFeatData.MinimumLevelRequirementIndex] = "MinLevel";
+            indices[DataIndexConstants.CharacterClassFeatData.StrengthIndex] = "Strength";
         }
 
         public virtual void Data(String name, String featId, String focusType, Int32 frequencyQuantity, String frequencyQuantityStat, String frequencyTimePeriod, Int32 minimumLevel, Int32 maximumLevel, Int32 strength)

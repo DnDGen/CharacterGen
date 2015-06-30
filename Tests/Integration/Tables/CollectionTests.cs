@@ -26,7 +26,7 @@ namespace NPCGen.Tests.Integration.Tables
         protected virtual void PopulateIndices(IEnumerable<String> collection)
         {
             for (var i = 0; i < collection.Count(); i++)
-                indices[i] = String.Format("Index {0}", i);
+                indices[i] = String.Empty;
         }
 
         public virtual void Collection(String name, params String[] collection)
@@ -56,7 +56,11 @@ namespace NPCGen.Tests.Integration.Tables
                 var actualItem = table[name].ElementAt(i);
                 var expectedItem = collection[i];
 
-                Assert.That(actualItem, Is.EqualTo(expectedItem));
+                var message = String.Format("Index {0}", i);
+                if (String.IsNullOrEmpty(indices[i]) == false)
+                    message += String.Format(" ({0})", indices[i]);
+
+                Assert.That(actualItem, Is.EqualTo(expectedItem), message);
             }
 
             AssertExtraItems(name, collection);

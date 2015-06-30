@@ -8,7 +8,7 @@ using NUnit.Framework;
 namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
 {
     [TestFixture]
-    public class HobgoblinFeatDataTests : CollectionTests
+    public class HobgoblinFeatDataTests : RacialFeatDataTests
     {
         protected override String tableName
         {

@@ -4,208 +4,254 @@
     <object>
         <name>SimpleWeaponProficiency</name>
         <item>SimpleWeaponProficiency</item>
-        <item>0</item>
         <item>All</item>
         <item>0</item>
-        <item>0</item>
         <item></item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
     </object>
     <object>
         <name>MartialWeaponProficiencyLongsword</name>
         <item>MartialWeaponProficiency</item>
-        <item>0</item>
         <item>Longsword</item>
         <item>0</item>
-        <item>0</item>
         <item></item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
     </object>
     <object>
         <name>MartialWeaponProficiencyRapier</name>
         <item>MartialWeaponProficiency</item>
-        <item>0</item>
         <item>Rapier</item>
         <item>0</item>
-        <item>0</item>
         <item></item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
     </object>
     <object>
         <name>MartialWeaponProficiencySap</name>
         <item>MartialWeaponProficiency</item>
-        <item>0</item>
         <item>Sap</item>
         <item>0</item>
-        <item>0</item>
         <item></item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
     </object>
     <object>
         <name>MartialWeaponProficiencyShort sword</name>
         <item>MartialWeaponProficiency</item>
-        <item>0</item>
         <item>Short sword</item>
         <item>0</item>
-        <item>0</item>
         <item></item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
     </object>
     <object>
         <name>MartialWeaponProficiencyShortbow</name>
         <item>MartialWeaponProficiency</item>
-        <item>0</item>
         <item>Shortbow</item>
         <item>0</item>
-        <item>0</item>
         <item></item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
     </object>
     <object>
         <name>MartialWeaponProficiencyWhip</name>
         <item>MartialWeaponProficiency</item>
-        <item>0</item>
         <item>Whip</item>
         <item>0</item>
-        <item>0</item>
         <item></item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
     </object>
     <object>
         <name>LightArmorProficiency</name>
         <item>LightArmorProficiency</item>
+        <item></item>
         <item>0</item>
+        <item></item>
         <item></item>
         <item>0</item>
         <item>0</item>
-        <item></item>
+        <item>0</item>
     </object>
     <object>
         <name>ShieldProficiency</name>
         <item>ShieldProficiency</item>
+        <item></item>
         <item>0</item>
+        <item></item>
         <item></item>
         <item>0</item>
         <item>0</item>
-        <item></item>
+        <item>0</item>
     </object>
     <object>
         <name>BardicMusic</name>
         <item>BardicMusic</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+        <item></item>
         <item>1</item>
-        <item></item>
         <item>0</item>
         <item>0</item>
-        <item></item>
     </object>
     <object>
         <name>BardicKnowledge</name>
         <item>BardicKnowledge</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+        <item></item>
         <item>1</item>
-        <item></item>
         <item>0</item>
         <item>0</item>
-        <item></item>
     </object>
     <object>
         <name>Countersong</name>
         <item>Countersong</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+        <item></item>
         <item>1</item>
-        <item></item>
         <item>0</item>
         <item>0</item>
-        <item></item>
     </object>
     <object>
         <name>Fascinate</name>
         <item>Fascinate</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+        <item></item>
         <item>1</item>
-        <item></item>
         <item>0</item>
         <item>0</item>
-        <item></item>
     </object>
     <object>
         <name>InspireCourage1</name>
         <item>InspireCourage</item>
-        <item>1</item>
         <item></item>
-        <item>1</item>
         <item>0</item>
         <item></item>
+        <item></item>
+        <item>1</item>
+        <item>7</item>
+        <item>1</item>
     </object>
     <object>
         <name>InspireCourage2</name>
         <item>InspireCourage</item>
-        <item>8</item>
         <item></item>
-        <item>2</item>
         <item>0</item>
         <item></item>
+        <item></item>
+        <item>8</item>
+        <item>13</item>
+        <item>2</item>
     </object>
     <object>
         <name>InspireCourage3</name>
         <item>InspireCourage</item>
-        <item>14</item>
         <item></item>
-        <item>3</item>
         <item>0</item>
         <item></item>
+        <item></item>
+        <item>14</item>
+        <item>19</item>
+        <item>3</item>
     </object>
     <object>
         <name>InspireCourage4</name>
         <item>InspireCourage</item>
-        <item>20</item>
         <item></item>
-        <item>4</item>
         <item>0</item>
         <item></item>
+        <item></item>
+        <item>20</item>
+        <item>0</item>
+        <item>4</item>
     </object>
     <object>
         <name>InspireCompetence</name>
         <item>InspireCompetence</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+        <item></item>
         <item>3</item>
-        <item></item>
         <item>0</item>
         <item>0</item>
-        <item></item>
     </object>
     <object>
         <name>Suggestion</name>
         <item>Suggestion</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+        <item></item>
         <item>6</item>
-        <item></item>
         <item>0</item>
         <item>0</item>
-        <item></item>
     </object>
     <object>
         <name>InspireGreatness</name>
         <item>InspireGreatness</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+        <item></item>
         <item>9</item>
-        <item></item>
         <item>0</item>
         <item>0</item>
-        <item></item>
     </object>
     <object>
         <name>SongOfFreedom</name>
         <item>SongOfFreedom</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+        <item></item>
         <item>12</item>
-        <item></item>
         <item>0</item>
         <item>0</item>
-        <item></item>
     </object>
     <object>
         <name>InspireHeroics</name>
         <item>InspireHeroics</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+        <item></item>
         <item>15</item>
-        <item></item>
         <item>0</item>
         <item>0</item>
-        <item></item>
     </object>
     <object>
         <name>MassSuggestion</name>
         <item>MassSuggestion</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+        <item></item>
         <item>18</item>
-        <item></item>
         <item>0</item>
         <item>0</item>
-        <item></item>
     </object>
 </items>

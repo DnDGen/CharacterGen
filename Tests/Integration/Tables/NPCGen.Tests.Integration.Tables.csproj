@@ -78,6 +78,7 @@
     <Compile Include="Abilities\Feats\Data\Racial\HillDwarfFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\HobgoblinFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\LizardfolkFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\RacialFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\WoodElfFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\FeatFociTests.cs" />
     <Compile Include="Abilities\Feats\FeatGroupsTests.cs" />

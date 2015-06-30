@@ -242,13 +242,13 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             4)]
         [TestCase(FeatConstants.DamageReductionId + "5",
             FeatConstants.DamageReductionId,
-            19,
+            "",
             0,
             "",
             "",
-            "",
-            5,
-            0)]
+            19,
+            0,
+            5)]
         [TestCase(FeatConstants.GreaterRageId,
             FeatConstants.GreaterRageId,
             "",

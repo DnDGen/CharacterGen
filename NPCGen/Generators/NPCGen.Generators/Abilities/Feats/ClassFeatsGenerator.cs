@@ -40,6 +40,10 @@ namespace NPCGen.Generators.Abilities.Feats
                 classFeat.Name.Id = classFeatSelection.FeatId;
                 classFeat.Focus = featFocusGenerator.GenerateFrom(classFeatSelection.FeatId, classFeatSelection.FocusType, classFeatSelection.RequiredFeatIds, earnedFeat, characterClass);
                 classFeat.Frequency = classFeatSelection.Frequency;
+
+                if (classFeatSelection.FrequencyQuantityStat != String.Empty)
+                    classFeat.Frequency.Quantity += stats[classFeatSelection.FrequencyQuantityStat].Bonus;
+
                 classFeat.Strength = classFeatSelection.Strength;
 
                 classFeats.Add(classFeat);
