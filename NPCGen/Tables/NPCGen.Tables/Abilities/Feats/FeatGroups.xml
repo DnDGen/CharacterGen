@@ -223,6 +223,16 @@
         <item>Turn</item>
     </object>
     <object>
+        <name>Fighter</name>
+        <item>SimpleWeaponProficiency</item>
+        <item>MartialWeaponProficiency</item>
+        <item>LightArmorProficiency</item>
+        <item>MediumArmorProficiency</item>
+        <item>HeavyArmorProficiency</item>
+        <item>ShieldProficiency</item>
+        <item>TowerShieldProficiency</item>
+    </object>
+    <object>
         <name>Goblin</name>
         <item>SkillBonusMove Silently</item>
         <item>SkillBonusRide</item>

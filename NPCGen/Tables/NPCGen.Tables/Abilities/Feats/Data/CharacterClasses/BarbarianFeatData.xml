@@ -5,7 +5,7 @@
         <name>SimpleWeaponProficiency</name>
         <item>SimpleWeaponProficiency</item>
         <item>1</item>
-        <item>All</item>
+        <item>SimpleWeaponProficiency</item>
         <item>0</item>
         <item>0</item>
         <item></item>
@@ -16,7 +16,7 @@
         <name>MartialWeaponProficiency</name>
         <item>MartialWeaponProficiency</item>
         <item>1</item>
-        <item>All</item>
+        <item>MartialWeaponProficiency</item>
         <item>0</item>
         <item>0</item>
         <item></item>

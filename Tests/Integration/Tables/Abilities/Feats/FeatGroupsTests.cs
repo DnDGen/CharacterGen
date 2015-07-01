@@ -121,6 +121,35 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.AttackBonusId,
             FeatConstants.DodgeBonusId,
             FeatConstants.SaveBonusId)]
+        [TestCase(CharacterClassConstants.Fighter,
+            FeatConstants.SimpleWeaponProficiencyId,
+            FeatConstants.MartialWeaponProficiencyId,
+            FeatConstants.LightArmorProficiencyId,
+            FeatConstants.MediumArmorProficiencyId,
+            FeatConstants.HeavyArmorProficiencyId,
+            FeatConstants.ShieldProficiencyId,
+            FeatConstants.TowerShieldProficiencyId)]
+        [TestCase(CharacterClassConstants.Ranger,
+            FeatConstants.SimpleWeaponProficiencyId,
+            FeatConstants.MartialWeaponProficiencyId,
+            FeatConstants.LightArmorProficiencyId,
+            FeatConstants.ShieldProficiencyId,
+            FeatConstants.FavoredEnemyId + "1",
+            FeatConstants.FavoredEnemyId + "2",
+            FeatConstants.FavoredEnemyId + "3",
+            FeatConstants.FavoredEnemyId + "4",
+            FeatConstants.FavoredEnemyId + "5",
+            FeatConstants.TrackId,
+            FeatConstants.WildEmpathyId,
+            FeatConstants.CombatStyleId,
+            FeatConstants.EnduranceId,
+            FeatConstants.ImprovedCombatStyleId,
+            FeatConstants.WoodlandStrideId,
+            FeatConstants.SwiftTrackerId,
+            FeatConstants.EvasionId,
+            FeatConstants.CombatStyleMasteryId,
+            FeatConstants.CamouflageId,
+            FeatConstants.HideInPlainSightId)]
         public override void DistinctCollection(String name, params String[] collection)
         {
             base.DistinctCollection(name, collection);
