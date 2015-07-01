@@ -4,7 +4,7 @@
     <object>
         <name>SimpleWeaponProficiency</name>
         <item>SimpleWeaponProficiency</item>
-        <item>0</item>
+        <item>1</item>
         <item>All</item>
         <item>0</item>
         <item>0</item>
@@ -15,7 +15,7 @@
     <object>
         <name>MartialWeaponProficiency</name>
         <item>MartialWeaponProficiency</item>
-        <item>0</item>
+        <item>1</item>
         <item>All</item>
         <item>0</item>
         <item>0</item>
@@ -26,7 +26,7 @@
     <object>
         <name>MediumArmorProficiency</name>
         <item>MediumArmorProficiency</item>
-        <item>0</item>
+        <item>1</item>
         <item></item>
         <item>0</item>
         <item>0</item>
@@ -37,7 +37,7 @@
     <object>
         <name>LightArmorProficiency</name>
         <item>LightArmorProficiency</item>
-        <item>0</item>
+        <item>1</item>
         <item></item>
         <item>0</item>
         <item>0</item>
@@ -48,7 +48,7 @@
     <object>
         <name>ShieldProficiency</name>
         <item>ShieldProficiency</item>
-        <item>0</item>
+        <item>1</item>
         <item></item>
         <item>0</item>
         <item>0</item>
@@ -59,7 +59,7 @@
     <object>
         <name>FastMovement</name>
         <item>FastMovement</item>
-        <item>0</item>
+        <item>1</item>
         <item></item>
         <item>0</item>
         <item>0</item>
@@ -70,7 +70,7 @@
     <object>
         <name>Illiteracy</name>
         <item>Illiteracy</item>
-        <item>0</item>
+        <item>1</item>
         <item></item>
         <item>0</item>
         <item>0</item>
@@ -160,66 +160,66 @@
         <item>TrapSense</item>
         <item>3</item>
         <item></item>
+        <item>1</item>
         <item>0</item>
         <item></item>
-        <item></item>
         <item>5</item>
-        <item>1</item>
+        <item></item>
     </object>
     <object>
         <name>TrapSense2</name>
         <item>TrapSense</item>
         <item>6</item>
         <item></item>
+        <item>2</item>
         <item>0</item>
         <item></item>
-        <item></item>
         <item>8</item>
-        <item>2</item>
+        <item></item>
     </object>
     <object>
         <name>TrapSense3</name>
         <item>TrapSense</item>
         <item>9</item>
         <item></item>
+        <item>3</item>
         <item>0</item>
         <item></item>
-        <item></item>
         <item>11</item>
-        <item>3</item>
+        <item></item>
     </object>
     <object>
         <name>TrapSense4</name>
         <item>TrapSense</item>
         <item>12</item>
         <item></item>
+        <item>4</item>
         <item>0</item>
         <item></item>
-        <item></item>
         <item>14</item>
-        <item>4</item>
+        <item></item>
     </object>
     <object>
         <name>TrapSense5</name>
         <item>TrapSense</item>
         <item>15</item>
         <item></item>
+        <item>5</item>
         <item>0</item>
         <item></item>
-        <item></item>
         <item>17</item>
-        <item>5</item>
+        <item></item>
     </object>
     <object>
         <name>TrapSense6</name>
         <item>TrapSense</item>
         <item>18</item>
         <item></item>
-        <item>0</item>
-        <item></item>
-        <item></item>
-        <item>0</item>
         <item>6</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
     </object>
     <object>
         <name>ImprovedUncannyDodge</name>
@@ -312,7 +312,7 @@
     <object>
         <name>TirelessRage</name>
         <item>TirelessRage</item>
-        <item>13</item>
+        <item>17</item>
         <item></item>
         <item>0</item>
         <item>0</item>

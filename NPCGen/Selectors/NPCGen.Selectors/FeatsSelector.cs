@@ -87,13 +87,13 @@ namespace NPCGen.Selectors
 
         public IEnumerable<CharacterClassFeatSelection> SelectClass(String characterClassName)
         {
-            var classFeatIds = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, characterClassName);
+            var classFeatSelectionIds = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, characterClassName);
             var classFeatSelections = new List<CharacterClassFeatSelection>();
 
-            foreach (var classFeatId in classFeatIds)
+            foreach (var classFeatSelectionId in classFeatSelectionIds)
             {
                 var tableName = String.Format(TableNameConstants.Formattable.Collection.CLASSFeatData, characterClassName);
-                var featData = collectionsSelector.SelectFrom(tableName, classFeatId).ToArray();
+                var featData = collectionsSelector.SelectFrom(tableName, classFeatSelectionId).ToArray();
 
                 var classFeatSelection = new CharacterClassFeatSelection();
                 classFeatSelection.FeatId = featData[DataIndexConstants.CharacterClassFeatData.FeatIdIndex];

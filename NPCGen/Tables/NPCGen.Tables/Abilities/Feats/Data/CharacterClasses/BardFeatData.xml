@@ -4,7 +4,7 @@
     <object>
         <name>SimpleWeaponProficiency</name>
         <item>SimpleWeaponProficiency</item>
-        <item>0</item>
+        <item>1</item>
         <item>All</item>
         <item>0</item>
         <item>0</item>
@@ -15,7 +15,7 @@
     <object>
         <name>MartialWeaponProficiencyLongsword</name>
         <item>MartialWeaponProficiency</item>
-        <item>0</item>
+        <item>1</item>
         <item>Longsword</item>
         <item>0</item>
         <item>0</item>
@@ -26,7 +26,7 @@
     <object>
         <name>MartialWeaponProficiencyRapier</name>
         <item>MartialWeaponProficiency</item>
-        <item>0</item>
+        <item>1</item>
         <item>Rapier</item>
         <item>0</item>
         <item>0</item>
@@ -37,7 +37,7 @@
     <object>
         <name>MartialWeaponProficiencySap</name>
         <item>MartialWeaponProficiency</item>
-        <item>0</item>
+        <item>1</item>
         <item>Sap</item>
         <item>0</item>
         <item>0</item>
@@ -48,7 +48,7 @@
     <object>
         <name>MartialWeaponProficiencyShort sword</name>
         <item>MartialWeaponProficiency</item>
-        <item>0</item>
+        <item>1</item>
         <item>Short sword</item>
         <item>0</item>
         <item>0</item>
@@ -59,7 +59,7 @@
     <object>
         <name>MartialWeaponProficiencyShortbow</name>
         <item>MartialWeaponProficiency</item>
-        <item>0</item>
+        <item>1</item>
         <item>Shortbow</item>
         <item>0</item>
         <item>0</item>
@@ -70,7 +70,7 @@
     <object>
         <name>MartialWeaponProficiencyWhip</name>
         <item>MartialWeaponProficiency</item>
-        <item>0</item>
+        <item>1</item>
         <item>Whip</item>
         <item>0</item>
         <item>0</item>
@@ -81,7 +81,7 @@
     <object>
         <name>LightArmorProficiency</name>
         <item>LightArmorProficiency</item>
-        <item>0</item>
+        <item>1</item>
         <item></item>
         <item>0</item>
         <item>0</item>
@@ -92,7 +92,7 @@
     <object>
         <name>ShieldProficiency</name>
         <item>ShieldProficiency</item>
-        <item>0</item>
+        <item>1</item>
         <item></item>
         <item>0</item>
         <item>0</item>

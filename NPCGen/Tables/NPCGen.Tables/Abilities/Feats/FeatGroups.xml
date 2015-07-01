@@ -161,7 +161,26 @@
         <item>MartialWeaponProficiencyWhip</item>
         <item>LightArmorProficiency</item>
         <item>ShieldProficiency</item>
-        <item>BardicMusic</item>
+        <item>BardicMusic1</item>
+        <item>BardicMusic2</item>
+        <item>BardicMusic3</item>
+        <item>BardicMusic4</item>
+        <item>BardicMusic5</item>
+        <item>BardicMusic6</item>
+        <item>BardicMusic7</item>
+        <item>BardicMusic8</item>
+        <item>BardicMusic9</item>
+        <item>BardicMusic10</item>
+        <item>BardicMusic11</item>
+        <item>BardicMusic12</item>
+        <item>BardicMusic13</item>
+        <item>BardicMusic14</item>
+        <item>BardicMusic15</item>
+        <item>BardicMusic16</item>
+        <item>BardicMusic17</item>
+        <item>BardicMusic18</item>
+        <item>BardicMusic19</item>
+        <item>BardicMusic20</item>
         <item>BardicKnowledge</item>
         <item>Countersong</item>
         <item>Fascinate</item>
@@ -184,6 +203,10 @@
         <item>HeavyArmorProficiency</item>
         <item>ShieldProficiency</item>
         <item>Turn</item>
+    </object>
+    <object>
+        <name>Conjuration</name>
+        <item>SkillBonus</item>
     </object>
     <object>
         <name>DeepHalfling</name>

@@ -87,6 +87,7 @@
     <Compile Include="Abilities\Skills\CrossClassSkillsTests.cs" />
     <Compile Include="Abilities\Skills\RacialAdjustments\BugbearSkillAdjustmentsTests.cs" />
     <Compile Include="Abilities\Skills\RacialAdjustments\DeepHalflingSkillAdjustmentsTests.cs" />
+    <Compile Include="Abilities\Skills\RacialAdjustments\DeepDwarfSkillAdjustmentsTests.cs" />
     <Compile Include="Abilities\Skills\RacialAdjustments\DrowSkillAdjustmentsTests.cs" />
     <Compile Include="Abilities\Skills\RacialAdjustments\ForestGnomeSkillAdjustmentsTests.cs" />
     <Compile Include="Abilities\Skills\RacialAdjustments\GnollSkillAdjustmentsTests.cs" />
