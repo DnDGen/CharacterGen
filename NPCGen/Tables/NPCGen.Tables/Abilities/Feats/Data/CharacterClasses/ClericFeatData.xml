@@ -4,54 +4,66 @@
     <object>
         <name>SimpleWeaponProficiency</name>
         <item>SimpleWeaponProficiency</item>
-        <item>0</item>
+        <item>1</item>
         <item>All</item>
         <item>0</item>
+        <item>0</item>
+        <item></item>
         <item>0</item>
         <item></item>
     </object>
     <object>
         <name>LightArmorProficiency</name>
         <item>LightArmorProficiency</item>
-        <item>0</item>
+        <item>1</item>
         <item></item>
         <item>0</item>
+        <item>0</item>
+        <item></item>
         <item>0</item>
         <item></item>
     </object>
     <object>
         <name>MediumArmorProficiency</name>
         <item>MediumArmorProficiency</item>
-        <item>0</item>
+        <item>1</item>
         <item></item>
         <item>0</item>
+        <item>0</item>
+        <item></item>
         <item>0</item>
         <item></item>
     </object>
     <object>
         <name>HeavyArmorProficiency</name>
         <item>HeavyArmorProficiency</item>
-        <item>0</item>
+        <item>1</item>
         <item></item>
         <item>0</item>
+        <item>0</item>
+        <item></item>
         <item>0</item>
         <item></item>
     </object>
     <object>
         <name>ShieldProficiency</name>
         <item>ShieldProficiency</item>
-        <item>0</item>
+        <item>1</item>
         <item></item>
         <item>0</item>
+        <item>0</item>
+        <item></item>
         <item>0</item>
         <item></item>
     </object>
     <object>
         <name>Turn</name>
         <item>Turn</item>
-        <item>0</item>
+        <item>1</item>
         <item>Undead</item>
         <item>0</item>
+        <item>0</item>
+        <item></item>
         <item>0</item>
         <item></item>
     </object>

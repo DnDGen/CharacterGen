@@ -19,7 +19,19 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
 
         public virtual void Data(String name, String featId, String focus, Int32 frequencyQuantity, String frequencyTimePeriod, Int32 minimumHitDiceRequirement, String sizeRequirement, Int32 strength)
         {
-            Data(name, featId, focus, frequencyQuantity.ToString(), frequencyTimePeriod, minimumHitDiceRequirement.ToString(), sizeRequirement, strength.ToString());
+            var data = new List<String>();
+            for (var i = 0; i < 7; i++)
+                data.Add(String.Empty);
+
+            data[DataIndexConstants.RacialFeatData.FeatIdIndex] = featId;
+            data[DataIndexConstants.RacialFeatData.FocusIndex] = focus;
+            data[DataIndexConstants.RacialFeatData.FrequencyQuantityIndex] = Convert.ToString(frequencyQuantity);
+            data[DataIndexConstants.RacialFeatData.MinimumHitDiceRequirementIndex] = Convert.ToString(minimumHitDiceRequirement);
+            data[DataIndexConstants.RacialFeatData.FrequencyTimePeriodIndex] = frequencyTimePeriod;
+            data[DataIndexConstants.RacialFeatData.SizeRequirementIndex] = sizeRequirement;
+            data[DataIndexConstants.RacialFeatData.StrengthIndex] = Convert.ToString(strength);
+
+            Data(name, data);
         }
     }
 }

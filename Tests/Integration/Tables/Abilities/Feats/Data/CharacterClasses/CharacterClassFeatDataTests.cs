@@ -20,7 +20,20 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
 
         public virtual void Data(String name, String featId, String focusType, Int32 frequencyQuantity, String frequencyQuantityStat, String frequencyTimePeriod, Int32 minimumLevel, Int32 maximumLevel, Int32 strength)
         {
-            Data(name, featId, focusType, frequencyQuantity.ToString(), frequencyQuantityStat, frequencyTimePeriod, minimumLevel.ToString(), maximumLevel.ToString(), strength.ToString());
+            var data = new List<String>();
+            for (var i = 0; i < 8; i++)
+                data.Add(String.Empty);
+
+            data[DataIndexConstants.CharacterClassFeatData.FeatIdIndex] = featId;
+            data[DataIndexConstants.CharacterClassFeatData.FocusTypeIndex] = focusType;
+            data[DataIndexConstants.CharacterClassFeatData.FrequencyQuantityIndex] = Convert.ToString(frequencyQuantity);
+            data[DataIndexConstants.CharacterClassFeatData.FrequencyQuantityStatIndex] = frequencyQuantityStat;
+            data[DataIndexConstants.CharacterClassFeatData.FrequencyTimePeriodIndex] = frequencyTimePeriod;
+            data[DataIndexConstants.CharacterClassFeatData.MaximumLevelRequirementIndex] = Convert.ToString(maximumLevel);
+            data[DataIndexConstants.CharacterClassFeatData.MinimumLevelRequirementIndex] = Convert.ToString(minimumLevel);
+            data[DataIndexConstants.CharacterClassFeatData.StrengthIndex] = Convert.ToString(strength);
+
+            Data(name, data);
         }
     }
 }

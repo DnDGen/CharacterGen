@@ -21,7 +21,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             0,
             "",
             "",
-            0,
+            1,
             0,
             0)]
         [TestCase(FeatConstants.SimpleWeaponProficiencyId + WeaponConstants.Club,
@@ -30,7 +30,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             0,
             "",
             "",
-            0,
+            1,
             0,
             0)]
         [TestCase(FeatConstants.SimpleWeaponProficiencyId + WeaponConstants.Dagger,
@@ -39,7 +39,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             0,
             "",
             "",
-            0,
+            1,
             0,
             0)]
         [TestCase(FeatConstants.SimpleWeaponProficiencyId + WeaponConstants.HeavyCrossbow,
@@ -48,7 +48,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             0,
             "",
             "",
-            0,
+            1,
             0,
             0)]
         [TestCase(FeatConstants.SimpleWeaponProficiencyId + WeaponConstants.LightCrossbow,
@@ -57,7 +57,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             0,
             "",
             "",
-            0,
+            1,
             0,
             0)]
         [TestCase(FeatConstants.SimpleWeaponProficiencyId + WeaponConstants.Quarterstaff,
@@ -66,7 +66,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             0,
             "",
             "",
-            0,
+            1,
             0,
             0)]
         public override void Data(String name, String featId, String focusType, Int32 frequencyQuantity, String frequencyQuantityStat, String frequencyTimePeriod, Int32 minimumLevel, Int32 maximumLevel, Int32 strength)

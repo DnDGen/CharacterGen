@@ -22,7 +22,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             0,
             "",
             "",
-            0,
+            1,
             0,
             0)]
         [TestCase(FeatConstants.LightArmorProficiencyId,
@@ -31,7 +31,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             0,
             "",
             "",
-            0,
+            1,
             0,
             0)]
         [TestCase(FeatConstants.MediumArmorProficiencyId,
@@ -40,7 +40,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             0,
             "",
             "",
-            0,
+            1,
             0,
             0)]
         [TestCase(FeatConstants.HeavyArmorProficiencyId,
@@ -49,7 +49,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             0,
             "",
             "",
-            0,
+            1,
             0,
             0)]
         [TestCase(FeatConstants.ShieldProficiencyId,
@@ -58,7 +58,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             0,
             "",
             "",
-            0,
+            1,
             0,
             0)]
         [TestCase(FeatConstants.TurnId,
@@ -67,7 +67,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             3,
             StatConstants.Charisma,
             FeatConstants.Frequencies.Day,
-            0,
+            1,
             0,
             0)]
         public override void Data(String name, String featId, String focusType, Int32 frequencyQuantity, String frequencyQuantityStat, String frequencyTimePeriod, Int32 minimumLevel, Int32 maximumLevel, Int32 strength)

@@ -21,7 +21,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             0,
             "",
             "",
-            0,
+            1,
             0,
             0)]
         [TestCase(FeatConstants.MartialWeaponProficiencyId,
@@ -30,7 +30,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             0,
             "",
             "",
-            0,
+            1,
             0,
             0)]
         [TestCase(FeatConstants.LightArmorProficiencyId,
@@ -39,7 +39,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             0,
             "",
             "",
-            0,
+            1,
             0,
             0)]
         [TestCase(FeatConstants.MediumArmorProficiencyId,
@@ -48,7 +48,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             0,
             "",
             "",
-            0,
+            1,
             0,
             0)]
         [TestCase(FeatConstants.ShieldProficiencyId,
@@ -57,7 +57,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             0,
             "",
             "",
-            0,
+            1,
             0,
             0)]
         [TestCase(FeatConstants.FastMovementId,
@@ -66,7 +66,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             0,
             "",
             "",
-            0,
+            1,
             0,
             0)]
         [TestCase(FeatConstants.IlliteracyId,
@@ -75,7 +75,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             0,
             "",
             "",
-            0,
+            1,
             0,
             0)]
         [TestCase(FeatConstants.RageId + "1",

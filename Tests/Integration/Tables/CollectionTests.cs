@@ -51,14 +51,14 @@ namespace NPCGen.Tests.Integration.Tables
 
             PopulateIndices(collection);
 
-            for (var i = 0; i < collection.Length; i++)
+            foreach (var index in indices.Keys.OrderBy(k => k))
             {
-                var actualItem = table[name].ElementAt(i);
-                var expectedItem = collection[i];
+                var actualItem = table[name].ElementAt(index);
+                var expectedItem = collection[index];
 
-                var message = String.Format("Index {0}", i);
-                if (String.IsNullOrEmpty(indices[i]) == false)
-                    message += String.Format(" ({0})", indices[i]);
+                var message = String.Format("Index {0}", index);
+                if (String.IsNullOrEmpty(indices[index]) == false)
+                    message += String.Format(" ({0})", indices[index]);
 
                 Assert.That(actualItem, Is.EqualTo(expectedItem), message);
             }
