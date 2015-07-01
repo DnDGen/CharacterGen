@@ -138,28 +138,14 @@ namespace NPCGen.Generators.Abilities
 
         private Dictionary<String, Skill> ApplyRacialAdjustments(Dictionary<String, Skill> skills, Race race)
         {
-            skills = GetRacialBonuses(skills, race.BaseRace.Id);
+            if (race.BaseRace.Id != RaceConstants.BaseRaces.MindFlayerId)
+                return skills;
 
             var allKnowledgeSkills = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.Knowledge);
             var knowledgeSkills = allKnowledgeSkills.Intersect(skills.Keys);
 
-            if (race.Metarace.Id != RaceConstants.Metaraces.NoneId)
-                skills = GetRacialBonuses(skills, race.Metarace.Id);
-
-            if (race.BaseRace.Id == RaceConstants.BaseRaces.MindFlayerId && knowledgeSkills.Any())
-                skills = ApplyMindFlayerKnowledgeBonus(skills, knowledgeSkills);
-
-            return skills;
-        }
-
-        private Dictionary<String, Skill> GetRacialBonuses(Dictionary<String, Skill> skills, String raceId)
-        {
-            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.BASERACESkillAdjustments, raceId);
-            var adjustments = adjustmentsSelector.SelectFrom(tableName);
-
-            foreach (var adjustment in adjustments)
-                if (skills.ContainsKey(adjustment.Key))
-                    skills[adjustment.Key].Bonus += adjustment.Value;
+            if (knowledgeSkills.Any())
+                return ApplyMindFlayerKnowledgeBonus(skills, knowledgeSkills);
 
             return skills;
         }

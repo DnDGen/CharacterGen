@@ -47,7 +47,6 @@ namespace NPCGen.Tables.Interfaces
                 public const String SkillData = "SkillData";
                 public const String SkillGroups = "SkillGroups";
                 public const String SkillSynergy = "SkillSynergy";
-                public const String SkillSynergyFeats = "SkillSynergyFeats";
                 public const String SpecialistFields = "SpecialistFields";
                 public const String StatPriorities = "StatPriorities";
             }
@@ -69,13 +68,10 @@ namespace NPCGen.Tables.Interfaces
         {
             public static class Adjustments
             {
-                public const String BASERACESkillAdjustments = "{0}SkillAdjustments";
                 public const String CLASSFeatLevelRequirements = "{0}FeatLevelRequirements";
                 public const String FEATClassRequirements = "{0}ClassRequirements";
-                public const String FEATSkillAdjustments = "{0}SkillAdjustments";
                 public const String FEATSkillRankRequirements = "{0}SkillRankRequirements";
                 public const String FEATStatRequirements = "{0}StatRequirements";
-                public const String METARACESkillAdjustments = "{0}SkillAdjustments";
                 public const String STATStatAdjustments = "{0}StatAdjustments";
             }
 

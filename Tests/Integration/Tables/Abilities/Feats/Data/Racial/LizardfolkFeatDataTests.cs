@@ -1,6 +1,5 @@
 ﻿using System;
 using NPCGen.Common.Abilities.Feats;
-using NPCGen.Common.Items;
 using NPCGen.Common.Races;
 using NPCGen.Tables.Interfaces;
 using NUnit.Framework;
@@ -17,55 +16,55 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
 
         [TestCase(FeatConstants.SimpleWeaponProficiencyId,
             FeatConstants.SimpleWeaponProficiencyId,
+            FeatConstants.SimpleWeaponProficiencyId,
+            0,
             "",
-            "0",
-            "0",
-            WeaponProficiencyConstants.All,
-            "0",
-            "")]
+            0,
+            "",
+            0)]
         [TestCase(FeatConstants.ShieldProficiencyId,
             FeatConstants.ShieldProficiencyId,
             "",
-            "0",
-            "0",
+            0,
             "",
-            "0",
-            "")]
+            0,
+            "",
+            0)]
         [TestCase(FeatConstants.NaturalArmorId,
             FeatConstants.NaturalArmorId,
             "",
-            "0",
-            "5",
+            0,
             "",
-            "0",
-            "")]
+            0,
+            "",
+            5)]
         [TestCase(FeatConstants.HoldBreathId,
             FeatConstants.HoldBreathId,
             "",
-            "0",
-            "0",
+            0,
             "",
-            "0",
-            "")]
+            0,
+            "",
+            0)]
         [TestCase(FeatConstants.NaturalWeaponId + "Claw",
             FeatConstants.NaturalWeaponId,
-            "",
-            "0",
-            "0",
             "Claw (x2)",
-            "0",
-            "")]
+            0,
+            "",
+            0,
+            "",
+            0)]
         [TestCase(FeatConstants.NaturalWeaponId + "Bite",
             FeatConstants.NaturalWeaponId,
-            "",
-            "0",
-            "0",
             "Bite",
-            "0",
-            "")]
-        public override void OrderedCollection(String name, params String[] collection)
+            0,
+            "",
+            0,
+            "",
+            0)]
+        public override void Data(String name, String featId, String focus, Int32 frequencyQuantity, String frequencyTimePeriod, Int32 minimumHitDiceRequirement, String sizeRequirement, Int32 strength)
         {
-            base.OrderedCollection(name, collection);
+            base.Data(name, featId, focus, frequencyQuantity, frequencyTimePeriod, minimumHitDiceRequirement, sizeRequirement, strength);
         }
     }
 }

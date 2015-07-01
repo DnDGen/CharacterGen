@@ -156,46 +156,6 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
         }
 
         [Test]
-        public void GetSkillSynergyFeats()
-        {
-            skills["skill 1"] = new Skill();
-            skills["skill 1"].Ranks = 10;
-            skills["skill 1"].ClassSkill = false;
-
-            skills["skill 2"] = new Skill();
-            skills["skill 2"].Ranks = 5;
-            skills["skill 2"].ClassSkill = true;
-
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillSynergyFeats, "skill 1")).Returns(new[] { "synergy 1" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillSynergyFeats, "skill 2")).Returns(new[] { "synergy 2", "synergy 3" });
-
-            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack).ToList();
-
-            Assert.That(feats[0].Name.Id, Is.EqualTo("synergy 1"));
-            Assert.That(feats[1].Name.Id, Is.EqualTo("synergy 2"));
-            Assert.That(feats[2].Name.Id, Is.EqualTo("synergy 3"));
-            Assert.That(feats.Count, Is.EqualTo(3));
-        }
-
-        [Test]
-        public void DoNotGetSkillSynergyFeatsIfFewerThan5EffectiveRanks()
-        {
-            skills["skill 1"] = new Skill();
-            skills["skill 1"].Ranks = 9;
-            skills["skill 1"].ClassSkill = false;
-
-            skills["skill 2"] = new Skill();
-            skills["skill 2"].Ranks = 4;
-            skills["skill 2"].ClassSkill = true;
-
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillSynergyFeats, "skill 1")).Returns(new[] { "synergy 1" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillSynergyFeats, "skill 2")).Returns(new[] { "synergy 2", "synergy 3" });
-
-            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack).ToList();
-            Assert.That(feats, Is.Empty);
-        }
-
-        [Test]
         public void GetAllFeats()
         {
             racialFeats.Add(new Feat());
@@ -222,16 +182,11 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             classFeats[0].Name.Name = "class feat 1";
             classFeats[0].Strength = 9266;
 
-            skills["skill 1"] = new Skill();
-            skills["skill 1"].Ranks = 5;
-            skills["skill 1"].ClassSkill = true;
-
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillSynergyFeats, "skill 1")).Returns(new[] { "synergy 1" });
             mockClassFeatsGenerator.Setup(g => g.GenerateWith(characterClass, stats, racialFeats)).Returns(classFeats);
             mockAdditionalFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills, baseAttack, It.IsAny<IEnumerable<Feat>>())).Returns(additionalFeats);
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
-            Assert.That(feats.Count(), Is.EqualTo(4));
+            Assert.That(feats.Count(), Is.EqualTo(3));
         }
 
         [Test]
@@ -689,24 +644,17 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             classFeats[0].Name.Id = "classFeat1";
             classFeats[0].Strength = 9266;
 
-            skills["skill 1"] = new Skill();
-            skills["skill 1"].Ranks = 5;
-            skills["skill 1"].ClassSkill = true;
-
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillSynergyFeats, "skill 1")).Returns(new[] { "synergy1" });
             mockClassFeatsGenerator.Setup(g => g.GenerateWith(characterClass, stats, racialFeats)).Returns(classFeats);
             mockAdditionalFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills, baseAttack, It.IsAny<IEnumerable<Feat>>())).Returns(additionalFeats);
 
             mockNameSelector.Setup(s => s.Select("racialFeat1")).Returns("Racial feat 1");
             mockNameSelector.Setup(s => s.Select("feat1")).Returns("Additional feat 1");
             mockNameSelector.Setup(s => s.Select("classFeat1")).Returns("Class feat 1");
-            mockNameSelector.Setup(s => s.Select("synergy1")).Returns("Synergy 1");
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
             Assert.That(feats.First(f => f.Name.Id == "racialFeat1").Name.Name, Is.EqualTo("Racial feat 1"));
             Assert.That(feats.First(f => f.Name.Id == "feat1").Name.Name, Is.EqualTo("Additional feat 1"));
             Assert.That(feats.First(f => f.Name.Id == "classFeat1").Name.Name, Is.EqualTo("Class feat 1"));
-            Assert.That(feats.First(f => f.Name.Id == "synergy1").Name.Name, Is.EqualTo("Synergy 1"));
         }
 
         [Test]

@@ -182,7 +182,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             requiredFeatIds.Add("feat1");
             otherFeat.Add(new Feat());
             otherFeat[0].Name.Id = "feat1";
-            otherFeat[0].Focus = WeaponProficiencyConstants.All;
+            otherFeat[0].Focus = "feat1";
 
             var schools = new[] { "school 2", "school 3" };
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, "focus type")).Returns(schools);
@@ -202,7 +202,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             otherFeat.Add(new Feat());
 
             otherFeat[0].Name.Id = FeatConstants.MartialWeaponProficiencyId;
-            otherFeat[0].Focus = WeaponProficiencyConstants.All;
+            otherFeat[0].Focus = FeatConstants.MartialWeaponProficiencyId;
             otherFeat[1].Name.Id = FeatConstants.WeaponFamiliarityId;
             otherFeat[1].Focus = "weird weapon";
 
@@ -242,7 +242,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             requiredFeatIds.Add(GroupConstants.Proficiency);
             otherFeat.Add(new Feat());
             otherFeat[0].Name.Id = "proficiency2";
-            otherFeat[0].Focus = WeaponProficiencyConstants.All;
+            otherFeat[0].Focus = "proficiency2";
 
             var schools = new[] { "school 1", "school 2" };
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, "focus type")).Returns(schools);

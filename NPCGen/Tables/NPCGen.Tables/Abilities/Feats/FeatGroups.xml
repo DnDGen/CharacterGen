@@ -293,6 +293,11 @@
         <name>None</name>
     </object>
     <object>
+        <name>Orc</name>
+        <item>Darkvision</item>
+        <item>LightSensitivity</item>
+    </object>
+    <object>
         <name>Rogue</name>
         <item>SneakAttack1</item>
         <item>SneakAttack2</item>

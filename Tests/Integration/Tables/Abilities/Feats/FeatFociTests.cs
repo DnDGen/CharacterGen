@@ -25,6 +25,12 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
             CharacterClassConstants.Schools.Illusion,
             CharacterClassConstants.Schools.Necromancy,
             CharacterClassConstants.Schools.Transmutation)]
+        [TestCase(WeaponConstants.HeavyCrossbow,
+            WeaponConstants.HeavyCrossbow)]
+        [TestCase(WeaponConstants.LightCrossbow,
+            WeaponConstants.LightCrossbow)]
+        [TestCase(WeaponConstants.Club,
+            WeaponConstants.Club)]
         public override void DistinctCollection(String name, params String[] collection)
         {
             base.DistinctCollection(name, collection);

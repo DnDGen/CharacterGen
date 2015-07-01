@@ -39,9 +39,8 @@ namespace NPCGen.Generators.Abilities.Feats
             var classFeats = classFeatsGenerator.GenerateWith(characterClass, stats, racialFeats);
             var automaticFeats = racialFeats.Union(classFeats);
             var additionalFeats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, automaticFeats);
-            var skillSynergyFeats = GetSkillSynergyFeats(skills);
 
-            var allFeats = automaticFeats.Union(additionalFeats).Union(skillSynergyFeats);
+            var allFeats = automaticFeats.Union(additionalFeats);
 
             var featsToCombine = allFeats.Where(f => CanCombine(f, allFeats));
             var featsToRemove = new List<Feat>();
@@ -142,29 +141,6 @@ namespace NPCGen.Generators.Abilities.Feats
                 || secondFrequency.TimePeriod == FeatConstants.Frequencies.AtWill
                 || firstFrequency.TimePeriod == FeatConstants.Frequencies.Constant
                 || secondFrequency.TimePeriod == FeatConstants.Frequencies.Constant;
-        }
-
-        private IEnumerable<Feat> GetSkillSynergyFeats(Dictionary<String, Skill> skills)
-        {
-            var synergyFeatIds = new List<String>();
-            var synergyQualifyingSkills = skills.Where(kvp => kvp.Value.EffectiveRanks >= 5).Select(kvp => kvp.Key);
-
-            foreach (var skill in synergyQualifyingSkills)
-            {
-                var synergy = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillSynergyFeats, skill);
-                synergyFeatIds.AddRange(synergy);
-            }
-
-            var synergyFeats = new List<Feat>();
-            foreach (var synergyFeatId in synergyFeatIds)
-            {
-                var synergyFeat = new Feat();
-                synergyFeat.Name.Id = synergyFeatId;
-
-                synergyFeats.Add(synergyFeat);
-            }
-
-            return synergyFeats;
         }
     }
 }

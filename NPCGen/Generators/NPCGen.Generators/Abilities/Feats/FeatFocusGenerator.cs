@@ -65,8 +65,8 @@ namespace NPCGen.Generators.Abilities.Feats
             var requiredFeats = otherFeats.Where(f => RequirementHasFocus(requiredFeatIds, f));
             requiredFeats = requiredFeats.Union(proficiencyFeats);
 
-            var requirementFoci = requiredFeats.Where(f => f.Focus != WeaponProficiencyConstants.All).Select(f => f.Focus);
-            var featsWithAllFocus = requiredFeats.Where(f => f.Focus == WeaponProficiencyConstants.All);
+            var requirementFoci = requiredFeats.Where(f => f.Focus != f.Name.Id).Select(f => f.Focus);
+            var featsWithAllFocus = requiredFeats.Where(f => f.Focus == f.Name.Id);
 
             foreach (var featWithAllFocus in featsWithAllFocus)
             {

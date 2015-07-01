@@ -33,6 +33,7 @@
         <name>DeepHalfling</name>
         <item>Common</item>
         <item>Halfling</item>
+        <item>Dwarven</item>
     </object>
     <object>
         <name>Derro</name>

@@ -329,40 +329,10 @@
     <EmbeddedResource Include="Combats\RacialBaseAttackAdjustments.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\TallfellowHalflingSkillAdjustments.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\HalfOrcSkillAdjustments.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\ForestGnomeSkillAdjustments.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\TroglodyteSkillAdjustments.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\HalfElfSkillAdjustments.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\HighElfSkillAdjustments.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\HumanSkillAdjustments.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\OrcSkillAdjustments.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Abilities\Feats\Data\Racial\HighElfFeatData.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Races\BaseRaces\LandSpeeds.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\LightfootHalflingSkillAdjustments.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\GnollSkillAdjustments.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Races\Metaraces\DragonSpecies.xml" />
@@ -372,54 +342,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Combats\MonsterHitDice.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\KoboldSkillAdjustments.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\GoblinSkillAdjustments.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\WoodElfSkillAdjustments.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\DeepHalflingSkillAdjustments.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\HillDwarfSkillAdjustments.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\TieflingSkillAdjustments.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\HobgoblinSkillAdjustments.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\DrowSkillAdjustments.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\WildElfSkillAdjustments.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\BugbearSkillAdjustments.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\OgreSkillAdjustments.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\LizardfolkSkillAdjustments.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\GrayElfSkillAdjustments.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\MindFlayerSkillAdjustments.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\RockGnomeSkillAdjustments.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\WereboarSkillAdjustments.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Names.xml" />
@@ -478,10 +400,9 @@
     <EmbeddedResource Include="CharacterClasses\ProhibitedFieldQuantities.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Abilities\Feats\FeatGroups.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\WerewolfSkillAdjustments.xml" />
+    <EmbeddedResource Include="Abilities\Feats\FeatGroups.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Abilities\Feats\Data\Racial\HalfElfFeatData.xml" />
@@ -496,13 +417,12 @@
     <Folder Include="Abilities\Feats\Data\Additional\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\HalfFiendSkillAdjustments.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Abilities\Feats\Data\CharacterClasses\WizardFeatData.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Abilities\Feats\FeatFoci.xml" />
+    <EmbeddedResource Include="Abilities\Feats\FeatFoci.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Abilities\Feats\Data\Racial\HillDwarfFeatData.xml" />
@@ -526,7 +446,15 @@
     <EmbeddedResource Include="Abilities\Feats\Data\CharacterClasses\BarbarianFeatData.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Abilities\Skills\RacialAdjustments\DeepDwarfSkillAdjustments.xml" />
+    <EmbeddedResource Include="Abilities\Feats\Data\Racial\GoblinFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Feats\Data\CharacterClasses\RogueFeatData.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Feats\Data\Racial\DeepHalflingFeatData.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -18,87 +18,87 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
 
         [TestCase(FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Longsword,
             FeatConstants.MartialWeaponProficiencyId,
-            "",
-            "0",
-            "0",
             WeaponConstants.Longsword,
-            "0",
-            "")]
+            0,
+            "",
+            0,
+            "",
+            0)]
         [TestCase(FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Rapier,
             FeatConstants.MartialWeaponProficiencyId,
-            "",
-            "0",
-            "0",
             WeaponConstants.Rapier,
-            "0",
-            "")]
+            0,
+            "",
+            0,
+            "",
+            0)]
         [TestCase(FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Longbow,
             FeatConstants.MartialWeaponProficiencyId,
-            "",
-            "0",
-            "0",
             WeaponConstants.Longbow,
-            "0",
-            "")]
+            0,
+            "",
+            0,
+            "",
+            0)]
         [TestCase(FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Shortbow,
             FeatConstants.MartialWeaponProficiencyId,
-            "",
-            "0",
-            "0",
             WeaponConstants.Shortbow,
-            "0",
-            "")]
+            0,
+            "",
+            0,
+            "",
+            0)]
         [TestCase(FeatConstants.SaveBonusId,
             FeatConstants.SaveBonusId,
-            "",
-            "0",
-            "2",
             "Enchantment spells or effects",
-            "0",
-            "")]
+            0,
+            "",
+            0,
+            "",
+            2)]
         [TestCase(FeatConstants.ImmuneToEffectId,
             FeatConstants.ImmuneToEffectId,
-            "",
-            "0",
-            "0",
             "Sleep",
-            "0",
-            "")]
+            0,
+            "",
+            0,
+            "",
+            0)]
         [TestCase(FeatConstants.LowLightVisionId,
             FeatConstants.LowLightVisionId,
             "",
-            "0",
-            "0",
+            0,
             "",
-            "0",
-            "")]
+            0,
+            "",
+            0)]
         [TestCase(FeatConstants.SkillBonusId + SkillConstants.Listen,
             FeatConstants.SkillBonusId,
-            "",
-            "0",
-            "2",
             SkillConstants.Listen,
-            "0",
-            "")]
+            0,
+            "",
+            0,
+            "",
+            2)]
         [TestCase(FeatConstants.SkillBonusId + SkillConstants.Search,
             FeatConstants.SkillBonusId,
-            "",
-            "0",
-            "2",
             SkillConstants.Search,
-            "0",
-            "")]
+            0,
+            "",
+            0,
+            "",
+            2)]
         [TestCase(FeatConstants.SkillBonusId + SkillConstants.Spot,
             FeatConstants.SkillBonusId,
-            "",
-            "0",
-            "2",
             SkillConstants.Spot,
-            "0",
-            "")]
-        public override void OrderedCollection(String name, params String[] collection)
+            0,
+            "",
+            0,
+            "",
+            2)]
+        public override void Data(String name, String featId, String focus, Int32 frequencyQuantity, String frequencyTimePeriod, Int32 minimumHitDiceRequirement, String sizeRequirement, Int32 strength)
         {
-            base.OrderedCollection(name, collection);
+            base.Data(name, featId, focus, frequencyQuantity, frequencyTimePeriod, minimumHitDiceRequirement, sizeRequirement, strength);
         }
     }
 }

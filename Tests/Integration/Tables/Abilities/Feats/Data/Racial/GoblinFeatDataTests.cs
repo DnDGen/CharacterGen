@@ -8,13 +8,29 @@ using NUnit.Framework;
 namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
 {
     [TestFixture]
-    public class HobgoblinFeatDataTests : RacialFeatDataTests
+    public class GoblinFeatDataTests : RacialFeatDataTests
     {
         protected override String tableName
         {
-            get { return String.Format(TableNameConstants.Formattable.Collection.RACEFeatData, RaceConstants.BaseRaces.HobgoblinId); }
+            get { return String.Format(TableNameConstants.Formattable.Collection.RACEFeatData, RaceConstants.BaseRaces.GoblinId); }
         }
 
+        [TestCase(FeatConstants.SkillBonusId + SkillConstants.MoveSilently,
+            FeatConstants.SkillBonusId,
+            SkillConstants.MoveSilently,
+            0,
+            "",
+            0,
+            "",
+            4)]
+        [TestCase(FeatConstants.SkillBonusId + SkillConstants.Ride,
+            FeatConstants.SkillBonusId,
+            SkillConstants.Ride,
+            0,
+            "",
+            0,
+            "",
+            4)]
         [TestCase(FeatConstants.DarkvisionId,
             FeatConstants.DarkvisionId,
             "",
@@ -23,14 +39,6 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             60)]
-        [TestCase(FeatConstants.SkillBonusId,
-            FeatConstants.SkillBonusId,
-            SkillConstants.MoveSilently,
-            0,
-            "",
-            0,
-            "",
-            4)]
         public override void Data(String name, String featId, String focus, Int32 frequencyQuantity, String frequencyTimePeriod, Int32 minimumHitDiceRequirement, String sizeRequirement, Int32 strength)
         {
             base.Data(name, featId, focus, frequencyQuantity, frequencyTimePeriod, minimumHitDiceRequirement, sizeRequirement, strength);

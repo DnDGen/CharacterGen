@@ -42,7 +42,6 @@ namespace NPCGen.Tests.Unit.Tables
         [TestCase(TableNameConstants.Set.Collection.SkillData, "SkillData")]
         [TestCase(TableNameConstants.Set.Collection.SkillGroups, "SkillGroups")]
         [TestCase(TableNameConstants.Set.Collection.SkillSynergy, "SkillSynergy")]
-        [TestCase(TableNameConstants.Set.Collection.SkillSynergyFeats, "SkillSynergyFeats")]
         [TestCase(TableNameConstants.Set.Collection.SpecialistFields, "SpecialistFields")]
         [TestCase(TableNameConstants.Set.Collection.StatPriorities, "StatPriorities")]
         [TestCase(TableNameConstants.Set.Percentile.AlignmentGoodness, "AlignmentGoodness")]
@@ -61,24 +60,6 @@ namespace NPCGen.Tests.Unit.Tables
         public void Constant(String constant, String value)
         {
             Assert.That(constant, Is.EqualTo(value));
-        }
-
-        [Test]
-        public void BaseRaceSkillAdjustmentsTable()
-        {
-            Assert.That(TableNameConstants.Formattable.Adjustments.BASERACESkillAdjustments, Is.EqualTo("{0}SkillAdjustments"));
-        }
-
-        [Test]
-        public void FeatSkillAdjustmentsTable()
-        {
-            Assert.That(TableNameConstants.Formattable.Adjustments.FEATSkillAdjustments, Is.EqualTo("{0}SkillAdjustments"));
-        }
-
-        [Test]
-        public void MetaraceSkillAdjustmentsTable()
-        {
-            Assert.That(TableNameConstants.Formattable.Adjustments.METARACESkillAdjustments, Is.EqualTo("{0}SkillAdjustments"));
         }
 
         [Test]

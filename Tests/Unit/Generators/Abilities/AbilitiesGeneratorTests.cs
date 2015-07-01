@@ -11,8 +11,6 @@ using NPCGen.Generators.Abilities;
 using NPCGen.Generators.Interfaces.Abilities;
 using NPCGen.Generators.Interfaces.Abilities.Feats;
 using NPCGen.Generators.Interfaces.Randomizers.Stats;
-using NPCGen.Selectors.Interfaces;
-using NPCGen.Tables.Interfaces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Unit.Generators.Abilities
@@ -30,7 +28,6 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         private BaseAttack baseAttack;
         private Mock<IFeatsGenerator> mockFeatsGenerator;
         private Dictionary<String, Stat> stats;
-        private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
 
         [SetUp]
         public void Setup()
@@ -43,9 +40,8 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             baseAttack = new BaseAttack();
             mockSkillsGenerator = new Mock<ISkillsGenerator>();
             mockFeatsGenerator = new Mock<IFeatsGenerator>();
-            mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
             abilitiesGenerator = new AbilitiesGenerator(mockStatsGenerator.Object, mockLanguageGenerator.Object,
-                mockSkillsGenerator.Object, mockFeatsGenerator.Object, mockAdjustmentsSelector.Object);
+                mockSkillsGenerator.Object, mockFeatsGenerator.Object);
             stats = new Dictionary<String, Stat>();
 
             characterClass.ClassName = "class name";
@@ -92,71 +88,6 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
 
             var ability = abilitiesGenerator.GenerateWith(characterClass, race, mockStatsRandomizer.Object, baseAttack);
             Assert.That(ability.Feats, Is.EqualTo(feats));
-        }
-
-        [Test]
-        public void AdjustSkillsByFeat()
-        {
-            var skills = new Dictionary<String, Skill>();
-            skills["skill 1"] = new Skill();
-            skills["skill 2"] = new Skill();
-            skills["skill 3"] = new Skill();
-            mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats)).Returns(skills);
-
-            var feats = new List<Feat>();
-            var noAdjustmentFeat = new Feat();
-            var adjustmentFeat = new Feat();
-
-            noAdjustmentFeat.Name.Id = "noAdjust";
-            adjustmentFeat.Name.Id = "adjust";
-            feats.Add(noAdjustmentFeat);
-            feats.Add(adjustmentFeat);
-            mockFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills, baseAttack)).Returns(feats);
-
-            var noAdjustments = new Dictionary<String, Int32>();
-            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.FEATSkillAdjustments, feats[0].Name.Id);
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(noAdjustments);
-
-            var adjustments = new Dictionary<String, Int32>();
-            adjustments["skill 1"] = 92;
-            adjustments["skill 2"] = 66;
-            tableName = String.Format(TableNameConstants.Formattable.Adjustments.FEATSkillAdjustments, feats[1].Name.Id);
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(adjustments);
-
-            var ability = abilitiesGenerator.GenerateWith(characterClass, race, mockStatsRandomizer.Object, baseAttack);
-            Assert.That(ability.Skills["skill 1"].Bonus, Is.EqualTo(adjustments["skill 1"]));
-            Assert.That(ability.Skills["skill 2"].Bonus, Is.EqualTo(adjustments["skill 2"]));
-            Assert.That(ability.Skills["skill 3"].Bonus, Is.EqualTo(0));
-        }
-
-        [Test]
-        public void ApplySkillFocus()
-        {
-            var skills = new Dictionary<String, Skill>();
-            skills["skill 1"] = new Skill();
-            skills["skill 2"] = new Skill();
-            skills["skill 3"] = new Skill();
-            mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats)).Returns(skills);
-
-            var feats = new List<Feat>();
-            var firstSkillFocus = new Feat();
-            var secondSkillFocus = new Feat();
-
-            firstSkillFocus.Name.Id = FeatConstants.SkillFocusId;
-            firstSkillFocus.Focus = "skill 1";
-            secondSkillFocus.Name.Id = FeatConstants.SkillFocusId;
-            secondSkillFocus.Focus = "skill 3";
-            feats.Add(firstSkillFocus);
-            feats.Add(secondSkillFocus);
-            mockFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills, baseAttack)).Returns(feats);
-
-            var noAdjustments = new Dictionary<String, Int32>();
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(It.IsAny<String>())).Returns(noAdjustments);
-
-            var ability = abilitiesGenerator.GenerateWith(characterClass, race, mockStatsRandomizer.Object, baseAttack);
-            Assert.That(ability.Skills["skill 1"].Bonus, Is.EqualTo(3));
-            Assert.That(ability.Skills["skill 2"].Bonus, Is.EqualTo(0));
-            Assert.That(ability.Skills["skill 3"].Bonus, Is.EqualTo(3));
         }
     }
 }

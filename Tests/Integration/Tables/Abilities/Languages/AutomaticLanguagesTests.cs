@@ -86,7 +86,8 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Languages
             LanguageConstants.Orc)]
         [TestCase(RaceConstants.BaseRaces.DeepHalflingId,
             LanguageConstants.Common,
-            LanguageConstants.Halfling)]
+            LanguageConstants.Halfling,
+            LanguageConstants.Dwarven)]
         [TestCase(RaceConstants.BaseRaces.LightfootHalflingId,
             LanguageConstants.Common,
             LanguageConstants.Halfling)]

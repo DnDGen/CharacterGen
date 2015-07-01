@@ -96,6 +96,9 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.NaturalWeaponId + "Claw",
             FeatConstants.NaturalWeaponId + "Bite")]
         [TestCase(RaceConstants.Metaraces.NoneId)]
+        [TestCase(RaceConstants.BaseRaces.OrcId,
+            FeatConstants.DarkvisionId,
+            FeatConstants.LightSensitivityId)]
         [TestCase(RaceConstants.Metaraces.WerewolfId,
             FeatConstants.IronWillId,
             FeatConstants.TrackId)]

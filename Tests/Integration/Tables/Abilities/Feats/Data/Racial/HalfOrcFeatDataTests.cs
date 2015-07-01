@@ -17,22 +17,22 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
         [TestCase(FeatConstants.DarkvisionId,
             FeatConstants.DarkvisionId,
             "",
-            "0",
-            "60",
+            0,
             "",
-            "0",
-            "")]
+            0,
+            "",
+            60)]
         [TestCase(FeatConstants.OrcBloodId,
             FeatConstants.OrcBloodId,
             "",
-            "0",
-            "0",
+            0,
             "",
-            "0",
-            "")]
-        public override void OrderedCollection(String name, params String[] collection)
+            0,
+            "",
+            0)]
+        public override void Data(String name, String featId, String focus, Int32 frequencyQuantity, String frequencyTimePeriod, Int32 minimumHitDiceRequirement, String sizeRequirement, Int32 strength)
         {
-            base.OrderedCollection(name, collection);
+            base.Data(name, featId, focus, frequencyQuantity, frequencyTimePeriod, minimumHitDiceRequirement, sizeRequirement, strength);
         }
     }
 }

@@ -18,95 +18,95 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
 
         [TestCase(FeatConstants.SkillBonusId + SkillConstants.Appraise,
             FeatConstants.SkillBonusId,
-            "",
-            "0",
-            "2",
             SkillConstants.Appraise + " (Stone or metal items)",
-            "0",
-            "")]
+            0,
+            "",
+            0,
+            "",
+            2)]
         [TestCase(FeatConstants.AttackBonusId + RaceConstants.BaseRaces.Goblin,
             FeatConstants.AttackBonusId,
-            "",
-            "0",
-            "1",
             "Goblinoids",
-            "0",
-            "")]
+            0,
+            "",
+            0,
+            "",
+            1)]
         [TestCase(FeatConstants.AttackBonusId + RaceConstants.BaseRaces.Orc,
             FeatConstants.AttackBonusId,
-            "",
-            "0",
-            "1",
             "Orcs",
-            "0",
-            "")]
+            0,
+            "",
+            0,
+            "",
+            1)]
         [TestCase(FeatConstants.SaveBonusId + "Spell",
             FeatConstants.SaveBonusId,
-            "",
-            "0",
-            "2",
             "Spells and spell-like effects",
-            "0",
-            "")]
+            0,
+            "",
+            0,
+            "",
+            2)]
         [TestCase(FeatConstants.SaveBonusId + "Poison",
             FeatConstants.SaveBonusId,
-            "",
-            "0",
-            "2",
             "Poison",
-            "0",
-            "")]
+            0,
+            "",
+            0,
+            "",
+            2)]
         [TestCase(FeatConstants.DodgeBonusId,
             FeatConstants.DodgeBonusId,
-            "",
-            "0",
-            "4",
             "Giants",
-            "0",
-            "")]
+            0,
+            "",
+            0,
+            "",
+            4)]
         [TestCase(FeatConstants.StabilityId,
             FeatConstants.StabilityId,
             "",
-            "0",
-            "0",
+            0,
             "",
-            "0",
-            "")]
+            0,
+            "",
+            0)]
         [TestCase(FeatConstants.WeaponFamiliarityId + WeaponConstants.DwarvenWaraxe,
             FeatConstants.WeaponFamiliarityId,
-            "",
-            "0",
-            "0",
             WeaponConstants.DwarvenWaraxe,
-            "0",
-            "")]
+            0,
+            "",
+            0,
+            "",
+            0)]
         [TestCase(FeatConstants.WeaponFamiliarityId + WeaponConstants.DwarvenUrgrosh,
             FeatConstants.WeaponFamiliarityId,
-            "",
-            "0",
-            "0",
             WeaponConstants.DwarvenUrgrosh,
-            "0",
-            "")]
+            0,
+            "",
+            0,
+            "",
+            0)]
         [TestCase(FeatConstants.StonecunningId,
             FeatConstants.StonecunningId,
             "",
-            "0",
-            "0",
+            0,
             "",
-            "0",
-            "")]
+            0,
+            "",
+            0)]
         [TestCase(FeatConstants.DarkvisionId,
             FeatConstants.DarkvisionId,
             "",
-            "0",
-            "60",
+            0,
             "",
-            "0",
-            "")]
-        public override void OrderedCollection(String name, params String[] collection)
+            0,
+            "",
+            60)]
+        public override void Data(String name, String featId, String focus, Int32 frequencyQuantity, String frequencyTimePeriod, Int32 minimumHitDiceRequirement, String sizeRequirement, Int32 strength)
         {
-            base.OrderedCollection(name, collection);
+            base.Data(name, featId, focus, frequencyQuantity, frequencyTimePeriod, minimumHitDiceRequirement, sizeRequirement, strength);
         }
     }
 }
