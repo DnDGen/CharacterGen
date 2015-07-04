@@ -180,6 +180,15 @@ namespace NPCGen.Tests.Unit.Common.Abilities.Feats
         [TestCase(FeatConstants.InspireHeroics, "Inspire Heroics")]
         [TestCase(FeatConstants.MassSuggestion, "Mass Suggestion")]
         [TestCase(FeatConstants.InspireCompetence, "Inspire Competence")]
+        [TestCase(FeatConstants.FavoredEnemy, "Favored Enemy")]
+        [TestCase(FeatConstants.WildEmpathy, "Wild Empathy")]
+        [TestCase(FeatConstants.CombatStyle, "Combat Style")]
+        [TestCase(FeatConstants.ImprovedCombatStyle, "Improved Combat Style")]
+        [TestCase(FeatConstants.WoodlandStride, "Woodland Stride")]
+        [TestCase(FeatConstants.SwiftTracker, "Swift Tracker")]
+        [TestCase(FeatConstants.CombatStyleMastery, "Combat Style Mastery")]
+        [TestCase(FeatConstants.Camouflage, "Camouflage")]
+        [TestCase(FeatConstants.HideInPlainSight, "Hide in Plain Sight")]
         public void ConstantName(String constant, String value)
         {
             Assert.That(constant, Is.EqualTo(value));
@@ -357,6 +366,15 @@ namespace NPCGen.Tests.Unit.Common.Abilities.Feats
         [TestCase(FeatConstants.InspireHeroicsId, "InspireHeroics")]
         [TestCase(FeatConstants.MassSuggestionId, "MassSuggestion")]
         [TestCase(FeatConstants.InspireCompetenceId, "InspireCompetence")]
+        [TestCase(FeatConstants.FavoredEnemyId, "FavoredEnemy")]
+        [TestCase(FeatConstants.WildEmpathyId, "WildEmpathy")]
+        [TestCase(FeatConstants.CombatStyleId, "CombatStyle")]
+        [TestCase(FeatConstants.ImprovedCombatStyleId, "ImprovedCombatStyle")]
+        [TestCase(FeatConstants.WoodlandStrideId, "WoodlandStride")]
+        [TestCase(FeatConstants.SwiftTrackerId, "SwiftTracker")]
+        [TestCase(FeatConstants.CombatStyleMasteryId, "CombatStyleMastery")]
+        [TestCase(FeatConstants.CamouflageId, "Camouflage")]
+        [TestCase(FeatConstants.HideInPlainSightId, "HideInPlainSight")]
         public void ConstantId(String constant, String value)
         {
             Assert.That(constant, Is.EqualTo(value));

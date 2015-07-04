@@ -134,28 +134,5 @@ namespace NPCGen.Generators.Abilities
 
             return skills;
         }
-
-        //private Dictionary<String, Skill> ApplyRacialAdjustments(Dictionary<String, Skill> skills, Race race)
-        //{
-        //    if (race.BaseRace.Id != RaceConstants.BaseRaces.MindFlayerId)
-        //        return skills;
-
-        //    var allKnowledgeSkills = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.Knowledge);
-        //    var knowledgeSkills = allKnowledgeSkills.Intersect(skills.Keys);
-
-        //    if (knowledgeSkills.Any())
-        //        return ApplyMindFlayerKnowledgeBonus(skills, knowledgeSkills);
-
-        //    return skills;
-        //}
-
-        //private Dictionary<String, Skill> ApplyMindFlayerKnowledgeBonus(Dictionary<String, Skill> skills, IEnumerable<String> knowledgeSkills)
-        //{
-        //    var index = dice.Roll().d(knowledgeSkills.Count()) - 1;
-        //    var knowledgeSkill = knowledgeSkills.ElementAt(index);
-        //    skills[knowledgeSkill].Bonus += 8;
-
-        //    return skills;
-        //}
     }
 }

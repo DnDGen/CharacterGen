@@ -33,8 +33,8 @@ namespace NPCGen.Tests.Integration.Tables
         {
             Assert.That(table.Keys, Contains.Item(name), tableName);
 
-            foreach (var item in collection)
-                Assert.That(table[name], Contains.Item(item), tableName);
+            var missingItems = collection.Except(table[name]);
+            Assert.That(missingItems, Is.Empty, name);
 
             AssertExtraItems(name, collection);
         }

@@ -78,6 +78,8 @@ namespace NPCGen.Common.Abilities.Feats
         public const String ExtraTurningId = "ExtraTurning";
         public const String FarShot = "Far Shot";
         public const String FarShotId = "FarShot";
+        public const String FavoredEnemy = "Favored Enemy";
+        public const String FavoredEnemyId = "FavoredEnemy";
         public const String Ferocity = "Ferocity";
         public const String FerocityId = "Ferocity";
         public const String GreatCleave = "Great Cleave";
@@ -350,6 +352,22 @@ namespace NPCGen.Common.Abilities.Feats
         public const String MassSuggestionId = "MassSuggestion";
         public const String InspireCompetence = "Inspire Competence";
         public const String InspireCompetenceId = "InspireCompetence";
+        public const String WildEmpathyId = "WildEmpathy";
+        public const String CombatStyleId = "CombatStyle";
+        public const String ImprovedCombatStyleId = "ImprovedCombatStyle";
+        public const String WoodlandStrideId = "WoodlandStride";
+        public const String SwiftTrackerId = "SwiftTracker";
+        public const String CombatStyleMasteryId = "CombatStyleMastery";
+        public const String CamouflageId = "Camouflage";
+        public const String HideInPlainSightId = "HideInPlainSight";
+        public const String WildEmpathy = "Wild Empathy";
+        public const String CombatStyle = "Combat Style";
+        public const String ImprovedCombatStyle = "Improved Combat Style";
+        public const String WoodlandStride = "Woodland Stride";
+        public const String SwiftTracker = "Swift Tracker";
+        public const String CombatStyleMastery = "Combat Style Mastery";
+        public const String Camouflage = "Camouflage";
+        public const String HideInPlainSight = "Hide in Plain Sight";
 
         public static class Frequencies
         {

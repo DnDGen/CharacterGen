@@ -308,6 +308,29 @@
         <item>LightSensitivity</item>
     </object>
     <object>
+        <name>Ranger</name>
+        <item>FavoredEnemy1</item>
+        <item>FavoredEnemy2</item>
+        <item>FavoredEnemy3</item>
+        <item>FavoredEnemy4</item>
+        <item>FavoredEnemy5</item>
+        <item>WoodlandStride</item>
+        <item>SwiftTracker</item>
+        <item>Camouflage</item>
+        <item>HideInPlainSight</item>
+        <item>Evasion</item>
+        <item>Endurance</item>
+        <item>SimpleWeaponProficiency</item>
+        <item>LightArmorProficiency</item>
+        <item>MartialWeaponProficiency</item>
+        <item>ShieldProficiency</item>
+        <item>Track</item>
+        <item>WildEmpathy</item>
+        <item>CombatStyle</item>
+        <item>ImprovedCombatStyle</item>
+        <item>CombatStyleMastery</item>
+    </object>
+    <object>
         <name>Rogue</name>
         <item>SneakAttack1</item>
         <item>SneakAttack2</item>
