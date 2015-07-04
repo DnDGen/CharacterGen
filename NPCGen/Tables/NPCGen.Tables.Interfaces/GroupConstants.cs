@@ -20,6 +20,7 @@ namespace NPCGen.Tables.Interfaces
         public const String Proficiency = "Proficiency";
         public const String SchoolsOfMagic = "Schools of Magic";
         public const String Size = "Size";
+        public const String SkillBonus = "SkillBonus";
         public const String Skills = "Skills";
         public const String Spellcasters = "Spellcasters";
         public const String Standard = "Standard";

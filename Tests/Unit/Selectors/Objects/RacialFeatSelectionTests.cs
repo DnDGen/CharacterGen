@@ -25,7 +25,7 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
             Assert.That(selection.Strength, Is.EqualTo(0));
             Assert.That(selection.MinimumHitDieRequirement, Is.EqualTo(0));
             Assert.That(selection.SizeRequirement, Is.Empty);
-            Assert.That(selection.Focus, Is.Empty);
+            Assert.That(selection.FocusType, Is.Empty);
             Assert.That(selection.Frequency, Is.Not.Null);
         }
 

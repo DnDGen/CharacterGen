@@ -32,6 +32,7 @@ namespace NPCGen.Tests.Unit.Tables
         [TestCase(GroupConstants.Weapons, "Weapons")]
         [TestCase(GroupConstants.WeaponsWithUnarmedAndGrapple, "Weapons with unarmed and grapple")]
         [TestCase(GroupConstants.WeaponsWithUnarmedAndGrappleAndRay, "Weapons with unarmed, grapple, and ray")]
+        [TestCase(GroupConstants.SkillBonus, "SkillBonus")]
         public void Constant(String constant, String value)
         {
             Assert.That(constant, Is.EqualTo(value));

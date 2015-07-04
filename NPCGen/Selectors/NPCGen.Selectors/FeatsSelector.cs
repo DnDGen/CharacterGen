@@ -33,7 +33,7 @@ namespace NPCGen.Selectors
                 racialFeatSelection.SizeRequirement = featData[DataIndexConstants.RacialFeatData.SizeRequirementIndex];
                 racialFeatSelection.Strength = Convert.ToInt32(featData[DataIndexConstants.RacialFeatData.StrengthIndex]);
                 racialFeatSelection.MinimumHitDieRequirement = Convert.ToInt32(featData[DataIndexConstants.RacialFeatData.MinimumHitDiceRequirementIndex]);
-                racialFeatSelection.Focus = featData[DataIndexConstants.RacialFeatData.FocusIndex];
+                racialFeatSelection.FocusType = featData[DataIndexConstants.RacialFeatData.FocusIndex];
                 racialFeatSelection.Frequency.Quantity = Convert.ToInt32(featData[DataIndexConstants.RacialFeatData.FrequencyQuantityIndex]);
                 racialFeatSelection.Frequency.TimePeriod = featData[DataIndexConstants.RacialFeatData.FrequencyTimePeriodIndex];
 
@@ -71,7 +71,7 @@ namespace NPCGen.Selectors
             additionalFeatSelection.Frequency.TimePeriod = featData[DataIndexConstants.AdditionalFeatData.FrequencyTimePeriodIndex];
             additionalFeatSelection.Strength = Convert.ToInt32(featData[DataIndexConstants.AdditionalFeatData.StrengthIndex]);
 
-            additionalFeatSelection.RequiredFeatIds = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AdditionalFeatFeatRequirements, featId);
+            additionalFeatSelection.RequiredFeatIds = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.RequiredFeats, featId);
 
             var tableName = String.Format(TableNameConstants.Formattable.Adjustments.FEATClassRequirements, featId);
             additionalFeatSelection.RequiredCharacterClasses = adjustmentsSelector.SelectFrom(tableName);
@@ -104,6 +104,8 @@ namespace NPCGen.Selectors
                 classFeatSelection.Strength = Convert.ToInt32(featData[DataIndexConstants.CharacterClassFeatData.StrengthIndex]);
                 classFeatSelection.MaximumLevel = Convert.ToInt32(featData[DataIndexConstants.CharacterClassFeatData.MaximumLevelRequirementIndex]);
                 classFeatSelection.FrequencyQuantityStat = featData[DataIndexConstants.CharacterClassFeatData.FrequencyQuantityStatIndex];
+
+                classFeatSelection.RequiredFeatIds = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.RequiredFeats, classFeatSelection.FeatId);
 
                 classFeatSelections.Add(classFeatSelection);
             }

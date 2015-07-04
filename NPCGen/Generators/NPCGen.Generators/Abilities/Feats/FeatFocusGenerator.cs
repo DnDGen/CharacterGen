@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using D20Dice;
 using NPCGen.Common.Abilities.Feats;
+using NPCGen.Common.Abilities.Skills;
 using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Items;
 using NPCGen.Generators.Interfaces.Abilities.Feats;
@@ -96,6 +97,30 @@ namespace NPCGen.Generators.Abilities.Feats
         {
             var die = collection.Count();
             return dice.Roll().d(die) - 1;
+        }
+
+        public String GenerateFrom(String featId, String focusType, Dictionary<String, Skill> skills)
+        {
+            if (String.IsNullOrEmpty(focusType))
+                return String.Empty;
+
+            var foci = GetFoci(focusType, Enumerable.Empty<Feat>(), Enumerable.Empty<String>());
+            var allSkills = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.Skills);
+            var skillFoci = allSkills.Intersect(foci);
+
+            if (skillFoci.Any())
+            {
+                var missingSkills = allSkills.Except(skills.Keys);
+                foci = foci.Except(missingSkills);
+            }
+
+            if (foci.Any() == false)
+                return String.Empty;
+
+            var index = GetRandomIndexOf(foci);
+            var focus = foci.ElementAt(index);
+
+            return focus;
         }
     }
 }

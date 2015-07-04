@@ -50,7 +50,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             baseAttack = new BaseAttack();
             racialFeats = new List<Feat>();
 
-            mockRacialFeatsGenerator.Setup(g => g.GenerateWith(race)).Returns(racialFeats);
+            mockRacialFeatsGenerator.Setup(g => g.GenerateWith(race, skills)).Returns(racialFeats);
         }
 
         [Test]

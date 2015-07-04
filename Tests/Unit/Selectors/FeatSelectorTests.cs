@@ -46,7 +46,7 @@ namespace NPCGen.Tests.Unit.Selectors
             Assert.That(first.SizeRequirement, Is.EqualTo("ginormous"));
             Assert.That(first.MinimumHitDieRequirement, Is.EqualTo(9266));
             Assert.That(first.Strength, Is.EqualTo(0));
-            Assert.That(first.Focus, Is.Empty);
+            Assert.That(first.FocusType, Is.Empty);
             Assert.That(first.Frequency.Quantity, Is.EqualTo(0));
             Assert.That(first.Frequency.TimePeriod, Is.EqualTo("never"));
 
@@ -54,7 +54,7 @@ namespace NPCGen.Tests.Unit.Selectors
             Assert.That(last.SizeRequirement, Is.Empty);
             Assert.That(last.MinimumHitDieRequirement, Is.EqualTo(0));
             Assert.That(last.Strength, Is.EqualTo(90210));
-            Assert.That(last.Focus, Is.EqualTo("focusness"));
+            Assert.That(last.FocusType, Is.EqualTo("focusness"));
             Assert.That(last.Frequency.Quantity, Is.EqualTo(42));
             Assert.That(last.Frequency.TimePeriod, Is.EqualTo("fortnight"));
         }
@@ -78,7 +78,7 @@ namespace NPCGen.Tests.Unit.Selectors
             Assert.That(first.SizeRequirement, Is.EqualTo("ginormous"));
             Assert.That(first.MinimumHitDieRequirement, Is.EqualTo(9266));
             Assert.That(first.Strength, Is.EqualTo(0));
-            Assert.That(first.Focus, Is.Empty);
+            Assert.That(first.FocusType, Is.Empty);
             Assert.That(first.Frequency.Quantity, Is.EqualTo(0));
             Assert.That(first.Frequency.TimePeriod, Is.EqualTo("never"));
 
@@ -86,7 +86,7 @@ namespace NPCGen.Tests.Unit.Selectors
             Assert.That(last.SizeRequirement, Is.Empty);
             Assert.That(last.MinimumHitDieRequirement, Is.EqualTo(0));
             Assert.That(last.Strength, Is.EqualTo(90210));
-            Assert.That(last.Focus, Is.EqualTo("focusness"));
+            Assert.That(last.FocusType, Is.EqualTo("focusness"));
             Assert.That(last.Frequency.Quantity, Is.EqualTo(42));
             Assert.That(last.Frequency.TimePeriod, Is.EqualTo("fortnight"));
         }
@@ -100,6 +100,8 @@ namespace NPCGen.Tests.Unit.Selectors
             var classFeatTableName = String.Format(TableNameConstants.Formattable.Collection.CLASSFeatData, "class name");
             mockCollectionsSelector.Setup(s => s.SelectFrom(classFeatTableName, "class feat 1")).Returns(new[] { "classFeat1", "1", "focus type A", "0", "3", "Daily", "4", "stat" });
             mockCollectionsSelector.Setup(s => s.SelectFrom(classFeatTableName, "class feat 2")).Returns(new[] { "classFeat2", "5", String.Empty, "9266", "0", "never", "0", String.Empty });
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.RequiredFeats, "classFeat1")).Returns(new[] { "feat 1", "feat 2" });
 
             var classFeats = selector.SelectClass("class name");
             Assert.That(classFeats.Count(), Is.EqualTo(2));
@@ -115,6 +117,9 @@ namespace NPCGen.Tests.Unit.Selectors
             Assert.That(first.Frequency.TimePeriod, Is.EqualTo("Daily"));
             Assert.That(first.FrequencyQuantityStat, Is.EqualTo("stat"));
             Assert.That(first.MaximumLevel, Is.EqualTo(4));
+            Assert.That(first.RequiredFeatIds, Contains.Item("feat 1"));
+            Assert.That(first.RequiredFeatIds, Contains.Item("feat 2"));
+            Assert.That(first.RequiredFeatIds.Count(), Is.EqualTo(2));
 
             Assert.That(last.FeatId, Is.EqualTo("classFeat2"));
             Assert.That(last.FocusType, Is.Empty);
@@ -124,6 +129,7 @@ namespace NPCGen.Tests.Unit.Selectors
             Assert.That(last.Frequency.TimePeriod, Is.EqualTo("never"));
             Assert.That(last.FrequencyQuantityStat, Is.Empty);
             Assert.That(last.MaximumLevel, Is.EqualTo(0));
+            Assert.That(last.RequiredFeatIds, Is.Empty);
         }
 
         [Test]
@@ -135,6 +141,8 @@ namespace NPCGen.Tests.Unit.Selectors
             var classFeatTableName = String.Format(TableNameConstants.Formattable.Collection.CLASSFeatData, "class name");
             mockCollectionsSelector.Setup(s => s.SelectFrom(classFeatTableName, "class feat 1")).Returns(new[] { "classFeat1", "1", "focus type A", "0", "3", "Daily", "4", "stat" });
             mockCollectionsSelector.Setup(s => s.SelectFrom(classFeatTableName, "class feat 2")).Returns(new[] { "classFeat1", "5", String.Empty, "9266", "0", "never", "0", String.Empty });
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.RequiredFeats, "classFeat1")).Returns(new[] { "feat 1", "feat 2" });
 
             var classFeats = selector.SelectClass("class name");
             Assert.That(classFeats.Count(), Is.EqualTo(2));
@@ -148,6 +156,11 @@ namespace NPCGen.Tests.Unit.Selectors
             Assert.That(first.Strength, Is.EqualTo(0));
             Assert.That(first.Frequency.Quantity, Is.EqualTo(3));
             Assert.That(first.Frequency.TimePeriod, Is.EqualTo("Daily"));
+            Assert.That(first.FrequencyQuantityStat, Is.EqualTo("stat"));
+            Assert.That(first.MaximumLevel, Is.EqualTo(4));
+            Assert.That(first.RequiredFeatIds, Contains.Item("feat 1"));
+            Assert.That(first.RequiredFeatIds, Contains.Item("feat 2"));
+            Assert.That(first.RequiredFeatIds.Count(), Is.EqualTo(2));
 
             Assert.That(last.FeatId, Is.EqualTo("classFeat1"));
             Assert.That(last.FocusType, Is.Empty);
@@ -155,6 +168,11 @@ namespace NPCGen.Tests.Unit.Selectors
             Assert.That(last.Strength, Is.EqualTo(9266));
             Assert.That(last.Frequency.Quantity, Is.EqualTo(0));
             Assert.That(last.Frequency.TimePeriod, Is.EqualTo("never"));
+            Assert.That(last.FrequencyQuantityStat, Is.Empty);
+            Assert.That(last.MaximumLevel, Is.EqualTo(0));
+            Assert.That(last.RequiredFeatIds, Contains.Item("feat 1"));
+            Assert.That(last.RequiredFeatIds, Contains.Item("feat 2"));
+            Assert.That(last.RequiredFeatIds.Count(), Is.EqualTo(2));
         }
 
         [Test]
@@ -164,7 +182,7 @@ namespace NPCGen.Tests.Unit.Selectors
                 .Returns(new[] { "additional feat 1", "additional feat 2" });
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AdditionalFeatData, "additional feat 1")).Returns(new[] { "True", "False", "9266", String.Empty, "42", "0", String.Empty });
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AdditionalFeatData, "additional feat 2")).Returns(new[] { "False", "True", "0", "focus", "0", "9266", "occasionally" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AdditionalFeatFeatRequirements, "additional feat 1")).Returns(new[] { "feat 1", "feat 2" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.RequiredFeats, "additional feat 1")).Returns(new[] { "feat 1", "feat 2" });
 
             var feat1ClassRequirements = new Dictionary<String, Int32>();
             feat1ClassRequirements["class 1"] = 3;

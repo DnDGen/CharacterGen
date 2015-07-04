@@ -731,31 +731,6 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             Assert.That(skills["skill 5"].Ranks, Is.EqualTo(0));
         }
 
-        [Test]
-        public void MindFlayerKnowledgeBonusIsRandom()
-        {
-            race.BaseRace.Id = RaceConstants.BaseRaces.MindFlayerId;
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.Knowledge))
-                .Returns(new[] { "knowledge skill", "other knowledge skill", "different knowledge skill", "skill of knowledge" });
-
-            classSkills.Add("knowledge skill");
-            classSkills.Add("other knowledge skill");
-            classSkills.Add("different knowledge skill");
-            classSkills.Add("skill of knowledge");
-            classSkills.Add("other skill");
-            crossClassSkills.Add("other other skill");
-
-            mockDice.Setup(d => d.Roll(1).d(4)).Returns(3);
-
-            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
-            Assert.That(skills["knowledge skill"].Bonus, Is.EqualTo(0));
-            Assert.That(skills["other knowledge skill"].Bonus, Is.EqualTo(0));
-            Assert.That(skills["different knowledge skill"].Bonus, Is.EqualTo(8));
-            Assert.That(skills["skill of knowledge"].Bonus, Is.EqualTo(0));
-            Assert.That(skills["other skill"].Bonus, Is.EqualTo(0));
-            Assert.That(skills["other other skill"].Bonus, Is.EqualTo(0));
-        }
-
         [TestCase(1)]
         [TestCase(2)]
         [TestCase(3)]

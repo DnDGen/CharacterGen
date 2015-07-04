@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using NPCGen.Common.Abilities.Feats;
+using NPCGen.Common.Abilities.Skills;
 using NPCGen.Common.Races;
 using NPCGen.Generators.Interfaces.Abilities.Feats;
 using NPCGen.Selectors.Interfaces;
@@ -14,16 +15,18 @@ namespace NPCGen.Generators.Abilities.Feats
         private ICollectionsSelector collectionsSelector;
         private IAdjustmentsSelector adjustmentsSelector;
         private IFeatsSelector featsSelector;
+        private IFeatFocusGenerator featFocusGenerator;
 
         public RacialFeatsGenerator(ICollectionsSelector collectionsSelector, IAdjustmentsSelector adjustmentsSelector,
-            IFeatsSelector featsSelector)
+            IFeatsSelector featsSelector, IFeatFocusGenerator featFocusGenerator)
         {
             this.collectionsSelector = collectionsSelector;
             this.adjustmentsSelector = adjustmentsSelector;
             this.featsSelector = featsSelector;
+            this.featFocusGenerator = featFocusGenerator;
         }
 
-        public IEnumerable<Feat> GenerateWith(Race race)
+        public IEnumerable<Feat> GenerateWith(Race race, Dictionary<String, Skill> skills)
         {
             var baseRacialFeatSelections = featsSelector.SelectRacial(race.BaseRace.Id);
             var metaracialFeatSelections = featsSelector.SelectRacial(race.Metarace.Id);
@@ -39,7 +42,7 @@ namespace NPCGen.Generators.Abilities.Feats
             {
                 var feat = new Feat();
                 feat.Name.Id = racialFeatSelection.FeatId;
-                feat.Focus = racialFeatSelection.Focus;
+                feat.Focus = featFocusGenerator.GenerateFrom(racialFeatSelection.FeatId, racialFeatSelection.FocusType, skills);
                 feat.Frequency = racialFeatSelection.Frequency;
                 feat.Strength = racialFeatSelection.Strength;
 

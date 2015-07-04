@@ -47,7 +47,6 @@ namespace NPCGen.Generators.Abilities
             var skills = InitializeSkills(stats, classSkills, crossClassSkills);
             skills = AddRanks(characterClass, race, stats, classSkills, crossClassSkills, skills);
             skills = ApplySkillSynergies(skills);
-            skills = ApplyRacialAdjustments(skills, race);
 
             return skills;
         }
@@ -97,7 +96,7 @@ namespace NPCGen.Generators.Abilities
             var multiplier = characterClass.Level;
 
             var monsters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters);
-            if (!monsters.Contains(race.BaseRace.Id))
+            if (monsters.Contains(race.BaseRace.Id) == false)
                 multiplier += 3;
 
             if (race.BaseRace.Id == RaceConstants.BaseRaces.HumanId)
@@ -108,10 +107,10 @@ namespace NPCGen.Generators.Abilities
 
         private IEnumerable<String> GetSkillCollection(Dictionary<String, Skill> skills, Int32 rankCap, IEnumerable<String> classSkills, IEnumerable<String> crossClassSkills)
         {
-            if (!skills.Keys.Intersect(classSkills).Any(s => skills[s].Ranks < rankCap))
+            if (skills.Keys.Intersect(classSkills).Any(s => skills[s].Ranks < rankCap) == false)
                 return crossClassSkills.Where(s => skills[s].Ranks < rankCap);
 
-            if (!skills.Keys.Intersect(crossClassSkills).Any(s => skills[s].Ranks < rankCap))
+            if (skills.Keys.Intersect(crossClassSkills).Any(s => skills[s].Ranks < rankCap) == false)
                 return classSkills.Where(s => skills[s].Ranks < rankCap);
 
             var shouldAddPointToCrossClassSkill = booleanPercentileSelector.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill);
@@ -136,27 +135,27 @@ namespace NPCGen.Generators.Abilities
             return skills;
         }
 
-        private Dictionary<String, Skill> ApplyRacialAdjustments(Dictionary<String, Skill> skills, Race race)
-        {
-            if (race.BaseRace.Id != RaceConstants.BaseRaces.MindFlayerId)
-                return skills;
+        //private Dictionary<String, Skill> ApplyRacialAdjustments(Dictionary<String, Skill> skills, Race race)
+        //{
+        //    if (race.BaseRace.Id != RaceConstants.BaseRaces.MindFlayerId)
+        //        return skills;
 
-            var allKnowledgeSkills = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.Knowledge);
-            var knowledgeSkills = allKnowledgeSkills.Intersect(skills.Keys);
+        //    var allKnowledgeSkills = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.Knowledge);
+        //    var knowledgeSkills = allKnowledgeSkills.Intersect(skills.Keys);
 
-            if (knowledgeSkills.Any())
-                return ApplyMindFlayerKnowledgeBonus(skills, knowledgeSkills);
+        //    if (knowledgeSkills.Any())
+        //        return ApplyMindFlayerKnowledgeBonus(skills, knowledgeSkills);
 
-            return skills;
-        }
+        //    return skills;
+        //}
 
-        private Dictionary<String, Skill> ApplyMindFlayerKnowledgeBonus(Dictionary<String, Skill> skills, IEnumerable<String> knowledgeSkills)
-        {
-            var index = dice.Roll().d(knowledgeSkills.Count()) - 1;
-            var knowledgeSkill = knowledgeSkills.ElementAt(index);
-            skills[knowledgeSkill].Bonus += 8;
+        //private Dictionary<String, Skill> ApplyMindFlayerKnowledgeBonus(Dictionary<String, Skill> skills, IEnumerable<String> knowledgeSkills)
+        //{
+        //    var index = dice.Roll().d(knowledgeSkills.Count()) - 1;
+        //    var knowledgeSkill = knowledgeSkills.ElementAt(index);
+        //    skills[knowledgeSkill].Bonus += 8;
 
-            return skills;
-        }
+        //    return skills;
+        //}
     }
 }

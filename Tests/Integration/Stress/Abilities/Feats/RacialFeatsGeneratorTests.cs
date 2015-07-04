@@ -34,8 +34,10 @@ namespace NPCGen.Tests.Integration.Stress.Abilities.Feats
             var alignment = GetNewAlignment();
             var characterClass = GetNewCharacterClass(alignment);
             var race = GetNewRace(alignment, characterClass);
+            var stats = StatsGenerator.GenerateWith(StatsRandomizer, characterClass, race);
+            var skills = SkillsGenerator.GenerateWith(characterClass, race, stats);
 
-            var feats = RacialFeatsGenerator.GenerateWith(race);
+            var feats = RacialFeatsGenerator.GenerateWith(race, skills);
 
             foreach (var feat in feats)
             {

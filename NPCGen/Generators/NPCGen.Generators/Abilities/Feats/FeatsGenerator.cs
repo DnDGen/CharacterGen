@@ -35,7 +35,7 @@ namespace NPCGen.Generators.Abilities.Feats
         public IEnumerable<Feat> GenerateWith(CharacterClass characterClass, Race race, Dictionary<String, Stat> stats,
             Dictionary<String, Skill> skills, BaseAttack baseAttack)
         {
-            var racialFeats = racialFeatsGenerator.GenerateWith(race);
+            var racialFeats = racialFeatsGenerator.GenerateWith(race, skills);
             var classFeats = classFeatsGenerator.GenerateWith(characterClass, stats, racialFeats);
             var automaticFeats = racialFeats.Union(classFeats);
             var additionalFeats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, automaticFeats);

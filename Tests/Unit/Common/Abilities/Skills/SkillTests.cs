@@ -23,6 +23,7 @@ namespace NPCGen.Tests.Unit.Common.Abilities.Skills
             Assert.That(skill.ClassSkill, Is.False);
             Assert.That(skill.Bonus, Is.EqualTo(0));
             Assert.That(skill.Ranks, Is.EqualTo(0));
+            Assert.That(skill.CircumstantialBonus, Is.False);
         }
 
         [Test]

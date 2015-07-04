@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using D20Dice;
 using Moq;
 using NPCGen.Common.Abilities.Feats;
+using NPCGen.Common.Abilities.Skills;
 using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Items;
 using NPCGen.Generators.Abilities.Feats;
@@ -22,6 +23,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
         private List<String> requiredFeatIds;
         private List<Feat> otherFeat;
         private CharacterClass characterClass;
+        private Dictionary<String, Skill> skills;
 
         [SetUp]
         public void Setup()
@@ -32,6 +34,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             requiredFeatIds = new List<String>();
             otherFeat = new List<Feat>();
             characterClass = new CharacterClass();
+            skills = new Dictionary<String, Skill>();
 
             characterClass.ClassName = "class name";
             mockDice.Setup(d => d.Roll(1).d(It.IsAny<Int32>())).Returns(1);
@@ -271,6 +274,66 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
 
             var focus = featFocusGenerator.GenerateFrom("featToFill", FeatConstants.MartialWeaponProficiencyId, requiredFeatIds, otherFeat, characterClass);
             Assert.That(focus, Is.EqualTo("weird weapon"));
+        }
+
+        [Test]
+        public void GeneratingFromSkillsReturnsEmptyFocusForEmptyFocusType()
+        {
+            var schools = new[] { "school 1" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, "")).Returns(schools);
+
+            var focus = featFocusGenerator.GenerateFrom("featToFill", String.Empty, skills);
+            mockCollectionsSelector.Verify(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, It.IsAny<String>()), Times.Never);
+            Assert.That(focus, Is.Empty);
+        }
+
+        [Test]
+        public void GeneratingFromSkillsReturnsFocus()
+        {
+            var schools = new[] { "school 1" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, "focus type")).Returns(schools);
+
+            var focus = featFocusGenerator.GenerateFrom("featToFill", "focus type", skills);
+            Assert.That(focus, Is.EqualTo("school 1"));
+        }
+
+        [Test]
+        public void GeneratingFromSkillsReturnsRandomFocus()
+        {
+            var schools = new[] { "school 1", "school 2" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, "focus type")).Returns(schools);
+
+            mockDice.Setup(d => d.Roll(1).d(2)).Returns(2);
+
+            var focus = featFocusGenerator.GenerateFrom("featToFill", "focus type", skills);
+            Assert.That(focus, Is.EqualTo("school 2"));
+        }
+
+        [Test]
+        public void IfAvailableFociContainsSkills_OnlyUseProvidedSkills()
+        {
+            var skillFoci = new[] { "skill 1", "skill 2" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, "focus type")).Returns(skillFoci);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.Skills)).Returns(new[] { "skill 1", "skill 2", "skill 3" });
+
+            skills["skill 2"] = new Skill();
+            skills["skill 3"] = new Skill();
+
+            var focus = featFocusGenerator.GenerateFrom("featToFill", "focus type", skills);
+            Assert.That(focus, Is.EqualTo("skill 2"));
+        }
+
+        [Test]
+        public void IfNoWorkingSkillFoci_ReturnNoFocus()
+        {
+            var skillFoci = new[] { "skill 1" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, "focus type")).Returns(skillFoci);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.Skills)).Returns(new[] { "skill 1", "skill 2" });
+
+            skills["skill 2"] = new Skill();
+
+            var focus = featFocusGenerator.GenerateFrom("featToFill", "focus type", skills);
+            Assert.That(focus, Is.Empty);
         }
     }
 }

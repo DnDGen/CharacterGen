@@ -10,6 +10,7 @@ namespace NPCGen.Common.Abilities.Skills
         public Int32 Bonus { get; set; }
         public Boolean ClassSkill { get; set; }
         public Boolean ArmorCheckPenalty { get; set; }
+        public Boolean CircumstantialBonus { get; set; }
         public Double EffectiveRanks
         {
             get
