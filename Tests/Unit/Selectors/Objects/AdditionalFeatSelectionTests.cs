@@ -37,9 +37,7 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
             Assert.That(selection.RequiredSkillRanks, Is.Empty);
             Assert.That(selection.RequiredStats, Is.Empty);
             Assert.That(selection.RequiredCharacterClasses, Is.Empty);
-            Assert.That(selection.IsFighterFeat, Is.False);
             Assert.That(selection.FocusType, Is.Empty);
-            Assert.That(selection.IsWizardFeat, Is.False);
             Assert.That(selection.Strength, Is.EqualTo(0));
             Assert.That(selection.Frequency, Is.Not.Null);
         }

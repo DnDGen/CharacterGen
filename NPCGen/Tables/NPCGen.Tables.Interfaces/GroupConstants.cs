@@ -10,7 +10,7 @@ namespace NPCGen.Tables.Interfaces
         public const String CombatStyles = "CombatStyles";
         public const String Deflection = "Deflection";
         public const String Dodge = "Dodge";
-        public const String Foci = "Foci";
+        public const String FighterBonusFeats = "FighterBonusFeats";
         public const String Genetic = "Genetic";
         public const String GoodBaseAttack = "Good Base Attack";
         public const String HasClassRequirements = "HasClassRequirements";
@@ -35,5 +35,6 @@ namespace NPCGen.Tables.Interfaces
         public const String Weapons = "Weapons";
         public const String WeaponsWithUnarmedAndGrapple = "Weapons with unarmed and grapple";
         public const String WeaponsWithUnarmedAndGrappleAndRay = "Weapons with unarmed, grapple, and ray";
+        public const String WizardBonusFeats = "WizardBonusFeats";
     }
 }

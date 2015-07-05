@@ -33,6 +33,8 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
         private List<AdditionalFeatSelection> additionalFeatSelections;
         private BaseAttack baseAttack;
         private List<Feat> preselectedFeats;
+        private List<String> fighterBonusFeats;
+        private List<String> wizardBonusFeats;
 
         [SetUp]
         public void Setup()
@@ -50,9 +52,13 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             baseAttack = new BaseAttack();
             stats[StatConstants.Intelligence] = new Stat();
             preselectedFeats = new List<Feat>();
+            fighterBonusFeats = new List<String>();
+            wizardBonusFeats = new List<String>();
 
             mockFeatsSelector.Setup(s => s.SelectAdditional()).Returns(additionalFeatSelections);
             mockDice.Setup(d => d.Roll(1).d(It.IsAny<Int32>())).Returns(1);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.FighterBonusFeats)).Returns(fighterBonusFeats);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.WizardBonusFeats)).Returns(wizardBonusFeats);
         }
 
         [TestCase(1, 1)]
@@ -123,7 +129,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
         {
             characterClass.Level = 1;
             AddFeatSelections(1);
-            additionalFeatSelections[0].IsFighterFeat = true;
+            fighterBonusFeats.Add(additionalFeatSelections[0].FeatId);
 
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             var featIds = feats.Select(f => f.Name.Id);
@@ -207,8 +213,9 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             characterClass.ClassName = CharacterClassConstants.Fighter;
             characterClass.Level = level;
             AddFeatSelections(20);
+
             foreach (var selection in additionalFeatSelections)
-                selection.IsFighterFeat = true;
+                fighterBonusFeats.Add(selection.FeatId);
 
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             var featIds = feats.Select(f => f.Name.Id);
@@ -227,7 +234,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             characterClass.ClassName = CharacterClassConstants.Fighter;
             characterClass.Level = 1;
             AddFeatSelections(3);
-            additionalFeatSelections[2].IsFighterFeat = true;
+            fighterBonusFeats.Add(additionalFeatSelections[2].FeatId);
 
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             var featIds = feats.Select(f => f.Name.Id);
@@ -243,7 +250,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             characterClass.ClassName = CharacterClassConstants.Fighter;
             characterClass.Level = 1;
             AddFeatSelections(1);
-            additionalFeatSelections[0].IsFighterFeat = true;
+            fighterBonusFeats.Add(additionalFeatSelections[0].FeatId);
 
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             var featIds = feats.Select(f => f.Name.Id);
@@ -259,8 +266,8 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             characterClass.Level = 2;
             AddFeatSelections(3);
             additionalFeatSelections[1].RequiredBaseAttack = 9266;
-            additionalFeatSelections[1].IsFighterFeat = true;
-            additionalFeatSelections[2].IsFighterFeat = true;
+            fighterBonusFeats.Add(additionalFeatSelections[1].FeatId);
+            fighterBonusFeats.Add(additionalFeatSelections[2].FeatId);
 
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             var featIds = feats.Select(f => f.Name.Id);
@@ -276,8 +283,9 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             characterClass.ClassName = CharacterClassConstants.Fighter;
             characterClass.Level = 2;
             AddFeatSelections(4);
-            foreach (var feat in additionalFeatSelections)
-                feat.IsFighterFeat = true;
+
+            foreach (var selection in additionalFeatSelections)
+                fighterBonusFeats.Add(selection.FeatId);
 
             mockDice.Setup(d => d.Roll(1).d(4)).Returns(4);
             mockDice.Setup(d => d.Roll(1).d(3)).Returns(1);
@@ -298,9 +306,9 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             characterClass.ClassName = CharacterClassConstants.Fighter;
             characterClass.Level = 1;
             AddFeatSelections(3);
-            additionalFeatSelections[1].IsFighterFeat = true;
             additionalFeatSelections[1].RequiredFeatIds = new[] { "other feat" };
-            additionalFeatSelections[2].IsFighterFeat = true;
+            fighterBonusFeats.Add(additionalFeatSelections[1].FeatId);
+            fighterBonusFeats.Add(additionalFeatSelections[2].FeatId);
 
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             var featIds = feats.Select(f => f.Name.Id);
@@ -316,7 +324,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             characterClass.ClassName = CharacterClassConstants.Fighter;
             characterClass.Level = 1;
             AddFeatSelections(3);
-            additionalFeatSelections[1].IsFighterFeat = true;
+            fighterBonusFeats.Add(additionalFeatSelections[1].FeatId);
             additionalFeatSelections[1].RequiredFeatIds = new[] { "other feat" };
 
             mockDice.Setup(d => d.Roll(1).d(2)).Returns(2);
@@ -353,8 +361,9 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             characterClass.ClassName = CharacterClassConstants.Wizard;
             characterClass.Level = level;
             AddFeatSelections(20);
+
             foreach (var selection in additionalFeatSelections)
-                selection.IsWizardFeat = true;
+                wizardBonusFeats.Add(selection.FeatId);
 
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             var featIds = feats.Select(f => f.Name.Id);
@@ -373,7 +382,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             characterClass.ClassName = CharacterClassConstants.Wizard;
             characterClass.Level = 5;
             AddFeatSelections(5);
-            additionalFeatSelections[3].IsWizardFeat = true;
+            wizardBonusFeats.Add(additionalFeatSelections[3].FeatId);
 
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             var featIds = feats.Select(f => f.Name.Id);
@@ -390,7 +399,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             characterClass.ClassName = CharacterClassConstants.Wizard;
             characterClass.Level = 5;
             AddFeatSelections(4);
-            additionalFeatSelections[0].IsWizardFeat = true;
+            wizardBonusFeats.Add(additionalFeatSelections[0].FeatId);
 
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             var featIds = feats.Select(f => f.Name.Id);
@@ -406,8 +415,8 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             characterClass.ClassName = CharacterClassConstants.Wizard;
             characterClass.Level = 10;
             AddFeatSelections(6);
-            additionalFeatSelections[1].IsWizardFeat = true;
-            additionalFeatSelections[5].IsWizardFeat = true;
+            wizardBonusFeats.Add(additionalFeatSelections[1].FeatId);
+            wizardBonusFeats.Add(additionalFeatSelections[5].FeatId);
 
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             var featIds = feats.Select(f => f.Name.Id);
@@ -426,8 +435,9 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             characterClass.ClassName = CharacterClassConstants.Wizard;
             characterClass.Level = 10;
             AddFeatSelections(7);
-            foreach (var feat in additionalFeatSelections)
-                feat.IsWizardFeat = true;
+
+            foreach (var selection in additionalFeatSelections)
+                wizardBonusFeats.Add(selection.FeatId);
 
             mockDice.Setup(d => d.Roll(1).d(7)).Returns(7);
             mockDice.Setup(d => d.Roll(1).d(6)).Returns(6);

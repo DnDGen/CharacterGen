@@ -19,7 +19,10 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
             var names = new[] 
             {
                 FeatConstants.ImprovedCombatStyleId,
-                FeatConstants.CombatStyleMasteryId
+                FeatConstants.CombatStyleMasteryId,
+                FeatConstants.HeavyArmorProficiencyId,
+                FeatConstants.MediumArmorProficiencyId,
+                FeatConstants.AugmentSummoningId
             };
 
             AssertCollectionNames(names);
@@ -29,8 +32,16 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.CombatStyleId)]
         [TestCase(FeatConstants.CombatStyleMasteryId,
             FeatConstants.ImprovedCombatStyleId)]
+        [TestCase(FeatConstants.HeavyArmorProficiencyId,
+            FeatConstants.MediumArmorProficiencyId)]
+        [TestCase(FeatConstants.MediumArmorProficiencyId,
+            FeatConstants.LightArmorProficiencyId)]
+        [TestCase(FeatConstants.AugmentSummoningId,
+            FeatConstants.SpellFocusId)]
         public override void DistinctCollection(String name, params String[] collection)
         {
+            throw new NotImplementedException("Have to figure out focus requirements, augment requires conjuration focus");
+
             base.DistinctCollection(name, collection);
         }
     }

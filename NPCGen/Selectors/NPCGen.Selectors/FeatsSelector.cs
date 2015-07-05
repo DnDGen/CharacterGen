@@ -63,8 +63,6 @@ namespace NPCGen.Selectors
             additionalFeatSelection.FeatId = featId;
 
             var featData = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AdditionalFeatData, featId).ToArray();
-            additionalFeatSelection.IsFighterFeat = Convert.ToBoolean(featData[DataIndexConstants.AdditionalFeatData.IsFighterFeatIndex]);
-            additionalFeatSelection.IsWizardFeat = Convert.ToBoolean(featData[DataIndexConstants.AdditionalFeatData.IsWizardFeatIndex]);
             additionalFeatSelection.RequiredBaseAttack = Convert.ToInt32(featData[DataIndexConstants.AdditionalFeatData.BaseAttackRequirementIndex]);
             additionalFeatSelection.FocusType = featData[DataIndexConstants.AdditionalFeatData.FocusTypeIndex];
             additionalFeatSelection.Frequency.Quantity = Convert.ToInt32(featData[DataIndexConstants.AdditionalFeatData.FrequencyQuantityIndex]);

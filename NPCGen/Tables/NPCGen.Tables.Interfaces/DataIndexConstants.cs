@@ -29,13 +29,11 @@ namespace NPCGen.Tables.Interfaces
 
         public static class AdditionalFeatData
         {
-            public const Int32 IsFighterFeatIndex = 0;
-            public const Int32 IsWizardFeatIndex = 1;
-            public const Int32 BaseAttackRequirementIndex = 2;
-            public const Int32 FocusTypeIndex = 3;
-            public const Int32 StrengthIndex = 4;
-            public const Int32 FrequencyQuantityIndex = 5;
-            public const Int32 FrequencyTimePeriodIndex = 6;
+            public const Int32 BaseAttackRequirementIndex = 0;
+            public const Int32 FocusTypeIndex = 1;
+            public const Int32 StrengthIndex = 2;
+            public const Int32 FrequencyQuantityIndex = 3;
+            public const Int32 FrequencyTimePeriodIndex = 4;
         }
     }
 }

@@ -184,8 +184,8 @@ namespace NPCGen.Tests.Unit.Selectors
         {
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.Additional))
                 .Returns(new[] { "additional feat 1", "additional feat 2" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AdditionalFeatData, "additional feat 1")).Returns(new[] { "True", "False", "9266", String.Empty, "42", "0", String.Empty });
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AdditionalFeatData, "additional feat 2")).Returns(new[] { "False", "True", "0", "focus", "0", "9266", "occasionally" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AdditionalFeatData, "additional feat 1")).Returns(new[] { "9266", String.Empty, "42", "0", String.Empty });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AdditionalFeatData, "additional feat 2")).Returns(new[] { "0", "focus", "0", "9266", "occasionally" });
 
             var featRequirements = new Dictionary<String, IEnumerable<String>>();
             featRequirements["additional feat 1"] = new[] { "feat 1", "feat 2" };
@@ -226,8 +226,6 @@ namespace NPCGen.Tests.Unit.Selectors
             Assert.That(first.Strength, Is.EqualTo(42));
             Assert.That(first.Frequency.Quantity, Is.EqualTo(0));
             Assert.That(first.Frequency.TimePeriod, Is.Empty);
-            Assert.That(first.IsFighterFeat, Is.True);
-            Assert.That(first.IsWizardFeat, Is.False);
             Assert.That(first.RequiredBaseAttack, Is.EqualTo(9266));
             Assert.That(first.RequiredCharacterClasses["class 1"], Is.EqualTo(3));
             Assert.That(first.RequiredCharacterClasses["class 3"], Is.EqualTo(5));
@@ -243,8 +241,6 @@ namespace NPCGen.Tests.Unit.Selectors
             Assert.That(last.Strength, Is.EqualTo(0));
             Assert.That(last.Frequency.Quantity, Is.EqualTo(9266));
             Assert.That(last.Frequency.TimePeriod, Is.EqualTo("occasionally"));
-            Assert.That(last.IsFighterFeat, Is.False);
-            Assert.That(last.IsWizardFeat, Is.True);
             Assert.That(last.RequiredBaseAttack, Is.EqualTo(0));
             Assert.That(last.RequiredCharacterClasses, Is.Empty);
             Assert.That(last.RequiredFeatIds, Is.Empty);

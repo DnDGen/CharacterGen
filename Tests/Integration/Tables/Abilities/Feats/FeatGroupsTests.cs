@@ -61,7 +61,8 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
                 CharacterClassConstants.Barbarian,
                 CharacterClassConstants.Bard,
                 CharacterClassConstants.Rogue,
-                RaceConstants.Metaraces.HalfCelestialId
+                RaceConstants.Metaraces.HalfCelestialId,
+                RaceConstants.Metaraces.WereboarId
             };
 
             AssertCollectionNames(names);
@@ -251,9 +252,16 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.SkillBonusId + SkillConstants.Search,
             FeatConstants.SkillBonusId + SkillConstants.Spot,
             FeatConstants.PassiveSecretDoorSearchId)]
+        [TestCase(RaceConstants.Metaraces.WereboarId,
+            FeatConstants.SkillBonusId + SkillConstants.Listen,
+            FeatConstants.SkillBonusId + SkillConstants.Spot,
+            FeatConstants.NaturalArmorId)]
         [TestCase(RaceConstants.Metaraces.WerewolfId,
             FeatConstants.IronWillId,
-            FeatConstants.TrackId)]
+            FeatConstants.TrackId,
+            FeatConstants.SkillBonusId + SkillConstants.Listen,
+            FeatConstants.SkillBonusId + SkillConstants.Spot,
+            FeatConstants.NaturalArmorId)]
         [TestCase(RaceConstants.BaseRaces.WoodElfId,
             FeatConstants.ImmuneToEffectId,
             FeatConstants.SaveBonusId,

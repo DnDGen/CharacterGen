@@ -32,13 +32,11 @@ namespace NPCGen.Tests.Unit.Tables
             Assert.That(constant, Is.EqualTo(value));
         }
 
-        [TestCase(DataIndexConstants.AdditionalFeatData.IsFighterFeatIndex, 0)]
-        [TestCase(DataIndexConstants.AdditionalFeatData.IsWizardFeatIndex, 1)]
-        [TestCase(DataIndexConstants.AdditionalFeatData.BaseAttackRequirementIndex, 2)]
-        [TestCase(DataIndexConstants.AdditionalFeatData.FocusTypeIndex, 3)]
-        [TestCase(DataIndexConstants.AdditionalFeatData.StrengthIndex, 4)]
-        [TestCase(DataIndexConstants.AdditionalFeatData.FrequencyQuantityIndex, 5)]
-        [TestCase(DataIndexConstants.AdditionalFeatData.FrequencyTimePeriodIndex, 6)]
+        [TestCase(DataIndexConstants.AdditionalFeatData.BaseAttackRequirementIndex, 0)]
+        [TestCase(DataIndexConstants.AdditionalFeatData.FocusTypeIndex, 1)]
+        [TestCase(DataIndexConstants.AdditionalFeatData.StrengthIndex, 2)]
+        [TestCase(DataIndexConstants.AdditionalFeatData.FrequencyQuantityIndex, 3)]
+        [TestCase(DataIndexConstants.AdditionalFeatData.FrequencyTimePeriodIndex, 4)]
         public void AdditionalFeatDataIndex(Int32 constant, Int32 value)
         {
             Assert.That(constant, Is.EqualTo(value));

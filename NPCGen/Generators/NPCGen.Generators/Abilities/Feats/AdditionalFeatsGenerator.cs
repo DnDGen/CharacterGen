@@ -120,7 +120,8 @@ namespace NPCGen.Generators.Abilities.Feats
         private IEnumerable<Feat> GetFighterFeats(CharacterClass characterClass, Race race, Dictionary<String, Stat> stats, Dictionary<String, Skill> skills,
             BaseAttack baseAttack, IEnumerable<Feat> selectedFeats)
         {
-            var fighterFeats = featsSelector.SelectAdditional().Where(f => f.IsFighterFeat);
+            var fighterFeatIds = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.FighterBonusFeats);
+            var fighterFeats = featsSelector.SelectAdditional().Where(f => fighterFeatIds.Contains(f.FeatId));
             var availableFeats = fighterFeats.Where(f => f.ImmutableRequirementsMet(baseAttack.Bonus, stats, skills, characterClass));
 
             var numberOfFighterFeats = characterClass.Level / 2 + 1;
@@ -132,7 +133,8 @@ namespace NPCGen.Generators.Abilities.Feats
         private IEnumerable<Feat> GetWizardBonusFeats(CharacterClass characterClass, Race race, Dictionary<string, Stat> stats, Dictionary<string, Skill> skills,
             BaseAttack baseAttack, IEnumerable<Feat> selectedFeats)
         {
-            var wizardFeats = featsSelector.SelectAdditional().Where(f => f.IsWizardFeat);
+            var wizardFeatIds = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.WizardBonusFeats);
+            var wizardFeats = featsSelector.SelectAdditional().Where(f => wizardFeatIds.Contains(f.FeatId));
             var availableFeats = wizardFeats.Where(f => f.ImmutableRequirementsMet(baseAttack.Bonus, stats, skills, characterClass));
 
             var numberOfWizardFeats = characterClass.Level / 5;

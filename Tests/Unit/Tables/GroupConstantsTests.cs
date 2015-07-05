@@ -13,6 +13,7 @@ namespace NPCGen.Tests.Unit.Tables
         [TestCase(GroupConstants.CombatStyles, "CombatStyles")]
         [TestCase(GroupConstants.Deflection, "Deflection")]
         [TestCase(GroupConstants.Dodge, "Dodge")]
+        [TestCase(GroupConstants.FighterBonusFeats, "FighterBonusFeats")]
         [TestCase(GroupConstants.Genetic, "Genetic")]
         [TestCase(GroupConstants.GoodBaseAttack, "Good Base Attack")]
         [TestCase(GroupConstants.HasClassRequirements, "HasClassRequirements")]
@@ -27,6 +28,7 @@ namespace NPCGen.Tests.Unit.Tables
         [TestCase(GroupConstants.Proficiency, "Proficiency")]
         [TestCase(GroupConstants.SchoolsOfMagic, "Schools of Magic")]
         [TestCase(GroupConstants.Size, "Size")]
+        [TestCase(GroupConstants.SkillBonus, "SkillBonus")]
         [TestCase(GroupConstants.Skills, "Skills")]
         [TestCase(GroupConstants.Spellcasters, "Spellcasters")]
         [TestCase(GroupConstants.Standard, "Standard")]
@@ -36,7 +38,7 @@ namespace NPCGen.Tests.Unit.Tables
         [TestCase(GroupConstants.Weapons, "Weapons")]
         [TestCase(GroupConstants.WeaponsWithUnarmedAndGrapple, "Weapons with unarmed and grapple")]
         [TestCase(GroupConstants.WeaponsWithUnarmedAndGrappleAndRay, "Weapons with unarmed, grapple, and ray")]
-        [TestCase(GroupConstants.SkillBonus, "SkillBonus")]
+        [TestCase(GroupConstants.WizardBonusFeats, "WizardBonusFeats")]
         public void Constant(String constant, String value)
         {
             Assert.That(constant, Is.EqualTo(value));

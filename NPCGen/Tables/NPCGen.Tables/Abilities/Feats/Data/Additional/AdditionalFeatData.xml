@@ -3,8 +3,14 @@
 <items>
     <object>
         <name>Acrobatic</name>
-        <item>False</item>
-        <item>False</item>
+        <item>0</item>
+        <item></item>
+        <item>2</item>
+        <item>0</item>
+        <item></item>
+    </object>
+    <object>
+        <name>Agile</name>
         <item>0</item>
         <item></item>
         <item>2</item>

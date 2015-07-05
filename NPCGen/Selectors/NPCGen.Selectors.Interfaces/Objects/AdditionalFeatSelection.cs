@@ -18,8 +18,6 @@ namespace NPCGen.Selectors.Interfaces.Objects
         public Int32 RequiredBaseAttack { get; set; }
         public Dictionary<String, Int32> RequiredStats { get; set; }
         public Dictionary<String, Int32> RequiredSkillRanks { get; set; }
-        public Boolean IsFighterFeat { get; set; }
-        public Boolean IsWizardFeat { get; set; }
         public Dictionary<String, Int32> RequiredCharacterClasses { get; set; }
         public String FocusType { get; set; }
 

@@ -482,6 +482,20 @@
         <item>PassiveSecretDoorSearch</item>
     </object>
     <object>
+        <name>Wereboar</name>
+        <item>SkillBonusListen</item>
+        <item>SkillBonusSpot</item>
+        <item>NaturalArmor</item>
+    </object>
+    <object>
+        <name>Werewolf</name>
+        <item>IronWill</item>
+        <item>Track</item>
+        <item>SkillBonusListen</item>
+        <item>SkillBonusSpot</item>
+        <item>NaturalArmor</item>
+    </object>
+    <object>
         <name>Wizard</name>
         <item>ScribeScroll</item>
         <item>SimpleWeaponProficiencyHeavy crossbow</item>
@@ -489,11 +503,6 @@
         <item>SimpleWeaponProficiencyClub</item>
         <item>SimpleWeaponProficiencyDagger</item>
         <item>SimpleWeaponProficiencyQuarterstaff</item>
-    </object>
-    <object>
-        <name>Werewolf</name>
-        <item>IronWill</item>
-        <item>Track</item>
     </object>
     <object>
         <name>WoodElf</name>
