@@ -13,6 +13,9 @@ namespace NPCGen.Tables.Interfaces
         public const String Foci = "Foci";
         public const String Genetic = "Genetic";
         public const String GoodBaseAttack = "Good Base Attack";
+        public const String HasClassRequirements = "HasClassRequirements";
+        public const String HasSkillRequirements = "HasSkillRequirements";
+        public const String HasStatRequirements = "HasStatRequirements";
         public const String Healers = "Healers";
         public const String Knowledge = "Knowledge";
         public const String Lycanthrope = "Lycanthrope";

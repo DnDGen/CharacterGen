@@ -191,6 +191,10 @@ namespace NPCGen.Tests.Unit.Selectors
             featRequirements["additional feat 1"] = new[] { "feat 1", "feat 2" };
             mockCollectionsSelector.Setup(s => s.SelectAllFrom(TableNameConstants.Set.Collection.RequiredFeats)).Returns(featRequirements);
 
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.HasClassRequirements)).Returns(new[] { "additional feat 1" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.HasSkillRequirements)).Returns(new[] { "additional feat 2" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.HasStatRequirements)).Returns(new[] { "additional feat 2" });
+
             var feat1ClassRequirements = new Dictionary<String, Int32>();
             feat1ClassRequirements["class 1"] = 3;
             feat1ClassRequirements["class 3"] = 5;

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using EquipmentGen.Common.Items;
 using NPCGen.Common.Abilities.Feats;
 using NPCGen.Common.Abilities.Skills;
@@ -26,6 +27,9 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.AttackBonusId,
             FeatConstants.DodgeBonusId,
             FeatConstants.SaveBonusId)]
+        [TestCase(GroupConstants.HasClassRequirements)]
+        [TestCase(GroupConstants.HasSkillRequirements)]
+        [TestCase(GroupConstants.HasStatRequirements)]
         public override void DistinctCollection(String name, params String[] collection)
         {
             base.DistinctCollection(name, collection);
@@ -82,7 +86,11 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.TurnId)]
         [TestCase(CharacterClassConstants.Domains.Evil,
             FeatConstants.CastSpellBonusId)]
+        [TestCase(CharacterClassConstants.Domains.Strength,
+            FeatConstants.SupernaturalStrengthId)]
         [TestCase(CharacterClassConstants.Schools.Conjuration,
+            FeatConstants.SkillBonusId)]
+        [TestCase(CharacterClassConstants.Schools.Evocation,
             FeatConstants.SkillBonusId)]
         public void ClassFeatGroup(String name, params String[] collection)
         {
@@ -134,6 +142,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Rapier,
             FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Longbow,
             FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Shortbow,
+            FeatConstants.PassiveSecretDoorSearchId,
             FeatConstants.SkillBonusId + SkillConstants.Search,
             FeatConstants.SkillBonusId + SkillConstants.Spot,
             FeatConstants.SkillBonusId + SkillConstants.Listen)]
@@ -153,6 +162,14 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.DarkvisionId,
             FeatConstants.SkillBonusId)]
         [TestCase(RaceConstants.BaseRaces.HumanId)]
+        [TestCase(RaceConstants.BaseRaces.LightfootHalflingId,
+            FeatConstants.SaveBonusId + "All",
+            FeatConstants.SaveBonusId + "Fear",
+            FeatConstants.AttackBonusId + "ThrowOrSling",
+            FeatConstants.SkillBonusId + SkillConstants.Listen,
+            FeatConstants.SkillBonusId + SkillConstants.Climb,
+            FeatConstants.SkillBonusId + SkillConstants.Jump,
+            FeatConstants.SkillBonusId + SkillConstants.MoveSilently)]
         [TestCase(RaceConstants.BaseRaces.LizardfolkId,
             FeatConstants.SimpleWeaponProficiencyId,
             FeatConstants.ShieldProficiencyId,
@@ -164,6 +181,27 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
         [TestCase(RaceConstants.BaseRaces.OrcId,
             FeatConstants.DarkvisionId,
             FeatConstants.LightSensitivityId)]
+        [TestCase(RaceConstants.BaseRaces.RockGnomeId,
+            FeatConstants.LowLightVisionId,
+            FeatConstants.WeaponFamiliarityId,
+            FeatConstants.SaveBonusId,
+            FeatConstants.ImprovedSpellId,
+            FeatConstants.AttackBonusId + RaceConstants.BaseRaces.GoblinId,
+            FeatConstants.AttackBonusId + RaceConstants.BaseRaces.KoboldId,
+            FeatConstants.DodgeBonusId,
+            FeatConstants.SkillBonusId,
+            FeatConstants.SpellLikeAbilityId + "Speak with animals",
+            FeatConstants.SpellLikeAbilityId + "Dancing lights",
+            FeatConstants.SpellLikeAbilityId + "Ghost sound",
+            FeatConstants.SpellLikeAbilityId + "Prestidigitation")]
+        [TestCase(RaceConstants.BaseRaces.TallfellowHalflingId,
+            FeatConstants.SaveBonusId + "All",
+            FeatConstants.SaveBonusId + "Fear",
+            FeatConstants.AttackBonusId + "ThrowOrSling",
+            FeatConstants.SkillBonusId + SkillConstants.Listen,
+            FeatConstants.SkillBonusId + SkillConstants.Search,
+            FeatConstants.SkillBonusId + SkillConstants.Spot,
+            FeatConstants.PassiveSecretDoorSearchId)]
         [TestCase(RaceConstants.Metaraces.WerewolfId,
             FeatConstants.IronWillId,
             FeatConstants.TrackId)]
@@ -175,6 +213,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Rapier,
             FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Longbow,
             FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Shortbow,
+            FeatConstants.PassiveSecretDoorSearchId,
             FeatConstants.SkillBonusId + SkillConstants.Search,
             FeatConstants.SkillBonusId + SkillConstants.Spot,
             FeatConstants.SkillBonusId + SkillConstants.Listen)]
@@ -467,6 +506,23 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
             };
 
             base.DistinctCollection(GroupConstants.Additional, featIds);
+        }
+
+        [TestCase(CharacterClassConstants.Ranger,
+            FeatConstants.ImprovedCombatStyleId,
+            FeatConstants.CombatStyleId)]
+        [TestCase(CharacterClassConstants.Ranger,
+            FeatConstants.CombatStyleMasteryId,
+            FeatConstants.ImprovedCombatStyleId)]
+        public void FeatGroupDependency(String name, String featId, String dependencyFeatId)
+        {
+            var collection = table[name].ToList();
+            var featIndex = collection.IndexOf(featId);
+            var dependencyIndex = collection.IndexOf(dependencyFeatId);
+
+            Assert.That(featIndex, Is.Positive);
+            Assert.That(dependencyIndex, Is.Positive);
+            Assert.That(featIndex, Is.GreaterThan(dependencyIndex));
         }
     }
 }

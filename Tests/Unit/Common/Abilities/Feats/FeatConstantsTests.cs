@@ -191,6 +191,9 @@ namespace NPCGen.Tests.Unit.Common.Abilities.Feats
         [TestCase(FeatConstants.HideInPlainSight, "Hide in Plain Sight")]
         [TestCase(FeatConstants.CastSpellBonus, "Cast Spell Bonus")]
         [TestCase(FeatConstants.DeathTouch, "Death Touch")]
+        [TestCase(FeatConstants.PassiveSecretDoorSearch, "Passive Secret Door Search")]
+        [TestCase(FeatConstants.ImprovedSpell, "Improved Spell")]
+        [TestCase(FeatConstants.SupernaturalStrength, "Supernatural Strength")]
         public void ConstantName(String constant, String value)
         {
             Assert.That(constant, Is.EqualTo(value));
@@ -379,6 +382,9 @@ namespace NPCGen.Tests.Unit.Common.Abilities.Feats
         [TestCase(FeatConstants.HideInPlainSightId, "HideInPlainSight")]
         [TestCase(FeatConstants.CastSpellBonusId, "CastSpellBonus")]
         [TestCase(FeatConstants.DeathTouchId, "DeathTouch")]
+        [TestCase(FeatConstants.PassiveSecretDoorSearchId, "PassiveSecretDoorSearch")]
+        [TestCase(FeatConstants.ImprovedSpellId, "ImprovedSpell")]
+        [TestCase(FeatConstants.SupernaturalStrengthId, "SupernaturalStrength")]
         public void ConstantId(String constant, String value)
         {
             Assert.That(constant, Is.EqualTo(value));

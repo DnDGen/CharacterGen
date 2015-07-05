@@ -372,6 +372,12 @@ namespace NPCGen.Common.Abilities.Feats
         public const String CombatStyleMastery = "Combat Style Mastery";
         public const String Camouflage = "Camouflage";
         public const String HideInPlainSight = "Hide in Plain Sight";
+        public const String PassiveSecretDoorSearch = "Passive Secret Door Search";
+        public const String PassiveSecretDoorSearchId = "PassiveSecretDoorSearch";
+        public const String ImprovedSpell = "Improved Spell";
+        public const String ImprovedSpellId = "ImprovedSpell";
+        public const String SupernaturalStrength = "Supernatural Strength";
+        public const String SupernaturalStrengthId = "SupernaturalStrength";
 
         public static class Frequencies
         {

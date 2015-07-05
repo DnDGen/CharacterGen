@@ -34,7 +34,7 @@ namespace NPCGen.Tests.Integration.Tables
             Assert.That(table.Keys, Contains.Item(name), tableName);
 
             var missingItems = collection.Except(table[name]);
-            Assert.That(missingItems, Is.Empty, name);
+            Assert.That(missingItems, Is.Empty, name + " missing");
 
             AssertExtraItems(name, collection);
         }
@@ -42,8 +42,8 @@ namespace NPCGen.Tests.Integration.Tables
         protected void AssertExtraItems(String name, IEnumerable<String> collection)
         {
             var extras = table[name].Except(collection);
-            Assert.That(extras, Is.Empty, name);
-            Assert.That(table[name].Count(), Is.EqualTo(collection.Count()));
+            Assert.That(extras, Is.Empty, name + " extra");
+            Assert.That(table[name].Count(), Is.EqualTo(collection.Count()), name);
         }
 
         public virtual void OrderedCollection(String name, params String[] collection)

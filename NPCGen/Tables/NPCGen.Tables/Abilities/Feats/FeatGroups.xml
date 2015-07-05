@@ -209,6 +209,10 @@
         <item>SkillBonus</item>
     </object>
     <object>
+        <name>Death</name>
+        <item>DeathTouch</item>
+    </object>
+    <object>
         <name>DeepHalfling</name>
         <item>SkillBonusListen</item>
         <item>SkillBonusAppraise</item>
@@ -217,10 +221,6 @@
         <item>AttackBonusThrowOrSling</item>
         <item>Darkvision</item>
         <item>Stonecunning</item>
-    </object>
-    <object>
-        <name>Death</name>
-        <item>DeathTouch</item>
     </object>
     <object>
         <name>Doppelganger</name>
@@ -240,6 +240,10 @@
     <object>
         <name>Evil</name>
         <item>CastSpellBonus</item>
+    </object>
+    <object>
+        <name>Evocation</name>
+        <item>SkillBonus</item>
     </object>
     <object>
         <name>Fighter</name>
@@ -310,6 +314,15 @@
         <item>OrcBlood</item>
     </object>
     <object>
+        <name>HasClassRequirements</name>
+    </object>
+    <object>
+        <name>HasSkillRequirements</name>
+    </object>
+    <object>
+        <name>HasStatRequirements</name>
+    </object>
+    <object>
         <name>HighElf</name>
         <item>SkillBonusSearch</item>
         <item>SkillBonusSpot</item>
@@ -321,6 +334,7 @@
         <item>MartialWeaponProficiencyRapier</item>
         <item>MartialWeaponProficiencyLongbow</item>
         <item>MartialWeaponProficiencyShortbow</item>
+        <item>PassiveSecretDoorSearch</item>
     </object>
     <object>
         <name>HillDwarf</name>
@@ -343,6 +357,16 @@
     </object>
     <object>
         <name>Human</name>
+    </object>
+    <object>
+        <name>LightfootHalfling</name>
+        <item>SkillBonusListen</item>
+        <item>SkillBonusClimb</item>
+        <item>SkillBonusJump</item>
+        <item>SkillBonusMove Silently</item>
+        <item>SaveBonusAll</item>
+        <item>SaveBonusFear</item>
+        <item>AttackBonusThrowOrSling</item>
     </object>
     <object>
         <name>Lizardfolk</name>
@@ -385,6 +409,21 @@
         <item>CombatStyleMastery</item>
     </object>
     <object>
+        <name>RockGnome</name>
+        <item>LowLightVision</item>
+        <item>WeaponFamiliarity</item>
+        <item>SaveBonus</item>
+        <item>ImprovedSpell</item>
+        <item>AttackBonusGoblin</item>
+        <item>AttackBonusKobold</item>
+        <item>DodgeBonus</item>
+        <item>SkillBonus</item>
+        <item>SpellLikeAbilitySpeak with animals</item>
+        <item>SpellLikeAbilityDancing lights</item>
+        <item>SpellLikeAbilityGhost sound</item>
+        <item>SpellLikeAbilityPrestidigitation</item>
+    </object>
+    <object>
         <name>Rogue</name>
         <item>SneakAttack1</item>
         <item>SneakAttack2</item>
@@ -419,6 +458,10 @@
         <item>SimpleWeaponProficiency</item>
     </object>
     <object>
+        <name>Strength</name>
+        <item>SupernaturalStrength</item>
+    </object>
+    <object>
         <name>TakenMultipleTimes</name>
         <item>SkillMastery</item>
         <item>SpellMastery</item>
@@ -427,6 +470,16 @@
         <item>AttackBonus</item>
         <item>SaveBonus</item>
         <item>DodgeBonus</item>
+    </object>
+    <object>
+        <name>TallfellowHalfling</name>
+        <item>SkillBonusListen</item>
+        <item>SkillBonusSearch</item>
+        <item>SkillBonusSpot</item>
+        <item>SaveBonusAll</item>
+        <item>SaveBonusFear</item>
+        <item>AttackBonusThrowOrSling</item>
+        <item>PassiveSecretDoorSearch</item>
     </object>
     <object>
         <name>Wizard</name>
@@ -454,5 +507,6 @@
         <item>MartialWeaponProficiencyRapier</item>
         <item>MartialWeaponProficiencyLongbow</item>
         <item>MartialWeaponProficiencyShortbow</item>
+        <item>PassiveSecretDoorSearch</item>
     </object>
 </items>

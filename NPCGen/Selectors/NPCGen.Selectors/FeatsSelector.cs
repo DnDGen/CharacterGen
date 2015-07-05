@@ -75,14 +75,26 @@ namespace NPCGen.Selectors
             if (requiredFeats.ContainsKey(featId))
                 additionalFeatSelection.RequiredFeatIds = requiredFeats[featId];
 
-            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.FEATClassRequirements, featId);
-            additionalFeatSelection.RequiredCharacterClasses = adjustmentsSelector.SelectFrom(tableName);
+            var featsWithClassRequirements = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.HasClassRequirements);
+            if (featsWithClassRequirements.Contains(featId))
+            {
+                var tableName = String.Format(TableNameConstants.Formattable.Adjustments.FEATClassRequirements, featId);
+                additionalFeatSelection.RequiredCharacterClasses = adjustmentsSelector.SelectFrom(tableName);
+            }
 
-            tableName = String.Format(TableNameConstants.Formattable.Adjustments.FEATSkillRankRequirements, featId);
-            additionalFeatSelection.RequiredSkillRanks = adjustmentsSelector.SelectFrom(tableName);
+            var featsWithSkillRequirements = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.HasSkillRequirements);
+            if (featsWithSkillRequirements.Contains(featId))
+            {
+                var tableName = String.Format(TableNameConstants.Formattable.Adjustments.FEATSkillRankRequirements, featId);
+                additionalFeatSelection.RequiredSkillRanks = adjustmentsSelector.SelectFrom(tableName);
+            }
 
-            tableName = String.Format(TableNameConstants.Formattable.Adjustments.FEATStatRequirements, featId);
-            additionalFeatSelection.RequiredStats = adjustmentsSelector.SelectFrom(tableName);
+            var featWithStatRequirements = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.HasStatRequirements);
+            if (featWithStatRequirements.Contains(featId))
+            {
+                var tableName = String.Format(TableNameConstants.Formattable.Adjustments.FEATStatRequirements, featId);
+                additionalFeatSelection.RequiredStats = adjustmentsSelector.SelectFrom(tableName);
+            }
 
             return additionalFeatSelection;
         }
