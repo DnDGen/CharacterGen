@@ -18,6 +18,19 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
         }
 
         [TestCase("")]
+        [TestCase(GroupConstants.TakenMultipleTimes,
+            FeatConstants.SpellMasteryId,
+            FeatConstants.ToughnessId,
+            FeatConstants.SkillMasteryId,
+            FeatConstants.SkillBonusId,
+            FeatConstants.AttackBonusId,
+            FeatConstants.DodgeBonusId,
+            FeatConstants.SaveBonusId)]
+        public override void DistinctCollection(String name, params String[] collection)
+        {
+            base.DistinctCollection(name, collection);
+        }
+
         [TestCase(CharacterClassConstants.Cleric,
             FeatConstants.SimpleWeaponProficiencyId,
             FeatConstants.LightArmorProficiencyId,
@@ -25,6 +38,37 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.HeavyArmorProficiencyId,
             FeatConstants.ShieldProficiencyId,
             FeatConstants.TurnId)]
+        [TestCase(CharacterClassConstants.Fighter,
+            FeatConstants.SimpleWeaponProficiencyId,
+            FeatConstants.MartialWeaponProficiencyId,
+            FeatConstants.LightArmorProficiencyId,
+            FeatConstants.MediumArmorProficiencyId,
+            FeatConstants.HeavyArmorProficiencyId,
+            FeatConstants.ShieldProficiencyId,
+            FeatConstants.TowerShieldProficiencyId)]
+        [TestCase(CharacterClassConstants.Ranger,
+            FeatConstants.SimpleWeaponProficiencyId,
+            FeatConstants.MartialWeaponProficiencyId,
+            FeatConstants.LightArmorProficiencyId,
+            FeatConstants.ShieldProficiencyId,
+            FeatConstants.FavoredEnemyId + "1",
+            FeatConstants.FavoredEnemyId + "2",
+            FeatConstants.FavoredEnemyId + "3",
+            FeatConstants.FavoredEnemyId + "4",
+            FeatConstants.FavoredEnemyId + "5",
+            FeatConstants.TrackId,
+            FeatConstants.WildEmpathyId,
+            FeatConstants.CombatStyleId,
+            FeatConstants.EnduranceId,
+            FeatConstants.ImprovedCombatStyleId,
+            FeatConstants.WoodlandStrideId,
+            FeatConstants.SwiftTrackerId,
+            FeatConstants.EvasionId,
+            FeatConstants.CombatStyleMasteryId,
+            FeatConstants.CamouflageId,
+            FeatConstants.HideInPlainSightId)]
+        [TestCase(CharacterClassConstants.Sorcerer,
+            FeatConstants.SimpleWeaponProficiencyId)]
         [TestCase(CharacterClassConstants.Wizard,
             FeatConstants.ScribeScrollId,
             FeatConstants.SimpleWeaponProficiencyId + WeaponConstants.Club,
@@ -32,10 +76,19 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.SimpleWeaponProficiencyId + WeaponConstants.HeavyCrossbow,
             FeatConstants.SimpleWeaponProficiencyId + WeaponConstants.LightCrossbow,
             FeatConstants.SimpleWeaponProficiencyId + WeaponConstants.Quarterstaff)]
+        [TestCase(CharacterClassConstants.Domains.Death,
+            FeatConstants.DeathTouchId)]
         [TestCase(CharacterClassConstants.Domains.Earth,
             FeatConstants.TurnId)]
+        [TestCase(CharacterClassConstants.Domains.Evil,
+            FeatConstants.CastSpellBonusId)]
         [TestCase(CharacterClassConstants.Schools.Conjuration,
             FeatConstants.SkillBonusId)]
+        public void ClassFeatGroup(String name, params String[] collection)
+        {
+            base.DistinctCollection(name, collection);
+        }
+
         [TestCase(RaceConstants.BaseRaces.DeepHalflingId,
             FeatConstants.SaveBonusId + "All",
             FeatConstants.SaveBonusId + "Fear",
@@ -44,6 +97,18 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.SkillBonusId + SkillConstants.Appraise,
             FeatConstants.DarkvisionId,
             FeatConstants.StonecunningId)]
+        [TestCase(RaceConstants.BaseRaces.DoppelgangerId,
+            FeatConstants.SkillBonusId + SkillConstants.Bluff,
+            FeatConstants.SkillBonusId + SkillConstants.Disguise,
+            FeatConstants.DarkvisionId,
+            FeatConstants.NaturalArmorId,
+            FeatConstants.SpellLikeAbilityId,
+            FeatConstants.ChangeShapeId,
+            FeatConstants.ImmuneToEffectId + "Sleep",
+            FeatConstants.ImmuneToEffectId + "Charm")]
+        [TestCase(RaceConstants.BaseRaces.GnollId,
+            FeatConstants.DarkvisionId,
+            FeatConstants.NaturalArmorId)]
         [TestCase(RaceConstants.BaseRaces.GoblinId,
             FeatConstants.DarkvisionId,
             FeatConstants.SkillBonusId + SkillConstants.MoveSilently,
@@ -113,46 +178,46 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.SkillBonusId + SkillConstants.Search,
             FeatConstants.SkillBonusId + SkillConstants.Spot,
             FeatConstants.SkillBonusId + SkillConstants.Listen)]
-        [TestCase(GroupConstants.TakenMultipleTimes,
-            FeatConstants.SpellMasteryId,
-            FeatConstants.ToughnessId,
-            FeatConstants.SkillMasteryId,
-            FeatConstants.SkillBonusId,
-            FeatConstants.AttackBonusId,
-            FeatConstants.DodgeBonusId,
-            FeatConstants.SaveBonusId)]
-        [TestCase(CharacterClassConstants.Fighter,
-            FeatConstants.SimpleWeaponProficiencyId,
-            FeatConstants.MartialWeaponProficiencyId,
-            FeatConstants.LightArmorProficiencyId,
-            FeatConstants.MediumArmorProficiencyId,
-            FeatConstants.HeavyArmorProficiencyId,
-            FeatConstants.ShieldProficiencyId,
-            FeatConstants.TowerShieldProficiencyId)]
-        [TestCase(CharacterClassConstants.Ranger,
-            FeatConstants.SimpleWeaponProficiencyId,
-            FeatConstants.MartialWeaponProficiencyId,
-            FeatConstants.LightArmorProficiencyId,
-            FeatConstants.ShieldProficiencyId,
-            FeatConstants.FavoredEnemyId + "1",
-            FeatConstants.FavoredEnemyId + "2",
-            FeatConstants.FavoredEnemyId + "3",
-            FeatConstants.FavoredEnemyId + "4",
-            FeatConstants.FavoredEnemyId + "5",
-            FeatConstants.TrackId,
-            FeatConstants.WildEmpathyId,
-            FeatConstants.CombatStyleId,
-            FeatConstants.EnduranceId,
-            FeatConstants.ImprovedCombatStyleId,
-            FeatConstants.WoodlandStrideId,
-            FeatConstants.SwiftTrackerId,
-            FeatConstants.EvasionId,
-            FeatConstants.CombatStyleMasteryId,
-            FeatConstants.CamouflageId,
-            FeatConstants.HideInPlainSightId)]
-        public override void DistinctCollection(String name, params String[] collection)
+        public void RaceFeatGroup(String name, params String[] collection)
         {
             base.DistinctCollection(name, collection);
+        }
+
+        [Test]
+        public void HalfCelestialFeatGroup()
+        {
+            var featIds = new[]
+            {
+                FeatConstants.SpellLikeAbilityId + "Daylight",
+                FeatConstants.SmiteEvilId,
+                FeatConstants.SpellLikeAbilityId + "Protection from evil",
+                FeatConstants.SpellLikeAbilityId + "Bless",
+                FeatConstants.SpellLikeAbilityId + "Aid",
+                FeatConstants.SpellLikeAbilityId + "Detect evil",
+                FeatConstants.SpellLikeAbilityId + "Cure serious wounds",
+                FeatConstants.SpellLikeAbilityId + "Neutralize poison",
+                FeatConstants.SpellLikeAbilityId + "Holy smite",
+                FeatConstants.SpellLikeAbilityId + "Remove disease",
+                FeatConstants.SpellLikeAbilityId + "Dispel evil",
+                FeatConstants.SpellLikeAbilityId + "Holy word",
+                FeatConstants.SpellLikeAbilityId + "Holy aura",
+                FeatConstants.SpellLikeAbilityId + "Hallow",
+                FeatConstants.SpellLikeAbilityId + "Mass charm monster",
+                FeatConstants.SpellLikeAbilityId + "Summon monster IX (Celestials only)",
+                FeatConstants.SpellLikeAbilityId + "Resurrection",
+                FeatConstants.NaturalArmorId,
+                FeatConstants.DarkvisionId,
+                FeatConstants.ImmuneToEffectId,
+                FeatConstants.ResistanceToAcidId,
+                FeatConstants.ResistanceToColdId,
+                FeatConstants.ResistanceToElectricityId,
+                FeatConstants.DamageReductionId + "10-",
+                FeatConstants.DamageReductionId + "11+",
+                FeatConstants.SpellResistanceId,
+                FeatConstants.SaveBonusId
+            };
+
+            base.DistinctCollection(RaceConstants.Metaraces.HalfCelestialId, featIds);
         }
 
         [Test]
@@ -273,7 +338,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
                 FeatConstants.TrapSenseId + "6",
                 FeatConstants.ImprovedUncannyDodgeId,
                 FeatConstants.SimpleWeaponProficiencyId,
-                FeatConstants.MartialWeaponProficiencyId + WeaponConstants.HandCrossbow,
+                FeatConstants.ExoticWeaponProficiencyId + WeaponConstants.HandCrossbow,
                 FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Rapier,
                 FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Sap,
                 FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Shortbow,

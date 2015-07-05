@@ -107,4 +107,49 @@
     <object>
         <name>Water</name>
     </object>
+    <object>
+        <name>Skills</name>
+        <item>Appraise</item>
+        <item>Balance</item>
+        <item>Bluff</item>
+        <item>Climb</item>
+        <item>Concentration</item>
+        <item>Decipher Script</item>
+        <item>Diplomacy</item>
+        <item>Disable Device</item>
+        <item>Disguise</item>
+        <item>Escape Artist</item>
+        <item>Forgery</item>
+        <item>Gather Information</item>
+        <item>Handle Animal</item>
+        <item>Heal</item>
+        <item>Hide</item>
+        <item>Intimidate</item>
+        <item>Jump</item>
+        <item>Knowledge (Arcana)</item>
+        <item>Knowledge (Architecture and Engineering)</item>
+        <item>Knowledge (Dungeoneering)</item>
+        <item>Knowledge (Geography)</item>
+        <item>Knowledge (History)</item>
+        <item>Knowledge (Local)</item>
+        <item>Knowledge (Nature)</item>
+        <item>Knowledge (Nobility and Royalty)</item>
+        <item>Knowledge (Religion)</item>
+        <item>Knowledge (The Planes)</item>
+        <item>Listen</item>
+        <item>Move Silently</item>
+        <item>Open Lock</item>
+        <item>Perform</item>
+        <item>Ride</item>
+        <item>Search</item>
+        <item>Sense Motive</item>
+        <item>Sleight of Hand</item>
+        <item>Spellcraft</item>
+        <item>Spot</item>
+        <item>Survival</item>
+        <item>Swim</item>
+        <item>Tumble</item>
+        <item>Use Magic Device</item>
+        <item>Use Rope</item>
+    </object>
 </items>

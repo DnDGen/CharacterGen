@@ -43,6 +43,7 @@ namespace NPCGen.Tests.Integration.Tables
         {
             var extras = table[name].Except(collection);
             Assert.That(extras, Is.Empty, name);
+            Assert.That(table[name].Count(), Is.EqualTo(collection.Count()));
         }
 
         public virtual void OrderedCollection(String name, params String[] collection)

@@ -13,8 +13,8 @@
         <item></item>
     </object>
     <object>
-        <name>MartialWeaponProficiencyHand crossbow</name>
-        <item>MartialWeaponProficiency</item>
+        <name>ExoticWeaponProficiencyHand crossbow</name>
+        <item>ExoticWeaponProficiency</item>
         <item>1</item>
         <item>Hand crossbow</item>
         <item>0</item>

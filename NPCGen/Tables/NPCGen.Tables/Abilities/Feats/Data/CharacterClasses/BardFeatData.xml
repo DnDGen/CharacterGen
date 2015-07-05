@@ -68,8 +68,8 @@
         <item></item>
     </object>
     <object>
-        <name>MartialWeaponProficiencyWhip</name>
-        <item>MartialWeaponProficiency</item>
+        <name>ExoticWeaponProficiencyWhip</name>
+        <item>ExoticWeaponProficiency</item>
         <item>1</item>
         <item>Whip</item>
         <item>0</item>

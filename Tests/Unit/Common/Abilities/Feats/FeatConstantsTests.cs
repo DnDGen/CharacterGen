@@ -189,6 +189,8 @@ namespace NPCGen.Tests.Unit.Common.Abilities.Feats
         [TestCase(FeatConstants.CombatStyleMastery, "Combat Style Mastery")]
         [TestCase(FeatConstants.Camouflage, "Camouflage")]
         [TestCase(FeatConstants.HideInPlainSight, "Hide in Plain Sight")]
+        [TestCase(FeatConstants.CastSpellBonus, "Cast Spell Bonus")]
+        [TestCase(FeatConstants.DeathTouch, "Death Touch")]
         public void ConstantName(String constant, String value)
         {
             Assert.That(constant, Is.EqualTo(value));
@@ -375,6 +377,8 @@ namespace NPCGen.Tests.Unit.Common.Abilities.Feats
         [TestCase(FeatConstants.CombatStyleMasteryId, "CombatStyleMastery")]
         [TestCase(FeatConstants.CamouflageId, "Camouflage")]
         [TestCase(FeatConstants.HideInPlainSightId, "HideInPlainSight")]
+        [TestCase(FeatConstants.CastSpellBonusId, "CastSpellBonus")]
+        [TestCase(FeatConstants.DeathTouchId, "DeathTouch")]
         public void ConstantId(String constant, String value)
         {
             Assert.That(constant, Is.EqualTo(value));
@@ -383,6 +387,7 @@ namespace NPCGen.Tests.Unit.Common.Abilities.Feats
         [TestCase(FeatConstants.Frequencies.Constant, "Constant")]
         [TestCase(FeatConstants.Frequencies.AtWill, "At Will")]
         [TestCase(FeatConstants.Frequencies.Day, "Day")]
+        [TestCase(FeatConstants.Foci.Archery, "Archery")]
         public void Constant(String constant, String value)
         {
             Assert.That(constant, Is.EqualTo(value));

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+    <object>
+        <name>CombatStyleMastery</name>
+        <item>ImprovedCombatStyle</item>
+    </object>
+    <object>
+        <name>ImprovedCombatStyle</name>
+        <item>CombatStyle</item>
+    </object>
+</items>

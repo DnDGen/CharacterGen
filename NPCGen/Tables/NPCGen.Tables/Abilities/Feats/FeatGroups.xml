@@ -219,8 +219,27 @@
         <item>Stonecunning</item>
     </object>
     <object>
+        <name>Death</name>
+        <item>DeathTouch</item>
+    </object>
+    <object>
+        <name>Doppelganger</name>
+        <item>SkillBonusBluff</item>
+        <item>SkillBonusDisguise</item>
+        <item>Darkvision</item>
+        <item>NaturalArmor</item>
+        <item>SpellLikeAbility</item>
+        <item>ChangeShape</item>
+        <item>ImmuneToEffectSleep</item>
+        <item>ImmuneToEffectCharm</item>
+    </object>
+    <object>
         <name>Earth</name>
         <item>Turn</item>
+    </object>
+    <object>
+        <name>Evil</name>
+        <item>CastSpellBonus</item>
     </object>
     <object>
         <name>Fighter</name>
@@ -233,10 +252,45 @@
         <item>TowerShieldProficiency</item>
     </object>
     <object>
+        <name>Gnoll</name>
+        <item>NaturalArmor</item>
+        <item>Darkvision</item>
+    </object>
+    <object>
         <name>Goblin</name>
         <item>SkillBonusMove Silently</item>
         <item>SkillBonusRide</item>
         <item>Darkvision</item>
+    </object>
+    <object>
+        <name>HalfCelestial</name>
+        <item>Darkvision</item>
+        <item>ImmuneToEffect</item>
+        <item>SaveBonus</item>
+        <item>SpellLikeAbilityDaylight</item>
+        <item>SpellLikeAbilityBless</item>
+        <item>SpellLikeAbilityProtection from evil</item>
+        <item>SpellLikeAbilityHoly word</item>
+        <item>SpellLikeAbilityHallow</item>
+        <item>SpellLikeAbilityResurrection</item>
+        <item>SmiteEvil</item>
+        <item>SpellLikeAbilityAid</item>
+        <item>SpellLikeAbilityDetect evil</item>
+        <item>SpellLikeAbilityCure serious wounds</item>
+        <item>SpellLikeAbilityNeutralize poison</item>
+        <item>SpellLikeAbilityHoly smite</item>
+        <item>SpellLikeAbilityRemove disease</item>
+        <item>SpellLikeAbilityDispel evil</item>
+        <item>SpellLikeAbilityHoly aura</item>
+        <item>SpellLikeAbilityMass charm monster</item>
+        <item>SpellLikeAbilitySummon monster IX (Celestials only)</item>
+        <item>NaturalArmor</item>
+        <item>ResistanceToAcid</item>
+        <item>ResistanceToCold</item>
+        <item>ResistanceToElectricity</item>
+        <item>DamageReduction10-</item>
+        <item>DamageReduction11+</item>
+        <item>SpellResistance</item>
     </object>
     <object>
         <name>HalfElf</name>
@@ -354,11 +408,15 @@
         <item>ImprovedUncannyDodge</item>
         <item>SimpleWeaponProficiency</item>
         <item>LightArmorProficiency</item>
-        <item>MartialWeaponProficiencyHand crossbow</item>
+        <item>ExoticWeaponProficiencyHand crossbow</item>
         <item>MartialWeaponProficiencyRapier</item>
         <item>MartialWeaponProficiencySap</item>
         <item>MartialWeaponProficiencyShortbow</item>
         <item>MartialWeaponProficiencyShort sword</item>
+    </object>
+    <object>
+        <name>Sorcerer</name>
+        <item>SimpleWeaponProficiency</item>
     </object>
     <object>
         <name>TakenMultipleTimes</name>

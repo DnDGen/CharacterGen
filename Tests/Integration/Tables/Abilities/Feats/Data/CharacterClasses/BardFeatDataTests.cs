@@ -69,8 +69,8 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             1,
             0,
             0)]
-        [TestCase(FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Whip,
-            FeatConstants.MartialWeaponProficiencyId,
+        [TestCase(FeatConstants.ExoticWeaponProficiencyId + WeaponConstants.Whip,
+            FeatConstants.ExoticWeaponProficiencyId,
             WeaponConstants.Whip,
             0,
             "",

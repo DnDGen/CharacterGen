@@ -24,6 +24,8 @@ namespace NPCGen.Common.Abilities.Feats
         public const String AugmentSummoningId = "AugmentSummoning";
         public const String BlindFight = "Blind-Fight";
         public const String BlindFightId = "BlindFight";
+        public const String CastSpellBonus = "Cast Spell Bonus";
+        public const String CastSpellBonusId = "CastSpellBonus";
         public const String ChangeShape = "Change Shape";
         public const String ChangeShapeId = "ChangeShape";
         public const String Cleave = "Cleave";
@@ -40,6 +42,8 @@ namespace NPCGen.Common.Abilities.Feats
         public const String DamageReductionId = "DamageReduction";
         public const String Darkvision = "Darkvision";
         public const String DarkvisionId = "Darkvision";
+        public const String DeathTouch = "Death Touch";
+        public const String DeathTouchId = "DeathTouch";
         public const String Deceitful = "Deceitful";
         public const String DeceitfulId = "Deceitful";
         public const String DefensiveRoll = "Defensive Roll";
@@ -374,6 +378,11 @@ namespace NPCGen.Common.Abilities.Feats
             public const String AtWill = "At Will";
             public const String Constant = "Constant";
             public const String Day = "Day";
+        }
+
+        public static class Foci
+        {
+            public const String Archery = "Archery";
         }
     }
 }

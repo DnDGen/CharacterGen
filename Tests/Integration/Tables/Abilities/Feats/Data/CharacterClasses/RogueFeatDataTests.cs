@@ -204,8 +204,8 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             1,
             0,
             0)]
-        [TestCase(FeatConstants.MartialWeaponProficiencyId + WeaponConstants.HandCrossbow,
-            FeatConstants.MartialWeaponProficiencyId,
+        [TestCase(FeatConstants.ExoticWeaponProficiencyId + WeaponConstants.HandCrossbow,
+            FeatConstants.ExoticWeaponProficiencyId,
             WeaponConstants.HandCrossbow,
             0,
             "",

@@ -7,8 +7,10 @@ namespace NPCGen.Tables.Interfaces
         public const String Additional = "Additional";
         public const String AverageBaseAttack = "Average Base Attack";
         public const String CharacterClasses = "CharacterClasses";
+        public const String CombatStyles = "CombatStyles";
         public const String Deflection = "Deflection";
         public const String Dodge = "Dodge";
+        public const String Foci = "Foci";
         public const String Genetic = "Genetic";
         public const String GoodBaseAttack = "Good Base Attack";
         public const String Healers = "Healers";

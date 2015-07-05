@@ -2,16 +2,9 @@
 
 <items>
     <object>
-        <name>Club</name>
-        <item>Club</item>
-    </object>
-    <object>
-        <name>Heavy crossbow</name>
-        <item>Heavy crossbow</item>
-    </object>
-    <object>
-        <name>Light crossbow</name>
-        <item>Light crossbow</item>
+        <name>CombatStyle</name>
+        <item>TwoWeaponFighting</item>
+        <item>Archery</item>
     </object>
     <object>
         <name>Schools of Magic</name>
@@ -23,6 +16,77 @@
         <item>Illusion</item>
         <item>Necromancy</item>
         <item>Transmutation</item>
+    </object>
+    <object>
+        <name>SimpleWeaponProficiency</name>
+        <item>Gauntlet</item>
+        <item>Unarmed Strike</item>
+        <item>Dagger</item>
+        <item>Quarterstaff</item>
+        <item>Club</item>
+        <item>Heavy crossbow</item>
+        <item>Light crossbow</item>
+        <item>Punching dagger</item>
+        <item>Spiked gauntlet</item>
+        <item>Light mace</item>
+        <item>Sickle</item>
+        <item>Heavy mace</item>
+        <item>Morningstar</item>
+        <item>Shortspear</item>
+        <item>Longspear</item>
+        <item>Dart</item>
+        <item>Javelin</item>
+        <item>Sling</item>
+    </object>
+    <object>
+        <name>MartialWeaponProficiency</name>
+        <item>Longsword</item>
+        <item>Longbow</item>
+        <item>Shortbow</item>
+        <item>Throwing axe</item>
+        <item>Light hammer</item>
+        <item>Handaxe</item>
+        <item>Kukri</item>
+        <item>Light pick</item>
+        <item>Sap</item>
+        <item>Short sword</item>
+        <item>Battleaxe</item>
+        <item>Light flail</item>
+        <item>Heavy pick</item>
+        <item>Rapier</item>
+        <item>Scimitar</item>
+        <item>Trident</item>
+        <item>Warhammer</item>
+        <item>Falchion</item>
+        <item>Glaive</item>
+        <item>Greataxe</item>
+        <item>Greatclub</item>
+        <item>Heavy flail</item>
+        <item>Greatsword</item>
+        <item>Halberd</item>
+        <item>Guisarme</item>
+        <item>Lance</item>
+        <item>Ranseur</item>
+        <item>Scythe</item>
+    </object>
+    <object>
+        <name>ExoticWeaponProficiency</name>
+        <item>Kama</item>
+        <item>Nunchaku</item>
+        <item>Siangham</item>
+        <item>Bastard sword</item>
+        <item>Dwarven waraxe</item>
+        <item>Whip</item>
+        <item>Orc double axe</item>
+        <item>Spiked chain</item>
+        <item>Dire flail</item>
+        <item>Gnome hooked hammer</item>
+        <item>Shuriken</item>
+        <item>Net</item>
+        <item>Two-bladed sword</item>
+        <item>Dwarven urgrosh</item>
+        <item>Hand crossbow</item>
+        <item>Repeating crossbow</item>
     </object>
     <object>
         <name>Skills</name>

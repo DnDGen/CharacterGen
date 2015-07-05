@@ -55,6 +55,58 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Skills
         }
 
         [Test]
+        public void AllSkills()
+        {
+            var skills = new[] 
+            {
+                SkillConstants.Appraise,
+                SkillConstants.Balance,
+                SkillConstants.Bluff,
+                SkillConstants.Climb,
+                SkillConstants.Concentration,
+                SkillConstants.DecipherScript,
+                SkillConstants.Diplomacy,
+                SkillConstants.DisableDevice,
+                SkillConstants.Disguise,
+                SkillConstants.EscapeArtist,
+                SkillConstants.Forgery,
+                SkillConstants.GatherInformation,
+                SkillConstants.HandleAnimal,
+                SkillConstants.Heal,
+                SkillConstants.Hide,
+                SkillConstants.Intimidate,
+                SkillConstants.Jump,
+                SkillConstants.KnowledgeArcana,
+                SkillConstants.KnowledgeArchitectureAndEngineering,
+                SkillConstants.KnowledgeDungeoneering,
+                SkillConstants.KnowledgeGeography,
+                SkillConstants.KnowledgeHistory,
+                SkillConstants.KnowledgeLocal,
+                SkillConstants.KnowledgeNature,
+                SkillConstants.KnowledgeNobilityAndRoyalty,
+                SkillConstants.KnowledgeReligion,
+                SkillConstants.KnowledgeThePlanes,
+                SkillConstants.Listen,
+                SkillConstants.MoveSilently,
+                SkillConstants.OpenLock,
+                SkillConstants.Perform,
+                SkillConstants.Ride,
+                SkillConstants.Search,
+                SkillConstants.SenseMotive,
+                SkillConstants.SleightOfHand,
+                SkillConstants.Spellcraft,
+                SkillConstants.Spot,
+                SkillConstants.Survival,
+                SkillConstants.Swim,
+                SkillConstants.Tumble,
+                SkillConstants.UseMagicDevice,
+                SkillConstants.UseRope
+            };
+
+            base.DistinctCollection(GroupConstants.Skills, skills);
+        }
+
+        [Test]
         public void KnowledgeSkills()
         {
             var skills = new[] 

@@ -413,9 +413,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Abilities\Feats\Data\CharacterClasses\ClericFeatData.xml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Abilities\Feats\Data\Additional\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Abilities\Feats\Data\CharacterClasses\WizardFeatData.xml" />
   </ItemGroup>
@@ -455,6 +453,20 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Abilities\Feats\Data\Racial\DeepHalflingFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Feats\RequiredFeats.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Feats\Data\CharacterClasses\FighterFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Feats\Data\Racial\GnollFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Feats\Data\Additional\AdditionalFeatData.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -28,7 +28,11 @@ namespace NPCGen.Generators.Abilities.Feats
             if (String.IsNullOrEmpty(focusType))
                 return String.Empty;
 
-            var foci = GetFoci(focusType, otherFeats, requiredFeatIds);
+            var allSourceFeatFoci = collectionsSelector.SelectAllFrom(TableNameConstants.Set.Collection.FeatFoci);
+            if (allSourceFeatFoci.Keys.Contains(focusType) == false)
+                return focusType;
+
+            var foci = GetFoci(focusType, allSourceFeatFoci, otherFeats, requiredFeatIds);
             var usedFoci = otherFeats.Where(f => f.Name.Id == featId).Select(f => f.Focus);
             foci = foci.Except(usedFoci);
 
@@ -45,17 +49,10 @@ namespace NPCGen.Generators.Abilities.Feats
             return focus;
         }
 
-        private IEnumerable<String> GetFoci(String focusType, IEnumerable<Feat> otherFeats, IEnumerable<String> requiredFeatIds)
+        private IEnumerable<String> GetFoci(String focusType, Dictionary<String, IEnumerable<String>> allSourceFeatFoci, IEnumerable<Feat> otherFeats, IEnumerable<String> requiredFeatIds)
         {
-            var sourceFeatFoci = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, focusType);
             var proficiencyRequired = requiredFeatIds.Contains(GroupConstants.Proficiency);
-
-            if (focusType == FeatConstants.MartialWeaponProficiencyId)
-            {
-                var weaponFamiliartyFeats = otherFeats.Where(f => f.Name.Id == FeatConstants.WeaponFamiliarityId);
-                var familiarityFoci = weaponFamiliartyFeats.Select(f => f.Focus);
-                sourceFeatFoci = sourceFeatFoci.Union(familiarityFoci);
-            }
+            var sourceFeatFoci = GetExplodedFoci(allSourceFeatFoci, focusType, otherFeats);
 
             if (proficiencyRequired == false && otherFeats.Any(f => RequirementHasFocus(requiredFeatIds, f)) == false)
                 return sourceFeatFoci;
@@ -71,21 +68,23 @@ namespace NPCGen.Generators.Abilities.Feats
 
             foreach (var featWithAllFocus in featsWithAllFocus)
             {
-                var explodedFoci = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, featWithAllFocus.Name.Id);
-
-                if (featWithAllFocus.Name.Id == FeatConstants.MartialWeaponProficiencyId)
-                {
-                    var weaponFamiliartyFeats = otherFeats.Where(f => f.Name.Id == FeatConstants.WeaponFamiliarityId);
-                    var familiarityFoci = weaponFamiliartyFeats.Select(f => f.Focus);
-                    explodedFoci = explodedFoci.Union(familiarityFoci);
-                }
-
+                var explodedFoci = GetExplodedFoci(allSourceFeatFoci, featWithAllFocus.Name.Id, otherFeats);
                 requirementFoci = requirementFoci.Union(explodedFoci);
             }
 
             var applicableFoci = requirementFoci.Intersect(sourceFeatFoci);
 
             return applicableFoci;
+        }
+
+        private IEnumerable<String> GetExplodedFoci(Dictionary<String, IEnumerable<String>> allSourceFeatFoci, String focusType, IEnumerable<Feat> otherFeats)
+        {
+            if (focusType != FeatConstants.MartialWeaponProficiencyId)
+                return allSourceFeatFoci[focusType];
+
+            var weaponFamiliartyFeats = otherFeats.Where(f => f.Name.Id == FeatConstants.WeaponFamiliarityId);
+            var familiarityFoci = weaponFamiliartyFeats.Select(f => f.Focus);
+            return allSourceFeatFoci[focusType].Union(familiarityFoci);
         }
 
         private Boolean RequirementHasFocus(IEnumerable<String> requiredFeatIds, Feat feat)
@@ -104,7 +103,11 @@ namespace NPCGen.Generators.Abilities.Feats
             if (String.IsNullOrEmpty(focusType))
                 return String.Empty;
 
-            var foci = GetFoci(focusType, Enumerable.Empty<Feat>(), Enumerable.Empty<String>());
+            var allSourceFeatFoci = collectionsSelector.SelectAllFrom(TableNameConstants.Set.Collection.FeatFoci);
+            if (allSourceFeatFoci.Keys.Contains(focusType) == false)
+                return focusType;
+
+            var foci = GetFoci(focusType, allSourceFeatFoci, Enumerable.Empty<Feat>(), Enumerable.Empty<String>());
             var allSkills = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.Skills);
             var skillFoci = allSkills.Intersect(foci);
 

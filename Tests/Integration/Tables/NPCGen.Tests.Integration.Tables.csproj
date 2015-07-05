@@ -67,13 +67,16 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Abilities\Feats\Data\Additional\AdditionalFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\BarbarianFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\BardFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\CharacterClassFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\ClericFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\CharacterClasses\FighterFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\RogueFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\WizardFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\DeepHalflingFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\GnollFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\GoblinFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\HalfElfFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\HalfOrcFeatDataTests.cs" />
@@ -85,6 +88,7 @@
     <Compile Include="Abilities\Feats\Data\Racial\WoodElfFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\FeatFociTests.cs" />
     <Compile Include="Abilities\Feats\FeatGroupsTests.cs" />
+    <Compile Include="Abilities\Feats\RequiredFeatsTests.cs" />
     <Compile Include="Abilities\Skills\AssignPointToCrossClassSkillTests.cs" />
     <Compile Include="Abilities\Skills\ClassSkillsTests.cs" />
     <Compile Include="Abilities\Skills\CrossClassSkillsTests.cs" />
@@ -230,9 +234,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Abilities\Feats\Data\Additional\" />
-  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
