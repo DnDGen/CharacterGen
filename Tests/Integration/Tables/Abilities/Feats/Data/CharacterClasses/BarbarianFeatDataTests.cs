@@ -14,6 +14,46 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             get { return String.Format(TableNameConstants.Formattable.Collection.CLASSFeatData, CharacterClassConstants.Barbarian); }
         }
 
+        [Test]
+        public override void CollectionNames()
+        {
+            var names = new[] 
+            {
+                FeatConstants.SimpleWeaponProficiencyId,
+                FeatConstants.MartialWeaponProficiencyId,
+                FeatConstants.LightArmorProficiencyId,
+                FeatConstants.MediumArmorProficiencyId,
+                FeatConstants.ShieldProficiencyId,
+                FeatConstants.FastMovementId,
+                FeatConstants.IlliteracyId,
+                FeatConstants.RageId + "1",
+                FeatConstants.RageId + "2",
+                FeatConstants.RageId + "3",
+                FeatConstants.RageId + "4",
+                FeatConstants.RageId + "5",
+                FeatConstants.RageId + "6",
+                FeatConstants.UncannyDodgeId,
+                FeatConstants.TrapSenseId + "1",
+                FeatConstants.TrapSenseId + "2",
+                FeatConstants.TrapSenseId + "3",
+                FeatConstants.TrapSenseId + "4",
+                FeatConstants.TrapSenseId + "5",
+                FeatConstants.TrapSenseId + "6",
+                FeatConstants.ImprovedUncannyDodgeId,
+                FeatConstants.DamageReductionId + "1",
+                FeatConstants.DamageReductionId + "2",
+                FeatConstants.DamageReductionId + "3",
+                FeatConstants.DamageReductionId + "4",
+                FeatConstants.DamageReductionId + "5",
+                FeatConstants.GreaterRageId,
+                FeatConstants.IndomitableWillId,
+                FeatConstants.TirelessRageId,
+                FeatConstants.MightyRageId
+            };
+
+            AssertCollectionNames(names);
+        }
+
         [TestCase(FeatConstants.SimpleWeaponProficiencyId,
             FeatConstants.SimpleWeaponProficiencyId,
             FeatConstants.SimpleWeaponProficiencyId,

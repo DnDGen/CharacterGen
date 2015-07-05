@@ -15,6 +15,58 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             get { return String.Format(TableNameConstants.Formattable.Collection.CLASSFeatData, CharacterClassConstants.Bard); }
         }
 
+        [Test]
+        public override void CollectionNames()
+        {
+            var names = new[] 
+            {
+                FeatConstants.SimpleWeaponProficiencyId,
+                FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Longsword,
+                FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Rapier,
+                FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Sap,
+                FeatConstants.MartialWeaponProficiencyId + WeaponConstants.ShortSword,
+                FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Shortbow,
+                FeatConstants.ExoticWeaponProficiencyId + WeaponConstants.Whip,
+                FeatConstants.LightArmorProficiencyId,
+                FeatConstants.ShieldProficiencyId,
+                FeatConstants.BardicMusicId + "1",
+                FeatConstants.BardicMusicId + "2",
+                FeatConstants.BardicMusicId + "3",
+                FeatConstants.BardicMusicId + "4",
+                FeatConstants.BardicMusicId + "5",
+                FeatConstants.BardicMusicId + "6",
+                FeatConstants.BardicMusicId + "7",
+                FeatConstants.BardicMusicId + "8",
+                FeatConstants.BardicMusicId + "9",
+                FeatConstants.BardicMusicId + "10",
+                FeatConstants.BardicMusicId + "11",
+                FeatConstants.BardicMusicId + "12",
+                FeatConstants.BardicMusicId + "13",
+                FeatConstants.BardicMusicId + "14",
+                FeatConstants.BardicMusicId + "15",
+                FeatConstants.BardicMusicId + "16",
+                FeatConstants.BardicMusicId + "17",
+                FeatConstants.BardicMusicId + "18",
+                FeatConstants.BardicMusicId + "19",
+                FeatConstants.BardicMusicId + "20",
+                FeatConstants.BardicKnowledgeId,
+                FeatConstants.CountersongId,
+                FeatConstants.FascinateId,
+                FeatConstants.InspireCourageId + "1",
+                FeatConstants.InspireCourageId + "2",
+                FeatConstants.InspireCourageId + "3",
+                FeatConstants.InspireCourageId + "4",
+                FeatConstants.InspireCompetenceId,
+                FeatConstants.SuggestionId,
+                FeatConstants.InspireGreatnessId,
+                FeatConstants.SongOfFreedomId,
+                FeatConstants.InspireHeroicsId,
+                FeatConstants.MassSuggestionId
+            };
+
+            AssertCollectionNames(names);
+        }
+
         [TestCase(FeatConstants.SimpleWeaponProficiencyId,
             FeatConstants.SimpleWeaponProficiencyId,
             FeatConstants.SimpleWeaponProficiencyId,

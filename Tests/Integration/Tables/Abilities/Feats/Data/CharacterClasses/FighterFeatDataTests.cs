@@ -14,6 +14,23 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             get { return String.Format(TableNameConstants.Formattable.Collection.CLASSFeatData, CharacterClassConstants.Fighter); }
         }
 
+        [Test]
+        public override void CollectionNames()
+        {
+            var names = new[] 
+            {
+                FeatConstants.SimpleWeaponProficiencyId,
+                FeatConstants.MartialWeaponProficiencyId,
+                FeatConstants.LightArmorProficiencyId,
+                FeatConstants.MediumArmorProficiencyId,
+                FeatConstants.HeavyArmorProficiencyId,
+                FeatConstants.ShieldProficiencyId,
+                FeatConstants.TowerShieldProficiencyId
+            };
+
+            AssertCollectionNames(names);
+        }
+
         [TestCase(FeatConstants.SimpleWeaponProficiencyId,
             FeatConstants.SimpleWeaponProficiencyId,
             FeatConstants.SimpleWeaponProficiencyId,

@@ -14,6 +14,27 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Skills
             get { return TableNameConstants.Set.Collection.ClassSkills; }
         }
 
+        [Test]
+        public override void CollectionNames()
+        {
+            var names = new[] 
+            {
+                CharacterClassConstants.Barbarian,
+                CharacterClassConstants.Bard,
+                CharacterClassConstants.Cleric,
+                CharacterClassConstants.Druid,
+                CharacterClassConstants.Fighter, 
+                CharacterClassConstants.Monk,
+                CharacterClassConstants.Paladin, 
+                CharacterClassConstants.Ranger, 
+                CharacterClassConstants.Rogue, 
+                CharacterClassConstants.Sorcerer, 
+                CharacterClassConstants.Wizard
+            };
+
+            AssertCollectionNames(names);
+        }
+
         [TestCase(CharacterClassConstants.Barbarian,
             SkillConstants.Climb,
             SkillConstants.HandleAnimal,

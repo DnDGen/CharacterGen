@@ -18,7 +18,59 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
             get { return TableNameConstants.Set.Collection.FeatGroups; }
         }
 
+        [Test]
+        public override void CollectionNames()
+        {
+            var names = new[] 
+            {
+                "",
+                GroupConstants.HasClassRequirements,
+                GroupConstants.HasSkillRequirements,
+                GroupConstants.HasStatRequirements,
+                GroupConstants.TakenMultipleTimes,
+                CharacterClassConstants.Cleric,
+                CharacterClassConstants.Fighter,
+                CharacterClassConstants.Ranger,
+                CharacterClassConstants.Sorcerer,
+                CharacterClassConstants.Wizard,
+                CharacterClassConstants.Domains.Death,
+                CharacterClassConstants.Domains.Earth,
+                CharacterClassConstants.Domains.Evil,
+                CharacterClassConstants.Domains.Strength,
+                CharacterClassConstants.Schools.Conjuration,
+                CharacterClassConstants.Schools.Evocation,
+                RaceConstants.BaseRaces.DeepHalflingId,
+                RaceConstants.BaseRaces.DoppelgangerId,
+                RaceConstants.BaseRaces.GnollId,
+                RaceConstants.BaseRaces.GoblinId,
+                RaceConstants.BaseRaces.HalfElfId,
+                RaceConstants.BaseRaces.HalfOrcId,
+                RaceConstants.BaseRaces.HighElfId,
+                RaceConstants.BaseRaces.HillDwarfId,
+                RaceConstants.BaseRaces.HobgoblinId,
+                RaceConstants.BaseRaces.HumanId,
+                RaceConstants.BaseRaces.LightfootHalflingId,
+                RaceConstants.BaseRaces.LizardfolkId,
+                RaceConstants.Metaraces.NoneId,
+                RaceConstants.BaseRaces.OrcId,
+                RaceConstants.BaseRaces.RockGnomeId,
+                RaceConstants.BaseRaces.TallfellowHalflingId,
+                RaceConstants.Metaraces.WerewolfId,
+                RaceConstants.BaseRaces.WoodElfId,
+                GroupConstants.Additional,
+                CharacterClassConstants.Barbarian,
+                CharacterClassConstants.Bard,
+                CharacterClassConstants.Rogue,
+                RaceConstants.Metaraces.HalfCelestialId
+            };
+
+            AssertCollectionNames(names);
+        }
+
         [TestCase("")]
+        [TestCase(GroupConstants.HasClassRequirements)]
+        [TestCase(GroupConstants.HasSkillRequirements)]
+        [TestCase(GroupConstants.HasStatRequirements)]
         [TestCase(GroupConstants.TakenMultipleTimes,
             FeatConstants.SpellMasteryId,
             FeatConstants.ToughnessId,
@@ -27,9 +79,6 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.AttackBonusId,
             FeatConstants.DodgeBonusId,
             FeatConstants.SaveBonusId)]
-        [TestCase(GroupConstants.HasClassRequirements)]
-        [TestCase(GroupConstants.HasSkillRequirements)]
-        [TestCase(GroupConstants.HasStatRequirements)]
         public override void DistinctCollection(String name, params String[] collection)
         {
             base.DistinctCollection(name, collection);
@@ -310,7 +359,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
                 FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Sap,
                 FeatConstants.MartialWeaponProficiencyId + WeaponConstants.ShortSword,
                 FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Shortbow,
-                FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Whip,
+                FeatConstants.ExoticWeaponProficiencyId + WeaponConstants.Whip,
                 FeatConstants.LightArmorProficiencyId,
                 FeatConstants.ShieldProficiencyId,
                 FeatConstants.BardicMusicId + "1",

@@ -14,6 +14,21 @@ namespace NPCGen.Tests.Integration.Tables.Races.Metaraces
             get { return TableNameConstants.Set.Collection.MetaraceGroups; }
         }
 
+        [Test]
+        public override void CollectionNames()
+        {
+            var names = new[] 
+            {
+                AlignmentConstants.Evil,
+                AlignmentConstants.Good,
+                AlignmentConstants.Neutral,
+                GroupConstants.Genetic,
+                GroupConstants.Lycanthrope
+            };
+
+            AssertCollectionNames(names);
+        }
+
         [TestCase(AlignmentConstants.Evil,
             RaceConstants.Metaraces.HalfDragonId,
             RaceConstants.Metaraces.HalfFiendId,

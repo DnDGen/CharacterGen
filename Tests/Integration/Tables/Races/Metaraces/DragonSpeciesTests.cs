@@ -13,6 +13,22 @@ namespace NPCGen.Tests.Integration.Tables.Races.Metaraces
             get { return TableNameConstants.Set.Collection.DragonSpecies; }
         }
 
+        [Test]
+        public override void CollectionNames()
+        {
+            var names = new[] 
+            {
+                "Lawful Good",
+                "Neutral Good",
+                "Chaotic Good",
+                "Lawful Evil",
+                "Neutral Evil",
+                "Chaotic Evil"
+            };
+
+            AssertCollectionNames(names);
+        }
+
         [TestCase("Lawful Good",
             RaceConstants.Metaraces.Species.Bronze,
             RaceConstants.Metaraces.Species.Gold,

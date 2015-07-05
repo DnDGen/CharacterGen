@@ -15,6 +15,43 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             get { return String.Format(TableNameConstants.Formattable.Collection.CLASSFeatData, CharacterClassConstants.Rogue); }
         }
 
+        [Test]
+        public override void CollectionNames()
+        {
+            var names = new[] 
+            {
+                FeatConstants.SneakAttackId + "1",
+                FeatConstants.SneakAttackId + "2",
+                FeatConstants.SneakAttackId + "3",
+                FeatConstants.SneakAttackId + "4",
+                FeatConstants.SneakAttackId + "5",
+                FeatConstants.SneakAttackId + "6",
+                FeatConstants.SneakAttackId + "7",
+                FeatConstants.SneakAttackId + "8",
+                FeatConstants.SneakAttackId + "9",
+                FeatConstants.SneakAttackId + "10",
+                FeatConstants.TrapfindingId,
+                FeatConstants.EvasionId,
+                FeatConstants.UncannyDodgeId,
+                FeatConstants.TrapSenseId + "1",
+                FeatConstants.TrapSenseId + "2",
+                FeatConstants.TrapSenseId + "3",
+                FeatConstants.TrapSenseId + "4",
+                FeatConstants.TrapSenseId + "5",
+                FeatConstants.TrapSenseId + "6",
+                FeatConstants.ImprovedUncannyDodgeId,
+                FeatConstants.SimpleWeaponProficiencyId,
+                FeatConstants.ExoticWeaponProficiencyId + WeaponConstants.HandCrossbow,
+                FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Rapier,
+                FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Sap,
+                FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Shortbow,
+                FeatConstants.MartialWeaponProficiencyId + WeaponConstants.ShortSword,
+                FeatConstants.LightArmorProficiencyId
+            };
+
+            AssertCollectionNames(names);
+        }
+
         [TestCase(FeatConstants.SneakAttackId + "1",
             FeatConstants.SneakAttackId,
             "",

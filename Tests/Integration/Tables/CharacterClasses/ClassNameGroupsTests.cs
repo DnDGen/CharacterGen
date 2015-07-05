@@ -13,6 +13,32 @@ namespace NPCGen.Tests.Integration.Tables.CharacterClasses
             get { return TableNameConstants.Set.Collection.ClassNameGroups; }
         }
 
+        [Test]
+        public override void CollectionNames()
+        {
+            var names = new[] 
+            {
+                GroupConstants.Healers,
+                GroupConstants.Mages,
+                GroupConstants.Spellcasters,
+                GroupConstants.Stealth,
+                GroupConstants.Warriors,
+                GroupConstants.GoodBaseAttack,
+                GroupConstants.AverageBaseAttack,
+                "Lawful Good",
+                "Neutral Good",
+                "Chaotic Good",
+                "Lawful Neutral",
+                "True Neutral",
+                "Chaotic Neutral",
+                "Lawful Evil",
+                "Neutral Evil",
+                "Chaotic Evil"
+            };
+
+            AssertCollectionNames(names);
+        }
+
         [TestCase(GroupConstants.Healers,
             CharacterClassConstants.Bard,
             CharacterClassConstants.Cleric,

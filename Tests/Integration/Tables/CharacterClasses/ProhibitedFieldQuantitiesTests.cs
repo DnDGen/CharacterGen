@@ -13,6 +13,46 @@ namespace NPCGen.Tests.Integration.Tables.CharacterClasses
             get { return TableNameConstants.Set.Adjustments.ProhibitedFieldQuantities; }
         }
 
+        [Test]
+        public override void CollectionNames()
+        {
+            var names = new[] 
+            {
+                CharacterClassConstants.Schools.Abjuration, 
+                CharacterClassConstants.Schools.Conjuration, 
+                CharacterClassConstants.Schools.Divination, 
+                CharacterClassConstants.Schools.Enchantment, 
+                CharacterClassConstants.Schools.Evocation, 
+                CharacterClassConstants.Schools.Illusion,
+                CharacterClassConstants.Schools.Necromancy, 
+                CharacterClassConstants.Schools.Transmutation, 
+                CharacterClassConstants.Domains.Air, 
+                CharacterClassConstants.Domains.Animal, 
+                CharacterClassConstants.Domains.Chaos, 
+                CharacterClassConstants.Domains.Death, 
+                CharacterClassConstants.Domains.Destruction, 
+                CharacterClassConstants.Domains.Earth, 
+                CharacterClassConstants.Domains.Evil, 
+                CharacterClassConstants.Domains.Fire, 
+                CharacterClassConstants.Domains.Good, 
+                CharacterClassConstants.Domains.Healing, 
+                CharacterClassConstants.Domains.Knowledge, 
+                CharacterClassConstants.Domains.Law, 
+                CharacterClassConstants.Domains.Luck, 
+                CharacterClassConstants.Domains.Magic, 
+                CharacterClassConstants.Domains.Plant, 
+                CharacterClassConstants.Domains.Protection, 
+                CharacterClassConstants.Domains.Strength, 
+                CharacterClassConstants.Domains.Sun, 
+                CharacterClassConstants.Domains.Travel, 
+                CharacterClassConstants.Domains.Trickery, 
+                CharacterClassConstants.Domains.War, 
+                CharacterClassConstants.Domains.Water
+            };
+
+            AssertCollectionNames(names);
+        }
+
         [TestCase(CharacterClassConstants.Schools.Abjuration, 2)]
         [TestCase(CharacterClassConstants.Schools.Conjuration, 2)]
         [TestCase(CharacterClassConstants.Schools.Divination, 1)]

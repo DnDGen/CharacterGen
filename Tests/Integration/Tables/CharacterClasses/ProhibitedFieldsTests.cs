@@ -13,6 +13,36 @@ namespace NPCGen.Tests.Integration.Tables.CharacterClasses
             get { return TableNameConstants.Set.Collection.ProhibitedFields; }
         }
 
+        [Test]
+        public override void CollectionNames()
+        {
+            var names = new[] 
+            {
+                CharacterClassConstants.Barbarian,
+                CharacterClassConstants.Bard,
+                CharacterClassConstants.Cleric,
+                CharacterClassConstants.Druid,
+                CharacterClassConstants.Fighter, 
+                CharacterClassConstants.Monk,
+                CharacterClassConstants.Paladin, 
+                CharacterClassConstants.Ranger, 
+                CharacterClassConstants.Rogue, 
+                CharacterClassConstants.Sorcerer, 
+                CharacterClassConstants.Wizard,
+                "Lawful Good",
+                "Neutral Good",
+                "Chaotic Good",
+                "Lawful Neutral",
+                "True Neutral",
+                "Chaotic Neutral",
+                "Lawful Evil",
+                "Neutral Evil",
+                "Chaotic Evil"
+            };
+
+            AssertCollectionNames(names);
+        }
+
         [TestCase(CharacterClassConstants.Barbarian)]
         [TestCase(CharacterClassConstants.Bard)]
         [TestCase(CharacterClassConstants.Cleric)]

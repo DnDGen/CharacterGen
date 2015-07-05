@@ -48,5 +48,16 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.Additional
 
             base.Data(name, data);
         }
+
+        [Test]
+        public override void CollectionNames()
+        {
+            var names = new[] 
+            {
+                FeatConstants.AcrobaticId
+            };
+
+            AssertCollectionNames(names);
+        }
     }
 }

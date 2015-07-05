@@ -101,4 +101,14 @@
         <item>0</item>
         <item></item>
     </object>
+    <object>
+        <name>PassiveSecretDoorSearch</name>
+        <item>PassiveSecretDoorSearch</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+    </object>
 </items>

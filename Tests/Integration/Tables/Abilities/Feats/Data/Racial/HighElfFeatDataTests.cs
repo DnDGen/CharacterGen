@@ -16,6 +16,27 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             get { return String.Format(TableNameConstants.Formattable.Collection.RACEFeatData, RaceConstants.BaseRaces.HighElfId); }
         }
 
+        [Test]
+        public override void CollectionNames()
+        {
+            var names = new[] 
+            {
+                FeatConstants.ImmuneToEffectId,
+                FeatConstants.SaveBonusId,
+                FeatConstants.LowLightVisionId,
+                FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Longsword,
+                FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Rapier,
+                FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Longbow,
+                FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Shortbow,
+                FeatConstants.PassiveSecretDoorSearchId,
+                FeatConstants.SkillBonusId + SkillConstants.Search,
+                FeatConstants.SkillBonusId + SkillConstants.Spot,
+                FeatConstants.SkillBonusId + SkillConstants.Listen
+            };
+
+            AssertCollectionNames(names);
+        }
+
         [TestCase(FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Longsword,
             FeatConstants.MartialWeaponProficiencyId,
             WeaponConstants.Longsword,
@@ -96,6 +117,14 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             2)]
+        [TestCase(FeatConstants.PassiveSecretDoorSearchId,
+            FeatConstants.PassiveSecretDoorSearchId,
+            "",
+            0,
+            "",
+            0,
+            "",
+            0)]
         public override void Data(String name, String featId, String focus, Int32 frequencyQuantity, String frequencyTimePeriod, Int32 minimumHitDiceRequirement, String sizeRequirement, Int32 strength)
         {
             base.Data(name, featId, focus, frequencyQuantity, frequencyTimePeriod, minimumHitDiceRequirement, sizeRequirement, strength);

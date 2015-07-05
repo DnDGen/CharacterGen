@@ -14,6 +14,47 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Skills
             get { return TableNameConstants.Set.Collection.SkillGroups; }
         }
 
+        [Test]
+        public override void CollectionNames()
+        {
+            var names = new[] 
+            {
+                CharacterClassConstants.Domains.Air,
+                CharacterClassConstants.Domains.Animal,
+                CharacterClassConstants.Domains.Chaos,
+                CharacterClassConstants.Domains.Death,
+                CharacterClassConstants.Domains.Destruction,
+                CharacterClassConstants.Domains.Earth,
+                CharacterClassConstants.Domains.Evil,
+                CharacterClassConstants.Domains.Fire,
+                CharacterClassConstants.Domains.Good,
+                CharacterClassConstants.Domains.Healing,
+                CharacterClassConstants.Domains.Law,
+                CharacterClassConstants.Domains.Luck,
+                CharacterClassConstants.Domains.Magic,
+                CharacterClassConstants.Domains.Plant,
+                CharacterClassConstants.Domains.Protection,
+                CharacterClassConstants.Domains.Strength,
+                CharacterClassConstants.Domains.Sun,
+                CharacterClassConstants.Domains.Travel,
+                CharacterClassConstants.Domains.Trickery,
+                CharacterClassConstants.Domains.War,
+                CharacterClassConstants.Domains.Water,
+                CharacterClassConstants.Schools.Abjuration,
+                CharacterClassConstants.Schools.Conjuration,
+                CharacterClassConstants.Schools.Divination,
+                CharacterClassConstants.Schools.Enchantment,
+                CharacterClassConstants.Schools.Evocation,
+                CharacterClassConstants.Schools.Illusion,
+                CharacterClassConstants.Schools.Necromancy,
+                CharacterClassConstants.Schools.Transmutation,
+                CharacterClassConstants.Domains.Knowledge,
+                GroupConstants.Skills
+            };
+
+            AssertCollectionNames(names);
+        }
+
         [TestCase(CharacterClassConstants.Domains.Air)]
         [TestCase(CharacterClassConstants.Domains.Animal,
             SkillConstants.KnowledgeNature)]

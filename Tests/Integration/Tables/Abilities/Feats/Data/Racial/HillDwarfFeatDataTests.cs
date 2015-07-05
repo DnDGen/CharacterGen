@@ -16,6 +16,27 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             get { return String.Format(TableNameConstants.Formattable.Collection.RACEFeatData, RaceConstants.BaseRaces.HillDwarfId); }
         }
 
+        [Test]
+        public override void CollectionNames()
+        {
+            var names = new[] 
+            {
+                FeatConstants.DarkvisionId,
+                FeatConstants.StonecunningId,
+                FeatConstants.WeaponFamiliarityId + WeaponConstants.DwarvenUrgrosh,
+                FeatConstants.WeaponFamiliarityId + WeaponConstants.DwarvenWaraxe,
+                FeatConstants.StabilityId,
+                FeatConstants.SaveBonusId + "Poison",
+                FeatConstants.SaveBonusId + "Spell",
+                FeatConstants.AttackBonusId + RaceConstants.BaseRaces.Orc,
+                FeatConstants.AttackBonusId + RaceConstants.BaseRaces.Goblin,
+                FeatConstants.DodgeBonusId,
+                FeatConstants.SkillBonusId + SkillConstants.Appraise
+            };
+
+            AssertCollectionNames(names);
+        }
+
         [TestCase(FeatConstants.SkillBonusId + SkillConstants.Appraise,
             FeatConstants.SkillBonusId,
             SkillConstants.Appraise + " (Stone or metal items)",

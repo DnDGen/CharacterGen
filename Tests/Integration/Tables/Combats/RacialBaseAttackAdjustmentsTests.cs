@@ -13,6 +13,59 @@ namespace NPCGen.Tests.Integration.Tables.Combats
             get { return TableNameConstants.Set.Adjustments.RacialBaseAttackAdjustments; }
         }
 
+        [Test]
+        public override void CollectionNames()
+        {
+            var names = new[] 
+            {
+                RaceConstants.BaseRaces.AasimarId,
+                RaceConstants.BaseRaces.BugbearId, 
+                RaceConstants.BaseRaces.DerroId,
+                RaceConstants.BaseRaces.DoppelgangerId, 
+                RaceConstants.BaseRaces.DrowId,
+                RaceConstants.BaseRaces.DuergarDwarfId, 
+                RaceConstants.BaseRaces.DeepDwarfId, 
+                RaceConstants.BaseRaces.HillDwarfId, 
+                RaceConstants.BaseRaces.MountainDwarfId, 
+                RaceConstants.BaseRaces.GrayElfId, 
+                RaceConstants.BaseRaces.HighElfId,
+                RaceConstants.BaseRaces.WildElfId, 
+                RaceConstants.BaseRaces.WoodElfId,
+                RaceConstants.BaseRaces.GnollId, 
+                RaceConstants.BaseRaces.ForestGnomeId, 
+                RaceConstants.BaseRaces.RockGnomeId, 
+                RaceConstants.BaseRaces.SvirfneblinId, 
+                RaceConstants.BaseRaces.GoblinId, 
+                RaceConstants.Metaraces.HalfCelestialId,
+                RaceConstants.Metaraces.HalfDragonId, 
+                RaceConstants.BaseRaces.HalfElfId,
+                RaceConstants.Metaraces.HalfFiendId,
+                RaceConstants.BaseRaces.HalfOrcId, 
+                RaceConstants.BaseRaces.DeepHalflingId,
+                RaceConstants.BaseRaces.LightfootHalflingId,
+                RaceConstants.BaseRaces.TallfellowHalflingId,
+                RaceConstants.BaseRaces.HobgoblinId,
+                RaceConstants.BaseRaces.HumanId,
+                RaceConstants.BaseRaces.KoboldId,
+                RaceConstants.BaseRaces.LizardfolkId,
+                RaceConstants.BaseRaces.MindFlayerId,
+                RaceConstants.BaseRaces.MinotaurId,
+                RaceConstants.BaseRaces.OgreId,
+                RaceConstants.BaseRaces.OgreMageId,
+                RaceConstants.BaseRaces.OrcId,
+                RaceConstants.BaseRaces.TieflingId, 
+                RaceConstants.BaseRaces.TroglodyteId,
+                RaceConstants.Metaraces.WerebearId, 
+                RaceConstants.Metaraces.WereboarId, 
+                RaceConstants.Metaraces.WereratId, 
+                RaceConstants.Metaraces.WeretigerId,
+                RaceConstants.Metaraces.WerewolfId, 
+                RaceConstants.Metaraces.NoneId
+            };
+
+            AssertCollectionNames(names);
+        }
+
         [TestCase(RaceConstants.BaseRaces.AasimarId, 0)]
         [TestCase(RaceConstants.BaseRaces.BugbearId, 2)]
         [TestCase(RaceConstants.BaseRaces.DerroId, 3)]

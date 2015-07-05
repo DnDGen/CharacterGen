@@ -16,6 +16,61 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Languages
             get { return TableNameConstants.Set.Collection.BonusLanguages; }
         }
 
+        [Test]
+        public override void CollectionNames()
+        {
+            var names = new[] 
+            {
+                RaceConstants.BaseRaces.AasimarId,
+                RaceConstants.BaseRaces.BugbearId,
+                RaceConstants.BaseRaces.DerroId,
+                RaceConstants.BaseRaces.DoppelgangerId,
+                RaceConstants.BaseRaces.DrowId,
+                RaceConstants.BaseRaces.DuergarDwarfId,
+                RaceConstants.BaseRaces.DeepDwarfId,
+                RaceConstants.BaseRaces.HillDwarfId,
+                RaceConstants.BaseRaces.MountainDwarfId,
+                RaceConstants.BaseRaces.GrayElfId,
+                RaceConstants.BaseRaces.HighElfId,
+                RaceConstants.BaseRaces.WildElfId,
+                RaceConstants.BaseRaces.WoodElfId,
+                RaceConstants.BaseRaces.GnollId,
+                RaceConstants.BaseRaces.ForestGnomeId,
+                RaceConstants.BaseRaces.RockGnomeId,
+                RaceConstants.BaseRaces.SvirfneblinId,
+                RaceConstants.BaseRaces.GoblinId,
+                RaceConstants.BaseRaces.HalfOrcId,
+                RaceConstants.BaseRaces.DeepHalflingId,
+                RaceConstants.BaseRaces.LightfootHalflingId,
+                RaceConstants.BaseRaces.TallfellowHalflingId,
+                RaceConstants.BaseRaces.HobgoblinId,
+                RaceConstants.BaseRaces.KoboldId,
+                RaceConstants.BaseRaces.LizardfolkId,
+                RaceConstants.BaseRaces.MinotaurId,
+                RaceConstants.BaseRaces.OgreId,
+                RaceConstants.BaseRaces.OgreMageId,
+                RaceConstants.BaseRaces.OrcId,
+                RaceConstants.BaseRaces.TieflingId,
+                RaceConstants.BaseRaces.TroglodyteId,
+                CharacterClassConstants.Cleric,
+                CharacterClassConstants.Druid,
+                CharacterClassConstants.Wizard,
+                CharacterClassConstants.Barbarian,
+                CharacterClassConstants.Bard,
+                CharacterClassConstants.Fighter,
+                CharacterClassConstants.Monk,
+                CharacterClassConstants.Paladin,
+                CharacterClassConstants.Ranger,
+                CharacterClassConstants.Rogue,
+                CharacterClassConstants.Sorcerer,
+                RaceConstants.BaseRaces.HalfElfId,
+                RaceConstants.BaseRaces.HumanId,
+                RaceConstants.BaseRaces.MindFlayerId,
+            };
+
+            AssertCollectionNames(names);
+        }
+
         [TestCase(RaceConstants.BaseRaces.AasimarId,
             LanguageConstants.Dwarven,
             LanguageConstants.Elven,

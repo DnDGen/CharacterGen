@@ -17,6 +17,25 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
             get { return TableNameConstants.Set.Collection.FeatFoci; }
         }
 
+        [Test]
+        public override void CollectionNames()
+        {
+            var names = new[] 
+            {
+                GroupConstants.SchoolsOfMagic,
+                FeatConstants.SimpleWeaponProficiencyId,
+                FeatConstants.MartialWeaponProficiencyId,
+                FeatConstants.ExoticWeaponProficiencyId,
+                GroupConstants.Weapons,
+                GroupConstants.WeaponsWithUnarmedAndGrapple,
+                GroupConstants.WeaponsWithUnarmedAndGrappleAndRay,
+                FeatConstants.CombatStyleId,
+                GroupConstants.Skills
+            };
+
+            AssertCollectionNames(names);
+        }
+
         [TestCase(GroupConstants.SchoolsOfMagic,
             CharacterClassConstants.Schools.Abjuration,
             CharacterClassConstants.Schools.Conjuration,

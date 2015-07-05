@@ -15,6 +15,22 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             get { return String.Format(TableNameConstants.Formattable.Collection.CLASSFeatData, CharacterClassConstants.Cleric); }
         }
 
+        [Test]
+        public override void CollectionNames()
+        {
+            var names = new[] 
+            {
+                FeatConstants.SimpleWeaponProficiencyId,
+                FeatConstants.LightArmorProficiencyId,
+                FeatConstants.MediumArmorProficiencyId,
+                FeatConstants.HeavyArmorProficiencyId,
+                FeatConstants.ShieldProficiencyId,
+                FeatConstants.TurnId
+            };
+
+            AssertCollectionNames(names);
+        }
+
         [TestCase(FeatConstants.SimpleWeaponProficiencyId,
             FeatConstants.SimpleWeaponProficiencyId,
             FeatConstants.SimpleWeaponProficiencyId,

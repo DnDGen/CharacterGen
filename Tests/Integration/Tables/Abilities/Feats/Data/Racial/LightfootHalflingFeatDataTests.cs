@@ -8,11 +8,11 @@ using NUnit.Framework;
 namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
 {
     [TestFixture]
-    public class DeepHalflingFeatDataTests : RacialFeatDataTests
+    public class LightfootHalflingFeatDataTests : RacialFeatDataTests
     {
         protected override String tableName
         {
-            get { return String.Format(TableNameConstants.Formattable.Collection.RACEFeatData, RaceConstants.BaseRaces.DeepHalflingId); }
+            get { return String.Format(TableNameConstants.Formattable.Collection.RACEFeatData, RaceConstants.BaseRaces.LightfootHalflingId); }
         }
 
         [Test]
@@ -24,9 +24,9 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
                 FeatConstants.SaveBonusId + "Fear",
                 FeatConstants.AttackBonusId + "ThrowOrSling",
                 FeatConstants.SkillBonusId + SkillConstants.Listen,
-                FeatConstants.SkillBonusId + SkillConstants.Appraise,
-                FeatConstants.DarkvisionId,
-                FeatConstants.StonecunningId
+                FeatConstants.SkillBonusId + SkillConstants.Climb,
+                FeatConstants.SkillBonusId + SkillConstants.Jump,
+                FeatConstants.SkillBonusId + SkillConstants.MoveSilently
             };
 
             AssertCollectionNames(names);
@@ -56,22 +56,6 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             1)]
-        [TestCase(FeatConstants.StonecunningId,
-            FeatConstants.StonecunningId,
-            "",
-            0,
-            "",
-            0,
-            "",
-            0)]
-        [TestCase(FeatConstants.DarkvisionId,
-            FeatConstants.DarkvisionId,
-            "",
-            0,
-            "",
-            0,
-            "",
-            60)]
         [TestCase(FeatConstants.SkillBonusId + SkillConstants.Listen,
             FeatConstants.SkillBonusId,
             SkillConstants.Listen,
@@ -80,9 +64,25 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             2)]
-        [TestCase(FeatConstants.SkillBonusId + SkillConstants.Appraise,
+        [TestCase(FeatConstants.SkillBonusId + SkillConstants.Climb,
             FeatConstants.SkillBonusId,
-            SkillConstants.Appraise + " (Stone or metal items)",
+            SkillConstants.Climb,
+            0,
+            "",
+            0,
+            "",
+            2)]
+        [TestCase(FeatConstants.SkillBonusId + SkillConstants.Jump,
+            FeatConstants.SkillBonusId,
+            SkillConstants.Jump,
+            0,
+            "",
+            0,
+            "",
+            2)]
+        [TestCase(FeatConstants.SkillBonusId + SkillConstants.MoveSilently,
+            FeatConstants.SkillBonusId,
+            SkillConstants.MoveSilently,
             0,
             "",
             0,

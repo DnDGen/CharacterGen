@@ -13,6 +13,26 @@ namespace NPCGen.Tests.Integration.Tables.Combats
             get { return TableNameConstants.Set.Adjustments.MonsterHitDice; }
         }
 
+        [Test]
+        public override void CollectionNames()
+        {
+            var names = new[] 
+            {
+                RaceConstants.BaseRaces.BugbearId,
+                RaceConstants.BaseRaces.DerroId, 
+                RaceConstants.BaseRaces.DoppelgangerId,
+                RaceConstants.BaseRaces.GnollId, 
+                RaceConstants.BaseRaces.LizardfolkId, 
+                RaceConstants.BaseRaces.MindFlayerId,
+                RaceConstants.BaseRaces.MinotaurId, 
+                RaceConstants.BaseRaces.OgreId,
+                RaceConstants.BaseRaces.OgreMageId,
+                RaceConstants.BaseRaces.TroglodyteId
+            };
+
+            AssertCollectionNames(names);
+        }
+
         [TestCase(RaceConstants.BaseRaces.BugbearId, 3)]
         [TestCase(RaceConstants.BaseRaces.DerroId, 3)]
         [TestCase(RaceConstants.BaseRaces.DoppelgangerId, 4)]

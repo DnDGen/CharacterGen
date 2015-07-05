@@ -15,6 +15,22 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             get { return String.Format(TableNameConstants.Formattable.Collection.CLASSFeatData, CharacterClassConstants.Wizard); }
         }
 
+        [Test]
+        public override void CollectionNames()
+        {
+            var names = new[] 
+            {
+                FeatConstants.ScribeScrollId,
+                FeatConstants.SimpleWeaponProficiencyId + WeaponConstants.Club,
+                FeatConstants.SimpleWeaponProficiencyId + WeaponConstants.Dagger,
+                FeatConstants.SimpleWeaponProficiencyId + WeaponConstants.HeavyCrossbow,
+                FeatConstants.SimpleWeaponProficiencyId + WeaponConstants.LightCrossbow,
+                FeatConstants.SimpleWeaponProficiencyId + WeaponConstants.Quarterstaff
+            };
+
+            AssertCollectionNames(names);
+        }
+
         [TestCase(FeatConstants.ScribeScrollId,
             FeatConstants.ScribeScrollId,
             "",

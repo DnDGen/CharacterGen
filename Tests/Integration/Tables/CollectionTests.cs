@@ -23,6 +23,14 @@ namespace NPCGen.Tests.Integration.Tables
             indices = new Dictionary<Int32, String>();
         }
 
+        public abstract void CollectionNames();
+
+        protected void AssertCollectionNames(IEnumerable<String> names)
+        {
+            AssertMissingItems(table.Keys, names);
+            AssertExtraItems(table.Keys, names);
+        }
+
         protected virtual void PopulateIndices(IEnumerable<String> collection)
         {
             for (var i = 0; i < collection.Count(); i++)
@@ -33,17 +41,21 @@ namespace NPCGen.Tests.Integration.Tables
         {
             Assert.That(table.Keys, Contains.Item(name), tableName);
 
-            var missingItems = collection.Except(table[name]);
-            Assert.That(missingItems, Is.Empty, name + " missing");
-
-            AssertExtraItems(name, collection);
+            AssertMissingItems(table[name], collection);
+            AssertExtraItems(table[name], collection);
         }
 
-        protected void AssertExtraItems(String name, IEnumerable<String> collection)
+        protected void AssertMissingItems(IEnumerable<String> expected, IEnumerable<String> collection)
         {
-            var extras = table[name].Except(collection);
-            Assert.That(extras, Is.Empty, name + " extra");
-            Assert.That(table[name].Count(), Is.EqualTo(collection.Count()), name);
+            var missingItems = collection.Except(expected);
+            Assert.That(missingItems, Is.Empty, "missing");
+        }
+
+        protected void AssertExtraItems(IEnumerable<String> expected, IEnumerable<String> collection)
+        {
+            var extras = expected.Except(collection);
+            Assert.That(extras, Is.Empty, "extra");
+            Assert.That(expected.Count(), Is.EqualTo(collection.Count()));
         }
 
         public virtual void OrderedCollection(String name, params String[] collection)
@@ -64,18 +76,18 @@ namespace NPCGen.Tests.Integration.Tables
                 Assert.That(actualItem, Is.EqualTo(expectedItem), message);
             }
 
-            AssertExtraItems(name, collection);
+            AssertExtraItems(table[name], collection);
         }
 
         public virtual void DistinctCollection(String name, params String[] collection)
         {
             var distinctCollection = collection.Distinct();
-            Assert.That(distinctCollection.Count(), Is.EqualTo(collection.Count()));
+            Assert.That(distinctCollection.Count(), Is.EqualTo(collection.Count()), "Provided collection is not distinct");
 
             Collection(name, collection);
 
             distinctCollection = table[name].Distinct();
-            Assert.That(distinctCollection.Count(), Is.EqualTo(table[name].Count()));
+            Assert.That(distinctCollection.Count(), Is.EqualTo(table[name].Count()), "Actual collection is not distinct");
         }
 
         public virtual void EmptyCollection()

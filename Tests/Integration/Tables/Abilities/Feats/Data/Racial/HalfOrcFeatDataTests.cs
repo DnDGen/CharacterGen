@@ -14,6 +14,18 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             get { return String.Format(TableNameConstants.Formattable.Collection.RACEFeatData, RaceConstants.BaseRaces.HalfOrcId); }
         }
 
+        [Test]
+        public override void CollectionNames()
+        {
+            var names = new[] 
+            {
+                FeatConstants.DarkvisionId,
+                FeatConstants.OrcBloodId
+            };
+
+            AssertCollectionNames(names);
+        }
+
         [TestCase(FeatConstants.DarkvisionId,
             FeatConstants.DarkvisionId,
             "",

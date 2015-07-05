@@ -14,6 +14,22 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             get { return String.Format(TableNameConstants.Formattable.Collection.RACEFeatData, RaceConstants.BaseRaces.LizardfolkId); }
         }
 
+        [Test]
+        public override void CollectionNames()
+        {
+            var names = new[] 
+            {
+                FeatConstants.SimpleWeaponProficiencyId,
+                FeatConstants.ShieldProficiencyId,
+                FeatConstants.NaturalArmorId,
+                FeatConstants.HoldBreathId,
+                FeatConstants.NaturalWeaponId + "Claw",
+                FeatConstants.NaturalWeaponId + "Bite"
+            };
+
+            AssertCollectionNames(names);
+        }
+
         [TestCase(FeatConstants.SimpleWeaponProficiencyId,
             FeatConstants.SimpleWeaponProficiencyId,
             FeatConstants.SimpleWeaponProficiencyId,

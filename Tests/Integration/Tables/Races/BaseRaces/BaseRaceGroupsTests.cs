@@ -14,6 +14,23 @@ namespace NPCGen.Tests.Integration.Tables.Races.BaseRaces
             get { return TableNameConstants.Set.Collection.BaseRaceGroups; }
         }
 
+        [Test]
+        public override void CollectionNames()
+        {
+            var names = new[] 
+            {
+                GroupConstants.Standard,
+                AlignmentConstants.Evil,
+                AlignmentConstants.Good,
+                AlignmentConstants.Neutral,
+                RaceConstants.Sizes.Large,
+                RaceConstants.Sizes.Small,
+                GroupConstants.Monsters,
+            };
+
+            AssertCollectionNames(names);
+        }
+
         [TestCase(GroupConstants.Standard,
             RaceConstants.BaseRaces.HalfElfId,
             RaceConstants.BaseRaces.HalfOrcId,
