@@ -1,5 +1,6 @@
 ﻿using System;
 using NPCGen.Common.Abilities.Feats;
+using NPCGen.Common.CharacterClasses;
 using NPCGen.Tables.Interfaces;
 using NUnit.Framework;
 
@@ -28,21 +29,21 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
             AssertCollectionNames(names);
         }
 
-        [TestCase(FeatConstants.ImprovedCombatStyleId,
-            FeatConstants.CombatStyleId)]
-        [TestCase(FeatConstants.CombatStyleMasteryId,
-            FeatConstants.ImprovedCombatStyleId)]
-        [TestCase(FeatConstants.HeavyArmorProficiencyId,
-            FeatConstants.MediumArmorProficiencyId)]
-        [TestCase(FeatConstants.MediumArmorProficiencyId,
-            FeatConstants.LightArmorProficiencyId)]
-        [TestCase(FeatConstants.AugmentSummoningId,
-            FeatConstants.SpellFocusId)]
-        public override void DistinctCollection(String name, params String[] collection)
+        [TestCase(FeatConstants.ImprovedCombatStyleId, FeatConstants.CombatStyleId)]
+        [TestCase(FeatConstants.CombatStyleMasteryId, FeatConstants.ImprovedCombatStyleId)]
+        [TestCase(FeatConstants.HeavyArmorProficiencyId, FeatConstants.MediumArmorProficiencyId)]
+        [TestCase(FeatConstants.MediumArmorProficiencyId, FeatConstants.LightArmorProficiencyId)]
+        public void RequiredFeat(String name, String requiredFeatId)
         {
-            throw new NotImplementedException("Have to figure out focus requirements, augment requires conjuration focus");
+            var collection = new[] { requiredFeatId };
+            DistinctCollection(name, collection);
+        }
 
-            base.DistinctCollection(name, collection);
+        [TestCase(FeatConstants.AugmentSummoningId, FeatConstants.SpellFocusId, CharacterClassConstants.Schools.Conjuration)]
+        public void RequiredFeat(String name, String requiredFeatId, String requiredFocus)
+        {
+            var collection = new[] { String.Format("{0}/{1}", requiredFeatId, requiredFocus) };
+            DistinctCollection(name, collection);
         }
     }
 }

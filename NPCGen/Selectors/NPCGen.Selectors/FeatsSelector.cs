@@ -68,10 +68,7 @@ namespace NPCGen.Selectors
             additionalFeatSelection.Frequency.Quantity = Convert.ToInt32(featData[DataIndexConstants.AdditionalFeatData.FrequencyQuantityIndex]);
             additionalFeatSelection.Frequency.TimePeriod = featData[DataIndexConstants.AdditionalFeatData.FrequencyTimePeriodIndex];
             additionalFeatSelection.Strength = Convert.ToInt32(featData[DataIndexConstants.AdditionalFeatData.StrengthIndex]);
-
-            var requiredFeats = collectionsSelector.SelectAllFrom(TableNameConstants.Set.Collection.RequiredFeats);
-            if (requiredFeats.ContainsKey(featId))
-                additionalFeatSelection.RequiredFeatIds = requiredFeats[featId];
+            additionalFeatSelection.RequiredFeats = GetRequiredFeats(additionalFeatSelection.FeatId);
 
             var featsWithClassRequirements = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.HasClassRequirements);
             if (featsWithClassRequirements.Contains(featId))
@@ -116,15 +113,36 @@ namespace NPCGen.Selectors
                 classFeatSelection.Strength = Convert.ToInt32(featData[DataIndexConstants.CharacterClassFeatData.StrengthIndex]);
                 classFeatSelection.MaximumLevel = Convert.ToInt32(featData[DataIndexConstants.CharacterClassFeatData.MaximumLevelRequirementIndex]);
                 classFeatSelection.FrequencyQuantityStat = featData[DataIndexConstants.CharacterClassFeatData.FrequencyQuantityStatIndex];
-
-                var requiredFeats = collectionsSelector.SelectAllFrom(TableNameConstants.Set.Collection.RequiredFeats);
-                if (requiredFeats.ContainsKey(classFeatSelection.FeatId))
-                    classFeatSelection.RequiredFeatIds = requiredFeats[classFeatSelection.FeatId];
+                classFeatSelection.RequiredFeats = GetRequiredFeats(classFeatSelection.FeatId);
 
                 classFeatSelections.Add(classFeatSelection);
             }
 
             return classFeatSelections;
+        }
+
+        private IEnumerable<RequiredFeat> GetRequiredFeats(String featId)
+        {
+            var allRequiredFeats = collectionsSelector.SelectAllFrom(TableNameConstants.Set.Collection.RequiredFeats);
+            if (allRequiredFeats.ContainsKey(featId) == false)
+                return Enumerable.Empty<RequiredFeat>();
+
+            var requiredFeatsData = allRequiredFeats[featId];
+            var requiredFeats = new List<RequiredFeat>();
+
+            foreach (var requiredFeatData in requiredFeatsData)
+            {
+                var splitData = requiredFeatData.Split('/');
+                var requiredFeat = new RequiredFeat();
+                requiredFeat.FeatId = splitData[0];
+
+                if (splitData.Length > 1)
+                    requiredFeat.Focus = splitData[1];
+
+                requiredFeats.Add(requiredFeat);
+            }
+
+            return requiredFeats;
         }
     }
 }

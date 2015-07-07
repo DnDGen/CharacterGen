@@ -60,6 +60,7 @@
     <Compile Include="AdjustmentsSelectorTests.cs" />
     <Compile Include="Objects\CharacterClassFeatSelectionTests.cs" />
     <Compile Include="Objects\RacialFeatSelectionTests.cs" />
+    <Compile Include="Objects\RequiredFeatTests.cs" />
     <Compile Include="Objects\SkillSelectionTests.cs" />
     <Compile Include="Objects\StatPrioritySelectionTests.cs" />
     <Compile Include="PercentileSelectorTests.cs" />

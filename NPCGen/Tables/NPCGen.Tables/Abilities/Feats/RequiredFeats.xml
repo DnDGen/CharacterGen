@@ -9,4 +9,16 @@
         <name>ImprovedCombatStyle</name>
         <item>CombatStyle</item>
     </object>
+    <object>
+        <name>HeavyArmorProficiency</name>
+        <item>MediumArmorProficiency</item>
+    </object>
+    <object>
+        <name>MediumArmorProficiency</name>
+        <item>LightArmorProficiency</item>
+    </object>
+    <object>
+        <name>AugmentSummoning</name>
+        <item>SpellFocus/Conjuration</item>
+    </object>
 </items>

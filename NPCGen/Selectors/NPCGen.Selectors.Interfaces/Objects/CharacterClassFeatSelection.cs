@@ -14,7 +14,7 @@ namespace NPCGen.Selectors.Interfaces.Objects
         public Int32 MaximumLevel { get; set; }
         public Int32 Strength { get; set; }
         public Frequency Frequency { get; set; }
-        public IEnumerable<String> RequiredFeatIds { get; set; }
+        public IEnumerable<RequiredFeat> RequiredFeats { get; set; }
         public String FrequencyQuantityStat { get; set; }
 
         public CharacterClassFeatSelection()
@@ -22,7 +22,7 @@ namespace NPCGen.Selectors.Interfaces.Objects
             FeatId = String.Empty;
             FocusType = String.Empty;
             Frequency = new Frequency();
-            RequiredFeatIds = Enumerable.Empty<String>();
+            RequiredFeats = Enumerable.Empty<RequiredFeat>();
             FrequencyQuantityStat = String.Empty;
         }
 

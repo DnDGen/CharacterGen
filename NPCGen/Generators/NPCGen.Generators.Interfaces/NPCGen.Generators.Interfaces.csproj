@@ -93,6 +93,10 @@
       <Project>{83f2b67c-3eb0-4e46-aad5-bafaa2e35689}</Project>
       <Name>NPCGen.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Selectors\NPCGen.Selectors.Interfaces\NPCGen.Selectors.Interfaces.csproj">
+      <Project>{98848dc9-c901-4189-8559-54d68215f3a7}</Project>
+      <Name>NPCGen.Selectors.Interfaces</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -81,7 +81,7 @@ namespace NPCGen.Generators.Abilities.Feats
 
                 var feat = new Feat();
                 feat.Name.Id = featSelection.FeatId;
-                feat.Focus = featFocusGenerator.GenerateFrom(featSelection.FeatId, featSelection.FocusType, featSelection.RequiredFeatIds, chosenFeats, characterClass);
+                feat.Focus = featFocusGenerator.GenerateFrom(featSelection.FeatId, featSelection.FocusType, featSelection.RequiredFeats, chosenFeats, characterClass);
                 feat.Frequency = featSelection.Frequency;
 
                 if (featSelection.FeatId == FeatConstants.SpellMasteryId)
@@ -101,7 +101,7 @@ namespace NPCGen.Generators.Abilities.Feats
         private IEnumerable<AdditionalFeatSelection> GetAvailableFeats(IEnumerable<AdditionalFeatSelection> sourceFeats, IEnumerable<Feat> chosenFeats)
         {
             var chosenFeatIds = chosenFeats.Select(f => f.Name.Id);
-            var featsWithRequirementsMet = sourceFeats.Where(f => f.MutableRequirementsMet(chosenFeatIds));
+            var featsWithRequirementsMet = sourceFeats.Where(f => f.MutableRequirementsMet(chosenFeats));
             var alreadyChosenFeats = sourceFeats.Where(f => f.FocusType == String.Empty && chosenFeatIds.Contains(f.FeatId));
 
             var featIdsAllowingMultipleTakes = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TakenMultipleTimes);

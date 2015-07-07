@@ -14,7 +14,7 @@ namespace NPCGen.Selectors.Interfaces.Objects
         public String FeatId { get; set; }
         public Frequency Frequency { get; set; }
         public Int32 Strength { get; set; }
-        public IEnumerable<String> RequiredFeatIds { get; set; }
+        public IEnumerable<RequiredFeat> RequiredFeats { get; set; }
         public Int32 RequiredBaseAttack { get; set; }
         public Dictionary<String, Int32> RequiredStats { get; set; }
         public Dictionary<String, Int32> RequiredSkillRanks { get; set; }
@@ -24,7 +24,7 @@ namespace NPCGen.Selectors.Interfaces.Objects
         public AdditionalFeatSelection()
         {
             FeatId = String.Empty;
-            RequiredFeatIds = Enumerable.Empty<String>();
+            RequiredFeats = Enumerable.Empty<RequiredFeat>();
             RequiredStats = new Dictionary<String, Int32>();
             RequiredSkillRanks = new Dictionary<String, Int32>();
             RequiredCharacterClasses = new Dictionary<String, Int32>();
@@ -32,8 +32,7 @@ namespace NPCGen.Selectors.Interfaces.Objects
             Frequency = new Frequency();
         }
 
-        public Boolean ImmutableRequirementsMet(Int32 baseAttack, Dictionary<String, Stat> stats,
-            Dictionary<String, Skill> skills, CharacterClass characterClass)
+        public Boolean ImmutableRequirementsMet(Int32 baseAttack, Dictionary<String, Stat> stats, Dictionary<String, Skill> skills, CharacterClass characterClass)
         {
             foreach (var stat in RequiredStats)
                 if (stats[stat.Key].Value < stat.Value)
@@ -49,12 +48,12 @@ namespace NPCGen.Selectors.Interfaces.Objects
             return baseAttack >= RequiredBaseAttack;
         }
 
-        public Boolean MutableRequirementsMet(IEnumerable<String> featIds)
+        public Boolean MutableRequirementsMet(IEnumerable<Feat> feats)
         {
-            var requirementsWithoutProficiency = RequiredFeatIds.Except(new[] { GroupConstants.Proficiency });
+            var proficiencyRequirement = RequiredFeats.FirstOrDefault(f => f.FeatId == GroupConstants.Proficiency);
+            var requirementsWithoutProficiency = RequiredFeats.Except(new[] { proficiencyRequirement });
 
-            var missedRequirements = requirementsWithoutProficiency.Except(featIds);
-            return missedRequirements.Any() == false;
+            return requirementsWithoutProficiency.All(f => f.RequirementMet(feats));
         }
     }
 }

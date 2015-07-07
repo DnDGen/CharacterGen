@@ -8,6 +8,7 @@ using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Items;
 using NPCGen.Generators.Interfaces.Abilities.Feats;
 using NPCGen.Selectors.Interfaces;
+using NPCGen.Selectors.Interfaces.Objects;
 using NPCGen.Tables.Interfaces;
 
 namespace NPCGen.Generators.Abilities.Feats
@@ -23,7 +24,7 @@ namespace NPCGen.Generators.Abilities.Feats
             this.dice = dice;
         }
 
-        public String GenerateFrom(String featId, String focusType, IEnumerable<String> requiredFeatIds, IEnumerable<Feat> otherFeats, CharacterClass characterClass)
+        public String GenerateFrom(String featId, String focusType, IEnumerable<RequiredFeat> requiredFeats, IEnumerable<Feat> otherFeats, CharacterClass characterClass)
         {
             if (String.IsNullOrEmpty(focusType))
                 return String.Empty;
@@ -32,6 +33,7 @@ namespace NPCGen.Generators.Abilities.Feats
             if (allSourceFeatFoci.Keys.Contains(focusType) == false)
                 return focusType;
 
+            var requiredFeatIds = requiredFeats.Select(f => f.FeatId);
             var foci = GetFoci(focusType, allSourceFeatFoci, otherFeats, requiredFeatIds);
             var usedFoci = otherFeats.Where(f => f.Name.Id == featId).Select(f => f.Focus);
             foci = foci.Except(usedFoci);
@@ -79,12 +81,16 @@ namespace NPCGen.Generators.Abilities.Feats
 
         private IEnumerable<String> GetExplodedFoci(Dictionary<String, IEnumerable<String>> allSourceFeatFoci, String focusType, IEnumerable<Feat> otherFeats)
         {
-            if (focusType != FeatConstants.MartialWeaponProficiencyId)
+            if (focusType != FeatConstants.MartialWeaponProficiencyId && focusType != FeatConstants.ExoticWeaponProficiencyId)
                 return allSourceFeatFoci[focusType];
 
             var weaponFamiliartyFeats = otherFeats.Where(f => f.Name.Id == FeatConstants.WeaponFamiliarityId);
             var familiarityFoci = weaponFamiliartyFeats.Select(f => f.Focus);
-            return allSourceFeatFoci[focusType].Union(familiarityFoci);
+
+            if (focusType == FeatConstants.MartialWeaponProficiencyId)
+                return allSourceFeatFoci[focusType].Union(familiarityFoci);
+
+            return allSourceFeatFoci[focusType].Except(familiarityFoci);
         }
 
         private Boolean RequirementHasFocus(IEnumerable<String> requiredFeatIds, Feat feat)
