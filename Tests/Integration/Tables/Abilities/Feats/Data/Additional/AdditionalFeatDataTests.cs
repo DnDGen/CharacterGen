@@ -172,24 +172,24 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.Additional
         [TestCase(FeatConstants.ExtraTurningId, 0, "", 0, "", 4)]
         [TestCase(FeatConstants.FarShotId, 0, "", 0, "", 0)]
         [TestCase(FeatConstants.GreatCleaveId, 4, "", 0, "", 0)]
-        [TestCase(FeatConstants.GreaterSpellFocusId, 0, "", 0, "", 1)]
+        [TestCase(FeatConstants.GreaterSpellFocusId, 0, GroupConstants.SchoolsOfMagic, 0, "", 1)]
         [TestCase(FeatConstants.GreaterSpellPenetrationId, 0, "", 0, "", 2)]
         [TestCase(FeatConstants.GreaterTwoWeaponFightingId, 11, "", 0, "", 0)]
-        [TestCase(FeatConstants.GreaterWeaponFocusId, 0, "", 0, "", 1)]
-        [TestCase(FeatConstants.GreaterWeaponSpecializationId, 0, "", 0, "", 2)]
+        [TestCase(FeatConstants.GreaterWeaponFocusId, 0, GroupConstants.WeaponsWithUnarmedAndGrappleAndRay, 0, "", 1)]
+        [TestCase(FeatConstants.GreaterWeaponSpecializationId, 0, GroupConstants.WeaponsWithUnarmedAndGrapple, 0, "", 2)]
         [TestCase(FeatConstants.GreatFortitudeId, 0, "", 0, "", 2)]
         [TestCase(FeatConstants.HeightenSpellId, 0, "", 0, "", 0)]
         [TestCase(FeatConstants.ImprovedBullRushId, 0, "", 0, "", 4)]
         [TestCase(FeatConstants.ImprovedCounterspellId, 0, "", 0, "", 0)]
-        [TestCase(FeatConstants.ImprovedCriticalId, 8, "", 0, "", 0)]
-        [TestCase(FeatConstants.ImprovedDisarmId, 8, "", 0, "", 4)]
+        [TestCase(FeatConstants.ImprovedCriticalId, 8, GroupConstants.Proficiency, 0, "", 0)]
+        [TestCase(FeatConstants.ImprovedDisarmId, 0, "", 0, "", 4)]
         [TestCase(FeatConstants.ImprovedEvasionId, 0, "", 0, "", 0)]
         [TestCase(FeatConstants.ImprovedFamiliarId, 0, "", 0, "", 0)]
         [TestCase(FeatConstants.ImprovedFeintId, 0, "", 0, "", 0)]
         [TestCase(FeatConstants.ImprovedGrappleId, 0, "", 0, "", 4)]
         [TestCase(FeatConstants.ImprovedInitiativeId, 0, "", 0, "", 4)]
         [TestCase(FeatConstants.ImprovedOverrunId, 0, "", 0, "", 4)]
-        public void Data(String name, Int32 baseAttackRequirement, String focusType, Int32 frequencyQuantity, String frequencyTimePeriod, Int32 strength)
+        public void AdditionalFeatData(String name, Int32 baseAttackRequirement, String focusType, Int32 frequencyQuantity, String frequencyTimePeriod, Int32 strength)
         {
             var data = new List<String>();
             for (var i = 0; i < 5; i++)

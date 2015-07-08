@@ -77,7 +77,7 @@
         <name>BlindFight</name>
         <item>0</item>
         <item></item>
-        <item>0</item>
+        <item>2</item>
         <item>0</item>
         <item></item>
     </object>
@@ -85,7 +85,7 @@
         <name>Cleave</name>
         <item>0</item>
         <item></item>
-        <item>0</item>
+        <item>2</item>
         <item>0</item>
         <item></item>
     </object>
@@ -252,7 +252,7 @@
     <object>
         <name>GreaterSpellFocus</name>
         <item>0</item>
-        <item></item>
+        <item>Schools of Magic</item>
         <item>1</item>
         <item>0</item>
         <item></item>
@@ -276,7 +276,7 @@
     <object>
         <name>GreaterWeaponFocus</name>
         <item>0</item>
-        <item></item>
+        <item>Weapons with unarmed, grapple, and ray</item>
         <item>1</item>
         <item>0</item>
         <item></item>
@@ -284,7 +284,7 @@
     <object>
         <name>GreaterWeaponSpecialization</name>
         <item>0</item>
-        <item></item>
+        <item>Weapons with unarmed and grapple</item>
         <item>2</item>
         <item>0</item>
         <item></item>
@@ -309,7 +309,7 @@
         <name>ImprovedBullRush</name>
         <item>0</item>
         <item></item>
-        <item>0</item>
+        <item>4</item>
         <item>0</item>
         <item></item>
     </object>
@@ -323,8 +323,8 @@
     </object>
     <object>
         <name>ImprovedCritical</name>
-        <item>0</item>
-        <item></item>
+        <item>8</item>
+        <item>Proficiency</item>
         <item>0</item>
         <item>0</item>
         <item></item>
@@ -333,7 +333,7 @@
         <name>ImprovedDisarm</name>
         <item>0</item>
         <item></item>
-        <item>0</item>
+        <item>4</item>
         <item>0</item>
         <item></item>
     </object>
@@ -365,7 +365,7 @@
         <name>ImprovedGrapple</name>
         <item>0</item>
         <item></item>
-        <item>0</item>
+        <item>4</item>
         <item>0</item>
         <item></item>
     </object>
@@ -373,7 +373,7 @@
         <name>ImprovedInitiative</name>
         <item>0</item>
         <item></item>
-        <item>0</item>
+        <item>4</item>
         <item>0</item>
         <item></item>
     </object>
@@ -381,7 +381,7 @@
         <name>ImprovedOverrun</name>
         <item>0</item>
         <item></item>
-        <item>0</item>
+        <item>4</item>
         <item>0</item>
         <item></item>
     </object>

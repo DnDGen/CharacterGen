@@ -318,6 +318,11 @@
         <item>DefensiveRoll</item>
         <item>GreaterWeaponFocus</item>
         <item>GreaterWeaponSpecialization</item>
+        <item>ImprovedEvasion</item>
+        <item>Opportunist</item>
+        <item>SkillMastery</item>
+        <item>SlipperyMind</item>
+        <item>ImprovedFamiliar</item>
     </object>
     <object>
         <name>HasSkillRequirements</name>
@@ -329,6 +334,7 @@
         <item>DeflectArrows</item>
         <item>Dodge</item>
         <item>GreaterTwoWeaponFighting</item>
+        <item>ImprovedGrapple</item>
     </object>
     <object>
         <name>HighElf</name>

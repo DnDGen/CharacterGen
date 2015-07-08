@@ -90,4 +90,28 @@
         <item>WeaponSpecialization</item>
         <item>GreaterWeaponFocus</item>
     </object>
+    <object>
+        <name>ImprovedBullRush</name>
+        <item>PowerAttack</item>
+    </object>
+    <object>
+        <name>ImprovedCritical</name>
+        <item>Proficiency</item>
+    </object>
+    <object>
+        <name>ImprovedDisarm</name>
+        <item>CombatExpertise</item>
+    </object>
+    <object>
+        <name>ImprovedFeint</name>
+        <item>CombatExpertise</item>
+    </object>
+    <object>
+        <name>ImprovedOverrun</name>
+        <item>PowerAttack</item>
+    </object>
+    <object>
+        <name>ImprovedGrapple</name>
+        <item>ImprovedUnarmedStrike</item>
+    </object>
 </items>
