@@ -113,7 +113,7 @@ namespace NPCGen.Selectors
                 classFeatSelection.Strength = Convert.ToInt32(featData[DataIndexConstants.CharacterClassFeatData.StrengthIndex]);
                 classFeatSelection.MaximumLevel = Convert.ToInt32(featData[DataIndexConstants.CharacterClassFeatData.MaximumLevelRequirementIndex]);
                 classFeatSelection.FrequencyQuantityStat = featData[DataIndexConstants.CharacterClassFeatData.FrequencyQuantityStatIndex];
-                classFeatSelection.RequiredFeats = GetRequiredFeats(classFeatSelection.FeatId);
+                classFeatSelection.RequiredFeats = GetRequiredFeats(classFeatSelectionId);
 
                 classFeatSelections.Add(classFeatSelection);
             }

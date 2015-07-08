@@ -37,6 +37,7 @@ namespace NPCGen.Tables.Interfaces
                 public const String ClassSkills = "ClassSkills";
                 public const String CrossClassSkills = "CrossClassSkills";
                 public const String DragonSpecies = "DragonSpecies";
+                public const String EquivalentFeats = "EquivalentFeats";
                 public const String FeatFoci = "FeatFoci";
                 public const String FeatGroups = "FeatGroups";
                 public const String MetaraceGroups = "MetaraceGroups";

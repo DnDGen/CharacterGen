@@ -33,6 +33,7 @@ namespace NPCGen.Tests.Unit.Tables
         [TestCase(TableNameConstants.Set.Collection.ClassSkills, "ClassSkills")]
         [TestCase(TableNameConstants.Set.Collection.CrossClassSkills, "CrossClassSkills")]
         [TestCase(TableNameConstants.Set.Collection.DragonSpecies, "DragonSpecies")]
+        [TestCase(TableNameConstants.Set.Collection.EquivalentFeats, "EquivalentFeats")]
         [TestCase(TableNameConstants.Set.Collection.FeatGroups, "FeatGroups")]
         [TestCase(TableNameConstants.Set.Collection.FeatFoci, "FeatFoci")]
         [TestCase(TableNameConstants.Set.Collection.MetaraceGroups, "MetaraceGroups")]

@@ -9,7 +9,6 @@
         <item>Acrobatic</item>
         <item>Agile</item>
         <item>Alertness</item>
-        <item>Ambidexterity</item>
         <item>AnimalAffinity</item>
         <item>Athletic</item>
         <item>AugmentSummoning</item>
@@ -315,12 +314,21 @@
     </object>
     <object>
         <name>HasClassRequirements</name>
+        <item>CripplingStrike</item>
+        <item>DefensiveRoll</item>
+        <item>GreaterWeaponFocus</item>
+        <item>GreaterWeaponSpecialization</item>
     </object>
     <object>
         <name>HasSkillRequirements</name>
     </object>
     <object>
         <name>HasStatRequirements</name>
+        <item>PowerAttack</item>
+        <item>CombatExpertise</item>
+        <item>DeflectArrows</item>
+        <item>Dodge</item>
+        <item>GreaterTwoWeaponFighting</item>
     </object>
     <object>
         <name>HighElf</name>
@@ -407,6 +415,12 @@
         <item>CombatStyle</item>
         <item>ImprovedCombatStyle</item>
         <item>CombatStyleMastery</item>
+        <item>RapidShotRanger</item>
+        <item>TwoWeaponFightingRanger</item>
+        <item>ManyshotRanger</item>
+        <item>ImprovedTwoWeaponFightingRanger</item>
+        <item>ImprovedPreciseShotRanger</item>
+        <item>GreaterTwoWeaponFightingRanger</item>
     </object>
     <object>
         <name>RockGnome</name>
@@ -470,6 +484,7 @@
         <item>AttackBonus</item>
         <item>SaveBonus</item>
         <item>DodgeBonus</item>
+        <item>ExtraTurning</item>
     </object>
     <object>
         <name>TallfellowHalfling</name>

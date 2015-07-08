@@ -102,7 +102,7 @@ namespace NPCGen.Tests.Unit.Selectors
             mockCollectionsSelector.Setup(s => s.SelectFrom(classFeatTableName, "class feat 2")).Returns(new[] { "classFeat2", "5", String.Empty, "9266", "0", "never", "0", String.Empty });
 
             var featRequirements = new Dictionary<String, IEnumerable<String>>();
-            featRequirements["classFeat1"] = new[] { "feat 1", "feat 2/focus" };
+            featRequirements["class feat 1"] = new[] { "feat 1", "feat 2/focus" };
             mockCollectionsSelector.Setup(s => s.SelectAllFrom(TableNameConstants.Set.Collection.RequiredFeats)).Returns(featRequirements);
 
             var classFeats = selector.SelectClass("class name");
@@ -150,7 +150,7 @@ namespace NPCGen.Tests.Unit.Selectors
             mockCollectionsSelector.Setup(s => s.SelectFrom(classFeatTableName, "class feat 2")).Returns(new[] { "classFeat1", "5", String.Empty, "9266", "0", "never", "0", String.Empty });
 
             var featRequirements = new Dictionary<String, IEnumerable<String>>();
-            featRequirements["classFeat1"] = new[] { "feat 1", "feat 2/focus" };
+            featRequirements["class feat 1"] = new[] { "feat 1", "feat 2/focus" };
             mockCollectionsSelector.Setup(s => s.SelectAllFrom(TableNameConstants.Set.Collection.RequiredFeats)).Returns(featRequirements);
 
             var classFeats = selector.SelectClass("class name");
@@ -184,14 +184,7 @@ namespace NPCGen.Tests.Unit.Selectors
             Assert.That(last.Frequency.TimePeriod, Is.EqualTo("never"));
             Assert.That(last.FrequencyQuantityStat, Is.Empty);
             Assert.That(last.MaximumLevel, Is.EqualTo(0));
-
-            firstRequirement = last.RequiredFeats.First();
-            lastRequirement = last.RequiredFeats.Last();
-            Assert.That(firstRequirement.FeatId, Is.EqualTo("feat 1"));
-            Assert.That(firstRequirement.Focus, Is.Empty);
-            Assert.That(lastRequirement.FeatId, Is.EqualTo("feat 2"));
-            Assert.That(lastRequirement.Focus, Is.EqualTo("focus"));
-            Assert.That(last.RequiredFeats.Count(), Is.EqualTo(2));
+            Assert.That(last.RequiredFeats, Is.Empty);
         }
 
         [Test]

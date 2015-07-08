@@ -11,7 +11,6 @@ namespace NPCGen.Tests.Unit.Common.Abilities.Feats
         [TestCase(FeatConstants.Agile, "Agile")]
         [TestCase(FeatConstants.Alertness, "Alertness")]
         [TestCase(FeatConstants.AlternateForm, "Alternate Form")]
-        [TestCase(FeatConstants.Ambidexterity, "Ambidexterity")]
         [TestCase(FeatConstants.AnimalAffinity, "Animal Affinity")]
         [TestCase(FeatConstants.Athletic, "Athletic")]
         [TestCase(FeatConstants.AttackBonus, "Attack Bonus")]
@@ -203,7 +202,6 @@ namespace NPCGen.Tests.Unit.Common.Abilities.Feats
         [TestCase(FeatConstants.AgileId, "Agile")]
         [TestCase(FeatConstants.AlertnessId, "Alertness")]
         [TestCase(FeatConstants.AlternateFormId, "AlternateForm")]
-        [TestCase(FeatConstants.AmbidexterityId, "Ambidexterity")]
         [TestCase(FeatConstants.AnimalAffinityId, "AnimalAffinity")]
         [TestCase(FeatConstants.AthleticId, "Athletic")]
         [TestCase(FeatConstants.AttackBonusId, "AttackBonus")]
@@ -393,6 +391,7 @@ namespace NPCGen.Tests.Unit.Common.Abilities.Feats
         [TestCase(FeatConstants.Frequencies.Constant, "Constant")]
         [TestCase(FeatConstants.Frequencies.AtWill, "At Will")]
         [TestCase(FeatConstants.Frequencies.Day, "Day")]
+        [TestCase(FeatConstants.Frequencies.Round, "Round")]
         [TestCase(FeatConstants.Foci.Archery, "Archery")]
         public void Constant(String constant, String value)
         {

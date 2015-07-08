@@ -69,9 +69,24 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
         }
 
         [TestCase("")]
-        [TestCase(GroupConstants.HasClassRequirements)]
+        [TestCase(GroupConstants.HasClassRequirements,
+            FeatConstants.CripplingStrikeId,
+            FeatConstants.DefensiveRollId,
+            FeatConstants.GreaterWeaponFocusId,
+            FeatConstants.GreaterWeaponSpecializationId,
+            FeatConstants.ImprovedEvasionId,
+            FeatConstants.OpportunistId,
+            FeatConstants.SkillMasteryId,
+            FeatConstants.SlipperyMindId,
+            FeatConstants.ImprovedFamiliarId)]
         [TestCase(GroupConstants.HasSkillRequirements)]
-        [TestCase(GroupConstants.HasStatRequirements)]
+        [TestCase(GroupConstants.HasStatRequirements,
+            FeatConstants.PowerAttackId,
+            FeatConstants.CombatExpertiseId,
+            FeatConstants.DeflectArrowsId,
+            FeatConstants.DodgeId,
+            FeatConstants.GreaterTwoWeaponFightingId,
+            FeatConstants.ImprovedGrappleId)]
         [TestCase(GroupConstants.TakenMultipleTimes,
             FeatConstants.SpellMasteryId,
             FeatConstants.ToughnessId,
@@ -79,7 +94,8 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.SkillBonusId,
             FeatConstants.AttackBonusId,
             FeatConstants.DodgeBonusId,
-            FeatConstants.SaveBonusId)]
+            FeatConstants.SaveBonusId,
+            FeatConstants.ExtraTurningId)]
         public override void DistinctCollection(String name, params String[] collection)
         {
             base.DistinctCollection(name, collection);
@@ -100,27 +116,6 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.HeavyArmorProficiencyId,
             FeatConstants.ShieldProficiencyId,
             FeatConstants.TowerShieldProficiencyId)]
-        [TestCase(CharacterClassConstants.Ranger,
-            FeatConstants.SimpleWeaponProficiencyId,
-            FeatConstants.MartialWeaponProficiencyId,
-            FeatConstants.LightArmorProficiencyId,
-            FeatConstants.ShieldProficiencyId,
-            FeatConstants.FavoredEnemyId + "1",
-            FeatConstants.FavoredEnemyId + "2",
-            FeatConstants.FavoredEnemyId + "3",
-            FeatConstants.FavoredEnemyId + "4",
-            FeatConstants.FavoredEnemyId + "5",
-            FeatConstants.TrackId,
-            FeatConstants.WildEmpathyId,
-            FeatConstants.CombatStyleId,
-            FeatConstants.EnduranceId,
-            FeatConstants.ImprovedCombatStyleId,
-            FeatConstants.WoodlandStrideId,
-            FeatConstants.SwiftTrackerId,
-            FeatConstants.EvasionId,
-            FeatConstants.CombatStyleMasteryId,
-            FeatConstants.CamouflageId,
-            FeatConstants.HideInPlainSightId)]
         [TestCase(CharacterClassConstants.Sorcerer,
             FeatConstants.SimpleWeaponProficiencyId)]
         [TestCase(CharacterClassConstants.Wizard,
@@ -277,6 +272,42 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
         public void RaceFeatGroup(String name, params String[] collection)
         {
             base.DistinctCollection(name, collection);
+        }
+
+        [Test]
+        public void RangerFeatGroup()
+        {
+            var featIds = new[]
+            {
+                FeatConstants.SimpleWeaponProficiencyId,
+                FeatConstants.MartialWeaponProficiencyId,
+                FeatConstants.LightArmorProficiencyId,
+                FeatConstants.ShieldProficiencyId,
+                FeatConstants.FavoredEnemyId + "1",
+                FeatConstants.FavoredEnemyId + "2",
+                FeatConstants.FavoredEnemyId + "3",
+                FeatConstants.FavoredEnemyId + "4",
+                FeatConstants.FavoredEnemyId + "5",
+                FeatConstants.TrackId,
+                FeatConstants.WildEmpathyId,
+                FeatConstants.CombatStyleId,
+                FeatConstants.EnduranceId,
+                FeatConstants.ImprovedCombatStyleId,
+                FeatConstants.WoodlandStrideId,
+                FeatConstants.SwiftTrackerId,
+                FeatConstants.EvasionId,
+                FeatConstants.CombatStyleMasteryId,
+                FeatConstants.CamouflageId,
+                FeatConstants.HideInPlainSightId,
+                FeatConstants.RapidShotId + "Ranger",
+                FeatConstants.TwoWeaponFightingId + "Ranger",
+                FeatConstants.ManyshotId + "Ranger",
+                FeatConstants.ImprovedTwoWeaponFightingId + "Ranger",
+                FeatConstants.ImprovedPreciseShotId + "Ranger",
+                FeatConstants.GreaterTwoWeaponFightingId + "Ranger"
+            };
+
+            base.DistinctCollection(CharacterClassConstants.Ranger, featIds);
         }
 
         [Test]
@@ -453,7 +484,6 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
                 FeatConstants.AcrobaticId,
                 FeatConstants.AgileId,
                 FeatConstants.AlertnessId,
-                FeatConstants.AmbidexterityId,
                 FeatConstants.AnimalAffinityId,
                 FeatConstants.AthleticId,
                 FeatConstants.AugmentSummoningId,

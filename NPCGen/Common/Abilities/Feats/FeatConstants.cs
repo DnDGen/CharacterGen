@@ -12,8 +12,6 @@ namespace NPCGen.Common.Abilities.Feats
         public const String AlertnessId = "Alertness";
         public const String AlternateForm = "Alternate Form";
         public const String AlternateFormId = "AlternateForm";
-        public const String Ambidexterity = "Ambidexterity";
-        public const String AmbidexterityId = "Ambidexterity";
         public const String AnimalAffinity = "Animal Affinity";
         public const String AnimalAffinityId = "AnimalAffinity";
         public const String Athletic = "Athletic";
@@ -384,6 +382,7 @@ namespace NPCGen.Common.Abilities.Feats
             public const String AtWill = "At Will";
             public const String Constant = "Constant";
             public const String Day = "Day";
+            public const String Round = "Round";
         }
 
         public static class Foci

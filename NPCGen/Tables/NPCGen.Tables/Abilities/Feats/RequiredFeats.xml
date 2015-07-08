@@ -18,7 +18,76 @@
         <item>LightArmorProficiency</item>
     </object>
     <object>
+        <name>Cleave</name>
+        <item>PowerAttack</item>
+    </object>
+    <object>
+        <name>DeflectArrows</name>
+        <item>ImprovedUnarmedStrike</item>
+    </object>
+    <object>
         <name>AugmentSummoning</name>
         <item>SpellFocus/Conjuration</item>
+    </object>
+    <object>
+        <name>Diehard</name>
+        <item>Endurance</item>
+    </object>
+    <object>
+        <name>ExtraTurning</name>
+        <item>Turn</item>
+    </object>
+    <object>
+        <name>FarShot</name>
+        <item>PointBlankShot</item>
+    </object>
+    <object>
+        <name>RapidShotRanger</name>
+        <item>CombatStyle/Archery</item>
+    </object>
+    <object>
+        <name>TwoWeaponFightingRanger</name>
+        <item>CombatStyle/TwoWeaponFighting</item>
+    </object>
+    <object>
+        <name>ManyshotRanger</name>
+        <item>ImprovedCombatStyle/Archery</item>
+    </object>
+    <object>
+        <name>ImprovedTwoWeaponFightingRanger</name>
+        <item>ImprovedCombatStyle/TwoWeaponFighting</item>
+    </object>
+    <object>
+        <name>ImprovedPreciseShotRanger</name>
+        <item>CombatStyleMastery/Archery</item>
+    </object>
+    <object>
+        <name>GreaterTwoWeaponFightingRanger</name>
+        <item>CombatStyleMastery/TwoWeaponFighting</item>
+    </object>
+    <object>
+        <name>GreatCleave</name>
+        <item>Cleave</item>
+    </object>
+    <object>
+        <name>GreaterSpellFocus</name>
+        <item>SpellFocus</item>
+    </object>
+    <object>
+        <name>GreaterSpellPenetration</name>
+        <item>SpellPenetration</item>
+    </object>
+    <object>
+        <name>GreaterTwoWeaponFighting</name>
+        <item>ImprovedTwoWeaponFighting</item>
+    </object>
+    <object>
+        <name>GreaterWeaponFocus</name>
+        <item>WeaponFocus</item>
+    </object>
+    <object>
+        <name>GreaterWeaponSpecialization</name>
+        <item>WeaponSpecialization</item>
+        <item>GreaterWeaponFocus</item>
     </object>
 </items>
