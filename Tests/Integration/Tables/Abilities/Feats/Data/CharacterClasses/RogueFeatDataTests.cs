@@ -2,6 +2,7 @@
 using EquipmentGen.Common.Items;
 using NPCGen.Common.Abilities.Feats;
 using NPCGen.Common.CharacterClasses;
+using NPCGen.Common.Items;
 using NPCGen.Tables.Interfaces;
 using NUnit.Framework;
 
@@ -234,7 +235,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             0)]
         [TestCase(FeatConstants.SimpleWeaponProficiencyId,
             FeatConstants.SimpleWeaponProficiencyId,
-            FeatConstants.SimpleWeaponProficiencyId,
+            ProficiencyConstants.All,
             0,
             "",
             "",

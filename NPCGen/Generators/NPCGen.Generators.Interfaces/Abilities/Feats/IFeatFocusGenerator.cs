@@ -11,5 +11,7 @@ namespace NPCGen.Generators.Interfaces.Abilities.Feats
     {
         String GenerateFrom(String featId, String focusType, IEnumerable<RequiredFeat> requiredFeats, IEnumerable<Feat> otherFeat, CharacterClass characterClass);
         String GenerateFrom(String featId, String focusType, Dictionary<String, Skill> skills);
+        String GenerateAllowingFocusOfAllFrom(String featId, String focusType, IEnumerable<RequiredFeat> requiredFeats, IEnumerable<Feat> otherFeat, CharacterClass characterClass);
+        String GenerateAllowingFocusOfAllFrom(String featId, String focusType, Dictionary<String, Skill> skills);
     }
 }

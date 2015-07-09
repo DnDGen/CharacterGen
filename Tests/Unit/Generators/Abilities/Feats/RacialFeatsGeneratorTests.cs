@@ -295,9 +295,9 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             speciesFeatSelection.FocusType = "species focus type";
             speciesFeats.Add(speciesFeatSelection);
 
-            mockFeatFocusGenerator.Setup(g => g.GenerateFrom("racial feat", "base focus type", skills)).Returns("base focus");
-            mockFeatFocusGenerator.Setup(g => g.GenerateFrom("metarace feat", "meta focus type", skills)).Returns("meta focus");
-            mockFeatFocusGenerator.Setup(g => g.GenerateFrom("metarace species feat", "species focus type", skills)).Returns("species focus");
+            mockFeatFocusGenerator.Setup(g => g.GenerateAllowingFocusOfAllFrom("racial feat", "base focus type", skills)).Returns("base focus");
+            mockFeatFocusGenerator.Setup(g => g.GenerateAllowingFocusOfAllFrom("metarace feat", "meta focus type", skills)).Returns("meta focus");
+            mockFeatFocusGenerator.Setup(g => g.GenerateAllowingFocusOfAllFrom("metarace species feat", "species focus type", skills)).Returns("species focus");
 
             var feats = racialFeatsGenerator.GenerateWith(race, skills);
             var baseFeat = feats.First(f => f.Name.Id == baseRaceFeatSelection.FeatId);

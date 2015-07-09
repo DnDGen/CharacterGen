@@ -51,7 +51,7 @@ namespace NPCGen.Generators.Abilities.Feats
             {
                 var classFeat = new Feat();
                 classFeat.Name.Id = classFeatSelection.FeatId;
-                classFeat.Focus = featFocusGenerator.GenerateFrom(classFeatSelection.FeatId, classFeatSelection.FocusType, classFeatSelection.RequiredFeats, earnedFeat, characterClass);
+                classFeat.Focus = featFocusGenerator.GenerateAllowingFocusOfAllFrom(classFeatSelection.FeatId, classFeatSelection.FocusType, classFeatSelection.RequiredFeats, earnedFeat, characterClass);
                 classFeat.Frequency = classFeatSelection.Frequency;
 
                 if (classFeatSelection.FrequencyQuantityStat != String.Empty)

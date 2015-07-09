@@ -49,13 +49,8 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
         [Test]
         public void GetClassFeatsForClass()
         {
-            var classFeats = new[]
-            {
-                new CharacterClassFeatSelection { FeatId = "class feat 1", Strength = 9266, Frequency = new Frequency { Quantity = 0, TimePeriod = "constant" } },
-                new CharacterClassFeatSelection { FeatId = "class feat 2", Frequency = new Frequency { Quantity = 600, TimePeriod = "fortnight" } }
-            };
-
-            mockFeatsSelector.Setup(s => s.SelectClass("class name")).Returns(classFeats);
+            AddClassFeat(characterClass.ClassName, "class feat 1", strength: 9266);
+            AddClassFeat(characterClass.ClassName, "class feat 2", frequencyPeriod: "fortnight", frequencyQuantity: 600);
 
             var feats = classFeatsGenerator.GenerateWith(characterClass, stats, racialFeats);
             var first = feats.First();
@@ -64,7 +59,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             Assert.That(first.Name.Id, Is.EqualTo("class feat 1"));
             Assert.That(first.Strength, Is.EqualTo(9266));
             Assert.That(first.Frequency.Quantity, Is.EqualTo(0));
-            Assert.That(first.Frequency.TimePeriod, Is.EqualTo("constant"));
+            Assert.That(first.Frequency.TimePeriod, Is.Empty);
 
             Assert.That(last.Name.Id, Is.EqualTo("class feat 2"));
             Assert.That(last.Strength, Is.EqualTo(0));
@@ -79,19 +74,9 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
         {
             characterClass.SpecialistFields = new[] { "specialist 1", "specialist 2" };
 
-            var specialist1Feats = new[]
-            {
-                new CharacterClassFeatSelection { FeatId = "specialist feat 1", Strength = 9266 },
-                new CharacterClassFeatSelection { FeatId = "specialist feat 2", Frequency = new Frequency { Quantity = 600, TimePeriod = "fortnight" } }
-            };
-
-            var specialist2Feats = new[]
-            {
-                new CharacterClassFeatSelection { FeatId = "specialist feat 3", Strength = 42 }
-            };
-
-            mockFeatsSelector.Setup(s => s.SelectClass("specialist 1")).Returns(specialist1Feats);
-            mockFeatsSelector.Setup(s => s.SelectClass("specialist 2")).Returns(specialist2Feats);
+            AddClassFeat("specialist 1", "specialist feat 1", strength: 9266);
+            AddClassFeat("specialist 1", "specialist feat 2", frequencyPeriod: "fortnight", frequencyQuantity: 600);
+            AddClassFeat("specialist 2", "specialist feat 3", strength: 42);
 
             var feats = classFeatsGenerator.GenerateWith(characterClass, stats, racialFeats);
             var feat1 = feats.First(f => f.Name.Id == "specialist feat 1");
@@ -121,18 +106,8 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
         {
             characterClass.SpecialistFields = new[] { "specialist" };
 
-            var classFeats = new[]
-            {
-                new CharacterClassFeatSelection { FeatId = "class feat", Strength = 9266 }
-            };
-
-            var specialistFeats = new[]
-            {
-                new CharacterClassFeatSelection { FeatId = "specialist feat", Strength = 42 }
-            };
-
-            mockFeatsSelector.Setup(s => s.SelectClass("class name")).Returns(classFeats);
-            mockFeatsSelector.Setup(s => s.SelectClass("specialist")).Returns(specialistFeats);
+            AddClassFeat(characterClass.ClassName, "class feat", strength: 9266);
+            AddClassFeat("specialist", "specialist feat", strength: 42);
 
             var feats = classFeatsGenerator.GenerateWith(characterClass, stats, racialFeats);
             Assert.That(feats.Count(), Is.EqualTo(2));
@@ -202,7 +177,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
         public void FeatFociAreFilled()
         {
             AddClassFeat(characterClass.ClassName, "feat1", focusType: "focus type");
-            mockFeatFocusGenerator.Setup(g => g.GenerateFrom("feat1", "focus type", classFeatSelections[characterClass.ClassName][0].RequiredFeats, It.IsAny<IEnumerable<Feat>>(), characterClass))
+            mockFeatFocusGenerator.Setup(g => g.GenerateAllowingFocusOfAllFrom("feat1", "focus type", classFeatSelections[characterClass.ClassName][0].RequiredFeats, It.IsAny<IEnumerable<Feat>>(), characterClass))
                 .Returns("focus");
 
             var feats = classFeatsGenerator.GenerateWith(characterClass, stats, racialFeats);
@@ -218,9 +193,9 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             AddClassFeat(characterClass.ClassName, "feat1", focusType: "focus type");
             AddClassFeat(characterClass.ClassName, "feat2");
 
-            mockFeatFocusGenerator.Setup(g => g.GenerateFrom("feat1", "focus type", classFeatSelections[characterClass.ClassName][0].RequiredFeats, It.IsAny<IEnumerable<Feat>>(), characterClass))
+            mockFeatFocusGenerator.Setup(g => g.GenerateAllowingFocusOfAllFrom("feat1", "focus type", classFeatSelections[characterClass.ClassName][0].RequiredFeats, It.IsAny<IEnumerable<Feat>>(), characterClass))
                 .Returns("focus");
-            mockFeatFocusGenerator.Setup(g => g.GenerateFrom("feat2", String.Empty, classFeatSelections[characterClass.ClassName][1].RequiredFeats, It.IsAny<IEnumerable<Feat>>(), characterClass))
+            mockFeatFocusGenerator.Setup(g => g.GenerateAllowingFocusOfAllFrom("feat2", String.Empty, classFeatSelections[characterClass.ClassName][1].RequiredFeats, It.IsAny<IEnumerable<Feat>>(), characterClass))
                 .Returns(String.Empty);
 
             var feats = classFeatsGenerator.GenerateWith(characterClass, stats, racialFeats);
@@ -231,9 +206,9 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             Assert.That(first.Focus, Is.EqualTo("focus"));
             Assert.That(last.Name.Id, Is.EqualTo(classFeatSelections[characterClass.ClassName][1].FeatId));
             Assert.That(last.Focus, Is.Empty);
-            mockFeatFocusGenerator.Verify(g => g.GenerateFrom(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<IEnumerable<RequiredFeat>>(), It.IsAny<IEnumerable<Feat>>(), It.IsAny<CharacterClass>()), Times.Exactly(2));
-            mockFeatFocusGenerator.Verify(g => g.GenerateFrom("feat1", "focus type", classFeatSelections[characterClass.ClassName][0].RequiredFeats, It.IsAny<IEnumerable<Feat>>(), characterClass), Times.Once);
-            mockFeatFocusGenerator.Verify(g => g.GenerateFrom("feat2", String.Empty, classFeatSelections[characterClass.ClassName][1].RequiredFeats, It.IsAny<IEnumerable<Feat>>(), characterClass), Times.Once);
+            mockFeatFocusGenerator.Verify(g => g.GenerateAllowingFocusOfAllFrom(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<IEnumerable<RequiredFeat>>(), It.IsAny<IEnumerable<Feat>>(), It.IsAny<CharacterClass>()), Times.Exactly(2));
+            mockFeatFocusGenerator.Verify(g => g.GenerateAllowingFocusOfAllFrom("feat1", "focus type", classFeatSelections[characterClass.ClassName][0].RequiredFeats, It.IsAny<IEnumerable<Feat>>(), characterClass), Times.Once);
+            mockFeatFocusGenerator.Verify(g => g.GenerateAllowingFocusOfAllFrom("feat2", String.Empty, classFeatSelections[characterClass.ClassName][1].RequiredFeats, It.IsAny<IEnumerable<Feat>>(), characterClass), Times.Once);
         }
 
         [Test]
@@ -243,7 +218,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             AddClassFeat(characterClass.ClassName, "feat1", focusType: "focus type");
             AddClassFeat(characterClass.ClassName, "feat1", focusType: "focus type", minimumLevel: 2);
 
-            mockFeatFocusGenerator.SetupSequence(g => g.GenerateFrom("feat1", "focus type", classFeatSelections[characterClass.ClassName][0].RequiredFeats, It.IsAny<IEnumerable<Feat>>(), characterClass))
+            mockFeatFocusGenerator.SetupSequence(g => g.GenerateAllowingFocusOfAllFrom("feat1", "focus type", classFeatSelections[characterClass.ClassName][0].RequiredFeats, It.IsAny<IEnumerable<Feat>>(), characterClass))
                 .Returns("focus 1").Returns("focus 2");
 
             var feats = classFeatsGenerator.GenerateWith(characterClass, stats, racialFeats);
@@ -263,9 +238,9 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             AddClassFeat(characterClass.ClassName, "feat1", focusType: "focus type");
             AddClassFeat(characterClass.ClassName, "feat2", focusType: "focus type", requiredFeatIds: "feat1");
 
-            mockFeatFocusGenerator.Setup(g => g.GenerateFrom("feat1", "focus type", classFeatSelections[characterClass.ClassName][0].RequiredFeats, It.IsAny<IEnumerable<Feat>>(), characterClass))
+            mockFeatFocusGenerator.Setup(g => g.GenerateAllowingFocusOfAllFrom("feat1", "focus type", classFeatSelections[characterClass.ClassName][0].RequiredFeats, It.IsAny<IEnumerable<Feat>>(), characterClass))
                 .Returns("focus 1");
-            mockFeatFocusGenerator.Setup(g => g.GenerateFrom("feat2", "focus type", classFeatSelections[characterClass.ClassName][1].RequiredFeats, It.Is<IEnumerable<Feat>>(fs => fs.Any(f => f.Name.Id == "feat1")), characterClass))
+            mockFeatFocusGenerator.Setup(g => g.GenerateAllowingFocusOfAllFrom("feat2", "focus type", classFeatSelections[characterClass.ClassName][1].RequiredFeats, It.Is<IEnumerable<Feat>>(fs => fs.Any(f => f.Name.Id == "feat1")), characterClass))
                 .Returns("focus 1");
 
             var feats = classFeatsGenerator.GenerateWith(characterClass, stats, racialFeats);
@@ -323,7 +298,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
 
             mockDice.SetupSequence(d => d.Roll(1).d(5)).Returns(2).Returns(2).Returns(5).Returns(1);
 
-            mockFeatFocusGenerator.SetupSequence(g => g.GenerateFrom(FeatConstants.FavoredEnemyId, "focus type", It.IsAny<IEnumerable<RequiredFeat>>(), It.IsAny<IEnumerable<Feat>>(), characterClass))
+            mockFeatFocusGenerator.SetupSequence(g => g.GenerateAllowingFocusOfAllFrom(FeatConstants.FavoredEnemyId, "focus type", It.IsAny<IEnumerable<RequiredFeat>>(), It.IsAny<IEnumerable<Feat>>(), characterClass))
                 .Returns("focus 1").Returns("focus 2").Returns("focus 3").Returns("focus 4").Returns("focus 5");
 
             var feats = classFeatsGenerator.GenerateWith(characterClass, stats, racialFeats);
@@ -345,7 +320,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
 
             mockDice.SetupSequence(d => d.Roll(1).d(5)).Returns(2).Returns(2).Returns(5).Returns(1);
 
-            mockFeatFocusGenerator.SetupSequence(g => g.GenerateFrom(FeatConstants.FavoredEnemyId, "focus type", It.IsAny<IEnumerable<RequiredFeat>>(), It.IsAny<IEnumerable<Feat>>(), characterClass))
+            mockFeatFocusGenerator.SetupSequence(g => g.GenerateAllowingFocusOfAllFrom(FeatConstants.FavoredEnemyId, "focus type", It.IsAny<IEnumerable<RequiredFeat>>(), It.IsAny<IEnumerable<Feat>>(), characterClass))
                 .Returns("focus 1").Returns("focus 2").Returns("focus 3").Returns("focus 4").Returns("focus 5");
 
             var feats = classFeatsGenerator.GenerateWith(characterClass, stats, racialFeats);
@@ -359,13 +334,8 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
         [Test]
         public void RacialFeatAreNotAltered()
         {
-            var classFeats = new[]
-            {
-                new CharacterClassFeatSelection { FeatId = "class feat 1", Strength = 9266, Frequency = new Frequency { Quantity = 0, TimePeriod = "constant" } },
-                new CharacterClassFeatSelection { FeatId = "class feat 2", Frequency = new Frequency { Quantity = 600, TimePeriod = "fortnight" } }
-            };
-
-            mockFeatsSelector.Setup(s => s.SelectClass("class name")).Returns(classFeats);
+            AddClassFeat(characterClass.ClassName, "class feat 1", strength: 9266);
+            AddClassFeat(characterClass.ClassName, "class feat 2", frequencyPeriod: "fortnight", frequencyQuantity: 600);
 
             var feats = classFeatsGenerator.GenerateWith(characterClass, stats, racialFeats);
             Assert.That(racialFeats, Is.Empty);

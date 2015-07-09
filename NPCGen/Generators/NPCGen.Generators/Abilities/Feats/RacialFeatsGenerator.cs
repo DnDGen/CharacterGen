@@ -42,7 +42,7 @@ namespace NPCGen.Generators.Abilities.Feats
             {
                 var feat = new Feat();
                 feat.Name.Id = racialFeatSelection.FeatId;
-                feat.Focus = featFocusGenerator.GenerateFrom(racialFeatSelection.FeatId, racialFeatSelection.FocusType, skills);
+                feat.Focus = featFocusGenerator.GenerateAllowingFocusOfAllFrom(racialFeatSelection.FeatId, racialFeatSelection.FocusType, skills);
                 feat.Frequency = racialFeatSelection.Frequency;
                 feat.Strength = racialFeatSelection.Strength;
 

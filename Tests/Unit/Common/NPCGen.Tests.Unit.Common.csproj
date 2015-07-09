@@ -67,7 +67,7 @@
     <Compile Include="Classes\CharacterClassTests.cs" />
     <Compile Include="Combats\CombatTests.cs" />
     <Compile Include="Items\EquipmentTests.cs" />
-    <Compile Include="Items\WeaponProficiencyConstantsTests.cs" />
+    <Compile Include="Items\ProficiencyConstantsTests.cs" />
     <Compile Include="Magics\FamiliarTests.cs" />
     <Compile Include="Items\WeaponAttributeConstantsTests.cs" />
     <Compile Include="Abilities\LanguageConstantsTests.cs" />

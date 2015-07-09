@@ -47,7 +47,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
             CharacterClassConstants.Schools.Transmutation)]
         [TestCase(FeatConstants.SimpleWeaponProficiencyId,
             WeaponConstants.Gauntlet,
-            WeaponProficiencyConstants.UnarmedStrike,
+            ProficiencyConstants.UnarmedStrike,
             WeaponConstants.Dagger,
             WeaponConstants.PunchingDagger,
             WeaponConstants.SpikedGauntlet,
@@ -257,8 +257,8 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
                 WeaponConstants.TwoBladedSword,
                 WeaponConstants.Warhammer,
                 WeaponConstants.Whip,
-                WeaponProficiencyConstants.UnarmedStrike,
-                WeaponProficiencyConstants.Grapple
+                ProficiencyConstants.UnarmedStrike,
+                ProficiencyConstants.Grapple
             };
 
             base.DistinctCollection(GroupConstants.WeaponsWithUnarmedAndGrapple, foci);
@@ -331,9 +331,9 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
                 WeaponConstants.TwoBladedSword,
                 WeaponConstants.Warhammer,
                 WeaponConstants.Whip,
-                WeaponProficiencyConstants.UnarmedStrike,
-                WeaponProficiencyConstants.Grapple,
-                WeaponProficiencyConstants.Ray
+                ProficiencyConstants.UnarmedStrike,
+                ProficiencyConstants.Grapple,
+                ProficiencyConstants.Ray
             };
 
             base.DistinctCollection(GroupConstants.WeaponsWithUnarmedAndGrappleAndRay, foci);

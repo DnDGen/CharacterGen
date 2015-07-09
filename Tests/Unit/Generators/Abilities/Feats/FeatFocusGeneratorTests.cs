@@ -89,19 +89,19 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
         [Test]
         public void SpellcastersCanSelectRayForWeaponFoci()
         {
-            focusTypes[GroupConstants.WeaponsWithUnarmedAndGrappleAndRay] = new[] { WeaponProficiencyConstants.Ray, "weapon" };
+            focusTypes[GroupConstants.WeaponsWithUnarmedAndGrappleAndRay] = new[] { ProficiencyConstants.Ray, "weapon" };
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Spellcasters))
                 .Returns(new[] { characterClass.ClassName });
 
             var focus = featFocusGenerator.GenerateFrom("featToFill", GroupConstants.WeaponsWithUnarmedAndGrappleAndRay, requiredFeats, otherFeat, characterClass);
-            Assert.That(focus, Is.EqualTo(WeaponProficiencyConstants.Ray));
+            Assert.That(focus, Is.EqualTo(ProficiencyConstants.Ray));
         }
 
         [Test]
         public void NonSpellcastersCannotSelectRayForWeaponFoci()
         {
-            focusTypes[GroupConstants.WeaponsWithUnarmedAndGrappleAndRay] = new[] { WeaponProficiencyConstants.Ray, "weapon" };
+            focusTypes[GroupConstants.WeaponsWithUnarmedAndGrappleAndRay] = new[] { ProficiencyConstants.Ray, "weapon" };
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Spellcasters))
                 .Returns(new[] { "other class name" });
@@ -176,7 +176,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             requiredFeats.Add(new RequiredFeat { FeatId = "feat1" });
             otherFeat.Add(new Feat());
             otherFeat[0].Name.Id = "feat1";
-            otherFeat[0].Focus = "feat1";
+            otherFeat[0].Focus = ProficiencyConstants.All;
 
             focusTypes["focus type"] = new[] { "school 2", "school 3" };
             focusTypes["feat1"] = new[] { "school 1", "school 2" };
@@ -193,7 +193,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             otherFeat.Add(new Feat());
 
             otherFeat[0].Name.Id = FeatConstants.MartialWeaponProficiencyId;
-            otherFeat[0].Focus = FeatConstants.MartialWeaponProficiencyId;
+            otherFeat[0].Focus = ProficiencyConstants.All;
             otherFeat[1].Name.Id = FeatConstants.WeaponFamiliarityId;
             otherFeat[1].Focus = "weird weapon";
 
@@ -229,7 +229,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             requiredFeats.Add(new RequiredFeat { FeatId = GroupConstants.Proficiency });
             otherFeat.Add(new Feat());
             otherFeat[0].Name.Id = "proficiency2";
-            otherFeat[0].Focus = "proficiency2";
+            otherFeat[0].Focus = ProficiencyConstants.All;
 
             focusTypes["focus type"] = new[] { "school 1", "school 2" };
             focusTypes["proficiency2"] = new[] { "school 2", "school 3" };
@@ -252,7 +252,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
 
             mockDice.Setup(d => d.Roll(1).d(3)).Returns(3);
 
-            var focus = featFocusGenerator.GenerateFrom("featToFill", FeatConstants.MartialWeaponProficiencyId, requiredFeats, otherFeat, characterClass);
+            var focus = featFocusGenerator.GenerateFrom(FeatConstants.MartialWeaponProficiencyId, ProficiencyConstants.All, requiredFeats, otherFeat, characterClass);
             Assert.That(focus, Is.EqualTo("weird weapon"));
         }
 
@@ -336,7 +336,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
 
             focusTypes[FeatConstants.ExoticWeaponProficiencyId] = new[] { "weird weapon", "school 2" };
 
-            var focus = featFocusGenerator.GenerateFrom(FeatConstants.ExoticWeaponProficiencyId, FeatConstants.ExoticWeaponProficiencyId, requiredFeats, otherFeat, characterClass);
+            var focus = featFocusGenerator.GenerateFrom(FeatConstants.ExoticWeaponProficiencyId, ProficiencyConstants.All, requiredFeats, otherFeat, characterClass);
             Assert.That(focus, Is.EqualTo("school 2"));
         }
 
@@ -351,7 +351,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
 
             mockDice.Setup(d => d.Roll(1).d(2)).Returns(2);
 
-            var focus = featFocusGenerator.GenerateFrom(FeatConstants.MartialWeaponProficiencyId, FeatConstants.MartialWeaponProficiencyId, requiredFeats, otherFeat, characterClass);
+            var focus = featFocusGenerator.GenerateFrom(FeatConstants.MartialWeaponProficiencyId, ProficiencyConstants.All, requiredFeats, otherFeat, characterClass);
             Assert.That(focus, Is.EqualTo("school 2"));
         }
 
@@ -364,8 +364,94 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
 
             focusTypes[FeatConstants.ExoticWeaponProficiencyId] = new[] { "weird weapon", "school 2" };
 
-            var focus = featFocusGenerator.GenerateFrom(FeatConstants.ExoticWeaponProficiencyId, FeatConstants.ExoticWeaponProficiencyId, requiredFeats, otherFeat, characterClass);
+            var focus = featFocusGenerator.GenerateFrom(FeatConstants.ExoticWeaponProficiencyId, ProficiencyConstants.All, requiredFeats, otherFeat, characterClass);
             Assert.That(focus, Is.EqualTo("weird weapon"));
+        }
+
+        [Test]
+        public void CanBeProficientInAllFromSkills()
+        {
+            focusTypes["feat"] = new[] { "focus" };
+            var focus = featFocusGenerator.GenerateAllowingFocusOfAllFrom("feat", ProficiencyConstants.All, skills);
+            Assert.That(focus, Is.EqualTo(ProficiencyConstants.All));
+        }
+
+        [Test]
+        public void CannotBeProficientInAllFromSkills()
+        {
+            focusTypes["feat"] = new[] { "focus" };
+            var focus = featFocusGenerator.GenerateFrom("feat", ProficiencyConstants.All, skills);
+            Assert.That(focus, Is.EqualTo("focus"));
+        }
+
+        [Test]
+        public void CannotBeProficientInAll()
+        {
+            focusTypes["feat"] = new[] { "focus" };
+            var focus = featFocusGenerator.GenerateFrom("feat", ProficiencyConstants.All, requiredFeats, otherFeat, characterClass);
+            Assert.That(focus, Is.EqualTo("focus"));
+        }
+
+        [Test]
+        public void CanAlwaysFocusInUnarmedStrikeWhenProficiencyIsRequirement()
+        {
+            requiredFeats.Add(new RequiredFeat { FeatId = GroupConstants.Proficiency });
+            focusTypes[GroupConstants.WeaponsWithUnarmedAndGrapple] = new[] { "weapon", ProficiencyConstants.UnarmedStrike };
+            focusTypes[GroupConstants.Weapons] = new[] { "weapon" };
+
+            var proficiencyFeats = new[] { "proficiency1", "proficiency2" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.Proficiency)).Returns(proficiencyFeats);
+
+            var focus = featFocusGenerator.GenerateFrom("featToFill", GroupConstants.WeaponsWithUnarmedAndGrapple, requiredFeats, otherFeat, characterClass);
+            Assert.That(focus, Is.EqualTo(ProficiencyConstants.UnarmedStrike));
+        }
+
+        [Test]
+        public void CanAlwaysFocusInGrappleWhenProficiencyIsRequirement()
+        {
+            requiredFeats.Add(new RequiredFeat { FeatId = GroupConstants.Proficiency });
+            focusTypes[GroupConstants.WeaponsWithUnarmedAndGrapple] = new[] { "weapon", ProficiencyConstants.Grapple };
+            focusTypes[GroupConstants.Weapons] = new[] { "weapon" };
+
+            var proficiencyFeats = new[] { "proficiency1", "proficiency2" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.Proficiency)).Returns(proficiencyFeats);
+
+            var focus = featFocusGenerator.GenerateFrom("featToFill", GroupConstants.WeaponsWithUnarmedAndGrapple, requiredFeats, otherFeat, characterClass);
+            Assert.That(focus, Is.EqualTo(ProficiencyConstants.Grapple));
+        }
+
+        [Test]
+        public void CanFocusInRayWhenProficiencyIsRequirementAndSpellcaster()
+        {
+            requiredFeats.Add(new RequiredFeat { FeatId = GroupConstants.Proficiency });
+            focusTypes[GroupConstants.WeaponsWithUnarmedAndGrappleAndRay] = new[] { "weapon", ProficiencyConstants.Ray };
+            focusTypes[GroupConstants.Weapons] = new[] { "weapon" };
+
+            var proficiencyFeats = new[] { "proficiency1", "proficiency2" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.Proficiency)).Returns(proficiencyFeats);
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Spellcasters))
+                .Returns(new[] { characterClass.ClassName });
+
+            var focus = featFocusGenerator.GenerateFrom("featToFill", GroupConstants.WeaponsWithUnarmedAndGrappleAndRay, requiredFeats, otherFeat, characterClass);
+            Assert.That(focus, Is.EqualTo(ProficiencyConstants.Ray));
+        }
+
+        [Test]
+        public void CannotFocusInRayWhenProficiencyIsRequirementAndNotSpellcaster()
+        {
+            requiredFeats.Add(new RequiredFeat { FeatId = GroupConstants.Proficiency });
+            focusTypes[GroupConstants.WeaponsWithUnarmedAndGrappleAndRay] = new[] { "weapon", ProficiencyConstants.Ray };
+            focusTypes[GroupConstants.Weapons] = new[] { "weapon" };
+
+            var proficiencyFeats = new[] { "proficiency1", "proficiency2" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.Proficiency)).Returns(proficiencyFeats);
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Spellcasters))
+                .Returns(new[] { "other class" });
+
+            var focus = featFocusGenerator.GenerateFrom("featToFill", GroupConstants.WeaponsWithUnarmedAndGrappleAndRay, requiredFeats, otherFeat, characterClass);
+            Assert.That(focus, Is.Empty);
         }
     }
 }

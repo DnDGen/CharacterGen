@@ -1,5 +1,6 @@
 ﻿using System;
 using NPCGen.Common.Abilities.Feats;
+using NPCGen.Common.Items;
 using NPCGen.Common.Races;
 using NPCGen.Tables.Interfaces;
 using NUnit.Framework;
@@ -32,7 +33,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
 
         [TestCase(FeatConstants.SimpleWeaponProficiencyId,
             FeatConstants.SimpleWeaponProficiencyId,
-            FeatConstants.SimpleWeaponProficiencyId,
+            ProficiencyConstants.All,
             0,
             "",
             0,
