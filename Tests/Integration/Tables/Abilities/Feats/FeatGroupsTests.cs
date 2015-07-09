@@ -86,7 +86,8 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.DeflectArrowsId,
             FeatConstants.DodgeId,
             FeatConstants.GreaterTwoWeaponFightingId,
-            FeatConstants.ImprovedGrappleId)]
+            FeatConstants.ImprovedGrappleId,
+            FeatConstants.ImprovedPreciseShotId)]
         [TestCase(GroupConstants.TakenMultipleTimes,
             FeatConstants.SpellMasteryId,
             FeatConstants.ToughnessId,

@@ -189,6 +189,16 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.Additional
         [TestCase(FeatConstants.ImprovedGrappleId, 0, "", 0, "", 4)]
         [TestCase(FeatConstants.ImprovedInitiativeId, 0, "", 0, "", 4)]
         [TestCase(FeatConstants.ImprovedOverrunId, 0, "", 0, "", 4)]
+        [TestCase(FeatConstants.ImprovedPreciseShotId, 11, "", 0, "", 0)]
+        [TestCase(FeatConstants.ImprovedShieldBashId, 0, "", 0, "", 4)]
+        [TestCase(FeatConstants.ImprovedSunderId, 0, "", 0, "", 4)]
+        [TestCase(FeatConstants.ImprovedTripId, 0, "", 0, "", 4)]
+        [TestCase(FeatConstants.ImprovedTurningId, 0, "", 0, "", 4)]
+        [TestCase(FeatConstants.ImprovedTwoWeaponFightingId, 0, "", 0, "", 4)]
+        [TestCase(FeatConstants.ImprovedUnarmedStrikeId, 0, "", 0, "", 4)]
+        [TestCase(FeatConstants.InvestigatorId, 0, "", 0, "", 4)]
+        [TestCase(FeatConstants.IronWillId, 0, "", 0, "", 4)]
+        [TestCase(FeatConstants.LeadershipId, 0, "", 0, "", 4)]
         public void AdditionalFeatData(String name, Int32 baseAttackRequirement, String focusType, Int32 frequencyQuantity, String frequencyTimePeriod, Int32 strength)
         {
             var data = new List<String>();

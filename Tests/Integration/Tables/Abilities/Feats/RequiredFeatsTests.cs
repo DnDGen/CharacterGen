@@ -19,16 +19,16 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
         {
             var names = new[] 
             {
-                FeatConstants.ImprovedCombatStyleId,
-                FeatConstants.CombatStyleMasteryId,
-                FeatConstants.HeavyArmorProficiencyId,
-                FeatConstants.MediumArmorProficiencyId,
                 FeatConstants.AugmentSummoningId,
                 FeatConstants.CleaveId,
+                FeatConstants.CombatStyleMasteryId,
                 FeatConstants.DeflectArrowsId,
                 FeatConstants.DiehardId,
                 FeatConstants.ExtraTurningId,
                 FeatConstants.FarShotId,
+                FeatConstants.HeavyArmorProficiencyId,
+                FeatConstants.ImprovedCombatStyleId,
+                FeatConstants.MediumArmorProficiencyId,
                 FeatConstants.RapidShotId + "Ranger",
                 FeatConstants.TwoWeaponFightingId + "Ranger",
                 FeatConstants.ManyshotId + "Ranger",
@@ -45,8 +45,10 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
                 FeatConstants.ImprovedCriticalId,
                 FeatConstants.ImprovedDisarmId,
                 FeatConstants.ImprovedFeintId,
+                FeatConstants.ImprovedGrappleId,
                 FeatConstants.ImprovedOverrunId,
-                FeatConstants.ImprovedGrappleId
+                FeatConstants.ImprovedPreciseShotId,
+                FeatConstants.PreciseShotId
             };
 
             AssertCollectionNames(names);
@@ -73,6 +75,8 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
         [TestCase(FeatConstants.ImprovedFeintId, FeatConstants.CombatExpertiseId)]
         [TestCase(FeatConstants.ImprovedGrappleId, FeatConstants.ImprovedUnarmedStrikeId)]
         [TestCase(FeatConstants.ImprovedOverrunId, FeatConstants.PowerAttackId)]
+        [TestCase(FeatConstants.ImprovedPreciseShotId, FeatConstants.PreciseShotId)]
+        [TestCase(FeatConstants.PreciseShotId, FeatConstants.PointBlankShotId)]
         public void RequiredFeats(String name, params String[] requiredFeatIds)
         {
             DistinctCollection(name, requiredFeatIds);
