@@ -78,7 +78,8 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.OpportunistId,
             FeatConstants.SkillMasteryId,
             FeatConstants.SlipperyMindId,
-            FeatConstants.ImprovedFamiliarId)]
+            FeatConstants.ImprovedFamiliarId,
+            FeatConstants.LeadershipId)]
         [TestCase(GroupConstants.HasSkillRequirements)]
         [TestCase(GroupConstants.HasStatRequirements,
             FeatConstants.PowerAttackId,
@@ -87,7 +88,8 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.DodgeId,
             FeatConstants.GreaterTwoWeaponFightingId,
             FeatConstants.ImprovedGrappleId,
-            FeatConstants.ImprovedPreciseShotId)]
+            FeatConstants.ImprovedPreciseShotId,
+            FeatConstants.ImprovedTwoWeaponFightingId)]
         [TestCase(GroupConstants.TakenMultipleTimes,
             FeatConstants.SpellMasteryId,
             FeatConstants.ToughnessId,

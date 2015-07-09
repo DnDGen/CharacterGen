@@ -25,6 +25,7 @@ namespace NPCGen.Tests.Unit.Common
             Assert.That(character.Combat, Is.Not.Null);
             Assert.That(character.Equipment, Is.Not.Null);
             Assert.That(character.Magic, Is.Not.Null);
+            Assert.That(character.Leadership, Is.Not.Null);
         }
     }
 }

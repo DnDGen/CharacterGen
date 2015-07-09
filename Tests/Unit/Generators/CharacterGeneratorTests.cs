@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using Moq;
 using NPCGen.Common;
 using NPCGen.Common.Abilities;
+using NPCGen.Common.Abilities.Feats;
 using NPCGen.Common.Abilities.Skills;
+using NPCGen.Common.Abilities.Stats;
 using NPCGen.Common.Alignments;
 using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Combats;
@@ -58,6 +60,7 @@ namespace NPCGen.Tests.Unit.Generators
         private Combat combat;
         private Equipment equipment;
         private BaseAttack baseAttack;
+        private List<Feat> feats;
 
         [SetUp]
         public void Setup()
@@ -113,6 +116,7 @@ namespace NPCGen.Tests.Unit.Generators
             equipment = new Equipment();
             combat = new Combat();
             baseAttack = new BaseAttack();
+            feats = new List<Feat>();
 
             alignment.Goodness = "goodness";
             alignment.Lawfulness = "lawfulness";
@@ -120,6 +124,7 @@ namespace NPCGen.Tests.Unit.Generators
             characterClass.ClassName = "class name";
             race.BaseRace.Id = BaseRaceId;
             race.Metarace.Id = RaceConstants.Metaraces.NoneId;
+            ability.Feats = feats;
 
             mockAlignmentGenerator.Setup(f => f.GenerateWith(mockAlignmentRandomizer.Object)).Returns(alignment);
             mockCharacterClassGenerator.Setup(f => f.GenerateWith(alignment, mockLevelRandomizer.Object,
@@ -302,6 +307,101 @@ namespace NPCGen.Tests.Unit.Generators
 
             var character = GenerateCharacter();
             Assert.That(character.Ability.Skills[SkillConstants.Swim].Bonus, Is.EqualTo(-10));
+        }
+
+        [Test]
+        public void IfNoLeadershipFeat_NoLeadership()
+        {
+            feats.Add(new Feat());
+            feats[0].Name.Id = "other feat";
+
+            var character = GenerateCharacter();
+            Assert.That(character.Leadership.IsFollower, Is.EqualTo(false));
+            Assert.That(character.Leadership.Cohort, Is.Null);
+            Assert.That(character.Leadership.Followers, Is.Empty);
+            Assert.That(character.Leadership.Score, Is.EqualTo(0));
+        }
+
+        [Test]
+        public void IfCharacterHasLeadershipFeat_LeadershipScoreIsLevelPlusCharismaModifier()
+        {
+            feats.Add(new Feat());
+            feats[0].Name.Id = FeatConstants.LeadershipId;
+
+            ability.Stats[StatConstants.Charisma] = new Stat { Value = 16 };
+            characterClass.Level = 5;
+
+            var character = GenerateCharacter();
+            Assert.That(character.Leadership.IsFollower, Is.False);
+            Assert.That(character.Leadership.Score, Is.EqualTo(8));
+        }
+
+        [Test]
+        public void IfCharacterHasLeadership_GenerateCohort()
+        {
+            feats.Add(new Feat());
+            feats[0].Name.Id = FeatConstants.LeadershipId;
+
+            ability.Stats[StatConstants.Charisma] = new Stat { Value = 16 };
+            characterClass.Level = 5;
+
+            var character = GenerateCharacter();
+            Assert.That(character.Leadership.IsFollower, Is.False);
+            Assert.That(character.Leadership.Cohort, Is.Not.Null);
+
+            var cohort = character.Leadership.Cohort;
+            Assert.That(cohort.Leadership.IsFollower, Is.True);
+            Assert.That(cohort.Leadership.Cohort, Is.Null);
+            Assert.That(cohort.Leadership.Followers, Is.Empty);
+            Assert.That(cohort.Leadership.Score, Is.EqualTo(0));
+        }
+
+        [Test]
+        public void IfLeadershipScoreIs1_NoCohort()
+        {
+            throw new NotImplementedException();
+        }
+
+        [Test]
+        public void IfLeadershipScoreIsLessThan1_NoCohort()
+        {
+            throw new NotImplementedException();
+        }
+
+        [Test]
+        public void CohortIsGeneratedIndependently()
+        {
+            throw new NotImplementedException();
+        }
+
+        [Test]
+        public void CohortLevelIs1LessThanCharacterLeadershipScore()
+        {
+            throw new NotImplementedException();
+        }
+
+        [Test]
+        public void CohortsCannotReceiveFollowers()
+        {
+            throw new NotImplementedException();
+        }
+
+        [Test]
+        public void FollowersGenerated()
+        {
+            throw new NotImplementedException();
+        }
+
+        [Test]
+        public void FollowersGeneratedIndependently()
+        {
+            throw new NotImplementedException();
+        }
+
+        [Test]
+        public void FollowersCannotReceiveFollowers()
+        {
+            throw new NotImplementedException();
         }
     }
 }

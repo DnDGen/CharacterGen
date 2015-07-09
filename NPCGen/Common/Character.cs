@@ -20,6 +20,7 @@ namespace NPCGen.Common
         public Ability Ability { get; set; }
         public Equipment Equipment { get; set; }
         public Magic Magic { get; set; }
+        public Leadership Leadership { get; set; }
 
         public Character()
         {
@@ -31,6 +32,7 @@ namespace NPCGen.Common
             Ability = new Ability();
             Equipment = new Equipment();
             Magic = new Magic();
+            Leadership = new Leadership();
         }
     }
 }

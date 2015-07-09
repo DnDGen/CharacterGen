@@ -48,7 +48,12 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
                 FeatConstants.ImprovedGrappleId,
                 FeatConstants.ImprovedOverrunId,
                 FeatConstants.ImprovedPreciseShotId,
-                FeatConstants.PreciseShotId
+                FeatConstants.PreciseShotId,
+                FeatConstants.ImprovedShieldBashId,
+                FeatConstants.ImprovedSunderId,
+                FeatConstants.ImprovedTripId,
+                FeatConstants.ImprovedTurningId,
+                FeatConstants.ImprovedTwoWeaponFightingId
             };
 
             AssertCollectionNames(names);
@@ -77,6 +82,11 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
         [TestCase(FeatConstants.ImprovedOverrunId, FeatConstants.PowerAttackId)]
         [TestCase(FeatConstants.ImprovedPreciseShotId, FeatConstants.PreciseShotId)]
         [TestCase(FeatConstants.PreciseShotId, FeatConstants.PointBlankShotId)]
+        [TestCase(FeatConstants.ImprovedShieldBashId, FeatConstants.ShieldProficiencyId)]
+        [TestCase(FeatConstants.ImprovedSunderId, FeatConstants.PowerAttackId)]
+        [TestCase(FeatConstants.ImprovedTripId, FeatConstants.CombatExpertiseId)]
+        [TestCase(FeatConstants.ImprovedTurningId, FeatConstants.TurnId)]
+        [TestCase(FeatConstants.ImprovedTwoWeaponFightingId, FeatConstants.TwoWeaponFightingId)]
         public void RequiredFeats(String name, params String[] requiredFeatIds)
         {
             DistinctCollection(name, requiredFeatIds);
