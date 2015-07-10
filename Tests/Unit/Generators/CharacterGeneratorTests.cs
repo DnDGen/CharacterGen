@@ -10,12 +10,14 @@ using NPCGen.Common.Alignments;
 using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Combats;
 using NPCGen.Common.Items;
+using NPCGen.Common.Magics;
 using NPCGen.Common.Races;
 using NPCGen.Generators;
 using NPCGen.Generators.Interfaces;
 using NPCGen.Generators.Interfaces.Abilities;
 using NPCGen.Generators.Interfaces.Combats;
 using NPCGen.Generators.Interfaces.Items;
+using NPCGen.Generators.Interfaces.Magics;
 using NPCGen.Generators.Interfaces.Randomizers.Alignments;
 using NPCGen.Generators.Interfaces.Randomizers.CharacterClasses;
 using NPCGen.Generators.Interfaces.Randomizers.Races;
@@ -23,6 +25,7 @@ using NPCGen.Generators.Interfaces.Randomizers.Stats;
 using NPCGen.Generators.Interfaces.Verifiers;
 using NPCGen.Generators.Interfaces.Verifiers.Exceptions;
 using NPCGen.Selectors.Interfaces;
+using NPCGen.Selectors.Interfaces.Objects;
 using NPCGen.Tables.Interfaces;
 using NUnit.Framework;
 
@@ -43,24 +46,35 @@ namespace NPCGen.Tests.Unit.Generators
         private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
         private Mock<IRandomizerVerifier> mockRandomizerVerifier;
         private Mock<IPercentileSelector> mockPercentileSelector;
+        private Mock<ILeadershipSelector> mockLeadershipSelector;
+        private Mock<IEquipmentGenerator> mockEquipmentGenerator;
+        private Mock<IMagicGenerator> mockMagicGenerator;
+        private Mock<ISetLevelRandomizer> mockSetLevelRandomizer;
+        private Mock<ISetAlignmentRandomizer> mockSetAlignmentRandomizer;
+        private Mock<IClassNameRandomizer> mockAnyClassNameRandomizer;
+        private Mock<IBaseRaceRandomizer> mockAnyBaseRaceRandomizer;
+        private Mock<IMetaraceRandomizer> mockAnyMetaraceRandomizer;
+        private Mock<IStatsRandomizer> mockRawStatRandomizer;
         private ICharacterGenerator characterGenerator;
+
         private Mock<IAlignmentRandomizer> mockAlignmentRandomizer;
         private Mock<IClassNameRandomizer> mockClassNameRandomizer;
         private Mock<ILevelRandomizer> mockLevelRandomizer;
         private Mock<IBaseRaceRandomizer> mockBaseRaceRandomizer;
         private Mock<IMetaraceRandomizer> mockMetaraceRandomizer;
         private Mock<IStatsRandomizer> mockStatsRandomizer;
-        private Mock<IEquipmentGenerator> mockEquipmentGenerator;
 
         private CharacterClass characterClass;
         private Race race;
-        private Dictionary<String, Int32> adjustments;
+        private Dictionary<String, Int32> levelAdjustments;
         private Alignment alignment;
         private Ability ability;
         private Combat combat;
         private Equipment equipment;
         private BaseAttack baseAttack;
         private List<Feat> feats;
+        private FollowerQuantities followerQuantities;
+        private Magic magic;
 
         [SetUp]
         public void Setup()
@@ -69,15 +83,19 @@ namespace NPCGen.Tests.Unit.Generators
             SetUpGenerators();
 
             mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
-            adjustments = new Dictionary<String, Int32>();
+            levelAdjustments = new Dictionary<String, Int32>();
             mockRandomizerVerifier = new Mock<IRandomizerVerifier>();
             mockPercentileSelector = new Mock<IPercentileSelector>();
+            mockLeadershipSelector = new Mock<ILeadershipSelector>();
+            mockSetLevelRandomizer = new Mock<ISetLevelRandomizer>();
+            mockSetAlignmentRandomizer = new Mock<ISetAlignmentRandomizer>();
+            followerQuantities = new FollowerQuantities();
 
-            adjustments.Add(BaseRaceId, 0);
-            adjustments.Add(BaseRacePlusOneId, 1);
-            adjustments.Add(RaceConstants.Metaraces.NoneId, 0);
-            adjustments.Add(MetaraceId, 1);
-            mockAdjustmentsSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments)).Returns(adjustments);
+            levelAdjustments[BaseRaceId] = 0;
+            levelAdjustments[BaseRacePlusOneId] = 1;
+            levelAdjustments[RaceConstants.Metaraces.NoneId] = 0;
+            levelAdjustments[MetaraceId] = 1;
+            mockAdjustmentsSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments)).Returns(levelAdjustments);
 
             mockRandomizerVerifier.Setup(v => v.VerifyCompatibility(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object,
                 mockLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(true);
@@ -85,6 +103,8 @@ namespace NPCGen.Tests.Unit.Generators
                 mockLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(true);
             mockRandomizerVerifier.Setup(v => v.VerifyCharacterClassCompatibility(It.IsAny<String>(), It.IsAny<CharacterClass>(),
                 mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(true);
+
+            mockLeadershipSelector.Setup(s => s.SelectFollowerQuantitiesFor(It.IsAny<Int32>())).Returns(new FollowerQuantities());
 
             characterGenerator = new CharacterGenerator(mockAlignmentGenerator.Object, mockCharacterClassGenerator.Object,
                 mockRaceGenerator.Object, mockAdjustmentsSelector.Object, mockRandomizerVerifier.Object, mockPercentileSelector.Object,
@@ -99,6 +119,14 @@ namespace NPCGen.Tests.Unit.Generators
             mockStatsRandomizer = new Mock<IStatsRandomizer>();
             mockBaseRaceRandomizer = new Mock<IBaseRaceRandomizer>();
             mockMetaraceRandomizer = new Mock<IMetaraceRandomizer>();
+
+            mockSetAlignmentRandomizer = new Mock<ISetAlignmentRandomizer>();
+            mockSetLevelRandomizer = new Mock<ISetLevelRandomizer>();
+            mockAnyClassNameRandomizer = new Mock<IClassNameRandomizer>();
+            mockAnyBaseRaceRandomizer = new Mock<IBaseRaceRandomizer>();
+            mockAnyMetaraceRandomizer = new Mock<IMetaraceRandomizer>();
+            mockRawStatRandomizer = new Mock<IStatsRandomizer>();
+
         }
 
         private void SetUpGenerators()
@@ -109,6 +137,7 @@ namespace NPCGen.Tests.Unit.Generators
             mockEquipmentGenerator = new Mock<IEquipmentGenerator>();
             mockCharacterClassGenerator = new Mock<ICharacterClassGenerator>();
             mockRaceGenerator = new Mock<IRaceGenerator>();
+            mockMagicGenerator = new Mock<IMagicGenerator>();
             alignment = new Alignment();
             characterClass = new CharacterClass();
             race = new Race();
@@ -117,6 +146,7 @@ namespace NPCGen.Tests.Unit.Generators
             combat = new Combat();
             baseAttack = new BaseAttack();
             feats = new List<Feat>();
+            magic = new Magic();
 
             alignment.Goodness = "goodness";
             alignment.Lawfulness = "lawfulness";
@@ -135,6 +165,7 @@ namespace NPCGen.Tests.Unit.Generators
             mockEquipmentGenerator.Setup(g => g.GenerateWith(ability.Feats, characterClass)).Returns(equipment);
             mockCombatGenerator.Setup(g => g.GenerateWith(baseAttack, characterClass, race, ability.Feats, ability.Stats, equipment)).Returns(combat);
             mockCombatGenerator.Setup(g => g.GenerateBaseAttackWith(characterClass, race)).Returns(baseAttack);
+            mockMagicGenerator.Setup(g => g.GenerateWith(characterClass, ability.Feats, equipment)).Returns(magic);
         }
 
         [Test]
@@ -310,6 +341,13 @@ namespace NPCGen.Tests.Unit.Generators
         }
 
         [Test]
+        public void GetMagicFromGenerator()
+        {
+            var character = GenerateCharacter();
+            Assert.That(character.Magic, Is.EqualTo(magic));
+        }
+
+        [Test]
         public void IfNoLeadershipFeat_NoLeadership()
         {
             feats.Add(new Feat());
@@ -367,7 +405,7 @@ namespace NPCGen.Tests.Unit.Generators
 
             var character = GenerateCharacter();
             Assert.That(character.Leadership.Score, Is.EqualTo(1));
-            Assert.That(character.Leadership.IsFollower, Is.EqualTo(false));
+            Assert.That(character.Leadership.IsFollower, Is.False);
             Assert.That(character.Leadership.Cohort, Is.Null);
             Assert.That(character.Leadership.Followers, Is.Empty);
             Assert.That(character.Leadership.Score, Is.EqualTo(0));
@@ -384,7 +422,7 @@ namespace NPCGen.Tests.Unit.Generators
 
             var character = GenerateCharacter();
             Assert.That(character.Leadership.Score, Is.EqualTo(0));
-            Assert.That(character.Leadership.IsFollower, Is.EqualTo(false));
+            Assert.That(character.Leadership.IsFollower, Is.False);
             Assert.That(character.Leadership.Cohort, Is.Null);
             Assert.That(character.Leadership.Followers, Is.Empty);
             Assert.That(character.Leadership.Score, Is.EqualTo(0));
@@ -446,43 +484,91 @@ namespace NPCGen.Tests.Unit.Generators
         }
 
         [Test]
-        public void GenerateFactorsThatAffectAttractingCohorts()
+        public void CohortLevelIsSetBasedOnCharacterLeadershipScore()
         {
-            throw new NotImplementedException();
-        }
+            feats.Add(new Feat());
+            feats[0].Name.Id = FeatConstants.LeadershipId;
 
-        [Test]
-        public void GenerateFactorsThatAffectAttractingFollowers()
-        {
-            throw new NotImplementedException();
-        }
+            ability.Stats[StatConstants.Charisma] = new Stat { Value = 16 };
+            characterClass.Level = 5;
 
-        [Test]
-        public void CohortIsGeneratedIndependently()
-        {
-            throw new NotImplementedException();
-        }
+            mockLeadershipSelector.Setup(s => s.SelectCohortLevelFor(8)).Returns(2);
 
-        [Test]
-        public void CohortLevelIs1LessThanCharacterLeadershipScore()
-        {
-            throw new NotImplementedException();
+            var character = GenerateCharacter();
+            Assert.That(character.Leadership.Score, Is.EqualTo(8));
+            Assert.That(character.Leadership.Cohort, Is.Not.Null);
+            mockCharacterClassGenerator.Verify(g => g.GenerateWith(It.IsAny<Alignment>(), It.IsAny<ILevelRandomizer>(), It.IsAny<IClassNameRandomizer>()), Times.Exactly(2));
+            mockCharacterClassGenerator.Verify(g => g.GenerateWith(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object), Times.Once);
+            mockCharacterClassGenerator.Verify(g => g.GenerateWith(It.IsAny<Alignment>(), It.Is<ISetLevelRandomizer>(r => r.SetLevel == 2), mockAnyClassNameRandomizer.Object), Times.Once);
         }
 
         [Test]
         public void CohortLevelIs2LessThanCharacterLevel()
         {
-            throw new NotImplementedException();
+            feats.Add(new Feat());
+            feats[0].Name.Id = FeatConstants.LeadershipId;
+
+            ability.Stats[StatConstants.Charisma] = new Stat { Value = 16 };
+            characterClass.Level = 5;
+
+            mockLeadershipSelector.Setup(s => s.SelectCohortLevelFor(8)).Returns(4);
+
+            var character = GenerateCharacter();
+            Assert.That(character.Leadership.Score, Is.EqualTo(8));
+            Assert.That(character.Leadership.Cohort, Is.Not.Null);
+
+            var cohort = character.Leadership.Cohort;
+            mockCharacterClassGenerator.Verify(g => g.GenerateWith(It.IsAny<Alignment>(), It.IsAny<ILevelRandomizer>(), It.IsAny<IClassNameRandomizer>()), Times.Exactly(2));
+            mockCharacterClassGenerator.Verify(g => g.GenerateWith(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object), Times.Once);
+            mockCharacterClassGenerator.Verify(g => g.GenerateWith(It.IsAny<Alignment>(), It.Is<ISetLevelRandomizer>(r => r.SetLevel == 3), mockAnyClassNameRandomizer.Object), Times.Once);
         }
 
         [Test]
-        public void CohortLevelIsLimitedByLeadershipScoreIfLower()
+        public void CohortIsGeneratedIndependently()
         {
-            throw new NotImplementedException();
+            feats.Add(new Feat());
+            feats[0].Name.Id = FeatConstants.LeadershipId;
+
+            ability.Stats[StatConstants.Charisma] = new Stat { Value = 16 };
+            characterClass.Level = 5;
+
+            mockLeadershipSelector.Setup(s => s.SelectCohortLevelFor(8)).Returns(4);
+
+            var cohortAlignment = new Alignment();
+            var cohortClass = new CharacterClass();
+            var cohortRace = new Race();
+            var cohortAbility = new Ability();
+            var cohortCombat = new Combat();
+            var cohortEquipment = new Equipment();
+            var cohortMagic = new Magic();
+            var cohortBaseAttack = new BaseAttack();
+
+            mockAlignmentGenerator.Setup(g => g.GenerateWith(mockSetAlignmentRandomizer.Object)).Returns(cohortAlignment);
+            mockCharacterClassGenerator.Setup(g => g.GenerateWith(cohortAlignment, It.Is<ISetLevelRandomizer>(r => r.SetLevel == 3), mockAnyClassNameRandomizer.Object)).Returns(cohortClass);
+            mockRaceGenerator.Setup(g => g.GenerateWith(cohortAlignment, cohortClass, mockAnyBaseRaceRandomizer.Object, mockAnyMetaraceRandomizer.Object)).Returns(cohortRace);
+            mockAbilitiesGenerator.Setup(g => g.GenerateWith(cohortClass, cohortRace, mockRawStatRandomizer.Object, cohortBaseAttack)).Returns(cohortAbility);
+            mockCombatGenerator.Setup(g => g.GenerateBaseAttackWith(cohortClass, cohortRace)).Returns(cohortBaseAttack);
+            mockCombatGenerator.Setup(g => g.GenerateWith(cohortBaseAttack, cohortClass, cohortRace, cohortAbility.Feats, cohortAbility.Stats, cohortEquipment)).Returns(cohortCombat);
+            mockEquipmentGenerator.Setup(g => g.GenerateWith(cohortAbility.Feats, cohortClass)).Returns(cohortEquipment);
+            mockMagicGenerator.Setup(g => g.GenerateWith(cohortClass, cohortAbility.Feats, cohortEquipment)).Returns(cohortMagic);
+            mockPercentileSelector.SetupSequence(s => s.SelectFrom(TableNameConstants.Set.Percentile.Traits)).Returns("character is interesting").Returns("cohort is interesting");
+
+            var character = GenerateCharacter();
+            Assert.That(character.Leadership.Cohort, Is.Not.Null);
+
+            var cohort = character.Leadership.Cohort;
+            Assert.That(cohort.Alignment, Is.EqualTo(cohortAlignment));
+            Assert.That(cohort.Class, Is.EqualTo(cohortClass));
+            Assert.That(cohort.Race, Is.EqualTo(cohortRace));
+            Assert.That(cohort.Ability, Is.EqualTo(cohortAbility));
+            Assert.That(cohort.Combat, Is.EqualTo(cohortCombat));
+            Assert.That(cohort.Equipment, Is.EqualTo(cohortEquipment));
+            Assert.That(cohort.InterestingTrait, Is.EqualTo("cohort is interesting"));
+            Assert.That(cohort.Magic, Is.EqualTo(cohortMagic));
         }
 
         [Test]
-        public void CohortLevelIsLimitedByCharacterLevelIfLower()
+        public void GenerateFactorsThatAffectAttractingCohorts()
         {
             throw new NotImplementedException();
         }
@@ -525,6 +611,12 @@ namespace NPCGen.Tests.Unit.Generators
 
         [Test]
         public void FollowersGeneratedIndependently()
+        {
+            throw new NotImplementedException();
+        }
+
+        [Test]
+        public void GenerateFactorsThatAffectAttractingFollowers()
         {
             throw new NotImplementedException();
         }

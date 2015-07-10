@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IBooleanPercentileSelector.cs" />
+    <Compile Include="ILeadershipSelector.cs" />
     <Compile Include="INameSelector.cs" />
     <Compile Include="Objects\AdditionalFeatSelection.cs" />
     <Compile Include="ICollectionsSelector.cs" />
@@ -51,6 +52,7 @@
     <Compile Include="IStatAdjustmentsSelector.cs" />
     <Compile Include="IStatPrioritySelector.cs" />
     <Compile Include="Objects\CharacterClassFeatSelection.cs" />
+    <Compile Include="Objects\FollowerQuantities.cs" />
     <Compile Include="Objects\RacialFeatSelection.cs" />
     <Compile Include="Objects\RequiredFeat.cs" />
     <Compile Include="Objects\StatPrioritySelection.cs" />
