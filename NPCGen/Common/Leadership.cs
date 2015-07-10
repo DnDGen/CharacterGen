@@ -10,10 +10,12 @@ namespace NPCGen.Common
         public Character Cohort { get; set; }
         public IEnumerable<Character> Followers { get; set; }
         public Int32 Score { get; set; }
+        public IEnumerable<String> LeadershipModifiers { get; set; }
 
         public Leadership()
         {
             Followers = Enumerable.Empty<Character>();
+            LeadershipModifiers = Enumerable.Empty<String>();
         }
     }
 }

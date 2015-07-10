@@ -359,11 +359,100 @@ namespace NPCGen.Tests.Unit.Generators
         [Test]
         public void IfLeadershipScoreIs1_NoCohort()
         {
-            throw new NotImplementedException();
+            feats.Add(new Feat());
+            feats[0].Name.Id = FeatConstants.LeadershipId;
+
+            ability.Stats[StatConstants.Charisma] = new Stat { Value = 10 };
+            characterClass.Level = 1;
+
+            var character = GenerateCharacter();
+            Assert.That(character.Leadership.Score, Is.EqualTo(1));
+            Assert.That(character.Leadership.IsFollower, Is.EqualTo(false));
+            Assert.That(character.Leadership.Cohort, Is.Null);
+            Assert.That(character.Leadership.Followers, Is.Empty);
+            Assert.That(character.Leadership.Score, Is.EqualTo(0));
         }
 
         [Test]
         public void IfLeadershipScoreIsLessThan1_NoCohort()
+        {
+            feats.Add(new Feat());
+            feats[0].Name.Id = FeatConstants.LeadershipId;
+
+            ability.Stats[StatConstants.Charisma] = new Stat { Value = 9 };
+            characterClass.Level = 1;
+
+            var character = GenerateCharacter();
+            Assert.That(character.Leadership.Score, Is.EqualTo(0));
+            Assert.That(character.Leadership.IsFollower, Is.EqualTo(false));
+            Assert.That(character.Leadership.Cohort, Is.Null);
+            Assert.That(character.Leadership.Followers, Is.Empty);
+            Assert.That(character.Leadership.Score, Is.EqualTo(0));
+        }
+
+        [Test]
+        public void CharacterReputationGenerated()
+        {
+            feats.Add(new Feat());
+            feats[0].Name.Id = FeatConstants.LeadershipId;
+
+            ability.Stats[StatConstants.Charisma] = new Stat { Value = 16 };
+            characterClass.Level = 5;
+
+            mockPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Percentile.Reputation)).Returns("reputable");
+
+            var character = GenerateCharacter();
+            Assert.That(character.Leadership.LeadershipModifiers, Contains.Item("reputable"));
+        }
+
+        [Test]
+        public void CharacterReputationAdjustmentIsApplied()
+        {
+            feats.Add(new Feat());
+            feats[0].Name.Id = FeatConstants.LeadershipId;
+
+            ability.Stats[StatConstants.Charisma] = new Stat { Value = 16 };
+            characterClass.Level = 5;
+
+            mockPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Percentile.Reputation)).Returns("reputable");
+
+            var reputationAjustments = new Dictionary<String, Int32>();
+            reputationAjustments["reputable"] = 7;
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.ReputationAdjustments)).Returns(reputationAjustments);
+
+            var character = GenerateCharacter();
+            Assert.That(character.Leadership.LeadershipModifiers, Contains.Item("reputable"));
+            Assert.That(character.Leadership.Score, Is.EqualTo(15));
+        }
+
+        [Test]
+        public void NegativeCharacterReputationAdjustmentIsApplied()
+        {
+            feats.Add(new Feat());
+            feats[0].Name.Id = FeatConstants.LeadershipId;
+
+            ability.Stats[StatConstants.Charisma] = new Stat { Value = 16 };
+            characterClass.Level = 5;
+
+            mockPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Percentile.Reputation)).Returns("reputable");
+
+            var reputationAjustments = new Dictionary<String, Int32>();
+            reputationAjustments["reputable"] = -4;
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.ReputationAdjustments)).Returns(reputationAjustments);
+
+            var character = GenerateCharacter();
+            Assert.That(character.Leadership.LeadershipModifiers, Contains.Item("reputable"));
+            Assert.That(character.Leadership.Score, Is.EqualTo(4));
+        }
+
+        [Test]
+        public void GenerateFactorsThatAffectAttractingCohorts()
+        {
+            throw new NotImplementedException();
+        }
+
+        [Test]
+        public void GenerateFactorsThatAffectAttractingFollowers()
         {
             throw new NotImplementedException();
         }
@@ -376,6 +465,48 @@ namespace NPCGen.Tests.Unit.Generators
 
         [Test]
         public void CohortLevelIs1LessThanCharacterLeadershipScore()
+        {
+            throw new NotImplementedException();
+        }
+
+        [Test]
+        public void CohortLevelIs2LessThanCharacterLevel()
+        {
+            throw new NotImplementedException();
+        }
+
+        [Test]
+        public void CohortLevelIsLimitedByLeadershipScoreIfLower()
+        {
+            throw new NotImplementedException();
+        }
+
+        [Test]
+        public void CohortLevelIsLimitedByCharacterLevelIfLower()
+        {
+            throw new NotImplementedException();
+        }
+
+        [Test]
+        public void CohortCannotOpposeAlignmentGoodness()
+        {
+            throw new NotImplementedException();
+        }
+
+        [Test]
+        public void CohortCannotOpposeAlignmentLawfulness()
+        {
+            throw new NotImplementedException();
+        }
+
+        [Test]
+        public void AttractCohortOfSameAlignment()
+        {
+            throw new NotImplementedException();
+        }
+
+        [Test]
+        public void AttractCohortOfDifferingAlignment()
         {
             throw new NotImplementedException();
         }
@@ -400,6 +531,18 @@ namespace NPCGen.Tests.Unit.Generators
 
         [Test]
         public void FollowersCannotReceiveFollowers()
+        {
+            throw new NotImplementedException();
+        }
+
+        [Test]
+        public void FollowersCannotOpposeAlignmentGoodness()
+        {
+            throw new NotImplementedException();
+        }
+
+        [Test]
+        public void FollowersCannotOpposeAlignmentLawfulness()
         {
             throw new NotImplementedException();
         }

@@ -21,6 +21,7 @@ namespace NPCGen.Tests.Unit.Common
             Assert.That(leadership.Cohort, Is.Null);
             Assert.That(leadership.Followers, Is.Empty);
             Assert.That(leadership.Score, Is.EqualTo(0));
+            Assert.That(leadership.LeadershipModifiers, Is.Empty);
         }
     }
 }

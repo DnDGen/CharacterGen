@@ -22,6 +22,7 @@ namespace NPCGen.Tables.Interfaces
                 public const String RacialBaseAttackAdjustments = "RacialBaseAttackAdjustments";
                 public const String RacialInitiativeBonuses = "RacialInitiativeBonuses";
                 public const String RacialNaturalArmorBonuses = "RacialNaturalArmorBonuses";
+                public const String ReputationAdjustments = "ReputationAdjustments";
                 public const String SkillPointsForClasses = "SkillPointsForClasses";
                 public const String SpecialistFieldQuantities = "SpecialistFieldQuantities";
             }
@@ -55,6 +56,7 @@ namespace NPCGen.Tables.Interfaces
             public static class Percentile
             {
                 public const String AlignmentGoodness = "AlignmentGoodness";
+                public const String Reputation = "Reputation";
                 public const String Traits = "Traits";
             }
 
