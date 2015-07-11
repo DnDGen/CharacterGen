@@ -570,7 +570,22 @@ namespace NPCGen.Tests.Unit.Generators
         [Test]
         public void GenerateFactorsThatAffectAttractingCohorts()
         {
-            throw new NotImplementedException();
+            feats.Add(new Feat());
+            feats[0].Name.Id = FeatConstants.LeadershipId;
+
+            ability.Stats[StatConstants.Charisma] = new Stat { Value = 16 };
+            characterClass.Level = 5;
+
+            //set up the factors
+
+            mockLeadershipSelector.Setup(s => s.SelectCohortLevelFor(8)).Returns(2);
+
+            var character = GenerateCharacter();
+            Assert.That(character.Leadership.Score, Is.EqualTo(8));
+            Assert.That(character.Leadership.Cohort, Is.Not.Null);
+            mockCharacterClassGenerator.Verify(g => g.GenerateWith(It.IsAny<Alignment>(), It.IsAny<ILevelRandomizer>(), It.IsAny<IClassNameRandomizer>()), Times.Exactly(2));
+            mockCharacterClassGenerator.Verify(g => g.GenerateWith(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object), Times.Once);
+            mockCharacterClassGenerator.Verify(g => g.GenerateWith(It.IsAny<Alignment>(), It.Is<ISetLevelRandomizer>(r => r.SetLevel == 2), mockAnyClassNameRandomizer.Object), Times.Once);
         }
 
         [Test]
