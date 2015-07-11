@@ -56,6 +56,7 @@ namespace NPCGen.Tables.Interfaces
             public static class Percentile
             {
                 public const String AlignmentGoodness = "AlignmentGoodness";
+                public const String KilledCohort = "KilledCohort";
                 public const String Reputation = "Reputation";
                 public const String Traits = "Traits";
             }

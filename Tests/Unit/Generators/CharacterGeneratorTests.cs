@@ -55,6 +55,7 @@ namespace NPCGen.Tests.Unit.Generators
         private Mock<IBaseRaceRandomizer> mockAnyBaseRaceRandomizer;
         private Mock<IMetaraceRandomizer> mockAnyMetaraceRandomizer;
         private Mock<IStatsRandomizer> mockRawStatRandomizer;
+        private Mock<IBooleanPercentileSelector> mockBooleanPercentileSelector;
         private ICharacterGenerator characterGenerator;
 
         private Mock<IAlignmentRandomizer> mockAlignmentRandomizer;
@@ -89,6 +90,7 @@ namespace NPCGen.Tests.Unit.Generators
             mockLeadershipSelector = new Mock<ILeadershipSelector>();
             mockSetLevelRandomizer = new Mock<ISetLevelRandomizer>();
             mockSetAlignmentRandomizer = new Mock<ISetAlignmentRandomizer>();
+            mockBooleanPercentileSelector = new Mock<IBooleanPercentileSelector>();
             followerQuantities = new FollowerQuantities();
 
             levelAdjustments[BaseRaceId] = 0;
@@ -568,7 +570,27 @@ namespace NPCGen.Tests.Unit.Generators
         }
 
         [Test]
-        public void GenerateFactorsThatAffectAttractingCohorts()
+        public void FamiliarsDecreaseScoreOfAttractingCohorts()
+        {
+            feats.Add(new Feat());
+            feats[0].Name.Id = FeatConstants.LeadershipId;
+
+            ability.Stats[StatConstants.Charisma] = new Stat { Value = 16 };
+            characterClass.Level = 5;
+            magic.Familiar.Animal = "animal";
+
+            mockLeadershipSelector.Setup(s => s.SelectCohortLevelFor(6)).Returns(2);
+
+            var character = GenerateCharacter();
+            Assert.That(character.Leadership.Score, Is.EqualTo(8));
+            Assert.That(character.Leadership.Cohort, Is.Not.Null);
+            mockCharacterClassGenerator.Verify(g => g.GenerateWith(It.IsAny<Alignment>(), It.IsAny<ILevelRandomizer>(), It.IsAny<IClassNameRandomizer>()), Times.Exactly(2));
+            mockCharacterClassGenerator.Verify(g => g.GenerateWith(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object), Times.Once);
+            mockCharacterClassGenerator.Verify(g => g.GenerateWith(It.IsAny<Alignment>(), It.Is<ISetLevelRandomizer>(r => r.SetLevel == 2), mockAnyClassNameRandomizer.Object), Times.Once);
+        }
+
+        [Test]
+        public void KillingCohortsDecreasesScoreOfAttractingCohorts()
         {
             feats.Add(new Feat());
             feats[0].Name.Id = FeatConstants.LeadershipId;
@@ -576,9 +598,29 @@ namespace NPCGen.Tests.Unit.Generators
             ability.Stats[StatConstants.Charisma] = new Stat { Value = 16 };
             characterClass.Level = 5;
 
-            //set up the factors
+            mockBooleanPercentileSelector.SetupSequence(s => s.SelectFrom(TableNameConstants.Set.Percentile.KilledCohort)).Returns(true).Returns(false);
+            mockLeadershipSelector.Setup(s => s.SelectCohortLevelFor(6)).Returns(2);
 
-            mockLeadershipSelector.Setup(s => s.SelectCohortLevelFor(8)).Returns(2);
+            var character = GenerateCharacter();
+            Assert.That(character.Leadership.Score, Is.EqualTo(8));
+            Assert.That(character.Leadership.Cohort, Is.Not.Null);
+            mockCharacterClassGenerator.Verify(g => g.GenerateWith(It.IsAny<Alignment>(), It.IsAny<ILevelRandomizer>(), It.IsAny<IClassNameRandomizer>()), Times.Exactly(2));
+            mockCharacterClassGenerator.Verify(g => g.GenerateWith(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object), Times.Once);
+            mockCharacterClassGenerator.Verify(g => g.GenerateWith(It.IsAny<Alignment>(), It.Is<ISetLevelRandomizer>(r => r.SetLevel == 2), mockAnyClassNameRandomizer.Object), Times.Once);
+        }
+
+        [Test]
+        public void KillingMultipleCohortsDecreasesScoreOfAttractingCohorts()
+        {
+            feats.Add(new Feat());
+            feats[0].Name.Id = FeatConstants.LeadershipId;
+
+            ability.Stats[StatConstants.Charisma] = new Stat { Value = 16 };
+            characterClass.Level = 5;
+
+            mockBooleanPercentileSelector.SetupSequence(s => s.SelectFrom(TableNameConstants.Set.Percentile.KilledCohort))
+                .Returns(true).Returns(true).Returns(false);
+            mockLeadershipSelector.Setup(s => s.SelectCohortLevelFor(4)).Returns(2);
 
             var character = GenerateCharacter();
             Assert.That(character.Leadership.Score, Is.EqualTo(8));
