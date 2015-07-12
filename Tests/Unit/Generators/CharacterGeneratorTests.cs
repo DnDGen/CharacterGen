@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Moq;
 using NPCGen.Common;
 using NPCGen.Common.Abilities;
@@ -51,11 +52,13 @@ namespace NPCGen.Tests.Unit.Generators
         private Mock<IMagicGenerator> mockMagicGenerator;
         private Mock<ISetLevelRandomizer> mockSetLevelRandomizer;
         private Mock<ISetAlignmentRandomizer> mockSetAlignmentRandomizer;
+        private Mock<IAlignmentRandomizer> mockAnyAlignmentRandomizer;
         private Mock<IClassNameRandomizer> mockAnyClassNameRandomizer;
         private Mock<IBaseRaceRandomizer> mockAnyBaseRaceRandomizer;
         private Mock<IMetaraceRandomizer> mockAnyMetaraceRandomizer;
         private Mock<IStatsRandomizer> mockRawStatRandomizer;
         private Mock<IBooleanPercentileSelector> mockBooleanPercentileSelector;
+        private Mock<ICollectionsSelector> mockCollectionsSelector;
         private ICharacterGenerator characterGenerator;
 
         private Mock<IAlignmentRandomizer> mockAlignmentRandomizer;
@@ -91,6 +94,7 @@ namespace NPCGen.Tests.Unit.Generators
             mockSetLevelRandomizer = new Mock<ISetLevelRandomizer>();
             mockSetAlignmentRandomizer = new Mock<ISetAlignmentRandomizer>();
             mockBooleanPercentileSelector = new Mock<IBooleanPercentileSelector>();
+            mockCollectionsSelector = new Mock<ICollectionsSelector>();
             followerQuantities = new FollowerQuantities();
 
             levelAdjustments[BaseRaceId] = 0;
@@ -123,6 +127,7 @@ namespace NPCGen.Tests.Unit.Generators
             mockMetaraceRandomizer = new Mock<IMetaraceRandomizer>();
 
             mockSetAlignmentRandomizer = new Mock<ISetAlignmentRandomizer>();
+            mockAnyAlignmentRandomizer = new Mock<IAlignmentRandomizer>();
             mockSetLevelRandomizer = new Mock<ISetLevelRandomizer>();
             mockAnyClassNameRandomizer = new Mock<IClassNameRandomizer>();
             mockAnyBaseRaceRandomizer = new Mock<IBaseRaceRandomizer>();
@@ -397,40 +402,6 @@ namespace NPCGen.Tests.Unit.Generators
         }
 
         [Test]
-        public void IfLeadershipScoreIs1_NoCohort()
-        {
-            feats.Add(new Feat());
-            feats[0].Name.Id = FeatConstants.LeadershipId;
-
-            ability.Stats[StatConstants.Charisma] = new Stat { Value = 10 };
-            characterClass.Level = 1;
-
-            var character = GenerateCharacter();
-            Assert.That(character.Leadership.Score, Is.EqualTo(1));
-            Assert.That(character.Leadership.IsFollower, Is.False);
-            Assert.That(character.Leadership.Cohort, Is.Null);
-            Assert.That(character.Leadership.Followers, Is.Empty);
-            Assert.That(character.Leadership.Score, Is.EqualTo(0));
-        }
-
-        [Test]
-        public void IfLeadershipScoreIsLessThan1_NoCohort()
-        {
-            feats.Add(new Feat());
-            feats[0].Name.Id = FeatConstants.LeadershipId;
-
-            ability.Stats[StatConstants.Charisma] = new Stat { Value = 9 };
-            characterClass.Level = 1;
-
-            var character = GenerateCharacter();
-            Assert.That(character.Leadership.Score, Is.EqualTo(0));
-            Assert.That(character.Leadership.IsFollower, Is.False);
-            Assert.That(character.Leadership.Cohort, Is.Null);
-            Assert.That(character.Leadership.Followers, Is.Empty);
-            Assert.That(character.Leadership.Score, Is.EqualTo(0));
-        }
-
-        [Test]
         public void CharacterReputationGenerated()
         {
             feats.Add(new Feat());
@@ -598,12 +569,13 @@ namespace NPCGen.Tests.Unit.Generators
             ability.Stats[StatConstants.Charisma] = new Stat { Value = 16 };
             characterClass.Level = 5;
 
-            mockBooleanPercentileSelector.SetupSequence(s => s.SelectFrom(TableNameConstants.Set.Percentile.KilledCohort)).Returns(true).Returns(false);
+            mockBooleanPercentileSelector.SetupSequence(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.KilledCohort)).Returns(true).Returns(false);
             mockLeadershipSelector.Setup(s => s.SelectCohortLevelFor(6)).Returns(2);
 
             var character = GenerateCharacter();
             Assert.That(character.Leadership.Score, Is.EqualTo(8));
             Assert.That(character.Leadership.Cohort, Is.Not.Null);
+            Assert.That(character.Leadership.LeadershipModifiers, Contains.Item("Caused the death of 1 cohort(s)"));
             mockCharacterClassGenerator.Verify(g => g.GenerateWith(It.IsAny<Alignment>(), It.IsAny<ILevelRandomizer>(), It.IsAny<IClassNameRandomizer>()), Times.Exactly(2));
             mockCharacterClassGenerator.Verify(g => g.GenerateWith(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object), Times.Once);
             mockCharacterClassGenerator.Verify(g => g.GenerateWith(It.IsAny<Alignment>(), It.Is<ISetLevelRandomizer>(r => r.SetLevel == 2), mockAnyClassNameRandomizer.Object), Times.Once);
@@ -618,82 +590,538 @@ namespace NPCGen.Tests.Unit.Generators
             ability.Stats[StatConstants.Charisma] = new Stat { Value = 16 };
             characterClass.Level = 5;
 
-            mockBooleanPercentileSelector.SetupSequence(s => s.SelectFrom(TableNameConstants.Set.Percentile.KilledCohort))
+            mockBooleanPercentileSelector.SetupSequence(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.KilledCohort))
                 .Returns(true).Returns(true).Returns(false);
             mockLeadershipSelector.Setup(s => s.SelectCohortLevelFor(4)).Returns(2);
 
             var character = GenerateCharacter();
             Assert.That(character.Leadership.Score, Is.EqualTo(8));
             Assert.That(character.Leadership.Cohort, Is.Not.Null);
+            Assert.That(character.Leadership.LeadershipModifiers, Contains.Item("Caused the death of 2 cohort(s)"));
             mockCharacterClassGenerator.Verify(g => g.GenerateWith(It.IsAny<Alignment>(), It.IsAny<ILevelRandomizer>(), It.IsAny<IClassNameRandomizer>()), Times.Exactly(2));
             mockCharacterClassGenerator.Verify(g => g.GenerateWith(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object), Times.Once);
             mockCharacterClassGenerator.Verify(g => g.GenerateWith(It.IsAny<Alignment>(), It.Is<ISetLevelRandomizer>(r => r.SetLevel == 2), mockAnyClassNameRandomizer.Object), Times.Once);
         }
 
         [Test]
-        public void CohortCannotOpposeAlignmentGoodness()
+        public void CohortCannotOpposeAlignment()
         {
-            throw new NotImplementedException();
-        }
+            feats.Add(new Feat());
+            feats[0].Name.Id = FeatConstants.LeadershipId;
 
-        [Test]
-        public void CohortCannotOpposeAlignmentLawfulness()
-        {
-            throw new NotImplementedException();
+            ability.Stats[StatConstants.Charisma] = new Stat { Value = 16 };
+            characterClass.Level = 5;
+            alignment.Goodness = "goodness";
+            alignment.Lawfulness = "lawfulness";
+
+            var incompatibleAlignment1 = new Alignment();
+            var incompatibleAlignment2 = new Alignment();
+            var incompatibleAlignment3 = new Alignment();
+            var cohortAlignment = new Alignment();
+
+            incompatibleAlignment1.Goodness = "wrong goodness";
+            incompatibleAlignment1.Lawfulness = "lawfulness";
+            incompatibleAlignment2.Goodness = "goodness";
+            incompatibleAlignment2.Lawfulness = "wrong lawfulness";
+            incompatibleAlignment3.Goodness = "wrong goodness";
+            incompatibleAlignment3.Lawfulness = "wrong lawfulness";
+            cohortAlignment.Goodness = "cohort goodness";
+            cohortAlignment.Lawfulness = "cohort lawfulness";
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AlignmentGroups, alignment.ToString()))
+                .Returns(new[] { "goodness lawfulness", "cohort goodness cohort lawfulness" });
+
+            mockAlignmentGenerator.SetupSequence(g => g.GenerateWith(mockSetAlignmentRandomizer.Object))
+                .Returns(incompatibleAlignment1).Returns(incompatibleAlignment3).Returns(incompatibleAlignment2).Returns(cohortAlignment);
+
+            var character = GenerateCharacter();
+            Assert.That(character.Leadership.Cohort, Is.Not.Null);
+
+            var cohort = character.Leadership.Cohort;
+            Assert.That(cohort.Alignment, Is.EqualTo(cohortAlignment));
         }
 
         [Test]
         public void AttractCohortOfSameAlignment()
         {
-            throw new NotImplementedException();
+            feats.Add(new Feat());
+            feats[0].Name.Id = FeatConstants.LeadershipId;
+
+            ability.Stats[StatConstants.Charisma] = new Stat { Value = 16 };
+            characterClass.Level = 5;
+            alignment.Goodness = "goodness";
+            alignment.Lawfulness = "lawfulness";
+
+            mockLeadershipSelector.Setup(s => s.SelectCohortLevelFor(8)).Returns(4);
+            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AttractCohortOfDifferentAlignment)).Returns(false);
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AlignmentGroups, alignment.ToString()))
+                .Returns(new[] { "goodness lawfulness" });
+
+            var cohortAlignment = new Alignment();
+            mockAlignmentGenerator.Setup(g => g.GenerateWith(mockSetAlignmentRandomizer.Object)).Returns(cohortAlignment);
+
+            var character = GenerateCharacter();
+            Assert.That(character.Leadership.Cohort, Is.Not.Null);
+
+            var setAlignmentRandomizer = mockSetAlignmentRandomizer.Object;
+            Assert.That(setAlignmentRandomizer.SetAlignment, Is.EqualTo(alignment));
+
+            var cohort = character.Leadership.Cohort;
+            Assert.That(cohort.Alignment, Is.EqualTo(cohortAlignment));
         }
 
         [Test]
         public void AttractCohortOfDifferingAlignment()
         {
-            throw new NotImplementedException();
+            feats.Add(new Feat());
+            feats[0].Name.Id = FeatConstants.LeadershipId;
+
+            ability.Stats[StatConstants.Charisma] = new Stat { Value = 16 };
+            characterClass.Level = 5;
+
+            mockLeadershipSelector.Setup(s => s.SelectCohortLevelFor(7)).Returns(4);
+            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AttractCohortOfDifferentAlignment)).Returns(true);
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AlignmentGroups, alignment.ToString()))
+                .Returns(new[] { "goodness lawfulness", "different alignment" });
+
+            var cohortAlignment = new Alignment();
+            cohortAlignment.Goodness = "different";
+            cohortAlignment.Lawfulness = "alignment";
+            mockAlignmentGenerator.Setup(g => g.GenerateWith(mockAnyAlignmentRandomizer.Object)).Returns(cohortAlignment);
+
+            var character = GenerateCharacter();
+            Assert.That(character.Leadership.Cohort, Is.Not.Null);
+
+            var cohort = character.Leadership.Cohort;
+            Assert.That(cohort.Alignment, Is.EqualTo(cohortAlignment));
+        }
+
+        [Test]
+        public void IfSelectedCohortLevelIs0_DoNotGenerateCohort()
+        {
+            feats.Add(new Feat());
+            feats[0].Name.Id = FeatConstants.LeadershipId;
+
+            ability.Stats[StatConstants.Charisma] = new Stat { Value = 16 };
+            characterClass.Level = 5;
+
+            mockLeadershipSelector.Setup(s => s.SelectCohortLevelFor(8)).Returns(0);
+
+            var character = GenerateCharacter();
+            Assert.That(character.Leadership.Score, Is.EqualTo(8));
+            Assert.That(character.Leadership.Cohort, Is.Null);
         }
 
         [Test]
         public void CohortsCannotReceiveFollowers()
         {
-            throw new NotImplementedException();
+            feats.Add(new Feat());
+            feats[0].Name.Id = FeatConstants.LeadershipId;
+
+            ability.Stats[StatConstants.Charisma] = new Stat { Value = 16 };
+            characterClass.Level = 5;
+
+            mockLeadershipSelector.Setup(s => s.SelectCohortLevelFor(8)).Returns(4);
+
+            var cohortAlignment = new Alignment();
+            var cohortClass = characterClass;
+            var cohortRace = new Race();
+            var cohortAbility = new Ability();
+
+            cohortAbility.Feats = feats;
+            cohortAbility.Stats = ability.Stats;
+
+            mockAlignmentGenerator.Setup(g => g.GenerateWith(mockSetAlignmentRandomizer.Object)).Returns(cohortAlignment);
+            mockCharacterClassGenerator.Setup(g => g.GenerateWith(cohortAlignment, It.Is<ISetLevelRandomizer>(r => r.SetLevel == 3), mockAnyClassNameRandomizer.Object)).Returns(cohortClass);
+            mockRaceGenerator.Setup(g => g.GenerateWith(cohortAlignment, cohortClass, mockAnyBaseRaceRandomizer.Object, mockAnyMetaraceRandomizer.Object)).Returns(cohortRace);
+            mockAbilitiesGenerator.Setup(g => g.GenerateWith(cohortClass, cohortRace, mockRawStatRandomizer.Object, It.IsAny<BaseAttack>())).Returns(cohortAbility);
+
+            var character = GenerateCharacter();
+            Assert.That(character.Leadership.Cohort, Is.Not.Null);
+
+            var cohort = character.Leadership.Cohort;
+            Assert.That(cohort.Ability, Is.EqualTo(cohortAbility));
+            Assert.That(cohort.Leadership.IsFollower, Is.True);
+            Assert.That(cohort.Leadership.Cohort, Is.Null);
+            Assert.That(cohort.Leadership.Followers, Is.Empty);
+            Assert.That(cohort.Leadership.LeadershipModifiers, Is.Empty);
+            Assert.That(cohort.Leadership.Score, Is.EqualTo(0));
         }
 
         [Test]
         public void FollowersGenerated()
         {
-            throw new NotImplementedException();
+            feats.Add(new Feat());
+            feats[0].Name.Id = FeatConstants.LeadershipId;
+
+            ability.Stats[StatConstants.Charisma] = new Stat { Value = 16 };
+            characterClass.Level = 5;
+
+            followerQuantities.Level1 = 6;
+            followerQuantities.Level2 = 5;
+            followerQuantities.Level3 = 4;
+            followerQuantities.Level4 = 3;
+            followerQuantities.Level5 = 2;
+            followerQuantities.Level6 = 1;
+            mockLeadershipSelector.Setup(s => s.SelectFollowerQuantitiesFor(8)).Returns(followerQuantities);
+
+            var character = GenerateCharacter();
+            Assert.That(character.Leadership.IsFollower, Is.False);
+            Assert.That(character.Leadership.Followers.Count(), Is.EqualTo(21));
+
+            foreach (var follower in character.Leadership.Followers)
+            {
+                Assert.That(follower.Leadership.IsFollower, Is.True);
+                Assert.That(follower.Leadership.Cohort, Is.Null);
+                Assert.That(follower.Leadership.Followers, Is.Empty);
+                Assert.That(follower.Leadership.Score, Is.EqualTo(0));
+            }
         }
 
         [Test]
         public void FollowersGeneratedIndependently()
         {
-            throw new NotImplementedException();
+            feats.Add(new Feat());
+            feats[0].Name.Id = FeatConstants.LeadershipId;
+
+            ability.Stats[StatConstants.Charisma] = new Stat { Value = 16 };
+            characterClass.Level = 5;
+
+            followerQuantities.Level1 = 2;
+            followerQuantities.Level2 = 2;
+            followerQuantities.Level3 = 2;
+            followerQuantities.Level4 = 2;
+            followerQuantities.Level5 = 2;
+            followerQuantities.Level6 = 2;
+            mockLeadershipSelector.Setup(s => s.SelectFollowerQuantitiesFor(8)).Returns(followerQuantities);
+
+            var followerAlignments = new List<Alignment>();
+            var followerAlignmentSequence = mockAlignmentGenerator.SetupSequence(g => g.GenerateWith(mockAnyAlignmentRandomizer.Object));
+
+            while (followerAlignments.Count < 12)
+            {
+                var followerAlignment = new Alignment();
+                followerAlignment.Goodness = followerAlignments.Count.ToString();
+                followerAlignment.Lawfulness = "alignment";
+
+                followerAlignments.Add(followerAlignment);
+                followerAlignmentSequence = followerAlignmentSequence.Returns(followerAlignment);
+            }
+
+            var followerClasses = new List<CharacterClass>();
+            for (var i = 0; i < followerAlignments.Count; i++)
+            {
+                var followerClass = new CharacterClass();
+                followerClass.Level = i / 2 + 1;
+
+                followerClasses.Add(followerClass);
+                mockCharacterClassGenerator.Setup(g => g.GenerateWith(followerAlignments[i], It.Is<ISetLevelRandomizer>(r => r.SetLevel == followerClass.Level), mockAnyClassNameRandomizer.Object))
+                    .Returns(followerClass);
+            }
+
+            var followerRaces = new List<Race>();
+            for (var i = 0; i < followerAlignments.Count; i++)
+            {
+                var followerRace = new Race();
+
+                followerRaces.Add(followerRace);
+                mockRaceGenerator.Setup(g => g.GenerateWith(followerAlignments[i], followerClasses[i], mockAnyBaseRaceRandomizer.Object, mockAnyMetaraceRandomizer.Object))
+                    .Returns(followerRace);
+            }
+
+            var followerBaseAttacks = new List<BaseAttack>();
+            for (var i = 0; i < followerAlignments.Count; i++)
+            {
+                var followerBaseAttack = new BaseAttack();
+
+                followerBaseAttacks.Add(followerBaseAttack);
+                mockCombatGenerator.Setup(g => g.GenerateBaseAttackWith(followerClasses[i], followerRaces[i]))
+                    .Returns(followerBaseAttack);
+            }
+
+            var followerAbilities = new List<Ability>();
+            for (var i = 0; i < followerAlignments.Count; i++)
+            {
+                var followerAbility = new Ability();
+
+                followerAbilities.Add(followerAbility);
+                mockAbilitiesGenerator.Setup(g => g.GenerateWith(followerClasses[i], followerRaces[i], mockRawStatRandomizer.Object, followerBaseAttacks[i]))
+                    .Returns(followerAbility);
+            }
+
+            var followerEquipments = new List<Equipment>();
+            for (var i = 0; i < followerAlignments.Count; i++)
+            {
+                var followerEquipment = new Equipment();
+
+                followerEquipments.Add(followerEquipment);
+                mockEquipmentGenerator.Setup(g => g.GenerateWith(followerAbilities[i].Feats, followerClasses[i]))
+                    .Returns(followerEquipment);
+            }
+
+            var followerCombats = new List<Combat>();
+            for (var i = 0; i < followerAlignments.Count; i++)
+            {
+                var followerCombat = new Combat();
+
+                followerCombats.Add(followerCombat);
+                mockCombatGenerator.Setup(g => g.GenerateWith(followerBaseAttacks[i], followerClasses[i], followerRaces[i], followerAbilities[i].Feats, followerAbilities[i].Stats, followerEquipments[i]))
+                    .Returns(followerCombat);
+            }
+
+            var followerMagics = new List<Magic>();
+            for (var i = 0; i < followerAlignments.Count; i++)
+            {
+                var followerMagic = new Magic();
+
+                followerMagics.Add(followerMagic);
+                mockMagicGenerator.Setup(g => g.GenerateWith(followerClasses[i], followerAbilities[i].Feats, followerEquipments[i]))
+                    .Returns(followerMagic);
+            }
+
+            var followerTraitSequence = mockPercentileSelector.SetupSequence(s => s.SelectFrom(TableNameConstants.Set.Percentile.Traits)).Returns("character is interesting");
+            for (var i = 0; i < followerAlignments.Count; i++)
+                followerTraitSequence = followerTraitSequence.Returns(i.ToString());
+
+            var character = GenerateCharacter();
+            Assert.That(character.Leadership.Cohort, Is.Not.Null);
+
+            for (var i = 0; i < character.Leadership.Followers.Count(); i++)
+            {
+                var follower = character.Leadership.Followers.ElementAt(i);
+
+                Assert.That(follower.Alignment, Is.EqualTo(followerAlignments[i]));
+                Assert.That(follower.Class, Is.EqualTo(followerClasses[i]));
+                Assert.That(follower.Race, Is.EqualTo(followerRaces[i]));
+                Assert.That(follower.Ability, Is.EqualTo(followerAbilities[i]));
+                Assert.That(follower.Combat, Is.EqualTo(followerCombats[i]));
+                Assert.That(follower.Equipment, Is.EqualTo(followerEquipments[i]));
+                Assert.That(follower.InterestingTrait, Is.EqualTo(i.ToString()));
+                Assert.That(follower.Magic, Is.EqualTo(followerMagics[i]));
+            }
         }
 
         [Test]
-        public void GenerateFactorsThatAffectAttractingFollowers()
+        public void GenerateLeadershipMovementFactorsAndApplyThem()
         {
-            throw new NotImplementedException();
+            feats.Add(new Feat());
+            feats[0].Name.Id = FeatConstants.LeadershipId;
+
+            ability.Stats[StatConstants.Charisma] = new Stat { Value = 16 };
+            characterClass.Level = 5;
+
+            mockPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Percentile.LeadershipMovement)).Returns("moves");
+
+            var leadershipAdjustments = new Dictionary<String, Int32>();
+            leadershipAdjustments["moves"] = 9266;
+            leadershipAdjustments["murders"] = -5;
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.LeadershipModifiers)).Returns(leadershipAdjustments);
+
+            followerQuantities.Level1 = 6;
+            followerQuantities.Level2 = 5;
+            followerQuantities.Level3 = 4;
+            followerQuantities.Level4 = 3;
+            followerQuantities.Level5 = 2;
+            followerQuantities.Level6 = 1;
+            mockLeadershipSelector.Setup(s => s.SelectFollowerQuantitiesFor(9274)).Returns(followerQuantities);
+
+            var character = GenerateCharacter();
+            Assert.That(character.Leadership.IsFollower, Is.False);
+            Assert.That(character.Leadership.Followers.Count(), Is.EqualTo(21));
+        }
+
+        [Test]
+        public void CharacterDoesNotHaveEmptyLeadershipModifiers()
+        {
+            feats.Add(new Feat());
+            feats[0].Name.Id = FeatConstants.LeadershipId;
+
+            ability.Stats[StatConstants.Charisma] = new Stat { Value = 16 };
+            characterClass.Level = 5;
+
+            mockPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Percentile.LeadershipMovement)).Returns(String.Empty);
+
+            followerQuantities.Level1 = 6;
+            followerQuantities.Level2 = 5;
+            followerQuantities.Level3 = 4;
+            followerQuantities.Level4 = 3;
+            followerQuantities.Level5 = 2;
+            followerQuantities.Level6 = 1;
+            mockLeadershipSelector.Setup(s => s.SelectFollowerQuantitiesFor(8)).Returns(followerQuantities);
+
+            var character = GenerateCharacter();
+            Assert.That(character.Leadership.IsFollower, Is.False);
+            Assert.That(character.Leadership.Followers.Count(), Is.EqualTo(21));
+            Assert.That(character.Leadership.LeadershipModifiers, Is.Empty);
+        }
+
+        [Test]
+        public void GenerateWhetherCharacterHasCausedFollowerDeathsAndApply()
+        {
+            feats.Add(new Feat());
+            feats[0].Name.Id = FeatConstants.LeadershipId;
+
+            ability.Stats[StatConstants.Charisma] = new Stat { Value = 16 };
+            characterClass.Level = 5;
+
+            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.KilledFollowers)).Returns(true);
+
+            followerQuantities.Level1 = 6;
+            followerQuantities.Level2 = 5;
+            followerQuantities.Level3 = 4;
+            followerQuantities.Level4 = 3;
+            followerQuantities.Level5 = 2;
+            followerQuantities.Level6 = 1;
+            mockLeadershipSelector.Setup(s => s.SelectFollowerQuantitiesFor(7)).Returns(followerQuantities);
+
+            var character = GenerateCharacter();
+            Assert.That(character.Leadership.IsFollower, Is.False);
+            Assert.That(character.Leadership.Followers.Count(), Is.EqualTo(21));
         }
 
         [Test]
         public void FollowersCannotReceiveFollowers()
         {
-            throw new NotImplementedException();
+            feats.Add(new Feat());
+            feats[0].Name.Id = FeatConstants.LeadershipId;
+
+            ability.Stats[StatConstants.Charisma] = new Stat { Value = 16 };
+            characterClass.Level = 5;
+
+            followerQuantities.Level1 = 2;
+            followerQuantities.Level2 = 2;
+            followerQuantities.Level3 = 2;
+            followerQuantities.Level4 = 2;
+            followerQuantities.Level5 = 2;
+            followerQuantities.Level6 = 2;
+            mockLeadershipSelector.Setup(s => s.SelectFollowerQuantitiesFor(8)).Returns(followerQuantities);
+
+            var followerAlignments = new List<Alignment>();
+            var followerAlignmentSequence = mockAlignmentGenerator.SetupSequence(g => g.GenerateWith(mockAnyAlignmentRandomizer.Object));
+
+            while (followerAlignments.Count < 12)
+            {
+                var followerAlignment = new Alignment();
+                followerAlignment.Goodness = followerAlignments.Count.ToString();
+                followerAlignment.Lawfulness = "alignment";
+
+                followerAlignments.Add(followerAlignment);
+                followerAlignmentSequence = followerAlignmentSequence.Returns(followerAlignment);
+            }
+
+            var followerClasses = new List<CharacterClass>();
+            for (var i = 0; i < followerAlignments.Count; i++)
+            {
+                var followerClass = new CharacterClass();
+                followerClass.Level = characterClass.Level;
+
+                followerClasses.Add(followerClass);
+                mockCharacterClassGenerator.Setup(g => g.GenerateWith(followerAlignments[i], It.Is<ISetLevelRandomizer>(r => r.SetLevel == followerClass.Level), mockAnyClassNameRandomizer.Object))
+                    .Returns(followerClass);
+            }
+
+            var followerRaces = new List<Race>();
+            for (var i = 0; i < followerAlignments.Count; i++)
+            {
+                var followerRace = new Race();
+
+                followerRaces.Add(followerRace);
+                mockRaceGenerator.Setup(g => g.GenerateWith(followerAlignments[i], followerClasses[i], mockAnyBaseRaceRandomizer.Object, mockAnyMetaraceRandomizer.Object))
+                    .Returns(followerRace);
+            }
+
+            var followerBaseAttacks = new List<BaseAttack>();
+            for (var i = 0; i < followerAlignments.Count; i++)
+            {
+                var followerBaseAttack = new BaseAttack();
+
+                followerBaseAttacks.Add(followerBaseAttack);
+                mockCombatGenerator.Setup(g => g.GenerateBaseAttackWith(followerClasses[i], followerRaces[i]))
+                    .Returns(followerBaseAttack);
+            }
+
+            var followerAbilities = new List<Ability>();
+            for (var i = 0; i < followerAlignments.Count; i++)
+            {
+                var followerAbility = new Ability();
+                followerAbility.Feats = feats;
+                followerAbility.Stats = ability.Stats;
+
+                followerAbilities.Add(followerAbility);
+                mockAbilitiesGenerator.Setup(g => g.GenerateWith(followerClasses[i], followerRaces[i], mockRawStatRandomizer.Object, followerBaseAttacks[i]))
+                    .Returns(followerAbility);
+            }
+
+            var character = GenerateCharacter();
+            Assert.That(character.Leadership.Followers.Count(), Is.EqualTo(12));
+
+            for (var i = 0; i < character.Leadership.Followers.Count(); i++)
+            {
+                var follower = character.Leadership.Followers.ElementAt(i);
+
+                Assert.That(follower.Leadership.Score, Is.EqualTo(0));
+                Assert.That(follower.Leadership.IsFollower, Is.True);
+                Assert.That(follower.Leadership.Cohort, Is.Null);
+                Assert.That(follower.Leadership.Followers, Is.Empty);
+                Assert.That(follower.Leadership.LeadershipModifiers, Is.Empty);
+            }
         }
 
         [Test]
-        public void FollowersCannotOpposeAlignmentGoodness()
+        public void FollowersCannotOpposeAlignment()
         {
-            throw new NotImplementedException();
-        }
+            feats.Add(new Feat());
+            feats[0].Name.Id = FeatConstants.LeadershipId;
 
-        [Test]
-        public void FollowersCannotOpposeAlignmentLawfulness()
-        {
-            throw new NotImplementedException();
+            ability.Stats[StatConstants.Charisma] = new Stat { Value = 16 };
+            characterClass.Level = 5;
+            alignment.Goodness = "goodness";
+            alignment.Lawfulness = "lawfulness";
+
+            followerQuantities.Level1 = 2;
+            followerQuantities.Level2 = 2;
+            followerQuantities.Level3 = 2;
+            followerQuantities.Level4 = 2;
+            followerQuantities.Level5 = 2;
+            followerQuantities.Level6 = 2;
+            mockLeadershipSelector.Setup(s => s.SelectFollowerQuantitiesFor(8)).Returns(followerQuantities);
+
+            var followerAlignments = new List<Alignment>();
+            var followerAlignmentSequence = mockAlignmentGenerator.SetupSequence(g => g.GenerateWith(mockAnyAlignmentRandomizer.Object));
+
+            while (followerAlignments.Count < 12)
+            {
+                var incompatibleAlignment1 = new Alignment();
+                var incompatibleAlignment2 = new Alignment();
+                var incompatibleAlignment3 = new Alignment();
+                var followerAlignment = new Alignment();
+
+                followerAlignment.Goodness = "follower goodness";
+                followerAlignment.Lawfulness = "follower lawfulness";
+                incompatibleAlignment1.Goodness = "wrong goodness";
+                incompatibleAlignment1.Lawfulness = "lawfulness";
+                incompatibleAlignment2.Goodness = "goodness";
+                incompatibleAlignment2.Lawfulness = "wrong lawfulness";
+                incompatibleAlignment3.Goodness = "wrong goodness";
+                incompatibleAlignment3.Lawfulness = "wrong lawfulness";
+
+                followerAlignments.Add(followerAlignment);
+                followerAlignmentSequence = followerAlignmentSequence.Returns(incompatibleAlignment1).Returns(incompatibleAlignment3).Returns(incompatibleAlignment2).Returns(followerAlignment);
+            }
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AlignmentGroups, alignment.ToString()))
+                .Returns(new[] { "goodness lawfulness", "follower goodness follower lawfulness" });
+
+            var character = GenerateCharacter();
+            Assert.That(character.Leadership.Followers.Count(), Is.EqualTo(12));
+
+            for (var i = 0; i < character.Leadership.Followers.Count(); i++)
+            {
+                var follower = character.Leadership.Followers.ElementAt(i);
+                Assert.That(follower.Alignment, Is.EqualTo(followerAlignments[i]));
+            }
         }
     }
 }

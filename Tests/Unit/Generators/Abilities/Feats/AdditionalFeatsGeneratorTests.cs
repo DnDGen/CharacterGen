@@ -637,5 +637,18 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
 
             Assert.That(featIds.Count(), Is.EqualTo(quantity));
         }
+
+        [Test]
+        public void IfBlankFocusGenerated_CannotSelectFeat()
+        {
+            AddFeatSelections(1);
+            additionalFeatSelections[0].FocusType = "focus type";
+
+            mockFeatFocusGenerator.Setup(g => g.GenerateFrom("feat1", "focus type", additionalFeatSelections[0].RequiredFeats, It.IsAny<IEnumerable<Feat>>(), characterClass))
+                .Returns(String.Empty);
+
+            var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
+            Assert.That(feats, Is.Empty);
+        }
     }
 }

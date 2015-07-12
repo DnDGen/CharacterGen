@@ -15,6 +15,7 @@ namespace NPCGen.Tables.Interfaces
                 public const String FeatInitiativeBonuses = "FeatInitiativeBonuses";
                 public const String FighterFeatLevelRequirements = "FighterFeatLevelRequirements";
                 public const String LandSpeeds = "LandSpeeds";
+                public const String LeadershipModifiers = "LeadershipModifiers";
                 public const String LevelAdjustments = "LevelAdjustments";
                 public const String MaxDexterityBonus = "MaxDexterityBonus";
                 public const String MonsterHitDice = "MonsterHitDice";
@@ -30,6 +31,7 @@ namespace NPCGen.Tables.Interfaces
             public static class Collection
             {
                 public const String AdditionalFeatData = "AdditionalFeatData";
+                public const String AlignmentGroups = "AlignmentGroups";
                 public const String ArmorClassModifiers = "ArmorClassModifiers";
                 public const String AutomaticLanguages = "AutomaticLanguages";
                 public const String BaseRaceGroups = "BaseRaceGroups";
@@ -56,7 +58,7 @@ namespace NPCGen.Tables.Interfaces
             public static class Percentile
             {
                 public const String AlignmentGoodness = "AlignmentGoodness";
-                public const String KilledCohort = "KilledCohort";
+                public const String LeadershipMovement = "LeadershipMovement";
                 public const String Reputation = "Reputation";
                 public const String Traits = "Traits";
             }
@@ -64,7 +66,10 @@ namespace NPCGen.Tables.Interfaces
             public static class TrueOrFalse
             {
                 public const String AssignPointToCrossClassSkill = "AssignPointToCrossClassSkill";
+                public const String AttractCohortOfDifferentAlignment = "AttractCohortOfDifferentAlignment";
                 public const String IncreaseFirstPriorityStat = "IncreaseFirstPriorityStat";
+                public const String KilledCohort = "KilledCohort";
+                public const String KilledFollowers = "KilledFollowers";
             }
         }
 

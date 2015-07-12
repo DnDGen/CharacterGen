@@ -31,10 +31,21 @@ namespace NPCGen.Generators
         private IAbilitiesGenerator abilitiesGenerator;
         private ICombatGenerator combatGenerator;
         private IEquipmentGenerator equipmentGenerator;
+        private ISetAlignmentRandomizer setAlignmentRandomizer;
+        private ISetLevelRandomizer setLevelRandomizer;
+        private IAlignmentRandomizer anyAlignmentRandomizer;
+        private IClassNameRandomizer anyClassNameRandomizer;
+        private IBaseRaceRandomizer anyBaseRaceRandomizer;
+        private IMetaraceRandomizer anyMetaraceRandomizer;
+        private IStatsRandomizer rawStatsRandomizer;
+        private IBooleanPercentileSelector booleanPercentileSelector;
 
         public CharacterGenerator(IAlignmentGenerator alignmentGenerator, ICharacterClassGenerator characterClassGenerator, IRaceGenerator raceGenerator,
             IAdjustmentsSelector adjustmentsSelector, IRandomizerVerifier randomizerVerifier, IPercentileSelector percentileSelector,
-            IAbilitiesGenerator abilitiesGenerator, ICombatGenerator combatGenerator, IEquipmentGenerator equipmentGenerator)
+            IAbilitiesGenerator abilitiesGenerator, ICombatGenerator combatGenerator, IEquipmentGenerator equipmentGenerator,
+            ISetAlignmentRandomizer setAlignmentRandomizer, ISetLevelRandomizer setLevelRandomizer, IAlignmentRandomizer anyAlignmentRandomizer,
+            IClassNameRandomizer anyClassNameRandomizer, IBaseRaceRandomizer anyBaseRaceRandomizer, IMetaraceRandomizer anyMetaraceRandomizer,
+            IStatsRandomizer rawStatsRandomizer, IBooleanPercentileSelector booleanPercentileSelector)
         {
             this.alignmentGenerator = alignmentGenerator;
             this.characterClassGenerator = characterClassGenerator;
@@ -46,6 +57,14 @@ namespace NPCGen.Generators
             this.adjustmentsSelector = adjustmentsSelector;
             this.randomizerVerifier = randomizerVerifier;
             this.percentileSelector = percentileSelector;
+            this.setAlignmentRandomizer = setAlignmentRandomizer;
+            this.setLevelRandomizer = setLevelRandomizer;
+            this.anyAlignmentRandomizer = anyAlignmentRandomizer;
+            this.anyClassNameRandomizer = anyClassNameRandomizer;
+            this.anyBaseRaceRandomizer = anyBaseRaceRandomizer;
+            this.anyMetaraceRandomizer = anyMetaraceRandomizer;
+            this.rawStatsRandomizer = rawStatsRandomizer;
+            this.booleanPercentileSelector = booleanPercentileSelector;
         }
 
         public Character GenerateWith(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classNameRandomizer,
