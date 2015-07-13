@@ -643,10 +643,25 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
         public void IfAllFocusGenerated_CannotSelectFeat()
         {
             AddFeatSelections(1);
-            mockFeatFocusGenerator.Setup(g => g.GenerateFrom(additionalFeatSelections[0].FeatId, "focus type", skills)).Returns(ProficiencyConstants.All);
+            additionalFeatSelections[0].FocusType = "focus type";
+
+            mockFeatFocusGenerator.Setup(g => g.GenerateFrom(additionalFeatSelections[0].FeatId, "focus type", additionalFeatSelections[0].RequiredFeats, preselectedFeats, characterClass)).Returns(ProficiencyConstants.All);
 
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             Assert.That(feats, Is.Empty);
+        }
+
+        [Test]
+        public void IfAllFocusGenerated_DoNotTryToSelectFeatAgain()
+        {
+            AddFeatSelections(2);
+            additionalFeatSelections[0].FocusType = "focus type";
+
+            mockFeatFocusGenerator.Setup(g => g.GenerateFrom(additionalFeatSelections[0].FeatId, "focus type", additionalFeatSelections[0].RequiredFeats, preselectedFeats, characterClass)).Returns(ProficiencyConstants.All);
+
+            var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
+            var onlyFeat = feats.Single();
+            Assert.That(onlyFeat.Name.Id, Is.EqualTo(additionalFeatSelections[1].FeatId));
         }
 
         [Test]

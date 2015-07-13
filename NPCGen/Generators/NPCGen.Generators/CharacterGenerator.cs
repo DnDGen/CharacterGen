@@ -12,6 +12,7 @@ using NPCGen.Generators.Interfaces;
 using NPCGen.Generators.Interfaces.Abilities;
 using NPCGen.Generators.Interfaces.Combats;
 using NPCGen.Generators.Interfaces.Items;
+using NPCGen.Generators.Interfaces.Magics;
 using NPCGen.Generators.Interfaces.Randomizers.Alignments;
 using NPCGen.Generators.Interfaces.Randomizers.CharacterClasses;
 using NPCGen.Generators.Interfaces.Randomizers.Races;
@@ -44,6 +45,7 @@ namespace NPCGen.Generators
         private IBooleanPercentileSelector booleanPercentileSelector;
         private ILeadershipSelector leadershipSelector;
         private ICollectionsSelector collectionsSelector;
+        private IMagicGenerator magicGenerator;
 
         public CharacterGenerator(IAlignmentGenerator alignmentGenerator, ICharacterClassGenerator characterClassGenerator, IRaceGenerator raceGenerator,
             IAdjustmentsSelector adjustmentsSelector, IRandomizerVerifier randomizerVerifier, IPercentileSelector percentileSelector,
@@ -51,7 +53,7 @@ namespace NPCGen.Generators
             ISetAlignmentRandomizer setAlignmentRandomizer, ISetLevelRandomizer setLevelRandomizer, IAlignmentRandomizer anyAlignmentRandomizer,
             IClassNameRandomizer anyClassNameRandomizer, IBaseRaceRandomizer anyBaseRaceRandomizer, IMetaraceRandomizer anyMetaraceRandomizer,
             IStatsRandomizer rawStatsRandomizer, IBooleanPercentileSelector booleanPercentileSelector, ILeadershipSelector leadershipSelector,
-            ICollectionsSelector collectionsSelector)
+            ICollectionsSelector collectionsSelector, IMagicGenerator magicGenerator)
         {
             this.alignmentGenerator = alignmentGenerator;
             this.characterClassGenerator = characterClassGenerator;
@@ -73,6 +75,7 @@ namespace NPCGen.Generators
             this.booleanPercentileSelector = booleanPercentileSelector;
             this.leadershipSelector = leadershipSelector;
             this.collectionsSelector = collectionsSelector;
+            this.magicGenerator = magicGenerator;
         }
 
         public Character GenerateWith(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classNameRandomizer,
@@ -81,13 +84,18 @@ namespace NPCGen.Generators
         {
             VerifyRandomizers(alignmentRandomizer, classNameRandomizer, levelRandomizer, baseRaceRandomizer, metaraceRandomizer);
 
-            return GenerateCharacter(alignmentRandomizer, classNameRandomizer, levelRandomizer, baseRaceRandomizer, metaraceRandomizer,
-                statsRandomizer, false);
+            var character = GenerateCharacter(alignmentRandomizer, classNameRandomizer, levelRandomizer, baseRaceRandomizer, metaraceRandomizer,
+                statsRandomizer);
+
+            if (character.Ability.Feats.Any(f => f.Name.Id == FeatConstants.LeadershipId))
+                character.Leadership = GenerateLeadership(character);
+
+            return character;
         }
 
         private Character GenerateCharacter(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classNameRandomizer,
             ILevelRandomizer levelRandomizer, IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer,
-            IStatsRandomizer statsRandomizer, Boolean isFollower)
+            IStatsRandomizer statsRandomizer)
         {
             var character = new Character();
 
@@ -118,9 +126,7 @@ namespace NPCGen.Generators
 
             character.Combat = combatGenerator.GenerateWith(baseAttack, character.Class, character.Race, character.Ability.Feats, character.Ability.Stats, character.Equipment);
             character.InterestingTrait = percentileSelector.SelectFrom(TableNameConstants.Set.Percentile.Traits);
-
-            if (isFollower == false && character.Ability.Feats.Any(f => f.Name.Id == FeatConstants.LeadershipId))
-                character.Leadership = GenerateLeadership(character);
+            character.Magic = magicGenerator.GenerateWith(character.Class, character.Ability.Feats, character.Equipment);
 
             return character;
         }
@@ -153,7 +159,7 @@ namespace NPCGen.Generators
             CharacterClass characterClass;
 
             do characterClass = characterClassGenerator.GenerateWith(alignment, levelRandomizer, classNameRandomizer);
-            while (!randomizerVerifier.VerifyCharacterClassCompatibility(alignment.Goodness, characterClass, baseRaceRandomizer, metaraceRandomizer));
+            while (randomizerVerifier.VerifyCharacterClassCompatibility(alignment.Goodness, characterClass, baseRaceRandomizer, metaraceRandomizer) == false);
 
             return characterClass;
         }
@@ -283,7 +289,7 @@ namespace NPCGen.Generators
             while (allowedAlignments.Contains(setAlignmentRandomizer.SetAlignment.ToString()) == false);
 
             return GenerateCharacter(setAlignmentRandomizer, anyClassNameRandomizer, setLevelRandomizer, anyBaseRaceRandomizer, anyMetaraceRandomizer,
-                rawStatsRandomizer, true);
+                rawStatsRandomizer);
         }
 
         private Character GenerateFollower(Int32 level, Character leader)

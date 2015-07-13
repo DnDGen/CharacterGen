@@ -88,6 +88,8 @@ namespace NPCGen.Generators.Abilities.Feats
                 {
                     quantity++;
                     sourceFeats = sourceFeats.Except(new[] { featSelection });
+                    availableFeats = GetAvailableFeats(sourceFeats, chosenFeats);
+
                     continue;
                 }
 

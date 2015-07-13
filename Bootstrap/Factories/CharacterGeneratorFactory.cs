@@ -4,6 +4,7 @@ using NPCGen.Generators.Interfaces;
 using NPCGen.Generators.Interfaces.Abilities;
 using NPCGen.Generators.Interfaces.Combats;
 using NPCGen.Generators.Interfaces.Items;
+using NPCGen.Generators.Interfaces.Magics;
 using NPCGen.Generators.Interfaces.Randomizers.Alignments;
 using NPCGen.Generators.Interfaces.Randomizers.CharacterClasses;
 using NPCGen.Generators.Interfaces.Randomizers.Races;
@@ -36,11 +37,12 @@ namespace NPCGen.Bootstrap.Factories
             var booleanPercentileSelector = kernel.Get<IBooleanPercentileSelector>();
             var leadershipSelector = kernel.Get<ILeadershipSelector>();
             var collectionsSelector = kernel.Get<ICollectionsSelector>();
+            var magicGenerator = kernel.Get<IMagicGenerator>();
 
             return new CharacterGenerator(alignmentGenerator, characterClassGenerator, raceGenerator, adjustmentsSelector,
                 randomizerVerifier, percentileSelector, abilitiesGenerator, combatGenerator, equipmentGenerator, setAlignmentRandomizer,
                 setLevelRandomizer, anyAlignmentRandomizer, anyClassNameRandomizer, anyBaseRaceRandomizer, anyMetaraceRandomizer,
-                rawStatsRandomizer, booleanPercentileSelector, leadershipSelector, collectionsSelector);
+                rawStatsRandomizer, booleanPercentileSelector, leadershipSelector, collectionsSelector, magicGenerator);
         }
     }
 }

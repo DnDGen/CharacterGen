@@ -36,6 +36,10 @@ namespace NPCGen.Generators.Abilities.Feats
             var requiredFeatIds = requiredFeats.Select(f => f.FeatId);
             var foci = GetFoci(featId, focusType, allSourceFeatFoci, otherFeats, requiredFeatIds);
             var usedFoci = otherFeats.Where(f => f.Name.Id == featId).Select(f => f.Focus);
+
+            if (usedFoci.Contains(ProficiencyConstants.All))
+                return ProficiencyConstants.All;
+
             foci = foci.Except(usedFoci);
 
             if (focusType == GroupConstants.SchoolsOfMagic)
@@ -46,7 +50,7 @@ namespace NPCGen.Generators.Abilities.Feats
                 foci = foci.Except(new[] { ProficiencyConstants.Ray });
 
             if (foci.Any() == false)
-                return String.Empty;
+                return ProficiencyConstants.All;
 
             var index = GetRandomIndexOf(foci);
             var focus = foci.ElementAt(index);

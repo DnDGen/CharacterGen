@@ -117,7 +117,7 @@ namespace NPCGen.Tests.Unit.Generators
                 mockAbilitiesGenerator.Object, mockCombatGenerator.Object, mockEquipmentGenerator.Object, mockSetAlignmentRandomizer.Object,
                 mockSetLevelRandomizer.Object, mockAnyAlignmentRandomizer.Object, mockAnyClassNameRandomizer.Object, mockAnyBaseRaceRandomizer.Object,
                 mockAnyMetaraceRandomizer.Object, mockRawStatRandomizer.Object, mockBooleanPercentileSelector.Object, mockLeadershipSelector.Object,
-                mockCollectionsSelector.Object);
+                mockCollectionsSelector.Object, mockMagicGenerator.Object);
         }
 
         private void SetUpMockRandomizers()

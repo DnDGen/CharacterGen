@@ -450,12 +450,16 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Spellcasters))
                 .Returns(new[] { "other class" });
 
+            otherFeats.Add(new Feat());
+            otherFeats[0].Name.Id = "proficiency2";
+            otherFeats[0].Focus = "weapon";
+
             var focus = featFocusGenerator.GenerateFrom("featToFill", GroupConstants.WeaponsWithUnarmedAndGrappleAndRay, requiredFeats, otherFeats, characterClass);
-            Assert.That(focus, Is.Empty);
+            Assert.That(focus, Is.EqualTo("weapon"));
         }
 
         [Test]
-        public void CannotChooseFocusWhenAllAlreadyTaken()
+        public void CannotChooseFocusWhenFocusedInAll()
         {
             otherFeats.Add(new Feat());
             otherFeats[0].Name.Id = "featId";
@@ -468,15 +472,15 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
         }
 
         [Test]
-        public void CannotChooseFocusWhenFocusedInAll()
+        public void CannotChooseFocusWhenAllAlreadyTaken()
         {
             otherFeats.Add(new Feat());
             otherFeats.Add(new Feat());
 
             otherFeats[0].Name.Id = "featId";
             otherFeats[0].Focus = "school 1";
-            otherFeats[0].Name.Id = "featId";
-            otherFeats[0].Focus = "school 2";
+            otherFeats[1].Name.Id = "featId";
+            otherFeats[1].Focus = "school 2";
 
             focusTypes["focus type"] = new[] { "school 1", "school 2" };
 
