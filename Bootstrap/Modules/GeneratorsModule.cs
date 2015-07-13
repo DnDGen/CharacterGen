@@ -1,4 +1,5 @@
 ﻿using Ninject.Modules;
+using NPCGen.Bootstrap.Factories;
 using NPCGen.Generators;
 using NPCGen.Generators.Abilities;
 using NPCGen.Generators.Abilities.Feats;
@@ -30,7 +31,7 @@ namespace NPCGen.Bootstrap.Modules
         {
             Bind<IAlignmentGenerator>().To<AlignmentGenerator>();
             Bind<ICharacterClassGenerator>().To<CharacterClassGenerator>();
-            Bind<ICharacterGenerator>().To<CharacterGenerator>();
+            Bind<ICharacterGenerator>().ToMethod(c => CharacterGeneratorFactory.CreateWith(c.Kernel));
             Bind<IHitPointsGenerator>().To<HitPointsGenerator>();
             Bind<ILanguageGenerator>().To<LanguageGenerator>();
             Bind<IRaceGenerator>().To<RaceGenerator>();

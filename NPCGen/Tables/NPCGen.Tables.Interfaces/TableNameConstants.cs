@@ -23,7 +23,6 @@ namespace NPCGen.Tables.Interfaces
                 public const String RacialBaseAttackAdjustments = "RacialBaseAttackAdjustments";
                 public const String RacialInitiativeBonuses = "RacialInitiativeBonuses";
                 public const String RacialNaturalArmorBonuses = "RacialNaturalArmorBonuses";
-                public const String ReputationAdjustments = "ReputationAdjustments";
                 public const String SkillPointsForClasses = "SkillPointsForClasses";
                 public const String SpecialistFieldQuantities = "SpecialistFieldQuantities";
             }

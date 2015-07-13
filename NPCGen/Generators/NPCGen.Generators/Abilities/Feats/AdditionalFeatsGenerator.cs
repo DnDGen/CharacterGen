@@ -7,6 +7,7 @@ using NPCGen.Common.Abilities.Skills;
 using NPCGen.Common.Abilities.Stats;
 using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Combats;
+using NPCGen.Common.Items;
 using NPCGen.Common.Races;
 using NPCGen.Generators.Interfaces.Abilities.Feats;
 using NPCGen.Selectors.Interfaces;
@@ -82,6 +83,14 @@ namespace NPCGen.Generators.Abilities.Feats
                 var feat = new Feat();
                 feat.Name.Id = featSelection.FeatId;
                 feat.Focus = featFocusGenerator.GenerateFrom(featSelection.FeatId, featSelection.FocusType, featSelection.RequiredFeats, chosenFeats, characterClass);
+
+                if (feat.Focus == ProficiencyConstants.All)
+                {
+                    quantity++;
+                    sourceFeats = sourceFeats.Except(new[] { featSelection });
+                    continue;
+                }
+
                 feat.Frequency = featSelection.Frequency;
 
                 if (featSelection.FeatId == FeatConstants.SpellMasteryId)

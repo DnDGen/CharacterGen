@@ -22,7 +22,6 @@ namespace NPCGen.Tests.Unit.Tables
         [TestCase(TableNameConstants.Set.Adjustments.RacialBaseAttackAdjustments, "RacialBaseAttackAdjustments")]
         [TestCase(TableNameConstants.Set.Adjustments.RacialInitiativeBonuses, "RacialInitiativeBonuses")]
         [TestCase(TableNameConstants.Set.Adjustments.RacialNaturalArmorBonuses, "RacialNaturalArmorBonuses")]
-        [TestCase(TableNameConstants.Set.Adjustments.ReputationAdjustments, "ReputationAdjustments")]
         [TestCase(TableNameConstants.Set.Adjustments.SkillPointsForClasses, "SkillPointsForClasses")]
         [TestCase(TableNameConstants.Set.Adjustments.SpecialistFieldQuantities, "SpecialistFieldQuantities")]
         [TestCase(TableNameConstants.Set.Collection.AdditionalFeatData, "AdditionalFeatData")]

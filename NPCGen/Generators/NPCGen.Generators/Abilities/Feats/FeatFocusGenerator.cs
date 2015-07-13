@@ -122,7 +122,7 @@ namespace NPCGen.Generators.Abilities.Feats
                 return String.Empty;
 
             var allSourceFeatFoci = collectionsSelector.SelectAllFrom(TableNameConstants.Set.Collection.FeatFoci);
-            if (allSourceFeatFoci.Keys.Contains(focusType) == false)
+            if (focusType != ProficiencyConstants.All && allSourceFeatFoci.Keys.Contains(focusType) == false)
                 return focusType;
 
             var foci = GetFoci(featId, focusType, allSourceFeatFoci, Enumerable.Empty<Feat>(), Enumerable.Empty<String>());

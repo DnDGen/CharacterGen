@@ -1,14 +1,14 @@
-﻿using NPCGen.Mappers.Collections;
+﻿using Ninject;
+using NPCGen.Mappers.Collections;
 using NPCGen.Mappers.Interfaces;
-using NPCGen.Tables.Interfaces;
 
 namespace NPCGen.Bootstrap.Factories
 {
     public static class CollectionsMapperFactory
     {
-        public static ICollectionsMapper CreateWith(IStreamLoader streamLoader)
+        public static ICollectionsMapper CreateWith(IKernel kernel)
         {
-            ICollectionsMapper mapper = new CollectionsXmlMapper(streamLoader);
+            ICollectionsMapper mapper = kernel.Get<CollectionsXmlMapper>();
             mapper = new CollectionsMapperCachingProxy(mapper);
 
             return mapper;

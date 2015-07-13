@@ -61,9 +61,15 @@ namespace NPCGen.Tests.Integration.Bootstrap.Modules
         }
 
         [Test]
-        public void BooleanPercentileSelectorsArenotGeneratedAsSingletons()
+        public void BooleanPercentileSelectorsAreNotGeneratedAsSingletons()
         {
             AssertNotSingleton<IBooleanPercentileSelector>();
+        }
+
+        [Test]
+        public void LeadershipSelectorsAreNotGeneratedAsSingletons()
+        {
+            AssertNotSingleton<ILeadershipSelector>();
         }
     }
 }

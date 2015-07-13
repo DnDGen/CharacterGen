@@ -464,7 +464,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             focusTypes["focus type"] = new[] { "school 1" };
 
             var focus = featFocusGenerator.GenerateFrom("featId", "focus type", requiredFeats, otherFeats, characterClass);
-            Assert.That(focus, Is.Empty);
+            Assert.That(focus, Is.EqualTo(ProficiencyConstants.All));
         }
 
         [Test]
@@ -481,7 +481,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             focusTypes["focus type"] = new[] { "school 1", "school 2" };
 
             var focus = featFocusGenerator.GenerateFrom("featId", "focus type", requiredFeats, otherFeats, characterClass);
-            Assert.That(focus, Is.Empty);
+            Assert.That(focus, Is.EqualTo(ProficiencyConstants.All));
         }
     }
 }

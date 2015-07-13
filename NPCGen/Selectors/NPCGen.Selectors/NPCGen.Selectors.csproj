@@ -48,6 +48,7 @@
     <Compile Include="FeatsSelector.cs" />
     <Compile Include="LanguageCollectionsSelector.cs" />
     <Compile Include="AdjustmentsSelector.cs" />
+    <Compile Include="LeadershipSelector.cs" />
     <Compile Include="NameSelector.cs" />
     <Compile Include="PercentileSelector.cs" />
     <Compile Include="SkillSelector.cs" />

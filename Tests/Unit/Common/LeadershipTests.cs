@@ -17,7 +17,6 @@ namespace NPCGen.Tests.Unit.Common
         [Test]
         public void LeadershipIsInitialized()
         {
-            Assert.That(leadership.IsFollower, Is.False);
             Assert.That(leadership.Cohort, Is.Null);
             Assert.That(leadership.Followers, Is.Empty);
             Assert.That(leadership.Score, Is.EqualTo(0));
