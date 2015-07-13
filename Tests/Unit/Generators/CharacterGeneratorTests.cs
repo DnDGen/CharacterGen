@@ -114,7 +114,10 @@ namespace NPCGen.Tests.Unit.Generators
 
             characterGenerator = new CharacterGenerator(mockAlignmentGenerator.Object, mockCharacterClassGenerator.Object,
                 mockRaceGenerator.Object, mockAdjustmentsSelector.Object, mockRandomizerVerifier.Object, mockPercentileSelector.Object,
-                mockAbilitiesGenerator.Object, mockCombatGenerator.Object, mockEquipmentGenerator.Object);
+                mockAbilitiesGenerator.Object, mockCombatGenerator.Object, mockEquipmentGenerator.Object, mockSetAlignmentRandomizer.Object,
+                mockSetLevelRandomizer.Object, mockAnyAlignmentRandomizer.Object, mockAnyClassNameRandomizer.Object, mockAnyBaseRaceRandomizer.Object,
+                mockAnyMetaraceRandomizer.Object, mockRawStatRandomizer.Object, mockBooleanPercentileSelector.Object, mockLeadershipSelector.Object,
+                mockCollectionsSelector.Object);
         }
 
         private void SetUpMockRandomizers()
@@ -134,6 +137,8 @@ namespace NPCGen.Tests.Unit.Generators
             mockAnyMetaraceRandomizer = new Mock<IMetaraceRandomizer>();
             mockRawStatRandomizer = new Mock<IStatsRandomizer>();
 
+            mockSetAlignmentRandomizer.Setup(r => r.Randomize()).Returns(mockSetAlignmentRandomizer.Object.SetAlignment);
+            mockSetLevelRandomizer.Setup(r => r.Randomize()).Returns(mockSetLevelRandomizer.Object.SetLevel);
         }
 
         private void SetUpGenerators()
@@ -361,7 +366,6 @@ namespace NPCGen.Tests.Unit.Generators
             feats[0].Name.Id = "other feat";
 
             var character = GenerateCharacter();
-            Assert.That(character.Leadership.IsFollower, Is.EqualTo(false));
             Assert.That(character.Leadership.Cohort, Is.Null);
             Assert.That(character.Leadership.Followers, Is.Empty);
             Assert.That(character.Leadership.Score, Is.EqualTo(0));
@@ -377,7 +381,6 @@ namespace NPCGen.Tests.Unit.Generators
             characterClass.Level = 5;
 
             var character = GenerateCharacter();
-            Assert.That(character.Leadership.IsFollower, Is.False);
             Assert.That(character.Leadership.Score, Is.EqualTo(8));
         }
 
@@ -391,11 +394,9 @@ namespace NPCGen.Tests.Unit.Generators
             characterClass.Level = 5;
 
             var character = GenerateCharacter();
-            Assert.That(character.Leadership.IsFollower, Is.False);
             Assert.That(character.Leadership.Cohort, Is.Not.Null);
 
             var cohort = character.Leadership.Cohort;
-            Assert.That(cohort.Leadership.IsFollower, Is.True);
             Assert.That(cohort.Leadership.Cohort, Is.Null);
             Assert.That(cohort.Leadership.Followers, Is.Empty);
             Assert.That(cohort.Leadership.Score, Is.EqualTo(0));
@@ -429,7 +430,7 @@ namespace NPCGen.Tests.Unit.Generators
 
             var reputationAjustments = new Dictionary<String, Int32>();
             reputationAjustments["reputable"] = 7;
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.ReputationAdjustments)).Returns(reputationAjustments);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.LeadershipModifiers)).Returns(reputationAjustments);
 
             var character = GenerateCharacter();
             Assert.That(character.Leadership.LeadershipModifiers, Contains.Item("reputable"));
@@ -449,7 +450,7 @@ namespace NPCGen.Tests.Unit.Generators
 
             var reputationAjustments = new Dictionary<String, Int32>();
             reputationAjustments["reputable"] = -4;
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.ReputationAdjustments)).Returns(reputationAjustments);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.LeadershipModifiers)).Returns(reputationAjustments);
 
             var character = GenerateCharacter();
             Assert.That(character.Leadership.LeadershipModifiers, Contains.Item("reputable"));
@@ -649,12 +650,12 @@ namespace NPCGen.Tests.Unit.Generators
 
             ability.Stats[StatConstants.Charisma] = new Stat { Value = 16 };
             characterClass.Level = 5;
-            alignment.Goodness = "goodness";
-            alignment.Lawfulness = "lawfulness";
 
             mockLeadershipSelector.Setup(s => s.SelectCohortLevelFor(8)).Returns(4);
             mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AttractCohortOfDifferentAlignment)).Returns(false);
 
+            alignment.Goodness = "goodness";
+            alignment.Lawfulness = "lawfulness";
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AlignmentGroups, alignment.ToString()))
                 .Returns(new[] { "goodness lawfulness" });
 
@@ -687,8 +688,8 @@ namespace NPCGen.Tests.Unit.Generators
                 .Returns(new[] { "goodness lawfulness", "different alignment" });
 
             var cohortAlignment = new Alignment();
-            cohortAlignment.Goodness = "different";
-            cohortAlignment.Lawfulness = "alignment";
+            cohortAlignment.Goodness = "alignment";
+            cohortAlignment.Lawfulness = "different";
             mockAlignmentGenerator.Setup(g => g.GenerateWith(mockAnyAlignmentRandomizer.Object)).Returns(cohortAlignment);
 
             var character = GenerateCharacter();
@@ -743,7 +744,6 @@ namespace NPCGen.Tests.Unit.Generators
 
             var cohort = character.Leadership.Cohort;
             Assert.That(cohort.Ability, Is.EqualTo(cohortAbility));
-            Assert.That(cohort.Leadership.IsFollower, Is.True);
             Assert.That(cohort.Leadership.Cohort, Is.Null);
             Assert.That(cohort.Leadership.Followers, Is.Empty);
             Assert.That(cohort.Leadership.LeadershipModifiers, Is.Empty);
@@ -768,12 +768,10 @@ namespace NPCGen.Tests.Unit.Generators
             mockLeadershipSelector.Setup(s => s.SelectFollowerQuantitiesFor(8)).Returns(followerQuantities);
 
             var character = GenerateCharacter();
-            Assert.That(character.Leadership.IsFollower, Is.False);
             Assert.That(character.Leadership.Followers.Count(), Is.EqualTo(21));
 
             foreach (var follower in character.Leadership.Followers)
             {
-                Assert.That(follower.Leadership.IsFollower, Is.True);
                 Assert.That(follower.Leadership.Cohort, Is.Null);
                 Assert.That(follower.Leadership.Followers, Is.Empty);
                 Assert.That(follower.Leadership.Score, Is.EqualTo(0));
@@ -928,7 +926,6 @@ namespace NPCGen.Tests.Unit.Generators
             mockLeadershipSelector.Setup(s => s.SelectFollowerQuantitiesFor(9274)).Returns(followerQuantities);
 
             var character = GenerateCharacter();
-            Assert.That(character.Leadership.IsFollower, Is.False);
             Assert.That(character.Leadership.Followers.Count(), Is.EqualTo(21));
         }
 
@@ -952,7 +949,6 @@ namespace NPCGen.Tests.Unit.Generators
             mockLeadershipSelector.Setup(s => s.SelectFollowerQuantitiesFor(8)).Returns(followerQuantities);
 
             var character = GenerateCharacter();
-            Assert.That(character.Leadership.IsFollower, Is.False);
             Assert.That(character.Leadership.Followers.Count(), Is.EqualTo(21));
             Assert.That(character.Leadership.LeadershipModifiers, Is.Empty);
         }
@@ -977,7 +973,6 @@ namespace NPCGen.Tests.Unit.Generators
             mockLeadershipSelector.Setup(s => s.SelectFollowerQuantitiesFor(7)).Returns(followerQuantities);
 
             var character = GenerateCharacter();
-            Assert.That(character.Leadership.IsFollower, Is.False);
             Assert.That(character.Leadership.Followers.Count(), Is.EqualTo(21));
         }
 
@@ -1062,7 +1057,6 @@ namespace NPCGen.Tests.Unit.Generators
                 var follower = character.Leadership.Followers.ElementAt(i);
 
                 Assert.That(follower.Leadership.Score, Is.EqualTo(0));
-                Assert.That(follower.Leadership.IsFollower, Is.True);
                 Assert.That(follower.Leadership.Cohort, Is.Null);
                 Assert.That(follower.Leadership.Followers, Is.Empty);
                 Assert.That(follower.Leadership.LeadershipModifiers, Is.Empty);

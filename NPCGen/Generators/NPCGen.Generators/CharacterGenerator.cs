@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using NPCGen.Common;
+using NPCGen.Common.Abilities.Feats;
 using NPCGen.Common.Abilities.Skills;
+using NPCGen.Common.Abilities.Stats;
 using NPCGen.Common.Alignments;
 using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Races;
@@ -39,13 +42,16 @@ namespace NPCGen.Generators
         private IMetaraceRandomizer anyMetaraceRandomizer;
         private IStatsRandomizer rawStatsRandomizer;
         private IBooleanPercentileSelector booleanPercentileSelector;
+        private ILeadershipSelector leadershipSelector;
+        private ICollectionsSelector collectionsSelector;
 
         public CharacterGenerator(IAlignmentGenerator alignmentGenerator, ICharacterClassGenerator characterClassGenerator, IRaceGenerator raceGenerator,
             IAdjustmentsSelector adjustmentsSelector, IRandomizerVerifier randomizerVerifier, IPercentileSelector percentileSelector,
             IAbilitiesGenerator abilitiesGenerator, ICombatGenerator combatGenerator, IEquipmentGenerator equipmentGenerator,
             ISetAlignmentRandomizer setAlignmentRandomizer, ISetLevelRandomizer setLevelRandomizer, IAlignmentRandomizer anyAlignmentRandomizer,
             IClassNameRandomizer anyClassNameRandomizer, IBaseRaceRandomizer anyBaseRaceRandomizer, IMetaraceRandomizer anyMetaraceRandomizer,
-            IStatsRandomizer rawStatsRandomizer, IBooleanPercentileSelector booleanPercentileSelector)
+            IStatsRandomizer rawStatsRandomizer, IBooleanPercentileSelector booleanPercentileSelector, ILeadershipSelector leadershipSelector,
+            ICollectionsSelector collectionsSelector)
         {
             this.alignmentGenerator = alignmentGenerator;
             this.characterClassGenerator = characterClassGenerator;
@@ -65,6 +71,8 @@ namespace NPCGen.Generators
             this.anyMetaraceRandomizer = anyMetaraceRandomizer;
             this.rawStatsRandomizer = rawStatsRandomizer;
             this.booleanPercentileSelector = booleanPercentileSelector;
+            this.leadershipSelector = leadershipSelector;
+            this.collectionsSelector = collectionsSelector;
         }
 
         public Character GenerateWith(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classNameRandomizer,
@@ -73,6 +81,14 @@ namespace NPCGen.Generators
         {
             VerifyRandomizers(alignmentRandomizer, classNameRandomizer, levelRandomizer, baseRaceRandomizer, metaraceRandomizer);
 
+            return GenerateCharacter(alignmentRandomizer, classNameRandomizer, levelRandomizer, baseRaceRandomizer, metaraceRandomizer,
+                statsRandomizer, false);
+        }
+
+        private Character GenerateCharacter(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classNameRandomizer,
+            ILevelRandomizer levelRandomizer, IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer,
+            IStatsRandomizer statsRandomizer, Boolean isFollower)
+        {
             var character = new Character();
 
             character.Alignment = GenerateAlignment(alignmentRandomizer, classNameRandomizer, levelRandomizer, baseRaceRandomizer, metaraceRandomizer);
@@ -102,6 +118,9 @@ namespace NPCGen.Generators
 
             character.Combat = combatGenerator.GenerateWith(baseAttack, character.Class, character.Race, character.Ability.Feats, character.Ability.Stats, character.Equipment);
             character.InterestingTrait = percentileSelector.SelectFrom(TableNameConstants.Set.Percentile.Traits);
+
+            if (isFollower == false && character.Ability.Feats.Any(f => f.Name.Id == FeatConstants.LeadershipId))
+                character.Leadership = GenerateLeadership(character);
 
             return character;
         }
@@ -148,6 +167,128 @@ namespace NPCGen.Generators
             while (levelAdjustments[race.BaseRace.Id] + levelAdjustments[race.Metarace.Id] >= characterClass.Level);
 
             return race;
+        }
+
+        private Leadership GenerateLeadership(Character character)
+        {
+            var leadership = new Leadership();
+
+            leadership.Score = character.Class.Level + character.Ability.Stats[StatConstants.Charisma].Bonus;
+
+            var leadershipModifiers = new List<String>();
+            var reputation = percentileSelector.SelectFrom(TableNameConstants.Set.Percentile.Reputation);
+            var leadershipAdjustments = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.LeadershipModifiers);
+
+            if (String.IsNullOrEmpty(reputation) == false)
+            {
+                leadershipModifiers.Add(reputation);
+                leadership.Score += leadershipAdjustments[reputation];
+            }
+
+            var cohortScore = leadership.Score;
+            var cohortDeaths = 0;
+
+            while (booleanPercentileSelector.SelectFrom(TableNameConstants.Set.TrueOrFalse.KilledCohort))
+                cohortDeaths++;
+
+            cohortScore -= cohortDeaths * 2;
+
+            if (cohortDeaths > 0)
+            {
+                var modifier = String.Format("Caused the death of {0} cohort(s)", cohortDeaths);
+                leadershipModifiers.Add(modifier);
+            }
+
+            leadership.LeadershipModifiers = leadershipModifiers;
+
+            if (String.IsNullOrEmpty(character.Magic.Familiar.Animal) == false)
+                cohortScore -= 2;
+
+            var followerScore = leadership.Score;
+            var leaderMovement = percentileSelector.SelectFrom(TableNameConstants.Set.Percentile.LeadershipMovement);
+
+            if (String.IsNullOrEmpty(leaderMovement) == false)
+            {
+                leadershipModifiers.Add(leaderMovement);
+                followerScore += leadershipAdjustments[leaderMovement];
+            }
+
+            if (booleanPercentileSelector.SelectFrom(TableNameConstants.Set.TrueOrFalse.KilledFollowers))
+                followerScore--;
+
+            leadership.Cohort = GenerateCohort(character, cohortScore);
+            leadership.Followers = GenerateFollowers(character, followerScore);
+
+            return leadership;
+        }
+
+        private IEnumerable<Character> GenerateFollowers(Character leader, Int32 followerScore)
+        {
+            var followerQuantities = leadershipSelector.SelectFollowerQuantitiesFor(followerScore);
+
+            var followers = new List<Character>();
+            followers.AddRange(GenerateFollowers(1, followerQuantities.Level1, leader));
+            followers.AddRange(GenerateFollowers(2, followerQuantities.Level2, leader));
+            followers.AddRange(GenerateFollowers(3, followerQuantities.Level3, leader));
+            followers.AddRange(GenerateFollowers(4, followerQuantities.Level4, leader));
+            followers.AddRange(GenerateFollowers(5, followerQuantities.Level5, leader));
+            followers.AddRange(GenerateFollowers(6, followerQuantities.Level6, leader));
+
+            return followers;
+        }
+
+        private IEnumerable<Character> GenerateFollowers(Int32 level, Int32 quantity, Character leader)
+        {
+            var followers = new List<Character>();
+
+            while (quantity-- > 0)
+            {
+                var follower = GenerateFollower(level, leader);
+                followers.Add(follower);
+            }
+
+            return followers;
+        }
+
+        private Character GenerateCohort(Character leader, Int32 cohortScore)
+        {
+            var alignmentDiffers = booleanPercentileSelector.SelectFrom(TableNameConstants.Set.TrueOrFalse.AttractCohortOfDifferentAlignment);
+            if (alignmentDiffers)
+                cohortScore--;
+
+            var cohortLevel = leadershipSelector.SelectCohortLevelFor(cohortScore);
+            cohortLevel = Math.Min(leader.Class.Level - 2, cohortLevel);
+
+            if (cohortLevel <= 0)
+                return null;
+
+            if (alignmentDiffers == false)
+            {
+                setAlignmentRandomizer.SetAlignment = leader.Alignment;
+                return GenerateFollower(setAlignmentRandomizer, cohortLevel, leader);
+            }
+
+            if (cohortLevel > 0)
+                return GenerateFollower(cohortLevel, leader);
+
+            return null;
+        }
+
+        private Character GenerateFollower(IAlignmentRandomizer alignmentRandomizer, Int32 level, Character leader)
+        {
+            setLevelRandomizer.SetLevel = level;
+            var allowedAlignments = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AlignmentGroups, leader.Alignment.ToString());
+
+            do setAlignmentRandomizer.SetAlignment = alignmentGenerator.GenerateWith(alignmentRandomizer);
+            while (allowedAlignments.Contains(setAlignmentRandomizer.SetAlignment.ToString()) == false);
+
+            return GenerateCharacter(setAlignmentRandomizer, anyClassNameRandomizer, setLevelRandomizer, anyBaseRaceRandomizer, anyMetaraceRandomizer,
+                rawStatsRandomizer, true);
+        }
+
+        private Character GenerateFollower(Int32 level, Character leader)
+        {
+            return GenerateFollower(anyAlignmentRandomizer, level, leader);
         }
     }
 }

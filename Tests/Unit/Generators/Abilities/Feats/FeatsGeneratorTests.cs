@@ -479,7 +479,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
         }
 
         [Test]
-        public void IfNoFrequencyRestMatchesButUnequalStrengths_KeepHigherStrength()
+        public void IfNoFrequencyAndRestMatchesButUnequalStrengths_KeepHigherStrength()
         {
             racialFeats.Add(new Feat());
             racialFeats.Add(new Feat());
@@ -672,6 +672,12 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             Assert.That(feats.Count(), Is.EqualTo(2));
             Assert.That(feats.First().Name.Id, Is.EqualTo("feat1"));
             Assert.That(feats.Last().Name.Id, Is.EqualTo("feat1"));
+        }
+
+        [Test]
+        public void IfFeatHasFocusOfAll_RemoveOtherInstancesOfTheFeat()
+        {
+            throw new NotImplementedException();
         }
     }
 }

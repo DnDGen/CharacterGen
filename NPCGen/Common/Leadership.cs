@@ -6,7 +6,6 @@ namespace NPCGen.Common
 {
     public class Leadership
     {
-        public Boolean IsFollower { get; set; }
         public Character Cohort { get; set; }
         public IEnumerable<Character> Followers { get; set; }
         public Int32 Score { get; set; }

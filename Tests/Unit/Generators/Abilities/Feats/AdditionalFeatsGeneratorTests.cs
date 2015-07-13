@@ -8,6 +8,7 @@ using NPCGen.Common.Abilities.Skills;
 using NPCGen.Common.Abilities.Stats;
 using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Combats;
+using NPCGen.Common.Items;
 using NPCGen.Common.Races;
 using NPCGen.Generators.Abilities.Feats;
 using NPCGen.Generators.Interfaces.Abilities.Feats;
@@ -639,16 +640,27 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
         }
 
         [Test]
-        public void IfBlankFocusGenerated_CannotSelectFeat()
+        public void IfAllFocusGenerated_CannotSelectFeat()
         {
             AddFeatSelections(1);
-            additionalFeatSelections[0].FocusType = "focus type";
-
-            mockFeatFocusGenerator.Setup(g => g.GenerateFrom("feat1", "focus type", additionalFeatSelections[0].RequiredFeats, It.IsAny<IEnumerable<Feat>>(), characterClass))
-                .Returns(String.Empty);
+            mockFeatFocusGenerator.Setup(g => g.GenerateFrom(additionalFeatSelections[0].FeatId, "focus type", skills)).Returns(ProficiencyConstants.All);
 
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             Assert.That(feats, Is.Empty);
+        }
+
+        [Test]
+        public void CanHaveFeatWithoutFocus()
+        {
+            AddFeatSelections(1);
+            mockFeatFocusGenerator.Setup(g => g.GenerateFrom(additionalFeatSelections[0].FeatId, String.Empty, additionalFeatSelections[0].RequiredFeats, preselectedFeats, characterClass))
+                .Returns(String.Empty);
+
+            var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
+            var feat = feats.Single();
+
+            Assert.That(feat.Name.Id, Is.EqualTo(additionalFeatSelections[0].FeatId));
+            Assert.That(feat.Focus, Is.Empty);
         }
     }
 }
