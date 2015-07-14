@@ -6,6 +6,7 @@ using NPCGen.Common.Abilities.Skills;
 using NPCGen.Common.Abilities.Stats;
 using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Combats;
+using NPCGen.Common.Items;
 using NPCGen.Common.Races;
 using NPCGen.Generators.Interfaces.Abilities.Feats;
 using NPCGen.Selectors.Interfaces;
@@ -95,6 +96,13 @@ namespace NPCGen.Generators.Abilities.Feats
 
                 featsToRemove.AddRange(otherFeats);
                 combinedFeatIds.Add(featToRemove.Name.Id);
+            }
+
+            if (allFeats.Any(f => f.Focus == ProficiencyConstants.All))
+            {
+                var featIdsWithAllFocus = allFeats.Where(f => f.Focus == ProficiencyConstants.All).Select(f => f.Name.Id);
+                var redundantFeats = allFeats.Where(f => featIdsWithAllFocus.Contains(f.Name.Id) && f.Focus != ProficiencyConstants.All);
+                featsToRemove.AddRange(redundantFeats);
             }
 
             allFeats = allFeats.Except(featsToRemove);

@@ -79,6 +79,8 @@ namespace NPCGen.Tests.Unit.Generators
         private List<Feat> feats;
         private FollowerQuantities followerQuantities;
         private Magic magic;
+        private Alignment setAlignment;
+        private Int32 setLevel;
 
         [SetUp]
         public void Setup()
@@ -137,8 +139,13 @@ namespace NPCGen.Tests.Unit.Generators
             mockAnyMetaraceRandomizer = new Mock<IMetaraceRandomizer>();
             mockRawStatRandomizer = new Mock<IStatsRandomizer>();
 
-            mockSetAlignmentRandomizer.Setup(r => r.Randomize()).Returns(mockSetAlignmentRandomizer.Object.SetAlignment);
-            mockSetLevelRandomizer.Setup(r => r.Randomize()).Returns(mockSetLevelRandomizer.Object.SetLevel);
+            setAlignment = new Alignment();
+
+            mockSetAlignmentRandomizer.Setup(r => r.Randomize()).Returns(() => mockSetAlignmentRandomizer.Object.SetAlignment);
+            mockSetLevelRandomizer.Setup(r => r.Randomize()).Returns(() => mockSetLevelRandomizer.Object.SetLevel);
+
+            mockSetAlignmentRandomizer.SetupAllProperties();
+            mockSetLevelRandomizer.SetupAllProperties();
         }
 
         private void SetUpGenerators()
@@ -169,6 +176,8 @@ namespace NPCGen.Tests.Unit.Generators
             ability.Feats = feats;
 
             mockAlignmentGenerator.Setup(f => f.GenerateWith(mockAlignmentRandomizer.Object)).Returns(alignment);
+            mockAlignmentGenerator.Setup(f => f.GenerateWith(mockSetAlignmentRandomizer.Object)).Returns(() => mockSetAlignmentRandomizer.Object.SetAlignment);
+
             mockCharacterClassGenerator.Setup(f => f.GenerateWith(alignment, mockLevelRandomizer.Object,
                 mockClassNameRandomizer.Object)).Returns(characterClass);
             mockRaceGenerator.Setup(f => f.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object,
@@ -393,6 +402,8 @@ namespace NPCGen.Tests.Unit.Generators
             ability.Stats[StatConstants.Charisma] = new Stat { Value = 16 };
             characterClass.Level = 5;
 
+            mockLeadershipSelector.Setup(s => s.SelectCohortLevelFor(8)).Returns(4);
+
             var character = GenerateCharacter();
             Assert.That(character.Leadership.Cohort, Is.Not.Null);
 
@@ -412,6 +423,10 @@ namespace NPCGen.Tests.Unit.Generators
             characterClass.Level = 5;
 
             mockPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Percentile.Reputation)).Returns("reputable");
+
+            var reputationAjustments = new Dictionary<String, Int32>();
+            reputationAjustments["reputable"] = 0;
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.LeadershipModifiers)).Returns(reputationAjustments);
 
             var character = GenerateCharacter();
             Assert.That(character.Leadership.LeadershipModifiers, Contains.Item("reputable"));
@@ -614,6 +629,8 @@ namespace NPCGen.Tests.Unit.Generators
             characterClass.Level = 5;
             alignment.Goodness = "goodness";
             alignment.Lawfulness = "lawfulness";
+
+            mockLeadershipSelector.Setup(s => s.SelectCohortLevelFor(8)).Returns(4);
 
             var incompatibleAlignment1 = new Alignment();
             var incompatibleAlignment2 = new Alignment();

@@ -7,6 +7,7 @@ using NPCGen.Common.Abilities.Skills;
 using NPCGen.Common.Abilities.Stats;
 using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Combats;
+using NPCGen.Common.Items;
 using NPCGen.Common.Races;
 using NPCGen.Generators.Abilities.Feats;
 using NPCGen.Generators.Interfaces.Abilities.Feats;
@@ -677,7 +678,31 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
         [Test]
         public void IfFeatHasFocusOfAll_RemoveOtherInstancesOfTheFeat()
         {
-            throw new NotImplementedException();
+            racialFeats.Add(new Feat());
+            racialFeats.Add(new Feat());
+            racialFeats.Add(new Feat());
+            racialFeats.Add(new Feat());
+
+            racialFeats[0].Name.Id = "feat1";
+            racialFeats[0].Focus = "focus";
+            racialFeats[1].Name.Id = "feat1";
+            racialFeats[1].Focus = ProficiencyConstants.All;
+            racialFeats[2].Name.Id = "feat2";
+            racialFeats[3].Name.Id = "feat3";
+            racialFeats[3].Focus = "focus";
+
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            var feat1 = feats.First(f => f.Name.Id == "feat1");
+            var feat2 = feats.First(f => f.Name.Id == "feat2");
+            var feat3 = feats.First(f => f.Name.Id == "feat3");
+
+            Assert.That(feat1.Name.Id, Is.EqualTo("feat1"));
+            Assert.That(feat1.Focus, Is.EqualTo(ProficiencyConstants.All));
+            Assert.That(feat2.Name.Id, Is.EqualTo("feat2"));
+            Assert.That(feat2.Focus, Is.Empty);
+            Assert.That(feat3.Name.Id, Is.EqualTo("feat3"));
+            Assert.That(feat3.Focus, Is.EqualTo("focus"));
+            Assert.That(feats.Count(), Is.EqualTo(3));
         }
     }
 }
