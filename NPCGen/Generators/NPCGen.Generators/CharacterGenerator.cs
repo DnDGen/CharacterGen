@@ -205,8 +205,6 @@ namespace NPCGen.Generators
                 leadershipModifiers.Add(modifier);
             }
 
-            leadership.LeadershipModifiers = leadershipModifiers;
-
             if (String.IsNullOrEmpty(character.Magic.Familiar.Animal) == false)
                 cohortScore -= 2;
 
@@ -220,10 +218,14 @@ namespace NPCGen.Generators
             }
 
             if (booleanPercentileSelector.SelectFrom(TableNameConstants.Set.TrueOrFalse.KilledFollowers))
+            {
+                leadershipModifiers.Add("Caused the death of followers");
                 followerScore--;
+            }
 
             leadership.Cohort = GenerateCohort(character, cohortScore);
             leadership.Followers = GenerateFollowers(character, followerScore);
+            leadership.LeadershipModifiers = leadershipModifiers;
 
             return leadership;
         }
@@ -274,10 +276,7 @@ namespace NPCGen.Generators
                 return GenerateFollower(setAlignmentRandomizer, cohortLevel, leader);
             }
 
-            if (cohortLevel > 0)
-                return GenerateFollower(cohortLevel, leader);
-
-            return null;
+            return GenerateFollower(cohortLevel, leader);
         }
 
         private Character GenerateFollower(IAlignmentRandomizer alignmentRandomizer, Int32 level, Character leader)

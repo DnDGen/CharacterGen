@@ -141,11 +141,14 @@ namespace NPCGen.Tests.Unit.Generators
 
             setAlignment = new Alignment();
 
-            mockSetAlignmentRandomizer.Setup(r => r.Randomize()).Returns(() => mockSetAlignmentRandomizer.Object.SetAlignment);
-            mockSetLevelRandomizer.Setup(r => r.Randomize()).Returns(() => mockSetLevelRandomizer.Object.SetLevel);
-
             mockSetAlignmentRandomizer.SetupAllProperties();
             mockSetLevelRandomizer.SetupAllProperties();
+
+            mockSetAlignmentRandomizer.SetupSet(r => r.SetAlignment = It.IsAny<Alignment>()).Callback<Alignment>(value => setAlignment = value);
+            mockSetAlignmentRandomizer.SetupGet(r => r.SetAlignment).Returns(() => setAlignment);
+
+            mockSetLevelRandomizer.SetupSet(r => r.SetLevel = It.IsAny<Int32>()).Callback<Int32>(value => setLevel = value);
+            mockSetLevelRandomizer.SetupGet(r => r.SetLevel).Returns(() => setLevel);
         }
 
         private void SetUpGenerators()
