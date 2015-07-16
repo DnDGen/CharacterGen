@@ -241,6 +241,25 @@
         <item>ImmuneToEffectCharm</item>
     </object>
     <object>
+        <name>Drow</name>
+        <item>SkillBonusSearch</item>
+        <item>SkillBonusSpot</item>
+        <item>SkillBonusListen</item>
+        <item>SaveBonus</item>
+        <item>SaveBonusWill</item>
+        <item>ImmuneToEffect</item>
+        <item>Darkvision</item>
+        <item>MartialWeaponProficiencyHand crossbow</item>
+        <item>MartialWeaponProficiencyRapier</item>
+        <item>MartialWeaponProficiencyShort sword</item>
+        <item>PassiveSecretDoorSearch</item>
+        <item>LightBlindness</item>
+        <item>SpellLikeAbilityDarkness</item>
+        <item>SpellLikeAbilityDancing lights</item>
+        <item>SpellLikeAbilityFaerie fire</item>
+        <item>SpellResistance</item>
+    </object>
+    <object>
         <name>Earth</name>
         <item>Turn</item>
     </object>

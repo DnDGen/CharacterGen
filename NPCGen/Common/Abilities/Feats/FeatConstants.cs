@@ -378,6 +378,40 @@ namespace NPCGen.Common.Abilities.Feats
         public const String SupernaturalStrengthId = "SupernaturalStrength";
         public const String WildShape = "Wild Shape";
         public const String WildShapeId = "WildShape";
+        public const String LightBlindness = "Light Blindness";
+        public const String LightBlindnessId = "LightBlindness";
+        public const String ArmorBonus = "Armor Bonus";
+        public const String ArmorBonusId = "ArmorBonus";
+        public const String FlurryOfBlows = "Flurry of Blows";
+        public const String MonkUnarmedStrike = "Monk Unarmed Strike";
+        public const String StillMind = "Still Mind";
+        public const String KiStrike = "Ki Strike";
+        public const String SlowFall = "Slow Fall";
+        public const String PurityOfBody = "Purity of Body";
+        public const String WholenessOfBody = "Wholeness of Body";
+        public const String DiamondBody = "Diamond Body";
+        public const String AbundantStep = "Abundant Step";
+        public const String DiamondSoul = "Diamond Soul";
+        public const String QuiveringPalm = "Quivering Palm";
+        public const String TimelessBody = "Timeless Body";
+        public const String TongueOfSunAndMoon = "Tongue of Sun and Moon";
+        public const String EmptyBody = "Empty Body";
+        public const String PerfectSelf = "Perfect Self";
+        public const String FlurryOfBlowsId = "FlurryOfBlows";
+        public const String MonkUnarmedStrikeId = "MonkUnarmedStrike";
+        public const String StillMindId = "StillMind";
+        public const String KiStrikeId = "KiStrike";
+        public const String SlowFallId = "SlowFall";
+        public const String PurityOfBodyId = "PurityOfBody";
+        public const String WholenessOfBodyId = "WholenessOfBody";
+        public const String DiamondBodyId = "DiamondBody";
+        public const String AbundantStepId = "AbundantStep";
+        public const String DiamondSoulId = "DiamondSoul";
+        public const String QuiveringPalmId = "QuiveringPalm";
+        public const String TimelessBodyId = "TimelessBody";
+        public const String TongueOfSunAndMoonId = "TongueOfSunAndMoon";
+        public const String EmptyBodyId = "EmptyBody";
+        public const String PerfectSelfId = "PerfectSelf";
 
         public static class Frequencies
         {

@@ -3,6 +3,7 @@ using System.Linq;
 using EquipmentGen.Common.Items;
 using NPCGen.Common.Abilities.Feats;
 using NPCGen.Common.Abilities.Skills;
+using NPCGen.Common.Abilities.Stats;
 using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Races;
 using NPCGen.Tables.Interfaces;
@@ -198,6 +199,23 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.ChangeShapeId,
             FeatConstants.ImmuneToEffectId + "Sleep",
             FeatConstants.ImmuneToEffectId + "Charm")]
+        [TestCase(RaceConstants.BaseRaces.DrowId,
+            FeatConstants.ImmuneToEffectId,
+            FeatConstants.SaveBonusId,
+            FeatConstants.SaveBonusId + "Will",
+            FeatConstants.DarkvisionId,
+            FeatConstants.MartialWeaponProficiencyId + WeaponConstants.HandCrossbow,
+            FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Rapier,
+            FeatConstants.MartialWeaponProficiencyId + WeaponConstants.ShortSword,
+            FeatConstants.PassiveSecretDoorSearchId,
+            FeatConstants.SkillBonusId + SkillConstants.Search,
+            FeatConstants.SkillBonusId + SkillConstants.Spot,
+            FeatConstants.SkillBonusId + SkillConstants.Listen,
+            FeatConstants.SpellResistanceId,
+            FeatConstants.SpellLikeAbilityId + "Dancing lights",
+            FeatConstants.SpellLikeAbilityId + "Darkness",
+            FeatConstants.SpellLikeAbilityId + "Faerie fire",
+            FeatConstants.LightBlindnessId)]
         [TestCase(RaceConstants.BaseRaces.GnollId,
             FeatConstants.DarkvisionId,
             FeatConstants.NaturalArmorId)]
@@ -347,6 +365,58 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
             };
 
             base.DistinctCollection(CharacterClassConstants.Ranger, featIds);
+        }
+
+        [Test]
+        public void MonkFeatGroup()
+        {
+            var featIds = new[]
+            {
+                FeatConstants.SimpleWeaponProficiencyId + WeaponConstants.Club,
+                FeatConstants.SimpleWeaponProficiencyId + WeaponConstants.HeavyCrossbow,
+                FeatConstants.SimpleWeaponProficiencyId + WeaponConstants.LightCrossbow,
+                FeatConstants.SimpleWeaponProficiencyId + WeaponConstants.Dagger,
+                FeatConstants.SimpleWeaponProficiencyId + WeaponConstants.Sling,
+                FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Handaxe,
+                FeatConstants.SimpleWeaponProficiencyId + WeaponConstants.Javelin,
+                FeatConstants.ExoticWeaponProficiencyId + WeaponConstants.Kama,
+                FeatConstants.ExoticWeaponProficiencyId + WeaponConstants.Nunchaku,
+                FeatConstants.SimpleWeaponProficiencyId + WeaponConstants.Quarterstaff,
+                FeatConstants.ExoticWeaponProficiencyId + WeaponConstants.Shuriken,
+                FeatConstants.ExoticWeaponProficiencyId + WeaponConstants.Siangham,
+                FeatConstants.ArmorBonusId + StatConstants.Wisdom,
+                FeatConstants.ArmorBonusId + "1",
+                FeatConstants.ArmorBonusId + "2",
+                FeatConstants.ArmorBonusId + "3",
+                FeatConstants.ArmorBonusId + "4",
+                FeatConstants.FlurryOfBlowsId,
+                FeatConstants.MonkUnarmedStrikeId, // damage depends on size
+                FeatConstants.ImprovedUnarmedStrikeId,
+                //choice bonus feats
+                FeatConstants.EvasionId,
+                FeatConstants.FastMovementId + "10",
+                FeatConstants.FastMovementId + "20",
+                FeatConstants.FastMovementId + "30",
+                FeatConstants.FastMovementId + "40",
+                FeatConstants.FastMovementId + "50",
+                FeatConstants.FastMovementId + "60",
+                FeatConstants.StillMindId,
+                FeatConstants.KiStrikeId,
+                FeatConstants.SlowFallId,
+                FeatConstants.PurityOfBodyId,
+                FeatConstants.WholenessOfBodyId,
+                FeatConstants.ImprovedEvasionId,
+                FeatConstants.DiamondBodyId,
+                FeatConstants.AbundantStepId,
+                FeatConstants.DiamondSoulId,
+                FeatConstants.QuiveringPalmId,
+                FeatConstants.TimelessBodyId,
+                FeatConstants.TongueOfSunAndMoonId,
+                FeatConstants.EmptyBodyId,
+                FeatConstants.PerfectSelfId
+            };
+
+            base.DistinctCollection(CharacterClassConstants.Monk, featIds);
         }
 
         [Test]
