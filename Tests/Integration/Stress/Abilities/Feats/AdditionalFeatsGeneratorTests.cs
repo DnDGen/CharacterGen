@@ -44,7 +44,7 @@ namespace NPCGen.Tests.Integration.Stress.Abilities.Feats
             var skills = SkillsGenerator.GenerateWith(characterClass, race, stats);
             var baseAttack = CombatGenerator.GenerateBaseAttackWith(characterClass, race);
             var racialFeats = RacialFeatsGenerator.GenerateWith(race, skills);
-            var classFeats = ClassFeatsGenerator.GenerateWith(characterClass, stats, racialFeats);
+            var classFeats = ClassFeatsGenerator.GenerateWith(characterClass, stats, racialFeats, skills);
             var preselectedFeats = classFeats.Union(racialFeats);
 
             var feats = AdditionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);

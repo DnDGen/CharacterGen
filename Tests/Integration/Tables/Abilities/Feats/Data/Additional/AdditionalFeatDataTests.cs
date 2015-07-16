@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using NPCGen.Common.Abilities.Feats;
+using NPCGen.Common.Items;
 using NPCGen.Tables.Interfaces;
 using NUnit.Framework;
 
@@ -121,7 +122,6 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.Additional
                 FeatConstants.SpellPenetrationId,
                 FeatConstants.SpiritedChargeId,
                 FeatConstants.SpringAttackId,
-                FeatConstants.StabilityId,
                 FeatConstants.StealthyId,
                 FeatConstants.StillSpellId,
                 FeatConstants.StunningFistId,
@@ -167,7 +167,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.Additional
         [TestCase(FeatConstants.EnduranceId, 0, "", 0, "", 4)]
         [TestCase(FeatConstants.EnlargeSpellId, 0, "", 0, "", 0)]
         [TestCase(FeatConstants.EschewMaterialsId, 0, "", 0, "", 0)]
-        [TestCase(FeatConstants.ExoticWeaponProficiencyId, 1, FeatConstants.ExoticWeaponProficiencyId, 0, "", 0)]
+        [TestCase(FeatConstants.ExoticWeaponProficiencyId, 1, ProficiencyConstants.All, 0, "", 0)]
         [TestCase(FeatConstants.ExtendSpellId, 0, "", 0, "", 0)]
         [TestCase(FeatConstants.ExtraTurningId, 0, "", 0, "", 4)]
         [TestCase(FeatConstants.FarShotId, 0, "", 0, "", 0)]
@@ -199,6 +199,56 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.Additional
         [TestCase(FeatConstants.InvestigatorId, 0, "", 0, "", 2)]
         [TestCase(FeatConstants.IronWillId, 0, "", 0, "", 2)]
         [TestCase(FeatConstants.LeadershipId, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.LightningReflexesId, 0, "", 0, "", 2)]
+        [TestCase(FeatConstants.MagicalAptitudeId, 0, "", 0, "", 2)]
+        [TestCase(FeatConstants.ManyshotId, 6, "", 0, "", 0)]
+        [TestCase(FeatConstants.MartialWeaponProficiencyId, 0, ProficiencyConstants.All, 0, "", 0)]
+        [TestCase(FeatConstants.MaximizeSpellId, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.MobilityId, 0, "", 0, "", 4)]
+        [TestCase(FeatConstants.MountedArcheryId, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.MountedCombatId, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.NaturalSpellId, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.NegotiatorId, 0, "", 0, "", 2)]
+        [TestCase(FeatConstants.NimbleFingersId, 0, "", 0, "", 2)]
+        [TestCase(FeatConstants.OpportunistId, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.PersuasiveId, 0, "", 0, "", 2)]
+        [TestCase(FeatConstants.PointBlankShotId, 0, "", 0, "", 1)]
+        [TestCase(FeatConstants.PowerAttackId, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.PreciseShotId, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.QuickDrawId, 1, "", 0, "", 0)]
+        [TestCase(FeatConstants.QuickenSpellId, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.RapidReloadId, 0, GroupConstants.ManualCrossbows, 0, "", 0)]
+        [TestCase(FeatConstants.RapidShotId, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.RideByAttackId, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.RunId, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.SelfSufficientId, 0, "", 0, "", 2)]
+        [TestCase(FeatConstants.ShieldProficiencyId, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.ShotOnTheRunId, 4, "", 0, "", 0)]
+        [TestCase(FeatConstants.SilentSpellId, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.SimpleWeaponProficiencyId, 0, ProficiencyConstants.All, 0, "", 0)]
+        [TestCase(FeatConstants.SkillFocusId, 0, GroupConstants.Skills, 0, "", 3)]
+        [TestCase(FeatConstants.SkillMasteryId, 0, GroupConstants.Skills, 0, "", 3)]
+        [TestCase(FeatConstants.SlipperyMindId, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.SnatchArrowsId, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.SpellFocusId, 0, GroupConstants.SchoolsOfMagic, 0, "", 1)]
+        [TestCase(FeatConstants.SpellMasteryId, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.SpellPenetrationId, 0, "", 0, "", 2)]
+        [TestCase(FeatConstants.SpiritedChargeId, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.SpringAttackId, 4, "", 0, "", 0)]
+        [TestCase(FeatConstants.StealthyId, 0, "", 0, "", 2)]
+        [TestCase(FeatConstants.StillSpellId, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.StunningFistId, 8, "", 0, "", 0)]
+        [TestCase(FeatConstants.ToughnessId, 0, "", 0, "", 3)]
+        [TestCase(FeatConstants.TowerShieldProficiencyId, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.TrackId, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.TrampleId, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.TwoWeaponDefenseId, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.TwoWeaponFightingId, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.WeaponFocusId, 1, GroupConstants.WeaponsWithUnarmedAndGrappleAndRay, 0, "", 1)]
+        [TestCase(FeatConstants.WeaponFinesseId, 1, "", 0, "", 0)]
+        [TestCase(FeatConstants.WeaponSpecializationId, 0, GroupConstants.WeaponsWithUnarmedAndGrapple, 0, "", 2)]
+        [TestCase(FeatConstants.WhirlwindAttackId, 4, "", 0, "", 0)]
+        [TestCase(FeatConstants.WidenSpellId, 0, "", 0, "", 0)]
         public void AdditionalFeatData(String name, Int32 baseAttackRequirement, String focusType, Int32 frequencyQuantity, String frequencyTimePeriod, Int32 strength)
         {
             var data = new List<String>();

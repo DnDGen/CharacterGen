@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+    <object>
+        <name>Rogue</name>
+        <item>10</item>
+    </object>
+    <object>
+        <name>Monk</name>
+        <item>9</item>
+    </object>
+</items>

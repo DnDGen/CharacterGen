@@ -53,7 +53,25 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
                 FeatConstants.ImprovedSunderId,
                 FeatConstants.ImprovedTripId,
                 FeatConstants.ImprovedTurningId,
-                FeatConstants.ImprovedTwoWeaponFightingId
+                FeatConstants.ImprovedTwoWeaponFightingId,
+                FeatConstants.ManyshotId,
+                FeatConstants.RapidShotId,
+                FeatConstants.MountedArcheryId,
+                FeatConstants.MobilityId,
+                FeatConstants.NaturalSpellId,
+                FeatConstants.RapidReloadId,
+                FeatConstants.RideByAttackId,
+                FeatConstants.ShotOnTheRunId,
+                FeatConstants.SnatchArrowsId,
+                FeatConstants.SpiritedChargeId,
+                FeatConstants.SpringAttackId,
+                FeatConstants.StunningFistId,
+                FeatConstants.TowerShieldProficiencyId,
+                FeatConstants.TrampleId,
+                FeatConstants.WhirlwindAttackId,
+                FeatConstants.TwoWeaponDefenseId,
+                FeatConstants.WeaponFocusId,
+                FeatConstants.WeaponSpecializationId
             };
 
             AssertCollectionNames(names);
@@ -87,6 +105,38 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
         [TestCase(FeatConstants.ImprovedTripId, FeatConstants.CombatExpertiseId)]
         [TestCase(FeatConstants.ImprovedTurningId, FeatConstants.TurnId)]
         [TestCase(FeatConstants.ImprovedTwoWeaponFightingId, FeatConstants.TwoWeaponFightingId)]
+        [TestCase(FeatConstants.ManyshotId, FeatConstants.RapidShotId)]
+        [TestCase(FeatConstants.RapidShotId, FeatConstants.PointBlankShotId)]
+        [TestCase(FeatConstants.MobilityId, FeatConstants.DodgeId)]
+        [TestCase(FeatConstants.MountedArcheryId, FeatConstants.MountedCombatId)]
+        [TestCase(FeatConstants.NaturalSpellId, FeatConstants.WildShapeId)]
+        [TestCase(FeatConstants.PreciseShotId, FeatConstants.PointBlankShotId)]
+        [TestCase(FeatConstants.RapidReloadId, GroupConstants.Proficiency)]
+        [TestCase(FeatConstants.RideByAttackId, FeatConstants.MountedCombatId)]
+        [TestCase(FeatConstants.ShotOnTheRunId,
+            FeatConstants.DodgeId,
+            FeatConstants.MobilityId,
+            FeatConstants.PointBlankShotId)]
+        [TestCase(FeatConstants.SnatchArrowsId,
+            FeatConstants.DeflectArrowsId,
+            FeatConstants.ImprovedUnarmedStrikeId)]
+        [TestCase(FeatConstants.SpiritedChargeId,
+            FeatConstants.MountedCombatId,
+            FeatConstants.RideByAttackId)]
+        [TestCase(FeatConstants.SpringAttackId,
+            FeatConstants.DodgeId,
+            FeatConstants.MobilityId)]
+        [TestCase(FeatConstants.StunningFistId, FeatConstants.ImprovedUnarmedStrikeId)]
+        [TestCase(FeatConstants.TowerShieldProficiencyId, FeatConstants.ShieldProficiencyId)]
+        [TestCase(FeatConstants.TrampleId, FeatConstants.MountedCombatId)]
+        [TestCase(FeatConstants.TwoWeaponDefenseId, FeatConstants.TwoWeaponFightingId)]
+        [TestCase(FeatConstants.WeaponFocusId, GroupConstants.Proficiency)]
+        [TestCase(FeatConstants.WeaponSpecializationId, FeatConstants.WeaponFocusId)]
+        [TestCase(FeatConstants.WhirlwindAttackId,
+            FeatConstants.CombatExpertiseId,
+            FeatConstants.DodgeId,
+            FeatConstants.MobilityId,
+            FeatConstants.SpringAttackId)]
         public void RequiredFeats(String name, params String[] requiredFeatIds)
         {
             DistinctCollection(name, requiredFeatIds);

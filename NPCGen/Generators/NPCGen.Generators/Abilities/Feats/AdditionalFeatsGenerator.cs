@@ -80,11 +80,8 @@ namespace NPCGen.Generators.Abilities.Feats
                 var index = GetRandomIndexOf(availableFeats);
                 var featSelection = availableFeats.ElementAt(index);
 
-                var feat = new Feat();
-                feat.Name.Id = featSelection.FeatId;
-                feat.Focus = featFocusGenerator.GenerateFrom(featSelection.FeatId, featSelection.FocusType, featSelection.RequiredFeats, chosenFeats, characterClass);
-
-                if (feat.Focus == ProficiencyConstants.All)
+                var preliminaryFocus = featFocusGenerator.GenerateFrom(featSelection.FeatId, featSelection.FocusType, skills, featSelection.RequiredFeats, chosenFeats, characterClass);
+                if (preliminaryFocus == ProficiencyConstants.All)
                 {
                     quantity++;
                     sourceFeats = sourceFeats.Except(new[] { featSelection });
@@ -93,17 +90,28 @@ namespace NPCGen.Generators.Abilities.Feats
                     continue;
                 }
 
-                feat.Frequency = featSelection.Frequency;
+                var featInstanceQuantity = 1;
+                if (featSelection.FeatId == FeatConstants.SkillMasteryId)
+                    featInstanceQuantity = stats[StatConstants.Intelligence].Bonus + featSelection.Strength;
 
-                if (featSelection.FeatId == FeatConstants.SpellMasteryId)
-                    feat.Strength = stats[StatConstants.Intelligence].Bonus;
-                else if (featSelection.FeatId == FeatConstants.SkillMasteryId)
-                    feat.Strength = stats[StatConstants.Intelligence].Bonus + 3;
+                while (featInstanceQuantity-- > 0 && preliminaryFocus != ProficiencyConstants.All)
+                {
+                    var feat = new Feat();
+                    feat.Name.Id = featSelection.FeatId;
+                    feat.Focus = preliminaryFocus;
+                    feat.Frequency = featSelection.Frequency;
 
-                feats.Add(feat);
+                    if (featSelection.FeatId == FeatConstants.SpellMasteryId)
+                        feat.Strength = stats[StatConstants.Intelligence].Bonus;
 
-                chosenFeats = preselectedFeats.Union(feats);
-                availableFeats = GetAvailableFeats(sourceFeats, chosenFeats);
+                    feats.Add(feat);
+
+                    chosenFeats = preselectedFeats.Union(feats);
+                    availableFeats = GetAvailableFeats(sourceFeats, chosenFeats);
+
+                    if (featInstanceQuantity > 0)
+                        preliminaryFocus = featFocusGenerator.GenerateFrom(featSelection.FeatId, featSelection.FocusType, skills, featSelection.RequiredFeats, chosenFeats, characterClass);
+                }
             }
 
             return feats;

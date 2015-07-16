@@ -24,7 +24,7 @@ namespace NPCGen.Generators.Abilities.Feats
             this.dice = dice;
         }
 
-        public String GenerateFrom(String featId, String focusType, IEnumerable<RequiredFeat> requiredFeats, IEnumerable<Feat> otherFeats, CharacterClass characterClass)
+        public String GenerateFrom(String featId, String focusType, Dictionary<String, Skill> skills, IEnumerable<RequiredFeat> requiredFeats, IEnumerable<Feat> otherFeats, CharacterClass characterClass)
         {
             if (String.IsNullOrEmpty(focusType))
                 return String.Empty;
@@ -41,6 +41,15 @@ namespace NPCGen.Generators.Abilities.Feats
                 return ProficiencyConstants.All;
 
             foci = foci.Except(usedFoci);
+
+            var allSkills = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.Skills);
+            var skillFoci = allSkills.Intersect(foci);
+
+            if (skillFoci.Any())
+            {
+                var missingSkills = allSkills.Except(skills.Keys);
+                foci = foci.Except(missingSkills);
+            }
 
             if (focusType == GroupConstants.SchoolsOfMagic)
                 foci = foci.Except(characterClass.ProhibitedFields);
@@ -140,7 +149,7 @@ namespace NPCGen.Generators.Abilities.Feats
             }
 
             if (foci.Any() == false)
-                return String.Empty;
+                return ProficiencyConstants.All;
 
             var index = GetRandomIndexOf(foci);
             var focus = foci.ElementAt(index);
@@ -149,12 +158,12 @@ namespace NPCGen.Generators.Abilities.Feats
         }
 
 
-        public String GenerateAllowingFocusOfAllFrom(String featId, String focusType, IEnumerable<RequiredFeat> requiredFeats, IEnumerable<Feat> otherFeats, CharacterClass characterClass)
+        public String GenerateAllowingFocusOfAllFrom(String featId, String focusType, Dictionary<String, Skill> skills, IEnumerable<RequiredFeat> requiredFeats, IEnumerable<Feat> otherFeats, CharacterClass characterClass)
         {
             if (focusType == ProficiencyConstants.All)
                 return focusType;
 
-            return GenerateFrom(featId, focusType, requiredFeats, otherFeats, characterClass);
+            return GenerateFrom(featId, focusType, skills, requiredFeats, otherFeats, characterClass);
         }
 
         public String GenerateAllowingFocusOfAllFrom(String featId, String focusType, Dictionary<String, Skill> skills)

@@ -193,6 +193,7 @@ namespace NPCGen.Tests.Unit.Common.Abilities.Feats
         [TestCase(FeatConstants.PassiveSecretDoorSearch, "Passive Secret Door Search")]
         [TestCase(FeatConstants.ImprovedSpell, "Improved Spell")]
         [TestCase(FeatConstants.SupernaturalStrength, "Supernatural Strength")]
+        [TestCase(FeatConstants.WildShape, "Wild Shape")]
         public void ConstantName(String constant, String value)
         {
             Assert.That(constant, Is.EqualTo(value));
@@ -383,6 +384,7 @@ namespace NPCGen.Tests.Unit.Common.Abilities.Feats
         [TestCase(FeatConstants.PassiveSecretDoorSearchId, "PassiveSecretDoorSearch")]
         [TestCase(FeatConstants.ImprovedSpellId, "ImprovedSpell")]
         [TestCase(FeatConstants.SupernaturalStrengthId, "SupernaturalStrength")]
+        [TestCase(FeatConstants.WildShapeId, "WildShape")]
         public void ConstantId(String constant, String value)
         {
             Assert.That(constant, Is.EqualTo(value));

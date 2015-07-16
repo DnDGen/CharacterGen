@@ -20,6 +20,7 @@ namespace NPCGen.Tables.Interfaces
         public const String Knowledge = "Knowledge";
         public const String Lycanthrope = "Lycanthrope";
         public const String Mages = "Mages";
+        public const String ManualCrossbows = "Manual Crossbows";
         public const String Monsters = "Monsters";
         public const String NaturalArmor = "NaturalArmor";
         public const String Proficiency = "Proficiency";

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using D20Dice;
 using NPCGen.Common.Abilities.Feats;
+using NPCGen.Common.Abilities.Skills;
 using NPCGen.Common.Abilities.Stats;
 using NPCGen.Common.CharacterClasses;
 using NPCGen.Generators.Interfaces.Abilities.Feats;
@@ -24,7 +25,7 @@ namespace NPCGen.Generators.Abilities.Feats
             this.dice = dice;
         }
 
-        public IEnumerable<Feat> GenerateWith(CharacterClass characterClass, Dictionary<String, Stat> stats, IEnumerable<Feat> racialFeats)
+        public IEnumerable<Feat> GenerateWith(CharacterClass characterClass, Dictionary<String, Stat> stats, IEnumerable<Feat> racialFeats, Dictionary<String, Skill> skills)
         {
             var characterClassFeatSelections = featsSelector.SelectClass(characterClass.ClassName).ToList();
 
@@ -35,7 +36,7 @@ namespace NPCGen.Generators.Abilities.Feats
             }
 
             var relevantClassFeatSelections = characterClassFeatSelections.Where(f => f.RequirementsMet(characterClass));
-            var classFeats = GetClassFeats(relevantClassFeatSelections, racialFeats, stats, characterClass);
+            var classFeats = GetClassFeats(relevantClassFeatSelections, racialFeats, stats, characterClass, skills);
 
             if (characterClass.ClassName == CharacterClassConstants.Ranger)
                 return ImproveFavoredEnemyStrength(classFeats);
@@ -43,7 +44,7 @@ namespace NPCGen.Generators.Abilities.Feats
             return classFeats;
         }
 
-        private IEnumerable<Feat> GetClassFeats(IEnumerable<CharacterClassFeatSelection> classFeatSelections, IEnumerable<Feat> earnedFeat, Dictionary<String, Stat> stats, CharacterClass characterClass)
+        private IEnumerable<Feat> GetClassFeats(IEnumerable<CharacterClassFeatSelection> classFeatSelections, IEnumerable<Feat> earnedFeat, Dictionary<String, Stat> stats, CharacterClass characterClass, Dictionary<String, Skill> skills)
         {
             var classFeats = new List<Feat>();
 
@@ -51,7 +52,7 @@ namespace NPCGen.Generators.Abilities.Feats
             {
                 var classFeat = new Feat();
                 classFeat.Name.Id = classFeatSelection.FeatId;
-                classFeat.Focus = featFocusGenerator.GenerateAllowingFocusOfAllFrom(classFeatSelection.FeatId, classFeatSelection.FocusType, classFeatSelection.RequiredFeats, earnedFeat, characterClass);
+                classFeat.Focus = featFocusGenerator.GenerateAllowingFocusOfAllFrom(classFeatSelection.FeatId, classFeatSelection.FocusType, skills, classFeatSelection.RequiredFeats, earnedFeat, characterClass);
                 classFeat.Frequency = classFeatSelection.Frequency;
 
                 if (classFeatSelection.FrequencyQuantityStat != String.Empty)

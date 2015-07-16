@@ -376,6 +376,8 @@ namespace NPCGen.Common.Abilities.Feats
         public const String ImprovedSpellId = "ImprovedSpell";
         public const String SupernaturalStrength = "Supernatural Strength";
         public const String SupernaturalStrengthId = "SupernaturalStrength";
+        public const String WildShape = "Wild Shape";
+        public const String WildShapeId = "WildShape";
 
         public static class Frequencies
         {

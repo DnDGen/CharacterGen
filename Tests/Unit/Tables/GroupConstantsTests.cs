@@ -23,6 +23,7 @@ namespace NPCGen.Tests.Unit.Tables
         [TestCase(GroupConstants.Knowledge, "Knowledge")]
         [TestCase(GroupConstants.Lycanthrope, "Lycanthrope")]
         [TestCase(GroupConstants.Mages, "Mages")]
+        [TestCase(GroupConstants.ManualCrossbows, "Manual Crossbows")]
         [TestCase(GroupConstants.Monsters, "Monsters")]
         [TestCase(GroupConstants.NaturalArmor, "NaturalArmor")]
         [TestCase(GroupConstants.Proficiency, "Proficiency")]

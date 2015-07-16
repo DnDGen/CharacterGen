@@ -9,6 +9,7 @@ using NPCGen.Common.Alignments;
 using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Items;
 using NPCGen.Generators.Interfaces;
+using NPCGen.Generators.Interfaces.Randomizers.CharacterClasses;
 using NPCGen.Generators.Interfaces.Randomizers.Stats;
 using NUnit.Framework;
 
@@ -21,6 +22,8 @@ namespace NPCGen.Tests.Integration.Stress
         public ICharacterGenerator CharacterGenerator { get; set; }
         [Inject, Named(StatsRandomizerTypeConstants.Raw)]
         public IStatsRandomizer StatsRandomizer { get; set; }
+        [Inject]
+        public ISetLevelRandomizer SetLevelRandomizer { get; set; }
 
         IEnumerable<String> goodnesses;
         IEnumerable<String> lawfulnesses;
@@ -111,6 +114,8 @@ namespace NPCGen.Tests.Integration.Stress
             Assert.That(character.Combat.ArmorClass.Full, Is.Positive);
             Assert.That(character.Combat.ArmorClass.FlatFooted, Is.Positive);
             Assert.That(character.Combat.ArmorClass.Touch, Is.Positive);
+
+            Assert.That(character.Leadership, Is.Not.Null);
         }
 
         [Test]
@@ -183,6 +188,32 @@ namespace NPCGen.Tests.Integration.Stress
             while (TestShouldKeepRunning() && character.Magic.Spells.Any());
 
             Assert.That(character.Magic.Spells, Is.Empty);
+        }
+
+        [Test]
+        public void LeadershipHappens()
+        {
+            SetLevelRandomizer.SetLevel = 20;
+            var character = new Character();
+
+            do character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, SetLevelRandomizer, BaseRaceRandomizer,
+                MetaraceRandomizer, StatsRandomizer);
+            while (TestShouldKeepRunning() && character.Leadership.Score == 0);
+
+            Assert.That(character.Leadership.Score, Is.Positive);
+        }
+
+        [Test]
+        public void LeadershipDoesNotHappen()
+        {
+            SetLevelRandomizer.SetLevel = 20;
+            var character = new Character();
+
+            do character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, SetLevelRandomizer, BaseRaceRandomizer,
+                MetaraceRandomizer, StatsRandomizer);
+            while (TestShouldKeepRunning() && character.Leadership.Score > 0);
+
+            Assert.That(character.Leadership.Score, Is.EqualTo(0));
         }
     }
 }

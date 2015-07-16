@@ -27,6 +27,9 @@ namespace NPCGen.Tests.Integration.Tables
 
         protected void AssertCollectionNames(IEnumerable<String> names)
         {
+            var distinctCollection = names.Distinct();
+            Assert.That(distinctCollection.Count(), Is.EqualTo(names.Count()), "Provided collection is not distinct");
+
             AssertMissingItems(table.Keys, names);
             AssertExtraItems(table.Keys, names);
         }

@@ -91,6 +91,11 @@
     <Compile Include="Abilities\Feats\FeatFociTests.cs" />
     <Compile Include="Abilities\Feats\FeatGroupsTests.cs" />
     <Compile Include="Abilities\Feats\RequiredFeatsTests.cs" />
+    <Compile Include="Abilities\Feats\Requirements\Classes\CripplingStrikeClassRequirementsTests.cs" />
+    <Compile Include="Abilities\Feats\Requirements\Classes\DefensiveRollClassRequirementsTests.cs" />
+    <Compile Include="Abilities\Feats\Requirements\Classes\ImprovedEvasionClassRequirementsTests.cs" />
+    <Compile Include="Abilities\Feats\Requirements\Stats\CombatExpertiseStatRequirementsTests.cs" />
+    <Compile Include="Abilities\Feats\Requirements\Stats\DeflectArrowsStatRequirementsTests.cs" />
     <Compile Include="Abilities\Skills\AssignPointToCrossClassSkillTests.cs" />
     <Compile Include="Abilities\Skills\ClassSkillsTests.cs" />
     <Compile Include="Abilities\Skills\CrossClassSkillsTests.cs" />
@@ -236,9 +241,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Abilities\Feats\Requirements\Stats\" />
-  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

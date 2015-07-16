@@ -5,6 +5,10 @@
         <name></name>
     </object>
     <object>
+        <name>Abjuration</name>
+        <item>SkillBonus</item>
+    </object>
+    <object>
         <name>Additional</name>
         <item>Acrobatic</item>
         <item>Agile</item>
@@ -222,6 +226,10 @@
         <item>Stonecunning</item>
     </object>
     <object>
+        <name>Divination</name>
+        <item>SkillBonus</item>
+    </object>
+    <object>
         <name>Doppelganger</name>
         <item>SkillBonusBluff</item>
         <item>SkillBonusDisguise</item>
@@ -235,6 +243,10 @@
     <object>
         <name>Earth</name>
         <item>Turn</item>
+    </object>
+    <object>
+        <name>Enchantment</name>
+        <item>SkillBonus</item>
     </object>
     <object>
         <name>Evil</name>
@@ -323,9 +335,17 @@
         <item>SkillMastery</item>
         <item>SlipperyMind</item>
         <item>ImprovedFamiliar</item>
+        <item>Leadership</item>
+        <item>SpellMastery</item>
+        <item>WeaponSpecialization</item>
     </object>
     <object>
         <name>HasSkillRequirements</name>
+        <item>MountedArchery</item>
+        <item>MountedCombat</item>
+        <item>RideByAttack</item>
+        <item>SpiritedCharge</item>
+        <item>Trample</item>
     </object>
     <object>
         <name>HasStatRequirements</name>
@@ -335,6 +355,19 @@
         <item>Dodge</item>
         <item>GreaterTwoWeaponFighting</item>
         <item>ImprovedGrapple</item>
+        <item>ImprovedPreciseShot</item>
+        <item>ImprovedTwoWeaponFighting</item>
+        <item>Manyshot</item>
+        <item>Mobility</item>
+        <item>NaturalSpell</item>
+        <item>RapidShot</item>
+        <item>ShotOnTheRun</item>
+        <item>SnatchArrows</item>
+        <item>SpringAttack</item>
+        <item>StunningFist</item>
+        <item>TwoWeaponFighting</item>
+        <item>TwoWeaponDefense</item>
+        <item>WhirlwindAttack</item>
     </object>
     <object>
         <name>HighElf</name>
@@ -373,6 +406,10 @@
         <name>Human</name>
     </object>
     <object>
+        <name>Illusion</name>
+        <item>SkillBonus</item>
+    </object>
+    <object>
         <name>LightfootHalfling</name>
         <item>SkillBonusListen</item>
         <item>SkillBonusClimb</item>
@@ -390,6 +427,10 @@
         <item>NaturalArmor</item>
         <item>SimpleWeaponProficiency</item>
         <item>ShieldProficiency</item>
+    </object>
+    <object>
+        <name>Necromancy</name>
+        <item>SkillBonus</item>
     </object>
     <object>
         <name>None</name>
@@ -501,6 +542,10 @@
         <item>SaveBonusFear</item>
         <item>AttackBonusThrowOrSling</item>
         <item>PassiveSecretDoorSearch</item>
+    </object>
+    <object>
+        <name>Transmutation</name>
+        <item>SkillBonus</item>
     </object>
     <object>
         <name>Wereboar</name>

@@ -39,6 +39,12 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
                 CharacterClassConstants.Domains.Strength,
                 CharacterClassConstants.Schools.Conjuration,
                 CharacterClassConstants.Schools.Evocation,
+                CharacterClassConstants.Schools.Enchantment,
+                CharacterClassConstants.Schools.Abjuration,
+                CharacterClassConstants.Schools.Divination,
+                CharacterClassConstants.Schools.Illusion,
+                CharacterClassConstants.Schools.Necromancy,
+                CharacterClassConstants.Schools.Transmutation,
                 RaceConstants.BaseRaces.DeepHalflingId,
                 RaceConstants.BaseRaces.DoppelgangerId,
                 RaceConstants.BaseRaces.GnollId,
@@ -79,8 +85,15 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.SkillMasteryId,
             FeatConstants.SlipperyMindId,
             FeatConstants.ImprovedFamiliarId,
-            FeatConstants.LeadershipId)]
-        [TestCase(GroupConstants.HasSkillRequirements)]
+            FeatConstants.LeadershipId,
+            FeatConstants.SpellMasteryId,
+            FeatConstants.WeaponSpecializationId)]
+        [TestCase(GroupConstants.HasSkillRequirements,
+            FeatConstants.MountedArcheryId,
+            FeatConstants.MountedCombatId,
+            FeatConstants.RideByAttackId,
+            FeatConstants.SpiritedChargeId,
+            FeatConstants.TrampleId)]
         [TestCase(GroupConstants.HasStatRequirements,
             FeatConstants.PowerAttackId,
             FeatConstants.CombatExpertiseId,
@@ -89,7 +102,18 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.GreaterTwoWeaponFightingId,
             FeatConstants.ImprovedGrappleId,
             FeatConstants.ImprovedPreciseShotId,
-            FeatConstants.ImprovedTwoWeaponFightingId)]
+            FeatConstants.ImprovedTwoWeaponFightingId,
+            FeatConstants.ManyshotId,
+            FeatConstants.MobilityId,
+            FeatConstants.NaturalSpellId,
+            FeatConstants.RapidShotId,
+            FeatConstants.SnatchArrowsId,
+            FeatConstants.SpringAttackId,
+            FeatConstants.StunningFistId,
+            FeatConstants.ShotOnTheRunId,
+            FeatConstants.TwoWeaponDefenseId,
+            FeatConstants.TwoWeaponFightingId,
+            FeatConstants.WhirlwindAttackId)]
         [TestCase(GroupConstants.TakenMultipleTimes,
             FeatConstants.SpellMasteryId,
             FeatConstants.ToughnessId,
@@ -136,9 +160,21 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.CastSpellBonusId)]
         [TestCase(CharacterClassConstants.Domains.Strength,
             FeatConstants.SupernaturalStrengthId)]
+        [TestCase(CharacterClassConstants.Schools.Abjuration,
+            FeatConstants.SkillBonusId)]
         [TestCase(CharacterClassConstants.Schools.Conjuration,
             FeatConstants.SkillBonusId)]
+        [TestCase(CharacterClassConstants.Schools.Divination,
+            FeatConstants.SkillBonusId)]
+        [TestCase(CharacterClassConstants.Schools.Enchantment,
+            FeatConstants.SkillBonusId)]
         [TestCase(CharacterClassConstants.Schools.Evocation,
+            FeatConstants.SkillBonusId)]
+        [TestCase(CharacterClassConstants.Schools.Illusion,
+            FeatConstants.SkillBonusId)]
+        [TestCase(CharacterClassConstants.Schools.Necromancy,
+            FeatConstants.SkillBonusId)]
+        [TestCase(CharacterClassConstants.Schools.Transmutation,
             FeatConstants.SkillBonusId)]
         public void ClassFeatGroup(String name, params String[] collection)
         {

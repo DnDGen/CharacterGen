@@ -496,7 +496,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
         {
             AddFeatSelections(1);
             additionalFeatSelections[0].FocusType = "focus type";
-            mockFeatFocusGenerator.Setup(g => g.GenerateFrom("feat1", "focus type", additionalFeatSelections[0].RequiredFeats, It.IsAny<IEnumerable<Feat>>(), characterClass))
+            mockFeatFocusGenerator.Setup(g => g.GenerateFrom("feat1", "focus type", skills, additionalFeatSelections[0].RequiredFeats, It.IsAny<IEnumerable<Feat>>(), characterClass))
                 .Returns("focus");
 
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
@@ -513,9 +513,9 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             AddFeatSelections(2);
             additionalFeatSelections[0].FocusType = "focus type";
 
-            mockFeatFocusGenerator.Setup(g => g.GenerateFrom("feat1", "focus type", additionalFeatSelections[0].RequiredFeats, It.IsAny<IEnumerable<Feat>>(), characterClass))
+            mockFeatFocusGenerator.Setup(g => g.GenerateFrom("feat1", "focus type", skills, additionalFeatSelections[0].RequiredFeats, It.IsAny<IEnumerable<Feat>>(), characterClass))
                 .Returns("focus");
-            mockFeatFocusGenerator.Setup(g => g.GenerateFrom("feat2", String.Empty, additionalFeatSelections[1].RequiredFeats, It.IsAny<IEnumerable<Feat>>(), characterClass))
+            mockFeatFocusGenerator.Setup(g => g.GenerateFrom("feat2", String.Empty, skills, additionalFeatSelections[1].RequiredFeats, It.IsAny<IEnumerable<Feat>>(), characterClass))
                 .Returns(String.Empty);
 
             mockDice.SetupSequence(d => d.Roll(1).d(2)).Returns(1).Returns(2);
@@ -530,9 +530,6 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             Assert.That(first.Focus, Is.EqualTo("focus"));
             Assert.That(last.Name.Id, Is.EqualTo(additionalFeatSelections[1].FeatId));
             Assert.That(last.Focus, Is.Empty);
-            mockFeatFocusGenerator.Verify(g => g.GenerateFrom(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<IEnumerable<RequiredFeat>>(), It.IsAny<IEnumerable<Feat>>(), It.IsAny<CharacterClass>()), Times.Exactly(2));
-            mockFeatFocusGenerator.Verify(g => g.GenerateFrom("feat1", "focus type", additionalFeatSelections[0].RequiredFeats, It.IsAny<IEnumerable<Feat>>(), characterClass), Times.Once);
-            mockFeatFocusGenerator.Verify(g => g.GenerateFrom("feat2", String.Empty, additionalFeatSelections[1].RequiredFeats, It.IsAny<IEnumerable<Feat>>(), characterClass), Times.Once);
         }
 
         [Test]
@@ -542,7 +539,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             AddFeatSelections(1);
             additionalFeatSelections[0].FocusType = "focus type";
 
-            mockFeatFocusGenerator.SetupSequence(g => g.GenerateFrom("feat1", "focus type", additionalFeatSelections[0].RequiredFeats, It.IsAny<IEnumerable<Feat>>(), characterClass))
+            mockFeatFocusGenerator.SetupSequence(g => g.GenerateFrom("feat1", "focus type", skills, additionalFeatSelections[0].RequiredFeats, It.IsAny<IEnumerable<Feat>>(), characterClass))
                 .Returns("focus 1").Returns("focus 2");
 
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
@@ -569,22 +566,6 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
 
             Assert.That(firstFeat.Name.Id, Is.EqualTo(FeatConstants.SpellMasteryId));
             Assert.That(firstFeat.Strength, Is.EqualTo(stats[StatConstants.Intelligence].Bonus));
-            Assert.That(feats.Count(), Is.EqualTo(1));
-        }
-
-        [Test]
-        public void SkillMasteryStrengthIsIntelligenceBonusPlus3()
-        {
-            characterClass.Level = 1;
-            AddFeatSelections(1);
-            additionalFeatSelections[0].FeatId = FeatConstants.SkillMasteryId;
-            stats[StatConstants.Intelligence].Value = 14;
-
-            var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
-            var firstFeat = feats.First();
-
-            Assert.That(firstFeat.Name.Id, Is.EqualTo(FeatConstants.SkillMasteryId));
-            Assert.That(firstFeat.Strength, Is.EqualTo(stats[StatConstants.Intelligence].Bonus + 3));
             Assert.That(feats.Count(), Is.EqualTo(1));
         }
 
@@ -645,7 +626,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             AddFeatSelections(1);
             additionalFeatSelections[0].FocusType = "focus type";
 
-            mockFeatFocusGenerator.Setup(g => g.GenerateFrom(additionalFeatSelections[0].FeatId, "focus type", additionalFeatSelections[0].RequiredFeats, preselectedFeats, characterClass)).Returns(ProficiencyConstants.All);
+            mockFeatFocusGenerator.Setup(g => g.GenerateFrom(additionalFeatSelections[0].FeatId, "focus type", skills, additionalFeatSelections[0].RequiredFeats, preselectedFeats, characterClass)).Returns(ProficiencyConstants.All);
 
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             Assert.That(feats, Is.Empty);
@@ -657,7 +638,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             AddFeatSelections(2);
             additionalFeatSelections[0].FocusType = "focus type";
 
-            mockFeatFocusGenerator.Setup(g => g.GenerateFrom(additionalFeatSelections[0].FeatId, "focus type", additionalFeatSelections[0].RequiredFeats, preselectedFeats, characterClass)).Returns(ProficiencyConstants.All);
+            mockFeatFocusGenerator.Setup(g => g.GenerateFrom(additionalFeatSelections[0].FeatId, "focus type", skills, additionalFeatSelections[0].RequiredFeats, preselectedFeats, characterClass)).Returns(ProficiencyConstants.All);
 
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             var onlyFeat = feats.Single();
@@ -668,7 +649,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
         public void CanHaveFeatWithoutFocus()
         {
             AddFeatSelections(1);
-            mockFeatFocusGenerator.Setup(g => g.GenerateFrom(additionalFeatSelections[0].FeatId, String.Empty, additionalFeatSelections[0].RequiredFeats, preselectedFeats, characterClass))
+            mockFeatFocusGenerator.Setup(g => g.GenerateFrom(additionalFeatSelections[0].FeatId, String.Empty, skills, additionalFeatSelections[0].RequiredFeats, preselectedFeats, characterClass))
                 .Returns(String.Empty);
 
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
@@ -676,6 +657,160 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
 
             Assert.That(feat.Name.Id, Is.EqualTo(additionalFeatSelections[0].FeatId));
             Assert.That(feat.Focus, Is.Empty);
+        }
+
+        [Test]
+        public void SkillMasteryIsBrokenIntoSeparateFeats()
+        {
+            AddFeatSelections(1);
+            additionalFeatSelections[0].FeatId = FeatConstants.SkillMasteryId;
+            additionalFeatSelections[0].Strength = 2;
+            additionalFeatSelections[0].FocusType = GroupConstants.Skills;
+            stats[StatConstants.Intelligence].Value = 12;
+
+            mockFeatFocusGenerator.SetupSequence(g => g.GenerateFrom(FeatConstants.SkillMasteryId, GroupConstants.Skills, skills, additionalFeatSelections[0].RequiredFeats, It.IsAny<IEnumerable<Feat>>(), characterClass))
+                .Returns("skill 1").Returns("skill 2").Returns("skill 3").Returns("skill 4");
+
+            var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
+
+            Assert.That(feats.Count(), Is.EqualTo(3));
+
+            for (var i = 0; i < 3; i++)
+            {
+                var feat = feats.ElementAt(i);
+                var focus = String.Format("skill {0}", i + 1);
+
+                Assert.That(feat.Name.Id, Is.EqualTo(FeatConstants.SkillMasteryId));
+                Assert.That(feat.Focus, Is.EqualTo(focus));
+                Assert.That(feat.Strength, Is.EqualTo(0));
+            }
+        }
+
+        [Test]
+        public void SkillMasteryDoesNotRepeatFociWithinOneFeatSelection()
+        {
+            AddFeatSelections(1);
+            additionalFeatSelections[0].FeatId = FeatConstants.SkillMasteryId;
+            additionalFeatSelections[0].Strength = 1;
+            additionalFeatSelections[0].FocusType = GroupConstants.Skills;
+            stats[StatConstants.Intelligence].Value = 12;
+
+            mockFeatFocusGenerator.Setup(g => g.GenerateFrom(FeatConstants.SkillMasteryId, GroupConstants.Skills, skills, additionalFeatSelections[0].RequiredFeats, preselectedFeats, characterClass))
+                .Returns("skill 1");
+            mockFeatFocusGenerator.Setup(g => g.GenerateFrom(FeatConstants.SkillMasteryId, GroupConstants.Skills, skills, additionalFeatSelections[0].RequiredFeats, It.Is<IEnumerable<Feat>>(fs => fs.Any(f => f.Name.Id == FeatConstants.SkillMasteryId)), characterClass))
+                .Returns("skill 2");
+
+            var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
+
+            Assert.That(feats.Count(), Is.EqualTo(2));
+
+            for (var i = 0; i < 2; i++)
+            {
+                var feat = feats.ElementAt(i);
+                var focus = String.Format("skill {0}", i + 1);
+
+                Assert.That(feat.Name.Id, Is.EqualTo(FeatConstants.SkillMasteryId));
+                Assert.That(feat.Focus, Is.EqualTo(focus));
+                Assert.That(feat.Strength, Is.EqualTo(0));
+            }
+        }
+
+        [Test]
+        public void SkillMasteryDoesNotRepeatFociAcrossFeatSelections()
+        {
+            AddFeatSelections(1);
+            additionalFeatSelections[0].FeatId = FeatConstants.SkillMasteryId;
+            additionalFeatSelections[0].Strength = 1;
+            additionalFeatSelections[0].FocusType = GroupConstants.Skills;
+            stats[StatConstants.Intelligence].Value = 10;
+            characterClass.Level = 3;
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TakenMultipleTimes))
+                .Returns(new[] { FeatConstants.SkillMasteryId });
+
+            mockFeatFocusGenerator.Setup(g => g.GenerateFrom(FeatConstants.SkillMasteryId, GroupConstants.Skills, skills, additionalFeatSelections[0].RequiredFeats, preselectedFeats, characterClass))
+                .Returns("skill 1");
+            mockFeatFocusGenerator.Setup(g => g.GenerateFrom(FeatConstants.SkillMasteryId, GroupConstants.Skills, skills, additionalFeatSelections[0].RequiredFeats, It.Is<IEnumerable<Feat>>(fs => fs.Any(f => f.Name.Id == FeatConstants.SkillMasteryId)), characterClass))
+                .Returns("skill 2");
+
+            var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
+
+            Assert.That(feats.Count(), Is.EqualTo(2));
+
+            for (var i = 0; i < 2; i++)
+            {
+                var feat = feats.ElementAt(i);
+                var focus = String.Format("skill {0}", i + 1);
+
+                Assert.That(feat.Name.Id, Is.EqualTo(FeatConstants.SkillMasteryId));
+                Assert.That(feat.Focus, Is.EqualTo(focus));
+                Assert.That(feat.Strength, Is.EqualTo(0));
+            }
+        }
+
+        [Test]
+        public void IfOutOfSkills_StopAddingSkillFoci()
+        {
+            AddFeatSelections(1);
+            additionalFeatSelections[0].FeatId = FeatConstants.SkillMasteryId;
+            additionalFeatSelections[0].Strength = 1;
+            additionalFeatSelections[0].FocusType = GroupConstants.Skills;
+            stats[StatConstants.Intelligence].Value = 10;
+            characterClass.Level = 3;
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TakenMultipleTimes))
+                .Returns(new[] { FeatConstants.SkillMasteryId });
+
+            mockFeatFocusGenerator.Setup(g => g.GenerateFrom(FeatConstants.SkillMasteryId, GroupConstants.Skills, skills, additionalFeatSelections[0].RequiredFeats, preselectedFeats, characterClass))
+                .Returns("skill 1");
+            mockFeatFocusGenerator.Setup(g => g.GenerateFrom(FeatConstants.SkillMasteryId, GroupConstants.Skills, skills, additionalFeatSelections[0].RequiredFeats, It.Is<IEnumerable<Feat>>(fs => fs.Any(f => f.Name.Id == FeatConstants.SkillMasteryId)), characterClass))
+                .Returns(ProficiencyConstants.All);
+
+            var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
+            var onlyFeat = feats.Single();
+
+            Assert.That(onlyFeat.Name.Id, Is.EqualTo(FeatConstants.SkillMasteryId));
+            Assert.That(onlyFeat.Focus, Is.EqualTo("skill 1"));
+            Assert.That(onlyFeat.Strength, Is.EqualTo(0));
+        }
+
+        [Test]
+        public void IfOutOfSkills_DoNotTakeSkillMastery()
+        {
+            AddFeatSelections(1);
+            additionalFeatSelections[0].FeatId = FeatConstants.SkillMasteryId;
+            additionalFeatSelections[0].Strength = 1;
+            additionalFeatSelections[0].FocusType = GroupConstants.Skills;
+            stats[StatConstants.Intelligence].Value = 10;
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TakenMultipleTimes))
+                .Returns(new[] { FeatConstants.SkillMasteryId });
+
+            mockFeatFocusGenerator.Setup(g => g.GenerateFrom(FeatConstants.SkillMasteryId, GroupConstants.Skills, skills, additionalFeatSelections[0].RequiredFeats, preselectedFeats, characterClass))
+                .Returns(ProficiencyConstants.All);
+
+            var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
+            Assert.That(feats, Is.Empty);
+        }
+
+        [Test]
+        public void IfOutOfSkills_CanTakeDifferentFeat()
+        {
+            AddFeatSelections(2);
+            additionalFeatSelections[0].FeatId = FeatConstants.SkillMasteryId;
+            additionalFeatSelections[0].Strength = 1;
+            additionalFeatSelections[0].FocusType = GroupConstants.Skills;
+            stats[StatConstants.Intelligence].Value = 10;
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TakenMultipleTimes))
+                .Returns(new[] { FeatConstants.SkillMasteryId });
+
+            mockFeatFocusGenerator.Setup(g => g.GenerateFrom(FeatConstants.SkillMasteryId, GroupConstants.Skills, skills, additionalFeatSelections[0].RequiredFeats, preselectedFeats, characterClass))
+                .Returns(ProficiencyConstants.All);
+
+            var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
+            var onlyFeat = feats.Single();
+            Assert.That(onlyFeat.Name.Id, Is.EqualTo("feat2"));
         }
     }
 }
