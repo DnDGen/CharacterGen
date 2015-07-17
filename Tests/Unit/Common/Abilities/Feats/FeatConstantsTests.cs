@@ -211,6 +211,8 @@ namespace NPCGen.Tests.Unit.Common.Abilities.Feats
         [TestCase(FeatConstants.TongueOfSunAndMoon, "Tongue of Sun and Moon")]
         [TestCase(FeatConstants.EmptyBody, "Empty Body")]
         [TestCase(FeatConstants.PerfectSelf, "Perfect Self")]
+        [TestCase(FeatConstants.MonkBonusFeat, "Monk Bonus Feat")]
+        [TestCase(FeatConstants.GoodFortune, "Good Fortune")]
         public void ConstantName(String constant, String value)
         {
             Assert.That(constant, Is.EqualTo(value));
@@ -419,6 +421,8 @@ namespace NPCGen.Tests.Unit.Common.Abilities.Feats
         [TestCase(FeatConstants.TongueOfSunAndMoonId, "TongueOfSunAndMoon")]
         [TestCase(FeatConstants.EmptyBodyId, "EmptyBody")]
         [TestCase(FeatConstants.PerfectSelfId, "PerfectSelf")]
+        [TestCase(FeatConstants.MonkBonusFeatId, "MonkBonusFeat")]
+        [TestCase(FeatConstants.GoodFortuneId, "GoodFortune")]
         public void ConstantId(String constant, String value)
         {
             Assert.That(constant, Is.EqualTo(value));

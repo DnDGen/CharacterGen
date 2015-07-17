@@ -24,14 +24,19 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
         {
             var names = new[] 
             {
-                "",
+                String.Empty,
+                GroupConstants.Additional,
                 GroupConstants.HasClassRequirements,
                 GroupConstants.HasSkillRequirements,
                 GroupConstants.HasStatRequirements,
                 GroupConstants.TakenMultipleTimes,
+                CharacterClassConstants.Barbarian,
+                CharacterClassConstants.Bard,
                 CharacterClassConstants.Cleric,
                 CharacterClassConstants.Fighter,
+                CharacterClassConstants.Monk,
                 CharacterClassConstants.Ranger,
+                CharacterClassConstants.Rogue,
                 CharacterClassConstants.Sorcerer,
                 CharacterClassConstants.Wizard,
                 CharacterClassConstants.Domains.Death,
@@ -48,8 +53,10 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
                 CharacterClassConstants.Schools.Transmutation,
                 RaceConstants.BaseRaces.DeepHalflingId,
                 RaceConstants.BaseRaces.DoppelgangerId,
+                RaceConstants.BaseRaces.DrowId,
                 RaceConstants.BaseRaces.GnollId,
                 RaceConstants.BaseRaces.GoblinId,
+                RaceConstants.Metaraces.HalfCelestialId,
                 RaceConstants.BaseRaces.HalfElfId,
                 RaceConstants.BaseRaces.HalfOrcId,
                 RaceConstants.BaseRaces.HighElfId,
@@ -62,14 +69,9 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
                 RaceConstants.BaseRaces.OrcId,
                 RaceConstants.BaseRaces.RockGnomeId,
                 RaceConstants.BaseRaces.TallfellowHalflingId,
+                RaceConstants.Metaraces.WereboarId,
                 RaceConstants.Metaraces.WerewolfId,
-                RaceConstants.BaseRaces.WoodElfId,
-                GroupConstants.Additional,
-                CharacterClassConstants.Barbarian,
-                CharacterClassConstants.Bard,
-                CharacterClassConstants.Rogue,
-                RaceConstants.Metaraces.HalfCelestialId,
-                RaceConstants.Metaraces.WereboarId
+                RaceConstants.BaseRaces.WoodElfId
             };
 
             AssertCollectionNames(names);
@@ -159,6 +161,8 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.TurnId)]
         [TestCase(CharacterClassConstants.Domains.Evil,
             FeatConstants.CastSpellBonusId)]
+        [TestCase(CharacterClassConstants.Domains.Luck,
+            FeatConstants.GoodFortuneId)]
         [TestCase(CharacterClassConstants.Domains.Strength,
             FeatConstants.SupernaturalStrengthId)]
         [TestCase(CharacterClassConstants.Schools.Abjuration,
@@ -390,9 +394,34 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
                 FeatConstants.ArmorBonusId + "3",
                 FeatConstants.ArmorBonusId + "4",
                 FeatConstants.FlurryOfBlowsId,
-                FeatConstants.MonkUnarmedStrikeId, // damage depends on size
+                FeatConstants.MonkUnarmedStrikeId + RaceConstants.Sizes.Small + "1d4",
+                FeatConstants.MonkUnarmedStrikeId + RaceConstants.Sizes.Small + "1d6",
+                FeatConstants.MonkUnarmedStrikeId + RaceConstants.Sizes.Small + "1d8",
+                FeatConstants.MonkUnarmedStrikeId + RaceConstants.Sizes.Small + "1d10",
+                FeatConstants.MonkUnarmedStrikeId + RaceConstants.Sizes.Small + "2d6",
+                FeatConstants.MonkUnarmedStrikeId + RaceConstants.Sizes.Small + "2d8",
+                FeatConstants.MonkUnarmedStrikeId + RaceConstants.Sizes.Medium + "1d6",
+                FeatConstants.MonkUnarmedStrikeId + RaceConstants.Sizes.Medium + "1d8",
+                FeatConstants.MonkUnarmedStrikeId + RaceConstants.Sizes.Medium + "1d10",
+                FeatConstants.MonkUnarmedStrikeId + RaceConstants.Sizes.Medium + "2d6",
+                FeatConstants.MonkUnarmedStrikeId + RaceConstants.Sizes.Medium + "2d8",
+                FeatConstants.MonkUnarmedStrikeId + RaceConstants.Sizes.Medium + "2d10",
+                FeatConstants.MonkUnarmedStrikeId + RaceConstants.Sizes.Large + "1d8",
+                FeatConstants.MonkUnarmedStrikeId + RaceConstants.Sizes.Large + "2d6",
+                FeatConstants.MonkUnarmedStrikeId + RaceConstants.Sizes.Large + "2d8",
+                FeatConstants.MonkUnarmedStrikeId + RaceConstants.Sizes.Large + "3d6",
+                FeatConstants.MonkUnarmedStrikeId + RaceConstants.Sizes.Large + "3d8",
+                FeatConstants.MonkUnarmedStrikeId + RaceConstants.Sizes.Large + "4d8",
                 FeatConstants.ImprovedUnarmedStrikeId,
-                //choice bonus feats
+                FeatConstants.MonkBonusFeatId + "1",
+                FeatConstants.MonkBonusFeatId + "2",
+                FeatConstants.MonkBonusFeatId + "6",
+                FeatConstants.ImprovedGrappleId,
+                FeatConstants.StunningFistId,
+                FeatConstants.CombatReflexesId,
+                FeatConstants.DeflectArrowsId,
+                FeatConstants.ImprovedDisarmId,
+                FeatConstants.ImprovedTripId,
                 FeatConstants.EvasionId,
                 FeatConstants.FastMovementId + "10",
                 FeatConstants.FastMovementId + "20",

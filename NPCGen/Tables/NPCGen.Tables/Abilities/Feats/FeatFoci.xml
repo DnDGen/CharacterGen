@@ -7,6 +7,21 @@
         <item>Archery</item>
     </object>
     <object>
+        <name>MonkBonusFeat1</name>
+        <item>ImprovedGrapple</item>
+        <item>StunningFist</item>
+    </object>
+    <object>
+        <name>MonkBonusFeat2</name>
+        <item>CombatReflexes</item>
+        <item>DeflectArrows</item>
+    </object>
+    <object>
+        <name>MonkBonusFeat6</name>
+        <item>ImprovedTrip</item>
+        <item>ImprovedDisarm</item>
+    </object>
+    <object>
         <name>Schools of Magic</name>
         <item>Abjuration</item>
         <item>Conjuration</item>

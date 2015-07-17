@@ -448,6 +448,80 @@
         <item>ShieldProficiency</item>
     </object>
     <object>
+        <name>Luck</name>
+        <item>GoodFortune</item>
+    </object>
+    <object>
+        <name>Monk</name>
+        <item>MonkBonusFeat1</item>
+        <item>MonkBonusFeat2</item>
+        <item>MonkBonusFeat6</item>
+        <item>ImprovedUnarmedStrike</item>
+        <item>PerfectSelf</item>
+        <item>DiamondBody</item>
+        <item>TongueOfSunAndMoon</item>
+        <item>DiamondSoul</item>
+        <item>EmptyBody</item>
+        <item>ImprovedGrapple</item>
+        <item>StunningFist</item>
+        <item>ImprovedDisarm</item>
+        <item>DeflectArrows</item>
+        <item>ImprovedTrip</item>
+        <item>SimpleWeaponProficiencyClub</item>
+        <item>SimpleWeaponProficiencyHeavy crossbow</item>
+        <item>SimpleWeaponProficiencyLight crossbow</item>
+        <item>SimpleWeaponProficiencyDagger</item>
+        <item>SimpleWeaponProficiencySling</item>
+        <item>MartialWeaponProficiencyHandaxe</item>
+        <item>SimpleWeaponProficiencyJavelin</item>
+        <item>ExoticWeaponProficiencyKama</item>
+        <item>ExoticWeaponProficiencyNunchaku</item>
+        <item>SimpleWeaponProficiencyQuarterstaff</item>
+        <item>ExoticWeaponProficiencyShuriken</item>
+        <item>ExoticWeaponProficiencySiangham</item>
+        <item>ArmorBonusWisdom</item>
+        <item>ArmorBonus1</item>
+        <item>ArmorBonus2</item>
+        <item>ArmorBonus3</item>
+        <item>ArmorBonus4</item>
+        <item>FlurryOfBlows</item>
+        <item>MonkUnarmedStrikeSmall1d4</item>
+        <item>MonkUnarmedStrikeSmall1d6</item>
+        <item>MonkUnarmedStrikeSmall1d8</item>
+        <item>MonkUnarmedStrikeSmall1d10</item>
+        <item>MonkUnarmedStrikeSmall2d6</item>
+        <item>MonkUnarmedStrikeSmall2d8</item>
+        <item>MonkUnarmedStrikeMedium1d6</item>
+        <item>MonkUnarmedStrikeMedium1d8</item>
+        <item>MonkUnarmedStrikeMedium1d10</item>
+        <item>MonkUnarmedStrikeMedium2d6</item>
+        <item>MonkUnarmedStrikeMedium2d8</item>
+        <item>MonkUnarmedStrikeMedium2d10</item>
+        <item>MonkUnarmedStrikeLarge1d8</item>
+        <item>MonkUnarmedStrikeLarge2d6</item>
+        <item>MonkUnarmedStrikeLarge2d8</item>
+        <item>MonkUnarmedStrikeLarge3d6</item>
+        <item>MonkUnarmedStrikeLarge3d8</item>
+        <item>MonkUnarmedStrikeLarge4d8</item>
+        <item>CombatReflexes</item>
+        <item>Evasion</item>
+        <item>FastMovement10</item>
+        <item>FastMovement20</item>
+        <item>FastMovement30</item>
+        <item>FastMovement40</item>
+        <item>FastMovement50</item>
+        <item>FastMovement60</item>
+        <item>StillMind</item>
+        <item>KiStrike</item>
+        <item>SlowFall</item>
+        <item>PurityOfBody</item>
+        <item>WholenessOfBody</item>
+        <item>ImprovedEvasion</item>
+        <item>AbundantStep</item>
+        <item>QuiveringPalm</item>
+        <item>TimelessBody</item>
+    </object>
+    <object>
         <name>Necromancy</name>
         <item>SkillBonus</item>
     </object>

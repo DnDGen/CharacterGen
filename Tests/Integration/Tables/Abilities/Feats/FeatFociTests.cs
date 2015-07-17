@@ -30,7 +30,10 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
                 GroupConstants.WeaponsWithUnarmedAndGrapple,
                 GroupConstants.WeaponsWithUnarmedAndGrappleAndRay,
                 FeatConstants.CombatStyleId,
-                GroupConstants.Skills
+                GroupConstants.Skills,
+                FeatConstants.MonkBonusFeatId + "1",
+                FeatConstants.MonkBonusFeatId + "2",
+                FeatConstants.MonkBonusFeatId + "6",
             };
 
             AssertCollectionNames(names);
@@ -113,6 +116,15 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
         [TestCase(FeatConstants.CombatStyleId,
             FeatConstants.TwoWeaponFightingId,
             FeatConstants.Foci.Archery)]
+        [TestCase(FeatConstants.MonkBonusFeatId + "1",
+            FeatConstants.StunningFistId,
+            FeatConstants.ImprovedGrappleId)]
+        [TestCase(FeatConstants.MonkBonusFeatId + "2",
+            FeatConstants.CombatReflexesId,
+            FeatConstants.DeflectArrowsId)]
+        [TestCase(FeatConstants.MonkBonusFeatId + "6",
+            FeatConstants.ImprovedDisarmId,
+            FeatConstants.ImprovedTripId)]
         public override void DistinctCollection(String name, params String[] collection)
         {
             base.DistinctCollection(name, collection);

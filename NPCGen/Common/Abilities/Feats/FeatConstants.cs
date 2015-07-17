@@ -412,6 +412,10 @@ namespace NPCGen.Common.Abilities.Feats
         public const String TongueOfSunAndMoonId = "TongueOfSunAndMoon";
         public const String EmptyBodyId = "EmptyBody";
         public const String PerfectSelfId = "PerfectSelf";
+        public const String MonkBonusFeat = "Monk Bonus Feat";
+        public const String MonkBonusFeatId = "MonkBonusFeat";
+        public const String GoodFortuneId = "GoodFortune";
+        public const String GoodFortune = "Good Fortune";
 
         public static class Frequencies
         {
