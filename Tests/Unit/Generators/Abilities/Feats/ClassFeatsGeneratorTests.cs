@@ -298,8 +298,11 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             AddClassFeat(characterClass.ClassName, FeatConstants.FavoredEnemy, focusType: "focus type", strength: 2);
             AddClassFeat(characterClass.ClassName, FeatConstants.FavoredEnemy, focusType: "focus type", strength: 2);
 
-            mockCollectionsSelector.SetupSequence(s => s.SelectRandomFrom(It.Is<IEnumerable<Feat>>(fs => fs.All(f => f.Name == FeatConstants.FavoredEnemy))))
-                .Returns("focus 2").Returns("focus 2").Returns("focus 5").Returns("focus 1");
+            mockCollectionsSelector.SetupSequence(s => s.SelectRandomFrom<Feat>(It.IsAny<IEnumerable<Feat>>()))
+                .Returns((IEnumerable<Feat> fs) => fs.ElementAt(1))
+                .Returns("focus 2")
+                .Returns("focus 5")
+                .Returns("focus 1");
 
             mockFeatFocusGenerator.SetupSequence(g => g.GenerateAllowingFocusOfAllFrom(FeatConstants.FavoredEnemy, "focus type", skills, It.IsAny<IEnumerable<RequiredFeat>>(), It.IsAny<IEnumerable<Feat>>(), characterClass))
                 .Returns("focus 1").Returns("focus 2").Returns("focus 3").Returns("focus 4").Returns("focus 5");
