@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using D20Dice;
 using NPCGen.Common.Alignments;
 using NPCGen.Common.CharacterClasses;
 using NPCGen.Generators.Interfaces;
@@ -16,15 +15,12 @@ namespace NPCGen.Generators
         private IAdjustmentsSelector adjustmentsSelector;
         private ICollectionsSelector collectionsSelector;
         private IBooleanPercentileSelector booleanPercentileSelector;
-        private IDice dice;
 
-        public CharacterClassGenerator(IAdjustmentsSelector adjustmentsSelector, ICollectionsSelector collectionsSelector, IBooleanPercentileSelector booleanPercentileSelector,
-            IDice dice)
+        public CharacterClassGenerator(IAdjustmentsSelector adjustmentsSelector, ICollectionsSelector collectionsSelector, IBooleanPercentileSelector booleanPercentileSelector)
         {
             this.adjustmentsSelector = adjustmentsSelector;
             this.booleanPercentileSelector = booleanPercentileSelector;
             this.collectionsSelector = collectionsSelector;
-            this.dice = dice;
         }
 
         public CharacterClass GenerateWith(Alignment alignment, ILevelRandomizer levelRandomizer,
@@ -66,8 +62,7 @@ namespace NPCGen.Generators
 
             while (fields.Count < quantity)
             {
-                var index = dice.Roll(1).d(possibleFields.Count()) - 1;
-                var field = possibleFields.ElementAt(index);
+                var field = collectionsSelector.SelectRandomFrom(possibleFields);
                 fields.Add(field);
             }
 

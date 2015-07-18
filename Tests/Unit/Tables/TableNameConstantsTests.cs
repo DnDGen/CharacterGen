@@ -56,6 +56,7 @@ namespace NPCGen.Tests.Unit.Tables
         [TestCase(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityStat, "IncreaseFirstPriorityStat")]
         [TestCase(TableNameConstants.Set.TrueOrFalse.KilledCohort, "KilledCohort")]
         [TestCase(TableNameConstants.Set.TrueOrFalse.KilledFollowers, "KilledFollowers")]
+        [TestCase(TableNameConstants.Set.TrueOrFalse.Male, "Male")]
         [TestCase(TableNameConstants.Formattable.Adjustments.CLASSFeatLevelRequirements, "{0}FeatLevelRequirements")]
         [TestCase(TableNameConstants.Formattable.Adjustments.FEATClassRequirements, "{0}ClassRequirements")]
         [TestCase(TableNameConstants.Formattable.Adjustments.FEATSkillRankRequirements, "{0}SkillRankRequirements")]

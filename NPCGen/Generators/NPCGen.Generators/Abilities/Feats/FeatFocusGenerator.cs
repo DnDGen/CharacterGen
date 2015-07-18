@@ -61,10 +61,7 @@ namespace NPCGen.Generators.Abilities.Feats
             if (foci.Any() == false)
                 return ProficiencyConstants.All;
 
-            var index = GetRandomIndexOf(foci);
-            var focus = foci.ElementAt(index);
-
-            return focus;
+            return collectionsSelector.SelectRandomFrom(foci);
         }
 
         private IEnumerable<String> GetFoci(String feat, String focusType, Dictionary<String, IEnumerable<String>> allSourceFeatFoci, IEnumerable<Feat> otherFeats, IEnumerable<String> requiredFeatIds)
@@ -123,12 +120,6 @@ namespace NPCGen.Generators.Abilities.Feats
             return requiredFeatIds.Contains(feat.Name) && String.IsNullOrEmpty(feat.Focus) == false;
         }
 
-        private Int32 GetRandomIndexOf(IEnumerable<Object> collection)
-        {
-            var die = collection.Count();
-            return dice.Roll().d(die) - 1;
-        }
-
         public String GenerateFrom(String feat, String focusType, Dictionary<String, Skill> skills)
         {
             if (String.IsNullOrEmpty(focusType))
@@ -151,10 +142,7 @@ namespace NPCGen.Generators.Abilities.Feats
             if (foci.Any() == false)
                 return ProficiencyConstants.All;
 
-            var index = GetRandomIndexOf(foci);
-            var focus = foci.ElementAt(index);
-
-            return focus;
+            return collectionsSelector.SelectRandomFrom(foci);
         }
 
 

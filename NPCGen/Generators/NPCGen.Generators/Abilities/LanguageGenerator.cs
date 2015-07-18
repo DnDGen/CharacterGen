@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using D20Dice;
 using NPCGen.Common.Races;
 using NPCGen.Generators.Interfaces.Abilities;
 using NPCGen.Selectors.Interfaces;
@@ -10,13 +9,13 @@ namespace NPCGen.Generators.Abilities
 {
     public class LanguageGenerator : ILanguageGenerator
     {
-        private IDice dice;
         private ILanguageCollectionsSelector languagesSelector;
+        private ICollectionsSelector collectionsSelector;
 
-        public LanguageGenerator(IDice dice, ILanguageCollectionsSelector languagesSelector)
+        public LanguageGenerator(ILanguageCollectionsSelector languagesSelector, ICollectionsSelector collectionsSelector)
         {
-            this.dice = dice;
             this.languagesSelector = languagesSelector;
+            this.collectionsSelector = collectionsSelector;
         }
 
         public IEnumerable<String> GenerateWith(Race race, String className, Int32 intelligenceBonus)
@@ -38,9 +37,7 @@ namespace NPCGen.Generators.Abilities
 
             while (numberOfBonusLanguages-- > 0 && remainingBonusLanguages.Any())
             {
-                var index = dice.Roll().d(remainingBonusLanguages.Count) - 1;
-                var language = remainingBonusLanguages[index];
-
+                var language = collectionsSelector.SelectRandomFrom(remainingBonusLanguages);
                 languages.Add(language);
                 remainingBonusLanguages.Remove(language);
             }

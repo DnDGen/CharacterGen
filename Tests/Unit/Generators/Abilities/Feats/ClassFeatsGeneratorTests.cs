@@ -20,7 +20,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
     {
         private Mock<IFeatsSelector> mockFeatsSelector;
         private Mock<IFeatFocusGenerator> mockFeatFocusGenerator;
-        private Mock<IDice> mockDice;
+        private Mock<ICollectionsSelector> mockCollectionsSelector;
         private IClassFeatsGenerator classFeatsGenerator;
         private CharacterClass characterClass;
         private Dictionary<String, Stat> stats;
@@ -33,8 +33,8 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
         {
             mockFeatsSelector = new Mock<IFeatsSelector>();
             mockFeatFocusGenerator = new Mock<IFeatFocusGenerator>();
-            mockDice = new Mock<IDice>();
-            classFeatsGenerator = new ClassFeatsGenerator(mockFeatsSelector.Object, mockFeatFocusGenerator.Object, mockDice.Object);
+            mockCollectionsSelector = new Mock<ICollectionsSelector>();
+            classFeatsGenerator = new ClassFeatsGenerator(mockFeatsSelector.Object, mockFeatFocusGenerator.Object, mockCollectionsSelector.Object);
             characterClass = new CharacterClass();
             stats = new Dictionary<String, Stat>();
             stats[StatConstants.Intelligence] = new Stat();
@@ -43,7 +43,6 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             skills = new Dictionary<String, Skill>();
 
             mockFeatsSelector.Setup(s => s.SelectClass(It.IsAny<String>())).Returns(Enumerable.Empty<CharacterClassFeatSelection>());
-            mockDice.Setup(d => d.Roll(1).d(It.IsAny<Int32>())).Returns(1);
 
             characterClass.ClassName = "class name";
             characterClass.Level = 1;
@@ -299,7 +298,8 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             AddClassFeat(characterClass.ClassName, FeatConstants.FavoredEnemy, focusType: "focus type", strength: 2);
             AddClassFeat(characterClass.ClassName, FeatConstants.FavoredEnemy, focusType: "focus type", strength: 2);
 
-            mockDice.SetupSequence(d => d.Roll(1).d(5)).Returns(2).Returns(2).Returns(5).Returns(1);
+            mockCollectionsSelector.SetupSequence(s => s.SelectRandomFrom(It.Is<IEnumerable<Feat>>(fs => fs.All(f => f.Name == FeatConstants.FavoredEnemy))))
+                .Returns("focus 2").Returns("focus 2").Returns("focus 5").Returns("focus 1");
 
             mockFeatFocusGenerator.SetupSequence(g => g.GenerateAllowingFocusOfAllFrom(FeatConstants.FavoredEnemy, "focus type", skills, It.IsAny<IEnumerable<RequiredFeat>>(), It.IsAny<IEnumerable<Feat>>(), characterClass))
                 .Returns("focus 1").Returns("focus 2").Returns("focus 3").Returns("focus 4").Returns("focus 5");

@@ -69,6 +69,7 @@ namespace NPCGen.Tables.Interfaces
                 public const String IncreaseFirstPriorityStat = "IncreaseFirstPriorityStat";
                 public const String KilledCohort = "KilledCohort";
                 public const String KilledFollowers = "KilledFollowers";
+                public const String Male = "Male";
             }
         }
 

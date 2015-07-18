@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using D20Dice;
 using NPCGen.Common.Alignments;
 using NPCGen.Common.CharacterClasses;
 using NPCGen.Common.Races;
@@ -13,13 +12,13 @@ namespace NPCGen.Generators
 {
     public class RaceGenerator : IRaceGenerator
     {
-        private IDice dice;
+        private IBooleanPercentileSelector booleanPercentileSelector;
         private ICollectionsSelector collectionsSelector;
         private IAdjustmentsSelector adjustmentsSelector;
 
-        public RaceGenerator(IDice dice, ICollectionsSelector collectionsSelector, IAdjustmentsSelector adjustmentsSelector)
+        public RaceGenerator(IBooleanPercentileSelector booleanPercentileSelector, ICollectionsSelector collectionsSelector, IAdjustmentsSelector adjustmentsSelector)
         {
-            this.dice = dice;
+            this.booleanPercentileSelector = booleanPercentileSelector;
             this.collectionsSelector = collectionsSelector;
             this.adjustmentsSelector = adjustmentsSelector;
         }
@@ -45,10 +44,7 @@ namespace NPCGen.Generators
             if (metarace != RaceConstants.Metaraces.HalfDragon)
                 return String.Empty;
 
-            var species = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.DragonSpecies, alignment.ToString());
-            var index = dice.Roll().d(species.Count()) - 1;
-
-            return species.ElementAt(index);
+            return collectionsSelector.SelectRandomFrom(TableNameConstants.Set.Collection.DragonSpecies, alignment.ToString());
         }
 
         private Boolean DetermineIfMale(String baseRace, String className)
@@ -59,7 +55,7 @@ namespace NPCGen.Generators
             if (baseRace == RaceConstants.BaseRaces.Drow && className == CharacterClassConstants.Cleric)
                 return false;
 
-            return dice.Roll().d2() == 1;
+            return booleanPercentileSelector.SelectFrom(TableNameConstants.Set.TrueOrFalse.Male);
         }
 
         private String DetermineSize(String baseRace)

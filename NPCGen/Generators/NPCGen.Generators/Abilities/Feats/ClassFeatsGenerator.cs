@@ -16,13 +16,13 @@ namespace NPCGen.Generators.Abilities.Feats
     {
         private IFeatsSelector featsSelector;
         private IFeatFocusGenerator featFocusGenerator;
-        private IDice dice;
+        private ICollectionsSelector collectionsSelector;
 
-        public ClassFeatsGenerator(IFeatsSelector featsSelector, IFeatFocusGenerator featFocusGenerator, IDice dice)
+        public ClassFeatsGenerator(IFeatsSelector featsSelector, IFeatFocusGenerator featFocusGenerator, ICollectionsSelector collectionsSelector)
         {
             this.featsSelector = featsSelector;
             this.featFocusGenerator = featFocusGenerator;
-            this.dice = dice;
+            this.collectionsSelector = collectionsSelector;
         }
 
         public IEnumerable<Feat> GenerateWith(CharacterClass characterClass, Dictionary<String, Stat> stats, IEnumerable<Feat> racialFeats, Dictionary<String, Skill> skills)
@@ -75,8 +75,7 @@ namespace NPCGen.Generators.Abilities.Feats
 
             while (timesToImprove-- > 0)
             {
-                var index = dice.Roll().d(favoredEnemyQuantity) - 1;
-                var feat = favoredEnemyFeats.ElementAt(index);
+                var feat = collectionsSelector.SelectRandomFrom<Feat>(favoredEnemyFeats);
                 feat.Strength += 2;
             }
 

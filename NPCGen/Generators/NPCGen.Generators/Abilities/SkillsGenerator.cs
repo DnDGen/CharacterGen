@@ -15,16 +15,14 @@ namespace NPCGen.Generators.Abilities
     public class SkillsGenerator : ISkillsGenerator
     {
         private ISkillSelector skillSelector;
-        private IDice dice;
         private ICollectionsSelector collectionsSelector;
         private IAdjustmentsSelector adjustmentsSelector;
         private IBooleanPercentileSelector booleanPercentileSelector;
 
-        public SkillsGenerator(ISkillSelector skillSelector, IDice dice, ICollectionsSelector collectionsSelector, IAdjustmentsSelector adjustmentsSelector,
+        public SkillsGenerator(ISkillSelector skillSelector, ICollectionsSelector collectionsSelector, IAdjustmentsSelector adjustmentsSelector,
             IBooleanPercentileSelector booleanPercentileSelector)
         {
             this.skillSelector = skillSelector;
-            this.dice = dice;
             this.collectionsSelector = collectionsSelector;
             this.adjustmentsSelector = adjustmentsSelector;
             this.booleanPercentileSelector = booleanPercentileSelector;
@@ -79,9 +77,8 @@ namespace NPCGen.Generators.Abilities
             while (points > 0 && skills.Values.Any(s => s.Ranks < rankCap))
             {
                 var skillCollection = GetSkillCollection(skills, rankCap, classSkills, crossClassSkills);
-                var index = dice.Roll().d(skillCollection.Count()) - 1;
+                var skill = collectionsSelector.SelectRandomFrom(skillCollection);
 
-                var skill = skillCollection.ElementAt(index);
                 skills[skill].Ranks++;
                 points--;
             }

@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Linq;
 using Ninject;
 using NPCGen.Generators.Interfaces.Randomizers.Races;
+using NPCGen.Selectors.Interfaces;
 using NUnit.Framework;
 
 namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
@@ -12,7 +12,7 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
         [Inject]
         public ISetMetaraceRandomizer SetMetaraceRandomizer { get; set; }
         [Inject]
-        public Random Random { get; set; }
+        public ICollectionsSelector CollectionsSelector { get; set; }
 
         [TestCase("SetMetaraceRandomizer")]
         public override void Stress(String stressSubject)
@@ -25,10 +25,8 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
             var alignment = GetNewAlignment();
             var characterClass = GetNewCharacterClass(alignment);
 
-            var metaraceIds = BaseRaceRandomizer.GetAllPossibles(alignment.Goodness, characterClass);
-            var metaraceCount = metaraceIds.Count();
-            var randomIndex = Random.Next(metaraceCount);
-            SetMetaraceRandomizer.SetMetarace = metaraceIds.ElementAt(randomIndex);
+            var metaraces = BaseRaceRandomizer.GetAllPossibles(alignment.Goodness, characterClass);
+            SetMetaraceRandomizer.SetMetarace = CollectionsSelector.SelectRandomFrom(metaraces);
 
             var metarace = SetMetaraceRandomizer.Randomize(alignment.Goodness, characterClass);
             Assert.That(metarace, Is.EqualTo(SetMetaraceRandomizer.SetMetarace));

@@ -77,8 +77,7 @@ namespace NPCGen.Generators.Abilities.Feats
 
             while (quantity-- > 0 && availableFeats.Any())
             {
-                var index = GetRandomIndexOf(availableFeats);
-                var featSelection = availableFeats.ElementAt(index);
+                var featSelection = collectionsSelector.SelectRandomFrom<AdditionalFeatSelection>(availableFeats);
 
                 var preliminaryFocus = featFocusGenerator.GenerateFrom(featSelection.Feat, featSelection.FocusType, skills, featSelection.RequiredFeats, chosenFeats, characterClass);
                 if (preliminaryFocus == ProficiencyConstants.All)
@@ -128,12 +127,6 @@ namespace NPCGen.Generators.Abilities.Feats
             var excludedFeats = alreadyChosenFeats.Except(featsAllowingMultipleTakes);
 
             return featsWithRequirementsMet.Except(excludedFeats);
-        }
-
-        private Int32 GetRandomIndexOf(IEnumerable<Object> collection)
-        {
-            var die = collection.Count();
-            return dice.Roll().d(die) - 1;
         }
 
         private IEnumerable<Feat> GetFighterFeats(CharacterClass characterClass, Race race, Dictionary<String, Stat> stats, Dictionary<String, Skill> skills,
