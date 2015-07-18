@@ -6,7 +6,7 @@ namespace NPCGen.Selectors.Interfaces.Objects
 {
     public class RacialFeatSelection
     {
-        public String FeatId { get; set; }
+        public String Feat { get; set; }
         public Int32 MinimumHitDieRequirement { get; set; }
         public String SizeRequirement { get; set; }
         public Frequency Frequency { get; set; }
@@ -15,7 +15,7 @@ namespace NPCGen.Selectors.Interfaces.Objects
 
         public RacialFeatSelection()
         {
-            FeatId = String.Empty;
+            Feat = String.Empty;
             SizeRequirement = String.Empty;
             Frequency = new Frequency();
             FocusType = String.Empty;

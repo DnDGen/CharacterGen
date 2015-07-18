@@ -35,7 +35,7 @@ namespace NPCGen.Generators.Combats
 
             var monsters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups,
                 GroupConstants.Monsters);
-            if (!monsters.Contains(race.BaseRace.Id))
+            if (!monsters.Contains(race.BaseRace))
                 return hitPoints;
 
             var monsterHitPoints = GetAdditionalMonsterHitDice(race);
@@ -46,10 +46,10 @@ namespace NPCGen.Generators.Combats
         {
             var hitDice = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice);
 
-            if (race.Metarace.Id == RaceConstants.Metaraces.HalfDragonId)
-                return dice.Roll(hitDice[race.BaseRace.Id]).d10();
+            if (race.Metarace == RaceConstants.Metaraces.HalfDragon)
+                return dice.Roll(hitDice[race.BaseRace]).d10();
 
-            return dice.Roll(hitDice[race.BaseRace.Id]).d8();
+            return dice.Roll(hitDice[race.BaseRace]).d8();
         }
     }
 }

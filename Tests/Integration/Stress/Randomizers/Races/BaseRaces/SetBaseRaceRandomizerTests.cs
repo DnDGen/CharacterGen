@@ -25,13 +25,13 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
             var alignment = GetNewAlignment();
             var characterClass = GetNewCharacterClass(alignment);
 
-            var baseRaceIds = BaseRaceRandomizer.GetAllPossibleIds(alignment.Goodness, characterClass);
-            var baseRaceCount = baseRaceIds.Count();
+            var baseRaces = BaseRaceRandomizer.GetAllPossibles(alignment.Goodness, characterClass);
+            var baseRaceCount = baseRaces.Count();
             var randomIndex = Random.Next(baseRaceCount);
-            SetBaseRaceRandomizer.SetBaseRaceId = baseRaceIds.ElementAt(randomIndex);
+            SetBaseRaceRandomizer.SetBaseRace = baseRaces.ElementAt(randomIndex);
 
             var baseRace = SetBaseRaceRandomizer.Randomize(alignment.Goodness, characterClass);
-            Assert.That(baseRace.Id, Is.EqualTo(SetBaseRaceRandomizer.SetBaseRaceId));
+            Assert.That(baseRace, Is.EqualTo(SetBaseRaceRandomizer.SetBaseRace));
         }
     }
 }

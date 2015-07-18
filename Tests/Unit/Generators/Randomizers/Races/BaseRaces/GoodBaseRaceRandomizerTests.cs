@@ -35,7 +35,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         public void Setup()
         {
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
-            randomizer = new GoodBaseRaceRandomizer(mockPercentileResultSelector.Object, mockAdjustmentsSelector.Object, mockNameSelector.Object,
+            randomizer = new GoodBaseRaceRandomizer(mockPercentileResultSelector.Object, mockAdjustmentsSelector.Object, 
                 mockCollectionsSelector.Object);
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, AlignmentConstants.Good)).Returns(new[] { "good base race", "base race", "not neutral base race", "not evil base race" });
@@ -49,7 +49,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         [TestCase("not evil base race")]
         public void Allowed(String baseRace)
         {
-            var baseRaces = randomizer.GetAllPossibleIds(String.Empty, characterClass);
+            var baseRaces = randomizer.GetAllPossibles(String.Empty, characterClass);
             Assert.That(baseRaces, Contains.Item(baseRace));
         }
 
@@ -58,7 +58,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         [TestCase("not good base race")]
         public void NotAllowed(String baseRace)
         {
-            var baseRaces = randomizer.GetAllPossibleIds(String.Empty, characterClass);
+            var baseRaces = randomizer.GetAllPossibles(String.Empty, characterClass);
             Assert.That(baseRaces, Is.Not.Contains(baseRace));
         }
     }

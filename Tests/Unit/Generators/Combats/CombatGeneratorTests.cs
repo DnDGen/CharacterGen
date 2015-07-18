@@ -189,8 +189,8 @@ namespace NPCGen.Tests.Unit.Generators.Combats
         [Test]
         public void GetAllRacialBaseAttackAdjustments()
         {
-            race.BaseRace.Id = "baserace";
-            race.Metarace.Id = "metarace";
+            race.BaseRace = "baserace";
+            race.Metarace = "metarace";
 
             var racialAdjustments = new Dictionary<String, Int32>();
             racialAdjustments["baserace"] = 1;
@@ -303,31 +303,31 @@ namespace NPCGen.Tests.Unit.Generators.Combats
         [Test]
         public void InitiativeBonusIsSumOfBonuses()
         {
-            race.BaseRace.Id = "baserace";
-            race.Metarace.Id = "metarace";
+            race.BaseRace = "baserace";
+            race.Metarace = "metarace";
 
             var feat1 = new Feat();
-            feat1.Name.Id = "feat 1";
+            feat1.Name = "feat 1";
             feats.Add(feat1);
 
             var feat2 = new Feat();
-            feat2.Name.Id = "feat 2";
+            feat2.Name = "feat 2";
             feats.Add(feat2);
 
             var feat3 = new Feat();
-            feat3.Name.Id = "feat 3";
+            feat3.Name = "feat 3";
             feats.Add(feat3);
 
-            racialInitiativeAdjustments[race.BaseRace.Id] = 1;
-            racialInitiativeAdjustments[race.Metarace.Id] = 1;
+            racialInitiativeAdjustments[race.BaseRace] = 1;
+            racialInitiativeAdjustments[race.Metarace] = 1;
             racialInitiativeAdjustments["other race"] = 5;
 
-            featInitiativeAdjustments[feats[0].Name.Id] = 1;
-            featInitiativeAdjustments[feats[1].Name.Id] = 0;
-            featInitiativeAdjustments[feats[2].Name.Id] = 1;
+            featInitiativeAdjustments[feats[0].Name] = 1;
+            featInitiativeAdjustments[feats[1].Name] = 0;
+            featInitiativeAdjustments[feats[2].Name] = 1;
 
-            racialBaseAttackAdjustments[race.BaseRace.Id] = 0;
-            racialBaseAttackAdjustments[race.Metarace.Id] = 0;
+            racialBaseAttackAdjustments[race.BaseRace] = 0;
+            racialBaseAttackAdjustments[race.Metarace] = 0;
 
             var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass, race);
             var combat = combatGenerator.GenerateWith(baseAttack, characterClass, race, feats, stats, equipment);

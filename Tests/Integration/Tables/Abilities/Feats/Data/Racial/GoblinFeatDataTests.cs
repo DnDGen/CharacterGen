@@ -12,7 +12,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
     {
         protected override String tableName
         {
-            get { return String.Format(TableNameConstants.Formattable.Collection.RACEFeatData, RaceConstants.BaseRaces.GoblinId); }
+            get { return String.Format(TableNameConstants.Formattable.Collection.RACEFeatData, RaceConstants.BaseRaces.Goblin); }
         }
 
         [Test]
@@ -20,41 +20,41 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
         {
             var names = new[] 
             {
-                FeatConstants.DarkvisionId,
-                FeatConstants.SkillBonusId + SkillConstants.MoveSilently,
-                FeatConstants.SkillBonusId + SkillConstants.Ride
+                FeatConstants.Darkvision,
+                FeatConstants.SkillBonus + SkillConstants.MoveSilently,
+                FeatConstants.SkillBonus + SkillConstants.Ride
             };
 
             AssertCollectionNames(names);
         }
 
-        [TestCase(FeatConstants.SkillBonusId + SkillConstants.MoveSilently,
-            FeatConstants.SkillBonusId,
+        [TestCase(FeatConstants.SkillBonus + SkillConstants.MoveSilently,
+            FeatConstants.SkillBonus,
             SkillConstants.MoveSilently,
             0,
             "",
             0,
             "",
             4)]
-        [TestCase(FeatConstants.SkillBonusId + SkillConstants.Ride,
-            FeatConstants.SkillBonusId,
+        [TestCase(FeatConstants.SkillBonus + SkillConstants.Ride,
+            FeatConstants.SkillBonus,
             SkillConstants.Ride,
             0,
             "",
             0,
             "",
             4)]
-        [TestCase(FeatConstants.DarkvisionId,
-            FeatConstants.DarkvisionId,
+        [TestCase(FeatConstants.Darkvision,
+            FeatConstants.Darkvision,
             "",
             0,
             "",
             0,
             "",
             60)]
-        public override void Data(String name, String featId, String focus, Int32 frequencyQuantity, String frequencyTimePeriod, Int32 minimumHitDiceRequirement, String sizeRequirement, Int32 strength)
+        public override void Data(String name, String feat, String focus, Int32 frequencyQuantity, String frequencyTimePeriod, Int32 minimumHitDiceRequirement, String sizeRequirement, Int32 strength)
         {
-            base.Data(name, featId, focus, frequencyQuantity, frequencyTimePeriod, minimumHitDiceRequirement, sizeRequirement, strength);
+            base.Data(name, feat, focus, frequencyQuantity, frequencyTimePeriod, minimumHitDiceRequirement, sizeRequirement, strength);
         }
     }
 }

@@ -28,7 +28,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         public void Setup()
         {
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
-            randomizer = new NonStandardBaseRaceRandomizer(mockPercentileResultSelector.Object, mockAdjustmentsSelector.Object, mockNameSelector.Object,
+            randomizer = new NonStandardBaseRaceRandomizer(mockPercentileResultSelector.Object, mockAdjustmentsSelector.Object, 
                 mockCollectionsSelector.Object);
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Standard))
@@ -38,14 +38,14 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         [TestCase("nonstandard base race")]
         public void Allowed(String baseRace)
         {
-            var baseRaces = randomizer.GetAllPossibleIds(String.Empty, characterClass);
+            var baseRaces = randomizer.GetAllPossibles(String.Empty, characterClass);
             Assert.That(baseRaces, Contains.Item(baseRace));
         }
 
         [TestCase("standard base race")]
         public void NotAllowed(String baseRace)
         {
-            var baseRaces = randomizer.GetAllPossibleIds(String.Empty, characterClass);
+            var baseRaces = randomizer.GetAllPossibles(String.Empty, characterClass);
             Assert.That(baseRaces, Is.Not.Contains(baseRace));
         }
     }

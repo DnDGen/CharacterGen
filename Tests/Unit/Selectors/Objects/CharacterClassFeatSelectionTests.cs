@@ -21,7 +21,7 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
         [Test]
         public void SelectionIsInitialized()
         {
-            Assert.That(selection.FeatId, Is.Empty);
+            Assert.That(selection.Feat, Is.Empty);
             Assert.That(selection.FocusType, Is.Empty);
             Assert.That(selection.Frequency, Is.Not.Null);
             Assert.That(selection.MinimumLevel, Is.EqualTo(0));

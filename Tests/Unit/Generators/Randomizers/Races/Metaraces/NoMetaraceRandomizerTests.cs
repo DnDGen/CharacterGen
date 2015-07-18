@@ -23,16 +23,15 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         public void RandomizeAlwaysReturnsEmptyString()
         {
             var metarace = randomizer.Randomize(String.Empty, new CharacterClass());
-            Assert.That(metarace.Id, Is.EqualTo(RaceConstants.Metaraces.NoneId));
-            Assert.That(metarace.Name, Is.EqualTo(RaceConstants.Metaraces.None));
+            Assert.That(metarace, Is.EqualTo(RaceConstants.Metaraces.None));
         }
 
         [Test]
         public void GetAllPossibleResultsReturnsEnumerableOfEmptyString()
         {
-            var metaraceIds = randomizer.GetAllPossibleIds(String.Empty, new CharacterClass());
-            Assert.That(metaraceIds, Contains.Item(RaceConstants.Metaraces.NoneId));
-            Assert.That(metaraceIds.Count(), Is.EqualTo(1));
+            var metaraces = randomizer.GetAllPossible(String.Empty, new CharacterClass());
+            Assert.That(metaraces, Contains.Item(RaceConstants.Metaraces.None));
+            Assert.That(metaraces.Count(), Is.EqualTo(1));
         }
     }
 }

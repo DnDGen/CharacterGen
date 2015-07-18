@@ -9,27 +9,16 @@ namespace NPCGen.Generators.Randomizers.Races.Metaraces
 {
     public class SetMetaraceRandomizer : ISetMetaraceRandomizer
     {
-        public String SetMetaraceId { get; set; }
+        public String SetMetarace { get; set; }
 
-        private INameSelector nameSelector;
-
-        public SetMetaraceRandomizer(INameSelector nameSelector)
+        public String Randomize(String goodness, CharacterClass characterClass)
         {
-            this.nameSelector = nameSelector;
+            return SetMetarace;
         }
 
-        public NameModel Randomize(String goodness, CharacterClass characterClass)
+        public IEnumerable<String> GetAllPossible(String goodness, CharacterClass characterClass)
         {
-            var metarace = new NameModel();
-            metarace.Id = SetMetaraceId;
-            metarace.Name = nameSelector.Select(SetMetaraceId);
-
-            return metarace;
-        }
-
-        public IEnumerable<String> GetAllPossibleIds(String goodness, CharacterClass characterClass)
-        {
-            return new[] { SetMetaraceId };
+            return new[] { SetMetarace };
         }
     }
 }

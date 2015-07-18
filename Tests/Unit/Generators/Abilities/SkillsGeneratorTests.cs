@@ -680,7 +680,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             skillPoints[characterClass.ClassName] = 0;
             classSkills.Add("skill 1");
             classSkills.Add("skill 2");
-            race.BaseRace.Id = RaceConstants.BaseRaces.Human;
+            race.BaseRace = RaceConstants.BaseRaces.Human;
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
             Assert.That(skills["skill 1"].Ranks, Is.EqualTo(points));
@@ -713,7 +713,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             characterClass.Level = level;
             skillPoints[characterClass.ClassName] = 2;
             intelligence.Value = 12;
-            race.BaseRace.Id = RaceConstants.BaseRaces.Human;
+            race.BaseRace = RaceConstants.BaseRaces.Human;
             classSkills.Add("skill 1");
             classSkills.Add("skill 2");
             classSkills.Add("skill 3");
@@ -753,7 +753,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         [TestCase(20)]
         public void MonstersDoNotGetMoreSkillPointsAtFirstLevel(Int32 level)
         {
-            race.BaseRace.Id = "baserace";
+            race.BaseRace = "baserace";
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
                 .Returns(new[] { "baserace", "otherbaserace" });
 

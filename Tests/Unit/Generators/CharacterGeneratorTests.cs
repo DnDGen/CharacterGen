@@ -35,9 +35,9 @@ namespace NPCGen.Tests.Unit.Generators
     [TestFixture]
     public class CharacterGeneratorTests
     {
-        private const String BaseRaceId = "baserace";
-        private const String BaseRacePlusOneId = "baserace+1";
-        private const String MetaraceId = "metarace";
+        private const String BaseRace = "baserace";
+        private const String BaseRacePlusOne = "baserace+1";
+        private const String Metarace = "metarace";
 
         private Mock<IAlignmentGenerator> mockAlignmentGenerator;
         private Mock<ICharacterClassGenerator> mockCharacterClassGenerator;
@@ -99,10 +99,10 @@ namespace NPCGen.Tests.Unit.Generators
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
             followerQuantities = new FollowerQuantities();
 
-            levelAdjustments[BaseRaceId] = 0;
-            levelAdjustments[BaseRacePlusOneId] = 1;
-            levelAdjustments[RaceConstants.Metaraces.NoneId] = 0;
-            levelAdjustments[MetaraceId] = 1;
+            levelAdjustments[BaseRace] = 0;
+            levelAdjustments[BaseRacePlusOne] = 1;
+            levelAdjustments[RaceConstants.Metaraces.None] = 0;
+            levelAdjustments[Metarace] = 1;
             mockAdjustmentsSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments)).Returns(levelAdjustments);
 
             mockRandomizerVerifier.Setup(v => v.VerifyCompatibility(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object,
@@ -174,8 +174,8 @@ namespace NPCGen.Tests.Unit.Generators
             alignment.Lawfulness = "lawfulness";
             characterClass.Level = 1;
             characterClass.ClassName = "class name";
-            race.BaseRace.Id = BaseRaceId;
-            race.Metarace.Id = RaceConstants.Metaraces.NoneId;
+            race.BaseRace = BaseRace;
+            race.Metarace = RaceConstants.Metaraces.None;
             ability.Feats = feats;
 
             mockAlignmentGenerator.Setup(f => f.GenerateWith(mockAlignmentRandomizer.Object)).Returns(alignment);
@@ -232,10 +232,10 @@ namespace NPCGen.Tests.Unit.Generators
         public void IncompatibleComboOfBaseRaceAndMetaraceIsRegeneratedWithCompatibleBaseRace()
         {
             var higherRace = new Race();
-            higherRace.BaseRace.Id = BaseRacePlusOneId;
-            higherRace.Metarace.Id = MetaraceId;
-            race.BaseRace.Id = BaseRaceId;
-            race.Metarace.Id = MetaraceId;
+            higherRace.BaseRace = BaseRacePlusOne;
+            higherRace.Metarace = Metarace;
+            race.BaseRace = BaseRace;
+            race.Metarace = Metarace;
 
             mockRaceGenerator.SetupSequence(f => f.GenerateWith(It.IsAny<Alignment>(), It.IsAny<CharacterClass>(), mockBaseRaceRandomizer.Object,
                 mockMetaraceRandomizer.Object)).Returns(higherRace).Returns(race);
@@ -251,10 +251,10 @@ namespace NPCGen.Tests.Unit.Generators
         public void IncompatibleComboOfBaseRaceAndMetaraceIsRegeneratedWithCompatibleMetarace()
         {
             var higherRace = new Race();
-            higherRace.BaseRace.Id = BaseRacePlusOneId;
-            higherRace.Metarace.Id = MetaraceId;
-            race.BaseRace.Id = BaseRacePlusOneId;
-            race.Metarace.Id = RaceConstants.Metaraces.NoneId;
+            higherRace.BaseRace = BaseRacePlusOne;
+            higherRace.Metarace = Metarace;
+            race.BaseRace = BaseRacePlusOne;
+            race.Metarace = RaceConstants.Metaraces.None;
 
             mockRaceGenerator.SetupSequence(f => f.GenerateWith(It.IsAny<Alignment>(), It.IsAny<CharacterClass>(), mockBaseRaceRandomizer.Object,
                 mockMetaraceRandomizer.Object)).Returns(higherRace).Returns(race);
@@ -270,7 +270,7 @@ namespace NPCGen.Tests.Unit.Generators
         public void AppliesBaseRaceLevelAdjustment()
         {
             characterClass.Level = 2;
-            race.BaseRace.Id = BaseRacePlusOneId;
+            race.BaseRace = BaseRacePlusOne;
 
             GenerateCharacter();
             Assert.That(characterClass.Level, Is.EqualTo(1));
@@ -280,7 +280,7 @@ namespace NPCGen.Tests.Unit.Generators
         public void AppliesMetaraceLevelAdjustment()
         {
             characterClass.Level = 2;
-            race.Metarace.Id = MetaraceId;
+            race.Metarace = Metarace;
 
             GenerateCharacter();
             Assert.That(characterClass.Level, Is.EqualTo(1));
@@ -289,8 +289,8 @@ namespace NPCGen.Tests.Unit.Generators
         [Test]
         public void ApplyBaseRaceAndMetaraceLevelAdjustments()
         {
-            race.BaseRace.Id = BaseRacePlusOneId;
-            race.Metarace.Id = MetaraceId;
+            race.BaseRace = BaseRacePlusOne;
+            race.Metarace = Metarace;
             characterClass.Level = 3;
 
             GenerateCharacter();
@@ -375,7 +375,7 @@ namespace NPCGen.Tests.Unit.Generators
         public void IfNoLeadershipFeat_NoLeadership()
         {
             feats.Add(new Feat());
-            feats[0].Name.Id = "other feat";
+            feats[0].Name = "other feat";
 
             var character = GenerateCharacter();
             Assert.That(character.Leadership.Cohort, Is.Null);
@@ -387,7 +387,7 @@ namespace NPCGen.Tests.Unit.Generators
         public void IfCharacterHasLeadershipFeat_LeadershipScoreIsLevelPlusCharismaModifier()
         {
             feats.Add(new Feat());
-            feats[0].Name.Id = FeatConstants.LeadershipId;
+            feats[0].Name = FeatConstants.Leadership;
 
             ability.Stats[StatConstants.Charisma] = new Stat { Value = 16 };
             characterClass.Level = 5;
@@ -400,7 +400,7 @@ namespace NPCGen.Tests.Unit.Generators
         public void IfCharacterHasLeadership_GenerateCohort()
         {
             feats.Add(new Feat());
-            feats[0].Name.Id = FeatConstants.LeadershipId;
+            feats[0].Name = FeatConstants.Leadership;
 
             ability.Stats[StatConstants.Charisma] = new Stat { Value = 16 };
             characterClass.Level = 5;
@@ -420,7 +420,7 @@ namespace NPCGen.Tests.Unit.Generators
         public void CharacterReputationGenerated()
         {
             feats.Add(new Feat());
-            feats[0].Name.Id = FeatConstants.LeadershipId;
+            feats[0].Name = FeatConstants.Leadership;
 
             ability.Stats[StatConstants.Charisma] = new Stat { Value = 16 };
             characterClass.Level = 5;
@@ -439,7 +439,7 @@ namespace NPCGen.Tests.Unit.Generators
         public void CharacterReputationAdjustmentIsApplied()
         {
             feats.Add(new Feat());
-            feats[0].Name.Id = FeatConstants.LeadershipId;
+            feats[0].Name = FeatConstants.Leadership;
 
             ability.Stats[StatConstants.Charisma] = new Stat { Value = 16 };
             characterClass.Level = 5;
@@ -459,7 +459,7 @@ namespace NPCGen.Tests.Unit.Generators
         public void NegativeCharacterReputationAdjustmentIsApplied()
         {
             feats.Add(new Feat());
-            feats[0].Name.Id = FeatConstants.LeadershipId;
+            feats[0].Name = FeatConstants.Leadership;
 
             ability.Stats[StatConstants.Charisma] = new Stat { Value = 16 };
             characterClass.Level = 5;
@@ -479,7 +479,7 @@ namespace NPCGen.Tests.Unit.Generators
         public void CohortLevelIsSetBasedOnCharacterLeadershipScore()
         {
             feats.Add(new Feat());
-            feats[0].Name.Id = FeatConstants.LeadershipId;
+            feats[0].Name = FeatConstants.Leadership;
 
             ability.Stats[StatConstants.Charisma] = new Stat { Value = 16 };
             characterClass.Level = 5;
@@ -498,7 +498,7 @@ namespace NPCGen.Tests.Unit.Generators
         public void CohortLevelIs2LessThanCharacterLevel()
         {
             feats.Add(new Feat());
-            feats[0].Name.Id = FeatConstants.LeadershipId;
+            feats[0].Name = FeatConstants.Leadership;
 
             ability.Stats[StatConstants.Charisma] = new Stat { Value = 16 };
             characterClass.Level = 5;
@@ -519,7 +519,7 @@ namespace NPCGen.Tests.Unit.Generators
         public void CohortIsGeneratedIndependently()
         {
             feats.Add(new Feat());
-            feats[0].Name.Id = FeatConstants.LeadershipId;
+            feats[0].Name = FeatConstants.Leadership;
 
             ability.Stats[StatConstants.Charisma] = new Stat { Value = 16 };
             characterClass.Level = 5;
@@ -563,7 +563,7 @@ namespace NPCGen.Tests.Unit.Generators
         public void FamiliarsDecreaseScoreOfAttractingCohorts()
         {
             feats.Add(new Feat());
-            feats[0].Name.Id = FeatConstants.LeadershipId;
+            feats[0].Name = FeatConstants.Leadership;
 
             ability.Stats[StatConstants.Charisma] = new Stat { Value = 16 };
             characterClass.Level = 5;
@@ -583,7 +583,7 @@ namespace NPCGen.Tests.Unit.Generators
         public void KillingCohortsDecreasesScoreOfAttractingCohorts()
         {
             feats.Add(new Feat());
-            feats[0].Name.Id = FeatConstants.LeadershipId;
+            feats[0].Name = FeatConstants.Leadership;
 
             ability.Stats[StatConstants.Charisma] = new Stat { Value = 16 };
             characterClass.Level = 5;
@@ -604,7 +604,7 @@ namespace NPCGen.Tests.Unit.Generators
         public void KillingMultipleCohortsDecreasesScoreOfAttractingCohorts()
         {
             feats.Add(new Feat());
-            feats[0].Name.Id = FeatConstants.LeadershipId;
+            feats[0].Name = FeatConstants.Leadership;
 
             ability.Stats[StatConstants.Charisma] = new Stat { Value = 16 };
             characterClass.Level = 5;
@@ -626,7 +626,7 @@ namespace NPCGen.Tests.Unit.Generators
         public void CohortCannotOpposeAlignment()
         {
             feats.Add(new Feat());
-            feats[0].Name.Id = FeatConstants.LeadershipId;
+            feats[0].Name = FeatConstants.Leadership;
 
             ability.Stats[StatConstants.Charisma] = new Stat { Value = 16 };
             characterClass.Level = 5;
@@ -666,7 +666,7 @@ namespace NPCGen.Tests.Unit.Generators
         public void AttractCohortOfSameAlignment()
         {
             feats.Add(new Feat());
-            feats[0].Name.Id = FeatConstants.LeadershipId;
+            feats[0].Name = FeatConstants.Leadership;
 
             ability.Stats[StatConstants.Charisma] = new Stat { Value = 16 };
             characterClass.Level = 5;
@@ -696,7 +696,7 @@ namespace NPCGen.Tests.Unit.Generators
         public void AttractCohortOfDifferingAlignment()
         {
             feats.Add(new Feat());
-            feats[0].Name.Id = FeatConstants.LeadershipId;
+            feats[0].Name = FeatConstants.Leadership;
 
             ability.Stats[StatConstants.Charisma] = new Stat { Value = 16 };
             characterClass.Level = 5;
@@ -723,7 +723,7 @@ namespace NPCGen.Tests.Unit.Generators
         public void IfSelectedCohortLevelIs0_DoNotGenerateCohort()
         {
             feats.Add(new Feat());
-            feats[0].Name.Id = FeatConstants.LeadershipId;
+            feats[0].Name = FeatConstants.Leadership;
 
             ability.Stats[StatConstants.Charisma] = new Stat { Value = 16 };
             characterClass.Level = 5;
@@ -739,7 +739,7 @@ namespace NPCGen.Tests.Unit.Generators
         public void CohortsCannotReceiveFollowers()
         {
             feats.Add(new Feat());
-            feats[0].Name.Id = FeatConstants.LeadershipId;
+            feats[0].Name = FeatConstants.Leadership;
 
             ability.Stats[StatConstants.Charisma] = new Stat { Value = 16 };
             characterClass.Level = 5;
@@ -774,7 +774,7 @@ namespace NPCGen.Tests.Unit.Generators
         public void FollowersGenerated()
         {
             feats.Add(new Feat());
-            feats[0].Name.Id = FeatConstants.LeadershipId;
+            feats[0].Name = FeatConstants.Leadership;
 
             ability.Stats[StatConstants.Charisma] = new Stat { Value = 16 };
             characterClass.Level = 5;
@@ -802,7 +802,7 @@ namespace NPCGen.Tests.Unit.Generators
         public void FollowersGeneratedIndependently()
         {
             feats.Add(new Feat());
-            feats[0].Name.Id = FeatConstants.LeadershipId;
+            feats[0].Name = FeatConstants.Leadership;
 
             ability.Stats[StatConstants.Charisma] = new Stat { Value = 16 };
             characterClass.Level = 5;
@@ -925,7 +925,7 @@ namespace NPCGen.Tests.Unit.Generators
         public void GenerateLeadershipMovementFactorsAndApplyThem()
         {
             feats.Add(new Feat());
-            feats[0].Name.Id = FeatConstants.LeadershipId;
+            feats[0].Name = FeatConstants.Leadership;
 
             ability.Stats[StatConstants.Charisma] = new Stat { Value = 16 };
             characterClass.Level = 5;
@@ -953,7 +953,7 @@ namespace NPCGen.Tests.Unit.Generators
         public void CharacterDoesNotHaveEmptyLeadershipModifiers()
         {
             feats.Add(new Feat());
-            feats[0].Name.Id = FeatConstants.LeadershipId;
+            feats[0].Name = FeatConstants.Leadership;
 
             ability.Stats[StatConstants.Charisma] = new Stat { Value = 16 };
             characterClass.Level = 5;
@@ -977,7 +977,7 @@ namespace NPCGen.Tests.Unit.Generators
         public void GenerateWhetherCharacterHasCausedFollowerDeathsAndApply()
         {
             feats.Add(new Feat());
-            feats[0].Name.Id = FeatConstants.LeadershipId;
+            feats[0].Name = FeatConstants.Leadership;
 
             ability.Stats[StatConstants.Charisma] = new Stat { Value = 16 };
             characterClass.Level = 5;
@@ -1000,7 +1000,7 @@ namespace NPCGen.Tests.Unit.Generators
         public void FollowersCannotReceiveFollowers()
         {
             feats.Add(new Feat());
-            feats[0].Name.Id = FeatConstants.LeadershipId;
+            feats[0].Name = FeatConstants.Leadership;
 
             ability.Stats[StatConstants.Charisma] = new Stat { Value = 16 };
             characterClass.Level = 5;
@@ -1087,7 +1087,7 @@ namespace NPCGen.Tests.Unit.Generators
         public void FollowersCannotOpposeAlignment()
         {
             feats.Add(new Feat());
-            feats[0].Name.Id = FeatConstants.LeadershipId;
+            feats[0].Name = FeatConstants.Leadership;
 
             ability.Stats[StatConstants.Charisma] = new Stat { Value = 16 };
             characterClass.Level = 5;

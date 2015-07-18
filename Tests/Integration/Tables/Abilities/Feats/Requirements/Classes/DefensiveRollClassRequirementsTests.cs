@@ -11,7 +11,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Requirements.Classes
     {
         protected override String tableName
         {
-            get { return String.Format(TableNameConstants.Formattable.Adjustments.FEATClassRequirements, FeatConstants.DefensiveRollId); }
+            get { return String.Format(TableNameConstants.Formattable.Adjustments.FEATClassRequirements, FeatConstants.DefensiveRoll); }
         }
 
         [Test]

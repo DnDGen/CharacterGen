@@ -51,8 +51,8 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             statPrioritySelection.Second = "second priority";
             mockStatPrioritySelector.Setup(p => p.SelectFor(It.IsAny<String>())).Returns(statPrioritySelection);
 
-            race.BaseRace.Name = "base race";
-            race.Metarace.Name = String.Empty;
+            race.BaseRace = "base race";
+            race.Metarace = String.Empty;
             adjustments.Add(statPrioritySelection.First, 0);
             adjustments.Add(statPrioritySelection.Second, 0);
             adjustments.Add("other stat", 0);

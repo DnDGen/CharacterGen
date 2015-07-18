@@ -11,7 +11,7 @@ namespace NPCGen.Selectors.Interfaces.Objects
 {
     public class AdditionalFeatSelection
     {
-        public String FeatId { get; set; }
+        public String Feat { get; set; }
         public Frequency Frequency { get; set; }
         public Int32 Strength { get; set; }
         public IEnumerable<RequiredFeat> RequiredFeats { get; set; }
@@ -23,7 +23,7 @@ namespace NPCGen.Selectors.Interfaces.Objects
 
         public AdditionalFeatSelection()
         {
-            FeatId = String.Empty;
+            Feat = String.Empty;
             RequiredFeats = Enumerable.Empty<RequiredFeat>();
             RequiredStats = new Dictionary<String, Int32>();
             RequiredSkillRanks = new Dictionary<String, Int32>();
@@ -50,7 +50,7 @@ namespace NPCGen.Selectors.Interfaces.Objects
 
         public Boolean MutableRequirementsMet(IEnumerable<Feat> feats)
         {
-            var proficiencyRequirement = RequiredFeats.FirstOrDefault(f => f.FeatId == GroupConstants.Proficiency);
+            var proficiencyRequirement = RequiredFeats.FirstOrDefault(f => f.Feat == GroupConstants.Proficiency);
             var requirementsWithoutProficiency = RequiredFeats.Except(new[] { proficiencyRequirement });
 
             return requirementsWithoutProficiency.All(f => f.RequirementMet(feats));

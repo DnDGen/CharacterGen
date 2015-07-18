@@ -25,7 +25,7 @@ namespace NPCGen.Selectors
                 var tableName = String.Format(TableNameConstants.Formattable.Adjustments.STATStatAdjustments, stat);
                 var statAdjustments = innerSelector.SelectFrom(tableName);
 
-                adjustments[stat] = statAdjustments[race.BaseRace.Id] + statAdjustments[race.Metarace.Id];
+                adjustments[stat] = statAdjustments[race.BaseRace] + statAdjustments[race.Metarace];
             }
 
             return adjustments;

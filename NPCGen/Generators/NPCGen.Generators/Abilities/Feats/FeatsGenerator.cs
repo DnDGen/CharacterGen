@@ -20,17 +20,14 @@ namespace NPCGen.Generators.Abilities.Feats
         private IClassFeatsGenerator classFeatsGenerator;
         private IAdditionalFeatsGenerator additionalFeatsGenerator;
         private ICollectionsSelector collectionsSelector;
-        private INameSelector nameSelector;
 
         public FeatsGenerator(IRacialFeatsGenerator racialFeatsGenerator, IClassFeatsGenerator classFeatsGenerator,
-            IAdditionalFeatsGenerator additionalFeatsGenerator, ICollectionsSelector collectionsSelector,
-            INameSelector nameSelector)
+            IAdditionalFeatsGenerator additionalFeatsGenerator, ICollectionsSelector collectionsSelector)
         {
             this.racialFeatsGenerator = racialFeatsGenerator;
             this.classFeatsGenerator = classFeatsGenerator;
             this.additionalFeatsGenerator = additionalFeatsGenerator;
             this.collectionsSelector = collectionsSelector;
-            this.nameSelector = nameSelector;
         }
 
         public IEnumerable<Feat> GenerateWith(CharacterClass characterClass, Race race, Dictionary<String, Stat> stats,
@@ -49,7 +46,7 @@ namespace NPCGen.Generators.Abilities.Feats
 
             foreach (var featToCombine in featsToCombine)
             {
-                if (combinedFeatIds.Contains(featToCombine.Name.Id))
+                if (combinedFeatIds.Contains(featToCombine.Name))
                     continue;
 
                 var combinableFeats = featsToCombine.Where(f => CanCombine(f, featsToCombine));
@@ -75,7 +72,7 @@ namespace NPCGen.Generators.Abilities.Feats
                 }
 
                 featsToRemove.AddRange(otherFeats);
-                combinedFeatIds.Add(featToCombine.Name.Id);
+                combinedFeatIds.Add(featToCombine.Name);
             }
 
             var featsWithRemovableStrengths = allFeats.Where(f => CanRemoveStrength(f, allFeats));
@@ -83,7 +80,7 @@ namespace NPCGen.Generators.Abilities.Feats
 
             foreach (var featToRemove in featsWithRemovableStrengths)
             {
-                if (combinedFeatIds.Contains(featToRemove.Name.Id))
+                if (combinedFeatIds.Contains(featToRemove.Name))
                     continue;
 
                 var removableFeats = featsWithRemovableStrengths.Where(f => CanRemoveStrength(f, featsWithRemovableStrengths));
@@ -95,20 +92,17 @@ namespace NPCGen.Generators.Abilities.Feats
                 var otherFeats = removableFeats.Except(new[] { featToKeep });
 
                 featsToRemove.AddRange(otherFeats);
-                combinedFeatIds.Add(featToRemove.Name.Id);
+                combinedFeatIds.Add(featToRemove.Name);
             }
 
             if (allFeats.Any(f => f.Focus == ProficiencyConstants.All))
             {
-                var featIdsWithAllFocus = allFeats.Where(f => f.Focus == ProficiencyConstants.All).Select(f => f.Name.Id);
-                var redundantFeats = allFeats.Where(f => featIdsWithAllFocus.Contains(f.Name.Id) && f.Focus != ProficiencyConstants.All);
+                var featIdsWithAllFocus = allFeats.Where(f => f.Focus == ProficiencyConstants.All).Select(f => f.Name);
+                var redundantFeats = allFeats.Where(f => featIdsWithAllFocus.Contains(f.Name) && f.Focus != ProficiencyConstants.All);
                 featsToRemove.AddRange(redundantFeats);
             }
 
             allFeats = allFeats.Except(featsToRemove);
-
-            foreach (var feat in allFeats)
-                feat.Name.Name = nameSelector.Select(feat.Name.Id);
 
             return allFeats;
         }
@@ -119,10 +113,10 @@ namespace NPCGen.Generators.Abilities.Feats
                 return false;
 
             var featIdsAllowingMultipleTakes = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TakenMultipleTimes);
-            if (featIdsAllowingMultipleTakes.Contains(feat.Name.Id))
+            if (featIdsAllowingMultipleTakes.Contains(feat.Name))
                 return false;
 
-            var count = allFeats.Count(f => f.Name.Id == feat.Name.Id
+            var count = allFeats.Count(f => f.Name == feat.Name
                                         && f.Focus == feat.Focus
                                         && f.Frequency.TimePeriod == String.Empty);
 
@@ -134,7 +128,7 @@ namespace NPCGen.Generators.Abilities.Feats
             if (feat.Frequency.TimePeriod == String.Empty)
                 return false;
 
-            var count = allFeats.Count(f => f.Name.Id == feat.Name.Id
+            var count = allFeats.Count(f => f.Name == feat.Name
                                         && f.Focus == feat.Focus
                                         && f.Strength == feat.Strength
                                         && FrequenciesCanCombine(f.Frequency, feat.Frequency));

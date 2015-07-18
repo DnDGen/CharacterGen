@@ -28,12 +28,12 @@ namespace NPCGen.Generators.Abilities.Feats
 
         public IEnumerable<Feat> GenerateWith(Race race, Dictionary<String, Skill> skills)
         {
-            var baseRacialFeatSelections = featsSelector.SelectRacial(race.BaseRace.Id);
-            var metaracialFeatSelections = featsSelector.SelectRacial(race.Metarace.Id);
+            var baseRacialFeatSelections = featsSelector.SelectRacial(race.BaseRace);
+            var metaracialFeatSelections = featsSelector.SelectRacial(race.Metarace);
             var metaraceSpeciesFeatSelections = featsSelector.SelectRacial(race.MetaraceSpecies);
             var allRacialFeatSelections = baseRacialFeatSelections.Union(metaracialFeatSelections).Union(metaraceSpeciesFeatSelections);
 
-            var monsterHitDice = GetMonsterHitDice(race.BaseRace.Id);
+            var monsterHitDice = GetMonsterHitDice(race.BaseRace);
             var applicableRacialFeatSelections = allRacialFeatSelections.Where(s => s.MinimumHitDieRequirement <= monsterHitDice)
                                                                         .Where(s => String.IsNullOrEmpty(s.SizeRequirement) || s.SizeRequirement == race.Size);
 
@@ -41,8 +41,8 @@ namespace NPCGen.Generators.Abilities.Feats
             foreach (var racialFeatSelection in applicableRacialFeatSelections)
             {
                 var feat = new Feat();
-                feat.Name.Id = racialFeatSelection.FeatId;
-                feat.Focus = featFocusGenerator.GenerateAllowingFocusOfAllFrom(racialFeatSelection.FeatId, racialFeatSelection.FocusType, skills);
+                feat.Name = racialFeatSelection.Feat;
+                feat.Focus = featFocusGenerator.GenerateAllowingFocusOfAllFrom(racialFeatSelection.Feat, racialFeatSelection.FocusType, skills);
                 feat.Frequency = racialFeatSelection.Frequency;
                 feat.Strength = racialFeatSelection.Strength;
 
@@ -52,14 +52,14 @@ namespace NPCGen.Generators.Abilities.Feats
             return feats;
         }
 
-        private Int32 GetMonsterHitDice(String baseRaceId)
+        private Int32 GetMonsterHitDice(String baseRace)
         {
             var monsters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters);
-            if (!monsters.Contains(baseRaceId))
+            if (!monsters.Contains(baseRace))
                 return 1;
 
             var hitDice = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice);
-            return hitDice[baseRaceId];
+            return hitDice[baseRace];
         }
     }
 }

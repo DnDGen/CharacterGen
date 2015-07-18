@@ -14,13 +14,11 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
     {
         private ISetBaseRaceRandomizer randomizer;
         private CharacterClass characterclass;
-        private Mock<INameSelector> mockNameSelector;
 
         [SetUp]
         public void Setup()
         {
-            mockNameSelector = new Mock<INameSelector>();
-            randomizer = new SetBaseRaceRandomizer(mockNameSelector.Object);
+            randomizer = new SetBaseRaceRandomizer();
             characterclass = new CharacterClass();
         }
 
@@ -33,20 +31,18 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         [Test]
         public void ReturnSetBaseRace()
         {
-            randomizer.SetBaseRaceId = "baserace";
-            mockNameSelector.Setup(s => s.Select("baserace")).Returns("base race");
+            randomizer.SetBaseRace = "baserace";
 
             var baseRace = randomizer.Randomize(String.Empty, characterclass);
-            Assert.That(baseRace.Id, Is.EqualTo("baserace"));
-            Assert.That(baseRace.Name, Is.EqualTo("base race"));
+            Assert.That(baseRace, Is.EqualTo("baserace"));
         }
 
         [Test]
         public void ReturnJustSetBaseRace()
         {
-            randomizer.SetBaseRaceId = "baserace";
+            randomizer.SetBaseRace = "baserace";
 
-            var baseRaces = randomizer.GetAllPossibleIds(String.Empty, characterclass);
+            var baseRaces = randomizer.GetAllPossibles(String.Empty, characterclass);
             Assert.That(baseRaces, Contains.Item("baserace"));
             Assert.That(baseRaces.Count(), Is.EqualTo(1));
         }

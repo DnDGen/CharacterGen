@@ -14,46 +14,42 @@ namespace NPCGen.Generators.Randomizers.Races.BaseRaces
     {
         private IPercentileSelector percentileResultSelector;
         private IAdjustmentsSelector adjustmentSelector;
-        private INameSelector nameSelector;
 
-        public BaseBaseRace(IPercentileSelector percentileResultSelector, IAdjustmentsSelector adjustmentSelector, INameSelector nameSelector)
+        public BaseBaseRace(IPercentileSelector percentileResultSelector, IAdjustmentsSelector adjustmentSelector)
         {
             this.percentileResultSelector = percentileResultSelector;
             this.adjustmentSelector = adjustmentSelector;
-            this.nameSelector = nameSelector;
         }
 
-        public NameModel Randomize(String goodness, CharacterClass characterClass)
+        public String Randomize(String goodness, CharacterClass characterClass)
         {
-            var results = GetAllPossibleIds(goodness, characterClass);
+            var results = GetAllPossibles(goodness, characterClass);
             if (!results.Any())
                 throw new IncompatibleRandomizersException();
 
             var tableName = String.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSBaseRaces, goodness, characterClass.ClassName);
-            var baseRace = new NameModel();
+            var baseRace = String.Empty;
 
-            do baseRace.Id = percentileResultSelector.SelectFrom(tableName);
-            while (!results.Contains(baseRace.Id));
-
-            baseRace.Name = nameSelector.Select(baseRace.Id);
+            do baseRace = percentileResultSelector.SelectFrom(tableName);
+            while (!results.Contains(baseRace));
 
             return baseRace;
         }
 
-        private Boolean RaceIsAllowed(String baseRaceId, Int32 level)
+        private Boolean RaceIsAllowed(String baseRace, Int32 level)
         {
-            return !String.IsNullOrEmpty(baseRaceId) && LevelAdjustmentIsAllowed(baseRaceId, level) && BaseRaceIsAllowed(baseRaceId);
+            return !String.IsNullOrEmpty(baseRace) && LevelAdjustmentIsAllowed(baseRace, level) && BaseRaceIsAllowed(baseRace);
         }
 
-        private Boolean LevelAdjustmentIsAllowed(String baseRaceId, Int32 level)
+        private Boolean LevelAdjustmentIsAllowed(String baseRace, Int32 level)
         {
             var levelAdjustments = adjustmentSelector.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments);
-            return levelAdjustments[baseRaceId] < level;
+            return levelAdjustments[baseRace] < level;
         }
 
-        protected abstract Boolean BaseRaceIsAllowed(String baseRaceId);
+        protected abstract Boolean BaseRaceIsAllowed(String baseRace);
 
-        public IEnumerable<String> GetAllPossibleIds(String goodness, CharacterClass characterClass)
+        public IEnumerable<String> GetAllPossibles(String goodness, CharacterClass characterClass)
         {
             var tableName = String.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSBaseRaces,
                 goodness, characterClass.ClassName);

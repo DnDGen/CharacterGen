@@ -20,19 +20,19 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
         {
             var names = new[] 
             {
-                FeatConstants.ScribeScrollId,
-                FeatConstants.SimpleWeaponProficiencyId + WeaponConstants.Club,
-                FeatConstants.SimpleWeaponProficiencyId + WeaponConstants.Dagger,
-                FeatConstants.SimpleWeaponProficiencyId + WeaponConstants.HeavyCrossbow,
-                FeatConstants.SimpleWeaponProficiencyId + WeaponConstants.LightCrossbow,
-                FeatConstants.SimpleWeaponProficiencyId + WeaponConstants.Quarterstaff
+                FeatConstants.ScribeScroll,
+                FeatConstants.SimpleWeaponProficiency + WeaponConstants.Club,
+                FeatConstants.SimpleWeaponProficiency + WeaponConstants.Dagger,
+                FeatConstants.SimpleWeaponProficiency + WeaponConstants.HeavyCrossbow,
+                FeatConstants.SimpleWeaponProficiency + WeaponConstants.LightCrossbow,
+                FeatConstants.SimpleWeaponProficiency + WeaponConstants.Quarterstaff
             };
 
             AssertCollectionNames(names);
         }
 
-        [TestCase(FeatConstants.ScribeScrollId,
-            FeatConstants.ScribeScrollId,
+        [TestCase(FeatConstants.ScribeScroll,
+            FeatConstants.ScribeScroll,
             "",
             0,
             "",
@@ -40,8 +40,8 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             1,
             0,
             0)]
-        [TestCase(FeatConstants.SimpleWeaponProficiencyId + WeaponConstants.Club,
-            FeatConstants.SimpleWeaponProficiencyId,
+        [TestCase(FeatConstants.SimpleWeaponProficiency + WeaponConstants.Club,
+            FeatConstants.SimpleWeaponProficiency,
             WeaponConstants.Club,
             0,
             "",
@@ -49,8 +49,8 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             1,
             0,
             0)]
-        [TestCase(FeatConstants.SimpleWeaponProficiencyId + WeaponConstants.Dagger,
-            FeatConstants.SimpleWeaponProficiencyId,
+        [TestCase(FeatConstants.SimpleWeaponProficiency + WeaponConstants.Dagger,
+            FeatConstants.SimpleWeaponProficiency,
             WeaponConstants.Dagger,
             0,
             "",
@@ -58,8 +58,8 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             1,
             0,
             0)]
-        [TestCase(FeatConstants.SimpleWeaponProficiencyId + WeaponConstants.HeavyCrossbow,
-            FeatConstants.SimpleWeaponProficiencyId,
+        [TestCase(FeatConstants.SimpleWeaponProficiency + WeaponConstants.HeavyCrossbow,
+            FeatConstants.SimpleWeaponProficiency,
             WeaponConstants.HeavyCrossbow,
             0,
             "",
@@ -67,8 +67,8 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             1,
             0,
             0)]
-        [TestCase(FeatConstants.SimpleWeaponProficiencyId + WeaponConstants.LightCrossbow,
-            FeatConstants.SimpleWeaponProficiencyId,
+        [TestCase(FeatConstants.SimpleWeaponProficiency + WeaponConstants.LightCrossbow,
+            FeatConstants.SimpleWeaponProficiency,
             WeaponConstants.LightCrossbow,
             0,
             "",
@@ -76,8 +76,8 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             1,
             0,
             0)]
-        [TestCase(FeatConstants.SimpleWeaponProficiencyId + WeaponConstants.Quarterstaff,
-            FeatConstants.SimpleWeaponProficiencyId,
+        [TestCase(FeatConstants.SimpleWeaponProficiency + WeaponConstants.Quarterstaff,
+            FeatConstants.SimpleWeaponProficiency,
             WeaponConstants.Quarterstaff,
             0,
             "",
@@ -85,9 +85,9 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             1,
             0,
             0)]
-        public override void Data(String name, String featId, String focusType, Int32 frequencyQuantity, String frequencyQuantityStat, String frequencyTimePeriod, Int32 minimumLevel, Int32 maximumLevel, Int32 strength)
+        public override void Data(String name, String feat, String focusType, Int32 frequencyQuantity, String frequencyQuantityStat, String frequencyTimePeriod, Int32 minimumLevel, Int32 maximumLevel, Int32 strength)
         {
-            base.Data(name, featId, focusType, frequencyQuantity, frequencyQuantityStat, frequencyTimePeriod, minimumLevel, maximumLevel, strength);
+            base.Data(name, feat, focusType, frequencyQuantity, frequencyQuantityStat, frequencyTimePeriod, minimumLevel, maximumLevel, strength);
         }
     }
 }

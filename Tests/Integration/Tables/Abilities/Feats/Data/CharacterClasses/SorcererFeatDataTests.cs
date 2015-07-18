@@ -20,14 +20,14 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
         {
             var names = new[] 
             {
-                FeatConstants.SimpleWeaponProficiencyId
+                FeatConstants.SimpleWeaponProficiency
             };
 
             AssertCollectionNames(names);
         }
 
-        [TestCase(FeatConstants.SimpleWeaponProficiencyId,
-            FeatConstants.SimpleWeaponProficiencyId,
+        [TestCase(FeatConstants.SimpleWeaponProficiency,
+            FeatConstants.SimpleWeaponProficiency,
             ProficiencyConstants.All,
             0,
             "",
@@ -35,9 +35,9 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             1,
             0,
             0)]
-        public override void Data(String name, String featId, String focusType, Int32 frequencyQuantity, String frequencyQuantityStat, String frequencyTimePeriod, Int32 minimumLevel, Int32 maximumLevel, Int32 strength)
+        public override void Data(String name, String feat, String focusType, Int32 frequencyQuantity, String frequencyQuantityStat, String frequencyTimePeriod, Int32 minimumLevel, Int32 maximumLevel, Int32 strength)
         {
-            base.Data(name, featId, focusType, frequencyQuantity, frequencyQuantityStat, frequencyTimePeriod, minimumLevel, maximumLevel, strength);
+            base.Data(name, feat, focusType, frequencyQuantity, frequencyQuantityStat, frequencyTimePeriod, minimumLevel, maximumLevel, strength);
         }
     }
 }

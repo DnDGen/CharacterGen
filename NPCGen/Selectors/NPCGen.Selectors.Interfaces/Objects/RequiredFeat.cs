@@ -7,18 +7,18 @@ namespace NPCGen.Selectors.Interfaces.Objects
 {
     public class RequiredFeat
     {
-        public String FeatId { get; set; }
+        public String Feat { get; set; }
         public String Focus { get; set; }
 
         public RequiredFeat()
         {
-            FeatId = String.Empty;
+            Feat = String.Empty;
             Focus = String.Empty;
         }
 
         public Boolean RequirementMet(IEnumerable<Feat> otherFeats)
         {
-            var requiredFeats = otherFeats.Where(f => f.Name.Id == FeatId);
+            var requiredFeats = otherFeats.Where(f => f.Name == Feat);
 
             if (requiredFeats.Any() == false)
                 return false;

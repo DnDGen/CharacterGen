@@ -9,9 +9,9 @@ namespace NPCGen.Generators.Interfaces.Abilities.Feats
 {
     public interface IFeatFocusGenerator
     {
-        String GenerateFrom(String featId, String focusType, Dictionary<String, Skill> skills, IEnumerable<RequiredFeat> requiredFeats, IEnumerable<Feat> otherFeat, CharacterClass characterClass);
-        String GenerateFrom(String featId, String focusType, Dictionary<String, Skill> skills);
-        String GenerateAllowingFocusOfAllFrom(String featId, String focusType, Dictionary<String, Skill> skills, IEnumerable<RequiredFeat> requiredFeats, IEnumerable<Feat> otherFeat, CharacterClass characterClass);
-        String GenerateAllowingFocusOfAllFrom(String featId, String focusType, Dictionary<String, Skill> skills);
+        String GenerateFrom(String feat, String focusType, Dictionary<String, Skill> skills, IEnumerable<RequiredFeat> requiredFeats, IEnumerable<Feat> otherFeat, CharacterClass characterClass);
+        String GenerateFrom(String feat, String focusType, Dictionary<String, Skill> skills);
+        String GenerateAllowingFocusOfAllFrom(String feat, String focusType, Dictionary<String, Skill> skills, IEnumerable<RequiredFeat> requiredFeats, IEnumerable<Feat> otherFeat, CharacterClass characterClass);
+        String GenerateAllowingFocusOfAllFrom(String feat, String focusType, Dictionary<String, Skill> skills);
     }
 }

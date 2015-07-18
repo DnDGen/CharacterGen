@@ -10,9 +10,9 @@ namespace NPCGen.Generators.Randomizers.Races.Metaraces
     {
         private ICollectionsSelector collectionsSelector;
 
-        public GoodMetaraceRandomizer(IPercentileSelector percentileResultSelector, IAdjustmentsSelector levelAdjustmentSelector, INameSelector nameSelector,
+        public GoodMetaraceRandomizer(IPercentileSelector percentileResultSelector, IAdjustmentsSelector levelAdjustmentSelector,
             ICollectionsSelector collectionsSelector)
-            : base(percentileResultSelector, levelAdjustmentSelector, nameSelector)
+            : base(percentileResultSelector, levelAdjustmentSelector)
         {
             this.collectionsSelector = collectionsSelector;
         }

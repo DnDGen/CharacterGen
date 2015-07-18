@@ -113,11 +113,11 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             feats.Add(new Feat());
             feats.Add(new Feat());
             feats.Add(new Feat());
-            feats[0].Name.Id = "feat1";
+            feats[0].Name = "feat1";
             feats[0].Strength = 1;
-            feats[1].Name.Id = "feat2";
+            feats[1].Name = "feat2";
             feats[1].Strength = 2;
-            feats[2].Name.Id = "feat3";
+            feats[2].Name = "feat3";
             feats[2].Strength = 3;
 
             mockFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills, baseAttack)).Returns(feats);
@@ -152,13 +152,13 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             feats.Add(new Feat());
             feats.Add(new Feat());
             feats.Add(new Feat());
-            feats[0].Name.Id = "feat1";
+            feats[0].Name = "feat1";
             feats[0].Focus = "skill 2";
             feats[0].Strength = 1;
-            feats[1].Name.Id = "feat2";
+            feats[1].Name = "feat2";
             feats[1].Focus = "skill 3";
             feats[1].Strength = 2;
-            feats[2].Name.Id = "feat1";
+            feats[2].Name = "feat1";
             feats[2].Focus = "skill 2";
             feats[2].Strength = 3;
 
@@ -184,7 +184,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
 
             var feats = new List<Feat>();
             feats.Add(new Feat());
-            feats[0].Name.Id = "feat1";
+            feats[0].Name = "feat1";
             feats[0].Focus = "skill 1 (with qualifiers)";
             feats[0].Strength = 1;
 
@@ -211,9 +211,9 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             var feats = new List<Feat>();
             feats.Add(new Feat());
             feats.Add(new Feat());
-            feats[0].Name.Id = "feat1";
+            feats[0].Name = "feat1";
             feats[0].Strength = 1;
-            feats[1].Name.Id = "feat2";
+            feats[1].Name = "feat2";
             feats[1].Focus = "skill 2";
             feats[1].Strength = 2;
 
@@ -242,7 +242,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
 
             var feats = new List<Feat>();
             feats.Add(new Feat());
-            feats[0].Name.Id = "feat1";
+            feats[0].Name = "feat1";
             feats[0].Focus = "skill 1 (with qualifiers)";
             feats[0].Strength = 1;
 

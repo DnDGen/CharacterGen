@@ -18,25 +18,25 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
             get
             {
                 return new[] {
-                    RaceConstants.BaseRaces.AasimarId,
-                    RaceConstants.BaseRaces.DeepDwarfId,
-                    RaceConstants.BaseRaces.DeepHalflingId,
-                    RaceConstants.BaseRaces.DoppelgangerId,
-                    RaceConstants.BaseRaces.ForestGnomeId,
-                    RaceConstants.BaseRaces.GrayElfId,
-                    RaceConstants.BaseRaces.HalfElfId,
-                    RaceConstants.BaseRaces.HalfOrcId,
-                    RaceConstants.BaseRaces.HighElfId,
-                    RaceConstants.BaseRaces.HillDwarfId,
-                    RaceConstants.BaseRaces.HumanId,
-                    RaceConstants.BaseRaces.LightfootHalflingId,
-                    RaceConstants.BaseRaces.LizardfolkId,
-                    RaceConstants.BaseRaces.MountainDwarfId,
-                    RaceConstants.BaseRaces.RockGnomeId,
-                    RaceConstants.BaseRaces.SvirfneblinId,
-                    RaceConstants.BaseRaces.TallfellowHalflingId,
-                    RaceConstants.BaseRaces.WildElfId,
-                    RaceConstants.BaseRaces.WoodElfId
+                    RaceConstants.BaseRaces.Aasimar,
+                    RaceConstants.BaseRaces.DeepDwarf,
+                    RaceConstants.BaseRaces.DeepHalfling,
+                    RaceConstants.BaseRaces.Doppelganger,
+                    RaceConstants.BaseRaces.ForestGnome,
+                    RaceConstants.BaseRaces.GrayElf,
+                    RaceConstants.BaseRaces.HalfElf,
+                    RaceConstants.BaseRaces.HalfOrc,
+                    RaceConstants.BaseRaces.HighElf,
+                    RaceConstants.BaseRaces.HillDwarf,
+                    RaceConstants.BaseRaces.Human,
+                    RaceConstants.BaseRaces.LightfootHalfling,
+                    RaceConstants.BaseRaces.Lizardfolk,
+                    RaceConstants.BaseRaces.MountainDwarf,
+                    RaceConstants.BaseRaces.RockGnome,
+                    RaceConstants.BaseRaces.Svirfneblin,
+                    RaceConstants.BaseRaces.TallfellowHalfling,
+                    RaceConstants.BaseRaces.WildElf,
+                    RaceConstants.BaseRaces.WoodElf
                 };
             }
         }

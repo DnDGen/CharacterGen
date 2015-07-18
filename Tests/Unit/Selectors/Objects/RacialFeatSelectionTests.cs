@@ -21,7 +21,7 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
         [Test]
         public void RacialFeatSelectionInitialization()
         {
-            Assert.That(selection.FeatId, Is.Empty);
+            Assert.That(selection.Feat, Is.Empty);
             Assert.That(selection.Strength, Is.EqualTo(0));
             Assert.That(selection.MinimumHitDieRequirement, Is.EqualTo(0));
             Assert.That(selection.SizeRequirement, Is.Empty);

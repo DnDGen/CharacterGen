@@ -14,40 +14,40 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
             get
             {
                 return new[] {
-                    RaceConstants.BaseRaces.AasimarId,
-                    RaceConstants.BaseRaces.BugbearId,
-                    RaceConstants.BaseRaces.DeepDwarfId,
-                    RaceConstants.BaseRaces.DeepHalflingId,
-                    RaceConstants.BaseRaces.DerroId,
-                    RaceConstants.BaseRaces.DoppelgangerId,
-                    RaceConstants.BaseRaces.DrowId,
-                    RaceConstants.BaseRaces.DuergarDwarfId,
-                    RaceConstants.BaseRaces.ForestGnomeId,
-                    RaceConstants.BaseRaces.GnollId,
-                    RaceConstants.BaseRaces.GoblinId,
-                    RaceConstants.BaseRaces.GrayElfId,
-                    RaceConstants.BaseRaces.HalfElfId,
-                    RaceConstants.BaseRaces.HalfOrcId,
-                    RaceConstants.BaseRaces.HighElfId,
-                    RaceConstants.BaseRaces.HillDwarfId,
-                    RaceConstants.BaseRaces.HobgoblinId,
-                    RaceConstants.BaseRaces.HumanId,
-                    RaceConstants.BaseRaces.KoboldId,
-                    RaceConstants.BaseRaces.LightfootHalflingId,
-                    RaceConstants.BaseRaces.LizardfolkId,
-                    RaceConstants.BaseRaces.MindFlayerId,
-                    RaceConstants.BaseRaces.MinotaurId,
-                    RaceConstants.BaseRaces.MountainDwarfId,
-                    RaceConstants.BaseRaces.OgreId,
-                    RaceConstants.BaseRaces.OgreMageId,
-                    RaceConstants.BaseRaces.OrcId,
-                    RaceConstants.BaseRaces.RockGnomeId,
-                    RaceConstants.BaseRaces.SvirfneblinId,
-                    RaceConstants.BaseRaces.TallfellowHalflingId,
-                    RaceConstants.BaseRaces.TieflingId,
-                    RaceConstants.BaseRaces.TroglodyteId,
-                    RaceConstants.BaseRaces.WildElfId,
-                    RaceConstants.BaseRaces.WoodElfId
+                    RaceConstants.BaseRaces.Aasimar,
+                    RaceConstants.BaseRaces.Bugbear,
+                    RaceConstants.BaseRaces.DeepDwarf,
+                    RaceConstants.BaseRaces.DeepHalfling,
+                    RaceConstants.BaseRaces.Derro,
+                    RaceConstants.BaseRaces.Doppelganger,
+                    RaceConstants.BaseRaces.Drow,
+                    RaceConstants.BaseRaces.DuergarDwarf,
+                    RaceConstants.BaseRaces.ForestGnome,
+                    RaceConstants.BaseRaces.Gnoll,
+                    RaceConstants.BaseRaces.Goblin,
+                    RaceConstants.BaseRaces.GrayElf,
+                    RaceConstants.BaseRaces.HalfElf,
+                    RaceConstants.BaseRaces.HalfOrc,
+                    RaceConstants.BaseRaces.HighElf,
+                    RaceConstants.BaseRaces.HillDwarf,
+                    RaceConstants.BaseRaces.Hobgoblin,
+                    RaceConstants.BaseRaces.Human,
+                    RaceConstants.BaseRaces.Kobold,
+                    RaceConstants.BaseRaces.LightfootHalfling,
+                    RaceConstants.BaseRaces.Lizardfolk,
+                    RaceConstants.BaseRaces.MindFlayer,
+                    RaceConstants.BaseRaces.Minotaur,
+                    RaceConstants.BaseRaces.MountainDwarf,
+                    RaceConstants.BaseRaces.Ogre,
+                    RaceConstants.BaseRaces.OgreMage,
+                    RaceConstants.BaseRaces.Orc,
+                    RaceConstants.BaseRaces.RockGnome,
+                    RaceConstants.BaseRaces.Svirfneblin,
+                    RaceConstants.BaseRaces.TallfellowHalfling,
+                    RaceConstants.BaseRaces.Tiefling,
+                    RaceConstants.BaseRaces.Troglodyte,
+                    RaceConstants.BaseRaces.WildElf,
+                    RaceConstants.BaseRaces.WoodElf
                 };
             }
         }
@@ -55,13 +55,13 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         [SetUp]
         public void Setup()
         {
-            randomizer = new AnyBaseRaceRandomizer(mockPercentileResultSelector.Object, mockAdjustmentsSelector.Object, mockNameSelector.Object);
+            randomizer = new AnyBaseRaceRandomizer(mockPercentileResultSelector.Object, mockAdjustmentsSelector.Object);
         }
 
         [Test]
         public void AllBaseRacesAllowed()
         {
-            var allBaseRaces = randomizer.GetAllPossibleIds(String.Empty, characterClass);
+            var allBaseRaces = randomizer.GetAllPossibles(String.Empty, characterClass);
             foreach (var baseRace in baseRaceIds)
                 Assert.That(allBaseRaces, Contains.Item(baseRace));
         }

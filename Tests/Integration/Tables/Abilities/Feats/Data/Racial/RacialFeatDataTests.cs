@@ -8,7 +8,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
     {
         protected override void PopulateIndices(IEnumerable<String> collection)
         {
-            indices[DataIndexConstants.RacialFeatData.FeatIdIndex] = "FeatId";
+            indices[DataIndexConstants.RacialFeatData.FeatNameIndex] = "FeatId";
             indices[DataIndexConstants.RacialFeatData.FocusIndex] = "FocusType";
             indices[DataIndexConstants.RacialFeatData.FrequencyQuantityIndex] = "FrequencyQuantity";
             indices[DataIndexConstants.RacialFeatData.FrequencyTimePeriodIndex] = "FrequencyTimePeriod";
@@ -17,13 +17,13 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             indices[DataIndexConstants.RacialFeatData.StrengthIndex] = "Strength";
         }
 
-        public virtual void Data(String name, String featId, String focus, Int32 frequencyQuantity, String frequencyTimePeriod, Int32 minimumHitDiceRequirement, String sizeRequirement, Int32 strength)
+        public virtual void Data(String name, String feat, String focus, Int32 frequencyQuantity, String frequencyTimePeriod, Int32 minimumHitDiceRequirement, String sizeRequirement, Int32 strength)
         {
             var data = new List<String>();
             for (var i = 0; i < 7; i++)
                 data.Add(String.Empty);
 
-            data[DataIndexConstants.RacialFeatData.FeatIdIndex] = featId;
+            data[DataIndexConstants.RacialFeatData.FeatNameIndex] = feat;
             data[DataIndexConstants.RacialFeatData.FocusIndex] = focus;
             data[DataIndexConstants.RacialFeatData.FrequencyQuantityIndex] = Convert.ToString(frequencyQuantity);
             data[DataIndexConstants.RacialFeatData.MinimumHitDiceRequirementIndex] = Convert.ToString(minimumHitDiceRequirement);

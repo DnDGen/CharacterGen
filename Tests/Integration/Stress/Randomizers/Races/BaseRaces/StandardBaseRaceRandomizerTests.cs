@@ -19,13 +19,13 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
             {
                 return new[]
                 {
-                    RaceConstants.BaseRaces.RockGnomeId,
-                    RaceConstants.BaseRaces.HalfElfId,
-                    RaceConstants.BaseRaces.HalfOrcId,
-                    RaceConstants.BaseRaces.HighElfId,
-                    RaceConstants.BaseRaces.HillDwarfId,
-                    RaceConstants.BaseRaces.HumanId,
-                    RaceConstants.BaseRaces.LightfootHalflingId
+                    RaceConstants.BaseRaces.RockGnome,
+                    RaceConstants.BaseRaces.HalfElf,
+                    RaceConstants.BaseRaces.HalfOrc,
+                    RaceConstants.BaseRaces.HighElf,
+                    RaceConstants.BaseRaces.HillDwarf,
+                    RaceConstants.BaseRaces.Human,
+                    RaceConstants.BaseRaces.LightfootHalfling
                 };
             }
         }

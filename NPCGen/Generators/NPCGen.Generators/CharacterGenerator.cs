@@ -87,7 +87,7 @@ namespace NPCGen.Generators
             var character = GenerateCharacter(alignmentRandomizer, classNameRandomizer, levelRandomizer, baseRaceRandomizer, metaraceRandomizer,
                 statsRandomizer);
 
-            if (character.Ability.Feats.Any(f => f.Name.Id == FeatConstants.LeadershipId))
+            if (character.Ability.Feats.Any(f => f.Name == FeatConstants.Leadership))
                 character.Leadership = GenerateLeadership(character);
 
             return character;
@@ -105,8 +105,8 @@ namespace NPCGen.Generators
             var levelAdjustments = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments);
             character.Race = GenerateRace(baseRaceRandomizer, metaraceRandomizer, levelAdjustments, character.Alignment, character.Class);
 
-            character.Class.Level -= levelAdjustments[character.Race.BaseRace.Id];
-            character.Class.Level -= levelAdjustments[character.Race.Metarace.Id];
+            character.Class.Level -= levelAdjustments[character.Race.BaseRace];
+            character.Class.Level -= levelAdjustments[character.Race.Metarace];
 
             var baseAttack = combatGenerator.GenerateBaseAttackWith(character.Class, character.Race);
 
@@ -170,7 +170,7 @@ namespace NPCGen.Generators
             Race race;
 
             do race = raceGenerator.GenerateWith(alignment, characterClass, baseRaceRandomizer, metaraceRandomizer);
-            while (levelAdjustments[race.BaseRace.Id] + levelAdjustments[race.Metarace.Id] >= characterClass.Level);
+            while (levelAdjustments[race.BaseRace] + levelAdjustments[race.Metarace] >= characterClass.Level);
 
             return race;
         }

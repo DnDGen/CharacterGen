@@ -8,7 +8,7 @@ namespace NPCGen.Selectors.Interfaces.Objects
 {
     public class CharacterClassFeatSelection
     {
-        public String FeatId { get; set; }
+        public String Feat { get; set; }
         public String FocusType { get; set; }
         public Int32 MinimumLevel { get; set; }
         public Int32 MaximumLevel { get; set; }
@@ -19,7 +19,7 @@ namespace NPCGen.Selectors.Interfaces.Objects
 
         public CharacterClassFeatSelection()
         {
-            FeatId = String.Empty;
+            Feat = String.Empty;
             FocusType = String.Empty;
             Frequency = new Frequency();
             RequiredFeats = Enumerable.Empty<RequiredFeat>();

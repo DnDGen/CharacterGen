@@ -22,10 +22,10 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
         protected override void MakeAssertions()
         {
             var metarace = GenerateMetarace();
-            Assert.That(allowedMetaraces, Contains.Item(metarace.Id), testType);
+            Assert.That(allowedMetaraces, Contains.Item(metarace), testType);
         }
 
-        private NameModel GenerateMetarace()
+        private String GenerateMetarace()
         {
             var alignment = GetNewAlignment();
             var characterClass = GetNewCharacterClass(alignment);
@@ -40,18 +40,18 @@ namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
         {
             ForcableMetaraceRandomizer.ForceMetarace = true;
             var metarace = GenerateMetarace();
-            Assert.That(metarace.Id, Is.Not.EqualTo(RaceConstants.Metaraces.NoneId));
+            Assert.That(metarace, Is.Not.EqualTo(RaceConstants.Metaraces.None));
         }
 
         protected void AssertUnforcedMetarace()
         {
             ForcableMetaraceRandomizer.ForceMetarace = false;
-            var metarace = new NameModel();
+            var metarace = String.Empty;
 
             do metarace = GenerateMetarace();
-            while (TestShouldKeepRunning() && metarace.Id != RaceConstants.Metaraces.NoneId);
+            while (TestShouldKeepRunning() && metarace != RaceConstants.Metaraces.None);
 
-            Assert.That(metarace.Id, Is.EqualTo(RaceConstants.Metaraces.NoneId));
+            Assert.That(metarace, Is.EqualTo(RaceConstants.Metaraces.None));
         }
     }
 }

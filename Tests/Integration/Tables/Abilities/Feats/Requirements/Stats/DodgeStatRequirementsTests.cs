@@ -11,7 +11,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Requirements.Stats
     {
         protected override String tableName
         {
-            get { return String.Format(TableNameConstants.Formattable.Adjustments.FEATStatRequirements, FeatConstants.DodgeId); }
+            get { return String.Format(TableNameConstants.Formattable.Adjustments.FEATStatRequirements, FeatConstants.Dodge); }
         }
 
         [Test]

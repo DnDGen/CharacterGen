@@ -6,7 +6,7 @@ namespace NPCGen.Tables.Interfaces
     {
         public static class CharacterClassFeatData
         {
-            public const Int32 FeatIdIndex = 0;
+            public const Int32 FeatNameIndex = 0;
             public const Int32 MinimumLevelRequirementIndex = 1;
             public const Int32 FocusTypeIndex = 2;
             public const Int32 StrengthIndex = 3;
@@ -18,7 +18,7 @@ namespace NPCGen.Tables.Interfaces
 
         public static class RacialFeatData
         {
-            public const Int32 FeatIdIndex = 0;
+            public const Int32 FeatNameIndex = 0;
             public const Int32 SizeRequirementIndex = 1;
             public const Int32 MinimumHitDiceRequirementIndex = 2;
             public const Int32 StrengthIndex = 3;

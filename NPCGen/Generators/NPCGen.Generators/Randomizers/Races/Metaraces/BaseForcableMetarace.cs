@@ -16,53 +16,49 @@ namespace NPCGen.Generators.Randomizers.Races.Metaraces
 
         private IPercentileSelector percentileResultSelector;
         private IAdjustmentsSelector adjustmentsSelector;
-        private INameSelector nameSelector;
 
-        public BaseForcableMetarace(IPercentileSelector percentileResultSelector, IAdjustmentsSelector adjustmentsSelector, INameSelector nameSelector)
+        public BaseForcableMetarace(IPercentileSelector percentileResultSelector, IAdjustmentsSelector adjustmentsSelector)
         {
             this.percentileResultSelector = percentileResultSelector;
             this.adjustmentsSelector = adjustmentsSelector;
-            this.nameSelector = nameSelector;
         }
 
-        public NameModel Randomize(String goodness, CharacterClass characterClass)
+        public String Randomize(String goodness, CharacterClass characterClass)
         {
-            var results = GetAllPossibleIds(goodness, characterClass);
-            if (!results.Any())
+            var results = GetAllPossible(goodness, characterClass);
+            if (results.Any() == false)
                 throw new IncompatibleRandomizersException();
 
             var tableName = String.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSMetaraces, goodness, characterClass.ClassName);
-            var metarace = new NameModel();
+            var metarace = String.Empty;
 
-            do metarace.Id = percentileResultSelector.SelectFrom(tableName);
-            while (!results.Contains(metarace.Id));
-
-            metarace.Name = nameSelector.Select(metarace.Id);
+            do metarace = percentileResultSelector.SelectFrom(tableName);
+            while (results.Contains(metarace) == false);
 
             return metarace;
         }
 
-        public IEnumerable<String> GetAllPossibleIds(String goodness, CharacterClass characterClass)
+        public IEnumerable<String> GetAllPossible(String goodness, CharacterClass characterClass)
         {
             var tableName = String.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSMetaraces, goodness, characterClass.ClassName);
-            var metaraceIds = percentileResultSelector.SelectAllFrom(tableName);
-            return metaraceIds.Where(r => RaceIsAllowed(r, characterClass.Level));
+            var metaraces = percentileResultSelector.SelectAllFrom(tableName);
+            return metaraces.Where(r => RaceIsAllowed(r, characterClass.Level));
         }
 
-        private Boolean RaceIsAllowed(String metaraceId, Int32 level)
+        private Boolean RaceIsAllowed(String metarace, Int32 level)
         {
-            if (metaraceId == RaceConstants.Metaraces.NoneId)
+            if (metarace == RaceConstants.Metaraces.None)
                 return !ForceMetarace;
 
-            return LevelAdjustmentIsAllowed(metaraceId, level) && MetaraceIsAllowed(metaraceId);
+            return LevelAdjustmentIsAllowed(metarace, level) && MetaraceIsAllowed(metarace);
         }
 
-        private Boolean LevelAdjustmentIsAllowed(String metaraceId, Int32 level)
+        private Boolean LevelAdjustmentIsAllowed(String metarace, Int32 level)
         {
             var adjustments = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments);
-            return adjustments[metaraceId] < level;
+            return adjustments[metarace] < level;
         }
 
-        protected abstract Boolean MetaraceIsAllowed(String metaraceId);
+        protected abstract Boolean MetaraceIsAllowed(String metarace);
     }
 }

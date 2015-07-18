@@ -48,7 +48,7 @@ namespace NPCGen.Generators.Abilities.Feats
             var availableFeats = additionalFeats.Where(f => f.ImmutableRequirementsMet(baseAttack.Bonus, stats, skills, characterClass));
 
             var numberOfAdditionalFeats = characterClass.Level / 3 + 1;
-            if (race.BaseRace.Id == RaceConstants.BaseRaces.HumanId)
+            if (race.BaseRace == RaceConstants.BaseRaces.Human)
                 numberOfAdditionalFeats++;
             if (characterClass.ClassName == CharacterClassConstants.Rogue && characterClass.Level >= 10)
                 numberOfAdditionalFeats += (characterClass.Level - 10) / 3 + 1;
@@ -80,7 +80,7 @@ namespace NPCGen.Generators.Abilities.Feats
                 var index = GetRandomIndexOf(availableFeats);
                 var featSelection = availableFeats.ElementAt(index);
 
-                var preliminaryFocus = featFocusGenerator.GenerateFrom(featSelection.FeatId, featSelection.FocusType, skills, featSelection.RequiredFeats, chosenFeats, characterClass);
+                var preliminaryFocus = featFocusGenerator.GenerateFrom(featSelection.Feat, featSelection.FocusType, skills, featSelection.RequiredFeats, chosenFeats, characterClass);
                 if (preliminaryFocus == ProficiencyConstants.All)
                 {
                     quantity++;
@@ -91,17 +91,17 @@ namespace NPCGen.Generators.Abilities.Feats
                 }
 
                 var featInstanceQuantity = 1;
-                if (featSelection.FeatId == FeatConstants.SkillMasteryId)
+                if (featSelection.Feat == FeatConstants.SkillMastery)
                     featInstanceQuantity = stats[StatConstants.Intelligence].Bonus + featSelection.Strength;
 
                 while (featInstanceQuantity-- > 0 && preliminaryFocus != ProficiencyConstants.All)
                 {
                     var feat = new Feat();
-                    feat.Name.Id = featSelection.FeatId;
+                    feat.Name = featSelection.Feat;
                     feat.Focus = preliminaryFocus;
                     feat.Frequency = featSelection.Frequency;
 
-                    if (featSelection.FeatId == FeatConstants.SpellMasteryId)
+                    if (featSelection.Feat == FeatConstants.SpellMastery)
                         feat.Strength = stats[StatConstants.Intelligence].Bonus;
 
                     feats.Add(feat);
@@ -110,7 +110,7 @@ namespace NPCGen.Generators.Abilities.Feats
                     availableFeats = GetAvailableFeats(sourceFeats, chosenFeats);
 
                     if (featInstanceQuantity > 0)
-                        preliminaryFocus = featFocusGenerator.GenerateFrom(featSelection.FeatId, featSelection.FocusType, skills, featSelection.RequiredFeats, chosenFeats, characterClass);
+                        preliminaryFocus = featFocusGenerator.GenerateFrom(featSelection.Feat, featSelection.FocusType, skills, featSelection.RequiredFeats, chosenFeats, characterClass);
                 }
             }
 
@@ -119,12 +119,12 @@ namespace NPCGen.Generators.Abilities.Feats
 
         private IEnumerable<AdditionalFeatSelection> GetAvailableFeats(IEnumerable<AdditionalFeatSelection> sourceFeats, IEnumerable<Feat> chosenFeats)
         {
-            var chosenFeatIds = chosenFeats.Select(f => f.Name.Id);
+            var chosenFeatIds = chosenFeats.Select(f => f.Name);
             var featsWithRequirementsMet = sourceFeats.Where(f => f.MutableRequirementsMet(chosenFeats));
-            var alreadyChosenFeats = sourceFeats.Where(f => f.FocusType == String.Empty && chosenFeatIds.Contains(f.FeatId));
+            var alreadyChosenFeats = sourceFeats.Where(f => f.FocusType == String.Empty && chosenFeatIds.Contains(f.Feat));
 
             var featIdsAllowingMultipleTakes = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TakenMultipleTimes);
-            var featsAllowingMultipleTakes = alreadyChosenFeats.Where(f => featIdsAllowingMultipleTakes.Contains(f.FeatId));
+            var featsAllowingMultipleTakes = alreadyChosenFeats.Where(f => featIdsAllowingMultipleTakes.Contains(f.Feat));
             var excludedFeats = alreadyChosenFeats.Except(featsAllowingMultipleTakes);
 
             return featsWithRequirementsMet.Except(excludedFeats);
@@ -140,7 +140,7 @@ namespace NPCGen.Generators.Abilities.Feats
             BaseAttack baseAttack, IEnumerable<Feat> selectedFeats)
         {
             var fighterFeatIds = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.FighterBonusFeats);
-            var fighterFeats = featsSelector.SelectAdditional().Where(f => fighterFeatIds.Contains(f.FeatId));
+            var fighterFeats = featsSelector.SelectAdditional().Where(f => fighterFeatIds.Contains(f.Feat));
             var availableFeats = fighterFeats.Where(f => f.ImmutableRequirementsMet(baseAttack.Bonus, stats, skills, characterClass));
 
             var numberOfFighterFeats = characterClass.Level / 2 + 1;
@@ -153,7 +153,7 @@ namespace NPCGen.Generators.Abilities.Feats
             BaseAttack baseAttack, IEnumerable<Feat> selectedFeats)
         {
             var wizardFeatIds = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.WizardBonusFeats);
-            var wizardFeats = featsSelector.SelectAdditional().Where(f => wizardFeatIds.Contains(f.FeatId));
+            var wizardFeats = featsSelector.SelectAdditional().Where(f => wizardFeatIds.Contains(f.Feat));
             var availableFeats = wizardFeats.Where(f => f.ImmutableRequirementsMet(baseAttack.Bonus, stats, skills, characterClass));
 
             var numberOfWizardFeats = characterClass.Level / 5;

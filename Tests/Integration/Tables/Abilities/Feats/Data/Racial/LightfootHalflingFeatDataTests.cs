@@ -12,7 +12,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
     {
         protected override String tableName
         {
-            get { return String.Format(TableNameConstants.Formattable.Collection.RACEFeatData, RaceConstants.BaseRaces.LightfootHalflingId); }
+            get { return String.Format(TableNameConstants.Formattable.Collection.RACEFeatData, RaceConstants.BaseRaces.LightfootHalfling); }
         }
 
         [Test]
@@ -20,77 +20,77 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
         {
             var names = new[] 
             {
-                FeatConstants.SaveBonusId + "All",
-                FeatConstants.SaveBonusId + "Fear",
-                FeatConstants.AttackBonusId + "ThrowOrSling",
-                FeatConstants.SkillBonusId + SkillConstants.Listen,
-                FeatConstants.SkillBonusId + SkillConstants.Climb,
-                FeatConstants.SkillBonusId + SkillConstants.Jump,
-                FeatConstants.SkillBonusId + SkillConstants.MoveSilently
+                FeatConstants.SaveBonus + "All",
+                FeatConstants.SaveBonus + "Fear",
+                FeatConstants.AttackBonus + "ThrowOrSling",
+                FeatConstants.SkillBonus + SkillConstants.Listen,
+                FeatConstants.SkillBonus + SkillConstants.Climb,
+                FeatConstants.SkillBonus + SkillConstants.Jump,
+                FeatConstants.SkillBonus + SkillConstants.MoveSilently
             };
 
             AssertCollectionNames(names);
         }
 
-        [TestCase(FeatConstants.SaveBonusId + "Fear",
-            FeatConstants.SaveBonusId,
+        [TestCase(FeatConstants.SaveBonus + "Fear",
+            FeatConstants.SaveBonus,
             "Fear",
             0,
             "",
             0,
             "",
             2)]
-        [TestCase(FeatConstants.SaveBonusId + "All",
-            FeatConstants.SaveBonusId,
+        [TestCase(FeatConstants.SaveBonus + "All",
+            FeatConstants.SaveBonus,
             "",
             0,
             "",
             0,
             "",
             1)]
-        [TestCase(FeatConstants.AttackBonusId + "ThrowOrSling",
-            FeatConstants.AttackBonusId,
+        [TestCase(FeatConstants.AttackBonus + "ThrowOrSling",
+            FeatConstants.AttackBonus,
             "Thrown weapons and slings",
             0,
             "",
             0,
             "",
             1)]
-        [TestCase(FeatConstants.SkillBonusId + SkillConstants.Listen,
-            FeatConstants.SkillBonusId,
+        [TestCase(FeatConstants.SkillBonus + SkillConstants.Listen,
+            FeatConstants.SkillBonus,
             SkillConstants.Listen,
             0,
             "",
             0,
             "",
             2)]
-        [TestCase(FeatConstants.SkillBonusId + SkillConstants.Climb,
-            FeatConstants.SkillBonusId,
+        [TestCase(FeatConstants.SkillBonus + SkillConstants.Climb,
+            FeatConstants.SkillBonus,
             SkillConstants.Climb,
             0,
             "",
             0,
             "",
             2)]
-        [TestCase(FeatConstants.SkillBonusId + SkillConstants.Jump,
-            FeatConstants.SkillBonusId,
+        [TestCase(FeatConstants.SkillBonus + SkillConstants.Jump,
+            FeatConstants.SkillBonus,
             SkillConstants.Jump,
             0,
             "",
             0,
             "",
             2)]
-        [TestCase(FeatConstants.SkillBonusId + SkillConstants.MoveSilently,
-            FeatConstants.SkillBonusId,
+        [TestCase(FeatConstants.SkillBonus + SkillConstants.MoveSilently,
+            FeatConstants.SkillBonus,
             SkillConstants.MoveSilently,
             0,
             "",
             0,
             "",
             2)]
-        public override void Data(String name, String featId, String focus, Int32 frequencyQuantity, String frequencyTimePeriod, Int32 minimumHitDiceRequirement, String sizeRequirement, Int32 strength)
+        public override void Data(String name, String feat, String focus, Int32 frequencyQuantity, String frequencyTimePeriod, Int32 minimumHitDiceRequirement, String sizeRequirement, Int32 strength)
         {
-            base.Data(name, featId, focus, frequencyQuantity, frequencyTimePeriod, minimumHitDiceRequirement, sizeRequirement, strength);
+            base.Data(name, feat, focus, frequencyQuantity, frequencyTimePeriod, minimumHitDiceRequirement, sizeRequirement, strength);
         }
     }
 }

@@ -17,10 +17,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         private TestBaseRaceRandomizer randomizer;
         private Mock<IPercentileSelector> mockPercentileResultSelector;
         private Mock<IAdjustmentsSelector> mockLevelAdjustmentsSelector;
-        private Mock<INameSelector> mockNameSelector;
 
-        private String firstBaseRaceId = "firstbaserace";
-        private String secondBaseRaceId = "secondbaserace";
         private String firstBaseRace = "first base race";
         private String secondBaseRace = "second base race";
         private CharacterClass characterClass;
@@ -29,13 +26,13 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         [SetUp]
         public void Setup()
         {
-            var baseRaceIds = new[] { firstBaseRaceId, secondBaseRaceId, String.Empty };
+            var baseRaces = new[] { firstBaseRace, secondBaseRace, String.Empty };
             mockPercentileResultSelector = new Mock<IPercentileSelector>();
-            mockPercentileResultSelector.Setup(p => p.SelectAllFrom(It.IsAny<String>())).Returns(baseRaceIds);
-            mockPercentileResultSelector.Setup(p => p.SelectFrom(It.IsAny<String>())).Returns(firstBaseRaceId);
+            mockPercentileResultSelector.Setup(p => p.SelectAllFrom(It.IsAny<String>())).Returns(baseRaces);
+            mockPercentileResultSelector.Setup(p => p.SelectFrom(It.IsAny<String>())).Returns(firstBaseRace);
 
             adjustments = new Dictionary<String, Int32>();
-            foreach (var baseRace in baseRaceIds)
+            foreach (var baseRace in baseRaces)
                 adjustments.Add(baseRace, 0);
 
             mockLevelAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
@@ -44,11 +41,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
             characterClass = new CharacterClass();
             characterClass.Level = 1;
 
-            mockNameSelector = new Mock<INameSelector>();
-            mockNameSelector.Setup(s => s.Select(firstBaseRaceId)).Returns(firstBaseRace);
-            mockNameSelector.Setup(s => s.Select(secondBaseRaceId)).Returns(secondBaseRace);
-
-            randomizer = new TestBaseRaceRandomizer(mockPercentileResultSelector.Object, mockLevelAdjustmentsSelector.Object, mockNameSelector.Object);
+            randomizer = new TestBaseRaceRandomizer(mockPercentileResultSelector.Object, mockLevelAdjustmentsSelector.Object);
         }
 
         [Test]
@@ -69,8 +62,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         public void RandomizeReturnsBaseRaceFromPercentileResultSelector()
         {
             var result = randomizer.Randomize(String.Empty, characterClass);
-            Assert.That(result.Id, Is.EqualTo(firstBaseRaceId));
-            Assert.That(result.Name, Is.EqualTo(firstBaseRace));
+            Assert.That(result, Is.EqualTo(firstBaseRace));
         }
 
         [Test]
@@ -86,7 +78,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         public void RandomizeLoopsUntilAllowedBaseRaceIsRolled()
         {
             mockPercentileResultSelector.SetupSequence(p => p.SelectFrom(It.IsAny<String>())).Returns("invalid base race")
-                .Returns(firstBaseRaceId);
+                .Returns(firstBaseRace);
 
             randomizer.Randomize(String.Empty, characterClass);
             mockPercentileResultSelector.Verify(p => p.SelectFrom(It.IsAny<String>()), Times.Exactly(2));
@@ -95,16 +87,16 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         [Test]
         public void GetAllPossibleResultsGetsResultsFromSelector()
         {
-            randomizer.GetAllPossibleIds(String.Empty, characterClass);
+            randomizer.GetAllPossibles(String.Empty, characterClass);
             mockPercentileResultSelector.Verify(p => p.SelectAllFrom(It.IsAny<String>()), Times.Once);
         }
 
         [Test]
         public void GetAllPossibleResultsFiltersOutEmptyStrings()
         {
-            var classNames = randomizer.GetAllPossibleIds(String.Empty, characterClass);
-            Assert.That(classNames, Contains.Item(firstBaseRaceId));
-            Assert.That(classNames, Contains.Item(secondBaseRaceId));
+            var classNames = randomizer.GetAllPossibles(String.Empty, characterClass);
+            Assert.That(classNames, Contains.Item(firstBaseRace));
+            Assert.That(classNames, Contains.Item(secondBaseRace));
             Assert.That(classNames.Count(), Is.EqualTo(2));
         }
 
@@ -112,41 +104,40 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         public void GetAllPossibleResultsAccessesTableAlignmentGoodnessClassNameBaseRaces()
         {
             characterClass.ClassName = "className";
-            randomizer.GetAllPossibleIds("goodness", characterClass);
+            randomizer.GetAllPossibles("goodness", characterClass);
             mockPercentileResultSelector.Verify(p => p.SelectAllFrom("goodnessclassNameBaseRaces"), Times.Once);
         }
 
         [Test]
         public void GetAllPossibleResultsFiltersOutUnallowedBaseRaces()
         {
-            randomizer.NotAllowedBaseRaceId = firstBaseRaceId;
+            randomizer.ForbiddenBaseRace = firstBaseRace;
 
-            var results = randomizer.GetAllPossibleIds(String.Empty, characterClass);
-            Assert.That(results, Contains.Item(secondBaseRaceId));
+            var results = randomizer.GetAllPossibles(String.Empty, characterClass);
+            Assert.That(results, Contains.Item(secondBaseRace));
             Assert.That(results.Count(), Is.EqualTo(1));
         }
 
         [Test]
         public void GetAllPossibleResultsFiltersOutBaseRacesWithTooHighLevelAdjustments()
         {
-            adjustments[firstBaseRaceId] = 1;
+            adjustments[firstBaseRace] = 1;
 
-            var results = randomizer.GetAllPossibleIds(String.Empty, characterClass);
-            Assert.That(results, Contains.Item(secondBaseRaceId));
+            var results = randomizer.GetAllPossibles(String.Empty, characterClass);
+            Assert.That(results, Contains.Item(secondBaseRace));
             Assert.That(results.Count(), Is.EqualTo(1));
         }
 
         private class TestBaseRaceRandomizer : BaseBaseRace
         {
-            public String NotAllowedBaseRaceId { get; set; }
+            public String ForbiddenBaseRace { get; set; }
 
-            public TestBaseRaceRandomizer(IPercentileSelector percentileResultSelector, IAdjustmentsSelector levelAdjustmentSelector,
-                INameSelector nameSelector)
-                : base(percentileResultSelector, levelAdjustmentSelector, nameSelector) { }
+            public TestBaseRaceRandomizer(IPercentileSelector percentileResultSelector, IAdjustmentsSelector levelAdjustmentSelector)
+                : base(percentileResultSelector, levelAdjustmentSelector) { }
 
-            protected override Boolean BaseRaceIsAllowed(String baseRaceId)
+            protected override Boolean BaseRaceIsAllowed(String baseRace)
             {
-                return baseRaceId != NotAllowedBaseRaceId;
+                return baseRace != ForbiddenBaseRace;
             }
         }
     }

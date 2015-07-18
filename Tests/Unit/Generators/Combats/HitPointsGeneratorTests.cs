@@ -36,7 +36,7 @@ namespace NPCGen.Tests.Unit.Generators.Combats
             characterClass = new CharacterClass();
             characterClass.ClassName = "class name";
             race = new Race();
-            race.Metarace.Id = "metarace";
+            race.Metarace = "metarace";
             constitutionBonus = 0;
             mockDice.Setup(d => d.Roll(0).d8()).Returns(0);
 
@@ -84,7 +84,7 @@ namespace NPCGen.Tests.Unit.Generators.Combats
         public void NonMonsterDoNotGetadditionalHitDice()
         {
             characterClass.Level = 2;
-            race.BaseRace.Id = "differentbaserace";
+            race.BaseRace = "differentbaserace";
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
                 .Returns(new[] { "otherbaserace", "baserace" });
             mockDice.Setup(d => d.Roll(1).d(9266)).Returns(7);
@@ -103,7 +103,7 @@ namespace NPCGen.Tests.Unit.Generators.Combats
         public void MonstersGetAdditionalHitDice()
         {
             characterClass.Level = 2;
-            race.BaseRace.Id = "baserace";
+            race.BaseRace = "baserace";
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
                 .Returns(new[] { "otherbaserace", "baserace" });
             mockDice.Setup(d => d.Roll(1).d(9266)).Returns(7);
@@ -122,8 +122,8 @@ namespace NPCGen.Tests.Unit.Generators.Combats
         public void HalfDragonIncreasesMonsterHitDie()
         {
             characterClass.Level = 2;
-            race.BaseRace.Id = "baserace";
-            race.Metarace.Id = RaceConstants.Metaraces.HalfDragonId;
+            race.BaseRace = "baserace";
+            race.Metarace = RaceConstants.Metaraces.HalfDragon;
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
                 .Returns(new[] { "otherbaserace", "baserace" });
             mockDice.Setup(d => d.Roll(1).d(9266)).Returns(7);

@@ -52,8 +52,7 @@ namespace NPCGen.Tests.Integration.Stress.Abilities.Feats
 
             foreach (var feat in feats)
             {
-                Assert.That(feat.Name.Id, Is.Not.Empty);
-                Assert.That(feat.Name.Name, Is.Not.Empty);
+                Assert.That(feat.Name, Is.Not.Empty);
                 Assert.That(feat.Focus, Is.Not.Null);
                 Assert.That(feat.Strength, Is.Positive);
                 Assert.That(feat.Frequency.Quantity, Is.Positive);
@@ -61,10 +60,6 @@ namespace NPCGen.Tests.Integration.Stress.Abilities.Feats
                     .Or.EqualTo(FeatConstants.Frequencies.AtWill)
                     .Or.EqualTo(FeatConstants.Frequencies.Day));
             }
-
-            var featWithFoci = feats.Where(f => feats.Count(c => c.Name.Id == f.Name.Id) > 1);
-            foreach (var feat in featWithFoci)
-                Assert.That(feat.Focus, Is.Not.Empty, feat.Name.Name);
         }
     }
 }

@@ -96,10 +96,10 @@ namespace NPCGen.Generators.Abilities
             var multiplier = characterClass.Level;
 
             var monsters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters);
-            if (monsters.Contains(race.BaseRace.Id) == false)
+            if (monsters.Contains(race.BaseRace) == false)
                 multiplier += 3;
 
-            if (race.BaseRace.Id == RaceConstants.BaseRaces.HumanId)
+            if (race.BaseRace == RaceConstants.BaseRaces.Human)
                 perLevel++;
 
             return perLevel * multiplier;

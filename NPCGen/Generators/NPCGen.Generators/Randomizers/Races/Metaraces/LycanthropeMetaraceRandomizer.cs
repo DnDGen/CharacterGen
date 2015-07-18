@@ -9,9 +9,9 @@ namespace NPCGen.Generators.Randomizers.Races.Metaraces
     {
         private ICollectionsSelector collectionsSelector;
 
-        public LycanthropeMetaraceRandomizer(IPercentileSelector percentileResultSelector, IAdjustmentsSelector levelAdjustmentSelector, INameSelector nameSelector,
+        public LycanthropeMetaraceRandomizer(IPercentileSelector percentileResultSelector, IAdjustmentsSelector levelAdjustmentSelector,
             ICollectionsSelector collectionsSelector)
-            : base(percentileResultSelector, levelAdjustmentSelector, nameSelector)
+            : base(percentileResultSelector, levelAdjustmentSelector)
         {
             this.collectionsSelector = collectionsSelector;
         }

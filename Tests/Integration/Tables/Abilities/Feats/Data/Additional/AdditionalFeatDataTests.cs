@@ -28,227 +28,227 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.Additional
         {
             var names = new[] 
             {
-                FeatConstants.AcrobaticId,
-                FeatConstants.AgileId,
-                FeatConstants.AlertnessId,
-                FeatConstants.AnimalAffinityId,
-                FeatConstants.AthleticId,
-                FeatConstants.AugmentSummoningId,
-                FeatConstants.BlindFightId,
-                FeatConstants.CleaveId,
-                FeatConstants.CombatCastingId,
-                FeatConstants.CombatExpertiseId,
-                FeatConstants.CombatReflexesId,
-                FeatConstants.CripplingStrikeId,
-                FeatConstants.DeceitfulId,
-                FeatConstants.DefensiveRollId,
-                FeatConstants.DeflectArrowsId,
-                FeatConstants.DeftHandsId,
-                FeatConstants.DiehardId,
-                FeatConstants.DiligentId,
-                FeatConstants.DodgeId,
-                FeatConstants.EmpowerSpellId,
-                FeatConstants.EnduranceId,
-                FeatConstants.EnlargeSpellId,
-                FeatConstants.EschewMaterialsId,
-                FeatConstants.ExoticWeaponProficiencyId,
-                FeatConstants.ExtendSpellId,
-                FeatConstants.ExtraTurningId,
-                FeatConstants.FarShotId,
-                FeatConstants.GreatCleaveId,
-                FeatConstants.GreaterSpellFocusId,
-                FeatConstants.GreaterSpellPenetrationId,
-                FeatConstants.GreaterTwoWeaponFightingId,
-                FeatConstants.GreaterWeaponFocusId,
-                FeatConstants.GreaterWeaponSpecializationId,
-                FeatConstants.GreatFortitudeId,
-                FeatConstants.HeavyArmorProficiencyId,
-                FeatConstants.HeightenSpellId,
-                FeatConstants.ImprovedBullRushId,
-                FeatConstants.ImprovedCounterspellId,
-                FeatConstants.ImprovedCriticalId,
-                FeatConstants.ImprovedDisarmId,
-                FeatConstants.ImprovedEvasionId,
-                FeatConstants.ImprovedFamiliarId,
-                FeatConstants.ImprovedFeintId,
-                FeatConstants.ImprovedGrappleId,
-                FeatConstants.ImprovedInitiativeId,
-                FeatConstants.ImprovedOverrunId,
-                FeatConstants.ImprovedPreciseShotId,
-                FeatConstants.ImprovedShieldBashId,
-                FeatConstants.ImprovedSunderId,
-                FeatConstants.ImprovedTripId,
-                FeatConstants.ImprovedTurningId,
-                FeatConstants.ImprovedTwoWeaponFightingId,
-                FeatConstants.ImprovedUnarmedStrikeId,
-                FeatConstants.InvestigatorId,
-                FeatConstants.IronWillId,
-                FeatConstants.LeadershipId,
-                FeatConstants.LightArmorProficiencyId,
-                FeatConstants.LightningReflexesId,
-                FeatConstants.MagicalAptitudeId,
-                FeatConstants.ManyshotId,
-                FeatConstants.MartialWeaponProficiencyId,
-                FeatConstants.MaximizeSpellId,
-                FeatConstants.MediumArmorProficiencyId,
-                FeatConstants.MobilityId,
-                FeatConstants.MountedArcheryId,
-                FeatConstants.MountedCombatId,
-                FeatConstants.NaturalSpellId,
-                FeatConstants.NegotiatorId,
-                FeatConstants.NimbleFingersId,
-                FeatConstants.OpportunistId,
-                FeatConstants.PersuasiveId,
-                FeatConstants.PointBlankShotId,
-                FeatConstants.PowerAttackId,
-                FeatConstants.PreciseShotId,
-                FeatConstants.QuickDrawId,
-                FeatConstants.QuickenSpellId,
-                FeatConstants.RapidReloadId,
-                FeatConstants.RapidShotId,
-                FeatConstants.RideByAttackId,
-                FeatConstants.RunId,
-                FeatConstants.SelfSufficientId,
-                FeatConstants.ShieldProficiencyId,
-                FeatConstants.ShotOnTheRunId,
-                FeatConstants.SilentSpellId,
-                FeatConstants.SimpleWeaponProficiencyId,
-                FeatConstants.SkillFocusId,
-                FeatConstants.SkillMasteryId,
-                FeatConstants.SlipperyMindId,
-                FeatConstants.SnatchArrowsId,
-                FeatConstants.SpellFocusId,
-                FeatConstants.SpellMasteryId,
-                FeatConstants.SpellPenetrationId,
-                FeatConstants.SpiritedChargeId,
-                FeatConstants.SpringAttackId,
-                FeatConstants.StealthyId,
-                FeatConstants.StillSpellId,
-                FeatConstants.StunningFistId,
-                FeatConstants.ToughnessId,
-                FeatConstants.TowerShieldProficiencyId,
-                FeatConstants.TrackId,
-                FeatConstants.TrampleId,
-                FeatConstants.TwoWeaponDefenseId,
-                FeatConstants.TwoWeaponFightingId,
-                FeatConstants.WeaponFocusId,
-                FeatConstants.WeaponFinesseId,
-                FeatConstants.WeaponSpecializationId,
-                FeatConstants.WhirlwindAttackId,
-                FeatConstants.WidenSpellId
+                FeatConstants.Acrobatic,
+                FeatConstants.Agile,
+                FeatConstants.Alertness,
+                FeatConstants.AnimalAffinity,
+                FeatConstants.Athletic,
+                FeatConstants.AugmentSummoning,
+                FeatConstants.BlindFight,
+                FeatConstants.Cleave,
+                FeatConstants.CombatCasting,
+                FeatConstants.CombatExpertise,
+                FeatConstants.CombatReflexes,
+                FeatConstants.CripplingStrike,
+                FeatConstants.Deceitful,
+                FeatConstants.DefensiveRoll,
+                FeatConstants.DeflectArrows,
+                FeatConstants.DeftHands,
+                FeatConstants.Diehard,
+                FeatConstants.Diligent,
+                FeatConstants.Dodge,
+                FeatConstants.EmpowerSpell,
+                FeatConstants.Endurance,
+                FeatConstants.EnlargeSpell,
+                FeatConstants.EschewMaterials,
+                FeatConstants.ExoticWeaponProficiency,
+                FeatConstants.ExtendSpell,
+                FeatConstants.ExtraTurning,
+                FeatConstants.FarShot,
+                FeatConstants.GreatCleave,
+                FeatConstants.GreaterSpellFocus,
+                FeatConstants.GreaterSpellPenetration,
+                FeatConstants.GreaterTwoWeaponFighting,
+                FeatConstants.GreaterWeaponFocus,
+                FeatConstants.GreaterWeaponSpecialization,
+                FeatConstants.GreatFortitude,
+                FeatConstants.HeavyArmorProficiency,
+                FeatConstants.HeightenSpell,
+                FeatConstants.ImprovedBullRush,
+                FeatConstants.ImprovedCounterspell,
+                FeatConstants.ImprovedCritical,
+                FeatConstants.ImprovedDisarm,
+                FeatConstants.ImprovedEvasion,
+                FeatConstants.ImprovedFamiliar,
+                FeatConstants.ImprovedFeint,
+                FeatConstants.ImprovedGrapple,
+                FeatConstants.ImprovedInitiative,
+                FeatConstants.ImprovedOverrun,
+                FeatConstants.ImprovedPreciseShot,
+                FeatConstants.ImprovedShieldBash,
+                FeatConstants.ImprovedSunder,
+                FeatConstants.ImprovedTrip,
+                FeatConstants.ImprovedTurning,
+                FeatConstants.ImprovedTwoWeaponFighting,
+                FeatConstants.ImprovedUnarmedStrike,
+                FeatConstants.Investigator,
+                FeatConstants.IronWill,
+                FeatConstants.Leadership,
+                FeatConstants.LightArmorProficiency,
+                FeatConstants.LightningReflexes,
+                FeatConstants.MagicalAptitude,
+                FeatConstants.Manyshot,
+                FeatConstants.MartialWeaponProficiency,
+                FeatConstants.MaximizeSpell,
+                FeatConstants.MediumArmorProficiency,
+                FeatConstants.Mobility,
+                FeatConstants.MountedArchery,
+                FeatConstants.MountedCombat,
+                FeatConstants.NaturalSpell,
+                FeatConstants.Negotiator,
+                FeatConstants.NimbleFingers,
+                FeatConstants.Opportunist,
+                FeatConstants.Persuasive,
+                FeatConstants.PointBlankShot,
+                FeatConstants.PowerAttack,
+                FeatConstants.PreciseShot,
+                FeatConstants.QuickDraw,
+                FeatConstants.QuickenSpell,
+                FeatConstants.RapidReload,
+                FeatConstants.RapidShot,
+                FeatConstants.RideByAttack,
+                FeatConstants.Run,
+                FeatConstants.SelfSufficient,
+                FeatConstants.ShieldProficiency,
+                FeatConstants.ShotOnTheRun,
+                FeatConstants.SilentSpell,
+                FeatConstants.SimpleWeaponProficiency,
+                FeatConstants.SkillFocus,
+                FeatConstants.SkillMastery,
+                FeatConstants.SlipperyMind,
+                FeatConstants.SnatchArrows,
+                FeatConstants.SpellFocus,
+                FeatConstants.SpellMastery,
+                FeatConstants.SpellPenetration,
+                FeatConstants.SpiritedCharge,
+                FeatConstants.SpringAttack,
+                FeatConstants.Stealthy,
+                FeatConstants.StillSpell,
+                FeatConstants.StunningFist,
+                FeatConstants.Toughness,
+                FeatConstants.TowerShieldProficiency,
+                FeatConstants.Track,
+                FeatConstants.Trample,
+                FeatConstants.TwoWeaponDefense,
+                FeatConstants.TwoWeaponFighting,
+                FeatConstants.WeaponFocus,
+                FeatConstants.WeaponFinesse,
+                FeatConstants.WeaponSpecialization,
+                FeatConstants.WhirlwindAttack,
+                FeatConstants.WidenSpell
             };
 
             AssertCollectionNames(names);
         }
 
-        [TestCase(FeatConstants.AcrobaticId, 0, "", 0, "", 2)]
-        [TestCase(FeatConstants.AgileId, 0, "", 0, "", 2)]
-        [TestCase(FeatConstants.AlertnessId, 0, "", 0, "", 2)]
-        [TestCase(FeatConstants.AnimalAffinityId, 0, "", 0, "", 2)]
-        [TestCase(FeatConstants.HeavyArmorProficiencyId, 0, "", 0, "", 0)]
-        [TestCase(FeatConstants.MediumArmorProficiencyId, 0, "", 0, "", 0)]
-        [TestCase(FeatConstants.LightArmorProficiencyId, 0, "", 0, "", 0)]
-        [TestCase(FeatConstants.AthleticId, 0, "", 0, "", 2)]
-        [TestCase(FeatConstants.AugmentSummoningId, 0, "", 0, "", 4)]
-        [TestCase(FeatConstants.BlindFightId, 0, "", 0, "", 2)]
-        [TestCase(FeatConstants.CleaveId, 0, "", 0, "", 2)]
-        [TestCase(FeatConstants.CombatCastingId, 0, "", 0, "", 4)]
-        [TestCase(FeatConstants.CombatExpertiseId, 0, "", 0, "", 4)]
-        [TestCase(FeatConstants.CombatReflexesId, 0, "", 0, "", 0)]
-        [TestCase(FeatConstants.CripplingStrikeId, 0, "", 0, "", 0)]
-        [TestCase(FeatConstants.DeceitfulId, 0, "", 0, "", 2)]
-        [TestCase(FeatConstants.DefensiveRollId, 0, "", 1, FeatConstants.Frequencies.Day, 0)]
-        [TestCase(FeatConstants.DeflectArrowsId, 0, "", 1, FeatConstants.Frequencies.Round, 0)]
-        [TestCase(FeatConstants.DeftHandsId, 0, "", 0, "", 2)]
-        [TestCase(FeatConstants.DiehardId, 0, "", 0, "", 0)]
-        [TestCase(FeatConstants.DiligentId, 0, "", 0, "", 2)]
-        [TestCase(FeatConstants.DodgeId, 0, "", 0, "", 1)]
-        [TestCase(FeatConstants.EmpowerSpellId, 0, "", 0, "", 0)]
-        [TestCase(FeatConstants.EnduranceId, 0, "", 0, "", 4)]
-        [TestCase(FeatConstants.EnlargeSpellId, 0, "", 0, "", 0)]
-        [TestCase(FeatConstants.EschewMaterialsId, 0, "", 0, "", 0)]
-        [TestCase(FeatConstants.ExoticWeaponProficiencyId, 1, ProficiencyConstants.All, 0, "", 0)]
-        [TestCase(FeatConstants.ExtendSpellId, 0, "", 0, "", 0)]
-        [TestCase(FeatConstants.ExtraTurningId, 0, "", 0, "", 4)]
-        [TestCase(FeatConstants.FarShotId, 0, "", 0, "", 0)]
-        [TestCase(FeatConstants.GreatCleaveId, 4, "", 0, "", 0)]
-        [TestCase(FeatConstants.GreaterSpellFocusId, 0, GroupConstants.SchoolsOfMagic, 0, "", 1)]
-        [TestCase(FeatConstants.GreaterSpellPenetrationId, 0, "", 0, "", 2)]
-        [TestCase(FeatConstants.GreaterTwoWeaponFightingId, 11, "", 0, "", 0)]
-        [TestCase(FeatConstants.GreaterWeaponFocusId, 0, GroupConstants.WeaponsWithUnarmedAndGrappleAndRay, 0, "", 1)]
-        [TestCase(FeatConstants.GreaterWeaponSpecializationId, 0, GroupConstants.WeaponsWithUnarmedAndGrapple, 0, "", 2)]
-        [TestCase(FeatConstants.GreatFortitudeId, 0, "", 0, "", 2)]
-        [TestCase(FeatConstants.HeightenSpellId, 0, "", 0, "", 0)]
-        [TestCase(FeatConstants.ImprovedBullRushId, 0, "", 0, "", 4)]
-        [TestCase(FeatConstants.ImprovedCounterspellId, 0, "", 0, "", 0)]
-        [TestCase(FeatConstants.ImprovedCriticalId, 8, GroupConstants.Proficiency, 0, "", 0)]
-        [TestCase(FeatConstants.ImprovedDisarmId, 0, "", 0, "", 4)]
-        [TestCase(FeatConstants.ImprovedEvasionId, 0, "", 0, "", 0)]
-        [TestCase(FeatConstants.ImprovedFamiliarId, 0, "", 0, "", 0)]
-        [TestCase(FeatConstants.ImprovedFeintId, 0, "", 0, "", 0)]
-        [TestCase(FeatConstants.ImprovedGrappleId, 0, "", 0, "", 4)]
-        [TestCase(FeatConstants.ImprovedInitiativeId, 0, "", 0, "", 4)]
-        [TestCase(FeatConstants.ImprovedOverrunId, 0, "", 0, "", 4)]
-        [TestCase(FeatConstants.ImprovedPreciseShotId, 11, "", 0, "", 0)]
-        [TestCase(FeatConstants.ImprovedShieldBashId, 0, "", 0, "", 0)]
-        [TestCase(FeatConstants.ImprovedSunderId, 0, "", 0, "", 4)]
-        [TestCase(FeatConstants.ImprovedTripId, 0, "", 0, "", 4)]
-        [TestCase(FeatConstants.ImprovedTurningId, 0, "", 0, "", 4)]
-        [TestCase(FeatConstants.ImprovedTwoWeaponFightingId, 6, "", 0, "", 0)]
-        [TestCase(FeatConstants.ImprovedUnarmedStrikeId, 0, "", 0, "", 0)]
-        [TestCase(FeatConstants.InvestigatorId, 0, "", 0, "", 2)]
-        [TestCase(FeatConstants.IronWillId, 0, "", 0, "", 2)]
-        [TestCase(FeatConstants.LeadershipId, 0, "", 0, "", 0)]
-        [TestCase(FeatConstants.LightningReflexesId, 0, "", 0, "", 2)]
-        [TestCase(FeatConstants.MagicalAptitudeId, 0, "", 0, "", 2)]
-        [TestCase(FeatConstants.ManyshotId, 6, "", 0, "", 0)]
-        [TestCase(FeatConstants.MartialWeaponProficiencyId, 0, ProficiencyConstants.All, 0, "", 0)]
-        [TestCase(FeatConstants.MaximizeSpellId, 0, "", 0, "", 0)]
-        [TestCase(FeatConstants.MobilityId, 0, "", 0, "", 4)]
-        [TestCase(FeatConstants.MountedArcheryId, 0, "", 0, "", 0)]
-        [TestCase(FeatConstants.MountedCombatId, 0, "", 0, "", 0)]
-        [TestCase(FeatConstants.NaturalSpellId, 0, "", 0, "", 0)]
-        [TestCase(FeatConstants.NegotiatorId, 0, "", 0, "", 2)]
-        [TestCase(FeatConstants.NimbleFingersId, 0, "", 0, "", 2)]
-        [TestCase(FeatConstants.OpportunistId, 0, "", 0, "", 0)]
-        [TestCase(FeatConstants.PersuasiveId, 0, "", 0, "", 2)]
-        [TestCase(FeatConstants.PointBlankShotId, 0, "", 0, "", 1)]
-        [TestCase(FeatConstants.PowerAttackId, 0, "", 0, "", 0)]
-        [TestCase(FeatConstants.PreciseShotId, 0, "", 0, "", 0)]
-        [TestCase(FeatConstants.QuickDrawId, 1, "", 0, "", 0)]
-        [TestCase(FeatConstants.QuickenSpellId, 0, "", 0, "", 0)]
-        [TestCase(FeatConstants.RapidReloadId, 0, GroupConstants.ManualCrossbows, 0, "", 0)]
-        [TestCase(FeatConstants.RapidShotId, 0, "", 0, "", 0)]
-        [TestCase(FeatConstants.RideByAttackId, 0, "", 0, "", 0)]
-        [TestCase(FeatConstants.RunId, 0, "", 0, "", 0)]
-        [TestCase(FeatConstants.SelfSufficientId, 0, "", 0, "", 2)]
-        [TestCase(FeatConstants.ShieldProficiencyId, 0, "", 0, "", 0)]
-        [TestCase(FeatConstants.ShotOnTheRunId, 4, "", 0, "", 0)]
-        [TestCase(FeatConstants.SilentSpellId, 0, "", 0, "", 0)]
-        [TestCase(FeatConstants.SimpleWeaponProficiencyId, 0, ProficiencyConstants.All, 0, "", 0)]
-        [TestCase(FeatConstants.SkillFocusId, 0, GroupConstants.Skills, 0, "", 3)]
-        [TestCase(FeatConstants.SkillMasteryId, 0, GroupConstants.Skills, 0, "", 3)]
-        [TestCase(FeatConstants.SlipperyMindId, 0, "", 0, "", 0)]
-        [TestCase(FeatConstants.SnatchArrowsId, 0, "", 0, "", 0)]
-        [TestCase(FeatConstants.SpellFocusId, 0, GroupConstants.SchoolsOfMagic, 0, "", 1)]
-        [TestCase(FeatConstants.SpellMasteryId, 0, "", 0, "", 0)]
-        [TestCase(FeatConstants.SpellPenetrationId, 0, "", 0, "", 2)]
-        [TestCase(FeatConstants.SpiritedChargeId, 0, "", 0, "", 0)]
-        [TestCase(FeatConstants.SpringAttackId, 4, "", 0, "", 0)]
-        [TestCase(FeatConstants.StealthyId, 0, "", 0, "", 2)]
-        [TestCase(FeatConstants.StillSpellId, 0, "", 0, "", 0)]
-        [TestCase(FeatConstants.StunningFistId, 8, "", 0, "", 0)]
-        [TestCase(FeatConstants.ToughnessId, 0, "", 0, "", 3)]
-        [TestCase(FeatConstants.TowerShieldProficiencyId, 0, "", 0, "", 0)]
-        [TestCase(FeatConstants.TrackId, 0, "", 0, "", 0)]
-        [TestCase(FeatConstants.TrampleId, 0, "", 0, "", 0)]
-        [TestCase(FeatConstants.TwoWeaponDefenseId, 0, "", 0, "", 0)]
-        [TestCase(FeatConstants.TwoWeaponFightingId, 0, "", 0, "", 0)]
-        [TestCase(FeatConstants.WeaponFocusId, 1, GroupConstants.WeaponsWithUnarmedAndGrappleAndRay, 0, "", 1)]
-        [TestCase(FeatConstants.WeaponFinesseId, 1, "", 0, "", 0)]
-        [TestCase(FeatConstants.WeaponSpecializationId, 0, GroupConstants.WeaponsWithUnarmedAndGrapple, 0, "", 2)]
-        [TestCase(FeatConstants.WhirlwindAttackId, 4, "", 0, "", 0)]
-        [TestCase(FeatConstants.WidenSpellId, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.Acrobatic, 0, "", 0, "", 2)]
+        [TestCase(FeatConstants.Agile, 0, "", 0, "", 2)]
+        [TestCase(FeatConstants.Alertness, 0, "", 0, "", 2)]
+        [TestCase(FeatConstants.AnimalAffinity, 0, "", 0, "", 2)]
+        [TestCase(FeatConstants.HeavyArmorProficiency, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.MediumArmorProficiency, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.LightArmorProficiency, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.Athletic, 0, "", 0, "", 2)]
+        [TestCase(FeatConstants.AugmentSummoning, 0, "", 0, "", 4)]
+        [TestCase(FeatConstants.BlindFight, 0, "", 0, "", 2)]
+        [TestCase(FeatConstants.Cleave, 0, "", 0, "", 2)]
+        [TestCase(FeatConstants.CombatCasting, 0, "", 0, "", 4)]
+        [TestCase(FeatConstants.CombatExpertise, 0, "", 0, "", 4)]
+        [TestCase(FeatConstants.CombatReflexes, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.CripplingStrike, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.Deceitful, 0, "", 0, "", 2)]
+        [TestCase(FeatConstants.DefensiveRoll, 0, "", 1, FeatConstants.Frequencies.Day, 0)]
+        [TestCase(FeatConstants.DeflectArrows, 0, "", 1, FeatConstants.Frequencies.Round, 0)]
+        [TestCase(FeatConstants.DeftHands, 0, "", 0, "", 2)]
+        [TestCase(FeatConstants.Diehard, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.Diligent, 0, "", 0, "", 2)]
+        [TestCase(FeatConstants.Dodge, 0, "", 0, "", 1)]
+        [TestCase(FeatConstants.EmpowerSpell, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.Endurance, 0, "", 0, "", 4)]
+        [TestCase(FeatConstants.EnlargeSpell, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.EschewMaterials, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.ExoticWeaponProficiency, 1, ProficiencyConstants.All, 0, "", 0)]
+        [TestCase(FeatConstants.ExtendSpell, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.ExtraTurning, 0, "", 0, "", 4)]
+        [TestCase(FeatConstants.FarShot, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.GreatCleave, 4, "", 0, "", 0)]
+        [TestCase(FeatConstants.GreaterSpellFocus, 0, GroupConstants.SchoolsOfMagic, 0, "", 1)]
+        [TestCase(FeatConstants.GreaterSpellPenetration, 0, "", 0, "", 2)]
+        [TestCase(FeatConstants.GreaterTwoWeaponFighting, 11, "", 0, "", 0)]
+        [TestCase(FeatConstants.GreaterWeaponFocus, 0, GroupConstants.WeaponsWithUnarmedAndGrappleAndRay, 0, "", 1)]
+        [TestCase(FeatConstants.GreaterWeaponSpecialization, 0, GroupConstants.WeaponsWithUnarmedAndGrapple, 0, "", 2)]
+        [TestCase(FeatConstants.GreatFortitude, 0, "", 0, "", 2)]
+        [TestCase(FeatConstants.HeightenSpell, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.ImprovedBullRush, 0, "", 0, "", 4)]
+        [TestCase(FeatConstants.ImprovedCounterspell, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.ImprovedCritical, 8, GroupConstants.Proficiency, 0, "", 0)]
+        [TestCase(FeatConstants.ImprovedDisarm, 0, "", 0, "", 4)]
+        [TestCase(FeatConstants.ImprovedEvasion, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.ImprovedFamiliar, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.ImprovedFeint, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.ImprovedGrapple, 0, "", 0, "", 4)]
+        [TestCase(FeatConstants.ImprovedInitiative, 0, "", 0, "", 4)]
+        [TestCase(FeatConstants.ImprovedOverrun, 0, "", 0, "", 4)]
+        [TestCase(FeatConstants.ImprovedPreciseShot, 11, "", 0, "", 0)]
+        [TestCase(FeatConstants.ImprovedShieldBash, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.ImprovedSunder, 0, "", 0, "", 4)]
+        [TestCase(FeatConstants.ImprovedTrip, 0, "", 0, "", 4)]
+        [TestCase(FeatConstants.ImprovedTurning, 0, "", 0, "", 4)]
+        [TestCase(FeatConstants.ImprovedTwoWeaponFighting, 6, "", 0, "", 0)]
+        [TestCase(FeatConstants.ImprovedUnarmedStrike, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.Investigator, 0, "", 0, "", 2)]
+        [TestCase(FeatConstants.IronWill, 0, "", 0, "", 2)]
+        [TestCase(FeatConstants.Leadership, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.LightningReflexes, 0, "", 0, "", 2)]
+        [TestCase(FeatConstants.MagicalAptitude, 0, "", 0, "", 2)]
+        [TestCase(FeatConstants.Manyshot, 6, "", 0, "", 0)]
+        [TestCase(FeatConstants.MartialWeaponProficiency, 0, ProficiencyConstants.All, 0, "", 0)]
+        [TestCase(FeatConstants.MaximizeSpell, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.Mobility, 0, "", 0, "", 4)]
+        [TestCase(FeatConstants.MountedArchery, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.MountedCombat, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.NaturalSpell, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.Negotiator, 0, "", 0, "", 2)]
+        [TestCase(FeatConstants.NimbleFingers, 0, "", 0, "", 2)]
+        [TestCase(FeatConstants.Opportunist, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.Persuasive, 0, "", 0, "", 2)]
+        [TestCase(FeatConstants.PointBlankShot, 0, "", 0, "", 1)]
+        [TestCase(FeatConstants.PowerAttack, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.PreciseShot, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.QuickDraw, 1, "", 0, "", 0)]
+        [TestCase(FeatConstants.QuickenSpell, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.RapidReload, 0, GroupConstants.ManualCrossbows, 0, "", 0)]
+        [TestCase(FeatConstants.RapidShot, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.RideByAttack, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.Run, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.SelfSufficient, 0, "", 0, "", 2)]
+        [TestCase(FeatConstants.ShieldProficiency, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.ShotOnTheRun, 4, "", 0, "", 0)]
+        [TestCase(FeatConstants.SilentSpell, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.SimpleWeaponProficiency, 0, ProficiencyConstants.All, 0, "", 0)]
+        [TestCase(FeatConstants.SkillFocus, 0, GroupConstants.Skills, 0, "", 3)]
+        [TestCase(FeatConstants.SkillMastery, 0, GroupConstants.Skills, 0, "", 3)]
+        [TestCase(FeatConstants.SlipperyMind, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.SnatchArrows, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.SpellFocus, 0, GroupConstants.SchoolsOfMagic, 0, "", 1)]
+        [TestCase(FeatConstants.SpellMastery, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.SpellPenetration, 0, "", 0, "", 2)]
+        [TestCase(FeatConstants.SpiritedCharge, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.SpringAttack, 4, "", 0, "", 0)]
+        [TestCase(FeatConstants.Stealthy, 0, "", 0, "", 2)]
+        [TestCase(FeatConstants.StillSpell, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.StunningFist, 8, "", 0, "", 0)]
+        [TestCase(FeatConstants.Toughness, 0, "", 0, "", 3)]
+        [TestCase(FeatConstants.TowerShieldProficiency, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.Track, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.Trample, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.TwoWeaponDefense, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.TwoWeaponFighting, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.WeaponFocus, 1, GroupConstants.WeaponsWithUnarmedAndGrappleAndRay, 0, "", 1)]
+        [TestCase(FeatConstants.WeaponFinesse, 1, "", 0, "", 0)]
+        [TestCase(FeatConstants.WeaponSpecialization, 0, GroupConstants.WeaponsWithUnarmedAndGrapple, 0, "", 2)]
+        [TestCase(FeatConstants.WhirlwindAttack, 4, "", 0, "", 0)]
+        [TestCase(FeatConstants.WidenSpell, 0, "", 0, "", 0)]
         public void AdditionalFeatData(String name, Int32 baseAttackRequirement, String focusType, Int32 frequencyQuantity, String frequencyTimePeriod, Int32 strength)
         {
             var data = new List<String>();

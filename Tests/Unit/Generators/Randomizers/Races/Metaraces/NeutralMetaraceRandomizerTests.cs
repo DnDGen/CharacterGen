@@ -26,7 +26,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
                     "not good metarace",
                     "not neutral metarace",
                     "not evil metarace",
-                    RaceConstants.Metaraces.NoneId
+                    RaceConstants.Metaraces.None
                 };
             }
         }
@@ -37,7 +37,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         public void Setup()
         {
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
-            randomizer = new NeutralMetaraceRandomizer(mockPercentileResultSelector.Object, mockAdjustmentsSelector.Object, mockNameSelector.Object,
+            randomizer = new NeutralMetaraceRandomizer(mockPercentileResultSelector.Object, mockAdjustmentsSelector.Object, 
                 mockCollectionsSelector.Object);
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, AlignmentConstants.Good)).Returns(new[] { "good metarace", "metarace", "not neutral metarace", "not evil metarace" });
@@ -49,10 +49,10 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         [TestCase("neutral metarace")]
         [TestCase("not good metarace")]
         [TestCase("not evil metarace")]
-        [TestCase(RaceConstants.Metaraces.NoneId)]
+        [TestCase(RaceConstants.Metaraces.None)]
         public void Allowed(String metarace)
         {
-            var metaraces = randomizer.GetAllPossibleIds(String.Empty, characterClass);
+            var metaraces = randomizer.GetAllPossible(String.Empty, characterClass);
             Assert.That(metaraces, Contains.Item(metarace));
         }
 
@@ -61,7 +61,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         [TestCase("not neutral metarace")]
         public void NotAllowed(String metarace)
         {
-            var metaraces = randomizer.GetAllPossibleIds(String.Empty, characterClass);
+            var metaraces = randomizer.GetAllPossible(String.Empty, characterClass);
             Assert.That(metaraces, Is.Not.Contains(metarace));
         }
     }

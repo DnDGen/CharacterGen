@@ -17,10 +17,8 @@ namespace NPCGen.Tests.Integration.Stress
         protected override void MakeAssertions()
         {
             var race = GenerateRace();
-            Assert.That(race.BaseRace.Id, Is.Not.Empty);
-            Assert.That(race.BaseRace.Name, Is.Not.Empty);
-            Assert.That(race.Metarace.Id, Is.Not.Empty);
-            Assert.That(race.Metarace.Name, Is.Not.Null);
+            Assert.That(race.BaseRace, Is.Not.Empty);
+            Assert.That(race.Metarace, Is.Not.Empty);
             Assert.That(race.Size, Is.EqualTo(RaceConstants.Sizes.Large).Or.EqualTo(RaceConstants.Sizes.Medium).Or.EqualTo(RaceConstants.Sizes.Small));
             Assert.That(race.LandSpeed, Is.AtLeast(20));
             Assert.That(race.LandSpeed % 10, Is.EqualTo(0));
@@ -42,9 +40,9 @@ namespace NPCGen.Tests.Integration.Stress
             var race = new Race();
 
             do race = GenerateRace();
-            while (TestShouldKeepRunning() && race.Metarace.Id == RaceConstants.Metaraces.NoneId);
+            while (TestShouldKeepRunning() && race.Metarace == RaceConstants.Metaraces.None);
 
-            Assert.That(race.Metarace.Id, Is.Not.EqualTo(RaceConstants.Metaraces.NoneId));
+            Assert.That(race.Metarace, Is.Not.EqualTo(RaceConstants.Metaraces.None));
         }
 
         [Test]
@@ -53,9 +51,9 @@ namespace NPCGen.Tests.Integration.Stress
             var race = new Race();
 
             do race = GenerateRace();
-            while (TestShouldKeepRunning() && race.Metarace.Id != RaceConstants.Metaraces.NoneId);
+            while (TestShouldKeepRunning() && race.Metarace != RaceConstants.Metaraces.None);
 
-            Assert.That(race.Metarace.Id, Is.EqualTo(RaceConstants.Metaraces.NoneId));
+            Assert.That(race.Metarace, Is.EqualTo(RaceConstants.Metaraces.None));
         }
 
         [Test]

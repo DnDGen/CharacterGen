@@ -21,25 +21,25 @@ namespace NPCGen.Tests.Integration.Tables.Races.BaseRaces.Evil
             AssertTableIsComplete();
         }
 
-        [TestCase(RaceConstants.BaseRaces.HighElfId, 1, 10)]
-        [TestCase(RaceConstants.BaseRaces.HalfElfId, 12, 26)]
-        [TestCase(RaceConstants.BaseRaces.HumanId, 29, 78)]
-        [TestCase(RaceConstants.BaseRaces.HobgoblinId, 79, 80)]
-        [TestCase(RaceConstants.BaseRaces.DrowId, 82, 91)]
-        [TestCase(RaceConstants.BaseRaces.OgreMageId, 95, 96)]
+        [TestCase(RaceConstants.BaseRaces.HighElf, 1, 10)]
+        [TestCase(RaceConstants.BaseRaces.HalfElf, 12, 26)]
+        [TestCase(RaceConstants.BaseRaces.Human, 29, 78)]
+        [TestCase(RaceConstants.BaseRaces.Hobgoblin, 79, 80)]
+        [TestCase(RaceConstants.BaseRaces.Drow, 82, 91)]
+        [TestCase(RaceConstants.BaseRaces.OgreMage, 95, 96)]
         [TestCase(EmptyContent, 97, 100)]
         public override void Percentile(String content, Int32 lower, Int32 upper)
         {
             base.Percentile(content, lower, upper);
         }
 
-        [TestCase(RaceConstants.BaseRaces.WoodElfId, 11)]
-        [TestCase(RaceConstants.BaseRaces.LightfootHalflingId, 27)]
-        [TestCase(RaceConstants.BaseRaces.TallfellowHalflingId, 28)]
-        [TestCase(RaceConstants.BaseRaces.TieflingId, 81)]
-        [TestCase(RaceConstants.BaseRaces.GnollId, 92)]
-        [TestCase(RaceConstants.BaseRaces.BugbearId, 93)]
-        [TestCase(RaceConstants.BaseRaces.MindFlayerId, 94)]
+        [TestCase(RaceConstants.BaseRaces.WoodElf, 11)]
+        [TestCase(RaceConstants.BaseRaces.LightfootHalfling, 27)]
+        [TestCase(RaceConstants.BaseRaces.TallfellowHalfling, 28)]
+        [TestCase(RaceConstants.BaseRaces.Tiefling, 81)]
+        [TestCase(RaceConstants.BaseRaces.Gnoll, 92)]
+        [TestCase(RaceConstants.BaseRaces.Bugbear, 93)]
+        [TestCase(RaceConstants.BaseRaces.MindFlayer, 94)]
         public override void Percentile(String content, Int32 roll)
         {
             base.Percentile(content, roll);

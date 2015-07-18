@@ -210,7 +210,7 @@ namespace NPCGen.Tests.Unit.Generators.Combats
         public void NaturalArmorBonusFromFeatApplied()
         {
             var feat = new Feat();
-            feat.Name.Id = "feat 1";
+            feat.Name = "feat 1";
             feats.Add(feat);
 
             featAdjustments["feat 1"] = 1;
@@ -243,26 +243,26 @@ namespace NPCGen.Tests.Unit.Generators.Combats
         [Test]
         public void NaturalArmorBonusFromBaseRaceApplied()
         {
-            race.BaseRace.Id = "baserace";
-            racialArmorBonuses[race.BaseRace.Id] = 1;
+            race.BaseRace = "baserace";
+            racialArmorBonuses[race.BaseRace] = 1;
             AssertArmorClass(11, 11, 10);
         }
 
         [Test]
         public void NaturalArmorBonusFromMetaraceApplied()
         {
-            race.Metarace.Id = "metarace";
-            racialArmorBonuses[race.Metarace.Id] = 1;
+            race.Metarace = "metarace";
+            racialArmorBonuses[race.Metarace] = 1;
             AssertArmorClass(11, 11, 10);
         }
 
         [Test]
         public void NaturalArmorBonusFromBaseRaceAndMetaraceApplied()
         {
-            race.BaseRace.Id = "base race";
-            race.Metarace.Id = "metarace";
-            racialArmorBonuses[race.BaseRace.Id] = 1;
-            racialArmorBonuses[race.Metarace.Id] = 1;
+            race.BaseRace = "base race";
+            race.Metarace = "metarace";
+            racialArmorBonuses[race.BaseRace] = 1;
+            racialArmorBonuses[race.Metarace] = 1;
 
             AssertArmorClass(12, 12, 10);
         }
@@ -271,11 +271,11 @@ namespace NPCGen.Tests.Unit.Generators.Combats
         public void OnlyHighestNaturalArmorBonusAppliesWhenHighestIsFeat()
         {
             var feat = new Feat();
-            feat.Name.Id = "feat 1";
+            feat.Name = "feat 1";
             feats.Add(feat);
 
             var feat2 = new Feat();
-            feat2.Name.Id = "feat 2";
+            feat2.Name = "feat 2";
             feats.Add(feat2);
 
             featAdjustments["feat 1"] = 1;
@@ -293,10 +293,10 @@ namespace NPCGen.Tests.Unit.Generators.Combats
 
             equipment.Treasure.Items = new[] { ring, otherRing };
 
-            race.BaseRace.Id = "base race";
-            race.Metarace.Id = "metarace";
-            racialArmorBonuses[race.BaseRace.Id] = 0;
-            racialArmorBonuses[race.Metarace.Id] = 1;
+            race.BaseRace = "base race";
+            race.Metarace = "metarace";
+            racialArmorBonuses[race.BaseRace] = 0;
+            racialArmorBonuses[race.Metarace] = 1;
 
             AssertArmorClass(12, 12, 10);
         }
@@ -305,11 +305,11 @@ namespace NPCGen.Tests.Unit.Generators.Combats
         public void OnlyHighestNaturalArmorBonusAppliesWhenHighestIsItem()
         {
             var feat = new Feat();
-            feat.Name.Id = "feat 1";
+            feat.Name = "feat 1";
             feats.Add(feat);
 
             var feat2 = new Feat();
-            feat2.Name.Id = "feat 2";
+            feat2.Name = "feat 2";
             feats.Add(feat2);
 
             featAdjustments["feat 1"] = 1;
@@ -327,10 +327,10 @@ namespace NPCGen.Tests.Unit.Generators.Combats
 
             equipment.Treasure.Items = new[] { ring, otherRing };
 
-            race.BaseRace.Id = "baserace";
-            race.Metarace.Id = "metarace";
-            racialArmorBonuses[race.BaseRace.Id] = 0;
-            racialArmorBonuses[race.Metarace.Id] = 1;
+            race.BaseRace = "baserace";
+            race.Metarace = "metarace";
+            racialArmorBonuses[race.BaseRace] = 0;
+            racialArmorBonuses[race.Metarace] = 1;
 
             AssertArmorClass(12, 12, 10);
         }
@@ -339,11 +339,11 @@ namespace NPCGen.Tests.Unit.Generators.Combats
         public void OnlyHighestNaturalArmorBonusAppliesWhenHighestIsRacial()
         {
             var feat = new Feat();
-            feat.Name.Id = "feat 1";
+            feat.Name = "feat 1";
             feats.Add(feat);
 
             var feat2 = new Feat();
-            feat2.Name.Id = "feat 2";
+            feat2.Name = "feat 2";
             feats.Add(feat2);
 
             featAdjustments["feat 1"] = 1;
@@ -361,10 +361,10 @@ namespace NPCGen.Tests.Unit.Generators.Combats
 
             equipment.Treasure.Items = new[] { ring, otherRing };
 
-            race.BaseRace.Id = "baserace";
-            race.Metarace.Id = "metarace";
-            racialArmorBonuses[race.BaseRace.Id] = 1;
-            racialArmorBonuses[race.Metarace.Id] = 1;
+            race.BaseRace = "baserace";
+            race.Metarace = "metarace";
+            racialArmorBonuses[race.BaseRace] = 1;
+            racialArmorBonuses[race.Metarace] = 1;
 
             AssertArmorClass(12, 12, 10);
         }
@@ -373,11 +373,11 @@ namespace NPCGen.Tests.Unit.Generators.Combats
         public void NaturalArmorBonusesDoNotStackWithBaseRace()
         {
             var feat = new Feat();
-            feat.Name.Id = "feat 1";
+            feat.Name = "feat 1";
             feats.Add(feat);
 
             var feat2 = new Feat();
-            feat2.Name.Id = "feat 2";
+            feat2.Name = "feat 2";
             feats.Add(feat2);
 
             featAdjustments["feat 1"] = 1;
@@ -395,8 +395,8 @@ namespace NPCGen.Tests.Unit.Generators.Combats
 
             equipment.Treasure.Items = new[] { ring, otherRing };
 
-            race.BaseRace.Id = "baserace";
-            racialArmorBonuses[race.BaseRace.Id] = 1;
+            race.BaseRace = "baserace";
+            racialArmorBonuses[race.BaseRace] = 1;
 
             AssertArmorClass(11, 11, 10);
         }
@@ -405,11 +405,11 @@ namespace NPCGen.Tests.Unit.Generators.Combats
         public void NaturalArmorBonusesDoNotStackWithMetarace()
         {
             var feat = new Feat();
-            feat.Name.Id = "feat 1";
+            feat.Name = "feat 1";
             feats.Add(feat);
 
             var feat2 = new Feat();
-            feat2.Name.Id = "feat 2";
+            feat2.Name = "feat 2";
             feats.Add(feat2);
 
             featAdjustments["feat 1"] = 1;
@@ -427,8 +427,8 @@ namespace NPCGen.Tests.Unit.Generators.Combats
 
             equipment.Treasure.Items = new[] { ring, otherRing };
 
-            race.Metarace.Id = "metarace";
-            racialArmorBonuses[race.Metarace.Id] = 1;
+            race.Metarace = "metarace";
+            racialArmorBonuses[race.Metarace] = 1;
 
             AssertArmorClass(11, 11, 10);
         }
@@ -437,7 +437,7 @@ namespace NPCGen.Tests.Unit.Generators.Combats
         public void DodgeBonusApplied()
         {
             var feat = new Feat();
-            feat.Name.Id = "feat 1";
+            feat.Name = "feat 1";
             feats.Add(feat);
 
             featAdjustments["feat 1"] = 1;
@@ -452,11 +452,11 @@ namespace NPCGen.Tests.Unit.Generators.Combats
         public void DodgeBonusesStack()
         {
             var feat = new Feat();
-            feat.Name.Id = "feat 1";
+            feat.Name = "feat 1";
             feats.Add(feat);
 
             var feat2 = new Feat();
-            feat2.Name.Id = "feat 2";
+            feat2.Name = "feat 2";
             feats.Add(feat2);
 
             featAdjustments["feat 1"] = 1;
@@ -489,7 +489,7 @@ namespace NPCGen.Tests.Unit.Generators.Combats
             adjustedDexterityBonus = 1;
 
             var feat = new Feat();
-            feat.Name.Id = "feat 1";
+            feat.Name = "feat 1";
             feats.Add(feat);
 
             featAdjustments["feat 1"] = 1;
@@ -513,10 +513,10 @@ namespace NPCGen.Tests.Unit.Generators.Combats
             equipment.Treasure.Items = new[] { ring };
 
             race.Size = RaceConstants.Sizes.Small;
-            race.BaseRace.Id = "baserace";
-            race.Metarace.Id = "metarace";
-            racialArmorBonuses[race.BaseRace.Id] = 1;
-            racialArmorBonuses[race.Metarace.Id] = 1;
+            race.BaseRace = "baserace";
+            race.Metarace = "metarace";
+            racialArmorBonuses[race.BaseRace] = 1;
+            racialArmorBonuses[race.Metarace] = 1;
 
             AssertArmorClass(18, 20, 14);
         }

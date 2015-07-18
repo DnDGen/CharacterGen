@@ -21,13 +21,13 @@ namespace NPCGen.Tests.Integration.Tables.Races.Metaraces.Evil
             AssertTableIsComplete();
         }
 
-        [TestCase(RaceConstants.Metaraces.NoneId, 1, 99)]
+        [TestCase(RaceConstants.Metaraces.None, 1, 99)]
         public override void Percentile(String content, Int32 lower, Int32 upper)
         {
             base.Percentile(content, lower, upper);
         }
 
-        [TestCase(RaceConstants.Metaraces.WerewolfId, 100)]
+        [TestCase(RaceConstants.Metaraces.Werewolf, 100)]
         public override void Percentile(String content, Int32 roll)
         {
             base.Percentile(content, roll);

@@ -32,7 +32,7 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
         [Test]
         public void FeatSelectionInitialized()
         {
-            Assert.That(selection.FeatId, Is.Empty);
+            Assert.That(selection.Feat, Is.Empty);
             Assert.That(selection.RequiredBaseAttack, Is.EqualTo(0));
             Assert.That(selection.RequiredFeats, Is.Empty);
             Assert.That(selection.RequiredSkillRanks, Is.Empty);
@@ -150,11 +150,11 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
         public void FeatRequirementsNotMet()
         {
             feats.Add(new Feat());
-            feats[0].Name.Id = "feat";
+            feats[0].Name = "feat";
             selection.RequiredFeats = new[]
             {
-                new RequiredFeat { FeatId = "feat" }, 
-                new RequiredFeat { FeatId = "other required feat" }
+                new RequiredFeat { Feat = "feat" }, 
+                new RequiredFeat { Feat = "other required feat" }
             };
 
             var met = selection.MutableRequirementsMet(feats);
@@ -166,12 +166,12 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
         {
             feats.Add(new Feat());
             feats.Add(new Feat());
-            feats[0].Name.Id = "feat";
-            feats[1].Name.Id = "other required feat";
+            feats[0].Name = "feat";
+            feats[1].Name = "other required feat";
             selection.RequiredFeats = new[]
             {
-                new RequiredFeat { FeatId = "feat" }, 
-                new RequiredFeat { FeatId = "other required feat" }
+                new RequiredFeat { Feat = "feat" }, 
+                new RequiredFeat { Feat = "other required feat" }
             };
 
             var met = selection.MutableRequirementsMet(feats);
@@ -184,14 +184,14 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
             feats.Add(new Feat());
             feats.Add(new Feat());
             feats.Add(new Feat());
-            feats[0].Name.Id = "feat";
-            feats[1].Name.Id = "other required feat";
-            feats[2].Name.Id = "yet another feat";
+            feats[0].Name = "feat";
+            feats[1].Name = "other required feat";
+            feats[2].Name = "yet another feat";
 
             selection.RequiredFeats = new[]
             {
-                new RequiredFeat { FeatId = "feat" }, 
-                new RequiredFeat { FeatId = "other required feat" }
+                new RequiredFeat { Feat = "feat" }, 
+                new RequiredFeat { Feat = "other required feat" }
             };
 
             var met = selection.MutableRequirementsMet(feats);
@@ -203,7 +203,7 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
         {
             selection.RequiredFeats = new[]
             {
-                new RequiredFeat { FeatId = GroupConstants.Proficiency }
+                new RequiredFeat { Feat = GroupConstants.Proficiency }
             };
 
             var met = selection.MutableRequirementsMet(feats);
@@ -215,8 +215,8 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
         {
             selection.RequiredFeats = new[]
             {
-                new RequiredFeat { FeatId = GroupConstants.Proficiency },
-                new RequiredFeat { FeatId = "feat" }
+                new RequiredFeat { Feat = GroupConstants.Proficiency },
+                new RequiredFeat { Feat = "feat" }
             };
 
             var met = selection.MutableRequirementsMet(feats);
@@ -227,11 +227,11 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
         public void WithProficiencyRequirement_OtherRequirementsAreHonored()
         {
             feats.Add(new Feat());
-            feats[0].Name.Id = "feat";
+            feats[0].Name = "feat";
             selection.RequiredFeats = new[]
             { 
-                new RequiredFeat { FeatId = GroupConstants.Proficiency },
-                new RequiredFeat { FeatId = "feat" }
+                new RequiredFeat { Feat = GroupConstants.Proficiency },
+                new RequiredFeat { Feat = "feat" }
             };
 
             var met = selection.MutableRequirementsMet(feats);

@@ -19,7 +19,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
                 return new[]
                 {
                     "lycanthrope metarace",
-                    RaceConstants.Metaraces.NoneId
+                    RaceConstants.Metaraces.None
                 };
             }
         }
@@ -30,25 +30,24 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         public void Setup()
         {
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
-            randomizer = new LycanthropeMetaraceRandomizer(mockPercentileResultSelector.Object, mockAdjustmentsSelector.Object, mockNameSelector.Object,
-                mockCollectionsSelector.Object);
+            randomizer = new LycanthropeMetaraceRandomizer(mockPercentileResultSelector.Object, mockAdjustmentsSelector.Object, mockCollectionsSelector.Object);
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Lycanthrope))
                 .Returns(new[] { "lycanthrope metarace" });
         }
 
         [TestCase("lycanthrope metarace")]
-        [TestCase(RaceConstants.Metaraces.NoneId)]
+        [TestCase(RaceConstants.Metaraces.None)]
         public void Allowed(String metarace)
         {
-            var metaraces = randomizer.GetAllPossibleIds(String.Empty, characterClass);
+            var metaraces = randomizer.GetAllPossible(String.Empty, characterClass);
             Assert.That(metaraces, Contains.Item(metarace));
         }
 
         [TestCase("genetic metarace")]
         public void NotAllowed(String metarace)
         {
-            var metaraces = randomizer.GetAllPossibleIds(String.Empty, characterClass);
+            var metaraces = randomizer.GetAllPossible(String.Empty, characterClass);
             Assert.That(metaraces, Is.Not.Contains(metarace));
         }
     }

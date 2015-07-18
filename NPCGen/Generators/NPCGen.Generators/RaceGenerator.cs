@@ -30,9 +30,9 @@ namespace NPCGen.Generators
 
             race.BaseRace = baseRaceRandomizer.Randomize(alignment.Goodness, characterClass);
             race.Metarace = metaraceRandomizer.Randomize(alignment.Goodness, characterClass);
-            race.MetaraceSpecies = DetermineMetaraceSpecies(alignment, race.Metarace.Id);
-            race.Male = DetermineIfMale(race.BaseRace.Id, characterClass.ClassName);
-            race.Size = DetermineSize(race.BaseRace.Id);
+            race.MetaraceSpecies = DetermineMetaraceSpecies(alignment, race.Metarace);
+            race.Male = DetermineIfMale(race.BaseRace, characterClass.ClassName);
+            race.Size = DetermineSize(race.BaseRace);
             race.HasWings = DetermineIfRaceHasWings(race);
             race.LandSpeed = DetermineLandSpeed(race);
             race.AerialSpeed = DetermineAerialSpeed(race);
@@ -40,9 +40,9 @@ namespace NPCGen.Generators
             return race;
         }
 
-        private String DetermineMetaraceSpecies(Alignment alignment, String metaraceId)
+        private String DetermineMetaraceSpecies(Alignment alignment, String metarace)
         {
-            if (metaraceId != RaceConstants.Metaraces.HalfDragonId)
+            if (metarace != RaceConstants.Metaraces.HalfDragon)
                 return String.Empty;
 
             var species = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.DragonSpecies, alignment.ToString());
@@ -62,14 +62,14 @@ namespace NPCGen.Generators
             return dice.Roll().d2() == 1;
         }
 
-        private String DetermineSize(String baseRaceId)
+        private String DetermineSize(String baseRace)
         {
             var largeRaces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, RaceConstants.Sizes.Large);
-            if (largeRaces.Contains(baseRaceId))
+            if (largeRaces.Contains(baseRace))
                 return RaceConstants.Sizes.Large;
 
             var smallRaces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, RaceConstants.Sizes.Small);
-            if (smallRaces.Contains(baseRaceId))
+            if (smallRaces.Contains(baseRace))
                 return RaceConstants.Sizes.Small;
 
             return RaceConstants.Sizes.Medium;
@@ -77,13 +77,13 @@ namespace NPCGen.Generators
 
         private Boolean DetermineIfRaceHasWings(Race race)
         {
-            if (race.Metarace.Id == RaceConstants.Metaraces.NoneId)
+            if (race.Metarace == RaceConstants.Metaraces.None)
                 return false;
 
-            if (race.Metarace.Id == RaceConstants.Metaraces.HalfCelestialId || race.Metarace.Id == RaceConstants.Metaraces.HalfFiendId)
+            if (race.Metarace == RaceConstants.Metaraces.HalfCelestial || race.Metarace == RaceConstants.Metaraces.HalfFiend)
                 return true;
 
-            if (race.Metarace.Id == RaceConstants.Metaraces.HalfDragonId)
+            if (race.Metarace == RaceConstants.Metaraces.HalfDragon)
                 return race.Size == RaceConstants.Sizes.Large;
 
             return false;
@@ -92,7 +92,7 @@ namespace NPCGen.Generators
         private Int32 DetermineLandSpeed(Race race)
         {
             var speeds = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.LandSpeeds);
-            return speeds[race.BaseRace.Id];
+            return speeds[race.BaseRace];
         }
 
         private Int32 DetermineAerialSpeed(Race race)
@@ -100,7 +100,7 @@ namespace NPCGen.Generators
             if (!race.HasWings)
                 return 0;
 
-            if (race.Metarace.Id == RaceConstants.Metaraces.HalfFiendId)
+            if (race.Metarace == RaceConstants.Metaraces.HalfFiend)
                 return race.LandSpeed;
 
             return race.LandSpeed * 2;

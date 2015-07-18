@@ -13,7 +13,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
     {
         protected override String tableName
         {
-            get { return String.Format(TableNameConstants.Formattable.Collection.RACEFeatData, RaceConstants.BaseRaces.HighElfId); }
+            get { return String.Format(TableNameConstants.Formattable.Collection.RACEFeatData, RaceConstants.BaseRaces.HighElf); }
         }
 
         [Test]
@@ -21,113 +21,113 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
         {
             var names = new[] 
             {
-                FeatConstants.ImmuneToEffectId,
-                FeatConstants.SaveBonusId,
-                FeatConstants.LowLightVisionId,
-                FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Longsword,
-                FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Rapier,
-                FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Longbow,
-                FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Shortbow,
-                FeatConstants.PassiveSecretDoorSearchId,
-                FeatConstants.SkillBonusId + SkillConstants.Search,
-                FeatConstants.SkillBonusId + SkillConstants.Spot,
-                FeatConstants.SkillBonusId + SkillConstants.Listen
+                FeatConstants.ImmuneToEffect,
+                FeatConstants.SaveBonus,
+                FeatConstants.LowLightVision,
+                FeatConstants.MartialWeaponProficiency + WeaponConstants.Longsword,
+                FeatConstants.MartialWeaponProficiency + WeaponConstants.Rapier,
+                FeatConstants.MartialWeaponProficiency + WeaponConstants.Longbow,
+                FeatConstants.MartialWeaponProficiency + WeaponConstants.Shortbow,
+                FeatConstants.PassiveSecretDoorSearch,
+                FeatConstants.SkillBonus + SkillConstants.Search,
+                FeatConstants.SkillBonus + SkillConstants.Spot,
+                FeatConstants.SkillBonus + SkillConstants.Listen
             };
 
             AssertCollectionNames(names);
         }
 
-        [TestCase(FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Longsword,
-            FeatConstants.MartialWeaponProficiencyId,
+        [TestCase(FeatConstants.MartialWeaponProficiency + WeaponConstants.Longsword,
+            FeatConstants.MartialWeaponProficiency,
             WeaponConstants.Longsword,
             0,
             "",
             0,
             "",
             0)]
-        [TestCase(FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Rapier,
-            FeatConstants.MartialWeaponProficiencyId,
+        [TestCase(FeatConstants.MartialWeaponProficiency + WeaponConstants.Rapier,
+            FeatConstants.MartialWeaponProficiency,
             WeaponConstants.Rapier,
             0,
             "",
             0,
             "",
             0)]
-        [TestCase(FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Longbow,
-            FeatConstants.MartialWeaponProficiencyId,
+        [TestCase(FeatConstants.MartialWeaponProficiency + WeaponConstants.Longbow,
+            FeatConstants.MartialWeaponProficiency,
             WeaponConstants.Longbow,
             0,
             "",
             0,
             "",
             0)]
-        [TestCase(FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Shortbow,
-            FeatConstants.MartialWeaponProficiencyId,
+        [TestCase(FeatConstants.MartialWeaponProficiency + WeaponConstants.Shortbow,
+            FeatConstants.MartialWeaponProficiency,
             WeaponConstants.Shortbow,
             0,
             "",
             0,
             "",
             0)]
-        [TestCase(FeatConstants.SaveBonusId,
-            FeatConstants.SaveBonusId,
+        [TestCase(FeatConstants.SaveBonus,
+            FeatConstants.SaveBonus,
             "Enchantment spells or effects",
             0,
             "",
             0,
             "",
             2)]
-        [TestCase(FeatConstants.ImmuneToEffectId,
-            FeatConstants.ImmuneToEffectId,
+        [TestCase(FeatConstants.ImmuneToEffect,
+            FeatConstants.ImmuneToEffect,
             "Sleep",
             0,
             "",
             0,
             "",
             0)]
-        [TestCase(FeatConstants.LowLightVisionId,
-            FeatConstants.LowLightVisionId,
+        [TestCase(FeatConstants.LowLightVision,
+            FeatConstants.LowLightVision,
             "",
             0,
             "",
             0,
             "",
             0)]
-        [TestCase(FeatConstants.SkillBonusId + SkillConstants.Listen,
-            FeatConstants.SkillBonusId,
+        [TestCase(FeatConstants.SkillBonus + SkillConstants.Listen,
+            FeatConstants.SkillBonus,
             SkillConstants.Listen,
             0,
             "",
             0,
             "",
             2)]
-        [TestCase(FeatConstants.SkillBonusId + SkillConstants.Search,
-            FeatConstants.SkillBonusId,
+        [TestCase(FeatConstants.SkillBonus + SkillConstants.Search,
+            FeatConstants.SkillBonus,
             SkillConstants.Search,
             0,
             "",
             0,
             "",
             2)]
-        [TestCase(FeatConstants.SkillBonusId + SkillConstants.Spot,
-            FeatConstants.SkillBonusId,
+        [TestCase(FeatConstants.SkillBonus + SkillConstants.Spot,
+            FeatConstants.SkillBonus,
             SkillConstants.Spot,
             0,
             "",
             0,
             "",
             2)]
-        [TestCase(FeatConstants.PassiveSecretDoorSearchId,
-            FeatConstants.PassiveSecretDoorSearchId,
+        [TestCase(FeatConstants.PassiveSecretDoorSearch,
+            FeatConstants.PassiveSecretDoorSearch,
             "",
             0,
             "",
             0,
             "",
             0)]
-        public override void Data(String name, String featId, String focus, Int32 frequencyQuantity, String frequencyTimePeriod, Int32 minimumHitDiceRequirement, String sizeRequirement, Int32 strength)
+        public override void Data(String name, String feat, String focus, Int32 frequencyQuantity, String frequencyTimePeriod, Int32 minimumHitDiceRequirement, String sizeRequirement, Int32 strength)
         {
-            base.Data(name, featId, focus, frequencyQuantity, frequencyTimePeriod, minimumHitDiceRequirement, sizeRequirement, strength);
+            base.Data(name, feat, focus, frequencyQuantity, frequencyTimePeriod, minimumHitDiceRequirement, sizeRequirement, strength);
         }
     }
 }

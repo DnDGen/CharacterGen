@@ -26,7 +26,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
                     "not good metarace",
                     "not neutral metarace",
                     "not evil metarace",
-                    RaceConstants.Metaraces.NoneId
+                    RaceConstants.Metaraces.None
                 };
             }
         }
@@ -37,8 +37,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         public void Setup()
         {
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
-            randomizer = new EvilMetaraceRandomizer(mockPercentileResultSelector.Object, mockAdjustmentsSelector.Object, mockNameSelector.Object,
-                mockCollectionsSelector.Object);
+            randomizer = new EvilMetaraceRandomizer(mockPercentileResultSelector.Object, mockAdjustmentsSelector.Object, mockCollectionsSelector.Object);
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, AlignmentConstants.Good)).Returns(new[] { "good metarace", "metarace", "not neutral metarace", "not evil metarace" });
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, AlignmentConstants.Evil)).Returns(new[] { "evil metarace", "metarace", "not good metarace", "not neutral metarace" });
@@ -49,10 +48,10 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         [TestCase("evil metarace")]
         [TestCase("not neutral metarace")]
         [TestCase("not good metarace")]
-        [TestCase(RaceConstants.Metaraces.NoneId)]
+        [TestCase(RaceConstants.Metaraces.None)]
         public void Allowed(String metarace)
         {
-            var metaraces = randomizer.GetAllPossibleIds(String.Empty, characterClass);
+            var metaraces = randomizer.GetAllPossible(String.Empty, characterClass);
             Assert.That(metaraces, Contains.Item(metarace));
         }
 
@@ -61,7 +60,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         [TestCase("not evil metarace")]
         public void NotAllowed(String metarace)
         {
-            var metaraces = randomizer.GetAllPossibleIds(String.Empty, characterClass);
+            var metaraces = randomizer.GetAllPossible(String.Empty, characterClass);
             Assert.That(metaraces, Is.Not.Contains(metarace));
         }
     }

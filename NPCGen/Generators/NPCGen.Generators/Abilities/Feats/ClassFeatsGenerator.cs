@@ -51,8 +51,8 @@ namespace NPCGen.Generators.Abilities.Feats
             foreach (var classFeatSelection in classFeatSelections)
             {
                 var classFeat = new Feat();
-                classFeat.Name.Id = classFeatSelection.FeatId;
-                classFeat.Focus = featFocusGenerator.GenerateAllowingFocusOfAllFrom(classFeatSelection.FeatId, classFeatSelection.FocusType, skills, classFeatSelection.RequiredFeats, earnedFeat, characterClass);
+                classFeat.Name = classFeatSelection.Feat;
+                classFeat.Focus = featFocusGenerator.GenerateAllowingFocusOfAllFrom(classFeatSelection.Feat, classFeatSelection.FocusType, skills, classFeatSelection.RequiredFeats, earnedFeat, characterClass);
                 classFeat.Frequency = classFeatSelection.Frequency;
 
                 if (classFeatSelection.FrequencyQuantityStat != String.Empty)
@@ -69,7 +69,7 @@ namespace NPCGen.Generators.Abilities.Feats
 
         private IEnumerable<Feat> ImproveFavoredEnemyStrength(IEnumerable<Feat> classFeats)
         {
-            var favoredEnemyFeats = classFeats.Where(f => f.Name.Id == FeatConstants.FavoredEnemyId);
+            var favoredEnemyFeats = classFeats.Where(f => f.Name == FeatConstants.FavoredEnemy);
             var favoredEnemyQuantity = favoredEnemyFeats.Count();
             var timesToImprove = favoredEnemyQuantity - 1;
 

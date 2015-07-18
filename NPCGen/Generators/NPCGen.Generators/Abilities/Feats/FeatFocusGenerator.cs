@@ -24,7 +24,7 @@ namespace NPCGen.Generators.Abilities.Feats
             this.dice = dice;
         }
 
-        public String GenerateFrom(String featId, String focusType, Dictionary<String, Skill> skills, IEnumerable<RequiredFeat> requiredFeats, IEnumerable<Feat> otherFeats, CharacterClass characterClass)
+        public String GenerateFrom(String feat, String focusType, Dictionary<String, Skill> skills, IEnumerable<RequiredFeat> requiredFeats, IEnumerable<Feat> otherFeats, CharacterClass characterClass)
         {
             if (String.IsNullOrEmpty(focusType))
                 return String.Empty;
@@ -33,9 +33,9 @@ namespace NPCGen.Generators.Abilities.Feats
             if (focusType != ProficiencyConstants.All && allSourceFeatFoci.Keys.Contains(focusType) == false)
                 return focusType;
 
-            var requiredFeatIds = requiredFeats.Select(f => f.FeatId);
-            var foci = GetFoci(featId, focusType, allSourceFeatFoci, otherFeats, requiredFeatIds);
-            var usedFoci = otherFeats.Where(f => f.Name.Id == featId).Select(f => f.Focus);
+            var requiredFeatIds = requiredFeats.Select(f => f.Feat);
+            var foci = GetFoci(feat, focusType, allSourceFeatFoci, otherFeats, requiredFeatIds);
+            var usedFoci = otherFeats.Where(f => f.Name == feat).Select(f => f.Focus);
 
             if (usedFoci.Contains(ProficiencyConstants.All))
                 return ProficiencyConstants.All;
@@ -67,16 +67,16 @@ namespace NPCGen.Generators.Abilities.Feats
             return focus;
         }
 
-        private IEnumerable<String> GetFoci(String featId, String focusType, Dictionary<String, IEnumerable<String>> allSourceFeatFoci, IEnumerable<Feat> otherFeats, IEnumerable<String> requiredFeatIds)
+        private IEnumerable<String> GetFoci(String feat, String focusType, Dictionary<String, IEnumerable<String>> allSourceFeatFoci, IEnumerable<Feat> otherFeats, IEnumerable<String> requiredFeatIds)
         {
             var proficiencyRequired = requiredFeatIds.Contains(GroupConstants.Proficiency);
-            var sourceFeatFoci = GetExplodedFoci(allSourceFeatFoci, featId, focusType, otherFeats);
+            var sourceFeatFoci = GetExplodedFoci(allSourceFeatFoci, feat, focusType, otherFeats);
 
             if (proficiencyRequired == false && otherFeats.Any(f => RequirementHasFocus(requiredFeatIds, f)) == false)
                 return sourceFeatFoci;
 
             var proficiencyFeatIds = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.Proficiency);
-            var proficiencyFeats = otherFeats.Where(f => proficiencyFeatIds.Contains(f.Name.Id));
+            var proficiencyFeats = otherFeats.Where(f => proficiencyFeatIds.Contains(f.Name));
 
             var requiredFeats = otherFeats.Where(f => RequirementHasFocus(requiredFeatIds, f));
             requiredFeats = requiredFeats.Union(proficiencyFeats);
@@ -86,7 +86,7 @@ namespace NPCGen.Generators.Abilities.Feats
 
             foreach (var featWithAllFocus in featsWithAllFocus)
             {
-                var explodedFoci = GetExplodedFoci(allSourceFeatFoci, featWithAllFocus.Name.Id, featWithAllFocus.Focus, otherFeats);
+                var explodedFoci = GetExplodedFoci(allSourceFeatFoci, featWithAllFocus.Name, featWithAllFocus.Focus, otherFeats);
                 requirementFoci = requirementFoci.Union(explodedFoci);
             }
 
@@ -101,26 +101,26 @@ namespace NPCGen.Generators.Abilities.Feats
             return applicableFoci;
         }
 
-        private IEnumerable<String> GetExplodedFoci(Dictionary<String, IEnumerable<String>> allSourceFeatFoci, String featId, String focusType, IEnumerable<Feat> otherFeats)
+        private IEnumerable<String> GetExplodedFoci(Dictionary<String, IEnumerable<String>> allSourceFeatFoci, String feat, String focusType, IEnumerable<Feat> otherFeats)
         {
             if (focusType != ProficiencyConstants.All)
                 return allSourceFeatFoci[focusType];
 
-            if (featId != FeatConstants.MartialWeaponProficiencyId && featId != FeatConstants.ExoticWeaponProficiencyId)
-                return allSourceFeatFoci[featId];
+            if (feat != FeatConstants.MartialWeaponProficiency && feat != FeatConstants.ExoticWeaponProficiency)
+                return allSourceFeatFoci[feat];
 
-            var weaponFamiliartyFeats = otherFeats.Where(f => f.Name.Id == FeatConstants.WeaponFamiliarityId);
+            var weaponFamiliartyFeats = otherFeats.Where(f => f.Name == FeatConstants.WeaponFamiliarity);
             var familiarityFoci = weaponFamiliartyFeats.Select(f => f.Focus);
 
-            if (featId == FeatConstants.MartialWeaponProficiencyId)
-                return allSourceFeatFoci[featId].Union(familiarityFoci);
+            if (feat == FeatConstants.MartialWeaponProficiency)
+                return allSourceFeatFoci[feat].Union(familiarityFoci);
 
-            return allSourceFeatFoci[featId].Except(familiarityFoci);
+            return allSourceFeatFoci[feat].Except(familiarityFoci);
         }
 
         private Boolean RequirementHasFocus(IEnumerable<String> requiredFeatIds, Feat feat)
         {
-            return requiredFeatIds.Contains(feat.Name.Id) && String.IsNullOrEmpty(feat.Focus) == false;
+            return requiredFeatIds.Contains(feat.Name) && String.IsNullOrEmpty(feat.Focus) == false;
         }
 
         private Int32 GetRandomIndexOf(IEnumerable<Object> collection)
@@ -129,7 +129,7 @@ namespace NPCGen.Generators.Abilities.Feats
             return dice.Roll().d(die) - 1;
         }
 
-        public String GenerateFrom(String featId, String focusType, Dictionary<String, Skill> skills)
+        public String GenerateFrom(String feat, String focusType, Dictionary<String, Skill> skills)
         {
             if (String.IsNullOrEmpty(focusType))
                 return String.Empty;
@@ -138,7 +138,7 @@ namespace NPCGen.Generators.Abilities.Feats
             if (focusType != ProficiencyConstants.All && allSourceFeatFoci.Keys.Contains(focusType) == false)
                 return focusType;
 
-            var foci = GetFoci(featId, focusType, allSourceFeatFoci, Enumerable.Empty<Feat>(), Enumerable.Empty<String>());
+            var foci = GetFoci(feat, focusType, allSourceFeatFoci, Enumerable.Empty<Feat>(), Enumerable.Empty<String>());
             var allSkills = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.Skills);
             var skillFoci = allSkills.Intersect(foci);
 
@@ -158,20 +158,20 @@ namespace NPCGen.Generators.Abilities.Feats
         }
 
 
-        public String GenerateAllowingFocusOfAllFrom(String featId, String focusType, Dictionary<String, Skill> skills, IEnumerable<RequiredFeat> requiredFeats, IEnumerable<Feat> otherFeats, CharacterClass characterClass)
+        public String GenerateAllowingFocusOfAllFrom(String feat, String focusType, Dictionary<String, Skill> skills, IEnumerable<RequiredFeat> requiredFeats, IEnumerable<Feat> otherFeats, CharacterClass characterClass)
         {
             if (focusType == ProficiencyConstants.All)
                 return focusType;
 
-            return GenerateFrom(featId, focusType, skills, requiredFeats, otherFeats, characterClass);
+            return GenerateFrom(feat, focusType, skills, requiredFeats, otherFeats, characterClass);
         }
 
-        public String GenerateAllowingFocusOfAllFrom(String featId, String focusType, Dictionary<String, Skill> skills)
+        public String GenerateAllowingFocusOfAllFrom(String feat, String focusType, Dictionary<String, Skill> skills)
         {
             if (focusType == ProficiencyConstants.All)
                 return focusType;
 
-            return GenerateFrom(featId, focusType, skills);
+            return GenerateFrom(feat, focusType, skills);
         }
     }
 }

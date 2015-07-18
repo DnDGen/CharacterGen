@@ -43,9 +43,9 @@ namespace NPCGen.Generators.Abilities
             ability.Feats = featsGenerator.GenerateWith(characterClass, race, ability.Stats, ability.Skills, baseAttack);
 
             var allFeatGrantingSkillBonuses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.SkillBonus);
-            var featIds = ability.Feats.Select(f => f.Name.Id);
+            var featIds = ability.Feats.Select(f => f.Name);
             var featIdsGrantingSkillBonuses = allFeatGrantingSkillBonuses.Intersect(featIds);
-            var featGrantingSkillBonuses = ability.Feats.Where(f => featIdsGrantingSkillBonuses.Contains(f.Name.Id));
+            var featGrantingSkillBonuses = ability.Feats.Where(f => featIdsGrantingSkillBonuses.Contains(f.Name));
             var allSkills = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.Skills);
 
             foreach (var feat in featGrantingSkillBonuses)
@@ -75,7 +75,7 @@ namespace NPCGen.Generators.Abilities
         private IEnumerable<String> GetSkillsToReceiveBonuses(Feat feat)
         {
             if (feat.Focus == String.Empty)
-                return collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, feat.Name.Id);
+                return collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, feat.Name);
 
             return new[] { feat.Focus };
         }

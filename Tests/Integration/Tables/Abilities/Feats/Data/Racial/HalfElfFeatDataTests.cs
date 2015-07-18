@@ -12,7 +12,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
     {
         protected override String tableName
         {
-            get { return String.Format(TableNameConstants.Formattable.Collection.RACEFeatData, RaceConstants.BaseRaces.HalfElfId); }
+            get { return String.Format(TableNameConstants.Formattable.Collection.RACEFeatData, RaceConstants.BaseRaces.HalfElf); }
         }
 
         [Test]
@@ -20,95 +20,95 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
         {
             var names = new[] 
             {
-                FeatConstants.ImmuneToEffectId,
-                FeatConstants.SaveBonusId,
-                FeatConstants.LowLightVisionId,
-                FeatConstants.ElvenBloodId,
-                FeatConstants.SkillBonusId + SkillConstants.Search,
-                FeatConstants.SkillBonusId + SkillConstants.Spot,
-                FeatConstants.SkillBonusId + SkillConstants.Listen,
-                FeatConstants.SkillBonusId + SkillConstants.Diplomacy,
-                FeatConstants.SkillBonusId + SkillConstants.GatherInformation
+                FeatConstants.ImmuneToEffect,
+                FeatConstants.SaveBonus,
+                FeatConstants.LowLightVision,
+                FeatConstants.ElvenBlood,
+                FeatConstants.SkillBonus + SkillConstants.Search,
+                FeatConstants.SkillBonus + SkillConstants.Spot,
+                FeatConstants.SkillBonus + SkillConstants.Listen,
+                FeatConstants.SkillBonus + SkillConstants.Diplomacy,
+                FeatConstants.SkillBonus + SkillConstants.GatherInformation
             };
 
             AssertCollectionNames(names);
         }
 
-        [TestCase(FeatConstants.SkillBonusId + SkillConstants.Listen,
-            FeatConstants.SkillBonusId,
+        [TestCase(FeatConstants.SkillBonus + SkillConstants.Listen,
+            FeatConstants.SkillBonus,
             SkillConstants.Listen,
             0,
             "",
             0,
             "",
             1)]
-        [TestCase(FeatConstants.SkillBonusId + SkillConstants.Search,
-            FeatConstants.SkillBonusId,
+        [TestCase(FeatConstants.SkillBonus + SkillConstants.Search,
+            FeatConstants.SkillBonus,
             SkillConstants.Search,
             0,
             "",
             0,
             "",
             1)]
-        [TestCase(FeatConstants.SkillBonusId + SkillConstants.Spot,
-            FeatConstants.SkillBonusId,
+        [TestCase(FeatConstants.SkillBonus + SkillConstants.Spot,
+            FeatConstants.SkillBonus,
             SkillConstants.Spot,
             0,
             "",
             0,
             "",
             1)]
-        [TestCase(FeatConstants.SkillBonusId + SkillConstants.Diplomacy,
-            FeatConstants.SkillBonusId,
+        [TestCase(FeatConstants.SkillBonus + SkillConstants.Diplomacy,
+            FeatConstants.SkillBonus,
             SkillConstants.Diplomacy,
             0,
             "",
             0,
             "",
             2)]
-        [TestCase(FeatConstants.SkillBonusId + SkillConstants.GatherInformation,
-            FeatConstants.SkillBonusId,
+        [TestCase(FeatConstants.SkillBonus + SkillConstants.GatherInformation,
+            FeatConstants.SkillBonus,
             SkillConstants.GatherInformation,
             0,
             "",
             0,
             "",
             2)]
-        [TestCase(FeatConstants.SaveBonusId,
-            FeatConstants.SaveBonusId,
+        [TestCase(FeatConstants.SaveBonus,
+            FeatConstants.SaveBonus,
             "Enchantment spells or effects",
             0,
             "",
             0,
             "",
             2)]
-        [TestCase(FeatConstants.ImmuneToEffectId,
-            FeatConstants.ImmuneToEffectId,
+        [TestCase(FeatConstants.ImmuneToEffect,
+            FeatConstants.ImmuneToEffect,
             "Sleep",
             0,
             "",
             0,
             "",
             0)]
-        [TestCase(FeatConstants.LowLightVisionId,
-            FeatConstants.LowLightVisionId,
+        [TestCase(FeatConstants.LowLightVision,
+            FeatConstants.LowLightVision,
             "",
             0,
             "",
             0,
             "",
             0)]
-        [TestCase(FeatConstants.ElvenBloodId,
-            FeatConstants.ElvenBloodId,
+        [TestCase(FeatConstants.ElvenBlood,
+            FeatConstants.ElvenBlood,
             "",
             0,
             "",
             0,
             "",
             0)]
-        public override void Data(String name, String featId, String focus, Int32 frequencyQuantity, String frequencyTimePeriod, Int32 minimumHitDiceRequirement, String sizeRequirement, Int32 strength)
+        public override void Data(String name, String feat, String focus, Int32 frequencyQuantity, String frequencyTimePeriod, Int32 minimumHitDiceRequirement, String sizeRequirement, Int32 strength)
         {
-            base.Data(name, featId, focus, frequencyQuantity, frequencyTimePeriod, minimumHitDiceRequirement, sizeRequirement, strength);
+            base.Data(name, feat, focus, frequencyQuantity, frequencyTimePeriod, minimumHitDiceRequirement, sizeRequirement, strength);
         }
     }
 }

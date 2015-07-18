@@ -18,31 +18,31 @@ namespace NPCGen.Tests.Integration.Tables.Combats
         {
             var names = new[] 
             {
-                RaceConstants.BaseRaces.BugbearId,
-                RaceConstants.BaseRaces.DerroId, 
-                RaceConstants.BaseRaces.DoppelgangerId,
-                RaceConstants.BaseRaces.GnollId, 
-                RaceConstants.BaseRaces.LizardfolkId, 
-                RaceConstants.BaseRaces.MindFlayerId,
-                RaceConstants.BaseRaces.MinotaurId, 
-                RaceConstants.BaseRaces.OgreId,
-                RaceConstants.BaseRaces.OgreMageId,
-                RaceConstants.BaseRaces.TroglodyteId
+                RaceConstants.BaseRaces.Bugbear,
+                RaceConstants.BaseRaces.Derro, 
+                RaceConstants.BaseRaces.Doppelganger,
+                RaceConstants.BaseRaces.Gnoll, 
+                RaceConstants.BaseRaces.Lizardfolk, 
+                RaceConstants.BaseRaces.MindFlayer,
+                RaceConstants.BaseRaces.Minotaur, 
+                RaceConstants.BaseRaces.Ogre,
+                RaceConstants.BaseRaces.OgreMage,
+                RaceConstants.BaseRaces.Troglodyte
             };
 
             AssertCollectionNames(names);
         }
 
-        [TestCase(RaceConstants.BaseRaces.BugbearId, 3)]
-        [TestCase(RaceConstants.BaseRaces.DerroId, 3)]
-        [TestCase(RaceConstants.BaseRaces.DoppelgangerId, 4)]
-        [TestCase(RaceConstants.BaseRaces.GnollId, 2)]
-        [TestCase(RaceConstants.BaseRaces.LizardfolkId, 2)]
-        [TestCase(RaceConstants.BaseRaces.MindFlayerId, 8)]
-        [TestCase(RaceConstants.BaseRaces.MinotaurId, 6)]
-        [TestCase(RaceConstants.BaseRaces.OgreId, 4)]
-        [TestCase(RaceConstants.BaseRaces.OgreMageId, 5)]
-        [TestCase(RaceConstants.BaseRaces.TroglodyteId, 2)]
+        [TestCase(RaceConstants.BaseRaces.Bugbear, 3)]
+        [TestCase(RaceConstants.BaseRaces.Derro, 3)]
+        [TestCase(RaceConstants.BaseRaces.Doppelganger, 4)]
+        [TestCase(RaceConstants.BaseRaces.Gnoll, 2)]
+        [TestCase(RaceConstants.BaseRaces.Lizardfolk, 2)]
+        [TestCase(RaceConstants.BaseRaces.MindFlayer, 8)]
+        [TestCase(RaceConstants.BaseRaces.Minotaur, 6)]
+        [TestCase(RaceConstants.BaseRaces.Ogre, 4)]
+        [TestCase(RaceConstants.BaseRaces.OgreMage, 5)]
+        [TestCase(RaceConstants.BaseRaces.Troglodyte, 2)]
         public override void Adjustment(String name, Int32 adjustment)
         {
             base.Adjustment(name, adjustment);

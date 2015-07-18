@@ -58,7 +58,7 @@ namespace NPCGen.Tests.Integration.Stress.Abilities.Feats
 
             foreach (var feat in feats)
             {
-                Assert.That(feat.Name.Id, Is.Not.Empty);
+                Assert.That(feat.Name, Is.Not.Empty);
                 Assert.That(feat.Focus, Is.Not.Null);
                 Assert.That(feat.Strength, Is.Positive);
                 Assert.That(feat.Frequency.Quantity, Is.Positive);

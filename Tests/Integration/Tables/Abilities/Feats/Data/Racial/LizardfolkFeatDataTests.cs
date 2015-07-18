@@ -12,7 +12,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
     {
         protected override String tableName
         {
-            get { return String.Format(TableNameConstants.Formattable.Collection.RACEFeatData, RaceConstants.BaseRaces.LizardfolkId); }
+            get { return String.Format(TableNameConstants.Formattable.Collection.RACEFeatData, RaceConstants.BaseRaces.Lizardfolk); }
         }
 
         [Test]
@@ -20,68 +20,68 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
         {
             var names = new[] 
             {
-                FeatConstants.SimpleWeaponProficiencyId,
-                FeatConstants.ShieldProficiencyId,
-                FeatConstants.NaturalArmorId,
-                FeatConstants.HoldBreathId,
-                FeatConstants.NaturalWeaponId + "Claw",
-                FeatConstants.NaturalWeaponId + "Bite"
+                FeatConstants.SimpleWeaponProficiency,
+                FeatConstants.ShieldProficiency,
+                FeatConstants.NaturalArmor,
+                FeatConstants.HoldBreath,
+                FeatConstants.NaturalWeapon + "Claw",
+                FeatConstants.NaturalWeapon + "Bite"
             };
 
             AssertCollectionNames(names);
         }
 
-        [TestCase(FeatConstants.SimpleWeaponProficiencyId,
-            FeatConstants.SimpleWeaponProficiencyId,
+        [TestCase(FeatConstants.SimpleWeaponProficiency,
+            FeatConstants.SimpleWeaponProficiency,
             ProficiencyConstants.All,
             0,
             "",
             0,
             "",
             0)]
-        [TestCase(FeatConstants.ShieldProficiencyId,
-            FeatConstants.ShieldProficiencyId,
+        [TestCase(FeatConstants.ShieldProficiency,
+            FeatConstants.ShieldProficiency,
             "",
             0,
             "",
             0,
             "",
             0)]
-        [TestCase(FeatConstants.NaturalArmorId,
-            FeatConstants.NaturalArmorId,
+        [TestCase(FeatConstants.NaturalArmor,
+            FeatConstants.NaturalArmor,
             "",
             0,
             "",
             0,
             "",
             5)]
-        [TestCase(FeatConstants.HoldBreathId,
-            FeatConstants.HoldBreathId,
+        [TestCase(FeatConstants.HoldBreath,
+            FeatConstants.HoldBreath,
             "",
             0,
             "",
             0,
             "",
             0)]
-        [TestCase(FeatConstants.NaturalWeaponId + "Claw",
-            FeatConstants.NaturalWeaponId,
+        [TestCase(FeatConstants.NaturalWeapon + "Claw",
+            FeatConstants.NaturalWeapon,
             "Claw (x2)",
             0,
             "",
             0,
             "",
             0)]
-        [TestCase(FeatConstants.NaturalWeaponId + "Bite",
-            FeatConstants.NaturalWeaponId,
+        [TestCase(FeatConstants.NaturalWeapon + "Bite",
+            FeatConstants.NaturalWeapon,
             "Bite",
             0,
             "",
             0,
             "",
             0)]
-        public override void Data(String name, String featId, String focus, Int32 frequencyQuantity, String frequencyTimePeriod, Int32 minimumHitDiceRequirement, String sizeRequirement, Int32 strength)
+        public override void Data(String name, String feat, String focus, Int32 frequencyQuantity, String frequencyTimePeriod, Int32 minimumHitDiceRequirement, String sizeRequirement, Int32 strength)
         {
-            base.Data(name, featId, focus, frequencyQuantity, frequencyTimePeriod, minimumHitDiceRequirement, sizeRequirement, strength);
+            base.Data(name, feat, focus, frequencyQuantity, frequencyTimePeriod, minimumHitDiceRequirement, sizeRequirement, strength);
         }
     }
 }

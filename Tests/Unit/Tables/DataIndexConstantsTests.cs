@@ -7,7 +7,7 @@ namespace NPCGen.Tests.Unit.Tables
     [TestFixture]
     public class DataIndexConstantsTests
     {
-        [TestCase(DataIndexConstants.CharacterClassFeatData.FeatIdIndex, 0)]
+        [TestCase(DataIndexConstants.CharacterClassFeatData.FeatNameIndex, 0)]
         [TestCase(DataIndexConstants.CharacterClassFeatData.MinimumLevelRequirementIndex, 1)]
         [TestCase(DataIndexConstants.CharacterClassFeatData.FocusTypeIndex, 2)]
         [TestCase(DataIndexConstants.CharacterClassFeatData.StrengthIndex, 3)]
@@ -20,7 +20,7 @@ namespace NPCGen.Tests.Unit.Tables
             Assert.That(constant, Is.EqualTo(value));
         }
 
-        [TestCase(DataIndexConstants.RacialFeatData.FeatIdIndex, 0)]
+        [TestCase(DataIndexConstants.RacialFeatData.FeatNameIndex, 0)]
         [TestCase(DataIndexConstants.RacialFeatData.SizeRequirementIndex, 1)]
         [TestCase(DataIndexConstants.RacialFeatData.MinimumHitDiceRequirementIndex, 2)]
         [TestCase(DataIndexConstants.RacialFeatData.StrengthIndex, 3)]

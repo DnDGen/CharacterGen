@@ -344,9 +344,6 @@
     <EmbeddedResource Include="Combats\MonsterHitDice.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Names.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="CharacterClasses\HasSpecialistFields\ClericHasSpecialistFields.xml" />
   </ItemGroup>
   <ItemGroup>

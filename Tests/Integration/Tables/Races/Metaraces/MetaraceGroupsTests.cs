@@ -30,27 +30,27 @@ namespace NPCGen.Tests.Integration.Tables.Races.Metaraces
         }
 
         [TestCase(AlignmentConstants.Evil,
-            RaceConstants.Metaraces.HalfDragonId,
-            RaceConstants.Metaraces.HalfFiendId,
-            RaceConstants.Metaraces.WereratId,
-            RaceConstants.Metaraces.WerewolfId)]
+            RaceConstants.Metaraces.HalfDragon,
+            RaceConstants.Metaraces.HalfFiend,
+            RaceConstants.Metaraces.Wererat,
+            RaceConstants.Metaraces.Werewolf)]
         [TestCase(AlignmentConstants.Good,
-            RaceConstants.Metaraces.HalfDragonId,
-            RaceConstants.Metaraces.HalfCelestialId,
-            RaceConstants.Metaraces.WerebearId)]
+            RaceConstants.Metaraces.HalfDragon,
+            RaceConstants.Metaraces.HalfCelestial,
+            RaceConstants.Metaraces.Werebear)]
         [TestCase(AlignmentConstants.Neutral,
-            RaceConstants.Metaraces.WereboarId,
-            RaceConstants.Metaraces.WeretigerId)]
+            RaceConstants.Metaraces.Wereboar,
+            RaceConstants.Metaraces.Weretiger)]
         [TestCase(GroupConstants.Genetic,
-            RaceConstants.Metaraces.HalfDragonId,
-            RaceConstants.Metaraces.HalfFiendId,
-            RaceConstants.Metaraces.HalfCelestialId)]
+            RaceConstants.Metaraces.HalfDragon,
+            RaceConstants.Metaraces.HalfFiend,
+            RaceConstants.Metaraces.HalfCelestial)]
         [TestCase(GroupConstants.Lycanthrope,
-            RaceConstants.Metaraces.WerebearId,
-            RaceConstants.Metaraces.WereboarId,
-            RaceConstants.Metaraces.WeretigerId,
-            RaceConstants.Metaraces.WereratId,
-            RaceConstants.Metaraces.WerewolfId)]
+            RaceConstants.Metaraces.Werebear,
+            RaceConstants.Metaraces.Wereboar,
+            RaceConstants.Metaraces.Weretiger,
+            RaceConstants.Metaraces.Wererat,
+            RaceConstants.Metaraces.Werewolf)]
         public override void DistinctCollection(String name, params String[] collection)
         {
             base.DistinctCollection(name, collection);

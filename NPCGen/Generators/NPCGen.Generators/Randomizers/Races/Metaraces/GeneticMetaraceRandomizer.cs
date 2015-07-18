@@ -9,17 +9,17 @@ namespace NPCGen.Generators.Randomizers.Races.Metaraces
     {
         private ICollectionsSelector collectionsSelector;
 
-        public GeneticMetaraceRandomizer(IPercentileSelector percentileResultSelector, IAdjustmentsSelector levelAdjustmentSelector, INameSelector nameSelector,
+        public GeneticMetaraceRandomizer(IPercentileSelector percentileResultSelector, IAdjustmentsSelector levelAdjustmentSelector,
             ICollectionsSelector collectionsSelector)
-            : base(percentileResultSelector, levelAdjustmentSelector, nameSelector)
+            : base(percentileResultSelector, levelAdjustmentSelector)
         {
             this.collectionsSelector = collectionsSelector;
         }
 
-        protected override Boolean MetaraceIsAllowed(String metaraceId)
+        protected override Boolean MetaraceIsAllowed(String metarace)
         {
             var metaraceIds = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Genetic);
-            return metaraceIds.Contains(metaraceId);
+            return metaraceIds.Contains(metarace);
         }
     }
 }

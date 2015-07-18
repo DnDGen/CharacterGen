@@ -21,19 +21,19 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
         {
             var names = new[] 
             {
-                FeatConstants.SimpleWeaponProficiencyId,
-                FeatConstants.LightArmorProficiencyId,
-                FeatConstants.MediumArmorProficiencyId,
-                FeatConstants.HeavyArmorProficiencyId,
-                FeatConstants.ShieldProficiencyId,
-                FeatConstants.TurnId
+                FeatConstants.SimpleWeaponProficiency,
+                FeatConstants.LightArmorProficiency,
+                FeatConstants.MediumArmorProficiency,
+                FeatConstants.HeavyArmorProficiency,
+                FeatConstants.ShieldProficiency,
+                FeatConstants.Turn
             };
 
             AssertCollectionNames(names);
         }
 
-        [TestCase(FeatConstants.SimpleWeaponProficiencyId,
-            FeatConstants.SimpleWeaponProficiencyId,
+        [TestCase(FeatConstants.SimpleWeaponProficiency,
+            FeatConstants.SimpleWeaponProficiency,
             ProficiencyConstants.All,
             0,
             "",
@@ -41,8 +41,8 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             1,
             0,
             0)]
-        [TestCase(FeatConstants.LightArmorProficiencyId,
-            FeatConstants.LightArmorProficiencyId,
+        [TestCase(FeatConstants.LightArmorProficiency,
+            FeatConstants.LightArmorProficiency,
             "",
             0,
             "",
@@ -50,8 +50,8 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             1,
             0,
             0)]
-        [TestCase(FeatConstants.MediumArmorProficiencyId,
-            FeatConstants.MediumArmorProficiencyId,
+        [TestCase(FeatConstants.MediumArmorProficiency,
+            FeatConstants.MediumArmorProficiency,
             "",
             0,
             "",
@@ -59,8 +59,8 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             1,
             0,
             0)]
-        [TestCase(FeatConstants.HeavyArmorProficiencyId,
-            FeatConstants.HeavyArmorProficiencyId,
+        [TestCase(FeatConstants.HeavyArmorProficiency,
+            FeatConstants.HeavyArmorProficiency,
             "",
             0,
             "",
@@ -68,8 +68,8 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             1,
             0,
             0)]
-        [TestCase(FeatConstants.ShieldProficiencyId,
-            FeatConstants.ShieldProficiencyId,
+        [TestCase(FeatConstants.ShieldProficiency,
+            FeatConstants.ShieldProficiency,
             "",
             0,
             "",
@@ -77,8 +77,8 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             1,
             0,
             0)]
-        [TestCase(FeatConstants.TurnId,
-            FeatConstants.TurnId,
+        [TestCase(FeatConstants.Turn,
+            FeatConstants.Turn,
             "Undead",
             3,
             StatConstants.Charisma,
@@ -86,9 +86,9 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             1,
             0,
             0)]
-        public override void Data(String name, String featId, String focusType, Int32 frequencyQuantity, String frequencyQuantityStat, String frequencyTimePeriod, Int32 minimumLevel, Int32 maximumLevel, Int32 strength)
+        public override void Data(String name, String feat, String focusType, Int32 frequencyQuantity, String frequencyQuantityStat, String frequencyTimePeriod, Int32 minimumLevel, Int32 maximumLevel, Int32 strength)
         {
-            base.Data(name, featId, focusType, frequencyQuantity, frequencyQuantityStat, frequencyTimePeriod, minimumLevel, maximumLevel, strength);
+            base.Data(name, feat, focusType, frequencyQuantity, frequencyQuantityStat, frequencyTimePeriod, minimumLevel, maximumLevel, strength);
         }
     }
 }

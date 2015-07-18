@@ -65,10 +65,8 @@ namespace NPCGen.Tests.Integration.Stress
             Assert.That(classNames, Contains.Item(character.Class.ClassName));
             Assert.That(character.Class.Level, Is.Positive);
             Assert.That(character.InterestingTrait, Is.Not.Null);
-            Assert.That(character.Race.BaseRace.Name, Is.Not.Empty);
-            Assert.That(character.Race.BaseRace.Id, Is.Not.Empty);
-            Assert.That(character.Race.Metarace.Name, Is.Not.Null);
-            Assert.That(character.Race.Metarace.Id, Is.Not.Empty);
+            Assert.That(character.Race.BaseRace, Is.Not.Empty);
+            Assert.That(character.Race.Metarace, Is.Not.Empty);
 
             Assert.That(character.Ability.Stats.Count, Is.EqualTo(6));
             Assert.That(character.Ability.Stats.Keys, Contains.Item(StatConstants.Charisma));

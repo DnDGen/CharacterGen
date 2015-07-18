@@ -23,17 +23,17 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
             var names = new[] 
             {
                 GroupConstants.SchoolsOfMagic,
-                FeatConstants.SimpleWeaponProficiencyId,
-                FeatConstants.MartialWeaponProficiencyId,
-                FeatConstants.ExoticWeaponProficiencyId,
+                FeatConstants.SimpleWeaponProficiency,
+                FeatConstants.MartialWeaponProficiency,
+                FeatConstants.ExoticWeaponProficiency,
                 GroupConstants.Weapons,
                 GroupConstants.WeaponsWithUnarmedAndGrapple,
                 GroupConstants.WeaponsWithUnarmedAndGrappleAndRay,
-                FeatConstants.CombatStyleId,
+                FeatConstants.CombatStyle,
                 GroupConstants.Skills,
-                FeatConstants.MonkBonusFeatId + "1",
-                FeatConstants.MonkBonusFeatId + "2",
-                FeatConstants.MonkBonusFeatId + "6",
+                FeatConstants.MonkBonusFeat + "1",
+                FeatConstants.MonkBonusFeat + "2",
+                FeatConstants.MonkBonusFeat + "6",
             };
 
             AssertCollectionNames(names);
@@ -48,7 +48,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
             CharacterClassConstants.Schools.Illusion,
             CharacterClassConstants.Schools.Necromancy,
             CharacterClassConstants.Schools.Transmutation)]
-        [TestCase(FeatConstants.SimpleWeaponProficiencyId,
+        [TestCase(FeatConstants.SimpleWeaponProficiency,
             WeaponConstants.Gauntlet,
             ProficiencyConstants.UnarmedStrike,
             WeaponConstants.Dagger,
@@ -67,7 +67,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
             WeaponConstants.Dart,
             WeaponConstants.Javelin,
             WeaponConstants.Sling)]
-        [TestCase(FeatConstants.MartialWeaponProficiencyId,
+        [TestCase(FeatConstants.MartialWeaponProficiency,
             WeaponConstants.ThrowingAxe,
             WeaponConstants.LightHammer,
             WeaponConstants.Handaxe,
@@ -96,7 +96,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
             WeaponConstants.Scythe,
             WeaponConstants.Longbow,
             WeaponConstants.Shortbow)]
-        [TestCase(FeatConstants.ExoticWeaponProficiencyId,
+        [TestCase(FeatConstants.ExoticWeaponProficiency,
             WeaponConstants.Kama,
             WeaponConstants.Nunchaku,
             WeaponConstants.Siangham,
@@ -113,18 +113,18 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
             WeaponConstants.RepeatingCrossbow,
             WeaponConstants.Shuriken,
             WeaponConstants.Net)]
-        [TestCase(FeatConstants.CombatStyleId,
-            FeatConstants.TwoWeaponFightingId,
+        [TestCase(FeatConstants.CombatStyle,
+            FeatConstants.TwoWeaponFighting,
             FeatConstants.Foci.Archery)]
-        [TestCase(FeatConstants.MonkBonusFeatId + "1",
-            FeatConstants.StunningFistId,
-            FeatConstants.ImprovedGrappleId)]
-        [TestCase(FeatConstants.MonkBonusFeatId + "2",
-            FeatConstants.CombatReflexesId,
-            FeatConstants.DeflectArrowsId)]
-        [TestCase(FeatConstants.MonkBonusFeatId + "6",
-            FeatConstants.ImprovedDisarmId,
-            FeatConstants.ImprovedTripId)]
+        [TestCase(FeatConstants.MonkBonusFeat + "1",
+            FeatConstants.StunningFist,
+            FeatConstants.ImprovedGrapple)]
+        [TestCase(FeatConstants.MonkBonusFeat + "2",
+            FeatConstants.CombatReflexes,
+            FeatConstants.DeflectArrows)]
+        [TestCase(FeatConstants.MonkBonusFeat + "6",
+            FeatConstants.ImprovedDisarm,
+            FeatConstants.ImprovedTrip)]
         public override void DistinctCollection(String name, params String[] collection)
         {
             base.DistinctCollection(name, collection);

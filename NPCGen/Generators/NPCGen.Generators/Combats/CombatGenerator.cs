@@ -74,7 +74,7 @@ namespace NPCGen.Generators.Combats
         private Int32 GetRacialBaseAttackAdjustments(Race race)
         {
             var racialAdjustments = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.RacialBaseAttackAdjustments);
-            return racialAdjustments[race.BaseRace.Id] + racialAdjustments[race.Metarace.Id];
+            return racialAdjustments[race.BaseRace] + racialAdjustments[race.Metarace];
         }
 
         private Int32 GetSizeAdjustments(Race race)
@@ -115,8 +115,8 @@ namespace NPCGen.Generators.Combats
             var racialBonuses = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.RacialInitiativeBonuses);
             var featBonuses = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.FeatInitiativeBonuses);
 
-            var raceBonus = racialBonuses[race.BaseRace.Id] + racialBonuses[race.Metarace.Id];
-            var initiativeFeats = featBonuses.Where(kvp => feats.Any(f => f.Name.Id == kvp.Key));
+            var raceBonus = racialBonuses[race.BaseRace] + racialBonuses[race.Metarace];
+            var initiativeFeats = featBonuses.Where(kvp => feats.Any(f => f.Name == kvp.Key));
             var featBonus = initiativeFeats.Sum(kvp => kvp.Value);
 
             return raceBonus + featBonus;

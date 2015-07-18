@@ -21,40 +21,40 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
         {
             var names = new[] 
             {
-                FeatConstants.SneakAttackId + "1",
-                FeatConstants.SneakAttackId + "2",
-                FeatConstants.SneakAttackId + "3",
-                FeatConstants.SneakAttackId + "4",
-                FeatConstants.SneakAttackId + "5",
-                FeatConstants.SneakAttackId + "6",
-                FeatConstants.SneakAttackId + "7",
-                FeatConstants.SneakAttackId + "8",
-                FeatConstants.SneakAttackId + "9",
-                FeatConstants.SneakAttackId + "10",
-                FeatConstants.TrapfindingId,
-                FeatConstants.EvasionId,
-                FeatConstants.UncannyDodgeId,
-                FeatConstants.TrapSenseId + "1",
-                FeatConstants.TrapSenseId + "2",
-                FeatConstants.TrapSenseId + "3",
-                FeatConstants.TrapSenseId + "4",
-                FeatConstants.TrapSenseId + "5",
-                FeatConstants.TrapSenseId + "6",
-                FeatConstants.ImprovedUncannyDodgeId,
-                FeatConstants.SimpleWeaponProficiencyId,
-                FeatConstants.ExoticWeaponProficiencyId + WeaponConstants.HandCrossbow,
-                FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Rapier,
-                FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Sap,
-                FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Shortbow,
-                FeatConstants.MartialWeaponProficiencyId + WeaponConstants.ShortSword,
-                FeatConstants.LightArmorProficiencyId
+                FeatConstants.SneakAttack + "1",
+                FeatConstants.SneakAttack + "2",
+                FeatConstants.SneakAttack + "3",
+                FeatConstants.SneakAttack + "4",
+                FeatConstants.SneakAttack + "5",
+                FeatConstants.SneakAttack + "6",
+                FeatConstants.SneakAttack + "7",
+                FeatConstants.SneakAttack + "8",
+                FeatConstants.SneakAttack + "9",
+                FeatConstants.SneakAttack + "10",
+                FeatConstants.Trapfinding,
+                FeatConstants.Evasion,
+                FeatConstants.UncannyDodge,
+                FeatConstants.TrapSense + "1",
+                FeatConstants.TrapSense + "2",
+                FeatConstants.TrapSense + "3",
+                FeatConstants.TrapSense + "4",
+                FeatConstants.TrapSense + "5",
+                FeatConstants.TrapSense + "6",
+                FeatConstants.ImprovedUncannyDodge,
+                FeatConstants.SimpleWeaponProficiency,
+                FeatConstants.ExoticWeaponProficiency + WeaponConstants.HandCrossbow,
+                FeatConstants.MartialWeaponProficiency + WeaponConstants.Rapier,
+                FeatConstants.MartialWeaponProficiency + WeaponConstants.Sap,
+                FeatConstants.MartialWeaponProficiency + WeaponConstants.Shortbow,
+                FeatConstants.MartialWeaponProficiency + WeaponConstants.ShortSword,
+                FeatConstants.LightArmorProficiency
             };
 
             AssertCollectionNames(names);
         }
 
-        [TestCase(FeatConstants.SneakAttackId + "1",
-            FeatConstants.SneakAttackId,
+        [TestCase(FeatConstants.SneakAttack + "1",
+            FeatConstants.SneakAttack,
             "",
             0,
             "",
@@ -62,8 +62,8 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             1,
             2,
             1)]
-        [TestCase(FeatConstants.SneakAttackId + "2",
-            FeatConstants.SneakAttackId,
+        [TestCase(FeatConstants.SneakAttack + "2",
+            FeatConstants.SneakAttack,
             "",
             0,
             "",
@@ -71,8 +71,8 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             3,
             4,
             2)]
-        [TestCase(FeatConstants.SneakAttackId + "3",
-            FeatConstants.SneakAttackId,
+        [TestCase(FeatConstants.SneakAttack + "3",
+            FeatConstants.SneakAttack,
             "",
             0,
             "",
@@ -80,8 +80,8 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             5,
             6,
             3)]
-        [TestCase(FeatConstants.SneakAttackId + "4",
-            FeatConstants.SneakAttackId,
+        [TestCase(FeatConstants.SneakAttack + "4",
+            FeatConstants.SneakAttack,
             "",
             0,
             "",
@@ -89,8 +89,8 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             7,
             8,
             4)]
-        [TestCase(FeatConstants.SneakAttackId + "5",
-            FeatConstants.SneakAttackId,
+        [TestCase(FeatConstants.SneakAttack + "5",
+            FeatConstants.SneakAttack,
             "",
             0,
             "",
@@ -98,8 +98,8 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             9,
             10,
             5)]
-        [TestCase(FeatConstants.SneakAttackId + "6",
-            FeatConstants.SneakAttackId,
+        [TestCase(FeatConstants.SneakAttack + "6",
+            FeatConstants.SneakAttack,
             "",
             0,
             "",
@@ -107,8 +107,8 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             11,
             12,
             6)]
-        [TestCase(FeatConstants.SneakAttackId + "7",
-            FeatConstants.SneakAttackId,
+        [TestCase(FeatConstants.SneakAttack + "7",
+            FeatConstants.SneakAttack,
             "",
             0,
             "",
@@ -116,8 +116,8 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             13,
             14,
             7)]
-        [TestCase(FeatConstants.SneakAttackId + "8",
-            FeatConstants.SneakAttackId,
+        [TestCase(FeatConstants.SneakAttack + "8",
+            FeatConstants.SneakAttack,
             "",
             0,
             "",
@@ -125,8 +125,8 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             15,
             16,
             8)]
-        [TestCase(FeatConstants.SneakAttackId + "9",
-            FeatConstants.SneakAttackId,
+        [TestCase(FeatConstants.SneakAttack + "9",
+            FeatConstants.SneakAttack,
             "",
             0,
             "",
@@ -134,8 +134,8 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             17,
             18,
             9)]
-        [TestCase(FeatConstants.SneakAttackId + "10",
-            FeatConstants.SneakAttackId,
+        [TestCase(FeatConstants.SneakAttack + "10",
+            FeatConstants.SneakAttack,
             "",
             0,
             "",
@@ -143,8 +143,8 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             19,
             0,
             10)]
-        [TestCase(FeatConstants.TrapfindingId,
-            FeatConstants.TrapfindingId,
+        [TestCase(FeatConstants.Trapfinding,
+            FeatConstants.Trapfinding,
             "",
             0,
             "",
@@ -152,8 +152,8 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             1,
             0,
             0)]
-        [TestCase(FeatConstants.EvasionId,
-            FeatConstants.EvasionId,
+        [TestCase(FeatConstants.Evasion,
+            FeatConstants.Evasion,
             "",
             0,
             "",
@@ -161,8 +161,8 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             2,
             0,
             0)]
-        [TestCase(FeatConstants.UncannyDodgeId,
-            FeatConstants.UncannyDodgeId,
+        [TestCase(FeatConstants.UncannyDodge,
+            FeatConstants.UncannyDodge,
             "",
             0,
             "",
@@ -170,8 +170,8 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             4,
             0,
             0)]
-        [TestCase(FeatConstants.TrapSenseId + "1",
-            FeatConstants.TrapSenseId,
+        [TestCase(FeatConstants.TrapSense + "1",
+            FeatConstants.TrapSense,
             "",
             0,
             "",
@@ -179,8 +179,8 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             3,
             5,
             1)]
-        [TestCase(FeatConstants.TrapSenseId + "2",
-            FeatConstants.TrapSenseId,
+        [TestCase(FeatConstants.TrapSense + "2",
+            FeatConstants.TrapSense,
             "",
             0,
             "",
@@ -188,8 +188,8 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             6,
             8,
             2)]
-        [TestCase(FeatConstants.TrapSenseId + "3",
-            FeatConstants.TrapSenseId,
+        [TestCase(FeatConstants.TrapSense + "3",
+            FeatConstants.TrapSense,
             "",
             0,
             "",
@@ -197,8 +197,8 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             9,
             11,
             3)]
-        [TestCase(FeatConstants.TrapSenseId + "4",
-            FeatConstants.TrapSenseId,
+        [TestCase(FeatConstants.TrapSense + "4",
+            FeatConstants.TrapSense,
             "",
             0,
             "",
@@ -206,8 +206,8 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             12,
             14,
             4)]
-        [TestCase(FeatConstants.TrapSenseId + "5",
-            FeatConstants.TrapSenseId,
+        [TestCase(FeatConstants.TrapSense + "5",
+            FeatConstants.TrapSense,
             "",
             0,
             "",
@@ -215,8 +215,8 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             15,
             17,
             5)]
-        [TestCase(FeatConstants.TrapSenseId + "6",
-            FeatConstants.TrapSenseId,
+        [TestCase(FeatConstants.TrapSense + "6",
+            FeatConstants.TrapSense,
             "",
             0,
             "",
@@ -224,8 +224,8 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             18,
             0,
             6)]
-        [TestCase(FeatConstants.ImprovedUncannyDodgeId,
-            FeatConstants.ImprovedUncannyDodgeId,
+        [TestCase(FeatConstants.ImprovedUncannyDodge,
+            FeatConstants.ImprovedUncannyDodge,
             "",
             0,
             "",
@@ -233,8 +233,8 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             8,
             0,
             0)]
-        [TestCase(FeatConstants.SimpleWeaponProficiencyId,
-            FeatConstants.SimpleWeaponProficiencyId,
+        [TestCase(FeatConstants.SimpleWeaponProficiency,
+            FeatConstants.SimpleWeaponProficiency,
             ProficiencyConstants.All,
             0,
             "",
@@ -242,8 +242,8 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             1,
             0,
             0)]
-        [TestCase(FeatConstants.ExoticWeaponProficiencyId + WeaponConstants.HandCrossbow,
-            FeatConstants.ExoticWeaponProficiencyId,
+        [TestCase(FeatConstants.ExoticWeaponProficiency + WeaponConstants.HandCrossbow,
+            FeatConstants.ExoticWeaponProficiency,
             WeaponConstants.HandCrossbow,
             0,
             "",
@@ -251,8 +251,8 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             1,
             0,
             0)]
-        [TestCase(FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Rapier,
-            FeatConstants.MartialWeaponProficiencyId,
+        [TestCase(FeatConstants.MartialWeaponProficiency + WeaponConstants.Rapier,
+            FeatConstants.MartialWeaponProficiency,
             WeaponConstants.Rapier,
             0,
             "",
@@ -260,8 +260,8 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             1,
             0,
             0)]
-        [TestCase(FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Sap,
-            FeatConstants.MartialWeaponProficiencyId,
+        [TestCase(FeatConstants.MartialWeaponProficiency + WeaponConstants.Sap,
+            FeatConstants.MartialWeaponProficiency,
             WeaponConstants.Sap,
             0,
             "",
@@ -269,8 +269,8 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             1,
             0,
             0)]
-        [TestCase(FeatConstants.MartialWeaponProficiencyId + WeaponConstants.Shortbow,
-            FeatConstants.MartialWeaponProficiencyId,
+        [TestCase(FeatConstants.MartialWeaponProficiency + WeaponConstants.Shortbow,
+            FeatConstants.MartialWeaponProficiency,
             WeaponConstants.Shortbow,
             0,
             "",
@@ -278,8 +278,8 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             1,
             0,
             0)]
-        [TestCase(FeatConstants.MartialWeaponProficiencyId + WeaponConstants.ShortSword,
-            FeatConstants.MartialWeaponProficiencyId,
+        [TestCase(FeatConstants.MartialWeaponProficiency + WeaponConstants.ShortSword,
+            FeatConstants.MartialWeaponProficiency,
             WeaponConstants.ShortSword,
             0,
             "",
@@ -287,8 +287,8 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             1,
             0,
             0)]
-        [TestCase(FeatConstants.LightArmorProficiencyId,
-            FeatConstants.LightArmorProficiencyId,
+        [TestCase(FeatConstants.LightArmorProficiency,
+            FeatConstants.LightArmorProficiency,
             "",
             0,
             "",
@@ -296,9 +296,9 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
             1,
             0,
             0)]
-        public override void Data(String name, String featId, String focusType, Int32 frequencyQuantity, String frequencyQuantityStat, String frequencyTimePeriod, Int32 minimumLevel, Int32 maximumLevel, Int32 strength)
+        public override void Data(String name, String feat, String focusType, Int32 frequencyQuantity, String frequencyQuantityStat, String frequencyTimePeriod, Int32 minimumLevel, Int32 maximumLevel, Int32 strength)
         {
-            base.Data(name, featId, focusType, frequencyQuantity, frequencyQuantityStat, frequencyTimePeriod, minimumLevel, maximumLevel, strength);
+            base.Data(name, feat, focusType, frequencyQuantity, frequencyQuantityStat, frequencyTimePeriod, minimumLevel, maximumLevel, strength);
         }
     }
 }

@@ -18,97 +18,97 @@ namespace NPCGen.Tests.Integration.Tables.Combats
         {
             var names = new[] 
             {
-                RaceConstants.BaseRaces.AasimarId,
-                RaceConstants.BaseRaces.BugbearId, 
-                RaceConstants.BaseRaces.DerroId,
-                RaceConstants.BaseRaces.DoppelgangerId, 
-                RaceConstants.BaseRaces.DrowId,
-                RaceConstants.BaseRaces.DuergarDwarfId, 
-                RaceConstants.BaseRaces.DeepDwarfId, 
-                RaceConstants.BaseRaces.HillDwarfId, 
-                RaceConstants.BaseRaces.MountainDwarfId, 
-                RaceConstants.BaseRaces.GrayElfId, 
-                RaceConstants.BaseRaces.HighElfId,
-                RaceConstants.BaseRaces.WildElfId, 
-                RaceConstants.BaseRaces.WoodElfId,
-                RaceConstants.BaseRaces.GnollId, 
-                RaceConstants.BaseRaces.ForestGnomeId, 
-                RaceConstants.BaseRaces.RockGnomeId, 
-                RaceConstants.BaseRaces.SvirfneblinId, 
-                RaceConstants.BaseRaces.GoblinId, 
-                RaceConstants.Metaraces.HalfCelestialId,
-                RaceConstants.Metaraces.HalfDragonId, 
-                RaceConstants.BaseRaces.HalfElfId,
-                RaceConstants.Metaraces.HalfFiendId,
-                RaceConstants.BaseRaces.HalfOrcId, 
-                RaceConstants.BaseRaces.DeepHalflingId,
-                RaceConstants.BaseRaces.LightfootHalflingId,
-                RaceConstants.BaseRaces.TallfellowHalflingId,
-                RaceConstants.BaseRaces.HobgoblinId,
-                RaceConstants.BaseRaces.HumanId,
-                RaceConstants.BaseRaces.KoboldId,
-                RaceConstants.BaseRaces.LizardfolkId,
-                RaceConstants.BaseRaces.MindFlayerId,
-                RaceConstants.BaseRaces.MinotaurId,
-                RaceConstants.BaseRaces.OgreId,
-                RaceConstants.BaseRaces.OgreMageId,
-                RaceConstants.BaseRaces.OrcId,
-                RaceConstants.BaseRaces.TieflingId, 
-                RaceConstants.BaseRaces.TroglodyteId,
-                RaceConstants.Metaraces.WerebearId, 
-                RaceConstants.Metaraces.WereboarId, 
-                RaceConstants.Metaraces.WereratId, 
-                RaceConstants.Metaraces.WeretigerId,
-                RaceConstants.Metaraces.WerewolfId, 
-                RaceConstants.Metaraces.NoneId
+                RaceConstants.BaseRaces.Aasimar,
+                RaceConstants.BaseRaces.Bugbear, 
+                RaceConstants.BaseRaces.Derro,
+                RaceConstants.BaseRaces.Doppelganger, 
+                RaceConstants.BaseRaces.Drow,
+                RaceConstants.BaseRaces.DuergarDwarf, 
+                RaceConstants.BaseRaces.DeepDwarf, 
+                RaceConstants.BaseRaces.HillDwarf, 
+                RaceConstants.BaseRaces.MountainDwarf, 
+                RaceConstants.BaseRaces.GrayElf, 
+                RaceConstants.BaseRaces.HighElf,
+                RaceConstants.BaseRaces.WildElf, 
+                RaceConstants.BaseRaces.WoodElf,
+                RaceConstants.BaseRaces.Gnoll, 
+                RaceConstants.BaseRaces.ForestGnome, 
+                RaceConstants.BaseRaces.RockGnome, 
+                RaceConstants.BaseRaces.Svirfneblin, 
+                RaceConstants.BaseRaces.Goblin, 
+                RaceConstants.Metaraces.HalfCelestial,
+                RaceConstants.Metaraces.HalfDragon, 
+                RaceConstants.BaseRaces.HalfElf,
+                RaceConstants.Metaraces.HalfFiend,
+                RaceConstants.BaseRaces.HalfOrc, 
+                RaceConstants.BaseRaces.DeepHalfling,
+                RaceConstants.BaseRaces.LightfootHalfling,
+                RaceConstants.BaseRaces.TallfellowHalfling,
+                RaceConstants.BaseRaces.Hobgoblin,
+                RaceConstants.BaseRaces.Human,
+                RaceConstants.BaseRaces.Kobold,
+                RaceConstants.BaseRaces.Lizardfolk,
+                RaceConstants.BaseRaces.MindFlayer,
+                RaceConstants.BaseRaces.Minotaur,
+                RaceConstants.BaseRaces.Ogre,
+                RaceConstants.BaseRaces.OgreMage,
+                RaceConstants.BaseRaces.Orc,
+                RaceConstants.BaseRaces.Tiefling, 
+                RaceConstants.BaseRaces.Troglodyte,
+                RaceConstants.Metaraces.Werebear, 
+                RaceConstants.Metaraces.Wereboar, 
+                RaceConstants.Metaraces.Wererat, 
+                RaceConstants.Metaraces.Weretiger,
+                RaceConstants.Metaraces.Werewolf, 
+                RaceConstants.Metaraces.None
             };
 
             AssertCollectionNames(names);
         }
 
-        [TestCase(RaceConstants.BaseRaces.AasimarId, 0)]
-        [TestCase(RaceConstants.BaseRaces.BugbearId, 2)]
-        [TestCase(RaceConstants.BaseRaces.DerroId, 3)]
-        [TestCase(RaceConstants.BaseRaces.DoppelgangerId, 4)]
-        [TestCase(RaceConstants.BaseRaces.DrowId, 0)]
-        [TestCase(RaceConstants.BaseRaces.DuergarDwarfId, 0)]
-        [TestCase(RaceConstants.BaseRaces.DeepDwarfId, 0)]
-        [TestCase(RaceConstants.BaseRaces.HillDwarfId, 0)]
-        [TestCase(RaceConstants.BaseRaces.MountainDwarfId, 0)]
-        [TestCase(RaceConstants.BaseRaces.GrayElfId, 0)]
-        [TestCase(RaceConstants.BaseRaces.HighElfId, 0)]
-        [TestCase(RaceConstants.BaseRaces.WildElfId, 0)]
-        [TestCase(RaceConstants.BaseRaces.WoodElfId, 0)]
-        [TestCase(RaceConstants.BaseRaces.GnollId, 1)]
-        [TestCase(RaceConstants.BaseRaces.ForestGnomeId, 0)]
-        [TestCase(RaceConstants.BaseRaces.RockGnomeId, 0)]
-        [TestCase(RaceConstants.BaseRaces.SvirfneblinId, 0)]
-        [TestCase(RaceConstants.BaseRaces.GoblinId, 0)]
-        [TestCase(RaceConstants.Metaraces.HalfCelestialId, 0)]
-        [TestCase(RaceConstants.Metaraces.HalfDragonId, 0)]
-        [TestCase(RaceConstants.BaseRaces.HalfElfId, 0)]
-        [TestCase(RaceConstants.Metaraces.HalfFiendId, 0)]
-        [TestCase(RaceConstants.BaseRaces.HalfOrcId, 0)]
-        [TestCase(RaceConstants.BaseRaces.DeepHalflingId, 0)]
-        [TestCase(RaceConstants.BaseRaces.LightfootHalflingId, 0)]
-        [TestCase(RaceConstants.BaseRaces.TallfellowHalflingId, 0)]
-        [TestCase(RaceConstants.BaseRaces.HobgoblinId, 0)]
-        [TestCase(RaceConstants.BaseRaces.HumanId, 0)]
-        [TestCase(RaceConstants.BaseRaces.KoboldId, 0)]
-        [TestCase(RaceConstants.BaseRaces.LizardfolkId, 1)]
-        [TestCase(RaceConstants.BaseRaces.MindFlayerId, 6)]
-        [TestCase(RaceConstants.BaseRaces.MinotaurId, 6)]
-        [TestCase(RaceConstants.BaseRaces.OgreId, 3)]
-        [TestCase(RaceConstants.BaseRaces.OgreMageId, 3)]
-        [TestCase(RaceConstants.BaseRaces.OrcId, 0)]
-        [TestCase(RaceConstants.BaseRaces.TieflingId, 0)]
-        [TestCase(RaceConstants.BaseRaces.TroglodyteId, 1)]
-        [TestCase(RaceConstants.Metaraces.WerebearId, 4)]
-        [TestCase(RaceConstants.Metaraces.WereboarId, 2)]
-        [TestCase(RaceConstants.Metaraces.WereratId, 0)]
-        [TestCase(RaceConstants.Metaraces.WeretigerId, 4)]
-        [TestCase(RaceConstants.Metaraces.WerewolfId, 1)]
-        [TestCase(RaceConstants.Metaraces.NoneId, 0)]
+        [TestCase(RaceConstants.BaseRaces.Aasimar, 0)]
+        [TestCase(RaceConstants.BaseRaces.Bugbear, 2)]
+        [TestCase(RaceConstants.BaseRaces.Derro, 3)]
+        [TestCase(RaceConstants.BaseRaces.Doppelganger, 4)]
+        [TestCase(RaceConstants.BaseRaces.Drow, 0)]
+        [TestCase(RaceConstants.BaseRaces.DuergarDwarf, 0)]
+        [TestCase(RaceConstants.BaseRaces.DeepDwarf, 0)]
+        [TestCase(RaceConstants.BaseRaces.HillDwarf, 0)]
+        [TestCase(RaceConstants.BaseRaces.MountainDwarf, 0)]
+        [TestCase(RaceConstants.BaseRaces.GrayElf, 0)]
+        [TestCase(RaceConstants.BaseRaces.HighElf, 0)]
+        [TestCase(RaceConstants.BaseRaces.WildElf, 0)]
+        [TestCase(RaceConstants.BaseRaces.WoodElf, 0)]
+        [TestCase(RaceConstants.BaseRaces.Gnoll, 1)]
+        [TestCase(RaceConstants.BaseRaces.ForestGnome, 0)]
+        [TestCase(RaceConstants.BaseRaces.RockGnome, 0)]
+        [TestCase(RaceConstants.BaseRaces.Svirfneblin, 0)]
+        [TestCase(RaceConstants.BaseRaces.Goblin, 0)]
+        [TestCase(RaceConstants.Metaraces.HalfCelestial, 0)]
+        [TestCase(RaceConstants.Metaraces.HalfDragon, 0)]
+        [TestCase(RaceConstants.BaseRaces.HalfElf, 0)]
+        [TestCase(RaceConstants.Metaraces.HalfFiend, 0)]
+        [TestCase(RaceConstants.BaseRaces.HalfOrc, 0)]
+        [TestCase(RaceConstants.BaseRaces.DeepHalfling, 0)]
+        [TestCase(RaceConstants.BaseRaces.LightfootHalfling, 0)]
+        [TestCase(RaceConstants.BaseRaces.TallfellowHalfling, 0)]
+        [TestCase(RaceConstants.BaseRaces.Hobgoblin, 0)]
+        [TestCase(RaceConstants.BaseRaces.Human, 0)]
+        [TestCase(RaceConstants.BaseRaces.Kobold, 0)]
+        [TestCase(RaceConstants.BaseRaces.Lizardfolk, 1)]
+        [TestCase(RaceConstants.BaseRaces.MindFlayer, 6)]
+        [TestCase(RaceConstants.BaseRaces.Minotaur, 6)]
+        [TestCase(RaceConstants.BaseRaces.Ogre, 3)]
+        [TestCase(RaceConstants.BaseRaces.OgreMage, 3)]
+        [TestCase(RaceConstants.BaseRaces.Orc, 0)]
+        [TestCase(RaceConstants.BaseRaces.Tiefling, 0)]
+        [TestCase(RaceConstants.BaseRaces.Troglodyte, 1)]
+        [TestCase(RaceConstants.Metaraces.Werebear, 4)]
+        [TestCase(RaceConstants.Metaraces.Wereboar, 2)]
+        [TestCase(RaceConstants.Metaraces.Wererat, 0)]
+        [TestCase(RaceConstants.Metaraces.Weretiger, 4)]
+        [TestCase(RaceConstants.Metaraces.Werewolf, 1)]
+        [TestCase(RaceConstants.Metaraces.None, 0)]
         public override void Adjustment(String name, Int32 adjustment)
         {
             base.Adjustment(name, adjustment);

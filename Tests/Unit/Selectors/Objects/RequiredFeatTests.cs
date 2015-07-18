@@ -21,7 +21,7 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
         [Test]
         public void RequiredFeatInitialized()
         {
-            Assert.That(requiredFeat.FeatId, Is.Empty);
+            Assert.That(requiredFeat.Feat, Is.Empty);
             Assert.That(requiredFeat.Focus, Is.Empty);
         }
 
@@ -30,10 +30,10 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
         {
             otherFeats.Add(new Feat());
             otherFeats.Add(new Feat());
-            otherFeats[0].Name.Id = "feat1";
-            otherFeats[0].Name.Id = "feat2";
+            otherFeats[0].Name = "feat1";
+            otherFeats[0].Name = "feat2";
 
-            requiredFeat.FeatId = "feat2";
+            requiredFeat.Feat = "feat2";
 
             var met = requiredFeat.RequirementMet(otherFeats);
             Assert.That(met, Is.True);
@@ -44,10 +44,10 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
         {
             otherFeats.Add(new Feat());
             otherFeats.Add(new Feat());
-            otherFeats[0].Name.Id = "feat1";
-            otherFeats[0].Name.Id = "feat2";
+            otherFeats[0].Name = "feat1";
+            otherFeats[0].Name = "feat2";
 
-            requiredFeat.FeatId = "feat3";
+            requiredFeat.Feat = "feat3";
 
             var met = requiredFeat.RequirementMet(otherFeats);
             Assert.That(met, Is.False);
@@ -58,11 +58,11 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
         {
             otherFeats.Add(new Feat());
             otherFeats.Add(new Feat());
-            otherFeats[0].Name.Id = "feat1";
-            otherFeats[0].Name.Id = "feat2";
+            otherFeats[0].Name = "feat1";
+            otherFeats[0].Name = "feat2";
             otherFeats[0].Focus = "focus";
 
-            requiredFeat.FeatId = "feat2";
+            requiredFeat.Feat = "feat2";
 
             var met = requiredFeat.RequirementMet(otherFeats);
             Assert.That(met, Is.True);
@@ -73,11 +73,11 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
         {
             otherFeats.Add(new Feat());
             otherFeats.Add(new Feat());
-            otherFeats[0].Name.Id = "feat1";
-            otherFeats[0].Name.Id = "feat2";
+            otherFeats[0].Name = "feat1";
+            otherFeats[0].Name = "feat2";
             otherFeats[0].Focus = "focus";
 
-            requiredFeat.FeatId = "feat2";
+            requiredFeat.Feat = "feat2";
             requiredFeat.Focus = "focus";
 
             var met = requiredFeat.RequirementMet(otherFeats);
@@ -89,12 +89,12 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
         {
             otherFeats.Add(new Feat());
             otherFeats.Add(new Feat());
-            otherFeats[0].Name.Id = "feat2";
+            otherFeats[0].Name = "feat2";
             otherFeats[0].Focus = "other focus";
-            otherFeats[0].Name.Id = "feat2";
+            otherFeats[0].Name = "feat2";
             otherFeats[0].Focus = "focus";
 
-            requiredFeat.FeatId = "feat2";
+            requiredFeat.Feat = "feat2";
             requiredFeat.Focus = "focus";
 
             var met = requiredFeat.RequirementMet(otherFeats);
@@ -106,12 +106,12 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
         {
             otherFeats.Add(new Feat());
             otherFeats.Add(new Feat());
-            otherFeats[0].Name.Id = "feat1";
+            otherFeats[0].Name = "feat1";
             otherFeats[0].Focus = "focus";
-            otherFeats[0].Name.Id = "feat2";
+            otherFeats[0].Name = "feat2";
             otherFeats[0].Focus = "other focus";
 
-            requiredFeat.FeatId = "feat2";
+            requiredFeat.Feat = "feat2";
             requiredFeat.Focus = "focus";
 
             var met = requiredFeat.RequirementMet(otherFeats);
@@ -123,11 +123,11 @@ namespace NPCGen.Tests.Unit.Selectors.Objects
         {
             otherFeats.Add(new Feat());
             otherFeats.Add(new Feat());
-            otherFeats[0].Name.Id = "feat1";
-            otherFeats[0].Name.Id = "feat2";
+            otherFeats[0].Name = "feat1";
+            otherFeats[0].Name = "feat2";
             otherFeats[0].Focus = "other focus";
 
-            requiredFeat.FeatId = "feat2";
+            requiredFeat.Feat = "feat2";
             requiredFeat.Focus = "focus";
 
             var met = requiredFeat.RequirementMet(otherFeats);

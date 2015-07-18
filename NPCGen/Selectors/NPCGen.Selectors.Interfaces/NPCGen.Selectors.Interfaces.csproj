@@ -41,7 +41,6 @@
   <ItemGroup>
     <Compile Include="IBooleanPercentileSelector.cs" />
     <Compile Include="ILeadershipSelector.cs" />
-    <Compile Include="INameSelector.cs" />
     <Compile Include="Objects\AdditionalFeatSelection.cs" />
     <Compile Include="ICollectionsSelector.cs" />
     <Compile Include="IFeatsSelector.cs" />

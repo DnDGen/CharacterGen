@@ -11,7 +11,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
     {
         protected override String tableName
         {
-            get { return String.Format(TableNameConstants.Formattable.Collection.RACEFeatData, RaceConstants.BaseRaces.GnollId); }
+            get { return String.Format(TableNameConstants.Formattable.Collection.RACEFeatData, RaceConstants.BaseRaces.Gnoll); }
         }
 
         [Test]
@@ -19,32 +19,32 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
         {
             var names = new[] 
             {
-                FeatConstants.DarkvisionId,
-                FeatConstants.NaturalArmorId
+                FeatConstants.Darkvision,
+                FeatConstants.NaturalArmor
             };
 
             AssertCollectionNames(names);
         }
 
-        [TestCase(FeatConstants.DarkvisionId,
-            FeatConstants.DarkvisionId,
+        [TestCase(FeatConstants.Darkvision,
+            FeatConstants.Darkvision,
             "",
             0,
             "",
             0,
             "",
             60)]
-        [TestCase(FeatConstants.NaturalArmorId,
-            FeatConstants.NaturalArmorId,
+        [TestCase(FeatConstants.NaturalArmor,
+            FeatConstants.NaturalArmor,
             "",
             0,
             "",
             0,
             "",
             1)]
-        public override void Data(String name, String featId, String focus, Int32 frequencyQuantity, String frequencyTimePeriod, Int32 minimumHitDiceRequirement, String sizeRequirement, Int32 strength)
+        public override void Data(String name, String feat, String focus, Int32 frequencyQuantity, String frequencyTimePeriod, Int32 minimumHitDiceRequirement, String sizeRequirement, Int32 strength)
         {
-            base.Data(name, featId, focus, frequencyQuantity, frequencyTimePeriod, minimumHitDiceRequirement, sizeRequirement, strength);
+            base.Data(name, feat, focus, frequencyQuantity, frequencyTimePeriod, minimumHitDiceRequirement, sizeRequirement, strength);
         }
     }
 }
