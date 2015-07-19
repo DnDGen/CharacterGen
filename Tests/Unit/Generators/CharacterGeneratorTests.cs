@@ -79,8 +79,7 @@ namespace NPCGen.Tests.Unit.Generators
         private List<Feat> feats;
         private FollowerQuantities followerQuantities;
         private Magic magic;
-        private Alignment setAlignment;
-        private Int32 setLevel;
+        private List<String> allowedAlignments;
 
         [SetUp]
         public void Setup()
@@ -93,11 +92,10 @@ namespace NPCGen.Tests.Unit.Generators
             mockRandomizerVerifier = new Mock<IRandomizerVerifier>();
             mockPercentileSelector = new Mock<IPercentileSelector>();
             mockLeadershipSelector = new Mock<ILeadershipSelector>();
-            mockSetLevelRandomizer = new Mock<ISetLevelRandomizer>();
-            mockSetAlignmentRandomizer = new Mock<ISetAlignmentRandomizer>();
             mockBooleanPercentileSelector = new Mock<IBooleanPercentileSelector>();
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
             followerQuantities = new FollowerQuantities();
+            allowedAlignments = new List<String>();
 
             levelAdjustments[BaseRace] = 0;
             levelAdjustments[BaseRacePlusOne] = 1;
@@ -111,8 +109,17 @@ namespace NPCGen.Tests.Unit.Generators
                 mockLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(true);
             mockRandomizerVerifier.Setup(v => v.VerifyCharacterClassCompatibility(It.IsAny<String>(), It.IsAny<CharacterClass>(),
                 mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(true);
+            mockRandomizerVerifier.Setup(v => v.VerifyAlignmentCompatibility(It.IsAny<Alignment>(), mockAnyClassNameRandomizer.Object,
+                mockSetLevelRandomizer.Object, mockAnyBaseRaceRandomizer.Object, mockAnyMetaraceRandomizer.Object)).Returns(true);
+            mockRandomizerVerifier.Setup(v => v.VerifyCharacterClassCompatibility(It.IsAny<String>(), It.IsAny<CharacterClass>(),
+                mockAnyBaseRaceRandomizer.Object, mockAnyMetaraceRandomizer.Object)).Returns(true);
 
             mockLeadershipSelector.Setup(s => s.SelectFollowerQuantitiesFor(It.IsAny<Int32>())).Returns(new FollowerQuantities());
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AlignmentGroups, It.IsAny<String>()))
+                .Returns(() => allowedAlignments.Union(new[] { alignment.ToString() }));
+
+            allowedAlignments.Add(String.Empty);
+            allowedAlignments.Add(" ");
 
             characterGenerator = new CharacterGenerator(mockAlignmentGenerator.Object, mockCharacterClassGenerator.Object,
                 mockRaceGenerator.Object, mockAdjustmentsSelector.Object, mockRandomizerVerifier.Object, mockPercentileSelector.Object,
@@ -139,16 +146,8 @@ namespace NPCGen.Tests.Unit.Generators
             mockAnyMetaraceRandomizer = new Mock<IMetaraceRandomizer>();
             mockRawStatRandomizer = new Mock<IStatsRandomizer>();
 
-            setAlignment = new Alignment();
-
             mockSetAlignmentRandomizer.SetupAllProperties();
             mockSetLevelRandomizer.SetupAllProperties();
-
-            mockSetAlignmentRandomizer.SetupSet(r => r.SetAlignment = It.IsAny<Alignment>()).Callback<Alignment>(value => setAlignment = value);
-            mockSetAlignmentRandomizer.SetupGet(r => r.SetAlignment).Returns(() => setAlignment);
-
-            mockSetLevelRandomizer.SetupSet(r => r.SetLevel = It.IsAny<Int32>()).Callback<Int32>(value => setLevel = value);
-            mockSetLevelRandomizer.SetupGet(r => r.SetLevel).Returns(() => setLevel);
         }
 
         private void SetUpGenerators()
@@ -178,18 +177,39 @@ namespace NPCGen.Tests.Unit.Generators
             race.Metarace = RaceConstants.Metaraces.None;
             ability.Feats = feats;
 
-            mockAlignmentGenerator.Setup(f => f.GenerateWith(mockAlignmentRandomizer.Object)).Returns(alignment);
-            mockAlignmentGenerator.Setup(f => f.GenerateWith(mockSetAlignmentRandomizer.Object)).Returns(() => mockSetAlignmentRandomizer.Object.SetAlignment);
+            mockCharacterClassGenerator.Setup(g => g.GenerateWith(It.IsAny<Alignment>(), mockSetLevelRandomizer.Object, mockAnyClassNameRandomizer.Object)).Returns(() => new CharacterClass { Level = 1 });
+            mockRaceGenerator.Setup(g => g.GenerateWith(It.IsAny<Alignment>(), It.IsAny<CharacterClass>(), mockAnyBaseRaceRandomizer.Object, mockAnyMetaraceRandomizer.Object)).Returns(() => new Race());
+            mockCombatGenerator.Setup(g => g.GenerateBaseAttackWith(It.IsAny<CharacterClass>(), It.IsAny<Race>())).Returns(() => new BaseAttack());
+            mockAbilitiesGenerator.Setup(g => g.GenerateWith(It.IsAny<CharacterClass>(), It.IsAny<Race>(), mockRawStatRandomizer.Object, It.IsAny<BaseAttack>())).Returns(() => new Ability());
+            mockEquipmentGenerator.Setup(g => g.GenerateWith(It.IsAny<IEnumerable<Feat>>(), It.IsAny<CharacterClass>())).Returns(() => new Equipment());
+            mockCombatGenerator.Setup(g => g.GenerateWith(It.IsAny<BaseAttack>(), It.IsAny<CharacterClass>(), It.IsAny<Race>(), It.IsAny<IEnumerable<Feat>>(), It.IsAny<Dictionary<String, Stat>>(), It.IsAny<Equipment>())).Returns(() => new Combat());
+            mockMagicGenerator.Setup(g => g.GenerateWith(It.IsAny<CharacterClass>(), It.IsAny<IEnumerable<Feat>>(), It.IsAny<Equipment>())).Returns(() => new Magic());
 
-            mockCharacterClassGenerator.Setup(f => f.GenerateWith(alignment, mockLevelRandomizer.Object,
+            mockAlignmentGenerator.Setup(g => g.GenerateWith(mockAlignmentRandomizer.Object)).Returns(alignment);
+            mockAlignmentGenerator.Setup(g => g.GenerateWith(mockSetAlignmentRandomizer.Object)).Returns(() => mockSetAlignmentRandomizer.Object.SetAlignment);
+
+            mockAlignmentGenerator.Setup(g => g.GenerateWith(mockAnyAlignmentRandomizer.Object)).Returns(() => new Alignment());
+            mockCharacterClassGenerator.Setup(g => g.GenerateWith(alignment, mockLevelRandomizer.Object,
                 mockClassNameRandomizer.Object)).Returns(characterClass);
-            mockRaceGenerator.Setup(f => f.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object,
+            mockRaceGenerator.Setup(g => g.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object,
                 mockMetaraceRandomizer.Object)).Returns(race);
             mockAbilitiesGenerator.Setup(g => g.GenerateWith(characterClass, race, mockStatsRandomizer.Object, baseAttack)).Returns(ability);
             mockEquipmentGenerator.Setup(g => g.GenerateWith(ability.Feats, characterClass)).Returns(equipment);
             mockCombatGenerator.Setup(g => g.GenerateWith(baseAttack, characterClass, race, ability.Feats, ability.Stats, equipment)).Returns(combat);
             mockCombatGenerator.Setup(g => g.GenerateBaseAttackWith(characterClass, race)).Returns(baseAttack);
             mockMagicGenerator.Setup(g => g.GenerateWith(characterClass, ability.Feats, equipment)).Returns(magic);
+        }
+
+        [Test]
+        public void CanSetValuesOnMockSetRandomizers()
+        {
+            var setAlignment = new Alignment();
+            mockSetAlignmentRandomizer.Object.SetAlignment = setAlignment;
+            mockSetLevelRandomizer.Object.SetLevel = 9266;
+
+            Assert.That(mockSetAlignmentRandomizer.Object.SetAlignment, Is.Not.Null);
+            Assert.That(mockSetAlignmentRandomizer.Object.SetAlignment, Is.EqualTo(setAlignment));
+            Assert.That(mockSetLevelRandomizer.Object.SetLevel, Is.EqualTo(9266));
         }
 
         [Test]
@@ -526,8 +546,16 @@ namespace NPCGen.Tests.Unit.Generators
 
             mockLeadershipSelector.Setup(s => s.SelectCohortLevelFor(8)).Returns(4);
 
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AlignmentGroups, alignment.ToString()))
+                .Returns(new[] { alignment.ToString() });
+
             var cohortAlignment = new Alignment();
+            cohortAlignment.Goodness = alignment.Goodness;
+            cohortAlignment.Lawfulness = alignment.Lawfulness;
+
             var cohortClass = new CharacterClass();
+            cohortClass.Level = 1;
+
             var cohortRace = new Race();
             var cohortAbility = new Ability();
             var cohortCombat = new Combat();
@@ -650,7 +678,7 @@ namespace NPCGen.Tests.Unit.Generators
             cohortAlignment.Lawfulness = "cohort lawfulness";
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AlignmentGroups, alignment.ToString()))
-                .Returns(new[] { "goodness lawfulness", "cohort goodness cohort lawfulness" });
+                .Returns(new[] { "goodness lawfulness", cohortAlignment.ToString() });
 
             mockAlignmentGenerator.SetupSequence(g => g.GenerateWith(mockSetAlignmentRandomizer.Object))
                 .Returns(incompatibleAlignment1).Returns(incompatibleAlignment3).Returns(incompatibleAlignment2).Returns(cohortAlignment);
@@ -677,9 +705,11 @@ namespace NPCGen.Tests.Unit.Generators
             alignment.Goodness = "goodness";
             alignment.Lawfulness = "lawfulness";
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AlignmentGroups, alignment.ToString()))
-                .Returns(new[] { "goodness lawfulness" });
+                .Returns(new[] { alignment.ToString() });
 
             var cohortAlignment = new Alignment();
+            cohortAlignment.Goodness = alignment.Goodness;
+            cohortAlignment.Lawfulness = alignment.Lawfulness;
             mockAlignmentGenerator.Setup(g => g.GenerateWith(mockSetAlignmentRandomizer.Object)).Returns(cohortAlignment);
 
             var character = GenerateCharacter();
@@ -704,12 +734,13 @@ namespace NPCGen.Tests.Unit.Generators
             mockLeadershipSelector.Setup(s => s.SelectCohortLevelFor(7)).Returns(4);
             mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AttractCohortOfDifferentAlignment)).Returns(true);
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AlignmentGroups, alignment.ToString()))
-                .Returns(new[] { "goodness lawfulness", "different alignment" });
-
             var cohortAlignment = new Alignment();
             cohortAlignment.Goodness = "alignment";
             cohortAlignment.Lawfulness = "different";
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AlignmentGroups, alignment.ToString()))
+                .Returns(new[] { "lawfulness goodness", cohortAlignment.ToString() });
+
             mockAlignmentGenerator.Setup(g => g.GenerateWith(mockAnyAlignmentRandomizer.Object)).Returns(cohortAlignment);
 
             var character = GenerateCharacter();
@@ -816,86 +847,55 @@ namespace NPCGen.Tests.Unit.Generators
             mockLeadershipSelector.Setup(s => s.SelectFollowerQuantitiesFor(8)).Returns(followerQuantities);
 
             var followerAlignments = new List<Alignment>();
+            var followerClasses = new List<CharacterClass>();
+            var followerRaces = new List<Race>();
+            var followerBaseAttacks = new List<BaseAttack>();
+            var followerAbilities = new List<Ability>();
+            var followerEquipments = new List<Equipment>();
+            var followerCombats = new List<Combat>();
+            var followerMagics = new List<Magic>();
+
             var followerAlignmentSequence = mockAlignmentGenerator.SetupSequence(g => g.GenerateWith(mockAnyAlignmentRandomizer.Object));
 
             while (followerAlignments.Count < 12)
             {
                 var followerAlignment = new Alignment();
-                followerAlignment.Goodness = followerAlignments.Count.ToString();
-                followerAlignment.Lawfulness = "alignment";
-
-                followerAlignments.Add(followerAlignment);
-                followerAlignmentSequence = followerAlignmentSequence.Returns(followerAlignment);
-            }
-
-            var followerClasses = new List<CharacterClass>();
-            for (var i = 0; i < followerAlignments.Count; i++)
-            {
                 var followerClass = new CharacterClass();
-                followerClass.Level = i / 2 + 1;
-
-                followerClasses.Add(followerClass);
-                mockCharacterClassGenerator.Setup(g => g.GenerateWith(followerAlignments[i], It.Is<ISetLevelRandomizer>(r => r.SetLevel == followerClass.Level), mockAnyClassNameRandomizer.Object))
-                    .Returns(followerClass);
-            }
-
-            var followerRaces = new List<Race>();
-            for (var i = 0; i < followerAlignments.Count; i++)
-            {
                 var followerRace = new Race();
-
-                followerRaces.Add(followerRace);
-                mockRaceGenerator.Setup(g => g.GenerateWith(followerAlignments[i], followerClasses[i], mockAnyBaseRaceRandomizer.Object, mockAnyMetaraceRandomizer.Object))
-                    .Returns(followerRace);
-            }
-
-            var followerBaseAttacks = new List<BaseAttack>();
-            for (var i = 0; i < followerAlignments.Count; i++)
-            {
                 var followerBaseAttack = new BaseAttack();
-
-                followerBaseAttacks.Add(followerBaseAttack);
-                mockCombatGenerator.Setup(g => g.GenerateBaseAttackWith(followerClasses[i], followerRaces[i]))
-                    .Returns(followerBaseAttack);
-            }
-
-            var followerAbilities = new List<Ability>();
-            for (var i = 0; i < followerAlignments.Count; i++)
-            {
                 var followerAbility = new Ability();
-
-                followerAbilities.Add(followerAbility);
-                mockAbilitiesGenerator.Setup(g => g.GenerateWith(followerClasses[i], followerRaces[i], mockRawStatRandomizer.Object, followerBaseAttacks[i]))
-                    .Returns(followerAbility);
-            }
-
-            var followerEquipments = new List<Equipment>();
-            for (var i = 0; i < followerAlignments.Count; i++)
-            {
                 var followerEquipment = new Equipment();
-
-                followerEquipments.Add(followerEquipment);
-                mockEquipmentGenerator.Setup(g => g.GenerateWith(followerAbilities[i].Feats, followerClasses[i]))
-                    .Returns(followerEquipment);
-            }
-
-            var followerCombats = new List<Combat>();
-            for (var i = 0; i < followerAlignments.Count; i++)
-            {
                 var followerCombat = new Combat();
-
-                followerCombats.Add(followerCombat);
-                mockCombatGenerator.Setup(g => g.GenerateWith(followerBaseAttacks[i], followerClasses[i], followerRaces[i], followerAbilities[i].Feats, followerAbilities[i].Stats, followerEquipments[i]))
-                    .Returns(followerCombat);
-            }
-
-            var followerMagics = new List<Magic>();
-            for (var i = 0; i < followerAlignments.Count; i++)
-            {
                 var followerMagic = new Magic();
 
+                followerAlignment.Goodness = followerAlignments.Count.ToString();
+                followerAlignment.Lawfulness = "alignment";
+                followerClass.Level = followerAlignments.Count / 2 + 1;
+
+                followerAlignments.Add(followerAlignment);
+                allowedAlignments.Add(followerAlignment.ToString());
+                followerClasses.Add(followerClass);
+                followerRaces.Add(followerRace);
+                followerBaseAttacks.Add(followerBaseAttack);
+                followerAbilities.Add(followerAbility);
+                followerEquipments.Add(followerEquipment);
+                followerCombats.Add(followerCombat);
                 followerMagics.Add(followerMagic);
-                mockMagicGenerator.Setup(g => g.GenerateWith(followerClasses[i], followerAbilities[i].Feats, followerEquipments[i]))
+
+                followerAlignmentSequence = followerAlignmentSequence.Returns(followerAlignment);
+                mockCharacterClassGenerator.Setup(g => g.GenerateWith(followerAlignment, It.Is<ISetLevelRandomizer>(r => r.SetLevel == followerClass.Level), mockAnyClassNameRandomizer.Object))
+                    .Returns(followerClass);
+                mockRaceGenerator.Setup(g => g.GenerateWith(followerAlignment, followerClass, mockAnyBaseRaceRandomizer.Object, mockAnyMetaraceRandomizer.Object))
+                    .Returns(followerRace);
+                mockCombatGenerator.Setup(g => g.GenerateBaseAttackWith(followerClass, followerRace))
+                    .Returns(followerBaseAttack);
+                mockAbilitiesGenerator.Setup(g => g.GenerateWith(followerClass, followerRace, mockRawStatRandomizer.Object, followerBaseAttack))
+                    .Returns(followerAbility);
+                mockEquipmentGenerator.Setup(g => g.GenerateWith(followerAbility.Feats, followerClass))
+                    .Returns(followerEquipment);
+                mockCombatGenerator.Setup(g => g.GenerateWith(followerBaseAttack, followerClass, followerRace, followerAbility.Feats, followerAbility.Stats, followerEquipment))
+                    .Returns(followerCombat);
+                mockMagicGenerator.Setup(g => g.GenerateWith(followerClass, followerAbility.Feats, followerEquipment))
                     .Returns(followerMagic);
             }
 
@@ -904,7 +904,6 @@ namespace NPCGen.Tests.Unit.Generators
                 followerTraitSequence = followerTraitSequence.Returns(i.ToString());
 
             var character = GenerateCharacter();
-            Assert.That(character.Leadership.Cohort, Is.Not.Null);
 
             for (var i = 0; i < character.Leadership.Followers.Count(); i++)
             {
@@ -1014,58 +1013,45 @@ namespace NPCGen.Tests.Unit.Generators
             mockLeadershipSelector.Setup(s => s.SelectFollowerQuantitiesFor(8)).Returns(followerQuantities);
 
             var followerAlignments = new List<Alignment>();
+            var followerClasses = new List<CharacterClass>();
+            var followerRaces = new List<Race>();
+            var followerBaseAttacks = new List<BaseAttack>();
+            var followerAbilities = new List<Ability>();
+            var followerEquipments = new List<Equipment>();
+            var followerCombats = new List<Combat>();
+            var followerMagics = new List<Magic>();
+
             var followerAlignmentSequence = mockAlignmentGenerator.SetupSequence(g => g.GenerateWith(mockAnyAlignmentRandomizer.Object));
 
             while (followerAlignments.Count < 12)
             {
                 var followerAlignment = new Alignment();
+                var followerClass = new CharacterClass();
+                var followerRace = new Race();
+                var followerBaseAttack = new BaseAttack();
+                var followerAbility = new Ability();
+
                 followerAlignment.Goodness = followerAlignments.Count.ToString();
                 followerAlignment.Lawfulness = "alignment";
-
-                followerAlignments.Add(followerAlignment);
-                followerAlignmentSequence = followerAlignmentSequence.Returns(followerAlignment);
-            }
-
-            var followerClasses = new List<CharacterClass>();
-            for (var i = 0; i < followerAlignments.Count; i++)
-            {
-                var followerClass = new CharacterClass();
-                followerClass.Level = characterClass.Level;
-
-                followerClasses.Add(followerClass);
-                mockCharacterClassGenerator.Setup(g => g.GenerateWith(followerAlignments[i], It.Is<ISetLevelRandomizer>(r => r.SetLevel == followerClass.Level), mockAnyClassNameRandomizer.Object))
-                    .Returns(followerClass);
-            }
-
-            var followerRaces = new List<Race>();
-            for (var i = 0; i < followerAlignments.Count; i++)
-            {
-                var followerRace = new Race();
-
-                followerRaces.Add(followerRace);
-                mockRaceGenerator.Setup(g => g.GenerateWith(followerAlignments[i], followerClasses[i], mockAnyBaseRaceRandomizer.Object, mockAnyMetaraceRandomizer.Object))
-                    .Returns(followerRace);
-            }
-
-            var followerBaseAttacks = new List<BaseAttack>();
-            for (var i = 0; i < followerAlignments.Count; i++)
-            {
-                var followerBaseAttack = new BaseAttack();
-
-                followerBaseAttacks.Add(followerBaseAttack);
-                mockCombatGenerator.Setup(g => g.GenerateBaseAttackWith(followerClasses[i], followerRaces[i]))
-                    .Returns(followerBaseAttack);
-            }
-
-            var followerAbilities = new List<Ability>();
-            for (var i = 0; i < followerAlignments.Count; i++)
-            {
-                var followerAbility = new Ability();
+                followerClass.Level = followerAlignments.Count / 2 + 1;
                 followerAbility.Feats = feats;
                 followerAbility.Stats = ability.Stats;
 
+                followerAlignments.Add(followerAlignment);
+                allowedAlignments.Add(followerAlignment.ToString());
+                followerClasses.Add(followerClass);
+                followerRaces.Add(followerRace);
+                followerBaseAttacks.Add(followerBaseAttack);
                 followerAbilities.Add(followerAbility);
-                mockAbilitiesGenerator.Setup(g => g.GenerateWith(followerClasses[i], followerRaces[i], mockRawStatRandomizer.Object, followerBaseAttacks[i]))
+
+                followerAlignmentSequence = followerAlignmentSequence.Returns(followerAlignment);
+                mockCharacterClassGenerator.Setup(g => g.GenerateWith(followerAlignment, It.Is<ISetLevelRandomizer>(r => r.SetLevel == followerClass.Level), mockAnyClassNameRandomizer.Object))
+                    .Returns(followerClass);
+                mockRaceGenerator.Setup(g => g.GenerateWith(followerAlignment, followerClass, mockAnyBaseRaceRandomizer.Object, mockAnyMetaraceRandomizer.Object))
+                    .Returns(followerRace);
+                mockCombatGenerator.Setup(g => g.GenerateBaseAttackWith(followerClass, followerRace))
+                    .Returns(followerBaseAttack);
+                mockAbilitiesGenerator.Setup(g => g.GenerateWith(followerClass, followerRace, mockRawStatRandomizer.Object, followerBaseAttack))
                     .Returns(followerAbility);
             }
 
@@ -1126,7 +1112,7 @@ namespace NPCGen.Tests.Unit.Generators
             }
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AlignmentGroups, alignment.ToString()))
-                .Returns(new[] { "goodness lawfulness", "follower goodness follower lawfulness" });
+                .Returns(new[] { alignment.ToString(), followerAlignments[0].ToString() });
 
             var character = GenerateCharacter();
             Assert.That(character.Leadership.Followers.Count(), Is.EqualTo(12));

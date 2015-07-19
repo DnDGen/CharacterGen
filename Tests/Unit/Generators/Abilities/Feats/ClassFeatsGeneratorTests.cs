@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using D20Dice;
 using Moq;
 using NPCGen.Common.Abilities.Feats;
 using NPCGen.Common.Abilities.Skills;
@@ -43,6 +42,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             skills = new Dictionary<String, Skill>();
 
             mockFeatsSelector.Setup(s => s.SelectClass(It.IsAny<String>())).Returns(Enumerable.Empty<CharacterClassFeatSelection>());
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom<Feat>(It.IsAny<IEnumerable<Feat>>())).Returns((IEnumerable<Feat> c) => c.First());
 
             characterClass.ClassName = "class name";
             characterClass.Level = 1;
@@ -298,11 +298,16 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             AddClassFeat(characterClass.ClassName, FeatConstants.FavoredEnemy, focusType: "focus type", strength: 2);
             AddClassFeat(characterClass.ClassName, FeatConstants.FavoredEnemy, focusType: "focus type", strength: 2);
 
-            mockCollectionsSelector.SetupSequence(s => s.SelectRandomFrom<Feat>(It.IsAny<IEnumerable<Feat>>()))
-                .Returns((IEnumerable<Feat> fs) => fs.ElementAt(1))
-                .Returns("focus 2")
-                .Returns("focus 5")
-                .Returns("focus 1");
+            var indices = new List<Int32>();
+            indices.Add(1);
+            indices.Add(1);
+            indices.Add(4);
+            indices.Add(0);
+            var i = 0;
+
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom<Feat>(It.IsAny<IEnumerable<Feat>>()))
+                .Returns((IEnumerable<Feat> fs) => fs.ElementAt(indices[i]))
+                .Callback(() => i++);
 
             mockFeatFocusGenerator.SetupSequence(g => g.GenerateAllowingFocusOfAllFrom(FeatConstants.FavoredEnemy, "focus type", skills, It.IsAny<IEnumerable<RequiredFeat>>(), It.IsAny<IEnumerable<Feat>>(), characterClass))
                 .Returns("focus 1").Returns("focus 2").Returns("focus 3").Returns("focus 4").Returns("focus 5");
@@ -324,7 +329,16 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             AddClassFeat(characterClass.ClassName, FeatConstants.FavoredEnemy, focusType: "focus type", strength: 2);
             AddClassFeat(characterClass.ClassName, FeatConstants.FavoredEnemy, focusType: "focus type", strength: 2);
 
-            mockDice.SetupSequence(d => d.Roll(1).d(5)).Returns(2).Returns(2).Returns(5).Returns(1);
+            var indices = new List<Int32>();
+            indices.Add(1);
+            indices.Add(1);
+            indices.Add(4);
+            indices.Add(0);
+            var i = 0;
+
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom<Feat>(It.IsAny<IEnumerable<Feat>>()))
+                .Returns((IEnumerable<Feat> fs) => fs.ElementAt(indices[i]))
+                .Callback(() => i++);
 
             mockFeatFocusGenerator.SetupSequence(g => g.GenerateAllowingFocusOfAllFrom(FeatConstants.FavoredEnemy, "focus type", skills, It.IsAny<IEnumerable<RequiredFeat>>(), It.IsAny<IEnumerable<Feat>>(), characterClass))
                 .Returns("focus 1").Returns("focus 2").Returns("focus 3").Returns("focus 4").Returns("focus 5");

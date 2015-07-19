@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using D20Dice;
 using NPCGen.Common.Abilities.Feats;
 using NPCGen.Common.Abilities.Skills;
 using NPCGen.Common.CharacterClasses;
@@ -16,12 +15,10 @@ namespace NPCGen.Generators.Abilities.Feats
     public class FeatFocusGenerator : IFeatFocusGenerator
     {
         private ICollectionsSelector collectionsSelector;
-        private IDice dice;
 
-        public FeatFocusGenerator(ICollectionsSelector collectionsSelector, IDice dice)
+        public FeatFocusGenerator(ICollectionsSelector collectionsSelector)
         {
             this.collectionsSelector = collectionsSelector;
-            this.dice = dice;
         }
 
         public String GenerateFrom(String feat, String focusType, Dictionary<String, Skill> skills, IEnumerable<RequiredFeat> requiredFeats, IEnumerable<Feat> otherFeats, CharacterClass characterClass)

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using D20Dice;
 using Moq;
 using NPCGen.Common.Abilities.Stats;
 using NPCGen.Common.CharacterClasses;
@@ -27,7 +26,6 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
         private List<String> classSkills;
         private List<String> crossClassSkills;
         private Mock<ISkillSelector> mockSkillSelector;
-        private Mock<IDice> mockDice;
         private Stat intelligence;
         private Dictionary<String, Int32> skillPoints;
         private Race race;
@@ -39,9 +37,8 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
             mockSkillSelector = new Mock<ISkillSelector>();
-            mockDice = new Mock<IDice>();
             mockBooleanPercentileSelector = new Mock<IBooleanPercentileSelector>();
-            skillsGenerator = new SkillsGenerator(mockSkillSelector.Object, mockDice.Object, mockCollectionsSelector.Object, mockAdjustmentsSelector.Object,
+            skillsGenerator = new SkillsGenerator(mockSkillSelector.Object, mockCollectionsSelector.Object, mockAdjustmentsSelector.Object,
                 mockBooleanPercentileSelector.Object);
             characterClass = new CharacterClass();
             stats = new Dictionary<String, Stat>();
@@ -67,10 +64,8 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             skillPoints = new Dictionary<String, Int32>();
             skillPoints[characterClass.ClassName] = 0;
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.SkillPointsForClasses)).Returns(skillPoints);
-            mockDice.Setup(d => d.Roll(1).d3()).Returns(1);
-            mockDice.Setup(d => d.Roll(1).d(It.IsAny<Int32>())).Returns(1);
-
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, "specialist field")).Returns(specialistSkills);
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<String>>())).Returns((IEnumerable<String> ss) => ss.First());
         }
 
         [TestCase(1, 4)]
@@ -319,12 +314,17 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             skillPoints[characterClass.ClassName] = 1;
             characterClass.Level = 2;
 
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
-                .Returns(false);
-            mockDice.SetupSequence(d => d.Roll(1).d(2)).Returns(2).Returns(1).Returns(1).Returns(2).Returns(2);
-
             classSkills.Add("skill 1");
             classSkills.Add("skill 2");
+
+            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
+                .Returns(false);
+            mockCollectionsSelector.SetupSequence(s => s.SelectRandomFrom(It.Is<IEnumerable<String>>(ss => ss.Count() == 2)))
+                .Returns(classSkills[1])
+                .Returns(classSkills[0])
+                .Returns(classSkills[0])
+                .Returns(classSkills[1])
+                .Returns(classSkills[1]);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
 
@@ -340,12 +340,17 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             skillPoints[characterClass.ClassName] = 1;
             characterClass.Level = 2;
 
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
-                .Returns(true);
-            mockDice.SetupSequence(d => d.Roll(1).d(2)).Returns(2).Returns(1).Returns(1).Returns(2).Returns(2);
-
             crossClassSkills.Add("skill 1");
             crossClassSkills.Add("skill 2");
+
+            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
+                .Returns(true);
+            mockCollectionsSelector.SetupSequence(s => s.SelectRandomFrom(It.Is<IEnumerable<String>>(ss => ss.Count() == 2)))
+                .Returns(crossClassSkills[1])
+                .Returns(crossClassSkills[0])
+                .Returns(crossClassSkills[0])
+                .Returns(crossClassSkills[1])
+                .Returns(crossClassSkills[1]);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
 
@@ -412,9 +417,9 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
                 .Returns(false);
 
-            var sequence = mockDice.SetupSequence(d => d.Roll(1).d(3));
+            var sequence = mockCollectionsSelector.SetupSequence(s => s.SelectRandomFrom(It.Is<IEnumerable<String>>(ss => ss.Count() == 3)));
             for (var count = 4; count > 0; count--)
-                sequence = sequence.Returns(2).Returns(3).Returns(1).Returns(1);
+                sequence = sequence.Returns("skill 2").Returns("skill 3").Returns("skill 1").Returns("skill 1");
 
             classSkills.Add("skill 1");
             classSkills.Add("skill 2");
@@ -434,9 +439,9 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
                 .Returns(true);
 
-            var sequence = mockDice.SetupSequence(d => d.Roll(1).d(3));
+            var sequence = mockCollectionsSelector.SetupSequence(s => s.SelectRandomFrom(It.Is<IEnumerable<String>>(ss => ss.Count() == 3)));
             for (var count = 4; count > 0; count--)
-                sequence = sequence.Returns(2).Returns(3).Returns(1).Returns(1);
+                sequence = sequence.Returns("skill 2").Returns("skill 3").Returns("skill 1").Returns("skill 1");
 
             crossClassSkills.Add("skill 1");
             crossClassSkills.Add("skill 2");
@@ -473,20 +478,6 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             skillPoints[characterClass.ClassName] = 2;
             characterClass.Level = 13;
 
-            var sequence = mockBooleanPercentileSelector.SetupSequence(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill));
-            for (var count = 0; count < 11; count++)
-                sequence = sequence.Returns(false);
-            for (var count = 0; count < 21; count++)
-                sequence = sequence.Returns(true);
-
-            var rollSequence = mockDice.SetupSequence(d => d.Roll(1).d(8)).Returns(1);
-            for (var roll = 0; roll < 10; roll++)
-                rollSequence = rollSequence.Returns(roll % 2 + 1);
-
-            rollSequence = mockDice.SetupSequence(d => d.Roll(1).d(2)).Returns(1);
-            for (var roll = 0; roll < 20; roll++)
-                rollSequence = rollSequence.Returns(roll % 2 + 1);
-
             classSkills.Add("skill 1");
             classSkills.Add("skill 2");
             crossClassSkills.Add("skill 3");
@@ -497,6 +488,24 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             classSkills.Add("synergy 4");
             classSkills.Add("synergy 5");
             classSkills.Add("synergy 6");
+
+            var sequence = mockBooleanPercentileSelector.SetupSequence(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill));
+            for (var count = 0; count < 11; count++)
+                sequence = sequence.Returns(false);
+            for (var count = 0; count < 21; count++)
+                sequence = sequence.Returns(true);
+
+            var randomSequence = mockCollectionsSelector.SetupSequence(s => s.SelectRandomFrom(It.Is<IEnumerable<String>>(ss => ss.Count() == 8)))
+                .Returns(classSkills[0]);
+
+            for (var index = 0; index < 10; index++)
+                randomSequence = randomSequence.Returns(classSkills[index % 2]);
+
+            randomSequence = mockCollectionsSelector.SetupSequence(s => s.SelectRandomFrom(It.Is<IEnumerable<String>>(ss => ss.Count() == 2)))
+                .Returns(crossClassSkills[0]);
+
+            for (var index = 0; index < 20; index++)
+                randomSequence = randomSequence.Returns(crossClassSkills[index % 2]);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
 
@@ -536,21 +545,20 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
 
             skillPoints[characterClass.ClassName] = 2;
             characterClass.Level = 2;
-
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
-                .Returns(false);
-
-            var sequence = mockDice.SetupSequence(d => d.Roll(1).d(4));
-            for (var roll = 0; roll < 5; roll++)
-                sequence = sequence.Returns(2).Returns(1);
-
             classSkills.Add("skill 1");
             classSkills.Add("skill 2");
             classSkills.Add("synergy 1");
             classSkills.Add("synergy 2");
 
-            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
+            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
+                .Returns(false);
 
+            var randomSequence = mockCollectionsSelector.SetupSequence(s => s.SelectRandomFrom(It.Is<IEnumerable<String>>(ss => ss.Count() == 4)));
+
+            for (var index = 0; index < 5; index++)
+                randomSequence = randomSequence.Returns(classSkills[1]).Returns(classSkills[0]);
+
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
             Assert.That(skills["skill 1"].Ranks, Is.EqualTo(5));
             Assert.That(skills["skill 2"].Ranks, Is.EqualTo(5));
             Assert.That(skills["synergy 1"].Ranks, Is.EqualTo(0));
@@ -574,16 +582,17 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             skillPoints[characterClass.ClassName] = 2;
             characterClass.Level = 2;
 
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
-                .Returns(false);
-
-            var sequence = mockDice.SetupSequence(d => d.Roll(1).d(3));
-            for (var roll = 0; roll < 10; roll++)
-                sequence = sequence.Returns(roll % 2 + 1);
-
             classSkills.Add("skill 1");
             classSkills.Add("skill 2");
             classSkills.Add("synergy 2");
+
+            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
+                .Returns(false);
+
+            var randomSequence = mockCollectionsSelector.SetupSequence(s => s.SelectRandomFrom(It.Is<IEnumerable<String>>(ss => ss.Count() == 3)));
+
+            for (var index = 0; index < 10; index++)
+                randomSequence = randomSequence.Returns(classSkills[index % 2]);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
 
@@ -609,28 +618,30 @@ namespace NPCGen.Tests.Unit.Generators.Abilities
             skillPoints[characterClass.ClassName] = 3;
             characterClass.Level = 6;
 
-            var sequence = mockBooleanPercentileSelector.SetupSequence(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill));
-            for (var count = 0; count < 10; count++)
-                sequence = sequence.Returns(false);
-            for (var count = 0; count < 17; count++)
-                sequence = sequence.Returns(true);
-
-            var rollSequence = mockDice.SetupSequence(d => d.Roll(1).d(4));
-            for (var roll = 0; roll < 4; roll++)
-                rollSequence = rollSequence.Returns(1);
-            for (var roll = 0; roll < 6; roll++)
-                rollSequence = rollSequence.Returns(2);
-
-            rollSequence = mockDice.SetupSequence(d => d.Roll(1).d(2)).Returns(1);
-            for (var roll = 0; roll < 16; roll++)
-                rollSequence = rollSequence.Returns(roll % 2 + 1);
-
             classSkills.Add("skill 1");
             crossClassSkills.Add("skill 2");
             crossClassSkills.Add("skill 3");
             classSkills.Add("synergy 1");
             classSkills.Add("synergy 2");
             classSkills.Add("synergy 3");
+
+            var sequence = mockBooleanPercentileSelector.SetupSequence(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill));
+            for (var count = 0; count < 10; count++)
+                sequence = sequence.Returns(false);
+            for (var count = 0; count < 17; count++)
+                sequence = sequence.Returns(true);
+
+            var randomSequence = mockCollectionsSelector.SetupSequence(s => s.SelectRandomFrom(It.Is<IEnumerable<String>>(ss => ss.Count() == 4)));
+
+            for (var index = 0; index < 4; index++)
+                randomSequence = randomSequence.Returns(classSkills[0]);
+            for (var index = 0; index < 6; index++)
+                randomSequence = randomSequence.Returns(classSkills[1]);
+
+            randomSequence = mockCollectionsSelector.SetupSequence(s => s.SelectRandomFrom(It.Is<IEnumerable<String>>(ss => ss.Count() == 2)));
+
+            for (var index = 0; index < 17; index++)
+                randomSequence = randomSequence.Returns(crossClassSkills[index % 2]);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
 

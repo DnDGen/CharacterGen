@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using D20Dice;
 using Moq;
 using NPCGen.Common.Abilities.Feats;
 using NPCGen.Common.Abilities.Skills;
@@ -24,7 +23,6 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
     {
         private Mock<ICollectionsSelector> mockCollectionsSelector;
         private Mock<IFeatsSelector> mockFeatsSelector;
-        private Mock<IDice> mockDice;
         private Mock<IFeatFocusGenerator> mockFeatFocusGenerator;
         private IAdditionalFeatsGenerator additionalFeatsGenerator;
         private CharacterClass characterClass;
@@ -42,9 +40,8 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
         {
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
             mockFeatsSelector = new Mock<IFeatsSelector>();
-            mockDice = new Mock<IDice>();
             mockFeatFocusGenerator = new Mock<IFeatFocusGenerator>();
-            additionalFeatsGenerator = new AdditionalFeatsGenerator(mockCollectionsSelector.Object, mockFeatsSelector.Object, mockDice.Object, mockFeatFocusGenerator.Object);
+            additionalFeatsGenerator = new AdditionalFeatsGenerator(mockCollectionsSelector.Object, mockFeatsSelector.Object, mockFeatFocusGenerator.Object);
             characterClass = new CharacterClass();
             race = new Race();
             stats = new Dictionary<String, Stat>();
@@ -57,9 +54,9 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             wizardBonusFeats = new List<String>();
 
             mockFeatsSelector.Setup(s => s.SelectAdditional()).Returns(additionalFeatSelections);
-            mockDice.Setup(d => d.Roll(1).d(It.IsAny<Int32>())).Returns(1);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.FighterBonusFeats)).Returns(fighterBonusFeats);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.WizardBonusFeats)).Returns(wizardBonusFeats);
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom<AdditionalFeatSelection>(It.IsAny<IEnumerable<AdditionalFeatSelection>>())).Returns((IEnumerable<AdditionalFeatSelection> fs) => fs.First());
         }
 
         [TestCase(1, 1)]
@@ -145,8 +142,10 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             characterClass.Level = 3;
             AddFeatSelections(3);
 
-            mockDice.Setup(d => d.Roll(1).d(3)).Returns(3);
-            mockDice.Setup(d => d.Roll(1).d(2)).Returns(1);
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom<AdditionalFeatSelection>(It.Is<IEnumerable<AdditionalFeatSelection>>(fs => fs.Count() == 3)))
+                .Returns((IEnumerable<AdditionalFeatSelection> fs) => fs.Last());
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom<AdditionalFeatSelection>(It.Is<IEnumerable<AdditionalFeatSelection>>(fs => fs.Count() == 2)))
+                .Returns((IEnumerable<AdditionalFeatSelection> fs) => fs.First());
 
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             var featIds = feats.Select(f => f.Name);
@@ -163,8 +162,10 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             characterClass.Level = 1;
             AddFeatSelections(3);
 
-            mockDice.Setup(d => d.Roll(1).d(3)).Returns(3);
-            mockDice.Setup(d => d.Roll(1).d(2)).Returns(1);
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom<AdditionalFeatSelection>(It.Is<IEnumerable<AdditionalFeatSelection>>(fs => fs.Count() == 3)))
+                .Returns((IEnumerable<AdditionalFeatSelection> fs) => fs.Last());
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom<AdditionalFeatSelection>(It.Is<IEnumerable<AdditionalFeatSelection>>(fs => fs.Count() == 2)))
+                .Returns((IEnumerable<AdditionalFeatSelection> fs) => fs.First());
 
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             var featIds = feats.Select(f => f.Name);
@@ -180,7 +181,6 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             characterClass.Level = 1;
             AddFeatSelections(2);
             additionalFeatSelections[0].RequiredBaseAttack = 9266;
-            mockDice.Setup(d => d.Roll(1).d(It.IsAny<Int32>())).Returns(1);
 
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             var featIds = feats.Select(f => f.Name);
@@ -288,9 +288,12 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             foreach (var selection in additionalFeatSelections)
                 fighterBonusFeats.Add(selection.Feat);
 
-            mockDice.Setup(d => d.Roll(1).d(4)).Returns(4);
-            mockDice.Setup(d => d.Roll(1).d(3)).Returns(1);
-            mockDice.Setup(d => d.Roll(1).d(2)).Returns(2);
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom<AdditionalFeatSelection>(It.Is<IEnumerable<AdditionalFeatSelection>>(fs => fs.Count() == 4)))
+                .Returns((IEnumerable<AdditionalFeatSelection> fs) => fs.Last());
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom<AdditionalFeatSelection>(It.Is<IEnumerable<AdditionalFeatSelection>>(fs => fs.Count() == 3)))
+                .Returns((IEnumerable<AdditionalFeatSelection> fs) => fs.First());
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom<AdditionalFeatSelection>(It.Is<IEnumerable<AdditionalFeatSelection>>(fs => fs.Count() == 2)))
+                .Returns((IEnumerable<AdditionalFeatSelection> fs) => fs.Last());
 
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             var featIds = feats.Select(f => f.Name);
@@ -328,7 +331,8 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             fighterBonusFeats.Add(additionalFeatSelections[1].Feat);
             additionalFeatSelections[1].RequiredFeats = new[] { new RequiredFeat { Feat = "other feat" } };
 
-            mockDice.Setup(d => d.Roll(1).d(2)).Returns(2);
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom<AdditionalFeatSelection>(It.Is<IEnumerable<AdditionalFeatSelection>>(fs => fs.Count() == 2)))
+                .Returns((IEnumerable<AdditionalFeatSelection> fs) => fs.Last());
 
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             var featIds = feats.Select(f => f.Name);
@@ -440,12 +444,10 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             foreach (var selection in additionalFeatSelections)
                 wizardBonusFeats.Add(selection.Feat);
 
-            mockDice.Setup(d => d.Roll(1).d(7)).Returns(7);
-            mockDice.Setup(d => d.Roll(1).d(6)).Returns(6);
-            mockDice.Setup(d => d.Roll(1).d(5)).Returns(5);
-            mockDice.Setup(d => d.Roll(1).d(4)).Returns(4);
-            mockDice.Setup(d => d.Roll(1).d(3)).Returns(1);
-            mockDice.Setup(d => d.Roll(1).d(2)).Returns(2);
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom<AdditionalFeatSelection>(It.IsAny<IEnumerable<AdditionalFeatSelection>>()))
+                .Returns((IEnumerable<AdditionalFeatSelection> fs) => fs.Last());
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom<AdditionalFeatSelection>(It.Is<IEnumerable<AdditionalFeatSelection>>(fs => fs.Count() == 3)))
+                .Returns((IEnumerable<AdditionalFeatSelection> fs) => fs.First());
 
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             var featIds = feats.Select(f => f.Name);
@@ -465,9 +467,6 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             characterClass.Level = 3;
             AddFeatSelections(3);
             additionalFeatSelections[1].RequiredFeats = new[] { new RequiredFeat { Feat = additionalFeatSelections[0].Feat } };
-
-            mockDice.Setup(d => d.Roll(1).d(3)).Returns(1);
-            mockDice.Setup(d => d.Roll(1).d(2)).Returns(1);
 
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             var featIds = feats.Select(f => f.Name);
@@ -511,14 +510,18 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
         {
             characterClass.Level = 3;
             AddFeatSelections(2);
-            additionalFeatSelections[0].FocusType = "focus type";
+            additionalFeatSelections[0].FocusType = "focus type 1";
+            additionalFeatSelections[1].FocusType = "focus type 2";
 
-            mockFeatFocusGenerator.Setup(g => g.GenerateFrom("feat1", "focus type", skills, additionalFeatSelections[0].RequiredFeats, It.IsAny<IEnumerable<Feat>>(), characterClass))
-                .Returns("focus");
-            mockFeatFocusGenerator.Setup(g => g.GenerateFrom("feat2", String.Empty, skills, additionalFeatSelections[1].RequiredFeats, It.IsAny<IEnumerable<Feat>>(), characterClass))
-                .Returns(String.Empty);
+            mockFeatFocusGenerator.Setup(g => g.GenerateFrom("feat1", "focus type 1", skills, additionalFeatSelections[0].RequiredFeats, It.IsAny<IEnumerable<Feat>>(), characterClass))
+                .Returns("focus 1");
+            mockFeatFocusGenerator.Setup(g => g.GenerateFrom("feat2", "focus type 2", skills, additionalFeatSelections[1].RequiredFeats, It.IsAny<IEnumerable<Feat>>(), characterClass))
+                .Returns("focus 2");
 
-            mockDice.SetupSequence(d => d.Roll(1).d(2)).Returns(1).Returns(2);
+            var index = 0;
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom<AdditionalFeatSelection>(It.IsAny<IEnumerable<AdditionalFeatSelection>>()))
+                .Returns(() => additionalFeatSelections[index])
+                .Callback(() => index++);
 
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             Assert.That(feats.Count(), Is.EqualTo(2));
@@ -527,9 +530,9 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             var last = feats.Last();
 
             Assert.That(first.Name, Is.EqualTo(additionalFeatSelections[0].Feat));
-            Assert.That(first.Focus, Is.EqualTo("focus"));
+            Assert.That(first.Focus, Is.EqualTo("focus 1"));
             Assert.That(last.Name, Is.EqualTo(additionalFeatSelections[1].Feat));
-            Assert.That(last.Focus, Is.Empty);
+            Assert.That(last.Focus, Is.EqualTo("focus 2"));
         }
 
         [Test]

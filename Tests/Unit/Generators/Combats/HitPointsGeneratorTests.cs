@@ -75,9 +75,9 @@ namespace NPCGen.Tests.Unit.Generators.Combats
         [Test]
         public void CannotGainFewerThan1HitPointPerLevel()
         {
-            characterClass.Level = 90210;
+            characterClass.Level = 600;
             var hitPoints = hitPointsGenerator.GenerateWith(characterClass, Int32.MinValue, race);
-            Assert.That(hitPoints, Is.EqualTo(90210));
+            Assert.That(hitPoints, Is.EqualTo(600));
         }
 
         [Test]

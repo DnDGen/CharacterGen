@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using D20Dice;
 using NPCGen.Common.Abilities.Feats;
 using NPCGen.Common.Abilities.Skills;
 using NPCGen.Common.Abilities.Stats;
@@ -20,14 +19,12 @@ namespace NPCGen.Generators.Abilities.Feats
     {
         private ICollectionsSelector collectionsSelector;
         private IFeatsSelector featsSelector;
-        private IDice dice;
         private IFeatFocusGenerator featFocusGenerator;
 
-        public AdditionalFeatsGenerator(ICollectionsSelector collectionsSelector, IFeatsSelector featsSelector, IDice dice, IFeatFocusGenerator featFocusGenerator)
+        public AdditionalFeatsGenerator(ICollectionsSelector collectionsSelector, IFeatsSelector featsSelector, IFeatFocusGenerator featFocusGenerator)
         {
             this.collectionsSelector = collectionsSelector;
             this.featsSelector = featsSelector;
-            this.dice = dice;
             this.featFocusGenerator = featFocusGenerator;
         }
 

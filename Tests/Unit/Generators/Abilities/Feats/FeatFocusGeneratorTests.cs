@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using D20Dice;
+using System.Linq;
 using Moq;
 using NPCGen.Common.Abilities.Feats;
 using NPCGen.Common.Abilities.Skills;
@@ -19,7 +19,6 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
     public class FeatFocusGeneratorTests
     {
         private Mock<ICollectionsSelector> mockCollectionsSelector;
-        private Mock<IDice> mockDice;
         private IFeatFocusGenerator featFocusGenerator;
         private List<RequiredFeat> requiredFeats;
         private List<Feat> otherFeats;
@@ -31,8 +30,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
         public void Setup()
         {
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
-            mockDice = new Mock<IDice>();
-            featFocusGenerator = new FeatFocusGenerator(mockCollectionsSelector.Object, mockDice.Object);
+            featFocusGenerator = new FeatFocusGenerator(mockCollectionsSelector.Object);
             requiredFeats = new List<RequiredFeat>();
             otherFeats = new List<Feat>();
             characterClass = new CharacterClass();
@@ -40,8 +38,8 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             focusTypes = new Dictionary<String, IEnumerable<String>>();
 
             characterClass.ClassName = "class name";
-            mockDice.Setup(d => d.Roll(1).d(It.IsAny<Int32>())).Returns(1);
             mockCollectionsSelector.Setup(s => s.SelectAllFrom(TableNameConstants.Set.Collection.FeatFoci)).Returns(focusTypes);
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<String>>())).Returns((IEnumerable<String> c) => c.First());
         }
 
         [Test]
@@ -67,7 +65,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
         public void FocusRandomlyGenerated()
         {
             focusTypes["focus type"] = new[] { "school 1", "school 2" };
-            mockDice.Setup(d => d.Roll(1).d(2)).Returns(2);
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<String>>())).Returns((IEnumerable<String> c) => c.ElementAt(1));
 
             var focus = featFocusGenerator.GenerateFrom("featToFill", "focus type", skills, requiredFeats, otherFeats, characterClass);
             Assert.That(focus, Is.EqualTo("school 2"));
@@ -151,8 +149,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             otherFeats[1].Focus = "other focus";
 
             focusTypes["focus type"] = new[] { "other focus", "focus" };
-
-            mockDice.Setup(d => d.Roll(1).d(2)).Returns(2);
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<String>>())).Returns((IEnumerable<String> c) => c.ElementAt(1));
 
             var focus = featFocusGenerator.GenerateFrom("featToFill", "focus type", skills, requiredFeats, otherFeats, characterClass);
             Assert.That(focus, Is.EqualTo("other focus"));
@@ -162,8 +159,8 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
         public void IfFocusTypeIsSchoolOfMagic_CannotPickProhibitedFieldAsFocus()
         {
             focusTypes[GroupConstants.SchoolsOfMagic] = new[] { "school 1", "school 2", "school 3", "school 4" };
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<String>>())).Returns((IEnumerable<String> c) => c.ElementAt(1));
 
-            mockDice.Setup(d => d.Roll(1).d(2)).Returns(2);
             characterClass.ProhibitedFields = new[] { "school 1", "school 3" };
 
             var focus = featFocusGenerator.GenerateFrom("featToFill", GroupConstants.SchoolsOfMagic, skills, requiredFeats, otherFeats, characterClass);
@@ -200,7 +197,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             focusTypes["focus type"] = new[] { "school 2", "school 3", "weird weapon" };
             focusTypes[FeatConstants.MartialWeaponProficiency] = new[] { "school 1", "school 2" };
 
-            mockDice.Setup(d => d.Roll(1).d(2)).Returns(2);
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<String>>())).Returns((IEnumerable<String> c) => c.ElementAt(1));
 
             var focus = featFocusGenerator.GenerateFrom("featToFill", "focus type", skills, requiredFeats, otherFeats, characterClass);
             Assert.That(focus, Is.EqualTo("weird weapon"));
@@ -250,7 +247,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
 
             focusTypes[FeatConstants.MartialWeaponProficiency] = new[] { "school 2", "school 3" };
 
-            mockDice.Setup(d => d.Roll(1).d(3)).Returns(3);
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<String>>())).Returns((IEnumerable<String> c) => c.ElementAt(2));
 
             var focus = featFocusGenerator.GenerateFrom(FeatConstants.MartialWeaponProficiency, ProficiencyConstants.All, skills, requiredFeats, otherFeats, characterClass);
             Assert.That(focus, Is.EqualTo("weird weapon"));
@@ -280,7 +277,7 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
         {
             focusTypes["focus type"] = new[] { "school 1", "school 2" };
 
-            mockDice.Setup(d => d.Roll(1).d(2)).Returns(2);
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<String>>())).Returns((IEnumerable<String> c) => c.ElementAt(1));
 
             var focus = featFocusGenerator.GenerateFrom("featToFill", "focus type", skills);
             Assert.That(focus, Is.EqualTo("school 2"));
@@ -348,8 +345,6 @@ namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
             otherFeats[0].Focus = "weird weapon";
 
             focusTypes[FeatConstants.MartialWeaponProficiency] = new[] { "school 2" };
-
-            mockDice.Setup(d => d.Roll(1).d(2)).Returns(2);
 
             var focus = featFocusGenerator.GenerateFrom(FeatConstants.MartialWeaponProficiency, ProficiencyConstants.All, skills, requiredFeats, otherFeats, characterClass);
             Assert.That(focus, Is.EqualTo("school 2"));

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using D20Dice;
 using Moq;
 using NPCGen.Common.Alignments;
 using NPCGen.Generators;
@@ -23,7 +22,6 @@ namespace NPCGen.Tests.Unit.Generators
         private Mock<IBooleanPercentileSelector> mockBooleanPercentileSelector;
         private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
         private Mock<ICollectionsSelector> mockCollectionsSelector;
-        private Mock<IDice> mockDice;
         private ICharacterClassGenerator characterClassGenerator;
         private Alignment alignment;
         private Dictionary<String, Int32> specialistFieldQuantities;
@@ -37,9 +35,7 @@ namespace NPCGen.Tests.Unit.Generators
             mockBooleanPercentileSelector = new Mock<IBooleanPercentileSelector>();
             mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
-            mockDice = new Mock<IDice>();
-            characterClassGenerator = new CharacterClassGenerator(mockAdjustmentsSelector.Object, mockCollectionsSelector.Object, mockBooleanPercentileSelector.Object,
-                mockDice.Object);
+            characterClassGenerator = new CharacterClassGenerator(mockAdjustmentsSelector.Object, mockCollectionsSelector.Object, mockBooleanPercentileSelector.Object);
 
             alignment = new Alignment();
             mockLevelRandomizer = new Mock<ILevelRandomizer>();
@@ -54,6 +50,7 @@ namespace NPCGen.Tests.Unit.Generators
             mockClassNameRandomizer.Setup(r => r.Randomize(alignment)).Returns(ClassName);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SpecialistFields, ClassName)).Returns(specialistFields);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ProhibitedFields, ClassName)).Returns(prohibitedFields);
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<String>>())).Returns((IEnumerable<String> c) => c.First());
         }
 
         [Test]
@@ -103,7 +100,8 @@ namespace NPCGen.Tests.Unit.Generators
             specialistFieldQuantities[ClassName] = 1;
             specialistFields.Add("field 1");
             specialistFields.Add("field 2");
-            mockDice.Setup(d => d.Roll(1).d(2)).Returns(2);
+
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.Is<IEnumerable<String>>(fs => fs.Contains("field 2")))).Returns("field 2");
 
             prohibitedFieldQuantities["field 1"] = 0;
             prohibitedFieldQuantities["field 2"] = 0;
@@ -122,7 +120,9 @@ namespace NPCGen.Tests.Unit.Generators
             specialistFields.Add("field 1");
             specialistFields.Add("field 2");
             specialistFields.Add("field 3");
-            mockDice.SetupSequence(d => d.Roll(1).d(3)).Returns(3).Returns(1);
+
+            mockCollectionsSelector.SetupSequence(s => s.SelectRandomFrom(It.Is<IEnumerable<String>>(fs => fs.Contains("field 3") && fs.Contains("field 1"))))
+                .Returns("field 3").Returns("field 1");
 
             prohibitedFieldQuantities["field 1"] = 0;
             prohibitedFieldQuantities["field 2"] = 0;
@@ -151,7 +151,7 @@ namespace NPCGen.Tests.Unit.Generators
 
             prohibitedFieldQuantities["alignment field"] = 0;
 
-            mockDice.Setup(d => d.Roll(1).d(1)).Returns(1);
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.Is<IEnumerable<String>>(fs => fs.Contains("alignment field")))).Returns("alignment field");
 
             var characterClass = characterClassGenerator.GenerateWith(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
             Assert.That(characterClass.SpecialistFields, Contains.Item("alignment field"));
@@ -162,7 +162,7 @@ namespace NPCGen.Tests.Unit.Generators
         public void DoNotGetProhibitedFieldsIfThereAreNoSpecialistFields()
         {
             prohibitedFields.Add("field 1");
-            mockDice.Setup(d => d.Roll(1).d(2)).Returns(1);
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.Is<IEnumerable<String>>(fs => fs.Contains("field 1")))).Returns("field 1");
 
             var characterClass = characterClassGenerator.GenerateWith(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
             Assert.That(characterClass.SpecialistFields, Is.Empty);
@@ -176,8 +176,7 @@ namespace NPCGen.Tests.Unit.Generators
             mockBooleanPercentileSelector.Setup(s => s.SelectFrom(tableName)).Returns(true);
             specialistFieldQuantities[ClassName] = 1;
             specialistFields.Add("field 1");
-            mockDice.Setup(d => d.Roll(1).d(1)).Returns(1);
-
+            
             prohibitedFieldQuantities["field 1"] = 1;
 
             var characterClass = characterClassGenerator.GenerateWith(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
@@ -191,7 +190,6 @@ namespace NPCGen.Tests.Unit.Generators
             mockBooleanPercentileSelector.Setup(s => s.SelectFrom(tableName)).Returns(true);
             specialistFieldQuantities[ClassName] = 1;
             specialistFields.Add("field 1");
-            mockDice.Setup(d => d.Roll(1).d(1)).Returns(1);
 
             prohibitedFieldQuantities["field 1"] = 1;
             prohibitedFields.Add("field 1");
@@ -209,12 +207,12 @@ namespace NPCGen.Tests.Unit.Generators
             mockBooleanPercentileSelector.Setup(s => s.SelectFrom(tableName)).Returns(true);
             specialistFieldQuantities[ClassName] = 1;
             specialistFields.Add("field 1");
-            mockDice.Setup(d => d.Roll(1).d(1)).Returns(1);
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.Is<IEnumerable<String>>(fs => fs.Contains("field 1")))).Returns("field 1");
 
             prohibitedFieldQuantities["field 1"] = 1;
             prohibitedFields.Add("field 1");
             prohibitedFields.Add("field 2");
-            mockDice.Setup(d => d.Roll(1).d(2)).Returns(2);
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.Is<IEnumerable<String>>(fs => fs.Contains("field 2")))).Returns("field 2");
 
             var characterClass = characterClassGenerator.GenerateWith(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
             Assert.That(characterClass.ProhibitedFields, Contains.Item("field 2"));
@@ -228,14 +226,15 @@ namespace NPCGen.Tests.Unit.Generators
             mockBooleanPercentileSelector.Setup(s => s.SelectFrom(tableName)).Returns(true);
             specialistFieldQuantities[ClassName] = 1;
             specialistFields.Add("field 2");
-            mockDice.Setup(d => d.Roll(1).d(1)).Returns(1);
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.Is<IEnumerable<String>>(fs => fs.Contains("field 2")))).Returns("field 2");
 
             prohibitedFieldQuantities["field 2"] = 2;
             prohibitedFields.Add("field 1");
             prohibitedFields.Add("field 2");
             prohibitedFields.Add("field 3");
             prohibitedFields.Add("field 4");
-            mockDice.SetupSequence(d => d.Roll(1).d(3)).Returns(3).Returns(1);
+            mockCollectionsSelector.SetupSequence(s => s.SelectRandomFrom(It.Is<IEnumerable<String>>(fs => fs.Contains("field 1") && fs.Contains("field 4"))))
+                .Returns("field 4").Returns("field 1");
 
             var characterClass = characterClassGenerator.GenerateWith(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
             Assert.That(characterClass.ProhibitedFields, Contains.Item("field 4"));
@@ -251,7 +250,8 @@ namespace NPCGen.Tests.Unit.Generators
             specialistFieldQuantities[ClassName] = 2;
             specialistFields.Add("field 1");
             specialistFields.Add("field 2");
-            mockDice.SetupSequence(d => d.Roll(1).d(2)).Returns(1).Returns(2);
+            mockCollectionsSelector.SetupSequence(s => s.SelectRandomFrom(It.Is<IEnumerable<String>>(fs => fs.Contains("field 1") && fs.Contains("field 2"))))
+                .Returns("field 1").Returns("field 2");
 
             prohibitedFieldQuantities["field 1"] = 1;
             prohibitedFieldQuantities["field 2"] = 1;
@@ -260,7 +260,8 @@ namespace NPCGen.Tests.Unit.Generators
             prohibitedFields.Add("field 3");
             prohibitedFields.Add("field 4");
             prohibitedFields.Add("field 5");
-            mockDice.SetupSequence(d => d.Roll(1).d(3)).Returns(3).Returns(1);
+            mockCollectionsSelector.SetupSequence(s => s.SelectRandomFrom(It.Is<IEnumerable<String>>(fs => fs.Contains("field 3") && fs.Contains("field 5"))))
+                .Returns("field 5").Returns("field 3");
 
             var characterClass = characterClassGenerator.GenerateWith(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
             Assert.That(characterClass.ProhibitedFields, Contains.Item("field 5"));

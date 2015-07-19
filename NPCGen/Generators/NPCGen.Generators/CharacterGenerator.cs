@@ -137,7 +137,7 @@ namespace NPCGen.Generators
             var verified = randomizerVerifier.VerifyCompatibility(alignmentRandomizer, classNameRandomizer, levelRandomizer,
                 baseRaceRandomizer, metaraceRandomizer);
 
-            if (!verified)
+            if (verified == false)
                 throw new IncompatibleRandomizersException();
         }
 
@@ -147,8 +147,7 @@ namespace NPCGen.Generators
             Alignment alignment;
 
             do alignment = alignmentGenerator.GenerateWith(alignmentRandomizer);
-            while (!randomizerVerifier.VerifyAlignmentCompatibility(alignment, classNameRandomizer, levelRandomizer, baseRaceRandomizer,
-                metaraceRandomizer));
+            while (randomizerVerifier.VerifyAlignmentCompatibility(alignment, classNameRandomizer, levelRandomizer, baseRaceRandomizer, metaraceRandomizer) == false);
 
             return alignment;
         }
