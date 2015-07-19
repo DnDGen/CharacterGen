@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <percentile>
-  <object><lower>1</lower><content>HighElf</content><upper>10</upper></object>
-  <object><lower>11</lower><content>WoodElf</content><upper>11</upper></object>
-  <object><lower>12</lower><content>HalfElf</content><upper>26</upper></object>
-  <object><lower>27</lower><content>LightfootHalfling</content><upper>27</upper></object>
-  <object><lower>28</lower><content>TallfellowHalfling</content><upper>28</upper></object>
+  <object><lower>1</lower><content>High Elf</content><upper>10</upper></object>
+  <object><lower>11</lower><content>Wood Elf</content><upper>11</upper></object>
+  <object><lower>12</lower><content>Half-Elf</content><upper>26</upper></object>
+  <object><lower>27</lower><content>Lightfoot Halfling</content><upper>27</upper></object>
+  <object><lower>28</lower><content>Tallfellow Halfling</content><upper>28</upper></object>
   <object>
     <lower>29</lower>
     <content>Human</content>
@@ -38,12 +38,12 @@
     </object>
     <object>
         <lower>94</lower>
-        <content>MindFlayer</content>
+        <content>Mind Flayer</content>
         <upper>94</upper>
     </object>
     <object>
         <lower>95</lower>
-        <content>OgreMage</content>
+        <content>Ogre Mage</content>
         <upper>96</upper>
     </object>
     <object>

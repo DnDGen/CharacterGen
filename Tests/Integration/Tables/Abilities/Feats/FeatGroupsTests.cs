@@ -24,7 +24,6 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
         {
             var names = new[] 
             {
-                String.Empty,
                 GroupConstants.Additional,
                 GroupConstants.HasClassRequirements,
                 GroupConstants.HasSkillRequirements,

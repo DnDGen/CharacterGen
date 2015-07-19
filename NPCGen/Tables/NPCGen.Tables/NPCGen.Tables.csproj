@@ -329,7 +329,7 @@
     <EmbeddedResource Include="Combats\RacialBaseAttackAdjustments.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Abilities\Feats\Data\Racial\HighElfFeatData.xml" />
+    <EmbeddedResource Include="Abilities\Feats\Data\Racial\High ElfFeatData.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Races\BaseRaces\LandSpeeds.xml" />
@@ -402,7 +402,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Abilities\Feats\Data\Racial\HalfElfFeatData.xml" />
+    <EmbeddedResource Include="Abilities\Feats\Data\Racial\Half-ElfFeatData.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Abilities\Stats\IncreaseFirstPriorityStat.xml" />
@@ -411,7 +411,7 @@
     <EmbeddedResource Include="Abilities\Feats\Data\CharacterClasses\ClericFeatData.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Abilities\Feats\Data\Racial\LightfootHalflingFeatData.xml" />
+    <EmbeddedResource Include="Abilities\Feats\Data\Racial\Lightfoot HalflingFeatData.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Abilities\Feats\Data\CharacterClasses\WizardFeatData.xml" />
@@ -422,16 +422,16 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Abilities\Feats\Data\Racial\HillDwarfFeatData.xml" />
+    <EmbeddedResource Include="Abilities\Feats\Data\Racial\Hill DwarfFeatData.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Abilities\Feats\Data\Racial\WoodElfFeatData.xml" />
+    <EmbeddedResource Include="Abilities\Feats\Data\Racial\Wood ElfFeatData.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Abilities\Feats\Data\Racial\HobgoblinFeatData.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Abilities\Feats\Data\Racial\HalfOrcFeatData.xml" />
+    <EmbeddedResource Include="Abilities\Feats\Data\Racial\Half-OrcFeatData.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Abilities\Feats\Data\CharacterClasses\BardFeatData.xml" />
@@ -451,7 +451,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Abilities\Feats\Data\Racial\DeepHalflingFeatData.xml" />
+    <EmbeddedResource Include="Abilities\Feats\Data\Racial\Deep HalflingFeatData.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Abilities\Feats\RequiredFeats.xml">
@@ -473,19 +473,19 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Abilities\Feats\Requirements\Stats\CombatExpertiseStatRequirements.xml" />
+    <EmbeddedResource Include="Abilities\Feats\Requirements\Stats\Combat ExpertiseStatRequirements.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Abilities\Feats\Requirements\Classes\CripplingStrikeClassRequirements.xml" />
+    <EmbeddedResource Include="Abilities\Feats\Requirements\Classes\Crippling StrikeClassRequirements.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Abilities\Feats\Requirements\Classes\DefensiveRollClassRequirements.xml" />
+    <EmbeddedResource Include="Abilities\Feats\Requirements\Classes\Defensive RollClassRequirements.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Abilities\Feats\Requirements\Classes\ImprovedEvasionClassRequirements.xml" />
+    <EmbeddedResource Include="Abilities\Feats\Requirements\Classes\Improved EvasionClassRequirements.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Abilities\Feats\Requirements\Stats\DeflectArrowsStatRequirements.xml" />
+    <EmbeddedResource Include="Abilities\Feats\Requirements\Stats\Deflect ArrowsStatRequirements.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Abilities\Feats\Requirements\Stats\DodgeStatRequirements.xml" />

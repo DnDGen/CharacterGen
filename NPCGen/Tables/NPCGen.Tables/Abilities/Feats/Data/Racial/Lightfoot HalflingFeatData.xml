@@ -2,8 +2,8 @@
 
 <items>
     <object>
-        <name>SkillBonusJump</name>
-        <item>SkillBonus</item>
+        <name>Skill BonusJump</name>
+        <item>Skill Bonus</item>
         <item></item>
         <item>0</item>
         <item>2</item>
@@ -12,8 +12,8 @@
         <item></item>
     </object>
     <object>
-        <name>SkillBonusMove Silently</name>
-        <item>SkillBonus</item>
+        <name>Skill BonusMove Silently</name>
+        <item>Skill Bonus</item>
         <item></item>
         <item>0</item>
         <item>2</item>
@@ -22,8 +22,8 @@
         <item></item>
     </object>
     <object>
-        <name>SkillBonusClimb</name>
-        <item>SkillBonus</item>
+        <name>Skill BonusClimb</name>
+        <item>Skill Bonus</item>
         <item></item>
         <item>0</item>
         <item>2</item>
@@ -32,8 +32,8 @@
         <item></item>
     </object>
     <object>
-        <name>SkillBonusListen</name>
-        <item>SkillBonus</item>
+        <name>Skill BonusListen</name>
+        <item>Skill Bonus</item>
         <item></item>
         <item>0</item>
         <item>2</item>
@@ -42,8 +42,8 @@
         <item></item>
     </object>
     <object>
-        <name>AttackBonusThrowOrSling</name>
-        <item>AttackBonus</item>
+        <name>Attack BonusThrowOrSling</name>
+        <item>Attack Bonus</item>
         <item></item>
         <item>0</item>
         <item>1</item>
@@ -52,8 +52,8 @@
         <item></item>
     </object>
     <object>
-        <name>SaveBonusFear</name>
-        <item>SaveBonus</item>
+        <name>Save BonusFear</name>
+        <item>Save Bonus</item>
         <item></item>
         <item>0</item>
         <item>2</item>
@@ -62,8 +62,8 @@
         <item></item>
     </object>
     <object>
-        <name>SaveBonusAll</name>
-        <item>SaveBonus</item>
+        <name>Save BonusAll</name>
+        <item>Save Bonus</item>
         <item></item>
         <item>0</item>
         <item>1</item>

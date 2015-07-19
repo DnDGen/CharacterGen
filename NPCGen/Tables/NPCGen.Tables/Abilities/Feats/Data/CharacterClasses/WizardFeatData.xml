@@ -2,8 +2,8 @@
 
 <items>
     <object>
-        <name>SimpleWeaponProficiencyClub</name>
-        <item>SimpleWeaponProficiency</item>
+        <name>Simple Weapon ProficiencyClub</name>
+        <item>Simple Weapon Proficiency</item>
         <item>1</item>
         <item>Club</item>
         <item>0</item>
@@ -13,8 +13,8 @@
         <item></item>
     </object>
     <object>
-        <name>SimpleWeaponProficiencyDagger</name>
-        <item>SimpleWeaponProficiency</item>
+        <name>Simple Weapon ProficiencyDagger</name>
+        <item>Simple Weapon Proficiency</item>
         <item>1</item>
         <item>Dagger</item>
         <item>0</item>
@@ -24,8 +24,8 @@
         <item></item>
     </object>
     <object>
-        <name>SimpleWeaponProficiencyHeavy crossbow</name>
-        <item>SimpleWeaponProficiency</item>
+        <name>Simple Weapon ProficiencyHeavy crossbow</name>
+        <item>Simple Weapon Proficiency</item>
         <item>1</item>
         <item>Heavy crossbow</item>
         <item>0</item>
@@ -35,8 +35,8 @@
         <item></item>
     </object>
     <object>
-        <name>SimpleWeaponProficiencyLight crossbow</name>
-        <item>SimpleWeaponProficiency</item>
+        <name>Simple Weapon ProficiencyLight crossbow</name>
+        <item>Simple Weapon Proficiency</item>
         <item>1</item>
         <item>Light crossbow</item>
         <item>0</item>
@@ -46,8 +46,8 @@
         <item></item>
     </object>
     <object>
-        <name>SimpleWeaponProficiencyQuarterstaff</name>
-        <item>SimpleWeaponProficiency</item>
+        <name>Simple Weapon ProficiencyQuarterstaff</name>
+        <item>Simple Weapon Proficiency</item>
         <item>1</item>
         <item>Quarterstaff</item>
         <item>0</item>
@@ -57,8 +57,8 @@
         <item></item>
     </object>
     <object>
-        <name>ScribeScroll</name>
-        <item>ScribeScroll</item>
+        <name>Scribe Scroll</name>
+        <item>Scribe Scroll</item>
         <item>1</item>
         <item></item>
         <item>0</item>

@@ -2,8 +2,8 @@
 
 <items>
     <object>
-        <name>SimpleWeaponProficiency</name>
-        <item>SimpleWeaponProficiency</item>
+        <name>Simple Weapon Proficiency</name>
+        <item>Simple Weapon Proficiency</item>
         <item></item>
         <item>0</item>
         <item>0</item>
@@ -12,8 +12,8 @@
         <item></item>
     </object>
     <object>
-        <name>ShieldProficiency</name>
-        <item>ShieldProficiency</item>
+        <name>Shield Proficiency</name>
+        <item>Shield Proficiency</item>
         <item></item>
         <item>0</item>
         <item>0</item>
@@ -22,8 +22,8 @@
         <item></item>
     </object>
     <object>
-        <name>NaturalArmor</name>
-        <item>NaturalArmor</item>
+        <name>Natural Armor</name>
+        <item>Natural Armor</item>
         <item></item>
         <item>0</item>
         <item>5</item>
@@ -32,8 +32,8 @@
         <item></item>
     </object>
     <object>
-        <name>HoldBreath</name>
-        <item>HoldBreath</item>
+        <name>Hold Breath</name>
+        <item>Hold Breath</item>
         <item></item>
         <item>0</item>
         <item>0</item>
@@ -42,8 +42,8 @@
         <item></item>
     </object>
     <object>
-        <name>NaturalWeaponClaw</name>
-        <item>NaturalWeapon</item>
+        <name>Natural WeaponClaw</name>
+        <item>Natural Weapon</item>
         <item></item>
         <item>0</item>
         <item>0</item>
@@ -52,8 +52,8 @@
         <item></item>
     </object>
     <object>
-        <name>NaturalWeaponBite</name>
-        <item>NaturalWeapon</item>
+        <name>Natural WeaponBite</name>
+        <item>Natural Weapon</item>
         <item></item>
         <item>0</item>
         <item>0</item>

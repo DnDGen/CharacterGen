@@ -2,8 +2,8 @@
 
 <items>
     <object>
-        <name>SimpleWeaponProficiency</name>
-        <item>SimpleWeaponProficiency</item>
+        <name>Simple Weapon Proficiency</name>
+        <item>Simple Weapon Proficiency</item>
         <item>1</item>
         <item>All</item>
         <item>0</item>
@@ -13,8 +13,8 @@
         <item></item>
     </object>
     <object>
-        <name>MartialWeaponProficiency</name>
-        <item>MartialWeaponProficiency</item>
+        <name>Martial Weapon Proficiency</name>
+        <item>Martial Weapon Proficiency</item>
         <item>1</item>
         <item>All</item>
         <item>0</item>
@@ -24,8 +24,8 @@
         <item></item>
     </object>
     <object>
-        <name>MediumArmorProficiency</name>
-        <item>MediumArmorProficiency</item>
+        <name>Medium Armor Proficiency</name>
+        <item>Medium Armor Proficiency</item>
         <item>1</item>
         <item></item>
         <item>0</item>
@@ -35,8 +35,8 @@
         <item></item>
     </object>
     <object>
-        <name>LightArmorProficiency</name>
-        <item>LightArmorProficiency</item>
+        <name>Light Armor Proficiency</name>
+        <item>Light Armor Proficiency</item>
         <item>1</item>
         <item></item>
         <item>0</item>
@@ -46,8 +46,8 @@
         <item></item>
     </object>
     <object>
-        <name>HeavyArmorProficiency</name>
-        <item>HeavyArmorProficiency</item>
+        <name>Heavy Armor Proficiency</name>
+        <item>Heavy Armor Proficiency</item>
         <item>1</item>
         <item></item>
         <item>0</item>
@@ -57,8 +57,8 @@
         <item></item>
     </object>
     <object>
-        <name>ShieldProficiency</name>
-        <item>ShieldProficiency</item>
+        <name>Shield Proficiency</name>
+        <item>Shield Proficiency</item>
         <item>1</item>
         <item></item>
         <item>0</item>
@@ -68,8 +68,8 @@
         <item></item>
     </object>
     <object>
-        <name>TowerShieldProficiency</name>
-        <item>TowerShieldProficiency</item>
+        <name>Tower Shield Proficiency</name>
+        <item>Tower Shield Proficiency</item>
         <item>1</item>
         <item></item>
         <item>0</item>

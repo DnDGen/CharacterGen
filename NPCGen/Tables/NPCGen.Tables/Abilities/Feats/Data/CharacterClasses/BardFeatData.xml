@@ -2,8 +2,8 @@
 
 <items>
     <object>
-        <name>SimpleWeaponProficiency</name>
-        <item>SimpleWeaponProficiency</item>
+        <name>Simple Weapon Proficiency</name>
+        <item>Simple Weapon Proficiency</item>
         <item>1</item>
         <item>All</item>
         <item>0</item>
@@ -13,8 +13,8 @@
         <item></item>
     </object>
     <object>
-        <name>MartialWeaponProficiencyLongsword</name>
-        <item>MartialWeaponProficiency</item>
+        <name>Martial Weapon ProficiencyLongsword</name>
+        <item>Martial Weapon Proficiency</item>
         <item>1</item>
         <item>Longsword</item>
         <item>0</item>
@@ -24,8 +24,8 @@
         <item></item>
     </object>
     <object>
-        <name>MartialWeaponProficiencyRapier</name>
-        <item>MartialWeaponProficiency</item>
+        <name>Martial Weapon ProficiencyRapier</name>
+        <item>Martial Weapon Proficiency</item>
         <item>1</item>
         <item>Rapier</item>
         <item>0</item>
@@ -35,8 +35,8 @@
         <item></item>
     </object>
     <object>
-        <name>MartialWeaponProficiencySap</name>
-        <item>MartialWeaponProficiency</item>
+        <name>Martial Weapon ProficiencySap</name>
+        <item>Martial Weapon Proficiency</item>
         <item>1</item>
         <item>Sap</item>
         <item>0</item>
@@ -46,8 +46,8 @@
         <item></item>
     </object>
     <object>
-        <name>MartialWeaponProficiencyShort sword</name>
-        <item>MartialWeaponProficiency</item>
+        <name>Martial Weapon ProficiencyShort sword</name>
+        <item>Martial Weapon Proficiency</item>
         <item>1</item>
         <item>Short sword</item>
         <item>0</item>
@@ -57,8 +57,8 @@
         <item></item>
     </object>
     <object>
-        <name>MartialWeaponProficiencyShortbow</name>
-        <item>MartialWeaponProficiency</item>
+        <name>Martial Weapon ProficiencyShortbow</name>
+        <item>Martial Weapon Proficiency</item>
         <item>1</item>
         <item>Shortbow</item>
         <item>0</item>
@@ -68,8 +68,8 @@
         <item></item>
     </object>
     <object>
-        <name>ExoticWeaponProficiencyWhip</name>
-        <item>ExoticWeaponProficiency</item>
+        <name>Exotic Weapon ProficiencyWhip</name>
+        <item>Exotic Weapon Proficiency</item>
         <item>1</item>
         <item>Whip</item>
         <item>0</item>
@@ -79,8 +79,8 @@
         <item></item>
     </object>
     <object>
-        <name>LightArmorProficiency</name>
-        <item>LightArmorProficiency</item>
+        <name>Light Armor Proficiency</name>
+        <item>Light Armor Proficiency</item>
         <item>1</item>
         <item></item>
         <item>0</item>
@@ -90,8 +90,8 @@
         <item></item>
     </object>
     <object>
-        <name>ShieldProficiency</name>
-        <item>ShieldProficiency</item>
+        <name>Shield Proficiency</name>
+        <item>Shield Proficiency</item>
         <item>1</item>
         <item></item>
         <item>0</item>
@@ -101,8 +101,8 @@
         <item></item>
     </object>
     <object>
-        <name>BardicMusic1</name>
-        <item>BardicMusic</item>
+        <name>Bardic Music1</name>
+        <item>Bardic Music</item>
         <item>1</item>
         <item></item>
         <item>0</item>
@@ -112,8 +112,8 @@
         <item></item>
     </object>
     <object>
-        <name>BardicMusic2</name>
-        <item>BardicMusic</item>
+        <name>Bardic Music2</name>
+        <item>Bardic Music</item>
         <item>2</item>
         <item></item>
         <item>0</item>
@@ -123,8 +123,8 @@
         <item></item>
     </object>
     <object>
-        <name>BardicMusic3</name>
-        <item>BardicMusic</item>
+        <name>Bardic Music3</name>
+        <item>Bardic Music</item>
         <item>3</item>
         <item></item>
         <item>0</item>
@@ -134,8 +134,8 @@
         <item></item>
     </object>
     <object>
-        <name>BardicMusic4</name>
-        <item>BardicMusic</item>
+        <name>Bardic Music4</name>
+        <item>Bardic Music</item>
         <item>4</item>
         <item></item>
         <item>0</item>
@@ -145,8 +145,8 @@
         <item></item>
     </object>
     <object>
-        <name>BardicMusic5</name>
-        <item>BardicMusic</item>
+        <name>Bardic Music5</name>
+        <item>Bardic Music</item>
         <item>5</item>
         <item></item>
         <item>0</item>
@@ -156,8 +156,8 @@
         <item></item>
     </object>
     <object>
-        <name>BardicMusic6</name>
-        <item>BardicMusic</item>
+        <name>Bardic Music6</name>
+        <item>Bardic Music</item>
         <item>6</item>
         <item></item>
         <item>0</item>
@@ -167,8 +167,8 @@
         <item></item>
     </object>
     <object>
-        <name>BardicMusic7</name>
-        <item>BardicMusic</item>
+        <name>Bardic Music7</name>
+        <item>Bardic Music</item>
         <item>7</item>
         <item></item>
         <item>0</item>
@@ -178,8 +178,8 @@
         <item></item>
     </object>
     <object>
-        <name>BardicMusic8</name>
-        <item>BardicMusic</item>
+        <name>Bardic Music8</name>
+        <item>Bardic Music</item>
         <item>8</item>
         <item></item>
         <item>0</item>
@@ -189,8 +189,8 @@
         <item></item>
     </object>
     <object>
-        <name>BardicMusic9</name>
-        <item>BardicMusic</item>
+        <name>Bardic Music9</name>
+        <item>Bardic Music</item>
         <item>9</item>
         <item></item>
         <item>0</item>
@@ -200,8 +200,8 @@
         <item></item>
     </object>
     <object>
-        <name>BardicMusic10</name>
-        <item>BardicMusic</item>
+        <name>Bardic Music10</name>
+        <item>Bardic Music</item>
         <item>10</item>
         <item></item>
         <item>0</item>
@@ -211,8 +211,8 @@
         <item></item>
     </object>
     <object>
-        <name>BardicMusic11</name>
-        <item>BardicMusic</item>
+        <name>Bardic Music11</name>
+        <item>Bardic Music</item>
         <item>11</item>
         <item></item>
         <item>0</item>
@@ -222,8 +222,8 @@
         <item></item>
     </object>
     <object>
-        <name>BardicMusic12</name>
-        <item>BardicMusic</item>
+        <name>Bardic Music12</name>
+        <item>Bardic Music</item>
         <item>12</item>
         <item></item>
         <item>0</item>
@@ -233,8 +233,8 @@
         <item></item>
     </object>
     <object>
-        <name>BardicMusic13</name>
-        <item>BardicMusic</item>
+        <name>Bardic Music13</name>
+        <item>Bardic Music</item>
         <item>13</item>
         <item></item>
         <item>0</item>
@@ -244,8 +244,8 @@
         <item></item>
     </object>
     <object>
-        <name>BardicMusic14</name>
-        <item>BardicMusic</item>
+        <name>Bardic Music14</name>
+        <item>Bardic Music</item>
         <item>14</item>
         <item></item>
         <item>0</item>
@@ -255,8 +255,8 @@
         <item></item>
     </object>
     <object>
-        <name>BardicMusic15</name>
-        <item>BardicMusic</item>
+        <name>Bardic Music15</name>
+        <item>Bardic Music</item>
         <item>15</item>
         <item></item>
         <item>0</item>
@@ -266,8 +266,8 @@
         <item></item>
     </object>
     <object>
-        <name>BardicMusic16</name>
-        <item>BardicMusic</item>
+        <name>Bardic Music16</name>
+        <item>Bardic Music</item>
         <item>16</item>
         <item></item>
         <item>0</item>
@@ -277,8 +277,8 @@
         <item></item>
     </object>
     <object>
-        <name>BardicMusic17</name>
-        <item>BardicMusic</item>
+        <name>Bardic Music17</name>
+        <item>Bardic Music</item>
         <item>17</item>
         <item></item>
         <item>0</item>
@@ -288,8 +288,8 @@
         <item></item>
     </object>
     <object>
-        <name>BardicMusic18</name>
-        <item>BardicMusic</item>
+        <name>Bardic Music18</name>
+        <item>Bardic Music</item>
         <item>18</item>
         <item></item>
         <item>0</item>
@@ -299,8 +299,8 @@
         <item></item>
     </object>
     <object>
-        <name>BardicMusic19</name>
-        <item>BardicMusic</item>
+        <name>Bardic Music19</name>
+        <item>Bardic Music</item>
         <item>19</item>
         <item></item>
         <item>0</item>
@@ -310,8 +310,8 @@
         <item></item>
     </object>
     <object>
-        <name>BardicMusic20</name>
-        <item>BardicMusic</item>
+        <name>Bardic Music20</name>
+        <item>Bardic Music</item>
         <item>20</item>
         <item></item>
         <item>0</item>
@@ -321,8 +321,8 @@
         <item></item>
     </object>
     <object>
-        <name>BardicKnowledge</name>
-        <item>BardicKnowledge</item>
+        <name>Bardic Knowledge</name>
+        <item>Bardic Knowledge</item>
         <item>1</item>
         <item></item>
         <item>0</item>
@@ -354,8 +354,8 @@
         <item></item>
     </object>
     <object>
-        <name>InspireCourage1</name>
-        <item>InspireCourage</item>
+        <name>Inspire Courage1</name>
+        <item>Inspire Courage</item>
         <item>1</item>
         <item></item>
         <item>1</item>
@@ -365,8 +365,8 @@
         <item></item>
     </object>
     <object>
-        <name>InspireCourage2</name>
-        <item>InspireCourage</item>
+        <name>Inspire Courage2</name>
+        <item>Inspire Courage</item>
         <item>8</item>
         <item></item>
         <item>2</item>
@@ -376,8 +376,8 @@
         <item></item>
     </object>
     <object>
-        <name>InspireCourage3</name>
-        <item>InspireCourage</item>
+        <name>Inspire Courage3</name>
+        <item>Inspire Courage</item>
         <item>14</item>
         <item></item>
         <item>3</item>
@@ -387,8 +387,8 @@
         <item></item>
     </object>
     <object>
-        <name>InspireCourage4</name>
-        <item>InspireCourage</item>
+        <name>Inspire Courage4</name>
+        <item>Inspire Courage</item>
         <item>20</item>
         <item></item>
         <item>4</item>
@@ -398,8 +398,8 @@
         <item></item>
     </object>
     <object>
-        <name>InspireCompetence</name>
-        <item>InspireCompetence</item>
+        <name>Inspire Competence</name>
+        <item>Inspire Competence</item>
         <item>3</item>
         <item></item>
         <item>0</item>
@@ -420,8 +420,8 @@
         <item></item>
     </object>
     <object>
-        <name>InspireGreatness</name>
-        <item>InspireGreatness</item>
+        <name>Inspire Greatness</name>
+        <item>Inspire Greatness</item>
         <item>9</item>
         <item></item>
         <item>0</item>
@@ -431,8 +431,8 @@
         <item></item>
     </object>
     <object>
-        <name>SongOfFreedom</name>
-        <item>SongOfFreedom</item>
+        <name>Song of Freedom</name>
+        <item>Song of Freedom</item>
         <item>12</item>
         <item></item>
         <item>0</item>
@@ -442,8 +442,8 @@
         <item></item>
     </object>
     <object>
-        <name>InspireHeroics</name>
-        <item>InspireHeroics</item>
+        <name>Inspire Heroics</name>
+        <item>Inspire Heroics</item>
         <item>15</item>
         <item></item>
         <item>0</item>
@@ -453,8 +453,8 @@
         <item></item>
     </object>
     <object>
-        <name>MassSuggestion</name>
-        <item>MassSuggestion</item>
+        <name>Mass Suggestion</name>
+        <item>Mass Suggestion</item>
         <item>18</item>
         <item></item>
         <item>0</item>

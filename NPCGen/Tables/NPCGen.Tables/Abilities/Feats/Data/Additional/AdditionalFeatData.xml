@@ -26,7 +26,7 @@
         <item></item>
     </object>
     <object>
-        <name>AnimalAffinity</name>
+        <name>Animal Affinity</name>
         <item>0</item>
         <item></item>
         <item>2</item>
@@ -42,7 +42,7 @@
         <item></item>
     </object>
     <object>
-        <name>AugmentSummoning</name>
+        <name>Augment Summoning</name>
         <item>0</item>
         <item></item>
         <item>4</item>
@@ -50,31 +50,7 @@
         <item></item>
     </object>
     <object>
-        <name>HeavyArmorProficiency</name>
-        <item>0</item>
-        <item></item>
-        <item>0</item>
-        <item>0</item>
-        <item></item>
-    </object>
-    <object>
-        <name>MediumArmorProficiency</name>
-        <item>0</item>
-        <item></item>
-        <item>0</item>
-        <item>0</item>
-        <item></item>
-    </object>
-    <object>
-        <name>LightArmorProficiency</name>
-        <item>0</item>
-        <item></item>
-        <item>0</item>
-        <item>0</item>
-        <item></item>
-    </object>
-    <object>
-        <name>BlindFight</name>
+        <name>Blind-Fight</name>
         <item>0</item>
         <item></item>
         <item>2</item>
@@ -90,7 +66,7 @@
         <item></item>
     </object>
     <object>
-        <name>CombatCasting</name>
+        <name>Combat Casting</name>
         <item>0</item>
         <item></item>
         <item>4</item>
@@ -98,7 +74,7 @@
         <item></item>
     </object>
     <object>
-        <name>CombatExpertise</name>
+        <name>Combat Expertise</name>
         <item>0</item>
         <item></item>
         <item>4</item>
@@ -106,7 +82,7 @@
         <item></item>
     </object>
     <object>
-        <name>CombatReflexes</name>
+        <name>Combat Reflexes</name>
         <item>0</item>
         <item></item>
         <item>0</item>
@@ -114,7 +90,7 @@
         <item></item>
     </object>
     <object>
-        <name>CripplingStrike</name>
+        <name>Crippling Strike</name>
         <item>0</item>
         <item></item>
         <item>0</item>
@@ -130,7 +106,7 @@
         <item></item>
     </object>
     <object>
-        <name>DefensiveRoll</name>
+        <name>Defensive Roll</name>
         <item>0</item>
         <item></item>
         <item>0</item>
@@ -138,7 +114,7 @@
         <item>Day</item>
     </object>
     <object>
-        <name>DeflectArrows</name>
+        <name>Deflect Arrows</name>
         <item>0</item>
         <item></item>
         <item>0</item>
@@ -146,7 +122,7 @@
         <item>Round</item>
     </object>
     <object>
-        <name>DeftHands</name>
+        <name>Deft Hands</name>
         <item>0</item>
         <item></item>
         <item>2</item>
@@ -178,7 +154,7 @@
         <item></item>
     </object>
     <object>
-        <name>EmpowerSpell</name>
+        <name>Empower Spell</name>
         <item>0</item>
         <item></item>
         <item>0</item>
@@ -194,7 +170,7 @@
         <item></item>
     </object>
     <object>
-        <name>EnlargeSpell</name>
+        <name>Enlarge Spell</name>
         <item>0</item>
         <item></item>
         <item>0</item>
@@ -202,7 +178,7 @@
         <item></item>
     </object>
     <object>
-        <name>EschewMaterials</name>
+        <name>Eschew Materials</name>
         <item>0</item>
         <item></item>
         <item>0</item>
@@ -210,7 +186,7 @@
         <item></item>
     </object>
     <object>
-        <name>ExoticWeaponProficiency</name>
+        <name>Exotic Weapon Proficiency</name>
         <item>1</item>
         <item>All</item>
         <item>0</item>
@@ -218,7 +194,7 @@
         <item></item>
     </object>
     <object>
-        <name>ExtendSpell</name>
+        <name>Extend Spell</name>
         <item>0</item>
         <item></item>
         <item>0</item>
@@ -226,7 +202,7 @@
         <item></item>
     </object>
     <object>
-        <name>ExtraTurning</name>
+        <name>Extra Turning</name>
         <item>0</item>
         <item></item>
         <item>4</item>
@@ -234,7 +210,7 @@
         <item></item>
     </object>
     <object>
-        <name>FarShot</name>
+        <name>Far Shot</name>
         <item>0</item>
         <item></item>
         <item>0</item>
@@ -242,7 +218,7 @@
         <item></item>
     </object>
     <object>
-        <name>GreatCleave</name>
+        <name>Great Cleave</name>
         <item>4</item>
         <item></item>
         <item>0</item>
@@ -250,7 +226,7 @@
         <item></item>
     </object>
     <object>
-        <name>GreaterSpellFocus</name>
+        <name>Greater Spell Focus</name>
         <item>0</item>
         <item>Schools of Magic</item>
         <item>1</item>
@@ -258,7 +234,7 @@
         <item></item>
     </object>
     <object>
-        <name>GreaterSpellPenetration</name>
+        <name>Greater Spell Penetration</name>
         <item>0</item>
         <item></item>
         <item>2</item>
@@ -266,7 +242,7 @@
         <item></item>
     </object>
     <object>
-        <name>GreaterTwoWeaponFighting</name>
+        <name>Greater Two-Weapon Fighting</name>
         <item>11</item>
         <item></item>
         <item>0</item>
@@ -274,7 +250,7 @@
         <item></item>
     </object>
     <object>
-        <name>GreaterWeaponFocus</name>
+        <name>Greater Weapon Focus</name>
         <item>0</item>
         <item>Weapons with unarmed, grapple, and ray</item>
         <item>1</item>
@@ -282,7 +258,7 @@
         <item></item>
     </object>
     <object>
-        <name>GreaterWeaponSpecialization</name>
+        <name>Greater Weapon Specialization</name>
         <item>0</item>
         <item>Weapons with unarmed and grapple</item>
         <item>2</item>
@@ -290,7 +266,7 @@
         <item></item>
     </object>
     <object>
-        <name>GreatFortitude</name>
+        <name>Great Fortitude</name>
         <item>0</item>
         <item></item>
         <item>2</item>
@@ -298,7 +274,7 @@
         <item></item>
     </object>
     <object>
-        <name>HeightenSpell</name>
+        <name>Heavy Armor Proficiency</name>
         <item>0</item>
         <item></item>
         <item>0</item>
@@ -306,7 +282,15 @@
         <item></item>
     </object>
     <object>
-        <name>ImprovedBullRush</name>
+        <name>Heighten Spell</name>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+    </object>
+    <object>
+        <name>Improved Bull Rush</name>
         <item>0</item>
         <item></item>
         <item>4</item>
@@ -314,7 +298,7 @@
         <item></item>
     </object>
     <object>
-        <name>ImprovedCounterspell</name>
+        <name>Improved Counterspell</name>
         <item>0</item>
         <item></item>
         <item>0</item>
@@ -322,7 +306,7 @@
         <item></item>
     </object>
     <object>
-        <name>ImprovedCritical</name>
+        <name>Improved Critical</name>
         <item>8</item>
         <item>Proficiency</item>
         <item>0</item>
@@ -330,7 +314,7 @@
         <item></item>
     </object>
     <object>
-        <name>ImprovedDisarm</name>
+        <name>Improved Disarm</name>
         <item>0</item>
         <item></item>
         <item>4</item>
@@ -338,7 +322,7 @@
         <item></item>
     </object>
     <object>
-        <name>ImprovedEvasion</name>
+        <name>Improved Evasion</name>
         <item>0</item>
         <item></item>
         <item>0</item>
@@ -346,7 +330,7 @@
         <item></item>
     </object>
     <object>
-        <name>ImprovedFamiliar</name>
+        <name>Improved Familiar</name>
         <item>0</item>
         <item></item>
         <item>0</item>
@@ -354,7 +338,7 @@
         <item></item>
     </object>
     <object>
-        <name>ImprovedFeint</name>
+        <name>Improved Feint</name>
         <item>0</item>
         <item></item>
         <item>0</item>
@@ -362,7 +346,7 @@
         <item></item>
     </object>
     <object>
-        <name>ImprovedGrapple</name>
+        <name>Improved Grapple</name>
         <item>0</item>
         <item></item>
         <item>4</item>
@@ -370,7 +354,7 @@
         <item></item>
     </object>
     <object>
-        <name>ImprovedInitiative</name>
+        <name>Improved Initiative</name>
         <item>0</item>
         <item></item>
         <item>4</item>
@@ -378,7 +362,7 @@
         <item></item>
     </object>
     <object>
-        <name>ImprovedOverrun</name>
+        <name>Improved Overrun</name>
         <item>0</item>
         <item></item>
         <item>4</item>
@@ -386,7 +370,7 @@
         <item></item>
     </object>
     <object>
-        <name>ImprovedPreciseShot</name>
+        <name>Improved Precise Shot</name>
         <item>11</item>
         <item></item>
         <item>0</item>
@@ -394,7 +378,7 @@
         <item></item>
     </object>
     <object>
-        <name>ImprovedShieldBash</name>
+        <name>Improved Shield Bash</name>
         <item>0</item>
         <item></item>
         <item>0</item>
@@ -402,7 +386,7 @@
         <item></item>
     </object>
     <object>
-        <name>ImprovedSunder</name>
+        <name>Improved Sunder</name>
         <item>0</item>
         <item></item>
         <item>4</item>
@@ -410,7 +394,7 @@
         <item></item>
     </object>
     <object>
-        <name>ImprovedTrip</name>
+        <name>Improved Trip</name>
         <item>0</item>
         <item></item>
         <item>4</item>
@@ -418,7 +402,7 @@
         <item></item>
     </object>
     <object>
-        <name>ImprovedTurning</name>
+        <name>Improved Turning</name>
         <item>0</item>
         <item></item>
         <item>4</item>
@@ -426,7 +410,7 @@
         <item></item>
     </object>
     <object>
-        <name>ImprovedTwoWeaponFighting</name>
+        <name>Improved Two-Weapon Fighting</name>
         <item>6</item>
         <item></item>
         <item>0</item>
@@ -434,7 +418,7 @@
         <item></item>
     </object>
     <object>
-        <name>ImprovedUnarmedStrike</name>
+        <name>Improved Unarmed Strike</name>
         <item>0</item>
         <item></item>
         <item>0</item>
@@ -450,7 +434,7 @@
         <item></item>
     </object>
     <object>
-        <name>IronWill</name>
+        <name>Iron Will</name>
         <item>0</item>
         <item></item>
         <item>2</item>
@@ -466,7 +450,15 @@
         <item></item>
     </object>
     <object>
-        <name>LightningReflexes</name>
+        <name>Light Armor Proficiency</name>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+    </object>
+    <object>
+        <name>Lightning Reflexes</name>
         <item>0</item>
         <item></item>
         <item>2</item>
@@ -474,7 +466,7 @@
         <item></item>
     </object>
     <object>
-        <name>MagicalAptitude</name>
+        <name>Magical Aptitude</name>
         <item>0</item>
         <item></item>
         <item>2</item>
@@ -490,7 +482,7 @@
         <item></item>
     </object>
     <object>
-        <name>MartialWeaponProficiency</name>
+        <name>Martial Weapon Proficiency</name>
         <item>0</item>
         <item>All</item>
         <item>0</item>
@@ -498,7 +490,15 @@
         <item></item>
     </object>
     <object>
-        <name>MaximizeSpell</name>
+        <name>Maximize Spell</name>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+    </object>
+    <object>
+        <name>Medium Armor Proficiency</name>
         <item>0</item>
         <item></item>
         <item>0</item>
@@ -514,7 +514,7 @@
         <item></item>
     </object>
     <object>
-        <name>MountedArchery</name>
+        <name>Mounted Archery</name>
         <item>0</item>
         <item></item>
         <item>0</item>
@@ -522,7 +522,7 @@
         <item></item>
     </object>
     <object>
-        <name>MountedCombat</name>
+        <name>Mounted Combat</name>
         <item>0</item>
         <item></item>
         <item>0</item>
@@ -530,7 +530,7 @@
         <item></item>
     </object>
     <object>
-        <name>NaturalSpell</name>
+        <name>Natural Spell</name>
         <item>0</item>
         <item></item>
         <item>0</item>
@@ -546,7 +546,7 @@
         <item></item>
     </object>
     <object>
-        <name>NimbleFingers</name>
+        <name>Nimble Fingers</name>
         <item>0</item>
         <item></item>
         <item>2</item>
@@ -570,7 +570,7 @@
         <item></item>
     </object>
     <object>
-        <name>PointBlankShot</name>
+        <name>Point Blank Shot</name>
         <item>0</item>
         <item></item>
         <item>1</item>
@@ -578,7 +578,7 @@
         <item></item>
     </object>
     <object>
-        <name>PowerAttack</name>
+        <name>Power Attack</name>
         <item>0</item>
         <item></item>
         <item>0</item>
@@ -586,7 +586,7 @@
         <item></item>
     </object>
     <object>
-        <name>PreciseShot</name>
+        <name>Precise Shot</name>
         <item>0</item>
         <item></item>
         <item>0</item>
@@ -594,7 +594,7 @@
         <item></item>
     </object>
     <object>
-        <name>QuickDraw</name>
+        <name>Quick Draw</name>
         <item>1</item>
         <item></item>
         <item>0</item>
@@ -602,7 +602,7 @@
         <item></item>
     </object>
     <object>
-        <name>QuickenSpell</name>
+        <name>Quicken Spell</name>
         <item>0</item>
         <item></item>
         <item>0</item>
@@ -610,7 +610,7 @@
         <item></item>
     </object>
     <object>
-        <name>RapidReload</name>
+        <name>Rapid Reload</name>
         <item>0</item>
         <item>Manual Crossbows</item>
         <item>0</item>
@@ -618,7 +618,7 @@
         <item></item>
     </object>
     <object>
-        <name>RapidShot</name>
+        <name>Rapid Shot</name>
         <item>0</item>
         <item></item>
         <item>0</item>
@@ -626,7 +626,7 @@
         <item></item>
     </object>
     <object>
-        <name>RideByAttack</name>
+        <name>Ride-By Attack</name>
         <item>0</item>
         <item></item>
         <item>0</item>
@@ -642,7 +642,7 @@
         <item></item>
     </object>
     <object>
-        <name>SelfSufficient</name>
+        <name>Self-Sufficient</name>
         <item>0</item>
         <item></item>
         <item>2</item>
@@ -650,7 +650,7 @@
         <item></item>
     </object>
     <object>
-        <name>ShieldProficiency</name>
+        <name>Shield Proficiency</name>
         <item>0</item>
         <item></item>
         <item>0</item>
@@ -658,7 +658,7 @@
         <item></item>
     </object>
     <object>
-        <name>ShotOnTheRun</name>
+        <name>Shot On The Run</name>
         <item>4</item>
         <item></item>
         <item>0</item>
@@ -666,7 +666,7 @@
         <item></item>
     </object>
     <object>
-        <name>SilentSpell</name>
+        <name>Silent Spell</name>
         <item>0</item>
         <item></item>
         <item>0</item>
@@ -674,7 +674,7 @@
         <item></item>
     </object>
     <object>
-        <name>SimpleWeaponProficiency</name>
+        <name>Simple Weapon Proficiency</name>
         <item>0</item>
         <item>All</item>
         <item>0</item>
@@ -682,7 +682,7 @@
         <item></item>
     </object>
     <object>
-        <name>SkillFocus</name>
+        <name>Skill Focus</name>
         <item>0</item>
         <item>Skills</item>
         <item>3</item>
@@ -690,7 +690,7 @@
         <item></item>
     </object>
     <object>
-        <name>SkillMastery</name>
+        <name>Skill Mastery</name>
         <item>0</item>
         <item>Skills</item>
         <item>3</item>
@@ -698,7 +698,7 @@
         <item></item>
     </object>
     <object>
-        <name>SlipperyMind</name>
+        <name>Slippery Mind</name>
         <item>0</item>
         <item></item>
         <item>0</item>
@@ -706,7 +706,7 @@
         <item></item>
     </object>
     <object>
-        <name>SnatchArrows</name>
+        <name>Snatch Arrows</name>
         <item>0</item>
         <item></item>
         <item>0</item>
@@ -714,7 +714,7 @@
         <item></item>
     </object>
     <object>
-        <name>SpellFocus</name>
+        <name>Spell Focus</name>
         <item>0</item>
         <item>Schools of Magic</item>
         <item>1</item>
@@ -722,7 +722,7 @@
         <item></item>
     </object>
     <object>
-        <name>SpellMastery</name>
+        <name>Spell Mastery</name>
         <item>0</item>
         <item></item>
         <item>0</item>
@@ -730,7 +730,7 @@
         <item></item>
     </object>
     <object>
-        <name>SpellPenetration</name>
+        <name>Spell Penetration</name>
         <item>0</item>
         <item></item>
         <item>2</item>
@@ -738,7 +738,7 @@
         <item></item>
     </object>
     <object>
-        <name>SpiritedCharge</name>
+        <name>Spirited Charge</name>
         <item>0</item>
         <item></item>
         <item>0</item>
@@ -746,7 +746,7 @@
         <item></item>
     </object>
     <object>
-        <name>SpringAttack</name>
+        <name>Spring Attack</name>
         <item>4</item>
         <item></item>
         <item>0</item>
@@ -762,7 +762,7 @@
         <item></item>
     </object>
     <object>
-        <name>StillSpell</name>
+        <name>Still Spell</name>
         <item>0</item>
         <item></item>
         <item>0</item>
@@ -770,7 +770,7 @@
         <item></item>
     </object>
     <object>
-        <name>StunningFist</name>
+        <name>Stunning Fist</name>
         <item>8</item>
         <item></item>
         <item>0</item>
@@ -786,7 +786,7 @@
         <item></item>
     </object>
     <object>
-        <name>TowerShieldProficiency</name>
+        <name>Tower Shield Proficiency</name>
         <item>0</item>
         <item></item>
         <item>0</item>
@@ -810,7 +810,7 @@
         <item></item>
     </object>
     <object>
-        <name>TwoWeaponDefense</name>
+        <name>Two-Weapon Defense</name>
         <item>0</item>
         <item></item>
         <item>0</item>
@@ -818,7 +818,7 @@
         <item></item>
     </object>
     <object>
-        <name>TwoWeaponFighting</name>
+        <name>Two-Weapon Fighting</name>
         <item>0</item>
         <item></item>
         <item>0</item>
@@ -826,7 +826,7 @@
         <item></item>
     </object>
     <object>
-        <name>WeaponFinesse</name>
+        <name>Weapon Finesse</name>
         <item>1</item>
         <item></item>
         <item>0</item>
@@ -834,7 +834,7 @@
         <item></item>
     </object>
     <object>
-        <name>WeaponFocus</name>
+        <name>Weapon Focus</name>
         <item>1</item>
         <item>Weapons with unarmed, grapple, and ray</item>
         <item>1</item>
@@ -842,7 +842,7 @@
         <item></item>
     </object>
     <object>
-        <name>WeaponSpecialization</name>
+        <name>Weapon Specialization</name>
         <item>0</item>
         <item>Weapons with unarmed and grapple</item>
         <item>2</item>
@@ -850,7 +850,7 @@
         <item></item>
     </object>
     <object>
-        <name>WhirlwindAttack</name>
+        <name>Whirlwind Attack</name>
         <item>4</item>
         <item></item>
         <item>0</item>
@@ -858,7 +858,7 @@
         <item></item>
     </object>
     <object>
-        <name>WidenSpell</name>
+        <name>Widen Spell</name>
         <item>0</item>
         <item></item>
         <item>0</item>

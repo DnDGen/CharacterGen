@@ -3,17 +3,17 @@
 <percentile>
     <object>
         <lower>1</lower>
-        <content>None</content>
+        <content></content>
         <upper>96</upper>
     </object>
   <object>
     <lower>97</lower>
-    <content>HalfCelestial</content>
+    <content>Half-Celestial</content>
     <upper>98</upper>
   </object>
     <object>
         <lower>99</lower>
-        <content>HalfDragon</content>
+        <content>Half-Dragon</content>
         <upper>99</upper>
     </object>
   <object>

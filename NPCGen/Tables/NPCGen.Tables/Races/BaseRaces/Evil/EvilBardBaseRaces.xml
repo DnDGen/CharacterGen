@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <percentile>
-  <object><lower>1</lower><content>HighElf</content><upper>1</upper></object>
-  <object><lower>2</lower><content>WoodElf</content><upper>2</upper></object>
-  <object><lower>3</lower><content>HalfElf</content><upper>17</upper></object>
-  <object><lower>18</lower><content>LightfootHalfling</content><upper>18</upper></object>
-  <object><lower>19</lower><content>DeepHalfling</content><upper>19</upper></object>
-  <object><lower>20</lower><content>TallfellowHalfling</content><upper>20</upper></object>
-  <object><lower>21</lower><content>HalfOrc</content><upper>22</upper></object>
+  <object><lower>1</lower><content>High Elf</content><upper>1</upper></object>
+  <object><lower>2</lower><content>Wood Elf</content><upper>2</upper></object>
+  <object><lower>3</lower><content>Half-Elf</content><upper>17</upper></object>
+  <object><lower>18</lower><content>Lightfoot Halfling</content><upper>18</upper></object>
+  <object><lower>19</lower><content>Deep Halfling</content><upper>19</upper></object>
+  <object><lower>20</lower><content>Tallfellow Halfling</content><upper>20</upper></object>
+  <object><lower>21</lower><content>Half-Orc</content><upper>22</upper></object>
   <object><lower>23</lower><content>Human</content><upper>97</upper></object>
   <object>
     <lower>98</lower>

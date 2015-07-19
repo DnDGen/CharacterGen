@@ -2,8 +2,8 @@
 
 <items>
     <object>
-        <name>SimpleWeaponProficiency</name>
-        <item>SimpleWeaponProficiency</item>
+        <name>Simple Weapon Proficiency</name>
+        <item>Simple Weapon Proficiency</item>
         <item>1</item>
         <item>All</item>
         <item>0</item>
@@ -13,8 +13,8 @@
         <item></item>
     </object>
     <object>
-        <name>MartialWeaponProficiency</name>
-        <item>MartialWeaponProficiency</item>
+        <name>Martial Weapon Proficiency</name>
+        <item>Martial Weapon Proficiency</item>
         <item>1</item>
         <item>All</item>
         <item>0</item>
@@ -24,8 +24,8 @@
         <item></item>
     </object>
     <object>
-        <name>MediumArmorProficiency</name>
-        <item>MediumArmorProficiency</item>
+        <name>Medium Armor Proficiency</name>
+        <item>Medium Armor Proficiency</item>
         <item>1</item>
         <item></item>
         <item>0</item>
@@ -35,8 +35,8 @@
         <item></item>
     </object>
     <object>
-        <name>LightArmorProficiency</name>
-        <item>LightArmorProficiency</item>
+        <name>Light Armor Proficiency</name>
+        <item>Light Armor Proficiency</item>
         <item>1</item>
         <item></item>
         <item>0</item>
@@ -46,8 +46,8 @@
         <item></item>
     </object>
     <object>
-        <name>ShieldProficiency</name>
-        <item>ShieldProficiency</item>
+        <name>Shield Proficiency</name>
+        <item>Shield Proficiency</item>
         <item>1</item>
         <item></item>
         <item>0</item>
@@ -57,8 +57,8 @@
         <item></item>
     </object>
     <object>
-        <name>FastMovement</name>
-        <item>FastMovement</item>
+        <name>Fast Movement</name>
+        <item>Fast Movement</item>
         <item>1</item>
         <item></item>
         <item>0</item>
@@ -145,8 +145,8 @@
         <item></item>
     </object>
     <object>
-        <name>UncannyDodge</name>
-        <item>UncannyDodge</item>
+        <name>Uncanny Dodge</name>
+        <item>Uncanny Dodge</item>
         <item>2</item>
         <item></item>
         <item>0</item>
@@ -156,8 +156,8 @@
         <item></item>
     </object>
     <object>
-        <name>TrapSense1</name>
-        <item>TrapSense</item>
+        <name>Trap Sense1</name>
+        <item>Trap Sense</item>
         <item>3</item>
         <item></item>
         <item>1</item>
@@ -167,8 +167,8 @@
         <item></item>
     </object>
     <object>
-        <name>TrapSense2</name>
-        <item>TrapSense</item>
+        <name>Trap Sense2</name>
+        <item>Trap Sense</item>
         <item>6</item>
         <item></item>
         <item>2</item>
@@ -178,8 +178,8 @@
         <item></item>
     </object>
     <object>
-        <name>TrapSense3</name>
-        <item>TrapSense</item>
+        <name>Trap Sense3</name>
+        <item>Trap Sense</item>
         <item>9</item>
         <item></item>
         <item>3</item>
@@ -189,8 +189,8 @@
         <item></item>
     </object>
     <object>
-        <name>TrapSense4</name>
-        <item>TrapSense</item>
+        <name>Trap Sense4</name>
+        <item>Trap Sense</item>
         <item>12</item>
         <item></item>
         <item>4</item>
@@ -200,8 +200,8 @@
         <item></item>
     </object>
     <object>
-        <name>TrapSense5</name>
-        <item>TrapSense</item>
+        <name>Trap Sense5</name>
+        <item>Trap Sense</item>
         <item>15</item>
         <item></item>
         <item>5</item>
@@ -211,8 +211,8 @@
         <item></item>
     </object>
     <object>
-        <name>TrapSense6</name>
-        <item>TrapSense</item>
+        <name>Trap Sense6</name>
+        <item>Trap Sense</item>
         <item>18</item>
         <item></item>
         <item>6</item>
@@ -222,8 +222,8 @@
         <item></item>
     </object>
     <object>
-        <name>ImprovedUncannyDodge</name>
-        <item>ImprovedUncannyDodge</item>
+        <name>Improved Uncanny Dodge</name>
+        <item>Improved Uncanny Dodge</item>
         <item>5</item>
         <item></item>
         <item>0</item>
@@ -233,8 +233,8 @@
         <item></item>
     </object>
     <object>
-        <name>DamageReduction1</name>
-        <item>DamageReduction</item>
+        <name>Damage Reduction1</name>
+        <item>Damage Reduction</item>
         <item>7</item>
         <item></item>
         <item>1</item>
@@ -244,8 +244,8 @@
         <item></item>
     </object>
     <object>
-        <name>DamageReduction2</name>
-        <item>DamageReduction</item>
+        <name>Damage Reduction2</name>
+        <item>Damage Reduction</item>
         <item>10</item>
         <item></item>
         <item>2</item>
@@ -255,8 +255,8 @@
         <item></item>
     </object>
     <object>
-        <name>DamageReduction3</name>
-        <item>DamageReduction</item>
+        <name>Damage Reduction3</name>
+        <item>Damage Reduction</item>
         <item>13</item>
         <item></item>
         <item>3</item>
@@ -266,8 +266,8 @@
         <item></item>
     </object>
     <object>
-        <name>DamageReduction4</name>
-        <item>DamageReduction</item>
+        <name>Damage Reduction4</name>
+        <item>Damage Reduction</item>
         <item>16</item>
         <item></item>
         <item>4</item>
@@ -277,8 +277,8 @@
         <item></item>
     </object>
     <object>
-        <name>DamageReduction5</name>
-        <item>DamageReduction</item>
+        <name>Damage Reduction5</name>
+        <item>Damage Reduction</item>
         <item>19</item>
         <item></item>
         <item>5</item>
@@ -288,8 +288,8 @@
         <item></item>
     </object>
     <object>
-        <name>GreaterRage</name>
-        <item>GreaterRage</item>
+        <name>Greater Rage</name>
+        <item>Greater Rage</item>
         <item>11</item>
         <item></item>
         <item>0</item>
@@ -299,8 +299,8 @@
         <item></item>
     </object>
     <object>
-        <name>IndomitableWill</name>
-        <item>IndomitableWill</item>
+        <name>Indomitable Will</name>
+        <item>Indomitable Will</item>
         <item>14</item>
         <item></item>
         <item>0</item>
@@ -310,8 +310,8 @@
         <item></item>
     </object>
     <object>
-        <name>TirelessRage</name>
-        <item>TirelessRage</item>
+        <name>Tireless Rage</name>
+        <item>Tireless Rage</item>
         <item>17</item>
         <item></item>
         <item>0</item>
@@ -321,8 +321,8 @@
         <item></item>
     </object>
     <object>
-        <name>MightyRage</name>
-        <item>MightyRage</item>
+        <name>Mighty Rage</name>
+        <item>Mighty Rage</item>
         <item>20</item>
         <item></item>
         <item>0</item>

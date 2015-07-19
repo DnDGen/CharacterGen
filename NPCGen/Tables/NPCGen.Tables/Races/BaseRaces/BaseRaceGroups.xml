@@ -3,16 +3,16 @@
 <items>
     <object>
         <name>Evil</name>
-        <item>DeepDwarf</item>
-        <item>HillDwarf</item>
-        <item>HighElf</item>
-        <item>WildElf</item>
-        <item>WoodElf</item>
-        <item>HalfElf</item>
-        <item>LightfootHalfling</item>
-        <item>DeepHalfling</item>
-        <item>TallfellowHalfling</item>
-        <item>HalfOrc</item>
+        <item>Deep Dwarf</item>
+        <item>Hill Dwarf</item>
+        <item>High Elf</item>
+        <item>Wild Elf</item>
+        <item>Wood Elf</item>
+        <item>Half-Elf</item>
+        <item>Lightfoot Halfling</item>
+        <item>Deep Halfling</item>
+        <item>Tallfellow Halfling</item>
+        <item>Half-Orc</item>
         <item>Human</item>
         <item>Lizardfolk</item>
         <item>Goblin</item>
@@ -21,81 +21,81 @@
         <item>Orc</item>
         <item>Tiefling</item>
         <item>Drow</item>
-        <item>DuergarDwarf</item>
+        <item>Duergar Dwarf</item>
         <item>Derro</item>
         <item>Gnoll</item>
         <item>Troglodyte</item>
         <item>Bugbear</item>
         <item>Ogre</item>
         <item>Minotaur</item>
-        <item>MindFlayer</item>
-        <item>OgreMage</item>
+        <item>Mind Flayer</item>
+        <item>Ogre Mage</item>
     </object>
     <object>
         <name>Neutral</name>
-        <item>MountainDwarf</item>
-        <item>DeepDwarf</item>
-        <item>HillDwarf</item>
-        <item>HighElf</item>
-        <item>WildElf</item>
-        <item>WoodElf</item>
-        <item>GrayElf</item>
-        <item>HalfElf</item>
-        <item>LightfootHalfling</item>
-        <item>DeepHalfling</item>
-        <item>TallfellowHalfling</item>
-        <item>HalfOrc</item>
+        <item>Mountain Dwarf</item>
+        <item>Deep Dwarf</item>
+        <item>Hill Dwarf</item>
+        <item>High Elf</item>
+        <item>Wild Elf</item>
+        <item>Wood Elf</item>
+        <item>Gray Elf</item>
+        <item>Half-Elf</item>
+        <item>Lightfoot Halfling</item>
+        <item>Deep Halfling</item>
+        <item>Tallfellow Halfling</item>
+        <item>Half-Orc</item>
         <item>Human</item>
         <item>Lizardfolk</item>
         <item>Doppelganger</item>
-        <item>ForestGnome</item>
-        <item>RockGnome</item>
+        <item>Forest Gnome</item>
+        <item>Rock Gnome</item>
     </object>
     <object>
         <name>Good</name>
         <item>Aasimar</item>
-        <item>MountainDwarf</item>
-        <item>DeepDwarf</item>
-        <item>HillDwarf</item>
-        <item>HighElf</item>
-        <item>WildElf</item>
-        <item>WoodElf</item>
-        <item>HalfElf</item>
-        <item>GrayElf</item>
-        <item>LightfootHalfling</item>
-        <item>DeepHalfling</item>
-        <item>TallfellowHalfling</item>
-        <item>HalfOrc</item>
+        <item>Mountain Dwarf</item>
+        <item>Deep Dwarf</item>
+        <item>Hill Dwarf</item>
+        <item>High Elf</item>
+        <item>Wild Elf</item>
+        <item>Wood Elf</item>
+        <item>Half-Elf</item>
+        <item>Gray Elf</item>
+        <item>Lightfoot Halfling</item>
+        <item>Deep Halfling</item>
+        <item>Tallfellow Halfling</item>
+        <item>Half-Orc</item>
         <item>Human</item>
         <item>Svirfneblin</item>
-        <item>ForestGnome</item>
-        <item>RockGnome</item>
+        <item>Forest Gnome</item>
+        <item>Rock Gnome</item>
     </object>
     <object>
         <name>Standard</name>
-        <item>HalfElf</item>
-        <item>HalfOrc</item>
-        <item>HighElf</item>
-        <item>HillDwarf</item>
+        <item>Half-Elf</item>
+        <item>Half-Orc</item>
+        <item>High Elf</item>
+        <item>Hill Dwarf</item>
         <item>Human</item>
-        <item>LightfootHalfling</item>
-        <item>RockGnome</item>
+        <item>Lightfoot Halfling</item>
+        <item>Rock Gnome</item>
     </object>
     <object>
         <name>Large</name>
         <item>Minotaur</item>
         <item>Ogre</item>
-        <item>OgreMage</item>
+        <item>Ogre Mage</item>
     </object>
     <object>
         <name>Small</name>
         <item>Derro</item>
-        <item>ForestGnome</item>
-        <item>RockGnome</item>
+        <item>Forest Gnome</item>
+        <item>Rock Gnome</item>
         <item>Svirfneblin</item>
-        <item>DeepHalfling</item>
-        <item>LightfootHalfling</item>
-        <item>TallfellowHalfling</item>
+        <item>Deep Halfling</item>
+        <item>Lightfoot Halfling</item>
+        <item>Tallfellow Halfling</item>
         <item>Kobold</item>
         <item>Goblin</item>
     </object>
@@ -106,10 +106,10 @@
         <item>Doppelganger</item>
         <item>Gnoll</item>
         <item>Lizardfolk</item>
-        <item>MindFlayer</item>
+        <item>Mind Flayer</item>
         <item>Minotaur</item>
         <item>Ogre</item>
-        <item>OgreMage</item>
+        <item>Ogre Mage</item>
         <item>Troglodyte</item>
     </object>
 </items>

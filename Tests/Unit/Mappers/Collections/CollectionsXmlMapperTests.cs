@@ -88,6 +88,33 @@ namespace NPCGen.Tests.Unit.Mappers.Collections
             Assert.That(table, Is.Empty);
         }
 
+        [Test]
+        public void DuplicateNamesThrowError()
+        {
+            var content = @"<?xml version=""1.0"" encoding=""utf-8"" ?>
+                            <collections>
+                                <object>
+                                    <name>first name</name>
+                                    <item>first item</item>
+                                    <item>second item</item>
+                                </object>
+                                <object>
+                                    <name>first name</name>
+                                    <item>other item</item>
+                                </object>
+                                <object>
+                                    <name>second name</name>
+                                    <item>third item</item>
+                                </object>
+                                <object>
+                                    <name>empty name</name>
+                                </object>
+                            </collections>";
+            File.WriteAllText(filename, content);
+
+            Assert.That(() => mapper.Map(tableName), Throws.Exception);
+        }
+
         private void MakeEmptyXmlFile()
         {
             var content = @"<?xml version=""1.0"" encoding=""utf-8"" ?>

@@ -2,24 +2,24 @@
 
 <items>
     <object>
-        <name>CombatStyle</name>
-        <item>TwoWeaponFighting</item>
+        <name>Combat Style</name>
+        <item>Two-Weapon Fighting</item>
         <item>Archery</item>
     </object>
     <object>
-        <name>MonkBonusFeat1</name>
-        <item>ImprovedGrapple</item>
-        <item>StunningFist</item>
+        <name>Monk Bonus Feat1</name>
+        <item>Improved Grapple</item>
+        <item>Stunning Fist</item>
     </object>
     <object>
-        <name>MonkBonusFeat2</name>
-        <item>CombatReflexes</item>
-        <item>DeflectArrows</item>
+        <name>Monk Bonus Feat2</name>
+        <item>Combat Reflexes</item>
+        <item>Deflect Arrows</item>
     </object>
     <object>
-        <name>MonkBonusFeat6</name>
-        <item>ImprovedTrip</item>
-        <item>ImprovedDisarm</item>
+        <name>Monk Bonus Feat6</name>
+        <item>Improved Trip</item>
+        <item>Improved Disarm</item>
     </object>
     <object>
         <name>Schools of Magic</name>
@@ -33,7 +33,7 @@
         <item>Transmutation</item>
     </object>
     <object>
-        <name>SimpleWeaponProficiency</name>
+        <name>Simple Weapon Proficiency</name>
         <item>Gauntlet</item>
         <item>Unarmed Strike</item>
         <item>Dagger</item>
@@ -54,7 +54,7 @@
         <item>Sling</item>
     </object>
     <object>
-        <name>MartialWeaponProficiency</name>
+        <name>Martial Weapon Proficiency</name>
         <item>Longsword</item>
         <item>Longbow</item>
         <item>Shortbow</item>
@@ -85,7 +85,7 @@
         <item>Scythe</item>
     </object>
     <object>
-        <name>ExoticWeaponProficiency</name>
+        <name>Exotic Weapon Proficiency</name>
         <item>Kama</item>
         <item>Nunchaku</item>
         <item>Siangham</item>

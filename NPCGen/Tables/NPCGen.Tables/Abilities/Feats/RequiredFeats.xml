@@ -2,224 +2,224 @@
 
 <items>
     <object>
-        <name>CombatStyleMastery</name>
-        <item>ImprovedCombatStyle</item>
-    </object>
-    <object>
-        <name>ImprovedCombatStyle</name>
-        <item>CombatStyle</item>
-    </object>
-    <object>
-        <name>HeavyArmorProficiency</name>
-        <item>MediumArmorProficiency</item>
-    </object>
-    <object>
-        <name>MediumArmorProficiency</name>
-        <item>LightArmorProficiency</item>
+        <name>Augment Summoning</name>
+        <item>Spell Focus/Conjuration</item>
     </object>
     <object>
         <name>Cleave</name>
-        <item>PowerAttack</item>
+        <item>Power Attack</item>
     </object>
     <object>
-        <name>DeflectArrows</name>
-        <item>ImprovedUnarmedStrike</item>
+        <name>Combat Style Mastery</name>
+        <item>Improved Combat Style</item>
     </object>
     <object>
-        <name>AugmentSummoning</name>
-        <item>SpellFocus/Conjuration</item>
+        <name>Deflect Arrows</name>
+        <item>Improved Unarmed Strike</item>
     </object>
     <object>
         <name>Diehard</name>
         <item>Endurance</item>
     </object>
     <object>
-        <name>ExtraTurning</name>
+        <name>Extra Turning</name>
         <item>Turn</item>
     </object>
     <object>
-        <name>FarShot</name>
-        <item>PointBlankShot</item>
+        <name>Far Shot</name>
+        <item>Point Blank Shot</item>
     </object>
     <object>
-        <name>RapidShotRanger</name>
-        <item>CombatStyle/Archery</item>
-    </object>
-    <object>
-        <name>TwoWeaponFightingRanger</name>
-        <item>CombatStyle/TwoWeaponFighting</item>
-    </object>
-    <object>
-        <name>ManyshotRanger</name>
-        <item>ImprovedCombatStyle/Archery</item>
-    </object>
-    <object>
-        <name>ImprovedTwoWeaponFightingRanger</name>
-        <item>ImprovedCombatStyle/TwoWeaponFighting</item>
-    </object>
-    <object>
-        <name>ImprovedPreciseShotRanger</name>
-        <item>CombatStyleMastery/Archery</item>
-    </object>
-    <object>
-        <name>GreaterTwoWeaponFightingRanger</name>
-        <item>CombatStyleMastery/TwoWeaponFighting</item>
-    </object>
-    <object>
-        <name>GreatCleave</name>
+        <name>Great Cleave</name>
         <item>Cleave</item>
     </object>
     <object>
-        <name>GreaterSpellFocus</name>
-        <item>SpellFocus</item>
+        <name>Greater Spell Focus</name>
+        <item>Spell Focus</item>
     </object>
     <object>
-        <name>GreaterSpellPenetration</name>
-        <item>SpellPenetration</item>
+        <name>Greater Spell Penetration</name>
+        <item>Spell Penetration</item>
     </object>
     <object>
-        <name>GreaterTwoWeaponFighting</name>
-        <item>ImprovedTwoWeaponFighting</item>
+        <name>Greater Two-Weapon Fighting</name>
+        <item>Improved Two-Weapon Fighting</item>
     </object>
     <object>
-        <name>GreaterWeaponFocus</name>
-        <item>WeaponFocus</item>
+        <name>Greater Two-Weapon FightingRanger</name>
+        <item>Combat Style Mastery/Two-Weapon Fighting</item>
     </object>
     <object>
-        <name>GreaterWeaponSpecialization</name>
-        <item>WeaponSpecialization</item>
-        <item>GreaterWeaponFocus</item>
+        <name>Greater Weapon Focus</name>
+        <item>Weapon Focus</item>
     </object>
     <object>
-        <name>ImprovedBullRush</name>
-        <item>PowerAttack</item>
+        <name>Greater Weapon Specialization</name>
+        <item>Weapon Specialization</item>
+        <item>Greater Weapon Focus</item>
     </object>
     <object>
-        <name>ImprovedCritical</name>
+        <name>Heavy Armor Proficiency</name>
+        <item>Medium Armor Proficiency</item>
+    </object>
+    <object>
+        <name>Improved Combat Style</name>
+        <item>Combat Style</item>
+    </object>
+    <object>
+        <name>Improved Bull Rush</name>
+        <item>Power Attack</item>
+    </object>
+    <object>
+        <name>Improved Critical</name>
         <item>Proficiency</item>
     </object>
     <object>
-        <name>ImprovedDisarm</name>
-        <item>CombatExpertise</item>
+        <name>Improved Disarm</name>
+        <item>Combat Expertise</item>
     </object>
     <object>
-        <name>ImprovedFeint</name>
-        <item>CombatExpertise</item>
+        <name>Improved Feint</name>
+        <item>Combat Expertise</item>
     </object>
     <object>
-        <name>ImprovedOverrun</name>
-        <item>PowerAttack</item>
+        <name>Improved Grapple</name>
+        <item>Improved Unarmed Strike</item>
     </object>
     <object>
-        <name>ImprovedGrapple</name>
-        <item>ImprovedUnarmedStrike</item>
+        <name>Improved Overrun</name>
+        <item>Power Attack</item>
     </object>
     <object>
-        <name>ImprovedPreciseShot</name>
-        <item>PreciseShot</item>
+        <name>Improved Precise Shot</name>
+        <item>Precise Shot</item>
     </object>
     <object>
-        <name>ImprovedShieldBash</name>
-        <item>ShieldProficiency</item>
+        <name>Improved Precise ShotRanger</name>
+        <item>Combat Style Mastery/Archery</item>
     </object>
     <object>
-        <name>ImprovedSunder</name>
-        <item>PowerAttack</item>
+        <name>Improved Shield Bash</name>
+        <item>Shield Proficiency</item>
     </object>
     <object>
-        <name>ImprovedTrip</name>
-        <item>CombatExpertise</item>
+        <name>Improved Sunder</name>
+        <item>Power Attack</item>
     </object>
     <object>
-        <name>ImprovedTurning</name>
+        <name>Improved Two-Weapon Fighting</name>
+        <item>Two-Weapon Fighting</item>
+    </object>
+    <object>
+        <name>Improved Trip</name>
+        <item>Combat Expertise</item>
+    </object>
+    <object>
+        <name>Improved Turning</name>
         <item>Turn</item>
     </object>
     <object>
-        <name>ImprovedTwoWeaponFighting</name>
-        <item>TwoWeaponFighting</item>
-    </object>
-    <object>
-        <name>PreciseShot</name>
-        <item>PointBlankShot</item>
+        <name>Improved Two-Weapon FightingRanger</name>
+        <item>Improved Combat Style/Two-Weapon Fighting</item>
     </object>
     <object>
         <name>Manyshot</name>
-        <item>RapidShot</item>
+        <item>Rapid Shot</item>
     </object>
     <object>
-        <name>RapidShot</name>
-        <item>PointBlankShot</item>
+        <name>ManyshotRanger</name>
+        <item>Improved Combat Style/Archery</item>
     </object>
     <object>
-        <name>MountedArchery</name>
-        <item>MountedCombat</item>
+        <name>Medium Armor Proficiency</name>
+        <item>Light Armor Proficiency</item>
     </object>
     <object>
         <name>Mobility</name>
         <item>Dodge</item>
     </object>
     <object>
-        <name>NaturalSpell</name>
-        <item>WildShape</item>
+        <name>Mounted Archery</name>
+        <item>Mounted Combat</item>
     </object>
     <object>
-        <name>RapidReload</name>
+        <name>Natural Spell</name>
+        <item>Wild Shape</item>
+    </object>
+    <object>
+        <name>Precise Shot</name>
+        <item>Point Blank Shot</item>
+    </object>
+    <object>
+        <name>Rapid Reload</name>
         <item>Proficiency</item>
     </object>
     <object>
-        <name>RideByAttack</name>
-        <item>MountedCombat</item>
+        <name>Rapid Shot</name>
+        <item>Point Blank Shot</item>
     </object>
     <object>
-        <name>ShotOnTheRun</name>
+        <name>Rapid ShotRanger</name>
+        <item>Combat Style/Archery</item>
+    </object>
+    <object>
+        <name>Ride-By Attack</name>
+        <item>Mounted Combat</item>
+    </object>
+    <object>
+        <name>Shot On The Run</name>
         <item>Dodge</item>
         <item>Mobility</item>
-        <item>PointBlankShot</item>
+        <item>Point Blank Shot</item>
     </object>
     <object>
-        <name>SnatchArrows</name>
-        <item>ImprovedUnarmedStrike</item>
-        <item>DeflectArrows</item>
+        <name>Snatch Arrows</name>
+        <item>Improved Unarmed Strike</item>
+        <item>Deflect Arrows</item>
     </object>
     <object>
-        <name>SpiritedCharge</name>
-        <item>MountedCombat</item>
-        <item>RideByAttack</item>
+        <name>Spirited Charge</name>
+        <item>Mounted Combat</item>
+        <item>Ride-By Attack</item>
     </object>
     <object>
-        <name>SpringAttack</name>
+        <name>Spring Attack</name>
         <item>Dodge</item>
         <item>Mobility</item>
     </object>
     <object>
-        <name>StunningFist</name>
-        <item>ImprovedUnarmedStrike</item>
+        <name>Stunning Fist</name>
+        <item>Improved Unarmed Strike</item>
     </object>
     <object>
-        <name>TowerShieldProficiency</name>
-        <item>ShieldProficiency</item>
+        <name>Tower Shield Proficiency</name>
+        <item>Shield Proficiency</item>
     </object>
     <object>
         <name>Trample</name>
-        <item>MountedCombat</item>
+        <item>Mounted Combat</item>
     </object>
     <object>
-        <name>TwoWeaponDefense</name>
-        <item>TwoWeaponFighting</item>
+        <name>Two-Weapon Defense</name>
+        <item>Two-Weapon Fighting</item>
     </object>
     <object>
-        <name>WeaponFocus</name>
+        <name>Two-Weapon FightingRanger</name>
+        <item>Combat Style/Two-Weapon Fighting</item>
+    </object>
+    <object>
+        <name>Weapon Focus</name>
         <item>Proficiency</item>
     </object>
     <object>
-        <name>WeaponSpecialization</name>
-        <item>WeaponFocus</item>
+        <name>Weapon Specialization</name>
+        <item>Weapon Focus</item>
     </object>
     <object>
-        <name>WhirlwindAttack</name>
-        <item>CombatExpertise</item>
+        <name>Whirlwind Attack</name>
+        <item>Combat Expertise</item>
         <item>Dodge</item>
-        <item>SpringAttack</item>
+        <item>Spring Attack</item>
         <item>Mobility</item>
     </object>
 </items>

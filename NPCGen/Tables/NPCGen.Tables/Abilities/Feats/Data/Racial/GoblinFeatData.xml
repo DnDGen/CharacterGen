@@ -2,8 +2,8 @@
 
 <items>
     <object>
-        <name>SkillBonusMove Silently</name>
-        <item>SkillBonus</item>
+        <name>Skill BonusMove Silently</name>
+        <item>Skill Bonus</item>
         <item></item>
         <item>0</item>
         <item>4</item>
@@ -12,8 +12,8 @@
         <item></item>
     </object>
     <object>
-        <name>SkillBonusRide</name>
-        <item>SkillBonus</item>
+        <name>Skill BonusRide</name>
+        <item>Skill Bonus</item>
         <item></item>
         <item>0</item>
         <item>4</item>

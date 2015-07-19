@@ -1,32 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <percentile>
-  <object><lower>1</lower><content>GrayElf</content><upper>1</upper></object>
-  <object><lower>2</lower><content>HighElf</content><upper>11</upper></object>
+  <object><lower>1</lower><content>Gray Elf</content><upper>1</upper></object>
+  <object><lower>2</lower><content>High Elf</content><upper>11</upper></object>
   <object>
     <lower>12</lower>
-    <content>WildElf</content>
+    <content>Wild Elf</content>
     <upper>21</upper>
   </object>
   <object>
     <lower>22</lower>
-    <content>WoodElf</content>
+    <content>Wood Elf</content>
     <upper>31</upper>
   </object>
   <object>
     <lower>32</lower>
-    <content>ForestGnome</content>
+    <content>Forest Gnome</content>
     <upper>36</upper>
   </object>
   <object>
     <lower>37</lower>
-    <content>RockGnome</content>
+    <content>Rock Gnome</content>
     <upper>37</upper>
   </object>
-  <object><lower>38</lower><content>HalfElf</content><upper>46</upper></object>
-  <object><lower>47</lower><content>LightfootHalfling</content><upper>47</upper></object>
-  <object><lower>48</lower><content>TallfellowHalfling</content><upper>48</upper></object>
-  <object><lower>49</lower><content>HalfOrc</content><upper>49</upper></object>
+  <object><lower>38</lower><content>Half-Elf</content><upper>46</upper></object>
+  <object><lower>47</lower><content>Lightfoot Halfling</content><upper>47</upper></object>
+  <object><lower>48</lower><content>Tallfellow Halfling</content><upper>48</upper></object>
+  <object><lower>49</lower><content>Half-Orc</content><upper>49</upper></object>
   <object><lower>50</lower><content>Human</content><upper>99</upper></object>
     <object>
         <lower>100</lower>

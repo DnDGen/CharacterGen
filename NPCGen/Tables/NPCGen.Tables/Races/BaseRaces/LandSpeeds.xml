@@ -14,11 +14,11 @@
         <item>20</item>
     </object>
     <object>
-        <name>DeepHalfling</name>
+        <name>Deep Halfling</name>
         <item>20</item>
     </object>
     <object>
-        <name>DeepDwarf</name>
+        <name>Deep Dwarf</name>
         <item>20</item>
     </object>
     <object>
@@ -30,11 +30,11 @@
         <item>30</item>
     </object>
     <object>
-        <name>DuergarDwarf</name>
+        <name>Duergar Dwarf</name>
         <item>20</item>
     </object>
     <object>
-        <name>ForestGnome</name>
+        <name>Forest Gnome</name>
         <item>20</item>
     </object>
     <object>
@@ -46,23 +46,23 @@
         <item>30</item>
     </object>
     <object>
-        <name>GrayElf</name>
+        <name>Gray Elf</name>
         <item>30</item>
     </object>
     <object>
-        <name>HalfElf</name>
+        <name>Half-Elf</name>
         <item>30</item>
     </object>
     <object>
-        <name>HalfOrc</name>
+        <name>Half-Orc</name>
         <item>30</item>
     </object>
     <object>
-        <name>HighElf</name>
+        <name>High Elf</name>
         <item>30</item>
     </object>
     <object>
-        <name>HillDwarf</name>
+        <name>Hill Dwarf</name>
         <item>20</item>
     </object>
     <object>
@@ -78,7 +78,7 @@
         <item>30</item>
     </object>
     <object>
-        <name>LightfootHalfling</name>
+        <name>Lightfoot Halfling</name>
         <item>20</item>
     </object>
     <object>
@@ -86,7 +86,7 @@
         <item>30</item>
     </object>
     <object>
-        <name>MindFlayer</name>
+        <name>Mind Flayer</name>
         <item>30</item>
     </object>
     <object>
@@ -94,11 +94,11 @@
         <item>30</item>
     </object>
     <object>
-        <name>MountainDwarf</name>
+        <name>Mountain Dwarf</name>
         <item>20</item>
     </object>
     <object>
-        <name>OgreMage</name>
+        <name>Ogre Mage</name>
         <item>50</item>
     </object>
     <object>
@@ -110,7 +110,7 @@
         <item>30</item>
     </object>
     <object>
-        <name>RockGnome</name>
+        <name>Rock Gnome</name>
         <item>20</item>
     </object>
     <object>
@@ -118,7 +118,7 @@
         <item>20</item>
     </object>
     <object>
-        <name>TallfellowHalfling</name>
+        <name>Tallfellow Halfling</name>
         <item>20</item>
     </object>
     <object>
@@ -130,11 +130,11 @@
         <item>30</item>
     </object>
     <object>
-        <name>WildElf</name>
+        <name>Wild Elf</name>
         <item>30</item>
     </object>
     <object>
-        <name>WoodElf</name>
+        <name>Wood Elf</name>
         <item>30</item>
     </object>
 </items>

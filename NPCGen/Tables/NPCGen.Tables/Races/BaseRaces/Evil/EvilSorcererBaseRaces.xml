@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <percentile>
-  <object><lower>1</lower><content>WildElf</content><upper>1</upper></object>
-  <object><lower>2</lower><content>HalfElf</content><upper>16</upper></object>
-  <object><lower>17</lower><content>LightfootHalfling</content><upper>21</upper></object> 
-  <object><lower>22</lower><content>DeepHalfling</content><upper>22</upper></object>
-  <object><lower>23</lower><content>TallfellowHalfling</content><upper>23</upper></object>
-  <object><lower>24</lower><content>HalfOrc</content><upper>28</upper></object>
+  <object><lower>1</lower><content>Wild Elf</content><upper>1</upper></object>
+  <object><lower>2</lower><content>Half-Elf</content><upper>16</upper></object>
+  <object><lower>17</lower><content>Lightfoot Halfling</content><upper>21</upper></object> 
+  <object><lower>22</lower><content>Deep Halfling</content><upper>22</upper></object>
+  <object><lower>23</lower><content>Tallfellow Halfling</content><upper>23</upper></object>
+  <object><lower>24</lower><content>Half-Orc</content><upper>28</upper></object>
   <object>
     <lower>29</lower>
     <content>Human</content>
@@ -59,12 +59,12 @@
     </object>
     <object>
         <lower>94</lower>
-        <content>MindFlayer</content>
+        <content>Mind Flayer</content>
         <upper>94</upper>
     </object>
     <object>
         <lower>95</lower>
-        <content>OgreMage</content>
+        <content>Ogre Mage</content>
         <upper>95</upper>
     </object>
   <object>
