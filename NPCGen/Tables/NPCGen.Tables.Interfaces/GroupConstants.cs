@@ -10,6 +10,7 @@ namespace NPCGen.Tables.Interfaces
         public const String CombatStyles = "CombatStyles";
         public const String Deflection = "Deflection";
         public const String Dodge = "Dodge";
+        public const String FavoredEnemies = "Favored Enemies";
         public const String FighterBonusFeats = "FighterBonusFeats";
         public const String Genetic = "Genetic";
         public const String GoodBaseAttack = "Good Base Attack";

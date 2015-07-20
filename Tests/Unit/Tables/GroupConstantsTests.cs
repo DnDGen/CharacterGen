@@ -14,6 +14,7 @@ namespace NPCGen.Tests.Unit.Tables
         [TestCase(GroupConstants.Deflection, "Deflection")]
         [TestCase(GroupConstants.Dodge, "Dodge")]
         [TestCase(GroupConstants.FighterBonusFeats, "FighterBonusFeats")]
+        [TestCase(GroupConstants.FavoredEnemies, "Favored Enemies")]
         [TestCase(GroupConstants.Genetic, "Genetic")]
         [TestCase(GroupConstants.GoodBaseAttack, "Good Base Attack")]
         [TestCase(GroupConstants.HasClassRequirements, "HasClassRequirements")]

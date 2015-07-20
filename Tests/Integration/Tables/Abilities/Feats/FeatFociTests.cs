@@ -34,6 +34,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
                 FeatConstants.MonkBonusFeat + "1",
                 FeatConstants.MonkBonusFeat + "2",
                 FeatConstants.MonkBonusFeat + "6",
+                GroupConstants.FavoredEnemies
             };
 
             AssertCollectionNames(names);
@@ -125,6 +126,39 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
         [TestCase(FeatConstants.MonkBonusFeat + "6",
             FeatConstants.ImprovedDisarm,
             FeatConstants.ImprovedTrip)]
+        [TestCase(GroupConstants.FavoredEnemies,
+            "Aberration",
+            "Animal",
+            "Construct",
+            "Dragon",
+            "Elemental",
+            "Fey",
+            "Giant",
+            "Humanoid (aquatic)",
+            "Humanoid (dwarf)",
+            "Humanoid (elf)",
+            "Humanoid (goblinoid)",
+            "Humanoid (gnoll)",
+            "Humanoid (gnome)",
+            "Humanoid (halfling)",
+            "Humanoid (human)",
+            "Humanoid (orc)",
+            "Humanoid (reptilian)",
+            "Magical beast",
+            "Monstrous humanoid",
+            "Ooze",
+            "Outsider (air)",
+            "Outsider (chaotic)",
+            "Outsider (earth)",
+            "Outsider (evil)",
+            "Outsider (fire)",
+            "Outsider (good)",
+            "Outsider (lawful)",
+            "Outsider (native)",
+            "Outsider (water)",
+            "Plant",
+            "Undead",
+            "Vermin")]
         public override void DistinctCollection(String name, params String[] collection)
         {
             base.DistinctCollection(name, collection);

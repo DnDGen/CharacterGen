@@ -30,7 +30,7 @@ namespace NPCGen.Tests.Unit.Common.Magics
         [TestCase(SpellConstants.DetectThoughts, "Detect thoughts")]
         [TestCase(SpellConstants.DisguiseSelf, "Disguise self")]
         [TestCase(SpellConstants.DispelEvil, "Dispel evil")]
-        [TestCase(SpellConstants.EnlargePerson, "Enlarge Person")]
+        [TestCase(SpellConstants.EnlargePerson, "Enlarge person")]
         [TestCase(SpellConstants.GaseousForm, "Gaseous form")]
         [TestCase(SpellConstants.GhostSound, "Ghost sound")]
         [TestCase(SpellConstants.Hallow, "Hallow")]

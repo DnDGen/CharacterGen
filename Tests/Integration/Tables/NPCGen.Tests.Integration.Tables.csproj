@@ -73,6 +73,7 @@
     <Compile Include="Abilities\Feats\Data\CharacterClasses\CharacterClassFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\ClericFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\FighterFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\CharacterClasses\RangerFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\RogueFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\SorcererFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\WizardFeatDataTests.cs" />
