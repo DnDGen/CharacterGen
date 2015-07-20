@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+    <object>
+        <name>Natural Armor</name>
+        <item>Natural Armor</item>
+        <item></item>
+        <item>0</item>
+        <item>4</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+    </object>
+    <object>
+        <name>Natural WeaponClaw</name>
+        <item>Natural Weapon</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item>Claw (x2)</item>
+        <item>0</item>
+        <item></item>
+    </object>
+    <object>
+        <name>Natural WeaponBite</name>
+        <item>Natural Weapon</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item>Bite</item>
+        <item>0</item>
+        <item></item>
+    </object>
+    <object>
+        <name>Immune to EffectSleep</name>
+        <item>Immune to Effect</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item>Sleep</item>
+        <item>0</item>
+        <item></item>
+    </object>
+    <object>
+        <name>Immune to EffectParalysis</name>
+        <item>Immune to Effect</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item>Paralysis</item>
+        <item>0</item>
+        <item></item>
+    </object>
+    <object>
+        <name>Low-Light Vision</name>
+        <item>Low-Light Vision</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+    </object>
+    <object>
+        <name>Darkvision</name>
+        <item>Darkvision</item>
+        <item></item>
+        <item>0</item>
+        <item>60</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+    </object>
+</items>
