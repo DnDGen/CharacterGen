@@ -109,9 +109,7 @@ namespace NPCGen.Common.Abilities.Feats
         public const String QuickenSpell = "Quicken Spell";
         public const String RapidReload = "Rapid Reload";
         public const String RapidShot = "Rapid Shot";
-        public const String ResistanceToAcid = "Resistance to Acid";
-        public const String ResistanceToCold = "Resistance to Cold";
-        public const String ResistanceToElectricity = "Resistance to Electricity";
+        public const String Resistance = "Resistance";
         public const String RideByAttack = "Ride-By Attack";
         public const String Run = "Run";
         public const String SaveBonus = "Save Bonus";
@@ -213,6 +211,17 @@ namespace NPCGen.Common.Abilities.Feats
         public const String Smite = "Smite";
         public const String UseMagicDeviceAsWizard = "Use Magic Device as Wizard";
         public const String GreaterTurning = "Greater Turning";
+        public const String MindBlast = "Mind Blast";
+        public const String Extract = "Extract";
+        public const String NaturalCunning = "Natural Cunning";
+        public const String PowerfulCharge = "Powerful Charge";
+        public const String Flight = "Flight";
+        public const String Regeneration = "Regeneration";
+        public const String Stench = "Stench";
+        public const String Disease = "Disease";
+        public const String Pounce = "Pounce";
+        public const String Rake = "Rake";
+        public const String Trip = "Trip";
 
         public static class Frequencies
         {
@@ -224,7 +233,12 @@ namespace NPCGen.Common.Abilities.Feats
 
         public static class Foci
         {
+            public const String Acid = "Acid";
             public const String Archery = "Archery";
+            public const String Cold = "Cold";
+            public const String Electricity = "Electricity";
+            public const String Fire = "Fire";
+            public const String Sonic = "Sonic";
         }
     }
 }

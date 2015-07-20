@@ -110,7 +110,6 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
         [TestCase(FeatConstants.Mobility, FeatConstants.Dodge)]
         [TestCase(FeatConstants.MountedArchery, FeatConstants.MountedCombat)]
         [TestCase(FeatConstants.NaturalSpell, FeatConstants.WildShape)]
-        [TestCase(FeatConstants.PreciseShot, FeatConstants.PointBlankShot)]
         [TestCase(FeatConstants.RapidReload, GroupConstants.Proficiency)]
         [TestCase(FeatConstants.RideByAttack, FeatConstants.MountedCombat)]
         [TestCase(FeatConstants.ShotOnTheRun,

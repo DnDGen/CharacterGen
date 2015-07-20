@@ -5,6 +5,16 @@
         <name></name>
     </object>
     <object>
+        <name>Aasimar</name>
+        <item>Spell-Like Ability</item>
+        <item>Darkvision</item>
+        <item>Skill BonusSpot</item>
+        <item>Skill BonusListen</item>
+        <item>ResistanceAcid</item>
+        <item>ResistanceCold</item>
+        <item>ResistanceElectricity</item>
+    </object>
+    <object>
         <name>Abjuration</name>
         <item>Skill Bonus</item>
     </object>
@@ -207,6 +217,36 @@
         <item>Inspire Competence</item>
     </object>
     <object>
+        <name>Black</name>
+        <item>Natural Weapon</item>
+        <item>Immune to Effect</item>
+    </object>
+    <object>
+        <name>Blue</name>
+        <item>Natural Weapon</item>
+        <item>Immune to Effect</item>
+    </object>
+    <object>
+        <name>Brass</name>
+        <item>Natural Weapon</item>
+        <item>Immune to Effect</item>
+    </object>
+    <object>
+        <name>Bronze</name>
+        <item>Natural Weapon</item>
+        <item>Immune to Effect</item>
+    </object>
+    <object>
+        <name>Bugbear</name>
+        <item>Save BonusWill</item>
+        <item>Save BonusFortitude</item>
+        <item>Save BonusReflex</item>
+        <item>Natural Armor</item>
+        <item>Skill BonusMove Silently</item>
+        <item>Darkvision</item>
+        <item>Scent</item>
+    </object>
+    <object>
         <name>Chaos</name>
         <item>Cast Spell Bonus</item>
     </object>
@@ -224,12 +264,28 @@
         <item>Skill Bonus</item>
     </object>
     <object>
+        <name>Copper</name>
+        <item>Natural Weapon</item>
+        <item>Immune to Effect</item>
+    </object>
+    <object>
         <name>Death</name>
         <item>Death Touch</item>
     </object>
     <object>
-        <name>Destruction</name>
-        <item>Smite</item>
+        <name>Deep Dwarf</name>
+        <item>Skill BonusAppraise</item>
+        <item>Save BonusPoison</item>
+        <item>Save BonusSpell</item>
+        <item>Attack BonusOrc</item>
+        <item>Attack BonusGoblin</item>
+        <item>Dodge Bonus</item>
+        <item>Weapon FamiliarityDwarven urgrosh</item>
+        <item>Weapon FamiliarityDwarven waraxe</item>
+        <item>Stonecunning</item>
+        <item>Darkvision</item>
+        <item>Stability</item>
+        <item>Light Sensitivity</item>
     </object>
     <object>
         <name>Deep Halfling</name>
@@ -240,6 +296,23 @@
         <item>Attack BonusThrowOrSling</item>
         <item>Darkvision</item>
         <item>Stonecunning</item>
+    </object>
+    <object>
+        <name>Derro</name>
+        <item>Madness</item>
+        <item>Poison Use</item>
+        <item>Sneak Attack</item>
+        <item>Spell-Like AbilityDarkness</item>
+        <item>Spell-Like AbilityGhost sound</item>
+        <item>Spell-Like AbilityDaze</item>
+        <item>Spell-Like AbilitySound burst</item>
+        <item>Vulnerability to Sunlight</item>
+        <item>Skill BonusHide</item>
+        <item>Skill BonusMove Silently</item>
+    </object>
+    <object>
+        <name>Destruction</name>
+        <item>Smite</item>
     </object>
     <object>
         <name>Divination</name>
@@ -276,6 +349,26 @@
         <item>Spell Resistance</item>
     </object>
     <object>
+        <name>Duergar Dwarf</name>
+        <item>Skill BonusAppraise</item>
+        <item>Immune to EffectParalysis</item>
+        <item>Immune to EffectPoison</item>
+        <item>Immune to EffectPhantasms</item>
+        <item>Save BonusSpell</item>
+        <item>Attack BonusOrc</item>
+        <item>Attack BonusGoblin</item>
+        <item>Dodge Bonus</item>
+        <item>Stonecunning</item>
+        <item>Darkvision</item>
+        <item>Stability</item>
+        <item>Spell-Like AbilityEnlarge person</item>
+        <item>Spell-Like AbilityInvisibility</item>
+        <item>Light Sensitivity</item>
+        <item>Skill BonusMove Silently</item>
+        <item>Skill BonusListen</item>
+        <item>Skill BonusSpot</item>
+    </object>
+    <object>
         <name>Earth</name>
         <item>Turn</item>
     </object>
@@ -306,6 +399,25 @@
         <item>Turn</item>
     </object>
     <object>
+        <name>Forest Gnome</name>
+        <item>Low-Light Vision</item>
+        <item>Weapon Familiarity</item>
+        <item>Save Bonus</item>
+        <item>Improved Spell</item>
+        <item>Attack BonusGoblin</item>
+        <item>Attack BonusKobold</item>
+        <item>Attack BonusOrc</item>
+        <item>Attack BonusLizardfolk</item>
+        <item>Dodge Bonus</item>
+        <item>Skill BonusListen</item>
+        <item>Spell-Like AbilitySpeak with animals</item>
+        <item>Spell-Like AbilityDancing lights</item>
+        <item>Spell-Like AbilityGhost sound</item>
+        <item>Spell-Like AbilityPrestidigitation</item>
+        <item>Spell-Like AbilityPass without trace</item>
+        <item>Skill BonusHide</item>
+    </object>
+    <object>
         <name>Gnoll</name>
         <item>Natural Armor</item>
         <item>Darkvision</item>
@@ -317,8 +429,32 @@
         <item>Darkvision</item>
     </object>
     <object>
+        <name>Gold</name>
+        <item>Natural Weapon</item>
+        <item>Immune to Effect</item>
+    </object>
+    <object>
         <name>Good</name>
         <item>Cast Spell Bonus</item>
+    </object>
+    <object>
+        <name>Green</name>
+        <item>Natural Weapon</item>
+        <item>Immune to Effect</item>
+    </object>
+    <object>
+        <name>Gray Elf</name>
+        <item>Skill BonusSearch</item>
+        <item>Skill BonusSpot</item>
+        <item>Skill BonusListen</item>
+        <item>Save Bonus</item>
+        <item>Immune to Effect</item>
+        <item>Low-Light Vision</item>
+        <item>Martial Weapon ProficiencyLongsword</item>
+        <item>Martial Weapon ProficiencyRapier</item>
+        <item>Martial Weapon ProficiencyLongbow</item>
+        <item>Martial Weapon ProficiencyShortbow</item>
+        <item>Passive Secret Door Search</item>
     </object>
     <object>
         <name>Half-Celestial</name>
@@ -341,13 +477,50 @@
         <item>Spell-Like AbilityDispel evil</item>
         <item>Spell-Like AbilityHoly aura</item>
         <item>Spell-Like AbilityMass charm monster</item>
-        <item>Spell-Like AbilitySummon monster IX (Celestials only)</item>
+        <item>Spell-Like AbilitySummon monster IX</item>
         <item>Natural Armor</item>
-        <item>Resistance to Acid</item>
-        <item>Resistance to Cold</item>
-        <item>Resistance to Electricity</item>
+        <item>ResistanceAcid</item>
+        <item>ResistanceCold</item>
+        <item>ResistanceElectricity</item>
         <item>Damage Reduction10-</item>
         <item>Damage Reduction11+</item>
+        <item>Spell Resistance</item>
+    </object>
+    <object>
+        <name>Half-Dragon</name>
+        <item>Natural Armor</item>
+        <item>Darkvision</item>
+        <item>Low-Light Vision</item>
+        <item>Immune to EffectSleep</item>
+        <item>Immune to EffectParalysis</item>
+        <item>Natural WeaponClaw</item>
+        <item>Natural WeaponBite</item>
+    </object>
+    <object>
+        <name>Half-Fiend</name>
+        <item>Natural Armor</item>
+        <item>Natural WeaponClaw</item>
+        <item>Natural WeaponBite</item>
+        <item>Smite Good</item>
+        <item>Spell-Like AbilityDarkness</item>
+        <item>Spell-Like AbilityDesecrate</item>
+        <item>Spell-Like AbilityUnholy blight</item>
+        <item>Spell-Like AbilityPoison</item>
+        <item>Spell-Like AbilityContagion</item>
+        <item>Spell-Like AbilityBlasphemy</item>
+        <item>Spell-Like AbilityDestruction</item>
+        <item>Spell-Like AbilityUnholy aura</item>
+        <item>Spell-Like AbilityUnhallow</item>
+        <item>Spell-Like AbilityHorrid wilting</item>
+        <item>Spell-Like AbilitySummon monster IX</item>
+        <item>Immune to Effect</item>
+        <item>ResistanceAcid</item>
+        <item>ResistanceCold</item>
+        <item>ResistanceElectricity</item>
+        <item>ResistanceFire</item>
+        <item>Darkvision</item>
+        <item>Damage Reduction11-</item>
+        <item>Damage Reduction12+</item>
         <item>Spell Resistance</item>
     </object>
     <object>
@@ -461,6 +634,13 @@
         <item>Cast Spell Bonus</item>
     </object>
     <object>
+        <name>Kobold</name>
+        <item>Darkvision</item>
+        <item>Skill BonusSearch</item>
+        <item>Natural Armor</item>
+        <item>Light Sensitivity</item>
+    </object>
+    <object>
         <name>Law</name>
         <item>Cast Spell Bonus</item>
     </object>
@@ -490,6 +670,45 @@
     <object>
         <name>Magic</name>
         <item>Use Magic Device as Wizard</item>
+    </object>
+    <object>
+        <name>Mind Flayer</name>
+        <item>Save BonusWill</item>
+        <item>Save BonusReflex</item>
+        <item>Save BonusFortitude</item>
+        <item>Natural Armor</item>
+        <item>Skill BonusBluff</item>
+        <item>Skill BonusConcentration</item>
+        <item>Skill BonusHide</item>
+        <item>Skill BonusIntimidate</item>
+        <item>Skill BonusMove Silently</item>
+        <item>Skill BonusListen</item>
+        <item>Skill BonusSpot</item>
+        <item>Skill BonusSense Motive</item>
+        <item>Darkvision</item>
+        <item>Mind Blast</item>
+        <item>Natural Weapon</item>
+        <item>Spell-Like AbilityDetect thoughts</item>
+        <item>Spell-Like AbilityLevitate</item>
+        <item>Spell-Like AbilityPlane shift</item>
+        <item>Spell-Like AbilitySuggestion</item>
+        <item>Spell-Like AbilityCharm monster</item>
+        <item>Improved Grab</item>
+        <item>Extract</item>
+    </object>
+    <object>
+        <name>Minotaur</name>
+        <item>Darkvision</item>
+        <item>Martial Weapon ProficiencyGreataxe</item>
+        <item>Simple Weapon Proficiency</item>
+        <item>Natural Armor</item>
+        <item>Natural Weapon</item>
+        <item>Powerful Charge</item>
+        <item>Natural Cunning</item>
+        <item>Scent</item>
+        <item>Skill BonusSearch</item>
+        <item>Skill BonusSpot</item>
+        <item>Skill BonusListen</item>
     </object>
     <object>
         <name>Monk</name>
@@ -562,8 +781,53 @@
         <item>Timeless Body</item>
     </object>
     <object>
+        <name>Mountain Dwarf</name>
+        <item>Skill BonusAppraise</item>
+        <item>Save BonusPoison</item>
+        <item>Save BonusSpell</item>
+        <item>Attack BonusOrc</item>
+        <item>Attack BonusGoblin</item>
+        <item>Dodge Bonus</item>
+        <item>Weapon FamiliarityDwarven urgrosh</item>
+        <item>Weapon FamiliarityDwarven waraxe</item>
+        <item>Stonecunning</item>
+        <item>Darkvision</item>
+        <item>Stability</item>
+    </object>
+    <object>
         <name>Necromancy</name>
         <item>Skill Bonus</item>
+    </object>
+    <object>
+        <name>Ogre</name>
+        <item>Darkvision</item>
+        <item>Save BonusWill</item>
+        <item>Save BonusReflex</item>
+        <item>Save BonusFortitude</item>
+        <item>Simple Weapon Proficiency</item>
+        <item>Martial Weapon Proficiency</item>
+        <item>Light Armor Proficiency</item>
+        <item>Medium Armor Proficiency</item>
+        <item>Shield Proficiency</item>
+        <item>Natural Armor</item>
+    </object>
+    <object>
+        <name>Ogre Mage</name>
+        <item>Darkvision</item>
+        <item>Save BonusReflex</item>
+        <item>Save BonusWill</item>
+        <item>Save BonusFortitude</item>
+        <item>Natural Armor</item>
+        <item>Spell-Like AbilityDarkness</item>
+        <item>Spell-Like AbilityInvisibility</item>
+        <item>Spell-Like AbilityCharm person</item>
+        <item>Spell-Like AbilityCone of cold</item>
+        <item>Spell-Like AbilityGaseous form</item>
+        <item>Spell-Like AbilitySleep</item>
+        <item>Flight</item>
+        <item>Change Shape</item>
+        <item>Regeneration</item>
+        <item>Spell Resistance</item>
     </object>
     <object>
         <name>Orc</name>
@@ -606,6 +870,11 @@
         <item>Improved Two-Weapon FightingRanger</item>
         <item>Improved Precise ShotRanger</item>
         <item>Greater Two-Weapon FightingRanger</item>
+    </object>
+    <object>
+        <name>Red</name>
+        <item>Natural Weapon</item>
+        <item>Immune to Effect</item>
     </object>
     <object>
         <name>Rock Gnome</name>
@@ -653,6 +922,11 @@
         <item>Martial Weapon ProficiencyShort sword</item>
     </object>
     <object>
+        <name>Silver</name>
+        <item>Natural Weapon</item>
+        <item>Immune to Effect</item>
+    </object>
+    <object>
         <name>Sorcerer</name>
         <item>Simple Weapon Proficiency</item>
     </object>
@@ -663,6 +937,27 @@
     <object>
         <name>Sun</name>
         <item>Greater Turning</item>
+    </object>
+    <object>
+        <name>Svirfneblin</name>
+        <item>Low-Light Vision</item>
+        <item>Weapon Familiarity</item>
+        <item>Save Bonus</item>
+        <item>Improved Spell</item>
+        <item>Attack BonusGoblin</item>
+        <item>Attack BonusKobold</item>
+        <item>Dodge Bonus</item>
+        <item>Spell-Like AbilitySpeak with animals</item>
+        <item>Darkvision</item>
+        <item>Spell-Like AbilityBlindness/deafness</item>
+        <item>Spell-Like AbilityBlur</item>
+        <item>Spell-Like AbilityDisguise self</item>
+        <item>Stonecunning</item>
+        <item>Spell Resistance</item>
+        <item>Cast Spell Bonus</item>
+        <item>Spell-Like AbilityNondetection</item>
+        <item>Skill BonusHide</item>
+        <item>Skill BonusListen</item>
     </object>
     <object>
         <name>TakenMultipleTimes</name>
@@ -686,6 +981,16 @@
         <item>Passive Secret Door Search</item>
     </object>
     <object>
+        <name>Tiefling</name>
+        <item>Spell-Like AbilityDarkness</item>
+        <item>Darkvision</item>
+        <item>Skill BonusBluff</item>
+        <item>Skill BonusHide</item>
+        <item>ResistanceFire</item>
+        <item>ResistanceCold</item>
+        <item>ResistanceElectricity</item>
+    </object>
+    <object>
         <name>Transmutation</name>
         <item>Skill Bonus</item>
     </object>
@@ -697,6 +1002,16 @@
         <name>Trickery</name>
     </object>
     <object>
+        <name>Troglodyte</name>
+        <item>Darkvision</item>
+        <item>Save BonusFortitude</item>
+        <item>Skill BonusHide</item>
+        <item>Natural Armor</item>
+        <item>Natural WeaponClaw</item>
+        <item>Natural WeaponBite</item>
+        <item>Stench</item>
+    </object>
+    <object>
         <name>War</name>
         <item>Martial Weapon Proficiency</item>
         <item>Weapon Focus</item>
@@ -706,18 +1021,109 @@
         <item>Turn</item>
     </object>
     <object>
+        <name>Werebear</name>
+        <item>Alternate Form</item>
+        <item>Empathy</item>
+        <item>Lycanthropy</item>
+        <item>Improved Grab</item>
+        <item>Skill BonusSwim</item>
+        <item>Save BonusReflex</item>
+        <item>Save BonusFortitude</item>
+        <item>Save BonusWill</item>
+        <item>Natural Armor</item>
+        <item>Iron Will</item>
+        <item>Scent</item>
+        <item>Track</item>
+        <item>Skill BonusListen</item>
+        <item>Skill BonusSpot</item>
+        <item>Low-Light Vision</item>
+    </object>
+    <object>
         <name>Wereboar</name>
+        <item>Alternate Form</item>
+        <item>Empathy</item>
+        <item>Lycanthropy</item>
         <item>Skill BonusListen</item>
         <item>Skill BonusSpot</item>
         <item>Natural Armor</item>
+        <item>Scent</item>
+        <item>Ferocity</item>
+        <item>Save BonusReflex</item>
+        <item>Save BonusFortitude</item>
+        <item>Save BonusWill</item>
+        <item>Low-Light Vision</item>
+    </object>
+    <object>
+        <name>Wererat</name>
+        <item>Alternate Form</item>
+        <item>Empathy</item>
+        <item>Lycanthropy</item>
+        <item>Natural Armor</item>
+        <item>Iron Will</item>
+        <item>Scent</item>
+        <item>Low-Light Vision</item>
+        <item>Disease</item>
+        <item>Skill BonusClimb</item>
+        <item>Skill BonusMove Silently</item>
+        <item>Alertness</item>
+        <item>Weapon Finesse</item>
+        <item>Skill BonusHide</item>
+    </object>
+    <object>
+        <name>Weretiger</name>
+        <item>Alternate Form</item>
+        <item>Empathy</item>
+        <item>Lycanthropy</item>
+        <item>Improved Grab</item>
+        <item>Save BonusReflex</item>
+        <item>Save BonusFortitude</item>
+        <item>Save BonusWill</item>
+        <item>Iron Will</item>
+        <item>Scent</item>
+        <item>Low-Light Vision</item>
+        <item>Pounce</item>
+        <item>Rake</item>
+        <item>Skill BonusMove Silently</item>
+        <item>Skill BonusBalance</item>
+        <item>Skill BonusHide</item>
+        <item>Skill BonusListen</item>
+        <item>Skill BonusSpot</item>
+        <item>Alertness</item>
     </object>
     <object>
         <name>Werewolf</name>
+        <item>Alternate Form</item>
+        <item>Empathy</item>
+        <item>Lycanthropy</item>
         <item>Iron Will</item>
         <item>Track</item>
         <item>Skill BonusListen</item>
         <item>Skill BonusSpot</item>
         <item>Natural Armor</item>
+        <item>Scent</item>
+        <item>Low-Light Vision</item>
+        <item>Save BonusFortitude</item>
+        <item>Save BonusWill</item>
+        <item>Trip</item>
+    </object>
+    <object>
+        <name>White</name>
+        <item>Natural Weapon</item>
+        <item>Immune to Effect</item>
+    </object>
+    <object>
+        <name>Wild Elf</name>
+        <item>Skill BonusSearch</item>
+        <item>Skill BonusSpot</item>
+        <item>Skill BonusListen</item>
+        <item>Save Bonus</item>
+        <item>Immune to Effect</item>
+        <item>Low-Light Vision</item>
+        <item>Martial Weapon ProficiencyLongsword</item>
+        <item>Martial Weapon ProficiencyRapier</item>
+        <item>Martial Weapon ProficiencyLongbow</item>
+        <item>Martial Weapon ProficiencyShortbow</item>
+        <item>Passive Secret Door Search</item>
     </object>
     <object>
         <name>Wizard</name>

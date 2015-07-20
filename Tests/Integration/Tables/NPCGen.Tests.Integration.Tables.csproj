@@ -172,6 +172,7 @@
     <Compile Include="Races\BaseRaces\Neutral\NeutralRogueBaseRacesTests.cs" />
     <Compile Include="Races\BaseRaces\Neutral\NeutralSorcererBaseRacesTests.cs" />
     <Compile Include="Races\BaseRaces\Neutral\NeutralWizardBaseRacesTests.cs" />
+    <Compile Include="Races\MaleTests.cs" />
     <Compile Include="Races\Metaraces\DragonSpeciesTests.cs" />
     <Compile Include="Races\Metaraces\Evil\EvilBarbarianMetaracesTests.cs" />
     <Compile Include="Races\Metaraces\Evil\EvilBardMetaracesTests.cs" />
