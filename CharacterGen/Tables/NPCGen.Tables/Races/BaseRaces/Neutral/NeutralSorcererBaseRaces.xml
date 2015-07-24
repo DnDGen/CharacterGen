@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<percentile>
+  <object><lower>1</lower><content>Hill Dwarf</content><upper>1</upper></object>
+  <object><lower>2</lower><content>High Elf</content><upper>2</upper></object>
+  <object><lower>3</lower><content>Wild Elf</content><upper>12</upper></object>
+  <object><lower>13</lower><content>Wood Elf</content><upper>15</upper></object>
+  <object><lower>16</lower><content>Rock Gnome</content><upper>16</upper></object>
+  <object><lower>17</lower><content>Half-Elf</content><upper>31</upper></object>
+  <object><lower>32</lower><content>Lightfoot Halfling</content><upper>41</upper></object> 
+  <object><lower>42</lower><content>Deep Halfling</content><upper>42</upper></object>
+  <object><lower>43</lower><content>Tallfellow Halfling</content><upper>43</upper></object>
+  <object><lower>44</lower><content>Half-Orc</content><upper>48</upper></object>
+  <object>
+    <lower>49</lower>
+    <content>Human</content>
+    <upper>95</upper>
+  </object>
+  <object>
+    <lower>96</lower>
+    <content>Lizardfolk</content>
+    <upper>97</upper>
+  </object>
+  <object>
+    <lower>98</lower>
+    <content>Doppelganger</content>
+    <upper>98</upper>
+  </object>
+    <object>
+        <lower>99</lower>
+        <content></content>
+        <upper>100</upper>
+    </object>
+</percentile>

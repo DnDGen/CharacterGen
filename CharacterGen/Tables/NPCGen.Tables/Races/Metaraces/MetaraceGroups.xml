@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+    <object>
+        <name>Evil</name>
+        <item>Half-Dragon</item>
+        <item>Half-Fiend</item>
+        <item>Wererat</item>
+        <item>Werewolf</item>
+    </object>
+    <object>
+        <name>Neutral</name>
+        <item>Wereboar</item>
+        <item>Weretiger</item>
+    </object>
+    <object>
+        <name>Good</name>
+        <item>Half-Dragon</item>
+        <item>Half-Celestial</item>
+        <item>Werebear</item>
+    </object>
+    <object>
+        <name>Genetic</name>
+        <item>Half-Dragon</item>
+        <item>Half-Celestial</item>
+        <item>Half-Fiend</item>
+    </object>
+    <object>
+        <name>Lycanthrope</name>
+        <item>Werebear</item>
+        <item>Wereboar</item>
+        <item>Weretiger</item>
+        <item>Wererat</item>
+        <item>Werewolf</item>
+    </object>
+</items>

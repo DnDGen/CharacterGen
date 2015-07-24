@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<percentile>
+    <object>
+        <lower>1</lower>
+        <content></content>
+        <upper>95</upper>
+    </object>
+  <object>
+    <lower>96</lower>
+    <content>Wererat</content>
+    <upper>96</upper>
+  </object>
+  <object>
+    <lower>97</lower>
+    <content>Werewolf</content>
+    <upper>97</upper>
+  </object>
+  <object>
+    <lower>98</lower>
+    <content>Half-Fiend</content>
+    <upper>98</upper>
+  </object>
+  <object>
+    <lower>99</lower>
+    <content>Half-Dragon</content>
+    <upper>100</upper>
+  </object>
+</percentile>

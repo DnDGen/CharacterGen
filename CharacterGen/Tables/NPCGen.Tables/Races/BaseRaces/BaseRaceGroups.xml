@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+    <object>
+        <name>Evil</name>
+        <item>Deep Dwarf</item>
+        <item>Hill Dwarf</item>
+        <item>High Elf</item>
+        <item>Wild Elf</item>
+        <item>Wood Elf</item>
+        <item>Half-Elf</item>
+        <item>Lightfoot Halfling</item>
+        <item>Deep Halfling</item>
+        <item>Tallfellow Halfling</item>
+        <item>Half-Orc</item>
+        <item>Human</item>
+        <item>Lizardfolk</item>
+        <item>Goblin</item>
+        <item>Hobgoblin</item>
+        <item>Kobold</item>
+        <item>Orc</item>
+        <item>Tiefling</item>
+        <item>Drow</item>
+        <item>Duergar Dwarf</item>
+        <item>Derro</item>
+        <item>Gnoll</item>
+        <item>Troglodyte</item>
+        <item>Bugbear</item>
+        <item>Ogre</item>
+        <item>Minotaur</item>
+        <item>Mind Flayer</item>
+        <item>Ogre Mage</item>
+    </object>
+    <object>
+        <name>Neutral</name>
+        <item>Mountain Dwarf</item>
+        <item>Deep Dwarf</item>
+        <item>Hill Dwarf</item>
+        <item>High Elf</item>
+        <item>Wild Elf</item>
+        <item>Wood Elf</item>
+        <item>Gray Elf</item>
+        <item>Half-Elf</item>
+        <item>Lightfoot Halfling</item>
+        <item>Deep Halfling</item>
+        <item>Tallfellow Halfling</item>
+        <item>Half-Orc</item>
+        <item>Human</item>
+        <item>Lizardfolk</item>
+        <item>Doppelganger</item>
+        <item>Forest Gnome</item>
+        <item>Rock Gnome</item>
+    </object>
+    <object>
+        <name>Good</name>
+        <item>Aasimar</item>
+        <item>Mountain Dwarf</item>
+        <item>Deep Dwarf</item>
+        <item>Hill Dwarf</item>
+        <item>High Elf</item>
+        <item>Wild Elf</item>
+        <item>Wood Elf</item>
+        <item>Half-Elf</item>
+        <item>Gray Elf</item>
+        <item>Lightfoot Halfling</item>
+        <item>Deep Halfling</item>
+        <item>Tallfellow Halfling</item>
+        <item>Half-Orc</item>
+        <item>Human</item>
+        <item>Svirfneblin</item>
+        <item>Forest Gnome</item>
+        <item>Rock Gnome</item>
+    </object>
+    <object>
+        <name>Standard</name>
+        <item>Half-Elf</item>
+        <item>Half-Orc</item>
+        <item>High Elf</item>
+        <item>Hill Dwarf</item>
+        <item>Human</item>
+        <item>Lightfoot Halfling</item>
+        <item>Rock Gnome</item>
+    </object>
+    <object>
+        <name>Large</name>
+        <item>Minotaur</item>
+        <item>Ogre</item>
+        <item>Ogre Mage</item>
+    </object>
+    <object>
+        <name>Small</name>
+        <item>Derro</item>
+        <item>Forest Gnome</item>
+        <item>Rock Gnome</item>
+        <item>Svirfneblin</item>
+        <item>Deep Halfling</item>
+        <item>Lightfoot Halfling</item>
+        <item>Tallfellow Halfling</item>
+        <item>Kobold</item>
+        <item>Goblin</item>
+    </object>
+    <object>
+        <name>Monsters</name>
+        <item>Bugbear</item>
+        <item>Derro</item>
+        <item>Doppelganger</item>
+        <item>Gnoll</item>
+        <item>Lizardfolk</item>
+        <item>Mind Flayer</item>
+        <item>Minotaur</item>
+        <item>Ogre</item>
+        <item>Ogre Mage</item>
+        <item>Troglodyte</item>
+    </object>
+</items>
