@@ -1,0 +1,290 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+  <object>
+    <name>Light Armor Proficiency</name>
+    <item>Light Armor Proficiency</item>
+    <item>1</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+  </object>
+  <object>
+    <name>Martial Weapon Proficiency</name>
+    <item>Martial Weapon Proficiency</item>
+    <item>1</item>
+    <item>All</item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+  </object>
+    <object>
+        <name>Simple Weapon Proficiency</name>
+        <item>Simple Weapon Proficiency</item>
+        <item>1</item>
+        <item>All</item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+    </object>
+  <object>
+    <name>Shield Proficiency</name>
+    <item>Shield Proficiency</item>
+    <item>1</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+  </object>
+    <object>
+        <name>Favored Enemy1</name>
+        <item>Favored Enemy</item>
+        <item>1</item>
+        <item>Favored Enemies</item>
+        <item>2</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+    </object>
+    <object>
+        <name>Favored Enemy2</name>
+        <item>Favored Enemy</item>
+        <item>5</item>
+        <item>Favored Enemies</item>
+        <item>2</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+    </object>
+    <object>
+        <name>Favored Enemy3</name>
+        <item>Favored Enemy</item>
+        <item>10</item>
+        <item>Favored Enemies</item>
+        <item>2</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+    </object>
+    <object>
+        <name>Favored Enemy4</name>
+        <item>Favored Enemy</item>
+        <item>15</item>
+        <item>Favored Enemies</item>
+        <item>2</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+    </object>
+    <object>
+        <name>Favored Enemy5</name>
+        <item>Favored Enemy</item>
+        <item>20</item>
+        <item>Favored Enemies</item>
+        <item>2</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+    </object>
+    <object>
+        <name>Track</name>
+        <item>Track</item>
+        <item>1</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+    </object>
+    <object>
+        <name>Wild Empathy</name>
+        <item>Wild Empathy</item>
+        <item>1</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+    </object>
+    <object>
+        <name>Combat Style</name>
+        <item>Combat Style</item>
+        <item>2</item>
+        <item>CombatStyles</item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+    </object>
+    <object>
+        <name>Endurance</name>
+        <item>Endurance</item>
+        <item>3</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+    </object>
+    <object>
+        <name>Improved Combat Style</name>
+        <item>Improved Combat Style</item>
+        <item>6</item>
+        <item>CombatStyles</item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+    </object>
+    <object>
+        <name>Woodland Stride</name>
+        <item>Woodland Stride</item>
+        <item>7</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+    </object>
+    <object>
+        <name>Swift Tracker</name>
+        <item>Swift Tracker</item>
+        <item>8</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+    </object>
+    <object>
+        <name>Combat Style Mastery</name>
+        <item>Combat Style Mastery</item>
+        <item>11</item>
+        <item>CombatStyles</item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+    </object>
+    <object>
+        <name>Camouflage</name>
+        <item>Camouflage</item>
+        <item>13</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+    </object>
+    <object>
+        <name>Hide in Plain Sight</name>
+        <item>Hide in Plain Sight</item>
+        <item>17</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+    </object>
+    <object>
+        <name>Rapid ShotRanger</name>
+        <item>Rapid Shot</item>
+        <item>1</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+    </object>
+    <object>
+        <name>Evasion</name>
+        <item>Evasion</item>
+        <item>9</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+    </object>
+    <object>
+        <name>Two-Weapon FightingRanger</name>
+        <item>Two-Weapon Fighting</item>
+        <item>1</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+    </object>
+  <object>
+    <name>ManyshotRanger</name>
+    <item>Manyshot</item>
+    <item>1</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+  </object>
+  <object>
+    <name>Improved Two-Weapon FightingRanger</name>
+    <item>Improved Two-Weapon Fighting</item>
+    <item>1</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+  </object>
+  <object>
+    <name>Improved Precise ShotRanger</name>
+    <item>Improved Precise Shot</item>
+    <item>1</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+  </object>
+  <object>
+    <name>Greater Two-Weapon FightingRanger</name>
+    <item>Greater Two-Weapon Fighting</item>
+    <item>1</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+  </object>
+</items>

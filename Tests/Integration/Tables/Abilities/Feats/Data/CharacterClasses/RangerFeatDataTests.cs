@@ -1,8 +1,9 @@
-﻿using System;
-using CharacterGen.Common.Abilities.Feats;
+﻿using CharacterGen.Common.Abilities.Feats;
 using CharacterGen.Common.CharacterClasses;
+using CharacterGen.Common.Items;
 using CharacterGen.Tables;
 using NUnit.Framework;
+using System;
 
 namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
 {
@@ -17,7 +18,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
         [Test]
         public override void CollectionNames()
         {
-            var names = new[] 
+            var names = new[]
             {
                 FeatConstants.SimpleWeaponProficiency,
                 FeatConstants.MartialWeaponProficiency,
@@ -52,7 +53,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
 
         [TestCase(FeatConstants.SimpleWeaponProficiency,
             FeatConstants.SimpleWeaponProficiency,
-            "",
+            ProficiencyConstants.All,
             0,
             "",
             "",
@@ -61,7 +62,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             0)]
         [TestCase(FeatConstants.MartialWeaponProficiency,
             FeatConstants.MartialWeaponProficiency,
-            "",
+            ProficiencyConstants.All,
             0,
             "",
             "",
@@ -94,7 +95,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             "",
             1,
             0,
-            0)]
+            2)]
         [TestCase(FeatConstants.FavoredEnemy + "2",
             FeatConstants.FavoredEnemy,
             GroupConstants.FavoredEnemies,
@@ -103,7 +104,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             "",
             5,
             0,
-            0)]
+            2)]
         [TestCase(FeatConstants.FavoredEnemy + "3",
             FeatConstants.FavoredEnemy,
             GroupConstants.FavoredEnemies,
@@ -112,7 +113,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             "",
             10,
             0,
-            0)]
+            2)]
         [TestCase(FeatConstants.FavoredEnemy + "4",
             FeatConstants.FavoredEnemy,
             GroupConstants.FavoredEnemies,
@@ -121,7 +122,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             "",
             15,
             0,
-            0)]
+            2)]
         [TestCase(FeatConstants.FavoredEnemy + "5",
             FeatConstants.FavoredEnemy,
             GroupConstants.FavoredEnemies,
@@ -130,7 +131,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             "",
             20,
             0,
-            0)]
+            2)]
         [TestCase(FeatConstants.Track,
             FeatConstants.Track,
             "",
