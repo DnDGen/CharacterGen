@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-using TreasureGen.Common.Items;
-using CharacterGen.Common.Abilities.Feats;
+﻿using CharacterGen.Common.Abilities.Feats;
 using CharacterGen.Common.Abilities.Skills;
 using CharacterGen.Common.Abilities.Stats;
 using CharacterGen.Common.CharacterClasses;
@@ -9,6 +6,9 @@ using CharacterGen.Common.Magics;
 using CharacterGen.Common.Races;
 using CharacterGen.Tables;
 using NUnit.Framework;
+using System;
+using System.Linq;
+using TreasureGen.Common.Items;
 
 namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
 {
@@ -23,7 +23,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
         [Test]
         public override void CollectionNames()
         {
-            var names = new[] 
+            var names = new[]
             {
                 GroupConstants.Additional,
                 GroupConstants.HasClassRequirements,
@@ -33,8 +33,10 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
                 CharacterClassConstants.Barbarian,
                 CharacterClassConstants.Bard,
                 CharacterClassConstants.Cleric,
+                CharacterClassConstants.Druid,
                 CharacterClassConstants.Fighter,
                 CharacterClassConstants.Monk,
+                CharacterClassConstants.Paladin,
                 CharacterClassConstants.Ranger,
                 CharacterClassConstants.Rogue,
                 CharacterClassConstants.Sorcerer,
@@ -188,6 +190,36 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.HeavyArmorProficiency,
             FeatConstants.ShieldProficiency,
             FeatConstants.Turn)]
+        [TestCase(CharacterClassConstants.Druid,
+            FeatConstants.SimpleWeaponProficiency + WeaponConstants.Quarterstaff,
+            FeatConstants.SimpleWeaponProficiency + WeaponConstants.Dagger,
+            FeatConstants.SimpleWeaponProficiency + WeaponConstants.Club,
+            FeatConstants.SimpleWeaponProficiency + WeaponConstants.Dart,
+            FeatConstants.SimpleWeaponProficiency + WeaponConstants.Sling,
+            FeatConstants.SimpleWeaponProficiency + WeaponConstants.Shortspear,
+            FeatConstants.SimpleWeaponProficiency + WeaponConstants.Longspear,
+            FeatConstants.MartialWeaponProficiency + WeaponConstants.Scimitar,
+            FeatConstants.SimpleWeaponProficiency + WeaponConstants.Sickle,
+            FeatConstants.LightArmorProficiency,
+            FeatConstants.MediumArmorProficiency,
+            FeatConstants.ShieldProficiency,
+            FeatConstants.NatureSense,
+            FeatConstants.WildEmpathy + "1",
+            FeatConstants.WildEmpathy + "2",
+            FeatConstants.WildEmpathy + "3",
+            FeatConstants.WildEmpathy + "4",
+            FeatConstants.WildEmpathy + "5",
+            FeatConstants.WildEmpathy + "6",
+            FeatConstants.WildEmpathy + "Elemental1",
+            FeatConstants.WildEmpathy + "Elemental2",
+            FeatConstants.WildEmpathy + "Elemental3",
+            FeatConstants.WoodlandStride,
+            FeatConstants.TracklessStep,
+            FeatConstants.ResistNaturesLure,
+            FeatConstants.WildShape,
+            FeatConstants.ImmuneToEffect,
+            FeatConstants.AThousandFaces,
+            FeatConstants.TimelessBody)]
         [TestCase(CharacterClassConstants.Fighter,
             FeatConstants.SimpleWeaponProficiency,
             FeatConstants.MartialWeaponProficiency,
@@ -340,10 +372,11 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.SkillBonus + SkillConstants.Spot,
             FeatConstants.SkillBonus + SkillConstants.Listen,
             FeatConstants.SpellResistance,
-            FeatConstants.SpellLikeAbility + "Dancing lights",
-            FeatConstants.SpellLikeAbility + "Darkness",
-            FeatConstants.SpellLikeAbility + "Faerie fire",
-            FeatConstants.LightBlindness)]
+            FeatConstants.SpellLikeAbility + SpellConstants.DancingLights,
+            FeatConstants.SpellLikeAbility + SpellConstants.Darkness,
+            FeatConstants.SpellLikeAbility + SpellConstants.FaerieFire,
+            FeatConstants.LightBlindness,
+            FeatConstants.Poison)]
         [TestCase(RaceConstants.BaseRaces.DuergarDwarf,
             FeatConstants.Darkvision,
             FeatConstants.Stonecunning,

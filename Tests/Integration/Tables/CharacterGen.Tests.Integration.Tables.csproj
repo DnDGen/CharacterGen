@@ -79,6 +79,7 @@
     <Compile Include="Abilities\Feats\Data\CharacterClasses\SorcererFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\WizardFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\DeepHalflingFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\DrowFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\GnollFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\GoblinFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\HalfDragonFeatDataTests.cs" />

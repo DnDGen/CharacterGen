@@ -1,6 +1,6 @@
-﻿using System;
-using CharacterGen.Common.Magics;
+﻿using CharacterGen.Common.Magics;
 using NUnit.Framework;
+using System;
 
 namespace CharacterGen.Tests.Unit.Common.Magics
 {
@@ -31,6 +31,7 @@ namespace CharacterGen.Tests.Unit.Common.Magics
         [TestCase(SpellConstants.DisguiseSelf, "Disguise self")]
         [TestCase(SpellConstants.DispelEvil, "Dispel evil")]
         [TestCase(SpellConstants.EnlargePerson, "Enlarge person")]
+        [TestCase(SpellConstants.FaerieFire, "Faerie fire")]
         [TestCase(SpellConstants.GaseousForm, "Gaseous form")]
         [TestCase(SpellConstants.GhostSound, "Ghost sound")]
         [TestCase(SpellConstants.Hallow, "Hallow")]

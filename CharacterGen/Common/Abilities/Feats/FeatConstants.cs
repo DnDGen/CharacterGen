@@ -102,6 +102,7 @@ namespace CharacterGen.Common.Abilities.Feats
         public const String PassWithoutTrace = "Pass Without Trace";
         public const String Persuasive = "Persuasive";
         public const String PointBlankShot = "Point Blank Shot";
+        public const String Poison = "Poison";
         public const String PoisonUse = "Poison Use";
         public const String PowerAttack = "Power Attack";
         public const String PreciseShot = "Precise Shot";

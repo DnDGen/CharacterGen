@@ -347,6 +347,7 @@
         <item>Spell-Like AbilityDancing lights</item>
         <item>Spell-Like AbilityFaerie fire</item>
         <item>Spell Resistance</item>
+      <item>Poison</item>
     </object>
     <object>
         <name>Duergar Dwarf</name>

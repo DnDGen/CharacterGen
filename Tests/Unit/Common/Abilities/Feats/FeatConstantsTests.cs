@@ -1,6 +1,6 @@
-﻿using System;
-using CharacterGen.Common.Abilities.Feats;
+﻿using CharacterGen.Common.Abilities.Feats;
 using NUnit.Framework;
+using System;
 
 namespace CharacterGen.Tests.Unit.Common.Abilities.Feats
 {
@@ -144,6 +144,7 @@ namespace CharacterGen.Tests.Unit.Common.Abilities.Feats
         [TestCase(FeatConstants.PerfectSelf, "Perfect Self")]
         [TestCase(FeatConstants.Persuasive, "Persuasive")]
         [TestCase(FeatConstants.PointBlankShot, "Point Blank Shot")]
+        [TestCase(FeatConstants.Poison, "Poison")]
         [TestCase(FeatConstants.PoisonUse, "Poison Use")]
         [TestCase(FeatConstants.Pounce, "Pounce")]
         [TestCase(FeatConstants.PowerAttack, "Power Attack")]

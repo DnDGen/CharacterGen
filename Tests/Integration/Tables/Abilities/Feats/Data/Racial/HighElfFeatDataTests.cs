@@ -1,10 +1,11 @@
-﻿using System;
-using TreasureGen.Common.Items;
-using CharacterGen.Common.Abilities.Feats;
+﻿using CharacterGen.Common.Abilities.Feats;
 using CharacterGen.Common.Abilities.Skills;
+using CharacterGen.Common.Magics;
 using CharacterGen.Common.Races;
 using CharacterGen.Tables;
 using NUnit.Framework;
+using System;
+using TreasureGen.Common.Items;
 
 namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
 {
@@ -19,7 +20,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
         [Test]
         public override void CollectionNames()
         {
-            var names = new[] 
+            var names = new[]
             {
                 FeatConstants.ImmuneToEffect,
                 FeatConstants.SaveBonus,
@@ -79,7 +80,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             2)]
         [TestCase(FeatConstants.ImmuneToEffect,
             FeatConstants.ImmuneToEffect,
-            "Sleep",
+            SpellConstants.Sleep,
             0,
             "",
             0,
