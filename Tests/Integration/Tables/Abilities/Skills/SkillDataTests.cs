@@ -1,10 +1,10 @@
 ﻿using System;
-using NPCGen.Common.Abilities.Skills;
-using NPCGen.Common.Abilities.Stats;
-using NPCGen.Tables.Interfaces;
+using CharacterGen.Common.Abilities.Skills;
+using CharacterGen.Common.Abilities.Stats;
+using CharacterGen.Tables;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Integration.Tables.Abilities.Skills
+namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
 {
     [TestFixture]
     public class SkillDataTests : CollectionTests

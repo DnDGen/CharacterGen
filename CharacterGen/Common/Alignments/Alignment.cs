@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NPCGen.Common.Alignments
+namespace CharacterGen.Common.Alignments
 {
     public class Alignment
     {

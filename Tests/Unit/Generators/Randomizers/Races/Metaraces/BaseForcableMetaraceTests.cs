@@ -1,16 +1,16 @@
-﻿using System;
+﻿using CharacterGen.Common.CharacterClasses;
+using CharacterGen.Common.Races;
+using CharacterGen.Generators.Domain.Randomizers.Races.Metaraces;
+using CharacterGen.Generators.Verifiers.Exceptions;
+using CharacterGen.Selectors;
+using CharacterGen.Tables;
+using Moq;
+using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Moq;
-using NPCGen.Common.CharacterClasses;
-using NPCGen.Common.Races;
-using NPCGen.Generators.Interfaces.Verifiers.Exceptions;
-using NPCGen.Generators.Randomizers.Races.Metaraces;
-using NPCGen.Selectors.Interfaces;
-using NPCGen.Tables.Interfaces;
-using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
+namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
 {
     [TestFixture]
     public class BaseForcableMetaraceTests
@@ -150,7 +150,8 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
             public String ForbiddenMetarace { get; set; }
 
             public TestMetaraceRandomizer(IPercentileSelector percentileResultSelector, IAdjustmentsSelector levelAdjustmentsSelector)
-                : base(percentileResultSelector, levelAdjustmentsSelector) { }
+                : base(percentileResultSelector, levelAdjustmentsSelector)
+            { }
 
             protected override Boolean MetaraceIsAllowed(String metarace)
             {

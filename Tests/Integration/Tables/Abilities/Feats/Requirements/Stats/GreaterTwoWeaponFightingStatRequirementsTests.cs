@@ -1,10 +1,10 @@
 ﻿using System;
-using NPCGen.Common.Abilities.Feats;
-using NPCGen.Common.Abilities.Stats;
-using NPCGen.Tables.Interfaces;
+using CharacterGen.Common.Abilities.Feats;
+using CharacterGen.Common.Abilities.Stats;
+using CharacterGen.Tables;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Requirements.Stats
+namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Requirements.Stats
 {
     [TestFixture]
     public class GreaterTwoWeaponFightingStatRequirementsTests : AdjustmentsTests

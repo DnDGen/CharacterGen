@@ -1,9 +1,9 @@
 ﻿using System;
-using NPCGen.Common.Races;
-using NPCGen.Tables.Interfaces;
+using CharacterGen.Common.Races;
+using CharacterGen.Tables;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Integration.Tables.Races.BaseRaces
+namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces
 {
     [TestFixture]
     public class LandSpeedsTests : AdjustmentsTests

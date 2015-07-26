@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using Moq;
-using NPCGen.Generators.Interfaces.Randomizers.Races;
+using CharacterGen.Generators.Randomizers.Races;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
+namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
 {
     [TestFixture]
     public abstract class BaseRaceRandomizerTests : RaceRandomizerTests

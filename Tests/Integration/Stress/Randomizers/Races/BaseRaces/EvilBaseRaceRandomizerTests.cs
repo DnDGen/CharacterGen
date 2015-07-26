@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using Ninject;
-using NPCGen.Common.Races;
-using NPCGen.Generators.Interfaces.Randomizers.Races;
+using CharacterGen.Common.Races;
+using CharacterGen.Generators.Randomizers.Races;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
+namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
 {
     [TestFixture]
     public class EvilBaseRaceRandomizerTests : BaseRaceRandomizerTests

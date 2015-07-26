@@ -1,8 +1,8 @@
-﻿using Ninject.Modules;
-using NPCGen.Bootstrap.Factories;
-using NPCGen.Mappers.Interfaces;
+﻿using CharacterGen.Bootstrap.Factories;
+using CharacterGen.Mappers;
+using Ninject.Modules;
 
-namespace NPCGen.Bootstrap.Modules
+namespace CharacterGen.Bootstrap.Modules
 {
     public class MappersModule : NinjectModule
     {

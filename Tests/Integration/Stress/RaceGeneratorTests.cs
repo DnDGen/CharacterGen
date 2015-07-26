@@ -1,9 +1,9 @@
 ﻿using System;
-using NPCGen.Common.Races;
-using NPCGen.Generators.Interfaces.Randomizers.Races;
+using CharacterGen.Common.Races;
+using CharacterGen.Generators.Randomizers.Races;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Integration.Stress
+namespace CharacterGen.Tests.Integration.Stress
 {
     [TestFixture]
     public class RaceGeneratorTests : StressTests

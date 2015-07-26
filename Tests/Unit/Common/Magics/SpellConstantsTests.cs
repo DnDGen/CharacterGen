@@ -1,8 +1,8 @@
 ﻿using System;
-using NPCGen.Common.Magics;
+using CharacterGen.Common.Magics;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Common.Magics
+namespace CharacterGen.Tests.Unit.Common.Magics
 {
     [TestFixture]
     public class SpellConstantsTests

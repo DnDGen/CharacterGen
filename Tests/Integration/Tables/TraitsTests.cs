@@ -1,8 +1,8 @@
 ﻿using System;
-using NPCGen.Tables.Interfaces;
+using CharacterGen.Tables;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Integration.Tables
+namespace CharacterGen.Tests.Integration.Tables
 {
     [TestFixture]
     public class TraitsTests : PercentileTests

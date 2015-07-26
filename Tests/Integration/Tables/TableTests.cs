@@ -1,8 +1,8 @@
 ﻿using System;
-using NPCGen.Tests.Integration.Common;
+using CharacterGen.Tests.Integration.Common;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Integration.Tables
+namespace CharacterGen.Tests.Integration.Tables
 {
     [TestFixture]
     [Table]

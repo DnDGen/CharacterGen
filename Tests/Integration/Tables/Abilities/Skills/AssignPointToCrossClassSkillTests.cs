@@ -1,8 +1,8 @@
 ﻿using System;
-using NPCGen.Tables.Interfaces;
+using CharacterGen.Tables;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Integration.Tables.Abilities.Skills
+namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
 {
     [TestFixture]
     public class AssignPointToCrossClassSkillTests : BooleanPercentileTests

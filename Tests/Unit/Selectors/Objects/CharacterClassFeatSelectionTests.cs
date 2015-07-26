@@ -1,9 +1,9 @@
 ﻿using System;
-using NPCGen.Common.CharacterClasses;
-using NPCGen.Selectors.Interfaces.Objects;
+using CharacterGen.Common.CharacterClasses;
+using CharacterGen.Selectors.Objects;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Selectors.Objects
+namespace CharacterGen.Tests.Unit.Selectors.Objects
 {
     [TestFixture]
     public class CharacterClassFeatSelectionTests

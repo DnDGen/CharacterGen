@@ -1,8 +1,8 @@
 ﻿using System;
-using NPCGen.Tests.Integration.Common;
+using CharacterGen.Tests.Integration.Common;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Integration.Bootstrap
+namespace CharacterGen.Tests.Integration.Bootstrap
 {
     [TestFixture]
     public abstract class BootstrapTests : IntegrationTests

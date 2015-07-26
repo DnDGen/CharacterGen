@@ -1,16 +1,16 @@
-﻿using System;
+﻿using CharacterGen.Common.Alignments;
+using CharacterGen.Generators;
+using CharacterGen.Generators.Domain;
+using CharacterGen.Generators.Randomizers.CharacterClasses;
+using CharacterGen.Selectors;
+using CharacterGen.Tables;
+using Moq;
+using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Moq;
-using NPCGen.Common.Alignments;
-using NPCGen.Generators;
-using NPCGen.Generators.Interfaces;
-using NPCGen.Generators.Interfaces.Randomizers.CharacterClasses;
-using NPCGen.Selectors.Interfaces;
-using NPCGen.Tables.Interfaces;
-using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Generators
+namespace CharacterGen.Tests.Unit.Generators
 {
     [TestFixture]
     public class CharacterClassGeneratorTests
@@ -176,7 +176,7 @@ namespace NPCGen.Tests.Unit.Generators
             mockBooleanPercentileSelector.Setup(s => s.SelectFrom(tableName)).Returns(true);
             specialistFieldQuantities[ClassName] = 1;
             specialistFields.Add("field 1");
-            
+
             prohibitedFieldQuantities["field 1"] = 1;
 
             var characterClass = characterClassGenerator.GenerateWith(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);

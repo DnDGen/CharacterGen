@@ -1,15 +1,15 @@
-﻿using System;
-using System.Linq;
-using D20Dice;
+﻿using CharacterGen.Common.Alignments;
+using CharacterGen.Generators.Domain.Randomizers.Alignments;
+using CharacterGen.Generators.Verifiers.Exceptions;
+using CharacterGen.Selectors;
+using CharacterGen.Tables;
+using RollGen;
 using Moq;
-using NPCGen.Common.Alignments;
-using NPCGen.Generators.Interfaces.Verifiers.Exceptions;
-using NPCGen.Generators.Randomizers.Alignments;
-using NPCGen.Selectors.Interfaces;
-using NPCGen.Tables.Interfaces;
 using NUnit.Framework;
+using System;
+using System.Linq;
 
-namespace NPCGen.Tests.Unit.Generators.Randomizers.Alignments
+namespace CharacterGen.Tests.Unit.Generators.Randomizers.Alignments
 {
     [TestFixture]
     public class BaseAlignmentTests

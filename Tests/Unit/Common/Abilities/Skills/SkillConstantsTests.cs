@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
-using NPCGen.Common.Abilities.Skills;
+using CharacterGen.Common.Abilities.Skills;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Common.Abilities.Skills
+namespace CharacterGen.Tests.Unit.Common.Abilities.Skills
 {
     [TestFixture]
     public class SkillConstantsTests

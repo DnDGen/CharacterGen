@@ -1,8 +1,8 @@
-﻿using NPCGen.Common.Abilities.Skills;
-using NPCGen.Common.Abilities.Stats;
+﻿using CharacterGen.Common.Abilities.Skills;
+using CharacterGen.Common.Abilities.Stats;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Common.Abilities.Skills
+namespace CharacterGen.Tests.Unit.Common.Abilities.Skills
 {
     [TestFixture]
     public class SkillTests

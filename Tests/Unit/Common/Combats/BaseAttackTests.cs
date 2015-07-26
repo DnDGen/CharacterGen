@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
-using NPCGen.Common.Combats;
+using CharacterGen.Common.Combats;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Common.Combats
+namespace CharacterGen.Tests.Unit.Common.Combats
 {
     [TestFixture]
     public class BaseAttackTests

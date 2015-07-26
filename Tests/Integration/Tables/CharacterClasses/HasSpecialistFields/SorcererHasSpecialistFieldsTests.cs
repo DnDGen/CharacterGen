@@ -1,9 +1,9 @@
 ﻿using System;
-using NPCGen.Common.CharacterClasses;
-using NPCGen.Tables.Interfaces;
+using CharacterGen.Common.CharacterClasses;
+using CharacterGen.Tables;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Integration.Tables.CharacterClasses.HasSpecialistFields
+namespace CharacterGen.Tests.Integration.Tables.CharacterClasses.HasSpecialistFields
 {
     [TestFixture]
     public class SorcererHasSpecialistFieldsTests : BooleanPercentileTests

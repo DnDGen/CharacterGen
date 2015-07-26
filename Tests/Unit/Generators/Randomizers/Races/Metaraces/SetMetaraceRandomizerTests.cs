@@ -1,13 +1,11 @@
-﻿using System;
-using System.Linq;
-using Moq;
-using NPCGen.Common.CharacterClasses;
-using NPCGen.Generators.Interfaces.Randomizers.Races;
-using NPCGen.Generators.Randomizers.Races.Metaraces;
-using NPCGen.Selectors.Interfaces;
+﻿using CharacterGen.Common.CharacterClasses;
+using CharacterGen.Generators.Domain.Randomizers.Races.Metaraces;
+using CharacterGen.Generators.Randomizers.Races;
 using NUnit.Framework;
+using System;
+using System.Linq;
 
-namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
+namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
 {
     [TestFixture]
     public class SetMetaraceRandomizerTests

@@ -1,8 +1,8 @@
 ﻿using System;
-using NPCGen.Common.CharacterClasses;
+using CharacterGen.Common.CharacterClasses;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Common.Classes
+namespace CharacterGen.Tests.Unit.Common.Classes
 {
     [TestFixture]
     public class CharacterClassConstantsTests

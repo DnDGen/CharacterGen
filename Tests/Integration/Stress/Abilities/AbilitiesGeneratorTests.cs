@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Linq;
 using Ninject;
-using NPCGen.Common.Abilities.Skills;
-using NPCGen.Common.Abilities.Stats;
-using NPCGen.Generators.Interfaces.Abilities;
-using NPCGen.Generators.Interfaces.Combats;
-using NPCGen.Generators.Interfaces.Randomizers.Stats;
+using CharacterGen.Common.Abilities.Skills;
+using CharacterGen.Common.Abilities.Stats;
+using CharacterGen.Generators.Abilities;
+using CharacterGen.Generators.Combats;
+using CharacterGen.Generators.Randomizers.Stats;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Integration.Stress.Abilities
+namespace CharacterGen.Tests.Integration.Stress.Abilities
 {
     [TestFixture]
     public class AbilitiesGeneratorTests : StressTests

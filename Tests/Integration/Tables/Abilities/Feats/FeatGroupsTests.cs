@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Linq;
-using EquipmentGen.Common.Items;
-using NPCGen.Common.Abilities.Feats;
-using NPCGen.Common.Abilities.Skills;
-using NPCGen.Common.Abilities.Stats;
-using NPCGen.Common.CharacterClasses;
-using NPCGen.Common.Magics;
-using NPCGen.Common.Races;
-using NPCGen.Tables.Interfaces;
+using TreasureGen.Common.Items;
+using CharacterGen.Common.Abilities.Feats;
+using CharacterGen.Common.Abilities.Skills;
+using CharacterGen.Common.Abilities.Stats;
+using CharacterGen.Common.CharacterClasses;
+using CharacterGen.Common.Magics;
+using CharacterGen.Common.Races;
+using CharacterGen.Tables;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
+namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
 {
     [TestFixture]
     public class FeatGroupsTests : CollectionTests

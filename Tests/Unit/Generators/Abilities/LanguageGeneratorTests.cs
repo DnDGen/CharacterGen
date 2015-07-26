@@ -1,14 +1,14 @@
-﻿using System;
+﻿using CharacterGen.Common.Races;
+using CharacterGen.Generators.Abilities;
+using CharacterGen.Generators.Domain.Abilities;
+using CharacterGen.Selectors;
+using Moq;
+using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Moq;
-using NPCGen.Common.Races;
-using NPCGen.Generators.Abilities;
-using NPCGen.Generators.Interfaces.Abilities;
-using NPCGen.Selectors.Interfaces;
-using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Generators.Abilities
+namespace CharacterGen.Tests.Unit.Generators.Abilities
 {
     [TestFixture]
     public class LanguageGeneratorTests

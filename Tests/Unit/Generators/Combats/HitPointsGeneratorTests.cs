@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using D20Dice;
+﻿using CharacterGen.Common.CharacterClasses;
+using CharacterGen.Common.Races;
+using CharacterGen.Generators.Combats;
+using CharacterGen.Generators.Domain.Combats;
+using CharacterGen.Selectors;
+using CharacterGen.Tables;
+using RollGen;
 using Moq;
-using NPCGen.Common.CharacterClasses;
-using NPCGen.Common.Races;
-using NPCGen.Generators.Combats;
-using NPCGen.Generators.Interfaces.Combats;
-using NPCGen.Selectors.Interfaces;
-using NPCGen.Tables.Interfaces;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
 
-namespace NPCGen.Tests.Unit.Generators.Combats
+namespace CharacterGen.Tests.Unit.Generators.Combats
 {
     [TestFixture]
     public class HitPointsGeneratorTests

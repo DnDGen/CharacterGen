@@ -1,10 +1,10 @@
-﻿using System;
-using NPCGen.Common.Abilities.Stats;
-using NPCGen.Generators.Interfaces.Randomizers.Stats;
-using NPCGen.Generators.Randomizers.Stats;
+﻿using CharacterGen.Common.Abilities.Stats;
+using CharacterGen.Generators.Domain.Randomizers.Stats;
+using CharacterGen.Generators.Randomizers.Stats;
 using NUnit.Framework;
+using System;
 
-namespace NPCGen.Tests.Unit.Generators.Randomizers.Stats
+namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
 {
     [TestFixture]
     public class SetStatsRandomizerTests

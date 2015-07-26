@@ -1,10 +1,10 @@
 ﻿using System;
-using NPCGen.Common.Abilities.Stats;
-using NPCGen.Common.Races;
-using NPCGen.Tables.Interfaces;
+using CharacterGen.Common.Abilities.Stats;
+using CharacterGen.Common.Races;
+using CharacterGen.Tables;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Integration.Tables.Abilities.Stats
+namespace CharacterGen.Tests.Integration.Tables.Abilities.Stats
 {
     [TestFixture]
     public class ConstitutionStatAdjustmentsTests : AdjustmentsTests

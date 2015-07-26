@@ -2,19 +2,19 @@
 using System.Diagnostics;
 using System.Linq;
 using Ninject;
-using NPCGen.Common.Alignments;
-using NPCGen.Common.CharacterClasses;
-using NPCGen.Common.Races;
-using NPCGen.Generators.Interfaces;
-using NPCGen.Generators.Interfaces.Randomizers.Alignments;
-using NPCGen.Generators.Interfaces.Randomizers.CharacterClasses;
-using NPCGen.Generators.Interfaces.Randomizers.Races;
-using NPCGen.Generators.Interfaces.Verifiers;
-using NPCGen.Generators.Interfaces.Verifiers.Exceptions;
-using NPCGen.Tests.Integration.Common;
+using CharacterGen.Common.Alignments;
+using CharacterGen.Common.CharacterClasses;
+using CharacterGen.Common.Races;
+using CharacterGen.Generators;
+using CharacterGen.Generators.Randomizers.Alignments;
+using CharacterGen.Generators.Randomizers.CharacterClasses;
+using CharacterGen.Generators.Randomizers.Races;
+using CharacterGen.Generators.Verifiers;
+using CharacterGen.Generators.Verifiers.Exceptions;
+using CharacterGen.Tests.Integration.Common;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Integration.Stress
+namespace CharacterGen.Tests.Integration.Stress
 {
     [TestFixture]
     [Stress]

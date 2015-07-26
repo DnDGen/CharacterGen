@@ -1,12 +1,12 @@
-﻿using System;
-using System.Linq;
-using D20Dice;
+﻿using CharacterGen.Generators.Domain.Randomizers.Stats;
+using CharacterGen.Generators.Randomizers.Stats;
+using RollGen;
 using Moq;
-using NPCGen.Generators.Interfaces.Randomizers.Stats;
-using NPCGen.Generators.Randomizers.Stats;
 using NUnit.Framework;
+using System;
+using System.Linq;
 
-namespace NPCGen.Tests.Unit.Generators.Randomizers.Stats
+namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
 {
     [TestFixture]
     public class GoodStatsRandomizerTests

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using NPCGen.Common.Alignments;
+using CharacterGen.Common.Alignments;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Integration.Stress
+namespace CharacterGen.Tests.Integration.Stress
 {
     [TestFixture]
     public class AlignmentGeneratorTests : StressTests

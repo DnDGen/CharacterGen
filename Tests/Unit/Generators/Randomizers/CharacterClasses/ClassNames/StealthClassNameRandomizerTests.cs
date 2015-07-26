@@ -1,8 +1,8 @@
-﻿using System;
-using NPCGen.Generators.Randomizers.CharacterClasses.ClassNames;
+﻿using CharacterGen.Generators.Domain.Randomizers.CharacterClasses.ClassNames;
 using NUnit.Framework;
+using System;
 
-namespace NPCGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassNames
+namespace CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassNames
 {
     [TestFixture]
     public class StealthClassNameRandomizerTests : ClassNameRandomizerTests

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace NPCGen.Common.Alignments
+namespace CharacterGen.Common.Alignments
 {
     public class AlignmentConstants
     {

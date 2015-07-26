@@ -1,18 +1,18 @@
-﻿using System;
+﻿using CharacterGen.Common.Abilities.Feats;
+using CharacterGen.Common.Abilities.Skills;
+using CharacterGen.Common.Abilities.Stats;
+using CharacterGen.Common.CharacterClasses;
+using CharacterGen.Generators.Abilities.Feats;
+using CharacterGen.Generators.Domain.Abilities.Feats;
+using CharacterGen.Selectors;
+using CharacterGen.Selectors.Objects;
+using Moq;
+using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Moq;
-using NPCGen.Common.Abilities.Feats;
-using NPCGen.Common.Abilities.Skills;
-using NPCGen.Common.Abilities.Stats;
-using NPCGen.Common.CharacterClasses;
-using NPCGen.Generators.Abilities.Feats;
-using NPCGen.Generators.Interfaces.Abilities.Feats;
-using NPCGen.Selectors.Interfaces;
-using NPCGen.Selectors.Interfaces.Objects;
-using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Generators.Abilities.Feats
+namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
 {
     [TestFixture]
     public class ClassFeatsGeneratorTests

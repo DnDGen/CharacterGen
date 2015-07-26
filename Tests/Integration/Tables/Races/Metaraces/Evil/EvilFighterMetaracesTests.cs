@@ -1,11 +1,11 @@
 ﻿using System;
-using NPCGen.Common.Alignments;
-using NPCGen.Common.CharacterClasses;
-using NPCGen.Common.Races;
-using NPCGen.Tables.Interfaces;
+using CharacterGen.Common.Alignments;
+using CharacterGen.Common.CharacterClasses;
+using CharacterGen.Common.Races;
+using CharacterGen.Tables;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Integration.Tables.Races.Metaraces.Evil
+namespace CharacterGen.Tests.Integration.Tables.Races.Metaraces.Evil
 {
     [TestFixture]
     public class EvilFighterMetaracesTests : PercentileTests

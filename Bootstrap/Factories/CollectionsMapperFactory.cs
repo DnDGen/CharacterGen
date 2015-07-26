@@ -1,8 +1,8 @@
-﻿using Ninject;
-using NPCGen.Mappers.Collections;
-using NPCGen.Mappers.Interfaces;
+﻿using CharacterGen.Mappers;
+using CharacterGen.Mappers.Domain.Collections;
+using Ninject;
 
-namespace NPCGen.Bootstrap.Factories
+namespace CharacterGen.Bootstrap.Factories
 {
     public static class CollectionsMapperFactory
     {

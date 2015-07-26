@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using NPCGen.Common.Abilities.Feats;
-using NPCGen.Common.Abilities.Skills;
-using NPCGen.Common.Abilities.Stats;
-using NPCGen.Common.CharacterClasses;
-using NPCGen.Selectors.Interfaces.Objects;
-using NPCGen.Tables.Interfaces;
+using CharacterGen.Common.Abilities.Feats;
+using CharacterGen.Common.Abilities.Skills;
+using CharacterGen.Common.Abilities.Stats;
+using CharacterGen.Common.CharacterClasses;
+using CharacterGen.Selectors.Objects;
+using CharacterGen.Tables;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Selectors.Objects
+namespace CharacterGen.Tests.Unit.Selectors.Objects
 {
     [TestFixture]
     public class AdditionalFeatSelectionTests

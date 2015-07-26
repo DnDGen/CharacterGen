@@ -1,8 +1,8 @@
 ﻿using System;
-using NPCGen.Tables.Interfaces;
+using CharacterGen.Tables;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Integration.Tables.Races
+namespace CharacterGen.Tests.Integration.Tables.Races
 {
     [TestFixture]
     public class MaleTests : BooleanPercentileTests

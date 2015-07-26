@@ -1,10 +1,10 @@
 ﻿using System;
 using Ninject;
-using NPCGen.Common.Races;
-using NPCGen.Generators.Interfaces.Randomizers.Races;
+using CharacterGen.Common.Races;
+using CharacterGen.Generators.Randomizers.Races;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
+namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
 {
     [TestFixture]
     public class NoMetaraceRandomizerTests : StressTests

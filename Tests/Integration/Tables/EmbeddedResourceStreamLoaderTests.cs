@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Xml;
 using Ninject;
-using NPCGen.Common.Alignments;
-using NPCGen.Tables.Interfaces;
-using NPCGen.Tests.Integration.Common;
+using CharacterGen.Common.Alignments;
+using CharacterGen.Tables;
+using CharacterGen.Tests.Integration.Common;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Integration.Tables
+namespace CharacterGen.Tests.Integration.Tables
 {
     [TestFixture]
     public class EmbeddedResourceStreamLoaderTests : IntegrationTests

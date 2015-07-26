@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using Ninject;
-using NPCGen.Common.CharacterClasses;
-using NPCGen.Generators.Interfaces.Randomizers.CharacterClasses;
+using CharacterGen.Common.CharacterClasses;
+using CharacterGen.Generators.Randomizers.CharacterClasses;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Integration.Stress.Randomizers.CharacterClasses.ClassNames
+namespace CharacterGen.Tests.Integration.Stress.Randomizers.CharacterClasses.ClassNames
 {
     [TestFixture]
     public class AnyClassNameRandomizerTests : ClassNameRandomizerTests

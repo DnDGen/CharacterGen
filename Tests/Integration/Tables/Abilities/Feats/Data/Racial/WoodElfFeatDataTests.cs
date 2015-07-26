@@ -1,12 +1,12 @@
 ﻿using System;
-using EquipmentGen.Common.Items;
-using NPCGen.Common.Abilities.Feats;
-using NPCGen.Common.Abilities.Skills;
-using NPCGen.Common.Races;
-using NPCGen.Tables.Interfaces;
+using TreasureGen.Common.Items;
+using CharacterGen.Common.Abilities.Feats;
+using CharacterGen.Common.Abilities.Skills;
+using CharacterGen.Common.Races;
+using CharacterGen.Tables;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
+namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
 {
     [TestFixture]
     public class WoodElfFeatDataTests : RacialFeatDataTests

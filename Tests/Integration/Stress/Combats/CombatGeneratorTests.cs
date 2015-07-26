@@ -1,13 +1,13 @@
 ﻿using System;
 using Ninject;
-using NPCGen.Common.Abilities.Stats;
-using NPCGen.Generators.Interfaces.Abilities;
-using NPCGen.Generators.Interfaces.Combats;
-using NPCGen.Generators.Interfaces.Items;
-using NPCGen.Generators.Interfaces.Randomizers.Stats;
+using CharacterGen.Common.Abilities.Stats;
+using CharacterGen.Generators.Abilities;
+using CharacterGen.Generators.Combats;
+using CharacterGen.Generators.Items;
+using CharacterGen.Generators.Randomizers.Stats;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Integration.Stress.Combats
+namespace CharacterGen.Tests.Integration.Stress.Combats
 {
     [TestFixture]
     public class CombatGeneratorTests : StressTests
@@ -19,7 +19,7 @@ namespace NPCGen.Tests.Integration.Stress.Combats
         [Inject, Named(StatsRandomizerTypeConstants.Raw)]
         public IStatsRandomizer StatsRandomizer { get; set; }
         [Inject]
-        public IEquipmentGenerator EquipmentGenerator { get; set; }
+        public ITreasureGenerator TreasureGenerator { get; set; }
 
         [TestCase("CombatGenerator")]
         public override void Stress(String stressSubject)
@@ -37,7 +37,7 @@ namespace NPCGen.Tests.Integration.Stress.Combats
             Assert.That(baseAttack.Bonus, Is.Not.Negative);
 
             var ability = AbilitiesGenerator.GenerateWith(characterClass, race, StatsRandomizer, baseAttack);
-            var equipment = EquipmentGenerator.GenerateWith(ability.Feats, characterClass);
+            var equipment = TreasureGenerator.GenerateWith(ability.Feats, characterClass);
 
             var combat = CombatGenerator.GenerateWith(baseAttack, characterClass, race, ability.Feats, ability.Stats, equipment);
             Assert.That(combat.ArmorClass.FlatFooted, Is.Positive);

@@ -1,7 +1,7 @@
-﻿using NPCGen.Tables.Interfaces;
+﻿using CharacterGen.Tables;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Integration.Bootstrap.Modules
+namespace CharacterGen.Tests.Integration.Bootstrap.Modules
 {
     [TestFixture]
     public class TablesModuleTests : BootstrapTests

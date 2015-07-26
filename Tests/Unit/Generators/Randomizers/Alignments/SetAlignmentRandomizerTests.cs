@@ -1,9 +1,9 @@
-﻿using System.Linq;
-using NPCGen.Generators.Interfaces.Randomizers.Alignments;
-using NPCGen.Generators.Randomizers.Alignments;
+﻿using CharacterGen.Generators.Domain.Randomizers.Alignments;
+using CharacterGen.Generators.Randomizers.Alignments;
 using NUnit.Framework;
+using System.Linq;
 
-namespace NPCGen.Tests.Unit.Generators.Randomizers.Alignments
+namespace CharacterGen.Tests.Unit.Generators.Randomizers.Alignments
 {
     [TestFixture]
     public class SetAlignmentRandomizerTests

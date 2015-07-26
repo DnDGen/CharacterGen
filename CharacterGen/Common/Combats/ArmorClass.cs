@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NPCGen.Common.Combats
+namespace CharacterGen.Common.Combats
 {
     public class ArmorClass
     {

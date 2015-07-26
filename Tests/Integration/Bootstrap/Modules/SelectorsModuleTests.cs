@@ -1,7 +1,7 @@
-﻿using NPCGen.Selectors.Interfaces;
+﻿using CharacterGen.Selectors;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Integration.Bootstrap.Modules
+namespace CharacterGen.Tests.Integration.Bootstrap.Modules
 {
     [TestFixture]
     public class SelectorsModuleTests : BootstrapTests

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using Ninject;
-using NPCGen.Common.Alignments;
-using NPCGen.Generators.Interfaces.Randomizers.Alignments;
+using CharacterGen.Common.Alignments;
+using CharacterGen.Generators.Randomizers.Alignments;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Integration.Stress.Randomizers.Alignments
+namespace CharacterGen.Tests.Integration.Stress.Randomizers.Alignments
 {
     [TestFixture]
     public class NonNeutralAlignmentRandomizerTests : StressTests

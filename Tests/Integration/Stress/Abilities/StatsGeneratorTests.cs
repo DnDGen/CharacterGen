@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using Ninject;
-using NPCGen.Common.Abilities.Stats;
-using NPCGen.Generators.Interfaces.Abilities;
-using NPCGen.Generators.Interfaces.Randomizers.Stats;
+using CharacterGen.Common.Abilities.Stats;
+using CharacterGen.Generators.Abilities;
+using CharacterGen.Generators.Randomizers.Stats;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Integration.Stress.Abilities
+namespace CharacterGen.Tests.Integration.Stress.Abilities
 {
     [TestFixture]
     public class StatsGeneratorTests : StressTests

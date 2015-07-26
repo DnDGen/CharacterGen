@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using Moq;
-using NPCGen.Common.Alignments;
-using NPCGen.Generators.Interfaces.Randomizers.CharacterClasses;
-using NPCGen.Selectors.Interfaces;
-using NPCGen.Tables.Interfaces;
+using CharacterGen.Common.Alignments;
+using CharacterGen.Generators.Randomizers.CharacterClasses;
+using CharacterGen.Selectors;
+using CharacterGen.Tables;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassNames
+namespace CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassNames
 {
     [TestFixture]
     public abstract class ClassNameRandomizerTests

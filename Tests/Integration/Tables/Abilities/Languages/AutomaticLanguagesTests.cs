@@ -1,11 +1,11 @@
 ﻿using System;
-using NPCGen.Common.Abilities;
-using NPCGen.Common.CharacterClasses;
-using NPCGen.Common.Races;
-using NPCGen.Tables.Interfaces;
+using CharacterGen.Common.Abilities;
+using CharacterGen.Common.CharacterClasses;
+using CharacterGen.Common.Races;
+using CharacterGen.Tables;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Integration.Tables.Abilities.Languages
+namespace CharacterGen.Tests.Integration.Tables.Abilities.Languages
 {
     [TestFixture]
     public class AutomaticLanguagesTests : CollectionTests

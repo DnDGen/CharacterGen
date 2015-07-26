@@ -1,12 +1,12 @@
 ﻿using System;
-using EquipmentGen.Common.Items;
-using NPCGen.Common.Abilities.Feats;
-using NPCGen.Common.CharacterClasses;
-using NPCGen.Common.Items;
-using NPCGen.Tables.Interfaces;
+using TreasureGen.Common.Items;
+using CharacterGen.Common.Abilities.Feats;
+using CharacterGen.Common.CharacterClasses;
+using CharacterGen.Common.Items;
+using CharacterGen.Tables;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
+namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
 {
     [TestFixture]
     public class BardFeatDataTests : CharacterClassFeatDataTests

@@ -1,9 +1,9 @@
-﻿using D20Dice;
+﻿using CharacterGen.Generators.Domain.Randomizers.CharacterClasses.Levels;
+using RollGen;
 using Moq;
-using NPCGen.Generators.Randomizers.CharacterClasses.Levels;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Generators.Randomizers.CharacterClasses.Levels
+namespace CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses.Levels
 {
     [TestFixture]
     public class VeryHighLevelRandomizerTests

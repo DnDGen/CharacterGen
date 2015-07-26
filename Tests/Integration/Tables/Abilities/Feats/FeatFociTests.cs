@@ -1,13 +1,13 @@
-﻿using System;
-using EquipmentGen.Common.Items;
-using NPCGen.Common.Abilities.Feats;
-using NPCGen.Common.Abilities.Skills;
-using NPCGen.Common.CharacterClasses;
-using NPCGen.Common.Items;
-using NPCGen.Tables.Interfaces;
+﻿using CharacterGen.Common.Abilities.Feats;
+using CharacterGen.Common.Abilities.Skills;
+using CharacterGen.Common.CharacterClasses;
+using CharacterGen.Common.Items;
+using CharacterGen.Tables;
 using NUnit.Framework;
+using System;
+using TreasureGen.Common.Items;
 
-namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
+namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
 {
     [TestFixture]
     public class FeatFociTests : CollectionTests
@@ -20,7 +20,7 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
         [Test]
         public override void CollectionNames()
         {
-            var names = new[] 
+            var names = new[]
             {
                 GroupConstants.SchoolsOfMagic,
                 FeatConstants.SimpleWeaponProficiency,
@@ -126,42 +126,51 @@ namespace NPCGen.Tests.Integration.Tables.Abilities.Feats
         [TestCase(FeatConstants.MonkBonusFeat + "6",
             FeatConstants.ImprovedDisarm,
             FeatConstants.ImprovedTrip)]
-        [TestCase(GroupConstants.FavoredEnemies,
-            "Aberration",
-            "Animal",
-            "Construct",
-            "Dragon",
-            "Elemental",
-            "Fey",
-            "Giant",
-            "Humanoid (aquatic)",
-            "Humanoid (dwarf)",
-            "Humanoid (elf)",
-            "Humanoid (goblinoid)",
-            "Humanoid (gnoll)",
-            "Humanoid (gnome)",
-            "Humanoid (halfling)",
-            "Humanoid (human)",
-            "Humanoid (orc)",
-            "Humanoid (reptilian)",
-            "Magical beast",
-            "Monstrous humanoid",
-            "Ooze",
-            "Outsider (air)",
-            "Outsider (chaotic)",
-            "Outsider (earth)",
-            "Outsider (evil)",
-            "Outsider (fire)",
-            "Outsider (good)",
-            "Outsider (lawful)",
-            "Outsider (native)",
-            "Outsider (water)",
-            "Plant",
-            "Undead",
-            "Vermin")]
         public override void DistinctCollection(String name, params String[] collection)
         {
             base.DistinctCollection(name, collection);
+        }
+
+        [Test]
+        public void FavoredEnemyFoci()
+        {
+            var foci = new[]
+            {
+                "Aberration",
+                "Animal",
+                "Construct",
+                "Dragon",
+                "Elemental",
+                "Fey",
+                "Giant",
+                "Humanoid (aquatic)",
+                "Humanoid (dwarf)",
+                "Humanoid (elf)",
+                "Humanoid (goblinoid)",
+                "Humanoid (gnoll)",
+                "Humanoid (gnome)",
+                "Humanoid (halfling)",
+                "Humanoid (human)",
+                "Humanoid (orc)",
+                "Humanoid (reptilian)",
+                "Magical beast",
+                "Monstrous humanoid",
+                "Ooze",
+                "Outsider (air)",
+                "Outsider (chaotic)",
+                "Outsider (earth)",
+                "Outsider (evil)",
+                "Outsider (fire)",
+                "Outsider (good)",
+                "Outsider (lawful)",
+                "Outsider (native)",
+                "Outsider (water)",
+                "Plant",
+                "Undead",
+                "Vermin"
+            };
+
+            base.DistinctCollection(GroupConstants.FavoredEnemies, foci);
         }
 
         [Test]

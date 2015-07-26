@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NPCGen.Common.Items
+namespace CharacterGen.Common.Items
 {
     public static class ProficiencyConstants
     {

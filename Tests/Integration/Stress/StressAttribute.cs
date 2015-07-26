@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Integration.Stress
+namespace CharacterGen.Tests.Integration.Stress
 {
     public class StressAttribute : CategoryAttribute
     {

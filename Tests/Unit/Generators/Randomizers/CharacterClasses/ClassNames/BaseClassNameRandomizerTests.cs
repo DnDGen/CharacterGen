@@ -1,13 +1,13 @@
-﻿using System;
-using System.Linq;
+﻿using CharacterGen.Common.Alignments;
+using CharacterGen.Generators.Domain.Randomizers.CharacterClasses.ClassNames;
+using CharacterGen.Generators.Verifiers.Exceptions;
+using CharacterGen.Selectors;
 using Moq;
-using NPCGen.Common.Alignments;
-using NPCGen.Generators.Interfaces.Verifiers.Exceptions;
-using NPCGen.Generators.Randomizers.CharacterClasses.ClassNames;
-using NPCGen.Selectors.Interfaces;
 using NUnit.Framework;
+using System;
+using System.Linq;
 
-namespace NPCGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassNames
+namespace CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassNames
 {
     [TestFixture]
     public class BaseClassNameRandomizerTests
@@ -106,7 +106,8 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassNames
             public String NotAllowedClassName { get; set; }
 
             public TestClassRandomizer(IPercentileSelector percentileResultSelector)
-                : base(percentileResultSelector) { }
+                : base(percentileResultSelector)
+            { }
 
             protected override Boolean CharacterClassIsAllowed(String className, Alignment alignment)
             {

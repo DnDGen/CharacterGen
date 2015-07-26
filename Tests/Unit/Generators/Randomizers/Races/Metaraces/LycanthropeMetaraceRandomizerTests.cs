@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using CharacterGen.Common.Races;
+using CharacterGen.Generators.Domain.Randomizers.Races.Metaraces;
+using CharacterGen.Selectors;
+using CharacterGen.Tables;
 using Moq;
-using NPCGen.Common.Races;
-using NPCGen.Generators.Randomizers.Races.Metaraces;
-using NPCGen.Selectors.Interfaces;
-using NPCGen.Tables.Interfaces;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
 
-namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
+namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
 {
     [TestFixture]
     public class LycanthropeMetaraceRandomizerTests : MetaraceRandomizerTests

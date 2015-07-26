@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NPCGen.Common.Abilities.Stats
+namespace CharacterGen.Common.Abilities.Stats
 {
     public class Stat
     {

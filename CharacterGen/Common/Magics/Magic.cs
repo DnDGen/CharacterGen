@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace NPCGen.Common.Magics
+namespace CharacterGen.Common.Magics
 {
     public class Magic
     {

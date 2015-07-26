@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using EquipmentGen.Common.Items;
+using TreasureGen.Common.Items;
 using Ninject;
-using NPCGen.Common;
-using NPCGen.Common.Abilities.Stats;
-using NPCGen.Common.Alignments;
-using NPCGen.Common.CharacterClasses;
-using NPCGen.Common.Items;
-using NPCGen.Generators.Interfaces;
-using NPCGen.Generators.Interfaces.Randomizers.CharacterClasses;
-using NPCGen.Generators.Interfaces.Randomizers.Stats;
+using CharacterGen.Common;
+using CharacterGen.Common.Abilities.Stats;
+using CharacterGen.Common.Alignments;
+using CharacterGen.Common.CharacterClasses;
+using CharacterGen.Common.Items;
+using CharacterGen.Generators;
+using CharacterGen.Generators.Randomizers.CharacterClasses;
+using CharacterGen.Generators.Randomizers.Stats;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Integration.Stress
+namespace CharacterGen.Tests.Integration.Stress
 {
     [TestFixture]
     public class CharacterGeneratorTests : StressTests

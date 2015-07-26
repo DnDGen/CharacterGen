@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using NPCGen.Tables.Interfaces;
+using CharacterGen.Tables;
 
-namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
+namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
 {
     public abstract class RacialFeatDataTests : DataTests
     {

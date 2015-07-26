@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using CharacterGen.Generators.Domain.Randomizers.Races.BaseRaces;
+using CharacterGen.Selectors;
+using CharacterGen.Tables;
 using Moq;
-using NPCGen.Generators.Randomizers.Races.BaseRaces;
-using NPCGen.Selectors.Interfaces;
-using NPCGen.Tables.Interfaces;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
 
-namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
+namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
 {
     [TestFixture]
     public class NonStandardBaseRaceRandomizerTests : BaseRaceRandomizerTests
@@ -28,7 +28,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         public void Setup()
         {
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
-            randomizer = new NonStandardBaseRaceRandomizer(mockPercentileResultSelector.Object, mockAdjustmentsSelector.Object, 
+            randomizer = new NonStandardBaseRaceRandomizer(mockPercentileResultSelector.Object, mockAdjustmentsSelector.Object,
                 mockCollectionsSelector.Object);
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Standard))

@@ -1,14 +1,14 @@
-﻿using System;
+﻿using CharacterGen.Mappers;
+using CharacterGen.Selectors;
+using CharacterGen.Selectors.Domain;
+using RollGen;
+using Moq;
+using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using D20Dice;
-using Moq;
-using NPCGen.Mappers.Interfaces;
-using NPCGen.Selectors;
-using NPCGen.Selectors.Interfaces;
-using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Selectors
+namespace CharacterGen.Tests.Unit.Selectors
 {
     [TestFixture]
     public class PercentileSelectorTests

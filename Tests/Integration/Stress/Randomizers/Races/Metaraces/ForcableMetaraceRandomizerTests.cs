@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using NPCGen.Common.Races;
-using NPCGen.Generators.Interfaces.Randomizers.Races;
+using CharacterGen.Common.Races;
+using CharacterGen.Generators.Randomizers.Races;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
+namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
 {
     [TestFixture]
     public abstract class ForcableMetaraceRandomizerTests : StressTests

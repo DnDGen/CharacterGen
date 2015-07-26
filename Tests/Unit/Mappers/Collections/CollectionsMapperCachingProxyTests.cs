@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using CharacterGen.Mappers;
+using CharacterGen.Mappers.Domain.Collections;
 using Moq;
-using NPCGen.Mappers.Collections;
-using NPCGen.Mappers.Interfaces;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
 
-namespace NPCGen.Tests.Unit.Mappers.Collections
+namespace CharacterGen.Tests.Unit.Mappers.Collections
 {
     [TestFixture]
     public class CollectionsMapperCachingProxyTests

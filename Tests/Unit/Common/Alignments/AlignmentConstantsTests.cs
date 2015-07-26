@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
-using NPCGen.Common.Alignments;
+using CharacterGen.Common.Alignments;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Common.Alignments
+namespace CharacterGen.Tests.Unit.Common.Alignments
 {
     [TestFixture]
     public class AlignmentConstantsTests

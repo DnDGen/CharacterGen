@@ -1,19 +1,19 @@
-﻿using System;
+﻿using CharacterGen.Common.Alignments;
+using CharacterGen.Common.CharacterClasses;
+using CharacterGen.Generators.Domain.Verifiers;
+using CharacterGen.Generators.Randomizers.Alignments;
+using CharacterGen.Generators.Randomizers.CharacterClasses;
+using CharacterGen.Generators.Randomizers.Races;
+using CharacterGen.Generators.Verifiers;
+using CharacterGen.Selectors;
+using CharacterGen.Tables;
+using Moq;
+using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Moq;
-using NPCGen.Common.Alignments;
-using NPCGen.Common.CharacterClasses;
-using NPCGen.Generators.Interfaces.Randomizers.Alignments;
-using NPCGen.Generators.Interfaces.Randomizers.CharacterClasses;
-using NPCGen.Generators.Interfaces.Randomizers.Races;
-using NPCGen.Generators.Interfaces.Verifiers;
-using NPCGen.Generators.Verifiers;
-using NPCGen.Selectors.Interfaces;
-using NPCGen.Tables.Interfaces;
-using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Generators.Verifiers
+namespace CharacterGen.Tests.Unit.Generators.Verifiers
 {
     [TestFixture]
     public class RandomizerVerifierTests

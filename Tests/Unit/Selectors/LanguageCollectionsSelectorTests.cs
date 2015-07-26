@@ -1,13 +1,13 @@
-﻿using System;
-using System.Linq;
+﻿using CharacterGen.Common.Races;
+using CharacterGen.Selectors;
+using CharacterGen.Selectors.Domain;
+using CharacterGen.Tables;
 using Moq;
-using NPCGen.Common.Races;
-using NPCGen.Selectors;
-using NPCGen.Selectors.Interfaces;
-using NPCGen.Tables.Interfaces;
 using NUnit.Framework;
+using System;
+using System.Linq;
 
-namespace NPCGen.Tests.Unit.Selectors
+namespace CharacterGen.Tests.Unit.Selectors
 {
     [TestFixture]
     public class LanguageCollectionsSelectorTests

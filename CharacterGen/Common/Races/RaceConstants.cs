@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NPCGen.Common.Races
+namespace CharacterGen.Common.Races
 {
     public class RaceConstants
     {

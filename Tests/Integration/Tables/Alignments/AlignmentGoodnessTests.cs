@@ -1,9 +1,9 @@
 ﻿using System;
-using NPCGen.Common.Alignments;
-using NPCGen.Tables.Interfaces;
+using CharacterGen.Common.Alignments;
+using CharacterGen.Tables;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Integration.Tables.Alignments
+namespace CharacterGen.Tests.Integration.Tables.Alignments
 {
     [TestFixture]
     public class AlignmentGoodnessTests : PercentileTests

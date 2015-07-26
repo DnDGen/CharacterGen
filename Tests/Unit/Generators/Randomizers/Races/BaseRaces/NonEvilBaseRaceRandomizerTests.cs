@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using CharacterGen.Common.Alignments;
+using CharacterGen.Generators.Domain.Randomizers.Races.BaseRaces;
+using CharacterGen.Selectors;
+using CharacterGen.Tables;
 using Moq;
-using NPCGen.Common.Alignments;
-using NPCGen.Generators.Randomizers.Races.BaseRaces;
-using NPCGen.Selectors.Interfaces;
-using NPCGen.Tables.Interfaces;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
 
-namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
+namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
 {
     [TestFixture]
     public class NonEvilBaseRaceRandomizerTests : BaseRaceRandomizerTests
@@ -35,7 +35,7 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         public void Setup()
         {
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
-            randomizer = new NonEvilBaseRaceRandomizer(mockPercentileResultSelector.Object, mockAdjustmentsSelector.Object, 
+            randomizer = new NonEvilBaseRaceRandomizer(mockPercentileResultSelector.Object, mockAdjustmentsSelector.Object,
                 mockCollectionsSelector.Object);
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, AlignmentConstants.Good)).Returns(new[] { "good base race", "base race", "not neutral base race", "not evil base race" });

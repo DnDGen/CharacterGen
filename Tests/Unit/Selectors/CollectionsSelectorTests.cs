@@ -1,15 +1,15 @@
-﻿using System;
+﻿using CharacterGen.Mappers;
+using CharacterGen.Selectors;
+using CharacterGen.Selectors.Domain;
+using CharacterGen.Selectors.Objects;
+using RollGen;
+using Moq;
+using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using D20Dice;
-using Moq;
-using NPCGen.Mappers.Interfaces;
-using NPCGen.Selectors;
-using NPCGen.Selectors.Interfaces;
-using NPCGen.Selectors.Interfaces.Objects;
-using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Selectors
+namespace CharacterGen.Tests.Unit.Selectors
 {
     [TestFixture]
     public class CollectionsSelectorTests
@@ -96,8 +96,8 @@ namespace NPCGen.Tests.Unit.Selectors
         [Test]
         public void SelectRandomFromNonStringCollection()
         {
-            var collection = new[] 
-            { 
+            var collection = new[]
+            {
                 new AdditionalFeatSelection { Feat = "feat 1" },
                 new AdditionalFeatSelection { Feat = "feat 2" }
             };

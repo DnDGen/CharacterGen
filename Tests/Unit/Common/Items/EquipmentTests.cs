@@ -1,7 +1,7 @@
-﻿using NPCGen.Common.Items;
+﻿using CharacterGen.Common.Items;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Common.Items
+namespace CharacterGen.Tests.Unit.Common.Items
 {
     [TestFixture]
     public class EquipmentTests

@@ -1,12 +1,12 @@
 ﻿using System;
 using Ninject;
-using NPCGen.Generators.Interfaces.Abilities;
-using NPCGen.Generators.Interfaces.Combats;
-using NPCGen.Generators.Interfaces.Items;
-using NPCGen.Generators.Interfaces.Randomizers.Stats;
+using CharacterGen.Generators.Abilities;
+using CharacterGen.Generators.Combats;
+using CharacterGen.Generators.Items;
+using CharacterGen.Generators.Randomizers.Stats;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Integration.Stress.Combats
+namespace CharacterGen.Tests.Integration.Stress.Combats
 {
     [TestFixture]
     public class ArmorClassGeneratorTests : StressTests
@@ -14,7 +14,7 @@ namespace NPCGen.Tests.Integration.Stress.Combats
         [Inject]
         public IArmorClassGenerator ArmorClassGenerator { get; set; }
         [Inject]
-        public IEquipmentGenerator EquipmentGenerator { get; set; }
+        public ITreasureGenerator TreasureGenerator { get; set; }
         [Inject]
         public IAbilitiesGenerator AbilitiesGenerator { get; set; }
         [Inject, Named(StatsRandomizerTypeConstants.Raw)]
@@ -35,7 +35,7 @@ namespace NPCGen.Tests.Integration.Stress.Combats
             var race = GetNewRace(alignment, characterClass);
             var baseAttack = CombatGenerator.GenerateBaseAttackWith(characterClass, race);
             var ability = AbilitiesGenerator.GenerateWith(characterClass, race, StatsRandomizer, baseAttack);
-            var equipment = EquipmentGenerator.GenerateWith(ability.Feats, characterClass);
+            var equipment = TreasureGenerator.GenerateWith(ability.Feats, characterClass);
             var combat = CombatGenerator.GenerateWith(baseAttack, characterClass, race, ability.Feats, ability.Stats, equipment);
 
             var armorClass = ArmorClassGenerator.GenerateWith(equipment, combat.AdjustedDexterityBonus, ability.Feats, race);

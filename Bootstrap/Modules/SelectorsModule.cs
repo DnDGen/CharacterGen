@@ -1,8 +1,8 @@
-﻿using Ninject.Modules;
-using NPCGen.Selectors;
-using NPCGen.Selectors.Interfaces;
+﻿using CharacterGen.Selectors;
+using CharacterGen.Selectors.Domain;
+using Ninject.Modules;
 
-namespace NPCGen.Bootstrap.Modules
+namespace CharacterGen.Bootstrap.Modules
 {
     public class SelectorsModule : NinjectModule
     {

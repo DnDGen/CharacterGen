@@ -1,9 +1,9 @@
-﻿using NPCGen.Mappers.Collections;
-using NPCGen.Mappers.Interfaces;
-using NPCGen.Mappers.Percentiles;
+﻿using CharacterGen.Mappers;
+using CharacterGen.Mappers.Domain.Collections;
+using CharacterGen.Mappers.Domain.Percentiles;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Integration.Bootstrap.Modules
+namespace CharacterGen.Tests.Integration.Bootstrap.Modules
 {
     [TestFixture]
     public class MappersModuleTests : BootstrapTests

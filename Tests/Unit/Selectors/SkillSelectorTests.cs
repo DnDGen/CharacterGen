@@ -1,10 +1,10 @@
-﻿using Moq;
-using NPCGen.Selectors;
-using NPCGen.Selectors.Interfaces;
-using NPCGen.Tables.Interfaces;
+﻿using CharacterGen.Selectors;
+using CharacterGen.Selectors.Domain;
+using CharacterGen.Tables;
+using Moq;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Selectors
+namespace CharacterGen.Tests.Unit.Selectors
 {
     [TestFixture]
     public class SkillSelectorTests

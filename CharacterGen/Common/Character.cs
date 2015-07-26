@@ -1,13 +1,13 @@
 ﻿using System;
-using NPCGen.Common.Abilities;
-using NPCGen.Common.Alignments;
-using NPCGen.Common.CharacterClasses;
-using NPCGen.Common.Combats;
-using NPCGen.Common.Items;
-using NPCGen.Common.Magics;
-using NPCGen.Common.Races;
+using CharacterGen.Common.Abilities;
+using CharacterGen.Common.Alignments;
+using CharacterGen.Common.CharacterClasses;
+using CharacterGen.Common.Combats;
+using CharacterGen.Common.Items;
+using CharacterGen.Common.Magics;
+using CharacterGen.Common.Races;
 
-namespace NPCGen.Common
+namespace CharacterGen.Common
 {
     public class Character
     {

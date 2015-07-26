@@ -1,7 +1,7 @@
-﻿using NPCGen.Common.Races;
+﻿using CharacterGen.Common.Races;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Common.Races
+namespace CharacterGen.Tests.Unit.Common.Races
 {
     [TestFixture]
     public class RaceTests

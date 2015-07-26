@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NPCGen.Common.CharacterClasses
+namespace CharacterGen.Common.CharacterClasses
 {
     public static class CharacterClassConstants
     {

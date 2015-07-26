@@ -1,10 +1,9 @@
-﻿using System;
+﻿using CharacterGen.Generators.Randomizers.CharacterClasses;
 using Ninject;
-using NPCGen.Generators.Interfaces.Randomizers.CharacterClasses;
-using NPCGen.Generators.Randomizers.CharacterClasses.Levels;
 using NUnit.Framework;
+using System;
 
-namespace NPCGen.Tests.Integration.Stress.Randomizers.CharacterClasses.Levels
+namespace CharacterGen.Tests.Integration.Stress.Randomizers.CharacterClasses.Levels
 {
     [TestFixture]
     public class VeryHighLevelRandomizerTests : StressTests

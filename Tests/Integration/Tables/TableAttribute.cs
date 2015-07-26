@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace NPCGen.Tests.Integration.Tables
+namespace CharacterGen.Tests.Integration.Tables
 {
     public class TableAttribute : CategoryAttribute
     {

@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using NPCGen.Common.Races;
-using NPCGen.Generators.Randomizers.Races.BaseRaces;
+﻿using CharacterGen.Common.Races;
+using CharacterGen.Generators.Domain.Randomizers.Races.BaseRaces;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
 
-namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
+namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
 {
     [TestFixture]
     public class AnyBaseRaceRandomizerTests : BaseRaceRandomizerTests

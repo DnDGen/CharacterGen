@@ -1,9 +1,9 @@
 ﻿using System;
 using Ninject;
-using NPCGen.Generators.Interfaces.Randomizers.CharacterClasses;
+using CharacterGen.Generators.Randomizers.CharacterClasses;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Integration.Stress.Randomizers.CharacterClasses.ClassNames
+namespace CharacterGen.Tests.Integration.Stress.Randomizers.CharacterClasses.ClassNames
 {
     [TestFixture]
     public class SetClassNameRandomizerTests : StressTests

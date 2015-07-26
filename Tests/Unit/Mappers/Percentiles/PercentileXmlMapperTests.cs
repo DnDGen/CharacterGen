@@ -1,13 +1,13 @@
-﻿using System;
+﻿using CharacterGen.Mappers;
+using CharacterGen.Mappers.Domain.Percentiles;
+using CharacterGen.Tables;
+using Moq;
+using NUnit.Framework;
+using System;
 using System.IO;
 using System.Linq;
-using Moq;
-using NPCGen.Mappers.Interfaces;
-using NPCGen.Mappers.Percentiles;
-using NPCGen.Tables.Interfaces;
-using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Mappers.Percentiles
+namespace CharacterGen.Tests.Unit.Mappers.Percentiles
 {
     [TestFixture]
     public class PercentileXmlMapperTests

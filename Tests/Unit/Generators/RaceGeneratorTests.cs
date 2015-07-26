@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using CharacterGen.Common.Alignments;
+using CharacterGen.Common.CharacterClasses;
+using CharacterGen.Common.Races;
+using CharacterGen.Generators;
+using CharacterGen.Generators.Domain;
+using CharacterGen.Generators.Randomizers.Races;
+using CharacterGen.Selectors;
+using CharacterGen.Tables;
 using Moq;
-using NPCGen.Common.Alignments;
-using NPCGen.Common.CharacterClasses;
-using NPCGen.Common.Races;
-using NPCGen.Generators;
-using NPCGen.Generators.Interfaces;
-using NPCGen.Generators.Interfaces.Randomizers.Races;
-using NPCGen.Selectors.Interfaces;
-using NPCGen.Tables.Interfaces;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
 
-namespace NPCGen.Tests.Unit.Generators
+namespace CharacterGen.Tests.Unit.Generators
 {
     [TestFixture]
     public class RaceGeneratorTests

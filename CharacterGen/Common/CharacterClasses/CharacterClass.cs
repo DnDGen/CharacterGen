@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace NPCGen.Common.CharacterClasses
+namespace CharacterGen.Common.CharacterClasses
 {
     public class CharacterClass
     {

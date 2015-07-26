@@ -1,8 +1,8 @@
-﻿using Ninject.Modules;
-using NPCGen.Tables;
-using NPCGen.Tables.Interfaces;
+﻿using CharacterGen.Tables;
+using CharacterGen.Tables.Domain;
+using Ninject.Modules;
 
-namespace NPCGen.Bootstrap.Modules
+namespace CharacterGen.Bootstrap.Modules
 {
     public class TablesModule : NinjectModule
     {

@@ -1,7 +1,7 @@
-﻿using NPCGen.Common.Abilities.Feats;
+﻿using CharacterGen.Common.Abilities.Feats;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Common.Abilities.Feats
+namespace CharacterGen.Tests.Unit.Common.Abilities.Feats
 {
     [TestFixture]
     public class FrequencyTests

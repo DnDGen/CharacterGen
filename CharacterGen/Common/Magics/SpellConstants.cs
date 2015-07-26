@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NPCGen.Common.Magics
+namespace CharacterGen.Common.Magics
 {
     public static class SpellConstants
     {

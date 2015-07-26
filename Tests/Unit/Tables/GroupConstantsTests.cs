@@ -1,8 +1,8 @@
 ﻿using System;
-using NPCGen.Tables.Interfaces;
+using CharacterGen.Tables;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Tables
+namespace CharacterGen.Tests.Unit.Tables
 {
     [TestFixture]
     public class GroupConstantsTests

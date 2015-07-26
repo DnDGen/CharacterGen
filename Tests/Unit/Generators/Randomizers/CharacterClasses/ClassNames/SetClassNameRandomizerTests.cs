@@ -1,10 +1,10 @@
-﻿using System.Linq;
-using NPCGen.Common.Alignments;
-using NPCGen.Generators.Interfaces.Randomizers.CharacterClasses;
-using NPCGen.Generators.Randomizers.CharacterClasses.ClassNames;
+﻿using CharacterGen.Common.Alignments;
+using CharacterGen.Generators.Domain.Randomizers.CharacterClasses.ClassNames;
+using CharacterGen.Generators.Randomizers.CharacterClasses;
 using NUnit.Framework;
+using System.Linq;
 
-namespace NPCGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassNames
+namespace CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassNames
 {
     [TestFixture]
     public class SetClassNameRandomizerTests

@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using CharacterGen.Common.Abilities.Stats;
+using CharacterGen.Common.Races;
+using CharacterGen.Selectors;
+using CharacterGen.Selectors.Domain;
 using Moq;
-using NPCGen.Common.Abilities.Stats;
-using NPCGen.Common.Races;
-using NPCGen.Selectors;
-using NPCGen.Selectors.Interfaces;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
 
-namespace NPCGen.Tests.Unit.Selectors
+namespace CharacterGen.Tests.Unit.Selectors
 {
     [TestFixture]
     public class StatAdjustmentsSelectorTests

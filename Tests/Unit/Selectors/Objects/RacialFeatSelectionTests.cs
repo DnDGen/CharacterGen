@@ -1,9 +1,9 @@
 ﻿using System;
-using NPCGen.Common.Races;
-using NPCGen.Selectors.Interfaces.Objects;
+using CharacterGen.Common.Races;
+using CharacterGen.Selectors.Objects;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Selectors.Objects
+namespace CharacterGen.Tests.Unit.Selectors.Objects
 {
     [TestFixture]
     public class RacialFeatSelectionTests

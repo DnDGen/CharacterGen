@@ -1,18 +1,18 @@
-﻿using System;
+﻿using CharacterGen.Common.Abilities.Feats;
+using CharacterGen.Common.Items;
+using CharacterGen.Common.Races;
+using CharacterGen.Generators.Combats;
+using CharacterGen.Generators.Domain.Combats;
+using CharacterGen.Selectors;
+using CharacterGen.Tables;
+using TreasureGen.Common.Items;
+using Moq;
+using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using EquipmentGen.Common.Items;
-using Moq;
-using NPCGen.Common.Abilities.Feats;
-using NPCGen.Common.Items;
-using NPCGen.Common.Races;
-using NPCGen.Generators.Combats;
-using NPCGen.Generators.Interfaces.Combats;
-using NPCGen.Selectors.Interfaces;
-using NPCGen.Tables.Interfaces;
-using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Generators.Combats
+namespace CharacterGen.Tests.Unit.Generators.Combats
 {
     [TestFixture]
     public class ArmorClassGeneratorTests

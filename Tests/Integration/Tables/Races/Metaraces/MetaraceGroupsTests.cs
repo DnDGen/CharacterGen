@@ -1,10 +1,10 @@
 ﻿using System;
-using NPCGen.Common.Alignments;
-using NPCGen.Common.Races;
-using NPCGen.Tables.Interfaces;
+using CharacterGen.Common.Alignments;
+using CharacterGen.Common.Races;
+using CharacterGen.Tables;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Integration.Tables.Races.Metaraces
+namespace CharacterGen.Tests.Integration.Tables.Races.Metaraces
 {
     [TestFixture]
     public class MetaraceGroupsTests : CollectionTests

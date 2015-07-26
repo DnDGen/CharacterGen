@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CharacterGen.Mappers;
+using CharacterGen.Mappers.Domain.Percentiles;
 using Moq;
-using NPCGen.Mappers.Interfaces;
-using NPCGen.Mappers.Percentiles;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
 
-namespace NPCGen.Tests.Unit.Mappers.Percentiles
+namespace CharacterGen.Tests.Unit.Mappers.Percentiles
 {
     [TestFixture]
     public class PercentileMapperCachingProxyTests

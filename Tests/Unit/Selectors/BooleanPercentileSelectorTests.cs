@@ -1,10 +1,10 @@
-﻿using System;
+﻿using CharacterGen.Selectors;
+using CharacterGen.Selectors.Domain;
 using Moq;
-using NPCGen.Selectors;
-using NPCGen.Selectors.Interfaces;
 using NUnit.Framework;
+using System;
 
-namespace NPCGen.Tests.Unit.Selectors
+namespace CharacterGen.Tests.Unit.Selectors
 {
     [TestFixture]
     public class BooleanPercentileSelectorTests

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NPCGen.Common.Abilities.Feats
+namespace CharacterGen.Common.Abilities.Feats
 {
     public class Frequency
     {

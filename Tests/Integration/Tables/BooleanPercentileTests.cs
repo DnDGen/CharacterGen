@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NPCGen.Tests.Integration.Tables
+namespace CharacterGen.Tests.Integration.Tables
 {
     public abstract class BooleanPercentileTests : PercentileTests
     {

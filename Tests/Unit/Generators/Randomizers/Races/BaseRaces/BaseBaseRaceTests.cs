@@ -1,15 +1,15 @@
-﻿using System;
+﻿using CharacterGen.Common.CharacterClasses;
+using CharacterGen.Generators.Domain.Randomizers.Races.BaseRaces;
+using CharacterGen.Generators.Verifiers.Exceptions;
+using CharacterGen.Selectors;
+using CharacterGen.Tables;
+using Moq;
+using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Moq;
-using NPCGen.Common.CharacterClasses;
-using NPCGen.Generators.Interfaces.Verifiers.Exceptions;
-using NPCGen.Generators.Randomizers.Races.BaseRaces;
-using NPCGen.Selectors.Interfaces;
-using NPCGen.Tables.Interfaces;
-using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
+namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
 {
     [TestFixture]
     public class BaseBaseRaceTests
@@ -133,7 +133,8 @@ namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
             public String ForbiddenBaseRace { get; set; }
 
             public TestBaseRaceRandomizer(IPercentileSelector percentileResultSelector, IAdjustmentsSelector levelAdjustmentSelector)
-                : base(percentileResultSelector, levelAdjustmentSelector) { }
+                : base(percentileResultSelector, levelAdjustmentSelector)
+            { }
 
             protected override Boolean BaseRaceIsAllowed(String baseRace)
             {

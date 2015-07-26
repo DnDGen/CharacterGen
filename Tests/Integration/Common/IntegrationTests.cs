@@ -1,11 +1,11 @@
 ﻿using System;
-using D20Dice.Bootstrap;
-using EquipmentGen.Bootstrap;
+using RollGen.Bootstrap;
+using TreasureGen.Bootstrap;
 using Ninject;
-using NPCGen.Bootstrap;
+using CharacterGen.Bootstrap;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Integration.Common
+namespace CharacterGen.Tests.Integration.Common
 {
     [TestFixture]
     [Integration]
@@ -18,13 +18,13 @@ namespace NPCGen.Tests.Integration.Common
         {
             kernel = new StandardKernel();
 
-            var diceLoader = new D20DiceModuleLoader();
+            var diceLoader = new RollGenModuleLoader();
             diceLoader.LoadModules(kernel);
 
-            var equipmentGenLoader = new EquipmentGenModuleLoader();
-            equipmentGenLoader.LoadModules(kernel);
+            var TreasureGenLoader = new TreasureGenModuleLoader();
+            TreasureGenLoader.LoadModules(kernel);
 
-            var npcGenLoader = new NPCGenModuleLoader();
+            var npcGenLoader = new CharacterGenModuleLoader();
             npcGenLoader.LoadModules(kernel);
         }
 

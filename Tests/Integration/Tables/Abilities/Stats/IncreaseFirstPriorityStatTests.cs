@@ -1,8 +1,8 @@
 ﻿using System;
-using NPCGen.Tables.Interfaces;
+using CharacterGen.Tables;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Integration.Tables.Abilities.Stats
+namespace CharacterGen.Tests.Integration.Tables.Abilities.Stats
 {
     [TestFixture]
     public class IncreaseFirstPriorityStatTests : BooleanPercentileTests

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using NPCGen.Common.CharacterClasses;
+using CharacterGen.Common.CharacterClasses;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Integration.Stress
+namespace CharacterGen.Tests.Integration.Stress
 {
     [TestFixture]
     public class CharacterClassGeneratorTests : StressTests

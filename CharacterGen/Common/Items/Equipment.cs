@@ -1,7 +1,7 @@
-﻿using EquipmentGen.Common;
-using EquipmentGen.Common.Items;
+﻿using TreasureGen.Common;
+using TreasureGen.Common.Items;
 
-namespace NPCGen.Common.Items
+namespace CharacterGen.Common.Items
 {
     public class Equipment
     {

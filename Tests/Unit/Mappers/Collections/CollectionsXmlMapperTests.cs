@@ -1,13 +1,13 @@
-﻿using System;
+﻿using CharacterGen.Mappers;
+using CharacterGen.Mappers.Domain.Collections;
+using CharacterGen.Tables;
+using Moq;
+using NUnit.Framework;
+using System;
 using System.IO;
 using System.Linq;
-using Moq;
-using NPCGen.Mappers.Collections;
-using NPCGen.Mappers.Interfaces;
-using NPCGen.Tables.Interfaces;
-using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Mappers.Collections
+namespace CharacterGen.Tests.Unit.Mappers.Collections
 {
     [TestFixture]
     public class CollectionsXmlMapperTests

@@ -1,11 +1,11 @@
-﻿using Moq;
-using NPCGen.Common.Alignments;
-using NPCGen.Generators;
-using NPCGen.Generators.Interfaces;
-using NPCGen.Generators.Interfaces.Randomizers.Alignments;
+﻿using CharacterGen.Common.Alignments;
+using CharacterGen.Generators;
+using CharacterGen.Generators.Domain;
+using CharacterGen.Generators.Randomizers.Alignments;
+using Moq;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Generators
+namespace CharacterGen.Tests.Unit.Generators
 {
     [TestFixture]
     public class AlignmentGeneratorTests

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Integration.Stress.Randomizers.CharacterClasses.ClassNames
+namespace CharacterGen.Tests.Integration.Stress.Randomizers.CharacterClasses.ClassNames
 {
     [TestFixture]
     public abstract class ClassNameRandomizerTests : StressTests

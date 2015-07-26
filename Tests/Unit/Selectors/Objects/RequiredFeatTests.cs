@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using NPCGen.Common.Abilities.Feats;
-using NPCGen.Selectors.Interfaces.Objects;
+using CharacterGen.Common.Abilities.Feats;
+using CharacterGen.Selectors.Objects;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Selectors.Objects
+namespace CharacterGen.Tests.Unit.Selectors.Objects
 {
     [TestFixture]
     public class RequiredFeatTests

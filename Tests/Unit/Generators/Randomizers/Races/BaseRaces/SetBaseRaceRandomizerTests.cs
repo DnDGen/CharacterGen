@@ -1,13 +1,11 @@
-﻿using System;
-using System.Linq;
-using Moq;
-using NPCGen.Common.CharacterClasses;
-using NPCGen.Generators.Interfaces.Randomizers.Races;
-using NPCGen.Generators.Randomizers.Races.BaseRaces;
-using NPCGen.Selectors.Interfaces;
+﻿using CharacterGen.Common.CharacterClasses;
+using CharacterGen.Generators.Domain.Randomizers.Races.BaseRaces;
+using CharacterGen.Generators.Randomizers.Races;
 using NUnit.Framework;
+using System;
+using System.Linq;
 
-namespace NPCGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
+namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
 {
     [TestFixture]
     public class SetBaseRaceRandomizerTests

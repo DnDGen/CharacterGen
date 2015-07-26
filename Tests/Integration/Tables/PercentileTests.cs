@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using Ninject;
-using NPCGen.Mappers.Interfaces;
+using CharacterGen.Mappers;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Integration.Tables
+namespace CharacterGen.Tests.Integration.Tables
 {
     [TestFixture]
     public abstract class PercentileTests : TableTests

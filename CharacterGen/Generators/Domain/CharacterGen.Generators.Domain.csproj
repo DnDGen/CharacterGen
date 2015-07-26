@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8611F130-C7BF-4EF9-BE78-E2624C58861F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CharacterGen.Generators.Domain</RootNamespace>
+    <AssemblyName>CharacterGen.Generators.Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="RollGen, Version=1.0.5683.31166, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\D20Dice.9.0\lib\RollGen.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="TreasureGen.Common, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\EquipmentGen.3.0\lib\TreasureGen.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="TreasureGen.Generators, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\EquipmentGen.3.0\lib\TreasureGen.Generators.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Abilities\AbilitiesGenerator.cs" />
+    <Compile Include="Abilities\Feats\AdditionalFeatsGenerator.cs" />
+    <Compile Include="Abilities\Feats\ClassFeatsGenerator.cs" />
+    <Compile Include="Abilities\Feats\FeatFocusGenerator.cs" />
+    <Compile Include="Abilities\Feats\RacialFeatsGenerator.cs" />
+    <Compile Include="Abilities\Feats\FeatsGenerator.cs" />
+    <Compile Include="Abilities\SkillsGenerator.cs" />
+    <Compile Include="AlignmentGenerator.cs" />
+    <Compile Include="CharacterClassGenerator.cs" />
+    <Compile Include="CharacterGenerator.cs" />
+    <Compile Include="Combats\ArmorClassGenerator.cs" />
+    <Compile Include="Combats\CombatGenerator.cs" />
+    <Compile Include="Combats\HitPointsGenerator.cs" />
+    <Compile Include="Abilities\LanguageGenerator.cs" />
+    <Compile Include="Combats\SavingThrowsGenerator.cs" />
+    <Compile Include="Items\EquipmentGenerator.cs" />
+    <Compile Include="RaceGenerator.cs" />
+    <Compile Include="Randomizers\Alignments\SetAlignmentRandomizer.cs" />
+    <Compile Include="Randomizers\CharacterClasses\ClassNames\SetClassNameRandomizer.cs" />
+    <Compile Include="Randomizers\CharacterClasses\Levels\SetLevelRandomizer.cs" />
+    <Compile Include="Randomizers\Races\BaseRaces\SetBaseRaceRandomizer.cs" />
+    <Compile Include="Abilities\StatsGenerator.cs" />
+    <Compile Include="Randomizers\Alignments\AnyAlignmentRandomizer.cs" />
+    <Compile Include="Randomizers\Alignments\BaseAlignmentRandomizer.cs" />
+    <Compile Include="Randomizers\Alignments\ChaoticAlignmentRandomizer.cs" />
+    <Compile Include="Randomizers\Alignments\EvilAlignmentRandomizer.cs" />
+    <Compile Include="Randomizers\Alignments\GoodAlignmentRandomizer.cs" />
+    <Compile Include="Randomizers\Alignments\LawfulAlignmentRandomizer.cs" />
+    <Compile Include="Randomizers\Alignments\NeutralAlignmentRandomizer.cs" />
+    <Compile Include="Randomizers\Alignments\NonChaoticAlignmentRandomizer.cs" />
+    <Compile Include="Randomizers\Alignments\NonEvilAlignmentRandomizer.cs" />
+    <Compile Include="Randomizers\Alignments\NonGoodAlignmentRandomizer.cs" />
+    <Compile Include="Randomizers\Alignments\NonLawfulAlignmentRandomizer.cs" />
+    <Compile Include="Randomizers\Alignments\NonNeutralAlignmentRandomizer.cs" />
+    <Compile Include="Randomizers\CharacterClasses\ClassNames\AnyClassNameRandomizer.cs" />
+    <Compile Include="Randomizers\CharacterClasses\ClassNames\BaseClassNameRandomizer.cs" />
+    <Compile Include="Randomizers\CharacterClasses\ClassNames\HealerClassNameRandomizer.cs" />
+    <Compile Include="Randomizers\CharacterClasses\ClassNames\MageClassNameRandomizer.cs" />
+    <Compile Include="Randomizers\CharacterClasses\ClassNames\NonSpellcasterClassNameRandomizer.cs" />
+    <Compile Include="Randomizers\CharacterClasses\ClassNames\SpellcasterClassNameRandomizer.cs" />
+    <Compile Include="Randomizers\CharacterClasses\ClassNames\StealthClassNameRandomizer.cs" />
+    <Compile Include="Randomizers\CharacterClasses\ClassNames\WarriorClassNameRandomizer.cs" />
+    <Compile Include="Randomizers\CharacterClasses\Levels\AnyLevelRandomizer.cs" />
+    <Compile Include="Randomizers\CharacterClasses\Levels\HighLevelRandomizer.cs" />
+    <Compile Include="Randomizers\CharacterClasses\Levels\LowLevelRandomizer.cs" />
+    <Compile Include="Randomizers\CharacterClasses\Levels\MediumLevelRandomizer.cs" />
+    <Compile Include="Randomizers\CharacterClasses\Levels\RangedLevel.cs" />
+    <Compile Include="Randomizers\CharacterClasses\Levels\VeryHighLevelRandomizer.cs" />
+    <Compile Include="Randomizers\Races\BaseRaces\AnyBaseRaceRandomizer.cs" />
+    <Compile Include="Randomizers\Races\BaseRaces\BaseBaseRace.cs" />
+    <Compile Include="Randomizers\Races\BaseRaces\EvilBaseRaceRandomizer.cs" />
+    <Compile Include="Randomizers\Races\BaseRaces\GoodBaseRaceRandomizer.cs" />
+    <Compile Include="Randomizers\Races\BaseRaces\NeutralBaseRaceRandomizer.cs" />
+    <Compile Include="Randomizers\Races\BaseRaces\NonEvilBaseRaceRandomizer.cs" />
+    <Compile Include="Randomizers\Races\BaseRaces\NonGoodBaseRaceRandomizer.cs" />
+    <Compile Include="Randomizers\Races\BaseRaces\NonNeutralBaseRaceRandomizer.cs" />
+    <Compile Include="Randomizers\Races\BaseRaces\NonStandardBaseRaceRandomizer.cs" />
+    <Compile Include="Randomizers\Races\BaseRaces\StandardBaseRaceRandomizer.cs" />
+    <Compile Include="Randomizers\Races\Metaraces\AnyMetaraceRandomizer.cs" />
+    <Compile Include="Randomizers\Races\Metaraces\BaseForcableMetarace.cs" />
+    <Compile Include="Randomizers\Races\Metaraces\EvilMetaraceRandomizer.cs" />
+    <Compile Include="Randomizers\Races\Metaraces\GeneticMetaraceRandomizer.cs" />
+    <Compile Include="Randomizers\Races\Metaraces\GoodMetaraceRandomizer.cs" />
+    <Compile Include="Randomizers\Races\Metaraces\LycanthropeMetaraceRandomizer.cs" />
+    <Compile Include="Randomizers\Races\Metaraces\NeutralMetaraceRandomizer.cs" />
+    <Compile Include="Randomizers\Races\Metaraces\NoMetaraceRandomizer.cs" />
+    <Compile Include="Randomizers\Races\Metaraces\NonEvilMetaraceRandomizer.cs" />
+    <Compile Include="Randomizers\Races\Metaraces\NonGoodMetaraceRandomizer.cs" />
+    <Compile Include="Randomizers\Races\Metaraces\NonNeutralMetaraceRandomizer.cs" />
+    <Compile Include="Randomizers\Races\Metaraces\SetMetaraceRandomizer.cs" />
+    <Compile Include="Randomizers\Stats\AverageStatsRandomizer.cs" />
+    <Compile Include="Randomizers\Stats\BaseStatsRandomizer.cs" />
+    <Compile Include="Randomizers\Stats\BestOfFourStatsRandomizer.cs" />
+    <Compile Include="Randomizers\Stats\GoodStatsRandomizer.cs" />
+    <Compile Include="Randomizers\Stats\HeroicStatsRandomizer.cs" />
+    <Compile Include="Randomizers\Stats\OnesAsSixesStatsRandomizer.cs" />
+    <Compile Include="Randomizers\Stats\PoorStatsRandomizer.cs" />
+    <Compile Include="Randomizers\Stats\RawStatsRandomizer.cs" />
+    <Compile Include="Randomizers\Stats\SetStatsRandomizer.cs" />
+    <Compile Include="Randomizers\Stats\TwoTenSidedDiceStatsRandomizer.cs" />
+    <Compile Include="Verifiers\RandomizerVerifier.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\CharacterGen.Common.csproj">
+      <Project>{83f2b67c-3eb0-4e46-aad5-bafaa2e35689}</Project>
+      <Name>CharacterGen.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Selectors\Contracts\CharacterGen.Selectors.csproj">
+      <Project>{98848dc9-c901-4189-8559-54d68215f3a7}</Project>
+      <Name>CharacterGen.Selectors</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Tables\Contracts\CharacterGen.Tables.csproj">
+      <Project>{b0abd6a7-a3f9-456b-b820-0e90426c5fa8}</Project>
+      <Name>CharacterGen.Tables</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Contracts\CharacterGen.Generators.csproj">
+      <Project>{7f262696-287c-4308-8bb3-c6563b7f4878}</Project>
+      <Name>CharacterGen.Generators</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Magics\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

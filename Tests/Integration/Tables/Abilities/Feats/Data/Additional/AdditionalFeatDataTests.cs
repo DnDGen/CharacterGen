@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using NPCGen.Common.Abilities.Feats;
-using NPCGen.Common.Items;
-using NPCGen.Tables.Interfaces;
+using CharacterGen.Common.Abilities.Feats;
+using CharacterGen.Common.Items;
+using CharacterGen.Tables;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Integration.Tables.Abilities.Feats.Data.Additional
+namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Additional
 {
     [TestFixture]
     public class AdditionalFeatDataTests : DataTests

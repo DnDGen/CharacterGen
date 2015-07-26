@@ -1,29 +1,29 @@
 ﻿using System;
 using System.Linq;
-using EquipmentGen.Common.Items;
+using TreasureGen.Common.Items;
 using Ninject;
-using NPCGen.Common.Items;
-using NPCGen.Generators.Interfaces.Abilities;
-using NPCGen.Generators.Interfaces.Combats;
-using NPCGen.Generators.Interfaces.Items;
-using NPCGen.Generators.Interfaces.Randomizers.Stats;
+using CharacterGen.Common.Items;
+using CharacterGen.Generators.Abilities;
+using CharacterGen.Generators.Combats;
+using CharacterGen.Generators.Items;
+using CharacterGen.Generators.Randomizers.Stats;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Integration.Stress.Items
+namespace CharacterGen.Tests.Integration.Stress.Items
 {
     [TestFixture]
-    public class EquipmentGeneratorTests : StressTests
+    public class TreasureGeneratorTests : StressTests
     {
         [Inject]
         public IAbilitiesGenerator AbilitiesGenerator { get; set; }
         [Inject, Named(StatsRandomizerTypeConstants.Raw)]
         public IStatsRandomizer StatsRandomizer { get; set; }
         [Inject]
-        public IEquipmentGenerator EquipmentGenerator { get; set; }
+        public ITreasureGenerator TreasureGenerator { get; set; }
         [Inject]
         public ICombatGenerator CombatGenerator { get; set; }
 
-        [TestCase("EquipmentGenerator")]
+        [TestCase("TreasureGenerator")]
         public override void Stress(String stressSubject)
         {
             Stress();
@@ -50,7 +50,7 @@ namespace NPCGen.Tests.Integration.Stress.Items
             var baseAttack = CombatGenerator.GenerateBaseAttackWith(characterClass, race);
             var ability = AbilitiesGenerator.GenerateWith(characterClass, race, StatsRandomizer, baseAttack);
 
-            return EquipmentGenerator.GenerateWith(ability.Feats, characterClass);
+            return TreasureGenerator.GenerateWith(ability.Feats, characterClass);
         }
 
         [Test]

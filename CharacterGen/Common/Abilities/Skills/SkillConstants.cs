@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace NPCGen.Common.Abilities.Skills
+namespace CharacterGen.Common.Abilities.Skills
 {
     public static class SkillConstants
     {

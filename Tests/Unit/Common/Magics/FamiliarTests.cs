@@ -1,7 +1,7 @@
-﻿using NPCGen.Common.Magics;
+﻿using CharacterGen.Common.Magics;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Common
+namespace CharacterGen.Tests.Unit.Common
 {
     [TestFixture]
     public class FamiliarTests

@@ -1,8 +1,8 @@
 ﻿using System;
-using NPCGen.Selectors.Interfaces;
+using CharacterGen.Selectors;
 using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Selectors
+namespace CharacterGen.Tests.Unit.Selectors
 {
     [TestFixture]
     public class SelectorConstantsTests

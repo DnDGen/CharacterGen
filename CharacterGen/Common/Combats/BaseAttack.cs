@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace NPCGen.Common.Combats
+namespace CharacterGen.Common.Combats
 {
     public class BaseAttack
     {

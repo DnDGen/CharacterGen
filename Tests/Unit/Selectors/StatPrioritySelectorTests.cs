@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using CharacterGen.Selectors;
+using CharacterGen.Selectors.Domain;
+using CharacterGen.Tables;
 using Moq;
-using NPCGen.Selectors;
-using NPCGen.Selectors.Interfaces;
-using NPCGen.Tables.Interfaces;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
 
-namespace NPCGen.Tests.Unit.Selectors
+namespace CharacterGen.Tests.Unit.Selectors
 {
     [TestFixture]
     public class StatPrioritySelectorTests

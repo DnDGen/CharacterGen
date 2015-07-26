@@ -1,36 +1,36 @@
-﻿using System;
+﻿using CharacterGen.Common;
+using CharacterGen.Common.Abilities;
+using CharacterGen.Common.Abilities.Feats;
+using CharacterGen.Common.Abilities.Skills;
+using CharacterGen.Common.Abilities.Stats;
+using CharacterGen.Common.Alignments;
+using CharacterGen.Common.CharacterClasses;
+using CharacterGen.Common.Combats;
+using CharacterGen.Common.Items;
+using CharacterGen.Common.Magics;
+using CharacterGen.Common.Races;
+using CharacterGen.Generators;
+using CharacterGen.Generators.Abilities;
+using CharacterGen.Generators.Combats;
+using CharacterGen.Generators.Domain;
+using CharacterGen.Generators.Items;
+using CharacterGen.Generators.Magics;
+using CharacterGen.Generators.Randomizers.Alignments;
+using CharacterGen.Generators.Randomizers.CharacterClasses;
+using CharacterGen.Generators.Randomizers.Races;
+using CharacterGen.Generators.Randomizers.Stats;
+using CharacterGen.Generators.Verifiers;
+using CharacterGen.Generators.Verifiers.Exceptions;
+using CharacterGen.Selectors;
+using CharacterGen.Selectors.Objects;
+using CharacterGen.Tables;
+using Moq;
+using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Moq;
-using NPCGen.Common;
-using NPCGen.Common.Abilities;
-using NPCGen.Common.Abilities.Feats;
-using NPCGen.Common.Abilities.Skills;
-using NPCGen.Common.Abilities.Stats;
-using NPCGen.Common.Alignments;
-using NPCGen.Common.CharacterClasses;
-using NPCGen.Common.Combats;
-using NPCGen.Common.Items;
-using NPCGen.Common.Magics;
-using NPCGen.Common.Races;
-using NPCGen.Generators;
-using NPCGen.Generators.Interfaces;
-using NPCGen.Generators.Interfaces.Abilities;
-using NPCGen.Generators.Interfaces.Combats;
-using NPCGen.Generators.Interfaces.Items;
-using NPCGen.Generators.Interfaces.Magics;
-using NPCGen.Generators.Interfaces.Randomizers.Alignments;
-using NPCGen.Generators.Interfaces.Randomizers.CharacterClasses;
-using NPCGen.Generators.Interfaces.Randomizers.Races;
-using NPCGen.Generators.Interfaces.Randomizers.Stats;
-using NPCGen.Generators.Interfaces.Verifiers;
-using NPCGen.Generators.Interfaces.Verifiers.Exceptions;
-using NPCGen.Selectors.Interfaces;
-using NPCGen.Selectors.Interfaces.Objects;
-using NPCGen.Tables.Interfaces;
-using NUnit.Framework;
 
-namespace NPCGen.Tests.Unit.Generators
+namespace CharacterGen.Tests.Unit.Generators
 {
     [TestFixture]
     public class CharacterGeneratorTests
@@ -48,7 +48,7 @@ namespace NPCGen.Tests.Unit.Generators
         private Mock<IRandomizerVerifier> mockRandomizerVerifier;
         private Mock<IPercentileSelector> mockPercentileSelector;
         private Mock<ILeadershipSelector> mockLeadershipSelector;
-        private Mock<IEquipmentGenerator> mockEquipmentGenerator;
+        private Mock<ITreasureGenerator> mockTreasureGenerator;
         private Mock<IMagicGenerator> mockMagicGenerator;
         private Mock<ISetLevelRandomizer> mockSetLevelRandomizer;
         private Mock<ISetAlignmentRandomizer> mockSetAlignmentRandomizer;
@@ -123,7 +123,7 @@ namespace NPCGen.Tests.Unit.Generators
 
             characterGenerator = new CharacterGenerator(mockAlignmentGenerator.Object, mockCharacterClassGenerator.Object,
                 mockRaceGenerator.Object, mockAdjustmentsSelector.Object, mockRandomizerVerifier.Object, mockPercentileSelector.Object,
-                mockAbilitiesGenerator.Object, mockCombatGenerator.Object, mockEquipmentGenerator.Object, mockSetAlignmentRandomizer.Object,
+                mockAbilitiesGenerator.Object, mockCombatGenerator.Object, mockTreasureGenerator.Object, mockSetAlignmentRandomizer.Object,
                 mockSetLevelRandomizer.Object, mockAnyAlignmentRandomizer.Object, mockAnyClassNameRandomizer.Object, mockAnyBaseRaceRandomizer.Object,
                 mockAnyMetaraceRandomizer.Object, mockRawStatRandomizer.Object, mockBooleanPercentileSelector.Object, mockLeadershipSelector.Object,
                 mockCollectionsSelector.Object, mockMagicGenerator.Object);
@@ -155,7 +155,7 @@ namespace NPCGen.Tests.Unit.Generators
             mockAlignmentGenerator = new Mock<IAlignmentGenerator>();
             mockAbilitiesGenerator = new Mock<IAbilitiesGenerator>();
             mockCombatGenerator = new Mock<ICombatGenerator>();
-            mockEquipmentGenerator = new Mock<IEquipmentGenerator>();
+            mockTreasureGenerator = new Mock<ITreasureGenerator>();
             mockCharacterClassGenerator = new Mock<ICharacterClassGenerator>();
             mockRaceGenerator = new Mock<IRaceGenerator>();
             mockMagicGenerator = new Mock<IMagicGenerator>();
@@ -181,7 +181,7 @@ namespace NPCGen.Tests.Unit.Generators
             mockRaceGenerator.Setup(g => g.GenerateWith(It.IsAny<Alignment>(), It.IsAny<CharacterClass>(), mockAnyBaseRaceRandomizer.Object, mockAnyMetaraceRandomizer.Object)).Returns(() => new Race());
             mockCombatGenerator.Setup(g => g.GenerateBaseAttackWith(It.IsAny<CharacterClass>(), It.IsAny<Race>())).Returns(() => new BaseAttack());
             mockAbilitiesGenerator.Setup(g => g.GenerateWith(It.IsAny<CharacterClass>(), It.IsAny<Race>(), mockRawStatRandomizer.Object, It.IsAny<BaseAttack>())).Returns(() => new Ability());
-            mockEquipmentGenerator.Setup(g => g.GenerateWith(It.IsAny<IEnumerable<Feat>>(), It.IsAny<CharacterClass>())).Returns(() => new Equipment());
+            mockTreasureGenerator.Setup(g => g.GenerateWith(It.IsAny<IEnumerable<Feat>>(), It.IsAny<CharacterClass>())).Returns(() => new Equipment());
             mockCombatGenerator.Setup(g => g.GenerateWith(It.IsAny<BaseAttack>(), It.IsAny<CharacterClass>(), It.IsAny<Race>(), It.IsAny<IEnumerable<Feat>>(), It.IsAny<Dictionary<String, Stat>>(), It.IsAny<Equipment>())).Returns(() => new Combat());
             mockMagicGenerator.Setup(g => g.GenerateWith(It.IsAny<CharacterClass>(), It.IsAny<IEnumerable<Feat>>(), It.IsAny<Equipment>())).Returns(() => new Magic());
 
@@ -194,7 +194,7 @@ namespace NPCGen.Tests.Unit.Generators
             mockRaceGenerator.Setup(g => g.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object,
                 mockMetaraceRandomizer.Object)).Returns(race);
             mockAbilitiesGenerator.Setup(g => g.GenerateWith(characterClass, race, mockStatsRandomizer.Object, baseAttack)).Returns(ability);
-            mockEquipmentGenerator.Setup(g => g.GenerateWith(ability.Feats, characterClass)).Returns(equipment);
+            mockTreasureGenerator.Setup(g => g.GenerateWith(ability.Feats, characterClass)).Returns(equipment);
             mockCombatGenerator.Setup(g => g.GenerateWith(baseAttack, characterClass, race, ability.Feats, ability.Stats, equipment)).Returns(combat);
             mockCombatGenerator.Setup(g => g.GenerateBaseAttackWith(characterClass, race)).Returns(baseAttack);
             mockMagicGenerator.Setup(g => g.GenerateWith(characterClass, ability.Feats, equipment)).Returns(magic);
@@ -569,7 +569,7 @@ namespace NPCGen.Tests.Unit.Generators
             mockAbilitiesGenerator.Setup(g => g.GenerateWith(cohortClass, cohortRace, mockRawStatRandomizer.Object, cohortBaseAttack)).Returns(cohortAbility);
             mockCombatGenerator.Setup(g => g.GenerateBaseAttackWith(cohortClass, cohortRace)).Returns(cohortBaseAttack);
             mockCombatGenerator.Setup(g => g.GenerateWith(cohortBaseAttack, cohortClass, cohortRace, cohortAbility.Feats, cohortAbility.Stats, cohortEquipment)).Returns(cohortCombat);
-            mockEquipmentGenerator.Setup(g => g.GenerateWith(cohortAbility.Feats, cohortClass)).Returns(cohortEquipment);
+            mockTreasureGenerator.Setup(g => g.GenerateWith(cohortAbility.Feats, cohortClass)).Returns(cohortEquipment);
             mockMagicGenerator.Setup(g => g.GenerateWith(cohortClass, cohortAbility.Feats, cohortEquipment)).Returns(cohortMagic);
             mockPercentileSelector.SetupSequence(s => s.SelectFrom(TableNameConstants.Set.Percentile.Traits)).Returns("character is interesting").Returns("cohort is interesting");
 
@@ -891,7 +891,7 @@ namespace NPCGen.Tests.Unit.Generators
                     .Returns(followerBaseAttack);
                 mockAbilitiesGenerator.Setup(g => g.GenerateWith(followerClass, followerRace, mockRawStatRandomizer.Object, followerBaseAttack))
                     .Returns(followerAbility);
-                mockEquipmentGenerator.Setup(g => g.GenerateWith(followerAbility.Feats, followerClass))
+                mockTreasureGenerator.Setup(g => g.GenerateWith(followerAbility.Feats, followerClass))
                     .Returns(followerEquipment);
                 mockCombatGenerator.Setup(g => g.GenerateWith(followerBaseAttack, followerClass, followerRace, followerAbility.Feats, followerAbility.Stats, followerEquipment))
                     .Returns(followerCombat);

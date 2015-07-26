@@ -1,8 +1,8 @@
-﻿using Ninject;
-using NPCGen.Mappers.Interfaces;
-using NPCGen.Mappers.Percentiles;
+﻿using CharacterGen.Mappers;
+using CharacterGen.Mappers.Domain.Percentiles;
+using Ninject;
 
-namespace NPCGen.Bootstrap.Factories
+namespace CharacterGen.Bootstrap.Factories
 {
     public static class PercentileMapperFactory
     {

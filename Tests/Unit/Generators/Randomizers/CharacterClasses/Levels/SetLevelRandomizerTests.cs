@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NPCGen.Generators.Interfaces.Randomizers.CharacterClasses;
-using NPCGen.Generators.Randomizers.CharacterClasses.Levels;
+﻿using CharacterGen.Generators.Domain.Randomizers.CharacterClasses.Levels;
+using CharacterGen.Generators.Randomizers.CharacterClasses;
 using NUnit.Framework;
+using System.Linq;
 
-namespace NPCGen.Tests.Unit.Generators.Randomizers.CharacterClasses.Levels
+namespace CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses.Levels
 {
     [TestFixture]
     public class SetLevelRandomizerTests

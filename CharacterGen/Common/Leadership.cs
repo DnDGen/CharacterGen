@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace NPCGen.Common
+namespace CharacterGen.Common
 {
     public class Leadership
     {

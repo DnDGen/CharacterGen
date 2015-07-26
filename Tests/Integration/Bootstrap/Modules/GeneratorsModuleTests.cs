@@ -1,23 +1,23 @@
-﻿using System;
-using NPCGen.Generators.Interfaces;
-using NPCGen.Generators.Interfaces.Abilities;
-using NPCGen.Generators.Interfaces.Abilities.Feats;
-using NPCGen.Generators.Interfaces.Combats;
-using NPCGen.Generators.Interfaces.Items;
-using NPCGen.Generators.Interfaces.Randomizers.Alignments;
-using NPCGen.Generators.Interfaces.Randomizers.CharacterClasses;
-using NPCGen.Generators.Interfaces.Randomizers.Races;
-using NPCGen.Generators.Interfaces.Randomizers.Stats;
-using NPCGen.Generators.Interfaces.Verifiers;
-using NPCGen.Generators.Randomizers.Alignments;
-using NPCGen.Generators.Randomizers.CharacterClasses.ClassNames;
-using NPCGen.Generators.Randomizers.CharacterClasses.Levels;
-using NPCGen.Generators.Randomizers.Races.BaseRaces;
-using NPCGen.Generators.Randomizers.Races.Metaraces;
-using NPCGen.Generators.Randomizers.Stats;
+﻿using CharacterGen.Generators;
+using CharacterGen.Generators.Abilities;
+using CharacterGen.Generators.Abilities.Feats;
+using CharacterGen.Generators.Combats;
+using CharacterGen.Generators.Domain.Randomizers.Alignments;
+using CharacterGen.Generators.Domain.Randomizers.CharacterClasses.ClassNames;
+using CharacterGen.Generators.Domain.Randomizers.CharacterClasses.Levels;
+using CharacterGen.Generators.Domain.Randomizers.Races.BaseRaces;
+using CharacterGen.Generators.Domain.Randomizers.Races.Metaraces;
+using CharacterGen.Generators.Domain.Randomizers.Stats;
+using CharacterGen.Generators.Items;
+using CharacterGen.Generators.Randomizers.Alignments;
+using CharacterGen.Generators.Randomizers.CharacterClasses;
+using CharacterGen.Generators.Randomizers.Races;
+using CharacterGen.Generators.Randomizers.Stats;
+using CharacterGen.Generators.Verifiers;
 using NUnit.Framework;
+using System;
 
-namespace NPCGen.Tests.Integration.Bootstrap.Modules
+namespace CharacterGen.Tests.Integration.Bootstrap.Modules
 {
     [TestFixture]
     public class GeneratorsModuleTests : BootstrapTests
@@ -509,9 +509,9 @@ namespace NPCGen.Tests.Integration.Bootstrap.Modules
         }
 
         [Test]
-        public void EquipmentGeneratorIsNotGeneratedAsSingleton()
+        public void TreasureGeneratorIsNotGeneratedAsSingleton()
         {
-            AssertNotSingleton<IEquipmentGenerator>();
+            AssertNotSingleton<ITreasureGenerator>();
         }
 
         [Test]
