@@ -1,6 +1,6 @@
-﻿using System;
-using CharacterGen.Common.Abilities.Feats;
+﻿using CharacterGen.Common.Abilities.Feats;
 using CharacterGen.Common.Races;
+using System;
 
 namespace CharacterGen.Selectors.Objects
 {
@@ -8,6 +8,7 @@ namespace CharacterGen.Selectors.Objects
     {
         public String Feat { get; set; }
         public Int32 MinimumHitDieRequirement { get; set; }
+        public Int32 MaximumHitDieRequirement { get; set; }
         public String SizeRequirement { get; set; }
         public Frequency Frequency { get; set; }
         public String FocusType { get; set; }
@@ -24,6 +25,9 @@ namespace CharacterGen.Selectors.Objects
         public Boolean RequirementsMet(Race race, Int32 monsterHitDice)
         {
             if (String.IsNullOrEmpty(SizeRequirement) == false && SizeRequirement != race.Size)
+                return false;
+
+            if (MaximumHitDieRequirement > 0 && monsterHitDice > MaximumHitDieRequirement)
                 return false;
 
             return monsterHitDice >= MinimumHitDieRequirement;

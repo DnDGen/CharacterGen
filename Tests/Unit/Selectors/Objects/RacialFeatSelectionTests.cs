@@ -1,5 +1,4 @@
-﻿using System;
-using CharacterGen.Common.Races;
+﻿using CharacterGen.Common.Races;
 using CharacterGen.Selectors.Objects;
 using NUnit.Framework;
 
@@ -27,6 +26,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Objects
             Assert.That(selection.SizeRequirement, Is.Empty);
             Assert.That(selection.FocusType, Is.Empty);
             Assert.That(selection.Frequency, Is.Not.Null);
+            Assert.That(selection.MaximumHitDieRequirement, Is.EqualTo(0));
         }
 
         [Test]
@@ -55,13 +55,37 @@ namespace CharacterGen.Tests.Unit.Selectors.Objects
             Assert.That(met, Is.False);
         }
 
-        [TestCase(3)]
-        [TestCase(4)]
-        public void RequirementsMetForMinimumHitDice(Int32 hitDice)
+        [Test]
+        public void RequirementsNotMetIfAboveHitDiceRange()
         {
-            selection.MinimumHitDieRequirement = hitDice;
+            selection.MaximumHitDieRequirement = 3;
 
-            var met = selection.RequirementsMet(race, hitDice);
+            var met = selection.RequirementsMet(race, 4);
+            Assert.That(met, Is.False);
+        }
+
+        [Test]
+        public void RequirementsMetIfAboveMaximumOfZero()
+        {
+            var met = selection.RequirementsMet(race, 4);
+            Assert.That(met, Is.True);
+        }
+
+        [Test]
+        public void RequirementsMetForMinimumHitDice()
+        {
+            selection.MinimumHitDieRequirement = 4;
+
+            var met = selection.RequirementsMet(race, 4);
+            Assert.That(met, Is.True);
+        }
+
+        [Test]
+        public void RequirementsMetForMaximumHitDice()
+        {
+            selection.MaximumHitDieRequirement = 4;
+
+            var met = selection.RequirementsMet(race, 4);
             Assert.That(met, Is.True);
         }
 
@@ -72,6 +96,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Objects
 
             selection.SizeRequirement = race.Size;
             selection.MinimumHitDieRequirement = 3;
+            selection.MaximumHitDieRequirement = 5;
 
             var met = selection.RequirementsMet(race, 4);
             Assert.That(met, Is.True);

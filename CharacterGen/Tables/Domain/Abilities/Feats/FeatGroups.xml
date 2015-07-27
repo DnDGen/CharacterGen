@@ -349,6 +349,38 @@
         <item>Spell Resistance</item>
       <item>Poison</item>
     </object>
+  <object>
+    <name>Druid</name>
+    <item>Light Armor Proficiency</item>
+    <item>Medium Armor Proficiency</item>
+    <item>Shield Proficiency</item>
+    <item>Nature Sense</item>
+    <item>Wild Empathy</item>
+    <item>Wild Shape1</item>
+    <item>Wild Shape2</item>
+    <item>Wild Shape3</item>
+    <item>Wild Shape4</item>
+    <item>Wild Shape5</item>
+    <item>Wild Shape6</item>
+    <item>Wild ShapeElemental1</item>
+    <item>Wild ShapeElemental2</item>
+    <item>Wild ShapeElemental3</item>
+    <item>Woodland Stride</item>
+    <item>Simple Weapon ProficiencyQuarterstaff</item>
+    <item>Simple Weapon ProficiencyDagger</item>
+    <item>Simple Weapon ProficiencySling</item>
+    <item>Simple Weapon ProficiencyLongspear</item>
+    <item>Simple Weapon ProficiencyShortspear</item>
+    <item>Simple Weapon ProficiencyClub</item>
+    <item>Simple Weapon ProficiencyDart</item>
+    <item>Simple Weapon ProficiencySickle</item>
+    <item>Martial Weapon ProficiencyScimitar</item>
+    <item>Trackless Step</item>
+    <item>Resist Nature's Lure</item>
+    <item>Venom Immunity</item>
+    <item>A Thousand Faces</item>
+    <item>Timeless Body</item>
+  </object>
     <object>
         <name>Duergar Dwarf</name>
         <item>Skill BonusAppraise</item>
@@ -483,8 +515,8 @@
         <item>ResistanceAcid</item>
         <item>ResistanceCold</item>
         <item>ResistanceElectricity</item>
-        <item>Damage Reduction10-</item>
-        <item>Damage Reduction11+</item>
+        <item>Damage Reduction11-</item>
+        <item>Damage Reduction12+</item>
         <item>Spell Resistance</item>
     </object>
     <object>
@@ -835,6 +867,32 @@
         <item>Darkvision</item>
         <item>Light Sensitivity</item>
     </object>
+  <object>
+    <name>Paladin</name>
+    <item>Simple Weapon Proficiency</item>
+    <item>Light Armor Proficiency</item>
+    <item>Medium Armor Proficiency</item>
+    <item>Heavy Armor Proficiency</item>
+    <item>Shield Proficiency</item>
+    <item>Aura of Good</item>
+    <item>Spell-Like AbilityDetect evil</item>
+    <item>Smite Evil1</item>
+    <item>Smite Evil2</item>
+    <item>Smite Evil3</item>
+    <item>Smite Evil4</item>
+    <item>Smite Evil5</item>
+    <item>Martial Weapon Proficiency</item>
+    <item>Divine Grace</item>
+    <item>Lay On Hands</item>
+    <item>Aura of Courage</item>
+    <item>Divine Health</item>
+    <item>Turn</item>
+    <item>Spell-Like AbilityRemove disease1</item>
+    <item>Spell-Like AbilityRemove disease2</item>
+    <item>Spell-Like AbilityRemove disease3</item>
+    <item>Spell-Like AbilityRemove disease4</item>
+    <item>Spell-Like AbilityRemove disease5</item>
+  </object>
     <object>
         <name>Plant</name>
         <item>Turn</item>

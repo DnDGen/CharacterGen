@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+    <object>
+        <name>Sorcerer</name>
+        <item>1</item>
+    </object>
+    <object>
+        <name>Wizard</name>
+        <item>1</item>
+    </object>
+</items>

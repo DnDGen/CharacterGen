@@ -82,6 +82,7 @@
     <Compile Include="Abilities\Feats\Data\Racial\DrowFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\GnollFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\GoblinFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\HalfCelestialFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\HalfDragonFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\HalfElfFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\HalfOrcFeatDataTests.cs" />
@@ -100,9 +101,11 @@
     <Compile Include="Abilities\Feats\Requirements\Classes\GreaterWeaponFocusClassRequirementsTests.cs" />
     <Compile Include="Abilities\Feats\Requirements\Classes\GreaterWeaponSpecializationClassRequirementsTests.cs" />
     <Compile Include="Abilities\Feats\Requirements\Classes\ImprovedEvasionClassRequirementsTests.cs" />
+    <Compile Include="Abilities\Feats\Requirements\Classes\ImprovedFamiliarClassRequirementsTests.cs" />
     <Compile Include="Abilities\Feats\Requirements\Stats\CombatExpertiseStatRequirementsTests.cs" />
     <Compile Include="Abilities\Feats\Requirements\Stats\DeflectArrowsStatRequirementsTests.cs" />
     <Compile Include="Abilities\Feats\Requirements\Stats\DodgeStatRequirementsTests.cs" />
+    <Compile Include="Abilities\Feats\Requirements\Stats\ImprovedGrappleStatRequirementsTests.cs" />
     <Compile Include="Abilities\Feats\Requirements\Stats\GreaterTwoWeaponFightingStatRequirementsTests.cs" />
     <Compile Include="Abilities\Skills\AssignPointToCrossClassSkillTests.cs" />
     <Compile Include="Abilities\Skills\ClassSkillsTests.cs" />

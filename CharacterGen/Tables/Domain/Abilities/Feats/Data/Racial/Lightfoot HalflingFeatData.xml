@@ -10,16 +10,18 @@
         <item>Jump</item>
         <item>0</item>
         <item></item>
+      <item>0</item>
     </object>
     <object>
-        <name>Skill BonusMove Silently</name>
-        <item>Skill Bonus</item>
-        <item></item>
-        <item>0</item>
-        <item>2</item>
-        <item>Move Silently</item>
-        <item>0</item>
-        <item></item>
+      <name>Skill BonusMove Silently</name>
+      <item>Skill Bonus</item>
+      <item></item>
+      <item>0</item>
+      <item>2</item>
+      <item>Move Silently</item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
     </object>
     <object>
         <name>Skill BonusClimb</name>
@@ -30,6 +32,7 @@
         <item>Climb</item>
         <item>0</item>
         <item></item>
+        <item>0</item>
     </object>
     <object>
         <name>Skill BonusListen</name>
@@ -40,6 +43,7 @@
         <item>Listen</item>
         <item>0</item>
         <item></item>
+      <item>0</item>
     </object>
     <object>
         <name>Attack BonusThrowOrSling</name>
@@ -50,6 +54,7 @@
         <item>Thrown weapons and slings</item>
         <item>0</item>
         <item></item>
+      <item>0</item>
     </object>
     <object>
         <name>Save BonusFear</name>
@@ -60,6 +65,7 @@
         <item>Fear</item>
         <item>0</item>
         <item></item>
+      <item>0</item>
     </object>
     <object>
         <name>Save BonusAll</name>
@@ -70,5 +76,6 @@
         <item></item>
         <item>0</item>
         <item></item>
+      <item>0</item>
     </object>
 </items>

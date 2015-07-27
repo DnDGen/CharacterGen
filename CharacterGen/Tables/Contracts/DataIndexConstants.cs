@@ -25,6 +25,7 @@ namespace CharacterGen.Tables
             public const Int32 FocusIndex = 4;
             public const Int32 FrequencyQuantityIndex = 5;
             public const Int32 FrequencyTimePeriodIndex = 6;
+            public const Int32 MaximumHitDiceRequirementIndex = 7;
         }
 
         public static class AdditionalFeatData

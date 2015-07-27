@@ -1,9 +1,9 @@
-﻿using System;
-using CharacterGen.Common.Abilities.Feats;
+﻿using CharacterGen.Common.Abilities.Feats;
 using CharacterGen.Common.Abilities.Skills;
 using CharacterGen.Common.Races;
 using CharacterGen.Tables;
 using NUnit.Framework;
+using System;
 
 namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
 {
@@ -18,7 +18,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
         [Test]
         public override void CollectionNames()
         {
-            var names = new[] 
+            var names = new[]
             {
                 FeatConstants.Darkvision,
                 FeatConstants.SkillBonus + SkillConstants.MoveSilently,
@@ -35,7 +35,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             "",
             0,
             "",
-            4)]
+            4,
+            0)]
         [TestCase(FeatConstants.SkillBonus + SkillConstants.Ride,
             FeatConstants.SkillBonus,
             SkillConstants.Ride,
@@ -43,7 +44,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             "",
             0,
             "",
-            4)]
+            4,
+            0)]
         [TestCase(FeatConstants.Darkvision,
             FeatConstants.Darkvision,
             "",
@@ -51,10 +53,11 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             "",
             0,
             "",
-            60)]
-        public override void Data(String name, String feat, String focus, Int32 frequencyQuantity, String frequencyTimePeriod, Int32 minimumHitDiceRequirement, String sizeRequirement, Int32 strength)
+            60,
+            0)]
+        public override void Data(String name, String feat, String focus, Int32 frequencyQuantity, String frequencyTimePeriod, Int32 minimumHitDiceRequirement, String sizeRequirement, Int32 strength, Int32 maximumHitDiceRequirement)
         {
-            base.Data(name, feat, focus, frequencyQuantity, frequencyTimePeriod, minimumHitDiceRequirement, sizeRequirement, strength);
+            base.Data(name, feat, focus, frequencyQuantity, frequencyTimePeriod, minimumHitDiceRequirement, sizeRequirement, strength, maximumHitDiceRequirement);
         }
     }
 }

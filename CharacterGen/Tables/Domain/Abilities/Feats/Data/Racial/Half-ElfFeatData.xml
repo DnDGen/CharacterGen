@@ -10,6 +10,7 @@
         <item>Listen</item>
         <item>0</item>
         <item></item>
+      <item>0</item>
     </object>
     <object>
         <name>Skill BonusSearch</name>
@@ -20,6 +21,7 @@
         <item>Search</item>
         <item>0</item>
         <item></item>
+      <item>0</item>
     </object>
     <object>
         <name>Skill BonusSpot</name>
@@ -30,6 +32,7 @@
         <item>Spot</item>
         <item>0</item>
         <item></item>
+        <item>0</item>
     </object>
     <object>
         <name>Skill BonusDiplomacy</name>
@@ -40,6 +43,7 @@
         <item>Diplomacy</item>
         <item>0</item>
         <item></item>
+      <item>0</item>
     </object>
     <object>
         <name>Skill BonusGather Information</name>
@@ -50,6 +54,7 @@
         <item>Gather Information</item>
         <item>0</item>
         <item></item>
+      <item>0</item>
     </object>
     <object>
         <name>Immune to Effect</name>
@@ -60,6 +65,7 @@
         <item>Sleep</item>
         <item>0</item>
         <item></item>
+      <item>0</item>
     </object>
     <object>
         <name>Save Bonus</name>
@@ -70,6 +76,7 @@
         <item>Enchantment spells or effects</item>
         <item>0</item>
         <item></item>
+      <item>0</item>
     </object>
     <object>
         <name>Low-Light Vision</name>
@@ -80,6 +87,7 @@
         <item></item>
         <item>0</item>
         <item></item>
+      <item>0</item>
     </object>
     <object>
         <name>Elven Blood</name>
@@ -90,5 +98,6 @@
         <item></item>
         <item>0</item>
         <item></item>
+      <item>0</item>
     </object>
 </items>

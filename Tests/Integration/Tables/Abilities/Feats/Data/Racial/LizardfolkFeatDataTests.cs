@@ -1,9 +1,9 @@
-﻿using System;
-using CharacterGen.Common.Abilities.Feats;
+﻿using CharacterGen.Common.Abilities.Feats;
 using CharacterGen.Common.Items;
 using CharacterGen.Common.Races;
 using CharacterGen.Tables;
 using NUnit.Framework;
+using System;
 
 namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
 {
@@ -18,7 +18,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
         [Test]
         public override void CollectionNames()
         {
-            var names = new[] 
+            var names = new[]
             {
                 FeatConstants.SimpleWeaponProficiency,
                 FeatConstants.ShieldProficiency,
@@ -38,6 +38,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             "",
             0,
             "",
+            0,
             0)]
         [TestCase(FeatConstants.ShieldProficiency,
             FeatConstants.ShieldProficiency,
@@ -46,6 +47,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             "",
             0,
             "",
+            0,
             0)]
         [TestCase(FeatConstants.NaturalArmor,
             FeatConstants.NaturalArmor,
@@ -54,7 +56,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             "",
             0,
             "",
-            5)]
+            5,
+            0)]
         [TestCase(FeatConstants.HoldBreath,
             FeatConstants.HoldBreath,
             "",
@@ -62,6 +65,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             "",
             0,
             "",
+            0,
             0)]
         [TestCase(FeatConstants.NaturalWeapon + "Claw",
             FeatConstants.NaturalWeapon,
@@ -70,6 +74,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             "",
             0,
             "",
+            0,
             0)]
         [TestCase(FeatConstants.NaturalWeapon + "Bite",
             FeatConstants.NaturalWeapon,
@@ -78,10 +83,11 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             "",
             0,
             "",
+            0,
             0)]
-        public override void Data(String name, String feat, String focus, Int32 frequencyQuantity, String frequencyTimePeriod, Int32 minimumHitDiceRequirement, String sizeRequirement, Int32 strength)
+        public override void Data(String name, String feat, String focus, Int32 frequencyQuantity, String frequencyTimePeriod, Int32 minimumHitDiceRequirement, String sizeRequirement, Int32 strength, Int32 maximumHitDiceRequirement)
         {
-            base.Data(name, feat, focus, frequencyQuantity, frequencyTimePeriod, minimumHitDiceRequirement, sizeRequirement, strength);
+            base.Data(name, feat, focus, frequencyQuantity, frequencyTimePeriod, minimumHitDiceRequirement, sizeRequirement, strength, maximumHitDiceRequirement);
         }
     }
 }

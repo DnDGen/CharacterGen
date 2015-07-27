@@ -10,6 +10,7 @@
         <item></item>
         <item>0</item>
         <item></item>
+      <item>0</item>
     </object>
     <object>
         <name>Natural WeaponClaw</name>
@@ -20,6 +21,7 @@
         <item>Claw (x2)</item>
         <item>0</item>
         <item></item>
+      <item>0</item>
     </object>
     <object>
         <name>Natural WeaponBite</name>
@@ -30,6 +32,7 @@
         <item>Bite</item>
         <item>0</item>
         <item></item>
+      <item>0</item>
     </object>
     <object>
         <name>Immune to EffectSleep</name>
@@ -40,6 +43,7 @@
         <item>Sleep</item>
         <item>0</item>
         <item></item>
+      <item>0</item>
     </object>
     <object>
         <name>Immune to EffectParalysis</name>
@@ -50,6 +54,7 @@
         <item>Paralysis</item>
         <item>0</item>
         <item></item>
+      <item>0</item>
     </object>
     <object>
         <name>Low-Light Vision</name>
@@ -60,6 +65,7 @@
         <item></item>
         <item>0</item>
         <item></item>
+      <item>0</item>
     </object>
     <object>
         <name>Darkvision</name>
@@ -70,5 +76,6 @@
         <item></item>
         <item>0</item>
         <item></item>
+      <item>0</item>
     </object>
 </items>

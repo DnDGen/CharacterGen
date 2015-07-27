@@ -10,6 +10,7 @@
         <item>Appraise (Stone or metal items)</item>
         <item>0</item>
         <item></item>
+      <item>0</item>
     </object>
     <object>
         <name>Skill BonusListen</name>
@@ -20,6 +21,7 @@
         <item>Listen</item>
         <item>0</item>
         <item></item>
+      <item>0</item>
     </object>
     <object>
         <name>Attack BonusThrowOrSling</name>
@@ -30,6 +32,7 @@
         <item>Thrown weapons and slings</item>
         <item>0</item>
         <item></item>
+      <item>0</item>
     </object>
     <object>
         <name>Save BonusFear</name>
@@ -40,6 +43,7 @@
         <item>Fear</item>
         <item>0</item>
         <item></item>
+      <item>0</item>
     </object>
     <object>
         <name>Save BonusAll</name>
@@ -50,6 +54,7 @@
         <item></item>
         <item>0</item>
         <item></item>
+      <item>0</item>
     </object>
     <object>
         <name>Darkvision</name>
@@ -60,6 +65,7 @@
         <item></item>
         <item>0</item>
         <item></item>
+      <item>0</item>
     </object>
     <object>
         <name>Stonecunning</name>
@@ -70,5 +76,6 @@
         <item></item>
         <item>0</item>
         <item></item>
+      <item>0</item>
     </object>
 </items>

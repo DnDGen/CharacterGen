@@ -1,6 +1,6 @@
-﻿using System;
-using CharacterGen.Tables;
+﻿using CharacterGen.Tables;
 using NUnit.Framework;
+using System;
 
 namespace CharacterGen.Tests.Unit.Tables
 {
@@ -27,6 +27,7 @@ namespace CharacterGen.Tests.Unit.Tables
         [TestCase(DataIndexConstants.RacialFeatData.FocusIndex, 4)]
         [TestCase(DataIndexConstants.RacialFeatData.FrequencyQuantityIndex, 5)]
         [TestCase(DataIndexConstants.RacialFeatData.FrequencyTimePeriodIndex, 6)]
+        [TestCase(DataIndexConstants.RacialFeatData.MaximumHitDiceRequirementIndex, 7)]
         public void RacialFeatDataIndex(Int32 constant, Int32 value)
         {
             Assert.That(constant, Is.EqualTo(value));

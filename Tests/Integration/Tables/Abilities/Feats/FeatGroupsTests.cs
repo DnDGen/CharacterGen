@@ -190,36 +190,6 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.HeavyArmorProficiency,
             FeatConstants.ShieldProficiency,
             FeatConstants.Turn)]
-        [TestCase(CharacterClassConstants.Druid,
-            FeatConstants.SimpleWeaponProficiency + WeaponConstants.Quarterstaff,
-            FeatConstants.SimpleWeaponProficiency + WeaponConstants.Dagger,
-            FeatConstants.SimpleWeaponProficiency + WeaponConstants.Club,
-            FeatConstants.SimpleWeaponProficiency + WeaponConstants.Dart,
-            FeatConstants.SimpleWeaponProficiency + WeaponConstants.Sling,
-            FeatConstants.SimpleWeaponProficiency + WeaponConstants.Shortspear,
-            FeatConstants.SimpleWeaponProficiency + WeaponConstants.Longspear,
-            FeatConstants.MartialWeaponProficiency + WeaponConstants.Scimitar,
-            FeatConstants.SimpleWeaponProficiency + WeaponConstants.Sickle,
-            FeatConstants.LightArmorProficiency,
-            FeatConstants.MediumArmorProficiency,
-            FeatConstants.ShieldProficiency,
-            FeatConstants.NatureSense,
-            FeatConstants.WildEmpathy + "1",
-            FeatConstants.WildEmpathy + "2",
-            FeatConstants.WildEmpathy + "3",
-            FeatConstants.WildEmpathy + "4",
-            FeatConstants.WildEmpathy + "5",
-            FeatConstants.WildEmpathy + "6",
-            FeatConstants.WildEmpathy + "Elemental1",
-            FeatConstants.WildEmpathy + "Elemental2",
-            FeatConstants.WildEmpathy + "Elemental3",
-            FeatConstants.WoodlandStride,
-            FeatConstants.TracklessStep,
-            FeatConstants.ResistNaturesLure,
-            FeatConstants.WildShape,
-            FeatConstants.ImmuneToEffect,
-            FeatConstants.AThousandFaces,
-            FeatConstants.TimelessBody)]
         [TestCase(CharacterClassConstants.Fighter,
             FeatConstants.SimpleWeaponProficiency,
             FeatConstants.MartialWeaponProficiency,
@@ -747,6 +717,78 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
         }
 
         [Test]
+        public void PaladinFeatGroup()
+        {
+            var featIds = new[]
+            {
+                FeatConstants.SimpleWeaponProficiency,
+                FeatConstants.MartialWeaponProficiency,
+                FeatConstants.LightArmorProficiency,
+                FeatConstants.MediumArmorProficiency,
+                FeatConstants.HeavyArmorProficiency,
+                FeatConstants.ShieldProficiency,
+                FeatConstants.AuraOfGood,
+                FeatConstants.SpellLikeAbility + SpellConstants.DetectEvil,
+                FeatConstants.SmiteEvil + "1",
+                FeatConstants.SmiteEvil + "2",
+                FeatConstants.SmiteEvil + "3",
+                FeatConstants.SmiteEvil + "4",
+                FeatConstants.SmiteEvil + "5",
+                FeatConstants.DivineGrace,
+                FeatConstants.LayOnHands,
+                FeatConstants.AuraOfCourage,
+                FeatConstants.DivineHealth,
+                FeatConstants.Turn,
+                FeatConstants.SpellLikeAbility + SpellConstants.RemoveDisease + "1",
+                FeatConstants.SpellLikeAbility + SpellConstants.RemoveDisease + "2",
+                FeatConstants.SpellLikeAbility + SpellConstants.RemoveDisease + "3",
+                FeatConstants.SpellLikeAbility + SpellConstants.RemoveDisease + "4",
+                FeatConstants.SpellLikeAbility + SpellConstants.RemoveDisease + "5"
+            };
+
+            base.DistinctCollection(CharacterClassConstants.Paladin, featIds);
+        }
+
+        [Test]
+        public void DruidFeatGroup()
+        {
+            var featIds = new[]
+            {
+                FeatConstants.SimpleWeaponProficiency + WeaponConstants.Quarterstaff,
+                FeatConstants.SimpleWeaponProficiency + WeaponConstants.Dagger,
+                FeatConstants.SimpleWeaponProficiency + WeaponConstants.Club,
+                FeatConstants.SimpleWeaponProficiency + WeaponConstants.Dart,
+                FeatConstants.SimpleWeaponProficiency + WeaponConstants.Sling,
+                FeatConstants.SimpleWeaponProficiency + WeaponConstants.Shortspear,
+                FeatConstants.SimpleWeaponProficiency + WeaponConstants.Longspear,
+                FeatConstants.MartialWeaponProficiency + WeaponConstants.Scimitar,
+                FeatConstants.SimpleWeaponProficiency + WeaponConstants.Sickle,
+                FeatConstants.LightArmorProficiency,
+                FeatConstants.MediumArmorProficiency,
+                FeatConstants.ShieldProficiency,
+                FeatConstants.NatureSense,
+                FeatConstants.WildEmpathy,
+                FeatConstants.WildShape + "1",
+                FeatConstants.WildShape + "2",
+                FeatConstants.WildShape + "3",
+                FeatConstants.WildShape + "4",
+                FeatConstants.WildShape + "5",
+                FeatConstants.WildShape + "6",
+                FeatConstants.WildShape + "Elemental1",
+                FeatConstants.WildShape + "Elemental2",
+                FeatConstants.WildShape + "Elemental3",
+                FeatConstants.WoodlandStride,
+                FeatConstants.TracklessStep,
+                FeatConstants.ResistNaturesLure,
+                FeatConstants.VenomImmunity,
+                FeatConstants.AThousandFaces,
+                FeatConstants.TimelessBody
+            };
+
+            base.DistinctCollection(CharacterClassConstants.Druid, featIds);
+        }
+
+        [Test]
         public void MindFlayerFeatGroup()
         {
             var featIds = new[]
@@ -953,8 +995,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
                 FeatConstants.Resistance + FeatConstants.Foci.Acid,
                 FeatConstants.Resistance + FeatConstants.Foci.Cold,
                 FeatConstants.Resistance + FeatConstants.Foci.Electricity,
-                FeatConstants.DamageReduction + "10-",
-                FeatConstants.DamageReduction + "11+",
+                FeatConstants.DamageReduction + "11-",
+                FeatConstants.DamageReduction + "12+",
                 FeatConstants.SpellResistance,
                 FeatConstants.SaveBonus
             };

@@ -10,6 +10,7 @@
         <item>Longsword</item>
         <item>0</item>
         <item></item>
+      <item>0</item>
     </object>
     <object>
         <name>Martial Weapon ProficiencyRapier</name>
@@ -20,6 +21,7 @@
         <item>Rapier</item>
         <item>0</item>
         <item></item>
+      <item>0</item>
     </object>
     <object>
         <name>Martial Weapon ProficiencyLongbow</name>
@@ -30,6 +32,7 @@
         <item>Longbow</item>
         <item>0</item>
         <item></item>
+      <item>0</item>
     </object>
     <object>
         <name>Martial Weapon ProficiencyShortbow</name>
@@ -40,6 +43,7 @@
         <item>Shortbow</item>
         <item>0</item>
         <item></item>
+      <item>0</item>
     </object>
     <object>
         <name>Immune to Effect</name>
@@ -50,6 +54,7 @@
         <item>Sleep</item>
         <item>0</item>
         <item></item>
+      <item>0</item>
     </object>
     <object>
         <name>Save Bonus</name>
@@ -60,6 +65,7 @@
         <item>Enchantment spells or effects</item>
         <item>0</item>
         <item></item>
+        <item>0</item>
     </object>
     <object>
         <name>Low-Light Vision</name>
@@ -70,6 +76,7 @@
         <item></item>
         <item>0</item>
         <item></item>
+      <item>0</item>
     </object>
     <object>
         <name>Skill BonusListen</name>
@@ -80,16 +87,18 @@
         <item>Listen</item>
         <item>0</item>
         <item></item>
+      <item>0</item>
     </object>
     <object>
-        <name>Skill BonusSearch</name>
-        <item>Skill Bonus</item>
-        <item></item>
-        <item>0</item>
-        <item>2</item>
-        <item>Search</item>
-        <item>0</item>
-        <item></item>
+      <name>Skill BonusSearch</name>
+      <item>Skill Bonus</item>
+      <item></item>
+      <item>0</item>
+      <item>2</item>
+      <item>Search</item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
     </object>
     <object>
         <name>Skill BonusSpot</name>
@@ -100,6 +109,7 @@
         <item>Spot</item>
         <item>0</item>
         <item></item>
+      <item>0</item>
     </object>
     <object>
         <name>Passive Secret Door Search</name>
@@ -110,5 +120,6 @@
         <item></item>
         <item>0</item>
         <item></item>
+      <item>0</item>
     </object>
 </items>

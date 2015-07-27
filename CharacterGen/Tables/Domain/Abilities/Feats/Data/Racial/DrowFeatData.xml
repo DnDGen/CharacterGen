@@ -10,6 +10,7 @@
         <item>Hand crossbow</item>
         <item>0</item>
         <item></item>
+      <item>0</item>
     </object>
     <object>
         <name>Martial Weapon ProficiencyRapier</name>
@@ -20,6 +21,7 @@
         <item>Rapier</item>
         <item>0</item>
         <item></item>
+      <item>0</item>
     </object>
     <object>
         <name>Martial Weapon ProficiencyShort sword</name>
@@ -30,6 +32,7 @@
         <item>Short sword</item>
         <item>0</item>
         <item></item>
+      <item>0</item>
     </object>
     <object>
         <name>Immune to Effect</name>
@@ -40,6 +43,7 @@
         <item>Sleep</item>
         <item>0</item>
         <item></item>
+      <item>0</item>
     </object>
     <object>
         <name>Save Bonus</name>
@@ -50,6 +54,7 @@
         <item>Enchantment spells or effects</item>
         <item>0</item>
         <item></item>
+      <item>0</item>
     </object>
     <object>
         <name>Darkvision</name>
@@ -60,6 +65,7 @@
         <item></item>
         <item>0</item>
         <item></item>
+      <item>0</item>
     </object>
     <object>
         <name>Skill BonusListen</name>
@@ -70,6 +76,7 @@
         <item>Listen</item>
         <item>0</item>
         <item></item>
+      <item>0</item>
     </object>
     <object>
         <name>Skill BonusSearch</name>
@@ -80,6 +87,7 @@
         <item>Search</item>
         <item>0</item>
         <item></item>
+      <item>0</item>
     </object>
     <object>
         <name>Skill BonusSpot</name>
@@ -90,6 +98,7 @@
         <item>Spot</item>
         <item>0</item>
         <item></item>
+      <item>0</item>
     </object>
     <object>
         <name>Passive Secret Door Search</name>
@@ -100,16 +109,18 @@
         <item></item>
         <item>0</item>
         <item></item>
+      <item>0</item>
     </object>
   <object>
     <name>Save BonusWill</name>
     <item>Save Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>2</item>
     <item>Will (spells and spell-like abilities)</item>
     <item>0</item>
-    <item>0</item>
     <item></item>
     <item>0</item>
-    <item></item>
   </object>
   <object>
     <name>Spell Resistance</name>
@@ -120,6 +131,7 @@
     <item>Add class level to strength</item>
     <item>0</item>
     <item></item>
+    <item>0</item>
   </object>
   <object>
     <name>Spell-Like AbilityDancing lights</name>
@@ -130,6 +142,7 @@
     <item>Dancing lights</item>
     <item>1</item>
     <item>Day</item>
+    <item>0</item>
   </object>
   <object>
     <name>Spell-Like AbilityDarkness</name>
@@ -140,6 +153,7 @@
     <item>Darkness</item>
     <item>1</item>
     <item>Day</item>
+    <item>0</item>
   </object>
   <object>
     <name>Spell-Like AbilityFaerie fire</name>
@@ -150,6 +164,7 @@
     <item>Faerie fire</item>
     <item>1</item>
     <item>Day</item>
+    <item>0</item>
   </object>
   <object>
     <name>Light Blindness</name>
@@ -160,6 +175,7 @@
     <item></item>
     <item>0</item>
     <item></item>
+        <item>0</item>
   </object>
   <object>
     <name>Poison</name>
@@ -170,5 +186,6 @@
     <item></item>
     <item>0</item>
     <item></item>
+    <item>0</item>
   </object>
 </items>

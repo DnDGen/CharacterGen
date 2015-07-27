@@ -35,6 +35,7 @@ namespace CharacterGen.Selectors.Domain
                 racialFeatSelection.FocusType = featData[DataIndexConstants.RacialFeatData.FocusIndex];
                 racialFeatSelection.Frequency.Quantity = Convert.ToInt32(featData[DataIndexConstants.RacialFeatData.FrequencyQuantityIndex]);
                 racialFeatSelection.Frequency.TimePeriod = featData[DataIndexConstants.RacialFeatData.FrequencyTimePeriodIndex];
+                racialFeatSelection.MaximumHitDieRequirement = Convert.ToInt32(featData[DataIndexConstants.RacialFeatData.MaximumHitDiceRequirementIndex]);
 
                 racialFeatSelections.Add(racialFeatSelection);
             }

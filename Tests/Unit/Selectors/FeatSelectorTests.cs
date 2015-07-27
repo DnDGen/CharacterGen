@@ -33,8 +33,8 @@ namespace CharacterGen.Tests.Unit.Selectors
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, "race")).Returns(new[] { "racial feat 1", "racial feat 2" });
 
             var racialFeatTableName = String.Format(TableNameConstants.Formattable.Collection.RACEFeatData, "race");
-            mockCollectionsSelector.Setup(s => s.SelectFrom(racialFeatTableName, "racial feat 1")).Returns(new[] { "racialFeat1", "ginormous", "9266", "0", String.Empty, "0", "never" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom(racialFeatTableName, "racial feat 2")).Returns(new[] { "racialFeat2", String.Empty, "0", "90210", "focusness", "42", "fortnight" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(racialFeatTableName, "racial feat 1")).Returns(new[] { "racialFeat1", "ginormous", "9266", "0", String.Empty, "0", "never", "600" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(racialFeatTableName, "racial feat 2")).Returns(new[] { "racialFeat2", String.Empty, "0", "90210", "focusness", "42", "fortnight", "0" });
 
             var racialFeats = selector.SelectRacial("race");
             Assert.That(racialFeats.Count(), Is.EqualTo(2));
@@ -49,6 +49,7 @@ namespace CharacterGen.Tests.Unit.Selectors
             Assert.That(first.FocusType, Is.Empty);
             Assert.That(first.Frequency.Quantity, Is.EqualTo(0));
             Assert.That(first.Frequency.TimePeriod, Is.EqualTo("never"));
+            Assert.That(first.MaximumHitDieRequirement, Is.EqualTo(600));
 
             Assert.That(last.Feat, Is.EqualTo("racialFeat2"));
             Assert.That(last.SizeRequirement, Is.Empty);
@@ -57,6 +58,7 @@ namespace CharacterGen.Tests.Unit.Selectors
             Assert.That(last.FocusType, Is.EqualTo("focusness"));
             Assert.That(last.Frequency.Quantity, Is.EqualTo(42));
             Assert.That(last.Frequency.TimePeriod, Is.EqualTo("fortnight"));
+            Assert.That(last.MaximumHitDieRequirement, Is.EqualTo(0));
         }
 
         [Test]
@@ -65,8 +67,8 @@ namespace CharacterGen.Tests.Unit.Selectors
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, "race")).Returns(new[] { "racial feat 1", "racial feat 2" });
 
             var racialFeatTableName = String.Format(TableNameConstants.Formattable.Collection.RACEFeatData, "race");
-            mockCollectionsSelector.Setup(s => s.SelectFrom(racialFeatTableName, "racial feat 1")).Returns(new[] { "racialFeat1", "ginormous", "9266", "0", String.Empty, "0", "never" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom(racialFeatTableName, "racial feat 2")).Returns(new[] { "racialFeat1", String.Empty, "0", "90210", "focusness", "42", "fortnight" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(racialFeatTableName, "racial feat 1")).Returns(new[] { "racialFeat1", "ginormous", "9266", "0", String.Empty, "0", "never", "600" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(racialFeatTableName, "racial feat 2")).Returns(new[] { "racialFeat1", String.Empty, "0", "90210", "focusness", "42", "fortnight", "0" });
 
             var racialFeats = selector.SelectRacial("race");
             Assert.That(racialFeats.Count(), Is.EqualTo(2));
@@ -81,6 +83,7 @@ namespace CharacterGen.Tests.Unit.Selectors
             Assert.That(first.FocusType, Is.Empty);
             Assert.That(first.Frequency.Quantity, Is.EqualTo(0));
             Assert.That(first.Frequency.TimePeriod, Is.EqualTo("never"));
+            Assert.That(first.MaximumHitDieRequirement, Is.EqualTo(600));
 
             Assert.That(last.Feat, Is.EqualTo("racialFeat1"));
             Assert.That(last.SizeRequirement, Is.Empty);
@@ -89,6 +92,7 @@ namespace CharacterGen.Tests.Unit.Selectors
             Assert.That(last.FocusType, Is.EqualTo("focusness"));
             Assert.That(last.Frequency.Quantity, Is.EqualTo(42));
             Assert.That(last.Frequency.TimePeriod, Is.EqualTo("fortnight"));
+            Assert.That(last.MaximumHitDieRequirement, Is.EqualTo(0));
         }
 
         [Test]
