@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+  <object>
+    <name>Barbarian</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Bard</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Cleric</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Druid</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Fighter</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Monk</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Paladin</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Ranger</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Rogue</name>
+    <item>6</item>
+  </object>
+    <object>
+        <name>Sorcerer</name>
+        <item>6</item>
+    </object>
+    <object>
+        <name>Wizard</name>
+        <item>6</item>
+    </object>
+</items>

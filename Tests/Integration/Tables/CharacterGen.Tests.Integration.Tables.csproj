@@ -74,6 +74,8 @@
     <Compile Include="Abilities\Feats\Data\CharacterClasses\CharacterClassFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\ClericFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\FighterFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\CharacterClasses\FireFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\CharacterClasses\IllusionFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\RangerFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\RogueFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\SorcererFeatDataTests.cs" />
@@ -102,11 +104,14 @@
     <Compile Include="Abilities\Feats\Requirements\Classes\GreaterWeaponSpecializationClassRequirementsTests.cs" />
     <Compile Include="Abilities\Feats\Requirements\Classes\ImprovedEvasionClassRequirementsTests.cs" />
     <Compile Include="Abilities\Feats\Requirements\Classes\ImprovedFamiliarClassRequirementsTests.cs" />
+    <Compile Include="Abilities\Feats\Requirements\Classes\LeadershipClassRequirementsTests.cs" />
     <Compile Include="Abilities\Feats\Requirements\Stats\CombatExpertiseStatRequirementsTests.cs" />
     <Compile Include="Abilities\Feats\Requirements\Stats\DeflectArrowsStatRequirementsTests.cs" />
     <Compile Include="Abilities\Feats\Requirements\Stats\DodgeStatRequirementsTests.cs" />
     <Compile Include="Abilities\Feats\Requirements\Stats\ImprovedGrappleStatRequirementsTests.cs" />
     <Compile Include="Abilities\Feats\Requirements\Stats\GreaterTwoWeaponFightingStatRequirementsTests.cs" />
+    <Compile Include="Abilities\Feats\Requirements\Stats\ImprovedPreciseShotStatRequirementsTests.cs" />
+    <Compile Include="Abilities\Feats\Requirements\Stats\ImprovedTwoWeaponFightingStatRequirementsTests.cs" />
     <Compile Include="Abilities\Skills\AssignPointToCrossClassSkillTests.cs" />
     <Compile Include="Abilities\Skills\ClassSkillsTests.cs" />
     <Compile Include="Abilities\Skills\CrossClassSkillsTests.cs" />

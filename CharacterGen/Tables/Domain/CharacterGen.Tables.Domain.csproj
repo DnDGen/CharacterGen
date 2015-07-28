@@ -525,6 +525,25 @@
   <ItemGroup>
     <EmbeddedResource Include="Abilities\Feats\Data\Racial\Half-CelestialFeatData.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Feats\Requirements\Stats\Improved Precise ShotStatRequirements.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Feats\Requirements\Stats\Improved Two-Weapon FightingStatRequirements.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Feats\Requirements\Classes\LeadershipClassRequirements.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Feats\Data\CharacterClasses\IllusionFeatData.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Feats\Data\CharacterClasses\FireFeatData.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
