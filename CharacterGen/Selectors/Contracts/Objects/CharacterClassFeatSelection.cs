@@ -1,8 +1,9 @@
-﻿using System;
+﻿using CharacterGen.Common.Abilities.Feats;
+using CharacterGen.Common.CharacterClasses;
+using CharacterGen.Common.Races;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using CharacterGen.Common.Abilities.Feats;
-using CharacterGen.Common.CharacterClasses;
 
 namespace CharacterGen.Selectors.Objects
 {
@@ -16,6 +17,7 @@ namespace CharacterGen.Selectors.Objects
         public Frequency Frequency { get; set; }
         public IEnumerable<RequiredFeat> RequiredFeats { get; set; }
         public String FrequencyQuantityStat { get; set; }
+        public String SizeRequirement { get; set; }
 
         public CharacterClassFeatSelection()
         {
@@ -26,10 +28,13 @@ namespace CharacterGen.Selectors.Objects
             FrequencyQuantityStat = String.Empty;
         }
 
-        public Boolean RequirementsMet(CharacterClass characterClass)
+        public Boolean RequirementsMet(CharacterClass characterClass, Race race)
         {
-            if (MaximumLevel > 0)
-                return MinimumLevel <= characterClass.Level && characterClass.Level <= MaximumLevel;
+            if (String.IsNullOrEmpty(SizeRequirement) == false && SizeRequirement != race.Size)
+                return false;
+
+            if (MaximumLevel > 0 && characterClass.Level > MaximumLevel)
+                return false;
 
             return MinimumLevel <= characterClass.Level;
         }

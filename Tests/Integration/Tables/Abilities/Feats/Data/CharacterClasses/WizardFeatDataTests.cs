@@ -1,9 +1,9 @@
-﻿using System;
-using TreasureGen.Common.Items;
-using CharacterGen.Common.Abilities.Feats;
+﻿using CharacterGen.Common.Abilities.Feats;
 using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Tables;
 using NUnit.Framework;
+using System;
+using TreasureGen.Common.Items;
 
 namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
 {
@@ -18,7 +18,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
         [Test]
         public override void CollectionNames()
         {
-            var names = new[] 
+            var names = new[]
             {
                 FeatConstants.ScribeScroll,
                 FeatConstants.SimpleWeaponProficiency + WeaponConstants.Club,
@@ -39,7 +39,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             "",
             1,
             0,
-            0)]
+            0,
+            "")]
         [TestCase(FeatConstants.SimpleWeaponProficiency + WeaponConstants.Club,
             FeatConstants.SimpleWeaponProficiency,
             WeaponConstants.Club,
@@ -48,7 +49,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             "",
             1,
             0,
-            0)]
+            0,
+            "")]
         [TestCase(FeatConstants.SimpleWeaponProficiency + WeaponConstants.Dagger,
             FeatConstants.SimpleWeaponProficiency,
             WeaponConstants.Dagger,
@@ -57,7 +59,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             "",
             1,
             0,
-            0)]
+            0,
+            "")]
         [TestCase(FeatConstants.SimpleWeaponProficiency + WeaponConstants.HeavyCrossbow,
             FeatConstants.SimpleWeaponProficiency,
             WeaponConstants.HeavyCrossbow,
@@ -66,7 +69,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             "",
             1,
             0,
-            0)]
+            0,
+            "")]
         [TestCase(FeatConstants.SimpleWeaponProficiency + WeaponConstants.LightCrossbow,
             FeatConstants.SimpleWeaponProficiency,
             WeaponConstants.LightCrossbow,
@@ -75,7 +79,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             "",
             1,
             0,
-            0)]
+            0,
+            "")]
         [TestCase(FeatConstants.SimpleWeaponProficiency + WeaponConstants.Quarterstaff,
             FeatConstants.SimpleWeaponProficiency,
             WeaponConstants.Quarterstaff,
@@ -84,10 +89,11 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             "",
             1,
             0,
-            0)]
-        public override void Data(String name, String feat, String focusType, Int32 frequencyQuantity, String frequencyQuantityStat, String frequencyTimePeriod, Int32 minimumLevel, Int32 maximumLevel, Int32 strength)
+            0,
+            "")]
+        public override void Data(String name, String feat, String focusType, Int32 frequencyQuantity, String frequencyQuantityStat, String frequencyTimePeriod, Int32 minimumLevel, Int32 maximumLevel, Int32 strength, String sizeRequirement)
         {
-            base.Data(name, feat, focusType, frequencyQuantity, frequencyQuantityStat, frequencyTimePeriod, minimumLevel, maximumLevel, strength);
+            base.Data(name, feat, focusType, frequencyQuantity, frequencyQuantityStat, frequencyTimePeriod, minimumLevel, maximumLevel, strength, sizeRequirement);
         }
     }
 }

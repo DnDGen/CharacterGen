@@ -14,6 +14,7 @@ namespace CharacterGen.Tables
             public const Int32 FrequencyTimePeriodIndex = 5;
             public const Int32 MaximumLevelRequirementIndex = 6;
             public const Int32 FrequencyQuantityStatIndex = 7;
+            public const Int32 SizeRequirementIndex = 8;
         }
 
         public static class RacialFeatData

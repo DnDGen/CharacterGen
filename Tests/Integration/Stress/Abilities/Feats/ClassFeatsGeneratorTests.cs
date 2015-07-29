@@ -1,10 +1,10 @@
-﻿using System;
-using Ninject;
-using CharacterGen.Common.Abilities.Feats;
+﻿using CharacterGen.Common.Abilities.Feats;
 using CharacterGen.Generators.Abilities;
 using CharacterGen.Generators.Abilities.Feats;
 using CharacterGen.Generators.Randomizers.Stats;
+using Ninject;
 using NUnit.Framework;
+using System;
 
 namespace CharacterGen.Tests.Integration.Stress.Abilities.Feats
 {
@@ -37,7 +37,7 @@ namespace CharacterGen.Tests.Integration.Stress.Abilities.Feats
             var skills = SkillsGenerator.GenerateWith(characterClass, race, stats);
             var racialFeats = RacialFeatsGenerator.GenerateWith(race, skills);
 
-            var feats = ClassFeatsGenerator.GenerateWith(characterClass, stats, racialFeats, skills);
+            var feats = ClassFeatsGenerator.GenerateWith(characterClass, race, stats, racialFeats, skills);
 
             foreach (var feat in feats)
             {

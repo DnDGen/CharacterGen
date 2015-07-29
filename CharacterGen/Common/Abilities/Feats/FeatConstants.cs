@@ -68,6 +68,7 @@ namespace CharacterGen.Common.Abilities.Feats
         public const String FlurryOfBlows = "Flurry of Blows";
         public const String GoodFortune = "Good Fortune";
         public const String GreatCleave = "Great Cleave";
+        public const String GreaterFlurry = "Greater Flurry";
         public const String GreaterRage = "Greater Rage";
         public const String GreaterSpellFocus = "Greater Spell Focus";
         public const String GreaterSpellPenetration = "Greater Spell Penetration";
@@ -240,6 +241,7 @@ namespace CharacterGen.Common.Abilities.Feats
             public const String Constant = "Constant";
             public const String Day = "Day";
             public const String Round = "Round";
+            public const String Week = "Week";
         }
 
         public static class Foci

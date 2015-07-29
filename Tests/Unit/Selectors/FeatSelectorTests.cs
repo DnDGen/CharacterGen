@@ -102,8 +102,8 @@ namespace CharacterGen.Tests.Unit.Selectors
                 .Returns(new[] { "class feat 1", "class feat 2" });
 
             var classFeatTableName = String.Format(TableNameConstants.Formattable.Collection.CLASSFeatData, "class name");
-            mockCollectionsSelector.Setup(s => s.SelectFrom(classFeatTableName, "class feat 1")).Returns(new[] { "classFeat1", "1", "focus type A", "0", "3", "Daily", "4", "stat" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom(classFeatTableName, "class feat 2")).Returns(new[] { "classFeat2", "5", String.Empty, "9266", "0", "never", "0", String.Empty });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(classFeatTableName, "class feat 1")).Returns(new[] { "classFeat1", "1", "focus type A", "0", "3", "Daily", "4", "stat", String.Empty });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(classFeatTableName, "class feat 2")).Returns(new[] { "classFeat2", "5", String.Empty, "9266", "0", "never", "0", String.Empty, "large" });
 
             var featRequirements = new Dictionary<String, IEnumerable<String>>();
             featRequirements["class feat 1"] = new[] { "feat 1", "feat 2/focus" };
@@ -123,6 +123,7 @@ namespace CharacterGen.Tests.Unit.Selectors
             Assert.That(first.Frequency.TimePeriod, Is.EqualTo("Daily"));
             Assert.That(first.FrequencyQuantityStat, Is.EqualTo("stat"));
             Assert.That(first.MaximumLevel, Is.EqualTo(4));
+            Assert.That(first.SizeRequirement, Is.Empty);
 
             var firstRequirement = first.RequiredFeats.First();
             var lastRequirement = first.RequiredFeats.Last();
@@ -141,6 +142,7 @@ namespace CharacterGen.Tests.Unit.Selectors
             Assert.That(last.FrequencyQuantityStat, Is.Empty);
             Assert.That(last.MaximumLevel, Is.EqualTo(0));
             Assert.That(last.RequiredFeats, Is.Empty);
+            Assert.That(last.SizeRequirement, Is.EqualTo("large"));
         }
 
         [Test]
@@ -150,8 +152,8 @@ namespace CharacterGen.Tests.Unit.Selectors
                 .Returns(new[] { "class feat 1", "class feat 2" });
 
             var classFeatTableName = String.Format(TableNameConstants.Formattable.Collection.CLASSFeatData, "class name");
-            mockCollectionsSelector.Setup(s => s.SelectFrom(classFeatTableName, "class feat 1")).Returns(new[] { "classFeat1", "1", "focus type A", "0", "3", "Daily", "4", "stat" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom(classFeatTableName, "class feat 2")).Returns(new[] { "classFeat1", "5", String.Empty, "9266", "0", "never", "0", String.Empty });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(classFeatTableName, "class feat 1")).Returns(new[] { "classFeat1", "1", "focus type A", "0", "3", "Daily", "4", "stat", String.Empty });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(classFeatTableName, "class feat 2")).Returns(new[] { "classFeat1", "5", String.Empty, "9266", "0", "never", "0", String.Empty, "large" });
 
             var featRequirements = new Dictionary<String, IEnumerable<String>>();
             featRequirements["class feat 1"] = new[] { "feat 1", "feat 2/focus" };
@@ -171,6 +173,7 @@ namespace CharacterGen.Tests.Unit.Selectors
             Assert.That(first.Frequency.TimePeriod, Is.EqualTo("Daily"));
             Assert.That(first.FrequencyQuantityStat, Is.EqualTo("stat"));
             Assert.That(first.MaximumLevel, Is.EqualTo(4));
+            Assert.That(first.SizeRequirement, Is.Empty);
 
             var firstRequirement = first.RequiredFeats.First();
             var lastRequirement = first.RequiredFeats.Last();
@@ -189,6 +192,7 @@ namespace CharacterGen.Tests.Unit.Selectors
             Assert.That(last.FrequencyQuantityStat, Is.Empty);
             Assert.That(last.MaximumLevel, Is.EqualTo(0));
             Assert.That(last.RequiredFeats, Is.Empty);
+            Assert.That(last.SizeRequirement, Is.EqualTo("large"));
         }
 
         [Test]

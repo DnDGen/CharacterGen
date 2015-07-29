@@ -1,7 +1,8 @@
-﻿using System;
-using CharacterGen.Common.CharacterClasses;
+﻿using CharacterGen.Common.CharacterClasses;
+using CharacterGen.Common.Races;
 using CharacterGen.Selectors.Objects;
 using NUnit.Framework;
+using System;
 
 namespace CharacterGen.Tests.Unit.Selectors.Objects
 {
@@ -10,12 +11,14 @@ namespace CharacterGen.Tests.Unit.Selectors.Objects
     {
         private CharacterClassFeatSelection selection;
         private CharacterClass characterClass;
+        private Race race;
 
         [SetUp]
         public void Setup()
         {
             selection = new CharacterClassFeatSelection();
             characterClass = new CharacterClass();
+            race = new Race();
         }
 
         [Test]
@@ -42,7 +45,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Objects
             selection.MaximumLevel = 4;
             selection.MinimumLevel = 2;
 
-            var requirementsMet = selection.RequirementsMet(characterClass);
+            var requirementsMet = selection.RequirementsMet(characterClass, race);
             Assert.That(requirementsMet, Is.EqualTo(met));
         }
 
@@ -52,7 +55,49 @@ namespace CharacterGen.Tests.Unit.Selectors.Objects
             characterClass.Level = 5;
             selection.MinimumLevel = 2;
 
-            var requirementsMet = selection.RequirementsMet(characterClass);
+            var requirementsMet = selection.RequirementsMet(characterClass, race);
+            Assert.That(requirementsMet, Is.True);
+        }
+
+        [Test]
+        public void MetIfNoSizeRequirement()
+        {
+            race.Size = "size";
+
+            var requirementsMet = selection.RequirementsMet(characterClass, race);
+            Assert.That(requirementsMet, Is.True);
+        }
+
+        [Test]
+        public void MetIfMatchingSizeRequirement()
+        {
+            race.Size = "size";
+            selection.SizeRequirement = "size";
+
+            var requirementsMet = selection.RequirementsMet(characterClass, race);
+            Assert.That(requirementsMet, Is.True);
+        }
+
+        [Test]
+        public void NotMetIfSizeRequirementDoesNotMatch()
+        {
+            race.Size = "size";
+            selection.SizeRequirement = "other size";
+
+            var requirementsMet = selection.RequirementsMet(characterClass, race);
+            Assert.That(requirementsMet, Is.False);
+        }
+
+        [Test]
+        public void AllRequirementsMet()
+        {
+            characterClass.Level = 3;
+            race.Size = "size";
+            selection.SizeRequirement = "size";
+            selection.MaximumLevel = 4;
+            selection.MinimumLevel = 2;
+
+            var requirementsMet = selection.RequirementsMet(characterClass, race);
             Assert.That(requirementsMet, Is.True);
         }
     }

@@ -2,6 +2,7 @@
 using CharacterGen.Common.Abilities.Skills;
 using CharacterGen.Common.Abilities.Stats;
 using CharacterGen.Common.CharacterClasses;
+using CharacterGen.Common.Races;
 using CharacterGen.Generators.Abilities.Feats;
 using CharacterGen.Selectors;
 using CharacterGen.Selectors.Objects;
@@ -24,7 +25,7 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
             this.collectionsSelector = collectionsSelector;
         }
 
-        public IEnumerable<Feat> GenerateWith(CharacterClass characterClass, Dictionary<String, Stat> stats, IEnumerable<Feat> racialFeats, Dictionary<String, Skill> skills)
+        public IEnumerable<Feat> GenerateWith(CharacterClass characterClass, Race race, Dictionary<String, Stat> stats, IEnumerable<Feat> racialFeats, Dictionary<String, Skill> skills)
         {
             var characterClassFeatSelections = featsSelector.SelectClass(characterClass.ClassName).ToList();
 
@@ -34,7 +35,7 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
                 characterClassFeatSelections.AddRange(specialistFeatSelections);
             }
 
-            var relevantClassFeatSelections = characterClassFeatSelections.Where(f => f.RequirementsMet(characterClass));
+            var relevantClassFeatSelections = characterClassFeatSelections.Where(f => f.RequirementsMet(characterClass, race));
             var classFeats = GetClassFeats(relevantClassFeatSelections, racialFeats, stats, characterClass, skills);
 
             if (characterClass.ClassName == CharacterClassConstants.Ranger)

@@ -1,6 +1,6 @@
-﻿using System;
+﻿using CharacterGen.Tables;
+using System;
 using System.Collections.Generic;
-using CharacterGen.Tables;
 
 namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
 {
@@ -16,9 +16,10 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             indices[DataIndexConstants.CharacterClassFeatData.MaximumLevelRequirementIndex] = "MaxLevel";
             indices[DataIndexConstants.CharacterClassFeatData.MinimumLevelRequirementIndex] = "MinLevel";
             indices[DataIndexConstants.CharacterClassFeatData.StrengthIndex] = "Strength";
+            indices[DataIndexConstants.CharacterClassFeatData.SizeRequirementIndex] = "SizeRequirement";
         }
 
-        public virtual void Data(String name, String feat, String focusType, Int32 frequencyQuantity, String frequencyQuantityStat, String frequencyTimePeriod, Int32 minimumLevel, Int32 maximumLevel, Int32 strength)
+        public virtual void Data(String name, String feat, String focusType, Int32 frequencyQuantity, String frequencyQuantityStat, String frequencyTimePeriod, Int32 minimumLevel, Int32 maximumLevel, Int32 strength, String sizeRequirement)
         {
             var data = new List<String>();
             for (var i = 0; i < 8; i++)
@@ -32,6 +33,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             data[DataIndexConstants.CharacterClassFeatData.MaximumLevelRequirementIndex] = Convert.ToString(maximumLevel);
             data[DataIndexConstants.CharacterClassFeatData.MinimumLevelRequirementIndex] = Convert.ToString(minimumLevel);
             data[DataIndexConstants.CharacterClassFeatData.StrengthIndex] = Convert.ToString(strength);
+            data[DataIndexConstants.CharacterClassFeatData.SizeRequirementIndex] = sizeRequirement;
 
             Data(name, data);
         }

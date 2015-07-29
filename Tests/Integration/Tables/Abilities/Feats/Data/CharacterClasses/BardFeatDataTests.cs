@@ -1,10 +1,10 @@
-﻿using System;
-using TreasureGen.Common.Items;
-using CharacterGen.Common.Abilities.Feats;
+﻿using CharacterGen.Common.Abilities.Feats;
 using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Common.Items;
 using CharacterGen.Tables;
 using NUnit.Framework;
+using System;
+using TreasureGen.Common.Items;
 
 namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses
 {
@@ -19,7 +19,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
         [Test]
         public override void CollectionNames()
         {
-            var names = new[] 
+            var names = new[]
             {
                 FeatConstants.SimpleWeaponProficiency,
                 FeatConstants.MartialWeaponProficiency + WeaponConstants.Longsword,
@@ -76,7 +76,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             "",
             1,
             0,
-            0)]
+            0,
+            "")]
         [TestCase(FeatConstants.MartialWeaponProficiency + WeaponConstants.Longsword,
             FeatConstants.MartialWeaponProficiency,
             WeaponConstants.Longsword,
@@ -85,7 +86,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             "",
             1,
             0,
-            0)]
+            0,
+            "")]
         [TestCase(FeatConstants.MartialWeaponProficiency + WeaponConstants.Rapier,
             FeatConstants.MartialWeaponProficiency,
             WeaponConstants.Rapier,
@@ -94,7 +96,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             "",
             1,
             0,
-            0)]
+            0,
+            "")]
         [TestCase(FeatConstants.MartialWeaponProficiency + WeaponConstants.Sap,
             FeatConstants.MartialWeaponProficiency,
             WeaponConstants.Sap,
@@ -103,7 +106,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             "",
             1,
             0,
-            0)]
+            0,
+            "")]
         [TestCase(FeatConstants.MartialWeaponProficiency + WeaponConstants.ShortSword,
             FeatConstants.MartialWeaponProficiency,
             WeaponConstants.ShortSword,
@@ -112,7 +116,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             "",
             1,
             0,
-            0)]
+            0,
+            "")]
         [TestCase(FeatConstants.MartialWeaponProficiency + WeaponConstants.Shortbow,
             FeatConstants.MartialWeaponProficiency,
             WeaponConstants.Shortbow,
@@ -121,7 +126,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             "",
             1,
             0,
-            0)]
+            0,
+            "")]
         [TestCase(FeatConstants.ExoticWeaponProficiency + WeaponConstants.Whip,
             FeatConstants.ExoticWeaponProficiency,
             WeaponConstants.Whip,
@@ -130,7 +136,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             "",
             1,
             0,
-            0)]
+            0,
+            "")]
         [TestCase(FeatConstants.LightArmorProficiency,
             FeatConstants.LightArmorProficiency,
             "",
@@ -139,7 +146,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             "",
             1,
             0,
-            0)]
+            0,
+            "")]
         [TestCase(FeatConstants.ShieldProficiency,
             FeatConstants.ShieldProficiency,
             "",
@@ -148,7 +156,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             "",
             1,
             0,
-            0)]
+            0,
+            "")]
         [TestCase(FeatConstants.BardicMusic + "1",
             FeatConstants.BardicMusic,
             "",
@@ -157,7 +166,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             FeatConstants.Frequencies.Day,
             1,
             1,
-            0)]
+            0,
+            "")]
         [TestCase(FeatConstants.BardicMusic + "2",
             FeatConstants.BardicMusic,
             "",
@@ -166,7 +176,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             FeatConstants.Frequencies.Day,
             2,
             2,
-            0)]
+            0,
+            "")]
         [TestCase(FeatConstants.BardicMusic + "3",
             FeatConstants.BardicMusic,
             "",
@@ -175,7 +186,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             FeatConstants.Frequencies.Day,
             3,
             3,
-            0)]
+            0,
+            "")]
         [TestCase(FeatConstants.BardicMusic + "4",
             FeatConstants.BardicMusic,
             "",
@@ -184,7 +196,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             FeatConstants.Frequencies.Day,
             4,
             4,
-            0)]
+            0,
+            "")]
         [TestCase(FeatConstants.BardicMusic + "5",
             FeatConstants.BardicMusic,
             "",
@@ -193,7 +206,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             FeatConstants.Frequencies.Day,
             5,
             5,
-            0)]
+            0,
+            "")]
         [TestCase(FeatConstants.BardicMusic + "6",
             FeatConstants.BardicMusic,
             "",
@@ -202,7 +216,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             FeatConstants.Frequencies.Day,
             6,
             6,
-            0)]
+            0,
+            "")]
         [TestCase(FeatConstants.BardicMusic + "7",
             FeatConstants.BardicMusic,
             "",
@@ -211,7 +226,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             FeatConstants.Frequencies.Day,
             7,
             7,
-            0)]
+            0,
+            "")]
         [TestCase(FeatConstants.BardicMusic + "8",
             FeatConstants.BardicMusic,
             "",
@@ -220,7 +236,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             FeatConstants.Frequencies.Day,
             8,
             8,
-            0)]
+            0,
+            "")]
         [TestCase(FeatConstants.BardicMusic + "9",
             FeatConstants.BardicMusic,
             "",
@@ -229,7 +246,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             FeatConstants.Frequencies.Day,
             9,
             9,
-            0)]
+            0,
+            "")]
         [TestCase(FeatConstants.BardicMusic + "10",
             FeatConstants.BardicMusic,
             "",
@@ -238,7 +256,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             FeatConstants.Frequencies.Day,
             10,
             10,
-            0)]
+            0,
+            "")]
         [TestCase(FeatConstants.BardicMusic + "11",
             FeatConstants.BardicMusic,
             "",
@@ -247,7 +266,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             FeatConstants.Frequencies.Day,
             11,
             11,
-            0)]
+            0,
+            "")]
         [TestCase(FeatConstants.BardicMusic + "12",
             FeatConstants.BardicMusic,
             "",
@@ -256,7 +276,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             FeatConstants.Frequencies.Day,
             12,
             12,
-            0)]
+            0,
+            "")]
         [TestCase(FeatConstants.BardicMusic + "13",
             FeatConstants.BardicMusic,
             "",
@@ -265,7 +286,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             FeatConstants.Frequencies.Day,
             13,
             13,
-            0)]
+            0,
+            "")]
         [TestCase(FeatConstants.BardicMusic + "14",
             FeatConstants.BardicMusic,
             "",
@@ -274,7 +296,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             FeatConstants.Frequencies.Day,
             14,
             14,
-            0)]
+            0,
+            "")]
         [TestCase(FeatConstants.BardicMusic + "15",
             FeatConstants.BardicMusic,
             "",
@@ -283,7 +306,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             FeatConstants.Frequencies.Day,
             15,
             15,
-            0)]
+            0,
+            "")]
         [TestCase(FeatConstants.BardicMusic + "16",
             FeatConstants.BardicMusic,
             "",
@@ -292,7 +316,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             FeatConstants.Frequencies.Day,
             16,
             16,
-            0)]
+            0,
+            "")]
         [TestCase(FeatConstants.BardicMusic + "17",
             FeatConstants.BardicMusic,
             "",
@@ -301,7 +326,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             FeatConstants.Frequencies.Day,
             17,
             17,
-            0)]
+            0,
+            "")]
         [TestCase(FeatConstants.BardicMusic + "18",
             FeatConstants.BardicMusic,
             "",
@@ -310,7 +336,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             FeatConstants.Frequencies.Day,
             18,
             18,
-            0)]
+            0,
+            "")]
         [TestCase(FeatConstants.BardicMusic + "19",
             FeatConstants.BardicMusic,
             "",
@@ -319,7 +346,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             FeatConstants.Frequencies.Day,
             19,
             19,
-            0)]
+            0,
+            "")]
         [TestCase(FeatConstants.BardicMusic + "20",
             FeatConstants.BardicMusic,
             "",
@@ -327,8 +355,9 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             "",
             FeatConstants.Frequencies.Day,
             20,
-            20,
-            0)]
+            0,
+            0,
+            "")]
         [TestCase(FeatConstants.BardicKnowledge,
             FeatConstants.BardicKnowledge,
             "",
@@ -337,7 +366,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             "",
             1,
             0,
-            0)]
+            0,
+            "")]
         [TestCase(FeatConstants.Countersong,
             FeatConstants.Countersong,
             "",
@@ -346,7 +376,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             "",
             1,
             0,
-            0)]
+            0,
+            "")]
         [TestCase(FeatConstants.Fascinate,
             FeatConstants.Fascinate,
             "",
@@ -355,7 +386,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             "",
             1,
             0,
-            0)]
+            0,
+            "")]
         [TestCase(FeatConstants.InspireCourage + "1",
             FeatConstants.InspireCourage,
             "",
@@ -364,7 +396,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             "",
             1,
             7,
-            1)]
+            1,
+            "")]
         [TestCase(FeatConstants.InspireCourage + "2",
             FeatConstants.InspireCourage,
             "",
@@ -373,7 +406,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             "",
             8,
             13,
-            2)]
+            2,
+            "")]
         [TestCase(FeatConstants.InspireCourage + "3",
             FeatConstants.InspireCourage,
             "",
@@ -382,7 +416,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             "",
             14,
             19,
-            3)]
+            3,
+            "")]
         [TestCase(FeatConstants.InspireCourage + "4",
             FeatConstants.InspireCourage,
             "",
@@ -391,7 +426,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             "",
             20,
             0,
-            4)]
+            4,
+            "")]
         [TestCase(FeatConstants.InspireCompetence,
             FeatConstants.InspireCompetence,
             "",
@@ -400,7 +436,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             "",
             3,
             0,
-            0)]
+            0,
+            "")]
         [TestCase(FeatConstants.Suggestion,
             FeatConstants.Suggestion,
             "",
@@ -409,7 +446,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             "",
             6,
             0,
-            0)]
+            0,
+            "")]
         [TestCase(FeatConstants.InspireGreatness,
             FeatConstants.InspireGreatness,
             "",
@@ -418,7 +456,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             "",
             9,
             0,
-            0)]
+            0,
+            "")]
         [TestCase(FeatConstants.SongOfFreedom,
             FeatConstants.SongOfFreedom,
             "",
@@ -427,7 +466,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             "",
             12,
             0,
-            0)]
+            0,
+            "")]
         [TestCase(FeatConstants.InspireHeroics,
             FeatConstants.InspireHeroics,
             "",
@@ -436,7 +476,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             "",
             15,
             0,
-            0)]
+            0,
+            "")]
         [TestCase(FeatConstants.MassSuggestion,
             FeatConstants.MassSuggestion,
             "",
@@ -445,10 +486,11 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             "",
             18,
             0,
-            0)]
-        public override void Data(String name, String feat, String focusType, Int32 frequencyQuantity, String frequencyQuantityStat, String frequencyTimePeriod, Int32 minimumLevel, Int32 maximumLevel, Int32 strength)
+            0,
+            "")]
+        public override void Data(String name, String feat, String focusType, Int32 frequencyQuantity, String frequencyQuantityStat, String frequencyTimePeriod, Int32 minimumLevel, Int32 maximumLevel, Int32 strength, String sizeRequirement)
         {
-            base.Data(name, feat, focusType, frequencyQuantity, frequencyQuantityStat, frequencyTimePeriod, minimumLevel, maximumLevel, strength);
+            base.Data(name, feat, focusType, frequencyQuantity, frequencyQuantityStat, frequencyTimePeriod, minimumLevel, maximumLevel, strength, sizeRequirement);
         }
     }
 }

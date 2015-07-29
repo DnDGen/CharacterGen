@@ -15,6 +15,7 @@ namespace CharacterGen.Tests.Unit.Tables
         [TestCase(DataIndexConstants.CharacterClassFeatData.FrequencyTimePeriodIndex, 5)]
         [TestCase(DataIndexConstants.CharacterClassFeatData.MaximumLevelRequirementIndex, 6)]
         [TestCase(DataIndexConstants.CharacterClassFeatData.FrequencyQuantityStatIndex, 7)]
+        [TestCase(DataIndexConstants.CharacterClassFeatData.SizeRequirementIndex, 8)]
         public void CharacterClassFeatDataIndex(Int32 constant, Int32 value)
         {
             Assert.That(constant, Is.EqualTo(value));

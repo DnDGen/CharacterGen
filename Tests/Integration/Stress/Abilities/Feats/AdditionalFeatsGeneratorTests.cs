@@ -1,13 +1,13 @@
-﻿using System;
-using System.Linq;
-using Ninject;
-using CharacterGen.Common.Abilities.Feats;
+﻿using CharacterGen.Common.Abilities.Feats;
 using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Generators.Abilities;
 using CharacterGen.Generators.Abilities.Feats;
 using CharacterGen.Generators.Combats;
 using CharacterGen.Generators.Randomizers.Stats;
+using Ninject;
 using NUnit.Framework;
+using System;
+using System.Linq;
 
 namespace CharacterGen.Tests.Integration.Stress.Abilities.Feats
 {
@@ -44,7 +44,7 @@ namespace CharacterGen.Tests.Integration.Stress.Abilities.Feats
             var skills = SkillsGenerator.GenerateWith(characterClass, race, stats);
             var baseAttack = CombatGenerator.GenerateBaseAttackWith(characterClass, race);
             var racialFeats = RacialFeatsGenerator.GenerateWith(race, skills);
-            var classFeats = ClassFeatsGenerator.GenerateWith(characterClass, stats, racialFeats, skills);
+            var classFeats = ClassFeatsGenerator.GenerateWith(characterClass, race, stats, racialFeats, skills);
             var preselectedFeats = classFeats.Union(racialFeats);
 
             var feats = AdditionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);

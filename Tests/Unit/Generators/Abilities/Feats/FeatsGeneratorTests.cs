@@ -98,7 +98,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             classFeats[1].Frequency.TimePeriod = "fortnight";
             classFeats[1].Name = "classFeat2";
 
-            mockClassFeatsGenerator.Setup(g => g.GenerateWith(characterClass, stats, racialFeats, skills)).Returns(classFeats);
+            mockClassFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, racialFeats, skills)).Returns(classFeats);
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
             var first = feats.First();
@@ -178,7 +178,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             classFeats[0].Name = "classFeat1";
             classFeats[0].Strength = 9266;
 
-            mockClassFeatsGenerator.Setup(g => g.GenerateWith(characterClass, stats, racialFeats, skills)).Returns(classFeats);
+            mockClassFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, racialFeats, skills)).Returns(classFeats);
             mockAdditionalFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills, baseAttack, It.IsAny<IEnumerable<Feat>>())).Returns(additionalFeats);
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);

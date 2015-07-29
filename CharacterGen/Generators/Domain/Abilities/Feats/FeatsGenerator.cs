@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using CharacterGen.Common.Abilities.Feats;
+﻿using CharacterGen.Common.Abilities.Feats;
 using CharacterGen.Common.Abilities.Skills;
 using CharacterGen.Common.Abilities.Stats;
 using CharacterGen.Common.CharacterClasses;
@@ -11,6 +8,9 @@ using CharacterGen.Common.Races;
 using CharacterGen.Generators.Abilities.Feats;
 using CharacterGen.Selectors;
 using CharacterGen.Tables;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CharacterGen.Generators.Domain.Abilities.Feats
 {
@@ -34,7 +34,7 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
             Dictionary<String, Skill> skills, BaseAttack baseAttack)
         {
             var racialFeats = racialFeatsGenerator.GenerateWith(race, skills);
-            var classFeats = classFeatsGenerator.GenerateWith(characterClass, stats, racialFeats, skills);
+            var classFeats = classFeatsGenerator.GenerateWith(characterClass, race, stats, racialFeats, skills);
             var automaticFeats = racialFeats.Union(classFeats);
             var additionalFeats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, automaticFeats);
 
