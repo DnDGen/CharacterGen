@@ -9,6 +9,10 @@
         <name>Cleave</name>
         <item>Power Attack</item>
     </object>
+  <object>
+    <name>Combat ReflexesMonk</name>
+    <item>Improved Combat Style</item>
+  </object>
     <object>
         <name>Combat Style Mastery</name>
         <item>Improved Combat Style</item>
@@ -17,6 +21,10 @@
         <name>Deflect Arrows</name>
         <item>Improved Unarmed Strike</item>
     </object>
+  <object>
+    <name>Deflect ArrowsMonk</name>
+    <item>Improved Unarmed Strike</item>
+  </object>
     <object>
         <name>Diehard</name>
         <item>Endurance</item>
@@ -78,6 +86,10 @@
         <name>Improved Disarm</name>
         <item>Combat Expertise</item>
     </object>
+  <object>
+    <name>Improved DisarmMonk</name>
+    <item>Combat Expertise</item>
+  </object>
     <object>
         <name>Improved Feint</name>
         <item>Combat Expertise</item>
@@ -86,6 +98,10 @@
         <name>Improved Grapple</name>
         <item>Improved Unarmed Strike</item>
     </object>
+  <object>
+    <name>Improved GrappleMonk</name>
+    <item>Improved Unarmed Strike</item>
+  </object>
     <object>
         <name>Improved Overrun</name>
         <item>Power Attack</item>
@@ -114,6 +130,10 @@
         <name>Improved Trip</name>
         <item>Combat Expertise</item>
     </object>
+  <object>
+    <name>Improved TripMonk</name>
+    <item>Combat Expertise</item>
+  </object>
     <object>
         <name>Improved Turning</name>
         <item>Turn</item>
@@ -191,6 +211,10 @@
         <name>Stunning Fist</name>
         <item>Improved Unarmed Strike</item>
     </object>
+  <object>
+    <name>Stunning FistMonk</name>
+    <item>Improved Unarmed Strike</item>
+  </object>
     <object>
         <name>Tower Shield Proficiency</name>
         <item>Shield Proficiency</item>

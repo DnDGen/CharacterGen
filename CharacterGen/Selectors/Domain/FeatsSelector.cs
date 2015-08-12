@@ -114,6 +114,7 @@ namespace CharacterGen.Selectors.Domain
                 classFeatSelection.MaximumLevel = Convert.ToInt32(featData[DataIndexConstants.CharacterClassFeatData.MaximumLevelRequirementIndex]);
                 classFeatSelection.FrequencyQuantityStat = featData[DataIndexConstants.CharacterClassFeatData.FrequencyQuantityStatIndex];
                 classFeatSelection.RequiredFeats = GetRequiredFeats(classFeat);
+                classFeatSelection.SizeRequirement = featData[DataIndexConstants.CharacterClassFeatData.SizeRequirementIndex];
 
                 classFeatSelections.Add(classFeatSelection);
             }

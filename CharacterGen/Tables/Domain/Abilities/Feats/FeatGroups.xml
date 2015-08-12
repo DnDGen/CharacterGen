@@ -754,11 +754,11 @@
         <item>Tongue of Sun and Moon</item>
         <item>Diamond Soul</item>
         <item>Empty Body</item>
-        <item>Improved Grapple</item>
-        <item>Stunning Fist</item>
-        <item>Improved Disarm</item>
-        <item>Deflect Arrows</item>
-        <item>Improved Trip</item>
+        <item>Improved GrappleMonk</item>
+        <item>Stunning FistMonk</item>
+        <item>Improved DisarmMonk</item>
+        <item>Deflect ArrowsMonk</item>
+        <item>Improved TripMonk</item>
         <item>Simple Weapon ProficiencyClub</item>
         <item>Simple Weapon ProficiencyHeavy crossbow</item>
         <item>Simple Weapon ProficiencyLight crossbow</item>
@@ -795,7 +795,7 @@
         <item>Monk Unarmed StrikeLarge3d6</item>
         <item>Monk Unarmed StrikeLarge3d8</item>
         <item>Monk Unarmed StrikeLarge4d8</item>
-        <item>Combat Reflexes</item>
+        <item>Combat ReflexesMonk</item>
         <item>Evasion</item>
         <item>Fast Movement10</item>
         <item>Fast Movement20</item>
@@ -804,7 +804,9 @@
         <item>Fast Movement50</item>
         <item>Fast Movement60</item>
         <item>Still Mind</item>
-        <item>Ki Strike</item>
+        <item>Ki StrikeMagic</item>
+      <item>Ki StrikeLawful</item>
+      <item>Ki StrikeAdamantine</item>
         <item>Slow Fall</item>
         <item>Purity of Body</item>
         <item>Wholeness of Body</item>

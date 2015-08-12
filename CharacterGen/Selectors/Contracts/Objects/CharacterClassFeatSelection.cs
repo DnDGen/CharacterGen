@@ -26,6 +26,7 @@ namespace CharacterGen.Selectors.Objects
             Frequency = new Frequency();
             RequiredFeats = Enumerable.Empty<RequiredFeat>();
             FrequencyQuantityStat = String.Empty;
+            SizeRequirement = String.Empty;
         }
 
         public Boolean RequirementsMet(CharacterClass characterClass, Race race)

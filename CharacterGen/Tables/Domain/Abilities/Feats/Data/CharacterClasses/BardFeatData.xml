@@ -11,6 +11,7 @@
         <item></item>
         <item>0</item>
         <item></item>
+      <item></item>
     </object>
     <object>
         <name>Martial Weapon ProficiencyLongsword</name>
@@ -22,17 +23,19 @@
         <item></item>
         <item>0</item>
         <item></item>
+      <item></item>
     </object>
     <object>
-        <name>Martial Weapon ProficiencyRapier</name>
-        <item>Martial Weapon Proficiency</item>
-        <item>1</item>
-        <item>Rapier</item>
-        <item>0</item>
-        <item>0</item>
-        <item></item>
-        <item>0</item>
-        <item></item>
+      <name>Martial Weapon ProficiencyRapier</name>
+      <item>Martial Weapon Proficiency</item>
+      <item>1</item>
+      <item>Rapier</item>
+      <item>0</item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
+      <item></item>
     </object>
     <object>
         <name>Martial Weapon ProficiencySap</name>
@@ -44,6 +47,7 @@
         <item></item>
         <item>0</item>
         <item></item>
+      <item></item>
     </object>
     <object>
         <name>Martial Weapon ProficiencyShort sword</name>
@@ -55,6 +59,7 @@
         <item></item>
         <item>0</item>
         <item></item>
+      <item></item>
     </object>
     <object>
         <name>Martial Weapon ProficiencyShortbow</name>
@@ -66,6 +71,7 @@
         <item></item>
         <item>0</item>
         <item></item>
+      <item></item>
     </object>
     <object>
         <name>Exotic Weapon ProficiencyWhip</name>
@@ -77,6 +83,7 @@
         <item></item>
         <item>0</item>
         <item></item>
+      <item></item>
     </object>
     <object>
         <name>Light Armor Proficiency</name>
@@ -88,17 +95,19 @@
         <item></item>
         <item>0</item>
         <item></item>
+      <item></item>
     </object>
     <object>
-        <name>Shield Proficiency</name>
-        <item>Shield Proficiency</item>
-        <item>1</item>
-        <item></item>
-        <item>0</item>
-        <item>0</item>
-        <item></item>
-        <item>0</item>
-        <item></item>
+      <name>Shield Proficiency</name>
+      <item>Shield Proficiency</item>
+      <item>1</item>
+      <item></item>
+      <item>0</item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
+      <item></item>
     </object>
     <object>
         <name>Bardic Music1</name>
@@ -110,6 +119,7 @@
         <item>Day</item>
         <item>1</item>
         <item></item>
+      <item></item>
     </object>
     <object>
         <name>Bardic Music2</name>
@@ -121,6 +131,7 @@
         <item>Day</item>
         <item>2</item>
         <item></item>
+      <item></item>
     </object>
     <object>
         <name>Bardic Music3</name>
@@ -132,28 +143,31 @@
         <item>Day</item>
         <item>3</item>
         <item></item>
+      <item></item>
     </object>
     <object>
-        <name>Bardic Music4</name>
-        <item>Bardic Music</item>
-        <item>4</item>
-        <item></item>
-        <item>0</item>
-        <item>4</item>
-        <item>Day</item>
-        <item>4</item>
-        <item></item>
+      <name>Bardic Music4</name>
+      <item>Bardic Music</item>
+      <item>4</item>
+      <item></item>
+      <item>0</item>
+      <item>4</item>
+      <item>Day</item>
+      <item>4</item>
+      <item></item>
+      <item></item>
     </object>
     <object>
-        <name>Bardic Music5</name>
-        <item>Bardic Music</item>
-        <item>5</item>
-        <item></item>
-        <item>0</item>
-        <item>5</item>
-        <item>Day</item>
-        <item>5</item>
-        <item></item>
+      <name>Bardic Music5</name>
+      <item>Bardic Music</item>
+      <item>5</item>
+      <item></item>
+      <item>0</item>
+      <item>5</item>
+      <item>Day</item>
+      <item>5</item>
+      <item></item>
+      <item></item>
     </object>
     <object>
         <name>Bardic Music6</name>
@@ -164,6 +178,7 @@
         <item>6</item>
         <item>Day</item>
         <item>6</item>
+        <item></item>
         <item></item>
     </object>
     <object>
@@ -176,6 +191,7 @@
         <item>Day</item>
         <item>7</item>
         <item></item>
+      <item></item>
     </object>
     <object>
         <name>Bardic Music8</name>
@@ -187,6 +203,7 @@
         <item>Day</item>
         <item>8</item>
         <item></item>
+      <item></item>
     </object>
     <object>
         <name>Bardic Music9</name>
@@ -198,6 +215,7 @@
         <item>Day</item>
         <item>9</item>
         <item></item>
+      <item></item>
     </object>
     <object>
         <name>Bardic Music10</name>
@@ -209,6 +227,7 @@
         <item>Day</item>
         <item>10</item>
         <item></item>
+      <item></item>
     </object>
     <object>
         <name>Bardic Music11</name>
@@ -220,6 +239,7 @@
         <item>Day</item>
         <item>11</item>
         <item></item>
+      <item></item>
     </object>
     <object>
         <name>Bardic Music12</name>
@@ -231,6 +251,7 @@
         <item>Day</item>
         <item>12</item>
         <item></item>
+      <item></item>
     </object>
     <object>
         <name>Bardic Music13</name>
@@ -242,6 +263,7 @@
         <item>Day</item>
         <item>13</item>
         <item></item>
+      <item></item>
     </object>
     <object>
         <name>Bardic Music14</name>
@@ -252,6 +274,7 @@
         <item>14</item>
         <item>Day</item>
         <item>14</item>
+        <item></item>
         <item></item>
     </object>
     <object>
@@ -264,6 +287,7 @@
         <item>Day</item>
         <item>15</item>
         <item></item>
+      <item></item>
     </object>
     <object>
         <name>Bardic Music16</name>
@@ -275,6 +299,7 @@
         <item>Day</item>
         <item>16</item>
         <item></item>
+      <item></item>
     </object>
     <object>
         <name>Bardic Music17</name>
@@ -286,6 +311,7 @@
         <item>Day</item>
         <item>17</item>
         <item></item>
+      <item></item>
     </object>
     <object>
         <name>Bardic Music18</name>
@@ -297,17 +323,19 @@
         <item>Day</item>
         <item>18</item>
         <item></item>
+      <item></item>
     </object>
     <object>
-        <name>Bardic Music19</name>
-        <item>Bardic Music</item>
-        <item>19</item>
-        <item></item>
-        <item>0</item>
-        <item>19</item>
-        <item>Day</item>
-        <item>19</item>
-        <item></item>
+      <name>Bardic Music19</name>
+      <item>Bardic Music</item>
+      <item>19</item>
+      <item></item>
+      <item>0</item>
+      <item>19</item>
+      <item>Day</item>
+      <item>19</item>
+      <item></item>
+      <item></item>
     </object>
     <object>
         <name>Bardic Music20</name>
@@ -319,6 +347,7 @@
         <item>Day</item>
         <item>20</item>
         <item></item>
+      <item></item>
     </object>
     <object>
         <name>Bardic Knowledge</name>
@@ -330,6 +359,7 @@
         <item></item>
         <item>0</item>
         <item></item>
+      <item></item>
     </object>
     <object>
         <name>Countersong</name>
@@ -341,6 +371,7 @@
         <item></item>
         <item>0</item>
         <item></item>
+      <item></item>
     </object>
     <object>
         <name>Fascinate</name>
@@ -352,17 +383,19 @@
         <item></item>
         <item>0</item>
         <item></item>
+      <item></item>
     </object>
     <object>
-        <name>Inspire Courage1</name>
-        <item>Inspire Courage</item>
-        <item>1</item>
-        <item></item>
-        <item>1</item>
-        <item>0</item>
-        <item></item>
-        <item>7</item>
-        <item></item>
+      <name>Inspire Courage1</name>
+      <item>Inspire Courage</item>
+      <item>1</item>
+      <item></item>
+      <item>1</item>
+      <item>0</item>
+      <item></item>
+      <item>7</item>
+      <item></item>
+      <item></item>
     </object>
     <object>
         <name>Inspire Courage2</name>
@@ -374,6 +407,7 @@
         <item></item>
         <item>13</item>
         <item></item>
+      <item></item>
     </object>
     <object>
         <name>Inspire Courage3</name>
@@ -385,6 +419,7 @@
         <item></item>
         <item>19</item>
         <item></item>
+      <item></item>
     </object>
     <object>
         <name>Inspire Courage4</name>
@@ -396,17 +431,19 @@
         <item></item>
         <item>0</item>
         <item></item>
+      <item></item>
     </object>
     <object>
-        <name>Inspire Competence</name>
-        <item>Inspire Competence</item>
-        <item>3</item>
-        <item></item>
-        <item>0</item>
-        <item>0</item>
-        <item></item>
-        <item>0</item>
-        <item></item>
+      <name>Inspire Competence</name>
+      <item>Inspire Competence</item>
+      <item>3</item>
+      <item></item>
+      <item>0</item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
+      <item></item>
     </object>
     <object>
         <name>Suggestion</name>
@@ -418,6 +455,7 @@
         <item></item>
         <item>0</item>
         <item></item>
+      <item></item>
     </object>
     <object>
         <name>Inspire Greatness</name>
@@ -429,6 +467,7 @@
         <item></item>
         <item>0</item>
         <item></item>
+      <item></item>
     </object>
     <object>
         <name>Song of Freedom</name>
@@ -440,6 +479,7 @@
         <item></item>
         <item>0</item>
         <item></item>
+      <item></item>
     </object>
     <object>
         <name>Inspire Heroics</name>
@@ -451,6 +491,7 @@
         <item></item>
         <item>0</item>
         <item></item>
+      <item></item>
     </object>
     <object>
         <name>Mass Suggestion</name>
@@ -462,5 +503,6 @@
         <item></item>
         <item>0</item>
         <item></item>
+      <item></item>
     </object>
 </items>
