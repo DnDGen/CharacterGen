@@ -11,7 +11,7 @@
     </object>
   <object>
     <name>Combat ReflexesMonk</name>
-    <item>Improved Combat Style</item>
+    <item>Monk Bonus Feat/Combat Reflexes</item>
   </object>
     <object>
         <name>Combat Style Mastery</name>
@@ -23,7 +23,7 @@
     </object>
   <object>
     <name>Deflect ArrowsMonk</name>
-    <item>Improved Unarmed Strike</item>
+    <item>Monk Bonus Feat/Deflect Arrows</item>
   </object>
     <object>
         <name>Diehard</name>
@@ -88,7 +88,7 @@
     </object>
   <object>
     <name>Improved DisarmMonk</name>
-    <item>Combat Expertise</item>
+    <item>Monk Bonus Feat/Improved Disarm</item>
   </object>
     <object>
         <name>Improved Feint</name>
@@ -100,7 +100,7 @@
     </object>
   <object>
     <name>Improved GrappleMonk</name>
-    <item>Improved Unarmed Strike</item>
+    <item>Monk Bonus Feat/Improved Grapple</item>
   </object>
     <object>
         <name>Improved Overrun</name>
@@ -132,7 +132,7 @@
     </object>
   <object>
     <name>Improved TripMonk</name>
-    <item>Combat Expertise</item>
+    <item>Monk Bonus Feat/Improved Trip</item>
   </object>
     <object>
         <name>Improved Turning</name>
@@ -213,7 +213,7 @@
     </object>
   <object>
     <name>Stunning FistMonk</name>
-    <item>Improved Unarmed Strike</item>
+    <item>Monk Bonus Feat/Stunning Fist</item>
   </object>
     <object>
         <name>Tower Shield Proficiency</name>

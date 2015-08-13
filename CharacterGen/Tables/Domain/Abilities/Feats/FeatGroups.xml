@@ -805,9 +805,18 @@
         <item>Fast Movement60</item>
         <item>Still Mind</item>
         <item>Ki StrikeMagic</item>
+      <item>Greater Flurry</item>
       <item>Ki StrikeLawful</item>
       <item>Ki StrikeAdamantine</item>
-        <item>Slow Fall</item>
+        <item>Slow Fall20</item>
+      <item>Slow Fall30</item>
+      <item>Slow Fall40</item>
+      <item>Slow Fall50</item>
+      <item>Slow Fall60</item>
+      <item>Slow Fall70</item>
+      <item>Slow Fall80</item>
+      <item>Slow Fall90</item>
+      <item>Slow FallAny</item>
         <item>Purity of Body</item>
         <item>Wholeness of Body</item>
         <item>Improved Evasion</item>

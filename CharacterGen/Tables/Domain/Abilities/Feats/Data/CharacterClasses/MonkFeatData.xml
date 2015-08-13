@@ -4,193 +4,937 @@
     <object>
         <name>Abundant Step</name>
         <item>Abundant Step</item>
-        <item>1</item>
-        <item>Turn water creatures, rebuke fire creatures</item>
+        <item>12</item>
+        <item></item>
         <item>0</item>
-        <item>3</item>
+        <item>1</item>
         <item>Day</item>
         <item>0</item>
-        <item>Charisma</item>
+        <item></item>
       <item></item>
     </object>
   <object>
     <name>Armor Bonus1</name>
     <item>Armor Bonus</item>
+    <item>5</item>
+    <item></item>
     <item>1</item>
-    <item>Turn water creatures, rebuke fire creatures</item>
     <item>0</item>
-    <item>3</item>
-    <item>Day</item>
-    <item>0</item>
-    <item>Charisma</item>
+    <item></item>
+    <item>9</item>
+    <item></item>
     <item></item>
   </object>
   <object>
     <name>Armor Bonus2</name>
     <item>Armor Bonus</item>
-    <item>1</item>
-    <item>Turn water creatures, rebuke fire creatures</item>
+    <item>10</item>
+    <item></item>
+    <item>2</item>
     <item>0</item>
-    <item>3</item>
-    <item>Day</item>
-    <item>0</item>
-    <item>Charisma</item>
+    <item></item>
+    <item>14</item>
+    <item></item>
     <item></item>
   </object>
   <object>
     <name>Armor Bonus3</name>
     <item>Armor Bonus</item>
-    <item>1</item>
-    <item>Turn water creatures, rebuke fire creatures</item>
-    <item>0</item>
+    <item>15</item>
+    <item></item>
     <item>3</item>
-    <item>Day</item>
     <item>0</item>
-    <item>Charisma</item>
+    <item></item>
+    <item>19</item>
+    <item></item>
     <item></item>
   </object>
   <object>
     <name>Armor Bonus4</name>
     <item>Armor Bonus</item>
-    <item>1</item>
-    <item>Turn water creatures, rebuke fire creatures</item>
+    <item>20</item>
+    <item></item>
+    <item>4</item>
     <item>0</item>
-    <item>3</item>
-    <item>Day</item>
+    <item></item>
     <item>0</item>
-    <item>Charisma</item>
+    <item></item>
     <item></item>
   </object>
   <object>
     <name>Armor BonusWisdom</name>
     <item>Armor Bonus</item>
     <item>1</item>
-    <item>Turn water creatures, rebuke fire creatures</item>
+    <item>Add Wisdom bonus to AC if unarmored and unencumbered</item>
     <item>0</item>
-    <item>3</item>
-    <item>Day</item>
     <item>0</item>
-    <item>Charisma</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
     <item></item>
   </object>
   <object>
     <name>Simple Weapon ProficiencyClub</name>
-    <item>Armor Bonus</item>
+    <item>Simple Weapon Proficiency</item>
     <item>1</item>
-    <item>Turn water creatures, rebuke fire creatures</item>
+    <item>Club</item>
     <item>0</item>
-    <item>3</item>
-    <item>Day</item>
     <item>0</item>
-    <item>Charisma</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
     <item></item>
   </object>
   <object>
     <name>Simple Weapon ProficiencyDagger</name>
-    <item>Armor Bonus</item>
+    <item>Simple Weapon Proficiency</item>
     <item>1</item>
-    <item>Turn water creatures, rebuke fire creatures</item>
+    <item>Dagger</item>
     <item>0</item>
-    <item>3</item>
-    <item>Day</item>
     <item>0</item>
-    <item>Charisma</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
     <item></item>
   </object>
   <object>
     <name>Simple Weapon ProficiencyHeavy crossbow</name>
-    <item>Armor Bonus</item>
+    <item>Simple Weapon Proficiency</item>
     <item>1</item>
-    <item>Turn water creatures, rebuke fire creatures</item>
+    <item>Heavy crossbow</item>
     <item>0</item>
-    <item>3</item>
-    <item>Day</item>
     <item>0</item>
-    <item>Charisma</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
     <item></item>
   </object>
   <object>
     <name>Simple Weapon ProficiencyLight crossbow</name>
-    <item>Armor Bonus</item>
+    <item>Simple Weapon Proficiency</item>
     <item>1</item>
-    <item>Turn water creatures, rebuke fire creatures</item>
+    <item>Light crossbow</item>
     <item>0</item>
-    <item>3</item>
-    <item>Day</item>
     <item>0</item>
-    <item>Charisma</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
     <item></item>
   </object>
   <object>
     <name>Simple Weapon ProficiencySling</name>
-    <item>Armor Bonus</item>
+    <item>Simple Weapon Proficiency</item>
     <item>1</item>
-    <item>Turn water creatures, rebuke fire creatures</item>
+    <item>Sling</item>
     <item>0</item>
-    <item>3</item>
-    <item>Day</item>
     <item>0</item>
-    <item>Charisma</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
     <item></item>
   </object>
   <object>
     <name>Martial Weapon ProficiencyHandaxe</name>
-    <item>Armor Bonus</item>
+    <item>Martial Weapon Proficiency</item>
     <item>1</item>
-    <item>Turn water creatures, rebuke fire creatures</item>
+    <item>Handaxe</item>
     <item>0</item>
-    <item>3</item>
-    <item>Day</item>
     <item>0</item>
-    <item>Charisma</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
     <item></item>
   </object>
   <object>
     <name>Simple Weapon ProficiencyJavelin</name>
-    <item>Armor Bonus</item>
+    <item>Simple Weapon Proficiency</item>
     <item>1</item>
-    <item>Turn water creatures, rebuke fire creatures</item>
+    <item>Javelin</item>
     <item>0</item>
-    <item>3</item>
-    <item>Day</item>
     <item>0</item>
-    <item>Charisma</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
     <item></item>
   </object>
   <object>
     <name>Exotic Weapon ProficiencyKama</name>
-    <item>Armor Bonus</item>
+    <item>Exotic Weapon Proficiency</item>
     <item>1</item>
-    <item>Turn water creatures, rebuke fire creatures</item>
+    <item>Kama</item>
     <item>0</item>
-    <item>3</item>
-    <item>Day</item>
     <item>0</item>
-    <item>Charisma</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
     <item></item>
   </object>
   <object>
     <name>Exotic Weapon ProficiencyNunchaku</name>
-    <item>Armor Bonus</item>
+    <item>Exotic Weapon Proficiency</item>
     <item>1</item>
-    <item>Turn water creatures, rebuke fire creatures</item>
+    <item>Nunchaku</item>
     <item>0</item>
-    <item>3</item>
-    <item>Day</item>
     <item>0</item>
-    <item>Charisma</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
     <item></item>
   </object>
   <object>
     <name>Simple Weapon ProficiencyQuarterstaff</name>
-    <item>Armor Bonus</item>
+    <item>Simple Weapon Proficiency</item>
     <item>1</item>
-    <item>Turn water creatures, rebuke fire creatures</item>
+    <item>Quarterstaff</item>
     <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Exotic Weapon ProficiencyShuriken</name>
+    <item>Exotic Weapon Proficiency</item>
+    <item>1</item>
+    <item>Shuriken</item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Exotic Weapon ProficiencySiangham</name>
+    <item>Exotic Weapon Proficiency</item>
+    <item>1</item>
+    <item>Siangham</item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Flurry of Blows</name>
+    <item>Flurry of Blows</item>
+    <item>1</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Greater Flurry</name>
+    <item>Greater Flurry</item>
+    <item>11</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Monk Unarmed StrikeSmall1d4</name>
+    <item>Monk Unarmed Strike</item>
+    <item>1</item>
+    <item>1d4</item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
     <item>3</item>
-    <item>Day</item>
+    <item></item>
+    <item>Small</item>
+  </object>
+  <object>
+    <name>Monk Unarmed StrikeSmall1d6</name>
+    <item>Monk Unarmed Strike</item>
+    <item>4</item>
+    <item>1d6</item>
     <item>0</item>
-    <item>Charisma</item>
+    <item>0</item>
+    <item></item>
+    <item>7</item>
+    <item></item>
+    <item>Small</item>
+  </object>
+  <object>
+    <name>Monk Unarmed StrikeSmall1d8</name>
+    <item>Monk Unarmed Strike</item>
+    <item>8</item>
+    <item>1d8</item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>11</item>
+    <item></item>
+    <item>Small</item>
+  </object>
+  <object>
+    <name>Monk Unarmed StrikeSmall1d10</name>
+    <item>Monk Unarmed Strike</item>
+    <item>12</item>
+    <item>1d10</item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>15</item>
+    <item></item>
+    <item>Small</item>
+  </object>
+  <object>
+    <name>Monk Unarmed StrikeSmall2d6</name>
+    <item>Monk Unarmed Strike</item>
+    <item>16</item>
+    <item>2d6</item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>19</item>
+    <item></item>
+    <item>Small</item>
+  </object>
+  <object>
+    <name>Monk Unarmed StrikeSmall2d8</name>
+    <item>Monk Unarmed Strike</item>
+    <item>20</item>
+    <item>2d8</item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>Small</item>
+  </object>
+  <object>
+    <name>Monk Unarmed StrikeMedium1d6</name>
+    <item>Monk Unarmed Strike</item>
+    <item>1</item>
+    <item>1d6</item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>3</item>
+    <item></item>
+    <item>Medium</item>
+  </object>
+  <object>
+    <name>Monk Unarmed StrikeMedium1d8</name>
+    <item>Monk Unarmed Strike</item>
+    <item>4</item>
+    <item>1d8</item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>7</item>
+    <item></item>
+    <item>Medium</item>
+  </object>
+  <object>
+    <name>Monk Unarmed StrikeMedium1d10</name>
+    <item>Monk Unarmed Strike</item>
+    <item>8</item>
+    <item>1d10</item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>11</item>
+    <item></item>
+    <item>Medium</item>
+  </object>
+  <object>
+    <name>Monk Unarmed StrikeMedium2d6</name>
+    <item>Monk Unarmed Strike</item>
+    <item>12</item>
+    <item>2d6</item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>15</item>
+    <item></item>
+    <item>Medium</item>
+  </object>
+  <object>
+    <name>Monk Unarmed StrikeMedium2d8</name>
+    <item>Monk Unarmed Strike</item>
+    <item>16</item>
+    <item>2d8</item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>19</item>
+    <item></item>
+    <item>Medium</item>
+  </object>
+  <object>
+    <name>Monk Unarmed StrikeMedium2d10</name>
+    <item>Monk Unarmed Strike</item>
+    <item>20</item>
+    <item>2d10</item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>Medium</item>
+  </object>
+  <object>
+    <name>Monk Unarmed StrikeLarge1d8</name>
+    <item>Monk Unarmed Strike</item>
+    <item>1</item>
+    <item>1d8</item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>3</item>
+    <item></item>
+    <item>Large</item>
+  </object>
+  <object>
+    <name>Monk Unarmed StrikeLarge2d6</name>
+    <item>Monk Unarmed Strike</item>
+    <item>4</item>
+    <item>2d6</item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>7</item>
+    <item></item>
+    <item>Large</item>
+  </object>
+  <object>
+    <name>Monk Unarmed StrikeLarge2d8</name>
+    <item>Monk Unarmed Strike</item>
+    <item>8</item>
+    <item>2d8</item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>11</item>
+    <item></item>
+    <item>Large</item>
+  </object>
+  <object>
+    <name>Monk Unarmed StrikeLarge3d6</name>
+    <item>Monk Unarmed Strike</item>
+    <item>12</item>
+    <item>3d6</item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>15</item>
+    <item></item>
+    <item>Large</item>
+  </object>
+  <object>
+    <name>Monk Unarmed StrikeLarge3d8</name>
+    <item>Monk Unarmed Strike</item>
+    <item>16</item>
+    <item>3d8</item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>19</item>
+    <item></item>
+    <item>Large</item>
+  </object>
+  <object>
+    <name>Monk Unarmed StrikeLarge4d8</name>
+    <item>Monk Unarmed Strike</item>
+    <item>20</item>
+    <item>4d8</item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>Large</item>
+  </object>
+  <object>
+    <name>Improved Unarmed Strike</name>
+    <item>Improved Unarmed Strike</item>
+    <item>1</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Monk Bonus Feat1</name>
+    <item>Monk Bonus Feat</item>
+    <item>1</item>
+    <item>Monk Bonus Feat1</item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Monk Bonus Feat2</name>
+    <item>Monk Bonus Feat</item>
+    <item>2</item>
+    <item>Monk Bonus Feat2</item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Monk Bonus Feat6</name>
+    <item>Monk Bonus Feat</item>
+    <item>6</item>
+    <item>Monk Bonus Feat6</item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Improved GrappleMonk</name>
+    <item>Improved Grapple</item>
+    <item>1</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Stunning FistMonk</name>
+    <item>Stunning Fist</item>
+    <item>1</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Combat ReflexesMonk</name>
+    <item>Combat Reflexes</item>
+    <item>1</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Deflect ArrowsMonk</name>
+    <item>Deflect Arrows</item>
+    <item>1</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Improved DisarmMonk</name>
+    <item>Improved Disarm</item>
+    <item>1</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Improved TripMonk</name>
+    <item>Improved Trip</item>
+    <item>1</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Evasion</name>
+    <item>Evasion</item>
+    <item>2</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Fast Movement10</name>
+    <item>Fast Movement</item>
+    <item>3</item>
+    <item></item>
+    <item>10</item>
+    <item>0</item>
+    <item></item>
+    <item>5</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Fast Movement20</name>
+    <item>Fast Movement</item>
+    <item>6</item>
+    <item></item>
+    <item>20</item>
+    <item>0</item>
+    <item></item>
+    <item>8</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Fast Movement30</name>
+    <item>Fast Movement</item>
+    <item>9</item>
+    <item></item>
+    <item>30</item>
+    <item>0</item>
+    <item></item>
+    <item>11</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Fast Movement40</name>
+    <item>Fast Movement</item>
+    <item>12</item>
+    <item></item>
+    <item>40</item>
+    <item>0</item>
+    <item></item>
+    <item>14</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Fast Movement50</name>
+    <item>Fast Movement</item>
+    <item>15</item>
+    <item></item>
+    <item>50</item>
+    <item>0</item>
+    <item></item>
+    <item>17</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Fast Movement60</name>
+    <item>Fast Movement</item>
+    <item>18</item>
+    <item></item>
+    <item>60</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Still Mind</name>
+    <item>Still Mind</item>
+    <item>3</item>
+    <item></item>
+    <item>2</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Ki StrikeMagic</name>
+    <item>Ki Strike</item>
+    <item>4</item>
+    <item>Magic</item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Ki StrikeLawful</name>
+    <item>Ki Strike</item>
+    <item>10</item>
+    <item>Lawful</item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Ki StrikeAdamantine</name>
+    <item>Ki Strike</item>
+    <item>16</item>
+    <item>Adamantine</item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Diamond Body</name>
+    <item>Diamond Body</item>
+    <item>11</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Diamond Soul</name>
+    <item>Diamond Soul</item>
+    <item>13</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Empty Body</name>
+    <item>Empty Body</item>
+    <item>19</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Slow Fall20</name>
+    <item>Slow Fall</item>
+    <item>4</item>
+    <item></item>
+    <item>20</item>
+    <item>0</item>
+    <item></item>
+    <item>5</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Slow Fall30</name>
+    <item>Slow Fall</item>
+    <item>6</item>
+    <item></item>
+    <item>30</item>
+    <item>0</item>
+    <item></item>
+    <item>7</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Slow Fall40</name>
+    <item>Slow Fall</item>
+    <item>8</item>
+    <item></item>
+    <item>40</item>
+    <item>0</item>
+    <item></item>
+    <item>9</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Slow Fall50</name>
+    <item>Slow Fall</item>
+    <item>10</item>
+    <item></item>
+    <item>50</item>
+    <item>0</item>
+    <item></item>
+    <item>11</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Slow Fall60</name>
+    <item>Slow Fall</item>
+    <item>12</item>
+    <item></item>
+    <item>60</item>
+    <item>0</item>
+    <item></item>
+    <item>13</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Slow Fall70</name>
+    <item>Slow Fall</item>
+    <item>14</item>
+    <item></item>
+    <item>70</item>
+    <item>0</item>
+    <item></item>
+    <item>15</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Slow Fall80</name>
+    <item>Slow Fall</item>
+    <item>16</item>
+    <item></item>
+    <item>80</item>
+    <item>0</item>
+    <item></item>
+    <item>17</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Slow Fall90</name>
+    <item>Slow Fall</item>
+    <item>18</item>
+    <item></item>
+    <item>90</item>
+    <item>0</item>
+    <item></item>
+    <item>19</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Slow FallAny</name>
+    <item>Slow Fall</item>
+    <item>20</item>
+    <item>Any distance</item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Purity of Body</name>
+    <item>Purity of Body</item>
+    <item>5</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Wholeness of Body</name>
+    <item>Wholeness of Body</item>
+    <item>7</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Improved Evasion</name>
+    <item>Improved Evasion</item>
+    <item>9</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Quivering Palm</name>
+    <item>Quivering Palm</item>
+    <item>15</item>
+    <item></item>
+    <item>0</item>
+    <item>1</item>
+    <item>Week</item>
+    <item>0</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Timeless Body</name>
+    <item>Timeless Body</item>
+    <item>17</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Tongue of Sun and Moon</name>
+    <item>Tongue of Sun and Moon</item>
+    <item>17</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Perfect Self</name>
+    <item>Perfect Self</item>
+    <item>20</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
     <item></item>
   </object>
 </items>

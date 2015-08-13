@@ -22,7 +22,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
         public virtual void Data(String name, String feat, String focusType, Int32 frequencyQuantity, String frequencyQuantityStat, String frequencyTimePeriod, Int32 minimumLevel, Int32 maximumLevel, Int32 strength, String sizeRequirement)
         {
             var data = new List<String>();
-            for (var i = 0; i < 8; i++)
+            for (var i = 0; i < 9; i++)
                 data.Add(String.Empty);
 
             data[DataIndexConstants.CharacterClassFeatData.FeatNameIndex] = feat;
