@@ -11,6 +11,7 @@
         <item>Day</item>
         <item>0</item>
         <item>Charisma</item>
+      <item></item>
     </object>
   <object>
     <name>Armor Bonus1</name>
@@ -22,6 +23,7 @@
     <item>Day</item>
     <item>0</item>
     <item>Charisma</item>
+    <item></item>
   </object>
   <object>
     <name>Armor Bonus2</name>
@@ -33,6 +35,7 @@
     <item>Day</item>
     <item>0</item>
     <item>Charisma</item>
+    <item></item>
   </object>
   <object>
     <name>Armor Bonus3</name>
@@ -44,6 +47,7 @@
     <item>Day</item>
     <item>0</item>
     <item>Charisma</item>
+    <item></item>
   </object>
   <object>
     <name>Armor Bonus4</name>
@@ -55,6 +59,7 @@
     <item>Day</item>
     <item>0</item>
     <item>Charisma</item>
+    <item></item>
   </object>
   <object>
     <name>Armor BonusWisdom</name>
@@ -66,5 +71,126 @@
     <item>Day</item>
     <item>0</item>
     <item>Charisma</item>
+    <item></item>
+  </object>
+  <object>
+    <name>Simple Weapon ProficiencyClub</name>
+    <item>Armor Bonus</item>
+    <item>1</item>
+    <item>Turn water creatures, rebuke fire creatures</item>
+    <item>0</item>
+    <item>3</item>
+    <item>Day</item>
+    <item>0</item>
+    <item>Charisma</item>
+    <item></item>
+  </object>
+  <object>
+    <name>Simple Weapon ProficiencyDagger</name>
+    <item>Armor Bonus</item>
+    <item>1</item>
+    <item>Turn water creatures, rebuke fire creatures</item>
+    <item>0</item>
+    <item>3</item>
+    <item>Day</item>
+    <item>0</item>
+    <item>Charisma</item>
+    <item></item>
+  </object>
+  <object>
+    <name>Simple Weapon ProficiencyHeavy crossbow</name>
+    <item>Armor Bonus</item>
+    <item>1</item>
+    <item>Turn water creatures, rebuke fire creatures</item>
+    <item>0</item>
+    <item>3</item>
+    <item>Day</item>
+    <item>0</item>
+    <item>Charisma</item>
+    <item></item>
+  </object>
+  <object>
+    <name>Simple Weapon ProficiencyLight crossbow</name>
+    <item>Armor Bonus</item>
+    <item>1</item>
+    <item>Turn water creatures, rebuke fire creatures</item>
+    <item>0</item>
+    <item>3</item>
+    <item>Day</item>
+    <item>0</item>
+    <item>Charisma</item>
+    <item></item>
+  </object>
+  <object>
+    <name>Simple Weapon ProficiencySling</name>
+    <item>Armor Bonus</item>
+    <item>1</item>
+    <item>Turn water creatures, rebuke fire creatures</item>
+    <item>0</item>
+    <item>3</item>
+    <item>Day</item>
+    <item>0</item>
+    <item>Charisma</item>
+    <item></item>
+  </object>
+  <object>
+    <name>Martial Weapon ProficiencyHandaxe</name>
+    <item>Armor Bonus</item>
+    <item>1</item>
+    <item>Turn water creatures, rebuke fire creatures</item>
+    <item>0</item>
+    <item>3</item>
+    <item>Day</item>
+    <item>0</item>
+    <item>Charisma</item>
+    <item></item>
+  </object>
+  <object>
+    <name>Simple Weapon ProficiencyJavelin</name>
+    <item>Armor Bonus</item>
+    <item>1</item>
+    <item>Turn water creatures, rebuke fire creatures</item>
+    <item>0</item>
+    <item>3</item>
+    <item>Day</item>
+    <item>0</item>
+    <item>Charisma</item>
+    <item></item>
+  </object>
+  <object>
+    <name>Exotic Weapon ProficiencyKama</name>
+    <item>Armor Bonus</item>
+    <item>1</item>
+    <item>Turn water creatures, rebuke fire creatures</item>
+    <item>0</item>
+    <item>3</item>
+    <item>Day</item>
+    <item>0</item>
+    <item>Charisma</item>
+    <item></item>
+  </object>
+  <object>
+    <name>Exotic Weapon ProficiencyNunchaku</name>
+    <item>Armor Bonus</item>
+    <item>1</item>
+    <item>Turn water creatures, rebuke fire creatures</item>
+    <item>0</item>
+    <item>3</item>
+    <item>Day</item>
+    <item>0</item>
+    <item>Charisma</item>
+    <item></item>
+  </object>
+  <object>
+    <name>Simple Weapon ProficiencyQuarterstaff</name>
+    <item>Armor Bonus</item>
+    <item>1</item>
+    <item>Turn water creatures, rebuke fire creatures</item>
+    <item>0</item>
+    <item>3</item>
+    <item>Day</item>
+    <item>0</item>
+    <item>Charisma</item>
+    <item></item>
   </object>
 </items>
