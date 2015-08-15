@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using CharacterGen.Common.Abilities.Feats;
+﻿using CharacterGen.Common.Abilities.Feats;
 using CharacterGen.Common.Abilities.Stats;
 using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Common.Combats;
@@ -10,6 +7,9 @@ using CharacterGen.Common.Races;
 using CharacterGen.Generators.Combats;
 using CharacterGen.Selectors;
 using CharacterGen.Tables;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CharacterGen.Generators.Domain.Combats
 {
@@ -103,11 +103,11 @@ namespace CharacterGen.Generators.Domain.Combats
 
         private Int32 GetAdjustedDexterityBonus(Dictionary<String, Stat> stats, Equipment equipment)
         {
-            var maxDexterityBonuses = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.MaxDexterityBonus);
-            var dexterityBonus = stats[StatConstants.Dexterity].Bonus;
-            var maxArmorBonus = maxDexterityBonuses[equipment.Armor.Name];
+            if (equipment.Armor == null)
+                return stats[StatConstants.Dexterity].Bonus;
 
-            return Math.Min(dexterityBonus, maxArmorBonus);
+            var maxDexterityBonuses = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.MaxDexterityBonus);
+            return Math.Min(stats[StatConstants.Dexterity].Bonus, maxDexterityBonuses[equipment.Armor.Name]);
         }
 
         private Int32 GetInitiativeBonus(Race race, IEnumerable<Feat> feats)

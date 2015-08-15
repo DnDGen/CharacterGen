@@ -49,6 +49,7 @@ namespace CharacterGen.Tests.Unit.Tables
         [TestCase(TableNameConstants.Set.Collection.SpecialistFields, "SpecialistFields")]
         [TestCase(TableNameConstants.Set.Collection.StatPriorities, "StatPriorities")]
         [TestCase(TableNameConstants.Set.Percentile.AlignmentGoodness, "AlignmentGoodness")]
+        [TestCase(TableNameConstants.Set.Percentile.AlignmentLawfulness, "AlignmentLawfulness")]
         [TestCase(TableNameConstants.Set.Percentile.LeadershipMovement, "LeadershipMovement")]
         [TestCase(TableNameConstants.Set.Percentile.Reputation, "Reputation")]
         [TestCase(TableNameConstants.Set.Percentile.Traits, "Traits")]

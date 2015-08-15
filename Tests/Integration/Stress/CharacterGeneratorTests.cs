@@ -24,15 +24,11 @@ namespace CharacterGen.Tests.Integration.Stress
         [Inject]
         public ISetLevelRandomizer SetLevelRandomizer { get; set; }
 
-        IEnumerable<String> goodnesses;
-        IEnumerable<String> lawfulnesses;
         IEnumerable<String> classNames;
 
         [SetUp]
         public void Setup()
         {
-            goodnesses = AlignmentConstants.GetGoodnesses();
-            lawfulnesses = AlignmentConstants.GetLawfulnesses();
             classNames = new[] {
                 CharacterClassConstants.Barbarian,
                 CharacterClassConstants.Bard,
@@ -59,8 +55,13 @@ namespace CharacterGen.Tests.Integration.Stress
             var character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
                     MetaraceRandomizer, StatsRandomizer);
 
-            Assert.That(goodnesses, Contains.Item(character.Alignment.Goodness));
-            Assert.That(lawfulnesses, Contains.Item(character.Alignment.Lawfulness));
+            Assert.That(character.Alignment.Goodness, Is.EqualTo(AlignmentConstants.Good)
+                .Or.EqualTo(AlignmentConstants.Neutral)
+                .Or.EqualTo(AlignmentConstants.Evil));
+            Assert.That(character.Alignment.Lawfulness, Is.EqualTo(AlignmentConstants.Lawful)
+                .Or.EqualTo(AlignmentConstants.Neutral)
+                .Or.EqualTo(AlignmentConstants.Chaotic));
+
             Assert.That(classNames, Contains.Item(character.Class.ClassName));
             Assert.That(character.Class.Level, Is.Positive);
             Assert.That(character.InterestingTrait, Is.Not.Null);

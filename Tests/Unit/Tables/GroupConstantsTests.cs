@@ -36,7 +36,7 @@ namespace CharacterGen.Tests.Unit.Tables
         [TestCase(GroupConstants.Standard, "Standard")]
         [TestCase(GroupConstants.Stealth, "Stealth")]
         [TestCase(GroupConstants.TakenMultipleTimes, "TakenMultipleTimes")]
-        [TestCase(GroupConstants.TwoHanded, "Two-Handed Weapons")]
+        [TestCase(GroupConstants.TwoHanded, "Two-Handed")]
         [TestCase(GroupConstants.Warriors, "Warriors")]
         [TestCase(GroupConstants.Weapons, "Weapons")]
         [TestCase(GroupConstants.WeaponsWithUnarmedAndGrapple, "Weapons with unarmed and grapple")]

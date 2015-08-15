@@ -3,7 +3,6 @@ using CharacterGen.Generators.Domain.Randomizers.Alignments;
 using CharacterGen.Generators.Verifiers.Exceptions;
 using CharacterGen.Selectors;
 using CharacterGen.Tables;
-using RollGen;
 using Moq;
 using NUnit.Framework;
 using System;
@@ -15,104 +14,108 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Alignments
     public class BaseAlignmentTests
     {
         private TestAlignmentRandomizer randomizer;
-        private Mock<IDice> mockDice;
         private Mock<IPercentileSelector> mockPercentileResultSelector;
 
         [SetUp]
         public void Setup()
         {
-            mockDice = new Mock<IDice>();
-            mockDice.Setup(d => d.Roll(1).d3()).Returns(1);
-
             mockPercentileResultSelector = new Mock<IPercentileSelector>();
-            mockPercentileResultSelector.Setup(p => p.SelectAllFrom(It.IsAny<String>())).Returns(AlignmentConstants.GetGoodnesses());
-            mockPercentileResultSelector.Setup(p => p.SelectFrom(It.IsAny<String>())).Returns(AlignmentConstants.Good);
+            mockPercentileResultSelector.Setup(p => p.SelectAllFrom(TableNameConstants.Set.Percentile.AlignmentLawfulness)).Returns(new[] { "other lawfulness", "lawfulness" });
+            mockPercentileResultSelector.Setup(p => p.SelectAllFrom(TableNameConstants.Set.Percentile.AlignmentGoodness)).Returns(new[] { "other goodness", "goodness" });
+            mockPercentileResultSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Percentile.AlignmentLawfulness)).Returns("lawfulness");
+            mockPercentileResultSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Percentile.AlignmentGoodness)).Returns("goodness");
 
-            randomizer = new TestAlignmentRandomizer(mockDice.Object, mockPercentileResultSelector.Object);
+            randomizer = new TestAlignmentRandomizer(mockPercentileResultSelector.Object);
         }
 
         [Test]
-        public void LawfulIs3OnD3()
+        public void ReturnLawfulnessFromSelector()
         {
-            mockDice.Setup(d => d.Roll(1).d3()).Returns(3);
             var alignment = randomizer.Randomize();
-            Assert.That(alignment.Lawfulness, Is.EqualTo(AlignmentConstants.Lawful));
-        }
-
-        [Test]
-        public void NeutralLawfulnessIs2OnD3()
-        {
-            mockDice.Setup(d => d.Roll(1).d3()).Returns(2);
-            var alignment = randomizer.Randomize();
-            Assert.That(alignment.Lawfulness, Is.EqualTo(AlignmentConstants.Neutral));
-        }
-
-        [Test]
-        public void ChaoticIs1OnD3()
-        {
-            mockDice.Setup(d => d.Roll(1).d3()).Returns(1);
-            var alignment = randomizer.Randomize();
-            Assert.That(alignment.Lawfulness, Is.EqualTo(AlignmentConstants.Chaotic));
+            Assert.That(alignment.Lawfulness, Is.EqualTo("lawfulness"));
         }
 
         [Test]
         public void ReturnsGoodnessFromSelector()
         {
-            mockPercentileResultSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Percentile.AlignmentGoodness)).Returns(AlignmentConstants.Evil);
-
             var alignment = randomizer.Randomize();
-            Assert.That(alignment.Goodness, Is.EqualTo(AlignmentConstants.Evil));
+            Assert.That(alignment.Goodness, Is.EqualTo("goodness"));
         }
 
         [Test]
-        public void RandomizeGetsAllPossibleResultsFromGetAllPossibleResults()
+        public void RandomizeThrowsErrorIfNoLawfulnessPossibleResults()
         {
-            randomizer.Randomize();
-            mockPercentileResultSelector.Verify(p => p.SelectAllFrom(It.IsAny<String>()), Times.Once);
+            mockPercentileResultSelector.Setup(p => p.SelectAllFrom(TableNameConstants.Set.Percentile.AlignmentLawfulness)).Returns(Enumerable.Empty<String>());
+            Assert.That(() => randomizer.Randomize(), Throws.InstanceOf<IncompatibleRandomizersException>());
         }
 
         [Test]
-        public void RandomizeThrowsErrorIfNoPossibleResults()
+        public void RandomizeThrowsErrorIfNoGoodnessPossibleResults()
         {
-            mockPercentileResultSelector.Setup(p => p.SelectAllFrom(It.IsAny<String>())).Returns(Enumerable.Empty<String>());
+            mockPercentileResultSelector.Setup(p => p.SelectAllFrom(TableNameConstants.Set.Percentile.AlignmentGoodness)).Returns(Enumerable.Empty<String>());
             Assert.That(() => randomizer.Randomize(), Throws.InstanceOf<IncompatibleRandomizersException>());
         }
 
         [Test]
         public void RandomizeLoopsUntilAlignmentWithAllowedGoodnessIsRolled()
         {
-            mockPercentileResultSelector.SetupSequence(p => p.SelectFrom(It.IsAny<String>())).Returns("invalid class name")
-                .Returns(AlignmentConstants.Good);
+            randomizer.NotAllowedGoodness = "goodness";
 
-            randomizer.Randomize();
-            mockPercentileResultSelector.Verify(p => p.SelectFrom(It.IsAny<String>()), Times.Exactly(2));
+            mockPercentileResultSelector.SetupSequence(p => p.SelectFrom(TableNameConstants.Set.Percentile.AlignmentGoodness))
+                .Returns("goodness").Returns("other goodness");
+
+            var alignment = randomizer.Randomize();
+            Assert.That(alignment.Goodness, Is.EqualTo("other goodness"));
         }
 
         [Test]
-        public void GetAllPossibleResultsAccessesTableAlignmentGoodness()
+        public void RandomizeLoopsUntilAlignmentWithAllowedLawfulnessIsRolled()
         {
-            randomizer.Randomize();
-            mockPercentileResultSelector.Verify(p => p.SelectAllFrom("AlignmentGoodness"), Times.Once);
+            randomizer.NotAllowedLawfulness = "lawfulness";
+
+            mockPercentileResultSelector.SetupSequence(p => p.SelectFrom(TableNameConstants.Set.Percentile.AlignmentLawfulness))
+                .Returns("lawfulness").Returns("other lawfulness");
+
+            var alignment = randomizer.Randomize();
+            Assert.That(alignment.Lawfulness, Is.EqualTo("other lawfulness"));
+        }
+
+        [Test]
+        public void GetAllPossibleResults()
+        {
+            var allAlignments = randomizer.GetAllPossibleResults();
+            var alignmentStrings = allAlignments.Select(a => a.ToString());
+
+            Assert.That(alignmentStrings, Contains.Item("lawfulness goodness"));
+            Assert.That(alignmentStrings, Contains.Item("lawfulness other goodness"));
+            Assert.That(alignmentStrings, Contains.Item("other lawfulness goodness"));
+            Assert.That(alignmentStrings, Contains.Item("other lawfulness other goodness"));
+            Assert.That(alignmentStrings.Count(), Is.EqualTo(4));
         }
 
         [Test]
         public void GetAllPossibleResultsFiltersOutUnallowedCharacterClasses()
         {
-            randomizer.NotAllowedLawfulness = AlignmentConstants.Lawful;
-            var results = randomizer.GetAllPossibleResults();
+            randomizer.NotAllowedLawfulness = "lawfulness";
+            randomizer.NotAllowedGoodness = "goodness";
 
-            Assert.That(results.Any(a => a.Lawfulness == AlignmentConstants.Lawful), Is.False);
+            var results = randomizer.GetAllPossibleResults();
+            Assert.That(results.Count(), Is.EqualTo(1));
+            Assert.That(results.First().ToString(), Is.EqualTo("other lawfulness other goodness"));
         }
 
         private class TestAlignmentRandomizer : BaseAlignmentRandomizer
         {
             public String NotAllowedLawfulness { get; set; }
+            public String NotAllowedGoodness { get; set; }
 
-            public TestAlignmentRandomizer(IDice dice, IPercentileSelector Selector) : base(dice, Selector) { }
+            public TestAlignmentRandomizer(IPercentileSelector innerSelector)
+                : base(innerSelector)
+            { }
 
             protected override Boolean AlignmentIsAllowed(Alignment alignment)
             {
-                return alignment.Lawfulness != NotAllowedLawfulness;
+                return alignment.Lawfulness != NotAllowedLawfulness && alignment.Goodness != NotAllowedGoodness;
             }
         }
     }

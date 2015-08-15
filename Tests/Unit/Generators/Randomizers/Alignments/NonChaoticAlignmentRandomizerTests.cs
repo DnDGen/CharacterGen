@@ -1,7 +1,7 @@
 ﻿using CharacterGen.Common.Alignments;
 using CharacterGen.Generators.Domain.Randomizers.Alignments;
 using CharacterGen.Selectors;
-using RollGen;
+using CharacterGen.Tables;
 using Moq;
 using NUnit.Framework;
 using System;
@@ -17,11 +17,13 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Alignments
         [SetUp]
         public void Setup()
         {
-            var mockDice = new Mock<IDice>();
             var mockPercentileResultSelector = new Mock<IPercentileSelector>();
-            mockPercentileResultSelector.Setup(p => p.SelectAllFrom(It.IsAny<String>())).Returns(AlignmentConstants.GetGoodnesses());
+            var randomizer = new NonChaoticAlignmentRandomizer(mockPercentileResultSelector.Object);
 
-            var randomizer = new NonChaoticAlignmentRandomizer(mockDice.Object, mockPercentileResultSelector.Object);
+            mockPercentileResultSelector.Setup(p => p.SelectAllFrom(TableNameConstants.Set.Percentile.AlignmentGoodness))
+                .Returns(new[] { AlignmentConstants.Good, AlignmentConstants.Neutral, AlignmentConstants.Evil });
+            mockPercentileResultSelector.Setup(p => p.SelectAllFrom(TableNameConstants.Set.Percentile.AlignmentLawfulness))
+                .Returns(new[] { AlignmentConstants.Lawful, AlignmentConstants.Neutral, AlignmentConstants.Chaotic });
 
             alignments = randomizer.GetAllPossibleResults();
         }

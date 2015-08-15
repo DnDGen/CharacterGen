@@ -12,6 +12,7 @@ using Moq;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using TreasureGen.Common.Items;
 
 namespace CharacterGen.Tests.Unit.Generators.Combats
 {
@@ -230,7 +231,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         [Test]
         public void AdjustedDexterityBonusIsBonus()
         {
-            equipment.Armor.Name = "armor";
+            equipment.Armor = new Item { Name = "armor" };
             maxDexterityBonuses[equipment.Armor.Name] = 17;
 
             var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass, race);
@@ -242,7 +243,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         [Test]
         public void AdjustedDexterityBonusIsMaxBonusOfArmor()
         {
-            equipment.Armor.Name = "armor";
+            equipment.Armor = new Item { Name = "armor" };
             maxDexterityBonuses[equipment.Armor.Name] = 5;
 
             var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass, race);
@@ -254,7 +255,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         [Test]
         public void GetArmorClassFromGeneratorWithMaxDexterityBonus()
         {
-            equipment.Armor.Name = "armor";
+            equipment.Armor = new Item { Name = "armor" };
             maxDexterityBonuses[equipment.Armor.Name] = 5;
             var armorClass = new ArmorClass();
             mockArmorClassGenerator.Setup(g => g.GenerateWith(equipment, 5, feats, race)).Returns(armorClass);

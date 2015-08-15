@@ -1,13 +1,14 @@
-﻿using System;
-using RollGen;
-using CharacterGen.Common.Alignments;
+﻿using CharacterGen.Common.Alignments;
 using CharacterGen.Selectors;
+using System;
 
 namespace CharacterGen.Generators.Domain.Randomizers.Alignments
 {
     public class NonLawfulAlignmentRandomizer : BaseAlignmentRandomizer
     {
-        public NonLawfulAlignmentRandomizer(IDice dice, IPercentileSelector Selector) : base(dice, Selector) { }
+        public NonLawfulAlignmentRandomizer(IPercentileSelector innerSelector)
+            : base(innerSelector)
+        { }
 
         protected override Boolean AlignmentIsAllowed(Alignment alignment)
         {

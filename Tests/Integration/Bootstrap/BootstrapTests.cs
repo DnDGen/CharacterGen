@@ -1,10 +1,11 @@
-﻿using System;
-using CharacterGen.Tests.Integration.Common;
+﻿using CharacterGen.Tests.Integration.Common;
 using NUnit.Framework;
+using System;
 
 namespace CharacterGen.Tests.Integration.Bootstrap
 {
     [TestFixture]
+    [Bootstrap]
     public abstract class BootstrapTests : IntegrationTests
     {
         protected void AssertSingleton<T>()

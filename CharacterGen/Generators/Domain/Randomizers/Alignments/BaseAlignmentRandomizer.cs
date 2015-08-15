@@ -1,62 +1,48 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using RollGen;
-using CharacterGen.Common.Alignments;
+﻿using CharacterGen.Common.Alignments;
 using CharacterGen.Generators.Randomizers.Alignments;
 using CharacterGen.Generators.Verifiers.Exceptions;
 using CharacterGen.Selectors;
+using CharacterGen.Tables;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CharacterGen.Generators.Domain.Randomizers.Alignments
 {
     public abstract class BaseAlignmentRandomizer : IAlignmentRandomizer
     {
-        private IDice dice;
         private IPercentileSelector percentileResultSelector;
 
-        private const String table = "AlignmentGoodness";
-
-        public BaseAlignmentRandomizer(IDice dice, IPercentileSelector percentileResultSelector)
+        public BaseAlignmentRandomizer(IPercentileSelector percentileResultSelector)
         {
-            this.dice = dice;
             this.percentileResultSelector = percentileResultSelector;
         }
 
         public Alignment Randomize()
         {
             var possibleAlignments = GetAllPossibleResults();
-            if (!possibleAlignments.Any())
+            if (possibleAlignments.Any() == false)
                 throw new IncompatibleRandomizersException();
 
             var alignment = new Alignment();
 
             do
             {
-                alignment.Lawfulness = RollLawfulness();
-                alignment.Goodness = percentileResultSelector.SelectFrom(table);
-            } while (!possibleAlignments.Any(a => a.Equals(alignment)));
+                alignment.Lawfulness = percentileResultSelector.SelectFrom(TableNameConstants.Set.Percentile.AlignmentLawfulness);
+                alignment.Goodness = percentileResultSelector.SelectFrom(TableNameConstants.Set.Percentile.AlignmentGoodness);
+            } while (possibleAlignments.Contains(alignment) == false);
 
             return alignment;
-        }
-
-        private String RollLawfulness()
-        {
-            switch (dice.Roll().d3())
-            {
-                case 1: return AlignmentConstants.Chaotic;
-                case 2: return AlignmentConstants.Neutral;
-                case 3: return AlignmentConstants.Lawful;
-                default: throw new ArgumentOutOfRangeException();
-            }
         }
 
         public IEnumerable<Alignment> GetAllPossibleResults()
         {
             var alignments = new List<Alignment>();
-            var goodnesses = percentileResultSelector.SelectAllFrom(table);
+            var goodnesses = percentileResultSelector.SelectAllFrom(TableNameConstants.Set.Percentile.AlignmentGoodness);
+            var lawfulnesses = percentileResultSelector.SelectAllFrom(TableNameConstants.Set.Percentile.AlignmentLawfulness);
 
             foreach (var goodness in goodnesses)
-                foreach (var lawfulness in AlignmentConstants.GetLawfulnesses())
+                foreach (var lawfulness in lawfulnesses)
                     alignments.Add(new Alignment { Goodness = goodness, Lawfulness = lawfulness });
 
             return alignments.Where(a => AlignmentIsAllowed(a));

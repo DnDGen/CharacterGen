@@ -1,7 +1,6 @@
-﻿using System;
-using System.Linq;
-using CharacterGen.Common.Alignments;
+﻿using CharacterGen.Common.Alignments;
 using NUnit.Framework;
+using System;
 
 namespace CharacterGen.Tests.Unit.Common.Alignments
 {
@@ -16,28 +15,6 @@ namespace CharacterGen.Tests.Unit.Common.Alignments
         public void Constant(String constant, String value)
         {
             Assert.That(constant, Is.EqualTo(value));
-        }
-
-        [Test]
-        public void Lawfulnesses()
-        {
-            var lawfulnesses = AlignmentConstants.GetLawfulnesses();
-
-            Assert.That(lawfulnesses, Contains.Item(AlignmentConstants.Lawful));
-            Assert.That(lawfulnesses, Contains.Item(AlignmentConstants.Neutral));
-            Assert.That(lawfulnesses, Contains.Item(AlignmentConstants.Chaotic));
-            Assert.That(lawfulnesses.Count(), Is.EqualTo(3));
-        }
-
-        [Test]
-        public void Goodnesses()
-        {
-            var goodnesses = AlignmentConstants.GetGoodnesses();
-
-            Assert.That(goodnesses, Contains.Item(AlignmentConstants.Good));
-            Assert.That(goodnesses, Contains.Item(AlignmentConstants.Neutral));
-            Assert.That(goodnesses, Contains.Item(AlignmentConstants.Evil));
-            Assert.That(goodnesses.Count(), Is.EqualTo(3));
         }
     }
 }

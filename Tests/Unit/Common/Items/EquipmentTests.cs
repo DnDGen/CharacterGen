@@ -17,8 +17,8 @@ namespace CharacterGen.Tests.Unit.Common.Items
         [Test]
         public void EquipmentInitialized()
         {
-            Assert.That(equipment.Armor, Is.Not.Null);
-            Assert.That(equipment.OffHand, Is.Not.Null);
+            Assert.That(equipment.Armor, Is.Null);
+            Assert.That(equipment.OffHand, Is.Null);
             Assert.That(equipment.PrimaryHand, Is.Not.Null);
             Assert.That(equipment.Treasure, Is.Not.Null);
         }

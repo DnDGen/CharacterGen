@@ -5,12 +5,12 @@ using CharacterGen.Generators.Combats;
 using CharacterGen.Generators.Domain.Combats;
 using CharacterGen.Selectors;
 using CharacterGen.Tables;
-using TreasureGen.Common.Items;
 using Moq;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TreasureGen.Common.Items;
 
 namespace CharacterGen.Tests.Unit.Generators.Combats
 {
@@ -24,8 +24,6 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         private Mock<ICollectionsSelector> mockCollectionsSelector;
         private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
         private Dictionary<String, Int32> armorBonuses;
-        private Dictionary<String, Int32> featAdjustments;
-        private Dictionary<String, Int32> racialArmorBonuses;
         private Race race;
 
         [SetUp]
@@ -37,16 +35,11 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             equipment = new Equipment();
             feats = new List<Feat>();
             armorBonuses = new Dictionary<String, Int32>();
-            featAdjustments = new Dictionary<String, Int32>();
             adjustedDexterityBonus = 0;
             race = new Race();
-            racialArmorBonuses = new Dictionary<String, Int32>();
 
             armorBonuses[String.Empty] = 0;
-            racialArmorBonuses[String.Empty] = 0;
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.ArmorBonuses)).Returns(armorBonuses);
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.RacialNaturalArmorBonuses)).Returns(racialArmorBonuses);
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.FeatArmorAdjustments)).Returns(featAdjustments);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.Size)).Returns(Enumerable.Empty<String>());
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.NaturalArmor))
                 .Returns(Enumerable.Empty<String>());
@@ -54,7 +47,6 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
                 .Returns(Enumerable.Empty<String>());
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.Deflection))
                 .Returns(Enumerable.Empty<String>());
-
         }
 
         [Test]
@@ -76,7 +68,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         {
             armorBonuses["armor"] = 1;
             armorBonuses["other armor"] = -1;
-            equipment.Armor.Name = "armor";
+            equipment.Armor = new Item { Name = "armor" };
 
             AssertArmorClass(11, 11, 10);
         }
@@ -86,7 +78,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         {
             armorBonuses["shield"] = 1;
             armorBonuses["other shield"] = -1;
-            equipment.OffHand.Name = "shield";
+            equipment.OffHand = new Item { Name = "shield" };
             equipment.OffHand.ItemType = ItemTypeConstants.Armor;
             equipment.OffHand.Attributes = new[] { AttributeConstants.Shield };
 
@@ -121,6 +113,8 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         [Test]
         public void ArmorEnhancementBonusApplied()
         {
+            armorBonuses["armor"] = 0;
+            equipment.Armor = new Item { Name = "armor" };
             equipment.Armor.Magic.Bonus = 1;
             AssertArmorClass(11, 11, 10);
         }
@@ -128,6 +122,8 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         [Test]
         public void ShieldEnhancementBonusApplied()
         {
+            armorBonuses["shield"] = 0;
+            equipment.OffHand = new Item { Name = "shield" };
             equipment.OffHand.ItemType = ItemTypeConstants.Armor;
             equipment.OffHand.Attributes = new[] { AttributeConstants.Shield };
             equipment.OffHand.Magic.Bonus = 1;
@@ -137,6 +133,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         [Test]
         public void OffhandNonArmorEnhancementBonusNotApplied()
         {
+            equipment.OffHand = new Item { Name = "item" };
             equipment.OffHand.ItemType = "not armor";
             equipment.OffHand.Magic.Bonus = 1;
             AssertArmorClass(10, 10, 10);
@@ -207,18 +204,19 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         }
 
         [Test]
-        public void NaturalArmorBonusFromFeatApplied()
+        public void TotalNaturalArmorBonusFromFeatApplied()
         {
-            var feat = new Feat();
-            feat.Name = "feat 1";
-            feats.Add(feat);
+            feats.Add(new Feat());
+            feats.Add(new Feat());
+            feats[0].Name = "feat 1";
+            feats[0].Strength = 1;
+            feats[1].Name = "feat 2";
+            feats[1].Strength = 1;
 
-            featAdjustments["feat 1"] = 1;
-            featAdjustments["feat 2"] = -1;
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.NaturalArmor))
                 .Returns(new[] { "feat 1", "feat 2", "other feat" });
 
-            AssertArmorClass(11, 11, 10);
+            AssertArmorClass(12, 12, 10);
         }
 
         [Test]
@@ -241,45 +239,15 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         }
 
         [Test]
-        public void NaturalArmorBonusFromBaseRaceApplied()
+        public void OnlyHighestNaturalArmorBonusAppliesWhenHighestIsFeatSum()
         {
-            race.BaseRace = "baserace";
-            racialArmorBonuses[race.BaseRace] = 1;
-            AssertArmorClass(11, 11, 10);
-        }
+            feats.Add(new Feat());
+            feats.Add(new Feat());
+            feats[0].Name = "feat 1";
+            feats[0].Strength = 3;
+            feats[1].Name = "feat 2";
+            feats[1].Strength = 4;
 
-        [Test]
-        public void NaturalArmorBonusFromMetaraceApplied()
-        {
-            race.Metarace = "metarace";
-            racialArmorBonuses[race.Metarace] = 1;
-            AssertArmorClass(11, 11, 10);
-        }
-
-        [Test]
-        public void NaturalArmorBonusFromBaseRaceAndMetaraceApplied()
-        {
-            race.BaseRace = "base race";
-            race.Metarace = "metarace";
-            racialArmorBonuses[race.BaseRace] = 1;
-            racialArmorBonuses[race.Metarace] = 1;
-
-            AssertArmorClass(12, 12, 10);
-        }
-
-        [Test]
-        public void OnlyHighestNaturalArmorBonusAppliesWhenHighestIsFeat()
-        {
-            var feat = new Feat();
-            feat.Name = "feat 1";
-            feats.Add(feat);
-
-            var feat2 = new Feat();
-            feat2.Name = "feat 2";
-            feats.Add(feat2);
-
-            featAdjustments["feat 1"] = 1;
-            featAdjustments["feat 2"] = 2;
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.NaturalArmor))
                 .Returns(new[] { "feat 1", "feat 2", "ring", "other ring" });
 
@@ -293,27 +261,19 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
 
             equipment.Treasure.Items = new[] { ring, otherRing };
 
-            race.BaseRace = "base race";
-            race.Metarace = "metarace";
-            racialArmorBonuses[race.BaseRace] = 0;
-            racialArmorBonuses[race.Metarace] = 1;
-
-            AssertArmorClass(12, 12, 10);
+            AssertArmorClass(17, 17, 10);
         }
 
         [Test]
         public void OnlyHighestNaturalArmorBonusAppliesWhenHighestIsItem()
         {
-            var feat = new Feat();
-            feat.Name = "feat 1";
-            feats.Add(feat);
+            feats.Add(new Feat());
+            feats.Add(new Feat());
+            feats[0].Name = "feat 1";
+            feats[0].Strength = 1;
+            feats[1].Name = "feat 2";
+            feats[1].Strength = 1;
 
-            var feat2 = new Feat();
-            feat2.Name = "feat 2";
-            feats.Add(feat2);
-
-            featAdjustments["feat 1"] = 1;
-            featAdjustments["feat 2"] = 1;
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.NaturalArmor))
                 .Returns(new[] { "feat 1", "feat 2", "ring", "other ring" });
 
@@ -327,110 +287,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
 
             equipment.Treasure.Items = new[] { ring, otherRing };
 
-            race.BaseRace = "baserace";
-            race.Metarace = "metarace";
-            racialArmorBonuses[race.BaseRace] = 0;
-            racialArmorBonuses[race.Metarace] = 1;
-
             AssertArmorClass(12, 12, 10);
-        }
-
-        [Test]
-        public void OnlyHighestNaturalArmorBonusAppliesWhenHighestIsRacial()
-        {
-            var feat = new Feat();
-            feat.Name = "feat 1";
-            feats.Add(feat);
-
-            var feat2 = new Feat();
-            feat2.Name = "feat 2";
-            feats.Add(feat2);
-
-            featAdjustments["feat 1"] = 1;
-            featAdjustments["feat 2"] = 2;
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.NaturalArmor))
-                .Returns(new[] { "feat 1", "feat 2", "ring", "other ring" });
-
-            var ring = new Item();
-            ring.Name = "ring";
-            ring.Magic.Bonus = 1;
-
-            var otherRing = new Item();
-            otherRing.Name = "other ring";
-            otherRing.Magic.Bonus = 1;
-
-            equipment.Treasure.Items = new[] { ring, otherRing };
-
-            race.BaseRace = "baserace";
-            race.Metarace = "metarace";
-            racialArmorBonuses[race.BaseRace] = 1;
-            racialArmorBonuses[race.Metarace] = 1;
-
-            AssertArmorClass(12, 12, 10);
-        }
-
-        [Test]
-        public void NaturalArmorBonusesDoNotStackWithBaseRace()
-        {
-            var feat = new Feat();
-            feat.Name = "feat 1";
-            feats.Add(feat);
-
-            var feat2 = new Feat();
-            feat2.Name = "feat 2";
-            feats.Add(feat2);
-
-            featAdjustments["feat 1"] = 1;
-            featAdjustments["feat 2"] = 1;
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.NaturalArmor))
-                .Returns(new[] { "feat 1", "feat 2", "ring", "other ring" });
-
-            var ring = new Item();
-            ring.Name = "ring";
-            ring.Magic.Bonus = 1;
-
-            var otherRing = new Item();
-            otherRing.Name = "other ring";
-            otherRing.Magic.Bonus = 1;
-
-            equipment.Treasure.Items = new[] { ring, otherRing };
-
-            race.BaseRace = "baserace";
-            racialArmorBonuses[race.BaseRace] = 1;
-
-            AssertArmorClass(11, 11, 10);
-        }
-
-        [Test]
-        public void NaturalArmorBonusesDoNotStackWithMetarace()
-        {
-            var feat = new Feat();
-            feat.Name = "feat 1";
-            feats.Add(feat);
-
-            var feat2 = new Feat();
-            feat2.Name = "feat 2";
-            feats.Add(feat2);
-
-            featAdjustments["feat 1"] = 1;
-            featAdjustments["feat 2"] = 1;
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.NaturalArmor))
-                .Returns(new[] { "feat 1", "feat 2", "ring", "other ring" });
-
-            var ring = new Item();
-            ring.Name = "ring";
-            ring.Magic.Bonus = 1;
-
-            var otherRing = new Item();
-            otherRing.Name = "other ring";
-            otherRing.Magic.Bonus = 1;
-
-            equipment.Treasure.Items = new[] { ring, otherRing };
-
-            race.Metarace = "metarace";
-            racialArmorBonuses[race.Metarace] = 1;
-
-            AssertArmorClass(11, 11, 10);
         }
 
         [Test]
@@ -438,10 +295,9 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         {
             var feat = new Feat();
             feat.Name = "feat 1";
+            feat.Strength = 1;
             feats.Add(feat);
 
-            featAdjustments["feat 1"] = 1;
-            featAdjustments["feat 2"] = -1;
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.Dodge))
                 .Returns(new[] { "feat 1", "feat 2", "other feat" });
 
@@ -453,14 +309,14 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         {
             var feat = new Feat();
             feat.Name = "feat 1";
+            feat.Strength = 1;
             feats.Add(feat);
 
             var feat2 = new Feat();
             feat2.Name = "feat 2";
+            feat2.Strength = 1;
             feats.Add(feat2);
 
-            featAdjustments["feat 1"] = 1;
-            featAdjustments["feat 2"] = 1;
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.Dodge))
                 .Returns(new[] { "feat 1", "feat 2", "other feat" });
 
@@ -490,18 +346,17 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
 
             var feat = new Feat();
             feat.Name = "feat 1";
+            feat.Strength = 1;
             feats.Add(feat);
-
-            featAdjustments["feat 1"] = 1;
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.Deflection))
                 .Returns(new[] { "ring" });
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.Dodge))
                 .Returns(new[] { "feat 1" });
 
-            equipment.Armor.Name = "armor";
+            equipment.Armor = new Item { Name = "armor" };
             equipment.Armor.Magic.Bonus = 1;
-            equipment.OffHand.Name = "shield";
+            equipment.OffHand = new Item { Name = "shield" };
             equipment.OffHand.Magic.Bonus = 1;
             equipment.OffHand.ItemType = ItemTypeConstants.Armor;
             equipment.OffHand.Attributes = new[] { AttributeConstants.Shield };
@@ -513,12 +368,8 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             equipment.Treasure.Items = new[] { ring };
 
             race.Size = RaceConstants.Sizes.Small;
-            race.BaseRace = "baserace";
-            race.Metarace = "metarace";
-            racialArmorBonuses[race.BaseRace] = 1;
-            racialArmorBonuses[race.Metarace] = 1;
 
-            AssertArmorClass(18, 20, 14);
+            AssertArmorClass(16, 18, 14);
         }
     }
 }

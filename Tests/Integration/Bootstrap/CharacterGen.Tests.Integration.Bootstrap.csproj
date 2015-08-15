@@ -59,6 +59,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BootstrapAttribute.cs" />
     <Compile Include="BootstrapTests.cs" />
     <Compile Include="Modules\GeneratorsModuleTests.cs" />
     <Compile Include="Modules\SelectorsModuleTests.cs" />

@@ -358,7 +358,8 @@ namespace CharacterGen.Tests.Unit.Generators
         {
             ability.Skills.Add("no penalty", new Skill { ArmorCheckPenalty = false });
             ability.Skills.Add("penalty", new Skill { ArmorCheckPenalty = true });
-            equipment.Armor.Name = "armor name";
+
+            equipment.Armor = new TreasureGen.Common.Items.Item { Name = "armor" };
 
             var skillAdjustments = new Dictionary<String, Int32>();
             skillAdjustments.Add(equipment.Armor.Name, 5);
@@ -374,7 +375,8 @@ namespace CharacterGen.Tests.Unit.Generators
         public void SwimmingTakesDoubleArmorCheckPenalty()
         {
             ability.Skills.Add(SkillConstants.Swim, new Skill { ArmorCheckPenalty = true });
-            equipment.Armor.Name = "armor name";
+
+            equipment.Armor = new TreasureGen.Common.Items.Item { Name = "armor" };
 
             var skillAdjustments = new Dictionary<String, Int32>();
             skillAdjustments.Add(equipment.Armor.Name, 5);

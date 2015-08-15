@@ -58,6 +58,7 @@ namespace CharacterGen.Tables
             public static class Percentile
             {
                 public const String AlignmentGoodness = "AlignmentGoodness";
+                public const String AlignmentLawfulness = "AlignmentLawfulness";
                 public const String LeadershipMovement = "LeadershipMovement";
                 public const String Reputation = "Reputation";
                 public const String Traits = "Traits";

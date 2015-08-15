@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using Ninject;
-using CharacterGen.Common.Alignments;
+﻿using CharacterGen.Common.Alignments;
 using CharacterGen.Generators.Randomizers.Alignments;
+using Ninject;
 using NUnit.Framework;
+using System;
 
 namespace CharacterGen.Tests.Integration.Stress.Randomizers.Alignments
 {
@@ -12,14 +11,6 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Alignments
     {
         [Inject, Named(AlignmentRandomizerTypeConstants.Evil)]
         public override IAlignmentRandomizer AlignmentRandomizer { get; set; }
-
-        private IEnumerable<String> lawfulnesses;
-
-        [SetUp]
-        public void Setup()
-        {
-            lawfulnesses = AlignmentConstants.GetLawfulnesses();
-        }
 
         [TestCase("EvilAlignmentRandomizer")]
         public override void Stress(String stressSubject)
@@ -31,7 +22,9 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Alignments
         {
             var alignment = AlignmentRandomizer.Randomize();
             Assert.That(alignment.Goodness, Is.EqualTo(AlignmentConstants.Evil));
-            Assert.That(lawfulnesses, Contains.Item(alignment.Lawfulness));
+            Assert.That(alignment.Lawfulness, Is.EqualTo(AlignmentConstants.Lawful)
+                .Or.EqualTo(AlignmentConstants.Neutral)
+                .Or.EqualTo(AlignmentConstants.Chaotic));
         }
     }
 }

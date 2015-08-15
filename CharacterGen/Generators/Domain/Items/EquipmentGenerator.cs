@@ -4,6 +4,7 @@ using CharacterGen.Common.Items;
 using CharacterGen.Generators.Items;
 using CharacterGen.Selectors;
 using CharacterGen.Tables;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TreasureGen.Common.Items;
@@ -35,6 +36,21 @@ namespace CharacterGen.Generators.Domain.Items
 
             var baseWeaponTypes = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, equipment.PrimaryHand.Name);
 
+            if (baseWeaponTypes.Count() > 1)
+            {
+                Item ammunition;
+                var baseAmmunitionType = String.Empty;
+
+                do
+                {
+                    ammunition = weaponGenerator.GenerateFrom(feats, characterClass);
+                    baseAmmunitionType = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, ammunition.Name).First();
+                }
+                while (ammunition.Attributes.Contains(AttributeConstants.Ammunition) == false || baseWeaponTypes.Contains(baseAmmunitionType) == false);
+
+                equipment.Treasure.Items = equipment.Treasure.Items.Union(new[] { ammunition });
+            }
+
             if (equipment.PrimaryHand.Attributes.Contains(AttributeConstants.Ammunition))
             {
                 equipment.Treasure.Items = equipment.Treasure.Items.Union(new[] { equipment.PrimaryHand });
@@ -58,7 +74,12 @@ namespace CharacterGen.Generators.Domain.Items
 
             if (twoHandedFeats.Intersect(featNames).Any() && equipment.OffHand == null)
             {
-
+                do
+                {
+                    equipment.OffHand = weaponGenerator.GenerateFrom(feats, characterClass);
+                    baseWeaponTypes = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, equipment.OffHand.Name);
+                }
+                while (equipment.OffHand.Attributes.Contains(AttributeConstants.Ammunition) || twoHandedWeapons.Contains(baseWeaponTypes.First()));
             }
 
             equipment.Armor = armorGenerator.GenerateFrom(feats, characterClass);

@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using TreasureGen.Common.Items;
-using CharacterGen.Common.Abilities.Feats;
+﻿using CharacterGen.Common.Abilities.Feats;
 using CharacterGen.Common.Combats;
 using CharacterGen.Common.Items;
 using CharacterGen.Common.Races;
 using CharacterGen.Generators.Combats;
 using CharacterGen.Selectors;
 using CharacterGen.Tables;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using TreasureGen.Common.Items;
 
 namespace CharacterGen.Generators.Domain.Combats
 {
@@ -43,32 +43,25 @@ namespace CharacterGen.Generators.Domain.Combats
         {
             var armorBonus = GetArmorBonus(equipment.Armor);
             var shieldBonus = GetShieldBonus(equipment.OffHand);
-            var armorEnhancementBonus = equipment.Armor.Magic.Bonus;
-            var shieldEnhancementBonus = GetShieldEnhancementBonus(equipment.OffHand);
-            return armorBonus + armorEnhancementBonus + shieldBonus + shieldEnhancementBonus;
+            return armorBonus + shieldBonus;
         }
 
         private Int32 GetArmorBonus(Item armor)
         {
+            if (armor == null)
+                return 0;
+
             var armorBonuses = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.ArmorBonuses);
-            return armorBonuses[armor.Name];
+            return armorBonuses[armor.Name] + armor.Magic.Bonus;
         }
 
         private Int32 GetShieldBonus(Item offHand)
         {
-            if (offHand.ItemType != ItemTypeConstants.Armor || !offHand.Attributes.Contains(AttributeConstants.Shield))
+            if (offHand == null || offHand.ItemType != ItemTypeConstants.Armor || !offHand.Attributes.Contains(AttributeConstants.Shield))
                 return 0;
 
             var armorBonuses = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.ArmorBonuses);
-            return armorBonuses[offHand.Name];
-        }
-
-        private Int32 GetShieldEnhancementBonus(Item offHand)
-        {
-            if (offHand.ItemType != ItemTypeConstants.Armor || !offHand.Attributes.Contains(AttributeConstants.Shield))
-                return 0;
-
-            return offHand.Magic.Bonus;
+            return armorBonuses[offHand.Name] + offHand.Magic.Bonus;
         }
 
         private Int32 GetSizeModifier(Race race)
@@ -99,18 +92,12 @@ namespace CharacterGen.Generators.Domain.Combats
             var itemsWithNaturalArmorBonuses = items.Where(i => thingsThatGrantNaturalArmorBonuses.Contains(i.Name));
             var itemNaturalArmorBonuses = itemsWithNaturalArmorBonuses.Select(i => i.Magic.Bonus);
 
-            var featAdjustments = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.FeatArmorAdjustments);
-            var featsWithNaturalArmorBonuses = feats.Select(f => f.Name).Intersect(thingsThatGrantNaturalArmorBonuses);
-            var featNaturalArmorAdjustments = featAdjustments.Where(kvp => featsWithNaturalArmorBonuses.Contains(kvp.Key));
-            var featNaturalArmorBonuses = featNaturalArmorAdjustments.Select(kvp => kvp.Value);
+            var featsWithNaturalArmorBonuses = feats.Where(f => thingsThatGrantNaturalArmorBonuses.Contains(f.Name));
+            var featNaturalArmorBonuses = featsWithNaturalArmorBonuses.Select(f => f.Strength);
+            var featNaturalArmorBonus = featNaturalArmorBonuses.Sum();
 
-            var racialBonuses = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.RacialNaturalArmorBonuses);
-            var racialBonus = racialBonuses[race.BaseRace] + racialBonuses[race.Metarace];
-            var racialNaturalArmorBonuses = new[] { racialBonus };
-
-            var naturalArmorBonuses = featNaturalArmorBonuses.Union(itemNaturalArmorBonuses)
-                                                             .Union(racialNaturalArmorBonuses);
-            if (!naturalArmorBonuses.Any())
+            var naturalArmorBonuses = itemNaturalArmorBonuses.Union(new[] { featNaturalArmorBonus });
+            if (naturalArmorBonuses.Any() == false)
                 return 0;
 
             return naturalArmorBonuses.Max();
@@ -118,17 +105,11 @@ namespace CharacterGen.Generators.Domain.Combats
 
         private Int32 GetDodgeBonus(IEnumerable<Feat> feats)
         {
-            var featAdjustments = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.FeatArmorAdjustments);
             var dodgeBonuses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers,
                 GroupConstants.Dodge);
-            var dodgeFeats = feats.Select(f => f.Name).Intersect(dodgeBonuses);
+            var dodgeFeats = feats.Where(f => dodgeBonuses.Contains(f.Name));
 
-            var bonus = 0;
-
-            foreach (var feat in dodgeFeats)
-                bonus += featAdjustments[feat];
-
-            return bonus;
+            return dodgeFeats.Sum(f => f.Strength);
         }
     }
 }
