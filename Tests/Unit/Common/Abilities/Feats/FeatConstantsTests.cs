@@ -229,7 +229,6 @@ namespace CharacterGen.Tests.Unit.Common.Abilities.Feats
         [TestCase(FeatConstants.WeaponFamiliarity, "Weapon Familiarity")]
         [TestCase(FeatConstants.WeaponFinesse, "Weapon Finesse")]
         [TestCase(FeatConstants.WeaponFocus, "Weapon Focus")]
-        [TestCase(FeatConstants.WeaponProficiency, "Weapon Proficiency")]
         [TestCase(FeatConstants.WeaponSpecialization, "Weapon Specialization")]
         [TestCase(FeatConstants.WhirlwindAttack, "Whirlwind Attack")]
         [TestCase(FeatConstants.WholenessOfBody, "Wholeness of Body")]

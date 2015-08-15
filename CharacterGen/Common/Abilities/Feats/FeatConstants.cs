@@ -226,7 +226,6 @@ namespace CharacterGen.Common.Abilities.Feats
         public const String WeaponFamiliarity = "Weapon Familiarity";
         public const String WeaponFinesse = "Weapon Finesse";
         public const String WeaponFocus = "Weapon Focus";
-        public const String WeaponProficiency = "Weapon Proficiency";
         public const String WeaponSpecialization = "Weapon Specialization";
         public const String WhirlwindAttack = "Whirlwind Attack";
         public const String WholenessOfBody = "Wholeness of Body";

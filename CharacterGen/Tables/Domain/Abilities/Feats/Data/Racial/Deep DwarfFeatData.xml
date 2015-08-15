@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+    <object>
+        <name>Skill BonusAppraise</name>
+        <item>Skill Bonus</item>
+        <item></item>
+        <item>0</item>
+        <item>2</item>
+        <item>Appraise (Stone or metal items)</item>
+        <item>0</item>
+        <item></item>
+      <item>0</item>
+    </object>
+    <object>
+        <name>Attack BonusGoblin</name>
+        <item>Attack Bonus</item>
+        <item></item>
+        <item>0</item>
+        <item>1</item>
+        <item>Goblinoids</item>
+        <item>0</item>
+        <item></item>
+      <item>0</item>
+    </object>
+    <object>
+        <name>Attack BonusOrc</name>
+        <item>Attack Bonus</item>
+        <item></item>
+        <item>0</item>
+        <item>1</item>
+        <item>Orcs</item>
+        <item>0</item>
+        <item></item>
+      <item>0</item>
+    </object>
+    <object>
+        <name>Save BonusSpell</name>
+        <item>Save Bonus</item>
+        <item></item>
+        <item>0</item>
+        <item>3</item>
+        <item>Spells and spell-like effects</item>
+        <item>0</item>
+        <item></item>
+      <item>0</item>
+    </object>
+    <object>
+        <name>Save BonusPoison</name>
+        <item>Save Bonus</item>
+        <item></item>
+        <item>0</item>
+        <item>3</item>
+        <item>Poison</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+    </object>
+    <object>
+        <name>Dodge Bonus</name>
+        <item>Dodge Bonus</item>
+        <item></item>
+        <item>0</item>
+        <item>4</item>
+        <item>Giants</item>
+        <item>0</item>
+        <item></item>
+      <item>0</item>
+    </object>
+    <object>
+        <name>Stability</name>
+        <item>Stability</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+      <item>0</item>
+    </object>
+    <object>
+        <name>Weapon FamiliarityDwarven urgrosh</name>
+        <item>Weapon Familiarity</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item>Dwarven urgrosh</item>
+        <item>0</item>
+        <item></item>
+      <item>0</item>
+    </object>
+    <object>
+        <name>Weapon FamiliarityDwarven waraxe</name>
+        <item>Weapon Familiarity</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item>Dwarven waraxe</item>
+        <item>0</item>
+        <item></item>
+      <item>0</item>
+    </object>
+    <object>
+        <name>Stonecunning</name>
+        <item>Stonecunning</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+    </object>
+    <object>
+        <name>Darkvision</name>
+        <item>Darkvision</item>
+        <item></item>
+        <item>0</item>
+        <item>90</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+      <item>0</item>
+    </object>
+  <object>
+    <name>Light Sensitivity</name>
+    <item>Light Sensitivity</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+</items>

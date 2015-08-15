@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using CharacterGen.Common.Abilities;
+﻿using CharacterGen.Common.Abilities;
 using CharacterGen.Common.Abilities.Feats;
 using CharacterGen.Common.Abilities.Stats;
 using CharacterGen.Common.CharacterClasses;
@@ -12,6 +9,9 @@ using CharacterGen.Generators.Abilities.Feats;
 using CharacterGen.Generators.Randomizers.Stats;
 using CharacterGen.Selectors;
 using CharacterGen.Tables;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CharacterGen.Generators.Domain.Abilities
 {
@@ -51,7 +51,6 @@ namespace CharacterGen.Generators.Domain.Abilities
             foreach (var feat in featGrantingSkillBonuses)
             {
                 var skillsToReceiveBonus = GetSkillsToReceiveBonuses(feat);
-
                 var skillHasCircumstantialBonus = skillsToReceiveBonus.Intersect(allSkills).Any() == false;
 
                 if (skillHasCircumstantialBonus == false)

@@ -114,7 +114,6 @@
         <item>Spell Penetration</item>
         <item>Spirited Charge</item>
         <item>Spring Attack</item>
-        <item>Stability</item>
         <item>Stealthy</item>
         <item>Still Spell</item>
         <item>Stunning Fist</item>
@@ -908,6 +907,17 @@
         <name>Plant</name>
         <item>Turn</item>
     </object>
+  <object>
+    <name>Proficiency</name>
+    <item>Exotic Weapon Proficiency</item>
+    <item>Heavy Armor Proficiency</item>
+    <item>Light Armor Proficiency</item>
+    <item>Martial Weapon Proficiency</item>
+    <item>Medium Armor Proficiency</item>
+    <item>Shield Proficiency</item>
+    <item>Simple Weapon Proficiency</item>
+    <item>Tower Shield Proficiency</item>
+  </object>
     <object>
         <name>Protection</name>
         <item>Spell-Like Ability</item>
@@ -996,6 +1006,26 @@
         <item>Natural Weapon</item>
         <item>Immune to Effect</item>
     </object>
+  <object>
+    <name>Skill Bonus</name>
+    <item>Acrobatic</item>
+    <item>Agile</item>
+    <item>Alertness</item>
+    <item>Animal Affinity</item>
+    <item>Athletic</item>
+    <item>Deceitful</item>
+    <item>Deft Hands</item>
+    <item>Diligent</item>
+    <item>Investigator</item>
+    <item>Magical Aptitude</item>
+    <item>Negotiator</item>
+    <item>Skill Bonus</item>
+    <item>Nimble Fingers</item>
+    <item>Persuasive</item>
+    <item>Self-Sufficient</item>
+    <item>Skill Focus</item>
+    <item>Stealthy</item>
+  </object>
     <object>
         <name>Sorcerer</name>
         <item>Simple Weapon Proficiency</item>
@@ -1204,6 +1234,20 @@
         <item>Simple Weapon ProficiencyDagger</item>
         <item>Simple Weapon ProficiencyQuarterstaff</item>
     </object>
+  <object>
+    <name>WizardBonusFeats</name>
+    <item>Scribe Scroll</item>
+    <item>Enlarge Spell</item>
+    <item>Spell Mastery</item>
+    <item>Extend Spell</item>
+    <item>Empower Spell</item>
+    <item>Heighten Spell</item>
+    <item>Maximize Spell</item>
+    <item>Silent Spell</item>
+    <item>Still Spell</item>
+    <item>Widen Spell</item>
+    <item>Quicken Spell</item>
+  </object>
     <object>
         <name>Wood Elf</name>
         <item>Skill BonusSearch</item>
