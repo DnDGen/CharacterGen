@@ -48,7 +48,7 @@ namespace CharacterGen.Tests.Unit.Generators
         private Mock<IRandomizerVerifier> mockRandomizerVerifier;
         private Mock<IPercentileSelector> mockPercentileSelector;
         private Mock<ILeadershipSelector> mockLeadershipSelector;
-        private Mock<ITreasureGenerator> mockTreasureGenerator;
+        private Mock<IEquipmentGenerator> mockTreasureGenerator;
         private Mock<IMagicGenerator> mockMagicGenerator;
         private Mock<ISetLevelRandomizer> mockSetLevelRandomizer;
         private Mock<ISetAlignmentRandomizer> mockSetAlignmentRandomizer;
@@ -155,7 +155,7 @@ namespace CharacterGen.Tests.Unit.Generators
             mockAlignmentGenerator = new Mock<IAlignmentGenerator>();
             mockAbilitiesGenerator = new Mock<IAbilitiesGenerator>();
             mockCombatGenerator = new Mock<ICombatGenerator>();
-            mockTreasureGenerator = new Mock<ITreasureGenerator>();
+            mockTreasureGenerator = new Mock<IEquipmentGenerator>();
             mockCharacterClassGenerator = new Mock<ICharacterClassGenerator>();
             mockRaceGenerator = new Mock<IRaceGenerator>();
             mockMagicGenerator = new Mock<IMagicGenerator>();

@@ -34,7 +34,7 @@ namespace CharacterGen.Generators.Domain
         private IPercentileSelector percentileSelector;
         private IAbilitiesGenerator abilitiesGenerator;
         private ICombatGenerator combatGenerator;
-        private ITreasureGenerator TreasureGenerator;
+        private IEquipmentGenerator TreasureGenerator;
         private ISetAlignmentRandomizer setAlignmentRandomizer;
         private ISetLevelRandomizer setLevelRandomizer;
         private IAlignmentRandomizer anyAlignmentRandomizer;
@@ -49,7 +49,7 @@ namespace CharacterGen.Generators.Domain
 
         public CharacterGenerator(IAlignmentGenerator alignmentGenerator, ICharacterClassGenerator characterClassGenerator, IRaceGenerator raceGenerator,
             IAdjustmentsSelector adjustmentsSelector, IRandomizerVerifier randomizerVerifier, IPercentileSelector percentileSelector,
-            IAbilitiesGenerator abilitiesGenerator, ICombatGenerator combatGenerator, ITreasureGenerator TreasureGenerator,
+            IAbilitiesGenerator abilitiesGenerator, ICombatGenerator combatGenerator, IEquipmentGenerator TreasureGenerator,
             ISetAlignmentRandomizer setAlignmentRandomizer, ISetLevelRandomizer setLevelRandomizer, IAlignmentRandomizer anyAlignmentRandomizer,
             IClassNameRandomizer anyClassNameRandomizer, IBaseRaceRandomizer anyBaseRaceRandomizer, IMetaraceRandomizer anyMetaraceRandomizer,
             IStatsRandomizer rawStatsRandomizer, IBooleanPercentileSelector booleanPercentileSelector, ILeadershipSelector leadershipSelector,

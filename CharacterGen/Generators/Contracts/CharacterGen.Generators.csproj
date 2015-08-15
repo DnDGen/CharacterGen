@@ -57,7 +57,7 @@
     <Compile Include="Combats\ICombatGenerator.cs" />
     <Compile Include="Combats\ISavingThrowsGenerator.cs" />
     <Compile Include="IAlignmentGenerator.cs" />
-    <Compile Include="Items\IArmorGenerator.cs" />
+    <Compile Include="Items\GearGenerator.cs" />
     <Compile Include="ICharacterClassGenerator.cs" />
     <Compile Include="ICharacterGenerator.cs" />
     <Compile Include="Abilities\Feats\IFeatsGenerator.cs" />

@@ -39,7 +39,7 @@ namespace CharacterGen.Bootstrap.Modules
             Bind<IStatsGenerator>().To<StatsGenerator>();
             Bind<IAbilitiesGenerator>().To<AbilitiesGenerator>();
             Bind<ICombatGenerator>().To<CombatGenerator>();
-            Bind<ITreasureGenerator>().To<TreasureGenerator>();
+            Bind<IEquipmentGenerator>().To<EquipmentGenerator>();
             Bind<ISkillsGenerator>().To<SkillsGenerator>();
             Bind<IFeatsGenerator>().To<FeatsGenerator>();
             Bind<IArmorClassGenerator>().To<ArmorClassGenerator>();

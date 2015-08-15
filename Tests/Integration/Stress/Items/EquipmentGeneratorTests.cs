@@ -1,13 +1,13 @@
-﻿using System;
-using System.Linq;
-using TreasureGen.Common.Items;
-using Ninject;
-using CharacterGen.Common.Items;
+﻿using CharacterGen.Common.Items;
 using CharacterGen.Generators.Abilities;
 using CharacterGen.Generators.Combats;
 using CharacterGen.Generators.Items;
 using CharacterGen.Generators.Randomizers.Stats;
+using Ninject;
 using NUnit.Framework;
+using System;
+using System.Linq;
+using TreasureGen.Common.Items;
 
 namespace CharacterGen.Tests.Integration.Stress.Items
 {
@@ -19,7 +19,7 @@ namespace CharacterGen.Tests.Integration.Stress.Items
         [Inject, Named(StatsRandomizerTypeConstants.Raw)]
         public IStatsRandomizer StatsRandomizer { get; set; }
         [Inject]
-        public ITreasureGenerator TreasureGenerator { get; set; }
+        public IEquipmentGenerator TreasureGenerator { get; set; }
         [Inject]
         public ICombatGenerator CombatGenerator { get; set; }
 
@@ -32,14 +32,9 @@ namespace CharacterGen.Tests.Integration.Stress.Items
         protected override void MakeAssertions()
         {
             var equipment = GetEquipment();
-            Assert.That(equipment.Armor, Is.Not.Null);
-            Assert.That(equipment.OffHand, Is.Not.Null);
             Assert.That(equipment.Treasure, Is.Not.Null);
             Assert.That(equipment.PrimaryHand.Name, Is.Not.Empty);
             Assert.That(equipment.PrimaryHand.ItemType, Is.EqualTo(ItemTypeConstants.Weapon));
-
-            if (equipment.PrimaryHand.Attributes.Contains(WeaponAttributeConstants.TwoHanded))
-                Assert.That(equipment.PrimaryHand, Is.EqualTo(equipment.OffHand));
         }
 
         private Equipment GetEquipment()
@@ -92,8 +87,8 @@ namespace CharacterGen.Tests.Integration.Stress.Items
             var equipment = new Equipment();
 
             do equipment = GetEquipment();
-            while (TestShouldKeepRunning() && (equipment.Treasure.Items.Any() || equipment.Treasure.Goods.Any()
-                || equipment.Treasure.Coin.Quantity > 0));
+            while (TestShouldKeepRunning() &&
+                (equipment.Treasure.Items.Any() || equipment.Treasure.Goods.Any() || equipment.Treasure.Coin.Quantity > 0));
 
             Assert.That(equipment.Treasure.Items, Is.Empty);
             Assert.That(equipment.Treasure.Goods, Is.Empty);
@@ -106,7 +101,7 @@ namespace CharacterGen.Tests.Integration.Stress.Items
             var equipment = new Equipment();
 
             do equipment = GetEquipment();
-            while (TestShouldKeepRunning() && (String.IsNullOrEmpty(equipment.OffHand.Name) || equipment.OffHand == equipment.PrimaryHand));
+            while (TestShouldKeepRunning() && (equipment.OffHand == null || equipment.OffHand == equipment.PrimaryHand));
 
             Assert.That(equipment.OffHand.Name, Is.Not.Empty);
             Assert.That(equipment.OffHand, Is.Not.EqualTo(equipment.PrimaryHand));
@@ -120,12 +115,11 @@ namespace CharacterGen.Tests.Integration.Stress.Items
             var equipment = new Equipment();
 
             do equipment = GetEquipment();
-            while (TestShouldKeepRunning() && (String.IsNullOrEmpty(equipment.OffHand.Name) || equipment.OffHand == equipment.PrimaryHand));
+            while (TestShouldKeepRunning() && (equipment.OffHand == null || equipment.OffHand == equipment.PrimaryHand));
 
             Assert.That(equipment.OffHand.Name, Is.Not.Empty);
             Assert.That(equipment.OffHand, Is.Not.EqualTo(equipment.PrimaryHand));
             Assert.That(equipment.OffHand.ItemType, Is.EqualTo(ItemTypeConstants.Weapon));
-            Assert.That(equipment.OffHand.Attributes, Is.Not.Contains(WeaponAttributeConstants.TwoHanded));
         }
 
         [Test]
@@ -137,7 +131,7 @@ namespace CharacterGen.Tests.Integration.Stress.Items
             while (TestShouldKeepRunning() && equipment.OffHand != equipment.PrimaryHand);
 
             Assert.That(equipment.OffHand, Is.EqualTo(equipment.PrimaryHand));
-            Assert.That(equipment.OffHand.Attributes, Contains.Item(WeaponAttributeConstants.TwoHanded));
+            Assert.That(equipment.OffHand.ItemType, Is.EqualTo(ItemTypeConstants.Weapon));
         }
 
         [Test]
@@ -146,9 +140,9 @@ namespace CharacterGen.Tests.Integration.Stress.Items
             var equipment = new Equipment();
 
             do equipment = GetEquipment();
-            while (TestShouldKeepRunning() && !String.IsNullOrEmpty(equipment.OffHand.Name));
+            while (TestShouldKeepRunning() && equipment.OffHand != null);
 
-            Assert.That(equipment.OffHand.Name, Is.Empty);
+            Assert.That(equipment.OffHand, Is.Null);
         }
 
         [Test]
@@ -157,10 +151,11 @@ namespace CharacterGen.Tests.Integration.Stress.Items
             var equipment = new Equipment();
 
             do equipment = GetEquipment();
-            while (TestShouldKeepRunning() && String.IsNullOrEmpty(equipment.Armor.Name));
+            while (TestShouldKeepRunning() && equipment.Armor == null);
 
             Assert.That(equipment.Armor.ItemType, Is.EqualTo(ItemTypeConstants.Armor));
             Assert.That(equipment.Armor.Name, Is.Not.Empty);
+            Assert.That(equipment.Armor.Attributes, Is.Not.Contains(AttributeConstants.Shield));
         }
 
         [Test]
@@ -169,9 +164,9 @@ namespace CharacterGen.Tests.Integration.Stress.Items
             var equipment = new Equipment();
 
             do equipment = GetEquipment();
-            while (TestShouldKeepRunning() && !String.IsNullOrEmpty(equipment.Armor.Name));
+            while (TestShouldKeepRunning() && equipment.Armor != null);
 
-            Assert.That(equipment.Armor.Name, Is.Empty);
+            Assert.That(equipment.Armor, Is.Null);
         }
     }
 }

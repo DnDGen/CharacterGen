@@ -24,6 +24,11 @@
         <name>Animal</name>
         <item>Knowledge (Nature)</item>
     </object>
+  <object>
+    <name>Animal Affinity</name>
+    <item>Handle Animal</item>
+    <item>Ride</item>
+  </object>
     <object>
         <name>Chaos</name>
     </object>
@@ -33,6 +38,11 @@
     <object>
         <name>Death</name>
     </object>
+  <object>
+    <name>Deceitful</name>
+    <item>Disguise</item>
+    <item>Forgery</item>
+  </object>
     <object>
         <name>Destruction</name>
     </object>
@@ -72,9 +82,19 @@
     <object>
         <name>Magic</name>
     </object>
+  <object>
+    <name>Magical Aptitude</name>
+    <item>Spellcraft</item>
+    <item>Use Magic Device</item>
+  </object>
     <object>
         <name>Necromancy</name>
     </object>
+  <object>
+    <name>Persuasive</name>
+    <item>Bluff</item>
+    <item>Intimidate</item>
+  </object>
     <object>
         <name>Plant</name>
         <item>Knowledge (Nature)</item>
@@ -82,6 +102,11 @@
     <object>
         <name>Protection</name>
     </object>
+  <object>
+    <name>Self-Sufficient</name>
+    <item>Heal</item>
+    <item>Survival</item>
+  </object>
     <object>
         <name>Strength</name>
     </object>

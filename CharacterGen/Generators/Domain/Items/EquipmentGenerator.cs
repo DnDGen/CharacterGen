@@ -7,7 +7,7 @@ using CharacterGen.Generators.Items;
 
 namespace CharacterGen.Generators.Domain.Items
 {
-    public class TreasureGenerator : ITreasureGenerator
+    public class EquipmentGenerator : IEquipmentGenerator
     {
         public Equipment GenerateWith(IEnumerable<Feat> feats, CharacterClass characterClass)
         {

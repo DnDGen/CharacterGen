@@ -1,6 +1,6 @@
-﻿using System;
-using CharacterGen.Tables;
+﻿using CharacterGen.Tables;
 using NUnit.Framework;
+using System;
 
 namespace CharacterGen.Tests.Unit.Tables
 {
@@ -27,15 +27,16 @@ namespace CharacterGen.Tests.Unit.Tables
         [TestCase(GroupConstants.ManualCrossbows, "Manual Crossbows")]
         [TestCase(GroupConstants.Monsters, "Monsters")]
         [TestCase(GroupConstants.NaturalArmor, "NaturalArmor")]
+        [TestCase(GroupConstants.NeedsAmmunition, "Needs Ammunition")]
         [TestCase(GroupConstants.Proficiency, "Proficiency")]
         [TestCase(GroupConstants.SchoolsOfMagic, "Schools of Magic")]
         [TestCase(GroupConstants.Size, "Size")]
-        [TestCase(GroupConstants.SkillBonus, "SkillBonus")]
         [TestCase(GroupConstants.Skills, "Skills")]
         [TestCase(GroupConstants.Spellcasters, "Spellcasters")]
         [TestCase(GroupConstants.Standard, "Standard")]
         [TestCase(GroupConstants.Stealth, "Stealth")]
         [TestCase(GroupConstants.TakenMultipleTimes, "TakenMultipleTimes")]
+        [TestCase(GroupConstants.TwoHanded, "Two-Handed Weapons")]
         [TestCase(GroupConstants.Warriors, "Warriors")]
         [TestCase(GroupConstants.Weapons, "Weapons")]
         [TestCase(GroupConstants.WeaponsWithUnarmedAndGrapple, "Weapons with unarmed and grapple")]

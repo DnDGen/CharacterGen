@@ -42,6 +42,7 @@ namespace CharacterGen.Tables
                 public const String EquivalentFeats = "EquivalentFeats";
                 public const String FeatFoci = "FeatFoci";
                 public const String FeatGroups = "FeatGroups";
+                public const String ItemGroups = "ItemGroups";
                 public const String MetaraceGroups = "MetaraceGroups";
                 public const String Names = "Names";
                 public const String ProhibitedFields = "ProhibitedFields";

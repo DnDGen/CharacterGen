@@ -24,15 +24,16 @@ namespace CharacterGen.Tables
         public const String ManualCrossbows = "Manual Crossbows";
         public const String Monsters = "Monsters";
         public const String NaturalArmor = "NaturalArmor";
+        public const String NeedsAmmunition = "Needs Ammunition";
         public const String Proficiency = "Proficiency";
         public const String SchoolsOfMagic = "Schools of Magic";
         public const String Size = "Size";
-        public const String SkillBonus = "SkillBonus";
         public const String Skills = "Skills";
         public const String Spellcasters = "Spellcasters";
         public const String Standard = "Standard";
         public const String Stealth = "Stealth";
         public const String TakenMultipleTimes = "TakenMultipleTimes";
+        public const String TwoHanded = "Two-Handed";
         public const String Warriors = "Warriors";
         public const String Weapons = "Weapons";
         public const String WeaponsWithUnarmedAndGrapple = "Weapons with unarmed and grapple";

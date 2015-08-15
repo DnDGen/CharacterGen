@@ -1,17 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using TreasureGen.Common.Items;
-using Ninject;
-using CharacterGen.Common;
+﻿using CharacterGen.Common;
 using CharacterGen.Common.Abilities.Stats;
 using CharacterGen.Common.Alignments;
 using CharacterGen.Common.CharacterClasses;
-using CharacterGen.Common.Items;
 using CharacterGen.Generators;
 using CharacterGen.Generators.Randomizers.CharacterClasses;
 using CharacterGen.Generators.Randomizers.Stats;
+using Ninject;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using TreasureGen.Common.Items;
 
 namespace CharacterGen.Tests.Integration.Stress
 {
@@ -92,13 +91,6 @@ namespace CharacterGen.Tests.Integration.Stress
             Assert.That(character.Equipment.Treasure, Is.Not.Null);
             Assert.That(character.Equipment.OffHand, Is.Not.Null);
 
-            if (character.Equipment.OffHand.ItemType == ItemTypeConstants.Armor)
-                Assert.That(character.Equipment.OffHand.Attributes, Contains.Item(AttributeConstants.Shield));
-            else if (character.Equipment.OffHand.ItemType == ItemTypeConstants.Weapon && character.Equipment.OffHand != character.Equipment.PrimaryHand)
-                Assert.That(character.Equipment.OffHand.Attributes, Is.Not.Contains(WeaponAttributeConstants.TwoHanded));
-            else if (character.Equipment.OffHand != character.Equipment.PrimaryHand)
-                Assert.That(character.Equipment.OffHand.Name, Is.Empty);
-
             Assert.That(character.Magic.Familiar, Is.Not.Null);
 
             foreach (var level in character.Magic.Spells.Keys)
@@ -121,8 +113,9 @@ namespace CharacterGen.Tests.Integration.Stress
         {
             var character = new Character();
 
-            do character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
-                MetaraceRandomizer, StatsRandomizer);
+            do
+                character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
+                 MetaraceRandomizer, StatsRandomizer);
             while (TestShouldKeepRunning() && String.IsNullOrEmpty(character.Magic.Familiar.Animal));
 
             Assert.That(character.Magic.Familiar.Animal, Is.Not.Empty);
@@ -133,8 +126,9 @@ namespace CharacterGen.Tests.Integration.Stress
         {
             var character = new Character();
 
-            do character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
-                MetaraceRandomizer, StatsRandomizer);
+            do
+                character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
+                 MetaraceRandomizer, StatsRandomizer);
             while (TestShouldKeepRunning() && !String.IsNullOrEmpty(character.Magic.Familiar.Animal));
 
             Assert.That(character.Magic.Familiar.Animal, Is.Empty);
@@ -145,8 +139,9 @@ namespace CharacterGen.Tests.Integration.Stress
         {
             var character = new Character();
 
-            do character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
-                MetaraceRandomizer, StatsRandomizer);
+            do
+                character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
+                 MetaraceRandomizer, StatsRandomizer);
             while (TestShouldKeepRunning() && String.IsNullOrEmpty(character.InterestingTrait));
 
             Assert.That(character.InterestingTrait, Is.Not.Empty);
@@ -157,8 +152,9 @@ namespace CharacterGen.Tests.Integration.Stress
         {
             var character = new Character();
 
-            do character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
-                MetaraceRandomizer, StatsRandomizer);
+            do
+                character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
+                 MetaraceRandomizer, StatsRandomizer);
             while (TestShouldKeepRunning() && !String.IsNullOrEmpty(character.InterestingTrait));
 
             Assert.That(character.InterestingTrait, Is.Empty);
@@ -169,8 +165,9 @@ namespace CharacterGen.Tests.Integration.Stress
         {
             var character = new Character();
 
-            do character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
-                MetaraceRandomizer, StatsRandomizer);
+            do
+                character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
+                 MetaraceRandomizer, StatsRandomizer);
             while (TestShouldKeepRunning() && !character.Magic.Spells.Any());
 
             Assert.That(character.Magic.Spells, Is.Not.Empty);
@@ -181,8 +178,9 @@ namespace CharacterGen.Tests.Integration.Stress
         {
             var character = new Character();
 
-            do character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
-                MetaraceRandomizer, StatsRandomizer);
+            do
+                character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
+                 MetaraceRandomizer, StatsRandomizer);
             while (TestShouldKeepRunning() && character.Magic.Spells.Any());
 
             Assert.That(character.Magic.Spells, Is.Empty);
@@ -194,8 +192,9 @@ namespace CharacterGen.Tests.Integration.Stress
             SetLevelRandomizer.SetLevel = 20;
             var character = new Character();
 
-            do character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, SetLevelRandomizer, BaseRaceRandomizer,
-                MetaraceRandomizer, StatsRandomizer);
+            do
+                character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, SetLevelRandomizer, BaseRaceRandomizer,
+                 MetaraceRandomizer, StatsRandomizer);
             while (TestShouldKeepRunning() && character.Leadership.Score == 0);
 
             Assert.That(character.Leadership.Score, Is.Positive);
@@ -207,8 +206,9 @@ namespace CharacterGen.Tests.Integration.Stress
             SetLevelRandomizer.SetLevel = 20;
             var character = new Character();
 
-            do character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, SetLevelRandomizer, BaseRaceRandomizer,
-                MetaraceRandomizer, StatsRandomizer);
+            do
+                character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, SetLevelRandomizer, BaseRaceRandomizer,
+                 MetaraceRandomizer, StatsRandomizer);
             while (TestShouldKeepRunning() && character.Leadership.Score > 0);
 
             Assert.That(character.Leadership.Score, Is.EqualTo(0));

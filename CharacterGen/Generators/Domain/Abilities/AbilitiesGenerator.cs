@@ -42,7 +42,7 @@ namespace CharacterGen.Generators.Domain.Abilities
             ability.Skills = skillsGenerator.GenerateWith(characterClass, race, ability.Stats);
             ability.Feats = featsGenerator.GenerateWith(characterClass, race, ability.Stats, ability.Skills, baseAttack);
 
-            var allFeatGrantingSkillBonuses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.SkillBonus);
+            var allFeatGrantingSkillBonuses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus);
             var featIds = ability.Feats.Select(f => f.Name);
             var featIdsGrantingSkillBonuses = allFeatGrantingSkillBonuses.Intersect(featIds);
             var featGrantingSkillBonuses = ability.Feats.Where(f => featIdsGrantingSkillBonuses.Contains(f.Name));

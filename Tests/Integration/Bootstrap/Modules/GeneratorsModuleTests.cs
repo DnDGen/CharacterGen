@@ -511,7 +511,7 @@ namespace CharacterGen.Tests.Integration.Bootstrap.Modules
         [Test]
         public void TreasureGeneratorIsNotGeneratedAsSingleton()
         {
-            AssertNotSingleton<ITreasureGenerator>();
+            AssertNotSingleton<IEquipmentGenerator>();
         }
 
         [Test]

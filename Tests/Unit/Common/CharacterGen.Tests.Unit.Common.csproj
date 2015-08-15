@@ -72,7 +72,6 @@
     <Compile Include="Items\ProficiencyConstantsTests.cs" />
     <Compile Include="LeadershipTests.cs" />
     <Compile Include="Magics\FamiliarTests.cs" />
-    <Compile Include="Items\WeaponAttributeConstantsTests.cs" />
     <Compile Include="Abilities\LanguageConstantsTests.cs" />
     <Compile Include="Magics\MagicTests.cs" />
     <Compile Include="Magics\SpellConstantsTests.cs" />

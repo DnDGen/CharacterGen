@@ -5,7 +5,7 @@ using CharacterGen.Common.Items;
 
 namespace CharacterGen.Generators.Items
 {
-    public interface ITreasureGenerator
+    public interface IEquipmentGenerator
     {
         Equipment GenerateWith(IEnumerable<Feat> feats, CharacterClass characterClass);
     }

@@ -14,7 +14,7 @@ namespace CharacterGen.Tests.Integration.Stress.Combats
         [Inject]
         public IArmorClassGenerator ArmorClassGenerator { get; set; }
         [Inject]
-        public ITreasureGenerator TreasureGenerator { get; set; }
+        public IEquipmentGenerator TreasureGenerator { get; set; }
         [Inject]
         public IAbilitiesGenerator AbilitiesGenerator { get; set; }
         [Inject, Named(StatsRandomizerTypeConstants.Raw)]

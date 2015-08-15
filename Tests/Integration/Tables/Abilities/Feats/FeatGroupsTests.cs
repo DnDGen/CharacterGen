@@ -198,7 +198,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.Persuasive,
             FeatConstants.SelfSufficient,
             FeatConstants.SkillFocus,
-            FeatConstants.Stealthy)]
+            FeatConstants.Stealthy,
+            FeatConstants.NatureSense)]
         [TestCase(GroupConstants.WizardBonusFeats,
             FeatConstants.SpellMastery,
             FeatConstants.ScribeScroll,

@@ -1,6 +1,6 @@
-﻿using System;
-using CharacterGen.Tables;
+﻿using CharacterGen.Tables;
 using NUnit.Framework;
+using System;
 
 namespace CharacterGen.Tests.Unit.Tables
 {
@@ -37,6 +37,7 @@ namespace CharacterGen.Tests.Unit.Tables
         [TestCase(TableNameConstants.Set.Collection.EquivalentFeats, "EquivalentFeats")]
         [TestCase(TableNameConstants.Set.Collection.FeatGroups, "FeatGroups")]
         [TestCase(TableNameConstants.Set.Collection.FeatFoci, "FeatFoci")]
+        [TestCase(TableNameConstants.Set.Collection.ItemGroups, "ItemGroups")]
         [TestCase(TableNameConstants.Set.Collection.MetaraceGroups, "MetaraceGroups")]
         [TestCase(TableNameConstants.Set.Collection.Names, "Names")]
         [TestCase(TableNameConstants.Set.Collection.ProhibitedFields, "ProhibitedFields")]

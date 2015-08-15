@@ -75,7 +75,6 @@
     <Compile Include="Leadership.cs" />
     <Compile Include="Magics\Familiar.cs" />
     <Compile Include="Items\Equipment.cs" />
-    <Compile Include="Items\WeaponAttributeConstants.cs" />
     <Compile Include="Magics\Magic.cs" />
     <Compile Include="Magics\SpellConstants.cs" />
     <Compile Include="Races\Race.cs" />

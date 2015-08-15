@@ -1,8 +1,9 @@
-﻿using System;
+﻿using CharacterGen.Common.Abilities.Feats;
 using CharacterGen.Common.Abilities.Skills;
 using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Tables;
 using NUnit.Framework;
+using System;
 
 namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
 {
@@ -17,7 +18,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
         [Test]
         public override void CollectionNames()
         {
-            var names = new[] 
+            var names = new[]
             {
                 CharacterClassConstants.Domains.Air,
                 CharacterClassConstants.Domains.Animal,
@@ -49,7 +50,12 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
                 CharacterClassConstants.Schools.Necromancy,
                 CharacterClassConstants.Schools.Transmutation,
                 CharacterClassConstants.Domains.Knowledge,
-                GroupConstants.Skills
+                GroupConstants.Skills,
+                FeatConstants.AnimalAffinity,
+                FeatConstants.Deceitful,
+                FeatConstants.MagicalAptitude,
+                FeatConstants.Persuasive,
+                FeatConstants.SelfSufficient
             };
 
             AssertCollectionNames(names);
@@ -90,6 +96,21 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
         [TestCase(CharacterClassConstants.Schools.Illusion)]
         [TestCase(CharacterClassConstants.Schools.Necromancy)]
         [TestCase(CharacterClassConstants.Schools.Transmutation)]
+        [TestCase(FeatConstants.AnimalAffinity,
+            SkillConstants.HandleAnimal,
+            SkillConstants.Ride)]
+        [TestCase(FeatConstants.Deceitful,
+            SkillConstants.Disguise,
+            SkillConstants.Forgery)]
+        [TestCase(FeatConstants.MagicalAptitude,
+            SkillConstants.Spellcraft,
+            SkillConstants.UseMagicDevice)]
+        [TestCase(FeatConstants.Persuasive,
+            SkillConstants.Bluff,
+            SkillConstants.Intimidate)]
+        [TestCase(FeatConstants.SelfSufficient,
+            SkillConstants.Heal,
+            SkillConstants.Survival)]
         public override void DistinctCollection(String name, params String[] collection)
         {
             base.DistinctCollection(name, collection);
@@ -98,7 +119,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
         [Test]
         public void AllSkills()
         {
-            var skills = new[] 
+            var skills = new[]
             {
                 SkillConstants.Appraise,
                 SkillConstants.Balance,
@@ -150,7 +171,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
         [Test]
         public void KnowledgeSkills()
         {
-            var skills = new[] 
+            var skills = new[]
             {
                 SkillConstants.KnowledgeArcana,
                 SkillConstants.KnowledgeArchitectureAndEngineering,
@@ -170,7 +191,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
         [Test]
         public void KnowledgeDomainSkills()
         {
-            var skills = new[] 
+            var skills = new[]
             {
                 SkillConstants.KnowledgeArcana,
                 SkillConstants.KnowledgeArchitectureAndEngineering,

@@ -19,7 +19,7 @@ namespace CharacterGen.Tests.Integration.Stress.Combats
         [Inject, Named(StatsRandomizerTypeConstants.Raw)]
         public IStatsRandomizer StatsRandomizer { get; set; }
         [Inject]
-        public ITreasureGenerator TreasureGenerator { get; set; }
+        public IEquipmentGenerator TreasureGenerator { get; set; }
 
         [TestCase("CombatGenerator")]
         public override void Stress(String stressSubject)

@@ -25,7 +25,7 @@ namespace CharacterGen.Bootstrap.Factories
             var percentileSelector = kernel.Get<IPercentileSelector>();
             var abilitiesGenerator = kernel.Get<IAbilitiesGenerator>();
             var combatGenerator = kernel.Get<ICombatGenerator>();
-            var TreasureGenerator = kernel.Get<ITreasureGenerator>();
+            var TreasureGenerator = kernel.Get<IEquipmentGenerator>();
             var setLevelRandomizer = kernel.Get<ISetLevelRandomizer>();
             var setAlignmentRandomizer = kernel.Get<ISetAlignmentRandomizer>();
             var anyAlignmentRandomizer = kernel.Get<IAlignmentRandomizer>(AlignmentRandomizerTypeConstants.Any);
