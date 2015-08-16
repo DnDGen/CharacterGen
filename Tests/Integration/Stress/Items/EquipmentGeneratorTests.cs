@@ -19,11 +19,11 @@ namespace CharacterGen.Tests.Integration.Stress.Items
         [Inject, Named(StatsRandomizerTypeConstants.Raw)]
         public IStatsRandomizer StatsRandomizer { get; set; }
         [Inject]
-        public IEquipmentGenerator TreasureGenerator { get; set; }
+        public IEquipmentGenerator EquipmentGenerator { get; set; }
         [Inject]
         public ICombatGenerator CombatGenerator { get; set; }
 
-        [TestCase("TreasureGenerator")]
+        [TestCase("EquipmentGenerator")]
         public override void Stress(String stressSubject)
         {
             Stress();
@@ -45,7 +45,7 @@ namespace CharacterGen.Tests.Integration.Stress.Items
             var baseAttack = CombatGenerator.GenerateBaseAttackWith(characterClass, race);
             var ability = AbilitiesGenerator.GenerateWith(characterClass, race, StatsRandomizer, baseAttack);
 
-            return TreasureGenerator.GenerateWith(ability.Feats, characterClass);
+            return EquipmentGenerator.GenerateWith(ability.Feats, characterClass);
         }
 
         [Test]
