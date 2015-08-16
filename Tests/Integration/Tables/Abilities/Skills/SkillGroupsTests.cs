@@ -30,6 +30,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
                 CharacterClassConstants.Domains.Fire,
                 CharacterClassConstants.Domains.Good,
                 CharacterClassConstants.Domains.Healing,
+                CharacterClassConstants.Domains.Knowledge,
                 CharacterClassConstants.Domains.Law,
                 CharacterClassConstants.Domains.Luck,
                 CharacterClassConstants.Domains.Magic,
@@ -49,14 +50,17 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
                 CharacterClassConstants.Schools.Illusion,
                 CharacterClassConstants.Schools.Necromancy,
                 CharacterClassConstants.Schools.Transmutation,
-                CharacterClassConstants.Domains.Knowledge,
                 GroupConstants.Skills,
+                FeatConstants.Acrobatic,
+                FeatConstants.Agile,
                 FeatConstants.AnimalAffinity,
                 FeatConstants.Athletic,
                 FeatConstants.Deceitful,
                 FeatConstants.MagicalAptitude,
+                FeatConstants.Negotiator,
                 FeatConstants.Persuasive,
-                FeatConstants.SelfSufficient
+                FeatConstants.SelfSufficient,
+                FeatConstants.Stealthy
             };
 
             AssertCollectionNames(names);
@@ -97,6 +101,12 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
         [TestCase(CharacterClassConstants.Schools.Illusion)]
         [TestCase(CharacterClassConstants.Schools.Necromancy)]
         [TestCase(CharacterClassConstants.Schools.Transmutation)]
+        [TestCase(FeatConstants.Acrobatic,
+            SkillConstants.Jump,
+            SkillConstants.Tumble)]
+        [TestCase(FeatConstants.Agile,
+            SkillConstants.Balance,
+            SkillConstants.EscapeArtist)]
         [TestCase(FeatConstants.AnimalAffinity,
             SkillConstants.HandleAnimal,
             SkillConstants.Ride)]
@@ -109,12 +119,18 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
         [TestCase(FeatConstants.MagicalAptitude,
             SkillConstants.Spellcraft,
             SkillConstants.UseMagicDevice)]
+        [TestCase(FeatConstants.Negotiator,
+            SkillConstants.Diplomacy,
+            SkillConstants.SenseMotive)]
         [TestCase(FeatConstants.Persuasive,
             SkillConstants.Bluff,
             SkillConstants.Intimidate)]
         [TestCase(FeatConstants.SelfSufficient,
             SkillConstants.Heal,
             SkillConstants.Survival)]
+        [TestCase(FeatConstants.Stealthy,
+            SkillConstants.Hide,
+            SkillConstants.MoveSilently)]
         public override void DistinctCollection(String name, params String[] collection)
         {
             base.DistinctCollection(name, collection);

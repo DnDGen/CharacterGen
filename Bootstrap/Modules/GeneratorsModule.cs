@@ -52,7 +52,7 @@ namespace CharacterGen.Bootstrap.Modules
             Bind<IRacialFeatsGenerator>().To<RacialFeatsGenerator>();
             Bind<IFeatFocusGenerator>().To<FeatFocusGenerator>();
             Bind<GearGenerator>().To<ArmorGenerator>().Named(ItemTypeConstants.Armor);
-            Bind<GearGenerator>().To<WeaponGenerator>().Named(ItemTypeConstants.Weapon);
+            Bind<GearGenerator>().ToMethod(c => WeaponGeneratorFactory.CreateWith(c.Kernel)).Named(ItemTypeConstants.Weapon);
             Bind<IMagicGenerator>().To<MagicGenerator>();
 
             Bind<IAlignmentRandomizer>().To<AnyAlignmentRandomizer>().Named(AlignmentRandomizerTypeConstants.Any);

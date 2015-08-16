@@ -658,6 +658,82 @@
   <ItemGroup>
     <EmbeddedResource Include="Alignments\AlignmentLawfulness.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Feats\Data\Racial\WerewolfFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Feats\Data\Racial\OrcFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Feats\Data\CharacterClasses\EvocationFeatData.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Feats\Data\CharacterClasses\LuckFeatData.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Items\Powers\Level1Power.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Items\Powers\Level20Power.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Items\Powers\Level12Power.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Items\Powers\Level13Power.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Items\Powers\Level14Power.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Items\Powers\Level15Power.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Items\Powers\Level16Power.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Items\Powers\Level17Power.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Items\Powers\Level18Power.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Items\Powers\Level19Power.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Items\Powers\Level2Power.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Items\Powers\Level3Power.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Items\Powers\Level4Power.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Items\Powers\Level5Power.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Items\Powers\Level6Power.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Items\Powers\Level7Power.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Items\Powers\Level8Power.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Items\Powers\Level9Power.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Items\Powers\Level10Power.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Items\Powers\Level11Power.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

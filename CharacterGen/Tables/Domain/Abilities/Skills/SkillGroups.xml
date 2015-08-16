@@ -17,6 +17,16 @@
     <object>
         <name>Abjuration</name>
     </object>
+  <object>
+    <name>Acrobatic</name>
+    <item>Jump</item>
+    <item>Tumble</item>
+  </object>
+  <object>
+    <name>Agile</name>
+    <item>Balance</item>
+    <item>Escape Artist</item>
+  </object>
     <object>
         <name>Air</name>
     </object>
@@ -96,6 +106,11 @@
         <name>Necromancy</name>
     </object>
   <object>
+    <name>Negotiator</name>
+    <item>Diplomacy</item>
+    <item>Sense Motive</item>
+  </object>
+  <object>
     <name>Persuasive</name>
     <item>Bluff</item>
     <item>Intimidate</item>
@@ -111,6 +126,11 @@
     <name>Self-Sufficient</name>
     <item>Heal</item>
     <item>Survival</item>
+  </object>
+  <object>
+    <name>Stealthy</name>
+    <item>Hide</item>
+    <item>Move Silently</item>
   </object>
     <object>
         <name>Strength</name>

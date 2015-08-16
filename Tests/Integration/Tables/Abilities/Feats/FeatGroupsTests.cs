@@ -754,7 +754,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.SkillBonus + SkillConstants.Listen,
             FeatConstants.SkillBonus + SkillConstants.Spot,
             FeatConstants.SaveBonus + "Fortitude",
-            FeatConstants.SaveBonus + "Will",
+            FeatConstants.SaveBonus + "Reflex",
             FeatConstants.NaturalArmor,
             FeatConstants.Trip,
             FeatConstants.LowLightVision,
