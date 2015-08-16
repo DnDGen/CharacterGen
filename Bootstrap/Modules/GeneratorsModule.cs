@@ -1,5 +1,4 @@
-﻿using Ninject.Modules;
-using CharacterGen.Bootstrap.Factories;
+﻿using CharacterGen.Bootstrap.Factories;
 using CharacterGen.Generators;
 using CharacterGen.Generators.Abilities;
 using CharacterGen.Generators.Abilities.Feats;
@@ -8,13 +7,8 @@ using CharacterGen.Generators.Domain;
 using CharacterGen.Generators.Domain.Abilities;
 using CharacterGen.Generators.Domain.Abilities.Feats;
 using CharacterGen.Generators.Domain.Combats;
-using CharacterGen.Generators.Items;
-using CharacterGen.Generators.Randomizers.Alignments;
-using CharacterGen.Generators.Randomizers.CharacterClasses;
-using CharacterGen.Generators.Randomizers.Races;
-using CharacterGen.Generators.Randomizers.Stats;
-using CharacterGen.Generators.Verifiers;
 using CharacterGen.Generators.Domain.Items;
+using CharacterGen.Generators.Domain.Magics;
 using CharacterGen.Generators.Domain.Randomizers.Alignments;
 using CharacterGen.Generators.Domain.Randomizers.CharacterClasses.ClassNames;
 using CharacterGen.Generators.Domain.Randomizers.CharacterClasses.Levels;
@@ -22,6 +16,15 @@ using CharacterGen.Generators.Domain.Randomizers.Races.BaseRaces;
 using CharacterGen.Generators.Domain.Randomizers.Races.Metaraces;
 using CharacterGen.Generators.Domain.Randomizers.Stats;
 using CharacterGen.Generators.Domain.Verifiers;
+using CharacterGen.Generators.Items;
+using CharacterGen.Generators.Magics;
+using CharacterGen.Generators.Randomizers.Alignments;
+using CharacterGen.Generators.Randomizers.CharacterClasses;
+using CharacterGen.Generators.Randomizers.Races;
+using CharacterGen.Generators.Randomizers.Stats;
+using CharacterGen.Generators.Verifiers;
+using Ninject.Modules;
+using TreasureGen.Common.Items;
 
 namespace CharacterGen.Bootstrap.Modules
 {
@@ -39,7 +42,7 @@ namespace CharacterGen.Bootstrap.Modules
             Bind<IStatsGenerator>().To<StatsGenerator>();
             Bind<IAbilitiesGenerator>().To<AbilitiesGenerator>();
             Bind<ICombatGenerator>().To<CombatGenerator>();
-            Bind<IEquipmentGenerator>().To<EquipmentGenerator>();
+            Bind<IEquipmentGenerator>().ToMethod(c => EquipmentGeneratorFactory.CreateWith(c.Kernel));
             Bind<ISkillsGenerator>().To<SkillsGenerator>();
             Bind<IFeatsGenerator>().To<FeatsGenerator>();
             Bind<IArmorClassGenerator>().To<ArmorClassGenerator>();
@@ -48,6 +51,9 @@ namespace CharacterGen.Bootstrap.Modules
             Bind<IClassFeatsGenerator>().To<ClassFeatsGenerator>();
             Bind<IRacialFeatsGenerator>().To<RacialFeatsGenerator>();
             Bind<IFeatFocusGenerator>().To<FeatFocusGenerator>();
+            Bind<GearGenerator>().To<ArmorGenerator>().Named(ItemTypeConstants.Armor);
+            Bind<GearGenerator>().To<WeaponGenerator>().Named(ItemTypeConstants.Weapon);
+            Bind<IMagicGenerator>().To<MagicGenerator>();
 
             Bind<IAlignmentRandomizer>().To<AnyAlignmentRandomizer>().Named(AlignmentRandomizerTypeConstants.Any);
             Bind<IAlignmentRandomizer>().To<ChaoticAlignmentRandomizer>().Named(AlignmentRandomizerTypeConstants.Chaotic);

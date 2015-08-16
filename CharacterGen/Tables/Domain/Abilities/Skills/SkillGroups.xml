@@ -29,6 +29,11 @@
     <item>Handle Animal</item>
     <item>Ride</item>
   </object>
+  <object>
+    <name>Athletic</name>
+    <item>Climb</item>
+    <item>Swim</item>
+  </object>
     <object>
         <name>Chaos</name>
     </object>

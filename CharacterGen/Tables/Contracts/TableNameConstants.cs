@@ -97,6 +97,7 @@ namespace CharacterGen.Tables
                 public const String GOODNESSCharacterClasses = "{0}CharacterClasses";
                 public const String GOODNESSCLASSBaseRaces = "{0}{1}BaseRaces";
                 public const String GOODNESSCLASSMetaraces = "{0}{1}Metaraces";
+                public const String LevelXPower = "Level{0}Power";
             }
 
             public static class TrueOrFalse

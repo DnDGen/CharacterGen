@@ -2,6 +2,7 @@
 using CharacterGen.Generators.Abilities;
 using CharacterGen.Generators.Abilities.Feats;
 using CharacterGen.Generators.Combats;
+using CharacterGen.Generators.Domain.Items;
 using CharacterGen.Generators.Domain.Randomizers.Alignments;
 using CharacterGen.Generators.Domain.Randomizers.CharacterClasses.ClassNames;
 using CharacterGen.Generators.Domain.Randomizers.CharacterClasses.Levels;
@@ -9,6 +10,7 @@ using CharacterGen.Generators.Domain.Randomizers.Races.BaseRaces;
 using CharacterGen.Generators.Domain.Randomizers.Races.Metaraces;
 using CharacterGen.Generators.Domain.Randomizers.Stats;
 using CharacterGen.Generators.Items;
+using CharacterGen.Generators.Magics;
 using CharacterGen.Generators.Randomizers.Alignments;
 using CharacterGen.Generators.Randomizers.CharacterClasses;
 using CharacterGen.Generators.Randomizers.Races;
@@ -16,6 +18,7 @@ using CharacterGen.Generators.Randomizers.Stats;
 using CharacterGen.Generators.Verifiers;
 using NUnit.Framework;
 using System;
+using TreasureGen.Common.Items;
 
 namespace CharacterGen.Tests.Integration.Bootstrap.Modules
 {
@@ -551,9 +554,34 @@ namespace CharacterGen.Tests.Integration.Bootstrap.Modules
         }
 
         [Test]
-        public void FeatFocusGeneratoeIsNotASingleton()
+        public void FeatFocusGeneratorIsNotASingleton()
         {
             AssertNotSingleton<IFeatFocusGenerator>();
+        }
+
+        [TestCase(ItemTypeConstants.Armor)]
+        [TestCase(ItemTypeConstants.Weapon)]
+        public void GearGeneratorIsNotASingleton(String name)
+        {
+            AssertNotSingleton<GearGenerator>(name);
+        }
+
+        [Test]
+        public void GearGeneratorNamedArmorIsArmorGenerator()
+        {
+            AssertNamedIsInstanceOf<GearGenerator, ArmorGenerator>(ItemTypeConstants.Armor);
+        }
+
+        [Test]
+        public void GearGeneratorNamedWeaponIsWeaponGenerator()
+        {
+            AssertNamedIsInstanceOf<GearGenerator, WeaponGenerator>(ItemTypeConstants.Weapon);
+        }
+
+        [Test]
+        public void MAgicGeneratorIsNotASingleton()
+        {
+            AssertNotSingleton<IMagicGenerator>();
         }
     }
 }

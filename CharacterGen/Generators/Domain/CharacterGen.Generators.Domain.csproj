@@ -67,7 +67,10 @@
     <Compile Include="Combats\HitPointsGenerator.cs" />
     <Compile Include="Abilities\LanguageGenerator.cs" />
     <Compile Include="Combats\SavingThrowsGenerator.cs" />
+    <Compile Include="Items\ArmorGenerator.cs" />
     <Compile Include="Items\EquipmentGenerator.cs" />
+    <Compile Include="Items\WeaponGenerator.cs" />
+    <Compile Include="Magics\MagicGenerator.cs" />
     <Compile Include="RaceGenerator.cs" />
     <Compile Include="Randomizers\Alignments\SetAlignmentRandomizer.cs" />
     <Compile Include="Randomizers\CharacterClasses\ClassNames\SetClassNameRandomizer.cs" />
@@ -156,9 +159,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Magics\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

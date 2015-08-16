@@ -52,6 +52,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
                 CharacterClassConstants.Domains.Knowledge,
                 GroupConstants.Skills,
                 FeatConstants.AnimalAffinity,
+                FeatConstants.Athletic,
                 FeatConstants.Deceitful,
                 FeatConstants.MagicalAptitude,
                 FeatConstants.Persuasive,
@@ -99,6 +100,9 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
         [TestCase(FeatConstants.AnimalAffinity,
             SkillConstants.HandleAnimal,
             SkillConstants.Ride)]
+        [TestCase(FeatConstants.Athletic,
+            SkillConstants.Climb,
+            SkillConstants.Swim)]
         [TestCase(FeatConstants.Deceitful,
             SkillConstants.Disguise,
             SkillConstants.Forgery)]

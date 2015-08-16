@@ -426,6 +426,57 @@
         <item>Shield Proficiency</item>
         <item>Tower Shield Proficiency</item>
     </object>
+  <object>
+    <name>FighterBonusFeats</name>
+    <item>Blind-Fight</item>
+    <item>Combat Expertise</item>
+    <item>Improved Disarm</item>
+    <item>Improved Trip</item>
+    <item>Whirlwind Attack</item>
+    <item>Improved Feint</item>
+    <item>Combat Reflexes</item>
+    <item>Dodge</item>
+    <item>Mobility</item>
+    <item>Spring Attack</item>
+    <item>Exotic Weapon Proficiency</item>
+    <item>Improved Critical</item>
+    <item>Improved Initiative</item>
+    <item>Improved Shield Bash</item>
+    <item>Improved Unarmed Strike</item>
+    <item>Improved Grapple</item>
+    <item>Deflect Arrows</item>
+    <item>Snatch Arrows</item>
+    <item>Stunning Fist</item>
+    <item>Mounted Combat</item>
+    <item>Mounted Archery</item>
+    <item>Ride-By Attack</item>
+    <item>Trample</item>
+    <item>Spirited Charge</item>
+    <item>Point Blank Shot</item>
+    <item>Far Shot</item>
+    <item>Precise Shot</item>
+    <item>Improved Precise Shot</item>
+    <item>Rapid Shot</item>
+    <item>Manyshot</item>
+    <item>Shot On The Run</item>
+    <item>Power Attack</item>
+    <item>Cleave</item>
+    <item>Great Cleave</item>
+    <item>Improved Bull Rush</item>
+    <item>Improved Overrun</item>
+    <item>Quick Draw</item>
+    <item>Improved Sunder</item>
+    <item>Rapid Reload</item>
+    <item>Two-Weapon Fighting</item>
+    <item>Two-Weapon Defense</item>
+    <item>Improved Two-Weapon Fighting</item>
+    <item>Greater Two-Weapon Fighting</item>
+    <item>Weapon Finesse</item>
+    <item>Weapon Focus</item>
+    <item>Weapon Specialization</item>
+    <item>Greater Weapon Focus</item>
+    <item>Greater Weapon Specialization</item>
+  </object>
     <object>
         <name>Fire</name>
         <item>Turn</item>

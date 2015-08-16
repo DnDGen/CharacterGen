@@ -158,6 +158,7 @@
     <Compile Include="Alignments\AlignmentGoodnessTests.cs" />
     <Compile Include="Abilities\Languages\AutomaticLanguagesTests.cs" />
     <Compile Include="Abilities\Languages\BonusLanguagesTests.cs" />
+    <Compile Include="Alignments\AlignmentLawfulnessTests.cs" />
     <Compile Include="BooleanPercentileTests.cs" />
     <Compile Include="CharacterClasses\ClassNameGroupsTests.cs" />
     <Compile Include="CharacterClasses\EvilCharacterClassesTests.cs" />

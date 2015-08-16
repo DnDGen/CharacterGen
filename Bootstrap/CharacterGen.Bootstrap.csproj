@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Factories\CharacterGeneratorFactory.cs" />
     <Compile Include="Factories\CollectionsMapperFactory.cs" />
+    <Compile Include="Factories\EquipmentGeneratorFactory.cs" />
     <Compile Include="Factories\PercentileMapperFactory.cs" />
     <Compile Include="Modules\GeneratorsModule.cs" />
     <Compile Include="Modules\MappersModule.cs" />

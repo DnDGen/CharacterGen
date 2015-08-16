@@ -26,6 +26,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
             var names = new[]
             {
                 GroupConstants.Additional,
+                GroupConstants.FighterBonusFeats,
                 GroupConstants.HasClassRequirements,
                 GroupConstants.HasSkillRequirements,
                 GroupConstants.HasStatRequirements,
@@ -224,6 +225,64 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
         public override void DistinctCollection(String name, params String[] collection)
         {
             base.DistinctCollection(name, collection);
+        }
+
+        [Test]
+        public void FighterBonusFeats()
+        {
+            var featIds = new[]
+            {
+                FeatConstants.BlindFight,
+                FeatConstants.CombatExpertise,
+                FeatConstants.ImprovedDisarm,
+                FeatConstants.ImprovedFeint,
+                FeatConstants.ImprovedTrip,
+                FeatConstants.WhirlwindAttack,
+                FeatConstants.CombatReflexes,
+                FeatConstants.Dodge,
+                FeatConstants.Mobility,
+                FeatConstants.SpringAttack,
+                FeatConstants.ExoticWeaponProficiency,
+                FeatConstants.ImprovedCritical,
+                FeatConstants.ImprovedInitiative,
+                FeatConstants.ImprovedShieldBash,
+                FeatConstants.ImprovedUnarmedStrike,
+                FeatConstants.DeflectArrows,
+                FeatConstants.ImprovedGrapple,
+                FeatConstants.SnatchArrows,
+                FeatConstants.StunningFist,
+                FeatConstants.MountedCombat,
+                FeatConstants.MountedArchery,
+                FeatConstants.RideByAttack,
+                FeatConstants.SpiritedCharge,
+                FeatConstants.Trample,
+                FeatConstants.PointBlankShot,
+                FeatConstants.FarShot,
+                FeatConstants.PreciseShot,
+                FeatConstants.RapidShot,
+                FeatConstants.Manyshot,
+                FeatConstants.ShotOnTheRun,
+                FeatConstants.ImprovedPreciseShot,
+                FeatConstants.PowerAttack,
+                FeatConstants.Cleave,
+                FeatConstants.GreatCleave,
+                FeatConstants.ImprovedBullRush,
+                FeatConstants.ImprovedOverrun,
+                FeatConstants.ImprovedSunder,
+                FeatConstants.QuickDraw,
+                FeatConstants.RapidReload,
+                FeatConstants.TwoWeaponFighting,
+                FeatConstants.TwoWeaponDefense,
+                FeatConstants.ImprovedTwoWeaponFighting,
+                FeatConstants.GreaterTwoWeaponFighting,
+                FeatConstants.WeaponFinesse,
+                FeatConstants.WeaponFocus,
+                FeatConstants.WeaponSpecialization,
+                FeatConstants.GreaterWeaponFocus,
+                FeatConstants.GreaterWeaponSpecialization
+            };
+
+            base.DistinctCollection(GroupConstants.FighterBonusFeats, featIds);
         }
 
         [TestCase(CharacterClassConstants.Cleric,
