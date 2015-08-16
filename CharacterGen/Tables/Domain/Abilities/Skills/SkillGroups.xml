@@ -61,6 +61,11 @@
     <object>
         <name>Destruction</name>
     </object>
+  <object>
+    <name>Diligent</name>
+    <item>Appraise</item>
+    <item>Decipher Script</item>
+  </object>
     <object>
         <name>Divination</name>
     </object>

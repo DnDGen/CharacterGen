@@ -190,6 +190,7 @@
     <Compile Include="Combats\RacialBaseAttackAdjustmentsTests.cs" />
     <Compile Include="DataTests.cs" />
     <Compile Include="EmbeddedResourceStreamLoaderTests.cs" />
+    <Compile Include="Items\ItemGroupsTests.cs" />
     <Compile Include="Items\Powers\Level10PowerTests.cs" />
     <Compile Include="Items\Powers\Level11PowerTests.cs" />
     <Compile Include="Items\Powers\Level12PowerTests.cs" />

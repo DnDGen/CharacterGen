@@ -56,6 +56,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
                 FeatConstants.AnimalAffinity,
                 FeatConstants.Athletic,
                 FeatConstants.Deceitful,
+                FeatConstants.Diligent,
                 FeatConstants.MagicalAptitude,
                 FeatConstants.Negotiator,
                 FeatConstants.Persuasive,
@@ -116,6 +117,9 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
         [TestCase(FeatConstants.Deceitful,
             SkillConstants.Disguise,
             SkillConstants.Forgery)]
+        [TestCase(FeatConstants.Diligent,
+            SkillConstants.Appraise,
+            SkillConstants.DecipherScript)]
         [TestCase(FeatConstants.MagicalAptitude,
             SkillConstants.Spellcraft,
             SkillConstants.UseMagicDevice)]
