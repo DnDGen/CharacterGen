@@ -1,6 +1,6 @@
-﻿using CharacterGen.Tables;
+﻿using System;
+using CharacterGen.Tables;
 using NUnit.Framework;
-using System;
 using TreasureGen.Common.Items;
 
 namespace CharacterGen.Tests.Integration.Tables.Items
@@ -50,7 +50,7 @@ namespace CharacterGen.Tests.Integration.Tables.Items
                 WeaponConstants.Glaive,
                 WeaponConstants.GnomeHookedHammer,
                 WeaponConstants.Greataxe,
-                WeaponConstants.GreaterSlayingArrow,
+                WeaponConstants.GreaterSlayingArrow + " (Fey)",
                 WeaponConstants.Greatclub,
                 WeaponConstants.Greatsword,
                 WeaponConstants.Guisarme,
@@ -101,7 +101,7 @@ namespace CharacterGen.Tests.Integration.Tables.Items
                 WeaponConstants.Shuriken,
                 WeaponConstants.Siangham,
                 WeaponConstants.Sickle,
-                WeaponConstants.SlayingArrow,
+                WeaponConstants.SlayingArrow + " (Fey)",
                 WeaponConstants.SleepArrow,
                 WeaponConstants.Sling,
                 WeaponConstants.SlingBullet,
@@ -157,7 +157,7 @@ namespace CharacterGen.Tests.Integration.Tables.Items
         [TestCase(WeaponConstants.GnomeHookedHammer, WeaponConstants.GnomeHookedHammer)]
         [TestCase(WeaponConstants.Greataxe, WeaponConstants.Greataxe)]
         [TestCase(WeaponConstants.Greatclub, WeaponConstants.Greatclub)]
-        [TestCase(WeaponConstants.GreaterSlayingArrow, WeaponConstants.Arrow)]
+        [TestCase(WeaponConstants.GreaterSlayingArrow + " (Fey)", WeaponConstants.Arrow)]
         [TestCase(WeaponConstants.Greatsword, WeaponConstants.Greatsword)]
         [TestCase(WeaponConstants.Guisarme, WeaponConstants.Guisarme)]
         [TestCase(WeaponConstants.Halberd, WeaponConstants.Halberd)]
@@ -207,7 +207,7 @@ namespace CharacterGen.Tests.Integration.Tables.Items
         [TestCase(WeaponConstants.Shuriken, WeaponConstants.Shuriken)]
         [TestCase(WeaponConstants.Siangham, WeaponConstants.Siangham)]
         [TestCase(WeaponConstants.Sickle, WeaponConstants.Sickle)]
-        [TestCase(WeaponConstants.SlayingArrow, WeaponConstants.Arrow)]
+        [TestCase(WeaponConstants.SlayingArrow + " (Fey)", WeaponConstants.Arrow)]
         [TestCase(WeaponConstants.SleepArrow, WeaponConstants.Arrow)]
         [TestCase(WeaponConstants.Sling, WeaponConstants.Sling, WeaponConstants.SlingBullet)]
         [TestCase(WeaponConstants.SlingBullet, WeaponConstants.SlingBullet)]

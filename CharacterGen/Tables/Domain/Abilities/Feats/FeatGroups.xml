@@ -361,9 +361,14 @@
     <item>Wild Shape4</item>
     <item>Wild Shape5</item>
     <item>Wild Shape6</item>
+      <item>Wild ShapeLarge</item>
+      <item>Wild ShapeTiny</item>
+      <item>Wild ShapeHuge</item>
+      <item>Wild ShapePlant</item>
     <item>Wild ShapeElemental1</item>
     <item>Wild ShapeElemental2</item>
     <item>Wild ShapeElemental3</item>
+      <item>Wild ShapeElementalHuge</item>
     <item>Woodland Stride</item>
     <item>Simple Weapon ProficiencyQuarterstaff</item>
     <item>Simple Weapon ProficiencyDagger</item>

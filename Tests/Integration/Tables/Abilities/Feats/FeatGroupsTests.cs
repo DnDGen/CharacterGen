@@ -1,4 +1,6 @@
-﻿using CharacterGen.Common.Abilities.Feats;
+﻿using System;
+using System.Linq;
+using CharacterGen.Common.Abilities.Feats;
 using CharacterGen.Common.Abilities.Skills;
 using CharacterGen.Common.Abilities.Stats;
 using CharacterGen.Common.CharacterClasses;
@@ -6,8 +8,6 @@ using CharacterGen.Common.Magics;
 using CharacterGen.Common.Races;
 using CharacterGen.Tables;
 using NUnit.Framework;
-using System;
-using System.Linq;
 using TreasureGen.Common.Items;
 
 namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats

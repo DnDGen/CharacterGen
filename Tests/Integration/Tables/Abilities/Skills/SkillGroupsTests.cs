@@ -1,9 +1,9 @@
-﻿using CharacterGen.Common.Abilities.Feats;
+﻿using System;
+using CharacterGen.Common.Abilities.Feats;
 using CharacterGen.Common.Abilities.Skills;
 using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Tables;
 using NUnit.Framework;
-using System;
 
 namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
 {
@@ -60,6 +60,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
                 FeatConstants.Diligent,
                 FeatConstants.MagicalAptitude,
                 FeatConstants.Negotiator,
+                FeatConstants.NimbleFingers,
                 FeatConstants.Persuasive,
                 FeatConstants.SelfSufficient,
                 FeatConstants.Stealthy
@@ -130,6 +131,9 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
         [TestCase(FeatConstants.Negotiator,
             SkillConstants.Diplomacy,
             SkillConstants.SenseMotive)]
+        [TestCase(FeatConstants.NimbleFingers,
+            SkillConstants.DisableDevice,
+            SkillConstants.OpenLock)]
         [TestCase(FeatConstants.Persuasive,
             SkillConstants.Bluff,
             SkillConstants.Intimidate)]

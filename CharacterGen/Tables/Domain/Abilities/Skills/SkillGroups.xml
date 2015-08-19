@@ -120,6 +120,11 @@
     <item>Diplomacy</item>
     <item>Sense Motive</item>
   </object>
+    <object>
+        <name>Nimble Fingers</name>
+        <item>Disable Device</item>
+        <item>Open Lock</item>
+    </object>
   <object>
     <name>Persuasive</name>
     <item>Bluff</item>

@@ -86,7 +86,7 @@
     <item></item>
   </object>
   <object>
-    <name>Simple Weapon Proficiency</name>
+    <name>Simple Weapon ProficiencySickle</name>
     <item>Simple Weapon Proficiency</item>
     <item>1</item>
     <item>Sickle</item>
@@ -97,6 +97,18 @@
     <item></item>
     <item></item>
   </object>
+    <object>
+        <name>Martial Weapon ProficiencyScimitar</name>
+        <item>Martial Weapon Proficiency</item>
+        <item>1</item>
+        <item>Scimitar</item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+        <item></item>
+    </object>
     <object>
         <name>Light Armor Proficiency</name>
         <item>Light Armor Proficiency</item>
@@ -138,7 +150,7 @@
         <item>Nature Sense</item>
         <item>1</item>
         <item></item>
-        <item>0</item>
+        <item>2</item>
         <item>0</item>
         <item></item>
         <item>0</item>
@@ -148,7 +160,7 @@
   <object>
     <name>Timeless Body</name>
     <item>Timeless Body</item>
-    <item>1</item>
+    <item>15</item>
     <item></item>
     <item>0</item>
     <item>0</item>
@@ -157,4 +169,244 @@
     <item></item>
     <item></item>
   </object>
+    <object>
+        <name>Wild Empathy</name>
+        <item>Wild Empathy</item>
+        <item>1</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+        <item></item>
+    </object>
+    <object>
+        <name>Wild Shape1</name>
+        <item>Wild Shape</item>
+        <item>5</item>
+        <item></item>
+        <item>0</item>
+        <item>1</item>
+        <item>Day</item>
+        <item>5</item>
+        <item></item>
+        <item></item>
+    </object>
+    <object>
+        <name>Wild Shape2</name>
+        <item>Wild Shape</item>
+        <item>6</item>
+        <item></item>
+        <item>0</item>
+        <item>2</item>
+        <item>Day</item>
+        <item>6</item>
+        <item></item>
+        <item></item>
+    </object>
+    <object>
+        <name>Wild Shape3</name>
+        <item>Wild Shape</item>
+        <item>7</item>
+        <item></item>
+        <item>0</item>
+        <item>3</item>
+        <item>Day</item>
+        <item>9</item>
+        <item></item>
+        <item></item>
+    </object>
+    <object>
+        <name>Wild Shape4</name>
+        <item>Wild Shape</item>
+        <item>10</item>
+        <item></item>
+        <item>0</item>
+        <item>4</item>
+        <item>Day</item>
+        <item>13</item>
+        <item></item>
+        <item></item>
+    </object>
+    <object>
+        <name>Wild Shape5</name>
+        <item>Wild Shape</item>
+        <item>14</item>
+        <item></item>
+        <item>0</item>
+        <item>5</item>
+        <item>Day</item>
+        <item>17</item>
+        <item></item>
+        <item></item>
+    </object>
+    <object>
+        <name>Wild Shape6</name>
+        <item>Wild Shape</item>
+        <item>18</item>
+        <item></item>
+        <item>0</item>
+        <item>6</item>
+        <item>Day</item>
+        <item>0</item>
+        <item></item>
+        <item></item>
+    </object>
+    <object>
+        <name>Wild ShapeTiny</name>
+        <item>Wild Shape</item>
+        <item>11</item>
+        <item>Tiny</item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+        <item></item>
+    </object>
+    <object>
+        <name>Wild ShapeLarge</name>
+        <item>Wild Shape</item>
+        <item>8</item>
+        <item>Large</item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+        <item></item>
+    </object>
+    <object>
+        <name>Wild ShapeHuge</name>
+        <item>Wild Shape</item>
+        <item>15</item>
+        <item>Huge</item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+        <item></item>
+    </object>
+    <object>
+        <name>Wild ShapePlant</name>
+        <item>Wild Shape</item>
+        <item>12</item>
+        <item>Plant</item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+        <item></item>
+    </object>
+    <object>
+        <name>Wild ShapeElemental1</name>
+        <item>Wild Shape</item>
+        <item>16</item>
+        <item>Elemental</item>
+        <item>0</item>
+        <item>1</item>
+        <item>Day</item>
+        <item>17</item>
+        <item></item>
+        <item></item>
+    </object>
+    <object>
+        <name>Wild ShapeElemental2</name>
+        <item>Wild Shape</item>
+        <item>18</item>
+        <item>Elemental</item>
+        <item>0</item>
+        <item>2</item>
+        <item>Day</item>
+        <item>19</item>
+        <item></item>
+        <item></item>
+    </object>
+    <object>
+        <name>Wild ShapeElemental3</name>
+        <item>Wild Shape</item>
+        <item>20</item>
+        <item>Elemental</item>
+        <item>0</item>
+        <item>3</item>
+        <item>Day</item>
+        <item>0</item>
+        <item></item>
+        <item></item>
+    </object>
+    <object>
+        <name>Wild ShapeElementalHuge</name>
+        <item>Wild Shape</item>
+        <item>20</item>
+        <item>Huge Elemental</item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+        <item></item>
+    </object>
+    <object>
+        <name>A Thousand Faces</name>
+        <item>A Thousand Faces</item>
+        <item>13</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+        <item></item>
+    </object>
+    <object>
+        <name>Resist Nature's Lure</name>
+        <item>Resist Nature's Lure</item>
+        <item>4</item>
+        <item></item>
+        <item>4</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+        <item></item>
+    </object>
+    <object>
+        <name>Woodland Stride</name>
+        <item>Woodland Stride</item>
+        <item>2</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+        <item></item>
+    </object>
+    <object>
+        <name>Trackless Step</name>
+        <item>Trackless Step</item>
+        <item>3</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+        <item></item>
+    </object>
+    <object>
+        <name>Venom Immunity</name>
+        <item>Venom Immunity</item>
+        <item>9</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+        <item></item>
+    </object>
 </items>
