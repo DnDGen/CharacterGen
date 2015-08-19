@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+    <object>
+        <name>Simple Weapon ProficiencyQuarterstaff</name>
+        <item>Simple Weapon Proficiency</item>
+        <item>1</item>
+        <item>Quarterstaff</item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+      <item></item>
+    </object>
+  <object>
+    <name>Simple Weapon ProficiencyDagger</name>
+    <item>Simple Weapon Proficiency</item>
+    <item>1</item>
+    <item>Dagger</item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Simple Weapon ProficiencyClub</name>
+    <item>Simple Weapon Proficiency</item>
+    <item>1</item>
+    <item>Club</item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Simple Weapon ProficiencyDart</name>
+    <item>Simple Weapon Proficiency</item>
+    <item>1</item>
+    <item>Dart</item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Simple Weapon ProficiencySling</name>
+    <item>Simple Weapon Proficiency</item>
+    <item>1</item>
+    <item>Sling</item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Simple Weapon ProficiencyShortspear</name>
+    <item>Simple Weapon Proficiency</item>
+    <item>1</item>
+    <item>Shortspear</item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Simple Weapon ProficiencyLongspear</name>
+    <item>Simple Weapon Proficiency</item>
+    <item>1</item>
+    <item>Longspear</item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Simple Weapon Proficiency</name>
+    <item>Simple Weapon Proficiency</item>
+    <item>1</item>
+    <item>Sickle</item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item></item>
+  </object>
+    <object>
+        <name>Light Armor Proficiency</name>
+        <item>Light Armor Proficiency</item>
+        <item>1</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+      <item></item>
+    </object>
+    <object>
+        <name>Medium Armor Proficiency</name>
+        <item>Medium Armor Proficiency</item>
+        <item>1</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+      <item></item>
+    </object>
+    <object>
+        <name>Shield Proficiency</name>
+        <item>Shield Proficiency</item>
+        <item>1</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+      <item></item>
+    </object>
+    <object>
+        <name>Nature Sense</name>
+        <item>Nature Sense</item>
+        <item>1</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+      <item></item>
+    </object>
+  <object>
+    <name>Timeless Body</name>
+    <item>Timeless Body</item>
+    <item>1</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item></item>
+  </object>
+</items>

@@ -30,6 +30,11 @@
     <object>
         <name>Air</name>
     </object>
+  <object>
+    <name>Alertness</name>
+    <item>Listen</item>
+    <item>Spot</item>
+  </object>
     <object>
         <name>Animal</name>
         <item>Knowledge (Nature)</item>

@@ -1,0 +1,519 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+    <object>
+        <name>Arrow</name>
+      <item>Arrow</item>
+    </object>
+    <object>
+        <name>Assassin's dagger</name>
+      <item>Dagger</item>
+    </object>
+    <object>
+        <name>Bastard sword</name>
+      <item>Bastard sword</item>
+    </object>
+    <object>
+        <name>Battleaxe</name>
+      <item>Battleaxe</item>
+    </object>
+    <object>
+        <name>Berserking sword</name>
+      <item>Greatsword</item>
+    </object>
+    <object>
+        <name>Club</name>
+      <item>Club</item>
+    </object>
+    <object>
+        <name>Composite (+0) longbow</name>
+      <item>Longbow</item>
+      <item>Arrow</item>
+    </object>
+    <object>
+        <name>Composite (+0) shortbow</name>
+      <item>Shortbow</item>
+      <item>Arrow</item>
+    </object>
+    <object>
+        <name>Composite (+1) longbow</name>
+      <item>Longbow</item>
+      <item>Arrow</item>
+    </object>
+    <object>
+        <name>Composite (+1) shortbow</name>
+      <item>Shortbow</item>
+      <item>Arrow</item>
+    </object>
+    <object>
+        <name>Composite (+2) longbow</name>
+      <item>Longbow</item>
+      <item>Arrow</item>
+    </object>
+    <object>
+        <name>Composite (+2) shortbow</name>
+      <item>Shortbow</item>
+      <item>Arrow</item>
+    </object>
+    <object>
+        <name>Composite (+3) longbow</name>
+      <item>Longbow</item>
+      <item>Arrow</item>
+    </object>
+    <object>
+        <name>Composite (+4) longbow</name>
+      <item>Longbow</item>
+      <item>Arrow</item>
+    </object>
+    <object>
+        <name>Crossbow bolt</name>
+      <item>Crossbow bolt</item>
+    </object>
+    <object>
+        <name>Cursed backbiter spear</name>
+      <item>Shortspear</item>
+    </object>
+    <object>
+        <name>Cursed -2 sword</name>
+      <item>Longsword</item>
+    </object>
+    <object>
+        <name>Dagger</name>
+      <item>Dagger</item>
+    </object>
+    <object>
+        <name>Dagger of venom</name>
+      <item>Dagger</item>
+    </object>
+    <object>
+        <name>Dart</name>
+      <item>Dart</item>
+    </object>
+    <object>
+        <name>Dire flail</name>
+      <item>Dire flail</item>
+    </object>
+    <object>
+        <name>Dwarven thrower</name>
+      <item>Warhammer</item>
+    </object>
+    <object>
+        <name>Dwarven urgrosh</name>
+      <item>Dwarven urgrosh</item>
+    </object>
+    <object>
+        <name>Dwarven waraxe</name>
+      <item>Dwarven waraxe</item>
+    </object>
+    <object>
+        <name>Falchion</name>
+      <item>Falchion</item>
+    </object>
+    <object>
+        <name>Flame tongue</name>
+      <item>Longsword</item>
+    </object>
+    <object>
+        <name>Frost brand</name>
+      <item>Greatsword</item>
+    </object>
+    <object>
+        <name>Gauntlet</name>
+      <item>Gauntlet</item>
+    </object>
+    <object>
+        <name>Glaive</name>
+      <item>Glaive</item>
+    </object>
+    <object>
+        <name>Gnome hooked hammer</name>
+      <item>Gnome hooked hammer</item>
+    </object>
+    <object>
+        <name>Greataxe</name>
+      <item>Greataxe</item>
+    </object>
+    <object>
+        <name>Greatclub</name>
+      <item>Greatclub</item>
+    </object>
+    <object>
+        <name>Greater slaying arrow</name>
+      <item>Arrow</item>
+    </object>
+    <object>
+        <name>Greatsword</name>
+      <item>Greatsword</item>
+    </object>
+    <object>
+        <name>Guisarme</name>
+      <item>Guisarme</item>
+    </object>
+    <object>
+        <name>Halberd</name>
+      <item>Halberd</item>
+    </object>
+    <object>
+        <name>Halfspear</name>
+      <item>Halfspear</item>
+    </object>
+    <object>
+        <name>Handaxe</name>
+      <item>Handaxe</item>
+    </object>
+    <object>
+        <name>Hand crossbow</name>
+      <item>Hand crossbow</item>
+      <item>Crossbow bolt</item>
+    </object>
+    <object>
+        <name>Heavy crossbow</name>
+      <item>Heavy crossbow</item>
+      <item>Crossbow bolt</item>
+    </object>
+    <object>
+        <name>Heavy flail</name>
+      <item>Heavy flail</item>
+    </object>
+    <object>
+        <name>Heavy mace</name>
+      <item>Heavy mace</item>
+    </object>
+    <object>
+        <name>Heavy pick</name>
+      <item>Heavy pick</item>
+    </object>
+    <object>
+        <name>Holy avenger</name>
+      <item>Longsword</item>
+    </object>
+    <object>
+        <name>Javelin</name>
+      <item>Javelin</item>
+    </object>
+    <object>
+        <name>Javelin of lightning</name>
+      <item>Javelin</item>
+    </object>
+    <object>
+        <name>Kama</name>
+      <item>Kama</item>
+    </object>
+    <object>
+        <name>Kukri</name>
+      <item>Kukri</item>
+    </object>
+    <object>
+        <name>Lance</name>
+      <item>Lance</item>
+    </object>
+    <object>
+        <name>Life-drinker</name>
+      <item>Greataxe</item>
+    </object>
+    <object>
+        <name>Light crossbow</name>
+      <item>Light crossbow</item>
+      <item>Crossbow bolt</item>
+    </object>
+    <object>
+        <name>Light flail</name>
+      <item>Light flail</item>
+    </object>
+    <object>
+        <name>Light hammer</name>
+      <item>Light hammer</item>
+    </object>
+    <object>
+        <name>Light mace</name>
+      <item>Light mace</item>
+    </object>
+    <object>
+        <name>Light pick</name>
+      <item>Light pick</item>
+    </object>
+    <object>
+        <name>Longbow</name>
+      <item>Longbow</item>
+      <item>Arrow</item>
+    </object>
+    <object>
+        <name>Longspear</name>
+      <item>Longspear</item>
+    </object>
+    <object>
+        <name>Longsword</name>
+      <item>Longsword</item>
+    </object>
+    <object>
+        <name>Morningstar</name>
+      <item>Morningstar</item>
+    </object>
+    <object>
+        <name>Net</name>
+      <item>Net</item>
+    </object>
+    <object>
+        <name>Nine lives stealer</name>
+      <item>Longsword</item>
+    </object>
+    <object>
+        <name>Nunchaku</name>
+      <item>Nunchaku</item>
+    </object>
+    <object>
+        <name>Oathbow</name>
+      <item>Longbow</item>
+      <item>Arrow</item>
+    </object>
+    <object>
+        <name>Orc double axe</name>
+      <item>Orc double axe</item>
+    </object>
+    <object>
+        <name>Punching dagger</name>
+      <item>Punching dagger</item>
+    </object>
+    <object>
+        <name>Quarterstaff</name>
+      <item>Quarterstaff</item>
+    </object>
+    <object>
+        <name>Ranseur</name>
+      <item>Ranseur</item>
+    </object>
+    <object>
+        <name>Rapier</name>
+      <item>Rapier</item>
+    </object>
+    <object>
+        <name>Rapier of puncturing</name>
+      <item>Rapier</item>
+    </object>
+    <object>
+        <name>Repeating crossbow</name>
+      <item>Repeating crossbow</item>
+      <item>Crossbow bolt</item>
+    </object>
+    <object>
+        <name>Sap</name>
+      <item>Sap</item>
+    </object>
+    <object>
+        <name>Scimitar</name>
+      <item>Scimitar</item>
+    </object>
+    <object>
+        <name>Screaming bolt</name>
+      <item>Crossbow bolt</item>
+    </object>
+    <object>
+        <name>Scythe</name>
+      <item>Scythe</item>
+    </object>
+    <object>
+        <name>Shatterspike</name>
+      <item>Longsword</item>
+    </object>
+    <object>
+        <name>Shifter's sorrow</name>
+      <item>Two-bladed sword</item>
+    </object>
+    <object>
+        <name>Shortbow</name>
+      <item>Shortbow</item>
+      <item>Arrow</item>
+    </object>
+    <object>
+        <name>Shortspear</name>
+      <item>Shortspear</item>
+    </object>
+    <object>
+        <name>Short sword</name>
+      <item>Short sword</item>
+    </object>
+    <object>
+        <name>Shuriken</name>
+      <item>Shuriken</item>
+    </object>
+    <object>
+        <name>Siangham</name>
+      <item>Siangham</item>
+    </object>
+    <object>
+        <name>Sickle</name>
+      <item>Sickle</item>
+    </object>
+    <object>
+        <name>Slaying arrow</name>
+      <item>Arrow</item>
+    </object>
+    <object>
+        <name>Sleep arrow</name>
+      <item>Arrow</item>
+    </object>
+    <object>
+        <name>Sling</name>
+      <item>Sling</item>
+      <item>Sling bullet</item>
+    </object>
+    <object>
+        <name>Sling bullet</name>
+      <item>Sling bullet</item>
+    </object>
+    <object>
+        <name>Spiked chain</name>
+      <item>Spiked chain</item>
+    </object>
+    <object>
+        <name>Spiked gauntlet</name>
+      <item>Spiked gauntlet</item>
+    </object>
+    <object>
+        <name>Sun blade</name>
+      <item>Short sword</item>
+    </object>
+    <object>
+        <name>Sword of life stealing</name>
+      <item>Longsword</item>
+    </object>
+    <object>
+        <name>Sword of subtlety</name>
+      <item>Short sword</item>
+    </object>
+    <object>
+        <name>Sword of the planes</name>
+      <item>Longsword</item>
+    </object>
+    <object>
+        <name>Sylvan scimitar</name>
+      <item>Scimitar</item>
+    </object>
+    <object>
+        <name>Throwing axe</name>
+      <item>Throwing axe</item>
+    </object>
+    <object>
+        <name>Trident</name>
+      <item>Trident</item>
+    </object>
+    <object>
+        <name>Trident of fish command</name>
+      <item>Trident</item>
+    </object>
+    <object>
+        <name>Trident of warning</name>
+      <item>Trident</item>
+    </object>
+    <object>
+        <name>Two-bladed sword</name>
+      <item>Two-bladed sword</item>
+    </object>
+    <object>
+        <name>Two-Handed</name>
+      <item>Dire flail</item>
+      <item>Dwarven urgrosh</item>
+      <item>Falchion</item>
+      <item>Glaive</item>
+      <item>Gnome hooked hammer</item>
+      <item>Greataxe</item>
+      <item>Greatclub</item>
+      <item>Greatsword</item>
+      <item>Guisarme</item>
+      <item>Halberd</item>
+      <item>Halfspear</item>
+      <item>Hand crossbow</item>
+      <item>Heavy crossbow</item>
+      <item>Heavy flail</item>
+      <item>Lance</item>
+      <item>Light crossbow</item>
+      <item>Longbow</item>
+      <item>Longspear</item>
+      <item>Net</item>
+      <item>Orc double axe</item>
+      <item>Quarterstaff</item>
+      <item>Ranseur</item>
+      <item>Repeating crossbow</item>
+      <item>Scythe</item>
+      <item>Shortbow</item>
+      <item>Sling</item>
+      <item>Spiked chain</item>
+      <item>Two-bladed sword</item>
+    </object>
+    <object>
+        <name>Warhammer</name>
+      <item>Warhammer</item>
+    </object>
+    <object>
+        <name>Weapons</name>
+      <item>Arrow</item>
+      <item>Bastard sword</item>
+      <item>Battleaxe</item>
+      <item>Club</item>
+      <item>Crossbow bolt</item>
+      <item>Dagger</item>
+      <item>Dart</item>
+      <item>Dire flail</item>
+      <item>Dwarven urgrosh</item>
+      <item>Dwarven waraxe</item>
+      <item>Falchion</item>
+      <item>Gauntlet</item>
+      <item>Glaive</item>
+      <item>Gnome hooked hammer</item>
+      <item>Greataxe</item>
+      <item>Greatclub</item>
+      <item>Greatsword</item>
+      <item>Guisarme</item>
+      <item>Halberd</item>
+      <item>Halfspear</item>
+      <item>Handaxe</item>
+      <item>Hand crossbow</item>
+      <item>Heavy crossbow</item>
+      <item>Heavy flail</item>
+      <item>Heavy mace</item>
+      <item>Heavy pick</item>
+      <item>Javelin</item>
+      <item>Kama</item>
+      <item>Kukri</item>
+      <item>Lance</item>
+      <item>Light crossbow</item>
+      <item>Light flail</item>
+      <item>Light hammer</item>
+      <item>Light mace</item>
+      <item>Light pick</item>
+      <item>Longbow</item>
+      <item>Longspear</item>
+      <item>Longsword</item>
+      <item>Morningstar</item>
+      <item>Net</item>
+      <item>Nunchaku</item>
+      <item>Orc double axe</item>
+      <item>Punching dagger</item>
+      <item>Quarterstaff</item>
+      <item>Ranseur</item>
+      <item>Rapier</item>
+      <item>Repeating crossbow</item>
+      <item>Sap</item>
+      <item>Scimitar</item>
+      <item>Scythe</item>
+      <item>Shortbow</item>
+      <item>Shortspear</item>
+      <item>Short sword</item>
+      <item>Shuriken</item>
+      <item>Siangham</item>
+      <item>Sickle</item>
+      <item>Sling</item>
+      <item>Sling bullet</item>
+      <item>Spiked chain</item>
+      <item>Spiked gauntlet</item>
+      <item>Throwing axe</item>
+      <item>Trident</item>
+      <item>Two-bladed sword</item>
+      <item>Warhammer</item>
+      <item>Whip</item>
+    </object>
+    <object>
+        <name>Whip</name>
+      <item>Whip</item>
+    </object>
+</items>
