@@ -88,7 +88,8 @@ namespace CharacterGen.Tests.Integration.Tables.Items
                 WeaponConstants.Ranseur,
                 WeaponConstants.Rapier,
                 WeaponConstants.RapierOfPuncturing,
-                WeaponConstants.RepeatingCrossbow,
+                WeaponConstants.HeavyRepeatingCrossbow,
+                WeaponConstants.LightRepeatingCrossbow,
                 WeaponConstants.Sap,
                 WeaponConstants.Scimitar,
                 WeaponConstants.ScreamingBolt,
@@ -194,7 +195,8 @@ namespace CharacterGen.Tests.Integration.Tables.Items
         [TestCase(WeaponConstants.Ranseur, WeaponConstants.Ranseur)]
         [TestCase(WeaponConstants.Rapier, WeaponConstants.Rapier)]
         [TestCase(WeaponConstants.RapierOfPuncturing, WeaponConstants.Rapier)]
-        [TestCase(WeaponConstants.RepeatingCrossbow, WeaponConstants.RepeatingCrossbow, WeaponConstants.CrossbowBolt)]
+        [TestCase(WeaponConstants.HeavyRepeatingCrossbow, WeaponConstants.HeavyRepeatingCrossbow, WeaponConstants.CrossbowBolt)]
+        [TestCase(WeaponConstants.LightRepeatingCrossbow, WeaponConstants.LightRepeatingCrossbow, WeaponConstants.CrossbowBolt)]
         [TestCase(WeaponConstants.Sap, WeaponConstants.Sap)]
         [TestCase(WeaponConstants.Scimitar, WeaponConstants.Scimitar)]
         [TestCase(WeaponConstants.ScreamingBolt, WeaponConstants.CrossbowBolt)]
@@ -248,7 +250,8 @@ namespace CharacterGen.Tests.Integration.Tables.Items
             WeaponConstants.DireFlail,
             WeaponConstants.GnomeHookedHammer,
             WeaponConstants.DwarvenUrgrosh,
-            WeaponConstants.RepeatingCrossbow,
+            WeaponConstants.HeavyRepeatingCrossbow,
+            WeaponConstants.LightRepeatingCrossbow,
             WeaponConstants.Net,
             WeaponConstants.TwoBladedSword,
             WeaponConstants.HandCrossbow)]
@@ -310,7 +313,8 @@ namespace CharacterGen.Tests.Integration.Tables.Items
                 WeaponConstants.Quarterstaff,
                 WeaponConstants.Ranseur,
                 WeaponConstants.Rapier,
-                WeaponConstants.RepeatingCrossbow,
+                WeaponConstants.HeavyRepeatingCrossbow,
+                WeaponConstants.LightRepeatingCrossbow,
                 WeaponConstants.Sap,
                 WeaponConstants.Scimitar,
                 WeaponConstants.Scythe,
