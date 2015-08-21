@@ -23,7 +23,8 @@
     <item>Two-bladed sword</item>
     <item>Dwarven urgrosh</item>
     <item>Hand crossbow</item>
-    <item>Repeating crossbow</item>
+    <item>Heavy repeating crossbow</item>
+    <item>Light repeating crossbow</item>
   </object>
   <object>
     <name>Favored Enemies</name>
@@ -229,7 +230,8 @@
         <item>Quarterstaff</item>
         <item>Ranseur</item>
         <item>Rapier</item>
-        <item>Repeating crossbow</item>
+      <item>Heavy repeating crossbow</item>
+      <item>Light repeating crossbow</item>
         <item>Sap</item>
         <item>Scimitar</item>
         <item>Scythe</item>
@@ -294,7 +296,8 @@
         <item>Quarterstaff</item>
         <item>Ranseur</item>
         <item>Rapier</item>
-        <item>Repeating crossbow</item>
+      <item>Heavy repeating crossbow</item>
+      <item>Light repeating crossbow</item>
         <item>Sap</item>
         <item>Scimitar</item>
         <item>Scythe</item>
@@ -361,7 +364,8 @@
         <item>Quarterstaff</item>
         <item>Ranseur</item>
         <item>Rapier</item>
-        <item>Repeating crossbow</item>
+      <item>Heavy repeating crossbow</item>
+      <item>Light repeating crossbow</item>
         <item>Sap</item>
         <item>Scimitar</item>
         <item>Scythe</item>

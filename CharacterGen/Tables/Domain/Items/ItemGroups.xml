@@ -138,7 +138,7 @@
       <item>Greatclub</item>
     </object>
     <object>
-        <name>Greater slaying arrow (Fey)</name>
+        <name>Greater slaying arrow</name>
       <item>Arrow</item>
     </object>
     <object>
@@ -291,10 +291,15 @@
       <item>Rapier</item>
     </object>
     <object>
-        <name>Repeating crossbow</name>
-      <item>Repeating crossbow</item>
+        <name>Heavy repeating crossbow</name>
+      <item>Heavy repeating crossbow</item>
       <item>Crossbow bolt</item>
     </object>
+  <object>
+    <name>Light repeating crossbow</name>
+    <item>Light repeating crossbow</item>
+    <item>Crossbow bolt</item>
+  </object>
     <object>
         <name>Sap</name>
       <item>Sap</item>
@@ -345,7 +350,7 @@
       <item>Sickle</item>
     </object>
     <object>
-        <name>Slaying arrow (Fey)</name>
+        <name>Slaying arrow</name>
       <item>Arrow</item>
     </object>
     <object>
@@ -433,7 +438,8 @@
       <item>Orc double axe</item>
       <item>Quarterstaff</item>
       <item>Ranseur</item>
-      <item>Repeating crossbow</item>
+      <item>Heavy repeating crossbow</item>
+      <item>Light repeating crossbow</item>
       <item>Scythe</item>
       <item>Shortbow</item>
       <item>Sling</item>
@@ -492,7 +498,8 @@
       <item>Quarterstaff</item>
       <item>Ranseur</item>
       <item>Rapier</item>
-      <item>Repeating crossbow</item>
+      <item>Heavy repeating crossbow</item>
+      <item>Light repeating crossbow</item>
       <item>Sap</item>
       <item>Scimitar</item>
       <item>Scythe</item>
