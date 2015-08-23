@@ -1,5 +1,6 @@
 ﻿using CharacterGen.Common.Abilities.Feats;
 using CharacterGen.Common.CharacterClasses;
+using CharacterGen.Common.Items;
 using CharacterGen.Generators.Domain.Items;
 using CharacterGen.Generators.Items;
 using CharacterGen.Selectors;
@@ -8,6 +9,7 @@ using Moq;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using TreasureGen.Common;
 using TreasureGen.Common.Items;
 using TreasureGen.Generators;
@@ -357,6 +359,69 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             Assert.That(equipment.PrimaryHand, Is.EqualTo(rangedWeapon));
             Assert.That(equipment.OffHand, Is.EqualTo(rangedWeapon));
             Assert.That(equipment.Treasure.Items, Contains.Item(weapon));
+        }
+
+        [Test]
+        public void IfPrimaryHandIsNotMelee_GenerateMeleeWeaponForTreasure()
+        {
+            var meleeWeapon = new Item();
+            meleeWeapon.Attributes = new[] { AttributeConstants.Melee };
+            mockWeaponGenerator.SetupSequence(g => g.GenerateFrom(feats, characterClass))
+                .Returns(weapon).Returns(meleeWeapon);
+
+            var equipment = equipmentGenerator.GenerateWith(feats, characterClass);
+            Assert.That(equipment.PrimaryHand, Is.EqualTo(weapon));
+            Assert.That(equipment.Treasure.Items, Contains.Item(meleeWeapon));
+        }
+
+        [Test]
+        public void GenerateMeleeWeaponFromProficiencyAllFeats()
+        {
+            feats.Add(new Feat());
+            feats.Add(new Feat());
+            feats.Add(new Feat());
+
+            feats[0].Focus = ProficiencyConstants.All;
+            feats[0].Name = "feat";
+            feats[1].Name = "other feat";
+            feats[1].Focus = "other focus";
+            feats[2].Focus = "weapon 1";
+            feats[2].Name = "third feat";
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.Proficiency))
+                .Returns(new[] { feats[0].Name, feats[2].Name });
+
+            var meleeWeapon = new Item();
+            meleeWeapon.Attributes = new[] { AttributeConstants.Melee };
+            mockWeaponGenerator.Setup(g => g.GenerateFrom(It.Is<IEnumerable<Feat>>(fs => fs.Contains(feats[0]) && fs.Count() == 1), characterClass))
+                .Returns(meleeWeapon);
+
+            var equipment = equipmentGenerator.GenerateWith(feats, characterClass);
+            Assert.That(equipment.PrimaryHand, Is.EqualTo(weapon));
+            Assert.That(equipment.Treasure.Items, Contains.Item(meleeWeapon));
+        }
+
+        [Test]
+        public void GenerateMeleeWeaponFromSpecificProficiencyFeatsIfNoneAreAll()
+        {
+            feats.Add(new Feat());
+            feats.Add(new Feat());
+            feats[0].Focus = "weapon 1";
+            feats[0].Name = "feat";
+            feats[1].Name = "other feat";
+            feats[1].Focus = "other focus";
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.Proficiency))
+                .Returns(new[] { feats[0].Name });
+
+            var meleeWeapon = new Item();
+            meleeWeapon.Attributes = new[] { AttributeConstants.Melee };
+            mockWeaponGenerator.Setup(g => g.GenerateFrom(It.Is<IEnumerable<Feat>>(fs => fs.Contains(feats[0]) && fs.Count() == 1), characterClass))
+                .Returns(meleeWeapon);
+
+            var equipment = equipmentGenerator.GenerateWith(feats, characterClass);
+            Assert.That(equipment.PrimaryHand, Is.EqualTo(weapon));
+            Assert.That(equipment.Treasure.Items, Contains.Item(meleeWeapon));
         }
     }
 }

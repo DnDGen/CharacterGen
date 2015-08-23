@@ -36,18 +36,9 @@ namespace CharacterGen.Generators.Domain.Items
 
             var baseWeaponTypes = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, equipment.PrimaryHand.Name);
 
-            if (baseWeaponTypes.Count() > 1)
+            if (WeaponRequiresAmmunition(baseWeaponTypes))
             {
-                Item ammunition;
-                var baseAmmunitionType = String.Empty;
-
-                do
-                {
-                    ammunition = weaponGenerator.GenerateFrom(feats, characterClass);
-                    baseAmmunitionType = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, ammunition.Name).First();
-                }
-                while (ammunition.Attributes.Contains(AttributeConstants.Ammunition) == false || baseWeaponTypes.Contains(baseAmmunitionType) == false);
-
+                var ammunition = GenerateAmmunition(feats, characterClass, baseWeaponTypes);
                 equipment.Treasure.Items = equipment.Treasure.Items.Union(new[] { ammunition });
             }
 
@@ -55,13 +46,8 @@ namespace CharacterGen.Generators.Domain.Items
             {
                 equipment.Treasure.Items = equipment.Treasure.Items.Union(new[] { equipment.PrimaryHand });
                 var baseAmmunitionType = baseWeaponTypes.First();
-
-                do
-                {
-                    equipment.PrimaryHand = weaponGenerator.GenerateFrom(feats, characterClass);
-                    baseWeaponTypes = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, equipment.PrimaryHand.Name);
-                }
-                while (equipment.PrimaryHand.Attributes.Contains(AttributeConstants.Ammunition) || baseWeaponTypes.Contains(baseAmmunitionType) == false);
+                equipment.PrimaryHand = GenerateWeaponForAmmunition(feats, characterClass, baseAmmunitionType);
+                baseWeaponTypes = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, equipment.PrimaryHand.Name);
             }
 
             var twoHandedWeapons = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, GroupConstants.TwoHanded);
@@ -73,13 +59,12 @@ namespace CharacterGen.Generators.Domain.Items
             var featNames = feats.Select(f => f.Name);
 
             if (twoHandedFeats.Intersect(featNames).Any() && equipment.OffHand == null)
+                equipment.OffHand = GenerateOffHandWeapon(feats, characterClass, twoHandedWeapons);
+
+            if (equipment.PrimaryHand.Attributes.Contains(AttributeConstants.Melee) == false)
             {
-                do
-                {
-                    equipment.OffHand = weaponGenerator.GenerateFrom(feats, characterClass);
-                    baseWeaponTypes = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, equipment.OffHand.Name);
-                }
-                while (equipment.OffHand.Attributes.Contains(AttributeConstants.Ammunition) || twoHandedWeapons.Contains(baseWeaponTypes.First()));
+                var meleeWeapon = GenerateMeleeWeapon(feats, characterClass);
+                equipment.Treasure.Items = equipment.Treasure.Items.Union(new[] { meleeWeapon });
             }
 
             equipment.Armor = armorGenerator.GenerateFrom(feats, characterClass);
@@ -93,6 +78,69 @@ namespace CharacterGen.Generators.Domain.Items
             }
 
             return equipment;
+        }
+
+        private Boolean WeaponRequiresAmmunition(IEnumerable<String> baseWeaponTypes)
+        {
+            return baseWeaponTypes.Count() > 1;
+        }
+
+        private Item GenerateAmmunition(IEnumerable<Feat> feats, CharacterClass characterClass, IEnumerable<String> baseWeaponTypes)
+        {
+            Item ammunition;
+            var baseAmmunitionType = String.Empty;
+
+            do
+            {
+                ammunition = weaponGenerator.GenerateFrom(feats, characterClass);
+                baseAmmunitionType = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, ammunition.Name).First();
+            }
+            while (ammunition.Attributes.Contains(AttributeConstants.Ammunition) == false || baseWeaponTypes.Contains(baseAmmunitionType) == false);
+
+            return ammunition;
+        }
+
+        private Item GenerateWeaponForAmmunition(IEnumerable<Feat> feats, CharacterClass characterClass, String baseAmmunitionType)
+        {
+            Item weapon;
+            var baseWeaponTypes = Enumerable.Empty<String>();
+
+            do
+            {
+                weapon = weaponGenerator.GenerateFrom(feats, characterClass);
+                baseWeaponTypes = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, weapon.Name);
+            }
+            while (weapon.Attributes.Contains(AttributeConstants.Ammunition) || baseWeaponTypes.Contains(baseAmmunitionType) == false);
+
+            return weapon;
+        }
+
+        private Item GenerateOffHandWeapon(IEnumerable<Feat> feats, CharacterClass characterClass, IEnumerable<String> twoHandedWeapons)
+        {
+            Item weapon;
+            var baseWeaponTypes = Enumerable.Empty<String>();
+
+            do
+            {
+                weapon = weaponGenerator.GenerateFrom(feats, characterClass);
+                baseWeaponTypes = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, weapon.Name);
+            }
+            while (weapon.Attributes.Contains(AttributeConstants.Ammunition) || twoHandedWeapons.Contains(baseWeaponTypes.First()));
+
+            return weapon;
+        }
+
+        private Item GenerateMeleeWeapon(IEnumerable<Feat> feats, CharacterClass characterClass)
+        {
+            var proficiencyFeats = feats.Where(f => f.Focus == ProficiencyConstants.All);
+
+            if (proficiencyFeats.Any() == false)
+            {
+                var proficiencyFeatNames = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.Proficiency);
+                proficiencyFeats = feats.Where(f => proficiencyFeatNames.Contains(f.Name));
+            }
+
+            return weaponGenerator.GenerateFrom(proficiencyFeats, characterClass);
         }
     }
 }
