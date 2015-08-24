@@ -3,6 +3,7 @@ using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Tables;
 using NUnit.Framework;
 using System;
+using TreasureGen.Common.Items;
 
 namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
 {
@@ -99,7 +100,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
         [TestCase(FeatConstants.GreaterWeaponFocus, FeatConstants.WeaponFocus)]
         [TestCase(FeatConstants.GreaterWeaponSpecialization, FeatConstants.GreaterWeaponFocus, FeatConstants.WeaponSpecialization)]
         [TestCase(FeatConstants.ImprovedBullRush, FeatConstants.PowerAttack)]
-        [TestCase(FeatConstants.ImprovedCritical, GroupConstants.Proficiency)]
+        [TestCase(FeatConstants.ImprovedCritical, ItemTypeConstants.Weapon + GroupConstants.Proficiency)]
         [TestCase(FeatConstants.ImprovedDisarm, FeatConstants.CombatExpertise)]
         [TestCase(FeatConstants.ImprovedFeint, FeatConstants.CombatExpertise)]
         [TestCase(FeatConstants.ImprovedGrapple, FeatConstants.ImprovedUnarmedStrike)]
@@ -116,7 +117,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
         [TestCase(FeatConstants.Mobility, FeatConstants.Dodge)]
         [TestCase(FeatConstants.MountedArchery, FeatConstants.MountedCombat)]
         [TestCase(FeatConstants.NaturalSpell, FeatConstants.WildShape)]
-        [TestCase(FeatConstants.RapidReload, GroupConstants.Proficiency)]
+        [TestCase(FeatConstants.RapidReload, ItemTypeConstants.Weapon + GroupConstants.Proficiency)]
         [TestCase(FeatConstants.RideByAttack, FeatConstants.MountedCombat)]
         [TestCase(FeatConstants.ShotOnTheRun,
             FeatConstants.Dodge,
@@ -135,7 +136,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
         [TestCase(FeatConstants.TowerShieldProficiency, FeatConstants.ShieldProficiency)]
         [TestCase(FeatConstants.Trample, FeatConstants.MountedCombat)]
         [TestCase(FeatConstants.TwoWeaponDefense, FeatConstants.TwoWeaponFighting)]
-        [TestCase(FeatConstants.WeaponFocus, GroupConstants.Proficiency)]
+        [TestCase(FeatConstants.WeaponFocus, ItemTypeConstants.Weapon + GroupConstants.Proficiency)]
         [TestCase(FeatConstants.WeaponSpecialization, FeatConstants.WeaponFocus)]
         [TestCase(FeatConstants.WhirlwindAttack,
             FeatConstants.CombatExpertise,

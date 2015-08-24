@@ -166,6 +166,13 @@
       <item>Hand crossbow</item>
       <item>Crossbow bolt</item>
     </object>
+  <object>
+    <name>Heavy Armor Proficiency</name>
+    <item>Splint mail</item>
+    <item>Banded mail</item>
+    <item>Half-plate</item>
+    <item>Full plate</item>
+  </object>
     <object>
         <name>Heavy crossbow</name>
       <item>Heavy crossbow</item>
@@ -211,6 +218,13 @@
         <name>Life-drinker</name>
       <item>Greataxe</item>
     </object>
+  <object>
+    <name>Light Armor Proficiency</name>
+    <item>Padded armor</item>
+    <item>Leather armor</item>
+    <item>Studded leather armor</item>
+    <item>Chain shirt</item>
+  </object>
     <object>
         <name>Light crossbow</name>
       <item>Light crossbow</item>
@@ -245,6 +259,13 @@
         <name>Longsword</name>
       <item>Longsword</item>
     </object>
+  <object>
+    <name>Medium Armor Proficiency</name>
+    <item>Hide armor</item>
+    <item>Scale mail</item>
+    <item>Chainmail</item>
+    <item>Breastplate</item>
+  </object>
     <object>
         <name>Morningstar</name>
       <item>Morningstar</item>
@@ -320,6 +341,14 @@
         <name>Shatterspike</name>
       <item>Longsword</item>
     </object>
+  <object>
+    <name>Shield Proficiency</name>
+    <item>Buckler</item>
+    <item>Light wooden shield</item>
+    <item>Light steel shield</item>
+    <item>Heavy wooden shield</item>
+    <item>Heavy steel shield</item>
+  </object>
     <object>
         <name>Shifter's sorrow</name>
       <item>Two-bladed sword</item>
@@ -398,6 +427,10 @@
         <name>Throwing axe</name>
       <item>Throwing axe</item>
     </object>
+  <object>
+    <name>Tower Shield Proficiency</name>
+    <item>Tower shield</item>
+  </object>
     <object>
         <name>Trident</name>
       <item>Trident</item>

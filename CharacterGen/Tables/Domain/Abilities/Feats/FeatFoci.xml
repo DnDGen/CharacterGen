@@ -250,6 +250,73 @@
         <item>Warhammer</item>
         <item>Whip</item>
     </object>
+  <object>
+    <name>Weapons with unarmed</name>
+    <item>Bastard sword</item>
+    <item>Battleaxe</item>
+    <item>Club</item>
+    <item>Dagger</item>
+    <item>Dart</item>
+    <item>Dire flail</item>
+    <item>Dwarven urgrosh</item>
+    <item>Dwarven waraxe</item>
+    <item>Falchion</item>
+    <item>Gauntlet</item>
+    <item>Glaive</item>
+    <item>Gnome hooked hammer</item>
+    <item>Greataxe</item>
+    <item>Greatclub</item>
+    <item>Greatsword</item>
+    <item>Guisarme</item>
+    <item>Halberd</item>
+    <item>Halfspear</item>
+    <item>Handaxe</item>
+    <item>Hand crossbow</item>
+    <item>Heavy crossbow</item>
+    <item>Heavy flail</item>
+    <item>Heavy mace</item>
+    <item>Heavy pick</item>
+    <item>Javelin</item>
+    <item>Kama</item>
+    <item>Kukri</item>
+    <item>Lance</item>
+    <item>Light crossbow</item>
+    <item>Light flail</item>
+    <item>Light hammer</item>
+    <item>Light mace</item>
+    <item>Light pick</item>
+    <item>Longbow</item>
+    <item>Longspear</item>
+    <item>Longsword</item>
+    <item>Morningstar</item>
+    <item>Net</item>
+    <item>Nunchaku</item>
+    <item>Orc double axe</item>
+    <item>Punching dagger</item>
+    <item>Quarterstaff</item>
+    <item>Ranseur</item>
+    <item>Rapier</item>
+    <item>Heavy repeating crossbow</item>
+    <item>Light repeating crossbow</item>
+    <item>Sap</item>
+    <item>Scimitar</item>
+    <item>Scythe</item>
+    <item>Shortbow</item>
+    <item>Shortspear</item>
+    <item>Short sword</item>
+    <item>Shuriken</item>
+    <item>Siangham</item>
+    <item>Sickle</item>
+    <item>Sling</item>
+    <item>Spiked chain</item>
+    <item>Spiked gauntlet</item>
+    <item>Throwing axe</item>
+    <item>Trident</item>
+    <item>Two-bladed sword</item>
+    <item>Warhammer</item>
+    <item>Whip</item>
+    <item>Unarmed Strike</item>
+  </object>
     <object>
         <name>Weapons with unarmed and grapple</name>
         <item>Bastard sword</item>

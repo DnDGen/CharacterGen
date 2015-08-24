@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using CharacterGen.Common.Abilities.Feats;
+﻿using CharacterGen.Common.Abilities.Feats;
 using CharacterGen.Common.Abilities.Skills;
 using CharacterGen.Common.Abilities.Stats;
 using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Selectors.Objects;
 using CharacterGen.Tables;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
 
 namespace CharacterGen.Tests.Unit.Selectors.Objects
 {
@@ -153,7 +153,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Objects
             feats[0].Name = "feat";
             selection.RequiredFeats = new[]
             {
-                new RequiredFeat { Feat = "feat" }, 
+                new RequiredFeat { Feat = "feat" },
                 new RequiredFeat { Feat = "other required feat" }
             };
 
@@ -170,7 +170,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Objects
             feats[1].Name = "other required feat";
             selection.RequiredFeats = new[]
             {
-                new RequiredFeat { Feat = "feat" }, 
+                new RequiredFeat { Feat = "feat" },
                 new RequiredFeat { Feat = "other required feat" }
             };
 
@@ -190,7 +190,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Objects
 
             selection.RequiredFeats = new[]
             {
-                new RequiredFeat { Feat = "feat" }, 
+                new RequiredFeat { Feat = "feat" },
                 new RequiredFeat { Feat = "other required feat" }
             };
 
@@ -203,7 +203,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Objects
         {
             selection.RequiredFeats = new[]
             {
-                new RequiredFeat { Feat = GroupConstants.Proficiency }
+                new RequiredFeat { Feat = "weapon" + GroupConstants.Proficiency }
             };
 
             var met = selection.MutableRequirementsMet(feats);
@@ -215,7 +215,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Objects
         {
             selection.RequiredFeats = new[]
             {
-                new RequiredFeat { Feat = GroupConstants.Proficiency },
+                new RequiredFeat { Feat = "weapon" + GroupConstants.Proficiency },
                 new RequiredFeat { Feat = "feat" }
             };
 
@@ -229,8 +229,8 @@ namespace CharacterGen.Tests.Unit.Selectors.Objects
             feats.Add(new Feat());
             feats[0].Name = "feat";
             selection.RequiredFeats = new[]
-            { 
-                new RequiredFeat { Feat = GroupConstants.Proficiency },
+            {
+                new RequiredFeat { Feat = "weapon" + GroupConstants.Proficiency },
                 new RequiredFeat { Feat = "feat" }
             };
 

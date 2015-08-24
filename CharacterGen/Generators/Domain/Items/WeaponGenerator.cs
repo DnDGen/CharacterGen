@@ -65,7 +65,7 @@ namespace CharacterGen.Generators.Domain.Items
 
         private IEnumerable<String> GetAllowedWeapons(IEnumerable<Feat> feats)
         {
-            var proficiencyFeatNames = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.Proficiency);
+            var proficiencyFeatNames = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, ItemTypeConstants.Weapon + GroupConstants.Proficiency);
             var proficiencyFeats = feats.Where(f => proficiencyFeatNames.Contains(f.Name));
             var allWeapons = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, GroupConstants.Weapons);
 

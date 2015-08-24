@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using CharacterGen.Common.Abilities.Feats;
+﻿using CharacterGen.Common.Abilities.Feats;
 using CharacterGen.Common.Abilities.Skills;
 using CharacterGen.Common.Abilities.Stats;
 using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Tables;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CharacterGen.Selectors.Objects
 {
@@ -50,7 +50,7 @@ namespace CharacterGen.Selectors.Objects
 
         public Boolean MutableRequirementsMet(IEnumerable<Feat> feats)
         {
-            var proficiencyRequirement = RequiredFeats.FirstOrDefault(f => f.Feat == GroupConstants.Proficiency);
+            var proficiencyRequirement = RequiredFeats.FirstOrDefault(f => f.Feat.Contains(GroupConstants.Proficiency));
             var requirementsWithoutProficiency = RequiredFeats.Except(new[] { proficiencyRequirement });
 
             return requirementsWithoutProficiency.All(f => f.RequirementMet(feats));

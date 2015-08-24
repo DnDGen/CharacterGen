@@ -1,17 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Ninject;
-using CharacterGen.Common.Abilities.Skills;
+﻿using CharacterGen.Common.Abilities.Skills;
 using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Mappers;
 using CharacterGen.Tables;
 using CharacterGen.Tests.Integration.Common;
+using Ninject;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
 {
     [TestFixture]
+    [Table]
     public class SkillCollectionTests : IntegrationTests
     {
         [Inject]

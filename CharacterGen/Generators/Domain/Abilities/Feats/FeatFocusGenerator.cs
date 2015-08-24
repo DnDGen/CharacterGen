@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using CharacterGen.Common.Abilities.Feats;
+﻿using CharacterGen.Common.Abilities.Feats;
 using CharacterGen.Common.Abilities.Skills;
 using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Common.Items;
@@ -9,6 +6,10 @@ using CharacterGen.Generators.Abilities.Feats;
 using CharacterGen.Selectors;
 using CharacterGen.Selectors.Objects;
 using CharacterGen.Tables;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using TreasureGen.Common.Items;
 
 namespace CharacterGen.Generators.Domain.Abilities.Feats
 {
@@ -63,13 +64,13 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
 
         private IEnumerable<String> GetFoci(String feat, String focusType, Dictionary<String, IEnumerable<String>> allSourceFeatFoci, IEnumerable<Feat> otherFeats, IEnumerable<String> requiredFeatIds)
         {
-            var proficiencyRequired = requiredFeatIds.Contains(GroupConstants.Proficiency);
+            var proficiencyRequired = requiredFeatIds.Contains(ItemTypeConstants.Weapon + GroupConstants.Proficiency);
             var sourceFeatFoci = GetExplodedFoci(allSourceFeatFoci, feat, focusType, otherFeats);
 
             if (proficiencyRequired == false && otherFeats.Any(f => RequirementHasFocus(requiredFeatIds, f)) == false)
                 return sourceFeatFoci;
 
-            var proficiencyFeatIds = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.Proficiency);
+            var proficiencyFeatIds = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, ItemTypeConstants.Weapon + GroupConstants.Proficiency);
             var proficiencyFeats = otherFeats.Where(f => proficiencyFeatIds.Contains(f.Name));
 
             var requiredFeats = otherFeats.Where(f => RequirementHasFocus(requiredFeatIds, f));

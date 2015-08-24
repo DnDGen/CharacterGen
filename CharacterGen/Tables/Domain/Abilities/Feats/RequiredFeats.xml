@@ -80,7 +80,7 @@
     </object>
     <object>
         <name>Improved Critical</name>
-        <item>Proficiency</item>
+        <item>WeaponProficiency</item>
     </object>
     <object>
         <name>Improved Disarm</name>
@@ -172,7 +172,7 @@
     </object>
     <object>
         <name>Rapid Reload</name>
-        <item>Proficiency</item>
+        <item>WeaponProficiency</item>
     </object>
     <object>
         <name>Rapid Shot</name>
@@ -233,7 +233,7 @@
     </object>
     <object>
         <name>Weapon Focus</name>
-        <item>Proficiency</item>
+        <item>WeaponProficiency</item>
     </object>
     <object>
         <name>Weapon Specialization</name>

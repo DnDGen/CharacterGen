@@ -27,6 +27,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
                 FeatConstants.MartialWeaponProficiency,
                 FeatConstants.ExoticWeaponProficiency,
                 GroupConstants.Weapons,
+                GroupConstants.WeaponsWithUnarmed,
                 GroupConstants.WeaponsWithUnarmedAndGrapple,
                 GroupConstants.WeaponsWithUnarmedAndGrappleAndRay,
                 FeatConstants.CombatStyle,
@@ -248,7 +249,81 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
         }
 
         [Test]
-        public void WeaponAnGrappleFoci()
+        public void WeaponAndUnarmedFoci()
+        {
+            var foci = new[]
+            {
+                WeaponConstants.BastardSword,
+                WeaponConstants.Battleaxe,
+                WeaponConstants.Club,
+                WeaponConstants.Dagger,
+                WeaponConstants.Dart,
+                WeaponConstants.DireFlail,
+                WeaponConstants.DwarvenUrgrosh,
+                WeaponConstants.DwarvenWaraxe,
+                WeaponConstants.Falchion,
+                WeaponConstants.Gauntlet,
+                WeaponConstants.Glaive,
+                WeaponConstants.GnomeHookedHammer,
+                WeaponConstants.Greataxe,
+                WeaponConstants.Greatclub,
+                WeaponConstants.Greatsword,
+                WeaponConstants.Guisarme,
+                WeaponConstants.Halberd,
+                WeaponConstants.Halfspear,
+                WeaponConstants.Handaxe,
+                WeaponConstants.HandCrossbow,
+                WeaponConstants.HeavyCrossbow,
+                WeaponConstants.HeavyFlail,
+                WeaponConstants.HeavyMace,
+                WeaponConstants.HeavyPick,
+                WeaponConstants.Javelin,
+                WeaponConstants.Kama,
+                WeaponConstants.Kukri,
+                WeaponConstants.Lance,
+                WeaponConstants.LightCrossbow,
+                WeaponConstants.LightFlail,
+                WeaponConstants.LightHammer,
+                WeaponConstants.LightMace,
+                WeaponConstants.LightPick,
+                WeaponConstants.Longbow,
+                WeaponConstants.Longspear,
+                WeaponConstants.Longsword,
+                WeaponConstants.Morningstar,
+                WeaponConstants.Net,
+                WeaponConstants.Nunchaku,
+                WeaponConstants.OrcDoubleAxe,
+                WeaponConstants.PunchingDagger,
+                WeaponConstants.Quarterstaff,
+                WeaponConstants.Ranseur,
+                WeaponConstants.Rapier,
+                WeaponConstants.HeavyRepeatingCrossbow,
+                WeaponConstants.LightRepeatingCrossbow,
+                WeaponConstants.Sap,
+                WeaponConstants.Scimitar,
+                WeaponConstants.Scythe,
+                WeaponConstants.Shortbow,
+                WeaponConstants.Shortspear,
+                WeaponConstants.ShortSword,
+                WeaponConstants.Shuriken,
+                WeaponConstants.Siangham,
+                WeaponConstants.Sickle,
+                WeaponConstants.Sling,
+                WeaponConstants.SpikedChain,
+                WeaponConstants.SpikedGauntlet,
+                WeaponConstants.ThrowingAxe,
+                WeaponConstants.Trident,
+                WeaponConstants.TwoBladedSword,
+                WeaponConstants.Warhammer,
+                WeaponConstants.Whip,
+                ProficiencyConstants.UnarmedStrike
+            };
+
+            base.DistinctCollection(GroupConstants.WeaponsWithUnarmed, foci);
+        }
+
+        [Test]
+        public void WeaponAndUnarmedAndGrappleFoci()
         {
             var foci = new[]
             {

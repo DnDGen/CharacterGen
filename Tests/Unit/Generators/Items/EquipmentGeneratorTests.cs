@@ -388,7 +388,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             feats[2].Focus = "weapon 1";
             feats[2].Name = "third feat";
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.Proficiency))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, ItemTypeConstants.Weapon + GroupConstants.Proficiency))
                 .Returns(new[] { feats[0].Name, feats[2].Name });
 
             var meleeWeapon = new Item();
@@ -411,7 +411,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             feats[1].Name = "other feat";
             feats[1].Focus = "other focus";
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.Proficiency))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, ItemTypeConstants.Weapon + GroupConstants.Proficiency))
                 .Returns(new[] { feats[0].Name });
 
             var meleeWeapon = new Item();

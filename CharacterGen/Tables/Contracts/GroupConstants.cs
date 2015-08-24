@@ -36,6 +36,7 @@ namespace CharacterGen.Tables
         public const String TwoHanded = "Two-Handed";
         public const String Warriors = "Warriors";
         public const String Weapons = "Weapons";
+        public const String WeaponsWithUnarmed = "Weapons with unarmed";
         public const String WeaponsWithUnarmedAndGrapple = "Weapons with unarmed and grapple";
         public const String WeaponsWithUnarmedAndGrappleAndRay = "Weapons with unarmed, grapple, and ray";
         public const String WizardBonusFeats = "WizardBonusFeats";

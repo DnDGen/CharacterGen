@@ -1,4 +1,5 @@
-﻿using CharacterGen.Tables;
+﻿using CharacterGen.Common.Abilities.Feats;
+using CharacterGen.Tables;
 using NUnit.Framework;
 using System;
 using TreasureGen.Common.Items;
@@ -18,6 +19,11 @@ namespace CharacterGen.Tests.Integration.Tables.Items
         {
             var names = new[]
             {
+                FeatConstants.LightArmorProficiency,
+                FeatConstants.MediumArmorProficiency,
+                FeatConstants.HeavyArmorProficiency,
+                FeatConstants.ShieldProficiency,
+                FeatConstants.TowerShieldProficiency,
                 GroupConstants.Weapons,
                 WeaponConstants.Arrow,
                 WeaponConstants.AssassinsDagger,
@@ -126,6 +132,29 @@ namespace CharacterGen.Tests.Integration.Tables.Items
             AssertCollectionNames(names);
         }
 
+        [TestCase(FeatConstants.MediumArmorProficiency,
+            ArmorConstants.HideArmor,
+            ArmorConstants.ScaleMail,
+            ArmorConstants.Chainmail,
+            ArmorConstants.Breastplate)]
+        [TestCase(FeatConstants.HeavyArmorProficiency,
+            ArmorConstants.SplintMail,
+            ArmorConstants.BandedMail,
+            ArmorConstants.HalfPlate,
+            ArmorConstants.FullPlate)]
+        [TestCase(FeatConstants.ShieldProficiency,
+            ArmorConstants.Buckler,
+            ArmorConstants.HeavySteelShield,
+            ArmorConstants.HeavyWoodenShield,
+            ArmorConstants.LightSteelShield,
+            ArmorConstants.LightWoodenShield)]
+        [TestCase(FeatConstants.TowerShieldProficiency,
+            ArmorConstants.TowerShield)]
+        [TestCase(FeatConstants.LightArmorProficiency,
+            ArmorConstants.PaddedArmor,
+            ArmorConstants.LeatherArmor,
+            ArmorConstants.StuddedLeatherArmor,
+            ArmorConstants.ChainShirt)]
         [TestCase(WeaponConstants.Arrow, WeaponConstants.Arrow)]
         [TestCase(WeaponConstants.AssassinsDagger, WeaponConstants.Dagger)]
         [TestCase(WeaponConstants.BastardSword, WeaponConstants.BastardSword)]

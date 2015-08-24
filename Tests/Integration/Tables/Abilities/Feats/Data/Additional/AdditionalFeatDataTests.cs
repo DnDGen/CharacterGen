@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using CharacterGen.Common.Abilities.Feats;
+﻿using CharacterGen.Common.Abilities.Feats;
 using CharacterGen.Common.Items;
 using CharacterGen.Tables;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
 
 namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Additional
 {
@@ -26,7 +26,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Additional
         [Test]
         public override void CollectionNames()
         {
-            var names = new[] 
+            var names = new[]
             {
                 FeatConstants.Acrobatic,
                 FeatConstants.Agile,
@@ -181,7 +181,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Additional
         [TestCase(FeatConstants.HeightenSpell, 0, "", 0, "", 0)]
         [TestCase(FeatConstants.ImprovedBullRush, 0, "", 0, "", 4)]
         [TestCase(FeatConstants.ImprovedCounterspell, 0, "", 0, "", 0)]
-        [TestCase(FeatConstants.ImprovedCritical, 8, GroupConstants.Proficiency, 0, "", 0)]
+        [TestCase(FeatConstants.ImprovedCritical, 8, GroupConstants.WeaponsWithUnarmed, 0, "", 0)]
         [TestCase(FeatConstants.ImprovedDisarm, 0, "", 0, "", 4)]
         [TestCase(FeatConstants.ImprovedEvasion, 0, "", 0, "", 0)]
         [TestCase(FeatConstants.ImprovedFamiliar, 0, "", 0, "", 0)]

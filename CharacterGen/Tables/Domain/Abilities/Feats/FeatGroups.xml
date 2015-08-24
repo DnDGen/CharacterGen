@@ -137,6 +137,14 @@
         <name>Animal</name>
         <item>Spell-Like Ability</item>
     </object>
+  <object>
+    <name>ArmorProficiency</name>
+    <item>Heavy Armor Proficiency</item>
+    <item>Light Armor Proficiency</item>
+    <item>Medium Armor Proficiency</item>
+    <item>Shield Proficiency</item>
+    <item>Tower Shield Proficiency</item>
+  </object>
     <object>
         <name>Barbarian</name>
         <item>Simple Weapon Proficiency</item>
@@ -963,17 +971,6 @@
         <name>Plant</name>
         <item>Turn</item>
     </object>
-  <object>
-    <name>Proficiency</name>
-    <item>Exotic Weapon Proficiency</item>
-    <item>Heavy Armor Proficiency</item>
-    <item>Light Armor Proficiency</item>
-    <item>Martial Weapon Proficiency</item>
-    <item>Medium Armor Proficiency</item>
-    <item>Shield Proficiency</item>
-    <item>Simple Weapon Proficiency</item>
-    <item>Tower Shield Proficiency</item>
-  </object>
     <object>
         <name>Protection</name>
         <item>Spell-Like Ability</item>
@@ -1184,6 +1181,12 @@
         <name>Water</name>
         <item>Turn</item>
     </object>
+  <object>
+    <name>WeaponProficiency</name>
+    <item>Exotic Weapon Proficiency</item>
+    <item>Martial Weapon Proficiency</item>
+    <item>Simple Weapon Proficiency</item>
+  </object>
     <object>
         <name>Werebear</name>
         <item>Alternate Form</item>

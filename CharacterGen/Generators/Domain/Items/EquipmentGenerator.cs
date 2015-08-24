@@ -136,7 +136,7 @@ namespace CharacterGen.Generators.Domain.Items
 
             if (proficiencyFeats.Any() == false)
             {
-                var proficiencyFeatNames = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.Proficiency);
+                var proficiencyFeatNames = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, ItemTypeConstants.Weapon + GroupConstants.Proficiency);
                 proficiencyFeats = feats.Where(f => proficiencyFeatNames.Contains(f.Name));
             }
 
