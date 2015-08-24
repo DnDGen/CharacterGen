@@ -7,7 +7,6 @@ using CharacterGen.Generators.Domain;
 using CharacterGen.Generators.Domain.Abilities;
 using CharacterGen.Generators.Domain.Abilities.Feats;
 using CharacterGen.Generators.Domain.Combats;
-using CharacterGen.Generators.Domain.Items;
 using CharacterGen.Generators.Domain.Magics;
 using CharacterGen.Generators.Domain.Randomizers.Alignments;
 using CharacterGen.Generators.Domain.Randomizers.CharacterClasses.ClassNames;
@@ -51,7 +50,7 @@ namespace CharacterGen.Bootstrap.Modules
             Bind<IClassFeatsGenerator>().To<ClassFeatsGenerator>();
             Bind<IRacialFeatsGenerator>().To<RacialFeatsGenerator>();
             Bind<IFeatFocusGenerator>().To<FeatFocusGenerator>();
-            Bind<GearGenerator>().To<ArmorGenerator>().Named(ItemTypeConstants.Armor);
+            Bind<GearGenerator>().ToMethod(c => ArmorGeneratorFactory.CreateWith(c.Kernel)).Named(ItemTypeConstants.Armor);
             Bind<GearGenerator>().ToMethod(c => WeaponGeneratorFactory.CreateWith(c.Kernel)).Named(ItemTypeConstants.Weapon);
             Bind<IMagicGenerator>().To<MagicGenerator>();
 

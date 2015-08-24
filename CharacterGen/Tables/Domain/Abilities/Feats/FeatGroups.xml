@@ -1168,6 +1168,13 @@
         <item>Natural WeaponBite</item>
         <item>Stench</item>
     </object>
+  <object>
+    <name>Two-Handed</name>
+  <item>Two-Weapon Fighting</item>
+  <item>Two-Weapon Defense</item>
+  <item>Improved Two-Weapon Fighting</item>
+  <item>Greater Two-Weapon Fighting</item>
+  </object>
     <object>
         <name>War</name>
         <item>Martial Weapon Proficiency</item>

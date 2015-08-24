@@ -579,7 +579,7 @@ namespace CharacterGen.Tests.Integration.Bootstrap.Modules
         }
 
         [Test]
-        public void MAgicGeneratorIsNotASingleton()
+        public void MagicGeneratorIsNotASingleton()
         {
             AssertNotSingleton<IMagicGenerator>();
         }

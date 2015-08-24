@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using CharacterGen.Common.Abilities.Feats;
+﻿using CharacterGen.Common.Abilities.Feats;
 using CharacterGen.Common.Abilities.Skills;
 using CharacterGen.Common.Abilities.Stats;
 using CharacterGen.Common.CharacterClasses;
@@ -8,6 +6,8 @@ using CharacterGen.Common.Magics;
 using CharacterGen.Common.Races;
 using CharacterGen.Tables;
 using NUnit.Framework;
+using System;
+using System.Linq;
 using TreasureGen.Common.Items;
 
 namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
@@ -30,9 +30,11 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
                 GroupConstants.HasClassRequirements,
                 GroupConstants.HasSkillRequirements,
                 GroupConstants.HasStatRequirements,
-                GroupConstants.Proficiency,
+                ItemTypeConstants.Weapon + GroupConstants.Proficiency,
+                ItemTypeConstants.Armor + GroupConstants.Proficiency,
                 FeatConstants.SkillBonus,
                 GroupConstants.TakenMultipleTimes,
+                GroupConstants.TwoHanded,
                 GroupConstants.WizardBonusFeats,
                 CharacterClassConstants.Barbarian,
                 CharacterClassConstants.Bard,
@@ -213,15 +215,21 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.SilentSpell,
             FeatConstants.StillSpell,
             FeatConstants.WidenSpell)]
-        [TestCase(GroupConstants.Proficiency,
+        [TestCase(ItemTypeConstants.Weapon + GroupConstants.Proficiency,
             FeatConstants.ExoticWeaponProficiency,
+            FeatConstants.MartialWeaponProficiency,
+            FeatConstants.SimpleWeaponProficiency)]
+        [TestCase(ItemTypeConstants.Armor + GroupConstants.Proficiency,
             FeatConstants.HeavyArmorProficiency,
             FeatConstants.LightArmorProficiency,
-            FeatConstants.MartialWeaponProficiency,
             FeatConstants.MediumArmorProficiency,
             FeatConstants.ShieldProficiency,
-            FeatConstants.SimpleWeaponProficiency,
             FeatConstants.TowerShieldProficiency)]
+        [TestCase(GroupConstants.TwoHanded,
+            FeatConstants.TwoWeaponDefense,
+            FeatConstants.TwoWeaponFighting,
+            FeatConstants.GreaterTwoWeaponFighting,
+            FeatConstants.ImprovedTwoWeaponFighting)]
         public override void DistinctCollection(String name, params String[] collection)
         {
             base.DistinctCollection(name, collection);
