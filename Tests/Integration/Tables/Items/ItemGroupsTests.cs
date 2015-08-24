@@ -86,6 +86,7 @@ namespace CharacterGen.Tests.Integration.Tables.Items
                 WeaponConstants.Morningstar,
                 WeaponConstants.NineLivesStealer,
                 WeaponConstants.Net,
+                WeaponConstants.NetOfSnaring,
                 WeaponConstants.Nunchaku,
                 WeaponConstants.Oathbow,
                 WeaponConstants.OrcDoubleAxe,
@@ -215,6 +216,7 @@ namespace CharacterGen.Tests.Integration.Tables.Items
         [TestCase(WeaponConstants.Longsword, WeaponConstants.Longsword)]
         [TestCase(WeaponConstants.Morningstar, WeaponConstants.Morningstar)]
         [TestCase(WeaponConstants.Net, WeaponConstants.Net)]
+        [TestCase(WeaponConstants.NetOfSnaring, WeaponConstants.Net)]
         [TestCase(WeaponConstants.NineLivesStealer, WeaponConstants.Longsword)]
         [TestCase(WeaponConstants.Nunchaku, WeaponConstants.Nunchaku)]
         [TestCase(WeaponConstants.Oathbow, WeaponConstants.Longbow, WeaponConstants.Arrow)]

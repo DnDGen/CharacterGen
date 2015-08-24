@@ -274,6 +274,10 @@
         <name>Net</name>
       <item>Net</item>
     </object>
+  <object>
+    <name>Net of snaring</name>
+    <item>Net</item>
+  </object>
     <object>
         <name>Nine lives stealer</name>
       <item>Longsword</item>
