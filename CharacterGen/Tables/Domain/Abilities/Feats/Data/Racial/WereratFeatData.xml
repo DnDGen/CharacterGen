@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+    <object>
+        <name>Natural Armor</name>
+        <item>Natural Armor</item>
+        <item></item>
+        <item>0</item>
+        <item>2</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+      <item>0</item>
+    </object>
+  <object>
+    <name>Empathy</name>
+    <item>Empathy</item>
+    <item></item>
+    <item>0</item>
+    <item>4</item>
+    <item>Rat</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Lycanthropy</name>
+    <item>Lycanthropy</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Wererat</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Alternate Form</name>
+    <item>Alternate Form</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Rat</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Iron Will</name>
+    <item>Iron Will</item>
+    <item></item>
+    <item>0</item>
+    <item>2</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Scent</name>
+    <item>Scent</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+    <object>
+        <name>Low-Light Vision</name>
+        <item>Low-Light Vision</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+      <item>0</item>
+    </object>
+  <object>
+    <name>Save Bonus</name>
+    <item>Save Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>2</item>
+    <item>All</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Skill BonusHide</name>
+    <item>Skill Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>1</item>
+    <item>Hide</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Skill BonusMove Silently</name>
+    <item>Skill Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>1</item>
+    <item>Move Silently</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Alertness</name>
+    <item>Alertness</item>
+    <item></item>
+    <item>0</item>
+    <item>2</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Disease</name>
+    <item>Disease</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Filth fever</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Weapon Finesse</name>
+    <item>Weapon Finesse</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+</items>

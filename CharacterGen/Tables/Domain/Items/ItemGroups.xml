@@ -1,6 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <items>
+  <object>
+    <name>Absorbing shield</name>
+    <item>Heavy steel shield</item>
+  </object>
+  <object>
+    <name>Armor of arrow attraction</name>
+    <item>Full plate</item>
+  </object>
+  <object>
+    <name>Armor of rage</name>
+    <item>Full plate</item>
+  </object>
     <object>
         <name>Arrow</name>
       <item>Arrow</item>
@@ -9,6 +21,14 @@
         <name>Assassin's dagger</name>
       <item>Dagger</item>
     </object>
+  <object>
+    <name>Banded mail</name>
+    <item>Banded mail</item>
+  </object>
+  <object>
+    <name>Banded mail of luck</name>
+    <item>Banded mail</item>
+  </object>
     <object>
         <name>Bastard sword</name>
       <item>Bastard sword</item>
@@ -21,6 +41,34 @@
         <name>Berserking sword</name>
       <item>Greatsword</item>
     </object>
+  <object>
+    <name>Breastplate</name>
+    <item>Breastplate</item>
+  </object>
+  <object>
+    <name>Breastplate of command</name>
+    <item>Breastplate</item>
+  </object>
+  <object>
+    <name>Buckler</name>
+    <item>Buckler</item>
+  </object>
+  <object>
+    <name>Caster's shield</name>
+    <item>Light wooden shield</item>
+  </object>
+  <object>
+    <name>Celestial armor</name>
+    <item>Chainmail</item>
+  </object>
+  <object>
+    <name>Chain shirt</name>
+    <item>Chain shirt</item>
+  </object>
+  <object>
+    <name>Chainmail</name>
+    <item>Chainmail</item>
+  </object>
     <object>
         <name>Club</name>
       <item>Club</item>
@@ -89,10 +137,18 @@
         <name>Dart</name>
       <item>Dart</item>
     </object>
+  <object>
+    <name>Demon armor</name>
+    <item>Full plate</item>
+  </object>
     <object>
         <name>Dire flail</name>
       <item>Dire flail</item>
     </object>
+  <object>
+    <name>Dwarven plate</name>
+    <item>Full plate</item>
+  </object>
     <object>
         <name>Dwarven thrower</name>
       <item>Warhammer</item>
@@ -105,6 +161,10 @@
         <name>Dwarven waraxe</name>
       <item>Dwarven waraxe</item>
     </object>
+  <object>
+    <name>Elven chain</name>
+    <item>Elven chain</item>
+  </object>
     <object>
         <name>Falchion</name>
       <item>Falchion</item>
@@ -117,6 +177,14 @@
         <name>Frost brand</name>
       <item>Greatsword</item>
     </object>
+  <object>
+    <name>Full plate</name>
+    <item>Full plate</item>
+  </object>
+  <object>
+    <name>Full plate of speed</name>
+    <item>Full plate</item>
+  </object>
     <object>
         <name>Gauntlet</name>
       <item>Gauntlet</item>
@@ -153,6 +221,10 @@
         <name>Halberd</name>
       <item>Halberd</item>
     </object>
+  <object>
+    <name>Half-plate</name>
+    <item>Half-plate</item>
+  </object>
     <object>
         <name>Halfspear</name>
       <item>Halfspear</item>
@@ -190,6 +262,18 @@
         <name>Heavy pick</name>
       <item>Heavy pick</item>
     </object>
+  <object>
+    <name>Heavy steel shield</name>
+    <item>Heavy steel shield</item>
+  </object>
+  <object>
+    <name>Heavy wooden shield</name>
+    <item>Heavy wooden shield</item>
+  </object>
+  <object>
+    <name>Hide armor</name>
+    <item>Hide armor</item>
+  </object>
     <object>
         <name>Holy avenger</name>
       <item>Longsword</item>
@@ -214,6 +298,10 @@
         <name>Lance</name>
       <item>Lance</item>
     </object>
+  <object>
+    <name>Leather armor</name>
+    <item>Leather armor</item>
+  </object>
     <object>
         <name>Life-drinker</name>
       <item>Greataxe</item>
@@ -224,6 +312,7 @@
     <item>Leather armor</item>
     <item>Studded leather armor</item>
     <item>Chain shirt</item>
+    <item>Elven chain</item>
   </object>
     <object>
         <name>Light crossbow</name>
@@ -246,6 +335,18 @@
         <name>Light pick</name>
       <item>Light pick</item>
     </object>
+  <object>
+    <name>Light steel shield</name>
+    <item>Light steel shield</item>
+  </object>
+  <object>
+    <name>Light wooden shield</name>
+    <item>Light wooden shield</item>
+  </object>
+  <object>
+    <name>Lion's shield</name>
+    <item>Heavy steel shield</item>
+  </object>
     <object>
         <name>Longbow</name>
       <item>Longbow</item>
@@ -259,6 +360,10 @@
         <name>Longsword</name>
       <item>Longsword</item>
     </object>
+  <object>
+    <name>Luck blade</name>
+    <item>Short sword</item>
+  </object>
   <object>
     <name>Medium Armor Proficiency</name>
     <item>Hide armor</item>
@@ -295,6 +400,14 @@
         <name>Orc double axe</name>
       <item>Orc double axe</item>
     </object>
+  <object>
+    <name>Padded armor</name>
+    <item>Padded armor</item>
+  </object>
+  <object>
+    <name>Plate armor of the deep</name>
+    <item>Full plate</item>
+  </object>
     <object>
         <name>Punching dagger</name>
       <item>Punching dagger</item>
@@ -315,6 +428,10 @@
         <name>Rapier of puncturing</name>
       <item>Rapier</item>
     </object>
+  <object>
+    <name>Rhino hide</name>
+    <item>Hide armor</item>
+  </object>
     <object>
         <name>Heavy repeating crossbow</name>
       <item>Heavy repeating crossbow</item>
@@ -329,6 +446,10 @@
         <name>Sap</name>
       <item>Sap</item>
     </object>
+  <object>
+    <name>Scale mail</name>
+    <item>Scale mail</item>
+  </object>
     <object>
         <name>Scimitar</name>
       <item>Scimitar</item>
@@ -407,6 +528,18 @@
         <name>Spiked gauntlet</name>
       <item>Spiked gauntlet</item>
     </object>
+  <object>
+    <name>Spined shield</name>
+    <item>Heavy steel shield</item>
+  </object>
+  <object>
+    <name>Splint mail</name>
+    <item>Splint mail</item>
+  </object>
+  <object>
+    <name>Studded leather armor</name>
+    <item>Studded leather armor</item>
+  </object>
     <object>
         <name>Sun blade</name>
       <item>Short sword</item>
@@ -431,6 +564,10 @@
         <name>Throwing axe</name>
       <item>Throwing axe</item>
     </object>
+  <object>
+    <name>Tower shield</name>
+    <item>Tower shield</item>
+  </object>
   <object>
     <name>Tower Shield Proficiency</name>
     <item>Tower shield</item>
@@ -560,4 +697,8 @@
         <name>Whip</name>
       <item>Whip</item>
     </object>
+  <object>
+    <name>Winged shield</name>
+    <item>Heavy wooden shield</item>
+  </object>
 </items>

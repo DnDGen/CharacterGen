@@ -63,6 +63,11 @@
     <item>Disguise</item>
     <item>Forgery</item>
   </object>
+  <object>
+    <name>Deft Hands</name>
+    <item>Sleight of Hand</item>
+    <item>Use Rope</item>
+  </object>
     <object>
         <name>Destruction</name>
     </object>
@@ -99,6 +104,11 @@
         <name>Illusion</name>
     </object>
     <object>
+      <name>Investigator</name>
+      <item>Gather Information</item>
+      <item>Search</item>
+    </object>
+    <object>
         <name>Law</name>
     </object>
     <object>
@@ -111,6 +121,11 @@
     <name>Magical Aptitude</name>
     <item>Spellcraft</item>
     <item>Use Magic Device</item>
+  </object>
+  <object>
+    <name>Nature Sense</name>
+    <item>Knowledge (Nature)</item>
+    <item>Survival</item>
   </object>
     <object>
         <name>Necromancy</name>

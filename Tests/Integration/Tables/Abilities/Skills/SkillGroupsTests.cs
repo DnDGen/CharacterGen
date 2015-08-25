@@ -1,9 +1,9 @@
-﻿using System;
-using CharacterGen.Common.Abilities.Feats;
+﻿using CharacterGen.Common.Abilities.Feats;
 using CharacterGen.Common.Abilities.Skills;
 using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Tables;
 using NUnit.Framework;
+using System;
 
 namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
 {
@@ -57,8 +57,11 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
                 FeatConstants.AnimalAffinity,
                 FeatConstants.Athletic,
                 FeatConstants.Deceitful,
+                FeatConstants.DeftHands,
                 FeatConstants.Diligent,
+                FeatConstants.Investigator,
                 FeatConstants.MagicalAptitude,
+                FeatConstants.NatureSense,
                 FeatConstants.Negotiator,
                 FeatConstants.NimbleFingers,
                 FeatConstants.Persuasive,
@@ -122,12 +125,21 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
         [TestCase(FeatConstants.Deceitful,
             SkillConstants.Disguise,
             SkillConstants.Forgery)]
+        [TestCase(FeatConstants.DeftHands,
+            SkillConstants.SleightOfHand,
+            SkillConstants.UseRope)]
         [TestCase(FeatConstants.Diligent,
             SkillConstants.Appraise,
             SkillConstants.DecipherScript)]
+        [TestCase(FeatConstants.Investigator,
+            SkillConstants.GatherInformation,
+            SkillConstants.Search)]
         [TestCase(FeatConstants.MagicalAptitude,
             SkillConstants.Spellcraft,
             SkillConstants.UseMagicDevice)]
+        [TestCase(FeatConstants.NatureSense,
+            SkillConstants.KnowledgeNature,
+            SkillConstants.Survival)]
         [TestCase(FeatConstants.Negotiator,
             SkillConstants.Diplomacy,
             SkillConstants.SenseMotive)]

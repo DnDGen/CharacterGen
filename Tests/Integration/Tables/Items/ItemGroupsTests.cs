@@ -19,11 +19,46 @@ namespace CharacterGen.Tests.Integration.Tables.Items
         {
             var names = new[]
             {
+                ArmorConstants.AbsorbingShield,
+                ArmorConstants.ArmorOfArrowAttraction,
+                ArmorConstants.ArmorOfRage,
+                ArmorConstants.BandedMail,
+                ArmorConstants.BandedMailOfLuck,
+                ArmorConstants.Breastplate,
+                ArmorConstants.BreastplateOfCommand,
+                ArmorConstants.Buckler,
+                ArmorConstants.CastersShield,
+                ArmorConstants.CelestialArmor,
+                ArmorConstants.Chainmail,
+                ArmorConstants.ChainShirt,
+                ArmorConstants.DemonArmor,
+                ArmorConstants.DwarvenPlate,
+                ArmorConstants.ElvenChain,
+                ArmorConstants.FullPlate,
+                ArmorConstants.FullPlateOfSpeed,
+                ArmorConstants.HalfPlate,
+                ArmorConstants.HeavySteelShield,
+                ArmorConstants.HeavyWoodenShield,
+                ArmorConstants.HideArmor,
+                ArmorConstants.LeatherArmor,
+                ArmorConstants.LightSteelShield,
+                ArmorConstants.LightWoodenShield,
+                ArmorConstants.LionsShield,
+                ArmorConstants.PaddedArmor,
+                ArmorConstants.PlateArmorOfTheDeep,
+                ArmorConstants.RhinoHide,
+                ArmorConstants.ScaleMail,
+                ArmorConstants.SpinedShield,
+                ArmorConstants.SplintMail,
+                ArmorConstants.StuddedLeatherArmor,
+                ArmorConstants.TowerShield,
+                ArmorConstants.WingedShield,
                 FeatConstants.LightArmorProficiency,
                 FeatConstants.MediumArmorProficiency,
                 FeatConstants.HeavyArmorProficiency,
                 FeatConstants.ShieldProficiency,
                 FeatConstants.TowerShieldProficiency,
+                GroupConstants.TwoHanded,
                 GroupConstants.Weapons,
                 WeaponConstants.Arrow,
                 WeaponConstants.AssassinsDagger,
@@ -83,6 +118,7 @@ namespace CharacterGen.Tests.Integration.Tables.Items
                 WeaponConstants.Longbow,
                 WeaponConstants.Longspear,
                 WeaponConstants.Longsword,
+                WeaponConstants.LuckBlade,
                 WeaponConstants.Morningstar,
                 WeaponConstants.NineLivesStealer,
                 WeaponConstants.Net,
@@ -125,7 +161,6 @@ namespace CharacterGen.Tests.Integration.Tables.Items
                 WeaponConstants.TridentOfFishCommand,
                 WeaponConstants.TridentOfWarning,
                 WeaponConstants.TwoBladedSword,
-                GroupConstants.TwoHanded,
                 WeaponConstants.Warhammer,
                 WeaponConstants.Whip
             };
@@ -133,6 +168,40 @@ namespace CharacterGen.Tests.Integration.Tables.Items
             AssertCollectionNames(names);
         }
 
+        [TestCase(ArmorConstants.AbsorbingShield, ArmorConstants.HeavySteelShield)]
+        [TestCase(ArmorConstants.ArmorOfArrowAttraction, ArmorConstants.FullPlate)]
+        [TestCase(ArmorConstants.ArmorOfRage, ArmorConstants.FullPlate)]
+        [TestCase(ArmorConstants.BandedMail, ArmorConstants.BandedMail)]
+        [TestCase(ArmorConstants.BandedMailOfLuck, ArmorConstants.BandedMail)]
+        [TestCase(ArmorConstants.Breastplate, ArmorConstants.Breastplate)]
+        [TestCase(ArmorConstants.BreastplateOfCommand, ArmorConstants.Breastplate)]
+        [TestCase(ArmorConstants.Buckler, ArmorConstants.Buckler)]
+        [TestCase(ArmorConstants.CastersShield, ArmorConstants.LightWoodenShield)]
+        [TestCase(ArmorConstants.CelestialArmor, ArmorConstants.Chainmail)]
+        [TestCase(ArmorConstants.Chainmail, ArmorConstants.Chainmail)]
+        [TestCase(ArmorConstants.ChainShirt, ArmorConstants.ChainShirt)]
+        [TestCase(ArmorConstants.DemonArmor, ArmorConstants.FullPlate)]
+        [TestCase(ArmorConstants.DwarvenPlate, ArmorConstants.FullPlate)]
+        [TestCase(ArmorConstants.ElvenChain, ArmorConstants.ElvenChain)]
+        [TestCase(ArmorConstants.FullPlate, ArmorConstants.FullPlate)]
+        [TestCase(ArmorConstants.FullPlateOfSpeed, ArmorConstants.FullPlate)]
+        [TestCase(ArmorConstants.HalfPlate, ArmorConstants.HalfPlate)]
+        [TestCase(ArmorConstants.HeavySteelShield, ArmorConstants.HeavySteelShield)]
+        [TestCase(ArmorConstants.HeavyWoodenShield, ArmorConstants.HeavyWoodenShield)]
+        [TestCase(ArmorConstants.HideArmor, ArmorConstants.HideArmor)]
+        [TestCase(ArmorConstants.LeatherArmor, ArmorConstants.LeatherArmor)]
+        [TestCase(ArmorConstants.LightSteelShield, ArmorConstants.LightSteelShield)]
+        [TestCase(ArmorConstants.LightWoodenShield, ArmorConstants.LightWoodenShield)]
+        [TestCase(ArmorConstants.LionsShield, ArmorConstants.HeavySteelShield)]
+        [TestCase(ArmorConstants.PaddedArmor, ArmorConstants.PaddedArmor)]
+        [TestCase(ArmorConstants.PlateArmorOfTheDeep, ArmorConstants.FullPlate)]
+        [TestCase(ArmorConstants.RhinoHide, ArmorConstants.HideArmor)]
+        [TestCase(ArmorConstants.ScaleMail, ArmorConstants.ScaleMail)]
+        [TestCase(ArmorConstants.SpinedShield, ArmorConstants.HeavySteelShield)]
+        [TestCase(ArmorConstants.SplintMail, ArmorConstants.SplintMail)]
+        [TestCase(ArmorConstants.StuddedLeatherArmor, ArmorConstants.StuddedLeatherArmor)]
+        [TestCase(ArmorConstants.TowerShield, ArmorConstants.TowerShield)]
+        [TestCase(ArmorConstants.WingedShield, ArmorConstants.HeavyWoodenShield)]
         [TestCase(FeatConstants.MediumArmorProficiency,
             ArmorConstants.HideArmor,
             ArmorConstants.ScaleMail,
@@ -155,7 +224,38 @@ namespace CharacterGen.Tests.Integration.Tables.Items
             ArmorConstants.PaddedArmor,
             ArmorConstants.LeatherArmor,
             ArmorConstants.StuddedLeatherArmor,
-            ArmorConstants.ChainShirt)]
+            ArmorConstants.ChainShirt,
+            ArmorConstants.ElvenChain)]
+        [TestCase(GroupConstants.TwoHanded,
+            WeaponConstants.Longspear,
+            WeaponConstants.Quarterstaff,
+            WeaponConstants.Halfspear,
+            WeaponConstants.HeavyCrossbow,
+            WeaponConstants.LightCrossbow,
+            WeaponConstants.Sling,
+            WeaponConstants.Falchion,
+            WeaponConstants.Glaive,
+            WeaponConstants.Greataxe,
+            WeaponConstants.Greatclub,
+            WeaponConstants.Greatsword,
+            WeaponConstants.Guisarme,
+            WeaponConstants.Halberd,
+            WeaponConstants.HeavyFlail,
+            WeaponConstants.Ranseur,
+            WeaponConstants.Scythe,
+            WeaponConstants.Lance,
+            WeaponConstants.Longbow,
+            WeaponConstants.Shortbow,
+            WeaponConstants.OrcDoubleAxe,
+            WeaponConstants.SpikedChain,
+            WeaponConstants.DireFlail,
+            WeaponConstants.GnomeHookedHammer,
+            WeaponConstants.DwarvenUrgrosh,
+            WeaponConstants.HeavyRepeatingCrossbow,
+            WeaponConstants.LightRepeatingCrossbow,
+            WeaponConstants.Net,
+            WeaponConstants.TwoBladedSword,
+            WeaponConstants.HandCrossbow)]
         [TestCase(WeaponConstants.Arrow, WeaponConstants.Arrow)]
         [TestCase(WeaponConstants.AssassinsDagger, WeaponConstants.Dagger)]
         [TestCase(WeaponConstants.BastardSword, WeaponConstants.BastardSword)]
@@ -214,6 +314,7 @@ namespace CharacterGen.Tests.Integration.Tables.Items
         [TestCase(WeaponConstants.Longbow, WeaponConstants.Longbow, WeaponConstants.Arrow)]
         [TestCase(WeaponConstants.Longspear, WeaponConstants.Longspear)]
         [TestCase(WeaponConstants.Longsword, WeaponConstants.Longsword)]
+        [TestCase(WeaponConstants.LuckBlade, WeaponConstants.ShortSword)]
         [TestCase(WeaponConstants.Morningstar, WeaponConstants.Morningstar)]
         [TestCase(WeaponConstants.Net, WeaponConstants.Net)]
         [TestCase(WeaponConstants.NetOfSnaring, WeaponConstants.Net)]
@@ -256,36 +357,6 @@ namespace CharacterGen.Tests.Integration.Tables.Items
         [TestCase(WeaponConstants.TridentOfFishCommand, WeaponConstants.Trident)]
         [TestCase(WeaponConstants.TridentOfWarning, WeaponConstants.Trident)]
         [TestCase(WeaponConstants.TwoBladedSword, WeaponConstants.TwoBladedSword)]
-        [TestCase(GroupConstants.TwoHanded,
-            WeaponConstants.Longspear,
-            WeaponConstants.Quarterstaff,
-            WeaponConstants.Halfspear,
-            WeaponConstants.HeavyCrossbow,
-            WeaponConstants.LightCrossbow,
-            WeaponConstants.Sling,
-            WeaponConstants.Falchion,
-            WeaponConstants.Glaive,
-            WeaponConstants.Greataxe,
-            WeaponConstants.Greatclub,
-            WeaponConstants.Greatsword,
-            WeaponConstants.Guisarme,
-            WeaponConstants.Halberd,
-            WeaponConstants.HeavyFlail,
-            WeaponConstants.Ranseur,
-            WeaponConstants.Scythe,
-            WeaponConstants.Lance,
-            WeaponConstants.Longbow,
-            WeaponConstants.Shortbow,
-            WeaponConstants.OrcDoubleAxe,
-            WeaponConstants.SpikedChain,
-            WeaponConstants.DireFlail,
-            WeaponConstants.GnomeHookedHammer,
-            WeaponConstants.DwarvenUrgrosh,
-            WeaponConstants.HeavyRepeatingCrossbow,
-            WeaponConstants.LightRepeatingCrossbow,
-            WeaponConstants.Net,
-            WeaponConstants.TwoBladedSword,
-            WeaponConstants.HandCrossbow)]
         [TestCase(WeaponConstants.Warhammer, WeaponConstants.Warhammer)]
         [TestCase(WeaponConstants.Whip, WeaponConstants.Whip)]
         public override void DistinctCollection(String name, params String[] collection)

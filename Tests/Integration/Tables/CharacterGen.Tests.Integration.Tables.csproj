@@ -93,6 +93,7 @@
     <Compile Include="Abilities\Feats\Data\Racial\BugbearFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\DeepDwarfFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\DeepHalflingFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\DoppelgangerFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\DrowFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\GnollFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\GoblinFeatDataTests.cs" />
@@ -110,6 +111,7 @@
     <Compile Include="Abilities\Feats\Data\Racial\OrcFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\RacialFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\TallfellowHalflingFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\WereratFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\WerewolfFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\WoodElfFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\FeatFociTests.cs" />

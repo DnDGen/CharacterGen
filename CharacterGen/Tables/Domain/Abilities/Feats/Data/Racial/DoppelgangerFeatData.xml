@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+  <object>
+    <name>Skill BonusBluff</name>
+    <item>Skill Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>4</item>
+    <item>Bluff</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Skill BonusDisguise</name>
+    <item>Skill Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>4</item>
+    <item>Disguise</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Spell-Like Ability</name>
+    <item>Spell-Like Ability</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Detect thoughts</item>
+    <item>0</item>
+    <item>Constant</item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Immune to EffectSleep</name>
+    <item>Immune to Effect</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Sleep</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Immune to EffectCharm</name>
+    <item>Immune to Effect</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Charm</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Change Shape</name>
+    <item>Change Shape</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+    <object>
+        <name>Natural Armor</name>
+        <item>Natural Armor</item>
+        <item></item>
+        <item>0</item>
+        <item>4</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+      <item>0</item>
+    </object>
+    <object>
+        <name>Darkvision</name>
+        <item>Darkvision</item>
+        <item></item>
+        <item>0</item>
+        <item>60</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+      <item>0</item>
+    </object>
+</items>

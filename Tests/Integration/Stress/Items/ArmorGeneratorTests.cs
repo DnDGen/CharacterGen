@@ -31,8 +31,12 @@ namespace CharacterGen.Tests.Integration.Stress.Items
         protected override void MakeAssertions()
         {
             var armor = GetArmor();
-            Assert.That(armor.Name, Is.Not.Empty);
-            Assert.That(armor.ItemType, Is.EqualTo(ItemTypeConstants.Armor), armor.Name);
+
+            if (armor != null)
+            {
+                Assert.That(armor.Name, Is.Not.Empty);
+                Assert.That(armor.ItemType, Is.EqualTo(ItemTypeConstants.Armor), armor.Name);
+            }
         }
 
         private Item GetArmor()
@@ -44,6 +48,17 @@ namespace CharacterGen.Tests.Integration.Stress.Items
             var ability = AbilitiesGenerator.GenerateWith(characterClass, race, StatsRandomizer, baseAttack);
 
             return ArmorGenerator.GenerateFrom(ability.Feats, characterClass);
+        }
+
+        [Test]
+        public void ArmorDoesNotHappen()
+        {
+            var armor = new Item();
+
+            do armor = GetArmor();
+            while (TestShouldKeepRunning() && armor != null);
+
+            Assert.That(armor, Is.Null);
         }
 
         [Test]
