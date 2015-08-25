@@ -365,6 +365,18 @@
     <item>Short sword</item>
   </object>
   <object>
+    <name>Mace of blood</name>
+    <item>Heavy mace</item>
+  </object>
+  <object>
+    <name>Mace of smiting</name>
+    <item>Heavy mace</item>
+  </object>
+  <object>
+    <name>Mace of terror</name>
+    <item>Heavy mace</item>
+  </object>
+  <object>
     <name>Medium Armor Proficiency</name>
     <item>Hide armor</item>
     <item>Scale mail</item>

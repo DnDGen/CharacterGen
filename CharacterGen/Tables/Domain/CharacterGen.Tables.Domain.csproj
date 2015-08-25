@@ -735,7 +735,9 @@
     <EmbeddedResource Include="Items\Powers\Level11Power.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Items\ItemGroups.xml" />
+    <EmbeddedResource Include="Items\ItemGroups.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Abilities\Feats\Data\CharacterClasses\DruidFeatData.xml" />
@@ -748,6 +750,11 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Abilities\Feats\Data\Racial\DoppelgangerFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Feats\Data\CharacterClasses\ConjurationFeatData.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

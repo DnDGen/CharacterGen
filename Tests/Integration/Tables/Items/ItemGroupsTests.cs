@@ -119,6 +119,9 @@ namespace CharacterGen.Tests.Integration.Tables.Items
                 WeaponConstants.Longspear,
                 WeaponConstants.Longsword,
                 WeaponConstants.LuckBlade,
+                WeaponConstants.MaceOfBlood,
+                WeaponConstants.MaceOfSmiting,
+                WeaponConstants.MaceOfTerror,
                 WeaponConstants.Morningstar,
                 WeaponConstants.NineLivesStealer,
                 WeaponConstants.Net,
@@ -315,6 +318,9 @@ namespace CharacterGen.Tests.Integration.Tables.Items
         [TestCase(WeaponConstants.Longspear, WeaponConstants.Longspear)]
         [TestCase(WeaponConstants.Longsword, WeaponConstants.Longsword)]
         [TestCase(WeaponConstants.LuckBlade, WeaponConstants.ShortSword)]
+        [TestCase(WeaponConstants.MaceOfBlood, WeaponConstants.HeavyMace)]
+        [TestCase(WeaponConstants.MaceOfSmiting, WeaponConstants.HeavyMace)]
+        [TestCase(WeaponConstants.MaceOfTerror, WeaponConstants.HeavyMace)]
         [TestCase(WeaponConstants.Morningstar, WeaponConstants.Morningstar)]
         [TestCase(WeaponConstants.Net, WeaponConstants.Net)]
         [TestCase(WeaponConstants.NetOfSnaring, WeaponConstants.Net)]
