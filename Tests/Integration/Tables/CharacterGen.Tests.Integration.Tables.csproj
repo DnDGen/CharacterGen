@@ -97,6 +97,7 @@
     <Compile Include="Abilities\Feats\Data\Racial\DoppelgangerFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\DrowFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\GnollFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\RockGnomeFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\GoblinFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\HalfCelestialFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\HalfDragonFeatDataTests.cs" />

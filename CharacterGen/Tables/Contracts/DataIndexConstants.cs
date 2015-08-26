@@ -27,6 +27,8 @@ namespace CharacterGen.Tables
             public const Int32 FrequencyQuantityIndex = 5;
             public const Int32 FrequencyTimePeriodIndex = 6;
             public const Int32 MaximumHitDiceRequirementIndex = 7;
+            public const Int32 RequiredStat = 8;
+            public const Int32 RequiredStatMinimumValue = 9;
         }
 
         public static class AdditionalFeatData

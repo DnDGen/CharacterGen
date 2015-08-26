@@ -1,6 +1,6 @@
-﻿using System;
+﻿using CharacterGen.Tables;
+using System;
 using System.Collections.Generic;
-using CharacterGen.Tables;
 
 namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
 {
@@ -16,12 +16,16 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             indices[DataIndexConstants.RacialFeatData.SizeRequirementIndex] = "SizeRequirement";
             indices[DataIndexConstants.RacialFeatData.StrengthIndex] = "Strength";
             indices[DataIndexConstants.RacialFeatData.MaximumHitDiceRequirementIndex] = "MaxHitDiceRequirement";
+            indices[DataIndexConstants.RacialFeatData.RequiredStat] = "RequiredStat";
+            indices[DataIndexConstants.RacialFeatData.RequiredStatMinimumValue] = "RequiredStatMinimumValue";
         }
 
-        public virtual void Data(String name, String feat, String focus, Int32 frequencyQuantity, String frequencyTimePeriod, Int32 minimumHitDiceRequirement, String sizeRequirement, Int32 strength, Int32 maximumHitDiceRequirement)
+        public virtual void Data(String name, String feat, String focus, Int32 frequencyQuantity,
+            String frequencyTimePeriod, Int32 minimumHitDiceRequirement, String sizeRequirement,
+            Int32 strength, Int32 maximumHitDiceRequirement, String requiredStat, Int32 requiredStatMinimumValue)
         {
             var data = new List<String>();
-            for (var i = 0; i < 8; i++)
+            for (var i = 0; i < 10; i++)
                 data.Add(String.Empty);
 
             data[DataIndexConstants.RacialFeatData.FeatNameIndex] = feat;
@@ -32,6 +36,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             data[DataIndexConstants.RacialFeatData.SizeRequirementIndex] = sizeRequirement;
             data[DataIndexConstants.RacialFeatData.StrengthIndex] = Convert.ToString(strength);
             data[DataIndexConstants.RacialFeatData.MaximumHitDiceRequirementIndex] = Convert.ToString(maximumHitDiceRequirement);
+            data[DataIndexConstants.RacialFeatData.RequiredStat] = requiredStat;
+            data[DataIndexConstants.RacialFeatData.RequiredStatMinimumValue] = Convert.ToString(requiredStatMinimumValue);
 
             Data(name, data);
         }
