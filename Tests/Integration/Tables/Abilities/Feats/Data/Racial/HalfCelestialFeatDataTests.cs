@@ -1,4 +1,5 @@
 ﻿using CharacterGen.Common.Abilities.Feats;
+using CharacterGen.Common.Abilities.Stats;
 using CharacterGen.Common.Magics;
 using CharacterGen.Common.Races;
 using CharacterGen.Tables;
@@ -60,7 +61,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             0,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.SmiteEvil,
             FeatConstants.SmiteEvil,
             "",
@@ -69,7 +70,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             0,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.ProtectionFromEvil,
             FeatConstants.SpellLikeAbility,
             SpellConstants.ProtectionFromEvil,
@@ -78,7 +79,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             1,
             "",
             0,
-            0)]
+            0, StatConstants.Wisdom, 8)]
         [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.Bless,
             FeatConstants.SpellLikeAbility,
             SpellConstants.Bless,
@@ -87,7 +88,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             1,
             "",
             0,
-            0)]
+            0, StatConstants.Wisdom, 8)]
         [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.Aid,
             FeatConstants.SpellLikeAbility,
             SpellConstants.Aid,
@@ -96,7 +97,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             3,
             "",
             0,
-            0)]
+            0, StatConstants.Wisdom, 8)]
         [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.DetectEvil,
             FeatConstants.SpellLikeAbility,
             SpellConstants.DetectEvil,
@@ -105,7 +106,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             3,
             "",
             0,
-            0)]
+            0, StatConstants.Wisdom, 8)]
         [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.CureSeriousWounds,
             FeatConstants.SpellLikeAbility,
             SpellConstants.CureSeriousWounds,
@@ -114,7 +115,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             5,
             "",
             0,
-            0)]
+            0, StatConstants.Wisdom, 8)]
         [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.NeutralizePoison,
             FeatConstants.SpellLikeAbility,
             SpellConstants.NeutralizePoison,
@@ -123,7 +124,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             5,
             "",
             0,
-            0)]
+            0, StatConstants.Wisdom, 8)]
         [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.HolySmite,
             FeatConstants.SpellLikeAbility,
             SpellConstants.HolySmite,
@@ -132,7 +133,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             7,
             "",
             0,
-            0)]
+            0, StatConstants.Wisdom, 8)]
         [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.RemoveDisease,
             FeatConstants.SpellLikeAbility,
             SpellConstants.RemoveDisease,
@@ -141,7 +142,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             7,
             "",
             0,
-            0)]
+            0, StatConstants.Wisdom, 8)]
         [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.DispelEvil,
             FeatConstants.SpellLikeAbility,
             SpellConstants.DispelEvil,
@@ -150,7 +151,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             9,
             "",
             0,
-            0)]
+            0, StatConstants.Wisdom, 8)]
         [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.HolyWord,
             FeatConstants.SpellLikeAbility,
             SpellConstants.HolyWord,
@@ -159,7 +160,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             11,
             "",
             0,
-            0)]
+            0, StatConstants.Wisdom, 8)]
         [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.HolyAura,
             FeatConstants.SpellLikeAbility,
             SpellConstants.HolyAura,
@@ -168,7 +169,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             13,
             "",
             0,
-            0)]
+            0, StatConstants.Wisdom, 8)]
         [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.Hallow,
             FeatConstants.SpellLikeAbility,
             SpellConstants.Hallow,
@@ -177,7 +178,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             13,
             "",
             0,
-            0)]
+            0, StatConstants.Wisdom, 8)]
         [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.MassCharmMonster,
             FeatConstants.SpellLikeAbility,
             SpellConstants.MassCharmMonster,
@@ -186,7 +187,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             15,
             "",
             0,
-            0)]
+            0, StatConstants.Wisdom, 8)]
         [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.SummonMonsterIX,
             FeatConstants.SpellLikeAbility,
             SpellConstants.SummonMonsterIX + " (Celestials only)",
@@ -195,7 +196,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             17,
             "",
             0,
-            0)]
+            0, StatConstants.Wisdom, 8)]
         [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.Resurrection,
             FeatConstants.SpellLikeAbility,
             SpellConstants.Resurrection,
@@ -204,7 +205,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             19,
             "",
             0,
-            0)]
+            0, StatConstants.Wisdom, 8)]
         [TestCase(FeatConstants.NaturalArmor,
             FeatConstants.NaturalArmor,
             "",
@@ -213,7 +214,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             1,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.ImmuneToEffect,
             FeatConstants.ImmuneToEffect,
             "Disease",
@@ -222,7 +223,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             0,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.Resistance + FeatConstants.Foci.Acid,
             FeatConstants.Resistance,
             FeatConstants.Foci.Acid,
@@ -231,7 +232,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             10,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.Resistance + FeatConstants.Foci.Cold,
             FeatConstants.Resistance,
             FeatConstants.Foci.Cold,
@@ -240,7 +241,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             10,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.Resistance + FeatConstants.Foci.Electricity,
             FeatConstants.Resistance,
             FeatConstants.Foci.Electricity,
@@ -249,7 +250,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             10,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.DamageReduction + "11-",
             FeatConstants.DamageReduction,
             "Magic",
@@ -258,7 +259,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             1,
             "",
             5,
-            11)]
+            11, "", 0)]
         [TestCase(FeatConstants.DamageReduction + "12+",
             FeatConstants.DamageReduction,
             "Magic",
@@ -267,7 +268,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             12,
             "",
             10,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.SpellResistance,
             FeatConstants.SpellResistance,
             "Add creature's monster hit dice to strength (non-monsters add only 1)",
@@ -276,7 +277,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             10,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.SaveBonus,
             FeatConstants.SaveBonus,
             "Fortitude (Poison)",
@@ -285,7 +286,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             4,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.Darkvision,
             FeatConstants.Darkvision,
             "",
@@ -294,10 +295,10 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             60,
-            0)]
-        public override void Data(String name, String feat, String focus, Int32 frequencyQuantity, String frequencyTimePeriod, Int32 minimumHitDiceRequirement, String sizeRequirement, Int32 strength, Int32 maximumHitDiceRequirement)
+            0, "", 0)]
+        public override void Data(String name, String feat, String focus, Int32 frequencyQuantity, String frequencyTimePeriod, Int32 minimumHitDiceRequirement, String sizeRequirement, Int32 strength, Int32 maximumHitDiceRequirement, String requiredStat, Int32 requiredStatMinimumValue)
         {
-            base.Data(name, feat, focus, frequencyQuantity, frequencyTimePeriod, minimumHitDiceRequirement, sizeRequirement, strength, maximumHitDiceRequirement);
+            base.Data(name, feat, focus, frequencyQuantity, frequencyTimePeriod, minimumHitDiceRequirement, sizeRequirement, strength, maximumHitDiceRequirement, requiredStat, requiredStatMinimumValue);
         }
     }
 }

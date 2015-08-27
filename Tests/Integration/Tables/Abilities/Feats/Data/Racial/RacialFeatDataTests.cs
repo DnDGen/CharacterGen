@@ -16,8 +16,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             indices[DataIndexConstants.RacialFeatData.SizeRequirementIndex] = "SizeRequirement";
             indices[DataIndexConstants.RacialFeatData.StrengthIndex] = "Strength";
             indices[DataIndexConstants.RacialFeatData.MaximumHitDiceRequirementIndex] = "MaxHitDiceRequirement";
-            indices[DataIndexConstants.RacialFeatData.RequiredStat] = "RequiredStat";
-            indices[DataIndexConstants.RacialFeatData.RequiredStatMinimumValue] = "RequiredStatMinimumValue";
+            indices[DataIndexConstants.RacialFeatData.RequiredStatIndex] = "RequiredStat";
+            indices[DataIndexConstants.RacialFeatData.RequiredStatMinimumValueIndex] = "RequiredStatMinimumValue";
         }
 
         public virtual void Data(String name, String feat, String focus, Int32 frequencyQuantity,
@@ -36,8 +36,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             data[DataIndexConstants.RacialFeatData.SizeRequirementIndex] = sizeRequirement;
             data[DataIndexConstants.RacialFeatData.StrengthIndex] = Convert.ToString(strength);
             data[DataIndexConstants.RacialFeatData.MaximumHitDiceRequirementIndex] = Convert.ToString(maximumHitDiceRequirement);
-            data[DataIndexConstants.RacialFeatData.RequiredStat] = requiredStat;
-            data[DataIndexConstants.RacialFeatData.RequiredStatMinimumValue] = Convert.ToString(requiredStatMinimumValue);
+            data[DataIndexConstants.RacialFeatData.RequiredStatIndex] = requiredStat;
+            data[DataIndexConstants.RacialFeatData.RequiredStatMinimumValueIndex] = Convert.ToString(requiredStatMinimumValue);
 
             Data(name, data);
         }

@@ -11,6 +11,8 @@
         <item>0</item>
         <item></item>
       <item>0</item>
+      <item></item>
+      <item>0</item>
     </object>
   <object>
     <name>Empathy</name>
@@ -19,6 +21,8 @@
     <item>0</item>
     <item>4</item>
     <item>Rat</item>
+    <item>0</item>
+    <item></item>
     <item>0</item>
     <item></item>
     <item>0</item>
@@ -33,6 +37,8 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
+    <item>0</item>
   </object>
   <object>
     <name>Alternate Form</name>
@@ -41,6 +47,8 @@
     <item>0</item>
     <item>0</item>
     <item>Rat</item>
+    <item>0</item>
+    <item></item>
     <item>0</item>
     <item></item>
     <item>0</item>
@@ -55,12 +63,16 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
+    <item>0</item>
   </object>
   <object>
     <name>Scent</name>
     <item>Scent</item>
     <item></item>
     <item>0</item>
+    <item>0</item>
+    <item></item>
     <item>0</item>
     <item></item>
     <item>0</item>
@@ -77,17 +89,21 @@
         <item>0</item>
         <item></item>
       <item>0</item>
+      <item></item>
+      <item>0</item>
     </object>
-  <object>
-    <name>Save Bonus</name>
-    <item>Save Bonus</item>
-    <item></item>
-    <item>0</item>
-    <item>2</item>
-    <item>All</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
+    <object>
+      <name>Save Bonus</name>
+      <item>Save Bonus</item>
+      <item></item>
+      <item>0</item>
+      <item>2</item>
+      <item>All</item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
   </object>
   <object>
     <name>Skill BonusHide</name>
@@ -96,6 +112,8 @@
     <item>0</item>
     <item>1</item>
     <item>Hide</item>
+    <item>0</item>
+    <item></item>
     <item>0</item>
     <item></item>
     <item>0</item>
@@ -110,6 +128,8 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
+    <item>0</item>
   </object>
   <object>
     <name>Alertness</name>
@@ -117,6 +137,8 @@
     <item></item>
     <item>0</item>
     <item>2</item>
+    <item></item>
+    <item>0</item>
     <item></item>
     <item>0</item>
     <item></item>
@@ -132,12 +154,16 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
+    <item>0</item>
   </object>
   <object>
     <name>Weapon Finesse</name>
     <item>Weapon Finesse</item>
     <item></item>
     <item>0</item>
+    <item>0</item>
+    <item></item>
     <item>0</item>
     <item></item>
     <item>0</item>

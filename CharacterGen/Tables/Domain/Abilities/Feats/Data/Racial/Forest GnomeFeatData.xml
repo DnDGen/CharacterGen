@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+    <object>
+        <name>Low-Light Vision</name>
+        <item>Low-Light Vision</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+      <item></item>
+      <item>0</item>
+    </object>
+    <object>
+      <name>Skill BonusListen</name>
+      <item>Skill Bonus</item>
+      <item></item>
+      <item>0</item>
+      <item>2</item>
+      <item>Listen</item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+    </object>
+    <object>
+      <name>Attack BonusGoblin</name>
+      <item>Attack Bonus</item>
+      <item></item>
+      <item>0</item>
+      <item>1</item>
+      <item>Goblinoids</item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+    </object>
+  <object>
+    <name>Attack BonusKobold</name>
+    <item>Attack Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>1</item>
+    <item>Kobold</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Attack BonusOrc</name>
+    <item>Attack Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>1</item>
+    <item>Orc</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Attack BonusLizardfolk</name>
+    <item>Attack Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>1</item>
+    <item>Reptilian humanoids</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+    <object>
+        <name>Save Bonus</name>
+        <item>Save Bonus</item>
+        <item></item>
+        <item>0</item>
+        <item>2</item>
+        <item>Illusion</item>
+        <item>0</item>
+        <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+    </object>
+  <object>
+    <name>Weapon Familiarity</name>
+    <item>Weapon Familiarity</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Gnome hooked hammer</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Improved Spell</name>
+    <item>Improved Spell</item>
+    <item></item>
+    <item>0</item>
+    <item>1</item>
+    <item>Illusion</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Dodge Bonus</name>
+    <item>Dodge Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>4</item>
+    <item>Giant</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Spell-Like AbilityDancing lights</name>
+    <item>Spell-Like Ability</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Dancing lights</item>
+    <item>1</item>
+    <item>Day</item>
+    <item>0</item>
+    <item>Charisma</item>
+    <item>10</item>
+  </object>
+  <object>
+    <name>Spell-Like AbilityGhost sound</name>
+    <item>Spell-Like Ability</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Ghost sound</item>
+    <item>1</item>
+    <item>Day</item>
+    <item>0</item>
+    <item>Charisma</item>
+    <item>10</item>
+  </object>
+  <object>
+    <name>Spell-Like AbilityPrestidigitation</name>
+    <item>Spell-Like Ability</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Prestidigitation</item>
+    <item>1</item>
+    <item>Day</item>
+    <item>0</item>
+    <item>Charisma</item>
+    <item>10</item>
+  </object>
+  <object>
+    <name>Spell-Like AbilitySpeak with animals</name>
+    <item>Spell-Like Ability</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Speak with animals (Forest animals)</item>
+    <item>0</item>
+    <item>Constant</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Spell-Like AbilityPass without trace</name>
+    <item>Spell-Like Ability</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Pass without trace</item>
+    <item>0</item>
+    <item>Constant</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Skill BonusHide</name>
+    <item>Skill Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>4</item>
+    <item>Hide</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+</items>

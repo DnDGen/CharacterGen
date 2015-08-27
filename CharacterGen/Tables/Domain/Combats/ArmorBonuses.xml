@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+  <object>
+    <name>Absorbing shield</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Armor of arrow attraction</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Armor of rage</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Banded mail</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Banded mail of luck</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Breastplate</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Breastplate of command</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Buckler</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Caster's shield</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Celestial armor</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Chain shirt</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Chainmail</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Demon armor</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Dwarven plate</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Elven chain</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Full plate</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Full plate of speed</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Half-plate</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Heavy steel shield</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Heavy wooden shield</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Hide armor</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Leather armor</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Light steel shield</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Light wooden shield</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Lion's shield</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Padded armor</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Plate armor of the deep</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Rhino hide</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Scale mail</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Spined shield</name>
+    <item>2</item>
+  </object>
+    <object>
+        <name>Splint mail</name>
+        <item>6</item>
+    </object>
+  <object>
+    <name>Studded leather armor</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Tower shield</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Winged shield</name>
+    <item>2</item>
+  </object>
+</items>

@@ -29,8 +29,8 @@ namespace CharacterGen.Tests.Unit.Tables
         [TestCase(DataIndexConstants.RacialFeatData.FrequencyQuantityIndex, 5)]
         [TestCase(DataIndexConstants.RacialFeatData.FrequencyTimePeriodIndex, 6)]
         [TestCase(DataIndexConstants.RacialFeatData.MaximumHitDiceRequirementIndex, 7)]
-        [TestCase(DataIndexConstants.RacialFeatData.RequiredStat, 8)]
-        [TestCase(DataIndexConstants.RacialFeatData.RequiredStatMinimumValue, 9)]
+        [TestCase(DataIndexConstants.RacialFeatData.RequiredStatIndex, 8)]
+        [TestCase(DataIndexConstants.RacialFeatData.RequiredStatMinimumValueIndex, 9)]
         public void RacialFeatDataIndex(Int32 constant, Int32 value)
         {
             Assert.That(constant, Is.EqualTo(value));

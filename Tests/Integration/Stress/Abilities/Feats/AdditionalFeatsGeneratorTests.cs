@@ -1,5 +1,4 @@
 ﻿using CharacterGen.Common.Abilities.Feats;
-using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Generators.Abilities;
 using CharacterGen.Generators.Abilities.Feats;
 using CharacterGen.Generators.Combats;
@@ -43,28 +42,25 @@ namespace CharacterGen.Tests.Integration.Stress.Abilities.Feats
             var stats = StatsGenerator.GenerateWith(StatsRandomizer, characterClass, race);
             var skills = SkillsGenerator.GenerateWith(characterClass, race, stats);
             var baseAttack = CombatGenerator.GenerateBaseAttackWith(characterClass, race);
-            var racialFeats = RacialFeatsGenerator.GenerateWith(race, skills);
+            var racialFeats = RacialFeatsGenerator.GenerateWith(race, skills, stats);
             var classFeats = ClassFeatsGenerator.GenerateWith(characterClass, race, stats, racialFeats, skills);
             var preselectedFeats = classFeats.Union(racialFeats);
 
             var feats = AdditionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
-
-            var additionalFeatCount = characterClass.Level / 3 + 1;
-            if (characterClass.ClassName == CharacterClassConstants.Fighter)
-                additionalFeatCount += characterClass.Level / 2 + 1;
-
-            var count = feats.Count();
-            Assert.That(count, Is.EqualTo(additionalFeatCount), characterClass.ClassName);
+            Assert.That(feats, Is.Not.Empty);
 
             foreach (var feat in feats)
             {
                 Assert.That(feat.Name, Is.Not.Empty);
-                Assert.That(feat.Focus, Is.Not.Null);
-                Assert.That(feat.Strength, Is.Positive);
-                Assert.That(feat.Frequency.Quantity, Is.Positive);
+                Assert.That(feat.Focus, Is.Not.Null, feat.Name);
+                Assert.That(feat.Strength, Is.Not.Negative, feat.Name);
+                Assert.That(feat.Frequency.Quantity, Is.Not.Negative, feat.Name);
                 Assert.That(feat.Frequency.TimePeriod, Is.EqualTo(FeatConstants.Frequencies.Constant)
                     .Or.EqualTo(FeatConstants.Frequencies.AtWill)
-                    .Or.EqualTo(FeatConstants.Frequencies.Day));
+                    .Or.EqualTo(FeatConstants.Frequencies.Day)
+                    .Or.EqualTo(FeatConstants.Frequencies.Week)
+                    .Or.EqualTo(FeatConstants.Frequencies.Round)
+                    .Or.Empty, feat.Name);
             }
         }
     }

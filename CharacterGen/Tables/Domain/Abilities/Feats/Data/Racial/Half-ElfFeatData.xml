@@ -11,6 +11,8 @@
         <item>0</item>
         <item></item>
       <item>0</item>
+      <item></item>
+      <item>0</item>
     </object>
     <object>
         <name>Skill BonusSearch</name>
@@ -21,6 +23,8 @@
         <item>Search</item>
         <item>0</item>
         <item></item>
+      <item>0</item>
+      <item></item>
       <item>0</item>
     </object>
     <object>
@@ -33,6 +37,8 @@
         <item>0</item>
         <item></item>
         <item>0</item>
+    <item></item>
+    <item>0</item>
     </object>
     <object>
         <name>Skill BonusDiplomacy</name>
@@ -43,6 +49,8 @@
         <item>Diplomacy</item>
         <item>0</item>
         <item></item>
+      <item>0</item>
+      <item></item>
       <item>0</item>
     </object>
     <object>
@@ -55,27 +63,33 @@
         <item>0</item>
         <item></item>
       <item>0</item>
-    </object>
-    <object>
-        <name>Immune to Effect</name>
-        <item>Immune to Effect</item>
-        <item></item>
-        <item>0</item>
-        <item>0</item>
-        <item>Sleep</item>
-        <item>0</item>
-        <item></item>
+      <item></item>
       <item>0</item>
     </object>
     <object>
-        <name>Save Bonus</name>
-        <item>Save Bonus</item>
-        <item></item>
-        <item>0</item>
-        <item>2</item>
-        <item>Enchantment spells or effects</item>
-        <item>0</item>
-        <item></item>
+      <name>Immune to Effect</name>
+      <item>Immune to Effect</item>
+      <item></item>
+      <item>0</item>
+      <item>0</item>
+      <item>Sleep</item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+    </object>
+    <object>
+      <name>Save Bonus</name>
+      <item>Save Bonus</item>
+      <item></item>
+      <item>0</item>
+      <item>2</item>
+      <item>Enchantment</item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
       <item>0</item>
     </object>
     <object>
@@ -88,6 +102,8 @@
         <item>0</item>
         <item></item>
       <item>0</item>
+    <item></item>
+    <item>0</item>
     </object>
     <object>
         <name>Elven Blood</name>
@@ -99,5 +115,7 @@
         <item>0</item>
         <item></item>
       <item>0</item>
+    <item></item>
+    <item>0</item>
     </object>
 </items>

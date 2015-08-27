@@ -45,7 +45,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             2,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.AttackBonus + RaceConstants.BaseRaces.Goblin,
             FeatConstants.AttackBonus,
             "Goblinoids",
@@ -54,7 +54,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             1,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.AttackBonus + RaceConstants.BaseRaces.Orc,
             FeatConstants.AttackBonus,
             "Orcs",
@@ -63,7 +63,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             1,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.SaveBonus + "Spell",
             FeatConstants.SaveBonus,
             "Spells and spell-like effects",
@@ -72,7 +72,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             2,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.SaveBonus + "Poison",
             FeatConstants.SaveBonus,
             "Poison",
@@ -81,7 +81,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             2,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.DodgeBonus,
             FeatConstants.DodgeBonus,
             "Giants",
@@ -90,7 +90,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             4,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.Stability,
             FeatConstants.Stability,
             "",
@@ -99,7 +99,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             0,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.WeaponFamiliarity + WeaponConstants.DwarvenWaraxe,
             FeatConstants.WeaponFamiliarity,
             WeaponConstants.DwarvenWaraxe,
@@ -108,7 +108,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             0,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.WeaponFamiliarity + WeaponConstants.DwarvenUrgrosh,
             FeatConstants.WeaponFamiliarity,
             WeaponConstants.DwarvenUrgrosh,
@@ -117,7 +117,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             0,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.Stonecunning,
             FeatConstants.Stonecunning,
             "",
@@ -126,7 +126,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             0,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.Darkvision,
             FeatConstants.Darkvision,
             "",
@@ -135,10 +135,10 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             60,
-            0)]
-        public override void Data(String name, String feat, String focus, Int32 frequencyQuantity, String frequencyTimePeriod, Int32 minimumHitDiceRequirement, String sizeRequirement, Int32 strength, Int32 maximumHitDiceRequirement)
+            0, "", 0)]
+        public override void Data(String name, String feat, String focus, Int32 frequencyQuantity, String frequencyTimePeriod, Int32 minimumHitDiceRequirement, String sizeRequirement, Int32 strength, Int32 maximumHitDiceRequirement, String requiredStat, Int32 requiredStatMinimumValue)
         {
-            base.Data(name, feat, focus, frequencyQuantity, frequencyTimePeriod, minimumHitDiceRequirement, sizeRequirement, strength, maximumHitDiceRequirement);
+            base.Data(name, feat, focus, frequencyQuantity, frequencyTimePeriod, minimumHitDiceRequirement, sizeRequirement, strength, maximumHitDiceRequirement, requiredStat, requiredStatMinimumValue);
         }
     }
 }

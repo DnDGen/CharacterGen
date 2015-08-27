@@ -1,7 +1,6 @@
 ﻿using CharacterGen.Common;
 using CharacterGen.Common.Abilities;
 using CharacterGen.Common.Abilities.Feats;
-using CharacterGen.Common.Abilities.Skills;
 using CharacterGen.Common.Abilities.Stats;
 using CharacterGen.Common.Alignments;
 using CharacterGen.Common.CharacterClasses;
@@ -36,7 +35,7 @@ namespace CharacterGen.Tests.Unit.Generators
     public class CharacterGeneratorTests
     {
         private const String BaseRace = "baserace";
-        private const String BaseRacePlusOne = "baserace+1";
+        private const String BaseRaceMinusOne = "baserace-1";
         private const String Metarace = "metarace";
 
         private Mock<IAlignmentGenerator> mockAlignmentGenerator;
@@ -98,9 +97,9 @@ namespace CharacterGen.Tests.Unit.Generators
             allowedAlignments = new List<String>();
 
             levelAdjustments[BaseRace] = 0;
-            levelAdjustments[BaseRacePlusOne] = 1;
+            levelAdjustments[BaseRaceMinusOne] = -1;
             levelAdjustments[RaceConstants.Metaraces.None] = 0;
-            levelAdjustments[Metarace] = 1;
+            levelAdjustments[Metarace] = -1;
             mockAdjustmentsSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments)).Returns(levelAdjustments);
 
             mockRandomizerVerifier.Setup(v => v.VerifyCompatibility(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object,
@@ -252,7 +251,7 @@ namespace CharacterGen.Tests.Unit.Generators
         public void IncompatibleComboOfBaseRaceAndMetaraceIsRegeneratedWithCompatibleBaseRace()
         {
             var higherRace = new Race();
-            higherRace.BaseRace = BaseRacePlusOne;
+            higherRace.BaseRace = BaseRaceMinusOne;
             higherRace.Metarace = Metarace;
             race.BaseRace = BaseRace;
             race.Metarace = Metarace;
@@ -271,9 +270,9 @@ namespace CharacterGen.Tests.Unit.Generators
         public void IncompatibleComboOfBaseRaceAndMetaraceIsRegeneratedWithCompatibleMetarace()
         {
             var higherRace = new Race();
-            higherRace.BaseRace = BaseRacePlusOne;
+            higherRace.BaseRace = BaseRaceMinusOne;
             higherRace.Metarace = Metarace;
-            race.BaseRace = BaseRacePlusOne;
+            race.BaseRace = BaseRaceMinusOne;
             race.Metarace = RaceConstants.Metaraces.None;
 
             mockRaceGenerator.SetupSequence(f => f.GenerateWith(It.IsAny<Alignment>(), It.IsAny<CharacterClass>(), mockBaseRaceRandomizer.Object,
@@ -290,7 +289,7 @@ namespace CharacterGen.Tests.Unit.Generators
         public void AppliesBaseRaceLevelAdjustment()
         {
             characterClass.Level = 2;
-            race.BaseRace = BaseRacePlusOne;
+            race.BaseRace = BaseRaceMinusOne;
 
             GenerateCharacter();
             Assert.That(characterClass.Level, Is.EqualTo(1));
@@ -309,7 +308,7 @@ namespace CharacterGen.Tests.Unit.Generators
         [Test]
         public void ApplyBaseRaceAndMetaraceLevelAdjustments()
         {
-            race.BaseRace = BaseRacePlusOne;
+            race.BaseRace = BaseRaceMinusOne;
             race.Metarace = Metarace;
             characterClass.Level = 3;
 
@@ -351,39 +350,6 @@ namespace CharacterGen.Tests.Unit.Generators
         {
             var character = GenerateCharacter();
             Assert.That(character.Combat, Is.EqualTo(combat));
-        }
-
-        [Test]
-        public void AdjustSkillsWithArmorCheckPenalty()
-        {
-            ability.Skills.Add("no penalty", new Skill { ArmorCheckPenalty = false });
-            ability.Skills.Add("penalty", new Skill { ArmorCheckPenalty = true });
-
-            equipment.Armor = new TreasureGen.Common.Items.Item { Name = "armor" };
-
-            var skillAdjustments = new Dictionary<String, Int32>();
-            skillAdjustments.Add(equipment.Armor.Name, 5);
-            skillAdjustments.Add("other armor", 10);
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.ArmorCheckPenalties)).Returns(skillAdjustments);
-
-            var character = GenerateCharacter();
-            Assert.That(character.Ability.Skills["no penalty"].Bonus, Is.EqualTo(0));
-            Assert.That(character.Ability.Skills["penalty"].Bonus, Is.EqualTo(-5));
-        }
-
-        [Test]
-        public void SwimmingTakesDoubleArmorCheckPenalty()
-        {
-            ability.Skills.Add(SkillConstants.Swim, new Skill { ArmorCheckPenalty = true });
-
-            equipment.Armor = new TreasureGen.Common.Items.Item { Name = "armor" };
-
-            var skillAdjustments = new Dictionary<String, Int32>();
-            skillAdjustments.Add(equipment.Armor.Name, 5);
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.ArmorCheckPenalties)).Returns(skillAdjustments);
-
-            var character = GenerateCharacter();
-            Assert.That(character.Ability.Skills[SkillConstants.Swim].Bonus, Is.EqualTo(-10));
         }
 
         [Test]

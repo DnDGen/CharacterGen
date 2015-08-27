@@ -1,6 +1,9 @@
-﻿using CharacterGen.Common.Races;
+﻿using CharacterGen.Common.Abilities.Stats;
+using CharacterGen.Common.Races;
 using CharacterGen.Selectors.Objects;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
 
 namespace CharacterGen.Tests.Unit.Selectors.Objects
 {
@@ -9,12 +12,16 @@ namespace CharacterGen.Tests.Unit.Selectors.Objects
     {
         private RacialFeatSelection selection;
         private Race race;
+        private Dictionary<String, Stat> stats;
 
         [SetUp]
         public void Setup()
         {
             selection = new RacialFeatSelection();
             race = new Race();
+            stats = new Dictionary<String, Stat>();
+
+            stats["stat"] = new Stat { Value = 42 };
         }
 
         [Test]
@@ -27,12 +34,14 @@ namespace CharacterGen.Tests.Unit.Selectors.Objects
             Assert.That(selection.FocusType, Is.Empty);
             Assert.That(selection.Frequency, Is.Not.Null);
             Assert.That(selection.MaximumHitDieRequirement, Is.EqualTo(0));
+            Assert.That(selection.RequiredStat, Is.Empty);
+            Assert.That(selection.RequiredStatMinimumValue, Is.EqualTo(0));
         }
 
         [Test]
         public void RequirementsMetIfNoRequirements()
         {
-            var met = selection.RequirementsMet(race, 0);
+            var met = selection.RequirementsMet(race, 0, stats);
             Assert.That(met, Is.True);
         }
 
@@ -42,7 +51,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Objects
             race.Size = "big";
             selection.SizeRequirement = "small";
 
-            var met = selection.RequirementsMet(race, 0);
+            var met = selection.RequirementsMet(race, 0, stats);
             Assert.That(met, Is.False);
         }
 
@@ -51,7 +60,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Objects
         {
             selection.MinimumHitDieRequirement = 3;
 
-            var met = selection.RequirementsMet(race, 2);
+            var met = selection.RequirementsMet(race, 2, stats);
             Assert.That(met, Is.False);
         }
 
@@ -60,14 +69,14 @@ namespace CharacterGen.Tests.Unit.Selectors.Objects
         {
             selection.MaximumHitDieRequirement = 3;
 
-            var met = selection.RequirementsMet(race, 4);
+            var met = selection.RequirementsMet(race, 4, stats);
             Assert.That(met, Is.False);
         }
 
         [Test]
         public void RequirementsMetIfAboveMaximumOfZero()
         {
-            var met = selection.RequirementsMet(race, 4);
+            var met = selection.RequirementsMet(race, 4, stats);
             Assert.That(met, Is.True);
         }
 
@@ -76,7 +85,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Objects
         {
             selection.MinimumHitDieRequirement = 4;
 
-            var met = selection.RequirementsMet(race, 4);
+            var met = selection.RequirementsMet(race, 4, stats);
             Assert.That(met, Is.True);
         }
 
@@ -85,8 +94,18 @@ namespace CharacterGen.Tests.Unit.Selectors.Objects
         {
             selection.MaximumHitDieRequirement = 4;
 
-            var met = selection.RequirementsMet(race, 4);
+            var met = selection.RequirementsMet(race, 4, stats);
             Assert.That(met, Is.True);
+        }
+
+        [Test]
+        public void RequirementsNotMetIfDoesNotHaveMinimumStat()
+        {
+            selection.RequiredStat = "stat";
+            selection.RequiredStatMinimumValue = 9266;
+
+            var met = selection.RequirementsMet(race, 4, stats);
+            Assert.That(met, Is.False);
         }
 
         [Test]
@@ -97,8 +116,10 @@ namespace CharacterGen.Tests.Unit.Selectors.Objects
             selection.SizeRequirement = race.Size;
             selection.MinimumHitDieRequirement = 3;
             selection.MaximumHitDieRequirement = 5;
+            selection.RequiredStat = "stat";
+            selection.RequiredStatMinimumValue = 42;
 
-            var met = selection.RequirementsMet(race, 4);
+            var met = selection.RequirementsMet(race, 4, stats);
             Assert.That(met, Is.True);
         }
     }

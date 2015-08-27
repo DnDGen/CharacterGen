@@ -11,6 +11,8 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
+    <item>0</item>
   </object>
   <object>
     <name>Skill BonusDisguise</name>
@@ -19,6 +21,8 @@
     <item>0</item>
     <item>4</item>
     <item>Disguise</item>
+    <item>0</item>
+    <item></item>
     <item>0</item>
     <item></item>
     <item>0</item>
@@ -33,6 +37,8 @@
     <item>0</item>
     <item>Constant</item>
     <item>0</item>
+    <item></item>
+    <item>0</item>
   </object>
   <object>
     <name>Immune to EffectSleep</name>
@@ -41,6 +47,8 @@
     <item>0</item>
     <item>0</item>
     <item>Sleep</item>
+    <item>0</item>
+    <item></item>
     <item>0</item>
     <item></item>
     <item>0</item>
@@ -55,12 +63,16 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
+    <item>0</item>
   </object>
   <object>
     <name>Change Shape</name>
     <item>Change Shape</item>
     <item></item>
     <item>0</item>
+    <item>0</item>
+    <item></item>
     <item>0</item>
     <item></item>
     <item>0</item>
@@ -77,6 +89,8 @@
         <item>0</item>
         <item></item>
       <item>0</item>
+    <item></item>
+    <item>0</item>
     </object>
     <object>
         <name>Darkvision</name>
@@ -88,5 +102,7 @@
         <item>0</item>
         <item></item>
       <item>0</item>
+    <item></item>
+    <item>0</item>
     </object>
 </items>

@@ -36,7 +36,9 @@ namespace CharacterGen.Selectors.Domain
                 racialFeatSelection.Frequency.Quantity = Convert.ToInt32(featData[DataIndexConstants.RacialFeatData.FrequencyQuantityIndex]);
                 racialFeatSelection.Frequency.TimePeriod = featData[DataIndexConstants.RacialFeatData.FrequencyTimePeriodIndex];
                 racialFeatSelection.MaximumHitDieRequirement = Convert.ToInt32(featData[DataIndexConstants.RacialFeatData.MaximumHitDiceRequirementIndex]);
-
+                racialFeatSelection.RequiredStat = featData[DataIndexConstants.RacialFeatData.RequiredStatIndex];
+                racialFeatSelection.RequiredStatMinimumValue = Convert.ToInt32(featData[DataIndexConstants.RacialFeatData.RequiredStatMinimumValueIndex]);
+                
                 racialFeatSelections.Add(racialFeatSelection);
             }
 

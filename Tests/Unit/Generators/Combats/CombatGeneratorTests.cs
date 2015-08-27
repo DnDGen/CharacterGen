@@ -253,6 +253,19 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         }
 
         [Test]
+        public void MithralIncreasesArmorMaxDexterityBonusBy2()
+        {
+            equipment.Armor = new Item { Name = "armor" };
+            equipment.Armor.Traits.Add(TraitConstants.Mithral);
+            maxDexterityBonuses[equipment.Armor.Name] = 5;
+
+            var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass, race);
+            var combat = combatGenerator.GenerateWith(baseAttack, characterClass, race, feats, stats, equipment);
+
+            Assert.That(combat.AdjustedDexterityBonus, Is.EqualTo(7));
+        }
+
+        [Test]
         public void GetArmorClassFromGeneratorWithMaxDexterityBonus()
         {
             equipment.Armor = new Item { Name = "armor" };

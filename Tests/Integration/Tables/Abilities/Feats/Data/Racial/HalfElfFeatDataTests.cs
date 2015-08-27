@@ -1,5 +1,6 @@
 ﻿using CharacterGen.Common.Abilities.Feats;
 using CharacterGen.Common.Abilities.Skills;
+using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Common.Races;
 using CharacterGen.Tables;
 using NUnit.Framework;
@@ -42,7 +43,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             1,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.SkillBonus + SkillConstants.Search,
             FeatConstants.SkillBonus,
             SkillConstants.Search,
@@ -51,7 +52,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             1,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.SkillBonus + SkillConstants.Spot,
             FeatConstants.SkillBonus,
             SkillConstants.Spot,
@@ -60,7 +61,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             1,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.SkillBonus + SkillConstants.Diplomacy,
             FeatConstants.SkillBonus,
             SkillConstants.Diplomacy,
@@ -69,7 +70,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             2,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.SkillBonus + SkillConstants.GatherInformation,
             FeatConstants.SkillBonus,
             SkillConstants.GatherInformation,
@@ -78,16 +79,16 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             2,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.SaveBonus,
             FeatConstants.SaveBonus,
-            "Enchantment spells or effects",
+            CharacterClassConstants.Schools.Enchantment,
             0,
             "",
             0,
             "",
             2,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.ImmuneToEffect,
             FeatConstants.ImmuneToEffect,
             "Sleep",
@@ -96,7 +97,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             0,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.LowLightVision,
             FeatConstants.LowLightVision,
             "",
@@ -105,7 +106,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             0,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.ElvenBlood,
             FeatConstants.ElvenBlood,
             "",
@@ -114,10 +115,10 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             0,
-            0)]
-        public override void Data(String name, String feat, String focus, Int32 frequencyQuantity, String frequencyTimePeriod, Int32 minimumHitDiceRequirement, String sizeRequirement, Int32 strength, Int32 maximumHitDiceRequirement)
+            0, "", 0)]
+        public override void Data(String name, String feat, String focus, Int32 frequencyQuantity, String frequencyTimePeriod, Int32 minimumHitDiceRequirement, String sizeRequirement, Int32 strength, Int32 maximumHitDiceRequirement, String requiredStat, Int32 requiredStatMinimumValue)
         {
-            base.Data(name, feat, focus, frequencyQuantity, frequencyTimePeriod, minimumHitDiceRequirement, sizeRequirement, strength, maximumHitDiceRequirement);
+            base.Data(name, feat, focus, frequencyQuantity, frequencyTimePeriod, minimumHitDiceRequirement, sizeRequirement, strength, maximumHitDiceRequirement, requiredStat, requiredStatMinimumValue);
         }
     }
 }

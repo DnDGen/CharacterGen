@@ -10,6 +10,7 @@ using CharacterGen.Tables;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TreasureGen.Common.Items;
 
 namespace CharacterGen.Generators.Domain.Combats
 {
@@ -107,7 +108,12 @@ namespace CharacterGen.Generators.Domain.Combats
                 return stats[StatConstants.Dexterity].Bonus;
 
             var maxDexterityBonuses = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.MaxDexterityBonus);
-            return Math.Min(stats[StatConstants.Dexterity].Bonus, maxDexterityBonuses[equipment.Armor.Name]);
+            var armorBonus = maxDexterityBonuses[equipment.Armor.Name];
+
+            if (equipment.Armor.Traits.Contains(TraitConstants.Mithral))
+                armorBonus += 2;
+
+            return Math.Min(stats[StatConstants.Dexterity].Bonus, armorBonus);
         }
 
         private Int32 GetInitiativeBonus(Race race, IEnumerable<Feat> feats)

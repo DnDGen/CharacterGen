@@ -35,6 +35,15 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Stress|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Stress\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -69,6 +78,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Abilities\Feats\Data\Additional\AdditionalFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\CharacterClasses\AirFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\CharacterClasses\AnimalFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\BarbarianFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\BardFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\CharacterClassFeatDataTests.cs" />
@@ -81,22 +92,28 @@
     <Compile Include="Abilities\Feats\Data\CharacterClasses\FireFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\HealingFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\IllusionFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\CharacterClasses\KnowledgeFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\CharacterClasses\LawFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\LuckFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\MagicFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\MonkFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\NecromancyFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\CharacterClasses\ProtectionFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\RangerFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\RogueFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\SorcererFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\StrengthFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\SunFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\WizardFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\AasimarFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BugbearFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\DeepDwarfFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\DeepHalflingFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\DoppelgangerFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\DrowFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\ForestGnomeFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\GnollFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\GrayElfFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\RockGnomeFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\GoblinFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\HalfCelestialFeatDataTests.cs" />
@@ -113,7 +130,9 @@
     <Compile Include="Abilities\Feats\Data\Racial\OrcFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\RacialFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\TallfellowHalflingFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\TieflingFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\WereratFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\WeretigerFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\WerewolfFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\WoodElfFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\FeatFociTests.cs" />
@@ -191,12 +210,15 @@
     <Compile Include="CharacterClasses\SpecialistFieldQuantitiesTests.cs" />
     <Compile Include="CharacterClasses\SpecialistFieldsTests.cs" />
     <Compile Include="CollectionTests.cs" />
+    <Compile Include="Combats\ArmorBonusesTests.cs" />
+    <Compile Include="Combats\ArmorClassModifiersTests.cs" />
     <Compile Include="Combats\ClassHitDiceTests.cs" />
     <Compile Include="Combats\MonsterHitDiceTests.cs" />
     <Compile Include="Combats\RacialBaseAttackAdjustmentsTests.cs" />
     <Compile Include="DataTests.cs" />
     <Compile Include="EmbeddedResourceStreamLoaderTests.cs" />
     <Compile Include="Items\ItemGroupsTests.cs" />
+    <Compile Include="Items\MaxDexterityBonusTests.cs" />
     <Compile Include="Items\Powers\Level10PowerTests.cs" />
     <Compile Include="Items\Powers\Level11PowerTests.cs" />
     <Compile Include="Items\Powers\Level12PowerTests.cs" />

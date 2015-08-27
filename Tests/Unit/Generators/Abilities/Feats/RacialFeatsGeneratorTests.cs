@@ -1,4 +1,5 @@
 ﻿using CharacterGen.Common.Abilities.Skills;
+using CharacterGen.Common.Abilities.Stats;
 using CharacterGen.Common.Races;
 using CharacterGen.Generators.Abilities.Feats;
 using CharacterGen.Generators.Domain.Abilities.Feats;
@@ -26,6 +27,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         private List<RacialFeatSelection> metaraceFeats;
         private List<RacialFeatSelection> speciesFeats;
         private Dictionary<String, Skill> skills;
+        private Dictionary<String, Stat> stats;
 
         [SetUp]
         public void Setup()
@@ -41,10 +43,13 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             metaraceFeats = new List<RacialFeatSelection>();
             speciesFeats = new List<RacialFeatSelection>();
             skills = new Dictionary<String, Skill>();
+            stats = new Dictionary<String, Stat>();
 
             race.BaseRace = "baseRaceId";
             race.Metarace = "metaraceId";
             race.MetaraceSpecies = "metarace species";
+            stats["stat"] = new Stat { Value = 14 };
+
             mockFeatsSelector.Setup(s => s.SelectRacial("baseRaceId")).Returns(baseRaceFeats);
             mockFeatsSelector.Setup(s => s.SelectRacial("metaraceId")).Returns(metaraceFeats);
             mockFeatsSelector.Setup(s => s.SelectRacial("metarace species")).Returns(speciesFeats);
@@ -65,7 +70,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             baseRaceFeats.Add(feat1);
             baseRaceFeats.Add(feat2);
 
-            var feats = racialFeatsGenerator.GenerateWith(race, skills);
+            var feats = racialFeatsGenerator.GenerateWith(race, skills, stats);
             var first = feats.First();
             var last = feats.Last();
 
@@ -95,7 +100,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             metaraceFeats.Add(feat1);
             metaraceFeats.Add(feat2);
 
-            var feats = racialFeatsGenerator.GenerateWith(race, skills);
+            var feats = racialFeatsGenerator.GenerateWith(race, skills, stats);
             var first = feats.First();
             var last = feats.Last();
 
@@ -125,7 +130,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             speciesFeats.Add(feat1);
             speciesFeats.Add(feat2);
 
-            var feats = racialFeatsGenerator.GenerateWith(race, skills);
+            var feats = racialFeatsGenerator.GenerateWith(race, skills, stats);
             var first = feats.First();
             var last = feats.Last();
 
@@ -155,12 +160,12 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             speciesFeat.Feat = "metarace species feat";
             speciesFeats.Add(speciesFeat);
 
-            var feats = racialFeatsGenerator.GenerateWith(race, skills);
+            var feats = racialFeatsGenerator.GenerateWith(race, skills, stats);
             Assert.That(feats.Count(), Is.EqualTo(3));
         }
 
         [Test]
-        public void DoNotGetRacialFeatThatDoNotMeetMinimumHitDiceRequirement()
+        public void DoNotGetRacialFeatThatDoNotMeetRequirements()
         {
             var baseRaceFeat = new RacialFeatSelection();
             baseRaceFeat.Feat = "base race feat";
@@ -169,24 +174,25 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
 
             var metaraceFeat = new RacialFeatSelection();
             metaraceFeat.Feat = "metarace feat";
-            metaraceFeat.MinimumHitDieRequirement = 2;
+            metaraceFeat.SizeRequirement = "size";
             metaraceFeats.Add(metaraceFeat);
 
             var speciesFeat = new RacialFeatSelection();
             speciesFeat.Feat = "metarace species feat";
-            speciesFeat.MinimumHitDieRequirement = 2;
+            speciesFeat.RequiredStat = "stat";
+            speciesFeat.RequiredStatMinimumValue = 15;
             speciesFeats.Add(speciesFeat);
 
             var monsterHitDice = new Dictionary<String, Int32>();
             monsterHitDice[race.BaseRace] = 1;
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice)).Returns(monsterHitDice);
 
-            var feats = racialFeatsGenerator.GenerateWith(race, skills);
+            var feats = racialFeatsGenerator.GenerateWith(race, skills, stats);
             Assert.That(feats, Is.Empty);
         }
 
         [Test]
-        public void GetRacialFeatThatMeetMinimumHitDiceRequirement()
+        public void GetRacialFeatThatMeetRequirements()
         {
             var baseRaceFeat = new RacialFeatSelection();
             baseRaceFeat.Feat = "base race feat";
@@ -195,68 +201,24 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
 
             var metaraceFeat = new RacialFeatSelection();
             metaraceFeat.Feat = "metarace feat";
-            metaraceFeat.MinimumHitDieRequirement = 2;
+            metaraceFeat.SizeRequirement = "size";
             metaraceFeats.Add(metaraceFeat);
 
             var speciesFeat = new RacialFeatSelection();
             speciesFeat.Feat = "metarace species feat";
-            speciesFeat.MinimumHitDieRequirement = 2;
+            speciesFeat.RequiredStat = "stat";
+            speciesFeat.RequiredStatMinimumValue = 15;
             speciesFeats.Add(speciesFeat);
+
+            race.Size = "size";
+            stats["stat"].Value = 15;
 
             var monsterHitDice = new Dictionary<String, Int32>();
             monsterHitDice[race.BaseRace] = 2;
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice)).Returns(monsterHitDice);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters)).Returns(new[] { "baseRaceId" });
 
-            var feats = racialFeatsGenerator.GenerateWith(race, skills);
-            Assert.That(feats.Count(), Is.EqualTo(3));
-        }
-
-        [Test]
-        public void DoNotGetRacialFeatThatDoNotMeetSizeRequirement()
-        {
-            var baseRaceFeat = new RacialFeatSelection();
-            baseRaceFeat.Feat = "base race feat";
-            baseRaceFeat.SizeRequirement = "Large";
-            baseRaceFeats.Add(baseRaceFeat);
-
-            var metaraceFeat = new RacialFeatSelection();
-            metaraceFeat.Feat = "metarace feat";
-            metaraceFeat.SizeRequirement = "Large";
-            metaraceFeats.Add(metaraceFeat);
-
-            var speciesFeat = new RacialFeatSelection();
-            speciesFeat.Feat = "metarace species feat";
-            speciesFeat.SizeRequirement = "Large";
-            speciesFeats.Add(speciesFeat);
-
-            race.Size = "not large";
-
-            var feats = racialFeatsGenerator.GenerateWith(race, skills);
-            Assert.That(feats, Is.Empty);
-        }
-
-        [Test]
-        public void GetRacialFeatThatMeetSizeRequirement()
-        {
-            var baseRaceFeat = new RacialFeatSelection();
-            baseRaceFeat.Feat = "base race feat";
-            baseRaceFeat.SizeRequirement = "Large";
-            baseRaceFeats.Add(baseRaceFeat);
-
-            var metaraceFeat = new RacialFeatSelection();
-            metaraceFeat.Feat = "metarace feat";
-            metaraceFeat.SizeRequirement = "Large";
-            metaraceFeats.Add(metaraceFeat);
-
-            var speciesFeat = new RacialFeatSelection();
-            speciesFeat.Feat = "metarace species feat";
-            speciesFeat.SizeRequirement = "Large";
-            speciesFeats.Add(speciesFeat);
-
-            race.Size = "Large";
-
-            var feats = racialFeatsGenerator.GenerateWith(race, skills);
+            var feats = racialFeatsGenerator.GenerateWith(race, skills, stats);
             Assert.That(feats.Count(), Is.EqualTo(3));
         }
 
@@ -270,7 +232,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters)).Returns(new[] { "other base race" });
 
-            var feats = racialFeatsGenerator.GenerateWith(race, skills);
+            var feats = racialFeatsGenerator.GenerateWith(race, skills, stats);
             var onlyFeat = feats.Single();
 
             Assert.That(onlyFeat.Name, Is.EqualTo("racial feat"));
@@ -299,7 +261,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             mockFeatFocusGenerator.Setup(g => g.GenerateAllowingFocusOfAllFrom("metarace feat", "meta focus type", skills)).Returns("meta focus");
             mockFeatFocusGenerator.Setup(g => g.GenerateAllowingFocusOfAllFrom("metarace species feat", "species focus type", skills)).Returns("species focus");
 
-            var feats = racialFeatsGenerator.GenerateWith(race, skills);
+            var feats = racialFeatsGenerator.GenerateWith(race, skills, stats);
             var baseFeat = feats.First(f => f.Name == baseRaceFeatSelection.Feat);
             var metaFeat = feats.First(f => f.Name == metaraceFeatSelection.Feat);
             var speciesFeat = feats.First(f => f.Name == speciesFeatSelection.Feat);

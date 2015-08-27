@@ -1,8 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using System.Linq;
-using Ninject;
-using CharacterGen.Common.Alignments;
+﻿using CharacterGen.Common.Alignments;
 using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Common.Races;
 using CharacterGen.Generators;
@@ -12,7 +8,11 @@ using CharacterGen.Generators.Randomizers.Races;
 using CharacterGen.Generators.Verifiers;
 using CharacterGen.Generators.Verifiers.Exceptions;
 using CharacterGen.Tests.Integration.Common;
+using Ninject;
 using NUnit.Framework;
+using System;
+using System.Diagnostics;
+using System.Linq;
 
 namespace CharacterGen.Tests.Integration.Stress
 {
@@ -44,7 +44,11 @@ namespace CharacterGen.Tests.Integration.Stress
         protected readonly String testType;
 
         private const Int32 ConfidentIterations = 1000000;
+#if STRESS
+        private const Int32 TimeLimitInSeconds = 60;
+#else
         private const Int32 TimeLimitInSeconds = 1;
+#endif
 
         private Int32 iterations;
 

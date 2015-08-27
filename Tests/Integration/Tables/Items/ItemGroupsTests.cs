@@ -180,14 +180,14 @@ namespace CharacterGen.Tests.Integration.Tables.Items
         [TestCase(ArmorConstants.BreastplateOfCommand, ArmorConstants.Breastplate)]
         [TestCase(ArmorConstants.Buckler, ArmorConstants.Buckler)]
         [TestCase(ArmorConstants.CastersShield, ArmorConstants.LightWoodenShield)]
-        [TestCase(ArmorConstants.CelestialArmor, ArmorConstants.Chainmail)]
+        [TestCase(ArmorConstants.CelestialArmor, ArmorConstants.CelestialArmor)]
         [TestCase(ArmorConstants.Chainmail, ArmorConstants.Chainmail)]
         [TestCase(ArmorConstants.ChainShirt, ArmorConstants.ChainShirt)]
         [TestCase(ArmorConstants.DemonArmor, ArmorConstants.FullPlate)]
         [TestCase(ArmorConstants.DwarvenPlate, ArmorConstants.FullPlate)]
         [TestCase(ArmorConstants.ElvenChain, ArmorConstants.ElvenChain)]
         [TestCase(ArmorConstants.FullPlate, ArmorConstants.FullPlate)]
-        [TestCase(ArmorConstants.FullPlateOfSpeed, ArmorConstants.FullPlate)]
+        [TestCase(ArmorConstants.FullPlateOfSpeed, ArmorConstants.FullPlateOfSpeed)]
         [TestCase(ArmorConstants.HalfPlate, ArmorConstants.HalfPlate)]
         [TestCase(ArmorConstants.HeavySteelShield, ArmorConstants.HeavySteelShield)]
         [TestCase(ArmorConstants.HeavyWoodenShield, ArmorConstants.HeavyWoodenShield)]
@@ -209,7 +209,8 @@ namespace CharacterGen.Tests.Integration.Tables.Items
             ArmorConstants.HideArmor,
             ArmorConstants.ScaleMail,
             ArmorConstants.Chainmail,
-            ArmorConstants.Breastplate)]
+            ArmorConstants.Breastplate,
+            ArmorConstants.FullPlateOfSpeed)]
         [TestCase(FeatConstants.HeavyArmorProficiency,
             ArmorConstants.SplintMail,
             ArmorConstants.BandedMail,
@@ -228,7 +229,8 @@ namespace CharacterGen.Tests.Integration.Tables.Items
             ArmorConstants.LeatherArmor,
             ArmorConstants.StuddedLeatherArmor,
             ArmorConstants.ChainShirt,
-            ArmorConstants.ElvenChain)]
+            ArmorConstants.ElvenChain,
+            ArmorConstants.CelestialArmor)]
         [TestCase(GroupConstants.TwoHanded,
             WeaponConstants.Longspear,
             WeaponConstants.Quarterstaff,

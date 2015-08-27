@@ -1,5 +1,7 @@
 ﻿using CharacterGen.Common.Abilities.Feats;
 using CharacterGen.Common.Abilities.Skills;
+using CharacterGen.Common.CharacterClasses;
+using CharacterGen.Common.Magics;
 using CharacterGen.Common.Races;
 using CharacterGen.Tables;
 using NUnit.Framework;
@@ -45,7 +47,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             0,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.MartialWeaponProficiency + WeaponConstants.Rapier,
             FeatConstants.MartialWeaponProficiency,
             WeaponConstants.Rapier,
@@ -54,7 +56,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             0,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.MartialWeaponProficiency + WeaponConstants.Longbow,
             FeatConstants.MartialWeaponProficiency,
             WeaponConstants.Longbow,
@@ -63,7 +65,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             0,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.MartialWeaponProficiency + WeaponConstants.Shortbow,
             FeatConstants.MartialWeaponProficiency,
             WeaponConstants.Shortbow,
@@ -72,25 +74,25 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             0,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.SaveBonus,
             FeatConstants.SaveBonus,
-            "Enchantment spells or effects",
+            CharacterClassConstants.Schools.Enchantment,
             0,
             "",
             0,
             "",
             2,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.ImmuneToEffect,
             FeatConstants.ImmuneToEffect,
-            "Sleep",
+            SpellConstants.Sleep,
             0,
             "",
             0,
             "",
             0,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.LowLightVision,
             FeatConstants.LowLightVision,
             "",
@@ -99,7 +101,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             0,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.SkillBonus + SkillConstants.Listen,
             FeatConstants.SkillBonus,
             SkillConstants.Listen,
@@ -108,7 +110,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             2,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.SkillBonus + SkillConstants.Search,
             FeatConstants.SkillBonus,
             SkillConstants.Search,
@@ -117,7 +119,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             2,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.SkillBonus + SkillConstants.Spot,
             FeatConstants.SkillBonus,
             SkillConstants.Spot,
@@ -126,7 +128,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             2,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.PassiveSecretDoorSearch,
             FeatConstants.PassiveSecretDoorSearch,
             "",
@@ -135,10 +137,10 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             0,
-            0)]
-        public override void Data(String name, String feat, String focus, Int32 frequencyQuantity, String frequencyTimePeriod, Int32 minimumHitDiceRequirement, String sizeRequirement, Int32 strength, Int32 maximumHitDiceRequirement)
+            0, "", 0)]
+        public override void Data(String name, String feat, String focus, Int32 frequencyQuantity, String frequencyTimePeriod, Int32 minimumHitDiceRequirement, String sizeRequirement, Int32 strength, Int32 maximumHitDiceRequirement, String requiredStat, Int32 requiredStatMinimumValue)
         {
-            base.Data(name, feat, focus, frequencyQuantity, frequencyTimePeriod, minimumHitDiceRequirement, sizeRequirement, strength, maximumHitDiceRequirement);
+            base.Data(name, feat, focus, frequencyQuantity, frequencyTimePeriod, minimumHitDiceRequirement, sizeRequirement, strength, maximumHitDiceRequirement, requiredStat, requiredStatMinimumValue);
         }
     }
 }

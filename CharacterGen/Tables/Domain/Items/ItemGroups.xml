@@ -59,7 +59,7 @@
   </object>
   <object>
     <name>Celestial armor</name>
-    <item>Chainmail</item>
+    <item>Celestial armor</item>
   </object>
   <object>
     <name>Chain shirt</name>
@@ -183,7 +183,7 @@
   </object>
   <object>
     <name>Full plate of speed</name>
-    <item>Full plate</item>
+    <item>Full plate of speed</item>
   </object>
     <object>
         <name>Gauntlet</name>
@@ -313,6 +313,7 @@
     <item>Studded leather armor</item>
     <item>Chain shirt</item>
     <item>Elven chain</item>
+    <item>Celestial armor</item>
   </object>
     <object>
         <name>Light crossbow</name>
@@ -382,6 +383,7 @@
     <item>Scale mail</item>
     <item>Chainmail</item>
     <item>Breastplate</item>
+    <item>Full plate of speed</item>
   </object>
     <object>
         <name>Morningstar</name>

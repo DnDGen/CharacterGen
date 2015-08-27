@@ -39,7 +39,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             0,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.NaturalWeapon + "Bite",
             FeatConstants.NaturalWeapon,
             "Bite",
@@ -48,7 +48,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             0,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.ImmuneToEffect + "Paralysis",
             FeatConstants.ImmuneToEffect,
             "Paralysis",
@@ -57,7 +57,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             0,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.ImmuneToEffect + "Sleep",
             FeatConstants.ImmuneToEffect,
             "Sleep",
@@ -66,7 +66,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             0,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.LowLightVision,
             FeatConstants.LowLightVision,
             "",
@@ -75,7 +75,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             0,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.NaturalArmor,
             FeatConstants.NaturalArmor,
             "",
@@ -84,7 +84,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             4,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.Darkvision,
             FeatConstants.Darkvision,
             "",
@@ -93,10 +93,10 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             60,
-            0)]
-        public override void Data(String name, String feat, String focus, Int32 frequencyQuantity, String frequencyTimePeriod, Int32 minimumHitDiceRequirement, String sizeRequirement, Int32 strength, Int32 maximumHitDiceRequirement)
+            0, "", 0)]
+        public override void Data(String name, String feat, String focus, Int32 frequencyQuantity, String frequencyTimePeriod, Int32 minimumHitDiceRequirement, String sizeRequirement, Int32 strength, Int32 maximumHitDiceRequirement, String requiredStat, Int32 requiredStatMinimumValue)
         {
-            base.Data(name, feat, focus, frequencyQuantity, frequencyTimePeriod, minimumHitDiceRequirement, sizeRequirement, strength, maximumHitDiceRequirement);
+            base.Data(name, feat, focus, frequencyQuantity, frequencyTimePeriod, minimumHitDiceRequirement, sizeRequirement, strength, maximumHitDiceRequirement, requiredStat, requiredStatMinimumValue);
         }
     }
 }

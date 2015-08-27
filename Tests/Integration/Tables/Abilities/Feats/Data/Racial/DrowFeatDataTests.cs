@@ -55,7 +55,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             2,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.ImmuneToEffect,
             FeatConstants.ImmuneToEffect,
             SpellConstants.Sleep,
@@ -64,7 +64,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             0,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.SaveBonus + "Will",
             FeatConstants.SaveBonus,
             "Will (spells and spell-like abilities)",
@@ -73,7 +73,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             2,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.Darkvision,
             FeatConstants.Darkvision,
             "",
@@ -82,7 +82,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             120,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.MartialWeaponProficiency + WeaponConstants.HandCrossbow,
             FeatConstants.MartialWeaponProficiency,
             WeaponConstants.HandCrossbow,
@@ -91,7 +91,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             0,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.MartialWeaponProficiency + WeaponConstants.Rapier,
             FeatConstants.MartialWeaponProficiency,
             WeaponConstants.Rapier,
@@ -100,7 +100,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             0,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.MartialWeaponProficiency + WeaponConstants.ShortSword,
             FeatConstants.MartialWeaponProficiency,
             WeaponConstants.ShortSword,
@@ -109,7 +109,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             0,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.PassiveSecretDoorSearch,
             FeatConstants.PassiveSecretDoorSearch,
             "",
@@ -118,7 +118,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             0,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.SkillBonus + SkillConstants.Listen,
             FeatConstants.SkillBonus,
             SkillConstants.Listen,
@@ -127,7 +127,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             2,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.SkillBonus + SkillConstants.Search,
             FeatConstants.SkillBonus,
             SkillConstants.Search,
@@ -136,7 +136,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             2,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.SkillBonus + SkillConstants.Spot,
             FeatConstants.SkillBonus,
             SkillConstants.Spot,
@@ -145,7 +145,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             2,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.SpellResistance,
             FeatConstants.SpellResistance,
             "Add class level to strength",
@@ -154,7 +154,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             11,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.DancingLights,
             FeatConstants.SpellLikeAbility,
             SpellConstants.DancingLights,
@@ -163,7 +163,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             0,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.Darkness,
             FeatConstants.SpellLikeAbility,
             SpellConstants.Darkness,
@@ -172,7 +172,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             0,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.FaerieFire,
             FeatConstants.SpellLikeAbility,
             SpellConstants.FaerieFire,
@@ -181,7 +181,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             0,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.LightBlindness,
             FeatConstants.LightBlindness,
             "",
@@ -190,7 +190,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             0,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.Poison,
             FeatConstants.Poison,
             "",
@@ -199,10 +199,12 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             0,
-            0)]
-        public override void Data(String name, String feat, String focus, Int32 frequencyQuantity, String frequencyTimePeriod, Int32 minimumHitDiceRequirement, String sizeRequirement, Int32 strength, Int32 maximumHitDiceRequirement, String requiredStat, Int32 requiredStatMinimumValue)
+            0, "", 0)]
+        public override void Data(String name, String feat, String focus, Int32 frequencyQuantity,
+            String frequencyTimePeriod, Int32 minimumHitDiceRequirement, String sizeRequirement,
+            Int32 strength, Int32 maximumHitDiceRequirement, String requiredStat, Int32 requiredStatMinimumValue)
         {
-            base.Data(name, feat, focus, frequencyQuantity, frequencyTimePeriod, minimumHitDiceRequirement, sizeRequirement, strength, maximumHitDiceRequirement);
+            base.Data(name, feat, focus, frequencyQuantity, frequencyTimePeriod, minimumHitDiceRequirement, sizeRequirement, strength, maximumHitDiceRequirement, requiredStat, requiredStatMinimumValue);
         }
     }
 }

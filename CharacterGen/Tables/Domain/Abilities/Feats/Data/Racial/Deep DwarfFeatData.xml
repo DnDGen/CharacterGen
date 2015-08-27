@@ -11,16 +11,20 @@
         <item>0</item>
         <item></item>
       <item>0</item>
+      <item></item>
+      <item>0</item>
     </object>
     <object>
-        <name>Attack BonusGoblin</name>
-        <item>Attack Bonus</item>
-        <item></item>
-        <item>0</item>
-        <item>1</item>
-        <item>Goblinoids</item>
-        <item>0</item>
-        <item></item>
+      <name>Attack BonusGoblin</name>
+      <item>Attack Bonus</item>
+      <item></item>
+      <item>0</item>
+      <item>1</item>
+      <item>Goblinoids</item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
       <item>0</item>
     </object>
     <object>
@@ -33,16 +37,20 @@
         <item>0</item>
         <item></item>
       <item>0</item>
+      <item></item>
+      <item>0</item>
     </object>
     <object>
-        <name>Save BonusSpell</name>
-        <item>Save Bonus</item>
-        <item></item>
-        <item>0</item>
-        <item>3</item>
-        <item>Spells and spell-like effects</item>
-        <item>0</item>
-        <item></item>
+      <name>Save BonusSpell</name>
+      <item>Save Bonus</item>
+      <item></item>
+      <item>0</item>
+      <item>3</item>
+      <item>Spells and spell-like effects</item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
       <item>0</item>
     </object>
     <object>
@@ -55,6 +63,8 @@
         <item>0</item>
         <item></item>
         <item>0</item>
+    <item></item>
+    <item>0</item>
     </object>
     <object>
         <name>Dodge Bonus</name>
@@ -66,16 +76,20 @@
         <item>0</item>
         <item></item>
       <item>0</item>
+      <item></item>
+      <item>0</item>
     </object>
     <object>
-        <name>Stability</name>
-        <item>Stability</item>
-        <item></item>
-        <item>0</item>
-        <item>0</item>
-        <item></item>
-        <item>0</item>
-        <item></item>
+      <name>Stability</name>
+      <item>Stability</item>
+      <item></item>
+      <item>0</item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
       <item>0</item>
     </object>
     <object>
@@ -88,6 +102,8 @@
         <item>0</item>
         <item></item>
       <item>0</item>
+    <item></item>
+    <item>0</item>
     </object>
     <object>
         <name>Weapon FamiliarityDwarven waraxe</name>
@@ -98,6 +114,8 @@
         <item>Dwarven waraxe</item>
         <item>0</item>
         <item></item>
+      <item>0</item>
+      <item></item>
       <item>0</item>
     </object>
     <object>
@@ -110,6 +128,8 @@
         <item>0</item>
         <item></item>
         <item>0</item>
+    <item></item>
+    <item>0</item>
     </object>
     <object>
         <name>Darkvision</name>
@@ -121,12 +141,16 @@
         <item>0</item>
         <item></item>
       <item>0</item>
+      <item></item>
+      <item>0</item>
     </object>
   <object>
     <name>Light Sensitivity</name>
     <item>Light Sensitivity</item>
     <item></item>
     <item>0</item>
+    <item>0</item>
+    <item></item>
     <item>0</item>
     <item></item>
     <item>0</item>

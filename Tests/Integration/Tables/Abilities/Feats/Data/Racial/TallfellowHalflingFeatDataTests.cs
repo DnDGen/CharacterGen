@@ -40,7 +40,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             2,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.SaveBonus + "All",
             FeatConstants.SaveBonus,
             "",
@@ -49,7 +49,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             1,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.AttackBonus + "ThrowOrSling",
             FeatConstants.AttackBonus,
             "Thrown weapons and slings",
@@ -58,7 +58,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             1,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.SkillBonus + SkillConstants.Listen,
             FeatConstants.SkillBonus,
             SkillConstants.Listen,
@@ -67,7 +67,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             2,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.SkillBonus + SkillConstants.Search,
             FeatConstants.SkillBonus,
             SkillConstants.Search,
@@ -76,7 +76,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             2,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.SkillBonus + SkillConstants.Spot,
             FeatConstants.SkillBonus,
             SkillConstants.Spot,
@@ -85,7 +85,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             2,
-            0)]
+            0, "", 0)]
         [TestCase(FeatConstants.PassiveSecretDoorSearch,
             FeatConstants.PassiveSecretDoorSearch,
             "",
@@ -94,10 +94,10 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             0,
             "",
             0,
-            0)]
-        public override void Data(String name, String feat, String focus, Int32 frequencyQuantity, String frequencyTimePeriod, Int32 minimumHitDiceRequirement, String sizeRequirement, Int32 strength, Int32 maximumHitDiceRequirement)
+            0, "", 0)]
+        public override void Data(String name, String feat, String focus, Int32 frequencyQuantity, String frequencyTimePeriod, Int32 minimumHitDiceRequirement, String sizeRequirement, Int32 strength, Int32 maximumHitDiceRequirement, String requiredStat, Int32 requiredStatMinimumValue)
         {
-            base.Data(name, feat, focus, frequencyQuantity, frequencyTimePeriod, minimumHitDiceRequirement, sizeRequirement, strength, maximumHitDiceRequirement);
+            base.Data(name, feat, focus, frequencyQuantity, frequencyTimePeriod, minimumHitDiceRequirement, sizeRequirement, strength, maximumHitDiceRequirement, requiredStat, requiredStatMinimumValue);
         }
     }
 }

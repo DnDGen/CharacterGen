@@ -8,7 +8,6 @@ namespace CharacterGen.Tests.Unit.Tables
     public class TableNameConstantsTests
     {
         [TestCase(TableNameConstants.Set.Adjustments.ArmorBonuses, "ArmorBonuses")]
-        [TestCase(TableNameConstants.Set.Adjustments.ArmorCheckPenalties, "ArmorCheckPenalties")]
         [TestCase(TableNameConstants.Set.Adjustments.ClassHitDice, "ClassHitDice")]
         [TestCase(TableNameConstants.Set.Adjustments.FeatArmorAdjustments, "FeatArmorAdjustments")]
         [TestCase(TableNameConstants.Set.Adjustments.FeatInitiativeBonuses, "FeatInitiativeBonuses")]

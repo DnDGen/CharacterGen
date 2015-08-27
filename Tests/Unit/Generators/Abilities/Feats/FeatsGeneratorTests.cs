@@ -49,7 +49,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             baseAttack = new BaseAttack();
             racialFeats = new List<Feat>();
 
-            mockRacialFeatsGenerator.Setup(g => g.GenerateWith(race, skills)).Returns(racialFeats);
+            mockRacialFeatsGenerator.Setup(g => g.GenerateWith(race, skills, stats)).Returns(racialFeats);
         }
 
         [Test]

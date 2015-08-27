@@ -1,14 +1,13 @@
-﻿using System;
-using RollGen.Bootstrap;
-using TreasureGen.Bootstrap;
+﻿using CharacterGen.Bootstrap;
 using Ninject;
-using CharacterGen.Bootstrap;
 using NUnit.Framework;
+using RollGen.Bootstrap;
+using System;
+using TreasureGen.Bootstrap;
 
 namespace CharacterGen.Tests.Integration.Common
 {
     [TestFixture]
-    [Integration]
     public abstract class IntegrationTests
     {
         private IKernel kernel;
@@ -21,11 +20,11 @@ namespace CharacterGen.Tests.Integration.Common
             var diceLoader = new RollGenModuleLoader();
             diceLoader.LoadModules(kernel);
 
-            var TreasureGenLoader = new TreasureGenModuleLoader();
-            TreasureGenLoader.LoadModules(kernel);
+            var treasureGenLoader = new TreasureGenModuleLoader();
+            treasureGenLoader.LoadModules(kernel);
 
-            var npcGenLoader = new CharacterGenModuleLoader();
-            npcGenLoader.LoadModules(kernel);
+            var characterGenLoader = new CharacterGenModuleLoader();
+            characterGenLoader.LoadModules(kernel);
         }
 
         [SetUp]

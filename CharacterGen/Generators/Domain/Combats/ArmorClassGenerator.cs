@@ -41,26 +41,26 @@ namespace CharacterGen.Generators.Domain.Combats
 
         private Int32 GetArmorBonuses(Equipment equipment)
         {
-            var armorBonus = GetArmorBonus(equipment.Armor);
-            var shieldBonus = GetShieldBonus(equipment.OffHand);
+            var armorBonuses = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.ArmorBonuses);
+
+            var armorBonus = GetArmorBonus(equipment.Armor, armorBonuses);
+            var shieldBonus = GetShieldBonus(equipment.OffHand, armorBonuses);
             return armorBonus + shieldBonus;
         }
 
-        private Int32 GetArmorBonus(Item armor)
+        private Int32 GetArmorBonus(Item armor, Dictionary<String, Int32> armorBonuses)
         {
             if (armor == null)
                 return 0;
 
-            var armorBonuses = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.ArmorBonuses);
             return armorBonuses[armor.Name] + armor.Magic.Bonus;
         }
 
-        private Int32 GetShieldBonus(Item offHand)
+        private Int32 GetShieldBonus(Item offHand, Dictionary<String, Int32> armorBonuses)
         {
             if (offHand == null || offHand.ItemType != ItemTypeConstants.Armor || !offHand.Attributes.Contains(AttributeConstants.Shield))
                 return 0;
 
-            var armorBonuses = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.ArmorBonuses);
             return armorBonuses[offHand.Name] + offHand.Magic.Bonus;
         }
 
@@ -79,7 +79,7 @@ namespace CharacterGen.Generators.Domain.Combats
             var deflectionBonuses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.Deflection);
             var itemsWithDeflectionBonuses = items.Where(i => deflectionBonuses.Contains(i.Name));
 
-            if (!itemsWithDeflectionBonuses.Any())
+            if (itemsWithDeflectionBonuses.Any() == false)
                 return 0;
 
             return itemsWithDeflectionBonuses.Max(i => i.Magic.Bonus);

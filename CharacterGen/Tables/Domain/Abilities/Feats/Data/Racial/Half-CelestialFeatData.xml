@@ -11,16 +11,20 @@
         <item>0</item>
         <item></item>
       <item>0</item>
+      <item></item>
+      <item>0</item>
     </object>
     <object>
-        <name>Spell-Like AbilityDaylight</name>
-        <item>Spell-Like Ability</item>
-        <item></item>
-        <item>0</item>
-        <item>0</item>
-        <item>Daylight</item>
+      <name>Spell-Like AbilityDaylight</name>
+      <item>Spell-Like Ability</item>
+      <item></item>
+      <item>0</item>
+      <item>0</item>
+      <item>Daylight</item>
       <item>0</item>
       <item>At Will</item>
+      <item>0</item>
+      <item></item>
       <item>0</item>
     </object>
     <object>
@@ -33,6 +37,8 @@
       <item>3</item>
       <item>Day</item>
       <item>0</item>
+      <item>Wisdom</item>
+      <item>8</item>
     </object>
     <object>
         <name>Smite Evil</name>
@@ -44,6 +50,8 @@
       <item>1</item>
       <item>Day</item>
       <item>0</item>
+    <item></item>
+    <item>0</item>
     </object>
     <object>
         <name>Spell-Like AbilityBless</name>
@@ -55,6 +63,8 @@
       <item>1</item>
       <item>Day</item>
       <item>0</item>
+      <item>Wisdom</item>
+      <item>8</item>
     </object>
     <object>
       <name>Spell-Like AbilityAid</name>
@@ -66,28 +76,34 @@
       <item>1</item>
       <item>Day</item>
       <item>0</item>
+      <item>Wisdom</item>
+      <item>8</item>
     </object>
     <object>
-        <name>Darkvision</name>
-        <item>Darkvision</item>
-        <item></item>
-        <item>0</item>
-        <item>60</item>
-        <item></item>
-        <item>0</item>
-        <item></item>
+      <name>Darkvision</name>
+      <item>Darkvision</item>
+      <item></item>
+      <item>0</item>
+      <item>60</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
       <item>0</item>
     </object>
-  <object>
-    <name>Spell-Like AbilityDetect evil</name>
-    <item>Spell-Like Ability</item>
-    <item></item>
-    <item>3</item>
-    <item>0</item>
-    <item>Detect evil</item>
-    <item>1</item>
-    <item>Day</item>
-    <item>0</item>
+    <object>
+      <name>Spell-Like AbilityDetect evil</name>
+      <item>Spell-Like Ability</item>
+      <item></item>
+      <item>3</item>
+      <item>0</item>
+      <item>Detect evil</item>
+      <item>1</item>
+      <item>Day</item>
+      <item>0</item>
+      <item>Wisdom</item>
+      <item>8</item>
   </object>
   <object>
     <name>Spell-Like AbilityCure serious wounds</name>
@@ -99,6 +115,8 @@
     <item>1</item>
     <item>Day</item>
     <item>0</item>
+    <item>Wisdom</item>
+    <item>8</item>
   </object>
   <object>
     <name>Spell-Like AbilityNeutralize poison</name>
@@ -110,6 +128,8 @@
     <item>1</item>
     <item>Day</item>
     <item>0</item>
+    <item>Wisdom</item>
+    <item>8</item>
   </object>
   <object>
     <name>Spell-Like AbilityHoly smite</name>
@@ -121,6 +141,8 @@
     <item>1</item>
     <item>Day</item>
     <item>0</item>
+    <item>Wisdom</item>
+    <item>8</item>
   </object>
   <object>
     <name>Spell-Like AbilityRemove disease</name>
@@ -132,6 +154,8 @@
     <item>1</item>
     <item>Day</item>
     <item>0</item>
+    <item>Wisdom</item>
+    <item>8</item>
   </object>
   <object>
     <name>Spell-Like AbilityDispel evil</name>
@@ -143,6 +167,8 @@
     <item>1</item>
     <item>Day</item>
     <item>0</item>
+    <item>Wisdom</item>
+    <item>8</item>
   </object>
   <object>
     <name>Spell-Like AbilityHoly word</name>
@@ -154,6 +180,8 @@
     <item>1</item>
     <item>Day</item>
     <item>0</item>
+    <item>Wisdom</item>
+    <item>8</item>
   </object>
   <object>
     <name>Spell-Like AbilityHoly aura</name>
@@ -165,6 +193,8 @@
     <item>3</item>
     <item>Day</item>
     <item>0</item>
+    <item>Wisdom</item>
+    <item>8</item>
   </object>
   <object>
     <name>Spell-Like AbilityHallow</name>
@@ -176,6 +206,8 @@
     <item>1</item>
     <item>Day</item>
     <item>0</item>
+    <item>Wisdom</item>
+    <item>8</item>
   </object>
   <object>
     <name>Spell-Like AbilityMass charm monster</name>
@@ -187,6 +219,8 @@
     <item>1</item>
     <item>Day</item>
     <item>0</item>
+    <item>Wisdom</item>
+    <item>8</item>
   </object>
   <object>
     <name>Spell-Like AbilitySummon monster IX</name>
@@ -198,6 +232,8 @@
     <item>1</item>
     <item>Day</item>
     <item>0</item>
+    <item>Wisdom</item>
+    <item>8</item>
   </object>
   <object>
     <name>Spell-Like AbilityResurrection</name>
@@ -209,6 +245,8 @@
     <item>1</item>
     <item>Day</item>
     <item>0</item>
+    <item>Wisdom</item>
+    <item>8</item>
   </object>
   <object>
     <name>Immune to Effect</name>
@@ -217,6 +255,8 @@
     <item>0</item>
     <item>0</item>
     <item>Disease</item>
+    <item>0</item>
+    <item></item>
     <item>0</item>
     <item></item>
     <item>0</item>
@@ -231,6 +271,8 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
+    <item>0</item>
   </object>
   <object>
     <name>ResistanceCold</name>
@@ -239,6 +281,8 @@
     <item>0</item>
     <item>10</item>
     <item>Cold</item>
+    <item>0</item>
+    <item></item>
     <item>0</item>
     <item></item>
     <item>0</item>
@@ -253,6 +297,8 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
+    <item>0</item>
   </object>
   <object>
     <name>Damage Reduction11-</name>
@@ -264,6 +310,8 @@
     <item>0</item>
     <item></item>
     <item>11</item>
+    <item></item>
+    <item>0</item>
   </object>
   <object>
     <name>Damage Reduction12+</name>
@@ -272,6 +320,8 @@
     <item>12</item>
     <item>10</item>
     <item>Magic</item>
+    <item>0</item>
+    <item></item>
     <item>0</item>
     <item></item>
     <item>0</item>
@@ -286,6 +336,8 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
+    <item>0</item>
   </object>
   <object>
     <name>Save Bonus</name>
@@ -294,6 +346,8 @@
     <item>0</item>
     <item>4</item>
     <item>Fortitude (Poison)</item>
+    <item>0</item>
+    <item></item>
     <item>0</item>
     <item></item>
     <item>0</item>

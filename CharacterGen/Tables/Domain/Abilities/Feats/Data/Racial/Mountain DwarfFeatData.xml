@@ -11,6 +11,8 @@
         <item>0</item>
         <item></item>
       <item>0</item>
+      <item></item>
+      <item>0</item>
     </object>
     <object>
         <name>Attack BonusGoblin</name>
@@ -21,6 +23,8 @@
         <item>Goblinoids</item>
         <item>0</item>
         <item></item>
+      <item>0</item>
+      <item></item>
       <item>0</item>
     </object>
     <object>
@@ -33,6 +37,8 @@
         <item>0</item>
         <item></item>
       <item>0</item>
+      <item></item>
+      <item>0</item>
     </object>
     <object>
         <name>Save BonusSpell</name>
@@ -44,6 +50,8 @@
         <item>0</item>
         <item></item>
       <item>0</item>
+    <item></item>
+    <item>0</item>
     </object>
     <object>
         <name>Save BonusPoison</name>
@@ -55,6 +63,8 @@
         <item>0</item>
         <item></item>
         <item>0</item>
+      <item></item>
+      <item>0</item>
     </object>
     <object>
         <name>Dodge Bonus</name>
@@ -66,16 +76,20 @@
         <item>0</item>
         <item></item>
       <item>0</item>
+      <item></item>
+      <item>0</item>
     </object>
     <object>
-        <name>Stability</name>
-        <item>Stability</item>
-        <item></item>
-        <item>0</item>
-        <item>0</item>
-        <item></item>
-        <item>0</item>
-        <item></item>
+      <name>Stability</name>
+      <item>Stability</item>
+      <item></item>
+      <item>0</item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
       <item>0</item>
     </object>
     <object>
@@ -88,6 +102,8 @@
         <item>0</item>
         <item></item>
       <item>0</item>
+      <item></item>
+      <item>0</item>
     </object>
     <object>
         <name>Weapon FamiliarityDwarven waraxe</name>
@@ -98,6 +114,8 @@
         <item>Dwarven waraxe</item>
         <item>0</item>
         <item></item>
+      <item>0</item>
+      <item></item>
       <item>0</item>
     </object>
     <object>
@@ -110,6 +128,8 @@
         <item>0</item>
         <item></item>
         <item>0</item>
+      <item></item>
+      <item>0</item>
     </object>
     <object>
         <name>Darkvision</name>
@@ -120,6 +140,8 @@
         <item></item>
         <item>0</item>
         <item></item>
+      <item>0</item>
+      <item></item>
       <item>0</item>
     </object>
 </items>

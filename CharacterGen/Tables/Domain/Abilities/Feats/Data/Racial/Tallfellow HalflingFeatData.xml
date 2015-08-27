@@ -11,6 +11,8 @@
         <item>0</item>
         <item></item>
       <item>0</item>
+      <item></item>
+      <item>0</item>
     </object>
     <object>
       <name>Skill BonusSpot</name>
@@ -22,6 +24,8 @@
       <item>0</item>
       <item></item>
       <item>0</item>
+    <item></item>
+    <item>0</item>
     </object>
     <object>
         <name>Passive Secret Door Search</name>
@@ -33,27 +37,33 @@
         <item>0</item>
         <item></item>
         <item>0</item>
-    </object>
-    <object>
-        <name>Skill BonusListen</name>
-        <item>Skill Bonus</item>
-        <item></item>
-        <item>0</item>
-        <item>2</item>
-        <item>Listen</item>
-        <item>0</item>
-        <item></item>
+      <item></item>
       <item>0</item>
     </object>
     <object>
-        <name>Attack BonusThrowOrSling</name>
-        <item>Attack Bonus</item>
-        <item></item>
-        <item>0</item>
-        <item>1</item>
-        <item>Thrown weapons and slings</item>
-        <item>0</item>
-        <item></item>
+      <name>Skill BonusListen</name>
+      <item>Skill Bonus</item>
+      <item></item>
+      <item>0</item>
+      <item>2</item>
+      <item>Listen</item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+    </object>
+    <object>
+      <name>Attack BonusThrowOrSling</name>
+      <item>Attack Bonus</item>
+      <item></item>
+      <item>0</item>
+      <item>1</item>
+      <item>Thrown weapons and slings</item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
       <item>0</item>
     </object>
     <object>
@@ -66,6 +76,8 @@
         <item>0</item>
         <item></item>
       <item>0</item>
+      <item></item>
+      <item>0</item>
     </object>
     <object>
         <name>Save BonusAll</name>
@@ -76,6 +88,8 @@
         <item></item>
         <item>0</item>
         <item></item>
+      <item>0</item>
+      <item></item>
       <item>0</item>
     </object>
 </items>

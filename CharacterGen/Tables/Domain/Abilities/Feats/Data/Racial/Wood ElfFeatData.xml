@@ -11,6 +11,8 @@
         <item>0</item>
         <item></item>
       <item>0</item>
+      <item></item>
+      <item>0</item>
     </object>
     <object>
         <name>Martial Weapon ProficiencyRapier</name>
@@ -22,27 +24,33 @@
         <item>0</item>
         <item></item>
       <item>0</item>
-    </object>
-    <object>
-        <name>Martial Weapon ProficiencyLongbow</name>
-        <item>Martial Weapon Proficiency</item>
-        <item></item>
-        <item>0</item>
-        <item>0</item>
-        <item>Longbow</item>
-        <item>0</item>
-        <item></item>
+      <item></item>
       <item>0</item>
     </object>
     <object>
-        <name>Martial Weapon ProficiencyShortbow</name>
-        <item>Martial Weapon Proficiency</item>
-        <item></item>
-        <item>0</item>
-        <item>0</item>
-        <item>Shortbow</item>
-        <item>0</item>
-        <item></item>
+      <name>Martial Weapon ProficiencyLongbow</name>
+      <item>Martial Weapon Proficiency</item>
+      <item></item>
+      <item>0</item>
+      <item>0</item>
+      <item>Longbow</item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+    </object>
+    <object>
+      <name>Martial Weapon ProficiencyShortbow</name>
+      <item>Martial Weapon Proficiency</item>
+      <item></item>
+      <item>0</item>
+      <item>0</item>
+      <item>Shortbow</item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
       <item>0</item>
     </object>
     <object>
@@ -55,6 +63,8 @@
         <item>0</item>
         <item></item>
       <item>0</item>
+      <item></item>
+      <item>0</item>
     </object>
     <object>
         <name>Save Bonus</name>
@@ -62,10 +72,12 @@
         <item></item>
         <item>0</item>
         <item>2</item>
-        <item>Enchantment spells or effects</item>
+      <item>Enchantment</item>
         <item>0</item>
         <item></item>
         <item>0</item>
+      <item></item>
+      <item>0</item>
     </object>
     <object>
         <name>Low-Light Vision</name>
@@ -77,6 +89,8 @@
         <item>0</item>
         <item></item>
       <item>0</item>
+    <item></item>
+    <item>0</item>
     </object>
     <object>
         <name>Skill BonusListen</name>
@@ -88,6 +102,8 @@
         <item>0</item>
         <item></item>
       <item>0</item>
+      <item></item>
+      <item>0</item>
     </object>
     <object>
       <name>Skill BonusSearch</name>
@@ -96,6 +112,8 @@
       <item>0</item>
       <item>2</item>
       <item>Search</item>
+      <item>0</item>
+      <item></item>
       <item>0</item>
       <item></item>
       <item>0</item>
@@ -110,6 +128,8 @@
         <item>0</item>
         <item></item>
       <item>0</item>
+    <item></item>
+    <item>0</item>
     </object>
     <object>
         <name>Passive Secret Door Search</name>
@@ -120,6 +140,8 @@
         <item></item>
         <item>0</item>
         <item></item>
+      <item>0</item>
+      <item></item>
       <item>0</item>
     </object>
 </items>

@@ -33,7 +33,7 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
         public IEnumerable<Feat> GenerateWith(CharacterClass characterClass, Race race, Dictionary<String, Stat> stats,
             Dictionary<String, Skill> skills, BaseAttack baseAttack)
         {
-            var racialFeats = racialFeatsGenerator.GenerateWith(race, skills);
+            var racialFeats = racialFeatsGenerator.GenerateWith(race, skills, stats);
             var classFeats = classFeatsGenerator.GenerateWith(characterClass, race, stats, racialFeats, skills);
             var automaticFeats = racialFeats.Union(classFeats);
             var additionalFeats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, automaticFeats);

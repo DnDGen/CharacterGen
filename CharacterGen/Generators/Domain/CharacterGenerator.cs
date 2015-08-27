@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using CharacterGen.Common;
+﻿using CharacterGen.Common;
 using CharacterGen.Common.Abilities.Feats;
-using CharacterGen.Common.Abilities.Skills;
 using CharacterGen.Common.Abilities.Stats;
 using CharacterGen.Common.Alignments;
 using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Common.Races;
-using CharacterGen.Generators;
 using CharacterGen.Generators.Abilities;
 using CharacterGen.Generators.Combats;
 using CharacterGen.Generators.Items;
@@ -21,6 +16,9 @@ using CharacterGen.Generators.Verifiers;
 using CharacterGen.Generators.Verifiers.Exceptions;
 using CharacterGen.Selectors;
 using CharacterGen.Tables;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CharacterGen.Generators.Domain
 {
@@ -34,7 +32,7 @@ namespace CharacterGen.Generators.Domain
         private IPercentileSelector percentileSelector;
         private IAbilitiesGenerator abilitiesGenerator;
         private ICombatGenerator combatGenerator;
-        private IEquipmentGenerator TreasureGenerator;
+        private IEquipmentGenerator equipmentGenerator;
         private ISetAlignmentRandomizer setAlignmentRandomizer;
         private ISetLevelRandomizer setLevelRandomizer;
         private IAlignmentRandomizer anyAlignmentRandomizer;
@@ -49,7 +47,7 @@ namespace CharacterGen.Generators.Domain
 
         public CharacterGenerator(IAlignmentGenerator alignmentGenerator, ICharacterClassGenerator characterClassGenerator, IRaceGenerator raceGenerator,
             IAdjustmentsSelector adjustmentsSelector, IRandomizerVerifier randomizerVerifier, IPercentileSelector percentileSelector,
-            IAbilitiesGenerator abilitiesGenerator, ICombatGenerator combatGenerator, IEquipmentGenerator TreasureGenerator,
+            IAbilitiesGenerator abilitiesGenerator, ICombatGenerator combatGenerator, IEquipmentGenerator equipmentGenerator,
             ISetAlignmentRandomizer setAlignmentRandomizer, ISetLevelRandomizer setLevelRandomizer, IAlignmentRandomizer anyAlignmentRandomizer,
             IClassNameRandomizer anyClassNameRandomizer, IBaseRaceRandomizer anyBaseRaceRandomizer, IMetaraceRandomizer anyMetaraceRandomizer,
             IStatsRandomizer rawStatsRandomizer, IBooleanPercentileSelector booleanPercentileSelector, ILeadershipSelector leadershipSelector,
@@ -60,7 +58,7 @@ namespace CharacterGen.Generators.Domain
             this.raceGenerator = raceGenerator;
             this.abilitiesGenerator = abilitiesGenerator;
             this.combatGenerator = combatGenerator;
-            this.TreasureGenerator = TreasureGenerator;
+            this.equipmentGenerator = equipmentGenerator;
 
             this.adjustmentsSelector = adjustmentsSelector;
             this.randomizerVerifier = randomizerVerifier;
@@ -105,25 +103,13 @@ namespace CharacterGen.Generators.Domain
             var levelAdjustments = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments);
             character.Race = GenerateRace(baseRaceRandomizer, metaraceRandomizer, levelAdjustments, character.Alignment, character.Class);
 
-            character.Class.Level -= levelAdjustments[character.Race.BaseRace];
-            character.Class.Level -= levelAdjustments[character.Race.Metarace];
+            character.Class.Level += levelAdjustments[character.Race.BaseRace];
+            character.Class.Level += levelAdjustments[character.Race.Metarace];
 
             var baseAttack = combatGenerator.GenerateBaseAttackWith(character.Class, character.Race);
 
             character.Ability = abilitiesGenerator.GenerateWith(character.Class, character.Race, statsRandomizer, baseAttack);
-            character.Equipment = TreasureGenerator.GenerateWith(character.Ability.Feats, character.Class);
-
-            var armorCheckPenalties = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.ArmorCheckPenalties);
-
-            foreach (var skill in character.Ability.Skills)
-            {
-                if (skill.Value.ArmorCheckPenalty)
-                    skill.Value.Bonus -= armorCheckPenalties[character.Equipment.Armor.Name];
-
-                if (skill.Key == SkillConstants.Swim)
-                    skill.Value.Bonus -= armorCheckPenalties[character.Equipment.Armor.Name];
-            }
-
+            character.Equipment = equipmentGenerator.GenerateWith(character.Ability.Feats, character.Class);
             character.Combat = combatGenerator.GenerateWith(baseAttack, character.Class, character.Race, character.Ability.Feats, character.Ability.Stats, character.Equipment);
             character.InterestingTrait = percentileSelector.SelectFrom(TableNameConstants.Set.Percentile.Traits);
             character.Magic = magicGenerator.GenerateWith(character.Class, character.Ability.Feats, character.Equipment);
@@ -169,7 +155,7 @@ namespace CharacterGen.Generators.Domain
             Race race;
 
             do race = raceGenerator.GenerateWith(alignment, characterClass, baseRaceRandomizer, metaraceRandomizer);
-            while (levelAdjustments[race.BaseRace] + levelAdjustments[race.Metarace] >= characterClass.Level);
+            while (characterClass.Level + levelAdjustments[race.BaseRace] + levelAdjustments[race.Metarace] <= 0);
 
             return race;
         }
