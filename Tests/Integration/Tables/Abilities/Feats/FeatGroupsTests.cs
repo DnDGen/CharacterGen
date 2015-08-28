@@ -752,7 +752,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.Alertness,
             FeatConstants.IronWill,
             FeatConstants.LowLightVision,
-            FeatConstants.Scent)]
+            FeatConstants.Scent,
+            FeatConstants.NaturalArmor)]
         [TestCase(RaceConstants.Metaraces.Werewolf,
             FeatConstants.AlternateForm,
             FeatConstants.Empathy,
@@ -929,7 +930,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
                 FeatConstants.SpellLikeAbility + SpellConstants.PlaneShift,
                 FeatConstants.SpellLikeAbility + SpellConstants.Suggestion,
                 FeatConstants.ImprovedGrab,
-                FeatConstants.Extract
+                FeatConstants.Extract,
+                FeatConstants.AttackBonus
             };
 
             base.DistinctCollection(RaceConstants.BaseRaces.MindFlayer, featIds);

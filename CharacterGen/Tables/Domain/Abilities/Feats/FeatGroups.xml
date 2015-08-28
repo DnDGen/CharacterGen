@@ -1256,6 +1256,7 @@
         <item>Skill BonusListen</item>
         <item>Skill BonusSpot</item>
         <item>Alertness</item>
+      <item>Natural Armor</item>
     </object>
     <object>
         <name>Werewolf</name>

@@ -34,8 +34,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Objects
             Assert.That(selection.FocusType, Is.Empty);
             Assert.That(selection.Frequency, Is.Not.Null);
             Assert.That(selection.MaximumHitDieRequirement, Is.EqualTo(0));
-            Assert.That(selection.RequiredStat, Is.Empty);
-            Assert.That(selection.RequiredStatMinimumValue, Is.EqualTo(0));
+            Assert.That(selection.MinimumStats, Is.Empty);
         }
 
         [Test]
@@ -101,11 +100,22 @@ namespace CharacterGen.Tests.Unit.Selectors.Objects
         [Test]
         public void RequirementsNotMetIfDoesNotHaveMinimumStat()
         {
-            selection.RequiredStat = "stat";
-            selection.RequiredStatMinimumValue = 9266;
+            selection.MinimumStats["stat"] = 9266;
 
             var met = selection.RequirementsMet(race, 4, stats);
             Assert.That(met, Is.False);
+        }
+
+        [Test]
+        public void RequirementsMetIfAnyMinimumStatIsMet()
+        {
+            selection.MinimumStats["stat"] = 9266;
+            selection.MinimumStats["stat 2"] = 600;
+
+            stats["stat 2"] = new Stat { Value = 600 };
+
+            var met = selection.RequirementsMet(race, 4, stats);
+            Assert.That(met, Is.True);
         }
 
         [Test]
@@ -116,8 +126,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Objects
             selection.SizeRequirement = race.Size;
             selection.MinimumHitDieRequirement = 3;
             selection.MaximumHitDieRequirement = 5;
-            selection.RequiredStat = "stat";
-            selection.RequiredStatMinimumValue = 42;
+            selection.MinimumStats["stat"] = 42;
 
             var met = selection.RequirementsMet(race, 4, stats);
             Assert.That(met, Is.True);

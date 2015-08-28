@@ -179,8 +179,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
 
             var speciesFeat = new RacialFeatSelection();
             speciesFeat.Feat = "metarace species feat";
-            speciesFeat.RequiredStat = "stat";
-            speciesFeat.RequiredStatMinimumValue = 15;
+            speciesFeat.MinimumStats["stat"] = 15;
             speciesFeats.Add(speciesFeat);
 
             var monsterHitDice = new Dictionary<String, Int32>();
@@ -206,12 +205,10 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
 
             var speciesFeat = new RacialFeatSelection();
             speciesFeat.Feat = "metarace species feat";
-            speciesFeat.RequiredStat = "stat";
-            speciesFeat.RequiredStatMinimumValue = 15;
+            speciesFeat.MinimumStats["stat"] = 14;
             speciesFeats.Add(speciesFeat);
 
             race.Size = "size";
-            stats["stat"].Value = 15;
 
             var monsterHitDice = new Dictionary<String, Int32>();
             monsterHitDice[race.BaseRace] = 2;

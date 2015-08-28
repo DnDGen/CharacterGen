@@ -3,6 +3,7 @@ using CharacterGen.Common.Abilities.Stats;
 using CharacterGen.Common.Races;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CharacterGen.Selectors.Objects
 {
@@ -15,8 +16,7 @@ namespace CharacterGen.Selectors.Objects
         public Frequency Frequency { get; set; }
         public String FocusType { get; set; }
         public Int32 Strength { get; set; }
-        public String RequiredStat { get; set; }
-        public Int32 RequiredStatMinimumValue { get; set; }
+        public Dictionary<String, Int32> MinimumStats { get; set; }
 
         public RacialFeatSelection()
         {
@@ -24,7 +24,7 @@ namespace CharacterGen.Selectors.Objects
             SizeRequirement = String.Empty;
             Frequency = new Frequency();
             FocusType = String.Empty;
-            RequiredStat = String.Empty;
+            MinimumStats = new Dictionary<String, Int32>();
         }
 
         public Boolean RequirementsMet(Race race, Int32 monsterHitDice, Dictionary<String, Stat> stats)
@@ -35,10 +35,22 @@ namespace CharacterGen.Selectors.Objects
             if (MaximumHitDieRequirement > 0 && monsterHitDice > MaximumHitDieRequirement)
                 return false;
 
-            if (String.IsNullOrEmpty(RequiredStat) == false && RequiredStatMinimumValue > stats[RequiredStat].Value)
+            if (MinimumStatMet(stats) == false)
                 return false;
 
             return monsterHitDice >= MinimumHitDieRequirement;
+        }
+
+        private Boolean MinimumStatMet(Dictionary<String, Stat> stats)
+        {
+            if (MinimumStats.Any() == false)
+                return true;
+
+            foreach (var stat in MinimumStats)
+                if (stats[stat.Key].Value >= stat.Value)
+                    return true;
+
+            return false;
         }
     }
 }

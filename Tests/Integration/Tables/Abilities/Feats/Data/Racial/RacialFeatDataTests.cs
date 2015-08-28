@@ -22,11 +22,13 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
 
         public virtual void Data(String name, String feat, String focus, Int32 frequencyQuantity,
             String frequencyTimePeriod, Int32 minimumHitDiceRequirement, String sizeRequirement,
-            Int32 strength, Int32 maximumHitDiceRequirement, String requiredStat, Int32 requiredStatMinimumValue)
+            Int32 strength, Int32 maximumHitDiceRequirement, Int32 requiredStatMinimumValue, params String[] minimumStats)
         {
             var data = new List<String>();
             for (var i = 0; i < 10; i++)
                 data.Add(String.Empty);
+
+            var requiredStat = String.Join(",", minimumStats);
 
             data[DataIndexConstants.RacialFeatData.FeatNameIndex] = feat;
             data[DataIndexConstants.RacialFeatData.FocusIndex] = focus;
