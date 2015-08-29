@@ -818,7 +818,10 @@
     <EmbeddedResource Include="Abilities\Feats\Data\Racial\Metaraces\WeretigerFeatData.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Abilities\Feats\Data\Racial\BaseRaces\MindFlayerFeatData.xml" />
+    <EmbeddedResource Include="Abilities\Feats\Data\Racial\BaseRaces\Mind FlayerFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Feats\Data\Racial\BaseRaces\TroglodyteFeatData.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

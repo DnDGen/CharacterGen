@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+    <object>
+        <name>Natural Armor</name>
+        <item>Natural Armor</item>
+        <item></item>
+        <item>0</item>
+        <item>3</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+    </object>
+    <object>
+        <name>Darkvision</name>
+        <item>Darkvision</item>
+        <item></item>
+        <item>0</item>
+        <item>60</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+      <item>0</item>
+    <item></item>
+    <item>0</item>
+    </object>
+  <object>
+    <name>Save BonusWill</name>
+    <item>Save Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Save BonusFortitude</name>
+    <item>Save Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Save BonusReflex</name>
+    <item>Save Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Skill BonusBluff</name>
+    <item>Skill Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Skill BonusConcentration</name>
+    <item>Skill Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Skill BonusHide</name>
+    <item>Skill Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Skill BonusIntimidate</name>
+    <item>Skill Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Skill BonusMoveSilently</name>
+    <item>Skill Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Skill BonusListen</name>
+    <item>Skill Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Skill BonusSense Motive</name>
+    <item>Skill Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+</items>

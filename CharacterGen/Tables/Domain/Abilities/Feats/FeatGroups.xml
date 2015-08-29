@@ -791,6 +791,7 @@
         <item>Spell-Like AbilityCharm monster</item>
         <item>Improved Grab</item>
         <item>Extract</item>
+      <item>Attack Bonus</item>
     </object>
     <object>
         <name>Minotaur</name>
