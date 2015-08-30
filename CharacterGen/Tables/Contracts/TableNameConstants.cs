@@ -20,8 +20,6 @@ namespace CharacterGen.Tables
                 public const String MonsterHitDice = "MonsterHitDice";
                 public const String ProhibitedFieldQuantities = "ProhibitedFieldQuantities";
                 public const String RacialBaseAttackAdjustments = "RacialBaseAttackAdjustments";
-                public const String RacialInitiativeBonuses = "RacialInitiativeBonuses";
-                public const String RacialNaturalArmorBonuses = "RacialNaturalArmorBonuses";
                 public const String SkillPointsForClasses = "SkillPointsForClasses";
                 public const String SpecialistFieldQuantities = "SpecialistFieldQuantities";
             }

@@ -964,6 +964,29 @@
   <ItemGroup>
     <EmbeddedResource Include="Races\BaseRaces\Ages\Intuitive\IntuitiveTallfellow HalflingAges.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\BaseRaces\Ages\Trained\TrainedHalf-ElfAges.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\BaseRaces\Ages\Trained\TrainedWood ElfAges.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\BaseRaces\Ages\Trained\TrainedBugbearAges.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\BaseRaces\Weights\FemaleHalf-OrcWeights.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\BaseRaces\Heights\MaleGoblinHeights.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\BaseRaces\Ages\SelfTaught\Self-TaughtKoboldAges.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Feats\Data\CharacterClasses\Domains\EvilFeatData.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

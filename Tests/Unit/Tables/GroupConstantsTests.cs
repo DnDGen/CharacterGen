@@ -20,6 +20,7 @@ namespace CharacterGen.Tests.Unit.Tables
         [TestCase(GroupConstants.HasSkillRequirements, "HasSkillRequirements")]
         [TestCase(GroupConstants.HasStatRequirements, "HasStatRequirements")]
         [TestCase(GroupConstants.Healers, "Healers")]
+        [TestCase(GroupConstants.Initiative, "Initiative")]
         [TestCase(GroupConstants.Intuitive, "Intuitive")]
         [TestCase(GroupConstants.Knowledge, "Knowledge")]
         [TestCase(GroupConstants.Lycanthrope, "Lycanthrope")]

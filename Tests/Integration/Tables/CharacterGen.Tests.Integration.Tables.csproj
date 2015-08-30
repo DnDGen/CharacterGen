@@ -87,6 +87,7 @@
     <Compile Include="Abilities\Feats\Data\CharacterClasses\Domains\ChaosFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\Domains\DeathFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\Domains\EarthFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\CharacterClasses\Domains\EvilFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\Domains\PlantFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\Domains\WarFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\Schools\AbjurationFeatDataTests.cs" />
@@ -265,9 +266,12 @@
     <Compile Include="Races\BaseRaces\Ages\SelfTaught\SelfTaughtHillDwarfAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\SelfTaught\SelfTaughtHobgoblinAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\SelfTaught\SelfTaughtHumanAgesTests.cs" />
+    <Compile Include="Races\BaseRaces\Ages\SelfTaught\SelfTaughtKoboldAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\SelfTaught\SelfTaughtOrcAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\SelfTaught\SelfTaughtWoodElfAgesTests.cs" />
+    <Compile Include="Races\BaseRaces\Ages\Trained\TrainedBugbearAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\Trained\TrainedDrowAgesTests.cs" />
+    <Compile Include="Races\BaseRaces\Ages\Trained\TrainedHalfElfAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\Trained\TrainedHighElfAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\Trained\TrainedHillDwarfAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\Trained\TrainedHumanAgesTests.cs" />
@@ -276,6 +280,7 @@
     <Compile Include="Races\BaseRaces\Ages\Intuitive\IntuitiveLightfootHalflingAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\Intuitive\IntuitiveWoodElfAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\Trained\TrainedTroglodyteAgesTests.cs" />
+    <Compile Include="Races\BaseRaces\Ages\Trained\TrainedWoodElfAgesTests.cs" />
     <Compile Include="Races\BaseRaces\BaseRaceGroupsTests.cs" />
     <Compile Include="Races\BaseRaces\Evil\EvilBarbarianBaseRacesTests.cs" />
     <Compile Include="Races\BaseRaces\Evil\EvilBardBaseRacesTests.cs" />
@@ -301,6 +306,7 @@
     <Compile Include="Races\BaseRaces\Heights\FemaleHalfOrcHeightsTests.cs" />
     <Compile Include="Races\BaseRaces\Heights\FemaleHobgoblinHeightsTests.cs" />
     <Compile Include="Races\BaseRaces\Heights\FemaleHumanHeightsTests.cs" />
+    <Compile Include="Races\BaseRaces\Heights\MaleGoblinHeightsTests.cs" />
     <Compile Include="Races\BaseRaces\Heights\MaleHighElfHeightsTests.cs" />
     <Compile Include="Races\BaseRaces\Heights\MaleHumanHeightsTests.cs" />
     <Compile Include="Races\BaseRaces\Heights\MaleLightfootHalflingHeightsTests.cs" />
@@ -316,6 +322,7 @@
     <Compile Include="Races\BaseRaces\Neutral\NeutralRogueBaseRacesTests.cs" />
     <Compile Include="Races\BaseRaces\Neutral\NeutralSorcererBaseRacesTests.cs" />
     <Compile Include="Races\BaseRaces\Neutral\NeutralWizardBaseRacesTests.cs" />
+    <Compile Include="Races\BaseRaces\Weights\FemaleHalfOrcWeightsTests.cs" />
     <Compile Include="Races\BaseRaces\Weights\FemaleHumanWeightsTests.cs" />
     <Compile Include="Races\BaseRaces\Weights\MaleHighElfWeightsTests.cs" />
     <Compile Include="Races\BaseRaces\Weights\MaleHumanWeightsTests.cs" />

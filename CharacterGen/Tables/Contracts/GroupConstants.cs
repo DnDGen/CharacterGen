@@ -17,6 +17,7 @@ namespace CharacterGen.Tables
         public const String HasSkillRequirements = "HasSkillRequirements";
         public const String HasStatRequirements = "HasStatRequirements";
         public const String Healers = "Healers";
+        public const String Initiative = "Initiative";
         public const String Intuitive = "Intuitive";
         public const String Knowledge = "Knowledge";
         public const String Lycanthrope = "Lycanthrope";

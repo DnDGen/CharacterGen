@@ -97,7 +97,7 @@ namespace CharacterGen.Generators.Domain.Combats
             combat.ArmorClass = armorClassGenerator.GenerateWith(equipment, combat.AdjustedDexterityBonus, feats, race);
             combat.HitPoints = hitPointsGenerator.GenerateWith(characterClass, stats[StatConstants.Constitution].Bonus, race, feats);
             combat.SavingThrows = savingThrowsGenerator.GenerateWith(characterClass, feats, stats);
-            combat.InitiativeBonus = GetInitiativeBonus(race, feats);
+            combat.InitiativeBonus = GetInitiativeBonus(combat.AdjustedDexterityBonus, feats);
 
             return combat;
         }
@@ -116,16 +116,13 @@ namespace CharacterGen.Generators.Domain.Combats
             return Math.Min(stats[StatConstants.Dexterity].Bonus, armorBonus);
         }
 
-        private Int32 GetInitiativeBonus(Race race, IEnumerable<Feat> feats)
+        private Int32 GetInitiativeBonus(Int32 dexterityBonus, IEnumerable<Feat> feats)
         {
-            var racialBonuses = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.RacialInitiativeBonuses);
-            var featBonuses = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.FeatInitiativeBonuses);
+            var initiativeFeatNames = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.Initiative);
+            var initiativeFeats = feats.Where(f => initiativeFeatNames.Contains(f.Name));
+            var initiativeFeatBonus = initiativeFeats.Sum(f => f.Strength);
 
-            var raceBonus = racialBonuses[race.BaseRace] + racialBonuses[race.Metarace];
-            var initiativeFeats = featBonuses.Where(kvp => feats.Any(f => f.Name == kvp.Key));
-            var featBonus = initiativeFeats.Sum(kvp => kvp.Value);
-
-            return raceBonus + featBonus;
+            return initiativeFeatBonus + dexterityBonus;
         }
     }
 }

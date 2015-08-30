@@ -19,23 +19,22 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
     [TestFixture]
     public class CombatGeneratorTests
     {
+        private Mock<ISavingThrowsGenerator> mockSavingThrowsGenerator;
+        private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
+        private Mock<ICollectionsSelector> mockCollectionsSelector;
+        private Mock<IArmorClassGenerator> mockArmorClassGenerator;
+        private Mock<IHitPointsGenerator> mockHitPointsGenerator;
         private ICombatGenerator combatGenerator;
         private CharacterClass characterClass;
         private List<Feat> feats;
         private Dictionary<String, Stat> stats;
         private Equipment equipment;
-        private Mock<IArmorClassGenerator> mockArmorClassGenerator;
-        private Mock<IHitPointsGenerator> mockHitPointsGenerator;
         private Race race;
-        private Mock<ISavingThrowsGenerator> mockSavingThrowsGenerator;
-        private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
-        private Mock<ICollectionsSelector> mockCollectionsSelector;
         private Dictionary<String, Int32> maxDexterityBonuses;
         private List<String> averageBaseAttacks;
         private List<String> goodBaseAttacks;
         private Dictionary<String, Int32> racialBaseAttackAdjustments;
-        private Dictionary<String, Int32> racialInitiativeAdjustments;
-        private Dictionary<String, Int32> featInitiativeAdjustments;
+        private List<String> initiativeFeats;
 
         [SetUp]
         public void Setup()
@@ -56,27 +55,25 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             averageBaseAttacks = new List<String>();
             goodBaseAttacks = new List<String>();
             racialBaseAttackAdjustments = new Dictionary<String, Int32>();
-            racialInitiativeAdjustments = new Dictionary<String, Int32>();
-            featInitiativeAdjustments = new Dictionary<String, Int32>();
+            initiativeFeats = new List<String>();
 
             characterClass.ClassName = "class name";
             characterClass.Level = 20;
             stats[StatConstants.Constitution] = new Stat { Value = 9266 };
             stats[StatConstants.Dexterity] = new Stat { Value = 42 };
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.MaxDexterityBonus)).Returns(maxDexterityBonuses);
+            racialBaseAttackAdjustments[String.Empty] = 0;
             maxDexterityBonuses[String.Empty] = 42;
+            averageBaseAttacks.Add("other class name");
+            goodBaseAttacks.Add("other class name");
+
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.MaxDexterityBonus)).Returns(maxDexterityBonuses);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.GoodBaseAttack))
                 .Returns(goodBaseAttacks);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.AverageBaseAttack))
                 .Returns(averageBaseAttacks);
-            averageBaseAttacks.Add("other class name");
-            goodBaseAttacks.Add("other class name");
-
-            racialBaseAttackAdjustments[String.Empty] = 0;
-            racialInitiativeAdjustments[String.Empty] = 0;
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.Initiative))
+                .Returns(initiativeFeats);
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.RacialBaseAttackAdjustments)).Returns(racialBaseAttackAdjustments);
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.RacialInitiativeBonuses)).Returns(racialInitiativeAdjustments);
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.FeatInitiativeBonuses)).Returns(featInitiativeAdjustments);
         }
 
         [Test]
@@ -317,36 +314,43 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         [Test]
         public void InitiativeBonusIsSumOfBonuses()
         {
-            race.BaseRace = "baserace";
-            race.Metarace = "metarace";
+            feats.Add(new Feat());
+            feats[0].Name = "feat 1";
+            feats[0].Strength = 90210;
 
-            var feat1 = new Feat();
-            feat1.Name = "feat 1";
-            feats.Add(feat1);
+            feats.Add(new Feat());
+            feats[1].Name = "feat 2";
+            feats[1].Strength = 600;
 
-            var feat2 = new Feat();
-            feat2.Name = "feat 2";
-            feats.Add(feat2);
-
-            var feat3 = new Feat();
-            feat3.Name = "feat 3";
-            feats.Add(feat3);
-
-            racialInitiativeAdjustments[race.BaseRace] = 1;
-            racialInitiativeAdjustments[race.Metarace] = 1;
-            racialInitiativeAdjustments["other race"] = 5;
-
-            featInitiativeAdjustments[feats[0].Name] = 1;
-            featInitiativeAdjustments[feats[1].Name] = 0;
-            featInitiativeAdjustments[feats[2].Name] = 1;
-
-            racialBaseAttackAdjustments[race.BaseRace] = 0;
-            racialBaseAttackAdjustments[race.Metarace] = 0;
+            initiativeFeats.Add(feats[1].Name);
 
             var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass, race);
             var combat = combatGenerator.GenerateWith(baseAttack, characterClass, race, feats, stats, equipment);
 
-            Assert.That(combat.InitiativeBonus, Is.EqualTo(4));
+            Assert.That(combat.InitiativeBonus, Is.EqualTo(616));
+        }
+
+        [Test]
+        public void InitiativeBonusIncludesNegativeDexterityBonus()
+        {
+            stats[StatConstants.Dexterity].Value = 1;
+
+            var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass, race);
+            var combat = combatGenerator.GenerateWith(baseAttack, characterClass, race, feats, stats, equipment);
+
+            Assert.That(combat.InitiativeBonus, Is.EqualTo(-5));
+        }
+
+        [Test]
+        public void InitiativeBonusUsesAdjustedDexterityBonus()
+        {
+            equipment.Armor = new Item { Name = "armor" };
+            maxDexterityBonuses[equipment.Armor.Name] = 5;
+
+            var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass, race);
+            var combat = combatGenerator.GenerateWith(baseAttack, characterClass, race, feats, stats, equipment);
+
+            Assert.That(combat.InitiativeBonus, Is.EqualTo(5));
         }
     }
 }
