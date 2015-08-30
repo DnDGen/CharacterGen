@@ -131,15 +131,15 @@ namespace CharacterGen.Generators.Domain
 
         private String GetAgeGroup(CharacterClass characterClass)
         {
-            var youngClasses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Young);
-            if (youngClasses.Contains(characterClass.ClassName))
-                return GroupConstants.Young;
+            var intuitiveClasses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Intuitive);
+            if (intuitiveClasses.Contains(characterClass.ClassName))
+                return GroupConstants.Intuitive;
 
-            var oldClasses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Old);
-            if (oldClasses.Contains(characterClass.ClassName))
-                return GroupConstants.Old;
+            var trainedClasses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Trained);
+            if (trainedClasses.Contains(characterClass.ClassName))
+                return GroupConstants.Trained;
 
-            return GroupConstants.Middle;
+            return GroupConstants.SelfTaught;
         }
     }
 }

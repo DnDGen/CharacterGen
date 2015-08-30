@@ -98,7 +98,7 @@ namespace CharacterGen.Generators.Domain.Abilities
 
         private Dictionary<String, Stat> ApplyAgeToStats(Dictionary<String, Stat> stats, Race race)
         {
-            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.AGEGROUPRACEAges, GroupConstants.Middle, race.BaseRace);
+            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.AGEGROUPRACEAges, GroupConstants.SelfTaught, race.BaseRace);
             var ages = adjustmentsSelector.SelectFrom(tableName);
 
             if (race.Age >= ages[AdjustmentConstants.MiddleAge])

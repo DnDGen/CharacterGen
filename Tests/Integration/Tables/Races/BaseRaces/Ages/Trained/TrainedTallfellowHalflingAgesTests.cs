@@ -3,14 +3,14 @@ using CharacterGen.Tables;
 using NUnit.Framework;
 using System;
 
-namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Ages.Young
+namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Ages.Trained
 {
     [TestFixture]
-    public class YoungHumanAgesTests : AdjustmentsTests
+    public class TrainedTallfellowHalflingAgesTests : AdjustmentsTests
     {
         protected override String tableName
         {
-            get { return String.Format(TableNameConstants.Formattable.Adjustments.AGEGROUPRACEAges, GroupConstants.Young, RaceConstants.BaseRaces.Human); }
+            get { return String.Format(TableNameConstants.Formattable.Adjustments.AGEGROUPRACEAges, GroupConstants.Trained, RaceConstants.BaseRaces.TallfellowHalfling); }
         }
 
         [Test]
@@ -29,12 +29,12 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Ages.Young
             AssertCollectionNames(names);
         }
 
-        [TestCase(AdjustmentConstants.Adulthood, 15)]
-        [TestCase(AdjustmentConstants.Quantity, 1)]
-        [TestCase(AdjustmentConstants.Die, 4)]
-        [TestCase(AdjustmentConstants.MiddleAge, 35)]
-        [TestCase(AdjustmentConstants.Old, 53)]
-        [TestCase(AdjustmentConstants.Venerable, 70)]
+        [TestCase(AdjustmentConstants.Adulthood, 20)]
+        [TestCase(AdjustmentConstants.Quantity, 4)]
+        [TestCase(AdjustmentConstants.Die, 6)]
+        [TestCase(AdjustmentConstants.MiddleAge, 50)]
+        [TestCase(AdjustmentConstants.Old, 75)]
+        [TestCase(AdjustmentConstants.Venerable, 100)]
         public override void Adjustment(String name, Int32 adjustment)
         {
             base.Adjustment(name, adjustment);

@@ -3,14 +3,14 @@ using CharacterGen.Tables;
 using NUnit.Framework;
 using System;
 
-namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Ages.Old
+namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Ages.SelfTaught
 {
     [TestFixture]
-    public class OldHumanAgesTests : AdjustmentsTests
+    public class SelfTaughtHumanAgesTests : AdjustmentsTests
     {
         protected override String tableName
         {
-            get { return String.Format(TableNameConstants.Formattable.Adjustments.AGEGROUPRACEAges, GroupConstants.Old, RaceConstants.BaseRaces.Human); }
+            get { return String.Format(TableNameConstants.Formattable.Adjustments.AGEGROUPRACEAges, GroupConstants.SelfTaught, RaceConstants.BaseRaces.Human); }
         }
 
         [Test]
@@ -30,7 +30,7 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Ages.Old
         }
 
         [TestCase(AdjustmentConstants.Adulthood, 15)]
-        [TestCase(AdjustmentConstants.Quantity, 2)]
+        [TestCase(AdjustmentConstants.Quantity, 1)]
         [TestCase(AdjustmentConstants.Die, 6)]
         [TestCase(AdjustmentConstants.MiddleAge, 35)]
         [TestCase(AdjustmentConstants.Old, 53)]

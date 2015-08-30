@@ -38,9 +38,9 @@ namespace CharacterGen.Tests.Integration.Tables.CharacterClasses
                 SavingThrowConstants.Fortitude,
                 SavingThrowConstants.Reflex,
                 SavingThrowConstants.Will,
-                GroupConstants.Young,
-                GroupConstants.Middle,
-                GroupConstants.Old
+                GroupConstants.Intuitive,
+                GroupConstants.SelfTaught,
+                GroupConstants.Trained
             };
 
             AssertCollectionNames(names);
@@ -190,16 +190,16 @@ namespace CharacterGen.Tests.Integration.Tables.CharacterClasses
             CharacterClassConstants.Monk,
             CharacterClassConstants.Sorcerer,
             CharacterClassConstants.Wizard)]
-        [TestCase(GroupConstants.Young,
+        [TestCase(GroupConstants.Intuitive,
             CharacterClassConstants.Barbarian,
             CharacterClassConstants.Rogue,
             CharacterClassConstants.Sorcerer)]
-        [TestCase(GroupConstants.Middle,
+        [TestCase(GroupConstants.SelfTaught,
             CharacterClassConstants.Bard,
             CharacterClassConstants.Fighter,
             CharacterClassConstants.Paladin,
             CharacterClassConstants.Ranger)]
-        [TestCase(GroupConstants.Old,
+        [TestCase(GroupConstants.Trained,
             CharacterClassConstants.Cleric,
             CharacterClassConstants.Druid,
             CharacterClassConstants.Monk,

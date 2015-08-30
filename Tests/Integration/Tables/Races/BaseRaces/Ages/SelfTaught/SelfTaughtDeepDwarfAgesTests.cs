@@ -3,14 +3,14 @@ using CharacterGen.Tables;
 using NUnit.Framework;
 using System;
 
-namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Ages.Middle
+namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Ages.SelfTaught
 {
     [TestFixture]
-    public class MiddleDeepDwarfAgesTests : AdjustmentsTests
+    public class SelfTaughtDeepDwarfAgesTests : AdjustmentsTests
     {
         protected override String tableName
         {
-            get { return String.Format(TableNameConstants.Formattable.Adjustments.AGEGROUPRACEAges, GroupConstants.Middle, RaceConstants.BaseRaces.DeepDwarf); }
+            get { return String.Format(TableNameConstants.Formattable.Adjustments.AGEGROUPRACEAges, GroupConstants.SelfTaught, RaceConstants.BaseRaces.DeepDwarf); }
         }
 
         [Test]

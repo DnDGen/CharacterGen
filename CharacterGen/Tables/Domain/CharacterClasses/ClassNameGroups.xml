@@ -184,20 +184,20 @@
     <item>Wizard</item>
   </object>
   <object>
-    <name>Young</name>
+    <name>Intuitive</name>
     <item>Barbarian</item>
     <item>Rogue</item>
     <item>Sorcerer</item>
   </object>
   <object>
-    <name>Middle</name>
+    <name>Self-Taught</name>
     <item>Bard</item>
     <item>Fighter</item>
     <item>Paladin</item>
     <item>Ranger</item>
   </object>
   <object>
-    <name>Old</name>
+    <name>Trained</name>
     <item>Cleric</item>
     <item>Druid</item>
     <item>Monk</item>
