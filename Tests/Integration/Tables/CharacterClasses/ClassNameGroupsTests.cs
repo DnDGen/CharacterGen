@@ -37,7 +37,10 @@ namespace CharacterGen.Tests.Integration.Tables.CharacterClasses
                 "Chaotic Evil",
                 SavingThrowConstants.Fortitude,
                 SavingThrowConstants.Reflex,
-                SavingThrowConstants.Will
+                SavingThrowConstants.Will,
+                GroupConstants.Young,
+                GroupConstants.Middle,
+                GroupConstants.Old
             };
 
             AssertCollectionNames(names);
@@ -186,6 +189,20 @@ namespace CharacterGen.Tests.Integration.Tables.CharacterClasses
             CharacterClassConstants.Druid,
             CharacterClassConstants.Monk,
             CharacterClassConstants.Sorcerer,
+            CharacterClassConstants.Wizard)]
+        [TestCase(GroupConstants.Young,
+            CharacterClassConstants.Barbarian,
+            CharacterClassConstants.Rogue,
+            CharacterClassConstants.Sorcerer)]
+        [TestCase(GroupConstants.Middle,
+            CharacterClassConstants.Bard,
+            CharacterClassConstants.Fighter,
+            CharacterClassConstants.Paladin,
+            CharacterClassConstants.Ranger)]
+        [TestCase(GroupConstants.Old,
+            CharacterClassConstants.Cleric,
+            CharacterClassConstants.Druid,
+            CharacterClassConstants.Monk,
             CharacterClassConstants.Wizard)]
         public override void DistinctCollection(String name, params String[] collection)
         {
