@@ -2,6 +2,7 @@
 using CharacterGen.Common.Abilities.Skills;
 using CharacterGen.Common.Abilities.Stats;
 using CharacterGen.Common.CharacterClasses;
+using CharacterGen.Common.Combats;
 using CharacterGen.Common.Magics;
 using CharacterGen.Common.Races;
 using CharacterGen.Tables;
@@ -129,7 +130,10 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
                 RaceConstants.Metaraces.Species.Green,
                 RaceConstants.Metaraces.Species.Red,
                 RaceConstants.Metaraces.Species.Silver,
-                RaceConstants.Metaraces.Species.White
+                RaceConstants.Metaraces.Species.White,
+                SavingThrowConstants.Fortitude,
+                SavingThrowConstants.Reflex,
+                SavingThrowConstants.Will
             };
 
             AssertCollectionNames(names);
@@ -230,6 +234,12 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.TwoWeaponFighting,
             FeatConstants.GreaterTwoWeaponFighting,
             FeatConstants.ImprovedTwoWeaponFighting)]
+        [TestCase(SavingThrowConstants.Fortitude,
+            FeatConstants.GreatFortitude)]
+        [TestCase(SavingThrowConstants.Reflex,
+            FeatConstants.LightningReflexes)]
+        [TestCase(SavingThrowConstants.Will,
+            FeatConstants.IronWill)]
         public override void DistinctCollection(String name, params String[] collection)
         {
             base.DistinctCollection(name, collection);
@@ -607,9 +617,9 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
         [TestCase(RaceConstants.Metaraces.None)]
         [TestCase(RaceConstants.BaseRaces.Ogre,
             FeatConstants.Darkvision,
-            FeatConstants.SaveBonus + "Reflex",
-            FeatConstants.SaveBonus + "Will",
-            FeatConstants.SaveBonus + "Fortitude",
+            FeatConstants.SaveBonus + SavingThrowConstants.Reflex,
+            FeatConstants.SaveBonus + SavingThrowConstants.Will,
+            FeatConstants.SaveBonus + SavingThrowConstants.Fortitude,
             FeatConstants.SimpleWeaponProficiency,
             FeatConstants.MartialWeaponProficiency,
             FeatConstants.LightArmorProficiency,
@@ -618,9 +628,9 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.NaturalArmor)]
         [TestCase(RaceConstants.BaseRaces.OgreMage,
             FeatConstants.Darkvision,
-            FeatConstants.SaveBonus + "Reflex",
-            FeatConstants.SaveBonus + "Will",
-            FeatConstants.SaveBonus + "Fortitude",
+            FeatConstants.SaveBonus + SavingThrowConstants.Reflex,
+            FeatConstants.SaveBonus + SavingThrowConstants.Will,
+            FeatConstants.SaveBonus + SavingThrowConstants.Fortitude,
             FeatConstants.NaturalArmor,
             FeatConstants.SpellLikeAbility + SpellConstants.Darkness,
             FeatConstants.SpellLikeAbility + SpellConstants.Invisibility,

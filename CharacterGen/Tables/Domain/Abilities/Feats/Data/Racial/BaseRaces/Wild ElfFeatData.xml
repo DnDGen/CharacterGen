@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+    <object>
+        <name>Martial Weapon ProficiencyLongsword</name>
+        <item>Martial Weapon Proficiency</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item>Longsword</item>
+        <item>0</item>
+        <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+    </object>
+    <object>
+      <name>Martial Weapon ProficiencyRapier</name>
+      <item>Martial Weapon Proficiency</item>
+      <item></item>
+      <item>0</item>
+      <item>0</item>
+      <item>Rapier</item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+    </object>
+    <object>
+        <name>Martial Weapon ProficiencyLongbow</name>
+        <item>Martial Weapon Proficiency</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item>Longbow</item>
+        <item>0</item>
+        <item></item>
+      <item>0</item>
+    <item></item>
+    <item>0</item>
+    </object>
+    <object>
+        <name>Martial Weapon ProficiencyShortbow</name>
+        <item>Martial Weapon Proficiency</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item>Shortbow</item>
+        <item>0</item>
+        <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+    </object>
+    <object>
+        <name>Immune to Effect</name>
+        <item>Immune to Effect</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item>Sleep</item>
+        <item>0</item>
+        <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+    </object>
+    <object>
+      <name>Save Bonus</name>
+      <item>Save Bonus</item>
+      <item></item>
+      <item>0</item>
+      <item>2</item>
+      <item>Enchantment</item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+    <item></item>
+    <item>0</item>
+    </object>
+    <object>
+        <name>Low-Light Vision</name>
+        <item>Low-Light Vision</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+    </object>
+    <object>
+        <name>Skill BonusListen</name>
+        <item>Skill Bonus</item>
+        <item></item>
+        <item>0</item>
+        <item>2</item>
+        <item>Listen</item>
+        <item>0</item>
+        <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+    </object>
+    <object>
+        <name>Skill BonusSearch</name>
+        <item>Skill Bonus</item>
+        <item></item>
+        <item>0</item>
+        <item>2</item>
+        <item>Search</item>
+        <item>0</item>
+        <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+    </object>
+    <object>
+        <name>Skill BonusSpot</name>
+        <item>Skill Bonus</item>
+        <item></item>
+        <item>0</item>
+        <item>2</item>
+        <item>Spot</item>
+        <item>0</item>
+        <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+    </object>
+    <object>
+      <name>Passive Secret Door Search</name>
+      <item>Passive Secret Door Search</item>
+      <item></item>
+      <item>0</item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+    </object>
+</items>

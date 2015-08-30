@@ -1,7 +1,8 @@
-﻿using System;
-using CharacterGen.Common.CharacterClasses;
+﻿using CharacterGen.Common.CharacterClasses;
+using CharacterGen.Common.Combats;
 using CharacterGen.Tables;
 using NUnit.Framework;
+using System;
 
 namespace CharacterGen.Tests.Integration.Tables.CharacterClasses
 {
@@ -16,7 +17,7 @@ namespace CharacterGen.Tests.Integration.Tables.CharacterClasses
         [Test]
         public override void CollectionNames()
         {
-            var names = new[] 
+            var names = new[]
             {
                 GroupConstants.Healers,
                 GroupConstants.Mages,
@@ -33,7 +34,10 @@ namespace CharacterGen.Tests.Integration.Tables.CharacterClasses
                 "Chaotic Neutral",
                 "Lawful Evil",
                 "Neutral Evil",
-                "Chaotic Evil"
+                "Chaotic Evil",
+                SavingThrowConstants.Fortitude,
+                SavingThrowConstants.Reflex,
+                SavingThrowConstants.Will
             };
 
             AssertCollectionNames(names);
@@ -161,6 +165,26 @@ namespace CharacterGen.Tests.Integration.Tables.CharacterClasses
             CharacterClassConstants.Bard,
             CharacterClassConstants.Ranger,
             CharacterClassConstants.Rogue,
+            CharacterClassConstants.Sorcerer,
+            CharacterClassConstants.Wizard)]
+        [TestCase(SavingThrowConstants.Fortitude,
+            CharacterClassConstants.Barbarian,
+            CharacterClassConstants.Cleric,
+            CharacterClassConstants.Druid,
+            CharacterClassConstants.Fighter,
+            CharacterClassConstants.Monk,
+            CharacterClassConstants.Paladin,
+            CharacterClassConstants.Ranger)]
+        [TestCase(SavingThrowConstants.Reflex,
+            CharacterClassConstants.Bard,
+            CharacterClassConstants.Monk,
+            CharacterClassConstants.Ranger,
+            CharacterClassConstants.Rogue)]
+        [TestCase(SavingThrowConstants.Will,
+            CharacterClassConstants.Bard,
+            CharacterClassConstants.Cleric,
+            CharacterClassConstants.Druid,
+            CharacterClassConstants.Monk,
             CharacterClassConstants.Sorcerer,
             CharacterClassConstants.Wizard)]
         public override void DistinctCollection(String name, params String[] collection)

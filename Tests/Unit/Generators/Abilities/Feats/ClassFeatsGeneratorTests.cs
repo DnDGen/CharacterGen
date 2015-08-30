@@ -2,6 +2,7 @@
 using CharacterGen.Common.Abilities.Skills;
 using CharacterGen.Common.Abilities.Stats;
 using CharacterGen.Common.CharacterClasses;
+using CharacterGen.Common.Items;
 using CharacterGen.Common.Races;
 using CharacterGen.Generators.Abilities.Feats;
 using CharacterGen.Generators.Domain.Abilities.Feats;
@@ -362,6 +363,23 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
 
             var feats = classFeatsGenerator.GenerateWith(characterClass, race, stats, racialFeats, skills);
             Assert.That(racialFeats, Is.Empty);
+        }
+
+        [Test]
+        public void SpecialistFeatsDoNotAllowForAllProficiency()
+        {
+            characterClass.SpecialistFields = new[] { "specialist" };
+
+            AddClassFeat("specialist", "feat1", focusType: ProficiencyConstants.All);
+
+            mockFeatFocusGenerator.Setup(g => g.GenerateFrom("feat1", ProficiencyConstants.All, skills, classFeatSelections["specialist"][0].RequiredFeats, It.IsAny<IEnumerable<Feat>>(), characterClass))
+                .Returns("focus");
+
+            var feats = classFeatsGenerator.GenerateWith(characterClass, race, stats, racialFeats, skills);
+            var onlyFeat = feats.Single();
+
+            Assert.That(onlyFeat.Name, Is.EqualTo(classFeatSelections["specialist"][0].Feat));
+            Assert.That(onlyFeat.Focus, Is.EqualTo("focus"));
         }
     }
 }

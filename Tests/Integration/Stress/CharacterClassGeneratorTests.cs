@@ -1,4 +1,7 @@
-﻿using CharacterGen.Common.CharacterClasses;
+﻿using CharacterGen.Common.Alignments;
+using CharacterGen.Common.CharacterClasses;
+using CharacterGen.Generators.Randomizers.Alignments;
+using CharacterGen.Generators.Randomizers.CharacterClasses;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -50,6 +53,45 @@ namespace CharacterGen.Tests.Integration.Stress
         [Test]
         public void PaladinHappens()
         {
+            CharacterClass characterClass;
+
+            do characterClass = GenerateClass();
+            while (TestShouldKeepRunning() && characterClass.ClassName != CharacterClassConstants.Paladin);
+
+            Assert.That(characterClass.ClassName, Is.EqualTo(CharacterClassConstants.Paladin));
+        }
+
+        [Test]
+        public void PaladinHappensWhenLawfulGood()
+        {
+            var setAlignmentRandomizer = GetNewInstanceOf<ISetAlignmentRandomizer>();
+            setAlignmentRandomizer.SetAlignment.Lawfulness = AlignmentConstants.Lawful;
+            setAlignmentRandomizer.SetAlignment.Goodness = AlignmentConstants.Good;
+
+            AlignmentRandomizer = setAlignmentRandomizer;
+
+            CharacterClass characterClass;
+
+            do characterClass = GenerateClass();
+            while (TestShouldKeepRunning() && characterClass.ClassName != CharacterClassConstants.Paladin);
+
+            Assert.That(characterClass.ClassName, Is.EqualTo(CharacterClassConstants.Paladin));
+        }
+
+        [Test]
+        public void PaladinHappensWhenSetToPaladin()
+        {
+            var setAlignmentRandomizer = GetNewInstanceOf<ISetAlignmentRandomizer>();
+            setAlignmentRandomizer.SetAlignment.Lawfulness = AlignmentConstants.Lawful;
+            setAlignmentRandomizer.SetAlignment.Goodness = AlignmentConstants.Good;
+
+            AlignmentRandomizer = setAlignmentRandomizer;
+
+            var setClassRandomizer = GetNewInstanceOf<ISetClassNameRandomizer>();
+            setClassRandomizer.SetClassName = CharacterClassConstants.Paladin;
+
+            ClassNameRandomizer = setClassRandomizer;
+
             CharacterClass characterClass;
 
             do characterClass = GenerateClass();

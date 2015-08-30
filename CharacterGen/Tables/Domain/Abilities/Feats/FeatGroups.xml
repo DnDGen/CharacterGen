@@ -513,6 +513,10 @@
         <item>Spell-Like AbilityPass without trace</item>
         <item>Skill BonusHide</item>
     </object>
+  <object>
+    <name>Fortitude</name>
+    <item>Great Fortitude</item>
+  </object>
     <object>
         <name>Gnoll</name>
         <item>Natural Armor</item>
@@ -1010,6 +1014,10 @@
         <item>Natural Weapon</item>
         <item>Immune to Effect</item>
     </object>
+  <object>
+    <name>Reflex</name>
+    <item>Lightning Reflexes</item>
+  </object>
     <object>
         <name>Rock Gnome</name>
         <item>Low-Light Vision</item>
@@ -1294,6 +1302,10 @@
         <item>Martial Weapon ProficiencyShortbow</item>
         <item>Passive Secret Door Search</item>
     </object>
+  <object>
+    <name>Will</name>
+    <item>Iron Will</item>
+  </object>
     <object>
         <name>Wizard</name>
         <item>Scribe Scroll</item>
