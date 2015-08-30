@@ -45,7 +45,7 @@ namespace CharacterGen.Tests.Integration.Stress.Items
             var baseAttack = CombatGenerator.GenerateBaseAttackWith(characterClass, race);
             var ability = AbilitiesGenerator.GenerateWith(characterClass, race, StatsRandomizer, baseAttack);
 
-            return EquipmentGenerator.GenerateWith(ability.Feats, characterClass);
+            return EquipmentGenerator.GenerateWith(ability.Feats, characterClass, race);
         }
 
         [Test]

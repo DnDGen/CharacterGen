@@ -1,6 +1,7 @@
 ﻿using CharacterGen.Common.Abilities.Feats;
 using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Common.Items;
+using CharacterGen.Common.Races;
 using CharacterGen.Generators.Items;
 using CharacterGen.Selectors;
 using CharacterGen.Tables;
@@ -29,7 +30,7 @@ namespace CharacterGen.Generators.Domain.Items
             this.magicalWeaponGenerator = magicalWeaponGenerator;
         }
 
-        public Item GenerateFrom(IEnumerable<Feat> feats, CharacterClass characterClass)
+        public Item GenerateFrom(IEnumerable<Feat> feats, CharacterClass characterClass, Race race)
         {
             var tableName = String.Format(TableNameConstants.Formattable.Percentile.LevelXPower, characterClass.Level);
             var power = percentileSelector.SelectFrom(tableName);
@@ -41,14 +42,17 @@ namespace CharacterGen.Generators.Domain.Items
             Item weapon;
 
             do weapon = GenerateWeapon(power);
-            while (WeaponIsValid(weapon, allowedWeapons) == false);
+            while (WeaponIsValid(weapon, allowedWeapons, race) == false);
 
             return weapon;
         }
 
-        private Boolean WeaponIsValid(Item weapon, IEnumerable<String> allowedWeapons)
+        private Boolean WeaponIsValid(Item weapon, IEnumerable<String> allowedWeapons, Race race)
         {
             if (weapon.ItemType != ItemTypeConstants.Weapon)
+                return false;
+
+            if (weapon.IsMagical == false && weapon.Traits.Contains(race.Size) == false)
                 return false;
 
             var baseWeaponType = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, weapon.Name).First();

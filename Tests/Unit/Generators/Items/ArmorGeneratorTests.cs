@@ -1,5 +1,6 @@
 ﻿using CharacterGen.Common.Abilities.Feats;
 using CharacterGen.Common.CharacterClasses;
+using CharacterGen.Common.Races;
 using CharacterGen.Generators.Domain.Items;
 using CharacterGen.Generators.Items;
 using CharacterGen.Selectors;
@@ -29,6 +30,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         private List<String> proficentArmors;
         private List<String> baseArmorTypes;
         private Item magicalArmor;
+        private Race race;
 
         [SetUp]
         public void Setup()
@@ -45,6 +47,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             proficentArmors = new List<String>();
             baseArmorTypes = new List<String>();
             magicalArmor = new Item();
+            race = new Race();
 
             magicalArmor.Name = "magical armor";
             magicalArmor.ItemType = ItemTypeConstants.Armor;
@@ -55,6 +58,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             feats.Add(new Feat { Name = "light proficiency" });
             feats.Add(new Feat { Name = "other feat" });
             proficiencyFeats.Add(feats[0].Name);
+            race.Size = "size";
 
             mockPercentileSelector.Setup(s => s.SelectFrom("Level9266Power")).Returns("power");
             mockMagicalArmorGenerator.Setup(g => g.GenerateAtPower("power")).Returns(magicalArmor);
@@ -72,7 +76,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         public void GenerateNoArmor()
         {
             feats.Remove(feats[0]);
-            var armor = armorGenerator.GenerateFrom(feats, characterClass);
+            var armor = armorGenerator.GenerateFrom(feats, characterClass, race);
             Assert.That(armor, Is.Null);
         }
 
@@ -83,7 +87,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             mockPercentileSelector.Setup(s => s.SelectFrom("Level9266Power")).Returns(PowerConstants.Mundane);
             mockMundaneArmorGenerator.Setup(g => g.Generate()).Returns(mundaneArmor);
 
-            var armor = armorGenerator.GenerateFrom(feats, characterClass);
+            var armor = armorGenerator.GenerateFrom(feats, characterClass, race);
             Assert.That(armor, Is.EqualTo(mundaneArmor));
         }
 
@@ -92,6 +96,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             var armor = new Item();
             armor.Name = name;
             armor.ItemType = ItemTypeConstants.Armor;
+            armor.Traits.Add(race.Size);
 
             proficentArmors.Add(name);
 
@@ -108,7 +113,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
 
             proficentArmors.Remove(wrongMundaneArmor.Name);
 
-            var armor = armorGenerator.GenerateFrom(feats, characterClass);
+            var armor = armorGenerator.GenerateFrom(feats, characterClass, race);
             Assert.That(armor, Is.EqualTo(mundaneArmor));
         }
 
@@ -122,7 +127,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
 
             wrongMundaneArmor.ItemType = "not armor";
 
-            var armor = armorGenerator.GenerateFrom(feats, characterClass);
+            var armor = armorGenerator.GenerateFrom(feats, characterClass, race);
             Assert.That(armor, Is.EqualTo(mundaneArmor));
         }
 
@@ -140,14 +145,14 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             mockMagicalArmorGenerator.SetupSequence(g => g.GenerateAtPower("power"))
                 .Returns(otherArmor).Returns(magicalArmor);
 
-            var armor = armorGenerator.GenerateFrom(feats, characterClass);
+            var armor = armorGenerator.GenerateFrom(feats, characterClass, race);
             Assert.That(armor, Is.EqualTo(otherArmor));
         }
 
         [Test]
         public void GenerateMagicalArmor()
         {
-            var armor = armorGenerator.GenerateFrom(feats, characterClass);
+            var armor = armorGenerator.GenerateFrom(feats, characterClass, race);
             Assert.That(armor, Is.EqualTo(magicalArmor));
         }
 
@@ -160,7 +165,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
 
             proficentArmors.Remove(wrongMagicalArmor.Name);
 
-            var armor = armorGenerator.GenerateFrom(feats, characterClass);
+            var armor = armorGenerator.GenerateFrom(feats, characterClass, race);
             Assert.That(armor, Is.EqualTo(magicalArmor));
         }
 
@@ -173,7 +178,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
 
             wrongMagicalArmor.ItemType = "not armor";
 
-            var armor = armorGenerator.GenerateFrom(feats, characterClass);
+            var armor = armorGenerator.GenerateFrom(feats, characterClass, race);
             Assert.That(armor, Is.EqualTo(magicalArmor));
         }
 
@@ -187,7 +192,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
 
             wrongMagicalArmor.Attributes = wrongMagicalArmor.Attributes.Union(new[] { AttributeConstants.Metal });
 
-            var armor = armorGenerator.GenerateFrom(feats, characterClass);
+            var armor = armorGenerator.GenerateFrom(feats, characterClass, race);
             Assert.That(armor, Is.EqualTo(magicalArmor));
         }
 
@@ -200,7 +205,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
 
             magicalArmor.Attributes = wrongMagicalArmor.Attributes.Union(new[] { AttributeConstants.Metal });
 
-            var armor = armorGenerator.GenerateFrom(feats, characterClass);
+            var armor = armorGenerator.GenerateFrom(feats, characterClass, race);
             Assert.That(armor, Is.EqualTo(magicalArmor));
         }
 
@@ -214,7 +219,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
 
             magicalArmor.Attributes = wrongMagicalArmor.Attributes.Union(new[] { "other attribute" });
 
-            var armor = armorGenerator.GenerateFrom(feats, characterClass);
+            var armor = armorGenerator.GenerateFrom(feats, characterClass, race);
             Assert.That(armor, Is.EqualTo(magicalArmor));
         }
 
@@ -227,8 +232,27 @@ namespace CharacterGen.Tests.Unit.Generators.Items
 
             magicalArmor.Attributes = wrongMagicalArmor.Attributes.Union(new[] { "other attribute" });
 
-            var armor = armorGenerator.GenerateFrom(feats, characterClass);
+            var armor = armorGenerator.GenerateFrom(feats, characterClass, race);
             Assert.That(armor, Is.EqualTo(magicalArmor));
+        }
+
+        [Test]
+        public void MundaneArmorMustFitCharacter()
+        {
+            var mundaneArmor = CreateArmor("mundane armor");
+            var wrongMundaneArmor = CreateArmor("wrong mundane armor");
+            var otherWrongMundaneArmor = CreateArmor("other wrong mundane armor");
+            mockPercentileSelector.Setup(s => s.SelectFrom("Level9266Power")).Returns(PowerConstants.Mundane);
+            mockMundaneArmorGenerator.SetupSequence(g => g.Generate())
+                .Returns(wrongMundaneArmor).Returns(otherWrongMundaneArmor).Returns(mundaneArmor);
+
+            wrongMundaneArmor.Traits.Clear();
+            wrongMundaneArmor.Traits.Add("bigger size");
+            otherWrongMundaneArmor.Traits.Clear();
+            otherWrongMundaneArmor.Traits.Add("smaller size");
+
+            var armor = armorGenerator.GenerateFrom(feats, characterClass, race);
+            Assert.That(armor, Is.EqualTo(mundaneArmor));
         }
     }
 }

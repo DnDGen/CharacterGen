@@ -1,6 +1,7 @@
 ﻿using CharacterGen.Common.Abilities.Feats;
 using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Common.Items;
+using CharacterGen.Common.Races;
 using CharacterGen.Generators.Domain.Items;
 using CharacterGen.Generators.Items;
 using CharacterGen.Selectors;
@@ -30,6 +31,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         private List<String> baseWeaponTypes;
         private List<String> weapons;
         private List<String> allProficientWeapons;
+        private Race race;
 
         [SetUp]
         public void Setup()
@@ -47,6 +49,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             baseWeaponTypes = new List<String>();
             weapons = new List<String>();
             allProficientWeapons = new List<String>();
+            race = new Race();
 
             magicalWeapon.Name = "magical weapon";
             magicalWeapon.ItemType = ItemTypeConstants.Weapon;
@@ -57,6 +60,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             feats.Add(new Feat { Name = "all proficiency", Focus = ProficiencyConstants.All });
             proficiencyFeats.Add(feats[0].Name);
             allProficientWeapons.Add(baseWeaponTypes[0]);
+            race.Size = "size";
 
             mockPercentileSelector.Setup(s => s.SelectFrom("Level9266Power")).Returns("power");
             mockMagicalWeaponGenerator.Setup(g => g.GenerateAtPower("power")).Returns(magicalWeapon);
@@ -76,7 +80,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         public void ThrowExceptionIfNoWeaponsAreAllowed()
         {
             allProficientWeapons.Clear();
-            Assert.That(() => weaponGenerator.GenerateFrom(feats, characterClass), Throws.Exception);
+            Assert.That(() => weaponGenerator.GenerateFrom(feats, characterClass, race), Throws.Exception);
         }
 
         [Test]
@@ -86,7 +90,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             mockPercentileSelector.Setup(s => s.SelectFrom("Level9266Power")).Returns(PowerConstants.Mundane);
             mockMundaneWeaponGenerator.Setup(g => g.Generate()).Returns(mundaneWeapon);
 
-            var weapon = weaponGenerator.GenerateFrom(feats, characterClass);
+            var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
             Assert.That(weapon, Is.EqualTo(mundaneWeapon));
         }
 
@@ -95,6 +99,8 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             var weapon = new Item();
             weapon.Name = name;
             weapon.ItemType = ItemTypeConstants.Weapon;
+            weapon.Traits.Add(race.Size);
+
             weapons.Add(name);
             allProficientWeapons.Add(name);
 
@@ -111,7 +117,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
 
             allProficientWeapons.Remove(wrongMundaneWeapon.Name);
 
-            var weapon = weaponGenerator.GenerateFrom(feats, characterClass);
+            var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
             Assert.That(weapon, Is.EqualTo(mundaneWeapon));
         }
 
@@ -125,7 +131,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
 
             wrongMundaneWeapon.ItemType = "not weapon";
 
-            var weapon = weaponGenerator.GenerateFrom(feats, characterClass);
+            var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
             Assert.That(weapon, Is.EqualTo(mundaneWeapon));
         }
 
@@ -140,7 +146,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             feats.Add(new Feat { Name = "feat2", Focus = mundaneWeapon.Name });
             proficiencyFeats.Add(feats[1].Name);
 
-            var weapon = weaponGenerator.GenerateFrom(feats, characterClass);
+            var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
             Assert.That(weapon, Is.EqualTo(mundaneWeapon));
         }
 
@@ -156,7 +162,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             feats.Add(new Feat { Name = "feat3", Focus = mundaneWeapon.Name });
             proficiencyFeats.Add(feats[1].Name);
 
-            var weapon = weaponGenerator.GenerateFrom(feats, characterClass);
+            var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
             Assert.That(weapon, Is.EqualTo(mundaneWeapon));
         }
 
@@ -176,7 +182,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             feats.Add(new Feat { Name = "feat4", Focus = mundaneWeapon.Name });
             proficiencyFeats.Add(feats[1].Name);
 
-            var weapon = weaponGenerator.GenerateFrom(feats, characterClass);
+            var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
             Assert.That(weapon, Is.EqualTo(otherMundaneWeapon));
         }
 
@@ -192,7 +198,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             feats.Add(new Feat { Name = "feat2", Focus = mundaneWeapon.Name });
             proficiencyFeats.Add(feats[1].Name);
 
-            var weapon = weaponGenerator.GenerateFrom(feats, characterClass);
+            var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
             Assert.That(weapon, Is.EqualTo(mundaneWeapon));
         }
 
@@ -213,7 +219,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             proficiencyFeats.Add(feats[2].Name);
             proficiencyFeats.Add(feats[3].Name);
 
-            var weapon = weaponGenerator.GenerateFrom(feats, characterClass);
+            var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
             Assert.That(weapon, Is.EqualTo(otherMundaneWeapon));
         }
 
@@ -226,14 +232,14 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             mockMundaneWeaponGenerator.SetupSequence(g => g.Generate())
                 .Returns(mundaneWeapon).Returns(wrongMundaneWeapon);
 
-            var weapon = weaponGenerator.GenerateFrom(feats, characterClass);
+            var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
             Assert.That(weapon, Is.EqualTo(mundaneWeapon));
         }
 
         [Test]
         public void GenerateMagicalWeapon()
         {
-            var weapon = weaponGenerator.GenerateFrom(feats, characterClass);
+            var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
             Assert.That(weapon, Is.EqualTo(magicalWeapon));
         }
 
@@ -246,7 +252,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
 
             allProficientWeapons.Remove(wrongMagicalWeapon.Name);
 
-            var weapon = weaponGenerator.GenerateFrom(feats, characterClass);
+            var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
             Assert.That(weapon, Is.EqualTo(magicalWeapon));
         }
 
@@ -259,7 +265,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
 
             wrongMagicalWeapon.ItemType = "not weapon";
 
-            var weapon = weaponGenerator.GenerateFrom(feats, characterClass);
+            var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
             Assert.That(weapon, Is.EqualTo(magicalWeapon));
         }
 
@@ -273,7 +279,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             feats.Add(new Feat { Name = "feat2", Focus = baseWeaponTypes[0] });
             proficiencyFeats.Add(feats[1].Name);
 
-            var weapon = weaponGenerator.GenerateFrom(feats, characterClass);
+            var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
             Assert.That(weapon, Is.EqualTo(magicalWeapon));
         }
 
@@ -288,7 +294,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             feats.Add(new Feat { Name = "feat3", Focus = baseWeaponTypes[0] });
             proficiencyFeats.Add(feats[1].Name);
 
-            var weapon = weaponGenerator.GenerateFrom(feats, characterClass);
+            var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
             Assert.That(weapon, Is.EqualTo(magicalWeapon));
         }
 
@@ -306,7 +312,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             feats.Add(new Feat { Name = "feat4", Focus = baseWeaponTypes[0] });
             proficiencyFeats.Add(feats[1].Name);
 
-            var weapon = weaponGenerator.GenerateFrom(feats, characterClass);
+            var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
             Assert.That(weapon, Is.EqualTo(otherMagicalWeapon));
         }
 
@@ -320,7 +326,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             feats.Add(new Feat { Name = "feat2", Focus = baseWeaponTypes[0] });
             proficiencyFeats.Add(feats[1].Name);
 
-            var weapon = weaponGenerator.GenerateFrom(feats, characterClass);
+            var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
             Assert.That(weapon, Is.EqualTo(magicalWeapon));
         }
 
@@ -339,7 +345,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             proficiencyFeats.Add(feats[2].Name);
             proficiencyFeats.Add(feats[3].Name);
 
-            var weapon = weaponGenerator.GenerateFrom(feats, characterClass);
+            var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
             Assert.That(weapon, Is.EqualTo(otherMagicalWeapon));
         }
 
@@ -350,8 +356,27 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateAtPower("power"))
                 .Returns(magicalWeapon).Returns(wrongMagicalWeapon);
 
-            var weapon = weaponGenerator.GenerateFrom(feats, characterClass);
+            var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
             Assert.That(weapon, Is.EqualTo(magicalWeapon));
+        }
+
+        [Test]
+        public void MundaneWeaponMustFitCharacter()
+        {
+            var mundaneWeapon = CreateWeapon("mundane weapon");
+            var wrongMundaneWeapon = CreateWeapon("wrong mundane weapon");
+            var otherWrongMundaneWeapon = CreateWeapon("other wrong mundane weapon");
+            mockPercentileSelector.Setup(s => s.SelectFrom("Level9266Power")).Returns(PowerConstants.Mundane);
+            mockMundaneWeaponGenerator.SetupSequence(g => g.Generate())
+                .Returns(wrongMundaneWeapon).Returns(otherWrongMundaneWeapon).Returns(mundaneWeapon);
+
+            wrongMundaneWeapon.Traits.Clear();
+            wrongMundaneWeapon.Traits.Add("bigger size");
+            otherWrongMundaneWeapon.Traits.Clear();
+            otherWrongMundaneWeapon.Traits.Add("smaller size");
+
+            var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
+            Assert.That(weapon, Is.EqualTo(mundaneWeapon));
         }
     }
 }

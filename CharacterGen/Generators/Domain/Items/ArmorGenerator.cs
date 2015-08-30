@@ -1,5 +1,6 @@
 ﻿using CharacterGen.Common.Abilities.Feats;
 using CharacterGen.Common.CharacterClasses;
+using CharacterGen.Common.Races;
 using CharacterGen.Generators.Items;
 using CharacterGen.Selectors;
 using CharacterGen.Tables;
@@ -28,7 +29,7 @@ namespace CharacterGen.Generators.Domain.Items
             this.magicalArmorGenerator = magicalArmorGenerator;
         }
 
-        public Item GenerateFrom(IEnumerable<Feat> feats, CharacterClass characterClass)
+        public Item GenerateFrom(IEnumerable<Feat> feats, CharacterClass characterClass, Race race)
         {
             var tableName = String.Format(TableNameConstants.Formattable.Percentile.LevelXPower, characterClass.Level);
             var power = percentileSelector.SelectFrom(tableName);
@@ -40,17 +41,20 @@ namespace CharacterGen.Generators.Domain.Items
             Item armor;
 
             do armor = GenerateArmor(power);
-            while (ArmorIsValid(armor, proficientArmors, characterClass) == false);
+            while (ArmorIsValid(armor, proficientArmors, characterClass, race) == false);
 
             return armor;
         }
 
-        private Boolean ArmorIsValid(Item armor, IEnumerable<String> proficientArmors, CharacterClass characterClass)
+        private Boolean ArmorIsValid(Item armor, IEnumerable<String> proficientArmors, CharacterClass characterClass, Race race)
         {
             if (armor.ItemType != ItemTypeConstants.Armor)
                 return false;
 
             if (armor.Attributes.Contains(AttributeConstants.Metal) && characterClass.ClassName == CharacterClassConstants.Druid)
+                return false;
+
+            if (armor.IsMagical == false && armor.Traits.Contains(race.Size) == false)
                 return false;
 
             var baseArmorType = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, armor.Name).First();

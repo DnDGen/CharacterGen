@@ -1,10 +1,10 @@
-﻿using System;
-using Ninject;
-using CharacterGen.Generators.Abilities;
+﻿using CharacterGen.Generators.Abilities;
 using CharacterGen.Generators.Combats;
 using CharacterGen.Generators.Items;
 using CharacterGen.Generators.Randomizers.Stats;
+using Ninject;
 using NUnit.Framework;
+using System;
 
 namespace CharacterGen.Tests.Integration.Stress.Combats
 {
@@ -35,7 +35,7 @@ namespace CharacterGen.Tests.Integration.Stress.Combats
             var race = GetNewRace(alignment, characterClass);
             var baseAttack = CombatGenerator.GenerateBaseAttackWith(characterClass, race);
             var ability = AbilitiesGenerator.GenerateWith(characterClass, race, StatsRandomizer, baseAttack);
-            var equipment = TreasureGenerator.GenerateWith(ability.Feats, characterClass);
+            var equipment = TreasureGenerator.GenerateWith(ability.Feats, characterClass, race);
             var combat = CombatGenerator.GenerateWith(baseAttack, characterClass, race, ability.Feats, ability.Stats, equipment);
 
             var armorClass = ArmorClassGenerator.GenerateWith(equipment, combat.AdjustedDexterityBonus, ability.Feats, race);

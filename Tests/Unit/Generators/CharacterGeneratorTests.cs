@@ -180,7 +180,7 @@ namespace CharacterGen.Tests.Unit.Generators
             mockRaceGenerator.Setup(g => g.GenerateWith(It.IsAny<Alignment>(), It.IsAny<CharacterClass>(), mockAnyBaseRaceRandomizer.Object, mockAnyMetaraceRandomizer.Object)).Returns(() => new Race());
             mockCombatGenerator.Setup(g => g.GenerateBaseAttackWith(It.IsAny<CharacterClass>(), It.IsAny<Race>())).Returns(() => new BaseAttack());
             mockAbilitiesGenerator.Setup(g => g.GenerateWith(It.IsAny<CharacterClass>(), It.IsAny<Race>(), mockRawStatRandomizer.Object, It.IsAny<BaseAttack>())).Returns(() => new Ability());
-            mockTreasureGenerator.Setup(g => g.GenerateWith(It.IsAny<IEnumerable<Feat>>(), It.IsAny<CharacterClass>())).Returns(() => new Equipment());
+            mockTreasureGenerator.Setup(g => g.GenerateWith(It.IsAny<IEnumerable<Feat>>(), It.IsAny<CharacterClass>(), It.IsAny<Race>())).Returns(() => new Equipment());
             mockCombatGenerator.Setup(g => g.GenerateWith(It.IsAny<BaseAttack>(), It.IsAny<CharacterClass>(), It.IsAny<Race>(), It.IsAny<IEnumerable<Feat>>(), It.IsAny<Dictionary<String, Stat>>(), It.IsAny<Equipment>())).Returns(() => new Combat());
             mockMagicGenerator.Setup(g => g.GenerateWith(It.IsAny<CharacterClass>(), It.IsAny<IEnumerable<Feat>>(), It.IsAny<Equipment>())).Returns(() => new Magic());
 
@@ -193,7 +193,7 @@ namespace CharacterGen.Tests.Unit.Generators
             mockRaceGenerator.Setup(g => g.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object,
                 mockMetaraceRandomizer.Object)).Returns(race);
             mockAbilitiesGenerator.Setup(g => g.GenerateWith(characterClass, race, mockStatsRandomizer.Object, baseAttack)).Returns(ability);
-            mockTreasureGenerator.Setup(g => g.GenerateWith(ability.Feats, characterClass)).Returns(equipment);
+            mockTreasureGenerator.Setup(g => g.GenerateWith(ability.Feats, characterClass, race)).Returns(equipment);
             mockCombatGenerator.Setup(g => g.GenerateWith(baseAttack, characterClass, race, ability.Feats, ability.Stats, equipment)).Returns(combat);
             mockCombatGenerator.Setup(g => g.GenerateBaseAttackWith(characterClass, race)).Returns(baseAttack);
             mockMagicGenerator.Setup(g => g.GenerateWith(characterClass, ability.Feats, equipment)).Returns(magic);
@@ -537,7 +537,7 @@ namespace CharacterGen.Tests.Unit.Generators
             mockAbilitiesGenerator.Setup(g => g.GenerateWith(cohortClass, cohortRace, mockRawStatRandomizer.Object, cohortBaseAttack)).Returns(cohortAbility);
             mockCombatGenerator.Setup(g => g.GenerateBaseAttackWith(cohortClass, cohortRace)).Returns(cohortBaseAttack);
             mockCombatGenerator.Setup(g => g.GenerateWith(cohortBaseAttack, cohortClass, cohortRace, cohortAbility.Feats, cohortAbility.Stats, cohortEquipment)).Returns(cohortCombat);
-            mockTreasureGenerator.Setup(g => g.GenerateWith(cohortAbility.Feats, cohortClass)).Returns(cohortEquipment);
+            mockTreasureGenerator.Setup(g => g.GenerateWith(cohortAbility.Feats, cohortClass, cohortRace)).Returns(cohortEquipment);
             mockMagicGenerator.Setup(g => g.GenerateWith(cohortClass, cohortAbility.Feats, cohortEquipment)).Returns(cohortMagic);
             mockPercentileSelector.SetupSequence(s => s.SelectFrom(TableNameConstants.Set.Percentile.Traits)).Returns("character is interesting").Returns("cohort is interesting");
 
@@ -859,7 +859,7 @@ namespace CharacterGen.Tests.Unit.Generators
                     .Returns(followerBaseAttack);
                 mockAbilitiesGenerator.Setup(g => g.GenerateWith(followerClass, followerRace, mockRawStatRandomizer.Object, followerBaseAttack))
                     .Returns(followerAbility);
-                mockTreasureGenerator.Setup(g => g.GenerateWith(followerAbility.Feats, followerClass))
+                mockTreasureGenerator.Setup(g => g.GenerateWith(followerAbility.Feats, followerClass, followerRace))
                     .Returns(followerEquipment);
                 mockCombatGenerator.Setup(g => g.GenerateWith(followerBaseAttack, followerClass, followerRace, followerAbility.Feats, followerAbility.Stats, followerEquipment))
                     .Returns(followerCombat);

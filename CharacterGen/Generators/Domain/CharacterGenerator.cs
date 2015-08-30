@@ -109,7 +109,7 @@ namespace CharacterGen.Generators.Domain
             var baseAttack = combatGenerator.GenerateBaseAttackWith(character.Class, character.Race);
 
             character.Ability = abilitiesGenerator.GenerateWith(character.Class, character.Race, statsRandomizer, baseAttack);
-            character.Equipment = equipmentGenerator.GenerateWith(character.Ability.Feats, character.Class);
+            character.Equipment = equipmentGenerator.GenerateWith(character.Ability.Feats, character.Class, character.Race);
             character.Combat = combatGenerator.GenerateWith(baseAttack, character.Class, character.Race, character.Ability.Feats, character.Ability.Stats, character.Equipment);
             character.InterestingTrait = percentileSelector.SelectFrom(TableNameConstants.Set.Percentile.Traits);
             character.Magic = magicGenerator.GenerateWith(character.Class, character.Ability.Feats, character.Equipment);
