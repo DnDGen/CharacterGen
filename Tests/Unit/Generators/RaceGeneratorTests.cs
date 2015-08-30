@@ -154,7 +154,7 @@ namespace CharacterGen.Tests.Unit.Generators
             mockBaseRaceRandomizer.Setup(r => r.Randomize(alignment.Goodness, characterClass)).Returns(RaceConstants.BaseRaces.Drow);
             speeds[RaceConstants.BaseRaces.Drow] = 9266;
 
-            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.AGEGROUPRACEAges, characterClass.ClassName, RaceConstants.BaseRaces.Drow);
+            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.AGEGROUPRACEAges, GroupConstants.Middle, RaceConstants.BaseRaces.Drow);
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(ageRolls);
 
             tableName = String.Format(TableNameConstants.Formattable.Adjustments.GENDERRACEHeights, "Male", RaceConstants.BaseRaces.Drow);
@@ -174,7 +174,7 @@ namespace CharacterGen.Tests.Unit.Generators
             mockBaseRaceRandomizer.Setup(r => r.Randomize(alignment.Goodness, characterClass)).Returns(RaceConstants.BaseRaces.Drow);
             speeds[RaceConstants.BaseRaces.Drow] = 9266;
 
-            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.AGEGROUPRACEAges, characterClass.ClassName, RaceConstants.BaseRaces.Drow);
+            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.AGEGROUPRACEAges, GroupConstants.Middle, RaceConstants.BaseRaces.Drow);
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(ageRolls);
 
             tableName = String.Format(TableNameConstants.Formattable.Adjustments.GENDERRACEHeights, "Female", RaceConstants.BaseRaces.Drow);

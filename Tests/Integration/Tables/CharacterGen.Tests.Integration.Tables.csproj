@@ -255,6 +255,15 @@
     <Compile Include="Items\Powers\Level9PowerTests.cs" />
     <Compile Include="PercentileTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Races\BaseRaces\Ages\Middle\MiddleDeepDwarfAgesTests.cs" />
+    <Compile Include="Races\BaseRaces\Ages\Middle\MiddleHobgoblinAgesTests.cs" />
+    <Compile Include="Races\BaseRaces\Ages\Middle\MiddleHumanAgesTests.cs" />
+    <Compile Include="Races\BaseRaces\Ages\Middle\MiddleOrcAgesTests.cs" />
+    <Compile Include="Races\BaseRaces\Ages\Middle\MiddleWoodElfAgesTests.cs" />
+    <Compile Include="Races\BaseRaces\Ages\Old\OldHillDwarfAgesTests.cs" />
+    <Compile Include="Races\BaseRaces\Ages\Old\OldHumanAgesTests.cs" />
+    <Compile Include="Races\BaseRaces\Ages\Young\YoungHumanAgesTests.cs" />
+    <Compile Include="Races\BaseRaces\Ages\Young\YoungLightfootHalflingAgesTests.cs" />
     <Compile Include="Races\BaseRaces\BaseRaceGroupsTests.cs" />
     <Compile Include="Races\BaseRaces\Evil\EvilBarbarianBaseRacesTests.cs" />
     <Compile Include="Races\BaseRaces\Evil\EvilBardBaseRacesTests.cs" />
