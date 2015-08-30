@@ -24,9 +24,11 @@ namespace CharacterGen.Tests.Unit.Tables
         [TestCase(GroupConstants.Lycanthrope, "Lycanthrope")]
         [TestCase(GroupConstants.Mages, "Mages")]
         [TestCase(GroupConstants.ManualCrossbows, "Manual Crossbows")]
+        [TestCase(GroupConstants.Middle, "Middle")]
         [TestCase(GroupConstants.Monsters, "Monsters")]
         [TestCase(GroupConstants.NaturalArmor, "NaturalArmor")]
         [TestCase(GroupConstants.NeedsAmmunition, "Needs Ammunition")]
+        [TestCase(GroupConstants.Old, "Old")]
         [TestCase(GroupConstants.Proficiency, "Proficiency")]
         [TestCase(GroupConstants.SavingThrows, "Saving Throws")]
         [TestCase(GroupConstants.SchoolsOfMagic, "Schools of Magic")]
@@ -42,6 +44,7 @@ namespace CharacterGen.Tests.Unit.Tables
         [TestCase(GroupConstants.WeaponsWithUnarmedAndGrapple, "Weapons with unarmed and grapple")]
         [TestCase(GroupConstants.WeaponsWithUnarmedAndGrappleAndRay, "Weapons with unarmed, grapple, and ray")]
         [TestCase(GroupConstants.WizardBonusFeats, "WizardBonusFeats")]
+        [TestCase(GroupConstants.Young, "Young")]
         public void Constant(String constant, String value)
         {
             Assert.That(constant, Is.EqualTo(value));

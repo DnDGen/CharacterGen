@@ -73,7 +73,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
             ageRolls[AdjustmentConstants.Old] = 600;
             ageRolls[AdjustmentConstants.Venerable] = 90210;
 
-            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.CLASSRACEAges, characterClass.ClassName, race.BaseRace);
+            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.AGEGROUPRACEAges, GroupConstants.Middle, race.BaseRace);
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(ageRolls);
 
             mockStatPrioritySelector.Setup(p => p.SelectFor(It.IsAny<String>())).Returns(statPrioritySelection);

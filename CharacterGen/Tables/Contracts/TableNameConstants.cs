@@ -79,7 +79,7 @@ namespace CharacterGen.Tables
             public static class Adjustments
             {
                 public const String CLASSFeatLevelRequirements = "{0}FeatLevelRequirements";
-                public const String CLASSRACEAges = "{0}{1}Ages";
+                public const String AGEGROUPRACEAges = "{0}{1}Ages";
                 public const String GENDERRACEHeights = "{0}{1}Heights";
                 public const String GENDERRACEWeights = "{0}{1}Weights";
                 public const String FEATClassRequirements = "{0}ClassRequirements";

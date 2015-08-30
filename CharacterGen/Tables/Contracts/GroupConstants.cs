@@ -21,9 +21,11 @@ namespace CharacterGen.Tables
         public const String Lycanthrope = "Lycanthrope";
         public const String Mages = "Mages";
         public const String ManualCrossbows = "Manual Crossbows";
+        public const String Middle = "Middle";
         public const String Monsters = "Monsters";
         public const String NaturalArmor = "NaturalArmor";
         public const String NeedsAmmunition = "Needs Ammunition";
+        public const String Old = "Old";
         public const String Proficiency = "Proficiency";
         public const String SavingThrows = "Saving Throws";
         public const String SchoolsOfMagic = "Schools of Magic";
@@ -40,5 +42,6 @@ namespace CharacterGen.Tables
         public const String WeaponsWithUnarmedAndGrapple = "Weapons with unarmed and grapple";
         public const String WeaponsWithUnarmedAndGrappleAndRay = "Weapons with unarmed, grapple, and ray";
         public const String WizardBonusFeats = "WizardBonusFeats";
+        public const String Young = "Young";
     }
 }

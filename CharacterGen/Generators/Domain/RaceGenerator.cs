@@ -110,7 +110,7 @@ namespace CharacterGen.Generators.Domain
 
         private Int32 DetermineAerialSpeed(Race race)
         {
-            if (!race.HasWings)
+            if (race.HasWings == false)
                 return 0;
 
             if (race.Metarace == RaceConstants.Metaraces.HalfFiend)
@@ -121,11 +121,25 @@ namespace CharacterGen.Generators.Domain
 
         private Int32 DetermineAge(Race race, CharacterClass characterClass)
         {
-            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.CLASSRACEAges, characterClass.ClassName, race.BaseRace);
+            var ageGroup = GetAgeGroup(characterClass);
+            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.AGEGROUPRACEAges, ageGroup, race.BaseRace);
             var ages = adjustmentsSelector.SelectFrom(tableName);
             var additionalAge = dice.Roll(ages[AdjustmentConstants.Quantity]).d(ages[AdjustmentConstants.Die]);
 
             return ages[AdjustmentConstants.Adulthood] + additionalAge;
+        }
+
+        private String GetAgeGroup(CharacterClass characterClass)
+        {
+            var youngClasses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Young);
+            if (youngClasses.Contains(characterClass.ClassName))
+                return GroupConstants.Young;
+
+            var oldClasses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Old);
+            if (oldClasses.Contains(characterClass.ClassName))
+                return GroupConstants.Old;
+
+            return GroupConstants.Middle;
         }
     }
 }

@@ -36,7 +36,7 @@ namespace CharacterGen.Generators.Domain.Abilities
             stats = PrioritizeStats(stats, statPriorities);
             stats = AdjustStats(race, stats);
             stats = IncreaseStats(stats, characterClass.Level, statPriorities);
-            stats = ApplyAgeToStats(stats, race, characterClass);
+            stats = ApplyAgeToStats(stats, race);
 
             return stats;
         }
@@ -96,9 +96,9 @@ namespace CharacterGen.Generators.Domain.Abilities
                 stats[priorities.Second].Value++;
         }
 
-        private Dictionary<String, Stat> ApplyAgeToStats(Dictionary<String, Stat> stats, Race race, CharacterClass characterClass)
+        private Dictionary<String, Stat> ApplyAgeToStats(Dictionary<String, Stat> stats, Race race)
         {
-            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.CLASSRACEAges, characterClass.ClassName, race.BaseRace);
+            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.AGEGROUPRACEAges, GroupConstants.Middle, race.BaseRace);
             var ages = adjustmentsSelector.SelectFrom(tableName);
 
             if (race.Age >= ages[AdjustmentConstants.MiddleAge])
