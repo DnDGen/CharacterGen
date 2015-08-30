@@ -1,12 +1,12 @@
-﻿using System;
-using System.Linq;
-using CharacterGen.Common.Alignments;
+﻿using CharacterGen.Common.Alignments;
 using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Common.Races;
-using CharacterGen.Generators;
 using CharacterGen.Generators.Randomizers.Races;
 using CharacterGen.Selectors;
 using CharacterGen.Tables;
+using RollGen;
+using System;
+using System.Linq;
 
 namespace CharacterGen.Generators.Domain
 {
@@ -15,12 +15,15 @@ namespace CharacterGen.Generators.Domain
         private IBooleanPercentileSelector booleanPercentileSelector;
         private ICollectionsSelector collectionsSelector;
         private IAdjustmentsSelector adjustmentsSelector;
+        private IDice dice;
 
-        public RaceGenerator(IBooleanPercentileSelector booleanPercentileSelector, ICollectionsSelector collectionsSelector, IAdjustmentsSelector adjustmentsSelector)
+        public RaceGenerator(IBooleanPercentileSelector booleanPercentileSelector, ICollectionsSelector collectionsSelector, IAdjustmentsSelector adjustmentsSelector,
+            IDice dice)
         {
             this.booleanPercentileSelector = booleanPercentileSelector;
             this.collectionsSelector = collectionsSelector;
             this.adjustmentsSelector = adjustmentsSelector;
+            this.dice = dice;
         }
 
         public Race GenerateWith(Alignment alignment, CharacterClass characterClass, IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer)
@@ -35,6 +38,20 @@ namespace CharacterGen.Generators.Domain
             race.HasWings = DetermineIfRaceHasWings(race);
             race.LandSpeed = DetermineLandSpeed(race);
             race.AerialSpeed = DetermineAerialSpeed(race);
+            race.Age = DetermineAge(race, characterClass);
+
+            var gender = race.Male ? "Male" : "Female";
+            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.GENDERRACEHeights, gender, race.BaseRace);
+            var heights = adjustmentsSelector.SelectFrom(tableName);
+            var additionalHeight = dice.Roll(heights[AdjustmentConstants.Quantity]).d(heights[AdjustmentConstants.Die]);
+
+            race.HeightInInches = heights[AdjustmentConstants.Base] + additionalHeight;
+
+            tableName = String.Format(TableNameConstants.Formattable.Adjustments.GENDERRACEWeights, gender, race.BaseRace);
+            var weights = adjustmentsSelector.SelectFrom(tableName);
+            var additionalWeightMultiplier = dice.Roll(weights[AdjustmentConstants.Quantity]).d(weights[AdjustmentConstants.Die]);
+
+            race.WeightInPounds = weights[AdjustmentConstants.Base] + additionalHeight * additionalWeightMultiplier;
 
             return race;
         }
@@ -100,6 +117,15 @@ namespace CharacterGen.Generators.Domain
                 return race.LandSpeed;
 
             return race.LandSpeed * 2;
+        }
+
+        private Int32 DetermineAge(Race race, CharacterClass characterClass)
+        {
+            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.CLASSRACEAges, characterClass.ClassName, race.BaseRace);
+            var ages = adjustmentsSelector.SelectFrom(tableName);
+            var additionalAge = dice.Roll(ages[AdjustmentConstants.Quantity]).d(ages[AdjustmentConstants.Die]);
+
+            return ages[AdjustmentConstants.Adulthood] + additionalAge;
         }
     }
 }

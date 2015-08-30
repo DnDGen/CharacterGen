@@ -180,11 +180,11 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.TwoWeaponFighting,
             FeatConstants.WhirlwindAttack)]
         [TestCase(GroupConstants.TakenMultipleTimes,
+            FeatConstants.AttackBonus,
             FeatConstants.SpellMastery,
             FeatConstants.Toughness,
             FeatConstants.SkillMastery,
             FeatConstants.SkillBonus,
-            FeatConstants.AttackBonus,
             FeatConstants.DodgeBonus,
             FeatConstants.SaveBonus,
             FeatConstants.ExtraTurning)]
@@ -601,7 +601,10 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.Scent,
             FeatConstants.SkillBonus + SkillConstants.Search,
             FeatConstants.SkillBonus + SkillConstants.Spot,
-            FeatConstants.SkillBonus + SkillConstants.Listen)]
+            FeatConstants.SkillBonus + SkillConstants.Listen,
+            FeatConstants.SaveBonus + SavingThrowConstants.Fortitude,
+            FeatConstants.SaveBonus + SavingThrowConstants.Reflex,
+            FeatConstants.SaveBonus + SavingThrowConstants.Will)]
         [TestCase(RaceConstants.BaseRaces.MountainDwarf,
             FeatConstants.Darkvision,
             FeatConstants.Stonecunning,
@@ -940,8 +943,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
                 FeatConstants.SpellLikeAbility + SpellConstants.PlaneShift,
                 FeatConstants.SpellLikeAbility + SpellConstants.Suggestion,
                 FeatConstants.ImprovedGrab,
-                FeatConstants.Extract,
-                FeatConstants.AttackBonus
+                FeatConstants.Extract
             };
 
             base.DistinctCollection(RaceConstants.BaseRaces.MindFlayer, featIds);

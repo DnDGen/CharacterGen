@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using CharacterGen.Common.Abilities.Stats;
+﻿using CharacterGen.Common.Abilities.Stats;
 using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Common.Races;
 using CharacterGen.Generators.Abilities;
@@ -9,6 +6,9 @@ using CharacterGen.Generators.Randomizers.Stats;
 using CharacterGen.Selectors;
 using CharacterGen.Selectors.Objects;
 using CharacterGen.Tables;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CharacterGen.Generators.Domain.Abilities
 {
@@ -17,12 +17,15 @@ namespace CharacterGen.Generators.Domain.Abilities
         private IBooleanPercentileSelector booleanPercentileSelector;
         private IStatPrioritySelector statPrioritySelector;
         private IStatAdjustmentsSelector statAdjustmentsSelector;
+        private IAdjustmentsSelector adjustmentsSelector;
 
-        public StatsGenerator(IBooleanPercentileSelector booleanPercentileSelector, IStatPrioritySelector statPrioritySelector, IStatAdjustmentsSelector statAdjustmentsSelector)
+        public StatsGenerator(IBooleanPercentileSelector booleanPercentileSelector, IStatPrioritySelector statPrioritySelector,
+            IStatAdjustmentsSelector statAdjustmentsSelector, IAdjustmentsSelector adjustmentsSelector)
         {
             this.booleanPercentileSelector = booleanPercentileSelector;
             this.statPrioritySelector = statPrioritySelector;
             this.statAdjustmentsSelector = statAdjustmentsSelector;
+            this.adjustmentsSelector = adjustmentsSelector;
         }
 
         public Dictionary<String, Stat> GenerateWith(IStatsRandomizer statsRandomizer, CharacterClass characterClass, Race race)
@@ -33,6 +36,7 @@ namespace CharacterGen.Generators.Domain.Abilities
             stats = PrioritizeStats(stats, statPriorities);
             stats = AdjustStats(race, stats);
             stats = IncreaseStats(stats, characterClass.Level, statPriorities);
+            stats = ApplyAgeToStats(stats, race, characterClass);
 
             return stats;
         }
@@ -64,10 +68,10 @@ namespace CharacterGen.Generators.Domain.Abilities
             var statAdjustments = statAdjustmentsSelector.SelectFor(race);
 
             foreach (var stat in stats.Keys)
-            {
                 stats[stat].Value += statAdjustments[stat];
-                stats[stat].Value = Math.Max(stats[stat].Value, 3);
-            }
+
+            foreach (var stat in stats.Values)
+                stat.Value = Math.Max(stat.Value, 1);
 
             return stats;
         }
@@ -90,6 +94,47 @@ namespace CharacterGen.Generators.Domain.Abilities
                 stats[priorities.First].Value++;
             else
                 stats[priorities.Second].Value++;
+        }
+
+        private Dictionary<String, Stat> ApplyAgeToStats(Dictionary<String, Stat> stats, Race race, CharacterClass characterClass)
+        {
+            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.CLASSRACEAges, characterClass.ClassName, race.BaseRace);
+            var ages = adjustmentsSelector.SelectFrom(tableName);
+
+            if (race.Age >= ages[AdjustmentConstants.MiddleAge])
+            {
+                stats[StatConstants.Strength].Value--;
+                stats[StatConstants.Constitution].Value--;
+                stats[StatConstants.Dexterity].Value--;
+                stats[StatConstants.Intelligence].Value++;
+                stats[StatConstants.Wisdom].Value++;
+                stats[StatConstants.Charisma].Value++;
+            }
+
+            if (race.Age >= ages[AdjustmentConstants.Old])
+            {
+                stats[StatConstants.Strength].Value -= 2;
+                stats[StatConstants.Constitution].Value -= 2;
+                stats[StatConstants.Dexterity].Value -= 2;
+                stats[StatConstants.Intelligence].Value++;
+                stats[StatConstants.Wisdom].Value++;
+                stats[StatConstants.Charisma].Value++;
+            }
+
+            if (race.Age >= ages[AdjustmentConstants.Venerable])
+            {
+                stats[StatConstants.Strength].Value -= 3;
+                stats[StatConstants.Constitution].Value -= 3;
+                stats[StatConstants.Dexterity].Value -= 3;
+                stats[StatConstants.Intelligence].Value++;
+                stats[StatConstants.Wisdom].Value++;
+                stats[StatConstants.Charisma].Value++;
+            }
+
+            foreach (var stat in stats.Values)
+                stat.Value = Math.Max(stat.Value, 1);
+
+            return stats;
         }
     }
 }

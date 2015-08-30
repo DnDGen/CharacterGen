@@ -22,6 +22,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
         private Mock<IStatPrioritySelector> mockStatPrioritySelector;
         private Mock<IStatAdjustmentsSelector> mockStatAdjustmentsSelector;
         private Mock<IBooleanPercentileSelector> mockBooleanPercentileSelector;
+        private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
         private IStatsGenerator statsGenerator;
 
         private Mock<IStatsRandomizer> mockStatRandomizer;
@@ -30,39 +31,54 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
         private Race race;
         private CharacterClass characterClass;
         private StatPrioritySelection statPrioritySelection;
+        private Dictionary<String, Int32> ageRolls;
 
         [SetUp]
         public void Setup()
         {
-            statPrioritySelection = new StatPrioritySelection();
             mockStatPrioritySelector = new Mock<IStatPrioritySelector>();
-            race = new Race();
-            adjustments = new Dictionary<String, Int32>();
             mockStatAdjustmentsSelector = new Mock<IStatAdjustmentsSelector>();
             mockBooleanPercentileSelector = new Mock<IBooleanPercentileSelector>();
+            mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
             statsGenerator = new StatsGenerator(mockBooleanPercentileSelector.Object, mockStatPrioritySelector.Object,
-                mockStatAdjustmentsSelector.Object);
-            randomizedStats = new Dictionary<String, Stat>();
+                mockStatAdjustmentsSelector.Object, mockAdjustmentsSelector.Object);
+
             mockStatRandomizer = new Mock<IStatsRandomizer>();
+
+            randomizedStats = new Dictionary<String, Stat>();
+            race = new Race();
+            adjustments = new Dictionary<String, Int32>();
+            statPrioritySelection = new StatPrioritySelection();
             characterClass = new CharacterClass();
-
-            statPrioritySelection.First = "first priority";
-            statPrioritySelection.Second = "second priority";
-            mockStatPrioritySelector.Setup(p => p.SelectFor(It.IsAny<String>())).Returns(statPrioritySelection);
-
-            race.BaseRace = "base race";
-            race.Metarace = String.Empty;
-            adjustments.Add(statPrioritySelection.First, 0);
-            adjustments.Add(statPrioritySelection.Second, 0);
-            adjustments.Add("other stat", 0);
-            mockStatAdjustmentsSelector.Setup(p => p.SelectFor(race)).Returns(adjustments);
-
-            randomizedStats.Add(statPrioritySelection.First, new Stat { Value = baseStat });
-            randomizedStats.Add(statPrioritySelection.Second, new Stat { Value = baseStat });
-            randomizedStats.Add("other stat", new Stat { Value = baseStat });
-            mockStatRandomizer.Setup(r => r.Randomize()).Returns(randomizedStats);
+            ageRolls = new Dictionary<String, Int32>();
 
             characterClass.ClassName = "class name";
+            randomizedStats[StatConstants.Charisma] = new Stat { Value = baseStat };
+            randomizedStats[StatConstants.Constitution] = new Stat { Value = baseStat };
+            randomizedStats[StatConstants.Dexterity] = new Stat { Value = baseStat };
+            randomizedStats[StatConstants.Intelligence] = new Stat { Value = baseStat };
+            randomizedStats[StatConstants.Strength] = new Stat { Value = baseStat };
+            randomizedStats[StatConstants.Wisdom] = new Stat { Value = baseStat };
+            statPrioritySelection.First = StatConstants.Strength;
+            statPrioritySelection.Second = StatConstants.Wisdom;
+            race.BaseRace = "base race";
+            race.Metarace = String.Empty;
+            adjustments[StatConstants.Charisma] = 0;
+            adjustments[StatConstants.Constitution] = 0;
+            adjustments[StatConstants.Dexterity] = 0;
+            adjustments[StatConstants.Intelligence] = 0;
+            adjustments[StatConstants.Strength] = 0;
+            adjustments[StatConstants.Wisdom] = 0;
+            ageRolls[AdjustmentConstants.MiddleAge] = 42;
+            ageRolls[AdjustmentConstants.Old] = 600;
+            ageRolls[AdjustmentConstants.Venerable] = 90210;
+
+            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.CLASSRACEAges, characterClass.ClassName, race.BaseRace);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(ageRolls);
+
+            mockStatPrioritySelector.Setup(p => p.SelectFor(It.IsAny<String>())).Returns(statPrioritySelection);
+            mockStatAdjustmentsSelector.Setup(p => p.SelectFor(race)).Returns(adjustments);
+            mockStatRandomizer.Setup(r => r.Randomize()).Returns(randomizedStats);
         }
 
         [Test]
@@ -82,40 +98,40 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
         [Test]
         public void PrioritizesStatsByClass()
         {
-            randomizedStats["other stat"].Value = 18;
+            randomizedStats[StatConstants.Dexterity].Value = 18;
             randomizedStats[statPrioritySelection.First].Value = 16;
 
             var stats = statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
             Assert.That(stats[statPrioritySelection.First].Value, Is.EqualTo(18));
             Assert.That(stats[statPrioritySelection.Second].Value, Is.EqualTo(16));
-            Assert.That(stats["other stat"].Value, Is.EqualTo(baseStat));
+            Assert.That(stats[StatConstants.Dexterity].Value, Is.EqualTo(baseStat));
         }
 
         [Test]
         public void AdjustsStatsByBaseRace()
         {
-            adjustments["other stat"] = 1;
+            adjustments[StatConstants.Dexterity] = 1;
             adjustments[statPrioritySelection.First] = -1;
 
             var stats = statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
             Assert.That(stats[statPrioritySelection.First].Value, Is.EqualTo(baseStat - 1));
             Assert.That(stats[statPrioritySelection.Second].Value, Is.EqualTo(baseStat));
-            Assert.That(stats["other stat"].Value, Is.EqualTo(baseStat + 1));
+            Assert.That(stats[StatConstants.Dexterity].Value, Is.EqualTo(baseStat + 1));
         }
 
         [Test]
         public void AdjustStatsAfterPrioritizing()
         {
-            randomizedStats["other stat"].Value = 18;
+            randomizedStats[StatConstants.Dexterity].Value = 18;
             randomizedStats[statPrioritySelection.First].Value = 16;
-            adjustments["other stat"] = 9266;
+            adjustments[StatConstants.Dexterity] = 9266;
             adjustments[statPrioritySelection.First] = -10;
             adjustments[statPrioritySelection.Second] = -7;
 
             var stats = statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
             Assert.That(stats[statPrioritySelection.First].Value, Is.EqualTo(8));
             Assert.That(stats[statPrioritySelection.Second].Value, Is.EqualTo(9));
-            Assert.That(stats["other stat"].Value, Is.EqualTo(baseStat + 9266));
+            Assert.That(stats[StatConstants.Dexterity].Value, Is.EqualTo(baseStat + 9266));
         }
 
         [Test]
@@ -127,7 +143,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
             var stats = statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
             Assert.That(stats[statPrioritySelection.First].Value, Is.EqualTo(baseStat + 1));
             Assert.That(stats[statPrioritySelection.Second].Value, Is.EqualTo(baseStat));
-            Assert.That(stats["other stat"].Value, Is.EqualTo(baseStat));
+            Assert.That(stats[StatConstants.Dexterity].Value, Is.EqualTo(baseStat));
         }
 
         [Test]
@@ -139,15 +155,15 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
             var stats = statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
             Assert.That(stats[statPrioritySelection.First].Value, Is.EqualTo(baseStat));
             Assert.That(stats[statPrioritySelection.Second].Value, Is.EqualTo(baseStat + 1));
-            Assert.That(stats["other stat"].Value, Is.EqualTo(baseStat));
+            Assert.That(stats[StatConstants.Dexterity].Value, Is.EqualTo(baseStat));
         }
 
         [Test]
         public void IncreasingIsAfterPrioritizationAndAdjustments()
         {
-            randomizedStats["other stat"].Value = 18;
+            randomizedStats[StatConstants.Dexterity].Value = 18;
             randomizedStats[statPrioritySelection.First].Value = 16;
-            adjustments["other stat"] = 9266;
+            adjustments[StatConstants.Dexterity] = 9266;
             adjustments[statPrioritySelection.First] = -10;
             adjustments[statPrioritySelection.Second] = -7;
             mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityStat)).Returns(true);
@@ -156,7 +172,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
             var stats = statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
             Assert.That(stats[statPrioritySelection.First].Value, Is.EqualTo(9));
             Assert.That(stats[statPrioritySelection.Second].Value, Is.EqualTo(9));
-            Assert.That(stats["other stat"].Value, Is.EqualTo(baseStat + 9266));
+            Assert.That(stats[StatConstants.Dexterity].Value, Is.EqualTo(baseStat + 9266));
         }
 
         [TestCase(1, 0)]
@@ -198,7 +214,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
             var stats = statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
             Assert.That(stats[statPrioritySelection.First].Value, Is.EqualTo(baseStat + 2));
             Assert.That(stats[statPrioritySelection.Second].Value, Is.EqualTo(baseStat + 1));
-            Assert.That(stats["other stat"].Value, Is.EqualTo(baseStat));
+            Assert.That(stats[StatConstants.Dexterity].Value, Is.EqualTo(baseStat));
         }
 
         [Test]
@@ -208,22 +224,43 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
             mockBooleanPercentileSelector.SetupSequence(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityStat))
                 .Returns(true).Returns(false).Returns(false);
 
-            foreach (var stat in randomizedStats.Values)
-                stat.Value = baseStat;
-
             var stats = statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
             Assert.That(stats[statPrioritySelection.First].Value, Is.EqualTo(baseStat + 1));
             Assert.That(stats[statPrioritySelection.Second].Value, Is.EqualTo(baseStat + 2));
-            Assert.That(stats["other stat"].Value, Is.EqualTo(baseStat));
+            Assert.That(stats[StatConstants.Dexterity].Value, Is.EqualTo(baseStat));
+        }
+
+        [TestCase(41, 10, 10, 10, 10, 10, 10)]
+        [TestCase(42, 9, 9, 9, 11, 11, 11)]
+        [TestCase(43, 9, 9, 9, 11, 11, 11)]
+        [TestCase(599, 9, 9, 9, 11, 11, 11)]
+        [TestCase(600, 7, 7, 7, 12, 12, 12)]
+        [TestCase(601, 7, 7, 7, 12, 12, 12)]
+        [TestCase(90209, 7, 7, 7, 12, 12, 12)]
+        [TestCase(90210, 4, 4, 4, 13, 13, 13)]
+        [TestCase(90211, 4, 4, 4, 13, 13, 13)]
+        public void ApplyAgeModifierToStats(Int32 age, Int32 strength, Int32 constitution, Int32 dexterity, Int32 intelligence, Int32 wisdom, Int32 charisma)
+        {
+            race.Age = age;
+
+            var stats = statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
+            Assert.That(stats[StatConstants.Charisma].Value, Is.EqualTo(charisma));
+            Assert.That(stats[StatConstants.Constitution].Value, Is.EqualTo(constitution));
+            Assert.That(stats[StatConstants.Dexterity].Value, Is.EqualTo(dexterity));
+            Assert.That(stats[StatConstants.Intelligence].Value, Is.EqualTo(intelligence));
+            Assert.That(stats[StatConstants.Strength].Value, Is.EqualTo(strength));
+            Assert.That(stats[StatConstants.Wisdom].Value, Is.EqualTo(wisdom));
         }
 
         [Test]
-        public void CannotHaveStatLessThan3()
+        public void CannotHaveStatLessThan1()
         {
-            adjustments[statPrioritySelection.First] = -9266;
+            adjustments[StatConstants.Strength] = -9266;
+            randomizedStats[StatConstants.Strength].Value = 3;
+            race.Age = 90211;
 
             var stats = statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
-            Assert.That(stats[statPrioritySelection.First].Value, Is.EqualTo(3));
+            Assert.That(stats[StatConstants.Strength].Value, Is.EqualTo(1));
         }
     }
 }

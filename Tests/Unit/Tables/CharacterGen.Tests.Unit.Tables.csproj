@@ -59,6 +59,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="AdjustmentConstantsTests.cs" />
     <Compile Include="DataIndexConstantsTests.cs" />
     <Compile Include="GroupConstantsTests.cs" />
     <Compile Include="TableNameConstantsTests.cs" />

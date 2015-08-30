@@ -795,7 +795,6 @@
         <item>Spell-Like AbilityCharm monster</item>
         <item>Improved Grab</item>
         <item>Extract</item>
-      <item>Attack Bonus</item>
     </object>
     <object>
         <name>Minotaur</name>
@@ -810,6 +809,9 @@
         <item>Skill BonusSearch</item>
         <item>Skill BonusSpot</item>
         <item>Skill BonusListen</item>
+      <item>Save BonusFortitude</item>
+      <item>Save BonusReflex</item>
+      <item>Save BonusWill</item>
     </object>
     <object>
         <name>Monk</name>

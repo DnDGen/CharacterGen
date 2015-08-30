@@ -12,6 +12,9 @@ namespace CharacterGen.Common.Races
         public String Size { get; set; }
         public Int32 LandSpeed { get; set; }
         public Int32 AerialSpeed { get; set; }
+        public Int32 HeightInInches { get; set; }
+        public Int32 WeightInPounds { get; set; }
+        public Int32 Age { get; set; }
 
         public Race()
         {

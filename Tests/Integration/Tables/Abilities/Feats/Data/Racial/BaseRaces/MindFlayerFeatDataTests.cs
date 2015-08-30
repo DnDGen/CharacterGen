@@ -42,8 +42,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial.Base
                 FeatConstants.SpellLikeAbility + SpellConstants.PlaneShift,
                 FeatConstants.SpellLikeAbility + SpellConstants.Suggestion,
                 FeatConstants.ImprovedGrab,
-                FeatConstants.Extract,
-                FeatConstants.AttackBonus
+                FeatConstants.Extract
             };
 
             AssertCollectionNames(names);
@@ -246,15 +245,6 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial.Base
             0,
             "",
             0,
-            0, 0)]
-        [TestCase(FeatConstants.AttackBonus,
-            FeatConstants.AttackBonus,
-            "",
-            0,
-            "",
-            0,
-            "",
-            6,
             0, 0)]
         public override void Data(String name, String feat, String focus, Int32 frequencyQuantity, String frequencyTimePeriod, Int32 minimumHitDiceRequirement, String sizeRequirement, Int32 strength, Int32 maximumHitDiceRequirement, Int32 requiredStatMinimumValue, params String[] minimumStats)
         {

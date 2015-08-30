@@ -1,7 +1,7 @@
-﻿using System;
-using CharacterGen.Common.Races;
+﻿using CharacterGen.Common.Races;
 using CharacterGen.Generators.Randomizers.Races;
 using NUnit.Framework;
+using System;
 
 namespace CharacterGen.Tests.Integration.Stress
 {
@@ -24,6 +24,9 @@ namespace CharacterGen.Tests.Integration.Stress
             Assert.That(race.LandSpeed % 10, Is.EqualTo(0));
             Assert.That(race.AerialSpeed, Is.Not.Negative);
             Assert.That(race.MetaraceSpecies, Is.Not.Null);
+            Assert.That(race.Age, Is.InRange<Int32>(15, 170), race.BaseRace);
+            Assert.That(race.HeightInInches, Is.InRange<Int32>(32, 82), race.BaseRace);
+            Assert.That(race.WeightInPounds, Is.InRange<Int32>(27, 438), race.BaseRace);
         }
 
         private Race GenerateRace()
