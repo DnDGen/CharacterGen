@@ -1065,6 +1065,10 @@
         <item>Martial Weapon ProficiencyShortbow</item>
         <item>Martial Weapon ProficiencyShort sword</item>
     </object>
+  <object>
+    <name>Saving Throws</name>
+    <item>Save Bonus</item>
+  </object>
     <object>
         <name>Silver</name>
         <item>Natural Weapon</item>

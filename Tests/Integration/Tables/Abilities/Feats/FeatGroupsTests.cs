@@ -133,7 +133,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
                 RaceConstants.Metaraces.Species.White,
                 SavingThrowConstants.Fortitude,
                 SavingThrowConstants.Reflex,
-                SavingThrowConstants.Will
+                SavingThrowConstants.Will,
+                GroupConstants.SavingThrows
             };
 
             AssertCollectionNames(names);
@@ -240,6 +241,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.LightningReflexes)]
         [TestCase(SavingThrowConstants.Will,
             FeatConstants.IronWill)]
+        [TestCase(GroupConstants.SavingThrows,
+            FeatConstants.SaveBonus)]
         public override void DistinctCollection(String name, params String[] collection)
         {
             base.DistinctCollection(name, collection);
