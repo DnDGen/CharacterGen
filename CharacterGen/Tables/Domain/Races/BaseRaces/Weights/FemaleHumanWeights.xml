@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+    <object>
+        <name>Base</name>
+        <item>85</item>
+    </object>
+    <object>
+        <name>Quantity</name>
+        <item>2</item>
+    </object>
+    <object>
+        <name>Die</name>
+        <item>4</item>
+    </object>
+</items>
