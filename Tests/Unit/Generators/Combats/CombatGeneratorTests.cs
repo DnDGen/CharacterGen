@@ -294,7 +294,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         [Test]
         public void GetHitPointsFromGenerator()
         {
-            mockHitPointsGenerator.Setup(g => g.GenerateWith(characterClass, stats[StatConstants.Constitution].Bonus, race)).Returns(90210);
+            mockHitPointsGenerator.Setup(g => g.GenerateWith(characterClass, stats[StatConstants.Constitution].Bonus, race, feats)).Returns(90210);
 
             var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass, race);
             var combat = combatGenerator.GenerateWith(baseAttack, characterClass, race, feats, stats, equipment);

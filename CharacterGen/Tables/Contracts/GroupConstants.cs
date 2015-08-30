@@ -9,7 +9,6 @@ namespace CharacterGen.Tables
         public const String CharacterClasses = "CharacterClasses";
         public const String CombatStyles = "CombatStyles";
         public const String Deflection = "Deflection";
-        public const String Dodge = "Dodge";
         public const String FavoredEnemies = "Favored Enemies";
         public const String FighterBonusFeats = "FighterBonusFeats";
         public const String Genetic = "Genetic";
@@ -26,6 +25,7 @@ namespace CharacterGen.Tables
         public const String NaturalArmor = "NaturalArmor";
         public const String NeedsAmmunition = "Needs Ammunition";
         public const String Proficiency = "Proficiency";
+        public const String SavingThrows = "Saving Throws";
         public const String SchoolsOfMagic = "Schools of Magic";
         public const String Size = "Size";
         public const String Skills = "Skills";

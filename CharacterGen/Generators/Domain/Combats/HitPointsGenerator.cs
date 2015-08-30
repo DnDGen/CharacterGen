@@ -1,10 +1,12 @@
-﻿using CharacterGen.Common.CharacterClasses;
+﻿using CharacterGen.Common.Abilities.Feats;
+using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Common.Races;
 using CharacterGen.Generators.Combats;
 using CharacterGen.Selectors;
 using CharacterGen.Tables;
 using RollGen;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace CharacterGen.Generators.Domain.Combats
@@ -22,7 +24,7 @@ namespace CharacterGen.Generators.Domain.Combats
             this.collectionsSelector = collectionsSelector;
         }
 
-        public Int32 GenerateWith(CharacterClass characterClass, Int32 constitutionBonus, Race race)
+        public Int32 GenerateWith(CharacterClass characterClass, Int32 constitutionBonus, Race race, IEnumerable<Feat> feats)
         {
             var hitPoints = 0;
             var hitDice = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.ClassHitDice);
@@ -33,9 +35,12 @@ namespace CharacterGen.Generators.Domain.Combats
                 hitPoints += Math.Max(rolledHitPoints, 1);
             }
 
+            var toughness = feats.Where(f => f.Name == FeatConstants.Toughness);
+            hitPoints += toughness.Sum(f => f.Strength);
+
             var monsters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups,
                 GroupConstants.Monsters);
-            if (!monsters.Contains(race.BaseRace))
+            if (monsters.Contains(race.BaseRace) == false)
                 return hitPoints;
 
             var monsterHitPoints = GetAdditionalMonsterHitDice(race);

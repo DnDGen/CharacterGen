@@ -95,7 +95,7 @@ namespace CharacterGen.Generators.Domain.Combats
             combat.BaseAttack = baseAttack;
             combat.AdjustedDexterityBonus = GetAdjustedDexterityBonus(stats, equipment);
             combat.ArmorClass = armorClassGenerator.GenerateWith(equipment, combat.AdjustedDexterityBonus, feats, race);
-            combat.HitPoints = hitPointsGenerator.GenerateWith(characterClass, stats[StatConstants.Constitution].Bonus, race);
+            combat.HitPoints = hitPointsGenerator.GenerateWith(characterClass, stats[StatConstants.Constitution].Bonus, race, feats);
             combat.SavingThrows = savingThrowsGenerator.GenerateWith(characterClass, feats, stats);
             combat.InitiativeBonus = GetInitiativeBonus(race, feats);
 

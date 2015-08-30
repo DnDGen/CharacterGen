@@ -40,10 +40,9 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
 
             armorBonuses[String.Empty] = 0;
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.ArmorBonuses)).Returns(armorBonuses);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.Size)).Returns(Enumerable.Empty<String>());
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.NaturalArmor))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.Size))
                 .Returns(Enumerable.Empty<String>());
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.Dodge))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.NaturalArmor))
                 .Returns(Enumerable.Empty<String>());
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.Deflection))
                 .Returns(Enumerable.Empty<String>());
@@ -58,9 +57,9 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         private void AssertArmorClass(Int32 flatFooted, Int32 full, Int32 touch)
         {
             var armorClass = armorClassGenerator.GenerateWith(equipment, adjustedDexterityBonus, feats, race);
-            Assert.That(armorClass.FlatFooted, Is.EqualTo(flatFooted));
-            Assert.That(armorClass.Full, Is.EqualTo(full));
-            Assert.That(armorClass.Touch, Is.EqualTo(touch));
+            Assert.That(armorClass.FlatFooted, Is.EqualTo(flatFooted), "flat-footed");
+            Assert.That(armorClass.Full, Is.EqualTo(full), "full");
+            Assert.That(armorClass.Touch, Is.EqualTo(touch), "touch");
         }
 
         [Test]
@@ -220,6 +219,23 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         }
 
         [Test]
+        public void DoNotApplyNaturalArmorBonusesIfTheyHaveQualifications()
+        {
+            feats.Add(new Feat());
+            feats.Add(new Feat());
+            feats[0].Name = "feat 1";
+            feats[0].Strength = 1;
+            feats[1].Name = "feat 2";
+            feats[1].Strength = 1;
+            feats[1].Focus = "focus";
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.NaturalArmor))
+                .Returns(new[] { "feat 1", "feat 2", "other feat" });
+
+            AssertArmorClass(11, 11, 10);
+        }
+
+        [Test]
         public void NaturalArmorBonusFromItemsApplied()
         {
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.NaturalArmor))
@@ -239,17 +255,10 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         }
 
         [Test]
-        public void OnlyHighestNaturalArmorBonusAppliesWhenHighestIsFeatSum()
+        public void OnlyHighestNaturalArmorBonusFromItemsApplies()
         {
-            feats.Add(new Feat());
-            feats.Add(new Feat());
-            feats[0].Name = "feat 1";
-            feats[0].Strength = 3;
-            feats[1].Name = "feat 2";
-            feats[1].Strength = 4;
-
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.NaturalArmor))
-                .Returns(new[] { "feat 1", "feat 2", "ring", "other ring" });
+                .Returns(new[] { "ring", "other ring" });
 
             var ring = new Item();
             ring.Name = "ring";
@@ -257,15 +266,15 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
 
             var otherRing = new Item();
             otherRing.Name = "other ring";
-            otherRing.Magic.Bonus = 1;
+            otherRing.Magic.Bonus = 2;
 
             equipment.Treasure.Items = new[] { ring, otherRing };
 
-            AssertArmorClass(17, 17, 10);
+            AssertArmorClass(12, 12, 10);
         }
 
         [Test]
-        public void OnlyHighestNaturalArmorBonusAppliesWhenHighestIsItem()
+        public void TotalNaturalArmorBonusFromFeatAndItemsApplied()
         {
             feats.Add(new Feat());
             feats.Add(new Feat());
@@ -287,40 +296,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
 
             equipment.Treasure.Items = new[] { ring, otherRing };
 
-            AssertArmorClass(12, 12, 10);
-        }
-
-        [Test]
-        public void DodgeBonusApplied()
-        {
-            var feat = new Feat();
-            feat.Name = "feat 1";
-            feat.Strength = 1;
-            feats.Add(feat);
-
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.Dodge))
-                .Returns(new[] { "feat 1", "feat 2", "other feat" });
-
-            AssertArmorClass(10, 11, 11);
-        }
-
-        [Test]
-        public void DodgeBonusesStack()
-        {
-            var feat = new Feat();
-            feat.Name = "feat 1";
-            feat.Strength = 1;
-            feats.Add(feat);
-
-            var feat2 = new Feat();
-            feat2.Name = "feat 2";
-            feat2.Strength = 1;
-            feats.Add(feat2);
-
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.Dodge))
-                .Returns(new[] { "feat 1", "feat 2", "other feat" });
-
-            AssertArmorClass(10, 12, 12);
+            AssertArmorClass(14, 14, 10);
         }
 
         [Test]
@@ -351,7 +327,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.Deflection))
                 .Returns(new[] { "ring" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.Dodge))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.NaturalArmor))
                 .Returns(new[] { "feat 1" });
 
             equipment.Armor = new Item { Name = "armor" };
@@ -369,7 +345,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
 
             race.Size = RaceConstants.Sizes.Small;
 
-            AssertArmorClass(16, 18, 14);
+            AssertArmorClass(17, 18, 13);
         }
     }
 }

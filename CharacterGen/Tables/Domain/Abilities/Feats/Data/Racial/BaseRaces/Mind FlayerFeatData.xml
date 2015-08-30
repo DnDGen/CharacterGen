@@ -32,8 +32,8 @@
     <item>Save Bonus</item>
     <item></item>
     <item>0</item>
-    <item>0</item>
-    <item></item>
+    <item>6</item>
+    <item>Will</item>
     <item>0</item>
     <item></item>
     <item>0</item>
@@ -45,8 +45,8 @@
     <item>Save Bonus</item>
     <item></item>
     <item>0</item>
-    <item>0</item>
-    <item></item>
+    <item>2</item>
+    <item>Fortitude</item>
     <item>0</item>
     <item></item>
     <item>0</item>
@@ -58,8 +58,8 @@
     <item>Save Bonus</item>
     <item></item>
     <item>0</item>
-    <item>0</item>
-    <item></item>
+    <item>2</item>
+    <item>Reflex</item>
     <item>0</item>
     <item></item>
     <item>0</item>
@@ -71,8 +71,8 @@
     <item>Skill Bonus</item>
     <item></item>
     <item>0</item>
-    <item>0</item>
-    <item></item>
+    <item>8</item>
+    <item>Bluff</item>
     <item>0</item>
     <item></item>
     <item>0</item>
@@ -84,8 +84,8 @@
     <item>Skill Bonus</item>
     <item></item>
     <item>0</item>
-    <item>0</item>
-    <item></item>
+    <item>6</item>
+    <item>Concentration</item>
     <item>0</item>
     <item></item>
     <item>0</item>
@@ -97,8 +97,8 @@
     <item>Skill Bonus</item>
     <item></item>
     <item>0</item>
-    <item>0</item>
-    <item></item>
+    <item>8</item>
+    <item>Hide</item>
     <item>0</item>
     <item></item>
     <item>0</item>
@@ -110,8 +110,8 @@
     <item>Skill Bonus</item>
     <item></item>
     <item>0</item>
-    <item>0</item>
-    <item></item>
+    <item>4</item>
+    <item>Intimidate</item>
     <item>0</item>
     <item></item>
     <item>0</item>
@@ -119,12 +119,12 @@
     <item>0</item>
   </object>
   <object>
-    <name>Skill BonusMoveSilently</name>
+    <name>Skill BonusMove Silently</name>
     <item>Skill Bonus</item>
     <item></item>
     <item>0</item>
-    <item>0</item>
-    <item></item>
+    <item>8</item>
+    <item>Move Silently</item>
     <item>0</item>
     <item></item>
     <item>0</item>
@@ -136,8 +136,8 @@
     <item>Skill Bonus</item>
     <item></item>
     <item>0</item>
-    <item>0</item>
-    <item></item>
+    <item>8</item>
+    <item>Listen</item>
     <item>0</item>
     <item></item>
     <item>0</item>
@@ -149,7 +149,150 @@
     <item>Skill Bonus</item>
     <item></item>
     <item>0</item>
+    <item>4</item>
+    <item>Sense Motive</item>
     <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Skill BonusSpot</name>
+    <item>Skill Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>8</item>
+    <item>Spot</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Mind Blast</name>
+    <item>Mind Blast</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Natural Weapon</name>
+    <item>Natural Weapon</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Tentacles (x4)</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Spell-Like AbilityCharm monster</name>
+    <item>Spell-Like Ability</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Charm monster</item>
+    <item>0</item>
+    <item>At Will</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Spell-Like AbilityDetect thoughts</name>
+    <item>Spell-Like Ability</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Detect thoughts</item>
+    <item>0</item>
+    <item>At Will</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Spell-Like AbilityLevitate</name>
+    <item>Spell-Like Ability</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Levitate</item>
+    <item>0</item>
+    <item>At Will</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Spell-Like AbilityPlane shift</name>
+    <item>Spell-Like Ability</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Plane shift</item>
+    <item>0</item>
+    <item>At Will</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Spell-Like AbilitySuggestion</name>
+    <item>Spell-Like Ability</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Suggestion</item>
+    <item>0</item>
+    <item>At Will</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Improved Grab</name>
+    <item>Improved Grab</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Extract</name>
+    <item>Extract</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Attack Bonus</name>
+    <item>Attack Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>6</item>
     <item></item>
     <item>0</item>
     <item></item>

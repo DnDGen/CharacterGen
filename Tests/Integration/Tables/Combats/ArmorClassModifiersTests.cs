@@ -1,4 +1,5 @@
-﻿using CharacterGen.Tables;
+﻿using CharacterGen.Common.Abilities.Feats;
+using CharacterGen.Tables;
 using NUnit.Framework;
 using System;
 using TreasureGen.Common.Items;
@@ -18,13 +19,18 @@ namespace CharacterGen.Tests.Integration.Tables.Combats
         {
             var names = new[]
             {
-                GroupConstants.Deflection
+                GroupConstants.Deflection,
+                GroupConstants.NaturalArmor
             };
 
             AssertCollectionNames(names);
         }
 
         [TestCase(GroupConstants.Deflection, RingConstants.Protection)]
+        [TestCase(GroupConstants.NaturalArmor,
+            FeatConstants.NaturalArmor,
+            FeatConstants.ArmorBonus,
+            WondrousItemConstants.AmuletOfNaturalArmor)]
         public override void DistinctCollection(String name, params String[] collection)
         {
             base.DistinctCollection(name, collection);

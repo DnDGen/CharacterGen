@@ -5,4 +5,10 @@
     <name>Deflection</name>
     <item>Ring of Protection</item>
   </object>
+  <object>
+    <name>NaturalArmor</name>
+    <item>Amulet of natural armor</item>
+    <item>Armor Bonus</item>
+    <item>Natural Armor</item>
+  </object>
 </items>

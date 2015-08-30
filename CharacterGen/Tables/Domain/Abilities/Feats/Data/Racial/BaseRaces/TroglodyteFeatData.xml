@@ -6,7 +6,7 @@
         <item>Natural Armor</item>
         <item></item>
         <item>0</item>
-        <item>1</item>
+        <item>6</item>
         <item></item>
         <item>0</item>
         <item></item>
@@ -19,7 +19,7 @@
         <item>Darkvision</item>
         <item></item>
         <item>0</item>
-        <item>60</item>
+        <item>90</item>
         <item></item>
         <item>0</item>
         <item></item>
@@ -32,8 +32,8 @@
     <item>Save Bonus</item>
     <item></item>
     <item>0</item>
-    <item>0</item>
-    <item></item>
+    <item>3</item>
+    <item>Fortitude</item>
     <item>0</item>
     <item></item>
     <item>0</item>
@@ -45,8 +45,8 @@
     <item>Skill Bonus</item>
     <item></item>
     <item>0</item>
-    <item>0</item>
-    <item></item>
+    <item>4</item>
+    <item>Hide</item>
     <item>0</item>
     <item></item>
     <item>0</item>
@@ -59,7 +59,7 @@
     <item></item>
     <item>0</item>
     <item>0</item>
-    <item></item>
+    <item>Claw (x2)</item>
     <item>0</item>
     <item></item>
     <item>0</item>
@@ -72,7 +72,7 @@
     <item></item>
     <item>0</item>
     <item>0</item>
-    <item></item>
+    <item>Bite</item>
     <item>0</item>
     <item></item>
     <item>0</item>

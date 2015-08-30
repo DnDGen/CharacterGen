@@ -79,6 +79,7 @@
     <Compile Include="Combats\ArmorClass.cs" />
     <Compile Include="Combats\BaseAttack.cs" />
     <Compile Include="Combats\Combat.cs" />
+    <Compile Include="Combats\SavingThrowConstants.cs" />
     <Compile Include="Combats\SavingThrows.cs" />
     <Compile Include="Items\ProficiencyConstants.cs" />
     <Compile Include="Leadership.cs" />

@@ -1,0 +1,316 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+    <object>
+        <name>Natural Armor</name>
+        <item>Natural Armor</item>
+        <item></item>
+        <item>0</item>
+        <item>1</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+    </object>
+  <object>
+    <name>Natural WeaponBite</name>
+    <item>Natural Weapon</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Bite</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Natural WeaponClaw</name>
+    <item>Natural Weapon</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Claw (x2)</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+    <object>
+        <name>Smite Good</name>
+        <item>Smite Good</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+      <item>1</item>
+      <item>Day</item>
+      <item>0</item>
+    <item></item>
+    <item>0</item>
+    </object>
+    <object>
+        <name>Spell-Like AbilityDarkness</name>
+      <item>Spell-Like Ability</item>
+      <item></item>
+      <item>1</item>
+      <item>0</item>
+      <item>Darkness</item>
+      <item>3</item>
+      <item>Day</item>
+      <item>0</item>
+      <item>Wisdom,Intelligence</item>
+      <item>8</item>
+    </object>
+    <object>
+      <name>Spell-Like AbilityDesecrate</name>
+      <item>Spell-Like Ability</item>
+        <item></item>
+        <item>3</item>
+        <item>0</item>
+        <item>Desecrate</item>
+      <item>1</item>
+      <item>Day</item>
+      <item>0</item>
+      <item>Wisdom,Intelligence</item>
+      <item>8</item>
+    </object>
+    <object>
+      <name>Darkvision</name>
+      <item>Darkvision</item>
+      <item></item>
+      <item>0</item>
+      <item>60</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+    </object>
+  <object>
+    <name>Spell-Like AbilityUnholy blight</name>
+    <item>Spell-Like Ability</item>
+    <item></item>
+    <item>5</item>
+    <item>0</item>
+    <item>Unholy blight</item>
+    <item>1</item>
+    <item>Day</item>
+    <item>0</item>
+    <item>Wisdom,Intelligence</item>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Spell-Like AbilityPoison</name>
+    <item>Spell-Like Ability</item>
+    <item></item>
+    <item>7</item>
+    <item>0</item>
+    <item>Poison</item>
+    <item>3</item>
+    <item>Day</item>
+    <item>0</item>
+    <item>Wisdom,Intelligence</item>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Spell-Like AbilityContagion</name>
+    <item>Spell-Like Ability</item>
+    <item></item>
+    <item>9</item>
+    <item>0</item>
+    <item>Contagion</item>
+    <item>1</item>
+    <item>Day</item>
+    <item>0</item>
+    <item>Wisdom,Intelligence</item>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Spell-Like AbilityBlasphemy</name>
+    <item>Spell-Like Ability</item>
+    <item></item>
+    <item>11</item>
+    <item>0</item>
+    <item>Blasphemy</item>
+    <item>1</item>
+    <item>Day</item>
+    <item>0</item>
+    <item>Wisdom,Intelligence</item>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Spell-Like AbilityUnholy aura</name>
+    <item>Spell-Like Ability</item>
+    <item></item>
+    <item>13</item>
+    <item>0</item>
+    <item>Unholy aura</item>
+    <item>3</item>
+    <item>Day</item>
+    <item>0</item>
+    <item>Wisdom,Intelligence</item>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Spell-Like AbilityUnhallow</name>
+    <item>Spell-Like Ability</item>
+    <item></item>
+    <item>13</item>
+    <item>0</item>
+    <item>Unhallow</item>
+    <item>1</item>
+    <item>Day</item>
+    <item>0</item>
+    <item>Wisdom,Intelligence</item>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Spell-Like AbilityHorrid wilting</name>
+    <item>Spell-Like Ability</item>
+    <item></item>
+    <item>15</item>
+    <item>0</item>
+    <item>Horrid wilting</item>
+    <item>1</item>
+    <item>Day</item>
+    <item>0</item>
+    <item>Wisdom,Intelligence</item>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Spell-Like AbilitySummon monster IX</name>
+    <item>Spell-Like Ability</item>
+    <item></item>
+    <item>17</item>
+    <item>0</item>
+    <item>Summon monster IX (Fiends only)</item>
+    <item>1</item>
+    <item>Day</item>
+    <item>0</item>
+    <item>Wisdom,Intelligence</item>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Spell-Like AbilityDestruction</name>
+    <item>Spell-Like Ability</item>
+    <item></item>
+    <item>19</item>
+    <item>0</item>
+    <item>Destruction</item>
+    <item>1</item>
+    <item>Day</item>
+    <item>0</item>
+    <item>Wisdom,Intelligence</item>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Immune to Effect</name>
+    <item>Immune to Effect</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Poison</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>ResistanceAcid</name>
+    <item>Resistance</item>
+    <item></item>
+    <item>0</item>
+    <item>10</item>
+    <item>Acid</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>ResistanceCold</name>
+    <item>Resistance</item>
+    <item></item>
+    <item>0</item>
+    <item>10</item>
+    <item>Cold</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>ResistanceElectricity</name>
+    <item>Resistance</item>
+    <item></item>
+    <item>0</item>
+    <item>10</item>
+    <item>Electricity</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>ResistanceFire</name>
+    <item>Resistance</item>
+    <item></item>
+    <item>0</item>
+    <item>10</item>
+    <item>Fire</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Damage Reduction11-</name>
+    <item>Damage Reduction</item>
+    <item></item>
+    <item>1</item>
+    <item>5</item>
+    <item>Magic</item>
+    <item>0</item>
+    <item></item>
+    <item>11</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Damage Reduction12+</name>
+    <item>Damage Reduction</item>
+    <item></item>
+    <item>12</item>
+    <item>10</item>
+    <item>Magic</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Spell Resistance</name>
+    <item>Spell Resistance</item>
+    <item></item>
+    <item>0</item>
+    <item>10</item>
+    <item>Add creature's monster hit dice to strength (non-monsters add only 1)</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+</items>

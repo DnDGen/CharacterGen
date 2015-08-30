@@ -84,6 +84,8 @@
     <Compile Include="Abilities\Feats\Data\CharacterClasses\Classes\BardFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\CharacterClassFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\Classes\ClericFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\CharacterClasses\Domains\PlantFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\CharacterClasses\Domains\WarFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\Schools\ConjurationFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\Domains\DestructionFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\Classes\DruidFeatDataTests.cs" />
@@ -105,6 +107,7 @@
     <Compile Include="Abilities\Feats\Data\CharacterClasses\Domains\StrengthFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\Domains\SunFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\Classes\WizardFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\CharacterClasses\Schools\TransmutationFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\AasimarFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\BugbearFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\DeepDwarfFeatDataTests.cs" />
@@ -130,6 +133,8 @@
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\LizardfolkFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\MountainDwarfFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\OrcFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\Metaraces\HalfFiendFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\Metaraces\Species\BronzeFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\RacialFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\TallfellowHalflingFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\TieflingFeatDataTests.cs" />

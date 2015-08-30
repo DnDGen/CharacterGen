@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using CharacterGen.Common.CharacterClasses;
+﻿using CharacterGen.Common.CharacterClasses;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
 
 namespace CharacterGen.Tests.Integration.Stress
 {
@@ -36,11 +36,26 @@ namespace CharacterGen.Tests.Integration.Stress
 
         protected override void MakeAssertions()
         {
-            var alignment = GetNewAlignment();
-
-            var characterClass = CharacterClassGenerator.GenerateWith(alignment, LevelRandomizer, ClassNameRandomizer);
+            var characterClass = GenerateClass();
             Assert.That(classNames, Contains.Item(characterClass.ClassName));
             Assert.That(characterClass.Level, Is.Positive);
+        }
+
+        private CharacterClass GenerateClass()
+        {
+            var alignment = GetNewAlignment();
+            return CharacterClassGenerator.GenerateWith(alignment, LevelRandomizer, ClassNameRandomizer);
+        }
+
+        [Test]
+        public void PaladinHappens()
+        {
+            CharacterClass characterClass;
+
+            do characterClass = GenerateClass();
+            while (TestShouldKeepRunning() && characterClass.ClassName != CharacterClassConstants.Paladin);
+
+            Assert.That(characterClass.ClassName, Is.EqualTo(CharacterClassConstants.Paladin));
         }
     }
 }

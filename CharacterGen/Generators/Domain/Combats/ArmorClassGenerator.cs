@@ -29,12 +29,11 @@ namespace CharacterGen.Generators.Domain.Combats
             var sizeModifier = GetSizeModifier(race);
             var deflectionBonus = GetDeflectionBonus(equipment.Treasure.Items);
             var naturalArmorBonus = GetNaturalArmorBonus(equipment.Treasure.Items, feats, race);
-            var dodgeBonus = GetDodgeBonus(feats);
 
             var armorClass = new ArmorClass();
-            armorClass.Full = 10 + armorBonuses + sizeModifier + deflectionBonus + naturalArmorBonus + adjustedDexterityBonus + dodgeBonus;
+            armorClass.Full = 10 + armorBonuses + sizeModifier + deflectionBonus + naturalArmorBonus + adjustedDexterityBonus;
             armorClass.Touch = armorClass.Full - armorBonuses - naturalArmorBonus;
-            armorClass.FlatFooted = armorClass.Full - adjustedDexterityBonus - dodgeBonus;
+            armorClass.FlatFooted = armorClass.Full - adjustedDexterityBonus;
 
             return armorClass;
         }
@@ -92,24 +91,14 @@ namespace CharacterGen.Generators.Domain.Combats
             var itemsWithNaturalArmorBonuses = items.Where(i => thingsThatGrantNaturalArmorBonuses.Contains(i.Name));
             var itemNaturalArmorBonuses = itemsWithNaturalArmorBonuses.Select(i => i.Magic.Bonus);
 
-            var featsWithNaturalArmorBonuses = feats.Where(f => thingsThatGrantNaturalArmorBonuses.Contains(f.Name));
+            var featsWithNaturalArmorBonuses = feats.Where(f => thingsThatGrantNaturalArmorBonuses.Contains(f.Name) && String.IsNullOrEmpty(f.Focus));
             var featNaturalArmorBonuses = featsWithNaturalArmorBonuses.Select(f => f.Strength);
             var featNaturalArmorBonus = featNaturalArmorBonuses.Sum();
 
-            var naturalArmorBonuses = itemNaturalArmorBonuses.Union(new[] { featNaturalArmorBonus });
-            if (naturalArmorBonuses.Any() == false)
-                return 0;
+            if (itemNaturalArmorBonuses.Any() == false)
+                return featNaturalArmorBonus;
 
-            return naturalArmorBonuses.Max();
-        }
-
-        private Int32 GetDodgeBonus(IEnumerable<Feat> feats)
-        {
-            var dodgeBonuses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers,
-                GroupConstants.Dodge);
-            var dodgeFeats = feats.Where(f => dodgeBonuses.Contains(f.Name));
-
-            return dodgeFeats.Sum(f => f.Strength);
+            return featNaturalArmorBonus + itemNaturalArmorBonuses.Max();
         }
     }
 }
