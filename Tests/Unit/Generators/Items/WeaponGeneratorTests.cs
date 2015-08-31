@@ -51,16 +51,18 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             allProficientWeapons = new List<String>();
             race = new Race();
 
-            magicalWeapon.Name = "magical weapon";
-            magicalWeapon.ItemType = ItemTypeConstants.Weapon;
+            race.Size = "size";
+            magicalWeapon = CreateWeapon("magical weapon");
+            magicalWeapon.IsMagical = true;
             characterClass.Level = 9266;
             baseWeaponTypes.Add("base weapon");
+            weapons.Remove(magicalWeapon.Name);
             weapons.Add(baseWeaponTypes[0]);
             weapons.Add("different weapon");
             feats.Add(new Feat { Name = "all proficiency", Focus = ProficiencyConstants.All });
             proficiencyFeats.Add(feats[0].Name);
+            allProficientWeapons.Remove(magicalWeapon.Name);
             allProficientWeapons.Add(baseWeaponTypes[0]);
-            race.Size = "size";
 
             mockPercentileSelector.Setup(s => s.SelectFrom("Level9266Power")).Returns("power");
             mockMagicalWeaponGenerator.Setup(g => g.GenerateAtPower("power")).Returns(magicalWeapon);
@@ -377,6 +379,19 @@ namespace CharacterGen.Tests.Unit.Generators.Items
 
             var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
             Assert.That(weapon, Is.EqualTo(mundaneWeapon));
+        }
+
+        [Test]
+        public void MagicalWeaponDoesNotHaveToFitCharacter()
+        {
+            var wrongMagicalWeapon = CreateWeapon("wrong magical weapon");
+            mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateAtPower("power"))
+                .Returns(magicalWeapon).Returns(wrongMagicalWeapon);
+
+            race.Size = "other size";
+
+            var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
+            Assert.That(weapon, Is.EqualTo(magicalWeapon));
         }
     }
 }
