@@ -987,6 +987,40 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Feats\Data\CharacterClasses\Schools\DivinationFeatData.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\BaseRaces\Ages\Intuitive\IntuitiveOrcAges.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\BaseRaces\Ages\Intuitive\IntuitiveDoppelgangerAges.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Feats\Data\CharacterClasses\Domains\TravelFeatData.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\BaseRaces\Ages\Trained\TrainedLizardfolkAges.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\BaseRaces\Ages\Trained\TrainedLightfoot HalflingAges.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\BaseRaces\Heights\FemaleHalf-ElfHeights.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\BaseRaces\Heights\MaleTallfellow HalflingHeights.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\BaseRaces\Heights\FemaleDeep DwarfHeights.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\BaseRaces\Heights\MaleDrowHeights.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

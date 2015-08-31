@@ -32,6 +32,7 @@ namespace CharacterGen.Tests.Unit.Common.Magics
         [TestCase(SpellConstants.DispelEvil, "Dispel evil")]
         [TestCase(SpellConstants.EnlargePerson, "Enlarge person")]
         [TestCase(SpellConstants.FaerieFire, "Faerie fire")]
+        [TestCase(SpellConstants.FreedomOfMovement, "Freedom of movement")]
         [TestCase(SpellConstants.GaseousForm, "Gaseous form")]
         [TestCase(SpellConstants.GhostSound, "Ghost sound")]
         [TestCase(SpellConstants.Hallow, "Hallow")]

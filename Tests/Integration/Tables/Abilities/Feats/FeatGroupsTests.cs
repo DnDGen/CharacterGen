@@ -134,7 +134,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
                 SavingThrowConstants.Fortitude,
                 SavingThrowConstants.Reflex,
                 SavingThrowConstants.Will,
-                GroupConstants.SavingThrows
+                GroupConstants.SavingThrows,
+                GroupConstants.Initiative
             };
 
             AssertCollectionNames(names);
@@ -243,6 +244,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.IronWill)]
         [TestCase(GroupConstants.SavingThrows,
             FeatConstants.SaveBonus)]
+        [TestCase(GroupConstants.Initiative,
+            FeatConstants.ImprovedInitiative)]
         public override void DistinctCollection(String name, params String[] collection)
         {
             base.DistinctCollection(name, collection);

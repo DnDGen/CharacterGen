@@ -729,6 +729,10 @@
         <name>Illusion</name>
         <item>Skill Bonus</item>
     </object>
+  <object>
+    <name>Initiative</name>
+    <item>Improved Initiative</item>
+  </object>
     <object>
         <name>Knowledge</name>
         <item>Cast Spell Bonus</item>

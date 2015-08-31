@@ -29,6 +29,7 @@ namespace CharacterGen.Common.Magics
         public const String DispelEvil = "Dispel evil";
         public const String EnlargePerson = "Enlarge person";
         public const String FaerieFire = "Faerie fire";
+        public const String FreedomOfMovement = "Freedom of movement";
         public const String GaseousForm = "Gaseous form";
         public const String GhostSound = "Ghost sound";
         public const String Hallow = "Hallow";
