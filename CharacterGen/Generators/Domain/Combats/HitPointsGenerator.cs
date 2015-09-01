@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace CharacterGen.Generators.Domain.Combats
 {
-    public class HitPointsGenerator : IHitPointsGenerator
+    public class HitPointsGenerator : Generator, IHitPointsGenerator
     {
         private IDice dice;
         private IAdjustmentsSelector adjustmentsSelector;
@@ -38,8 +38,7 @@ namespace CharacterGen.Generators.Domain.Combats
             var toughness = feats.Where(f => f.Name == FeatConstants.Toughness);
             hitPoints += toughness.Sum(f => f.Strength);
 
-            var monsters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups,
-                GroupConstants.Monsters);
+            var monsters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters);
             if (monsters.Contains(race.BaseRace) == false)
                 return hitPoints;
 

@@ -12,7 +12,7 @@ using System.Linq;
 
 namespace CharacterGen.Generators.Domain.Abilities.Feats
 {
-    public class ClassFeatsGenerator : IClassFeatsGenerator
+    public class ClassFeatsGenerator : Generator, IClassFeatsGenerator
     {
         private IFeatsSelector featsSelector;
         private IFeatFocusGenerator featFocusGenerator;

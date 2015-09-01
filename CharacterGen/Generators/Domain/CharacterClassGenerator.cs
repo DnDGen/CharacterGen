@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using CharacterGen.Common.Alignments;
+﻿using CharacterGen.Common.Alignments;
 using CharacterGen.Common.CharacterClasses;
-using CharacterGen.Generators;
 using CharacterGen.Generators.Randomizers.CharacterClasses;
 using CharacterGen.Selectors;
 using CharacterGen.Tables;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CharacterGen.Generators.Domain
 {
-    public class CharacterClassGenerator : ICharacterClassGenerator
+    public class CharacterClassGenerator : Generator, ICharacterClassGenerator
     {
         private IAdjustmentsSelector adjustmentsSelector;
         private ICollectionsSelector collectionsSelector;

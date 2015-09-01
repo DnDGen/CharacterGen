@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using CharacterGen.Common.Abilities.Feats;
+﻿using CharacterGen.Common.Abilities.Feats;
 using CharacterGen.Common.Abilities.Skills;
 using CharacterGen.Common.Abilities.Stats;
 using CharacterGen.Common.CharacterClasses;
@@ -12,10 +9,13 @@ using CharacterGen.Generators.Abilities.Feats;
 using CharacterGen.Selectors;
 using CharacterGen.Selectors.Objects;
 using CharacterGen.Tables;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CharacterGen.Generators.Domain.Abilities.Feats
 {
-    public class AdditionalFeatsGenerator : IAdditionalFeatsGenerator
+    public class AdditionalFeatsGenerator : Generator, IAdditionalFeatsGenerator
     {
         private ICollectionsSelector collectionsSelector;
         private IFeatsSelector featsSelector;

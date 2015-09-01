@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using CharacterGen.Common.Races;
+﻿using CharacterGen.Common.Races;
 using CharacterGen.Generators.Abilities;
 using CharacterGen.Selectors;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CharacterGen.Generators.Domain.Abilities
 {
-    public class LanguageGenerator : ILanguageGenerator
+    public class LanguageGenerator : Generator, ILanguageGenerator
     {
         private ILanguageCollectionsSelector languagesSelector;
         private ICollectionsSelector collectionsSelector;

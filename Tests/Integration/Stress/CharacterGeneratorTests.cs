@@ -199,6 +199,8 @@ namespace CharacterGen.Tests.Integration.Stress
             while (TestShouldKeepRunning() && character.Leadership.Score == 0);
 
             Assert.That(character.Leadership.Score, Is.Positive);
+            Assert.That(character.Leadership.Cohort, Is.Not.Null);
+            Assert.That(character.Leadership.Followers, Is.Not.Empty);
         }
 
         [Test]
@@ -213,6 +215,8 @@ namespace CharacterGen.Tests.Integration.Stress
             while (TestShouldKeepRunning() && character.Leadership.Score > 0);
 
             Assert.That(character.Leadership.Score, Is.EqualTo(0));
+            Assert.That(character.Leadership.Cohort, Is.Null);
+            Assert.That(character.Leadership.Followers, Is.Empty);
         }
     }
 }

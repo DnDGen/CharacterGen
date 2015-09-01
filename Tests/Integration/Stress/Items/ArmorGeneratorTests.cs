@@ -67,7 +67,7 @@ namespace CharacterGen.Tests.Integration.Stress.Items
             var armor = new Item();
 
             do armor = GetArmor();
-            while (TestShouldKeepRunning() && armor.Attributes.Contains(AttributeConstants.Shield));
+            while (TestShouldKeepRunning() && (armor == null || armor.Attributes.Contains(AttributeConstants.Shield)));
 
             Assert.That(armor.Attributes, Is.Not.Contains(AttributeConstants.Shield));
         }
@@ -78,7 +78,7 @@ namespace CharacterGen.Tests.Integration.Stress.Items
             var armor = new Item();
 
             do armor = GetArmor();
-            while (TestShouldKeepRunning() && armor.Attributes.Contains(AttributeConstants.Shield) == false);
+            while (TestShouldKeepRunning() && (armor == null || armor.Attributes.Contains(AttributeConstants.Shield) == false));
 
             Assert.That(armor.Attributes, Contains.Item(AttributeConstants.Shield));
         }

@@ -12,7 +12,7 @@ using System.Linq;
 
 namespace CharacterGen.Generators.Domain.Combats
 {
-    public class SavingThrowsGenerator : ISavingThrowsGenerator
+    public class SavingThrowsGenerator : Generator, ISavingThrowsGenerator
     {
         private ICollectionsSelector collectionsSelector;
 

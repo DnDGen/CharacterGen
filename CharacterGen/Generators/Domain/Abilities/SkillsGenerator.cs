@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace CharacterGen.Generators.Domain.Abilities
 {
-    public class SkillsGenerator : ISkillsGenerator
+    public class SkillsGenerator : Generator, ISkillsGenerator
     {
         private ISkillSelector skillSelector;
         private ICollectionsSelector collectionsSelector;
@@ -98,7 +98,7 @@ namespace CharacterGen.Generators.Domain.Abilities
             if (race.BaseRace == RaceConstants.BaseRaces.Human)
                 perLevel++;
 
-            return perLevel * multiplier;
+            return Math.Max(perLevel * multiplier, characterClass.Level);
         }
 
         private IEnumerable<String> GetSkillCollection(Dictionary<String, Skill> skills, Int32 rankCap, IEnumerable<String> classSkills, IEnumerable<String> crossClassSkills)

@@ -12,7 +12,7 @@ using TreasureGen.Common.Items;
 
 namespace CharacterGen.Generators.Domain.Combats
 {
-    public class ArmorClassGenerator : IArmorClassGenerator
+    public class ArmorClassGenerator : Generator, IArmorClassGenerator
     {
         private ICollectionsSelector collectionsSelector;
         private IAdjustmentsSelector adjustmentsSelector;

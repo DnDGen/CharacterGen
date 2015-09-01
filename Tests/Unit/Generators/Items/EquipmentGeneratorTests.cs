@@ -378,6 +378,22 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         }
 
         [Test]
+        public void IfMeleeWeaponMustBeMeleeWeapon()
+        {
+            var wrongWeapon = new Item();
+            wrongWeapon.Attributes = new[] { "not melee" };
+
+            var meleeWeapon = new Item();
+            meleeWeapon.Attributes = new[] { AttributeConstants.Melee };
+            mockWeaponGenerator.SetupSequence(g => g.GenerateFrom(feats, characterClass, race))
+                .Returns(weapon).Returns(wrongWeapon).Returns(meleeWeapon);
+
+            var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
+            Assert.That(equipment.PrimaryHand, Is.EqualTo(weapon));
+            Assert.That(equipment.Treasure.Items, Contains.Item(meleeWeapon));
+        }
+
+        [Test]
         public void GenerateMeleeWeaponFromProficiencyAllFeats()
         {
             feats.Add(new Feat());

@@ -76,6 +76,7 @@
     <Compile Include="Combats\HitPointsGenerator.cs" />
     <Compile Include="Abilities\LanguageGenerator.cs" />
     <Compile Include="Combats\SavingThrowsGenerator.cs" />
+    <Compile Include="Generator.cs" />
     <Compile Include="Items\ArmorGenerator.cs" />
     <Compile Include="Items\EquipmentGenerator.cs" />
     <Compile Include="Items\WeaponGenerator.cs" />

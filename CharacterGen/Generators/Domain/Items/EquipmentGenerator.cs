@@ -13,7 +13,7 @@ using TreasureGen.Generators;
 
 namespace CharacterGen.Generators.Domain.Items
 {
-    public class EquipmentGenerator : IEquipmentGenerator
+    public class EquipmentGenerator : Generator, IEquipmentGenerator
     {
         private ICollectionsSelector collectionsSelector;
         private GearGenerator armorGenerator;
@@ -74,8 +74,9 @@ namespace CharacterGen.Generators.Domain.Items
                 if (equipment.OffHand == null)
                     equipment.OffHand = equipment.Armor;
 
-                do equipment.Armor = armorGenerator.GenerateFrom(feats, characterClass, race);
-                while (equipment.Armor.Attributes.Contains(AttributeConstants.Shield));
+                equipment.Armor = Generate<Item>(
+                    () => armorGenerator.GenerateFrom(feats, characterClass, race),
+                    a => a.Attributes.Contains(AttributeConstants.Shield) == false);
             }
 
             return equipment;
@@ -88,47 +89,41 @@ namespace CharacterGen.Generators.Domain.Items
 
         private Item GenerateAmmunition(IEnumerable<Feat> feats, CharacterClass characterClass, Race race, IEnumerable<String> baseWeaponTypes)
         {
-            Item ammunition;
-            var baseAmmunitionType = String.Empty;
+            return Generate<Item>(
+                () => weaponGenerator.GenerateFrom(feats, characterClass, race),
+                a => AmmunitionIsValid(a, baseWeaponTypes));
+        }
 
-            do
-            {
-                ammunition = weaponGenerator.GenerateFrom(feats, characterClass, race);
-                baseAmmunitionType = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, ammunition.Name).First();
-            }
-            while (ammunition.Attributes.Contains(AttributeConstants.Ammunition) == false || baseWeaponTypes.Contains(baseAmmunitionType) == false);
-
-            return ammunition;
+        private Boolean AmmunitionIsValid(Item ammunition, IEnumerable<String> baseWeaponTypes)
+        {
+            var baseAmmunitionType = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, ammunition.Name).First();
+            return ammunition.Attributes.Contains(AttributeConstants.Ammunition) && baseWeaponTypes.Contains(baseAmmunitionType);
         }
 
         private Item GenerateWeaponForAmmunition(IEnumerable<Feat> feats, CharacterClass characterClass, Race race, String baseAmmunitionType)
         {
-            Item weapon;
-            var baseWeaponTypes = Enumerable.Empty<String>();
+            return Generate<Item>(
+                () => weaponGenerator.GenerateFrom(feats, characterClass, race),
+                w => WeaponForAmmunitionIsValid(w, baseAmmunitionType));
+        }
 
-            do
-            {
-                weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
-                baseWeaponTypes = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, weapon.Name);
-            }
-            while (weapon.Attributes.Contains(AttributeConstants.Ammunition) || baseWeaponTypes.Contains(baseAmmunitionType) == false);
-
-            return weapon;
+        private Boolean WeaponForAmmunitionIsValid(Item weapon, String baseAmmunitionType)
+        {
+            var baseWeaponTypes = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, weapon.Name);
+            return weapon.Attributes.Contains(AttributeConstants.Ammunition) == false && baseWeaponTypes.Contains(baseAmmunitionType);
         }
 
         private Item GenerateOffHandWeapon(IEnumerable<Feat> feats, CharacterClass characterClass, Race race, IEnumerable<String> twoHandedWeapons)
         {
-            Item weapon;
-            var baseWeaponTypes = Enumerable.Empty<String>();
+            return Generate<Item>(
+                () => weaponGenerator.GenerateFrom(feats, characterClass, race),
+                w => OffHandWeaponIsValid(w, twoHandedWeapons));
+        }
 
-            do
-            {
-                weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
-                baseWeaponTypes = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, weapon.Name);
-            }
-            while (weapon.Attributes.Contains(AttributeConstants.Ammunition) || twoHandedWeapons.Contains(baseWeaponTypes.First()));
-
-            return weapon;
+        private Boolean OffHandWeaponIsValid(Item weapon, IEnumerable<String> twoHandedWeapons)
+        {
+            var baseWeaponTypes = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, weapon.Name);
+            return weapon.Attributes.Contains(AttributeConstants.Ammunition) == false && twoHandedWeapons.Contains(baseWeaponTypes.First()) == false;
         }
 
         private Item GenerateMeleeWeapon(IEnumerable<Feat> feats, CharacterClass characterClass, Race race)
@@ -141,7 +136,9 @@ namespace CharacterGen.Generators.Domain.Items
                 proficiencyFeats = feats.Where(f => proficiencyFeatNames.Contains(f.Name));
             }
 
-            return weaponGenerator.GenerateFrom(proficiencyFeats, characterClass, race);
+            return Generate<Item>(
+                () => weaponGenerator.GenerateFrom(proficiencyFeats, characterClass, race),
+                w => w.Attributes.Contains(AttributeConstants.Melee));
         }
     }
 }

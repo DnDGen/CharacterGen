@@ -14,7 +14,7 @@ using TreasureGen.Common.Items;
 
 namespace CharacterGen.Generators.Domain.Combats
 {
-    public class CombatGenerator : ICombatGenerator
+    public class CombatGenerator : Generator, ICombatGenerator
     {
         private IArmorClassGenerator armorClassGenerator;
         private IHitPointsGenerator hitPointsGenerator;
@@ -44,13 +44,11 @@ namespace CharacterGen.Generators.Domain.Combats
 
         private Int32 GetBaseAttackBonus(CharacterClass characterClass)
         {
-            var goodBaseAttacks = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups,
-                GroupConstants.GoodBaseAttack);
+            var goodBaseAttacks = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.GoodBaseAttack);
             if (goodBaseAttacks.Contains(characterClass.ClassName))
                 return GetGoodBaseAttackBonus(characterClass.Level);
 
-            var averageBaseAttacks = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups,
-                GroupConstants.AverageBaseAttack);
+            var averageBaseAttacks = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.AverageBaseAttack);
             if (averageBaseAttacks.Contains(characterClass.ClassName))
                 return GetAverageBaseAttackBonus(characterClass.Level);
 

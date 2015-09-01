@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace CharacterGen.Generators.Domain.Magics
 {
-    public class MagicGenerator : IMagicGenerator
+    public class MagicGenerator : Generator, IMagicGenerator
     {
         public Magic GenerateWith(CharacterClass characterClass, IEnumerable<Feat> feats, Equipment equipment)
         {

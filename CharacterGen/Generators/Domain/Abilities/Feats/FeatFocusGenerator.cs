@@ -13,7 +13,7 @@ using TreasureGen.Common.Items;
 
 namespace CharacterGen.Generators.Domain.Abilities.Feats
 {
-    public class FeatFocusGenerator : IFeatFocusGenerator
+    public class FeatFocusGenerator : Generator, IFeatFocusGenerator
     {
         private ICollectionsSelector collectionsSelector;
 

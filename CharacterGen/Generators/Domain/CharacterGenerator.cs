@@ -22,7 +22,7 @@ using System.Linq;
 
 namespace CharacterGen.Generators.Domain
 {
-    public class CharacterGenerator : ICharacterGenerator
+    public class CharacterGenerator : Generator, ICharacterGenerator
     {
         private IAlignmentGenerator alignmentGenerator;
         private ICharacterClassGenerator characterClassGenerator;
@@ -130,10 +130,9 @@ namespace CharacterGen.Generators.Domain
         private Alignment GenerateAlignment(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classNameRandomizer,
             ILevelRandomizer levelRandomizer, IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer)
         {
-            Alignment alignment;
-
-            do alignment = alignmentGenerator.GenerateWith(alignmentRandomizer);
-            while (randomizerVerifier.VerifyAlignmentCompatibility(alignment, classNameRandomizer, levelRandomizer, baseRaceRandomizer, metaraceRandomizer) == false);
+            var alignment = Generate<Alignment>(
+                () => alignmentGenerator.GenerateWith(alignmentRandomizer),
+                a => randomizerVerifier.VerifyAlignmentCompatibility(a, classNameRandomizer, levelRandomizer, baseRaceRandomizer, metaraceRandomizer));
 
             return alignment;
         }
@@ -141,10 +140,9 @@ namespace CharacterGen.Generators.Domain
         private CharacterClass GenerateCharacterClass(IClassNameRandomizer classNameRandomizer, ILevelRandomizer levelRandomizer,
             Alignment alignment, IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer)
         {
-            CharacterClass characterClass;
-
-            do characterClass = characterClassGenerator.GenerateWith(alignment, levelRandomizer, classNameRandomizer);
-            while (randomizerVerifier.VerifyCharacterClassCompatibility(alignment.Goodness, characterClass, baseRaceRandomizer, metaraceRandomizer) == false);
+            var characterClass = Generate<CharacterClass>(
+                () => characterClassGenerator.GenerateWith(alignment, levelRandomizer, classNameRandomizer),
+                c => randomizerVerifier.VerifyCharacterClassCompatibility(alignment.Goodness, c, baseRaceRandomizer, metaraceRandomizer));
 
             return characterClass;
         }
@@ -152,10 +150,9 @@ namespace CharacterGen.Generators.Domain
         private Race GenerateRace(IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer, Dictionary<String, Int32> levelAdjustments,
             Alignment alignment, CharacterClass characterClass)
         {
-            Race race;
-
-            do race = raceGenerator.GenerateWith(alignment, characterClass, baseRaceRandomizer, metaraceRandomizer);
-            while (characterClass.Level + levelAdjustments[race.BaseRace] + levelAdjustments[race.Metarace] <= 0);
+            var race = Generate<Race>(
+                () => raceGenerator.GenerateWith(alignment, characterClass, baseRaceRandomizer, metaraceRandomizer),
+                r => characterClass.Level + levelAdjustments[r.BaseRace] + levelAdjustments[r.Metarace] > 0);
 
             return race;
         }
@@ -269,8 +266,9 @@ namespace CharacterGen.Generators.Domain
             setLevelRandomizer.SetLevel = level;
             var allowedAlignments = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AlignmentGroups, leader.Alignment.ToString());
 
-            do setAlignmentRandomizer.SetAlignment = alignmentGenerator.GenerateWith(alignmentRandomizer);
-            while (allowedAlignments.Contains(setAlignmentRandomizer.SetAlignment.ToString()) == false);
+            setAlignmentRandomizer.SetAlignment = Generate<Alignment>(
+                () => alignmentGenerator.GenerateWith(alignmentRandomizer),
+                a => allowedAlignments.Contains(a.ToString()));
 
             return GenerateCharacter(setAlignmentRandomizer, anyClassNameRandomizer, setLevelRandomizer, anyBaseRaceRandomizer, anyMetaraceRandomizer,
                 rawStatsRandomizer);

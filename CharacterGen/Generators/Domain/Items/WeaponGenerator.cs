@@ -14,7 +14,7 @@ using TreasureGen.Generators.Items.Mundane;
 
 namespace CharacterGen.Generators.Domain.Items
 {
-    public class WeaponGenerator : GearGenerator
+    public class WeaponGenerator : Generator, GearGenerator
     {
         private ICollectionsSelector collectionsSelector;
         private IPercentileSelector percentileSelector;
@@ -39,12 +39,7 @@ namespace CharacterGen.Generators.Domain.Items
             if (allowedWeapons.Any() == false)
                 throw new Exception("There are no valid weapons, which should never happen.");
 
-            Item weapon;
-
-            do weapon = GenerateWeapon(power);
-            while (WeaponIsValid(weapon, allowedWeapons, race) == false);
-
-            return weapon;
+            return Generate<Item>(() => GenerateWeapon(power), w => WeaponIsValid(w, allowedWeapons, race));
         }
 
         private Boolean WeaponIsValid(Item weapon, IEnumerable<String> allowedWeapons, Race race)
