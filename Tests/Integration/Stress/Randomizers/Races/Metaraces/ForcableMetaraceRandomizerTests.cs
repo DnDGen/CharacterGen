@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using CharacterGen.Common.Races;
+﻿using CharacterGen.Common.Races;
 using CharacterGen.Generators.Randomizers.Races;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
 
 namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
 {
@@ -46,10 +46,9 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
         protected void AssertUnforcedMetarace()
         {
             ForcableMetaraceRandomizer.ForceMetarace = false;
-            var metarace = String.Empty;
 
-            do metarace = GenerateMetarace();
-            while (TestShouldKeepRunning() && metarace != RaceConstants.Metaraces.None);
+            var metarace = Generate(GenerateMetarace,
+                m => m == RaceConstants.Metaraces.None);
 
             Assert.That(metarace, Is.EqualTo(RaceConstants.Metaraces.None));
         }

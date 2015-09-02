@@ -49,10 +49,8 @@ namespace CharacterGen.Tests.Integration.Stress.Items
         [Test]
         public void MeleeWeaponHappens()
         {
-            var weapon = new Item();
-
-            do weapon = GetWeapon();
-            while (TestShouldKeepRunning() && weapon.Attributes.Contains(AttributeConstants.Melee) == false);
+            var weapon = Generate<Item>(GetWeapon,
+                w => w.Attributes.Contains(AttributeConstants.Melee));
 
             Assert.That(weapon.Attributes, Contains.Item(AttributeConstants.Melee));
         }
@@ -60,10 +58,8 @@ namespace CharacterGen.Tests.Integration.Stress.Items
         [Test]
         public void RangedWeaponHappens()
         {
-            var weapon = new Item();
-
-            do weapon = GetWeapon();
-            while (TestShouldKeepRunning() && weapon.Attributes.Contains(AttributeConstants.Melee));
+            var weapon = Generate<Item>(GetWeapon,
+                w => w.Attributes.Contains(AttributeConstants.Melee) == false);
 
             Assert.That(weapon.Attributes, Contains.Item(AttributeConstants.Ranged));
         }
@@ -71,10 +67,8 @@ namespace CharacterGen.Tests.Integration.Stress.Items
         [Test]
         public void MundaneWeaponHappens()
         {
-            var weapon = new Item();
-
-            do weapon = GetWeapon();
-            while (TestShouldKeepRunning() && weapon.IsMagical);
+            var weapon = Generate<Item>(GetWeapon,
+                w => w.IsMagical == false);
 
             Assert.That(weapon.IsMagical, Is.False);
         }
@@ -82,10 +76,8 @@ namespace CharacterGen.Tests.Integration.Stress.Items
         [Test]
         public void MagicalWeaponHappens()
         {
-            var weapon = new Item();
-
-            do weapon = GetWeapon();
-            while (TestShouldKeepRunning() && weapon.IsMagical == false);
+            var weapon = Generate<Item>(GetWeapon,
+                w => w.IsMagical);
 
             Assert.That(weapon.IsMagical, Is.True);
         }
@@ -93,10 +85,8 @@ namespace CharacterGen.Tests.Integration.Stress.Items
         [Test]
         public void UncursedWeaponHappens()
         {
-            var weapon = new Item();
-
-            do weapon = GetWeapon();
-            while (TestShouldKeepRunning() && weapon.Magic.Curse.Length > 0);
+            var weapon = Generate<Item>(GetWeapon,
+                w => String.IsNullOrEmpty(w.Magic.Curse));
 
             Assert.That(weapon.Magic.Curse, Is.Empty);
         }
@@ -104,10 +94,8 @@ namespace CharacterGen.Tests.Integration.Stress.Items
         [Test]
         public void CursedWeaponHappens()
         {
-            var weapon = new Item();
-
-            do weapon = GetWeapon();
-            while (TestShouldKeepRunning() && weapon.Magic.Curse.Length == 0);
+            var weapon = Generate<Item>(GetWeapon,
+                w => String.IsNullOrEmpty(w.Magic.Curse) == false);
 
             Assert.That(weapon.Magic.Curse, Is.Not.Empty);
         }
@@ -115,10 +103,8 @@ namespace CharacterGen.Tests.Integration.Stress.Items
         [Test]
         public void SpecificCursedWeaponHappens()
         {
-            var weapon = new Item();
-
-            do weapon = GetWeapon();
-            while (TestShouldKeepRunning() && (weapon.Magic.Curse.Length == 0 || weapon.Attributes.Contains(AttributeConstants.Specific) == false));
+            var weapon = Generate<Item>(GetWeapon,
+                w => String.IsNullOrEmpty(w.Magic.Curse) == false && w.Attributes.Contains(AttributeConstants.Specific));
 
             Assert.That(weapon.Magic.Curse, Is.Not.Empty);
             Assert.That(weapon.Magic.Curse, Contains.Item(AttributeConstants.Specific));
@@ -127,10 +113,8 @@ namespace CharacterGen.Tests.Integration.Stress.Items
         [Test]
         public void IntelligentWeaponHappens()
         {
-            var weapon = new Item();
-
-            do weapon = GetWeapon();
-            while (TestShouldKeepRunning() && weapon.Magic.Intelligence.Ego == 0);
+            var weapon = Generate<Item>(GetWeapon,
+                w => w.Magic.Intelligence.Ego > 0);
 
             Assert.That(weapon.Magic.Intelligence.Ego, Is.Positive);
         }
@@ -138,10 +122,8 @@ namespace CharacterGen.Tests.Integration.Stress.Items
         [Test]
         public void NonIntelligentWeaponHappens()
         {
-            var weapon = new Item();
-
-            do weapon = GetWeapon();
-            while (TestShouldKeepRunning() && weapon.Magic.Intelligence.Ego > 0);
+            var weapon = Generate<Item>(GetWeapon,
+                w => w.Magic.Intelligence.Ego == 0);
 
             Assert.That(weapon.Magic.Intelligence.Ego, Is.EqualTo(0));
         }

@@ -40,10 +40,8 @@ namespace CharacterGen.Tests.Integration.Stress
         [Test]
         public void MetaraceHappens()
         {
-            var race = new Race();
-
-            do race = GenerateRace();
-            while (TestShouldKeepRunning() && race.Metarace == RaceConstants.Metaraces.None);
+            var race = Generate<Race>(GenerateRace,
+                r => r.Metarace != RaceConstants.Metaraces.None);
 
             Assert.That(race.Metarace, Is.Not.EqualTo(RaceConstants.Metaraces.None));
         }
@@ -51,10 +49,8 @@ namespace CharacterGen.Tests.Integration.Stress
         [Test]
         public void MetaraceDoesNotHappen()
         {
-            var race = new Race();
-
-            do race = GenerateRace();
-            while (TestShouldKeepRunning() && race.Metarace != RaceConstants.Metaraces.None);
+            var race = Generate<Race>(GenerateRace,
+                r => r.Metarace == RaceConstants.Metaraces.None);
 
             Assert.That(race.Metarace, Is.EqualTo(RaceConstants.Metaraces.None));
         }
@@ -62,10 +58,8 @@ namespace CharacterGen.Tests.Integration.Stress
         [Test]
         public void WingsHappen()
         {
-            var race = new Race();
-
-            do race = GenerateRace();
-            while (TestShouldKeepRunning() && !race.HasWings);
+            var race = Generate<Race>(GenerateRace,
+                r => r.HasWings);
 
             Assert.That(race.HasWings, Is.True);
             Assert.That(race.AerialSpeed, Is.Positive);
@@ -74,10 +68,8 @@ namespace CharacterGen.Tests.Integration.Stress
         [Test]
         public void WingsDoNotHappen()
         {
-            var race = new Race();
-
-            do race = GenerateRace();
-            while (TestShouldKeepRunning() && race.HasWings);
+            var race = Generate<Race>(GenerateRace,
+                r => r.HasWings == false);
 
             Assert.That(race.HasWings, Is.False);
             Assert.That(race.AerialSpeed, Is.EqualTo(0));
@@ -86,10 +78,8 @@ namespace CharacterGen.Tests.Integration.Stress
         [Test]
         public void MaleHappens()
         {
-            var race = new Race();
-
-            do race = GenerateRace();
-            while (TestShouldKeepRunning() && !race.Male);
+            var race = Generate<Race>(GenerateRace,
+                r => r.Male);
 
             Assert.That(race.Male, Is.True);
         }
@@ -97,10 +87,8 @@ namespace CharacterGen.Tests.Integration.Stress
         [Test]
         public void FemaleHappens()
         {
-            var race = new Race();
-
-            do race = GenerateRace();
-            while (TestShouldKeepRunning() && race.Male);
+            var race = Generate<Race>(GenerateRace,
+                r => r.Male == false);
 
             Assert.That(race.Male, Is.False);
         }
@@ -111,10 +99,8 @@ namespace CharacterGen.Tests.Integration.Stress
             var forcableRandomizer = MetaraceRandomizer as IForcableMetaraceRandomizer;
             forcableRandomizer.ForceMetarace = true;
 
-            var race = new Race();
-
-            do race = GenerateRace();
-            while (TestShouldKeepRunning() && String.IsNullOrEmpty(race.MetaraceSpecies));
+            var race = Generate<Race>(GenerateRace,
+                r => String.IsNullOrEmpty(r.MetaraceSpecies) == false);
 
             Assert.That(race.MetaraceSpecies, Is.Not.Empty);
         }
@@ -125,10 +111,8 @@ namespace CharacterGen.Tests.Integration.Stress
             var forcableRandomizer = MetaraceRandomizer as IForcableMetaraceRandomizer;
             forcableRandomizer.ForceMetarace = true;
 
-            var race = new Race();
-
-            do race = GenerateRace();
-            while (TestShouldKeepRunning() && !String.IsNullOrEmpty(race.MetaraceSpecies));
+            var race = Generate<Race>(GenerateRace,
+                r => String.IsNullOrEmpty(r.MetaraceSpecies));
 
             Assert.That(race.MetaraceSpecies, Is.Empty);
         }

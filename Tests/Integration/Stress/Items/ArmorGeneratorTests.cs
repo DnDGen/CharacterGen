@@ -53,10 +53,8 @@ namespace CharacterGen.Tests.Integration.Stress.Items
         [Test]
         public void ArmorDoesNotHappen()
         {
-            var armor = new Item();
-
-            do armor = GetArmor();
-            while (TestShouldKeepRunning() && armor != null);
+            var armor = Generate<Item>(GetArmor,
+                a => a == null);
 
             Assert.That(armor, Is.Null);
         }
@@ -64,10 +62,8 @@ namespace CharacterGen.Tests.Integration.Stress.Items
         [Test]
         public void ArmorHappens()
         {
-            var armor = new Item();
-
-            do armor = GetArmor();
-            while (TestShouldKeepRunning() && (armor == null || armor.Attributes.Contains(AttributeConstants.Shield)));
+            var armor = Generate<Item>(GetArmor,
+                a => a != null && a.Attributes.Contains(AttributeConstants.Shield) == false);
 
             Assert.That(armor.Attributes, Is.Not.Contains(AttributeConstants.Shield));
         }
@@ -75,10 +71,8 @@ namespace CharacterGen.Tests.Integration.Stress.Items
         [Test]
         public void ShieldHappens()
         {
-            var armor = new Item();
-
-            do armor = GetArmor();
-            while (TestShouldKeepRunning() && (armor == null || armor.Attributes.Contains(AttributeConstants.Shield) == false));
+            var armor = Generate<Item>(GetArmor,
+                a => a != null && a.Attributes.Contains(AttributeConstants.Shield));
 
             Assert.That(armor.Attributes, Contains.Item(AttributeConstants.Shield));
         }
@@ -86,10 +80,8 @@ namespace CharacterGen.Tests.Integration.Stress.Items
         [Test]
         public void MundaneArmorHappens()
         {
-            var armor = new Item();
-
-            do armor = GetArmor();
-            while (TestShouldKeepRunning() && armor.IsMagical);
+            var armor = Generate<Item>(GetArmor,
+                a => a != null && a.IsMagical == false);
 
             Assert.That(armor.IsMagical, Is.False);
         }
@@ -97,10 +89,8 @@ namespace CharacterGen.Tests.Integration.Stress.Items
         [Test]
         public void MagicalArmorHappens()
         {
-            var armor = new Item();
-
-            do armor = GetArmor();
-            while (TestShouldKeepRunning() && armor.IsMagical == false);
+            var armor = Generate<Item>(GetArmor,
+                a => a != null && a.IsMagical);
 
             Assert.That(armor.IsMagical, Is.True);
         }
@@ -108,10 +98,8 @@ namespace CharacterGen.Tests.Integration.Stress.Items
         [Test]
         public void UncursedArmorHappens()
         {
-            var armor = new Item();
-
-            do armor = GetArmor();
-            while (TestShouldKeepRunning() && armor.Magic.Curse.Length > 0);
+            var armor = Generate<Item>(GetArmor,
+                a => a != null && String.IsNullOrEmpty(a.Magic.Curse));
 
             Assert.That(armor.Magic.Curse, Is.Empty);
         }
@@ -119,10 +107,8 @@ namespace CharacterGen.Tests.Integration.Stress.Items
         [Test]
         public void CursedArmorHappens()
         {
-            var armor = new Item();
-
-            do armor = GetArmor();
-            while (TestShouldKeepRunning() && armor.Magic.Curse.Length == 0);
+            var armor = Generate<Item>(GetArmor,
+                a => a != null && String.IsNullOrEmpty(a.Magic.Curse) == false);
 
             Assert.That(armor.Magic.Curse, Is.Not.Empty);
         }
@@ -130,10 +116,8 @@ namespace CharacterGen.Tests.Integration.Stress.Items
         [Test]
         public void SpecificCursedArmorHappens()
         {
-            var armor = new Item();
-
-            do armor = GetArmor();
-            while (TestShouldKeepRunning() && (armor.Magic.Curse.Length == 0 || armor.Attributes.Contains(AttributeConstants.Specific) == false));
+            var armor = Generate<Item>(GetArmor,
+                a => a != null && String.IsNullOrEmpty(a.Magic.Curse) == false && a.Attributes.Contains(AttributeConstants.Specific));
 
             Assert.That(armor.Magic.Curse, Is.Not.Empty);
             Assert.That(armor.Magic.Curse, Contains.Item(AttributeConstants.Specific));
@@ -142,10 +126,8 @@ namespace CharacterGen.Tests.Integration.Stress.Items
         [Test]
         public void IntelligentArmorHappens()
         {
-            var armor = new Item();
-
-            do armor = GetArmor();
-            while (TestShouldKeepRunning() && armor.Magic.Intelligence.Ego == 0);
+            var armor = Generate<Item>(GetArmor,
+                a => a != null && a.Magic.Intelligence.Ego > 0);
 
             Assert.That(armor.Magic.Intelligence.Ego, Is.Positive);
         }
@@ -153,10 +135,8 @@ namespace CharacterGen.Tests.Integration.Stress.Items
         [Test]
         public void NonIntelligentArmorHappens()
         {
-            var armor = new Item();
-
-            do armor = GetArmor();
-            while (TestShouldKeepRunning() && armor.Magic.Intelligence.Ego > 0);
+            var armor = Generate<Item>(GetArmor,
+                a => a != null && a.Magic.Intelligence.Ego == 0);
 
             Assert.That(armor.Magic.Intelligence.Ego, Is.EqualTo(0));
         }

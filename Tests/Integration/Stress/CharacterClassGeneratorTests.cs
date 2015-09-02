@@ -4,33 +4,13 @@ using CharacterGen.Generators.Randomizers.Alignments;
 using CharacterGen.Generators.Randomizers.CharacterClasses;
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
+using System.Linq;
 
 namespace CharacterGen.Tests.Integration.Stress
 {
     [TestFixture]
     public class CharacterClassGeneratorTests : StressTests
     {
-        private IEnumerable<String> classNames;
-
-        [SetUp]
-        public void Setup()
-        {
-            classNames = new[] {
-                CharacterClassConstants.Barbarian,
-                CharacterClassConstants.Bard,
-                CharacterClassConstants.Cleric,
-                CharacterClassConstants.Druid,
-                CharacterClassConstants.Fighter,
-                CharacterClassConstants.Monk,
-                CharacterClassConstants.Paladin,
-                CharacterClassConstants.Ranger,
-                CharacterClassConstants.Rogue,
-                CharacterClassConstants.Sorcerer,
-                CharacterClassConstants.Wizard
-            };
-        }
-
         [TestCase("CharacterClassGenerator")]
         public override void Stress(String stressSubject)
         {
@@ -40,7 +20,7 @@ namespace CharacterGen.Tests.Integration.Stress
         protected override void MakeAssertions()
         {
             var characterClass = GenerateClass();
-            Assert.That(classNames, Contains.Item(characterClass.ClassName));
+            Assert.That(characterClass.ClassName, Is.Not.Empty);
             Assert.That(characterClass.Level, Is.Positive);
         }
 
@@ -53,10 +33,8 @@ namespace CharacterGen.Tests.Integration.Stress
         [Test]
         public void PaladinHappens()
         {
-            CharacterClass characterClass;
-
-            do characterClass = GenerateClass();
-            while (TestShouldKeepRunning() && characterClass.ClassName != CharacterClassConstants.Paladin);
+            var characterClass = Generate<CharacterClass>(GenerateClass,
+                c => c.ClassName == CharacterClassConstants.Paladin);
 
             Assert.That(characterClass.ClassName, Is.EqualTo(CharacterClassConstants.Paladin));
         }
@@ -70,10 +48,8 @@ namespace CharacterGen.Tests.Integration.Stress
 
             AlignmentRandomizer = setAlignmentRandomizer;
 
-            CharacterClass characterClass;
-
-            do characterClass = GenerateClass();
-            while (TestShouldKeepRunning() && characterClass.ClassName != CharacterClassConstants.Paladin);
+            var characterClass = Generate<CharacterClass>(GenerateClass,
+                c => c.ClassName == CharacterClassConstants.Paladin);
 
             Assert.That(characterClass.ClassName, Is.EqualTo(CharacterClassConstants.Paladin));
         }
@@ -92,12 +68,46 @@ namespace CharacterGen.Tests.Integration.Stress
 
             ClassNameRandomizer = setClassRandomizer;
 
-            CharacterClass characterClass;
-
-            do characterClass = GenerateClass();
-            while (TestShouldKeepRunning() && characterClass.ClassName != CharacterClassConstants.Paladin);
+            var characterClass = Generate<CharacterClass>(GenerateClass,
+                c => c.ClassName == CharacterClassConstants.Paladin);
 
             Assert.That(characterClass.ClassName, Is.EqualTo(CharacterClassConstants.Paladin));
+        }
+
+        [Test]
+        public void SpecialistFieldsHappen()
+        {
+            var characterClass = Generate<CharacterClass>(GenerateClass,
+                c => c.SpecialistFields.Any());
+
+            Assert.That(characterClass.SpecialistFields, Is.Not.Empty);
+        }
+
+        [Test]
+        public void SpecialistFieldsDoNotHappen()
+        {
+            var characterClass = Generate<CharacterClass>(GenerateClass,
+                c => c.SpecialistFields.Any() == false);
+
+            Assert.That(characterClass.SpecialistFields, Is.Empty);
+        }
+
+        [Test]
+        public void ProhibitedFieldsHappen()
+        {
+            var characterClass = Generate<CharacterClass>(GenerateClass,
+                c => c.ProhibitedFields.Any());
+
+            Assert.That(characterClass.ProhibitedFields, Is.Not.Empty);
+        }
+
+        [Test]
+        public void ProhibitedFieldsDoNotHappen()
+        {
+            var characterClass = Generate<CharacterClass>(GenerateClass,
+                c => c.ProhibitedFields.Any() == false);
+
+            Assert.That(characterClass.ProhibitedFields, Is.Empty);
         }
     }
 }

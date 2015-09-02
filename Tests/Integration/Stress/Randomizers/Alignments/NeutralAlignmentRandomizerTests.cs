@@ -32,10 +32,9 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Alignments
         [Test]
         public void NeutralGoodnessHappens()
         {
-            var alignment = new Alignment();
-
-            do alignment = AlignmentRandomizer.Randomize();
-            while (TestShouldKeepRunning() && alignment.Goodness != AlignmentConstants.Neutral);
+            var alignment = Generate(
+                () => AlignmentRandomizer.Randomize(),
+                a => a.Goodness == AlignmentConstants.Neutral);
 
             Assert.That(alignment.Goodness, Is.EqualTo(AlignmentConstants.Neutral));
         }
@@ -43,10 +42,9 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Alignments
         [Test]
         public void NeutralLawfulnessHappens()
         {
-            var alignment = new Alignment();
-
-            do alignment = AlignmentRandomizer.Randomize();
-            while (TestShouldKeepRunning() && alignment.Lawfulness != AlignmentConstants.Neutral);
+            var alignment = Generate(
+                () => AlignmentRandomizer.Randomize(),
+                a => a.Lawfulness == AlignmentConstants.Neutral);
 
             Assert.That(alignment.Lawfulness, Is.EqualTo(AlignmentConstants.Neutral));
         }
@@ -54,10 +52,9 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Alignments
         [Test]
         public void TrueNeutralHappens()
         {
-            var alignment = new Alignment();
-
-            do alignment = AlignmentRandomizer.Randomize();
-            while (TestShouldKeepRunning() && (alignment.Lawfulness != AlignmentConstants.Neutral || alignment.Goodness != AlignmentConstants.Neutral));
+            var alignment = Generate(
+                () => AlignmentRandomizer.Randomize(),
+                a => a.Goodness == AlignmentConstants.Neutral && a.Lawfulness == AlignmentConstants.Neutral);
 
             Assert.That(alignment.Lawfulness, Is.EqualTo(AlignmentConstants.Neutral));
             Assert.That(alignment.Goodness, Is.EqualTo(AlignmentConstants.Neutral));

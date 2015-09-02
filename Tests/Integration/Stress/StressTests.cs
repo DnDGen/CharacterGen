@@ -82,7 +82,17 @@ namespace CharacterGen.Tests.Integration.Stress
 
         protected abstract void MakeAssertions();
 
-        protected Boolean TestShouldKeepRunning()
+        protected T Generate<T>(Func<T> generate, Func<T, Boolean> isValid)
+        {
+            T generatedObject;
+
+            do generatedObject = generate();
+            while (TestShouldKeepRunning() && isValid(generatedObject) == false);
+
+            return generatedObject;
+        }
+
+        private Boolean TestShouldKeepRunning()
         {
             iterations++;
             return Stopwatch.Elapsed.TotalSeconds < TimeLimitInSeconds && iterations < ConfidentIterations;
@@ -90,25 +100,23 @@ namespace CharacterGen.Tests.Integration.Stress
 
         protected Alignment GetNewAlignment()
         {
-            var alignment = new Alignment();
+            var compatible = RandomizerVerifier.VerifyCompatibility(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer);
 
-            if (!RandomizerVerifier.VerifyCompatibility(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer))
+            if (compatible == false)
                 throw new IncompatibleRandomizersException();
 
-            do alignment = AlignmentGenerator.GenerateWith(AlignmentRandomizer);
-            while (!RandomizerVerifier.VerifyAlignmentCompatibility(alignment, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
-                MetaraceRandomizer));
+            var alignment = Generate(
+                () => AlignmentGenerator.GenerateWith(AlignmentRandomizer),
+                a => RandomizerVerifier.VerifyAlignmentCompatibility(a, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer));
 
             return alignment;
         }
 
         protected CharacterClass GetNewCharacterClass(Alignment alignment)
         {
-            var characterClass = new CharacterClass();
-
-            do characterClass = CharacterClassGenerator.GenerateWith(alignment, LevelRandomizer, ClassNameRandomizer);
-            while (!RandomizerVerifier.VerifyCharacterClassCompatibility(alignment.Goodness, characterClass,
-                BaseRaceRandomizer, MetaraceRandomizer));
+            var characterClass = Generate(
+                () => CharacterClassGenerator.GenerateWith(alignment, LevelRandomizer, ClassNameRandomizer),
+                c => RandomizerVerifier.VerifyCharacterClassCompatibility(alignment.Goodness, c, BaseRaceRandomizer, MetaraceRandomizer));
 
             return characterClass;
         }

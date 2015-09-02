@@ -51,10 +51,8 @@ namespace CharacterGen.Tests.Integration.Stress.Items
         [Test]
         public void CoinHappens()
         {
-            var equipment = new Equipment();
-
-            do equipment = GetEquipment();
-            while (TestShouldKeepRunning() && equipment.Treasure.Coin.Quantity == 0);
+            var equipment = Generate(GetEquipment,
+                e => e.Treasure.Coin.Quantity > 0);
 
             Assert.That(equipment.Treasure.Coin.Quantity, Is.Positive);
         }
@@ -62,10 +60,8 @@ namespace CharacterGen.Tests.Integration.Stress.Items
         [Test]
         public void GoodsHappen()
         {
-            var equipment = new Equipment();
-
-            do equipment = GetEquipment();
-            while (TestShouldKeepRunning() && !equipment.Treasure.Goods.Any());
+            var equipment = Generate(GetEquipment,
+                e => e.Treasure.Goods.Any());
 
             Assert.That(equipment.Treasure.Goods, Is.Not.Empty);
         }
@@ -73,10 +69,8 @@ namespace CharacterGen.Tests.Integration.Stress.Items
         [Test]
         public void ItemsHappen()
         {
-            var equipment = new Equipment();
-
-            do equipment = GetEquipment();
-            while (TestShouldKeepRunning() && !equipment.Treasure.Items.Any());
+            var equipment = Generate(GetEquipment,
+                e => e.Treasure.Items.Any());
 
             Assert.That(equipment.Treasure.Items, Is.Not.Empty);
         }
@@ -84,11 +78,8 @@ namespace CharacterGen.Tests.Integration.Stress.Items
         [Test]
         public void TreasureDoesNotHappen()
         {
-            var equipment = new Equipment();
-
-            do equipment = GetEquipment();
-            while (TestShouldKeepRunning() &&
-                (equipment.Treasure.Items.Any() || equipment.Treasure.Goods.Any() || equipment.Treasure.Coin.Quantity > 0));
+            var equipment = Generate(GetEquipment,
+                e => e.Treasure.Goods.Any() == false && e.Treasure.Items.Any() == false && e.Treasure.Coin.Quantity == 0);
 
             Assert.That(equipment.Treasure.Items, Is.Empty);
             Assert.That(equipment.Treasure.Goods, Is.Empty);
@@ -98,10 +89,8 @@ namespace CharacterGen.Tests.Integration.Stress.Items
         [Test]
         public void OffHandShieldHappens()
         {
-            var equipment = new Equipment();
-
-            do equipment = GetEquipment();
-            while (TestShouldKeepRunning() && (equipment.OffHand == null || equipment.OffHand == equipment.PrimaryHand));
+            var equipment = Generate(GetEquipment,
+                e => e.OffHand != null && e.OffHand.Attributes.Contains(AttributeConstants.Shield));
 
             Assert.That(equipment.OffHand.Name, Is.Not.Empty);
             Assert.That(equipment.OffHand, Is.Not.EqualTo(equipment.PrimaryHand));
@@ -112,10 +101,8 @@ namespace CharacterGen.Tests.Integration.Stress.Items
         [Test]
         public void OffHandWeaponHappens()
         {
-            var equipment = new Equipment();
-
-            do equipment = GetEquipment();
-            while (TestShouldKeepRunning() && (equipment.OffHand == null || equipment.OffHand == equipment.PrimaryHand));
+            var equipment = Generate(GetEquipment,
+                e => e.OffHand != null && e.OffHand.ItemType == ItemTypeConstants.Weapon && e.OffHand != e.PrimaryHand);
 
             Assert.That(equipment.OffHand.Name, Is.Not.Empty);
             Assert.That(equipment.OffHand, Is.Not.EqualTo(equipment.PrimaryHand));
@@ -125,11 +112,10 @@ namespace CharacterGen.Tests.Integration.Stress.Items
         [Test]
         public void TwoHandedHappens()
         {
-            var equipment = new Equipment();
+            var equipment = Generate(GetEquipment,
+                e => e.OffHand != null && e.OffHand.ItemType == ItemTypeConstants.Weapon && e.OffHand == e.PrimaryHand);
 
-            do equipment = GetEquipment();
-            while (TestShouldKeepRunning() && equipment.OffHand != equipment.PrimaryHand);
-
+            Assert.That(equipment.OffHand.Name, Is.Not.Empty);
             Assert.That(equipment.OffHand, Is.EqualTo(equipment.PrimaryHand));
             Assert.That(equipment.OffHand.ItemType, Is.EqualTo(ItemTypeConstants.Weapon));
         }
@@ -137,10 +123,8 @@ namespace CharacterGen.Tests.Integration.Stress.Items
         [Test]
         public void OffHandDoesNotHappen()
         {
-            var equipment = new Equipment();
-
-            do equipment = GetEquipment();
-            while (TestShouldKeepRunning() && equipment.OffHand != null);
+            var equipment = Generate(GetEquipment,
+                e => e.OffHand == null);
 
             Assert.That(equipment.OffHand, Is.Null);
         }
@@ -148,10 +132,8 @@ namespace CharacterGen.Tests.Integration.Stress.Items
         [Test]
         public void ArmorHappens()
         {
-            var equipment = new Equipment();
-
-            do equipment = GetEquipment();
-            while (TestShouldKeepRunning() && equipment.Armor == null);
+            var equipment = Generate(GetEquipment,
+                e => e.Armor != null);
 
             Assert.That(equipment.Armor.ItemType, Is.EqualTo(ItemTypeConstants.Armor));
             Assert.That(equipment.Armor.Name, Is.Not.Empty);
@@ -161,10 +143,8 @@ namespace CharacterGen.Tests.Integration.Stress.Items
         [Test]
         public void ArmorDoesNotHappen()
         {
-            var equipment = new Equipment();
-
-            do equipment = GetEquipment();
-            while (TestShouldKeepRunning() && equipment.Armor != null);
+            var equipment = Generate(GetEquipment,
+                e => e.Armor == null);
 
             Assert.That(equipment.Armor, Is.Null);
         }
