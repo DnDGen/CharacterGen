@@ -6,11 +6,11 @@ using System;
 namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Ages.Trained
 {
     [TestFixture]
-    public class TrainedLizardfolkAgesTests : AdjustmentsTests
+    public class TrainedOgreMageAgesTests : AdjustmentsTests
     {
         protected override String tableName
         {
-            get { return String.Format(TableNameConstants.Formattable.Adjustments.AGEGROUPRACEAges, GroupConstants.Trained, RaceConstants.BaseRaces.Lizardfolk); }
+            get { return String.Format(TableNameConstants.Formattable.Adjustments.AGEGROUPRACEAges, GroupConstants.Trained, RaceConstants.BaseRaces.OgreMage); }
         }
 
         [Test]
@@ -29,12 +29,12 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Ages.Trained
             AssertCollectionNames(names);
         }
 
-        [TestCase(AdjustmentConstants.Adulthood, 10)]
-        [TestCase(AdjustmentConstants.Quantity, 1)]
-        [TestCase(AdjustmentConstants.Die, 10)]
-        [TestCase(AdjustmentConstants.MiddleAge, 30)]
-        [TestCase(AdjustmentConstants.Old, 50)]
-        [TestCase(AdjustmentConstants.Venerable, 65)]
+        [TestCase(AdjustmentConstants.Adulthood, 30)]
+        [TestCase(AdjustmentConstants.Quantity, 4)]
+        [TestCase(AdjustmentConstants.Die, 6)]
+        [TestCase(AdjustmentConstants.MiddleAge, 60)]
+        [TestCase(AdjustmentConstants.Old, 80)]
+        [TestCase(AdjustmentConstants.Venerable, 120)]
         public override void Adjustment(String name, Int32 adjustment)
         {
             base.Adjustment(name, adjustment);

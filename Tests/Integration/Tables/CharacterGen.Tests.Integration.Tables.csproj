@@ -281,6 +281,7 @@
     <Compile Include="Races\BaseRaces\Ages\Trained\TrainedHumanAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\Trained\TrainedLightfootHalflingAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\Trained\TrainedLizardfolkAgesTests.cs" />
+    <Compile Include="Races\BaseRaces\Ages\Trained\TrainedOgreMageAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\Trained\TrainedTallfellowHalflingAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\Intuitive\IntuitiveHumanAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\Intuitive\IntuitiveLightfootHalflingAgesTests.cs" />
@@ -310,15 +311,19 @@
     <Compile Include="Races\BaseRaces\Good\GoodSorcererBaseRacesTests.cs" />
     <Compile Include="Races\BaseRaces\Good\GoodWizardBaseRacesTests.cs" />
     <Compile Include="Races\BaseRaces\Heights\FemaleDeepDwarfHeightsTests.cs" />
+    <Compile Include="Races\BaseRaces\Heights\FemaleGoblinHeightsTests.cs" />
     <Compile Include="Races\BaseRaces\Heights\FemaleHalfElfHeightsTests.cs" />
     <Compile Include="Races\BaseRaces\Heights\FemaleHalfOrcHeightsTests.cs" />
     <Compile Include="Races\BaseRaces\Heights\FemaleHobgoblinHeightsTests.cs" />
     <Compile Include="Races\BaseRaces\Heights\FemaleHumanHeightsTests.cs" />
+    <Compile Include="Races\BaseRaces\Heights\FemaleLightfootHalflingHeightsTests.cs" />
+    <Compile Include="Races\BaseRaces\Heights\MaleDeepDwarfHeightsTests.cs" />
     <Compile Include="Races\BaseRaces\Heights\MaleDrowHeightsTests.cs" />
     <Compile Include="Races\BaseRaces\Heights\MaleGoblinHeightsTests.cs" />
     <Compile Include="Races\BaseRaces\Heights\MaleHighElfHeightsTests.cs" />
     <Compile Include="Races\BaseRaces\Heights\MaleHumanHeightsTests.cs" />
     <Compile Include="Races\BaseRaces\Heights\MaleLightfootHalflingHeightsTests.cs" />
+    <Compile Include="Races\BaseRaces\Heights\MaleLizardfolkHeights.cs" />
     <Compile Include="Races\BaseRaces\Heights\MaleTallfellowHalflingHeightsTests.cs" />
     <Compile Include="Races\BaseRaces\Heights\MaleTroglodyteHeightsTests.cs" />
     <Compile Include="Races\BaseRaces\LandSpeedsTests.cs" />
@@ -334,6 +339,7 @@
     <Compile Include="Races\BaseRaces\Neutral\NeutralWizardBaseRacesTests.cs" />
     <Compile Include="Races\BaseRaces\Weights\FemaleHalfOrcWeightsTests.cs" />
     <Compile Include="Races\BaseRaces\Weights\FemaleHumanWeightsTests.cs" />
+    <Compile Include="Races\BaseRaces\Weights\MaleGoblinWeightsTests.cs" />
     <Compile Include="Races\BaseRaces\Weights\MaleHighElfWeightsTests.cs" />
     <Compile Include="Races\BaseRaces\Weights\MaleHumanWeightsTests.cs" />
     <Compile Include="Races\MaleTests.cs" />
