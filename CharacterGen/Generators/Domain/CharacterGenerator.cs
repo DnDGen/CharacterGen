@@ -187,8 +187,7 @@ namespace CharacterGen.Generators.Domain
                 leadershipModifiers.Add(modifier);
             }
 
-            if (String.IsNullOrEmpty(character.Magic.Familiar.Animal) == false)
-                cohortScore -= 2;
+            cohortScore -= character.Magic.Animals.Count() * 2;
 
             var followerScore = leadership.Score;
             var leaderMovement = percentileSelector.SelectFrom(TableNameConstants.Set.Percentile.LeadershipMovement);

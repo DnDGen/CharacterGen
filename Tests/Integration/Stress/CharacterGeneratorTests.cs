@@ -105,23 +105,23 @@ namespace CharacterGen.Tests.Integration.Stress
         }
 
         [Test]
-        public void FamiliarsHappen()
+        public void AnimalsHappen()
         {
             var character = Generate<Character>(
                 () => CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer, StatsRandomizer),
-                c => String.IsNullOrEmpty(c.Magic.Familiar.Animal) == false);
+                c => c.Magic.Animals.Any());
 
-            Assert.That(character.Magic.Familiar.Animal, Is.Not.Empty);
+            Assert.That(character.Magic.Animals, Is.Not.Empty);
         }
 
         [Test]
-        public void FamiliarsDoNotHappen()
+        public void AnimalsDoNotHappen()
         {
             var character = Generate<Character>(
                 () => CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer, StatsRandomizer),
-                c => String.IsNullOrEmpty(c.Magic.Familiar.Animal));
+                c => c.Magic.Animals.Any() == false);
 
-            Assert.That(character.Magic.Familiar.Animal, Is.Empty);
+            Assert.That(character.Magic.Animals, Is.Empty);
         }
 
         [Test]

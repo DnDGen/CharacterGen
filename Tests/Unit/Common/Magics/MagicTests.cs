@@ -17,7 +17,7 @@ namespace CharacterGen.Tests.Unit.Common.Magics
         [Test]
         public void MagicInitialized()
         {
-            Assert.That(magic.Familiar, Is.Not.Null);
+            Assert.That(magic.Animals, Is.Empty);
             Assert.That(magic.Spells, Is.Empty);
         }
     }
