@@ -1,6 +1,7 @@
 ﻿using CharacterGen.Common.Abilities.Feats;
 using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Common.Items;
+using CharacterGen.Common.Magics;
 using CharacterGen.Generators.Domain.Magics;
 using CharacterGen.Generators.Magics;
 using Moq;
@@ -14,6 +15,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
     public class MagicGeneratorTests
     {
         private Mock<ISpellsGenerator> mockSpellsGenerator;
+        private Mock<IAnimalGenerator> mockAnimalGenerator;
         private IMagicGenerator magicGenerator;
         private CharacterClass characterClass;
         private List<Feat> feats;
@@ -22,7 +24,9 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         [SetUp]
         public void Setup()
         {
-            magicGenerator = new MagicGenerator();
+            mockSpellsGenerator = new Mock<ISpellsGenerator>();
+            mockAnimalGenerator = new Mock<IAnimalGenerator>();
+            magicGenerator = new MagicGenerator(mockSpellsGenerator.Object, mockAnimalGenerator.Object);
             characterClass = new CharacterClass();
             feats = new List<Feat>();
             equipment = new Equipment();
@@ -46,9 +50,23 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         }
 
         [Test]
-        public void GenerateAnimals()
+        public void DoNotGenerateAnimal()
         {
-            throw new NotImplementedException();
+            Animal animal = null;
+            mockAnimalGenerator.Setup(g => g.GenerateFrom(characterClass, feats)).Returns(animal);
+
+            var magic = magicGenerator.GenerateWith(characterClass, feats, equipment);
+            Assert.That(magic.Animal, Is.Null);
+        }
+
+        [Test]
+        public void GenerateAnimal()
+        {
+            Animal animal = new Animal();
+            mockAnimalGenerator.Setup(g => g.GenerateFrom(characterClass, feats)).Returns(animal);
+
+            var magic = magicGenerator.GenerateWith(characterClass, feats, equipment);
+            Assert.That(magic.Animal, Is.EqualTo(animal));
         }
     }
 }

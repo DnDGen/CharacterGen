@@ -109,9 +109,9 @@ namespace CharacterGen.Tests.Integration.Stress
         {
             var character = Generate<Character>(
                 () => CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer, StatsRandomizer),
-                c => c.Magic.Animals.Any());
+                c => c.Magic.Animal != null);
 
-            Assert.That(character.Magic.Animals, Is.Not.Empty);
+            Assert.That(character.Magic.Animal, Is.Not.Null);
         }
 
         [Test]
@@ -119,9 +119,9 @@ namespace CharacterGen.Tests.Integration.Stress
         {
             var character = Generate<Character>(
                 () => CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer, StatsRandomizer),
-                c => c.Magic.Animals.Any() == false);
+                c => c.Magic.Animal == null);
 
-            Assert.That(character.Magic.Animals, Is.Empty);
+            Assert.That(character.Magic.Animal, Is.Null);
         }
 
         [Test]

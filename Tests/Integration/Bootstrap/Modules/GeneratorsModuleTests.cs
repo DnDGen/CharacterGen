@@ -583,5 +583,17 @@ namespace CharacterGen.Tests.Integration.Bootstrap.Modules
         {
             AssertNotSingleton<IMagicGenerator>();
         }
+
+        [Test]
+        public void SpellsGeneratorIsNotASingleton()
+        {
+            AssertNotSingleton<ISpellsGenerator>();
+        }
+
+        [Test]
+        public void AnimalGeneratorIsNotASingleton()
+        {
+            AssertNotSingleton<IAnimalGenerator>();
+        }
     }
 }

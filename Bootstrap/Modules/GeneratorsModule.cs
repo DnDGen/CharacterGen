@@ -53,6 +53,8 @@ namespace CharacterGen.Bootstrap.Modules
             Bind<GearGenerator>().ToMethod(c => ArmorGeneratorFactory.CreateWith(c.Kernel)).Named(ItemTypeConstants.Armor);
             Bind<GearGenerator>().ToMethod(c => WeaponGeneratorFactory.CreateWith(c.Kernel)).Named(ItemTypeConstants.Weapon);
             Bind<IMagicGenerator>().To<MagicGenerator>();
+            Bind<ISpellsGenerator>().To<SpellsGenerator>();
+            Bind<IAnimalGenerator>().To<AnimalGenerator>();
 
             Bind<IAlignmentRandomizer>().To<AnyAlignmentRandomizer>().Named(AlignmentRandomizerTypeConstants.Any);
             Bind<IAlignmentRandomizer>().To<ChaoticAlignmentRandomizer>().Named(AlignmentRandomizerTypeConstants.Chaotic);

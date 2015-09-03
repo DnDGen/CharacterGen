@@ -76,6 +76,7 @@
     <Compile Include="Abilities\ISkillsGenerator.cs" />
     <Compile Include="Abilities\IStatsGenerator.cs" />
     <Compile Include="Items\IEquipmentGenerator.cs" />
+    <Compile Include="Magics\IAnimalGenerator.cs" />
     <Compile Include="Magics\IMagicGenerator.cs" />
     <Compile Include="Magics\ISpellsGenerator.cs" />
     <Compile Include="Randomizers\Alignments\AlignmentRandomizerTypeConstants.cs" />

@@ -83,7 +83,7 @@
     <Compile Include="Combats\SavingThrows.cs" />
     <Compile Include="Items\ProficiencyConstants.cs" />
     <Compile Include="Leadership.cs" />
-    <Compile Include="Magics\Familiar.cs" />
+    <Compile Include="Magics\Animal.cs" />
     <Compile Include="Items\Equipment.cs" />
     <Compile Include="Magics\Magic.cs" />
     <Compile Include="Magics\SpellConstants.cs" />

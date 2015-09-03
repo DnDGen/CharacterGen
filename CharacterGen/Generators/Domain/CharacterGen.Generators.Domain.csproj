@@ -80,7 +80,9 @@
     <Compile Include="Items\ArmorGenerator.cs" />
     <Compile Include="Items\EquipmentGenerator.cs" />
     <Compile Include="Items\WeaponGenerator.cs" />
+    <Compile Include="Magics\AnimalGenerator.cs" />
     <Compile Include="Magics\MagicGenerator.cs" />
+    <Compile Include="Magics\SpellsGenerator.cs" />
     <Compile Include="RaceGenerator.cs" />
     <Compile Include="Randomizers\Alignments\SetAlignmentRandomizer.cs" />
     <Compile Include="Randomizers\CharacterClasses\ClassNames\SetClassNameRandomizer.cs" />
