@@ -9,7 +9,6 @@ using Ninject;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using TreasureGen.Common.Items;
 
 namespace CharacterGen.Tests.Integration.Stress
@@ -105,26 +104,6 @@ namespace CharacterGen.Tests.Integration.Stress
         }
 
         [Test]
-        public void AnimalsHappen()
-        {
-            var character = Generate<Character>(
-                () => CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer, StatsRandomizer),
-                c => c.Magic.Animal != null);
-
-            Assert.That(character.Magic.Animal, Is.Not.Null);
-        }
-
-        [Test]
-        public void AnimalsDoNotHappen()
-        {
-            var character = Generate<Character>(
-                () => CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer, StatsRandomizer),
-                c => c.Magic.Animal == null);
-
-            Assert.That(character.Magic.Animal, Is.Null);
-        }
-
-        [Test]
         public void InterestingTraitsHappen()
         {
             var character = Generate<Character>(
@@ -142,26 +121,6 @@ namespace CharacterGen.Tests.Integration.Stress
                 c => String.IsNullOrEmpty(c.InterestingTrait));
 
             Assert.That(character.InterestingTrait, Is.Empty);
-        }
-
-        [Test]
-        public void SpellsHappen()
-        {
-            var character = Generate<Character>(
-                () => CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer, StatsRandomizer),
-                c => c.Magic.Spells.Any());
-
-            Assert.That(character.Magic.Spells, Is.Not.Empty);
-        }
-
-        [Test]
-        public void SpellsDoNotHappen()
-        {
-            var character = Generate<Character>(
-                () => CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer, StatsRandomizer),
-                c => c.Magic.Spells.Any() == false);
-
-            Assert.That(character.Magic.Spells, Is.Empty);
         }
 
         [Test]
