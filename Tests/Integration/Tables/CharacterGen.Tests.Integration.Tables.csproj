@@ -326,6 +326,7 @@
     <Compile Include="Races\BaseRaces\Heights\MaleLizardfolkHeights.cs" />
     <Compile Include="Races\BaseRaces\Heights\MaleTallfellowHalflingHeightsTests.cs" />
     <Compile Include="Races\BaseRaces\Heights\MaleTroglodyteHeightsTests.cs" />
+    <Compile Include="Races\BaseRaces\Heights\MaleWoodElfHeightsTests.cs" />
     <Compile Include="Races\BaseRaces\LandSpeedsTests.cs" />
     <Compile Include="Races\BaseRaces\Neutral\NeutralBarbarianBaseRacesTests.cs" />
     <Compile Include="Races\BaseRaces\Neutral\NeutralBardBaseRacesTests.cs" />
