@@ -128,25 +128,5 @@ namespace CharacterGen.Tests.Integration.Stress.Items
 
             Assert.That(equipment.OffHand, Is.Null);
         }
-
-        [Test]
-        public void ArmorHappens()
-        {
-            var equipment = Generate(GetEquipment,
-                e => e.Armor != null);
-
-            Assert.That(equipment.Armor.ItemType, Is.EqualTo(ItemTypeConstants.Armor));
-            Assert.That(equipment.Armor.Name, Is.Not.Empty);
-            Assert.That(equipment.Armor.Attributes, Is.Not.Contains(AttributeConstants.Shield));
-        }
-
-        [Test]
-        public void ArmorDoesNotHappen()
-        {
-            var equipment = Generate(GetEquipment,
-                e => e.Armor == null);
-
-            Assert.That(equipment.Armor, Is.Null);
-        }
     }
 }
