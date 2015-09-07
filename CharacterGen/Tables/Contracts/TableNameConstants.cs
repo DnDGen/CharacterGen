@@ -28,6 +28,7 @@ namespace CharacterGen.Tables
             {
                 public const String AdditionalFeatData = "AdditionalFeatData";
                 public const String AlignmentGroups = "AlignmentGroups";
+                public const String Animals = "Animals";
                 public const String ArmorClassModifiers = "ArmorClassModifiers";
                 public const String AutomaticLanguages = "AutomaticLanguages";
                 public const String BaseRaceGroups = "BaseRaceGroups";

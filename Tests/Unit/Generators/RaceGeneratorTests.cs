@@ -337,7 +337,7 @@ namespace CharacterGen.Tests.Unit.Generators
         {
             intuitiveClasses.Add(characterClass.ClassName);
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
-            Assert.That(race.Age, Is.EqualTo(90350));
+            Assert.That(race.AgeInYears, Is.EqualTo(90350));
         }
 
         [Test]
@@ -345,14 +345,14 @@ namespace CharacterGen.Tests.Unit.Generators
         {
             trainedClasses.Add(characterClass.ClassName);
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
-            Assert.That(race.Age, Is.EqualTo(91610));
+            Assert.That(race.AgeInYears, Is.EqualTo(91610));
         }
 
         [Test]
         public void GenerateMiddleAge()
         {
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
-            Assert.That(race.Age, Is.EqualTo(90224));
+            Assert.That(race.AgeInYears, Is.EqualTo(90224));
         }
 
         [Test]

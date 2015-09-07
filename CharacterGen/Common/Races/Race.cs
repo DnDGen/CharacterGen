@@ -14,7 +14,7 @@ namespace CharacterGen.Common.Races
         public Int32 AerialSpeed { get; set; }
         public Int32 HeightInInches { get; set; }
         public Int32 WeightInPounds { get; set; }
-        public Int32 Age { get; set; }
+        public Int32 AgeInYears { get; set; }
 
         public Race()
         {

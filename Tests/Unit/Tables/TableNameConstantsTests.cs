@@ -23,6 +23,7 @@ namespace CharacterGen.Tests.Unit.Tables
         [TestCase(TableNameConstants.Set.Adjustments.SpecialistFieldQuantities, "SpecialistFieldQuantities")]
         [TestCase(TableNameConstants.Set.Collection.AdditionalFeatData, "AdditionalFeatData")]
         [TestCase(TableNameConstants.Set.Collection.AlignmentGroups, "AlignmentGroups")]
+        [TestCase(TableNameConstants.Set.Collection.Animals, "Animals")]
         [TestCase(TableNameConstants.Set.Collection.ArmorClassModifiers, "ArmorClassModifiers")]
         [TestCase(TableNameConstants.Set.Collection.AutomaticLanguages, "AutomaticLanguages")]
         [TestCase(TableNameConstants.Set.Collection.BaseRaceGroups, "BaseRaceGroups")]

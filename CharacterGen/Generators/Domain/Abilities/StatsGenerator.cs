@@ -101,7 +101,7 @@ namespace CharacterGen.Generators.Domain.Abilities
             var tableName = String.Format(TableNameConstants.Formattable.Adjustments.AGEGROUPRACEAges, GroupConstants.SelfTaught, race.BaseRace);
             var ages = adjustmentsSelector.SelectFrom(tableName);
 
-            if (race.Age >= ages[AdjustmentConstants.MiddleAge])
+            if (race.AgeInYears >= ages[AdjustmentConstants.MiddleAge])
             {
                 stats[StatConstants.Strength].Value--;
                 stats[StatConstants.Constitution].Value--;
@@ -111,7 +111,7 @@ namespace CharacterGen.Generators.Domain.Abilities
                 stats[StatConstants.Charisma].Value++;
             }
 
-            if (race.Age >= ages[AdjustmentConstants.Old])
+            if (race.AgeInYears >= ages[AdjustmentConstants.Old])
             {
                 stats[StatConstants.Strength].Value -= 2;
                 stats[StatConstants.Constitution].Value -= 2;
@@ -121,7 +121,7 @@ namespace CharacterGen.Generators.Domain.Abilities
                 stats[StatConstants.Charisma].Value++;
             }
 
-            if (race.Age >= ages[AdjustmentConstants.Venerable])
+            if (race.AgeInYears >= ages[AdjustmentConstants.Venerable])
             {
                 stats[StatConstants.Strength].Value -= 3;
                 stats[StatConstants.Constitution].Value -= 3;

@@ -38,7 +38,7 @@ namespace CharacterGen.Generators.Domain
             race.HasWings = DetermineIfRaceHasWings(race);
             race.LandSpeed = DetermineLandSpeed(race);
             race.AerialSpeed = DetermineAerialSpeed(race);
-            race.Age = DetermineAge(race, characterClass);
+            race.AgeInYears = DetermineAge(race, characterClass);
 
             var gender = race.Male ? "Male" : "Female";
             var tableName = String.Format(TableNameConstants.Formattable.Adjustments.GENDERRACEHeights, gender, race.BaseRace);

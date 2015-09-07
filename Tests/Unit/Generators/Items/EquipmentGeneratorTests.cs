@@ -32,6 +32,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         private Item armor;
         private Treasure treasure;
         private Race race;
+        private List<String> shieldProficiencyFeats;
 
         [SetUp]
         public void Setup()
@@ -49,6 +50,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             armor = new Item();
             treasure = new Treasure();
             race = new Race();
+            shieldProficiencyFeats = new List<String>();
 
             characterClass.Level = 9266;
             weapon.Name = "weapon name";
@@ -63,6 +65,8 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, It.IsAny<String>())).Returns((String table, String name) => new[] { name });
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, weapon.Name)).Returns(baseWeaponTypes);
             mockTreasureGenerator.Setup(g => g.GenerateAtLevel(9266)).Returns(treasure);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, AttributeConstants.Shield + GroupConstants.Proficiency))
+                .Returns(shieldProficiencyFeats);
         }
 
         [Test]
@@ -285,6 +289,44 @@ namespace CharacterGen.Tests.Unit.Generators.Items
 
             var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
             Assert.That(equipment.OffHand, Is.EqualTo(offHandWeapon));
+        }
+
+        [Test]
+        public void GenerateArmorAfterShieldWithoutShieldProficiencies()
+        {
+            feats.Add(new Feat { Name = "feat" });
+            feats.Add(new Feat { Name = "other feat" });
+            shieldProficiencyFeats.Add(feats[0].Name);
+
+            var shield = new Item();
+            shield.Attributes = new[] { AttributeConstants.Shield };
+            mockArmorGenerator.Setup(g => g.GenerateFrom(feats, characterClass, race))
+                .Returns(shield);
+            mockArmorGenerator.Setup(g => g.GenerateFrom(It.Is<IEnumerable<Feat>>(fs => fs.First().Name == "other feat" && fs.Count() == 1), characterClass, race))
+                .Returns(armor);
+
+            var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
+            Assert.That(equipment.OffHand, Is.EqualTo(shield));
+            Assert.That(equipment.Armor, Is.EqualTo(armor));
+        }
+
+        [Test]
+        public void CanGenerateNoArmorAfterShieldWithoutShieldProficiencies()
+        {
+            feats.Add(new Feat { Name = "feat" });
+            shieldProficiencyFeats.Add(feats[0].Name);
+
+            armor = null;
+            var shield = new Item();
+            shield.Attributes = new[] { AttributeConstants.Shield };
+            mockArmorGenerator.Setup(g => g.GenerateFrom(feats, characterClass, race))
+                .Returns(shield);
+            mockArmorGenerator.Setup(g => g.GenerateFrom(It.Is<IEnumerable<Feat>>(fs => fs.Any() == false), characterClass, race))
+                .Returns(armor);
+
+            var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
+            Assert.That(equipment.OffHand, Is.EqualTo(shield));
+            Assert.That(equipment.Armor, Is.Null);
         }
 
         [Test]

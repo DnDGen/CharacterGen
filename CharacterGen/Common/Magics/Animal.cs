@@ -1,22 +1,22 @@
-﻿using CharacterGen.Common.Abilities.Feats;
+﻿using CharacterGen.Common.Abilities;
+using CharacterGen.Common.Combats;
+using CharacterGen.Common.Races;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace CharacterGen.Common.Magics
 {
     public class Animal
     {
-        public String Type { get; set; }
-        public Int32 HitPoints { get; set; }
-        public Int32 ArmorClass { get; set; }
-        public IEnumerable<Feat> Feats { get; set; }
+        public Race Race { get; set; }
+        public Ability Ability { get; set; }
+        public Combat Combat { get; set; }
         public Int32 Tricks { get; set; }
 
         public Animal()
         {
-            Type = String.Empty;
-            Feats = Enumerable.Empty<Feat>();
+            Race = new Race();
+            Ability = new Ability();
+            Combat = new Combat();
         }
     }
 }

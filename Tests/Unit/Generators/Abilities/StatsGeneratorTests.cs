@@ -241,7 +241,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
         [TestCase(90211, 4, 4, 4, 13, 13, 13)]
         public void ApplyAgeModifierToStats(Int32 age, Int32 strength, Int32 constitution, Int32 dexterity, Int32 intelligence, Int32 wisdom, Int32 charisma)
         {
-            race.Age = age;
+            race.AgeInYears = age;
 
             var stats = statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
             Assert.That(stats[StatConstants.Charisma].Value, Is.EqualTo(charisma));
@@ -257,7 +257,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
         {
             adjustments[StatConstants.Strength] = -9266;
             randomizedStats[StatConstants.Strength].Value = 3;
-            race.Age = 90211;
+            race.AgeInYears = 90211;
 
             var stats = statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
             Assert.That(stats[StatConstants.Strength].Value, Is.EqualTo(1));

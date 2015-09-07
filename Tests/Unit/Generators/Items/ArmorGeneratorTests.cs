@@ -151,6 +151,64 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         }
 
         [Test]
+        public void IfMundaneArmorContainsMetalAndClassIsDruid_Regenerate()
+        {
+            characterClass.ClassName = CharacterClassConstants.Druid;
+            var mundaneArmor = CreateArmor("mundane armor");
+            var wrongMundaneArmor = CreateArmor("wrong mundane armor");
+            mockPercentileSelector.Setup(s => s.SelectFrom("Level9266Power")).Returns(PowerConstants.Mundane);
+            mockMundaneArmorGenerator.SetupSequence(g => g.Generate()).Returns(wrongMundaneArmor).Returns(mundaneArmor);
+
+            wrongMundaneArmor.Attributes = wrongMundaneArmor.Attributes.Union(new[] { AttributeConstants.Metal });
+
+            var armor = armorGenerator.GenerateFrom(feats, characterClass, race);
+            Assert.That(armor, Is.EqualTo(mundaneArmor));
+        }
+
+        [Test]
+        public void IfMundaneArmorContainsMetalAndClassIsNotDruid_Keep()
+        {
+            var mundaneArmor = CreateArmor("mundane armor");
+            var wrongMundaneArmor = CreateArmor("wrong mundane armor");
+            mockPercentileSelector.Setup(s => s.SelectFrom("Level9266Power")).Returns(PowerConstants.Mundane);
+            mockMundaneArmorGenerator.SetupSequence(g => g.Generate()).Returns(mundaneArmor).Returns(wrongMundaneArmor);
+
+            mundaneArmor.Attributes = mundaneArmor.Attributes.Union(new[] { AttributeConstants.Metal });
+
+            var armor = armorGenerator.GenerateFrom(feats, characterClass, race);
+            Assert.That(armor, Is.EqualTo(mundaneArmor));
+        }
+
+        [Test]
+        public void IfMundaneArmorDoesNotContainMetalAndClassIsDruid_Keep()
+        {
+            characterClass.ClassName = CharacterClassConstants.Druid;
+            var mundaneArmor = CreateArmor("mundane armor");
+            var wrongMundaneArmor = CreateArmor("wrong mundane armor");
+            mockPercentileSelector.Setup(s => s.SelectFrom("Level9266Power")).Returns(PowerConstants.Mundane);
+            mockMundaneArmorGenerator.SetupSequence(g => g.Generate()).Returns(mundaneArmor).Returns(wrongMundaneArmor);
+
+            mundaneArmor.Attributes = mundaneArmor.Attributes.Union(new[] { "other attribute" });
+
+            var armor = armorGenerator.GenerateFrom(feats, characterClass, race);
+            Assert.That(armor, Is.EqualTo(mundaneArmor));
+        }
+
+        [Test]
+        public void IfMundaneArmorDoesNotContainMetalAndClassIsNotDruid_Keep()
+        {
+            var mundaneArmor = CreateArmor("mundane armor");
+            var wrongMundaneArmor = CreateArmor("wrong mundane armor");
+            mockPercentileSelector.Setup(s => s.SelectFrom("Level9266Power")).Returns(PowerConstants.Mundane);
+            mockMundaneArmorGenerator.SetupSequence(g => g.Generate()).Returns(mundaneArmor).Returns(wrongMundaneArmor);
+
+            mundaneArmor.Attributes = mundaneArmor.Attributes.Union(new[] { "other attribute" });
+
+            var armor = armorGenerator.GenerateFrom(feats, characterClass, race);
+            Assert.That(armor, Is.EqualTo(mundaneArmor));
+        }
+
+        [Test]
         public void GenerateMagicalArmor()
         {
             var armor = armorGenerator.GenerateFrom(feats, characterClass, race);
