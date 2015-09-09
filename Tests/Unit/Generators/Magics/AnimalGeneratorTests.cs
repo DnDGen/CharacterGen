@@ -100,6 +100,11 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         [Test]
         public void GenerateAnimalAbilities()
         {
+            //Languages - racial languages, if any
+            //Stats - set, adjusted (increased) for some character classes
+            //Skills - set
+            //Feats - racial, ones from character class, no additional
+
             throw new NotImplementedException();
         }
 
