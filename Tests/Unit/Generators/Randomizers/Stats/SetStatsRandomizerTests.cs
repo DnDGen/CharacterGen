@@ -45,6 +45,15 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
         }
 
         [Test]
+        public void StatsDefaultTo10()
+        {
+            var stats = randomizer.Randomize();
+
+            foreach (var stat in stats)
+                Assert.That(stat.Value, Is.EqualTo(10));
+        }
+
+        [Test]
         public void ReturnSetStats()
         {
             randomizer.SetStrength = 9266;
