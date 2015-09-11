@@ -12,7 +12,6 @@ namespace CharacterGen.Common.Items
 
         public Equipment()
         {
-            PrimaryHand = new Item();
             Treasure = new Treasure();
         }
     }

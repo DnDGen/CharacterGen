@@ -64,6 +64,7 @@ namespace CharacterGen.Tests.Unit.Tables
         [TestCase(TableNameConstants.Formattable.Adjustments.FEATClassRequirements, "{0}ClassRequirements")]
         [TestCase(TableNameConstants.Formattable.Adjustments.FEATSkillRankRequirements, "{0}SkillRankRequirements")]
         [TestCase(TableNameConstants.Formattable.Adjustments.FEATStatRequirements, "{0}StatRequirements")]
+        [TestCase(TableNameConstants.Formattable.Adjustments.LevelXAnimalTricks, "Level{0}AnimalTricks")]
         [TestCase(TableNameConstants.Formattable.Adjustments.STATStatAdjustments, "{0}StatAdjustments")]
         [TestCase(TableNameConstants.Formattable.Percentile.GOODNESSCharacterClasses, "{0}CharacterClasses")]
         [TestCase(TableNameConstants.Formattable.Percentile.GOODNESSCLASSBaseRaces, "{0}{1}BaseRaces")]

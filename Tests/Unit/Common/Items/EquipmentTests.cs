@@ -19,7 +19,7 @@ namespace CharacterGen.Tests.Unit.Common.Items
         {
             Assert.That(equipment.Armor, Is.Null);
             Assert.That(equipment.OffHand, Is.Null);
-            Assert.That(equipment.PrimaryHand, Is.Not.Null);
+            Assert.That(equipment.PrimaryHand, Is.Null);
             Assert.That(equipment.Treasure, Is.Not.Null);
         }
     }

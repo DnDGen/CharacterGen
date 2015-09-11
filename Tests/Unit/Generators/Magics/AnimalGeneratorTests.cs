@@ -1,10 +1,13 @@
-﻿using CharacterGen.Common.Abilities.Feats;
-using CharacterGen.Common.Abilities.Stats;
+﻿using CharacterGen.Common.Abilities;
+using CharacterGen.Common.Abilities.Feats;
 using CharacterGen.Common.Alignments;
 using CharacterGen.Common.CharacterClasses;
+using CharacterGen.Common.Combats;
+using CharacterGen.Common.Items;
 using CharacterGen.Common.Races;
 using CharacterGen.Generators;
 using CharacterGen.Generators.Abilities;
+using CharacterGen.Generators.Combats;
 using CharacterGen.Generators.Domain.Magics;
 using CharacterGen.Generators.Magics;
 using CharacterGen.Generators.Randomizers.Races;
@@ -15,6 +18,7 @@ using Moq;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CharacterGen.Tests.Unit.Generators.Magics
 {
@@ -26,8 +30,9 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         private Mock<IBaseRaceRandomizer> mockAnimalBaseRaceRandomizer;
         private Mock<IMetaraceRandomizer> mockNoMetaraceRandomizer;
         private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
-        private Mock<IStatsGenerator> mockAnimalStatsGenerator;
+        private Mock<IAbilitiesGenerator> mockAnimalAbilitiesGenerator;
         private Mock<ISetStatsRandomizer> mockSetStatsRandomizer;
+        private Mock<ICombatGenerator> mockAnimalCombatGenerator;
         private IAnimalGenerator animalGenerator;
         private CharacterClass characterClass;
         private List<Feat> feats;
@@ -35,7 +40,10 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         private Race race;
         private Alignment alignment;
         private Dictionary<String, Int32> levelAdjustments;
-        private Dictionary<String, Stat> stats;
+        private Ability ability;
+        private Combat combat;
+        private BaseAttack baseAttack;
+        private Dictionary<String, Int32> tricks;
 
         [SetUp]
         public void Setup()
@@ -45,8 +53,9 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
             mockAnimalBaseRaceRandomizer = new Mock<IBaseRaceRandomizer>();
             mockNoMetaraceRandomizer = new Mock<IMetaraceRandomizer>();
             mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
-            mockAnimalStatsGenerator = new Mock<IStatsGenerator>();
+            mockAnimalAbilitiesGenerator = new Mock<IAbilitiesGenerator>();
             mockSetStatsRandomizer = new Mock<ISetStatsRandomizer>();
+            mockAnimalCombatGenerator = new Mock<ICombatGenerator>();
             animalGenerator = new AnimalGenerator();
             characterClass = new CharacterClass();
             feats = new List<Feat>();
@@ -54,18 +63,26 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
             race = new Race();
             alignment = new Alignment();
             levelAdjustments = new Dictionary<String, Int32>();
-            stats = new Dictionary<String, Stat>();
+            ability = new Ability();
+            combat = new Combat();
+            baseAttack = new BaseAttack();
 
             characterClass.Level = 9266;
             characterClass.ClassName = "class name";
             race.BaseRace = "animal";
             animals.Add(race.BaseRace);
             levelAdjustments[race.BaseRace] = 0;
+            tricks[characterClass.ClassName] = 42;
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.Animals, characterClass.ClassName)).Returns(animals);
             mockRaceGenerator.Setup(g => g.GenerateWith(alignment, characterClass, mockAnimalBaseRaceRandomizer.Object, mockNoMetaraceRandomizer.Object)).Returns(race);
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments)).Returns(levelAdjustments);
-            mockAnimalStatsGenerator.Setup(s => s.GenerateWith(mockSetStatsRandomizer.Object, characterClass, race)).Returns(stats);
+
+            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.LevelXAnimalTricks, 9266);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(tricks);
+            mockAnimalCombatGenerator.Setup(g => g.GenerateBaseAttackWith(characterClass, race)).Returns(baseAttack);
+            mockAnimalCombatGenerator.Setup(g => g.GenerateWith(baseAttack, characterClass, race, ability.Feats, ability.Stats, It.IsAny<Equipment>())).Returns(combat);
+            mockAnimalAbilitiesGenerator.Setup(g => g.GenerateWith(characterClass, race, mockSetStatsRandomizer.Object, baseAttack)).Returns(ability);
         }
 
         [Test]
@@ -105,10 +122,10 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         }
 
         [Test]
-        public void GenerateAnimalStats()
+        public void GenerateAnimalAbilities()
         {
             var animal = animalGenerator.GenerateFrom(characterClass, feats);
-            Assert.That(animal.Ability.Stats, Is.EqualTo(stats));
+            Assert.That(animal.Ability, Is.EqualTo(ability));
         }
 
         [Test]
@@ -126,51 +143,30 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         }
 
         [Test]
-        public void GenerateAnimalLanguages()
-        {
-            //Languages - racial languages, if any.  Animal class
-            //regular language generator
-
-            throw new NotImplementedException();
-        }
-
-        [Test]
-        public void GenerateNoAnimalLanguages()
-        {
-            //Languages - racial languages, if any.  Animal class
-            //regular language generator
-
-            throw new NotImplementedException();
-        }
-
-        [Test]
-        public void GenerateAnimalSkills()
-        {
-            //Skills - set
-            //Animal skills generator (because no class/points per level)
-
-            throw new NotImplementedException();
-        }
-
-        [Test]
-        public void GenerateAnimalFeats()
-        {
-            //Feats - racial, ones from character class, no additional
-            //Animal feats generator (because no additional)
-
-            throw new NotImplementedException();
-        }
-
-        [Test]
         public void GenerateAnimalCombat()
         {
-            throw new NotImplementedException();
+            var animal = animalGenerator.GenerateFrom(characterClass, feats);
+            Assert.That(animal.Combat, Is.EqualTo(combat));
+        }
+
+        [Test]
+        public void UseEmptyEquipmentToGenerateAnimalCombat()
+        {
+            var animal = animalGenerator.GenerateFrom(characterClass, feats);
+            mockAnimalCombatGenerator.Verify(g => g.GenerateWith(baseAttack, characterClass, race, ability.Feats, ability.Stats, It.IsAny<Equipment>()), Times.Once);
+            mockAnimalCombatGenerator.Verify(g => g.GenerateWith(baseAttack, characterClass, race, ability.Feats, ability.Stats, It.Is<Equipment>(e => e.Armor == null)), Times.Once);
+            mockAnimalCombatGenerator.Verify(g => g.GenerateWith(baseAttack, characterClass, race, ability.Feats, ability.Stats, It.Is<Equipment>(e => e.OffHand == null)), Times.Once);
+            mockAnimalCombatGenerator.Verify(g => g.GenerateWith(baseAttack, characterClass, race, ability.Feats, ability.Stats, It.Is<Equipment>(e => e.PrimaryHand == null)), Times.Once);
+            mockAnimalCombatGenerator.Verify(g => g.GenerateWith(baseAttack, characterClass, race, ability.Feats, ability.Stats, It.Is<Equipment>(e => e.Treasure.Coin.Quantity == 0)), Times.Once);
+            mockAnimalCombatGenerator.Verify(g => g.GenerateWith(baseAttack, characterClass, race, ability.Feats, ability.Stats, It.Is<Equipment>(e => e.Treasure.Goods.Any() == false)), Times.Once);
+            mockAnimalCombatGenerator.Verify(g => g.GenerateWith(baseAttack, characterClass, race, ability.Feats, ability.Stats, It.Is<Equipment>(e => e.Treasure.Items.Any() == false)), Times.Once);
         }
 
         [Test]
         public void GenerateAnimalTricks()
         {
-            throw new NotImplementedException();
+            var animal = animalGenerator.GenerateFrom(characterClass, feats);
+            Assert.That(animal.Tricks, Is.EqualTo(42));
         }
     }
 }

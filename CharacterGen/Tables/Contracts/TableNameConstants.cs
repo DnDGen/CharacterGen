@@ -84,6 +84,7 @@ namespace CharacterGen.Tables
                 public const String FEATClassRequirements = "{0}ClassRequirements";
                 public const String FEATSkillRankRequirements = "{0}SkillRankRequirements";
                 public const String FEATStatRequirements = "{0}StatRequirements";
+                public const String LevelXAnimalTricks = "Level{0}AnimalTricks";
                 public const String STATStatAdjustments = "{0}StatAdjustments";
             }
 
