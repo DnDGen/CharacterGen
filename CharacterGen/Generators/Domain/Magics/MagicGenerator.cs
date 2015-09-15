@@ -1,4 +1,5 @@
 ﻿using CharacterGen.Common.Abilities.Feats;
+using CharacterGen.Common.Alignments;
 using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Common.Items;
 using CharacterGen.Common.Magics;
@@ -18,11 +19,11 @@ namespace CharacterGen.Generators.Domain.Magics
             this.animalGenerator = animalGenerator;
         }
 
-        public Magic GenerateWith(CharacterClass characterClass, IEnumerable<Feat> feats, Equipment equipment)
+        public Magic GenerateWith(Alignment alignment, CharacterClass characterClass, IEnumerable<Feat> feats, Equipment equipment)
         {
             var magic = new Magic();
             magic.Spells = spellsGenerator.GenerateFrom(characterClass, feats, equipment);
-            magic.Animal = animalGenerator.GenerateFrom(characterClass, feats);
+            magic.Animal = animalGenerator.GenerateFrom(alignment, characterClass, feats);
 
             return magic;
         }

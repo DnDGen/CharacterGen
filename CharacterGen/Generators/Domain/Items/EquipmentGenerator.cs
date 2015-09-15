@@ -74,9 +74,10 @@ namespace CharacterGen.Generators.Domain.Items
                 if (equipment.OffHand == null)
                     equipment.OffHand = equipment.Armor;
 
-                equipment.Armor = Generate<Item>(
-                    () => armorGenerator.GenerateFrom(feats, characterClass, race),
-                    a => a.Attributes.Contains(AttributeConstants.Shield) == false);
+                var shieldProficiencyFeats = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, AttributeConstants.Shield + GroupConstants.Proficiency);
+                var featsWithoutShieldProficiency = feats.Where(f => shieldProficiencyFeats.Contains(f.Name) == false);
+
+                equipment.Armor = armorGenerator.GenerateFrom(featsWithoutShieldProficiency, characterClass, race);
             }
 
             return equipment;

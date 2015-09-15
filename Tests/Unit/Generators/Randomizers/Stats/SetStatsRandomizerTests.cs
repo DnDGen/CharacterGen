@@ -49,7 +49,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
         {
             var stats = randomizer.Randomize();
 
-            foreach (var stat in stats)
+            foreach (var stat in stats.Values)
                 Assert.That(stat.Value, Is.EqualTo(10));
         }
 

@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using CharacterGen.Common.Abilities.Stats;
+﻿using CharacterGen.Common.Abilities.Stats;
 using CharacterGen.Generators.Randomizers.Stats;
+using System;
+using System.Collections.Generic;
 
 namespace CharacterGen.Generators.Domain.Randomizers.Stats
 {
@@ -13,6 +13,16 @@ namespace CharacterGen.Generators.Domain.Randomizers.Stats
         public Int32 SetIntelligence { get; set; }
         public Int32 SetWisdom { get; set; }
         public Int32 SetCharisma { get; set; }
+
+        public SetStatsRandomizer()
+        {
+            SetStrength = 10;
+            SetDexterity = 10;
+            SetConstitution = 10;
+            SetIntelligence = 10;
+            SetWisdom = 10;
+            SetCharisma = 10;
+        }
 
         public Dictionary<String, Stat> Randomize()
         {

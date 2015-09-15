@@ -56,7 +56,9 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
             mockAnimalAbilitiesGenerator = new Mock<IAbilitiesGenerator>();
             mockSetStatsRandomizer = new Mock<ISetStatsRandomizer>();
             mockAnimalCombatGenerator = new Mock<ICombatGenerator>();
-            animalGenerator = new AnimalGenerator();
+            animalGenerator = new AnimalGenerator(mockCollectionsSelector.Object, mockRaceGenerator.Object, mockAnimalBaseRaceRandomizer.Object, mockNoMetaraceRandomizer.Object,
+                mockAdjustmentsSelector.Object, mockAnimalAbilitiesGenerator.Object, mockSetStatsRandomizer.Object, mockAnimalCombatGenerator.Object);
+
             characterClass = new CharacterClass();
             feats = new List<Feat>();
             animals = new List<String>();
@@ -66,6 +68,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
             ability = new Ability();
             combat = new Combat();
             baseAttack = new BaseAttack();
+            tricks = new Dictionary<String, Int32>();
 
             characterClass.Level = 9266;
             characterClass.ClassName = "class name";
@@ -89,21 +92,21 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         public void GenerateNoAnimal()
         {
             animals.Clear();
-            var animal = animalGenerator.GenerateFrom(characterClass, feats);
+            var animal = animalGenerator.GenerateFrom(alignment, characterClass, feats);
             Assert.That(animal, Is.Null);
         }
 
         [Test]
         public void GenerateAnimal()
         {
-            var animal = animalGenerator.GenerateFrom(characterClass, feats);
+            var animal = animalGenerator.GenerateFrom(alignment, characterClass, feats);
             Assert.That(animal, Is.Not.Null);
         }
 
         [Test]
         public void GenerateAnimalRace()
         {
-            var animal = animalGenerator.GenerateFrom(characterClass, feats);
+            var animal = animalGenerator.GenerateFrom(alignment, characterClass, feats);
             Assert.That(animal.Race, Is.EqualTo(race));
         }
 
@@ -112,47 +115,33 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         {
             var wrongRace = new Race { BaseRace = "other animal" };
             animals.Add(wrongRace.BaseRace);
-            levelAdjustments[wrongRace.BaseRace] = 90210;
+            levelAdjustments[wrongRace.BaseRace] = -90210;
 
             mockRaceGenerator.SetupSequence(g => g.GenerateWith(alignment, characterClass, mockAnimalBaseRaceRandomizer.Object,
                 mockNoMetaraceRandomizer.Object)).Returns(wrongRace).Returns(race);
 
-            var animal = animalGenerator.GenerateFrom(characterClass, feats);
+            var animal = animalGenerator.GenerateFrom(alignment, characterClass, feats);
             Assert.That(animal.Race, Is.EqualTo(race));
         }
 
         [Test]
         public void GenerateAnimalAbilities()
         {
-            var animal = animalGenerator.GenerateFrom(characterClass, feats);
+            var animal = animalGenerator.GenerateFrom(alignment, characterClass, feats);
             Assert.That(animal.Ability, Is.EqualTo(ability));
-        }
-
-        [Test]
-        public void StatsRandomizerIsSetTo10ForAnimalStats()
-        {
-            var animal = animalGenerator.GenerateFrom(characterClass, feats);
-            var statsRandomizer = mockSetStatsRandomizer.Object;
-
-            Assert.That(statsRandomizer.SetCharisma, Is.EqualTo(10));
-            Assert.That(statsRandomizer.SetConstitution, Is.EqualTo(10));
-            Assert.That(statsRandomizer.SetDexterity, Is.EqualTo(10));
-            Assert.That(statsRandomizer.SetIntelligence, Is.EqualTo(10));
-            Assert.That(statsRandomizer.SetStrength, Is.EqualTo(10));
-            Assert.That(statsRandomizer.SetWisdom, Is.EqualTo(10));
         }
 
         [Test]
         public void GenerateAnimalCombat()
         {
-            var animal = animalGenerator.GenerateFrom(characterClass, feats);
+            var animal = animalGenerator.GenerateFrom(alignment, characterClass, feats);
             Assert.That(animal.Combat, Is.EqualTo(combat));
         }
 
         [Test]
         public void UseEmptyEquipmentToGenerateAnimalCombat()
         {
-            var animal = animalGenerator.GenerateFrom(characterClass, feats);
+            var animal = animalGenerator.GenerateFrom(alignment, characterClass, feats);
             mockAnimalCombatGenerator.Verify(g => g.GenerateWith(baseAttack, characterClass, race, ability.Feats, ability.Stats, It.IsAny<Equipment>()), Times.Once);
             mockAnimalCombatGenerator.Verify(g => g.GenerateWith(baseAttack, characterClass, race, ability.Feats, ability.Stats, It.Is<Equipment>(e => e.Armor == null)), Times.Once);
             mockAnimalCombatGenerator.Verify(g => g.GenerateWith(baseAttack, characterClass, race, ability.Feats, ability.Stats, It.Is<Equipment>(e => e.OffHand == null)), Times.Once);
@@ -165,7 +154,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         [Test]
         public void GenerateAnimalTricks()
         {
-            var animal = animalGenerator.GenerateFrom(characterClass, feats);
+            var animal = animalGenerator.GenerateFrom(alignment, characterClass, feats);
             Assert.That(animal.Tricks, Is.EqualTo(42));
         }
     }

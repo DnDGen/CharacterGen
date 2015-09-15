@@ -88,6 +88,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         public void PrimaryHandBonusNotApplied()
         {
             armorBonuses["shield"] = 1;
+            equipment.PrimaryHand = new Item();
             equipment.PrimaryHand.Name = "shield";
             equipment.PrimaryHand.ItemType = ItemTypeConstants.Armor;
             equipment.PrimaryHand.Attributes = new[] { AttributeConstants.Shield };
@@ -115,6 +116,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             armorBonuses["armor"] = 0;
             equipment.Armor = new Item { Name = "armor" };
             equipment.Armor.Magic.Bonus = 1;
+
             AssertArmorClass(11, 11, 10);
         }
 
@@ -126,6 +128,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             equipment.OffHand.ItemType = ItemTypeConstants.Armor;
             equipment.OffHand.Attributes = new[] { AttributeConstants.Shield };
             equipment.OffHand.Magic.Bonus = 1;
+
             AssertArmorClass(11, 11, 10);
         }
 
@@ -135,13 +138,16 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             equipment.OffHand = new Item { Name = "item" };
             equipment.OffHand.ItemType = "not armor";
             equipment.OffHand.Magic.Bonus = 1;
+
             AssertArmorClass(10, 10, 10);
         }
 
         [Test]
         public void PrimaryHandEnhancementBonusNotApplied()
         {
+            equipment.PrimaryHand = new Item();
             equipment.PrimaryHand.Magic.Bonus = 1;
+
             AssertArmorClass(10, 10, 10);
         }
 

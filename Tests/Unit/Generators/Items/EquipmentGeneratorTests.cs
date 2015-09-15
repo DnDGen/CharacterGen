@@ -234,12 +234,10 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         [Test]
         public void ArmorCannotBeShield()
         {
-            var firstShield = new Item();
-            firstShield.Attributes = new[] { AttributeConstants.Shield };
-            var secondShield = new Item();
-            secondShield.Attributes = new[] { AttributeConstants.Shield };
+            var shield = new Item();
+            shield.Attributes = new[] { AttributeConstants.Shield };
             mockArmorGenerator.SetupSequence(g => g.GenerateFrom(feats, characterClass, race))
-                .Returns(firstShield).Returns(secondShield).Returns(armor);
+                .Returns(shield).Returns(armor);
 
             var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
             Assert.That(equipment.Armor, Is.EqualTo(armor));

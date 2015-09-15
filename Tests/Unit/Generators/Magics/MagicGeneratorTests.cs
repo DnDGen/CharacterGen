@@ -1,4 +1,5 @@
 ﻿using CharacterGen.Common.Abilities.Feats;
+using CharacterGen.Common.Alignments;
 using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Common.Items;
 using CharacterGen.Common.Magics;
@@ -20,6 +21,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         private CharacterClass characterClass;
         private List<Feat> feats;
         private Equipment equipment;
+        private Alignment alignment;
 
         [SetUp]
         public void Setup()
@@ -30,12 +32,13 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
             characterClass = new CharacterClass();
             feats = new List<Feat>();
             equipment = new Equipment();
+            alignment = new Alignment();
         }
 
         [Test]
         public void GenerateMagic()
         {
-            var magic = magicGenerator.GenerateWith(characterClass, feats, equipment);
+            var magic = magicGenerator.GenerateWith(alignment, characterClass, feats, equipment);
             Assert.That(magic, Is.Not.Null);
         }
 
@@ -45,7 +48,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
             var spells = new Dictionary<Int32, IEnumerable<String>>();
             mockSpellsGenerator.Setup(g => g.GenerateFrom(characterClass, feats, equipment)).Returns(spells);
 
-            var magic = magicGenerator.GenerateWith(characterClass, feats, equipment);
+            var magic = magicGenerator.GenerateWith(alignment, characterClass, feats, equipment);
             Assert.That(magic.Spells, Is.EqualTo(spells));
         }
 
@@ -53,9 +56,9 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         public void DoNotGenerateAnimal()
         {
             Animal animal = null;
-            mockAnimalGenerator.Setup(g => g.GenerateFrom(characterClass, feats)).Returns(animal);
+            mockAnimalGenerator.Setup(g => g.GenerateFrom(alignment, characterClass, feats)).Returns(animal);
 
-            var magic = magicGenerator.GenerateWith(characterClass, feats, equipment);
+            var magic = magicGenerator.GenerateWith(alignment, characterClass, feats, equipment);
             Assert.That(magic.Animal, Is.Null);
         }
 
@@ -63,9 +66,9 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         public void GenerateAnimal()
         {
             Animal animal = new Animal();
-            mockAnimalGenerator.Setup(g => g.GenerateFrom(characterClass, feats)).Returns(animal);
+            mockAnimalGenerator.Setup(g => g.GenerateFrom(alignment, characterClass, feats)).Returns(animal);
 
-            var magic = magicGenerator.GenerateWith(characterClass, feats, equipment);
+            var magic = magicGenerator.GenerateWith(alignment, characterClass, feats, equipment);
             Assert.That(magic.Animal, Is.EqualTo(animal));
         }
     }
