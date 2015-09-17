@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Ninject;
-using CharacterGen.Common.Abilities.Skills;
-using CharacterGen.Common.Abilities.Stats;
+﻿using CharacterGen.Common.Abilities.Skills;
 using CharacterGen.Generators.Abilities;
 using CharacterGen.Generators.Randomizers.Stats;
+using Ninject;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CharacterGen.Tests.Integration.Stress.Abilities
 {
@@ -20,8 +19,6 @@ namespace CharacterGen.Tests.Integration.Stress.Abilities
         [Inject, Named(StatsRandomizerTypeConstants.Raw)]
         public IStatsRandomizer StatsRandomizer { get; set; }
 
-        private IEnumerable<String> untrainedSkills;
-        private IEnumerable<String> allSkills;
         private IEnumerable<String> trainedSkills;
 
         [SetUp]
@@ -48,9 +45,6 @@ namespace CharacterGen.Tests.Integration.Stress.Abilities
                 SkillConstants.Tumble,
                 SkillConstants.UseMagicDevice
             };
-
-            allSkills = SkillConstants.GetSkills();
-            untrainedSkills = allSkills.Except(trainedSkills);
         }
 
         [TestCase("SkillsGenerator")]
@@ -68,15 +62,9 @@ namespace CharacterGen.Tests.Integration.Stress.Abilities
 
             var skills = SkillsGenerator.GenerateWith(characterClass, race, stats);
 
-            foreach (var skill in untrainedSkills)
-                Assert.That(skills.Keys, Contains.Item(skill));
-
             foreach (var skill in trainedSkills)
                 if (skills.Keys.Contains(skill))
                     Assert.That(skills[skill].ClassSkill, Is.True);
-
-            foreach (var skill in skills.Keys)
-                Assert.That(allSkills, Contains.Item(skill));
 
             foreach (var skill in skills.Values)
             {
@@ -86,8 +74,7 @@ namespace CharacterGen.Tests.Integration.Stress.Abilities
             }
 
             var sum = skills.Values.Sum(s => s.Ranks);
-            var minimumRanks = (2 + stats[StatConstants.Intelligence].Bonus) * characterClass.Level;
-            Assert.That(sum, Is.AtLeast(minimumRanks));
+            Assert.That(sum, Is.AtLeast(characterClass.Level));
         }
     }
 }

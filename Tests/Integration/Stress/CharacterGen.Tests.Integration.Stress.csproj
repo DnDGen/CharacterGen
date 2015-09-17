@@ -80,7 +80,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Abilities\AbilitiesGeneratorTests.cs" />
+    <Compile Include="Abilities\AnimalAbilitiesGeneratorTests.cs" />
+    <Compile Include="Abilities\CharacterAbilitiesGeneratorTests.cs" />
     <Compile Include="Abilities\Feats\AdditionalFeatsGeneratorTests.cs" />
     <Compile Include="Abilities\Feats\ClassFeatsGeneratorTests.cs" />
     <Compile Include="Abilities\Feats\RacialFeatsGeneratorTests.cs" />
@@ -89,8 +90,9 @@
     <Compile Include="CharacterClassGeneratorTests.cs" />
     <Compile Include="CharacterGeneratorTests.cs" />
     <Compile Include="AlignmentGeneratorTests.cs" />
+    <Compile Include="Combats\AnimalCombatGeneratorTests.cs" />
     <Compile Include="Combats\ArmorClassGeneratorTests.cs" />
-    <Compile Include="Combats\CombatGeneratorTests.cs" />
+    <Compile Include="Combats\CharacterCombatGeneratorTests.cs" />
     <Compile Include="Combats\HitPointsGeneratorTests.cs" />
     <Compile Include="Abilities\LanguageGeneratorTests.cs" />
     <Compile Include="Items\ArmorGeneratorTests.cs" />

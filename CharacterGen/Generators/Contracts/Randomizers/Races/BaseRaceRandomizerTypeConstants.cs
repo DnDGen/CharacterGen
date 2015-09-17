@@ -4,6 +4,7 @@ namespace CharacterGen.Generators.Randomizers.Races
 {
     public static class BaseRaceRandomizerTypeConstants
     {
+        public const String Animal = "Animal";
         public const String Any = "Any";
         public const String Evil = "Evil";
         public const String Good = "Good";

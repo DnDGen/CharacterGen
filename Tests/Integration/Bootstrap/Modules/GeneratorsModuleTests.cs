@@ -2,6 +2,8 @@
 using CharacterGen.Generators.Abilities;
 using CharacterGen.Generators.Abilities.Feats;
 using CharacterGen.Generators.Combats;
+using CharacterGen.Generators.Domain.Abilities;
+using CharacterGen.Generators.Domain.Combats;
 using CharacterGen.Generators.Domain.Items;
 using CharacterGen.Generators.Domain.Randomizers.Alignments;
 using CharacterGen.Generators.Domain.Randomizers.CharacterClasses.ClassNames;
@@ -26,49 +28,49 @@ namespace CharacterGen.Tests.Integration.Bootstrap.Modules
     public class GeneratorsModuleTests : BootstrapTests
     {
         [Test]
-        public void AlignmentGeneratorsAreNotGeneratedAsSingletons()
+        public void AlignmentGeneratorIsNotBuiltAsSingleton()
         {
             AssertNotSingleton<IAlignmentGenerator>();
         }
 
         [Test]
-        public void CharacterGeneratorsAreNotGeneratedAsSingletons()
+        public void CharacterGeneratorIsNotBuiltAsSingleton()
         {
             AssertNotSingleton<ICharacterGenerator>();
         }
 
         [Test]
-        public void CharacterClassGeneratorsAreNotGeneratedAsSingletons()
+        public void CharacterClassGeneratorIsNotBuiltAsSingleton()
         {
             AssertNotSingleton<ICharacterClassGenerator>();
         }
 
         [Test]
-        public void HitPointsGeneratorsAreNotGeneratedAsSingletons()
+        public void HitPointsGeneratorIsNotBuiltAsSingleton()
         {
             AssertNotSingleton<IHitPointsGenerator>();
         }
 
         [Test]
-        public void LanguageGeneratorsAreNotGeneratedAsSingletons()
+        public void LanguageGeneratorIsNotBuiltAsSingleton()
         {
             AssertNotSingleton<ILanguageGenerator>();
         }
 
         [Test]
-        public void RaceGeneratorsAreNotGeneratedAsSingletons()
+        public void RaceGeneratorIsNotBuiltAsSingleton()
         {
             AssertNotSingleton<IRaceGenerator>();
         }
 
         [Test]
-        public void RandomizerVerifiersAreNotGeneratedAsSingletons()
+        public void RandomizerVerifierIsNotBuiltAsSingleton()
         {
             AssertNotSingleton<IRandomizerVerifier>();
         }
 
         [Test]
-        public void StatsGeneratorsAreNotGeneratedAsSingletons()
+        public void StatsGeneratorIsNotBuiltAsSingleton()
         {
             AssertNotSingleton<IStatsGenerator>();
         }
@@ -150,13 +152,13 @@ namespace CharacterGen.Tests.Integration.Bootstrap.Modules
         [TestCase(AlignmentRandomizerTypeConstants.NonGood)]
         [TestCase(AlignmentRandomizerTypeConstants.NonLawful)]
         [TestCase(AlignmentRandomizerTypeConstants.NonNeutral)]
-        public void AlignmentRandomizerIsNotGeneratedAsSingleton(String name)
+        public void AlignmentRandomizerIsNotBuiltAsSingleton(String name)
         {
             AssertNotSingleton<IAlignmentRandomizer>(name);
         }
 
         [Test]
-        public void SetAlignmentRandomizerIsNotGeneratedAsSingleton()
+        public void SetAlignmentRandomizerIsNotBuiltAsSingleton()
         {
             AssertNotSingleton<ISetAlignmentRandomizer>();
         }
@@ -210,13 +212,13 @@ namespace CharacterGen.Tests.Integration.Bootstrap.Modules
         [TestCase(ClassNameRandomizerTypeConstants.Spellcaster)]
         [TestCase(ClassNameRandomizerTypeConstants.Stealth)]
         [TestCase(ClassNameRandomizerTypeConstants.Warrior)]
-        public void ClassNameRandomizerIsNotGeneratedAsSingleton(String name)
+        public void ClassNameRandomizerIsNotBuiltAsSingleton(String name)
         {
             AssertNotSingleton<IClassNameRandomizer>(name);
         }
 
         [Test]
-        public void SetClassNameRandomizerIsNotGeneratedAsSingleton()
+        public void SetClassNameRandomizerIsNotBuiltAsSingleton()
         {
             AssertNotSingleton<ISetClassNameRandomizer>();
         }
@@ -256,13 +258,13 @@ namespace CharacterGen.Tests.Integration.Bootstrap.Modules
         [TestCase(LevelRandomizerTypeConstants.Low)]
         [TestCase(LevelRandomizerTypeConstants.Medium)]
         [TestCase(LevelRandomizerTypeConstants.VeryHigh)]
-        public void LevelRandomizerIsNotGeneratedAsSingleton(String name)
+        public void LevelRandomizerIsNotBuiltAsSingleton(String name)
         {
             AssertNotSingleton<ILevelRandomizer>(name);
         }
 
         [Test]
-        public void SetLevelRandomizerIsNotGeneratedAsSingleton()
+        public void SetLevelRandomizerIsNotBuiltAsSingleton()
         {
             AssertNotSingleton<ISetLevelRandomizer>();
         }
@@ -271,6 +273,12 @@ namespace CharacterGen.Tests.Integration.Bootstrap.Modules
         public void BaseRaceRandomizerNamedAnyIsAnyBaseRaceRandomizer()
         {
             AssertNamedIsInstanceOf<IBaseRaceRandomizer, AnyBaseRaceRandomizer>(BaseRaceRandomizerTypeConstants.Any);
+        }
+
+        [Test]
+        public void BaseRaceRandomizerNamedAnimalIsAnimalBaseRaceRandomizer()
+        {
+            AssertNamedIsInstanceOf<IBaseRaceRandomizer, AnimalBaseRaceRandomizer>(BaseRaceRandomizerTypeConstants.Animal);
         }
 
         [Test]
@@ -321,6 +329,7 @@ namespace CharacterGen.Tests.Integration.Bootstrap.Modules
             AssertNamedIsInstanceOf<IBaseRaceRandomizer, NonNeutralBaseRaceRandomizer>(BaseRaceRandomizerTypeConstants.NonNeutral);
         }
 
+        [TestCase(BaseRaceRandomizerTypeConstants.Animal)]
         [TestCase(BaseRaceRandomizerTypeConstants.Any)]
         [TestCase(BaseRaceRandomizerTypeConstants.Evil)]
         [TestCase(BaseRaceRandomizerTypeConstants.Good)]
@@ -330,13 +339,13 @@ namespace CharacterGen.Tests.Integration.Bootstrap.Modules
         [TestCase(BaseRaceRandomizerTypeConstants.NonNeutral)]
         [TestCase(BaseRaceRandomizerTypeConstants.NonStandard)]
         [TestCase(BaseRaceRandomizerTypeConstants.Standard)]
-        public void BaseRaceRandomizerIsNotGeneratedAsSingleton(String name)
+        public void BaseRaceRandomizerIsNotBuiltAsSingleton(String name)
         {
             AssertNotSingleton<IBaseRaceRandomizer>(name);
         }
 
         [Test]
-        public void SetBaseRaceRandomizerIsNotGeneratedAsSingleton()
+        public void SetBaseRaceRandomizerIsNotBuiltAsSingleton()
         {
             AssertNotSingleton<ISetBaseRaceRandomizer>();
         }
@@ -420,14 +429,20 @@ namespace CharacterGen.Tests.Integration.Bootstrap.Modules
         [TestCase(MetaraceRandomizerTypeConstants.NonEvil)]
         [TestCase(MetaraceRandomizerTypeConstants.NonGood)]
         [TestCase(MetaraceRandomizerTypeConstants.NonNeutral)]
-        public void MetaraceRandomizerIsNotGeneratedAsSingleton(String name)
+        public void MetaraceRandomizerIsNotBuiltAsSingleton(String name)
         {
             AssertNotSingleton<IForcableMetaraceRandomizer>(name);
             AssertNotSingleton<IMetaraceRandomizer>(name);
         }
 
         [Test]
-        public void SetMetaraceRandomizerIsNotGeneratedAsSingleton()
+        public void NoMetaraceRandomizerIsNotBuiltAsSingleton()
+        {
+            AssertNotSingleton<IMetaraceRandomizer>(MetaraceRandomizerTypeConstants.None);
+        }
+
+        [Test]
+        public void SetMetaraceRandomizerIsNotBuiltAsSingleton()
         {
             AssertNotSingleton<ISetMetaraceRandomizer>();
         }
@@ -488,49 +503,75 @@ namespace CharacterGen.Tests.Integration.Bootstrap.Modules
         [TestCase(StatsRandomizerTypeConstants.Poor)]
         [TestCase(StatsRandomizerTypeConstants.Raw)]
         [TestCase(StatsRandomizerTypeConstants.TwoTenSidedDice)]
-        public void StatRandomizerIsNotGeneratedAsSingleton(String name)
+        public void StatRandomizerIsNotBuiltAsSingleton(String name)
         {
             AssertNotSingleton<IStatsRandomizer>(name);
         }
 
         [Test]
-        public void SetStatsRandomizerIsNotGeneratedAsSingleton()
+        public void SetStatsRandomizerIsNotBuiltAsSingleton()
         {
             AssertNotSingleton<ISetStatsRandomizer>();
         }
 
         [Test]
-        public void AbilitiesGeneratorIsNotGeneratedAsSingleton()
+        public void AbilitiesGeneratorNamedCharacterIsCharacterAbilitiesGenerator()
         {
-            AssertNotSingleton<IAbilitiesGenerator>();
+            AssertNamedIsInstanceOf<IAbilitiesGenerator, CharacterAbilitiesGenerator>(AbilitiesGeneratorTypeConstants.Character);
         }
 
         [Test]
-        public void CombatGeneratorIsNotGeneratedAsSingleton()
+        public void AbilitiesGeneratorNamedAnimalIsAnimalAbilitiesGenerator()
         {
-            AssertNotSingleton<ICombatGenerator>();
+            AssertNamedIsInstanceOf<IAbilitiesGenerator, AnimalAbilitiesGenerator>(AbilitiesGeneratorTypeConstants.Animal);
+        }
+
+        [TestCase(AbilitiesGeneratorTypeConstants.Animal)]
+        [TestCase(AbilitiesGeneratorTypeConstants.Character)]
+        public void AbilitiesGeneratorIsNotBuiltAsSingleton(String name)
+        {
+            AssertNotSingleton<IAbilitiesGenerator>(name);
         }
 
         [Test]
-        public void EquipmentGeneratorIsNotGeneratedAsSingleton()
+        public void CombatGeneratorNamedCharacterIsCharacterCombatGenerator()
+        {
+            AssertNamedIsInstanceOf<ICombatGenerator, CharacterCombatGenerator>(AbilitiesGeneratorTypeConstants.Character);
+        }
+
+        [Test]
+        public void CombatGeneratorNamedAnimalIsAnimalCombatGenerator()
+        {
+            AssertNamedIsInstanceOf<ICombatGenerator, AnimalCombatGenerator>(AbilitiesGeneratorTypeConstants.Animal);
+        }
+
+        [TestCase(AbilitiesGeneratorTypeConstants.Animal)]
+        [TestCase(AbilitiesGeneratorTypeConstants.Character)]
+        public void CombatGeneratorIsNotBuiltAsSingleton(String name)
+        {
+            AssertNotSingleton<ICombatGenerator>(name);
+        }
+
+        [Test]
+        public void EquipmentGeneratorIsNotBuiltAsSingleton()
         {
             AssertNotSingleton<IEquipmentGenerator>();
         }
 
         [Test]
-        public void SkillsGeneratorIsNotGeneratedAsSingleton()
+        public void SkillsGeneratorIsNotBuiltAsSingleton()
         {
             AssertNotSingleton<ISkillsGenerator>();
         }
 
         [Test]
-        public void FeatsGeneratorIsNotGeneratedAsSingleton()
+        public void FeatsGeneratorIsNotBuiltAsSingleton()
         {
             AssertNotSingleton<IFeatsGenerator>();
         }
 
         [Test]
-        public void AdditionalFeatsGeneratorIsNotGeneratedAsSingleton()
+        public void AdditionalFeatsGeneratorIsNotBuiltAsSingleton()
         {
             AssertNotSingleton<IAdditionalFeatsGenerator>();
         }

@@ -13,13 +13,13 @@ namespace CharacterGen.Tests.Integration.Stress.Items
     [TestFixture]
     public class ArmorGeneratorTests : StressTests
     {
-        [Inject]
+        [Inject, Named(AbilitiesGeneratorTypeConstants.Character)]
         public IAbilitiesGenerator AbilitiesGenerator { get; set; }
         [Inject, Named(StatsRandomizerTypeConstants.Raw)]
         public IStatsRandomizer StatsRandomizer { get; set; }
         [Inject, Named(ItemTypeConstants.Armor)]
         public GearGenerator ArmorGenerator { get; set; }
-        [Inject]
+        [Inject, Named(AbilitiesGeneratorTypeConstants.Character)]
         public ICombatGenerator CombatGenerator { get; set; }
 
         [TestCase("ArmorGenerator")]

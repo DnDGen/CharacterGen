@@ -1,7 +1,6 @@
-﻿using System;
-using System.Linq;
-using CharacterGen.Common.Abilities.Skills;
+﻿using CharacterGen.Common.Abilities.Skills;
 using NUnit.Framework;
+using System;
 
 namespace CharacterGen.Tests.Unit.Common.Abilities.Skills
 {
@@ -53,56 +52,6 @@ namespace CharacterGen.Tests.Unit.Common.Abilities.Skills
         public void Constant(String constant, String value)
         {
             Assert.That(constant, Is.EqualTo(value));
-        }
-
-        [Test]
-        public void AllSkills()
-        {
-            var skills = SkillConstants.GetSkills();
-
-            Assert.That(skills, Contains.Item(SkillConstants.Appraise));
-            Assert.That(skills, Contains.Item(SkillConstants.Balance));
-            Assert.That(skills, Contains.Item(SkillConstants.Bluff));
-            Assert.That(skills, Contains.Item(SkillConstants.Climb));
-            Assert.That(skills, Contains.Item(SkillConstants.Concentration));
-            Assert.That(skills, Contains.Item(SkillConstants.DecipherScript));
-            Assert.That(skills, Contains.Item(SkillConstants.Diplomacy));
-            Assert.That(skills, Contains.Item(SkillConstants.DisableDevice));
-            Assert.That(skills, Contains.Item(SkillConstants.Disguise));
-            Assert.That(skills, Contains.Item(SkillConstants.EscapeArtist));
-            Assert.That(skills, Contains.Item(SkillConstants.Forgery));
-            Assert.That(skills, Contains.Item(SkillConstants.GatherInformation));
-            Assert.That(skills, Contains.Item(SkillConstants.HandleAnimal));
-            Assert.That(skills, Contains.Item(SkillConstants.Heal));
-            Assert.That(skills, Contains.Item(SkillConstants.Hide));
-            Assert.That(skills, Contains.Item(SkillConstants.Intimidate));
-            Assert.That(skills, Contains.Item(SkillConstants.Jump));
-            Assert.That(skills, Contains.Item(SkillConstants.KnowledgeArcana));
-            Assert.That(skills, Contains.Item(SkillConstants.KnowledgeArchitectureAndEngineering));
-            Assert.That(skills, Contains.Item(SkillConstants.KnowledgeDungeoneering));
-            Assert.That(skills, Contains.Item(SkillConstants.KnowledgeGeography));
-            Assert.That(skills, Contains.Item(SkillConstants.KnowledgeHistory));
-            Assert.That(skills, Contains.Item(SkillConstants.KnowledgeLocal));
-            Assert.That(skills, Contains.Item(SkillConstants.KnowledgeNature));
-            Assert.That(skills, Contains.Item(SkillConstants.KnowledgeNobilityAndRoyalty));
-            Assert.That(skills, Contains.Item(SkillConstants.KnowledgeReligion));
-            Assert.That(skills, Contains.Item(SkillConstants.KnowledgeThePlanes));
-            Assert.That(skills, Contains.Item(SkillConstants.Listen));
-            Assert.That(skills, Contains.Item(SkillConstants.MoveSilently));
-            Assert.That(skills, Contains.Item(SkillConstants.OpenLock));
-            Assert.That(skills, Contains.Item(SkillConstants.Perform));
-            Assert.That(skills, Contains.Item(SkillConstants.Ride));
-            Assert.That(skills, Contains.Item(SkillConstants.Search));
-            Assert.That(skills, Contains.Item(SkillConstants.SenseMotive));
-            Assert.That(skills, Contains.Item(SkillConstants.SleightOfHand));
-            Assert.That(skills, Contains.Item(SkillConstants.Spellcraft));
-            Assert.That(skills, Contains.Item(SkillConstants.Spot));
-            Assert.That(skills, Contains.Item(SkillConstants.Survival));
-            Assert.That(skills, Contains.Item(SkillConstants.Swim));
-            Assert.That(skills, Contains.Item(SkillConstants.Tumble));
-            Assert.That(skills, Contains.Item(SkillConstants.UseMagicDevice));
-            Assert.That(skills, Contains.Item(SkillConstants.UseRope));
-            Assert.That(skills.Count(), Is.EqualTo(42));
         }
     }
 }

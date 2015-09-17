@@ -61,7 +61,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abilities\AbilitiesGenerator.cs" />
+    <Compile Include="Abilities\AnimalAbilitiesGenerator.cs" />
+    <Compile Include="Abilities\CharacterAbilitiesGenerator.cs" />
     <Compile Include="Abilities\Feats\AdditionalFeatsGenerator.cs" />
     <Compile Include="Abilities\Feats\ClassFeatsGenerator.cs" />
     <Compile Include="Abilities\Feats\FeatFocusGenerator.cs" />
@@ -71,8 +72,9 @@
     <Compile Include="AlignmentGenerator.cs" />
     <Compile Include="CharacterClassGenerator.cs" />
     <Compile Include="CharacterGenerator.cs" />
+    <Compile Include="Combats\AnimalCombatGenerator.cs" />
     <Compile Include="Combats\ArmorClassGenerator.cs" />
-    <Compile Include="Combats\CombatGenerator.cs" />
+    <Compile Include="Combats\CharacterCombatGenerator.cs" />
     <Compile Include="Combats\HitPointsGenerator.cs" />
     <Compile Include="Abilities\LanguageGenerator.cs" />
     <Compile Include="Combats\SavingThrowsGenerator.cs" />
@@ -87,6 +89,7 @@
     <Compile Include="Randomizers\Alignments\SetAlignmentRandomizer.cs" />
     <Compile Include="Randomizers\CharacterClasses\ClassNames\SetClassNameRandomizer.cs" />
     <Compile Include="Randomizers\CharacterClasses\Levels\SetLevelRandomizer.cs" />
+    <Compile Include="Randomizers\Races\BaseRaces\AnimalBaseRaceRandomizer.cs" />
     <Compile Include="Randomizers\Races\BaseRaces\SetBaseRaceRandomizer.cs" />
     <Compile Include="Abilities\StatsGenerator.cs" />
     <Compile Include="Randomizers\Alignments\AnyAlignmentRandomizer.cs" />

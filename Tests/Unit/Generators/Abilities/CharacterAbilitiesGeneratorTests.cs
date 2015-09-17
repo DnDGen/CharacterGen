@@ -18,7 +18,7 @@ using System.Collections.Generic;
 namespace CharacterGen.Tests.Unit.Generators.Abilities
 {
     [TestFixture]
-    public class AbilitiesGeneratorTests
+    public class CharacterAbilitiesGeneratorTests
     {
         private IAbilitiesGenerator abilitiesGenerator;
         private Mock<IStatsRandomizer> mockStatsRandomizer;
@@ -41,7 +41,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
             mockSkillsGenerator = new Mock<ISkillsGenerator>();
             mockFeatsGenerator = new Mock<IFeatsGenerator>();
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
-            abilitiesGenerator = new AbilitiesGenerator(mockStatsGenerator.Object, mockLanguageGenerator.Object,
+            abilitiesGenerator = new CharacterAbilitiesGenerator(mockStatsGenerator.Object, mockLanguageGenerator.Object,
                 mockSkillsGenerator.Object, mockFeatsGenerator.Object, mockCollectionsSelector.Object);
             stats = new Dictionary<String, Stat>();
             baseAttack = new BaseAttack();

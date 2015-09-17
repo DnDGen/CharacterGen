@@ -20,12 +20,16 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
 
         private Dictionary<String, IEnumerable<String>> classSkills;
         private Dictionary<String, IEnumerable<String>> crossClassSkills;
+        private IEnumerable<String> allSkills;
 
         [SetUp]
         public void Setup()
         {
             classSkills = Mapper.Map(TableNameConstants.Set.Collection.ClassSkills);
             crossClassSkills = Mapper.Map(TableNameConstants.Set.Collection.CrossClassSkills);
+
+            var skills = Mapper.Map(TableNameConstants.Set.Collection.SkillGroups);
+            allSkills = skills[GroupConstants.Skills];
         }
 
         [TestCase(CharacterClassConstants.Barbarian)]
@@ -118,11 +122,11 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
                 SkillConstants.UseMagicDevice
             };
 
-            var untrainedSkills = SkillConstants.GetSkills().Except(trainedSkills);
-            var allSkills = classSkills[className].Union(crossClassSkills[className]);
+            var untrainedSkills = allSkills.Except(trainedSkills);
+            var allCharacterSkills = classSkills[className].Union(crossClassSkills[className]);
 
             foreach (var skill in untrainedSkills)
-                Assert.That(allSkills, Contains.Item(skill));
+                Assert.That(allCharacterSkills, Contains.Item(skill));
         }
     }
 }

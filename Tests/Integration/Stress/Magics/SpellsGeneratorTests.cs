@@ -13,13 +13,13 @@ namespace CharacterGen.Tests.Integration.Stress.Magics
     [TestFixture]
     public class SpellsGeneratorTests : StressTests
     {
-        [Inject]
+        [Inject, Named(AbilitiesGeneratorTypeConstants.Character)]
         public IAbilitiesGenerator AbilitiesGenerator { get; set; }
         [Inject, Named(StatsRandomizerTypeConstants.Raw)]
         public IStatsRandomizer StatsRandomizer { get; set; }
         [Inject]
         public IEquipmentGenerator EquipmentGenerator { get; set; }
-        [Inject]
+        [Inject, Named(AbilitiesGeneratorTypeConstants.Character)]
         public ICombatGenerator CombatGenerator { get; set; }
         [Inject]
         public ISpellsGenerator SpellsGenerator { get; set; }

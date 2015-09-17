@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace CharacterGen.Common.Abilities.Skills
 {
@@ -47,54 +46,5 @@ namespace CharacterGen.Common.Abilities.Skills
         public const String Tumble = "Tumble";
         public const String UseMagicDevice = "Use Magic Device";
         public const String UseRope = "Use Rope";
-
-        public static IEnumerable<String> GetSkills()
-        {
-            return new[]
-            {
-                Appraise,
-                Balance,
-                Bluff,
-                Climb,
-                Concentration,
-                DecipherScript,
-                Diplomacy,
-                DisableDevice,
-                Disguise,
-                EscapeArtist,
-                Forgery,
-                GatherInformation,
-                HandleAnimal,
-                Heal,
-                Hide,
-                Intimidate,
-                Jump,
-                KnowledgeArcana,
-                KnowledgeArchitectureAndEngineering,
-                KnowledgeDungeoneering,
-                KnowledgeGeography,
-                KnowledgeHistory,
-                KnowledgeLocal,
-                KnowledgeNature,
-                KnowledgeNobilityAndRoyalty,
-                KnowledgeReligion,
-                KnowledgeThePlanes,
-                Listen,
-                MoveSilently,
-                OpenLock,
-                Perform,
-                Ride,
-                Search,
-                SenseMotive,
-                SleightOfHand,
-                Spellcraft,
-                Spot,
-                Survival,
-                Swim,
-                Tumble,
-                UseMagicDevice,
-                UseRope
-            };
-        }
     }
 }

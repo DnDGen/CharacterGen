@@ -39,8 +39,13 @@ namespace CharacterGen.Bootstrap.Modules
             Bind<IRaceGenerator>().To<RaceGenerator>();
             Bind<IRandomizerVerifier>().To<RandomizerVerifier>();
             Bind<IStatsGenerator>().To<StatsGenerator>();
-            Bind<IAbilitiesGenerator>().To<AbilitiesGenerator>();
-            Bind<ICombatGenerator>().To<CombatGenerator>();
+
+            Bind<IAbilitiesGenerator>().To<CharacterAbilitiesGenerator>().Named(AbilitiesGeneratorTypeConstants.Character);
+            Bind<IAbilitiesGenerator>().To<AnimalAbilitiesGenerator>().Named(AbilitiesGeneratorTypeConstants.Animal);
+
+            Bind<ICombatGenerator>().To<CharacterCombatGenerator>().Named(AbilitiesGeneratorTypeConstants.Character);
+            Bind<ICombatGenerator>().To<AnimalCombatGenerator>().Named(AbilitiesGeneratorTypeConstants.Animal);
+
             Bind<IEquipmentGenerator>().ToMethod(c => EquipmentGeneratorFactory.CreateWith(c.Kernel));
             Bind<ISkillsGenerator>().To<SkillsGenerator>();
             Bind<IFeatsGenerator>().To<FeatsGenerator>();
@@ -54,7 +59,7 @@ namespace CharacterGen.Bootstrap.Modules
             Bind<GearGenerator>().ToMethod(c => WeaponGeneratorFactory.CreateWith(c.Kernel)).Named(ItemTypeConstants.Weapon);
             Bind<IMagicGenerator>().To<MagicGenerator>();
             Bind<ISpellsGenerator>().To<SpellsGenerator>();
-            Bind<IAnimalGenerator>().To<AnimalGenerator>();
+            Bind<IAnimalGenerator>().ToMethod(c => AnimalGeneratorFactory.CreateWith(c.Kernel));
 
             Bind<IAlignmentRandomizer>().To<AnyAlignmentRandomizer>().Named(AlignmentRandomizerTypeConstants.Any);
             Bind<IAlignmentRandomizer>().To<ChaoticAlignmentRandomizer>().Named(AlignmentRandomizerTypeConstants.Chaotic);
@@ -82,6 +87,7 @@ namespace CharacterGen.Bootstrap.Modules
             Bind<ILevelRandomizer>().To<MediumLevelRandomizer>().Named(LevelRandomizerTypeConstants.Medium);
             Bind<ILevelRandomizer>().To<VeryHighLevelRandomizer>().Named(LevelRandomizerTypeConstants.VeryHigh);
 
+            Bind<IBaseRaceRandomizer>().To<AnimalBaseRaceRandomizer>().Named(BaseRaceRandomizerTypeConstants.Animal);
             Bind<IBaseRaceRandomizer>().To<AnyBaseRaceRandomizer>().Named(BaseRaceRandomizerTypeConstants.Any);
             Bind<IBaseRaceRandomizer>().To<EvilBaseRaceRandomizer>().Named(BaseRaceRandomizerTypeConstants.Evil);
             Bind<IBaseRaceRandomizer>().To<GoodBaseRaceRandomizer>().Named(BaseRaceRandomizerTypeConstants.Good);

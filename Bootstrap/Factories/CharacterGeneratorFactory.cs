@@ -23,8 +23,8 @@ namespace CharacterGen.Bootstrap.Factories
             var raceGenerator = kernel.Get<IRaceGenerator>();
             var randomizerVerifier = kernel.Get<IRandomizerVerifier>();
             var percentileSelector = kernel.Get<IPercentileSelector>();
-            var abilitiesGenerator = kernel.Get<IAbilitiesGenerator>();
-            var combatGenerator = kernel.Get<ICombatGenerator>();
+            var abilitiesGenerator = kernel.Get<IAbilitiesGenerator>(AbilitiesGeneratorTypeConstants.Character);
+            var combatGenerator = kernel.Get<ICombatGenerator>(CombatGeneratorTypeConstants.Character);
             var TreasureGenerator = kernel.Get<IEquipmentGenerator>();
             var setLevelRandomizer = kernel.Get<ISetLevelRandomizer>();
             var setAlignmentRandomizer = kernel.Get<ISetAlignmentRandomizer>();

@@ -1,26 +1,24 @@
-﻿using System;
-using System.Linq;
-using Ninject;
-using CharacterGen.Common.Abilities.Skills;
-using CharacterGen.Common.Abilities.Stats;
+﻿using CharacterGen.Common.Abilities.Stats;
 using CharacterGen.Generators.Abilities;
 using CharacterGen.Generators.Combats;
 using CharacterGen.Generators.Randomizers.Stats;
+using Ninject;
 using NUnit.Framework;
+using System;
 
 namespace CharacterGen.Tests.Integration.Stress.Abilities
 {
     [TestFixture]
-    public class AbilitiesGeneratorTests : StressTests
+    public class CharacterAbilitiesGeneratorTests : StressTests
     {
-        [Inject]
-        public IAbilitiesGenerator AbilitiesGenerator { get; set; }
+        [Inject, Named(AbilitiesGeneratorTypeConstants.Character)]
+        public IAbilitiesGenerator CharacterAbilitiesGenerator { get; set; }
         [Inject, Named(StatsRandomizerTypeConstants.Raw)]
         public IStatsRandomizer StatsRandomizer { get; set; }
-        [Inject]
-        public ICombatGenerator CombatGenerator { get; set; }
+        [Inject, Named(AbilitiesGeneratorTypeConstants.Character)]
+        public ICombatGenerator CharacterCombatGenerator { get; set; }
 
-        [TestCase("AbilitiesGenerator")]
+        [TestCase("CharacterAbilitiesGenerator")]
         public override void Stress(String stressSubject)
         {
             Stress();
@@ -31,9 +29,9 @@ namespace CharacterGen.Tests.Integration.Stress.Abilities
             var alignment = GetNewAlignment();
             var characterClass = GetNewCharacterClass(alignment);
             var race = GetNewRace(alignment, characterClass);
-            var baseAttack = CombatGenerator.GenerateBaseAttackWith(characterClass, race);
+            var baseAttack = CharacterCombatGenerator.GenerateBaseAttackWith(characterClass, race);
 
-            var ability = AbilitiesGenerator.GenerateWith(characterClass, race, StatsRandomizer, baseAttack);
+            var ability = CharacterAbilitiesGenerator.GenerateWith(characterClass, race, StatsRandomizer, baseAttack);
             Assert.That(ability.Feats, Is.Not.Empty);
             Assert.That(ability.Languages, Is.Not.Empty);
 
@@ -52,10 +50,6 @@ namespace CharacterGen.Tests.Integration.Stress.Abilities
             Assert.That(ability.Stats[StatConstants.Wisdom].Value, Is.Positive);
 
             Assert.That(ability.Skills, Is.Not.Empty);
-
-            var skillNames = SkillConstants.GetSkills();
-            var extras = ability.Skills.Keys.Except(skillNames);
-            Assert.That(extras, Is.Empty);
 
             foreach (var skill in ability.Skills.Values)
             {

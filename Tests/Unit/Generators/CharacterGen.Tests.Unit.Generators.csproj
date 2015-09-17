@@ -69,7 +69,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abilities\AbilitiesGeneratorTests.cs" />
+    <Compile Include="Abilities\CharacterAbilitiesGeneratorTests.cs" />
+    <Compile Include="Abilities\AbilitiesGeneratorTypeConstantsTests.cs" />
     <Compile Include="Abilities\Feats\AdditionalFeatsGeneratorTests.cs" />
     <Compile Include="Abilities\Feats\ClassFeatsGeneratorTests.cs" />
     <Compile Include="Abilities\Feats\FeatFocusGeneratorTests.cs" />
@@ -80,7 +81,8 @@
     <Compile Include="CharacterClassGeneratorTests.cs" />
     <Compile Include="CharacterGeneratorTests.cs" />
     <Compile Include="Combats\ArmorClassGeneratorTests.cs" />
-    <Compile Include="Combats\CombatGeneratorTests.cs" />
+    <Compile Include="Combats\CharacterCombatGeneratorTests.cs" />
+    <Compile Include="Combats\CombatGeneratorTypeConstantsTests.cs" />
     <Compile Include="Combats\HitPointsGeneratorTests.cs" />
     <Compile Include="Abilities\LanguageGeneratorTests.cs" />
     <Compile Include="Combats\SavingThrowsGeneratorTests.cs" />
@@ -91,9 +93,13 @@
     <Compile Include="Magics\AnimalGeneratorTests.cs" />
     <Compile Include="Magics\MagicGeneratorTests.cs" />
     <Compile Include="RaceGeneratorTests.cs" />
+    <Compile Include="Randomizers\Alignments\AlignmentRandomizerTypeConstantsTests.cs" />
     <Compile Include="Randomizers\Alignments\SetAlignmentRandomizerTests.cs" />
+    <Compile Include="Randomizers\CharacterClasses\ClassNames\ClassNameRandomizerTypeConstantsTests.cs" />
     <Compile Include="Randomizers\CharacterClasses\ClassNames\SetClassNameRandomizerTests.cs" />
+    <Compile Include="Randomizers\CharacterClasses\Levels\LevelRandomizerTypeConstantsTests.cs" />
     <Compile Include="Randomizers\CharacterClasses\Levels\SetLevelRandomizerTests.cs" />
+    <Compile Include="Randomizers\Races\BaseRaces\BaseRaceRandomizerTypeConstantsTests.cs" />
     <Compile Include="Randomizers\Races\BaseRaces\SetBaseRaceRandomizerTests.cs" />
     <Compile Include="Abilities\StatsGeneratorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -142,6 +148,7 @@
     <Compile Include="Randomizers\Races\Metaraces\GoodMetaraceRandomizerTests.cs" />
     <Compile Include="Randomizers\Races\Metaraces\LycanthropeMetaraceRandomizerTests.cs" />
     <Compile Include="Randomizers\Races\Metaraces\MetaraceRandomizerTests.cs" />
+    <Compile Include="Randomizers\Races\Metaraces\MetaraceRandomizerTypeConstantsTests.cs" />
     <Compile Include="Randomizers\Races\Metaraces\NeutralMetaraceRandomizerTests.cs" />
     <Compile Include="Randomizers\Races\Metaraces\NoMetaraceRandomizerTests.cs" />
     <Compile Include="Randomizers\Races\Metaraces\NonEvilMetaraceRandomizerTests.cs" />
@@ -158,6 +165,7 @@
     <Compile Include="Randomizers\Stats\PoorStatsRandomizerTests.cs" />
     <Compile Include="Randomizers\Stats\RawStatsRandomizerTests.cs" />
     <Compile Include="Randomizers\Stats\SetStatsRandomizerTests.cs" />
+    <Compile Include="Randomizers\Stats\StatsRandomizerTypeConstantsTests.cs" />
     <Compile Include="Randomizers\Stats\TwoTenSidedDiceStatsRandomizerTests.cs" />
     <Compile Include="Verifiers\RandomizerVerifierTests.cs" />
   </ItemGroup>
