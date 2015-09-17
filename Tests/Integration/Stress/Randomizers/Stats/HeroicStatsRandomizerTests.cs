@@ -1,11 +1,10 @@
-﻿using System;
+﻿using CharacterGen.Common.Abilities.Stats;
+using CharacterGen.Generators.Randomizers.Stats;
+using Ninject;
+using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Ninject;
-using CharacterGen.Common.Abilities.Stats;
-using CharacterGen.Generators.Randomizers.Stats;
-using CharacterGen.Generators.Randomizers.Stats;
-using NUnit.Framework;
 
 namespace CharacterGen.Tests.Integration.Stress.Randomizers.Stats
 {

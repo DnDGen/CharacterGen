@@ -41,30 +41,55 @@ namespace CharacterGen.Generators.Domain.Magics
             this.animalCombatGenerator = animalCombatGenerator;
         }
 
-        public Animal GenerateFrom(Alignment alignment, CharacterClass characterClass, IEnumerable<Feat> feats)
+        public Animal GenerateFrom(Alignment alignment, CharacterClass characterClass, Race race, IEnumerable<Feat> feats)
         {
-            var animals = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.Animals, characterClass.ClassName);
+            var levelAdjustments = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments);
+            var effectiveCharacterClass = GetEffectiveCharacterClass(characterClass);
 
-            if (animals.Any() == false)
+            if (CharacterCanHaveAnimal(effectiveCharacterClass, race, levelAdjustments) == false)
                 return null;
 
-            var levelAdjustments = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments);
-
             var animal = new Animal();
-            animal.Race = Generate<Race>(() => raceGenerator.GenerateWith(alignment, characterClass, animalBaseRaceRandomizer, noMetaraceRandomizer),
-                a => characterClass.Level + levelAdjustments[a.BaseRace] > 0);
+            var improvedFamiliars = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.Animals, FeatConstants.ImprovedFamiliar);
+            var characterHasImprovedFamiliarFeat = feats.Any(f => f.Name == FeatConstants.ImprovedFamiliar);
 
-            var baseAttack = animalCombatGenerator.GenerateBaseAttackWith(characterClass, animal.Race);
-            animal.Ability = animalAbilitiesGenerator.GenerateWith(characterClass, animal.Race, setStatsRandomizer, baseAttack);
+            animal.Race = Generate<Race>(() => raceGenerator.GenerateWith(alignment, effectiveCharacterClass, animalBaseRaceRandomizer, noMetaraceRandomizer),
+                a => effectiveCharacterClass.Level + levelAdjustments[a.BaseRace] > 0 && (characterHasImprovedFamiliarFeat || improvedFamiliars.Contains(a.BaseRace) == false));
+
+            var baseAttack = animalCombatGenerator.GenerateBaseAttackWith(effectiveCharacterClass, animal.Race);
+            animal.Ability = animalAbilitiesGenerator.GenerateWith(effectiveCharacterClass, animal.Race, setStatsRandomizer, baseAttack);
 
             var emptyEquipment = new Equipment();
-            animal.Combat = animalCombatGenerator.GenerateWith(baseAttack, characterClass, animal.Race, animal.Ability.Feats, animal.Ability.Stats, emptyEquipment);
-            
-            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.LevelXAnimalTricks, characterClass.Level);
+            animal.Combat = animalCombatGenerator.GenerateWith(baseAttack, effectiveCharacterClass, animal.Race, animal.Ability.Feats, animal.Ability.Stats, emptyEquipment);
+
+            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.LevelXAnimalTricks, effectiveCharacterClass.Level);
             var tricks = adjustmentsSelector.SelectFrom(tableName);
-            animal.Tricks = tricks[characterClass.ClassName];
+            animal.Tricks = tricks[effectiveCharacterClass.ClassName];
 
             return animal;
+        }
+
+        private CharacterClass GetEffectiveCharacterClass(CharacterClass characterClass)
+        {
+            if (characterClass.ClassName != CharacterClassConstants.Ranger)
+                return characterClass;
+
+            var effectiveCharacterClass = new CharacterClass();
+            effectiveCharacterClass.ClassName = CharacterClassConstants.Druid;
+            effectiveCharacterClass.Level = characterClass.Level / 2;
+
+            return effectiveCharacterClass;
+        }
+
+        private Boolean CharacterCanHaveAnimal(CharacterClass characterClass, Race race, Dictionary<String, Int32> levelAdjustments)
+        {
+            var animals = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.Animals, characterClass.ClassName);
+            var animalsForSize = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.Animals, race.Size);
+            var animalsWithinLevel = animals.Where(a => characterClass.Level + levelAdjustments[a] > 0);
+
+            animals = animals.Intersect(animalsForSize).Intersect(animalsWithinLevel);
+
+            return animals.Any();
         }
     }
 }

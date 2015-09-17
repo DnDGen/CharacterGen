@@ -182,7 +182,7 @@ namespace CharacterGen.Tests.Unit.Generators
             mockAbilitiesGenerator.Setup(g => g.GenerateWith(It.IsAny<CharacterClass>(), It.IsAny<Race>(), mockRawStatRandomizer.Object, It.IsAny<BaseAttack>())).Returns(() => new Ability());
             mockTreasureGenerator.Setup(g => g.GenerateWith(It.IsAny<IEnumerable<Feat>>(), It.IsAny<CharacterClass>(), It.IsAny<Race>())).Returns(() => new Equipment());
             mockCombatGenerator.Setup(g => g.GenerateWith(It.IsAny<BaseAttack>(), It.IsAny<CharacterClass>(), It.IsAny<Race>(), It.IsAny<IEnumerable<Feat>>(), It.IsAny<Dictionary<String, Stat>>(), It.IsAny<Equipment>())).Returns(() => new Combat());
-            mockMagicGenerator.Setup(g => g.GenerateWith(It.IsAny<Alignment>(), It.IsAny<CharacterClass>(), It.IsAny<IEnumerable<Feat>>(), It.IsAny<Equipment>())).Returns(() => new Magic());
+            mockMagicGenerator.Setup(g => g.GenerateWith(It.IsAny<Alignment>(), It.IsAny<CharacterClass>(), It.IsAny<Race>(), It.IsAny<IEnumerable<Feat>>(), It.IsAny<Equipment>())).Returns(() => new Magic());
 
             mockAlignmentGenerator.Setup(g => g.GenerateWith(mockAlignmentRandomizer.Object)).Returns(alignment);
             mockAlignmentGenerator.Setup(g => g.GenerateWith(mockSetAlignmentRandomizer.Object)).Returns(() => mockSetAlignmentRandomizer.Object.SetAlignment);
@@ -196,7 +196,7 @@ namespace CharacterGen.Tests.Unit.Generators
             mockTreasureGenerator.Setup(g => g.GenerateWith(ability.Feats, characterClass, race)).Returns(equipment);
             mockCombatGenerator.Setup(g => g.GenerateWith(baseAttack, characterClass, race, ability.Feats, ability.Stats, equipment)).Returns(combat);
             mockCombatGenerator.Setup(g => g.GenerateBaseAttackWith(characterClass, race)).Returns(baseAttack);
-            mockMagicGenerator.Setup(g => g.GenerateWith(alignment, characterClass, ability.Feats, equipment)).Returns(magic);
+            mockMagicGenerator.Setup(g => g.GenerateWith(alignment, characterClass, race, ability.Feats, equipment)).Returns(magic);
         }
 
         [Test]
@@ -538,7 +538,7 @@ namespace CharacterGen.Tests.Unit.Generators
             mockCombatGenerator.Setup(g => g.GenerateBaseAttackWith(cohortClass, cohortRace)).Returns(cohortBaseAttack);
             mockCombatGenerator.Setup(g => g.GenerateWith(cohortBaseAttack, cohortClass, cohortRace, cohortAbility.Feats, cohortAbility.Stats, cohortEquipment)).Returns(cohortCombat);
             mockTreasureGenerator.Setup(g => g.GenerateWith(cohortAbility.Feats, cohortClass, cohortRace)).Returns(cohortEquipment);
-            mockMagicGenerator.Setup(g => g.GenerateWith(cohortAlignment, cohortClass, cohortAbility.Feats, cohortEquipment)).Returns(cohortMagic);
+            mockMagicGenerator.Setup(g => g.GenerateWith(cohortAlignment, cohortClass, cohortRace, cohortAbility.Feats, cohortEquipment)).Returns(cohortMagic);
             mockPercentileSelector.SetupSequence(s => s.SelectFrom(TableNameConstants.Set.Percentile.Traits)).Returns("character is interesting").Returns("cohort is interesting");
 
             var character = GenerateCharacter();
@@ -863,7 +863,7 @@ namespace CharacterGen.Tests.Unit.Generators
                     .Returns(followerEquipment);
                 mockCombatGenerator.Setup(g => g.GenerateWith(followerBaseAttack, followerClass, followerRace, followerAbility.Feats, followerAbility.Stats, followerEquipment))
                     .Returns(followerCombat);
-                mockMagicGenerator.Setup(g => g.GenerateWith(followerAlignment, followerClass, followerAbility.Feats, followerEquipment))
+                mockMagicGenerator.Setup(g => g.GenerateWith(followerAlignment, followerClass, followerRace, followerAbility.Feats, followerEquipment))
                     .Returns(followerMagic);
             }
 

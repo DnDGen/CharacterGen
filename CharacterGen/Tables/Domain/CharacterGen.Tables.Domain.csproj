@@ -76,7 +76,7 @@
     <EmbeddedResource Include="CharacterClasses\GoodCharacterClasses.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="CharacterClasses\LevelAdjustments.xml" />
+    <EmbeddedResource Include="Races\LevelAdjustments.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="CharacterClasses\NeutralCharacterClasses.xml" />
@@ -1041,6 +1041,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Races\BaseRaces\Heights\MaleWood ElfHeights.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Animals.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

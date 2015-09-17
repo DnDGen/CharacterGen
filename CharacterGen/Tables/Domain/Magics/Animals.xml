@@ -1,0 +1,269 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+    <object>
+        <name>Barbarian</name>
+    </object>
+    <object>
+        <name>Bard</name>
+    </object>
+    <object>
+        <name>Cleric</name>
+    </object>
+    <object>
+        <name>Druid</name>
+      <item>Badger</item>
+      <item>Camel</item>
+      <item>Dire Rat</item>
+      <item>Dog</item>
+      <item>Riding Dog</item>
+      <item>Eagle</item>
+      <item>Hawk</item>
+      <item>Light Horse</item>
+      <item>Heavy Horse</item>
+      <item>Owl</item>
+      <item>Pony</item>
+      <item>Small Viper Snake</item>
+      <item>Medium Viper Snake</item>
+      <item>Wolf</item>
+      <item>Ape</item>
+      <item>Black Bear</item>
+      <item>Bison</item>
+      <item>Boar</item>
+      <item>Cheetah</item>
+      <item>Dire Badger</item>
+      <item>Dire Bat</item>
+      <item>Dire Weasel</item>
+      <item>Leopard</item>
+      <item>Monitor Lizard</item>
+      <item>Constrictor Snake</item>
+      <item>Large Viper Snake</item>
+      <item>Wolverine</item>
+      <item>Brown Bear</item>
+      <item>Dire Wolverine</item>
+      <item>Deinonychus</item>
+    </object>
+    <object>
+        <name>Fighter</name>
+    </object>
+    <object>
+        <name>Paladin</name>
+        <item>Heavy Warhorse</item>
+        <item>Warpony</item>
+    </object>
+    <object>
+        <name>Monk</name>
+    </object>
+    <object>
+        <name>Ranger</name>
+    </object>
+    <object>
+        <name>Rogue</name>
+    </object>
+    <object>
+        <name>Sorcerer</name>
+        <item>Bat</item>
+        <item>Cat</item>
+        <item>Hawk</item>
+        <item>Lizard</item>
+        <item>Owl</item>
+        <item>Rat</item>
+        <item>Raven</item>
+        <item>Tiny Viper Snake</item>
+      <item>Toad</item>
+      <item>Weasel</item>
+      <item>Shocker Lizard</item>
+      <item>Stirge</item>
+      <item>Formian Worker</item>
+      <item>Imp</item>
+      <item>Pseudodragon</item>
+      <item>Quasit</item>
+      <item>Celestial Bat</item>
+      <item>Celestial Cat</item>
+      <item>Celestial Hawk</item>
+      <item>Celestial Lizard</item>
+      <item>Celestial Owl</item>
+      <item>Celestial Rat</item>
+      <item>Celestial Raven</item>
+      <item>Celestial Tiny Viper Snake</item>
+      <item>Celestial Toad</item>
+      <item>Celestial Weasel</item>
+      <item>Fiendish Bat</item>
+      <item>Fiendish Cat</item>
+      <item>Fiendish Hawk</item>
+      <item>Fiendish Lizard</item>
+      <item>Fiendish Owl</item>
+      <item>Fiendish Rat</item>
+      <item>Fiendish Raven</item>
+      <item>Fiendish Tiny Viper Snake</item>
+      <item>Fiendish Toad</item>
+      <item>Fiendish Weasel</item>
+    </object>
+    <object>
+      <name>Wizard</name>
+      <item>Bat</item>
+      <item>Cat</item>
+      <item>Hawk</item>
+      <item>Lizard</item>
+      <item>Owl</item>
+      <item>Rat</item>
+      <item>Raven</item>
+      <item>Tiny Viper Snake</item>
+      <item>Toad</item>
+      <item>Weasel</item>
+      <item>Shocker Lizard</item>
+      <item>Stirge</item>
+      <item>Formian Worker</item>
+      <item>Imp</item>
+      <item>Pseudodragon</item>
+      <item>Quasit</item>
+      <item>Celestial Bat</item>
+      <item>Celestial Cat</item>
+      <item>Celestial Hawk</item>
+      <item>Celestial Lizard</item>
+      <item>Celestial Owl</item>
+      <item>Celestial Rat</item>
+      <item>Celestial Raven</item>
+      <item>Celestial Tiny Viper Snake</item>
+      <item>Celestial Toad</item>
+      <item>Celestial Weasel</item>
+      <item>Fiendish Bat</item>
+      <item>Fiendish Cat</item>
+      <item>Fiendish Hawk</item>
+      <item>Fiendish Lizard</item>
+      <item>Fiendish Owl</item>
+      <item>Fiendish Rat</item>
+      <item>Fiendish Raven</item>
+      <item>Fiendish Tiny Viper Snake</item>
+      <item>Fiendish Toad</item>
+      <item>Fiendish Weasel</item>
+    </object>
+    <object>
+        <name>Large</name>
+        <item>Badger</item>
+        <item>Camel</item>
+        <item>Dire Rat</item>
+        <item>Dog</item>
+        <item>Riding Dog</item>
+        <item>Eagle</item>
+        <item>Hawk</item>
+        <item>Light Horse</item>
+        <item>Heavy Horse</item>
+      <item>Owl</item>
+      <item>Pony</item>
+      <item>Small Viper Snake</item>
+      <item>Medium Viper Snake</item>
+      <item>Wolf</item>
+      <item>Ape</item>
+      <item>Black Bear</item>
+      <item>Bison</item>
+      <item>Boar</item>
+      <item>Cheetah</item>
+      <item>Dire Badger</item>
+      <item>Dire Bat</item>
+      <item>Dire Weasel</item>
+      <item>Leopard</item>
+      <item>Monitor Lizard</item>
+      <item>Constrictor Snake</item>
+      <item>Large Viper Snake</item>
+      <item>Wolverine</item>
+      <item>Brown Bear</item>
+      <item>Dire Wolverine</item>
+      <item>Deinonychus</item>
+    </object>
+    <object>
+        <name>Medium</name>
+      <item>Badger</item>
+      <item>Camel</item>
+      <item>Dire Rat</item>
+      <item>Dog</item>
+      <item>Riding Dog</item>
+      <item>Eagle</item>
+      <item>Hawk</item>
+      <item>Light Horse</item>
+      <item>Heavy Horse</item>
+      <item>Owl</item>
+      <item>Pony</item>
+      <item>Small Viper Snake</item>
+      <item>Medium Viper Snake</item>
+      <item>Wolf</item>
+      <item>Ape</item>
+      <item>Black Bear</item>
+      <item>Bison</item>
+      <item>Boar</item>
+      <item>Cheetah</item>
+      <item>Dire Badger</item>
+      <item>Dire Bat</item>
+      <item>Dire Weasel</item>
+      <item>Leopard</item>
+      <item>Monitor Lizard</item>
+      <item>Constrictor Snake</item>
+      <item>Large Viper Snake</item>
+      <item>Wolverine</item>
+      <item>Brown Bear</item>
+      <item>Dire Wolverine</item>
+      <item>Deinonychus</item>
+    </object>
+    <object>
+        <name>Small</name>
+      <item>Badger</item>
+      <item>Camel</item>
+      <item>Dire Rat</item>
+      <item>Dog</item>
+      <item>Riding Dog</item>
+      <item>Eagle</item>
+      <item>Hawk</item>
+      <item>Light Horse</item>
+      <item>Heavy Horse</item>
+      <item>Owl</item>
+      <item>Pony</item>
+      <item>Small Viper Snake</item>
+      <item>Medium Viper Snake</item>
+      <item>Wolf</item>
+      <item>Ape</item>
+      <item>Black Bear</item>
+      <item>Bison</item>
+      <item>Boar</item>
+      <item>Cheetah</item>
+      <item>Dire Badger</item>
+      <item>Dire Bat</item>
+      <item>Dire Weasel</item>
+      <item>Leopard</item>
+      <item>Monitor Lizard</item>
+      <item>Constrictor Snake</item>
+      <item>Large Viper Snake</item>
+      <item>Wolverine</item>
+      <item>Brown Bear</item>
+      <item>Dire Wolverine</item>
+      <item>Deinonychus</item>
+    </object>
+  <object>
+    <name>Improved Familiar</name>
+    <item>Shocker Lizard</item>
+    <item>Stirge</item>
+    <item>Formian Worker</item>
+    <item>Imp</item>
+    <item>Pseudodragon</item>
+    <item>Quasit</item>
+    <item>Celestial Bat</item>
+    <item>Celestial Cat</item>
+    <item>Celestial Hawk</item>
+    <item>Celestial Lizard</item>
+    <item>Celestial Owl</item>
+    <item>Celestial Rat</item>
+    <item>Celestial Raven</item>
+    <item>Celestial Tiny Viper Snake</item>
+    <item>Celestial Toad</item>
+    <item>Celestial Weasel</item>
+    <item>Fiendish Bat</item>
+    <item>Fiendish Cat</item>
+    <item>Fiendish Hawk</item>
+    <item>Fiendish Lizard</item>
+    <item>Fiendish Owl</item>
+    <item>Fiendish Rat</item>
+    <item>Fiendish Raven</item>
+    <item>Fiendish Tiny Viper Snake</item>
+    <item>Fiendish Toad</item>
+    <item>Fiendish Weasel</item>
+  </object>
+</items>

@@ -80,7 +80,7 @@ namespace CharacterGen.Tests.Integration.Stress.Magics
             var baseAttack = CombatGenerator.GenerateBaseAttackWith(characterClass, race);
             var ability = AbilitiesGenerator.GenerateWith(characterClass, race, StatsRandomizer, baseAttack);
 
-            return AnimalGenerator.GenerateFrom(alignment, characterClass, ability.Feats);
+            return AnimalGenerator.GenerateFrom(alignment, characterClass, race, ability.Feats);
         }
 
         [Test]
