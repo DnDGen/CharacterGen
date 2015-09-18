@@ -137,7 +137,16 @@ namespace CharacterGen.Common.Races
                 public const String SmallFireElemental = "Small Fire Elemental";
                 public const String SmallWaterElemental = "Small Water Elemental";
                 public const String Homonculus = "Homonculus";
+                public const String AirMephit = "Air Mephit";
+                public const String DustMephit = "Dust Mephit";
+                public const String EarthMephit = "Earth Mephit";
+                public const String FireMephit = "Fire Mephit";
                 public const String IceMephit = "Ice Mephit";
+                public const String MagmaMephit = "Magma Mephit";
+                public const String OozeMephit = "Ooze Mephit";
+                public const String SaltMephit = "Salt Mephit";
+                public const String SteamMephit = "Steam Mephit";
+                public const String WaterMephit = "Water Mephit";
             }
         }
 

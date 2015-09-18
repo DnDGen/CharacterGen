@@ -114,7 +114,16 @@ namespace CharacterGen.Tests.Integration.Tables.Races
                 RaceConstants.BaseRaces.Animals.HeavyWarhorse,
                 RaceConstants.BaseRaces.Animals.Homonculus,
                 RaceConstants.BaseRaces.Animals.HugeViperSnake,
+                RaceConstants.BaseRaces.Animals.AirMephit,
+                RaceConstants.BaseRaces.Animals.DustMephit,
+                RaceConstants.BaseRaces.Animals.EarthMephit,
+                RaceConstants.BaseRaces.Animals.FireMephit,
                 RaceConstants.BaseRaces.Animals.IceMephit,
+                RaceConstants.BaseRaces.Animals.MagmaMephit,
+                RaceConstants.BaseRaces.Animals.OozeMephit,
+                RaceConstants.BaseRaces.Animals.SaltMephit,
+                RaceConstants.BaseRaces.Animals.SteamMephit,
+                RaceConstants.BaseRaces.Animals.WaterMephit,
                 RaceConstants.BaseRaces.Animals.Imp,
                 RaceConstants.BaseRaces.Animals.LargeViperSnake,
                 RaceConstants.BaseRaces.Animals.Leopard,
@@ -282,7 +291,16 @@ namespace CharacterGen.Tests.Integration.Tables.Races
         [TestCase(RaceConstants.BaseRaces.Animals.SmallFireElemental, -4)]
         [TestCase(RaceConstants.BaseRaces.Animals.SmallWaterElemental, -4)]
         [TestCase(RaceConstants.BaseRaces.Animals.Homonculus, -6)]
+        [TestCase(RaceConstants.BaseRaces.Animals.AirMephit, -6)]
+        [TestCase(RaceConstants.BaseRaces.Animals.DustMephit, -6)]
+        [TestCase(RaceConstants.BaseRaces.Animals.EarthMephit, -6)]
+        [TestCase(RaceConstants.BaseRaces.Animals.FireMephit, -6)]
         [TestCase(RaceConstants.BaseRaces.Animals.IceMephit, -6)]
+        [TestCase(RaceConstants.BaseRaces.Animals.MagmaMephit, -6)]
+        [TestCase(RaceConstants.BaseRaces.Animals.OozeMephit, -6)]
+        [TestCase(RaceConstants.BaseRaces.Animals.SaltMephit, -6)]
+        [TestCase(RaceConstants.BaseRaces.Animals.SteamMephit, -6)]
+        [TestCase(RaceConstants.BaseRaces.Animals.WaterMephit, -6)]
         [TestCase(RaceConstants.BaseRaces.Animals.HeavyWarhorse, -4)]
         [TestCase(RaceConstants.BaseRaces.Animals.Warpony, -4)]
         public override void Adjustment(String name, Int32 adjustment)

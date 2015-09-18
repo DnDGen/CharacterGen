@@ -103,7 +103,16 @@ namespace CharacterGen.Tests.Integration.Tables.Magics
                 RaceConstants.BaseRaces.Animals.SmallFireElemental,
                 RaceConstants.BaseRaces.Animals.SmallWaterElemental,
                 RaceConstants.BaseRaces.Animals.Homonculus,
-                RaceConstants.BaseRaces.Animals.IceMephit
+                RaceConstants.BaseRaces.Animals.AirMephit,
+                RaceConstants.BaseRaces.Animals.DustMephit,
+                RaceConstants.BaseRaces.Animals.EarthMephit,
+                RaceConstants.BaseRaces.Animals.FireMephit,
+                RaceConstants.BaseRaces.Animals.IceMephit,
+                RaceConstants.BaseRaces.Animals.MagmaMephit,
+                RaceConstants.BaseRaces.Animals.OozeMephit,
+                RaceConstants.BaseRaces.Animals.SaltMephit,
+                RaceConstants.BaseRaces.Animals.SteamMephit,
+                RaceConstants.BaseRaces.Animals.WaterMephit
             };
 
             DistinctCollection(CharacterClassConstants.Sorcerer, animals);
@@ -155,7 +164,16 @@ namespace CharacterGen.Tests.Integration.Tables.Magics
                 RaceConstants.BaseRaces.Animals.SmallFireElemental,
                 RaceConstants.BaseRaces.Animals.SmallWaterElemental,
                 RaceConstants.BaseRaces.Animals.Homonculus,
-                RaceConstants.BaseRaces.Animals.IceMephit
+                RaceConstants.BaseRaces.Animals.AirMephit,
+                RaceConstants.BaseRaces.Animals.DustMephit,
+                RaceConstants.BaseRaces.Animals.EarthMephit,
+                RaceConstants.BaseRaces.Animals.FireMephit,
+                RaceConstants.BaseRaces.Animals.IceMephit,
+                RaceConstants.BaseRaces.Animals.MagmaMephit,
+                RaceConstants.BaseRaces.Animals.OozeMephit,
+                RaceConstants.BaseRaces.Animals.SaltMephit,
+                RaceConstants.BaseRaces.Animals.SteamMephit,
+                RaceConstants.BaseRaces.Animals.WaterMephit
             };
 
             DistinctCollection(CharacterClassConstants.Wizard, animals);
@@ -197,7 +215,16 @@ namespace CharacterGen.Tests.Integration.Tables.Magics
                 RaceConstants.BaseRaces.Animals.SmallFireElemental,
                 RaceConstants.BaseRaces.Animals.SmallWaterElemental,
                 RaceConstants.BaseRaces.Animals.Homonculus,
-                RaceConstants.BaseRaces.Animals.IceMephit
+                RaceConstants.BaseRaces.Animals.AirMephit,
+                RaceConstants.BaseRaces.Animals.DustMephit,
+                RaceConstants.BaseRaces.Animals.EarthMephit,
+                RaceConstants.BaseRaces.Animals.FireMephit,
+                RaceConstants.BaseRaces.Animals.IceMephit,
+                RaceConstants.BaseRaces.Animals.MagmaMephit,
+                RaceConstants.BaseRaces.Animals.OozeMephit,
+                RaceConstants.BaseRaces.Animals.SaltMephit,
+                RaceConstants.BaseRaces.Animals.SteamMephit,
+                RaceConstants.BaseRaces.Animals.WaterMephit
             };
 
             DistinctCollection(FeatConstants.ImprovedFamiliar, animals);
@@ -350,7 +377,16 @@ namespace CharacterGen.Tests.Integration.Tables.Magics
                 RaceConstants.BaseRaces.Animals.SmallFireElemental,
                 RaceConstants.BaseRaces.Animals.SmallWaterElemental,
                 RaceConstants.BaseRaces.Animals.Homonculus,
-                RaceConstants.BaseRaces.Animals.IceMephit
+                RaceConstants.BaseRaces.Animals.AirMephit,
+                RaceConstants.BaseRaces.Animals.DustMephit,
+                RaceConstants.BaseRaces.Animals.EarthMephit,
+                RaceConstants.BaseRaces.Animals.FireMephit,
+                RaceConstants.BaseRaces.Animals.IceMephit,
+                RaceConstants.BaseRaces.Animals.MagmaMephit,
+                RaceConstants.BaseRaces.Animals.OozeMephit,
+                RaceConstants.BaseRaces.Animals.SaltMephit,
+                RaceConstants.BaseRaces.Animals.SteamMephit,
+                RaceConstants.BaseRaces.Animals.WaterMephit
             };
 
             DistinctCollection(RaceConstants.Sizes.Small, animals);
@@ -447,7 +483,16 @@ namespace CharacterGen.Tests.Integration.Tables.Magics
                 RaceConstants.BaseRaces.Animals.SmallFireElemental,
                 RaceConstants.BaseRaces.Animals.SmallWaterElemental,
                 RaceConstants.BaseRaces.Animals.Homonculus,
-                RaceConstants.BaseRaces.Animals.IceMephit
+                RaceConstants.BaseRaces.Animals.AirMephit,
+                RaceConstants.BaseRaces.Animals.DustMephit,
+                RaceConstants.BaseRaces.Animals.EarthMephit,
+                RaceConstants.BaseRaces.Animals.FireMephit,
+                RaceConstants.BaseRaces.Animals.IceMephit,
+                RaceConstants.BaseRaces.Animals.MagmaMephit,
+                RaceConstants.BaseRaces.Animals.OozeMephit,
+                RaceConstants.BaseRaces.Animals.SaltMephit,
+                RaceConstants.BaseRaces.Animals.SteamMephit,
+                RaceConstants.BaseRaces.Animals.WaterMephit
             };
 
             DistinctCollection(RaceConstants.Sizes.Medium, animals);
@@ -543,7 +588,16 @@ namespace CharacterGen.Tests.Integration.Tables.Magics
                 RaceConstants.BaseRaces.Animals.SmallFireElemental,
                 RaceConstants.BaseRaces.Animals.SmallWaterElemental,
                 RaceConstants.BaseRaces.Animals.Homonculus,
-                RaceConstants.BaseRaces.Animals.IceMephit
+                RaceConstants.BaseRaces.Animals.AirMephit,
+                RaceConstants.BaseRaces.Animals.DustMephit,
+                RaceConstants.BaseRaces.Animals.EarthMephit,
+                RaceConstants.BaseRaces.Animals.FireMephit,
+                RaceConstants.BaseRaces.Animals.IceMephit,
+                RaceConstants.BaseRaces.Animals.MagmaMephit,
+                RaceConstants.BaseRaces.Animals.OozeMephit,
+                RaceConstants.BaseRaces.Animals.SaltMephit,
+                RaceConstants.BaseRaces.Animals.SteamMephit,
+                RaceConstants.BaseRaces.Animals.WaterMephit
             };
 
             DistinctCollection(RaceConstants.Sizes.Large, animals);

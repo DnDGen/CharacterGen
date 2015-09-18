@@ -6,6 +6,10 @@
         <item>0</item>
     </object>
   <object>
+    <name>Air Mephit</name>
+    <item>-6</item>
+  </object>
+  <object>
     <name>Ape</name>
     <item>-3</item>
   </object>
@@ -170,8 +174,16 @@
         <item>-1</item>
     </object>
   <object>
+    <name>Dust Mephit</name>
+    <item>-6</item>
+  </object>
+  <object>
     <name>Eagle</name>
     <item>0</item>
+  </object>
+  <object>
+    <name>Earth Mephit</name>
+    <item>-6</item>
   </object>
   <object>
     <name>Elephant</name>
@@ -216,6 +228,10 @@
   <object>
     <name>Fiendish Weasel</name>
     <item>-2</item>
+  </object>
+  <object>
+    <name>Fire Mephit</name>
+    <item>-6</item>
   </object>
     <object>
         <name>Forest Gnome</name>
@@ -338,6 +354,10 @@
         <item>0</item>
     </object>
   <object>
+    <name>Magma Mephit</name>
+    <item>-6</item>
+  </object>
+  <object>
     <name>Medium Viper Snake</name>
     <item>0</item>
   </object>
@@ -369,6 +389,10 @@
         <name>Ogre</name>
         <item>-2</item>
     </object>
+  <object>
+    <name>Ooze Mephit</name>
+    <item>-6</item>
+  </object>
     <object>
         <name>Orc</name>
         <item>0</item>
@@ -414,6 +438,10 @@
         <item>0</item>
     </object>
   <object>
+    <name>Salt Mephit</name>
+    <item>-6</item>
+  </object>
+  <object>
     <name>Shocker Lizard</name>
     <item>-4</item>
   </object>
@@ -436,6 +464,10 @@
   <object>
     <name>Small Viper Snake</name>
     <item>0</item>
+  </object>
+  <object>
+    <name>Steam Mephit</name>
+    <item>-6</item>
   </object>
   <object>
     <name>Stirge</name>
@@ -476,6 +508,10 @@
   <object>
     <name>Tyrannosaurus</name>
     <item>-15</item>
+  </object>
+  <object>
+    <name>Water Mephit</name>
+    <item>-6</item>
   </object>
   <object>
     <name>Warpony</name>
