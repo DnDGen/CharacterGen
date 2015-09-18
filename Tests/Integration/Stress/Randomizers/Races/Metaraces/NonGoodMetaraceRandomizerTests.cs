@@ -10,7 +10,7 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
     [TestFixture]
     public class NonGoodMetaraceRandomizerTests : ForcableMetaraceRandomizerTests
     {
-        [Inject, Named(MetaraceRandomizerTypeConstants.NonGood)]
+        [Inject, Named(RaceRandomizerTypeConstants.Metarace.NonGoodMeta)]
         public override IForcableMetaraceRandomizer ForcableMetaraceRandomizer { get; set; }
 
         protected override IEnumerable<String> allowedMetaraces

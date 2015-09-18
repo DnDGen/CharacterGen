@@ -90,13 +90,11 @@
     <Compile Include="Randomizers\CharacterClasses\ISetClassNameRandomizer.cs" />
     <Compile Include="Randomizers\CharacterClasses\ISetLevelRandomizer.cs" />
     <Compile Include="Randomizers\CharacterClasses\LevelRandomizerTypeConstants.cs" />
-    <Compile Include="Randomizers\Races\BaseRaceRandomizerTypeConstants.cs" />
-    <Compile Include="Randomizers\Races\IBaseRaceRandomizer.cs" />
+    <Compile Include="Randomizers\Races\RaceRandomizerTypeConstants.cs" />
+    <Compile Include="Randomizers\Races\RaceRandomizer.cs" />
     <Compile Include="Randomizers\Races\IForcableMetaraceRandomizer.cs" />
-    <Compile Include="Randomizers\Races\IMetaraceRandomizer.cs" />
     <Compile Include="Randomizers\Races\ISetBaseRaceRandomizer.cs" />
     <Compile Include="Randomizers\Races\ISetMetaraceRandomizer.cs" />
-    <Compile Include="Randomizers\Races\MetaraceRandomizerTypeConstants.cs" />
     <Compile Include="Randomizers\Stats\ISetStatsRandomizer.cs" />
     <Compile Include="Randomizers\Stats\IStatsRandomizer.cs" />
     <Compile Include="Randomizers\Stats\StatsRandomizerTypeConstants.cs" />

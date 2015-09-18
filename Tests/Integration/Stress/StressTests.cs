@@ -32,10 +32,10 @@ namespace CharacterGen.Tests.Integration.Stress
         public virtual IClassNameRandomizer ClassNameRandomizer { get; set; }
         [Inject, Named(LevelRandomizerTypeConstants.Any)]
         public ILevelRandomizer LevelRandomizer { get; set; }
-        [Inject, Named(BaseRaceRandomizerTypeConstants.Any)]
-        public virtual IBaseRaceRandomizer BaseRaceRandomizer { get; set; }
-        [Inject, Named(MetaraceRandomizerTypeConstants.Any)]
-        public virtual IMetaraceRandomizer MetaraceRandomizer { get; set; }
+        [Inject, Named(RaceRandomizerTypeConstants.BaseRace.AnyBase)]
+        public virtual RaceRandomizer BaseRaceRandomizer { get; set; }
+        [Inject, Named(RaceRandomizerTypeConstants.Metarace.AnyMeta)]
+        public virtual RaceRandomizer MetaraceRandomizer { get; set; }
         [Inject]
         public ICharacterClassGenerator CharacterClassGenerator { get; set; }
         [Inject]
@@ -116,7 +116,7 @@ namespace CharacterGen.Tests.Integration.Stress
         {
             var characterClass = Generate(
                 () => CharacterClassGenerator.GenerateWith(alignment, LevelRandomizer, ClassNameRandomizer),
-                c => RandomizerVerifier.VerifyCharacterClassCompatibility(alignment.Goodness, c, BaseRaceRandomizer, MetaraceRandomizer));
+                c => RandomizerVerifier.VerifyCharacterClassCompatibility(alignment, c, BaseRaceRandomizer, MetaraceRandomizer));
 
             return characterClass;
         }

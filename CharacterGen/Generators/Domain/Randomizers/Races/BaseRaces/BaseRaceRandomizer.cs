@@ -1,39 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using CharacterGen.Common.Alignments;
 using CharacterGen.Common.CharacterClasses;
-using CharacterGen.Common.Races;
 using CharacterGen.Generators.Randomizers.Races;
 using CharacterGen.Generators.Verifiers.Exceptions;
 using CharacterGen.Selectors;
 using CharacterGen.Tables;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CharacterGen.Generators.Domain.Randomizers.Races.BaseRaces
 {
-    public abstract class BaseBaseRace : IBaseRaceRandomizer
+    public abstract class BaseRaceRandomizer : IterativeBuilder, RaceRandomizer
     {
         private IPercentileSelector percentileResultSelector;
         private IAdjustmentsSelector adjustmentSelector;
 
-        public BaseBaseRace(IPercentileSelector percentileResultSelector, IAdjustmentsSelector adjustmentSelector)
+        public BaseRaceRandomizer(IPercentileSelector percentileResultSelector, IAdjustmentsSelector adjustmentSelector)
         {
             this.percentileResultSelector = percentileResultSelector;
             this.adjustmentSelector = adjustmentSelector;
         }
 
-        public String Randomize(String goodness, CharacterClass characterClass)
+        public String Randomize(Alignment alignment, CharacterClass characterClass)
         {
-            var results = GetAllPossibles(goodness, characterClass);
-            if (!results.Any())
+            var results = GetAllPossible(alignment, characterClass);
+            if (results.Any() == false)
                 throw new IncompatibleRandomizersException();
 
-            var tableName = String.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSBaseRaces, goodness, characterClass.ClassName);
-            var baseRace = String.Empty;
+            var tableName = String.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSBaseRaces, alignment.Goodness, characterClass.ClassName);
 
-            do baseRace = percentileResultSelector.SelectFrom(tableName);
-            while (!results.Contains(baseRace));
-
-            return baseRace;
+            return Build(() => percentileResultSelector.SelectFrom(tableName),
+                b => results.Contains(b));
         }
 
         private Boolean RaceIsAllowed(String baseRace, Int32 level)
@@ -49,10 +46,9 @@ namespace CharacterGen.Generators.Domain.Randomizers.Races.BaseRaces
 
         protected abstract Boolean BaseRaceIsAllowed(String baseRace);
 
-        public IEnumerable<String> GetAllPossibles(String goodness, CharacterClass characterClass)
+        public IEnumerable<String> GetAllPossible(Alignment alignment, CharacterClass characterClass)
         {
-            var tableName = String.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSBaseRaces,
-                goodness, characterClass.ClassName);
+            var tableName = String.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSBaseRaces, alignment.Goodness, characterClass.ClassName);
             var baseRaces = percentileResultSelector.SelectAllFrom(tableName);
             return baseRaces.Where(r => RaceIsAllowed(r, characterClass.Level));
         }

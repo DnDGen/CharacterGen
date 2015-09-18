@@ -25,10 +25,10 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
             var alignment = GetNewAlignment();
             var characterClass = GetNewCharacterClass(alignment);
 
-            var metaraces = BaseRaceRandomizer.GetAllPossibles(alignment.Goodness, characterClass);
+            var metaraces = BaseRaceRandomizer.GetAllPossible(alignment, characterClass);
             SetMetaraceRandomizer.SetMetarace = CollectionsSelector.SelectRandomFrom(metaraces);
 
-            var metarace = SetMetaraceRandomizer.Randomize(alignment.Goodness, characterClass);
+            var metarace = SetMetaraceRandomizer.Randomize(alignment, characterClass);
             Assert.That(metarace, Is.EqualTo(SetMetaraceRandomizer.SetMetarace));
         }
     }

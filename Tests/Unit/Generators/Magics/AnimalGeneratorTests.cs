@@ -27,8 +27,8 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
     {
         private Mock<ICollectionsSelector> mockCollectionsSelector;
         private Mock<IRaceGenerator> mockRaceGenerator;
-        private Mock<IBaseRaceRandomizer> mockAnimalBaseRaceRandomizer;
-        private Mock<IMetaraceRandomizer> mockNoMetaraceRandomizer;
+        private Mock<RaceRandomizer> mockAnimalBaseRaceRandomizer;
+        private Mock<RaceRandomizer> mockNoMetaraceRandomizer;
         private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
         private Mock<IAbilitiesGenerator> mockAnimalAbilitiesGenerator;
         private Mock<ISetStatsRandomizer> mockSetStatsRandomizer;
@@ -54,8 +54,8 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         {
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
             mockRaceGenerator = new Mock<IRaceGenerator>();
-            mockAnimalBaseRaceRandomizer = new Mock<IBaseRaceRandomizer>();
-            mockNoMetaraceRandomizer = new Mock<IMetaraceRandomizer>();
+            mockAnimalBaseRaceRandomizer = new Mock<RaceRandomizer>();
+            mockNoMetaraceRandomizer = new Mock<RaceRandomizer>();
             mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
             mockAnimalAbilitiesGenerator = new Mock<IAbilitiesGenerator>();
             mockSetStatsRandomizer = new Mock<ISetStatsRandomizer>();

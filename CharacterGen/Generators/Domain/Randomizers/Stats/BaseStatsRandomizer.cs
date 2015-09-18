@@ -1,21 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using CharacterGen.Common.Abilities.Stats;
+﻿using CharacterGen.Common.Abilities.Stats;
 using CharacterGen.Generators.Randomizers.Stats;
+using System;
+using System.Collections.Generic;
 
 namespace CharacterGen.Generators.Domain.Randomizers.Stats
 {
-    public abstract class BaseStatsRandomizer : IStatsRandomizer
+    public abstract class BaseStatsRandomizer : IterativeBuilder, IStatsRandomizer
     {
         public Dictionary<String, Stat> Randomize()
         {
+            return Build(() => RollStats(),
+                s => StatsAreAllowed(s.Values));
+        }
+
+        private Dictionary<String, Stat> RollStats()
+        {
             var stats = InitializeStats();
 
-            do
-            {
-                foreach (var stat in stats.Values)
-                    stat.Value = RollStat();
-            } while (!StatsAreAllowed(stats.Values));
+            foreach (var stat in stats.Values)
+                stat.Value = RollStat();
 
             return stats;
         }

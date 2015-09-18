@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using Ninject;
-using CharacterGen.Common.Races;
+﻿using CharacterGen.Common.Races;
 using CharacterGen.Generators.Randomizers.Races;
+using Ninject;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
 
 namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
 {
     [TestFixture]
     public class NonGoodBaseRaceRandomizerTests : BaseRaceRandomizerTests
     {
-        [Inject, Named(BaseRaceRandomizerTypeConstants.NonGood)]
-        public override IBaseRaceRandomizer BaseRaceRandomizer { get; set; }
+        [Inject, Named(RaceRandomizerTypeConstants.BaseRace.NonGoodBase)]
+        public override RaceRandomizer BaseRaceRandomizer { get; set; }
 
         protected override IEnumerable<String> allowedBaseRaces
         {

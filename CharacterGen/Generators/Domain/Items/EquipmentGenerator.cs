@@ -13,7 +13,7 @@ using TreasureGen.Generators;
 
 namespace CharacterGen.Generators.Domain.Items
 {
-    public class EquipmentGenerator : Generator, IEquipmentGenerator
+    public class EquipmentGenerator : IterativeBuilder, IEquipmentGenerator
     {
         private ICollectionsSelector collectionsSelector;
         private GearGenerator armorGenerator;
@@ -90,7 +90,7 @@ namespace CharacterGen.Generators.Domain.Items
 
         private Item GenerateAmmunition(IEnumerable<Feat> feats, CharacterClass characterClass, Race race, IEnumerable<String> baseWeaponTypes)
         {
-            return Generate<Item>(
+            return Build<Item>(
                 () => weaponGenerator.GenerateFrom(feats, characterClass, race),
                 a => AmmunitionIsValid(a, baseWeaponTypes));
         }
@@ -103,7 +103,7 @@ namespace CharacterGen.Generators.Domain.Items
 
         private Item GenerateWeaponForAmmunition(IEnumerable<Feat> feats, CharacterClass characterClass, Race race, String baseAmmunitionType)
         {
-            return Generate<Item>(
+            return Build<Item>(
                 () => weaponGenerator.GenerateFrom(feats, characterClass, race),
                 w => WeaponForAmmunitionIsValid(w, baseAmmunitionType));
         }
@@ -116,7 +116,7 @@ namespace CharacterGen.Generators.Domain.Items
 
         private Item GenerateOffHandWeapon(IEnumerable<Feat> feats, CharacterClass characterClass, Race race, IEnumerable<String> twoHandedWeapons)
         {
-            return Generate<Item>(
+            return Build<Item>(
                 () => weaponGenerator.GenerateFrom(feats, characterClass, race),
                 w => OffHandWeaponIsValid(w, twoHandedWeapons));
         }
@@ -137,7 +137,7 @@ namespace CharacterGen.Generators.Domain.Items
                 proficiencyFeats = feats.Where(f => proficiencyFeatNames.Contains(f.Name));
             }
 
-            return Generate<Item>(
+            return Build<Item>(
                 () => weaponGenerator.GenerateFrom(proficiencyFeats, characterClass, race),
                 w => w.Attributes.Contains(AttributeConstants.Melee));
         }

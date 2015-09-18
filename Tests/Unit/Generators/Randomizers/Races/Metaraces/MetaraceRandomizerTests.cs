@@ -9,7 +9,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
     [TestFixture]
     public abstract class MetaraceRandomizerTests : RaceRandomizerTests
     {
-        protected IMetaraceRandomizer randomizer;
+        protected RaceRandomizer randomizer;
         protected abstract IEnumerable<String> metaraceIds { get; }
 
         [SetUp]

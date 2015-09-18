@@ -22,7 +22,7 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
             var alignment = GetNewAlignment();
             var characterClass = GetNewCharacterClass(alignment);
 
-            var baseRace = BaseRaceRandomizer.Randomize(alignment.Goodness, characterClass);
+            var baseRace = BaseRaceRandomizer.Randomize(alignment, characterClass);
             Assert.That(baseRaces, Contains.Item(baseRace), testType);
         }
     }

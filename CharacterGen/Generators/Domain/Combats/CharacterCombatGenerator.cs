@@ -14,7 +14,7 @@ using TreasureGen.Common.Items;
 
 namespace CharacterGen.Generators.Domain.Combats
 {
-    public class CharacterCombatGenerator : Generator, ICombatGenerator
+    public class CharacterCombatGenerator : IterativeBuilder, ICombatGenerator
     {
         private IArmorClassGenerator armorClassGenerator;
         private IHitPointsGenerator hitPointsGenerator;

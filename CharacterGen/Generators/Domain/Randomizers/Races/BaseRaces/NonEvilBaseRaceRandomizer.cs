@@ -6,7 +6,7 @@ using CharacterGen.Tables;
 
 namespace CharacterGen.Generators.Domain.Randomizers.Races.BaseRaces
 {
-    public class NonEvilBaseRaceRandomizer : BaseBaseRace
+    public class NonEvilBaseRaceRandomizer : BaseRaceRandomizer
     {
         private ICollectionsSelector collectionsSelector;
 

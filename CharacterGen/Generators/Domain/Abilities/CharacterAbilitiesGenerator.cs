@@ -15,7 +15,7 @@ using System.Linq;
 
 namespace CharacterGen.Generators.Domain.Abilities
 {
-    public class CharacterAbilitiesGenerator : Generator, IAbilitiesGenerator
+    public class CharacterAbilitiesGenerator : IterativeBuilder, IAbilitiesGenerator
     {
         private IStatsGenerator statsGenerator;
         private ILanguageGenerator languageGenerator;

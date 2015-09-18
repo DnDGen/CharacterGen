@@ -51,7 +51,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses.Levels
             Assert.That(levels.Count(), Is.EqualTo(5));
         }
 
-        private class TestRangedLevelRandomizer : RangedLevel
+        private class TestRangedLevelRandomizer : RangedLevelRandomizer
         {
             public Int32 RollBonus
             {

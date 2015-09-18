@@ -9,7 +9,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
     [TestFixture]
     public class AnyBaseRaceRandomizerTests : BaseRaceRandomizerTests
     {
-        protected override IEnumerable<String> baseRaceIds
+        protected override IEnumerable<String> baseRaces
         {
             get
             {
@@ -61,8 +61,8 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         [Test]
         public void AllBaseRacesAllowed()
         {
-            var allBaseRaces = randomizer.GetAllPossibles(String.Empty, characterClass);
-            foreach (var baseRace in baseRaceIds)
+            var allBaseRaces = randomizer.GetAllPossible(alignment, characterClass);
+            foreach (var baseRace in baseRaces)
                 Assert.That(allBaseRaces, Contains.Item(baseRace));
         }
     }

@@ -272,76 +272,76 @@ namespace CharacterGen.Tests.Integration.Bootstrap.Modules
         [Test]
         public void BaseRaceRandomizerNamedAnyIsAnyBaseRaceRandomizer()
         {
-            AssertNamedIsInstanceOf<IBaseRaceRandomizer, AnyBaseRaceRandomizer>(BaseRaceRandomizerTypeConstants.Any);
+            AssertNamedIsInstanceOf<RaceRandomizer, AnyBaseRaceRandomizer>(RaceRandomizerTypeConstants.BaseRace.AnyBase);
         }
 
         [Test]
         public void BaseRaceRandomizerNamedAnimalIsAnimalBaseRaceRandomizer()
         {
-            AssertNamedIsInstanceOf<IBaseRaceRandomizer, AnimalBaseRaceRandomizer>(BaseRaceRandomizerTypeConstants.Animal);
+            AssertNamedIsInstanceOf<RaceRandomizer, AnimalBaseRaceRandomizer>(RaceRandomizerTypeConstants.BaseRace.AnimalBase);
         }
 
         [Test]
         public void BaseRaceRandomizerNamedNonStandardIsNonStandardBaseRaceRandomizer()
         {
-            AssertNamedIsInstanceOf<IBaseRaceRandomizer, NonStandardBaseRaceRandomizer>(BaseRaceRandomizerTypeConstants.NonStandard);
+            AssertNamedIsInstanceOf<RaceRandomizer, NonStandardBaseRaceRandomizer>(RaceRandomizerTypeConstants.BaseRace.NonStandardBase);
         }
 
         [Test]
         public void BaseRaceRandomizerNamedEvilIsEvilBaseRaceRandomizer()
         {
-            AssertNamedIsInstanceOf<IBaseRaceRandomizer, EvilBaseRaceRandomizer>(BaseRaceRandomizerTypeConstants.Evil);
+            AssertNamedIsInstanceOf<RaceRandomizer, EvilBaseRaceRandomizer>(RaceRandomizerTypeConstants.BaseRace.EvilBase);
         }
 
         [Test]
         public void BaseRaceRandomizerNamedGoodIsGoodBaseRaceRandomizer()
         {
-            AssertNamedIsInstanceOf<IBaseRaceRandomizer, GoodBaseRaceRandomizer>(BaseRaceRandomizerTypeConstants.Good);
+            AssertNamedIsInstanceOf<RaceRandomizer, GoodBaseRaceRandomizer>(RaceRandomizerTypeConstants.BaseRace.GoodBase);
         }
 
         [Test]
         public void BaseRaceRandomizerNamedStandardIsStandardBaseRaceRandomizer()
         {
-            AssertNamedIsInstanceOf<IBaseRaceRandomizer, StandardBaseRaceRandomizer>(BaseRaceRandomizerTypeConstants.Standard);
+            AssertNamedIsInstanceOf<RaceRandomizer, StandardBaseRaceRandomizer>(RaceRandomizerTypeConstants.BaseRace.StandardBase);
         }
 
         [Test]
         public void BaseRaceRandomizerNamedNeutralIsNeutralBaseRaceRandomizer()
         {
-            AssertNamedIsInstanceOf<IBaseRaceRandomizer, NeutralBaseRaceRandomizer>(BaseRaceRandomizerTypeConstants.Neutral);
+            AssertNamedIsInstanceOf<RaceRandomizer, NeutralBaseRaceRandomizer>(RaceRandomizerTypeConstants.BaseRace.NeutralBase);
         }
 
         [Test]
         public void BaseRaceRandomizerNamedNonEvilIsNonEvilBaseRaceRandomizer()
         {
-            AssertNamedIsInstanceOf<IBaseRaceRandomizer, NonEvilBaseRaceRandomizer>(BaseRaceRandomizerTypeConstants.NonEvil);
+            AssertNamedIsInstanceOf<RaceRandomizer, NonEvilBaseRaceRandomizer>(RaceRandomizerTypeConstants.BaseRace.NonEvilBase);
         }
 
         [Test]
         public void BaseRaceRandomizerNamedNonGoodIsNonGoodBaseRaceRandomizer()
         {
-            AssertNamedIsInstanceOf<IBaseRaceRandomizer, NonGoodBaseRaceRandomizer>(BaseRaceRandomizerTypeConstants.NonGood);
+            AssertNamedIsInstanceOf<RaceRandomizer, NonGoodBaseRaceRandomizer>(RaceRandomizerTypeConstants.BaseRace.NonGoodBase);
         }
 
         [Test]
         public void BaseRaceRandomizerNamedNonNeutralIsNonNeutralBaseRaceRandomizer()
         {
-            AssertNamedIsInstanceOf<IBaseRaceRandomizer, NonNeutralBaseRaceRandomizer>(BaseRaceRandomizerTypeConstants.NonNeutral);
+            AssertNamedIsInstanceOf<RaceRandomizer, NonNeutralBaseRaceRandomizer>(RaceRandomizerTypeConstants.BaseRace.NonNeutralBase);
         }
 
-        [TestCase(BaseRaceRandomizerTypeConstants.Animal)]
-        [TestCase(BaseRaceRandomizerTypeConstants.Any)]
-        [TestCase(BaseRaceRandomizerTypeConstants.Evil)]
-        [TestCase(BaseRaceRandomizerTypeConstants.Good)]
-        [TestCase(BaseRaceRandomizerTypeConstants.Neutral)]
-        [TestCase(BaseRaceRandomizerTypeConstants.NonEvil)]
-        [TestCase(BaseRaceRandomizerTypeConstants.NonGood)]
-        [TestCase(BaseRaceRandomizerTypeConstants.NonNeutral)]
-        [TestCase(BaseRaceRandomizerTypeConstants.NonStandard)]
-        [TestCase(BaseRaceRandomizerTypeConstants.Standard)]
+        [TestCase(RaceRandomizerTypeConstants.BaseRace.AnimalBase)]
+        [TestCase(RaceRandomizerTypeConstants.BaseRace.AnyBase)]
+        [TestCase(RaceRandomizerTypeConstants.BaseRace.EvilBase)]
+        [TestCase(RaceRandomizerTypeConstants.BaseRace.GoodBase)]
+        [TestCase(RaceRandomizerTypeConstants.BaseRace.NeutralBase)]
+        [TestCase(RaceRandomizerTypeConstants.BaseRace.NonEvilBase)]
+        [TestCase(RaceRandomizerTypeConstants.BaseRace.NonGoodBase)]
+        [TestCase(RaceRandomizerTypeConstants.BaseRace.NonNeutralBase)]
+        [TestCase(RaceRandomizerTypeConstants.BaseRace.NonStandardBase)]
+        [TestCase(RaceRandomizerTypeConstants.BaseRace.StandardBase)]
         public void BaseRaceRandomizerIsNotBuiltAsSingleton(String name)
         {
-            AssertNotSingleton<IBaseRaceRandomizer>(name);
+            AssertNotSingleton<RaceRandomizer>(name);
         }
 
         [Test]
@@ -353,92 +353,92 @@ namespace CharacterGen.Tests.Integration.Bootstrap.Modules
         [Test]
         public void MetaraceRandomizerNamedAnyIsAnyMetaraceRandomizer()
         {
-            AssertNamedIsInstanceOf<IForcableMetaraceRandomizer, AnyMetaraceRandomizer>(MetaraceRandomizerTypeConstants.Any);
-            AssertNamedIsInstanceOf<IMetaraceRandomizer, AnyMetaraceRandomizer>(MetaraceRandomizerTypeConstants.Any);
+            AssertNamedIsInstanceOf<IForcableMetaraceRandomizer, AnyMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.AnyMeta);
+            AssertNamedIsInstanceOf<RaceRandomizer, AnyMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.AnyMeta);
         }
 
         [Test]
         public void MetaraceRandomizerNamedGeneticIsGeneticMetaraceRandomizer()
         {
-            AssertNamedIsInstanceOf<IForcableMetaraceRandomizer, GeneticMetaraceRandomizer>(MetaraceRandomizerTypeConstants.Genetic);
-            AssertNamedIsInstanceOf<IMetaraceRandomizer, GeneticMetaraceRandomizer>(MetaraceRandomizerTypeConstants.Genetic);
+            AssertNamedIsInstanceOf<IForcableMetaraceRandomizer, GeneticMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.GeneticMeta);
+            AssertNamedIsInstanceOf<RaceRandomizer, GeneticMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.GeneticMeta);
         }
 
         [Test]
         public void MetaraceRandomizerNamedEvilIsEvilMetaraceRandomizer()
         {
-            AssertNamedIsInstanceOf<IForcableMetaraceRandomizer, EvilMetaraceRandomizer>(MetaraceRandomizerTypeConstants.Evil);
-            AssertNamedIsInstanceOf<IMetaraceRandomizer, EvilMetaraceRandomizer>(MetaraceRandomizerTypeConstants.Evil);
+            AssertNamedIsInstanceOf<IForcableMetaraceRandomizer, EvilMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.EvilMeta);
+            AssertNamedIsInstanceOf<RaceRandomizer, EvilMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.EvilMeta);
         }
 
         [Test]
         public void MetaraceRandomizerNamedGoodIsGoodMetaraceRandomizer()
         {
-            AssertNamedIsInstanceOf<IForcableMetaraceRandomizer, GoodMetaraceRandomizer>(MetaraceRandomizerTypeConstants.Good);
-            AssertNamedIsInstanceOf<IMetaraceRandomizer, GoodMetaraceRandomizer>(MetaraceRandomizerTypeConstants.Good);
+            AssertNamedIsInstanceOf<IForcableMetaraceRandomizer, GoodMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.GoodMeta);
+            AssertNamedIsInstanceOf<RaceRandomizer, GoodMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.GoodMeta);
         }
 
         [Test]
         public void MetaraceRandomizerNamedLycanthropeIsLycanthropeMetaraceRandomizer()
         {
-            AssertNamedIsInstanceOf<IForcableMetaraceRandomizer, LycanthropeMetaraceRandomizer>(MetaraceRandomizerTypeConstants.Lycanthrope);
-            AssertNamedIsInstanceOf<IMetaraceRandomizer, LycanthropeMetaraceRandomizer>(MetaraceRandomizerTypeConstants.Lycanthrope);
+            AssertNamedIsInstanceOf<IForcableMetaraceRandomizer, LycanthropeMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.LycanthropeMeta);
+            AssertNamedIsInstanceOf<RaceRandomizer, LycanthropeMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.LycanthropeMeta);
         }
 
         [Test]
         public void MetaraceRandomizerNamedNeutralIsNeutralMetaraceRandomizer()
         {
-            AssertNamedIsInstanceOf<IForcableMetaraceRandomizer, NeutralMetaraceRandomizer>(MetaraceRandomizerTypeConstants.Neutral);
-            AssertNamedIsInstanceOf<IMetaraceRandomizer, NeutralMetaraceRandomizer>(MetaraceRandomizerTypeConstants.Neutral);
+            AssertNamedIsInstanceOf<IForcableMetaraceRandomizer, NeutralMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.NeutralMeta);
+            AssertNamedIsInstanceOf<RaceRandomizer, NeutralMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.NeutralMeta);
         }
 
         [Test]
         public void MetaraceRandomizerNamedNonEvilIsNonEvilMetaraceRandomizer()
         {
-            AssertNamedIsInstanceOf<IForcableMetaraceRandomizer, NonEvilMetaraceRandomizer>(MetaraceRandomizerTypeConstants.NonEvil);
-            AssertNamedIsInstanceOf<IMetaraceRandomizer, NonEvilMetaraceRandomizer>(MetaraceRandomizerTypeConstants.NonEvil);
+            AssertNamedIsInstanceOf<IForcableMetaraceRandomizer, NonEvilMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.NonEvilMeta);
+            AssertNamedIsInstanceOf<RaceRandomizer, NonEvilMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.NonEvilMeta);
         }
 
         [Test]
         public void MetaraceRandomizerNamedNonGoodIsNonGoodMetaraceRandomizer()
         {
-            AssertNamedIsInstanceOf<IForcableMetaraceRandomizer, NonGoodMetaraceRandomizer>(MetaraceRandomizerTypeConstants.NonGood);
-            AssertNamedIsInstanceOf<IMetaraceRandomizer, NonGoodMetaraceRandomizer>(MetaraceRandomizerTypeConstants.NonGood);
+            AssertNamedIsInstanceOf<IForcableMetaraceRandomizer, NonGoodMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.NonGoodMeta);
+            AssertNamedIsInstanceOf<RaceRandomizer, NonGoodMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.NonGoodMeta);
         }
 
         [Test]
         public void MetaraceRandomizerNamedNonNeutralIsNonNeutralMetaraceRandomizer()
         {
-            AssertNamedIsInstanceOf<IForcableMetaraceRandomizer, NonNeutralMetaraceRandomizer>(MetaraceRandomizerTypeConstants.NonNeutral);
-            AssertNamedIsInstanceOf<IMetaraceRandomizer, NonNeutralMetaraceRandomizer>(MetaraceRandomizerTypeConstants.NonNeutral);
+            AssertNamedIsInstanceOf<IForcableMetaraceRandomizer, NonNeutralMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.NonNeutralMeta);
+            AssertNamedIsInstanceOf<RaceRandomizer, NonNeutralMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.NonNeutralMeta);
         }
 
         [Test]
         public void MetaraceRandomizerNamedNoneIsNoMetaraceRandomizer()
         {
-            AssertNamedIsInstanceOf<IMetaraceRandomizer, NoMetaraceRandomizer>(MetaraceRandomizerTypeConstants.None);
+            AssertNamedIsInstanceOf<RaceRandomizer, NoMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.NoMeta);
         }
 
 
-        [TestCase(MetaraceRandomizerTypeConstants.Any)]
-        [TestCase(MetaraceRandomizerTypeConstants.Evil)]
-        [TestCase(MetaraceRandomizerTypeConstants.Genetic)]
-        [TestCase(MetaraceRandomizerTypeConstants.Good)]
-        [TestCase(MetaraceRandomizerTypeConstants.Lycanthrope)]
-        [TestCase(MetaraceRandomizerTypeConstants.Neutral)]
-        [TestCase(MetaraceRandomizerTypeConstants.NonEvil)]
-        [TestCase(MetaraceRandomizerTypeConstants.NonGood)]
-        [TestCase(MetaraceRandomizerTypeConstants.NonNeutral)]
+        [TestCase(RaceRandomizerTypeConstants.Metarace.AnyMeta)]
+        [TestCase(RaceRandomizerTypeConstants.Metarace.EvilMeta)]
+        [TestCase(RaceRandomizerTypeConstants.Metarace.GeneticMeta)]
+        [TestCase(RaceRandomizerTypeConstants.Metarace.GoodMeta)]
+        [TestCase(RaceRandomizerTypeConstants.Metarace.LycanthropeMeta)]
+        [TestCase(RaceRandomizerTypeConstants.Metarace.NeutralMeta)]
+        [TestCase(RaceRandomizerTypeConstants.Metarace.NonEvilMeta)]
+        [TestCase(RaceRandomizerTypeConstants.Metarace.NonGoodMeta)]
+        [TestCase(RaceRandomizerTypeConstants.Metarace.NonNeutralMeta)]
         public void MetaraceRandomizerIsNotBuiltAsSingleton(String name)
         {
             AssertNotSingleton<IForcableMetaraceRandomizer>(name);
-            AssertNotSingleton<IMetaraceRandomizer>(name);
+            AssertNotSingleton<RaceRandomizer>(name);
         }
 
         [Test]
         public void NoMetaraceRandomizerIsNotBuiltAsSingleton()
         {
-            AssertNotSingleton<IMetaraceRandomizer>(MetaraceRandomizerTypeConstants.None);
+            AssertNotSingleton<RaceRandomizer>(RaceRandomizerTypeConstants.Metarace.NoMeta);
         }
 
         [Test]

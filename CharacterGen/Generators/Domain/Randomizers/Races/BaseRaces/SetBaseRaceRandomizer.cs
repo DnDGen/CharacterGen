@@ -1,7 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using CharacterGen.Common.Alignments;
 using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Generators.Randomizers.Races;
+using System;
+using System.Collections.Generic;
 
 namespace CharacterGen.Generators.Domain.Randomizers.Races.BaseRaces
 {
@@ -9,12 +10,12 @@ namespace CharacterGen.Generators.Domain.Randomizers.Races.BaseRaces
     {
         public String SetBaseRace { get; set; }
 
-        public String Randomize(String goodness, CharacterClass characterClass)
+        public String Randomize(Alignment alignment, CharacterClass characterClass)
         {
             return SetBaseRace;
         }
 
-        public IEnumerable<String> GetAllPossibles(String goodness, CharacterClass characterClass)
+        public IEnumerable<String> GetAllPossible(Alignment alignment, CharacterClass characterClass)
         {
             return new[] { SetBaseRace };
         }

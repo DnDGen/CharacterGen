@@ -78,7 +78,7 @@
     <Compile Include="Combats\HitPointsGenerator.cs" />
     <Compile Include="Abilities\LanguageGenerator.cs" />
     <Compile Include="Combats\SavingThrowsGenerator.cs" />
-    <Compile Include="Generator.cs" />
+    <Compile Include="IterativeBuilder.cs" />
     <Compile Include="Items\ArmorGenerator.cs" />
     <Compile Include="Items\EquipmentGenerator.cs" />
     <Compile Include="Items\WeaponGenerator.cs" />
@@ -116,10 +116,10 @@
     <Compile Include="Randomizers\CharacterClasses\Levels\HighLevelRandomizer.cs" />
     <Compile Include="Randomizers\CharacterClasses\Levels\LowLevelRandomizer.cs" />
     <Compile Include="Randomizers\CharacterClasses\Levels\MediumLevelRandomizer.cs" />
-    <Compile Include="Randomizers\CharacterClasses\Levels\RangedLevel.cs" />
+    <Compile Include="Randomizers\CharacterClasses\Levels\RangedLevelRandomizer.cs" />
     <Compile Include="Randomizers\CharacterClasses\Levels\VeryHighLevelRandomizer.cs" />
     <Compile Include="Randomizers\Races\BaseRaces\AnyBaseRaceRandomizer.cs" />
-    <Compile Include="Randomizers\Races\BaseRaces\BaseBaseRace.cs" />
+    <Compile Include="Randomizers\Races\BaseRaces\BaseRaceRandomizer.cs" />
     <Compile Include="Randomizers\Races\BaseRaces\EvilBaseRaceRandomizer.cs" />
     <Compile Include="Randomizers\Races\BaseRaces\GoodBaseRaceRandomizer.cs" />
     <Compile Include="Randomizers\Races\BaseRaces\NeutralBaseRaceRandomizer.cs" />

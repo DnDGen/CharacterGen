@@ -22,8 +22,8 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
         private Mock<IAlignmentRandomizer> mockAlignmentRandomizer;
         private Mock<IClassNameRandomizer> mockClassNameRandomizer;
         private Mock<ILevelRandomizer> mockLevelRandomizer;
-        private Mock<IBaseRaceRandomizer> mockBaseRaceRandomizer;
-        private Mock<IMetaraceRandomizer> mockMetaraceRandomizer;
+        private Mock<RaceRandomizer> mockBaseRaceRandomizer;
+        private Mock<RaceRandomizer> mockMetaraceRandomizer;
         private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
 
         private CharacterClass characterClass;
@@ -33,6 +33,7 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
         private List<String> baseRaces;
         private List<String> metaraces;
         private Dictionary<String, Int32> adjustments;
+        private Alignment alignment;
 
         [SetUp]
         public void Setup()
@@ -40,8 +41,8 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
             mockAlignmentRandomizer = new Mock<IAlignmentRandomizer>();
             mockClassNameRandomizer = new Mock<IClassNameRandomizer>();
             mockLevelRandomizer = new Mock<ILevelRandomizer>();
-            mockBaseRaceRandomizer = new Mock<IBaseRaceRandomizer>();
-            mockMetaraceRandomizer = new Mock<IMetaraceRandomizer>();
+            mockBaseRaceRandomizer = new Mock<RaceRandomizer>();
+            mockMetaraceRandomizer = new Mock<RaceRandomizer>();
             mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
             verifier = new RandomizerVerifier(mockAdjustmentsSelector.Object);
 
@@ -52,17 +53,17 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
             baseRaces = new List<String>();
             metaraces = new List<String>();
             adjustments = new Dictionary<String, Int32>();
+            alignment = new Alignment();
 
             mockAlignmentRandomizer.Setup(r => r.GetAllPossibleResults()).Returns(alignments);
             mockClassNameRandomizer.Setup(r => r.GetAllPossibleResults(It.IsAny<Alignment>())).Returns(classNames);
             mockLevelRandomizer.Setup(r => r.GetAllPossibleResults()).Returns(levels);
-            mockBaseRaceRandomizer.Setup(r => r.GetAllPossibles(It.IsAny<String>(), It.IsAny<CharacterClass>()))
+            mockBaseRaceRandomizer.Setup(r => r.GetAllPossible(It.IsAny<Alignment>(), It.IsAny<CharacterClass>()))
                 .Returns(baseRaces);
-            mockMetaraceRandomizer.Setup(r => r.GetAllPossible(It.IsAny<String>(), It.IsAny<CharacterClass>()))
+            mockMetaraceRandomizer.Setup(r => r.GetAllPossible(It.IsAny<Alignment>(), It.IsAny<CharacterClass>()))
                 .Returns(metaraces);
             mockAdjustmentsSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments)).Returns(adjustments);
 
-            var alignment = new Alignment();
             alignments.Add(alignment);
             characterClass.Level = 1;
             classNames.Add("class name");
@@ -138,7 +139,7 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
             classNames.Add("second class name");
             classNames.Add("third class name");
 
-            mockBaseRaceRandomizer.SetupSequence(r => r.GetAllPossibles(It.IsAny<String>(), It.IsAny<CharacterClass>()))
+            mockBaseRaceRandomizer.SetupSequence(r => r.GetAllPossible(It.IsAny<Alignment>(), It.IsAny<CharacterClass>()))
                 .Returns(Enumerable.Empty<String>()).Returns(Enumerable.Empty<String>()).Returns(baseRaces);
 
             var verified = verifier.VerifyCompatibility(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object,
@@ -162,7 +163,7 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
             classNames.Add("second class name");
             classNames.Add("third class name");
 
-            mockMetaraceRandomizer.SetupSequence(r => r.GetAllPossible(It.IsAny<String>(), It.IsAny<CharacterClass>()))
+            mockMetaraceRandomizer.SetupSequence(r => r.GetAllPossible(It.IsAny<Alignment>(), It.IsAny<CharacterClass>()))
                 .Returns(Enumerable.Empty<String>()).Returns(Enumerable.Empty<String>()).Returns(metaraces);
 
             var verified = verifier.VerifyCompatibility(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object,
@@ -227,7 +228,7 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
             classNames.Add("second class name");
             classNames.Add("third class name");
 
-            mockBaseRaceRandomizer.SetupSequence(r => r.GetAllPossibles(It.IsAny<String>(), It.IsAny<CharacterClass>()))
+            mockBaseRaceRandomizer.SetupSequence(r => r.GetAllPossible(It.IsAny<Alignment>(), It.IsAny<CharacterClass>()))
                 .Returns(Enumerable.Empty<String>()).Returns(Enumerable.Empty<String>()).Returns(baseRaces);
 
             var verified = verifier.VerifyAlignmentCompatibility(alignments[0], mockClassNameRandomizer.Object, mockLevelRandomizer.Object,
@@ -251,7 +252,7 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
             classNames.Add("second class name");
             classNames.Add("third class name");
 
-            mockMetaraceRandomizer.SetupSequence(r => r.GetAllPossible(It.IsAny<String>(), It.IsAny<CharacterClass>()))
+            mockMetaraceRandomizer.SetupSequence(r => r.GetAllPossible(It.IsAny<Alignment>(), It.IsAny<CharacterClass>()))
                 .Returns(Enumerable.Empty<String>()).Returns(Enumerable.Empty<String>()).Returns(metaraces);
 
             var verified = verifier.VerifyAlignmentCompatibility(alignments[0], mockClassNameRandomizer.Object, mockLevelRandomizer.Object,
@@ -277,7 +278,7 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
         {
             baseRaces.Clear();
 
-            var verified = verifier.VerifyCharacterClassCompatibility(String.Empty, characterClass, mockBaseRaceRandomizer.Object,
+            var verified = verifier.VerifyCharacterClassCompatibility(alignment, characterClass, mockBaseRaceRandomizer.Object,
                 mockMetaraceRandomizer.Object);
             Assert.That(verified, Is.False);
         }
@@ -285,7 +286,7 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
         [Test]
         public void CharacterClassVerifiedIfAtLeastOneBaseRaceForACharacterClass()
         {
-            var verified = verifier.VerifyCharacterClassCompatibility(String.Empty, characterClass, mockBaseRaceRandomizer.Object,
+            var verified = verifier.VerifyCharacterClassCompatibility(alignment, characterClass, mockBaseRaceRandomizer.Object,
                 mockMetaraceRandomizer.Object);
             Assert.That(verified, Is.True);
         }
@@ -295,7 +296,7 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
         {
             metaraces.Clear();
 
-            var verified = verifier.VerifyCharacterClassCompatibility(String.Empty, characterClass, mockBaseRaceRandomizer.Object,
+            var verified = verifier.VerifyCharacterClassCompatibility(alignment, characterClass, mockBaseRaceRandomizer.Object,
                 mockMetaraceRandomizer.Object);
             Assert.That(verified, Is.False);
         }
@@ -303,7 +304,7 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
         [Test]
         public void CharacterClassVerifiedIfAtLeastOneMetaraceForACharacterClass()
         {
-            var verified = verifier.VerifyCharacterClassCompatibility(String.Empty, characterClass, mockBaseRaceRandomizer.Object,
+            var verified = verifier.VerifyCharacterClassCompatibility(alignment, characterClass, mockBaseRaceRandomizer.Object,
                 mockMetaraceRandomizer.Object);
             Assert.That(verified, Is.True);
         }
@@ -316,7 +317,7 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
             levels.Clear();
             levels.Add(2);
 
-            var verified = verifier.VerifyCharacterClassCompatibility(String.Empty, characterClass, mockBaseRaceRandomizer.Object,
+            var verified = verifier.VerifyCharacterClassCompatibility(alignment, characterClass, mockBaseRaceRandomizer.Object,
                 mockMetaraceRandomizer.Object);
             Assert.That(verified, Is.False);
         }

@@ -52,7 +52,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         [TestCase(RaceConstants.Metaraces.None)]
         public void Allowed(String metarace)
         {
-            var metaraces = randomizer.GetAllPossible(String.Empty, characterClass);
+            var metaraces = randomizer.GetAllPossible(alignment, characterClass);
             Assert.That(metaraces, Contains.Item(metarace));
         }
 
@@ -61,7 +61,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         [TestCase("not neutral metarace")]
         public void NotAllowed(String metarace)
         {
-            var metaraces = randomizer.GetAllPossible(String.Empty, characterClass);
+            var metaraces = randomizer.GetAllPossible(alignment, characterClass);
             Assert.That(metaraces, Is.Not.Contains(metarace));
         }
     }

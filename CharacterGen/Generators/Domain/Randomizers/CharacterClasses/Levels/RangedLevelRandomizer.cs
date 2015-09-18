@@ -5,12 +5,12 @@ using CharacterGen.Generators.Randomizers.CharacterClasses;
 
 namespace CharacterGen.Generators.Domain.Randomizers.CharacterClasses.Levels
 {
-    public abstract class RangedLevel : ILevelRandomizer
+    public abstract class RangedLevelRandomizer : ILevelRandomizer
     {
         protected Int32 rollBonus;
         private IDice dice;
 
-        public RangedLevel(IDice dice)
+        public RangedLevelRandomizer(IDice dice)
         {
             this.dice = dice;
         }

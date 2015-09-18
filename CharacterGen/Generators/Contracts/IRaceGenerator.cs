@@ -7,6 +7,6 @@ namespace CharacterGen.Generators
 {
     public interface IRaceGenerator
     {
-        Race GenerateWith(Alignment alignment, CharacterClass characterClass, IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer);
+        Race GenerateWith(Alignment alignment, CharacterClass characterClass, RaceRandomizer baseRaceRandomizer, RaceRandomizer metaraceRandomizer);
     }
 }

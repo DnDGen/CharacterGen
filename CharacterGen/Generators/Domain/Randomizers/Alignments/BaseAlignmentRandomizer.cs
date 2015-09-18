@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace CharacterGen.Generators.Domain.Randomizers.Alignments
 {
-    public abstract class BaseAlignmentRandomizer : IAlignmentRandomizer
+    public abstract class BaseAlignmentRandomizer : IterativeBuilder, IAlignmentRandomizer
     {
         private IPercentileSelector percentileResultSelector;
 
@@ -24,13 +24,15 @@ namespace CharacterGen.Generators.Domain.Randomizers.Alignments
             if (possibleAlignments.Any() == false)
                 throw new IncompatibleRandomizersException();
 
+            return Build(BuildAlignment, a => possibleAlignments.Contains(a));
+        }
+
+        private Alignment BuildAlignment()
+        {
             var alignment = new Alignment();
 
-            do
-            {
-                alignment.Lawfulness = percentileResultSelector.SelectFrom(TableNameConstants.Set.Percentile.AlignmentLawfulness);
-                alignment.Goodness = percentileResultSelector.SelectFrom(TableNameConstants.Set.Percentile.AlignmentGoodness);
-            } while (possibleAlignments.Contains(alignment) == false);
+            alignment.Lawfulness = percentileResultSelector.SelectFrom(TableNameConstants.Set.Percentile.AlignmentLawfulness);
+            alignment.Goodness = percentileResultSelector.SelectFrom(TableNameConstants.Set.Percentile.AlignmentGoodness);
 
             return alignment;
         }

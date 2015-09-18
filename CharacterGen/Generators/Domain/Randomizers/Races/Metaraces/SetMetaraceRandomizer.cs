@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using CharacterGen.Common.Alignments;
 using CharacterGen.Common.CharacterClasses;
-using CharacterGen.Common.Races;
 using CharacterGen.Generators.Randomizers.Races;
-using CharacterGen.Selectors;
+using System;
+using System.Collections.Generic;
 
 namespace CharacterGen.Generators.Domain.Randomizers.Races.Metaraces
 {
@@ -11,12 +10,12 @@ namespace CharacterGen.Generators.Domain.Randomizers.Races.Metaraces
     {
         public String SetMetarace { get; set; }
 
-        public String Randomize(String goodness, CharacterClass characterClass)
+        public String Randomize(Alignment alignment, CharacterClass characterClass)
         {
             return SetMetarace;
         }
 
-        public IEnumerable<String> GetAllPossible(String goodness, CharacterClass characterClass)
+        public IEnumerable<String> GetAllPossible(Alignment alignment, CharacterClass characterClass)
         {
             return new[] { SetMetarace };
         }

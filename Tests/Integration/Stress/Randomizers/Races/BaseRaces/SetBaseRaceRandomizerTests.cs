@@ -25,10 +25,10 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
             var alignment = GetNewAlignment();
             var characterClass = GetNewCharacterClass(alignment);
 
-            var baseRaces = BaseRaceRandomizer.GetAllPossibles(alignment.Goodness, characterClass);
+            var baseRaces = BaseRaceRandomizer.GetAllPossible(alignment, characterClass);
             SetBaseRaceRandomizer.SetBaseRace = CollectionsSelector.SelectRandomFrom(baseRaces);
 
-            var baseRace = SetBaseRaceRandomizer.Randomize(alignment.Goodness, characterClass);
+            var baseRace = SetBaseRaceRandomizer.Randomize(alignment, characterClass);
             Assert.That(baseRace, Is.EqualTo(SetBaseRaceRandomizer.SetBaseRace));
         }
     }

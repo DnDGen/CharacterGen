@@ -12,7 +12,7 @@ using System.Linq;
 
 namespace CharacterGen.Generators.Domain.Abilities
 {
-    public class StatsGenerator : Generator, IStatsGenerator
+    public class StatsGenerator : IterativeBuilder, IStatsGenerator
     {
         private IBooleanPercentileSelector booleanPercentileSelector;
         private IStatPrioritySelector statPrioritySelector;

@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace CharacterGen.Generators.Domain
 {
-    public class CharacterClassGenerator : Generator, ICharacterClassGenerator
+    public class CharacterClassGenerator : IterativeBuilder, ICharacterClassGenerator
     {
         private IAdjustmentsSelector adjustmentsSelector;
         private ICollectionsSelector collectionsSelector;

@@ -3,7 +3,7 @@ using CharacterGen.Selectors;
 
 namespace CharacterGen.Generators.Domain.Randomizers.Races.BaseRaces
 {
-    public class AnyBaseRaceRandomizer : BaseBaseRace
+    public class AnyBaseRaceRandomizer : BaseRaceRandomizer
     {
         public AnyBaseRaceRandomizer(IPercentileSelector percentileResultSelector, IAdjustmentsSelector levelAdjustmentSelector)
             : base(percentileResultSelector, levelAdjustmentSelector) { }

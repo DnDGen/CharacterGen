@@ -11,7 +11,7 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
     {
         public virtual IForcableMetaraceRandomizer ForcableMetaraceRandomizer { get; set; }
 
-        public override IMetaraceRandomizer MetaraceRandomizer
+        public override RaceRandomizer MetaraceRandomizer
         {
             get { return ForcableMetaraceRandomizer; }
             set { base.MetaraceRandomizer = value; }
@@ -29,7 +29,7 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
         {
             var alignment = GetNewAlignment();
             var characterClass = GetNewCharacterClass(alignment);
-            return MetaraceRandomizer.Randomize(alignment.Goodness, characterClass);
+            return MetaraceRandomizer.Randomize(alignment, characterClass);
         }
 
         public abstract void MetaraceForced();

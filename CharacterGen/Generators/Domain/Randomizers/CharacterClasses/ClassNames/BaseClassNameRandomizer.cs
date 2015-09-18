@@ -8,7 +8,7 @@ using CharacterGen.Selectors;
 
 namespace CharacterGen.Generators.Domain.Randomizers.CharacterClasses.ClassNames
 {
-    public abstract class BaseClassNameRandomizer : IClassNameRandomizer
+    public abstract class BaseClassNameRandomizer : IterativeBuilder, IClassNameRandomizer
     {
         private IPercentileSelector percentileResultSelector;
 
@@ -20,16 +20,13 @@ namespace CharacterGen.Generators.Domain.Randomizers.CharacterClasses.ClassNames
         public String Randomize(Alignment alignment)
         {
             var possibleClassNames = GetAllPossibleResults(alignment);
-            if (!possibleClassNames.Any())
+            if (possibleClassNames.Any() == false)
                 throw new IncompatibleRandomizersException();
 
             var tableName = String.Format("{0}CharacterClasses", alignment.Goodness);
-            var className = String.Empty;
 
-            do className = percentileResultSelector.SelectFrom(tableName);
-            while (!possibleClassNames.Contains(className));
-
-            return className;
+            return Build(() => percentileResultSelector.SelectFrom(tableName),
+                c => possibleClassNames.Contains(c));
         }
 
         protected abstract Boolean CharacterClassIsAllowed(String className, Alignment alignment);

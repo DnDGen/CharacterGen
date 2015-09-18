@@ -30,8 +30,8 @@ namespace CharacterGen.Bootstrap.Factories
             var setAlignmentRandomizer = kernel.Get<ISetAlignmentRandomizer>();
             var anyAlignmentRandomizer = kernel.Get<IAlignmentRandomizer>(AlignmentRandomizerTypeConstants.Any);
             var anyClassNameRandomizer = kernel.Get<IClassNameRandomizer>(ClassNameRandomizerTypeConstants.Any);
-            var anyBaseRaceRandomizer = kernel.Get<IBaseRaceRandomizer>(BaseRaceRandomizerTypeConstants.Any);
-            var anyMetaraceRandomizer = kernel.Get<IMetaraceRandomizer>(MetaraceRandomizerTypeConstants.Any);
+            var anyBaseRaceRandomizer = kernel.Get<RaceRandomizer>(RaceRandomizerTypeConstants.BaseRace.AnyBase);
+            var anyMetaraceRandomizer = kernel.Get<RaceRandomizer>(RaceRandomizerTypeConstants.Metarace.AnyMeta);
             var rawStatsRandomizer = kernel.Get<IStatsRandomizer>(StatsRandomizerTypeConstants.Raw);
             var adjustmentsSelector = kernel.Get<IAdjustmentsSelector>();
             var booleanPercentileSelector = kernel.Get<IBooleanPercentileSelector>();

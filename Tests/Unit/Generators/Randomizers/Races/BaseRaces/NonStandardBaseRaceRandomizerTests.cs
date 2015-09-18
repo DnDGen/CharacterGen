@@ -11,7 +11,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
     [TestFixture]
     public class NonStandardBaseRaceRandomizerTests : BaseRaceRandomizerTests
     {
-        protected override IEnumerable<String> baseRaceIds
+        protected override IEnumerable<String> baseRaces
         {
             get
             {
@@ -38,14 +38,14 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         [TestCase("nonstandard base race")]
         public void Allowed(String baseRace)
         {
-            var baseRaces = randomizer.GetAllPossibles(String.Empty, characterClass);
+            var baseRaces = randomizer.GetAllPossible(alignment, characterClass);
             Assert.That(baseRaces, Contains.Item(baseRace));
         }
 
         [TestCase("standard base race")]
         public void NotAllowed(String baseRace)
         {
-            var baseRaces = randomizer.GetAllPossibles(String.Empty, characterClass);
+            var baseRaces = randomizer.GetAllPossible(alignment, characterClass);
             Assert.That(baseRaces, Is.Not.Contains(baseRace));
         }
     }

@@ -1,8 +1,8 @@
-﻿using CharacterGen.Common.CharacterClasses;
+﻿using CharacterGen.Common.Alignments;
+using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Generators.Domain.Randomizers.Races.BaseRaces;
 using CharacterGen.Generators.Randomizers.Races;
 using NUnit.Framework;
-using System;
 using System.Linq;
 
 namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
@@ -11,19 +11,21 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
     public class SetBaseRaceRandomizerTests
     {
         private ISetBaseRaceRandomizer randomizer;
-        private CharacterClass characterclass;
+        private CharacterClass characterClass;
+        private Alignment alignment;
 
         [SetUp]
         public void Setup()
         {
             randomizer = new SetBaseRaceRandomizer();
-            characterclass = new CharacterClass();
+            characterClass = new CharacterClass();
+            alignment = new Alignment();
         }
 
         [Test]
         public void SetBaseRaceRandomizerIsABaseRaceRandomizer()
         {
-            Assert.That(randomizer, Is.InstanceOf<IBaseRaceRandomizer>());
+            Assert.That(randomizer, Is.InstanceOf<RaceRandomizer>());
         }
 
         [Test]
@@ -31,7 +33,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         {
             randomizer.SetBaseRace = "baserace";
 
-            var baseRace = randomizer.Randomize(String.Empty, characterclass);
+            var baseRace = randomizer.Randomize(alignment, characterClass);
             Assert.That(baseRace, Is.EqualTo("baserace"));
         }
 
@@ -40,7 +42,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         {
             randomizer.SetBaseRace = "baserace";
 
-            var baseRaces = randomizer.GetAllPossibles(String.Empty, characterclass);
+            var baseRaces = randomizer.GetAllPossible(alignment, characterClass);
             Assert.That(baseRaces, Contains.Item("baserace"));
             Assert.That(baseRaces.Count(), Is.EqualTo(1));
         }

@@ -2,7 +2,7 @@
 
 namespace CharacterGen.Generators.Randomizers.Races
 {
-    public interface ISetMetaraceRandomizer : IMetaraceRandomizer
+    public interface ISetMetaraceRandomizer : RaceRandomizer
     {
         String SetMetarace { get; set; }
     }

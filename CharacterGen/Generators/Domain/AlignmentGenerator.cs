@@ -3,7 +3,7 @@ using CharacterGen.Generators.Randomizers.Alignments;
 
 namespace CharacterGen.Generators.Domain
 {
-    public class AlignmentGenerator : Generator, IAlignmentGenerator
+    public class AlignmentGenerator : IterativeBuilder, IAlignmentGenerator
     {
         public Alignment GenerateWith(IAlignmentRandomizer alignmentRandomizer)
         {

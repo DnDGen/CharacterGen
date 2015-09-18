@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using CharacterGen.Common.Alignments;
+﻿using CharacterGen.Common.Alignments;
 using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Generators.Randomizers.Alignments;
 using CharacterGen.Generators.Randomizers.CharacterClasses;
@@ -9,6 +6,9 @@ using CharacterGen.Generators.Randomizers.Races;
 using CharacterGen.Generators.Verifiers;
 using CharacterGen.Selectors;
 using CharacterGen.Tables;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CharacterGen.Generators.Domain.Verifiers
 {
@@ -22,7 +22,7 @@ namespace CharacterGen.Generators.Domain.Verifiers
         }
 
         public Boolean VerifyCompatibility(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classNameRandomizer, ILevelRandomizer levelRandomizer,
-            IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer)
+            RaceRandomizer baseRaceRandomizer, RaceRandomizer metaraceRandomizer)
         {
             var alignments = alignmentRandomizer.GetAllPossibleResults();
             return alignments.Any() && alignments.Any(a => VerifyAlignmentCompatibility(a, classNameRandomizer, levelRandomizer,
@@ -30,14 +30,13 @@ namespace CharacterGen.Generators.Domain.Verifiers
         }
 
         public Boolean VerifyAlignmentCompatibility(Alignment alignment, IClassNameRandomizer classNameRandomizer, ILevelRandomizer levelRandomizer,
-            IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer)
+            RaceRandomizer baseRaceRandomizer, RaceRandomizer metaraceRandomizer)
         {
             var classNames = classNameRandomizer.GetAllPossibleResults(alignment);
             var levels = levelRandomizer.GetAllPossibleResults();
 
             var characterClasses = GetAllCharacterClassPrototypes(classNames, levels);
-            return characterClasses.Any() && characterClasses.Any(c => VerifyCharacterClassCompatibility(alignment.Goodness, c,
-                baseRaceRandomizer, metaraceRandomizer));
+            return characterClasses.Any() && characterClasses.Any(c => VerifyCharacterClassCompatibility(alignment, c, baseRaceRandomizer, metaraceRandomizer));
         }
 
         private IEnumerable<CharacterClass> GetAllCharacterClassPrototypes(IEnumerable<String> classNames, IEnumerable<Int32> levels)
@@ -51,11 +50,11 @@ namespace CharacterGen.Generators.Domain.Verifiers
             return characterClasses;
         }
 
-        public Boolean VerifyCharacterClassCompatibility(String goodness, CharacterClass characterClass, IBaseRaceRandomizer baseRaceRandomizer,
-            IMetaraceRandomizer metaraceRandomizer)
+        public Boolean VerifyCharacterClassCompatibility(Alignment alignment, CharacterClass characterClass, RaceRandomizer baseRaceRandomizer,
+            RaceRandomizer metaraceRandomizer)
         {
-            var baseRaceIds = baseRaceRandomizer.GetAllPossibles(goodness, characterClass);
-            var metaraceIds = metaraceRandomizer.GetAllPossible(goodness, characterClass);
+            var baseRaceIds = baseRaceRandomizer.GetAllPossible(alignment, characterClass);
+            var metaraceIds = metaraceRandomizer.GetAllPossible(alignment, characterClass);
 
             return baseRaceIds.Any() && metaraceIds.Any() && LevelAdjustmentsAreAllowed(baseRaceIds, metaraceIds, characterClass.Level);
         }

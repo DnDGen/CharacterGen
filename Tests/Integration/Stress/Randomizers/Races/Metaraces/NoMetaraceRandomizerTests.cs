@@ -9,8 +9,8 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
     [TestFixture]
     public class NoMetaraceRandomizerTests : StressTests
     {
-        [Inject, Named(MetaraceRandomizerTypeConstants.None)]
-        public override IMetaraceRandomizer MetaraceRandomizer { get; set; }
+        [Inject, Named(RaceRandomizerTypeConstants.Metarace.NoMeta)]
+        public override RaceRandomizer MetaraceRandomizer { get; set; }
 
         [TestCase("NoMetaraceRandomizer")]
         public override void Stress(String stressSubject)
@@ -23,7 +23,7 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
             var alignment = GetNewAlignment();
             var characterClass = GetNewCharacterClass(alignment);
 
-            var metarace = MetaraceRandomizer.Randomize(alignment.Goodness, characterClass);
+            var metarace = MetaraceRandomizer.Randomize(alignment, characterClass);
             Assert.That(metarace, Is.EqualTo(RaceConstants.Metaraces.None));
         }
     }

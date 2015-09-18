@@ -2,7 +2,7 @@
 
 namespace CharacterGen.Generators.Domain.Randomizers.CharacterClasses.Levels
 {
-    public class MediumLevelRandomizer : RangedLevel
+    public class MediumLevelRandomizer : RangedLevelRandomizer
     {
         public MediumLevelRandomizer(IDice dice)
             : base(dice)

@@ -1,16 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using CharacterGen.Common.Alignments;
 using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Common.Races;
 using CharacterGen.Generators.Randomizers.Races;
 using CharacterGen.Generators.Verifiers.Exceptions;
 using CharacterGen.Selectors;
 using CharacterGen.Tables;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CharacterGen.Generators.Domain.Randomizers.Races.Metaraces
 {
-    public abstract class BaseForcableMetarace : IForcableMetaraceRandomizer
+    public abstract class BaseForcableMetarace : IterativeBuilder, IForcableMetaraceRandomizer
     {
         public Boolean ForceMetarace { get; set; }
 
@@ -23,24 +24,21 @@ namespace CharacterGen.Generators.Domain.Randomizers.Races.Metaraces
             this.adjustmentsSelector = adjustmentsSelector;
         }
 
-        public String Randomize(String goodness, CharacterClass characterClass)
+        public String Randomize(Alignment alignment, CharacterClass characterClass)
         {
-            var results = GetAllPossible(goodness, characterClass);
+            var results = GetAllPossible(alignment, characterClass);
             if (results.Any() == false)
                 throw new IncompatibleRandomizersException();
 
-            var tableName = String.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSMetaraces, goodness, characterClass.ClassName);
-            var metarace = String.Empty;
+            var tableName = String.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSMetaraces, alignment.Goodness, characterClass.ClassName);
 
-            do metarace = percentileResultSelector.SelectFrom(tableName);
-            while (results.Contains(metarace) == false);
-
-            return metarace;
+            return Build(() => percentileResultSelector.SelectFrom(tableName),
+                m => results.Contains(m));
         }
 
-        public IEnumerable<String> GetAllPossible(String goodness, CharacterClass characterClass)
+        public IEnumerable<String> GetAllPossible(Alignment alignment, CharacterClass characterClass)
         {
-            var tableName = String.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSMetaraces, goodness, characterClass.ClassName);
+            var tableName = String.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSMetaraces, alignment.Goodness, characterClass.ClassName);
             var metaraces = percentileResultSelector.SelectAllFrom(tableName);
             return metaraces.Where(r => RaceIsAllowed(r, characterClass.Level));
         }

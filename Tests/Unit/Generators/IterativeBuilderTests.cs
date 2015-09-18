@@ -5,28 +5,28 @@ using System;
 namespace CharacterGen.Tests.Unit.Generators
 {
     [TestFixture]
-    public class GeneratorTests : Generator
+    public class IterativeBuilderTests : IterativeBuilder
     {
         [Test]
-        public void GenerateWithLambda()
+        public void BuildWithLambda()
         {
-            var generatedString = "generated string";
+            var builtString = "built string";
 
-            var randomString = Generate<String>(
-                () => generatedString,
+            var randomString = Build<String>(
+                () => builtString,
                 s => s.Contains("string"));
 
-            Assert.That(randomString, Is.EqualTo(generatedString));
+            Assert.That(randomString, Is.EqualTo(builtString));
         }
 
         [Test]
-        public void GenerateWithMethods()
+        public void BuildWithMethods()
         {
-            var date = Generate<DateTime>(Generate, IsValid);
+            var date = Build<DateTime>(Build, IsValid);
             Assert.That(date.ToShortDateString(), Is.EqualTo(DateTime.Now.ToShortDateString()));
         }
 
-        private DateTime Generate()
+        private DateTime Build()
         {
             return DateTime.Now;
         }
@@ -37,9 +37,9 @@ namespace CharacterGen.Tests.Unit.Generators
         }
 
         [Test]
-        public void GenerateNull()
+        public void BuildNull()
         {
-            var randomObject = Generate<String>(
+            var randomObject = Build<String>(
                 () => null,
                 s => true);
 
@@ -47,11 +47,11 @@ namespace CharacterGen.Tests.Unit.Generators
         }
 
         [Test]
-        public void RegenerateIfInvalid()
+        public void RebuildIfInvalid()
         {
             var count = 0;
 
-            var randomNumber = Generate<Int32>(
+            var randomNumber = Build<Int32>(
                 () => count++,
                 i => i > 0 && i % 2 == 0);
 
@@ -64,9 +64,9 @@ namespace CharacterGen.Tests.Unit.Generators
         {
             var count = 0;
 
-            Assert.That(() => Generate<Int32>(
+            Assert.That(() => Build<Int32>(
                 () => count++,
-                i => false), Throws.Exception.With.Message.EqualTo("Exceeded max retries to generate"));
+                i => false), Throws.Exception.With.Message.EqualTo("Exceeded max retries to build"));
 
             Assert.That(count, Is.EqualTo(10001));
         }

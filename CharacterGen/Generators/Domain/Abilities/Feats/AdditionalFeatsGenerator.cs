@@ -15,7 +15,7 @@ using System.Linq;
 
 namespace CharacterGen.Generators.Domain.Abilities.Feats
 {
-    public class AdditionalFeatsGenerator : Generator, IAdditionalFeatsGenerator
+    public class AdditionalFeatsGenerator : IterativeBuilder, IAdditionalFeatsGenerator
     {
         private ICollectionsSelector collectionsSelector;
         private IFeatsSelector featsSelector;

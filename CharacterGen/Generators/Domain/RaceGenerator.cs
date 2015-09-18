@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace CharacterGen.Generators.Domain
 {
-    public class RaceGenerator : Generator, IRaceGenerator
+    public class RaceGenerator : IterativeBuilder, IRaceGenerator
     {
         private IBooleanPercentileSelector booleanPercentileSelector;
         private ICollectionsSelector collectionsSelector;
@@ -26,12 +26,12 @@ namespace CharacterGen.Generators.Domain
             this.dice = dice;
         }
 
-        public Race GenerateWith(Alignment alignment, CharacterClass characterClass, IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer)
+        public Race GenerateWith(Alignment alignment, CharacterClass characterClass, RaceRandomizer baseRaceRandomizer, RaceRandomizer metaraceRandomizer)
         {
             var race = new Race();
 
-            race.BaseRace = baseRaceRandomizer.Randomize(alignment.Goodness, characterClass);
-            race.Metarace = metaraceRandomizer.Randomize(alignment.Goodness, characterClass);
+            race.BaseRace = baseRaceRandomizer.Randomize(alignment, characterClass);
+            race.Metarace = metaraceRandomizer.Randomize(alignment, characterClass);
             race.MetaraceSpecies = DetermineMetaraceSpecies(alignment, race.Metarace);
             race.Male = DetermineIfMale(race.BaseRace, characterClass.ClassName);
             race.Size = DetermineSize(race.BaseRace);

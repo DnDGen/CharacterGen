@@ -12,7 +12,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
     [TestFixture]
     public class NonEvilBaseRaceRandomizerTests : BaseRaceRandomizerTests
     {
-        protected override IEnumerable<String> baseRaceIds
+        protected override IEnumerable<String> baseRaces
         {
             get
             {
@@ -51,14 +51,14 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         [TestCase("not evil base race")]
         public void Allowed(String baseRace)
         {
-            var baseRaces = randomizer.GetAllPossibles(String.Empty, characterClass);
+            var baseRaces = randomizer.GetAllPossible(alignment, characterClass);
             Assert.That(baseRaces, Contains.Item(baseRace));
         }
 
         [TestCase("evil base race")]
         public void NotAllowed(String baseRace)
         {
-            var baseRaces = randomizer.GetAllPossibles(String.Empty, characterClass);
+            var baseRaces = randomizer.GetAllPossible(alignment, characterClass);
             Assert.That(baseRaces, Is.Not.Contains(baseRace));
         }
     }

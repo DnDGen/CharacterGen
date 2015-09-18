@@ -1,4 +1,5 @@
-﻿using CharacterGen.Common.CharacterClasses;
+﻿using CharacterGen.Common.Alignments;
+using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Generators.Domain.Randomizers.Races.Metaraces;
 using CharacterGen.Generators.Randomizers.Races;
 using NUnit.Framework;
@@ -11,19 +12,21 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
     public class SetMetaraceRandomizerTests
     {
         private ISetMetaraceRandomizer randomizer;
-        private CharacterClass characterclass;
+        private CharacterClass characterClass;
+        private Alignment alignment;
 
         [SetUp]
         public void Setup()
         {
             randomizer = new SetMetaraceRandomizer();
-            characterclass = new CharacterClass();
+            characterClass = new CharacterClass();
+            alignment = new Alignment();
         }
 
         [Test]
         public void SetMetaraceRandomizerIsAMetaraceRandomizer()
         {
-            Assert.That(randomizer, Is.InstanceOf<IMetaraceRandomizer>());
+            Assert.That(randomizer, Is.InstanceOf<RaceRandomizer>());
         }
 
         [Test]
@@ -31,8 +34,8 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         {
             randomizer.SetMetarace = "metarace";
 
-            var baseRace = randomizer.Randomize(String.Empty, characterclass);
-            Assert.That(baseRace, Is.EqualTo("metarace"));
+            var metarace = randomizer.Randomize(alignment, characterClass);
+            Assert.That(metarace, Is.EqualTo("metarace"));
         }
 
         [Test]
@@ -40,9 +43,9 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         {
             randomizer.SetMetarace = "metarace";
 
-            var baseRaces = randomizer.GetAllPossible(String.Empty, characterclass);
-            Assert.That(baseRaces, Contains.Item("metarace"));
-            Assert.That(baseRaces.Count(), Is.EqualTo(1));
+            var metaraces = randomizer.GetAllPossible(alignment, characterClass);
+            Assert.That(metaraces, Contains.Item("metarace"));
+            Assert.That(metaraces.Count(), Is.EqualTo(1));
         }
     }
 }

@@ -22,7 +22,7 @@ using System.Linq;
 
 namespace CharacterGen.Generators.Domain
 {
-    public class CharacterGenerator : Generator, ICharacterGenerator
+    public class CharacterGenerator : IterativeBuilder, ICharacterGenerator
     {
         private IAlignmentGenerator alignmentGenerator;
         private ICharacterClassGenerator characterClassGenerator;
@@ -37,8 +37,8 @@ namespace CharacterGen.Generators.Domain
         private ISetLevelRandomizer setLevelRandomizer;
         private IAlignmentRandomizer anyAlignmentRandomizer;
         private IClassNameRandomizer anyClassNameRandomizer;
-        private IBaseRaceRandomizer anyBaseRaceRandomizer;
-        private IMetaraceRandomizer anyMetaraceRandomizer;
+        private RaceRandomizer anyBaseRaceRandomizer;
+        private RaceRandomizer anyMetaraceRandomizer;
         private IStatsRandomizer rawStatsRandomizer;
         private IBooleanPercentileSelector booleanPercentileSelector;
         private ILeadershipSelector leadershipSelector;
@@ -49,7 +49,7 @@ namespace CharacterGen.Generators.Domain
             IAdjustmentsSelector adjustmentsSelector, IRandomizerVerifier randomizerVerifier, IPercentileSelector percentileSelector,
             IAbilitiesGenerator abilitiesGenerator, ICombatGenerator combatGenerator, IEquipmentGenerator equipmentGenerator,
             ISetAlignmentRandomizer setAlignmentRandomizer, ISetLevelRandomizer setLevelRandomizer, IAlignmentRandomizer anyAlignmentRandomizer,
-            IClassNameRandomizer anyClassNameRandomizer, IBaseRaceRandomizer anyBaseRaceRandomizer, IMetaraceRandomizer anyMetaraceRandomizer,
+            IClassNameRandomizer anyClassNameRandomizer, RaceRandomizer anyBaseRaceRandomizer, RaceRandomizer anyMetaraceRandomizer,
             IStatsRandomizer rawStatsRandomizer, IBooleanPercentileSelector booleanPercentileSelector, ILeadershipSelector leadershipSelector,
             ICollectionsSelector collectionsSelector, IMagicGenerator magicGenerator)
         {
@@ -77,7 +77,7 @@ namespace CharacterGen.Generators.Domain
         }
 
         public Character GenerateWith(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classNameRandomizer,
-            ILevelRandomizer levelRandomizer, IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer,
+            ILevelRandomizer levelRandomizer, RaceRandomizer baseRaceRandomizer, RaceRandomizer metaraceRandomizer,
             IStatsRandomizer statsRandomizer)
         {
             VerifyRandomizers(alignmentRandomizer, classNameRandomizer, levelRandomizer, baseRaceRandomizer, metaraceRandomizer);
@@ -92,7 +92,7 @@ namespace CharacterGen.Generators.Domain
         }
 
         private Character GenerateCharacter(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classNameRandomizer,
-            ILevelRandomizer levelRandomizer, IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer,
+            ILevelRandomizer levelRandomizer, RaceRandomizer baseRaceRandomizer, RaceRandomizer metaraceRandomizer,
             IStatsRandomizer statsRandomizer)
         {
             var character = new Character();
@@ -118,7 +118,7 @@ namespace CharacterGen.Generators.Domain
         }
 
         private void VerifyRandomizers(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classNameRandomizer,
-            ILevelRandomizer levelRandomizer, IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer)
+            ILevelRandomizer levelRandomizer, RaceRandomizer baseRaceRandomizer, RaceRandomizer metaraceRandomizer)
         {
             var verified = randomizerVerifier.VerifyCompatibility(alignmentRandomizer, classNameRandomizer, levelRandomizer,
                 baseRaceRandomizer, metaraceRandomizer);
@@ -128,9 +128,9 @@ namespace CharacterGen.Generators.Domain
         }
 
         private Alignment GenerateAlignment(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classNameRandomizer,
-            ILevelRandomizer levelRandomizer, IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer)
+            ILevelRandomizer levelRandomizer, RaceRandomizer baseRaceRandomizer, RaceRandomizer metaraceRandomizer)
         {
-            var alignment = Generate<Alignment>(
+            var alignment = Build<Alignment>(
                 () => alignmentGenerator.GenerateWith(alignmentRandomizer),
                 a => randomizerVerifier.VerifyAlignmentCompatibility(a, classNameRandomizer, levelRandomizer, baseRaceRandomizer, metaraceRandomizer));
 
@@ -138,19 +138,19 @@ namespace CharacterGen.Generators.Domain
         }
 
         private CharacterClass GenerateCharacterClass(IClassNameRandomizer classNameRandomizer, ILevelRandomizer levelRandomizer,
-            Alignment alignment, IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer)
+            Alignment alignment, RaceRandomizer baseRaceRandomizer, RaceRandomizer metaraceRandomizer)
         {
-            var characterClass = Generate<CharacterClass>(
+            var characterClass = Build<CharacterClass>(
                 () => characterClassGenerator.GenerateWith(alignment, levelRandomizer, classNameRandomizer),
-                c => randomizerVerifier.VerifyCharacterClassCompatibility(alignment.Goodness, c, baseRaceRandomizer, metaraceRandomizer));
+                c => randomizerVerifier.VerifyCharacterClassCompatibility(alignment, c, baseRaceRandomizer, metaraceRandomizer));
 
             return characterClass;
         }
 
-        private Race GenerateRace(IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer, Dictionary<String, Int32> levelAdjustments,
+        private Race GenerateRace(RaceRandomizer baseRaceRandomizer, RaceRandomizer metaraceRandomizer, Dictionary<String, Int32> levelAdjustments,
             Alignment alignment, CharacterClass characterClass)
         {
-            var race = Generate<Race>(
+            var race = Build<Race>(
                 () => raceGenerator.GenerateWith(alignment, characterClass, baseRaceRandomizer, metaraceRandomizer),
                 r => characterClass.Level + levelAdjustments[r.BaseRace] + levelAdjustments[r.Metarace] > 0);
 
@@ -266,7 +266,7 @@ namespace CharacterGen.Generators.Domain
             setLevelRandomizer.SetLevel = level;
             var allowedAlignments = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AlignmentGroups, leader.Alignment.ToString());
 
-            setAlignmentRandomizer.SetAlignment = Generate<Alignment>(
+            setAlignmentRandomizer.SetAlignment = Build<Alignment>(
                 () => alignmentGenerator.GenerateWith(alignmentRandomizer),
                 a => allowedAlignments.Contains(a.ToString()));
 

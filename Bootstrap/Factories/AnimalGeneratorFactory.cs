@@ -16,8 +16,8 @@ namespace CharacterGen.Bootstrap.Factories
         {
             var collectionsSelector = kernel.Get<ICollectionsSelector>();
             var raceGenerator = kernel.Get<IRaceGenerator>();
-            var animalBaseRaceRandomizer = kernel.Get<IBaseRaceRandomizer>(BaseRaceRandomizerTypeConstants.Animal);
-            var noMetaraceRandomizer = kernel.Get<IMetaraceRandomizer>(MetaraceRandomizerTypeConstants.None);
+            var animalBaseRaceRandomizer = kernel.Get<RaceRandomizer>(RaceRandomizerTypeConstants.BaseRace.AnimalBase);
+            var noMetaraceRandomizer = kernel.Get<RaceRandomizer>(RaceRandomizerTypeConstants.Metarace.NoMeta);
             var adjustmentsSelector = kernel.Get<IAdjustmentsSelector>();
             var animalAbilitiesGenerator = kernel.Get<IAbilitiesGenerator>(AbilitiesGeneratorTypeConstants.Animal);
             var setStatsRandomizer = kernel.Get<ISetStatsRandomizer>();

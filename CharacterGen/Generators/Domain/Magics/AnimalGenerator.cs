@@ -17,18 +17,18 @@ using System.Linq;
 
 namespace CharacterGen.Generators.Domain.Magics
 {
-    public class AnimalGenerator : Generator, IAnimalGenerator
+    public class AnimalGenerator : IterativeBuilder, IAnimalGenerator
     {
         private ICollectionsSelector collectionsSelector;
         private IRaceGenerator raceGenerator;
-        private IBaseRaceRandomizer animalBaseRaceRandomizer;
-        private IMetaraceRandomizer noMetaraceRandomizer;
+        private RaceRandomizer animalBaseRaceRandomizer;
+        private RaceRandomizer noMetaraceRandomizer;
         private IAdjustmentsSelector adjustmentsSelector;
         private IAbilitiesGenerator animalAbilitiesGenerator;
         private ISetStatsRandomizer setStatsRandomizer;
         private ICombatGenerator animalCombatGenerator;
 
-        public AnimalGenerator(ICollectionsSelector collectionsSelector, IRaceGenerator raceGenerator, IBaseRaceRandomizer animalBaseRaceRandomizer, IMetaraceRandomizer noMetaraceRandomizer,
+        public AnimalGenerator(ICollectionsSelector collectionsSelector, IRaceGenerator raceGenerator, RaceRandomizer animalBaseRaceRandomizer, RaceRandomizer noMetaraceRandomizer,
             IAdjustmentsSelector adjustmentsSelector, IAbilitiesGenerator animalAbilitiesGenerator, ISetStatsRandomizer setStatsRandomizer, ICombatGenerator animalCombatGenerator)
         {
             this.collectionsSelector = collectionsSelector;
@@ -53,7 +53,7 @@ namespace CharacterGen.Generators.Domain.Magics
             var improvedFamiliars = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.Animals, FeatConstants.ImprovedFamiliar);
             var characterHasImprovedFamiliarFeat = feats.Any(f => f.Name == FeatConstants.ImprovedFamiliar);
 
-            animal.Race = Generate<Race>(() => raceGenerator.GenerateWith(alignment, effectiveCharacterClass, animalBaseRaceRandomizer, noMetaraceRandomizer),
+            animal.Race = Build<Race>(() => raceGenerator.GenerateWith(alignment, effectiveCharacterClass, animalBaseRaceRandomizer, noMetaraceRandomizer),
                 a => effectiveCharacterClass.Level + levelAdjustments[a.BaseRace] > 0 && (characterHasImprovedFamiliarFeat || improvedFamiliars.Contains(a.BaseRace) == false));
 
             var baseAttack = animalCombatGenerator.GenerateBaseAttackWith(effectiveCharacterClass, animal.Race);

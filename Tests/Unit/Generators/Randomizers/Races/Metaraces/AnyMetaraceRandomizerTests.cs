@@ -36,7 +36,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         [Test]
         public void AllMetaracesAllowed()
         {
-            var allMetaraces = randomizer.GetAllPossible(String.Empty, characterClass);
+            var allMetaraces = randomizer.GetAllPossible(alignment, characterClass);
             foreach (var metarace in metaraceIds)
                 Assert.That(allMetaraces, Contains.Item(metarace));
         }

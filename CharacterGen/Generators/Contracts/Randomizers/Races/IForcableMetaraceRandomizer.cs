@@ -2,7 +2,7 @@
 
 namespace CharacterGen.Generators.Randomizers.Races
 {
-    public interface IForcableMetaraceRandomizer : IMetaraceRandomizer
+    public interface IForcableMetaraceRandomizer : RaceRandomizer
     {
         Boolean ForceMetarace { get; set; }
     }

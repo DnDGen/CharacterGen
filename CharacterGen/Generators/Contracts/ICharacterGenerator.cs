@@ -9,7 +9,7 @@ namespace CharacterGen.Generators
     public interface ICharacterGenerator
     {
         Character GenerateWith(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classNameRandomizer,
-            ILevelRandomizer levelRandomizer, IBaseRaceRandomizer baseRaceRandomizer, IMetaraceRandomizer metaraceRandomizer,
+            ILevelRandomizer levelRandomizer, RaceRandomizer baseRaceRandomizer, RaceRandomizer metaraceRandomizer,
             IStatsRandomizer statsRandomizer);
     }
 }

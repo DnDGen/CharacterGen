@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace CharacterGen.Generators.Domain.Abilities
 {
-    public class LanguageGenerator : Generator, ILanguageGenerator
+    public class LanguageGenerator : IterativeBuilder, ILanguageGenerator
     {
         private ILanguageCollectionsSelector languagesSelector;
         private ICollectionsSelector collectionsSelector;

@@ -53,8 +53,8 @@ namespace CharacterGen.Tests.Unit.Generators
         private Mock<ISetAlignmentRandomizer> mockSetAlignmentRandomizer;
         private Mock<IAlignmentRandomizer> mockAnyAlignmentRandomizer;
         private Mock<IClassNameRandomizer> mockAnyClassNameRandomizer;
-        private Mock<IBaseRaceRandomizer> mockAnyBaseRaceRandomizer;
-        private Mock<IMetaraceRandomizer> mockAnyMetaraceRandomizer;
+        private Mock<RaceRandomizer> mockAnyBaseRaceRandomizer;
+        private Mock<RaceRandomizer> mockAnyMetaraceRandomizer;
         private Mock<IStatsRandomizer> mockRawStatRandomizer;
         private Mock<IBooleanPercentileSelector> mockBooleanPercentileSelector;
         private Mock<ICollectionsSelector> mockCollectionsSelector;
@@ -63,8 +63,8 @@ namespace CharacterGen.Tests.Unit.Generators
         private Mock<IAlignmentRandomizer> mockAlignmentRandomizer;
         private Mock<IClassNameRandomizer> mockClassNameRandomizer;
         private Mock<ILevelRandomizer> mockLevelRandomizer;
-        private Mock<IBaseRaceRandomizer> mockBaseRaceRandomizer;
-        private Mock<IMetaraceRandomizer> mockMetaraceRandomizer;
+        private Mock<RaceRandomizer> mockBaseRaceRandomizer;
+        private Mock<RaceRandomizer> mockMetaraceRandomizer;
         private Mock<IStatsRandomizer> mockStatsRandomizer;
 
         private CharacterClass characterClass;
@@ -106,11 +106,11 @@ namespace CharacterGen.Tests.Unit.Generators
                 mockLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(true);
             mockRandomizerVerifier.Setup(v => v.VerifyAlignmentCompatibility(It.IsAny<Alignment>(), mockClassNameRandomizer.Object,
                 mockLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(true);
-            mockRandomizerVerifier.Setup(v => v.VerifyCharacterClassCompatibility(It.IsAny<String>(), It.IsAny<CharacterClass>(),
+            mockRandomizerVerifier.Setup(v => v.VerifyCharacterClassCompatibility(It.IsAny<Alignment>(), It.IsAny<CharacterClass>(),
                 mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(true);
             mockRandomizerVerifier.Setup(v => v.VerifyAlignmentCompatibility(It.IsAny<Alignment>(), mockAnyClassNameRandomizer.Object,
                 mockSetLevelRandomizer.Object, mockAnyBaseRaceRandomizer.Object, mockAnyMetaraceRandomizer.Object)).Returns(true);
-            mockRandomizerVerifier.Setup(v => v.VerifyCharacterClassCompatibility(It.IsAny<String>(), It.IsAny<CharacterClass>(),
+            mockRandomizerVerifier.Setup(v => v.VerifyCharacterClassCompatibility(It.IsAny<Alignment>(), It.IsAny<CharacterClass>(),
                 mockAnyBaseRaceRandomizer.Object, mockAnyMetaraceRandomizer.Object)).Returns(true);
 
             mockLeadershipSelector.Setup(s => s.SelectFollowerQuantitiesFor(It.IsAny<Int32>())).Returns(new FollowerQuantities());
@@ -134,15 +134,15 @@ namespace CharacterGen.Tests.Unit.Generators
             mockClassNameRandomizer = new Mock<IClassNameRandomizer>();
             mockLevelRandomizer = new Mock<ILevelRandomizer>();
             mockStatsRandomizer = new Mock<IStatsRandomizer>();
-            mockBaseRaceRandomizer = new Mock<IBaseRaceRandomizer>();
-            mockMetaraceRandomizer = new Mock<IMetaraceRandomizer>();
+            mockBaseRaceRandomizer = new Mock<RaceRandomizer>();
+            mockMetaraceRandomizer = new Mock<RaceRandomizer>();
 
             mockSetAlignmentRandomizer = new Mock<ISetAlignmentRandomizer>();
             mockAnyAlignmentRandomizer = new Mock<IAlignmentRandomizer>();
             mockSetLevelRandomizer = new Mock<ISetLevelRandomizer>();
             mockAnyClassNameRandomizer = new Mock<IClassNameRandomizer>();
-            mockAnyBaseRaceRandomizer = new Mock<IBaseRaceRandomizer>();
-            mockAnyMetaraceRandomizer = new Mock<IMetaraceRandomizer>();
+            mockAnyBaseRaceRandomizer = new Mock<RaceRandomizer>();
+            mockAnyMetaraceRandomizer = new Mock<RaceRandomizer>();
             mockRawStatRandomizer = new Mock<IStatsRandomizer>();
 
             mockSetAlignmentRandomizer.SetupAllProperties();
@@ -239,7 +239,7 @@ namespace CharacterGen.Tests.Unit.Generators
         [Test]
         public void IncompatibleCharacterClassIsRegenerated()
         {
-            mockRandomizerVerifier.SetupSequence(v => v.VerifyCharacterClassCompatibility(It.IsAny<String>(), It.IsAny<CharacterClass>(),
+            mockRandomizerVerifier.SetupSequence(v => v.VerifyCharacterClassCompatibility(It.IsAny<Alignment>(), It.IsAny<CharacterClass>(),
                 mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(false).Returns(true);
 
             GenerateCharacter();

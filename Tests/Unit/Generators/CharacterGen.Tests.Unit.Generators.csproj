@@ -86,7 +86,7 @@
     <Compile Include="Combats\HitPointsGeneratorTests.cs" />
     <Compile Include="Abilities\LanguageGeneratorTests.cs" />
     <Compile Include="Combats\SavingThrowsGeneratorTests.cs" />
-    <Compile Include="GeneratorTests.cs" />
+    <Compile Include="IterativeBuilderTests.cs" />
     <Compile Include="Items\ArmorGeneratorTests.cs" />
     <Compile Include="Items\EquipmentGeneratorTests.cs" />
     <Compile Include="Items\WeaponGeneratorTests.cs" />
@@ -99,7 +99,8 @@
     <Compile Include="Randomizers\CharacterClasses\ClassNames\SetClassNameRandomizerTests.cs" />
     <Compile Include="Randomizers\CharacterClasses\Levels\LevelRandomizerTypeConstantsTests.cs" />
     <Compile Include="Randomizers\CharacterClasses\Levels\SetLevelRandomizerTests.cs" />
-    <Compile Include="Randomizers\Races\BaseRaces\BaseRaceRandomizerTypeConstantsTests.cs" />
+    <Compile Include="Randomizers\Races\BaseRaces\AnimalBaseRaceRandomizerTests.cs" />
+    <Compile Include="Randomizers\Races\RaceRandomizerTypeConstantsTests.cs" />
     <Compile Include="Randomizers\Races\BaseRaces\SetBaseRaceRandomizerTests.cs" />
     <Compile Include="Abilities\StatsGeneratorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

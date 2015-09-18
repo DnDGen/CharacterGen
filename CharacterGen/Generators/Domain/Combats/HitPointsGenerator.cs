@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace CharacterGen.Generators.Domain.Combats
 {
-    public class HitPointsGenerator : Generator, IHitPointsGenerator
+    public class HitPointsGenerator : IterativeBuilder, IHitPointsGenerator
     {
         private IDice dice;
         private IAdjustmentsSelector adjustmentsSelector;

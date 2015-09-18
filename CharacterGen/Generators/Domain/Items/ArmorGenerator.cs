@@ -13,7 +13,7 @@ using TreasureGen.Generators.Items.Mundane;
 
 namespace CharacterGen.Generators.Domain.Items
 {
-    public class ArmorGenerator : Generator, GearGenerator
+    public class ArmorGenerator : IterativeBuilder, GearGenerator
     {
         private ICollectionsSelector collectionsSelector;
         private IPercentileSelector percentileSelector;
@@ -38,7 +38,7 @@ namespace CharacterGen.Generators.Domain.Items
             if (proficientArmors.Any() == false)
                 return null;
 
-            return Generate<Item>(
+            return Build<Item>(
                 () => GenerateArmor(power),
                 a => ArmorIsValid(a, proficientArmors, characterClass, race));
         }
