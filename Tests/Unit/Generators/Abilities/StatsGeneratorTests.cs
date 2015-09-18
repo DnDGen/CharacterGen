@@ -31,7 +31,8 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
         private Race race;
         private CharacterClass characterClass;
         private StatPrioritySelection statPrioritySelection;
-        private Dictionary<String, Int32> ageRolls;
+        private Dictionary<String, Int32> ageStatGains;
+        private Dictionary<String, Int32> ageStatLosses;
 
         [SetUp]
         public void Setup()
@@ -50,7 +51,8 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
             adjustments = new Dictionary<String, Int32>();
             statPrioritySelection = new StatPrioritySelection();
             characterClass = new CharacterClass();
-            ageRolls = new Dictionary<String, Int32>();
+            ageStatGains = new Dictionary<String, Int32>();
+            ageStatLosses = new Dictionary<String, Int32>();
 
             characterClass.ClassName = "class name";
             randomizedStats[StatConstants.Charisma] = new Stat { Value = baseStat };
@@ -69,13 +71,11 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
             adjustments[StatConstants.Intelligence] = 0;
             adjustments[StatConstants.Strength] = 0;
             adjustments[StatConstants.Wisdom] = 0;
-            ageRolls[AdjustmentConstants.MiddleAge] = 42;
-            ageRolls[AdjustmentConstants.Old] = 600;
-            ageRolls[AdjustmentConstants.Venerable] = 90210;
+            ageStatGains[String.Empty] = 0;
+            ageStatLosses[String.Empty] = 0;
 
-            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.AGEGROUPRACEAges, GroupConstants.SelfTaught, race.BaseRace);
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(ageRolls);
-
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.AgeStatGains)).Returns(ageStatGains);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.AgeStatLosses)).Returns(ageStatLosses);
             mockStatPrioritySelector.Setup(p => p.SelectFor(It.IsAny<String>())).Returns(statPrioritySelection);
             mockStatAdjustmentsSelector.Setup(p => p.SelectFor(race)).Returns(adjustments);
             mockStatRandomizer.Setup(r => r.Randomize()).Returns(randomizedStats);
@@ -230,26 +230,30 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
             Assert.That(stats[StatConstants.Dexterity].Value, Is.EqualTo(baseStat));
         }
 
-        [TestCase(41, 10, 10, 10, 10, 10, 10)]
-        [TestCase(42, 9, 9, 9, 11, 11, 11)]
-        [TestCase(43, 9, 9, 9, 11, 11, 11)]
-        [TestCase(599, 9, 9, 9, 11, 11, 11)]
-        [TestCase(600, 7, 7, 7, 12, 12, 12)]
-        [TestCase(601, 7, 7, 7, 12, 12, 12)]
-        [TestCase(90209, 7, 7, 7, 12, 12, 12)]
-        [TestCase(90210, 4, 4, 4, 13, 13, 13)]
-        [TestCase(90211, 4, 4, 4, 13, 13, 13)]
-        public void ApplyAgeModifierToStats(Int32 age, Int32 strength, Int32 constitution, Int32 dexterity, Int32 intelligence, Int32 wisdom, Int32 charisma)
+        [Test]
+        public void ApplyAgeStatGainsToMentalStats()
         {
-            race.AgeInYears = age;
+            race.Age.Stage = "age stage";
+            ageStatGains[race.Age.Stage] = 9266;
+            ageStatLosses[race.Age.Stage] = 0;
 
             var stats = statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
-            Assert.That(stats[StatConstants.Charisma].Value, Is.EqualTo(charisma));
-            Assert.That(stats[StatConstants.Constitution].Value, Is.EqualTo(constitution));
-            Assert.That(stats[StatConstants.Dexterity].Value, Is.EqualTo(dexterity));
-            Assert.That(stats[StatConstants.Intelligence].Value, Is.EqualTo(intelligence));
-            Assert.That(stats[StatConstants.Strength].Value, Is.EqualTo(strength));
-            Assert.That(stats[StatConstants.Wisdom].Value, Is.EqualTo(wisdom));
+            Assert.That(stats[StatConstants.Charisma].Value, Is.EqualTo(9276));
+            Assert.That(stats[StatConstants.Intelligence].Value, Is.EqualTo(9276));
+            Assert.That(stats[StatConstants.Wisdom].Value, Is.EqualTo(9276));
+        }
+
+        [Test]
+        public void ApplyAgeStatLossesToPhysicalStats()
+        {
+            race.Age.Stage = "age stage";
+            ageStatGains[race.Age.Stage] = 0;
+            ageStatLosses[race.Age.Stage] = 5;
+
+            var stats = statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
+            Assert.That(stats[StatConstants.Constitution].Value, Is.EqualTo(5));
+            Assert.That(stats[StatConstants.Dexterity].Value, Is.EqualTo(5));
+            Assert.That(stats[StatConstants.Strength].Value, Is.EqualTo(5));
         }
 
         [Test]
@@ -257,7 +261,9 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
         {
             adjustments[StatConstants.Strength] = -9266;
             randomizedStats[StatConstants.Strength].Value = 3;
-            race.AgeInYears = 90211;
+            race.Age.Stage = "age stage";
+            ageStatGains[race.Age.Stage] = 0;
+            ageStatLosses[race.Age.Stage] = 90210;
 
             var stats = statsGenerator.GenerateWith(mockStatRandomizer.Object, characterClass, race);
             Assert.That(stats[StatConstants.Strength].Value, Is.EqualTo(1));

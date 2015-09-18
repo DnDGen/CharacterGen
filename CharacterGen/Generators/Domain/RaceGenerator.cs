@@ -38,7 +38,7 @@ namespace CharacterGen.Generators.Domain
             race.HasWings = DetermineIfRaceHasWings(race);
             race.LandSpeed = DetermineLandSpeed(race);
             race.AerialSpeed = DetermineAerialSpeed(race);
-            race.AgeInYears = DetermineAge(race, characterClass);
+            race.Age = DetermineAge(race, characterClass);
 
             var gender = race.Male ? "Male" : "Female";
             var tableName = String.Format(TableNameConstants.Formattable.Adjustments.GENDERRACEHeights, gender, race.BaseRace);
@@ -119,17 +119,29 @@ namespace CharacterGen.Generators.Domain
             return race.LandSpeed * 2;
         }
 
-        private Int32 DetermineAge(Race race, CharacterClass characterClass)
+        private Age DetermineAge(Race race, CharacterClass characterClass)
         {
-            var ageGroup = GetAgeGroup(characterClass);
-            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.AGEGROUPRACEAges, ageGroup, race.BaseRace);
+            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.RACEAges, race.BaseRace);
             var ages = adjustmentsSelector.SelectFrom(tableName);
-            var additionalAge = dice.Roll(ages[AdjustmentConstants.Quantity]).d(ages[AdjustmentConstants.Die]);
+            var classType = GetClassType(characterClass);
+            var additionalAge = dice.Roll(ages[AdjustmentConstants.Quantity + classType]).d(ages[AdjustmentConstants.Die + classType]);
 
-            return ages[AdjustmentConstants.Adulthood] + additionalAge;
+            var age = new Age();
+            age.Years = ages[RaceConstants.Ages.Adulthood] + additionalAge;
+
+            if (age.Years >= ages[RaceConstants.Ages.Venerable])
+                age.Stage = RaceConstants.Ages.Venerable;
+            else if (age.Years >= ages[RaceConstants.Ages.Old])
+                age.Stage = RaceConstants.Ages.Old;
+            else if (age.Years >= ages[RaceConstants.Ages.MiddleAge])
+                age.Stage = RaceConstants.Ages.MiddleAge;
+            else
+                age.Stage = RaceConstants.Ages.Adulthood;
+
+            return age;
         }
 
-        private String GetAgeGroup(CharacterClass characterClass)
+        private String GetClassType(CharacterClass characterClass)
         {
             var intuitiveClasses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Intuitive);
             if (intuitiveClasses.Contains(characterClass.ClassName))

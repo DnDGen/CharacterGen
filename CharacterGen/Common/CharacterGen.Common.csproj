@@ -87,6 +87,7 @@
     <Compile Include="Items\Equipment.cs" />
     <Compile Include="Magics\Magic.cs" />
     <Compile Include="Magics\SpellConstants.cs" />
+    <Compile Include="Races\Age.cs" />
     <Compile Include="Races\Race.cs" />
     <Compile Include="Races\RaceConstants.cs" />
     <Compile Include="Abilities\Skills\SkillConstants.cs" />

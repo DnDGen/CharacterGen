@@ -98,43 +98,32 @@ namespace CharacterGen.Generators.Domain.Abilities
 
         private Dictionary<String, Stat> ApplyAgeToStats(Dictionary<String, Stat> stats, Race race)
         {
-            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.AGEGROUPRACEAges, GroupConstants.SelfTaught, race.BaseRace);
-            var ages = adjustmentsSelector.SelectFrom(tableName);
+            var gain = GetGain(race.Age.Stage);
+            var loss = GetLoss(race.Age.Stage);
 
-            if (race.AgeInYears >= ages[AdjustmentConstants.MiddleAge])
-            {
-                stats[StatConstants.Strength].Value--;
-                stats[StatConstants.Constitution].Value--;
-                stats[StatConstants.Dexterity].Value--;
-                stats[StatConstants.Intelligence].Value++;
-                stats[StatConstants.Wisdom].Value++;
-                stats[StatConstants.Charisma].Value++;
-            }
-
-            if (race.AgeInYears >= ages[AdjustmentConstants.Old])
-            {
-                stats[StatConstants.Strength].Value -= 2;
-                stats[StatConstants.Constitution].Value -= 2;
-                stats[StatConstants.Dexterity].Value -= 2;
-                stats[StatConstants.Intelligence].Value++;
-                stats[StatConstants.Wisdom].Value++;
-                stats[StatConstants.Charisma].Value++;
-            }
-
-            if (race.AgeInYears >= ages[AdjustmentConstants.Venerable])
-            {
-                stats[StatConstants.Strength].Value -= 3;
-                stats[StatConstants.Constitution].Value -= 3;
-                stats[StatConstants.Dexterity].Value -= 3;
-                stats[StatConstants.Intelligence].Value++;
-                stats[StatConstants.Wisdom].Value++;
-                stats[StatConstants.Charisma].Value++;
-            }
+            stats[StatConstants.Strength].Value -= loss;
+            stats[StatConstants.Constitution].Value -= loss;
+            stats[StatConstants.Dexterity].Value -= loss;
+            stats[StatConstants.Intelligence].Value += gain;
+            stats[StatConstants.Wisdom].Value += gain;
+            stats[StatConstants.Charisma].Value += gain;
 
             foreach (var stat in stats.Values)
                 stat.Value = Math.Max(stat.Value, 1);
 
             return stats;
+        }
+
+        private Int32 GetGain(String ageStage)
+        {
+            var ageStatGains = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.AgeStatGains);
+            return ageStatGains[ageStage];
+        }
+
+        private Int32 GetLoss(String ageStage)
+        {
+            var ageStatLosses = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.AgeStatLosses);
+            return ageStatLosses[ageStage];
         }
     }
 }

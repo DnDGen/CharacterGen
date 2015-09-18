@@ -30,9 +30,7 @@ namespace CharacterGen.Tests.Unit.Generators
         private CharacterClass characterClass;
         private Alignment alignment;
         private Dictionary<String, Int32> speeds;
-        private Dictionary<String, Int32> selfTaughtAgeRolls;
-        private Dictionary<String, Int32> intuitiveAgeRolls;
-        private Dictionary<String, Int32> trainedAgeRolls;
+        private Dictionary<String, Int32> ageRolls;
         private Dictionary<String, Int32> heightRolls;
         private Dictionary<String, Int32> weightRolls;
         private List<String> intuitiveClasses;
@@ -53,9 +51,7 @@ namespace CharacterGen.Tests.Unit.Generators
             characterClass = new CharacterClass();
             alignment = new Alignment();
             speeds = new Dictionary<String, Int32>();
-            selfTaughtAgeRolls = new Dictionary<String, Int32>();
-            intuitiveAgeRolls = new Dictionary<String, Int32>();
-            trainedAgeRolls = new Dictionary<String, Int32>();
+            ageRolls = new Dictionary<String, Int32>();
             heightRolls = new Dictionary<String, Int32>();
             weightRolls = new Dictionary<String, Int32>();
             intuitiveClasses = new List<String>();
@@ -64,30 +60,28 @@ namespace CharacterGen.Tests.Unit.Generators
             characterClass.ClassName = "class name";
             alignment.Goodness = "goodness";
             speeds[BaseRace] = 9266;
-            selfTaughtAgeRolls[AdjustmentConstants.Adulthood] = 90210;
-            selfTaughtAgeRolls[AdjustmentConstants.Quantity] = 42;
-            selfTaughtAgeRolls[AdjustmentConstants.Die] = 600;
-            intuitiveAgeRolls[AdjustmentConstants.Adulthood] = 90210;
-            intuitiveAgeRolls[AdjustmentConstants.Quantity] = 420;
-            intuitiveAgeRolls[AdjustmentConstants.Die] = 6000;
-            trainedAgeRolls[AdjustmentConstants.Adulthood] = 90210;
-            trainedAgeRolls[AdjustmentConstants.Quantity] = 4200;
-            trainedAgeRolls[AdjustmentConstants.Die] = 60000;
+
+            ageRolls[AdjustmentConstants.Quantity + GroupConstants.Intuitive] = 42;
+            ageRolls[AdjustmentConstants.Die + GroupConstants.Intuitive] = 600;
+            ageRolls[AdjustmentConstants.Quantity + GroupConstants.SelfTaught] = 420;
+            ageRolls[AdjustmentConstants.Die + GroupConstants.SelfTaught] = 6000;
+            ageRolls[AdjustmentConstants.Quantity + GroupConstants.Trained] = 4200;
+            ageRolls[AdjustmentConstants.Die + GroupConstants.Trained] = 60000;
+            ageRolls[RaceConstants.Ages.Adulthood] = 90210;
+            ageRolls[RaceConstants.Ages.MiddleAge] = 90230;
+            ageRolls[RaceConstants.Ages.Old] = 90240;
+            ageRolls[RaceConstants.Ages.Venerable] = 90250;
+
             heightRolls[AdjustmentConstants.Base] = 902;
             heightRolls[AdjustmentConstants.Quantity] = 10;
             heightRolls[AdjustmentConstants.Die] = 4;
+
             weightRolls[AdjustmentConstants.Base] = 2;
             weightRolls[AdjustmentConstants.Quantity] = 92;
             weightRolls[AdjustmentConstants.Die] = 66;
 
-            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.AGEGROUPRACEAges, GroupConstants.SelfTaught, BaseRace);
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(selfTaughtAgeRolls);
-
-            tableName = String.Format(TableNameConstants.Formattable.Adjustments.AGEGROUPRACEAges, GroupConstants.Intuitive, BaseRace);
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(intuitiveAgeRolls);
-
-            tableName = String.Format(TableNameConstants.Formattable.Adjustments.AGEGROUPRACEAges, GroupConstants.Trained, BaseRace);
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(trainedAgeRolls);
+            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.RACEAges, BaseRace);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(ageRolls);
 
             tableName = String.Format(TableNameConstants.Formattable.Adjustments.GENDERRACEHeights, "Female", BaseRace);
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(heightRolls);
@@ -96,8 +90,8 @@ namespace CharacterGen.Tests.Unit.Generators
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(weightRolls);
 
             mockDice.Setup(d => d.Roll(42).d(600)).Returns(14);
-            mockDice.Setup(d => d.Roll(420).d(6000)).Returns(140);
-            mockDice.Setup(d => d.Roll(4200).d(60000)).Returns(1400);
+            mockDice.Setup(d => d.Roll(420).d(6000)).Returns(24);
+            mockDice.Setup(d => d.Roll(4200).d(60000)).Returns(34);
             mockDice.Setup(d => d.Roll(10).d(4)).Returns(104);
             mockDice.Setup(d => d.Roll(92).d(66)).Returns(426);
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.LandSpeeds)).Returns(speeds);
@@ -154,8 +148,8 @@ namespace CharacterGen.Tests.Unit.Generators
             mockBaseRaceRandomizer.Setup(r => r.Randomize(alignment, characterClass)).Returns(RaceConstants.BaseRaces.Drow);
             speeds[RaceConstants.BaseRaces.Drow] = 9266;
 
-            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.AGEGROUPRACEAges, GroupConstants.SelfTaught, RaceConstants.BaseRaces.Drow);
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(selfTaughtAgeRolls);
+            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.RACEAges, RaceConstants.BaseRaces.Drow);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(ageRolls);
 
             tableName = String.Format(TableNameConstants.Formattable.Adjustments.GENDERRACEHeights, "Male", RaceConstants.BaseRaces.Drow);
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(heightRolls);
@@ -174,8 +168,8 @@ namespace CharacterGen.Tests.Unit.Generators
             mockBaseRaceRandomizer.Setup(r => r.Randomize(alignment, characterClass)).Returns(RaceConstants.BaseRaces.Drow);
             speeds[RaceConstants.BaseRaces.Drow] = 9266;
 
-            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.AGEGROUPRACEAges, GroupConstants.SelfTaught, RaceConstants.BaseRaces.Drow);
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(selfTaughtAgeRolls);
+            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.RACEAges, RaceConstants.BaseRaces.Drow);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(ageRolls);
 
             tableName = String.Format(TableNameConstants.Formattable.Adjustments.GENDERRACEHeights, "Female", RaceConstants.BaseRaces.Drow);
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(heightRolls);
@@ -333,26 +327,59 @@ namespace CharacterGen.Tests.Unit.Generators
         }
 
         [Test]
-        public void GenerateYoungAge()
+        public void GenerateIntuitiveAge()
         {
             intuitiveClasses.Add(characterClass.ClassName);
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
-            Assert.That(race.AgeInYears, Is.EqualTo(90350));
+            Assert.That(race.Age.Years, Is.EqualTo(90224));
         }
 
         [Test]
-        public void GenerateOldAge()
+        public void GenerateSelfTaughtAge()
+        {
+            var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
+            Assert.That(race.Age.Years, Is.EqualTo(90234));
+        }
+
+        [Test]
+        public void GenerateTrainedAge()
         {
             trainedClasses.Add(characterClass.ClassName);
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
-            Assert.That(race.AgeInYears, Is.EqualTo(91610));
+            Assert.That(race.Age.Years, Is.EqualTo(90244));
+        }
+
+        [Test]
+        public void GenerateAdulthood()
+        {
+            intuitiveClasses.Add(characterClass.ClassName);
+            var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
+            Assert.That(race.Age.Stage, Is.EqualTo(RaceConstants.Ages.Adulthood));
         }
 
         [Test]
         public void GenerateMiddleAge()
         {
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
-            Assert.That(race.AgeInYears, Is.EqualTo(90224));
+            Assert.That(race.Age.Stage, Is.EqualTo(RaceConstants.Ages.MiddleAge));
+        }
+
+        [Test]
+        public void GenerateOld()
+        {
+            trainedClasses.Add(characterClass.ClassName);
+            var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
+            Assert.That(race.Age.Stage, Is.EqualTo(RaceConstants.Ages.Old));
+        }
+
+        [Test]
+        public void GenerateVenerable()
+        {
+            trainedClasses.Add(characterClass.ClassName);
+            mockDice.Setup(d => d.Roll(ageRolls[AdjustmentConstants.Quantity + GroupConstants.Trained]).d(ageRolls[AdjustmentConstants.Die + GroupConstants.Trained])).Returns(44);
+
+            var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
+            Assert.That(race.Age.Stage, Is.EqualTo(RaceConstants.Ages.Venerable));
         }
 
         [Test]

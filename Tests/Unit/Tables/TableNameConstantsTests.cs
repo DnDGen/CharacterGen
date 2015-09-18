@@ -7,6 +7,8 @@ namespace CharacterGen.Tests.Unit.Tables
     [TestFixture]
     public class TableNameConstantsTests
     {
+        [TestCase(TableNameConstants.Set.Adjustments.AgeStatGains, "AgeStatGains")]
+        [TestCase(TableNameConstants.Set.Adjustments.AgeStatLosses, "AgeStatLosses")]
         [TestCase(TableNameConstants.Set.Adjustments.ArmorBonuses, "ArmorBonuses")]
         [TestCase(TableNameConstants.Set.Adjustments.ClassHitDice, "ClassHitDice")]
         [TestCase(TableNameConstants.Set.Adjustments.FeatArmorAdjustments, "FeatArmorAdjustments")]
@@ -58,7 +60,7 @@ namespace CharacterGen.Tests.Unit.Tables
         [TestCase(TableNameConstants.Set.TrueOrFalse.KilledFollowers, "KilledFollowers")]
         [TestCase(TableNameConstants.Set.TrueOrFalse.Male, "Male")]
         [TestCase(TableNameConstants.Formattable.Adjustments.CLASSFeatLevelRequirements, "{0}FeatLevelRequirements")]
-        [TestCase(TableNameConstants.Formattable.Adjustments.AGEGROUPRACEAges, "{0}{1}Ages")]
+        [TestCase(TableNameConstants.Formattable.Adjustments.RACEAges, "{0}{1}Ages")]
         [TestCase(TableNameConstants.Formattable.Adjustments.GENDERRACEHeights, "{0}{1}Heights")]
         [TestCase(TableNameConstants.Formattable.Adjustments.GENDERRACEWeights, "{0}{1}Weights")]
         [TestCase(TableNameConstants.Formattable.Adjustments.FEATClassRequirements, "{0}ClassRequirements")]

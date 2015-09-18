@@ -160,6 +160,10 @@ namespace CharacterGen.Tests.Unit.Common.Races
         [TestCase(RaceConstants.Metaraces.Species.Red, "Red")]
         [TestCase(RaceConstants.Metaraces.Species.Silver, "Silver")]
         [TestCase(RaceConstants.Metaraces.Species.White, "White")]
+        [TestCase(RaceConstants.Ages.Adulthood, "Adulthood")]
+        [TestCase(RaceConstants.Ages.MiddleAge, "Middle Age")]
+        [TestCase(RaceConstants.Ages.Old, "Old")]
+        [TestCase(RaceConstants.Ages.Venerable, "Venerable")]
         public void Constant(String constant, String value)
         {
             Assert.That(constant, Is.EqualTo(value));

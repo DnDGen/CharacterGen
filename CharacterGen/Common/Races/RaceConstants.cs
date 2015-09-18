@@ -4,6 +4,14 @@ namespace CharacterGen.Common.Races
 {
     public class RaceConstants
     {
+        public static class Ages
+        {
+            public const String Adulthood = "Adulthood";
+            public const String MiddleAge = "Middle Age";
+            public const String Old = "Old";
+            public const String Venerable = "Venerable";
+        }
+
         public static class Sizes
         {
             public const String Large = "Large";
