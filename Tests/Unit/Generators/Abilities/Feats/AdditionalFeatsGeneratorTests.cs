@@ -24,6 +24,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         private Mock<ICollectionsSelector> mockCollectionsSelector;
         private Mock<IFeatsSelector> mockFeatsSelector;
         private Mock<IFeatFocusGenerator> mockFeatFocusGenerator;
+        private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
         private IAdditionalFeatsGenerator additionalFeatsGenerator;
         private CharacterClass characterClass;
         private Race race;
@@ -34,6 +35,8 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         private List<Feat> preselectedFeats;
         private List<String> fighterBonusFeats;
         private List<String> wizardBonusFeats;
+        private List<String> monsters;
+        private List<String> monsterFeats;
 
         [SetUp]
         public void Setup()
@@ -41,6 +44,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
             mockFeatsSelector = new Mock<IFeatsSelector>();
             mockFeatFocusGenerator = new Mock<IFeatFocusGenerator>();
+            mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
             additionalFeatsGenerator = new AdditionalFeatsGenerator(mockCollectionsSelector.Object, mockFeatsSelector.Object, mockFeatFocusGenerator.Object);
             characterClass = new CharacterClass();
             race = new Race();
@@ -52,11 +56,17 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             preselectedFeats = new List<Feat>();
             fighterBonusFeats = new List<String>();
             wizardBonusFeats = new List<String>();
+            monsters = new List<String>();
+            monsterFeats = new List<String>();
+
+            monsters.Add("monster");
 
             mockFeatsSelector.Setup(s => s.SelectAdditional()).Returns(additionalFeatSelections);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.FighterBonusFeats)).Returns(fighterBonusFeats);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.WizardBonusFeats)).Returns(wizardBonusFeats);
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom<AdditionalFeatSelection>(It.IsAny<IEnumerable<AdditionalFeatSelection>>())).Returns((IEnumerable<AdditionalFeatSelection> fs) => fs.First());
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.Monsters)).Returns(monsterFeats);
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<AdditionalFeatSelection>>())).Returns((IEnumerable<AdditionalFeatSelection> fs) => fs.First());
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters)).Returns(monsters);
         }
 
         [TestCase(1, 1)]
@@ -816,22 +826,49 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             Assert.That(onlyFeat.Name, Is.EqualTo("feat2"));
         }
 
-        [Test]
-        public void MonsterCanSelectAdditionalMonsterFeats()
+
+        [TestCase(0, 0)]
+        [TestCase(1, 1)]
+        [TestCase(2, 1)]
+        [TestCase(3, 2)]
+        [TestCase(4, 2)]
+        [TestCase(5, 2)]
+        [TestCase(6, 3)]
+        [TestCase(7, 3)]
+        [TestCase(8, 3)]
+        [TestCase(9, 4)]
+        [TestCase(10, 5)]
+        public void MonsterCanSelectAdditionalMonsterFeats(Int32 monsterHitDie, Int32 monsterFeatQuantity)
         {
-            throw new NotImplementedException();
+            race.BaseRace = monsters[0];
+            AddFeatSelections(monsterFeatQuantity + 1);
+
+            foreach (var monsterFeat in additionalFeatSelections)
+                monsterFeats.Add(monsterFeat.Feat);
+
+            var monsterHitDice = new Dictionary<String, Int32>();
+            monsterHitDice[race.BaseRace] = monsterHitDie;
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice)).Returns(monsterHitDice);
+
+            var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
+            Assert.That(feats.Count(), Is.EqualTo(monsterFeatQuantity));
         }
 
         [Test]
         public void NonMonstersCannotSelectMonsterFeats()
         {
-            throw new NotImplementedException();
-        }
+            race.BaseRace = "not a monster";
+            AddFeatSelections(10);
 
-        [Test]
-        public void MonstersMightNotBeAbleToSelectMonsterFeats()
-        {
-            throw new NotImplementedException();
+            foreach (var monsterFeat in additionalFeatSelections)
+                monsterFeats.Add(monsterFeat.Feat);
+
+            var monsterHitDice = new Dictionary<String, Int32>();
+            monsterHitDice[race.BaseRace] = 10;
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice)).Returns(monsterHitDice);
+
+            var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
+            Assert.That(feats, Is.Empty);
         }
     }
 }
