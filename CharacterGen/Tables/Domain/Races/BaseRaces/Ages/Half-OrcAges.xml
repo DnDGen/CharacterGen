@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+    <object>
+        <name>Adulthood</name>
+        <item>14</item>
+    </object>
+  <object>
+    <name>QuantityIntuitive</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>DieIntuitive</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>QuantitySelf-Taught</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>DieSelf-Taught</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>QuantityTrained</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>DieTrained</name>
+    <item>6</item>
+  </object>
+    <object>
+        <name>Middle Age</name>
+        <item>30</item>
+    </object>
+    <object>
+        <name>Old</name>
+        <item>45</item>
+    </object>
+    <object>
+        <name>Venerable</name>
+        <item>60</item>
+    </object>
+</items>

@@ -26,14 +26,8 @@ namespace CharacterGen.Generators.Domain.Combats
 
         public Int32 GenerateWith(CharacterClass characterClass, Int32 constitutionBonus, Race race, IEnumerable<Feat> feats)
         {
-            var hitPoints = 0;
             var hitDice = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.ClassHitDice);
-
-            for (var i = 0; i < characterClass.Level; i++)
-            {
-                var rolledHitPoints = dice.Roll().d(hitDice[characterClass.ClassName]) + constitutionBonus;
-                hitPoints += Math.Max(rolledHitPoints, 1);
-            }
+            var hitPoints = RollHitPoints(characterClass.Level, hitDice[characterClass.ClassName], constitutionBonus);
 
             var toughness = feats.Where(f => f.Name == FeatConstants.Toughness);
             hitPoints += toughness.Sum(f => f.Strength);
@@ -42,18 +36,25 @@ namespace CharacterGen.Generators.Domain.Combats
             if (monsters.Contains(race.BaseRace) == false)
                 return hitPoints;
 
-            var monsterHitPoints = GetAdditionalMonsterHitDice(race);
+            var monsterHitPoints = GetAdditionalMonsterHitDice(race, constitutionBonus);
             return hitPoints + monsterHitPoints;
         }
 
-        private Int32 GetAdditionalMonsterHitDice(Race race)
+        private Int32 GetAdditionalMonsterHitDice(Race race, Int32 constitutionBonus)
         {
             var hitDice = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice);
 
             if (race.Metarace == RaceConstants.Metaraces.HalfDragon)
-                return dice.Roll(hitDice[race.BaseRace]).d10();
+                return RollHitPoints(hitDice[race.BaseRace], 10, constitutionBonus);
 
-            return dice.Roll(hitDice[race.BaseRace]).d8();
+            return RollHitPoints(hitDice[race.BaseRace], 8, constitutionBonus);
+        }
+
+        private Int32 RollHitPoints(Int32 quantity, Int32 die, Int32 constitutionBonus)
+        {
+            var hitPoints = dice.Roll(quantity).d(die);
+            hitPoints += constitutionBonus * quantity;
+            return Math.Max(hitPoints, quantity);
         }
     }
 }

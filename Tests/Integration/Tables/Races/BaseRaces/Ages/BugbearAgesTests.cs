@@ -37,7 +37,7 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Ages
         [TestCase(AdjustmentConstants.Die + GroupConstants.Intuitive, 4)]
         [TestCase(AdjustmentConstants.Quantity + GroupConstants.SelfTaught, 1)]
         [TestCase(AdjustmentConstants.Die + GroupConstants.SelfTaught, 6)]
-        [TestCase(AdjustmentConstants.Quantity + GroupConstants.Trained, 1)]
+        [TestCase(AdjustmentConstants.Quantity + GroupConstants.Trained, 2)]
         [TestCase(AdjustmentConstants.Die + GroupConstants.Trained, 6)]
         [TestCase(RaceConstants.Ages.Adulthood, 11)]
         [TestCase(RaceConstants.Ages.MiddleAge, 30)]

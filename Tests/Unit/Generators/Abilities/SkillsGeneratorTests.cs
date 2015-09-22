@@ -762,8 +762,46 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
         [TestCase(18)]
         [TestCase(19)]
         [TestCase(20)]
-        public void MonstersDoNotGetMoreSkillPointsAtFirstLevel(Int32 level)
+        public void MonstersDoNotGetNonMonsterSkillPointBonusAtFirstLevel(Int32 level)
         {
+            race.BaseRace = "baserace";
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
+                .Returns(new[] { "baserace", "otherbaserace" });
+
+            characterClass.Level = level;
+            skillPoints[characterClass.ClassName] = 1;
+            classSkills.Add("skill 1");
+            classSkills.Add("skill 2");
+
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
+            Assert.That(skills["skill 1"].Ranks, Is.EqualTo(level));
+            Assert.That(skills["skill 2"].Ranks, Is.EqualTo(0));
+        }
+
+        [TestCase(1)]
+        [TestCase(2)]
+        [TestCase(3)]
+        [TestCase(4)]
+        [TestCase(5)]
+        [TestCase(6)]
+        [TestCase(7)]
+        [TestCase(8)]
+        [TestCase(9)]
+        [TestCase(10)]
+        [TestCase(11)]
+        [TestCase(12)]
+        [TestCase(13)]
+        [TestCase(14)]
+        [TestCase(15)]
+        [TestCase(16)]
+        [TestCase(17)]
+        [TestCase(18)]
+        [TestCase(19)]
+        [TestCase(20)]
+        public void MonstersGetMoreSkillPointsByMonsterHitDiceAtFirstLevel(Int32 level)
+        {
+            throw new NotImplementedException();
+
             race.BaseRace = "baserace";
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
                 .Returns(new[] { "baserace", "otherbaserace" });

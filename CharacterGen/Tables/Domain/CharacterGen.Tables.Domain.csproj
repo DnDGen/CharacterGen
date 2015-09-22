@@ -872,115 +872,76 @@
     <EmbeddedResource Include="Abilities\Feats\Data\Racial\BaseRaces\MinotaurFeatData.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Ages\Intuitive\IntuitiveHumanAges.xml" />
+    <EmbeddedResource Include="Races\BaseRaces\Ages\HumanAges.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Ages\Intuitive\IntuitiveLightfoot HalflingAges.xml" />
+    <EmbeddedResource Include="Races\BaseRaces\Ages\Lightfoot HalflingAges.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Ages\SelfTaught\Self-TaughtWood ElfAges.xml" />
+    <EmbeddedResource Include="Races\BaseRaces\Ages\Deep DwarfAges.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Ages\Trained\TrainedHill DwarfAges.xml" />
+    <EmbeddedResource Include="Races\BaseRaces\Ages\Wood ElfAges.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Ages\SelfTaught\Self-TaughtHumanAges.xml" />
+    <EmbeddedResource Include="Races\BaseRaces\Heights\HumanHeights.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Ages\Trained\TrainedHumanAges.xml" />
+    <EmbeddedResource Include="Races\BaseRaces\Ages\Hill DwarfAges.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Ages\SelfTaught\Self-TaughtOrcAges.xml" />
+    <EmbeddedResource Include="Races\BaseRaces\Heights\Lightfoot HalflingHeights.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Ages\SelfTaught\Self-TaughtDeep DwarfAges.xml" />
+    <EmbeddedResource Include="Races\BaseRaces\Ages\TroglodyteAges.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Ages\SelfTaught\Self-TaughtHobgoblinAges.xml" />
+    <EmbeddedResource Include="Races\BaseRaces\Ages\Half-OrcAges.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Heights\FemaleHumanHeights.xml" />
+    <EmbeddedResource Include="Races\BaseRaces\Weights\HumanWeights.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Ages\Intuitive\IntuitiveWood ElfAges.xml" />
+    <EmbeddedResource Include="Races\BaseRaces\Heights\HobgoblinHeights.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Ages\Trained\TrainedHigh ElfAges.xml" />
+    <EmbeddedResource Include="Races\BaseRaces\Heights\High ElfHeights.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Heights\MaleHumanHeights.xml" />
+    <EmbeddedResource Include="Races\BaseRaces\Ages\DrowAges.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Ages\SelfTaught\Self-TaughtHill DwarfAges.xml" />
+    <EmbeddedResource Include="Races\BaseRaces\Ages\High ElfAges.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Heights\MaleLightfoot HalflingHeights.xml" />
+    <EmbeddedResource Include="Races\BaseRaces\Heights\Half-OrcHeights.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Ages\Trained\TrainedTallfellow HalflingAges.xml" />
+    <EmbeddedResource Include="Races\BaseRaces\Weights\High ElfWeights.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Ages\Trained\TrainedTroglodyteAges.xml" />
+    <EmbeddedResource Include="Races\BaseRaces\Heights\TroglodyteHeights.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Ages\Intuitive\IntuitiveHalf-OrcAges.xml" />
+    <EmbeddedResource Include="Races\BaseRaces\Ages\GoblinAges.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Weights\FemaleHumanWeights.xml" />
+    <EmbeddedResource Include="Races\BaseRaces\Ages\Tallfellow HalflingAges.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Heights\FemaleHobgoblinHeights.xml" />
+    <EmbeddedResource Include="Races\BaseRaces\Ages\Half-ElfAges.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Weights\MaleHumanWeights.xml" />
+    <EmbeddedResource Include="Races\BaseRaces\Ages\BugbearAges.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Ages\SelfTaught\Self-TaughtHigh ElfAges.xml" />
+    <EmbeddedResource Include="Races\BaseRaces\Weights\Half-OrcWeights.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Heights\MaleHigh ElfHeights.xml" />
+    <EmbeddedResource Include="Races\BaseRaces\Heights\GoblinHeights.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Ages\SelfTaught\Self-TaughtHalf-OrcAges.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Ages\Trained\TrainedDrowAges.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Ages\Intuitive\IntuitiveHigh ElfAges.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Heights\FemaleHalf-OrcHeights.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Weights\MaleHigh ElfWeights.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Heights\MaleTroglodyteHeights.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Ages\Intuitive\IntuitiveGoblinAges.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Ages\Intuitive\IntuitiveTallfellow HalflingAges.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Ages\Trained\TrainedHalf-ElfAges.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Ages\Trained\TrainedWood ElfAges.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Ages\Trained\TrainedBugbearAges.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Weights\FemaleHalf-OrcWeights.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Heights\MaleGoblinHeights.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Ages\SelfTaught\Self-TaughtKoboldAges.xml" />
+    <EmbeddedResource Include="Races\BaseRaces\Ages\KoboldAges.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Abilities\Feats\Data\CharacterClasses\Domains\EvilFeatData.xml">
@@ -993,10 +954,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Ages\Intuitive\IntuitiveOrcAges.xml" />
+    <EmbeddedResource Include="Races\BaseRaces\Ages\OrcAges.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Ages\Intuitive\IntuitiveDoppelgangerAges.xml" />
+    <EmbeddedResource Include="Races\BaseRaces\Ages\DoppelgangerAges.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Abilities\Feats\Data\CharacterClasses\Domains\TravelFeatData.xml">
@@ -1004,52 +965,37 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Ages\Trained\TrainedLizardfolkAges.xml" />
+    <EmbeddedResource Include="Races\BaseRaces\Ages\LizardfolkAges.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Ages\Trained\TrainedLightfoot HalflingAges.xml" />
+    <EmbeddedResource Include="Races\BaseRaces\Heights\Half-ElfHeights.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Heights\FemaleHalf-ElfHeights.xml" />
+    <EmbeddedResource Include="Races\BaseRaces\Heights\Tallfellow HalflingHeights.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Heights\MaleTallfellow HalflingHeights.xml" />
+    <EmbeddedResource Include="Races\BaseRaces\Heights\DrowHeights.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Heights\FemaleDeep DwarfHeights.xml" />
+    <EmbeddedResource Include="Races\BaseRaces\Weights\GoblinWeights.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Heights\MaleDrowHeights.xml" />
+    <EmbeddedResource Include="Races\BaseRaces\Heights\Deep DwarfHeights.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Heights\FemaleLightfoot HalflingHeights.xml" />
+    <EmbeddedResource Include="Races\BaseRaces\Ages\Ogre MageAges.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Heights\FemaleGoblinHeights.xml" />
+    <EmbeddedResource Include="Races\BaseRaces\Heights\LizardfolkHeights.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Weights\MaleGoblinWeights.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Heights\MaleDeep DwarfHeights.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Ages\Trained\TrainedOgre MageAges.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Heights\MaleLizardfolkHeights.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Heights\MaleWood ElfHeights.xml" />
+    <EmbeddedResource Include="Races\BaseRaces\Heights\Wood ElfHeights.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Magics\Animals.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Heights\FemaleTroglodyteHeights.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Ages\Intuitive\IntuitiveHobgoblinAges.xml" />
+    <EmbeddedResource Include="Races\BaseRaces\Ages\HobgoblinAges.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

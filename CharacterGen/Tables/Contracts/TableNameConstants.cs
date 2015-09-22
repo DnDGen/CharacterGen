@@ -80,13 +80,13 @@ namespace CharacterGen.Tables
             public static class Adjustments
             {
                 public const String CLASSFeatLevelRequirements = "{0}FeatLevelRequirements";
-                public const String GENDERRACEHeights = "{0}{1}Heights";
-                public const String GENDERRACEWeights = "{0}{1}Weights";
                 public const String FEATClassRequirements = "{0}ClassRequirements";
                 public const String FEATSkillRankRequirements = "{0}SkillRankRequirements";
                 public const String FEATStatRequirements = "{0}StatRequirements";
                 public const String LevelXAnimalTricks = "Level{0}AnimalTricks";
                 public const String RACEAges = "{0}Ages";
+                public const String RACEHeights = "{0}Heights";
+                public const String RACEWeights = "{0}Weights";
                 public const String STATStatAdjustments = "{0}StatAdjustments";
             }
 

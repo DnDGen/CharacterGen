@@ -72,21 +72,21 @@ namespace CharacterGen.Tests.Unit.Generators
             ageRolls[RaceConstants.Ages.Old] = 90240;
             ageRolls[RaceConstants.Ages.Venerable] = 90250;
 
-            heightRolls[AdjustmentConstants.Base] = 902;
+            heightRolls[AdjustmentConstants.Base + Boolean.FalseString] = 902;
             heightRolls[AdjustmentConstants.Quantity] = 10;
             heightRolls[AdjustmentConstants.Die] = 4;
 
-            weightRolls[AdjustmentConstants.Base] = 2;
+            weightRolls[AdjustmentConstants.Base + Boolean.FalseString] = 2;
             weightRolls[AdjustmentConstants.Quantity] = 92;
             weightRolls[AdjustmentConstants.Die] = 66;
 
             var tableName = String.Format(TableNameConstants.Formattable.Adjustments.RACEAges, BaseRace);
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(ageRolls);
 
-            tableName = String.Format(TableNameConstants.Formattable.Adjustments.GENDERRACEHeights, "Female", BaseRace);
+            tableName = String.Format(TableNameConstants.Formattable.Adjustments.RACEHeights, BaseRace);
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(heightRolls);
 
-            tableName = String.Format(TableNameConstants.Formattable.Adjustments.GENDERRACEWeights, "Female", BaseRace);
+            tableName = String.Format(TableNameConstants.Formattable.Adjustments.RACEWeights, BaseRace);
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(weightRolls);
 
             mockDice.Setup(d => d.Roll(42).d(600)).Returns(14);
@@ -122,11 +122,8 @@ namespace CharacterGen.Tests.Unit.Generators
         {
             mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.Male)).Returns(true);
 
-            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.GENDERRACEHeights, "Male", BaseRace);
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(heightRolls);
-
-            tableName = String.Format(TableNameConstants.Formattable.Adjustments.GENDERRACEWeights, "Male", BaseRace);
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(weightRolls);
+            heightRolls[AdjustmentConstants.Base + Boolean.TrueString] = 209;
+            weightRolls[AdjustmentConstants.Base + Boolean.TrueString] = 22;
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
             Assert.That(race.Male, Is.True);
@@ -151,11 +148,14 @@ namespace CharacterGen.Tests.Unit.Generators
             var tableName = String.Format(TableNameConstants.Formattable.Adjustments.RACEAges, RaceConstants.BaseRaces.Drow);
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(ageRolls);
 
-            tableName = String.Format(TableNameConstants.Formattable.Adjustments.GENDERRACEHeights, "Male", RaceConstants.BaseRaces.Drow);
+            tableName = String.Format(TableNameConstants.Formattable.Adjustments.RACEHeights, RaceConstants.BaseRaces.Drow);
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(heightRolls);
 
-            tableName = String.Format(TableNameConstants.Formattable.Adjustments.GENDERRACEWeights, "Male", RaceConstants.BaseRaces.Drow);
+            tableName = String.Format(TableNameConstants.Formattable.Adjustments.RACEWeights, RaceConstants.BaseRaces.Drow);
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(weightRolls);
+
+            heightRolls[AdjustmentConstants.Base + Boolean.TrueString] = 209;
+            weightRolls[AdjustmentConstants.Base + Boolean.TrueString] = 22;
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
             Assert.That(race.Male, Is.True);
@@ -171,10 +171,10 @@ namespace CharacterGen.Tests.Unit.Generators
             var tableName = String.Format(TableNameConstants.Formattable.Adjustments.RACEAges, RaceConstants.BaseRaces.Drow);
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(ageRolls);
 
-            tableName = String.Format(TableNameConstants.Formattable.Adjustments.GENDERRACEHeights, "Female", RaceConstants.BaseRaces.Drow);
+            tableName = String.Format(TableNameConstants.Formattable.Adjustments.RACEHeights, RaceConstants.BaseRaces.Drow);
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(heightRolls);
 
-            tableName = String.Format(TableNameConstants.Formattable.Adjustments.GENDERRACEWeights, "Female", RaceConstants.BaseRaces.Drow);
+            tableName = String.Format(TableNameConstants.Formattable.Adjustments.RACEWeights, RaceConstants.BaseRaces.Drow);
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(weightRolls);
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
@@ -185,7 +185,6 @@ namespace CharacterGen.Tests.Unit.Generators
         public void LargeIfInLargeGroup()
         {
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, RaceConstants.Sizes.Large)).Returns(new[] { "other base race", BaseRace });
-
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
             Assert.That(race.Size, Is.EqualTo(RaceConstants.Sizes.Large));
         }
@@ -202,7 +201,6 @@ namespace CharacterGen.Tests.Unit.Generators
         public void SmallIfInSmallGroup()
         {
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, RaceConstants.Sizes.Small)).Returns(new[] { "other base race", BaseRace });
-
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
             Assert.That(race.Size, Is.EqualTo(RaceConstants.Sizes.Small));
         }
@@ -383,15 +381,39 @@ namespace CharacterGen.Tests.Unit.Generators
         }
 
         [Test]
-        public void GenerateHeight()
+        public void GenerateMaleHeight()
         {
+            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.Male)).Returns(true);
+            heightRolls[AdjustmentConstants.Base + Boolean.TrueString] = 209;
+            weightRolls[AdjustmentConstants.Base + Boolean.TrueString] = 22;
+
+            var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
+            Assert.That(race.HeightInInches, Is.EqualTo(313));
+        }
+
+        [Test]
+        public void GenerateMaleWeight()
+        {
+            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.Male)).Returns(true);
+            heightRolls[AdjustmentConstants.Base + Boolean.TrueString] = 209;
+            weightRolls[AdjustmentConstants.Base + Boolean.TrueString] = 22;
+
+            var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
+            Assert.That(race.WeightInPounds, Is.EqualTo(44326));
+        }
+
+        [Test]
+        public void GenerateFemaleHeight()
+        {
+            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.Male)).Returns(false);
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
             Assert.That(race.HeightInInches, Is.EqualTo(1006));
         }
 
         [Test]
-        public void GenerateWeight()
+        public void GenerateFemaleWeight()
         {
+            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.Male)).Returns(false);
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
             Assert.That(race.WeightInPounds, Is.EqualTo(44306));
         }

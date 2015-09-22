@@ -1,20 +1,21 @@
-﻿using System;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using System;
+using System.Linq;
 
 namespace CharacterGen.Tests.Integration.Tables
 {
     [TestFixture]
     public abstract class AdjustmentsTests : CollectionTests
     {
+        protected const String TrueString = "True";
+        protected const String FalseString = "False";
+
         public virtual void Adjustment(String name, Int32 adjustment)
         {
-            var collection = new[] { Convert.ToString(adjustment) };
-            Collection(name, collection);
-        }
+            Assert.That(table.Keys, Contains.Item(name), tableName);
 
-        public virtual void NoAdjustments()
-        {
-            EmptyCollection();
+            var actualAdjustment = Convert.ToInt32(table[name].Single());
+            Assert.That(actualAdjustment, Is.EqualTo(adjustment));
         }
     }
 }

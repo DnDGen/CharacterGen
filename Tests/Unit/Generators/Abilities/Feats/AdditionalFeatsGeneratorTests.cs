@@ -815,5 +815,23 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             var onlyFeat = feats.Single();
             Assert.That(onlyFeat.Name, Is.EqualTo("feat2"));
         }
+
+        [Test]
+        public void MonsterCanSelectAdditionalMonsterFeats()
+        {
+            throw new NotImplementedException();
+        }
+
+        [Test]
+        public void NonMonstersCannotSelectMonsterFeats()
+        {
+            throw new NotImplementedException();
+        }
+
+        [Test]
+        public void MonstersMightNotBeAbleToSelectMonsterFeats()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

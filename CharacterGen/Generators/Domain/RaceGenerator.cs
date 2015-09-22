@@ -40,18 +40,17 @@ namespace CharacterGen.Generators.Domain
             race.AerialSpeed = DetermineAerialSpeed(race);
             race.Age = DetermineAge(race, characterClass);
 
-            var gender = race.Male ? "Male" : "Female";
-            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.GENDERRACEHeights, gender, race.BaseRace);
+            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.RACEHeights, race.BaseRace);
             var heights = adjustmentsSelector.SelectFrom(tableName);
             var additionalHeight = dice.Roll(heights[AdjustmentConstants.Quantity]).d(heights[AdjustmentConstants.Die]);
 
-            race.HeightInInches = heights[AdjustmentConstants.Base] + additionalHeight;
+            race.HeightInInches = heights[AdjustmentConstants.Base + race.Male.ToString()] + additionalHeight;
 
-            tableName = String.Format(TableNameConstants.Formattable.Adjustments.GENDERRACEWeights, gender, race.BaseRace);
+            tableName = String.Format(TableNameConstants.Formattable.Adjustments.RACEWeights, race.BaseRace);
             var weights = adjustmentsSelector.SelectFrom(tableName);
             var additionalWeightMultiplier = dice.Roll(weights[AdjustmentConstants.Quantity]).d(weights[AdjustmentConstants.Die]);
 
-            race.WeightInPounds = weights[AdjustmentConstants.Base] + additionalHeight * additionalWeightMultiplier;
+            race.WeightInPounds = weights[AdjustmentConstants.Base + race.Male.ToString()] + additionalHeight * additionalWeightMultiplier;
 
             return race;
         }
