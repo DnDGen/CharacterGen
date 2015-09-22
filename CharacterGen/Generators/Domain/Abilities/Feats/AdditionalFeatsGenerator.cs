@@ -20,12 +20,14 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
         private ICollectionsSelector collectionsSelector;
         private IFeatsSelector featsSelector;
         private IFeatFocusGenerator featFocusGenerator;
+        private IAdjustmentsSelector adjustmentsSelector;
 
-        public AdditionalFeatsGenerator(ICollectionsSelector collectionsSelector, IFeatsSelector featsSelector, IFeatFocusGenerator featFocusGenerator)
+        public AdditionalFeatsGenerator(ICollectionsSelector collectionsSelector, IFeatsSelector featsSelector, IFeatFocusGenerator featFocusGenerator, IAdjustmentsSelector adjustmentsSelector)
         {
             this.collectionsSelector = collectionsSelector;
             this.featsSelector = featsSelector;
             this.featFocusGenerator = featFocusGenerator;
+            this.adjustmentsSelector = adjustmentsSelector;
         }
 
         public IEnumerable<Feat> GenerateWith(CharacterClass characterClass, Race race, Dictionary<String, Stat> stats,
@@ -34,15 +36,40 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
             var additionalFeats = GetAdditionalFeats(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             var allButBonusFeats = preselectedFeats.Union(additionalFeats);
             var bonusFeats = GetBonusFeats(characterClass, race, stats, skills, baseAttack, allButBonusFeats);
+            additionalFeats = additionalFeats.Union(bonusFeats);
 
-            return additionalFeats.Union(bonusFeats);
+            var monsters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters);
+            if (monsters.Contains(race.BaseRace) == false)
+                return additionalFeats;
+
+            var monsterFeats = GetMonsterFeats(characterClass, race, stats, skills, baseAttack, additionalFeats);
+            return additionalFeats.Union(monsterFeats);
+        }
+
+        private IEnumerable<Feat> GetMonsterFeats(CharacterClass characterClass, Race race, Dictionary<String, Stat> stats, Dictionary<String, Skill> skills, BaseAttack baseAttack, IEnumerable<Feat> preselectedFeats)
+        {
+            var monsterHitDice = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice);
+            if (monsterHitDice[race.BaseRace] <= 0)
+                return Enumerable.Empty<Feat>();
+
+            var numberOfMonsterFeats = monsterHitDice[race.BaseRace] / 3 + 1;
+
+            var additionalFeatSelections = featsSelector.SelectAdditional();
+            var monsterFeatNames = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.Monsters);
+            var monsterFeatSelections = additionalFeatSelections.Where(s => monsterFeatNames.Contains(s.Feat));
+
+            var monsterFeats = PopulateFeatsFrom(characterClass, stats, skills, baseAttack, preselectedFeats, monsterFeatSelections, numberOfMonsterFeats);
+
+            return monsterFeats;
         }
 
         private IEnumerable<Feat> GetAdditionalFeats(CharacterClass characterClass, Race race, Dictionary<String, Stat> stats, Dictionary<String, Skill> skills,
             BaseAttack baseAttack, IEnumerable<Feat> preselectedFeats)
         {
-            var additionalFeats = featsSelector.SelectAdditional();
-            var availableFeats = additionalFeats.Where(f => f.ImmutableRequirementsMet(baseAttack.Bonus, stats, skills, characterClass));
+            var additionalFeatSelections = featsSelector.SelectAdditional();
+            var monsterFeatNames = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.Monsters);
+            var availableFeats = additionalFeatSelections.Where(s => monsterFeatNames.Contains(s.Feat) == false);
+            availableFeats = availableFeats.Where(s => s.ImmutableRequirementsMet(baseAttack.Bonus, stats, skills, characterClass));
 
             var numberOfAdditionalFeats = characterClass.Level / 3 + 1;
             if (race.BaseRace == RaceConstants.BaseRaces.Human)

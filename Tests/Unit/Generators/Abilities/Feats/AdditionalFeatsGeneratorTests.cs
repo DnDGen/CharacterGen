@@ -45,7 +45,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             mockFeatsSelector = new Mock<IFeatsSelector>();
             mockFeatFocusGenerator = new Mock<IFeatFocusGenerator>();
             mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
-            additionalFeatsGenerator = new AdditionalFeatsGenerator(mockCollectionsSelector.Object, mockFeatsSelector.Object, mockFeatFocusGenerator.Object);
+            additionalFeatsGenerator = new AdditionalFeatsGenerator(mockCollectionsSelector.Object, mockFeatsSelector.Object, mockFeatFocusGenerator.Object, mockAdjustmentsSelector.Object);
             characterClass = new CharacterClass();
             race = new Race();
             stats = new Dictionary<String, Stat>();
@@ -837,11 +837,11 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         [TestCase(7, 3)]
         [TestCase(8, 3)]
         [TestCase(9, 4)]
-        [TestCase(10, 5)]
+        [TestCase(10, 4)]
         public void MonsterCanSelectAdditionalMonsterFeats(Int32 monsterHitDie, Int32 monsterFeatQuantity)
         {
             race.BaseRace = monsters[0];
-            AddFeatSelections(monsterFeatQuantity + 1);
+            AddFeatSelections(monsterFeatQuantity + 10);
 
             foreach (var monsterFeat in additionalFeatSelections)
                 monsterFeats.Add(monsterFeat.Feat);
@@ -866,6 +866,21 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             var monsterHitDice = new Dictionary<String, Int32>();
             monsterHitDice[race.BaseRace] = 10;
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice)).Returns(monsterHitDice);
+
+            var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
+            Assert.That(feats, Is.Empty);
+        }
+
+        [Test]
+        public void MonsterFeatsCannotBeSelectedAsRegularAdditionalFeats()
+        {
+            race.BaseRace = "not a monster";
+            AddFeatSelections(9266);
+
+            foreach (var monsterFeat in additionalFeatSelections)
+                monsterFeats.Add(monsterFeat.Feat);
+
+            characterClass.Level = 9266;
 
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             Assert.That(feats, Is.Empty);
