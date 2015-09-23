@@ -43,7 +43,41 @@ namespace CharacterGen.Generators.Domain.Abilities
 
             var skills = InitializeSkills(stats, classSkills, crossClassSkills);
             skills = AddRanks(characterClass, race, stats, classSkills, crossClassSkills, skills);
+
+            var monsters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters);
+            if (monsters.Contains(race.BaseRace))
+                skills = AddMonsterSkillRanks(race, stats, skills);
+
             skills = ApplySkillSynergies(skills);
+
+            return skills;
+        }
+
+        private Dictionary<string, Skill> AddMonsterSkillRanks(Race race, Dictionary<String, Stat> stats, Dictionary<String, Skill> skills)
+        {
+            var monsterSkills = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassSkills, race.BaseRace);
+
+            foreach (var monsterSkill in monsterSkills)
+            {
+                if (skills.ContainsKey(monsterSkill) == false)
+                {
+                    var selection = skillSelector.SelectFor(monsterSkill);
+
+                    skills[monsterSkill] = new Skill();
+                    skills[monsterSkill].ArmorCheckPenalty = selection.ArmorCheckPenalty;
+                    skills[monsterSkill].BaseStat = stats[selection.BaseStatName];
+                }
+
+                skills[monsterSkill].ClassSkill = true;
+            }
+
+            var monsterHitDice = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice);
+
+            for (var points = monsterHitDice[race.BaseRace] + 3; points > 0; points--)
+            {
+                var skill = collectionsSelector.SelectRandomFrom(monsterSkills);
+                skills[skill].Ranks++;
+            }
 
             return skills;
         }

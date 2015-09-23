@@ -742,7 +742,6 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
             Assert.That(skills["skill 5"].Ranks, Is.EqualTo(0));
         }
 
-        [TestCase(0, 0)]
         [TestCase(1, 4)]
         [TestCase(2, 5)]
         [TestCase(3, 6)]
@@ -766,7 +765,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
             var monsterClassSkills = new List<String>();
             monsterClassSkills.Add("skill 1");
             monsterClassSkills.Add("skill 2");
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, race.BaseRace)).Returns(monsterClassSkills);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassSkills, race.BaseRace)).Returns(monsterClassSkills);
 
             var monsterHitDice = new Dictionary<String, Int32>();
             monsterHitDice["monster"] = 1234;
@@ -779,7 +778,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
         }
 
         [Test]
-        public void MonstersCannotGetFewerThan1RankPerHitDie()
+        public void MonstersDoNotCareAboutIntelligenceBonusForMonsterSkillBonuses()
         {
             race.BaseRace = "baserace";
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
@@ -792,7 +791,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
             var monsterClassSkills = new List<String>();
             monsterClassSkills.Add("skill 1");
             monsterClassSkills.Add("skill 2");
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, race.BaseRace)).Returns(monsterClassSkills);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassSkills, race.BaseRace)).Returns(monsterClassSkills);
 
             var monsterHitDice = new Dictionary<String, Int32>();
             monsterHitDice["monster"] = 1234;
@@ -800,7 +799,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice)).Returns(monsterHitDice);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
-            Assert.That(skills["skill 1"].Ranks, Is.EqualTo(3));
+            Assert.That(skills["skill 1"].Ranks, Is.EqualTo(6));
             Assert.That(skills["skill 2"].Ranks, Is.EqualTo(0));
         }
 
@@ -827,9 +826,6 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
         public void CannotHaveFewerThan1SkillPointPerLevel(Int32 level)
         {
             race.BaseRace = "baserace";
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
-                .Returns(new[] { "baserace", "otherbaserace" });
-
             intelligence.Value = -9266;
             characterClass.Level = level;
             skillPoints[characterClass.ClassName] = 1;
