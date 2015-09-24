@@ -199,6 +199,7 @@
     <Compile Include="Abilities\Skills\SkillGroupsTests.cs" />
     <Compile Include="Abilities\Skills\SkillPointsForClassesTests.cs" />
     <Compile Include="Abilities\Skills\SkillSynergyTests.cs" />
+    <Compile Include="Abilities\Stats\AgeStatGainsTests.cs" />
     <Compile Include="Abilities\Stats\IncreaseFirstPriorityStatTests.cs" />
     <Compile Include="AdjustmentsTests.cs" />
     <Compile Include="Alignments\AlignmentGoodnessTests.cs" />
@@ -238,6 +239,7 @@
     <Compile Include="Races\BaseRaces\Ages\TallfellowHalflingAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\TroglodyteAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\WoodElfAgesTests.cs" />
+    <Compile Include="Races\BaseRaces\Heights\OgreMageHeightsTests.cs" />
     <Compile Include="Races\BaseRaces\Heights\TroglodyteHeightsTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\HumanAgesTests.cs" />
     <Compile Include="Races\LevelAdjustmentsTests.cs" />

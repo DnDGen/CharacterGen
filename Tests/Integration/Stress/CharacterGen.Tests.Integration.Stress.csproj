@@ -105,6 +105,7 @@
     <Compile Include="Randomizers\CharacterClasses\ClassNames\ClassNameRandomizerTests.cs" />
     <Compile Include="Randomizers\CharacterClasses\ClassNames\SetClassNameRandomizerTests.cs" />
     <Compile Include="Randomizers\CharacterClasses\Levels\SetLevelRandomizerTests.cs" />
+    <Compile Include="Randomizers\Races\BaseRaces\AnimalBaseRaceRandomizerTests.cs" />
     <Compile Include="Randomizers\Races\BaseRaces\BaseRaceRandomizerTests.cs" />
     <Compile Include="Randomizers\Races\BaseRaces\SetBaseRaceRandomizerTests.cs" />
     <Compile Include="Randomizers\Races\Metaraces\ForcableMetaraceRandomizerTests.cs" />
