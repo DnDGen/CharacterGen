@@ -998,7 +998,22 @@
     <EmbeddedResource Include="Races\BaseRaces\Ages\HobgoblinAges.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Heights\OgreMageHeights.xml" />
+    <EmbeddedResource Include="Races\BaseRaces\Heights\Ogre MageHeights.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\BaseRaces\Weights\Half-ElfWeights.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Stats\AdulthoodStatAdjustments.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Stats\VenerableStatAdjustments.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Stats\Middle AgeStatAdjustments.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Stats\OldStatAdjustments.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

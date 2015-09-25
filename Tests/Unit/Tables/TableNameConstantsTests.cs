@@ -7,8 +7,6 @@ namespace CharacterGen.Tests.Unit.Tables
     [TestFixture]
     public class TableNameConstantsTests
     {
-        [TestCase(TableNameConstants.Set.Adjustments.AgeStatGains, "AgeStatGains")]
-        [TestCase(TableNameConstants.Set.Adjustments.AgeStatLosses, "AgeStatLosses")]
         [TestCase(TableNameConstants.Set.Adjustments.ArmorBonuses, "ArmorBonuses")]
         [TestCase(TableNameConstants.Set.Adjustments.ClassHitDice, "ClassHitDice")]
         [TestCase(TableNameConstants.Set.Adjustments.FeatArmorAdjustments, "FeatArmorAdjustments")]
@@ -67,7 +65,6 @@ namespace CharacterGen.Tests.Unit.Tables
         [TestCase(TableNameConstants.Formattable.Adjustments.RACEAges, "{0}Ages")]
         [TestCase(TableNameConstants.Formattable.Adjustments.RACEHeights, "{0}Heights")]
         [TestCase(TableNameConstants.Formattable.Adjustments.RACEWeights, "{0}Weights")]
-        [TestCase(TableNameConstants.Formattable.Adjustments.STATStatAdjustments, "{0}StatAdjustments")]
         [TestCase(TableNameConstants.Formattable.Percentile.GOODNESSCharacterClasses, "{0}CharacterClasses")]
         [TestCase(TableNameConstants.Formattable.Percentile.GOODNESSCLASSBaseRaces, "{0}{1}BaseRaces")]
         [TestCase(TableNameConstants.Formattable.Percentile.GOODNESSCLASSMetaraces, "{0}{1}Metaraces")]
@@ -88,6 +85,18 @@ namespace CharacterGen.Tests.Unit.Tables
         public void ClassFeatDataTable()
         {
             Assert.That(TableNameConstants.Formattable.Collection.CLASSFeatData, Is.EqualTo("{0}FeatData"));
+        }
+
+        [Test]
+        public void AgeStatAdjustmentsTable()
+        {
+            Assert.That(TableNameConstants.Formattable.Adjustments.AGEStatAdjustments, Is.EqualTo("{0}StatAdjustments"));
+        }
+
+        [Test]
+        public void StatStatAdjustmentsTable()
+        {
+            Assert.That(TableNameConstants.Formattable.Adjustments.STATStatAdjustments, Is.EqualTo("{0}StatAdjustments"));
         }
     }
 }

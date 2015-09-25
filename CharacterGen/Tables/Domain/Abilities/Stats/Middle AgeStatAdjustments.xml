@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+    <object>
+        <name>Strength</name>
+        <item>-1</item>
+    </object>
+    <object>
+        <name>Constitution</name>
+        <item>-1</item>
+    </object>
+    <object>
+        <name>Dexterity</name>
+        <item>-1</item>
+    </object>
+    <object>
+        <name>Intelligence</name>
+        <item>1</item>
+    </object>
+  <object>
+    <name>Wisdom</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Charisma</name>
+    <item>1</item>
+  </object>
+</items>

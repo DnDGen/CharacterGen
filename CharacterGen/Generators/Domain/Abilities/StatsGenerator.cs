@@ -98,32 +98,16 @@ namespace CharacterGen.Generators.Domain.Abilities
 
         private Dictionary<String, Stat> ApplyAgeToStats(Dictionary<String, Stat> stats, Race race)
         {
-            var gain = GetGain(race.Age.Stage);
-            var loss = GetLoss(race.Age.Stage);
+            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.AGEStatAdjustments, race.Age.Stage);
+            var ageAdjustments = adjustmentsSelector.SelectFrom(tableName);
 
-            stats[StatConstants.Strength].Value -= loss;
-            stats[StatConstants.Constitution].Value -= loss;
-            stats[StatConstants.Dexterity].Value -= loss;
-            stats[StatConstants.Intelligence].Value += gain;
-            stats[StatConstants.Wisdom].Value += gain;
-            stats[StatConstants.Charisma].Value += gain;
+            foreach (var stat in stats)
+                stat.Value.Value += ageAdjustments[stat.Key];
 
             foreach (var stat in stats.Values)
                 stat.Value = Math.Max(stat.Value, 1);
 
             return stats;
-        }
-
-        private Int32 GetGain(String ageStage)
-        {
-            var ageStatGains = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.AgeStatGains);
-            return ageStatGains[ageStage];
-        }
-
-        private Int32 GetLoss(String ageStage)
-        {
-            var ageStatLosses = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.AgeStatLosses);
-            return ageStatLosses[ageStage];
         }
     }
 }

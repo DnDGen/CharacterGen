@@ -8,8 +8,6 @@ namespace CharacterGen.Tables
         {
             public static class Adjustments
             {
-                public const String AgeStatGains = "AgeStatGains";
-                public const String AgeStatLosses = "AgeStatLosses";
                 public const String ArmorBonuses = "ArmorBonuses";
                 public const String ClassHitDice = "ClassHitDice";
                 public const String FeatArmorAdjustments = "FeatArmorAdjustments";
@@ -79,6 +77,7 @@ namespace CharacterGen.Tables
         {
             public static class Adjustments
             {
+                public const String AGEStatAdjustments = "{0}StatAdjustments";
                 public const String CLASSFeatLevelRequirements = "{0}FeatLevelRequirements";
                 public const String FEATClassRequirements = "{0}ClassRequirements";
                 public const String FEATSkillRankRequirements = "{0}SkillRankRequirements";

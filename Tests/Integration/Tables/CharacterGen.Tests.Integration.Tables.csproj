@@ -199,8 +199,11 @@
     <Compile Include="Abilities\Skills\SkillGroupsTests.cs" />
     <Compile Include="Abilities\Skills\SkillPointsForClassesTests.cs" />
     <Compile Include="Abilities\Skills\SkillSynergyTests.cs" />
-    <Compile Include="Abilities\Stats\AgeStatGainsTests.cs" />
+    <Compile Include="Abilities\Stats\AdulthoodStatAdjustmentsTests.cs" />
+    <Compile Include="Abilities\Stats\MiddleAgeStatAdjustmentsTests.cs" />
     <Compile Include="Abilities\Stats\IncreaseFirstPriorityStatTests.cs" />
+    <Compile Include="Abilities\Stats\OldStatAdjustmentsTests.cs" />
+    <Compile Include="Abilities\Stats\VenerableStatAdjustmentsTests.cs" />
     <Compile Include="AdjustmentsTests.cs" />
     <Compile Include="Alignments\AlignmentGoodnessTests.cs" />
     <Compile Include="Abilities\Languages\AutomaticLanguagesTests.cs" />
@@ -242,6 +245,7 @@
     <Compile Include="Races\BaseRaces\Heights\OgreMageHeightsTests.cs" />
     <Compile Include="Races\BaseRaces\Heights\TroglodyteHeightsTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\HumanAgesTests.cs" />
+    <Compile Include="Races\BaseRaces\Weights\HalfElfWeightsTests.cs" />
     <Compile Include="Races\LevelAdjustmentsTests.cs" />
     <Compile Include="CharacterClasses\NeutralCharacterClassesTests.cs" />
     <Compile Include="CharacterClasses\ProhibitedFieldQuantitiesTests.cs" />
