@@ -227,6 +227,7 @@
     <Compile Include="CharacterClasses\HasSpecialistFields\WizardHasSpecialistFieldsTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\BugbearAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\DeepDwarfAgesTests.cs" />
+    <Compile Include="Races\BaseRaces\Ages\DeepHalflingAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\DoppelgangerAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\DrowAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\GoblinAgesTests.cs" />
@@ -255,6 +256,7 @@
     <Compile Include="Races\BaseRaces\Weights\HalfElfWeightsTests.cs" />
     <Compile Include="Races\BaseRaces\Weights\LightfootHalflingWeightsTests.cs" />
     <Compile Include="Races\BaseRaces\Weights\LizardfolkWeightsTests.cs" />
+    <Compile Include="Races\BaseRaces\Weights\TroglodyteWeightsTests.cs" />
     <Compile Include="Races\BaseRaces\Weights\WoodElfWeightsTests.cs" />
     <Compile Include="Races\LevelAdjustmentsTests.cs" />
     <Compile Include="CharacterClasses\NeutralCharacterClassesTests.cs" />
