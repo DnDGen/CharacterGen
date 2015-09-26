@@ -251,7 +251,9 @@
     <Compile Include="Races\BaseRaces\Heights\TroglodyteHeightsTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\HumanAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Weights\DeepDwarfWeightsTests.cs" />
+    <Compile Include="Races\BaseRaces\Weights\DrowWeightsTests.cs" />
     <Compile Include="Races\BaseRaces\Weights\HalfElfWeightsTests.cs" />
+    <Compile Include="Races\BaseRaces\Weights\LightfootHalflingWeightsTests.cs" />
     <Compile Include="Races\BaseRaces\Weights\LizardfolkWeightsTests.cs" />
     <Compile Include="Races\BaseRaces\Weights\WoodElfWeightsTests.cs" />
     <Compile Include="Races\LevelAdjustmentsTests.cs" />
