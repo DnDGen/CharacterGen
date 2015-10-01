@@ -73,4 +73,208 @@
     <item></item>
     <item></item>
   </object>
+  <object>
+    <name>Aura of Good</name>
+    <item>Aura of Good</item>
+    <item>1</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Spell-Like AbilityDetect evil</name>
+    <item>Spell-Like Ability</item>
+    <item>1</item>
+    <item>Detect evil</item>
+    <item>0</item>
+    <item>0</item>
+    <item>At Will</item>
+    <item>0</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Smite Evil1</name>
+    <item>Smite Evil</item>
+    <item>1</item>
+    <item></item>
+    <item>0</item>
+    <item>1</item>
+    <item>Day</item>
+    <item>4</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Smite Evil2</name>
+    <item>Smite Evil</item>
+    <item>5</item>
+    <item></item>
+    <item>0</item>
+    <item>2</item>
+    <item>Day</item>
+    <item>9</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Smite Evil3</name>
+    <item>Smite Evil</item>
+    <item>10</item>
+    <item></item>
+    <item>0</item>
+    <item>3</item>
+    <item>Day</item>
+    <item>14</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Smite Evil4</name>
+    <item>Smite Evil</item>
+    <item>15</item>
+    <item></item>
+    <item>0</item>
+    <item>4</item>
+    <item>Day</item>
+    <item>19</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Smite Evil5</name>
+    <item>Smite Evil</item>
+    <item>20</item>
+    <item></item>
+    <item>0</item>
+    <item>5</item>
+    <item>Day</item>
+    <item>0</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Divine Grace</name>
+    <item>Divine Grace</item>
+    <item>2</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Lay On Hands</name>
+    <item>Lay On Hands</item>
+    <item>2</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Aura of Courage</name>
+    <item>Aura of Courage</item>
+    <item>3</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Divine Health</name>
+    <item>Divine Health</item>
+    <item>3</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Turn</name>
+    <item>Turn</item>
+    <item>4</item>
+    <item>Undead (as cleric of level - 3)</item>
+    <item>0</item>
+    <item>3</item>
+    <item>Day</item>
+    <item>0</item>
+    <item>Charisma</item>
+    <item></item>
+  </object>
+  <object>
+    <name>Spell-Like AbilityRemove disease1</name>
+    <item>Spell-Like Ability</item>
+    <item>6</item>
+    <item>Remove disease</item>
+    <item>0</item>
+    <item>1</item>
+    <item>Week</item>
+    <item>8</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Spell-Like AbilityRemove disease2</name>
+    <item>Spell-Like Ability</item>
+    <item>9</item>
+    <item>Remove disease</item>
+    <item>0</item>
+    <item>2</item>
+    <item>Week</item>
+    <item>11</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Spell-Like AbilityRemove disease3</name>
+    <item>Spell-Like Ability</item>
+    <item>12</item>
+    <item>Remove disease</item>
+    <item>0</item>
+    <item>3</item>
+    <item>Week</item>
+    <item>14</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Spell-Like AbilityRemove disease4</name>
+    <item>Spell-Like Ability</item>
+    <item>15</item>
+    <item>Remove disease</item>
+    <item>0</item>
+    <item>4</item>
+    <item>Week</item>
+    <item>17</item>
+    <item></item>
+    <item></item>
+  </object>
+  <object>
+    <name>Spell-Like AbilityRemove disease5</name>
+    <item>Spell-Like Ability</item>
+    <item>18</item>
+    <item>Remove disease</item>
+    <item>0</item>
+    <item>5</item>
+    <item>Week</item>
+    <item>0</item>
+    <item></item>
+    <item></item>
+  </object>
 </items>
