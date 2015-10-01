@@ -78,6 +78,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Abilities\Feats\Data\Additional\AdditionalFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\CharacterClasses\Classes\PaladinFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\Domains\AirFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\Domains\AnimalFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\Classes\BarbarianFeatDataTests.cs" />
@@ -254,6 +255,7 @@
     <Compile Include="Races\BaseRaces\Weights\DeepDwarfWeightsTests.cs" />
     <Compile Include="Races\BaseRaces\Weights\DrowWeightsTests.cs" />
     <Compile Include="Races\BaseRaces\Weights\HalfElfWeightsTests.cs" />
+    <Compile Include="Races\BaseRaces\Weights\HobgoblinWeightsTests.cs" />
     <Compile Include="Races\BaseRaces\Weights\LightfootHalflingWeightsTests.cs" />
     <Compile Include="Races\BaseRaces\Weights\LizardfolkWeightsTests.cs" />
     <Compile Include="Races\BaseRaces\Weights\TroglodyteWeightsTests.cs" />
