@@ -6,11 +6,11 @@ using System;
 namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Weights
 {
     [TestFixture]
-    public class DeepDwarfWeightsTests : AdjustmentsTests
+    public class OrcWeightsTests : AdjustmentsTests
     {
         protected override String tableName
         {
-            get { return String.Format(TableNameConstants.Formattable.Adjustments.RACEWeights, RaceConstants.BaseRaces.DeepDwarf); }
+            get { return String.Format(TableNameConstants.Formattable.Adjustments.RACEWeights, RaceConstants.BaseRaces.Orc); }
         }
 
         [Test]
@@ -27,8 +27,8 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Weights
             AssertCollectionNames(names);
         }
 
-        [TestCase(AdjustmentConstants.Base + FalseString, 100)]
-        [TestCase(AdjustmentConstants.Base + TrueString, 130)]
+        [TestCase(AdjustmentConstants.Base + FalseString, 120)]
+        [TestCase(AdjustmentConstants.Base + TrueString, 160)]
         [TestCase(AdjustmentConstants.Quantity, 2)]
         [TestCase(AdjustmentConstants.Die, 6)]
         public override void Adjustment(String name, Int32 adjustment)

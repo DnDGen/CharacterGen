@@ -259,6 +259,7 @@
     <Compile Include="Races\BaseRaces\Weights\HobgoblinWeightsTests.cs" />
     <Compile Include="Races\BaseRaces\Weights\LightfootHalflingWeightsTests.cs" />
     <Compile Include="Races\BaseRaces\Weights\LizardfolkWeightsTests.cs" />
+    <Compile Include="Races\BaseRaces\Weights\OrcWeightsTests.cs" />
     <Compile Include="Races\BaseRaces\Weights\TroglodyteWeightsTests.cs" />
     <Compile Include="Races\BaseRaces\Weights\WoodElfWeightsTests.cs" />
     <Compile Include="Races\LevelAdjustmentsTests.cs" />
