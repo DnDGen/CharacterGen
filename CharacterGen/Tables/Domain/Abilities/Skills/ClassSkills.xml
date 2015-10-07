@@ -80,6 +80,12 @@
         <item>Ride</item>
         <item>Swim</item>
     </object>
+  <object>
+    <name>Lizardfolk</name>
+    <item>Balance</item>
+    <item>Jump</item>
+    <item>Swim</item>
+  </object>
     <object>
         <name>Monk</name>
         <item>Balance</item>

@@ -1,8 +1,9 @@
-﻿using System;
-using CharacterGen.Common.Abilities.Skills;
+﻿using CharacterGen.Common.Abilities.Skills;
 using CharacterGen.Common.CharacterClasses;
+using CharacterGen.Common.Races;
 using CharacterGen.Tables;
 using NUnit.Framework;
+using System;
 
 namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
 {
@@ -17,19 +18,20 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
         [Test]
         public override void CollectionNames()
         {
-            var names = new[] 
+            var names = new[]
             {
                 CharacterClassConstants.Barbarian,
                 CharacterClassConstants.Bard,
                 CharacterClassConstants.Cleric,
                 CharacterClassConstants.Druid,
-                CharacterClassConstants.Fighter, 
+                CharacterClassConstants.Fighter,
                 CharacterClassConstants.Monk,
-                CharacterClassConstants.Paladin, 
-                CharacterClassConstants.Ranger, 
-                CharacterClassConstants.Rogue, 
-                CharacterClassConstants.Sorcerer, 
-                CharacterClassConstants.Wizard
+                CharacterClassConstants.Paladin,
+                CharacterClassConstants.Ranger,
+                CharacterClassConstants.Rogue,
+                CharacterClassConstants.Sorcerer,
+                CharacterClassConstants.Wizard,
+                RaceConstants.BaseRaces.Lizardfolk
             };
 
             AssertCollectionNames(names);
@@ -163,6 +165,10 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
             SkillConstants.KnowledgeReligion,
             SkillConstants.KnowledgeThePlanes,
             SkillConstants.Spellcraft)]
+        [TestCase(RaceConstants.BaseRaces.Lizardfolk,
+            SkillConstants.Balance,
+            SkillConstants.Jump,
+            SkillConstants.Swim)]
         public override void DistinctCollection(String name, params String[] collection)
         {
             base.DistinctCollection(name, collection);
@@ -172,7 +178,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
         public void BardClassSkills()
         {
 
-            var classSkills = new[] 
+            var classSkills = new[]
             {
                 SkillConstants.Appraise,
                 SkillConstants.Balance,
