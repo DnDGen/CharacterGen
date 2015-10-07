@@ -14,6 +14,7 @@ namespace CharacterGen.Common.Magics
         {
             //Spells = new Dictionary<Int32, IEnumerable<String>>();
             SpellQuantities = new Dictionary<Int32, Int32>();
+            Animal = String.Empty;
         }
     }
 }

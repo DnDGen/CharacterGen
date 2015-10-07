@@ -18,6 +18,7 @@ using Moq;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CharacterGen.Tests.Unit.Generators.Magics
 {
@@ -86,6 +87,8 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
             animalsForSize.Add(animalRace.BaseRace);
             levelAdjustments[animalRace.BaseRace] = 0;
             tricks[characterClass.ClassName] = 42;
+
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<String>>())).Returns((IEnumerable<String> c) => c.Last());
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.Animals, characterClass.ClassName)).Returns(animals);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.Animals, CharacterClassConstants.Druid)).Returns(animals);
