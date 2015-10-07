@@ -18,7 +18,6 @@ using Moq;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace CharacterGen.Tests.Unit.Generators.Magics
 {
@@ -107,7 +106,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         {
             animals.Clear();
             var animal = animalGenerator.GenerateFrom(alignment, characterClass, characterRace, feats);
-            Assert.That(animal, Is.Null);
+            Assert.That(animal, Is.Empty);
         }
 
         [Test]
@@ -118,7 +117,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
             levelAdjustments["other animal"] = 0;
 
             var animal = animalGenerator.GenerateFrom(alignment, characterClass, characterRace, feats);
-            Assert.That(animal, Is.Null);
+            Assert.That(animal, Is.Empty);
         }
 
         [Test]
@@ -128,7 +127,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
             animalsForSize.Add("other animal");
 
             var animal = animalGenerator.GenerateFrom(alignment, characterClass, characterRace, feats);
-            Assert.That(animal, Is.Null);
+            Assert.That(animal, Is.Empty);
         }
 
         [Test]
@@ -136,22 +135,22 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         {
             levelAdjustments[animalRace.BaseRace] = characterClass.Level * -1;
             var animal = animalGenerator.GenerateFrom(alignment, characterClass, characterRace, feats);
-            Assert.That(animal, Is.Null);
+            Assert.That(animal, Is.Empty);
         }
 
         [Test]
         public void GenerateAnimal()
         {
             var animal = animalGenerator.GenerateFrom(alignment, characterClass, characterRace, feats);
-            Assert.That(animal, Is.Not.Null);
+            Assert.That(animal, Is.EqualTo("animal"));
         }
 
-        [Test]
-        public void GenerateAnimalRace()
-        {
-            var animal = animalGenerator.GenerateFrom(alignment, characterClass, characterRace, feats);
-            Assert.That(animal.Race, Is.EqualTo(animalRace));
-        }
+        //[Test]
+        //public void GenerateAnimalRace()
+        //{
+        //    var animal = animalGenerator.GenerateFrom(alignment, characterClass, characterRace, feats);
+        //    Assert.That(animal.Race, Is.EqualTo(animalRace));
+        //}
 
         [Test]
         public void GenerateImprovedFamiliar()
@@ -167,7 +166,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
                 mockNoMetaraceRandomizer.Object)).Returns(animalRace).Returns(wrongRace);
 
             var animal = animalGenerator.GenerateFrom(alignment, characterClass, characterRace, feats);
-            Assert.That(animal.Race, Is.EqualTo(animalRace));
+            Assert.That(animal, Is.EqualTo("animal"));
         }
 
         [Test]
@@ -184,7 +183,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
                 mockNoMetaraceRandomizer.Object)).Returns(animalRace).Returns(wrongRace);
 
             var animal = animalGenerator.GenerateFrom(alignment, characterClass, characterRace, feats);
-            Assert.That(animal.Race, Is.EqualTo(animalRace));
+            Assert.That(animal, Is.EqualTo("animal"));
         }
 
         [Test]
@@ -199,35 +198,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
                 mockNoMetaraceRandomizer.Object)).Returns(wrongRace).Returns(animalRace);
 
             var animal = animalGenerator.GenerateFrom(alignment, characterClass, characterRace, feats);
-            Assert.That(animal.Race, Is.EqualTo(animalRace));
-        }
-
-        [Test]
-        public void RegenerateAnimalRaceIfLevelAdjustmentIsCharacterLevel()
-        {
-            var wrongRace = new Race { BaseRace = "other animal" };
-            animals.Add(wrongRace.BaseRace);
-            levelAdjustments[wrongRace.BaseRace] = characterClass.Level * -1;
-
-            mockRaceGenerator.SetupSequence(g => g.GenerateWith(alignment, characterClass, mockAnimalBaseRaceRandomizer.Object,
-                mockNoMetaraceRandomizer.Object)).Returns(wrongRace).Returns(animalRace);
-
-            var animal = animalGenerator.GenerateFrom(alignment, characterClass, characterRace, feats);
-            Assert.That(animal.Race, Is.EqualTo(animalRace));
-        }
-
-        [Test]
-        public void RegenerateAnimalRaceIfLevelAdjustmentIsTooMuch()
-        {
-            var wrongRace = new Race { BaseRace = "other animal" };
-            animals.Add(wrongRace.BaseRace);
-            levelAdjustments[wrongRace.BaseRace] = -90210;
-
-            mockRaceGenerator.SetupSequence(g => g.GenerateWith(alignment, characterClass, mockAnimalBaseRaceRandomizer.Object,
-                mockNoMetaraceRandomizer.Object)).Returns(wrongRace).Returns(animalRace);
-
-            var animal = animalGenerator.GenerateFrom(alignment, characterClass, characterRace, feats);
-            Assert.That(animal.Race, Is.EqualTo(animalRace));
+            Assert.That(animal, Is.EqualTo("animal"));
         }
 
         [Test]
@@ -261,7 +232,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(rangerTricks);
 
             var animal = animalGenerator.GenerateFrom(alignment, characterClass, characterRace, feats);
-            Assert.That(animal.Race, Is.EqualTo(animalRace));
+            Assert.That(animal, Is.EqualTo("animal"));
         }
 
         [Test]
@@ -299,152 +270,152 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
             Assert.That(characterClass.Level, Is.EqualTo(9266));
         }
 
-        [Test]
-        public void GenerateAnimalAbilities()
-        {
-            var animal = animalGenerator.GenerateFrom(alignment, characterClass, characterRace, feats);
-            Assert.That(animal.Ability, Is.EqualTo(ability));
-        }
+        //[Test]
+        //public void GenerateAnimalAbilities()
+        //{
+        //    var animal = animalGenerator.GenerateFrom(alignment, characterClass, characterRace, feats);
+        //    Assert.That(animal.Ability, Is.EqualTo(ability));
+        //}
 
-        [Test]
-        public void GenerateRangerAnimalAbilities()
-        {
-            characterClass.ClassName = CharacterClassConstants.Ranger;
-            druidAnimals.Add(animalRace.BaseRace);
+        //[Test]
+        //public void GenerateRangerAnimalAbilities()
+        //{
+        //    characterClass.ClassName = CharacterClassConstants.Ranger;
+        //    druidAnimals.Add(animalRace.BaseRace);
 
-            var rangerAnimalBaseAttack = new BaseAttack();
-            var rangerAnimalCombat = new Combat();
-            var rangerAnimalAbility = new Ability();
+        //    var rangerAnimalBaseAttack = new BaseAttack();
+        //    var rangerAnimalCombat = new Combat();
+        //    var rangerAnimalAbility = new Ability();
 
-            mockRaceGenerator.Setup(g => g.GenerateWith(alignment, It.Is<CharacterClass>(c => c.ClassName == CharacterClassConstants.Druid && c.Level == characterClass.Level / 2), mockAnimalBaseRaceRandomizer.Object,
-                mockNoMetaraceRandomizer.Object)).Returns(animalRace);
+        //    mockRaceGenerator.Setup(g => g.GenerateWith(alignment, It.Is<CharacterClass>(c => c.ClassName == CharacterClassConstants.Druid && c.Level == characterClass.Level / 2), mockAnimalBaseRaceRandomizer.Object,
+        //        mockNoMetaraceRandomizer.Object)).Returns(animalRace);
 
-            mockAnimalCombatGenerator.Setup(g => g.GenerateBaseAttackWith(It.Is<CharacterClass>(c => c.ClassName == CharacterClassConstants.Druid && c.Level == characterClass.Level / 2), animalRace)).Returns(rangerAnimalBaseAttack);
-            mockAnimalCombatGenerator.Setup(g => g.GenerateWith(rangerAnimalBaseAttack, It.Is<CharacterClass>(c => c.ClassName == CharacterClassConstants.Druid && c.Level == characterClass.Level / 2), animalRace, rangerAnimalAbility.Feats, rangerAnimalAbility.Stats, It.IsAny<Equipment>())).Returns(rangerAnimalCombat);
-            mockAnimalAbilitiesGenerator.Setup(g => g.GenerateWith(It.Is<CharacterClass>(c => c.ClassName == CharacterClassConstants.Druid && c.Level == characterClass.Level / 2), animalRace, mockSetStatsRandomizer.Object, rangerAnimalBaseAttack)).Returns(rangerAnimalAbility);
+        //    mockAnimalCombatGenerator.Setup(g => g.GenerateBaseAttackWith(It.Is<CharacterClass>(c => c.ClassName == CharacterClassConstants.Druid && c.Level == characterClass.Level / 2), animalRace)).Returns(rangerAnimalBaseAttack);
+        //    mockAnimalCombatGenerator.Setup(g => g.GenerateWith(rangerAnimalBaseAttack, It.Is<CharacterClass>(c => c.ClassName == CharacterClassConstants.Druid && c.Level == characterClass.Level / 2), animalRace, rangerAnimalAbility.Feats, rangerAnimalAbility.Stats, It.IsAny<Equipment>())).Returns(rangerAnimalCombat);
+        //    mockAnimalAbilitiesGenerator.Setup(g => g.GenerateWith(It.Is<CharacterClass>(c => c.ClassName == CharacterClassConstants.Druid && c.Level == characterClass.Level / 2), animalRace, mockSetStatsRandomizer.Object, rangerAnimalBaseAttack)).Returns(rangerAnimalAbility);
 
-            var rangerTricks = new Dictionary<String, Int32>();
-            rangerTricks[CharacterClassConstants.Druid] = 600;
+        //    var rangerTricks = new Dictionary<String, Int32>();
+        //    rangerTricks[CharacterClassConstants.Druid] = 600;
 
-            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.LevelXAnimalTricks, 9266 / 2);
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(rangerTricks);
+        //    var tableName = String.Format(TableNameConstants.Formattable.Adjustments.LevelXAnimalTricks, 9266 / 2);
+        //    mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(rangerTricks);
 
-            var animal = animalGenerator.GenerateFrom(alignment, characterClass, characterRace, feats);
-            Assert.That(animal.Ability, Is.EqualTo(rangerAnimalAbility));
-        }
+        //    var animal = animalGenerator.GenerateFrom(alignment, characterClass, characterRace, feats);
+        //    Assert.That(animal.Ability, Is.EqualTo(rangerAnimalAbility));
+        //}
 
-        [Test]
-        public void GenerateAnimalCombat()
-        {
-            var animal = animalGenerator.GenerateFrom(alignment, characterClass, characterRace, feats);
-            Assert.That(animal.Combat, Is.EqualTo(combat));
-        }
+        //[Test]
+        //public void GenerateAnimalCombat()
+        //{
+        //    var animal = animalGenerator.GenerateFrom(alignment, characterClass, characterRace, feats);
+        //    Assert.That(animal.Combat, Is.EqualTo(combat));
+        //}
 
-        [Test]
-        public void GenerateRangerAnimalCombat()
-        {
-            characterClass.ClassName = CharacterClassConstants.Ranger;
-            druidAnimals.Add(animalRace.BaseRace);
+        //[Test]
+        //public void GenerateRangerAnimalCombat()
+        //{
+        //    characterClass.ClassName = CharacterClassConstants.Ranger;
+        //    druidAnimals.Add(animalRace.BaseRace);
 
-            var rangerAnimalBaseAttack = new BaseAttack();
-            var rangerAnimalCombat = new Combat();
-            var rangerAnimalAbility = new Ability();
+        //    var rangerAnimalBaseAttack = new BaseAttack();
+        //    var rangerAnimalCombat = new Combat();
+        //    var rangerAnimalAbility = new Ability();
 
-            mockRaceGenerator.Setup(g => g.GenerateWith(alignment, It.Is<CharacterClass>(c => c.ClassName == CharacterClassConstants.Druid && c.Level == characterClass.Level / 2), mockAnimalBaseRaceRandomizer.Object,
-                mockNoMetaraceRandomizer.Object)).Returns(animalRace);
+        //    mockRaceGenerator.Setup(g => g.GenerateWith(alignment, It.Is<CharacterClass>(c => c.ClassName == CharacterClassConstants.Druid && c.Level == characterClass.Level / 2), mockAnimalBaseRaceRandomizer.Object,
+        //        mockNoMetaraceRandomizer.Object)).Returns(animalRace);
 
-            mockAnimalCombatGenerator.Setup(g => g.GenerateBaseAttackWith(It.Is<CharacterClass>(c => c.ClassName == CharacterClassConstants.Druid && c.Level == characterClass.Level / 2), animalRace)).Returns(rangerAnimalBaseAttack);
-            mockAnimalCombatGenerator.Setup(g => g.GenerateWith(rangerAnimalBaseAttack, It.Is<CharacterClass>(c => c.ClassName == CharacterClassConstants.Druid && c.Level == characterClass.Level / 2), animalRace, rangerAnimalAbility.Feats, rangerAnimalAbility.Stats, It.IsAny<Equipment>())).Returns(rangerAnimalCombat);
-            mockAnimalAbilitiesGenerator.Setup(g => g.GenerateWith(It.Is<CharacterClass>(c => c.ClassName == CharacterClassConstants.Druid && c.Level == characterClass.Level / 2), animalRace, mockSetStatsRandomizer.Object, rangerAnimalBaseAttack)).Returns(rangerAnimalAbility);
+        //    mockAnimalCombatGenerator.Setup(g => g.GenerateBaseAttackWith(It.Is<CharacterClass>(c => c.ClassName == CharacterClassConstants.Druid && c.Level == characterClass.Level / 2), animalRace)).Returns(rangerAnimalBaseAttack);
+        //    mockAnimalCombatGenerator.Setup(g => g.GenerateWith(rangerAnimalBaseAttack, It.Is<CharacterClass>(c => c.ClassName == CharacterClassConstants.Druid && c.Level == characterClass.Level / 2), animalRace, rangerAnimalAbility.Feats, rangerAnimalAbility.Stats, It.IsAny<Equipment>())).Returns(rangerAnimalCombat);
+        //    mockAnimalAbilitiesGenerator.Setup(g => g.GenerateWith(It.Is<CharacterClass>(c => c.ClassName == CharacterClassConstants.Druid && c.Level == characterClass.Level / 2), animalRace, mockSetStatsRandomizer.Object, rangerAnimalBaseAttack)).Returns(rangerAnimalAbility);
 
-            var rangerTricks = new Dictionary<String, Int32>();
-            rangerTricks[CharacterClassConstants.Druid] = 600;
+        //    var rangerTricks = new Dictionary<String, Int32>();
+        //    rangerTricks[CharacterClassConstants.Druid] = 600;
 
-            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.LevelXAnimalTricks, 9266 / 2);
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(rangerTricks);
+        //    var tableName = String.Format(TableNameConstants.Formattable.Adjustments.LevelXAnimalTricks, 9266 / 2);
+        //    mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(rangerTricks);
 
-            var animal = animalGenerator.GenerateFrom(alignment, characterClass, characterRace, feats);
-            Assert.That(animal.Combat, Is.EqualTo(rangerAnimalCombat));
-        }
+        //    var animal = animalGenerator.GenerateFrom(alignment, characterClass, characterRace, feats);
+        //    Assert.That(animal.Combat, Is.EqualTo(rangerAnimalCombat));
+        //}
 
-        [Test]
-        public void UseEmptyEquipmentToGenerateAnimalCombat()
-        {
-            var animal = animalGenerator.GenerateFrom(alignment, characterClass, characterRace, feats);
-            mockAnimalCombatGenerator.Verify(g => g.GenerateWith(baseAttack, characterClass, animalRace, ability.Feats, ability.Stats, It.IsAny<Equipment>()), Times.Once);
-            mockAnimalCombatGenerator.Verify(g => g.GenerateWith(baseAttack, characterClass, animalRace, ability.Feats, ability.Stats, It.Is<Equipment>(e => e.Armor == null)), Times.Once);
-            mockAnimalCombatGenerator.Verify(g => g.GenerateWith(baseAttack, characterClass, animalRace, ability.Feats, ability.Stats, It.Is<Equipment>(e => e.OffHand == null)), Times.Once);
-            mockAnimalCombatGenerator.Verify(g => g.GenerateWith(baseAttack, characterClass, animalRace, ability.Feats, ability.Stats, It.Is<Equipment>(e => e.PrimaryHand == null)), Times.Once);
-            mockAnimalCombatGenerator.Verify(g => g.GenerateWith(baseAttack, characterClass, animalRace, ability.Feats, ability.Stats, It.Is<Equipment>(e => e.Treasure.Coin.Quantity == 0)), Times.Once);
-            mockAnimalCombatGenerator.Verify(g => g.GenerateWith(baseAttack, characterClass, animalRace, ability.Feats, ability.Stats, It.Is<Equipment>(e => e.Treasure.Goods.Any() == false)), Times.Once);
-            mockAnimalCombatGenerator.Verify(g => g.GenerateWith(baseAttack, characterClass, animalRace, ability.Feats, ability.Stats, It.Is<Equipment>(e => e.Treasure.Items.Any() == false)), Times.Once);
-        }
+        //[Test]
+        //public void UseEmptyEquipmentToGenerateAnimalCombat()
+        //{
+        //    var animal = animalGenerator.GenerateFrom(alignment, characterClass, characterRace, feats);
+        //    mockAnimalCombatGenerator.Verify(g => g.GenerateWith(baseAttack, characterClass, animalRace, ability.Feats, ability.Stats, It.IsAny<Equipment>()), Times.Once);
+        //    mockAnimalCombatGenerator.Verify(g => g.GenerateWith(baseAttack, characterClass, animalRace, ability.Feats, ability.Stats, It.Is<Equipment>(e => e.Armor == null)), Times.Once);
+        //    mockAnimalCombatGenerator.Verify(g => g.GenerateWith(baseAttack, characterClass, animalRace, ability.Feats, ability.Stats, It.Is<Equipment>(e => e.OffHand == null)), Times.Once);
+        //    mockAnimalCombatGenerator.Verify(g => g.GenerateWith(baseAttack, characterClass, animalRace, ability.Feats, ability.Stats, It.Is<Equipment>(e => e.PrimaryHand == null)), Times.Once);
+        //    mockAnimalCombatGenerator.Verify(g => g.GenerateWith(baseAttack, characterClass, animalRace, ability.Feats, ability.Stats, It.Is<Equipment>(e => e.Treasure.Coin.Quantity == 0)), Times.Once);
+        //    mockAnimalCombatGenerator.Verify(g => g.GenerateWith(baseAttack, characterClass, animalRace, ability.Feats, ability.Stats, It.Is<Equipment>(e => e.Treasure.Goods.Any() == false)), Times.Once);
+        //    mockAnimalCombatGenerator.Verify(g => g.GenerateWith(baseAttack, characterClass, animalRace, ability.Feats, ability.Stats, It.Is<Equipment>(e => e.Treasure.Items.Any() == false)), Times.Once);
+        //}
 
-        [Test]
-        public void UseEmptyEquipmentToGenerateRangerAnimalCombat()
-        {
-            characterClass.ClassName = CharacterClassConstants.Ranger;
-            druidAnimals.Add(animalRace.BaseRace);
+        //[Test]
+        //public void UseEmptyEquipmentToGenerateRangerAnimalCombat()
+        //{
+        //    characterClass.ClassName = CharacterClassConstants.Ranger;
+        //    druidAnimals.Add(animalRace.BaseRace);
 
-            var rangerAnimalBaseAttack = new BaseAttack();
-            var rangerAnimalCombat = new Combat();
-            var rangerAnimalAbility = new Ability();
+        //    var rangerAnimalBaseAttack = new BaseAttack();
+        //    var rangerAnimalCombat = new Combat();
+        //    var rangerAnimalAbility = new Ability();
 
-            mockRaceGenerator.Setup(g => g.GenerateWith(alignment, It.Is<CharacterClass>(c => c.ClassName == CharacterClassConstants.Druid && c.Level == characterClass.Level / 2), mockAnimalBaseRaceRandomizer.Object,
-                mockNoMetaraceRandomizer.Object)).Returns(animalRace);
+        //    mockRaceGenerator.Setup(g => g.GenerateWith(alignment, It.Is<CharacterClass>(c => c.ClassName == CharacterClassConstants.Druid && c.Level == characterClass.Level / 2), mockAnimalBaseRaceRandomizer.Object,
+        //        mockNoMetaraceRandomizer.Object)).Returns(animalRace);
 
-            mockAnimalCombatGenerator.Setup(g => g.GenerateBaseAttackWith(It.Is<CharacterClass>(c => c.ClassName == CharacterClassConstants.Druid && c.Level == characterClass.Level / 2), animalRace)).Returns(rangerAnimalBaseAttack);
-            mockAnimalCombatGenerator.Setup(g => g.GenerateWith(rangerAnimalBaseAttack, It.Is<CharacterClass>(c => c.ClassName == CharacterClassConstants.Druid && c.Level == characterClass.Level / 2), animalRace, rangerAnimalAbility.Feats, rangerAnimalAbility.Stats, It.IsAny<Equipment>())).Returns(rangerAnimalCombat);
-            mockAnimalAbilitiesGenerator.Setup(g => g.GenerateWith(It.Is<CharacterClass>(c => c.ClassName == CharacterClassConstants.Druid && c.Level == characterClass.Level / 2), animalRace, mockSetStatsRandomizer.Object, rangerAnimalBaseAttack)).Returns(rangerAnimalAbility);
+        //    mockAnimalCombatGenerator.Setup(g => g.GenerateBaseAttackWith(It.Is<CharacterClass>(c => c.ClassName == CharacterClassConstants.Druid && c.Level == characterClass.Level / 2), animalRace)).Returns(rangerAnimalBaseAttack);
+        //    mockAnimalCombatGenerator.Setup(g => g.GenerateWith(rangerAnimalBaseAttack, It.Is<CharacterClass>(c => c.ClassName == CharacterClassConstants.Druid && c.Level == characterClass.Level / 2), animalRace, rangerAnimalAbility.Feats, rangerAnimalAbility.Stats, It.IsAny<Equipment>())).Returns(rangerAnimalCombat);
+        //    mockAnimalAbilitiesGenerator.Setup(g => g.GenerateWith(It.Is<CharacterClass>(c => c.ClassName == CharacterClassConstants.Druid && c.Level == characterClass.Level / 2), animalRace, mockSetStatsRandomizer.Object, rangerAnimalBaseAttack)).Returns(rangerAnimalAbility);
 
-            var rangerTricks = new Dictionary<String, Int32>();
-            rangerTricks[CharacterClassConstants.Druid] = 600;
+        //    var rangerTricks = new Dictionary<String, Int32>();
+        //    rangerTricks[CharacterClassConstants.Druid] = 600;
 
-            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.LevelXAnimalTricks, 9266 / 2);
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(rangerTricks);
+        //    var tableName = String.Format(TableNameConstants.Formattable.Adjustments.LevelXAnimalTricks, 9266 / 2);
+        //    mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(rangerTricks);
 
-            var animal = animalGenerator.GenerateFrom(alignment, characterClass, characterRace, feats);
-            mockAnimalCombatGenerator.Verify(g => g.GenerateWith(rangerAnimalBaseAttack, It.Is<CharacterClass>(c => c.ClassName == CharacterClassConstants.Druid && c.Level == characterClass.Level / 2), animalRace, rangerAnimalAbility.Feats, rangerAnimalAbility.Stats, It.IsAny<Equipment>()), Times.Once);
-            mockAnimalCombatGenerator.Verify(g => g.GenerateWith(rangerAnimalBaseAttack, It.Is<CharacterClass>(c => c.ClassName == CharacterClassConstants.Druid && c.Level == characterClass.Level / 2), animalRace, rangerAnimalAbility.Feats, rangerAnimalAbility.Stats, It.Is<Equipment>(e => e.Armor == null)), Times.Once);
-            mockAnimalCombatGenerator.Verify(g => g.GenerateWith(rangerAnimalBaseAttack, It.Is<CharacterClass>(c => c.ClassName == CharacterClassConstants.Druid && c.Level == characterClass.Level / 2), animalRace, rangerAnimalAbility.Feats, rangerAnimalAbility.Stats, It.Is<Equipment>(e => e.OffHand == null)), Times.Once);
-            mockAnimalCombatGenerator.Verify(g => g.GenerateWith(rangerAnimalBaseAttack, It.Is<CharacterClass>(c => c.ClassName == CharacterClassConstants.Druid && c.Level == characterClass.Level / 2), animalRace, rangerAnimalAbility.Feats, rangerAnimalAbility.Stats, It.Is<Equipment>(e => e.PrimaryHand == null)), Times.Once);
-            mockAnimalCombatGenerator.Verify(g => g.GenerateWith(rangerAnimalBaseAttack, It.Is<CharacterClass>(c => c.ClassName == CharacterClassConstants.Druid && c.Level == characterClass.Level / 2), animalRace, rangerAnimalAbility.Feats, rangerAnimalAbility.Stats, It.Is<Equipment>(e => e.Treasure.Coin.Quantity == 0)), Times.Once);
-            mockAnimalCombatGenerator.Verify(g => g.GenerateWith(rangerAnimalBaseAttack, It.Is<CharacterClass>(c => c.ClassName == CharacterClassConstants.Druid && c.Level == characterClass.Level / 2), animalRace, rangerAnimalAbility.Feats, rangerAnimalAbility.Stats, It.Is<Equipment>(e => e.Treasure.Goods.Any() == false)), Times.Once);
-            mockAnimalCombatGenerator.Verify(g => g.GenerateWith(rangerAnimalBaseAttack, It.Is<CharacterClass>(c => c.ClassName == CharacterClassConstants.Druid && c.Level == characterClass.Level / 2), animalRace, rangerAnimalAbility.Feats, rangerAnimalAbility.Stats, It.Is<Equipment>(e => e.Treasure.Items.Any() == false)), Times.Once);
-        }
+        //    var animal = animalGenerator.GenerateFrom(alignment, characterClass, characterRace, feats);
+        //    mockAnimalCombatGenerator.Verify(g => g.GenerateWith(rangerAnimalBaseAttack, It.Is<CharacterClass>(c => c.ClassName == CharacterClassConstants.Druid && c.Level == characterClass.Level / 2), animalRace, rangerAnimalAbility.Feats, rangerAnimalAbility.Stats, It.IsAny<Equipment>()), Times.Once);
+        //    mockAnimalCombatGenerator.Verify(g => g.GenerateWith(rangerAnimalBaseAttack, It.Is<CharacterClass>(c => c.ClassName == CharacterClassConstants.Druid && c.Level == characterClass.Level / 2), animalRace, rangerAnimalAbility.Feats, rangerAnimalAbility.Stats, It.Is<Equipment>(e => e.Armor == null)), Times.Once);
+        //    mockAnimalCombatGenerator.Verify(g => g.GenerateWith(rangerAnimalBaseAttack, It.Is<CharacterClass>(c => c.ClassName == CharacterClassConstants.Druid && c.Level == characterClass.Level / 2), animalRace, rangerAnimalAbility.Feats, rangerAnimalAbility.Stats, It.Is<Equipment>(e => e.OffHand == null)), Times.Once);
+        //    mockAnimalCombatGenerator.Verify(g => g.GenerateWith(rangerAnimalBaseAttack, It.Is<CharacterClass>(c => c.ClassName == CharacterClassConstants.Druid && c.Level == characterClass.Level / 2), animalRace, rangerAnimalAbility.Feats, rangerAnimalAbility.Stats, It.Is<Equipment>(e => e.PrimaryHand == null)), Times.Once);
+        //    mockAnimalCombatGenerator.Verify(g => g.GenerateWith(rangerAnimalBaseAttack, It.Is<CharacterClass>(c => c.ClassName == CharacterClassConstants.Druid && c.Level == characterClass.Level / 2), animalRace, rangerAnimalAbility.Feats, rangerAnimalAbility.Stats, It.Is<Equipment>(e => e.Treasure.Coin.Quantity == 0)), Times.Once);
+        //    mockAnimalCombatGenerator.Verify(g => g.GenerateWith(rangerAnimalBaseAttack, It.Is<CharacterClass>(c => c.ClassName == CharacterClassConstants.Druid && c.Level == characterClass.Level / 2), animalRace, rangerAnimalAbility.Feats, rangerAnimalAbility.Stats, It.Is<Equipment>(e => e.Treasure.Goods.Any() == false)), Times.Once);
+        //    mockAnimalCombatGenerator.Verify(g => g.GenerateWith(rangerAnimalBaseAttack, It.Is<CharacterClass>(c => c.ClassName == CharacterClassConstants.Druid && c.Level == characterClass.Level / 2), animalRace, rangerAnimalAbility.Feats, rangerAnimalAbility.Stats, It.Is<Equipment>(e => e.Treasure.Items.Any() == false)), Times.Once);
+        //}
 
-        [Test]
-        public void GenerateAnimalTricks()
-        {
-            var animal = animalGenerator.GenerateFrom(alignment, characterClass, characterRace, feats);
-            Assert.That(animal.Tricks, Is.EqualTo(42));
-        }
+        //[Test]
+        //public void GenerateAnimalTricks()
+        //{
+        //    var animal = animalGenerator.GenerateFrom(alignment, characterClass, characterRace, feats);
+        //    Assert.That(animal.Tricks, Is.EqualTo(42));
+        //}
 
-        [Test]
-        public void GenerateRangerAnimalTricks()
-        {
-            characterClass.ClassName = CharacterClassConstants.Ranger;
-            druidAnimals.Add(animalRace.BaseRace);
+        //[Test]
+        //public void GenerateRangerAnimalTricks()
+        //{
+        //    characterClass.ClassName = CharacterClassConstants.Ranger;
+        //    druidAnimals.Add(animalRace.BaseRace);
 
-            var rangerAnimalBaseAttack = new BaseAttack();
-            var rangerAnimalCombat = new Combat();
-            var rangerAnimalAbility = new Ability();
+        //    var rangerAnimalBaseAttack = new BaseAttack();
+        //    var rangerAnimalCombat = new Combat();
+        //    var rangerAnimalAbility = new Ability();
 
-            mockRaceGenerator.Setup(g => g.GenerateWith(alignment, It.Is<CharacterClass>(c => c.ClassName == CharacterClassConstants.Druid && c.Level == characterClass.Level / 2), mockAnimalBaseRaceRandomizer.Object,
-                mockNoMetaraceRandomizer.Object)).Returns(animalRace);
+        //    mockRaceGenerator.Setup(g => g.GenerateWith(alignment, It.Is<CharacterClass>(c => c.ClassName == CharacterClassConstants.Druid && c.Level == characterClass.Level / 2), mockAnimalBaseRaceRandomizer.Object,
+        //        mockNoMetaraceRandomizer.Object)).Returns(animalRace);
 
-            mockAnimalCombatGenerator.Setup(g => g.GenerateBaseAttackWith(It.Is<CharacterClass>(c => c.ClassName == CharacterClassConstants.Druid && c.Level == characterClass.Level / 2), animalRace)).Returns(rangerAnimalBaseAttack);
-            mockAnimalCombatGenerator.Setup(g => g.GenerateWith(rangerAnimalBaseAttack, It.Is<CharacterClass>(c => c.ClassName == CharacterClassConstants.Druid && c.Level == characterClass.Level / 2), animalRace, rangerAnimalAbility.Feats, rangerAnimalAbility.Stats, It.IsAny<Equipment>())).Returns(rangerAnimalCombat);
-            mockAnimalAbilitiesGenerator.Setup(g => g.GenerateWith(It.Is<CharacterClass>(c => c.ClassName == CharacterClassConstants.Druid && c.Level == characterClass.Level / 2), animalRace, mockSetStatsRandomizer.Object, rangerAnimalBaseAttack)).Returns(rangerAnimalAbility);
+        //    mockAnimalCombatGenerator.Setup(g => g.GenerateBaseAttackWith(It.Is<CharacterClass>(c => c.ClassName == CharacterClassConstants.Druid && c.Level == characterClass.Level / 2), animalRace)).Returns(rangerAnimalBaseAttack);
+        //    mockAnimalCombatGenerator.Setup(g => g.GenerateWith(rangerAnimalBaseAttack, It.Is<CharacterClass>(c => c.ClassName == CharacterClassConstants.Druid && c.Level == characterClass.Level / 2), animalRace, rangerAnimalAbility.Feats, rangerAnimalAbility.Stats, It.IsAny<Equipment>())).Returns(rangerAnimalCombat);
+        //    mockAnimalAbilitiesGenerator.Setup(g => g.GenerateWith(It.Is<CharacterClass>(c => c.ClassName == CharacterClassConstants.Druid && c.Level == characterClass.Level / 2), animalRace, mockSetStatsRandomizer.Object, rangerAnimalBaseAttack)).Returns(rangerAnimalAbility);
 
-            var rangerTricks = new Dictionary<String, Int32>();
-            rangerTricks[CharacterClassConstants.Druid] = 600;
+        //    var rangerTricks = new Dictionary<String, Int32>();
+        //    rangerTricks[CharacterClassConstants.Druid] = 600;
 
-            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.LevelXAnimalTricks, 9266 / 2);
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(rangerTricks);
+        //    var tableName = String.Format(TableNameConstants.Formattable.Adjustments.LevelXAnimalTricks, 9266 / 2);
+        //    mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(rangerTricks);
 
-            var animal = animalGenerator.GenerateFrom(alignment, characterClass, characterRace, feats);
-            Assert.That(animal.Tricks, Is.EqualTo(600));
-        }
+        //    var animal = animalGenerator.GenerateFrom(alignment, characterClass, characterRace, feats);
+        //    Assert.That(animal.Tricks, Is.EqualTo(600));
+        //}
     }
 }
