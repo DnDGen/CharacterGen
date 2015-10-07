@@ -12,9 +12,9 @@ namespace CharacterGen.Common.Races
         public String Size { get; set; }
         public Int32 LandSpeed { get; set; }
         public Int32 AerialSpeed { get; set; }
-        public Int32 HeightInInches { get; set; }
-        public Int32 WeightInPounds { get; set; }
-        public Age Age { get; set; }
+        //public Int32 HeightInInches { get; set; }
+        //public Int32 WeightInPounds { get; set; }
+        //public Age Age { get; set; }
 
         public Race()
         {
@@ -22,7 +22,7 @@ namespace CharacterGen.Common.Races
             Metarace = String.Empty;
             Size = String.Empty;
             MetaraceSpecies = String.Empty;
-            Age = new Age();
+            //Age = new Age();
         }
     }
 }
