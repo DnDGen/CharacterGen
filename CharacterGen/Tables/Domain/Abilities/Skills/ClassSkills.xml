@@ -81,6 +81,11 @@
         <item>Swim</item>
     </object>
   <object>
+    <name>Gnoll</name>
+    <item>Spot</item>
+    <item>Listen</item>
+  </object>
+  <object>
     <name>Lizardfolk</name>
     <item>Balance</item>
     <item>Jump</item>
@@ -105,6 +110,12 @@
         <item>Swim</item>
         <item>Tumble</item>
     </object>
+  <object>
+    <name>Ogre</name>
+    <item>Spot</item>
+    <item>Climb</item>
+    <item>Listen</item>
+  </object>
     <object>
         <name>Paladin</name>
         <item>Concentration</item>
@@ -173,6 +184,11 @@
         <item>Knowledge (Arcana)</item>
         <item>Spellcraft</item>
     </object>
+  <object>
+    <name>Troglodyte</name>
+    <item>Hide</item>
+    <item>Listen</item>
+  </object>
     <object>
         <name>Wizard</name>
         <item>Concentration</item>

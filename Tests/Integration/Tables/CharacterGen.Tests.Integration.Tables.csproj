@@ -146,7 +146,16 @@
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\MountainDwarfFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\OrcFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\Metaraces\HalfFiendFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\Metaraces\Species\BlackFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\Metaraces\Species\BlueFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\Metaraces\Species\BrassFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\Metaraces\Species\BronzeFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\Metaraces\Species\CopperFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\Metaraces\Species\GoldFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\Metaraces\Species\GreenFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\Metaraces\Species\RedFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\Metaraces\Species\SilverFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\Metaraces\Species\WhiteFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\RacialFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\TallfellowHalflingFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\TieflingFeatDataTests.cs" />
