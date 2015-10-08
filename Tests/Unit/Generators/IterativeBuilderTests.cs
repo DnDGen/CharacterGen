@@ -68,7 +68,7 @@ namespace CharacterGen.Tests.Unit.Generators
                 () => count++,
                 i => false), Throws.Exception.With.Message.EqualTo("Exceeded max retries to build"));
 
-            Assert.That(count, Is.EqualTo(10001));
+            Assert.That(count, Is.EqualTo(1000001));
         }
     }
 }

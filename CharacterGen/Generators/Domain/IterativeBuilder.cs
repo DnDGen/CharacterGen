@@ -4,7 +4,7 @@ namespace CharacterGen.Generators.Domain
 {
     public abstract class IterativeBuilder
     {
-        private const Int32 MaxRetries = 10000;
+        private const Int32 MaxRetries = 1000000;
 
         protected T Build<T>(Func<T> buildInstructions, Func<T, Boolean> isValid)
         {
