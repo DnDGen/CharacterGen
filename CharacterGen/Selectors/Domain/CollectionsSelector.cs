@@ -35,11 +35,6 @@ namespace CharacterGen.Selectors.Domain
             return mapper.Map(tableName);
         }
 
-        public String SelectRandomFrom(IEnumerable<String> collection)
-        {
-            return SelectRandomFrom<String>(collection);
-        }
-
         public String SelectRandomFrom(String tableName, String tableEntry)
         {
             var collection = SelectFrom(tableName, tableEntry);

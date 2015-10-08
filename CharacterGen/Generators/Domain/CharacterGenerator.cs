@@ -187,7 +187,7 @@ namespace CharacterGen.Generators.Domain
                 leadershipModifiers.Add(modifier);
             }
 
-            if (character.Magic.Animal != null)
+            if (String.IsNullOrEmpty(character.Magic.Animal) == false)
                 cohortScore -= 2;
 
             var followerScore = leadership.Score;

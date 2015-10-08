@@ -92,6 +92,7 @@
     <Compile Include="Items\WeaponGeneratorTests.cs" />
     <Compile Include="Magics\AnimalGeneratorTests.cs" />
     <Compile Include="Magics\MagicGeneratorTests.cs" />
+    <Compile Include="Magics\SpellsGeneratorTests.cs" />
     <Compile Include="RaceGeneratorTests.cs" />
     <Compile Include="Randomizers\Alignments\AlignmentRandomizerTypeConstantsTests.cs" />
     <Compile Include="Randomizers\Alignments\SetAlignmentRandomizerTests.cs" />

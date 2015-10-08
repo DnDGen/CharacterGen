@@ -50,6 +50,7 @@ namespace CharacterGen.Tables
                 public const String SkillGroups = "SkillGroups";
                 public const String SkillSynergy = "SkillSynergy";
                 public const String SpecialistFields = "SpecialistFields";
+                public const String StatGroups = "StatGroups";
                 public const String StatPriorities = "StatPriorities";
             }
 
@@ -83,6 +84,7 @@ namespace CharacterGen.Tables
                 public const String FEATSkillRankRequirements = "{0}SkillRankRequirements";
                 public const String FEATStatRequirements = "{0}StatRequirements";
                 public const String LevelXAnimalTricks = "Level{0}AnimalTricks";
+                public const String LevelXCLASSSpellQuantities = "Level{0}{1}SpellQuantities";
                 public const String RACEAges = "{0}Ages";
                 public const String RACEHeights = "{0}Heights";
                 public const String RACEWeights = "{0}Weights";
