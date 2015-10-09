@@ -34,7 +34,9 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
                 RaceConstants.BaseRaces.Lizardfolk,
                 RaceConstants.BaseRaces.Gnoll,
                 RaceConstants.BaseRaces.Ogre,
-                RaceConstants.BaseRaces.Troglodyte
+                RaceConstants.BaseRaces.Troglodyte,
+                RaceConstants.BaseRaces.Bugbear,
+                RaceConstants.BaseRaces.OgreMage
             };
 
             AssertCollectionNames(names);
@@ -182,6 +184,18 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
         [TestCase(RaceConstants.BaseRaces.Troglodyte,
             SkillConstants.Listen,
             SkillConstants.Hide)]
+        [TestCase(RaceConstants.BaseRaces.OgreMage,
+            SkillConstants.Listen,
+            SkillConstants.Spot,
+            SkillConstants.Spellcraft,
+            SkillConstants.Concentration)]
+        [TestCase(RaceConstants.BaseRaces.Bugbear,
+            SkillConstants.Climb,
+            SkillConstants.Hide,
+            SkillConstants.Listen,
+            SkillConstants.MoveSilently,
+            SkillConstants.Search,
+            SkillConstants.Spot)]
         public override void DistinctCollection(String name, params String[] collection)
         {
             base.DistinctCollection(name, collection);

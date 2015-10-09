@@ -46,6 +46,15 @@
         <item>Tumble</item>
         <item>Use Magic Device</item>
     </object>
+  <object>
+    <name>Bugbear</name>
+    <item>Climb</item>
+    <item>Hide</item>
+    <item>Listen</item>
+    <item>Move Silently</item>
+    <item>Search</item>
+    <item>Spot</item>
+  </object>
     <object>
         <name>Cleric</name>
         <item>Concentration</item>
@@ -114,6 +123,13 @@
     <name>Ogre</name>
     <item>Spot</item>
     <item>Climb</item>
+    <item>Listen</item>
+  </object>
+  <object>
+    <name>Ogre Mage</name>
+    <item>Spot</item>
+    <item>Concentration</item>
+    <item>Spellcraft</item>
     <item>Listen</item>
   </object>
     <object>

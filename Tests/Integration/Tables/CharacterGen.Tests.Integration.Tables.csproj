@@ -156,6 +156,7 @@
     <Compile Include="Abilities\Feats\Data\Racial\Metaraces\Species\RedFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\Metaraces\Species\SilverFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\Metaraces\Species\WhiteFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\Metaraces\WereboarFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\RacialFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\TallfellowHalflingFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\TieflingFeatDataTests.cs" />
