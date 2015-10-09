@@ -70,11 +70,13 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
             feat.Name = selection.Feat;
             feat.Focus = focus;
             feat.Frequency = selection.Frequency;
+            feat.Strength = selection.Strength;
 
-            if (selection.FrequencyQuantityStat != String.Empty)
+            if (String.IsNullOrEmpty(selection.FrequencyQuantityStat) == false)
                 feat.Frequency.Quantity += stats[selection.FrequencyQuantityStat].Bonus;
 
-            feat.Strength = selection.Strength;
+            if (feat.Frequency.Quantity < 0)
+                feat.Frequency.Quantity = 0;
 
             return feat;
         }

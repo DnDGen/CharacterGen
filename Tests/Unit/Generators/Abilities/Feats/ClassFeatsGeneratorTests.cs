@@ -274,6 +274,20 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             Assert.That(onlyFeat.Frequency.Quantity, Is.EqualTo(3));
         }
 
+        [Test]
+        public void StatBasedFrequenciesCannotBeNegative()
+        {
+            AddClassFeat(characterClass.ClassName, "feat1", frequencyQuantity: 1);
+            classFeatSelections[characterClass.ClassName][0].FrequencyQuantityStat = "stat";
+
+            stats["stat"] = new Stat();
+            stats["stat"].Value = 1;
+
+            var feats = classFeatsGenerator.GenerateWith(characterClass, race, stats, racialFeats, skills);
+            var onlyFeat = feats.Single();
+            Assert.That(onlyFeat.Frequency.Quantity, Is.EqualTo(0));
+        }
+
         [TestCase(1, 2)]
         [TestCase(2, 4)]
         [TestCase(3, 6)]

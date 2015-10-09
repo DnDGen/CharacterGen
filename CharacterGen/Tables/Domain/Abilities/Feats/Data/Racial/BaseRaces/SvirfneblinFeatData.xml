@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+    <object>
+        <name>Low-Light Vision</name>
+        <item>Low-Light Vision</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+      <item></item>
+      <item>0</item>
+    </object>
+  <object>
+    <name>Darkvision</name>
+    <item>Darkvision</item>
+    <item></item>
+    <item>0</item>
+    <item>120</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+    <object>
+      <name>Skill BonusListen</name>
+      <item>Skill Bonus</item>
+      <item></item>
+      <item>0</item>
+      <item>2</item>
+      <item>Listen</item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+    </object>
+  <object>
+    <name>Skill BonusHide</name>
+    <item>Skill Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>2</item>
+    <item>Hide</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+    <object>
+      <name>Attack BonusGoblin</name>
+      <item>Attack Bonus</item>
+      <item></item>
+      <item>0</item>
+      <item>1</item>
+      <item>Goblinoids</item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+    </object>
+  <object>
+    <name>Attack BonusKobold</name>
+    <item>Attack Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>1</item>
+    <item>Kobold</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+    <object>
+        <name>Save Bonus</name>
+        <item>Save Bonus</item>
+        <item></item>
+        <item>0</item>
+        <item>2</item>
+        <item>All</item>
+        <item>0</item>
+        <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+    </object>
+  <object>
+    <name>Weapon Familiarity</name>
+    <item>Weapon Familiarity</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Gnome hooked hammer</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Improved Spell</name>
+    <item>Improved Spell</item>
+    <item></item>
+    <item>0</item>
+    <item>1</item>
+    <item>Illusion</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Dodge Bonus</name>
+    <item>Dodge Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>4</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Spell-Like AbilityBlindness/deafness</name>
+    <item>Spell-Like Ability</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Blindness/deafness</item>
+    <item>1</item>
+    <item>Day</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Spell-Like AbilityBlur</name>
+    <item>Spell-Like Ability</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Blur</item>
+    <item>1</item>
+    <item>Day</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Spell-Like AbilityDisguise self</name>
+    <item>Spell-Like Ability</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Disguise self</item>
+    <item>1</item>
+    <item>Day</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Stonecunning</name>
+    <item>Stonecunning</item>
+    <item></item>
+    <item>0</item>
+    <item>2</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Spell-Like AbilityNondetection</name>
+    <item>Spell-Like Ability</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Nondetection</item>
+    <item>0</item>
+    <item>Constant</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Spell Resistance</name>
+    <item>Spell Resistance</item>
+    <item></item>
+    <item>0</item>
+    <item>11</item>
+    <item>also increase by class levels</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+</items>

@@ -21,19 +21,19 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial.Base
         {
             var names = new[]
             {
-                FeatConstants.SpellLikeAbility + SpellConstants.Daylight,
+                FeatConstants.Darkvision,
                 FeatConstants.SkillBonus + SkillConstants.Spot,
                 FeatConstants.SkillBonus + SkillConstants.Listen,
-                FeatConstants.Darkvision,
+                FeatConstants.SpellLikeAbility,
+                FeatConstants.Resistance + FeatConstants.Foci.Acid,
                 FeatConstants.Resistance + FeatConstants.Foci.Cold,
-                FeatConstants.Resistance + FeatConstants.Foci.Electricity,
-                FeatConstants.Resistance + FeatConstants.Foci.Acid
+                FeatConstants.Resistance + FeatConstants.Foci.Electricity
             };
 
             AssertCollectionNames(names);
         }
 
-        [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.Daylight,
+        [TestCase(FeatConstants.SpellLikeAbility,
             FeatConstants.SpellLikeAbility,
             SpellConstants.Daylight,
             1,

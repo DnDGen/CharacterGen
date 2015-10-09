@@ -129,8 +129,10 @@
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\MindFlayerFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\MinotaurFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\OgreFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\OgreMageFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\RockGnomeFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\GoblinFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\SvirfneblinFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\TroglodyteFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\WildElfFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\Metaraces\HalfCelestialFeatDataTests.cs" />

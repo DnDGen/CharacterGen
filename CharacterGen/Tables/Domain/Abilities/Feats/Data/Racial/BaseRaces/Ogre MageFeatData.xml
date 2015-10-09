@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+    <object>
+        <name>Spell-Like AbilityDarkness</name>
+        <item>Spell-Like Ability</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item>Darkness</item>
+        <item>0</item>
+        <item>At Will</item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+    </object>
+  <object>
+    <name>Spell-Like AbilityInvisibility</name>
+    <item>Spell-Like Ability</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Invisibility</item>
+    <item>0</item>
+    <item>At Will</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Spell-Like AbilityCharm person</name>
+    <item>Spell-Like Ability</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Charm person</item>
+    <item>1</item>
+    <item>Day</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Spell-Like AbilityCone of cold</name>
+    <item>Spell-Like Ability</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Cone of cold</item>
+    <item>1</item>
+    <item>Day</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Spell-Like AbilityGaseous form</name>
+    <item>Spell-Like Ability</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Gaseous form</item>
+    <item>1</item>
+    <item>Day</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Spell-Like AbilitySleep</name>
+    <item>Spell-Like Ability</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Sleep</item>
+    <item>1</item>
+    <item>Day</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Flight</name>
+    <item>Flight</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Change Shape</name>
+    <item>Change Shape</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Regeneration</name>
+    <item>Regeneration</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>5</item>
+    <item>Round</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+    <object>
+        <name>Spell Resistance</name>
+        <item>Spell Resistance</item>
+        <item></item>
+        <item>0</item>
+        <item>19</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+    </object>
+    <object>
+        <name>Natural Armor</name>
+        <item>Natural Armor</item>
+        <item></item>
+        <item>0</item>
+        <item>5</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+    </object>
+  <object>
+    <name>Save BonusFortitude</name>
+    <item>Save Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>4</item>
+    <item>Fortitude</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Save BonusReflex</name>
+    <item>Save Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>1</item>
+    <item>Reflex</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Save BonusWill</name>
+    <item>Save Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>1</item>
+    <item>Will</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Darkvision</name>
+    <item>Darkvision</item>
+    <item></item>
+    <item>0</item>
+    <item>60</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+</items>

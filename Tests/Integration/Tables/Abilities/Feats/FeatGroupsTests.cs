@@ -681,13 +681,11 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.AttackBonus + RaceConstants.BaseRaces.Kobold,
             FeatConstants.DodgeBonus,
             FeatConstants.SkillBonus + SkillConstants.Listen,
-            FeatConstants.SpellLikeAbility + SpellConstants.SpeakWithAnimals,
             FeatConstants.SpellLikeAbility + SpellConstants.BlindnessDeafness,
             FeatConstants.SpellLikeAbility + SpellConstants.Blur,
             FeatConstants.SpellLikeAbility + SpellConstants.DisguiseSelf,
             FeatConstants.Stonecunning,
             FeatConstants.SpellResistance,
-            FeatConstants.CastSpellBonus,
             FeatConstants.SpellLikeAbility + SpellConstants.Nondetection,
             FeatConstants.SkillBonus + SkillConstants.Hide)]
         [TestCase(RaceConstants.BaseRaces.TallfellowHalfling,

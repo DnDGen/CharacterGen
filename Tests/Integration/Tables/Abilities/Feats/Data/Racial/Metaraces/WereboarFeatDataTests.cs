@@ -1,5 +1,6 @@
 ﻿using CharacterGen.Common.Abilities.Feats;
 using CharacterGen.Common.Abilities.Skills;
+using CharacterGen.Common.Combats;
 using CharacterGen.Common.Races;
 using CharacterGen.Tables;
 using NUnit.Framework;
@@ -24,9 +25,9 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial.Meta
                 FeatConstants.Empathy,
                 FeatConstants.Lycanthropy,
                 FeatConstants.Ferocity,
-                FeatConstants.SaveBonus + "Reflex",
-                FeatConstants.SaveBonus + "Fortitude",
-                FeatConstants.SaveBonus + "Will",
+                FeatConstants.SaveBonus + SavingThrowConstants.Reflex,
+                FeatConstants.SaveBonus + SavingThrowConstants.Fortitude,
+                FeatConstants.SaveBonus + SavingThrowConstants.Will,
                 FeatConstants.SkillBonus + SkillConstants.Listen,
                 FeatConstants.SkillBonus + SkillConstants.Spot,
                 FeatConstants.NaturalArmor,
@@ -39,7 +40,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial.Meta
 
         [TestCase(FeatConstants.AlternateForm,
             FeatConstants.AlternateForm,
-            "Boar",
+            RaceConstants.BaseRaces.Animals.Boar,
             0,
             "",
             0,
@@ -48,7 +49,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial.Meta
             0, 0)]
         [TestCase(FeatConstants.Empathy,
             FeatConstants.Empathy,
-            "Boar",
+            RaceConstants.BaseRaces.Animals.Boar,
             0,
             "",
             0,
@@ -57,7 +58,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial.Meta
             0, 0)]
         [TestCase(FeatConstants.Lycanthropy,
             FeatConstants.Lycanthropy,
-            "Wereboar",
+            RaceConstants.Metaraces.Wereboar,
             0,
             "",
             0,
@@ -73,27 +74,27 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial.Meta
             "",
             0,
             0, 0)]
-        [TestCase(FeatConstants.SaveBonus + "Fortitude",
+        [TestCase(FeatConstants.SaveBonus + SavingThrowConstants.Fortitude,
             FeatConstants.SaveBonus,
-            "Fortitude",
+            SavingThrowConstants.Fortitude,
             0,
             "",
             0,
             "",
             3,
             0, 0)]
-        [TestCase(FeatConstants.SaveBonus + "Reflex",
+        [TestCase(FeatConstants.SaveBonus + SavingThrowConstants.Reflex,
             FeatConstants.SaveBonus,
-            "Reflex",
+            SavingThrowConstants.Reflex,
             0,
             "",
             0,
             "",
             3,
             0, 0)]
-        [TestCase(FeatConstants.SaveBonus + "Will",
+        [TestCase(FeatConstants.SaveBonus + SavingThrowConstants.Will,
             FeatConstants.SaveBonus,
-            "Will",
+            SavingThrowConstants.Will,
             0,
             "",
             0,
