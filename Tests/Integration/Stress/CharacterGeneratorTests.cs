@@ -2,6 +2,7 @@
 using CharacterGen.Common.Abilities.Stats;
 using CharacterGen.Common.Alignments;
 using CharacterGen.Common.CharacterClasses;
+using CharacterGen.Common.Races;
 using CharacterGen.Generators;
 using CharacterGen.Generators.Randomizers.CharacterClasses;
 using CharacterGen.Generators.Randomizers.Stats;
@@ -149,6 +150,29 @@ namespace CharacterGen.Tests.Integration.Stress
             Assert.That(character.Leadership.Score, Is.EqualTo(0));
             Assert.That(character.Leadership.Cohort, Is.Null);
             Assert.That(character.Leadership.Followers, Is.Empty);
+        }
+
+        [Test]
+        public void GenerateBetaCharacter()
+        {
+            var character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer, StatsRandomizer);
+            Print(character);
+        }
+
+        private void Print(Character character)
+        {
+            var output = String.Empty;
+
+            var gender = character.Race.Male ? "Male" : "Female";
+            output += String.Format("Level {0} {1}", character.Class.Level, gender);
+
+            if (character.Race.Metarace != RaceConstants.Metaraces.None)
+                output += " " + character.Race.Metarace;
+
+            output += String.Format(" {0} {1}", character.Race.BaseRace, character.Class.ClassName);
+
+            //still need o print rest of character and write to file
+            throw new NotImplementedException();
         }
     }
 }
