@@ -89,6 +89,7 @@
     <Compile Include="Abilities\Feats\Data\CharacterClasses\Domains\DeathFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\Domains\EarthFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\Domains\EvilFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\CharacterClasses\Domains\GoodFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\Domains\PlantFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\Domains\TravelFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\Domains\WarFeatDataTests.cs" />
@@ -98,6 +99,7 @@
     <Compile Include="Abilities\Feats\Data\CharacterClasses\Domains\DestructionFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\Classes\DruidFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\Schools\DivinationFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\CharacterClasses\Schools\EnchantmentFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\Schools\EvocationFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\Classes\FighterFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\Domains\FireFeatDataTests.cs" />

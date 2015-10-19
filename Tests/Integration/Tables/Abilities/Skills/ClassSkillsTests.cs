@@ -36,7 +36,9 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
                 RaceConstants.BaseRaces.Ogre,
                 RaceConstants.BaseRaces.Troglodyte,
                 RaceConstants.BaseRaces.Bugbear,
-                RaceConstants.BaseRaces.OgreMage
+                RaceConstants.BaseRaces.OgreMage,
+                RaceConstants.BaseRaces.Doppelganger,
+                RaceConstants.BaseRaces.MindFlayer
             };
 
             AssertCollectionNames(names);
@@ -190,6 +192,21 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
             SkillConstants.Spellcraft,
             SkillConstants.Concentration)]
         [TestCase(RaceConstants.BaseRaces.Bugbear,
+            SkillConstants.Climb,
+            SkillConstants.Hide,
+            SkillConstants.Listen,
+            SkillConstants.MoveSilently,
+            SkillConstants.Search,
+            SkillConstants.Spot)]
+        [TestCase(RaceConstants.BaseRaces.Doppelganger,
+            SkillConstants.Bluff,
+            SkillConstants.Diplomacy,
+            SkillConstants.Disguise,
+            SkillConstants.Intimidate,
+            SkillConstants.Listen,
+            SkillConstants.SenseMotive,
+            SkillConstants.Spot)]
+        [TestCase(RaceConstants.BaseRaces.MindFlayer,
             SkillConstants.Climb,
             SkillConstants.Hide,
             SkillConstants.Listen,
