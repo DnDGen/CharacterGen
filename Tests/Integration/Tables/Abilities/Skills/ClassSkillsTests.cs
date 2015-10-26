@@ -38,7 +38,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
                 RaceConstants.BaseRaces.Bugbear,
                 RaceConstants.BaseRaces.OgreMage,
                 RaceConstants.BaseRaces.Doppelganger,
-                RaceConstants.BaseRaces.MindFlayer
+                RaceConstants.BaseRaces.MindFlayer,
+                RaceConstants.BaseRaces.Minotaur
             };
 
             AssertCollectionNames(names);

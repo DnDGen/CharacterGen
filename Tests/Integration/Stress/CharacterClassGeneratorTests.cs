@@ -80,7 +80,7 @@ namespace CharacterGen.Tests.Integration.Stress
             var characterClass = Generate<CharacterClass>(GenerateClass,
                 c => c.SpecialistFields.Any());
 
-            Assert.That(characterClass.SpecialistFields, Is.Not.Empty);
+            Assert.That(characterClass.SpecialistFields, Is.Not.Empty, characterClass.ClassName);
         }
 
         [Test]
@@ -89,7 +89,7 @@ namespace CharacterGen.Tests.Integration.Stress
             var characterClass = Generate<CharacterClass>(GenerateClass,
                 c => c.SpecialistFields.Any() == false);
 
-            Assert.That(characterClass.SpecialistFields, Is.Empty);
+            Assert.That(characterClass.SpecialistFields, Is.Empty, characterClass.ClassName);
         }
 
         [Test]

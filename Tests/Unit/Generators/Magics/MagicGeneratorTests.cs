@@ -54,7 +54,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
             mockSpellsGenerator.Setup(g => g.GenerateFrom(characterClass, stats)).Returns(spells);
 
             var magic = magicGenerator.GenerateWith(alignment, characterClass, race, stats, feats, equipment);
-            Assert.That(magic.SpellQuantities, Is.EqualTo(spells));
+            Assert.That(magic.SpellsPerDay, Is.EqualTo(spells));
         }
 
         [Test]

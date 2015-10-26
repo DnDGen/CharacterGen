@@ -17,9 +17,10 @@ namespace CharacterGen.Tests.Integration.Tables.Magics.Spells.Wizards
             }
         }
 
+        [Test]
         public override void CollectionNames()
         {
-            var names = Enumerable.Range(0, 7).Cast<String>();
+            var names = Enumerable.Range(0, 5).Select(i => i.ToString());
             AssertCollectionNames(names);
         }
 

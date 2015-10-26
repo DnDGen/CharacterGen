@@ -1175,6 +1175,71 @@
   <ItemGroup>
     <EmbeddedResource Include="Magics\Spells\Wizards\Level18WizardSpellsPerDay.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Stats\StatGroups.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Rangers\Level10RangerSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Rangers\Level11RangerSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Rangers\Level12RangerSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Rangers\Level13RangerSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Rangers\Level14RangerSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Rangers\Level15RangerSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Rangers\Level16RangerSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Rangers\Level17RangerSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Rangers\Level18RangerSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Rangers\Level19RangerSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Rangers\Level1RangerSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Rangers\Level20RangerSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Rangers\Level2RangerSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Rangers\Level3RangerSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Rangers\Level4RangerSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Rangers\Level5RangerSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Rangers\Level6RangerSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Rangers\Level7RangerSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Rangers\Level8RangerSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Rangers\Level9RangerSpellsPerDay.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

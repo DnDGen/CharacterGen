@@ -25,7 +25,7 @@ namespace CharacterGen.Generators.Domain.Magics
         public Magic GenerateWith(Alignment alignment, CharacterClass characterClass, Race race, Dictionary<String, Stat> stats, IEnumerable<Feat> feats, Equipment equipment)
         {
             var magic = new Magic();
-            magic.SpellQuantities = spellsGenerator.GenerateFrom(characterClass, stats);
+            magic.SpellsPerDay = spellsGenerator.GenerateFrom(characterClass, stats);
             magic.Animal = animalGenerator.GenerateFrom(alignment, characterClass, race, feats);
 
             return magic;

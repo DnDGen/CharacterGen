@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<statPriorities>
+    <object>
+        <name>BardSpellcasters</name>
+        <item>Charisma</item>
+    </object>
+    <object>
+        <name>ClericSpellcasters</name>
+        <item>Wisdom</item>
+    </object>
+    <object>
+        <name>DruidSpellcasters</name>
+        <item>Wisdom</item>
+    </object>
+    <object>
+        <name>PaladinSpellcasters</name>
+      <item>Wisdom</item>
+    </object>
+    <object>
+        <name>RangerSpellcasters</name>
+        <item>Wisdom</item>
+    </object>
+    <object>
+        <name>SorcererSpellcasters</name>
+        <item>Charisma</item>
+    </object>
+    <object>
+        <name>WizardSpellcasters</name>
+        <item>Intelligence</item>
+    </object>
+</statPriorities>
