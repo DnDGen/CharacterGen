@@ -1114,64 +1114,66 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Magics\Spells\Wizards\Level1WizardSpellQuantities.xml" />
+    <EmbeddedResource Include="Magics\Spells\Wizards\Level1WizardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Magics\Spells\Wizards\Level20WizardSpellQuantities.xml" />
+    <EmbeddedResource Include="Magics\Spells\Wizards\Level20WizardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Magics\Spells\Wizards\Level19WizardSpellQuantities.xml" />
+    <EmbeddedResource Include="Magics\Spells\Wizards\Level19WizardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Magics\Spells\Wizards\Level2WizardSpellQuantities.xml" />
+    <EmbeddedResource Include="Magics\Spells\Wizards\Level2WizardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Magics\Spells\Wizards\Level3WizardSpellQuantities.xml" />
+    <EmbeddedResource Include="Magics\Spells\Wizards\Level3WizardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Magics\Spells\Wizards\Level4WizardSpellQuantities.xml" />
+    <EmbeddedResource Include="Magics\Spells\Wizards\Level4WizardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Magics\Spells\Wizards\Level5WizardSpellQuantities.xml" />
+    <EmbeddedResource Include="Magics\Spells\Wizards\Level5WizardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Magics\Spells\Wizards\Level6WizardSpellQuantities.xml" />
+    <EmbeddedResource Include="Magics\Spells\Wizards\Level6WizardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Magics\Spells\Wizards\Level7WizardSpellQuantities.xml" />
+    <EmbeddedResource Include="Magics\Spells\Wizards\Level7WizardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Magics\Spells\Wizards\Level8WizardSpellQuantities.xml" />
+    <EmbeddedResource Include="Magics\Spells\Wizards\Level8WizardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Magics\Spells\Wizards\Level9WizardSpellQuantities.xml" />
+    <EmbeddedResource Include="Magics\Spells\Wizards\Level9WizardSpellsPerDay.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Magics\Spells\Wizards\Level10WizardSpellQuantities.xml" />
+    <EmbeddedResource Include="Magics\Spells\Wizards\Level10WizardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Magics\Spells\Wizards\Level11WizardSpellQuantities.xml" />
+    <EmbeddedResource Include="Magics\Spells\Wizards\Level11WizardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Magics\Spells\Wizards\Level12WizardSpellQuantities.xml" />
+    <EmbeddedResource Include="Magics\Spells\Wizards\Level12WizardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Magics\Spells\Wizards\Level13WizardSpellQuantities.xml" />
+    <EmbeddedResource Include="Magics\Spells\Wizards\Level13WizardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Magics\Spells\Wizards\Level14WizardSpellQuantities.xml" />
+    <EmbeddedResource Include="Magics\Spells\Wizards\Level14WizardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Magics\Spells\Wizards\Level15WizardSpellQuantities.xml" />
+    <EmbeddedResource Include="Magics\Spells\Wizards\Level15WizardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Magics\Spells\Wizards\Level16WizardSpellQuantities.xml" />
+    <EmbeddedResource Include="Magics\Spells\Wizards\Level16WizardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Magics\Spells\Wizards\Level17WizardSpellQuantities.xml" />
+    <EmbeddedResource Include="Magics\Spells\Wizards\Level17WizardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Magics\Spells\Wizards\Level18WizardSpellQuantities.xml" />
+    <EmbeddedResource Include="Magics\Spells\Wizards\Level18WizardSpellsPerDay.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

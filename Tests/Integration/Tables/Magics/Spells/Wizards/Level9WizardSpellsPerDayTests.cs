@@ -7,13 +7,13 @@ using System.Linq;
 namespace CharacterGen.Tests.Integration.Tables.Magics.Spells.Wizards
 {
     [TestFixture]
-    public class Level14WizardSpellQuantitiesTests : AdjustmentsTests
+    public class Level9WizardSpellsPerDayTests : AdjustmentsTests
     {
         protected override String tableName
         {
             get
             {
-                return String.Format(TableNameConstants.Formattable.Adjustments.LevelXCLASSSpellQuantities, 14, CharacterClassConstants.Wizard);
+                return String.Format(TableNameConstants.Formattable.Adjustments.LevelXCLASSSpellsPerDay, 9, CharacterClassConstants.Wizard);
             }
         }
 
@@ -26,11 +26,9 @@ namespace CharacterGen.Tests.Integration.Tables.Magics.Spells.Wizards
         [TestCase(0, 4)]
         [TestCase(1, 4)]
         [TestCase(2, 4)]
-        [TestCase(3, 4)]
-        [TestCase(4, 4)]
-        [TestCase(5, 3)]
-        [TestCase(6, 3)]
-        [TestCase(7, 2)]
+        [TestCase(3, 3)]
+        [TestCase(4, 2)]
+        [TestCase(5, 1)]
         public void Adjustment(Int32 spellLevel, Int32 quantity)
         {
             base.Adjustment(spellLevel.ToString(), quantity);

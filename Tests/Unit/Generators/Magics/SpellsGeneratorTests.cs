@@ -45,7 +45,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Spellcasters)).Returns(spellcasters);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.StatGroups, characterClass.ClassName + GroupConstants.Spellcasters)).Returns(new[] { "stat" });
 
-            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.LevelXCLASSSpellQuantities, characterClass.Level, characterClass.ClassName);
+            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.LevelXCLASSSpellsPerDay, characterClass.Level, characterClass.ClassName);
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(spellQuantitiesForClass);
         }
 

@@ -33,7 +33,7 @@ namespace CharacterGen.Generators.Domain.Magics
             if (spellcasters.Contains(characterClass.ClassName) == false)
                 return spellQuantities;
 
-            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.LevelXCLASSSpellQuantities, characterClass.Level, characterClass.ClassName);
+            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.LevelXCLASSSpellsPerDay, characterClass.Level, characterClass.ClassName);
             var spellsForClass = adjustmentsSelector.SelectFrom(tableName);
 
             var spellStat = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.StatGroups, characterClass.ClassName + GroupConstants.Spellcasters).Single();
