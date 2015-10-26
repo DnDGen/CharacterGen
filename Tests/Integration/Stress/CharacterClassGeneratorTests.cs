@@ -98,7 +98,7 @@ namespace CharacterGen.Tests.Integration.Stress
             var characterClass = Generate<CharacterClass>(GenerateClass,
                 c => c.ProhibitedFields.Any());
 
-            Assert.That(characterClass.ProhibitedFields, Is.Not.Empty);
+            Assert.That(characterClass.ProhibitedFields, Is.Not.Empty, characterClass.ClassName);
         }
 
         [Test]
@@ -107,7 +107,7 @@ namespace CharacterGen.Tests.Integration.Stress
             var characterClass = Generate<CharacterClass>(GenerateClass,
                 c => c.ProhibitedFields.Any() == false);
 
-            Assert.That(characterClass.ProhibitedFields, Is.Empty);
+            Assert.That(characterClass.ProhibitedFields, Is.Empty, characterClass.ClassName);
         }
     }
 }

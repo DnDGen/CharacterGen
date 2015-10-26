@@ -66,6 +66,16 @@
         <item>Knowledge (The Planes)</item>
         <item>Spellcraft</item>
     </object>
+  <object>
+    <name>Doppelganger</name>
+    <item>Bluff</item>
+    <item>Diplomacy</item>
+    <item>Disguise</item>
+    <item>Intimidate</item>
+    <item>Listen</item>
+    <item>Sense Motive</item>
+    <item>Spot</item>
+  </object>
     <object>
         <name>Druid</name>
         <item>Concentration</item>
@@ -99,6 +109,24 @@
     <item>Balance</item>
     <item>Jump</item>
     <item>Swim</item>
+  </object>
+  <object>
+    <name>Mind Flayer</name>
+    <item>Bluff</item>
+    <item>Concentration</item>
+    <item>Hide</item>
+    <item>Intimidate</item>
+    <item>Listen</item>
+    <item>Move Silently</item>
+    <item>Spot</item>
+  </object>
+  <object>
+    <name>Minotaur</name>
+    <item>Intimidate</item>
+    <item>Jump</item>
+    <item>Listen</item>
+    <item>Search</item>
+    <item>Spot</item>
   </object>
     <object>
         <name>Monk</name>

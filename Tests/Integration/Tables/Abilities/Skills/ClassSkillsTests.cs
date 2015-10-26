@@ -172,25 +172,6 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
             SkillConstants.KnowledgeReligion,
             SkillConstants.KnowledgeThePlanes,
             SkillConstants.Spellcraft)]
-        [TestCase(RaceConstants.BaseRaces.Lizardfolk,
-            SkillConstants.Balance,
-            SkillConstants.Jump,
-            SkillConstants.Swim)]
-        [TestCase(RaceConstants.BaseRaces.Ogre,
-            SkillConstants.Climb,
-            SkillConstants.Listen,
-            SkillConstants.Spot)]
-        [TestCase(RaceConstants.BaseRaces.Gnoll,
-            SkillConstants.Listen,
-            SkillConstants.Spot)]
-        [TestCase(RaceConstants.BaseRaces.Troglodyte,
-            SkillConstants.Listen,
-            SkillConstants.Hide)]
-        [TestCase(RaceConstants.BaseRaces.OgreMage,
-            SkillConstants.Listen,
-            SkillConstants.Spot,
-            SkillConstants.Spellcraft,
-            SkillConstants.Concentration)]
         [TestCase(RaceConstants.BaseRaces.Bugbear,
             SkillConstants.Climb,
             SkillConstants.Hide,
@@ -206,13 +187,39 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
             SkillConstants.Listen,
             SkillConstants.SenseMotive,
             SkillConstants.Spot)]
+        [TestCase(RaceConstants.BaseRaces.Gnoll,
+            SkillConstants.Listen,
+            SkillConstants.Spot)]
+        [TestCase(RaceConstants.BaseRaces.Lizardfolk,
+            SkillConstants.Balance,
+            SkillConstants.Jump,
+            SkillConstants.Swim)]
         [TestCase(RaceConstants.BaseRaces.MindFlayer,
-            SkillConstants.Climb,
+            SkillConstants.Bluff,
+            SkillConstants.Concentration,
             SkillConstants.Hide,
+            SkillConstants.Intimidate,
             SkillConstants.Listen,
             SkillConstants.MoveSilently,
+            SkillConstants.Spot)]
+        [TestCase(RaceConstants.BaseRaces.Minotaur,
+            SkillConstants.Intimidate,
+            SkillConstants.Jump,
+            SkillConstants.Listen,
             SkillConstants.Search,
             SkillConstants.Spot)]
+        [TestCase(RaceConstants.BaseRaces.Ogre,
+            SkillConstants.Climb,
+            SkillConstants.Listen,
+            SkillConstants.Spot)]
+        [TestCase(RaceConstants.BaseRaces.OgreMage,
+            SkillConstants.Listen,
+            SkillConstants.Spot,
+            SkillConstants.Spellcraft,
+            SkillConstants.Concentration)]
+        [TestCase(RaceConstants.BaseRaces.Troglodyte,
+            SkillConstants.Listen,
+            SkillConstants.Hide)]
         public override void DistinctCollection(String name, params String[] collection)
         {
             base.DistinctCollection(name, collection);

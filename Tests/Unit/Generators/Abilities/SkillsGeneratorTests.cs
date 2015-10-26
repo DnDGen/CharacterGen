@@ -742,17 +742,52 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
             Assert.That(skills["skill 5"].Ranks, Is.EqualTo(0));
         }
 
-        [TestCase(1, 4)]
-        [TestCase(2, 5)]
-        [TestCase(3, 6)]
-        [TestCase(4, 7)]
-        [TestCase(5, 8)]
-        [TestCase(6, 9)]
-        [TestCase(7, 10)]
-        [TestCase(8, 11)]
-        [TestCase(9, 12)]
-        [TestCase(10, 13)]
+        [TestCase(1, 8)]
+        [TestCase(2, 10)]
+        [TestCase(3, 12)]
+        [TestCase(4, 14)]
+        [TestCase(5, 16)]
+        [TestCase(6, 18)]
+        [TestCase(7, 20)]
+        [TestCase(8, 22)]
+        [TestCase(9, 24)]
+        [TestCase(10, 26)]
         public void MonstersGetMoreSkillPointsByMonsterHitDice(Int32 hitDie, Int32 totalRanks)
+        {
+            race.BaseRace = "baserace";
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
+                .Returns(new[] { "baserace", "otherbaserace" });
+
+            characterClass.Level = 20;
+            skillPoints[characterClass.ClassName] = 0;
+            intelligence.Value = 10;
+
+            var monsterClassSkills = new List<String>();
+            monsterClassSkills.Add("skill 1");
+            monsterClassSkills.Add("skill 2");
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassSkills, race.BaseRace)).Returns(monsterClassSkills);
+
+            var monsterHitDice = new Dictionary<String, Int32>();
+            monsterHitDice["monster"] = 1234;
+            monsterHitDice[race.BaseRace] = hitDie;
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice)).Returns(monsterHitDice);
+
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
+            Assert.That(skills["skill 1"].Ranks, Is.EqualTo(totalRanks));
+            Assert.That(skills["skill 2"].Ranks, Is.EqualTo(0));
+        }
+
+        [TestCase(1, 12)]
+        [TestCase(2, 15)]
+        [TestCase(3, 18)]
+        [TestCase(4, 21)]
+        [TestCase(5, 24)]
+        [TestCase(6, 27)]
+        [TestCase(7, 30)]
+        [TestCase(8, 33)]
+        [TestCase(9, 36)]
+        [TestCase(10, 39)]
+        public void MonstersApplyIntelligenceBonusToMonsterSkillPoints(Int32 hitDie, Int32 totalRanks)
         {
             race.BaseRace = "baserace";
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
@@ -777,8 +812,17 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
             Assert.That(skills["skill 2"].Ranks, Is.EqualTo(0));
         }
 
-        [Test]
-        public void MonstersDoNotCareAboutIntelligenceBonusForMonsterSkillBonuses()
+        [TestCase(1, 4)]
+        [TestCase(2, 5)]
+        [TestCase(3, 6)]
+        [TestCase(4, 7)]
+        [TestCase(5, 8)]
+        [TestCase(6, 9)]
+        [TestCase(7, 10)]
+        [TestCase(8, 11)]
+        [TestCase(9, 12)]
+        [TestCase(10, 13)]
+        public void MonstersCannotHaveFewerThan1SkillPointPerMonsterHitDie(Int32 hitDie, Int32 totalRanks)
         {
             race.BaseRace = "baserace";
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
@@ -795,11 +839,11 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
 
             var monsterHitDice = new Dictionary<String, Int32>();
             monsterHitDice["monster"] = 1234;
-            monsterHitDice[race.BaseRace] = 3;
+            monsterHitDice[race.BaseRace] = hitDie;
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice)).Returns(monsterHitDice);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
-            Assert.That(skills["skill 1"].Ranks, Is.EqualTo(6));
+            Assert.That(skills["skill 1"].Ranks, Is.EqualTo(totalRanks));
             Assert.That(skills["skill 2"].Ranks, Is.EqualTo(0));
         }
 

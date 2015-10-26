@@ -12,7 +12,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
     {
         protected override String tableName
         {
-            get { return String.Format(TableNameConstants.Formattable.Collection.CLASSFeatData, CharacterClassConstants.Schools.Evocation); }
+            get { return String.Format(TableNameConstants.Formattable.Collection.CLASSFeatData, CharacterClassConstants.Schools.Enchantment); }
         }
 
         [Test]

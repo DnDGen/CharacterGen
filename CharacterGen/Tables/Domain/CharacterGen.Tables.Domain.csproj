@@ -1113,6 +1113,66 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Wizards\Level1WizardSpellQuantities.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Wizards\Level20WizardSpellQuantities.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Wizards\Level19WizardSpellQuantities.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Wizards\Level2WizardSpellQuantities.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Wizards\Level3WizardSpellQuantities.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Wizards\Level4WizardSpellQuantities.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Wizards\Level5WizardSpellQuantities.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Wizards\Level6WizardSpellQuantities.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Wizards\Level7WizardSpellQuantities.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Wizards\Level8WizardSpellQuantities.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Wizards\Level9WizardSpellQuantities.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Wizards\Level10WizardSpellQuantities.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Wizards\Level11WizardSpellQuantities.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Wizards\Level12WizardSpellQuantities.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Wizards\Level13WizardSpellQuantities.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Wizards\Level14WizardSpellQuantities.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Wizards\Level15WizardSpellQuantities.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Wizards\Level16WizardSpellQuantities.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Wizards\Level17WizardSpellQuantities.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Wizards\Level18WizardSpellQuantities.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

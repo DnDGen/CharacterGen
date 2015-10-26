@@ -72,8 +72,10 @@ namespace CharacterGen.Generators.Domain.Abilities
             }
 
             var monsterHitDice = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice);
+            var intelligenceSkillBonus = Math.Max(1, 2 + stats[StatConstants.Intelligence].Bonus);
+            var points = (monsterHitDice[race.BaseRace] + 3) * intelligenceSkillBonus;
 
-            for (var points = monsterHitDice[race.BaseRace] + 3; points > 0; points--)
+            while (points-- > 0)
             {
                 var skill = collectionsSelector.SelectRandomFrom(monsterSkills);
                 skills[skill].Ranks++;

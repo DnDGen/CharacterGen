@@ -1,14 +1,12 @@
 ﻿using CharacterGen.Common;
 using CharacterGen.Common.Abilities.Stats;
 using CharacterGen.Common.Alignments;
-using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Generators;
 using CharacterGen.Generators.Randomizers.CharacterClasses;
 using CharacterGen.Generators.Randomizers.Stats;
 using Ninject;
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
 using TreasureGen.Common.Items;
 
 namespace CharacterGen.Tests.Integration.Stress
@@ -22,26 +20,6 @@ namespace CharacterGen.Tests.Integration.Stress
         public IStatsRandomizer StatsRandomizer { get; set; }
         [Inject]
         public ISetLevelRandomizer SetLevelRandomizer { get; set; }
-
-        IEnumerable<String> classNames;
-
-        [SetUp]
-        public void Setup()
-        {
-            classNames = new[] {
-                CharacterClassConstants.Barbarian,
-                CharacterClassConstants.Bard,
-                CharacterClassConstants.Cleric,
-                CharacterClassConstants.Druid,
-                CharacterClassConstants.Fighter,
-                CharacterClassConstants.Monk,
-                CharacterClassConstants.Paladin,
-                CharacterClassConstants.Ranger,
-                CharacterClassConstants.Rogue,
-                CharacterClassConstants.Sorcerer,
-                CharacterClassConstants.Wizard
-            };
-        }
 
         [TestCase("CharacterGenerator")]
         public override void Stress(String stressSubject)
@@ -61,11 +39,23 @@ namespace CharacterGen.Tests.Integration.Stress
                 .Or.EqualTo(AlignmentConstants.Neutral)
                 .Or.EqualTo(AlignmentConstants.Chaotic));
 
-            Assert.That(classNames, Contains.Item(character.Class.ClassName));
+            Assert.That(character.Class.ClassName, Is.Not.Empty);
             Assert.That(character.Class.Level, Is.Positive);
+            Assert.That(character.Class.ProhibitedFields, Is.Not.Null);
+            Assert.That(character.Class.SpecialistFields, Is.Not.Null);
+
             Assert.That(character.InterestingTrait, Is.Not.Null);
+
             Assert.That(character.Race.BaseRace, Is.Not.Empty);
-            Assert.That(character.Race.Metarace, Is.Not.Empty);
+            Assert.That(character.Race.Metarace, Is.Not.Null);
+            Assert.That(character.Race.AerialSpeed, Is.Not.Negative);
+
+            if (character.Race.HasWings)
+                Assert.That(character.Race.AerialSpeed, Is.Positive);
+
+            Assert.That(character.Race.LandSpeed, Is.Positive);
+            Assert.That(character.Race.MetaraceSpecies, Is.Not.Null);
+            Assert.That(character.Race.Size, Is.Not.Empty);
 
             Assert.That(character.Ability.Stats.Count, Is.EqualTo(6));
             Assert.That(character.Ability.Stats.Keys, Contains.Item(StatConstants.Charisma));
@@ -149,6 +139,13 @@ namespace CharacterGen.Tests.Integration.Stress
             Assert.That(character.Leadership.Score, Is.EqualTo(0));
             Assert.That(character.Leadership.Cohort, Is.Null);
             Assert.That(character.Leadership.Followers, Is.Empty);
+        }
+
+        [Test]
+        public void GenerateBetaCharacter()
+        {
+            var character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer, StatsRandomizer);
+            Assert.That(character, Is.Not.Null);
         }
     }
 }
