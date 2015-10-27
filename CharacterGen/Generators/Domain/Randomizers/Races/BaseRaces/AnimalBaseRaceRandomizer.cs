@@ -1,7 +1,6 @@
 ﻿using CharacterGen.Common.Alignments;
 using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Generators.Randomizers.Races;
-using CharacterGen.Generators.Verifiers.Exceptions;
 using CharacterGen.Selectors;
 using CharacterGen.Tables;
 using System;
@@ -37,7 +36,7 @@ namespace CharacterGen.Generators.Domain.Randomizers.Races.BaseRaces
             var animals = GetAllPossible(alignment, characterClass);
 
             if (animals.Any() == false)
-                throw new IncompatibleRandomizersException();
+                return String.Empty;
 
             return collectionsSelector.SelectRandomFrom(animals);
         }

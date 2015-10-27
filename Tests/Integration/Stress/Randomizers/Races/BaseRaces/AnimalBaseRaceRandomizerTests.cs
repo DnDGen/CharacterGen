@@ -114,7 +114,8 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
                     RaceConstants.BaseRaces.Animals.WaterMephit,
                     RaceConstants.BaseRaces.Animals.Weasel,
                     RaceConstants.BaseRaces.Animals.Wolf,
-                    RaceConstants.BaseRaces.Animals.Wolverine
+                    RaceConstants.BaseRaces.Animals.Wolverine,
+                    String.Empty
                 };
             }
         }

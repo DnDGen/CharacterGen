@@ -1,0 +1,225 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+    <object>
+        <name>Skill BonusAppraise</name>
+        <item>Skill Bonus</item>
+        <item></item>
+        <item>0</item>
+        <item>2</item>
+        <item>Appraise (Stone or metal items)</item>
+        <item>0</item>
+        <item></item>
+      <item>0</item>
+    <item></item>
+    <item>0</item>
+    </object>
+  <object>
+    <name>Skill BonusMove Silently</name>
+    <item>Skill Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>4</item>
+    <item>Move Silently</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Skill BonusListen</name>
+    <item>Skill Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>1</item>
+    <item>Listen</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Skill BonusSpot</name>
+    <item>Skill Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>1</item>
+    <item>Spot</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+    <object>
+        <name>Attack BonusGoblin</name>
+        <item>Attack Bonus</item>
+        <item></item>
+        <item>0</item>
+        <item>1</item>
+        <item>Goblinoids</item>
+        <item>0</item>
+        <item></item>
+      <item>0</item>
+    <item></item>
+    <item>0</item>
+    </object>
+    <object>
+        <name>Attack BonusOrc</name>
+        <item>Attack Bonus</item>
+        <item></item>
+        <item>0</item>
+        <item>1</item>
+        <item>Orcs</item>
+        <item>0</item>
+        <item></item>
+      <item>0</item>
+    <item></item>
+    <item>0</item>
+    </object>
+    <object>
+        <name>Save BonusSpell</name>
+        <item>Save Bonus</item>
+        <item></item>
+        <item>0</item>
+        <item>2</item>
+        <item>Spells and spell-like effects</item>
+        <item>0</item>
+        <item></item>
+      <item>0</item>
+    <item></item>
+    <item>0</item>
+    </object>
+    <object>
+        <name>Immune to EffectPoison</name>
+        <item>Immune to Effect</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item>Poison</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+    <item></item>
+    <item>0</item>
+    </object>
+  <object>
+    <name>Immune to EffectPhantasms</name>
+    <item>Immune to Effect</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Phantasms</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Immune to EffectParalysis</name>
+    <item>Immune to Effect</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Paralysis</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+    <object>
+        <name>Dodge Bonus</name>
+        <item>Dodge Bonus</item>
+        <item></item>
+        <item>0</item>
+        <item>4</item>
+        <item>Giants</item>
+        <item>0</item>
+        <item></item>
+      <item>0</item>
+    <item></item>
+    <item>0</item>
+    </object>
+    <object>
+        <name>Stability</name>
+        <item>Stability</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+      <item>0</item>
+    <item></item>
+    <item>0</item>
+    </object>
+    <object>
+        <name>Light Sensitivity</name>
+        <item>Light Sensitivity</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+      <item>0</item>
+    <item></item>
+    <item>0</item>
+    </object>
+    <object>
+        <name>Spell-Like AbilityEnlarge person</name>
+        <item>Spell-Like Ability</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item>Enlarge person</item>
+        <item>1</item>
+        <item>Day</item>
+      <item>0</item>
+    <item></item>
+    <item>0</item>
+    </object>
+  <object>
+    <name>Spell-Like AbilityInvisibility</name>
+    <item>Spell-Like Ability</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Invisibility</item>
+    <item>1</item>
+    <item>Day</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+    <object>
+        <name>Stonecunning</name>
+        <item>Stonecunning</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+    <item></item>
+    <item>0</item>
+    </object>
+    <object>
+        <name>Darkvision</name>
+        <item>Darkvision</item>
+        <item></item>
+        <item>0</item>
+        <item>120</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+      <item>0</item>
+    <item></item>
+    <item>0</item>
+    </object>
+</items>

@@ -83,9 +83,6 @@ namespace CharacterGen.Tests.Integration.Stress
 
             Assert.That(character.Combat.BaseAttack.Bonus, Is.Not.Negative);
             Assert.That(character.Combat.HitPoints, Is.AtLeast(character.Class.Level));
-            Assert.That(character.Combat.SavingThrows.Reflex, Is.Not.Negative);
-            Assert.That(character.Combat.SavingThrows.Fortitude, Is.Not.Negative);
-            Assert.That(character.Combat.SavingThrows.Will, Is.Not.Negative);
             Assert.That(character.Combat.ArmorClass.Full, Is.Positive);
             Assert.That(character.Combat.ArmorClass.FlatFooted, Is.Positive);
             Assert.That(character.Combat.ArmorClass.Touch, Is.Positive);

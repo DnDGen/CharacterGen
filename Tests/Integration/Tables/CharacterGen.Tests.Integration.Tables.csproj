@@ -125,6 +125,7 @@
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\DeepHalflingFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\DoppelgangerFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\DrowFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\DuergarDwarfFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\ForestGnomeFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\GnollFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\GrayElfFeatDataTests.cs" />
@@ -241,6 +242,26 @@
     <Compile Include="CharacterClasses\HasSpecialistFields\RogueHasSpecialistFieldsTests.cs" />
     <Compile Include="CharacterClasses\HasSpecialistFields\SorcererHasSpecialistFieldsTests.cs" />
     <Compile Include="CharacterClasses\HasSpecialistFields\WizardHasSpecialistFieldsTests.cs" />
+    <Compile Include="Magics\Spells\Clerics\Level10ClericSpellsPerDayTests.cs" />
+    <Compile Include="Magics\Spells\Clerics\Level11ClericSpellsPerDayTests.cs" />
+    <Compile Include="Magics\Spells\Clerics\Level12ClericSpellsPerDayTests.cs" />
+    <Compile Include="Magics\Spells\Clerics\Level13ClericSpellsPerDayTests.cs" />
+    <Compile Include="Magics\Spells\Clerics\Level14ClericSpellsPerDayTests.cs" />
+    <Compile Include="Magics\Spells\Clerics\Level15ClericSpellsPerDayTests.cs" />
+    <Compile Include="Magics\Spells\Clerics\Level16ClericSpellsPerDayTests.cs" />
+    <Compile Include="Magics\Spells\Clerics\Level17ClericSpellsPerDayTests.cs" />
+    <Compile Include="Magics\Spells\Clerics\Level18ClericSpellsPerDayTests.cs" />
+    <Compile Include="Magics\Spells\Clerics\Level19ClericSpellsPerDayTests.cs" />
+    <Compile Include="Magics\Spells\Clerics\Level1ClericSpellsPerDayTests.cs" />
+    <Compile Include="Magics\Spells\Clerics\Level20ClericSpellsPerDayTests.cs" />
+    <Compile Include="Magics\Spells\Clerics\Level2ClericSpellsPerDayTests.cs" />
+    <Compile Include="Magics\Spells\Clerics\Level3ClericSpellsPerDayTests.cs" />
+    <Compile Include="Magics\Spells\Clerics\Level4ClericSpellsPerDayTests.cs" />
+    <Compile Include="Magics\Spells\Clerics\Level5ClericSpellsPerDayTests.cs" />
+    <Compile Include="Magics\Spells\Clerics\Level6ClericSpellsPerDayTests.cs" />
+    <Compile Include="Magics\Spells\Clerics\Level7ClericSpellsPerDayTests.cs" />
+    <Compile Include="Magics\Spells\Clerics\Level8ClericSpellsPerDayTests.cs" />
+    <Compile Include="Magics\Spells\Clerics\Level9ClericSpellsPerDayTests.cs" />
     <Compile Include="Magics\Spells\Rangers\Level10RangerSpellsPerDayTests.cs" />
     <Compile Include="Magics\Spells\Rangers\Level11RangerSpellsPerDayTests.cs" />
     <Compile Include="Magics\Spells\Rangers\Level12RangerSpellsPerDayTests.cs" />
@@ -475,7 +496,12 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Magics\Spells\Bards\" />
+    <Folder Include="Magics\Spells\Druids\" />
+    <Folder Include="Magics\Spells\Paladins\" />
+    <Folder Include="Magics\Spells\Sorcerers\" />
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
