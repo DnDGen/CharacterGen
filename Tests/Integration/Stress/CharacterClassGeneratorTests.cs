@@ -30,6 +30,13 @@ namespace CharacterGen.Tests.Integration.Stress
             return CharacterClassGenerator.GenerateWith(alignment, LevelRandomizer, ClassNameRandomizer);
         }
 
+        [TearDown]
+        public void TearDown()
+        {
+            AlignmentRandomizer = GetNewInstanceOf<IAlignmentRandomizer>(AlignmentRandomizerTypeConstants.Any);
+            ClassNameRandomizer = GetNewInstanceOf<IClassNameRandomizer>(ClassNameRandomizerTypeConstants.Any);
+        }
+
         [Test]
         public void PaladinHappens()
         {

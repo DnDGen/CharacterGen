@@ -31,15 +31,16 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
                 CharacterClassConstants.Rogue,
                 CharacterClassConstants.Sorcerer,
                 CharacterClassConstants.Wizard,
-                RaceConstants.BaseRaces.Lizardfolk,
-                RaceConstants.BaseRaces.Gnoll,
-                RaceConstants.BaseRaces.Ogre,
-                RaceConstants.BaseRaces.Troglodyte,
                 RaceConstants.BaseRaces.Bugbear,
-                RaceConstants.BaseRaces.OgreMage,
+                RaceConstants.BaseRaces.Derro,
                 RaceConstants.BaseRaces.Doppelganger,
+                RaceConstants.BaseRaces.Gnoll,
+                RaceConstants.BaseRaces.Lizardfolk,
+                RaceConstants.BaseRaces.Ogre,
+                RaceConstants.BaseRaces.OgreMage,
                 RaceConstants.BaseRaces.MindFlayer,
-                RaceConstants.BaseRaces.Minotaur
+                RaceConstants.BaseRaces.Minotaur,
+                RaceConstants.BaseRaces.Troglodyte
             };
 
             AssertCollectionNames(names);
@@ -180,6 +181,11 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
             SkillConstants.MoveSilently,
             SkillConstants.Search,
             SkillConstants.Spot)]
+        [TestCase(RaceConstants.BaseRaces.Derro,
+            SkillConstants.Bluff,
+            SkillConstants.Hide,
+            SkillConstants.Listen,
+            SkillConstants.MoveSilently)]
         [TestCase(RaceConstants.BaseRaces.Doppelganger,
             SkillConstants.Bluff,
             SkillConstants.Diplomacy,

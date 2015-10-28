@@ -67,6 +67,13 @@
         <item>Spellcraft</item>
     </object>
   <object>
+    <name>Derro</name>
+    <item>Bluff</item>
+    <item>Hide</item>
+    <item>Listen</item>
+    <item>Move Silently</item>
+  </object>
+  <object>
     <name>Doppelganger</name>
     <item>Bluff</item>
     <item>Diplomacy</item>

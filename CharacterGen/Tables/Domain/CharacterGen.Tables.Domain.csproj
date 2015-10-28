@@ -1305,6 +1305,263 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Feats\Data\Racial\Metaraces\WerebearFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Feats\Requirements\Stats\Spell MasteryStatRequirements.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Feats\Data\Racial\BaseRaces\DerroFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Bards\Level10BardSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Bards\Level11BardSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Bards\Level12BardSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Bards\Level13BardSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Bards\Level14BardSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Bards\Level15BardSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Bards\Level16BardSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Bards\Level17BardSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Bards\Level18BardSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Bards\Level19BardSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Bards\Level1BardSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Bards\Level20BardSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Bards\Level2BardSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Bards\Level3BardSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Bards\Level4BardSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Bards\Level5BardSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Bards\Level6BardSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Bards\Level7BardSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Bards\Level8BardSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Bards\Level9BardSpellsPerDay.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Druids\Level10DruidSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Druids\Level11DruidSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Druids\Level12DruidSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Druids\Level13DruidSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Druids\Level14DruidSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Druids\Level15DruidSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Druids\Level16DruidSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Druids\Level17DruidSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Druids\Level18DruidSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Druids\Level19DruidSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Druids\Level1DruidSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Druids\Level20DruidSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Druids\Level2DruidSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Druids\Level3DruidSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Druids\Level4DruidSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Druids\Level5DruidSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Druids\Level6DruidSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Druids\Level7DruidSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Druids\Level8DruidSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Druids\Level9DruidSpellsPerDay.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Paladins\Level10PaladinSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Paladins\Level11PaladinSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Paladins\Level12PaladinSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Paladins\Level13PaladinSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Paladins\Level14PaladinSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Paladins\Level15PaladinSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Paladins\Level16PaladinSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Paladins\Level17PaladinSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Paladins\Level18PaladinSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Paladins\Level19PaladinSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Paladins\Level1PaladinSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Paladins\Level20PaladinSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Paladins\Level2PaladinSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Paladins\Level3PaladinSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Paladins\Level4PaladinSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Paladins\Level5PaladinSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Paladins\Level6PaladinSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Paladins\Level7PaladinSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Paladins\Level8PaladinSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Paladins\Level9PaladinSpellsPerDay.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Sorcerers\Level10SorcererSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Sorcerers\Level11SorcererSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Sorcerers\Level12SorcererSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Sorcerers\Level13SorcererSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Sorcerers\Level14SorcererSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Sorcerers\Level15SorcererSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Sorcerers\Level16SorcererSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Sorcerers\Level17SorcererSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Sorcerers\Level18SorcererSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Sorcerers\Level19SorcererSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Sorcerers\Level1SorcererSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Sorcerers\Level20SorcererSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Sorcerers\Level2SorcererSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Sorcerers\Level3SorcererSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Sorcerers\Level4SorcererSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Sorcerers\Level5SorcererSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Sorcerers\Level6SorcererSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Sorcerers\Level7SorcererSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Sorcerers\Level8SorcererSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Sorcerers\Level9SorcererSpellsPerDay.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -176,6 +176,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.NaturalSpell,
             FeatConstants.RapidShot,
             FeatConstants.SnatchArrows,
+            FeatConstants.SpellMastery,
             FeatConstants.SpringAttack,
             FeatConstants.StunningFist,
             FeatConstants.ShotOnTheRun,

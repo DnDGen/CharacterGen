@@ -2,7 +2,6 @@
 using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Generators.Domain.Randomizers.Races.BaseRaces;
 using CharacterGen.Generators.Randomizers.Races;
-using CharacterGen.Generators.Verifiers.Exceptions;
 using CharacterGen.Selectors;
 using CharacterGen.Tables;
 using Moq;
@@ -85,29 +84,32 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         }
 
         [Test]
-        public void ThrowExceptionIfClassHasNoAnimals()
+        public void NoAnimalIfClassHasNoAnimals()
         {
             classAnimals.Clear();
             classAnimals.Add("class animal");
 
-            Assert.That(() => animalBaseRaceRandomizer.Randomize(alignment, characterClass), Throws.InstanceOf<IncompatibleRandomizersException>());
+            var animal = animalBaseRaceRandomizer.Randomize(alignment, characterClass);
+            Assert.That(animal, Is.Empty);
         }
 
         [Test]
-        public void ThrowExceptionIfAlignmentHasNoAnimals()
+        public void NoAnimalIfAlignmentHasNoAnimals()
         {
             alignmentAnimals.Clear();
             alignmentAnimals.Add("alignment animal");
 
-            Assert.That(() => animalBaseRaceRandomizer.Randomize(alignment, characterClass), Throws.InstanceOf<IncompatibleRandomizersException>());
+            var animal = animalBaseRaceRandomizer.Randomize(alignment, characterClass);
+            Assert.That(animal, Is.Empty);
         }
 
         [Test]
-        public void ThrowExceptionIfLevelAdjustmentsPreventAnimal()
+        public void NoAnimalIfLevelAdjustmentsPreventAllAnimals()
         {
             animalLevelAdjustments["animal"] = 90210;
 
-            Assert.That(() => animalBaseRaceRandomizer.Randomize(alignment, characterClass), Throws.InstanceOf<IncompatibleRandomizersException>());
+            var animal = animalBaseRaceRandomizer.Randomize(alignment, characterClass);
+            Assert.That(animal, Is.Empty);
         }
 
         [Test]
