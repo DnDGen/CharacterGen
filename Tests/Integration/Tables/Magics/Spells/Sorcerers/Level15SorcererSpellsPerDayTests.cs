@@ -20,7 +20,7 @@ namespace CharacterGen.Tests.Integration.Tables.Magics.Spells.Sorcerers
         [Test]
         public override void CollectionNames()
         {
-            var names = Enumerable.Range(0, 9).Select(i => i.ToString());
+            var names = Enumerable.Range(0, 8).Select(i => i.ToString());
             AssertCollectionNames(names);
         }
 
