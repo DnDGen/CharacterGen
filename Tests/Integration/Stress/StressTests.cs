@@ -46,7 +46,7 @@ namespace CharacterGen.Tests.Integration.Stress
         private const Int32 ConfidentIterations = 1000000;
         private const Int32 OneMinuteInSeconds = 60;
 #if STRESS
-        private const Int32 TimeLimitInSeconds = OneMinuteInSeconds * 15;
+        private const Int32 TimeLimitInSeconds = OneMinuteInSeconds * 5;
 #else
         private const Int32 TimeLimitInSeconds = 1;
 #endif
