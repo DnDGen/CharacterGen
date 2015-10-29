@@ -79,10 +79,11 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         }
 
         [Test]
-        public void ThrowExceptionIfNoWeaponsAreAllowed()
+        public void ReturnNullIfNoWeaponsAreAllowed()
         {
             allProficientWeapons.Clear();
-            Assert.That(() => weaponGenerator.GenerateFrom(feats, characterClass, race), Throws.Exception);
+            var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
+            Assert.That(weapon, Is.Null);
         }
 
         [Test]
@@ -189,6 +190,32 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         }
 
         [Test]
+        public void PreferAnyMundaneAmmunitionsForMundaneWeaponsPickedAsFocusForNonProficiencyFeats()
+        {
+            var mundaneWeapon = CreateWeapon("mundane weapon");
+            var otherMundaneWeapon = CreateWeapon("other mundane weapon");
+            var otherAmmunition = CreateWeapon("other ammunition");
+            var wrongMundaneWeapon = CreateWeapon("wrong mundane weapon");
+            mockPercentileSelector.Setup(s => s.SelectFrom("Level9266Power")).Returns(PowerConstants.Mundane);
+            mockMundaneWeaponGenerator.SetupSequence(g => g.Generate())
+                .Returns(wrongMundaneWeapon).Returns(otherAmmunition).Returns(otherMundaneWeapon).Returns(mundaneWeapon);
+
+            feats.Add(new Feat { Name = "feat2", Focus = wrongMundaneWeapon.Name });
+            feats.Add(new Feat { Name = "feat3", Focus = mundaneWeapon.Name });
+            feats.Add(new Feat { Name = "feat3", Focus = otherMundaneWeapon.Name });
+            feats.Add(new Feat { Name = "feat4", Focus = mundaneWeapon.Name });
+            proficiencyFeats.Add(feats[1].Name);
+
+            allProficientWeapons.Remove(otherAmmunition.Name);
+
+            var baseWeaponTypes = new[] { otherMundaneWeapon.Name, otherAmmunition.Name };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, otherMundaneWeapon.Name)).Returns(baseWeaponTypes);
+
+            var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
+            Assert.That(weapon, Is.EqualTo(otherAmmunition));
+        }
+
+        [Test]
         public void PreferMundaneWeaponsPickedAsFocusForProficiencyFeats()
         {
             var mundaneWeapon = CreateWeapon("mundane weapon");
@@ -223,6 +250,33 @@ namespace CharacterGen.Tests.Unit.Generators.Items
 
             var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
             Assert.That(weapon, Is.EqualTo(otherMundaneWeapon));
+        }
+
+        [Test]
+        public void PreferAnyMundaneAmmunitionForMundaneWeaponsPickedAsFocusForProficiencyFeats()
+        {
+            var mundaneWeapon = CreateWeapon("mundane weapon");
+            var otherMundaneWeapon = CreateWeapon("other mundane weapon");
+            var otherAmmunition = CreateWeapon("other ammunition");
+            var wrongMundaneWeapon = CreateWeapon("wrong mundane weapon");
+            mockPercentileSelector.Setup(s => s.SelectFrom("Level9266Power")).Returns(PowerConstants.Mundane);
+            mockMundaneWeaponGenerator.SetupSequence(g => g.Generate())
+                .Returns(wrongMundaneWeapon).Returns(otherAmmunition).Returns(otherMundaneWeapon).Returns(mundaneWeapon);
+
+            feats.Add(new Feat { Name = "feat2", Focus = mundaneWeapon.Name });
+            feats.Add(new Feat { Name = "feat2", Focus = otherMundaneWeapon.Name });
+            feats.Add(new Feat { Name = "feat3", Focus = mundaneWeapon.Name });
+            proficiencyFeats.Add(feats[1].Name);
+            proficiencyFeats.Add(feats[2].Name);
+            proficiencyFeats.Add(feats[3].Name);
+
+            allProficientWeapons.Remove(otherAmmunition.Name);
+
+            var baseWeaponTypes = new[] { otherMundaneWeapon.Name, otherAmmunition.Name };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, otherMundaneWeapon.Name)).Returns(baseWeaponTypes);
+
+            var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
+            Assert.That(weapon, Is.EqualTo(otherAmmunition));
         }
 
         [Test]
@@ -319,6 +373,30 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         }
 
         [Test]
+        public void PreferAnyMagicalAmmunitionForMagicalWeaponsPickedAsFocusForNonProficiencyFeats()
+        {
+            var otherMagicalWeapon = CreateWeapon("other magical weapon");
+            var otherAmmunition = CreateWeapon("other magical ammunition");
+            var wrongMagicalWeapon = CreateWeapon("wrong magical weapon");
+            mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateAtPower("power"))
+                .Returns(wrongMagicalWeapon).Returns(otherAmmunition).Returns(otherMagicalWeapon).Returns(magicalWeapon);
+
+            feats.Add(new Feat { Name = "feat2", Focus = wrongMagicalWeapon.Name });
+            feats.Add(new Feat { Name = "feat3", Focus = baseWeaponTypes[0] });
+            feats.Add(new Feat { Name = "feat3", Focus = otherMagicalWeapon.Name });
+            feats.Add(new Feat { Name = "feat4", Focus = baseWeaponTypes[0] });
+            proficiencyFeats.Add(feats[1].Name);
+
+            allProficientWeapons.Remove(otherAmmunition.Name);
+
+            var otherBaseWeaponTypes = new[] { otherMagicalWeapon.Name, otherAmmunition.Name };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, otherMagicalWeapon.Name)).Returns(otherBaseWeaponTypes);
+
+            var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
+            Assert.That(weapon, Is.EqualTo(otherAmmunition));
+        }
+
+        [Test]
         public void PreferMagicalWeaponsPickedAsFocusForProficiencyFeats()
         {
             var wrongMagicalWeapon = CreateWeapon("wrong magical weapon");
@@ -349,6 +427,31 @@ namespace CharacterGen.Tests.Unit.Generators.Items
 
             var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
             Assert.That(weapon, Is.EqualTo(otherMagicalWeapon));
+        }
+
+        [Test]
+        public void PreferAnyMagicalAmmunitionForMagicalWeaponsPickedAsFocusForProficiencyFeats()
+        {
+            var otherMagicalWeapon = CreateWeapon("other magical weapon");
+            var otherAmmunition = CreateWeapon("other magical ammunition");
+            var wrongMagicalWeapon = CreateWeapon("wrong magical weapon");
+            mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateAtPower("power"))
+                .Returns(wrongMagicalWeapon).Returns(otherAmmunition).Returns(otherMagicalWeapon).Returns(magicalWeapon);
+
+            feats.Add(new Feat { Name = "feat2", Focus = baseWeaponTypes[0] });
+            feats.Add(new Feat { Name = "feat2", Focus = otherMagicalWeapon.Name });
+            feats.Add(new Feat { Name = "feat3", Focus = baseWeaponTypes[0] });
+            proficiencyFeats.Add(feats[1].Name);
+            proficiencyFeats.Add(feats[2].Name);
+            proficiencyFeats.Add(feats[3].Name);
+
+            allProficientWeapons.Remove(otherAmmunition.Name);
+
+            var otherBaseWeaponTypes = new[] { otherMagicalWeapon.Name, otherAmmunition.Name };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, otherMagicalWeapon.Name)).Returns(otherBaseWeaponTypes);
+
+            var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
+            Assert.That(weapon, Is.EqualTo(otherAmmunition));
         }
 
         [Test]

@@ -3,6 +3,7 @@ using CharacterGen.Generators.Randomizers.Races;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
 {
@@ -18,6 +19,15 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
         }
 
         protected abstract IEnumerable<String> allowedMetaraces { get; }
+
+        private readonly String testType;
+
+        public ForcableMetaraceRandomizerTests()
+        {
+            var classType = GetType().ToString();
+            var segments = classType.Split('.');
+            testType = segments.Last();
+        }
 
         protected override void MakeAssertions()
         {

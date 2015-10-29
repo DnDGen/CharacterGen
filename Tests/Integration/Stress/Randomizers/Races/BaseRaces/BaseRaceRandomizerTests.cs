@@ -1,6 +1,7 @@
-﻿using System;
+﻿using NUnit.Framework;
+using System;
 using System.Collections.Generic;
-using NUnit.Framework;
+using System.Linq;
 
 namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
 {
@@ -15,6 +16,15 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
         public void Setup()
         {
             baseRaces = allowedBaseRaces;
+        }
+
+        private readonly String testType;
+
+        public BaseRaceRandomizerTests()
+        {
+            var classType = GetType().ToString();
+            var segments = classType.Split('.');
+            testType = segments.Last();
         }
 
         protected override void MakeAssertions()

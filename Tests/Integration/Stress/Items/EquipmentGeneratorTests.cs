@@ -128,5 +128,17 @@ namespace CharacterGen.Tests.Integration.Stress.Items
 
             Assert.That(equipment.OffHand, Is.Null);
         }
+
+        [Test]
+        public void RangedWeaponWithAmmunitionHappens()
+        {
+            var equipment = Generate(GetEquipment,
+                e => e.PrimaryHand.Attributes.Contains(AttributeConstants.Ranged) && e.Treasure.Items.Any(i => i.Attributes.Contains(AttributeConstants.Ammunition)));
+
+            Assert.That(equipment.PrimaryHand.Attributes, Contains.Item(AttributeConstants.Ranged));
+
+            var hasAmmunition = equipment.Treasure.Items.Any(i => i.Attributes.Contains(AttributeConstants.Ammunition));
+            Assert.That(hasAmmunition, Is.True);
+        }
     }
 }

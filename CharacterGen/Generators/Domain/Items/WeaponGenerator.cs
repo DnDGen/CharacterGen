@@ -37,7 +37,17 @@ namespace CharacterGen.Generators.Domain.Items
             var allowedWeapons = GetAllowedWeapons(feats);
 
             if (allowedWeapons.Any() == false)
-                throw new Exception("There are no valid weapons, which should never happen.");
+                return null;
+
+            var additionalWeapons = new List<String>();
+
+            foreach (var allowedWeapon in allowedWeapons)
+            {
+                var baseWeaponTypes = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, allowedWeapon);
+                additionalWeapons.AddRange(baseWeaponTypes);
+            }
+
+            allowedWeapons = allowedWeapons.Union(additionalWeapons);
 
             return Build<Item>(() => GenerateWeapon(power), w => WeaponIsValid(w, allowedWeapons, race));
         }

@@ -40,25 +40,16 @@ namespace CharacterGen.Tests.Integration.Stress
         public ICharacterClassGenerator CharacterClassGenerator { get; set; }
         [Inject]
         public IRaceGenerator RaceGenerator { get; set; }
-
-        protected readonly String testType;
-
+        
         private const Int32 ConfidentIterations = 1000000;
         private const Int32 OneMinuteInSeconds = 60;
 #if STRESS
-        private const Int32 TimeLimitInSeconds = OneMinuteInSeconds * 5;
+        private const Int32 TimeLimitInSeconds = OneMinuteInSeconds * 1;
 #else
         private const Int32 TimeLimitInSeconds = 1;
 #endif
 
         private Int32 iterations;
-
-        public StressTests()
-        {
-            var classType = GetType().ToString();
-            var segments = classType.Split('.');
-            testType = segments.Last();
-        }
 
         [SetUp]
         public void StressSetup()
