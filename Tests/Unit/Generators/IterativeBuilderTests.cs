@@ -60,15 +60,29 @@ namespace CharacterGen.Tests.Unit.Generators
         }
 
         [Test]
-        public void ThrowExceptionAfterTooManyRetries()
+        public void ReturnDefaultAfterTooManyRetries()
         {
             var count = 0;
 
-            Assert.That(() => Build<Int32>(
+            var randomNumber = Build<Int32>(
                 () => count++,
-                i => false), Throws.Exception.With.Message.EqualTo("Exceeded max retries to build"));
+                i => false);
 
             Assert.That(count, Is.EqualTo(10001));
+            Assert.That(randomNumber, Is.EqualTo(0));
+        }
+
+        [Test]
+        public void ReturnNullAfterTooManyRetries()
+        {
+            var count = 0;
+
+            var randomString = Build<String>(
+                () => count++.ToString(),
+                i => false);
+
+            Assert.That(count, Is.EqualTo(10001));
+            Assert.That(randomString, Is.Null);
         }
     }
 }

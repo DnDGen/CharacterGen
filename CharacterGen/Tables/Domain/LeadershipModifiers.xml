@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+  <object>
+    <name></name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Cruelty</name>
+    <item>-2</item>
+  </object>
+  <object>
+    <name>Aloofness</name>
+    <item>-1</item>
+  </object>
+  <object>
+    <name>Failure</name>
+    <item>-1</item>
+  </object>
+  <object>
+    <name>Special power</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Fairness and generosity</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Great renown</name>
+    <item>2</item>
+  </object>
+</items>

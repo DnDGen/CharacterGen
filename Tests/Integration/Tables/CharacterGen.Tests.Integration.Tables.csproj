@@ -245,6 +245,7 @@
     <Compile Include="CharacterClasses\HasSpecialistFields\RogueHasSpecialistFieldsTests.cs" />
     <Compile Include="CharacterClasses\HasSpecialistFields\SorcererHasSpecialistFieldsTests.cs" />
     <Compile Include="CharacterClasses\HasSpecialistFields\WizardHasSpecialistFieldsTests.cs" />
+    <Compile Include="LeadershipModifiersTests.cs" />
     <Compile Include="Magics\Spells\Bards\Level10BardSpellsPerDayTests.cs" />
     <Compile Include="Magics\Spells\Bards\Level11BardSpellsPerDayTests.cs" />
     <Compile Include="Magics\Spells\Bards\Level12BardSpellsPerDayTests.cs" />
@@ -550,6 +551,7 @@
     <Compile Include="Abilities\Stats\StatPrioritiesTests.cs" />
     <Compile Include="Abilities\Stats\StrengthStatAdjustmentsTests.cs" />
     <Compile Include="Abilities\Stats\WisdomStatAdjustmentsTests.cs" />
+    <Compile Include="ReputationTests.cs" />
     <Compile Include="TableAttribute.cs" />
     <Compile Include="TableTests.cs" />
     <Compile Include="TraitsTests.cs" />

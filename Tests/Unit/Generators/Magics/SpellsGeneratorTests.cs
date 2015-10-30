@@ -20,7 +20,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         private CharacterClass characterClass;
         private Dictionary<String, Stat> stats;
         private List<String> spellcasters;
-        private Dictionary<String, Int32> spellQuantitiesForClass;
+        private Dictionary<String, Int32> spellsPerDayForClass;
 
         [SetUp]
         public void Setup()
@@ -31,14 +31,14 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
             characterClass = new CharacterClass();
             spellcasters = new List<String>();
             stats = new Dictionary<String, Stat>();
-            spellQuantitiesForClass = new Dictionary<String, Int32>();
+            spellsPerDayForClass = new Dictionary<String, Int32>();
 
             characterClass.ClassName = "class name";
             characterClass.Level = 9266;
             spellcasters.Add(characterClass.ClassName);
             spellcasters.Add("other class");
-            spellQuantitiesForClass["0"] = 90210;
-            spellQuantitiesForClass["1"] = 42;
+            spellsPerDayForClass["0"] = 90210;
+            spellsPerDayForClass["1"] = 42;
             stats["stat"] = new Stat { Value = 11 };
             stats["other stat"] = new Stat { Value = 11 };
 
@@ -46,24 +46,24 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.StatGroups, characterClass.ClassName + GroupConstants.Spellcasters)).Returns(new[] { "stat" });
 
             var tableName = String.Format(TableNameConstants.Formattable.Adjustments.LevelXCLASSSpellsPerDay, characterClass.Level, characterClass.ClassName);
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(spellQuantitiesForClass);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(spellsPerDayForClass);
         }
 
         [Test]
         public void DoNotGenerateSpellsIfNotASpellcaster()
         {
             spellcasters.Remove(characterClass.ClassName);
-            var spellQuantities = spellsGenerator.GenerateFrom(characterClass, stats);
-            Assert.That(spellQuantities, Is.Empty);
+            var spellsPerDay = spellsGenerator.GenerateFrom(characterClass, stats);
+            Assert.That(spellsPerDay, Is.Empty);
         }
 
         [Test]
         public void GenerateSpellQuantities()
         {
-            var spellQuantities = spellsGenerator.GenerateFrom(characterClass, stats);
-            Assert.That(spellQuantities[0], Is.EqualTo(90210));
-            Assert.That(spellQuantities[1], Is.EqualTo(42));
-            Assert.That(spellQuantities.Count, Is.EqualTo(2));
+            var spellsPerDay = spellsGenerator.GenerateFrom(characterClass, stats);
+            Assert.That(spellsPerDay[0], Is.EqualTo(90210));
+            Assert.That(spellsPerDay[1], Is.EqualTo(42));
+            Assert.That(spellsPerDay.Count, Is.EqualTo(2));
         }
 
         [TestCase(1)]
@@ -114,26 +114,26 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         public void AddBonusSpellsForStat(Int32 statValue, params Int32[] levelBonuses)
         {
             stats["stat"].Value = statValue;
-            spellQuantitiesForClass["0"] = 10;
-            spellQuantitiesForClass["1"] = 9;
-            spellQuantitiesForClass["2"] = 8;
-            spellQuantitiesForClass["3"] = 7;
-            spellQuantitiesForClass["4"] = 6;
-            spellQuantitiesForClass["5"] = 5;
-            spellQuantitiesForClass["6"] = 4;
-            spellQuantitiesForClass["7"] = 3;
-            spellQuantitiesForClass["8"] = 2;
-            spellQuantitiesForClass["9"] = 1;
+            spellsPerDayForClass["0"] = 10;
+            spellsPerDayForClass["1"] = 9;
+            spellsPerDayForClass["2"] = 8;
+            spellsPerDayForClass["3"] = 7;
+            spellsPerDayForClass["4"] = 6;
+            spellsPerDayForClass["5"] = 5;
+            spellsPerDayForClass["6"] = 4;
+            spellsPerDayForClass["7"] = 3;
+            spellsPerDayForClass["8"] = 2;
+            spellsPerDayForClass["9"] = 1;
 
-            var spellQuantities = spellsGenerator.GenerateFrom(characterClass, stats);
+            var spellsPerDay = spellsGenerator.GenerateFrom(characterClass, stats);
 
             for (var spellLevel = 0; spellLevel < levelBonuses.Length; spellLevel++)
             {
                 var expectedQuantity = (10 - spellLevel) + levelBonuses[spellLevel];
-                Assert.That(spellQuantities[spellLevel], Is.EqualTo(expectedQuantity), spellLevel.ToString());
+                Assert.That(spellsPerDay[spellLevel], Is.EqualTo(expectedQuantity), spellLevel.ToString());
             }
 
-            Assert.That(spellQuantities.Count, Is.EqualTo(levelBonuses.Length));
+            Assert.That(spellsPerDay.Count, Is.EqualTo(levelBonuses.Length));
         }
 
         [Test]
@@ -141,23 +141,33 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         {
             stats["stat"].Value = 45;
 
-            var spellQuantities = spellsGenerator.GenerateFrom(characterClass, stats);
-            Assert.That(spellQuantities[0], Is.EqualTo(90210));
-            Assert.That(spellQuantities[1], Is.EqualTo(47));
-            Assert.That(spellQuantities.Count, Is.EqualTo(2));
+            var spellsPerDay = spellsGenerator.GenerateFrom(characterClass, stats);
+            Assert.That(spellsPerDay[0], Is.EqualTo(90210));
+            Assert.That(spellsPerDay[1], Is.EqualTo(47));
+            Assert.That(spellsPerDay.Count, Is.EqualTo(2));
         }
 
         [Test]
         public void CanGetBonusSpellsInLevelWithQuantityOf0()
         {
             stats["stat"].Value = 45;
-            spellQuantitiesForClass["2"] = 0;
+            spellsPerDayForClass["2"] = 0;
 
-            var spellQuantities = spellsGenerator.GenerateFrom(characterClass, stats);
-            Assert.That(spellQuantities[0], Is.EqualTo(90210));
-            Assert.That(spellQuantities[1], Is.EqualTo(47));
-            Assert.That(spellQuantities[2], Is.EqualTo(4));
-            Assert.That(spellQuantities.Count, Is.EqualTo(3));
+            var spellsPerDay = spellsGenerator.GenerateFrom(characterClass, stats);
+            Assert.That(spellsPerDay[0], Is.EqualTo(90210));
+            Assert.That(spellsPerDay[1], Is.EqualTo(47));
+            Assert.That(spellsPerDay[2], Is.EqualTo(4));
+            Assert.That(spellsPerDay.Count, Is.EqualTo(3));
+        }
+
+        [Test]
+        public void IfTotalSpellsPerDayIs0_RemoveSpellLevel()
+        {
+            spellsPerDayForClass["1"] = 0;
+
+            var spellsPerDay = spellsGenerator.GenerateFrom(characterClass, stats);
+            Assert.That(spellsPerDay[0], Is.EqualTo(90210));
+            Assert.That(spellsPerDay.Count, Is.EqualTo(1));
         }
     }
 }

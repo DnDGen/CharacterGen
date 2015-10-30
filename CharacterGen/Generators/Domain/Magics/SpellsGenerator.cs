@@ -28,10 +28,10 @@ namespace CharacterGen.Generators.Domain.Magics
         public Dictionary<Int32, Int32> GenerateFrom(CharacterClass characterClass, Dictionary<String, Stat> stats)
         {
             var spellcasters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Spellcasters);
-            var spellQuantities = new Dictionary<Int32, Int32>();
+            var spellsPerDay = new Dictionary<Int32, Int32>();
 
             if (spellcasters.Contains(characterClass.ClassName) == false)
-                return spellQuantities;
+                return spellsPerDay;
 
             var tableName = String.Format(TableNameConstants.Formattable.Adjustments.LevelXCLASSSpellsPerDay, characterClass.Level, characterClass.ClassName);
             var spellsForClass = adjustmentsSelector.SelectFrom(tableName);
@@ -45,16 +45,18 @@ namespace CharacterGen.Generators.Domain.Magics
                 if (spellLevel > maxSpellLevel)
                     continue;
 
-                spellQuantities[spellLevel] = kvp.Value;
+                spellsPerDay[spellLevel] = kvp.Value;
 
                 if (spellLevel == 0 || stats[spellStat].Bonus - spellLevel < 0)
                     continue;
 
                 var bonusSpells = (stats[spellStat].Bonus - spellLevel) / 4 + 1;
-                spellQuantities[spellLevel] += bonusSpells;
+                spellsPerDay[spellLevel] += bonusSpells;
             }
 
-            return spellQuantities;
+            spellsPerDay = spellsPerDay.Where(kvp => kvp.Value > 0).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+
+            return spellsPerDay;
         }
     }
 }

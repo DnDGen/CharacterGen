@@ -15,7 +15,7 @@ namespace CharacterGen.Generators.Domain
             while (retries++ < MaxRetries && isValid(builtObject) == false);
 
             if (retries > MaxRetries)
-                throw new Exception("Exceeded max retries to build");
+                return default(T);
 
             return builtObject;
         }

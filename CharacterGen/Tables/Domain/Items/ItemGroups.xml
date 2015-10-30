@@ -634,6 +634,9 @@
       <item>Spiked chain</item>
       <item>Two-bladed sword</item>
     </object>
+  <object>
+    <name>Unarmed Strike</name>
+  </object>
     <object>
         <name>Warhammer</name>
       <item>Warhammer</item>
