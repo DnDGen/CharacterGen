@@ -35,7 +35,7 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Stats
             foreach (var name in statNames)
             {
                 Assert.That(stats.Keys, Contains.Item(name));
-                Assert.That(stats[name].Value, Is.InRange<Int32>(3, 18));
+                Assert.That(stats[name].Value, Is.InRange<Int32>(1, 18));
             }
 
             Assert.That(stats.Count, Is.EqualTo(6));

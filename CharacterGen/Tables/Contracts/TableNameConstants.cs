@@ -10,6 +10,7 @@ namespace CharacterGen.Tables
             {
                 public const String ArmorBonuses = "ArmorBonuses";
                 public const String ClassHitDice = "ClassHitDice";
+                public const String CohortLevels = "CohortLevels";
                 public const String FeatArmorAdjustments = "FeatArmorAdjustments";
                 public const String FeatInitiativeBonuses = "FeatInitiativeBonuses";
                 public const String FighterFeatLevelRequirements = "FighterFeatLevelRequirements";
@@ -85,6 +86,7 @@ namespace CharacterGen.Tables
                 public const String FEATStatRequirements = "{0}StatRequirements";
                 public const String LevelXAnimalTricks = "Level{0}AnimalTricks";
                 public const String LevelXCLASSSpellsPerDay = "Level{0}{1}SpellsPerDay";
+                public const String LevelXFollowerQuantities = "Level{0}FollowerQuantities";
                 public const String RACEAges = "{0}Ages";
                 public const String RACEHeights = "{0}Heights";
                 public const String RACEWeights = "{0}Weights";

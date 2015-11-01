@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using System;
 
-namespace CharacterGen.Tests.Integration.Tables
+namespace CharacterGen.Tests.Integration.Tables.Leadership
 {
     [TestFixture]
     public class LeadershipModifiersTests : AdjustmentsTests
@@ -26,7 +26,9 @@ namespace CharacterGen.Tests.Integration.Tables
                 "Failure",
                 "Special power",
                 "Fairness and generosity",
-                "Great renown"
+                "Great renown",
+                "Moves around a lot",
+                "Has a stronghold, base of operations, guildhouse, or the like"
             };
 
             AssertCollectionNames(names);
@@ -39,6 +41,8 @@ namespace CharacterGen.Tests.Integration.Tables
         [TestCase("Special power", 1)]
         [TestCase("Fairness and generosity", 1)]
         [TestCase("Great renown", 2)]
+        [TestCase("Moves around a lot", -1)]
+        [TestCase("Has a stronghold, base of operations, guildhouse, or the like", 2)]
         public override void Adjustment(String name, Int32 adjustment)
         {
             base.Adjustment(name, adjustment);

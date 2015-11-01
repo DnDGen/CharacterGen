@@ -9,6 +9,7 @@ namespace CharacterGen.Tests.Unit.Tables
     {
         [TestCase(TableNameConstants.Set.Adjustments.ArmorBonuses, "ArmorBonuses")]
         [TestCase(TableNameConstants.Set.Adjustments.ClassHitDice, "ClassHitDice")]
+        [TestCase(TableNameConstants.Set.Adjustments.CohortLevels, "CohortLevels")]
         [TestCase(TableNameConstants.Set.Adjustments.FeatArmorAdjustments, "FeatArmorAdjustments")]
         [TestCase(TableNameConstants.Set.Adjustments.FeatInitiativeBonuses, "FeatInitiativeBonuses")]
         [TestCase(TableNameConstants.Set.Adjustments.FighterFeatLevelRequirements, "FighterFeatLevelRequirements")]
@@ -64,6 +65,7 @@ namespace CharacterGen.Tests.Unit.Tables
         [TestCase(TableNameConstants.Formattable.Adjustments.FEATStatRequirements, "{0}StatRequirements")]
         [TestCase(TableNameConstants.Formattable.Adjustments.LevelXAnimalTricks, "Level{0}AnimalTricks")]
         [TestCase(TableNameConstants.Formattable.Adjustments.LevelXCLASSSpellsPerDay, "Level{0}{1}SpellsPerDay")]
+        [TestCase(TableNameConstants.Formattable.Adjustments.LevelXFollowerQuantities, "Level{0}FollowerQuantities")]
         [TestCase(TableNameConstants.Formattable.Adjustments.RACEAges, "{0}Ages")]
         [TestCase(TableNameConstants.Formattable.Adjustments.RACEHeights, "{0}Heights")]
         [TestCase(TableNameConstants.Formattable.Adjustments.RACEWeights, "{0}Weights")]

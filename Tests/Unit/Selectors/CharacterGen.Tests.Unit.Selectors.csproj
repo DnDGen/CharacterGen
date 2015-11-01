@@ -64,6 +64,7 @@
     <Compile Include="BooleanPercentileSelectorTests.cs" />
     <Compile Include="CollectionsSelectorTests.cs" />
     <Compile Include="FeatSelectorTests.cs" />
+    <Compile Include="LeadershipSelectorTests.cs" />
     <Compile Include="Objects\AdditionalFeatSelectionTests.cs" />
     <Compile Include="LanguageCollectionsSelectorTests.cs" />
     <Compile Include="AdjustmentsSelectorTests.cs" />

@@ -229,6 +229,7 @@
     <Compile Include="Alignments\AlignmentGoodnessTests.cs" />
     <Compile Include="Abilities\Languages\AutomaticLanguagesTests.cs" />
     <Compile Include="Abilities\Languages\BonusLanguagesTests.cs" />
+    <Compile Include="Alignments\AlignmentGroupsTests.cs" />
     <Compile Include="Alignments\AlignmentLawfulnessTests.cs" />
     <Compile Include="BooleanPercentileTests.cs" />
     <Compile Include="CharacterClasses\ClassNameGroupsTests.cs" />
@@ -245,7 +246,18 @@
     <Compile Include="CharacterClasses\HasSpecialistFields\RogueHasSpecialistFieldsTests.cs" />
     <Compile Include="CharacterClasses\HasSpecialistFields\SorcererHasSpecialistFieldsTests.cs" />
     <Compile Include="CharacterClasses\HasSpecialistFields\WizardHasSpecialistFieldsTests.cs" />
-    <Compile Include="LeadershipModifiersTests.cs" />
+    <Compile Include="Leadership\AttractCohortOfDifferentAlignmentTests.cs" />
+    <Compile Include="Leadership\CohortLevelsTests.cs" />
+    <Compile Include="Leadership\KilledCohortTests.cs" />
+    <Compile Include="Leadership\KilledFollowersTests.cs" />
+    <Compile Include="Leadership\LeadershipModifiersTests.cs" />
+    <Compile Include="Leadership\LeadershipMovementTests.cs" />
+    <Compile Include="Leadership\Level2FollowerQuantitiesTests.cs" />
+    <Compile Include="Leadership\Level3FollowerQuantitiesTests.cs" />
+    <Compile Include="Leadership\Level4FollowerQuantitiesTests.cs" />
+    <Compile Include="Leadership\Level5FollowerQuantitiesTests.cs" />
+    <Compile Include="Leadership\Level6FollowerQuantitiesTests.cs" />
+    <Compile Include="Leadership\Level1FollowerQuantitiesTests.cs" />
     <Compile Include="Magics\Spells\Bards\Level10BardSpellsPerDayTests.cs" />
     <Compile Include="Magics\Spells\Bards\Level11BardSpellsPerDayTests.cs" />
     <Compile Include="Magics\Spells\Bards\Level12BardSpellsPerDayTests.cs" />
@@ -551,7 +563,7 @@
     <Compile Include="Abilities\Stats\StatPrioritiesTests.cs" />
     <Compile Include="Abilities\Stats\StrengthStatAdjustmentsTests.cs" />
     <Compile Include="Abilities\Stats\WisdomStatAdjustmentsTests.cs" />
-    <Compile Include="ReputationTests.cs" />
+    <Compile Include="Leadership\ReputationTests.cs" />
     <Compile Include="TableAttribute.cs" />
     <Compile Include="TableTests.cs" />
     <Compile Include="TraitsTests.cs" />

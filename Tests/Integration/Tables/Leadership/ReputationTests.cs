@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using System;
 
-namespace CharacterGen.Tests.Integration.Tables
+namespace CharacterGen.Tests.Integration.Tables.Leadership
 {
     [TestFixture]
     public class ReputationTests : PercentileTests

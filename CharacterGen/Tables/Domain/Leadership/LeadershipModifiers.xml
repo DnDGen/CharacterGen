@@ -29,4 +29,12 @@
     <name>Great renown</name>
     <item>2</item>
   </object>
+  <object>
+    <name>Moves around a lot</name>
+    <item>-1</item>
+  </object>
+  <object>
+    <name>Has a stronghold, base of operations, guildhouse, or the like</name>
+    <item>2</item>
+  </object>
 </items>

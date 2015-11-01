@@ -1563,10 +1563,46 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Reputation.xml" />
+    <EmbeddedResource Include="Leadership\Reputation.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="LeadershipModifiers.xml" />
+    <EmbeddedResource Include="Leadership\LeadershipModifiers.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Leadership\KilledCohort.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Leadership\KilledFollowers.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Leadership\LeadershipMovement.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Leadership\AttractCohortOfDifferentAlignment.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Leadership\CohortLevels.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Leadership\Level1FollowerQuantities.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Leadership\Level6FollowerQuantities.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Leadership\Level2FollowerQuantities.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Leadership\Level3FollowerQuantities.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Leadership\Level4FollowerQuantities.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Leadership\Level5FollowerQuantities.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Alignments\AlignmentGroups.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
