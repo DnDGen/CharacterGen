@@ -7,10 +7,20 @@ namespace CharacterGen.Generators.Domain.Randomizers.Stats
 {
     public abstract class BaseStatsRandomizer : IterativeBuilder, IStatsRandomizer
     {
+        protected abstract Int32 defaultValue { get; }
+
         public Dictionary<String, Stat> Randomize()
         {
-            return Build(() => RollStats(),
-                s => StatsAreAllowed(s.Values));
+            var stats = Build(() => RollStats(), s => StatsAreAllowed(s.Values));
+
+            if (stats != null)
+                return stats;
+
+            stats = InitializeStats();
+            foreach (var stat in stats.Values)
+                stat.Value = defaultValue;
+
+            return stats;
         }
 
         private Dictionary<String, Stat> RollStats()

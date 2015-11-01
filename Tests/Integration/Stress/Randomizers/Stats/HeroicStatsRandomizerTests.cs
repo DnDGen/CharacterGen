@@ -31,11 +31,12 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Stats
         protected override void MakeAssertions()
         {
             var stats = HeroicStatsRandomizer.Randomize();
+            Assert.That(stats, Is.Not.Null);
 
             foreach (var name in statNames)
             {
-                Assert.That(stats.Keys, Contains.Item(name));
-                Assert.That(stats[name].Value, Is.InRange<Int32>(1, 18));
+                Assert.That(stats.Keys, Contains.Item(name), name);
+                Assert.That(stats[name].Value, Is.InRange<Int32>(1, 18), name);
             }
 
             Assert.That(stats.Count, Is.EqualTo(6));

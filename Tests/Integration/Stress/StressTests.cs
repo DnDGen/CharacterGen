@@ -12,7 +12,6 @@ using Ninject;
 using NUnit.Framework;
 using System;
 using System.Diagnostics;
-using System.Linq;
 
 namespace CharacterGen.Tests.Integration.Stress
 {
@@ -40,11 +39,11 @@ namespace CharacterGen.Tests.Integration.Stress
         public ICharacterClassGenerator CharacterClassGenerator { get; set; }
         [Inject]
         public IRaceGenerator RaceGenerator { get; set; }
-        
+
         private const Int32 ConfidentIterations = 1000000;
         private const Int32 OneMinuteInSeconds = 60;
 #if STRESS
-        private const Int32 TimeLimitInSeconds = OneMinuteInSeconds * 1;
+        private const Int32 TimeLimitInSeconds = OneMinuteInSeconds * 2;
 #else
         private const Int32 TimeLimitInSeconds = 1;
 #endif

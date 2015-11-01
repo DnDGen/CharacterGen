@@ -120,7 +120,7 @@ namespace CharacterGen.Tests.Integration.Stress.Items
                 a => a != null && String.IsNullOrEmpty(a.Magic.Curse) == false && a.Attributes.Contains(AttributeConstants.Specific));
 
             Assert.That(armor.Magic.Curse, Is.Not.Empty);
-            Assert.That(armor.Magic.Curse, Contains.Item(AttributeConstants.Specific));
+            Assert.That(armor.Attributes, Contains.Item(AttributeConstants.Specific));
         }
 
         [Test]

@@ -65,7 +65,9 @@ namespace CharacterGen.Generators.Domain.Items
             if (equipment.PrimaryHand.Attributes.Contains(AttributeConstants.Melee) == false)
             {
                 var meleeWeapon = GenerateMeleeWeapon(feats, characterClass, race);
-                equipment.Treasure.Items = equipment.Treasure.Items.Union(new[] { meleeWeapon });
+
+                if (meleeWeapon != null)
+                    equipment.Treasure.Items = equipment.Treasure.Items.Union(new[] { meleeWeapon });
             }
 
             equipment.Armor = armorGenerator.GenerateFrom(feats, characterClass, race);
@@ -139,7 +141,7 @@ namespace CharacterGen.Generators.Domain.Items
 
             return Build<Item>(
                 () => weaponGenerator.GenerateFrom(proficiencyFeats, characterClass, race),
-                w => w.Attributes.Contains(AttributeConstants.Melee));
+                w => w != null && w.Attributes.Contains(AttributeConstants.Melee));
         }
     }
 }

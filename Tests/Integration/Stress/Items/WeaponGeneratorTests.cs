@@ -136,14 +136,5 @@ namespace CharacterGen.Tests.Integration.Stress.Items
 
             Assert.That(weapon.Attributes, Contains.Item(AttributeConstants.Ammunition));
         }
-
-        [Test]
-        public void NoWeaponHappens()
-        {
-            var weapon = Generate<Item>(GetWeapon,
-                w => w == null);
-
-            Assert.That(weapon, Is.Null);
-        }
     }
 }

@@ -1,8 +1,8 @@
 ﻿using CharacterGen.Generators.Domain.Randomizers.Stats;
 using CharacterGen.Generators.Randomizers.Stats;
-using RollGen;
 using Moq;
 using NUnit.Framework;
+using RollGen;
 using System.Linq;
 
 namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
@@ -37,6 +37,17 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
             var stats = randomizer.Randomize();
             var stat = stats.Values.First();
             Assert.That(stat.Value, Is.EqualTo(9));
+        }
+
+        [Test]
+        public void DefaultValueIs10()
+        {
+            mockDice.Setup(d => d.Roll(3).d6()).Returns(9);
+
+            var stats = randomizer.Randomize();
+
+            foreach (var stat in stats)
+                Assert.That(stat.Value, Is.EqualTo(10));
         }
     }
 }

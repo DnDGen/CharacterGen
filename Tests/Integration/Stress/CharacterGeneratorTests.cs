@@ -1,12 +1,13 @@
 ﻿using CharacterGen.Common;
 using CharacterGen.Common.Abilities.Stats;
 using CharacterGen.Common.Alignments;
+using CharacterGen.Common.Races;
 using CharacterGen.Generators;
-using CharacterGen.Generators.Randomizers.CharacterClasses;
 using CharacterGen.Generators.Randomizers.Stats;
 using Ninject;
 using NUnit.Framework;
 using System;
+using System.Linq;
 using TreasureGen.Common.Items;
 
 namespace CharacterGen.Tests.Integration.Stress
@@ -18,8 +19,6 @@ namespace CharacterGen.Tests.Integration.Stress
         public ICharacterGenerator CharacterGenerator { get; set; }
         [Inject, Named(StatsRandomizerTypeConstants.Raw)]
         public IStatsRandomizer StatsRandomizer { get; set; }
-        [Inject]
-        public ISetLevelRandomizer SetLevelRandomizer { get; set; }
 
         [TestCase("CharacterGenerator")]
         public override void Stress(String stressSubject)
@@ -51,11 +50,17 @@ namespace CharacterGen.Tests.Integration.Stress
             Assert.That(character.Race.AerialSpeed, Is.Not.Negative);
 
             if (character.Race.HasWings)
+            {
                 Assert.That(character.Race.AerialSpeed, Is.Positive);
+                Assert.That(character.Race.AerialSpeed % 10, Is.EqualTo(0));
+            }
 
             Assert.That(character.Race.LandSpeed, Is.Positive);
+            Assert.That(character.Race.LandSpeed % 10, Is.EqualTo(0));
             Assert.That(character.Race.MetaraceSpecies, Is.Not.Null);
-            Assert.That(character.Race.Size, Is.Not.Empty);
+            Assert.That(character.Race.Size, Is.EqualTo(RaceConstants.Sizes.Large)
+                .Or.EqualTo(RaceConstants.Sizes.Medium)
+                .Or.EqualTo(RaceConstants.Sizes.Small));
 
             Assert.That(character.Ability.Stats.Count, Is.EqualTo(6));
             Assert.That(character.Ability.Stats.Keys, Contains.Item(StatConstants.Charisma));
@@ -113,11 +118,32 @@ namespace CharacterGen.Tests.Integration.Stress
         [Test]
         public void LeadershipHappens()
         {
-            SetLevelRandomizer.SetLevel = 20;
-
             var character = Generate<Character>(
                 () => CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer, StatsRandomizer),
                 c => c.Leadership.Score > 0);
+
+            Assert.That(character.Leadership.Score, Is.Positive);
+            Assert.That(character.Leadership.Cohort, Is.Not.Null);
+        }
+
+        [Test]
+        public void LeadershipWithoutFollowersHappens()
+        {
+            var character = Generate<Character>(
+                () => CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer, StatsRandomizer),
+                c => c.Leadership.Score > 0 && c.Leadership.Followers.Any() == false);
+
+            Assert.That(character.Leadership.Score, Is.Positive);
+            Assert.That(character.Leadership.Cohort, Is.Not.Null);
+            Assert.That(character.Leadership.Followers, Is.Empty);
+        }
+
+        [Test]
+        public void LeadershipWithFollowersHappens()
+        {
+            var character = Generate<Character>(
+                () => CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer, StatsRandomizer),
+                c => c.Leadership.Score > 0 && c.Leadership.Followers.Any());
 
             Assert.That(character.Leadership.Score, Is.Positive);
             Assert.That(character.Leadership.Cohort, Is.Not.Null);
@@ -127,8 +153,6 @@ namespace CharacterGen.Tests.Integration.Stress
         [Test]
         public void LeadershipDoesNotHappen()
         {
-            SetLevelRandomizer.SetLevel = 20;
-
             var character = Generate<Character>(
                 () => CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer, StatsRandomizer),
                 c => c.Leadership.Score == 0);

@@ -15,8 +15,6 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
         public void Setup()
         {
             randomizer = new TestStatRandomizer();
-            randomizer.Allowed = true;
-            randomizer.SwitchAllowed = false;
         }
 
         [Test]
@@ -36,7 +34,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
         [Test]
         public void StatsRolledTheSamePerStat()
         {
-            randomizer.Roll = 10;
+            randomizer.Roll = 11;
 
             var stats = randomizer.Randomize();
 
@@ -51,10 +49,9 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
         [Test]
         public void LoopUntilStatsAreAllowed()
         {
-            randomizer.Roll = 10;
+            randomizer.Roll = 11;
             randomizer.Reroll = 12;
-            randomizer.Allowed = false;
-            randomizer.SwitchAllowed = true;
+            randomizer.AllowedOnRoll = 10;
 
             var stats = randomizer.Randomize();
 
@@ -66,23 +63,48 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
             Assert.That(stats[StatConstants.Charisma].Value, Is.EqualTo(randomizer.Reroll));
         }
 
+        [Test]
+        public void IfStatsNeverAllowed_ReturnDefaultValues()
+        {
+            randomizer.Roll = 11;
+            randomizer.Reroll = 12;
+            randomizer.AllowedOnRoll = Int32.MaxValue;
+
+            var stats = randomizer.Randomize();
+
+            Assert.That(stats[StatConstants.Strength].Value, Is.EqualTo(9266));
+            Assert.That(stats[StatConstants.Constitution].Value, Is.EqualTo(9266));
+            Assert.That(stats[StatConstants.Dexterity].Value, Is.EqualTo(9266));
+            Assert.That(stats[StatConstants.Intelligence].Value, Is.EqualTo(9266));
+            Assert.That(stats[StatConstants.Wisdom].Value, Is.EqualTo(9266));
+            Assert.That(stats[StatConstants.Charisma].Value, Is.EqualTo(9266));
+        }
+
         private class TestStatRandomizer : BaseStatsRandomizer
         {
             public Int32 Roll { get; set; }
             public Int32 Reroll { get; set; }
-            public Boolean Allowed { get; set; }
-            public Boolean SwitchAllowed { get; set; }
+            public Int32 AllowedOnRoll { get; set; }
 
-            private Boolean firstRoll;
+            protected override Int32 defaultValue
+            {
+                get
+                {
+                    return 9266;
+                }
+            }
+
+            private Int32 rollCount;
 
             public TestStatRandomizer()
             {
-                firstRoll = true;
+                AllowedOnRoll = 1;
+                rollCount = 0;
             }
 
             protected override Int32 RollStat()
             {
-                if (firstRoll || Reroll == 0)
+                if (rollCount < AllowedOnRoll || Reroll == 0)
                     return Roll;
 
                 return Reroll;
@@ -90,13 +112,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
 
             protected override Boolean StatsAreAllowed(IEnumerable<Stat> stats)
             {
-                var retunValue = Allowed;
-                firstRoll &= !firstRoll;
-
-                if (SwitchAllowed)
-                    Allowed = !Allowed;
-
-                return retunValue;
+                return rollCount++ >= AllowedOnRoll;
             }
         }
     }

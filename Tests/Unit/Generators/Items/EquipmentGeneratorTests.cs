@@ -433,7 +433,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         }
 
         [Test]
-        public void IfMeleeWeaponMustBeMeleeWeapon()
+        public void MeleeWeaponMustBeMeleeWeapon()
         {
             weapon.Attributes = new[] { AttributeConstants.Ranged };
 
@@ -504,6 +504,18 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
             Assert.That(equipment.PrimaryHand, Is.EqualTo(rangedWeapon));
             Assert.That(equipment.Treasure.Items, Contains.Item(weapon));
+        }
+
+        [Test]
+        public void CanGenerateNoMeleeWeapon()
+        {
+            weapon.Attributes = new[] { AttributeConstants.Ranged };
+
+            mockWeaponGenerator.Setup(g => g.GenerateFrom(feats, characterClass, race)).Returns(weapon);
+
+            var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
+            Assert.That(equipment.PrimaryHand, Is.EqualTo(weapon));
+            Assert.That(equipment.Treasure.Items, Is.Empty);
         }
     }
 }
