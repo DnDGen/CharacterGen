@@ -24,16 +24,28 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
             middle = (max + min) / 2;
 
             mockDice = new Mock<IDice>();
-            mockDice.SetupSequence(d => d.Roll(3).d6()).Returns(min).Returns(max).Returns(middle).Returns(min - 1).Returns(max + 1).Returns(middle);
+            mockDice.Setup(d => d.Roll(1).d6()).Returns(1);
 
             randomizer = new HeroicStatsRandomizer(mockDice.Object);
         }
 
         [Test]
-        public void HeroicCalls3d6PerStat()
+        public void HeroicStatsCalls1d6ThreeTimesPerStat()
         {
             var stats = randomizer.Randomize();
-            mockDice.Verify(d => d.Roll(3).d6(), Times.Exactly(stats.Count));
+            mockDice.Verify(d => d.Roll(1).d6(), Times.Exactly(stats.Count * 3));
+        }
+
+        [Test]
+        public void HeroicStatRollsTreatsOnesAsSixes()
+        {
+            var sequence = mockDice.SetupSequence(d => d.Roll(1).d6());
+            for (var i = 0; i < 6; i++)
+                sequence = sequence.Returns(1).Returns(5).Returns(6);
+
+            var stats = randomizer.Randomize();
+            var stat = stats.Values.First();
+            Assert.That(stat.Value, Is.EqualTo(17));
         }
 
         [Test]
@@ -47,22 +59,26 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
         [Test]
         public void RerollIfStatAverageIsLessThanSixteen()
         {
-            mockDice.SetupSequence(d => d.Roll(3).d6())
-                .Returns(min).Returns(max).Returns(middle).Returns(min - 1).Returns(max + 1).Returns(3) //invalid average
-                .Returns(min).Returns(max).Returns(middle).Returns(min - 1).Returns(max + 1).Returns(middle); //valid average
+            var sequence = mockDice.SetupSequence(d => d.Roll(1).d6());
+            for (var i = 0; i < 6; i++)
+                sequence = sequence.Returns(5).Returns(5).Returns(5); //invalid average
+
+            for (var i = 0; i < 6; i++)
+                sequence = sequence.Returns(1).Returns(6).Returns(5); //valid average
 
             var stats = randomizer.Randomize();
-            mockDice.Verify(d => d.Roll(3).d6(), Times.Exactly(stats.Count * 2));
+            var average = stats.Average(s => s.Value.Value);
+            Assert.That(average, Is.EqualTo(middle));
         }
 
         [Test]
         public void DefaultValueIs16()
         {
-            mockDice.Setup(d => d.Roll(3).d6()).Returns(9);
+            mockDice.Setup(d => d.Roll(1).d6()).Returns(2);
 
             var stats = randomizer.Randomize();
 
-            foreach (var stat in stats)
+            foreach (var stat in stats.Values)
                 Assert.That(stat.Value, Is.EqualTo(16));
         }
     }

@@ -25,7 +25,25 @@ namespace CharacterGen.Generators.Domain.Randomizers.Stats
 
         protected override Int32 RollStat()
         {
-            return dice.Roll(3).d6();
+            var rolls = new List<Int32>();
+
+            for (var i = 0; i < 3; i++)
+            {
+                var roll = GetRollToAdd();
+                rolls.Add(roll);
+            }
+
+            return rolls.Sum();
+        }
+
+        private Int32 GetRollToAdd()
+        {
+            var roll = dice.Roll().d6();
+
+            if (roll == 1)
+                return 6;
+
+            return roll;
         }
 
         protected override Boolean StatsAreAllowed(IEnumerable<Stat> stats)

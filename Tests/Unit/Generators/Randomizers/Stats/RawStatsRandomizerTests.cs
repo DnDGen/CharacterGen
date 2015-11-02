@@ -55,16 +55,5 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
             Assert.That(stats[StatConstants.Strength].Value, Is.EqualTo(0));
             Assert.That(stats[StatConstants.Wisdom].Value, Is.EqualTo(1337));
         }
-
-        [Test]
-        public void DefaultValueIs10()
-        {
-            mockDice.Setup(d => d.Roll(3).d6()).Returns(9);
-
-            var stats = randomizer.Randomize();
-
-            foreach (var stat in stats)
-                Assert.That(stat.Value, Is.EqualTo(10));
-        }
     }
 }

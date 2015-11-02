@@ -38,16 +38,5 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
             var stat = stats.Values.First();
             Assert.That(stat.Value, Is.EqualTo(11));
         }
-
-        [Test]
-        public void DefaultValueIs10()
-        {
-            mockDice.SetupSequence(d => d.Roll(1).d6()).Returns(2).Returns(2).Returns(2);
-
-            var stats = randomizer.Randomize();
-
-            foreach (var stat in stats)
-                Assert.That(stat.Value, Is.EqualTo(10));
-        }
     }
 }
