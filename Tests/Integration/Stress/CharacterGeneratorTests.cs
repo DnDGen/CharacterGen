@@ -7,6 +7,7 @@ using CharacterGen.Generators.Randomizers.Stats;
 using Ninject;
 using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using TreasureGen.Common.Items;
 
@@ -141,7 +142,7 @@ namespace CharacterGen.Tests.Integration.Stress
         [Test]
         public void LeadershipWithFollowersHappens()
         {
-            var character = Generate<Character>(
+            var character = Generate(
                 () => CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer, StatsRandomizer),
                 c => c.Leadership.Score > 0 && c.Leadership.Followers.Any());
 
@@ -153,7 +154,7 @@ namespace CharacterGen.Tests.Integration.Stress
         [Test]
         public void LeadershipDoesNotHappen()
         {
-            var character = Generate<Character>(
+            var character = Generate(
                 () => CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer, StatsRandomizer),
                 c => c.Leadership.Score == 0);
 
@@ -167,6 +168,29 @@ namespace CharacterGen.Tests.Integration.Stress
         {
             var character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer, StatsRandomizer);
             Assert.That(character, Is.Not.Null);
+        }
+
+        [Test]
+        public void AverageCharacterCreationTime()
+        {
+            var durationsInMilliseconds = new List<Int32>();
+
+            Generate(() => TimeCharacterCreation(durationsInMilliseconds), c => false);
+
+            var averageDuration = durationsInMilliseconds.Average();
+            Assert.That(averageDuration, Is.LessThan(1000));
+        }
+
+        private Character TimeCharacterCreation(List<Int32> durationsInMilliseconds)
+        {
+            var start = DateTime.Now;
+            var character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer, StatsRandomizer);
+            var end = DateTime.Now;
+
+            var duration = end.Subtract(start).Milliseconds;
+            durationsInMilliseconds.Add(duration);
+
+            return character;
         }
     }
 }

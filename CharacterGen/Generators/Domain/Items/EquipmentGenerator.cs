@@ -33,7 +33,24 @@ namespace CharacterGen.Generators.Domain.Items
         {
             var equipment = new Equipment();
             equipment.Treasure = treasureGenerator.GenerateAtLevel(characterClass.Level);
+            equipment.Armor = armorGenerator.GenerateFrom(feats, characterClass, race);
+
             equipment.PrimaryHand = weaponGenerator.GenerateFrom(feats, characterClass, race);
+
+            if (equipment.PrimaryHand == null)
+            {
+                if (equipment.Armor != null && equipment.Armor.Attributes.Contains(AttributeConstants.Shield))
+                {
+                    equipment.OffHand = equipment.Armor;
+
+                    var shieldProficiencyFeats = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, AttributeConstants.Shield + GroupConstants.Proficiency);
+                    var featsWithoutShieldProficiency = feats.Where(f => shieldProficiencyFeats.Contains(f.Name) == false);
+
+                    equipment.Armor = armorGenerator.GenerateFrom(featsWithoutShieldProficiency, characterClass, race);
+                }
+
+                return equipment;
+            }
 
             var baseWeaponTypes = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, equipment.PrimaryHand.Name);
 
@@ -70,7 +87,6 @@ namespace CharacterGen.Generators.Domain.Items
                     equipment.Treasure.Items = equipment.Treasure.Items.Union(new[] { meleeWeapon });
             }
 
-            equipment.Armor = armorGenerator.GenerateFrom(feats, characterClass, race);
             if (equipment.Armor != null && equipment.Armor.Attributes.Contains(AttributeConstants.Shield))
             {
                 if (equipment.OffHand == null)

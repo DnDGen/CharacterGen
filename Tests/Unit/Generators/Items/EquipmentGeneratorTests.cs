@@ -286,7 +286,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
                 .Returns(firstShield).Returns(secondShield).Returns(armor);
 
             var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
-            Assert.That(equipment.OffHand, Is.EqualTo(offHandWeapon));
+            Assert.That(equipment.OffHand, Is.EqualTo(offHandWeapon), equipment.OffHand.Name);
         }
 
         [Test]
@@ -516,6 +516,44 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
             Assert.That(equipment.PrimaryHand, Is.EqualTo(weapon));
             Assert.That(equipment.Treasure.Items, Is.Empty);
+        }
+
+        [Test]
+        public void CanGenerateNoWeapon()
+        {
+            Item noWeapon = null;
+            mockWeaponGenerator.Setup(g => g.GenerateFrom(feats, characterClass, race)).Returns(noWeapon);
+
+            var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
+            Assert.That(equipment.PrimaryHand, Is.Null);
+            Assert.That(equipment.OffHand, Is.Null);
+        }
+
+        [Test]
+        public void CanGenerateArmorWithoutWeapon()
+        {
+            Item noWeapon = null;
+            mockWeaponGenerator.Setup(g => g.GenerateFrom(feats, characterClass, race)).Returns(noWeapon);
+
+            var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
+            Assert.That(equipment.PrimaryHand, Is.Null);
+            Assert.That(equipment.Armor, Is.EqualTo(armor));
+        }
+
+        [Test]
+        public void CanGenerateShieldWithoutWeapon()
+        {
+            Item noWeapon = null;
+            mockWeaponGenerator.Setup(g => g.GenerateFrom(feats, characterClass, race)).Returns(noWeapon);
+
+            var shield = new Item();
+            shield.Attributes = new[] { AttributeConstants.Shield };
+            mockArmorGenerator.SetupSequence(g => g.GenerateFrom(feats, characterClass, race))
+                .Returns(shield).Returns(armor);
+
+            var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
+            Assert.That(equipment.PrimaryHand, Is.Null);
+            Assert.That(equipment.OffHand, Is.EqualTo(shield));
         }
     }
 }
