@@ -7,7 +7,6 @@ namespace CharacterGen.Tables
         public const String Additional = "Additional";
         public const String AverageBaseAttack = "Average Base Attack";
         public const String CharacterClasses = "CharacterClasses";
-        public const String CombatStyles = "CombatStyles";
         public const String Deflection = "Deflection";
         public const String FavoredEnemies = "Favored Enemies";
         public const String FighterBonusFeats = "FighterBonusFeats";

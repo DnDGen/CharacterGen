@@ -163,7 +163,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             "")]
         [TestCase(FeatConstants.CombatStyle,
             FeatConstants.CombatStyle,
-            GroupConstants.CombatStyles,
+            FeatConstants.CombatStyle,
             0,
             "",
             "",
@@ -183,7 +183,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             "")]
         [TestCase(FeatConstants.ImprovedCombatStyle,
             FeatConstants.ImprovedCombatStyle,
-            GroupConstants.CombatStyles,
+            FeatConstants.CombatStyle,
             0,
             "",
             "",
@@ -223,7 +223,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             "")]
         [TestCase(FeatConstants.CombatStyleMastery,
             FeatConstants.CombatStyleMastery,
-            GroupConstants.CombatStyles,
+            FeatConstants.CombatStyle,
             0,
             "",
             "",
