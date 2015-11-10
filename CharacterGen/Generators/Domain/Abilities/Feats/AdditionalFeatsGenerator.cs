@@ -85,7 +85,7 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
 
             while (quantity-- > 0 && availableFeats.Any())
             {
-                var featSelection = collectionsSelector.SelectRandomFrom<AdditionalFeatSelection>(availableFeats);
+                var featSelection = collectionsSelector.SelectRandomFrom(availableFeats);
 
                 var preliminaryFocus = featFocusGenerator.GenerateFrom(featSelection.Feat, featSelection.FocusType, skills, featSelection.RequiredFeats, chosenFeats, characterClass);
                 if (preliminaryFocus == ProficiencyConstants.All)
@@ -107,6 +107,7 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
                     feat.Name = featSelection.Feat;
                     feat.Focus = preliminaryFocus;
                     feat.Frequency = featSelection.Frequency;
+                    feat.Strength = featSelection.Strength;
 
                     if (featSelection.Feat == FeatConstants.SpellMastery)
                         feat.Strength = stats[StatConstants.Intelligence].Bonus;
@@ -126,9 +127,9 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
 
         private IEnumerable<AdditionalFeatSelection> GetAvailableFeats(IEnumerable<AdditionalFeatSelection> sourceFeats, IEnumerable<Feat> chosenFeats)
         {
-            var chosenFeatIds = chosenFeats.Select(f => f.Name);
+            var chosenFeatNames = chosenFeats.Select(f => f.Name);
             var featsWithRequirementsMet = sourceFeats.Where(f => f.MutableRequirementsMet(chosenFeats));
-            var alreadyChosenFeats = sourceFeats.Where(f => f.FocusType == String.Empty && chosenFeatIds.Contains(f.Feat));
+            var alreadyChosenFeats = sourceFeats.Where(f => f.FocusType == String.Empty && chosenFeatNames.Contains(f.Feat));
 
             var featIdsAllowingMultipleTakes = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TakenMultipleTimes);
             var featsAllowingMultipleTakes = alreadyChosenFeats.Where(f => featIdsAllowingMultipleTakes.Contains(f.Feat));

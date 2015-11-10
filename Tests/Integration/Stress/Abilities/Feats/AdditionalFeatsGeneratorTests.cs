@@ -2,10 +2,12 @@
 using CharacterGen.Generators.Abilities;
 using CharacterGen.Generators.Abilities.Feats;
 using CharacterGen.Generators.Combats;
+using CharacterGen.Generators.Randomizers.CharacterClasses;
 using CharacterGen.Generators.Randomizers.Stats;
 using Ninject;
 using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace CharacterGen.Tests.Integration.Stress.Abilities.Feats
@@ -28,6 +30,12 @@ namespace CharacterGen.Tests.Integration.Stress.Abilities.Feats
         [Inject, Named(CombatGeneratorTypeConstants.Character)]
         public ICombatGenerator CombatGenerator { get; set; }
 
+        [TearDown]
+        public void TearDown()
+        {
+            LevelRandomizer = GetNewInstanceOf<ILevelRandomizer>(LevelRandomizerTypeConstants.Any);
+        }
+
         [TestCase("AdditionalFeatsGenerator")]
         public override void Stress(String stressSubject)
         {
@@ -36,17 +44,7 @@ namespace CharacterGen.Tests.Integration.Stress.Abilities.Feats
 
         protected override void MakeAssertions()
         {
-            var alignment = GetNewAlignment();
-            var characterClass = GetNewCharacterClass(alignment);
-            var race = GetNewRace(alignment, characterClass);
-            var stats = StatsGenerator.GenerateWith(StatsRandomizer, characterClass, race);
-            var skills = SkillsGenerator.GenerateWith(characterClass, race, stats);
-            var baseAttack = CombatGenerator.GenerateBaseAttackWith(characterClass, race);
-            var racialFeats = RacialFeatsGenerator.GenerateWith(race, skills, stats);
-            var classFeats = ClassFeatsGenerator.GenerateWith(characterClass, race, stats, racialFeats, skills);
-            var preselectedFeats = classFeats.Union(racialFeats);
-
-            var feats = AdditionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
+            var feats = GetAdditionalFeats();
             Assert.That(feats, Is.Not.Empty);
 
             foreach (var feat in feats)
@@ -62,6 +60,33 @@ namespace CharacterGen.Tests.Integration.Stress.Abilities.Feats
                     .Or.EqualTo(FeatConstants.Frequencies.Round)
                     .Or.Empty, feat.Name);
             }
+        }
+
+        private IEnumerable<Feat> GetAdditionalFeats()
+        {
+            var alignment = GetNewAlignment();
+            var characterClass = GetNewCharacterClass(alignment);
+            var race = GetNewRace(alignment, characterClass);
+            var stats = StatsGenerator.GenerateWith(StatsRandomizer, characterClass, race);
+            var skills = SkillsGenerator.GenerateWith(characterClass, race, stats);
+            var baseAttack = CombatGenerator.GenerateBaseAttackWith(characterClass, race);
+            var racialFeats = RacialFeatsGenerator.GenerateWith(race, skills, stats);
+            var classFeats = ClassFeatsGenerator.GenerateWith(characterClass, race, stats, racialFeats, skills);
+            var preselectedFeats = classFeats.Union(racialFeats);
+
+            return AdditionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
+        }
+
+        [Test]
+        public void ImprovedInitiativeHasAStrengthOf4()
+        {
+            var setLevelRandomizer = GetNewInstanceOf<ISetLevelRandomizer>();
+            setLevelRandomizer.SetLevel = 20;
+            LevelRandomizer = setLevelRandomizer;
+
+            var feats = Generate(GetAdditionalFeats, fs => fs.Any(f => f.Name == FeatConstants.ImprovedInitiative));
+            var improvedInitiative = feats.Single(f => f.Name == FeatConstants.ImprovedInitiative);
+            Assert.That(improvedInitiative.Strength, Is.EqualTo(4));
         }
     }
 }

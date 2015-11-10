@@ -692,7 +692,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
 
                 Assert.That(feat.Name, Is.EqualTo(FeatConstants.SkillMastery));
                 Assert.That(feat.Focus, Is.EqualTo(focus));
-                Assert.That(feat.Strength, Is.EqualTo(0));
+                Assert.That(feat.Strength, Is.EqualTo(2));
             }
         }
 
@@ -721,7 +721,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
 
                 Assert.That(feat.Name, Is.EqualTo(FeatConstants.SkillMastery));
                 Assert.That(feat.Focus, Is.EqualTo(focus));
-                Assert.That(feat.Strength, Is.EqualTo(0));
+                Assert.That(feat.Strength, Is.EqualTo(1));
             }
         }
 
@@ -754,7 +754,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
 
                 Assert.That(feat.Name, Is.EqualTo(FeatConstants.SkillMastery));
                 Assert.That(feat.Focus, Is.EqualTo(focus));
-                Assert.That(feat.Strength, Is.EqualTo(0));
+                Assert.That(feat.Strength, Is.EqualTo(1));
             }
         }
 
@@ -781,7 +781,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
 
             Assert.That(onlyFeat.Name, Is.EqualTo(FeatConstants.SkillMastery));
             Assert.That(onlyFeat.Focus, Is.EqualTo("skill 1"));
-            Assert.That(onlyFeat.Strength, Is.EqualTo(0));
+            Assert.That(onlyFeat.Strength, Is.EqualTo(1));
         }
 
         [Test]
@@ -858,6 +858,30 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
 
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             Assert.That(feats.Count(), Is.EqualTo(1));
+        }
+
+        [Test]
+        public void AllDataFromFeatSelectionIsCopiedToFeat()
+        {
+            var selection = new AdditionalFeatSelection();
+            selection.Feat = "additional feat";
+            selection.FocusType = "focus type";
+            selection.Frequency.Quantity = 9266;
+            selection.Frequency.TimePeriod = "frequency time period";
+            selection.Strength = 12345;
+
+            additionalFeatSelections.Add(selection);
+
+            mockFeatFocusGenerator.SetupSequence(g => g.GenerateFrom("additional feat", "focus type", skills, additionalFeatSelections[0].RequiredFeats, It.IsAny<IEnumerable<Feat>>(), characterClass))
+                .Returns("focus").Returns(ProficiencyConstants.All);
+
+            var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
+            var feat = feats.Single();
+            Assert.That(feat.Focus, Is.EqualTo("focus"));
+            Assert.That(feat.Frequency.Quantity, Is.EqualTo(9266));
+            Assert.That(feat.Frequency.TimePeriod, Is.EqualTo("frequency time period"));
+            Assert.That(feat.Name, Is.EqualTo("additional feat"));
+            Assert.That(feat.Strength, Is.EqualTo(12345));
         }
     }
 }
