@@ -20,7 +20,7 @@ namespace CharacterGen.Tests.Integration.Stress
             Assert.That(race.BaseRace, Is.Not.Empty);
             Assert.That(race.Metarace, Is.Not.Empty);
             Assert.That(race.Size, Is.EqualTo(RaceConstants.Sizes.Large).Or.EqualTo(RaceConstants.Sizes.Medium).Or.EqualTo(RaceConstants.Sizes.Small));
-            Assert.That(race.LandSpeed, Is.AtLeast(20));
+            Assert.That(race.LandSpeed, Is.Positive);
             Assert.That(race.LandSpeed % 10, Is.EqualTo(0));
             Assert.That(race.AerialSpeed, Is.Not.Negative);
             Assert.That(race.MetaraceSpecies, Is.Not.Null);
@@ -64,6 +64,7 @@ namespace CharacterGen.Tests.Integration.Stress
 
             Assert.That(race.HasWings, Is.True);
             Assert.That(race.AerialSpeed, Is.Positive);
+            Assert.That(race.AerialSpeed % 10, Is.EqualTo(0));
         }
 
         [Test]

@@ -79,11 +79,10 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         }
 
         [Test]
-        public void ReturnNullIfNoWeaponsAreAllowed()
+        public void ThrowExceptionIfNoWeaponsAreAllowed()
         {
             allProficientWeapons.Clear();
-            var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
-            Assert.That(weapon, Is.Null);
+            Assert.That(() => weaponGenerator.GenerateFrom(feats, characterClass, race), Throws.ArgumentException.With.Message.EqualTo("No weapons are allowed, which should never happen"));
         }
 
         [Test]
@@ -495,6 +494,50 @@ namespace CharacterGen.Tests.Unit.Generators.Items
 
             var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
             Assert.That(weapon, Is.EqualTo(magicalWeapon));
+        }
+
+        [Test]
+        public void IfCannotMakeAppropriateWeaponWithinIterativeBuilder_MakeMundaneWeaponWithIterativeBuilder()
+        {
+            var wrongMagicalWeapon = CreateWeapon("wrong magical weapon");
+            mockMagicalWeaponGenerator.Setup(g => g.GenerateAtPower("power")).Returns(wrongMagicalWeapon);
+            allProficientWeapons.Remove(wrongMagicalWeapon.Name);
+
+            var mundaneWeapon = CreateWeapon("mundane weapon");
+            var wrongMundaneWeapon = CreateWeapon("wrong mundane weapon");
+            var otherWrongMundaneWeapon = CreateWeapon("other wrong mundane weapon");
+            mockMundaneWeaponGenerator.SetupSequence(g => g.Generate()).Returns(wrongMundaneWeapon).Returns(otherWrongMundaneWeapon).Returns(mundaneWeapon);
+
+            allProficientWeapons.Remove(wrongMundaneWeapon.Name);
+            otherWrongMundaneWeapon.Traits.Add("smaller size");
+            otherWrongMundaneWeapon.Traits.Remove(race.Size);
+
+            var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
+            Assert.That(weapon, Is.EqualTo(mundaneWeapon), weapon.Name);
+        }
+
+        [Test]
+        public void IfCannotMakeAppropriateMundaneWeaponWithIterativeBuilder_GiveThemAClub()
+        {
+            var wrongMagicalWeapon = CreateWeapon("wrong magical weapon");
+            mockMagicalWeaponGenerator.Setup(g => g.GenerateAtPower("power")).Returns(wrongMagicalWeapon);
+            allProficientWeapons.Remove(wrongMagicalWeapon.Name);
+
+            var wrongMundaneWeapon = CreateWeapon("wrong mundane weapon");
+            mockMundaneWeaponGenerator.Setup(g => g.Generate()).Returns(wrongMundaneWeapon);
+            allProficientWeapons.Remove(wrongMundaneWeapon.Name);
+
+            var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
+            Assert.That(weapon.Name, Is.EqualTo(WeaponConstants.Club));
+            Assert.That(weapon.Attributes, Contains.Item(AttributeConstants.Bludgeoning));
+            Assert.That(weapon.Attributes, Contains.Item(AttributeConstants.Common));
+            Assert.That(weapon.Attributes, Contains.Item(AttributeConstants.Melee));
+            Assert.That(weapon.Attributes, Contains.Item(AttributeConstants.Wood));
+            Assert.That(weapon.Contents, Is.Empty);
+            Assert.That(weapon.IsMagical, Is.False);
+            Assert.That(weapon.ItemType, Is.EqualTo(ItemTypeConstants.Weapon));
+            Assert.That(weapon.Quantity, Is.EqualTo(1));
+            Assert.That(weapon.Traits, Contains.Item(race.Size));
         }
     }
 }

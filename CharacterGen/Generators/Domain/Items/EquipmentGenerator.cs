@@ -37,21 +37,6 @@ namespace CharacterGen.Generators.Domain.Items
 
             equipment.PrimaryHand = weaponGenerator.GenerateFrom(feats, characterClass, race);
 
-            if (equipment.PrimaryHand == null)
-            {
-                if (equipment.Armor != null && equipment.Armor.Attributes.Contains(AttributeConstants.Shield))
-                {
-                    equipment.OffHand = equipment.Armor;
-
-                    var shieldProficiencyFeats = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, AttributeConstants.Shield + GroupConstants.Proficiency);
-                    var featsWithoutShieldProficiency = feats.Where(f => shieldProficiencyFeats.Contains(f.Name) == false);
-
-                    equipment.Armor = armorGenerator.GenerateFrom(featsWithoutShieldProficiency, characterClass, race);
-                }
-
-                return equipment;
-            }
-
             var baseWeaponTypes = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, equipment.PrimaryHand.Name);
 
             if (WeaponRequiresAmmunition(baseWeaponTypes))

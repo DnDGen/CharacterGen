@@ -110,7 +110,7 @@ namespace CharacterGen.Tests.Integration.Stress.Items
         }
 
         [Test]
-        public void TwoHandedHappens()
+        public void TwoHandedWeaponHappens()
         {
             var equipment = Generate(GetEquipment,
                 e => e.OffHand != null && e.OffHand.ItemType == ItemTypeConstants.Weapon && e.OffHand == e.PrimaryHand);
@@ -130,7 +130,7 @@ namespace CharacterGen.Tests.Integration.Stress.Items
         }
 
         [Test]
-        public void RangedWeaponWithAmmunitionHappens()
+        public void RangedWeaponWithAmmunitionAndBackupMeleeHappens()
         {
             var equipment = Generate(GetEquipment,
                 e => e.PrimaryHand.Attributes.Contains(AttributeConstants.Ranged) && e.Treasure.Items.Any(i => i.Attributes.Contains(AttributeConstants.Ammunition)));
@@ -139,6 +139,9 @@ namespace CharacterGen.Tests.Integration.Stress.Items
 
             var hasAmmunition = equipment.Treasure.Items.Any(i => i.Attributes.Contains(AttributeConstants.Ammunition));
             Assert.That(hasAmmunition, Is.True);
+
+            var hasMeleeWeapon = equipment.Treasure.Items.Any(i => i.Attributes.Contains(AttributeConstants.Melee));
+            Assert.That(hasMeleeWeapon, Is.True);
         }
     }
 }

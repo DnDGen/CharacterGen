@@ -50,7 +50,7 @@ namespace CharacterGen.Tests.Integration.Stress.Items
         public void MeleeWeaponHappens()
         {
             var weapon = Generate<Item>(GetWeapon,
-                w => w != null && w.Attributes.Contains(AttributeConstants.Melee));
+                w => w.Attributes.Contains(AttributeConstants.Melee));
 
             Assert.That(weapon.Attributes, Contains.Item(AttributeConstants.Melee));
         }
@@ -59,7 +59,7 @@ namespace CharacterGen.Tests.Integration.Stress.Items
         public void RangedWeaponHappens()
         {
             var weapon = Generate<Item>(GetWeapon,
-                w => w != null && w.Attributes.Contains(AttributeConstants.Melee) == false);
+                w => w.Attributes.Contains(AttributeConstants.Melee) == false);
 
             Assert.That(weapon.Attributes, Contains.Item(AttributeConstants.Ranged));
         }
@@ -68,7 +68,7 @@ namespace CharacterGen.Tests.Integration.Stress.Items
         public void MundaneWeaponHappens()
         {
             var weapon = Generate<Item>(GetWeapon,
-                w => w != null && w.IsMagical == false);
+                w => w.IsMagical == false);
 
             Assert.That(weapon.IsMagical, Is.False);
         }
@@ -77,62 +77,16 @@ namespace CharacterGen.Tests.Integration.Stress.Items
         public void MagicalWeaponHappens()
         {
             var weapon = Generate<Item>(GetWeapon,
-                w => w != null && w.IsMagical);
+                w => w.IsMagical);
 
             Assert.That(weapon.IsMagical, Is.True);
-        }
-
-        [Test]
-        public void UncursedWeaponHappens()
-        {
-            var weapon = Generate<Item>(GetWeapon,
-                w => w != null && String.IsNullOrEmpty(w.Magic.Curse));
-
-            Assert.That(weapon.Magic.Curse, Is.Empty);
-        }
-
-        [Test]
-        public void CursedWeaponHappens()
-        {
-            var weapon = Generate<Item>(GetWeapon,
-                w => w != null && String.IsNullOrEmpty(w.Magic.Curse) == false);
-
-            Assert.That(weapon.Magic.Curse, Is.Not.Empty);
-        }
-
-        [Test]
-        public void SpecificCursedWeaponHappens()
-        {
-            var weapon = Generate<Item>(GetWeapon,
-                w => w != null && String.IsNullOrEmpty(w.Magic.Curse) == false && w.Attributes.Contains(AttributeConstants.Specific));
-
-            Assert.That(weapon.Magic.Curse, Is.Not.Empty);
-            Assert.That(weapon.Attributes, Contains.Item(AttributeConstants.Specific));
-        }
-
-        [Test]
-        public void IntelligentWeaponHappens()
-        {
-            var weapon = Generate<Item>(GetWeapon,
-                w => w != null && w.Magic.Intelligence.Ego > 0);
-
-            Assert.That(weapon.Magic.Intelligence.Ego, Is.Positive);
-        }
-
-        [Test]
-        public void NonIntelligentWeaponHappens()
-        {
-            var weapon = Generate<Item>(GetWeapon,
-                w => w != null && w.Magic.Intelligence.Ego == 0);
-
-            Assert.That(weapon.Magic.Intelligence.Ego, Is.EqualTo(0));
         }
 
         [Test]
         public void AmmunitionHappens()
         {
             var weapon = Generate<Item>(GetWeapon,
-                w => w != null && w.Attributes.Contains(AttributeConstants.Ammunition));
+                w => w.Attributes.Contains(AttributeConstants.Ammunition));
 
             Assert.That(weapon.Attributes, Contains.Item(AttributeConstants.Ammunition));
         }

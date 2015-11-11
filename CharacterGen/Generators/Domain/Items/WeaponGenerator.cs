@@ -37,7 +37,7 @@ namespace CharacterGen.Generators.Domain.Items
             var allowedWeapons = GetAllowedWeapons(feats);
 
             if (allowedWeapons.Any() == false)
-                return null;
+                throw new ArgumentException("No weapons are allowed, which should never happen");
 
             var additionalWeapons = new List<String>();
 
@@ -49,7 +49,28 @@ namespace CharacterGen.Generators.Domain.Items
 
             allowedWeapons = allowedWeapons.Union(additionalWeapons);
 
-            return Build<Item>(() => GenerateWeapon(power), w => WeaponIsValid(w, allowedWeapons, race));
+            var weapon = Build(() => GenerateWeapon(power), w => WeaponIsValid(w, allowedWeapons, race));
+
+            if (weapon != null)
+                return weapon;
+
+            weapon = Build(() => GenerateWeapon(PowerConstants.Mundane), w => WeaponIsValid(w, allowedWeapons, race));
+
+            if (weapon != null)
+                return weapon;
+
+            return BuildClub(race);
+        }
+
+        private Item BuildClub(Race race)
+        {
+            var club = new Item();
+            club.Attributes = new[] { AttributeConstants.Bludgeoning, AttributeConstants.Common, AttributeConstants.Melee, AttributeConstants.Wood };
+            club.ItemType = ItemTypeConstants.Weapon;
+            club.Name = WeaponConstants.Club;
+            club.Traits.Add(race.Size);
+
+            return club;
         }
 
         private Boolean WeaponIsValid(Item weapon, IEnumerable<String> allowedWeapons, Race race)

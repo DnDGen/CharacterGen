@@ -94,51 +94,5 @@ namespace CharacterGen.Tests.Integration.Stress.Items
 
             Assert.That(armor.IsMagical, Is.True);
         }
-
-        [Test]
-        public void UncursedArmorHappens()
-        {
-            var armor = Generate<Item>(GetArmor,
-                a => a != null && String.IsNullOrEmpty(a.Magic.Curse));
-
-            Assert.That(armor.Magic.Curse, Is.Empty);
-        }
-
-        [Test]
-        public void CursedArmorHappens()
-        {
-            var armor = Generate<Item>(GetArmor,
-                a => a != null && String.IsNullOrEmpty(a.Magic.Curse) == false);
-
-            Assert.That(armor.Magic.Curse, Is.Not.Empty);
-        }
-
-        [Test]
-        public void SpecificCursedArmorHappens()
-        {
-            var armor = Generate<Item>(GetArmor,
-                a => a != null && String.IsNullOrEmpty(a.Magic.Curse) == false && a.Attributes.Contains(AttributeConstants.Specific));
-
-            Assert.That(armor.Magic.Curse, Is.Not.Empty);
-            Assert.That(armor.Attributes, Contains.Item(AttributeConstants.Specific));
-        }
-
-        [Test]
-        public void IntelligentArmorHappens()
-        {
-            var armor = Generate<Item>(GetArmor,
-                a => a != null && a.Magic.Intelligence.Ego > 0);
-
-            Assert.That(armor.Magic.Intelligence.Ego, Is.Positive);
-        }
-
-        [Test]
-        public void NonIntelligentArmorHappens()
-        {
-            var armor = Generate<Item>(GetArmor,
-                a => a != null && a.Magic.Intelligence.Ego == 0);
-
-            Assert.That(armor.Magic.Intelligence.Ego, Is.EqualTo(0));
-        }
     }
 }
