@@ -1,6 +1,5 @@
 ﻿using CharacterGen.Common.Abilities.Feats;
 using CharacterGen.Common.Combats;
-using CharacterGen.Common.Items;
 using CharacterGen.Common.Races;
 using CharacterGen.Tables;
 using NUnit.Framework;
@@ -74,7 +73,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial.Base
             0, 0)]
         [TestCase(FeatConstants.MartialWeaponProficiency,
             FeatConstants.MartialWeaponProficiency,
-            ProficiencyConstants.All,
+            FeatConstants.Foci.All,
             0,
             "",
             0,
@@ -83,7 +82,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial.Base
             0, 0)]
         [TestCase(FeatConstants.SimpleWeaponProficiency,
             FeatConstants.SimpleWeaponProficiency,
-            ProficiencyConstants.All,
+            FeatConstants.Foci.All,
             0,
             "",
             0,

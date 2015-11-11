@@ -2,7 +2,6 @@
 using CharacterGen.Common.Abilities.Stats;
 using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Common.Combats;
-using CharacterGen.Common.Items;
 using CharacterGen.Generators.Combats;
 using CharacterGen.Selectors;
 using CharacterGen.Tables;
@@ -42,13 +41,13 @@ namespace CharacterGen.Generators.Domain.Combats
 
             foreach (var feat in anySavingThrowFeats)
             {
-                if (feat.Focus == ProficiencyConstants.All || feat.Focus == SavingThrowConstants.Fortitude)
+                if (feat.Focus == FeatConstants.Foci.All || feat.Focus == SavingThrowConstants.Fortitude)
                     savingThrows.Fortitude += feat.Strength;
 
-                if (feat.Focus == ProficiencyConstants.All || feat.Focus == SavingThrowConstants.Reflex)
+                if (feat.Focus == FeatConstants.Foci.All || feat.Focus == SavingThrowConstants.Reflex)
                     savingThrows.Reflex += feat.Strength;
 
-                if (feat.Focus == ProficiencyConstants.All || feat.Focus == SavingThrowConstants.Will)
+                if (feat.Focus == FeatConstants.Foci.All || feat.Focus == SavingThrowConstants.Will)
                     savingThrows.Will += feat.Strength;
             }
 

@@ -1,5 +1,4 @@
 ﻿using CharacterGen.Common.Abilities.Feats;
-using CharacterGen.Common.Items;
 using CharacterGen.Tables;
 using NUnit.Framework;
 using System;
@@ -167,7 +166,7 @@ namespace CharacterGen.Tests.Integration.Tables.Items
                 WeaponConstants.TwoBladedSword,
                 WeaponConstants.Warhammer,
                 WeaponConstants.Whip,
-                ProficiencyConstants.UnarmedStrike
+                FeatConstants.Foci.UnarmedStrike
             };
 
             AssertCollectionNames(names);
@@ -369,7 +368,7 @@ namespace CharacterGen.Tests.Integration.Tables.Items
         [TestCase(WeaponConstants.TwoBladedSword, WeaponConstants.TwoBladedSword)]
         [TestCase(WeaponConstants.Warhammer, WeaponConstants.Warhammer)]
         [TestCase(WeaponConstants.Whip, WeaponConstants.Whip)]
-        [TestCase(ProficiencyConstants.UnarmedStrike)]
+        [TestCase(FeatConstants.Foci.UnarmedStrike)]
         public override void DistinctCollection(String name, params String[] collection)
         {
             base.DistinctCollection(name, collection);

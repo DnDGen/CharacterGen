@@ -96,26 +96,6 @@ namespace CharacterGen.Tests.Integration.Stress
         }
 
         [Test]
-        public void InterestingTraitsHappen()
-        {
-            var character = Generate<Character>(
-                () => CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer, StatsRandomizer),
-                c => String.IsNullOrEmpty(c.InterestingTrait) == false);
-
-            Assert.That(character.InterestingTrait, Is.Not.Empty);
-        }
-
-        [Test]
-        public void InterestingTraitsDoNotHappen()
-        {
-            var character = Generate<Character>(
-                () => CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer, StatsRandomizer),
-                c => String.IsNullOrEmpty(c.InterestingTrait));
-
-            Assert.That(character.InterestingTrait, Is.Empty);
-        }
-
-        [Test]
         public void LeadershipHappens()
         {
             var character = Generate<Character>(

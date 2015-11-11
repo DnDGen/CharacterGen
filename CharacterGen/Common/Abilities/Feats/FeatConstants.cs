@@ -246,11 +246,15 @@ namespace CharacterGen.Common.Abilities.Feats
         public static class Foci
         {
             public const String Acid = "Acid";
+            public const String All = "All";
             public const String Archery = "Archery";
             public const String Cold = "Cold";
             public const String Electricity = "Electricity";
             public const String Fire = "Fire";
+            public const String Grapple = "Grapple";
+            public const String Ray = "Ray";
             public const String Sonic = "Sonic";
+            public const String UnarmedStrike = "Unarmed Strike";
         }
     }
 }

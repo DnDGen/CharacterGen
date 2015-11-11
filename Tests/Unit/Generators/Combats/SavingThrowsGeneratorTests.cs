@@ -2,7 +2,6 @@
 using CharacterGen.Common.Abilities.Stats;
 using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Common.Combats;
-using CharacterGen.Common.Items;
 using CharacterGen.Generators.Combats;
 using CharacterGen.Generators.Domain.Combats;
 using CharacterGen.Selectors;
@@ -223,7 +222,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
                 feats.Add(feat);
             }
 
-            feats[0].Focus = ProficiencyConstants.All;
+            feats[0].Focus = FeatConstants.Foci.All;
             feats[1].Focus = SavingThrowConstants.Fortitude;
             feats[2].Focus = SavingThrowConstants.Reflex;
             feats[3].Focus = SavingThrowConstants.Will;

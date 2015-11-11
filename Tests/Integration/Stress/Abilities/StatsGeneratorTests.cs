@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Ninject;
-using CharacterGen.Common.Abilities.Stats;
+﻿using CharacterGen.Common.Abilities.Stats;
 using CharacterGen.Generators.Abilities;
 using CharacterGen.Generators.Randomizers.Stats;
+using Ninject;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CharacterGen.Tests.Integration.Stress.Abilities
 {
@@ -35,7 +35,7 @@ namespace CharacterGen.Tests.Integration.Stress.Abilities
         {
             var alignment = GetNewAlignment();
             var characterClass = GetNewCharacterClass(alignment);
-            var race = GetNewRace(alignment, characterClass);
+            var race = RaceGenerator.GenerateWith(alignment, characterClass, BaseRaceRandomizer, MetaraceRandomizer);
             var stats = StatsGenerator.GenerateWith(StatsRandomizer, characterClass, race);
 
             foreach (var statName in statNames)

@@ -41,7 +41,7 @@ namespace CharacterGen.Tests.Integration.Stress.Items
         {
             var alignment = GetNewAlignment();
             var characterClass = GetNewCharacterClass(alignment);
-            var race = GetNewRace(alignment, characterClass);
+            var race = RaceGenerator.GenerateWith(alignment, characterClass, BaseRaceRandomizer, MetaraceRandomizer);
             var baseAttack = CombatGenerator.GenerateBaseAttackWith(characterClass, race);
             var ability = AbilitiesGenerator.GenerateWith(characterClass, race, StatsRandomizer, baseAttack);
 
@@ -73,17 +73,6 @@ namespace CharacterGen.Tests.Integration.Stress.Items
                 e => e.Treasure.Items.Any());
 
             Assert.That(equipment.Treasure.Items, Is.Not.Empty);
-        }
-
-        [Test]
-        public void TreasureDoesNotHappen()
-        {
-            var equipment = Generate(GetEquipment,
-                e => e.Treasure.Goods.Any() == false && e.Treasure.Items.Any() == false && e.Treasure.Coin.Quantity == 0);
-
-            Assert.That(equipment.Treasure.Items, Is.Empty);
-            Assert.That(equipment.Treasure.Goods, Is.Empty);
-            Assert.That(equipment.Treasure.Coin.Quantity, Is.EqualTo(0));
         }
 
         [Test]

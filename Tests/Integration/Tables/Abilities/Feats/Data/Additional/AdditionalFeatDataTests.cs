@@ -1,5 +1,4 @@
 ﻿using CharacterGen.Common.Abilities.Feats;
-using CharacterGen.Common.Items;
 using CharacterGen.Tables;
 using NUnit.Framework;
 using System;
@@ -168,7 +167,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Additional
         [TestCase(FeatConstants.Endurance, 0, "", 0, "", 4)]
         [TestCase(FeatConstants.EnlargeSpell, 0, "", 0, "", 0)]
         [TestCase(FeatConstants.EschewMaterials, 0, "", 0, "", 0)]
-        [TestCase(FeatConstants.ExoticWeaponProficiency, 1, ProficiencyConstants.All, 0, "", 0)]
+        [TestCase(FeatConstants.ExoticWeaponProficiency, 1, FeatConstants.Foci.All, 0, "", 0)]
         [TestCase(FeatConstants.ExtendSpell, 0, "", 0, "", 0)]
         [TestCase(FeatConstants.ExtraTurning, 0, "", 0, "", 4)]
         [TestCase(FeatConstants.FarShot, 0, "", 0, "", 0)]
@@ -203,7 +202,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Additional
         [TestCase(FeatConstants.LightningReflexes, 0, "", 0, "", 2)]
         [TestCase(FeatConstants.MagicalAptitude, 0, "", 0, "", 2)]
         [TestCase(FeatConstants.Manyshot, 6, "", 0, "", 0)]
-        [TestCase(FeatConstants.MartialWeaponProficiency, 0, ProficiencyConstants.All, 0, "", 0)]
+        [TestCase(FeatConstants.MartialWeaponProficiency, 0, FeatConstants.Foci.All, 0, "", 0)]
         [TestCase(FeatConstants.MaximizeSpell, 0, "", 0, "", 0)]
         [TestCase(FeatConstants.Mobility, 0, "", 0, "", 4)]
         [TestCase(FeatConstants.MountedArchery, 0, "", 0, "", 0)]
@@ -227,7 +226,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Additional
         [TestCase(FeatConstants.ShieldProficiency, 0, "", 0, "", 0)]
         [TestCase(FeatConstants.ShotOnTheRun, 4, "", 0, "", 0)]
         [TestCase(FeatConstants.SilentSpell, 0, "", 0, "", 0)]
-        [TestCase(FeatConstants.SimpleWeaponProficiency, 0, ProficiencyConstants.All, 0, "", 0)]
+        [TestCase(FeatConstants.SimpleWeaponProficiency, 0, FeatConstants.Foci.All, 0, "", 0)]
         [TestCase(FeatConstants.SkillFocus, 0, GroupConstants.Skills, 0, "", 3)]
         [TestCase(FeatConstants.SkillMastery, 0, GroupConstants.Skills, 0, "", 3)]
         [TestCase(FeatConstants.SlipperyMind, 0, "", 0, "", 0)]

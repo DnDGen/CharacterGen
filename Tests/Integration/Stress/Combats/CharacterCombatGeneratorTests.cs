@@ -44,7 +44,7 @@ namespace CharacterGen.Tests.Integration.Stress.Combats
         {
             var alignment = GetNewAlignment();
             var characterClass = GetNewCharacterClass(alignment);
-            var race = GetNewRace(alignment, characterClass);
+            var race = RaceGenerator.GenerateWith(alignment, characterClass, BaseRaceRandomizer, MetaraceRandomizer);
 
             var baseAttack = CombatGenerator.GenerateBaseAttackWith(characterClass, race);
             Assert.That(baseAttack.Bonus, Is.Not.Negative);
@@ -83,7 +83,7 @@ namespace CharacterGen.Tests.Integration.Stress.Combats
 
             var alignment = GetNewAlignment();
             var characterClass = GetNewCharacterClass(alignment);
-            var race = GetNewRace(alignment, characterClass);
+            var race = RaceGenerator.GenerateWith(alignment, characterClass, BaseRaceRandomizer, MetaraceRandomizer);
 
             var baseAttack = CombatGenerator.GenerateBaseAttackWith(characterClass, race);
             Assert.That(baseAttack.Bonus, Is.Not.Negative);

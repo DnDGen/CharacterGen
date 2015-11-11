@@ -1,7 +1,6 @@
 ﻿using CharacterGen.Common.Abilities.Feats;
 using CharacterGen.Common.Abilities.Stats;
 using CharacterGen.Common.CharacterClasses;
-using CharacterGen.Common.Items;
 using CharacterGen.Tables;
 using NUnit.Framework;
 using System;
@@ -34,7 +33,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
 
         [TestCase(FeatConstants.SimpleWeaponProficiency,
             FeatConstants.SimpleWeaponProficiency,
-            ProficiencyConstants.All,
+            FeatConstants.Foci.All,
             0,
             "",
             "",

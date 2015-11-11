@@ -1,5 +1,4 @@
 ﻿using CharacterGen.Common.Abilities.Feats;
-using CharacterGen.Common.Items;
 using CharacterGen.Common.Races;
 using CharacterGen.Tables;
 using NUnit.Framework;
@@ -33,7 +32,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial.Base
 
         [TestCase(FeatConstants.SimpleWeaponProficiency,
             FeatConstants.SimpleWeaponProficiency,
-            ProficiencyConstants.All,
+            FeatConstants.Foci.All,
             0,
             "",
             0,

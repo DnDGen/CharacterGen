@@ -1,6 +1,5 @@
 ﻿using CharacterGen.Common.Abilities.Feats;
 using CharacterGen.Common.CharacterClasses;
-using CharacterGen.Common.Items;
 using CharacterGen.Common.Races;
 using CharacterGen.Generators.Domain.Items;
 using CharacterGen.Generators.Items;
@@ -40,8 +39,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             mockMundaneWeaponGenerator = new Mock<IMundaneItemGenerator>();
             mockMagicalWeaponGenerator = new Mock<IMagicalItemGenerator>();
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
-            weaponGenerator = new WeaponGenerator(mockCollectionsSelector.Object, mockPercentileSelector.Object,
-                mockMundaneWeaponGenerator.Object, mockMagicalWeaponGenerator.Object);
+            weaponGenerator = new WeaponGenerator(mockCollectionsSelector.Object, mockPercentileSelector.Object, mockMundaneWeaponGenerator.Object, mockMagicalWeaponGenerator.Object);
             magicalWeapon = new Item();
             feats = new List<Feat>();
             characterClass = new CharacterClass();
@@ -52,14 +50,16 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             race = new Race();
 
             race.Size = "size";
+            race.BaseRace = "base race";
             magicalWeapon = CreateWeapon("magical weapon");
             magicalWeapon.IsMagical = true;
+            characterClass.ClassName = "class name";
             characterClass.Level = 9266;
             baseWeaponTypes.Add("base weapon");
             weapons.Remove(magicalWeapon.Name);
             weapons.Add(baseWeaponTypes[0]);
             weapons.Add("different weapon");
-            feats.Add(new Feat { Name = "all proficiency", Focus = ProficiencyConstants.All });
+            feats.Add(new Feat { Name = "all proficiency", Focus = FeatConstants.Foci.All });
             proficiencyFeats.Add(feats[0].Name);
             allProficientWeapons.Remove(magicalWeapon.Name);
             allProficientWeapons.Add(baseWeaponTypes[0]);
@@ -82,7 +82,13 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         public void ThrowExceptionIfNoWeaponsAreAllowed()
         {
             allProficientWeapons.Clear();
-            Assert.That(() => weaponGenerator.GenerateFrom(feats, characterClass, race), Throws.ArgumentException.With.Message.EqualTo("No weapons are allowed, which should never happen"));
+            feats.Add(new Feat { Name = "feat 1" });
+            feats.Add(new Feat { Name = "feat 2", Focus = "focus" });
+
+            Assert.That(() => weaponGenerator.GenerateFrom(feats, characterClass, race), Throws.ArgumentException.With.Message.ContainsSubstring("No weapons are allowed, which should never happen"));
+            Assert.That(() => weaponGenerator.GenerateFrom(feats, characterClass, race), Throws.ArgumentException.With.Message.ContainsSubstring("Class: class name"));
+            Assert.That(() => weaponGenerator.GenerateFrom(feats, characterClass, race), Throws.ArgumentException.With.Message.ContainsSubstring("Race: base race"));
+            Assert.That(() => weaponGenerator.GenerateFrom(feats, characterClass, race), Throws.ArgumentException.With.Message.ContainsSubstring("Feats: all proficiency (All), feat 1 (), feat 2 (focus)"));
         }
 
         [Test]
@@ -538,6 +544,16 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             Assert.That(weapon.ItemType, Is.EqualTo(ItemTypeConstants.Weapon));
             Assert.That(weapon.Quantity, Is.EqualTo(1));
             Assert.That(weapon.Traits, Contains.Item(race.Size));
+        }
+
+        [Test]
+        public void SaveBonusesOfAllDoNotCountAsProficiencyFeats()
+        {
+            feats.Add(new Feat { Name = FeatConstants.SaveBonus, Focus = FeatConstants.Foci.All });
+            feats[0].Focus = baseWeaponTypes[0];
+
+            var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
+            Assert.That(weapon, Is.EqualTo(magicalWeapon));
         }
     }
 }

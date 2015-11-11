@@ -3,7 +3,6 @@ using CharacterGen.Common.Abilities.Skills;
 using CharacterGen.Common.Abilities.Stats;
 using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Common.Combats;
-using CharacterGen.Common.Items;
 using CharacterGen.Common.Races;
 using CharacterGen.Generators.Abilities.Feats;
 using CharacterGen.Selectors;
@@ -88,7 +87,7 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
                 var featSelection = collectionsSelector.SelectRandomFrom(availableFeats);
 
                 var preliminaryFocus = featFocusGenerator.GenerateFrom(featSelection.Feat, featSelection.FocusType, skills, featSelection.RequiredFeats, chosenFeats, characterClass);
-                if (preliminaryFocus == ProficiencyConstants.All)
+                if (preliminaryFocus == FeatConstants.Foci.All)
                 {
                     quantity++;
                     sourceFeats = sourceFeats.Except(new[] { featSelection });
@@ -101,7 +100,7 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
                 if (featSelection.Feat == FeatConstants.SkillMastery)
                     featInstanceQuantity = stats[StatConstants.Intelligence].Bonus + featSelection.Strength;
 
-                while (featInstanceQuantity-- > 0 && preliminaryFocus != ProficiencyConstants.All)
+                while (featInstanceQuantity-- > 0 && preliminaryFocus != FeatConstants.Foci.All)
                 {
                     var feat = new Feat();
                     feat.Name = featSelection.Feat;

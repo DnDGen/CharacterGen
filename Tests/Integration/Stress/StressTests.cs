@@ -1,6 +1,5 @@
 ﻿using CharacterGen.Common.Alignments;
 using CharacterGen.Common.CharacterClasses;
-using CharacterGen.Common.Races;
 using CharacterGen.Generators;
 using CharacterGen.Generators.Randomizers.Alignments;
 using CharacterGen.Generators.Randomizers.CharacterClasses;
@@ -43,7 +42,7 @@ namespace CharacterGen.Tests.Integration.Stress
         private const Int32 ConfidentIterations = 1000000;
         private const Int32 OneMinuteInSeconds = 60;
 #if STRESS
-        private const Int32 TimeLimitInSeconds = OneMinuteInSeconds * 3;
+        private const Int32 TimeLimitInSeconds = OneMinuteInSeconds * 1;
 #else
         private const Int32 TimeLimitInSeconds = 1;
 #endif
@@ -113,11 +112,6 @@ namespace CharacterGen.Tests.Integration.Stress
                 c => RandomizerVerifier.VerifyCharacterClassCompatibility(alignment, c, BaseRaceRandomizer, MetaraceRandomizer));
 
             return characterClass;
-        }
-
-        protected Race GetNewRace(Alignment alignment, CharacterClass characterClass)
-        {
-            return RaceGenerator.GenerateWith(alignment, characterClass, BaseRaceRandomizer, MetaraceRandomizer);
         }
     }
 }

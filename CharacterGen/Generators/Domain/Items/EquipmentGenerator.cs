@@ -67,9 +67,7 @@ namespace CharacterGen.Generators.Domain.Items
             if (equipment.PrimaryHand.Attributes.Contains(AttributeConstants.Melee) == false)
             {
                 var meleeWeapon = GenerateMeleeWeapon(feats, characterClass, race);
-
-                if (meleeWeapon != null)
-                    equipment.Treasure.Items = equipment.Treasure.Items.Union(new[] { meleeWeapon });
+                equipment.Treasure.Items = equipment.Treasure.Items.Union(new[] { meleeWeapon });
             }
 
             if (equipment.Armor != null && equipment.Armor.Attributes.Contains(AttributeConstants.Shield))
@@ -132,17 +130,23 @@ namespace CharacterGen.Generators.Domain.Items
 
         private Item GenerateMeleeWeapon(IEnumerable<Feat> feats, CharacterClass characterClass, Race race)
         {
-            var proficiencyFeats = feats.Where(f => f.Focus == ProficiencyConstants.All);
-
-            if (proficiencyFeats.Any() == false)
-            {
-                var proficiencyFeatNames = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, ItemTypeConstants.Weapon + GroupConstants.Proficiency);
-                proficiencyFeats = feats.Where(f => proficiencyFeatNames.Contains(f.Name));
-            }
+            var proficiencyFeats = GetProficiencyFeats(feats);
 
             return Build<Item>(
                 () => weaponGenerator.GenerateFrom(proficiencyFeats, characterClass, race),
                 w => w != null && w.Attributes.Contains(AttributeConstants.Melee));
+        }
+
+        private IEnumerable<Feat> GetProficiencyFeats(IEnumerable<Feat> feats)
+        {
+            var proficiencyFeatNames = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, ItemTypeConstants.Weapon + GroupConstants.Proficiency);
+            var proficiencyFeats = feats.Where(f => proficiencyFeatNames.Contains(f.Name));
+            var specificProficiencyFeats = proficiencyFeats.Where(f => f.Focus != FeatConstants.Foci.All);
+
+            if (specificProficiencyFeats.Any())
+                return specificProficiencyFeats;
+
+            return proficiencyFeats;
         }
     }
 }

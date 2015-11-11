@@ -3,7 +3,6 @@ using CharacterGen.Common.Abilities.Skills;
 using CharacterGen.Common.Abilities.Stats;
 using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Common.Combats;
-using CharacterGen.Common.Items;
 using CharacterGen.Common.Races;
 using CharacterGen.Generators.Abilities.Feats;
 using CharacterGen.Generators.Domain.Abilities.Feats;
@@ -636,7 +635,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             AddFeatSelections(1);
             additionalFeatSelections[0].FocusType = "focus type";
 
-            mockFeatFocusGenerator.Setup(g => g.GenerateFrom(additionalFeatSelections[0].Feat, "focus type", skills, additionalFeatSelections[0].RequiredFeats, preselectedFeats, characterClass)).Returns(ProficiencyConstants.All);
+            mockFeatFocusGenerator.Setup(g => g.GenerateFrom(additionalFeatSelections[0].Feat, "focus type", skills, additionalFeatSelections[0].RequiredFeats, preselectedFeats, characterClass)).Returns(FeatConstants.Foci.All);
 
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             Assert.That(feats, Is.Empty);
@@ -648,7 +647,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             AddFeatSelections(2);
             additionalFeatSelections[0].FocusType = "focus type";
 
-            mockFeatFocusGenerator.Setup(g => g.GenerateFrom(additionalFeatSelections[0].Feat, "focus type", skills, additionalFeatSelections[0].RequiredFeats, preselectedFeats, characterClass)).Returns(ProficiencyConstants.All);
+            mockFeatFocusGenerator.Setup(g => g.GenerateFrom(additionalFeatSelections[0].Feat, "focus type", skills, additionalFeatSelections[0].RequiredFeats, preselectedFeats, characterClass)).Returns(FeatConstants.Foci.All);
 
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             var onlyFeat = feats.Single();
@@ -774,7 +773,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             mockFeatFocusGenerator.Setup(g => g.GenerateFrom(FeatConstants.SkillMastery, GroupConstants.Skills, skills, additionalFeatSelections[0].RequiredFeats, preselectedFeats, characterClass))
                 .Returns("skill 1");
             mockFeatFocusGenerator.Setup(g => g.GenerateFrom(FeatConstants.SkillMastery, GroupConstants.Skills, skills, additionalFeatSelections[0].RequiredFeats, It.Is<IEnumerable<Feat>>(fs => fs.Any(f => f.Name == FeatConstants.SkillMastery)), characterClass))
-                .Returns(ProficiencyConstants.All);
+                .Returns(FeatConstants.Foci.All);
 
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             var onlyFeat = feats.Single();
@@ -797,7 +796,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
                 .Returns(new[] { FeatConstants.SkillMastery });
 
             mockFeatFocusGenerator.Setup(g => g.GenerateFrom(FeatConstants.SkillMastery, GroupConstants.Skills, skills, additionalFeatSelections[0].RequiredFeats, preselectedFeats, characterClass))
-                .Returns(ProficiencyConstants.All);
+                .Returns(FeatConstants.Foci.All);
 
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             Assert.That(feats, Is.Empty);
@@ -816,7 +815,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
                 .Returns(new[] { FeatConstants.SkillMastery });
 
             mockFeatFocusGenerator.Setup(g => g.GenerateFrom(FeatConstants.SkillMastery, GroupConstants.Skills, skills, additionalFeatSelections[0].RequiredFeats, preselectedFeats, characterClass))
-                .Returns(ProficiencyConstants.All);
+                .Returns(FeatConstants.Foci.All);
 
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             var onlyFeat = feats.Single();
@@ -873,7 +872,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             additionalFeatSelections.Add(selection);
 
             mockFeatFocusGenerator.SetupSequence(g => g.GenerateFrom("additional feat", "focus type", skills, additionalFeatSelections[0].RequiredFeats, It.IsAny<IEnumerable<Feat>>(), characterClass))
-                .Returns("focus").Returns(ProficiencyConstants.All);
+                .Returns("focus").Returns(FeatConstants.Foci.All);
 
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             var feat = feats.Single();

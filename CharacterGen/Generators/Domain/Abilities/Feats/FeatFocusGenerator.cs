@@ -1,7 +1,6 @@
 ﻿using CharacterGen.Common.Abilities.Feats;
 using CharacterGen.Common.Abilities.Skills;
 using CharacterGen.Common.CharacterClasses;
-using CharacterGen.Common.Items;
 using CharacterGen.Generators.Abilities.Feats;
 using CharacterGen.Selectors;
 using CharacterGen.Selectors.Objects;
@@ -28,15 +27,15 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
                 return String.Empty;
 
             var allSourceFeatFoci = collectionsSelector.SelectAllFrom(TableNameConstants.Set.Collection.FeatFoci);
-            if (focusType != ProficiencyConstants.All && allSourceFeatFoci.Keys.Contains(focusType) == false)
+            if (focusType != FeatConstants.Foci.All && allSourceFeatFoci.Keys.Contains(focusType) == false)
                 return focusType;
 
             var requiredFeatIds = requiredFeats.Select(f => f.Feat);
             var foci = GetFoci(feat, focusType, allSourceFeatFoci, otherFeats, requiredFeatIds);
             var usedFoci = otherFeats.Where(f => f.Name == feat).Select(f => f.Focus);
 
-            if (usedFoci.Contains(ProficiencyConstants.All))
-                return ProficiencyConstants.All;
+            if (usedFoci.Contains(FeatConstants.Foci.All))
+                return FeatConstants.Foci.All;
 
             foci = foci.Except(usedFoci);
 
@@ -54,10 +53,10 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
 
             var spellcasters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Spellcasters);
             if (spellcasters.Contains(characterClass.ClassName) == false)
-                foci = foci.Except(new[] { ProficiencyConstants.Ray });
+                foci = foci.Except(new[] { FeatConstants.Foci.Ray });
 
             if (foci.Any() == false)
-                return ProficiencyConstants.All;
+                return FeatConstants.Foci.All;
 
             return collectionsSelector.SelectRandomFrom(foci);
         }
@@ -76,8 +75,8 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
             var requiredFeats = otherFeats.Where(f => RequirementHasFocus(requiredFeatIds, f));
             requiredFeats = requiredFeats.Union(proficiencyFeats);
 
-            var requirementFoci = requiredFeats.Where(f => f.Focus != ProficiencyConstants.All).Select(f => f.Focus);
-            var featsWithAllFocus = requiredFeats.Where(f => f.Focus == ProficiencyConstants.All);
+            var requirementFoci = requiredFeats.Where(f => f.Focus != FeatConstants.Foci.All).Select(f => f.Focus);
+            var featsWithAllFocus = requiredFeats.Where(f => f.Focus == FeatConstants.Foci.All);
 
             foreach (var featWithAllFocus in featsWithAllFocus)
             {
@@ -98,7 +97,7 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
 
         private IEnumerable<String> GetExplodedFoci(Dictionary<String, IEnumerable<String>> allSourceFeatFoci, String feat, String focusType, IEnumerable<Feat> otherFeats)
         {
-            if (focusType != ProficiencyConstants.All)
+            if (focusType != FeatConstants.Foci.All)
                 return allSourceFeatFoci[focusType];
 
             if (feat != FeatConstants.MartialWeaponProficiency && feat != FeatConstants.ExoticWeaponProficiency)
@@ -124,7 +123,7 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
                 return String.Empty;
 
             var allSourceFeatFoci = collectionsSelector.SelectAllFrom(TableNameConstants.Set.Collection.FeatFoci);
-            if (focusType != ProficiencyConstants.All && allSourceFeatFoci.Keys.Contains(focusType) == false)
+            if (focusType != FeatConstants.Foci.All && allSourceFeatFoci.Keys.Contains(focusType) == false)
                 return focusType;
 
             var foci = GetFoci(feat, focusType, allSourceFeatFoci, Enumerable.Empty<Feat>(), Enumerable.Empty<String>());
@@ -138,7 +137,7 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
             }
 
             if (foci.Any() == false)
-                return ProficiencyConstants.All;
+                return FeatConstants.Foci.All;
 
             return collectionsSelector.SelectRandomFrom(foci);
         }
@@ -146,7 +145,7 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
 
         public String GenerateAllowingFocusOfAllFrom(String feat, String focusType, Dictionary<String, Skill> skills, IEnumerable<RequiredFeat> requiredFeats, IEnumerable<Feat> otherFeats, CharacterClass characterClass)
         {
-            if (focusType == ProficiencyConstants.All)
+            if (focusType == FeatConstants.Foci.All)
                 return focusType;
 
             return GenerateFrom(feat, focusType, skills, requiredFeats, otherFeats, characterClass);
@@ -154,7 +153,7 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
 
         public String GenerateAllowingFocusOfAllFrom(String feat, String focusType, Dictionary<String, Skill> skills)
         {
-            if (focusType == ProficiencyConstants.All)
+            if (focusType == FeatConstants.Foci.All)
                 return focusType;
 
             return GenerateFrom(feat, focusType, skills);

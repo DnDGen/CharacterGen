@@ -3,7 +3,6 @@ using CharacterGen.Common.Abilities.Skills;
 using CharacterGen.Common.Abilities.Stats;
 using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Common.Combats;
-using CharacterGen.Common.Items;
 using CharacterGen.Common.Races;
 using CharacterGen.Generators.Abilities.Feats;
 using CharacterGen.Generators.Domain.Abilities.Feats;
@@ -644,7 +643,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             racialFeats[0].Name = "feat1";
             racialFeats[0].Focus = "focus";
             racialFeats[1].Name = "feat1";
-            racialFeats[1].Focus = ProficiencyConstants.All;
+            racialFeats[1].Focus = FeatConstants.Foci.All;
             racialFeats[2].Name = "feat2";
             racialFeats[3].Name = "feat3";
             racialFeats[3].Focus = "focus";
@@ -655,7 +654,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             var feat3 = feats.First(f => f.Name == "feat3");
 
             Assert.That(feat1.Name, Is.EqualTo("feat1"));
-            Assert.That(feat1.Focus, Is.EqualTo(ProficiencyConstants.All));
+            Assert.That(feat1.Focus, Is.EqualTo(FeatConstants.Foci.All));
             Assert.That(feat2.Name, Is.EqualTo("feat2"));
             Assert.That(feat2.Focus, Is.Empty);
             Assert.That(feat3.Name, Is.EqualTo("feat3"));

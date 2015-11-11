@@ -1,6 +1,5 @@
 ﻿using CharacterGen.Common.Abilities.Feats;
 using CharacterGen.Common.CharacterClasses;
-using CharacterGen.Common.Items;
 using CharacterGen.Common.Races;
 using CharacterGen.Generators.Items;
 using CharacterGen.Selectors;
@@ -37,7 +36,15 @@ namespace CharacterGen.Generators.Domain.Items
             var allowedWeapons = GetAllowedWeapons(feats);
 
             if (allowedWeapons.Any() == false)
-                throw new ArgumentException("No weapons are allowed, which should never happen");
+            {
+                var message = "No weapons are allowed, which should never happen";
+                message += String.Format("\nClass: {0}", characterClass.ClassName);
+                message += String.Format("\nRace: {0}", race.BaseRace);
+                var featNames = String.Join(", ", feats.Select(f => String.Format("{0} ({1})", f.Name, f.Focus)));
+                message += String.Format("\nFeats: {0}", featNames);
+
+                throw new ArgumentException(message);
+            }
 
             var additionalWeapons = new List<String>();
 
@@ -110,7 +117,8 @@ namespace CharacterGen.Generators.Domain.Items
             if (proficientWeapons.Any())
                 return proficientWeapons;
 
-            var proficientWithAllInFeat = proficiencyFeats.Where(f => f.Focus == ProficiencyConstants.All);
+            var proficientWithAllInFeat = proficiencyFeats.Where(f => f.Focus == FeatConstants.Foci.All);
+
             foreach (var feat in proficientWithAllInFeat)
             {
                 var featWeapons = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, feat.Name);

@@ -28,7 +28,7 @@ namespace CharacterGen.Tests.Integration.Stress.Abilities
         {
             var alignment = GetNewAlignment();
             var characterClass = GetNewCharacterClass(alignment);
-            var race = GetNewRace(alignment, characterClass);
+            var race = RaceGenerator.GenerateWith(alignment, characterClass, BaseRaceRandomizer, MetaraceRandomizer);
             var baseAttack = CharacterCombatGenerator.GenerateBaseAttackWith(characterClass, race);
 
             var ability = CharacterAbilitiesGenerator.GenerateWith(characterClass, race, StatsRandomizer, baseAttack);

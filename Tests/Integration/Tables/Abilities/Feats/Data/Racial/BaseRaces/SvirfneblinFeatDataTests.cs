@@ -1,7 +1,6 @@
 ﻿using CharacterGen.Common.Abilities.Feats;
 using CharacterGen.Common.Abilities.Skills;
 using CharacterGen.Common.CharacterClasses;
-using CharacterGen.Common.Items;
 using CharacterGen.Common.Magics;
 using CharacterGen.Common.Races;
 using CharacterGen.Tables;
@@ -74,7 +73,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial.Base
             0, 0)]
         [TestCase(FeatConstants.SaveBonus,
             FeatConstants.SaveBonus,
-            ProficiencyConstants.All,
+            FeatConstants.Foci.All,
             0,
             "",
             0,

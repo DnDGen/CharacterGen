@@ -3,7 +3,6 @@ using CharacterGen.Common.Abilities.Skills;
 using CharacterGen.Common.Abilities.Stats;
 using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Common.Combats;
-using CharacterGen.Common.Items;
 using CharacterGen.Common.Races;
 using CharacterGen.Generators.Abilities.Feats;
 using CharacterGen.Selectors;
@@ -95,10 +94,10 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
                 combinedFeatIds.Add(featToRemove.Name);
             }
 
-            if (allFeats.Any(f => f.Focus == ProficiencyConstants.All))
+            if (allFeats.Any(f => f.Focus == FeatConstants.Foci.All))
             {
-                var featIdsWithAllFocus = allFeats.Where(f => f.Focus == ProficiencyConstants.All).Select(f => f.Name);
-                var redundantFeats = allFeats.Where(f => featIdsWithAllFocus.Contains(f.Name) && f.Focus != ProficiencyConstants.All);
+                var featIdsWithAllFocus = allFeats.Where(f => f.Focus == FeatConstants.Foci.All).Select(f => f.Name);
+                var redundantFeats = allFeats.Where(f => featIdsWithAllFocus.Contains(f.Name) && f.Focus != FeatConstants.Foci.All);
                 featsToRemove.AddRange(redundantFeats);
             }
 

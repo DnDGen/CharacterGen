@@ -242,11 +242,15 @@ namespace CharacterGen.Tests.Unit.Common.Abilities.Feats
         [TestCase(FeatConstants.Frequencies.Round, "Round")]
         [TestCase(FeatConstants.Frequencies.Week, "Week")]
         [TestCase(FeatConstants.Foci.Acid, "Acid")]
+        [TestCase(FeatConstants.Foci.All, "All")]
         [TestCase(FeatConstants.Foci.Archery, "Archery")]
         [TestCase(FeatConstants.Foci.Cold, "Cold")]
         [TestCase(FeatConstants.Foci.Electricity, "Electricity")]
         [TestCase(FeatConstants.Foci.Fire, "Fire")]
+        [TestCase(FeatConstants.Foci.Grapple, "Grapple")]
+        [TestCase(FeatConstants.Foci.Ray, "Ray")]
         [TestCase(FeatConstants.Foci.Sonic, "Sonic")]
+        [TestCase(FeatConstants.Foci.UnarmedStrike, "Unarmed Strike")]
         public void Constant(String constant, String value)
         {
             Assert.That(constant, Is.EqualTo(value));

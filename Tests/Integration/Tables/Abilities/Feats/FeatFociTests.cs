@@ -1,7 +1,6 @@
 ﻿using CharacterGen.Common.Abilities.Feats;
 using CharacterGen.Common.Abilities.Skills;
 using CharacterGen.Common.CharacterClasses;
-using CharacterGen.Common.Items;
 using CharacterGen.Tables;
 using NUnit.Framework;
 using System;
@@ -52,7 +51,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
             CharacterClassConstants.Schools.Transmutation)]
         [TestCase(FeatConstants.SimpleWeaponProficiency,
             WeaponConstants.Gauntlet,
-            ProficiencyConstants.UnarmedStrike,
+            FeatConstants.Foci.UnarmedStrike,
             WeaponConstants.Dagger,
             WeaponConstants.PunchingDagger,
             WeaponConstants.SpikedGauntlet,
@@ -316,7 +315,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
                 WeaponConstants.TwoBladedSword,
                 WeaponConstants.Warhammer,
                 WeaponConstants.Whip,
-                ProficiencyConstants.UnarmedStrike
+                FeatConstants.Foci.UnarmedStrike
             };
 
             base.DistinctCollection(GroupConstants.WeaponsWithUnarmed, foci);
@@ -390,8 +389,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
                 WeaponConstants.TwoBladedSword,
                 WeaponConstants.Warhammer,
                 WeaponConstants.Whip,
-                ProficiencyConstants.UnarmedStrike,
-                ProficiencyConstants.Grapple
+                FeatConstants.Foci.UnarmedStrike,
+                FeatConstants.Foci.Grapple
             };
 
             base.DistinctCollection(GroupConstants.WeaponsWithUnarmedAndGrapple, foci);
@@ -465,9 +464,9 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
                 WeaponConstants.TwoBladedSword,
                 WeaponConstants.Warhammer,
                 WeaponConstants.Whip,
-                ProficiencyConstants.UnarmedStrike,
-                ProficiencyConstants.Grapple,
-                ProficiencyConstants.Ray
+                FeatConstants.Foci.UnarmedStrike,
+                FeatConstants.Foci.Grapple,
+                FeatConstants.Foci.Ray
             };
 
             base.DistinctCollection(GroupConstants.WeaponsWithUnarmedAndGrappleAndRay, foci);
