@@ -6,6 +6,7 @@ using CharacterGen.Tables;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TreasureGen.Common.Items;
 
 namespace CharacterGen.Selectors.Objects
 {
@@ -50,7 +51,7 @@ namespace CharacterGen.Selectors.Objects
 
         public Boolean MutableRequirementsMet(IEnumerable<Feat> feats)
         {
-            var proficiencyRequirement = RequiredFeats.FirstOrDefault(f => f.Feat.Contains(GroupConstants.Proficiency));
+            var proficiencyRequirement = RequiredFeats.FirstOrDefault(f => f.Feat == ItemTypeConstants.Weapon + GroupConstants.Proficiency);
             var requirementsWithoutProficiency = RequiredFeats.Except(new[] { proficiencyRequirement });
 
             return requirementsWithoutProficiency.All(f => f.RequirementMet(feats));

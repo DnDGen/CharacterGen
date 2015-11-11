@@ -88,5 +88,31 @@ namespace CharacterGen.Tests.Integration.Stress.Abilities.Feats
             var improvedInitiative = feats.Single(f => f.Name == FeatConstants.ImprovedInitiative);
             Assert.That(improvedInitiative.Strength, Is.EqualTo(4));
         }
+
+        [Test]
+        public void ImprovedShieldBashHasShieldProficiencyAsPrerequisite()
+        {
+            var setLevelRandomizer = GetNewInstanceOf<ISetLevelRandomizer>();
+            setLevelRandomizer.SetLevel = 20;
+            LevelRandomizer = setLevelRandomizer;
+
+            var alignment = GetNewAlignment();
+            var characterClass = GetNewCharacterClass(alignment);
+            var race = GetNewRace(alignment, characterClass);
+            var stats = StatsGenerator.GenerateWith(StatsRandomizer, characterClass, race);
+            var skills = SkillsGenerator.GenerateWith(characterClass, race, stats);
+            var baseAttack = CombatGenerator.GenerateBaseAttackWith(characterClass, race);
+            var racialFeats = RacialFeatsGenerator.GenerateWith(race, skills, stats);
+            var classFeats = ClassFeatsGenerator.GenerateWith(characterClass, race, stats, racialFeats, skills);
+            var preselectedFeats = classFeats.Union(racialFeats);
+
+            var feats = Generate(() => AdditionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats),
+                fs => fs.Any(f => f.Name == FeatConstants.ImprovedShieldBash));
+            var allFeats = feats.Union(preselectedFeats);
+            var allFeatNames = allFeats.Select(f => f.Name);
+
+            Assert.That(allFeatNames, Contains.Item(FeatConstants.ImprovedShieldBash));
+            Assert.That(allFeatNames, Contains.Item(FeatConstants.ShieldProficiency));
+        }
     }
 }

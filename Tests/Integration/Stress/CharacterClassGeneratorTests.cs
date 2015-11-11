@@ -1,7 +1,4 @@
-﻿using CharacterGen.Common.Alignments;
-using CharacterGen.Common.CharacterClasses;
-using CharacterGen.Generators.Randomizers.Alignments;
-using CharacterGen.Generators.Randomizers.CharacterClasses;
+﻿using CharacterGen.Common.CharacterClasses;
 using NUnit.Framework;
 using System;
 using System.Linq;
@@ -28,57 +25,6 @@ namespace CharacterGen.Tests.Integration.Stress
         {
             var alignment = GetNewAlignment();
             return CharacterClassGenerator.GenerateWith(alignment, LevelRandomizer, ClassNameRandomizer);
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            AlignmentRandomizer = GetNewInstanceOf<IAlignmentRandomizer>(AlignmentRandomizerTypeConstants.Any);
-            ClassNameRandomizer = GetNewInstanceOf<IClassNameRandomizer>(ClassNameRandomizerTypeConstants.Any);
-        }
-
-        [Test]
-        public void PaladinHappens()
-        {
-            var characterClass = Generate<CharacterClass>(GenerateClass,
-                c => c.ClassName == CharacterClassConstants.Paladin);
-
-            Assert.That(characterClass.ClassName, Is.EqualTo(CharacterClassConstants.Paladin));
-        }
-
-        [Test]
-        public void PaladinHappensWhenLawfulGood()
-        {
-            var setAlignmentRandomizer = GetNewInstanceOf<ISetAlignmentRandomizer>();
-            setAlignmentRandomizer.SetAlignment.Lawfulness = AlignmentConstants.Lawful;
-            setAlignmentRandomizer.SetAlignment.Goodness = AlignmentConstants.Good;
-
-            AlignmentRandomizer = setAlignmentRandomizer;
-
-            var characterClass = Generate<CharacterClass>(GenerateClass,
-                c => c.ClassName == CharacterClassConstants.Paladin);
-
-            Assert.That(characterClass.ClassName, Is.EqualTo(CharacterClassConstants.Paladin));
-        }
-
-        [Test]
-        public void PaladinHappensWhenSetToPaladin()
-        {
-            var setAlignmentRandomizer = GetNewInstanceOf<ISetAlignmentRandomizer>();
-            setAlignmentRandomizer.SetAlignment.Lawfulness = AlignmentConstants.Lawful;
-            setAlignmentRandomizer.SetAlignment.Goodness = AlignmentConstants.Good;
-
-            AlignmentRandomizer = setAlignmentRandomizer;
-
-            var setClassRandomizer = GetNewInstanceOf<ISetClassNameRandomizer>();
-            setClassRandomizer.SetClassName = CharacterClassConstants.Paladin;
-
-            ClassNameRandomizer = setClassRandomizer;
-
-            var characterClass = Generate<CharacterClass>(GenerateClass,
-                c => c.ClassName == CharacterClassConstants.Paladin);
-
-            Assert.That(characterClass.ClassName, Is.EqualTo(CharacterClassConstants.Paladin));
         }
 
         [Test]

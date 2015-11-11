@@ -47,6 +47,14 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="TreasureGen.Common, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\EquipmentGen.3.3\lib\TreasureGen.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="TreasureGen.Generators, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\EquipmentGen.3.3\lib\TreasureGen.Generators.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IBooleanPercentileSelector.cs" />
@@ -81,6 +89,9 @@
       <Project>{b0abd6a7-a3f9-456b-b820-0e90426c5fa8}</Project>
       <Name>CharacterGen.Tables</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
