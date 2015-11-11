@@ -1,6 +1,6 @@
-﻿using System;
-using CharacterGen.Common.Alignments;
+﻿using CharacterGen.Common.Alignments;
 using NUnit.Framework;
+using System;
 
 namespace CharacterGen.Tests.Unit.Common.Alignments
 {
@@ -16,6 +16,38 @@ namespace CharacterGen.Tests.Unit.Common.Alignments
         }
 
         [Test]
+        public void CanBuildAlignmentByString()
+        {
+            alignment = new Alignment("lawfulness goodness");
+            Assert.That(alignment.Goodness, Is.EqualTo("goodness"));
+            Assert.That(alignment.Lawfulness, Is.EqualTo("lawfulness"));
+        }
+
+        [Test]
+        public void TrueNeutralBecomesNeutralNeutral()
+        {
+            alignment = new Alignment("True Neutral");
+            Assert.That(alignment.Goodness, Is.EqualTo(AlignmentConstants.Neutral));
+            Assert.That(alignment.Lawfulness, Is.EqualTo(AlignmentConstants.Neutral));
+        }
+
+        [Test]
+        public void TooShortAlignmentDefaultsToEmpty()
+        {
+            alignment = new Alignment("good");
+            Assert.That(alignment.Goodness, Is.Empty);
+            Assert.That(alignment.Lawfulness, Is.Empty);
+        }
+
+        [Test]
+        public void TooLongAlignmentDefaultsToEmpty()
+        {
+            alignment = new Alignment("much too good");
+            Assert.That(alignment.Goodness, Is.Empty);
+            Assert.That(alignment.Lawfulness, Is.Empty);
+        }
+
+        [Test]
         public void AlignmentInitialized()
         {
             Assert.That(alignment.Goodness, Is.Empty);
@@ -23,23 +55,33 @@ namespace CharacterGen.Tests.Unit.Common.Alignments
         }
 
         [Test]
-        public void ToStringIsLawfulnessPlusGoodness()
+        public void FullIsLawfulnessPlusGoodness()
         {
             alignment.Lawfulness = "lawfulness";
             alignment.Goodness = "goodness";
-            Assert.That(alignment.ToString(), Is.EqualTo("lawfulness goodness"));
+            Assert.That(alignment.Full, Is.EqualTo("lawfulness goodness"));
         }
 
         [Test]
-        public void TrueNeutralToString()
+        public void FullNeutralNeutralIsTrueNeutral()
         {
             alignment.Lawfulness = AlignmentConstants.Neutral;
             alignment.Goodness = AlignmentConstants.Neutral;
-            Assert.That(alignment.ToString(), Is.EqualTo("True Neutral"));
+            Assert.That(alignment.Full, Is.EqualTo("True Neutral"));
         }
 
         [Test]
-        public void ConvertingToStringUsesToString()
+        public void ToStringIsFull()
+        {
+            alignment.Lawfulness = "lawfulness";
+            alignment.Goodness = "goodness";
+
+            var alignmentString = alignment.ToString();
+            Assert.That(alignmentString, Is.EqualTo("lawfulness goodness"));
+        }
+
+        [Test]
+        public void ConvertingToStringUsesFull()
         {
             alignment.Lawfulness = "lawfulness";
             alignment.Goodness = "goodness";
@@ -97,7 +139,7 @@ namespace CharacterGen.Tests.Unit.Common.Alignments
         }
 
         [Test]
-        public void HashCodeIsHashOfToString()
+        public void HashCodeIsHashOfFull()
         {
             alignment.Lawfulness = "lawfulness";
             alignment.Goodness = "goodness";
