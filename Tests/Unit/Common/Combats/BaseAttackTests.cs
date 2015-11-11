@@ -1,7 +1,7 @@
-﻿using System;
-using System.Linq;
-using CharacterGen.Common.Combats;
+﻿using CharacterGen.Common.Combats;
 using NUnit.Framework;
+using System;
+using System.Linq;
 
 namespace CharacterGen.Tests.Unit.Common.Combats
 {
@@ -46,10 +46,13 @@ namespace CharacterGen.Tests.Unit.Common.Combats
         public void Bonuses(Int32 bonus, params Int32[] bonuses)
         {
             baseAttack.Bonus = bonus;
-            var attacks = baseAttack.GetAllBonuses();
+            var attacks = baseAttack.AllBonuses;
 
-            foreach (var attack in bonuses)
-                Assert.That(attacks, Contains.Item(attack));
+            for (var i = 0; i < bonuses.Length; i++)
+            {
+                var attack = attacks.ElementAt(i);
+                Assert.That(attack, Is.EqualTo(bonuses[i]));
+            }
 
             var extras = attacks.Except(bonuses);
             Assert.That(extras, Is.Empty);

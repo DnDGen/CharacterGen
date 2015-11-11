@@ -7,18 +7,21 @@ namespace CharacterGen.Common.Combats
     {
         public Int32 Bonus { get; set; }
 
-        public List<Int32> GetAllBonuses()
+        public IEnumerable<Int32> AllBonuses
         {
-            var bonuses = new List<Int32>();
-            var attackBonus = Bonus;
-
-            do
+            get
             {
-                bonuses.Add(attackBonus);
-                attackBonus -= 5;
-            } while (attackBonus > 0);
+                var bonuses = new List<Int32>();
+                var attackBonus = Bonus;
 
-            return bonuses;
+                do
+                {
+                    bonuses.Add(attackBonus);
+                    attackBonus -= 5;
+                } while (attackBonus > 0);
+
+                return bonuses;
+            }
         }
     }
 }
