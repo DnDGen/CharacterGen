@@ -30,8 +30,8 @@ namespace CharacterGen.Tests.Integration.Stress.Combats
         public void TearDown()
         {
             LevelRandomizer = GetNewInstanceOf<ILevelRandomizer>(LevelRandomizerTypeConstants.Any);
-            StatsRandomizer = GetNewInstanceOf<IStatsRandomizer>(StatsRandomizerTypeConstants.Raw);
             BaseRaceRandomizer = GetNewInstanceOf<RaceRandomizer>(RaceRandomizerTypeConstants.BaseRace.AnyBase);
+            StatsRandomizer = GetNewInstanceOf<IStatsRandomizer>(StatsRandomizerTypeConstants.Raw);
         }
 
         [TestCase("CharacterCombatGenerator")]
@@ -65,7 +65,7 @@ namespace CharacterGen.Tests.Integration.Stress.Combats
         public void InitiativeBonusTakesImprovedInitiativeFeatIntoAccount()
         {
             var setLevelRandomizer = GetNewInstanceOf<ISetLevelRandomizer>();
-            setLevelRandomizer.SetLevel = 20;
+            setLevelRandomizer.SetLevel = 1;
             LevelRandomizer = setLevelRandomizer;
 
             var setBaseRaceRandomizer = GetNewInstanceOf<ISetBaseRaceRandomizer>();

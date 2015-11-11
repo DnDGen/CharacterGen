@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+  <object>
+    <name>Bard</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Cleric</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Druid</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Paladin</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Ranger</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Sorcerer</name>
+    <item>1</item>
+  </object>
+    <object>
+        <name>Wizard</name>
+        <item>1</item>
+    </object>
+</items>

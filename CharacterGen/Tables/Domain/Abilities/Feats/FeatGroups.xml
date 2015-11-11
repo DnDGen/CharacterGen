@@ -100,6 +100,7 @@
         <item>Rapid Shot</item>
         <item>Ride-By Attack</item>
         <item>Run</item>
+      <item>Scribe Scroll</item>
         <item>Self-Sufficient</item>
         <item>Shield Proficiency</item>
         <item>Shot On The Run</item>
@@ -654,6 +655,20 @@
         <item>Leadership</item>
         <item>Spell Mastery</item>
         <item>Weapon Specialization</item>
+      <item>Combat Casting</item>
+      <item>Empower Spell</item>
+      <item>Enlarge Spell</item>
+      <item>Eschew Materials</item>
+      <item>Extend Spell</item>
+      <item>Heighten Spell</item>
+      <item>Improved Counterspell</item>
+      <item>Maximize Spell</item>
+      <item>Quicken Spell</item>
+      <item>Spell Focus</item>
+      <item>Still Spell</item>
+      <item>Silent Spell</item>
+      <item>Widen Spell</item>
+      <item>Scribe Scroll</item>
     </object>
     <object>
         <name>HasSkillRequirements</name>

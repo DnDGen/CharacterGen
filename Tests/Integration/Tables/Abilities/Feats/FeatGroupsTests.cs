@@ -143,19 +143,6 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
         }
 
         [TestCase("")]
-        [TestCase(GroupConstants.HasClassRequirements,
-            FeatConstants.CripplingStrike,
-            FeatConstants.DefensiveRoll,
-            FeatConstants.GreaterWeaponFocus,
-            FeatConstants.GreaterWeaponSpecialization,
-            FeatConstants.ImprovedEvasion,
-            FeatConstants.Opportunist,
-            FeatConstants.SkillMastery,
-            FeatConstants.SlipperyMind,
-            FeatConstants.ImprovedFamiliar,
-            FeatConstants.Leadership,
-            FeatConstants.SpellMastery,
-            FeatConstants.WeaponSpecialization)]
         [TestCase(GroupConstants.HasSkillRequirements,
             FeatConstants.MountedArchery,
             FeatConstants.MountedCombat,
@@ -257,9 +244,45 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
         }
 
         [Test]
+        public void FeatsWithClassRequirements()
+        {
+            var featNames = new[]
+            {
+                FeatConstants.CripplingStrike,
+                FeatConstants.DefensiveRoll,
+                FeatConstants.GreaterWeaponFocus,
+                FeatConstants.GreaterWeaponSpecialization,
+                FeatConstants.ImprovedEvasion,
+                FeatConstants.Opportunist,
+                FeatConstants.SkillMastery,
+                FeatConstants.SlipperyMind,
+                FeatConstants.ImprovedFamiliar,
+                FeatConstants.Leadership,
+                FeatConstants.SpellMastery,
+                FeatConstants.WeaponSpecialization,
+                FeatConstants.CombatCasting,
+                FeatConstants.EmpowerSpell,
+                FeatConstants.EnlargeSpell,
+                FeatConstants.EschewMaterials,
+                FeatConstants.ExtendSpell,
+                FeatConstants.HeightenSpell,
+                FeatConstants.ImprovedCounterspell,
+                FeatConstants.MaximizeSpell,
+                FeatConstants.QuickenSpell,
+                FeatConstants.ScribeScroll,
+                FeatConstants.SilentSpell,
+                FeatConstants.SpellFocus,
+                FeatConstants.StillSpell,
+                FeatConstants.WidenSpell
+            };
+
+            base.DistinctCollection(GroupConstants.HasClassRequirements, featNames);
+        }
+
+        [Test]
         public void FighterBonusFeats()
         {
-            var featIds = new[]
+            var featNames = new[]
             {
                 FeatConstants.BlindFight,
                 FeatConstants.CombatExpertise,
@@ -311,7 +334,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
                 FeatConstants.GreaterWeaponSpecialization
             };
 
-            base.DistinctCollection(GroupConstants.FighterBonusFeats, featIds);
+            base.DistinctCollection(GroupConstants.FighterBonusFeats, featNames);
         }
 
         [TestCase(CharacterClassConstants.Cleric,
@@ -1368,6 +1391,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
                 FeatConstants.RideByAttack,
                 FeatConstants.Run,
                 FeatConstants.SelfSufficient,
+                FeatConstants.ScribeScroll,
                 FeatConstants.ShieldProficiency,
                 FeatConstants.ShotOnTheRun,
                 FeatConstants.SilentSpell,

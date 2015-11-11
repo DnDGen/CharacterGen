@@ -108,6 +108,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Additional
                 FeatConstants.RapidShot,
                 FeatConstants.RideByAttack,
                 FeatConstants.Run,
+                FeatConstants.ScribeScroll,
                 FeatConstants.SelfSufficient,
                 FeatConstants.ShieldProficiency,
                 FeatConstants.ShotOnTheRun,
@@ -221,6 +222,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Additional
         [TestCase(FeatConstants.RapidShot, 0, "", 0, "", 0)]
         [TestCase(FeatConstants.RideByAttack, 0, "", 0, "", 0)]
         [TestCase(FeatConstants.Run, 0, "", 0, "", 0)]
+        [TestCase(FeatConstants.ScribeScroll, 0, "", 0, "", 0)]
         [TestCase(FeatConstants.SelfSufficient, 0, "", 0, "", 2)]
         [TestCase(FeatConstants.ShieldProficiency, 0, "", 0, "", 0)]
         [TestCase(FeatConstants.ShotOnTheRun, 4, "", 0, "", 0)]

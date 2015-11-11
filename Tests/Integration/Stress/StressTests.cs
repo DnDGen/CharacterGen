@@ -80,6 +80,9 @@ namespace CharacterGen.Tests.Integration.Stress
             do generatedObject = generate();
             while (TestShouldKeepRunning() && isValid(generatedObject) == false);
 
+            if (TestShouldKeepRunning() == false && isValid(generatedObject) == false)
+                Assert.Fail("Stress test timed out.");
+
             return generatedObject;
         }
 
