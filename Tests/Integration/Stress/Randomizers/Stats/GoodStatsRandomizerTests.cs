@@ -42,5 +42,13 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Stats
             var average = stats.Values.Average(s => s.Value);
             Assert.That(average, Is.InRange<Double>(13, 15));
         }
+
+        [Test]
+        public void NonDefaultStatsOccur()
+        {
+            var stats = Generate(GoodStatsRandomizer.Randomize, ss => ss.Values.Any(s => s.Value != 13));
+            var allStatsAreDefault = stats.Values.All(s => s.Value == 13);
+            Assert.That(allStatsAreDefault, Is.False);
+        }
     }
 }

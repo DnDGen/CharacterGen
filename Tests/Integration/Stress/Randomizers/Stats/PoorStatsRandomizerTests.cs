@@ -42,5 +42,13 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Stats
             var average = stats.Values.Average(s => s.Value);
             Assert.That(average, Is.LessThan(10));
         }
+
+        [Test]
+        public void NonDefaultStatsOccur()
+        {
+            var stats = Generate(PoorStatsRandomizer.Randomize, ss => ss.Values.Any(s => s.Value != 9));
+            var allStatsAreDefault = stats.Values.All(s => s.Value == 9);
+            Assert.That(allStatsAreDefault, Is.False);
+        }
     }
 }

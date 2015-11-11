@@ -4,6 +4,7 @@ using Ninject;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CharacterGen.Tests.Integration.Stress.Randomizers.Stats
 {
@@ -38,6 +39,14 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Stats
             }
 
             Assert.That(stats.Count, Is.EqualTo(6));
+        }
+
+        [Test]
+        public void NonDefaultStatsOccur()
+        {
+            var stats = Generate(RawStatsRandomizer.Randomize, ss => ss.Values.Any(s => s.Value != 10));
+            var allStatsAreDefault = stats.Values.All(s => s.Value == 10);
+            Assert.That(allStatsAreDefault, Is.False);
         }
     }
 }
