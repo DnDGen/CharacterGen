@@ -1,5 +1,6 @@
 ﻿using CharacterGen.Common.Abilities.Stats;
 using CharacterGen.Common.CharacterClasses;
+using CharacterGen.Common.Magics;
 using CharacterGen.Generators.Magics;
 using CharacterGen.Selectors;
 using CharacterGen.Tables;
@@ -20,15 +21,10 @@ namespace CharacterGen.Generators.Domain.Magics
             this.adjustmentsSelector = adjustmentsSelector;
         }
 
-        //public Dictionary<Int32, IEnumerable<String>> GenerateFrom(CharacterClass characterClass, IEnumerable<Feat> feats, Equipment equipment)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        public Dictionary<Int32, Int32> GenerateFrom(CharacterClass characterClass, Dictionary<String, Stat> stats)
+        public IEnumerable<Spells> GenerateFrom(CharacterClass characterClass, Dictionary<String, Stat> stats)
         {
             var spellcasters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Spellcasters);
-            var spellsPerDay = new Dictionary<Int32, Int32>();
+            var spellsPerDay = new List<Spells>();
 
             if (spellcasters.Contains(characterClass.ClassName) == false)
                 return spellsPerDay;
@@ -38,25 +34,25 @@ namespace CharacterGen.Generators.Domain.Magics
 
             var spellStat = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.StatGroups, characterClass.ClassName + GroupConstants.Spellcasters).Single();
             var maxSpellLevel = stats[spellStat].Value - 10;
+            var spellsForCharacter = spellsForClass.Where(kvp => Convert.ToInt32(kvp.Key) <= maxSpellLevel);
 
-            foreach (var kvp in spellsForClass)
+            foreach (var kvp in spellsForCharacter)
             {
-                var spellLevel = Convert.ToInt32(kvp.Key);
-                if (spellLevel > maxSpellLevel)
+                var spells = new Spells();
+                spells.Level = Convert.ToInt32(kvp.Key);
+                spells.Quantity = kvp.Value;
+                spells.HasDomainSpell = characterClass.SpecialistFields.Any() && spells.Level > 0;
+
+                spellsPerDay.Add(spells);
+
+                if (spells.Level == 0 || spells.Level > stats[spellStat].Bonus)
                     continue;
 
-                spellsPerDay[spellLevel] = kvp.Value;
-
-                if (spellLevel == 0 || stats[spellStat].Bonus - spellLevel < 0)
-                    continue;
-
-                var bonusSpells = (stats[spellStat].Bonus - spellLevel) / 4 + 1;
-                spellsPerDay[spellLevel] += bonusSpells;
+                var bonusSpells = (stats[spellStat].Bonus - spells.Level) / 4 + 1;
+                spells.Quantity += bonusSpells;
             }
 
-            spellsPerDay = spellsPerDay.Where(kvp => kvp.Value > 0).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
-
-            return spellsPerDay;
+            return spellsPerDay.Where(s => s.Quantity > 0 || s.HasDomainSpell);
         }
     }
 }

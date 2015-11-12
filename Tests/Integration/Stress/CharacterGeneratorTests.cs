@@ -83,8 +83,11 @@ namespace CharacterGen.Tests.Integration.Stress
             Assert.That(character.Equipment.PrimaryHand.Name, Is.Not.Empty);
             Assert.That(character.Equipment.Treasure, Is.Not.Null);
 
-            foreach (var spellLevel in character.Magic.SpellsPerDay.Keys)
-                Assert.That(character.Magic.SpellsPerDay[spellLevel], Is.Positive, spellLevel.ToString());
+            foreach (var spells in character.Magic.SpellsPerDay)
+            {
+                Assert.That(spells.Level, Is.Not.Negative, spells.Level.ToString());
+                Assert.That(spells.Quantity, Is.Not.Negative, spells.Level.ToString());
+            }
 
             Assert.That(character.Combat.BaseAttack.Bonus, Is.Not.Negative);
             Assert.That(character.Combat.HitPoints, Is.AtLeast(character.Class.Level));

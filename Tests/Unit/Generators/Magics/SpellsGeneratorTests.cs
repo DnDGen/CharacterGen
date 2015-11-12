@@ -8,6 +8,7 @@ using Moq;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CharacterGen.Tests.Unit.Generators.Magics
 {
@@ -61,8 +62,13 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         public void GenerateSpellQuantities()
         {
             var spellsPerDay = spellsGenerator.GenerateFrom(characterClass, stats);
-            Assert.That(spellsPerDay[0], Is.EqualTo(90210));
-            Assert.That(spellsPerDay[1], Is.EqualTo(42));
+
+            var cantrips = spellsPerDay.First(s => s.Level == 0);
+            Assert.That(cantrips.Quantity, Is.EqualTo(90210));
+
+            var firstLevelSpells = spellsPerDay.First(s => s.Level == 1);
+            Assert.That(firstLevelSpells.Quantity, Is.EqualTo(42));
+
             Assert.That(spellsPerDay.Count, Is.EqualTo(2));
         }
 
@@ -130,7 +136,8 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
             for (var spellLevel = 0; spellLevel < levelBonuses.Length; spellLevel++)
             {
                 var expectedQuantity = (10 - spellLevel) + levelBonuses[spellLevel];
-                Assert.That(spellsPerDay[spellLevel], Is.EqualTo(expectedQuantity), spellLevel.ToString());
+                var spells = spellsPerDay.First(s => s.Level == spellLevel);
+                Assert.That(spells.Quantity, Is.EqualTo(expectedQuantity), spellLevel.ToString());
             }
 
             Assert.That(spellsPerDay.Count, Is.EqualTo(levelBonuses.Length));
@@ -142,8 +149,13 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
             stats["stat"].Value = 45;
 
             var spellsPerDay = spellsGenerator.GenerateFrom(characterClass, stats);
-            Assert.That(spellsPerDay[0], Is.EqualTo(90210));
-            Assert.That(spellsPerDay[1], Is.EqualTo(47));
+
+            var cantrips = spellsPerDay.First(s => s.Level == 0);
+            Assert.That(cantrips.Quantity, Is.EqualTo(90210));
+
+            var firstLevelSpells = spellsPerDay.First(s => s.Level == 1);
+            Assert.That(firstLevelSpells.Quantity, Is.EqualTo(47));
+
             Assert.That(spellsPerDay.Count, Is.EqualTo(2));
         }
 
@@ -154,20 +166,136 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
             spellsPerDayForClass["2"] = 0;
 
             var spellsPerDay = spellsGenerator.GenerateFrom(characterClass, stats);
-            Assert.That(spellsPerDay[0], Is.EqualTo(90210));
-            Assert.That(spellsPerDay[1], Is.EqualTo(47));
-            Assert.That(spellsPerDay[2], Is.EqualTo(4));
+
+            var cantrips = spellsPerDay.First(s => s.Level == 0);
+            Assert.That(cantrips.Quantity, Is.EqualTo(90210));
+
+            var firstLevelSpells = spellsPerDay.First(s => s.Level == 1);
+            Assert.That(firstLevelSpells.Quantity, Is.EqualTo(47));
+
+            var secondLevelSpells = spellsPerDay.First(s => s.Level == 2);
+            Assert.That(secondLevelSpells.Quantity, Is.EqualTo(4));
+
             Assert.That(spellsPerDay.Count, Is.EqualTo(3));
         }
 
         [Test]
-        public void IfTotalSpellsPerDayIs0_RemoveSpellLevel()
+        public void IfTotalSpellsPerDayIs0AndDoesNotHaveDomainSpell_RemoveSpellLevel()
         {
             spellsPerDayForClass["1"] = 0;
 
             var spellsPerDay = spellsGenerator.GenerateFrom(characterClass, stats);
-            Assert.That(spellsPerDay[0], Is.EqualTo(90210));
+            var cantrips = spellsPerDay.First(s => s.Level == 0);
+
+            Assert.That(cantrips.Quantity, Is.EqualTo(90210));
             Assert.That(spellsPerDay.Count, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void IfTotalSpellsPerDayIs0AndHasDomainSpell_DoNotRemoveSpellLevel()
+        {
+            spellsPerDayForClass["1"] = 0;
+            characterClass.SpecialistFields = new[] { "specialist" };
+
+            var spellsPerDay = spellsGenerator.GenerateFrom(characterClass, stats);
+
+            var cantrips = spellsPerDay.First(s => s.Level == 0);
+            Assert.That(cantrips.Quantity, Is.EqualTo(90210));
+            Assert.That(cantrips.HasDomainSpell, Is.False);
+
+            var firstLevelSpells = spellsPerDay.First(s => s.Level == 1);
+            Assert.That(firstLevelSpells.Quantity, Is.EqualTo(0));
+            Assert.That(firstLevelSpells.HasDomainSpell, Is.True);
+
+            Assert.That(spellsPerDay.Count, Is.EqualTo(2));
+        }
+
+        [Test]
+        public void IfTotalSpellsPerDayIsGreatThan0AndDoesNotHaveDomainSpell_DoNotRemoveSpellLevel()
+        {
+            spellsPerDayForClass["1"] = 1;
+
+            var spellsPerDay = spellsGenerator.GenerateFrom(characterClass, stats);
+
+            var cantrips = spellsPerDay.First(s => s.Level == 0);
+            Assert.That(cantrips.Quantity, Is.EqualTo(90210));
+            Assert.That(cantrips.HasDomainSpell, Is.False);
+
+            var firstLevelSpells = spellsPerDay.First(s => s.Level == 1);
+            Assert.That(firstLevelSpells.Quantity, Is.EqualTo(1));
+            Assert.That(firstLevelSpells.HasDomainSpell, Is.False);
+
+            Assert.That(spellsPerDay.Count, Is.EqualTo(2));
+        }
+
+        [Test]
+        public void AllSpellLevelsExcept0GetDomainSpellIfClassHasSpecialistFields()
+        {
+            characterClass.SpecialistFields = new[] { "specialist" };
+            spellsPerDayForClass["0"] = 10;
+            spellsPerDayForClass["1"] = 9;
+            spellsPerDayForClass["2"] = 8;
+            spellsPerDayForClass["3"] = 7;
+            spellsPerDayForClass["4"] = 6;
+            spellsPerDayForClass["5"] = 5;
+            spellsPerDayForClass["6"] = 4;
+            spellsPerDayForClass["7"] = 3;
+            spellsPerDayForClass["8"] = 2;
+            spellsPerDayForClass["9"] = 1;
+
+            var spellsPerDay = spellsGenerator.GenerateFrom(characterClass, stats);
+
+            var cantrips = spellsPerDay.First(s => s.Level == 0);
+            Assert.That(cantrips.HasDomainSpell, Is.False);
+
+            var nonCantrips = spellsPerDay.Except(new[] { cantrips });
+            foreach (var nonCantrip in nonCantrips)
+                Assert.That(nonCantrip.HasDomainSpell, Is.True);
+        }
+
+        [Test]
+        public void AllSpellLevelsExcept0GetDomainSpellIfClassHasMultipleSpecialistFields()
+        {
+            characterClass.SpecialistFields = new[] { "specialist", "also specialist" };
+            spellsPerDayForClass["0"] = 10;
+            spellsPerDayForClass["1"] = 9;
+            spellsPerDayForClass["2"] = 8;
+            spellsPerDayForClass["3"] = 7;
+            spellsPerDayForClass["4"] = 6;
+            spellsPerDayForClass["5"] = 5;
+            spellsPerDayForClass["6"] = 4;
+            spellsPerDayForClass["7"] = 3;
+            spellsPerDayForClass["8"] = 2;
+            spellsPerDayForClass["9"] = 1;
+
+            var spellsPerDay = spellsGenerator.GenerateFrom(characterClass, stats);
+
+            var cantrips = spellsPerDay.First(s => s.Level == 0);
+            Assert.That(cantrips.HasDomainSpell, Is.False);
+
+            var nonCantrips = spellsPerDay.Except(new[] { cantrips });
+            foreach (var nonCantrip in nonCantrips)
+                Assert.That(nonCantrip.HasDomainSpell, Is.True, nonCantrip.Level.ToString());
+        }
+
+        [Test]
+        public void NoSpellLevelsGetDomainSpellIfClassDoesNotHaveSpecialistFields()
+        {
+            spellsPerDayForClass["0"] = 10;
+            spellsPerDayForClass["1"] = 9;
+            spellsPerDayForClass["2"] = 8;
+            spellsPerDayForClass["3"] = 7;
+            spellsPerDayForClass["4"] = 6;
+            spellsPerDayForClass["5"] = 5;
+            spellsPerDayForClass["6"] = 4;
+            spellsPerDayForClass["7"] = 3;
+            spellsPerDayForClass["8"] = 2;
+            spellsPerDayForClass["9"] = 1;
+
+            var spellsPerDay = spellsGenerator.GenerateFrom(characterClass, stats);
+
+            foreach (var spells in spellsPerDay)
+                Assert.That(spells.HasDomainSpell, Is.False, spells.Level.ToString());
         }
     }
 }

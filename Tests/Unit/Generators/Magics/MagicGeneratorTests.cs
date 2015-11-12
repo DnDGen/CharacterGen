@@ -3,6 +3,7 @@ using CharacterGen.Common.Abilities.Stats;
 using CharacterGen.Common.Alignments;
 using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Common.Items;
+using CharacterGen.Common.Magics;
 using CharacterGen.Common.Races;
 using CharacterGen.Generators.Domain.Magics;
 using CharacterGen.Generators.Magics;
@@ -50,7 +51,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         [Test]
         public void GenerateSpells()
         {
-            var spells = new Dictionary<Int32, Int32>();
+            var spells = new List<Spells>();
             mockSpellsGenerator.Setup(g => g.GenerateFrom(characterClass, stats)).Returns(spells);
 
             var magic = magicGenerator.GenerateWith(alignment, characterClass, race, stats, feats, equipment);

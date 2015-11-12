@@ -1,4 +1,5 @@
-﻿using CharacterGen.Generators.Abilities;
+﻿using CharacterGen.Common.Magics;
+using CharacterGen.Generators.Abilities;
 using CharacterGen.Generators.Combats;
 using CharacterGen.Generators.Magics;
 using CharacterGen.Generators.Randomizers.Stats;
@@ -17,8 +18,6 @@ namespace CharacterGen.Tests.Integration.Stress.Magics
         public IAbilitiesGenerator AbilitiesGenerator { get; set; }
         [Inject, Named(StatsRandomizerTypeConstants.Raw)]
         public IStatsRandomizer StatsRandomizer { get; set; }
-        //[Inject]
-        //public IEquipmentGenerator EquipmentGenerator { get; set; }
         [Inject, Named(AbilitiesGeneratorTypeConstants.Character)]
         public ICombatGenerator CombatGenerator { get; set; }
         [Inject]
@@ -30,7 +29,7 @@ namespace CharacterGen.Tests.Integration.Stress.Magics
             Stress();
         }
 
-        private Dictionary<Int32, Int32> GenerateSpells()
+        private IEnumerable<Spells> GenerateSpells()
         {
             var alignment = GetNewAlignment();
             var characterClass = GetNewCharacterClass(alignment);
@@ -45,22 +44,51 @@ namespace CharacterGen.Tests.Integration.Stress.Magics
         {
             var spells = GenerateSpells();
 
-            foreach (var spellLevel in spells.Keys)
-                Assert.That(spells[spellLevel], Is.Positive);
+            foreach (var spellLevel in spells)
+            {
+                Assert.That(spellLevel.Level, Is.Not.Negative, spellLevel.Level.ToString());
+                Assert.That(spellLevel.Quantity, Is.Not.Negative, spellLevel.Level.ToString());
+            }
         }
 
         [Test]
         public void SpellsHappen()
         {
-            var spells = Generate(GenerateSpells, s => s.Any());
+            var spells = Generate(GenerateSpells, ss => ss.Any());
             Assert.That(spells, Is.Not.Empty);
         }
 
         [Test]
         public void SpellsDoNotHappen()
         {
-            var spells = Generate(GenerateSpells, s => s.Any() == false);
+            var spells = Generate(GenerateSpells, ss => ss.Any() == false);
             Assert.That(spells, Is.Empty);
+        }
+
+        [Test]
+        public void DomainSpellsHappen()
+        {
+            var spells = Generate(GenerateSpells, ss => ss.Any(s => s.HasDomainSpell));
+
+            if (spells.Any(s => s.Level == 0))
+            {
+                var cantrips = spells.First(s => s.Level == 0);
+                Assert.That(cantrips.HasDomainSpell, Is.False);
+                spells = spells.Except(new[] { cantrips });
+            }
+
+            foreach (var spellLevel in spells)
+                Assert.That(spellLevel.HasDomainSpell, Is.True);
+        }
+
+        [Test]
+        public void DomainSpellsDoNotHappen()
+        {
+            var spells = Generate(GenerateSpells, ss => ss.All(s => s.HasDomainSpell == false) && ss.Any());
+
+            Assert.That(spells, Is.Not.Empty);
+            foreach (var spellLevel in spells)
+                Assert.That(spellLevel.HasDomainSpell, Is.False);
         }
     }
 }
