@@ -38,7 +38,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         {
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
             randomizer = new NeutralMetaraceRandomizer(mockPercentileResultSelector.Object, mockAdjustmentsSelector.Object,
-                mockCollectionsSelector.Object);
+                mockCollectionsSelector.Object, generator);
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, AlignmentConstants.Good)).Returns(new[] { "good metarace", "metarace", "not neutral metarace", "not evil metarace" });
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, AlignmentConstants.Evil)).Returns(new[] { "evil metarace", "metarace", "not good metarace", "not neutral metarace" });

@@ -1,6 +1,4 @@
 ﻿using CharacterGen.Common.Races;
-using CharacterGen.Generators.Randomizers.Alignments;
-using CharacterGen.Generators.Randomizers.Races;
 using NUnit.Framework;
 using System;
 
@@ -9,13 +7,6 @@ namespace CharacterGen.Tests.Integration.Stress
     [TestFixture]
     public class RaceGeneratorTests : StressTests
     {
-        [TearDown]
-        public void TearDown()
-        {
-            AlignmentRandomizer = GetNewInstanceOf<IAlignmentRandomizer>(AlignmentRandomizerTypeConstants.Any);
-            MetaraceRandomizer = GetNewInstanceOf<RaceRandomizer>(RaceRandomizerTypeConstants.Metarace.AnyMeta);
-        }
-
         [TestCase("RaceGenerator")]
         public override void Stress(String stressSubject)
         {
@@ -40,28 +31,6 @@ namespace CharacterGen.Tests.Integration.Stress
             var characterClass = GetNewCharacterClass(alignment);
 
             return RaceGenerator.GenerateWith(alignment, characterClass, BaseRaceRandomizer, MetaraceRandomizer);
-        }
-
-        [Test]
-        public void WingsHappen()
-        {
-            AlignmentRandomizer = GetNewInstanceOf<IAlignmentRandomizer>(AlignmentRandomizerTypeConstants.NonNeutral);
-
-            var forcableMetaraceRandomizer = MetaraceRandomizer as IForcableMetaraceRandomizer;
-            forcableMetaraceRandomizer.ForceMetarace = true;
-
-            var race = GenerateOrFail(GenerateRace, r => r.HasWings);
-            Assert.That(race.HasWings, Is.True);
-            Assert.That(race.AerialSpeed, Is.Positive);
-            Assert.That(race.AerialSpeed % 10, Is.EqualTo(0));
-        }
-
-        [Test]
-        public void WingsDoNotHappen()
-        {
-            var race = GenerateOrFail(GenerateRace, r => r.HasWings == false);
-            Assert.That(race.HasWings, Is.False);
-            Assert.That(race.AerialSpeed, Is.EqualTo(0));
         }
     }
 }

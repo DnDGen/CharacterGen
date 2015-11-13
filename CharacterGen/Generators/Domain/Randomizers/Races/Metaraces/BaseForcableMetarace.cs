@@ -11,17 +11,19 @@ using System.Linq;
 
 namespace CharacterGen.Generators.Domain.Randomizers.Races.Metaraces
 {
-    public abstract class BaseForcableMetarace : IterativeBuilder, IForcableMetaraceRandomizer
+    public abstract class BaseForcableMetarace : IterativeGenerator, IForcableMetaraceRandomizer
     {
         public Boolean ForceMetarace { get; set; }
 
         private IPercentileSelector percentileResultSelector;
         private IAdjustmentsSelector adjustmentsSelector;
+        private Generator generator;
 
-        public BaseForcableMetarace(IPercentileSelector percentileResultSelector, IAdjustmentsSelector adjustmentsSelector)
+        public BaseForcableMetarace(IPercentileSelector percentileResultSelector, IAdjustmentsSelector adjustmentsSelector, Generator generator)
         {
             this.percentileResultSelector = percentileResultSelector;
             this.adjustmentsSelector = adjustmentsSelector;
+            this.generator = generator;
         }
 
         public String Randomize(Alignment alignment, CharacterClass characterClass)
@@ -32,7 +34,7 @@ namespace CharacterGen.Generators.Domain.Randomizers.Races.Metaraces
 
             var tableName = String.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSMetaraces, alignment.Goodness, characterClass.ClassName);
 
-            return Build(() => percentileResultSelector.SelectFrom(tableName),
+            return generator.Generate(() => percentileResultSelector.SelectFrom(tableName),
                 m => results.Contains(m));
         }
 

@@ -18,7 +18,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
         public void Setup()
         {
             mockDice = new Mock<IDice>();
-            randomizer = new TwoTenSidedDiceStatsRandomizer(mockDice.Object);
+            randomizer = new TwoTenSidedDiceStatsRandomizer(mockDice.Object, new ConfigurableIterationGenerator());
 
             mockDice.Setup(d => d.Roll(It.IsAny<Int32>()).d10()).Returns(1);
         }

@@ -10,8 +10,8 @@ namespace CharacterGen.Generators.Domain.Randomizers.CharacterClasses.ClassNames
     {
         private ICollectionsSelector collectionsSelector;
 
-        public StealthClassNameRandomizer(IPercentileSelector percentileResultSelector, ICollectionsSelector collectionsSelector)
-            : base(percentileResultSelector)
+        public StealthClassNameRandomizer(IPercentileSelector percentileResultSelector, ICollectionsSelector collectionsSelector, Generator generator)
+            : base(percentileResultSelector, generator)
         {
             this.collectionsSelector = collectionsSelector;
         }

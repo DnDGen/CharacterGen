@@ -40,9 +40,8 @@ namespace CharacterGen.Tests.Integration.Stress
         public IRaceGenerator RaceGenerator { get; set; }
 
         private const Int32 ConfidentIterations = 1000000;
-        private const Int32 OneMinuteInSeconds = 60;
 #if STRESS
-        private const Int32 TimeLimitInSeconds = OneMinuteInSeconds * 1;
+        private const Int32 TimeLimitInSeconds = Int32.MaxValue;
 #else
         private const Int32 TimeLimitInSeconds = 1;
 #endif

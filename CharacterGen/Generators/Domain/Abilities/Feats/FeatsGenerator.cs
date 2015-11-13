@@ -13,7 +13,7 @@ using System.Linq;
 
 namespace CharacterGen.Generators.Domain.Abilities.Feats
 {
-    public class FeatsGenerator : IterativeBuilder, IFeatsGenerator
+    public class FeatsGenerator : IterativeGenerator, IFeatsGenerator
     {
         private IRacialFeatsGenerator racialFeatsGenerator;
         private IClassFeatsGenerator classFeatsGenerator;

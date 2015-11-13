@@ -13,20 +13,22 @@ using TreasureGen.Generators.Items.Mundane;
 
 namespace CharacterGen.Generators.Domain.Items
 {
-    public class ArmorGenerator : IterativeBuilder, GearGenerator
+    public class ArmorGenerator : GearGenerator
     {
         private ICollectionsSelector collectionsSelector;
         private IPercentileSelector percentileSelector;
         private IMundaneItemGenerator mundaneArmorGenerator;
         private IMagicalItemGenerator magicalArmorGenerator;
+        private Generator generator;
 
         public ArmorGenerator(ICollectionsSelector collectionsSelector, IPercentileSelector percentileSelector,
-            IMundaneItemGenerator mundaneArmorGenerator, IMagicalItemGenerator magicalArmorGenerator)
+            IMundaneItemGenerator mundaneArmorGenerator, IMagicalItemGenerator magicalArmorGenerator, Generator generator)
         {
             this.collectionsSelector = collectionsSelector;
             this.percentileSelector = percentileSelector;
             this.mundaneArmorGenerator = mundaneArmorGenerator;
             this.magicalArmorGenerator = magicalArmorGenerator;
+            this.generator = generator;
         }
 
         public Item GenerateFrom(IEnumerable<Feat> feats, CharacterClass characterClass, Race race)
@@ -38,8 +40,7 @@ namespace CharacterGen.Generators.Domain.Items
             if (proficientArmors.Any() == false)
                 return null;
 
-            return Build<Item>(
-                () => GenerateArmor(power),
+            return generator.Generate(() => GenerateArmor(power),
                 a => ArmorIsValid(a, proficientArmors, characterClass, race));
         }
 

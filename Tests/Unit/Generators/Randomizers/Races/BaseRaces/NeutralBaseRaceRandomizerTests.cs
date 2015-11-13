@@ -36,7 +36,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         {
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
             randomizer = new NeutralBaseRaceRandomizer(mockPercentileResultSelector.Object, mockAdjustmentsSelector.Object,
-                mockCollectionsSelector.Object);
+                mockCollectionsSelector.Object, generator);
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, AlignmentConstants.Good)).Returns(new[] { "good base race", "base race", "not neutral base race", "not evil base race" });
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, AlignmentConstants.Evil)).Returns(new[] { "evil base race", "base race", "not good base race", "not neutral base race" });

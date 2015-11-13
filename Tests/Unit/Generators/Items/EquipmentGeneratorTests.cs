@@ -1,6 +1,7 @@
 ﻿using CharacterGen.Common.Abilities.Feats;
 using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Common.Races;
+using CharacterGen.Generators;
 using CharacterGen.Generators.Domain.Items;
 using CharacterGen.Generators.Items;
 using CharacterGen.Selectors;
@@ -24,6 +25,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         private Mock<ICollectionsSelector> mockCollectionsSelector;
         private Mock<GearGenerator> mockArmorGenerator;
         private Mock<ITreasureGenerator> mockTreasureGenerator;
+        private Generator generator;
         private List<Feat> feats;
         private CharacterClass characterClass;
         private Item weapon;
@@ -41,8 +43,9 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
             mockArmorGenerator = new Mock<GearGenerator>();
             mockTreasureGenerator = new Mock<ITreasureGenerator>();
+            generator = new ConfigurableIterationGenerator(3);
             equipmentGenerator = new EquipmentGenerator(mockCollectionsSelector.Object, mockWeaponGenerator.Object,
-                mockTreasureGenerator.Object, mockArmorGenerator.Object);
+                mockTreasureGenerator.Object, mockArmorGenerator.Object, generator);
             feats = new List<Feat>();
             characterClass = new CharacterClass();
             weapon = new Item();

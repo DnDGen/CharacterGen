@@ -1,28 +1,33 @@
-﻿using CharacterGen.Generators.Domain;
+﻿using CharacterGen.Generators;
+using CharacterGen.Generators.Domain;
 using NUnit.Framework;
 using System;
 
 namespace CharacterGen.Tests.Unit.Generators
 {
     [TestFixture]
-    public class IterativeBuilderTests : IterativeBuilder
+    public class IterativeBuilderTests
     {
+        private Generator generator;
+
+        [SetUp]
+        public void Setup()
+        {
+            generator = new IterativeGenerator();
+        }
+
         [Test]
         public void BuildWithLambda()
         {
             var builtString = "built string";
-
-            var randomString = Build<String>(
-                () => builtString,
-                s => s.Contains("string"));
-
+            var randomString = generator.Generate(() => builtString, s => s.Contains("string"));
             Assert.That(randomString, Is.EqualTo(builtString));
         }
 
         [Test]
         public void BuildWithMethods()
         {
-            var date = Build<DateTime>(Build, IsValid);
+            var date = generator.Generate(Build, IsValid);
             Assert.That(date.ToShortDateString(), Is.EqualTo(DateTime.Now.ToShortDateString()));
         }
 
@@ -39,10 +44,7 @@ namespace CharacterGen.Tests.Unit.Generators
         [Test]
         public void BuildNull()
         {
-            var randomObject = Build<String>(
-                () => null,
-                s => true);
-
+            var randomObject = generator.Generate<String>(() => null, s => true);
             Assert.That(randomObject, Is.Null);
         }
 
@@ -51,10 +53,7 @@ namespace CharacterGen.Tests.Unit.Generators
         {
             var count = 0;
 
-            var randomNumber = Build<Int32>(
-                () => count++,
-                i => i > 0 && i % 2 == 0);
-
+            var randomNumber = generator.Generate(() => count++, i => i > 0 && i % 2 == 0);
             Assert.That(randomNumber, Is.EqualTo(2));
             Assert.That(count, Is.EqualTo(3));
         }
@@ -64,9 +63,7 @@ namespace CharacterGen.Tests.Unit.Generators
         {
             var count = 0;
 
-            var randomNumber = Build<Int32>(
-                () => count++,
-                i => false);
+            var randomNumber = generator.Generate(() => count++, i => false);
 
             Assert.That(count, Is.EqualTo(10001));
             Assert.That(randomNumber, Is.EqualTo(0));
@@ -77,10 +74,7 @@ namespace CharacterGen.Tests.Unit.Generators
         {
             var count = 0;
 
-            var randomString = Build<String>(
-                () => count++.ToString(),
-                i => false);
-
+            var randomString = generator.Generate(() => count++.ToString(), i => false);
             Assert.That(count, Is.EqualTo(10001));
             Assert.That(randomString, Is.Null);
         }
@@ -90,10 +84,7 @@ namespace CharacterGen.Tests.Unit.Generators
         {
             var count = 0;
 
-            var randomString = Build<String>(
-                () => count++.ToString(),
-                i => count > 10000);
-
+            var randomString = generator.Generate(() => count++.ToString(), i => count > 10000);
             Assert.That(count, Is.EqualTo(10001));
             Assert.That(randomString, Is.EqualTo("10000"));
         }

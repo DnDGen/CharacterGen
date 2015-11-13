@@ -1,6 +1,7 @@
 ﻿using CharacterGen.Common.Abilities.Feats;
 using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Common.Races;
+using CharacterGen.Generators;
 using CharacterGen.Generators.Domain.Items;
 using CharacterGen.Generators.Items;
 using CharacterGen.Selectors;
@@ -23,6 +24,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         private Mock<IPercentileSelector> mockPercentileSelector;
         private Mock<IMundaneItemGenerator> mockMundaneArmorGenerator;
         private Mock<IMagicalItemGenerator> mockMagicalArmorGenerator;
+        private Generator generator;
         private GearGenerator armorGenerator;
         private List<Feat> feats;
         private CharacterClass characterClass;
@@ -39,8 +41,8 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             mockPercentileSelector = new Mock<IPercentileSelector>();
             mockMundaneArmorGenerator = new Mock<IMundaneItemGenerator>();
             mockMagicalArmorGenerator = new Mock<IMagicalItemGenerator>();
-            armorGenerator = new ArmorGenerator(mockCollectionsSelector.Object, mockPercentileSelector.Object,
-                mockMundaneArmorGenerator.Object, mockMagicalArmorGenerator.Object);
+            generator = new ConfigurableIterationGenerator(3);
+            armorGenerator = new ArmorGenerator(mockCollectionsSelector.Object, mockPercentileSelector.Object, mockMundaneArmorGenerator.Object, mockMagicalArmorGenerator.Object, generator);
             feats = new List<Feat>();
             characterClass = new CharacterClass();
             proficiencyFeats = new List<String>();

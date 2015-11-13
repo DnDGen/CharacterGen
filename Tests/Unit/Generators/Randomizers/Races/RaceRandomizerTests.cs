@@ -1,5 +1,6 @@
 ﻿using CharacterGen.Common.Alignments;
 using CharacterGen.Common.CharacterClasses;
+using CharacterGen.Generators;
 using CharacterGen.Selectors;
 using CharacterGen.Tables;
 using Moq;
@@ -14,6 +15,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races
     {
         protected Mock<IPercentileSelector> mockPercentileResultSelector;
         protected Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
+        protected Generator generator;
         protected Alignment alignment;
         protected CharacterClass characterClass;
         protected Dictionary<String, Int32> adjustments;
@@ -23,6 +25,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races
         {
             mockPercentileResultSelector = new Mock<IPercentileSelector>();
             mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
+            generator = new ConfigurableIterationGenerator();
             adjustments = new Dictionary<String, Int32>();
             characterClass = new CharacterClass();
             alignment = new Alignment();

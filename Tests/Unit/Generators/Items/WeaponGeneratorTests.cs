@@ -1,6 +1,7 @@
 ﻿using CharacterGen.Common.Abilities.Feats;
 using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Common.Races;
+using CharacterGen.Generators;
 using CharacterGen.Generators.Domain.Items;
 using CharacterGen.Generators.Items;
 using CharacterGen.Generators.Verifiers.Exceptions;
@@ -24,6 +25,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         private Mock<IMundaneItemGenerator> mockMundaneWeaponGenerator;
         private Mock<IMagicalItemGenerator> mockMagicalWeaponGenerator;
         private Mock<ICollectionsSelector> mockCollectionsSelector;
+        private Generator generator;
         private Item magicalWeapon;
         private List<Feat> feats;
         private List<String> proficiencyFeats;
@@ -40,7 +42,8 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             mockMundaneWeaponGenerator = new Mock<IMundaneItemGenerator>();
             mockMagicalWeaponGenerator = new Mock<IMagicalItemGenerator>();
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
-            weaponGenerator = new WeaponGenerator(mockCollectionsSelector.Object, mockPercentileSelector.Object, mockMundaneWeaponGenerator.Object, mockMagicalWeaponGenerator.Object);
+            generator = new ConfigurableIterationGenerator(3);
+            weaponGenerator = new WeaponGenerator(mockCollectionsSelector.Object, mockPercentileSelector.Object, mockMundaneWeaponGenerator.Object, mockMagicalWeaponGenerator.Object, generator);
             magicalWeapon = new Item();
             feats = new List<Feat>();
             characterClass = new CharacterClass();

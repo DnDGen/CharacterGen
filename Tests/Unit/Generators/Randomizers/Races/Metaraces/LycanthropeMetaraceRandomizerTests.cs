@@ -30,7 +30,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         public void Setup()
         {
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
-            randomizer = new LycanthropeMetaraceRandomizer(mockPercentileResultSelector.Object, mockAdjustmentsSelector.Object, mockCollectionsSelector.Object);
+            randomizer = new LycanthropeMetaraceRandomizer(mockPercentileResultSelector.Object, mockAdjustmentsSelector.Object, mockCollectionsSelector.Object, generator);
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Lycanthrope))
                 .Returns(new[] { "lycanthrope metarace" });

@@ -14,20 +14,22 @@ using TreasureGen.Generators.Items.Mundane;
 
 namespace CharacterGen.Generators.Domain.Items
 {
-    public class WeaponGenerator : IterativeBuilder, GearGenerator
+    public class WeaponGenerator : GearGenerator
     {
         private ICollectionsSelector collectionsSelector;
         private IPercentileSelector percentileSelector;
         private IMundaneItemGenerator mundaneWeaponGenerator;
         private IMagicalItemGenerator magicalWeaponGenerator;
+        private Generator generator;
 
         public WeaponGenerator(ICollectionsSelector collectionsSelector, IPercentileSelector percentileSelector,
-            IMundaneItemGenerator mundaneWeaponGenerator, IMagicalItemGenerator magicalWeaponGenerator)
+            IMundaneItemGenerator mundaneWeaponGenerator, IMagicalItemGenerator magicalWeaponGenerator, Generator generator)
         {
             this.collectionsSelector = collectionsSelector;
             this.percentileSelector = percentileSelector;
             this.mundaneWeaponGenerator = mundaneWeaponGenerator;
             this.magicalWeaponGenerator = magicalWeaponGenerator;
+            this.generator = generator;
         }
 
         public Item GenerateFrom(IEnumerable<Feat> feats, CharacterClass characterClass, Race race)
@@ -49,12 +51,12 @@ namespace CharacterGen.Generators.Domain.Items
 
             allowedWeapons = allowedWeapons.Union(additionalWeapons);
 
-            var weapon = Build(() => GenerateWeapon(power), w => WeaponIsValid(w, allowedWeapons, race));
+            var weapon = generator.Generate(() => GenerateWeapon(power), w => WeaponIsValid(w, allowedWeapons, race));
 
             if (weapon != null)
                 return weapon;
 
-            weapon = Build(() => GenerateWeapon(PowerConstants.Mundane), w => WeaponIsValid(w, allowedWeapons, race));
+            weapon = generator.Generate(() => GenerateWeapon(PowerConstants.Mundane), w => WeaponIsValid(w, allowedWeapons, race));
 
             if (weapon != null)
                 return weapon;

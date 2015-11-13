@@ -22,9 +22,10 @@ namespace CharacterGen.Bootstrap.Factories
             var animalAbilitiesGenerator = kernel.Get<IAbilitiesGenerator>(AbilitiesGeneratorTypeConstants.Animal);
             var setStatsRandomizer = kernel.Get<ISetStatsRandomizer>();
             var animalCombatGenerator = kernel.Get<ICombatGenerator>(CombatGeneratorTypeConstants.Animal);
+            var generator = kernel.Get<Generator>();
 
             return new AnimalGenerator(collectionsSelector, raceGenerator, animalBaseRaceRandomizer, noMetaraceRandomizer, adjustmentsSelector, animalAbilitiesGenerator,
-                setStatsRandomizer, animalCombatGenerator);
+                setStatsRandomizer, animalCombatGenerator, generator);
         }
     }
 }

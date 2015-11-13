@@ -10,15 +10,17 @@ using System.Linq;
 
 namespace CharacterGen.Generators.Domain.Randomizers.Races.BaseRaces
 {
-    public abstract class BaseRaceRandomizer : IterativeBuilder, RaceRandomizer
+    public abstract class BaseRaceRandomizer : IterativeGenerator, RaceRandomizer
     {
         private IPercentileSelector percentileResultSelector;
         private IAdjustmentsSelector adjustmentSelector;
+        private Generator generator;
 
-        public BaseRaceRandomizer(IPercentileSelector percentileResultSelector, IAdjustmentsSelector adjustmentSelector)
+        public BaseRaceRandomizer(IPercentileSelector percentileResultSelector, IAdjustmentsSelector adjustmentSelector, Generator generator)
         {
             this.percentileResultSelector = percentileResultSelector;
             this.adjustmentSelector = adjustmentSelector;
+            this.generator = generator;
         }
 
         public String Randomize(Alignment alignment, CharacterClass characterClass)
@@ -29,7 +31,7 @@ namespace CharacterGen.Generators.Domain.Randomizers.Races.BaseRaces
 
             var tableName = String.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSBaseRaces, alignment.Goodness, characterClass.ClassName);
 
-            return Build(() => percentileResultSelector.SelectFrom(tableName),
+            return generator.Generate(() => percentileResultSelector.SelectFrom(tableName),
                 b => results.Contains(b));
         }
 

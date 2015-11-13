@@ -1,4 +1,5 @@
 ﻿using CharacterGen.Common.Alignments;
+using CharacterGen.Generators;
 using CharacterGen.Generators.Domain.Randomizers.Alignments;
 using CharacterGen.Generators.Verifiers.Exceptions;
 using CharacterGen.Selectors;
@@ -15,17 +16,20 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Alignments
     {
         private TestAlignmentRandomizer randomizer;
         private Mock<IPercentileSelector> mockPercentileResultSelector;
+        private Generator generator;
 
         [SetUp]
         public void Setup()
         {
             mockPercentileResultSelector = new Mock<IPercentileSelector>();
+            generator = new ConfigurableIterationGenerator();
+
             mockPercentileResultSelector.Setup(p => p.SelectAllFrom(TableNameConstants.Set.Percentile.AlignmentLawfulness)).Returns(new[] { "other lawfulness", "lawfulness" });
             mockPercentileResultSelector.Setup(p => p.SelectAllFrom(TableNameConstants.Set.Percentile.AlignmentGoodness)).Returns(new[] { "other goodness", "goodness" });
             mockPercentileResultSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Percentile.AlignmentLawfulness)).Returns("lawfulness");
             mockPercentileResultSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Percentile.AlignmentGoodness)).Returns("goodness");
 
-            randomizer = new TestAlignmentRandomizer(mockPercentileResultSelector.Object);
+            randomizer = new TestAlignmentRandomizer(mockPercentileResultSelector.Object, generator);
         }
 
         [Test]
@@ -109,8 +113,8 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Alignments
             public String NotAllowedLawfulness { get; set; }
             public String NotAllowedGoodness { get; set; }
 
-            public TestAlignmentRandomizer(IPercentileSelector innerSelector)
-                : base(innerSelector)
+            public TestAlignmentRandomizer(IPercentileSelector innerSelector, Generator generator)
+                : base(innerSelector, generator)
             { }
 
             protected override Boolean AlignmentIsAllowed(Alignment alignment)

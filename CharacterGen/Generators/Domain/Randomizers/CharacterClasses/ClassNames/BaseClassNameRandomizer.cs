@@ -8,13 +8,15 @@ using CharacterGen.Selectors;
 
 namespace CharacterGen.Generators.Domain.Randomizers.CharacterClasses.ClassNames
 {
-    public abstract class BaseClassNameRandomizer : IterativeBuilder, IClassNameRandomizer
+    public abstract class BaseClassNameRandomizer : IClassNameRandomizer
     {
         private IPercentileSelector percentileResultSelector;
+        private Generator generator;
 
-        public BaseClassNameRandomizer(IPercentileSelector percentileResultSelector)
+        public BaseClassNameRandomizer(IPercentileSelector percentileResultSelector, Generator generator)
         {
             this.percentileResultSelector = percentileResultSelector;
+            this.generator = generator;
         }
 
         public String Randomize(Alignment alignment)
@@ -25,7 +27,7 @@ namespace CharacterGen.Generators.Domain.Randomizers.CharacterClasses.ClassNames
 
             var tableName = String.Format("{0}CharacterClasses", alignment.Goodness);
 
-            return Build(() => percentileResultSelector.SelectFrom(tableName),
+            return generator.Generate(() => percentileResultSelector.SelectFrom(tableName),
                 c => possibleClassNames.Contains(c));
         }
 

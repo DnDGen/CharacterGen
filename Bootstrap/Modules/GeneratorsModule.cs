@@ -61,6 +61,7 @@ namespace CharacterGen.Bootstrap.Modules
             Bind<IMagicGenerator>().To<MagicGenerator>();
             Bind<ISpellsGenerator>().To<SpellsGenerator>();
             Bind<IAnimalGenerator>().ToMethod(c => AnimalGeneratorFactory.CreateWith(c.Kernel));
+            Bind<Generator>().To<IterativeGenerator>();
 
             Bind<IAlignmentRandomizer>().To<AnyAlignmentRandomizer>().Named(AlignmentRandomizerTypeConstants.Any);
             Bind<IAlignmentRandomizer>().To<ChaoticAlignmentRandomizer>().Named(AlignmentRandomizerTypeConstants.Chaotic);

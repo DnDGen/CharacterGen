@@ -1,4 +1,5 @@
 ﻿using CharacterGen.Common.Alignments;
+using CharacterGen.Generators;
 using CharacterGen.Generators.Domain.Randomizers.CharacterClasses.ClassNames;
 using CharacterGen.Generators.Verifiers.Exceptions;
 using CharacterGen.Selectors;
@@ -14,6 +15,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassN
     {
         private TestClassRandomizer randomizer;
         private Mock<IPercentileSelector> mockPercentileResultSelector;
+        private Generator generator;
         private Alignment alignment;
 
         private String firstClass = "first class";
@@ -26,10 +28,12 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassN
             alignment.Goodness = AlignmentConstants.Good;
 
             mockPercentileResultSelector = new Mock<IPercentileSelector>();
+            generator = new ConfigurableIterationGenerator();
+
             mockPercentileResultSelector.Setup(p => p.SelectAllFrom(It.IsAny<String>())).Returns(new[] { firstClass, secondClass });
             mockPercentileResultSelector.Setup(p => p.SelectFrom(It.IsAny<String>())).Returns(firstClass);
 
-            randomizer = new TestClassRandomizer(mockPercentileResultSelector.Object);
+            randomizer = new TestClassRandomizer(mockPercentileResultSelector.Object, generator);
         }
 
         [Test]
@@ -105,8 +109,8 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassN
         {
             public String NotAllowedClassName { get; set; }
 
-            public TestClassRandomizer(IPercentileSelector percentileResultSelector)
-                : base(percentileResultSelector)
+            public TestClassRandomizer(IPercentileSelector percentileResultSelector, Generator generator)
+                : base(percentileResultSelector, generator)
             { }
 
             protected override Boolean CharacterClassIsAllowed(String className, Alignment alignment)

@@ -97,6 +97,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
             private Int32 rollCount;
 
             public TestStatRandomizer()
+                : base(new ConfigurableIterationGenerator(10))
             {
                 AllowedOnRoll = 1;
                 rollCount = 0;

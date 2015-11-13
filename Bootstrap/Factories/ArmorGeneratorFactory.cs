@@ -1,4 +1,5 @@
-﻿using CharacterGen.Generators.Domain.Items;
+﻿using CharacterGen.Generators;
+using CharacterGen.Generators.Domain.Items;
 using CharacterGen.Generators.Items;
 using CharacterGen.Selectors;
 using Ninject;
@@ -16,9 +17,10 @@ namespace CharacterGen.Bootstrap.Factories
             var percentileSelector = kernel.Get<IPercentileSelector>();
             var mundaneWeaponGenerator = kernel.Get<IMundaneItemGenerator>(ItemTypeConstants.Armor);
             var magicalWeaponGenerator = kernel.Get<IMagicalItemGenerator>(ItemTypeConstants.Armor);
+            var generator = kernel.Get<Generator>();
 
             return new ArmorGenerator(collectionsSelector, percentileSelector, mundaneWeaponGenerator,
-                magicalWeaponGenerator);
+                magicalWeaponGenerator, generator);
         }
     }
 }

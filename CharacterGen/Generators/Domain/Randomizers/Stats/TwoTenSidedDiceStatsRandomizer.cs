@@ -17,7 +17,8 @@ namespace CharacterGen.Generators.Domain.Randomizers.Stats
 
         private IDice dice;
 
-        public TwoTenSidedDiceStatsRandomizer(IDice dice)
+        public TwoTenSidedDiceStatsRandomizer(IDice dice, Generator generator)
+            : base(generator)
         {
             this.dice = dice;
         }

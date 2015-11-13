@@ -6,8 +6,8 @@ namespace CharacterGen.Generators.Domain.Randomizers.Alignments
 {
     public class NonNeutralAlignmentRandomizer : BaseAlignmentRandomizer
     {
-        public NonNeutralAlignmentRandomizer(IPercentileSelector innerSelector)
-            : base(innerSelector)
+        public NonNeutralAlignmentRandomizer(IPercentileSelector innerSelector, Generator generator)
+            : base(innerSelector, generator)
         { }
 
         protected override Boolean AlignmentIsAllowed(Alignment alignment)

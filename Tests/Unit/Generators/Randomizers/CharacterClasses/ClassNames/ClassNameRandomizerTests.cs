@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using Moq;
-using CharacterGen.Common.Alignments;
+﻿using CharacterGen.Common.Alignments;
+using CharacterGen.Generators;
 using CharacterGen.Generators.Randomizers.CharacterClasses;
 using CharacterGen.Selectors;
 using CharacterGen.Tables;
+using Moq;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
 
 namespace CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassNames
 {
@@ -20,6 +21,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassN
 
         protected Mock<ICollectionsSelector> mockCollectionsSelector;
         protected Mock<IPercentileSelector> mockPercentileResultSelector;
+        protected Generator generator;
         protected IClassNameRandomizer randomizer;
         protected Alignment alignment;
         protected List<String> alignmentClasses;
@@ -30,6 +32,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassN
         {
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
             mockPercentileResultSelector = new Mock<IPercentileSelector>();
+            generator = new ConfigurableIterationGenerator();
             alignment = new Alignment();
             alignmentClasses = new List<String>();
             groupClasses = new List<String>();

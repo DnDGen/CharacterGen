@@ -18,7 +18,8 @@ namespace CharacterGen.Generators.Domain.Randomizers.Stats
 
         private IDice dice;
 
-        public BestOfFourStatsRandomizer(IDice dice)
+        public BestOfFourStatsRandomizer(IDice dice, Generator generator)
+            : base (generator)
         {
             this.dice = dice;
         }

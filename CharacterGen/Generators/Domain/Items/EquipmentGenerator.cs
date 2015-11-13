@@ -13,20 +13,22 @@ using TreasureGen.Generators;
 
 namespace CharacterGen.Generators.Domain.Items
 {
-    public class EquipmentGenerator : IterativeBuilder, IEquipmentGenerator
+    public class EquipmentGenerator : IEquipmentGenerator
     {
         private ICollectionsSelector collectionsSelector;
         private GearGenerator armorGenerator;
         private GearGenerator weaponGenerator;
         private ITreasureGenerator treasureGenerator;
+        private Generator generator;
 
         public EquipmentGenerator(ICollectionsSelector collectionsSelector, GearGenerator weaponGenerator,
-            ITreasureGenerator treasureGenerator, GearGenerator armorGenerator)
+            ITreasureGenerator treasureGenerator, GearGenerator armorGenerator, Generator generator)
         {
             this.collectionsSelector = collectionsSelector;
             this.armorGenerator = armorGenerator;
             this.weaponGenerator = weaponGenerator;
             this.treasureGenerator = treasureGenerator;
+            this.generator = generator;
         }
 
         public Equipment GenerateWith(IEnumerable<Feat> feats, CharacterClass characterClass, Race race)
@@ -95,7 +97,7 @@ namespace CharacterGen.Generators.Domain.Items
 
         private Item GenerateAmmunition(IEnumerable<Feat> feats, CharacterClass characterClass, Race race, IEnumerable<String> baseWeaponTypes)
         {
-            return Build(() => weaponGenerator.GenerateFrom(feats, characterClass, race),
+            return generator.Generate(() => weaponGenerator.GenerateFrom(feats, characterClass, race),
                 a => AmmunitionIsValid(a, baseWeaponTypes));
         }
 
@@ -107,7 +109,7 @@ namespace CharacterGen.Generators.Domain.Items
 
         private Item GenerateWeaponForAmmunition(IEnumerable<Feat> feats, CharacterClass characterClass, Race race, String baseAmmunitionType)
         {
-            return Build(() => weaponGenerator.GenerateFrom(feats, characterClass, race),
+            return generator.Generate(() => weaponGenerator.GenerateFrom(feats, characterClass, race),
                 w => WeaponForAmmunitionIsValid(w, baseAmmunitionType));
         }
 
@@ -119,7 +121,7 @@ namespace CharacterGen.Generators.Domain.Items
 
         private Item GenerateOffHandWeapon(IEnumerable<Feat> feats, CharacterClass characterClass, Race race)
         {
-            return Build(() => weaponGenerator.GenerateFrom(feats, characterClass, race),
+            return generator.Generate(() => weaponGenerator.GenerateFrom(feats, characterClass, race),
                 w => OffHandWeaponIsValid(w));
         }
 
@@ -130,7 +132,7 @@ namespace CharacterGen.Generators.Domain.Items
 
         private Item GenerateMeleeWeapon(IEnumerable<Feat> feats, CharacterClass characterClass, Race race)
         {
-            var meleeWeapon = Build(() => weaponGenerator.GenerateFrom(feats, characterClass, race),
+            var meleeWeapon = generator.Generate(() => weaponGenerator.GenerateFrom(feats, characterClass, race),
                 w => w.Attributes.Contains(AttributeConstants.Melee));
 
             if (meleeWeapon != null)
@@ -138,15 +140,15 @@ namespace CharacterGen.Generators.Domain.Items
 
             var proficiencyFeats = GetProficiencyFeats(feats);
 
-            meleeWeapon = Build(() => weaponGenerator.GenerateFrom(proficiencyFeats, characterClass, race),
+            meleeWeapon = generator.Generate(() => weaponGenerator.GenerateFrom(proficiencyFeats, characterClass, race),
                 w => w.Attributes.Contains(AttributeConstants.Melee));
 
             if (meleeWeapon != null)
                 return meleeWeapon;
 
-            var proficiencyFeatsWithallFocus = proficiencyFeats.Where(f => f.Focus == FeatConstants.Foci.All);
+            var proficiencyFeatsWithAllFocus = proficiencyFeats.Where(f => f.Focus == FeatConstants.Foci.All);
 
-            return Build(() => weaponGenerator.GenerateFrom(proficiencyFeatsWithallFocus, characterClass, race),
+            return generator.Generate(() => weaponGenerator.GenerateFrom(proficiencyFeatsWithAllFocus, characterClass, race),
                 w => w.Attributes.Contains(AttributeConstants.Melee));
         }
 

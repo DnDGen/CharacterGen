@@ -11,7 +11,7 @@ using System.Collections.Generic;
 
 namespace CharacterGen.Generators.Domain.Magics
 {
-    public class MagicGenerator : IterativeBuilder, IMagicGenerator
+    public class MagicGenerator : IterativeGenerator, IMagicGenerator
     {
         private ISpellsGenerator spellsGenerator;
         private IAnimalGenerator animalGenerator;

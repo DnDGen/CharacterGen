@@ -58,6 +58,7 @@ namespace CharacterGen.Tests.Unit.Generators
         private Mock<IStatsRandomizer> mockRawStatRandomizer;
         private Mock<IBooleanPercentileSelector> mockBooleanPercentileSelector;
         private Mock<ICollectionsSelector> mockCollectionsSelector;
+        private Generator generator;
         private ICharacterGenerator characterGenerator;
 
         private Mock<IAlignmentRandomizer> mockAlignmentRandomizer;
@@ -125,7 +126,7 @@ namespace CharacterGen.Tests.Unit.Generators
                 mockAbilitiesGenerator.Object, mockCombatGenerator.Object, mockTreasureGenerator.Object, mockSetAlignmentRandomizer.Object,
                 mockSetLevelRandomizer.Object, mockAnyAlignmentRandomizer.Object, mockAnyClassNameRandomizer.Object, mockAnyBaseRaceRandomizer.Object,
                 mockAnyMetaraceRandomizer.Object, mockRawStatRandomizer.Object, mockBooleanPercentileSelector.Object, mockLeadershipSelector.Object,
-                mockCollectionsSelector.Object, mockMagicGenerator.Object);
+                mockCollectionsSelector.Object, mockMagicGenerator.Object, generator);
         }
 
         private void SetUpMockRandomizers()
@@ -158,6 +159,7 @@ namespace CharacterGen.Tests.Unit.Generators
             mockCharacterClassGenerator = new Mock<ICharacterClassGenerator>();
             mockRaceGenerator = new Mock<IRaceGenerator>();
             mockMagicGenerator = new Mock<IMagicGenerator>();
+            generator = new ConfigurableIterationGenerator(3);
             alignment = new Alignment();
             characterClass = new CharacterClass();
             race = new Race();
@@ -197,6 +199,7 @@ namespace CharacterGen.Tests.Unit.Generators
             mockCombatGenerator.Setup(g => g.GenerateWith(baseAttack, characterClass, race, ability.Feats, ability.Stats, equipment)).Returns(combat);
             mockCombatGenerator.Setup(g => g.GenerateBaseAttackWith(characterClass, race)).Returns(baseAttack);
             mockMagicGenerator.Setup(g => g.GenerateWith(alignment, characterClass, race, ability.Stats, ability.Feats, equipment)).Returns(magic);
+
         }
 
         [Test]

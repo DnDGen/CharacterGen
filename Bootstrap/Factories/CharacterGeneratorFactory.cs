@@ -38,11 +38,12 @@ namespace CharacterGen.Bootstrap.Factories
             var leadershipSelector = kernel.Get<ILeadershipSelector>();
             var collectionsSelector = kernel.Get<ICollectionsSelector>();
             var magicGenerator = kernel.Get<IMagicGenerator>();
+            var generator = kernel.Get<Generator>();
 
             return new CharacterGenerator(alignmentGenerator, characterClassGenerator, raceGenerator, adjustmentsSelector,
                 randomizerVerifier, percentileSelector, abilitiesGenerator, combatGenerator, TreasureGenerator, setAlignmentRandomizer,
                 setLevelRandomizer, anyAlignmentRandomizer, anyClassNameRandomizer, anyBaseRaceRandomizer, anyMetaraceRandomizer,
-                rawStatsRandomizer, booleanPercentileSelector, leadershipSelector, collectionsSelector, magicGenerator);
+                rawStatsRandomizer, booleanPercentileSelector, leadershipSelector, collectionsSelector, magicGenerator, generator);
         }
     }
 }

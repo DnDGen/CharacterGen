@@ -86,6 +86,7 @@
     <Compile Include="Combats\HitPointsGeneratorTests.cs" />
     <Compile Include="Abilities\LanguageGeneratorTests.cs" />
     <Compile Include="Combats\SavingThrowsGeneratorTests.cs" />
+    <Compile Include="ConfigurableIterationGenerator.cs" />
     <Compile Include="IterativeBuilderTests.cs" />
     <Compile Include="Items\ArmorGeneratorTests.cs" />
     <Compile Include="Items\EquipmentGeneratorTests.cs" />

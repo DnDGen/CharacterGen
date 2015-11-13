@@ -15,7 +15,7 @@ using System.Linq;
 
 namespace CharacterGen.Generators.Domain.Magics
 {
-    public class AnimalGenerator : IterativeBuilder, IAnimalGenerator
+    public class AnimalGenerator : IAnimalGenerator
     {
         private ICollectionsSelector collectionsSelector;
         private IRaceGenerator raceGenerator;
@@ -25,9 +25,11 @@ namespace CharacterGen.Generators.Domain.Magics
         private IAbilitiesGenerator animalAbilitiesGenerator;
         private ISetStatsRandomizer setStatsRandomizer;
         private ICombatGenerator animalCombatGenerator;
+        private Generator generator;
 
         public AnimalGenerator(ICollectionsSelector collectionsSelector, IRaceGenerator raceGenerator, RaceRandomizer animalBaseRaceRandomizer, RaceRandomizer noMetaraceRandomizer,
-            IAdjustmentsSelector adjustmentsSelector, IAbilitiesGenerator animalAbilitiesGenerator, ISetStatsRandomizer setStatsRandomizer, ICombatGenerator animalCombatGenerator)
+            IAdjustmentsSelector adjustmentsSelector, IAbilitiesGenerator animalAbilitiesGenerator, ISetStatsRandomizer setStatsRandomizer, ICombatGenerator animalCombatGenerator,
+            Generator generator)
         {
             this.collectionsSelector = collectionsSelector;
             this.raceGenerator = raceGenerator;
@@ -37,6 +39,7 @@ namespace CharacterGen.Generators.Domain.Magics
             this.animalAbilitiesGenerator = animalAbilitiesGenerator;
             this.setStatsRandomizer = setStatsRandomizer;
             this.animalCombatGenerator = animalCombatGenerator;
+            this.generator = generator;
         }
 
         public String GenerateFrom(Alignment alignment, CharacterClass characterClass, Race race, IEnumerable<Feat> feats)
@@ -51,22 +54,8 @@ namespace CharacterGen.Generators.Domain.Magics
             var improvedFamiliars = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.Animals, FeatConstants.ImprovedFamiliar);
             var characterHasImprovedFamiliarFeat = feats.Any(f => f.Name == FeatConstants.ImprovedFamiliar);
 
-            var animal = Build<String>(() => collectionsSelector.SelectRandomFrom(animals),
+            var animal = generator.Generate(() => collectionsSelector.SelectRandomFrom(animals),
                 a => characterHasImprovedFamiliarFeat || improvedFamiliars.Contains(a) == false);
-
-            //var animal = new Animal();
-            //animal.Race = Build<Race>(() => raceGenerator.GenerateWith(alignment, effectiveCharacterClass, animalBaseRaceRandomizer, noMetaraceRandomizer),
-            //    a => effectiveCharacterClass.Level + levelAdjustments[a.BaseRace] > 0 && (characterHasImprovedFamiliarFeat || improvedFamiliars.Contains(a.BaseRace) == false));
-
-            //var baseAttack = animalCombatGenerator.GenerateBaseAttackWith(effectiveCharacterClass, animal.Race);
-            //animal.Ability = animalAbilitiesGenerator.GenerateWith(effectiveCharacterClass, animal.Race, setStatsRandomizer, baseAttack);
-
-            //var emptyEquipment = new Equipment();
-            //animal.Combat = animalCombatGenerator.GenerateWith(baseAttack, effectiveCharacterClass, animal.Race, animal.Ability.Feats, animal.Ability.Stats, emptyEquipment);
-
-            //var tableName = String.Format(TableNameConstants.Formattable.Adjustments.LevelXAnimalTricks, effectiveCharacterClass.Level);
-            //var tricks = adjustmentsSelector.SelectFrom(tableName);
-            //animal.Tricks = tricks[effectiveCharacterClass.ClassName];
 
             return animal;
         }

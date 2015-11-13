@@ -55,7 +55,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         [SetUp]
         public void Setup()
         {
-            randomizer = new AnyBaseRaceRandomizer(mockPercentileResultSelector.Object, mockAdjustmentsSelector.Object);
+            randomizer = new AnyBaseRaceRandomizer(mockPercentileResultSelector.Object, mockAdjustmentsSelector.Object, generator);
         }
 
         [Test]

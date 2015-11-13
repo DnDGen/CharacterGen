@@ -31,7 +31,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         {
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
             randomizer = new GeneticMetaraceRandomizer(mockPercentileResultSelector.Object, mockAdjustmentsSelector.Object,
-                mockCollectionsSelector.Object);
+                mockCollectionsSelector.Object, generator);
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Genetic))
                 .Returns(new[] { "genetic metarace" });

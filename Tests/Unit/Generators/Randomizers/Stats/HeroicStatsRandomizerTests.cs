@@ -26,7 +26,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
             mockDice = new Mock<IDice>();
             mockDice.Setup(d => d.Roll(1).d6()).Returns(1);
 
-            randomizer = new HeroicStatsRandomizer(mockDice.Object);
+            randomizer = new HeroicStatsRandomizer(mockDice.Object, new ConfigurableIterationGenerator());
         }
 
         [Test]

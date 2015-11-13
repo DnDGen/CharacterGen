@@ -15,7 +15,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassN
         [SetUp]
         public void Setup()
         {
-            randomizer = new SpellcasterClassNameRandomizer(mockPercentileResultSelector.Object, mockCollectionsSelector.Object);
+            randomizer = new SpellcasterClassNameRandomizer(mockPercentileResultSelector.Object, mockCollectionsSelector.Object, generator);
         }
 
         [Test]

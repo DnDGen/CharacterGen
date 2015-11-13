@@ -11,8 +11,8 @@ namespace CharacterGen.Generators.Domain.Randomizers.Races.BaseRaces
         private ICollectionsSelector collectionsSelector;
 
         public EvilBaseRaceRandomizer(IPercentileSelector percentileResultSelector, IAdjustmentsSelector levelAdjustmentSelector,
-            ICollectionsSelector collectionsSelector)
-            : base(percentileResultSelector, levelAdjustmentSelector)
+            ICollectionsSelector collectionsSelector, Generator generator)
+            : base(percentileResultSelector, levelAdjustmentSelector, generator)
         {
             this.collectionsSelector = collectionsSelector;
         }

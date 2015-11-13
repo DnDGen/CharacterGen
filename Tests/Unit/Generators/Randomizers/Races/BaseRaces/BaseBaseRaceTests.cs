@@ -142,7 +142,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
             public String ForbiddenBaseRace { get; set; }
 
             public TestBaseRaceRandomizer(IPercentileSelector percentileResultSelector, IAdjustmentsSelector levelAdjustmentSelector)
-                : base(percentileResultSelector, levelAdjustmentSelector)
+                : base(percentileResultSelector, levelAdjustmentSelector, new ConfigurableIterationGenerator())
             { }
 
             protected override Boolean BaseRaceIsAllowed(String baseRace)

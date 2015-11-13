@@ -5,13 +5,20 @@ using System.Collections.Generic;
 
 namespace CharacterGen.Generators.Domain.Randomizers.Stats
 {
-    public abstract class BaseStatsRandomizer : IterativeBuilder, IStatsRandomizer
+    public abstract class BaseStatsRandomizer : IStatsRandomizer
     {
         protected abstract Int32 defaultValue { get; }
 
+        private Generator generator;
+
+        public BaseStatsRandomizer(Generator generator)
+        {
+            this.generator = generator;
+        }
+
         public Dictionary<String, Stat> Randomize()
         {
-            var stats = Build(() => RollStats(), s => StatsAreAllowed(s.Values));
+            var stats = generator.Generate(() => RollStats(), s => StatsAreAllowed(s.Values));
 
             if (stats != null)
                 return stats;

@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace CharacterGen.Generators.Domain
 {
-    public class RaceGenerator : IterativeBuilder, IRaceGenerator
+    public class RaceGenerator : IterativeGenerator, IRaceGenerator
     {
         private IBooleanPercentileSelector booleanPercentileSelector;
         private ICollectionsSelector collectionsSelector;

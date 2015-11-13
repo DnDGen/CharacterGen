@@ -11,8 +11,8 @@ namespace CharacterGen.Generators.Domain.Randomizers.Races.Metaraces
         private ICollectionsSelector collectionsSelector;
 
         public NonGoodMetaraceRandomizer(IPercentileSelector percentileResultSelector, IAdjustmentsSelector levelAdjustmentSelector,
-            ICollectionsSelector collectionsSelector)
-            : base(percentileResultSelector, levelAdjustmentSelector)
+            ICollectionsSelector collectionsSelector, Generator generator)
+            : base(percentileResultSelector, levelAdjustmentSelector, generator)
         {
             this.collectionsSelector = collectionsSelector;
         }

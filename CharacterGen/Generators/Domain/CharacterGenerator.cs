@@ -22,7 +22,7 @@ using System.Linq;
 
 namespace CharacterGen.Generators.Domain
 {
-    public class CharacterGenerator : IterativeBuilder, ICharacterGenerator
+    public class CharacterGenerator : ICharacterGenerator
     {
         private IAlignmentGenerator alignmentGenerator;
         private ICharacterClassGenerator characterClassGenerator;
@@ -44,6 +44,7 @@ namespace CharacterGen.Generators.Domain
         private ILeadershipSelector leadershipSelector;
         private ICollectionsSelector collectionsSelector;
         private IMagicGenerator magicGenerator;
+        private Generator generator;
 
         public CharacterGenerator(IAlignmentGenerator alignmentGenerator, ICharacterClassGenerator characterClassGenerator, IRaceGenerator raceGenerator,
             IAdjustmentsSelector adjustmentsSelector, IRandomizerVerifier randomizerVerifier, IPercentileSelector percentileSelector,
@@ -51,7 +52,7 @@ namespace CharacterGen.Generators.Domain
             ISetAlignmentRandomizer setAlignmentRandomizer, ISetLevelRandomizer setLevelRandomizer, IAlignmentRandomizer anyAlignmentRandomizer,
             IClassNameRandomizer anyClassNameRandomizer, RaceRandomizer anyBaseRaceRandomizer, RaceRandomizer anyMetaraceRandomizer,
             IStatsRandomizer rawStatsRandomizer, IBooleanPercentileSelector booleanPercentileSelector, ILeadershipSelector leadershipSelector,
-            ICollectionsSelector collectionsSelector, IMagicGenerator magicGenerator)
+            ICollectionsSelector collectionsSelector, IMagicGenerator magicGenerator, Generator generator)
         {
             this.alignmentGenerator = alignmentGenerator;
             this.characterClassGenerator = characterClassGenerator;
@@ -59,6 +60,7 @@ namespace CharacterGen.Generators.Domain
             this.abilitiesGenerator = abilitiesGenerator;
             this.combatGenerator = combatGenerator;
             this.equipmentGenerator = equipmentGenerator;
+            this.generator = generator;
 
             this.adjustmentsSelector = adjustmentsSelector;
             this.randomizerVerifier = randomizerVerifier;
@@ -130,8 +132,7 @@ namespace CharacterGen.Generators.Domain
         private Alignment GenerateAlignment(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classNameRandomizer,
             ILevelRandomizer levelRandomizer, RaceRandomizer baseRaceRandomizer, RaceRandomizer metaraceRandomizer)
         {
-            var alignment = Build<Alignment>(
-                () => alignmentGenerator.GenerateWith(alignmentRandomizer),
+            var alignment = generator.Generate(() => alignmentGenerator.GenerateWith(alignmentRandomizer),
                 a => randomizerVerifier.VerifyAlignmentCompatibility(a, classNameRandomizer, levelRandomizer, baseRaceRandomizer, metaraceRandomizer));
 
             return alignment;
@@ -140,8 +141,7 @@ namespace CharacterGen.Generators.Domain
         private CharacterClass GenerateCharacterClass(IClassNameRandomizer classNameRandomizer, ILevelRandomizer levelRandomizer,
             Alignment alignment, RaceRandomizer baseRaceRandomizer, RaceRandomizer metaraceRandomizer)
         {
-            var characterClass = Build<CharacterClass>(
-                () => characterClassGenerator.GenerateWith(alignment, levelRandomizer, classNameRandomizer),
+            var characterClass = generator.Generate(() => characterClassGenerator.GenerateWith(alignment, levelRandomizer, classNameRandomizer),
                 c => randomizerVerifier.VerifyCharacterClassCompatibility(alignment, c, baseRaceRandomizer, metaraceRandomizer));
 
             return characterClass;
@@ -150,8 +150,7 @@ namespace CharacterGen.Generators.Domain
         private Race GenerateRace(RaceRandomizer baseRaceRandomizer, RaceRandomizer metaraceRandomizer, Dictionary<String, Int32> levelAdjustments,
             Alignment alignment, CharacterClass characterClass)
         {
-            var race = Build<Race>(
-                () => raceGenerator.GenerateWith(alignment, characterClass, baseRaceRandomizer, metaraceRandomizer),
+            var race = generator.Generate(() => raceGenerator.GenerateWith(alignment, characterClass, baseRaceRandomizer, metaraceRandomizer),
                 r => characterClass.Level + levelAdjustments[r.BaseRace] + levelAdjustments[r.Metarace] > 0);
 
             return race;
@@ -266,8 +265,7 @@ namespace CharacterGen.Generators.Domain
             setLevelRandomizer.SetLevel = level;
             var allowedAlignments = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AlignmentGroups, leader.Alignment.ToString());
 
-            setAlignmentRandomizer.SetAlignment = Build<Alignment>(
-                () => alignmentGenerator.GenerateWith(alignmentRandomizer),
+            setAlignmentRandomizer.SetAlignment = generator.Generate(() => alignmentGenerator.GenerateWith(alignmentRandomizer),
                 a => allowedAlignments.Contains(a.ToString()));
 
             return GenerateCharacter(setAlignmentRandomizer, anyClassNameRandomizer, setLevelRandomizer, anyBaseRaceRandomizer, anyMetaraceRandomizer,

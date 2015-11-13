@@ -30,7 +30,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         [SetUp]
         public void Setup()
         {
-            randomizer = new AnyMetaraceRandomizer(mockPercentileResultSelector.Object, mockAdjustmentsSelector.Object);
+            randomizer = new AnyMetaraceRandomizer(mockPercentileResultSelector.Object, mockAdjustmentsSelector.Object, generator);
         }
 
         [Test]

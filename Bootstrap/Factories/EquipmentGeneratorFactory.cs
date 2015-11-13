@@ -1,4 +1,5 @@
-﻿using CharacterGen.Generators.Domain.Items;
+﻿using CharacterGen.Generators;
+using CharacterGen.Generators.Domain.Items;
 using CharacterGen.Generators.Items;
 using CharacterGen.Selectors;
 using Ninject;
@@ -15,8 +16,9 @@ namespace CharacterGen.Bootstrap.Factories
             var weaponGenerator = kernel.Get<GearGenerator>(ItemTypeConstants.Weapon);
             var treasureGenerator = kernel.Get<ITreasureGenerator>();
             var armorGenerator = kernel.Get<GearGenerator>(ItemTypeConstants.Armor);
+            var generator = kernel.Get<Generator>();
 
-            return new EquipmentGenerator(collectionsSelector, weaponGenerator, treasureGenerator, armorGenerator);
+            return new EquipmentGenerator(collectionsSelector, weaponGenerator, treasureGenerator, armorGenerator, generator);
         }
     }
 }

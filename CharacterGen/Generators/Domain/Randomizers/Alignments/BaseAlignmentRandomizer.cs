@@ -9,13 +9,15 @@ using System.Linq;
 
 namespace CharacterGen.Generators.Domain.Randomizers.Alignments
 {
-    public abstract class BaseAlignmentRandomizer : IterativeBuilder, IAlignmentRandomizer
+    public abstract class BaseAlignmentRandomizer : IAlignmentRandomizer
     {
         private IPercentileSelector percentileResultSelector;
+        private Generator generator;
 
-        public BaseAlignmentRandomizer(IPercentileSelector percentileResultSelector)
+        public BaseAlignmentRandomizer(IPercentileSelector percentileResultSelector, Generator generator)
         {
             this.percentileResultSelector = percentileResultSelector;
+            this.generator = generator;
         }
 
         public Alignment Randomize()
@@ -24,10 +26,10 @@ namespace CharacterGen.Generators.Domain.Randomizers.Alignments
             if (possibleAlignments.Any() == false)
                 throw new IncompatibleRandomizersException();
 
-            return Build(BuildAlignment, a => possibleAlignments.Contains(a));
+            return generator.Generate(GenerateAlignment, a => possibleAlignments.Contains(a));
         }
 
-        private Alignment BuildAlignment()
+        private Alignment GenerateAlignment()
         {
             var alignment = new Alignment();
 
