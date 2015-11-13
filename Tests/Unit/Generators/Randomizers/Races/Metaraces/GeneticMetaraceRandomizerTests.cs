@@ -49,7 +49,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         public void NotAllowed(String metarace)
         {
             var metaraces = randomizer.GetAllPossible(alignment, characterClass);
-            Assert.That(metaraces, Is.Not.Contains(metarace));
+            Assert.That(metaraces, Is.All.Not.EqualTo(metarace));
         }
     }
 }

@@ -602,38 +602,6 @@
         <name>Two-bladed sword</name>
       <item>Two-bladed sword</item>
     </object>
-    <object>
-        <name>Two-Handed</name>
-      <item>Dire flail</item>
-      <item>Dwarven urgrosh</item>
-      <item>Falchion</item>
-      <item>Glaive</item>
-      <item>Gnome hooked hammer</item>
-      <item>Greataxe</item>
-      <item>Greatclub</item>
-      <item>Greatsword</item>
-      <item>Guisarme</item>
-      <item>Halberd</item>
-      <item>Halfspear</item>
-      <item>Hand crossbow</item>
-      <item>Heavy crossbow</item>
-      <item>Heavy flail</item>
-      <item>Lance</item>
-      <item>Light crossbow</item>
-      <item>Longbow</item>
-      <item>Longspear</item>
-      <item>Net</item>
-      <item>Orc double axe</item>
-      <item>Quarterstaff</item>
-      <item>Ranseur</item>
-      <item>Heavy repeating crossbow</item>
-      <item>Light repeating crossbow</item>
-      <item>Scythe</item>
-      <item>Shortbow</item>
-      <item>Sling</item>
-      <item>Spiked chain</item>
-      <item>Two-bladed sword</item>
-    </object>
   <object>
     <name>Unarmed Strike</name>
   </object>

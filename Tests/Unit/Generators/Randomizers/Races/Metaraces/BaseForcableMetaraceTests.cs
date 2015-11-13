@@ -123,7 +123,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
             var results = randomizer.GetAllPossible(alignment, characterClass);
 
             Assert.That(results, Contains.Item(secondMetarace));
-            Assert.That(results, Is.Not.Contains(firstMetarace));
+            Assert.That(results, Is.All.Not.EqualTo(firstMetarace));
         }
 
         [Test]
@@ -131,7 +131,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         {
             randomizer.ForceMetarace = true;
             var results = randomizer.GetAllPossible(alignment, characterClass);
-            Assert.That(results, Is.Not.Contains(RaceConstants.Metaraces.None));
+            Assert.That(results, Is.All.Not.EqualTo(RaceConstants.Metaraces.None));
         }
 
         [Test]
@@ -149,7 +149,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
 
             var results = randomizer.GetAllPossible(alignment, characterClass);
             Assert.That(results, Contains.Item(secondMetarace));
-            Assert.That(results, Is.Not.Contains(firstMetarace));
+            Assert.That(results, Is.All.Not.EqualTo(firstMetarace));
         }
 
         private class TestMetaraceRandomizer : BaseForcableMetarace

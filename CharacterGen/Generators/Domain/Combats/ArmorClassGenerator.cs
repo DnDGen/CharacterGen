@@ -75,6 +75,9 @@ namespace CharacterGen.Generators.Domain.Combats
 
         private Int32 GetDeflectionBonus(IEnumerable<Item> items)
         {
+            if (items.Any() == false)
+                return 0;
+
             var deflectionBonuses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.Deflection);
             var itemsWithDeflectionBonuses = items.Where(i => deflectionBonuses.Contains(i.Name));
 

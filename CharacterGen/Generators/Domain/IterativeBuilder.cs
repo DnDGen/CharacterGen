@@ -14,10 +14,10 @@ namespace CharacterGen.Generators.Domain
             do builtObject = buildInstructions();
             while (retries++ < MaxRetries && isValid(builtObject) == false);
 
-            if (retries > MaxRetries)
-                return default(T);
+            if (isValid(builtObject))
+                return builtObject;
 
-            return builtObject;
+            return default(T);
         }
     }
 }

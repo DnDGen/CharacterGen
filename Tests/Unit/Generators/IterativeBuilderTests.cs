@@ -84,5 +84,18 @@ namespace CharacterGen.Tests.Unit.Generators
             Assert.That(count, Is.EqualTo(10001));
             Assert.That(randomString, Is.Null);
         }
+
+        [Test]
+        public void ReturnValidObjectAfterTooManyRetries()
+        {
+            var count = 0;
+
+            var randomString = Build<String>(
+                () => count++.ToString(),
+                i => count > 10000);
+
+            Assert.That(count, Is.EqualTo(10001));
+            Assert.That(randomString, Is.EqualTo("10000"));
+        }
     }
 }

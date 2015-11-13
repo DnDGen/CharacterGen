@@ -46,7 +46,7 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Stats
         [Test]
         public void NonDefaultStatsOccur()
         {
-            var stats = Generate(PoorStatsRandomizer.Randomize, ss => ss.Values.Any(s => s.Value != 9));
+            var stats = GenerateOrFail(PoorStatsRandomizer.Randomize, ss => ss.Values.Any(s => s.Value != 9));
             var allStatsAreDefault = stats.Values.All(s => s.Value == 9);
             Assert.That(allStatsAreDefault, Is.False);
         }

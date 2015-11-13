@@ -57,7 +57,7 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
         {
             ForcableMetaraceRandomizer.ForceMetarace = false;
 
-            var metarace = Generate(GenerateMetarace,
+            var metarace = GenerateOrFail(GenerateMetarace,
                 m => m == RaceConstants.Metaraces.None);
 
             Assert.That(metarace, Is.EqualTo(RaceConstants.Metaraces.None));

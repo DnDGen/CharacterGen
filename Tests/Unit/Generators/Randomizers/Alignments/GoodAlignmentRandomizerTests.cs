@@ -46,7 +46,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Alignments
         public void NotAllowed(String lawfulness, String goodness)
         {
             var expectedAlignment = new Alignment { Lawfulness = lawfulness, Goodness = goodness };
-            Assert.That(alignments, Is.Not.Contains(expectedAlignment));
+            Assert.That(alignments, Is.All.Not.EqualTo(expectedAlignment));
         }
     }
 }

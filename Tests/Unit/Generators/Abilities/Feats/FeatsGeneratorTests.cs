@@ -185,7 +185,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         }
 
         [Test]
-        public void IfIdAndFocusAndStrengthAndFrequencyTimePeriodAreEqual_CombineFrequencyQuantities()
+        public void IfNameAndFocusAndStrengthAndFrequencyTimePeriodAreEqual_CombineFrequencyQuantities()
         {
             racialFeats.Add(new Feat());
             racialFeats.Add(new Feat());
@@ -218,7 +218,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         }
 
         [Test]
-        public void IfIdsDoNotMatch_DoNotCombineFrequencyQuantities()
+        public void IfNamesDoNotMatch_DoNotCombineFrequencyQuantities()
         {
             racialFeats.Add(new Feat());
             racialFeats.Add(new Feat());
@@ -387,7 +387,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         }
 
         [Test]
-        public void IfIdsAndFocusAndStrengthAreEqual_ConstantWinsOut()
+        public void IfNamesAndFocusAndStrengthAreEqual_ConstantWinsOut()
         {
             racialFeats.Add(new Feat());
             racialFeats.Add(new Feat());
@@ -416,7 +416,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         }
 
         [Test]
-        public void IfIdsAndFocusAndStrengthAreEqual_AtWillWinsOut()
+        public void IfNamesAndFocusAndStrengthAreEqual_AtWillWinsOut()
         {
             racialFeats.Add(new Feat());
             racialFeats.Add(new Feat());
@@ -660,6 +660,64 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             Assert.That(feat3.Name, Is.EqualTo("feat3"));
             Assert.That(feat3.Focus, Is.EqualTo("focus"));
             Assert.That(feats.Count(), Is.EqualTo(3));
+        }
+
+        [Test]
+        public void IfFeatWithFocusOfAllIsDuplicated_KeepOne()
+        {
+            racialFeats.Add(new Feat());
+            racialFeats.Add(new Feat());
+            racialFeats.Add(new Feat());
+            racialFeats.Add(new Feat());
+
+            racialFeats[0].Name = "feat1";
+            racialFeats[0].Focus = FeatConstants.Foci.All;
+            racialFeats[1].Name = "feat1";
+            racialFeats[1].Focus = FeatConstants.Foci.All;
+            racialFeats[2].Name = "feat2";
+            racialFeats[3].Name = "feat3";
+            racialFeats[3].Focus = FeatConstants.Foci.All;
+
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            var feat1 = feats.First(f => f.Name == "feat1");
+            var feat2 = feats.First(f => f.Name == "feat2");
+            var feat3 = feats.First(f => f.Name == "feat3");
+
+            Assert.That(feat1.Name, Is.EqualTo("feat1"));
+            Assert.That(feat1.Focus, Is.EqualTo(FeatConstants.Foci.All));
+            Assert.That(feat2.Name, Is.EqualTo("feat2"));
+            Assert.That(feat2.Focus, Is.Empty);
+            Assert.That(feat3.Name, Is.EqualTo("feat3"));
+            Assert.That(feat3.Focus, Is.EqualTo(FeatConstants.Foci.All));
+            Assert.That(feats.Count(), Is.EqualTo(3));
+        }
+
+        [Test]
+        public void IfMultipleFeatWithFocusOfAllAreDuplicated_KeepOneOfEach()
+        {
+            racialFeats.Add(new Feat());
+            racialFeats.Add(new Feat());
+            racialFeats.Add(new Feat());
+            racialFeats.Add(new Feat());
+
+            racialFeats[0].Name = "feat1";
+            racialFeats[0].Focus = FeatConstants.Foci.All;
+            racialFeats[1].Name = "feat1";
+            racialFeats[1].Focus = FeatConstants.Foci.All;
+            racialFeats[2].Name = "feat2";
+            racialFeats[2].Focus = FeatConstants.Foci.All;
+            racialFeats[3].Name = "feat2";
+            racialFeats[3].Focus = FeatConstants.Foci.All;
+
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            var feat1 = feats.First(f => f.Name == "feat1");
+            var feat2 = feats.First(f => f.Name == "feat2");
+
+            Assert.That(feat1.Name, Is.EqualTo("feat1"));
+            Assert.That(feat1.Focus, Is.EqualTo(FeatConstants.Foci.All));
+            Assert.That(feat2.Name, Is.EqualTo("feat2"));
+            Assert.That(feat2.Focus, Is.EqualTo(FeatConstants.Foci.All));
+            Assert.That(feats.Count(), Is.EqualTo(2));
         }
     }
 }

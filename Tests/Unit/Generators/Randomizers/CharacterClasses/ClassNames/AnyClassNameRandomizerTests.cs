@@ -30,7 +30,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassN
         public void ClassIsNotAllowed()
         {
             var classNames = randomizer.GetAllPossibleResults(alignment);
-            Assert.That(classNames, Is.Not.Contains(ClassName));
+            Assert.That(classNames, Is.All.Not.EqualTo(ClassName));
         }
     }
 }

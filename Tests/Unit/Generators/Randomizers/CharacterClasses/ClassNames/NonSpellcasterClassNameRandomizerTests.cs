@@ -30,7 +30,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassN
         public void ClassIsNotInAlignment()
         {
             var classNames = randomizer.GetAllPossibleResults(alignment);
-            Assert.That(classNames, Is.Not.Contains(ClassName));
+            Assert.That(classNames, Is.All.Not.EqualTo(ClassName));
         }
 
         [Test]
@@ -39,7 +39,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassN
             alignmentClasses.Add(ClassName);
             groupClasses.Add(ClassName);
             var classNames = randomizer.GetAllPossibleResults(alignment);
-            Assert.That(classNames, Is.Not.Contains(ClassName));
+            Assert.That(classNames, Is.All.Not.EqualTo(ClassName));
         }
     }
 }

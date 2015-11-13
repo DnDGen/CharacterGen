@@ -2,6 +2,7 @@
 using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Common.Races;
 using CharacterGen.Generators.Items;
+using CharacterGen.Generators.Verifiers.Exceptions;
 using CharacterGen.Selectors;
 using CharacterGen.Tables;
 using System;
@@ -36,15 +37,7 @@ namespace CharacterGen.Generators.Domain.Items
             var allowedWeapons = GetAllowedWeapons(feats);
 
             if (allowedWeapons.Any() == false)
-            {
-                var message = "No weapons are allowed, which should never happen";
-                message += String.Format("\nClass: {0}", characterClass.ClassName);
-                message += String.Format("\nRace: {0}", race.BaseRace);
-                var featNames = String.Join(", ", feats.Select(f => String.Format("{0} ({1})", f.Name, f.Focus)));
-                message += String.Format("\nFeats: {0}", featNames);
-
-                throw new ArgumentException(message);
-            }
+                throw new NoWeaponProficienciesException();
 
             var additionalWeapons = new List<String>();
 

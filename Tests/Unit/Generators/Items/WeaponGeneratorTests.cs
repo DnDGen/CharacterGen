@@ -3,6 +3,7 @@ using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Common.Races;
 using CharacterGen.Generators.Domain.Items;
 using CharacterGen.Generators.Items;
+using CharacterGen.Generators.Verifiers.Exceptions;
 using CharacterGen.Selectors;
 using CharacterGen.Tables;
 using Moq;
@@ -85,10 +86,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             feats.Add(new Feat { Name = "feat 1" });
             feats.Add(new Feat { Name = "feat 2", Focus = "focus" });
 
-            Assert.That(() => weaponGenerator.GenerateFrom(feats, characterClass, race), Throws.ArgumentException.With.Message.ContainsSubstring("No weapons are allowed, which should never happen"));
-            Assert.That(() => weaponGenerator.GenerateFrom(feats, characterClass, race), Throws.ArgumentException.With.Message.ContainsSubstring("Class: class name"));
-            Assert.That(() => weaponGenerator.GenerateFrom(feats, characterClass, race), Throws.ArgumentException.With.Message.ContainsSubstring("Race: base race"));
-            Assert.That(() => weaponGenerator.GenerateFrom(feats, characterClass, race), Throws.ArgumentException.With.Message.ContainsSubstring("Feats: all proficiency (All), feat 1 (), feat 2 (focus)"));
+            Assert.That(() => weaponGenerator.GenerateFrom(feats, characterClass, race), Throws.Exception.InstanceOf<NoWeaponProficienciesException>());
         }
 
         [Test]

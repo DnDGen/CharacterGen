@@ -5,7 +5,6 @@ using CharacterGen.Generators.Randomizers.Stats;
 using Ninject;
 using NUnit.Framework;
 using System;
-using System.Linq;
 using TreasureGen.Common.Items;
 
 namespace CharacterGen.Tests.Integration.Stress.Items
@@ -44,51 +43,6 @@ namespace CharacterGen.Tests.Integration.Stress.Items
             var ability = AbilitiesGenerator.GenerateWith(characterClass, race, StatsRandomizer, baseAttack);
 
             return WeaponGenerator.GenerateFrom(ability.Feats, characterClass, race);
-        }
-
-        [Test]
-        public void MeleeWeaponHappens()
-        {
-            var weapon = Generate<Item>(GetWeapon,
-                w => w.Attributes.Contains(AttributeConstants.Melee));
-
-            Assert.That(weapon.Attributes, Contains.Item(AttributeConstants.Melee));
-        }
-
-        [Test]
-        public void RangedWeaponHappens()
-        {
-            var weapon = Generate<Item>(GetWeapon,
-                w => w.Attributes.Contains(AttributeConstants.Melee) == false);
-
-            Assert.That(weapon.Attributes, Contains.Item(AttributeConstants.Ranged));
-        }
-
-        [Test]
-        public void MundaneWeaponHappens()
-        {
-            var weapon = Generate<Item>(GetWeapon,
-                w => w.IsMagical == false);
-
-            Assert.That(weapon.IsMagical, Is.False);
-        }
-
-        [Test]
-        public void MagicalWeaponHappens()
-        {
-            var weapon = Generate<Item>(GetWeapon,
-                w => w.IsMagical);
-
-            Assert.That(weapon.IsMagical, Is.True);
-        }
-
-        [Test]
-        public void AmmunitionHappens()
-        {
-            var weapon = Generate<Item>(GetWeapon,
-                w => w.Attributes.Contains(AttributeConstants.Ammunition));
-
-            Assert.That(weapon.Attributes, Contains.Item(AttributeConstants.Ammunition));
         }
     }
 }

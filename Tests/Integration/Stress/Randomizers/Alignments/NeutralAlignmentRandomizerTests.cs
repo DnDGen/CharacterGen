@@ -32,7 +32,7 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Alignments
         [Test]
         public void NeutralGoodnessHappens()
         {
-            var alignment = Generate(
+            var alignment = GenerateOrFail(
                 () => AlignmentRandomizer.Randomize(),
                 a => a.Goodness == AlignmentConstants.Neutral);
 
@@ -42,7 +42,7 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Alignments
         [Test]
         public void NeutralLawfulnessHappens()
         {
-            var alignment = Generate(
+            var alignment = GenerateOrFail(
                 () => AlignmentRandomizer.Randomize(),
                 a => a.Lawfulness == AlignmentConstants.Neutral);
 
@@ -52,7 +52,7 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Alignments
         [Test]
         public void TrueNeutralHappens()
         {
-            var alignment = Generate(
+            var alignment = GenerateOrFail(
                 () => AlignmentRandomizer.Randomize(),
                 a => a.Goodness == AlignmentConstants.Neutral && a.Lawfulness == AlignmentConstants.Neutral);
 

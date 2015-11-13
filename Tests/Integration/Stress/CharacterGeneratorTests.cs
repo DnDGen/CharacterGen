@@ -1,5 +1,4 @@
-﻿using CharacterGen.Common;
-using CharacterGen.Common.Abilities.Stats;
+﻿using CharacterGen.Common.Abilities.Stats;
 using CharacterGen.Common.Alignments;
 using CharacterGen.Common.Races;
 using CharacterGen.Generators;
@@ -7,7 +6,6 @@ using CharacterGen.Generators.Randomizers.Stats;
 using Ninject;
 using NUnit.Framework;
 using System;
-using System.Linq;
 using TreasureGen.Common.Items;
 
 namespace CharacterGen.Tests.Integration.Stress
@@ -83,6 +81,9 @@ namespace CharacterGen.Tests.Integration.Stress
             Assert.That(character.Equipment.PrimaryHand.Name, Is.Not.Empty);
             Assert.That(character.Equipment.Treasure, Is.Not.Null);
 
+            foreach (var item in character.Equipment.Treasure.Items)
+                Assert.That(item, Is.Not.Null);
+
             foreach (var spells in character.Magic.SpellsPerDay)
             {
                 Assert.That(spells.Level, Is.Not.Negative, spells.Level.ToString());
@@ -96,53 +97,6 @@ namespace CharacterGen.Tests.Integration.Stress
             Assert.That(character.Combat.ArmorClass.Touch, Is.Positive);
 
             Assert.That(character.Leadership, Is.Not.Null);
-        }
-
-        [Test]
-        public void LeadershipHappens()
-        {
-            var character = Generate<Character>(
-                () => CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer, StatsRandomizer),
-                c => c.Leadership.Score > 0);
-
-            Assert.That(character.Leadership.Score, Is.Positive);
-            Assert.That(character.Leadership.Cohort, Is.Not.Null);
-        }
-
-        [Test]
-        public void LeadershipWithoutFollowersHappens()
-        {
-            var character = Generate<Character>(
-                () => CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer, StatsRandomizer),
-                c => c.Leadership.Score > 0 && c.Leadership.Followers.Any() == false);
-
-            Assert.That(character.Leadership.Score, Is.Positive);
-            Assert.That(character.Leadership.Cohort, Is.Not.Null);
-            Assert.That(character.Leadership.Followers, Is.Empty);
-        }
-
-        [Test]
-        public void LeadershipWithFollowersHappens()
-        {
-            var character = Generate(
-                () => CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer, StatsRandomizer),
-                c => c.Leadership.Score > 0 && c.Leadership.Followers.Any());
-
-            Assert.That(character.Leadership.Score, Is.Positive);
-            Assert.That(character.Leadership.Cohort, Is.Not.Null);
-            Assert.That(character.Leadership.Followers, Is.Not.Empty);
-        }
-
-        [Test]
-        public void LeadershipDoesNotHappen()
-        {
-            var character = Generate(
-                () => CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer, StatsRandomizer),
-                c => c.Leadership.Score == 0);
-
-            Assert.That(character.Leadership.Score, Is.EqualTo(0));
-            Assert.That(character.Leadership.Cohort, Is.Null);
-            Assert.That(character.Leadership.Followers, Is.Empty);
         }
     }
 }

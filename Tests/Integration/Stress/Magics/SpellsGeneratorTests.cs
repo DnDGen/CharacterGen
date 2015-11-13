@@ -42,53 +42,13 @@ namespace CharacterGen.Tests.Integration.Stress.Magics
 
         protected override void MakeAssertions()
         {
-            var spells = GenerateSpells();
+            var spells = Generate(GenerateSpells, ss => ss.Any());
 
             foreach (var spellLevel in spells)
             {
                 Assert.That(spellLevel.Level, Is.Not.Negative, spellLevel.Level.ToString());
                 Assert.That(spellLevel.Quantity, Is.Not.Negative, spellLevel.Level.ToString());
             }
-        }
-
-        [Test]
-        public void SpellsHappen()
-        {
-            var spells = Generate(GenerateSpells, ss => ss.Any());
-            Assert.That(spells, Is.Not.Empty);
-        }
-
-        [Test]
-        public void SpellsDoNotHappen()
-        {
-            var spells = Generate(GenerateSpells, ss => ss.Any() == false);
-            Assert.That(spells, Is.Empty);
-        }
-
-        [Test]
-        public void DomainSpellsHappen()
-        {
-            var spells = Generate(GenerateSpells, ss => ss.Any(s => s.HasDomainSpell));
-
-            if (spells.Any(s => s.Level == 0))
-            {
-                var cantrips = spells.First(s => s.Level == 0);
-                Assert.That(cantrips.HasDomainSpell, Is.False);
-                spells = spells.Except(new[] { cantrips });
-            }
-
-            foreach (var spellLevel in spells)
-                Assert.That(spellLevel.HasDomainSpell, Is.True);
-        }
-
-        [Test]
-        public void DomainSpellsDoNotHappen()
-        {
-            var spells = Generate(GenerateSpells, ss => ss.All(s => s.HasDomainSpell == false) && ss.Any());
-
-            Assert.That(spells, Is.Not.Empty);
-            foreach (var spellLevel in spells)
-                Assert.That(spellLevel.HasDomainSpell, Is.False);
         }
     }
 }

@@ -59,7 +59,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         public void NotAllowed(String baseRace)
         {
             var baseRaces = randomizer.GetAllPossible(alignment, characterClass);
-            Assert.That(baseRaces, Is.Not.Contains(baseRace));
+            Assert.That(baseRaces, Is.All.Not.EqualTo(baseRace));
         }
     }
 }

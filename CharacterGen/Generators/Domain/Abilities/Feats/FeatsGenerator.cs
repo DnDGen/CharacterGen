@@ -41,11 +41,11 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
 
             var featsToCombine = allFeats.Where(f => CanCombine(f, allFeats));
             var featsToRemove = new List<Feat>();
-            var combinedFeatIds = new List<String>();
+            var combinedFeatNames = new List<String>();
 
             foreach (var featToCombine in featsToCombine)
             {
-                if (combinedFeatIds.Contains(featToCombine.Name))
+                if (combinedFeatNames.Contains(featToCombine.Name))
                     continue;
 
                 var combinableFeats = featsToCombine.Where(f => CanCombine(f, featsToCombine));
@@ -71,33 +71,31 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
                 }
 
                 featsToRemove.AddRange(otherFeats);
-                combinedFeatIds.Add(featToCombine.Name);
+                combinedFeatNames.Add(featToCombine.Name);
             }
 
             var featsWithRemovableStrengths = allFeats.Where(f => CanRemoveStrength(f, allFeats));
-            combinedFeatIds.Clear();
+            combinedFeatNames.Clear();
 
             foreach (var featToRemove in featsWithRemovableStrengths)
             {
-                if (combinedFeatIds.Contains(featToRemove.Name))
+                if (combinedFeatNames.Contains(featToRemove.Name))
                     continue;
 
-                var removableFeats = featsWithRemovableStrengths.Where(f => CanRemoveStrength(f, featsWithRemovableStrengths));
-                if (removableFeats.Count() < 2)
-                    continue;
+                var removableFeats = featsWithRemovableStrengths.Where(f => f.Name == featToRemove.Name);
 
-                var maxStrength = featsWithRemovableStrengths.Max(f => f.Strength);
-                var featToKeep = featsWithRemovableStrengths.First(f => f.Strength == maxStrength);
+                var maxStrength = removableFeats.Max(f => f.Strength);
+                var featToKeep = removableFeats.First(f => f.Strength == maxStrength);
                 var otherFeats = removableFeats.Except(new[] { featToKeep });
 
                 featsToRemove.AddRange(otherFeats);
-                combinedFeatIds.Add(featToRemove.Name);
+                combinedFeatNames.Add(featToRemove.Name);
             }
 
             if (allFeats.Any(f => f.Focus == FeatConstants.Foci.All))
             {
-                var featIdsWithAllFocus = allFeats.Where(f => f.Focus == FeatConstants.Foci.All).Select(f => f.Name);
-                var redundantFeats = allFeats.Where(f => featIdsWithAllFocus.Contains(f.Name) && f.Focus != FeatConstants.Foci.All);
+                var featNamesWithAllFocus = allFeats.Where(f => f.Focus == FeatConstants.Foci.All).Select(f => f.Name);
+                var redundantFeats = allFeats.Where(f => featNamesWithAllFocus.Contains(f.Name) && f.Focus != FeatConstants.Foci.All);
                 featsToRemove.AddRange(redundantFeats);
             }
 

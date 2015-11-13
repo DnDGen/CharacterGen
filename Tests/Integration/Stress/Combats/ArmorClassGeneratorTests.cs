@@ -5,6 +5,8 @@ using CharacterGen.Generators.Randomizers.Stats;
 using Ninject;
 using NUnit.Framework;
 using System;
+using TreasureGen.Common.Items;
+using TreasureGen.Generators.Items.Magical;
 
 namespace CharacterGen.Tests.Integration.Stress.Combats
 {
@@ -21,6 +23,8 @@ namespace CharacterGen.Tests.Integration.Stress.Combats
         public IStatsRandomizer StatsRandomizer { get; set; }
         [Inject, Named(CombatGeneratorTypeConstants.Character)]
         public ICombatGenerator CombatGenerator { get; set; }
+        [Inject, Named(ItemTypeConstants.Ring)]
+        public IMagicalItemGenerator RingGenerator { get; set; }
 
         [TestCase("ArmorClassGenerator")]
         public override void Stress(String stressSubject)

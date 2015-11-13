@@ -84,7 +84,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
             };
 
             foreach (var className in classNames)
-                Assert.That(crossClassSkills[className], Is.Not.Contains(skill));
+                Assert.That(crossClassSkills[className], Is.All.Not.EqualTo(skill));
         }
 
         [TestCase(CharacterClassConstants.Barbarian)]

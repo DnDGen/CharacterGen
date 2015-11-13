@@ -77,6 +77,16 @@ namespace CharacterGen.Tests.Integration.Stress
             T generatedObject;
 
             do generatedObject = generate();
+            while (isValid(generatedObject) == false);
+
+            return generatedObject;
+        }
+
+        protected T GenerateOrFail<T>(Func<T> generate, Func<T, Boolean> isValid)
+        {
+            T generatedObject;
+
+            do generatedObject = generate();
             while (TestShouldKeepRunning() && isValid(generatedObject) == false);
 
             if (TestShouldKeepRunning() == false && isValid(generatedObject) == false)

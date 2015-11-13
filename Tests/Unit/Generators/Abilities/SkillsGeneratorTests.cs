@@ -605,7 +605,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
             Assert.That(skills["skill 1"].Bonus, Is.EqualTo(0));
             Assert.That(skills["skill 2"].Bonus, Is.EqualTo(0));
             Assert.That(skills["synergy 2"].Bonus, Is.EqualTo(0));
-            Assert.That(skills.Keys, Is.Not.Contains("synergy 1"));
+            Assert.That(skills.Keys, Is.All.Not.EqualTo("synergy 1"));
         }
 
         [Test]
