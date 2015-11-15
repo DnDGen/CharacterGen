@@ -58,7 +58,7 @@ namespace CharacterGen.Tests.Integration.Tables.Items
                 FeatConstants.HeavyArmorProficiency,
                 FeatConstants.ShieldProficiency,
                 FeatConstants.TowerShieldProficiency,
-                GroupConstants.Weapons,
+                FeatConstants.Foci.Weapons,
                 WeaponConstants.Arrow,
                 WeaponConstants.AssassinsDagger,
                 WeaponConstants.BastardSword,
@@ -416,7 +416,7 @@ namespace CharacterGen.Tests.Integration.Tables.Items
                 WeaponConstants.Whip
             };
 
-            base.DistinctCollection(GroupConstants.Weapons, items);
+            base.DistinctCollection(FeatConstants.Foci.Weapons, items);
         }
     }
 }

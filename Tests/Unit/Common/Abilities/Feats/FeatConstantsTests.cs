@@ -251,6 +251,10 @@ namespace CharacterGen.Tests.Unit.Common.Abilities.Feats
         [TestCase(FeatConstants.Foci.Ray, "Ray")]
         [TestCase(FeatConstants.Foci.Sonic, "Sonic")]
         [TestCase(FeatConstants.Foci.UnarmedStrike, "Unarmed Strike")]
+        [TestCase(FeatConstants.Foci.Weapons, "Weapons")]
+        [TestCase(FeatConstants.Foci.WeaponsWithUnarmed, "Weapons with unarmed")]
+        [TestCase(FeatConstants.Foci.WeaponsWithUnarmedAndGrapple, "Weapons with unarmed and grapple")]
+        [TestCase(FeatConstants.Foci.WeaponsWithUnarmedAndGrappleAndRay, "Weapons with unarmed, grapple, and ray")]
         public void Constant(String constant, String value)
         {
             Assert.That(constant, Is.EqualTo(value));

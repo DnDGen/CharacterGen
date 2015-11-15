@@ -76,7 +76,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
                 .Returns(proficiencyFeats);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, magicalWeapon.Name))
                 .Returns(baseWeaponTypes);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, GroupConstants.Weapons))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, FeatConstants.Foci.Weapons))
                 .Returns(weapons);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, feats[0].Name))
                 .Returns(allProficientWeapons);

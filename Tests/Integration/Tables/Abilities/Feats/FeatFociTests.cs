@@ -25,10 +25,10 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
                 FeatConstants.SimpleWeaponProficiency,
                 FeatConstants.MartialWeaponProficiency,
                 FeatConstants.ExoticWeaponProficiency,
-                GroupConstants.Weapons,
-                GroupConstants.WeaponsWithUnarmed,
-                GroupConstants.WeaponsWithUnarmedAndGrapple,
-                GroupConstants.WeaponsWithUnarmedAndGrappleAndRay,
+                FeatConstants.Foci.Weapons,
+                FeatConstants.Foci.WeaponsWithUnarmed,
+                FeatConstants.Foci.WeaponsWithUnarmedAndGrapple,
+                FeatConstants.Foci.WeaponsWithUnarmedAndGrappleAndRay,
                 FeatConstants.CombatStyle,
                 GroupConstants.Skills,
                 FeatConstants.MonkBonusFeat + "1",
@@ -244,7 +244,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
                 WeaponConstants.Whip
             };
 
-            base.DistinctCollection(GroupConstants.Weapons, foci);
+            base.DistinctCollection(FeatConstants.Foci.Weapons, foci);
         }
 
         [Test]
@@ -318,7 +318,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
                 FeatConstants.Foci.UnarmedStrike
             };
 
-            base.DistinctCollection(GroupConstants.WeaponsWithUnarmed, foci);
+            base.DistinctCollection(FeatConstants.Foci.WeaponsWithUnarmed, foci);
         }
 
         [Test]
@@ -393,7 +393,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
                 FeatConstants.Foci.Grapple
             };
 
-            base.DistinctCollection(GroupConstants.WeaponsWithUnarmedAndGrapple, foci);
+            base.DistinctCollection(FeatConstants.Foci.WeaponsWithUnarmedAndGrapple, foci);
         }
 
         [Test]
@@ -469,7 +469,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
                 FeatConstants.Foci.Ray
             };
 
-            base.DistinctCollection(GroupConstants.WeaponsWithUnarmedAndGrappleAndRay, foci);
+            base.DistinctCollection(FeatConstants.Foci.WeaponsWithUnarmedAndGrappleAndRay, foci);
         }
 
         [Test]

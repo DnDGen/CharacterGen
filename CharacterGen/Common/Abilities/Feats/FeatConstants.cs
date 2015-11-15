@@ -255,6 +255,10 @@ namespace CharacterGen.Common.Abilities.Feats
             public const String Ray = "Ray";
             public const String Sonic = "Sonic";
             public const String UnarmedStrike = "Unarmed Strike";
+            public const String Weapons = "Weapons";
+            public const String WeaponsWithUnarmed = "Weapons with unarmed";
+            public const String WeaponsWithUnarmedAndGrapple = "Weapons with unarmed and grapple";
+            public const String WeaponsWithUnarmedAndGrappleAndRay = "Weapons with unarmed, grapple, and ray";
         }
     }
 }

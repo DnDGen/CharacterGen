@@ -41,9 +41,6 @@ namespace CharacterGen.Tests.Unit.Tables
         [TestCase(GroupConstants.Trained, "Trained")]
         [TestCase(GroupConstants.TwoHanded, "Two-Handed")]
         [TestCase(GroupConstants.Warriors, "Warriors")]
-        [TestCase(GroupConstants.Weapons, "Weapons")]
-        [TestCase(GroupConstants.WeaponsWithUnarmedAndGrapple, "Weapons with unarmed and grapple")]
-        [TestCase(GroupConstants.WeaponsWithUnarmedAndGrappleAndRay, "Weapons with unarmed, grapple, and ray")]
         [TestCase(GroupConstants.WizardBonusFeats, "WizardBonusFeats")]
         public void Constant(String constant, String value)
         {

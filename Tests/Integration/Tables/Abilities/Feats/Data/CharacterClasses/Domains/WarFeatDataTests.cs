@@ -38,7 +38,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             "")]
         [TestCase(FeatConstants.WeaponFocus,
             FeatConstants.WeaponFocus,
-            GroupConstants.WeaponsWithUnarmedAndGrappleAndRay,
+            FeatConstants.Foci.WeaponsWithUnarmedAndGrappleAndRay,
             0,
             "",
             "",
