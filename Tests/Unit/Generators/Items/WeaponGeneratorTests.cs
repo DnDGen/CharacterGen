@@ -176,6 +176,21 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         }
 
         [Test]
+        public void DoNotPreferMundaneWeaponPickedAsFocusForWeaponFamiliarity()
+        {
+            var mundaneWeapon = CreateWeapon("mundane weapon");
+            var wrongMundaneWeapon = CreateWeapon("wrong mundane weapon");
+            mockPercentileSelector.Setup(s => s.SelectFrom("Level9266Power")).Returns(PowerConstants.Mundane);
+            mockMundaneWeaponGenerator.SetupSequence(g => g.Generate()).Returns(wrongMundaneWeapon).Returns(mundaneWeapon);
+
+            feats.Add(new Feat { Name = FeatConstants.WeaponFamiliarity, Focus = wrongMundaneWeapon.Name });
+            feats.Add(new Feat { Name = "feat3", Focus = mundaneWeapon.Name });
+
+            var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
+            Assert.That(weapon, Is.EqualTo(mundaneWeapon), weapon.Name);
+        }
+
+        [Test]
         public void PreferAnyMundaneWeaponsPickedAsFocusForNonProficiencyFeats()
         {
             var mundaneWeapon = CreateWeapon("mundane weapon");
@@ -358,6 +373,20 @@ namespace CharacterGen.Tests.Unit.Generators.Items
 
             var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
             Assert.That(weapon, Is.EqualTo(magicalWeapon));
+        }
+
+        [Test]
+        public void DoNotPreferMagicalWeaponsPickedAsFocusForWeaponFamiliarity()
+        {
+            var wrongMagicalWeapon = CreateWeapon("wrong magical weapon");
+            mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateAtPower("power"))
+                .Returns(wrongMagicalWeapon).Returns(magicalWeapon);
+
+            feats.Add(new Feat { Name = FeatConstants.WeaponFamiliarity, Focus = wrongMagicalWeapon.Name });
+            feats.Add(new Feat { Name = "feat3", Focus = baseWeaponTypes[0] });
+
+            var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
+            Assert.That(weapon, Is.EqualTo(magicalWeapon), weapon.Name);
         }
 
         [Test]

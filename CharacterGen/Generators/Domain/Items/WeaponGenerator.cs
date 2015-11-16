@@ -101,7 +101,8 @@ namespace CharacterGen.Generators.Domain.Items
             var proficiencyFeats = feats.Where(f => proficiencyFeatNames.Contains(f.Name));
             var allWeapons = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, FeatConstants.Foci.Weapons);
 
-            var nonProficiencyFoci = feats.Except(proficiencyFeats).Select(f => f.Focus);
+            var nonProficiencyFeats = feats.Except(proficiencyFeats).Where(f => f.Name != FeatConstants.WeaponFamiliarity);
+            var nonProficiencyFoci = nonProficiencyFeats.Select(f => f.Focus);
             var specialWeaponFoci = nonProficiencyFoci.Intersect(allWeapons);
 
             if (specialWeaponFoci.Any())
