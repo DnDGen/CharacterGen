@@ -3,7 +3,6 @@ using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Generators.Domain.Randomizers.Races.Metaraces;
 using CharacterGen.Generators.Randomizers.Races;
 using NUnit.Framework;
-using System;
 using System.Linq;
 
 namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces

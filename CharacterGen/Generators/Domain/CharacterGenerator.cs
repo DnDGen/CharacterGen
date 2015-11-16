@@ -153,6 +153,9 @@ namespace CharacterGen.Generators.Domain
             var race = generator.Generate(() => raceGenerator.GenerateWith(alignment, characterClass, baseRaceRandomizer, metaraceRandomizer),
                 r => characterClass.Level + levelAdjustments[r.BaseRace] + levelAdjustments[r.Metarace] > 0);
 
+            if (race == null)
+                throw new IncompatibleRandomizersException();
+
             return race;
         }
 

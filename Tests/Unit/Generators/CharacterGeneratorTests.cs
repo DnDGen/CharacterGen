@@ -320,6 +320,23 @@ namespace CharacterGen.Tests.Unit.Generators
         }
 
         [Test]
+        public void NullRaceIndicatesIncompatibleRandomizers()
+        {
+            var higherRace = new Race();
+            higherRace.BaseRace = BaseRaceMinusOne;
+            higherRace.Metarace = Metarace;
+            race.BaseRace = BaseRaceMinusOne;
+            race.Metarace = RaceConstants.Metaraces.None;
+
+            mockRaceGenerator.Setup(f => f.GenerateWith(It.IsAny<Alignment>(), It.IsAny<CharacterClass>(), mockBaseRaceRandomizer.Object,
+                mockMetaraceRandomizer.Object)).Returns(higherRace);
+
+            characterClass.Level = 2;
+
+            Assert.That(GenerateCharacter, Throws.InstanceOf<IncompatibleRandomizersException>());
+        }
+
+        [Test]
         public void GetsInterestingTraitFromPercentileResultSelector()
         {
             mockPercentileSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Percentile.Traits)).Returns("interesting trait");

@@ -70,8 +70,8 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
             levels.Add(1);
             baseRaces.Add("base race");
             metaraces.Add(String.Empty);
-            adjustments.Add(baseRaces[0], 0);
-            adjustments.Add(metaraces[0], 0);
+            adjustments[baseRaces[0]] = 0;
+            adjustments[metaraces[0]] = 0;
         }
 
         [Test]
@@ -178,6 +178,21 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
             adjustments[metaraces[0]] = 1;
             levels.Clear();
             levels.Add(2);
+
+            var verified = verifier.VerifyCompatibility(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object,
+                mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
+            Assert.That(verified, Is.False);
+        }
+
+        [Test]
+        public void RandomizersNotVerifiedIfSetLevelAndSetMetarace()
+        {
+            metaraces.Clear();
+            metaraces.Add("metarace");
+
+            adjustments[metaraces[0]] = 2;
+            levels.Clear();
+            levels.Add(1);
 
             var verified = verifier.VerifyCompatibility(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object,
                 mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
