@@ -28,8 +28,7 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
         public IEnumerable<Feat> GenerateWith(CharacterClass characterClass, Race race, Dictionary<String, Stat> stats, IEnumerable<Feat> racialFeats, Dictionary<String, Skill> skills)
         {
             var characterClassFeatSelections = featsSelector.SelectClass(characterClass.ClassName);
-            var relevantClassFeatSelections = characterClassFeatSelections.Where(f => f.RequirementsMet(characterClass, race));
-            var classFeats = GetClassFeats(relevantClassFeatSelections, racialFeats, stats, characterClass, skills);
+            var classFeats = GetClassFeats(characterClassFeatSelections, race, racialFeats, stats, characterClass, skills);
 
             var specialistSelections = Enumerable.Empty<CharacterClassFeatSelection>();
             foreach (var specialistField in characterClass.SpecialistFields)
@@ -48,12 +47,16 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
             return classFeats;
         }
 
-        private IEnumerable<Feat> GetClassFeats(IEnumerable<CharacterClassFeatSelection> classFeatSelections, IEnumerable<Feat> earnedFeat, Dictionary<String, Stat> stats, CharacterClass characterClass, Dictionary<String, Skill> skills)
+        private IEnumerable<Feat> GetClassFeats(IEnumerable<CharacterClassFeatSelection> classFeatSelections, Race race, IEnumerable<Feat> racialFeats, Dictionary<String, Stat> stats, CharacterClass characterClass, Dictionary<String, Skill> skills)
         {
             var classFeats = new List<Feat>();
+            var earnedFeat = racialFeats;
 
             foreach (var classFeatSelection in classFeatSelections)
             {
+                if (classFeatSelection.RequirementsMet(characterClass, race, earnedFeat) == false)
+                    continue;
+
                 var focus = featFocusGenerator.GenerateAllowingFocusOfAllFrom(classFeatSelection.Feat, classFeatSelection.FocusType, skills, classFeatSelection.RequiredFeats, earnedFeat, characterClass);
                 var classFeat = BuildFeatFrom(classFeatSelection, focus, earnedFeat, stats, characterClass, skills);
 

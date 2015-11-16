@@ -1,14 +1,11 @@
 ﻿using CharacterGen.Common.Abilities.Feats;
-using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Generators.Abilities;
 using CharacterGen.Generators.Abilities.Feats;
-using CharacterGen.Generators.Randomizers.CharacterClasses;
 using CharacterGen.Generators.Randomizers.Stats;
 using Ninject;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace CharacterGen.Tests.Integration.Stress.Abilities.Feats
 {
@@ -25,13 +22,6 @@ namespace CharacterGen.Tests.Integration.Stress.Abilities.Feats
         public IStatsRandomizer StatsRandomizer { get; set; }
         [Inject]
         public IRacialFeatsGenerator RacialFeatsGenerator { get; set; }
-
-        [TearDown]
-        public void TearDown()
-        {
-            ClassNameRandomizer = GetNewInstanceOf<IClassNameRandomizer>(ClassNameRandomizerTypeConstants.Any);
-            LevelRandomizer = GetNewInstanceOf<ILevelRandomizer>(LevelRandomizerTypeConstants.Any);
-        }
 
         [TestCase("ClassFeatsGenerator")]
         public override void Stress(String stressSubject)
@@ -68,31 +58,6 @@ namespace CharacterGen.Tests.Integration.Stress.Abilities.Feats
             var racialFeats = RacialFeatsGenerator.GenerateWith(race, skills, stats);
 
             return ClassFeatsGenerator.GenerateWith(characterClass, race, stats, racialFeats, skills);
-        }
-
-        [Test]
-        public void RangerCombatStyleFeatsHaveCorrectFocus()
-        {
-            var setClassNameRandomizer = GetNewInstanceOf<ISetClassNameRandomizer>();
-            setClassNameRandomizer.SetClassName = CharacterClassConstants.Ranger;
-            ClassNameRandomizer = setClassNameRandomizer;
-
-            var setLevelRandomizer = GetNewInstanceOf<ISetLevelRandomizer>();
-            setLevelRandomizer.SetLevel = 20;
-            LevelRandomizer = setLevelRandomizer;
-
-            var feats = GetClassFeats();
-
-            var combatStyleFeat = feats.Single(f => f.Name == FeatConstants.CombatStyle);
-            Assert.That(combatStyleFeat.Focus, Is.EqualTo(FeatConstants.TwoWeaponFighting).Or.EqualTo(FeatConstants.Foci.Archery));
-
-            var improvedCombatStyleFeat = feats.Single(f => f.Name == FeatConstants.ImprovedCombatStyle);
-            Assert.That(improvedCombatStyleFeat.Focus, Is.EqualTo(FeatConstants.TwoWeaponFighting).Or.EqualTo(FeatConstants.Foci.Archery));
-            Assert.That(improvedCombatStyleFeat.Focus, Is.EqualTo(combatStyleFeat.Focus));
-
-            var combatStyleMasteryFeat = feats.Single(f => f.Name == FeatConstants.CombatStyleMastery);
-            Assert.That(combatStyleMasteryFeat.Focus, Is.EqualTo(FeatConstants.TwoWeaponFighting).Or.EqualTo(FeatConstants.Foci.Archery));
-            Assert.That(combatStyleMasteryFeat.Focus, Is.EqualTo(combatStyleFeat.Focus));
         }
     }
 }

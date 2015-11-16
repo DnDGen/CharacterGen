@@ -394,5 +394,62 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             Assert.That(onlyFeat.Name, Is.EqualTo(classFeatSelections["specialist"][0].Feat));
             Assert.That(onlyFeat.Focus, Is.EqualTo("focus"));
         }
+
+        [Test]
+        public void HonorFeatRequirementsForClassFeats()
+        {
+            AddClassFeat(characterClass.ClassName, "feat with requirements 1", requiredFeatIds: new[] { "feat 1" });
+            AddClassFeat(characterClass.ClassName, "feat with requirements 2", requiredFeatIds: new[] { "feat 2" });
+            AddClassFeat(characterClass.ClassName, "feat with requirements 3", requiredFeatIds: new[] { "feat 3" });
+            AddClassFeat(characterClass.ClassName, "feat with requirements 4", requiredFeatIds: new[] { "feat 4" });
+
+            var requiredFeat3 = classFeatSelections[characterClass.ClassName][2].RequiredFeats.Single();
+            requiredFeat3.Focus = "focus 3";
+            classFeatSelections[characterClass.ClassName][2].RequiredFeats = new[] { requiredFeat3 };
+            var requiredFeat4 = classFeatSelections[characterClass.ClassName][3].RequiredFeats.Single();
+            requiredFeat4.Focus = "focus 4";
+            classFeatSelections[characterClass.ClassName][3].RequiredFeats = new[] { requiredFeat4 };
+
+            racialFeats.Add(new Feat { Name = "feat 2" });
+            racialFeats.Add(new Feat { Name = "feat 3", Focus = "wrong focus" });
+            racialFeats.Add(new Feat { Name = "feat 4", Focus = "focus 4" });
+
+            var feats = classFeatsGenerator.GenerateWith(characterClass, race, stats, racialFeats, skills);
+            var featNames = feats.Select(f => f.Name);
+
+            Assert.That(featNames, Is.All.Not.EqualTo("feat with requirements 1"));
+            Assert.That(featNames, Contains.Item("feat with requirements 2"));
+            Assert.That(featNames, Is.All.Not.EqualTo("feat with requirements 3"));
+            Assert.That(featNames, Contains.Item("feat with requirements 4"));
+        }
+
+        [Test]
+        public void HonorFeatRequirementsForClassFeatsWhenRequirementsAreOtherClassFeats()
+        {
+            AddClassFeat(characterClass.ClassName, "feat with requirements 1", focusType: "focus type");
+            AddClassFeat(characterClass.ClassName, "feat with requirements 2", focusType: "focus type");
+            AddClassFeat(characterClass.ClassName, "feat with requirements 3", requiredFeatIds: new[] { "feat with requirements 1" });
+            AddClassFeat(characterClass.ClassName, "feat with requirements 4", requiredFeatIds: new[] { "feat with requirements 2" });
+
+            var requiredFeat3 = classFeatSelections[characterClass.ClassName][2].RequiredFeats.Single();
+            requiredFeat3.Focus = "focus 1";
+            classFeatSelections[characterClass.ClassName][2].RequiredFeats = new[] { requiredFeat3 };
+            var requiredFeat4 = classFeatSelections[characterClass.ClassName][3].RequiredFeats.Single();
+            requiredFeat4.Focus = "focus 2";
+            classFeatSelections[characterClass.ClassName][3].RequiredFeats = new[] { requiredFeat4 };
+
+            mockFeatFocusGenerator.Setup(g => g.GenerateAllowingFocusOfAllFrom("feat with requirements 1", "focus type", skills, classFeatSelections[characterClass.ClassName][0].RequiredFeats, It.IsAny<IEnumerable<Feat>>(), characterClass))
+                .Returns("focus 3");
+            mockFeatFocusGenerator.Setup(g => g.GenerateAllowingFocusOfAllFrom("feat with requirements 2", "focus type", skills, classFeatSelections[characterClass.ClassName][1].RequiredFeats, It.IsAny<IEnumerable<Feat>>(), characterClass))
+                .Returns("focus 2");
+
+            var feats = classFeatsGenerator.GenerateWith(characterClass, race, stats, racialFeats, skills);
+            var featNames = feats.Select(f => f.Name);
+
+            Assert.That(featNames, Contains.Item("feat with requirements 1"));
+            Assert.That(featNames, Contains.Item("feat with requirements 2"));
+            Assert.That(featNames, Is.All.Not.EqualTo("feat with requirements 3"));
+            Assert.That(featNames, Contains.Item("feat with requirements 4"));
+        }
     }
 }

@@ -148,8 +148,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
             DistinctCollection(name, requiredFeatIds);
         }
 
-        [TestCase(FeatConstants.AugmentSummoning, FeatConstants.SpellFocus,
-            CharacterClassConstants.Schools.Conjuration)]
+        [TestCase(FeatConstants.AugmentSummoning,
+            FeatConstants.SpellFocus, CharacterClassConstants.Schools.Conjuration)]
         [TestCase(FeatConstants.RapidShot + CharacterClassConstants.Ranger,
             FeatConstants.CombatStyle, FeatConstants.Foci.Archery)]
         [TestCase(FeatConstants.TwoWeaponFighting + CharacterClassConstants.Ranger,

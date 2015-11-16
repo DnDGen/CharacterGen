@@ -29,7 +29,7 @@ namespace CharacterGen.Selectors.Objects
             SizeRequirement = String.Empty;
         }
 
-        public Boolean RequirementsMet(CharacterClass characterClass, Race race)
+        public Boolean RequirementsMet(CharacterClass characterClass, Race race, IEnumerable<Feat> feats)
         {
             if (String.IsNullOrEmpty(SizeRequirement) == false && SizeRequirement != race.Size)
                 return false;
@@ -37,7 +37,21 @@ namespace CharacterGen.Selectors.Objects
             if (MaximumLevel > 0 && characterClass.Level > MaximumLevel)
                 return false;
 
-            return MinimumLevel <= characterClass.Level;
+            if (MinimumLevel > characterClass.Level)
+                return false;
+
+            foreach (var requirement in RequiredFeats)
+            {
+                var requirementFeats = feats.Where(f => f.Name == requirement.Feat);
+
+                if (requirementFeats.Any() == false)
+                    return false;
+
+                if (requirement.Focus != String.Empty && requirementFeats.Any(f => f.Focus == requirement.Focus) == false)
+                    return false;
+            }
+
+            return true;
         }
     }
 }

@@ -1,8 +1,10 @@
-﻿using CharacterGen.Common.CharacterClasses;
+﻿using CharacterGen.Common.Abilities.Feats;
+using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Common.Races;
 using CharacterGen.Selectors.Objects;
 using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 
 namespace CharacterGen.Tests.Unit.Selectors.Objects
 {
@@ -12,6 +14,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Objects
         private CharacterClassFeatSelection selection;
         private CharacterClass characterClass;
         private Race race;
+        private List<Feat> feats;
 
         [SetUp]
         public void Setup()
@@ -19,6 +22,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Objects
             selection = new CharacterClassFeatSelection();
             characterClass = new CharacterClass();
             race = new Race();
+            feats = new List<Feat>();
         }
 
         [Test]
@@ -46,7 +50,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Objects
             selection.MaximumLevel = 4;
             selection.MinimumLevel = 2;
 
-            var requirementsMet = selection.RequirementsMet(characterClass, race);
+            var requirementsMet = selection.RequirementsMet(characterClass, race, feats);
             Assert.That(requirementsMet, Is.EqualTo(met));
         }
 
@@ -56,7 +60,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Objects
             characterClass.Level = 5;
             selection.MinimumLevel = 2;
 
-            var requirementsMet = selection.RequirementsMet(characterClass, race);
+            var requirementsMet = selection.RequirementsMet(characterClass, race, feats);
             Assert.That(requirementsMet, Is.True);
         }
 
@@ -65,7 +69,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Objects
         {
             race.Size = "size";
 
-            var requirementsMet = selection.RequirementsMet(characterClass, race);
+            var requirementsMet = selection.RequirementsMet(characterClass, race, feats);
             Assert.That(requirementsMet, Is.True);
         }
 
@@ -75,7 +79,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Objects
             race.Size = "size";
             selection.SizeRequirement = "size";
 
-            var requirementsMet = selection.RequirementsMet(characterClass, race);
+            var requirementsMet = selection.RequirementsMet(characterClass, race, feats);
             Assert.That(requirementsMet, Is.True);
         }
 
@@ -85,7 +89,117 @@ namespace CharacterGen.Tests.Unit.Selectors.Objects
             race.Size = "size";
             selection.SizeRequirement = "other size";
 
-            var requirementsMet = selection.RequirementsMet(characterClass, race);
+            var requirementsMet = selection.RequirementsMet(characterClass, race, feats);
+            Assert.That(requirementsMet, Is.False);
+        }
+
+        [Test]
+        public void MetIfNoRequiredFeats()
+        {
+            var requirementsMet = selection.RequirementsMet(characterClass, race, feats);
+            Assert.That(requirementsMet, Is.True);
+        }
+
+        [Test]
+        public void MetWithAllRequiredFeats()
+        {
+            selection.RequiredFeats = new[] { new RequiredFeat { Feat = "feat 1" }, new RequiredFeat { Feat = "feat 2" } };
+            feats.Add(new Feat { Name = "feat 1" });
+            feats.Add(new Feat { Name = "feat 2" });
+
+            var requirementsMet = selection.RequirementsMet(characterClass, race, feats);
+            Assert.That(requirementsMet, Is.True);
+        }
+
+        [Test]
+        public void NotMetWithSomeRequiredFeats()
+        {
+            selection.RequiredFeats = new[] { new RequiredFeat { Feat = "feat 1" }, new RequiredFeat { Feat = "feat 2" } };
+            feats.Add(new Feat { Name = "feat 1" });
+
+            var requirementsMet = selection.RequirementsMet(characterClass, race, feats);
+            Assert.That(requirementsMet, Is.False);
+        }
+
+        [Test]
+        public void NotMetWithNoRequiredFeats()
+        {
+            selection.RequiredFeats = new[] { new RequiredFeat { Feat = "feat 1" }, new RequiredFeat { Feat = "feat 2" } };
+
+            var requirementsMet = selection.RequirementsMet(characterClass, race, feats);
+            Assert.That(requirementsMet, Is.False);
+        }
+
+        [Test]
+        public void MetWithAllRequiredFeatsAndFoci()
+        {
+            selection.RequiredFeats = new[]
+            {
+                new RequiredFeat { Feat = "feat 1", Focus = "focus 1" },
+                new RequiredFeat { Feat = "feat 2", Focus = "focus 2" }
+            };
+
+            feats.Add(new Feat { Name = "feat 1", Focus = "focus 1" });
+            feats.Add(new Feat { Name = "feat 2", Focus = "focus 2" });
+
+            var requirementsMet = selection.RequirementsMet(characterClass, race, feats);
+            Assert.That(requirementsMet, Is.True);
+        }
+
+        [Test]
+        public void MetWithExtraRequiredFeatsAndFoci()
+        {
+            selection.RequiredFeats = new[]
+            {
+                new RequiredFeat { Feat = "feat 1", Focus = "focus 1" },
+                new RequiredFeat { Feat = "feat 2", Focus = "focus 2" }
+            };
+
+            feats.Add(new Feat { Name = "feat 1", Focus = "focus 1" });
+            feats.Add(new Feat { Name = "feat 1", Focus = "focus 2" });
+            feats.Add(new Feat { Name = "feat 2", Focus = "focus 2" });
+            feats.Add(new Feat { Name = "feat 2", Focus = "focus 1" });
+            feats.Add(new Feat { Name = "feat 2", Focus = "focus 3" });
+            feats.Add(new Feat { Name = "feat 3" });
+            feats.Add(new Feat { Name = "feat 4", Focus = "focus 4" });
+
+            var requirementsMet = selection.RequirementsMet(characterClass, race, feats);
+            Assert.That(requirementsMet, Is.True);
+        }
+
+        [Test]
+        public void NotMetWithSomeRequiredFeatsAndFoci()
+        {
+            selection.RequiredFeats = new[]
+            {
+                new RequiredFeat { Feat = "feat 1", Focus = "focus 1" },
+                new RequiredFeat { Feat = "feat 2", Focus = "focus 2" }
+            };
+
+            feats.Add(new Feat { Name = "feat 1", Focus = "focus 2" });
+            feats.Add(new Feat { Name = "feat 2", Focus = "focus 2" });
+            feats.Add(new Feat { Name = "feat 3", Focus = "focus 1" });
+            feats.Add(new Feat { Name = "feat 2", Focus = "focus 1" });
+
+            var requirementsMet = selection.RequirementsMet(characterClass, race, feats);
+            Assert.That(requirementsMet, Is.False);
+        }
+
+        [Test]
+        public void NotMetWithNoRequiredFeatsAndFoci()
+        {
+            selection.RequiredFeats = new[]
+            {
+                new RequiredFeat { Feat = "feat 1", Focus = "focus 1" },
+                new RequiredFeat { Feat = "feat 2", Focus = "focus 2" }
+            };
+
+            feats.Add(new Feat { Name = "feat 1", Focus = "focus 2" });
+            feats.Add(new Feat { Name = "feat 2", Focus = "focus 1" });
+            feats.Add(new Feat { Name = "feat 3", Focus = "focus 1" });
+            feats.Add(new Feat { Name = "feat 3", Focus = "focus 2" });
+
+            var requirementsMet = selection.RequirementsMet(characterClass, race, feats);
             Assert.That(requirementsMet, Is.False);
         }
 
@@ -98,7 +212,16 @@ namespace CharacterGen.Tests.Unit.Selectors.Objects
             selection.MaximumLevel = 4;
             selection.MinimumLevel = 2;
 
-            var requirementsMet = selection.RequirementsMet(characterClass, race);
+            selection.RequiredFeats = new[]
+            {
+                new RequiredFeat { Feat = "feat 1", Focus = "focus 1" },
+                new RequiredFeat { Feat = "feat 2", Focus = "focus 2" }
+            };
+
+            feats.Add(new Feat { Name = "feat 1", Focus = "focus 1" });
+            feats.Add(new Feat { Name = "feat 2", Focus = "focus 2" });
+
+            var requirementsMet = selection.RequirementsMet(characterClass, race, feats);
             Assert.That(requirementsMet, Is.True);
         }
     }
