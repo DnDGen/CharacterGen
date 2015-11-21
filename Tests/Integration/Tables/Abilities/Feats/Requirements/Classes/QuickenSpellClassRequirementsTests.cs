@@ -37,8 +37,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Requirements.Cla
         [TestCase(CharacterClassConstants.Bard, 1)]
         [TestCase(CharacterClassConstants.Cleric, 1)]
         [TestCase(CharacterClassConstants.Druid, 1)]
-        [TestCase(CharacterClassConstants.Paladin, 1)]
-        [TestCase(CharacterClassConstants.Ranger, 1)]
+        [TestCase(CharacterClassConstants.Paladin, 4)]
+        [TestCase(CharacterClassConstants.Ranger, 4)]
         [TestCase(CharacterClassConstants.Sorcerer, 1)]
         [TestCase(CharacterClassConstants.Wizard, 1)]
         public override void Adjustment(String name, Int32 adjustment)
