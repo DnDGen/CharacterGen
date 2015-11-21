@@ -248,19 +248,19 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
         {
             var featNames = new[]
             {
+                FeatConstants.CombatCasting,
                 FeatConstants.CripplingStrike,
                 FeatConstants.DefensiveRoll,
                 FeatConstants.GreaterWeaponFocus,
                 FeatConstants.GreaterWeaponSpecialization,
                 FeatConstants.ImprovedEvasion,
+                FeatConstants.ImprovedFamiliar,
+                FeatConstants.Leadership,
                 FeatConstants.Opportunist,
                 FeatConstants.SkillMastery,
                 FeatConstants.SlipperyMind,
-                FeatConstants.ImprovedFamiliar,
-                FeatConstants.Leadership,
                 FeatConstants.SpellMastery,
                 FeatConstants.WeaponSpecialization,
-                FeatConstants.CombatCasting,
                 FeatConstants.EmpowerSpell,
                 FeatConstants.EnlargeSpell,
                 FeatConstants.EschewMaterials,
@@ -273,7 +273,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
                 FeatConstants.SilentSpell,
                 FeatConstants.SpellFocus,
                 FeatConstants.StillSpell,
-                FeatConstants.WidenSpell
+                FeatConstants.WidenSpell,
+                FeatConstants.SpellPenetration
             };
 
             base.DistinctCollection(GroupConstants.HasClassRequirements, featNames);

@@ -197,6 +197,7 @@
     <Compile Include="Abilities\Feats\Requirements\Classes\SlipperyMindClassRequirementsTests.cs" />
     <Compile Include="Abilities\Feats\Requirements\Classes\SpellFocusClassRequirementsTests.cs" />
     <Compile Include="Abilities\Feats\Requirements\Classes\SpellMasteryClassRequirementsTests.cs" />
+    <Compile Include="Abilities\Feats\Requirements\Classes\SpellPenetrationClassRequirementsTests.cs" />
     <Compile Include="Abilities\Feats\Requirements\Classes\StillSpellClassRequirementsTests.cs" />
     <Compile Include="Abilities\Feats\Requirements\Classes\WeaponSpecializationClassRequirementsTests.cs" />
     <Compile Include="Abilities\Feats\Requirements\Classes\WidenSpellClassRequirementsTests.cs" />

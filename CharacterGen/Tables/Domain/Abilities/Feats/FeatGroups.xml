@@ -669,6 +669,7 @@
       <item>Silent Spell</item>
       <item>Widen Spell</item>
       <item>Scribe Scroll</item>
+      <item>Spell Penetration</item>
     </object>
     <object>
         <name>HasSkillRequirements</name>
