@@ -17,7 +17,8 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
         public void Setup()
         {
             mockDice = new Mock<IDice>();
-            randomizer = new BestOfFourStatsRandomizer(mockDice.Object, new ConfigurableIterationGenerator());
+            var generator = new ConfigurableIterationGenerator(2);
+            randomizer = new BestOfFourStatsRandomizer(mockDice.Object, generator);
 
             mockDice.Setup(d => d.Roll(1).d6()).Returns(1);
         }

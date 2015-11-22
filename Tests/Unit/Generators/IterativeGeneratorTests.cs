@@ -6,7 +6,7 @@ using System;
 namespace CharacterGen.Tests.Unit.Generators
 {
     [TestFixture]
-    public class IterativeBuilderTests
+    public class IterativeGeneratorTests
     {
         private Generator generator;
 
@@ -65,7 +65,7 @@ namespace CharacterGen.Tests.Unit.Generators
 
             var randomNumber = generator.Generate(() => count++, i => false);
 
-            Assert.That(count, Is.EqualTo(10001));
+            Assert.That(count, Is.EqualTo(10000));
             Assert.That(randomNumber, Is.EqualTo(0));
         }
 
@@ -75,7 +75,7 @@ namespace CharacterGen.Tests.Unit.Generators
             var count = 0;
 
             var randomString = generator.Generate(() => count++.ToString(), i => false);
-            Assert.That(count, Is.EqualTo(10001));
+            Assert.That(count, Is.EqualTo(10000));
             Assert.That(randomString, Is.Null);
         }
 
@@ -84,9 +84,9 @@ namespace CharacterGen.Tests.Unit.Generators
         {
             var count = 0;
 
-            var randomString = generator.Generate(() => count++.ToString(), i => count > 10000);
-            Assert.That(count, Is.EqualTo(10001));
-            Assert.That(randomString, Is.EqualTo("10000"));
+            var randomString = generator.Generate(() => count++.ToString(), i => Convert.ToInt32(i) == 9999);
+            Assert.That(count, Is.EqualTo(10000));
+            Assert.That(randomString, Is.EqualTo("9999"));
         }
     }
 }

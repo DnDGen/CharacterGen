@@ -1,4 +1,5 @@
-﻿using CharacterGen.Generators.Domain.Randomizers.Stats;
+﻿using CharacterGen.Generators;
+using CharacterGen.Generators.Domain.Randomizers.Stats;
 using CharacterGen.Generators.Randomizers.Stats;
 using Moq;
 using NUnit.Framework;
@@ -13,6 +14,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
     {
         private IStatsRandomizer randomizer;
         private Mock<IDice> mockDice;
+        private Generator generator;
 
         private const Int32 min = 3;
         private const Int32 max = 9;
@@ -23,10 +25,11 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
         {
             middle = (max + min) / 2;
 
+            generator = new ConfigurableIterationGenerator(2);
             mockDice = new Mock<IDice>();
             mockDice.SetupSequence(d => d.Roll(3).d6()).Returns(min).Returns(max).Returns(middle).Returns(min - 1).Returns(max + 1).Returns(middle);
 
-            randomizer = new PoorStatsRandomizer(mockDice.Object, new ConfigurableIterationGenerator());
+            randomizer = new PoorStatsRandomizer(mockDice.Object, generator);
         }
 
         [Test]

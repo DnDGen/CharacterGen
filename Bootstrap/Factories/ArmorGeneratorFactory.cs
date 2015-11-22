@@ -11,7 +11,7 @@ namespace CharacterGen.Bootstrap.Factories
 {
     public static class ArmorGeneratorFactory
     {
-        public static GearGenerator CreateWith(IKernel kernel)
+        public static IArmorGenerator CreateWith(IKernel kernel)
         {
             var collectionsSelector = kernel.Get<ICollectionsSelector>();
             var percentileSelector = kernel.Get<IPercentileSelector>();

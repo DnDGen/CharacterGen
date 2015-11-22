@@ -159,7 +159,7 @@ namespace CharacterGen.Tests.Unit.Generators
             mockCharacterClassGenerator = new Mock<ICharacterClassGenerator>();
             mockRaceGenerator = new Mock<IRaceGenerator>();
             mockMagicGenerator = new Mock<IMagicGenerator>();
-            generator = new ConfigurableIterationGenerator(3);
+            generator = new ConfigurableIterationGenerator(4);
             alignment = new Alignment();
             characterClass = new CharacterClass();
             race = new Race();

@@ -6,8 +6,9 @@ using TreasureGen.Common.Items;
 
 namespace CharacterGen.Generators.Items
 {
-    public interface GearGenerator
+    public interface IArmorGenerator
     {
-        Item GenerateFrom(IEnumerable<Feat> feats, CharacterClass characterClass, Race race);
+        Item GenerateArmorFrom(IEnumerable<Feat> feats, CharacterClass characterClass, Race race);
+        Item GenerateShieldFrom(IEnumerable<Feat> feats, CharacterClass characterClass, Race race);
     }
 }

@@ -24,9 +24,10 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
             middle = (max + min) / 2;
 
             mockDice = new Mock<IDice>();
+            var generator = new ConfigurableIterationGenerator(2);
             mockDice.Setup(d => d.Roll(1).d6()).Returns(1);
 
-            randomizer = new HeroicStatsRandomizer(mockDice.Object, new ConfigurableIterationGenerator());
+            randomizer = new HeroicStatsRandomizer(mockDice.Object, generator);
         }
 
         [Test]

@@ -157,7 +157,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
             public String ForbiddenMetarace { get; set; }
 
             public TestMetaraceRandomizer(IPercentileSelector percentileResultSelector, IAdjustmentsSelector levelAdjustmentsSelector)
-                : base(percentileResultSelector, levelAdjustmentsSelector, new ConfigurableIterationGenerator())
+                : base(percentileResultSelector, levelAdjustmentsSelector, new ConfigurableIterationGenerator(2))
             { }
 
             protected override Boolean MetaraceIsAllowed(String metarace)

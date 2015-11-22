@@ -21,35 +21,38 @@ namespace CharacterGen.Tests.Unit.Generators.Items
     public class EquipmentGeneratorTests
     {
         private IEquipmentGenerator equipmentGenerator;
-        private Mock<GearGenerator> mockWeaponGenerator;
+        private Mock<IWeaponGenerator> mockWeaponGenerator;
         private Mock<ICollectionsSelector> mockCollectionsSelector;
-        private Mock<GearGenerator> mockArmorGenerator;
+        private Mock<IArmorGenerator> mockArmorGenerator;
         private Mock<ITreasureGenerator> mockTreasureGenerator;
         private Generator generator;
         private List<Feat> feats;
         private CharacterClass characterClass;
-        private Item weapon;
-        private List<String> baseWeaponTypes;
+        private Item meleeWeapon;
+        private Item rangedWeapon;
+        private List<String> baseRangedWeaponTypes;
         private Item armor;
         private Treasure treasure;
         private Race race;
         private List<String> shieldProficiencyFeats;
         private List<String> weaponProficiencyFeats;
+        private Item treasureItem;
 
         [SetUp]
         public void Setup()
         {
-            mockWeaponGenerator = new Mock<GearGenerator>();
+            mockWeaponGenerator = new Mock<IWeaponGenerator>();
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
-            mockArmorGenerator = new Mock<GearGenerator>();
+            mockArmorGenerator = new Mock<IArmorGenerator>();
             mockTreasureGenerator = new Mock<ITreasureGenerator>();
             generator = new ConfigurableIterationGenerator(3);
             equipmentGenerator = new EquipmentGenerator(mockCollectionsSelector.Object, mockWeaponGenerator.Object,
                 mockTreasureGenerator.Object, mockArmorGenerator.Object, generator);
             feats = new List<Feat>();
             characterClass = new CharacterClass();
-            weapon = new Item();
-            baseWeaponTypes = new List<String>();
+            meleeWeapon = new Item();
+            rangedWeapon = new Item();
+            baseRangedWeaponTypes = new List<String>();
             armor = new Item();
             treasure = new Treasure();
             race = new Race();
@@ -57,17 +60,24 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             weaponProficiencyFeats = new List<String>();
 
             characterClass.Level = 9266;
-            weapon.Name = "weapon name";
-            weapon.ItemType = ItemTypeConstants.Weapon;
-            weapon.Attributes = new[] { AttributeConstants.Melee };
-            armor.Name = "armor name";
+            meleeWeapon.Name = "melee weapon";
+            meleeWeapon.ItemType = ItemTypeConstants.Weapon;
+            meleeWeapon.Attributes = new[] { AttributeConstants.Melee };
+            rangedWeapon.Name = "ranged weapon";
+            rangedWeapon.ItemType = ItemTypeConstants.Weapon;
+            rangedWeapon.Attributes = new[] { "not melee" };
+            armor.Name = "armor";
             armor.ItemType = ItemTypeConstants.Armor;
-            baseWeaponTypes.Add("base weapon");
+            baseRangedWeaponTypes.Add("base ranged weapon");
+            treasureItem = new Item { Name = "treasure item" };
+            treasure.Items = new[] { treasureItem };
 
-            mockWeaponGenerator.Setup(g => g.GenerateFrom(feats, characterClass, race)).Returns(weapon);
-            mockArmorGenerator.Setup(g => g.GenerateFrom(feats, characterClass, race)).Returns(armor);
+            mockWeaponGenerator.Setup(g => g.GenerateFrom(feats, characterClass, race)).Returns(meleeWeapon);
+            mockWeaponGenerator.Setup(g => g.GenerateRangedFrom(feats, characterClass, race)).Returns(rangedWeapon);
+            mockWeaponGenerator.Setup(g => g.GenerateMeleeFrom(feats, characterClass, race)).Returns(meleeWeapon);
+            mockArmorGenerator.Setup(g => g.GenerateArmorFrom(feats, characterClass, race)).Returns(armor);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, It.IsAny<String>())).Returns((String table, String name) => new[] { name });
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, weapon.Name)).Returns(baseWeaponTypes);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, rangedWeapon.Name)).Returns(baseRangedWeaponTypes);
             mockTreasureGenerator.Setup(g => g.GenerateAtLevel(9266)).Returns(treasure);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, AttributeConstants.Shield + GroupConstants.Proficiency))
                 .Returns(shieldProficiencyFeats);
@@ -79,35 +89,35 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         public void GeneratesWeaponForPrimaryHand()
         {
             var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
-            Assert.That(equipment.PrimaryHand, Is.EqualTo(weapon));
-            Assert.That(equipment.PrimaryHand.Name, Is.EqualTo("weapon name"));
+            Assert.That(equipment.PrimaryHand, Is.EqualTo(meleeWeapon));
         }
 
         [Test]
         public void IfWeaponIsTwoHanded_PutInOffHandAsWell()
         {
-            weapon.Attributes = weapon.Attributes.Union(new[] { AttributeConstants.TwoHanded });
+            meleeWeapon.Attributes = meleeWeapon.Attributes.Union(new[] { AttributeConstants.TwoHanded });
 
             var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
-            Assert.That(equipment.PrimaryHand, Is.EqualTo(weapon));
-            Assert.That(equipment.OffHand, Is.EqualTo(weapon));
+            Assert.That(equipment.PrimaryHand, Is.EqualTo(meleeWeapon));
+            Assert.That(equipment.OffHand, Is.EqualTo(meleeWeapon));
         }
 
         [Test]
         public void IfWeaponIsNotTwoHanded_DoNotPutInOffHandAsWell()
         {
             var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
-            Assert.That(equipment.PrimaryHand, Is.EqualTo(weapon));
+            Assert.That(equipment.PrimaryHand, Is.EqualTo(meleeWeapon));
             Assert.That(equipment.OffHand, Is.Null);
         }
 
         [Test]
-        public void IfOffHandIsEmptyAndHasTwoWeaponFeats_GenerateSecondWeapon()
+        public void IfCharacterHasTwoWeaponFeats_GenerateTwoOneHandedWeapons()
         {
             var offHandWeapon = new Item();
-            offHandWeapon.Name = "offhand";
-            mockWeaponGenerator.SetupSequence(g => g.GenerateFrom(feats, characterClass, race))
-                .Returns(weapon).Returns(offHandWeapon);
+            offHandWeapon.Attributes = new[] { AttributeConstants.Melee };
+
+            mockWeaponGenerator.SetupSequence(g => g.GenerateOneHandedMeleeFrom(feats, characterClass, race))
+                .Returns(meleeWeapon).Returns(offHandWeapon);
 
             feats.Add(new Feat { Name = "other feat" });
             feats.Add(new Feat { Name = "two-weapon feat" });
@@ -115,31 +125,9 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TwoHanded))
                 .Returns(twoWeaponFeats);
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, offHandWeapon.Name)).Returns(new[] { offHandWeapon.Name });
-
             var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
-            Assert.That(equipment.PrimaryHand, Is.EqualTo(weapon));
+            Assert.That(equipment.PrimaryHand, Is.EqualTo(meleeWeapon));
             Assert.That(equipment.OffHand, Is.EqualTo(offHandWeapon));
-        }
-
-        [Test]
-        public void IfOffHandIsNotEmptyAndHasTwoWeaponFeats_DoNotGenerateSecondWeapon()
-        {
-            weapon.Attributes = weapon.Attributes.Union(new[] { AttributeConstants.TwoHanded });
-
-            var offHandWeapon = new Item();
-            mockWeaponGenerator.SetupSequence(g => g.GenerateFrom(feats, characterClass, race))
-                .Returns(weapon).Returns(offHandWeapon);
-
-            feats.Add(new Feat { Name = "other feat" });
-            feats.Add(new Feat { Name = "two-weapon feat" });
-            var twoWeaponFeats = new[] { "two-weapon feat", "two-handed feat" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TwoHanded))
-                .Returns(twoWeaponFeats);
-
-            var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
-            Assert.That(equipment.PrimaryHand, Is.EqualTo(weapon));
-            Assert.That(equipment.OffHand, Is.EqualTo(weapon));
         }
 
         [Test]
@@ -147,7 +135,9 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         {
             var offHandWeapon = new Item();
             mockWeaponGenerator.SetupSequence(g => g.GenerateFrom(feats, characterClass, race))
-                .Returns(weapon).Returns(offHandWeapon);
+                .Returns(meleeWeapon).Returns(offHandWeapon);
+
+            mockWeaponGenerator.Setup(g => g.GenerateOneHandedMeleeFrom(feats, characterClass, race)).Returns(offHandWeapon);
 
             feats.Add(new Feat { Name = "other feat" });
             feats.Add(new Feat { Name = "different feat" });
@@ -156,53 +146,8 @@ namespace CharacterGen.Tests.Unit.Generators.Items
                 .Returns(twoWeaponFeats);
 
             var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
-            Assert.That(equipment.PrimaryHand, Is.EqualTo(weapon));
+            Assert.That(equipment.PrimaryHand, Is.EqualTo(meleeWeapon));
             Assert.That(equipment.OffHand, Is.Null);
-        }
-
-        [Test]
-        public void OffHandWeaponCannotBeTwoHanded()
-        {
-            var twoHandedWeapon = new Item();
-            twoHandedWeapon.Name = "two-handed";
-            twoHandedWeapon.Attributes = twoHandedWeapon.Attributes.Union(new[] { AttributeConstants.TwoHanded });
-
-            var offHandWeapon = new Item();
-            offHandWeapon.Name = "offhand";
-            mockWeaponGenerator.SetupSequence(g => g.GenerateFrom(feats, characterClass, race))
-                .Returns(weapon).Returns(twoHandedWeapon).Returns(offHandWeapon);
-
-            feats.Add(new Feat { Name = "other feat" });
-            feats.Add(new Feat { Name = "two-weapon feat" });
-            var twoWeaponFeats = new[] { "two-weapon feat", "two-handed feat" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TwoHanded))
-                .Returns(twoWeaponFeats);
-
-            var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
-            Assert.That(equipment.PrimaryHand, Is.EqualTo(weapon));
-            Assert.That(equipment.OffHand, Is.EqualTo(offHandWeapon));
-        }
-
-        [Test]
-        public void OffHandWeaponCannotBeAmmunition()
-        {
-            var ammo = new Item();
-            ammo.Name = "ammo";
-            ammo.Attributes = new[] { AttributeConstants.Ammunition };
-            var offHandWeapon = new Item();
-            offHandWeapon.Name = "offhand";
-            mockWeaponGenerator.SetupSequence(g => g.GenerateFrom(feats, characterClass, race))
-                .Returns(weapon).Returns(ammo).Returns(offHandWeapon);
-
-            feats.Add(new Feat { Name = "other feat" });
-            feats.Add(new Feat { Name = "two-weapon feat" });
-            var twoWeaponFeats = new[] { "two-weapon feat", "two-handed feat" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TwoHanded))
-                .Returns(twoWeaponFeats);
-
-            var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
-            Assert.That(equipment.PrimaryHand, Is.EqualTo(weapon));
-            Assert.That(equipment.OffHand, Is.EqualTo(offHandWeapon));
         }
 
         [Test]
@@ -216,106 +161,43 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         public void CanGenerateNoArmor()
         {
             Item noArmor = null;
-            mockArmorGenerator.Setup(g => g.GenerateFrom(feats, characterClass, race)).Returns(noArmor);
+            mockArmorGenerator.Setup(g => g.GenerateArmorFrom(feats, characterClass, race)).Returns(noArmor);
 
             var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
             Assert.That(equipment.Armor, Is.Null);
         }
 
         [Test]
-        public void ArmorCannotBeShield()
+        public void IfOffHandIsEmptyAndProficientInShields_GenerateShield()
         {
             var shield = new Item();
-            shield.Attributes = new[] { AttributeConstants.Shield };
-            mockArmorGenerator.SetupSequence(g => g.GenerateFrom(feats, characterClass, race))
-                .Returns(shield).Returns(armor);
+            mockArmorGenerator.SetupSequence(g => g.GenerateShieldFrom(feats, characterClass, race)).Returns(shield);
 
             var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
-            Assert.That(equipment.Armor, Is.EqualTo(armor));
+            Assert.That(equipment.OffHand, Is.EqualTo(shield));
         }
 
         [Test]
-        public void IfOffHandIsEmptyAndArmorIsShield_WearShield()
+        public void IfOffHandIsEmptyAndProficientInShields_CanGenerateNoShield()
         {
-            var firstShield = new Item();
-            firstShield.Attributes = new[] { AttributeConstants.Shield };
-            var secondShield = new Item();
-            secondShield.Attributes = new[] { AttributeConstants.Shield };
-            mockArmorGenerator.SetupSequence(g => g.GenerateFrom(feats, characterClass, race))
-                .Returns(firstShield).Returns(secondShield).Returns(armor);
+            Item shield = null;
+            mockArmorGenerator.SetupSequence(g => g.GenerateShieldFrom(feats, characterClass, race)).Returns(shield);
 
-            var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
-            Assert.That(equipment.OffHand, Is.EqualTo(firstShield));
-        }
-
-        [Test]
-        public void IfOffHandIsEmptyAndArmorIsNotShield_DoNotWearShield()
-        {
             var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
             Assert.That(equipment.OffHand, Is.Null);
         }
 
         [Test]
-        public void IfOffHandIsNotEmptyAndArmorIsShield_DoNotWearShield()
+        public void IfOffHandIsNotEmptyAndProficientInShields_DoNotGenerateShield()
         {
-            var offHandWeapon = new Item();
-            offHandWeapon.Name = "offhand";
-            mockWeaponGenerator.SetupSequence(g => g.GenerateFrom(feats, characterClass, race))
-                .Returns(weapon).Returns(offHandWeapon);
-
-            feats.Add(new Feat { Name = "other feat" });
-            feats.Add(new Feat { Name = "two-weapon feat" });
-            var twoWeaponFeats = new[] { "two-weapon feat", "two-handed feat" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TwoHanded))
-                .Returns(twoWeaponFeats);
-
-            var firstShield = new Item();
-            firstShield.Attributes = new[] { AttributeConstants.Shield };
-            var secondShield = new Item();
-            secondShield.Attributes = new[] { AttributeConstants.Shield };
-            mockArmorGenerator.SetupSequence(g => g.GenerateFrom(feats, characterClass, race))
-                .Returns(firstShield).Returns(secondShield).Returns(armor);
-
-            var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
-            Assert.That(equipment.OffHand, Is.EqualTo(offHandWeapon), equipment.OffHand.Name);
-        }
-
-        [Test]
-        public void GenerateArmorAfterShieldWithoutShieldProficiencies()
-        {
-            feats.Add(new Feat { Name = "feat" });
-            feats.Add(new Feat { Name = "other feat" });
-            shieldProficiencyFeats.Add(feats[0].Name);
+            meleeWeapon.Attributes = meleeWeapon.Attributes.Union(new[] { AttributeConstants.TwoHanded });
 
             var shield = new Item();
-            shield.Attributes = new[] { AttributeConstants.Shield };
-            mockArmorGenerator.Setup(g => g.GenerateFrom(feats, characterClass, race))
-                .Returns(shield);
-            mockArmorGenerator.Setup(g => g.GenerateFrom(It.Is<IEnumerable<Feat>>(fs => fs.First().Name == "other feat" && fs.Count() == 1), characterClass, race))
-                .Returns(armor);
+            mockArmorGenerator.SetupSequence(g => g.GenerateShieldFrom(feats, characterClass, race)).Returns(shield);
 
             var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
-            Assert.That(equipment.OffHand, Is.EqualTo(shield));
-            Assert.That(equipment.Armor, Is.EqualTo(armor));
-        }
-
-        [Test]
-        public void CanGenerateNoArmorAfterShieldWithoutShieldProficiencies()
-        {
-            feats.Add(new Feat { Name = "feat" });
-            shieldProficiencyFeats.Add(feats[0].Name);
-
-            armor = null;
-            var shield = new Item();
-            shield.Attributes = new[] { AttributeConstants.Shield };
-            mockArmorGenerator.Setup(g => g.GenerateFrom(feats, characterClass, race))
-                .Returns(shield);
-            mockArmorGenerator.Setup(g => g.GenerateFrom(It.Is<IEnumerable<Feat>>(fs => fs.Any() == false), characterClass, race))
-                .Returns(armor);
-
-            var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
-            Assert.That(equipment.OffHand, Is.EqualTo(shield));
-            Assert.That(equipment.Armor, Is.Null);
+            Assert.That(equipment.PrimaryHand, Is.EqualTo(meleeWeapon), equipment.PrimaryHand.Name);
+            Assert.That(equipment.OffHand, Is.EqualTo(meleeWeapon), equipment.OffHand.Name);
         }
 
         [Test]
@@ -323,226 +205,209 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         {
             var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
             Assert.That(equipment.Treasure, Is.EqualTo(treasure));
+            Assert.That(equipment.Treasure.Items, Contains.Item(treasureItem));
         }
 
         [Test]
         public void IfWeaponRequiresAmmunition_GenerateMatchingAmmunitionAndAddToTreasure()
         {
-            var notAmmo = new Item();
-            notAmmo.Name = "not ammo";
             var ammo = new Item();
             ammo.Name = "ammo";
             ammo.Attributes = new[] { AttributeConstants.Ammunition };
-            var wrongAmmo = new Item();
-            wrongAmmo.Name = "other ammo";
-            wrongAmmo.Attributes = new[] { AttributeConstants.Ammunition };
-            mockWeaponGenerator.SetupSequence(g => g.GenerateFrom(feats, characterClass, race))
-                .Returns(weapon).Returns(notAmmo).Returns(wrongAmmo).Returns(ammo);
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, "ammo"))
-                .Returns(new[] { "ammunition" });
-
-            baseWeaponTypes.Add("ammunition");
+            baseRangedWeaponTypes.Add("ammunition");
+            mockWeaponGenerator.Setup(g => g.GenerateAmmunition(feats, characterClass, race, "ammunition")).Returns(ammo);
 
             var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
-            Assert.That(equipment.PrimaryHand, Is.EqualTo(weapon));
+            Assert.That(equipment.PrimaryHand, Is.EqualTo(meleeWeapon));
+            Assert.That(equipment.Treasure.Items, Contains.Item(treasureItem));
             Assert.That(equipment.Treasure.Items, Contains.Item(ammo));
+        }
+
+        [Test]
+        public void IfWeaponDoesNotRequireAmmunition_DoNotGenerateMatchingAmmunitionOrAddToTreasure()
+        {
+            mockWeaponGenerator.Setup(g => g.GenerateFrom(feats, characterClass, race)).Returns(rangedWeapon);
+
+            var ammo = new Item();
+            ammo.Attributes = new[] { AttributeConstants.Ammunition };
+
+            mockWeaponGenerator.Setup(g => g.GenerateAmmunition(feats, characterClass, race, It.IsAny<String>())).Returns(ammo);
+
+            var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
+            Assert.That(equipment.PrimaryHand, Is.EqualTo(rangedWeapon));
+            Assert.That(equipment.Treasure.Items, Contains.Item(treasureItem));
+            Assert.That(equipment.Treasure.Items, Is.All.Not.EqualTo(ammo));
         }
 
         [Test]
         public void IfCannotGenerateMatchingAmmunition_NoAmmunition()
         {
-            mockWeaponGenerator.Setup(g => g.GenerateFrom(feats, characterClass, race)).Returns(weapon);
+            mockWeaponGenerator.Setup(g => g.GenerateFrom(feats, characterClass, race)).Returns(rangedWeapon);
 
-            baseWeaponTypes.Add("ammunition");
-
-            var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
-            Assert.That(equipment.PrimaryHand, Is.EqualTo(weapon));
-            Assert.That(equipment.Treasure.Items, Is.Empty);
-        }
-
-        [Test]
-        public void IfWeaponIsAmmunition_AddAmmoToTreasureAndGenerateWeaponToFit()
-        {
-            var ammo = new Item();
-            ammo.Name = "ammo";
-            ammo.ItemType = ItemTypeConstants.Weapon;
-            ammo.Attributes = new[] { AttributeConstants.Ammunition };
-            var rangedWeapon = new Item();
-            rangedWeapon.ItemType = ItemTypeConstants.Weapon;
-            rangedWeapon.Name = "ranged";
-            var wrongRangedWeapon = new Item();
-            wrongRangedWeapon.ItemType = ItemTypeConstants.Weapon;
-            wrongRangedWeapon.Name = "wrong ranged";
-
-            mockWeaponGenerator.SetupSequence(g => g.GenerateFrom(feats, characterClass, race))
-                .Returns(ammo).Returns(wrongRangedWeapon).Returns(rangedWeapon).Returns(weapon);
-
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, "ranged"))
-                .Returns(new[] { "ranged", "ammo" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, "wrong ranged"))
-                .Returns(new[] { "wrong ranged", "wrong ammo" });
+            baseRangedWeaponTypes.Add("ammunition");
 
             var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
             Assert.That(equipment.PrimaryHand, Is.EqualTo(rangedWeapon));
-            Assert.That(equipment.Treasure.Items, Contains.Item(ammo));
-        }
-
-        [Test]
-        public void IfWeaponIsAmmunitionAndCannotGenerateMatchingWeapon_AddAmmoToTreasureAndGenerateMeleeWeapon()
-        {
-            var ammo = new Item();
-            ammo.Name = "ammo";
-            ammo.ItemType = ItemTypeConstants.Weapon;
-            ammo.Attributes = new[] { AttributeConstants.Ammunition };
-
-            var calls = 0;
-            mockWeaponGenerator.Setup(g => g.GenerateFrom(feats, characterClass, race)).Returns(() => calls++ < 1 ? ammo : weapon);
-
-            var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
-            Assert.That(equipment.PrimaryHand, Is.EqualTo(weapon));
-            Assert.That(equipment.PrimaryHand.Attributes, Contains.Item(AttributeConstants.Melee));
-            Assert.That(equipment.Treasure.Items, Contains.Item(ammo));
-        }
-
-        [Test]
-        public void IfWeaponIsAmmunitionAndMatchingWeaponIsTwoHanded_MarkAsTwoHanded()
-        {
-            var ammo = new Item();
-            ammo.Name = "ammo";
-            ammo.ItemType = ItemTypeConstants.Weapon;
-            ammo.Attributes = new[] { AttributeConstants.Ammunition };
-            var rangedWeapon = new Item();
-            rangedWeapon.ItemType = ItemTypeConstants.Weapon;
-            rangedWeapon.Name = "ranged";
-            rangedWeapon.Attributes = rangedWeapon.Attributes.Union(new[] { AttributeConstants.TwoHanded });
-            var wrongRangedWeapon = new Item();
-            wrongRangedWeapon.ItemType = ItemTypeConstants.Weapon;
-            wrongRangedWeapon.Name = "wrong ranged";
-            wrongRangedWeapon.Attributes = wrongRangedWeapon.Attributes.Union(new[] { AttributeConstants.TwoHanded });
-
-            mockWeaponGenerator.SetupSequence(g => g.GenerateFrom(feats, characterClass, race))
-                .Returns(ammo).Returns(wrongRangedWeapon).Returns(rangedWeapon).Returns(weapon);
-
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, "ranged"))
-                .Returns(new[] { "ranged", "ammo" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, "wrong ranged"))
-                .Returns(new[] { "wrong ranged", "wrong ammo" });
-
-            var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
-            Assert.That(equipment.PrimaryHand, Is.EqualTo(rangedWeapon));
-            Assert.That(equipment.OffHand, Is.EqualTo(rangedWeapon));
-            Assert.That(equipment.Treasure.Items, Contains.Item(ammo));
+            Assert.That(equipment.Treasure.Items, Contains.Item(treasureItem));
+            Assert.That(equipment.Treasure.Items, Contains.Item(meleeWeapon));
+            Assert.That(equipment.Treasure.Items, Is.All.Not.Null);
         }
 
         [Test]
         public void IfPrimaryHandIsNotMelee_GenerateMeleeWeaponForTreasure()
         {
-            weapon.Attributes = new[] { AttributeConstants.Ranged };
-
-            var meleeWeapon = new Item();
-            meleeWeapon.Attributes = new[] { AttributeConstants.Melee };
-            mockWeaponGenerator.SetupSequence(g => g.GenerateFrom(feats, characterClass, race))
-                .Returns(weapon).Returns(meleeWeapon);
+            mockWeaponGenerator.Setup(g => g.GenerateFrom(feats, characterClass, race)).Returns(rangedWeapon);
 
             var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
-            Assert.That(equipment.PrimaryHand, Is.EqualTo(weapon));
+            Assert.That(equipment.PrimaryHand, Is.EqualTo(rangedWeapon));
+            Assert.That(equipment.Treasure.Items, Contains.Item(treasureItem));
             Assert.That(equipment.Treasure.Items, Contains.Item(meleeWeapon));
         }
 
         [Test]
-        public void MeleeWeaponMustBeMeleeWeapon()
+        public void AllowTwoHandedMeleeIfCharacterDoesNotHaveTwoWeaponFeat()
         {
-            weapon.Attributes = new[] { AttributeConstants.Ranged };
+            mockWeaponGenerator.Setup(g => g.GenerateFrom(feats, characterClass, race)).Returns(rangedWeapon);
 
-            var wrongWeapon = new Item();
-            wrongWeapon.Attributes = new[] { "not melee" };
+            var twoHandedWeapon = new Item();
+            twoHandedWeapon.Attributes = new[] { AttributeConstants.Melee, AttributeConstants.TwoHanded };
 
-            var meleeWeapon = new Item();
-            meleeWeapon.Attributes = new[] { AttributeConstants.Melee };
-            mockWeaponGenerator.SetupSequence(g => g.GenerateFrom(feats, characterClass, race))
-                .Returns(weapon).Returns(wrongWeapon).Returns(meleeWeapon);
+            mockWeaponGenerator.Setup(g => g.GenerateMeleeFrom(feats, characterClass, race)).Returns(twoHandedWeapon);
+
+            feats.Add(new Feat { Name = "other feat" });
+            var twoWeaponFeats = new[] { "two-weapon feat", "two-handed feat" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TwoHanded))
+                .Returns(twoWeaponFeats);
 
             var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
-            Assert.That(equipment.PrimaryHand, Is.EqualTo(weapon));
+            Assert.That(equipment.PrimaryHand, Is.EqualTo(rangedWeapon));
+            Assert.That(equipment.Treasure.Items, Contains.Item(treasureItem));
+            Assert.That(equipment.Treasure.Items, Contains.Item(twoHandedWeapon), String.Join(",", equipment.Treasure.Items.Select(i => i.Name)));
+            Assert.That(equipment.Treasure.Items, Is.All.Not.EqualTo(meleeWeapon));
+        }
+
+        [Test]
+        public void IfMeleeWeaponIsOneHandedAndProficientInShields_GenerateShield()
+        {
+            mockWeaponGenerator.Setup(g => g.GenerateFrom(feats, characterClass, race)).Returns(rangedWeapon);
+
+            feats.Add(new Feat { Name = "feat" });
+            feats.Add(new Feat { Name = "other feat" });
+            shieldProficiencyFeats.Add(feats[0].Name);
+
+            var shield = new Item();
+            shield.Attributes = new[] { AttributeConstants.Shield };
+            mockArmorGenerator.Setup(g => g.GenerateShieldFrom(feats, characterClass, race)).Returns(shield);
+
+            var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
+            Assert.That(equipment.PrimaryHand, Is.EqualTo(rangedWeapon));
+            Assert.That(equipment.Treasure.Items, Contains.Item(treasureItem));
             Assert.That(equipment.Treasure.Items, Contains.Item(meleeWeapon));
+            Assert.That(equipment.Treasure.Items, Contains.Item(shield));
         }
 
         [Test]
-        public void GenerateMeleeWeaponFromFeats()
+        public void IfMeleeWeaponIsTwoHandedAndProficientInShields_DoNotGenerateShield()
         {
-            feats.Add(new Feat());
-            feats.Add(new Feat());
-            feats[0].Focus = "weapon 1";
-            feats[0].Name = "feat";
-            feats[1].Name = "other feat";
-            feats[1].Focus = "other focus";
+            mockWeaponGenerator.Setup(g => g.GenerateFrom(feats, characterClass, race)).Returns(rangedWeapon);
 
-            weaponProficiencyFeats.Add(feats[0].Name);
+            var twoHandedWeapon = new Item();
+            twoHandedWeapon.Attributes = new[] { AttributeConstants.Melee, AttributeConstants.TwoHanded };
 
-            var rangedWeapon = new Item();
-            rangedWeapon.ItemType = ItemTypeConstants.Weapon;
-            rangedWeapon.Attributes = new[] { AttributeConstants.Ranged };
-            mockWeaponGenerator.SetupSequence(g => g.GenerateFrom(feats, characterClass, race))
-                .Returns(rangedWeapon).Returns(weapon);
+            mockWeaponGenerator.Setup(g => g.GenerateMeleeFrom(feats, characterClass, race)).Returns(twoHandedWeapon);
+
+            feats.Add(new Feat { Name = "feat" });
+            feats.Add(new Feat { Name = "other feat" });
+            shieldProficiencyFeats.Add(feats[0].Name);
+
+            var shield = new Item();
+            shield.Attributes = new[] { AttributeConstants.Shield };
+            mockArmorGenerator.Setup(g => g.GenerateShieldFrom(feats, characterClass, race)).Returns(shield);
 
             var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
             Assert.That(equipment.PrimaryHand, Is.EqualTo(rangedWeapon));
-            Assert.That(equipment.Treasure.Items, Contains.Item(weapon));
+            Assert.That(equipment.Treasure.Items, Contains.Item(treasureItem));
+            Assert.That(equipment.Treasure.Items, Contains.Item(twoHandedWeapon));
+            Assert.That(equipment.Treasure.Items, Is.All.Not.EqualTo(shield));
         }
 
         [Test]
-        public void GenerateMeleeWeaponFromSpecificProficiencyFeats()
+        public void IfMeleeWeaponIsOneHandedAndNotProficientInShields_DoNotGenerateShield()
         {
-            feats.Add(new Feat());
-            feats.Add(new Feat());
-            feats[0].Focus = "weapon 1";
-            feats[0].Name = "feat";
-            feats[1].Name = "other feat";
-            feats[1].Focus = "other focus";
+            mockWeaponGenerator.Setup(g => g.GenerateFrom(feats, characterClass, race)).Returns(rangedWeapon);
 
-            weaponProficiencyFeats.Add(feats[0].Name);
+            feats.Add(new Feat { Name = "feat" });
+            feats.Add(new Feat { Name = "other feat" });
 
-            var rangedWeapon = new Item();
-            rangedWeapon.ItemType = ItemTypeConstants.Weapon;
-            rangedWeapon.Attributes = new[] { AttributeConstants.Ranged };
-            mockWeaponGenerator.Setup(g => g.GenerateFrom(feats, characterClass, race))
-                .Returns(rangedWeapon);
-            mockWeaponGenerator.Setup(g => g.GenerateFrom(It.Is<IEnumerable<Feat>>(fs => fs.Contains(feats[0]) && fs.Count() == 1), characterClass, race))
-                .Returns(weapon);
+            Item noShield = null;
+            mockArmorGenerator.Setup(g => g.GenerateShieldFrom(feats, characterClass, race)).Returns(noShield);
 
             var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
             Assert.That(equipment.PrimaryHand, Is.EqualTo(rangedWeapon));
-            Assert.That(equipment.Treasure.Items, Contains.Item(weapon));
+            Assert.That(equipment.Treasure.Items, Contains.Item(treasureItem));
+            Assert.That(equipment.Treasure.Items, Contains.Item(meleeWeapon));
+            Assert.That(equipment.Treasure.Items, Is.All.Not.Null);
         }
 
         [Test]
-        public void GenerateMeleeWeaponFromProficiencyAllFeats()
+        public void IfPrimaryHandIsMelee_GenerateRangedToCarry()
         {
-            feats.Add(new Feat());
-            feats.Add(new Feat());
-            feats.Add(new Feat());
+            var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
+            Assert.That(equipment.PrimaryHand, Is.EqualTo(meleeWeapon));
+            Assert.That(equipment.Treasure.Items, Contains.Item(treasureItem));
+            Assert.That(equipment.Treasure.Items, Contains.Item(rangedWeapon));
+        }
 
-            feats[0].Focus = FeatConstants.Foci.All;
-            feats[0].Name = "feat";
-            feats[1].Name = "other feat";
-            feats[1].Focus = "other focus";
-            feats[2].Focus = "weapon 1";
-            feats[2].Name = "third feat";
+        [Test]
+        public void IfPrimaryHandIsMelee_GenerateRangedAndAmmunitionToCarry()
+        {
+            var ammo = new Item();
+            ammo.Name = "ammunition";
+            ammo.Attributes = new[] { AttributeConstants.Ammunition };
 
-            weaponProficiencyFeats.Add(feats[0].Name);
-
-            var rangedWeapon = new Item();
-            rangedWeapon.ItemType = ItemTypeConstants.Weapon;
-            rangedWeapon.Attributes = new[] { AttributeConstants.Ranged };
-            mockWeaponGenerator.Setup(g => g.GenerateFrom(feats, characterClass, race))
-                .Returns(rangedWeapon);
-            mockWeaponGenerator.Setup(g => g.GenerateFrom(It.Is<IEnumerable<Feat>>(fs => fs.Contains(feats[0]) && fs.Count() == 1), characterClass, race))
-                .Returns(weapon);
+            baseRangedWeaponTypes.Add("ammunition");
+            mockWeaponGenerator.Setup(g => g.GenerateAmmunition(feats, characterClass, race, "ammunition")).Returns(ammo);
 
             var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
-            Assert.That(equipment.PrimaryHand, Is.EqualTo(rangedWeapon));
-            Assert.That(equipment.Treasure.Items, Contains.Item(weapon));
+            Assert.That(equipment.PrimaryHand, Is.EqualTo(meleeWeapon));
+            Assert.That(equipment.Treasure.Items, Contains.Item(treasureItem));
+            Assert.That(equipment.Treasure.Items, Contains.Item(rangedWeapon));
+            Assert.That(equipment.Treasure.Items, Contains.Item(ammo));
+        }
+
+        [Test]
+        public void IfPrimaryHandIsMelee_GenerateRangedAndNoAmmunition()
+        {
+            Item noAmmo = null;
+
+            baseRangedWeaponTypes.Add("ammunition");
+            mockWeaponGenerator.Setup(g => g.GenerateAmmunition(feats, characterClass, race, "ammunition")).Returns(noAmmo);
+
+            var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
+            Assert.That(equipment.PrimaryHand, Is.EqualTo(meleeWeapon));
+            Assert.That(equipment.Treasure.Items, Contains.Item(treasureItem));
+            Assert.That(equipment.Treasure.Items, Contains.Item(rangedWeapon));
+            Assert.That(equipment.Treasure.Items, Is.All.Not.Null);
+        }
+
+        [Test]
+        public void IfPrimaryHandIsOneHandedRangedWeaponAndProficientInShields_DoNotEquipShield()
+        {
+            mockWeaponGenerator.Setup(g => g.GenerateFrom(feats, characterClass, race)).Returns(rangedWeapon);
+
+            feats.Add(new Feat { Name = "feat" });
+            feats.Add(new Feat { Name = "other feat" });
+            shieldProficiencyFeats.Add(feats[0].Name);
+
+            var shield = new Item();
+            shield.Attributes = new[] { AttributeConstants.Shield };
+            mockArmorGenerator.Setup(g => g.GenerateShieldFrom(feats, characterClass, race)).Returns(shield);
+
+            var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
+            Assert.That(equipment.OffHand, Is.Null);
+            Assert.That(equipment.Treasure.Items, Contains.Item(treasureItem));
+            Assert.That(equipment.Treasure.Items, Contains.Item(shield));
         }
     }
 }

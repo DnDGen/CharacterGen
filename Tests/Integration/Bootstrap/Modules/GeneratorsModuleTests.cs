@@ -4,7 +4,6 @@ using CharacterGen.Generators.Abilities.Feats;
 using CharacterGen.Generators.Combats;
 using CharacterGen.Generators.Domain.Abilities;
 using CharacterGen.Generators.Domain.Combats;
-using CharacterGen.Generators.Domain.Items;
 using CharacterGen.Generators.Domain.Randomizers.Alignments;
 using CharacterGen.Generators.Domain.Randomizers.CharacterClasses.ClassNames;
 using CharacterGen.Generators.Domain.Randomizers.CharacterClasses.Levels;
@@ -20,7 +19,6 @@ using CharacterGen.Generators.Randomizers.Stats;
 using CharacterGen.Generators.Verifiers;
 using NUnit.Framework;
 using System;
-using TreasureGen.Common.Items;
 
 namespace CharacterGen.Tests.Integration.Bootstrap.Modules
 {
@@ -600,23 +598,16 @@ namespace CharacterGen.Tests.Integration.Bootstrap.Modules
             AssertNotSingleton<IFeatFocusGenerator>();
         }
 
-        [TestCase(ItemTypeConstants.Armor)]
-        [TestCase(ItemTypeConstants.Weapon)]
-        public void GearGeneratorIsNotASingleton(String name)
+        [Test]
+        public void ArmorGeneratorIsNotASingleton()
         {
-            AssertNotSingleton<GearGenerator>(name);
+            AssertNotSingleton<IArmorGenerator>();
         }
 
         [Test]
-        public void GearGeneratorNamedArmorIsArmorGenerator()
+        public void WeaponGeneratorIsNotASingleton()
         {
-            AssertNamedIsInstanceOf<GearGenerator, ArmorGenerator>(ItemTypeConstants.Armor);
-        }
-
-        [Test]
-        public void GearGeneratorNamedWeaponIsWeaponGenerator()
-        {
-            AssertNamedIsInstanceOf<GearGenerator, WeaponGenerator>(ItemTypeConstants.Weapon);
+            AssertNotSingleton<IWeaponGenerator>();
         }
 
         [Test]

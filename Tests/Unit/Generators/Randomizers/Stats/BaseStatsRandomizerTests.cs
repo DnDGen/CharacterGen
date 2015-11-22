@@ -47,20 +47,36 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
         }
 
         [Test]
+        public void StatsAreRolledIndividually()
+        {
+            randomizer.Roll = 11;
+            randomizer.Reroll = 12;
+
+            var stats = randomizer.Randomize();
+
+            Assert.That(stats[StatConstants.Strength].Value, Is.EqualTo(16));
+            Assert.That(stats[StatConstants.Constitution].Value, Is.EqualTo(13));
+            Assert.That(stats[StatConstants.Dexterity].Value, Is.EqualTo(14));
+            Assert.That(stats[StatConstants.Intelligence].Value, Is.EqualTo(15));
+            Assert.That(stats[StatConstants.Wisdom].Value, Is.EqualTo(17));
+            Assert.That(stats[StatConstants.Charisma].Value, Is.EqualTo(12));
+        }
+
+        [Test]
         public void LoopUntilStatsAreAllowed()
         {
             randomizer.Roll = 11;
             randomizer.Reroll = 12;
-            randomizer.AllowedOnRoll = 10;
+            randomizer.AllowedOnRandomize = 10;
 
             var stats = randomizer.Randomize();
 
-            Assert.That(stats[StatConstants.Strength].Value, Is.EqualTo(randomizer.Reroll));
-            Assert.That(stats[StatConstants.Constitution].Value, Is.EqualTo(randomizer.Reroll));
-            Assert.That(stats[StatConstants.Dexterity].Value, Is.EqualTo(randomizer.Reroll));
-            Assert.That(stats[StatConstants.Intelligence].Value, Is.EqualTo(randomizer.Reroll));
-            Assert.That(stats[StatConstants.Wisdom].Value, Is.EqualTo(randomizer.Reroll));
-            Assert.That(stats[StatConstants.Charisma].Value, Is.EqualTo(randomizer.Reroll));
+            Assert.That(stats[StatConstants.Strength].Value, Is.EqualTo(16));
+            Assert.That(stats[StatConstants.Constitution].Value, Is.EqualTo(13));
+            Assert.That(stats[StatConstants.Dexterity].Value, Is.EqualTo(14));
+            Assert.That(stats[StatConstants.Intelligence].Value, Is.EqualTo(15));
+            Assert.That(stats[StatConstants.Wisdom].Value, Is.EqualTo(17));
+            Assert.That(stats[StatConstants.Charisma].Value, Is.EqualTo(12));
         }
 
         [Test]
@@ -68,7 +84,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
         {
             randomizer.Roll = 11;
             randomizer.Reroll = 12;
-            randomizer.AllowedOnRoll = Int32.MaxValue;
+            randomizer.AllowedOnRandomize = Int32.MaxValue;
 
             var stats = randomizer.Randomize();
 
@@ -84,7 +100,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
         {
             public Int32 Roll { get; set; }
             public Int32 Reroll { get; set; }
-            public Int32 AllowedOnRoll { get; set; }
+            public Int32 AllowedOnRandomize { get; set; }
 
             protected override Int32 defaultValue
             {
@@ -94,26 +110,27 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
                 }
             }
 
-            private Int32 rollCount;
+            private Int32 randomizeCount;
 
             public TestStatRandomizer()
                 : base(new ConfigurableIterationGenerator(10))
             {
-                AllowedOnRoll = 1;
-                rollCount = 0;
+                randomizeCount = 0;
+                AllowedOnRandomize = 1;
             }
 
             protected override Int32 RollStat()
             {
-                if (rollCount < AllowedOnRoll || Reroll == 0)
+                if (randomizeCount + 1 < AllowedOnRandomize || Reroll == 0)
                     return Roll;
 
-                return Reroll;
+                return Reroll++;
             }
 
             protected override Boolean StatsAreAllowed(IEnumerable<Stat> stats)
             {
-                return rollCount++ >= AllowedOnRoll;
+                randomizeCount++;
+                return randomizeCount >= AllowedOnRandomize;
             }
         }
     }

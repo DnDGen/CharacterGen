@@ -16,13 +16,12 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Alignments
     {
         private TestAlignmentRandomizer randomizer;
         private Mock<IPercentileSelector> mockPercentileResultSelector;
-        private Generator generator;
 
         [SetUp]
         public void Setup()
         {
             mockPercentileResultSelector = new Mock<IPercentileSelector>();
-            generator = new ConfigurableIterationGenerator();
+            var generator = new ConfigurableIterationGenerator(2);
 
             mockPercentileResultSelector.Setup(p => p.SelectAllFrom(TableNameConstants.Set.Percentile.AlignmentLawfulness)).Returns(new[] { "other lawfulness", "lawfulness" });
             mockPercentileResultSelector.Setup(p => p.SelectAllFrom(TableNameConstants.Set.Percentile.AlignmentGoodness)).Returns(new[] { "other goodness", "goodness" });

@@ -15,7 +15,6 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassN
     {
         private TestClassRandomizer randomizer;
         private Mock<IPercentileSelector> mockPercentileResultSelector;
-        private Generator generator;
         private Alignment alignment;
 
         private String firstClass = "first class";
@@ -28,7 +27,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassN
             alignment.Goodness = AlignmentConstants.Good;
 
             mockPercentileResultSelector = new Mock<IPercentileSelector>();
-            generator = new ConfigurableIterationGenerator();
+            var generator = new ConfigurableIterationGenerator(2);
 
             mockPercentileResultSelector.Setup(p => p.SelectAllFrom(It.IsAny<String>())).Returns(new[] { firstClass, secondClass });
             mockPercentileResultSelector.Setup(p => p.SelectFrom(It.IsAny<String>())).Returns(firstClass);

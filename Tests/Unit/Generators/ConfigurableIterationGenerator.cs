@@ -15,7 +15,7 @@ namespace CharacterGen.Tests.Unit.Generators
         public T Generate<T>(Func<T> buildInstructions, Func<T, Boolean> isValid)
         {
             T builtObject;
-            var retries = 0;
+            var retries = 1;
 
             do builtObject = buildInstructions();
             while (retries++ < maxRetries && isValid(builtObject) == false);

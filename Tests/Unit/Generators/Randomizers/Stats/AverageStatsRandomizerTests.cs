@@ -23,10 +23,11 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
         {
             middle = (max + min) / 2;
 
+            var generator = new ConfigurableIterationGenerator(2);
             mockDice = new Mock<IDice>();
             mockDice.SetupSequence(d => d.Roll(3).d6()).Returns(min).Returns(max).Returns(middle).Returns(min - 1).Returns(max + 1).Returns(middle);
 
-            randomizer = new AverageStatsRandomizer(mockDice.Object, new ConfigurableIterationGenerator());
+            randomizer = new AverageStatsRandomizer(mockDice.Object, generator);
         }
 
         [Test]

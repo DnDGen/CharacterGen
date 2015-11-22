@@ -9,10 +9,10 @@ namespace CharacterGen.Generators.Domain
         public T Generate<T>(Func<T> buildInstructions, Func<T, Boolean> isValid)
         {
             T builtObject;
-            var retries = 0;
+            var retries = 1;
 
             do builtObject = buildInstructions();
-            while (retries++ < MaxRetries && isValid(builtObject) == false);
+            while (isValid(builtObject) == false && retries++ < MaxRetries);
 
             if (isValid(builtObject))
                 return builtObject;

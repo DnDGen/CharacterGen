@@ -14,7 +14,7 @@ using TreasureGen.Generators.Items.Mundane;
 
 namespace CharacterGen.Generators.Domain.Items
 {
-    public class WeaponGenerator : GearGenerator
+    public class WeaponGenerator : IWeaponGenerator
     {
         private ICollectionsSelector collectionsSelector;
         private IPercentileSelector percentileSelector;
@@ -52,32 +52,12 @@ namespace CharacterGen.Generators.Domain.Items
             allowedWeapons = allowedWeapons.Union(additionalWeapons);
 
             var weapon = generator.Generate(() => GenerateWeapon(power), w => WeaponIsValid(w, allowedWeapons, race));
-
-            if (weapon != null)
-                return weapon;
-
-            weapon = generator.Generate(() => GenerateWeapon(PowerConstants.Mundane), w => WeaponIsValid(w, allowedWeapons, race));
-
-            if (weapon != null)
-                return weapon;
-
-            return BuildClub(race);
-        }
-
-        private Item BuildClub(Race race)
-        {
-            var club = new Item();
-            club.Attributes = new[] { AttributeConstants.Bludgeoning, AttributeConstants.Common, AttributeConstants.Melee, AttributeConstants.Wood };
-            club.ItemType = ItemTypeConstants.Weapon;
-            club.Name = WeaponConstants.Club;
-            club.Traits.Add(race.Size);
-
-            return club;
+            return weapon;
         }
 
         private Boolean WeaponIsValid(Item weapon, IEnumerable<String> allowedWeapons, Race race)
         {
-            if (weapon.ItemType != ItemTypeConstants.Weapon)
+            if (weapon.ItemType != ItemTypeConstants.Weapon || weapon.Attributes.Contains(AttributeConstants.Ammunition))
                 return false;
 
             if (weapon.IsMagical == false && weapon.Traits.Contains(race.Size) == false)
@@ -97,31 +77,138 @@ namespace CharacterGen.Generators.Domain.Items
 
         private IEnumerable<String> GetAllowedWeapons(IEnumerable<Feat> feats)
         {
-            var proficiencyFeatNames = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, ItemTypeConstants.Weapon + GroupConstants.Proficiency);
-            var proficiencyFeats = feats.Where(f => proficiencyFeatNames.Contains(f.Name));
-            var allWeapons = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, FeatConstants.Foci.Weapons);
+            var nonProficiencyFeatsWithWeaponFoci = GetNonProficiencyFeatsWithWeaponFoci(feats);
+            if (nonProficiencyFeatsWithWeaponFoci.Any())
+                return nonProficiencyFeatsWithWeaponFoci.Select(f => f.Focus);
 
-            var nonProficiencyFeats = feats.Except(proficiencyFeats).Where(f => f.Name != FeatConstants.WeaponFamiliarity);
-            var nonProficiencyFoci = nonProficiencyFeats.Select(f => f.Focus);
-            var specialWeaponFoci = nonProficiencyFoci.Intersect(allWeapons);
+            var proficiencyFeatsWithSpecificWeaponFoci = GetProficiencyFeatWithSpecificWeaponFocus(feats);
+            if (proficiencyFeatsWithSpecificWeaponFoci.Any())
+                return proficiencyFeatsWithSpecificWeaponFoci.Select(f => f.Focus);
 
-            if (specialWeaponFoci.Any())
-                return specialWeaponFoci;
-
-            var proficientWeapons = proficiencyFeats.Select(f => f.Focus).Intersect(allWeapons);
-
-            if (proficientWeapons.Any())
-                return proficientWeapons;
-
-            var proficientWithAllInFeat = proficiencyFeats.Where(f => f.Focus == FeatConstants.Foci.All);
+            var proficientWithAllInFeat = GetProficiencyFeatWithFocusOfAll(feats);
+            var proficientWeapons = new List<String>();
 
             foreach (var feat in proficientWithAllInFeat)
             {
                 var featWeapons = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, feat.Name);
-                proficientWeapons = proficientWeapons.Union(featWeapons);
+                proficientWeapons.AddRange(featWeapons);
             }
 
             return proficientWeapons;
+        }
+
+        private IEnumerable<Feat> GetNonProficiencyFeatsWithWeaponFoci(IEnumerable<Feat> feats)
+        {
+            var proficiencyFeats = GetProficiencyFeats(feats);
+            var allWeapons = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, FeatConstants.Foci.Weapons);
+
+            var nonProficiencyFeats = feats.Except(proficiencyFeats).Where(f => f.Name != FeatConstants.WeaponFamiliarity);
+            return nonProficiencyFeats.Where(f => allWeapons.Contains(f.Focus));
+        }
+
+        private IEnumerable<Feat> GetProficiencyFeatWithSpecificWeaponFocus(IEnumerable<Feat> feats)
+        {
+            var proficiencyFeats = GetProficiencyFeats(feats);
+            var allWeapons = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, FeatConstants.Foci.Weapons);
+
+            return proficiencyFeats.Where(f => allWeapons.Contains(f.Focus));
+        }
+
+        private IEnumerable<Feat> GetProficiencyFeatWithFocusOfAll(IEnumerable<Feat> feats)
+        {
+            var proficiencyFeats = GetProficiencyFeats(feats);
+            return proficiencyFeats.Where(f => f.Focus == FeatConstants.Foci.All);
+        }
+
+        private IEnumerable<Feat> GetProficiencyFeats(IEnumerable<Feat> feats)
+        {
+            var proficiencyFeatNames = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, ItemTypeConstants.Weapon + GroupConstants.Proficiency);
+            return feats.Where(f => proficiencyFeatNames.Contains(f.Name));
+        }
+
+        public Item GenerateAmmunition(IEnumerable<Feat> feats, CharacterClass characterClass, Race race, String ammunitionType)
+        {
+            var tableName = String.Format(TableNameConstants.Formattable.Percentile.LevelXPower, characterClass.Level);
+            var power = percentileSelector.SelectFrom(tableName);
+            var allowedWeapons = GetAllowedWeapons(feats);
+
+            var additionalWeapons = new List<String>();
+
+            foreach (var allowedWeapon in allowedWeapons)
+            {
+                var baseWeaponTypes = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, allowedWeapon);
+                additionalWeapons.AddRange(baseWeaponTypes);
+            }
+
+            allowedWeapons = allowedWeapons.Union(additionalWeapons);
+
+            if (allowedWeapons.Contains(ammunitionType) == false)
+                return null;
+
+            var ammunition = generator.Generate(() => GenerateWeapon(power), a => AmmunitionIsValid(a, ammunitionType, race));
+            return ammunition;
+        }
+
+        private Boolean AmmunitionIsValid(Item ammunition, String ammunitionType, Race race)
+        {
+            if (ammunition.ItemType != ItemTypeConstants.Weapon || ammunition.Attributes.Contains(AttributeConstants.Ammunition) == false)
+                return false;
+
+            if (ammunition.IsMagical == false && ammunition.Traits.Contains(race.Size) == false)
+                return false;
+
+            var baseAmmunitionType = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, ammunition.Name).First();
+            return ammunitionType == baseAmmunitionType;
+        }
+
+        public Item GenerateMeleeFrom(IEnumerable<Feat> feats, CharacterClass characterClass, Race race)
+        {
+            return GenerateFiltered(feats, characterClass, race, IsMelee);
+        }
+
+        private Boolean IsMelee(Item weapon)
+        {
+            return weapon.Attributes.Contains(AttributeConstants.Melee);
+        }
+
+        private Item GenerateFiltered(IEnumerable<Feat> feats, CharacterClass characterClass, Race race, Func<Item, Boolean> filter)
+        {
+            var weapon = generator.Generate(() => GenerateFrom(feats, characterClass, race), w => w != null && filter(w));
+
+            if (weapon != null)
+                return weapon;
+
+            var filteredFeats = GetProficiencyFeatWithSpecificWeaponFocus(feats);
+            if (filteredFeats.Any())
+                weapon = generator.Generate(() => GenerateFrom(filteredFeats, characterClass, race), w => w != null && filter(w));
+
+            if (weapon != null)
+                return weapon;
+
+            filteredFeats = GetProficiencyFeatWithFocusOfAll(feats);
+            weapon = generator.Generate(() => GenerateFrom(filteredFeats, characterClass, race), filter);
+
+            return weapon;
+        }
+
+        public Item GenerateOneHandedMeleeFrom(IEnumerable<Feat> feats, CharacterClass characterClass, Race race)
+        {
+            return GenerateFiltered(feats, characterClass, race, IsOneHandedMelee);
+        }
+
+        private Boolean IsOneHandedMelee(Item weapon)
+        {
+            return IsMelee(weapon) && weapon.Attributes.Contains(AttributeConstants.TwoHanded) == false;
+        }
+
+        public Item GenerateRangedFrom(IEnumerable<Feat> feats, CharacterClass characterClass, Race race)
+        {
+            return GenerateFiltered(feats, characterClass, race, IsRanged);
+        }
+
+        private Boolean IsRanged(Item weapon)
+        {
+            return IsMelee(weapon) == false;
         }
     }
 }

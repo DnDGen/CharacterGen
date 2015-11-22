@@ -13,7 +13,7 @@ using TreasureGen.Generators.Items.Mundane;
 
 namespace CharacterGen.Generators.Domain.Items
 {
-    public class ArmorGenerator : GearGenerator
+    public class ArmorGenerator : IArmorGenerator
     {
         private ICollectionsSelector collectionsSelector;
         private IPercentileSelector percentileSelector;
@@ -31,11 +31,11 @@ namespace CharacterGen.Generators.Domain.Items
             this.generator = generator;
         }
 
-        public Item GenerateFrom(IEnumerable<Feat> feats, CharacterClass characterClass, Race race)
+        public Item GenerateArmorFrom(IEnumerable<Feat> feats, CharacterClass characterClass, Race race)
         {
             var tableName = String.Format(TableNameConstants.Formattable.Percentile.LevelXPower, characterClass.Level);
             var power = percentileSelector.SelectFrom(tableName);
-            var proficientArmors = GetProficientArmors(feats);
+            var proficientArmors = GetProficientArmors(feats, ItemTypeConstants.Armor);
 
             if (proficientArmors.Any() == false)
                 return null;
@@ -44,7 +44,36 @@ namespace CharacterGen.Generators.Domain.Items
                 a => ArmorIsValid(a, proficientArmors, characterClass, race));
         }
 
+        public Item GenerateShieldFrom(IEnumerable<Feat> feats, CharacterClass characterClass, Race race)
+        {
+            var tableName = String.Format(TableNameConstants.Formattable.Percentile.LevelXPower, characterClass.Level);
+            var power = percentileSelector.SelectFrom(tableName);
+            var proficientShields = GetProficientArmors(feats, AttributeConstants.Shield);
+
+            if (proficientShields.Any() == false)
+                return null;
+
+            return generator.Generate(() => GenerateArmor(power),
+                s => ShieldIsValid(s, proficientShields, characterClass, race));
+        }
+
         private Boolean ArmorIsValid(Item armor, IEnumerable<String> proficientArmors, CharacterClass characterClass, Race race)
+        {
+            if (armor.Attributes.Contains(AttributeConstants.Shield))
+                return false;
+
+            return IsValid(armor, proficientArmors, characterClass, race);
+        }
+
+        private Boolean ShieldIsValid(Item shield, IEnumerable<String> proficientArmors, CharacterClass characterClass, Race race)
+        {
+            if (shield.Attributes.Contains(AttributeConstants.Shield) == false)
+                return false;
+
+            return IsValid(shield, proficientArmors, characterClass, race);
+        }
+
+        private Boolean IsValid(Item armor, IEnumerable<String> proficientArmors, CharacterClass characterClass, Race race)
         {
             if (armor.ItemType != ItemTypeConstants.Armor)
                 return false;
@@ -67,9 +96,9 @@ namespace CharacterGen.Generators.Domain.Items
             return magicalArmorGenerator.GenerateAtPower(power);
         }
 
-        private IEnumerable<String> GetProficientArmors(IEnumerable<Feat> feats)
+        private IEnumerable<String> GetProficientArmors(IEnumerable<Feat> feats, String armorType)
         {
-            var proficiencyFeatNames = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, ItemTypeConstants.Armor + GroupConstants.Proficiency);
+            var proficiencyFeatNames = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, armorType + GroupConstants.Proficiency);
             var proficiencyFeats = feats.Where(f => proficiencyFeatNames.Contains(f.Name));
             var proficientArmors = new List<String>();
 

@@ -7,6 +7,7 @@ using CharacterGen.Generators.Domain;
 using CharacterGen.Generators.Domain.Abilities;
 using CharacterGen.Generators.Domain.Abilities.Feats;
 using CharacterGen.Generators.Domain.Combats;
+using CharacterGen.Generators.Domain.Items;
 using CharacterGen.Generators.Domain.Magics;
 using CharacterGen.Generators.Domain.Randomizers.Alignments;
 using CharacterGen.Generators.Domain.Randomizers.CharacterClasses.ClassNames;
@@ -24,7 +25,6 @@ using CharacterGen.Generators.Randomizers.Stats;
 using CharacterGen.Generators.Verifiers;
 using Ninject;
 using Ninject.Modules;
-using TreasureGen.Common.Items;
 
 namespace CharacterGen.Bootstrap.Modules
 {
@@ -47,7 +47,7 @@ namespace CharacterGen.Bootstrap.Modules
             Bind<ICombatGenerator>().To<CharacterCombatGenerator>().Named(AbilitiesGeneratorTypeConstants.Character);
             Bind<ICombatGenerator>().To<AnimalCombatGenerator>().Named(AbilitiesGeneratorTypeConstants.Animal);
 
-            Bind<IEquipmentGenerator>().ToMethod(c => EquipmentGeneratorFactory.CreateWith(c.Kernel));
+            Bind<IEquipmentGenerator>().To<EquipmentGenerator>();
             Bind<ISkillsGenerator>().To<SkillsGenerator>();
             Bind<IFeatsGenerator>().To<FeatsGenerator>();
             Bind<IArmorClassGenerator>().To<ArmorClassGenerator>();
@@ -56,8 +56,8 @@ namespace CharacterGen.Bootstrap.Modules
             Bind<IClassFeatsGenerator>().To<ClassFeatsGenerator>();
             Bind<IRacialFeatsGenerator>().To<RacialFeatsGenerator>();
             Bind<IFeatFocusGenerator>().To<FeatFocusGenerator>();
-            Bind<GearGenerator>().ToMethod(c => ArmorGeneratorFactory.CreateWith(c.Kernel)).Named(ItemTypeConstants.Armor);
-            Bind<GearGenerator>().ToMethod(c => WeaponGeneratorFactory.CreateWith(c.Kernel)).Named(ItemTypeConstants.Weapon);
+            Bind<IArmorGenerator>().ToMethod(c => ArmorGeneratorFactory.CreateWith(c.Kernel));
+            Bind<IWeaponGenerator>().ToMethod(c => WeaponGeneratorFactory.CreateWith(c.Kernel));
             Bind<IMagicGenerator>().To<MagicGenerator>();
             Bind<ISpellsGenerator>().To<SpellsGenerator>();
             Bind<IAnimalGenerator>().ToMethod(c => AnimalGeneratorFactory.CreateWith(c.Kernel));
