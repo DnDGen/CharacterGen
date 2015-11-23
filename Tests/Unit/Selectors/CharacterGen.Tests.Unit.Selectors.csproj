@@ -77,7 +77,6 @@
     <Compile Include="LanguageCollectionsSelectorTests.cs" />
     <Compile Include="AdjustmentsSelectorTests.cs" />
     <Compile Include="Objects\CharacterClassFeatSelectionTests.cs" />
-    <Compile Include="Objects\FollowerQuantitesTests.cs" />
     <Compile Include="Objects\RacialFeatSelectionTests.cs" />
     <Compile Include="Objects\RequiredFeatTests.cs" />
     <Compile Include="Objects\SkillSelectionTests.cs" />

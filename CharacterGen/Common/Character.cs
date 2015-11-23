@@ -1,11 +1,13 @@
-﻿using System;
-using CharacterGen.Common.Abilities;
+﻿using CharacterGen.Common.Abilities;
+using CharacterGen.Common.Abilities.Feats;
 using CharacterGen.Common.Alignments;
 using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Common.Combats;
 using CharacterGen.Common.Items;
 using CharacterGen.Common.Magics;
 using CharacterGen.Common.Races;
+using System;
+using System.Linq;
 
 namespace CharacterGen.Common
 {
@@ -20,7 +22,14 @@ namespace CharacterGen.Common
         public Ability Ability { get; set; }
         public Equipment Equipment { get; set; }
         public Magic Magic { get; set; }
-        public Leadership Leadership { get; set; }
+
+        public Boolean IsLeader
+        {
+            get
+            {
+                return Ability.Feats.Any(f => f.Name == FeatConstants.Leadership);
+            }
+        }
 
         public Character()
         {
@@ -32,7 +41,6 @@ namespace CharacterGen.Common
             Ability = new Ability();
             Equipment = new Equipment();
             Magic = new Magic();
-            Leadership = new Leadership();
         }
     }
 }

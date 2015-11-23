@@ -17,10 +17,10 @@ namespace CharacterGen.Tests.Unit.Common
         [Test]
         public void LeadershipIsInitialized()
         {
-            Assert.That(leadership.Cohort, Is.Null);
-            Assert.That(leadership.Followers, Is.Empty);
             Assert.That(leadership.Score, Is.EqualTo(0));
             Assert.That(leadership.LeadershipModifiers, Is.Empty);
+            Assert.That(leadership.CohortScore, Is.EqualTo(0));
+            Assert.That(leadership.FollowerQuantities, Is.Not.Null);
         }
     }
 }

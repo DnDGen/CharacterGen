@@ -91,6 +91,7 @@
     <Compile Include="Items\ArmorGeneratorTests.cs" />
     <Compile Include="Items\EquipmentGeneratorTests.cs" />
     <Compile Include="Items\WeaponGeneratorTests.cs" />
+    <Compile Include="LeadershipGeneratorTests.cs" />
     <Compile Include="Magics\AnimalGeneratorTests.cs" />
     <Compile Include="Magics\MagicGeneratorTests.cs" />
     <Compile Include="Magics\SpellsGeneratorTests.cs" />

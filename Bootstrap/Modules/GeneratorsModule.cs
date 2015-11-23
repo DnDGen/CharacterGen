@@ -40,6 +40,7 @@ namespace CharacterGen.Bootstrap.Modules
             Bind<IRaceGenerator>().To<RaceGenerator>();
             Bind<IRandomizerVerifier>().To<RandomizerVerifier>();
             Bind<IStatsGenerator>().To<StatsGenerator>();
+            Bind<ILeadershipGenerator>().ToMethod(c => LeadershipGeneratorFactory.Create(c.Kernel));
 
             Bind<IAbilitiesGenerator>().To<CharacterAbilitiesGenerator>().Named(AbilitiesGeneratorTypeConstants.Character);
             Bind<IAbilitiesGenerator>().To<AnimalAbilitiesGenerator>().Named(AbilitiesGeneratorTypeConstants.Animal);

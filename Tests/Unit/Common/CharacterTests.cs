@@ -1,4 +1,5 @@
 ﻿using CharacterGen.Common;
+using CharacterGen.Common.Abilities.Feats;
 using NUnit.Framework;
 
 namespace CharacterGen.Tests.Unit.Common
@@ -25,7 +26,21 @@ namespace CharacterGen.Tests.Unit.Common
             Assert.That(character.Combat, Is.Not.Null);
             Assert.That(character.Equipment, Is.Not.Null);
             Assert.That(character.Magic, Is.Not.Null);
-            Assert.That(character.Leadership, Is.Not.Null);
+            Assert.That(character.IsLeader, Is.False);
+        }
+
+        [Test]
+        public void IsLeaderIfHasLeadershipFeat()
+        {
+            character.Ability.Feats = new[] { new Feat { Name = FeatConstants.Leadership } };
+            Assert.That(character.IsLeader, Is.True);
+        }
+
+        [Test]
+        public void IsNotLeaderIfDoesNotHaveLeadershipFeat()
+        {
+            character.Ability.Feats = new[] { new Feat { Name = "other feat" } };
+            Assert.That(character.IsLeader, Is.False);
         }
     }
 }

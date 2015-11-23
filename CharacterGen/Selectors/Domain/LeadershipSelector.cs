@@ -1,4 +1,4 @@
-﻿using CharacterGen.Selectors.Objects;
+﻿using CharacterGen.Common;
 using CharacterGen.Tables;
 using System;
 using System.Linq;

@@ -633,5 +633,11 @@ namespace CharacterGen.Tests.Integration.Bootstrap.Modules
         {
             AssertNotSingleton<Generator>();
         }
+
+        [Test]
+        public void LeadershipGeneratorIsNotASingleton()
+        {
+            AssertNotSingleton<ILeadershipGenerator>();
+        }
     }
 }

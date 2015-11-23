@@ -78,6 +78,7 @@
     <Compile Include="Classes\CharacterClassTests.cs" />
     <Compile Include="Combats\CombatTests.cs" />
     <Compile Include="Combats\SavingThrowConstantsTests.cs" />
+    <Compile Include="FollowerQuantitesTests.cs" />
     <Compile Include="Items\EquipmentTests.cs" />
     <Compile Include="Items\ProficiencyConstantsTests.cs" />
     <Compile Include="LeadershipTests.cs" />

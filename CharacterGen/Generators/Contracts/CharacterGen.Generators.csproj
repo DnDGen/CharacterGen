@@ -69,6 +69,7 @@
     <Compile Include="Combats\ISavingThrowsGenerator.cs" />
     <Compile Include="Generator.cs" />
     <Compile Include="IAlignmentGenerator.cs" />
+    <Compile Include="ILeadershipGenerator.cs" />
     <Compile Include="Items\IArmorGenerator.cs" />
     <Compile Include="Items\IWeaponGenerator.cs" />
     <Compile Include="ICharacterClassGenerator.cs" />

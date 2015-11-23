@@ -82,6 +82,7 @@
     <Compile Include="Items\ArmorGenerator.cs" />
     <Compile Include="Items\EquipmentGenerator.cs" />
     <Compile Include="Items\WeaponGenerator.cs" />
+    <Compile Include="LeadershipGenerator.cs" />
     <Compile Include="Magics\AnimalGenerator.cs" />
     <Compile Include="Magics\MagicGenerator.cs" />
     <Compile Include="Magics\SpellsGenerator.cs" />

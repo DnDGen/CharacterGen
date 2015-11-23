@@ -1,5 +1,5 @@
-﻿using System;
-using CharacterGen.Selectors.Objects;
+﻿using CharacterGen.Common;
+using System;
 
 namespace CharacterGen.Selectors
 {

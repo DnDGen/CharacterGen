@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CharacterGen.Selectors.Objects
+namespace CharacterGen.Common
 {
     public class FollowerQuantities
     {

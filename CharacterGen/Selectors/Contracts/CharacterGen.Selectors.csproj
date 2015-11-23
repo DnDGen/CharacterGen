@@ -69,7 +69,6 @@
     <Compile Include="IStatAdjustmentsSelector.cs" />
     <Compile Include="IStatPrioritySelector.cs" />
     <Compile Include="Objects\CharacterClassFeatSelection.cs" />
-    <Compile Include="Objects\FollowerQuantities.cs" />
     <Compile Include="Objects\RacialFeatSelection.cs" />
     <Compile Include="Objects\RequiredFeat.cs" />
     <Compile Include="Objects\StatPrioritySelection.cs" />

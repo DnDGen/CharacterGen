@@ -81,6 +81,7 @@
     <Compile Include="Combats\Combat.cs" />
     <Compile Include="Combats\SavingThrowConstants.cs" />
     <Compile Include="Combats\SavingThrows.cs" />
+    <Compile Include="FollowerQuantities.cs" />
     <Compile Include="Leadership.cs" />
     <Compile Include="Magics\Animal.cs" />
     <Compile Include="Items\Equipment.cs" />

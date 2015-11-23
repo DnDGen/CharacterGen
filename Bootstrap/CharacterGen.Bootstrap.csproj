@@ -69,6 +69,7 @@
     <Compile Include="Factories\ArmorGeneratorFactory.cs" />
     <Compile Include="Factories\CharacterGeneratorFactory.cs" />
     <Compile Include="Factories\CollectionsMapperFactory.cs" />
+    <Compile Include="Factories\LeadershipGeneratorFactory.cs" />
     <Compile Include="Factories\PercentileMapperFactory.cs" />
     <Compile Include="Factories\WeaponGeneratorFactory.cs" />
     <Compile Include="Modules\GeneratorsModule.cs" />

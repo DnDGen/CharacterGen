@@ -1,6 +1,4 @@
 ﻿using CharacterGen.Common;
-using CharacterGen.Common.Abilities.Feats;
-using CharacterGen.Common.Abilities.Stats;
 using CharacterGen.Common.Alignments;
 using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Common.Races;
@@ -18,7 +16,6 @@ using CharacterGen.Selectors;
 using CharacterGen.Tables;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace CharacterGen.Generators.Domain
 {
@@ -33,26 +30,13 @@ namespace CharacterGen.Generators.Domain
         private IAbilitiesGenerator abilitiesGenerator;
         private ICombatGenerator combatGenerator;
         private IEquipmentGenerator equipmentGenerator;
-        private ISetAlignmentRandomizer setAlignmentRandomizer;
-        private ISetLevelRandomizer setLevelRandomizer;
-        private IAlignmentRandomizer anyAlignmentRandomizer;
-        private IClassNameRandomizer anyClassNameRandomizer;
-        private RaceRandomizer anyBaseRaceRandomizer;
-        private RaceRandomizer anyMetaraceRandomizer;
-        private IStatsRandomizer rawStatsRandomizer;
-        private IBooleanPercentileSelector booleanPercentileSelector;
-        private ILeadershipSelector leadershipSelector;
-        private ICollectionsSelector collectionsSelector;
         private IMagicGenerator magicGenerator;
         private Generator generator;
 
         public CharacterGenerator(IAlignmentGenerator alignmentGenerator, ICharacterClassGenerator characterClassGenerator, IRaceGenerator raceGenerator,
             IAdjustmentsSelector adjustmentsSelector, IRandomizerVerifier randomizerVerifier, IPercentileSelector percentileSelector,
             IAbilitiesGenerator abilitiesGenerator, ICombatGenerator combatGenerator, IEquipmentGenerator equipmentGenerator,
-            ISetAlignmentRandomizer setAlignmentRandomizer, ISetLevelRandomizer setLevelRandomizer, IAlignmentRandomizer anyAlignmentRandomizer,
-            IClassNameRandomizer anyClassNameRandomizer, RaceRandomizer anyBaseRaceRandomizer, RaceRandomizer anyMetaraceRandomizer,
-            IStatsRandomizer rawStatsRandomizer, IBooleanPercentileSelector booleanPercentileSelector, ILeadershipSelector leadershipSelector,
-            ICollectionsSelector collectionsSelector, IMagicGenerator magicGenerator, Generator generator)
+            IMagicGenerator magicGenerator, Generator generator)
         {
             this.alignmentGenerator = alignmentGenerator;
             this.characterClassGenerator = characterClassGenerator;
@@ -65,16 +49,6 @@ namespace CharacterGen.Generators.Domain
             this.adjustmentsSelector = adjustmentsSelector;
             this.randomizerVerifier = randomizerVerifier;
             this.percentileSelector = percentileSelector;
-            this.setAlignmentRandomizer = setAlignmentRandomizer;
-            this.setLevelRandomizer = setLevelRandomizer;
-            this.anyAlignmentRandomizer = anyAlignmentRandomizer;
-            this.anyClassNameRandomizer = anyClassNameRandomizer;
-            this.anyBaseRaceRandomizer = anyBaseRaceRandomizer;
-            this.anyMetaraceRandomizer = anyMetaraceRandomizer;
-            this.rawStatsRandomizer = rawStatsRandomizer;
-            this.booleanPercentileSelector = booleanPercentileSelector;
-            this.leadershipSelector = leadershipSelector;
-            this.collectionsSelector = collectionsSelector;
             this.magicGenerator = magicGenerator;
         }
 
@@ -86,9 +60,6 @@ namespace CharacterGen.Generators.Domain
 
             var character = GenerateCharacter(alignmentRandomizer, classNameRandomizer, levelRandomizer, baseRaceRandomizer, metaraceRandomizer,
                 statsRandomizer);
-
-            if (character.Ability.Feats.Any(f => f.Name == FeatConstants.Leadership))
-                character.Leadership = GenerateLeadership(character);
 
             return character;
         }
@@ -157,127 +128,6 @@ namespace CharacterGen.Generators.Domain
                 throw new IncompatibleRandomizersException();
 
             return race;
-        }
-
-        private Leadership GenerateLeadership(Character character)
-        {
-            var leadership = new Leadership();
-
-            leadership.Score = character.Class.Level + character.Ability.Stats[StatConstants.Charisma].Bonus;
-
-            var leadershipModifiers = new List<String>();
-            var reputation = percentileSelector.SelectFrom(TableNameConstants.Set.Percentile.Reputation);
-            var leadershipAdjustments = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.LeadershipModifiers);
-
-            if (String.IsNullOrEmpty(reputation) == false)
-            {
-                leadershipModifiers.Add(reputation);
-                leadership.Score += leadershipAdjustments[reputation];
-            }
-
-            var cohortScore = leadership.Score;
-            var cohortDeaths = 0;
-
-            while (booleanPercentileSelector.SelectFrom(TableNameConstants.Set.TrueOrFalse.KilledCohort))
-                cohortDeaths++;
-
-            cohortScore -= cohortDeaths * 2;
-
-            if (cohortDeaths > 0)
-            {
-                var modifier = String.Format("Caused the death of {0} cohort(s)", cohortDeaths);
-                leadershipModifiers.Add(modifier);
-            }
-
-            if (String.IsNullOrEmpty(character.Magic.Animal) == false)
-                cohortScore -= 2;
-
-            var followerScore = leadership.Score;
-            var leaderMovement = percentileSelector.SelectFrom(TableNameConstants.Set.Percentile.LeadershipMovement);
-
-            if (String.IsNullOrEmpty(leaderMovement) == false)
-            {
-                leadershipModifiers.Add(leaderMovement);
-                followerScore += leadershipAdjustments[leaderMovement];
-            }
-
-            if (booleanPercentileSelector.SelectFrom(TableNameConstants.Set.TrueOrFalse.KilledFollowers))
-            {
-                leadershipModifiers.Add("Caused the death of followers");
-                followerScore--;
-            }
-
-            leadership.Cohort = GenerateCohort(character, cohortScore);
-            leadership.Followers = GenerateFollowers(character, followerScore);
-            leadership.LeadershipModifiers = leadershipModifiers;
-
-            return leadership;
-        }
-
-        private IEnumerable<Character> GenerateFollowers(Character leader, Int32 followerScore)
-        {
-            var followerQuantities = leadershipSelector.SelectFollowerQuantitiesFor(followerScore);
-
-            var followers = new List<Character>();
-            followers.AddRange(GenerateFollowers(1, followerQuantities.Level1, leader));
-            followers.AddRange(GenerateFollowers(2, followerQuantities.Level2, leader));
-            followers.AddRange(GenerateFollowers(3, followerQuantities.Level3, leader));
-            followers.AddRange(GenerateFollowers(4, followerQuantities.Level4, leader));
-            followers.AddRange(GenerateFollowers(5, followerQuantities.Level5, leader));
-            followers.AddRange(GenerateFollowers(6, followerQuantities.Level6, leader));
-
-            return followers;
-        }
-
-        private IEnumerable<Character> GenerateFollowers(Int32 level, Int32 quantity, Character leader)
-        {
-            var followers = new List<Character>();
-
-            while (quantity-- > 0)
-            {
-                var follower = GenerateFollower(level, leader);
-                followers.Add(follower);
-            }
-
-            return followers;
-        }
-
-        private Character GenerateCohort(Character leader, Int32 cohortScore)
-        {
-            var alignmentDiffers = booleanPercentileSelector.SelectFrom(TableNameConstants.Set.TrueOrFalse.AttractCohortOfDifferentAlignment);
-            if (alignmentDiffers)
-                cohortScore--;
-
-            var cohortLevel = leadershipSelector.SelectCohortLevelFor(cohortScore);
-            cohortLevel = Math.Min(leader.Class.Level - 2, cohortLevel);
-
-            if (cohortLevel <= 0)
-                return null;
-
-            if (alignmentDiffers == false)
-            {
-                setAlignmentRandomizer.SetAlignment = leader.Alignment;
-                return GenerateFollower(setAlignmentRandomizer, cohortLevel, leader);
-            }
-
-            return GenerateFollower(cohortLevel, leader);
-        }
-
-        private Character GenerateFollower(IAlignmentRandomizer alignmentRandomizer, Int32 level, Character leader)
-        {
-            setLevelRandomizer.SetLevel = level;
-            var allowedAlignments = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AlignmentGroups, leader.Alignment.ToString());
-
-            setAlignmentRandomizer.SetAlignment = generator.Generate(() => alignmentGenerator.GenerateWith(alignmentRandomizer),
-                a => allowedAlignments.Contains(a.ToString()));
-
-            return GenerateCharacter(setAlignmentRandomizer, anyClassNameRandomizer, setLevelRandomizer, anyBaseRaceRandomizer, anyMetaraceRandomizer,
-                rawStatsRandomizer);
-        }
-
-        private Character GenerateFollower(Int32 level, Character leader)
-        {
-            return GenerateFollower(anyAlignmentRandomizer, level, leader);
         }
     }
 }

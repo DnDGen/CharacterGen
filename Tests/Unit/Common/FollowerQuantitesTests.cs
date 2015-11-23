@@ -1,7 +1,7 @@
-﻿using CharacterGen.Selectors.Objects;
+﻿using CharacterGen.Common;
 using NUnit.Framework;
 
-namespace CharacterGen.Tests.Unit.Selectors.Objects
+namespace CharacterGen.Tests.Unit.Common
 {
     [TestFixture]
     public class FollowerQuantitesTests

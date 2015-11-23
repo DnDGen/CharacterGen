@@ -95,8 +95,6 @@ namespace CharacterGen.Tests.Integration.Stress
             Assert.That(character.Combat.ArmorClass.Full, Is.Positive);
             Assert.That(character.Combat.ArmorClass.FlatFooted, Is.Positive);
             Assert.That(character.Combat.ArmorClass.Touch, Is.Positive);
-
-            Assert.That(character.Leadership, Is.Not.Null);
         }
     }
 }
