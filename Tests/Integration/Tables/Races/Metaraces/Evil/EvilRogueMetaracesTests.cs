@@ -1,9 +1,9 @@
-﻿using System;
-using CharacterGen.Common.Alignments;
+﻿using CharacterGen.Common.Alignments;
 using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Common.Races;
 using CharacterGen.Tables;
 using NUnit.Framework;
+using System;
 
 namespace CharacterGen.Tests.Integration.Tables.Races.Metaraces.Evil
 {
@@ -21,7 +21,7 @@ namespace CharacterGen.Tests.Integration.Tables.Races.Metaraces.Evil
             AssertTableIsComplete();
         }
 
-        [TestCase(RaceConstants.Metaraces.None, 1, 94)]
+        [TestCase(RaceConstants.Metaraces.None, 1, 92)]
         [TestCase(RaceConstants.Metaraces.Wererat, 95, 96)]
         [TestCase(RaceConstants.Metaraces.HalfFiend, 98, 99)]
         public override void Percentile(String content, Int32 lower, Int32 upper)
@@ -29,6 +29,8 @@ namespace CharacterGen.Tests.Integration.Tables.Races.Metaraces.Evil
             base.Percentile(content, lower, upper);
         }
 
+        [TestCase(RaceConstants.Metaraces.Ghost, 93)]
+        [TestCase(RaceConstants.Metaraces.Vampire, 94)]
         [TestCase(RaceConstants.Metaraces.Werewolf, 97)]
         [TestCase(RaceConstants.Metaraces.HalfDragon, 100)]
         public override void Percentile(String content, Int32 roll)

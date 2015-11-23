@@ -233,6 +233,26 @@ namespace CharacterGen.Common.Abilities.Feats
         public const String WildEmpathy = "Wild Empathy";
         public const String WildShape = "Wild Shape";
         public const String WoodlandStride = "Woodland Stride";
+        public const String CorruptingGaze = "Corrupting Gaze";
+        public const String CorruptingTouch = "Corrupting Touch";
+        public const String DrainingTouch = "Draining Touch";
+        public const String FrightfulMoan = "Frightful Moan";
+        public const String HorrificAppearance = "Horrific Appearance";
+        public const String Malevolence = "Malevolence";
+        public const String Manifestation = "Manifestation";
+        public const String Telekinesis = "Telekinesis";
+        public const String Rejuvenation = "Rejuvenation";
+        public const String TurnResistance = "Turn Resistance";
+        public const String FearAura = "Fear Aura";
+        public const String ParalyzingTouch = "Paralyzing Touch";
+        public const String Slam = "Slam";
+        public const String BloodDrain = "Blood Drain";
+        public const String ChildrenOfTheNight = "Children of the Night";
+        public const String Dominate = "Dominate";
+        public const String CreateSpawn = "Create Spawn";
+        public const String EnergyDrain = "Energy Drain";
+        public const String FastHealing = "Fast Healing";
+        public const String GaseousForm = "Gaseous Form";
 
         public static class Frequencies
         {

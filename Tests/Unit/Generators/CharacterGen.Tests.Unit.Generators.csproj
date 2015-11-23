@@ -103,6 +103,7 @@
     <Compile Include="Randomizers\CharacterClasses\Levels\LevelRandomizerTypeConstantsTests.cs" />
     <Compile Include="Randomizers\CharacterClasses\Levels\SetLevelRandomizerTests.cs" />
     <Compile Include="Randomizers\Races\BaseRaces\AnimalBaseRaceRandomizerTests.cs" />
+    <Compile Include="Randomizers\Races\Metaraces\UndeadMetaraceRandomizerTests.cs" />
     <Compile Include="Randomizers\Races\RaceRandomizerTypeConstantsTests.cs" />
     <Compile Include="Randomizers\Races\BaseRaces\SetBaseRaceRandomizerTests.cs" />
     <Compile Include="Abilities\StatsGeneratorTests.cs" />
@@ -152,7 +153,6 @@
     <Compile Include="Randomizers\Races\Metaraces\GoodMetaraceRandomizerTests.cs" />
     <Compile Include="Randomizers\Races\Metaraces\LycanthropeMetaraceRandomizerTests.cs" />
     <Compile Include="Randomizers\Races\Metaraces\MetaraceRandomizerTests.cs" />
-    <Compile Include="Randomizers\Races\Metaraces\MetaraceRandomizerTypeConstantsTests.cs" />
     <Compile Include="Randomizers\Races\Metaraces\NeutralMetaraceRandomizerTests.cs" />
     <Compile Include="Randomizers\Races\Metaraces\NoMetaraceRandomizerTests.cs" />
     <Compile Include="Randomizers\Races\Metaraces\NonEvilMetaraceRandomizerTests.cs" />

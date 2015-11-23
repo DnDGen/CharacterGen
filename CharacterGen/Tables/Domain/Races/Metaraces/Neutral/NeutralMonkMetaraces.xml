@@ -4,6 +4,11 @@
     <object>
         <lower>1</lower>
         <content></content>
-        <upper>100</upper>
+        <upper>99</upper>
     </object>
+  <object>
+    <lower>100</lower>
+    <content>Ghost</content>
+    <upper>100</upper>
+  </object>
 </percentile>

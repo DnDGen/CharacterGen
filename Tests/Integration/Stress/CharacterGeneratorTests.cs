@@ -46,12 +46,10 @@ namespace CharacterGen.Tests.Integration.Stress
             Assert.That(character.Race.BaseRace, Is.Not.Empty);
             Assert.That(character.Race.Metarace, Is.Not.Null);
             Assert.That(character.Race.AerialSpeed, Is.Not.Negative);
+            Assert.That(character.Race.AerialSpeed % 10, Is.EqualTo(0));
 
             if (character.Race.HasWings)
-            {
                 Assert.That(character.Race.AerialSpeed, Is.Positive);
-                Assert.That(character.Race.AerialSpeed % 10, Is.EqualTo(0));
-            }
 
             Assert.That(character.Race.LandSpeed, Is.Positive);
             Assert.That(character.Race.LandSpeed % 10, Is.EqualTo(0));
@@ -68,7 +66,7 @@ namespace CharacterGen.Tests.Integration.Stress
             Assert.That(character.Ability.Stats.Keys, Contains.Item(StatConstants.Strength));
             Assert.That(character.Ability.Stats.Keys, Contains.Item(StatConstants.Wisdom));
             Assert.That(character.Ability.Stats[StatConstants.Charisma].Value, Is.Positive);
-            Assert.That(character.Ability.Stats[StatConstants.Constitution].Value, Is.Positive);
+            Assert.That(character.Ability.Stats[StatConstants.Constitution].Value, Is.Not.Negative);
             Assert.That(character.Ability.Stats[StatConstants.Dexterity].Value, Is.Positive);
             Assert.That(character.Ability.Stats[StatConstants.Intelligence].Value, Is.Positive);
             Assert.That(character.Ability.Stats[StatConstants.Strength].Value, Is.Positive);
@@ -80,6 +78,7 @@ namespace CharacterGen.Tests.Integration.Stress
             Assert.That(character.Equipment.PrimaryHand.ItemType, Is.EqualTo(ItemTypeConstants.Weapon));
             Assert.That(character.Equipment.PrimaryHand.Name, Is.Not.Empty);
             Assert.That(character.Equipment.Treasure, Is.Not.Null);
+            Assert.That(character.Equipment.Treasure.Items, Is.Not.Empty);
 
             foreach (var item in character.Equipment.Treasure.Items)
                 Assert.That(item, Is.Not.Null);

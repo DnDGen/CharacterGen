@@ -1,7 +1,7 @@
-﻿using CharacterGen.Common.Abilities.Stats;
-using CharacterGen.Common.Races;
+﻿using CharacterGen.Common.Races;
 using CharacterGen.Selectors;
 using CharacterGen.Selectors.Domain;
+using CharacterGen.Tables;
 using Moq;
 using NUnit.Framework;
 using System;
@@ -16,20 +16,28 @@ namespace CharacterGen.Tests.Unit.Selectors
         private Race race;
         private Mock<IAdjustmentsSelector> mockInnerSelector;
         private Dictionary<String, Int32> defaultAdjustments;
+        private Mock<ICollectionsSelector> mockCollectionsSelector;
+        private List<String> statNames;
 
         [SetUp]
         public void Setup()
         {
             mockInnerSelector = new Mock<IAdjustmentsSelector>();
-            selector = new StatAdjustmentsSelector(mockInnerSelector.Object);
+            mockCollectionsSelector = new Mock<ICollectionsSelector>();
+            selector = new StatAdjustmentsSelector(mockInnerSelector.Object, mockCollectionsSelector.Object);
             race = new Race();
             defaultAdjustments = new Dictionary<String, Int32>();
+            statNames = new List<String>();
 
             race.BaseRace = "base race";
             race.Metarace = "metarace";
             defaultAdjustments[race.BaseRace] = 0;
             defaultAdjustments[race.Metarace] = 0;
             mockInnerSelector.Setup(s => s.SelectFrom(It.IsAny<String>())).Returns(defaultAdjustments);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.StatGroups, GroupConstants.All)).Returns(statNames);
+
+            statNames.Add("first stat");
+            statNames.Add("second stat");
         }
 
         [Test]
@@ -37,7 +45,7 @@ namespace CharacterGen.Tests.Unit.Selectors
         {
             var adjustments = selector.SelectFor(race);
 
-            foreach (var stat in StatConstants.GetStats())
+            foreach (var stat in statNames)
                 Assert.That(adjustments.Keys, Contains.Item(stat));
         }
 
@@ -45,35 +53,23 @@ namespace CharacterGen.Tests.Unit.Selectors
         public void EachStatAdjustmentIsIndividual()
         {
             var allAdjustments = new Dictionary<String, Dictionary<String, Int32>>();
-            foreach (var stat in StatConstants.GetStats())
+            foreach (var stat in statNames)
                 allAdjustments[stat] = new Dictionary<String, Int32>();
 
-            allAdjustments[StatConstants.Charisma][race.BaseRace] = 9266;
-            allAdjustments[StatConstants.Charisma][race.Metarace] = 42;
-            allAdjustments[StatConstants.Constitution][race.BaseRace] = 90210;
-            allAdjustments[StatConstants.Constitution][race.Metarace] = -9266;
-            allAdjustments[StatConstants.Dexterity][race.BaseRace] = -42;
-            allAdjustments[StatConstants.Dexterity][race.Metarace] = -90210;
-            allAdjustments[StatConstants.Intelligence][race.BaseRace] = 92;
-            allAdjustments[StatConstants.Intelligence][race.Metarace] = 66;
-            allAdjustments[StatConstants.Strength][race.BaseRace] = 600;
-            allAdjustments[StatConstants.Strength][race.Metarace] = -92;
-            allAdjustments[StatConstants.Wisdom][race.BaseRace] = -66;
-            allAdjustments[StatConstants.Wisdom][race.Metarace] = -400;
+            allAdjustments[statNames[0]][race.BaseRace] = 9266;
+            allAdjustments[statNames[0]][race.Metarace] = 42;
+            allAdjustments[statNames[1]][race.BaseRace] = 90210;
+            allAdjustments[statNames[1]][race.Metarace] = -9266;
 
-            foreach (var stat in StatConstants.GetStats())
+            foreach (var stat in statNames)
             {
                 var tableName = String.Format("{0}StatAdjustments", stat);
                 mockInnerSelector.Setup(s => s.SelectFrom(tableName)).Returns(allAdjustments[stat]);
             }
 
             var adjustments = selector.SelectFor(race);
-            Assert.That(adjustments[StatConstants.Charisma], Is.EqualTo(9308));
-            Assert.That(adjustments[StatConstants.Constitution], Is.EqualTo(80944));
-            Assert.That(adjustments[StatConstants.Dexterity], Is.EqualTo(-90252));
-            Assert.That(adjustments[StatConstants.Intelligence], Is.EqualTo(158));
-            Assert.That(adjustments[StatConstants.Strength], Is.EqualTo(508));
-            Assert.That(adjustments[StatConstants.Wisdom], Is.EqualTo(-466));
+            Assert.That(adjustments[statNames[0]], Is.EqualTo(9308));
+            Assert.That(adjustments[statNames[1]], Is.EqualTo(80944));
         }
     }
 }

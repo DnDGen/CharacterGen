@@ -417,6 +417,12 @@ namespace CharacterGen.Tests.Integration.Bootstrap.Modules
             AssertNamedIsInstanceOf<RaceRandomizer, NoMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.NoMeta);
         }
 
+        [Test]
+        public void MetaraceRandomizerNamedUndeadIsUndeadMetaraceRandomizer()
+        {
+            AssertNamedIsInstanceOf<IForcableMetaraceRandomizer, UndeadMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.UndeadMeta);
+            AssertNamedIsInstanceOf<RaceRandomizer, UndeadMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.UndeadMeta);
+        }
 
         [TestCase(RaceRandomizerTypeConstants.Metarace.AnyMeta)]
         [TestCase(RaceRandomizerTypeConstants.Metarace.EvilMeta)]
@@ -427,6 +433,7 @@ namespace CharacterGen.Tests.Integration.Bootstrap.Modules
         [TestCase(RaceRandomizerTypeConstants.Metarace.NonEvilMeta)]
         [TestCase(RaceRandomizerTypeConstants.Metarace.NonGoodMeta)]
         [TestCase(RaceRandomizerTypeConstants.Metarace.NonNeutralMeta)]
+        [TestCase(RaceRandomizerTypeConstants.Metarace.UndeadMeta)]
         public void MetaraceRandomizerIsNotBuiltAsSingleton(String name)
         {
             AssertNotSingleton<IForcableMetaraceRandomizer>(name);

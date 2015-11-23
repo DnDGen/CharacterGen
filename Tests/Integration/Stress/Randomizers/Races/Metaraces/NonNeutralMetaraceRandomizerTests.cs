@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using Ninject;
-using CharacterGen.Common.Races;
+﻿using CharacterGen.Common.Races;
 using CharacterGen.Generators.Randomizers.Races;
+using Ninject;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
 
 namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
 {
@@ -25,6 +25,9 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
                     RaceConstants.Metaraces.Werebear,
                     RaceConstants.Metaraces.Wererat,
                     RaceConstants.Metaraces.Werewolf,
+                    RaceConstants.Metaraces.Ghost,
+                    RaceConstants.Metaraces.Lich,
+                    RaceConstants.Metaraces.Vampire,
                     RaceConstants.Metaraces.None
                 };
             }

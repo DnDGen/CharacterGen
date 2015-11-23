@@ -30,6 +30,7 @@ namespace CharacterGen.Generators.Randomizers.Races
             public const String NonEvilMeta = "Non-Evil Meta";
             public const String NonGoodMeta = "Non-Good Meta";
             public const String NonNeutralMeta = "Non-Neutral Meta";
+            public const String UndeadMeta = "Undead Meta";
         }
     }
 }

@@ -21,6 +21,7 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
                 {
                     RaceConstants.Metaraces.Wereboar,
                     RaceConstants.Metaraces.Weretiger,
+                    RaceConstants.Metaraces.Ghost,
                     RaceConstants.Metaraces.None
                 };
             }

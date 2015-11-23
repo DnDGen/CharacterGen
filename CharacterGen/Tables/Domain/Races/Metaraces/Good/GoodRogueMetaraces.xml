@@ -4,8 +4,13 @@
     <object>
         <lower>1</lower>
         <content></content>
-        <upper>97</upper>
+        <upper>96</upper>
     </object>
+  <object>
+    <lower>97</lower>
+    <content>Ghost</content>
+    <upper>97</upper>
+  </object>
     <object>
         <lower>98</lower>
         <content>Half-Celestial</content>

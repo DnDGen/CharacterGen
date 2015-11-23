@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace CharacterGen.Common.Abilities.Stats
 {
@@ -11,18 +10,5 @@ namespace CharacterGen.Common.Abilities.Stats
         public const String Intelligence = "Intelligence";
         public const String Wisdom = "Wisdom";
         public const String Charisma = "Charisma";
-
-        public static IEnumerable<String> GetStats()
-        {
-            return new[]
-            {
-                Strength,
-                Dexterity,
-                Constitution,
-                Intelligence,
-                Wisdom,
-                Charisma
-            };
-        }
     }
 }

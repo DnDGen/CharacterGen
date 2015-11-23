@@ -61,6 +61,9 @@ namespace CharacterGen.Tests.Integration.Tables.Races
                 RaceConstants.Metaraces.Wererat,
                 RaceConstants.Metaraces.Weretiger,
                 RaceConstants.Metaraces.Werewolf,
+                RaceConstants.Metaraces.Ghost,
+                RaceConstants.Metaraces.Lich,
+                RaceConstants.Metaraces.Vampire,
                 RaceConstants.BaseRaces.Animals.Ape,
                 RaceConstants.BaseRaces.Animals.Badger,
                 RaceConstants.BaseRaces.Animals.Bat,
@@ -206,6 +209,9 @@ namespace CharacterGen.Tests.Integration.Tables.Races
         [TestCase(RaceConstants.Metaraces.Weretiger, -1)]
         [TestCase(RaceConstants.Metaraces.Werewolf, -1)]
         [TestCase(RaceConstants.Metaraces.None, 0)]
+        [TestCase(RaceConstants.Metaraces.Ghost, -5)]
+        [TestCase(RaceConstants.Metaraces.Lich, -4)]
+        [TestCase(RaceConstants.Metaraces.Vampire, -8)]
         [TestCase(RaceConstants.BaseRaces.Animals.Badger, 0)]
         [TestCase(RaceConstants.BaseRaces.Animals.Camel, 0)]
         [TestCase(RaceConstants.BaseRaces.Animals.DireRat, 0)]

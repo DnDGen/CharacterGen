@@ -34,37 +34,16 @@ namespace CharacterGen.Generators.Domain.Items
 
         public Item GenerateFrom(IEnumerable<Feat> feats, CharacterClass characterClass, Race race)
         {
-            var tableName = String.Format(TableNameConstants.Formattable.Percentile.LevelXPower, characterClass.Level);
-            var power = percentileSelector.SelectFrom(tableName);
-            var allowedWeapons = GetAllowedWeapons(feats);
+            var weapons = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, FeatConstants.Foci.Weapons);
+            var ammunition = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, AttributeConstants.Ammunition);
+            var nonAmmunitionWeapons = weapons.Except(ammunition);
 
-            if (allowedWeapons.Any() == false)
+            var weapon = GenerateFiltered(feats, characterClass, race, nonAmmunitionWeapons);
+
+            if (weapon == null)
                 throw new NoWeaponProficienciesException();
 
-            var additionalWeapons = new List<String>();
-
-            foreach (var allowedWeapon in allowedWeapons)
-            {
-                var baseWeaponTypes = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, allowedWeapon);
-                additionalWeapons.AddRange(baseWeaponTypes);
-            }
-
-            allowedWeapons = allowedWeapons.Union(additionalWeapons);
-
-            var weapon = generator.Generate(() => GenerateWeapon(power), w => WeaponIsValid(w, allowedWeapons, race));
             return weapon;
-        }
-
-        private Boolean WeaponIsValid(Item weapon, IEnumerable<String> allowedWeapons, Race race)
-        {
-            if (weapon.ItemType != ItemTypeConstants.Weapon || weapon.Attributes.Contains(AttributeConstants.Ammunition))
-                return false;
-
-            if (weapon.IsMagical == false && weapon.Traits.Contains(race.Size) == false)
-                return false;
-
-            var baseWeaponType = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, weapon.Name).First();
-            return allowedWeapons.Contains(baseWeaponType);
         }
 
         private Item GenerateWeapon(String power)
@@ -75,26 +54,17 @@ namespace CharacterGen.Generators.Domain.Items
             return magicalWeaponGenerator.GenerateAtPower(power);
         }
 
-        private IEnumerable<String> GetAllowedWeapons(IEnumerable<Feat> feats)
+        private IEnumerable<String> GetAmmunitionBaseTypes(IEnumerable<String> allowedWeapons)
         {
-            var nonProficiencyFeatsWithWeaponFoci = GetNonProficiencyFeatsWithWeaponFoci(feats);
-            if (nonProficiencyFeatsWithWeaponFoci.Any())
-                return nonProficiencyFeatsWithWeaponFoci.Select(f => f.Focus);
+            var baseTypesWithAmmunition = new List<String>();
 
-            var proficiencyFeatsWithSpecificWeaponFoci = GetProficiencyFeatWithSpecificWeaponFocus(feats);
-            if (proficiencyFeatsWithSpecificWeaponFoci.Any())
-                return proficiencyFeatsWithSpecificWeaponFoci.Select(f => f.Focus);
-
-            var proficientWithAllInFeat = GetProficiencyFeatWithFocusOfAll(feats);
-            var proficientWeapons = new List<String>();
-
-            foreach (var feat in proficientWithAllInFeat)
+            foreach (var allowedWeapon in allowedWeapons)
             {
-                var featWeapons = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, feat.Name);
-                proficientWeapons.AddRange(featWeapons);
+                var baseWeaponTypes = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, allowedWeapon);
+                baseTypesWithAmmunition.AddRange(baseWeaponTypes);
             }
 
-            return proficientWeapons;
+            return baseTypesWithAmmunition;
         }
 
         private IEnumerable<Feat> GetNonProficiencyFeatsWithWeaponFoci(IEnumerable<Feat> feats)
@@ -128,87 +98,111 @@ namespace CharacterGen.Generators.Domain.Items
 
         public Item GenerateAmmunition(IEnumerable<Feat> feats, CharacterClass characterClass, Race race, String ammunitionType)
         {
-            var tableName = String.Format(TableNameConstants.Formattable.Percentile.LevelXPower, characterClass.Level);
-            var power = percentileSelector.SelectFrom(tableName);
-            var allowedWeapons = GetAllowedWeapons(feats);
-
-            var additionalWeapons = new List<String>();
-
-            foreach (var allowedWeapon in allowedWeapons)
-            {
-                var baseWeaponTypes = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, allowedWeapon);
-                additionalWeapons.AddRange(baseWeaponTypes);
-            }
-
-            allowedWeapons = allowedWeapons.Union(additionalWeapons);
-
-            if (allowedWeapons.Contains(ammunitionType) == false)
-                return null;
-
-            var ammunition = generator.Generate(() => GenerateWeapon(power), a => AmmunitionIsValid(a, ammunitionType, race));
-            return ammunition;
-        }
-
-        private Boolean AmmunitionIsValid(Item ammunition, String ammunitionType, Race race)
-        {
-            if (ammunition.ItemType != ItemTypeConstants.Weapon || ammunition.Attributes.Contains(AttributeConstants.Ammunition) == false)
-                return false;
-
-            if (ammunition.IsMagical == false && ammunition.Traits.Contains(race.Size) == false)
-                return false;
-
-            var baseAmmunitionType = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, ammunition.Name).First();
-            return ammunitionType == baseAmmunitionType;
+            var ammunitions = new[] { ammunitionType };
+            return GenerateFiltered(feats, characterClass, race, ammunitions);
         }
 
         public Item GenerateMeleeFrom(IEnumerable<Feat> feats, CharacterClass characterClass, Race race)
         {
-            return GenerateFiltered(feats, characterClass, race, IsMelee);
-        }
+            var meleeWeapons = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, AttributeConstants.Melee);
+            var weapon = GenerateFiltered(feats, characterClass, race, meleeWeapons);
 
-        private Boolean IsMelee(Item weapon)
-        {
-            return weapon.Attributes.Contains(AttributeConstants.Melee);
-        }
-
-        private Item GenerateFiltered(IEnumerable<Feat> feats, CharacterClass characterClass, Race race, Func<Item, Boolean> filter)
-        {
-            var weapon = generator.Generate(() => GenerateFrom(feats, characterClass, race), w => w != null && filter(w));
-
-            if (weapon != null)
-                return weapon;
-
-            var filteredFeats = GetProficiencyFeatWithSpecificWeaponFocus(feats);
-            if (filteredFeats.Any())
-                weapon = generator.Generate(() => GenerateFrom(filteredFeats, characterClass, race), w => w != null && filter(w));
-
-            if (weapon != null)
-                return weapon;
-
-            filteredFeats = GetProficiencyFeatWithFocusOfAll(feats);
-            weapon = generator.Generate(() => GenerateFrom(filteredFeats, characterClass, race), filter);
+            if (weapon == null)
+                throw new NoWeaponProficienciesException();
 
             return weapon;
         }
 
-        public Item GenerateOneHandedMeleeFrom(IEnumerable<Feat> feats, CharacterClass characterClass, Race race)
+        private Item GenerateFiltered(IEnumerable<Feat> feats, CharacterClass characterClass, Race race, IEnumerable<String> filteredWeapons)
         {
-            return GenerateFiltered(feats, characterClass, race, IsOneHandedMelee);
+            var allowedWeapons = GetAllowedWeapons(feats, filteredWeapons);
+
+            if (allowedWeapons.Any() == false)
+                return null;
+
+            return GenerateFrom(allowedWeapons, characterClass, race);
         }
 
-        private Boolean IsOneHandedMelee(Item weapon)
+        private IEnumerable<String> GetAllowedWeapons(IEnumerable<Feat> feats, IEnumerable<String> filteredWeapons)
         {
-            return IsMelee(weapon) && weapon.Attributes.Contains(AttributeConstants.TwoHanded) == false;
+            var nonProficiencyFeatsWithWeaponFoci = GetNonProficiencyFeatsWithWeaponFoci(feats);
+            var allowedWeapons = nonProficiencyFeatsWithWeaponFoci.Select(f => f.Focus);
+            allowedWeapons = GetAmmunitionBaseTypes(allowedWeapons);
+            allowedWeapons = allowedWeapons.Intersect(filteredWeapons);
+
+            if (allowedWeapons.Any())
+                return allowedWeapons;
+
+            var proficiencyFeatsWithSpecificWeaponFoci = GetProficiencyFeatWithSpecificWeaponFocus(feats);
+            allowedWeapons = proficiencyFeatsWithSpecificWeaponFoci.Select(f => f.Focus);
+            allowedWeapons = GetAmmunitionBaseTypes(allowedWeapons);
+            allowedWeapons = allowedWeapons.Intersect(filteredWeapons);
+
+            if (allowedWeapons.Any())
+                return allowedWeapons;
+
+            var proficientWithAllInFeat = GetProficiencyFeatWithFocusOfAll(feats);
+
+            foreach (var feat in proficientWithAllInFeat)
+            {
+                var featWeapons = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, feat.Name);
+                allowedWeapons = allowedWeapons.Union(featWeapons);
+            }
+
+            allowedWeapons = GetAmmunitionBaseTypes(allowedWeapons);
+            allowedWeapons = allowedWeapons.Intersect(filteredWeapons);
+
+            return allowedWeapons;
+        }
+
+        private Item GenerateFrom(IEnumerable<String> allowedWeapons, CharacterClass characterClass, Race race)
+        {
+            var tableName = String.Format(TableNameConstants.Formattable.Percentile.LevelXPower, characterClass.Level);
+            var power = percentileSelector.SelectFrom(tableName);
+            var weapon = generator.Generate(() => GenerateWeapon(power), w => WeaponIsValid(w, allowedWeapons, race));
+
+            return weapon;
+        }
+
+        private Boolean WeaponIsValid(Item weapon, IEnumerable<String> allowedWeapons, Race race)
+        {
+            if (weapon.ItemType != ItemTypeConstants.Weapon)
+                return false;
+
+            if (weapon.IsMagical == false && weapon.Traits.Contains(race.Size) == false)
+                return false;
+
+            var baseWeaponType = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, weapon.Name).First();
+            return allowedWeapons.Contains(baseWeaponType);
+        }
+
+        public Item GenerateOneHandedMeleeFrom(IEnumerable<Feat> feats, CharacterClass characterClass, Race race)
+        {
+            var meleeWeapons = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, AttributeConstants.Melee);
+            var twoHandedWeapons = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, AttributeConstants.TwoHanded);
+            var oneHandedWeapons = meleeWeapons.Except(twoHandedWeapons);
+
+            var weapon = GenerateFiltered(feats, characterClass, race, oneHandedWeapons);
+
+            if (weapon == null)
+                throw new NoWeaponProficienciesException();
+
+            return weapon;
         }
 
         public Item GenerateRangedFrom(IEnumerable<Feat> feats, CharacterClass characterClass, Race race)
         {
-            return GenerateFiltered(feats, characterClass, race, IsRanged);
-        }
+            var weapons = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, FeatConstants.Foci.Weapons);
+            var meleeWeapons = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, AttributeConstants.Melee);
+            var ammunitions = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, AttributeConstants.Ammunition);
+            var rangedWeapons = weapons.Except(meleeWeapons).Except(ammunitions);
 
-        private Boolean IsRanged(Item weapon)
-        {
-            return IsMelee(weapon) == false;
+            var weapon = GenerateFiltered(feats, characterClass, race, rangedWeapons);
+
+            if (weapon == null)
+                throw new NoWeaponProficienciesException();
+
+            return weapon;
         }
     }
 }

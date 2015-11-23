@@ -1,7 +1,6 @@
-﻿using System;
-using System.Linq;
-using CharacterGen.Common.Abilities.Stats;
+﻿using CharacterGen.Common.Abilities.Stats;
 using NUnit.Framework;
+using System;
 
 namespace CharacterGen.Tests.Unit.Common.Abilities.Stats
 {
@@ -17,20 +16,6 @@ namespace CharacterGen.Tests.Unit.Common.Abilities.Stats
         public void Constant(String constant, String value)
         {
             Assert.That(constant, Is.EqualTo(value));
-        }
-
-        [Test]
-        public void AllStatConstants()
-        {
-            var stats = StatConstants.GetStats();
-
-            Assert.That(stats, Contains.Item(StatConstants.Charisma));
-            Assert.That(stats, Contains.Item(StatConstants.Constitution));
-            Assert.That(stats, Contains.Item(StatConstants.Dexterity));
-            Assert.That(stats, Contains.Item(StatConstants.Intelligence));
-            Assert.That(stats, Contains.Item(StatConstants.Strength));
-            Assert.That(stats, Contains.Item(StatConstants.Wisdom));
-            Assert.That(stats.Count(), Is.EqualTo(6));
         }
     }
 }

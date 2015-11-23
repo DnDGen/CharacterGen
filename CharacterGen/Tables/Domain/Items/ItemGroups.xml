@@ -6,6 +6,12 @@
     <item>Heavy steel shield</item>
   </object>
   <object>
+    <name>Ammunition</name>
+    <item>Arrow</item>
+    <item>Crossbow bolt</item>
+    <item>Sling bullet</item>
+  </object>
+  <object>
     <name>Armor of arrow attraction</name>
     <item>Full plate</item>
   </object>
@@ -385,6 +391,59 @@
     <item>Breastplate</item>
     <item>Full plate of speed</item>
   </object>
+  <object>
+    <name>Melee</name>
+    <item>Bastard sword</item>
+    <item>Battleaxe</item>
+    <item>Club</item>
+    <item>Dagger</item>
+    <item>Dire flail</item>
+    <item>Dwarven urgrosh</item>
+    <item>Dwarven waraxe</item>
+    <item>Falchion</item>
+    <item>Gauntlet</item>
+    <item>Glaive</item>
+    <item>Gnome hooked hammer</item>
+    <item>Greataxe</item>
+    <item>Greatclub</item>
+    <item>Greatsword</item>
+    <item>Guisarme</item>
+    <item>Halberd</item>
+    <item>Halfspear</item>
+    <item>Handaxe</item>
+    <item>Heavy flail</item>
+    <item>Heavy mace</item>
+    <item>Heavy pick</item>
+    <item>Kama</item>
+    <item>Kukri</item>
+    <item>Lance</item>
+    <item>Light flail</item>
+    <item>Light hammer</item>
+    <item>Light mace</item>
+    <item>Light pick</item>
+    <item>Longspear</item>
+    <item>Longsword</item>
+    <item>Morningstar</item>
+    <item>Nunchaku</item>
+    <item>Orc double axe</item>
+    <item>Punching dagger</item>
+    <item>Quarterstaff</item>
+    <item>Ranseur</item>
+    <item>Rapier</item>
+    <item>Sap</item>
+    <item>Scimitar</item>
+    <item>Scythe</item>
+    <item>Shortspear</item>
+    <item>Short sword</item>
+    <item>Siangham</item>
+    <item>Sickle</item>
+    <item>Spiked chain</item>
+    <item>Spiked gauntlet</item>
+    <item>Trident</item>
+    <item>Two-bladed sword</item>
+    <item>Warhammer</item>
+    <item>Whip</item>
+  </object>
     <object>
         <name>Morningstar</name>
       <item>Morningstar</item>
@@ -602,6 +661,39 @@
         <name>Two-bladed sword</name>
       <item>Two-bladed sword</item>
     </object>
+  <object>
+    <name>Two-Handed</name>
+    <item>Bastard sword</item>
+    <item>Dire flail</item>
+    <item>Dwarven urgrosh</item>
+    <item>Falchion</item>
+    <item>Glaive</item>
+    <item>Gnome hooked hammer</item>
+    <item>Greataxe</item>
+    <item>Greatclub</item>
+    <item>Greatsword</item>
+    <item>Guisarme</item>
+    <item>Halberd</item>
+    <item>Halfspear</item>
+    <item>Hand crossbow</item>
+    <item>Heavy crossbow</item>
+    <item>Heavy flail</item>
+    <item>Lance</item>
+    <item>Light crossbow</item>
+    <item>Longbow</item>
+    <item>Longspear</item>
+    <item>Net</item>
+    <item>Orc double axe</item>
+    <item>Quarterstaff</item>
+    <item>Ranseur</item>
+    <item>Heavy repeating crossbow</item>
+    <item>Light repeating crossbow</item>
+    <item>Scythe</item>
+    <item>Shortbow</item>
+    <item>Sling</item>
+    <item>Spiked chain</item>
+    <item>Two-bladed sword</item>
+  </object>
   <object>
     <name>Unarmed Strike</name>
   </object>

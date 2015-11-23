@@ -121,6 +121,9 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
                 RaceConstants.Metaraces.Werewolf,
                 RaceConstants.BaseRaces.WildElf,
                 RaceConstants.BaseRaces.WoodElf,
+                RaceConstants.Metaraces.Ghost,
+                RaceConstants.Metaraces.Lich,
+                RaceConstants.Metaraces.Vampire,
                 RaceConstants.Metaraces.Species.Black,
                 RaceConstants.Metaraces.Species.Blue,
                 RaceConstants.Metaraces.Species.Brass,
@@ -814,6 +817,37 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.Trip,
             FeatConstants.LowLightVision,
             FeatConstants.Scent)]
+        [TestCase(RaceConstants.Metaraces.Ghost,
+            FeatConstants.CorruptingGaze,
+            FeatConstants.CorruptingTouch,
+            FeatConstants.DrainingTouch,
+            FeatConstants.FrightfulMoan,
+            FeatConstants.HorrificAppearance,
+            FeatConstants.Malevolence,
+            FeatConstants.Manifestation,
+            FeatConstants.Telekinesis,
+            FeatConstants.Rejuvenation,
+            FeatConstants.TurnResistance,
+            FeatConstants.SkillBonus + SkillConstants.Hide,
+            FeatConstants.SkillBonus + SkillConstants.Listen,
+            FeatConstants.SkillBonus + SkillConstants.Search,
+            FeatConstants.SkillBonus + SkillConstants.Spot)]
+        [TestCase(RaceConstants.Metaraces.Lich,
+            FeatConstants.ArmorBonus,
+            FeatConstants.FearAura,
+            FeatConstants.ParalyzingTouch,
+            FeatConstants.TurnResistance,
+            FeatConstants.DamageReduction,
+            FeatConstants.ImmuneToEffect + FeatConstants.Foci.Cold,
+            FeatConstants.ImmuneToEffect + FeatConstants.Foci.Electricity,
+            FeatConstants.ImmuneToEffect + SpellConstants.Polymorph,
+            FeatConstants.ImmuneToEffect + "Mind",
+            FeatConstants.SkillBonus + SkillConstants.Hide,
+            FeatConstants.SkillBonus + SkillConstants.Listen,
+            FeatConstants.SkillBonus + SkillConstants.MoveSilently,
+            FeatConstants.SkillBonus + SkillConstants.Search,
+            FeatConstants.SkillBonus + SkillConstants.SenseMotive,
+            FeatConstants.SkillBonus + SkillConstants.Spot)]
         [TestCase(RaceConstants.BaseRaces.WildElf,
             FeatConstants.ImmuneToEffect,
             FeatConstants.SaveBonus,
@@ -874,9 +908,48 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
         }
 
         [Test]
+        public void VampireFeatGroup()
+        {
+            var featNames = new[]
+            {
+                FeatConstants.ArmorBonus,
+                FeatConstants.Slam + RaceConstants.Sizes.Large,
+                FeatConstants.Slam + RaceConstants.Sizes.Medium,
+                FeatConstants.Slam + RaceConstants.Sizes.Small,
+                FeatConstants.BloodDrain,
+                FeatConstants.ChildrenOfTheNight,
+                FeatConstants.Dominate,
+                FeatConstants.CreateSpawn,
+                FeatConstants.EnergyDrain,
+                FeatConstants.AlternateForm,
+                FeatConstants.DamageReduction,
+                FeatConstants.FastHealing,
+                FeatConstants.GaseousForm,
+                FeatConstants.Resistance + FeatConstants.Foci.Cold,
+                FeatConstants.Resistance + FeatConstants.Foci.Electricity,
+                FeatConstants.SpellLikeAbility + SpellConstants.SpiderClimb,
+                FeatConstants.TurnResistance,
+                FeatConstants.SkillBonus + SkillConstants.Bluff,
+                FeatConstants.SkillBonus + SkillConstants.Hide,
+                FeatConstants.SkillBonus + SkillConstants.Listen,
+                FeatConstants.SkillBonus + SkillConstants.MoveSilently,
+                FeatConstants.SkillBonus + SkillConstants.Search,
+                FeatConstants.SkillBonus + SkillConstants.SenseMotive,
+                FeatConstants.SkillBonus + SkillConstants.Spot,
+                FeatConstants.Alertness,
+                FeatConstants.CombatReflexes,
+                FeatConstants.Dodge,
+                FeatConstants.ImprovedInitiative,
+                FeatConstants.LightningReflexes
+            };
+
+            base.DistinctCollection(RaceConstants.Metaraces.Vampire, featNames);
+        }
+
+        [Test]
         public void PaladinFeatGroup()
         {
-            var featIds = new[]
+            var featNames = new[]
             {
                 FeatConstants.SimpleWeaponProficiency,
                 FeatConstants.MartialWeaponProficiency,
@@ -903,7 +976,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
                 FeatConstants.SpellLikeAbility + SpellConstants.RemoveDisease + "5"
             };
 
-            base.DistinctCollection(CharacterClassConstants.Paladin, featIds);
+            base.DistinctCollection(CharacterClassConstants.Paladin, featNames);
         }
 
         [Test]

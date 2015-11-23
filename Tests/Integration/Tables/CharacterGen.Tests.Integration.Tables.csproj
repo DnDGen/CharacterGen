@@ -139,6 +139,7 @@
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\SvirfneblinFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\TroglodyteFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\WildElfFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\Metaraces\GhostFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\Metaraces\HalfCelestialFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\Metaraces\HalfDragonFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\HalfElfFeatDataTests.cs" />
@@ -152,6 +153,7 @@
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\MountainDwarfFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\OrcFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\Metaraces\HalfFiendFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\Metaraces\LichFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\Metaraces\Species\BlackFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\Metaraces\Species\BlueFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\Metaraces\Species\BrassFeatDataTests.cs" />
@@ -162,6 +164,7 @@
     <Compile Include="Abilities\Feats\Data\Racial\Metaraces\Species\RedFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\Metaraces\Species\SilverFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\Metaraces\Species\WhiteFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\Metaraces\VampireFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\Metaraces\WerebearFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\Metaraces\WereboarFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\RacialFeatDataTests.cs" />

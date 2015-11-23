@@ -7,17 +7,22 @@
         <item>Half-Fiend</item>
         <item>Wererat</item>
         <item>Werewolf</item>
+      <item>Ghost</item>
+      <item>Lich</item>
+      <item>Vampire</item>
     </object>
     <object>
         <name>Neutral</name>
         <item>Wereboar</item>
         <item>Weretiger</item>
+      <item>Ghost</item>
     </object>
     <object>
         <name>Good</name>
         <item>Half-Dragon</item>
         <item>Half-Celestial</item>
         <item>Werebear</item>
+      <item>Ghost</item>
     </object>
     <object>
         <name>Genetic</name>
@@ -33,4 +38,10 @@
         <item>Wererat</item>
         <item>Werewolf</item>
     </object>
+  <object>
+    <name>Undead</name>
+    <item>Vampire</item>
+    <item>Lich</item>
+    <item>Ghost</item>
+  </object>
 </items>

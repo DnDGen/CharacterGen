@@ -242,6 +242,10 @@
     <item>-6</item>
   </object>
   <object>
+    <name>Ghost</name>
+    <item>-5</item>
+  </object>
+  <object>
     <name>Giant Constrictor Snake</name>
     <item>-9</item>
   </object>
@@ -332,6 +336,10 @@
   <object>
     <name>Leopard</name>
     <item>-3</item>
+  </object>
+  <object>
+    <name>Lich</name>
+    <item>-4</item>
   </object>
   <object>
     <name>Light Horse</name>
@@ -508,6 +516,10 @@
   <object>
     <name>Tyrannosaurus</name>
     <item>-15</item>
+  </object>
+  <object>
+    <name>Vampire</name>
+    <item>-8</item>
   </object>
   <object>
     <name>Water Mephit</name>

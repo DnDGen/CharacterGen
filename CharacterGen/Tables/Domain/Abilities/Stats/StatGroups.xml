@@ -1,6 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <statPriorities>
+  <object>
+    <name>All</name>
+    <item>Charisma</item>
+    <item>Intelligence</item>
+    <item>Wisdom</item>
+    <item>Strength</item>
+    <item>Constitution</item>
+    <item>Dexterity</item>
+  </object>
     <object>
         <name>BardSpellcasters</name>
         <item>Charisma</item>

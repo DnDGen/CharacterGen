@@ -98,8 +98,8 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             mockDice.Setup(d => d.Roll(2).d(9266)).Returns(7);
 
             var monsterHitDice = new Dictionary<String, Int32>();
-            monsterHitDice["monster"] = 1234;
-            monsterHitDice["baserace"] = 2345;
+            monsterHitDice["monster"] = 1;
+            monsterHitDice["baserace"] = 3;
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice)).Returns(monsterHitDice);
 
             var hitPoints = hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race, feats);
@@ -117,13 +117,13 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             mockDice.Setup(d => d.Roll(2).d(9266)).Returns(7);
 
             var monsterHitDice = new Dictionary<String, Int32>();
-            monsterHitDice["monster"] = 1234;
-            monsterHitDice["baserace"] = 2345;
+            monsterHitDice["monster"] = 1;
+            monsterHitDice["baserace"] = 3;
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice)).Returns(monsterHitDice);
-            mockDice.Setup(d => d.Roll(2345).d(8)).Returns(5);
+            mockDice.Setup(d => d.Roll(3).d(8)).Returns(5);
 
             var hitPoints = hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race, feats);
-            Assert.That(hitPoints, Is.EqualTo(2352));
+            Assert.That(hitPoints, Is.EqualTo(12));
         }
 
         [Test]
@@ -138,15 +138,13 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             mockDice.Setup(d => d.Roll(2).d(9266)).Returns(7);
 
             var monsterHitDice = new Dictionary<String, Int32>();
-            monsterHitDice["monster"] = 1234;
-            monsterHitDice["baserace"] = 2345;
+            monsterHitDice["monster"] = 1;
+            monsterHitDice["baserace"] = 3;
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice)).Returns(monsterHitDice);
-            mockDice.Setup(d => d.Roll(2345).d(8)).Returns(5);
+            mockDice.Setup(d => d.Roll(3).d(8)).Returns(5);
 
             var hitPoints = hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race, feats);
-            var classHitPoints = 7 + 2 * 5;
-            var monsterHitPoints = 5 + 2345 * 5;
-            Assert.That(hitPoints, Is.EqualTo(classHitPoints + monsterHitPoints));
+            Assert.That(hitPoints, Is.EqualTo(37));
         }
 
         [Test]
@@ -183,15 +181,61 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             mockDice.Setup(d => d.Roll(2).d(9266)).Returns(7);
 
             var monsterHitDice = new Dictionary<String, Int32>();
-            monsterHitDice["monster"] = 1234;
-            monsterHitDice["baserace"] = 2345;
+            monsterHitDice["monster"] = 1;
+            monsterHitDice["baserace"] = 3;
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice)).Returns(monsterHitDice);
-            mockDice.Setup(d => d.Roll(2345).d(10)).Returns(5);
-            mockDice.Setup(d => d.Roll(2345).d(8)).Returns(9);
+            mockDice.Setup(d => d.Roll(3).d(10)).Returns(5);
+            mockDice.Setup(d => d.Roll(3).d(8)).Returns(9);
 
             var hitPoints = hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race, feats);
-            Assert.That(hitPoints, Is.EqualTo(2352));
-            mockDice.Verify(d => d.Roll(2345).d(8), Times.Never);
+            Assert.That(hitPoints, Is.EqualTo(12));
+            mockDice.Verify(d => d.Roll(It.IsAny<Int32>()).d(8), Times.Never);
+            mockDice.Verify(d => d.Roll(It.IsAny<Int32>()).d8(), Times.Never);
+        }
+
+        [Test]
+        public void UndeadIncreasesMonsterHitDie()
+        {
+            characterClass.Level = 2;
+            race.BaseRace = "baserace";
+            race.Metarace = "undead";
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
+                .Returns(new[] { "otherbaserace", "baserace" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Undead))
+                .Returns(new[] { "undead", "other undead" });
+
+            var mockClassRoll = new Mock<IPartialRoll>();
+            mockDice.Setup(d => d.Roll(2)).Returns(mockClassRoll.Object);
+            mockClassRoll.Setup(r => r.d(12)).Returns(7);
+
+            var monsterHitDice = new Dictionary<String, Int32>();
+            monsterHitDice["monster"] = 1;
+            monsterHitDice["baserace"] = 3;
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice)).Returns(monsterHitDice);
+
+            var mockMonsterRoll = new Mock<IPartialRoll>();
+            mockDice.Setup(d => d.Roll(3)).Returns(mockMonsterRoll.Object);
+            mockMonsterRoll.Setup(r => r.d(12)).Returns(5);
+            mockMonsterRoll.Setup(r => r.d(8)).Returns(9);
+
+            var hitPoints = hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race, feats);
+            Assert.That(hitPoints, Is.EqualTo(12));
+            mockDice.Verify(d => d.Roll(It.IsAny<Int32>()).d(8), Times.Never);
+            mockDice.Verify(d => d.Roll(It.IsAny<Int32>()).d8(), Times.Never);
+        }
+
+        [Test]
+        public void UndeadSetsClassHitDieTo12()
+        {
+            characterClass.Level = 2;
+            race.Metarace = "undead";
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Undead))
+                .Returns(new[] { "undead", "other undead" });
+            mockDice.Setup(d => d.Roll(2).d(12)).Returns(7);
+
+            var hitPoints = hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race, feats);
+            Assert.That(hitPoints, Is.EqualTo(7));
+            mockDice.Verify(d => d.Roll(2).d(12), Times.Once);
         }
 
         [Test]

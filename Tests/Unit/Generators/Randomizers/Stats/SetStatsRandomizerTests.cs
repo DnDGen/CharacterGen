@@ -26,13 +26,15 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
         [Test]
         public void SetStatsContainAllStats()
         {
-            var statNames = StatConstants.GetStats();
             var stats = randomizer.Randomize();
 
-            foreach (var stat in statNames)
-                Assert.That(stats.Keys, Contains.Item(stat));
-
             Assert.That(stats.Count, Is.EqualTo(6));
+            Assert.That(stats.Keys, Contains.Item(StatConstants.Charisma));
+            Assert.That(stats.Keys, Contains.Item(StatConstants.Constitution));
+            Assert.That(stats.Keys, Contains.Item(StatConstants.Dexterity));
+            Assert.That(stats.Keys, Contains.Item(StatConstants.Intelligence));
+            Assert.That(stats.Keys, Contains.Item(StatConstants.Strength));
+            Assert.That(stats.Keys, Contains.Item(StatConstants.Wisdom));
         }
 
         [Test]

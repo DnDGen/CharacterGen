@@ -1,5 +1,6 @@
 ﻿using CharacterGen.Common.Alignments;
 using CharacterGen.Common.CharacterClasses;
+using CharacterGen.Common.Races;
 using CharacterGen.Generators.Domain.Verifiers;
 using CharacterGen.Generators.Randomizers.Alignments;
 using CharacterGen.Generators.Randomizers.CharacterClasses;
@@ -25,6 +26,7 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
         private Mock<RaceRandomizer> mockBaseRaceRandomizer;
         private Mock<RaceRandomizer> mockMetaraceRandomizer;
         private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
+        private Mock<ICollectionsSelector> mockCollectionsSelector;
 
         private CharacterClass characterClass;
         private List<Alignment> alignments;
@@ -34,6 +36,7 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
         private List<String> metaraces;
         private Dictionary<String, Int32> adjustments;
         private Alignment alignment;
+        private List<String> spellcasters;
 
         [SetUp]
         public void Setup()
@@ -44,7 +47,8 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
             mockBaseRaceRandomizer = new Mock<RaceRandomizer>();
             mockMetaraceRandomizer = new Mock<RaceRandomizer>();
             mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
-            verifier = new RandomizerVerifier(mockAdjustmentsSelector.Object);
+            mockCollectionsSelector = new Mock<ICollectionsSelector>();
+            verifier = new RandomizerVerifier(mockAdjustmentsSelector.Object, mockCollectionsSelector.Object);
 
             alignments = new List<Alignment>();
             characterClass = new CharacterClass();
@@ -54,6 +58,7 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
             metaraces = new List<String>();
             adjustments = new Dictionary<String, Int32>();
             alignment = new Alignment();
+            spellcasters = new List<String>();
 
             mockAlignmentRandomizer.Setup(r => r.GetAllPossibleResults()).Returns(alignments);
             mockClassNameRandomizer.Setup(r => r.GetAllPossibleResults(It.IsAny<Alignment>())).Returns(classNames);
@@ -63,10 +68,13 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
             mockMetaraceRandomizer.Setup(r => r.GetAllPossible(It.IsAny<Alignment>(), It.IsAny<CharacterClass>()))
                 .Returns(metaraces);
             mockAdjustmentsSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments)).Returns(adjustments);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Spellcasters))
+                .Returns(spellcasters);
 
             alignments.Add(alignment);
             characterClass.Level = 1;
-            classNames.Add("class name");
+            characterClass.ClassName = "class name";
+            classNames.Add(characterClass.ClassName);
             levels.Add(1);
             baseRaces.Add("base race");
             metaraces.Add(String.Empty);
@@ -200,6 +208,45 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
         }
 
         [Test]
+        public void RandomizersNotVerifiedIfNoSpellcastersForLich()
+        {
+            metaraces.Clear();
+            metaraces.Add(RaceConstants.Metaraces.Lich);
+
+            spellcasters.Add("other class name");
+
+            var verified = verifier.VerifyCompatibility(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object,
+                mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
+            Assert.That(verified, Is.False);
+        }
+
+        [Test]
+        public void RandomizersVerifiedIfSpellcastersForLich()
+        {
+            metaraces.Clear();
+            metaraces.Add(RaceConstants.Metaraces.Lich);
+            adjustments[RaceConstants.Metaraces.Lich] = 0;
+
+            spellcasters.Add("other class name");
+            spellcasters.Add(classNames[0]);
+
+            var verified = verifier.VerifyCompatibility(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object,
+                mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
+            Assert.That(verified, Is.True);
+        }
+
+        [Test]
+        public void RandomizersVerifiedIfMetaracesOtherThanLich()
+        {
+            metaraces.Add(RaceConstants.Metaraces.Lich);
+            spellcasters.Add("other class name");
+
+            var verified = verifier.VerifyCompatibility(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object,
+                mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
+            Assert.That(verified, Is.True);
+        }
+
+        [Test]
         public void AlignmentNotVerifiedIfNoClassNamesForAnyAlignment()
         {
             classNames.Clear();
@@ -314,6 +361,40 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
             var verified = verifier.VerifyCharacterClassCompatibility(alignment, characterClass, mockBaseRaceRandomizer.Object,
                 mockMetaraceRandomizer.Object);
             Assert.That(verified, Is.False);
+        }
+
+        [Test]
+        public void CharacterClassNotVerifiedIfNotSpellcasterAndOnlyLichAvailable()
+        {
+            metaraces.Clear();
+            metaraces.Add(RaceConstants.Metaraces.Lich);
+
+            var verified = verifier.VerifyCharacterClassCompatibility(alignment, characterClass, mockBaseRaceRandomizer.Object,
+                mockMetaraceRandomizer.Object);
+            Assert.That(verified, Is.False);
+        }
+
+        [Test]
+        public void CharacterClassVerifiedIfSpellcasterAndOnlyLichAvailable()
+        {
+            metaraces.Clear();
+            metaraces.Add(RaceConstants.Metaraces.Lich);
+            adjustments[RaceConstants.Metaraces.Lich] = 0;
+            spellcasters.Add(characterClass.ClassName);
+
+            var verified = verifier.VerifyCharacterClassCompatibility(alignment, characterClass, mockBaseRaceRandomizer.Object,
+                mockMetaraceRandomizer.Object);
+            Assert.That(verified, Is.True);
+        }
+
+        [Test]
+        public void CharacterClassVerifiedIfNotSpellcasterAndMoreThanLichAvailable()
+        {
+            metaraces.Add(RaceConstants.Metaraces.Lich);
+
+            var verified = verifier.VerifyCharacterClassCompatibility(alignment, characterClass, mockBaseRaceRandomizer.Object,
+                mockMetaraceRandomizer.Object);
+            Assert.That(verified, Is.True);
         }
 
         [Test]

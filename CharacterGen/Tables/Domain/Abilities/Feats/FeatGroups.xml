@@ -518,6 +518,23 @@
     <name>Fortitude</name>
     <item>Great Fortitude</item>
   </object>
+  <object>
+    <name>Ghost</name>
+    <item>Corrupting Gaze</item>
+    <item>Corrupting Touch</item>
+    <item>Draining Touch</item>
+    <item>Frightful Moan</item>
+    <item>Horrific Appearance</item>
+    <item>Malevolence</item>
+    <item>Manifestation</item>
+    <item>Telekinesis</item>
+    <item>Rejuvenation</item>
+    <item>Turn Resistance</item>
+    <item>Skill BonusHide</item>
+    <item>Skill BonusListen</item>
+    <item>Skill BonusSearch</item>
+    <item>Skill BonusSpot</item>
+  </object>
     <object>
         <name>Gnoll</name>
         <item>Natural Armor</item>
@@ -765,6 +782,24 @@
         <name>Law</name>
         <item>Cast Spell Bonus</item>
     </object>
+  <object>
+    <name>Lich</name>
+    <item>Armor Bonus</item>
+    <item>Fear Aura</item>
+    <item>Paralyzing Touch</item>
+    <item>Turn Resistance</item>
+    <item>Damage Reduction</item>
+    <item>Immune to EffectCold</item>
+    <item>Immune to EffectElectricity</item>
+    <item>Immune to EffectPolymorph</item>
+    <item>Immune to EffectMind</item>
+    <item>Skill BonusHide</item>
+    <item>Skill BonusListen</item>
+    <item>Skill BonusMove Silently</item>
+    <item>Skill BonusSearch</item>
+    <item>Skill BonusSense Motive</item>
+    <item>Skill BonusSpot</item>
+  </object>
     <object>
         <name>Lightfoot Halfling</name>
         <item>Skill BonusListen</item>
@@ -1210,6 +1245,38 @@
   <item>Two-Weapon Defense</item>
   <item>Improved Two-Weapon Fighting</item>
   <item>Greater Two-Weapon Fighting</item>
+  </object>
+  <object>
+    <name>Vampire</name>
+    <item>Armor Bonus</item>
+    <item>SlamLarge</item>
+    <item>SlamMedium</item>
+    <item>SlamSmall</item>
+    <item>Blood Drain</item>
+    <item>Children of the Night</item>
+    <item>Dominate</item>
+    <item>Create Spawn</item>
+    <item>Energy Drain</item>
+    <item>Alternate Form</item>
+    <item>Damage Reduction</item>
+    <item>Fast Healing</item>
+    <item>Gaseous Form</item>
+    <item>ResistanceCold</item>
+    <item>ResistanceElectricity</item>
+    <item>Spell-Like AbilitySpider climb</item>
+    <item>Turn Resistance</item>
+    <item>Skill BonusBluff</item>
+    <item>Skill BonusHide</item>
+    <item>Skill BonusListen</item>
+    <item>Skill BonusMove Silently</item>
+    <item>Skill BonusSearch</item>
+    <item>Skill BonusSense Motive</item>
+    <item>Skill BonusSpot</item>
+    <item>Alertness</item>
+    <item>Combat Reflexes</item>
+    <item>Dodge</item>
+    <item>Improved Initiative</item>
+    <item>Lightning Reflexes</item>
   </object>
     <object>
         <name>War</name>

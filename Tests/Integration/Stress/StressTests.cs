@@ -41,7 +41,8 @@ namespace CharacterGen.Tests.Integration.Stress
 
         private const Int32 ConfidentIterations = 1000000;
 #if STRESS
-        private const Int32 TimeLimitInSeconds = 1000000;
+        //INFO: This should make all stress tests run within 1 hour
+        private const Int32 TimeLimitInSeconds = 60 * 60 / 100;
 #else
         private const Int32 TimeLimitInSeconds = 1;
 #endif
@@ -65,8 +66,16 @@ namespace CharacterGen.Tests.Integration.Stress
 
         protected void Stress()
         {
-            do MakeAssertions();
+            Stress(MakeAssertions);
+        }
+
+        protected void Stress(Action makeAssertions)
+        {
+            do makeAssertions();
             while (TestShouldKeepRunning());
+
+            if (Stopwatch.Elapsed.TotalSeconds > TimeLimitInSeconds + 2)
+                Assert.Fail("Something took way too long");
         }
 
         protected abstract void MakeAssertions();

@@ -1,5 +1,6 @@
 ﻿using CharacterGen.Common.Alignments;
 using CharacterGen.Common.CharacterClasses;
+using CharacterGen.Common.Races;
 using CharacterGen.Generators.Randomizers.Alignments;
 using CharacterGen.Generators.Randomizers.CharacterClasses;
 using CharacterGen.Generators.Randomizers.Races;
@@ -15,10 +16,12 @@ namespace CharacterGen.Generators.Domain.Verifiers
     public class RandomizerVerifier : IRandomizerVerifier
     {
         private IAdjustmentsSelector adjustmentsSelector;
+        private ICollectionsSelector collectionsSelector;
 
-        public RandomizerVerifier(IAdjustmentsSelector adjustmentsSelector)
+        public RandomizerVerifier(IAdjustmentsSelector adjustmentsSelector, ICollectionsSelector collectionsSelector)
         {
             this.adjustmentsSelector = adjustmentsSelector;
+            this.collectionsSelector = collectionsSelector;
         }
 
         public Boolean VerifyCompatibility(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classNameRandomizer, ILevelRandomizer levelRandomizer,
@@ -53,17 +56,24 @@ namespace CharacterGen.Generators.Domain.Verifiers
         public Boolean VerifyCharacterClassCompatibility(Alignment alignment, CharacterClass characterClass, RaceRandomizer baseRaceRandomizer,
             RaceRandomizer metaraceRandomizer)
         {
-            var baseRaceIds = baseRaceRandomizer.GetAllPossible(alignment, characterClass);
-            var metaraceIds = metaraceRandomizer.GetAllPossible(alignment, characterClass);
+            var baseRaces = baseRaceRandomizer.GetAllPossible(alignment, characterClass);
+            var metaraces = metaraceRandomizer.GetAllPossible(alignment, characterClass);
 
-            return baseRaceIds.Any() && metaraceIds.Any() && LevelAdjustmentsAreAllowed(baseRaceIds, metaraceIds, characterClass.Level);
+            if (metaraces.Count() == 1 && metaraces.First() == RaceConstants.Metaraces.Lich)
+            {
+                var spellcasters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Spellcasters);
+                if (spellcasters.Contains(characterClass.ClassName) == false)
+                    return false;
+            }
+
+            return baseRaces.Any() && metaraces.Any() && LevelAdjustmentsAreAllowed(baseRaces, metaraces, characterClass.Level);
         }
 
-        private Boolean LevelAdjustmentsAreAllowed(IEnumerable<String> baseRaceIds, IEnumerable<String> metaraceIds, Int32 level)
+        private Boolean LevelAdjustmentsAreAllowed(IEnumerable<String> baseRaces, IEnumerable<String> metaraces, Int32 level)
         {
             var levelAdjustments = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments);
-            var minBaseRaceLevelAdjustment = levelAdjustments.Where(kvp => baseRaceIds.Contains(kvp.Key)).Min(kvp => kvp.Value);
-            var minMetaraceLevelAdjustment = levelAdjustments.Where(kvp => metaraceIds.Contains(kvp.Key)).Min(kvp => kvp.Value);
+            var minBaseRaceLevelAdjustment = levelAdjustments.Where(kvp => baseRaces.Contains(kvp.Key)).Min(kvp => kvp.Value);
+            var minMetaraceLevelAdjustment = levelAdjustments.Where(kvp => metaraces.Contains(kvp.Key)).Min(kvp => kvp.Value);
 
             return minBaseRaceLevelAdjustment + minMetaraceLevelAdjustment < level;
         }

@@ -13,7 +13,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
     [TestFixture]
     public class EvilMetaraceRandomizerTests : MetaraceRandomizerTests
     {
-        protected override IEnumerable<String> metaraceIds
+        protected override IEnumerable<String> metaraceNames
         {
             get
             {

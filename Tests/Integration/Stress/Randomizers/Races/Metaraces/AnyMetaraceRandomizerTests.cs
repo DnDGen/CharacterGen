@@ -26,6 +26,9 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
                     RaceConstants.Metaraces.Wererat,
                     RaceConstants.Metaraces.Weretiger,
                     RaceConstants.Metaraces.Werewolf,
+                    RaceConstants.Metaraces.Ghost,
+                    RaceConstants.Metaraces.Lich,
+                    RaceConstants.Metaraces.Vampire,
                     RaceConstants.Metaraces.None
                 };
             }

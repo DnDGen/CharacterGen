@@ -4,8 +4,18 @@
     <object>
         <lower>1</lower>
         <content></content>
-        <upper>96</upper>
+        <upper>94</upper>
     </object>
+  <object>
+    <lower>95</lower>
+    <content>Ghost</content>
+    <upper>95</upper>
+  </object>
+  <object>
+    <lower>96</lower>
+    <content>Vampire</content>
+    <upper>96</upper>
+  </object>
   <object>
     <lower>97</lower>
     <content>Wererat</content>

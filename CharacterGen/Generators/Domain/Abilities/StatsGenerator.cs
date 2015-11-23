@@ -18,14 +18,16 @@ namespace CharacterGen.Generators.Domain.Abilities
         private IStatPrioritySelector statPrioritySelector;
         private IStatAdjustmentsSelector statAdjustmentsSelector;
         private IAdjustmentsSelector adjustmentsSelector;
+        private ICollectionsSelector collectionsSelector;
 
         public StatsGenerator(IBooleanPercentileSelector booleanPercentileSelector, IStatPrioritySelector statPrioritySelector,
-            IStatAdjustmentsSelector statAdjustmentsSelector, IAdjustmentsSelector adjustmentsSelector)
+            IStatAdjustmentsSelector statAdjustmentsSelector, IAdjustmentsSelector adjustmentsSelector, ICollectionsSelector collectionsSelector)
         {
             this.booleanPercentileSelector = booleanPercentileSelector;
             this.statPrioritySelector = statPrioritySelector;
             this.statAdjustmentsSelector = statAdjustmentsSelector;
             this.adjustmentsSelector = adjustmentsSelector;
+            this.collectionsSelector = collectionsSelector;
         }
 
         public Dictionary<String, Stat> GenerateWith(IStatsRandomizer statsRandomizer, CharacterClass characterClass, Race race)
@@ -36,7 +38,10 @@ namespace CharacterGen.Generators.Domain.Abilities
             stats = PrioritizeStats(stats, statPriorities);
             stats = AdjustStats(race, stats);
             stats = IncreaseStats(stats, characterClass.Level, statPriorities);
-            //stats = ApplyAgeToStats(stats, race);
+
+            var undead = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Undead);
+            if (undead.Contains(race.Metarace))
+                stats[StatConstants.Constitution].Value = 0;
 
             return stats;
         }
@@ -95,19 +100,5 @@ namespace CharacterGen.Generators.Domain.Abilities
             else
                 stats[priorities.Second].Value++;
         }
-
-        //private Dictionary<String, Stat> ApplyAgeToStats(Dictionary<String, Stat> stats, Race race)
-        //{
-        //    var tableName = String.Format(TableNameConstants.Formattable.Adjustments.AGEStatAdjustments, race.Age.Stage);
-        //    var ageAdjustments = adjustmentsSelector.SelectFrom(tableName);
-
-        //    foreach (var stat in stats)
-        //        stat.Value.Value += ageAdjustments[stat.Key];
-
-        //    foreach (var stat in stats.Values)
-        //        stat.Value = Math.Max(stat.Value, 1);
-
-        //    return stats;
-        //}
     }
 }

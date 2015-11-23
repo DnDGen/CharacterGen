@@ -38,19 +38,6 @@ namespace CharacterGen.Generators.Domain
             race.HasWings = DetermineIfRaceHasWings(race);
             race.LandSpeed = DetermineLandSpeed(race);
             race.AerialSpeed = DetermineAerialSpeed(race);
-            //race.Age = DetermineAge(race, characterClass);
-
-            //var tableName = String.Format(TableNameConstants.Formattable.Adjustments.RACEHeights, race.BaseRace);
-            //var heights = adjustmentsSelector.SelectFrom(tableName);
-            //var additionalHeight = dice.Roll(heights[AdjustmentConstants.Quantity]).d(heights[AdjustmentConstants.Die]);
-
-            //race.HeightInInches = heights[AdjustmentConstants.Base + race.Male.ToString()] + additionalHeight;
-
-            //tableName = String.Format(TableNameConstants.Formattable.Adjustments.RACEWeights, race.BaseRace);
-            //var weights = adjustmentsSelector.SelectFrom(tableName);
-            //var additionalWeightMultiplier = dice.Roll(weights[AdjustmentConstants.Quantity]).d(weights[AdjustmentConstants.Die]);
-
-            //race.WeightInPounds = weights[AdjustmentConstants.Base + race.Male.ToString()] + additionalHeight * additionalWeightMultiplier;
 
             return race;
         }
@@ -109,6 +96,9 @@ namespace CharacterGen.Generators.Domain
 
         private Int32 DetermineAerialSpeed(Race race)
         {
+            if (race.Metarace == RaceConstants.Metaraces.Ghost)
+                return 30;
+
             if (race.HasWings == false)
                 return 0;
 

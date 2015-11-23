@@ -43,7 +43,7 @@ namespace CharacterGen.Tests.Integration.Stress.Abilities
             Assert.That(ability.Stats.Keys, Contains.Item(StatConstants.Strength));
             Assert.That(ability.Stats.Keys, Contains.Item(StatConstants.Wisdom));
             Assert.That(ability.Stats[StatConstants.Charisma].Value, Is.Positive);
-            Assert.That(ability.Stats[StatConstants.Constitution].Value, Is.Positive);
+            Assert.That(ability.Stats[StatConstants.Constitution].Value, Is.Not.Negative);
             Assert.That(ability.Stats[StatConstants.Dexterity].Value, Is.Positive);
             Assert.That(ability.Stats[StatConstants.Intelligence].Value, Is.Positive);
             Assert.That(ability.Stats[StatConstants.Strength].Value, Is.Positive);

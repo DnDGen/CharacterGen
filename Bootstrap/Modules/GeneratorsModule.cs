@@ -110,6 +110,7 @@ namespace CharacterGen.Bootstrap.Modules
             Bind<IForcableMetaraceRandomizer>().To<NonEvilMetaraceRandomizer>().Named(RaceRandomizerTypeConstants.Metarace.NonEvilMeta);
             Bind<IForcableMetaraceRandomizer>().To<NonGoodMetaraceRandomizer>().Named(RaceRandomizerTypeConstants.Metarace.NonGoodMeta);
             Bind<IForcableMetaraceRandomizer>().To<NonNeutralMetaraceRandomizer>().Named(RaceRandomizerTypeConstants.Metarace.NonNeutralMeta);
+            Bind<IForcableMetaraceRandomizer>().To<UndeadMetaraceRandomizer>().Named(RaceRandomizerTypeConstants.Metarace.UndeadMeta);
 
             Bind<RaceRandomizer>().ToMethod(c => c.Kernel.Get<IForcableMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.AnyMeta)).Named(RaceRandomizerTypeConstants.Metarace.AnyMeta);
             Bind<RaceRandomizer>().ToMethod(c => c.Kernel.Get<IForcableMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.EvilMeta)).Named(RaceRandomizerTypeConstants.Metarace.EvilMeta);
@@ -120,6 +121,7 @@ namespace CharacterGen.Bootstrap.Modules
             Bind<RaceRandomizer>().ToMethod(c => c.Kernel.Get<IForcableMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.NonEvilMeta)).Named(RaceRandomizerTypeConstants.Metarace.NonEvilMeta);
             Bind<RaceRandomizer>().ToMethod(c => c.Kernel.Get<IForcableMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.NonGoodMeta)).Named(RaceRandomizerTypeConstants.Metarace.NonGoodMeta);
             Bind<RaceRandomizer>().ToMethod(c => c.Kernel.Get<IForcableMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.NonNeutralMeta)).Named(RaceRandomizerTypeConstants.Metarace.NonNeutralMeta);
+            Bind<RaceRandomizer>().ToMethod(c => c.Kernel.Get<IForcableMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.UndeadMeta)).Named(RaceRandomizerTypeConstants.Metarace.UndeadMeta);
             Bind<RaceRandomizer>().To<NoMetaraceRandomizer>().Named(RaceRandomizerTypeConstants.Metarace.NoMeta);
 
             Bind<IStatsRandomizer>().To<AverageStatsRandomizer>().Named(StatsRandomizerTypeConstants.Average);

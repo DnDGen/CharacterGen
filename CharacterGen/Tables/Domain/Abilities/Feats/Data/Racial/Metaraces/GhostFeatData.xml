@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+    <object>
+        <name>Corrupting Gaze</name>
+        <item>Corrupting Gaze</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+    </object>
+    <object>
+      <name>Corrupting Touch</name>
+      <item>Corrupting Touch</item>
+      <item></item>
+      <item>0</item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+  </object>
+  <object>
+    <name>Draining Touch</name>
+    <item>Draining Touch</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Frightful Moan</name>
+    <item>Frightful Moan</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+    <object>
+        <name>Horrific Appearance</name>
+        <item>Horrific Appearance</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+    </object>
+  <object>
+    <name>Malevolence</name>
+    <item>Malevolence</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>1</item>
+    <item>Round</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Manifestation</name>
+    <item>Manifestation</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Telekinesis</name>
+    <item>Telekinesis</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+    <object>
+        <name>Rejuvenation</name>
+        <item>Rejuvenation</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+    </object>
+  <object>
+    <name>Turn Resistance</name>
+    <item>Turn Resistance</item>
+    <item></item>
+    <item>0</item>
+    <item>4</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Skill BonusSpot</name>
+    <item>Skill Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>8</item>
+    <item>Spot</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Skill BonusListen</name>
+    <item>Skill Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>8</item>
+    <item>Listen</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Skill BonusHide</name>
+    <item>Skill Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>8</item>
+    <item>Hide</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Skill BonusSearch</name>
+    <item>Skill Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>8</item>
+    <item>Search</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+</items>

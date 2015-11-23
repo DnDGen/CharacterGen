@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using Ninject;
-using CharacterGen.Common.Abilities.Stats;
+﻿using CharacterGen.Common.Abilities.Stats;
 using CharacterGen.Generators.Randomizers.Stats;
+using Ninject;
 using NUnit.Framework;
+using System;
 
 namespace CharacterGen.Tests.Integration.Stress.Randomizers.Stats
 {
@@ -14,14 +13,6 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Stats
         public ISetStatsRandomizer SetStatsRandomizer { get; set; }
         [Inject]
         public Random Random { get; set; }
-
-        private IEnumerable<String> statNames;
-
-        [SetUp]
-        public void Setup()
-        {
-            statNames = StatConstants.GetStats();
-        }
 
         [TestCase("SetStatsRandomizer")]
         public override void Stress(String stressSubject)
@@ -40,10 +31,13 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Stats
 
             var stats = SetStatsRandomizer.Randomize();
 
-            foreach (var name in statNames)
-                Assert.That(stats.Keys, Contains.Item(name));
-
             Assert.That(stats.Count, Is.EqualTo(6));
+            Assert.That(stats.Keys, Contains.Item(StatConstants.Charisma));
+            Assert.That(stats.Keys, Contains.Item(StatConstants.Constitution));
+            Assert.That(stats.Keys, Contains.Item(StatConstants.Dexterity));
+            Assert.That(stats.Keys, Contains.Item(StatConstants.Intelligence));
+            Assert.That(stats.Keys, Contains.Item(StatConstants.Strength));
+            Assert.That(stats.Keys, Contains.Item(StatConstants.Wisdom));
             Assert.That(stats[StatConstants.Charisma].Value, Is.EqualTo(SetStatsRandomizer.SetCharisma));
             Assert.That(stats[StatConstants.Constitution].Value, Is.EqualTo(SetStatsRandomizer.SetConstitution));
             Assert.That(stats[StatConstants.Dexterity].Value, Is.EqualTo(SetStatsRandomizer.SetDexterity));

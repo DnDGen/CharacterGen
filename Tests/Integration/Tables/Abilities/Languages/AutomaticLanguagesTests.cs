@@ -1,9 +1,9 @@
-﻿using System;
-using CharacterGen.Common.Abilities;
+﻿using CharacterGen.Common.Abilities;
 using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Common.Races;
 using CharacterGen.Tables;
 using NUnit.Framework;
+using System;
 
 namespace CharacterGen.Tests.Integration.Tables.Abilities.Languages
 {
@@ -18,7 +18,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Languages
         [Test]
         public override void CollectionNames()
         {
-            var names = new[] 
+            var names = new[]
             {
                 RaceConstants.BaseRaces.Aasimar,
                 RaceConstants.BaseRaces.Bugbear,
@@ -63,6 +63,9 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Languages
                 RaceConstants.Metaraces.Weretiger,
                 RaceConstants.Metaraces.Werewolf,
                 RaceConstants.Metaraces.None,
+                RaceConstants.Metaraces.Ghost,
+                RaceConstants.Metaraces.Lich,
+                RaceConstants.Metaraces.Vampire,
                 CharacterClassConstants.Barbarian,
                 CharacterClassConstants.Bard,
                 CharacterClassConstants.Cleric,
@@ -194,6 +197,10 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Languages
         [TestCase(RaceConstants.Metaraces.Weretiger)]
         [TestCase(RaceConstants.Metaraces.Werewolf)]
         [TestCase(RaceConstants.Metaraces.None)]
+        [TestCase(RaceConstants.Metaraces.Ghost)]
+        [TestCase(RaceConstants.Metaraces.Lich,
+            LanguageConstants.Common)]
+        [TestCase(RaceConstants.Metaraces.Vampire)]
         [TestCase(CharacterClassConstants.Barbarian)]
         [TestCase(CharacterClassConstants.Bard)]
         [TestCase(CharacterClassConstants.Cleric)]

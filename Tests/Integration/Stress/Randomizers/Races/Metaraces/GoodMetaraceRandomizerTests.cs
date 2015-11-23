@@ -22,6 +22,7 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
                     RaceConstants.Metaraces.HalfDragon,
                     RaceConstants.Metaraces.HalfCelestial,
                     RaceConstants.Metaraces.Werebear,
+                    RaceConstants.Metaraces.Ghost,
                     RaceConstants.Metaraces.None
                 };
             }

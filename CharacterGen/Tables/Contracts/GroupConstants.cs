@@ -5,6 +5,7 @@ namespace CharacterGen.Tables
     public static class GroupConstants
     {
         public const String Additional = "Additional";
+        public const String All = "All";
         public const String AverageBaseAttack = "Average Base Attack";
         public const String CharacterClasses = "CharacterClasses";
         public const String Deflection = "Deflection";
@@ -37,6 +38,7 @@ namespace CharacterGen.Tables
         public const String TakenMultipleTimes = "TakenMultipleTimes";
         public const String Trained = "Trained";
         public const String TwoHanded = "Two-Handed";
+        public const String Undead = "Undead";
         public const String Warriors = "Warriors";
         public const String WizardBonusFeats = "WizardBonusFeats";
     }

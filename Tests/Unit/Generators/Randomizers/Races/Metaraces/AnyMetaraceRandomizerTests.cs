@@ -9,7 +9,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
     [TestFixture]
     public class AnyMetaraceRandomizerTests : MetaraceRandomizerTests
     {
-        protected override IEnumerable<String> metaraceIds
+        protected override IEnumerable<String> metaraceNames
         {
             get
             {
@@ -37,7 +37,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         public void AllMetaracesAllowed()
         {
             var allMetaraces = randomizer.GetAllPossible(alignment, characterClass);
-            foreach (var metarace in metaraceIds)
+            foreach (var metarace in metaraceNames)
                 Assert.That(allMetaraces, Contains.Item(metarace));
         }
     }

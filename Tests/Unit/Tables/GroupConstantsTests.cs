@@ -8,6 +8,7 @@ namespace CharacterGen.Tests.Unit.Tables
     public class GroupConstantsTests
     {
         [TestCase(GroupConstants.Additional, "Additional")]
+        [TestCase(GroupConstants.All, "All")]
         [TestCase(GroupConstants.AverageBaseAttack, "Average Base Attack")]
         [TestCase(GroupConstants.CharacterClasses, "CharacterClasses")]
         [TestCase(GroupConstants.Deflection, "Deflection")]
@@ -40,6 +41,7 @@ namespace CharacterGen.Tests.Unit.Tables
         [TestCase(GroupConstants.TakenMultipleTimes, "TakenMultipleTimes")]
         [TestCase(GroupConstants.Trained, "Trained")]
         [TestCase(GroupConstants.TwoHanded, "Two-Handed")]
+        [TestCase(GroupConstants.Undead, "Undead")]
         [TestCase(GroupConstants.Warriors, "Warriors")]
         [TestCase(GroupConstants.WizardBonusFeats, "WizardBonusFeats")]
         public void Constant(String constant, String value)

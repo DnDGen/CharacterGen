@@ -1,11 +1,9 @@
 ﻿using CharacterGen.Common.Abilities.Feats;
 using CharacterGen.Common.CharacterClasses;
-using CharacterGen.Common.Races;
 using CharacterGen.Generators.Abilities;
 using CharacterGen.Generators.Abilities.Feats;
 using CharacterGen.Generators.Combats;
 using CharacterGen.Generators.Randomizers.CharacterClasses;
-using CharacterGen.Generators.Randomizers.Races;
 using CharacterGen.Generators.Randomizers.Stats;
 using Ninject;
 using NUnit.Framework;
@@ -73,41 +71,6 @@ namespace CharacterGen.Tests.Integration.Stress.Abilities.Feats
                     .Or.EqualTo(FeatConstants.Frequencies.Round)
                     .Or.Empty, feat.Name);
             }
-        }
-
-        [Test]
-        public void DuplicateFeatsAreCorrectlyRemoved()
-        {
-            var setClassRandomizer = GetNewInstanceOf<ISetClassNameRandomizer>();
-            setClassRandomizer.SetClassName = CharacterClassConstants.Barbarian;
-            ClassNameRandomizer = setClassRandomizer;
-
-            var setLevelRandomizer = GetNewInstanceOf<ISetLevelRandomizer>();
-            setLevelRandomizer.SetLevel = 1;
-            LevelRandomizer = setLevelRandomizer;
-
-            var setRaceRandomizer = GetNewInstanceOf<ISetBaseRaceRandomizer>();
-            setRaceRandomizer.SetBaseRace = RaceConstants.BaseRaces.Ogre;
-
-            var alignment = GetNewAlignment();
-            var characterClass = GetNewCharacterClass(alignment);
-            var race = RaceGenerator.GenerateWith(alignment, characterClass, setRaceRandomizer, MetaraceRandomizer);
-            var stats = StatsGenerator.GenerateWith(StatsRandomizer, characterClass, race);
-            var skills = SkillsGenerator.GenerateWith(characterClass, race, stats);
-            var baseAttack = CombatGenerator.GenerateBaseAttackWith(characterClass, race);
-
-            var feats = FeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
-            Assert.That(feats.Count(f => f.Name == FeatConstants.SimpleWeaponProficiency), Is.EqualTo(1), FeatConstants.SimpleWeaponProficiency);
-            Assert.That(feats.Count(f => f.Name == FeatConstants.MartialWeaponProficiency), Is.EqualTo(1), FeatConstants.MartialWeaponProficiency);
-            Assert.That(feats.Count(f => f.Name == FeatConstants.LightArmorProficiency), Is.EqualTo(1), FeatConstants.LightArmorProficiency);
-            Assert.That(feats.Count(f => f.Name == FeatConstants.MediumArmorProficiency), Is.EqualTo(1), FeatConstants.MediumArmorProficiency);
-            Assert.That(feats.Count(f => f.Name == FeatConstants.ShieldProficiency), Is.EqualTo(1), FeatConstants.ShieldProficiency);
-
-            var simpleWeaponProficiencyFeat = feats.First(f => f.Name == FeatConstants.SimpleWeaponProficiency);
-            Assert.That(simpleWeaponProficiencyFeat.Focus, Is.EqualTo(FeatConstants.Foci.All));
-
-            var martialWeaponProficiencyFeat = feats.First(f => f.Name == FeatConstants.MartialWeaponProficiency);
-            Assert.That(martialWeaponProficiencyFeat.Focus, Is.EqualTo(FeatConstants.Foci.All));
         }
     }
 }

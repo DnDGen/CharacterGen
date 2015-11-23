@@ -17,7 +17,7 @@ namespace CharacterGen.Tests.Integration.Stress.Abilities
         [Inject, Named(AbilitiesGeneratorTypeConstants.Animal)]
         public ICombatGenerator AnimalCombatGenerator { get; set; }
 
-        [TestCase("AnimalAbilitiesGenerator INCOMPLETE")]
+        [TestCase("AnimalAbilitiesGenerator"), Ignore]
         public override void Stress(String stressSubject)
         {
             Stress();

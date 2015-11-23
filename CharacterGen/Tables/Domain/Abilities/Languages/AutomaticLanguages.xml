@@ -64,6 +64,9 @@
         <item>Sylvan</item>
     </object>
     <object>
+        <name>Ghost</name>
+    </object>
+    <object>
         <name>Gnoll</name>
         <item>Gnoll</item>
     </object>
@@ -132,6 +135,10 @@
         <name>Kobold</name>
         <item>Draconic</item>
     </object>
+  <object>
+    <name>Lich</name>
+    <item>Common</item>
+  </object>
     <object>
         <name>Lightfoot Halfling</name>
         <item>Common</item>
@@ -187,6 +194,9 @@
         <item>Common</item>
         <item>Draconic</item>
     </object>
+  <object>
+    <name>Vampire</name>
+  </object>
     <object>
         <name>Werebear</name>
     </object>

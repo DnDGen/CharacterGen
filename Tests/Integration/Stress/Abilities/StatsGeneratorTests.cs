@@ -4,8 +4,6 @@ using CharacterGen.Generators.Randomizers.Stats;
 using Ninject;
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace CharacterGen.Tests.Integration.Stress.Abilities
 {
@@ -16,14 +14,6 @@ namespace CharacterGen.Tests.Integration.Stress.Abilities
         public IStatsGenerator StatsGenerator { get; set; }
         [Inject, Named(StatsRandomizerTypeConstants.Raw)]
         public IStatsRandomizer StatsRandomizer { get; set; }
-
-        private IEnumerable<String> statNames;
-
-        [SetUp]
-        public void Setup()
-        {
-            statNames = StatConstants.GetStats();
-        }
 
         [TestCase("StatsGenerator")]
         public override void Stress(String stressSubject)
@@ -38,14 +28,19 @@ namespace CharacterGen.Tests.Integration.Stress.Abilities
             var race = RaceGenerator.GenerateWith(alignment, characterClass, BaseRaceRandomizer, MetaraceRandomizer);
             var stats = StatsGenerator.GenerateWith(StatsRandomizer, characterClass, race);
 
-            foreach (var statName in statNames)
-            {
-                Assert.That(stats.Keys, Contains.Item(statName));
-                Assert.That(stats[statName].Value, Is.Positive);
-            }
-
-            var extras = stats.Keys.Except(statNames);
-            Assert.That(extras, Is.Empty);
+            Assert.That(stats.Count, Is.EqualTo(6));
+            Assert.That(stats.Keys, Contains.Item(StatConstants.Charisma));
+            Assert.That(stats.Keys, Contains.Item(StatConstants.Constitution));
+            Assert.That(stats.Keys, Contains.Item(StatConstants.Dexterity));
+            Assert.That(stats.Keys, Contains.Item(StatConstants.Intelligence));
+            Assert.That(stats.Keys, Contains.Item(StatConstants.Strength));
+            Assert.That(stats.Keys, Contains.Item(StatConstants.Wisdom));
+            Assert.That(stats[StatConstants.Charisma].Value, Is.Positive);
+            Assert.That(stats[StatConstants.Constitution].Value, Is.Not.Negative);
+            Assert.That(stats[StatConstants.Dexterity].Value, Is.Positive);
+            Assert.That(stats[StatConstants.Intelligence].Value, Is.Positive);
+            Assert.That(stats[StatConstants.Strength].Value, Is.Positive);
+            Assert.That(stats[StatConstants.Wisdom].Value, Is.Positive);
         }
     }
 }

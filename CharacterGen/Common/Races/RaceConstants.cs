@@ -168,6 +168,9 @@ namespace CharacterGen.Common.Races
             public const String Weretiger = "Weretiger";
             public const String Wererat = "Wererat";
             public const String Werewolf = "Werewolf";
+            public const String Vampire = "Vampire";
+            public const String Ghost = "Ghost";
+            public const String Lich = "Lich";
             public const String None = "";
 
             public static class Species

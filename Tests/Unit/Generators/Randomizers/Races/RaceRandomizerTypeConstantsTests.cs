@@ -27,6 +27,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races
         [TestCase(RaceRandomizerTypeConstants.Metarace.GeneticMeta, "Genetic Meta")]
         [TestCase(RaceRandomizerTypeConstants.Metarace.LycanthropeMeta, "Lycanthrope Meta")]
         [TestCase(RaceRandomizerTypeConstants.Metarace.NoMeta, "No Meta")]
+        [TestCase(RaceRandomizerTypeConstants.Metarace.UndeadMeta, "Undead Meta")]
         public void Constant(String constant, String value)
         {
             Assert.That(constant, Is.EqualTo(value));

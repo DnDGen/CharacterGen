@@ -1,8 +1,8 @@
-﻿using System;
-using CharacterGen.Common.Abilities.Stats;
+﻿using CharacterGen.Common.Abilities.Stats;
 using CharacterGen.Common.Races;
 using CharacterGen.Tables;
 using NUnit.Framework;
+using System;
 
 namespace CharacterGen.Tests.Integration.Tables.Abilities.Stats
 {
@@ -17,31 +17,31 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Stats
         [Test]
         public override void CollectionNames()
         {
-            var names = new[] 
+            var names = new[]
             {
                 RaceConstants.BaseRaces.Aasimar,
-                RaceConstants.BaseRaces.Bugbear, 
+                RaceConstants.BaseRaces.Bugbear,
                 RaceConstants.BaseRaces.Derro,
-                RaceConstants.BaseRaces.Doppelganger, 
+                RaceConstants.BaseRaces.Doppelganger,
                 RaceConstants.BaseRaces.Drow,
-                RaceConstants.BaseRaces.DuergarDwarf, 
-                RaceConstants.BaseRaces.DeepDwarf, 
-                RaceConstants.BaseRaces.HillDwarf, 
-                RaceConstants.BaseRaces.MountainDwarf, 
-                RaceConstants.BaseRaces.GrayElf, 
+                RaceConstants.BaseRaces.DuergarDwarf,
+                RaceConstants.BaseRaces.DeepDwarf,
+                RaceConstants.BaseRaces.HillDwarf,
+                RaceConstants.BaseRaces.MountainDwarf,
+                RaceConstants.BaseRaces.GrayElf,
                 RaceConstants.BaseRaces.HighElf,
-                RaceConstants.BaseRaces.WildElf, 
+                RaceConstants.BaseRaces.WildElf,
                 RaceConstants.BaseRaces.WoodElf,
-                RaceConstants.BaseRaces.Gnoll, 
-                RaceConstants.BaseRaces.ForestGnome, 
-                RaceConstants.BaseRaces.RockGnome, 
-                RaceConstants.BaseRaces.Svirfneblin, 
-                RaceConstants.BaseRaces.Goblin, 
+                RaceConstants.BaseRaces.Gnoll,
+                RaceConstants.BaseRaces.ForestGnome,
+                RaceConstants.BaseRaces.RockGnome,
+                RaceConstants.BaseRaces.Svirfneblin,
+                RaceConstants.BaseRaces.Goblin,
                 RaceConstants.Metaraces.HalfCelestial,
-                RaceConstants.Metaraces.HalfDragon, 
+                RaceConstants.Metaraces.HalfDragon,
                 RaceConstants.BaseRaces.HalfElf,
                 RaceConstants.Metaraces.HalfFiend,
-                RaceConstants.BaseRaces.HalfOrc, 
+                RaceConstants.BaseRaces.HalfOrc,
                 RaceConstants.BaseRaces.DeepHalfling,
                 RaceConstants.BaseRaces.LightfootHalfling,
                 RaceConstants.BaseRaces.TallfellowHalfling,
@@ -54,14 +54,17 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Stats
                 RaceConstants.BaseRaces.Ogre,
                 RaceConstants.BaseRaces.OgreMage,
                 RaceConstants.BaseRaces.Orc,
-                RaceConstants.BaseRaces.Tiefling, 
+                RaceConstants.BaseRaces.Tiefling,
                 RaceConstants.BaseRaces.Troglodyte,
-                RaceConstants.Metaraces.Werebear, 
-                RaceConstants.Metaraces.Wereboar, 
-                RaceConstants.Metaraces.Wererat, 
+                RaceConstants.Metaraces.Werebear,
+                RaceConstants.Metaraces.Wereboar,
+                RaceConstants.Metaraces.Wererat,
                 RaceConstants.Metaraces.Weretiger,
-                RaceConstants.Metaraces.Werewolf, 
-                RaceConstants.Metaraces.None
+                RaceConstants.Metaraces.Werewolf,
+                RaceConstants.Metaraces.None,
+                RaceConstants.Metaraces.Ghost,
+                RaceConstants.Metaraces.Lich,
+                RaceConstants.Metaraces.Vampire
             };
 
             AssertCollectionNames(names);
@@ -110,6 +113,9 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Stats
         [TestCase(RaceConstants.Metaraces.Weretiger, 0)]
         [TestCase(RaceConstants.Metaraces.Werewolf, -2)]
         [TestCase(RaceConstants.Metaraces.None, 0)]
+        [TestCase(RaceConstants.Metaraces.Ghost, 4)]
+        [TestCase(RaceConstants.Metaraces.Lich, 2)]
+        [TestCase(RaceConstants.Metaraces.Vampire, 4)]
         public override void Adjustment(String name, Int32 adjustment)
         {
             base.Adjustment(name, adjustment);

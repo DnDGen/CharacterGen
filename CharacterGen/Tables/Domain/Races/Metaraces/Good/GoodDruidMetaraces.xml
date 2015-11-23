@@ -4,6 +4,11 @@
     <object>
         <lower>1</lower>
         <content></content>
+        <upper>98</upper>
+    </object>
+    <object>
+        <lower>99</lower>
+        <content>Ghost</content>
         <upper>99</upper>
     </object>
   <object>

@@ -1,8 +1,8 @@
-﻿using System;
-using Ninject;
-using CharacterGen.Generators.Randomizers.Races;
+﻿using CharacterGen.Generators.Randomizers.Races;
 using CharacterGen.Selectors;
+using Ninject;
 using NUnit.Framework;
+using System;
 
 namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
 {
@@ -25,7 +25,7 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
             var alignment = GetNewAlignment();
             var characterClass = GetNewCharacterClass(alignment);
 
-            var metaraces = BaseRaceRandomizer.GetAllPossible(alignment, characterClass);
+            var metaraces = MetaraceRandomizer.GetAllPossible(alignment, characterClass);
             SetMetaraceRandomizer.SetMetarace = CollectionsSelector.SelectRandomFrom(metaraces);
 
             var metarace = SetMetaraceRandomizer.Randomize(alignment, characterClass);

@@ -141,6 +141,7 @@
     <Compile Include="Randomizers\Races\Metaraces\NonGoodMetaraceRandomizer.cs" />
     <Compile Include="Randomizers\Races\Metaraces\NonNeutralMetaraceRandomizer.cs" />
     <Compile Include="Randomizers\Races\Metaraces\SetMetaraceRandomizer.cs" />
+    <Compile Include="Randomizers\Races\Metaraces\UndeadMetaraceRandomizer.cs" />
     <Compile Include="Randomizers\Stats\AverageStatsRandomizer.cs" />
     <Compile Include="Randomizers\Stats\BaseStatsRandomizer.cs" />
     <Compile Include="Randomizers\Stats\BestOfFourStatsRandomizer.cs" />

@@ -27,7 +27,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Stats
                 CharacterClassConstants.Paladin + GroupConstants.Spellcasters,
                 CharacterClassConstants.Ranger + GroupConstants.Spellcasters,
                 CharacterClassConstants.Sorcerer + GroupConstants.Spellcasters,
-                CharacterClassConstants.Wizard + GroupConstants.Spellcasters
+                CharacterClassConstants.Wizard + GroupConstants.Spellcasters,
+                GroupConstants.All
             };
 
             AssertCollectionNames(names);
@@ -40,6 +41,13 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Stats
         [TestCase(CharacterClassConstants.Ranger + GroupConstants.Spellcasters, StatConstants.Wisdom)]
         [TestCase(CharacterClassConstants.Sorcerer + GroupConstants.Spellcasters, StatConstants.Charisma)]
         [TestCase(CharacterClassConstants.Wizard + GroupConstants.Spellcasters, StatConstants.Intelligence)]
+        [TestCase(GroupConstants.All,
+            StatConstants.Charisma,
+            StatConstants.Constitution,
+            StatConstants.Dexterity,
+            StatConstants.Intelligence,
+            StatConstants.Strength,
+            StatConstants.Wisdom)]
         public override void DistinctCollection(String name, params String[] collection)
         {
             base.Collection(name, collection);

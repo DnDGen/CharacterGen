@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+    <object>
+        <name>Armor Bonus</name>
+        <item>Armor Bonus</item>
+        <item></item>
+        <item>0</item>
+        <item>5</item>
+        <item></item>
+        <item>0</item>
+        <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+    </object>
+    <object>
+      <name>Fear Aura</name>
+      <item>Fear Aura</item>
+      <item></item>
+      <item>0</item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+  </object>
+  <object>
+    <name>Paralyzing Touch</name>
+    <item>Paralyzing Touch</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Turn Resistance</name>
+    <item>Turn Resistance</item>
+    <item></item>
+    <item>0</item>
+    <item>4</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+    <object>
+        <name>Immune to EffectCold</name>
+        <item>Immune to Effect</item>
+        <item></item>
+        <item>0</item>
+        <item>0</item>
+        <item>Cold</item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+    </object>
+  <object>
+    <name>Immune to EffectElectricity</name>
+    <item>Immune to Effect</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Electricity</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Immune to EffectPolymorph</name>
+    <item>Immune to Effect</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Polymorph</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Immune to EffectMind</name>
+    <item>Immune to Effect</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Mind-affecting attacks</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Skill BonusHide</name>
+    <item>Skill Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>8</item>
+    <item>Hide</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Skill BonusMove Silently</name>
+    <item>Skill Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>8</item>
+    <item>Move Silently</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Skill BonusSearch</name>
+    <item>Skill Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>8</item>
+    <item>Search</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Skill BonusSense Motive</name>
+    <item>Skill Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>8</item>
+    <item>Sense Motive</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Damage Reduction</name>
+    <item>Damage Reduction</item>
+    <item></item>
+    <item>0</item>
+    <item>15</item>
+    <item>Bludgeoning and Magic</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Skill BonusSpot</name>
+    <item>Skill Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>8</item>
+    <item>Spot</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Skill BonusListen</name>
+    <item>Skill Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>8</item>
+    <item>Listen</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+</items>

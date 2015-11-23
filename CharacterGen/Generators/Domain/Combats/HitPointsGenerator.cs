@@ -26,8 +26,7 @@ namespace CharacterGen.Generators.Domain.Combats
 
         public Int32 GenerateWith(CharacterClass characterClass, Int32 constitutionBonus, Race race, IEnumerable<Feat> feats)
         {
-            var hitDice = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.ClassHitDice);
-            var hitPoints = RollHitPoints(characterClass.Level, hitDice[characterClass.ClassName], constitutionBonus);
+            var hitPoints = GetClassHitPoints(characterClass, constitutionBonus, race);
 
             var toughness = feats.Where(f => f.Name == FeatConstants.Toughness);
             hitPoints += toughness.Sum(f => f.Strength);
@@ -40,12 +39,26 @@ namespace CharacterGen.Generators.Domain.Combats
             return hitPoints + monsterHitPoints;
         }
 
+        private Int32 GetClassHitPoints(CharacterClass characterClass, Int32 constitutionBonus, Race race)
+        {
+            var undead = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Undead);
+            if (undead.Contains(race.Metarace))
+                return RollHitPoints(characterClass.Level, 12, constitutionBonus);
+
+            var hitDice = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.ClassHitDice);
+            return RollHitPoints(characterClass.Level, hitDice[characterClass.ClassName], constitutionBonus);
+        }
+
         private Int32 GetAdditionalMonsterHitDice(Race race, Int32 constitutionBonus)
         {
             var hitDice = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice);
 
             if (race.Metarace == RaceConstants.Metaraces.HalfDragon)
                 return RollHitPoints(hitDice[race.BaseRace], 10, constitutionBonus);
+
+            var undead = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Undead);
+            if (undead.Contains(race.Metarace))
+                return RollHitPoints(hitDice[race.BaseRace], 12, constitutionBonus);
 
             return RollHitPoints(hitDice[race.BaseRace], 8, constitutionBonus);
         }

@@ -3,7 +3,6 @@ using CharacterGen.Generators.Randomizers.Stats;
 using Ninject;
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace CharacterGen.Tests.Integration.Stress.Randomizers.Stats
@@ -13,14 +12,6 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Stats
     {
         [Inject, Named(StatsRandomizerTypeConstants.Raw)]
         public IStatsRandomizer RawStatsRandomizer { get; set; }
-
-        private IEnumerable<String> statNames;
-
-        [SetUp]
-        public void Setup()
-        {
-            statNames = StatConstants.GetStats();
-        }
 
         [TestCase("RawStatsRandomizer")]
         public override void Stress(String stressSubject)
@@ -32,11 +23,19 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Stats
         {
             var stats = RawStatsRandomizer.Randomize();
 
-            foreach (var name in statNames)
-            {
-                Assert.That(stats.Keys, Contains.Item(name));
-                Assert.That(stats[name].Value, Is.InRange<Int32>(3, 18));
-            }
+            Assert.That(stats.Count, Is.EqualTo(6));
+            Assert.That(stats.Keys, Contains.Item(StatConstants.Charisma));
+            Assert.That(stats.Keys, Contains.Item(StatConstants.Constitution));
+            Assert.That(stats.Keys, Contains.Item(StatConstants.Dexterity));
+            Assert.That(stats.Keys, Contains.Item(StatConstants.Intelligence));
+            Assert.That(stats.Keys, Contains.Item(StatConstants.Strength));
+            Assert.That(stats.Keys, Contains.Item(StatConstants.Wisdom));
+            Assert.That(stats[StatConstants.Charisma].Value, Is.InRange(3, 18));
+            Assert.That(stats[StatConstants.Constitution].Value, Is.InRange(3, 18));
+            Assert.That(stats[StatConstants.Dexterity].Value, Is.InRange(3, 18));
+            Assert.That(stats[StatConstants.Intelligence].Value, Is.InRange(3, 18));
+            Assert.That(stats[StatConstants.Strength].Value, Is.InRange(3, 18));
+            Assert.That(stats[StatConstants.Wisdom].Value, Is.InRange(3, 18));
 
             Assert.That(stats.Count, Is.EqualTo(6));
         }

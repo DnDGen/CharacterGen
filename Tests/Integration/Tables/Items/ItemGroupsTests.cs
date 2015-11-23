@@ -2,6 +2,7 @@
 using CharacterGen.Tables;
 using NUnit.Framework;
 using System;
+using System.Linq;
 using TreasureGen.Common.Items;
 
 namespace CharacterGen.Tests.Integration.Tables.Items
@@ -165,7 +166,10 @@ namespace CharacterGen.Tests.Integration.Tables.Items
                 WeaponConstants.TwoBladedSword,
                 WeaponConstants.Warhammer,
                 WeaponConstants.Whip,
-                FeatConstants.Foci.UnarmedStrike
+                FeatConstants.Foci.UnarmedStrike,
+                AttributeConstants.Ammunition,
+                AttributeConstants.Melee,
+                AttributeConstants.TwoHanded
             };
 
             AssertCollectionNames(names);
@@ -338,9 +342,24 @@ namespace CharacterGen.Tests.Integration.Tables.Items
         [TestCase(WeaponConstants.Warhammer, WeaponConstants.Warhammer)]
         [TestCase(WeaponConstants.Whip, WeaponConstants.Whip)]
         [TestCase(FeatConstants.Foci.UnarmedStrike)]
+        [TestCase(AttributeConstants.Ammunition,
+            WeaponConstants.Arrow,
+            WeaponConstants.CrossbowBolt,
+            WeaponConstants.SlingBullet)]
         public override void DistinctCollection(String name, params String[] collection)
         {
             base.DistinctCollection(name, collection);
+        }
+
+        [Test]
+        public void NoAmmunitionIsAlsoMelee()
+        {
+            var itemGroups = CollectionsMapper.Map(tableName);
+            var meleeWeapons = itemGroups[AttributeConstants.Melee];
+            var ammunitions = itemGroups[AttributeConstants.Ammunition];
+            var meleeAmmunitions = meleeWeapons.Intersect(ammunitions);
+
+            Assert.That(meleeAmmunitions, Is.Empty);
         }
 
         [Test]
@@ -417,6 +436,106 @@ namespace CharacterGen.Tests.Integration.Tables.Items
             };
 
             base.DistinctCollection(FeatConstants.Foci.Weapons, items);
+        }
+
+        [Test]
+        public void MeleeWeapons()
+        {
+            var items = new[]
+            {
+                WeaponConstants.BastardSword,
+                WeaponConstants.Battleaxe,
+                WeaponConstants.Club,
+                WeaponConstants.Dagger,
+                WeaponConstants.DireFlail,
+                WeaponConstants.DwarvenUrgrosh,
+                WeaponConstants.DwarvenWaraxe,
+                WeaponConstants.Falchion,
+                WeaponConstants.Gauntlet,
+                WeaponConstants.Glaive,
+                WeaponConstants.GnomeHookedHammer,
+                WeaponConstants.Greataxe,
+                WeaponConstants.Greatclub,
+                WeaponConstants.Greatsword,
+                WeaponConstants.Guisarme,
+                WeaponConstants.Halberd,
+                WeaponConstants.Halfspear,
+                WeaponConstants.Handaxe,
+                WeaponConstants.HeavyFlail,
+                WeaponConstants.HeavyMace,
+                WeaponConstants.HeavyPick,
+                WeaponConstants.Kama,
+                WeaponConstants.Kukri,
+                WeaponConstants.Lance,
+                WeaponConstants.LightFlail,
+                WeaponConstants.LightHammer,
+                WeaponConstants.LightMace,
+                WeaponConstants.LightPick,
+                WeaponConstants.Longspear,
+                WeaponConstants.Longsword,
+                WeaponConstants.Morningstar,
+                WeaponConstants.Nunchaku,
+                WeaponConstants.OrcDoubleAxe,
+                WeaponConstants.PunchingDagger,
+                WeaponConstants.Quarterstaff,
+                WeaponConstants.Ranseur,
+                WeaponConstants.Rapier,
+                WeaponConstants.Sap,
+                WeaponConstants.Scimitar,
+                WeaponConstants.Scythe,
+                WeaponConstants.Shortspear,
+                WeaponConstants.ShortSword,
+                WeaponConstants.Siangham,
+                WeaponConstants.Sickle,
+                WeaponConstants.SpikedChain,
+                WeaponConstants.SpikedGauntlet,
+                WeaponConstants.Trident,
+                WeaponConstants.TwoBladedSword,
+                WeaponConstants.Warhammer,
+                WeaponConstants.Whip
+            };
+
+            base.DistinctCollection(AttributeConstants.Melee, items);
+        }
+
+        [Test]
+        public void TwoHandedWeapons()
+        {
+            var items = new[]
+            {
+                WeaponConstants.BastardSword,
+                WeaponConstants.DireFlail,
+                WeaponConstants.DwarvenUrgrosh,
+                WeaponConstants.Falchion,
+                WeaponConstants.Glaive,
+                WeaponConstants.GnomeHookedHammer,
+                WeaponConstants.Greataxe,
+                WeaponConstants.Greatclub,
+                WeaponConstants.Greatsword,
+                WeaponConstants.Guisarme,
+                WeaponConstants.Halberd,
+                WeaponConstants.Halfspear,
+                WeaponConstants.HandCrossbow,
+                WeaponConstants.HeavyCrossbow,
+                WeaponConstants.HeavyFlail,
+                WeaponConstants.Lance,
+                WeaponConstants.LightCrossbow,
+                WeaponConstants.Longbow,
+                WeaponConstants.Longspear,
+                WeaponConstants.Net,
+                WeaponConstants.OrcDoubleAxe,
+                WeaponConstants.Quarterstaff,
+                WeaponConstants.Ranseur,
+                WeaponConstants.HeavyRepeatingCrossbow,
+                WeaponConstants.LightRepeatingCrossbow,
+                WeaponConstants.Scythe,
+                WeaponConstants.Shortbow,
+                WeaponConstants.Sling,
+                WeaponConstants.SpikedChain,
+                WeaponConstants.TwoBladedSword
+            };
+
+            base.DistinctCollection(AttributeConstants.TwoHanded, items);
         }
     }
 }

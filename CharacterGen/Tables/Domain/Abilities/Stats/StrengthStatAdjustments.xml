@@ -35,6 +35,10 @@
         <name>Forest Gnome</name>
         <item>-2</item>
     </object>
+  <object>
+    <name>Ghost</name>
+    <item>0</item>
+  </object>
     <object>
         <name>Gnoll</name>
         <item>4</item>
@@ -87,6 +91,10 @@
         <name>Kobold</name>
         <item>-4</item>
     </object>
+  <object>
+    <name>Lich</name>
+    <item>0</item>
+  </object>
     <object>
         <name>Lightfoot Halfling</name>
         <item>-2</item>
@@ -139,6 +147,10 @@
         <name>Troglodyte</name>
         <item>0</item>
     </object>
+  <object>
+    <name>Vampire</name>
+    <item>6</item>
+  </object>
     <object>
         <name>Werebear</name>
         <item>2</item>

@@ -46,6 +46,7 @@ namespace CharacterGen.Common.Magics
         public const String PassWithoutTrace = "Pass without trace";
         public const String PlaneShift = "Plane shift";
         public const String Poison = "Poison";
+        public const String Polymorph = "Polymorph";
         public const String Prestidigitation = "Prestidigitation";
         public const String ProtectionFromEvil = "Protection from evil";
         public const String RemoveDisease = "Remove disease";
@@ -53,6 +54,7 @@ namespace CharacterGen.Common.Magics
         public const String Sleep = "Sleep";
         public const String SoundBurst = "Sound burst";
         public const String SpeakWithAnimals = "Speak with animals";
+        public const String SpiderClimb = "Spider climb";
         public const String Suggestion = "Suggestion";
         public const String SummonMonsterI = "Summon monster I";
         public const String SummonMonsterII = "Summon monster II";
