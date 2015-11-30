@@ -2,7 +2,6 @@
 using CharacterGen.Common.Abilities.Stats;
 using CharacterGen.Common.Alignments;
 using CharacterGen.Common.CharacterClasses;
-using CharacterGen.Common.Items;
 using CharacterGen.Common.Magics;
 using CharacterGen.Common.Races;
 using CharacterGen.Generators.Magics;
@@ -22,7 +21,7 @@ namespace CharacterGen.Generators.Domain.Magics
             this.animalGenerator = animalGenerator;
         }
 
-        public Magic GenerateWith(Alignment alignment, CharacterClass characterClass, Race race, Dictionary<String, Stat> stats, IEnumerable<Feat> feats, Equipment equipment)
+        public Magic GenerateWith(Alignment alignment, CharacterClass characterClass, Race race, Dictionary<String, Stat> stats, IEnumerable<Feat> feats)
         {
             var magic = new Magic();
             magic.SpellsPerDay = spellsGenerator.GenerateFrom(characterClass, stats);

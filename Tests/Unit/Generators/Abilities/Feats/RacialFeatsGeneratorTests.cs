@@ -45,13 +45,13 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             skills = new Dictionary<String, Skill>();
             stats = new Dictionary<String, Stat>();
 
-            race.BaseRace = "baseRaceId";
-            race.Metarace = "metaraceId";
+            race.BaseRace = "base race";
+            race.Metarace = "metarace";
             race.MetaraceSpecies = "metarace species";
             stats["stat"] = new Stat { Value = 14 };
 
-            mockFeatsSelector.Setup(s => s.SelectRacial("baseRaceId")).Returns(baseRaceFeats);
-            mockFeatsSelector.Setup(s => s.SelectRacial("metaraceId")).Returns(metaraceFeats);
+            mockFeatsSelector.Setup(s => s.SelectRacial("base race")).Returns(baseRaceFeats);
+            mockFeatsSelector.Setup(s => s.SelectRacial("metarace")).Returns(metaraceFeats);
             mockFeatsSelector.Setup(s => s.SelectRacial("metarace species")).Returns(speciesFeats);
         }
 
@@ -213,7 +213,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             var monsterHitDice = new Dictionary<String, Int32>();
             monsterHitDice[race.BaseRace] = 2;
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice)).Returns(monsterHitDice);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters)).Returns(new[] { "baseRaceId" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters)).Returns(new[] { race.BaseRace });
 
             var feats = racialFeatsGenerator.GenerateWith(race, skills, stats);
             Assert.That(feats.Count(), Is.EqualTo(3));
@@ -263,9 +263,9 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             var metaFeat = feats.First(f => f.Name == metaraceFeatSelection.Feat);
             var speciesFeat = feats.First(f => f.Name == speciesFeatSelection.Feat);
 
-            Assert.That(baseFeat.Focus, Is.EqualTo("base focus"));
-            Assert.That(metaFeat.Focus, Is.EqualTo("meta focus"));
-            Assert.That(speciesFeat.Focus, Is.EqualTo("species focus"));
+            Assert.That(baseFeat.Foci.Single(), Is.EqualTo("base focus"));
+            Assert.That(metaFeat.Foci.Single(), Is.EqualTo("meta focus"));
+            Assert.That(speciesFeat.Foci.Single(), Is.EqualTo("species focus"));
         }
     }
 }

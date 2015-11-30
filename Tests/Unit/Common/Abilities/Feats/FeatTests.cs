@@ -18,7 +18,7 @@ namespace CharacterGen.Tests.Unit.Common.Abilities.Feats
         public void FeatInitialized()
         {
             Assert.That(feat.Name, Is.Not.Null);
-            Assert.That(feat.Focus, Is.Empty);
+            Assert.That(feat.Foci, Is.Empty);
             Assert.That(feat.Strength, Is.EqualTo(0));
             Assert.That(feat.Frequency, Is.Not.Null);
         }

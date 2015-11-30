@@ -47,7 +47,7 @@ namespace CharacterGen.Selectors.Objects
                 if (requirementFeats.Any() == false)
                     return false;
 
-                if (requirement.Focus != String.Empty && requirementFeats.Any(f => f.Focus == requirement.Focus) == false)
+                if (requirement.Focus != String.Empty && requirementFeats.Any(f => f.Foci.Contains(requirement.Focus)) == false)
                     return false;
             }
 

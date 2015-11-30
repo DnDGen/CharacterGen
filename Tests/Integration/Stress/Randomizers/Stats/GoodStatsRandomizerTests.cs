@@ -39,7 +39,7 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Stats
 
             Assert.That(stats.Count, Is.EqualTo(6));
             var average = stats.Values.Average(s => s.Value);
-            Assert.That(average, Is.InRange<Double>(13, 15));
+            Assert.That(average, Is.InRange(13, 15));
         }
 
         [Test]

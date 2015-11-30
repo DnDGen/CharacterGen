@@ -36,7 +36,7 @@ namespace CharacterGen.Tests.Integration.Stress.Abilities.Feats
             foreach (var feat in feats)
             {
                 Assert.That(feat.Name, Is.Not.Empty);
-                Assert.That(feat.Focus, Is.Not.Null, feat.Name);
+                Assert.That(feat.Foci, Is.Not.Null, feat.Name);
                 Assert.That(feat.Strength, Is.Not.Negative, feat.Name);
                 Assert.That(feat.Frequency.Quantity, Is.Not.Negative, feat.Name);
                 Assert.That(feat.Frequency.TimePeriod, Is.EqualTo(FeatConstants.Frequencies.Constant)

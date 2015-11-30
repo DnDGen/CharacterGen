@@ -44,7 +44,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
         {
             var stats = randomizer.Randomize();
             var average = stats.Values.Average(s => s.Value);
-            Assert.That(average, Is.InRange<Double>(min, max));
+            Assert.That(average, Is.InRange(min, max));
         }
 
         [Test]

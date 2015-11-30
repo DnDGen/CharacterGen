@@ -222,10 +222,10 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
                 feats.Add(feat);
             }
 
-            feats[0].Focus = FeatConstants.Foci.All;
-            feats[1].Focus = SavingThrowConstants.Fortitude;
-            feats[2].Focus = SavingThrowConstants.Reflex;
-            feats[3].Focus = SavingThrowConstants.Will;
+            feats[0].Foci = new[] { FeatConstants.Foci.All };
+            feats[1].Foci = new[] { SavingThrowConstants.Fortitude };
+            feats[2].Foci = new[] { SavingThrowConstants.Reflex };
+            feats[3].Foci = new[] { SavingThrowConstants.Will };
 
             allSaveFeats.Add(feats[0].Name);
             allSaveFeats.Add(feats[1].Name);
@@ -241,10 +241,10 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         {
             SetUpFeats();
 
-            feats[0].Focus += " against thing";
-            feats[1].Focus += " against thing";
-            feats[2].Focus += " against thing";
-            feats[3].Focus += " against thing";
+            feats[0].Foci = new[] { FeatConstants.Foci.All + " against thing" };
+            feats[1].Foci = new[] { SavingThrowConstants.Fortitude + " against thing" };
+            feats[2].Foci = new[] { SavingThrowConstants.Reflex + " against thing" };
+            feats[3].Foci = new[] { SavingThrowConstants.Will + " against thing" };
 
             var savingThrows = savingThrowsGenerator.GenerateWith(characterClass, feats, stats);
             Assert.That(savingThrows.Fortitude, Is.EqualTo(205));

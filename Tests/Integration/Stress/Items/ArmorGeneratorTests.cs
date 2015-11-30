@@ -1,6 +1,7 @@
 ﻿using CharacterGen.Generators.Abilities;
 using CharacterGen.Generators.Combats;
 using CharacterGen.Generators.Items;
+using CharacterGen.Generators.Randomizers.CharacterClasses;
 using CharacterGen.Generators.Randomizers.Stats;
 using Ninject;
 using NUnit.Framework;
@@ -20,6 +21,8 @@ namespace CharacterGen.Tests.Integration.Stress.Items
         public IStatsRandomizer StatsRandomizer { get; set; }
         [Inject, Named(CombatGeneratorTypeConstants.Character)]
         public ICombatGenerator CombatGenerator { get; set; }
+        [Inject, Named(ClassNameRandomizerTypeConstants.Warrior)]
+        public override IClassNameRandomizer ClassNameRandomizer { get; set; }
 
         [TestCase("Armor Generator")]
         public override void Stress(String stressSubject)
@@ -29,22 +32,17 @@ namespace CharacterGen.Tests.Integration.Stress.Items
 
         protected override void MakeAssertions()
         {
-            var armor = Generate(GetArmor, a => a != null);
-            Assert.That(armor, Is.Not.Null);
-            Assert.That(armor.ItemType, Is.EqualTo(ItemTypeConstants.Armor));
-            Assert.That(armor.Name, Is.Not.Empty);
-            Assert.That(armor.Attributes, Is.All.Not.EqualTo(AttributeConstants.Shield));
-        }
-
-        private Item GetArmor()
-        {
             var alignment = GetNewAlignment();
             var characterClass = GetNewCharacterClass(alignment);
             var race = RaceGenerator.GenerateWith(alignment, characterClass, BaseRaceRandomizer, MetaraceRandomizer);
             var baseAttack = CombatGenerator.GenerateBaseAttackWith(characterClass, race);
             var ability = AbilitiesGenerator.GenerateWith(characterClass, race, StatsRandomizer, baseAttack);
 
-            return ArmorGenerator.GenerateArmorFrom(ability.Feats, characterClass, race);
+            var armor = ArmorGenerator.GenerateArmorFrom(ability.Feats, characterClass, race);
+            Assert.That(armor, Is.Not.Null);
+            Assert.That(armor.ItemType, Is.EqualTo(ItemTypeConstants.Armor));
+            Assert.That(armor.Name, Is.Not.Empty);
+            Assert.That(armor.Attributes, Is.All.Not.EqualTo(AttributeConstants.Shield));
         }
 
         [Test]
@@ -55,22 +53,17 @@ namespace CharacterGen.Tests.Integration.Stress.Items
 
         private void MakeShieldAssertions()
         {
-            var shield = Generate(GetShield, s => s != null);
-            Assert.That(shield, Is.Not.Null);
-            Assert.That(shield.ItemType, Is.EqualTo(ItemTypeConstants.Armor));
-            Assert.That(shield.Name, Is.Not.Empty);
-            Assert.That(shield.Attributes, Contains.Item(AttributeConstants.Shield));
-        }
-
-        private Item GetShield()
-        {
             var alignment = GetNewAlignment();
             var characterClass = GetNewCharacterClass(alignment);
             var race = RaceGenerator.GenerateWith(alignment, characterClass, BaseRaceRandomizer, MetaraceRandomizer);
             var baseAttack = CombatGenerator.GenerateBaseAttackWith(characterClass, race);
             var ability = AbilitiesGenerator.GenerateWith(characterClass, race, StatsRandomizer, baseAttack);
 
-            return ArmorGenerator.GenerateShieldFrom(ability.Feats, characterClass, race);
+            var shield = ArmorGenerator.GenerateShieldFrom(ability.Feats, characterClass, race);
+            Assert.That(shield, Is.Not.Null);
+            Assert.That(shield.ItemType, Is.EqualTo(ItemTypeConstants.Armor));
+            Assert.That(shield.Name, Is.Not.Empty);
+            Assert.That(shield.Attributes, Contains.Item(AttributeConstants.Shield));
         }
     }
 }

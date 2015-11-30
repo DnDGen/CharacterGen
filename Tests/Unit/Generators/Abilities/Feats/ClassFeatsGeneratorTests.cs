@@ -130,21 +130,21 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             AddClassFeat(characterClass.ClassName, "feat 5", maximumLevel: 2);
 
             var feats = classFeatsGenerator.GenerateWith(characterClass, race, stats, racialFeats, skills);
-            var featIds = feats.Select(f => f.Name);
+            var featNames = feats.Select(f => f.Name);
 
-            Assert.That(featIds, Contains.Item("feat 1"));
-            Assert.That(featIds, Contains.Item("feat 2"));
-            Assert.That(featIds, Contains.Item("feat 5"));
-            Assert.That(featIds.Count(), Is.EqualTo(3));
+            Assert.That(featNames, Contains.Item("feat 1"));
+            Assert.That(featNames, Contains.Item("feat 2"));
+            Assert.That(featNames, Contains.Item("feat 5"));
+            Assert.That(featNames.Count(), Is.EqualTo(3));
         }
 
-        private void AddClassFeat(String className, String feat, String focusType = "", Int32 minimumLevel = 1, Int32 maximumLevel = 0, Int32 frequencyQuantity = 0, String frequencyPeriod = "", Int32 strength = 0, params String[] requiredFeatIds)
+        private void AddClassFeat(String className, String feat, String focusType = "", Int32 minimumLevel = 1, Int32 maximumLevel = 0, Int32 frequencyQuantity = 0, String frequencyPeriod = "", Int32 strength = 0, params String[] requiredFeatNames)
         {
             var selection = new CharacterClassFeatSelection();
             selection.Feat = feat;
             selection.FocusType = focusType;
             selection.MinimumLevel = minimumLevel;
-            selection.RequiredFeats = requiredFeatIds.Select(f => new RequiredFeat { Feat = f });
+            selection.RequiredFeats = requiredFeatNames.Select(f => new RequiredFeat { Feat = f });
             selection.Frequency.Quantity = frequencyQuantity;
             selection.Frequency.TimePeriod = frequencyPeriod;
             selection.MaximumLevel = maximumLevel;
@@ -189,7 +189,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             var onlyFeat = feats.Single();
 
             Assert.That(onlyFeat.Name, Is.EqualTo(classFeatSelections[characterClass.ClassName][0].Feat));
-            Assert.That(onlyFeat.Focus, Is.EqualTo("focus"));
+            Assert.That(onlyFeat.Foci.Single(), Is.EqualTo("focus"));
         }
 
         [Test]
@@ -208,9 +208,9 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             var last = feats.Last();
 
             Assert.That(first.Name, Is.EqualTo(classFeatSelections[characterClass.ClassName][0].Feat));
-            Assert.That(first.Focus, Is.EqualTo("focus"));
+            Assert.That(first.Foci.Single(), Is.EqualTo("focus"));
             Assert.That(last.Name, Is.EqualTo(classFeatSelections[characterClass.ClassName][1].Feat));
-            Assert.That(last.Focus, Is.Empty);
+            Assert.That(last.Foci, Is.Empty);
             mockFeatFocusGenerator.Verify(g => g.GenerateAllowingFocusOfAllFrom(It.IsAny<String>(), It.IsAny<String>(), skills, It.IsAny<IEnumerable<RequiredFeat>>(), It.IsAny<IEnumerable<Feat>>(), It.IsAny<CharacterClass>()), Times.Exactly(2));
             mockFeatFocusGenerator.Verify(g => g.GenerateAllowingFocusOfAllFrom("feat1", "focus type", skills, classFeatSelections[characterClass.ClassName][0].RequiredFeats, It.IsAny<IEnumerable<Feat>>(), characterClass), Times.Once);
             mockFeatFocusGenerator.Verify(g => g.GenerateAllowingFocusOfAllFrom("feat2", String.Empty, skills, classFeatSelections[characterClass.ClassName][1].RequiredFeats, It.IsAny<IEnumerable<Feat>>(), characterClass), Times.Once);
@@ -227,21 +227,20 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
                 .Returns("focus 1").Returns("focus 2");
 
             var feats = classFeatsGenerator.GenerateWith(characterClass, race, stats, racialFeats, skills);
-            var firstFeat = feats.First();
-            var lastFeat = feats.Last();
+            var first = feats.First();
+            var last = feats.Last();
 
-            Assert.That(firstFeat.Name, Is.EqualTo("feat1"));
-            Assert.That(firstFeat.Focus, Is.EqualTo("focus 1"));
-            Assert.That(lastFeat.Name, Is.EqualTo("feat1"));
-            Assert.That(lastFeat.Focus, Is.EqualTo("focus 2"));
-            Assert.That(feats.Count(), Is.EqualTo(2));
+            Assert.That(first.Name, Is.EqualTo("feat1"));
+            Assert.That(first.Foci.Single(), Is.EqualTo("focus 1"));
+            Assert.That(last.Name, Is.EqualTo("feat1"));
+            Assert.That(last.Foci.Single(), Is.EqualTo("focus 2"));
         }
 
         [Test]
         public void HonorFociInClassRequirements()
         {
             AddClassFeat(characterClass.ClassName, "feat1", focusType: "focus type");
-            AddClassFeat(characterClass.ClassName, "feat2", focusType: "focus type", requiredFeatIds: "feat1");
+            AddClassFeat(characterClass.ClassName, "feat2", focusType: "focus type", requiredFeatNames: "feat1");
 
             mockFeatFocusGenerator.Setup(g => g.GenerateAllowingFocusOfAllFrom("feat1", "focus type", skills, classFeatSelections[characterClass.ClassName][0].RequiredFeats, It.IsAny<IEnumerable<Feat>>(), characterClass))
                 .Returns("focus 1");
@@ -253,9 +252,9 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             var lastFeat = feats.Last();
 
             Assert.That(firstFeat.Name, Is.EqualTo("feat1"));
-            Assert.That(firstFeat.Focus, Is.EqualTo("focus 1"));
+            Assert.That(firstFeat.Foci.Single(), Is.EqualTo("focus 1"));
             Assert.That(lastFeat.Name, Is.EqualTo("feat2"));
-            Assert.That(lastFeat.Focus, Is.EqualTo("focus 1"));
+            Assert.That(lastFeat.Foci.Single(), Is.EqualTo("focus 1"));
             Assert.That(feats.Count(), Is.EqualTo(2));
         }
 
@@ -330,11 +329,11 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
                 .Returns("focus 1").Returns("focus 2").Returns("focus 3").Returns("focus 4").Returns("focus 5");
 
             var feats = classFeatsGenerator.GenerateWith(characterClass, race, stats, racialFeats, skills);
-            Assert.That(feats.First(f => f.Focus == "focus 1").Strength, Is.EqualTo(4));
-            Assert.That(feats.First(f => f.Focus == "focus 2").Strength, Is.EqualTo(6));
-            Assert.That(feats.First(f => f.Focus == "focus 3").Strength, Is.EqualTo(2));
-            Assert.That(feats.First(f => f.Focus == "focus 4").Strength, Is.EqualTo(2));
-            Assert.That(feats.First(f => f.Focus == "focus 5").Strength, Is.EqualTo(4));
+            Assert.That(feats.First(f => f.Foci.Contains("focus 1")).Strength, Is.EqualTo(4));
+            Assert.That(feats.First(f => f.Foci.Contains("focus 2")).Strength, Is.EqualTo(6));
+            Assert.That(feats.First(f => f.Foci.Contains("focus 3")).Strength, Is.EqualTo(2));
+            Assert.That(feats.First(f => f.Foci.Contains("focus 4")).Strength, Is.EqualTo(2));
+            Assert.That(feats.First(f => f.Foci.Contains("focus 5")).Strength, Is.EqualTo(4));
         }
 
         [Test]
@@ -361,11 +360,11 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
                 .Returns("focus 1").Returns("focus 2").Returns("focus 3").Returns("focus 4").Returns("focus 5");
 
             var feats = classFeatsGenerator.GenerateWith(characterClass, race, stats, racialFeats, skills);
-            Assert.That(feats.First(f => f.Focus == "focus 1").Strength, Is.EqualTo(2));
-            Assert.That(feats.First(f => f.Focus == "focus 2").Strength, Is.EqualTo(2));
-            Assert.That(feats.First(f => f.Focus == "focus 3").Strength, Is.EqualTo(2));
-            Assert.That(feats.First(f => f.Focus == "focus 4").Strength, Is.EqualTo(2));
-            Assert.That(feats.First(f => f.Focus == "focus 5").Strength, Is.EqualTo(2));
+            Assert.That(feats.First(f => f.Foci.Contains("focus 1")).Strength, Is.EqualTo(2));
+            Assert.That(feats.First(f => f.Foci.Contains("focus 2")).Strength, Is.EqualTo(2));
+            Assert.That(feats.First(f => f.Foci.Contains("focus 3")).Strength, Is.EqualTo(2));
+            Assert.That(feats.First(f => f.Foci.Contains("focus 4")).Strength, Is.EqualTo(2));
+            Assert.That(feats.First(f => f.Foci.Contains("focus 5")).Strength, Is.EqualTo(2));
         }
 
         [Test]
@@ -392,16 +391,16 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             var onlyFeat = feats.Single();
 
             Assert.That(onlyFeat.Name, Is.EqualTo(classFeatSelections["specialist"][0].Feat));
-            Assert.That(onlyFeat.Focus, Is.EqualTo("focus"));
+            Assert.That(onlyFeat.Foci.Single(), Is.EqualTo("focus"));
         }
 
         [Test]
         public void HonorFeatRequirementsForClassFeats()
         {
-            AddClassFeat(characterClass.ClassName, "feat with requirements 1", requiredFeatIds: new[] { "feat 1" });
-            AddClassFeat(characterClass.ClassName, "feat with requirements 2", requiredFeatIds: new[] { "feat 2" });
-            AddClassFeat(characterClass.ClassName, "feat with requirements 3", requiredFeatIds: new[] { "feat 3" });
-            AddClassFeat(characterClass.ClassName, "feat with requirements 4", requiredFeatIds: new[] { "feat 4" });
+            AddClassFeat(characterClass.ClassName, "feat with requirements 1", requiredFeatNames: new[] { "feat 1" });
+            AddClassFeat(characterClass.ClassName, "feat with requirements 2", requiredFeatNames: new[] { "feat 2" });
+            AddClassFeat(characterClass.ClassName, "feat with requirements 3", requiredFeatNames: new[] { "feat 3" });
+            AddClassFeat(characterClass.ClassName, "feat with requirements 4", requiredFeatNames: new[] { "feat 4" });
 
             var requiredFeat3 = classFeatSelections[characterClass.ClassName][2].RequiredFeats.Single();
             requiredFeat3.Focus = "focus 3";
@@ -411,8 +410,8 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             classFeatSelections[characterClass.ClassName][3].RequiredFeats = new[] { requiredFeat4 };
 
             racialFeats.Add(new Feat { Name = "feat 2" });
-            racialFeats.Add(new Feat { Name = "feat 3", Focus = "wrong focus" });
-            racialFeats.Add(new Feat { Name = "feat 4", Focus = "focus 4" });
+            racialFeats.Add(new Feat { Name = "feat 3", Foci = new[] { "wrong focus" } });
+            racialFeats.Add(new Feat { Name = "feat 4", Foci = new[] { "focus 4" } });
 
             var feats = classFeatsGenerator.GenerateWith(characterClass, race, stats, racialFeats, skills);
             var featNames = feats.Select(f => f.Name);
@@ -428,8 +427,8 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         {
             AddClassFeat(characterClass.ClassName, "feat with requirements 1", focusType: "focus type");
             AddClassFeat(characterClass.ClassName, "feat with requirements 2", focusType: "focus type");
-            AddClassFeat(characterClass.ClassName, "feat with requirements 3", requiredFeatIds: new[] { "feat with requirements 1" });
-            AddClassFeat(characterClass.ClassName, "feat with requirements 4", requiredFeatIds: new[] { "feat with requirements 2" });
+            AddClassFeat(characterClass.ClassName, "feat with requirements 3", requiredFeatNames: new[] { "feat with requirements 1" });
+            AddClassFeat(characterClass.ClassName, "feat with requirements 4", requiredFeatNames: new[] { "feat with requirements 2" });
 
             var requiredFeat3 = classFeatSelections[characterClass.ClassName][2].RequiredFeats.Single();
             requiredFeat3.Focus = "focus 1";

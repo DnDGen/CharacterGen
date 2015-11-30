@@ -32,7 +32,11 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
 
             var requiredFeatIds = requiredFeats.Select(f => f.Feat);
             var foci = GetFoci(feat, focusType, allSourceFeatFoci, otherFeats, requiredFeatIds);
-            var usedFoci = otherFeats.Where(f => f.Name == feat).Select(f => f.Focus);
+            var usedFeats = otherFeats.Where(f => f.Name == feat);
+            var usedFoci = Enumerable.Empty<String>();
+
+            foreach (var usedFeat in usedFeats)
+                usedFoci = usedFoci.Union(usedFeat.Foci);
 
             if (usedFoci.Contains(FeatConstants.Foci.All))
                 return FeatConstants.Foci.All;
@@ -79,12 +83,17 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
                 requiredFeatWithFoci = requiredFeatWithFoci.Union(proficiencyFeats);
             }
 
-            var requiredFoci = requiredFeatWithFoci.Where(f => f.Focus != FeatConstants.Foci.All).Select(f => f.Focus);
-            var featsWithAllFocus = requiredFeatWithFoci.Where(f => f.Focus == FeatConstants.Foci.All);
+            var requiredFeats = requiredFeatWithFoci.Where(f => f.Foci.Contains(FeatConstants.Foci.All) == false);
+            var requiredFoci = Enumerable.Empty<String>();
+
+            foreach (var requiredFeat in requiredFeats)
+                requiredFoci = requiredFoci.Union(requiredFeat.Foci);
+
+            var featsWithAllFocus = requiredFeatWithFoci.Where(f => f.Foci.Contains(FeatConstants.Foci.All));
 
             foreach (var featWithAllFocus in featsWithAllFocus)
             {
-                var explodedFoci = GetExplodedFoci(allSourceFeatFoci, featWithAllFocus.Name, featWithAllFocus.Focus, otherFeats);
+                var explodedFoci = GetExplodedFoci(allSourceFeatFoci, featWithAllFocus.Name, FeatConstants.Foci.All, otherFeats);
                 requiredFoci = requiredFoci.Union(explodedFoci);
             }
 
@@ -107,8 +116,11 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
             if (feat != FeatConstants.MartialWeaponProficiency && feat != FeatConstants.ExoticWeaponProficiency)
                 return allSourceFeatFoci[feat];
 
-            var weaponFamiliartyFeats = otherFeats.Where(f => f.Name == FeatConstants.WeaponFamiliarity);
-            var familiarityFoci = weaponFamiliartyFeats.Select(f => f.Focus);
+            var weaponFamiliarityFeats = otherFeats.Where(f => f.Name == FeatConstants.WeaponFamiliarity);
+            var familiarityFoci = Enumerable.Empty<String>();
+
+            foreach (var weaponFamiliarityFeat in weaponFamiliarityFeats)
+                familiarityFoci = familiarityFoci.Union(weaponFamiliarityFeat.Foci);
 
             if (feat == FeatConstants.MartialWeaponProficiency)
                 return allSourceFeatFoci[feat].Union(familiarityFoci);
@@ -116,9 +128,9 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
             return allSourceFeatFoci[feat].Except(familiarityFoci);
         }
 
-        private Boolean RequirementHasFocus(IEnumerable<String> requiredFeatIds, Feat feat)
+        private Boolean RequirementHasFocus(IEnumerable<String> requiredFeatNames, Feat feat)
         {
-            return requiredFeatIds.Contains(feat.Name) && String.IsNullOrEmpty(feat.Focus) == false;
+            return requiredFeatNames.Contains(feat.Name) && feat.Foci.Any();
         }
 
         public String GenerateFrom(String feat, String focusType, Dictionary<String, Skill> skills)

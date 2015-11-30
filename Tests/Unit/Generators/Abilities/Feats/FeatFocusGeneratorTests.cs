@@ -76,12 +76,25 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         {
             otherFeats.Add(new Feat());
             otherFeats[0].Name = "featToFill";
-            otherFeats[0].Focus = "school 1";
+            otherFeats[0].Foci = new[] { "school 1" };
 
             focusTypes["focus type"] = new[] { "school 1", "school 2" };
 
             var focus = featFocusGenerator.GenerateFrom("featToFill", "focus type", skills, requiredFeats, otherFeats, characterClass);
             Assert.That(focus, Is.EqualTo("school 2"));
+        }
+
+        [Test]
+        public void DoNotGetDuplicateFoci()
+        {
+            otherFeats.Add(new Feat());
+            otherFeats[0].Name = "featToFill";
+            otherFeats[0].Foci = new[] { "school 1", "school 2" };
+
+            focusTypes["focus type"] = new[] { "school 1", "school 2", "school 3" };
+
+            var focus = featFocusGenerator.GenerateFrom("featToFill", "focus type", skills, requiredFeats, otherFeats, characterClass);
+            Assert.That(focus, Is.EqualTo("school 3"));
         }
 
         [Test]
@@ -114,7 +127,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             requiredFeats.Add(new RequiredFeat { Feat = "feat1" });
             otherFeats.Add(new Feat());
             otherFeats[0].Name = "feat1";
-            otherFeats[0].Focus = "focus";
+            otherFeats[0].Foci = new[] { "focus" };
 
             focusTypes[""] = new[] { "school 1" };
 
@@ -128,7 +141,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             requiredFeats.Add(new RequiredFeat { Feat = "feat1" });
             otherFeats.Add(new Feat());
             otherFeats[0].Name = "feat1";
-            otherFeats[0].Focus = "focus";
+            otherFeats[0].Foci = new[] { "focus" };
 
             focusTypes["focus type"] = new[] { "other focus", "focus" };
 
@@ -141,12 +154,8 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         {
             requiredFeats.Add(new RequiredFeat { Feat = "feat1" });
             otherFeats.Add(new Feat());
-            otherFeats.Add(new Feat());
-
             otherFeats[0].Name = "feat1";
-            otherFeats[0].Focus = "focus";
-            otherFeats[1].Name = "feat1";
-            otherFeats[1].Focus = "other focus";
+            otherFeats[0].Foci = new[] { "focus", "other focus" };
 
             focusTypes["focus type"] = new[] { "other focus", "focus" };
             mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<String>>())).Returns((IEnumerable<String> c) => c.ElementAt(1));
@@ -173,7 +182,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             requiredFeats.Add(new RequiredFeat { Feat = "feat1" });
             otherFeats.Add(new Feat());
             otherFeats[0].Name = "feat1";
-            otherFeats[0].Focus = FeatConstants.Foci.All;
+            otherFeats[0].Foci = new[] { FeatConstants.Foci.All };
 
             focusTypes["focus type"] = new[] { "school 2", "school 3" };
             focusTypes["feat1"] = new[] { "school 1", "school 2" };
@@ -190,9 +199,9 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             otherFeats.Add(new Feat());
 
             otherFeats[0].Name = FeatConstants.MartialWeaponProficiency;
-            otherFeats[0].Focus = FeatConstants.Foci.All;
+            otherFeats[0].Foci = new[] { FeatConstants.Foci.All };
             otherFeats[1].Name = FeatConstants.WeaponFamiliarity;
-            otherFeats[1].Focus = "weird weapon";
+            otherFeats[1].Foci = new[] { "weird weapon" };
 
             focusTypes["focus type"] = new[] { "school 2", "school 3", "weird weapon" };
             focusTypes[FeatConstants.MartialWeaponProficiency] = new[] { "school 1", "school 2" };
@@ -209,7 +218,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             requiredFeats.Add(new RequiredFeat { Feat = ItemTypeConstants.Weapon + GroupConstants.Proficiency });
             otherFeats.Add(new Feat());
             otherFeats[0].Name = "proficiency2";
-            otherFeats[0].Focus = "school 2";
+            otherFeats[0].Foci = new[] { "school 2" };
 
             focusTypes["focus type"] = new[] { "school 1", "school 2" };
 
@@ -226,7 +235,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             requiredFeats.Add(new RequiredFeat { Feat = ItemTypeConstants.Weapon + GroupConstants.Proficiency });
             otherFeats.Add(new Feat());
             otherFeats[0].Name = "proficiency2";
-            otherFeats[0].Focus = FeatConstants.Foci.All;
+            otherFeats[0].Foci = new[] { FeatConstants.Foci.All };
 
             focusTypes["focus type"] = new[] { "school 1", "school 2" };
             focusTypes["proficiency2"] = new[] { "school 2", "school 3" };
@@ -243,7 +252,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         {
             otherFeats.Add(new Feat());
             otherFeats[0].Name = FeatConstants.WeaponFamiliarity;
-            otherFeats[0].Focus = "weird weapon";
+            otherFeats[0].Foci = new[] { "weird weapon" };
 
             focusTypes[FeatConstants.MartialWeaponProficiency] = new[] { "school 2", "school 3" };
 
@@ -329,7 +338,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         {
             otherFeats.Add(new Feat());
             otherFeats[0].Name = FeatConstants.WeaponFamiliarity;
-            otherFeats[0].Focus = "weird weapon";
+            otherFeats[0].Foci = new[] { "weird weapon" };
 
             focusTypes[FeatConstants.ExoticWeaponProficiency] = new[] { "weird weapon", "school 2" };
 
@@ -342,7 +351,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         {
             otherFeats.Add(new Feat());
             otherFeats[0].Name = "other feat";
-            otherFeats[0].Focus = "weird weapon";
+            otherFeats[0].Foci = new[] { "weird weapon" };
 
             focusTypes[FeatConstants.MartialWeaponProficiency] = new[] { "school 2" };
 
@@ -355,7 +364,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         {
             otherFeats.Add(new Feat());
             otherFeats[0].Name = "other feat";
-            otherFeats[0].Focus = "weird weapon";
+            otherFeats[0].Foci = new[] { "weird weapon" };
 
             focusTypes[FeatConstants.ExoticWeaponProficiency] = new[] { "weird weapon", "school 2" };
 
@@ -391,13 +400,13 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         public void CanAlwaysFocusInUnarmedStrikeWhenProficiencyIsRequirement()
         {
             requiredFeats.Add(new RequiredFeat { Feat = ItemTypeConstants.Weapon + GroupConstants.Proficiency });
-            focusTypes[FeatConstants.Foci.WeaponsWithUnarmedAndGrapple] = new[] { "weapon", FeatConstants.Foci.UnarmedStrike };
+            focusTypes[FeatConstants.Foci.WeaponsWithUnarmed] = new[] { "weapon", FeatConstants.Foci.UnarmedStrike };
             focusTypes[FeatConstants.Foci.Weapons] = new[] { "weapon" };
 
             var proficiencyFeats = new[] { "proficiency1", "proficiency2" };
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, ItemTypeConstants.Weapon + GroupConstants.Proficiency)).Returns(proficiencyFeats);
 
-            var focus = featFocusGenerator.GenerateFrom("featToFill", FeatConstants.Foci.WeaponsWithUnarmedAndGrapple, skills, requiredFeats, otherFeats, characterClass);
+            var focus = featFocusGenerator.GenerateFrom("featToFill", FeatConstants.Foci.WeaponsWithUnarmed, skills, requiredFeats, otherFeats, characterClass);
             Assert.That(focus, Is.EqualTo(FeatConstants.Foci.UnarmedStrike));
         }
 
@@ -447,7 +456,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
 
             otherFeats.Add(new Feat());
             otherFeats[0].Name = "proficiency2";
-            otherFeats[0].Focus = "weapon";
+            otherFeats[0].Foci = new[] { "weapon" };
 
             var focus = featFocusGenerator.GenerateFrom("featToFill", FeatConstants.Foci.WeaponsWithUnarmedAndGrappleAndRay, skills, requiredFeats, otherFeats, characterClass);
             Assert.That(focus, Is.EqualTo("weapon"));
@@ -458,7 +467,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         {
             otherFeats.Add(new Feat());
             otherFeats[0].Name = "featId";
-            otherFeats[0].Focus = FeatConstants.Foci.All;
+            otherFeats[0].Foci = new[] { FeatConstants.Foci.All };
 
             focusTypes["focus type"] = new[] { "school 1" };
 
@@ -470,16 +479,12 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         public void CannotChooseFocusWhenAllAlreadyTaken()
         {
             otherFeats.Add(new Feat());
-            otherFeats.Add(new Feat());
-
-            otherFeats[0].Name = "featId";
-            otherFeats[0].Focus = "school 1";
-            otherFeats[1].Name = "featId";
-            otherFeats[1].Focus = "school 2";
+            otherFeats[0].Name = "feat";
+            otherFeats[0].Foci = new[] { "school 1", "school 2" };
 
             focusTypes["focus type"] = new[] { "school 1", "school 2" };
 
-            var focus = featFocusGenerator.GenerateFrom("featId", "focus type", skills, requiredFeats, otherFeats, characterClass);
+            var focus = featFocusGenerator.GenerateFrom("feat", "focus type", skills, requiredFeats, otherFeats, characterClass);
             Assert.That(focus, Is.EqualTo(FeatConstants.Foci.All));
         }
 
@@ -517,11 +522,11 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             otherFeats.Add(new Feat());
             otherFeats.Add(new Feat());
             otherFeats[0].Name = "feat1";
-            otherFeats[0].Focus = "weapon";
+            otherFeats[0].Foci = new[] { "weapon" };
             otherFeats[1].Name = "all proficiency";
-            otherFeats[1].Focus = FeatConstants.Foci.All;
+            otherFeats[1].Foci = new[] { FeatConstants.Foci.All };
             otherFeats[2].Name = "specific proficiency";
-            otherFeats[2].Focus = "specific weapon";
+            otherFeats[2].Foci = new[] { "specific weapon" };
 
             focusTypes[FeatConstants.Foci.WeaponsWithUnarmedAndGrappleAndRay] = new[] { "specific weapon", "other weapon", "weapon", FeatConstants.Foci.UnarmedStrike, FeatConstants.Foci.Grapple, FeatConstants.Foci.Ray };
             focusTypes[FeatConstants.Foci.Weapons] = new[] { "specific weapon", "other weapon", "weapon" };

@@ -73,7 +73,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             meleeWeapons.Remove(magicalWeapon.Name);
             meleeWeapons.Add(baseWeaponTypes[0]);
             meleeWeapons.Add("different melee weapon");
-            feats.Add(new Feat { Name = "all proficiency", Focus = FeatConstants.Foci.All });
+            feats.Add(new Feat { Name = "all proficiency", Foci = new[] { FeatConstants.Foci.All } });
             proficiencyFeats.Add(feats[0].Name);
             allProficientWeapons.Remove(magicalWeapon.Name);
             allProficientWeapons.Add(baseWeaponTypes[0]);
@@ -105,7 +105,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         {
             allProficientWeapons.Clear();
             feats.Add(new Feat { Name = "feat 1" });
-            feats.Add(new Feat { Name = "feat 2", Focus = "focus" });
+            feats.Add(new Feat { Name = "feat 2", Foci = new[] { "focus" } });
 
             Assert.That(() => weaponGenerator.GenerateFrom(feats, characterClass, race), Throws.Exception.InstanceOf<NoWeaponProficienciesException>());
         }
@@ -171,7 +171,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             mockPercentileSelector.Setup(s => s.SelectFrom("Level9266Power")).Returns(PowerConstants.Mundane);
             mockMundaneWeaponGenerator.SetupSequence(g => g.Generate()).Returns(mundaneWeapon).Returns(wrongMundaneWeapon);
 
-            feats.Add(new Feat { Name = "feat2", Focus = mundaneWeapon.Name });
+            feats.Add(new Feat { Name = "feat2", Foci = new[] { mundaneWeapon.Name } });
             proficiencyFeats.Add(feats[1].Name);
 
             var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
@@ -186,8 +186,8 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             mockPercentileSelector.Setup(s => s.SelectFrom("Level9266Power")).Returns(PowerConstants.Mundane);
             mockMundaneWeaponGenerator.SetupSequence(g => g.Generate()).Returns(wrongMundaneWeapon).Returns(mundaneWeapon);
 
-            feats.Add(new Feat { Name = "feat2", Focus = wrongMundaneWeapon.Name });
-            feats.Add(new Feat { Name = "feat3", Focus = mundaneWeapon.Name });
+            feats.Add(new Feat { Name = "feat2", Foci = new[] { wrongMundaneWeapon.Name } });
+            feats.Add(new Feat { Name = "feat3", Foci = new[] { mundaneWeapon.Name } });
             proficiencyFeats.Add(feats[1].Name);
 
             var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
@@ -202,8 +202,8 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             mockPercentileSelector.Setup(s => s.SelectFrom("Level9266Power")).Returns(PowerConstants.Mundane);
             mockMundaneWeaponGenerator.SetupSequence(g => g.Generate()).Returns(wrongMundaneWeapon).Returns(mundaneWeapon);
 
-            feats.Add(new Feat { Name = FeatConstants.WeaponFamiliarity, Focus = wrongMundaneWeapon.Name });
-            feats.Add(new Feat { Name = "feat3", Focus = mundaneWeapon.Name });
+            feats.Add(new Feat { Name = FeatConstants.WeaponFamiliarity, Foci = new[] { wrongMundaneWeapon.Name } });
+            feats.Add(new Feat { Name = "feat3", Foci = new[] { mundaneWeapon.Name } });
 
             var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
             Assert.That(weapon, Is.EqualTo(mundaneWeapon), weapon.Name);
@@ -219,10 +219,9 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             mockMundaneWeaponGenerator.SetupSequence(g => g.Generate())
                 .Returns(wrongMundaneWeapon).Returns(otherMundaneWeapon).Returns(mundaneWeapon);
 
-            feats.Add(new Feat { Name = "feat2", Focus = wrongMundaneWeapon.Name });
-            feats.Add(new Feat { Name = "feat3", Focus = mundaneWeapon.Name });
-            feats.Add(new Feat { Name = "feat3", Focus = otherMundaneWeapon.Name });
-            feats.Add(new Feat { Name = "feat4", Focus = mundaneWeapon.Name });
+            feats.Add(new Feat { Name = "feat2", Foci = new[] { wrongMundaneWeapon.Name } });
+            feats.Add(new Feat { Name = "feat3", Foci = new[] { mundaneWeapon.Name, otherMundaneWeapon.Name } });
+            feats.Add(new Feat { Name = "feat4", Foci = new[] { mundaneWeapon.Name } });
             proficiencyFeats.Add(feats[1].Name);
 
             var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
@@ -238,7 +237,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             mockMundaneWeaponGenerator.SetupSequence(g => g.Generate())
                 .Returns(wrongMundaneWeapon).Returns(mundaneWeapon);
 
-            feats.Add(new Feat { Name = "feat2", Focus = mundaneWeapon.Name });
+            feats.Add(new Feat { Name = "feat2", Foci = new[] { mundaneWeapon.Name } });
             proficiencyFeats.Add(feats[1].Name);
 
             var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
@@ -255,12 +254,10 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             mockMundaneWeaponGenerator.SetupSequence(g => g.Generate())
                 .Returns(wrongMundaneWeapon).Returns(otherMundaneWeapon).Returns(mundaneWeapon);
 
-            feats.Add(new Feat { Name = "feat2", Focus = mundaneWeapon.Name });
-            feats.Add(new Feat { Name = "feat2", Focus = otherMundaneWeapon.Name });
-            feats.Add(new Feat { Name = "feat3", Focus = mundaneWeapon.Name });
+            feats.Add(new Feat { Name = "feat2", Foci = new[] { mundaneWeapon.Name, otherMundaneWeapon.Name } });
+            feats.Add(new Feat { Name = "feat3", Foci = new[] { mundaneWeapon.Name } });
             proficiencyFeats.Add(feats[1].Name);
             proficiencyFeats.Add(feats[2].Name);
-            proficiencyFeats.Add(feats[3].Name);
 
             var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
             Assert.That(weapon, Is.EqualTo(otherMundaneWeapon));
@@ -319,7 +316,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateAtPower("power"))
                 .Returns(magicalWeapon).Returns(wrongMagicalWeapon);
 
-            feats.Add(new Feat { Name = "feat2", Focus = baseWeaponTypes[0] });
+            feats.Add(new Feat { Name = "feat2", Foci = new[] { baseWeaponTypes[0] } });
             proficiencyFeats.Add(feats[1].Name);
 
             var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
@@ -333,8 +330,8 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateAtPower("power"))
                 .Returns(wrongMagicalWeapon).Returns(magicalWeapon);
 
-            feats.Add(new Feat { Name = "feat2", Focus = wrongMagicalWeapon.Name });
-            feats.Add(new Feat { Name = "feat3", Focus = baseWeaponTypes[0] });
+            feats.Add(new Feat { Name = "feat2", Foci = new[] { wrongMagicalWeapon.Name } });
+            feats.Add(new Feat { Name = "feat3", Foci = new[] { baseWeaponTypes[0] } });
             proficiencyFeats.Add(feats[1].Name);
 
             var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
@@ -348,8 +345,8 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateAtPower("power"))
                 .Returns(wrongMagicalWeapon).Returns(magicalWeapon);
 
-            feats.Add(new Feat { Name = FeatConstants.WeaponFamiliarity, Focus = wrongMagicalWeapon.Name });
-            feats.Add(new Feat { Name = "feat3", Focus = baseWeaponTypes[0] });
+            feats.Add(new Feat { Name = FeatConstants.WeaponFamiliarity, Foci = new[] { wrongMagicalWeapon.Name } });
+            feats.Add(new Feat { Name = "feat3", Foci = new[] { baseWeaponTypes[0] } });
 
             var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
             Assert.That(weapon, Is.EqualTo(magicalWeapon), weapon.Name);
@@ -363,10 +360,9 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateAtPower("power"))
                 .Returns(wrongMagicalWeapon).Returns(otherMagicalWeapon).Returns(magicalWeapon);
 
-            feats.Add(new Feat { Name = "feat2", Focus = wrongMagicalWeapon.Name });
-            feats.Add(new Feat { Name = "feat3", Focus = baseWeaponTypes[0] });
-            feats.Add(new Feat { Name = "feat3", Focus = otherMagicalWeapon.Name });
-            feats.Add(new Feat { Name = "feat4", Focus = baseWeaponTypes[0] });
+            feats.Add(new Feat { Name = "feat2", Foci = new[] { wrongMagicalWeapon.Name } });
+            feats.Add(new Feat { Name = "feat3", Foci = new[] { baseWeaponTypes[0], otherMagicalWeapon.Name } });
+            feats.Add(new Feat { Name = "feat4", Foci = new[] { baseWeaponTypes[0] } });
             proficiencyFeats.Add(feats[1].Name);
 
             var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
@@ -380,7 +376,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateAtPower("power"))
                 .Returns(wrongMagicalWeapon).Returns(magicalWeapon);
 
-            feats.Add(new Feat { Name = "feat2", Focus = baseWeaponTypes[0] });
+            feats.Add(new Feat { Name = "feat2", Foci = new[] { baseWeaponTypes[0] } });
             proficiencyFeats.Add(feats[1].Name);
 
             var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
@@ -395,12 +391,10 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateAtPower("power"))
                 .Returns(wrongMagicalWeapon).Returns(otherMagicalWeapon).Returns(magicalWeapon);
 
-            feats.Add(new Feat { Name = "feat2", Focus = baseWeaponTypes[0] });
-            feats.Add(new Feat { Name = "feat2", Focus = otherMagicalWeapon.Name });
-            feats.Add(new Feat { Name = "feat3", Focus = baseWeaponTypes[0] });
+            feats.Add(new Feat { Name = "feat2", Foci = new[] { baseWeaponTypes[0], otherMagicalWeapon.Name } });
+            feats.Add(new Feat { Name = "feat3", Foci = new[] { baseWeaponTypes[0] } });
             proficiencyFeats.Add(feats[1].Name);
             proficiencyFeats.Add(feats[2].Name);
-            proficiencyFeats.Add(feats[3].Name);
 
             var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
             Assert.That(weapon, Is.EqualTo(otherMagicalWeapon));
@@ -452,8 +446,8 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         [Test]
         public void SaveBonusesOfAllDoNotCountAsProficiencyFeats()
         {
-            feats.Add(new Feat { Name = FeatConstants.SaveBonus, Focus = FeatConstants.Foci.All });
-            feats[0].Focus = baseWeaponTypes[0];
+            feats.Add(new Feat { Name = FeatConstants.SaveBonus, Foci = new[] { FeatConstants.Foci.All } });
+            feats[0].Foci = new[] { baseWeaponTypes[0] };
 
             var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
             Assert.That(weapon, Is.EqualTo(magicalWeapon), weapon.Name);
@@ -494,7 +488,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         [Test]
         public void GenerateAmmunitionForSpecificRangedWeaponFocus()
         {
-            feats.Add(new Feat { Name = "feat2", Focus = baseWeaponTypes[0] });
+            feats.Add(new Feat { Name = "feat2", Foci = new[] { baseWeaponTypes[0] } });
 
             var ammunition = CreateWeapon("ammunition");
             meleeWeapons.Remove(ammunition.Name);
@@ -551,8 +545,8 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateAtPower("power"))
                 .Returns(rangedWeapon).Returns(otherMagicalWeapon).Returns(magicalWeapon);
 
-            feats.Add(new Feat { Name = "feat2", Focus = rangedWeapon.Name });
-            feats.Add(new Feat { Name = "feat3", Focus = otherMagicalWeapon.Name });
+            feats.Add(new Feat { Name = "feat2", Foci = new[] { rangedWeapon.Name } });
+            feats.Add(new Feat { Name = "feat3", Foci = new[] { otherMagicalWeapon.Name } });
             proficiencyFeats.Add("feat3");
 
             var weapon = weaponGenerator.GenerateMeleeFrom(feats, characterClass, race);
@@ -570,8 +564,8 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateAtPower("power"))
                 .Returns(rangedWeapon).Returns(otherMagicalWeapon).Returns(magicalWeapon);
 
-            feats.Add(new Feat { Name = "feat2", Focus = rangedWeapon.Name });
-            feats.Add(new Feat { Name = "feat3", Focus = otherMagicalWeapon.Name });
+            feats.Add(new Feat { Name = "feat2", Foci = new[] { rangedWeapon.Name } });
+            feats.Add(new Feat { Name = "feat3", Foci = new[] { otherMagicalWeapon.Name } });
             proficiencyFeats.Add("feat3");
 
             var weapon = weaponGenerator.GenerateMeleeFrom(feats, characterClass, race);
@@ -613,8 +607,8 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateAtPower("power"))
                 .Returns(rangedWeapon).Returns(otherMagicalWeapon).Returns(magicalWeapon);
 
-            feats.Add(new Feat { Name = "feat2", Focus = rangedWeapon.Name });
-            feats.Add(new Feat { Name = "feat3", Focus = otherMagicalWeapon.Name });
+            feats.Add(new Feat { Name = "feat2", Foci = new[] { rangedWeapon.Name } });
+            feats.Add(new Feat { Name = "feat3", Foci = new[] { otherMagicalWeapon.Name } });
             proficiencyFeats.Add("feat3");
 
             var weapon = weaponGenerator.GenerateOneHandedMeleeFrom(feats, characterClass, race);
@@ -632,8 +626,8 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateAtPower("power"))
                 .Returns(rangedWeapon).Returns(otherMagicalWeapon).Returns(magicalWeapon);
 
-            feats.Add(new Feat { Name = "feat2", Focus = rangedWeapon.Name });
-            feats.Add(new Feat { Name = "feat3", Focus = otherMagicalWeapon.Name });
+            feats.Add(new Feat { Name = "feat2", Foci = new[] { rangedWeapon.Name } });
+            feats.Add(new Feat { Name = "feat3", Foci = new[] { otherMagicalWeapon.Name } });
             proficiencyFeats.Add("feat3");
 
             var weapon = weaponGenerator.GenerateOneHandedMeleeFrom(feats, characterClass, race);
@@ -663,8 +657,8 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateAtPower("power"))
                 .Returns(magicalWeapon).Returns(otherMagicalWeapon).Returns(rangedWeapon);
 
-            feats.Add(new Feat { Name = "feat2", Focus = baseWeaponTypes[0] });
-            feats.Add(new Feat { Name = "feat3", Focus = otherMagicalWeapon.Name });
+            feats.Add(new Feat { Name = "feat2", Foci = new[] { baseWeaponTypes[0] } });
+            feats.Add(new Feat { Name = "feat3", Foci = new[] { otherMagicalWeapon.Name } });
             proficiencyFeats.Add("feat3");
 
             var weapon = weaponGenerator.GenerateRangedFrom(feats, characterClass, race);
@@ -681,8 +675,8 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateAtPower("power"))
                 .Returns(magicalWeapon).Returns(otherMagicalWeapon).Returns(rangedWeapon);
 
-            feats.Add(new Feat { Name = "feat2", Focus = baseWeaponTypes[0] });
-            feats.Add(new Feat { Name = "feat3", Focus = otherMagicalWeapon.Name });
+            feats.Add(new Feat { Name = "feat2", Foci = new[] { baseWeaponTypes[0] } });
+            feats.Add(new Feat { Name = "feat3", Foci = new[] { otherMagicalWeapon.Name } });
             proficiencyFeats.Add("feat3");
 
             var weapon = weaponGenerator.GenerateRangedFrom(feats, characterClass, race);
@@ -715,8 +709,8 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateAtPower("power"))
                 .Returns(wrongMagicalWeapon).Returns(magicalWeapon).Returns(ammunition);
 
-            feats.Add(new Feat { Name = "feat2", Focus = wrongMagicalWeapon.Name });
-            feats.Add(new Feat { Name = "feat3", Focus = baseWeaponTypes[0] });
+            feats.Add(new Feat { Name = "feat2", Foci = new[] { wrongMagicalWeapon.Name } });
+            feats.Add(new Feat { Name = "feat3", Foci = new[] { baseWeaponTypes[0] } });
             proficiencyFeats.Add(feats[2].Name);
 
             baseWeaponTypes.Add("ammunition");

@@ -1,5 +1,5 @@
-﻿using System;
-using CharacterGen.Common.Abilities.Stats;
+﻿using CharacterGen.Common.Abilities.Stats;
+using System;
 
 namespace CharacterGen.Common.Abilities.Skills
 {
@@ -20,12 +20,6 @@ namespace CharacterGen.Common.Abilities.Skills
 
                 return (Double)Ranks / 2;
             }
-        }
-
-        public Int32 GetTotalSkillBonus()
-        {
-            var roundedEffectiveRanks = Math.Floor(EffectiveRanks);
-            return Bonus + BaseStat.Bonus + Convert.ToInt32(roundedEffectiveRanks);
         }
     }
 }

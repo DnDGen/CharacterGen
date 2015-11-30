@@ -26,7 +26,7 @@ namespace CharacterGen.Selectors.Objects
             if (String.IsNullOrEmpty(Focus))
                 return true;
 
-            return requiredFeats.Any(f => f.Focus == Focus);
+            return requiredFeats.Any(f => f.Foci.Contains(Focus));
         }
     }
 }

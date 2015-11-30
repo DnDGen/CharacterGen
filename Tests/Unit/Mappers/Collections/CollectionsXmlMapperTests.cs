@@ -15,6 +15,7 @@ namespace CharacterGen.Tests.Unit.Mappers.Collections
         private const String tableName = "CollectionsXmlMapperTests";
 
         private String filename;
+        private String filePath;
         private ICollectionsMapper mapper;
         private Mock<IStreamLoader> mockStreamLoader;
 
@@ -22,6 +23,7 @@ namespace CharacterGen.Tests.Unit.Mappers.Collections
         public void Setup()
         {
             filename = tableName + ".xml";
+            filePath = Path.Combine(TestContext.CurrentContext.TestDirectory, filename);
             MakeXmlFile();
 
             mockStreamLoader = new Mock<IStreamLoader>();
@@ -47,12 +49,12 @@ namespace CharacterGen.Tests.Unit.Mappers.Collections
                                     <name>empty name</name>
                                 </object>
                             </collections>";
-            File.WriteAllText(filename, content);
+            File.WriteAllText(filePath, content);
         }
 
         private Stream GetStream()
         {
-            return new FileStream(filename, FileMode.Open);
+            return new FileStream(filePath, FileMode.Open);
         }
 
         [Test]
@@ -110,9 +112,9 @@ namespace CharacterGen.Tests.Unit.Mappers.Collections
                                     <name>empty name</name>
                                 </object>
                             </collections>";
-            File.WriteAllText(filename, content);
+            File.WriteAllText(filePath, content);
 
-            Assert.That(() => mapper.Map(tableName), Throws.Exception);
+            Assert.Throws<ArgumentException>(() => mapper.Map(tableName));
         }
 
         private void MakeEmptyXmlFile()
@@ -120,7 +122,7 @@ namespace CharacterGen.Tests.Unit.Mappers.Collections
             var content = @"<?xml version=""1.0"" encoding=""utf-8"" ?>
                             <collections>
                             </collections>";
-            File.WriteAllText(filename, content);
+            File.WriteAllText(filePath, content);
         }
     }
 }

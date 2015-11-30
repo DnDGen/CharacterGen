@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using CharacterGen.Common.Abilities.Feats;
+﻿using CharacterGen.Common.Abilities.Feats;
 using CharacterGen.Selectors.Objects;
 using NUnit.Framework;
+using System.Collections.Generic;
 
 namespace CharacterGen.Tests.Unit.Selectors.Objects
 {
@@ -26,7 +26,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Objects
         }
 
         [Test]
-        public void RequirementMetIfOtherFeatsContainFeatId()
+        public void RequirementMetIfOtherFeatsContainFeatName()
         {
             otherFeats.Add(new Feat());
             otherFeats.Add(new Feat());
@@ -40,7 +40,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Objects
         }
 
         [Test]
-        public void RequirementNotMetIfOtherFeatDoNotContainFeatId()
+        public void RequirementNotMetIfOtherFeatDoNotContainFeatName()
         {
             otherFeats.Add(new Feat());
             otherFeats.Add(new Feat());
@@ -54,13 +54,13 @@ namespace CharacterGen.Tests.Unit.Selectors.Objects
         }
 
         [Test]
-        public void RequirementMetIfOtherFeatsContainFeatIdAndNoRequiredFocus()
+        public void RequirementMetIfOtherFeatsContainFeatNAmeAndNoRequiredFocus()
         {
             otherFeats.Add(new Feat());
             otherFeats.Add(new Feat());
             otherFeats[0].Name = "feat1";
             otherFeats[0].Name = "feat2";
-            otherFeats[0].Focus = "focus";
+            otherFeats[0].Foci = new[] { "focus" };
 
             requiredFeat.Feat = "feat2";
 
@@ -69,13 +69,13 @@ namespace CharacterGen.Tests.Unit.Selectors.Objects
         }
 
         [Test]
-        public void RequirementMetIfOtherFeatsContainFeatIdAndRequiredFocusIsOnFeat()
+        public void RequirementMetIfOtherFeatsContainFeatNameAndRequiredFocusIsOnFeat()
         {
             otherFeats.Add(new Feat());
             otherFeats.Add(new Feat());
             otherFeats[0].Name = "feat1";
             otherFeats[0].Name = "feat2";
-            otherFeats[0].Focus = "focus";
+            otherFeats[0].Foci = new[] { "focus" };
 
             requiredFeat.Feat = "feat2";
             requiredFeat.Focus = "focus";
@@ -85,14 +85,12 @@ namespace CharacterGen.Tests.Unit.Selectors.Objects
         }
 
         [Test]
-        public void RequirementMetIfOtherFeatsContainFeatIdAndRequiredFocusIsOnAtLeastOneFeat()
+        public void RequirementMetIfOtherFeatsContainFeatNameAndRequiredFocusIsOnAtLeastOneFeat()
         {
             otherFeats.Add(new Feat());
             otherFeats.Add(new Feat());
             otherFeats[0].Name = "feat2";
-            otherFeats[0].Focus = "other focus";
-            otherFeats[0].Name = "feat2";
-            otherFeats[0].Focus = "focus";
+            otherFeats[0].Foci = new[] { "other focus", "focus" };
 
             requiredFeat.Feat = "feat2";
             requiredFeat.Focus = "focus";
@@ -107,9 +105,9 @@ namespace CharacterGen.Tests.Unit.Selectors.Objects
             otherFeats.Add(new Feat());
             otherFeats.Add(new Feat());
             otherFeats[0].Name = "feat1";
-            otherFeats[0].Focus = "focus";
+            otherFeats[0].Foci = new[] { "focus" };
             otherFeats[0].Name = "feat2";
-            otherFeats[0].Focus = "other focus";
+            otherFeats[0].Foci = new[] { "other focus" };
 
             requiredFeat.Feat = "feat2";
             requiredFeat.Focus = "focus";
@@ -125,7 +123,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Objects
             otherFeats.Add(new Feat());
             otherFeats[0].Name = "feat1";
             otherFeats[0].Name = "feat2";
-            otherFeats[0].Focus = "other focus";
+            otherFeats[0].Foci = new[] { "other focus" };
 
             requiredFeat.Feat = "feat2";
             requiredFeat.Focus = "focus";

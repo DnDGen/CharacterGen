@@ -233,7 +233,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             feats[0].Strength = 1;
             feats[1].Name = "feat 2";
             feats[1].Strength = 1;
-            feats[1].Focus = "focus";
+            feats[1].Foci = new[] { "focus" };
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.NaturalArmor))
                 .Returns(new[] { "feat 1", "feat 2", "other feat" });

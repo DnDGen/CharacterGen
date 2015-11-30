@@ -43,9 +43,9 @@ namespace CharacterGen.Generators.Domain.Abilities
             ability.Feats = featsGenerator.GenerateWith(characterClass, race, ability.Stats, ability.Skills, baseAttack);
 
             var allFeatGrantingSkillBonuses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus);
-            var featIds = ability.Feats.Select(f => f.Name);
-            var featIdsGrantingSkillBonuses = allFeatGrantingSkillBonuses.Intersect(featIds);
-            var featGrantingSkillBonuses = ability.Feats.Where(f => featIdsGrantingSkillBonuses.Contains(f.Name));
+            var featNames = ability.Feats.Select(f => f.Name);
+            var featNamesGrantingSkillBonuses = allFeatGrantingSkillBonuses.Intersect(featNames);
+            var featGrantingSkillBonuses = ability.Feats.Where(f => featNamesGrantingSkillBonuses.Contains(f.Name));
             var allSkills = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.Skills);
 
             foreach (var feat in featGrantingSkillBonuses)
@@ -61,10 +61,16 @@ namespace CharacterGen.Generators.Domain.Abilities
                 }
                 else
                 {
-                    var skill = allSkills.First(s => feat.Focus.StartsWith(s));
+                    foreach (var focus in feat.Foci)
+                    {
+                        if (allSkills.Any(s => focus.StartsWith(s)) == false)
+                            continue;
 
-                    if (ability.Skills.ContainsKey(skill))
-                        ability.Skills[skill].CircumstantialBonus = true;
+                        var skill = allSkills.First(s => focus.StartsWith(s));
+
+                        if (ability.Skills.ContainsKey(skill))
+                            ability.Skills[skill].CircumstantialBonus = true;
+                    }
                 }
             }
 
@@ -73,10 +79,10 @@ namespace CharacterGen.Generators.Domain.Abilities
 
         private IEnumerable<String> GetSkillsToReceiveBonuses(Feat feat)
         {
-            if (feat.Focus == String.Empty)
+            if (feat.Foci.Any() == false)
                 return collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, feat.Name);
 
-            return new[] { feat.Focus };
+            return feat.Foci;
         }
     }
 }

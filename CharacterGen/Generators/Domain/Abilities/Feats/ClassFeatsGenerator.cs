@@ -58,9 +58,10 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
                     continue;
 
                 var focus = featFocusGenerator.GenerateAllowingFocusOfAllFrom(classFeatSelection.Feat, classFeatSelection.FocusType, skills, classFeatSelection.RequiredFeats, earnedFeat, characterClass);
-                var classFeat = BuildFeatFrom(classFeatSelection, focus, earnedFeat, stats, characterClass, skills);
 
+                var classFeat = BuildFeatFrom(classFeatSelection, focus, earnedFeat, stats, characterClass, skills);
                 classFeats.Add(classFeat);
+
                 earnedFeat = earnedFeat.Union(classFeats);
             }
 
@@ -71,7 +72,10 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
         {
             var feat = new Feat();
             feat.Name = selection.Feat;
-            feat.Focus = focus;
+
+            if (String.IsNullOrEmpty(focus) == false)
+                feat.Foci = feat.Foci.Union(new[] { focus });
+
             feat.Frequency = selection.Frequency;
             feat.Strength = selection.Strength;
 

@@ -42,7 +42,7 @@ namespace CharacterGen.Tests.Integration.Stress
         private const Int32 ConfidentIterations = 1000000;
 #if STRESS
         //INFO: This should make all stress tests run within 1 hour
-        private const Int32 TimeLimitInSeconds = 60 * 60 / 100;
+        private const Int32 TimeLimitInSeconds = 60 * 60 / 116;
 #else
         private const Int32 TimeLimitInSeconds = 1;
 #endif

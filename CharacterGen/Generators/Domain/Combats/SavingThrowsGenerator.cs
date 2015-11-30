@@ -41,13 +41,13 @@ namespace CharacterGen.Generators.Domain.Combats
 
             foreach (var feat in anySavingThrowFeats)
             {
-                if (feat.Focus == FeatConstants.Foci.All || feat.Focus == SavingThrowConstants.Fortitude)
+                if (feat.Foci.Contains(FeatConstants.Foci.All) || feat.Foci.Contains(SavingThrowConstants.Fortitude))
                     savingThrows.Fortitude += feat.Strength;
 
-                if (feat.Focus == FeatConstants.Foci.All || feat.Focus == SavingThrowConstants.Reflex)
+                if (feat.Foci.Contains(FeatConstants.Foci.All) || feat.Foci.Contains(SavingThrowConstants.Reflex))
                     savingThrows.Reflex += feat.Strength;
 
-                if (feat.Focus == FeatConstants.Foci.All || feat.Focus == SavingThrowConstants.Will)
+                if (feat.Foci.Contains(FeatConstants.Foci.All) || feat.Foci.Contains(SavingThrowConstants.Will))
                     savingThrows.Will += feat.Strength;
             }
 

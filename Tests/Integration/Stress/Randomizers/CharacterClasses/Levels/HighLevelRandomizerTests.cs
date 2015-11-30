@@ -20,7 +20,7 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.CharacterClasses.Lev
         protected override void MakeAssertions()
         {
             var level = HighLevelRandomizer.Randomize();
-            Assert.That(level, Is.InRange<Int32>(11, 15));
+            Assert.That(level, Is.InRange(11, 15));
         }
     }
 }

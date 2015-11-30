@@ -49,9 +49,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
+    <Reference Include="nunit.framework, Version=3.0.5797.27534, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\NUnit.3.0.0\lib\net45\nunit.framework.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="RollGen, Version=1.0.5697.27803, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\D20Dice.9.1\lib\RollGen.dll</HintPath>
@@ -91,9 +91,14 @@
     <Compile Include="CharacterGeneratorTests.cs" />
     <Compile Include="AlignmentGeneratorTests.cs" />
     <Compile Include="Abilities\LanguageGeneratorTests.cs" />
+    <Compile Include="Combats\CharacterCombatGeneratorTests.cs" />
     <Compile Include="Items\ArmorGeneratorTests.cs" />
     <Compile Include="Items\EquipmentGeneratorTests.cs" />
     <Compile Include="Items\WeaponGeneratorTests.cs" />
+    <Compile Include="LeadershipGeneratorTests.cs" />
+    <Compile Include="Magics\AnimalGeneratorTests.cs" />
+    <Compile Include="Magics\MagicGeneratorTests.cs" />
+    <Compile Include="Magics\SpellsGeneratorTests.cs" />
     <Compile Include="RaceGeneratorTests.cs" />
     <Compile Include="Randomizers\Alignments\SetAlignmentRandomizerTests.cs" />
     <Compile Include="Randomizers\CharacterClasses\ClassNames\ClassNameRandomizerTests.cs" />

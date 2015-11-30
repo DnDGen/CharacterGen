@@ -96,15 +96,16 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
                     continue;
                 }
 
-                var featInstanceQuantity = 1;
-                if (featSelection.Feat == FeatConstants.SkillMastery)
-                    featInstanceQuantity = stats[StatConstants.Intelligence].Bonus + featSelection.Strength;
+                var feat = new Feat();
+                var hasMatchingFeat = feats.Any(f => FeatsMatch(f, featSelection));
 
-                while (featInstanceQuantity-- > 0 && preliminaryFocus != FeatConstants.Foci.All)
+                if (hasMatchingFeat)
                 {
-                    var feat = new Feat();
+                    feat = feats.First(f => FeatsMatch(f, featSelection));
+                }
+                else
+                {
                     feat.Name = featSelection.Feat;
-                    feat.Focus = preliminaryFocus;
                     feat.Frequency = featSelection.Frequency;
                     feat.Strength = featSelection.Strength;
 
@@ -112,16 +113,33 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
                         feat.Strength = stats[StatConstants.Intelligence].Bonus;
 
                     feats.Add(feat);
+                }
 
-                    chosenFeats = preselectedFeats.Union(feats);
-                    availableFeats = GetAvailableFeats(sourceFeats, chosenFeats);
+                chosenFeats = preselectedFeats.Union(feats);
+                availableFeats = GetAvailableFeats(sourceFeats, chosenFeats);
 
-                    if (featInstanceQuantity > 0)
-                        preliminaryFocus = featFocusGenerator.GenerateFrom(featSelection.Feat, featSelection.FocusType, skills, featSelection.RequiredFeats, chosenFeats, characterClass);
+                if (String.IsNullOrEmpty(preliminaryFocus) == false)
+                    feat.Foci = feat.Foci.Union(new[] { preliminaryFocus });
+
+                var featFociQuantity = 0;
+                if (featSelection.Feat == FeatConstants.SkillMastery)
+                    featFociQuantity = stats[StatConstants.Intelligence].Bonus + featSelection.Strength - 1;
+
+                while (featFociQuantity-- > 0 && preliminaryFocus != FeatConstants.Foci.All && String.IsNullOrEmpty(preliminaryFocus) == false)
+                {
+                    preliminaryFocus = featFocusGenerator.GenerateFrom(featSelection.Feat, featSelection.FocusType, skills, featSelection.RequiredFeats, chosenFeats, characterClass);
+                    feat.Foci = feat.Foci.Union(new[] { preliminaryFocus });
                 }
             }
 
             return feats;
+        }
+
+        private Boolean FeatsMatch(Feat feat, AdditionalFeatSelection additionalFeatSelection)
+        {
+            return feat.Frequency.TimePeriod == String.Empty && feat.Name == additionalFeatSelection.Feat
+                   && feat.Strength == additionalFeatSelection.Strength
+                   && feat.Foci.Any() && String.IsNullOrEmpty(additionalFeatSelection.FocusType) == false;
         }
 
         private IEnumerable<AdditionalFeatSelection> GetAvailableFeats(IEnumerable<AdditionalFeatSelection> sourceFeats, IEnumerable<Feat> chosenFeats)

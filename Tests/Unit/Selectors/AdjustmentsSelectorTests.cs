@@ -42,7 +42,7 @@ namespace CharacterGen.Tests.Unit.Selectors
         public void ThrowExceptionIfAnyEmptyCollections()
         {
             collections["first"] = Enumerable.Empty<String>();
-            Assert.That(() => adjustmentsSelector.SelectFrom(TableName), Throws.Exception);
+            Assert.Throws<InvalidOperationException>(() => adjustmentsSelector.SelectFrom(TableName));
         }
     }
 }

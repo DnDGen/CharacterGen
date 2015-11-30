@@ -57,7 +57,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             racialFeats.Add(new Feat());
             racialFeats.Add(new Feat());
 
-            racialFeats[0].Focus = "focus";
+            racialFeats[0].Foci = new[] { "focus" };
             racialFeats[0].Name = "racialFeat1";
             racialFeats[0].Strength = 9266;
             racialFeats[1].Frequency.Quantity = 42;
@@ -69,13 +69,13 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             var last = feats.Last();
 
             Assert.That(first.Name, Is.EqualTo("racialFeat1"));
-            Assert.That(first.Focus, Is.EqualTo("focus"));
+            Assert.That(first.Foci.Single(), Is.EqualTo("focus"));
             Assert.That(first.Strength, Is.EqualTo(9266));
             Assert.That(first.Frequency.Quantity, Is.EqualTo(0));
             Assert.That(first.Frequency.TimePeriod, Is.Empty);
 
             Assert.That(last.Name, Is.EqualTo("racialFeat2"));
-            Assert.That(last.Focus, Is.Empty);
+            Assert.That(last.Foci, Is.Empty);
             Assert.That(last.Strength, Is.EqualTo(0));
             Assert.That(last.Frequency.Quantity, Is.EqualTo(42));
             Assert.That(last.Frequency.TimePeriod, Is.EqualTo("fortnight"));
@@ -90,7 +90,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             classFeats.Add(new Feat());
             classFeats.Add(new Feat());
 
-            classFeats[0].Focus = "focus";
+            classFeats[0].Foci = new[] { "focus" };
             classFeats[0].Name = "classFeat1";
             classFeats[0].Strength = 9266;
             classFeats[1].Frequency.Quantity = 42;
@@ -104,13 +104,13 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             var last = feats.Last();
 
             Assert.That(first.Name, Is.EqualTo("classFeat1"));
-            Assert.That(first.Focus, Is.EqualTo("focus"));
+            Assert.That(first.Foci.Single(), Is.EqualTo("focus"));
             Assert.That(first.Strength, Is.EqualTo(9266));
             Assert.That(first.Frequency.Quantity, Is.EqualTo(0));
             Assert.That(first.Frequency.TimePeriod, Is.Empty);
 
             Assert.That(last.Name, Is.EqualTo("classFeat2"));
-            Assert.That(last.Focus, Is.Empty);
+            Assert.That(last.Foci, Is.Empty);
             Assert.That(last.Strength, Is.EqualTo(0));
             Assert.That(last.Frequency.Quantity, Is.EqualTo(42));
             Assert.That(last.Frequency.TimePeriod, Is.EqualTo("fortnight"));
@@ -125,7 +125,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             additionalFeats.Add(new Feat());
             additionalFeats.Add(new Feat());
 
-            additionalFeats[0].Focus = "focus";
+            additionalFeats[0].Foci = new[] { "focus" };
             additionalFeats[0].Name = "feat1";
             additionalFeats[0].Strength = 9266;
             additionalFeats[1].Frequency.Quantity = 42;
@@ -139,13 +139,13 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             var last = feats.Last();
 
             Assert.That(first.Name, Is.EqualTo("feat1"));
-            Assert.That(first.Focus, Is.EqualTo("focus"));
+            Assert.That(first.Foci.Single(), Is.EqualTo("focus"));
             Assert.That(first.Strength, Is.EqualTo(9266));
             Assert.That(first.Frequency.Quantity, Is.EqualTo(0));
             Assert.That(first.Frequency.TimePeriod, Is.Empty);
 
             Assert.That(last.Name, Is.EqualTo("feat2"));
-            Assert.That(last.Focus, Is.Empty);
+            Assert.That(last.Foci, Is.Empty);
             Assert.That(last.Strength, Is.EqualTo(0));
             Assert.That(last.Frequency.Quantity, Is.EqualTo(42));
             Assert.That(last.Frequency.TimePeriod, Is.EqualTo("fortnight"));
@@ -158,14 +158,14 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         {
             racialFeats.Add(new Feat());
 
-            racialFeats[0].Focus = "focus";
+            racialFeats[0].Foci = new[] { "focus" };
             racialFeats[0].Name = "racialFeat1";
             racialFeats[0].Strength = 9266;
 
             var additionalFeats = new List<Feat>();
             additionalFeats.Add(new Feat());
 
-            additionalFeats[0].Focus = "other focus";
+            additionalFeats[0].Foci = new[] { "other focus" };
             additionalFeats[0].Name = "feat1";
             additionalFeats[0].Strength = 9266;
             additionalFeats[0].Frequency.Quantity = 42;
@@ -191,12 +191,12 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             racialFeats.Add(new Feat());
             racialFeats.Add(new Feat());
 
-            racialFeats[0].Focus = "focus";
+            racialFeats[0].Foci = new[] { "focus" };
             racialFeats[0].Name = "feat1";
             racialFeats[0].Strength = 9266;
             racialFeats[0].Frequency.Quantity = 1;
             racialFeats[0].Frequency.TimePeriod = "fortnight";
-            racialFeats[1].Focus = "focus";
+            racialFeats[1].Foci = new[] { "focus" };
             racialFeats[1].Name = "feat1";
             racialFeats[1].Strength = 9266;
             racialFeats[1].Frequency.Quantity = 5;
@@ -207,7 +207,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             var first = feats.First();
             var last = feats.Last();
 
-            Assert.That(first.Focus, Is.EqualTo("focus"));
+            Assert.That(first.Foci.Single(), Is.EqualTo("focus"));
             Assert.That(first.Frequency.Quantity, Is.EqualTo(6));
             Assert.That(first.Frequency.TimePeriod, Is.EqualTo("fortnight"));
             Assert.That(first.Name, Is.EqualTo("feat1"));
@@ -223,12 +223,12 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             racialFeats.Add(new Feat());
             racialFeats.Add(new Feat());
 
-            racialFeats[0].Focus = "focus";
+            racialFeats[0].Foci = new[] { "focus" };
             racialFeats[0].Name = "feat1";
             racialFeats[0].Strength = 9266;
             racialFeats[0].Frequency.Quantity = 1;
             racialFeats[0].Frequency.TimePeriod = "fortnight";
-            racialFeats[1].Focus = "focus";
+            racialFeats[1].Foci = new[] { "focus" };
             racialFeats[1].Name = "feat2";
             racialFeats[1].Strength = 9266;
             racialFeats[1].Frequency.Quantity = 5;
@@ -238,13 +238,13 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             var first = feats.First();
             var last = feats.Last();
 
-            Assert.That(first.Focus, Is.EqualTo("focus"));
+            Assert.That(first.Foci.Single(), Is.EqualTo("focus"));
             Assert.That(first.Frequency.Quantity, Is.EqualTo(1));
             Assert.That(first.Frequency.TimePeriod, Is.EqualTo("fortnight"));
             Assert.That(first.Name, Is.EqualTo("feat1"));
             Assert.That(first.Strength, Is.EqualTo(9266));
 
-            Assert.That(last.Focus, Is.EqualTo("focus"));
+            Assert.That(last.Foci.Single(), Is.EqualTo("focus"));
             Assert.That(last.Frequency.Quantity, Is.EqualTo(5));
             Assert.That(last.Frequency.TimePeriod, Is.EqualTo("fortnight"));
             Assert.That(last.Name, Is.EqualTo("feat2"));
@@ -259,12 +259,12 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             racialFeats.Add(new Feat());
             racialFeats.Add(new Feat());
 
-            racialFeats[0].Focus = "focus";
+            racialFeats[0].Foci = new[] { "focus" };
             racialFeats[0].Name = "feat1";
             racialFeats[0].Strength = 9266;
             racialFeats[0].Frequency.Quantity = 4;
             racialFeats[0].Frequency.TimePeriod = "fortnight";
-            racialFeats[1].Focus = "focus2";
+            racialFeats[1].Foci = new[] { "focus2" };
             racialFeats[1].Name = "feat1";
             racialFeats[1].Strength = 9266;
             racialFeats[1].Frequency.Quantity = 2;
@@ -274,13 +274,13 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             var first = feats.First();
             var last = feats.Last();
 
-            Assert.That(first.Focus, Is.EqualTo("focus"));
+            Assert.That(first.Foci.Single(), Is.EqualTo("focus"));
             Assert.That(first.Frequency.Quantity, Is.EqualTo(4));
             Assert.That(first.Frequency.TimePeriod, Is.EqualTo("fortnight"));
             Assert.That(first.Name, Is.EqualTo("feat1"));
             Assert.That(first.Strength, Is.EqualTo(9266));
 
-            Assert.That(last.Focus, Is.EqualTo("focus2"));
+            Assert.That(last.Foci.Single(), Is.EqualTo("focus2"));
             Assert.That(last.Frequency.Quantity, Is.EqualTo(2));
             Assert.That(last.Frequency.TimePeriod, Is.EqualTo("fortnight"));
             Assert.That(last.Name, Is.EqualTo("feat1"));
@@ -295,12 +295,12 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             racialFeats.Add(new Feat());
             racialFeats.Add(new Feat());
 
-            racialFeats[0].Focus = "focus";
+            racialFeats[0].Foci = new[] { "focus" };
             racialFeats[0].Name = "feat1";
             racialFeats[0].Strength = 9266;
             racialFeats[0].Frequency.Quantity = 3;
             racialFeats[0].Frequency.TimePeriod = "fortnight";
-            racialFeats[1].Focus = "focus";
+            racialFeats[1].Foci = new[] { "focus" };
             racialFeats[1].Name = "feat1";
             racialFeats[1].Strength = 42;
             racialFeats[1].Frequency.Quantity = 3;
@@ -310,13 +310,13 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             var first = feats.First();
             var last = feats.Last();
 
-            Assert.That(first.Focus, Is.EqualTo("focus"));
+            Assert.That(first.Foci.Single(), Is.EqualTo("focus"));
             Assert.That(first.Frequency.Quantity, Is.EqualTo(3));
             Assert.That(first.Frequency.TimePeriod, Is.EqualTo("fortnight"));
             Assert.That(first.Name, Is.EqualTo("feat1"));
             Assert.That(first.Strength, Is.EqualTo(9266));
 
-            Assert.That(last.Focus, Is.EqualTo("focus"));
+            Assert.That(last.Foci.Single(), Is.EqualTo("focus"));
             Assert.That(last.Frequency.Quantity, Is.EqualTo(3));
             Assert.That(last.Frequency.TimePeriod, Is.EqualTo("fortnight"));
             Assert.That(last.Name, Is.EqualTo("feat1"));
@@ -331,12 +331,12 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             racialFeats.Add(new Feat());
             racialFeats.Add(new Feat());
 
-            racialFeats[0].Focus = "focus";
+            racialFeats[0].Foci = new[] { "focus" };
             racialFeats[0].Name = "feat1";
             racialFeats[0].Strength = 9266;
             racialFeats[0].Frequency.Quantity = 1;
             racialFeats[0].Frequency.TimePeriod = "day";
-            racialFeats[1].Focus = "focus";
+            racialFeats[1].Foci = new[] { "focus" };
             racialFeats[1].Name = "feat1";
             racialFeats[1].Strength = 9266;
             racialFeats[1].Frequency.Quantity = 5;
@@ -346,13 +346,13 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             var first = feats.First();
             var last = feats.Last();
 
-            Assert.That(first.Focus, Is.EqualTo("focus"));
+            Assert.That(first.Foci.Single(), Is.EqualTo("focus"));
             Assert.That(first.Frequency.Quantity, Is.EqualTo(1));
             Assert.That(first.Frequency.TimePeriod, Is.EqualTo("day"));
             Assert.That(first.Name, Is.EqualTo("feat1"));
             Assert.That(first.Strength, Is.EqualTo(9266));
 
-            Assert.That(last.Focus, Is.EqualTo("focus"));
+            Assert.That(last.Foci.Single(), Is.EqualTo("focus"));
             Assert.That(last.Frequency.Quantity, Is.EqualTo(5));
             Assert.That(last.Frequency.TimePeriod, Is.EqualTo("fortnight"));
             Assert.That(last.Name, Is.EqualTo("feat1"));
@@ -367,11 +367,11 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             racialFeats.Add(new Feat());
             racialFeats.Add(new Feat());
 
-            racialFeats[0].Focus = "focus";
+            racialFeats[0].Foci = new[] { "focus" };
             racialFeats[0].Name = "feat1";
             racialFeats[0].Strength = 9266;
             racialFeats[0].Frequency.Quantity = 1;
-            racialFeats[1].Focus = "focus";
+            racialFeats[1].Foci = new[] { "focus" };
             racialFeats[1].Name = "feat1";
             racialFeats[1].Strength = 9266;
             racialFeats[1].Frequency.Quantity = 5;
@@ -380,7 +380,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             //INFO: There is still only 1 feat here because strengths will filter out the duplicate
             var first = feats.Single();
 
-            Assert.That(first.Focus, Is.EqualTo("focus"));
+            Assert.That(first.Foci.Single(), Is.EqualTo("focus"));
             Assert.That(first.Frequency.Quantity, Is.EqualTo(1));
             Assert.That(first.Name, Is.EqualTo("feat1"));
             Assert.That(first.Strength, Is.EqualTo(9266));
@@ -392,12 +392,12 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             racialFeats.Add(new Feat());
             racialFeats.Add(new Feat());
 
-            racialFeats[0].Focus = "focus";
+            racialFeats[0].Foci = new[] { "focus" };
             racialFeats[0].Name = "feat1";
             racialFeats[0].Strength = 9266;
             racialFeats[0].Frequency.Quantity = 5;
             racialFeats[0].Frequency.TimePeriod = FeatConstants.Frequencies.Day;
-            racialFeats[1].Focus = "focus";
+            racialFeats[1].Foci = new[] { "focus" };
             racialFeats[1].Name = "feat1";
             racialFeats[1].Strength = 9266;
             racialFeats[1].Frequency.Quantity = 0;
@@ -406,7 +406,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
             var first = feats.First();
 
-            Assert.That(first.Focus, Is.EqualTo("focus"));
+            Assert.That(first.Foci.Single(), Is.EqualTo("focus"));
             Assert.That(first.Frequency.Quantity, Is.EqualTo(0));
             Assert.That(first.Frequency.TimePeriod, Is.EqualTo(FeatConstants.Frequencies.Constant));
             Assert.That(first.Name, Is.EqualTo("feat1"));
@@ -421,12 +421,12 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             racialFeats.Add(new Feat());
             racialFeats.Add(new Feat());
 
-            racialFeats[0].Focus = "focus";
+            racialFeats[0].Foci = new[] { "focus" };
             racialFeats[0].Name = "feat1";
             racialFeats[0].Strength = 9266;
             racialFeats[0].Frequency.Quantity = 5;
             racialFeats[0].Frequency.TimePeriod = FeatConstants.Frequencies.Day;
-            racialFeats[1].Focus = "focus";
+            racialFeats[1].Foci = new[] { "focus" };
             racialFeats[1].Name = "feat1";
             racialFeats[1].Strength = 9266;
             racialFeats[1].Frequency.Quantity = 0;
@@ -435,7 +435,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
             var first = feats.First();
 
-            Assert.That(first.Focus, Is.EqualTo("focus"));
+            Assert.That(first.Foci.Single(), Is.EqualTo("focus"));
             Assert.That(first.Frequency.Quantity, Is.EqualTo(0));
             Assert.That(first.Frequency.TimePeriod, Is.EqualTo(FeatConstants.Frequencies.AtWill));
             Assert.That(first.Name, Is.EqualTo("feat1"));
@@ -450,12 +450,12 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             racialFeats.Add(new Feat());
             racialFeats.Add(new Feat());
 
-            racialFeats[0].Focus = "focus";
+            racialFeats[0].Foci = new[] { "focus" };
             racialFeats[0].Name = "feat1";
             racialFeats[0].Strength = 9266;
             racialFeats[0].Frequency.Quantity = 0;
             racialFeats[0].Frequency.TimePeriod = FeatConstants.Frequencies.AtWill;
-            racialFeats[1].Focus = "focus";
+            racialFeats[1].Foci = new[] { "focus" };
             racialFeats[1].Name = "feat1";
             racialFeats[1].Strength = 9266;
             racialFeats[1].Frequency.Quantity = 0;
@@ -464,7 +464,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
             var first = feats.First();
 
-            Assert.That(first.Focus, Is.EqualTo("focus"));
+            Assert.That(first.Foci.Single(), Is.EqualTo("focus"));
             Assert.That(first.Frequency.Quantity, Is.EqualTo(0));
             Assert.That(first.Frequency.TimePeriod, Is.EqualTo(FeatConstants.Frequencies.Constant));
             Assert.That(first.Name, Is.EqualTo("feat1"));
@@ -480,10 +480,10 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             racialFeats.Add(new Feat());
             racialFeats.Add(new Feat());
 
-            racialFeats[0].Focus = "focus";
+            racialFeats[0].Foci = new[] { "focus" };
             racialFeats[0].Name = "feat1";
             racialFeats[0].Strength = 42;
-            racialFeats[1].Focus = "focus";
+            racialFeats[1].Foci = new[] { "focus" };
             racialFeats[1].Name = "feat1";
             racialFeats[1].Strength = 9266;
             racialFeats[2].Name = "feat2";
@@ -492,7 +492,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             var first = feats.First();
             var last = feats.Last();
 
-            Assert.That(first.Focus, Is.EqualTo("focus"));
+            Assert.That(first.Foci.Single(), Is.EqualTo("focus"));
             Assert.That(first.Name, Is.EqualTo("feat1"));
             Assert.That(first.Strength, Is.EqualTo(9266));
 
@@ -506,12 +506,12 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             racialFeats.Add(new Feat());
             racialFeats.Add(new Feat());
 
-            racialFeats[0].Focus = "focus";
+            racialFeats[0].Foci = new[] { "focus" };
             racialFeats[0].Name = "feat1";
             racialFeats[0].Strength = 42;
             racialFeats[0].Frequency.Quantity = 0;
             racialFeats[0].Frequency.TimePeriod = "time period";
-            racialFeats[1].Focus = "focus";
+            racialFeats[1].Foci = new[] { "focus" };
             racialFeats[1].Name = "feat1";
             racialFeats[1].Strength = 9266;
             racialFeats[1].Frequency.Quantity = 0;
@@ -521,13 +521,13 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             var first = feats.First();
             var last = feats.Last();
 
-            Assert.That(first.Focus, Is.EqualTo("focus"));
+            Assert.That(first.Foci.Single(), Is.EqualTo("focus"));
             Assert.That(first.Frequency.Quantity, Is.EqualTo(0));
             Assert.That(first.Frequency.TimePeriod, Is.EqualTo("time period"));
             Assert.That(first.Name, Is.EqualTo("feat1"));
             Assert.That(first.Strength, Is.EqualTo(42));
 
-            Assert.That(last.Focus, Is.EqualTo("focus"));
+            Assert.That(last.Foci.Single(), Is.EqualTo("focus"));
             Assert.That(last.Frequency.Quantity, Is.EqualTo(0));
             Assert.That(last.Frequency.TimePeriod, Is.EqualTo("time period"));
             Assert.That(last.Name, Is.EqualTo("feat1"));
@@ -537,15 +537,15 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         }
 
         [Test]
-        public void IfNoFrequencyButStrengthsAndIdsDoNotMatch_DoNotRemoveStrengths()
+        public void IfNoFrequencyButStrengthsAndNamesDoNotMatch_DoNotRemoveStrengths()
         {
             racialFeats.Add(new Feat());
             racialFeats.Add(new Feat());
 
-            racialFeats[0].Focus = "focus";
+            racialFeats[0].Foci = new[] { "focus" };
             racialFeats[0].Name = "feat1";
             racialFeats[0].Strength = 42;
-            racialFeats[1].Focus = "focus";
+            racialFeats[1].Foci = new[] { "focus" };
             racialFeats[1].Name = "feat2";
             racialFeats[1].Strength = 9266;
 
@@ -553,11 +553,11 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             var first = feats.First();
             var last = feats.Last();
 
-            Assert.That(first.Focus, Is.EqualTo("focus"));
+            Assert.That(first.Foci.Single(), Is.EqualTo("focus"));
             Assert.That(first.Name, Is.EqualTo("feat1"));
             Assert.That(first.Strength, Is.EqualTo(42));
 
-            Assert.That(last.Focus, Is.EqualTo("focus"));
+            Assert.That(last.Foci.Single(), Is.EqualTo("focus"));
             Assert.That(last.Name, Is.EqualTo("feat2"));
             Assert.That(last.Strength, Is.EqualTo(9266));
 
@@ -570,10 +570,10 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             racialFeats.Add(new Feat());
             racialFeats.Add(new Feat());
 
-            racialFeats[0].Focus = "focus";
+            racialFeats[0].Foci = new[] { "focus" };
             racialFeats[0].Name = "feat1";
             racialFeats[0].Strength = 42;
-            racialFeats[1].Focus = "focus2";
+            racialFeats[1].Foci = new[] { "focus2" };
             racialFeats[1].Name = "feat1";
             racialFeats[1].Strength = 9266;
 
@@ -581,11 +581,11 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             var first = feats.First();
             var last = feats.Last();
 
-            Assert.That(first.Focus, Is.EqualTo("focus"));
+            Assert.That(first.Foci.Single(), Is.EqualTo("focus"));
             Assert.That(first.Name, Is.EqualTo("feat1"));
             Assert.That(first.Strength, Is.EqualTo(42));
 
-            Assert.That(last.Focus, Is.EqualTo("focus2"));
+            Assert.That(last.Foci.Single(), Is.EqualTo("focus2"));
             Assert.That(last.Name, Is.EqualTo("feat1"));
             Assert.That(last.Strength, Is.EqualTo(9266));
 
@@ -598,17 +598,17 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             racialFeats.Add(new Feat());
             racialFeats.Add(new Feat());
 
-            racialFeats[0].Focus = "focus";
+            racialFeats[0].Foci = new[] { "focus" };
             racialFeats[0].Name = "feat1";
             racialFeats[0].Strength = 42;
-            racialFeats[1].Focus = "focus";
+            racialFeats[1].Foci = new[] { "focus" };
             racialFeats[1].Name = "feat1";
             racialFeats[1].Strength = 42;
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
             var first = feats.First();
 
-            Assert.That(first.Focus, Is.EqualTo("focus"));
+            Assert.That(first.Foci.Single(), Is.EqualTo("focus"));
             Assert.That(first.Name, Is.EqualTo("feat1"));
             Assert.That(first.Strength, Is.EqualTo(42));
 
@@ -641,12 +641,12 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             racialFeats.Add(new Feat());
 
             racialFeats[0].Name = "feat1";
-            racialFeats[0].Focus = "focus";
+            racialFeats[0].Foci = new[] { "focus" };
             racialFeats[1].Name = "feat1";
-            racialFeats[1].Focus = FeatConstants.Foci.All;
+            racialFeats[1].Foci = new[] { FeatConstants.Foci.All };
             racialFeats[2].Name = "feat2";
             racialFeats[3].Name = "feat3";
-            racialFeats[3].Focus = "focus";
+            racialFeats[3].Foci = new[] { "focus" };
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
             var feat1 = feats.First(f => f.Name == "feat1");
@@ -654,11 +654,11 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             var feat3 = feats.First(f => f.Name == "feat3");
 
             Assert.That(feat1.Name, Is.EqualTo("feat1"));
-            Assert.That(feat1.Focus, Is.EqualTo(FeatConstants.Foci.All));
+            Assert.That(feat1.Foci.Single(), Is.EqualTo(FeatConstants.Foci.All));
             Assert.That(feat2.Name, Is.EqualTo("feat2"));
-            Assert.That(feat2.Focus, Is.Empty);
+            Assert.That(feat2.Foci, Is.Empty);
             Assert.That(feat3.Name, Is.EqualTo("feat3"));
-            Assert.That(feat3.Focus, Is.EqualTo("focus"));
+            Assert.That(feat3.Foci.Single(), Is.EqualTo("focus"));
             Assert.That(feats.Count(), Is.EqualTo(3));
         }
 
@@ -671,12 +671,12 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             racialFeats.Add(new Feat());
 
             racialFeats[0].Name = "feat1";
-            racialFeats[0].Focus = FeatConstants.Foci.All;
+            racialFeats[0].Foci = new[] { FeatConstants.Foci.All };
             racialFeats[1].Name = "feat1";
-            racialFeats[1].Focus = FeatConstants.Foci.All;
+            racialFeats[1].Foci = new[] { FeatConstants.Foci.All };
             racialFeats[2].Name = "feat2";
             racialFeats[3].Name = "feat3";
-            racialFeats[3].Focus = FeatConstants.Foci.All;
+            racialFeats[3].Foci = new[] { FeatConstants.Foci.All };
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
             var feat1 = feats.First(f => f.Name == "feat1");
@@ -684,11 +684,11 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             var feat3 = feats.First(f => f.Name == "feat3");
 
             Assert.That(feat1.Name, Is.EqualTo("feat1"));
-            Assert.That(feat1.Focus, Is.EqualTo(FeatConstants.Foci.All));
+            Assert.That(feat1.Foci.Single(), Is.EqualTo(FeatConstants.Foci.All));
             Assert.That(feat2.Name, Is.EqualTo("feat2"));
-            Assert.That(feat2.Focus, Is.Empty);
+            Assert.That(feat2.Foci, Is.Empty);
             Assert.That(feat3.Name, Is.EqualTo("feat3"));
-            Assert.That(feat3.Focus, Is.EqualTo(FeatConstants.Foci.All));
+            Assert.That(feat3.Foci.Single(), Is.EqualTo(FeatConstants.Foci.All));
             Assert.That(feats.Count(), Is.EqualTo(3));
         }
 
@@ -701,23 +701,237 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             racialFeats.Add(new Feat());
 
             racialFeats[0].Name = "feat1";
-            racialFeats[0].Focus = FeatConstants.Foci.All;
+            racialFeats[0].Foci = new[] { FeatConstants.Foci.All };
             racialFeats[1].Name = "feat1";
-            racialFeats[1].Focus = FeatConstants.Foci.All;
+            racialFeats[1].Foci = new[] { FeatConstants.Foci.All };
             racialFeats[2].Name = "feat2";
-            racialFeats[2].Focus = FeatConstants.Foci.All;
+            racialFeats[2].Foci = new[] { FeatConstants.Foci.All };
             racialFeats[3].Name = "feat2";
-            racialFeats[3].Focus = FeatConstants.Foci.All;
+            racialFeats[3].Foci = new[] { FeatConstants.Foci.All };
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
             var feat1 = feats.First(f => f.Name == "feat1");
             var feat2 = feats.First(f => f.Name == "feat2");
 
             Assert.That(feat1.Name, Is.EqualTo("feat1"));
-            Assert.That(feat1.Focus, Is.EqualTo(FeatConstants.Foci.All));
+            Assert.That(feat1.Foci.Single(), Is.EqualTo(FeatConstants.Foci.All));
             Assert.That(feat2.Name, Is.EqualTo("feat2"));
-            Assert.That(feat2.Focus, Is.EqualTo(FeatConstants.Foci.All));
+            Assert.That(feat2.Foci.Single(), Is.EqualTo(FeatConstants.Foci.All));
             Assert.That(feats.Count(), Is.EqualTo(2));
+        }
+
+        [Test]
+        public void IfNameAndStrengthMatchAndNoFrequency_CombineFoci()
+        {
+            racialFeats.Add(new Feat());
+            racialFeats.Add(new Feat());
+
+            racialFeats[0].Name = "feat1";
+            racialFeats[0].Foci = new[] { "focus 1", "focus 2" };
+            racialFeats[0].Strength = 9266;
+            racialFeats[1].Name = "feat1";
+            racialFeats[1].Foci = new[] { "focus 3", "focus 4" };
+            racialFeats[1].Strength = 9266;
+
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            var onlyFeat = feats.Single();
+
+            Assert.That(onlyFeat.Name, Is.EqualTo("feat1"));
+            Assert.That(onlyFeat.Foci, Contains.Item("focus 1"));
+            Assert.That(onlyFeat.Foci, Contains.Item("focus 2"));
+            Assert.That(onlyFeat.Foci, Contains.Item("focus 3"));
+            Assert.That(onlyFeat.Foci, Contains.Item("focus 4"));
+            Assert.That(onlyFeat.Foci.Count(), Is.EqualTo(4));
+            Assert.That(onlyFeat.Strength, Is.EqualTo(9266));
+        }
+
+        [Test]
+        public void IfNamesDoNotMatch_DoNotCombineFoci()
+        {
+            racialFeats.Add(new Feat());
+            racialFeats.Add(new Feat());
+
+            racialFeats[0].Name = "feat1";
+            racialFeats[0].Foci = new[] { "focus 1", "focus 2" };
+            racialFeats[0].Strength = 9266;
+            racialFeats[1].Name = "feat2";
+            racialFeats[1].Foci = new[] { "focus 3", "focus 4" };
+            racialFeats[1].Strength = 9266;
+
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            var firstFeat = feats.First();
+            var lastFeat = feats.Last();
+
+            Assert.That(firstFeat.Name, Is.EqualTo("feat1"));
+            Assert.That(firstFeat.Foci, Contains.Item("focus 1"));
+            Assert.That(firstFeat.Foci, Contains.Item("focus 2"));
+            Assert.That(firstFeat.Foci.Count(), Is.EqualTo(2));
+            Assert.That(firstFeat.Strength, Is.EqualTo(9266));
+
+            Assert.That(lastFeat.Name, Is.EqualTo("feat2"));
+            Assert.That(lastFeat.Foci, Contains.Item("focus 3"));
+            Assert.That(lastFeat.Foci, Contains.Item("focus 4"));
+            Assert.That(lastFeat.Foci.Count(), Is.EqualTo(2));
+            Assert.That(lastFeat.Strength, Is.EqualTo(9266));
+        }
+
+        [Test]
+        public void IfStrengthsDoNotMatch_DoNotCombineFoci()
+        {
+            racialFeats.Add(new Feat());
+            racialFeats.Add(new Feat());
+
+            racialFeats[0].Name = "feat1";
+            racialFeats[0].Foci = new[] { "focus 1", "focus 2" };
+            racialFeats[0].Strength = 9266;
+            racialFeats[1].Name = "feat1";
+            racialFeats[1].Foci = new[] { "focus 3", "focus 4" };
+            racialFeats[1].Strength = 90210;
+
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            var firstFeat = feats.First();
+            var lastFeat = feats.Last();
+
+            Assert.That(firstFeat.Name, Is.EqualTo("feat1"));
+            Assert.That(firstFeat.Foci, Contains.Item("focus 1"));
+            Assert.That(firstFeat.Foci, Contains.Item("focus 2"));
+            Assert.That(firstFeat.Foci.Count(), Is.EqualTo(2));
+            Assert.That(firstFeat.Strength, Is.EqualTo(9266));
+
+            Assert.That(lastFeat.Name, Is.EqualTo("feat1"));
+            Assert.That(lastFeat.Foci, Contains.Item("focus 3"));
+            Assert.That(lastFeat.Foci, Contains.Item("focus 4"));
+            Assert.That(lastFeat.Foci.Count(), Is.EqualTo(2));
+            Assert.That(lastFeat.Strength, Is.EqualTo(90210));
+        }
+
+        [Test]
+        public void IfFeatHasFrequency_DoNotCombineFoci()
+        {
+            racialFeats.Add(new Feat());
+            racialFeats.Add(new Feat());
+
+            racialFeats[0].Name = "feat1";
+            racialFeats[0].Foci = new[] { "focus 1", "focus 2" };
+            racialFeats[0].Strength = 9266;
+            racialFeats[1].Name = "feat1";
+            racialFeats[1].Foci = new[] { "focus 3", "focus 4" };
+            racialFeats[1].Strength = 9266;
+            racialFeats[1].Frequency.TimePeriod = "time period";
+            racialFeats[1].Frequency.Quantity = 42;
+
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            var firstFeat = feats.First();
+            var lastFeat = feats.Last();
+
+            Assert.That(firstFeat.Name, Is.EqualTo("feat1"));
+            Assert.That(firstFeat.Foci, Contains.Item("focus 1"));
+            Assert.That(firstFeat.Foci, Contains.Item("focus 2"));
+            Assert.That(firstFeat.Foci.Count(), Is.EqualTo(2));
+            Assert.That(firstFeat.Strength, Is.EqualTo(9266));
+            Assert.That(firstFeat.Frequency.Quantity, Is.EqualTo(0));
+            Assert.That(firstFeat.Frequency.TimePeriod, Is.Empty);
+
+            Assert.That(lastFeat.Name, Is.EqualTo("feat1"));
+            Assert.That(lastFeat.Foci, Contains.Item("focus 3"));
+            Assert.That(lastFeat.Foci, Contains.Item("focus 4"));
+            Assert.That(lastFeat.Foci.Count(), Is.EqualTo(2));
+            Assert.That(lastFeat.Strength, Is.EqualTo(9266));
+            Assert.That(lastFeat.Frequency.Quantity, Is.EqualTo(42));
+            Assert.That(lastFeat.Frequency.TimePeriod, Is.EqualTo("time period"));
+        }
+
+        [Test]
+        public void IfBothFeatHaveMatchingFrequencies_DoNotCombineFoci()
+        {
+            racialFeats.Add(new Feat());
+            racialFeats.Add(new Feat());
+
+            racialFeats[0].Name = "feat1";
+            racialFeats[0].Foci = new[] { "focus 1", "focus 2" };
+            racialFeats[0].Strength = 9266;
+            racialFeats[0].Frequency.TimePeriod = "time period";
+            racialFeats[0].Frequency.Quantity = 42;
+            racialFeats[1].Name = "feat1";
+            racialFeats[1].Foci = new[] { "focus 3", "focus 4" };
+            racialFeats[1].Strength = 9266;
+            racialFeats[1].Frequency.TimePeriod = "time period";
+            racialFeats[1].Frequency.Quantity = 42;
+
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            var firstFeat = feats.First();
+            var lastFeat = feats.Last();
+
+            Assert.That(firstFeat.Name, Is.EqualTo("feat1"));
+            Assert.That(firstFeat.Foci, Contains.Item("focus 1"));
+            Assert.That(firstFeat.Foci, Contains.Item("focus 2"));
+            Assert.That(firstFeat.Foci.Count(), Is.EqualTo(2));
+            Assert.That(firstFeat.Strength, Is.EqualTo(9266));
+            Assert.That(firstFeat.Frequency.Quantity, Is.EqualTo(42));
+            Assert.That(firstFeat.Frequency.TimePeriod, Is.EqualTo("time period"));
+
+            Assert.That(lastFeat.Name, Is.EqualTo("feat1"));
+            Assert.That(lastFeat.Foci, Contains.Item("focus 3"));
+            Assert.That(lastFeat.Foci, Contains.Item("focus 4"));
+            Assert.That(lastFeat.Foci.Count(), Is.EqualTo(2));
+            Assert.That(lastFeat.Strength, Is.EqualTo(9266));
+            Assert.That(lastFeat.Frequency.Quantity, Is.EqualTo(42));
+            Assert.That(lastFeat.Frequency.TimePeriod, Is.EqualTo("time period"));
+        }
+
+        [Test]
+        public void DoNotCombineFociIfNoFoci()
+        {
+            racialFeats.Add(new Feat());
+            racialFeats.Add(new Feat());
+            racialFeats.Add(new Feat());
+            racialFeats.Add(new Feat());
+
+            racialFeats[0].Name = "feat1";
+            racialFeats[0].Strength = 9266;
+            racialFeats[1].Name = "feat1";
+            racialFeats[1].Foci = new[] { "focus 1" };
+            racialFeats[1].Strength = 9266;
+            racialFeats[2].Name = "feat2";
+            racialFeats[2].Strength = 9266;
+            racialFeats[2].Foci = new[] { "focus 2" };
+            racialFeats[3].Name = "feat2";
+            racialFeats[3].Strength = 9266;
+
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            var firstFeat = feats.ElementAt(0);
+            var secondFeat = feats.ElementAt(1);
+            var thirdFeat = feats.ElementAt(2);
+            var fourthFeat = feats.ElementAt(3);
+
+            Assert.That(firstFeat.Name, Is.EqualTo("feat1"));
+            Assert.That(firstFeat.Foci, Is.Empty);
+            Assert.That(firstFeat.Strength, Is.EqualTo(9266));
+
+            Assert.That(secondFeat.Name, Is.EqualTo("feat1"));
+            Assert.That(secondFeat.Foci.Single(), Is.EqualTo("focus 1"));
+            Assert.That(secondFeat.Strength, Is.EqualTo(9266));
+
+            Assert.That(thirdFeat.Name, Is.EqualTo("feat2"));
+            Assert.That(thirdFeat.Foci.Single(), Is.EqualTo("focus 2"));
+            Assert.That(thirdFeat.Strength, Is.EqualTo(9266));
+
+            Assert.That(fourthFeat.Name, Is.EqualTo("feat2"));
+            Assert.That(fourthFeat.Foci, Is.Empty);
+            Assert.That(fourthFeat.Strength, Is.EqualTo(9266));
+        }
+
+        [Test]
+        public void CanOnlyBeFocusedInAll()
+        {
+            racialFeats.Add(new Feat());
+
+            racialFeats[0].Name = "feat1";
+            racialFeats[0].Foci = new[] { FeatConstants.Foci.All, "focus 2" };
+
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            var onlyFeat = feats.Single();
+            Assert.That(onlyFeat.Foci.Single(), Is.EqualTo(FeatConstants.Foci.All));
         }
     }
 }

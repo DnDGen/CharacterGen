@@ -73,7 +73,7 @@ namespace CharacterGen.Generators.Domain.Items
             var allWeapons = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, FeatConstants.Foci.Weapons);
 
             var nonProficiencyFeats = feats.Except(proficiencyFeats).Where(f => f.Name != FeatConstants.WeaponFamiliarity);
-            return nonProficiencyFeats.Where(f => allWeapons.Contains(f.Focus));
+            return nonProficiencyFeats.Where(f => allWeapons.Intersect(f.Foci).Any());
         }
 
         private IEnumerable<Feat> GetProficiencyFeatWithSpecificWeaponFocus(IEnumerable<Feat> feats)
@@ -81,13 +81,13 @@ namespace CharacterGen.Generators.Domain.Items
             var proficiencyFeats = GetProficiencyFeats(feats);
             var allWeapons = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, FeatConstants.Foci.Weapons);
 
-            return proficiencyFeats.Where(f => allWeapons.Contains(f.Focus));
+            return proficiencyFeats.Where(f => allWeapons.Intersect(f.Foci).Any());
         }
 
         private IEnumerable<Feat> GetProficiencyFeatWithFocusOfAll(IEnumerable<Feat> feats)
         {
             var proficiencyFeats = GetProficiencyFeats(feats);
-            return proficiencyFeats.Where(f => f.Focus == FeatConstants.Foci.All);
+            return proficiencyFeats.Where(f => f.Foci.Contains(FeatConstants.Foci.All));
         }
 
         private IEnumerable<Feat> GetProficiencyFeats(IEnumerable<Feat> feats)
@@ -126,7 +126,7 @@ namespace CharacterGen.Generators.Domain.Items
         private IEnumerable<String> GetAllowedWeapons(IEnumerable<Feat> feats, IEnumerable<String> filteredWeapons)
         {
             var nonProficiencyFeatsWithWeaponFoci = GetNonProficiencyFeatsWithWeaponFoci(feats);
-            var allowedWeapons = nonProficiencyFeatsWithWeaponFoci.Select(f => f.Focus);
+            var allowedWeapons = nonProficiencyFeatsWithWeaponFoci.SelectMany(f => f.Foci);
             allowedWeapons = GetAmmunitionBaseTypes(allowedWeapons);
             allowedWeapons = allowedWeapons.Intersect(filteredWeapons);
 
@@ -134,7 +134,7 @@ namespace CharacterGen.Generators.Domain.Items
                 return allowedWeapons;
 
             var proficiencyFeatsWithSpecificWeaponFoci = GetProficiencyFeatWithSpecificWeaponFocus(feats);
-            allowedWeapons = proficiencyFeatsWithSpecificWeaponFoci.Select(f => f.Focus);
+            allowedWeapons = proficiencyFeatsWithSpecificWeaponFoci.SelectMany(f => f.Foci);
             allowedWeapons = GetAmmunitionBaseTypes(allowedWeapons);
             allowedWeapons = allowedWeapons.Intersect(filteredWeapons);
 

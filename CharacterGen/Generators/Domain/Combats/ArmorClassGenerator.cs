@@ -94,7 +94,7 @@ namespace CharacterGen.Generators.Domain.Combats
             var itemsWithNaturalArmorBonuses = items.Where(i => thingsThatGrantNaturalArmorBonuses.Contains(i.Name));
             var itemNaturalArmorBonuses = itemsWithNaturalArmorBonuses.Select(i => i.Magic.Bonus);
 
-            var featsWithNaturalArmorBonuses = feats.Where(f => thingsThatGrantNaturalArmorBonuses.Contains(f.Name) && String.IsNullOrEmpty(f.Focus));
+            var featsWithNaturalArmorBonuses = feats.Where(f => thingsThatGrantNaturalArmorBonuses.Contains(f.Name) && f.Foci.Any() == false);
             var featNaturalArmorBonuses = featsWithNaturalArmorBonuses.Select(f => f.Strength);
             var featNaturalArmorBonus = featNaturalArmorBonuses.Sum();
 

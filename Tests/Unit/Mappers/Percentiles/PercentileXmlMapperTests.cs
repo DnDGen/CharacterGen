@@ -16,11 +16,13 @@ namespace CharacterGen.Tests.Unit.Mappers.Percentiles
         private Mock<IStreamLoader> mockStreamLoader;
         private const String tableName = "PercentileXmlMapperTests";
         private String filename;
+        private String filePath;
 
         [SetUp]
         public void Setup()
         {
             filename = tableName + ".xml";
+            filePath = Path.Combine(TestContext.CurrentContext.TestDirectory, filename);
             MakeXmlFile();
 
             mockStreamLoader = new Mock<IStreamLoader>();
@@ -49,12 +51,12 @@ namespace CharacterGen.Tests.Unit.Mappers.Percentiles
                                     <upper>7</upper>
                                 </object>
                             </percentile>";
-            File.WriteAllText(filename, content);
+            File.WriteAllText(filePath, content);
         }
 
         private Stream GetStream()
         {
-            return new FileStream(filename, FileMode.Open);
+            return new FileStream(filePath, FileMode.Open);
         }
 
         [Test]
@@ -92,7 +94,7 @@ namespace CharacterGen.Tests.Unit.Mappers.Percentiles
             var content = @"<?xml version=""1.0"" encoding=""utf-8"" ?>
                             <percentile>
                             </percentile>";
-            File.WriteAllText(filename, content);
+            File.WriteAllText(filePath, content);
         }
     }
 }

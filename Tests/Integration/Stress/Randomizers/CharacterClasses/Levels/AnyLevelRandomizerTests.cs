@@ -1,7 +1,7 @@
-﻿using System;
+﻿using CharacterGen.Generators.Randomizers.CharacterClasses;
 using Ninject;
-using CharacterGen.Generators.Randomizers.CharacterClasses;
 using NUnit.Framework;
+using System;
 
 namespace CharacterGen.Tests.Integration.Stress.Randomizers.CharacterClasses.Levels
 {
@@ -20,7 +20,7 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.CharacterClasses.Lev
         protected override void MakeAssertions()
         {
             var level = LevelRandomizer.Randomize();
-            Assert.That(level, Is.InRange<Int32>(1, 20));
+            Assert.That(level, Is.InRange(1, 20));
         }
     }
 }

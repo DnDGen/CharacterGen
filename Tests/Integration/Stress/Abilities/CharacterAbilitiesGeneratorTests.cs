@@ -15,7 +15,7 @@ namespace CharacterGen.Tests.Integration.Stress.Abilities
         public IAbilitiesGenerator CharacterAbilitiesGenerator { get; set; }
         [Inject, Named(StatsRandomizerTypeConstants.Raw)]
         public IStatsRandomizer StatsRandomizer { get; set; }
-        [Inject, Named(AbilitiesGeneratorTypeConstants.Character)]
+        [Inject, Named(CombatGeneratorTypeConstants.Character)]
         public ICombatGenerator CharacterCombatGenerator { get; set; }
 
         [TestCase("CharacterAbilitiesGenerator")]

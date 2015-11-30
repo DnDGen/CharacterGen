@@ -32,14 +32,24 @@ namespace CharacterGen.Tests.Unit.Common
         [Test]
         public void IsLeaderIfHasLeadershipFeat()
         {
-            character.Ability.Feats = new[] { new Feat { Name = FeatConstants.Leadership } };
+            character.Ability.Feats = new[]
+            {
+                new Feat { Name = FeatConstants.Leadership },
+                new Feat { Name = "other feat" }
+            };
+
             Assert.That(character.IsLeader, Is.True);
         }
 
         [Test]
         public void IsNotLeaderIfDoesNotHaveLeadershipFeat()
         {
-            character.Ability.Feats = new[] { new Feat { Name = "other feat" } };
+            character.Ability.Feats = new[]
+            {
+                new Feat { Name = "feat" },
+                new Feat { Name = "other feat" }
+            };
+
             Assert.That(character.IsLeader, Is.False);
         }
     }

@@ -139,8 +139,8 @@ namespace CharacterGen.Tests.Unit.Selectors.Objects
                 new RequiredFeat { Feat = "feat 2", Focus = "focus 2" }
             };
 
-            feats.Add(new Feat { Name = "feat 1", Focus = "focus 1" });
-            feats.Add(new Feat { Name = "feat 2", Focus = "focus 2" });
+            feats.Add(new Feat { Name = "feat 1", Foci = new[] { "focus 1", "focus 3" } });
+            feats.Add(new Feat { Name = "feat 2", Foci = new[] { "focus 4", "focus 2" } });
 
             var requirementsMet = selection.RequirementsMet(characterClass, race, feats);
             Assert.That(requirementsMet, Is.True);
@@ -155,13 +155,10 @@ namespace CharacterGen.Tests.Unit.Selectors.Objects
                 new RequiredFeat { Feat = "feat 2", Focus = "focus 2" }
             };
 
-            feats.Add(new Feat { Name = "feat 1", Focus = "focus 1" });
-            feats.Add(new Feat { Name = "feat 1", Focus = "focus 2" });
-            feats.Add(new Feat { Name = "feat 2", Focus = "focus 2" });
-            feats.Add(new Feat { Name = "feat 2", Focus = "focus 1" });
-            feats.Add(new Feat { Name = "feat 2", Focus = "focus 3" });
+            feats.Add(new Feat { Name = "feat 1", Foci = new[] { "focus 1", "focus 2" } });
+            feats.Add(new Feat { Name = "feat 2", Foci = new[] { "focus 2", "focus 1", "focus 3" } });
             feats.Add(new Feat { Name = "feat 3" });
-            feats.Add(new Feat { Name = "feat 4", Focus = "focus 4" });
+            feats.Add(new Feat { Name = "feat 4", Foci = new[] { "focus 4" } });
 
             var requirementsMet = selection.RequirementsMet(characterClass, race, feats);
             Assert.That(requirementsMet, Is.True);
@@ -176,10 +173,9 @@ namespace CharacterGen.Tests.Unit.Selectors.Objects
                 new RequiredFeat { Feat = "feat 2", Focus = "focus 2" }
             };
 
-            feats.Add(new Feat { Name = "feat 1", Focus = "focus 2" });
-            feats.Add(new Feat { Name = "feat 2", Focus = "focus 2" });
-            feats.Add(new Feat { Name = "feat 3", Focus = "focus 1" });
-            feats.Add(new Feat { Name = "feat 2", Focus = "focus 1" });
+            feats.Add(new Feat { Name = "feat 1", Foci = new[] { "focus 2" } });
+            feats.Add(new Feat { Name = "feat 2", Foci = new[] { "focus 2", "focus 1" } });
+            feats.Add(new Feat { Name = "feat 3", Foci = new[] { "focus 1" } });
 
             var requirementsMet = selection.RequirementsMet(characterClass, race, feats);
             Assert.That(requirementsMet, Is.False);
@@ -194,10 +190,9 @@ namespace CharacterGen.Tests.Unit.Selectors.Objects
                 new RequiredFeat { Feat = "feat 2", Focus = "focus 2" }
             };
 
-            feats.Add(new Feat { Name = "feat 1", Focus = "focus 2" });
-            feats.Add(new Feat { Name = "feat 2", Focus = "focus 1" });
-            feats.Add(new Feat { Name = "feat 3", Focus = "focus 1" });
-            feats.Add(new Feat { Name = "feat 3", Focus = "focus 2" });
+            feats.Add(new Feat { Name = "feat 1", Foci = new[] { "focus 2" } });
+            feats.Add(new Feat { Name = "feat 2", Foci = new[] { "focus 1" } });
+            feats.Add(new Feat { Name = "feat 3", Foci = new[] { "focus 1", "focus 2" } });
 
             var requirementsMet = selection.RequirementsMet(characterClass, race, feats);
             Assert.That(requirementsMet, Is.False);
@@ -218,8 +213,8 @@ namespace CharacterGen.Tests.Unit.Selectors.Objects
                 new RequiredFeat { Feat = "feat 2", Focus = "focus 2" }
             };
 
-            feats.Add(new Feat { Name = "feat 1", Focus = "focus 1" });
-            feats.Add(new Feat { Name = "feat 2", Focus = "focus 2" });
+            feats.Add(new Feat { Name = "feat 1", Foci = new[] { "focus 1" } });
+            feats.Add(new Feat { Name = "feat 2", Foci = new[] { "focus 2" } });
 
             var requirementsMet = selection.RequirementsMet(characterClass, race, feats);
             Assert.That(requirementsMet, Is.True);

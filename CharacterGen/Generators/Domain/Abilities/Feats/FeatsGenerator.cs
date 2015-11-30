@@ -92,11 +92,35 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
                 combinedFeatNames.Add(featToRemove.Name);
             }
 
-            if (allFeats.Any(f => f.Focus == FeatConstants.Foci.All))
+            if (allFeats.Any(f => f.Foci.Contains(FeatConstants.Foci.All)))
             {
-                var featNamesWithAllFocus = allFeats.Where(f => f.Focus == FeatConstants.Foci.All).Select(f => f.Name);
-                var redundantFeats = allFeats.Where(f => featNamesWithAllFocus.Contains(f.Name) && f.Focus != FeatConstants.Foci.All);
+                var featsWithAllFocus = allFeats.Where(f => f.Foci.Contains(FeatConstants.Foci.All));
+                var featNamesWithAllFocus = featsWithAllFocus.Select(f => f.Name);
+                var redundantFeats = allFeats.Where(f => featNamesWithAllFocus.Contains(f.Name) && f.Foci.Contains(FeatConstants.Foci.All) == false);
                 featsToRemove.AddRange(redundantFeats);
+
+                foreach (var feat in featsWithAllFocus)
+                    feat.Foci = new[] { FeatConstants.Foci.All };
+            }
+
+            var remainingFeats = allFeats.Except(featsToRemove);
+            var featsWithCombinableFoci = remainingFeats.Where(f => CanCombineFoci(f, remainingFeats));
+            combinedFeatNames.Clear();
+
+            foreach (var featToKeep in featsWithCombinableFoci)
+            {
+                if (combinedFeatNames.Contains(featToKeep.Name))
+                    continue;
+
+                var removableFeats = featsWithCombinableFoci.Where(f => f.Name == featToKeep.Name);
+
+                foreach (var featToRemove in removableFeats)
+                    featToKeep.Foci = featToKeep.Foci.Union(featToRemove.Foci);
+
+                var otherFeats = removableFeats.Except(new[] { featToKeep });
+
+                featsToRemove.AddRange(otherFeats);
+                combinedFeatNames.Add(featToKeep.Name);
             }
 
             allFeats = allFeats.Except(featsToRemove);
@@ -104,17 +128,30 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
             return allFeats;
         }
 
+        private Boolean CanCombineFoci(Feat feat, IEnumerable<Feat> allFeats)
+        {
+            if (feat.Frequency.TimePeriod != String.Empty)
+                return false;
+
+            var count = allFeats.Count(f => f.Name == feat.Name
+                                        && f.Foci.Any() && feat.Foci.Any()
+                                        && f.Strength == feat.Strength
+                                        && f.Frequency.TimePeriod == String.Empty);
+
+            return count > 1;
+        }
+
         private Boolean CanRemoveStrength(Feat feat, IEnumerable<Feat> allFeats)
         {
             if (feat.Frequency.TimePeriod != String.Empty)
                 return false;
 
-            var featIdsAllowingMultipleTakes = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TakenMultipleTimes);
-            if (featIdsAllowingMultipleTakes.Contains(feat.Name))
+            var featNamesAllowingMultipleTakes = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TakenMultipleTimes);
+            if (featNamesAllowingMultipleTakes.Contains(feat.Name))
                 return false;
 
             var count = allFeats.Count(f => f.Name == feat.Name
-                                        && f.Focus == feat.Focus
+                                        && f.Foci.Except(feat.Foci).Any() == false
                                         && f.Frequency.TimePeriod == String.Empty);
 
             return count > 1;
@@ -126,7 +163,7 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
                 return false;
 
             var count = allFeats.Count(f => f.Name == feat.Name
-                                        && f.Focus == feat.Focus
+                                        && f.Foci.Except(feat.Foci).Any() == false
                                         && f.Strength == feat.Strength
                                         && FrequenciesCanCombine(f.Frequency, feat.Frequency));
 
