@@ -39,5 +39,11 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses.Levels
             Assert.That(levels, Contains.Item(9266));
             Assert.That(levels.Count(), Is.EqualTo(1));
         }
+
+        [Test]
+        public void AllowAdjustmentsByDefault()
+        {
+            Assert.That(randomizer.AllowAdjustments, Is.True);
+        }
     }
 }

@@ -55,6 +55,7 @@ namespace CharacterGen.Tests.Unit.Generators
         private Mock<RaceRandomizer> mockBaseRaceRandomizer;
         private Mock<RaceRandomizer> mockMetaraceRandomizer;
         private Mock<IStatsRandomizer> mockStatsRandomizer;
+        private Mock<ISetLevelRandomizer> mockSetLevelRandomizer;
 
         private CharacterClass characterClass;
         private Race race;
@@ -86,8 +87,12 @@ namespace CharacterGen.Tests.Unit.Generators
 
             mockRandomizerVerifier.Setup(v => v.VerifyCompatibility(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object,
                 mockLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(true);
+            mockRandomizerVerifier.Setup(v => v.VerifyCompatibility(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object,
+                mockSetLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(true);
             mockRandomizerVerifier.Setup(v => v.VerifyAlignmentCompatibility(It.IsAny<Alignment>(), mockClassNameRandomizer.Object,
                 mockLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(true);
+            mockRandomizerVerifier.Setup(v => v.VerifyAlignmentCompatibility(It.IsAny<Alignment>(), mockClassNameRandomizer.Object,
+                mockSetLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(true);
             mockRandomizerVerifier.Setup(v => v.VerifyCharacterClassCompatibility(It.IsAny<Alignment>(), It.IsAny<CharacterClass>(),
                 mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(true);
 
@@ -105,6 +110,9 @@ namespace CharacterGen.Tests.Unit.Generators
             mockStatsRandomizer = new Mock<IStatsRandomizer>();
             mockBaseRaceRandomizer = new Mock<RaceRandomizer>();
             mockMetaraceRandomizer = new Mock<RaceRandomizer>();
+            mockSetLevelRandomizer = new Mock<ISetLevelRandomizer>();
+
+            mockSetLevelRandomizer.SetupAllProperties();
         }
 
         private void SetUpGenerators()
@@ -143,6 +151,8 @@ namespace CharacterGen.Tests.Unit.Generators
             mockAlignmentGenerator.Setup(g => g.GenerateWith(mockAlignmentRandomizer.Object)).Returns(alignment);
 
             mockCharacterClassGenerator.Setup(g => g.GenerateWith(alignment, mockLevelRandomizer.Object,
+                mockClassNameRandomizer.Object)).Returns(characterClass);
+            mockCharacterClassGenerator.Setup(g => g.GenerateWith(alignment, mockSetLevelRandomizer.Object,
                 mockClassNameRandomizer.Object)).Returns(characterClass);
             mockRaceGenerator.Setup(g => g.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object,
                 mockMetaraceRandomizer.Object)).Returns(race);
@@ -317,6 +327,36 @@ namespace CharacterGen.Tests.Unit.Generators
         {
             var character = GenerateCharacter();
             Assert.That(character.Magic, Is.EqualTo(magic));
+        }
+
+        [Test]
+        public void AdjustSetLevel()
+        {
+            race.BaseRace = BaseRaceMinusOne;
+            race.Metarace = Metarace;
+            characterClass.Level = 3;
+
+            mockSetLevelRandomizer.Object.AllowAdjustments = true;
+
+            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object,
+                mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
+
+            Assert.That(character.Class.Level, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void DoNotAdjustSetLevel()
+        {
+            race.BaseRace = BaseRaceMinusOne;
+            race.Metarace = Metarace;
+            characterClass.Level = 3;
+
+            mockSetLevelRandomizer.Object.AllowAdjustments = false;
+
+            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object,
+                mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
+
+            Assert.That(character.Class.Level, Is.EqualTo(3));
         }
     }
 }

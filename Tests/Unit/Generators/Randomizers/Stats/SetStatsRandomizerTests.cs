@@ -56,6 +56,12 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
         }
 
         [Test]
+        public void AllowAdjustmentsByDefault()
+        {
+            Assert.That(randomizer.AllowAdjustments, Is.True);
+        }
+
+        [Test]
         public void ReturnSetStats()
         {
             randomizer.SetStrength = 9266;

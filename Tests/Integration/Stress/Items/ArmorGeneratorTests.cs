@@ -1,4 +1,5 @@
-﻿using CharacterGen.Generators.Abilities;
+﻿using CharacterGen.Common.CharacterClasses;
+using CharacterGen.Generators.Abilities;
 using CharacterGen.Generators.Combats;
 using CharacterGen.Generators.Items;
 using CharacterGen.Generators.Randomizers.CharacterClasses;
@@ -21,8 +22,15 @@ namespace CharacterGen.Tests.Integration.Stress.Items
         public IStatsRandomizer StatsRandomizer { get; set; }
         [Inject, Named(CombatGeneratorTypeConstants.Character)]
         public ICombatGenerator CombatGenerator { get; set; }
-        [Inject, Named(ClassNameRandomizerTypeConstants.Warrior)]
-        public override IClassNameRandomizer ClassNameRandomizer { get; set; }
+        [Inject]
+        public ISetClassNameRandomizer SetClassNameRandomizer { get; set; }
+
+        [SetUp]
+        public void Setup()
+        {
+            SetClassNameRandomizer.SetClassName = CharacterClassConstants.Fighter;
+            ClassNameRandomizer = SetClassNameRandomizer;
+        }
 
         [TestCase("Armor Generator")]
         public override void Stress(String stressSubject)

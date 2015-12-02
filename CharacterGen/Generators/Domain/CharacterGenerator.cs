@@ -76,8 +76,11 @@ namespace CharacterGen.Generators.Domain
             var levelAdjustments = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments);
             character.Race = GenerateRace(baseRaceRandomizer, metaraceRandomizer, levelAdjustments, character.Alignment, character.Class);
 
-            character.Class.Level += levelAdjustments[character.Race.BaseRace];
-            character.Class.Level += levelAdjustments[character.Race.Metarace];
+            if ((levelRandomizer is ISetLevelRandomizer) == false || (levelRandomizer as ISetLevelRandomizer).AllowAdjustments)
+            {
+                character.Class.Level += levelAdjustments[character.Race.BaseRace];
+                character.Class.Level += levelAdjustments[character.Race.Metarace];
+            }
 
             var baseAttack = combatGenerator.GenerateBaseAttackWith(character.Class, character.Race);
 

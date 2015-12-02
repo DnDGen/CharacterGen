@@ -13,6 +13,7 @@ namespace CharacterGen.Generators.Domain.Randomizers.Stats
         public Int32 SetIntelligence { get; set; }
         public Int32 SetWisdom { get; set; }
         public Int32 SetCharisma { get; set; }
+        public Boolean AllowAdjustments { get; set; }
 
         public SetStatsRandomizer()
         {
@@ -22,6 +23,7 @@ namespace CharacterGen.Generators.Domain.Randomizers.Stats
             SetIntelligence = 10;
             SetWisdom = 10;
             SetCharisma = 10;
+            AllowAdjustments = true;
         }
 
         public Dictionary<String, Stat> Randomize()

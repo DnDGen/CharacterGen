@@ -10,5 +10,6 @@ namespace CharacterGen.Generators.Randomizers.Stats
         Int32 SetIntelligence { get; set; }
         Int32 SetWisdom { get; set; }
         Int32 SetCharisma { get; set; }
+        Boolean AllowAdjustments { get; set; }
     }
 }

@@ -34,10 +34,15 @@ namespace CharacterGen.Generators.Domain.Abilities
         {
             var stats = statsRandomizer.Randomize();
 
-            var statPriorities = statPrioritySelector.SelectFor(characterClass.ClassName);
-            stats = PrioritizeStats(stats, statPriorities);
-            stats = AdjustStats(race, stats);
-            stats = IncreaseStats(stats, characterClass.Level, statPriorities);
+            if ((statsRandomizer is ISetStatsRandomizer) == false || (statsRandomizer as ISetStatsRandomizer).AllowAdjustments)
+            {
+                var statPriorities = statPrioritySelector.SelectFor(characterClass.ClassName);
+                stats = PrioritizeStats(stats, statPriorities);
+                stats = AdjustStats(race, stats);
+                stats = IncreaseStats(stats, characterClass.Level, statPriorities);
+            }
+
+            stats = SetMinimumStats(stats);
 
             var undead = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Undead);
             if (undead.Contains(race.Metarace))
@@ -75,6 +80,11 @@ namespace CharacterGen.Generators.Domain.Abilities
             foreach (var stat in stats.Keys)
                 stats[stat].Value += statAdjustments[stat];
 
+            return SetMinimumStats(stats);
+        }
+
+        private Dictionary<String, Stat> SetMinimumStats(Dictionary<String, Stat> stats)
+        {
             foreach (var stat in stats.Values)
                 stat.Value = Math.Max(stat.Value, 1);
 

@@ -114,7 +114,7 @@ namespace CharacterGen.Tests.Unit.Mappers.Collections
                             </collections>";
             File.WriteAllText(filePath, content);
 
-            Assert.Throws<ArgumentException>(() => mapper.Map(tableName));
+            Assert.That(() => mapper.Map(tableName), Throws.ArgumentException);
         }
 
         private void MakeEmptyXmlFile()
