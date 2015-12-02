@@ -17,7 +17,7 @@ using TreasureGen.Common.Items;
 namespace CharacterGen.Tests.Unit.Generators.Combats
 {
     [TestFixture]
-    public class CharacterCombatGeneratorTests
+    public class CombatGeneratorTests
     {
         private Mock<ISavingThrowsGenerator> mockSavingThrowsGenerator;
         private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
@@ -44,7 +44,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             mockSavingThrowsGenerator = new Mock<ISavingThrowsGenerator>();
             mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
-            combatGenerator = new CharacterCombatGenerator(mockArmorClassGenerator.Object, mockHitPointsGenerator.Object, mockSavingThrowsGenerator.Object,
+            combatGenerator = new CombatGenerator(mockArmorClassGenerator.Object, mockHitPointsGenerator.Object, mockSavingThrowsGenerator.Object,
                 mockAdjustmentsSelector.Object, mockCollectionsSelector.Object);
             characterClass = new CharacterClass();
             feats = new List<Feat>();

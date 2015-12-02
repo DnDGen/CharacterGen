@@ -12,12 +12,12 @@ namespace CharacterGen.Tests.Integration.Stress.Magics
     [TestFixture]
     public class MagicGeneratorTests : StressTests
     {
-        [Inject, Named(AbilitiesGeneratorTypeConstants.Character)]
-        public IAbilitiesGenerator CharacterAbilitiesGenerator { get; set; }
+        [Inject]
+        public IAbilitiesGenerator AbilitiesGenerator { get; set; }
         [Inject, Named(StatsRandomizerTypeConstants.Heroic)]
         public IStatsRandomizer StatsRandomizer { get; set; }
-        [Inject, Named(CombatGeneratorTypeConstants.Character)]
-        public ICombatGenerator CharacterCombatGenerator { get; set; }
+        [Inject]
+        public ICombatGenerator CombatGenerator { get; set; }
         [Inject]
         public IMagicGenerator MagicGenerator { get; set; }
         [Inject, Named(ClassNameRandomizerTypeConstants.Spellcaster)]
@@ -34,8 +34,8 @@ namespace CharacterGen.Tests.Integration.Stress.Magics
             var alignment = GetNewAlignment();
             var characterClass = Generate(() => GetNewCharacterClass(alignment), c => c.Level > 3);
             var race = RaceGenerator.GenerateWith(alignment, characterClass, BaseRaceRandomizer, MetaraceRandomizer);
-            var baseAttack = CharacterCombatGenerator.GenerateBaseAttackWith(characterClass, race);
-            var ability = CharacterAbilitiesGenerator.GenerateWith(characterClass, race, StatsRandomizer, baseAttack);
+            var baseAttack = CombatGenerator.GenerateBaseAttackWith(characterClass, race);
+            var ability = AbilitiesGenerator.GenerateWith(characterClass, race, StatsRandomizer, baseAttack);
 
             var magic = MagicGenerator.GenerateWith(alignment, characterClass, race, ability.Stats, ability.Feats);
             Assert.That(magic, Is.Not.Null);

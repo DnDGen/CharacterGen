@@ -7,7 +7,6 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races
     [TestFixture]
     public class RaceRandomizerTypeConstantsTests
     {
-        [TestCase(RaceRandomizerTypeConstants.BaseRace.AnimalBase, "Animal Base")]
         [TestCase(RaceRandomizerTypeConstants.BaseRace.AnyBase, "Any Base")]
         [TestCase(RaceRandomizerTypeConstants.BaseRace.EvilBase, "Evil Base")]
         [TestCase(RaceRandomizerTypeConstants.BaseRace.GoodBase, "Good Base")]

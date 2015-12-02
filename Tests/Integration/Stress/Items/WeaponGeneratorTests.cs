@@ -20,11 +20,11 @@ namespace CharacterGen.Tests.Integration.Stress.Items
     {
         [Inject]
         public IWeaponGenerator WeaponGenerator { get; set; }
-        [Inject, Named(AbilitiesGeneratorTypeConstants.Character)]
+        [Inject]
         public IAbilitiesGenerator AbilitiesGenerator { get; set; }
         [Inject, Named(StatsRandomizerTypeConstants.Raw)]
         public IStatsRandomizer StatsRandomizer { get; set; }
-        [Inject, Named(CombatGeneratorTypeConstants.Character)]
+        [Inject]
         public ICombatGenerator CombatGenerator { get; set; }
         [Inject]
         public ICollectionsSelector CollectionsSelector { get; set; }

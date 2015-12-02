@@ -11,10 +11,8 @@
     </object>
     <object>
         <name>Mages</name>
-        <item>Bard</item>
         <item>Sorcerer</item>
         <item>Wizard</item>
-        <item>Ranger</item>
     </object>
     <object>
         <name>Spellcasters</name>

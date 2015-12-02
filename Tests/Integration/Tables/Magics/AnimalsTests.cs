@@ -45,7 +45,19 @@ namespace CharacterGen.Tests.Integration.Tables.Magics
                 "Chaotic Neutral",
                 "Lawful Evil",
                 "Neutral Evil",
-                "Chaotic Evil"
+                "Chaotic Evil",
+                RaceConstants.Metaraces.Ghost,
+                RaceConstants.Metaraces.HalfCelestial,
+                RaceConstants.Metaraces.HalfDragon,
+                RaceConstants.Metaraces.HalfFiend,
+                RaceConstants.Metaraces.Lich,
+                RaceConstants.Metaraces.None,
+                RaceConstants.Metaraces.Vampire,
+                RaceConstants.Metaraces.Werebear,
+                RaceConstants.Metaraces.Wereboar,
+                RaceConstants.Metaraces.Wererat,
+                RaceConstants.Metaraces.Weretiger,
+                RaceConstants.Metaraces.Werewolf
             };
 
             AssertCollectionNames(names);
@@ -61,13 +73,21 @@ namespace CharacterGen.Tests.Integration.Tables.Magics
             RaceConstants.BaseRaces.Animals.Warpony)]
         [TestCase(CharacterClassConstants.Ranger)]
         [TestCase(CharacterClassConstants.Rogue)]
+        [TestCase(RaceConstants.Metaraces.Vampire,
+            RaceConstants.BaseRaces.Animals.Bat,
+            RaceConstants.BaseRaces.Animals.Rat,
+            RaceConstants.BaseRaces.Animals.DireBat,
+            RaceConstants.BaseRaces.Animals.DireRat,
+            RaceConstants.BaseRaces.Animals.FiendishBat,
+            RaceConstants.BaseRaces.Animals.FiendishRat)]
         public override void DistinctCollection(String name, params String[] collection)
         {
             base.DistinctCollection(name, collection);
         }
 
-        [Test]
-        public void SorcererAnimals()
+        [TestCase(CharacterClassConstants.Sorcerer)]
+        [TestCase(CharacterClassConstants.Wizard)]
+        public void MageAnimals(String className)
         {
             var animals = new[]
             {
@@ -125,67 +145,6 @@ namespace CharacterGen.Tests.Integration.Tables.Magics
             };
 
             DistinctCollection(CharacterClassConstants.Sorcerer, animals);
-        }
-
-        [Test]
-        public void WizardAnimals()
-        {
-            var animals = new[]
-            {
-                RaceConstants.BaseRaces.Animals.Bat,
-                RaceConstants.BaseRaces.Animals.Cat,
-                RaceConstants.BaseRaces.Animals.Hawk,
-                RaceConstants.BaseRaces.Animals.Lizard,
-                RaceConstants.BaseRaces.Animals.Owl,
-                RaceConstants.BaseRaces.Animals.Rat,
-                RaceConstants.BaseRaces.Animals.Raven,
-                RaceConstants.BaseRaces.Animals.TinyViperSnake,
-                RaceConstants.BaseRaces.Animals.Toad,
-                RaceConstants.BaseRaces.Animals.Weasel,
-                RaceConstants.BaseRaces.Animals.ShockerLizard,
-                RaceConstants.BaseRaces.Animals.Stirge,
-                RaceConstants.BaseRaces.Animals.FormianWorker,
-                RaceConstants.BaseRaces.Animals.Imp,
-                RaceConstants.BaseRaces.Animals.Pseudodragon,
-                RaceConstants.BaseRaces.Animals.Quasit,
-                RaceConstants.BaseRaces.Animals.CelestialBat,
-                RaceConstants.BaseRaces.Animals.CelestialCat,
-                RaceConstants.BaseRaces.Animals.CelestialHawk,
-                RaceConstants.BaseRaces.Animals.CelestialLizard,
-                RaceConstants.BaseRaces.Animals.CelestialOwl,
-                RaceConstants.BaseRaces.Animals.CelestialRat,
-                RaceConstants.BaseRaces.Animals.CelestialRaven,
-                RaceConstants.BaseRaces.Animals.CelestialTinyViperSnake,
-                RaceConstants.BaseRaces.Animals.CelestialToad,
-                RaceConstants.BaseRaces.Animals.CelestialWeasel,
-                RaceConstants.BaseRaces.Animals.FiendishBat,
-                RaceConstants.BaseRaces.Animals.FiendishCat,
-                RaceConstants.BaseRaces.Animals.FiendishHawk,
-                RaceConstants.BaseRaces.Animals.FiendishLizard,
-                RaceConstants.BaseRaces.Animals.FiendishOwl,
-                RaceConstants.BaseRaces.Animals.FiendishRat,
-                RaceConstants.BaseRaces.Animals.FiendishRaven,
-                RaceConstants.BaseRaces.Animals.FiendishTinyViperSnake,
-                RaceConstants.BaseRaces.Animals.FiendishToad,
-                RaceConstants.BaseRaces.Animals.FiendishWeasel,
-                RaceConstants.BaseRaces.Animals.SmallAirElemental,
-                RaceConstants.BaseRaces.Animals.SmallEarthElemental,
-                RaceConstants.BaseRaces.Animals.SmallFireElemental,
-                RaceConstants.BaseRaces.Animals.SmallWaterElemental,
-                RaceConstants.BaseRaces.Animals.Homonculus,
-                RaceConstants.BaseRaces.Animals.AirMephit,
-                RaceConstants.BaseRaces.Animals.DustMephit,
-                RaceConstants.BaseRaces.Animals.EarthMephit,
-                RaceConstants.BaseRaces.Animals.FireMephit,
-                RaceConstants.BaseRaces.Animals.IceMephit,
-                RaceConstants.BaseRaces.Animals.MagmaMephit,
-                RaceConstants.BaseRaces.Animals.OozeMephit,
-                RaceConstants.BaseRaces.Animals.SaltMephit,
-                RaceConstants.BaseRaces.Animals.SteamMephit,
-                RaceConstants.BaseRaces.Animals.WaterMephit
-            };
-
-            DistinctCollection(CharacterClassConstants.Wizard, animals);
         }
 
         [Test]
@@ -505,6 +464,315 @@ namespace CharacterGen.Tests.Integration.Tables.Magics
             };
 
             DistinctCollection(RaceConstants.Sizes.Medium, animals);
+        }
+
+        [TestCase(RaceConstants.Metaraces.HalfCelestial)]
+        [TestCase(RaceConstants.Metaraces.Werebear)]
+        public void AnimalsForGoodMetarace(String metarace)
+        {
+            var animals = new[]
+            {
+                RaceConstants.BaseRaces.Animals.Badger,
+                RaceConstants.BaseRaces.Animals.Camel,
+                RaceConstants.BaseRaces.Animals.DireRat,
+                RaceConstants.BaseRaces.Animals.Dog,
+                RaceConstants.BaseRaces.Animals.RidingDog,
+                RaceConstants.BaseRaces.Animals.Eagle,
+                RaceConstants.BaseRaces.Animals.Hawk,
+                RaceConstants.BaseRaces.Animals.LightHorse,
+                RaceConstants.BaseRaces.Animals.HeavyHorse,
+                RaceConstants.BaseRaces.Animals.Owl,
+                RaceConstants.BaseRaces.Animals.Pony,
+                RaceConstants.BaseRaces.Animals.SmallViperSnake,
+                RaceConstants.BaseRaces.Animals.MediumViperSnake,
+                RaceConstants.BaseRaces.Animals.Wolf,
+                RaceConstants.BaseRaces.Animals.Ape,
+                RaceConstants.BaseRaces.Animals.BlackBear,
+                RaceConstants.BaseRaces.Animals.Bison,
+                RaceConstants.BaseRaces.Animals.Boar,
+                RaceConstants.BaseRaces.Animals.Cheetah,
+                RaceConstants.BaseRaces.Animals.DireBadger,
+                RaceConstants.BaseRaces.Animals.DireBat,
+                RaceConstants.BaseRaces.Animals.DireWeasel,
+                RaceConstants.BaseRaces.Animals.Leopard,
+                RaceConstants.BaseRaces.Animals.MonitorLizard,
+                RaceConstants.BaseRaces.Animals.ConstrictorSnake,
+                RaceConstants.BaseRaces.Animals.LargeViperSnake,
+                RaceConstants.BaseRaces.Animals.Wolverine,
+                RaceConstants.BaseRaces.Animals.BrownBear,
+                RaceConstants.BaseRaces.Animals.DireWolverine,
+                RaceConstants.BaseRaces.Animals.Deinonychus,
+                RaceConstants.BaseRaces.Animals.DireApe,
+                RaceConstants.BaseRaces.Animals.DireBoar,
+                RaceConstants.BaseRaces.Animals.DireWolf,
+                RaceConstants.BaseRaces.Animals.Lion,
+                RaceConstants.BaseRaces.Animals.Rhinoceras,
+                RaceConstants.BaseRaces.Animals.HugeViperSnake,
+                RaceConstants.BaseRaces.Animals.Tiger,
+                RaceConstants.BaseRaces.Animals.PolarBear,
+                RaceConstants.BaseRaces.Animals.DireLion,
+                RaceConstants.BaseRaces.Animals.Megaraptor,
+                RaceConstants.BaseRaces.Animals.GiantConstrictorSnake,
+                RaceConstants.BaseRaces.Animals.DireBear,
+                RaceConstants.BaseRaces.Animals.Elephant,
+                RaceConstants.BaseRaces.Animals.DireTiger,
+                RaceConstants.BaseRaces.Animals.Triceratops,
+                RaceConstants.BaseRaces.Animals.Tyrannosaurus,
+                RaceConstants.BaseRaces.Animals.Warpony,
+                RaceConstants.BaseRaces.Animals.HeavyWarhorse,
+                RaceConstants.BaseRaces.Animals.Bat,
+                RaceConstants.BaseRaces.Animals.Cat,
+                RaceConstants.BaseRaces.Animals.Lizard,
+                RaceConstants.BaseRaces.Animals.Rat,
+                RaceConstants.BaseRaces.Animals.Raven,
+                RaceConstants.BaseRaces.Animals.TinyViperSnake,
+                RaceConstants.BaseRaces.Animals.Toad,
+                RaceConstants.BaseRaces.Animals.Weasel,
+                RaceConstants.BaseRaces.Animals.ShockerLizard,
+                RaceConstants.BaseRaces.Animals.Stirge,
+                RaceConstants.BaseRaces.Animals.FormianWorker,
+                RaceConstants.BaseRaces.Animals.Imp,
+                RaceConstants.BaseRaces.Animals.Pseudodragon,
+                RaceConstants.BaseRaces.Animals.Quasit,
+                RaceConstants.BaseRaces.Animals.CelestialBat,
+                RaceConstants.BaseRaces.Animals.CelestialCat,
+                RaceConstants.BaseRaces.Animals.CelestialHawk,
+                RaceConstants.BaseRaces.Animals.CelestialLizard,
+                RaceConstants.BaseRaces.Animals.CelestialOwl,
+                RaceConstants.BaseRaces.Animals.CelestialRat,
+                RaceConstants.BaseRaces.Animals.CelestialRaven,
+                RaceConstants.BaseRaces.Animals.CelestialTinyViperSnake,
+                RaceConstants.BaseRaces.Animals.CelestialToad,
+                RaceConstants.BaseRaces.Animals.CelestialWeasel,
+                RaceConstants.BaseRaces.Animals.SmallAirElemental,
+                RaceConstants.BaseRaces.Animals.SmallEarthElemental,
+                RaceConstants.BaseRaces.Animals.SmallFireElemental,
+                RaceConstants.BaseRaces.Animals.SmallWaterElemental,
+                RaceConstants.BaseRaces.Animals.Homonculus,
+                RaceConstants.BaseRaces.Animals.AirMephit,
+                RaceConstants.BaseRaces.Animals.DustMephit,
+                RaceConstants.BaseRaces.Animals.EarthMephit,
+                RaceConstants.BaseRaces.Animals.FireMephit,
+                RaceConstants.BaseRaces.Animals.IceMephit,
+                RaceConstants.BaseRaces.Animals.MagmaMephit,
+                RaceConstants.BaseRaces.Animals.OozeMephit,
+                RaceConstants.BaseRaces.Animals.SaltMephit,
+                RaceConstants.BaseRaces.Animals.SteamMephit,
+                RaceConstants.BaseRaces.Animals.WaterMephit
+            };
+
+            DistinctCollection(metarace, animals);
+        }
+
+        [TestCase(RaceConstants.Metaraces.Ghost)]
+        [TestCase(RaceConstants.Metaraces.HalfDragon)]
+        [TestCase(RaceConstants.Metaraces.None)]
+        [TestCase(RaceConstants.Metaraces.Wereboar)]
+        [TestCase(RaceConstants.Metaraces.Weretiger)]
+        public void AnimalsForNeutralMetarace(String metarace)
+        {
+            var animals = new[]
+            {
+                RaceConstants.BaseRaces.Animals.Badger,
+                RaceConstants.BaseRaces.Animals.Camel,
+                RaceConstants.BaseRaces.Animals.DireRat,
+                RaceConstants.BaseRaces.Animals.Dog,
+                RaceConstants.BaseRaces.Animals.RidingDog,
+                RaceConstants.BaseRaces.Animals.Eagle,
+                RaceConstants.BaseRaces.Animals.Hawk,
+                RaceConstants.BaseRaces.Animals.LightHorse,
+                RaceConstants.BaseRaces.Animals.HeavyHorse,
+                RaceConstants.BaseRaces.Animals.Owl,
+                RaceConstants.BaseRaces.Animals.Pony,
+                RaceConstants.BaseRaces.Animals.SmallViperSnake,
+                RaceConstants.BaseRaces.Animals.MediumViperSnake,
+                RaceConstants.BaseRaces.Animals.Wolf,
+                RaceConstants.BaseRaces.Animals.Ape,
+                RaceConstants.BaseRaces.Animals.BlackBear,
+                RaceConstants.BaseRaces.Animals.Bison,
+                RaceConstants.BaseRaces.Animals.Boar,
+                RaceConstants.BaseRaces.Animals.Cheetah,
+                RaceConstants.BaseRaces.Animals.DireBadger,
+                RaceConstants.BaseRaces.Animals.DireBat,
+                RaceConstants.BaseRaces.Animals.DireWeasel,
+                RaceConstants.BaseRaces.Animals.Leopard,
+                RaceConstants.BaseRaces.Animals.MonitorLizard,
+                RaceConstants.BaseRaces.Animals.ConstrictorSnake,
+                RaceConstants.BaseRaces.Animals.LargeViperSnake,
+                RaceConstants.BaseRaces.Animals.Wolverine,
+                RaceConstants.BaseRaces.Animals.BrownBear,
+                RaceConstants.BaseRaces.Animals.DireWolverine,
+                RaceConstants.BaseRaces.Animals.Deinonychus,
+                RaceConstants.BaseRaces.Animals.DireApe,
+                RaceConstants.BaseRaces.Animals.DireBoar,
+                RaceConstants.BaseRaces.Animals.DireWolf,
+                RaceConstants.BaseRaces.Animals.Lion,
+                RaceConstants.BaseRaces.Animals.Rhinoceras,
+                RaceConstants.BaseRaces.Animals.HugeViperSnake,
+                RaceConstants.BaseRaces.Animals.Tiger,
+                RaceConstants.BaseRaces.Animals.PolarBear,
+                RaceConstants.BaseRaces.Animals.DireLion,
+                RaceConstants.BaseRaces.Animals.Megaraptor,
+                RaceConstants.BaseRaces.Animals.GiantConstrictorSnake,
+                RaceConstants.BaseRaces.Animals.DireBear,
+                RaceConstants.BaseRaces.Animals.Elephant,
+                RaceConstants.BaseRaces.Animals.DireTiger,
+                RaceConstants.BaseRaces.Animals.Triceratops,
+                RaceConstants.BaseRaces.Animals.Tyrannosaurus,
+                RaceConstants.BaseRaces.Animals.Warpony,
+                RaceConstants.BaseRaces.Animals.HeavyWarhorse,
+                RaceConstants.BaseRaces.Animals.Bat,
+                RaceConstants.BaseRaces.Animals.Cat,
+                RaceConstants.BaseRaces.Animals.Lizard,
+                RaceConstants.BaseRaces.Animals.Rat,
+                RaceConstants.BaseRaces.Animals.Raven,
+                RaceConstants.BaseRaces.Animals.TinyViperSnake,
+                RaceConstants.BaseRaces.Animals.Toad,
+                RaceConstants.BaseRaces.Animals.Weasel,
+                RaceConstants.BaseRaces.Animals.ShockerLizard,
+                RaceConstants.BaseRaces.Animals.Stirge,
+                RaceConstants.BaseRaces.Animals.FormianWorker,
+                RaceConstants.BaseRaces.Animals.Imp,
+                RaceConstants.BaseRaces.Animals.Pseudodragon,
+                RaceConstants.BaseRaces.Animals.Quasit,
+                RaceConstants.BaseRaces.Animals.CelestialBat,
+                RaceConstants.BaseRaces.Animals.CelestialCat,
+                RaceConstants.BaseRaces.Animals.CelestialHawk,
+                RaceConstants.BaseRaces.Animals.CelestialLizard,
+                RaceConstants.BaseRaces.Animals.CelestialOwl,
+                RaceConstants.BaseRaces.Animals.CelestialRat,
+                RaceConstants.BaseRaces.Animals.CelestialRaven,
+                RaceConstants.BaseRaces.Animals.CelestialTinyViperSnake,
+                RaceConstants.BaseRaces.Animals.CelestialToad,
+                RaceConstants.BaseRaces.Animals.CelestialWeasel,
+                RaceConstants.BaseRaces.Animals.FiendishBat,
+                RaceConstants.BaseRaces.Animals.FiendishCat,
+                RaceConstants.BaseRaces.Animals.FiendishHawk,
+                RaceConstants.BaseRaces.Animals.FiendishLizard,
+                RaceConstants.BaseRaces.Animals.FiendishOwl,
+                RaceConstants.BaseRaces.Animals.FiendishRat,
+                RaceConstants.BaseRaces.Animals.FiendishRaven,
+                RaceConstants.BaseRaces.Animals.FiendishTinyViperSnake,
+                RaceConstants.BaseRaces.Animals.FiendishToad,
+                RaceConstants.BaseRaces.Animals.FiendishWeasel,
+                RaceConstants.BaseRaces.Animals.SmallAirElemental,
+                RaceConstants.BaseRaces.Animals.SmallEarthElemental,
+                RaceConstants.BaseRaces.Animals.SmallFireElemental,
+                RaceConstants.BaseRaces.Animals.SmallWaterElemental,
+                RaceConstants.BaseRaces.Animals.Homonculus,
+                RaceConstants.BaseRaces.Animals.AirMephit,
+                RaceConstants.BaseRaces.Animals.DustMephit,
+                RaceConstants.BaseRaces.Animals.EarthMephit,
+                RaceConstants.BaseRaces.Animals.FireMephit,
+                RaceConstants.BaseRaces.Animals.IceMephit,
+                RaceConstants.BaseRaces.Animals.MagmaMephit,
+                RaceConstants.BaseRaces.Animals.OozeMephit,
+                RaceConstants.BaseRaces.Animals.SaltMephit,
+                RaceConstants.BaseRaces.Animals.SteamMephit,
+                RaceConstants.BaseRaces.Animals.WaterMephit
+            };
+
+            DistinctCollection(metarace, animals);
+        }
+
+        [TestCase(RaceConstants.Metaraces.HalfFiend)]
+        [TestCase(RaceConstants.Metaraces.Lich)]
+        [TestCase(RaceConstants.Metaraces.Wererat)]
+        [TestCase(RaceConstants.Metaraces.Werewolf)]
+        public void AnimalsForEvilMetarace(String metarace)
+        {
+            var animals = new[]
+            {
+                RaceConstants.BaseRaces.Animals.Badger,
+                RaceConstants.BaseRaces.Animals.Camel,
+                RaceConstants.BaseRaces.Animals.DireRat,
+                RaceConstants.BaseRaces.Animals.Dog,
+                RaceConstants.BaseRaces.Animals.RidingDog,
+                RaceConstants.BaseRaces.Animals.Eagle,
+                RaceConstants.BaseRaces.Animals.Hawk,
+                RaceConstants.BaseRaces.Animals.LightHorse,
+                RaceConstants.BaseRaces.Animals.HeavyHorse,
+                RaceConstants.BaseRaces.Animals.Owl,
+                RaceConstants.BaseRaces.Animals.Pony,
+                RaceConstants.BaseRaces.Animals.SmallViperSnake,
+                RaceConstants.BaseRaces.Animals.MediumViperSnake,
+                RaceConstants.BaseRaces.Animals.Wolf,
+                RaceConstants.BaseRaces.Animals.Ape,
+                RaceConstants.BaseRaces.Animals.BlackBear,
+                RaceConstants.BaseRaces.Animals.Bison,
+                RaceConstants.BaseRaces.Animals.Boar,
+                RaceConstants.BaseRaces.Animals.Cheetah,
+                RaceConstants.BaseRaces.Animals.DireBadger,
+                RaceConstants.BaseRaces.Animals.DireBat,
+                RaceConstants.BaseRaces.Animals.DireWeasel,
+                RaceConstants.BaseRaces.Animals.Leopard,
+                RaceConstants.BaseRaces.Animals.MonitorLizard,
+                RaceConstants.BaseRaces.Animals.ConstrictorSnake,
+                RaceConstants.BaseRaces.Animals.LargeViperSnake,
+                RaceConstants.BaseRaces.Animals.Wolverine,
+                RaceConstants.BaseRaces.Animals.BrownBear,
+                RaceConstants.BaseRaces.Animals.DireWolverine,
+                RaceConstants.BaseRaces.Animals.Deinonychus,
+                RaceConstants.BaseRaces.Animals.DireApe,
+                RaceConstants.BaseRaces.Animals.DireBoar,
+                RaceConstants.BaseRaces.Animals.DireWolf,
+                RaceConstants.BaseRaces.Animals.Lion,
+                RaceConstants.BaseRaces.Animals.Rhinoceras,
+                RaceConstants.BaseRaces.Animals.HugeViperSnake,
+                RaceConstants.BaseRaces.Animals.Tiger,
+                RaceConstants.BaseRaces.Animals.PolarBear,
+                RaceConstants.BaseRaces.Animals.DireLion,
+                RaceConstants.BaseRaces.Animals.Megaraptor,
+                RaceConstants.BaseRaces.Animals.GiantConstrictorSnake,
+                RaceConstants.BaseRaces.Animals.DireBear,
+                RaceConstants.BaseRaces.Animals.Elephant,
+                RaceConstants.BaseRaces.Animals.DireTiger,
+                RaceConstants.BaseRaces.Animals.Triceratops,
+                RaceConstants.BaseRaces.Animals.Tyrannosaurus,
+                RaceConstants.BaseRaces.Animals.Warpony,
+                RaceConstants.BaseRaces.Animals.HeavyWarhorse,
+                RaceConstants.BaseRaces.Animals.Bat,
+                RaceConstants.BaseRaces.Animals.Cat,
+                RaceConstants.BaseRaces.Animals.Lizard,
+                RaceConstants.BaseRaces.Animals.Rat,
+                RaceConstants.BaseRaces.Animals.Raven,
+                RaceConstants.BaseRaces.Animals.TinyViperSnake,
+                RaceConstants.BaseRaces.Animals.Toad,
+                RaceConstants.BaseRaces.Animals.Weasel,
+                RaceConstants.BaseRaces.Animals.ShockerLizard,
+                RaceConstants.BaseRaces.Animals.Stirge,
+                RaceConstants.BaseRaces.Animals.FormianWorker,
+                RaceConstants.BaseRaces.Animals.Imp,
+                RaceConstants.BaseRaces.Animals.Pseudodragon,
+                RaceConstants.BaseRaces.Animals.Quasit,
+                RaceConstants.BaseRaces.Animals.FiendishBat,
+                RaceConstants.BaseRaces.Animals.FiendishCat,
+                RaceConstants.BaseRaces.Animals.FiendishHawk,
+                RaceConstants.BaseRaces.Animals.FiendishLizard,
+                RaceConstants.BaseRaces.Animals.FiendishOwl,
+                RaceConstants.BaseRaces.Animals.FiendishRat,
+                RaceConstants.BaseRaces.Animals.FiendishRaven,
+                RaceConstants.BaseRaces.Animals.FiendishTinyViperSnake,
+                RaceConstants.BaseRaces.Animals.FiendishToad,
+                RaceConstants.BaseRaces.Animals.FiendishWeasel,
+                RaceConstants.BaseRaces.Animals.SmallAirElemental,
+                RaceConstants.BaseRaces.Animals.SmallEarthElemental,
+                RaceConstants.BaseRaces.Animals.SmallFireElemental,
+                RaceConstants.BaseRaces.Animals.SmallWaterElemental,
+                RaceConstants.BaseRaces.Animals.Homonculus,
+                RaceConstants.BaseRaces.Animals.AirMephit,
+                RaceConstants.BaseRaces.Animals.DustMephit,
+                RaceConstants.BaseRaces.Animals.EarthMephit,
+                RaceConstants.BaseRaces.Animals.FireMephit,
+                RaceConstants.BaseRaces.Animals.IceMephit,
+                RaceConstants.BaseRaces.Animals.MagmaMephit,
+                RaceConstants.BaseRaces.Animals.OozeMephit,
+                RaceConstants.BaseRaces.Animals.SaltMephit,
+                RaceConstants.BaseRaces.Animals.SteamMephit,
+                RaceConstants.BaseRaces.Animals.WaterMephit
+            };
+
+            DistinctCollection(metarace, animals);
         }
 
         [Test]

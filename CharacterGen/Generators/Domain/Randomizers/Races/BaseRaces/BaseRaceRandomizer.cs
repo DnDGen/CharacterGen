@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace CharacterGen.Generators.Domain.Randomizers.Races.BaseRaces
 {
-    public abstract class BaseRaceRandomizer : IterativeGenerator, RaceRandomizer
+    public abstract class BaseRaceRandomizer : RaceRandomizer
     {
         private IPercentileSelector percentileResultSelector;
         private IAdjustmentsSelector adjustmentSelector;

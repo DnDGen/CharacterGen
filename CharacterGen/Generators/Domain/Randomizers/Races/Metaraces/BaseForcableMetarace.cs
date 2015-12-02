@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace CharacterGen.Generators.Domain.Randomizers.Races.Metaraces
 {
-    public abstract class BaseForcableMetarace : IterativeGenerator, IForcableMetaraceRandomizer
+    public abstract class BaseForcableMetarace : IForcableMetaraceRandomizer
     {
         public Boolean ForceMetarace { get; set; }
 

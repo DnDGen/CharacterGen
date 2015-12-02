@@ -11,14 +11,14 @@ using System.Linq;
 namespace CharacterGen.Tests.Integration.Stress.Combats
 {
     [TestFixture]
-    public class CharacterCombatGeneratorTests : StressTests
+    public class CombatGeneratorTests : StressTests
     {
-        [Inject, Named(AbilitiesGeneratorTypeConstants.Character)]
-        public IAbilitiesGenerator CharacterAbilitiesGenerator { get; set; }
+        [Inject]
+        public IAbilitiesGenerator AbilitiesGenerator { get; set; }
         [Inject, Named(StatsRandomizerTypeConstants.Raw)]
         public IStatsRandomizer StatsRandomizer { get; set; }
-        [Inject, Named(CombatGeneratorTypeConstants.Character)]
-        public ICombatGenerator CharacterCombatGenerator { get; set; }
+        [Inject]
+        public ICombatGenerator CombatGenerator { get; set; }
         [Inject]
         public IEquipmentGenerator EquipmentGenerator { get; set; }
 
@@ -33,11 +33,11 @@ namespace CharacterGen.Tests.Integration.Stress.Combats
             var alignment = GetNewAlignment();
             var characterClass = GetNewCharacterClass(alignment);
             var race = RaceGenerator.GenerateWith(alignment, characterClass, BaseRaceRandomizer, MetaraceRandomizer);
-            var baseAttack = CharacterCombatGenerator.GenerateBaseAttackWith(characterClass, race);
-            var ability = CharacterAbilitiesGenerator.GenerateWith(characterClass, race, StatsRandomizer, baseAttack);
+            var baseAttack = CombatGenerator.GenerateBaseAttackWith(characterClass, race);
+            var ability = AbilitiesGenerator.GenerateWith(characterClass, race, StatsRandomizer, baseAttack);
             var equipment = EquipmentGenerator.GenerateWith(ability.Feats, characterClass, race);
 
-            var combat = CharacterCombatGenerator.GenerateWith(baseAttack, characterClass, race, ability.Feats, ability.Stats, equipment);
+            var combat = CombatGenerator.GenerateWith(baseAttack, characterClass, race, ability.Feats, ability.Stats, equipment);
             Assert.That(combat.AdjustedDexterityBonus, Is.AtMost(ability.Stats[StatConstants.Dexterity].Bonus));
             Assert.That(combat.ArmorClass.FlatFooted, Is.Positive);
             Assert.That(combat.ArmorClass.Full, Is.Positive);
@@ -59,7 +59,7 @@ namespace CharacterGen.Tests.Integration.Stress.Combats
             var characterClass = GetNewCharacterClass(alignment);
             var race = RaceGenerator.GenerateWith(alignment, characterClass, BaseRaceRandomizer, MetaraceRandomizer);
 
-            var baseAttack = CharacterCombatGenerator.GenerateBaseAttackWith(characterClass, race);
+            var baseAttack = CombatGenerator.GenerateBaseAttackWith(characterClass, race);
             Assert.That(baseAttack.Bonus, Is.Not.Negative);
             Assert.That(baseAttack.AllBonuses, Contains.Item(baseAttack.Bonus));
 

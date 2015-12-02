@@ -2,11 +2,7 @@
 using CharacterGen.Common.Alignments;
 using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Common.Races;
-using CharacterGen.Generators.Abilities;
-using CharacterGen.Generators.Combats;
 using CharacterGen.Generators.Magics;
-using CharacterGen.Generators.Randomizers.Races;
-using CharacterGen.Generators.Randomizers.Stats;
 using CharacterGen.Selectors;
 using CharacterGen.Tables;
 using System;
@@ -18,27 +14,13 @@ namespace CharacterGen.Generators.Domain.Magics
     public class AnimalGenerator : IAnimalGenerator
     {
         private ICollectionsSelector collectionsSelector;
-        private IRaceGenerator raceGenerator;
-        private RaceRandomizer animalBaseRaceRandomizer;
-        private RaceRandomizer noMetaraceRandomizer;
         private IAdjustmentsSelector adjustmentsSelector;
-        private IAbilitiesGenerator animalAbilitiesGenerator;
-        private ISetStatsRandomizer setStatsRandomizer;
-        private ICombatGenerator animalCombatGenerator;
         private Generator generator;
 
-        public AnimalGenerator(ICollectionsSelector collectionsSelector, IRaceGenerator raceGenerator, RaceRandomizer animalBaseRaceRandomizer, RaceRandomizer noMetaraceRandomizer,
-            IAdjustmentsSelector adjustmentsSelector, IAbilitiesGenerator animalAbilitiesGenerator, ISetStatsRandomizer setStatsRandomizer, ICombatGenerator animalCombatGenerator,
-            Generator generator)
+        public AnimalGenerator(ICollectionsSelector collectionsSelector, IAdjustmentsSelector adjustmentsSelector, Generator generator)
         {
             this.collectionsSelector = collectionsSelector;
-            this.raceGenerator = raceGenerator;
-            this.animalBaseRaceRandomizer = animalBaseRaceRandomizer;
-            this.noMetaraceRandomizer = noMetaraceRandomizer;
             this.adjustmentsSelector = adjustmentsSelector;
-            this.animalAbilitiesGenerator = animalAbilitiesGenerator;
-            this.setStatsRandomizer = setStatsRandomizer;
-            this.animalCombatGenerator = animalCombatGenerator;
             this.generator = generator;
         }
 
@@ -77,8 +59,15 @@ namespace CharacterGen.Generators.Domain.Magics
             var animals = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.Animals, characterClass.ClassName);
             var animalsForSize = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.Animals, race.Size);
             var animalsWithinLevel = animals.Where(a => characterClass.Level + levelAdjustments[a] > 0);
+            var filteredAnimals = animals.Intersect(animalsForSize).Intersect(animalsWithinLevel);
 
-            return animals.Intersect(animalsForSize).Intersect(animalsWithinLevel);
+            var mages = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Mages);
+
+            if (mages.Contains(characterClass.ClassName) == false)
+                return filteredAnimals;
+
+            var animalsForMetarace = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.Animals, race.Metarace);
+            return filteredAnimals.Intersect(animalsForMetarace);
         }
     }
 }

@@ -20,12 +20,12 @@ namespace CharacterGen.Tests.Integration.Stress
     {
         [Inject]
         public ILeadershipGenerator LeadershipGenerator { get; set; }
-        [Inject, Named(AbilitiesGeneratorTypeConstants.Character)]
-        public IAbilitiesGenerator CharacterAbilitiesGenerator { get; set; }
+        [Inject]
+        public IAbilitiesGenerator AbilitiesGenerator { get; set; }
         [Inject, Named(StatsRandomizerTypeConstants.Raw)]
         public IStatsRandomizer StatsRandomizer { get; set; }
-        [Inject, Named(CombatGeneratorTypeConstants.Character)]
-        public ICombatGenerator CharacterCombatGenerator { get; set; }
+        [Inject]
+        public ICombatGenerator CombatGenerator { get; set; }
         [Inject]
         public IAnimalGenerator AnimalGenerator { get; set; }
 
@@ -49,8 +49,8 @@ namespace CharacterGen.Tests.Integration.Stress
         private Leadership GetLeadership(Alignment alignment, CharacterClass characterClass)
         {
             var race = RaceGenerator.GenerateWith(alignment, characterClass, BaseRaceRandomizer, MetaraceRandomizer);
-            var baseAttack = CharacterCombatGenerator.GenerateBaseAttackWith(characterClass, race);
-            var ability = CharacterAbilitiesGenerator.GenerateWith(characterClass, race, StatsRandomizer, baseAttack);
+            var baseAttack = CombatGenerator.GenerateBaseAttackWith(characterClass, race);
+            var ability = AbilitiesGenerator.GenerateWith(characterClass, race, StatsRandomizer, baseAttack);
             var animal = AnimalGenerator.GenerateFrom(alignment, characterClass, race, ability.Feats);
 
             return LeadershipGenerator.GenerateLeadership(characterClass.Level, ability.Stats[StatConstants.Charisma].Bonus, animal);

@@ -6,7 +6,6 @@ namespace CharacterGen.Generators.Randomizers.Races
     {
         public static class BaseRace
         {
-            public const String AnimalBase = "Animal Base";
             public const String AnyBase = "Any Base";
             public const String EvilBase = "Evil Base";
             public const String GoodBase = "Good Base";

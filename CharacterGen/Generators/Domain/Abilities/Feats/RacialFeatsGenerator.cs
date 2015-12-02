@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace CharacterGen.Generators.Domain.Abilities.Feats
 {
-    public class RacialFeatsGenerator : IterativeGenerator, IRacialFeatsGenerator
+    public class RacialFeatsGenerator : IRacialFeatsGenerator
     {
         private ICollectionsSelector collectionsSelector;
         private IAdjustmentsSelector adjustmentsSelector;

@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace CharacterGen.Generators.Domain.Abilities
 {
-    public class SkillsGenerator : IterativeGenerator, ISkillsGenerator
+    public class SkillsGenerator : ISkillsGenerator
     {
         private ISkillSelector skillSelector;
         private ICollectionsSelector collectionsSelector;

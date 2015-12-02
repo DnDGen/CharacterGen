@@ -15,7 +15,7 @@ using System.Linq;
 
 namespace CharacterGen.Generators.Domain.Abilities
 {
-    public class CharacterAbilitiesGenerator : IterativeGenerator, IAbilitiesGenerator
+    public class AbilitiesGenerator : IAbilitiesGenerator
     {
         private IStatsGenerator statsGenerator;
         private ILanguageGenerator languageGenerator;
@@ -23,7 +23,7 @@ namespace CharacterGen.Generators.Domain.Abilities
         private IFeatsGenerator featsGenerator;
         private ICollectionsSelector collectionsSelector;
 
-        public CharacterAbilitiesGenerator(IStatsGenerator statsGenerator, ILanguageGenerator languageGenerator, ISkillsGenerator skillsGenerator,
+        public AbilitiesGenerator(IStatsGenerator statsGenerator, ILanguageGenerator languageGenerator, ISkillsGenerator skillsGenerator,
             IFeatsGenerator featsGenerator, ICollectionsSelector collectionsSelector)
         {
             this.statsGenerator = statsGenerator;

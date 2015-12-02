@@ -1,6 +1,106 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <items>
+  <object>
+    <name></name>
+    <item>Badger</item>
+    <item>Camel</item>
+    <item>Dire Rat</item>
+    <item>Dog</item>
+    <item>Riding Dog</item>
+    <item>Eagle</item>
+    <item>Hawk</item>
+    <item>Light Horse</item>
+    <item>Heavy Horse</item>
+    <item>Owl</item>
+    <item>Pony</item>
+    <item>Small Viper Snake</item>
+    <item>Medium Viper Snake</item>
+    <item>Wolf</item>
+    <item>Ape</item>
+    <item>Black Bear</item>
+    <item>Bison</item>
+    <item>Boar</item>
+    <item>Cheetah</item>
+    <item>Dire Badger</item>
+    <item>Dire Bat</item>
+    <item>Dire Weasel</item>
+    <item>Leopard</item>
+    <item>Monitor Lizard</item>
+    <item>Constrictor Snake</item>
+    <item>Large Viper Snake</item>
+    <item>Wolverine</item>
+    <item>Brown Bear</item>
+    <item>Dire Wolverine</item>
+    <item>Deinonychus</item>
+    <item>Dire Ape</item>
+    <item>Dire Boar</item>
+    <item>Dire Wolf</item>
+    <item>Lion</item>
+    <item>Rhinoceras</item>
+    <item>Huge Viper Snake</item>
+    <item>Tiger</item>
+    <item>Polar Bear</item>
+    <item>Dire Lion</item>
+    <item>Megaraptor</item>
+    <item>Giant Constrictor Snake</item>
+    <item>Dire Bear</item>
+    <item>Elephant</item>
+    <item>Dire Tiger</item>
+    <item>Triceratops</item>
+    <item>Tyrannosaurus</item>
+    <item>Bat</item>
+    <item>Cat</item>
+    <item>Lizard</item>
+    <item>Rat</item>
+    <item>Raven</item>
+    <item>Tiny Viper Snake</item>
+    <item>Toad</item>
+    <item>Weasel</item>
+    <item>Shocker Lizard</item>
+    <item>Stirge</item>
+    <item>Formian Worker</item>
+    <item>Imp</item>
+    <item>Pseudodragon</item>
+    <item>Quasit</item>
+    <item>Celestial Bat</item>
+    <item>Celestial Cat</item>
+    <item>Celestial Hawk</item>
+    <item>Celestial Lizard</item>
+    <item>Celestial Owl</item>
+    <item>Celestial Rat</item>
+    <item>Celestial Raven</item>
+    <item>Celestial Tiny Viper Snake</item>
+    <item>Celestial Toad</item>
+    <item>Celestial Weasel</item>
+    <item>Fiendish Bat</item>
+    <item>Fiendish Cat</item>
+    <item>Fiendish Hawk</item>
+    <item>Fiendish Lizard</item>
+    <item>Fiendish Owl</item>
+    <item>Fiendish Rat</item>
+    <item>Fiendish Raven</item>
+    <item>Fiendish Tiny Viper Snake</item>
+    <item>Fiendish Toad</item>
+    <item>Fiendish Weasel</item>
+    <item>Small Air Elemental</item>
+    <item>Small Earth Elemental</item>
+    <item>Small Fire Elemental</item>
+    <item>Small Water Elemental</item>
+    <item>Homonculus</item>
+    <item>Air Mephit</item>
+    <item>Dust Mephit</item>
+    <item>Earth Mephit</item>
+    <item>Fire Mephit</item>
+    <item>Ice Mephit</item>
+    <item>Magma Mephit</item>
+    <item>Ooze Mephit</item>
+    <item>Salt Mephit</item>
+    <item>Steam Mephit</item>
+    <item>Water Mephit</item>
+    <item>Heavy Warhorse</item>
+    <item>Warpony</item>
+  </object>
     <object>
         <name>Barbarian</name>
     </object>
@@ -62,6 +162,476 @@
     <object>
         <name>Fighter</name>
     </object>
+  <object>
+    <name>Ghost</name>
+    <item>Badger</item>
+    <item>Camel</item>
+    <item>Dire Rat</item>
+    <item>Dog</item>
+    <item>Riding Dog</item>
+    <item>Eagle</item>
+    <item>Hawk</item>
+    <item>Light Horse</item>
+    <item>Heavy Horse</item>
+    <item>Owl</item>
+    <item>Pony</item>
+    <item>Small Viper Snake</item>
+    <item>Medium Viper Snake</item>
+    <item>Wolf</item>
+    <item>Ape</item>
+    <item>Black Bear</item>
+    <item>Bison</item>
+    <item>Boar</item>
+    <item>Cheetah</item>
+    <item>Dire Badger</item>
+    <item>Dire Bat</item>
+    <item>Dire Weasel</item>
+    <item>Leopard</item>
+    <item>Monitor Lizard</item>
+    <item>Constrictor Snake</item>
+    <item>Large Viper Snake</item>
+    <item>Wolverine</item>
+    <item>Brown Bear</item>
+    <item>Dire Wolverine</item>
+    <item>Deinonychus</item>
+    <item>Dire Ape</item>
+    <item>Dire Boar</item>
+    <item>Dire Wolf</item>
+    <item>Lion</item>
+    <item>Rhinoceras</item>
+    <item>Huge Viper Snake</item>
+    <item>Tiger</item>
+    <item>Polar Bear</item>
+    <item>Dire Lion</item>
+    <item>Megaraptor</item>
+    <item>Giant Constrictor Snake</item>
+    <item>Dire Bear</item>
+    <item>Elephant</item>
+    <item>Dire Tiger</item>
+    <item>Triceratops</item>
+    <item>Tyrannosaurus</item>
+    <item>Bat</item>
+    <item>Cat</item>
+    <item>Lizard</item>
+    <item>Rat</item>
+    <item>Raven</item>
+    <item>Tiny Viper Snake</item>
+    <item>Toad</item>
+    <item>Weasel</item>
+    <item>Shocker Lizard</item>
+    <item>Stirge</item>
+    <item>Formian Worker</item>
+    <item>Imp</item>
+    <item>Pseudodragon</item>
+    <item>Quasit</item>
+    <item>Celestial Bat</item>
+    <item>Celestial Cat</item>
+    <item>Celestial Hawk</item>
+    <item>Celestial Lizard</item>
+    <item>Celestial Owl</item>
+    <item>Celestial Rat</item>
+    <item>Celestial Raven</item>
+    <item>Celestial Tiny Viper Snake</item>
+    <item>Celestial Toad</item>
+    <item>Celestial Weasel</item>
+    <item>Fiendish Bat</item>
+    <item>Fiendish Cat</item>
+    <item>Fiendish Hawk</item>
+    <item>Fiendish Lizard</item>
+    <item>Fiendish Owl</item>
+    <item>Fiendish Rat</item>
+    <item>Fiendish Raven</item>
+    <item>Fiendish Tiny Viper Snake</item>
+    <item>Fiendish Toad</item>
+    <item>Fiendish Weasel</item>
+    <item>Small Air Elemental</item>
+    <item>Small Earth Elemental</item>
+    <item>Small Fire Elemental</item>
+    <item>Small Water Elemental</item>
+    <item>Homonculus</item>
+    <item>Air Mephit</item>
+    <item>Dust Mephit</item>
+    <item>Earth Mephit</item>
+    <item>Fire Mephit</item>
+    <item>Ice Mephit</item>
+    <item>Magma Mephit</item>
+    <item>Ooze Mephit</item>
+    <item>Salt Mephit</item>
+    <item>Steam Mephit</item>
+    <item>Water Mephit</item>
+    <item>Heavy Warhorse</item>
+    <item>Warpony</item>
+  </object>
+  <object>
+    <name>Half-Celestial</name>
+    <item>Badger</item>
+    <item>Camel</item>
+    <item>Dire Rat</item>
+    <item>Dog</item>
+    <item>Riding Dog</item>
+    <item>Eagle</item>
+    <item>Hawk</item>
+    <item>Light Horse</item>
+    <item>Heavy Horse</item>
+    <item>Owl</item>
+    <item>Pony</item>
+    <item>Small Viper Snake</item>
+    <item>Medium Viper Snake</item>
+    <item>Wolf</item>
+    <item>Ape</item>
+    <item>Black Bear</item>
+    <item>Bison</item>
+    <item>Boar</item>
+    <item>Cheetah</item>
+    <item>Dire Badger</item>
+    <item>Dire Bat</item>
+    <item>Dire Weasel</item>
+    <item>Leopard</item>
+    <item>Monitor Lizard</item>
+    <item>Constrictor Snake</item>
+    <item>Large Viper Snake</item>
+    <item>Wolverine</item>
+    <item>Brown Bear</item>
+    <item>Dire Wolverine</item>
+    <item>Deinonychus</item>
+    <item>Dire Ape</item>
+    <item>Dire Boar</item>
+    <item>Dire Wolf</item>
+    <item>Lion</item>
+    <item>Rhinoceras</item>
+    <item>Huge Viper Snake</item>
+    <item>Tiger</item>
+    <item>Polar Bear</item>
+    <item>Dire Lion</item>
+    <item>Megaraptor</item>
+    <item>Giant Constrictor Snake</item>
+    <item>Dire Bear</item>
+    <item>Elephant</item>
+    <item>Dire Tiger</item>
+    <item>Triceratops</item>
+    <item>Tyrannosaurus</item>
+    <item>Bat</item>
+    <item>Cat</item>
+    <item>Lizard</item>
+    <item>Rat</item>
+    <item>Raven</item>
+    <item>Tiny Viper Snake</item>
+    <item>Toad</item>
+    <item>Weasel</item>
+    <item>Shocker Lizard</item>
+    <item>Stirge</item>
+    <item>Formian Worker</item>
+    <item>Imp</item>
+    <item>Pseudodragon</item>
+    <item>Quasit</item>
+    <item>Celestial Bat</item>
+    <item>Celestial Cat</item>
+    <item>Celestial Hawk</item>
+    <item>Celestial Lizard</item>
+    <item>Celestial Owl</item>
+    <item>Celestial Rat</item>
+    <item>Celestial Raven</item>
+    <item>Celestial Tiny Viper Snake</item>
+    <item>Celestial Toad</item>
+    <item>Celestial Weasel</item>
+    <item>Small Air Elemental</item>
+    <item>Small Earth Elemental</item>
+    <item>Small Fire Elemental</item>
+    <item>Small Water Elemental</item>
+    <item>Homonculus</item>
+    <item>Air Mephit</item>
+    <item>Dust Mephit</item>
+    <item>Earth Mephit</item>
+    <item>Fire Mephit</item>
+    <item>Ice Mephit</item>
+    <item>Magma Mephit</item>
+    <item>Ooze Mephit</item>
+    <item>Salt Mephit</item>
+    <item>Steam Mephit</item>
+    <item>Water Mephit</item>
+    <item>Heavy Warhorse</item>
+    <item>Warpony</item>
+  </object>
+  <object>
+    <name>Half-Dragon</name>
+    <item>Badger</item>
+    <item>Camel</item>
+    <item>Dire Rat</item>
+    <item>Dog</item>
+    <item>Riding Dog</item>
+    <item>Eagle</item>
+    <item>Hawk</item>
+    <item>Light Horse</item>
+    <item>Heavy Horse</item>
+    <item>Owl</item>
+    <item>Pony</item>
+    <item>Small Viper Snake</item>
+    <item>Medium Viper Snake</item>
+    <item>Wolf</item>
+    <item>Ape</item>
+    <item>Black Bear</item>
+    <item>Bison</item>
+    <item>Boar</item>
+    <item>Cheetah</item>
+    <item>Dire Badger</item>
+    <item>Dire Bat</item>
+    <item>Dire Weasel</item>
+    <item>Leopard</item>
+    <item>Monitor Lizard</item>
+    <item>Constrictor Snake</item>
+    <item>Large Viper Snake</item>
+    <item>Wolverine</item>
+    <item>Brown Bear</item>
+    <item>Dire Wolverine</item>
+    <item>Deinonychus</item>
+    <item>Dire Ape</item>
+    <item>Dire Boar</item>
+    <item>Dire Wolf</item>
+    <item>Lion</item>
+    <item>Rhinoceras</item>
+    <item>Huge Viper Snake</item>
+    <item>Tiger</item>
+    <item>Polar Bear</item>
+    <item>Dire Lion</item>
+    <item>Megaraptor</item>
+    <item>Giant Constrictor Snake</item>
+    <item>Dire Bear</item>
+    <item>Elephant</item>
+    <item>Dire Tiger</item>
+    <item>Triceratops</item>
+    <item>Tyrannosaurus</item>
+    <item>Bat</item>
+    <item>Cat</item>
+    <item>Lizard</item>
+    <item>Rat</item>
+    <item>Raven</item>
+    <item>Tiny Viper Snake</item>
+    <item>Toad</item>
+    <item>Weasel</item>
+    <item>Shocker Lizard</item>
+    <item>Stirge</item>
+    <item>Formian Worker</item>
+    <item>Imp</item>
+    <item>Pseudodragon</item>
+    <item>Quasit</item>
+    <item>Celestial Bat</item>
+    <item>Celestial Cat</item>
+    <item>Celestial Hawk</item>
+    <item>Celestial Lizard</item>
+    <item>Celestial Owl</item>
+    <item>Celestial Rat</item>
+    <item>Celestial Raven</item>
+    <item>Celestial Tiny Viper Snake</item>
+    <item>Celestial Toad</item>
+    <item>Celestial Weasel</item>
+    <item>Fiendish Bat</item>
+    <item>Fiendish Cat</item>
+    <item>Fiendish Hawk</item>
+    <item>Fiendish Lizard</item>
+    <item>Fiendish Owl</item>
+    <item>Fiendish Rat</item>
+    <item>Fiendish Raven</item>
+    <item>Fiendish Tiny Viper Snake</item>
+    <item>Fiendish Toad</item>
+    <item>Fiendish Weasel</item>
+    <item>Small Air Elemental</item>
+    <item>Small Earth Elemental</item>
+    <item>Small Fire Elemental</item>
+    <item>Small Water Elemental</item>
+    <item>Homonculus</item>
+    <item>Air Mephit</item>
+    <item>Dust Mephit</item>
+    <item>Earth Mephit</item>
+    <item>Fire Mephit</item>
+    <item>Ice Mephit</item>
+    <item>Magma Mephit</item>
+    <item>Ooze Mephit</item>
+    <item>Salt Mephit</item>
+    <item>Steam Mephit</item>
+    <item>Water Mephit</item>
+    <item>Heavy Warhorse</item>
+    <item>Warpony</item>
+  </object>
+  <object>
+    <name>Half-Fiend</name>
+    <item>Badger</item>
+    <item>Camel</item>
+    <item>Dire Rat</item>
+    <item>Dog</item>
+    <item>Riding Dog</item>
+    <item>Eagle</item>
+    <item>Hawk</item>
+    <item>Light Horse</item>
+    <item>Heavy Horse</item>
+    <item>Owl</item>
+    <item>Pony</item>
+    <item>Small Viper Snake</item>
+    <item>Medium Viper Snake</item>
+    <item>Wolf</item>
+    <item>Ape</item>
+    <item>Black Bear</item>
+    <item>Bison</item>
+    <item>Boar</item>
+    <item>Cheetah</item>
+    <item>Dire Badger</item>
+    <item>Dire Bat</item>
+    <item>Dire Weasel</item>
+    <item>Leopard</item>
+    <item>Monitor Lizard</item>
+    <item>Constrictor Snake</item>
+    <item>Large Viper Snake</item>
+    <item>Wolverine</item>
+    <item>Brown Bear</item>
+    <item>Dire Wolverine</item>
+    <item>Deinonychus</item>
+    <item>Dire Ape</item>
+    <item>Dire Boar</item>
+    <item>Dire Wolf</item>
+    <item>Lion</item>
+    <item>Rhinoceras</item>
+    <item>Huge Viper Snake</item>
+    <item>Tiger</item>
+    <item>Polar Bear</item>
+    <item>Dire Lion</item>
+    <item>Megaraptor</item>
+    <item>Giant Constrictor Snake</item>
+    <item>Dire Bear</item>
+    <item>Elephant</item>
+    <item>Dire Tiger</item>
+    <item>Triceratops</item>
+    <item>Tyrannosaurus</item>
+    <item>Bat</item>
+    <item>Cat</item>
+    <item>Lizard</item>
+    <item>Rat</item>
+    <item>Raven</item>
+    <item>Tiny Viper Snake</item>
+    <item>Toad</item>
+    <item>Weasel</item>
+    <item>Shocker Lizard</item>
+    <item>Stirge</item>
+    <item>Formian Worker</item>
+    <item>Imp</item>
+    <item>Pseudodragon</item>
+    <item>Quasit</item>
+    <item>Fiendish Bat</item>
+    <item>Fiendish Cat</item>
+    <item>Fiendish Hawk</item>
+    <item>Fiendish Lizard</item>
+    <item>Fiendish Owl</item>
+    <item>Fiendish Rat</item>
+    <item>Fiendish Raven</item>
+    <item>Fiendish Tiny Viper Snake</item>
+    <item>Fiendish Toad</item>
+    <item>Fiendish Weasel</item>
+    <item>Small Air Elemental</item>
+    <item>Small Earth Elemental</item>
+    <item>Small Fire Elemental</item>
+    <item>Small Water Elemental</item>
+    <item>Homonculus</item>
+    <item>Air Mephit</item>
+    <item>Dust Mephit</item>
+    <item>Earth Mephit</item>
+    <item>Fire Mephit</item>
+    <item>Ice Mephit</item>
+    <item>Magma Mephit</item>
+    <item>Ooze Mephit</item>
+    <item>Salt Mephit</item>
+    <item>Steam Mephit</item>
+    <item>Water Mephit</item>
+    <item>Heavy Warhorse</item>
+    <item>Warpony</item>
+  </object>
+  <object>
+    <name>Lich</name>
+    <item>Badger</item>
+    <item>Camel</item>
+    <item>Dire Rat</item>
+    <item>Dog</item>
+    <item>Riding Dog</item>
+    <item>Eagle</item>
+    <item>Hawk</item>
+    <item>Light Horse</item>
+    <item>Heavy Horse</item>
+    <item>Owl</item>
+    <item>Pony</item>
+    <item>Small Viper Snake</item>
+    <item>Medium Viper Snake</item>
+    <item>Wolf</item>
+    <item>Ape</item>
+    <item>Black Bear</item>
+    <item>Bison</item>
+    <item>Boar</item>
+    <item>Cheetah</item>
+    <item>Dire Badger</item>
+    <item>Dire Bat</item>
+    <item>Dire Weasel</item>
+    <item>Leopard</item>
+    <item>Monitor Lizard</item>
+    <item>Constrictor Snake</item>
+    <item>Large Viper Snake</item>
+    <item>Wolverine</item>
+    <item>Brown Bear</item>
+    <item>Dire Wolverine</item>
+    <item>Deinonychus</item>
+    <item>Dire Ape</item>
+    <item>Dire Boar</item>
+    <item>Dire Wolf</item>
+    <item>Lion</item>
+    <item>Rhinoceras</item>
+    <item>Huge Viper Snake</item>
+    <item>Tiger</item>
+    <item>Polar Bear</item>
+    <item>Dire Lion</item>
+    <item>Megaraptor</item>
+    <item>Giant Constrictor Snake</item>
+    <item>Dire Bear</item>
+    <item>Elephant</item>
+    <item>Dire Tiger</item>
+    <item>Triceratops</item>
+    <item>Tyrannosaurus</item>
+    <item>Bat</item>
+    <item>Cat</item>
+    <item>Lizard</item>
+    <item>Rat</item>
+    <item>Raven</item>
+    <item>Tiny Viper Snake</item>
+    <item>Toad</item>
+    <item>Weasel</item>
+    <item>Shocker Lizard</item>
+    <item>Stirge</item>
+    <item>Formian Worker</item>
+    <item>Imp</item>
+    <item>Pseudodragon</item>
+    <item>Quasit</item>
+    <item>Fiendish Bat</item>
+    <item>Fiendish Cat</item>
+    <item>Fiendish Hawk</item>
+    <item>Fiendish Lizard</item>
+    <item>Fiendish Owl</item>
+    <item>Fiendish Rat</item>
+    <item>Fiendish Raven</item>
+    <item>Fiendish Tiny Viper Snake</item>
+    <item>Fiendish Toad</item>
+    <item>Fiendish Weasel</item>
+    <item>Small Air Elemental</item>
+    <item>Small Earth Elemental</item>
+    <item>Small Fire Elemental</item>
+    <item>Small Water Elemental</item>
+    <item>Homonculus</item>
+    <item>Air Mephit</item>
+    <item>Dust Mephit</item>
+    <item>Earth Mephit</item>
+    <item>Fire Mephit</item>
+    <item>Ice Mephit</item>
+    <item>Magma Mephit</item>
+    <item>Ooze Mephit</item>
+    <item>Salt Mephit</item>
+    <item>Steam Mephit</item>
+    <item>Water Mephit</item>
+    <item>Heavy Warhorse</item>
+    <item>Warpony</item>
+  </object>
     <object>
         <name>Paladin</name>
         <item>Heavy Warhorse</item>
@@ -130,6 +700,485 @@
       <item>Steam Mephit</item>
       <item>Water Mephit</item>
     </object>
+  <object>
+    <name>Vampire</name>
+    <item>Dire Rat</item>
+    <item>Dire Bat</item>
+    <item>Bat</item>
+    <item>Rat</item>
+    <item>Fiendish Bat</item>
+    <item>Fiendish Rat</item>
+  </object>
+  <object>
+    <name>Werebear</name>
+    <item>Badger</item>
+    <item>Camel</item>
+    <item>Dire Rat</item>
+    <item>Dog</item>
+    <item>Riding Dog</item>
+    <item>Eagle</item>
+    <item>Hawk</item>
+    <item>Light Horse</item>
+    <item>Heavy Horse</item>
+    <item>Owl</item>
+    <item>Pony</item>
+    <item>Small Viper Snake</item>
+    <item>Medium Viper Snake</item>
+    <item>Wolf</item>
+    <item>Ape</item>
+    <item>Black Bear</item>
+    <item>Bison</item>
+    <item>Boar</item>
+    <item>Cheetah</item>
+    <item>Dire Badger</item>
+    <item>Dire Bat</item>
+    <item>Dire Weasel</item>
+    <item>Leopard</item>
+    <item>Monitor Lizard</item>
+    <item>Constrictor Snake</item>
+    <item>Large Viper Snake</item>
+    <item>Wolverine</item>
+    <item>Brown Bear</item>
+    <item>Dire Wolverine</item>
+    <item>Deinonychus</item>
+    <item>Dire Ape</item>
+    <item>Dire Boar</item>
+    <item>Dire Wolf</item>
+    <item>Lion</item>
+    <item>Rhinoceras</item>
+    <item>Huge Viper Snake</item>
+    <item>Tiger</item>
+    <item>Polar Bear</item>
+    <item>Dire Lion</item>
+    <item>Megaraptor</item>
+    <item>Giant Constrictor Snake</item>
+    <item>Dire Bear</item>
+    <item>Elephant</item>
+    <item>Dire Tiger</item>
+    <item>Triceratops</item>
+    <item>Tyrannosaurus</item>
+    <item>Bat</item>
+    <item>Cat</item>
+    <item>Lizard</item>
+    <item>Rat</item>
+    <item>Raven</item>
+    <item>Tiny Viper Snake</item>
+    <item>Toad</item>
+    <item>Weasel</item>
+    <item>Shocker Lizard</item>
+    <item>Stirge</item>
+    <item>Formian Worker</item>
+    <item>Imp</item>
+    <item>Pseudodragon</item>
+    <item>Quasit</item>
+    <item>Celestial Bat</item>
+    <item>Celestial Cat</item>
+    <item>Celestial Hawk</item>
+    <item>Celestial Lizard</item>
+    <item>Celestial Owl</item>
+    <item>Celestial Rat</item>
+    <item>Celestial Raven</item>
+    <item>Celestial Tiny Viper Snake</item>
+    <item>Celestial Toad</item>
+    <item>Celestial Weasel</item>
+    <item>Small Air Elemental</item>
+    <item>Small Earth Elemental</item>
+    <item>Small Fire Elemental</item>
+    <item>Small Water Elemental</item>
+    <item>Homonculus</item>
+    <item>Air Mephit</item>
+    <item>Dust Mephit</item>
+    <item>Earth Mephit</item>
+    <item>Fire Mephit</item>
+    <item>Ice Mephit</item>
+    <item>Magma Mephit</item>
+    <item>Ooze Mephit</item>
+    <item>Salt Mephit</item>
+    <item>Steam Mephit</item>
+    <item>Water Mephit</item>
+    <item>Heavy Warhorse</item>
+    <item>Warpony</item>
+  </object>
+  <object>
+    <name>Wereboar</name>
+    <item>Badger</item>
+    <item>Camel</item>
+    <item>Dire Rat</item>
+    <item>Dog</item>
+    <item>Riding Dog</item>
+    <item>Eagle</item>
+    <item>Hawk</item>
+    <item>Light Horse</item>
+    <item>Heavy Horse</item>
+    <item>Owl</item>
+    <item>Pony</item>
+    <item>Small Viper Snake</item>
+    <item>Medium Viper Snake</item>
+    <item>Wolf</item>
+    <item>Ape</item>
+    <item>Black Bear</item>
+    <item>Bison</item>
+    <item>Boar</item>
+    <item>Cheetah</item>
+    <item>Dire Badger</item>
+    <item>Dire Bat</item>
+    <item>Dire Weasel</item>
+    <item>Leopard</item>
+    <item>Monitor Lizard</item>
+    <item>Constrictor Snake</item>
+    <item>Large Viper Snake</item>
+    <item>Wolverine</item>
+    <item>Brown Bear</item>
+    <item>Dire Wolverine</item>
+    <item>Deinonychus</item>
+    <item>Dire Ape</item>
+    <item>Dire Boar</item>
+    <item>Dire Wolf</item>
+    <item>Lion</item>
+    <item>Rhinoceras</item>
+    <item>Huge Viper Snake</item>
+    <item>Tiger</item>
+    <item>Polar Bear</item>
+    <item>Dire Lion</item>
+    <item>Megaraptor</item>
+    <item>Giant Constrictor Snake</item>
+    <item>Dire Bear</item>
+    <item>Elephant</item>
+    <item>Dire Tiger</item>
+    <item>Triceratops</item>
+    <item>Tyrannosaurus</item>
+    <item>Bat</item>
+    <item>Cat</item>
+    <item>Lizard</item>
+    <item>Rat</item>
+    <item>Raven</item>
+    <item>Tiny Viper Snake</item>
+    <item>Toad</item>
+    <item>Weasel</item>
+    <item>Shocker Lizard</item>
+    <item>Stirge</item>
+    <item>Formian Worker</item>
+    <item>Imp</item>
+    <item>Pseudodragon</item>
+    <item>Quasit</item>
+    <item>Celestial Bat</item>
+    <item>Celestial Cat</item>
+    <item>Celestial Hawk</item>
+    <item>Celestial Lizard</item>
+    <item>Celestial Owl</item>
+    <item>Celestial Rat</item>
+    <item>Celestial Raven</item>
+    <item>Celestial Tiny Viper Snake</item>
+    <item>Celestial Toad</item>
+    <item>Celestial Weasel</item>
+    <item>Fiendish Bat</item>
+    <item>Fiendish Cat</item>
+    <item>Fiendish Hawk</item>
+    <item>Fiendish Lizard</item>
+    <item>Fiendish Owl</item>
+    <item>Fiendish Rat</item>
+    <item>Fiendish Raven</item>
+    <item>Fiendish Tiny Viper Snake</item>
+    <item>Fiendish Toad</item>
+    <item>Fiendish Weasel</item>
+    <item>Small Air Elemental</item>
+    <item>Small Earth Elemental</item>
+    <item>Small Fire Elemental</item>
+    <item>Small Water Elemental</item>
+    <item>Homonculus</item>
+    <item>Air Mephit</item>
+    <item>Dust Mephit</item>
+    <item>Earth Mephit</item>
+    <item>Fire Mephit</item>
+    <item>Ice Mephit</item>
+    <item>Magma Mephit</item>
+    <item>Ooze Mephit</item>
+    <item>Salt Mephit</item>
+    <item>Steam Mephit</item>
+    <item>Water Mephit</item>
+    <item>Heavy Warhorse</item>
+    <item>Warpony</item>
+  </object>
+  <object>
+    <name>Wererat</name>
+    <item>Badger</item>
+    <item>Camel</item>
+    <item>Dire Rat</item>
+    <item>Dog</item>
+    <item>Riding Dog</item>
+    <item>Eagle</item>
+    <item>Hawk</item>
+    <item>Light Horse</item>
+    <item>Heavy Horse</item>
+    <item>Owl</item>
+    <item>Pony</item>
+    <item>Small Viper Snake</item>
+    <item>Medium Viper Snake</item>
+    <item>Wolf</item>
+    <item>Ape</item>
+    <item>Black Bear</item>
+    <item>Bison</item>
+    <item>Boar</item>
+    <item>Cheetah</item>
+    <item>Dire Badger</item>
+    <item>Dire Bat</item>
+    <item>Dire Weasel</item>
+    <item>Leopard</item>
+    <item>Monitor Lizard</item>
+    <item>Constrictor Snake</item>
+    <item>Large Viper Snake</item>
+    <item>Wolverine</item>
+    <item>Brown Bear</item>
+    <item>Dire Wolverine</item>
+    <item>Deinonychus</item>
+    <item>Dire Ape</item>
+    <item>Dire Boar</item>
+    <item>Dire Wolf</item>
+    <item>Lion</item>
+    <item>Rhinoceras</item>
+    <item>Huge Viper Snake</item>
+    <item>Tiger</item>
+    <item>Polar Bear</item>
+    <item>Dire Lion</item>
+    <item>Megaraptor</item>
+    <item>Giant Constrictor Snake</item>
+    <item>Dire Bear</item>
+    <item>Elephant</item>
+    <item>Dire Tiger</item>
+    <item>Triceratops</item>
+    <item>Tyrannosaurus</item>
+    <item>Bat</item>
+    <item>Cat</item>
+    <item>Lizard</item>
+    <item>Rat</item>
+    <item>Raven</item>
+    <item>Tiny Viper Snake</item>
+    <item>Toad</item>
+    <item>Weasel</item>
+    <item>Shocker Lizard</item>
+    <item>Stirge</item>
+    <item>Formian Worker</item>
+    <item>Imp</item>
+    <item>Pseudodragon</item>
+    <item>Quasit</item>
+    <item>Fiendish Bat</item>
+    <item>Fiendish Cat</item>
+    <item>Fiendish Hawk</item>
+    <item>Fiendish Lizard</item>
+    <item>Fiendish Owl</item>
+    <item>Fiendish Rat</item>
+    <item>Fiendish Raven</item>
+    <item>Fiendish Tiny Viper Snake</item>
+    <item>Fiendish Toad</item>
+    <item>Fiendish Weasel</item>
+    <item>Small Air Elemental</item>
+    <item>Small Earth Elemental</item>
+    <item>Small Fire Elemental</item>
+    <item>Small Water Elemental</item>
+    <item>Homonculus</item>
+    <item>Air Mephit</item>
+    <item>Dust Mephit</item>
+    <item>Earth Mephit</item>
+    <item>Fire Mephit</item>
+    <item>Ice Mephit</item>
+    <item>Magma Mephit</item>
+    <item>Ooze Mephit</item>
+    <item>Salt Mephit</item>
+    <item>Steam Mephit</item>
+    <item>Water Mephit</item>
+    <item>Heavy Warhorse</item>
+    <item>Warpony</item>
+  </object>
+  <object>
+    <name>Weretiger</name>
+    <item>Badger</item>
+    <item>Camel</item>
+    <item>Dire Rat</item>
+    <item>Dog</item>
+    <item>Riding Dog</item>
+    <item>Eagle</item>
+    <item>Hawk</item>
+    <item>Light Horse</item>
+    <item>Heavy Horse</item>
+    <item>Owl</item>
+    <item>Pony</item>
+    <item>Small Viper Snake</item>
+    <item>Medium Viper Snake</item>
+    <item>Wolf</item>
+    <item>Ape</item>
+    <item>Black Bear</item>
+    <item>Bison</item>
+    <item>Boar</item>
+    <item>Cheetah</item>
+    <item>Dire Badger</item>
+    <item>Dire Bat</item>
+    <item>Dire Weasel</item>
+    <item>Leopard</item>
+    <item>Monitor Lizard</item>
+    <item>Constrictor Snake</item>
+    <item>Large Viper Snake</item>
+    <item>Wolverine</item>
+    <item>Brown Bear</item>
+    <item>Dire Wolverine</item>
+    <item>Deinonychus</item>
+    <item>Dire Ape</item>
+    <item>Dire Boar</item>
+    <item>Dire Wolf</item>
+    <item>Lion</item>
+    <item>Rhinoceras</item>
+    <item>Huge Viper Snake</item>
+    <item>Tiger</item>
+    <item>Polar Bear</item>
+    <item>Dire Lion</item>
+    <item>Megaraptor</item>
+    <item>Giant Constrictor Snake</item>
+    <item>Dire Bear</item>
+    <item>Elephant</item>
+    <item>Dire Tiger</item>
+    <item>Triceratops</item>
+    <item>Tyrannosaurus</item>
+    <item>Bat</item>
+    <item>Cat</item>
+    <item>Lizard</item>
+    <item>Rat</item>
+    <item>Raven</item>
+    <item>Tiny Viper Snake</item>
+    <item>Toad</item>
+    <item>Weasel</item>
+    <item>Shocker Lizard</item>
+    <item>Stirge</item>
+    <item>Formian Worker</item>
+    <item>Imp</item>
+    <item>Pseudodragon</item>
+    <item>Quasit</item>
+    <item>Celestial Bat</item>
+    <item>Celestial Cat</item>
+    <item>Celestial Hawk</item>
+    <item>Celestial Lizard</item>
+    <item>Celestial Owl</item>
+    <item>Celestial Rat</item>
+    <item>Celestial Raven</item>
+    <item>Celestial Tiny Viper Snake</item>
+    <item>Celestial Toad</item>
+    <item>Celestial Weasel</item>
+    <item>Fiendish Bat</item>
+    <item>Fiendish Cat</item>
+    <item>Fiendish Hawk</item>
+    <item>Fiendish Lizard</item>
+    <item>Fiendish Owl</item>
+    <item>Fiendish Rat</item>
+    <item>Fiendish Raven</item>
+    <item>Fiendish Tiny Viper Snake</item>
+    <item>Fiendish Toad</item>
+    <item>Fiendish Weasel</item>
+    <item>Small Air Elemental</item>
+    <item>Small Earth Elemental</item>
+    <item>Small Fire Elemental</item>
+    <item>Small Water Elemental</item>
+    <item>Homonculus</item>
+    <item>Air Mephit</item>
+    <item>Dust Mephit</item>
+    <item>Earth Mephit</item>
+    <item>Fire Mephit</item>
+    <item>Ice Mephit</item>
+    <item>Magma Mephit</item>
+    <item>Ooze Mephit</item>
+    <item>Salt Mephit</item>
+    <item>Steam Mephit</item>
+    <item>Water Mephit</item>
+    <item>Heavy Warhorse</item>
+    <item>Warpony</item>
+  </object>
+  <object>
+    <name>Werewolf</name>
+    <item>Badger</item>
+    <item>Camel</item>
+    <item>Dire Rat</item>
+    <item>Dog</item>
+    <item>Riding Dog</item>
+    <item>Eagle</item>
+    <item>Hawk</item>
+    <item>Light Horse</item>
+    <item>Heavy Horse</item>
+    <item>Owl</item>
+    <item>Pony</item>
+    <item>Small Viper Snake</item>
+    <item>Medium Viper Snake</item>
+    <item>Wolf</item>
+    <item>Ape</item>
+    <item>Black Bear</item>
+    <item>Bison</item>
+    <item>Boar</item>
+    <item>Cheetah</item>
+    <item>Dire Badger</item>
+    <item>Dire Bat</item>
+    <item>Dire Weasel</item>
+    <item>Leopard</item>
+    <item>Monitor Lizard</item>
+    <item>Constrictor Snake</item>
+    <item>Large Viper Snake</item>
+    <item>Wolverine</item>
+    <item>Brown Bear</item>
+    <item>Dire Wolverine</item>
+    <item>Deinonychus</item>
+    <item>Dire Ape</item>
+    <item>Dire Boar</item>
+    <item>Dire Wolf</item>
+    <item>Lion</item>
+    <item>Rhinoceras</item>
+    <item>Huge Viper Snake</item>
+    <item>Tiger</item>
+    <item>Polar Bear</item>
+    <item>Dire Lion</item>
+    <item>Megaraptor</item>
+    <item>Giant Constrictor Snake</item>
+    <item>Dire Bear</item>
+    <item>Elephant</item>
+    <item>Dire Tiger</item>
+    <item>Triceratops</item>
+    <item>Tyrannosaurus</item>
+    <item>Bat</item>
+    <item>Cat</item>
+    <item>Lizard</item>
+    <item>Rat</item>
+    <item>Raven</item>
+    <item>Tiny Viper Snake</item>
+    <item>Toad</item>
+    <item>Weasel</item>
+    <item>Shocker Lizard</item>
+    <item>Stirge</item>
+    <item>Formian Worker</item>
+    <item>Imp</item>
+    <item>Pseudodragon</item>
+    <item>Quasit</item>
+    <item>Fiendish Bat</item>
+    <item>Fiendish Cat</item>
+    <item>Fiendish Hawk</item>
+    <item>Fiendish Lizard</item>
+    <item>Fiendish Owl</item>
+    <item>Fiendish Rat</item>
+    <item>Fiendish Raven</item>
+    <item>Fiendish Tiny Viper Snake</item>
+    <item>Fiendish Toad</item>
+    <item>Fiendish Weasel</item>
+    <item>Small Air Elemental</item>
+    <item>Small Earth Elemental</item>
+    <item>Small Fire Elemental</item>
+    <item>Small Water Elemental</item>
+    <item>Homonculus</item>
+    <item>Air Mephit</item>
+    <item>Dust Mephit</item>
+    <item>Earth Mephit</item>
+    <item>Fire Mephit</item>
+    <item>Ice Mephit</item>
+    <item>Magma Mephit</item>
+    <item>Ooze Mephit</item>
+    <item>Salt Mephit</item>
+    <item>Steam Mephit</item>
+    <item>Water Mephit</item>
+    <item>Heavy Warhorse</item>
+    <item>Warpony</item>
+  </object>
     <object>
       <name>Wizard</name>
       <item>Bat</item>

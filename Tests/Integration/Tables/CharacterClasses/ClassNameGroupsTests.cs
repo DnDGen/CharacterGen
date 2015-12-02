@@ -53,8 +53,6 @@ namespace CharacterGen.Tests.Integration.Tables.CharacterClasses
             CharacterClassConstants.Paladin,
             CharacterClassConstants.Ranger)]
         [TestCase(GroupConstants.Mages,
-            CharacterClassConstants.Bard,
-            CharacterClassConstants.Ranger,
             CharacterClassConstants.Sorcerer,
             CharacterClassConstants.Wizard)]
         [TestCase(GroupConstants.Spellcasters,

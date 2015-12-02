@@ -57,13 +57,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abilities\AbilitiesGeneratorTypeConstants.cs" />
     <Compile Include="Abilities\Feats\IAdditionalFeatsGenerator.cs" />
     <Compile Include="Abilities\Feats\IFeatFocusGenerator.cs" />
     <Compile Include="Abilities\Feats\IRacialFeatsGenerator.cs" />
     <Compile Include="Abilities\Feats\IClassFeatsGenerator.cs" />
     <Compile Include="Abilities\IAbilitiesGenerator.cs" />
-    <Compile Include="Combats\CombatGeneratorTypeConstants.cs" />
     <Compile Include="Combats\IArmorClassGenerator.cs" />
     <Compile Include="Combats\ICombatGenerator.cs" />
     <Compile Include="Combats\ISavingThrowsGenerator.cs" />

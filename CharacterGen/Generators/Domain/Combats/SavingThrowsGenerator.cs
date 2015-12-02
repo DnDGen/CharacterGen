@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace CharacterGen.Generators.Domain.Combats
 {
-    public class SavingThrowsGenerator : IterativeGenerator, ISavingThrowsGenerator
+    public class SavingThrowsGenerator : ISavingThrowsGenerator
     {
         private ICollectionsSelector collectionsSelector;
 

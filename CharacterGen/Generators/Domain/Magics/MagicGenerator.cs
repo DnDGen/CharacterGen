@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace CharacterGen.Generators.Domain.Magics
 {
-    public class MagicGenerator : IterativeGenerator, IMagicGenerator
+    public class MagicGenerator : IMagicGenerator
     {
         private ISpellsGenerator spellsGenerator;
         private IAnimalGenerator animalGenerator;

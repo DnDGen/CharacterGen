@@ -9,16 +9,16 @@ using System;
 namespace CharacterGen.Tests.Integration.Stress.Abilities
 {
     [TestFixture]
-    public class CharacterAbilitiesGeneratorTests : StressTests
+    public class AbilitiesGeneratorTests : StressTests
     {
-        [Inject, Named(AbilitiesGeneratorTypeConstants.Character)]
-        public IAbilitiesGenerator CharacterAbilitiesGenerator { get; set; }
+        [Inject]
+        public IAbilitiesGenerator AbilitiesGenerator { get; set; }
         [Inject, Named(StatsRandomizerTypeConstants.Raw)]
         public IStatsRandomizer StatsRandomizer { get; set; }
-        [Inject, Named(CombatGeneratorTypeConstants.Character)]
-        public ICombatGenerator CharacterCombatGenerator { get; set; }
+        [Inject]
+        public ICombatGenerator CombatGenerator { get; set; }
 
-        [TestCase("CharacterAbilitiesGenerator")]
+        [TestCase("Abilities Generator")]
         public override void Stress(String stressSubject)
         {
             Stress();
@@ -29,9 +29,9 @@ namespace CharacterGen.Tests.Integration.Stress.Abilities
             var alignment = GetNewAlignment();
             var characterClass = GetNewCharacterClass(alignment);
             var race = RaceGenerator.GenerateWith(alignment, characterClass, BaseRaceRandomizer, MetaraceRandomizer);
-            var baseAttack = CharacterCombatGenerator.GenerateBaseAttackWith(characterClass, race);
+            var baseAttack = CombatGenerator.GenerateBaseAttackWith(characterClass, race);
 
-            var ability = CharacterAbilitiesGenerator.GenerateWith(characterClass, race, StatsRandomizer, baseAttack);
+            var ability = AbilitiesGenerator.GenerateWith(characterClass, race, StatsRandomizer, baseAttack);
             Assert.That(ability.Feats, Is.Not.Empty);
             Assert.That(ability.Languages, Is.Not.Empty);
 

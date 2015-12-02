@@ -2,8 +2,6 @@
 using CharacterGen.Generators.Abilities;
 using CharacterGen.Generators.Abilities.Feats;
 using CharacterGen.Generators.Combats;
-using CharacterGen.Generators.Domain.Abilities;
-using CharacterGen.Generators.Domain.Combats;
 using CharacterGen.Generators.Domain.Randomizers.Alignments;
 using CharacterGen.Generators.Domain.Randomizers.CharacterClasses.ClassNames;
 using CharacterGen.Generators.Domain.Randomizers.CharacterClasses.Levels;
@@ -274,12 +272,6 @@ namespace CharacterGen.Tests.Integration.Bootstrap.Modules
         }
 
         [Test]
-        public void BaseRaceRandomizerNamedAnimalIsAnimalBaseRaceRandomizer()
-        {
-            AssertNamedIsInstanceOf<RaceRandomizer, AnimalBaseRaceRandomizer>(RaceRandomizerTypeConstants.BaseRace.AnimalBase);
-        }
-
-        [Test]
         public void BaseRaceRandomizerNamedNonStandardIsNonStandardBaseRaceRandomizer()
         {
             AssertNamedIsInstanceOf<RaceRandomizer, NonStandardBaseRaceRandomizer>(RaceRandomizerTypeConstants.BaseRace.NonStandardBase);
@@ -327,7 +319,6 @@ namespace CharacterGen.Tests.Integration.Bootstrap.Modules
             AssertNamedIsInstanceOf<RaceRandomizer, NonNeutralBaseRaceRandomizer>(RaceRandomizerTypeConstants.BaseRace.NonNeutralBase);
         }
 
-        [TestCase(RaceRandomizerTypeConstants.BaseRace.AnimalBase)]
         [TestCase(RaceRandomizerTypeConstants.BaseRace.AnyBase)]
         [TestCase(RaceRandomizerTypeConstants.BaseRace.EvilBase)]
         [TestCase(RaceRandomizerTypeConstants.BaseRace.GoodBase)]
@@ -519,42 +510,14 @@ namespace CharacterGen.Tests.Integration.Bootstrap.Modules
             AssertNotSingleton<ISetStatsRandomizer>();
         }
 
-        [Test]
-        public void AbilitiesGeneratorNamedCharacterIsCharacterAbilitiesGenerator()
+        public void AbilitiesGeneratorIsNotBuiltAsSingleton()
         {
-            AssertNamedIsInstanceOf<IAbilitiesGenerator, CharacterAbilitiesGenerator>(AbilitiesGeneratorTypeConstants.Character);
+            AssertNotSingleton<IAbilitiesGenerator>();
         }
 
-        [Test]
-        public void AbilitiesGeneratorNamedAnimalIsAnimalAbilitiesGenerator()
+        public void CombatGeneratorIsNotBuiltAsSingleton()
         {
-            AssertNamedIsInstanceOf<IAbilitiesGenerator, AnimalAbilitiesGenerator>(AbilitiesGeneratorTypeConstants.Animal);
-        }
-
-        [TestCase(AbilitiesGeneratorTypeConstants.Animal)]
-        [TestCase(AbilitiesGeneratorTypeConstants.Character)]
-        public void AbilitiesGeneratorIsNotBuiltAsSingleton(String name)
-        {
-            AssertNotSingleton<IAbilitiesGenerator>(name);
-        }
-
-        [Test]
-        public void CombatGeneratorNamedCharacterIsCharacterCombatGenerator()
-        {
-            AssertNamedIsInstanceOf<ICombatGenerator, CharacterCombatGenerator>(AbilitiesGeneratorTypeConstants.Character);
-        }
-
-        [Test]
-        public void CombatGeneratorNamedAnimalIsAnimalCombatGenerator()
-        {
-            AssertNamedIsInstanceOf<ICombatGenerator, AnimalCombatGenerator>(AbilitiesGeneratorTypeConstants.Animal);
-        }
-
-        [TestCase(AbilitiesGeneratorTypeConstants.Animal)]
-        [TestCase(AbilitiesGeneratorTypeConstants.Character)]
-        public void CombatGeneratorIsNotBuiltAsSingleton(String name)
-        {
-            AssertNotSingleton<ICombatGenerator>(name);
+            AssertNotSingleton<ICombatGenerator>();
         }
 
         [Test]

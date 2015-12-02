@@ -34,19 +34,15 @@ namespace CharacterGen.Bootstrap.Modules
         {
             Bind<IAlignmentGenerator>().To<AlignmentGenerator>();
             Bind<ICharacterClassGenerator>().To<CharacterClassGenerator>();
-            Bind<ICharacterGenerator>().ToMethod(c => CharacterGeneratorFactory.CreateWith(c.Kernel));
+            Bind<ICharacterGenerator>().To<CharacterGenerator>();
             Bind<IHitPointsGenerator>().To<HitPointsGenerator>();
             Bind<ILanguageGenerator>().To<LanguageGenerator>();
             Bind<IRaceGenerator>().To<RaceGenerator>();
             Bind<IRandomizerVerifier>().To<RandomizerVerifier>();
             Bind<IStatsGenerator>().To<StatsGenerator>();
             Bind<ILeadershipGenerator>().ToMethod(c => LeadershipGeneratorFactory.Create(c.Kernel));
-
-            Bind<IAbilitiesGenerator>().To<CharacterAbilitiesGenerator>().Named(AbilitiesGeneratorTypeConstants.Character);
-            Bind<IAbilitiesGenerator>().To<AnimalAbilitiesGenerator>().Named(AbilitiesGeneratorTypeConstants.Animal);
-
-            Bind<ICombatGenerator>().To<CharacterCombatGenerator>().Named(AbilitiesGeneratorTypeConstants.Character);
-            Bind<ICombatGenerator>().To<AnimalCombatGenerator>().Named(AbilitiesGeneratorTypeConstants.Animal);
+            Bind<IAbilitiesGenerator>().To<AbilitiesGenerator>();
+            Bind<ICombatGenerator>().To<CombatGenerator>();
 
             Bind<IEquipmentGenerator>().To<EquipmentGenerator>();
             Bind<ISkillsGenerator>().To<SkillsGenerator>();
@@ -61,7 +57,7 @@ namespace CharacterGen.Bootstrap.Modules
             Bind<IWeaponGenerator>().ToMethod(c => WeaponGeneratorFactory.CreateWith(c.Kernel));
             Bind<IMagicGenerator>().To<MagicGenerator>();
             Bind<ISpellsGenerator>().To<SpellsGenerator>();
-            Bind<IAnimalGenerator>().ToMethod(c => AnimalGeneratorFactory.CreateWith(c.Kernel));
+            Bind<IAnimalGenerator>().To<AnimalGenerator>();
             Bind<Generator>().To<IterativeGenerator>();
 
             Bind<IAlignmentRandomizer>().To<AnyAlignmentRandomizer>().Named(AlignmentRandomizerTypeConstants.Any);
@@ -90,7 +86,6 @@ namespace CharacterGen.Bootstrap.Modules
             Bind<ILevelRandomizer>().To<MediumLevelRandomizer>().Named(LevelRandomizerTypeConstants.Medium);
             Bind<ILevelRandomizer>().To<VeryHighLevelRandomizer>().Named(LevelRandomizerTypeConstants.VeryHigh);
 
-            Bind<RaceRandomizer>().To<AnimalBaseRaceRandomizer>().Named(RaceRandomizerTypeConstants.BaseRace.AnimalBase);
             Bind<RaceRandomizer>().To<AnyBaseRaceRandomizer>().Named(RaceRandomizerTypeConstants.BaseRace.AnyBase);
             Bind<RaceRandomizer>().To<EvilBaseRaceRandomizer>().Named(RaceRandomizerTypeConstants.BaseRace.EvilBase);
             Bind<RaceRandomizer>().To<GoodBaseRaceRandomizer>().Named(RaceRandomizerTypeConstants.BaseRace.GoodBase);
