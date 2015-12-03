@@ -16,12 +16,10 @@ namespace CharacterGen.Mappers.Domain.Percentiles
 
         public Dictionary<Int32, String> Map(String tableName)
         {
-            if (cachedTables.ContainsKey(tableName))
-                return cachedTables[tableName];
+            if (cachedTables.ContainsKey(tableName) == false)
+                cachedTables[tableName] = innerMapper.Map(tableName);
 
-            var table = innerMapper.Map(tableName);
-            cachedTables.Add(tableName, table);
-            return table;
+            return cachedTables[tableName];
         }
     }
 }
