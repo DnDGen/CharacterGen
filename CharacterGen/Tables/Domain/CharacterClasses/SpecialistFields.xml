@@ -38,6 +38,21 @@
     <object>
         <name>Fighter</name>
     </object>
+  <object>
+    <name>Ghost</name>
+  </object>
+  <object>
+    <name>Half-Celestial</name>
+  </object>
+  <object>
+    <name>Half-Dragon</name>
+  </object>
+    <object>
+        <name>Half-Fiend</name>
+    </object>
+  <object>
+    <name>Lich</name>
+  </object>
     <object>
         <name>Monk</name>
     </object>
@@ -53,6 +68,28 @@
     <object>
         <name>Sorcerer</name>
     </object>
+  <object>
+    <name>Vampire</name>
+    <item>Chaos</item>
+    <item>Destruction</item>
+    <item>Evil</item>
+    <item>Trickery</item>
+  </object>
+  <object>
+    <name>Werebear</name>
+  </object>
+  <object>
+    <name>Wereboar</name>
+  </object>
+  <object>
+    <name>Wererat</name>
+  </object>
+  <object>
+    <name>Weretiger</name>
+  </object>
+  <object>
+    <name>Werewolf</name>
+  </object>
     <object>
         <name>Wizard</name>
         <item>Abjuration</item>

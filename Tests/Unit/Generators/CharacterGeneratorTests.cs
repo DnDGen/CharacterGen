@@ -26,6 +26,7 @@ using Moq;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CharacterGen.Tests.Unit.Generators
 {
@@ -267,6 +268,16 @@ namespace CharacterGen.Tests.Unit.Generators
 
             GenerateCharacter();
             Assert.That(characterClass.Level, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void RegenerateSpecialistFields()
+        {
+            mockCharacterClassGenerator.Setup(g => g.RegenerateSpecialistFields(alignment, characterClass, race)).Returns(new[] { "new specialist field", "other new specialist field" });
+            GenerateCharacter();
+            Assert.That(characterClass.SpecialistFields, Contains.Item("new specialist field"));
+            Assert.That(characterClass.SpecialistFields, Contains.Item("other new specialist field"));
+            Assert.That(characterClass.SpecialistFields.Count(), Is.EqualTo(2));
         }
 
         [Test]

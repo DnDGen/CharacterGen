@@ -1,5 +1,6 @@
 ﻿using CharacterGen.Common.Alignments;
 using CharacterGen.Common.CharacterClasses;
+using CharacterGen.Common.Races;
 using CharacterGen.Generators.Randomizers.CharacterClasses;
 using CharacterGen.Selectors;
 using CharacterGen.Tables;
@@ -82,6 +83,24 @@ namespace CharacterGen.Generators.Domain
                 prohibitedfieldQuantity += prohibitedFieldQuantities[specialistField];
 
             return PopulateFields(prohibitedfieldQuantity, possibleProhibitedFields);
+        }
+
+        public IEnumerable<String> RegenerateSpecialistFields(Alignment alignment, CharacterClass characterClass, Race race)
+        {
+            if (characterClass.SpecialistFields.Any() == false || race.Metarace == RaceConstants.Metaraces.None)
+                return characterClass.SpecialistFields;
+
+            var allClassSpecialistFields = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SpecialistFields, characterClass.ClassName);
+            var allMetaraceSpecialistFields = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SpecialistFields, race.Metarace);
+            var applicableFields = allClassSpecialistFields.Intersect(allMetaraceSpecialistFields);
+
+            if (applicableFields.Any() == false)
+                return characterClass.SpecialistFields;
+
+            var nonAlignmentFields = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ProhibitedFields, alignment.ToString());
+            var possibleSpecialistFields = applicableFields.Except(nonAlignmentFields);
+
+            return PopulateFields(characterClass.SpecialistFields.Count(), possibleSpecialistFields);
         }
     }
 }

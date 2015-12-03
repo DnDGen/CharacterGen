@@ -82,6 +82,8 @@ namespace CharacterGen.Generators.Domain
                 character.Class.Level += levelAdjustments[character.Race.Metarace];
             }
 
+            character.Class.SpecialistFields = characterClassGenerator.RegenerateSpecialistFields(character.Alignment, character.Class, character.Race);
+
             var baseAttack = combatGenerator.GenerateBaseAttackWith(character.Class, character.Race);
 
             character.Ability = abilitiesGenerator.GenerateWith(character.Class, character.Race, statsRandomizer, baseAttack);
