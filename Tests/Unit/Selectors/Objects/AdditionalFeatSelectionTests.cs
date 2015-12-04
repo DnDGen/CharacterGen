@@ -100,6 +100,28 @@ namespace CharacterGen.Tests.Unit.Selectors.Objects
         }
 
         [Test]
+        public void AnyRequiredSkillWithSufficientRanksMeetRequirement()
+        {
+            selection.RequiredSkillRanks["skill"] = 5;
+            selection.RequiredSkillRanks["other skill"] = 1;
+            skills["skill"] = new Skill { Ranks = 4, ClassSkill = true };
+            skills["other skill"] = new Skill { Ranks = 1, ClassSkill = true };
+
+            var met = selection.ImmutableRequirementsMet(1, stats, skills, characterClass);
+            Assert.That(met, Is.True);
+        }
+
+        [Test]
+        public void MeetSkillRequirementOf0Ranks()
+        {
+            selection.RequiredSkillRanks["skill"] = 0;
+            skills["skill"] = new Skill { Ranks = 0, ClassSkill = false };
+
+            var met = selection.ImmutableRequirementsMet(1, stats, skills, characterClass);
+            Assert.That(met, Is.True);
+        }
+
+        [Test]
         public void ClassNameRequirementsNotMet()
         {
             selection.RequiredCharacterClasses["class name"] = 1;

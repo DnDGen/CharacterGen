@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+    <object>
+        <name>Diplomacy</name>
+        <item>0</item>
+    </object>
+  <object>
+    <name>Sense Motive</name>
+    <item>0</item>
+  </object>
+</items>

@@ -39,14 +39,17 @@ namespace CharacterGen.Selectors.Objects
                 if (stats[stat.Key].Value < stat.Value)
                     return false;
 
-            foreach (var skill in RequiredSkillRanks)
-                if (skills[skill.Key].EffectiveRanks < skill.Value)
-                    return false;
-
             if (RequiredCharacterClasses.Any() && (RequiredCharacterClasses.ContainsKey(characterClass.ClassName) == false || RequiredCharacterClasses[characterClass.ClassName] > characterClass.Level))
                 return false;
 
-            return baseAttack >= RequiredBaseAttack;
+            if (baseAttack < RequiredBaseAttack)
+                return false;
+
+            if (RequiredSkillRanks.Any() == false)
+                return true;
+
+            var requiredSkills = skills.Keys.Intersect(RequiredSkillRanks.Keys);
+            return requiredSkills.Any(s => skills[s].EffectiveRanks >= RequiredSkillRanks[s]);
         }
 
         public Boolean MutableRequirementsMet(IEnumerable<Feat> feats)

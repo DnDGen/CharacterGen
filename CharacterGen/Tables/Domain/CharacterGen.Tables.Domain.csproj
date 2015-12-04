@@ -1658,6 +1658,54 @@
   <ItemGroup>
     <EmbeddedResource Include="Abilities\Feats\Data\Racial\Metaraces\LichFeatData.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Feats\Requirements\Skills\DiligentSkillRankRequirements.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Feats\Requirements\Skills\AgileSkillRankRequirements.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Feats\Requirements\Skills\PersuasiveSkillRankRequirements.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Feats\Requirements\Skills\AthleticSkillRankRequirements.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Feats\Requirements\Skills\NegotiatorSkillRankRequirements.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Feats\Requirements\Skills\Nimble FingersSkillRankRequirements.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Feats\Requirements\Skills\DeceitfulSkillRankRequirements.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Feats\Requirements\Skills\InvestigatorSkillRankRequirements.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Feats\Requirements\Skills\Animal AffinitySkillRankRequirements.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Feats\Requirements\Skills\Self-SufficientSkillRankRequirements.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Feats\Requirements\Skills\StealthySkillRankRequirements.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Feats\Requirements\Skills\AcrobaticSkillRankRequirements.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Feats\Requirements\Skills\Nature SenseSkillRankRequirements.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Feats\Requirements\Skills\AlertnessSkillRankRequirements.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Feats\Requirements\Skills\Deft HandsSkillRankRequirements.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Feats\Requirements\Skills\Magical AptitudeSkillRankRequirements.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

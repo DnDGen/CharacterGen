@@ -695,6 +695,22 @@
         <item>Ride-By Attack</item>
         <item>Spirited Charge</item>
         <item>Trample</item>
+      <item>Acrobatic</item>
+      <item>Agile</item>
+      <item>Alertness</item>
+      <item>Animal Affinity</item>
+      <item>Athletic</item>
+      <item>Deceitful</item>
+      <item>Deft Hands</item>
+      <item>Diligent</item>
+      <item>Investigator</item>
+      <item>Magical Aptitude</item>
+      <item>Negotiator</item>
+      <item>Nature Sense</item>
+      <item>Nimble Fingers</item>
+      <item>Persuasive</item>
+      <item>Self-Sufficient</item>
+      <item>Stealthy</item>
     </object>
     <object>
         <name>HasStatRequirements</name>
