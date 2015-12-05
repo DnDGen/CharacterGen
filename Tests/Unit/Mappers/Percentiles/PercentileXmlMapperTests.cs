@@ -12,18 +12,35 @@ namespace CharacterGen.Tests.Unit.Mappers.Percentiles
     [TestFixture]
     public class PercentileXmlMapperTests
     {
+        private const String tableName = "PercentileXmlMapperTests";
+
         private IPercentileMapper mapper;
         private Mock<IStreamLoader> mockStreamLoader;
-        private const String tableName = "PercentileXmlMapperTests";
         private String filename;
-        private String filePath;
+        private String contents;
 
         [SetUp]
         public void Setup()
         {
             filename = tableName + ".xml";
-            filePath = Path.Combine(TestContext.CurrentContext.TestDirectory, filename);
-            MakeXmlFile();
+            contents = @"<?xml version=""1.0"" encoding=""utf-8"" ?>
+                         <percentile>
+                             <object>
+                                 <lower>1</lower>
+                                 <content>one through five</content>
+                                 <upper>5</upper>
+                             </object>
+                             <object>
+                                 <lower>6</lower>
+                                 <content>six only</content>
+                                 <upper>6</upper>
+                             </object>
+                             <object>
+                                 <lower>7</lower>
+                                 <content></content>
+                                 <upper>7</upper>
+                             </object>
+                         </percentile>";
 
             mockStreamLoader = new Mock<IStreamLoader>();
             mockStreamLoader.Setup(l => l.LoadFor(filename)).Returns(() => GetStream());
@@ -31,32 +48,15 @@ namespace CharacterGen.Tests.Unit.Mappers.Percentiles
             mapper = new PercentileXmlMapper(mockStreamLoader.Object);
         }
 
-        private void MakeXmlFile()
-        {
-            var content = @"<?xml version=""1.0"" encoding=""utf-8"" ?>
-                            <percentile>
-                                <object>
-                                    <lower>1</lower>
-                                    <content>one through five</content>
-                                    <upper>5</upper>
-                                </object>
-                                <object>
-                                    <lower>6</lower>
-                                    <content>six only</content>
-                                    <upper>6</upper>
-                                </object>
-                                <object>
-                                    <lower>7</lower>
-                                    <content></content>
-                                    <upper>7</upper>
-                                </object>
-                            </percentile>";
-            File.WriteAllText(filePath, content);
-        }
-
         private Stream GetStream()
         {
-            return new FileStream(filePath, FileMode.Open);
+            var stream = new MemoryStream();
+            var writer = new StreamWriter(stream);
+            writer.Write(contents);
+            writer.Flush();
+            stream.Position = 0;
+
+            return stream;
         }
 
         [Test]
@@ -84,17 +84,12 @@ namespace CharacterGen.Tests.Unit.Mappers.Percentiles
         [Test]
         public void EmptyFileReturnsEmptyMapping()
         {
-            MakeEmptyXmlFile();
+            contents = @"<?xml version=""1.0"" encoding=""utf-8"" ?>
+                         <percentile>
+                         </percentile>";
+
             var table = mapper.Map(tableName);
             Assert.That(table, Is.Empty);
-        }
-
-        private void MakeEmptyXmlFile()
-        {
-            var content = @"<?xml version=""1.0"" encoding=""utf-8"" ?>
-                            <percentile>
-                            </percentile>";
-            File.WriteAllText(filePath, content);
         }
     }
 }
