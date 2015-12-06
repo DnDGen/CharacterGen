@@ -593,7 +593,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         }
 
         [Test]
-        public void IfNoFrequencyAndFeatIdMatchAndFociMatchAndEqualStrength_RemoveDuplicateStrengths()
+        public void IfNoFrequencyAndFeatNamesMatchAndFociMatchAndEqualStrength_RemoveDuplicateStrengths()
         {
             racialFeats.Add(new Feat());
             racialFeats.Add(new Feat());
@@ -620,16 +620,36 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         {
             racialFeats.Add(new Feat());
             racialFeats.Add(new Feat());
+            racialFeats.Add(new Feat());
+            racialFeats.Add(new Feat());
 
             racialFeats[0].Name = "feat1";
             racialFeats[1].Name = "feat1";
+            racialFeats[2].Name = "feat2";
+            racialFeats[2].Foci = new[] { "focus 1", "focus 2" };
+            racialFeats[2].Strength = 2;
+            racialFeats[3].Name = "feat2";
+            racialFeats[3].Foci = new[] { "focus 2", "focus 3" };
+            racialFeats[3].Strength = 8;
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TakenMultipleTimes)).Returns(new[] { "feat1" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TakenMultipleTimes)).Returns(new[] { "feat1", "feat2" });
 
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
-            Assert.That(feats.Count(), Is.EqualTo(2));
-            Assert.That(feats.First().Name, Is.EqualTo("feat1"));
-            Assert.That(feats.Last().Name, Is.EqualTo("feat1"));
+            var featsList = feats.ToList();
+
+            Assert.That(featsList.Count, Is.EqualTo(4));
+            Assert.That(featsList[0].Name, Is.EqualTo("feat1"));
+            Assert.That(featsList[1].Name, Is.EqualTo("feat1"));
+            Assert.That(featsList[2].Name, Is.EqualTo("feat2"));
+            Assert.That(featsList[2].Strength, Is.EqualTo(2));
+            Assert.That(featsList[2].Foci, Contains.Item("focus 1"));
+            Assert.That(featsList[2].Foci, Contains.Item("focus 2"));
+            Assert.That(featsList[2].Foci.Count(), Is.EqualTo(2));
+            Assert.That(featsList[3].Name, Is.EqualTo("feat2"));
+            Assert.That(featsList[3].Strength, Is.EqualTo(8));
+            Assert.That(featsList[3].Foci, Contains.Item("focus 2"));
+            Assert.That(featsList[3].Foci, Contains.Item("focus 3"));
+            Assert.That(featsList[3].Foci.Count(), Is.EqualTo(2));
         }
 
         [Test]
@@ -932,6 +952,46 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
             var onlyFeat = feats.Single();
             Assert.That(onlyFeat.Foci.Single(), Is.EqualTo(FeatConstants.Foci.All));
+        }
+
+        [Test]
+        public void CombineFociOfMultipleFeatOfDifferentStrengths()
+        {
+            racialFeats.Add(new Feat());
+            racialFeats.Add(new Feat());
+            racialFeats.Add(new Feat());
+            racialFeats.Add(new Feat());
+
+            racialFeats[0].Name = "feat1";
+            racialFeats[0].Foci = new[] { "focus 1" };
+            racialFeats[0].Strength = 2;
+            racialFeats[1].Name = "feat1";
+            racialFeats[1].Foci = new[] { "focus 2" };
+            racialFeats[1].Strength = 2;
+            racialFeats[2].Name = "feat1";
+            racialFeats[2].Foci = new[] { "focus 1" };
+            racialFeats[2].Strength = 8;
+            racialFeats[3].Name = "feat1";
+            racialFeats[3].Foci = new[] { "focus 2" };
+            racialFeats[3].Strength = 8;
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TakenMultipleTimes)).Returns(new[] { "feat1" });
+
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            var firstFeat = feats.First();
+            var lastFeat = feats.Last();
+
+            Assert.That(feats.Count(), Is.EqualTo(2));
+
+            Assert.That(firstFeat.Strength, Is.EqualTo(2));
+            Assert.That(firstFeat.Foci, Contains.Item("focus 1"));
+            Assert.That(firstFeat.Foci, Contains.Item("focus 2"));
+            Assert.That(firstFeat.Foci.Count(), Is.EqualTo(2));
+
+            Assert.That(lastFeat.Strength, Is.EqualTo(8));
+            Assert.That(lastFeat.Foci, Contains.Item("focus 1"));
+            Assert.That(lastFeat.Foci, Contains.Item("focus 2"));
+            Assert.That(lastFeat.Foci.Count(), Is.EqualTo(2));
         }
     }
 }

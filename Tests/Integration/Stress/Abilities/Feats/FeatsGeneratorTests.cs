@@ -3,7 +3,6 @@ using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Generators.Abilities;
 using CharacterGen.Generators.Abilities.Feats;
 using CharacterGen.Generators.Combats;
-using CharacterGen.Generators.Randomizers.CharacterClasses;
 using CharacterGen.Generators.Randomizers.Stats;
 using Ninject;
 using NUnit.Framework;
@@ -30,13 +29,6 @@ namespace CharacterGen.Tests.Integration.Stress.Abilities.Feats
         public override void Stress(String stressSubject)
         {
             Stress();
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            ClassNameRandomizer = GetNewInstanceOf<IClassNameRandomizer>(ClassNameRandomizerTypeConstants.Any);
-            LevelRandomizer = GetNewInstanceOf<ILevelRandomizer>(LevelRandomizerTypeConstants.Any);
         }
 
         protected override void MakeAssertions()
