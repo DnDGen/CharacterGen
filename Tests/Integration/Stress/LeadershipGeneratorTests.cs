@@ -1,13 +1,14 @@
 ﻿using CharacterGen.Common;
 using CharacterGen.Common.Abilities.Stats;
 using CharacterGen.Common.Alignments;
-using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Common.Races;
 using CharacterGen.Generators;
 using CharacterGen.Generators.Abilities;
 using CharacterGen.Generators.Combats;
 using CharacterGen.Generators.Magics;
 using CharacterGen.Generators.Randomizers.Stats;
+using CharacterGen.Selectors;
+using CharacterGen.Tables;
 using Ninject;
 using NUnit.Framework;
 using System;
@@ -28,6 +29,10 @@ namespace CharacterGen.Tests.Integration.Stress
         public ICombatGenerator CombatGenerator { get; set; }
         [Inject]
         public IAnimalGenerator AnimalGenerator { get; set; }
+        [Inject]
+        public Random Random { get; set; }
+        [Inject]
+        public ICollectionsSelector CollectionsSelector { get; set; }
 
         [TestCase("Leadership Generator")]
         public override void Stress(String stressSubject)
@@ -39,21 +44,22 @@ namespace CharacterGen.Tests.Integration.Stress
         {
             var alignment = GetNewAlignment();
             var characterClass = Generate(() => GetNewCharacterClass(alignment), c => c.Level > 5);
-
-            var leadership = GetLeadership(alignment, characterClass);
-            Assert.That(leadership, Is.Not.Null);
-            Assert.That(leadership.CohortScore, Is.Not.Negative);
-            Assert.That(leadership.Score, Is.Positive);
-        }
-
-        private Leadership GetLeadership(Alignment alignment, CharacterClass characterClass)
-        {
             var race = RaceGenerator.GenerateWith(alignment, characterClass, BaseRaceRandomizer, MetaraceRandomizer);
             var baseAttack = CombatGenerator.GenerateBaseAttackWith(characterClass, race);
             var ability = AbilitiesGenerator.GenerateWith(characterClass, race, StatsRandomizer, baseAttack);
             var animal = AnimalGenerator.GenerateFrom(alignment, characterClass, race, ability.Feats);
 
-            return LeadershipGenerator.GenerateLeadership(characterClass.Level, ability.Stats[StatConstants.Charisma].Bonus, animal);
+            var leadership = LeadershipGenerator.GenerateLeadership(characterClass.Level, ability.Stats[StatConstants.Charisma].Bonus, animal);
+            Assert.That(leadership, Is.Not.Null);
+            Assert.That(leadership.CohortScore, Is.Not.Negative);
+            Assert.That(leadership.Score, Is.Positive);
+            Assert.That(leadership.FollowerQuantities.Level1, Is.Not.Negative);
+            Assert.That(leadership.FollowerQuantities.Level2, Is.InRange(0, leadership.FollowerQuantities.Level1));
+            Assert.That(leadership.FollowerQuantities.Level3, Is.InRange(0, leadership.FollowerQuantities.Level2));
+            Assert.That(leadership.FollowerQuantities.Level4, Is.InRange(0, leadership.FollowerQuantities.Level3));
+            Assert.That(leadership.FollowerQuantities.Level5, Is.InRange(0, leadership.FollowerQuantities.Level4));
+            Assert.That(leadership.FollowerQuantities.Level6, Is.InRange(0, leadership.FollowerQuantities.Level5));
+            Assert.That(leadership.LeadershipModifiers, Is.Not.Null);
         }
 
         [Test]
@@ -64,13 +70,16 @@ namespace CharacterGen.Tests.Integration.Stress
 
         public void AssertCohort()
         {
-            var alignment = GetNewAlignment();
-            var characterClass = Generate(() => GetNewCharacterClass(alignment), c => c.Level > 5);
-            var leadership = Generate(() => GetLeadership(alignment, characterClass), l => l.CohortScore > 1);
+            var leaderAlignment = GetNewAlignment();
+            var leaderLevel = Random.Next(6, 21);
+            var cohortScore = Random.Next(3, 26);
 
-            var cohort = LeadershipGenerator.GenerateCohort(leadership.CohortScore, characterClass.Level, alignment.Full);
+            var cohort = LeadershipGenerator.GenerateCohort(cohortScore, leaderLevel, leaderAlignment.Full);
             AssertCharacter(cohort);
-            Assert.That(cohort.Class.Level, Is.AtMost(characterClass.Level - 2));
+            Assert.That(cohort.Class.Level, Is.AtMost(leaderLevel - 2));
+
+            var allowedAlignments = CollectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AlignmentGroups, leaderAlignment.Full);
+            Assert.That(allowedAlignments, Contains.Item(cohort.Alignment.Full));
         }
 
         private void AssertCharacter(Character character)
@@ -150,11 +159,15 @@ namespace CharacterGen.Tests.Integration.Stress
 
         public void AssertFollower()
         {
-            var alignment = GetNewAlignment();
-            var followerLevel = LevelRandomizer.Randomize();
+            var leaderAlignment = GetNewAlignment();
+            var followerLevel = Random.Next(1, 7);
 
-            var follower = LeadershipGenerator.GenerateFollower(followerLevel, alignment.Full);
+            var follower = LeadershipGenerator.GenerateFollower(followerLevel, leaderAlignment.Full);
             AssertCharacter(follower);
+            Assert.That(follower.Class.Level, Is.AtMost(followerLevel));
+
+            var allowedAlignments = CollectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AlignmentGroups, leaderAlignment.Full);
+            Assert.That(allowedAlignments, Contains.Item(follower.Alignment.Full));
         }
     }
 }
