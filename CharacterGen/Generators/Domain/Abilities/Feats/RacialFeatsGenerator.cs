@@ -42,8 +42,11 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
             {
                 var feat = new Feat();
                 feat.Name = racialFeatSelection.Feat;
+
                 var focus = featFocusGenerator.GenerateAllowingFocusOfAllFrom(racialFeatSelection.Feat, racialFeatSelection.FocusType, skills);
-                feat.Foci = feat.Foci.Union(new[] { focus });
+                if (String.IsNullOrEmpty(focus) == false)
+                    feat.Foci = feat.Foci.Union(new[] { focus });
+
                 feat.Frequency = racialFeatSelection.Frequency;
                 feat.Strength = racialFeatSelection.Strength;
 

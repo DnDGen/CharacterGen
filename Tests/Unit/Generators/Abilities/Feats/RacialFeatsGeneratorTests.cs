@@ -267,5 +267,37 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             Assert.That(metaFeat.Foci.Single(), Is.EqualTo("meta focus"));
             Assert.That(speciesFeat.Foci.Single(), Is.EqualTo("species focus"));
         }
+
+        [Test]
+        public void DoNotGetEmptyFoci()
+        {
+            var baseRaceFeatSelection = new RacialFeatSelection();
+            baseRaceFeatSelection.Feat = "racial feat";
+            baseRaceFeatSelection.FocusType = String.Empty;
+            baseRaceFeats.Add(baseRaceFeatSelection);
+
+            var metaraceFeatSelection = new RacialFeatSelection();
+            metaraceFeatSelection.Feat = "metarace feat";
+            metaraceFeatSelection.FocusType = String.Empty;
+            metaraceFeats.Add(metaraceFeatSelection);
+
+            var speciesFeatSelection = new RacialFeatSelection();
+            speciesFeatSelection.Feat = "metarace species feat";
+            speciesFeatSelection.FocusType = String.Empty;
+            speciesFeats.Add(speciesFeatSelection);
+
+            mockFeatFocusGenerator.Setup(g => g.GenerateAllowingFocusOfAllFrom("racial feat", String.Empty, skills)).Returns(String.Empty);
+            mockFeatFocusGenerator.Setup(g => g.GenerateAllowingFocusOfAllFrom("metarace feat", String.Empty, skills)).Returns(String.Empty);
+            mockFeatFocusGenerator.Setup(g => g.GenerateAllowingFocusOfAllFrom("metarace species feat", String.Empty, skills)).Returns(String.Empty);
+
+            var feats = racialFeatsGenerator.GenerateWith(race, skills, stats);
+            var baseFeat = feats.First(f => f.Name == baseRaceFeatSelection.Feat);
+            var metaFeat = feats.First(f => f.Name == metaraceFeatSelection.Feat);
+            var speciesFeat = feats.First(f => f.Name == speciesFeatSelection.Feat);
+
+            Assert.That(baseFeat.Foci, Is.Empty);
+            Assert.That(metaFeat.Foci, Is.Empty);
+            Assert.That(speciesFeat.Foci, Is.Empty);
+        }
     }
 }
