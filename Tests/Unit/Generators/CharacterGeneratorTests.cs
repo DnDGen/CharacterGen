@@ -1,6 +1,7 @@
 ﻿using CharacterGen.Common;
 using CharacterGen.Common.Abilities;
 using CharacterGen.Common.Abilities.Feats;
+using CharacterGen.Common.Abilities.Skills;
 using CharacterGen.Common.Abilities.Stats;
 using CharacterGen.Common.Alignments;
 using CharacterGen.Common.CharacterClasses;
@@ -49,6 +50,7 @@ namespace CharacterGen.Tests.Unit.Generators
         private Mock<IMagicGenerator> mockMagicGenerator;
         private Generator generator;
         private ICharacterGenerator characterGenerator;
+        private Mock<ICollectionsSelector> mockCollectionsSelector;
 
         private Mock<IAlignmentRandomizer> mockAlignmentRandomizer;
         private Mock<IClassNameRandomizer> mockClassNameRandomizer;
@@ -79,6 +81,7 @@ namespace CharacterGen.Tests.Unit.Generators
             levelAdjustments = new Dictionary<String, Int32>();
             mockRandomizerVerifier = new Mock<IRandomizerVerifier>();
             mockPercentileSelector = new Mock<IPercentileSelector>();
+            mockCollectionsSelector = new Mock<ICollectionsSelector>();
 
             levelAdjustments[BaseRace] = 0;
             levelAdjustments[BaseRaceMinusOne] = -1;
@@ -97,10 +100,10 @@ namespace CharacterGen.Tests.Unit.Generators
             mockRandomizerVerifier.Setup(v => v.VerifyCharacterClassCompatibility(It.IsAny<Alignment>(), It.IsAny<CharacterClass>(),
                 mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(true);
 
-
             characterGenerator = new CharacterGenerator(mockAlignmentGenerator.Object, mockCharacterClassGenerator.Object,
                 mockRaceGenerator.Object, mockAdjustmentsSelector.Object, mockRandomizerVerifier.Object, mockPercentileSelector.Object,
-                mockAbilitiesGenerator.Object, mockCombatGenerator.Object, mockTreasureGenerator.Object, mockMagicGenerator.Object, generator);
+                mockAbilitiesGenerator.Object, mockCombatGenerator.Object, mockTreasureGenerator.Object, mockMagicGenerator.Object, generator,
+                mockCollectionsSelector.Object);
         }
 
         private void SetUpMockRandomizers()
@@ -368,6 +371,274 @@ namespace CharacterGen.Tests.Unit.Generators
                 mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
 
             Assert.That(character.Class.Level, Is.EqualTo(3));
+        }
+
+        [Test]
+        public void ApplyArmorCheckPenaltiesForArmor()
+        {
+            var armorCheckPenalties = new Dictionary<String, Int32>();
+            armorCheckPenalties["armor"] = -9266;
+            armorCheckPenalties["other armor"] = -90210;
+
+            ability.Skills["skill"] = new Skill();
+            ability.Skills["other skill"] = new Skill();
+
+            var armorCheckSkills = new[] { "other skill", "different skill" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.ArmorCheckPenalty)).Returns(armorCheckSkills);
+
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.ArmorCheckPenalties)).Returns(armorCheckPenalties);
+
+            equipment.Armor = new TreasureGen.Common.Items.Item { Name = "armor" };
+
+            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object,
+                mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
+
+            Assert.That(character.Ability.Skills["skill"].ArmorCheckPenalty, Is.EqualTo(0));
+            Assert.That(character.Ability.Skills["other skill"].ArmorCheckPenalty, Is.EqualTo(-9266));
+        }
+
+        [Test]
+        public void DoNotApplyPenaltyCheckForArmorIfNoArmor()
+        {
+            var armorCheckPenalties = new Dictionary<String, Int32>();
+            armorCheckPenalties["armor"] = -9266;
+            armorCheckPenalties["other armor"] = -90210;
+
+            ability.Skills["skill"] = new Skill();
+            ability.Skills["other skill"] = new Skill();
+
+            var armorCheckSkills = new[] { "other skill", "different skill" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.ArmorCheckPenalty)).Returns(armorCheckSkills);
+
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.ArmorCheckPenalties)).Returns(armorCheckPenalties);
+
+            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object,
+                mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
+
+            Assert.That(character.Ability.Skills["skill"].ArmorCheckPenalty, Is.EqualTo(0));
+            Assert.That(character.Ability.Skills["other skill"].ArmorCheckPenalty, Is.EqualTo(0));
+        }
+
+        [Test]
+        public void ApplyArmorCheckPenaltiesForShield()
+        {
+            var armorCheckPenalties = new Dictionary<String, Int32>();
+            armorCheckPenalties["shield"] = -9266;
+            armorCheckPenalties["other shield"] = -90210;
+
+            ability.Skills["skill"] = new Skill();
+            ability.Skills["other skill"] = new Skill();
+
+            var armorCheckSkills = new[] { "other skill", "different skill" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.ArmorCheckPenalty)).Returns(armorCheckSkills);
+
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.ArmorCheckPenalties)).Returns(armorCheckPenalties);
+
+            equipment.OffHand = new TreasureGen.Common.Items.Item { Name = "shield" };
+            equipment.OffHand.Attributes = new[] { TreasureGen.Common.Items.AttributeConstants.Shield };
+
+            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object,
+                mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
+
+            Assert.That(character.Ability.Skills["skill"].ArmorCheckPenalty, Is.EqualTo(0));
+            Assert.That(character.Ability.Skills["other skill"].ArmorCheckPenalty, Is.EqualTo(-9266));
+        }
+
+        [Test]
+        public void DoNotApplyPenaltyCheckForNonShields()
+        {
+            var armorCheckPenalties = new Dictionary<String, Int32>();
+            armorCheckPenalties["shield"] = -9266;
+            armorCheckPenalties["other shield"] = -90210;
+
+            ability.Skills["skill"] = new Skill();
+            ability.Skills["other skill"] = new Skill();
+
+            var armorCheckSkills = new[] { "other skill", "different skill" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.ArmorCheckPenalty)).Returns(armorCheckSkills);
+
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.ArmorCheckPenalties)).Returns(armorCheckPenalties);
+
+            equipment.OffHand = new TreasureGen.Common.Items.Item { Name = "shield" };
+
+            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object,
+                mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
+
+            Assert.That(character.Ability.Skills["skill"].ArmorCheckPenalty, Is.EqualTo(0));
+            Assert.That(character.Ability.Skills["other skill"].ArmorCheckPenalty, Is.EqualTo(0));
+        }
+
+        [Test]
+        public void ApplyArmorCheckPenaltiesForArmorAndShield()
+        {
+            var armorCheckPenalties = new Dictionary<String, Int32>();
+            armorCheckPenalties["shield"] = -9266;
+            armorCheckPenalties["other shield"] = -90210;
+            armorCheckPenalties["armor"] = -42;
+            armorCheckPenalties["other armor"] = -600;
+
+            ability.Skills["skill"] = new Skill();
+            ability.Skills["other skill"] = new Skill();
+
+            var armorCheckSkills = new[] { "other skill", "different skill" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.ArmorCheckPenalty)).Returns(armorCheckSkills);
+
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.ArmorCheckPenalties)).Returns(armorCheckPenalties);
+
+            equipment.Armor = new TreasureGen.Common.Items.Item { Name = "armor" };
+            equipment.OffHand = new TreasureGen.Common.Items.Item { Name = "shield" };
+            equipment.OffHand.Attributes = new[] { TreasureGen.Common.Items.AttributeConstants.Shield };
+
+            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object,
+                mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
+
+            Assert.That(character.Ability.Skills["skill"].ArmorCheckPenalty, Is.EqualTo(0));
+            Assert.That(character.Ability.Skills["other skill"].ArmorCheckPenalty, Is.EqualTo(-9308));
+        }
+
+        [Test]
+        public void ApplyArmorCheckPenaltiesForSpecialMaterials()
+        {
+            var armorCheckPenalties = new Dictionary<String, Int32>();
+            armorCheckPenalties["shield"] = -9266;
+            armorCheckPenalties["mithral"] = 1;
+            armorCheckPenalties["armor"] = -42;
+            armorCheckPenalties["darkwood"] = 2;
+
+            ability.Skills["skill"] = new Skill();
+            ability.Skills["other skill"] = new Skill();
+
+            var armorCheckSkills = new[] { "other skill", "different skill" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.ArmorCheckPenalty)).Returns(armorCheckSkills);
+
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.ArmorCheckPenalties)).Returns(armorCheckPenalties);
+
+            equipment.Armor = new TreasureGen.Common.Items.Item { Name = "armor" };
+            equipment.Armor.Traits.Add("mithral");
+            equipment.OffHand = new TreasureGen.Common.Items.Item { Name = "shield" };
+            equipment.OffHand.Attributes = new[] { TreasureGen.Common.Items.AttributeConstants.Shield };
+            equipment.OffHand.Traits.Add("darkwood");
+
+            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object,
+                mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
+
+            Assert.That(character.Ability.Skills["skill"].ArmorCheckPenalty, Is.EqualTo(0));
+            Assert.That(character.Ability.Skills["other skill"].ArmorCheckPenalty, Is.EqualTo(-9305));
+        }
+
+        [Test]
+        public void CannotHavePositiveArmorCheckPenalty()
+        {
+            var armorCheckPenalties = new Dictionary<String, Int32>();
+            armorCheckPenalties["shield"] = -9266;
+            armorCheckPenalties["mithral"] = 90210;
+
+            ability.Skills["skill"] = new Skill();
+            ability.Skills["other skill"] = new Skill();
+
+            var armorCheckSkills = new[] { "other skill", "different skill" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.ArmorCheckPenalty)).Returns(armorCheckSkills);
+
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.ArmorCheckPenalties)).Returns(armorCheckPenalties);
+
+            equipment.OffHand = new TreasureGen.Common.Items.Item { Name = "shield" };
+            equipment.OffHand.Attributes = new[] { TreasureGen.Common.Items.AttributeConstants.Shield };
+            equipment.OffHand.Traits.Add("mithral");
+
+            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object,
+                mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
+
+            Assert.That(character.Ability.Skills["skill"].ArmorCheckPenalty, Is.EqualTo(0));
+            Assert.That(character.Ability.Skills["other skill"].ArmorCheckPenalty, Is.EqualTo(0));
+        }
+
+        [Test]
+        public void SwimTakesDoubleArmorCheckPenalty()
+        {
+            var armorCheckPenalties = new Dictionary<String, Int32>();
+            armorCheckPenalties["shield"] = -9266;
+            armorCheckPenalties["other shield"] = -90210;
+            armorCheckPenalties["armor"] = -42;
+            armorCheckPenalties["other armor"] = -600;
+
+            ability.Skills["skill"] = new Skill();
+            ability.Skills["other skill"] = new Skill();
+            ability.Skills[SkillConstants.Swim] = new Skill();
+
+            var armorCheckSkills = new[] { "other skill", "different skill", SkillConstants.Swim };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.ArmorCheckPenalty)).Returns(armorCheckSkills);
+
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.ArmorCheckPenalties)).Returns(armorCheckPenalties);
+
+            equipment.Armor = new TreasureGen.Common.Items.Item { Name = "armor" };
+            equipment.OffHand = new TreasureGen.Common.Items.Item { Name = "shield" };
+            equipment.OffHand.Attributes = new[] { TreasureGen.Common.Items.AttributeConstants.Shield };
+
+            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object,
+                mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
+
+            Assert.That(character.Ability.Skills["skill"].ArmorCheckPenalty, Is.EqualTo(0));
+            Assert.That(character.Ability.Skills["other skill"].ArmorCheckPenalty, Is.EqualTo(-9308));
+            Assert.That(character.Ability.Skills[SkillConstants.Swim].ArmorCheckPenalty, Is.EqualTo(-9308 * 2));
+        }
+
+        [Test]
+        public void SwimTakesDoubleArmorCheckPenaltyMinusSpecialMaterials()
+        {
+            var armorCheckPenalties = new Dictionary<String, Int32>();
+            armorCheckPenalties["shield"] = -9266;
+            armorCheckPenalties["other shield"] = -90210;
+            armorCheckPenalties["armor"] = -42;
+            armorCheckPenalties["other armor"] = -600;
+            armorCheckPenalties["mithral"] = 1;
+            armorCheckPenalties["darkwood"] = 2;
+
+            ability.Skills["skill"] = new Skill();
+            ability.Skills["other skill"] = new Skill();
+            ability.Skills[SkillConstants.Swim] = new Skill();
+
+            var armorCheckSkills = new[] { "other skill", "different skill", SkillConstants.Swim };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.ArmorCheckPenalty)).Returns(armorCheckSkills);
+
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.ArmorCheckPenalties)).Returns(armorCheckPenalties);
+
+            equipment.Armor = new TreasureGen.Common.Items.Item { Name = "armor" };
+            equipment.Armor.Traits.Add("mithral");
+            equipment.OffHand = new TreasureGen.Common.Items.Item { Name = "shield" };
+            equipment.OffHand.Attributes = new[] { TreasureGen.Common.Items.AttributeConstants.Shield };
+            equipment.OffHand.Traits.Add("darkwood");
+
+            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object,
+                mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
+
+            Assert.That(character.Ability.Skills["skill"].ArmorCheckPenalty, Is.EqualTo(0));
+            Assert.That(character.Ability.Skills["other skill"].ArmorCheckPenalty, Is.EqualTo(-9308 + 3));
+            Assert.That(character.Ability.Skills[SkillConstants.Swim].ArmorCheckPenalty, Is.EqualTo(-9308 * 2 + 6));
+        }
+
+        [Test]
+        public void SwimTakesNoPenaltyForPlateArmorOfTheDeep()
+        {
+            var armorCheckPenalties = new Dictionary<String, Int32>();
+            armorCheckPenalties[TreasureGen.Common.Items.ArmorConstants.PlateArmorOfTheDeep] = -6;
+
+            ability.Skills["skill"] = new Skill();
+            ability.Skills["other skill"] = new Skill();
+            ability.Skills[SkillConstants.Swim] = new Skill();
+
+            var armorCheckSkills = new[] { "other skill", "different skill", SkillConstants.Swim };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.ArmorCheckPenalty)).Returns(armorCheckSkills);
+
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.ArmorCheckPenalties)).Returns(armorCheckPenalties);
+
+            equipment.Armor = new TreasureGen.Common.Items.Item { Name = TreasureGen.Common.Items.ArmorConstants.PlateArmorOfTheDeep };
+
+            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object,
+                mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
+
+            Assert.That(character.Ability.Skills["skill"].ArmorCheckPenalty, Is.EqualTo(0));
+            Assert.That(character.Ability.Skills["other skill"].ArmorCheckPenalty, Is.EqualTo(-6));
+            Assert.That(character.Ability.Skills[SkillConstants.Swim].ArmorCheckPenalty, Is.EqualTo(0));
         }
     }
 }

@@ -66,7 +66,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
                 FeatConstants.NimbleFingers,
                 FeatConstants.Persuasive,
                 FeatConstants.SelfSufficient,
-                FeatConstants.Stealthy
+                FeatConstants.Stealthy,
+                GroupConstants.ArmorCheckPenalty
             };
 
             AssertCollectionNames(names);
@@ -155,6 +156,16 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
         [TestCase(FeatConstants.Stealthy,
             SkillConstants.Hide,
             SkillConstants.MoveSilently)]
+        [TestCase(GroupConstants.ArmorCheckPenalty,
+            SkillConstants.Balance,
+            SkillConstants.Climb,
+            SkillConstants.EscapeArtist,
+            SkillConstants.Hide,
+            SkillConstants.Jump,
+            SkillConstants.MoveSilently,
+            SkillConstants.SleightOfHand,
+            SkillConstants.Swim,
+            SkillConstants.Tumble)]
         public override void DistinctCollection(String name, params String[] collection)
         {
             base.DistinctCollection(name, collection);

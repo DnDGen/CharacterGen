@@ -8,6 +8,7 @@ namespace CharacterGen.Tests.Unit.Tables
     public class TableNameConstantsTests
     {
         [TestCase(TableNameConstants.Set.Adjustments.ArmorBonuses, "ArmorBonuses")]
+        [TestCase(TableNameConstants.Set.Adjustments.ArmorCheckPenalties, "ArmorCheckPenalties")]
         [TestCase(TableNameConstants.Set.Adjustments.ClassHitDice, "ClassHitDice")]
         [TestCase(TableNameConstants.Set.Adjustments.CohortLevels, "CohortLevels")]
         [TestCase(TableNameConstants.Set.Adjustments.FeatArmorAdjustments, "FeatArmorAdjustments")]

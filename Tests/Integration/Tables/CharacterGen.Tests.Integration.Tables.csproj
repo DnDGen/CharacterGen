@@ -280,6 +280,7 @@
     <Compile Include="CharacterClasses\HasSpecialistFields\RogueHasSpecialistFieldsTests.cs" />
     <Compile Include="CharacterClasses\HasSpecialistFields\SorcererHasSpecialistFieldsTests.cs" />
     <Compile Include="CharacterClasses\HasSpecialistFields\WizardHasSpecialistFieldsTests.cs" />
+    <Compile Include="Items\ArmorCheckPenaltiesTests.cs" />
     <Compile Include="Leadership\AttractCohortOfDifferentAlignmentTests.cs" />
     <Compile Include="Leadership\CohortLevelsTests.cs" />
     <Compile Include="Leadership\KilledCohortTests.cs" />

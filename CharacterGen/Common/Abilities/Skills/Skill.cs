@@ -9,7 +9,7 @@ namespace CharacterGen.Common.Abilities.Skills
         public Stat BaseStat { get; set; }
         public Int32 Bonus { get; set; }
         public Boolean ClassSkill { get; set; }
-        public Boolean ArmorCheckPenalty { get; set; }
+        public Int32 ArmorCheckPenalty { get; set; }
         public Boolean CircumstantialBonus { get; set; }
         public Double EffectiveRanks
         {

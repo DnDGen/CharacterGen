@@ -73,6 +73,10 @@ namespace CharacterGen.Tests.Integration.Stress
             Assert.That(character.Ability.Stats[StatConstants.Wisdom].Value, Is.Positive);
             Assert.That(character.Ability.Languages, Is.Not.Empty);
             Assert.That(character.Ability.Skills, Is.Not.Empty);
+
+            foreach (var skill in character.Ability.Skills)
+                Assert.That(skill.Value.ArmorCheckPenalty, Is.AtMost(0));
+
             Assert.That(character.Ability.Feats, Is.Not.Empty);
 
             Assert.That(character.Equipment.PrimaryHand.ItemType, Is.EqualTo(ItemTypeConstants.Weapon));

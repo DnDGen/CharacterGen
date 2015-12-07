@@ -1,8 +1,8 @@
-﻿using System;
-using CharacterGen.Common.Abilities.Skills;
+﻿using CharacterGen.Common.Abilities.Skills;
 using CharacterGen.Common.Abilities.Stats;
 using CharacterGen.Tables;
 using NUnit.Framework;
+using System;
 
 namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
 {
@@ -17,7 +17,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
         [Test]
         public override void CollectionNames()
         {
-            var names = new[] 
+            var names = new[]
             {
                 SkillConstants.Appraise,
                 SkillConstants.Balance,
@@ -66,51 +66,51 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
             AssertCollectionNames(names);
         }
 
-        [TestCase(SkillConstants.Appraise, StatConstants.Intelligence, false)]
-        [TestCase(SkillConstants.Balance, StatConstants.Dexterity, true)]
-        [TestCase(SkillConstants.Bluff, StatConstants.Charisma, false)]
-        [TestCase(SkillConstants.Climb, StatConstants.Strength, true)]
-        [TestCase(SkillConstants.Concentration, StatConstants.Constitution, false)]
-        [TestCase(SkillConstants.DecipherScript, StatConstants.Intelligence, false)]
-        [TestCase(SkillConstants.Diplomacy, StatConstants.Charisma, false)]
-        [TestCase(SkillConstants.DisableDevice, StatConstants.Intelligence, false)]
-        [TestCase(SkillConstants.Disguise, StatConstants.Charisma, false)]
-        [TestCase(SkillConstants.EscapeArtist, StatConstants.Dexterity, true)]
-        [TestCase(SkillConstants.Forgery, StatConstants.Intelligence, false)]
-        [TestCase(SkillConstants.GatherInformation, StatConstants.Charisma, false)]
-        [TestCase(SkillConstants.HandleAnimal, StatConstants.Charisma, false)]
-        [TestCase(SkillConstants.Heal, StatConstants.Wisdom, false)]
-        [TestCase(SkillConstants.Hide, StatConstants.Dexterity, true)]
-        [TestCase(SkillConstants.Intimidate, StatConstants.Charisma, false)]
-        [TestCase(SkillConstants.Jump, StatConstants.Strength, true)]
-        [TestCase(SkillConstants.KnowledgeArcana, StatConstants.Intelligence, false)]
-        [TestCase(SkillConstants.KnowledgeArchitectureAndEngineering, StatConstants.Intelligence, false)]
-        [TestCase(SkillConstants.KnowledgeDungeoneering, StatConstants.Intelligence, false)]
-        [TestCase(SkillConstants.KnowledgeGeography, StatConstants.Intelligence, false)]
-        [TestCase(SkillConstants.KnowledgeHistory, StatConstants.Intelligence, false)]
-        [TestCase(SkillConstants.KnowledgeLocal, StatConstants.Intelligence, false)]
-        [TestCase(SkillConstants.KnowledgeNature, StatConstants.Intelligence, false)]
-        [TestCase(SkillConstants.KnowledgeNobilityAndRoyalty, StatConstants.Intelligence, false)]
-        [TestCase(SkillConstants.KnowledgeReligion, StatConstants.Intelligence, false)]
-        [TestCase(SkillConstants.KnowledgeThePlanes, StatConstants.Intelligence, false)]
-        [TestCase(SkillConstants.Listen, StatConstants.Wisdom, false)]
-        [TestCase(SkillConstants.MoveSilently, StatConstants.Dexterity, true)]
-        [TestCase(SkillConstants.OpenLock, StatConstants.Dexterity, false)]
-        [TestCase(SkillConstants.Perform, StatConstants.Charisma, false)]
-        [TestCase(SkillConstants.Ride, StatConstants.Dexterity, false)]
-        [TestCase(SkillConstants.Search, StatConstants.Intelligence, false)]
-        [TestCase(SkillConstants.SenseMotive, StatConstants.Wisdom, false)]
-        [TestCase(SkillConstants.SleightOfHand, StatConstants.Dexterity, true)]
-        [TestCase(SkillConstants.Spellcraft, StatConstants.Intelligence, false)]
-        [TestCase(SkillConstants.Spot, StatConstants.Wisdom, false)]
-        [TestCase(SkillConstants.Survival, StatConstants.Wisdom, false)]
-        [TestCase(SkillConstants.Swim, StatConstants.Strength, true)]
-        [TestCase(SkillConstants.Tumble, StatConstants.Dexterity, true)]
-        [TestCase(SkillConstants.UseMagicDevice, StatConstants.Charisma, false)]
-        [TestCase(SkillConstants.UseRope, StatConstants.Dexterity, false)]
-        public void OrderedCollection(String name, String baseStat, Boolean armorCheckPenalty)
+        [TestCase(SkillConstants.Appraise, StatConstants.Intelligence)]
+        [TestCase(SkillConstants.Balance, StatConstants.Dexterity)]
+        [TestCase(SkillConstants.Bluff, StatConstants.Charisma)]
+        [TestCase(SkillConstants.Climb, StatConstants.Strength)]
+        [TestCase(SkillConstants.Concentration, StatConstants.Constitution)]
+        [TestCase(SkillConstants.DecipherScript, StatConstants.Intelligence)]
+        [TestCase(SkillConstants.Diplomacy, StatConstants.Charisma)]
+        [TestCase(SkillConstants.DisableDevice, StatConstants.Intelligence)]
+        [TestCase(SkillConstants.Disguise, StatConstants.Charisma)]
+        [TestCase(SkillConstants.EscapeArtist, StatConstants.Dexterity)]
+        [TestCase(SkillConstants.Forgery, StatConstants.Intelligence)]
+        [TestCase(SkillConstants.GatherInformation, StatConstants.Charisma)]
+        [TestCase(SkillConstants.HandleAnimal, StatConstants.Charisma)]
+        [TestCase(SkillConstants.Heal, StatConstants.Wisdom)]
+        [TestCase(SkillConstants.Hide, StatConstants.Dexterity)]
+        [TestCase(SkillConstants.Intimidate, StatConstants.Charisma)]
+        [TestCase(SkillConstants.Jump, StatConstants.Strength)]
+        [TestCase(SkillConstants.KnowledgeArcana, StatConstants.Intelligence)]
+        [TestCase(SkillConstants.KnowledgeArchitectureAndEngineering, StatConstants.Intelligence)]
+        [TestCase(SkillConstants.KnowledgeDungeoneering, StatConstants.Intelligence)]
+        [TestCase(SkillConstants.KnowledgeGeography, StatConstants.Intelligence)]
+        [TestCase(SkillConstants.KnowledgeHistory, StatConstants.Intelligence)]
+        [TestCase(SkillConstants.KnowledgeLocal, StatConstants.Intelligence)]
+        [TestCase(SkillConstants.KnowledgeNature, StatConstants.Intelligence)]
+        [TestCase(SkillConstants.KnowledgeNobilityAndRoyalty, StatConstants.Intelligence)]
+        [TestCase(SkillConstants.KnowledgeReligion, StatConstants.Intelligence)]
+        [TestCase(SkillConstants.KnowledgeThePlanes, StatConstants.Intelligence)]
+        [TestCase(SkillConstants.Listen, StatConstants.Wisdom)]
+        [TestCase(SkillConstants.MoveSilently, StatConstants.Dexterity)]
+        [TestCase(SkillConstants.OpenLock, StatConstants.Dexterity)]
+        [TestCase(SkillConstants.Perform, StatConstants.Charisma)]
+        [TestCase(SkillConstants.Ride, StatConstants.Dexterity)]
+        [TestCase(SkillConstants.Search, StatConstants.Intelligence)]
+        [TestCase(SkillConstants.SenseMotive, StatConstants.Wisdom)]
+        [TestCase(SkillConstants.SleightOfHand, StatConstants.Dexterity)]
+        [TestCase(SkillConstants.Spellcraft, StatConstants.Intelligence)]
+        [TestCase(SkillConstants.Spot, StatConstants.Wisdom)]
+        [TestCase(SkillConstants.Survival, StatConstants.Wisdom)]
+        [TestCase(SkillConstants.Swim, StatConstants.Strength)]
+        [TestCase(SkillConstants.Tumble, StatConstants.Dexterity)]
+        [TestCase(SkillConstants.UseMagicDevice, StatConstants.Charisma)]
+        [TestCase(SkillConstants.UseRope, StatConstants.Dexterity)]
+        public void OrderedCollection(String name, String baseStat)
         {
-            var collection = new[] { baseStat, Convert.ToString(armorCheckPenalty) };
+            var collection = new[] { baseStat };
             base.OrderedCollection(name, collection);
         }
     }

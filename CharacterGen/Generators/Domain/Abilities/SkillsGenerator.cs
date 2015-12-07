@@ -64,7 +64,6 @@ namespace CharacterGen.Generators.Domain.Abilities
                     var selection = skillSelector.SelectFor(monsterSkill);
 
                     skills[monsterSkill] = new Skill();
-                    skills[monsterSkill].ArmorCheckPenalty = selection.ArmorCheckPenalty;
                     skills[monsterSkill].BaseStat = stats[selection.BaseStatName];
                 }
 
@@ -97,7 +96,6 @@ namespace CharacterGen.Generators.Domain.Abilities
             foreach (var skill in skills)
             {
                 var selection = skillSelector.SelectFor(skill.Key);
-                skill.Value.ArmorCheckPenalty = selection.ArmorCheckPenalty;
                 skill.Value.BaseStat = stats[selection.BaseStatName];
             }
 

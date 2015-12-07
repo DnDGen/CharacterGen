@@ -19,8 +19,7 @@ namespace CharacterGen.Selectors.Domain
             var data = innerSelector.SelectFrom(TableNameConstants.Set.Collection.SkillData, skill);
 
             var selection = new SkillSelection();
-            selection.ArmorCheckPenalty = Convert.ToBoolean(data.Last());
-            selection.BaseStatName = data.First();
+            selection.BaseStatName = data.Single();
 
             return selection;
         }

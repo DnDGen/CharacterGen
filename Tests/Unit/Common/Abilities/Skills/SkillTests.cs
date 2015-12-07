@@ -18,7 +18,7 @@ namespace CharacterGen.Tests.Unit.Common.Abilities.Skills
         public void SkillInitialized()
         {
             Assert.That(skill.BaseStat, Is.Null);
-            Assert.That(skill.ArmorCheckPenalty, Is.False);
+            Assert.That(skill.ArmorCheckPenalty, Is.EqualTo(0));
             Assert.That(skill.ClassSkill, Is.False);
             Assert.That(skill.Bonus, Is.EqualTo(0));
             Assert.That(skill.Ranks, Is.EqualTo(0));

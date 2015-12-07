@@ -1,4 +1,5 @@
 ﻿using CharacterGen.Common;
+using CharacterGen.Common.Abilities.Skills;
 using CharacterGen.Common.Alignments;
 using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Common.Races;
@@ -16,6 +17,8 @@ using CharacterGen.Selectors;
 using CharacterGen.Tables;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using TreasureGen.Common.Items;
 
 namespace CharacterGen.Generators.Domain
 {
@@ -32,11 +35,12 @@ namespace CharacterGen.Generators.Domain
         private IEquipmentGenerator equipmentGenerator;
         private IMagicGenerator magicGenerator;
         private Generator generator;
+        private ICollectionsSelector collectionsSelector;
 
         public CharacterGenerator(IAlignmentGenerator alignmentGenerator, ICharacterClassGenerator characterClassGenerator, IRaceGenerator raceGenerator,
             IAdjustmentsSelector adjustmentsSelector, IRandomizerVerifier randomizerVerifier, IPercentileSelector percentileSelector,
             IAbilitiesGenerator abilitiesGenerator, ICombatGenerator combatGenerator, IEquipmentGenerator equipmentGenerator,
-            IMagicGenerator magicGenerator, Generator generator)
+            IMagicGenerator magicGenerator, Generator generator, ICollectionsSelector collectionsSelector)
         {
             this.alignmentGenerator = alignmentGenerator;
             this.characterClassGenerator = characterClassGenerator;
@@ -50,6 +54,7 @@ namespace CharacterGen.Generators.Domain
             this.randomizerVerifier = randomizerVerifier;
             this.percentileSelector = percentileSelector;
             this.magicGenerator = magicGenerator;
+            this.collectionsSelector = collectionsSelector;
         }
 
         public Character GenerateWith(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classNameRandomizer,
@@ -88,6 +93,50 @@ namespace CharacterGen.Generators.Domain
 
             character.Ability = abilitiesGenerator.GenerateWith(character.Class, character.Race, statsRandomizer, baseAttack);
             character.Equipment = equipmentGenerator.GenerateWith(character.Ability.Feats, character.Class, character.Race);
+
+            var armorCheckPenaltySkills = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.ArmorCheckPenalty);
+            var armorCheckPenalties = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.ArmorCheckPenalties);
+
+            if (character.Equipment.Armor != null)
+            {
+                foreach (var skill in armorCheckPenaltySkills)
+                {
+                    if (character.Ability.Skills.ContainsKey(skill) == false)
+                        continue;
+
+                    if (skill == SkillConstants.Swim && character.Equipment.Armor.Name == ArmorConstants.PlateArmorOfTheDeep)
+                        continue;
+
+                    character.Ability.Skills[skill].ArmorCheckPenalty += armorCheckPenalties[character.Equipment.Armor.Name];
+
+                    var specialMaterials = character.Equipment.Armor.Traits.Intersect(armorCheckPenalties.Keys);
+                    foreach (var material in specialMaterials)
+                        character.Ability.Skills[skill].ArmorCheckPenalty += armorCheckPenalties[material];
+
+                    character.Ability.Skills[skill].ArmorCheckPenalty = Math.Min(0, character.Ability.Skills[skill].ArmorCheckPenalty);
+                }
+            }
+
+            if (character.Equipment.OffHand != null && character.Equipment.OffHand.Attributes.Contains(AttributeConstants.Shield))
+            {
+                foreach (var skill in armorCheckPenaltySkills)
+                {
+                    if (character.Ability.Skills.ContainsKey(skill) == false)
+                        continue;
+
+                    character.Ability.Skills[skill].ArmorCheckPenalty += armorCheckPenalties[character.Equipment.OffHand.Name];
+
+                    var specialMaterials = character.Equipment.OffHand.Traits.Intersect(armorCheckPenalties.Keys);
+                    foreach (var material in specialMaterials)
+                        character.Ability.Skills[skill].ArmorCheckPenalty += armorCheckPenalties[material];
+
+                    character.Ability.Skills[skill].ArmorCheckPenalty = Math.Min(0, character.Ability.Skills[skill].ArmorCheckPenalty);
+                }
+            }
+
+            if (character.Ability.Skills.ContainsKey(SkillConstants.Swim))
+                character.Ability.Skills[SkillConstants.Swim].ArmorCheckPenalty *= 2;
+
             character.Combat = combatGenerator.GenerateWith(baseAttack, character.Class, character.Race, character.Ability.Feats, character.Ability.Stats, character.Equipment);
             character.InterestingTrait = percentileSelector.SelectFrom(TableNameConstants.Set.Percentile.Traits);
             character.Magic = magicGenerator.GenerateWith(character.Alignment, character.Class, character.Race, character.Ability.Stats, character.Ability.Feats);

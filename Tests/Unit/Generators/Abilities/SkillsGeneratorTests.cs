@@ -258,23 +258,6 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
         }
 
         [Test]
-        public void SetArmorCheckPenalty()
-        {
-            classSkills.Add("penalty");
-            crossClassSkills.Add("no penalty");
-
-            var penaltySkillSelection = new SkillSelection { ArmorCheckPenalty = true, BaseStatName = StatConstants.Intelligence };
-            var noPenaltySkillSelection = new SkillSelection { ArmorCheckPenalty = false, BaseStatName = StatConstants.Intelligence };
-
-            mockSkillSelector.Setup(s => s.SelectFor("penalty")).Returns(penaltySkillSelection);
-            mockSkillSelector.Setup(s => s.SelectFor("no penalty")).Returns(noPenaltySkillSelection);
-
-            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
-            Assert.That(skills["penalty"].ArmorCheckPenalty, Is.True);
-            Assert.That(skills["no penalty"].ArmorCheckPenalty, Is.False);
-        }
-
-        [Test]
         public void SetClassSkill()
         {
             classSkills.Add("skill 1");

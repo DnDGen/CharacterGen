@@ -6,6 +6,7 @@ namespace CharacterGen.Tables
     {
         public const String Additional = "Additional";
         public const String All = "All";
+        public const String ArmorCheckPenalty = "ArmorCheckPenalty";
         public const String AverageBaseAttack = "Average Base Attack";
         public const String CharacterClasses = "CharacterClasses";
         public const String Deflection = "Deflection";

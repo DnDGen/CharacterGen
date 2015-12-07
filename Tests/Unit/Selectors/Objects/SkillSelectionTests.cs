@@ -17,7 +17,6 @@ namespace CharacterGen.Tests.Unit.Selectors.Objects
         [Test]
         public void SkillSelectionInitialized()
         {
-            Assert.That(selection.ArmorCheckPenalty, Is.False);
             Assert.That(selection.BaseStatName, Is.Empty);
         }
     }

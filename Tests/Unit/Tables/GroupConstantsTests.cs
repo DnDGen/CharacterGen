@@ -9,6 +9,7 @@ namespace CharacterGen.Tests.Unit.Tables
     {
         [TestCase(GroupConstants.Additional, "Additional")]
         [TestCase(GroupConstants.All, "All")]
+        [TestCase(GroupConstants.ArmorCheckPenalty, "ArmorCheckPenalty")]
         [TestCase(GroupConstants.AverageBaseAttack, "Average Base Attack")]
         [TestCase(GroupConstants.CharacterClasses, "CharacterClasses")]
         [TestCase(GroupConstants.Deflection, "Deflection")]

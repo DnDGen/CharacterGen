@@ -20,34 +20,13 @@ namespace CharacterGen.Tests.Unit.Selectors
         }
 
         [Test]
-        public void GetCollectionFromInnerCollectionSelectorWithArmorCheckPenalty()
+        public void GetCollectionFromInnerCollectionSelector()
         {
-            var skillData = new[]
-            {
-                "base stat",
-                "true"
-            };
+            var skillData = new[] { "base stat" };
 
             mockInnerSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillData, "skill")).Returns(skillData);
 
             var selection = skillSelector.SelectFor("skill");
-            Assert.That(selection.ArmorCheckPenalty, Is.True);
-            Assert.That(selection.BaseStatName, Is.EqualTo("base stat"));
-        }
-
-        [Test]
-        public void GetCollectionFromInnerCollectionSelectorWithoutArmorCheckPenalty()
-        {
-            var skillData = new[]
-            {
-                "base stat",
-                "false"
-            };
-
-            mockInnerSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillData, "skill")).Returns(skillData);
-
-            var selection = skillSelector.SelectFor("skill");
-            Assert.That(selection.ArmorCheckPenalty, Is.False);
             Assert.That(selection.BaseStatName, Is.EqualTo("base stat"));
         }
     }
