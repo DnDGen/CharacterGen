@@ -20,10 +20,10 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         private IArmorClassGenerator armorClassGenerator;
         private Equipment equipment;
         private List<Feat> feats;
-        private Int32 adjustedDexterityBonus;
+        private int adjustedDexterityBonus;
         private Mock<ICollectionsSelector> mockCollectionsSelector;
         private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
-        private Dictionary<String, Int32> armorBonuses;
+        private Dictionary<string, int> armorBonuses;
         private Race race;
 
         [SetUp]
@@ -34,7 +34,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             armorClassGenerator = new ArmorClassGenerator(mockCollectionsSelector.Object, mockAdjustmentsSelector.Object);
             equipment = new Equipment();
             feats = new List<Feat>();
-            armorBonuses = new Dictionary<String, Int32>();
+            armorBonuses = new Dictionary<string, int>();
             adjustedDexterityBonus = 0;
             race = new Race();
 
@@ -54,7 +54,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             AssertArmorClass(10, 10, 10);
         }
 
-        private void AssertArmorClass(Int32 flatFooted, Int32 full, Int32 touch)
+        private void AssertArmorClass(int flatFooted, int full, int touch)
         {
             var armorClass = armorClassGenerator.GenerateWith(equipment, adjustedDexterityBonus, feats, race);
             Assert.That(armorClass.FlatFooted, Is.EqualTo(flatFooted), "flat-footed");
@@ -352,6 +352,78 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             race.Size = RaceConstants.Sizes.Small;
 
             AssertArmorClass(17, 18, 13);
+        }
+
+        [Test]
+        public void CursedArmorWithOppositeEffectHasNegativeBonus()
+        {
+            armorBonuses["armor"] = 3;
+            equipment.Armor = new Item { Name = "armor" };
+            equipment.Armor.Magic.Bonus = 1;
+            equipment.Armor.Magic.Curse = CurseConstants.OppositeEffect;
+
+            AssertArmorClass(12, 12, 10);
+        }
+
+        [Test]
+        public void CursedArmorWithOppositeEffectHasNegativeEffect()
+        {
+            armorBonuses["armor"] = 1;
+            equipment.Armor = new Item { Name = "armor" };
+            equipment.Armor.Magic.Bonus = 2;
+            equipment.Armor.Magic.Curse = CurseConstants.OppositeEffect;
+
+            AssertArmorClass(9, 9, 10);
+        }
+
+        [Test]
+        public void CursedShieldWithOppositeEffectHasNegativeBonus()
+        {
+            armorBonuses["shield"] = 3;
+            equipment.OffHand = new Item { Name = "shield" };
+            equipment.OffHand.ItemType = ItemTypeConstants.Armor;
+            equipment.OffHand.Attributes = new[] { AttributeConstants.Shield };
+            equipment.OffHand.Magic.Bonus = 1;
+            equipment.OffHand.Magic.Curse = CurseConstants.OppositeEffect;
+
+            AssertArmorClass(12, 12, 10);
+        }
+
+        [Test]
+        public void CursedShieldWithOppositeEffectHasNegativeEffect()
+        {
+            armorBonuses["shield"] = 1;
+            equipment.OffHand = new Item { Name = "shield" };
+            equipment.OffHand.ItemType = ItemTypeConstants.Armor;
+            equipment.OffHand.Attributes = new[] { AttributeConstants.Shield };
+            equipment.OffHand.Magic.Bonus = 2;
+            equipment.OffHand.Magic.Curse = CurseConstants.OppositeEffect;
+
+            AssertArmorClass(9, 9, 10);
+        }
+
+        [Test]
+        public void CursedArmorWithDelusionHasNoonus()
+        {
+            armorBonuses["armor"] = 3;
+            equipment.Armor = new Item { Name = "armor" };
+            equipment.Armor.Magic.Bonus = 1;
+            equipment.Armor.Magic.Curse = CurseConstants.Delusion;
+
+            AssertArmorClass(13, 13, 10);
+        }
+
+        [Test]
+        public void CursedShieldWithDelusionHasNoBonus()
+        {
+            armorBonuses["shield"] = 3;
+            equipment.OffHand = new Item { Name = "shield" };
+            equipment.OffHand.ItemType = ItemTypeConstants.Armor;
+            equipment.OffHand.Attributes = new[] { AttributeConstants.Shield };
+            equipment.OffHand.Magic.Bonus = 1;
+            equipment.OffHand.Magic.Curse = CurseConstants.Delusion;
+
+            AssertArmorClass(13, 13, 10);
         }
     }
 }
