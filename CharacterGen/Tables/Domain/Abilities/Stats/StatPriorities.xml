@@ -14,12 +14,12 @@
     <object>
         <name>Cleric</name>
         <item>Wisdom</item>
-        <item>Constitution</item>
+        <item>Charisma</item>
     </object>
     <object>
         <name>Druid</name>
         <item>Wisdom</item>
-        <item>Dexterity</item>
+        <item>Charisma</item>
     </object>
     <object>
         <name>Fighter</name>
@@ -34,12 +34,12 @@
     <object>
         <name>Paladin</name>
         <item>Charisma</item>
-        <item>Strength</item>
+        <item>Wisdom</item>
     </object>
     <object>
         <name>Ranger</name>
-        <item>Dexterity</item>
         <item>Strength</item>
+        <item>Wisdom</item>
     </object>
     <object>
         <name>Rogue</name>
