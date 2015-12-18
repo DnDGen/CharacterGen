@@ -293,6 +293,7 @@
     <Compile Include="Leadership\Level5FollowerQuantitiesTests.cs" />
     <Compile Include="Leadership\Level6FollowerQuantitiesTests.cs" />
     <Compile Include="Leadership\Level1FollowerQuantitiesTests.cs" />
+    <Compile Include="Magics\Spells\ArcaneSpellFailuresTests.cs" />
     <Compile Include="Magics\Spells\Bards\Level10BardSpellsPerDayTests.cs" />
     <Compile Include="Magics\Spells\Bards\Level11BardSpellsPerDayTests.cs" />
     <Compile Include="Magics\Spells\Bards\Level12BardSpellsPerDayTests.cs" />

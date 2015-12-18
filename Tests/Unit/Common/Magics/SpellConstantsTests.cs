@@ -80,6 +80,8 @@ namespace CharacterGen.Tests.Unit.Common.Magics
         [TestCase(SpellConstants.Unhallow, "Unhallow")]
         [TestCase(SpellConstants.UnholyAura, "Unholy aura")]
         [TestCase(SpellConstants.UnholyBlight, "Unholy blight")]
+        [TestCase(SpellConstants.Arcane, "Arcane")]
+        [TestCase(SpellConstants.Divine, "Divine")]
         public void Constant(String constant, String value)
         {
             Assert.That(constant, Is.EqualTo(value));

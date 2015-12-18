@@ -1,5 +1,6 @@
 ﻿using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Common.Combats;
+using CharacterGen.Common.Magics;
 using CharacterGen.Tables;
 using NUnit.Framework;
 using System;
@@ -40,7 +41,8 @@ namespace CharacterGen.Tests.Integration.Tables.CharacterClasses
                 SavingThrowConstants.Will,
                 GroupConstants.Intuitive,
                 GroupConstants.SelfTaught,
-                GroupConstants.Trained
+                GroupConstants.Trained,
+                SpellConstants.Arcane
             };
 
             AssertCollectionNames(names);
@@ -201,6 +203,10 @@ namespace CharacterGen.Tests.Integration.Tables.CharacterClasses
             CharacterClassConstants.Cleric,
             CharacterClassConstants.Druid,
             CharacterClassConstants.Monk,
+            CharacterClassConstants.Wizard)]
+        [TestCase(SpellConstants.Arcane,
+            CharacterClassConstants.Bard,
+            CharacterClassConstants.Sorcerer,
             CharacterClassConstants.Wizard)]
         public override void DistinctCollection(String name, params String[] collection)
         {

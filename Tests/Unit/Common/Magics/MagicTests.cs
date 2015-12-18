@@ -19,6 +19,7 @@ namespace CharacterGen.Tests.Unit.Common.Magics
         {
             Assert.That(magic.Animal, Is.Empty);
             Assert.That(magic.SpellsPerDay, Is.Empty);
+            Assert.That(magic.ArcaneSpellFailure, Is.EqualTo(0));
         }
     }
 }

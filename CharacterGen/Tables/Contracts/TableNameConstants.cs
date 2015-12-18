@@ -8,6 +8,7 @@ namespace CharacterGen.Tables
         {
             public static class Adjustments
             {
+                public const String ArcaneSpellFailures = "ArcaneSpellFailures";
                 public const String ArmorBonuses = "ArmorBonuses";
                 public const String ArmorCheckPenalties = "ArmorCheckPenalties";
                 public const String ClassHitDice = "ClassHitDice";

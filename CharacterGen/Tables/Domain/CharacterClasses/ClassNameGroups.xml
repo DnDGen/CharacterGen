@@ -201,4 +201,10 @@
     <item>Monk</item>
     <item>Wizard</item>
   </object>
+  <object>
+    <name>Arcane</name>
+    <item>Bard</item>
+    <item>Sorcerer</item>
+    <item>Wizard</item>
+  </object>
 </items>

@@ -7,6 +7,7 @@ namespace CharacterGen.Tests.Unit.Tables
     [TestFixture]
     public class TableNameConstantsTests
     {
+        [TestCase(TableNameConstants.Set.Adjustments.ArcaneSpellFailures, "ArcaneSpellFailures")]
         [TestCase(TableNameConstants.Set.Adjustments.ArmorBonuses, "ArmorBonuses")]
         [TestCase(TableNameConstants.Set.Adjustments.ArmorCheckPenalties, "ArmorCheckPenalties")]
         [TestCase(TableNameConstants.Set.Adjustments.ClassHitDice, "ClassHitDice")]
