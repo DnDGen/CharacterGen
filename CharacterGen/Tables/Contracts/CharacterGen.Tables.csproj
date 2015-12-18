@@ -52,7 +52,7 @@
     <Compile Include="AdjustmentConstants.cs" />
     <Compile Include="DataIndexConstants.cs" />
     <Compile Include="GroupConstants.cs" />
-    <Compile Include="IStreamLoader.cs" />
+    <Compile Include="StreamLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TableNameConstants.cs" />
   </ItemGroup>

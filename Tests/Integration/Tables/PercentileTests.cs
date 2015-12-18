@@ -10,7 +10,7 @@ namespace CharacterGen.Tests.Integration.Tables
     public abstract class PercentileTests : TableTests
     {
         [Inject]
-        public IPercentileMapper PercentileMapper { get; set; }
+        public PercentileMapper PercentileMapper { get; set; }
 
         protected const String EmptyContent = "";
 

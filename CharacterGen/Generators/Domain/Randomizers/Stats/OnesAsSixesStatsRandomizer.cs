@@ -16,17 +16,17 @@ namespace CharacterGen.Generators.Domain.Randomizers.Stats
             }
         }
 
-        private IDice dice;
+        private Dice dice;
 
-        public OnesAsSixesStatsRandomizer(IDice dice, Generator generator)
+        public OnesAsSixesStatsRandomizer(Dice dice, Generator generator)
             : base(generator)
         {
             this.dice = dice;
         }
 
-        protected override Int32 RollStat()
+        protected override int RollStat()
         {
-            var rolls = new List<Int32>();
+            var rolls = new List<int>();
 
             for (var i = 0; i < 3; i++)
             {
@@ -37,7 +37,7 @@ namespace CharacterGen.Generators.Domain.Randomizers.Stats
             return rolls.Sum();
         }
 
-        private Int32 GetRollToAdd()
+        private int GetRollToAdd()
         {
             var roll = dice.Roll().d6();
 
@@ -47,7 +47,7 @@ namespace CharacterGen.Generators.Domain.Randomizers.Stats
             return roll;
         }
 
-        protected override Boolean StatsAreAllowed(IEnumerable<Stat> stats)
+        protected override bool StatsAreAllowed(IEnumerable<Stat> stats)
         {
             return true;
         }

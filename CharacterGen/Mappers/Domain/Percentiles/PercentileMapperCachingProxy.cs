@@ -3,12 +3,12 @@ using System.Collections.Generic;
 
 namespace CharacterGen.Mappers.Domain.Percentiles
 {
-    public class PercentileMapperCachingProxy : IPercentileMapper
+    public class PercentileMapperCachingProxy : PercentileMapper
     {
-        private IPercentileMapper innerMapper;
+        private PercentileMapper innerMapper;
         private Dictionary<String, Dictionary<Int32, String>> cachedTables;
 
-        public PercentileMapperCachingProxy(IPercentileMapper innerMapper)
+        public PercentileMapperCachingProxy(PercentileMapper innerMapper)
         {
             this.innerMapper = innerMapper;
             cachedTables = new Dictionary<String, Dictionary<Int32, String>>();

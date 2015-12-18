@@ -15,8 +15,8 @@ namespace CharacterGen.Tests.Unit.Mappers.Collections
         private const String tableName = "CollectionsXmlMapperTests";
 
         private String fileName;
-        private ICollectionsMapper mapper;
-        private Mock<IStreamLoader> mockStreamLoader;
+        private CollectionsMapper mapper;
+        private Mock<StreamLoader> mockStreamLoader;
         private String contents;
 
         [SetUp]
@@ -39,7 +39,7 @@ namespace CharacterGen.Tests.Unit.Mappers.Collections
                              </object>
                          </collections>";
 
-            mockStreamLoader = new Mock<IStreamLoader>();
+            mockStreamLoader = new Mock<StreamLoader>();
             mockStreamLoader.Setup(l => l.LoadFor(fileName)).Returns(() => GetStream());
 
             mapper = new CollectionsXmlMapper(mockStreamLoader.Object);

@@ -15,10 +15,10 @@ namespace CharacterGen.Generators.Domain
         private IBooleanPercentileSelector booleanPercentileSelector;
         private ICollectionsSelector collectionsSelector;
         private IAdjustmentsSelector adjustmentsSelector;
-        private IDice dice;
+        private Dice dice;
 
         public RaceGenerator(IBooleanPercentileSelector booleanPercentileSelector, ICollectionsSelector collectionsSelector, IAdjustmentsSelector adjustmentsSelector,
-            IDice dice)
+            Dice dice)
         {
             this.booleanPercentileSelector = booleanPercentileSelector;
             this.collectionsSelector = collectionsSelector;
@@ -42,15 +42,15 @@ namespace CharacterGen.Generators.Domain
             return race;
         }
 
-        private String DetermineMetaraceSpecies(Alignment alignment, String metarace)
+        private string DetermineMetaraceSpecies(Alignment alignment, string metarace)
         {
             if (metarace != RaceConstants.Metaraces.HalfDragon)
-                return String.Empty;
+                return string.Empty;
 
             return collectionsSelector.SelectRandomFrom(TableNameConstants.Set.Collection.DragonSpecies, alignment.ToString());
         }
 
-        private Boolean DetermineIfMale(String baseRace, String className)
+        private Boolean DetermineIfMale(string baseRace, string className)
         {
             if (baseRace == RaceConstants.BaseRaces.Drow && className == CharacterClassConstants.Wizard)
                 return true;

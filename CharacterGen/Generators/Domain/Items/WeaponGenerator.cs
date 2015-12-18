@@ -18,12 +18,12 @@ namespace CharacterGen.Generators.Domain.Items
     {
         private ICollectionsSelector collectionsSelector;
         private IPercentileSelector percentileSelector;
-        private IMundaneItemGenerator mundaneWeaponGenerator;
-        private IMagicalItemGenerator magicalWeaponGenerator;
+        private MundaneItemGenerator mundaneWeaponGenerator;
+        private MagicalItemGenerator magicalWeaponGenerator;
         private Generator generator;
 
         public WeaponGenerator(ICollectionsSelector collectionsSelector, IPercentileSelector percentileSelector,
-            IMundaneItemGenerator mundaneWeaponGenerator, IMagicalItemGenerator magicalWeaponGenerator, Generator generator)
+            MundaneItemGenerator mundaneWeaponGenerator, MagicalItemGenerator magicalWeaponGenerator, Generator generator)
         {
             this.collectionsSelector = collectionsSelector;
             this.percentileSelector = percentileSelector;
@@ -46,7 +46,7 @@ namespace CharacterGen.Generators.Domain.Items
             return weapon;
         }
 
-        private Item GenerateWeapon(String power)
+        private Item GenerateWeapon(string power)
         {
             if (power == PowerConstants.Mundane)
                 return mundaneWeaponGenerator.Generate();
@@ -54,9 +54,9 @@ namespace CharacterGen.Generators.Domain.Items
             return magicalWeaponGenerator.GenerateAtPower(power);
         }
 
-        private IEnumerable<String> GetAmmunitionBaseTypes(IEnumerable<String> allowedWeapons)
+        private IEnumerable<string> GetAmmunitionBaseTypes(IEnumerable<string> allowedWeapons)
         {
-            var baseTypesWithAmmunition = new List<String>();
+            var baseTypesWithAmmunition = new List<string>();
 
             foreach (var allowedWeapon in allowedWeapons)
             {

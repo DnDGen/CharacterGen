@@ -15,8 +15,8 @@ namespace CharacterGen.Bootstrap.Factories
         {
             var collectionsSelector = kernel.Get<ICollectionsSelector>();
             var percentileSelector = kernel.Get<IPercentileSelector>();
-            var mundaneWeaponGenerator = kernel.Get<IMundaneItemGenerator>(ItemTypeConstants.Weapon);
-            var magicalWeaponGenerator = kernel.Get<IMagicalItemGenerator>(ItemTypeConstants.Weapon);
+            var mundaneWeaponGenerator = kernel.Get<MundaneItemGenerator>(ItemTypeConstants.Weapon);
+            var magicalWeaponGenerator = kernel.Get<MagicalItemGenerator>(ItemTypeConstants.Weapon);
             var generator = kernel.Get<Generator>();
 
             return new WeaponGenerator(collectionsSelector, percentileSelector, mundaneWeaponGenerator,

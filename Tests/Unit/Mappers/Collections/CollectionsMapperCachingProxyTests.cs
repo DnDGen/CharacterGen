@@ -10,15 +10,15 @@ namespace CharacterGen.Tests.Unit.Mappers.Collections
     [TestFixture]
     public class CollectionsMapperCachingProxyTests
     {
-        private ICollectionsMapper proxy;
-        private Mock<ICollectionsMapper> mockInnerMapper;
+        private CollectionsMapper proxy;
+        private Mock<CollectionsMapper> mockInnerMapper;
         private Dictionary<String, IEnumerable<String>> table;
 
         [SetUp]
         public void Setup()
         {
             table = new Dictionary<String, IEnumerable<String>>();
-            mockInnerMapper = new Mock<ICollectionsMapper>();
+            mockInnerMapper = new Mock<CollectionsMapper>();
             mockInnerMapper.Setup(m => m.Map("table name")).Returns(table);
 
             proxy = new CollectionsMapperCachingProxy(mockInnerMapper.Object);

@@ -1,27 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using CharacterGen.Generators.Randomizers.CharacterClasses;
 using RollGen;
-using CharacterGen.Generators.Randomizers.CharacterClasses;
+using System.Collections.Generic;
 
 namespace CharacterGen.Generators.Domain.Randomizers.CharacterClasses.Levels
 {
     public class AnyLevelRandomizer : ILevelRandomizer
     {
-        private IDice dice;
+        private Dice dice;
 
-        public AnyLevelRandomizer(IDice dice)
+        public AnyLevelRandomizer(Dice dice)
         {
             this.dice = dice;
         }
 
-        public Int32 Randomize()
+        public int Randomize()
         {
             return dice.Roll().d20();
         }
 
-        public IEnumerable<Int32> GetAllPossibleResults()
+        public IEnumerable<int> GetAllPossibleResults()
         {
-            var levels = new List<Int32>();
+            var levels = new List<int>();
 
             for (var level = 1; level <= 20; level++)
                 levels.Add(level);

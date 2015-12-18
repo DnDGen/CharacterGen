@@ -11,25 +11,25 @@ namespace CharacterGen.Tests.Integration.Bootstrap.Modules
         [Test]
         public void CollectionsXmlMappersAreGeneratedAsSingletons()
         {
-            AssertSingleton<ICollectionsMapper>();
+            AssertSingleton<CollectionsMapper>();
         }
 
         [Test]
         public void CollectionsXmlMappersAreDecorated()
         {
-            AssertIsInstanceOf<ICollectionsMapper, CollectionsMapperCachingProxy>();
+            AssertIsInstanceOf<CollectionsMapper, CollectionsMapperCachingProxy>();
         }
 
         [Test]
         public void PercentileXmlMappersAreGeneratedAsSingletons()
         {
-            AssertSingleton<IPercentileMapper>();
+            AssertSingleton<PercentileMapper>();
         }
 
         [Test]
         public void PercentileXmlMappersAreDecorated()
         {
-            AssertIsInstanceOf<IPercentileMapper, PercentileMapperCachingProxy>();
+            AssertIsInstanceOf<PercentileMapper, PercentileMapperCachingProxy>();
         }
     }
 }

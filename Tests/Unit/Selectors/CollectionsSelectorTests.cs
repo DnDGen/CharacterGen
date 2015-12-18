@@ -2,9 +2,9 @@
 using CharacterGen.Selectors;
 using CharacterGen.Selectors.Domain;
 using CharacterGen.Selectors.Objects;
-using RollGen;
 using Moq;
 using NUnit.Framework;
+using RollGen;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,15 +17,15 @@ namespace CharacterGen.Tests.Unit.Selectors
         private const String TableName = "table name";
 
         private ICollectionsSelector selector;
-        private Mock<ICollectionsMapper> mockMapper;
-        private Mock<IDice> mockDice;
+        private Mock<CollectionsMapper> mockMapper;
+        private Mock<Dice> mockDice;
         private Dictionary<String, IEnumerable<String>> allCollections;
 
         [SetUp]
         public void Setup()
         {
-            mockMapper = new Mock<ICollectionsMapper>();
-            mockDice = new Mock<IDice>();
+            mockMapper = new Mock<CollectionsMapper>();
+            mockDice = new Mock<Dice>();
             selector = new CollectionsSelector(mockMapper.Object, mockDice.Object);
             allCollections = new Dictionary<String, IEnumerable<String>>();
 

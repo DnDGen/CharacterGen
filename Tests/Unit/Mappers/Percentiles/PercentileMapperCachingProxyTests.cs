@@ -10,15 +10,15 @@ namespace CharacterGen.Tests.Unit.Mappers.Percentiles
     [TestFixture]
     public class PercentileMapperCachingProxyTests
     {
-        private IPercentileMapper proxy;
-        private Mock<IPercentileMapper> mockInnerMapper;
+        private PercentileMapper proxy;
+        private Mock<PercentileMapper> mockInnerMapper;
         private Dictionary<Int32, String> table;
 
         [SetUp]
         public void Setup()
         {
             table = new Dictionary<Int32, String>();
-            mockInnerMapper = new Mock<IPercentileMapper>();
+            mockInnerMapper = new Mock<PercentileMapper>();
             mockInnerMapper.Setup(m => m.Map("table name")).Returns(table);
 
             proxy = new PercentileMapperCachingProxy(mockInnerMapper.Object);

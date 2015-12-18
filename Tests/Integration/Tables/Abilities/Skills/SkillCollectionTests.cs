@@ -16,7 +16,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
     public class SkillCollectionTests : IntegrationTests
     {
         [Inject]
-        public ICollectionsMapper Mapper { get; set; }
+        public CollectionsMapper Mapper { get; set; }
 
         private Dictionary<String, IEnumerable<String>> classSkills;
         private Dictionary<String, IEnumerable<String>> crossClassSkills;

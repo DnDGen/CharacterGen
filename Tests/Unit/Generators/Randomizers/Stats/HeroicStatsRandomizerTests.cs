@@ -12,7 +12,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
     public class HeroicStatsRandomizerTests
     {
         private IStatsRandomizer randomizer;
-        private Mock<IDice> mockDice;
+        private Mock<Dice> mockDice;
 
         private const Int32 min = 16;
         private const Int32 max = 18;
@@ -23,7 +23,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
         {
             middle = (max + min) / 2;
 
-            mockDice = new Mock<IDice>();
+            mockDice = new Mock<Dice>();
             var generator = new ConfigurableIterationGenerator(2);
             mockDice.Setup(d => d.Roll(1).d6()).Returns(1);
 

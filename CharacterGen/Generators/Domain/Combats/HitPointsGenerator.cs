@@ -13,18 +13,18 @@ namespace CharacterGen.Generators.Domain.Combats
 {
     public class HitPointsGenerator : IHitPointsGenerator
     {
-        private IDice dice;
+        private Dice dice;
         private IAdjustmentsSelector adjustmentsSelector;
         private ICollectionsSelector collectionsSelector;
 
-        public HitPointsGenerator(IDice dice, IAdjustmentsSelector adjustmentsSelector, ICollectionsSelector collectionsSelector)
+        public HitPointsGenerator(Dice dice, IAdjustmentsSelector adjustmentsSelector, ICollectionsSelector collectionsSelector)
         {
             this.dice = dice;
             this.adjustmentsSelector = adjustmentsSelector;
             this.collectionsSelector = collectionsSelector;
         }
 
-        public Int32 GenerateWith(CharacterClass characterClass, Int32 constitutionBonus, Race race, IEnumerable<Feat> feats)
+        public int GenerateWith(CharacterClass characterClass, int constitutionBonus, Race race, IEnumerable<Feat> feats)
         {
             var hitPoints = GetClassHitPoints(characterClass, constitutionBonus, race);
 
@@ -39,7 +39,7 @@ namespace CharacterGen.Generators.Domain.Combats
             return hitPoints + monsterHitPoints;
         }
 
-        private Int32 GetClassHitPoints(CharacterClass characterClass, Int32 constitutionBonus, Race race)
+        private int GetClassHitPoints(CharacterClass characterClass, int constitutionBonus, Race race)
         {
             var undead = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Undead);
             if (undead.Contains(race.Metarace))

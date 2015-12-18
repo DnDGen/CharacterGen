@@ -5,11 +5,11 @@ using System.Xml;
 
 namespace CharacterGen.Mappers.Domain.Collections
 {
-    public class CollectionsXmlMapper : ICollectionsMapper
+    public class CollectionsXmlMapper : CollectionsMapper
     {
-        private IStreamLoader streamLoader;
+        private StreamLoader streamLoader;
 
-        public CollectionsXmlMapper(IStreamLoader streamLoader)
+        public CollectionsXmlMapper(StreamLoader streamLoader)
         {
             this.streamLoader = streamLoader;
         }

@@ -3,12 +3,12 @@ using System.Collections.Generic;
 
 namespace CharacterGen.Mappers.Domain.Collections
 {
-    public class CollectionsMapperCachingProxy : ICollectionsMapper
+    public class CollectionsMapperCachingProxy : CollectionsMapper
     {
-        private ICollectionsMapper innerMapper;
+        private CollectionsMapper innerMapper;
         private Dictionary<String, Dictionary<String, IEnumerable<String>>> cachedTables;
 
-        public CollectionsMapperCachingProxy(ICollectionsMapper innerMapper)
+        public CollectionsMapperCachingProxy(CollectionsMapper innerMapper)
         {
             this.innerMapper = innerMapper;
             cachedTables = new Dictionary<String, Dictionary<String, IEnumerable<String>>>();

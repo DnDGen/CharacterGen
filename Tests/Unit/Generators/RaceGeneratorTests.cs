@@ -23,18 +23,18 @@ namespace CharacterGen.Tests.Unit.Generators
         private Mock<IBooleanPercentileSelector> mockBooleanPercentileSelector;
         private Mock<ICollectionsSelector> mockCollectionsSelector;
         private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
-        private Mock<IDice> mockDice;
+        private Mock<Dice> mockDice;
         private IRaceGenerator raceGenerator;
         private Mock<RaceRandomizer> mockBaseRaceRandomizer;
         private Mock<RaceRandomizer> mockMetaraceRandomizer;
         private CharacterClass characterClass;
         private Alignment alignment;
-        private Dictionary<String, Int32> speeds;
-        private Dictionary<String, Int32> ageRolls;
-        private Dictionary<String, Int32> heightRolls;
-        private Dictionary<String, Int32> weightRolls;
-        private List<String> intuitiveClasses;
-        private List<String> trainedClasses;
+        private Dictionary<string, int> speeds;
+        private Dictionary<string, int> ageRolls;
+        private Dictionary<string, int> heightRolls;
+        private Dictionary<string, int> weightRolls;
+        private List<string> intuitiveClasses;
+        private List<string> trainedClasses;
 
         [SetUp]
         public void Setup()
@@ -42,7 +42,7 @@ namespace CharacterGen.Tests.Unit.Generators
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
             mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
             mockBooleanPercentileSelector = new Mock<IBooleanPercentileSelector>();
-            mockDice = new Mock<IDice>();
+            mockDice = new Mock<Dice>();
             raceGenerator = new RaceGenerator(mockBooleanPercentileSelector.Object, mockCollectionsSelector.Object,
                 mockAdjustmentsSelector.Object, mockDice.Object);
 
@@ -50,12 +50,12 @@ namespace CharacterGen.Tests.Unit.Generators
             mockMetaraceRandomizer = new Mock<RaceRandomizer>();
             characterClass = new CharacterClass();
             alignment = new Alignment();
-            speeds = new Dictionary<String, Int32>();
-            ageRolls = new Dictionary<String, Int32>();
-            heightRolls = new Dictionary<String, Int32>();
-            weightRolls = new Dictionary<String, Int32>();
-            intuitiveClasses = new List<String>();
-            trainedClasses = new List<String>();
+            speeds = new Dictionary<string, int>();
+            ageRolls = new Dictionary<string, int>();
+            heightRolls = new Dictionary<string, int>();
+            weightRolls = new Dictionary<string, int>();
+            intuitiveClasses = new List<string>();
+            trainedClasses = new List<string>();
 
             characterClass.ClassName = "class name";
             alignment.Goodness = "goodness";

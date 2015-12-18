@@ -5,11 +5,11 @@ using System.Xml;
 
 namespace CharacterGen.Mappers.Domain.Percentiles
 {
-    public class PercentileXmlMapper : IPercentileMapper
+    public class PercentileXmlMapper : PercentileMapper
     {
-        private IStreamLoader streamLoader;
+        private StreamLoader streamLoader;
 
-        public PercentileXmlMapper(IStreamLoader streamLoader)
+        public PercentileXmlMapper(StreamLoader streamLoader)
         {
             this.streamLoader = streamLoader;
         }

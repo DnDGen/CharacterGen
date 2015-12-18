@@ -22,8 +22,8 @@ namespace CharacterGen.Tests.Unit.Generators.Items
     {
         private Mock<ICollectionsSelector> mockCollectionsSelector;
         private Mock<IPercentileSelector> mockPercentileSelector;
-        private Mock<IMundaneItemGenerator> mockMundaneArmorGenerator;
-        private Mock<IMagicalItemGenerator> mockMagicalArmorGenerator;
+        private Mock<MundaneItemGenerator> mockMundaneArmorGenerator;
+        private Mock<MagicalItemGenerator> mockMagicalArmorGenerator;
         private Generator generator;
         private IArmorGenerator armorGenerator;
         private List<Feat> feats;
@@ -43,8 +43,8 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         {
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
             mockPercentileSelector = new Mock<IPercentileSelector>();
-            mockMundaneArmorGenerator = new Mock<IMundaneItemGenerator>();
-            mockMagicalArmorGenerator = new Mock<IMagicalItemGenerator>();
+            mockMundaneArmorGenerator = new Mock<MundaneItemGenerator>();
+            mockMagicalArmorGenerator = new Mock<MagicalItemGenerator>();
             generator = new ConfigurableIterationGenerator(3);
             armorGenerator = new ArmorGenerator(mockCollectionsSelector.Object, mockPercentileSelector.Object, mockMundaneArmorGenerator.Object, mockMagicalArmorGenerator.Object, generator);
             feats = new List<Feat>();

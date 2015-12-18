@@ -49,8 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ICollectionsMapper.cs" />
-    <Compile Include="IPercentileMapper.cs" />
+    <Compile Include="CollectionsMapper.cs" />
+    <Compile Include="PercentileMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace CharacterGen.Tables.Domain
 {
-    public class EmbeddedResourceStreamLoader : IStreamLoader
+    public class EmbeddedResourceStreamLoader : StreamLoader
     {
         public Stream LoadFor(String filename)
         {

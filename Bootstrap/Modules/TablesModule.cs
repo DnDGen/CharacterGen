@@ -8,7 +8,7 @@ namespace CharacterGen.Bootstrap.Modules
     {
         public override void Load()
         {
-            Bind<IStreamLoader>().To<EmbeddedResourceStreamLoader>();
+            Bind<StreamLoader>().To<EmbeddedResourceStreamLoader>();
         }
     }
 }

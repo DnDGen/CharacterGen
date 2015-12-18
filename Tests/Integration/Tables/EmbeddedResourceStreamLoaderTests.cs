@@ -14,7 +14,7 @@ namespace CharacterGen.Tests.Integration.Tables
     public class EmbeddedResourceStreamLoaderTests : IntegrationTests
     {
         [Inject]
-        public IStreamLoader StreamLoader { get; set; }
+        public StreamLoader StreamLoader { get; set; }
 
         [Test]
         public void GetsFileIfItIsAnEmbeddedResource()

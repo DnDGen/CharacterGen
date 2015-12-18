@@ -8,8 +8,8 @@ namespace CharacterGen.Bootstrap.Modules
     {
         public override void Load()
         {
-            Bind<ICollectionsMapper>().ToMethod(c => CollectionsMapperFactory.CreateWith(c.Kernel)).InSingletonScope();
-            Bind<IPercentileMapper>().ToMethod(c => PercentileMapperFactory.CreateWith(c.Kernel)).InSingletonScope();
+            Bind<CollectionsMapper>().ToMethod(c => CollectionsMapperFactory.CreateWith(c.Kernel)).InSingletonScope();
+            Bind<PercentileMapper>().ToMethod(c => PercentileMapperFactory.CreateWith(c.Kernel)).InSingletonScope();
         }
     }
 }

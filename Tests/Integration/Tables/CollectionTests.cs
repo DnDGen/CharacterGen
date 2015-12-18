@@ -11,7 +11,7 @@ namespace CharacterGen.Tests.Integration.Tables
     public abstract class CollectionTests : TableTests
     {
         [Inject]
-        public ICollectionsMapper CollectionsMapper { get; set; }
+        public CollectionsMapper CollectionsMapper { get; set; }
 
         protected Dictionary<String, IEnumerable<String>> table;
         protected Dictionary<Int32, String> indices;

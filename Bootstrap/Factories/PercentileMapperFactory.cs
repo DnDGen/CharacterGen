@@ -6,9 +6,9 @@ namespace CharacterGen.Bootstrap.Factories
 {
     public static class PercentileMapperFactory
     {
-        public static IPercentileMapper CreateWith(IKernel kernel)
+        public static PercentileMapper CreateWith(IKernel kernel)
         {
-            IPercentileMapper mapper = kernel.Get<PercentileXmlMapper>();
+            PercentileMapper mapper = kernel.Get<PercentileXmlMapper>();
             mapper = new PercentileMapperCachingProxy(mapper);
 
             return mapper;

@@ -1,7 +1,7 @@
 ﻿using CharacterGen.Generators.Domain.Randomizers.CharacterClasses.Levels;
-using RollGen;
 using Moq;
 using NUnit.Framework;
+using RollGen;
 using System;
 using System.Linq;
 
@@ -11,12 +11,12 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses.Levels
     public class RangedLevelRandomizerTests
     {
         private TestRangedLevelRandomizer randomizer;
-        private Mock<IDice> mockDice;
+        private Mock<Dice> mockDice;
 
         [SetUp]
         public void Setup()
         {
-            mockDice = new Mock<IDice>();
+            mockDice = new Mock<Dice>();
             randomizer = new TestRangedLevelRandomizer(mockDice.Object);
         }
 
@@ -59,7 +59,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses.Levels
                 set { rollBonus = value; }
             }
 
-            public TestRangedLevelRandomizer(IDice dice) : base(dice) { }
+            public TestRangedLevelRandomizer(Dice dice) : base(dice) { }
         }
     }
 }

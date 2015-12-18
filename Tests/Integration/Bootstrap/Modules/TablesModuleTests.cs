@@ -9,7 +9,7 @@ namespace CharacterGen.Tests.Integration.Bootstrap.Modules
         [Test]
         public void StreamLoadersAreNotGeneratedAsSingletons()
         {
-            AssertNotSingleton<IStreamLoader>();
+            AssertNotSingleton<StreamLoader>();
         }
     }
 }

@@ -16,7 +16,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
     [TestFixture]
     public class HitPointsGeneratorTests
     {
-        private Mock<IDice> mockDice;
+        private Mock<Dice> mockDice;
         private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
         private Mock<ICollectionsSelector> mockCollectionsSelector;
         private IHitPointsGenerator hitPointsGenerator;
@@ -30,7 +30,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         [SetUp]
         public void Setup()
         {
-            mockDice = new Mock<IDice>();
+            mockDice = new Mock<Dice>();
             mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
             hitPointsGenerator = new HitPointsGenerator(mockDice.Object, mockAdjustmentsSelector.Object, mockCollectionsSelector.Object);
@@ -204,7 +204,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Undead))
                 .Returns(new[] { "undead", "other undead" });
 
-            var mockClassRoll = new Mock<IPartialRoll>();
+            var mockClassRoll = new Mock<PartialRoll>();
             mockDice.Setup(d => d.Roll(2)).Returns(mockClassRoll.Object);
             mockClassRoll.Setup(r => r.d(12)).Returns(7);
 
@@ -213,7 +213,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             monsterHitDice["baserace"] = 3;
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice)).Returns(monsterHitDice);
 
-            var mockMonsterRoll = new Mock<IPartialRoll>();
+            var mockMonsterRoll = new Mock<PartialRoll>();
             mockDice.Setup(d => d.Roll(3)).Returns(mockMonsterRoll.Object);
             mockMonsterRoll.Setup(r => r.d(12)).Returns(5);
             mockMonsterRoll.Setup(r => r.d(8)).Returns(9);

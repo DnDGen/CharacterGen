@@ -17,12 +17,12 @@ namespace CharacterGen.Generators.Domain.Items
     {
         private ICollectionsSelector collectionsSelector;
         private IPercentileSelector percentileSelector;
-        private IMundaneItemGenerator mundaneArmorGenerator;
-        private IMagicalItemGenerator magicalArmorGenerator;
+        private MundaneItemGenerator mundaneArmorGenerator;
+        private MagicalItemGenerator magicalArmorGenerator;
         private Generator generator;
 
         public ArmorGenerator(ICollectionsSelector collectionsSelector, IPercentileSelector percentileSelector,
-            IMundaneItemGenerator mundaneArmorGenerator, IMagicalItemGenerator magicalArmorGenerator, Generator generator)
+            MundaneItemGenerator mundaneArmorGenerator, MagicalItemGenerator magicalArmorGenerator, Generator generator)
         {
             this.collectionsSelector = collectionsSelector;
             this.percentileSelector = percentileSelector;
@@ -33,7 +33,7 @@ namespace CharacterGen.Generators.Domain.Items
 
         public Item GenerateArmorFrom(IEnumerable<Feat> feats, CharacterClass characterClass, Race race)
         {
-            var tableName = String.Format(TableNameConstants.Formattable.Percentile.LevelXPower, characterClass.Level);
+            var tableName = string.Format(TableNameConstants.Formattable.Percentile.LevelXPower, characterClass.Level);
             var power = percentileSelector.SelectFrom(tableName);
             var proficientArmors = GetProficientArmors(feats, ItemTypeConstants.Armor);
 

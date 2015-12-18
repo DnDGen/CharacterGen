@@ -1,6 +1,5 @@
 ﻿using CharacterGen.Common.Abilities.Stats;
 using RollGen;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,7 +7,7 @@ namespace CharacterGen.Generators.Domain.Randomizers.Stats
 {
     public class BestOfFourStatsRandomizer : BaseStatsRandomizer
     {
-        protected override Int32 defaultValue
+        protected override int defaultValue
         {
             get
             {
@@ -16,17 +15,17 @@ namespace CharacterGen.Generators.Domain.Randomizers.Stats
             }
         }
 
-        private IDice dice;
+        private Dice dice;
 
-        public BestOfFourStatsRandomizer(IDice dice, Generator generator)
-            : base (generator)
+        public BestOfFourStatsRandomizer(Dice dice, Generator generator)
+            : base(generator)
         {
             this.dice = dice;
         }
 
-        protected override Int32 RollStat()
+        protected override int RollStat()
         {
-            var rolls = new List<Int32>();
+            var rolls = new List<int>();
 
             for (var i = 0; i < 4; i++)
             {
@@ -40,7 +39,7 @@ namespace CharacterGen.Generators.Domain.Randomizers.Stats
             return rolls.Sum();
         }
 
-        protected override Boolean StatsAreAllowed(IEnumerable<Stat> stats)
+        protected override bool StatsAreAllowed(IEnumerable<Stat> stats)
         {
             return true;
         }

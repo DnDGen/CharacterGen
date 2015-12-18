@@ -6,9 +6,9 @@ namespace CharacterGen.Bootstrap.Factories
 {
     public static class CollectionsMapperFactory
     {
-        public static ICollectionsMapper CreateWith(IKernel kernel)
+        public static CollectionsMapper CreateWith(IKernel kernel)
         {
-            ICollectionsMapper mapper = kernel.Get<CollectionsXmlMapper>();
+            CollectionsMapper mapper = kernel.Get<CollectionsXmlMapper>();
             mapper = new CollectionsMapperCachingProxy(mapper);
 
             return mapper;

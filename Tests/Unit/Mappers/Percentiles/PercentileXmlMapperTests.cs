@@ -14,8 +14,8 @@ namespace CharacterGen.Tests.Unit.Mappers.Percentiles
     {
         private const String tableName = "PercentileXmlMapperTests";
 
-        private IPercentileMapper mapper;
-        private Mock<IStreamLoader> mockStreamLoader;
+        private PercentileMapper mapper;
+        private Mock<StreamLoader> mockStreamLoader;
         private String filename;
         private String contents;
 
@@ -42,7 +42,7 @@ namespace CharacterGen.Tests.Unit.Mappers.Percentiles
                              </object>
                          </percentile>";
 
-            mockStreamLoader = new Mock<IStreamLoader>();
+            mockStreamLoader = new Mock<StreamLoader>();
             mockStreamLoader.Setup(l => l.LoadFor(filename)).Returns(() => GetStream());
 
             mapper = new PercentileXmlMapper(mockStreamLoader.Object);

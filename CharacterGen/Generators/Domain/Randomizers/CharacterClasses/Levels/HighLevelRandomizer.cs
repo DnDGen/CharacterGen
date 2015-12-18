@@ -4,7 +4,7 @@ namespace CharacterGen.Generators.Domain.Randomizers.CharacterClasses.Levels
 {
     public class HighLevelRandomizer : RangedLevelRandomizer
     {
-        public HighLevelRandomizer(IDice dice)
+        public HighLevelRandomizer(Dice dice)
             : base(dice)
         {
             rollBonus = 10;

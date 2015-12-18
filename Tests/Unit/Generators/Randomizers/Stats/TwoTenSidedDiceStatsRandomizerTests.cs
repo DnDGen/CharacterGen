@@ -12,12 +12,12 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
     public class TwoTenSidedDiceStatsRandomizerTests
     {
         private IStatsRandomizer randomizer;
-        private Mock<IDice> mockDice;
+        private Mock<Dice> mockDice;
 
         [SetUp]
         public void Setup()
         {
-            mockDice = new Mock<IDice>();
+            mockDice = new Mock<Dice>();
             var generator = new ConfigurableIterationGenerator(2);
             randomizer = new TwoTenSidedDiceStatsRandomizer(mockDice.Object, generator);
 

@@ -8,34 +8,34 @@ namespace CharacterGen.Selectors.Domain
 {
     public class CollectionsSelector : ICollectionsSelector
     {
-        private ICollectionsMapper mapper;
-        private IDice dice;
+        private CollectionsMapper mapper;
+        private Dice dice;
 
-        public CollectionsSelector(ICollectionsMapper mapper, IDice dice)
+        public CollectionsSelector(CollectionsMapper mapper, Dice dice)
         {
             this.mapper = mapper;
             this.dice = dice;
         }
 
-        public IEnumerable<String> SelectFrom(String tableName, String tableEntry)
+        public IEnumerable<string> SelectFrom(string tableName, string tableEntry)
         {
             var table = SelectAllFrom(tableName);
 
             if (table.ContainsKey(tableEntry) == false)
             {
-                var message = String.Format("{0} is not a valid entry in the table {1}", tableEntry, tableName);
+                var message = string.Format("{0} is not a valid entry in the table {1}", tableEntry, tableName);
                 throw new ArgumentException(message);
             }
 
             return table[tableEntry];
         }
 
-        public Dictionary<String, IEnumerable<String>> SelectAllFrom(String tableName)
+        public Dictionary<string, IEnumerable<string>> SelectAllFrom(string tableName)
         {
             return mapper.Map(tableName);
         }
 
-        public String SelectRandomFrom(String tableName, String tableEntry)
+        public string SelectRandomFrom(string tableName, string tableEntry)
         {
             var collection = SelectFrom(tableName, tableEntry);
             return SelectRandomFrom(collection);

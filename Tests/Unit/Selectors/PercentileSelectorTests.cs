@@ -1,10 +1,9 @@
 ﻿using CharacterGen.Mappers;
 using CharacterGen.Selectors;
 using CharacterGen.Selectors.Domain;
-using RollGen;
 using Moq;
 using NUnit.Framework;
-using System;
+using RollGen;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -13,26 +12,26 @@ namespace CharacterGen.Tests.Unit.Selectors
     [TestFixture]
     public class PercentileSelectorTests
     {
-        private const String tableName = "table name";
+        private const string tableName = "table name";
 
         private IPercentileSelector percentileSelector;
-        private Dictionary<Int32, String> table;
-        private Mock<IDice> mockDice;
-        private Mock<IPercentileMapper> mockPercentileMapper;
+        private Dictionary<int, string> table;
+        private Mock<Dice> mockDice;
+        private Mock<PercentileMapper> mockPercentileMapper;
 
         [SetUp]
         public void Setup()
         {
-            table = new Dictionary<Int32, String>();
+            table = new Dictionary<int, string>();
             for (var i = 1; i <= 5; i++)
                 table.Add(i, "content");
             for (var i = 6; i <= 10; i++)
                 table.Add(i, i.ToString());
 
-            mockPercentileMapper = new Mock<IPercentileMapper>();
+            mockPercentileMapper = new Mock<PercentileMapper>();
             mockPercentileMapper.Setup(p => p.Map(tableName)).Returns(table);
 
-            mockDice = new Mock<IDice>();
+            mockDice = new Mock<Dice>();
             mockDice.Setup(d => d.Roll(1).Percentile()).Returns(1);
             percentileSelector = new PercentileSelector(mockPercentileMapper.Object, mockDice.Object);
         }
@@ -47,7 +46,7 @@ namespace CharacterGen.Tests.Unit.Selectors
         [TestCase(8, "8")]
         [TestCase(9, "9")]
         [TestCase(10, "10")]
-        public void GetPercentile(Int32 roll, String content)
+        public void GetPercentile(int roll, string content)
         {
             mockDice.Setup(d => d.Roll(1).Percentile()).Returns(roll);
             var result = percentileSelector.SelectFrom(tableName);

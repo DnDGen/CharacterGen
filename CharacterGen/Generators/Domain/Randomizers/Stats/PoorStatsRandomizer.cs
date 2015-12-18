@@ -16,20 +16,20 @@ namespace CharacterGen.Generators.Domain.Randomizers.Stats
             }
         }
 
-        private IDice dice;
+        private Dice dice;
 
-        public PoorStatsRandomizer(IDice dice, Generator generator)
+        public PoorStatsRandomizer(Dice dice, Generator generator)
             : base(generator)
         {
             this.dice = dice;
         }
 
-        protected override Int32 RollStat()
+        protected override int RollStat()
         {
             return dice.Roll(3).d6();
         }
 
-        protected override Boolean StatsAreAllowed(IEnumerable<Stat> stats)
+        protected override bool StatsAreAllowed(IEnumerable<Stat> stats)
         {
             var average = stats.Average(s => s.Value);
             return average < 10;

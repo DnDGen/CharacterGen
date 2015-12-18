@@ -1,8 +1,8 @@
 ﻿using CharacterGen.Generators.Domain.Randomizers.CharacterClasses.Levels;
 using CharacterGen.Generators.Randomizers.CharacterClasses;
-using RollGen;
 using Moq;
 using NUnit.Framework;
+using RollGen;
 using System.Linq;
 
 namespace CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses.Levels
@@ -11,12 +11,12 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses.Levels
     public class AnyLevelRandomizerTests
     {
         private ILevelRandomizer randomizer;
-        private Mock<IDice> mockDice;
+        private Mock<Dice> mockDice;
 
         [SetUp]
         public void Setup()
         {
-            mockDice = new Mock<IDice>();
+            mockDice = new Mock<Dice>();
             randomizer = new AnyLevelRandomizer(mockDice.Object);
         }
 
