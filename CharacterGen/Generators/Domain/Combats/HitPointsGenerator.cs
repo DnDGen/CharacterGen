@@ -49,7 +49,7 @@ namespace CharacterGen.Generators.Domain.Combats
             return RollHitPoints(characterClass.Level, hitDice[characterClass.ClassName], constitutionBonus);
         }
 
-        private Int32 GetAdditionalMonsterHitDice(Race race, Int32 constitutionBonus)
+        private int GetAdditionalMonsterHitDice(Race race, int constitutionBonus)
         {
             var hitDice = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice);
 
@@ -63,11 +63,17 @@ namespace CharacterGen.Generators.Domain.Combats
             return RollHitPoints(hitDice[race.BaseRace], 8, constitutionBonus);
         }
 
-        private Int32 RollHitPoints(Int32 quantity, Int32 die, Int32 constitutionBonus)
+        private int RollHitPoints(int quantity, int die, int constitutionBonus)
         {
-            var hitPoints = dice.Roll(quantity).d(die);
-            hitPoints += constitutionBonus * quantity;
-            return Math.Max(hitPoints, quantity);
+            var hitPoints = 0;
+
+            while (quantity-- > 0)
+            {
+                var roll = dice.Roll().d(die) + constitutionBonus;
+                hitPoints += Math.Max(roll, 1);
+            }
+
+            return hitPoints;
         }
     }
 }
