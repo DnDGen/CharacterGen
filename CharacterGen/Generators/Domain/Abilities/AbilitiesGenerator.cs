@@ -9,8 +9,6 @@ using CharacterGen.Generators.Abilities.Feats;
 using CharacterGen.Generators.Randomizers.Stats;
 using CharacterGen.Selectors;
 using CharacterGen.Tables;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace CharacterGen.Generators.Domain.Abilities
@@ -50,16 +48,7 @@ namespace CharacterGen.Generators.Domain.Abilities
 
             foreach (var feat in featGrantingSkillBonuses)
             {
-                var skillsToReceiveBonus = GetSkillsToReceiveBonuses(feat);
-                var skillHasCircumstantialBonus = skillsToReceiveBonus.Intersect(allSkills).Any() == false;
-
-                if (skillHasCircumstantialBonus == false)
-                {
-                    foreach (var skill in skillsToReceiveBonus)
-                        if (ability.Skills.ContainsKey(skill))
-                            ability.Skills[skill].Bonus += feat.Strength;
-                }
-                else
+                if (feat.Foci.Any())
                 {
                     foreach (var focus in feat.Foci)
                     {
@@ -69,20 +58,20 @@ namespace CharacterGen.Generators.Domain.Abilities
                         var skill = allSkills.First(s => focus.StartsWith(s));
 
                         if (ability.Skills.ContainsKey(skill))
-                            ability.Skills[skill].CircumstantialBonus = true;
+                            ability.Skills[skill].CircumstantialBonus |= allSkills.Contains(focus) == false;
                     }
+                }
+                else
+                {
+                    var skillsToReceiveBonus = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, feat.Name);
+
+                    foreach (var skill in skillsToReceiveBonus)
+                        if (ability.Skills.ContainsKey(skill))
+                            ability.Skills[skill].Bonus += feat.Strength;
                 }
             }
 
             return ability;
-        }
-
-        private IEnumerable<String> GetSkillsToReceiveBonuses(Feat feat)
-        {
-            if (feat.Foci.Any() == false)
-                return collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, feat.Name);
-
-            return feat.Foci;
         }
     }
 }
