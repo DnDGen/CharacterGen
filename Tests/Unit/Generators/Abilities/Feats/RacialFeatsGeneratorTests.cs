@@ -26,8 +26,8 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         private List<RacialFeatSelection> baseRaceFeats;
         private List<RacialFeatSelection> metaraceFeats;
         private List<RacialFeatSelection> speciesFeats;
-        private Dictionary<String, Skill> skills;
-        private Dictionary<String, Stat> stats;
+        private Dictionary<string, Skill> skills;
+        private Dictionary<string, Stat> stats;
 
         [SetUp]
         public void Setup()
@@ -42,8 +42,8 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             baseRaceFeats = new List<RacialFeatSelection>();
             metaraceFeats = new List<RacialFeatSelection>();
             speciesFeats = new List<RacialFeatSelection>();
-            skills = new Dictionary<String, Skill>();
-            stats = new Dictionary<String, Stat>();
+            skills = new Dictionary<string, Skill>();
+            stats = new Dictionary<string, Stat>();
 
             race.BaseRace = "base race";
             race.Metarace = "metarace";
@@ -210,7 +210,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
 
             race.Size = "size";
 
-            var monsterHitDice = new Dictionary<String, Int32>();
+            var monsterHitDice = new Dictionary<string, int>();
             monsterHitDice[race.BaseRace] = 2;
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice)).Returns(monsterHitDice);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters)).Returns(new[] { race.BaseRace });
@@ -298,6 +298,82 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             Assert.That(baseFeat.Foci, Is.Empty);
             Assert.That(metaFeat.Foci, Is.Empty);
             Assert.That(speciesFeat.Foci, Is.Empty);
+        }
+
+        [Test]
+        public void AddMonsterHitDiceToStrength()
+        {
+            var metaraceFeat = new RacialFeatSelection();
+            metaraceFeat.Feat = "metarace feat";
+            metaraceFeat.Strength = 10;
+            metaraceFeats.Add(metaraceFeat);
+
+            var monsterHitDice = new Dictionary<string, int>();
+            monsterHitDice[race.BaseRace] = 2;
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice)).Returns(monsterHitDice);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters)).Returns(new[] { race.BaseRace });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.AddMonsterHitDiceToStrength)).Returns(new[] { metaraceFeat.Feat });
+
+            var feats = racialFeatsGenerator.GenerateWith(race, skills, stats);
+            var onlyFeat = feats.Single();
+
+            Assert.That(onlyFeat.Name, Is.EqualTo("metarace feat"));
+            Assert.That(onlyFeat.Strength, Is.EqualTo(12));
+        }
+
+        [Test]
+        public void DoNotAddMonsterHitDiceToStrength()
+        {
+            var baseRaceFeatSelection = new RacialFeatSelection();
+            baseRaceFeatSelection.Feat = "different feat";
+            baseRaceFeatSelection.Strength = 2;
+            baseRaceFeats.Add(baseRaceFeatSelection);
+
+            var metaraceFeat = new RacialFeatSelection();
+            metaraceFeat.Feat = "metarace feat";
+            metaraceFeat.Strength = 10;
+            metaraceFeats.Add(metaraceFeat);
+
+            var speciesFeatSelection = new RacialFeatSelection();
+            speciesFeatSelection.Feat = "different feat";
+            speciesFeatSelection.Strength = 3;
+            speciesFeats.Add(speciesFeatSelection);
+
+            var monsterHitDice = new Dictionary<string, int>();
+            monsterHitDice[race.BaseRace] = 2;
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice)).Returns(monsterHitDice);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters)).Returns(new[] { race.BaseRace });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.AddMonsterHitDiceToStrength)).Returns(new[] { "different feat" });
+
+            var feats = racialFeatsGenerator.GenerateWith(race, skills, stats);
+            var first = feats.First();
+            var second = feats.ElementAt(1);
+            var third = feats.Last();
+
+            Assert.That(first.Name, Is.EqualTo("different feat"));
+            Assert.That(first.Strength, Is.EqualTo(2));
+            Assert.That(second.Name, Is.EqualTo("metarace feat"));
+            Assert.That(second.Strength, Is.EqualTo(10));
+            Assert.That(third.Name, Is.EqualTo("different feat"));
+            Assert.That(third.Strength, Is.EqualTo(3));
+        }
+
+        [Test]
+        public void IfNotMonster_Add1ToStrength()
+        {
+            var metaraceFeat = new RacialFeatSelection();
+            metaraceFeat.Feat = "metarace feat";
+            metaraceFeat.Strength = 10;
+            metaraceFeats.Add(metaraceFeat);
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters)).Returns(new[] { "monster" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.AddMonsterHitDiceToStrength)).Returns(new[] { metaraceFeat.Feat });
+
+            var feats = racialFeatsGenerator.GenerateWith(race, skills, stats);
+            var onlyFeat = feats.Single();
+
+            Assert.That(onlyFeat.Name, Is.EqualTo("metarace feat"));
+            Assert.That(onlyFeat.Strength, Is.EqualTo(11));
         }
     }
 }

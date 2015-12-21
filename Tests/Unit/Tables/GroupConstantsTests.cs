@@ -7,6 +7,7 @@ namespace CharacterGen.Tests.Unit.Tables
     [TestFixture]
     public class GroupConstantsTests
     {
+        [TestCase(GroupConstants.AddMonsterHitDiceToStrength, "Add Monster Hit Dice to Strength")]
         [TestCase(GroupConstants.Additional, "Additional")]
         [TestCase(GroupConstants.All, "All")]
         [TestCase(GroupConstants.ArmorCheckPenalty, "ArmorCheckPenalty")]

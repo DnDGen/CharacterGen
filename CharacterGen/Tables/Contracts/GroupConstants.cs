@@ -1,46 +1,45 @@
-﻿using System;
-
-namespace CharacterGen.Tables
+﻿namespace CharacterGen.Tables
 {
     public static class GroupConstants
     {
-        public const String Additional = "Additional";
-        public const String All = "All";
-        public const String ArmorCheckPenalty = "ArmorCheckPenalty";
-        public const String AverageBaseAttack = "Average Base Attack";
-        public const String CharacterClasses = "CharacterClasses";
-        public const String Deflection = "Deflection";
-        public const String FavoredEnemies = "Favored Enemies";
-        public const String FighterBonusFeats = "FighterBonusFeats";
-        public const String Genetic = "Genetic";
-        public const String GoodBaseAttack = "Good Base Attack";
-        public const String HasClassRequirements = "HasClassRequirements";
-        public const String HasSkillRequirements = "HasSkillRequirements";
-        public const String HasStatRequirements = "HasStatRequirements";
-        public const String Healers = "Healers";
-        public const String Initiative = "Initiative";
-        public const String Intuitive = "Intuitive";
-        public const String Knowledge = "Knowledge";
-        public const String Lycanthrope = "Lycanthrope";
-        public const String Mages = "Mages";
-        public const String ManualCrossbows = "Manual Crossbows";
-        public const String Monsters = "Monsters";
-        public const String NaturalArmor = "NaturalArmor";
-        public const String NeedsAmmunition = "Needs Ammunition";
-        public const String Proficiency = "Proficiency";
-        public const String SavingThrows = "Saving Throws";
-        public const String SchoolsOfMagic = "Schools of Magic";
-        public const String SelfTaught = "Self-Taught";
-        public const String Size = "Size";
-        public const String Skills = "Skills";
-        public const String Spellcasters = "Spellcasters";
-        public const String Standard = "Standard";
-        public const String Stealth = "Stealth";
-        public const String TakenMultipleTimes = "TakenMultipleTimes";
-        public const String Trained = "Trained";
-        public const String TwoHanded = "Two-Handed";
-        public const String Undead = "Undead";
-        public const String Warriors = "Warriors";
-        public const String WizardBonusFeats = "WizardBonusFeats";
+        public const string AddMonsterHitDiceToStrength = "Add Monster Hit Dice to Strength";
+        public const string Additional = "Additional";
+        public const string All = "All";
+        public const string ArmorCheckPenalty = "ArmorCheckPenalty";
+        public const string AverageBaseAttack = "Average Base Attack";
+        public const string CharacterClasses = "CharacterClasses";
+        public const string Deflection = "Deflection";
+        public const string FavoredEnemies = "Favored Enemies";
+        public const string FighterBonusFeats = "FighterBonusFeats";
+        public const string Genetic = "Genetic";
+        public const string GoodBaseAttack = "Good Base Attack";
+        public const string HasClassRequirements = "HasClassRequirements";
+        public const string HasSkillRequirements = "HasSkillRequirements";
+        public const string HasStatRequirements = "HasStatRequirements";
+        public const string Healers = "Healers";
+        public const string Initiative = "Initiative";
+        public const string Intuitive = "Intuitive";
+        public const string Knowledge = "Knowledge";
+        public const string Lycanthrope = "Lycanthrope";
+        public const string Mages = "Mages";
+        public const string ManualCrossbows = "Manual Crossbows";
+        public const string Monsters = "Monsters";
+        public const string NaturalArmor = "NaturalArmor";
+        public const string NeedsAmmunition = "Needs Ammunition";
+        public const string Proficiency = "Proficiency";
+        public const string SavingThrows = "Saving Throws";
+        public const string SchoolsOfMagic = "Schools of Magic";
+        public const string SelfTaught = "Self-Taught";
+        public const string Size = "Size";
+        public const string Skills = "Skills";
+        public const string Spellcasters = "Spellcasters";
+        public const string Standard = "Standard";
+        public const string Stealth = "Stealth";
+        public const string TakenMultipleTimes = "TakenMultipleTimes";
+        public const string Trained = "Trained";
+        public const string TwoHanded = "Two-Handed";
+        public const string Undead = "Undead";
+        public const string Warriors = "Warriors";
+        public const string WizardBonusFeats = "WizardBonusFeats";
     }
 }

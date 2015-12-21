@@ -18,6 +18,10 @@
         <name>Abjuration</name>
         <item>Skill Bonus</item>
     </object>
+  <object>
+    <name>Add Monster Hit Dice to Strength</name>
+    <item>Spell Resistance</item>
+  </object>
     <object>
         <name>Additional</name>
         <item>Acrobatic</item>

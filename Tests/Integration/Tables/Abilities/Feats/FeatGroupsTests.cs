@@ -139,13 +139,16 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
                 SavingThrowConstants.Will,
                 GroupConstants.SavingThrows,
                 GroupConstants.Initiative,
-                AttributeConstants.Shield + GroupConstants.Proficiency
+                AttributeConstants.Shield + GroupConstants.Proficiency,
+                GroupConstants.AddMonsterHitDiceToStrength
             };
 
             AssertCollectionNames(names);
         }
 
         [TestCase("")]
+        [TestCase(GroupConstants.AddMonsterHitDiceToStrength,
+            FeatConstants.SpellResistance)]
         [TestCase(GroupConstants.HasSkillRequirements,
             FeatConstants.MountedArchery,
             FeatConstants.MountedCombat,

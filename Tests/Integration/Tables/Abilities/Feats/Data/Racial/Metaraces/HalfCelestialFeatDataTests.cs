@@ -136,7 +136,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial.Meta
             0, 0)]
         [TestCase(FeatConstants.SpellResistance,
             FeatConstants.SpellResistance,
-            "Add creature's monster hit dice to strength (non-monsters add only 1)",
+            "",
             0,
             "",
             0,
