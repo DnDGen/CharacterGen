@@ -28,7 +28,46 @@
     <item>0</item>
   </object>
   <object>
-    <name>Spell-Like Ability</name>
+    <name>Skill BonusBluffDetect thoughts</name>
+    <item>Skill Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>4</item>
+    <item>Bluff (when reading minds)</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Skill BonusDisguiseDetect thoughts</name>
+    <item>Skill Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>4</item>
+    <item>Disguise (when reading minds)</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Skill BonusDisguiseChange Shape</name>
+    <item>Skill Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>10</item>
+    <item>Disguise (when using Change Shape)</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Spell-Like AbilityDetect thoughts</name>
     <item>Spell-Like Ability</item>
     <item></item>
     <item>0</item>

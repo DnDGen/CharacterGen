@@ -11,9 +11,9 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial.Base
     [TestFixture]
     public class DoppelgangerFeatDataTests : RacialFeatDataTests
     {
-        protected override String tableName
+        protected override string tableName
         {
-            get { return String.Format(TableNameConstants.Formattable.Collection.RACEFeatData, RaceConstants.BaseRaces.Doppelganger); }
+            get { return string.Format(TableNameConstants.Formattable.Collection.RACEFeatData, RaceConstants.BaseRaces.Doppelganger); }
         }
 
         [Test]
@@ -23,9 +23,12 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial.Base
             {
                 FeatConstants.SkillBonus + SkillConstants.Bluff,
                 FeatConstants.SkillBonus + SkillConstants.Disguise,
+                FeatConstants.SkillBonus + SkillConstants.Disguise + FeatConstants.ChangeShape,
+                FeatConstants.SkillBonus + SkillConstants.Bluff + SpellConstants.DetectThoughts,
+                FeatConstants.SkillBonus + SkillConstants.Disguise + SpellConstants.DetectThoughts,
                 FeatConstants.Darkvision,
                 FeatConstants.NaturalArmor,
-                FeatConstants.SpellLikeAbility,
+                FeatConstants.SpellLikeAbility + SpellConstants.DetectThoughts,
                 FeatConstants.ChangeShape,
                 FeatConstants.ImmuneToEffect + "Sleep",
                 FeatConstants.ImmuneToEffect + "Charm"
@@ -52,6 +55,33 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial.Base
             "",
             4,
             0, 0)]
+        [TestCase(FeatConstants.SkillBonus + SkillConstants.Disguise + FeatConstants.ChangeShape,
+            FeatConstants.SkillBonus,
+            SkillConstants.Disguise + " (when using Change Shape)",
+            0,
+            "",
+            0,
+            "",
+            10,
+            0, 0)]
+        [TestCase(FeatConstants.SkillBonus + SkillConstants.Bluff + SpellConstants.DetectThoughts,
+            FeatConstants.SkillBonus,
+            SkillConstants.Bluff + " (when reading minds)",
+            0,
+            "",
+            0,
+            "",
+            4,
+            0, 0)]
+        [TestCase(FeatConstants.SkillBonus + SkillConstants.Disguise + SpellConstants.DetectThoughts,
+            FeatConstants.SkillBonus,
+            SkillConstants.Disguise + " (when reading minds)",
+            0,
+            "",
+            0,
+            "",
+            4,
+            0, 0)]
         [TestCase(FeatConstants.Darkvision,
             FeatConstants.Darkvision,
             "",
@@ -70,7 +100,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial.Base
             "",
             4,
             0, 0)]
-        [TestCase(FeatConstants.SpellLikeAbility,
+        [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.DetectThoughts,
             FeatConstants.SpellLikeAbility,
             SpellConstants.DetectThoughts,
             0,

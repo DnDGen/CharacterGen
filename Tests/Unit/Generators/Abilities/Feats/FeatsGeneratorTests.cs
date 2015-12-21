@@ -10,7 +10,6 @@ using CharacterGen.Selectors;
 using CharacterGen.Tables;
 using Moq;
 using NUnit.Framework;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -26,8 +25,8 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         private Mock<ICollectionsSelector> mockCollectionsSelector;
         private CharacterClass characterClass;
         private Race race;
-        private Dictionary<String, Stat> stats;
-        private Dictionary<String, Skill> skills;
+        private Dictionary<string, Stat> stats;
+        private Dictionary<string, Skill> skills;
         private BaseAttack baseAttack;
         private List<Feat> racialFeats;
 
@@ -43,8 +42,8 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
 
             characterClass = new CharacterClass();
             race = new Race();
-            stats = new Dictionary<String, Stat>();
-            skills = new Dictionary<String, Skill>();
+            stats = new Dictionary<string, Stat>();
+            skills = new Dictionary<string, Skill>();
             baseAttack = new BaseAttack();
             racialFeats = new List<Feat>();
 
@@ -763,6 +762,40 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             Assert.That(onlyFeat.Foci, Contains.Item("focus 4"));
             Assert.That(onlyFeat.Foci.Count(), Is.EqualTo(4));
             Assert.That(onlyFeat.Strength, Is.EqualTo(9266));
+        }
+
+        [Test]
+        public void DoNotCombineFociIfFociIntersect()
+        {
+            racialFeats.Add(new Feat());
+            racialFeats.Add(new Feat());
+
+            racialFeats[0].Name = "feat1";
+            racialFeats[0].Foci = new[] { "focus 1", "focus 2" };
+            racialFeats[0].Strength = 9266;
+            racialFeats[1].Name = "feat1";
+            racialFeats[1].Foci = new[] { "focus 3", "focus 1" };
+            racialFeats[1].Strength = 9266;
+
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            var first = feats.First();
+            var last = feats.Last();
+
+            Assert.That(first, Is.Not.EqualTo(last));
+
+            Assert.That(first.Name, Is.EqualTo("feat1"));
+            Assert.That(first.Foci, Contains.Item("focus 2"));
+            Assert.That(first.Foci, Contains.Item("focus 1"));
+            Assert.That(first.Foci.Count(), Is.EqualTo(2));
+            Assert.That(first.Strength, Is.EqualTo(9266));
+
+            Assert.That(last.Name, Is.EqualTo("feat1"));
+            Assert.That(last.Foci, Contains.Item("focus 1"));
+            Assert.That(last.Foci, Contains.Item("focus 3"));
+            Assert.That(last.Foci.Count(), Is.EqualTo(2));
+            Assert.That(last.Strength, Is.EqualTo(9266));
+
+            Assert.That(feats.Count(), Is.EqualTo(2));
         }
 
         [Test]

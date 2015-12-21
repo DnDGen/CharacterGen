@@ -170,4 +170,17 @@
     <item></item>
     <item>0</item>
   </object>
+  <object>
+    <name>Skill BonusSurvival</name>
+    <item>Skill Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>4</item>
+    <item>Survival (when tracking by scent)</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
 </items>

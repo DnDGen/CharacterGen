@@ -14,9 +14,9 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial.Base
     [TestFixture]
     public class ForestGnomeFeatDataTests : RacialFeatDataTests
     {
-        protected override String tableName
+        protected override string tableName
         {
-            get { return String.Format(TableNameConstants.Formattable.Collection.RACEFeatData, RaceConstants.BaseRaces.ForestGnome); }
+            get { return string.Format(TableNameConstants.Formattable.Collection.RACEFeatData, RaceConstants.BaseRaces.ForestGnome); }
         }
 
         [Test]
@@ -39,7 +39,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial.Base
                 FeatConstants.SpellLikeAbility + SpellConstants.GhostSound,
                 FeatConstants.SpellLikeAbility + SpellConstants.Prestidigitation,
                 FeatConstants.SpellLikeAbility + SpellConstants.PassWithoutTrace,
-                FeatConstants.SkillBonus + SkillConstants.Hide
+                FeatConstants.SkillBonus + SkillConstants.Hide,
+                FeatConstants.SkillBonus + SkillConstants.Hide + "Woods"
             };
 
             AssertCollectionNames(names);
@@ -189,7 +190,16 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial.Base
             "",
             4,
             0, 0)]
-        public override void Data(String name, String feat, String focus, Int32 frequencyQuantity, String frequencyTimePeriod, Int32 minimumHitDiceRequirement, String sizeRequirement, Int32 strength, Int32 maximumHitDiceRequirement, Int32 requiredStatMinimumValue, params String[] minimumStats)
+        [TestCase(FeatConstants.SkillBonus + SkillConstants.Hide + "Woods",
+            FeatConstants.SkillBonus,
+            SkillConstants.Hide + " (in wooded areas)",
+            0,
+            "",
+            0,
+            "",
+            4,
+            0, 0)]
+        public override void Data(string name, string feat, string focus, int frequencyQuantity, string frequencyTimePeriod, int minimumHitDiceRequirement, String sizeRequirement, Int32 strength, Int32 maximumHitDiceRequirement, Int32 requiredStatMinimumValue, params String[] minimumStats)
         {
             base.Data(name, feat, focus, frequencyQuantity, frequencyTimePeriod, minimumHitDiceRequirement, sizeRequirement, strength, maximumHitDiceRequirement, requiredStatMinimumValue, minimumStats);
         }

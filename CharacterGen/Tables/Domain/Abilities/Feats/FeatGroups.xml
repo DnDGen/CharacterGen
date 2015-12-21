@@ -330,9 +330,12 @@
         <name>Doppelganger</name>
         <item>Skill BonusBluff</item>
         <item>Skill BonusDisguise</item>
+      <item>Skill BonusBluffDetect thoughts</item>
+      <item>Skill BonusDisguiseDetect thoughts</item>
+      <item>Skill BonusDisguiseChange Shape</item>
         <item>Darkvision</item>
         <item>Natural Armor</item>
-        <item>Spell-Like Ability</item>
+        <item>Spell-Like AbilityDetect thoughts</item>
         <item>Change Shape</item>
         <item>Immune to EffectSleep</item>
         <item>Immune to EffectCharm</item>
@@ -513,6 +516,7 @@
         <item>Spell-Like AbilityPrestidigitation</item>
         <item>Spell-Like AbilityPass without trace</item>
         <item>Skill BonusHide</item>
+      <item>Skill BonusHideWoods</item>
     </object>
   <object>
     <name>Fortitude</name>
@@ -1201,6 +1205,7 @@
         <item>Spell Resistance</item>
         <item>Spell-Like AbilityNondetection</item>
         <item>Skill BonusHide</item>
+      <item>Skill BonusHideUnderground</item>
         <item>Skill BonusListen</item>
     </object>
     <object>
@@ -1250,6 +1255,7 @@
         <item>Darkvision</item>
         <item>Save BonusFortitude</item>
         <item>Skill BonusHide</item>
+      <item>Skill BonusHideUnderground</item>
         <item>Natural Armor</item>
         <item>Natural WeaponClaw</item>
         <item>Natural WeaponBite</item>
@@ -1375,6 +1381,7 @@
         <item>Skill BonusMove Silently</item>
         <item>Skill BonusBalance</item>
         <item>Skill BonusHide</item>
+      <item>Skill BonusHideGrass</item>
         <item>Skill BonusListen</item>
         <item>Skill BonusSpot</item>
         <item>Alertness</item>
@@ -1389,6 +1396,7 @@
         <item>Track</item>
         <item>Skill BonusListen</item>
         <item>Skill BonusSpot</item>
+      <item>Skill BonusSurvival</item>
         <item>Natural Armor</item>
         <item>Scent</item>
         <item>Low-Light Vision</item>

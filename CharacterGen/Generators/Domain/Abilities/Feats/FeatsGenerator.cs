@@ -7,7 +7,6 @@ using CharacterGen.Common.Races;
 using CharacterGen.Generators.Abilities.Feats;
 using CharacterGen.Selectors;
 using CharacterGen.Tables;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -29,8 +28,8 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
             this.collectionsSelector = collectionsSelector;
         }
 
-        public IEnumerable<Feat> GenerateWith(CharacterClass characterClass, Race race, Dictionary<String, Stat> stats,
-            Dictionary<String, Skill> skills, BaseAttack baseAttack)
+        public IEnumerable<Feat> GenerateWith(CharacterClass characterClass, Race race, Dictionary<string, Stat> stats,
+            Dictionary<string, Skill> skills, BaseAttack baseAttack)
         {
             var racialFeats = racialFeatsGenerator.GenerateWith(race, skills, stats);
             var classFeats = classFeatsGenerator.GenerateWith(characterClass, race, stats, racialFeats, skills);
@@ -41,7 +40,7 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
 
             var featsToCombine = allFeats.Where(f => CanCombine(f, allFeats));
             var featsToRemove = new List<Feat>();
-            var combinedFeatNames = new List<String>();
+            var combinedFeatNames = new List<string>();
 
             foreach (var featToCombine in featsToCombine)
             {
@@ -105,12 +104,12 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
 
             var remainingFeats = allFeats.Except(featsToRemove);
             var featsWithCombinableFoci = remainingFeats.Where(f => CanCombineFoci(f, remainingFeats));
-            var combinedFeatNamesAndStrengths = new Dictionary<String, List<Int32>>();
+            var combinedFeatNamesAndStrengths = new Dictionary<string, List<int>>();
 
             foreach (var featToKeep in featsWithCombinableFoci)
             {
                 if (combinedFeatNamesAndStrengths.ContainsKey(featToKeep.Name) == false)
-                    combinedFeatNamesAndStrengths[featToKeep.Name] = new List<Int32>();
+                    combinedFeatNamesAndStrengths[featToKeep.Name] = new List<int>();
 
                 if (combinedFeatNamesAndStrengths[featToKeep.Name].Contains(featToKeep.Strength))
                     continue;
@@ -120,11 +119,14 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
                 var removableFeats = featsWithCombinableFoci.Where(f => f.Name == featToKeep.Name && f.Strength == featToKeep.Strength);
 
                 foreach (var featToRemove in removableFeats)
+                {
+                    var matchingFoci = featToKeep.Foci.Intersect(featToRemove.Foci);
+                    if (matchingFoci.Any())
+                        continue;
+
                     featToKeep.Foci = featToKeep.Foci.Union(featToRemove.Foci);
-
-                var otherFeats = removableFeats.Except(new[] { featToKeep });
-
-                featsToRemove.AddRange(otherFeats);
+                    featsToRemove.Add(featToRemove);
+                }
             }
 
             allFeats = allFeats.Except(featsToRemove);
@@ -132,22 +134,22 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
             return allFeats;
         }
 
-        private Boolean CanCombineFoci(Feat feat, IEnumerable<Feat> allFeats)
+        private bool CanCombineFoci(Feat feat, IEnumerable<Feat> allFeats)
         {
-            if (feat.Frequency.TimePeriod != String.Empty)
+            if (feat.Frequency.TimePeriod != string.Empty)
                 return false;
 
             var count = allFeats.Count(f => f.Name == feat.Name
                                         && f.Foci.Any() && feat.Foci.Any()
                                         && f.Strength == feat.Strength
-                                        && f.Frequency.TimePeriod == String.Empty);
+                                        && f.Frequency.TimePeriod == string.Empty);
 
             return count > 1;
         }
 
-        private Boolean CanRemoveStrength(Feat feat, IEnumerable<Feat> allFeats)
+        private bool CanRemoveStrength(Feat feat, IEnumerable<Feat> allFeats)
         {
-            if (feat.Frequency.TimePeriod != String.Empty)
+            if (feat.Frequency.TimePeriod != string.Empty)
                 return false;
 
             var featNamesAllowingMultipleTakes = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TakenMultipleTimes);
@@ -156,14 +158,14 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
 
             var count = allFeats.Count(f => f.Name == feat.Name
                                         && f.Foci.Except(feat.Foci).Any() == false
-                                        && f.Frequency.TimePeriod == String.Empty);
+                                        && f.Frequency.TimePeriod == string.Empty);
 
             return count > 1;
         }
 
-        private Boolean CanCombine(Feat feat, IEnumerable<Feat> allFeats)
+        private bool CanCombine(Feat feat, IEnumerable<Feat> allFeats)
         {
-            if (feat.Frequency.TimePeriod == String.Empty)
+            if (feat.Frequency.TimePeriod == string.Empty)
                 return false;
 
             var count = allFeats.Count(f => f.Name == feat.Name
@@ -174,7 +176,7 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
             return count > 1;
         }
 
-        private Boolean FrequenciesCanCombine(Frequency firstFrequency, Frequency secondFrequency)
+        private bool FrequenciesCanCombine(Frequency firstFrequency, Frequency secondFrequency)
         {
             return firstFrequency.TimePeriod == secondFrequency.TimePeriod
                 || firstFrequency.TimePeriod == FeatConstants.Frequencies.AtWill

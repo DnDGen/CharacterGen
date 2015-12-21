@@ -57,8 +57,14 @@ namespace CharacterGen.Generators.Domain.Abilities
 
                         var skill = allSkills.First(s => focus.StartsWith(s));
 
-                        if (ability.Skills.ContainsKey(skill))
-                            ability.Skills[skill].CircumstantialBonus |= allSkills.Contains(focus) == false;
+                        if (ability.Skills.ContainsKey(skill) == false)
+                            continue;
+
+                        var circumstantial = allSkills.Contains(focus) == false;
+                        ability.Skills[skill].CircumstantialBonus |= circumstantial;
+
+                        if (circumstantial == false)
+                            ability.Skills[skill].Bonus += feat.Strength;
                     }
                 }
                 else

@@ -10,9 +10,9 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial.Meta
     [TestFixture]
     public class WeretigerFeatDataTests : RacialFeatDataTests
     {
-        protected override String tableName
+        protected override string tableName
         {
-            get { return String.Format(TableNameConstants.Formattable.Collection.RACEFeatData, RaceConstants.Metaraces.Weretiger); }
+            get { return string.Format(TableNameConstants.Formattable.Collection.RACEFeatData, RaceConstants.Metaraces.Weretiger); }
         }
 
         [Test]
@@ -29,6 +29,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial.Meta
                 FeatConstants.SkillBonus + SkillConstants.MoveSilently,
                 FeatConstants.SkillBonus + SkillConstants.Balance,
                 FeatConstants.SkillBonus + SkillConstants.Hide,
+                FeatConstants.SkillBonus + SkillConstants.Hide + "Grass",
                 FeatConstants.SaveBonus + "Reflex",
                 FeatConstants.SaveBonus + "Fortitude",
                 FeatConstants.SaveBonus + "Will",
@@ -146,6 +147,15 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial.Meta
         [TestCase(FeatConstants.SkillBonus + SkillConstants.Hide,
             FeatConstants.SkillBonus,
             SkillConstants.Hide,
+            0,
+            "",
+            0,
+            "",
+            4,
+            0, 0)]
+        [TestCase(FeatConstants.SkillBonus + SkillConstants.Hide + "Grass",
+            FeatConstants.SkillBonus,
+            SkillConstants.Hide + " (Tall grass or heavy undergrowth)",
             0,
             "",
             0,

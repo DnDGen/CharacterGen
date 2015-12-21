@@ -10,9 +10,9 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial.Meta
     [TestFixture]
     public class WerewolfFeatDataTests : RacialFeatDataTests
     {
-        protected override String tableName
+        protected override string tableName
         {
-            get { return String.Format(TableNameConstants.Formattable.Collection.RACEFeatData, RaceConstants.Metaraces.Werewolf); }
+            get { return string.Format(TableNameConstants.Formattable.Collection.RACEFeatData, RaceConstants.Metaraces.Werewolf); }
         }
 
         [Test]
@@ -27,6 +27,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial.Meta
                 FeatConstants.Track,
                 FeatConstants.SkillBonus + SkillConstants.Listen,
                 FeatConstants.SkillBonus + SkillConstants.Spot,
+                FeatConstants.SkillBonus + SkillConstants.Survival,
                 FeatConstants.SaveBonus + "Fortitude",
                 FeatConstants.SaveBonus + "Reflex",
                 FeatConstants.NaturalArmor,
@@ -100,6 +101,15 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial.Meta
             0,
             "",
             1,
+            0, 0)]
+        [TestCase(FeatConstants.SkillBonus + SkillConstants.Survival,
+            FeatConstants.SkillBonus,
+            SkillConstants.Survival + " (when tracking by scent)",
+            0,
+            "",
+            0,
+            "",
+            4,
             0, 0)]
         [TestCase(FeatConstants.SaveBonus + "Fortitude",
             FeatConstants.SaveBonus,

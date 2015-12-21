@@ -13,9 +13,9 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial.Base
     [TestFixture]
     public class SvirfneblinFeatDataTests : RacialFeatDataTests
     {
-        protected override String tableName
+        protected override string tableName
         {
-            get { return String.Format(TableNameConstants.Formattable.Collection.RACEFeatData, RaceConstants.BaseRaces.Svirfneblin); }
+            get { return string.Format(TableNameConstants.Formattable.Collection.RACEFeatData, RaceConstants.BaseRaces.Svirfneblin); }
         }
 
         [Test]
@@ -38,7 +38,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial.Base
                 FeatConstants.Stonecunning,
                 FeatConstants.SpellResistance,
                 FeatConstants.SpellLikeAbility + SpellConstants.Nondetection,
-                FeatConstants.SkillBonus + SkillConstants.Hide
+                FeatConstants.SkillBonus + SkillConstants.Hide,
+                FeatConstants.SkillBonus + SkillConstants.Hide + "Underground"
             };
 
             AssertCollectionNames(names);
@@ -146,6 +147,15 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial.Base
         [TestCase(FeatConstants.SkillBonus + SkillConstants.Hide,
             FeatConstants.SkillBonus,
             SkillConstants.Hide,
+            0,
+            "",
+            0,
+            "",
+            2,
+            0, 0)]
+        [TestCase(FeatConstants.SkillBonus + SkillConstants.Hide + "Underground",
+            FeatConstants.SkillBonus,
+            SkillConstants.Hide + " (Underground)",
             0,
             "",
             0,

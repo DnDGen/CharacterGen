@@ -16,7 +16,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
     [TestFixture]
     public class FeatGroupsTests : CollectionTests
     {
-        protected override String tableName
+        protected override string tableName
         {
             get { return TableNameConstants.Set.Collection.FeatGroups; }
         }
@@ -257,7 +257,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
         [TestCase(AttributeConstants.Shield + GroupConstants.Proficiency,
             FeatConstants.ShieldProficiency,
             FeatConstants.TowerShieldProficiency)]
-        public override void DistinctCollection(String name, params String[] collection)
+        public override void DistinctCollection(string name, params string[] collection)
         {
             base.DistinctCollection(name, collection);
         }
@@ -441,7 +441,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.SkillBonus)]
         [TestCase(CharacterClassConstants.Schools.Transmutation,
             FeatConstants.SkillBonus)]
-        public void ClassFeatGroup(String name, params String[] collection)
+        public void ClassFeatGroup(string name, params string[] collection)
         {
             base.DistinctCollection(name, collection);
         }
@@ -455,9 +455,9 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.Resistance + FeatConstants.Foci.Cold,
             FeatConstants.Resistance + FeatConstants.Foci.Electricity)]
         [TestCase(RaceConstants.BaseRaces.Bugbear,
-            FeatConstants.SaveBonus + "Fortitude",
-            FeatConstants.SaveBonus + "Will",
-            FeatConstants.SaveBonus + "Reflex",
+            FeatConstants.SaveBonus + SavingThrowConstants.Fortitude,
+            FeatConstants.SaveBonus + SavingThrowConstants.Will,
+            FeatConstants.SaveBonus + SavingThrowConstants.Reflex,
             FeatConstants.NaturalArmor,
             FeatConstants.SkillBonus + SkillConstants.MoveSilently,
             FeatConstants.Darkvision,
@@ -497,16 +497,19 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
         [TestCase(RaceConstants.BaseRaces.Doppelganger,
             FeatConstants.SkillBonus + SkillConstants.Bluff,
             FeatConstants.SkillBonus + SkillConstants.Disguise,
+            FeatConstants.SkillBonus + SkillConstants.Disguise + FeatConstants.ChangeShape,
+            FeatConstants.SkillBonus + SkillConstants.Bluff + SpellConstants.DetectThoughts,
+            FeatConstants.SkillBonus + SkillConstants.Disguise + SpellConstants.DetectThoughts,
             FeatConstants.Darkvision,
             FeatConstants.NaturalArmor,
-            FeatConstants.SpellLikeAbility,
+            FeatConstants.SpellLikeAbility + SpellConstants.DetectThoughts,
             FeatConstants.ChangeShape,
             FeatConstants.ImmuneToEffect + "Sleep",
             FeatConstants.ImmuneToEffect + "Charm")]
         [TestCase(RaceConstants.BaseRaces.Drow,
             FeatConstants.ImmuneToEffect,
             FeatConstants.SaveBonus,
-            FeatConstants.SaveBonus + "Will",
+            FeatConstants.SaveBonus + SavingThrowConstants.Will,
             FeatConstants.Darkvision,
             FeatConstants.MartialWeaponProficiency + WeaponConstants.HandCrossbow,
             FeatConstants.MartialWeaponProficiency + WeaponConstants.Rapier,
@@ -555,7 +558,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.SpellLikeAbility + SpellConstants.GhostSound,
             FeatConstants.SpellLikeAbility + SpellConstants.Prestidigitation,
             FeatConstants.SpellLikeAbility + SpellConstants.PassWithoutTrace,
-            FeatConstants.SkillBonus + SkillConstants.Hide)]
+            FeatConstants.SkillBonus + SkillConstants.Hide,
+            FeatConstants.SkillBonus + SkillConstants.Hide + "Woods")]
         [TestCase(RaceConstants.BaseRaces.Gnoll,
             FeatConstants.Darkvision,
             FeatConstants.NaturalArmor)]
@@ -731,7 +735,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.Stonecunning,
             FeatConstants.SpellResistance,
             FeatConstants.SpellLikeAbility + SpellConstants.Nondetection,
-            FeatConstants.SkillBonus + SkillConstants.Hide)]
+            FeatConstants.SkillBonus + SkillConstants.Hide,
+            FeatConstants.SkillBonus + SkillConstants.Hide + "Underground")]
         [TestCase(RaceConstants.BaseRaces.TallfellowHalfling,
             FeatConstants.SaveBonus + "All",
             FeatConstants.SaveBonus + "Fear",
@@ -750,8 +755,9 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.Resistance + FeatConstants.Foci.Fire)]
         [TestCase(RaceConstants.BaseRaces.Troglodyte,
             FeatConstants.Darkvision,
-            FeatConstants.SaveBonus + "Fortitude",
+            FeatConstants.SaveBonus + SavingThrowConstants.Fortitude,
             FeatConstants.SkillBonus + SkillConstants.Hide,
+            FeatConstants.SkillBonus + SkillConstants.Hide + "Underground",
             FeatConstants.NaturalArmor,
             FeatConstants.NaturalWeapon + "Claw",
             FeatConstants.NaturalWeapon + "Bite",
@@ -762,9 +768,9 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.Lycanthropy,
             FeatConstants.ImprovedGrab,
             FeatConstants.SkillBonus + SkillConstants.Swim,
-            FeatConstants.SaveBonus + "Reflex",
-            FeatConstants.SaveBonus + "Fortitude",
-            FeatConstants.SaveBonus + "Will",
+            FeatConstants.SaveBonus + SavingThrowConstants.Reflex,
+            FeatConstants.SaveBonus + SavingThrowConstants.Fortitude,
+            FeatConstants.SaveBonus + SavingThrowConstants.Will,
             FeatConstants.NaturalArmor,
             FeatConstants.IronWill,
             FeatConstants.Track,
@@ -777,9 +783,9 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.Empathy,
             FeatConstants.Lycanthropy,
             FeatConstants.Ferocity,
-            FeatConstants.SaveBonus + "Reflex",
-            FeatConstants.SaveBonus + "Fortitude",
-            FeatConstants.SaveBonus + "Will",
+            FeatConstants.SaveBonus + SavingThrowConstants.Reflex,
+            FeatConstants.SaveBonus + SavingThrowConstants.Fortitude,
+            FeatConstants.SaveBonus + SavingThrowConstants.Will,
             FeatConstants.SkillBonus + SkillConstants.Listen,
             FeatConstants.SkillBonus + SkillConstants.Spot,
             FeatConstants.NaturalArmor,
@@ -809,9 +815,10 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.SkillBonus + SkillConstants.MoveSilently,
             FeatConstants.SkillBonus + SkillConstants.Balance,
             FeatConstants.SkillBonus + SkillConstants.Hide,
-            FeatConstants.SaveBonus + "Reflex",
-            FeatConstants.SaveBonus + "Fortitude",
-            FeatConstants.SaveBonus + "Will",
+            FeatConstants.SkillBonus + SkillConstants.Hide + "Grass",
+            FeatConstants.SaveBonus + SavingThrowConstants.Reflex,
+            FeatConstants.SaveBonus + SavingThrowConstants.Fortitude,
+            FeatConstants.SaveBonus + SavingThrowConstants.Will,
             FeatConstants.SkillBonus + SkillConstants.Listen,
             FeatConstants.SkillBonus + SkillConstants.Spot,
             FeatConstants.Alertness,
@@ -827,12 +834,13 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.Track,
             FeatConstants.SkillBonus + SkillConstants.Listen,
             FeatConstants.SkillBonus + SkillConstants.Spot,
-            FeatConstants.SaveBonus + "Fortitude",
-            FeatConstants.SaveBonus + "Reflex",
+            FeatConstants.SaveBonus + SavingThrowConstants.Fortitude,
+            FeatConstants.SaveBonus + SavingThrowConstants.Reflex,
             FeatConstants.NaturalArmor,
             FeatConstants.Trip,
             FeatConstants.LowLightVision,
-            FeatConstants.Scent)]
+            FeatConstants.Scent,
+            FeatConstants.SkillBonus + SkillConstants.Survival)]
         [TestCase(RaceConstants.Metaraces.Ghost,
             FeatConstants.CorruptingGaze,
             FeatConstants.CorruptingTouch,
@@ -998,7 +1006,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
         [Test]
         public void DruidFeatGroup()
         {
-            var featIds = new[]
+            var featNames = new[]
             {
                 FeatConstants.SimpleWeaponProficiency + WeaponConstants.Quarterstaff,
                 FeatConstants.SimpleWeaponProficiency + WeaponConstants.Dagger,
@@ -1036,17 +1044,17 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
                 FeatConstants.TimelessBody
             };
 
-            base.DistinctCollection(CharacterClassConstants.Druid, featIds);
+            base.DistinctCollection(CharacterClassConstants.Druid, featNames);
         }
 
         [Test]
         public void MindFlayerFeatGroup()
         {
-            var featIds = new[]
+            var featNames = new[]
             {
-                FeatConstants.SaveBonus + "Will",
-                FeatConstants.SaveBonus + "Fortitude",
-                FeatConstants.SaveBonus + "Reflex",
+                FeatConstants.SaveBonus + SavingThrowConstants.Will,
+                FeatConstants.SaveBonus + SavingThrowConstants.Fortitude,
+                FeatConstants.SaveBonus + SavingThrowConstants.Reflex,
                 FeatConstants.NaturalArmor,
                 FeatConstants.SkillBonus + SkillConstants.Bluff,
                 FeatConstants.SkillBonus + SkillConstants.Concentration,
@@ -1068,13 +1076,13 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
                 FeatConstants.Extract
             };
 
-            base.DistinctCollection(RaceConstants.BaseRaces.MindFlayer, featIds);
+            base.DistinctCollection(RaceConstants.BaseRaces.MindFlayer, featNames);
         }
 
         [Test]
         public void HalfFiendFeatGroup()
         {
-            var featIds = new[]
+            var featNames = new[]
             {
                 FeatConstants.NaturalArmor,
                 FeatConstants.NaturalWeapon + "Claw",
@@ -1102,13 +1110,13 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
                 FeatConstants.SpellResistance
             };
 
-            base.DistinctCollection(RaceConstants.Metaraces.HalfFiend, featIds);
+            base.DistinctCollection(RaceConstants.Metaraces.HalfFiend, featNames);
         }
 
         [Test]
         public void RangerFeatGroup()
         {
-            var featIds = new[]
+            var featNames = new[]
             {
                 FeatConstants.SimpleWeaponProficiency,
                 FeatConstants.MartialWeaponProficiency,
@@ -1138,13 +1146,13 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
                 FeatConstants.GreaterTwoWeaponFighting + CharacterClassConstants.Ranger
             };
 
-            base.DistinctCollection(CharacterClassConstants.Ranger, featIds);
+            base.DistinctCollection(CharacterClassConstants.Ranger, featNames);
         }
 
         [Test]
         public void MonkFeatGroup()
         {
-            var featIds = new[]
+            var featNames = new[]
             {
                 FeatConstants.SimpleWeaponProficiency + WeaponConstants.Club,
                 FeatConstants.SimpleWeaponProficiency + WeaponConstants.HeavyCrossbow,
@@ -1226,13 +1234,13 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
                 FeatConstants.PerfectSelf
             };
 
-            base.DistinctCollection(CharacterClassConstants.Monk, featIds);
+            base.DistinctCollection(CharacterClassConstants.Monk, featNames);
         }
 
         [Test]
         public void HalfCelestialFeatGroup()
         {
-            var featIds = new[]
+            var featNames = new[]
             {
                 FeatConstants.SpellLikeAbility + SpellConstants.Daylight,
                 FeatConstants.SmiteEvil,
@@ -1263,13 +1271,13 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
                 FeatConstants.SaveBonus
             };
 
-            base.DistinctCollection(RaceConstants.Metaraces.HalfCelestial, featIds);
+            base.DistinctCollection(RaceConstants.Metaraces.HalfCelestial, featNames);
         }
 
         [Test]
         public void BarbarianFeatGroup()
         {
-            var featIds = new[]
+            var featNames = new[]
             {
                 FeatConstants.SimpleWeaponProficiency,
                 FeatConstants.MartialWeaponProficiency,
@@ -1303,13 +1311,13 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
                 FeatConstants.MightyRage
             };
 
-            base.DistinctCollection(CharacterClassConstants.Barbarian, featIds);
+            base.DistinctCollection(CharacterClassConstants.Barbarian, featNames);
         }
 
         [Test]
         public void BardFeatGroup()
         {
-            var featIds = new[]
+            var featNames = new[]
             {
                 FeatConstants.SimpleWeaponProficiency,
                 FeatConstants.MartialWeaponProficiency + WeaponConstants.Longsword,
@@ -1355,13 +1363,13 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
                 FeatConstants.MassSuggestion
             };
 
-            base.DistinctCollection(CharacterClassConstants.Bard, featIds);
+            base.DistinctCollection(CharacterClassConstants.Bard, featNames);
         }
 
         [Test]
         public void RogueFeatGroup()
         {
-            var featIds = new[]
+            var featNames = new[]
             {
                 FeatConstants.SneakAttack + "1",
                 FeatConstants.SneakAttack + "2",
@@ -1392,13 +1400,13 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
                 FeatConstants.LightArmorProficiency
             };
 
-            base.DistinctCollection(CharacterClassConstants.Rogue, featIds);
+            base.DistinctCollection(CharacterClassConstants.Rogue, featNames);
         }
 
         [Test]
         public void AdditionalFeatGroup()
         {
-            var featIds = new[]
+            var featNames = new[]
             {
                 FeatConstants.Acrobatic,
                 FeatConstants.Agile,
@@ -1511,7 +1519,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
                 FeatConstants.WidenSpell
             };
 
-            base.DistinctCollection(GroupConstants.Additional, featIds);
+            base.DistinctCollection(GroupConstants.Additional, featNames);
         }
 
         [TestCase(CharacterClassConstants.Ranger,
@@ -1520,7 +1528,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
         [TestCase(CharacterClassConstants.Ranger,
             FeatConstants.CombatStyleMastery,
             FeatConstants.ImprovedCombatStyle)]
-        public void FeatGroupDependency(String name, String feat, String dependencyFeat)
+        public void FeatGroupDependency(string name, string feat, string dependencyFeat)
         {
             var collection = table[name].ToList();
             var featIndex = collection.IndexOf(feat);
