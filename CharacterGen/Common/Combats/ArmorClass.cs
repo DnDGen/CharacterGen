@@ -1,11 +1,10 @@
-﻿using System;
-
-namespace CharacterGen.Common.Combats
+﻿namespace CharacterGen.Common.Combats
 {
     public class ArmorClass
     {
-        public Int32 Full { get; set; }
-        public Int32 Touch { get; set; }
-        public Int32 FlatFooted { get; set; }
+        public int Full { get; set; }
+        public int Touch { get; set; }
+        public int FlatFooted { get; set; }
+        public bool CircumstantialBonus { get; set; }
     }
 }

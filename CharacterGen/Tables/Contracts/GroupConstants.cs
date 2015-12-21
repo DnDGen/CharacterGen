@@ -9,6 +9,7 @@
         public const string AverageBaseAttack = "Average Base Attack";
         public const string CharacterClasses = "CharacterClasses";
         public const string Deflection = "Deflection";
+        public const string DodgeBonus = "Dodge Bonus";
         public const string FavoredEnemies = "Favored Enemies";
         public const string FighterBonusFeats = "FighterBonusFeats";
         public const string Genetic = "Genetic";

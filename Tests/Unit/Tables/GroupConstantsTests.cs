@@ -14,6 +14,7 @@ namespace CharacterGen.Tests.Unit.Tables
         [TestCase(GroupConstants.AverageBaseAttack, "Average Base Attack")]
         [TestCase(GroupConstants.CharacterClasses, "CharacterClasses")]
         [TestCase(GroupConstants.Deflection, "Deflection")]
+        [TestCase(GroupConstants.DodgeBonus, "Dodge Bonus")]
         [TestCase(GroupConstants.FighterBonusFeats, "FighterBonusFeats")]
         [TestCase(GroupConstants.FavoredEnemies, "Favored Enemies")]
         [TestCase(GroupConstants.Genetic, "Genetic")]

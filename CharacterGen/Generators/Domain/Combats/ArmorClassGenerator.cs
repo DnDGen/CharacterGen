@@ -28,13 +28,46 @@ namespace CharacterGen.Generators.Domain.Combats
             var sizeModifier = GetSizeModifier(race);
             var deflectionBonus = GetDeflectionBonus(equipment.Treasure.Items);
             var naturalArmorBonus = GetNaturalArmorBonus(equipment.Treasure.Items, feats, race);
+            var dodgeBonus = GetDodgeBonus(feats);
 
             var armorClass = new ArmorClass();
-            armorClass.Full = 10 + armorBonuses + sizeModifier + deflectionBonus + naturalArmorBonus + adjustedDexterityBonus;
+            armorClass.Full = 10 + armorBonuses + sizeModifier + deflectionBonus + naturalArmorBonus + adjustedDexterityBonus + dodgeBonus;
             armorClass.Touch = armorClass.Full - armorBonuses - naturalArmorBonus;
-            armorClass.FlatFooted = armorClass.Full - adjustedDexterityBonus;
+            armorClass.FlatFooted = armorClass.Full - adjustedDexterityBonus - dodgeBonus;
+
+            var circumstantialDodgeBonus = IsDodgeBonusCircumstantial(feats);
+            var circumstantialNaturalArmorBonus = IsNaturalArmorBonusCircumstantial(feats);
+
+            armorClass.CircumstantialBonus = circumstantialDodgeBonus || circumstantialNaturalArmorBonus;
 
             return armorClass;
+        }
+
+        private bool IsNaturalArmorBonusCircumstantial(IEnumerable<Feat> feats)
+        {
+            var thingsThatGrantNaturalArmorBonuses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.NaturalArmor);
+            var featsWithNaturalArmorBonuses = feats.Where(f => thingsThatGrantNaturalArmorBonuses.Contains(f.Name));
+
+            return featsWithNaturalArmorBonuses.Any(f => f.Foci.Any());
+        }
+
+        private bool IsDodgeBonusCircumstantial(IEnumerable<Feat> feats)
+        {
+            var deflectionBonuses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.DodgeBonus);
+            var featsWithDeflectionBonuses = feats.Where(f => deflectionBonuses.Contains(f.Name));
+
+            return featsWithDeflectionBonuses.Any(f => f.Foci.Any());
+        }
+
+        private int GetDodgeBonus(IEnumerable<Feat> feats)
+        {
+            var deflectionBonuses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.DodgeBonus);
+            var featsWithDeflectionBonuses = feats.Where(f => deflectionBonuses.Contains(f.Name) && f.Foci.Any() == false);
+
+            if (featsWithDeflectionBonuses.Any() == false)
+                return 0;
+
+            return featsWithDeflectionBonuses.Sum(i => i.Strength);
         }
 
         private int GetArmorBonuses(Equipment equipment)

@@ -20,6 +20,7 @@ namespace CharacterGen.Tests.Unit.Common.Combats
             Assert.That(armorClass.FlatFooted, Is.EqualTo(0));
             Assert.That(armorClass.Full, Is.EqualTo(0));
             Assert.That(armorClass.Touch, Is.EqualTo(0));
+            Assert.That(armorClass.CircumstantialBonus, Is.False);
         }
     }
 }

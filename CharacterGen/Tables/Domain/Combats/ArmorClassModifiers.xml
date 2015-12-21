@@ -6,6 +6,11 @@
     <item>Ring of Protection</item>
   </object>
   <object>
+    <name>Dodge Bonus</name>
+    <item>Dodge</item>
+    <item>Dodge Bonus</item>
+  </object>
+  <object>
     <name>NaturalArmor</name>
     <item>Amulet of natural armor</item>
     <item>Armor Bonus</item>

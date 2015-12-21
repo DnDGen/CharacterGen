@@ -7,7 +7,6 @@ using CharacterGen.Selectors;
 using CharacterGen.Tables;
 using Moq;
 using NUnit.Framework;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using TreasureGen.Common.Items;
@@ -38,14 +37,14 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             adjustedDexterityBonus = 0;
             race = new Race();
 
-            armorBonuses[String.Empty] = 0;
+            armorBonuses[string.Empty] = 0;
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.ArmorBonuses)).Returns(armorBonuses);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.Size))
-                .Returns(Enumerable.Empty<String>());
+                .Returns(Enumerable.Empty<string>());
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.NaturalArmor))
-                .Returns(Enumerable.Empty<String>());
+                .Returns(Enumerable.Empty<string>());
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.Deflection))
-                .Returns(Enumerable.Empty<String>());
+                .Returns(Enumerable.Empty<string>());
         }
 
         [Test]
@@ -54,12 +53,13 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             AssertArmorClass(10, 10, 10);
         }
 
-        private void AssertArmorClass(int flatFooted, int full, int touch)
+        private void AssertArmorClass(int flatFooted, int full, int touch, bool circumstantial = false)
         {
             var armorClass = armorClassGenerator.GenerateWith(equipment, adjustedDexterityBonus, feats, race);
             Assert.That(armorClass.FlatFooted, Is.EqualTo(flatFooted), "flat-footed");
             Assert.That(armorClass.Full, Is.EqualTo(full), "full");
             Assert.That(armorClass.Touch, Is.EqualTo(touch), "touch");
+            Assert.That(armorClass.CircumstantialBonus, Is.EqualTo(circumstantial));
         }
 
         [Test]
@@ -225,7 +225,41 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         }
 
         [Test]
-        public void DoNotApplyNaturalArmorBonusesIfTheyHaveQualifications()
+        public void IfNaturalArmorHasCircumstantialArmorBonus_MarkCircumstantialBonus()
+        {
+            feats.Add(new Feat());
+            feats.Add(new Feat());
+            feats[0].Name = "feat 1";
+            feats[0].Strength = 1;
+            feats[1].Name = "feat 2";
+            feats[1].Foci = new[] { "focus" };
+            feats[1].Strength = 1;
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.NaturalArmor))
+                .Returns(new[] { "feat 1", "feat 2", "other feat" });
+
+            AssertArmorClass(11, 11, 10, true);
+        }
+
+        [Test]
+        public void DoNotOverwriteCircumstantialBonus()
+        {
+            feats.Add(new Feat());
+            feats.Add(new Feat());
+            feats[0].Name = "feat 1";
+            feats[0].Foci = new[] { "focus" };
+            feats[0].Strength = 1;
+            feats[1].Name = "feat 2";
+            feats[1].Strength = 1;
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.NaturalArmor))
+                .Returns(new[] { "feat 1", "feat 2", "other feat" });
+
+            AssertArmorClass(11, 11, 10, true);
+        }
+
+        [Test]
+        public void TotalDodgeBonusFromFeatApplied()
         {
             feats.Add(new Feat());
             feats.Add(new Feat());
@@ -233,12 +267,48 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             feats[0].Strength = 1;
             feats[1].Name = "feat 2";
             feats[1].Strength = 1;
-            feats[1].Foci = new[] { "focus" };
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.NaturalArmor))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.DodgeBonus))
                 .Returns(new[] { "feat 1", "feat 2", "other feat" });
 
-            AssertArmorClass(11, 11, 10);
+            AssertArmorClass(10, 12, 12);
+        }
+
+        [Test]
+        public void IfDodgeBonusHasCircumstantialArmorBonus_MarkCircumstantialBonus()
+        {
+            feats.Add(new Feat());
+            feats.Add(new Feat());
+            feats[0].Name = "feat 1";
+            feats[0].Strength = 1;
+            feats[1].Name = "feat 2";
+            feats[1].Foci = new[] { "focus" };
+            feats[1].Strength = 1;
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.DodgeBonus))
+                .Returns(new[] { "feat 1", "feat 2", "other feat" });
+
+            AssertArmorClass(10, 11, 11, true);
+        }
+
+        [Test]
+        public void DoNotOverwriteCircumstantialBonusWithDodgeBonus()
+        {
+            feats.Add(new Feat());
+            feats.Add(new Feat());
+            feats[0].Name = "feat 1";
+            feats[0].Foci = new[] { "focus" };
+            feats[0].Strength = 1;
+            feats[1].Name = "feat 2";
+            feats[1].Strength = 1;
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.NaturalArmor))
+                .Returns(new[] { "feat 1", "other feat" });
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.DodgeBonus))
+                .Returns(new[] { "feat 2", "other feat" });
+
+            AssertArmorClass(10, 11, 11, true);
         }
 
         [Test]
