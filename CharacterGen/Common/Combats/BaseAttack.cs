@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace CharacterGen.Common.Combats
 {
     public class BaseAttack
     {
-        public Int32 Bonus { get; set; }
+        public int Bonus { get; set; }
+        public bool CircumstantialBonus { get; set; }
 
-        public IEnumerable<Int32> AllBonuses
+        public IEnumerable<int> AllBonuses
         {
             get
             {
-                var bonuses = new List<Int32>();
+                var bonuses = new List<int>();
                 var attackBonus = Bonus;
 
                 do

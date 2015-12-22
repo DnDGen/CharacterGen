@@ -42,7 +42,7 @@ namespace CharacterGen.Generators.Domain.Combats
             return baseAttack;
         }
 
-        private Int32 GetBaseAttackBonus(CharacterClass characterClass)
+        private int GetBaseAttackBonus(CharacterClass characterClass)
         {
             var goodBaseAttacks = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.GoodBaseAttack);
             if (goodBaseAttacks.Contains(characterClass.ClassName))
@@ -55,28 +55,28 @@ namespace CharacterGen.Generators.Domain.Combats
             return GetPoorBaseAttackBonus(characterClass.Level);
         }
 
-        private Int32 GetGoodBaseAttackBonus(Int32 level)
+        private int GetGoodBaseAttackBonus(int level)
         {
             return level;
         }
 
-        private Int32 GetAverageBaseAttackBonus(Int32 level)
+        private int GetAverageBaseAttackBonus(int level)
         {
             return level * 3 / 4;
         }
 
-        private Int32 GetPoorBaseAttackBonus(Int32 level)
+        private int GetPoorBaseAttackBonus(int level)
         {
             return level / 2;
         }
 
-        private Int32 GetRacialBaseAttackAdjustments(Race race)
+        private int GetRacialBaseAttackAdjustments(Race race)
         {
             var racialAdjustments = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.RacialBaseAttackAdjustments);
             return racialAdjustments[race.BaseRace] + racialAdjustments[race.Metarace];
         }
 
-        private Int32 GetSizeAdjustments(Race race)
+        private int GetSizeAdjustments(Race race)
         {
             if (race.Size == RaceConstants.Sizes.Large)
                 return -1;
@@ -91,6 +91,8 @@ namespace CharacterGen.Generators.Domain.Combats
             var combat = new Combat();
 
             combat.BaseAttack = baseAttack;
+            combat.BaseAttack.Bonus += GetBonusFromFeats(feats);
+            combat.BaseAttack.CircumstantialBonus = IsAttackBonusCircumstantial(feats);
             combat.AdjustedDexterityBonus = GetAdjustedDexterityBonus(stats, equipment);
             combat.ArmorClass = armorClassGenerator.GenerateWith(equipment, combat.AdjustedDexterityBonus, feats, race);
             combat.HitPoints = hitPointsGenerator.GenerateWith(characterClass, stats[StatConstants.Constitution].Bonus, race, feats);
@@ -100,7 +102,26 @@ namespace CharacterGen.Generators.Domain.Combats
             return combat;
         }
 
-        private Int32 GetAdjustedDexterityBonus(Dictionary<String, Stat> stats, Equipment equipment)
+        private int GetBonusFromFeats(IEnumerable<Feat> feats)
+        {
+            var attackBonusFeatNames = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, FeatConstants.AttackBonus);
+            var attackBonusFeats = feats.Where(f => attackBonusFeatNames.Contains(f.Name) && f.Foci.Any() == false);
+
+            if (attackBonusFeats.Any() == false)
+                return 0;
+
+            return attackBonusFeats.Sum(f => f.Strength);
+        }
+
+        private bool IsAttackBonusCircumstantial(IEnumerable<Feat> feats)
+        {
+            var attackBonusFeatNames = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, FeatConstants.AttackBonus);
+            var attackBonusFeats = feats.Where(f => attackBonusFeatNames.Contains(f.Name));
+
+            return attackBonusFeats.Any(f => f.Foci.Any());
+        }
+
+        private int GetAdjustedDexterityBonus(Dictionary<string, Stat> stats, Equipment equipment)
         {
             if (equipment.Armor == null)
                 return stats[StatConstants.Dexterity].Bonus;
@@ -114,7 +135,7 @@ namespace CharacterGen.Generators.Domain.Combats
             return Math.Min(stats[StatConstants.Dexterity].Bonus, armorBonus);
         }
 
-        private Int32 GetInitiativeBonus(Int32 dexterityBonus, IEnumerable<Feat> feats)
+        private int GetInitiativeBonus(int dexterityBonus, IEnumerable<Feat> feats)
         {
             var initiativeFeatNames = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.Initiative);
             var initiativeFeats = feats.Where(f => initiativeFeatNames.Contains(f.Name));

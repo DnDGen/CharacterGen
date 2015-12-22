@@ -20,6 +20,7 @@ namespace CharacterGen.Tests.Unit.Common.Combats
         public void BaseAttackInitialized()
         {
             Assert.That(baseAttack.Bonus, Is.EqualTo(0));
+            Assert.That(baseAttack.CircumstantialBonus, Is.False);
         }
 
         [TestCase(0, 0)]
