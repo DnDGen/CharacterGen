@@ -9,7 +9,6 @@ using CharacterGen.Selectors;
 using CharacterGen.Tables;
 using Moq;
 using NUnit.Framework;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -18,7 +17,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
     [TestFixture]
     public class AnimalGeneratorTests
     {
-        private const String Animal = "animal";
+        private const string Animal = "animal";
 
         private Mock<ICollectionsSelector> mockCollectionsSelector;
         private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
@@ -26,15 +25,15 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         private IAnimalGenerator animalGenerator;
         private CharacterClass characterClass;
         private List<Feat> feats;
-        private List<String> animals;
-        private List<String> druidAnimals;
+        private List<string> animals;
+        private List<string> druidAnimals;
         private Race characterRace;
         private Alignment alignment;
-        private Dictionary<String, Int32> levelAdjustments;
-        private List<String> animalsForSize;
-        private List<String> improvedFamiliars;
-        private List<String> animalsForMetarace;
-        private List<String> mages;
+        private Dictionary<string, int> levelAdjustments;
+        private List<string> animalsForSize;
+        private List<string> improvedFamiliars;
+        private List<string> animalsForMetarace;
+        private List<string> mages;
 
         [SetUp]
         public void Setup()
@@ -47,14 +46,14 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
             characterClass = new CharacterClass();
             characterRace = new Race();
             feats = new List<Feat>();
-            animals = new List<String>();
+            animals = new List<string>();
             alignment = new Alignment();
-            levelAdjustments = new Dictionary<String, Int32>();
-            animalsForSize = new List<String>();
-            improvedFamiliars = new List<String>();
-            druidAnimals = new List<String>();
-            animalsForMetarace = new List<String>();
-            mages = new List<String>();
+            levelAdjustments = new Dictionary<string, int>();
+            animalsForSize = new List<string>();
+            improvedFamiliars = new List<string>();
+            druidAnimals = new List<string>();
+            animalsForMetarace = new List<string>();
+            mages = new List<string>();
 
             characterRace.BaseRace = "character race";
             characterRace.Metarace = "character metarace";
@@ -66,7 +65,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
             animalsForMetarace.Add(Animal);
             levelAdjustments[Animal] = 0;
 
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<String>>())).Returns((IEnumerable<String> c) => c.Last());
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<string>>())).Returns((IEnumerable<string> c) => c.Last());
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.Animals, characterClass.ClassName)).Returns(animals);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.Animals, CharacterClassConstants.Druid)).Returns(druidAnimals);
@@ -218,6 +217,30 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
             var animal = animalGenerator.GenerateFrom(alignment, characterClass, characterRace, feats);
             Assert.That(characterClass.ClassName, Is.EqualTo(CharacterClassConstants.Ranger));
             Assert.That(characterClass.Level, Is.EqualTo(9266));
+        }
+
+        [Test]
+        public void AdeptDoesNotGetAnimalAtLevel1()
+        {
+            characterClass.ClassName = CharacterClassConstants.Adept;
+            characterClass.Level = 1;
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.Animals, CharacterClassConstants.Adept)).Returns(animals);
+
+            var animal = animalGenerator.GenerateFrom(alignment, characterClass, characterRace, feats);
+            Assert.That(animal, Is.Empty);
+        }
+
+        [Test]
+        public void AdeptGetsAnimalAtLevel2()
+        {
+            characterClass.ClassName = CharacterClassConstants.Adept;
+            characterClass.Level = 2;
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.Animals, CharacterClassConstants.Adept)).Returns(animals);
+
+            var animal = animalGenerator.GenerateFrom(alignment, characterClass, characterRace, feats);
+            Assert.That(animal, Is.EqualTo(Animal));
         }
     }
 }

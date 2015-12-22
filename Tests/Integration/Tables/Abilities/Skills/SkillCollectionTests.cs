@@ -5,7 +5,6 @@ using CharacterGen.Tables;
 using CharacterGen.Tests.Integration.Common;
 using Ninject;
 using NUnit.Framework;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -18,9 +17,9 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
         [Inject]
         public CollectionsMapper Mapper { get; set; }
 
-        private Dictionary<String, IEnumerable<String>> classSkills;
-        private Dictionary<String, IEnumerable<String>> crossClassSkills;
-        private IEnumerable<String> allSkills;
+        private Dictionary<string, IEnumerable<string>> classSkills;
+        private Dictionary<string, IEnumerable<string>> crossClassSkills;
+        private IEnumerable<string> allSkills;
 
         [SetUp]
         public void Setup()
@@ -43,10 +42,15 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
         [TestCase(CharacterClassConstants.Rogue)]
         [TestCase(CharacterClassConstants.Sorcerer)]
         [TestCase(CharacterClassConstants.Wizard)]
-        public void NoIntersectionBetweenClassAndCrossClassSkills(String className)
+        [TestCase(CharacterClassConstants.Adept)]
+        [TestCase(CharacterClassConstants.Aristocrat)]
+        [TestCase(CharacterClassConstants.Commoner)]
+        [TestCase(CharacterClassConstants.Expert)]
+        [TestCase(CharacterClassConstants.Warrior)]
+        public void NoIntersectionBetweenClassAndCrossClassSkills(string className)
         {
             var intersect = classSkills[className].Intersect(crossClassSkills[className]);
-            Assert.That(intersect, Is.Empty);
+            Assert.That(intersect, Is.Empty, className);
         }
 
         [TestCase(SkillConstants.DecipherScript)]
@@ -67,7 +71,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
         [TestCase(SkillConstants.Spellcraft)]
         [TestCase(SkillConstants.Tumble)]
         [TestCase(SkillConstants.UseMagicDevice)]
-        public void TrainedSkills(String skill)
+        public void TrainedSkills(string skill)
         {
             var classNames = new[] {
                 CharacterClassConstants.Barbarian,
@@ -80,11 +84,16 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
                 CharacterClassConstants.Ranger,
                 CharacterClassConstants.Rogue,
                 CharacterClassConstants.Sorcerer,
-                CharacterClassConstants.Wizard
+                CharacterClassConstants.Wizard,
+                CharacterClassConstants.Adept,
+                CharacterClassConstants.Aristocrat,
+                CharacterClassConstants.Commoner,
+                CharacterClassConstants.Expert,
+                CharacterClassConstants.Warrior
             };
 
             foreach (var className in classNames)
-                Assert.That(crossClassSkills[className], Is.All.Not.EqualTo(skill));
+                Assert.That(crossClassSkills[className], Is.All.Not.EqualTo(skill), className);
         }
 
         [TestCase(CharacterClassConstants.Barbarian)]
@@ -98,7 +107,12 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
         [TestCase(CharacterClassConstants.Rogue)]
         [TestCase(CharacterClassConstants.Sorcerer)]
         [TestCase(CharacterClassConstants.Wizard)]
-        public void AllUntrainedSkills(String className)
+        [TestCase(CharacterClassConstants.Adept)]
+        [TestCase(CharacterClassConstants.Aristocrat)]
+        [TestCase(CharacterClassConstants.Commoner)]
+        [TestCase(CharacterClassConstants.Expert)]
+        [TestCase(CharacterClassConstants.Warrior)]
+        public void AllUntrainedSkills(string className)
         {
             var trainedSkills = new[]
             {

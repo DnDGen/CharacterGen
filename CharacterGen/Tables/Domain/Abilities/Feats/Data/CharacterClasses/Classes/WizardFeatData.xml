@@ -12,18 +12,20 @@
         <item>0</item>
         <item></item>
       <item></item>
+      <item>True</item>
     </object>
     <object>
-        <name>Simple Weapon ProficiencyDagger</name>
-        <item>Simple Weapon Proficiency</item>
-        <item>1</item>
-        <item>Dagger</item>
-        <item>0</item>
-        <item>0</item>
-        <item></item>
-        <item>0</item>
-        <item></item>
+      <name>Simple Weapon ProficiencyDagger</name>
+      <item>Simple Weapon Proficiency</item>
+      <item>1</item>
+      <item>Dagger</item>
+      <item>0</item>
+      <item>0</item>
       <item></item>
+      <item>0</item>
+      <item></item>
+      <item></item>
+      <item>True</item>
     </object>
     <object>
         <name>Simple Weapon ProficiencyHeavy crossbow</name>
@@ -36,6 +38,7 @@
         <item>0</item>
         <item></item>
       <item></item>
+      <item>True</item>
     </object>
     <object>
         <name>Simple Weapon ProficiencyLight crossbow</name>
@@ -48,6 +51,7 @@
         <item>0</item>
         <item></item>
       <item></item>
+      <item>True</item>
     </object>
     <object>
         <name>Simple Weapon ProficiencyQuarterstaff</name>
@@ -60,6 +64,7 @@
         <item>0</item>
         <item></item>
       <item></item>
+      <item>True</item>
     </object>
     <object>
         <name>Scribe Scroll</name>
@@ -72,5 +77,6 @@
         <item>0</item>
         <item></item>
       <item></item>
+      <item>True</item>
     </object>
 </items>

@@ -1,6 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <statPriorities>
+  <object>
+    <name>Adept</name>
+    <item>Wisdom</item>
+    <item>Charisma</item>
+  </object>
+  <object>
+    <name>Aristocrat</name>
+    <item>Charisma</item>
+    <item>Intelligence</item>
+  </object>
     <object>
         <name>Barbarian</name>
         <item>Strength</item>
@@ -16,11 +26,21 @@
         <item>Wisdom</item>
         <item>Charisma</item>
     </object>
+  <object>
+    <name>Commoner</name>
+    <item>Strength</item>
+    <item>Wisdom</item>
+  </object>
     <object>
         <name>Druid</name>
         <item>Wisdom</item>
         <item>Charisma</item>
     </object>
+  <object>
+    <name>Expert</name>
+    <item>Charisma</item>
+    <item>Intelligence</item>
+  </object>
     <object>
         <name>Fighter</name>
         <item>Strength</item>
@@ -51,6 +71,11 @@
         <item>Charisma</item>
         <item>Dexterity</item>
     </object>
+  <object>
+    <name>Warrior</name>
+    <item>Strength</item>
+    <item>Constitution</item>
+  </object>
     <object>
         <name>Wizard</name>
         <item>Intelligence</item>

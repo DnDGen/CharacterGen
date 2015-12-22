@@ -1,15 +1,15 @@
 ﻿using CharacterGen.Generators.Domain.Randomizers.CharacterClasses.ClassNames;
+using CharacterGen.Tables;
 using NUnit.Framework;
-using System;
 
 namespace CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassNames
 {
     [TestFixture]
     public class MageClassNameRandomizerTests : ClassNameRandomizerTests
     {
-        protected override String classNameGroup
+        protected override string classNameGroup
         {
-            get { return "Mages"; }
+            get { return GroupConstants.Mages; }
         }
 
         [SetUp]

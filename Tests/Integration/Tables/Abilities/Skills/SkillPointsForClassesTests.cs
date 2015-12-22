@@ -1,7 +1,7 @@
-﻿using System;
-using CharacterGen.Common.CharacterClasses;
+﻿using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Tables;
 using NUnit.Framework;
+using System;
 
 namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
 {
@@ -16,19 +16,24 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
         [Test]
         public override void CollectionNames()
         {
-            var names = new[] 
+            var names = new[]
             {
                 CharacterClassConstants.Barbarian,
                 CharacterClassConstants.Bard,
                 CharacterClassConstants.Cleric,
                 CharacterClassConstants.Druid,
-                CharacterClassConstants.Fighter, 
+                CharacterClassConstants.Fighter,
                 CharacterClassConstants.Monk,
-                CharacterClassConstants.Paladin, 
-                CharacterClassConstants.Ranger, 
-                CharacterClassConstants.Rogue, 
-                CharacterClassConstants.Sorcerer, 
-                CharacterClassConstants.Wizard
+                CharacterClassConstants.Paladin,
+                CharacterClassConstants.Ranger,
+                CharacterClassConstants.Rogue,
+                CharacterClassConstants.Sorcerer,
+                CharacterClassConstants.Wizard,
+                CharacterClassConstants.Adept,
+                CharacterClassConstants.Aristocrat,
+                CharacterClassConstants.Commoner,
+                CharacterClassConstants.Expert,
+                CharacterClassConstants.Warrior
             };
 
             AssertCollectionNames(names);
@@ -45,7 +50,12 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
         [TestCase(CharacterClassConstants.Rogue, 8)]
         [TestCase(CharacterClassConstants.Sorcerer, 2)]
         [TestCase(CharacterClassConstants.Wizard, 2)]
-        public override void Adjustment(String name, Int32 adjustment)
+        [TestCase(CharacterClassConstants.Adept, 2)]
+        [TestCase(CharacterClassConstants.Aristocrat, 4)]
+        [TestCase(CharacterClassConstants.Commoner, 2)]
+        [TestCase(CharacterClassConstants.Expert, 6)]
+        [TestCase(CharacterClassConstants.Warrior, 2)]
+        public override void Adjustment(string name, int adjustment)
         {
             base.Adjustment(name, adjustment);
         }

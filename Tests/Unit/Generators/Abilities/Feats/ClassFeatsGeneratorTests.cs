@@ -23,10 +23,10 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         private Mock<ICollectionsSelector> mockCollectionsSelector;
         private IClassFeatsGenerator classFeatsGenerator;
         private CharacterClass characterClass;
-        private Dictionary<String, Stat> stats;
-        private Dictionary<String, List<CharacterClassFeatSelection>> classFeatSelections;
+        private Dictionary<string, Stat> stats;
+        private Dictionary<string, List<CharacterClassFeatSelection>> classFeatSelections;
         private List<Feat> racialFeats;
-        private Dictionary<String, Skill> skills;
+        private Dictionary<string, Skill> skills;
         private Race race;
 
         [SetUp]
@@ -37,15 +37,15 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
             classFeatsGenerator = new ClassFeatsGenerator(mockFeatsSelector.Object, mockFeatFocusGenerator.Object, mockCollectionsSelector.Object);
             characterClass = new CharacterClass();
-            stats = new Dictionary<String, Stat>();
+            stats = new Dictionary<string, Stat>();
             stats[StatConstants.Intelligence] = new Stat();
-            classFeatSelections = new Dictionary<String, List<CharacterClassFeatSelection>>();
+            classFeatSelections = new Dictionary<string, List<CharacterClassFeatSelection>>();
             racialFeats = new List<Feat>();
-            skills = new Dictionary<String, Skill>();
+            skills = new Dictionary<string, Skill>();
             race = new Race();
 
-            mockFeatsSelector.Setup(s => s.SelectClass(It.IsAny<String>())).Returns(Enumerable.Empty<CharacterClassFeatSelection>());
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom<Feat>(It.IsAny<IEnumerable<Feat>>())).Returns((IEnumerable<Feat> c) => c.First());
+            mockFeatsSelector.Setup(s => s.SelectClass(It.IsAny<string>())).Returns(Enumerable.Empty<CharacterClassFeatSelection>());
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<Feat>>())).Returns((IEnumerable<Feat> c) => c.First());
 
             characterClass.ClassName = "class name";
             characterClass.Level = 1;
@@ -138,7 +138,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             Assert.That(featNames.Count(), Is.EqualTo(3));
         }
 
-        private void AddClassFeat(String className, String feat, String focusType = "", Int32 minimumLevel = 1, Int32 maximumLevel = 0, Int32 frequencyQuantity = 0, String frequencyPeriod = "", Int32 strength = 0, params String[] requiredFeatNames)
+        private void AddClassFeat(string className, string feat, string focusType = "", int minimumLevel = 1, int maximumLevel = 0, int frequencyQuantity = 0, String frequencyPeriod = "", Int32 strength = 0, params String[] requiredFeatNames)
         {
             var selection = new CharacterClassFeatSelection();
             selection.Feat = feat;
@@ -149,6 +149,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             selection.Frequency.TimePeriod = frequencyPeriod;
             selection.MaximumLevel = maximumLevel;
             selection.Strength = strength;
+            selection.AllowFocusOfAll = true;
 
             if (classFeatSelections.ContainsKey(className) == false)
             {
@@ -200,8 +201,8 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
 
             mockFeatFocusGenerator.Setup(g => g.GenerateAllowingFocusOfAllFrom("feat1", "focus type", skills, classFeatSelections[characterClass.ClassName][0].RequiredFeats, It.IsAny<IEnumerable<Feat>>(), characterClass))
                 .Returns("focus");
-            mockFeatFocusGenerator.Setup(g => g.GenerateAllowingFocusOfAllFrom("feat2", String.Empty, skills, classFeatSelections[characterClass.ClassName][1].RequiredFeats, It.IsAny<IEnumerable<Feat>>(), characterClass))
-                .Returns(String.Empty);
+            mockFeatFocusGenerator.Setup(g => g.GenerateAllowingFocusOfAllFrom("feat2", string.Empty, skills, classFeatSelections[characterClass.ClassName][1].RequiredFeats, It.IsAny<IEnumerable<Feat>>(), characterClass))
+                .Returns(string.Empty);
 
             var feats = classFeatsGenerator.GenerateWith(characterClass, race, stats, racialFeats, skills);
             var first = feats.First();
@@ -211,9 +212,9 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             Assert.That(first.Foci.Single(), Is.EqualTo("focus"));
             Assert.That(last.Name, Is.EqualTo(classFeatSelections[characterClass.ClassName][1].Feat));
             Assert.That(last.Foci, Is.Empty);
-            mockFeatFocusGenerator.Verify(g => g.GenerateAllowingFocusOfAllFrom(It.IsAny<String>(), It.IsAny<String>(), skills, It.IsAny<IEnumerable<RequiredFeat>>(), It.IsAny<IEnumerable<Feat>>(), It.IsAny<CharacterClass>()), Times.Exactly(2));
+            mockFeatFocusGenerator.Verify(g => g.GenerateAllowingFocusOfAllFrom(It.IsAny<string>(), It.IsAny<string>(), skills, It.IsAny<IEnumerable<RequiredFeat>>(), It.IsAny<IEnumerable<Feat>>(), It.IsAny<CharacterClass>()), Times.Exactly(2));
             mockFeatFocusGenerator.Verify(g => g.GenerateAllowingFocusOfAllFrom("feat1", "focus type", skills, classFeatSelections[characterClass.ClassName][0].RequiredFeats, It.IsAny<IEnumerable<Feat>>(), characterClass), Times.Once);
-            mockFeatFocusGenerator.Verify(g => g.GenerateAllowingFocusOfAllFrom("feat2", String.Empty, skills, classFeatSelections[characterClass.ClassName][1].RequiredFeats, It.IsAny<IEnumerable<Feat>>(), characterClass), Times.Once);
+            mockFeatFocusGenerator.Verify(g => g.GenerateAllowingFocusOfAllFrom("feat2", string.Empty, skills, classFeatSelections[characterClass.ClassName][1].RequiredFeats, It.IsAny<IEnumerable<Feat>>(), characterClass), Times.Once);
         }
 
         [Test]
@@ -378,11 +379,30 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         }
 
         [Test]
-        public void SpecialistFeatsDoNotAllowForAllProficiency()
+        public void FeatsAllowFocusForAllProficiency()
         {
             characterClass.SpecialistFields = new[] { "specialist" };
 
             AddClassFeat("specialist", "feat1", focusType: FeatConstants.Foci.All);
+            classFeatSelections["specialist"][0].AllowFocusOfAll = true;
+
+            mockFeatFocusGenerator.Setup(g => g.GenerateAllowingFocusOfAllFrom("feat1", FeatConstants.Foci.All, skills, classFeatSelections["specialist"][0].RequiredFeats, It.IsAny<IEnumerable<Feat>>(), characterClass))
+                .Returns(FeatConstants.Foci.All);
+
+            var feats = classFeatsGenerator.GenerateWith(characterClass, race, stats, racialFeats, skills);
+            var onlyFeat = feats.Single();
+
+            Assert.That(onlyFeat.Name, Is.EqualTo(classFeatSelections["specialist"][0].Feat));
+            Assert.That(onlyFeat.Foci.Single(), Is.EqualTo(FeatConstants.Foci.All));
+        }
+
+        [Test]
+        public void FeatsDoNotAllowFocusForAllProficiency()
+        {
+            characterClass.SpecialistFields = new[] { "specialist" };
+
+            AddClassFeat("specialist", "feat1", focusType: FeatConstants.Foci.All);
+            classFeatSelections["specialist"][0].AllowFocusOfAll = false;
 
             mockFeatFocusGenerator.Setup(g => g.GenerateFrom("feat1", FeatConstants.Foci.All, skills, classFeatSelections["specialist"][0].RequiredFeats, It.IsAny<IEnumerable<Feat>>(), characterClass))
                 .Returns("focus");

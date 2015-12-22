@@ -33,7 +33,8 @@ namespace CharacterGen.Generators.Domain.Items
 
         public Item GenerateArmorFrom(IEnumerable<Feat> feats, CharacterClass characterClass, Race race)
         {
-            var tableName = string.Format(TableNameConstants.Formattable.Percentile.LevelXPower, characterClass.Level);
+            var effectiveLevel = GetEffectiveLevel(characterClass);
+            var tableName = string.Format(TableNameConstants.Formattable.Percentile.LevelXPower, effectiveLevel);
             var power = percentileSelector.SelectFrom(tableName);
             var proficientArmors = GetProficientArmors(feats, ItemTypeConstants.Armor);
 
@@ -44,9 +45,19 @@ namespace CharacterGen.Generators.Domain.Items
                 a => ArmorIsValid(a, proficientArmors, characterClass, race));
         }
 
+        private int GetEffectiveLevel(CharacterClass characterClass)
+        {
+            var npcs = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.NPCs);
+            if (npcs.Contains(characterClass.ClassName))
+                return Math.Max(characterClass.Level / 2, 1);
+
+            return characterClass.Level;
+        }
+
         public Item GenerateShieldFrom(IEnumerable<Feat> feats, CharacterClass characterClass, Race race)
         {
-            var tableName = String.Format(TableNameConstants.Formattable.Percentile.LevelXPower, characterClass.Level);
+            var effectiveLevel = GetEffectiveLevel(characterClass);
+            var tableName = string.Format(TableNameConstants.Formattable.Percentile.LevelXPower, effectiveLevel);
             var power = percentileSelector.SelectFrom(tableName);
             var proficientShields = GetProficientArmors(feats, AttributeConstants.Shield);
 
@@ -57,23 +68,29 @@ namespace CharacterGen.Generators.Domain.Items
                 s => ShieldIsValid(s, proficientShields, characterClass, race));
         }
 
-        private Boolean ArmorIsValid(Item armor, IEnumerable<String> proficientArmors, CharacterClass characterClass, Race race)
+        private bool ArmorIsValid(Item armor, IEnumerable<string> proficientArmors, CharacterClass characterClass, Race race)
         {
+            if (armor == null)
+                return true;
+
             if (armor.Attributes.Contains(AttributeConstants.Shield))
                 return false;
 
             return IsValid(armor, proficientArmors, characterClass, race);
         }
 
-        private Boolean ShieldIsValid(Item shield, IEnumerable<String> proficientArmors, CharacterClass characterClass, Race race)
+        private bool ShieldIsValid(Item shield, IEnumerable<String> proficientArmors, CharacterClass characterClass, Race race)
         {
+            if (shield == null)
+                return true;
+
             if (shield.Attributes.Contains(AttributeConstants.Shield) == false)
                 return false;
 
             return IsValid(shield, proficientArmors, characterClass, race);
         }
 
-        private Boolean IsValid(Item armor, IEnumerable<String> proficientArmors, CharacterClass characterClass, Race race)
+        private bool IsValid(Item armor, IEnumerable<string> proficientArmors, CharacterClass characterClass, Race race)
         {
             if (armor.ItemType != ItemTypeConstants.Armor)
                 return false;
@@ -88,7 +105,7 @@ namespace CharacterGen.Generators.Domain.Items
             return proficientArmors.Contains(baseArmorType);
         }
 
-        private Item GenerateArmor(String power)
+        private Item GenerateArmor(string power)
         {
             if (power == PowerConstants.Mundane)
                 return mundaneArmorGenerator.Generate();
@@ -96,11 +113,11 @@ namespace CharacterGen.Generators.Domain.Items
             return magicalArmorGenerator.GenerateAtPower(power);
         }
 
-        private IEnumerable<String> GetProficientArmors(IEnumerable<Feat> feats, String armorType)
+        private IEnumerable<string> GetProficientArmors(IEnumerable<Feat> feats, string armorType)
         {
             var proficiencyFeatNames = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, armorType + GroupConstants.Proficiency);
             var proficiencyFeats = feats.Where(f => proficiencyFeatNames.Contains(f.Name));
-            var proficientArmors = new List<String>();
+            var proficientArmors = new List<string>();
 
             foreach (var feat in proficiencyFeats)
             {

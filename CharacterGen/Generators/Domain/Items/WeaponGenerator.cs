@@ -107,13 +107,10 @@ namespace CharacterGen.Generators.Domain.Items
             var meleeWeapons = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, AttributeConstants.Melee);
             var weapon = GenerateFiltered(feats, characterClass, race, meleeWeapons);
 
-            if (weapon == null)
-                throw new NoWeaponProficienciesException();
-
             return weapon;
         }
 
-        private Item GenerateFiltered(IEnumerable<Feat> feats, CharacterClass characterClass, Race race, IEnumerable<String> filteredWeapons)
+        private Item GenerateFiltered(IEnumerable<Feat> feats, CharacterClass characterClass, Race race, IEnumerable<string> filteredWeapons)
         {
             var allowedWeapons = GetAllowedWeapons(feats, filteredWeapons);
 
@@ -123,7 +120,7 @@ namespace CharacterGen.Generators.Domain.Items
             return GenerateFrom(allowedWeapons, characterClass, race);
         }
 
-        private IEnumerable<String> GetAllowedWeapons(IEnumerable<Feat> feats, IEnumerable<String> filteredWeapons)
+        private IEnumerable<string> GetAllowedWeapons(IEnumerable<Feat> feats, IEnumerable<string> filteredWeapons)
         {
             var nonProficiencyFeatsWithWeaponFoci = GetNonProficiencyFeatsWithWeaponFoci(feats);
             var allowedWeapons = nonProficiencyFeatsWithWeaponFoci.SelectMany(f => f.Foci);
@@ -155,17 +152,26 @@ namespace CharacterGen.Generators.Domain.Items
             return allowedWeapons;
         }
 
-        private Item GenerateFrom(IEnumerable<String> allowedWeapons, CharacterClass characterClass, Race race)
+        private Item GenerateFrom(IEnumerable<string> allowedWeapons, CharacterClass characterClass, Race race)
         {
-            var tableName = String.Format(TableNameConstants.Formattable.Percentile.LevelXPower, characterClass.Level);
+            var effectiveLevel = characterClass.Level;
+            var npcs = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.NPCs);
+
+            if (npcs.Contains(characterClass.ClassName))
+                effectiveLevel = Math.Max(1, characterClass.Level / 2);
+
+            var tableName = string.Format(TableNameConstants.Formattable.Percentile.LevelXPower, effectiveLevel);
             var power = percentileSelector.SelectFrom(tableName);
             var weapon = generator.Generate(() => GenerateWeapon(power), w => WeaponIsValid(w, allowedWeapons, race));
 
             return weapon;
         }
 
-        private Boolean WeaponIsValid(Item weapon, IEnumerable<String> allowedWeapons, Race race)
+        private bool WeaponIsValid(Item weapon, IEnumerable<string> allowedWeapons, Race race)
         {
+            if (weapon == null)
+                return true;
+
             if (weapon.ItemType != ItemTypeConstants.Weapon)
                 return false;
 
@@ -183,10 +189,6 @@ namespace CharacterGen.Generators.Domain.Items
             var oneHandedWeapons = meleeWeapons.Except(twoHandedWeapons);
 
             var weapon = GenerateFiltered(feats, characterClass, race, oneHandedWeapons);
-
-            if (weapon == null)
-                throw new NoWeaponProficienciesException();
-
             return weapon;
         }
 
@@ -198,10 +200,6 @@ namespace CharacterGen.Generators.Domain.Items
             var rangedWeapons = weapons.Except(meleeWeapons).Except(ammunitions);
 
             var weapon = GenerateFiltered(feats, characterClass, race, rangedWeapons);
-
-            if (weapon == null)
-                throw new NoWeaponProficienciesException();
-
             return weapon;
         }
     }

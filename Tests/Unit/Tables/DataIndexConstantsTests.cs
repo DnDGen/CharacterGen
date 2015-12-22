@@ -1,6 +1,5 @@
 ﻿using CharacterGen.Tables;
 using NUnit.Framework;
-using System;
 
 namespace CharacterGen.Tests.Unit.Tables
 {
@@ -16,7 +15,8 @@ namespace CharacterGen.Tests.Unit.Tables
         [TestCase(DataIndexConstants.CharacterClassFeatData.MaximumLevelRequirementIndex, 6)]
         [TestCase(DataIndexConstants.CharacterClassFeatData.FrequencyQuantityStatIndex, 7)]
         [TestCase(DataIndexConstants.CharacterClassFeatData.SizeRequirementIndex, 8)]
-        public void CharacterClassFeatDataIndex(Int32 constant, Int32 value)
+        [TestCase(DataIndexConstants.CharacterClassFeatData.AllowFocusOfAllIndex, 9)]
+        public void CharacterClassFeatDataIndex(int constant, int value)
         {
             Assert.That(constant, Is.EqualTo(value));
         }
@@ -31,7 +31,7 @@ namespace CharacterGen.Tests.Unit.Tables
         [TestCase(DataIndexConstants.RacialFeatData.MaximumHitDiceRequirementIndex, 7)]
         [TestCase(DataIndexConstants.RacialFeatData.RequiredStatIndex, 8)]
         [TestCase(DataIndexConstants.RacialFeatData.RequiredStatMinimumValueIndex, 9)]
-        public void RacialFeatDataIndex(Int32 constant, Int32 value)
+        public void RacialFeatDataIndex(int constant, int value)
         {
             Assert.That(constant, Is.EqualTo(value));
         }
@@ -41,7 +41,7 @@ namespace CharacterGen.Tests.Unit.Tables
         [TestCase(DataIndexConstants.AdditionalFeatData.StrengthIndex, 2)]
         [TestCase(DataIndexConstants.AdditionalFeatData.FrequencyQuantityIndex, 3)]
         [TestCase(DataIndexConstants.AdditionalFeatData.FrequencyTimePeriodIndex, 4)]
-        public void AdditionalFeatDataIndex(Int32 constant, Int32 value)
+        public void AdditionalFeatDataIndex(int constant, int value)
         {
             Assert.That(constant, Is.EqualTo(value));
         }

@@ -86,6 +86,7 @@
     <Compile Include="Magics\SpellsGenerator.cs" />
     <Compile Include="RaceGenerator.cs" />
     <Compile Include="Randomizers\Alignments\SetAlignmentRandomizer.cs" />
+    <Compile Include="Randomizers\CharacterClasses\ClassNames\AnyNPCClassNameRandomizer.cs" />
     <Compile Include="Randomizers\CharacterClasses\ClassNames\SetClassNameRandomizer.cs" />
     <Compile Include="Randomizers\CharacterClasses\Levels\SetLevelRandomizer.cs" />
     <Compile Include="Randomizers\Races\BaseRaces\SetBaseRaceRandomizer.cs" />
@@ -102,7 +103,7 @@
     <Compile Include="Randomizers\Alignments\NonGoodAlignmentRandomizer.cs" />
     <Compile Include="Randomizers\Alignments\NonLawfulAlignmentRandomizer.cs" />
     <Compile Include="Randomizers\Alignments\NonNeutralAlignmentRandomizer.cs" />
-    <Compile Include="Randomizers\CharacterClasses\ClassNames\AnyClassNameRandomizer.cs" />
+    <Compile Include="Randomizers\CharacterClasses\ClassNames\AnyPlayerClassNameRandomizer.cs" />
     <Compile Include="Randomizers\CharacterClasses\ClassNames\BaseClassNameRandomizer.cs" />
     <Compile Include="Randomizers\CharacterClasses\ClassNames\HealerClassNameRandomizer.cs" />
     <Compile Include="Randomizers\CharacterClasses\ClassNames\MageClassNameRandomizer.cs" />

@@ -21,7 +21,8 @@ namespace CharacterGen.Generators.Domain
         private ISetLevelRandomizer setLevelRandomizer;
         private ISetAlignmentRandomizer setAlignmentRandomizer;
         private IAlignmentRandomizer anyAlignmentRandomizer;
-        private IClassNameRandomizer anyClassNameRandomizer;
+        private IClassNameRandomizer anyPlayerClassNameRandomizer;
+        private IClassNameRandomizer anyNPCClassNameRandomizer;
         private RaceRandomizer anyBaseRaceRandomizer;
         private RaceRandomizer anyMetaraceRandomizer;
         private IStatsRandomizer rawStatsRandomizer;
@@ -32,9 +33,9 @@ namespace CharacterGen.Generators.Domain
 
         public LeadershipGenerator(ICharacterGenerator characterGenerator, ILeadershipSelector leadershipSelector, IPercentileSelector percentileSelector,
             IAdjustmentsSelector adjustmentsSelector, ISetLevelRandomizer setLevelRandomizer, ISetAlignmentRandomizer setAlignmentRandomizer,
-            IAlignmentRandomizer anyAlignmentRandomizer, IClassNameRandomizer anyClassNameRandomizer, RaceRandomizer anyBaseRaceRandomizer,
+            IAlignmentRandomizer anyAlignmentRandomizer, IClassNameRandomizer anyPlayerClassNameRandomizer, RaceRandomizer anyBaseRaceRandomizer,
             RaceRandomizer anyMetaraceRandomizer, IStatsRandomizer rawStatsRandomizer, IBooleanPercentileSelector booleanPercentileSelector,
-            ICollectionsSelector collectionsSelector, IAlignmentGenerator alignmentGenerator, Generator generator)
+            ICollectionsSelector collectionsSelector, IAlignmentGenerator alignmentGenerator, Generator generator, IClassNameRandomizer anyNPCClassNameRandomizer)
         {
             this.characterGenerator = characterGenerator;
             this.leadershipSelector = leadershipSelector;
@@ -43,7 +44,7 @@ namespace CharacterGen.Generators.Domain
             this.setLevelRandomizer = setLevelRandomizer;
             this.setAlignmentRandomizer = setAlignmentRandomizer;
             this.anyAlignmentRandomizer = anyAlignmentRandomizer;
-            this.anyClassNameRandomizer = anyClassNameRandomizer;
+            this.anyPlayerClassNameRandomizer = anyPlayerClassNameRandomizer;
             this.anyBaseRaceRandomizer = anyBaseRaceRandomizer;
             this.anyMetaraceRandomizer = anyMetaraceRandomizer;
             this.rawStatsRandomizer = rawStatsRandomizer;
@@ -51,18 +52,19 @@ namespace CharacterGen.Generators.Domain
             this.collectionsSelector = collectionsSelector;
             this.alignmentGenerator = alignmentGenerator;
             this.generator = generator;
+            this.anyNPCClassNameRandomizer = anyNPCClassNameRandomizer;
         }
 
-        public Leadership GenerateLeadership(Int32 level, Int32 charismaBonus, String leaderAnimal)
+        public Leadership GenerateLeadership(int level, int charismaBonus, string leaderAnimal)
         {
             var leadership = new Leadership();
             leadership.Score = level + charismaBonus;
 
-            var leadershipModifiers = new List<String>();
+            var leadershipModifiers = new List<string>();
             var reputation = percentileSelector.SelectFrom(TableNameConstants.Set.Percentile.Reputation);
             var leadershipAdjustments = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.LeadershipModifiers);
 
-            if (String.IsNullOrEmpty(reputation) == false)
+            if (string.IsNullOrEmpty(reputation) == false)
             {
                 leadershipModifiers.Add(reputation);
                 leadership.Score += leadershipAdjustments[reputation];
@@ -78,17 +80,17 @@ namespace CharacterGen.Generators.Domain
 
             if (cohortDeaths > 0)
             {
-                var modifier = String.Format("Caused the death of {0} cohort(s)", cohortDeaths);
+                var modifier = string.Format("Caused the death of {0} cohort(s)", cohortDeaths);
                 leadershipModifiers.Add(modifier);
             }
 
-            if (String.IsNullOrEmpty(leaderAnimal) == false)
+            if (string.IsNullOrEmpty(leaderAnimal) == false)
                 leadership.CohortScore -= 2;
 
             var followerScore = leadership.Score;
             var leaderMovement = percentileSelector.SelectFrom(TableNameConstants.Set.Percentile.LeadershipMovement);
 
-            if (String.IsNullOrEmpty(leaderMovement) == false)
+            if (string.IsNullOrEmpty(leaderMovement) == false)
             {
                 leadershipModifiers.Add(leaderMovement);
                 followerScore += leadershipAdjustments[leaderMovement];
@@ -106,7 +108,7 @@ namespace CharacterGen.Generators.Domain
             return leadership;
         }
 
-        public Character GenerateCohort(Int32 cohortScore, Int32 leaderLevel, String leaderAlignment)
+        public Character GenerateCohort(int cohortScore, int leaderLevel, string leaderAlignment, string leaderClass)
         {
             var alignmentDiffers = booleanPercentileSelector.SelectFrom(TableNameConstants.Set.TrueOrFalse.AttractCohortOfDifferentAlignment);
             if (alignmentDiffers)
@@ -121,18 +123,18 @@ namespace CharacterGen.Generators.Domain
             if (alignmentDiffers == false)
             {
                 setAlignmentRandomizer.SetAlignment = new Alignment(leaderAlignment);
-                return GenerateFollower(setAlignmentRandomizer, cohortLevel, leaderAlignment);
+                return GenerateFollower(setAlignmentRandomizer, cohortLevel, leaderAlignment, leaderClass);
             }
 
-            return GenerateFollower(cohortLevel, leaderAlignment);
+            return GenerateFollower(cohortLevel, leaderAlignment, leaderClass);
         }
 
-        public Character GenerateFollower(Int32 level, String leaderAlignment)
+        public Character GenerateFollower(int level, string leaderAlignment, string leaderClass)
         {
-            return GenerateFollower(anyAlignmentRandomizer, level, leaderAlignment);
+            return GenerateFollower(anyAlignmentRandomizer, level, leaderAlignment, leaderClass);
         }
 
-        private Character GenerateFollower(IAlignmentRandomizer alignmentRandomizer, Int32 level, String leaderAlignment)
+        private Character GenerateFollower(IAlignmentRandomizer alignmentRandomizer, int level, string leaderAlignment, string leaderClass)
         {
             setLevelRandomizer.SetLevel = level;
             var allowedAlignments = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AlignmentGroups, leaderAlignment);
@@ -140,7 +142,12 @@ namespace CharacterGen.Generators.Domain
             setAlignmentRandomizer.SetAlignment = generator.Generate(() => alignmentGenerator.GenerateWith(alignmentRandomizer),
                 a => allowedAlignments.Contains(a.ToString()));
 
-            return characterGenerator.GenerateWith(setAlignmentRandomizer, anyClassNameRandomizer, setLevelRandomizer, anyBaseRaceRandomizer, anyMetaraceRandomizer, rawStatsRandomizer);
+            var npcs = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.NPCs);
+
+            if (npcs.Contains(leaderClass))
+                return characterGenerator.GenerateWith(setAlignmentRandomizer, anyNPCClassNameRandomizer, setLevelRandomizer, anyBaseRaceRandomizer, anyMetaraceRandomizer, rawStatsRandomizer);
+
+            return characterGenerator.GenerateWith(setAlignmentRandomizer, anyPlayerClassNameRandomizer, setLevelRandomizer, anyBaseRaceRandomizer, anyMetaraceRandomizer, rawStatsRandomizer);
         }
     }
 }

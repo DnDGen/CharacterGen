@@ -27,12 +27,12 @@ namespace CharacterGen.Generators.Domain.Abilities
             this.booleanPercentileSelector = booleanPercentileSelector;
         }
 
-        public Dictionary<String, Skill> GenerateWith(CharacterClass characterClass, Race race, Dictionary<String, Stat> stats)
+        public Dictionary<string, Skill> GenerateWith(CharacterClass characterClass, Race race, Dictionary<string, Stat> stats)
         {
             var classSkills = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassSkills, characterClass.ClassName);
             var crossClassSkills = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.CrossClassSkills, characterClass.ClassName);
 
-            var specialistSkills = Enumerable.Empty<String>();
+            var specialistSkills = Enumerable.Empty<string>();
             foreach (var specialistField in characterClass.SpecialistFields)
             {
                 var newSpecialistSkills = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, specialistField);
@@ -40,6 +40,9 @@ namespace CharacterGen.Generators.Domain.Abilities
             }
 
             classSkills = classSkills.Union(specialistSkills);
+
+            if (characterClass.ClassName == CharacterClassConstants.Expert)
+                classSkills = GetRandomClassSkills();
 
             var skills = InitializeSkills(stats, classSkills, crossClassSkills);
             skills = AddRanks(characterClass, race, stats, classSkills, crossClassSkills, skills);
@@ -53,7 +56,21 @@ namespace CharacterGen.Generators.Domain.Abilities
             return skills;
         }
 
-        private Dictionary<string, Skill> AddMonsterSkillRanks(Race race, Dictionary<String, Stat> stats, Dictionary<String, Skill> skills)
+        private IEnumerable<string> GetRandomClassSkills()
+        {
+            var allSkills = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.Skills);
+            var randomSkills = new HashSet<string>();
+
+            while (randomSkills.Count < 10)
+            {
+                var skill = collectionsSelector.SelectRandomFrom(allSkills);
+                randomSkills.Add(skill);
+            }
+
+            return randomSkills;
+        }
+
+        private Dictionary<string, Skill> AddMonsterSkillRanks(Race race, Dictionary<string, Stat> stats, Dictionary<string, Skill> skills)
         {
             var monsterSkills = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassSkills, race.BaseRace);
 
@@ -83,9 +100,9 @@ namespace CharacterGen.Generators.Domain.Abilities
             return skills;
         }
 
-        private Dictionary<String, Skill> InitializeSkills(Dictionary<String, Stat> stats, IEnumerable<String> classSkills, IEnumerable<String> crossClassSkills)
+        private Dictionary<string, Skill> InitializeSkills(Dictionary<string, Stat> stats, IEnumerable<string> classSkills, IEnumerable<string> crossClassSkills)
         {
-            var skills = new Dictionary<String, Skill>();
+            var skills = new Dictionary<string, Skill>();
 
             foreach (var skill in crossClassSkills)
                 skills[skill] = new Skill { ClassSkill = false };
@@ -102,7 +119,7 @@ namespace CharacterGen.Generators.Domain.Abilities
             return skills;
         }
 
-        private Dictionary<String, Skill> AddRanks(CharacterClass characterClass, Race race, Dictionary<String, Stat> stats, IEnumerable<String> classSkills, IEnumerable<String> crossClassSkills, Dictionary<String, Skill> skills)
+        private Dictionary<string, Skill> AddRanks(CharacterClass characterClass, Race race, Dictionary<string, Stat> stats, IEnumerable<string> classSkills, IEnumerable<String> crossClassSkills, Dictionary<String, Skill> skills)
         {
             var points = GetTotalSkillPoints(characterClass, stats[StatConstants.Intelligence], race);
             var rankCap = characterClass.Level + 3;
@@ -119,7 +136,7 @@ namespace CharacterGen.Generators.Domain.Abilities
             return skills;
         }
 
-        private Int32 GetTotalSkillPoints(CharacterClass characterClass, Stat intelligence, Race race)
+        private int GetTotalSkillPoints(CharacterClass characterClass, Stat intelligence, Race race)
         {
             var pointsTable = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.SkillPointsForClasses);
             var perLevel = pointsTable[characterClass.ClassName] + intelligence.Bonus;
@@ -135,7 +152,7 @@ namespace CharacterGen.Generators.Domain.Abilities
             return Math.Max(perLevel * multiplier, characterClass.Level);
         }
 
-        private IEnumerable<String> GetSkillCollection(Dictionary<String, Skill> skills, Int32 rankCap, IEnumerable<String> classSkills, IEnumerable<String> crossClassSkills)
+        private IEnumerable<string> GetSkillCollection(Dictionary<string, Skill> skills, int rankCap, IEnumerable<string> classSkills, IEnumerable<string> crossClassSkills)
         {
             if (skills.Keys.Intersect(classSkills).Any(s => skills[s].Ranks < rankCap) == false)
                 return crossClassSkills.Where(s => skills[s].Ranks < rankCap);
@@ -150,9 +167,10 @@ namespace CharacterGen.Generators.Domain.Abilities
             return classSkills.Where(s => skills[s].Ranks < rankCap);
         }
 
-        private Dictionary<String, Skill> ApplySkillSynergies(Dictionary<String, Skill> skills)
+        private Dictionary<string, Skill> ApplySkillSynergies(Dictionary<string, Skill> skills)
         {
             var skillsWarrantingSynergy = skills.Where(s => s.Value.EffectiveRanks >= 5);
+
             foreach (var skill in skillsWarrantingSynergy)
             {
                 var synergySkills = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillSynergy, skill.Key);

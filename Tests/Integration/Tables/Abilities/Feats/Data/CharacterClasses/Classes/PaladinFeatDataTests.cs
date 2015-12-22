@@ -58,7 +58,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             6,
             8,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.RemoveDisease + "2",
             FeatConstants.SpellLikeAbility,
             SpellConstants.RemoveDisease,
@@ -68,7 +68,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             9,
             11,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.RemoveDisease + "3",
             FeatConstants.SpellLikeAbility,
             SpellConstants.RemoveDisease,
@@ -78,7 +78,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             12,
             14,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.RemoveDisease + "4",
             FeatConstants.SpellLikeAbility,
             SpellConstants.RemoveDisease,
@@ -88,7 +88,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             15,
             17,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.RemoveDisease + "5",
             FeatConstants.SpellLikeAbility,
             SpellConstants.RemoveDisease,
@@ -98,7 +98,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             18,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.Turn,
             FeatConstants.Turn,
             "Undead (as cleric of level - 3)",
@@ -108,7 +108,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             4,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.DivineHealth,
             FeatConstants.DivineHealth,
             "",
@@ -118,7 +118,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             3,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.AuraOfCourage,
             FeatConstants.AuraOfCourage,
             "",
@@ -128,7 +128,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             3,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.LayOnHands,
             FeatConstants.LayOnHands,
             "",
@@ -138,7 +138,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             2,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.DivineGrace,
             FeatConstants.DivineGrace,
             "",
@@ -148,7 +148,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             2,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.SmiteEvil + "1",
             FeatConstants.SmiteEvil,
             "",
@@ -158,7 +158,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             1,
             4,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.SmiteEvil + "2",
             FeatConstants.SmiteEvil,
             "",
@@ -168,7 +168,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             5,
             9,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.SmiteEvil + "3",
             FeatConstants.SmiteEvil,
             "",
@@ -178,7 +178,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             10,
             14,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.SmiteEvil + "4",
             FeatConstants.SmiteEvil,
             "",
@@ -188,7 +188,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             15,
             19,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.SmiteEvil + "5",
             FeatConstants.SmiteEvil,
             "",
@@ -198,7 +198,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             20,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.DetectEvil,
             FeatConstants.SpellLikeAbility,
             SpellConstants.DetectEvil,
@@ -208,7 +208,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             1,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.AuraOfGood,
             FeatConstants.AuraOfGood,
             "",
@@ -218,7 +218,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             1,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.SimpleWeaponProficiency,
             FeatConstants.SimpleWeaponProficiency,
             FeatConstants.Foci.All,
@@ -228,7 +228,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             1,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.MartialWeaponProficiency,
             FeatConstants.MartialWeaponProficiency,
             FeatConstants.Foci.All,
@@ -238,7 +238,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             1,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.LightArmorProficiency,
             FeatConstants.LightArmorProficiency,
             "",
@@ -248,7 +248,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             1,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.MediumArmorProficiency,
             FeatConstants.MediumArmorProficiency,
             "",
@@ -258,7 +258,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             1,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.HeavyArmorProficiency,
             FeatConstants.HeavyArmorProficiency,
             "",
@@ -268,7 +268,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             1,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.ShieldProficiency,
             FeatConstants.ShieldProficiency,
             "",
@@ -278,10 +278,10 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             1,
             0,
             0,
-            "")]
-        public override void Data(String name, String feat, String focusType, Int32 frequencyQuantity, String frequencyQuantityStat, String frequencyTimePeriod, Int32 minimumLevel, Int32 maximumLevel, Int32 strength, String sizeRequirement)
+            "", true)]
+        public override void Data(string name, string feat, string focusType, int frequencyQuantity, string frequencyQuantityStat, string frequencyTimePeriod, int minimumLevel, int maximumLevel, int strength, string sizeRequirement, bool allowFocusOfAll)
         {
-            base.Data(name, feat, focusType, frequencyQuantity, frequencyQuantityStat, frequencyTimePeriod, minimumLevel, maximumLevel, strength, sizeRequirement);
+            base.Data(name, feat, focusType, frequencyQuantity, frequencyQuantityStat, frequencyTimePeriod, minimumLevel, maximumLevel, strength, sizeRequirement, allowFocusOfAll);
         }
     }
 }

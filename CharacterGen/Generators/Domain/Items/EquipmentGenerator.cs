@@ -34,7 +34,14 @@ namespace CharacterGen.Generators.Domain.Items
         public Equipment GenerateWith(IEnumerable<Feat> feats, CharacterClass characterClass, Race race)
         {
             var equipment = new Equipment();
-            equipment.Treasure = treasureGenerator.GenerateAtLevel(characterClass.Level);
+
+            var npcs = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.NPCs);
+
+            var effectiveLevel = characterClass.Level;
+            if (npcs.Contains(characterClass.ClassName))
+                effectiveLevel = Math.Max(effectiveLevel / 2, 1);
+
+            equipment.Treasure = treasureGenerator.GenerateAtLevel(effectiveLevel);
             equipment.Armor = armorGenerator.GenerateArmorFrom(feats, characterClass, race);
 
             var twoWeaponFeats = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TwoHanded);
@@ -67,29 +74,35 @@ namespace CharacterGen.Generators.Domain.Items
             if (equipment.PrimaryHand.Attributes.Contains(AttributeConstants.Melee) == false)
             {
                 var meleeWeapon = weaponGenerator.GenerateMeleeFrom(feats, characterClass, race);
-                equipment.Treasure.Items = equipment.Treasure.Items.Union(new[] { meleeWeapon });
-
-                if (meleeWeapon.Attributes.Contains(AttributeConstants.TwoHanded) == false)
+                if (meleeWeapon != null)
                 {
-                    var shield = armorGenerator.GenerateShieldFrom(feats, characterClass, race);
-                    if (shield != null)
-                        equipment.Treasure.Items = equipment.Treasure.Items.Union(new[] { shield });
+                    equipment.Treasure.Items = equipment.Treasure.Items.Union(new[] { meleeWeapon });
+
+                    if (meleeWeapon.Attributes.Contains(AttributeConstants.TwoHanded) == false)
+                    {
+                        var shield = armorGenerator.GenerateShieldFrom(feats, characterClass, race);
+                        if (shield != null)
+                            equipment.Treasure.Items = equipment.Treasure.Items.Union(new[] { shield });
+                    }
                 }
             }
             else
             {
                 var rangedWeapon = weaponGenerator.GenerateRangedFrom(feats, characterClass, race);
-                equipment.Treasure.Items = equipment.Treasure.Items.Union(new[] { rangedWeapon });
-
-                var baseRangedWeaponTypes = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, rangedWeapon.Name);
-
-                if (WeaponRequiresAmmunition(baseRangedWeaponTypes))
+                if (rangedWeapon != null)
                 {
-                    var ammunitionType = baseRangedWeaponTypes.Last();
-                    var ammunition = weaponGenerator.GenerateAmmunition(feats, characterClass, race, ammunitionType);
+                    equipment.Treasure.Items = equipment.Treasure.Items.Union(new[] { rangedWeapon });
 
-                    if (ammunition != null)
-                        equipment.Treasure.Items = equipment.Treasure.Items.Union(new[] { ammunition });
+                    var baseRangedWeaponTypes = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, rangedWeapon.Name);
+
+                    if (WeaponRequiresAmmunition(baseRangedWeaponTypes))
+                    {
+                        var ammunitionType = baseRangedWeaponTypes.Last();
+                        var ammunition = weaponGenerator.GenerateAmmunition(feats, characterClass, race, ammunitionType);
+
+                        if (ammunition != null)
+                            equipment.Treasure.Items = equipment.Treasure.Items.Union(new[] { ammunition });
+                    }
                 }
             }
 

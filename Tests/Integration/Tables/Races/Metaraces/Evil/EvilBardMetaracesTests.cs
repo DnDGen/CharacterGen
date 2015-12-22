@@ -3,16 +3,15 @@ using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Common.Races;
 using CharacterGen.Tables;
 using NUnit.Framework;
-using System;
 
 namespace CharacterGen.Tests.Integration.Tables.Races.Metaraces.Evil
 {
     [TestFixture]
     public class EvilBardMetaracesTests : PercentileTests
     {
-        protected override String tableName
+        protected override string tableName
         {
-            get { return String.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSMetaraces, AlignmentConstants.Evil, CharacterClassConstants.Bard); }
+            get { return string.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSMetaraces, AlignmentConstants.Evil, CharacterClassConstants.Bard); }
         }
 
         [Test]
@@ -22,7 +21,7 @@ namespace CharacterGen.Tests.Integration.Tables.Races.Metaraces.Evil
         }
 
         [TestCase(RaceConstants.Metaraces.None, 1, 96)]
-        public override void Percentile(String content, Int32 lower, Int32 upper)
+        public override void Percentile(string content, int lower, int upper)
         {
             base.Percentile(content, lower, upper);
         }
@@ -31,7 +30,7 @@ namespace CharacterGen.Tests.Integration.Tables.Races.Metaraces.Evil
         [TestCase(RaceConstants.Metaraces.Vampire, 98)]
         [TestCase(RaceConstants.Metaraces.Lich, 99)]
         [TestCase(RaceConstants.Metaraces.Werewolf, 100)]
-        public override void Percentile(String content, Int32 roll)
+        public override void Percentile(string content, int roll)
         {
             base.Percentile(content, roll);
         }

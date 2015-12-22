@@ -35,6 +35,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         private Dictionary<string, int> racialBaseAttackAdjustments;
         private List<string> initiativeFeats;
         private List<string> attackBonusFeats;
+        private List<string> poorBaseAttacks;
 
         [SetUp]
         public void Setup()
@@ -57,6 +58,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             racialBaseAttackAdjustments = new Dictionary<string, int>();
             initiativeFeats = new List<string>();
             attackBonusFeats = new List<string>();
+            poorBaseAttacks = new List<string>();
 
             characterClass.ClassName = "class name";
             characterClass.Level = 20;
@@ -66,12 +68,15 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             maxDexterityBonuses[string.Empty] = 42;
             averageBaseAttacks.Add("other class name");
             goodBaseAttacks.Add("other class name");
+            poorBaseAttacks.Add(characterClass.ClassName);
 
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.MaxDexterityBonus)).Returns(maxDexterityBonuses);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.GoodBaseAttack))
                 .Returns(goodBaseAttacks);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.AverageBaseAttack))
                 .Returns(averageBaseAttacks);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.PoorBaseAttack))
+                .Returns(poorBaseAttacks);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.Initiative))
                 .Returns(initiativeFeats);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, FeatConstants.AttackBonus))
@@ -96,10 +101,17 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         }
 
         [Test]
-        public void DefaultIsPoorBaseAttack()
+        public void GetPoorBaseAttack()
         {
             var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass, race);
             Assert.That(baseAttack.Bonus, Is.EqualTo(10));
+        }
+
+        [Test]
+        public void ThrowExceptionIfNoBaseAttack()
+        {
+            poorBaseAttacks.Clear();
+            Assert.That(() => combatGenerator.GenerateBaseAttackWith(characterClass, race), Throws.ArgumentException.With.Message.EqualTo("class name has no base attack"));
         }
 
         [TestCase(1, 1)]

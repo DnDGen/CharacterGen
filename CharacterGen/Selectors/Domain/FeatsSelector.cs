@@ -17,14 +17,14 @@ namespace CharacterGen.Selectors.Domain
             this.adjustmentsSelector = adjustmentsSelector;
         }
 
-        public IEnumerable<RacialFeatSelection> SelectRacial(String race)
+        public IEnumerable<RacialFeatSelection> SelectRacial(string race)
         {
             var racialFeats = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, race);
             var racialFeatSelections = new List<RacialFeatSelection>();
 
             foreach (var racialFeat in racialFeats)
             {
-                var tableName = String.Format(TableNameConstants.Formattable.Collection.RACEFeatData, race);
+                var tableName = string.Format(TableNameConstants.Formattable.Collection.RACEFeatData, race);
                 var featData = collectionsSelector.SelectFrom(tableName, racialFeat).ToArray();
 
                 var racialFeatSelection = new RacialFeatSelection();
@@ -40,7 +40,7 @@ namespace CharacterGen.Selectors.Domain
                 var statNames = featData[DataIndexConstants.RacialFeatData.RequiredStatIndex].Split(',');
                 var statValue = Convert.ToInt32(featData[DataIndexConstants.RacialFeatData.RequiredStatMinimumValueIndex]);
 
-                if (String.IsNullOrEmpty(statNames[0]) == false)
+                if (string.IsNullOrEmpty(statNames[0]) == false)
                     for (var i = 0; i < statNames.Length; i++)
                         racialFeatSelection.MinimumStats[statNames[i]] = statValue;
 
@@ -64,7 +64,7 @@ namespace CharacterGen.Selectors.Domain
             return additionalFeatSelections;
         }
 
-        private AdditionalFeatSelection SelectAdditional(String feat)
+        private AdditionalFeatSelection SelectAdditional(string feat)
         {
             var additionalFeatSelection = new AdditionalFeatSelection();
             additionalFeatSelection.Feat = feat;
@@ -80,35 +80,35 @@ namespace CharacterGen.Selectors.Domain
             var featsWithClassRequirements = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.HasClassRequirements);
             if (featsWithClassRequirements.Contains(feat))
             {
-                var tableName = String.Format(TableNameConstants.Formattable.Adjustments.FEATClassRequirements, feat);
+                var tableName = string.Format(TableNameConstants.Formattable.Adjustments.FEATClassRequirements, feat);
                 additionalFeatSelection.RequiredCharacterClasses = adjustmentsSelector.SelectFrom(tableName);
             }
 
             var featsWithSkillRequirements = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.HasSkillRequirements);
             if (featsWithSkillRequirements.Contains(feat))
             {
-                var tableName = String.Format(TableNameConstants.Formattable.Adjustments.FEATSkillRankRequirements, feat);
+                var tableName = string.Format(TableNameConstants.Formattable.Adjustments.FEATSkillRankRequirements, feat);
                 additionalFeatSelection.RequiredSkillRanks = adjustmentsSelector.SelectFrom(tableName);
             }
 
             var featWithStatRequirements = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.HasStatRequirements);
             if (featWithStatRequirements.Contains(feat))
             {
-                var tableName = String.Format(TableNameConstants.Formattable.Adjustments.FEATStatRequirements, feat);
+                var tableName = string.Format(TableNameConstants.Formattable.Adjustments.FEATStatRequirements, feat);
                 additionalFeatSelection.RequiredStats = adjustmentsSelector.SelectFrom(tableName);
             }
 
             return additionalFeatSelection;
         }
 
-        public IEnumerable<CharacterClassFeatSelection> SelectClass(String characterClassName)
+        public IEnumerable<CharacterClassFeatSelection> SelectClass(string characterClassName)
         {
             var classFeats = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, characterClassName);
             var classFeatSelections = new List<CharacterClassFeatSelection>();
 
             foreach (var classFeat in classFeats)
             {
-                var tableName = String.Format(TableNameConstants.Formattable.Collection.CLASSFeatData, characterClassName);
+                var tableName = string.Format(TableNameConstants.Formattable.Collection.CLASSFeatData, characterClassName);
                 var featData = collectionsSelector.SelectFrom(tableName, classFeat).ToArray();
 
                 var classFeatSelection = new CharacterClassFeatSelection();
@@ -122,6 +122,7 @@ namespace CharacterGen.Selectors.Domain
                 classFeatSelection.FrequencyQuantityStat = featData[DataIndexConstants.CharacterClassFeatData.FrequencyQuantityStatIndex];
                 classFeatSelection.RequiredFeats = GetRequiredFeats(classFeat);
                 classFeatSelection.SizeRequirement = featData[DataIndexConstants.CharacterClassFeatData.SizeRequirementIndex];
+                classFeatSelection.AllowFocusOfAll = Convert.ToBoolean(featData[DataIndexConstants.CharacterClassFeatData.AllowFocusOfAllIndex]);
 
                 classFeatSelections.Add(classFeatSelection);
             }
@@ -129,14 +130,15 @@ namespace CharacterGen.Selectors.Domain
             return classFeatSelections;
         }
 
-        private IEnumerable<RequiredFeat> GetRequiredFeats(String feat)
+        private IEnumerable<RequiredFeat> GetRequiredFeats(string feat)
         {
             var allRequiredFeats = collectionsSelector.SelectAllFrom(TableNameConstants.Set.Collection.RequiredFeats);
+            var requiredFeats = new List<RequiredFeat>();
+
             if (allRequiredFeats.ContainsKey(feat) == false)
-                return Enumerable.Empty<RequiredFeat>();
+                return requiredFeats;
 
             var requiredFeatsData = allRequiredFeats[feat];
-            var requiredFeats = new List<RequiredFeat>();
 
             foreach (var requiredFeatData in requiredFeatsData)
             {

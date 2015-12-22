@@ -1,10 +1,10 @@
-﻿using System;
-using System.Linq;
-using CharacterGen.Common.Abilities;
+﻿using CharacterGen.Common.Abilities;
 using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Common.Races;
 using CharacterGen.Tables;
 using NUnit.Framework;
+using System;
+using System.Linq;
 
 namespace CharacterGen.Tests.Integration.Tables.Abilities.Languages
 {
@@ -19,7 +19,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Languages
         [Test]
         public override void CollectionNames()
         {
-            var names = new[] 
+            var names = new[]
             {
                 RaceConstants.BaseRaces.Aasimar,
                 RaceConstants.BaseRaces.Bugbear,
@@ -66,6 +66,11 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Languages
                 RaceConstants.BaseRaces.HalfElf,
                 RaceConstants.BaseRaces.Human,
                 RaceConstants.BaseRaces.MindFlayer,
+                CharacterClassConstants.Adept,
+                CharacterClassConstants.Aristocrat,
+                CharacterClassConstants.Commoner,
+                CharacterClassConstants.Expert,
+                CharacterClassConstants.Warrior
             };
 
             AssertCollectionNames(names);
@@ -280,7 +285,12 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Languages
         [TestCase(CharacterClassConstants.Ranger)]
         [TestCase(CharacterClassConstants.Rogue)]
         [TestCase(CharacterClassConstants.Sorcerer)]
-        public override void DistinctCollection(String name, params String[] collection)
+        [TestCase(CharacterClassConstants.Adept)]
+        [TestCase(CharacterClassConstants.Aristocrat)]
+        [TestCase(CharacterClassConstants.Commoner)]
+        [TestCase(CharacterClassConstants.Expert)]
+        [TestCase(CharacterClassConstants.Warrior)]
+        public override void DistinctCollection(string name, params string[] collection)
         {
             base.DistinctCollection(name, collection);
         }
@@ -288,7 +298,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Languages
         [TestCase(RaceConstants.BaseRaces.HalfElf)]
         [TestCase(RaceConstants.BaseRaces.Human)]
         [TestCase(RaceConstants.BaseRaces.MindFlayer)]
-        public void AllLanguagesExceptDruidicAreBonusLanguages(String name)
+        public void AllLanguagesExceptDruidicAreBonusLanguages(string name)
         {
             var allLanguages = LanguageConstants.GetLanguages();
             var bonusLanguages = allLanguages.Except(new[] { LanguageConstants.Druidic }).ToArray();

@@ -37,6 +37,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Objects
             Assert.That(selection.MaximumLevel, Is.EqualTo(0));
             Assert.That(selection.FrequencyQuantityStat, Is.Empty);
             Assert.That(selection.SizeRequirement, Is.Empty);
+            Assert.That(selection.AllowFocusOfAll, Is.False);
         }
 
         [TestCase(1, false)]

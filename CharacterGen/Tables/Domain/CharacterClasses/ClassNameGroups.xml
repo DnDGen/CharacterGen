@@ -8,6 +8,7 @@
         <item>Paladin</item>
         <item>Ranger</item>
         <item>Bard</item>
+      <item>Adept</item>
     </object>
     <object>
         <name>Mages</name>
@@ -23,7 +24,30 @@
         <item>Ranger</item>
         <item>Sorcerer</item>
         <item>Wizard</item>
+      <item>Adept</item>
     </object>
+  <object>
+    <name>Players</name>
+    <item>Barbarian</item>
+    <item>Bard</item>
+    <item>Cleric</item>
+    <item>Druid</item>
+    <item>Fighter</item>
+    <item>Monk</item>
+    <item>Paladin</item>
+    <item>Ranger</item>
+    <item>Rogue</item>
+    <item>Sorcerer</item>
+    <item>Wizard</item>
+  </object>
+  <object>
+    <name>NPCs</name>
+    <item>Adept</item>
+    <item>Aristocrat</item>
+    <item>Commoner</item>
+    <item>Expert</item>
+    <item>Warrior</item>
+  </object>
     <object>
         <name>Stealth</name>
         <item>Bard</item>
@@ -37,6 +61,7 @@
         <item>Paladin</item>
         <item>Ranger</item>
         <item>Barbarian</item>
+      <item>Warrior</item>
     </object>
     <object>
         <name>Good Base Attack</name>
@@ -44,6 +69,7 @@
         <item>Paladin</item>
         <item>Ranger</item>
         <item>Barbarian</item>
+      <item>Warrior</item>
     </object>
     <object>
         <name>Average Base Attack</name>
@@ -52,7 +78,16 @@
         <item>Druid</item>
         <item>Rogue</item>
         <item>Bard</item>
+        <item>Aristocrat</item>
+        <item>Expert</item>
     </object>
+  <object>
+    <name>Poor Base Attack</name>
+    <item>Wizard</item>
+    <item>Sorcerer</item>
+    <item>Commoner</item>
+    <item>Adept</item>
+  </object>
     <object>
         <name>Lawful Good</name>
         <item>Cleric</item>
@@ -63,6 +98,11 @@
         <item>Rogue</item>
         <item>Sorcerer</item>
         <item>Wizard</item>
+      <item>Adept</item>
+      <item>Aristocrat</item>
+      <item>Commoner</item>
+      <item>Expert</item>
+      <item>Warrior</item>
     </object>
     <object>
         <name>Neutral Good</name>
@@ -75,6 +115,11 @@
         <item>Rogue</item>
         <item>Sorcerer</item>
         <item>Wizard</item>
+    <item>Adept</item>
+    <item>Aristocrat</item>
+    <item>Commoner</item>
+    <item>Expert</item>
+    <item>Warrior</item>
     </object>
     <object>
         <name>Chaotic Good</name>
@@ -86,6 +131,11 @@
         <item>Rogue</item>
         <item>Sorcerer</item>
         <item>Wizard</item>
+    <item>Adept</item>
+    <item>Aristocrat</item>
+    <item>Commoner</item>
+    <item>Expert</item>
+    <item>Warrior</item>
     </object>
     <object>
         <name>Lawful Neutral</name>
@@ -97,18 +147,28 @@
         <item>Rogue</item>
         <item>Sorcerer</item>
         <item>Wizard</item>
+      <item>Adept</item>
+      <item>Aristocrat</item>
+      <item>Commoner</item>
+      <item>Expert</item>
+      <item>Warrior</item>
     </object>
     <object>
-        <name>True Neutral</name>
-        <item>Barbarian</item>
-        <item>Bard</item>
-        <item>Cleric</item>
-        <item>Druid</item>
-        <item>Fighter</item>
-        <item>Ranger</item>
-        <item>Rogue</item>
-        <item>Sorcerer</item>
-        <item>Wizard</item>
+      <name>True Neutral</name>
+      <item>Barbarian</item>
+      <item>Bard</item>
+      <item>Cleric</item>
+      <item>Druid</item>
+      <item>Fighter</item>
+      <item>Ranger</item>
+      <item>Rogue</item>
+      <item>Sorcerer</item>
+      <item>Wizard</item>
+      <item>Adept</item>
+      <item>Aristocrat</item>
+      <item>Commoner</item>
+      <item>Expert</item>
+      <item>Warrior</item>
     </object>
     <object>
         <name>Chaotic Neutral</name>
@@ -121,6 +181,11 @@
         <item>Rogue</item>
         <item>Sorcerer</item>
         <item>Wizard</item>
+      <item>Adept</item>
+      <item>Aristocrat</item>
+      <item>Commoner</item>
+      <item>Expert</item>
+      <item>Warrior</item>
     </object>
     <object>
         <name>Lawful Evil</name>
@@ -131,6 +196,11 @@
         <item>Rogue</item>
         <item>Sorcerer</item>
         <item>Wizard</item>
+    <item>Adept</item>
+    <item>Aristocrat</item>
+    <item>Commoner</item>
+    <item>Expert</item>
+    <item>Warrior</item>
     </object>
     <object>
         <name>Neutral Evil</name>
@@ -143,6 +213,11 @@
         <item>Rogue</item>
         <item>Sorcerer</item>
         <item>Wizard</item>
+      <item>Adept</item>
+      <item>Aristocrat</item>
+      <item>Commoner</item>
+      <item>Expert</item>
+      <item>Warrior</item>
     </object>
     <object>
         <name>Chaotic Evil</name>
@@ -154,6 +229,11 @@
         <item>Rogue</item>
         <item>Sorcerer</item>
         <item>Wizard</item>
+      <item>Adept</item>
+      <item>Aristocrat</item>
+      <item>Commoner</item>
+      <item>Expert</item>
+      <item>Warrior</item>
     </object>
   <object>
     <name>Fortitude</name>
@@ -164,6 +244,7 @@
     <item>Paladin</item>
     <item>Monk</item>
     <item>Ranger</item>
+    <item>Warrior</item>
   </object>
   <object>
     <name>Reflex</name>
@@ -180,12 +261,16 @@
     <item>Monk</item>
     <item>Sorcerer</item>
     <item>Wizard</item>
+    <item>Adept</item>
+    <item>Aristocrat</item>
+    <item>Expert</item>
   </object>
   <object>
     <name>Intuitive</name>
     <item>Barbarian</item>
     <item>Rogue</item>
     <item>Sorcerer</item>
+    <item>Commoner</item>
   </object>
   <object>
     <name>Self-Taught</name>
@@ -193,6 +278,7 @@
     <item>Fighter</item>
     <item>Paladin</item>
     <item>Ranger</item>
+    <item>Warrior</item>
   </object>
   <object>
     <name>Trained</name>
@@ -200,6 +286,9 @@
     <item>Druid</item>
     <item>Monk</item>
     <item>Wizard</item>
+    <item>Adept</item>
+    <item>Aristocrat</item>
+    <item>Expert</item>
   </object>
   <object>
     <name>Arcane</name>

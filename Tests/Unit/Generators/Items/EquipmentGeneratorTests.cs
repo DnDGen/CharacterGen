@@ -30,13 +30,14 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         private CharacterClass characterClass;
         private Item meleeWeapon;
         private Item rangedWeapon;
-        private List<String> baseRangedWeaponTypes;
+        private List<string> baseRangedWeaponTypes;
         private Item armor;
         private Treasure treasure;
         private Race race;
-        private List<String> shieldProficiencyFeats;
-        private List<String> weaponProficiencyFeats;
+        private List<string> shieldProficiencyFeats;
+        private List<string> weaponProficiencyFeats;
         private Item treasureItem;
+        private List<string> npcs;
 
         [SetUp]
         public void Setup()
@@ -52,12 +53,13 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             characterClass = new CharacterClass();
             meleeWeapon = new Item();
             rangedWeapon = new Item();
-            baseRangedWeaponTypes = new List<String>();
+            baseRangedWeaponTypes = new List<string>();
             armor = new Item();
             treasure = new Treasure();
             race = new Race();
-            shieldProficiencyFeats = new List<String>();
-            weaponProficiencyFeats = new List<String>();
+            shieldProficiencyFeats = new List<string>();
+            weaponProficiencyFeats = new List<string>();
+            npcs = new List<string>();
 
             characterClass.Level = 9266;
             meleeWeapon.Name = "melee weapon";
@@ -76,13 +78,15 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             mockWeaponGenerator.Setup(g => g.GenerateRangedFrom(feats, characterClass, race)).Returns(rangedWeapon);
             mockWeaponGenerator.Setup(g => g.GenerateMeleeFrom(feats, characterClass, race)).Returns(meleeWeapon);
             mockArmorGenerator.Setup(g => g.GenerateArmorFrom(feats, characterClass, race)).Returns(armor);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, It.IsAny<String>())).Returns((String table, String name) => new[] { name });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, It.IsAny<string>())).Returns((String table, String name) => new[] { name });
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, rangedWeapon.Name)).Returns(baseRangedWeaponTypes);
             mockTreasureGenerator.Setup(g => g.GenerateAtLevel(9266)).Returns(treasure);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, AttributeConstants.Shield + GroupConstants.Proficiency))
                 .Returns(shieldProficiencyFeats);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, ItemTypeConstants.Weapon + GroupConstants.Proficiency))
                 .Returns(weaponProficiencyFeats);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.NPCs))
+                .Returns(npcs);
         }
 
         [Test]
@@ -266,6 +270,19 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         }
 
         [Test]
+        public void GenerateNoMeleeWeaponForTreasure()
+        {
+            Item noMeleeWeapon = null;
+            mockWeaponGenerator.Setup(g => g.GenerateFrom(feats, characterClass, race)).Returns(rangedWeapon);
+            mockWeaponGenerator.Setup(g => g.GenerateMeleeFrom(feats, characterClass, race)).Returns(noMeleeWeapon);
+
+            var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
+            Assert.That(equipment.PrimaryHand, Is.EqualTo(rangedWeapon));
+            Assert.That(equipment.Treasure.Items, Contains.Item(treasureItem));
+            Assert.That(equipment.Treasure.Items, Is.All.Not.Null);
+        }
+
+        [Test]
         public void AllowTwoHandedMeleeIfCharacterDoesNotHaveTwoWeaponFeat()
         {
             mockWeaponGenerator.Setup(g => g.GenerateFrom(feats, characterClass, race)).Returns(rangedWeapon);
@@ -360,6 +377,38 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         }
 
         [Test]
+        public void GenerateNoRangedToCarry()
+        {
+            Item noRangedWeapon = null;
+            mockWeaponGenerator.Setup(g => g.GenerateRangedFrom(feats, characterClass, race)).Returns(noRangedWeapon);
+
+            var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
+            Assert.That(equipment.PrimaryHand, Is.EqualTo(meleeWeapon));
+            Assert.That(equipment.Treasure.Items, Contains.Item(treasureItem));
+            Assert.That(equipment.Treasure.Items, Is.All.Not.Null);
+        }
+
+        [Test]
+        public void IfPrimaryHandIsMelee_GenerateNoRangedOrAmmunitionToCarry()
+        {
+            Item noRangedWeapon = null;
+            mockWeaponGenerator.Setup(g => g.GenerateRangedFrom(feats, characterClass, race)).Returns(noRangedWeapon);
+
+            var ammo = new Item();
+            ammo.Name = "ammunition";
+            ammo.Attributes = new[] { AttributeConstants.Ammunition };
+
+            baseRangedWeaponTypes.Add("ammunition");
+            mockWeaponGenerator.Setup(g => g.GenerateAmmunition(feats, characterClass, race, "ammunition")).Returns(ammo);
+
+            var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
+            Assert.That(equipment.PrimaryHand, Is.EqualTo(meleeWeapon));
+            Assert.That(equipment.Treasure.Items, Contains.Item(treasureItem));
+            Assert.That(equipment.Treasure.Items, Is.All.Not.Null);
+            Assert.That(equipment.Treasure.Items, Is.All.Not.EqualTo(ammo));
+        }
+
+        [Test]
         public void IfPrimaryHandIsMelee_GenerateRangedAndAmmunitionToCarry()
         {
             var ammo = new Item();
@@ -408,6 +457,72 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             Assert.That(equipment.OffHand, Is.Null);
             Assert.That(equipment.Treasure.Items, Contains.Item(treasureItem));
             Assert.That(equipment.Treasure.Items, Contains.Item(shield));
+        }
+
+        [TestCase(1, 1)]
+        [TestCase(2, 1)]
+        [TestCase(3, 1)]
+        [TestCase(4, 2)]
+        [TestCase(5, 2)]
+        [TestCase(6, 3)]
+        [TestCase(7, 3)]
+        [TestCase(8, 4)]
+        [TestCase(9, 4)]
+        [TestCase(10, 5)]
+        [TestCase(11, 5)]
+        [TestCase(12, 6)]
+        [TestCase(13, 6)]
+        [TestCase(14, 7)]
+        [TestCase(15, 7)]
+        [TestCase(16, 8)]
+        [TestCase(17, 8)]
+        [TestCase(18, 9)]
+        [TestCase(19, 9)]
+        [TestCase(20, 10)]
+        public void NPCIsHalfLevel(int npcLevel, int effectiveLevel)
+        {
+            characterClass.Level = npcLevel;
+            characterClass.ClassName = "class name";
+            npcs.Add(characterClass.ClassName);
+
+            var npcTreasure = new Treasure();
+            mockTreasureGenerator.Setup(g => g.GenerateAtLevel(effectiveLevel)).Returns(npcTreasure);
+
+            var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
+            Assert.That(equipment.Treasure, Is.EqualTo(npcTreasure));
+        }
+
+        [TestCase(1, 1)]
+        [TestCase(2, 2)]
+        [TestCase(3, 3)]
+        [TestCase(4, 4)]
+        [TestCase(5, 5)]
+        [TestCase(6, 6)]
+        [TestCase(7, 7)]
+        [TestCase(8, 8)]
+        [TestCase(9, 9)]
+        [TestCase(10, 10)]
+        [TestCase(11, 11)]
+        [TestCase(12, 12)]
+        [TestCase(13, 13)]
+        [TestCase(14, 14)]
+        [TestCase(15, 15)]
+        [TestCase(16, 16)]
+        [TestCase(17, 17)]
+        [TestCase(18, 18)]
+        [TestCase(19, 19)]
+        [TestCase(20, 20)]
+        public void PlayerCharacterIsFullLevel(int level, int effectiveLevel)
+        {
+            characterClass.Level = level;
+            characterClass.ClassName = "class name";
+            npcs.Add("npc class");
+
+            var playerTreasure = new Treasure();
+            mockTreasureGenerator.Setup(g => g.GenerateAtLevel(effectiveLevel)).Returns(playerTreasure);
+
+            var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
+            Assert.That(equipment.Treasure, Is.EqualTo(playerTreasure));
         }
     }
 }

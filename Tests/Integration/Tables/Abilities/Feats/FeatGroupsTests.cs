@@ -140,13 +140,21 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
                 GroupConstants.SavingThrows,
                 GroupConstants.Initiative,
                 AttributeConstants.Shield + GroupConstants.Proficiency,
-                GroupConstants.AddMonsterHitDiceToStrength
+                GroupConstants.AddMonsterHitDiceToStrength,
+                FeatConstants.AttackBonus,
+                CharacterClassConstants.Adept,
+                CharacterClassConstants.Aristocrat,
+                CharacterClassConstants.Commoner,
+                CharacterClassConstants.Expert,
+                CharacterClassConstants.Warrior
             };
 
             AssertCollectionNames(names);
         }
 
         [TestCase("")]
+        [TestCase(FeatConstants.AttackBonus,
+            FeatConstants.AttackBonus)]
         [TestCase(GroupConstants.AddMonsterHitDiceToStrength,
             FeatConstants.SpellResistance)]
         [TestCase(GroupConstants.HasSkillRequirements,
@@ -444,6 +452,29 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.SkillBonus)]
         [TestCase(CharacterClassConstants.Schools.Transmutation,
             FeatConstants.SkillBonus)]
+        [TestCase(CharacterClassConstants.Adept,
+            FeatConstants.SimpleWeaponProficiency)]
+        [TestCase(CharacterClassConstants.Aristocrat,
+            FeatConstants.SimpleWeaponProficiency,
+            FeatConstants.MartialWeaponProficiency,
+            FeatConstants.LightArmorProficiency,
+            FeatConstants.MediumArmorProficiency,
+            FeatConstants.HeavyArmorProficiency,
+            FeatConstants.ShieldProficiency,
+            FeatConstants.TowerShieldProficiency)]
+        [TestCase(CharacterClassConstants.Commoner,
+            FeatConstants.SimpleWeaponProficiency)]
+        [TestCase(CharacterClassConstants.Expert,
+            FeatConstants.SimpleWeaponProficiency,
+            FeatConstants.LightArmorProficiency)]
+        [TestCase(CharacterClassConstants.Warrior,
+            FeatConstants.SimpleWeaponProficiency,
+            FeatConstants.MartialWeaponProficiency,
+            FeatConstants.LightArmorProficiency,
+            FeatConstants.MediumArmorProficiency,
+            FeatConstants.HeavyArmorProficiency,
+            FeatConstants.ShieldProficiency,
+            FeatConstants.TowerShieldProficiency)]
         public void ClassFeatGroup(string name, params string[] collection)
         {
             base.DistinctCollection(name, collection);

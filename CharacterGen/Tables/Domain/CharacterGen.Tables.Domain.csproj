@@ -1712,6 +1712,202 @@
   <ItemGroup>
     <EmbeddedResource Include="Magics\Spells\ArcaneSpellFailures.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\BaseRaces\Good\GoodAdeptBaseRaces.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\Metaraces\Good\GoodAdeptMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\Metaraces\Neutral\NeutralAdeptMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\Metaraces\Evil\EvilAdeptMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\BaseRaces\Neutral\NeutralAdeptBaseRaces.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\BaseRaces\Evil\EvilAdeptBaseRaces.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CharacterClasses\HasSpecialistFields\ExpertHasSpecialistFields.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\Metaraces\Neutral\NeutralExpertMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\Metaraces\Good\GoodExpertMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\Metaraces\Evil\EvilExpertMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\BaseRaces\Neutral\NeutralExpertBaseRaces.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\BaseRaces\Good\GoodExpertBaseRaces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\BaseRaces\Evil\EvilExpertBaseRaces.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CharacterClasses\HasSpecialistFields\WarriorHasSpecialistFields.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CharacterClasses\HasSpecialistFields\AdeptHasSpecialistFields.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CharacterClasses\HasSpecialistFields\CommonerHasSpecialistFields.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CharacterClasses\HasSpecialistFields\AristocratHasSpecialistFields.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\Metaraces\Neutral\NeutralWarriorMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\Metaraces\Good\GoodWarriorMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\Metaraces\Evil\EvilWarriorMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\BaseRaces\Neutral\NeutralWarriorBaseRaces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\BaseRaces\Good\GoodWarriorBaseRaces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\BaseRaces\Evil\EvilWarriorBaseRaces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\Metaraces\Evil\EvilCommonerMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\Metaraces\Good\GoodCommonerMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\Metaraces\Neutral\NeutralCommonerMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\BaseRaces\Neutral\NeutralCommonerBaseRaces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\BaseRaces\Good\GoodCommonerBaseRaces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\BaseRaces\Evil\EvilCommonerBaseRaces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Feats\Data\CharacterClasses\Classes\WarriorFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Feats\Data\CharacterClasses\Classes\AristocratFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Feats\Data\CharacterClasses\Classes\CommonerFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Feats\Data\CharacterClasses\Classes\AdeptFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Abilities\Feats\Data\CharacterClasses\Classes\ExpertFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\Metaraces\Neutral\NeutralAristocratMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\Metaraces\Good\GoodAristocratMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\Metaraces\Evil\EvilAristocratMetaraces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\BaseRaces\Neutral\NeutralAristocratBaseRaces.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\BaseRaces\Good\GoodAristocratBaseRaces.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\BaseRaces\Evil\EvilAristocratBaseRaces.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Adepts\Level10AdeptSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Adepts\Level11AdeptSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Adepts\Level12AdeptSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Adepts\Level13AdeptSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Adepts\Level14AdeptSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Adepts\Level15AdeptSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Adepts\Level16AdeptSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Adepts\Level17AdeptSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Adepts\Level18AdeptSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Adepts\Level19AdeptSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Adepts\Level1AdeptSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Adepts\Level20AdeptSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Adepts\Level2AdeptSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Adepts\Level3AdeptSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Adepts\Level4AdeptSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Adepts\Level5AdeptSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Adepts\Level6AdeptSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Adepts\Level7AdeptSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Adepts\Level8AdeptSpellsPerDay.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Magics\Spells\Adepts\Level9AdeptSpellsPerDay.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

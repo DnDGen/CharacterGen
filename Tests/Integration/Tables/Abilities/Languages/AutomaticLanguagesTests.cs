@@ -77,6 +77,11 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Languages
                 CharacterClassConstants.Rogue,
                 CharacterClassConstants.Sorcerer,
                 CharacterClassConstants.Wizard,
+                CharacterClassConstants.Adept,
+                CharacterClassConstants.Aristocrat,
+                CharacterClassConstants.Commoner,
+                CharacterClassConstants.Expert,
+                CharacterClassConstants.Warrior
             };
 
             AssertCollectionNames(names);
@@ -213,6 +218,11 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Languages
         [TestCase(CharacterClassConstants.Rogue)]
         [TestCase(CharacterClassConstants.Sorcerer)]
         [TestCase(CharacterClassConstants.Wizard)]
+        [TestCase(CharacterClassConstants.Adept)]
+        [TestCase(CharacterClassConstants.Aristocrat)]
+        [TestCase(CharacterClassConstants.Commoner)]
+        [TestCase(CharacterClassConstants.Expert)]
+        [TestCase(CharacterClassConstants.Warrior)]
         public override void DistinctCollection(String name, params String[] languages)
         {
             base.DistinctCollection(name, languages);

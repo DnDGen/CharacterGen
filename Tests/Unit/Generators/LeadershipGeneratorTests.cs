@@ -10,7 +10,6 @@ using CharacterGen.Selectors;
 using CharacterGen.Tables;
 using Moq;
 using NUnit.Framework;
-using System;
 using System.Collections.Generic;
 
 namespace CharacterGen.Tests.Unit.Generators
@@ -26,17 +25,19 @@ namespace CharacterGen.Tests.Unit.Generators
         private Mock<ISetLevelRandomizer> mockSetLevelRandomizer;
         private Mock<ISetAlignmentRandomizer> mockSetAlignmentRandomizer;
         private Mock<IAlignmentRandomizer> mockAnyAlignmentRandomizer;
-        private Mock<IClassNameRandomizer> mockAnyClassNameRandomizer;
+        private Mock<IClassNameRandomizer> mockAnyPlayerClassNameRandomizer;
         private Mock<RaceRandomizer> mockAnyBaseRaceRandomizer;
         private Mock<RaceRandomizer> mockAnyMetaraceRandomizer;
         private Mock<IStatsRandomizer> mockRawStatRandomizer;
         private Mock<IBooleanPercentileSelector> mockBooleanPercentileSelector;
         private Mock<ICollectionsSelector> mockCollectionsSelector;
         private Mock<IAlignmentGenerator> mockAlignmentGenerator;
+        private Mock<IClassNameRandomizer> mockAnyNPCClassNameRandomizer;
         private Generator generator;
-        private List<String> allowedAlignments;
-        private String leaderAlignment;
+        private List<string> allowedAlignments;
+        private string leaderAlignment;
         private FollowerQuantities followerQuantities;
+        private List<string> npcClasses;
 
         [SetUp]
         public void Setup()
@@ -48,7 +49,7 @@ namespace CharacterGen.Tests.Unit.Generators
             mockSetLevelRandomizer = new Mock<ISetLevelRandomizer>();
             mockSetAlignmentRandomizer = new Mock<ISetAlignmentRandomizer>();
             mockAnyAlignmentRandomizer = new Mock<IAlignmentRandomizer>();
-            mockAnyClassNameRandomizer = new Mock<IClassNameRandomizer>();
+            mockAnyPlayerClassNameRandomizer = new Mock<IClassNameRandomizer>();
             mockAnyBaseRaceRandomizer = new Mock<RaceRandomizer>();
             mockAnyMetaraceRandomizer = new Mock<RaceRandomizer>();
             mockRawStatRandomizer = new Mock<IStatsRandomizer>();
@@ -56,14 +57,16 @@ namespace CharacterGen.Tests.Unit.Generators
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
             mockAlignmentGenerator = new Mock<IAlignmentGenerator>();
             generator = new ConfigurableIterationGenerator(2);
+            mockAnyNPCClassNameRandomizer = new Mock<IClassNameRandomizer>();
             leadershipGenerator = new LeadershipGenerator(mockCharacterGenerator.Object, mockLeadershipSelector.Object, mockPercentileSelector.Object,
                 mockAdjustmentsSelector.Object, mockSetLevelRandomizer.Object, mockSetAlignmentRandomizer.Object, mockAnyAlignmentRandomizer.Object,
-                mockAnyClassNameRandomizer.Object, mockAnyBaseRaceRandomizer.Object, mockAnyMetaraceRandomizer.Object, mockRawStatRandomizer.Object,
-                mockBooleanPercentileSelector.Object, mockCollectionsSelector.Object, mockAlignmentGenerator.Object, generator);
-            allowedAlignments = new List<String>();
+                mockAnyPlayerClassNameRandomizer.Object, mockAnyBaseRaceRandomizer.Object, mockAnyMetaraceRandomizer.Object, mockRawStatRandomizer.Object,
+                mockBooleanPercentileSelector.Object, mockCollectionsSelector.Object, mockAlignmentGenerator.Object, generator, mockAnyNPCClassNameRandomizer.Object);
+            allowedAlignments = new List<string>();
             followerQuantities = new FollowerQuantities();
+            npcClasses = new List<string>();
 
-            mockLeadershipSelector.Setup(s => s.SelectFollowerQuantitiesFor(It.IsAny<Int32>())).Returns(new FollowerQuantities());
+            mockLeadershipSelector.Setup(s => s.SelectFollowerQuantitiesFor(It.IsAny<int>())).Returns(new FollowerQuantities());
             mockSetLevelRandomizer.SetupAllProperties();
             mockSetAlignmentRandomizer.SetupAllProperties();
             leaderAlignment = "leader alignment";
@@ -74,12 +77,13 @@ namespace CharacterGen.Tests.Unit.Generators
 
             mockAlignmentGenerator.Setup(g => g.GenerateWith(mockSetAlignmentRandomizer.Object)).Returns((IAlignmentRandomizer r) => (r as ISetAlignmentRandomizer).SetAlignment);
             mockAlignmentGenerator.Setup(g => g.GenerateWith(mockAnyAlignmentRandomizer.Object)).Returns(new Alignment("any alignment"));
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.NPCs)).Returns(npcClasses);
         }
 
         [Test]
         public void LeadershipScoreIsLevelPlusCharismaModifier()
         {
-            var leadership = leadershipGenerator.GenerateLeadership(9266, 90210, String.Empty);
+            var leadership = leadershipGenerator.GenerateLeadership(9266, 90210, string.Empty);
             Assert.That(leadership.Score, Is.EqualTo(99476));
             Assert.That(leadership.CohortScore, Is.EqualTo(99476));
         }
@@ -89,11 +93,11 @@ namespace CharacterGen.Tests.Unit.Generators
         {
             mockPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Percentile.Reputation)).Returns("reputable");
 
-            var reputationAjustments = new Dictionary<String, Int32>();
+            var reputationAjustments = new Dictionary<string, int>();
             reputationAjustments["reputable"] = 0;
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.LeadershipModifiers)).Returns(reputationAjustments);
 
-            var leadership = leadershipGenerator.GenerateLeadership(9266, 90210, String.Empty);
+            var leadership = leadershipGenerator.GenerateLeadership(9266, 90210, string.Empty);
             Assert.That(leadership.LeadershipModifiers, Contains.Item("reputable"));
         }
 
@@ -102,11 +106,11 @@ namespace CharacterGen.Tests.Unit.Generators
         {
             mockPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Percentile.Reputation)).Returns("reputable");
 
-            var reputationAjustments = new Dictionary<String, Int32>();
+            var reputationAjustments = new Dictionary<string, int>();
             reputationAjustments["reputable"] = 42;
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.LeadershipModifiers)).Returns(reputationAjustments);
 
-            var leadership = leadershipGenerator.GenerateLeadership(9266, 90210, String.Empty);
+            var leadership = leadershipGenerator.GenerateLeadership(9266, 90210, string.Empty);
             Assert.That(leadership.LeadershipModifiers, Contains.Item("reputable"));
             Assert.That(leadership.Score, Is.EqualTo(99518));
             Assert.That(leadership.CohortScore, Is.EqualTo(99518));
@@ -117,11 +121,11 @@ namespace CharacterGen.Tests.Unit.Generators
         {
             mockPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Percentile.Reputation)).Returns("reputable");
 
-            var reputationAjustments = new Dictionary<String, Int32>();
+            var reputationAjustments = new Dictionary<string, int>();
             reputationAjustments["reputable"] = -42;
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.LeadershipModifiers)).Returns(reputationAjustments);
 
-            var leadership = leadershipGenerator.GenerateLeadership(9266, 90210, String.Empty);
+            var leadership = leadershipGenerator.GenerateLeadership(9266, 90210, string.Empty);
             Assert.That(leadership.LeadershipModifiers, Contains.Item("reputable"));
             Assert.That(leadership.Score, Is.EqualTo(99434));
             Assert.That(leadership.CohortScore, Is.EqualTo(99434));
@@ -140,7 +144,7 @@ namespace CharacterGen.Tests.Unit.Generators
         {
             mockBooleanPercentileSelector.SetupSequence(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.KilledCohort)).Returns(true).Returns(false);
 
-            var leadership = leadershipGenerator.GenerateLeadership(9266, 90210, String.Empty);
+            var leadership = leadershipGenerator.GenerateLeadership(9266, 90210, string.Empty);
             Assert.That(leadership.Score, Is.EqualTo(99476));
             Assert.That(leadership.CohortScore, Is.EqualTo(99474));
             Assert.That(leadership.LeadershipModifiers, Contains.Item("Caused the death of 1 cohort(s)"));
@@ -151,7 +155,7 @@ namespace CharacterGen.Tests.Unit.Generators
         {
             mockBooleanPercentileSelector.SetupSequence(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.KilledCohort)).Returns(true).Returns(true).Returns(false);
 
-            var leadership = leadershipGenerator.GenerateLeadership(9266, 90210, String.Empty);
+            var leadership = leadershipGenerator.GenerateLeadership(9266, 90210, string.Empty);
             Assert.That(leadership.Score, Is.EqualTo(99476));
             Assert.That(leadership.CohortScore, Is.EqualTo(99472));
             Assert.That(leadership.LeadershipModifiers, Contains.Item("Caused the death of 2 cohort(s)"));
@@ -161,7 +165,7 @@ namespace CharacterGen.Tests.Unit.Generators
         public void GetFollowerQuantities()
         {
             mockLeadershipSelector.Setup(s => s.SelectFollowerQuantitiesFor(99476)).Returns(followerQuantities);
-            var leadership = leadershipGenerator.GenerateLeadership(9266, 90210, String.Empty);
+            var leadership = leadershipGenerator.GenerateLeadership(9266, 90210, string.Empty);
             Assert.That(leadership.FollowerQuantities, Is.EqualTo(followerQuantities));
         }
 
@@ -170,14 +174,14 @@ namespace CharacterGen.Tests.Unit.Generators
         {
             mockPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Percentile.LeadershipMovement)).Returns("moves");
 
-            var leadershipAdjustments = new Dictionary<String, Int32>();
+            var leadershipAdjustments = new Dictionary<string, int>();
             leadershipAdjustments["moves"] = 42;
             leadershipAdjustments["murders"] = -5;
 
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.LeadershipModifiers)).Returns(leadershipAdjustments);
             mockLeadershipSelector.Setup(s => s.SelectFollowerQuantitiesFor(99518)).Returns(followerQuantities);
 
-            var leadership = leadershipGenerator.GenerateLeadership(9266, 90210, String.Empty);
+            var leadership = leadershipGenerator.GenerateLeadership(9266, 90210, string.Empty);
             Assert.That(leadership.Score, Is.EqualTo(99476));
             Assert.That(leadership.CohortScore, Is.EqualTo(99476));
             Assert.That(leadership.FollowerQuantities, Is.EqualTo(followerQuantities));
@@ -186,8 +190,8 @@ namespace CharacterGen.Tests.Unit.Generators
         [Test]
         public void CharacterDoesNotHaveEmptyLeadershipModifiers()
         {
-            mockPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Percentile.LeadershipMovement)).Returns(String.Empty);
-            var leadership = leadershipGenerator.GenerateLeadership(9266, 90210, String.Empty);
+            mockPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Percentile.LeadershipMovement)).Returns(string.Empty);
+            var leadership = leadershipGenerator.GenerateLeadership(9266, 90210, string.Empty);
             Assert.That(leadership.LeadershipModifiers, Is.Empty);
         }
 
@@ -197,7 +201,7 @@ namespace CharacterGen.Tests.Unit.Generators
             mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.KilledFollowers)).Returns(true);
             mockLeadershipSelector.Setup(s => s.SelectFollowerQuantitiesFor(99475)).Returns(followerQuantities);
 
-            var leadership = leadershipGenerator.GenerateLeadership(9266, 90210, String.Empty);
+            var leadership = leadershipGenerator.GenerateLeadership(9266, 90210, string.Empty);
             Assert.That(leadership.Score, Is.EqualTo(99476));
             Assert.That(leadership.CohortScore, Is.EqualTo(99476));
             Assert.That(leadership.FollowerQuantities, Is.EqualTo(followerQuantities));
@@ -209,10 +213,25 @@ namespace CharacterGen.Tests.Unit.Generators
             mockLeadershipSelector.Setup(s => s.SelectCohortLevelFor(9266)).Returns(42);
 
             var cohort = new Character();
-            mockCharacterGenerator.Setup(g => g.GenerateWith(mockSetAlignmentRandomizer.Object, mockAnyClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockAnyBaseRaceRandomizer.Object, mockAnyMetaraceRandomizer.Object, mockRawStatRandomizer.Object))
+            mockCharacterGenerator.Setup(g => g.GenerateWith(mockSetAlignmentRandomizer.Object, mockAnyPlayerClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockAnyBaseRaceRandomizer.Object, mockAnyMetaraceRandomizer.Object, mockRawStatRandomizer.Object))
                 .Returns(cohort);
 
-            var generatedCohort = leadershipGenerator.GenerateCohort(9266, 90210, leaderAlignment);
+            var generatedCohort = leadershipGenerator.GenerateCohort(9266, 90210, leaderAlignment, "class name");
+            Assert.That(generatedCohort, Is.EqualTo(cohort));
+            mockSetLevelRandomizer.VerifySet(r => r.SetLevel = 42);
+        }
+
+        [Test]
+        public void GenerateNPCCohort()
+        {
+            mockLeadershipSelector.Setup(s => s.SelectCohortLevelFor(9266)).Returns(42);
+            npcClasses.Add("class name");
+
+            var cohort = new Character();
+            mockCharacterGenerator.Setup(g => g.GenerateWith(mockSetAlignmentRandomizer.Object, mockAnyNPCClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockAnyBaseRaceRandomizer.Object, mockAnyMetaraceRandomizer.Object, mockRawStatRandomizer.Object))
+                .Returns(cohort);
+
+            var generatedCohort = leadershipGenerator.GenerateCohort(9266, 90210, leaderAlignment, "class name");
             Assert.That(generatedCohort, Is.EqualTo(cohort));
             mockSetLevelRandomizer.VerifySet(r => r.SetLevel = 42);
         }
@@ -223,10 +242,10 @@ namespace CharacterGen.Tests.Unit.Generators
             mockLeadershipSelector.Setup(s => s.SelectCohortLevelFor(9266)).Returns(90210);
 
             var cohort = new Character();
-            mockCharacterGenerator.Setup(g => g.GenerateWith(mockSetAlignmentRandomizer.Object, mockAnyClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockAnyBaseRaceRandomizer.Object, mockAnyMetaraceRandomizer.Object, mockRawStatRandomizer.Object))
+            mockCharacterGenerator.Setup(g => g.GenerateWith(mockSetAlignmentRandomizer.Object, mockAnyPlayerClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockAnyBaseRaceRandomizer.Object, mockAnyMetaraceRandomizer.Object, mockRawStatRandomizer.Object))
                 .Returns(cohort);
 
-            var generatedCohort = leadershipGenerator.GenerateCohort(9266, 42, leaderAlignment);
+            var generatedCohort = leadershipGenerator.GenerateCohort(9266, 42, leaderAlignment, "class name");
             Assert.That(generatedCohort, Is.EqualTo(cohort));
             mockSetLevelRandomizer.VerifySet(r => r.SetLevel = 40);
         }
@@ -238,10 +257,10 @@ namespace CharacterGen.Tests.Unit.Generators
             mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AttractCohortOfDifferentAlignment)).Returns(false);
 
             var cohort = new Character();
-            mockCharacterGenerator.Setup(g => g.GenerateWith(mockSetAlignmentRandomizer.Object, mockAnyClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockAnyBaseRaceRandomizer.Object, mockAnyMetaraceRandomizer.Object, mockRawStatRandomizer.Object))
+            mockCharacterGenerator.Setup(g => g.GenerateWith(mockSetAlignmentRandomizer.Object, mockAnyPlayerClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockAnyBaseRaceRandomizer.Object, mockAnyMetaraceRandomizer.Object, mockRawStatRandomizer.Object))
                 .Returns(cohort);
 
-            var generatedCohort = leadershipGenerator.GenerateCohort(9266, 90210, leaderAlignment);
+            var generatedCohort = leadershipGenerator.GenerateCohort(9266, 90210, leaderAlignment, "class name");
             Assert.That(generatedCohort, Is.EqualTo(cohort));
             mockSetAlignmentRandomizer.VerifySet(r => r.SetAlignment = new Alignment(leaderAlignment));
         }
@@ -261,10 +280,10 @@ namespace CharacterGen.Tests.Unit.Generators
                 .Returns(incompatibleAlignment).Returns(cohortAlignment);
 
             var cohort = new Character();
-            mockCharacterGenerator.Setup(g => g.GenerateWith(mockSetAlignmentRandomizer.Object, mockAnyClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockAnyBaseRaceRandomizer.Object, mockAnyMetaraceRandomizer.Object, mockRawStatRandomizer.Object))
+            mockCharacterGenerator.Setup(g => g.GenerateWith(mockSetAlignmentRandomizer.Object, mockAnyPlayerClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockAnyBaseRaceRandomizer.Object, mockAnyMetaraceRandomizer.Object, mockRawStatRandomizer.Object))
                 .Returns(cohort);
 
-            var generatedCohort = leadershipGenerator.GenerateCohort(9266, 90210, leaderAlignment);
+            var generatedCohort = leadershipGenerator.GenerateCohort(9266, 90210, leaderAlignment, "class name");
             Assert.That(generatedCohort, Is.EqualTo(cohort));
             mockSetAlignmentRandomizer.VerifySet(r => r.SetAlignment = cohortAlignment);
         }
@@ -275,10 +294,10 @@ namespace CharacterGen.Tests.Unit.Generators
             mockLeadershipSelector.Setup(s => s.SelectCohortLevelFor(9266)).Returns(0);
 
             var cohort = new Character();
-            mockCharacterGenerator.Setup(g => g.GenerateWith(mockSetAlignmentRandomizer.Object, mockAnyClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockAnyBaseRaceRandomizer.Object, mockAnyMetaraceRandomizer.Object, mockRawStatRandomizer.Object))
+            mockCharacterGenerator.Setup(g => g.GenerateWith(mockSetAlignmentRandomizer.Object, mockAnyPlayerClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockAnyBaseRaceRandomizer.Object, mockAnyMetaraceRandomizer.Object, mockRawStatRandomizer.Object))
                 .Returns(cohort);
 
-            var generatedCohort = leadershipGenerator.GenerateCohort(9266, 90210, leaderAlignment);
+            var generatedCohort = leadershipGenerator.GenerateCohort(9266, 90210, leaderAlignment, "class name");
             Assert.That(generatedCohort, Is.Null);
         }
 
@@ -286,10 +305,23 @@ namespace CharacterGen.Tests.Unit.Generators
         public void FollowerGenerated()
         {
             var follower = new Character();
-            mockCharacterGenerator.Setup(g => g.GenerateWith(mockSetAlignmentRandomizer.Object, mockAnyClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockAnyBaseRaceRandomizer.Object, mockAnyMetaraceRandomizer.Object, mockRawStatRandomizer.Object))
+            mockCharacterGenerator.Setup(g => g.GenerateWith(mockSetAlignmentRandomizer.Object, mockAnyPlayerClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockAnyBaseRaceRandomizer.Object, mockAnyMetaraceRandomizer.Object, mockRawStatRandomizer.Object))
                 .Returns(follower);
 
-            var generatedFollower = leadershipGenerator.GenerateFollower(9266, leaderAlignment);
+            var generatedFollower = leadershipGenerator.GenerateFollower(9266, leaderAlignment, "class name");
+            Assert.That(generatedFollower, Is.EqualTo(follower));
+            mockSetLevelRandomizer.VerifySet(r => r.SetLevel = 9266);
+        }
+
+        [Test]
+        public void NPCFollowerGenerated()
+        {
+            var follower = new Character();
+            mockCharacterGenerator.Setup(g => g.GenerateWith(mockSetAlignmentRandomizer.Object, mockAnyNPCClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockAnyBaseRaceRandomizer.Object, mockAnyMetaraceRandomizer.Object, mockRawStatRandomizer.Object))
+                .Returns(follower);
+            npcClasses.Add("class name");
+
+            var generatedFollower = leadershipGenerator.GenerateFollower(9266, leaderAlignment, "class name");
             Assert.That(generatedFollower, Is.EqualTo(follower));
             mockSetLevelRandomizer.VerifySet(r => r.SetLevel = 9266);
         }
@@ -306,10 +338,10 @@ namespace CharacterGen.Tests.Unit.Generators
                 .Returns(incompatibleAlignment).Returns(followerAlignment);
 
             var follower = new Character();
-            mockCharacterGenerator.Setup(g => g.GenerateWith(mockSetAlignmentRandomizer.Object, mockAnyClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockAnyBaseRaceRandomizer.Object, mockAnyMetaraceRandomizer.Object, mockRawStatRandomizer.Object))
+            mockCharacterGenerator.Setup(g => g.GenerateWith(mockSetAlignmentRandomizer.Object, mockAnyPlayerClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockAnyBaseRaceRandomizer.Object, mockAnyMetaraceRandomizer.Object, mockRawStatRandomizer.Object))
                 .Returns(follower);
 
-            var generatedFollower = leadershipGenerator.GenerateFollower(9266, leaderAlignment);
+            var generatedFollower = leadershipGenerator.GenerateFollower(9266, leaderAlignment, "class name");
             Assert.That(generatedFollower, Is.EqualTo(follower));
             mockSetLevelRandomizer.VerifySet(r => r.SetLevel = 9266);
             mockSetAlignmentRandomizer.VerifySet(r => r.SetAlignment = followerAlignment);

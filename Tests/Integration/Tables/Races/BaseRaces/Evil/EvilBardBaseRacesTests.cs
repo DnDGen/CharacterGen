@@ -1,5 +1,4 @@
-﻿using System;
-using CharacterGen.Common.Alignments;
+﻿using CharacterGen.Common.Alignments;
 using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Common.Races;
 using CharacterGen.Tables;
@@ -10,9 +9,9 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Evil
     [TestFixture]
     public class EvilBardBaseRacesTests : PercentileTests
     {
-        protected override String tableName
+        protected override string tableName
         {
-            get { return String.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSBaseRaces, AlignmentConstants.Evil, CharacterClassConstants.Bard); }
+            get { return string.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSBaseRaces, AlignmentConstants.Evil, CharacterClassConstants.Bard); }
         }
 
         [Test]
@@ -29,7 +28,7 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Evil
         [TestCase(RaceConstants.BaseRaces.Goblin, 98)]
         [TestCase(RaceConstants.BaseRaces.Tiefling, 99)]
         [TestCase(EmptyContent, 100)]
-        public override void Percentile(String content, Int32 roll)
+        public override void Percentile(string content, int roll)
         {
             base.Percentile(content, roll);
         }
@@ -37,7 +36,7 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Evil
         [TestCase(RaceConstants.BaseRaces.HalfElf, 3, 17)]
         [TestCase(RaceConstants.BaseRaces.HalfOrc, 21, 22)]
         [TestCase(RaceConstants.BaseRaces.Human, 23, 97)]
-        public override void Percentile(String content, Int32 lower, Int32 upper)
+        public override void Percentile(string content, int lower, int upper)
         {
             base.Percentile(content, lower, upper);
         }

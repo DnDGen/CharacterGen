@@ -1,15 +1,14 @@
-﻿using System;
-
-namespace CharacterGen.Generators.Randomizers.CharacterClasses
+﻿namespace CharacterGen.Generators.Randomizers.CharacterClasses
 {
     public static class ClassNameRandomizerTypeConstants
     {
-        public const String Any = "Any";
-        public const String Healer = "Healer";
-        public const String Mage = "Mage";
-        public const String NonSpellcaster = "Non-spellcaster";
-        public const String Spellcaster = "Spellcaster";
-        public const String Stealth = "Stealth";
-        public const String Warrior = "Warrior";
+        public const string AnyPlayer = "Any Player";
+        public const string AnyNPC = "Any NPC";
+        public const string Healer = "Healer";
+        public const string Mage = "Mage";
+        public const string NonSpellcaster = "Non-spellcaster";
+        public const string Spellcaster = "Spellcaster";
+        public const string Stealth = "Stealth";
+        public const string Warrior = "Warrior";
     }
 }

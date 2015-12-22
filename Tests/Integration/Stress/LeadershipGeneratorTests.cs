@@ -35,7 +35,7 @@ namespace CharacterGen.Tests.Integration.Stress
         public ICollectionsSelector CollectionsSelector { get; set; }
 
         [TestCase("Leadership Generator")]
-        public override void Stress(String stressSubject)
+        public override void Stress(string stressSubject)
         {
             Stress();
         }
@@ -71,12 +71,14 @@ namespace CharacterGen.Tests.Integration.Stress
         public void AssertCohort()
         {
             var leaderAlignment = GetNewAlignment();
-            var leaderLevel = Random.Next(6, 21);
+            var leaderClass = GetNewCharacterClass(leaderAlignment);
+            leaderClass.Level = Random.Next(6, 21);
             var cohortScore = Random.Next(3, 26);
 
-            var cohort = LeadershipGenerator.GenerateCohort(cohortScore, leaderLevel, leaderAlignment.Full);
+            var cohort = LeadershipGenerator.GenerateCohort(cohortScore, leaderClass.Level, leaderAlignment.Full, leaderClass.ClassName);
             AssertCharacter(cohort);
-            Assert.That(cohort.Class.Level, Is.AtMost(leaderLevel - 2));
+            Assert.That(cohort.Equipment.Treasure.Items, Is.Not.Empty);
+            Assert.That(cohort.Class.Level, Is.InRange(1, leaderClass.Level - 2));
 
             var allowedAlignments = CollectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AlignmentGroups, leaderAlignment.Full);
             Assert.That(allowedAlignments, Contains.Item(cohort.Alignment.Full));
@@ -133,7 +135,7 @@ namespace CharacterGen.Tests.Integration.Stress
             Assert.That(character.Equipment.PrimaryHand.ItemType, Is.EqualTo(ItemTypeConstants.Weapon));
             Assert.That(character.Equipment.PrimaryHand.Name, Is.Not.Empty);
             Assert.That(character.Equipment.Treasure, Is.Not.Null);
-            Assert.That(character.Equipment.Treasure.Items, Is.Not.Empty);
+            Assert.That(character.Equipment.Treasure.Items, Is.Not.Null);
 
             foreach (var item in character.Equipment.Treasure.Items)
                 Assert.That(item, Is.Not.Null);
@@ -152,6 +154,27 @@ namespace CharacterGen.Tests.Integration.Stress
         }
 
         [Test]
+        public void StressNPCCohort()
+        {
+            Stress(AssertNPCCohort);
+        }
+
+        public void AssertNPCCohort()
+        {
+            var leaderAlignment = GetNewAlignment();
+            var leaderClass = CollectionsSelector.SelectRandomFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.NPCs);
+            var leaderLevel = Random.Next(6, 21);
+            var cohortScore = Random.Next(3, 26);
+
+            var cohort = LeadershipGenerator.GenerateCohort(cohortScore, leaderLevel, leaderAlignment.Full, leaderClass);
+            AssertCharacter(cohort);
+            Assert.That(cohort.Class.Level, Is.InRange(1, leaderLevel - 2));
+
+            var allowedAlignments = CollectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AlignmentGroups, leaderAlignment.Full);
+            Assert.That(allowedAlignments, Contains.Item(cohort.Alignment.Full));
+        }
+
+        [Test]
         public void StressFollower()
         {
             Stress(AssertFollower);
@@ -160,11 +183,33 @@ namespace CharacterGen.Tests.Integration.Stress
         public void AssertFollower()
         {
             var leaderAlignment = GetNewAlignment();
+            var leaderClass = GetNewCharacterClass(leaderAlignment);
             var followerLevel = Random.Next(1, 7);
 
-            var follower = LeadershipGenerator.GenerateFollower(followerLevel, leaderAlignment.Full);
+            var follower = LeadershipGenerator.GenerateFollower(followerLevel, leaderAlignment.Full, leaderClass.ClassName);
             AssertCharacter(follower);
-            Assert.That(follower.Class.Level, Is.AtMost(followerLevel));
+            Assert.That(follower.Equipment.Treasure.Items, Is.Not.Empty);
+            Assert.That(follower.Class.Level, Is.InRange(1, followerLevel));
+
+            var allowedAlignments = CollectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AlignmentGroups, leaderAlignment.Full);
+            Assert.That(allowedAlignments, Contains.Item(follower.Alignment.Full));
+        }
+
+        [Test]
+        public void StressNPCFollower()
+        {
+            Stress(AssertNPCFollower);
+        }
+
+        public void AssertNPCFollower()
+        {
+            var leaderAlignment = GetNewAlignment();
+            var leaderClass = CollectionsSelector.SelectRandomFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.NPCs);
+            var followerLevel = Random.Next(1, 7);
+
+            var follower = LeadershipGenerator.GenerateFollower(followerLevel, leaderAlignment.Full, leaderClass);
+            AssertCharacter(follower);
+            Assert.That(follower.Class.Level, Is.InRange(1, followerLevel));
 
             var allowedAlignments = CollectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AlignmentGroups, leaderAlignment.Full);
             Assert.That(allowedAlignments, Contains.Item(follower.Alignment.Full));

@@ -8,7 +8,6 @@ using CharacterGen.Selectors;
 using CharacterGen.Tables;
 using Moq;
 using NUnit.Framework;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using TreasureGen.Common.Items;
@@ -28,15 +27,16 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         private IArmorGenerator armorGenerator;
         private List<Feat> feats;
         private CharacterClass characterClass;
-        private List<String> armorProficiencyFeats;
-        private List<String> shieldProficiencyFeats;
-        private List<String> proficientArmors;
-        private List<String> proficientShields;
-        private List<String> baseArmorTypes;
-        private List<String> baseShieldTypes;
+        private List<string> armorProficiencyFeats;
+        private List<string> shieldProficiencyFeats;
+        private List<string> proficientArmors;
+        private List<string> proficientShields;
+        private List<string> baseArmorTypes;
+        private List<string> baseShieldTypes;
         private Item magicalArmor;
         private Item magicalShield;
         private Race race;
+        private List<string> npcs;
 
         [SetUp]
         public void Setup()
@@ -49,14 +49,15 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             armorGenerator = new ArmorGenerator(mockCollectionsSelector.Object, mockPercentileSelector.Object, mockMundaneArmorGenerator.Object, mockMagicalArmorGenerator.Object, generator);
             feats = new List<Feat>();
             characterClass = new CharacterClass();
-            armorProficiencyFeats = new List<String>();
-            shieldProficiencyFeats = new List<String>();
-            proficientArmors = new List<String>();
-            proficientShields = new List<String>();
-            baseArmorTypes = new List<String>();
-            baseShieldTypes = new List<String>();
+            armorProficiencyFeats = new List<string>();
+            shieldProficiencyFeats = new List<string>();
+            proficientArmors = new List<string>();
+            proficientShields = new List<string>();
+            baseArmorTypes = new List<string>();
+            baseShieldTypes = new List<string>();
             magicalArmor = new Item();
             race = new Race();
+            npcs = new List<string>();
 
             race.Size = "size";
             magicalArmor = CreateArmor("magical armor");
@@ -80,8 +81,8 @@ namespace CharacterGen.Tests.Unit.Generators.Items
 
             mockPercentileSelector.Setup(s => s.SelectFrom("Level9266Power")).Returns("power");
             mockMagicalArmorGenerator.Setup(g => g.GenerateAtPower("power")).Returns(magicalArmor);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, It.IsAny<String>()))
-                .Returns((String table, String name) => new[] { name });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, It.IsAny<string>()))
+                .Returns((string table, string name) => new[] { name });
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, ItemTypeConstants.Armor + GroupConstants.Proficiency))
                 .Returns(armorProficiencyFeats);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, AttributeConstants.Shield + GroupConstants.Proficiency))
@@ -94,6 +95,8 @@ namespace CharacterGen.Tests.Unit.Generators.Items
                 .Returns(proficientArmors);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, feats[1].Name))
                 .Returns(proficientShields);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.NPCs))
+                .Returns(npcs);
         }
 
         [Test]
@@ -115,7 +118,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             Assert.That(armor, Is.EqualTo(mundaneArmor));
         }
 
-        private Item CreateArmor(String name)
+        private Item CreateArmor(string name)
         {
             var armor = new Item();
             armor.Name = name;
@@ -379,7 +382,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             Assert.That(shield, Is.EqualTo(mundaneShield), shield.Name);
         }
 
-        private Item CreateShield(String name)
+        private Item CreateShield(string name)
         {
             var shield = new Item();
             shield.Name = name;
@@ -624,6 +627,150 @@ namespace CharacterGen.Tests.Unit.Generators.Items
 
             var shield = armorGenerator.GenerateShieldFrom(feats, characterClass, race);
             Assert.That(shield, Is.EqualTo(magicalShield), shield.Name);
+        }
+
+        [TestCase(1, 1)]
+        [TestCase(2, 1)]
+        [TestCase(3, 1)]
+        [TestCase(4, 2)]
+        [TestCase(5, 2)]
+        [TestCase(6, 3)]
+        [TestCase(7, 3)]
+        [TestCase(8, 4)]
+        [TestCase(9, 4)]
+        [TestCase(10, 5)]
+        [TestCase(11, 5)]
+        [TestCase(12, 6)]
+        [TestCase(13, 6)]
+        [TestCase(14, 7)]
+        [TestCase(15, 7)]
+        [TestCase(16, 8)]
+        [TestCase(17, 8)]
+        [TestCase(18, 9)]
+        [TestCase(19, 9)]
+        [TestCase(20, 10)]
+        public void NPCArmorIsHalfLevel(int npcLevel, int effectiveLevel)
+        {
+            characterClass.Level = npcLevel;
+            characterClass.ClassName = "class name";
+            npcs.Add(characterClass.ClassName);
+
+            var npcArmor = CreateArmor("npc armor");
+
+            var tableName = string.Format(TableNameConstants.Formattable.Percentile.LevelXPower, effectiveLevel);
+            mockPercentileSelector.Setup(s => s.SelectFrom(tableName)).Returns("npc power");
+            mockMagicalArmorGenerator.Setup(g => g.GenerateAtPower("npc power")).Returns(npcArmor);
+
+            var weapon = armorGenerator.GenerateArmorFrom(feats, characterClass, race);
+            Assert.That(weapon, Is.EqualTo(npcArmor));
+        }
+
+        [TestCase(1, 1)]
+        [TestCase(2, 2)]
+        [TestCase(3, 3)]
+        [TestCase(4, 4)]
+        [TestCase(5, 5)]
+        [TestCase(6, 6)]
+        [TestCase(7, 7)]
+        [TestCase(8, 8)]
+        [TestCase(9, 9)]
+        [TestCase(10, 10)]
+        [TestCase(11, 11)]
+        [TestCase(12, 12)]
+        [TestCase(13, 13)]
+        [TestCase(14, 14)]
+        [TestCase(15, 15)]
+        [TestCase(16, 16)]
+        [TestCase(17, 17)]
+        [TestCase(18, 18)]
+        [TestCase(19, 19)]
+        [TestCase(20, 20)]
+        public void PlayerCharacterArmorIsFullLevel(int level, int effectiveLevel)
+        {
+            characterClass.Level = level;
+            characterClass.ClassName = "class name";
+            npcs.Add("npc class");
+
+            var playerArmor = CreateArmor("player weapon");
+
+            var tableName = string.Format(TableNameConstants.Formattable.Percentile.LevelXPower, effectiveLevel);
+            mockPercentileSelector.Setup(s => s.SelectFrom(tableName)).Returns("player power");
+            mockMagicalArmorGenerator.Setup(g => g.GenerateAtPower("player power")).Returns(playerArmor);
+
+            var weapon = armorGenerator.GenerateArmorFrom(feats, characterClass, race);
+            Assert.That(weapon, Is.EqualTo(playerArmor));
+        }
+
+        [TestCase(1, 1)]
+        [TestCase(2, 1)]
+        [TestCase(3, 1)]
+        [TestCase(4, 2)]
+        [TestCase(5, 2)]
+        [TestCase(6, 3)]
+        [TestCase(7, 3)]
+        [TestCase(8, 4)]
+        [TestCase(9, 4)]
+        [TestCase(10, 5)]
+        [TestCase(11, 5)]
+        [TestCase(12, 6)]
+        [TestCase(13, 6)]
+        [TestCase(14, 7)]
+        [TestCase(15, 7)]
+        [TestCase(16, 8)]
+        [TestCase(17, 8)]
+        [TestCase(18, 9)]
+        [TestCase(19, 9)]
+        [TestCase(20, 10)]
+        public void NPCShieldIsHalfLevel(int npcLevel, int effectiveLevel)
+        {
+            characterClass.Level = npcLevel;
+            characterClass.ClassName = "class name";
+            npcs.Add(characterClass.ClassName);
+
+            var npcShield = CreateShield("npc shield");
+
+            var tableName = string.Format(TableNameConstants.Formattable.Percentile.LevelXPower, effectiveLevel);
+            mockPercentileSelector.Setup(s => s.SelectFrom(tableName)).Returns("npc power");
+            mockMagicalArmorGenerator.Setup(g => g.GenerateAtPower("npc power")).Returns(npcShield);
+
+            var weapon = armorGenerator.GenerateShieldFrom(feats, characterClass, race);
+            Assert.That(weapon, Is.EqualTo(npcShield));
+        }
+
+        [TestCase(1, 1)]
+        [TestCase(2, 2)]
+        [TestCase(3, 3)]
+        [TestCase(4, 4)]
+        [TestCase(5, 5)]
+        [TestCase(6, 6)]
+        [TestCase(7, 7)]
+        [TestCase(8, 8)]
+        [TestCase(9, 9)]
+        [TestCase(10, 10)]
+        [TestCase(11, 11)]
+        [TestCase(12, 12)]
+        [TestCase(13, 13)]
+        [TestCase(14, 14)]
+        [TestCase(15, 15)]
+        [TestCase(16, 16)]
+        [TestCase(17, 17)]
+        [TestCase(18, 18)]
+        [TestCase(19, 19)]
+        [TestCase(20, 20)]
+        public void PlayerCharacterShieldIsFullLevel(int level, int effectiveLevel)
+        {
+            characterClass.Level = level;
+            characterClass.ClassName = "class name";
+            npcs.Add("npc class");
+
+            var playerShield = CreateShield("player shield");
+
+            var tableName = string.Format(TableNameConstants.Formattable.Percentile.LevelXPower, effectiveLevel);
+            mockPercentileSelector.Setup(s => s.SelectFrom(tableName)).Returns("player power");
+            mockMagicalArmorGenerator.Setup(g => g.GenerateAtPower("player power")).Returns(playerShield);
+
+            var weapon = armorGenerator.GenerateShieldFrom(feats, characterClass, race);
+            Assert.That(weapon, Is.EqualTo(playerShield));
         }
     }
 }

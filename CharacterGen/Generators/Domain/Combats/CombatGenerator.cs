@@ -52,7 +52,12 @@ namespace CharacterGen.Generators.Domain.Combats
             if (averageBaseAttacks.Contains(characterClass.ClassName))
                 return GetAverageBaseAttackBonus(characterClass.Level);
 
-            return GetPoorBaseAttackBonus(characterClass.Level);
+            var poorBaseAttacks = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.PoorBaseAttack);
+            if (poorBaseAttacks.Contains(characterClass.ClassName))
+                return GetPoorBaseAttackBonus(characterClass.Level);
+
+            var message = string.Format("{0} has no base attack", characterClass.ClassName);
+            throw new ArgumentException(message);
         }
 
         private int GetGoodBaseAttackBonus(int level)

@@ -1,6 +1,51 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <items>
+  <object>
+    <name>Adept</name>
+    <item>Concentration</item>
+    <item>Handle Animal</item>
+    <item>Heal</item>
+    <item>Knowledge (Arcana)</item>
+    <item>Knowledge (Architecture and Engineering)</item>
+    <item>Knowledge (Dungeoneering)</item>
+    <item>Knowledge (Geography)</item>
+    <item>Knowledge (History)</item>
+    <item>Knowledge (Local)</item>
+    <item>Knowledge (Nature)</item>
+    <item>Knowledge (Nobility and Royalty)</item>
+    <item>Knowledge (Religion)</item>
+    <item>Knowledge (The Planes)</item>
+    <item>Spellcraft</item>
+    <item>Survival</item>
+  </object>
+  <object>
+    <name>Aristocrat</name>
+    <item>Appraise</item>
+    <item>Bluff</item>
+    <item>Diplomacy</item>
+    <item>Disguise</item>
+    <item>Forgery</item>
+    <item>Gather Information</item>
+    <item>Handle Animal</item>
+    <item>Intimidate</item>
+    <item>Knowledge (Arcana)</item>
+    <item>Knowledge (Architecture and Engineering)</item>
+    <item>Knowledge (Dungeoneering)</item>
+    <item>Knowledge (Geography)</item>
+    <item>Knowledge (History)</item>
+    <item>Knowledge (Local)</item>
+    <item>Knowledge (Nature)</item>
+    <item>Knowledge (Nobility and Royalty)</item>
+    <item>Knowledge (Religion)</item>
+    <item>Knowledge (The Planes)</item>
+    <item>Listen</item>
+    <item>Ride</item>
+    <item>Sense Motive</item>
+    <item>Spot</item>
+    <item>Survival</item>
+    <item>Swim</item>
+  </object>
     <object>
         <name>Barbarian</name>
         <item>Climb</item>
@@ -67,6 +112,17 @@
         <item>Spellcraft</item>
     </object>
   <object>
+    <name>Commoner</name>
+    <item>Climb</item>
+    <item>Handle Animal</item>
+    <item>Jump</item>
+    <item>Listen</item>
+    <item>Ride</item>
+    <item>Swim</item>
+    <item>Spot</item>
+    <item>Use Rope</item>
+  </object>
+  <object>
     <name>Derro</name>
     <item>Bluff</item>
     <item>Hide</item>
@@ -97,6 +153,9 @@
         <item>Survival</item>
         <item>Swim</item>
     </object>
+  <object>
+    <name>Expert</name>
+  </object>
     <object>
         <name>Fighter</name>
         <item>Climb</item>
@@ -239,6 +298,15 @@
     <name>Troglodyte</name>
     <item>Hide</item>
     <item>Listen</item>
+  </object>
+  <object>
+    <name>Warrior</name>
+    <item>Climb</item>
+    <item>Handle Animal</item>
+    <item>Intimidate</item>
+    <item>Jump</item>
+    <item>Ride</item>
+    <item>Swim</item>
   </object>
     <object>
         <name>Wizard</name>

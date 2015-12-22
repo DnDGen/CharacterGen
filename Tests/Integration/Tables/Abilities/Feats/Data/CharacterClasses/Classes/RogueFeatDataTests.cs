@@ -61,7 +61,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             1,
             2,
             1,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.SneakAttack + "2",
             FeatConstants.SneakAttack,
             "",
@@ -71,7 +71,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             3,
             4,
             2,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.SneakAttack + "3",
             FeatConstants.SneakAttack,
             "",
@@ -81,7 +81,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             5,
             6,
             3,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.SneakAttack + "4",
             FeatConstants.SneakAttack,
             "",
@@ -91,7 +91,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             7,
             8,
             4,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.SneakAttack + "5",
             FeatConstants.SneakAttack,
             "",
@@ -101,7 +101,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             9,
             10,
             5,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.SneakAttack + "6",
             FeatConstants.SneakAttack,
             "",
@@ -111,7 +111,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             11,
             12,
             6,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.SneakAttack + "7",
             FeatConstants.SneakAttack,
             "",
@@ -121,7 +121,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             13,
             14,
             7,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.SneakAttack + "8",
             FeatConstants.SneakAttack,
             "",
@@ -131,7 +131,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             15,
             16,
             8,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.SneakAttack + "9",
             FeatConstants.SneakAttack,
             "",
@@ -141,7 +141,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             17,
             18,
             9,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.SneakAttack + "10",
             FeatConstants.SneakAttack,
             "",
@@ -151,7 +151,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             19,
             0,
             10,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.Trapfinding,
             FeatConstants.Trapfinding,
             "",
@@ -161,7 +161,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             1,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.Evasion,
             FeatConstants.Evasion,
             "",
@@ -171,7 +171,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             2,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.UncannyDodge,
             FeatConstants.UncannyDodge,
             "",
@@ -181,7 +181,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             4,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.TrapSense + "1",
             FeatConstants.TrapSense,
             "",
@@ -191,7 +191,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             3,
             5,
             1,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.TrapSense + "2",
             FeatConstants.TrapSense,
             "",
@@ -201,7 +201,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             6,
             8,
             2,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.TrapSense + "3",
             FeatConstants.TrapSense,
             "",
@@ -211,7 +211,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             9,
             11,
             3,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.TrapSense + "4",
             FeatConstants.TrapSense,
             "",
@@ -221,7 +221,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             12,
             14,
             4,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.TrapSense + "5",
             FeatConstants.TrapSense,
             "",
@@ -231,7 +231,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             15,
             17,
             5,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.TrapSense + "6",
             FeatConstants.TrapSense,
             "",
@@ -241,7 +241,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             18,
             0,
             6,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.ImprovedUncannyDodge,
             FeatConstants.ImprovedUncannyDodge,
             "",
@@ -251,7 +251,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             8,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.SimpleWeaponProficiency,
             FeatConstants.SimpleWeaponProficiency,
             FeatConstants.Foci.All,
@@ -261,7 +261,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             1,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.ExoticWeaponProficiency + WeaponConstants.HandCrossbow,
             FeatConstants.ExoticWeaponProficiency,
             WeaponConstants.HandCrossbow,
@@ -271,7 +271,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             1,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.MartialWeaponProficiency + WeaponConstants.Rapier,
             FeatConstants.MartialWeaponProficiency,
             WeaponConstants.Rapier,
@@ -281,7 +281,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             1,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.MartialWeaponProficiency + WeaponConstants.Sap,
             FeatConstants.MartialWeaponProficiency,
             WeaponConstants.Sap,
@@ -291,7 +291,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             1,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.MartialWeaponProficiency + WeaponConstants.Shortbow,
             FeatConstants.MartialWeaponProficiency,
             WeaponConstants.Shortbow,
@@ -301,7 +301,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             1,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.MartialWeaponProficiency + WeaponConstants.ShortSword,
             FeatConstants.MartialWeaponProficiency,
             WeaponConstants.ShortSword,
@@ -311,7 +311,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             1,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.LightArmorProficiency,
             FeatConstants.LightArmorProficiency,
             "",
@@ -321,10 +321,10 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             1,
             0,
             0,
-            "")]
-        public override void Data(String name, String feat, String focusType, Int32 frequencyQuantity, String frequencyQuantityStat, String frequencyTimePeriod, Int32 minimumLevel, Int32 maximumLevel, Int32 strength, String sizeRequirement)
+            "", true)]
+        public override void Data(string name, string feat, string focusType, int frequencyQuantity, string frequencyQuantityStat, string frequencyTimePeriod, int minimumLevel, int maximumLevel, int strength, string sizeRequirement, bool allowFocusOfAll)
         {
-            base.Data(name, feat, focusType, frequencyQuantity, frequencyQuantityStat, frequencyTimePeriod, minimumLevel, maximumLevel, strength, sizeRequirement);
+            base.Data(name, feat, focusType, frequencyQuantity, frequencyQuantityStat, frequencyTimePeriod, minimumLevel, maximumLevel, strength, sizeRequirement, allowFocusOfAll);
         }
     }
 }

@@ -40,7 +40,12 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
                 RaceConstants.BaseRaces.OgreMage,
                 RaceConstants.BaseRaces.MindFlayer,
                 RaceConstants.BaseRaces.Minotaur,
-                RaceConstants.BaseRaces.Troglodyte
+                RaceConstants.BaseRaces.Troglodyte,
+                CharacterClassConstants.Adept,
+                CharacterClassConstants.Aristocrat,
+                CharacterClassConstants.Commoner,
+                CharacterClassConstants.Expert,
+                CharacterClassConstants.Warrior
             };
 
             AssertCollectionNames(names);
@@ -227,12 +232,45 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
         [TestCase(RaceConstants.BaseRaces.Troglodyte,
             SkillConstants.Listen,
             SkillConstants.Hide)]
+        [TestCase(CharacterClassConstants.Adept,
+            SkillConstants.Concentration,
+            SkillConstants.HandleAnimal,
+            SkillConstants.Heal,
+            SkillConstants.KnowledgeArcana,
+            SkillConstants.KnowledgeArchitectureAndEngineering,
+            SkillConstants.KnowledgeDungeoneering,
+            SkillConstants.KnowledgeGeography,
+            SkillConstants.KnowledgeHistory,
+            SkillConstants.KnowledgeLocal,
+            SkillConstants.KnowledgeNature,
+            SkillConstants.KnowledgeNobilityAndRoyalty,
+            SkillConstants.KnowledgeReligion,
+            SkillConstants.KnowledgeThePlanes,
+            SkillConstants.Spellcraft,
+            SkillConstants.Survival)]
+        [TestCase(CharacterClassConstants.Commoner,
+            SkillConstants.Climb,
+            SkillConstants.HandleAnimal,
+            SkillConstants.Jump,
+            SkillConstants.Listen,
+            SkillConstants.Ride,
+            SkillConstants.Spot,
+            SkillConstants.Swim,
+            SkillConstants.UseRope)]
+        [TestCase(CharacterClassConstants.Expert)]
+        [TestCase(CharacterClassConstants.Warrior,
+            SkillConstants.Climb,
+            SkillConstants.HandleAnimal,
+            SkillConstants.Intimidate,
+            SkillConstants.Jump,
+            SkillConstants.Ride,
+            SkillConstants.Swim)]
         public override void DistinctCollection(String name, params String[] collection)
         {
             base.DistinctCollection(name, collection);
         }
 
-        //HACK: Doing this as a test case is too long a name for NUnit
+        [Test]
         public void BardClassSkills()
         {
 
@@ -272,6 +310,41 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
             };
 
             DistinctCollection(CharacterClassConstants.Bard, classSkills);
+        }
+
+        [Test]
+        public void AristocratClassSkills()
+        {
+
+            var classSkills = new[]
+            {
+                SkillConstants.Appraise,
+                SkillConstants.Bluff,
+                SkillConstants.Diplomacy,
+                SkillConstants.Disguise,
+                SkillConstants.Forgery,
+                SkillConstants.GatherInformation,
+                SkillConstants.HandleAnimal,
+                SkillConstants.Intimidate,
+                SkillConstants.KnowledgeArcana,
+                SkillConstants.KnowledgeArchitectureAndEngineering,
+                SkillConstants.KnowledgeDungeoneering,
+                SkillConstants.KnowledgeGeography,
+                SkillConstants.KnowledgeHistory,
+                SkillConstants.KnowledgeLocal,
+                SkillConstants.KnowledgeNature,
+                SkillConstants.KnowledgeNobilityAndRoyalty,
+                SkillConstants.KnowledgeReligion,
+                SkillConstants.KnowledgeThePlanes,
+                SkillConstants.Listen,
+                SkillConstants.Ride,
+                SkillConstants.SenseMotive,
+                SkillConstants.Spot,
+                SkillConstants.Swim,
+                SkillConstants.Survival
+            };
+
+            DistinctCollection(CharacterClassConstants.Aristocrat, classSkills);
         }
     }
 }

@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using Ninject;
-using CharacterGen.Common.Races;
+﻿using CharacterGen.Common.Races;
 using CharacterGen.Generators.Randomizers.Races;
+using Ninject;
 using NUnit.Framework;
+using System.Collections.Generic;
 
 namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
 {
@@ -13,7 +12,7 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
         [Inject, Named(RaceRandomizerTypeConstants.Metarace.NonGoodMeta)]
         public override IForcableMetaraceRandomizer ForcableMetaraceRandomizer { get; set; }
 
-        protected override IEnumerable<String> allowedMetaraces
+        protected override IEnumerable<string> allowedMetaraces
         {
             get
             {
@@ -34,7 +33,7 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
         }
 
         [TestCase("NonGoodMetaraceRandomizer")]
-        public override void Stress(String stressSubject)
+        public override void Stress(string stressSubject)
         {
             Stress();
         }

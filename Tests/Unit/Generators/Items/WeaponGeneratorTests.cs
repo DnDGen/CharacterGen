@@ -9,7 +9,6 @@ using CharacterGen.Selectors;
 using CharacterGen.Tables;
 using Moq;
 using NUnit.Framework;
-using System;
 using System.Collections.Generic;
 using TreasureGen.Common.Items;
 using TreasureGen.Generators.Items.Magical;
@@ -28,15 +27,16 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         private Generator generator;
         private Item magicalWeapon;
         private List<Feat> feats;
-        private List<String> proficiencyFeats;
+        private List<string> proficiencyFeats;
         private CharacterClass characterClass;
-        private List<String> baseWeaponTypes;
-        private List<String> weapons;
-        private List<String> allProficientWeapons;
+        private List<string> baseWeaponTypes;
+        private List<string> weapons;
+        private List<string> allProficientWeapons;
         private Race race;
-        private List<String> meleeWeapons;
-        private List<String> twoHandedWeapons;
-        private List<String> ammunitions;
+        private List<string> meleeWeapons;
+        private List<string> twoHandedWeapons;
+        private List<string> ammunitions;
+        private List<string> npcs;
 
         [SetUp]
         public void Setup()
@@ -50,14 +50,15 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             magicalWeapon = new Item();
             feats = new List<Feat>();
             characterClass = new CharacterClass();
-            proficiencyFeats = new List<String>();
-            baseWeaponTypes = new List<String>();
-            weapons = new List<String>();
-            allProficientWeapons = new List<String>();
+            proficiencyFeats = new List<string>();
+            baseWeaponTypes = new List<string>();
+            weapons = new List<string>();
+            allProficientWeapons = new List<string>();
             race = new Race();
-            meleeWeapons = new List<String>();
-            twoHandedWeapons = new List<String>();
-            ammunitions = new List<String>();
+            meleeWeapons = new List<string>();
+            twoHandedWeapons = new List<string>();
+            ammunitions = new List<string>();
+            npcs = new List<string>();
 
             race.Size = "size";
             race.BaseRace = "base race";
@@ -80,8 +81,8 @@ namespace CharacterGen.Tests.Unit.Generators.Items
 
             mockPercentileSelector.Setup(s => s.SelectFrom("Level9266Power")).Returns("power");
             mockMagicalWeaponGenerator.Setup(g => g.GenerateAtPower("power")).Returns(magicalWeapon);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, It.IsAny<String>()))
-                .Returns((String table, String name) => new[] { name });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, It.IsAny<string>()))
+                .Returns((string table, string name) => new[] { name });
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, ItemTypeConstants.Weapon + GroupConstants.Proficiency))
                 .Returns(proficiencyFeats);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, magicalWeapon.Name))
@@ -98,6 +99,8 @@ namespace CharacterGen.Tests.Unit.Generators.Items
                 .Returns(ammunitions);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, feats[0].Name))
                 .Returns(allProficientWeapons);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.NPCs))
+                .Returns(npcs);
         }
 
         [Test]
@@ -121,7 +124,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             Assert.That(weapon, Is.EqualTo(mundaneWeapon));
         }
 
-        private Item CreateWeapon(String name)
+        private Item CreateWeapon(string name)
         {
             var weapon = new Item();
             weapon.Name = name;
@@ -573,6 +576,21 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         }
 
         [Test]
+        public void GenerateNoMeleeWeapon()
+        {
+            var rangedWeapon = CreateWeapon("ranged weapon");
+            meleeWeapons.Remove(rangedWeapon.Name);
+
+            mockMagicalWeaponGenerator.Setup(g => g.GenerateAtPower("power")).Returns(rangedWeapon);
+
+            feats.Add(new Feat { Name = "feat2", Foci = new[] { rangedWeapon.Name } });
+            proficiencyFeats.Add("feat2");
+
+            var weapon = weaponGenerator.GenerateMeleeFrom(feats, characterClass, race);
+            Assert.That(weapon, Is.Null);
+        }
+
+        [Test]
         public void OneHandedMeleeWeaponMustBeMelee()
         {
             var rangedWeapon = CreateWeapon("ranged weapon");
@@ -632,6 +650,23 @@ namespace CharacterGen.Tests.Unit.Generators.Items
 
             var weapon = weaponGenerator.GenerateOneHandedMeleeFrom(feats, characterClass, race);
             Assert.That(weapon, Is.EqualTo(magicalWeapon), weapon.Name);
+        }
+
+        [Test]
+        public void DoNotGenerateOneHandedMeleeWeapon()
+        {
+            weapons.Clear();
+
+            var rangedWeapon = CreateWeapon("ranged weapon");
+            meleeWeapons.Remove(rangedWeapon.Name);
+            var twoHandedWeapon = CreateWeapon("two-handed weapon");
+            twoHandedWeapons.Add(twoHandedWeapon.Name);
+
+            mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateAtPower("power"))
+                .Returns(rangedWeapon).Returns(twoHandedWeapon).Returns(twoHandedWeapon);
+
+            var weapon = weaponGenerator.GenerateOneHandedMeleeFrom(feats, characterClass, race);
+            Assert.That(weapon, Is.Null);
         }
 
         [Test]
@@ -699,6 +734,18 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         }
 
         [Test]
+        public void GenerateNoRangedWeapon()
+        {
+            mockMagicalWeaponGenerator.Setup(g => g.GenerateAtPower("power")).Returns(magicalWeapon);
+
+            feats.Add(new Feat { Name = "feat2", Foci = new[] { baseWeaponTypes[0] } });
+            proficiencyFeats.Add("feat2");
+
+            var weapon = weaponGenerator.GenerateRangedFrom(feats, characterClass, race);
+            Assert.That(weapon, Is.Null);
+        }
+
+        [Test]
         public void GetAmmunitionForRangedWeaponThatIsNotNonProficiencyFocus()
         {
             var wrongMagicalWeapon = CreateWeapon("wrong magical weapon");
@@ -733,6 +780,78 @@ namespace CharacterGen.Tests.Unit.Generators.Items
 
             var generatedAmmunition = weaponGenerator.GenerateAmmunition(feats, characterClass, race, ammunition.Name);
             Assert.That(generatedAmmunition, Is.EqualTo(ammunition), generatedAmmunition.Name);
+        }
+
+        [TestCase(1, 1)]
+        [TestCase(2, 1)]
+        [TestCase(3, 1)]
+        [TestCase(4, 2)]
+        [TestCase(5, 2)]
+        [TestCase(6, 3)]
+        [TestCase(7, 3)]
+        [TestCase(8, 4)]
+        [TestCase(9, 4)]
+        [TestCase(10, 5)]
+        [TestCase(11, 5)]
+        [TestCase(12, 6)]
+        [TestCase(13, 6)]
+        [TestCase(14, 7)]
+        [TestCase(15, 7)]
+        [TestCase(16, 8)]
+        [TestCase(17, 8)]
+        [TestCase(18, 9)]
+        [TestCase(19, 9)]
+        [TestCase(20, 10)]
+        public void NPCIsHalfLevel(int npcLevel, int effectiveLevel)
+        {
+            characterClass.Level = npcLevel;
+            characterClass.ClassName = "class name";
+            npcs.Add(characterClass.ClassName);
+
+            var npcWeapon = CreateWeapon("npc weapon");
+
+            var tableName = string.Format(TableNameConstants.Formattable.Percentile.LevelXPower, effectiveLevel);
+            mockPercentileSelector.Setup(s => s.SelectFrom(tableName)).Returns("npc power");
+            mockMagicalWeaponGenerator.Setup(g => g.GenerateAtPower("npc power")).Returns(npcWeapon);
+
+            var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
+            Assert.That(weapon, Is.EqualTo(npcWeapon));
+        }
+
+        [TestCase(1, 1)]
+        [TestCase(2, 2)]
+        [TestCase(3, 3)]
+        [TestCase(4, 4)]
+        [TestCase(5, 5)]
+        [TestCase(6, 6)]
+        [TestCase(7, 7)]
+        [TestCase(8, 8)]
+        [TestCase(9, 9)]
+        [TestCase(10, 10)]
+        [TestCase(11, 11)]
+        [TestCase(12, 12)]
+        [TestCase(13, 13)]
+        [TestCase(14, 14)]
+        [TestCase(15, 15)]
+        [TestCase(16, 16)]
+        [TestCase(17, 17)]
+        [TestCase(18, 18)]
+        [TestCase(19, 19)]
+        [TestCase(20, 20)]
+        public void PlayerCharacterIsFullLevel(int level, int effectiveLevel)
+        {
+            characterClass.Level = level;
+            characterClass.ClassName = "class name";
+            npcs.Add("npc class");
+
+            var playerWeapon = CreateWeapon("player weapon");
+
+            var tableName = string.Format(TableNameConstants.Formattable.Percentile.LevelXPower, effectiveLevel);
+            mockPercentileSelector.Setup(s => s.SelectFrom(tableName)).Returns("player power");
+            mockMagicalWeaponGenerator.Setup(g => g.GenerateAtPower("player power")).Returns(playerWeapon);
+
+            var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
+            Assert.That(weapon, Is.EqualTo(playerWeapon));
         }
     }
 }

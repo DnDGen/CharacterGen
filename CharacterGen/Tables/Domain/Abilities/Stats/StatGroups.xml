@@ -2,6 +2,10 @@
 
 <statPriorities>
   <object>
+    <name>AdeptSpellcasters</name>
+    <item>Wisdom</item>
+  </object>
+  <object>
     <name>All</name>
     <item>Charisma</item>
     <item>Intelligence</item>

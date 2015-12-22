@@ -5,7 +5,6 @@ using CharacterGen.Common.Races;
 using CharacterGen.Generators.Magics;
 using CharacterGen.Selectors;
 using CharacterGen.Tables;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -24,14 +23,17 @@ namespace CharacterGen.Generators.Domain.Magics
             this.generator = generator;
         }
 
-        public String GenerateFrom(Alignment alignment, CharacterClass characterClass, Race race, IEnumerable<Feat> feats)
+        public string GenerateFrom(Alignment alignment, CharacterClass characterClass, Race race, IEnumerable<Feat> feats)
         {
+            if (characterClass.ClassName == CharacterClassConstants.Adept && characterClass.Level == 1)
+                return string.Empty;
+
             var levelAdjustments = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments);
             var effectiveCharacterClass = GetEffectiveCharacterClass(characterClass);
             var animals = AnimalsForCharacter(effectiveCharacterClass, race, levelAdjustments);
 
             if (animals.Any() == false)
-                return String.Empty;
+                return string.Empty;
 
             var improvedFamiliars = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.Animals, FeatConstants.ImprovedFamiliar);
             var characterHasImprovedFamiliarFeat = feats.Any(f => f.Name == FeatConstants.ImprovedFamiliar);
@@ -54,7 +56,7 @@ namespace CharacterGen.Generators.Domain.Magics
             return effectiveCharacterClass;
         }
 
-        private IEnumerable<String> AnimalsForCharacter(CharacterClass characterClass, Race race, Dictionary<String, Int32> levelAdjustments)
+        private IEnumerable<string> AnimalsForCharacter(CharacterClass characterClass, Race race, Dictionary<string, int> levelAdjustments)
         {
             var animals = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.Animals, characterClass.ClassName);
             var animalsForSize = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.Animals, race.Size);

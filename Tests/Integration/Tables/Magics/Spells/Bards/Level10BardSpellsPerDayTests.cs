@@ -1,7 +1,6 @@
 ﻿using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Tables;
 using NUnit.Framework;
-using System;
 using System.Linq;
 
 namespace CharacterGen.Tests.Integration.Tables.Magics.Spells.Bards
@@ -9,11 +8,11 @@ namespace CharacterGen.Tests.Integration.Tables.Magics.Spells.Bards
     [TestFixture]
     public class Level10BardSpellsPerDayTests : AdjustmentsTests
     {
-        protected override String tableName
+        protected override string tableName
         {
             get
             {
-                return String.Format(TableNameConstants.Formattable.Adjustments.LevelXCLASSSpellsPerDay, 10, CharacterClassConstants.Bard);
+                return string.Format(TableNameConstants.Formattable.Adjustments.LevelXCLASSSpellsPerDay, 10, CharacterClassConstants.Bard);
             }
         }
 
@@ -29,7 +28,7 @@ namespace CharacterGen.Tests.Integration.Tables.Magics.Spells.Bards
         [TestCase(2, 3)]
         [TestCase(3, 2)]
         [TestCase(4, 0)]
-        public void Adjustment(Int32 spellLevel, Int32 quantity)
+        public void Adjustment(int spellLevel, int quantity)
         {
             base.Adjustment(spellLevel.ToString(), quantity);
         }

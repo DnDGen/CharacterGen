@@ -26,7 +26,7 @@ namespace CharacterGen.Tests.Integration.Stress
         public IRandomizerVerifier RandomizerVerifier { get; set; }
         [Inject, Named(AlignmentRandomizerTypeConstants.Any)]
         public virtual IAlignmentRandomizer AlignmentRandomizer { get; set; }
-        [Inject, Named(ClassNameRandomizerTypeConstants.Any)]
+        [Inject, Named(ClassNameRandomizerTypeConstants.AnyPlayer)]
         public virtual IClassNameRandomizer ClassNameRandomizer { get; set; }
         [Inject, Named(LevelRandomizerTypeConstants.Any)]
         public ILevelRandomizer LevelRandomizer { get; set; }
@@ -39,15 +39,15 @@ namespace CharacterGen.Tests.Integration.Stress
         [Inject]
         public IRaceGenerator RaceGenerator { get; set; }
 
-        private const Int32 ConfidentIterations = 1000000;
+        private const int ConfidentIterations = 1000000;
 #if STRESS
         //INFO: This should make all stress tests run within 1 hour
-        private const Int32 TimeLimitInSeconds = 60 * 60 / 116;
+        private const int TimeLimitInSeconds = 60 * 60 / 116;
 #else
-        private const Int32 TimeLimitInSeconds = 1;
+        private const int TimeLimitInSeconds = 1;
 #endif
 
-        private Int32 iterations;
+        private int iterations;
 
         [SetUp]
         public void StressSetup()
@@ -62,7 +62,7 @@ namespace CharacterGen.Tests.Integration.Stress
             Stopwatch.Reset();
         }
 
-        public abstract void Stress(String stressSubject);
+        public abstract void Stress(string stressSubject);
 
         protected void Stress()
         {
@@ -80,7 +80,7 @@ namespace CharacterGen.Tests.Integration.Stress
 
         protected abstract void MakeAssertions();
 
-        protected T Generate<T>(Func<T> generate, Func<T, Boolean> isValid)
+        protected T Generate<T>(Func<T> generate, Func<T, bool> isValid)
         {
             T generatedObject;
 
@@ -90,7 +90,7 @@ namespace CharacterGen.Tests.Integration.Stress
             return generatedObject;
         }
 
-        protected T GenerateOrFail<T>(Func<T> generate, Func<T, Boolean> isValid)
+        protected T GenerateOrFail<T>(Func<T> generate, Func<T, bool> isValid)
         {
             T generatedObject;
 
@@ -103,7 +103,7 @@ namespace CharacterGen.Tests.Integration.Stress
             return generatedObject;
         }
 
-        private Boolean TestShouldKeepRunning()
+        private bool TestShouldKeepRunning()
         {
             iterations++;
             return Stopwatch.Elapsed.TotalSeconds < TimeLimitInSeconds && iterations < ConfidentIterations;

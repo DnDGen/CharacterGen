@@ -1,57 +1,60 @@
-﻿using System;
-
-namespace CharacterGen.Common.CharacterClasses
+﻿namespace CharacterGen.Common.CharacterClasses
 {
     public static class CharacterClassConstants
     {
-        public const String Barbarian = "Barbarian";
-        public const String Bard = "Bard";
-        public const String Cleric = "Cleric";
-        public const String Druid = "Druid";
-        public const String Fighter = "Fighter";
-        public const String Monk = "Monk";
-        public const String Paladin = "Paladin";
-        public const String Ranger = "Ranger";
-        public const String Rogue = "Rogue";
-        public const String Sorcerer = "Sorcerer";
-        public const String Wizard = "Wizard";
+        public const string Barbarian = "Barbarian";
+        public const string Bard = "Bard";
+        public const string Cleric = "Cleric";
+        public const string Druid = "Druid";
+        public const string Fighter = "Fighter";
+        public const string Monk = "Monk";
+        public const string Paladin = "Paladin";
+        public const string Ranger = "Ranger";
+        public const string Rogue = "Rogue";
+        public const string Sorcerer = "Sorcerer";
+        public const string Wizard = "Wizard";
+        public const string Warrior = "Warrior";
+        public const string Commoner = "Commoner";
+        public const string Expert = "Expert";
+        public const string Adept = "Adept";
+        public const string Aristocrat = "Aristocrat";
 
         public static class Domains
         {
-            public const String Air = "Air";
-            public const String Animal = "Animal";
-            public const String Chaos = "Chaos";
-            public const String Death = "Death";
-            public const String Destruction = "Destruction";
-            public const String Earth = "Earth";
-            public const String Evil = "Evil";
-            public const String Fire = "Fire";
-            public const String Good = "Good";
-            public const String Healing = "Healing";
-            public const String Knowledge = "Knowledge";
-            public const String Law = "Law";
-            public const String Luck = "Luck";
-            public const String Magic = "Magic";
-            public const String Plant = "Plant";
-            public const String Protection = "Protection";
-            public const String Strength = "Strength";
-            public const String Sun = "Sun";
-            public const String Travel = "Travel";
-            public const String Trickery = "Trickery";
-            public const String War = "War";
-            public const String Water = "Water";
+            public const string Air = "Air";
+            public const string Animal = "Animal";
+            public const string Chaos = "Chaos";
+            public const string Death = "Death";
+            public const string Destruction = "Destruction";
+            public const string Earth = "Earth";
+            public const string Evil = "Evil";
+            public const string Fire = "Fire";
+            public const string Good = "Good";
+            public const string Healing = "Healing";
+            public const string Knowledge = "Knowledge";
+            public const string Law = "Law";
+            public const string Luck = "Luck";
+            public const string Magic = "Magic";
+            public const string Plant = "Plant";
+            public const string Protection = "Protection";
+            public const string Strength = "Strength";
+            public const string Sun = "Sun";
+            public const string Travel = "Travel";
+            public const string Trickery = "Trickery";
+            public const string War = "War";
+            public const string Water = "Water";
         }
 
         public static class Schools
         {
-            public const String Abjuration = "Abjuration";
-            public const String Conjuration = "Conjuration";
-            public const String Divination = "Divination";
-            public const String Enchantment = "Enchantment";
-            public const String Evocation = "Evocation";
-            public const String Illusion = "Illusion";
-            public const String Necromancy = "Necromancy";
-            public const String Transmutation = "Transmutation";
+            public const string Abjuration = "Abjuration";
+            public const string Conjuration = "Conjuration";
+            public const string Divination = "Divination";
+            public const string Enchantment = "Enchantment";
+            public const string Evocation = "Evocation";
+            public const string Illusion = "Illusion";
+            public const string Necromancy = "Necromancy";
+            public const string Transmutation = "Transmutation";
         }
     }
 }

@@ -246,4 +246,19 @@
     <object>
         <name>Wizard</name>
     </object>
+  <object>
+    <name>Adept</name>
+  </object>
+  <object>
+    <name>Aristocrat</name>
+  </object>
+  <object>
+    <name>Commoner</name>
+  </object>
+  <object>
+    <name>Expert</name>
+  </object>
+  <object>
+    <name>Warrior</name>
+  </object>
 </items>

@@ -3,14 +3,13 @@ using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Common.Races;
 using CharacterGen.Tables;
 using NUnit.Framework;
-using System;
 
 namespace CharacterGen.Tests.Integration.Tables.Magics
 {
     [TestFixture]
     public class AnimalsTests : CollectionTests
     {
-        protected override String tableName
+        protected override string tableName
         {
             get
             {
@@ -57,7 +56,12 @@ namespace CharacterGen.Tests.Integration.Tables.Magics
                 RaceConstants.Metaraces.Wereboar,
                 RaceConstants.Metaraces.Wererat,
                 RaceConstants.Metaraces.Weretiger,
-                RaceConstants.Metaraces.Werewolf
+                RaceConstants.Metaraces.Werewolf,
+                CharacterClassConstants.Adept,
+                CharacterClassConstants.Aristocrat,
+                CharacterClassConstants.Commoner,
+                CharacterClassConstants.Expert,
+                CharacterClassConstants.Warrior
             };
 
             AssertCollectionNames(names);
@@ -80,14 +84,19 @@ namespace CharacterGen.Tests.Integration.Tables.Magics
             RaceConstants.BaseRaces.Animals.DireRat,
             RaceConstants.BaseRaces.Animals.FiendishBat,
             RaceConstants.BaseRaces.Animals.FiendishRat)]
-        public override void DistinctCollection(String name, params String[] collection)
+        [TestCase(CharacterClassConstants.Aristocrat)]
+        [TestCase(CharacterClassConstants.Commoner)]
+        [TestCase(CharacterClassConstants.Expert)]
+        [TestCase(CharacterClassConstants.Warrior)]
+        public override void DistinctCollection(string name, params string[] collection)
         {
             base.DistinctCollection(name, collection);
         }
 
         [TestCase(CharacterClassConstants.Sorcerer)]
         [TestCase(CharacterClassConstants.Wizard)]
-        public void MageAnimals(String className)
+        [TestCase(CharacterClassConstants.Adept)]
+        public void MageAnimals(string className)
         {
             var animals = new[]
             {
@@ -144,7 +153,7 @@ namespace CharacterGen.Tests.Integration.Tables.Magics
                 RaceConstants.BaseRaces.Animals.WaterMephit
             };
 
-            DistinctCollection(CharacterClassConstants.Sorcerer, animals);
+            DistinctCollection(className, animals);
         }
 
         [Test]
@@ -468,7 +477,7 @@ namespace CharacterGen.Tests.Integration.Tables.Magics
 
         [TestCase(RaceConstants.Metaraces.HalfCelestial)]
         [TestCase(RaceConstants.Metaraces.Werebear)]
-        public void AnimalsForGoodMetarace(String metarace)
+        public void AnimalsForGoodMetarace(string metarace)
         {
             var animals = new[]
             {
@@ -569,7 +578,7 @@ namespace CharacterGen.Tests.Integration.Tables.Magics
         [TestCase(RaceConstants.Metaraces.None)]
         [TestCase(RaceConstants.Metaraces.Wereboar)]
         [TestCase(RaceConstants.Metaraces.Weretiger)]
-        public void AnimalsForNeutralMetarace(String metarace)
+        public void AnimalsForNeutralMetarace(string metarace)
         {
             var animals = new[]
             {
@@ -679,7 +688,7 @@ namespace CharacterGen.Tests.Integration.Tables.Magics
         [TestCase(RaceConstants.Metaraces.Lich)]
         [TestCase(RaceConstants.Metaraces.Wererat)]
         [TestCase(RaceConstants.Metaraces.Werewolf)]
-        public void AnimalsForEvilMetarace(String metarace)
+        public void AnimalsForEvilMetarace(string metarace)
         {
             var animals = new[]
             {

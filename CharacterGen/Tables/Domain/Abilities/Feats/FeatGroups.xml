@@ -18,6 +18,10 @@
         <name>Abjuration</name>
         <item>Skill Bonus</item>
     </object>
+    <object>
+        <name>Adept</name>
+        <item>Simple Weapon Proficiency</item>
+    </object>
   <object>
     <name>Add Monster Hit Dice to Strength</name>
     <item>Spell Resistance</item>
@@ -142,6 +146,16 @@
         <name>Animal</name>
         <item>Spell-Like Ability</item>
     </object>
+    <object>
+        <name>Aristocrat</name>
+        <item>Simple Weapon Proficiency</item>
+        <item>Martial Weapon Proficiency</item>
+        <item>Light Armor Proficiency</item>
+        <item>Medium Armor Proficiency</item>
+        <item>Heavy Armor Proficiency</item>
+        <item>Shield Proficiency</item>
+        <item>Tower Shield Proficiency</item>
+    </object>
   <object>
     <name>ArmorProficiency</name>
     <item>Heavy Armor Proficiency</item>
@@ -149,6 +163,10 @@
     <item>Medium Armor Proficiency</item>
     <item>Shield Proficiency</item>
     <item>Tower Shield Proficiency</item>
+  </object>
+  <object>
+    <name>Attack Bonus</name>
+    <item>Attack Bonus</item>
   </object>
     <object>
         <name>Barbarian</name>
@@ -270,6 +288,10 @@
         <item>Heavy Armor Proficiency</item>
         <item>Shield Proficiency</item>
         <item>Turn</item>
+    </object>
+    <object>
+        <name>Commoner</name>
+        <item>Simple Weapon Proficiency</item>
     </object>
     <object>
         <name>Conjuration</name>
@@ -436,6 +458,11 @@
     <object>
         <name>Evocation</name>
         <item>Skill Bonus</item>
+    </object>
+    <object>
+        <name>Expert</name>
+        <item>Simple Weapon Proficiency</item>
+        <item>Light Armor Proficiency</item>
     </object>
     <object>
         <name>Fighter</name>
@@ -1308,6 +1335,16 @@
         <name>War</name>
         <item>Martial Weapon Proficiency</item>
         <item>Weapon Focus</item>
+    </object>
+    <object>
+        <name>Warrior</name>
+        <item>Simple Weapon Proficiency</item>
+        <item>Martial Weapon Proficiency</item>
+        <item>Light Armor Proficiency</item>
+        <item>Medium Armor Proficiency</item>
+        <item>Heavy Armor Proficiency</item>
+        <item>Shield Proficiency</item>
+        <item>Tower Shield Proficiency</item>
     </object>
     <object>
         <name>Water</name>

@@ -1,11 +1,12 @@
-﻿using CharacterGen.Common.Abilities.Stats;
+﻿using CharacterGen.Common;
+using CharacterGen.Common.Abilities.Stats;
 using CharacterGen.Common.Alignments;
 using CharacterGen.Common.Races;
 using CharacterGen.Generators;
+using CharacterGen.Generators.Randomizers.CharacterClasses;
 using CharacterGen.Generators.Randomizers.Stats;
 using Ninject;
 using NUnit.Framework;
-using System;
 using TreasureGen.Common.Items;
 
 namespace CharacterGen.Tests.Integration.Stress
@@ -17,9 +18,11 @@ namespace CharacterGen.Tests.Integration.Stress
         public ICharacterGenerator CharacterGenerator { get; set; }
         [Inject, Named(StatsRandomizerTypeConstants.Raw)]
         public IStatsRandomizer StatsRandomizer { get; set; }
+        [Inject, Named(ClassNameRandomizerTypeConstants.AnyNPC)]
+        public IClassNameRandomizer NPCClassNameRandomizer { get; set; }
 
         [TestCase("CharacterGenerator")]
-        public override void Stress(String stressSubject)
+        public override void Stress(string stressSubject)
         {
             Stress();
         }
@@ -29,6 +32,12 @@ namespace CharacterGen.Tests.Integration.Stress
             var character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
                     MetaraceRandomizer, StatsRandomizer);
 
+            AssertCharacter(character);
+            Assert.That(character.Equipment.Treasure.Items, Is.Not.Empty);
+        }
+
+        private void AssertCharacter(Character character)
+        {
             Assert.That(character.Alignment.Goodness, Is.EqualTo(AlignmentConstants.Good)
                 .Or.EqualTo(AlignmentConstants.Neutral)
                 .Or.EqualTo(AlignmentConstants.Evil));
@@ -82,7 +91,7 @@ namespace CharacterGen.Tests.Integration.Stress
             Assert.That(character.Equipment.PrimaryHand.ItemType, Is.EqualTo(ItemTypeConstants.Weapon));
             Assert.That(character.Equipment.PrimaryHand.Name, Is.Not.Empty);
             Assert.That(character.Equipment.Treasure, Is.Not.Null);
-            Assert.That(character.Equipment.Treasure.Items, Is.Not.Empty);
+            Assert.That(character.Equipment.Treasure.Items, Is.Not.Null);
 
             foreach (var item in character.Equipment.Treasure.Items)
                 Assert.That(item, Is.Not.Null);
@@ -98,6 +107,20 @@ namespace CharacterGen.Tests.Integration.Stress
             Assert.That(character.Combat.ArmorClass.Full, Is.Positive);
             Assert.That(character.Combat.ArmorClass.FlatFooted, Is.Positive);
             Assert.That(character.Combat.ArmorClass.Touch, Is.Positive);
+        }
+
+        [Test]
+        public void StressNPC()
+        {
+            Stress(AssertNPC);
+        }
+
+        private void AssertNPC()
+        {
+            var npc = CharacterGenerator.GenerateWith(AlignmentRandomizer, NPCClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
+                    MetaraceRandomizer, StatsRandomizer);
+
+            AssertCharacter(npc);
         }
     }
 }

@@ -68,7 +68,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             1,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.SimpleWeaponProficiency + WeaponConstants.Dagger,
             FeatConstants.SimpleWeaponProficiency,
             WeaponConstants.Dagger,
@@ -78,7 +78,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             1,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.SimpleWeaponProficiency + WeaponConstants.Club,
             FeatConstants.SimpleWeaponProficiency,
             WeaponConstants.Club,
@@ -88,7 +88,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             1,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.SimpleWeaponProficiency + WeaponConstants.Dart,
             FeatConstants.SimpleWeaponProficiency,
             WeaponConstants.Dart,
@@ -98,7 +98,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             1,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.SimpleWeaponProficiency + WeaponConstants.Sling,
             FeatConstants.SimpleWeaponProficiency,
             WeaponConstants.Sling,
@@ -108,7 +108,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             1,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.SimpleWeaponProficiency + WeaponConstants.Shortspear,
             FeatConstants.SimpleWeaponProficiency,
             WeaponConstants.Shortspear,
@@ -118,7 +118,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             1,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.SimpleWeaponProficiency + WeaponConstants.Longspear,
             FeatConstants.SimpleWeaponProficiency,
             WeaponConstants.Longspear,
@@ -128,7 +128,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             1,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.SimpleWeaponProficiency + WeaponConstants.Sickle,
             FeatConstants.SimpleWeaponProficiency,
             WeaponConstants.Sickle,
@@ -138,7 +138,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             1,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.MartialWeaponProficiency + WeaponConstants.Scimitar,
             FeatConstants.MartialWeaponProficiency,
             WeaponConstants.Scimitar,
@@ -148,7 +148,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             1,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.LightArmorProficiency,
             FeatConstants.LightArmorProficiency,
             "",
@@ -158,7 +158,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             1,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.MediumArmorProficiency,
             FeatConstants.MediumArmorProficiency,
             "",
@@ -168,7 +168,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             1,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.ShieldProficiency,
             FeatConstants.ShieldProficiency,
             "",
@@ -178,7 +178,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             1,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.NatureSense,
             FeatConstants.NatureSense,
             "",
@@ -188,7 +188,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             1,
             0,
             2,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.WildEmpathy,
             FeatConstants.WildEmpathy,
             "",
@@ -198,7 +198,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             1,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.WildShape + "1",
             FeatConstants.WildShape,
             "",
@@ -208,7 +208,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             5,
             5,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.WildShape + "2",
             FeatConstants.WildShape,
             "",
@@ -218,7 +218,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             6,
             6,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.WildShape + "3",
             FeatConstants.WildShape,
             "",
@@ -228,7 +228,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             7,
             9,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.WildShape + "4",
             FeatConstants.WildShape,
             "",
@@ -238,7 +238,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             10,
             13,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.WildShape + "5",
             FeatConstants.WildShape,
             "",
@@ -248,7 +248,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             14,
             17,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.WildShape + "6",
             FeatConstants.WildShape,
             "",
@@ -258,7 +258,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             18,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.WildShape + "Large",
             FeatConstants.WildShape,
             "Large",
@@ -268,7 +268,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             8,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.WildShape + "Tiny",
             FeatConstants.WildShape,
             "Tiny",
@@ -278,7 +278,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             11,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.WildShape + "Plant",
             FeatConstants.WildShape,
             "Plant",
@@ -288,7 +288,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             12,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.WildShape + "Huge",
             FeatConstants.WildShape,
             "Huge",
@@ -298,7 +298,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             15,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.WildShape + "Elemental1",
             FeatConstants.WildShape,
             "Elemental",
@@ -308,7 +308,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             16,
             17,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.WildShape + "Elemental2",
             FeatConstants.WildShape,
             "Elemental",
@@ -318,7 +318,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             18,
             19,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.WildShape + "Elemental3",
             FeatConstants.WildShape,
             "Elemental",
@@ -328,7 +328,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             20,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.WildShape + "ElementalHuge",
             FeatConstants.WildShape,
             "Huge Elemental",
@@ -338,7 +338,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             20,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.WoodlandStride,
             FeatConstants.WoodlandStride,
             "",
@@ -348,7 +348,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             2,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.TracklessStep,
             FeatConstants.TracklessStep,
             "",
@@ -358,7 +358,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             3,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.ResistNaturesLure,
             FeatConstants.ResistNaturesLure,
             "",
@@ -368,7 +368,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             4,
             0,
             4,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.AThousandFaces,
             FeatConstants.AThousandFaces,
             "",
@@ -378,7 +378,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             13,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.TimelessBody,
             FeatConstants.TimelessBody,
             "",
@@ -388,7 +388,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             15,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.VenomImmunity,
             FeatConstants.VenomImmunity,
             "",
@@ -398,10 +398,10 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             9,
             0,
             0,
-            "")]
-        public override void Data(String name, String feat, String focusType, Int32 frequencyQuantity, String frequencyQuantityStat, String frequencyTimePeriod, Int32 minimumLevel, Int32 maximumLevel, Int32 strength, String sizeRequirement)
+            "", true)]
+        public override void Data(string name, string feat, string focusType, int frequencyQuantity, string frequencyQuantityStat, string frequencyTimePeriod, int minimumLevel, int maximumLevel, int strength, string sizeRequirement, bool allowFocusOfAll)
         {
-            base.Data(name, feat, focusType, frequencyQuantity, frequencyQuantityStat, frequencyTimePeriod, minimumLevel, maximumLevel, strength, sizeRequirement);
+            base.Data(name, feat, focusType, frequencyQuantity, frequencyQuantityStat, frequencyTimePeriod, minimumLevel, maximumLevel, strength, sizeRequirement, allowFocusOfAll);
         }
     }
 }

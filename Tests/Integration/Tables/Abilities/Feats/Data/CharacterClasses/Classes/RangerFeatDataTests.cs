@@ -59,7 +59,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             1,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.MartialWeaponProficiency,
             FeatConstants.MartialWeaponProficiency,
             FeatConstants.Foci.All,
@@ -69,7 +69,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             1,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.LightArmorProficiency,
             FeatConstants.LightArmorProficiency,
             "",
@@ -79,7 +79,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             1,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.ShieldProficiency,
             FeatConstants.ShieldProficiency,
             "",
@@ -89,7 +89,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             1,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.FavoredEnemy + "1",
             FeatConstants.FavoredEnemy,
             GroupConstants.FavoredEnemies,
@@ -99,7 +99,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             1,
             0,
             2,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.FavoredEnemy + "2",
             FeatConstants.FavoredEnemy,
             GroupConstants.FavoredEnemies,
@@ -109,7 +109,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             5,
             0,
             2,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.FavoredEnemy + "3",
             FeatConstants.FavoredEnemy,
             GroupConstants.FavoredEnemies,
@@ -119,7 +119,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             10,
             0,
             2,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.FavoredEnemy + "4",
             FeatConstants.FavoredEnemy,
             GroupConstants.FavoredEnemies,
@@ -129,7 +129,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             15,
             0,
             2,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.FavoredEnemy + "5",
             FeatConstants.FavoredEnemy,
             GroupConstants.FavoredEnemies,
@@ -139,7 +139,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             20,
             0,
             2,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.Track,
             FeatConstants.Track,
             "",
@@ -149,7 +149,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             1,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.WildEmpathy,
             FeatConstants.WildEmpathy,
             "",
@@ -159,7 +159,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             1,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.CombatStyle,
             FeatConstants.CombatStyle,
             FeatConstants.CombatStyle,
@@ -169,7 +169,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             2,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.Endurance,
             FeatConstants.Endurance,
             "",
@@ -179,7 +179,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             3,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.ImprovedCombatStyle,
             FeatConstants.ImprovedCombatStyle,
             FeatConstants.CombatStyle,
@@ -189,7 +189,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             6,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.WoodlandStride,
             FeatConstants.WoodlandStride,
             "",
@@ -199,7 +199,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             7,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.SwiftTracker,
             FeatConstants.SwiftTracker,
             "",
@@ -209,7 +209,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             8,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.Evasion,
             FeatConstants.Evasion,
             "",
@@ -219,7 +219,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             9,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.CombatStyleMastery,
             FeatConstants.CombatStyleMastery,
             FeatConstants.CombatStyle,
@@ -229,7 +229,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             11,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.Camouflage,
             FeatConstants.Camouflage,
             "",
@@ -239,7 +239,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             13,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.HideInPlainSight,
             FeatConstants.HideInPlainSight,
             "",
@@ -249,7 +249,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             17,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.RapidShot + CharacterClassConstants.Ranger,
             FeatConstants.RapidShot,
             "",
@@ -259,7 +259,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             1,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.TwoWeaponFighting + CharacterClassConstants.Ranger,
             FeatConstants.TwoWeaponFighting,
             "",
@@ -269,7 +269,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             1,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.Manyshot + CharacterClassConstants.Ranger,
             FeatConstants.Manyshot,
             "",
@@ -279,7 +279,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             1,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.ImprovedTwoWeaponFighting + CharacterClassConstants.Ranger,
             FeatConstants.ImprovedTwoWeaponFighting,
             "",
@@ -289,7 +289,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             1,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.ImprovedPreciseShot + CharacterClassConstants.Ranger,
             FeatConstants.ImprovedPreciseShot,
             "",
@@ -299,7 +299,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             1,
             0,
             0,
-            "")]
+            "", true)]
         [TestCase(FeatConstants.GreaterTwoWeaponFighting + CharacterClassConstants.Ranger,
             FeatConstants.GreaterTwoWeaponFighting,
             "",
@@ -309,10 +309,10 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             1,
             0,
             0,
-            "")]
-        public override void Data(String name, String feat, String focusType, Int32 frequencyQuantity, String frequencyQuantityStat, String frequencyTimePeriod, Int32 minimumLevel, Int32 maximumLevel, Int32 strength, String sizeRequirement)
+            "", true)]
+        public override void Data(string name, string feat, string focusType, int frequencyQuantity, string frequencyQuantityStat, string frequencyTimePeriod, int minimumLevel, int maximumLevel, int strength, string sizeRequirement, bool allowFocusOfAll)
         {
-            base.Data(name, feat, focusType, frequencyQuantity, frequencyQuantityStat, frequencyTimePeriod, minimumLevel, maximumLevel, strength, sizeRequirement);
+            base.Data(name, feat, focusType, frequencyQuantity, frequencyQuantityStat, frequencyTimePeriod, minimumLevel, maximumLevel, strength, sizeRequirement, allowFocusOfAll);
         }
     }
 }

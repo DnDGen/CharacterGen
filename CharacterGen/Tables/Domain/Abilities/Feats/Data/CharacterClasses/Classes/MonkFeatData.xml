@@ -12,6 +12,7 @@
         <item>0</item>
         <item></item>
       <item></item>
+      <item>True</item>
     </object>
   <object>
     <name>Armor Bonus1</name>
@@ -24,6 +25,7 @@
     <item>9</item>
     <item></item>
     <item></item>
+    <item>True</item>
   </object>
   <object>
     <name>Armor Bonus2</name>
@@ -36,6 +38,7 @@
     <item>14</item>
     <item></item>
     <item></item>
+    <item>True</item>
   </object>
   <object>
     <name>Armor Bonus3</name>
@@ -48,6 +51,7 @@
     <item>19</item>
     <item></item>
     <item></item>
+      <item>True</item>
   </object>
   <object>
     <name>Armor Bonus4</name>
@@ -60,6 +64,7 @@
     <item>0</item>
     <item></item>
     <item></item>
+    <item>True</item>
   </object>
   <object>
     <name>Armor BonusWisdom</name>
@@ -72,6 +77,7 @@
     <item>0</item>
     <item></item>
     <item></item>
+      <item>True</item>
   </object>
   <object>
     <name>Simple Weapon ProficiencyClub</name>
@@ -84,6 +90,7 @@
     <item>0</item>
     <item></item>
     <item></item>
+    <item>True</item>
   </object>
   <object>
     <name>Simple Weapon ProficiencyDagger</name>
@@ -96,6 +103,7 @@
     <item>0</item>
     <item></item>
     <item></item>
+    <item>True</item>
   </object>
   <object>
     <name>Simple Weapon ProficiencyHeavy crossbow</name>
@@ -108,6 +116,7 @@
     <item>0</item>
     <item></item>
     <item></item>
+    <item>True</item>
   </object>
   <object>
     <name>Simple Weapon ProficiencyLight crossbow</name>
@@ -120,6 +129,7 @@
     <item>0</item>
     <item></item>
     <item></item>
+    <item>True</item>
   </object>
   <object>
     <name>Simple Weapon ProficiencySling</name>
@@ -132,6 +142,7 @@
     <item>0</item>
     <item></item>
     <item></item>
+      <item>True</item>
   </object>
   <object>
     <name>Martial Weapon ProficiencyHandaxe</name>
@@ -144,6 +155,7 @@
     <item>0</item>
     <item></item>
     <item></item>
+    <item>True</item>
   </object>
   <object>
     <name>Simple Weapon ProficiencyJavelin</name>
@@ -156,6 +168,7 @@
     <item>0</item>
     <item></item>
     <item></item>
+      <item>True</item>
   </object>
   <object>
     <name>Exotic Weapon ProficiencyKama</name>
@@ -168,6 +181,7 @@
     <item>0</item>
     <item></item>
     <item></item>
+    <item>True</item>
   </object>
   <object>
     <name>Exotic Weapon ProficiencyNunchaku</name>
@@ -180,6 +194,7 @@
     <item>0</item>
     <item></item>
     <item></item>
+      <item>True</item>
   </object>
   <object>
     <name>Simple Weapon ProficiencyQuarterstaff</name>
@@ -192,6 +207,7 @@
     <item>0</item>
     <item></item>
     <item></item>
+    <item>True</item>
   </object>
   <object>
     <name>Exotic Weapon ProficiencyShuriken</name>
@@ -204,6 +220,7 @@
     <item>0</item>
     <item></item>
     <item></item>
+    <item>True</item>
   </object>
   <object>
     <name>Exotic Weapon ProficiencySiangham</name>
@@ -216,6 +233,7 @@
     <item>0</item>
     <item></item>
     <item></item>
+      <item>True</item>
   </object>
   <object>
     <name>Flurry of Blows</name>
@@ -228,6 +246,7 @@
     <item>0</item>
     <item></item>
     <item></item>
+    <item>True</item>
   </object>
   <object>
     <name>Greater Flurry</name>
@@ -240,6 +259,7 @@
     <item>0</item>
     <item></item>
     <item></item>
+      <item>True</item>
   </object>
   <object>
     <name>Monk Unarmed StrikeSmall1d4</name>
@@ -252,6 +272,7 @@
     <item>3</item>
     <item></item>
     <item>Small</item>
+    <item>True</item>
   </object>
   <object>
     <name>Monk Unarmed StrikeSmall1d6</name>
@@ -264,6 +285,7 @@
     <item>7</item>
     <item></item>
     <item>Small</item>
+      <item>True</item>
   </object>
   <object>
     <name>Monk Unarmed StrikeSmall1d8</name>
@@ -276,6 +298,7 @@
     <item>11</item>
     <item></item>
     <item>Small</item>
+    <item>True</item>
   </object>
   <object>
     <name>Monk Unarmed StrikeSmall1d10</name>
@@ -288,6 +311,7 @@
     <item>15</item>
     <item></item>
     <item>Small</item>
+    <item>True</item>
   </object>
   <object>
     <name>Monk Unarmed StrikeSmall2d6</name>
@@ -300,6 +324,7 @@
     <item>19</item>
     <item></item>
     <item>Small</item>
+      <item>True</item>
   </object>
   <object>
     <name>Monk Unarmed StrikeSmall2d8</name>
@@ -312,6 +337,7 @@
     <item>0</item>
     <item></item>
     <item>Small</item>
+      <item>True</item>
   </object>
   <object>
     <name>Monk Unarmed StrikeMedium1d6</name>
@@ -324,6 +350,7 @@
     <item>3</item>
     <item></item>
     <item>Medium</item>
+    <item>True</item>
   </object>
   <object>
     <name>Monk Unarmed StrikeMedium1d8</name>
@@ -336,6 +363,7 @@
     <item>7</item>
     <item></item>
     <item>Medium</item>
+      <item>True</item>
   </object>
   <object>
     <name>Monk Unarmed StrikeMedium1d10</name>
@@ -348,6 +376,7 @@
     <item>11</item>
     <item></item>
     <item>Medium</item>
+    <item>True</item>
   </object>
   <object>
     <name>Monk Unarmed StrikeMedium2d6</name>
@@ -360,6 +389,7 @@
     <item>15</item>
     <item></item>
     <item>Medium</item>
+      <item>True</item>
   </object>
   <object>
     <name>Monk Unarmed StrikeMedium2d8</name>
@@ -372,6 +402,7 @@
     <item>19</item>
     <item></item>
     <item>Medium</item>
+    <item>True</item>
   </object>
   <object>
     <name>Monk Unarmed StrikeMedium2d10</name>
@@ -384,6 +415,7 @@
     <item>0</item>
     <item></item>
     <item>Medium</item>
+    <item>True</item>
   </object>
   <object>
     <name>Monk Unarmed StrikeLarge1d8</name>
@@ -396,6 +428,7 @@
     <item>3</item>
     <item></item>
     <item>Large</item>
+    <item>True</item>
   </object>
   <object>
     <name>Monk Unarmed StrikeLarge2d6</name>
@@ -408,6 +441,7 @@
     <item>7</item>
     <item></item>
     <item>Large</item>
+      <item>True</item>
   </object>
   <object>
     <name>Monk Unarmed StrikeLarge2d8</name>
@@ -420,6 +454,7 @@
     <item>11</item>
     <item></item>
     <item>Large</item>
+    <item>True</item>
   </object>
   <object>
     <name>Monk Unarmed StrikeLarge3d6</name>
@@ -432,6 +467,7 @@
     <item>15</item>
     <item></item>
     <item>Large</item>
+    <item>True</item>
   </object>
   <object>
     <name>Monk Unarmed StrikeLarge3d8</name>
@@ -444,6 +480,7 @@
     <item>19</item>
     <item></item>
     <item>Large</item>
+    <item>True</item>
   </object>
   <object>
     <name>Monk Unarmed StrikeLarge4d8</name>
@@ -456,6 +493,7 @@
     <item>0</item>
     <item></item>
     <item>Large</item>
+      <item>True</item>
   </object>
   <object>
     <name>Improved Unarmed Strike</name>
@@ -468,6 +506,7 @@
     <item>0</item>
     <item></item>
     <item></item>
+    <item>True</item>
   </object>
   <object>
     <name>Monk Bonus Feat1</name>
@@ -480,6 +519,7 @@
     <item>0</item>
     <item></item>
     <item></item>
+    <item>True</item>
   </object>
   <object>
     <name>Monk Bonus Feat2</name>
@@ -492,6 +532,7 @@
     <item>0</item>
     <item></item>
     <item></item>
+      <item>True</item>
   </object>
   <object>
     <name>Monk Bonus Feat6</name>
@@ -504,6 +545,7 @@
     <item>0</item>
     <item></item>
     <item></item>
+      <item>True</item>
   </object>
   <object>
     <name>Improved GrappleMonk</name>
@@ -516,6 +558,7 @@
     <item>0</item>
     <item></item>
     <item></item>
+    <item>True</item>
   </object>
   <object>
     <name>Stunning FistMonk</name>
@@ -528,6 +571,7 @@
     <item>0</item>
     <item></item>
     <item></item>
+      <item>True</item>
   </object>
   <object>
     <name>Combat ReflexesMonk</name>
@@ -540,6 +584,7 @@
     <item>0</item>
     <item></item>
     <item></item>
+      <item>True</item>
   </object>
   <object>
     <name>Deflect ArrowsMonk</name>
@@ -552,6 +597,7 @@
     <item>0</item>
     <item></item>
     <item></item>
+    <item>True</item>
   </object>
   <object>
     <name>Improved DisarmMonk</name>
@@ -564,6 +610,7 @@
     <item>0</item>
     <item></item>
     <item></item>
+    <item>True</item>
   </object>
   <object>
     <name>Improved TripMonk</name>
@@ -576,6 +623,7 @@
     <item>0</item>
     <item></item>
     <item></item>
+      <item>True</item>
   </object>
   <object>
     <name>Evasion</name>
@@ -588,6 +636,7 @@
     <item>0</item>
     <item></item>
     <item></item>
+    <item>True</item>
   </object>
   <object>
     <name>Fast Movement10</name>
@@ -600,6 +649,7 @@
     <item>5</item>
     <item></item>
     <item></item>
+    <item>True</item>
   </object>
   <object>
     <name>Fast Movement20</name>
@@ -612,6 +662,7 @@
     <item>8</item>
     <item></item>
     <item></item>
+    <item>True</item>
   </object>
   <object>
     <name>Fast Movement30</name>
@@ -624,6 +675,7 @@
     <item>11</item>
     <item></item>
     <item></item>
+      <item>True</item>
   </object>
   <object>
     <name>Fast Movement40</name>
@@ -636,6 +688,7 @@
     <item>14</item>
     <item></item>
     <item></item>
+      <item>True</item>
   </object>
   <object>
     <name>Fast Movement50</name>
@@ -648,6 +701,7 @@
     <item>17</item>
     <item></item>
     <item></item>
+    <item>True</item>
   </object>
   <object>
     <name>Fast Movement60</name>
@@ -660,6 +714,7 @@
     <item>0</item>
     <item></item>
     <item></item>
+    <item>True</item>
   </object>
   <object>
     <name>Still Mind</name>
@@ -672,6 +727,7 @@
     <item>0</item>
     <item></item>
     <item></item>
+    <item>True</item>
   </object>
   <object>
     <name>Ki StrikeMagic</name>
@@ -684,6 +740,7 @@
     <item>0</item>
     <item></item>
     <item></item>
+    <item>True</item>
   </object>
   <object>
     <name>Ki StrikeLawful</name>
@@ -696,6 +753,7 @@
     <item>0</item>
     <item></item>
     <item></item>
+    <item>True</item>
   </object>
   <object>
     <name>Ki StrikeAdamantine</name>
@@ -708,6 +766,7 @@
     <item>0</item>
     <item></item>
     <item></item>
+    <item>True</item>
   </object>
   <object>
     <name>Diamond Body</name>
@@ -720,6 +779,7 @@
     <item>0</item>
     <item></item>
     <item></item>
+      <item>True</item>
   </object>
   <object>
     <name>Diamond Soul</name>
@@ -732,6 +792,7 @@
     <item>0</item>
     <item></item>
     <item></item>
+      <item>True</item>
   </object>
   <object>
     <name>Empty Body</name>
@@ -744,6 +805,7 @@
     <item>0</item>
     <item></item>
     <item></item>
+    <item>True</item>
   </object>
   <object>
     <name>Slow Fall20</name>
@@ -756,6 +818,7 @@
     <item>5</item>
     <item></item>
     <item></item>
+    <item>True</item>
   </object>
   <object>
     <name>Slow Fall30</name>
@@ -768,6 +831,7 @@
     <item>7</item>
     <item></item>
     <item></item>
+    <item>True</item>
   </object>
   <object>
     <name>Slow Fall40</name>
@@ -780,6 +844,7 @@
     <item>9</item>
     <item></item>
     <item></item>
+      <item>True</item>
   </object>
   <object>
     <name>Slow Fall50</name>
@@ -792,6 +857,7 @@
     <item>11</item>
     <item></item>
     <item></item>
+    <item>True</item>
   </object>
   <object>
     <name>Slow Fall60</name>
@@ -804,6 +870,7 @@
     <item>13</item>
     <item></item>
     <item></item>
+    <item>True</item>
   </object>
   <object>
     <name>Slow Fall70</name>
@@ -816,6 +883,7 @@
     <item>15</item>
     <item></item>
     <item></item>
+    <item>True</item>
   </object>
   <object>
     <name>Slow Fall80</name>
@@ -828,6 +896,7 @@
     <item>17</item>
     <item></item>
     <item></item>
+      <item>True</item>
   </object>
   <object>
     <name>Slow Fall90</name>
@@ -840,6 +909,7 @@
     <item>19</item>
     <item></item>
     <item></item>
+      <item>True</item>
   </object>
   <object>
     <name>Slow FallAny</name>
@@ -852,6 +922,7 @@
     <item>0</item>
     <item></item>
     <item></item>
+    <item>True</item>
   </object>
   <object>
     <name>Purity of Body</name>
@@ -864,6 +935,7 @@
     <item>0</item>
     <item></item>
     <item></item>
+    <item>True</item>
   </object>
   <object>
     <name>Wholeness of Body</name>
@@ -876,6 +948,7 @@
     <item>0</item>
     <item></item>
     <item></item>
+      <item>True</item>
   </object>
   <object>
     <name>Improved Evasion</name>
@@ -888,6 +961,7 @@
     <item>0</item>
     <item></item>
     <item></item>
+      <item>True</item>
   </object>
   <object>
     <name>Quivering Palm</name>
@@ -900,6 +974,7 @@
     <item>0</item>
     <item></item>
     <item></item>
+      <item>True</item>
   </object>
   <object>
     <name>Timeless Body</name>
@@ -912,6 +987,7 @@
     <item>0</item>
     <item></item>
     <item></item>
+    <item>True</item>
   </object>
   <object>
     <name>Tongue of Sun and Moon</name>
@@ -924,6 +1000,7 @@
     <item>0</item>
     <item></item>
     <item></item>
+    <item>True</item>
   </object>
   <object>
     <name>Perfect Self</name>
@@ -936,5 +1013,6 @@
     <item>0</item>
     <item></item>
     <item></item>
+    <item>True</item>
   </object>
 </items>

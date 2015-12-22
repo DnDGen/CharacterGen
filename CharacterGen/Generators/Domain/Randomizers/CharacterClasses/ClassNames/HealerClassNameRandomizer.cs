@@ -1,8 +1,8 @@
-﻿using System;
-using System.Linq;
-using CharacterGen.Common.Alignments;
+﻿using CharacterGen.Common.Alignments;
 using CharacterGen.Selectors;
 using CharacterGen.Tables;
+using System;
+using System.Linq;
 
 namespace CharacterGen.Generators.Domain.Randomizers.CharacterClasses.ClassNames
 {
@@ -18,12 +18,10 @@ namespace CharacterGen.Generators.Domain.Randomizers.CharacterClasses.ClassNames
 
         protected override Boolean CharacterClassIsAllowed(String className, Alignment alignment)
         {
-            var healers = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups,
-                GroupConstants.Healers);
-            var alignmentClasses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups,
-                alignment.ToString());
-
+            var healers = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Healers);
+            var alignmentClasses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, alignment.ToString());
             var allowedClasses = healers.Intersect(alignmentClasses);
+
             return allowedClasses.Contains(className);
         }
     }

@@ -160,9 +160,15 @@ namespace CharacterGen.Tests.Integration.Bootstrap.Modules
         }
 
         [Test]
-        public void ClassNameRandomizerNamedAnyIsAnyClassNameRandomizer()
+        public void ClassNameRandomizerNamedAnyPlayerIsAnyPlayerClassNameRandomizer()
         {
-            AssertNamedIsInstanceOf<IClassNameRandomizer, AnyClassNameRandomizer>(ClassNameRandomizerTypeConstants.Any);
+            AssertNamedIsInstanceOf<IClassNameRandomizer, AnyPlayerClassNameRandomizer>(ClassNameRandomizerTypeConstants.AnyPlayer);
+        }
+
+        [Test]
+        public void ClassNameRandomizerNamedAnyNPCIsAnyNPCClassNameRandomizer()
+        {
+            AssertNamedIsInstanceOf<IClassNameRandomizer, AnyNPCClassNameRandomizer>(ClassNameRandomizerTypeConstants.AnyNPC);
         }
 
         [Test]
@@ -201,7 +207,8 @@ namespace CharacterGen.Tests.Integration.Bootstrap.Modules
             AssertNamedIsInstanceOf<IClassNameRandomizer, WarriorClassNameRandomizer>(ClassNameRandomizerTypeConstants.Warrior);
         }
 
-        [TestCase(ClassNameRandomizerTypeConstants.Any)]
+        [TestCase(ClassNameRandomizerTypeConstants.AnyPlayer)]
+        [TestCase(ClassNameRandomizerTypeConstants.AnyNPC)]
         [TestCase(ClassNameRandomizerTypeConstants.Healer)]
         [TestCase(ClassNameRandomizerTypeConstants.Mage)]
         [TestCase(ClassNameRandomizerTypeConstants.NonSpellcaster)]

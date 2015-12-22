@@ -1,8 +1,8 @@
-﻿using System;
-using CharacterGen.Common.Abilities.Skills;
+﻿using CharacterGen.Common.Abilities.Skills;
 using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Tables;
 using NUnit.Framework;
+using System;
 
 namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
 {
@@ -17,19 +17,24 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
         [Test]
         public override void CollectionNames()
         {
-            var names = new[] 
+            var names = new[]
             {
                 CharacterClassConstants.Barbarian,
                 CharacterClassConstants.Bard,
                 CharacterClassConstants.Cleric,
                 CharacterClassConstants.Druid,
-                CharacterClassConstants.Fighter, 
+                CharacterClassConstants.Fighter,
                 CharacterClassConstants.Monk,
-                CharacterClassConstants.Paladin, 
-                CharacterClassConstants.Ranger, 
-                CharacterClassConstants.Rogue, 
-                CharacterClassConstants.Sorcerer, 
-                CharacterClassConstants.Wizard
+                CharacterClassConstants.Paladin,
+                CharacterClassConstants.Ranger,
+                CharacterClassConstants.Rogue,
+                CharacterClassConstants.Sorcerer,
+                CharacterClassConstants.Wizard,
+                CharacterClassConstants.Adept,
+                CharacterClassConstants.Aristocrat,
+                CharacterClassConstants.Commoner,
+                CharacterClassConstants.Expert,
+                CharacterClassConstants.Warrior
             };
 
             AssertCollectionNames(names);
@@ -216,6 +221,103 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
             SkillConstants.Spot,
             SkillConstants.Survival,
             SkillConstants.Swim,
+            SkillConstants.UseRope)]
+        [TestCase(CharacterClassConstants.Adept,
+            SkillConstants.Appraise,
+            SkillConstants.Balance,
+            SkillConstants.Bluff,
+            SkillConstants.Climb,
+            SkillConstants.Diplomacy,
+            SkillConstants.Disguise,
+            SkillConstants.EscapeArtist,
+            SkillConstants.Forgery,
+            SkillConstants.GatherInformation,
+            SkillConstants.Hide,
+            SkillConstants.Intimidate,
+            SkillConstants.Jump,
+            SkillConstants.Listen,
+            SkillConstants.MoveSilently,
+            SkillConstants.Perform,
+            SkillConstants.Ride,
+            SkillConstants.Search,
+            SkillConstants.SenseMotive,
+            SkillConstants.Spot,
+            SkillConstants.Swim,
+            SkillConstants.UseRope)]
+        [TestCase(CharacterClassConstants.Aristocrat,
+            SkillConstants.Balance,
+            SkillConstants.Climb,
+            SkillConstants.Concentration,
+            SkillConstants.EscapeArtist,
+            SkillConstants.Heal,
+            SkillConstants.Hide,
+            SkillConstants.Jump,
+            SkillConstants.MoveSilently,
+            SkillConstants.Perform,
+            SkillConstants.Search,
+            SkillConstants.UseRope)]
+        [TestCase(CharacterClassConstants.Commoner,
+            SkillConstants.Appraise,
+            SkillConstants.Balance,
+            SkillConstants.Bluff,
+            SkillConstants.Concentration,
+            SkillConstants.Diplomacy,
+            SkillConstants.Disguise,
+            SkillConstants.EscapeArtist,
+            SkillConstants.Forgery,
+            SkillConstants.GatherInformation,
+            SkillConstants.Heal,
+            SkillConstants.Hide,
+            SkillConstants.Intimidate,
+            SkillConstants.MoveSilently,
+            SkillConstants.Perform,
+            SkillConstants.Search,
+            SkillConstants.SenseMotive,
+            SkillConstants.Survival)]
+        [TestCase(CharacterClassConstants.Expert,
+            SkillConstants.Appraise,
+            SkillConstants.Balance,
+            SkillConstants.Bluff,
+            SkillConstants.Climb,
+            SkillConstants.Concentration,
+            SkillConstants.Diplomacy,
+            SkillConstants.Disguise,
+            SkillConstants.EscapeArtist,
+            SkillConstants.Forgery,
+            SkillConstants.GatherInformation,
+            SkillConstants.Heal,
+            SkillConstants.Hide,
+            SkillConstants.Intimidate,
+            SkillConstants.Jump,
+            SkillConstants.Listen,
+            SkillConstants.MoveSilently,
+            SkillConstants.Perform,
+            SkillConstants.Ride,
+            SkillConstants.Search,
+            SkillConstants.SenseMotive,
+            SkillConstants.Spot,
+            SkillConstants.Survival,
+            SkillConstants.Swim,
+            SkillConstants.UseRope)]
+        [TestCase(CharacterClassConstants.Warrior,
+            SkillConstants.Appraise,
+            SkillConstants.Balance,
+            SkillConstants.Bluff,
+            SkillConstants.Concentration,
+            SkillConstants.Diplomacy,
+            SkillConstants.Disguise,
+            SkillConstants.EscapeArtist,
+            SkillConstants.Forgery,
+            SkillConstants.GatherInformation,
+            SkillConstants.Heal,
+            SkillConstants.Hide,
+            SkillConstants.Listen,
+            SkillConstants.MoveSilently,
+            SkillConstants.Perform,
+            SkillConstants.Search,
+            SkillConstants.SenseMotive,
+            SkillConstants.Spot,
+            SkillConstants.Survival,
             SkillConstants.UseRope)]
         public override void DistinctCollection(String name, params String[] collection)
         {

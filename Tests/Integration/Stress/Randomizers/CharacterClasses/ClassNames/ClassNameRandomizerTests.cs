@@ -1,15 +1,14 @@
-﻿using System;
+﻿using NUnit.Framework;
 using System.Collections.Generic;
-using NUnit.Framework;
 
 namespace CharacterGen.Tests.Integration.Stress.Randomizers.CharacterClasses.ClassNames
 {
     [TestFixture]
     public abstract class ClassNameRandomizerTests : StressTests
     {
-        protected abstract IEnumerable<String> allowedClassNames { get; }
+        protected abstract IEnumerable<string> allowedClassNames { get; }
 
-        private IEnumerable<String> classNames;
+        private IEnumerable<string> classNames;
 
         [SetUp]
         public void Setup()

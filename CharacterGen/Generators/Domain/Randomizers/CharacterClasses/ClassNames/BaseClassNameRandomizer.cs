@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using CharacterGen.Common.Alignments;
+﻿using CharacterGen.Common.Alignments;
 using CharacterGen.Generators.Randomizers.CharacterClasses;
 using CharacterGen.Generators.Verifiers.Exceptions;
 using CharacterGen.Selectors;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CharacterGen.Generators.Domain.Randomizers.CharacterClasses.ClassNames
 {
@@ -19,23 +18,23 @@ namespace CharacterGen.Generators.Domain.Randomizers.CharacterClasses.ClassNames
             this.generator = generator;
         }
 
-        public String Randomize(Alignment alignment)
+        public string Randomize(Alignment alignment)
         {
             var possibleClassNames = GetAllPossibleResults(alignment);
             if (possibleClassNames.Any() == false)
                 throw new IncompatibleRandomizersException();
 
-            var tableName = String.Format("{0}CharacterClasses", alignment.Goodness);
+            var tableName = string.Format("{0}CharacterClasses", alignment.Goodness);
 
             return generator.Generate(() => percentileResultSelector.SelectFrom(tableName),
                 c => possibleClassNames.Contains(c));
         }
 
-        protected abstract Boolean CharacterClassIsAllowed(String className, Alignment alignment);
+        protected abstract bool CharacterClassIsAllowed(string className, Alignment alignment);
 
-        public IEnumerable<String> GetAllPossibleResults(Alignment alignment)
+        public IEnumerable<string> GetAllPossibleResults(Alignment alignment)
         {
-            var tableName = String.Format("{0}CharacterClasses", alignment.Goodness);
+            var tableName = string.Format("{0}CharacterClasses", alignment.Goodness);
             var classNames = percentileResultSelector.SelectAllFrom(tableName);
             return classNames.Where(c => CharacterClassIsAllowed(c, alignment));
         }

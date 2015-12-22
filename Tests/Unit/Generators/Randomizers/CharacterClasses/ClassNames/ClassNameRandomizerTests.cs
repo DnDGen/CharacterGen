@@ -5,7 +5,6 @@ using CharacterGen.Selectors;
 using CharacterGen.Tables;
 using Moq;
 using NUnit.Framework;
-using System;
 using System.Collections.Generic;
 
 namespace CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassNames
@@ -13,19 +12,19 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassN
     [TestFixture]
     public abstract class ClassNameRandomizerTests
     {
-        protected const String ClassName = "class name";
-        protected const String AlignmentClassName = "alignment class name";
-        protected const String GroupClassName = "group class name";
+        protected const string ClassName = "class name";
+        protected const string AlignmentClassName = "alignment class name";
+        protected const string GroupClassName = "group class name";
 
-        protected abstract String classNameGroup { get; }
+        protected abstract string classNameGroup { get; }
 
         protected Mock<ICollectionsSelector> mockCollectionsSelector;
         protected Mock<IPercentileSelector> mockPercentileResultSelector;
         protected Generator generator;
         protected IClassNameRandomizer randomizer;
         protected Alignment alignment;
-        protected List<String> alignmentClasses;
-        protected List<String> groupClasses;
+        protected List<string> alignmentClasses;
+        protected List<string> groupClasses;
 
         [SetUp]
         public void ClassNameRandomizerTestsSetup()
@@ -34,13 +33,13 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassN
             mockPercentileResultSelector = new Mock<IPercentileSelector>();
             generator = new ConfigurableIterationGenerator();
             alignment = new Alignment();
-            alignmentClasses = new List<String>();
-            groupClasses = new List<String>();
+            alignmentClasses = new List<string>();
+            groupClasses = new List<string>();
 
             alignment.Goodness = "goodness";
             alignment.Lawfulness = "lawfulness";
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, classNameGroup)).Returns(groupClasses);
-            mockPercentileResultSelector.Setup(s => s.SelectAllFrom(It.IsAny<String>())).Returns(new[] { ClassName, AlignmentClassName, GroupClassName });
+            mockPercentileResultSelector.Setup(s => s.SelectAllFrom(It.IsAny<string>())).Returns(new[] { ClassName, AlignmentClassName, GroupClassName });
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, alignment.ToString())).Returns(alignmentClasses);
             alignmentClasses.Add(AlignmentClassName);
             groupClasses.Add(GroupClassName);

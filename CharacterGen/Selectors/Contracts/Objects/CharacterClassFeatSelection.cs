@@ -1,7 +1,6 @@
 ﻿using CharacterGen.Common.Abilities.Feats;
 using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Common.Races;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,29 +8,30 @@ namespace CharacterGen.Selectors.Objects
 {
     public class CharacterClassFeatSelection
     {
-        public String Feat { get; set; }
-        public String FocusType { get; set; }
-        public Int32 MinimumLevel { get; set; }
-        public Int32 MaximumLevel { get; set; }
-        public Int32 Strength { get; set; }
+        public string Feat { get; set; }
+        public string FocusType { get; set; }
+        public int MinimumLevel { get; set; }
+        public int MaximumLevel { get; set; }
+        public int Strength { get; set; }
         public Frequency Frequency { get; set; }
         public IEnumerable<RequiredFeat> RequiredFeats { get; set; }
-        public String FrequencyQuantityStat { get; set; }
-        public String SizeRequirement { get; set; }
+        public string FrequencyQuantityStat { get; set; }
+        public string SizeRequirement { get; set; }
+        public bool AllowFocusOfAll { get; set; }
 
         public CharacterClassFeatSelection()
         {
-            Feat = String.Empty;
-            FocusType = String.Empty;
+            Feat = string.Empty;
+            FocusType = string.Empty;
             Frequency = new Frequency();
             RequiredFeats = Enumerable.Empty<RequiredFeat>();
-            FrequencyQuantityStat = String.Empty;
-            SizeRequirement = String.Empty;
+            FrequencyQuantityStat = string.Empty;
+            SizeRequirement = string.Empty;
         }
 
-        public Boolean RequirementsMet(CharacterClass characterClass, Race race, IEnumerable<Feat> feats)
+        public bool RequirementsMet(CharacterClass characterClass, Race race, IEnumerable<Feat> feats)
         {
-            if (String.IsNullOrEmpty(SizeRequirement) == false && SizeRequirement != race.Size)
+            if (string.IsNullOrEmpty(SizeRequirement) == false && SizeRequirement != race.Size)
                 return false;
 
             if (MaximumLevel > 0 && characterClass.Level > MaximumLevel)
@@ -47,7 +47,7 @@ namespace CharacterGen.Selectors.Objects
                 if (requirementFeats.Any() == false)
                     return false;
 
-                if (requirement.Focus != String.Empty && requirementFeats.Any(f => f.Foci.Contains(requirement.Focus)) == false)
+                if (requirement.Focus != string.Empty && requirementFeats.Any(f => f.Foci.Contains(requirement.Focus)) == false)
                     return false;
             }
 

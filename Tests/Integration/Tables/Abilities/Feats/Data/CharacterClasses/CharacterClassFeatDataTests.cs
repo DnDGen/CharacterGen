@@ -6,7 +6,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
 {
     public abstract class CharacterClassFeatDataTests : DataTests
     {
-        protected override void PopulateIndices(IEnumerable<String> collection)
+        protected override void PopulateIndices(IEnumerable<string> collection)
         {
             indices[DataIndexConstants.CharacterClassFeatData.FeatNameIndex] = "FeatId";
             indices[DataIndexConstants.CharacterClassFeatData.FocusTypeIndex] = "FocusType";
@@ -17,13 +17,14 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             indices[DataIndexConstants.CharacterClassFeatData.MinimumLevelRequirementIndex] = "MinLevel";
             indices[DataIndexConstants.CharacterClassFeatData.StrengthIndex] = "Strength";
             indices[DataIndexConstants.CharacterClassFeatData.SizeRequirementIndex] = "SizeRequirement";
+            indices[DataIndexConstants.CharacterClassFeatData.AllowFocusOfAllIndex] = "AllowFocusOfAll";
         }
 
-        public virtual void Data(String name, String feat, String focusType, Int32 frequencyQuantity, String frequencyQuantityStat, String frequencyTimePeriod, Int32 minimumLevel, Int32 maximumLevel, Int32 strength, String sizeRequirement)
+        public virtual void Data(string name, string feat, string focusType, int frequencyQuantity, string frequencyQuantityStat, string frequencyTimePeriod, int minimumLevel, int maximumLevel, int strength, string sizeRequirement, bool allowFocusOfAll)
         {
-            var data = new List<String>();
-            for (var i = 0; i < 9; i++)
-                data.Add(String.Empty);
+            var data = new List<string>();
+            for (var i = 0; i < 10; i++)
+                data.Add(string.Empty);
 
             data[DataIndexConstants.CharacterClassFeatData.FeatNameIndex] = feat;
             data[DataIndexConstants.CharacterClassFeatData.FocusTypeIndex] = focusType;
@@ -34,6 +35,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             data[DataIndexConstants.CharacterClassFeatData.MinimumLevelRequirementIndex] = Convert.ToString(minimumLevel);
             data[DataIndexConstants.CharacterClassFeatData.StrengthIndex] = Convert.ToString(strength);
             data[DataIndexConstants.CharacterClassFeatData.SizeRequirementIndex] = sizeRequirement;
+            data[DataIndexConstants.CharacterClassFeatData.AllowFocusOfAllIndex] = Convert.ToString(allowFocusOfAll);
 
             Data(name, data);
         }

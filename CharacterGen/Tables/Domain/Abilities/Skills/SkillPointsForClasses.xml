@@ -45,4 +45,24 @@
         <name>Wizard</name>
         <item>2</item>
     </object>
+  <object>
+    <name>Adept</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Aristocrat</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Commoner</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Expert</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Warrior</name>
+    <item>2</item>
+  </object>
 </items>

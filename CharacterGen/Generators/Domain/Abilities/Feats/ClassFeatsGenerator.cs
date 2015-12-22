@@ -25,7 +25,7 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
             this.collectionsSelector = collectionsSelector;
         }
 
-        public IEnumerable<Feat> GenerateWith(CharacterClass characterClass, Race race, Dictionary<String, Stat> stats, IEnumerable<Feat> racialFeats, Dictionary<String, Skill> skills)
+        public IEnumerable<Feat> GenerateWith(CharacterClass characterClass, Race race, Dictionary<string, Stat> stats, IEnumerable<Feat> racialFeats, Dictionary<String, Skill> skills)
         {
             var characterClassFeatSelections = featsSelector.SelectClass(characterClass.ClassName);
             var classFeats = GetClassFeats(characterClassFeatSelections, race, racialFeats, stats, characterClass, skills);
@@ -38,7 +38,7 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
             }
 
             var earnedFeats = classFeats.Union(racialFeats);
-            var specialistFeats = GetSpecialistFeats(specialistSelections, earnedFeats, stats, characterClass, skills);
+            var specialistFeats = GetClassFeats(specialistSelections, race, earnedFeats, stats, characterClass, skills);
             classFeats = classFeats.Union(specialistFeats);
 
             if (characterClass.ClassName == CharacterClassConstants.Ranger)
@@ -47,17 +47,21 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
             return classFeats;
         }
 
-        private IEnumerable<Feat> GetClassFeats(IEnumerable<CharacterClassFeatSelection> classFeatSelections, Race race, IEnumerable<Feat> racialFeats, Dictionary<String, Stat> stats, CharacterClass characterClass, Dictionary<String, Skill> skills)
+        private IEnumerable<Feat> GetClassFeats(IEnumerable<CharacterClassFeatSelection> classFeatSelections, Race race, IEnumerable<Feat> earnedFeat, Dictionary<string, Stat> stats, CharacterClass characterClass, Dictionary<string, Skill> skills)
         {
             var classFeats = new List<Feat>();
-            var earnedFeat = racialFeats;
 
             foreach (var classFeatSelection in classFeatSelections)
             {
                 if (classFeatSelection.RequirementsMet(characterClass, race, earnedFeat) == false)
                     continue;
 
-                var focus = featFocusGenerator.GenerateAllowingFocusOfAllFrom(classFeatSelection.Feat, classFeatSelection.FocusType, skills, classFeatSelection.RequiredFeats, earnedFeat, characterClass);
+                var focus = classFeatSelection.FocusType;
+
+                if (classFeatSelection.AllowFocusOfAll)
+                    focus = featFocusGenerator.GenerateAllowingFocusOfAllFrom(classFeatSelection.Feat, classFeatSelection.FocusType, skills, classFeatSelection.RequiredFeats, earnedFeat, characterClass);
+                else
+                    focus = featFocusGenerator.GenerateFrom(classFeatSelection.Feat, classFeatSelection.FocusType, skills, classFeatSelection.RequiredFeats, earnedFeat, characterClass);
 
                 var classFeat = BuildFeatFrom(classFeatSelection, focus, earnedFeat, stats, characterClass, skills);
                 classFeats.Add(classFeat);
@@ -68,40 +72,24 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
             return classFeats;
         }
 
-        private Feat BuildFeatFrom(CharacterClassFeatSelection selection, String focus, IEnumerable<Feat> earnedFeat, Dictionary<String, Stat> stats, CharacterClass characterClass, Dictionary<String, Skill> skills)
+        private Feat BuildFeatFrom(CharacterClassFeatSelection selection, string focus, IEnumerable<Feat> earnedFeat, Dictionary<string, Stat> stats, CharacterClass characterClass, Dictionary<string, Skill> skills)
         {
             var feat = new Feat();
             feat.Name = selection.Feat;
 
-            if (String.IsNullOrEmpty(focus) == false)
+            if (string.IsNullOrEmpty(focus) == false)
                 feat.Foci = feat.Foci.Union(new[] { focus });
 
             feat.Frequency = selection.Frequency;
             feat.Strength = selection.Strength;
 
-            if (String.IsNullOrEmpty(selection.FrequencyQuantityStat) == false)
+            if (string.IsNullOrEmpty(selection.FrequencyQuantityStat) == false)
                 feat.Frequency.Quantity += stats[selection.FrequencyQuantityStat].Bonus;
 
             if (feat.Frequency.Quantity < 0)
                 feat.Frequency.Quantity = 0;
 
             return feat;
-        }
-
-        private IEnumerable<Feat> GetSpecialistFeats(IEnumerable<CharacterClassFeatSelection> classFeatSelections, IEnumerable<Feat> earnedFeat, Dictionary<String, Stat> stats, CharacterClass characterClass, Dictionary<String, Skill> skills)
-        {
-            var specialistFeats = new List<Feat>();
-
-            foreach (var classFeatSelection in classFeatSelections)
-            {
-                var focus = featFocusGenerator.GenerateFrom(classFeatSelection.Feat, classFeatSelection.FocusType, skills, classFeatSelection.RequiredFeats, earnedFeat, characterClass);
-                var classFeat = BuildFeatFrom(classFeatSelection, focus, earnedFeat, stats, characterClass, skills);
-
-                specialistFeats.Add(classFeat);
-                earnedFeat = earnedFeat.Union(specialistFeats);
-            }
-
-            return specialistFeats;
         }
 
         private IEnumerable<Feat> ImproveFavoredEnemyStrength(IEnumerable<Feat> classFeats)
@@ -112,7 +100,7 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
 
             while (timesToImprove-- > 0)
             {
-                var feat = collectionsSelector.SelectRandomFrom<Feat>(favoredEnemyFeats);
+                var feat = collectionsSelector.SelectRandomFrom(favoredEnemyFeats);
                 feat.Strength += 2;
             }
 

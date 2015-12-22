@@ -28,6 +28,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Stats
                 CharacterClassConstants.Ranger + GroupConstants.Spellcasters,
                 CharacterClassConstants.Sorcerer + GroupConstants.Spellcasters,
                 CharacterClassConstants.Wizard + GroupConstants.Spellcasters,
+                CharacterClassConstants.Adept + GroupConstants.Spellcasters,
                 GroupConstants.All
             };
 
@@ -41,6 +42,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Stats
         [TestCase(CharacterClassConstants.Ranger + GroupConstants.Spellcasters, StatConstants.Wisdom)]
         [TestCase(CharacterClassConstants.Sorcerer + GroupConstants.Spellcasters, StatConstants.Charisma)]
         [TestCase(CharacterClassConstants.Wizard + GroupConstants.Spellcasters, StatConstants.Intelligence)]
+        [TestCase(CharacterClassConstants.Adept + GroupConstants.Spellcasters, StatConstants.Wisdom)]
         [TestCase(GroupConstants.All,
             StatConstants.Charisma,
             StatConstants.Constitution,

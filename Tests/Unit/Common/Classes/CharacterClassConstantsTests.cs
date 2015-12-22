@@ -1,6 +1,6 @@
-﻿using System;
-using CharacterGen.Common.CharacterClasses;
+﻿using CharacterGen.Common.CharacterClasses;
 using NUnit.Framework;
+using System;
 
 namespace CharacterGen.Tests.Unit.Common.Classes
 {
@@ -18,6 +18,11 @@ namespace CharacterGen.Tests.Unit.Common.Classes
         [TestCase(CharacterClassConstants.Rogue, "Rogue")]
         [TestCase(CharacterClassConstants.Sorcerer, "Sorcerer")]
         [TestCase(CharacterClassConstants.Wizard, "Wizard")]
+        [TestCase(CharacterClassConstants.Warrior, "Warrior")]
+        [TestCase(CharacterClassConstants.Commoner, "Commoner")]
+        [TestCase(CharacterClassConstants.Expert, "Expert")]
+        [TestCase(CharacterClassConstants.Adept, "Adept")]
+        [TestCase(CharacterClassConstants.Aristocrat, "Aristocrat")]
         [TestCase(CharacterClassConstants.Domains.Air, "Air")]
         [TestCase(CharacterClassConstants.Domains.Animal, "Animal")]
         [TestCase(CharacterClassConstants.Domains.Chaos, "Chaos")]
