@@ -1,7 +1,6 @@
-﻿using System;
-using Ninject;
+﻿using CharacterGen.Generators.Randomizers.CharacterClasses;
 using CharacterGen.Generators.Randomizers.Races;
-using CharacterGen.Selectors;
+using Ninject;
 using NUnit.Framework;
 
 namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
@@ -11,11 +10,17 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
     {
         [Inject]
         public ISetBaseRaceRandomizer SetBaseRaceRandomizer { get; set; }
-        [Inject]
-        public ICollectionsSelector CollectionsSelector { get; set; }
+        [Inject, Named(ClassNameRandomizerTypeConstants.AnyNPC)]
+        public IClassNameRandomizer AnyNPCClassNameRandomizer { get; set; }
 
-        [TestCase("SetBaseRaceRandomizer")]
-        public override void Stress(String stressSubject)
+        [TearDown]
+        public void TearDown()
+        {
+            ClassNameRandomizer = GetNewInstanceOf<IClassNameRandomizer>(ClassNameRandomizerTypeConstants.AnyPlayer);
+        }
+
+        [TestCase("Set Base Race Randomizer")]
+        public override void Stress(string stressSubject)
         {
             Stress();
         }
@@ -24,9 +29,24 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
         {
             var alignment = GetNewAlignment();
             var characterClass = GetNewCharacterClass(alignment);
+            SetBaseRaceRandomizer.SetBaseRace = BaseRaceRandomizer.Randomize(alignment, characterClass);
 
-            var baseRaces = BaseRaceRandomizer.GetAllPossible(alignment, characterClass);
-            SetBaseRaceRandomizer.SetBaseRace = CollectionsSelector.SelectRandomFrom(baseRaces);
+            var baseRace = SetBaseRaceRandomizer.Randomize(alignment, characterClass);
+            Assert.That(baseRace, Is.EqualTo(SetBaseRaceRandomizer.SetBaseRace));
+        }
+
+        [Test]
+        public void StressNPCSetBaseRace()
+        {
+            ClassNameRandomizer = AnyNPCClassNameRandomizer;
+            Stress(AssertNPCSetBaseRace);
+        }
+
+        private void AssertNPCSetBaseRace()
+        {
+            var alignment = GetNewAlignment();
+            var characterClass = GetNewCharacterClass(alignment);
+            SetBaseRaceRandomizer.SetBaseRace = BaseRaceRandomizer.Randomize(alignment, characterClass);
 
             var baseRace = SetBaseRaceRandomizer.Randomize(alignment, characterClass);
             Assert.That(baseRace, Is.EqualTo(SetBaseRaceRandomizer.SetBaseRace));

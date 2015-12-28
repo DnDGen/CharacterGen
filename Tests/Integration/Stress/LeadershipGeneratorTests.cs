@@ -80,6 +80,9 @@ namespace CharacterGen.Tests.Integration.Stress
             Assert.That(cohort.Equipment.Treasure.Items, Is.Not.Empty);
             Assert.That(cohort.Class.Level, Is.InRange(1, leaderClass.Level - 2));
 
+            var playerCharacters = CollectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Players);
+            Assert.That(playerCharacters, Contains.Item(cohort.Class.ClassName));
+
             var allowedAlignments = CollectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AlignmentGroups, leaderAlignment.Full);
             Assert.That(allowedAlignments, Contains.Item(cohort.Alignment.Full));
         }
@@ -170,6 +173,9 @@ namespace CharacterGen.Tests.Integration.Stress
             AssertCharacter(cohort);
             Assert.That(cohort.Class.Level, Is.InRange(1, leaderLevel - 2));
 
+            var npcsCharacters = CollectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.NPCs);
+            Assert.That(npcsCharacters, Contains.Item(cohort.Class.ClassName));
+
             var allowedAlignments = CollectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AlignmentGroups, leaderAlignment.Full);
             Assert.That(allowedAlignments, Contains.Item(cohort.Alignment.Full));
         }
@@ -191,6 +197,9 @@ namespace CharacterGen.Tests.Integration.Stress
             Assert.That(follower.Equipment.Treasure.Items, Is.Not.Empty);
             Assert.That(follower.Class.Level, Is.InRange(1, followerLevel));
 
+            var playerCharacters = CollectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Players);
+            Assert.That(playerCharacters, Contains.Item(follower.Class.ClassName));
+
             var allowedAlignments = CollectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AlignmentGroups, leaderAlignment.Full);
             Assert.That(allowedAlignments, Contains.Item(follower.Alignment.Full));
         }
@@ -210,6 +219,9 @@ namespace CharacterGen.Tests.Integration.Stress
             var follower = LeadershipGenerator.GenerateFollower(followerLevel, leaderAlignment.Full, leaderClass);
             AssertCharacter(follower);
             Assert.That(follower.Class.Level, Is.InRange(1, followerLevel));
+
+            var npcsCharacters = CollectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.NPCs);
+            Assert.That(npcsCharacters, Contains.Item(follower.Class.ClassName));
 
             var allowedAlignments = CollectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AlignmentGroups, leaderAlignment.Full);
             Assert.That(allowedAlignments, Contains.Item(follower.Alignment.Full));

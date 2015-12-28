@@ -1,22 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using CharacterGen.Common.Alignments;
+﻿using CharacterGen.Common.Alignments;
 using CharacterGen.Generators.Randomizers.CharacterClasses;
+using CharacterGen.Generators.Verifiers.Exceptions;
+using CharacterGen.Selectors;
+using CharacterGen.Tables;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CharacterGen.Generators.Domain.Randomizers.CharacterClasses.ClassNames
 {
     public class SetClassNameRandomizer : ISetClassNameRandomizer
     {
-        public String SetClassName { get; set; }
+        public string SetClassName { get; set; }
 
-        public String Randomize(Alignment alignment)
+        private ICollectionsSelector collectionsSelector;
+
+        public SetClassNameRandomizer(ICollectionsSelector collectionsSelector)
         {
-            return SetClassName;
+            this.collectionsSelector = collectionsSelector;
         }
 
-        public IEnumerable<String> GetAllPossibleResults(Alignment alignment)
+        public string Randomize(Alignment alignment)
         {
-            return new[] { SetClassName };
+            var classes = GetAllPossibleResults(alignment);
+
+            if (classes.Any() == false)
+                throw new IncompatibleRandomizersException();
+
+            return classes.Single();
+        }
+
+        public IEnumerable<string> GetAllPossibleResults(Alignment alignment)
+        {
+            var alignmentClasses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, alignment.Full);
+            return alignmentClasses.Intersect(new[] { SetClassName });
         }
     }
 }

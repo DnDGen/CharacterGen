@@ -1,6 +1,5 @@
-﻿using System;
+﻿using CharacterGen.Generators.Randomizers.CharacterClasses;
 using Ninject;
-using CharacterGen.Generators.Randomizers.CharacterClasses;
 using NUnit.Framework;
 
 namespace CharacterGen.Tests.Integration.Stress.Randomizers.CharacterClasses.ClassNames
@@ -10,20 +9,47 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.CharacterClasses.Cla
     {
         [Inject]
         public ISetClassNameRandomizer SetClassNameRandomizer { get; set; }
+        [Inject, Named(ClassNameRandomizerTypeConstants.AnyNPC)]
+        public IClassNameRandomizer AnyNPCClassNameRandomizer { get; set; }
 
-        [TestCase("SetClassNameRandomizer")]
-        public override void Stress(String stressSubject)
+        [TearDown]
+        public void TearDown()
+        {
+            ClassNameRandomizer = GetNewInstanceOf<IClassNameRandomizer>(ClassNameRandomizerTypeConstants.AnyPlayer);
+        }
+
+        [TestCase("Set Class Name Randomizer")]
+        public override void Stress(string stressSubject)
         {
             Stress();
         }
 
         protected override void MakeAssertions()
         {
-            SetClassNameRandomizer.SetClassName = Guid.NewGuid().ToString();
             var alignment = GetNewAlignment();
+            var characterClass = GetNewCharacterClass(alignment);
+
+            SetClassNameRandomizer.SetClassName = characterClass.ClassName;
 
             var className = SetClassNameRandomizer.Randomize(alignment);
             Assert.That(className, Is.EqualTo(SetClassNameRandomizer.SetClassName));
+        }
+
+        [Test]
+        public void StressNPCSetClassName()
+        {
+            ClassNameRandomizer = AnyNPCClassNameRandomizer;
+            Stress(AssertNPCSetClassName);
+        }
+
+        private void AssertNPCSetClassName()
+        {
+            var alignment = GetNewAlignment();
+            var characterClass = GetNewCharacterClass(alignment);
+            SetClassNameRandomizer.SetClassName = characterClass.ClassName;
+
+            var baseRace = SetClassNameRandomizer.Randomize(alignment);
+            Assert.That(baseRace, Is.EqualTo(SetClassNameRandomizer.SetClassName));
         }
     }
 }

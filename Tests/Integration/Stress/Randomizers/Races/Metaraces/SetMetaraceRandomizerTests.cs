@@ -1,8 +1,7 @@
-﻿using CharacterGen.Generators.Randomizers.Races;
-using CharacterGen.Selectors;
+﻿using CharacterGen.Generators.Randomizers.CharacterClasses;
+using CharacterGen.Generators.Randomizers.Races;
 using Ninject;
 using NUnit.Framework;
-using System;
 
 namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
 {
@@ -11,11 +10,17 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
     {
         [Inject]
         public ISetMetaraceRandomizer SetMetaraceRandomizer { get; set; }
-        [Inject]
-        public ICollectionsSelector CollectionsSelector { get; set; }
+        [Inject, Named(ClassNameRandomizerTypeConstants.AnyNPC)]
+        public IClassNameRandomizer AnyNPCClassNameRandomizer { get; set; }
 
-        [TestCase("SetMetaraceRandomizer")]
-        public override void Stress(String stressSubject)
+        [TearDown]
+        public void TearDown()
+        {
+            ClassNameRandomizer = GetNewInstanceOf<IClassNameRandomizer>(ClassNameRandomizerTypeConstants.AnyPlayer);
+        }
+
+        [TestCase("Set Metarace Randomizer")]
+        public override void Stress(string stressSubject)
         {
             Stress();
         }
@@ -24,9 +29,24 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
         {
             var alignment = GetNewAlignment();
             var characterClass = GetNewCharacterClass(alignment);
+            SetMetaraceRandomizer.SetMetarace = MetaraceRandomizer.Randomize(alignment, characterClass);
 
-            var metaraces = MetaraceRandomizer.GetAllPossible(alignment, characterClass);
-            SetMetaraceRandomizer.SetMetarace = CollectionsSelector.SelectRandomFrom(metaraces);
+            var metarace = SetMetaraceRandomizer.Randomize(alignment, characterClass);
+            Assert.That(metarace, Is.EqualTo(SetMetaraceRandomizer.SetMetarace));
+        }
+
+        [Test]
+        public void StressNPCSetMetarace()
+        {
+            ClassNameRandomizer = AnyNPCClassNameRandomizer;
+            Stress(AssertNPCSetMetarace);
+        }
+
+        private void AssertNPCSetMetarace()
+        {
+            var alignment = GetNewAlignment();
+            var characterClass = GetNewCharacterClass(alignment);
+            SetMetaraceRandomizer.SetMetarace = MetaraceRandomizer.Randomize(alignment, characterClass);
 
             var metarace = SetMetaraceRandomizer.Randomize(alignment, characterClass);
             Assert.That(metarace, Is.EqualTo(SetMetaraceRandomizer.SetMetarace));

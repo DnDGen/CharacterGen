@@ -1,23 +1,41 @@
 ﻿using CharacterGen.Common.Alignments;
 using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Generators.Randomizers.Races;
-using System;
+using CharacterGen.Generators.Verifiers.Exceptions;
+using CharacterGen.Selectors;
+using CharacterGen.Tables;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CharacterGen.Generators.Domain.Randomizers.Races.BaseRaces
 {
     public class SetBaseRaceRandomizer : ISetBaseRaceRandomizer
     {
-        public String SetBaseRace { get; set; }
+        public string SetBaseRace { get; set; }
 
-        public String Randomize(Alignment alignment, CharacterClass characterClass)
+        private ICollectionsSelector collectionsSelector;
+
+        public SetBaseRaceRandomizer(ICollectionsSelector collectionsSelector)
         {
-            return SetBaseRace;
+            this.collectionsSelector = collectionsSelector;
         }
 
-        public IEnumerable<String> GetAllPossible(Alignment alignment, CharacterClass characterClass)
+        public string Randomize(Alignment alignment, CharacterClass characterClass)
         {
-            return new[] { SetBaseRace };
+            var baseRaces = GetAllPossible(alignment, characterClass);
+
+            if (baseRaces.Any() == false)
+                throw new IncompatibleRandomizersException();
+
+            return baseRaces.Single();
+        }
+
+        public IEnumerable<string> GetAllPossible(Alignment alignment, CharacterClass characterClass)
+        {
+            var alignmentBaseRaces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, alignment.Goodness);
+            var classBaseRaces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, characterClass.ClassName);
+
+            return alignmentBaseRaces.Intersect(classBaseRaces).Intersect(new[] { SetBaseRace });
         }
     }
 }
