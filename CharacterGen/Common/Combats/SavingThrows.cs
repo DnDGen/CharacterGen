@@ -1,11 +1,10 @@
-﻿using System;
-
-namespace CharacterGen.Common.Combats
+﻿namespace CharacterGen.Common.Combats
 {
     public class SavingThrows
     {
-        public Int32 Reflex { get; set; }
-        public Int32 Fortitude { get; set; }
-        public Int32 Will { get; set; }
+        public int Reflex { get; set; }
+        public int Fortitude { get; set; }
+        public int Will { get; set; }
+        public bool CircumstantialBonus { get; set; }
     }
 }

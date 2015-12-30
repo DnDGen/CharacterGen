@@ -1,12 +1,10 @@
 ﻿using CharacterGen.Common.Abilities.Feats;
-using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Generators.Abilities;
 using CharacterGen.Generators.Abilities.Feats;
 using CharacterGen.Generators.Combats;
 using CharacterGen.Generators.Randomizers.Stats;
 using Ninject;
 using NUnit.Framework;
-using System;
 using System.Linq;
 
 namespace CharacterGen.Tests.Integration.Stress.Abilities.Feats
@@ -26,7 +24,7 @@ namespace CharacterGen.Tests.Integration.Stress.Abilities.Feats
         public ICombatGenerator CombatGenerator { get; set; }
 
         [TestCase("FeatsGenerator")]
-        public override void Stress(String stressSubject)
+        public override void Stress(string stressSubject)
         {
             Stress();
         }
@@ -41,12 +39,9 @@ namespace CharacterGen.Tests.Integration.Stress.Abilities.Feats
             var baseAttack = CombatGenerator.GenerateBaseAttackWith(characterClass, race);
 
             var feats = FeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
-
             var minimumFeats = characterClass.Level / 3 + 1;
-            if (characterClass.ClassName == CharacterClassConstants.Fighter)
-                minimumFeats += characterClass.Level / 2 + 1;
-
             var count = feats.Count();
+
             Assert.That(count, Is.AtLeast(minimumFeats));
             Assert.That(feats.Distinct().Count(), Is.EqualTo(count));
 
@@ -62,6 +57,9 @@ namespace CharacterGen.Tests.Integration.Stress.Abilities.Feats
                     .Or.EqualTo(FeatConstants.Frequencies.Week)
                     .Or.EqualTo(FeatConstants.Frequencies.Round)
                     .Or.Empty, feat.Name);
+
+                if (feat.Name == FeatConstants.SaveBonus)
+                    Assert.That(feat.Foci, Is.Not.Empty, race.BaseRace);
             }
         }
     }

@@ -682,6 +682,29 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         }
 
         [Test]
+        public void IfFeatWithFocusOfAllCanBeTakenMultipleTimes_DoNotRemoveOtherInstancesOfTheFeat()
+        {
+            racialFeats.Add(new Feat());
+            racialFeats.Add(new Feat());
+            racialFeats.Add(new Feat());
+            racialFeats.Add(new Feat());
+
+            racialFeats[0].Name = "feat1";
+            racialFeats[0].Foci = new[] { "focus" };
+            racialFeats[1].Name = "feat1";
+            racialFeats[1].Foci = new[] { FeatConstants.Foci.All };
+            racialFeats[2].Name = "feat2";
+            racialFeats[3].Name = "feat3";
+            racialFeats[3].Foci = new[] { "focus" };
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TakenMultipleTimes))
+                .Returns(new[] { "feat1", "feat2" });
+
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            Assert.That(feats.Count(), Is.EqualTo(4));
+        }
+
+        [Test]
         public void IfFeatWithFocusOfAllIsDuplicated_KeepOne()
         {
             racialFeats.Add(new Feat());
@@ -796,6 +819,70 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             Assert.That(last.Strength, Is.EqualTo(9266));
 
             Assert.That(feats.Count(), Is.EqualTo(2));
+        }
+
+        [Test]
+        public void DoNotCombineFociIfOneContainsAll()
+        {
+            racialFeats.Add(new Feat());
+            racialFeats.Add(new Feat());
+
+            racialFeats[0].Name = "feat1";
+            racialFeats[0].Foci = new[] { "focus 1", "focus 2" };
+            racialFeats[0].Strength = 9266;
+            racialFeats[1].Name = "feat1";
+            racialFeats[1].Foci = new[] { FeatConstants.Foci.All };
+            racialFeats[1].Strength = 9266;
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TakenMultipleTimes))
+                .Returns(new[] { "feat1" });
+
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            var first = feats.First();
+            var last = feats.Last();
+
+            Assert.That(first, Is.Not.EqualTo(last));
+
+            Assert.That(first.Name, Is.EqualTo("feat1"));
+            Assert.That(first.Foci, Contains.Item("focus 2"));
+            Assert.That(first.Foci, Contains.Item("focus 1"));
+            Assert.That(first.Foci.Count(), Is.EqualTo(2));
+            Assert.That(first.Strength, Is.EqualTo(9266));
+
+            Assert.That(last.Name, Is.EqualTo("feat1"));
+            Assert.That(last.Foci, Contains.Item(FeatConstants.Foci.All));
+            Assert.That(last.Foci.Count(), Is.EqualTo(1));
+            Assert.That(last.Strength, Is.EqualTo(9266));
+
+            Assert.That(feats.Count(), Is.EqualTo(2));
+        }
+
+        [Test]
+        public void CombineFociIfFeatCanBeTakenMultipleTimes()
+        {
+            racialFeats.Add(new Feat());
+            racialFeats.Add(new Feat());
+
+            racialFeats[0].Name = "feat1";
+            racialFeats[0].Foci = new[] { "focus 1", "focus 2" };
+            racialFeats[0].Strength = 9266;
+            racialFeats[1].Name = "feat1";
+            racialFeats[1].Foci = new[] { "focus 3", "focus 4" };
+            racialFeats[1].Strength = 9266;
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TakenMultipleTimes))
+                .Returns(new[] { "feat1" });
+
+            var feats = featsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
+            var onlyFeat = feats.Single();
+
+            Assert.That(onlyFeat.Name, Is.EqualTo("feat1"));
+            Assert.That(onlyFeat.Foci, Contains.Item("focus 1"));
+            Assert.That(onlyFeat.Foci, Contains.Item("focus 2"));
+            Assert.That(onlyFeat.Foci, Contains.Item("focus 3"));
+            Assert.That(onlyFeat.Foci, Contains.Item("focus 4"));
+            Assert.That(onlyFeat.Foci.Count(), Is.EqualTo(4));
+            Assert.That(onlyFeat.Strength, Is.EqualTo(9266));
         }
 
         [Test]

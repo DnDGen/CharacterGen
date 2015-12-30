@@ -20,6 +20,7 @@ namespace CharacterGen.Tests.Unit.Common.Combats
             Assert.That(savingThrows.Fortitude, Is.EqualTo(0));
             Assert.That(savingThrows.Reflex, Is.EqualTo(0));
             Assert.That(savingThrows.Will, Is.EqualTo(0));
+            Assert.That(savingThrows.CircumstantialBonus, Is.False);
         }
     }
 }

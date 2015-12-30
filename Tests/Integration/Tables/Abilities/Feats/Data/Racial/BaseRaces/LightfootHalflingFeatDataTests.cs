@@ -20,7 +20,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial.Base
         {
             var names = new[]
             {
-                FeatConstants.SaveBonus + "All",
+                FeatConstants.SaveBonus + FeatConstants.Foci.All,
                 FeatConstants.SaveBonus + "Fear",
                 FeatConstants.AttackBonus + "ThrowOrSling",
                 FeatConstants.SkillBonus + SkillConstants.Listen,
@@ -41,9 +41,9 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial.Base
             "",
             2,
             0, 0)]
-        [TestCase(FeatConstants.SaveBonus + "All",
+        [TestCase(FeatConstants.SaveBonus + FeatConstants.Foci.All,
             FeatConstants.SaveBonus,
-            "",
+            FeatConstants.Foci.All,
             0,
             "",
             0,

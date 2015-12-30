@@ -1,4 +1,5 @@
 ﻿using CharacterGen.Common;
+using CharacterGen.Common.Abilities.Feats;
 using CharacterGen.Common.Abilities.Stats;
 using CharacterGen.Common.Alignments;
 using CharacterGen.Common.Races;
@@ -133,7 +134,25 @@ namespace CharacterGen.Tests.Integration.Stress
             Assert.That(character.Ability.Stats[StatConstants.Wisdom].Value, Is.Positive);
             Assert.That(character.Ability.Languages, Is.Not.Empty);
             Assert.That(character.Ability.Skills, Is.Not.Empty);
+
             Assert.That(character.Ability.Feats, Is.Not.Empty);
+
+            foreach (var feat in character.Ability.Feats)
+            {
+                Assert.That(feat.Name, Is.Not.Empty);
+                Assert.That(feat.Foci, Is.Not.Null, feat.Name);
+                Assert.That(feat.Strength, Is.Not.Negative, feat.Name);
+                Assert.That(feat.Frequency.Quantity, Is.Not.Negative, feat.Name);
+                Assert.That(feat.Frequency.TimePeriod, Is.EqualTo(FeatConstants.Frequencies.Constant)
+                    .Or.EqualTo(FeatConstants.Frequencies.AtWill)
+                    .Or.EqualTo(FeatConstants.Frequencies.Day)
+                    .Or.EqualTo(FeatConstants.Frequencies.Week)
+                    .Or.EqualTo(FeatConstants.Frequencies.Round)
+                    .Or.Empty, feat.Name);
+
+                if (feat.Name == FeatConstants.SaveBonus)
+                    Assert.That(feat.Foci, Is.Not.Empty, character.Race.BaseRace);
+            }
 
             Assert.That(character.Equipment.PrimaryHand.ItemType, Is.EqualTo(ItemTypeConstants.Weapon));
             Assert.That(character.Equipment.PrimaryHand.Name, Is.Not.Empty);

@@ -94,7 +94,9 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
             if (allFeats.Any(f => f.Foci.Contains(FeatConstants.Foci.All)))
             {
                 var featsWithAllFocus = allFeats.Where(f => f.Foci.Contains(FeatConstants.Foci.All));
-                var featNamesWithAllFocus = featsWithAllFocus.Select(f => f.Name);
+                var featNamesAllowingMultipleTakes = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TakenMultipleTimes);
+                var featNamesWithAllFocus = featsWithAllFocus.Select(f => f.Name).Except(featNamesAllowingMultipleTakes);
+
                 var redundantFeats = allFeats.Where(f => featNamesWithAllFocus.Contains(f.Name) && f.Foci.Contains(FeatConstants.Foci.All) == false);
                 featsToRemove.AddRange(redundantFeats);
 
@@ -139,8 +141,12 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
             if (feat.Frequency.TimePeriod != string.Empty)
                 return false;
 
+            if (feat.Foci.Any() == false || feat.Foci.Contains(FeatConstants.Foci.All))
+                return false;
+
             var count = allFeats.Count(f => f.Name == feat.Name
-                                        && f.Foci.Any() && feat.Foci.Any()
+                                        && f.Foci.Any()
+                                        && f.Foci.Contains(FeatConstants.Foci.All) == false
                                         && f.Strength == feat.Strength
                                         && f.Frequency.TimePeriod == string.Empty);
 

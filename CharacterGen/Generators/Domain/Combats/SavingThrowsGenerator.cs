@@ -5,7 +5,6 @@ using CharacterGen.Common.Combats;
 using CharacterGen.Generators.Combats;
 using CharacterGen.Selectors;
 using CharacterGen.Tables;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -20,7 +19,7 @@ namespace CharacterGen.Generators.Domain.Combats
             this.collectionsSelector = collectionsSelector;
         }
 
-        public SavingThrows GenerateWith(CharacterClass characterClass, IEnumerable<Feat> feats, Dictionary<String, Stat> stats)
+        public SavingThrows GenerateWith(CharacterClass characterClass, IEnumerable<Feat> feats, Dictionary<string, Stat> stats)
         {
             var savingThrows = new SavingThrows();
 
@@ -41,20 +40,37 @@ namespace CharacterGen.Generators.Domain.Combats
 
             foreach (var feat in anySavingThrowFeats)
             {
-                if (feat.Foci.Contains(FeatConstants.Foci.All) || feat.Foci.Contains(SavingThrowConstants.Fortitude))
-                    savingThrows.Fortitude += feat.Strength;
-
-                if (feat.Foci.Contains(FeatConstants.Foci.All) || feat.Foci.Contains(SavingThrowConstants.Reflex))
-                    savingThrows.Reflex += feat.Strength;
-
-                if (feat.Foci.Contains(FeatConstants.Foci.All) || feat.Foci.Contains(SavingThrowConstants.Will))
-                    savingThrows.Will += feat.Strength;
+                savingThrows.Fortitude += GetBonus(feat, SavingThrowConstants.Fortitude);
+                savingThrows.Reflex += GetBonus(feat, SavingThrowConstants.Reflex);
+                savingThrows.Will += GetBonus(feat, SavingThrowConstants.Will);
+                savingThrows.CircumstantialBonus |= HasCircumstantialBonus(feat);
             }
 
             return savingThrows;
         }
 
-        private Int32 GetClassSavingThrowBonus(CharacterClass characterClass, String savingThrow)
+        private int GetBonus(Feat feat, string savingThrow)
+        {
+            if (feat.Foci.Contains(FeatConstants.Foci.All) || feat.Foci.Contains(savingThrow))
+                return feat.Strength;
+
+            return 0;
+        }
+
+        private bool HasCircumstantialBonus(Feat feat)
+        {
+            var saveFoci = new[]
+            {
+                FeatConstants.Foci.All,
+                SavingThrowConstants.Fortitude,
+                SavingThrowConstants.Reflex,
+                SavingThrowConstants.Will
+            };
+
+            return feat.Foci.Intersect(saveFoci).Any() == false;
+        }
+
+        private int GetClassSavingThrowBonus(CharacterClass characterClass, string savingThrow)
         {
             var strong = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, savingThrow);
             if (strong.Contains(characterClass.ClassName))
@@ -63,7 +79,7 @@ namespace CharacterGen.Generators.Domain.Combats
             return characterClass.Level / 3;
         }
 
-        private Int32 GetFeatSavingThrowBonus(IEnumerable<Feat> feats, String savingThrow)
+        private int GetFeatSavingThrowBonus(IEnumerable<Feat> feats, string savingThrow)
         {
             var saveFeatNames = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, savingThrow);
             var saveFeats = feats.Where(f => saveFeatNames.Contains(f.Name));
