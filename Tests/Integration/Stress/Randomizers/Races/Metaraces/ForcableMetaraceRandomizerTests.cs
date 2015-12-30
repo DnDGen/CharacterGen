@@ -1,9 +1,7 @@
 ﻿using CharacterGen.Common.Races;
 using CharacterGen.Generators.Randomizers.Races;
 using NUnit.Framework;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
 {
@@ -18,49 +16,30 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
             set { base.MetaraceRandomizer = value; }
         }
 
-        protected abstract IEnumerable<String> allowedMetaraces { get; }
-
-        private readonly String testType;
-
-        public ForcableMetaraceRandomizerTests()
-        {
-            var classType = GetType().ToString();
-            var segments = classType.Split('.');
-            testType = segments.Last();
-        }
+        protected abstract IEnumerable<string> allowedMetaraces { get; }
 
         protected override void MakeAssertions()
         {
             var metarace = GenerateMetarace();
-            Assert.That(allowedMetaraces, Contains.Item(metarace), testType);
+            Assert.That(allowedMetaraces, Contains.Item(metarace));
         }
 
-        private String GenerateMetarace()
+        private string GenerateMetarace()
         {
             var alignment = GetNewAlignment();
             var characterClass = GetNewCharacterClass(alignment);
             return MetaraceRandomizer.Randomize(alignment, characterClass);
         }
 
-        public abstract void MetaraceForced();
-
-        public abstract void MetaraceNotForced();
+        public abstract void StressForcedMetarace();
 
         protected void AssertForcedMetarace()
         {
             ForcableMetaraceRandomizer.ForceMetarace = true;
+
             var metarace = GenerateMetarace();
+            Assert.That(allowedMetaraces, Contains.Item(metarace));
             Assert.That(metarace, Is.Not.EqualTo(RaceConstants.Metaraces.None));
-        }
-
-        protected void AssertUnforcedMetarace()
-        {
-            ForcableMetaraceRandomizer.ForceMetarace = false;
-
-            var metarace = GenerateOrFail(GenerateMetarace,
-                m => m == RaceConstants.Metaraces.None);
-
-            Assert.That(metarace, Is.EqualTo(RaceConstants.Metaraces.None));
         }
     }
 }

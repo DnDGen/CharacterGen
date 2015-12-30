@@ -1,7 +1,6 @@
-﻿using System;
-using Ninject;
-using CharacterGen.Common.Races;
+﻿using CharacterGen.Common.Races;
 using CharacterGen.Generators.Randomizers.Races;
+using Ninject;
 using NUnit.Framework;
 
 namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
@@ -12,8 +11,8 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
         [Inject, Named(RaceRandomizerTypeConstants.Metarace.NoMeta)]
         public override RaceRandomizer MetaraceRandomizer { get; set; }
 
-        [TestCase("NoMetaraceRandomizer")]
-        public override void Stress(String stressSubject)
+        [TestCase("No Metarace Randomizer")]
+        public override void Stress(string stressSubject)
         {
             Stress();
         }

@@ -32,22 +32,16 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
             }
         }
 
-        [TestCase("NonGoodMetaraceRandomizer")]
+        [TestCase("Non-Good Metarace Randomizer")]
         public override void Stress(string stressSubject)
         {
             Stress();
         }
 
         [Test]
-        public override void MetaraceForced()
+        public override void StressForcedMetarace()
         {
-            AssertForcedMetarace();
-        }
-
-        [Test]
-        public override void MetaraceNotForced()
-        {
-            AssertUnforcedMetarace();
+            Stress(AssertForcedMetarace);
         }
     }
 }
