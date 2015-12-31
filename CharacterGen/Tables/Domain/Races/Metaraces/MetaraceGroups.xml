@@ -10,14 +10,12 @@
       <item>Ghost</item>
       <item>Lich</item>
       <item>Vampire</item>
-      <item></item>
     </object>
     <object>
         <name>Neutral</name>
         <item>Wereboar</item>
         <item>Weretiger</item>
       <item>Ghost</item>
-      <item></item>
     </object>
     <object>
         <name>Good</name>
@@ -25,14 +23,12 @@
         <item>Half-Celestial</item>
         <item>Werebear</item>
       <item>Ghost</item>
-      <item></item>
     </object>
     <object>
         <name>Genetic</name>
         <item>Half-Dragon</item>
         <item>Half-Celestial</item>
         <item>Half-Fiend</item>
-      <item></item>
     </object>
     <object>
         <name>Lycanthrope</name>
@@ -41,14 +37,12 @@
         <item>Weretiger</item>
         <item>Wererat</item>
         <item>Werewolf</item>
-      <item></item>
     </object>
   <object>
     <name>Undead</name>
     <item>Vampire</item>
     <item>Lich</item>
     <item>Ghost</item>
-    <item></item>
   </object>
   <object>
     <name>Paladin</name>

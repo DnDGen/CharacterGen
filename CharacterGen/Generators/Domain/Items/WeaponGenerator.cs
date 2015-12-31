@@ -2,7 +2,6 @@
 using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Common.Races;
 using CharacterGen.Generators.Items;
-using CharacterGen.Generators.Verifiers.Exceptions;
 using CharacterGen.Selectors;
 using CharacterGen.Tables;
 using System;
@@ -39,10 +38,6 @@ namespace CharacterGen.Generators.Domain.Items
             var nonAmmunitionWeapons = weapons.Except(ammunition);
 
             var weapon = GenerateFiltered(feats, characterClass, race, nonAmmunitionWeapons);
-
-            if (weapon == null)
-                throw new NoWeaponProficienciesException();
-
             return weapon;
         }
 

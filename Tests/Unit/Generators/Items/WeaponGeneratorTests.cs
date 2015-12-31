@@ -4,7 +4,6 @@ using CharacterGen.Common.Races;
 using CharacterGen.Generators;
 using CharacterGen.Generators.Domain.Items;
 using CharacterGen.Generators.Items;
-using CharacterGen.Generators.Verifiers.Exceptions;
 using CharacterGen.Selectors;
 using CharacterGen.Tables;
 using Moq;
@@ -104,13 +103,17 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         }
 
         [Test]
-        public void ThrowExceptionIfNoWeaponsAreAllowed()
+        public void GenerateNoWeapon()
         {
-            allProficientWeapons.Clear();
             feats.Add(new Feat { Name = "feat 1" });
-            feats.Add(new Feat { Name = "feat 2", Foci = new[] { "focus" } });
+            feats.Add(new Feat { Name = "feat 2", Foci = new[] { FeatConstants.Foci.UnarmedStrike } });
 
-            Assert.That(() => weaponGenerator.GenerateFrom(feats, characterClass, race), Throws.Exception.InstanceOf<NoWeaponProficienciesException>());
+            proficiencyFeats.Clear();
+            proficiencyFeats.Add(feats[1].Name);
+            proficiencyFeats.Add(feats[2].Name);
+
+            var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
+            Assert.That(weapon, Is.Null);
         }
 
         [Test]

@@ -97,6 +97,16 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         }
 
         [Test]
+        public void GenerateNoWeaponForPrimaryHand()
+        {
+            Item noWeapon = null;
+            mockWeaponGenerator.Setup(g => g.GenerateFrom(feats, characterClass, race)).Returns(noWeapon);
+
+            var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
+            Assert.That(equipment.PrimaryHand, Is.Null);
+        }
+
+        [Test]
         public void IfWeaponIsTwoHanded_PutInOffHandAsWell()
         {
             meleeWeapon.Attributes = meleeWeapon.Attributes.Union(new[] { AttributeConstants.TwoHanded });
@@ -457,6 +467,27 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             Assert.That(equipment.OffHand, Is.Null);
             Assert.That(equipment.Treasure.Items, Contains.Item(treasureItem));
             Assert.That(equipment.Treasure.Items, Contains.Item(shield));
+        }
+
+        [Test]
+        public void IfNoPrimaryHandAndProficientInShields_EquipShield()
+        {
+            Item noWeapon = null;
+            mockWeaponGenerator.Setup(g => g.GenerateFrom(feats, characterClass, race)).Returns(noWeapon);
+
+            feats.Add(new Feat { Name = "feat" });
+            feats.Add(new Feat { Name = "other feat", });
+            shieldProficiencyFeats.Add(feats[0].Name);
+
+            var shield = new Item();
+            shield.Attributes = new[] { AttributeConstants.Shield };
+            mockArmorGenerator.Setup(g => g.GenerateShieldFrom(feats, characterClass, race)).Returns(shield);
+
+            var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
+            Assert.That(equipment.PrimaryHand, Is.Null);
+            Assert.That(equipment.OffHand, Is.EqualTo(shield));
+            Assert.That(equipment.Treasure.Items, Contains.Item(treasureItem));
+            Assert.That(equipment.Treasure.Items, Is.All.Not.EqualTo(shield));
         }
 
         [TestCase(1, 1)]

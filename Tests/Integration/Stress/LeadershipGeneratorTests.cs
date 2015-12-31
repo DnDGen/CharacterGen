@@ -13,7 +13,6 @@ using CharacterGen.Tables;
 using Ninject;
 using NUnit.Framework;
 using System;
-using TreasureGen.Common.Items;
 
 namespace CharacterGen.Tests.Integration.Stress
 {
@@ -154,8 +153,6 @@ namespace CharacterGen.Tests.Integration.Stress
                     Assert.That(feat.Foci, Is.Not.Empty, character.Race.BaseRace);
             }
 
-            Assert.That(character.Equipment.PrimaryHand.ItemType, Is.EqualTo(ItemTypeConstants.Weapon));
-            Assert.That(character.Equipment.PrimaryHand.Name, Is.Not.Empty);
             Assert.That(character.Equipment.Treasure, Is.Not.Null);
             Assert.That(character.Equipment.Treasure.Items, Is.Not.Null);
 

@@ -11,6 +11,8 @@ using Ninject;
 using NUnit.Framework;
 using System;
 using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 
 namespace CharacterGen.Tests.Integration.Stress
 {
@@ -40,14 +42,24 @@ namespace CharacterGen.Tests.Integration.Stress
         public IRaceGenerator RaceGenerator { get; set; }
 
         private const int ConfidentIterations = 1000000;
-#if STRESS
-        //INFO: This should make all stress tests run within 1 hour
-        private const int TimeLimitInSeconds = 60 * 60 / 116;
-#else
-        private const int TimeLimitInSeconds = 1;
-#endif
+
+        private readonly int timeLimitInSeconds;
 
         private int iterations;
+
+        public StressTests()
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+            var types = assembly.GetTypes();
+            var methods = types.SelectMany(t => t.GetMethods());
+            var stressTestsCount = methods.Count(m => m.GetCustomAttributes<TestAttribute>(true).Any() || m.GetCustomAttributes<TestCaseAttribute>().Any());
+
+#if STRESS
+            timeLimitInSeconds = 60 * 60 / stressTestsCount;
+#else
+            timeLimitInSeconds = 1;
+#endif
+        }
 
         [SetUp]
         public void StressSetup()
@@ -74,7 +86,7 @@ namespace CharacterGen.Tests.Integration.Stress
             do makeAssertions();
             while (TestShouldKeepRunning());
 
-            if (Stopwatch.Elapsed.TotalSeconds > TimeLimitInSeconds + 2)
+            if (Stopwatch.Elapsed.TotalSeconds > timeLimitInSeconds + 2)
                 Assert.Fail("Something took way too long");
         }
 
@@ -106,7 +118,7 @@ namespace CharacterGen.Tests.Integration.Stress
         private bool TestShouldKeepRunning()
         {
             iterations++;
-            return Stopwatch.Elapsed.TotalSeconds < TimeLimitInSeconds && iterations < ConfidentIterations;
+            return Stopwatch.Elapsed.TotalSeconds < timeLimitInSeconds && iterations < ConfidentIterations;
         }
 
         protected Alignment GetNewAlignment()

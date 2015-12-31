@@ -1,9 +1,10 @@
 ﻿using CharacterGen.Common.Abilities.Stats;
+using CharacterGen.Common.Races;
 using CharacterGen.Generators.Abilities;
+using CharacterGen.Generators.Randomizers.Races;
 using CharacterGen.Generators.Randomizers.Stats;
 using Ninject;
 using NUnit.Framework;
-using System;
 
 namespace CharacterGen.Tests.Integration.Stress.Abilities
 {
@@ -15,8 +16,14 @@ namespace CharacterGen.Tests.Integration.Stress.Abilities
         [Inject, Named(StatsRandomizerTypeConstants.Raw)]
         public IStatsRandomizer StatsRandomizer { get; set; }
 
-        [TestCase("StatsGenerator")]
-        public override void Stress(String stressSubject)
+        [TearDown]
+        public void TearDown()
+        {
+            MetaraceRandomizer = GetNewInstanceOf<RaceRandomizer>(RaceRandomizerTypeConstants.Metarace.AnyMeta);
+        }
+
+        [TestCase("Stats Generator")]
+        public override void Stress(string stressSubject)
         {
             Stress();
         }
@@ -41,6 +48,65 @@ namespace CharacterGen.Tests.Integration.Stress.Abilities
             Assert.That(stats[StatConstants.Intelligence].Value, Is.Positive);
             Assert.That(stats[StatConstants.Strength].Value, Is.Positive);
             Assert.That(stats[StatConstants.Wisdom].Value, Is.Positive);
+        }
+
+        [Test]
+        public void ConstitutionNotZeroForNoMetarace()
+        {
+            MetaraceRandomizer = GetNewInstanceOf<RaceRandomizer>(RaceRandomizerTypeConstants.Metarace.NoMeta);
+
+            Stress(AssertPositiveConstitution);
+        }
+
+        [TestCase(RaceConstants.Metaraces.HalfCelestial)]
+        [TestCase(RaceConstants.Metaraces.HalfDragon)]
+        [TestCase(RaceConstants.Metaraces.HalfFiend)]
+        [TestCase(RaceConstants.Metaraces.Werebear)]
+        [TestCase(RaceConstants.Metaraces.Wereboar)]
+        [TestCase(RaceConstants.Metaraces.Wererat)]
+        [TestCase(RaceConstants.Metaraces.Weretiger)]
+        [TestCase(RaceConstants.Metaraces.Werewolf)]
+        public void ConstitutionNotZeroForNonUndead(string metarace)
+        {
+            var setMetaraceRandomizer = GetNewInstanceOf<ISetMetaraceRandomizer>();
+            setMetaraceRandomizer.SetMetarace = metarace;
+
+            MetaraceRandomizer = setMetaraceRandomizer;
+
+            Stress(AssertPositiveConstitution);
+        }
+
+        private void AssertPositiveConstitution()
+        {
+            var alignment = GetNewAlignment();
+            var characterClass = GetNewCharacterClass(alignment);
+            var race = RaceGenerator.GenerateWith(alignment, characterClass, BaseRaceRandomizer, MetaraceRandomizer);
+            var stats = StatsGenerator.GenerateWith(StatsRandomizer, characterClass, race);
+
+            Assert.That(stats[StatConstants.Constitution].Value, Is.Positive);
+        }
+
+        [TestCase(RaceConstants.Metaraces.Ghost)]
+        [TestCase(RaceConstants.Metaraces.Lich)]
+        [TestCase(RaceConstants.Metaraces.Vampire)]
+        public void ConstitutionZeroForUndead(string metarace)
+        {
+            var setMetaraceRandomizer = GetNewInstanceOf<ISetMetaraceRandomizer>();
+            setMetaraceRandomizer.SetMetarace = metarace;
+
+            MetaraceRandomizer = setMetaraceRandomizer;
+
+            Stress(AssertConstitutionOfZero);
+        }
+
+        private void AssertConstitutionOfZero()
+        {
+            var alignment = GetNewAlignment();
+            var characterClass = GetNewCharacterClass(alignment);
+            var race = RaceGenerator.GenerateWith(alignment, characterClass, BaseRaceRandomizer, MetaraceRandomizer);
+            var stats = StatsGenerator.GenerateWith(StatsRandomizer, characterClass, race);
+
+            Assert.That(stats[StatConstants.Constitution].Value, Is.EqualTo(0));
         }
     }
 }

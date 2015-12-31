@@ -13,10 +13,19 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
         [Inject, Named(ClassNameRandomizerTypeConstants.AnyNPC)]
         public IClassNameRandomizer AnyNPCClassNameRandomizer { get; set; }
 
+        [SetUp]
+        public void Setup()
+        {
+            var forcableMetaraceRandomizer = MetaraceRandomizer as IForcableMetaraceRandomizer;
+            forcableMetaraceRandomizer.ForceMetarace = true;
+        }
+
         [TearDown]
         public void TearDown()
         {
             ClassNameRandomizer = GetNewInstanceOf<IClassNameRandomizer>(ClassNameRandomizerTypeConstants.AnyPlayer);
+            MetaraceRandomizer = GetNewInstanceOf<RaceRandomizer>(RaceRandomizerTypeConstants.Metarace.AnyMeta);
+
         }
 
         [TestCase("Set Metarace Randomizer")]

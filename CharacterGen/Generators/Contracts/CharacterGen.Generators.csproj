@@ -100,7 +100,6 @@
     <Compile Include="Randomizers\Stats\IStatsRandomizer.cs" />
     <Compile Include="Randomizers\Stats\StatsRandomizerTypeConstants.cs" />
     <Compile Include="Verifiers\Exceptions\IncompatibleRandomizersException.cs" />
-    <Compile Include="Verifiers\Exceptions\NoWeaponProficienciesException.cs" />
     <Compile Include="Verifiers\IRandomizerVerifier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

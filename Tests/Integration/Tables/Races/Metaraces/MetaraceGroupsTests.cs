@@ -46,6 +46,11 @@ namespace CharacterGen.Tests.Integration.Tables.Races.Metaraces
             AssertCollectionNames(names);
         }
 
+        [TestCase(AlignmentConstants.Good,
+            RaceConstants.Metaraces.HalfDragon,
+            RaceConstants.Metaraces.HalfCelestial,
+            RaceConstants.Metaraces.Werebear,
+            RaceConstants.Metaraces.Ghost)]
         [TestCase(AlignmentConstants.Evil,
             RaceConstants.Metaraces.HalfDragon,
             RaceConstants.Metaraces.HalfFiend,
@@ -53,38 +58,32 @@ namespace CharacterGen.Tests.Integration.Tables.Races.Metaraces
             RaceConstants.Metaraces.Werewolf,
             RaceConstants.Metaraces.Vampire,
             RaceConstants.Metaraces.Lich,
-            RaceConstants.Metaraces.Ghost,
-            RaceConstants.Metaraces.None)]
+            RaceConstants.Metaraces.Ghost)]
         [TestCase(AlignmentConstants.Neutral,
             RaceConstants.Metaraces.Wereboar,
             RaceConstants.Metaraces.Weretiger,
-            RaceConstants.Metaraces.Ghost,
-            RaceConstants.Metaraces.None)]
+            RaceConstants.Metaraces.Ghost)]
         [TestCase(GroupConstants.Genetic,
             RaceConstants.Metaraces.HalfDragon,
             RaceConstants.Metaraces.HalfFiend,
-            RaceConstants.Metaraces.HalfCelestial,
-            RaceConstants.Metaraces.None)]
+            RaceConstants.Metaraces.HalfCelestial)]
         [TestCase(GroupConstants.Lycanthrope,
             RaceConstants.Metaraces.Werebear,
             RaceConstants.Metaraces.Wereboar,
             RaceConstants.Metaraces.Weretiger,
             RaceConstants.Metaraces.Wererat,
-            RaceConstants.Metaraces.Werewolf,
-            RaceConstants.Metaraces.None)]
+            RaceConstants.Metaraces.Werewolf)]
         [TestCase(GroupConstants.Undead,
             RaceConstants.Metaraces.Vampire,
             RaceConstants.Metaraces.Lich,
-            RaceConstants.Metaraces.Ghost,
-            RaceConstants.Metaraces.None)]
+            RaceConstants.Metaraces.Ghost)]
         public override void DistinctCollection(string name, params string[] collection)
         {
             base.DistinctCollection(name, collection);
         }
 
-        [TestCase(AlignmentConstants.Good)]
-        [TestCase(CharacterClassConstants.Paladin)]
-        public void GoodMetaraces(string name)
+        [Test]
+        public void PaladinMetaraces()
         {
             var metaraces = new[]
             {
@@ -95,7 +94,7 @@ namespace CharacterGen.Tests.Integration.Tables.Races.Metaraces
                 RaceConstants.Metaraces.None
             };
 
-            base.DistinctCollection(name, metaraces);
+            base.DistinctCollection(CharacterClassConstants.Paladin, metaraces);
         }
 
         [TestCase(CharacterClassConstants.Adept)]

@@ -1,5 +1,4 @@
 ﻿using CharacterGen.Tables;
-using System;
 using System.Collections.Generic;
 using System.Xml;
 
@@ -14,10 +13,10 @@ namespace CharacterGen.Mappers.Domain.Collections
             this.streamLoader = streamLoader;
         }
 
-        public Dictionary<String, IEnumerable<String>> Map(String tableName)
+        public Dictionary<string, IEnumerable<string>> Map(string tableName)
         {
             var filename = tableName + ".xml";
-            var results = new Dictionary<String, IEnumerable<String>>();
+            var results = new Dictionary<string, IEnumerable<string>>();
             var xmlDocument = new XmlDocument();
 
             using (var stream = streamLoader.LoadFor(filename))
@@ -25,7 +24,7 @@ namespace CharacterGen.Mappers.Domain.Collections
 
             foreach (XmlNode node in xmlDocument.DocumentElement.ChildNodes)
             {
-                var items = new List<String>();
+                var items = new List<string>();
                 var itemNodes = node.SelectNodes("item");
 
                 foreach (XmlNode itemNode in itemNodes)
