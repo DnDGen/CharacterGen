@@ -6,7 +6,6 @@ using CharacterGen.Generators.Randomizers.CharacterClasses;
 using CharacterGen.Generators.Randomizers.Stats;
 using Ninject;
 using NUnit.Framework;
-using System;
 
 namespace CharacterGen.Tests.Integration.Stress.Magics
 {
@@ -27,7 +26,7 @@ namespace CharacterGen.Tests.Integration.Stress.Magics
         public IEquipmentGenerator EquipmentGenerator { get; set; }
 
         [TestCase("Magic Generator")]
-        public override void Stress(String stressSubject)
+        public override void Stress(string stressSubject)
         {
             Stress();
         }
