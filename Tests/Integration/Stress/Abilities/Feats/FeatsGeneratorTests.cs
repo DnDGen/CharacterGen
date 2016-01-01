@@ -23,7 +23,7 @@ namespace CharacterGen.Tests.Integration.Stress.Abilities.Feats
         [Inject]
         public ICombatGenerator CombatGenerator { get; set; }
 
-        [TestCase("FeatsGenerator")]
+        [TestCase("Feats Generator")]
         public override void Stress(string stressSubject)
         {
             Stress();
@@ -40,10 +40,9 @@ namespace CharacterGen.Tests.Integration.Stress.Abilities.Feats
 
             var feats = FeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
             var minimumFeats = characterClass.Level / 3 + 1;
-            var count = feats.Count();
 
-            Assert.That(count, Is.AtLeast(minimumFeats));
-            Assert.That(feats.Distinct().Count(), Is.EqualTo(count));
+            Assert.That(feats.Count(), Is.AtLeast(minimumFeats));
+            Assert.That(feats, Is.Unique);
 
             foreach (var feat in feats)
             {
