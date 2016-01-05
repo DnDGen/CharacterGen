@@ -25,12 +25,6 @@ namespace CharacterGen.Tests.Integration.Bootstrap.Modules
         }
 
         [Test]
-        public void StatPrioritySelectorsAreNotGeneratedAsSingletons()
-        {
-            AssertNotSingleton<IStatPrioritySelector>();
-        }
-
-        [Test]
         public void StatAdjustmentsSelectorsAreNotGeneratedAsSingletons()
         {
             AssertNotSingleton<IStatAdjustmentsSelector>();

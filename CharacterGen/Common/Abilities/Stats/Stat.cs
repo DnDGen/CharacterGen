@@ -1,11 +1,9 @@
-﻿using System;
-
-namespace CharacterGen.Common.Abilities.Stats
+﻿namespace CharacterGen.Common.Abilities.Stats
 {
     public class Stat
     {
-        public Int32 Value { get; set; }
-        public Int32 Bonus
+        public int Value { get; set; }
+        public int Bonus
         {
             get
             {

@@ -4,7 +4,6 @@ using CharacterGen.Common.Races;
 using CharacterGen.Generators.Abilities;
 using CharacterGen.Generators.Randomizers.Stats;
 using CharacterGen.Selectors;
-using CharacterGen.Selectors.Objects;
 using CharacterGen.Tables;
 using System;
 using System.Collections.Generic;
@@ -15,56 +14,85 @@ namespace CharacterGen.Generators.Domain.Abilities
     public class StatsGenerator : IStatsGenerator
     {
         private IBooleanPercentileSelector booleanPercentileSelector;
-        private IStatPrioritySelector statPrioritySelector;
         private IStatAdjustmentsSelector statAdjustmentsSelector;
         private IAdjustmentsSelector adjustmentsSelector;
         private ICollectionsSelector collectionsSelector;
 
-        public StatsGenerator(IBooleanPercentileSelector booleanPercentileSelector, IStatPrioritySelector statPrioritySelector,
-            IStatAdjustmentsSelector statAdjustmentsSelector, IAdjustmentsSelector adjustmentsSelector, ICollectionsSelector collectionsSelector)
+        public StatsGenerator(IBooleanPercentileSelector booleanPercentileSelector, IStatAdjustmentsSelector statAdjustmentsSelector, IAdjustmentsSelector adjustmentsSelector, ICollectionsSelector collectionsSelector)
         {
             this.booleanPercentileSelector = booleanPercentileSelector;
-            this.statPrioritySelector = statPrioritySelector;
             this.statAdjustmentsSelector = statAdjustmentsSelector;
             this.adjustmentsSelector = adjustmentsSelector;
             this.collectionsSelector = collectionsSelector;
         }
 
-        public Dictionary<String, Stat> GenerateWith(IStatsRandomizer statsRandomizer, CharacterClass characterClass, Race race)
+        public Dictionary<string, Stat> GenerateWith(IStatsRandomizer statsRandomizer, CharacterClass characterClass, Race race)
         {
             var stats = statsRandomizer.Randomize();
 
-            if ((statsRandomizer is ISetStatsRandomizer) == false || (statsRandomizer as ISetStatsRandomizer).AllowAdjustments)
+            if (CanAdjustStats(statsRandomizer))
             {
-                var statPriorities = statPrioritySelector.SelectFor(characterClass.ClassName);
-                stats = PrioritizeStats(stats, statPriorities);
+                stats = PrioritizeStats(stats, characterClass);
                 stats = AdjustStats(race, stats);
-                stats = IncreaseStats(stats, characterClass.Level, statPriorities);
+                stats = SetMinimumStats(stats);
+                stats = IncreaseStats(stats, characterClass, race);
+            }
+            else
+            {
+                stats = SetMinimumStats(stats);
             }
 
-            stats = SetMinimumStats(stats);
-
             var undead = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Undead);
+
             if (undead.Contains(race.Metarace))
                 stats[StatConstants.Constitution].Value = 0;
 
             return stats;
         }
 
-        private Dictionary<String, Stat> PrioritizeStats(Dictionary<String, Stat> stats, StatPrioritySelection priorities)
+        private bool CanAdjustStats(IStatsRandomizer statsRandomizer)
         {
+            if ((statsRandomizer is ISetStatsRandomizer) == false)
+                return true;
+
+            var setStatsRandomizer = statsRandomizer as ISetStatsRandomizer;
+            return setStatsRandomizer.AllowAdjustments;
+        }
+
+        private Dictionary<string, Stat> PrioritizeStats(Dictionary<string, Stat> stats, CharacterClass characterClass)
+        {
+            var statPriorities = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.StatPriorities, characterClass.ClassName);
+            if (statPriorities.Any() == false)
+                return stats;
+
+            var firstPriority = statPriorities.First();
             var max = stats.Values.Max(s => s.Value);
             var maxStat = stats.Keys.First(k => stats[k].Value == max);
-            stats = SwapStat(stats, priorities.First, maxStat);
+            stats = SwapStat(stats, firstPriority, maxStat);
 
-            max = stats.Values.Except(new[] { stats[priorities.First] }).Max(s => s.Value);
-            maxStat = stats.Keys.First(k => stats[k].Value == max);
-            stats = SwapStat(stats, priorities.Second, maxStat);
+            var secondPriorities = statPriorities.Skip(1);
+            var nonPriorityStatNames = stats.Keys.Except(statPriorities);
+
+            while (secondPriorities.Any())
+            {
+                var priority = secondPriorities.First();
+                var nonPriorityStats = stats.Where(kvp => nonPriorityStatNames.Contains(kvp.Key));
+
+                max = nonPriorityStats.Max(kvp => kvp.Value.Value);
+
+                if (max > stats[priority].Value)
+                {
+                    maxStat = nonPriorityStatNames.First(s => stats[s].Value == max);
+                    stats = SwapStat(stats, priority, maxStat);
+                }
+
+                secondPriorities = secondPriorities.Skip(1);
+            }
 
             return stats;
         }
 
-        private Dictionary<String, Stat> SwapStat(Dictionary<String, Stat> stats, String priorityStat, String otherStat)
+        private Dictionary<string, Stat> SwapStat(Dictionary<string, Stat> stats, string priorityStat, string otherStat)
         {
             var temp = stats[otherStat];
             stats[otherStat] = stats[priorityStat];
@@ -73,17 +101,17 @@ namespace CharacterGen.Generators.Domain.Abilities
             return stats;
         }
 
-        private Dictionary<String, Stat> AdjustStats(Race race, Dictionary<String, Stat> stats)
+        private Dictionary<string, Stat> AdjustStats(Race race, Dictionary<string, Stat> stats)
         {
             var statAdjustments = statAdjustmentsSelector.SelectFor(race);
 
             foreach (var stat in stats.Keys)
                 stats[stat].Value += statAdjustments[stat];
 
-            return SetMinimumStats(stats);
+            return stats;
         }
 
-        private Dictionary<String, Stat> SetMinimumStats(Dictionary<String, Stat> stats)
+        private Dictionary<string, Stat> SetMinimumStats(Dictionary<string, Stat> stats)
         {
             foreach (var stat in stats.Values)
                 stat.Value = Math.Max(stat.Value, 1);
@@ -91,24 +119,47 @@ namespace CharacterGen.Generators.Domain.Abilities
             return stats;
         }
 
-        private Dictionary<String, Stat> IncreaseStats(Dictionary<String, Stat> stats, Int32 level, StatPrioritySelection priorities)
+        private Dictionary<string, Stat> IncreaseStats(Dictionary<string, Stat> stats, CharacterClass characterClass, Race race)
         {
-            var count = level / 4;
+            var count = characterClass.Level / 4;
 
             while (count-- > 0)
-                IncreaseStat(stats, priorities);
+            {
+                var statToIncrease = GetStatToIncrease(stats, race, characterClass);
+                stats[statToIncrease].Value++;
+            }
 
             return stats;
         }
 
-        private void IncreaseStat(Dictionary<String, Stat> stats, StatPrioritySelection priorities)
+        private string GetStatToIncrease(Dictionary<string, Stat> stats, Race race, CharacterClass characterClass)
         {
+            var statPriorities = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.StatPriorities, characterClass.ClassName);
+            var undead = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Undead);
+
+            if (undead.Contains(race.Metarace))
+                statPriorities = statPriorities.Except(new[] { StatConstants.Constitution });
+
+            if (statPriorities.Any() == false)
+            {
+                var stat = collectionsSelector.SelectRandomFrom(stats.Keys);
+
+                while (undead.Contains(race.Metarace) && stat == StatConstants.Constitution)
+                    stat = collectionsSelector.SelectRandomFrom(stats.Keys);
+
+                return stat;
+            }
+
+            var secondPriorityStats = statPriorities.Skip(1);
+            if (secondPriorityStats.Any() == false)
+                return statPriorities.First();
+
             var increaseFirst = booleanPercentileSelector.SelectFrom(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityStat);
 
             if (increaseFirst)
-                stats[priorities.First].Value++;
-            else
-                stats[priorities.Second].Value++;
+                return statPriorities.First();
+
+            return collectionsSelector.SelectRandomFrom(secondPriorityStats);
         }
     }
 }

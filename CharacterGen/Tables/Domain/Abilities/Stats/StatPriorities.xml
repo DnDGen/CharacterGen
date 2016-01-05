@@ -4,41 +4,38 @@
   <object>
     <name>Adept</name>
     <item>Wisdom</item>
-    <item>Charisma</item>
   </object>
   <object>
     <name>Aristocrat</name>
-    <item>Charisma</item>
-    <item>Intelligence</item>
   </object>
     <object>
         <name>Barbarian</name>
         <item>Strength</item>
         <item>Dexterity</item>
+      <item>Constitution</item>
     </object>
     <object>
         <name>Bard</name>
         <item>Charisma</item>
         <item>Intelligence</item>
+      <item>Constitution</item>
     </object>
     <object>
         <name>Cleric</name>
         <item>Wisdom</item>
         <item>Charisma</item>
+      <item>Constitution</item>
     </object>
   <object>
     <name>Commoner</name>
-    <item>Strength</item>
-    <item>Wisdom</item>
   </object>
     <object>
         <name>Druid</name>
         <item>Wisdom</item>
-        <item>Charisma</item>
+      <item>Constitution</item>
     </object>
   <object>
     <name>Expert</name>
-    <item>Charisma</item>
     <item>Intelligence</item>
   </object>
     <object>
@@ -50,26 +47,34 @@
         <name>Monk</name>
         <item>Wisdom</item>
         <item>Strength</item>
+      <item>Dexterity</item>
+      <item>Constitution</item>
     </object>
     <object>
         <name>Paladin</name>
         <item>Charisma</item>
         <item>Wisdom</item>
+      <item>Strength</item>
+      <item>Constitution</item>
     </object>
     <object>
         <name>Ranger</name>
         <item>Strength</item>
         <item>Wisdom</item>
+      <item>Dexterity</item>
+      <item>Constitution</item>
     </object>
     <object>
-        <name>Rogue</name>
-        <item>Dexterity</item>
-        <item>Intelligence</item>
+      <name>Rogue</name>
+      <item>Dexterity</item>
+      <item>Intelligence</item>
+      <item>Constitution</item>
     </object>
     <object>
         <name>Sorcerer</name>
         <item>Charisma</item>
         <item>Dexterity</item>
+      <item>Constitution</item>
     </object>
   <object>
     <name>Warrior</name>
@@ -80,5 +85,6 @@
         <name>Wizard</name>
         <item>Intelligence</item>
         <item>Dexterity</item>
+      <item>Constitution</item>
     </object>
 </statPriorities>

@@ -11,7 +11,6 @@ namespace CharacterGen.Bootstrap.Modules
             Bind<ILanguageCollectionsSelector>().To<LanguageCollectionsSelector>();
             Bind<IAdjustmentsSelector>().To<AdjustmentsSelector>();
             Bind<IPercentileSelector>().To<PercentileSelector>();
-            Bind<IStatPrioritySelector>().To<StatPrioritySelector>();
             Bind<IStatAdjustmentsSelector>().To<StatAdjustmentsSelector>();
             Bind<ICollectionsSelector>().To<CollectionsSelector>();
             Bind<ISkillSelector>().To<SkillSelector>();
