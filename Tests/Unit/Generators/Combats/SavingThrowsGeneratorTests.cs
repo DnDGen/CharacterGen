@@ -224,7 +224,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             {
                 var feat = new Feat();
                 feat.Name = string.Format("Feat{0}", i);
-                feat.Strength = i + 1;
+                feat.Power = i + 1;
 
                 feats.Add(feat);
             }

@@ -6,7 +6,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
 {
     public abstract class RacialFeatDataTests : DataTests
     {
-        protected override void PopulateIndices(IEnumerable<String> collection)
+        protected override void PopulateIndices(IEnumerable<string> collection)
         {
             indices[DataIndexConstants.RacialFeatData.FeatNameIndex] = "FeatId";
             indices[DataIndexConstants.RacialFeatData.FocusIndex] = "FocusType";
@@ -14,21 +14,19 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             indices[DataIndexConstants.RacialFeatData.FrequencyTimePeriodIndex] = "FrequencyTimePeriod";
             indices[DataIndexConstants.RacialFeatData.MinimumHitDiceRequirementIndex] = "MinHitDiceRequirement";
             indices[DataIndexConstants.RacialFeatData.SizeRequirementIndex] = "SizeRequirement";
-            indices[DataIndexConstants.RacialFeatData.StrengthIndex] = "Strength";
+            indices[DataIndexConstants.RacialFeatData.PowerIndex] = "Power";
             indices[DataIndexConstants.RacialFeatData.MaximumHitDiceRequirementIndex] = "MaxHitDiceRequirement";
             indices[DataIndexConstants.RacialFeatData.RequiredStatIndex] = "RequiredStat";
             indices[DataIndexConstants.RacialFeatData.RequiredStatMinimumValueIndex] = "RequiredStatMinimumValue";
         }
 
-        public virtual void Data(String name, String feat, String focus, Int32 frequencyQuantity,
-            String frequencyTimePeriod, Int32 minimumHitDiceRequirement, String sizeRequirement,
-            Int32 strength, Int32 maximumHitDiceRequirement, Int32 requiredStatMinimumValue, params String[] minimumStats)
+        public virtual void Data(string name, string feat, string focus, int frequencyQuantity, string frequencyTimePeriod, int minimumHitDiceRequirement, string sizeRequirement, int power, int maximumHitDiceRequirement, int requiredStatMinimumValue, params string[] minimumStats)
         {
-            var data = new List<String>();
+            var data = new List<string>();
             for (var i = 0; i < 10; i++)
-                data.Add(String.Empty);
+                data.Add(string.Empty);
 
-            var requiredStat = String.Join(",", minimumStats);
+            var requiredStat = string.Join(",", minimumStats);
 
             data[DataIndexConstants.RacialFeatData.FeatNameIndex] = feat;
             data[DataIndexConstants.RacialFeatData.FocusIndex] = focus;
@@ -36,7 +34,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial
             data[DataIndexConstants.RacialFeatData.MinimumHitDiceRequirementIndex] = Convert.ToString(minimumHitDiceRequirement);
             data[DataIndexConstants.RacialFeatData.FrequencyTimePeriodIndex] = frequencyTimePeriod;
             data[DataIndexConstants.RacialFeatData.SizeRequirementIndex] = sizeRequirement;
-            data[DataIndexConstants.RacialFeatData.StrengthIndex] = Convert.ToString(strength);
+            data[DataIndexConstants.RacialFeatData.PowerIndex] = Convert.ToString(power);
             data[DataIndexConstants.RacialFeatData.MaximumHitDiceRequirementIndex] = Convert.ToString(maximumHitDiceRequirement);
             data[DataIndexConstants.RacialFeatData.RequiredStatIndex] = requiredStat;
             data[DataIndexConstants.RacialFeatData.RequiredStatMinimumValueIndex] = Convert.ToString(requiredStatMinimumValue);

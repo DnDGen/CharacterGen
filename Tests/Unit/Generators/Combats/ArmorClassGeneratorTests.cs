@@ -214,9 +214,9 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             feats.Add(new Feat());
             feats.Add(new Feat());
             feats[0].Name = "feat 1";
-            feats[0].Strength = 1;
+            feats[0].Power = 1;
             feats[1].Name = "feat 2";
-            feats[1].Strength = 1;
+            feats[1].Power = 1;
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.NaturalArmor))
                 .Returns(new[] { "feat 1", "feat 2", "other feat" });
@@ -230,10 +230,10 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             feats.Add(new Feat());
             feats.Add(new Feat());
             feats[0].Name = "feat 1";
-            feats[0].Strength = 1;
+            feats[0].Power = 1;
             feats[1].Name = "feat 2";
             feats[1].Foci = new[] { "focus" };
-            feats[1].Strength = 1;
+            feats[1].Power = 1;
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.NaturalArmor))
                 .Returns(new[] { "feat 1", "feat 2", "other feat" });
@@ -248,9 +248,9 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             feats.Add(new Feat());
             feats[0].Name = "feat 1";
             feats[0].Foci = new[] { "focus" };
-            feats[0].Strength = 1;
+            feats[0].Power = 1;
             feats[1].Name = "feat 2";
-            feats[1].Strength = 1;
+            feats[1].Power = 1;
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.NaturalArmor))
                 .Returns(new[] { "feat 1", "feat 2", "other feat" });
@@ -264,9 +264,9 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             feats.Add(new Feat());
             feats.Add(new Feat());
             feats[0].Name = "feat 1";
-            feats[0].Strength = 1;
+            feats[0].Power = 1;
             feats[1].Name = "feat 2";
-            feats[1].Strength = 1;
+            feats[1].Power = 1;
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.DodgeBonus))
                 .Returns(new[] { "feat 1", "feat 2", "other feat" });
@@ -280,10 +280,10 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             feats.Add(new Feat());
             feats.Add(new Feat());
             feats[0].Name = "feat 1";
-            feats[0].Strength = 1;
+            feats[0].Power = 1;
             feats[1].Name = "feat 2";
             feats[1].Foci = new[] { "focus" };
-            feats[1].Strength = 1;
+            feats[1].Power = 1;
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.DodgeBonus))
                 .Returns(new[] { "feat 1", "feat 2", "other feat" });
@@ -298,9 +298,9 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             feats.Add(new Feat());
             feats[0].Name = "feat 1";
             feats[0].Foci = new[] { "focus" };
-            feats[0].Strength = 1;
+            feats[0].Power = 1;
             feats[1].Name = "feat 2";
-            feats[1].Strength = 1;
+            feats[1].Power = 1;
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.NaturalArmor))
                 .Returns(new[] { "feat 1", "other feat" });
@@ -355,9 +355,9 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             feats.Add(new Feat());
             feats.Add(new Feat());
             feats[0].Name = "feat 1";
-            feats[0].Strength = 1;
+            feats[0].Power = 1;
             feats[1].Name = "feat 2";
-            feats[1].Strength = 1;
+            feats[1].Power = 1;
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.NaturalArmor))
                 .Returns(new[] { "feat 1", "feat 2", "ring", "other ring" });
@@ -398,7 +398,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
 
             var feat = new Feat();
             feat.Name = "feat 1";
-            feat.Strength = 1;
+            feat.Power = 1;
             feats.Add(feat);
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.Deflection))

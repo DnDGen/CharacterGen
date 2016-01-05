@@ -29,7 +29,7 @@ namespace CharacterGen.Generators.Domain.Combats
             var hitPoints = GetClassHitPoints(characterClass, constitutionBonus, race);
 
             var toughness = feats.Where(f => f.Name == FeatConstants.Toughness);
-            hitPoints += toughness.Sum(f => f.Strength);
+            hitPoints += toughness.Sum(f => f.Power);
 
             var monsters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters);
             if (monsters.Contains(race.BaseRace) == false)

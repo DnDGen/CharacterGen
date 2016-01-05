@@ -113,11 +113,11 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
             feats.Add(new Feat());
             feats.Add(new Feat());
             feats[0].Name = "feat1";
-            feats[0].Strength = 1;
+            feats[0].Power = 1;
             feats[1].Name = "feat2";
-            feats[1].Strength = 2;
+            feats[1].Power = 2;
             feats[2].Name = "feat3";
-            feats[2].Strength = 3;
+            feats[2].Power = 3;
 
             mockFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills, baseAttack)).Returns(feats);
 
@@ -153,13 +153,13 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
             feats.Add(new Feat());
             feats[0].Name = "feat1";
             feats[0].Foci = new[] { "skill 2", "skill 3", "non-skill focus" };
-            feats[0].Strength = 4;
+            feats[0].Power = 4;
             feats[1].Name = "feat2";
             feats[1].Foci = new[] { "skill 3", "non-skill focus" };
-            feats[1].Strength = 1;
+            feats[1].Power = 1;
             feats[2].Name = "feat1";
             feats[2].Foci = new[] { "skill 2", "non-skill focus" };
-            feats[2].Strength = 3;
+            feats[2].Power = 3;
 
             mockFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills, baseAttack)).Returns(feats);
 
@@ -185,7 +185,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
             feats.Add(new Feat());
             feats[0].Name = "feat1";
             feats[0].Foci = new[] { "skill 1 (with qualifiers)", "non-skill focus" };
-            feats[0].Strength = 1;
+            feats[0].Power = 1;
 
             var featGrantingSkillBonuses = new[] { "feat2", "feat1" };
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus))
@@ -211,10 +211,10 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
             feats.Add(new Feat());
             feats.Add(new Feat());
             feats[0].Name = "feat1";
-            feats[0].Strength = 1;
+            feats[0].Power = 1;
             feats[1].Name = "feat2";
             feats[1].Foci = new[] { "skill 2", "non-skill focus" };
-            feats[1].Strength = 2;
+            feats[1].Power = 2;
 
             mockFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills, baseAttack)).Returns(feats);
 
@@ -243,7 +243,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
             feats.Add(new Feat());
             feats[0].Name = "feat1";
             feats[0].Foci = new[] { "skill 1 (with qualifiers)", "non-skill focus" };
-            feats[0].Strength = 1;
+            feats[0].Power = 1;
 
             mockFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills, baseAttack)).Returns(feats);
 
@@ -269,7 +269,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
             feats.Add(new Feat());
             feats[0].Name = "feat1";
             feats[0].Foci = new[] { "skill 1 (with qualifiers)", "skill 2" };
-            feats[0].Strength = 1;
+            feats[0].Power = 1;
 
             mockFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills, baseAttack)).Returns(feats);
 
@@ -297,10 +297,10 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
             feats.Add(new Feat());
             feats[0].Name = "feat1";
             feats[0].Foci = new[] { "skill 1 (with qualifiers)", "skill 2" };
-            feats[0].Strength = 1;
+            feats[0].Power = 1;
             feats[1].Name = "feat2";
             feats[1].Foci = new[] { "skill 1" };
-            feats[1].Strength = 1;
+            feats[1].Power = 1;
 
             mockFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills, baseAttack)).Returns(feats);
 

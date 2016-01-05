@@ -1,7 +1,6 @@
 ﻿using CharacterGen.Common.Abilities.Feats;
 using CharacterGen.Common.Abilities.Stats;
 using CharacterGen.Common.Races;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,27 +8,27 @@ namespace CharacterGen.Selectors.Objects
 {
     public class RacialFeatSelection
     {
-        public String Feat { get; set; }
-        public Int32 MinimumHitDieRequirement { get; set; }
-        public Int32 MaximumHitDieRequirement { get; set; }
-        public String SizeRequirement { get; set; }
+        public string Feat { get; set; }
+        public int MinimumHitDieRequirement { get; set; }
+        public int MaximumHitDieRequirement { get; set; }
+        public string SizeRequirement { get; set; }
         public Frequency Frequency { get; set; }
-        public String FocusType { get; set; }
-        public Int32 Strength { get; set; }
-        public Dictionary<String, Int32> MinimumStats { get; set; }
+        public string FocusType { get; set; }
+        public int Power { get; set; }
+        public Dictionary<string, int> MinimumStats { get; set; }
 
         public RacialFeatSelection()
         {
-            Feat = String.Empty;
-            SizeRequirement = String.Empty;
+            Feat = string.Empty;
+            SizeRequirement = string.Empty;
             Frequency = new Frequency();
-            FocusType = String.Empty;
-            MinimumStats = new Dictionary<String, Int32>();
+            FocusType = string.Empty;
+            MinimumStats = new Dictionary<string, int>();
         }
 
-        public Boolean RequirementsMet(Race race, Int32 monsterHitDice, Dictionary<String, Stat> stats)
+        public bool RequirementsMet(Race race, int monsterHitDice, Dictionary<string, Stat> stats)
         {
-            if (String.IsNullOrEmpty(SizeRequirement) == false && SizeRequirement != race.Size)
+            if (string.IsNullOrEmpty(SizeRequirement) == false && SizeRequirement != race.Size)
                 return false;
 
             if (MaximumHitDieRequirement > 0 && monsterHitDice > MaximumHitDieRequirement)
@@ -41,7 +40,7 @@ namespace CharacterGen.Selectors.Objects
             return monsterHitDice >= MinimumHitDieRequirement;
         }
 
-        private Boolean MinimumStatMet(Dictionary<String, Stat> stats)
+        private bool MinimumStatMet(Dictionary<string, Stat> stats)
         {
             if (MinimumStats.Any() == false)
                 return true;

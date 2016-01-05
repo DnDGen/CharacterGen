@@ -2,21 +2,21 @@
 {
     public static class GroupConstants
     {
-        public const string AddMonsterHitDiceToStrength = "Add Monster Hit Dice to Strength";
+        public const string AddMonsterHitDiceToPower = "Add Monster Hit Dice to Power";
         public const string Additional = "Additional";
         public const string All = "All";
-        public const string ArmorCheckPenalty = "ArmorCheckPenalty";
+        public const string ArmorCheckPenalty = "Armor Check Penalty";
         public const string AverageBaseAttack = "Average Base Attack";
-        public const string CharacterClasses = "CharacterClasses";
+        public const string CharacterClasses = "Character Classes";
         public const string Deflection = "Deflection";
         public const string DodgeBonus = "Dodge Bonus";
         public const string FavoredEnemies = "Favored Enemies";
-        public const string FighterBonusFeats = "FighterBonusFeats";
+        public const string FighterBonusFeats = "Fighter Bonus Feats";
         public const string Genetic = "Genetic";
         public const string GoodBaseAttack = "Good Base Attack";
-        public const string HasClassRequirements = "HasClassRequirements";
-        public const string HasSkillRequirements = "HasSkillRequirements";
-        public const string HasStatRequirements = "HasStatRequirements";
+        public const string HasClassRequirements = "Has Class Requirements";
+        public const string HasSkillRequirements = "Has Skill Requirements";
+        public const string HasStatRequirements = "Has Stat Requirements";
         public const string Healers = "Healers";
         public const string Initiative = "Initiative";
         public const string Intuitive = "Intuitive";
@@ -25,7 +25,7 @@
         public const string Mages = "Mages";
         public const string ManualCrossbows = "Manual Crossbows";
         public const string Monsters = "Monsters";
-        public const string NaturalArmor = "NaturalArmor";
+        public const string NaturalArmor = "Natural Armor";
         public const string NeedsAmmunition = "Needs Ammunition";
         public const string NPCs = "NPCs";
         public const string Players = "Players";
@@ -39,11 +39,11 @@
         public const string Spellcasters = "Spellcasters";
         public const string Standard = "Standard";
         public const string Stealth = "Stealth";
-        public const string TakenMultipleTimes = "TakenMultipleTimes";
+        public const string TakenMultipleTimes = "Taken Multiple Times";
         public const string Trained = "Trained";
         public const string TwoHanded = "Two-Handed";
         public const string Undead = "Undead";
         public const string Warriors = "Warriors";
-        public const string WizardBonusFeats = "WizardBonusFeats";
+        public const string WizardBonusFeats = "Wizard Bonus Feats";
     }
 }

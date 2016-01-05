@@ -3,7 +3,6 @@ using CharacterGen.Common.Abilities.Skills;
 using CharacterGen.Common.Abilities.Stats;
 using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Tables;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using TreasureGen.Common.Items;
@@ -12,28 +11,28 @@ namespace CharacterGen.Selectors.Objects
 {
     public class AdditionalFeatSelection
     {
-        public String Feat { get; set; }
+        public string Feat { get; set; }
         public Frequency Frequency { get; set; }
-        public Int32 Strength { get; set; }
+        public int Power { get; set; }
         public IEnumerable<RequiredFeat> RequiredFeats { get; set; }
-        public Int32 RequiredBaseAttack { get; set; }
-        public Dictionary<String, Int32> RequiredStats { get; set; }
-        public Dictionary<String, Int32> RequiredSkillRanks { get; set; }
-        public Dictionary<String, Int32> RequiredCharacterClasses { get; set; }
-        public String FocusType { get; set; }
+        public int RequiredBaseAttack { get; set; }
+        public Dictionary<string, int> RequiredStats { get; set; }
+        public Dictionary<string, int> RequiredSkillRanks { get; set; }
+        public Dictionary<string, int> RequiredCharacterClasses { get; set; }
+        public string FocusType { get; set; }
 
         public AdditionalFeatSelection()
         {
-            Feat = String.Empty;
+            Feat = string.Empty;
             RequiredFeats = Enumerable.Empty<RequiredFeat>();
-            RequiredStats = new Dictionary<String, Int32>();
-            RequiredSkillRanks = new Dictionary<String, Int32>();
-            RequiredCharacterClasses = new Dictionary<String, Int32>();
-            FocusType = String.Empty;
+            RequiredStats = new Dictionary<string, int>();
+            RequiredSkillRanks = new Dictionary<string, int>();
+            RequiredCharacterClasses = new Dictionary<string, int>();
+            FocusType = string.Empty;
             Frequency = new Frequency();
         }
 
-        public Boolean ImmutableRequirementsMet(Int32 baseAttack, Dictionary<String, Stat> stats, Dictionary<String, Skill> skills, CharacterClass characterClass)
+        public bool ImmutableRequirementsMet(int baseAttack, Dictionary<string, Stat> stats, Dictionary<string, Skill> skills, CharacterClass characterClass)
         {
             foreach (var stat in RequiredStats)
                 if (stats[stat.Key].Value < stat.Value)
@@ -52,7 +51,7 @@ namespace CharacterGen.Selectors.Objects
             return requiredSkills.Any(s => skills[s].EffectiveRanks >= RequiredSkillRanks[s]);
         }
 
-        public Boolean MutableRequirementsMet(IEnumerable<Feat> feats)
+        public bool MutableRequirementsMet(IEnumerable<Feat> feats)
         {
             var proficiencyRequirement = RequiredFeats.FirstOrDefault(f => f.Feat == ItemTypeConstants.Weapon + GroupConstants.Proficiency);
             var requirementsWithoutProficiency = RequiredFeats.Except(new[] { proficiencyRequirement });

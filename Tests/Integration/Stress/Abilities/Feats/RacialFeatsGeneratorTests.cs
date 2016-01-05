@@ -43,7 +43,7 @@ namespace CharacterGen.Tests.Integration.Stress.Abilities.Feats
             {
                 Assert.That(feat.Name, Is.Not.Empty);
                 Assert.That(feat.Foci, Is.Not.Null, feat.Name);
-                Assert.That(feat.Strength, Is.Not.Negative, feat.Name);
+                Assert.That(feat.Power, Is.Not.Negative, feat.Name);
                 Assert.That(feat.Frequency.Quantity, Is.Not.Negative, feat.Name);
                 Assert.That(feat.Frequency.TimePeriod, Is.EqualTo(FeatConstants.Frequencies.Constant)
                     .Or.EqualTo(FeatConstants.Frequencies.AtWill)

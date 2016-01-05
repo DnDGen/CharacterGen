@@ -45,7 +45,7 @@
     <item>Ride</item>
   </object>
   <object>
-    <name>ArmorCheckPenalty</name>
+    <name>Armor Check Penalty</name>
     <item>Balance</item>
     <item>Climb</item>
     <item>Escape Artist</item>

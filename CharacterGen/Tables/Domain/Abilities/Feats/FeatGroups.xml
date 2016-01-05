@@ -23,7 +23,7 @@
         <item>Simple Weapon Proficiency</item>
     </object>
   <object>
-    <name>Add Monster Hit Dice to Strength</name>
+    <name>Add Monster Hit Dice to Power</name>
     <item>Spell Resistance</item>
   </object>
     <object>
@@ -475,7 +475,7 @@
         <item>Tower Shield Proficiency</item>
     </object>
   <object>
-    <name>FighterBonusFeats</name>
+    <name>Fighter Bonus Feats</name>
     <item>Blind-Fight</item>
     <item>Combat Expertise</item>
     <item>Improved Disarm</item>
@@ -694,7 +694,7 @@
         <item>Orc Blood</item>
     </object>
     <object>
-        <name>HasClassRequirements</name>
+        <name>Has Class Requirements</name>
         <item>Crippling Strike</item>
         <item>Defensive Roll</item>
         <item>Greater Weapon Focus</item>
@@ -724,7 +724,7 @@
       <item>Spell Penetration</item>
     </object>
     <object>
-        <name>HasSkillRequirements</name>
+        <name>Has Skill Requirements</name>
         <item>Mounted Archery</item>
         <item>Mounted Combat</item>
         <item>Ride-By Attack</item>
@@ -748,7 +748,7 @@
       <item>Stealthy</item>
     </object>
     <object>
-        <name>HasStatRequirements</name>
+        <name>Has Stat Requirements</name>
         <item>Power Attack</item>
         <item>Combat Expertise</item>
         <item>Deflect Arrows</item>
@@ -1240,7 +1240,7 @@
         <item>Skill BonusListen</item>
     </object>
     <object>
-        <name>TakenMultipleTimes</name>
+        <name>Taken Multiple Times</name>
         <item>Skill Mastery</item>
         <item>Spell Mastery</item>
         <item>Toughness</item>
@@ -1478,7 +1478,7 @@
         <item>Simple Weapon ProficiencyQuarterstaff</item>
     </object>
   <object>
-    <name>WizardBonusFeats</name>
+    <name>Wizard Bonus Feats</name>
     <item>Scribe Scroll</item>
     <item>Enlarge Spell</item>
     <item>Spell Mastery</item>

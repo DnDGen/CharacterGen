@@ -572,7 +572,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             var firstFeat = feats.First();
 
             Assert.That(firstFeat.Name, Is.EqualTo(FeatConstants.SpellMastery));
-            Assert.That(firstFeat.Strength, Is.EqualTo(stats[StatConstants.Intelligence].Bonus));
+            Assert.That(firstFeat.Power, Is.EqualTo(stats[StatConstants.Intelligence].Bonus));
             Assert.That(feats.Count(), Is.EqualTo(1));
         }
 
@@ -671,7 +671,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         {
             AddFeatSelections(1);
             additionalFeatSelections[0].Feat = FeatConstants.SkillMastery;
-            additionalFeatSelections[0].Strength = 2;
+            additionalFeatSelections[0].Power = 2;
             additionalFeatSelections[0].FocusType = GroupConstants.Skills;
             stats[StatConstants.Intelligence].Value = 12;
 
@@ -682,7 +682,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             var onlyFeat = feats.Single();
 
             Assert.That(onlyFeat.Name, Is.EqualTo(FeatConstants.SkillMastery));
-            Assert.That(onlyFeat.Strength, Is.EqualTo(2));
+            Assert.That(onlyFeat.Power, Is.EqualTo(2));
             Assert.That(onlyFeat.Foci, Contains.Item("skill 1"));
             Assert.That(onlyFeat.Foci, Contains.Item("skill 2"));
             Assert.That(onlyFeat.Foci, Contains.Item("skill 3"));
@@ -695,7 +695,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         {
             AddFeatSelections(1);
             additionalFeatSelections[0].Feat = FeatConstants.SkillMastery;
-            additionalFeatSelections[0].Strength = 1;
+            additionalFeatSelections[0].Power = 1;
             additionalFeatSelections[0].FocusType = GroupConstants.Skills;
             stats[StatConstants.Intelligence].Value = 12;
 
@@ -708,7 +708,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             var onlyFeat = feats.Single();
 
             Assert.That(onlyFeat.Name, Is.EqualTo(FeatConstants.SkillMastery));
-            Assert.That(onlyFeat.Strength, Is.EqualTo(1));
+            Assert.That(onlyFeat.Power, Is.EqualTo(1));
             Assert.That(onlyFeat.Foci, Contains.Item("skill 1"));
             Assert.That(onlyFeat.Foci, Contains.Item("skill 2"));
             Assert.That(onlyFeat.Foci.Count(), Is.EqualTo(2));
@@ -719,7 +719,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         {
             AddFeatSelections(1);
             additionalFeatSelections[0].Feat = FeatConstants.SkillMastery;
-            additionalFeatSelections[0].Strength = 1;
+            additionalFeatSelections[0].Power = 1;
             additionalFeatSelections[0].FocusType = GroupConstants.Skills;
             stats[StatConstants.Intelligence].Value = 10;
             characterClass.Level = 3;
@@ -736,7 +736,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             var onlyFeat = feats.Single();
 
             Assert.That(onlyFeat.Name, Is.EqualTo(FeatConstants.SkillMastery));
-            Assert.That(onlyFeat.Strength, Is.EqualTo(1));
+            Assert.That(onlyFeat.Power, Is.EqualTo(1));
             Assert.That(onlyFeat.Foci, Contains.Item("skill 1"));
             Assert.That(onlyFeat.Foci, Contains.Item("skill 2"));
             Assert.That(onlyFeat.Foci.Count(), Is.EqualTo(2));
@@ -747,7 +747,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         {
             AddFeatSelections(1);
             additionalFeatSelections[0].Feat = FeatConstants.SkillMastery;
-            additionalFeatSelections[0].Strength = 1;
+            additionalFeatSelections[0].Power = 1;
             additionalFeatSelections[0].FocusType = GroupConstants.Skills;
             stats[StatConstants.Intelligence].Value = 10;
             characterClass.Level = 3;
@@ -765,7 +765,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
 
             Assert.That(onlyFeat.Name, Is.EqualTo(FeatConstants.SkillMastery));
             Assert.That(onlyFeat.Foci.Single(), Is.EqualTo("skill 1"));
-            Assert.That(onlyFeat.Strength, Is.EqualTo(1));
+            Assert.That(onlyFeat.Power, Is.EqualTo(1));
         }
 
         [Test]
@@ -773,7 +773,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         {
             AddFeatSelections(1);
             additionalFeatSelections[0].Feat = FeatConstants.SkillMastery;
-            additionalFeatSelections[0].Strength = 1;
+            additionalFeatSelections[0].Power = 1;
             additionalFeatSelections[0].FocusType = GroupConstants.Skills;
             stats[StatConstants.Intelligence].Value = 10;
 
@@ -792,7 +792,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         {
             AddFeatSelections(2);
             additionalFeatSelections[0].Feat = FeatConstants.SkillMastery;
-            additionalFeatSelections[0].Strength = 1;
+            additionalFeatSelections[0].Power = 1;
             additionalFeatSelections[0].FocusType = GroupConstants.Skills;
             stats[StatConstants.Intelligence].Value = 10;
 
@@ -852,7 +852,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             selection.FocusType = "focus type";
             selection.Frequency.Quantity = 9266;
             selection.Frequency.TimePeriod = "frequency time period";
-            selection.Strength = 12345;
+            selection.Power = 12345;
 
             additionalFeatSelections.Add(selection);
 
@@ -865,7 +865,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             Assert.That(feat.Frequency.Quantity, Is.EqualTo(9266));
             Assert.That(feat.Frequency.TimePeriod, Is.EqualTo("frequency time period"));
             Assert.That(feat.Name, Is.EqualTo("additional feat"));
-            Assert.That(feat.Strength, Is.EqualTo(12345));
+            Assert.That(feat.Power, Is.EqualTo(12345));
         }
     }
 }

@@ -30,11 +30,11 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
         {
             var baseRacialFeatSelections = featsSelector.SelectRacial(race.BaseRace);
             var metaracialFeatSelections = featsSelector.SelectRacial(race.Metarace);
-            var featToIncreaseStrength = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.AddMonsterHitDiceToStrength);
+            var featToIncreasePower = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.AddMonsterHitDiceToPower);
 
             foreach (var selection in metaracialFeatSelections)
-                if (featToIncreaseStrength.Contains(selection.Feat))
-                    selection.Strength += GetMonsterHitDice(race.BaseRace);
+                if (featToIncreasePower.Contains(selection.Feat))
+                    selection.Power += GetMonsterHitDice(race.BaseRace);
 
             var metaraceSpeciesFeatSelections = featsSelector.SelectRacial(race.MetaraceSpecies);
             var allRacialFeatSelections = baseRacialFeatSelections.Union(metaracialFeatSelections).Union(metaraceSpeciesFeatSelections);
@@ -53,7 +53,7 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
                     feat.Foci = feat.Foci.Union(new[] { focus });
 
                 feat.Frequency = racialFeatSelection.Frequency;
-                feat.Strength = racialFeatSelection.Strength;
+                feat.Power = racialFeatSelection.Power;
 
                 feats.Add(feat);
             }

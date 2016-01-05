@@ -28,7 +28,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Objects
         public void RacialFeatSelectionInitialization()
         {
             Assert.That(selection.Feat, Is.Empty);
-            Assert.That(selection.Strength, Is.EqualTo(0));
+            Assert.That(selection.Power, Is.EqualTo(0));
             Assert.That(selection.MinimumHitDieRequirement, Is.EqualTo(0));
             Assert.That(selection.SizeRequirement, Is.Empty);
             Assert.That(selection.FocusType, Is.Empty);

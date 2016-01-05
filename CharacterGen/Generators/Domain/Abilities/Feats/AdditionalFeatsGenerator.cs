@@ -107,10 +107,10 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
                 {
                     feat.Name = featSelection.Feat;
                     feat.Frequency = featSelection.Frequency;
-                    feat.Strength = featSelection.Strength;
+                    feat.Power = featSelection.Power;
 
                     if (featSelection.Feat == FeatConstants.SpellMastery)
-                        feat.Strength = stats[StatConstants.Intelligence].Bonus;
+                        feat.Power = stats[StatConstants.Intelligence].Bonus;
 
                     feats.Add(feat);
                 }
@@ -123,7 +123,7 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
 
                 var featFociQuantity = 0;
                 if (featSelection.Feat == FeatConstants.SkillMastery)
-                    featFociQuantity = stats[StatConstants.Intelligence].Bonus + featSelection.Strength - 1;
+                    featFociQuantity = stats[StatConstants.Intelligence].Bonus + featSelection.Power - 1;
 
                 while (featFociQuantity-- > 0 && preliminaryFocus != FeatConstants.Foci.All && String.IsNullOrEmpty(preliminaryFocus) == false)
                 {
@@ -138,7 +138,7 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
         private Boolean FeatsMatch(Feat feat, AdditionalFeatSelection additionalFeatSelection)
         {
             return feat.Frequency.TimePeriod == String.Empty && feat.Name == additionalFeatSelection.Feat
-                   && feat.Strength == additionalFeatSelection.Strength
+                   && feat.Power == additionalFeatSelection.Power
                    && feat.Foci.Any() && String.IsNullOrEmpty(additionalFeatSelection.FocusType) == false;
         }
 

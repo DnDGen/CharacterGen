@@ -52,7 +52,7 @@ namespace CharacterGen.Generators.Domain.Combats
         private int GetBonus(Feat feat, string savingThrow)
         {
             if (feat.Foci.Contains(FeatConstants.Foci.All) || feat.Foci.Contains(savingThrow))
-                return feat.Strength;
+                return feat.Power;
 
             return 0;
         }
@@ -84,7 +84,7 @@ namespace CharacterGen.Generators.Domain.Combats
             var saveFeatNames = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, savingThrow);
             var saveFeats = feats.Where(f => saveFeatNames.Contains(f.Name));
 
-            return saveFeats.Sum(f => f.Strength);
+            return saveFeats.Sum(f => f.Power);
         }
     }
 }

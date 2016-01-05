@@ -33,7 +33,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Objects
             Assert.That(selection.Frequency, Is.Not.Null);
             Assert.That(selection.MinimumLevel, Is.EqualTo(0));
             Assert.That(selection.RequiredFeats, Is.Empty);
-            Assert.That(selection.Strength, Is.EqualTo(0));
+            Assert.That(selection.Power, Is.EqualTo(0));
             Assert.That(selection.MaximumLevel, Is.EqualTo(0));
             Assert.That(selection.FrequencyQuantityStat, Is.Empty);
             Assert.That(selection.SizeRequirement, Is.Empty);

@@ -140,7 +140,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
                 GroupConstants.SavingThrows,
                 GroupConstants.Initiative,
                 AttributeConstants.Shield + GroupConstants.Proficiency,
-                GroupConstants.AddMonsterHitDiceToStrength,
+                GroupConstants.AddMonsterHitDiceToPower,
                 FeatConstants.AttackBonus,
                 CharacterClassConstants.Adept,
                 CharacterClassConstants.Aristocrat,
@@ -155,7 +155,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
         [TestCase("")]
         [TestCase(FeatConstants.AttackBonus,
             FeatConstants.AttackBonus)]
-        [TestCase(GroupConstants.AddMonsterHitDiceToStrength,
+        [TestCase(GroupConstants.AddMonsterHitDiceToPower,
             FeatConstants.SpellResistance)]
         [TestCase(GroupConstants.HasSkillRequirements,
             FeatConstants.MountedArchery,

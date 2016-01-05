@@ -81,7 +81,7 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
                 feat.Foci = feat.Foci.Union(new[] { focus });
 
             feat.Frequency = selection.Frequency;
-            feat.Strength = selection.Strength;
+            feat.Power = selection.Power;
 
             if (string.IsNullOrEmpty(selection.FrequencyQuantityStat) == false)
                 feat.Frequency.Quantity += stats[selection.FrequencyQuantityStat].Bonus;
@@ -101,7 +101,7 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
             while (timesToImprove-- > 0)
             {
                 var feat = collectionsSelector.SelectRandomFrom(favoredEnemyFeats);
-                feat.Strength += 2;
+                feat.Power += 2;
             }
 
             return classFeats;

@@ -64,7 +64,7 @@ namespace CharacterGen.Generators.Domain.Abilities
                         ability.Skills[skill].CircumstantialBonus |= circumstantial;
 
                         if (circumstantial == false)
-                            ability.Skills[skill].Bonus += feat.Strength;
+                            ability.Skills[skill].Bonus += feat.Power;
                     }
                 }
                 else
@@ -73,7 +73,7 @@ namespace CharacterGen.Generators.Domain.Abilities
 
                     foreach (var skill in skillsToReceiveBonus)
                         if (ability.Skills.ContainsKey(skill))
-                            ability.Skills[skill].Bonus += feat.Strength;
+                            ability.Skills[skill].Bonus += feat.Power;
                 }
             }
 

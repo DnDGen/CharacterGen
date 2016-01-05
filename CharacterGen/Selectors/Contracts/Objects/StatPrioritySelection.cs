@@ -1,16 +1,14 @@
-﻿using System;
-
-namespace CharacterGen.Selectors.Objects
+﻿namespace CharacterGen.Selectors.Objects
 {
     public class StatPrioritySelection
     {
-        public String First { get; set; }
-        public String Second { get; set; }
+        public string First { get; set; }
+        public string Second { get; set; }
 
         public StatPrioritySelection()
         {
-            First = String.Empty;
-            Second = String.Empty;
+            First = string.Empty;
+            Second = string.Empty;
         }
     }
 }

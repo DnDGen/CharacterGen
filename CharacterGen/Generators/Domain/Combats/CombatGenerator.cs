@@ -115,7 +115,7 @@ namespace CharacterGen.Generators.Domain.Combats
             if (attackBonusFeats.Any() == false)
                 return 0;
 
-            return attackBonusFeats.Sum(f => f.Strength);
+            return attackBonusFeats.Sum(f => f.Power);
         }
 
         private bool IsAttackBonusCircumstantial(IEnumerable<Feat> feats)
@@ -144,7 +144,7 @@ namespace CharacterGen.Generators.Domain.Combats
         {
             var initiativeFeatNames = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.Initiative);
             var initiativeFeats = feats.Where(f => initiativeFeatNames.Contains(f.Name));
-            var initiativeFeatBonus = initiativeFeats.Sum(f => f.Strength);
+            var initiativeFeatBonus = initiativeFeats.Sum(f => f.Power);
 
             return initiativeFeatBonus + dexterityBonus;
         }

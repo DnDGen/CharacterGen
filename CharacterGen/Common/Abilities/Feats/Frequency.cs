@@ -1,15 +1,13 @@
-﻿using System;
-
-namespace CharacterGen.Common.Abilities.Feats
+﻿namespace CharacterGen.Common.Abilities.Feats
 {
     public class Frequency
     {
-        public Int32 Quantity { get; set; }
-        public String TimePeriod { get; set; }
+        public int Quantity { get; set; }
+        public string TimePeriod { get; set; }
 
         public Frequency()
         {
-            TimePeriod = String.Empty;
+            TimePeriod = string.Empty;
         }
     }
 }

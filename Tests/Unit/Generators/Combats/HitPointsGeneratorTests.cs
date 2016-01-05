@@ -230,7 +230,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         [Test]
         public void ToughnessIncreassHitPoints()
         {
-            feats.Add(new Feat { Name = FeatConstants.Toughness, Strength = 3 });
+            feats.Add(new Feat { Name = FeatConstants.Toughness, Power = 3 });
 
             var hitPoints = hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race, feats);
             Assert.That(hitPoints, Is.EqualTo(3));
@@ -239,8 +239,8 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         [Test]
         public void ToughnessIncreassHitPointsMultipleTimes()
         {
-            feats.Add(new Feat { Name = FeatConstants.Toughness, Strength = 3 });
-            feats.Add(new Feat { Name = FeatConstants.Toughness, Strength = 3 });
+            feats.Add(new Feat { Name = FeatConstants.Toughness, Power = 3 });
+            feats.Add(new Feat { Name = FeatConstants.Toughness, Power = 3 });
 
             var hitPoints = hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race, feats);
             Assert.That(hitPoints, Is.EqualTo(6));

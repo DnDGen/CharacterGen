@@ -67,7 +67,7 @@ namespace CharacterGen.Generators.Domain.Combats
             if (featsWithDeflectionBonuses.Any() == false)
                 return 0;
 
-            return featsWithDeflectionBonuses.Sum(i => i.Strength);
+            return featsWithDeflectionBonuses.Sum(i => i.Power);
         }
 
         private int GetArmorBonuses(Equipment equipment)
@@ -136,7 +136,7 @@ namespace CharacterGen.Generators.Domain.Combats
             var itemNaturalArmorBonuses = itemsWithNaturalArmorBonuses.Select(i => i.Magic.Bonus);
 
             var featsWithNaturalArmorBonuses = feats.Where(f => thingsThatGrantNaturalArmorBonuses.Contains(f.Name) && f.Foci.Any() == false);
-            var featNaturalArmorBonuses = featsWithNaturalArmorBonuses.Select(f => f.Strength);
+            var featNaturalArmorBonuses = featsWithNaturalArmorBonuses.Select(f => f.Power);
             var featNaturalArmorBonus = featNaturalArmorBonuses.Sum();
 
             if (itemNaturalArmorBonuses.Any() == false)

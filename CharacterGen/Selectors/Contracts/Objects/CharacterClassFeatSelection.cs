@@ -12,7 +12,7 @@ namespace CharacterGen.Selectors.Objects
         public string FocusType { get; set; }
         public int MinimumLevel { get; set; }
         public int MaximumLevel { get; set; }
-        public int Strength { get; set; }
+        public int Power { get; set; }
         public Frequency Frequency { get; set; }
         public IEnumerable<RequiredFeat> RequiredFeats { get; set; }
         public string FrequencyQuantityStat { get; set; }

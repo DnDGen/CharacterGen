@@ -30,7 +30,7 @@ namespace CharacterGen.Selectors.Domain
                 var racialFeatSelection = new RacialFeatSelection();
                 racialFeatSelection.Feat = featData[DataIndexConstants.RacialFeatData.FeatNameIndex];
                 racialFeatSelection.SizeRequirement = featData[DataIndexConstants.RacialFeatData.SizeRequirementIndex];
-                racialFeatSelection.Strength = Convert.ToInt32(featData[DataIndexConstants.RacialFeatData.StrengthIndex]);
+                racialFeatSelection.Power = Convert.ToInt32(featData[DataIndexConstants.RacialFeatData.PowerIndex]);
                 racialFeatSelection.MinimumHitDieRequirement = Convert.ToInt32(featData[DataIndexConstants.RacialFeatData.MinimumHitDiceRequirementIndex]);
                 racialFeatSelection.FocusType = featData[DataIndexConstants.RacialFeatData.FocusIndex];
                 racialFeatSelection.Frequency.Quantity = Convert.ToInt32(featData[DataIndexConstants.RacialFeatData.FrequencyQuantityIndex]);
@@ -74,7 +74,7 @@ namespace CharacterGen.Selectors.Domain
             additionalFeatSelection.FocusType = featData[DataIndexConstants.AdditionalFeatData.FocusTypeIndex];
             additionalFeatSelection.Frequency.Quantity = Convert.ToInt32(featData[DataIndexConstants.AdditionalFeatData.FrequencyQuantityIndex]);
             additionalFeatSelection.Frequency.TimePeriod = featData[DataIndexConstants.AdditionalFeatData.FrequencyTimePeriodIndex];
-            additionalFeatSelection.Strength = Convert.ToInt32(featData[DataIndexConstants.AdditionalFeatData.StrengthIndex]);
+            additionalFeatSelection.Power = Convert.ToInt32(featData[DataIndexConstants.AdditionalFeatData.PowerIndex]);
             additionalFeatSelection.RequiredFeats = GetRequiredFeats(additionalFeatSelection.Feat);
 
             var featsWithClassRequirements = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.HasClassRequirements);
@@ -117,7 +117,7 @@ namespace CharacterGen.Selectors.Domain
                 classFeatSelection.Frequency.Quantity = Convert.ToInt32(featData[DataIndexConstants.CharacterClassFeatData.FrequencyQuantityIndex]);
                 classFeatSelection.Frequency.TimePeriod = featData[DataIndexConstants.CharacterClassFeatData.FrequencyTimePeriodIndex];
                 classFeatSelection.MinimumLevel = Convert.ToInt32(featData[DataIndexConstants.CharacterClassFeatData.MinimumLevelRequirementIndex]);
-                classFeatSelection.Strength = Convert.ToInt32(featData[DataIndexConstants.CharacterClassFeatData.StrengthIndex]);
+                classFeatSelection.Power = Convert.ToInt32(featData[DataIndexConstants.CharacterClassFeatData.PowerIndex]);
                 classFeatSelection.MaximumLevel = Convert.ToInt32(featData[DataIndexConstants.CharacterClassFeatData.MaximumLevelRequirementIndex]);
                 classFeatSelection.FrequencyQuantityStat = featData[DataIndexConstants.CharacterClassFeatData.FrequencyQuantityStatIndex];
                 classFeatSelection.RequiredFeats = GetRequiredFeats(classFeat);

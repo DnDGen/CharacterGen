@@ -47,7 +47,7 @@ namespace CharacterGen.Tests.Unit.Selectors
             Assert.That(first.Feat, Is.EqualTo("racialFeat1"));
             Assert.That(first.SizeRequirement, Is.EqualTo("ginormous"));
             Assert.That(first.MinimumHitDieRequirement, Is.EqualTo(9266));
-            Assert.That(first.Strength, Is.EqualTo(0));
+            Assert.That(first.Power, Is.EqualTo(0));
             Assert.That(first.FocusType, Is.Empty);
             Assert.That(first.Frequency.Quantity, Is.EqualTo(0));
             Assert.That(first.Frequency.TimePeriod, Is.EqualTo("never"));
@@ -57,7 +57,7 @@ namespace CharacterGen.Tests.Unit.Selectors
             Assert.That(last.Feat, Is.EqualTo("racialFeat2"));
             Assert.That(last.SizeRequirement, Is.Empty);
             Assert.That(last.MinimumHitDieRequirement, Is.EqualTo(0));
-            Assert.That(last.Strength, Is.EqualTo(90210));
+            Assert.That(last.Power, Is.EqualTo(90210));
             Assert.That(last.FocusType, Is.EqualTo("focusness"));
             Assert.That(last.Frequency.Quantity, Is.EqualTo(42));
             Assert.That(last.Frequency.TimePeriod, Is.EqualTo("fortnight"));
@@ -87,7 +87,7 @@ namespace CharacterGen.Tests.Unit.Selectors
             Assert.That(first.Feat, Is.EqualTo("racialFeat1"));
             Assert.That(first.SizeRequirement, Is.EqualTo("ginormous"));
             Assert.That(first.MinimumHitDieRequirement, Is.EqualTo(9266));
-            Assert.That(first.Strength, Is.EqualTo(0));
+            Assert.That(first.Power, Is.EqualTo(0));
             Assert.That(first.FocusType, Is.Empty);
             Assert.That(first.Frequency.Quantity, Is.EqualTo(0));
             Assert.That(first.Frequency.TimePeriod, Is.EqualTo("never"));
@@ -97,7 +97,7 @@ namespace CharacterGen.Tests.Unit.Selectors
             Assert.That(last.Feat, Is.EqualTo("racialFeat1"));
             Assert.That(last.SizeRequirement, Is.Empty);
             Assert.That(last.MinimumHitDieRequirement, Is.EqualTo(0));
-            Assert.That(last.Strength, Is.EqualTo(90210));
+            Assert.That(last.Power, Is.EqualTo(90210));
             Assert.That(last.FocusType, Is.EqualTo("focusness"));
             Assert.That(last.Frequency.Quantity, Is.EqualTo(42));
             Assert.That(last.Frequency.TimePeriod, Is.EqualTo("fortnight"));
@@ -130,7 +130,7 @@ namespace CharacterGen.Tests.Unit.Selectors
             Assert.That(first.Feat, Is.EqualTo("classFeat1"));
             Assert.That(first.FocusType, Is.EqualTo("focus type A"));
             Assert.That(first.MinimumLevel, Is.EqualTo(1));
-            Assert.That(first.Strength, Is.EqualTo(0));
+            Assert.That(first.Power, Is.EqualTo(0));
             Assert.That(first.Frequency.Quantity, Is.EqualTo(3));
             Assert.That(first.Frequency.TimePeriod, Is.EqualTo("Daily"));
             Assert.That(first.FrequencyQuantityStat, Is.EqualTo("stat"));
@@ -149,7 +149,7 @@ namespace CharacterGen.Tests.Unit.Selectors
             Assert.That(last.Feat, Is.EqualTo("classFeat2"));
             Assert.That(last.FocusType, Is.Empty);
             Assert.That(last.MinimumLevel, Is.EqualTo(5));
-            Assert.That(last.Strength, Is.EqualTo(9266));
+            Assert.That(last.Power, Is.EqualTo(9266));
             Assert.That(last.Frequency.Quantity, Is.EqualTo(0));
             Assert.That(last.Frequency.TimePeriod, Is.EqualTo("never"));
             Assert.That(last.FrequencyQuantityStat, Is.Empty);
@@ -182,7 +182,7 @@ namespace CharacterGen.Tests.Unit.Selectors
             Assert.That(first.Feat, Is.EqualTo("classFeat1"));
             Assert.That(first.FocusType, Is.EqualTo("focus type A"));
             Assert.That(first.MinimumLevel, Is.EqualTo(1));
-            Assert.That(first.Strength, Is.EqualTo(0));
+            Assert.That(first.Power, Is.EqualTo(0));
             Assert.That(first.Frequency.Quantity, Is.EqualTo(3));
             Assert.That(first.Frequency.TimePeriod, Is.EqualTo("Daily"));
             Assert.That(first.FrequencyQuantityStat, Is.EqualTo("stat"));
@@ -201,7 +201,7 @@ namespace CharacterGen.Tests.Unit.Selectors
             Assert.That(last.Feat, Is.EqualTo("classFeat1"));
             Assert.That(last.FocusType, Is.Empty);
             Assert.That(last.MinimumLevel, Is.EqualTo(5));
-            Assert.That(last.Strength, Is.EqualTo(9266));
+            Assert.That(last.Power, Is.EqualTo(9266));
             Assert.That(last.Frequency.Quantity, Is.EqualTo(0));
             Assert.That(last.Frequency.TimePeriod, Is.EqualTo("never"));
             Assert.That(last.FrequencyQuantityStat, Is.Empty);
@@ -255,7 +255,7 @@ namespace CharacterGen.Tests.Unit.Selectors
             var last = additionalFeats.Last();
 
             Assert.That(first.Feat, Is.EqualTo("additional feat 1"));
-            Assert.That(first.Strength, Is.EqualTo(42));
+            Assert.That(first.Power, Is.EqualTo(42));
             Assert.That(first.Frequency.Quantity, Is.EqualTo(0));
             Assert.That(first.Frequency.TimePeriod, Is.Empty);
             Assert.That(first.RequiredBaseAttack, Is.EqualTo(9266));
@@ -276,7 +276,7 @@ namespace CharacterGen.Tests.Unit.Selectors
             Assert.That(first.FocusType, Is.Empty);
 
             Assert.That(last.Feat, Is.EqualTo("additional feat 2"));
-            Assert.That(last.Strength, Is.EqualTo(0));
+            Assert.That(last.Power, Is.EqualTo(0));
             Assert.That(last.Frequency.Quantity, Is.EqualTo(9266));
             Assert.That(last.Frequency.TimePeriod, Is.EqualTo("occasionally"));
             Assert.That(last.RequiredBaseAttack, Is.EqualTo(0));

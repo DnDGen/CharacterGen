@@ -83,8 +83,8 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
 
                 var removableFeats = featsWithRemovableStrengths.Where(f => f.Name == featToRemove.Name);
 
-                var maxStrength = removableFeats.Max(f => f.Strength);
-                var featToKeep = removableFeats.First(f => f.Strength == maxStrength);
+                var maxPower = removableFeats.Max(f => f.Power);
+                var featToKeep = removableFeats.First(f => f.Power == maxPower);
                 var otherFeats = removableFeats.Except(new[] { featToKeep });
 
                 featsToRemove.AddRange(otherFeats);
@@ -106,19 +106,19 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
 
             var remainingFeats = allFeats.Except(featsToRemove);
             var featsWithCombinableFoci = remainingFeats.Where(f => CanCombineFoci(f, remainingFeats));
-            var combinedFeatNamesAndStrengths = new Dictionary<string, List<int>>();
+            var combinedFeatNamesAndPowers = new Dictionary<string, List<int>>();
 
             foreach (var featToKeep in featsWithCombinableFoci)
             {
-                if (combinedFeatNamesAndStrengths.ContainsKey(featToKeep.Name) == false)
-                    combinedFeatNamesAndStrengths[featToKeep.Name] = new List<int>();
+                if (combinedFeatNamesAndPowers.ContainsKey(featToKeep.Name) == false)
+                    combinedFeatNamesAndPowers[featToKeep.Name] = new List<int>();
 
-                if (combinedFeatNamesAndStrengths[featToKeep.Name].Contains(featToKeep.Strength))
+                if (combinedFeatNamesAndPowers[featToKeep.Name].Contains(featToKeep.Power))
                     continue;
 
-                combinedFeatNamesAndStrengths[featToKeep.Name].Add(featToKeep.Strength);
+                combinedFeatNamesAndPowers[featToKeep.Name].Add(featToKeep.Power);
 
-                var removableFeats = featsWithCombinableFoci.Where(f => f.Name == featToKeep.Name && f.Strength == featToKeep.Strength);
+                var removableFeats = featsWithCombinableFoci.Where(f => f.Name == featToKeep.Name && f.Power == featToKeep.Power);
 
                 foreach (var featToRemove in removableFeats)
                 {
@@ -147,7 +147,7 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
             var count = allFeats.Count(f => f.Name == feat.Name
                                         && f.Foci.Any()
                                         && f.Foci.Contains(FeatConstants.Foci.All) == false
-                                        && f.Strength == feat.Strength
+                                        && f.Power == feat.Power
                                         && f.Frequency.TimePeriod == string.Empty);
 
             return count > 1;
@@ -176,7 +176,7 @@ namespace CharacterGen.Generators.Domain.Abilities.Feats
 
             var count = allFeats.Count(f => f.Name == feat.Name
                                         && f.Foci.Except(feat.Foci).Any() == false
-                                        && f.Strength == feat.Strength
+                                        && f.Power == feat.Power
                                         && FrequenciesCanCombine(f.Frequency, feat.Frequency));
 
             return count > 1;

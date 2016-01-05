@@ -247,11 +247,11 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
 
             feats.Add(new Feat());
             feats[0].Name = "feat 1";
-            feats[0].Strength = 90210;
+            feats[0].Power = 90210;
 
             feats.Add(new Feat());
             feats[1].Name = "feat 2";
-            feats[1].Strength = 600;
+            feats[1].Power = 600;
 
             attackBonusFeats.Add(feats[1].Name);
 
@@ -268,16 +268,16 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
 
             feats.Add(new Feat());
             feats[0].Name = "feat 1";
-            feats[0].Strength = 90210;
+            feats[0].Power = 90210;
 
             feats.Add(new Feat());
             feats[1].Name = "feat 2";
-            feats[1].Strength = 600;
+            feats[1].Power = 600;
 
             feats.Add(new Feat());
             feats[2].Name = "feat 3";
             feats[2].Foci = new[] { "focus" };
-            feats[2].Strength = 42;
+            feats[2].Power = 42;
 
             attackBonusFeats.Add(feats[1].Name);
             attackBonusFeats.Add(feats[2].Name);
@@ -295,16 +295,16 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
 
             feats.Add(new Feat());
             feats[0].Name = "feat 1";
-            feats[0].Strength = 90210;
+            feats[0].Power = 90210;
 
             feats.Add(new Feat());
             feats[1].Name = "feat 2";
             feats[1].Foci = new[] { "focus" };
-            feats[1].Strength = 600;
+            feats[1].Power = 600;
 
             feats.Add(new Feat());
             feats[2].Name = "feat 3";
-            feats[2].Strength = 42;
+            feats[2].Power = 42;
 
             attackBonusFeats.Add(feats[1].Name);
             attackBonusFeats.Add(feats[2].Name);
@@ -406,11 +406,11 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         {
             feats.Add(new Feat());
             feats[0].Name = "feat 1";
-            feats[0].Strength = 90210;
+            feats[0].Power = 90210;
 
             feats.Add(new Feat());
             feats[1].Name = "feat 2";
-            feats[1].Strength = 600;
+            feats[1].Power = 600;
 
             initiativeFeats.Add(feats[1].Name);
 

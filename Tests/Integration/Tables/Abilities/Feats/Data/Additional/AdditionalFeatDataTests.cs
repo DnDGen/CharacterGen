@@ -9,17 +9,17 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Additional
     [TestFixture]
     public class AdditionalFeatDataTests : DataTests
     {
-        protected override String tableName
+        protected override string tableName
         {
             get { return TableNameConstants.Set.Collection.AdditionalFeatData; }
         }
-        protected override void PopulateIndices(IEnumerable<String> collection)
+        protected override void PopulateIndices(IEnumerable<string> collection)
         {
-            indices[DataIndexConstants.AdditionalFeatData.BaseAttackRequirementIndex] = "BaseAttackRequirement";
-            indices[DataIndexConstants.AdditionalFeatData.FocusTypeIndex] = "FocusType";
-            indices[DataIndexConstants.AdditionalFeatData.FrequencyQuantityIndex] = "FrequencyQuantity";
-            indices[DataIndexConstants.AdditionalFeatData.FrequencyTimePeriodIndex] = "FrequencyTimePeriod";
-            indices[DataIndexConstants.AdditionalFeatData.StrengthIndex] = "Strength";
+            indices[DataIndexConstants.AdditionalFeatData.BaseAttackRequirementIndex] = "Base Attack Requirement";
+            indices[DataIndexConstants.AdditionalFeatData.FocusTypeIndex] = "Focus Type";
+            indices[DataIndexConstants.AdditionalFeatData.FrequencyQuantityIndex] = "Frequency Quantity";
+            indices[DataIndexConstants.AdditionalFeatData.FrequencyTimePeriodIndex] = "Frequency Time Period";
+            indices[DataIndexConstants.AdditionalFeatData.PowerIndex] = "Power";
         }
 
         [Test]
@@ -250,19 +250,19 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Additional
         [TestCase(FeatConstants.WeaponSpecialization, 0, FeatConstants.Foci.WeaponsWithUnarmedAndGrapple, 0, "", 2)]
         [TestCase(FeatConstants.WhirlwindAttack, 4, "", 0, "", 0)]
         [TestCase(FeatConstants.WidenSpell, 0, "", 0, "", 0)]
-        public void AdditionalFeatData(String name, Int32 baseAttackRequirement, String focusType, Int32 frequencyQuantity, String frequencyTimePeriod, Int32 strength)
+        public void AdditionalFeatData(string name, int baseAttackRequirement, string focusType, int frequencyQuantity, string frequencyTimePeriod, int power)
         {
-            var data = new List<String>();
+            var data = new List<string>();
             for (var i = 0; i < 5; i++)
-                data.Add(String.Empty);
+                data.Add(string.Empty);
 
             data[DataIndexConstants.AdditionalFeatData.BaseAttackRequirementIndex] = Convert.ToString(baseAttackRequirement);
             data[DataIndexConstants.AdditionalFeatData.FocusTypeIndex] = focusType;
             data[DataIndexConstants.AdditionalFeatData.FrequencyQuantityIndex] = Convert.ToString(frequencyQuantity);
             data[DataIndexConstants.AdditionalFeatData.FrequencyTimePeriodIndex] = frequencyTimePeriod;
-            data[DataIndexConstants.AdditionalFeatData.StrengthIndex] = Convert.ToString(strength);
+            data[DataIndexConstants.AdditionalFeatData.PowerIndex] = Convert.ToString(power);
 
-            base.Data(name, data);
+            Data(name, data);
         }
     }
 }
