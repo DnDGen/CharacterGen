@@ -141,9 +141,9 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial.Meta
             0, 0, 0)]
         [TestCase(FeatConstants.DamageReduction,
             FeatConstants.DamageReduction,
-            "Silver and magic",
-            0,
-            "",
+            "Non-magical non-silver",
+            1,
+            FeatConstants.Frequencies.Hit,
             0,
             "",
             10, 0, 0)]

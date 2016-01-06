@@ -278,10 +278,10 @@
         <name>Damage Reduction1</name>
         <item>Damage Reduction</item>
         <item>7</item>
-        <item></item>
+        <item>All</item>
         <item>1</item>
-        <item>0</item>
-        <item></item>
+        <item>1</item>
+        <item>Hit</item>
         <item>9</item>
         <item></item>
       <item></item>
@@ -291,10 +291,10 @@
         <name>Damage Reduction2</name>
         <item>Damage Reduction</item>
         <item>10</item>
-        <item></item>
+      <item>All</item>
         <item>2</item>
-        <item>0</item>
-        <item></item>
+      <item>1</item>
+      <item>Hit</item>
         <item>12</item>
         <item></item>
       <item></item>
@@ -304,10 +304,10 @@
         <name>Damage Reduction3</name>
         <item>Damage Reduction</item>
         <item>13</item>
-        <item></item>
+      <item>All</item>
         <item>3</item>
-        <item>0</item>
-        <item></item>
+      <item>1</item>
+      <item>Hit</item>
         <item>15</item>
         <item></item>
       <item></item>
@@ -317,10 +317,10 @@
         <name>Damage Reduction4</name>
         <item>Damage Reduction</item>
         <item>16</item>
-        <item></item>
+      <item>All</item>
         <item>4</item>
-        <item>0</item>
-        <item></item>
+      <item>1</item>
+      <item>Hit</item>
         <item>18</item>
       <item></item>
         <item></item>
@@ -330,10 +330,10 @@
         <name>Damage Reduction5</name>
         <item>Damage Reduction</item>
         <item>19</item>
-        <item></item>
+      <item>All</item>
         <item>5</item>
-        <item>0</item>
-        <item></item>
+      <item>1</item>
+      <item>Hit</item>
         <item>0</item>
         <item></item>
       <item></item>

@@ -280,9 +280,9 @@
     <item></item>
     <item>1</item>
     <item>5</item>
-    <item>Magic</item>
-    <item>0</item>
-    <item></item>
+    <item>Non-magical</item>
+    <item>1</item>
+    <item>Hit</item>
     <item>11</item>
     <item></item>
     <item>0</item>
@@ -293,9 +293,9 @@
     <item></item>
     <item>12</item>
     <item>10</item>
-    <item>Magic</item>
-    <item>0</item>
-    <item></item>
+    <item>Non-magical</item>
+    <item>1</item>
+    <item>Hit</item>
     <item>0</item>
     <item></item>
     <item>0</item>

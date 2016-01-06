@@ -257,6 +257,7 @@
             public const string AtWill = "At Will";
             public const string Constant = "Constant";
             public const string Day = "Day";
+            public const string Hit = "Hit";
             public const string Round = "Round";
             public const string Week = "Week";
         }
