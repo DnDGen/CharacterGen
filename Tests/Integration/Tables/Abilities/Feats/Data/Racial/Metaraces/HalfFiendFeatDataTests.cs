@@ -133,7 +133,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial.Meta
             0, 0)]
         [TestCase(FeatConstants.DamageReduction + "11-",
             FeatConstants.DamageReduction,
-            "Non-magical",
+            "Must be magical to overcome",
             1,
             FeatConstants.Frequencies.Hit,
             1,
@@ -142,7 +142,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial.Meta
             11, 0)]
         [TestCase(FeatConstants.DamageReduction + "12+",
             FeatConstants.DamageReduction,
-            "Non-magical",
+            "Must be magical to overcome",
             1,
             FeatConstants.Frequencies.Hit,
             12,

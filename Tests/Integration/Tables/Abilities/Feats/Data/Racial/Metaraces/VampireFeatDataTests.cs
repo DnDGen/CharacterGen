@@ -5,18 +5,17 @@ using CharacterGen.Common.Magics;
 using CharacterGen.Common.Races;
 using CharacterGen.Tables;
 using NUnit.Framework;
-using System;
 
 namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial.Metaraces
 {
     [TestFixture]
     public class VampireFeatDataTests : RacialFeatDataTests
     {
-        protected override String tableName
+        protected override string tableName
         {
             get
             {
-                return String.Format(TableNameConstants.Formattable.Collection.RACEFeatData, RaceConstants.Metaraces.Vampire);
+                return string.Format(TableNameConstants.Formattable.Collection.RACEFeatData, RaceConstants.Metaraces.Vampire);
             }
         }
 
@@ -141,7 +140,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial.Meta
             0, 0, 0)]
         [TestCase(FeatConstants.DamageReduction,
             FeatConstants.DamageReduction,
-            "Non-magical non-silver",
+            "Must be magical and silver to overcome",
             1,
             FeatConstants.Frequencies.Hit,
             0,
@@ -283,9 +282,9 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial.Meta
             0,
             "",
             2, 0, 0)]
-        public override void Data(String name, String feat, String focus, Int32 frequencyQuantity, String frequencyTimePeriod, Int32 minimumHitDiceRequirement, String sizeRequirement, Int32 strength, Int32 maximumHitDiceRequirement, Int32 requiredStatMinimumValue, params String[] minimumStats)
+        public override void Data(string name, string feat, string focus, int frequencyQuantity, string frequencyTimePeriod, int minimumHitDiceRequirement, string sizeRequirement, int power, int maximumHitDiceRequirement, int requiredStatMinimumValue, params string[] minimumStats)
         {
-            base.Data(name, feat, focus, frequencyQuantity, frequencyTimePeriod, minimumHitDiceRequirement, sizeRequirement, strength, maximumHitDiceRequirement, requiredStatMinimumValue, minimumStats);
+            base.Data(name, feat, focus, frequencyQuantity, frequencyTimePeriod, minimumHitDiceRequirement, sizeRequirement, power, maximumHitDiceRequirement, requiredStatMinimumValue, minimumStats);
         }
     }
 }
