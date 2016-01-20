@@ -97,6 +97,119 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         }
 
         [Test]
+        public void ArmorFromItemApplied()
+        {
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.ArmorBonus))
+                .Returns(new[] { "bracers", "other item" });
+
+            var bracers = new Item();
+            bracers.Name = "bracers";
+            bracers.Magic.Bonus = 1;
+
+            var thing = new Item();
+            thing.Name = "thing";
+            thing.Magic.Bonus = -1;
+
+            equipment.Treasure.Items = new[] { bracers, thing };
+
+            AssertArmorClass(11, 11, 10);
+        }
+
+        [Test]
+        public void BestArmorBonusAppliedIfArmor()
+        {
+            armorBonuses["armor"] = 2;
+            equipment.Armor = new Item { Name = "armor" };
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.ArmorBonus))
+                .Returns(new[] { "bracers", "other item" });
+
+            var bracers = new Item();
+            bracers.Name = "bracers";
+            bracers.Magic.Bonus = 1;
+
+            var thing = new Item();
+            thing.Name = "thing";
+            thing.Magic.Bonus = -1;
+
+            equipment.Treasure.Items = new[] { bracers, thing };
+
+            AssertArmorClass(12, 12, 10);
+        }
+
+        [Test]
+        public void BestArmorBonusAppliedIfArmorWithBonus()
+        {
+            armorBonuses["armor"] = 1;
+            equipment.Armor = new Item { Name = "armor" };
+            equipment.Armor.Magic.Bonus = 1;
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.ArmorBonus))
+                .Returns(new[] { "bracers", "other item" });
+
+            var bracers = new Item();
+            bracers.Name = "bracers";
+            bracers.Magic.Bonus = 1;
+
+            var thing = new Item();
+            thing.Name = "thing";
+            thing.Magic.Bonus = -1;
+
+            equipment.Treasure.Items = new[] { bracers, thing };
+
+            AssertArmorClass(12, 12, 10);
+        }
+
+        [Test]
+        public void BestArmorBonusAppliedIfItem()
+        {
+            armorBonuses["armor"] = 1;
+            equipment.Armor = new Item { Name = "armor" };
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.ArmorBonus))
+                .Returns(new[] { "bracers", "other item" });
+
+            var bracers = new Item();
+            bracers.Name = "bracers";
+            bracers.Magic.Bonus = 2;
+
+            var thing = new Item();
+            thing.Name = "thing";
+            thing.Magic.Bonus = -1;
+
+            equipment.Treasure.Items = new[] { bracers, thing };
+
+            AssertArmorClass(12, 12, 10);
+        }
+
+        [Test]
+        public void BestArmorBonusAppliedIfItemAndShield()
+        {
+            armorBonuses["armor"] = 1;
+            equipment.Armor = new Item { Name = "armor" };
+
+            armorBonuses["shield"] = 1;
+            equipment.OffHand = new Item { Name = "shield" };
+            equipment.OffHand.ItemType = ItemTypeConstants.Armor;
+            equipment.OffHand.Attributes = new[] { AttributeConstants.Shield };
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.ArmorBonus))
+                .Returns(new[] { "bracers", "other item" });
+
+            var bracers = new Item();
+            bracers.Name = "bracers";
+            bracers.Magic.Bonus = 2;
+
+            var thing = new Item();
+            thing.Name = "thing";
+            thing.Magic.Bonus = -1;
+
+            equipment.Treasure.Items = new[] { bracers, thing };
+
+            AssertArmorClass(13, 13, 10);
+        }
+
+        [Test]
         public void DexterityBonusApplied()
         {
             adjustedDexterityBonus = 1;
@@ -447,6 +560,46 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         }
 
         [Test]
+        public void CursedArmorWithOppositeEffectLosesToItem()
+        {
+            armorBonuses["armor"] = 1;
+            equipment.Armor = new Item { Name = "armor" };
+            equipment.Armor.Magic.Bonus = 2;
+            equipment.Armor.Magic.Curse = CurseConstants.OppositeEffect;
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.ArmorBonus))
+                .Returns(new[] { "bracers", "other item" });
+
+            var bracers = new Item();
+            bracers.Name = "bracers";
+            bracers.Magic.Bonus = 1;
+
+            equipment.Treasure.Items = new[] { bracers };
+
+            AssertArmorClass(11, 11, 10);
+        }
+
+        [Test]
+        public void CursedArmorWithOppositeEffectWinsAgainstItem()
+        {
+            armorBonuses["armor"] = 3;
+            equipment.Armor = new Item { Name = "armor" };
+            equipment.Armor.Magic.Bonus = 1;
+            equipment.Armor.Magic.Curse = CurseConstants.OppositeEffect;
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.ArmorBonus))
+                .Returns(new[] { "bracers", "other item" });
+
+            var bracers = new Item();
+            bracers.Name = "bracers";
+            bracers.Magic.Bonus = 1;
+
+            equipment.Treasure.Items = new[] { bracers };
+
+            AssertArmorClass(12, 12, 10);
+        }
+
+        [Test]
         public void CursedShieldWithOppositeEffectHasNegativeBonus()
         {
             armorBonuses["shield"] = 3;
@@ -473,12 +626,52 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         }
 
         [Test]
-        public void CursedArmorWithDelusionHasNoonus()
+        public void CursedArmorWithDelusionHasNoBonus()
         {
             armorBonuses["armor"] = 3;
             equipment.Armor = new Item { Name = "armor" };
             equipment.Armor.Magic.Bonus = 1;
             equipment.Armor.Magic.Curse = CurseConstants.Delusion;
+
+            AssertArmorClass(13, 13, 10);
+        }
+
+        [Test]
+        public void CursedArmorWithDelusionLosesToItem()
+        {
+            armorBonuses["armor"] = 1;
+            equipment.Armor = new Item { Name = "armor" };
+            equipment.Armor.Magic.Bonus = 2;
+            equipment.Armor.Magic.Curse = CurseConstants.Delusion;
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.ArmorBonus))
+                .Returns(new[] { "bracers", "other item" });
+
+            var bracers = new Item();
+            bracers.Name = "bracers";
+            bracers.Magic.Bonus = 2;
+
+            equipment.Treasure.Items = new[] { bracers };
+
+            AssertArmorClass(12, 12, 10);
+        }
+
+        [Test]
+        public void CursedArmorWithDelusionWinsAgainstItem()
+        {
+            armorBonuses["armor"] = 3;
+            equipment.Armor = new Item { Name = "armor" };
+            equipment.Armor.Magic.Bonus = 1;
+            equipment.Armor.Magic.Curse = CurseConstants.Delusion;
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.ArmorBonus))
+                .Returns(new[] { "bracers", "other item" });
+
+            var bracers = new Item();
+            bracers.Name = "bracers";
+            bracers.Magic.Bonus = 2;
+
+            equipment.Treasure.Items = new[] { bracers };
 
             AssertArmorClass(13, 13, 10);
         }

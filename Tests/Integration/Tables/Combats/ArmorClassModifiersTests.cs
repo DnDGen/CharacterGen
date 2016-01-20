@@ -20,7 +20,8 @@ namespace CharacterGen.Tests.Integration.Tables.Combats
             {
                 GroupConstants.Deflection,
                 GroupConstants.NaturalArmor,
-                GroupConstants.DodgeBonus
+                GroupConstants.DodgeBonus,
+                GroupConstants.ArmorBonus
             };
 
             AssertCollectionNames(names);
@@ -35,6 +36,8 @@ namespace CharacterGen.Tests.Integration.Tables.Combats
         [TestCase(GroupConstants.DodgeBonus,
             FeatConstants.DodgeBonus,
             FeatConstants.Dodge)]
+        [TestCase(GroupConstants.ArmorBonus,
+            WondrousItemConstants.BracersOfArmor)]
         public override void DistinctCollection(string name, params string[] collection)
         {
             base.DistinctCollection(name, collection);

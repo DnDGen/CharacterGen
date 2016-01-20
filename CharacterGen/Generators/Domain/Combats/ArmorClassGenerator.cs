@@ -5,6 +5,7 @@ using CharacterGen.Common.Races;
 using CharacterGen.Generators.Combats;
 using CharacterGen.Selectors;
 using CharacterGen.Tables;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TreasureGen.Common.Items;
@@ -24,7 +25,7 @@ namespace CharacterGen.Generators.Domain.Combats
 
         public ArmorClass GenerateWith(Equipment equipment, int adjustedDexterityBonus, IEnumerable<Feat> feats, Race race)
         {
-            var armorBonuses = GetArmorBonuses(equipment);
+            var armorBonuses = GetArmorBonus(equipment);
             var sizeModifier = GetSizeModifier(race);
             var deflectionBonus = GetDeflectionBonus(equipment.Treasure.Items);
             var naturalArmorBonus = GetNaturalArmorBonus(equipment.Treasure.Items, feats, race);
@@ -70,39 +71,45 @@ namespace CharacterGen.Generators.Domain.Combats
             return featsWithDeflectionBonuses.Sum(i => i.Power);
         }
 
-        private int GetArmorBonuses(Equipment equipment)
+        private int GetArmorBonus(Equipment equipment)
         {
             var armorBonuses = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.ArmorBonuses);
 
-            var armorBonus = GetArmorBonus(equipment.Armor, armorBonuses);
-            var shieldBonus = GetShieldBonus(equipment.OffHand, armorBonuses);
+            var armorBonus = GetArmorBonus(equipment, armorBonuses);
+            var shieldBonus = 0;
+
+            if (equipment.OffHand != null && equipment.OffHand.ItemType == ItemTypeConstants.Armor && equipment.OffHand.Attributes.Contains(AttributeConstants.Shield))
+                shieldBonus += GetTotalBonus(equipment.OffHand, armorBonuses);
+
             return armorBonus + shieldBonus;
         }
 
-        private int GetArmorBonus(Item armor, Dictionary<string, int> armorBonuses)
+        private int GetArmorBonus(Equipment equipment, Dictionary<string, int> armorBonuses)
         {
-            if (armor == null)
-                return 0;
+            var armorItemBonus = 0;
 
-            if (armor.Magic.Curse == CurseConstants.OppositeEffect)
-                return armorBonuses[armor.Name] - armor.Magic.Bonus;
-            else if (armor.Magic.Curse == CurseConstants.Delusion)
-                return armorBonuses[armor.Name];
+            if (equipment.Armor != null)
+                armorItemBonus += GetTotalBonus(equipment.Armor, armorBonuses);
 
-            return armorBonuses[armor.Name] + armor.Magic.Bonus;
+            var itemNamesGrantingArmorBonuses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.ArmorBonus);
+            var itemsGrantingArmorBonus = equipment.Treasure.Items.Where(i => itemNamesGrantingArmorBonuses.Contains(i.Name));
+
+            if (itemsGrantingArmorBonus.Any() == false)
+                return armorItemBonus;
+
+            var maxItemArmorBonus = itemsGrantingArmorBonus.Max(i => i.Magic.Bonus);
+
+            return Math.Max(armorItemBonus, maxItemArmorBonus);
         }
 
-        private int GetShieldBonus(Item shield, Dictionary<string, int> armorBonuses)
+        private int GetTotalBonus(Item item, Dictionary<string, int> armorBonuses)
         {
-            if (shield == null || shield.ItemType != ItemTypeConstants.Armor || !shield.Attributes.Contains(AttributeConstants.Shield))
-                return 0;
+            if (item.Magic.Curse == CurseConstants.OppositeEffect)
+                return armorBonuses[item.Name] - item.Magic.Bonus;
+            else if (item.Magic.Curse == CurseConstants.Delusion)
+                return armorBonuses[item.Name];
 
-            if (shield.Magic.Curse == CurseConstants.OppositeEffect)
-                return armorBonuses[shield.Name] - shield.Magic.Bonus;
-            else if (shield.Magic.Curse == CurseConstants.Delusion)
-                return armorBonuses[shield.Name];
-
-            return armorBonuses[shield.Name] + shield.Magic.Bonus;
+            return armorBonuses[item.Name] + item.Magic.Bonus;
         }
 
         private int GetSizeModifier(Race race)

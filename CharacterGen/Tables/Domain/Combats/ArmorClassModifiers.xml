@@ -16,4 +16,8 @@
     <item>Armor Bonus</item>
     <item>Natural Armor</item>
   </object>
+  <object>
+    <name>Armor Bonus</name>
+    <item>Bracers of armor</item>
+  </object>
 </items>
