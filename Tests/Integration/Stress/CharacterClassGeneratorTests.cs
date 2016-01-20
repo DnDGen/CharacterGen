@@ -1,14 +1,20 @@
 ﻿using CharacterGen.Common.CharacterClasses;
+using CharacterGen.Generators.Randomizers.CharacterClasses;
 using NUnit.Framework;
-using System;
 
 namespace CharacterGen.Tests.Integration.Stress
 {
     [TestFixture]
     public class CharacterClassGeneratorTests : StressTests
     {
-        [TestCase("CharacterClassGenerator")]
-        public override void Stress(String stressSubject)
+        [TearDown]
+        public void TearDown()
+        {
+            ClassNameRandomizer = GetNewInstanceOf<IClassNameRandomizer>(ClassNameRandomizerTypeConstants.AnyPlayer);
+        }
+
+        [TestCase("Character Class Generator")]
+        public override void Stress(string stressSubject)
         {
             Stress();
         }
@@ -24,6 +30,13 @@ namespace CharacterGen.Tests.Integration.Stress
         {
             var alignment = GetNewAlignment();
             return CharacterClassGenerator.GenerateWith(alignment, LevelRandomizer, ClassNameRandomizer);
+        }
+
+        [Test]
+        public void NPCClasses()
+        {
+            ClassNameRandomizer = GetNewInstanceOf<IClassNameRandomizer>(ClassNameRandomizerTypeConstants.AnyNPC);
+            Stress(MakeAssertions);
         }
     }
 }

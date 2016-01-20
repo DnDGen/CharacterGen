@@ -266,7 +266,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             "", true)]
         [TestCase(FeatConstants.DamageReduction + "1",
             FeatConstants.DamageReduction,
-            FeatConstants.Foci.All,
+            "Nothing overcomes",
             1,
             "",
             FeatConstants.Frequencies.Hit,
@@ -276,7 +276,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             "", true)]
         [TestCase(FeatConstants.DamageReduction + "2",
             FeatConstants.DamageReduction,
-            FeatConstants.Foci.All,
+            "Nothing overcomes",
             1,
             "",
             FeatConstants.Frequencies.Hit,
@@ -286,7 +286,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             "", true)]
         [TestCase(FeatConstants.DamageReduction + "3",
             FeatConstants.DamageReduction,
-            FeatConstants.Foci.All,
+            "Nothing overcomes",
             1,
             "",
             FeatConstants.Frequencies.Hit,
@@ -296,7 +296,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             "", true)]
         [TestCase(FeatConstants.DamageReduction + "4",
             FeatConstants.DamageReduction,
-            FeatConstants.Foci.All,
+            "Nothing overcomes",
             1,
             "",
             FeatConstants.Frequencies.Hit,
@@ -306,7 +306,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             "", true)]
         [TestCase(FeatConstants.DamageReduction + "5",
             FeatConstants.DamageReduction,
-            FeatConstants.Foci.All,
+            "Nothing overcomes",
             1,
             "",
             FeatConstants.Frequencies.Hit,

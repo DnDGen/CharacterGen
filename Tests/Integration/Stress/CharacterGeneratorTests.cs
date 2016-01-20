@@ -29,8 +29,7 @@ namespace CharacterGen.Tests.Integration.Stress
 
         protected override void MakeAssertions()
         {
-            var character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
-                    MetaraceRandomizer, StatsRandomizer);
+            var character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer, StatsRandomizer);
 
             AssertCharacter(character);
             Assert.That(character.Equipment.Treasure.Items, Is.Not.Empty);
@@ -133,8 +132,7 @@ namespace CharacterGen.Tests.Integration.Stress
 
         private void AssertNPC()
         {
-            var npc = CharacterGenerator.GenerateWith(AlignmentRandomizer, NPCClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer,
-                    MetaraceRandomizer, StatsRandomizer);
+            var npc = CharacterGenerator.GenerateWith(AlignmentRandomizer, NPCClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer, StatsRandomizer);
 
             AssertCharacter(npc);
         }
