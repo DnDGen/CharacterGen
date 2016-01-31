@@ -86,7 +86,7 @@ namespace CharacterGen.Tests.Integration.Stress
             do makeAssertions();
             while (TestShouldKeepRunning());
 
-            if (Stopwatch.Elapsed.TotalSeconds > timeLimitInSeconds + 2)
+            if (Stopwatch.Elapsed.TotalSeconds > timeLimitInSeconds + 5)
                 Assert.Fail("Something took way too long");
         }
 
