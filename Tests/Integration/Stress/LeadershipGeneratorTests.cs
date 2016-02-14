@@ -147,6 +147,7 @@ namespace CharacterGen.Tests.Integration.Stress
                     .Or.EqualTo(FeatConstants.Frequencies.Day)
                     .Or.EqualTo(FeatConstants.Frequencies.Week)
                     .Or.EqualTo(FeatConstants.Frequencies.Round)
+                    .Or.EqualTo(FeatConstants.Frequencies.Hit)
                     .Or.Empty, feat.Name);
 
                 if (feat.Name == FeatConstants.SaveBonus)
