@@ -2,7 +2,7 @@
 
 Generates a random, equipped character for Dungeons and Dragons 3.X
 
-[![Build status](https://ci.appveyor.com/api/projects/status/58rhdo4g5d1lrsmc?svg=true)](https://ci.appveyor.com/project/cidthecoatrack/npcgen)
+[![Build Status](https://travis-ci.org/DnDGen/CharacterGen.svg?branch=master)](https://travis-ci.org/DnDGen/CharacterGen)
 
 ### Use
 

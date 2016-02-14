@@ -42,6 +42,7 @@ namespace CharacterGen.Tests.Integration.Stress
         public IRaceGenerator RaceGenerator { get; set; }
 
         private const int ConfidentIterations = 1000000;
+        private const int TenMinutesInSeconds = 600;
 
         private readonly int timeLimitInSeconds;
 
@@ -55,7 +56,7 @@ namespace CharacterGen.Tests.Integration.Stress
             var stressTestsCount = methods.Count(m => m.GetCustomAttributes<TestAttribute>(true).Any() || m.GetCustomAttributes<TestCaseAttribute>().Any());
 
 #if STRESS
-            timeLimitInSeconds = 60 * 60 / stressTestsCount;
+            timeLimitInSeconds = TenMinutesInSeconds / stressTestsCount;
 #else
             timeLimitInSeconds = 1;
 #endif
