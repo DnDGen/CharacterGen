@@ -5,9 +5,12 @@ using CharacterGen.Common.Alignments;
 using CharacterGen.Common.Races;
 using CharacterGen.Generators;
 using CharacterGen.Generators.Randomizers.CharacterClasses;
+using CharacterGen.Generators.Randomizers.Races;
 using CharacterGen.Generators.Randomizers.Stats;
+using CharacterGen.Generators.Verifiers.Exceptions;
 using Ninject;
 using NUnit.Framework;
+using System;
 
 namespace CharacterGen.Tests.Integration.Stress
 {
@@ -135,6 +138,107 @@ namespace CharacterGen.Tests.Integration.Stress
             var npc = CharacterGenerator.GenerateWith(AlignmentRandomizer, NPCClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer, StatsRandomizer);
 
             AssertCharacter(npc);
+        }
+
+        [Test]
+        public void StressSetMetarace()
+        {
+            Stress(AssertSetMetarace);
+        }
+
+        private void AssertSetMetarace()
+        {
+            var forcableMetaraceRandomizer = MetaraceRandomizer as IForcableMetaraceRandomizer;
+            forcableMetaraceRandomizer.ForceMetarace = true;
+
+            var setMetaraceRandomizer = GetNewInstanceOf<ISetMetaraceRandomizer>();
+
+            var alignment = GetNewAlignment();
+            var characterClass = GetNewCharacterClass(alignment);
+            setMetaraceRandomizer.SetMetarace = forcableMetaraceRandomizer.Randomize(alignment, characterClass);
+
+            var character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, setMetaraceRandomizer, StatsRandomizer);
+
+            AssertCharacter(character);
+            Assert.That(character.Equipment.Treasure.Items, Is.Not.Empty);
+        }
+
+        [Test]
+        public void StressSetMetaraceAndSetLevelAllowingValidAdjustment()
+        {
+            Stress(AssertSetMetaraceAndSetLevelAllowingValidAdjustment);
+        }
+
+        private void AssertSetMetaraceAndSetLevelAllowingValidAdjustment()
+        {
+            var forcableMetaraceRandomizer = MetaraceRandomizer as IForcableMetaraceRandomizer;
+            forcableMetaraceRandomizer.ForceMetarace = true;
+
+            var setMetaraceRandomizer = GetNewInstanceOf<ISetMetaraceRandomizer>();
+
+            var alignment = GetNewAlignment();
+            var characterClass = GetNewCharacterClass(alignment);
+            setMetaraceRandomizer.SetMetarace = forcableMetaraceRandomizer.Randomize(alignment, characterClass);
+
+            var setLevelRandomizer = GetNewInstanceOf<ISetLevelRandomizer>();
+            setLevelRandomizer.SetLevel = Math.Max(LevelRandomizer.Randomize(), 9);
+            setLevelRandomizer.AllowAdjustments = true;
+
+            var character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, setLevelRandomizer, BaseRaceRandomizer, setMetaraceRandomizer, StatsRandomizer);
+
+            AssertCharacter(character);
+            Assert.That(character.Equipment.Treasure.Items, Is.Not.Empty);
+        }
+
+        [Test]
+        public void StressSetMetaraceAndSetLevelAllowingInvalidAdjustment()
+        {
+            Stress(AssertSetMetaraceAndSetLevelAllowingInvalidAdjustment);
+        }
+
+        private void AssertSetMetaraceAndSetLevelAllowingInvalidAdjustment()
+        {
+            var forcableMetaraceRandomizer = MetaraceRandomizer as IForcableMetaraceRandomizer;
+            forcableMetaraceRandomizer.ForceMetarace = true;
+
+            var setMetaraceRandomizer = GetNewInstanceOf<ISetMetaraceRandomizer>();
+
+            var alignment = GetNewAlignment();
+            var characterClass = GetNewCharacterClass(alignment);
+            setMetaraceRandomizer.SetMetarace = forcableMetaraceRandomizer.Randomize(alignment, characterClass);
+
+            var setLevelRandomizer = GetNewInstanceOf<ISetLevelRandomizer>();
+            setLevelRandomizer.SetLevel = 1;
+            setLevelRandomizer.AllowAdjustments = true;
+
+            Assert.That(() => CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, setLevelRandomizer, BaseRaceRandomizer, setMetaraceRandomizer, StatsRandomizer), Throws.InstanceOf<IncompatibleRandomizersException>());
+        }
+
+        [Test]
+        public void StressSetMetaraceAndSetLevelNotAllowingAdjustment()
+        {
+            Stress(AssertSetMetaraceAndSetLevelNotAllowingAdjustment);
+        }
+
+        private void AssertSetMetaraceAndSetLevelNotAllowingAdjustment()
+        {
+            var forcableMetaraceRandomizer = MetaraceRandomizer as IForcableMetaraceRandomizer;
+            forcableMetaraceRandomizer.ForceMetarace = true;
+
+            var setMetaraceRandomizer = GetNewInstanceOf<ISetMetaraceRandomizer>();
+
+            var alignment = GetNewAlignment();
+            var characterClass = GetNewCharacterClass(alignment);
+            setMetaraceRandomizer.SetMetarace = forcableMetaraceRandomizer.Randomize(alignment, characterClass);
+
+            var setLevelRandomizer = GetNewInstanceOf<ISetLevelRandomizer>();
+            setLevelRandomizer.SetLevel = LevelRandomizer.Randomize();
+            setLevelRandomizer.AllowAdjustments = false;
+
+            var character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, setLevelRandomizer, BaseRaceRandomizer, setMetaraceRandomizer, StatsRandomizer);
+
+            AssertCharacter(character);
+            Assert.That(character.Equipment.Treasure.Items, Is.Not.Empty);
         }
     }
 }

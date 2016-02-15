@@ -172,8 +172,8 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
         [Test]
         public void RandomizersNotVerifiedIfSumOfLevelAdjustmentsIsNotLessThanLevel()
         {
-            adjustments[baseRaces[0]] = 1;
-            adjustments[metaraces[0]] = 1;
+            adjustments[baseRaces[0]] = -1;
+            adjustments[metaraces[0]] = -1;
             levels.Clear();
             levels.Add(2);
 
@@ -187,7 +187,7 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
             metaraces.Clear();
             metaraces.Add("metarace");
 
-            adjustments[metaraces[0]] = 2;
+            adjustments[metaraces[0]] = -2;
             levels.Clear();
             levels.Add(1);
 
@@ -267,8 +267,8 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
         [Test]
         public void AlignmentNotVerifiedIfSumOfLevelAdjustmentsIsNotLessThanLevel()
         {
-            adjustments[baseRaces[0]] = 1;
-            adjustments[metaraces[0]] = 1;
+            adjustments[baseRaces[0]] = -1;
+            adjustments[metaraces[0]] = -1;
             levels.Clear();
             levels.Add(2);
 
@@ -308,15 +308,33 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
         }
 
         [Test]
-        public void CharacterClassNotVerifiedIfSumOfLevelAdjustmentsIsNotLessThanLevel()
+        public void CharacterClassNotVerifiedIfLevelAdjustmentsMakeLevelLessThan1()
         {
-            adjustments[baseRaces[0]] = 1;
-            adjustments[metaraces[0]] = 1;
+            adjustments[baseRaces[0]] = -1;
+            adjustments[metaraces[0]] = -1;
             levels.Clear();
             levels.Add(2);
 
             var verified = verifier.VerifyCharacterClassCompatibility(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
             Assert.That(verified, Is.False);
+        }
+
+        [Test]
+        public void CharacterClassVerifiedIfOneLevelAdjustmentIsAllowed()
+        {
+            baseRaces.Add("other base race");
+            metaraces.Add("other metarace");
+
+            adjustments[baseRaces[0]] = 0;
+            adjustments[metaraces[0]] = -8;
+            adjustments[baseRaces[1]] = -3;
+            adjustments[metaraces[1]] = 0;
+
+            levels.Clear();
+            levels.Add(2);
+
+            var verified = verifier.VerifyCharacterClassCompatibility(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
+            Assert.That(verified, Is.True);
         }
     }
 }

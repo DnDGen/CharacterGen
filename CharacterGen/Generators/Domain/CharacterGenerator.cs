@@ -172,7 +172,7 @@ namespace CharacterGen.Generators.Domain
             return characterClass;
         }
 
-        private Race GenerateRace(RaceRandomizer baseRaceRandomizer, RaceRandomizer metaraceRandomizer, Dictionary<String, Int32> levelAdjustments,
+        private Race GenerateRace(RaceRandomizer baseRaceRandomizer, RaceRandomizer metaraceRandomizer, Dictionary<string, int> levelAdjustments,
             Alignment alignment, CharacterClass characterClass)
         {
             var race = generator.Generate(() => raceGenerator.GenerateWith(alignment, characterClass, baseRaceRandomizer, metaraceRandomizer),

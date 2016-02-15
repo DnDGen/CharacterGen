@@ -62,10 +62,10 @@ namespace CharacterGen.Generators.Domain.Verifiers
         private bool LevelAdjustmentsAreAllowed(IEnumerable<string> baseRaces, IEnumerable<string> metaraces, int level)
         {
             var levelAdjustments = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments);
-            var minBaseRaceLevelAdjustment = levelAdjustments.Where(kvp => baseRaces.Contains(kvp.Key)).Min(kvp => kvp.Value);
-            var minMetaraceLevelAdjustment = levelAdjustments.Where(kvp => metaraces.Contains(kvp.Key)).Min(kvp => kvp.Value);
+            var maxBaseRaceLevelAdjustment = levelAdjustments.Where(kvp => baseRaces.Contains(kvp.Key)).Max(kvp => kvp.Value);
+            var maxMetaraceLevelAdjustment = levelAdjustments.Where(kvp => metaraces.Contains(kvp.Key)).Max(kvp => kvp.Value);
 
-            return minBaseRaceLevelAdjustment + minMetaraceLevelAdjustment < level;
+            return level + maxBaseRaceLevelAdjustment + maxMetaraceLevelAdjustment > 0;
         }
     }
 }
