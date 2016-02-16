@@ -9,7 +9,6 @@ using CharacterGen.Selectors;
 using CharacterGen.Tables;
 using Ninject;
 using NUnit.Framework;
-using System;
 using System.Linq;
 using TreasureGen.Common.Items;
 
@@ -30,7 +29,7 @@ namespace CharacterGen.Tests.Integration.Stress.Items
         public ICollectionsSelector CollectionsSelector { get; set; }
 
         [TestCase("Weapon Generator")]
-        public override void Stress(String stressSubject)
+        public override void Stress(string stressSubject)
         {
             Stress();
         }

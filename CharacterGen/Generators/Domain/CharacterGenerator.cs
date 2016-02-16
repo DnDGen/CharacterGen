@@ -167,7 +167,7 @@ namespace CharacterGen.Generators.Domain
             Alignment alignment, RaceRandomizer baseRaceRandomizer, RaceRandomizer metaraceRandomizer)
         {
             var characterClass = generator.Generate(() => characterClassGenerator.GenerateWith(alignment, levelRandomizer, classNameRandomizer),
-                c => randomizerVerifier.VerifyCharacterClassCompatibility(alignment, c, baseRaceRandomizer, metaraceRandomizer));
+                c => randomizerVerifier.VerifyCharacterClassCompatibility(alignment, c, levelRandomizer, baseRaceRandomizer, metaraceRandomizer));
 
             return characterClass;
         }

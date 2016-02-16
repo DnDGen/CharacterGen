@@ -140,7 +140,7 @@ namespace CharacterGen.Tests.Integration.Stress
         {
             var characterClass = Generate(
                 () => CharacterClassGenerator.GenerateWith(alignment, LevelRandomizer, ClassNameRandomizer),
-                c => RandomizerVerifier.VerifyCharacterClassCompatibility(alignment, c, BaseRaceRandomizer, MetaraceRandomizer));
+                c => RandomizerVerifier.VerifyCharacterClassCompatibility(alignment, c, LevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer));
 
             return characterClass;
         }
