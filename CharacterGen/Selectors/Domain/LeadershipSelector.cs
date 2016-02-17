@@ -14,12 +14,12 @@ namespace CharacterGen.Selectors.Domain
             this.adjustmentsSelector = adjustmentsSelector;
         }
 
-        public Int32 SelectCohortLevelFor(Int32 leadershipScore)
+        public int SelectCohortLevelFor(int leadershipScore)
         {
             return GetAppropriateAdjustment(leadershipScore, TableNameConstants.Set.Adjustments.CohortLevels);
         }
 
-        public FollowerQuantities SelectFollowerQuantitiesFor(Int32 leadershipScore)
+        public FollowerQuantities SelectFollowerQuantitiesFor(int leadershipScore)
         {
             var followerQuantities = new FollowerQuantities();
 
@@ -33,13 +33,13 @@ namespace CharacterGen.Selectors.Domain
             return followerQuantities;
         }
 
-        private Int32 GetQuantityOfFollowersAtLevel(Int32 level, Int32 leadershipScore)
+        private int GetQuantityOfFollowersAtLevel(int level, int leadershipScore)
         {
-            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.LevelXFollowerQuantities, level);
+            var tableName = string.Format(TableNameConstants.Formattable.Adjustments.LevelXFollowerQuantities, level);
             return GetAppropriateAdjustment(leadershipScore, tableName);
         }
 
-        private Int32 GetAppropriateAdjustment(Int32 leadershipScore, String tableName)
+        private int GetAppropriateAdjustment(int leadershipScore, string tableName)
         {
             var adjustments = adjustmentsSelector.SelectFrom(tableName);
             var numericScores = adjustments.Keys.Select(k => Convert.ToInt32(k));

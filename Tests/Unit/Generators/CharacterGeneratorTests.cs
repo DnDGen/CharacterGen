@@ -89,18 +89,14 @@ namespace CharacterGen.Tests.Unit.Generators
             levelAdjustments[Metarace] = -1;
             mockAdjustmentsSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments)).Returns(levelAdjustments);
 
-            mockRandomizerVerifier.Setup(v => v.VerifyCompatibility(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object,
-                mockLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(true);
-            mockRandomizerVerifier.Setup(v => v.VerifyCompatibility(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object,
-                mockSetLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(true);
-            mockRandomizerVerifier.Setup(v => v.VerifyAlignmentCompatibility(It.IsAny<Alignment>(), mockClassNameRandomizer.Object,
-                mockLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(true);
-            mockRandomizerVerifier.Setup(v => v.VerifyAlignmentCompatibility(It.IsAny<Alignment>(), mockClassNameRandomizer.Object,
-                mockSetLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(true);
-            mockRandomizerVerifier.Setup(v => v.VerifyCharacterClassCompatibility(It.IsAny<Alignment>(), It.IsAny<CharacterClass>(),
-                mockLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(true);
-            mockRandomizerVerifier.Setup(v => v.VerifyCharacterClassCompatibility(It.IsAny<Alignment>(), It.IsAny<CharacterClass>(),
-                mockSetLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(true);
+            mockRandomizerVerifier.Setup(v => v.VerifyCompatibility(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(true);
+            mockRandomizerVerifier.Setup(v => v.VerifyCompatibility(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(true);
+            mockRandomizerVerifier.Setup(v => v.VerifyAlignmentCompatibility(It.IsAny<Alignment>(), mockClassNameRandomizer.Object, mockLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(true);
+            mockRandomizerVerifier.Setup(v => v.VerifyAlignmentCompatibility(It.IsAny<Alignment>(), mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(true);
+            mockRandomizerVerifier.Setup(v => v.VerifyCharacterClassCompatibility(It.IsAny<Alignment>(), It.IsAny<CharacterClass>(), mockLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(true);
+            mockRandomizerVerifier.Setup(v => v.VerifyCharacterClassCompatibility(It.IsAny<Alignment>(), It.IsAny<CharacterClass>(), mockSetLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(true);
+            mockRandomizerVerifier.Setup(v => v.VerifyRaceCompatibility(It.IsAny<Race>(), It.IsAny<CharacterClass>(), mockLevelRandomizer.Object)).Returns(true);
+            mockRandomizerVerifier.Setup(v => v.VerifyRaceCompatibility(It.IsAny<Race>(), It.IsAny<CharacterClass>(), mockSetLevelRandomizer.Object)).Returns(true);
 
             characterGenerator = new CharacterGenerator(mockAlignmentGenerator.Object, mockCharacterClassGenerator.Object,
                 mockRaceGenerator.Object, mockAdjustmentsSelector.Object, mockRandomizerVerifier.Object, mockPercentileSelector.Object,
@@ -195,52 +191,52 @@ namespace CharacterGen.Tests.Unit.Generators
         }
 
         [Test]
+        public void NullAlignmentIndicatesIncompatibleRandomizers()
+        {
+            mockRandomizerVerifier.Setup(v => v.VerifyAlignmentCompatibility(It.IsAny<Alignment>(), mockClassNameRandomizer.Object,
+                mockLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(false);
+
+            Assert.That(GenerateCharacter, Throws.InstanceOf<IncompatibleRandomizersException>());
+        }
+
+        [Test]
         public void IncompatibleCharacterClassIsRegenerated()
         {
             mockRandomizerVerifier.SetupSequence(v => v.VerifyCharacterClassCompatibility(It.IsAny<Alignment>(), It.IsAny<CharacterClass>(),
                 mockLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(false).Returns(true);
 
             GenerateCharacter();
-            mockCharacterClassGenerator.Verify(f => f.GenerateWith(alignment, mockLevelRandomizer.Object,
-                mockClassNameRandomizer.Object), Times.Exactly(2));
+            mockCharacterClassGenerator.Verify(f => f.GenerateWith(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object), Times.Exactly(2));
         }
 
         [Test]
-        public void IncompatibleComboOfBaseRaceAndMetaraceIsRegeneratedWithCompatibleBaseRace()
+        public void NullCharacterClassIndicatesIncompatibleRandomizers()
         {
-            var higherRace = new Race();
-            higherRace.BaseRace = BaseRaceMinusOne;
-            higherRace.Metarace = Metarace;
-            race.BaseRace = BaseRace;
-            race.Metarace = Metarace;
+            mockRandomizerVerifier.Setup(v => v.VerifyCharacterClassCompatibility(It.IsAny<Alignment>(), It.IsAny<CharacterClass>(),
+                mockLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(false);
 
-            mockRaceGenerator.SetupSequence(f => f.GenerateWith(It.IsAny<Alignment>(), It.IsAny<CharacterClass>(), mockBaseRaceRandomizer.Object,
-                mockMetaraceRandomizer.Object)).Returns(higherRace).Returns(race);
-
-            characterClass.Level = 2;
-
-            GenerateCharacter();
-            mockRaceGenerator.Verify(f => f.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object,
-                mockMetaraceRandomizer.Object), Times.Exactly(2));
+            Assert.That(GenerateCharacter, Throws.InstanceOf<IncompatibleRandomizersException>());
         }
 
         [Test]
-        public void IncompatibleComboOfBaseRaceAndMetaraceIsRegeneratedWithCompatibleMetarace()
+        public void IncompatibleRaceIsRegenerated()
         {
-            var higherRace = new Race();
-            higherRace.BaseRace = BaseRaceMinusOne;
-            higherRace.Metarace = Metarace;
-            race.BaseRace = BaseRaceMinusOne;
-            race.Metarace = RaceConstants.Metaraces.None;
+            mockRandomizerVerifier.SetupSequence(v => v.VerifyRaceCompatibility(It.IsAny<Race>(), It.IsAny<CharacterClass>(), mockLevelRandomizer.Object))
+                .Returns(false).Returns(true);
 
-            mockRaceGenerator.SetupSequence(f => f.GenerateWith(It.IsAny<Alignment>(), It.IsAny<CharacterClass>(), mockBaseRaceRandomizer.Object,
-                mockMetaraceRandomizer.Object)).Returns(higherRace).Returns(race);
+            GenerateCharacter();
+            mockRaceGenerator.Verify(f => f.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object), Times.Exactly(2));
+        }
+
+        [Test]
+        public void NullRaceIndicatesIncompatibleRandomizers()
+        {
+            mockRandomizerVerifier.Setup(v => v.VerifyRaceCompatibility(It.IsAny<Race>(), It.IsAny<CharacterClass>(), mockLevelRandomizer.Object))
+                .Returns(false);
 
             characterClass.Level = 2;
 
-            GenerateCharacter();
-            mockRaceGenerator.Verify(f => f.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object,
-                mockMetaraceRandomizer.Object), Times.Exactly(2));
+            Assert.That(GenerateCharacter, Throws.InstanceOf<IncompatibleRandomizersException>());
         }
 
         [Test]
@@ -282,23 +278,6 @@ namespace CharacterGen.Tests.Unit.Generators
             Assert.That(characterClass.SpecialistFields, Contains.Item("new specialist field"));
             Assert.That(characterClass.SpecialistFields, Contains.Item("other new specialist field"));
             Assert.That(characterClass.SpecialistFields.Count(), Is.EqualTo(2));
-        }
-
-        [Test]
-        public void NullRaceIndicatesIncompatibleRandomizers()
-        {
-            var higherRace = new Race();
-            higherRace.BaseRace = BaseRaceMinusOne;
-            higherRace.Metarace = Metarace;
-            race.BaseRace = BaseRaceMinusOne;
-            race.Metarace = RaceConstants.Metaraces.None;
-
-            mockRaceGenerator.Setup(f => f.GenerateWith(It.IsAny<Alignment>(), It.IsAny<CharacterClass>(), mockBaseRaceRandomizer.Object,
-                mockMetaraceRandomizer.Object)).Returns(higherRace);
-
-            characterClass.Level = 2;
-
-            Assert.That(GenerateCharacter, Throws.InstanceOf<IncompatibleRandomizersException>());
         }
 
         [Test]
@@ -377,7 +356,7 @@ namespace CharacterGen.Tests.Unit.Generators
         [Test]
         public void ApplyArmorCheckPenaltiesForArmor()
         {
-            var armorCheckPenalties = new Dictionary<String, Int32>();
+            var armorCheckPenalties = new Dictionary<string, int>();
             armorCheckPenalties["armor"] = -9266;
             armorCheckPenalties["other armor"] = -90210;
 
@@ -401,7 +380,7 @@ namespace CharacterGen.Tests.Unit.Generators
         [Test]
         public void DoNotApplyPenaltyCheckForArmorIfNoArmor()
         {
-            var armorCheckPenalties = new Dictionary<String, Int32>();
+            var armorCheckPenalties = new Dictionary<string, int>();
             armorCheckPenalties["armor"] = -9266;
             armorCheckPenalties["other armor"] = -90210;
 
@@ -423,7 +402,7 @@ namespace CharacterGen.Tests.Unit.Generators
         [Test]
         public void ApplyArmorCheckPenaltiesForShield()
         {
-            var armorCheckPenalties = new Dictionary<String, Int32>();
+            var armorCheckPenalties = new Dictionary<string, int>();
             armorCheckPenalties["shield"] = -9266;
             armorCheckPenalties["other shield"] = -90210;
 
@@ -448,7 +427,7 @@ namespace CharacterGen.Tests.Unit.Generators
         [Test]
         public void DoNotApplyPenaltyCheckForNonShields()
         {
-            var armorCheckPenalties = new Dictionary<String, Int32>();
+            var armorCheckPenalties = new Dictionary<string, int>();
             armorCheckPenalties["shield"] = -9266;
             armorCheckPenalties["other shield"] = -90210;
 
@@ -472,7 +451,7 @@ namespace CharacterGen.Tests.Unit.Generators
         [Test]
         public void ApplyArmorCheckPenaltiesForArmorAndShield()
         {
-            var armorCheckPenalties = new Dictionary<String, Int32>();
+            var armorCheckPenalties = new Dictionary<string, int>();
             armorCheckPenalties["shield"] = -9266;
             armorCheckPenalties["other shield"] = -90210;
             armorCheckPenalties["armor"] = -42;
@@ -500,7 +479,7 @@ namespace CharacterGen.Tests.Unit.Generators
         [Test]
         public void ApplyArmorCheckPenaltiesForSpecialMaterials()
         {
-            var armorCheckPenalties = new Dictionary<String, Int32>();
+            var armorCheckPenalties = new Dictionary<string, int>();
             armorCheckPenalties["shield"] = -9266;
             armorCheckPenalties["mithral"] = 1;
             armorCheckPenalties["armor"] = -42;
@@ -530,7 +509,7 @@ namespace CharacterGen.Tests.Unit.Generators
         [Test]
         public void CannotHavePositiveArmorCheckPenalty()
         {
-            var armorCheckPenalties = new Dictionary<String, Int32>();
+            var armorCheckPenalties = new Dictionary<string, int>();
             armorCheckPenalties["shield"] = -9266;
             armorCheckPenalties["mithral"] = 90210;
 
@@ -556,7 +535,7 @@ namespace CharacterGen.Tests.Unit.Generators
         [Test]
         public void SwimTakesDoubleArmorCheckPenalty()
         {
-            var armorCheckPenalties = new Dictionary<String, Int32>();
+            var armorCheckPenalties = new Dictionary<string, int>();
             armorCheckPenalties["shield"] = -9266;
             armorCheckPenalties["other shield"] = -90210;
             armorCheckPenalties["armor"] = -42;
@@ -586,7 +565,7 @@ namespace CharacterGen.Tests.Unit.Generators
         [Test]
         public void SwimTakesDoubleArmorCheckPenaltyMinusSpecialMaterials()
         {
-            var armorCheckPenalties = new Dictionary<String, Int32>();
+            var armorCheckPenalties = new Dictionary<string, int>();
             armorCheckPenalties["shield"] = -9266;
             armorCheckPenalties["other shield"] = -90210;
             armorCheckPenalties["armor"] = -42;
@@ -620,7 +599,7 @@ namespace CharacterGen.Tests.Unit.Generators
         [Test]
         public void SwimTakesNoPenaltyForPlateArmorOfTheDeep()
         {
-            var armorCheckPenalties = new Dictionary<String, Int32>();
+            var armorCheckPenalties = new Dictionary<string, int>();
             armorCheckPenalties[TreasureGen.Common.Items.ArmorConstants.PlateArmorOfTheDeep] = -6;
 
             ability.Skills["skill"] = new Skill();

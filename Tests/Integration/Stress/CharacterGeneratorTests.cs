@@ -240,5 +240,26 @@ namespace CharacterGen.Tests.Integration.Stress
             AssertCharacter(character);
             Assert.That(character.Equipment.Treasure.Items, Is.Not.Empty);
         }
+
+        [Test]
+        public void StressLevel4Ghost()
+        {
+            Stress(AssertLevel4Ghost);
+        }
+
+        private void AssertLevel4Ghost()
+        {
+            var setMetaraceRandomizer = GetNewInstanceOf<ISetMetaraceRandomizer>();
+            setMetaraceRandomizer.SetMetarace = RaceConstants.Metaraces.Ghost;
+
+            var setLevelRandomizer = GetNewInstanceOf<ISetLevelRandomizer>();
+            setLevelRandomizer.SetLevel = 4;
+            setLevelRandomizer.AllowAdjustments = false;
+
+            var character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, setLevelRandomizer, BaseRaceRandomizer, setMetaraceRandomizer, StatsRandomizer);
+
+            AssertCharacter(character);
+            Assert.That(character.Equipment.Treasure.Items, Is.Not.Empty);
+        }
     }
 }

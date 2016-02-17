@@ -25,14 +25,12 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Evil
         [TestCase(RaceConstants.BaseRaces.HighElf, 16, 25)]
         [TestCase(RaceConstants.BaseRaces.HillDwarf, 26, 35)]
         [TestCase(RaceConstants.BaseRaces.LightfootHalfling, 36, 45)]
-        [TestCase(RaceConstants.BaseRaces.MountainDwarf, 46, 50)]
-        [TestCase(RaceConstants.BaseRaces.Human, 51, 90)]
+        [TestCase(RaceConstants.BaseRaces.Human, 46, 91)]
         public override void Percentile(string content, int lower, int upper)
         {
             base.Percentile(content, lower, upper);
         }
 
-        [TestCase(RaceConstants.BaseRaces.GrayElf, 91)]
         [TestCase(RaceConstants.BaseRaces.Tiefling, 92)]
         [TestCase(RaceConstants.BaseRaces.Goblin, 93)]
         [TestCase(RaceConstants.BaseRaces.Hobgoblin, 94)]

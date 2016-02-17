@@ -51,8 +51,6 @@ namespace CharacterGen.Tests.Integration.Stress
 
             var leadership = LeadershipGenerator.GenerateLeadership(characterClass.Level, ability.Stats[StatConstants.Charisma].Bonus, animal);
             Assert.That(leadership, Is.Not.Null);
-            Assert.That(leadership.CohortScore, Is.Not.Negative);
-            Assert.That(leadership.Score, Is.Positive);
             Assert.That(leadership.FollowerQuantities.Level1, Is.Not.Negative);
             Assert.That(leadership.FollowerQuantities.Level2, Is.InRange(0, leadership.FollowerQuantities.Level1));
             Assert.That(leadership.FollowerQuantities.Level3, Is.InRange(0, leadership.FollowerQuantities.Level2));

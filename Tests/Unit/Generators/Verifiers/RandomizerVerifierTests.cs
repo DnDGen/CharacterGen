@@ -1,5 +1,6 @@
 ﻿using CharacterGen.Common.Alignments;
 using CharacterGen.Common.CharacterClasses;
+using CharacterGen.Common.Races;
 using CharacterGen.Generators.Domain.Verifiers;
 using CharacterGen.Generators.Randomizers.Alignments;
 using CharacterGen.Generators.Randomizers.CharacterClasses;
@@ -9,7 +10,6 @@ using CharacterGen.Selectors;
 using CharacterGen.Tables;
 using Moq;
 using NUnit.Framework;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -37,6 +37,7 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
         private Dictionary<string, int> adjustments;
         private Alignment alignment;
         private List<string> spellcasters;
+        private Race race;
 
         [SetUp]
         public void Setup()
@@ -54,12 +55,13 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
             alignments = new List<Alignment>();
             characterClass = new CharacterClass();
             classNames = new List<string>();
-            levels = new List<Int32>();
+            levels = new List<int>();
             baseRaces = new List<string>();
             metaraces = new List<string>();
             adjustments = new Dictionary<string, int>();
             alignment = new Alignment();
             spellcasters = new List<string>();
+            race = new Race();
 
             mockAlignmentRandomizer.Setup(r => r.GetAllPossibleResults()).Returns(alignments);
             mockClassNameRandomizer.Setup(r => r.GetAllPossibleResults(It.IsAny<Alignment>())).Returns(classNames);
@@ -76,12 +78,16 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
             mockSetLevelRandomizer.Setup(r => r.GetAllPossibleResults()).Returns(() => new[] { mockSetLevelRandomizer.Object.SetLevel });
 
             alignments.Add(alignment);
+
             characterClass.Level = 1;
             characterClass.ClassName = "class name";
             classNames.Add(characterClass.ClassName);
-            levels.Add(1);
-            baseRaces.Add("base race");
-            metaraces.Add(string.Empty);
+            levels.Add(characterClass.Level);
+
+            race.BaseRace = "base race";
+            baseRaces.Add(race.BaseRace);
+            metaraces.Add(race.Metarace);
+
             adjustments[baseRaces[0]] = 0;
             adjustments[metaraces[0]] = 0;
         }
@@ -452,6 +458,56 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
             mockSetLevelRandomizer.Object.AllowAdjustments = true;
 
             var verified = verifier.VerifyCharacterClassCompatibility(alignment, characterClass, mockSetLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
+            Assert.That(verified, Is.False);
+        }
+
+        [Test]
+        public void RaceNotVerifiedIfLevelAdjustmentsMakeLevelLessThan1()
+        {
+            adjustments[race.BaseRace] = -1;
+            adjustments[race.Metarace] = -1;
+
+            characterClass.Level = 2;
+
+            var verified = verifier.VerifyRaceCompatibility(race, characterClass, mockLevelRandomizer.Object);
+            Assert.That(verified, Is.False);
+        }
+
+        [Test]
+        public void RaceVerifiedIfLevelAdjustmentIsAllowed()
+        {
+            adjustments[race.BaseRace] = 0;
+            adjustments[race.Metarace] = -1;
+
+            characterClass.Level = 2;
+
+            var verified = verifier.VerifyRaceCompatibility(race, characterClass, mockLevelRandomizer.Object);
+            Assert.That(verified, Is.True);
+        }
+
+        [Test]
+        public void RaceVerifiedIfSetLevelAdjustmentIsNotAllowed()
+        {
+            adjustments[race.BaseRace] = -1;
+            adjustments[race.Metarace] = -1;
+
+            characterClass.Level = 2;
+            mockSetLevelRandomizer.Object.AllowAdjustments = false;
+
+            var verified = verifier.VerifyRaceCompatibility(race, characterClass, mockSetLevelRandomizer.Object);
+            Assert.That(verified, Is.True);
+        }
+
+        [Test]
+        public void RaceNotVerifiedIfSetLevelAdjustmentIsAllowed()
+        {
+            adjustments[race.BaseRace] = -1;
+            adjustments[race.Metarace] = -1;
+
+            characterClass.Level = 2;
+            mockSetLevelRandomizer.Object.AllowAdjustments = true;
+
+            var verified = verifier.VerifyRaceCompatibility(race, characterClass, mockSetLevelRandomizer.Object);
             Assert.That(verified, Is.False);
         }
     }

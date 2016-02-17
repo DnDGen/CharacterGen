@@ -13,7 +13,7 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
         [Inject, Named(RaceRandomizerTypeConstants.BaseRace.AnyBase)]
         public override RaceRandomizer BaseRaceRandomizer { get; set; }
 
-        protected override IEnumerable<String> allowedBaseRaces
+        protected override IEnumerable<string> allowedBaseRaces
         {
             get
             {

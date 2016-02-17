@@ -1,5 +1,6 @@
 ﻿using CharacterGen.Common.Alignments;
 using CharacterGen.Common.CharacterClasses;
+using CharacterGen.Common.Races;
 using CharacterGen.Generators.Randomizers.Alignments;
 using CharacterGen.Generators.Randomizers.CharacterClasses;
 using CharacterGen.Generators.Randomizers.Races;
@@ -25,17 +26,16 @@ namespace CharacterGen.Generators.Domain.Verifiers
         public bool VerifyCompatibility(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classNameRandomizer, ILevelRandomizer levelRandomizer, RaceRandomizer baseRaceRandomizer, RaceRandomizer metaraceRandomizer)
         {
             var alignments = alignmentRandomizer.GetAllPossibleResults();
-            return alignments.Any() && alignments.Any(a => VerifyAlignmentCompatibility(a, classNameRandomizer, levelRandomizer, baseRaceRandomizer, metaraceRandomizer));
+            return alignments.Any(a => VerifyAlignmentCompatibility(a, classNameRandomizer, levelRandomizer, baseRaceRandomizer, metaraceRandomizer));
         }
 
         public bool VerifyAlignmentCompatibility(Alignment alignment, IClassNameRandomizer classNameRandomizer, ILevelRandomizer levelRandomizer, RaceRandomizer baseRaceRandomizer, RaceRandomizer metaraceRandomizer)
         {
             var classNames = classNameRandomizer.GetAllPossibleResults(alignment);
             var levels = levelRandomizer.GetAllPossibleResults();
-
             var characterClasses = GetAllCharacterClassPrototypes(classNames, levels);
 
-            return characterClasses.Any() && characterClasses.Any(c => VerifyCharacterClassCompatibility(alignment, c, levelRandomizer, baseRaceRandomizer, metaraceRandomizer));
+            return characterClasses.Any(c => VerifyCharacterClassCompatibility(alignment, c, levelRandomizer, baseRaceRandomizer, metaraceRandomizer));
         }
 
         private IEnumerable<CharacterClass> GetAllCharacterClassPrototypes(IEnumerable<string> classNames, IEnumerable<int> levels)
@@ -53,22 +53,30 @@ namespace CharacterGen.Generators.Domain.Verifiers
         {
             var baseRaces = baseRaceRandomizer.GetAllPossible(alignment, characterClass);
             var metaraces = metaraceRandomizer.GetAllPossible(alignment, characterClass);
+            var races = GetAllRacePrototypes(baseRaces, metaraces);
 
-            var verified = baseRaces.Any() && metaraces.Any();
-
-            if (levelRandomizer is ISetLevelRandomizer && (levelRandomizer as ISetLevelRandomizer).AllowAdjustments == false)
-                return verified;
-
-            return verified && LevelAdjustmentsAreAllowed(baseRaces, metaraces, characterClass.Level);
+            return races.Any(r => VerifyRaceCompatibility(r, characterClass, levelRandomizer));
         }
 
-        private bool LevelAdjustmentsAreAllowed(IEnumerable<string> baseRaces, IEnumerable<string> metaraces, int level)
+        private IEnumerable<Race> GetAllRacePrototypes(IEnumerable<string> baseRaces, IEnumerable<string> metaraces)
         {
-            var levelAdjustments = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments);
-            var maxBaseRaceLevelAdjustment = levelAdjustments.Where(kvp => baseRaces.Contains(kvp.Key)).Max(kvp => kvp.Value);
-            var maxMetaraceLevelAdjustment = levelAdjustments.Where(kvp => metaraces.Contains(kvp.Key)).Max(kvp => kvp.Value);
+            var races = new List<Race>();
 
-            return level + maxBaseRaceLevelAdjustment + maxMetaraceLevelAdjustment > 0;
+            foreach (var baseRace in baseRaces)
+                foreach (var metarace in metaraces)
+                    races.Add(new Race { BaseRace = baseRace, Metarace = metarace });
+
+            return races;
+        }
+
+        public bool VerifyRaceCompatibility(Race race, CharacterClass characterClass, ILevelRandomizer levelRandomizer)
+        {
+            if (levelRandomizer is ISetLevelRandomizer && (levelRandomizer as ISetLevelRandomizer).AllowAdjustments == false)
+                return true;
+
+            var levelAdjustments = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments);
+
+            return characterClass.Level + levelAdjustments[race.BaseRace] + levelAdjustments[race.Metarace] > 0;
         }
     }
 }

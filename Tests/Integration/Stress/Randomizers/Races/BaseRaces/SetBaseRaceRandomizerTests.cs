@@ -10,8 +10,6 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
     {
         [Inject]
         public ISetBaseRaceRandomizer SetBaseRaceRandomizer { get; set; }
-        [Inject, Named(ClassNameRandomizerTypeConstants.AnyNPC)]
-        public IClassNameRandomizer AnyNPCClassNameRandomizer { get; set; }
 
         [TearDown]
         public void TearDown()
@@ -38,18 +36,8 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
         [Test]
         public void StressNPCSetBaseRace()
         {
-            ClassNameRandomizer = AnyNPCClassNameRandomizer;
-            Stress(AssertNPCSetBaseRace);
-        }
-
-        private void AssertNPCSetBaseRace()
-        {
-            var alignment = GetNewAlignment();
-            var characterClass = GetNewCharacterClass(alignment);
-            SetBaseRaceRandomizer.SetBaseRace = BaseRaceRandomizer.Randomize(alignment, characterClass);
-
-            var baseRace = SetBaseRaceRandomizer.Randomize(alignment, characterClass);
-            Assert.That(baseRace, Is.EqualTo(SetBaseRaceRandomizer.SetBaseRace));
+            ClassNameRandomizer = GetNewInstanceOf<IClassNameRandomizer>(ClassNameRandomizerTypeConstants.AnyNPC);
+            Stress(MakeAssertions);
         }
     }
 }
