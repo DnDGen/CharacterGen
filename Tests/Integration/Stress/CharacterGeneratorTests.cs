@@ -241,19 +241,78 @@ namespace CharacterGen.Tests.Integration.Stress
             Assert.That(character.Equipment.Treasure.Items, Is.Not.Empty);
         }
 
-        [Test]
-        public void StressLevel4Ghost()
+        [TestCase(RaceConstants.Metaraces.Ghost, 1)]
+        [TestCase(RaceConstants.Metaraces.Ghost, 2)]
+        [TestCase(RaceConstants.Metaraces.Ghost, 3)]
+        [TestCase(RaceConstants.Metaraces.Ghost, 4)]
+        [TestCase(RaceConstants.Metaraces.Ghost, 5)]
+        [TestCase(RaceConstants.Metaraces.Ghost, 6)]
+        [TestCase(RaceConstants.Metaraces.Ghost, 7)]
+        [TestCase(RaceConstants.Metaraces.Ghost, 8)]
+        [TestCase(RaceConstants.Metaraces.Ghost, 9)]
+        [TestCase(RaceConstants.Metaraces.Ghost, 10)]
+        [TestCase(RaceConstants.Metaraces.Ghost, 11)]
+        [TestCase(RaceConstants.Metaraces.Ghost, 12)]
+        [TestCase(RaceConstants.Metaraces.Ghost, 13)]
+        [TestCase(RaceConstants.Metaraces.Ghost, 14)]
+        [TestCase(RaceConstants.Metaraces.Ghost, 15)]
+        [TestCase(RaceConstants.Metaraces.Ghost, 16)]
+        [TestCase(RaceConstants.Metaraces.Ghost, 17)]
+        [TestCase(RaceConstants.Metaraces.Ghost, 18)]
+        [TestCase(RaceConstants.Metaraces.Ghost, 19)]
+        [TestCase(RaceConstants.Metaraces.Ghost, 20)]
+        [TestCase(RaceConstants.Metaraces.Lich, 1)]
+        [TestCase(RaceConstants.Metaraces.Lich, 2)]
+        [TestCase(RaceConstants.Metaraces.Lich, 3)]
+        [TestCase(RaceConstants.Metaraces.Lich, 4)]
+        [TestCase(RaceConstants.Metaraces.Lich, 5)]
+        [TestCase(RaceConstants.Metaraces.Lich, 6)]
+        [TestCase(RaceConstants.Metaraces.Lich, 7)]
+        [TestCase(RaceConstants.Metaraces.Lich, 8)]
+        [TestCase(RaceConstants.Metaraces.Lich, 9)]
+        [TestCase(RaceConstants.Metaraces.Lich, 10)]
+        [TestCase(RaceConstants.Metaraces.Lich, 11)]
+        [TestCase(RaceConstants.Metaraces.Lich, 12)]
+        [TestCase(RaceConstants.Metaraces.Lich, 13)]
+        [TestCase(RaceConstants.Metaraces.Lich, 14)]
+        [TestCase(RaceConstants.Metaraces.Lich, 15)]
+        [TestCase(RaceConstants.Metaraces.Lich, 16)]
+        [TestCase(RaceConstants.Metaraces.Lich, 17)]
+        [TestCase(RaceConstants.Metaraces.Lich, 18)]
+        [TestCase(RaceConstants.Metaraces.Lich, 19)]
+        [TestCase(RaceConstants.Metaraces.Lich, 20)]
+        [TestCase(RaceConstants.Metaraces.Vampire, 1)]
+        [TestCase(RaceConstants.Metaraces.Vampire, 2)]
+        [TestCase(RaceConstants.Metaraces.Vampire, 3)]
+        [TestCase(RaceConstants.Metaraces.Vampire, 4)]
+        [TestCase(RaceConstants.Metaraces.Vampire, 5)]
+        [TestCase(RaceConstants.Metaraces.Vampire, 6)]
+        [TestCase(RaceConstants.Metaraces.Vampire, 7)]
+        [TestCase(RaceConstants.Metaraces.Vampire, 8)]
+        [TestCase(RaceConstants.Metaraces.Vampire, 9)]
+        [TestCase(RaceConstants.Metaraces.Vampire, 10)]
+        [TestCase(RaceConstants.Metaraces.Vampire, 11)]
+        [TestCase(RaceConstants.Metaraces.Vampire, 12)]
+        [TestCase(RaceConstants.Metaraces.Vampire, 13)]
+        [TestCase(RaceConstants.Metaraces.Vampire, 14)]
+        [TestCase(RaceConstants.Metaraces.Vampire, 15)]
+        [TestCase(RaceConstants.Metaraces.Vampire, 16)]
+        [TestCase(RaceConstants.Metaraces.Vampire, 17)]
+        [TestCase(RaceConstants.Metaraces.Vampire, 18)]
+        [TestCase(RaceConstants.Metaraces.Vampire, 19)]
+        [TestCase(RaceConstants.Metaraces.Vampire, 20)]
+        public void StressUndead(string undead, int level)
         {
-            Stress(AssertLevel4Ghost);
+            Stress(() => AssertUndead(undead, level));
         }
 
-        private void AssertLevel4Ghost()
+        private void AssertUndead(string undead, int level)
         {
             var setMetaraceRandomizer = GetNewInstanceOf<ISetMetaraceRandomizer>();
-            setMetaraceRandomizer.SetMetarace = RaceConstants.Metaraces.Ghost;
+            setMetaraceRandomizer.SetMetarace = undead;
 
             var setLevelRandomizer = GetNewInstanceOf<ISetLevelRandomizer>();
-            setLevelRandomizer.SetLevel = 4;
+            setLevelRandomizer.SetLevel = level;
             setLevelRandomizer.AllowAdjustments = false;
 
             var character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, setLevelRandomizer, BaseRaceRandomizer, setMetaraceRandomizer, StatsRandomizer);
