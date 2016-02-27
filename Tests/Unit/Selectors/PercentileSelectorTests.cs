@@ -32,7 +32,7 @@ namespace CharacterGen.Tests.Unit.Selectors
             mockPercentileMapper.Setup(p => p.Map(tableName)).Returns(table);
 
             mockDice = new Mock<Dice>();
-            mockDice.Setup(d => d.Roll(1).Percentile()).Returns(1);
+            mockDice.Setup(d => d.Roll(1).IndividualRolls(100)).Returns(new[] { 1 });
             percentileSelector = new PercentileSelector(mockPercentileMapper.Object, mockDice.Object);
         }
 
@@ -48,7 +48,7 @@ namespace CharacterGen.Tests.Unit.Selectors
         [TestCase(10, "10")]
         public void GetPercentile(int roll, string content)
         {
-            mockDice.Setup(d => d.Roll(1).Percentile()).Returns(roll);
+            mockDice.Setup(d => d.Roll(1).IndividualRolls(100)).Returns(new[] { roll });
             var result = percentileSelector.SelectFrom(tableName);
             Assert.That(result, Is.EqualTo(content));
         }
@@ -69,7 +69,7 @@ namespace CharacterGen.Tests.Unit.Selectors
         [Test]
         public void IfRollNotPresentInTable_ThrowException()
         {
-            mockDice.Setup(d => d.Roll(1).Percentile()).Returns(11);
+            mockDice.Setup(d => d.Roll(1).IndividualRolls(100)).Returns(new[] { 11 });
             Assert.That(() => percentileSelector.SelectFrom(tableName), Throws.Exception.With.Message.EqualTo("11 is not a valid entry in the table table name"));
         }
     }

@@ -318,7 +318,7 @@ namespace CharacterGen.Tests.Integration.Stress
             var character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, setLevelRandomizer, BaseRaceRandomizer, setMetaraceRandomizer, StatsRandomizer);
 
             AssertCharacter(character);
-            Assert.That(character.Equipment.Treasure.Items, Is.Not.Empty);
+            Assert.That(character.Equipment.Treasure.Items, Is.Not.Empty, character.Class.ClassName);
         }
     }
 }

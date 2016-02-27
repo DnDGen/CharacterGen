@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CharacterGen.Tables
+﻿namespace CharacterGen.Tables
 {
     public static class TableNameConstants
     {
@@ -8,72 +6,74 @@ namespace CharacterGen.Tables
         {
             public static class Adjustments
             {
-                public const String ArcaneSpellFailures = "ArcaneSpellFailures";
-                public const String ArmorBonuses = "ArmorBonuses";
-                public const String ArmorCheckPenalties = "ArmorCheckPenalties";
-                public const String ClassHitDice = "ClassHitDice";
-                public const String CohortLevels = "CohortLevels";
-                public const String FeatArmorAdjustments = "FeatArmorAdjustments";
-                public const String FeatInitiativeBonuses = "FeatInitiativeBonuses";
-                public const String FighterFeatLevelRequirements = "FighterFeatLevelRequirements";
-                public const String LandSpeeds = "LandSpeeds";
-                public const String LeadershipModifiers = "LeadershipModifiers";
-                public const String LevelAdjustments = "LevelAdjustments";
-                public const String MaxDexterityBonus = "MaxDexterityBonus";
-                public const String MonsterHitDice = "MonsterHitDice";
-                public const String ProhibitedFieldQuantities = "ProhibitedFieldQuantities";
-                public const String RacialBaseAttackAdjustments = "RacialBaseAttackAdjustments";
-                public const String SkillPointsForClasses = "SkillPointsForClasses";
-                public const String SpecialistFieldQuantities = "SpecialistFieldQuantities";
+                public const string ArcaneSpellFailures = "ArcaneSpellFailures";
+                public const string ArmorBonuses = "ArmorBonuses";
+                public const string ArmorCheckPenalties = "ArmorCheckPenalties";
+                public const string ClassHitDice = "ClassHitDice";
+                public const string CohortLevels = "CohortLevels";
+                public const string FeatArmorAdjustments = "FeatArmorAdjustments";
+                public const string FeatInitiativeBonuses = "FeatInitiativeBonuses";
+                public const string FighterFeatLevelRequirements = "FighterFeatLevelRequirements";
+                public const string LandSpeeds = "LandSpeeds";
+                public const string LeadershipModifiers = "LeadershipModifiers";
+                public const string LevelAdjustments = "LevelAdjustments";
+                public const string MaxDexterityBonus = "MaxDexterityBonus";
+                public const string MonsterHitDice = "MonsterHitDice";
+                public const string ProhibitedFieldQuantities = "ProhibitedFieldQuantities";
+                public const string RacialBaseAttackAdjustments = "RacialBaseAttackAdjustments";
+                public const string SkillPointsForClasses = "SkillPointsForClasses";
+                public const string SpecialistFieldQuantities = "SpecialistFieldQuantities";
             }
 
             public static class Collection
             {
-                public const String AdditionalFeatData = "AdditionalFeatData";
-                public const String AlignmentGroups = "AlignmentGroups";
-                public const String Animals = "Animals";
-                public const String ArmorClassModifiers = "ArmorClassModifiers";
-                public const String AutomaticLanguages = "AutomaticLanguages";
-                public const String BaseRaceGroups = "BaseRaceGroups";
-                public const String BonusLanguages = "BonusLanguages";
-                public const String ClassNameGroups = "ClassNameGroups";
-                public const String ClassSkills = "ClassSkills";
-                public const String CrossClassSkills = "CrossClassSkills";
-                public const String DragonSpecies = "DragonSpecies";
-                public const String EquivalentFeats = "EquivalentFeats";
-                public const String FeatFoci = "FeatFoci";
-                public const String FeatGroups = "FeatGroups";
-                public const String ItemGroups = "ItemGroups";
-                public const String MetaraceGroups = "MetaraceGroups";
-                public const String Names = "Names";
-                public const String ProhibitedFields = "ProhibitedFields";
-                public const String RacialFeatHitDieRequirements = "RacialFeatHitDieRequirements";
-                public const String RequiredFeats = "RequiredFeats";
-                public const String SkillData = "SkillData";
-                public const String SkillGroups = "SkillGroups";
-                public const String SkillSynergy = "SkillSynergy";
-                public const String SpecialistFields = "SpecialistFields";
-                public const String StatGroups = "StatGroups";
-                public const String StatPriorities = "StatPriorities";
+                public const string AdditionalFeatData = "AdditionalFeatData";
+                public const string AlignmentGroups = "AlignmentGroups";
+                public const string Animals = "Animals";
+                public const string ArmorClassModifiers = "ArmorClassModifiers";
+                public const string AutomaticLanguages = "AutomaticLanguages";
+                public const string BaseRaceGroups = "BaseRaceGroups";
+                public const string BonusLanguages = "BonusLanguages";
+                public const string ClassNameGroups = "ClassNameGroups";
+                public const string ClassSkills = "ClassSkills";
+                public const string CrossClassSkills = "CrossClassSkills";
+                public const string DragonSpecies = "DragonSpecies";
+                public const string EquivalentFeats = "EquivalentFeats";
+                public const string FeatFoci = "FeatFoci";
+                public const string FeatGroups = "FeatGroups";
+                public const string HeightRolls = "HeightRolls";
+                public const string ItemGroups = "ItemGroups";
+                public const string MetaraceGroups = "MetaraceGroups";
+                public const string Names = "Names";
+                public const string ProhibitedFields = "ProhibitedFields";
+                public const string RacialFeatHitDieRequirements = "RacialFeatHitDieRequirements";
+                public const string RequiredFeats = "RequiredFeats";
+                public const string SkillData = "SkillData";
+                public const string SkillGroups = "SkillGroups";
+                public const string SkillSynergy = "SkillSynergy";
+                public const string SpecialistFields = "SpecialistFields";
+                public const string StatGroups = "StatGroups";
+                public const string StatPriorities = "StatPriorities";
+                public const string WeightRolls = "WeightRolls";
             }
 
             public static class Percentile
             {
-                public const String AlignmentGoodness = "AlignmentGoodness";
-                public const String AlignmentLawfulness = "AlignmentLawfulness";
-                public const String LeadershipMovement = "LeadershipMovement";
-                public const String Reputation = "Reputation";
-                public const String Traits = "Traits";
+                public const string AlignmentGoodness = "AlignmentGoodness";
+                public const string AlignmentLawfulness = "AlignmentLawfulness";
+                public const string LeadershipMovement = "LeadershipMovement";
+                public const string Reputation = "Reputation";
+                public const string Traits = "Traits";
             }
 
             public static class TrueOrFalse
             {
-                public const String AssignPointToCrossClassSkill = "AssignPointToCrossClassSkill";
-                public const String AttractCohortOfDifferentAlignment = "AttractCohortOfDifferentAlignment";
-                public const String IncreaseFirstPriorityStat = "IncreaseFirstPriorityStat";
-                public const String KilledCohort = "KilledCohort";
-                public const String KilledFollowers = "KilledFollowers";
-                public const String Male = "Male";
+                public const string AssignPointToCrossClassSkill = "AssignPointToCrossClassSkill";
+                public const string AttractCohortOfDifferentAlignment = "AttractCohortOfDifferentAlignment";
+                public const string IncreaseFirstPriorityStat = "IncreaseFirstPriorityStat";
+                public const string KilledCohort = "KilledCohort";
+                public const string KilledFollowers = "KilledFollowers";
+                public const string Male = "Male";
             }
         }
 
@@ -81,37 +81,38 @@ namespace CharacterGen.Tables
         {
             public static class Adjustments
             {
-                public const String AGEStatAdjustments = "{0}StatAdjustments";
-                public const String CLASSFeatLevelRequirements = "{0}FeatLevelRequirements";
-                public const String FEATClassRequirements = "{0}ClassRequirements";
-                public const String FEATSkillRankRequirements = "{0}SkillRankRequirements";
-                public const String FEATStatRequirements = "{0}StatRequirements";
-                public const String LevelXAnimalTricks = "Level{0}AnimalTricks";
-                public const String LevelXCLASSSpellsPerDay = "Level{0}{1}SpellsPerDay";
-                public const String LevelXFollowerQuantities = "Level{0}FollowerQuantities";
-                public const String RACEAges = "{0}Ages";
-                public const String RACEHeights = "{0}Heights";
-                public const String RACEWeights = "{0}Weights";
-                public const String STATStatAdjustments = "{0}StatAdjustments";
+                public const string AGEStatAdjustments = "{0}StatAdjustments";
+                public const string CLASSFeatLevelRequirements = "{0}FeatLevelRequirements";
+                public const string FEATClassRequirements = "{0}ClassRequirements";
+                public const string FEATSkillRankRequirements = "{0}SkillRankRequirements";
+                public const string FEATStatRequirements = "{0}StatRequirements";
+                public const string GENDERHeights = "{0}Heights";
+                public const string GENDERWeights = "{0}Weights";
+                public const string LevelXAnimalTricks = "Level{0}AnimalTricks";
+                public const string LevelXCLASSSpellsPerDay = "Level{0}{1}SpellsPerDay";
+                public const string LevelXFollowerQuantities = "Level{0}FollowerQuantities";
+                public const string STATStatAdjustments = "{0}StatAdjustments";
+                public const string RACEAges = "{0}Ages";
             }
 
             public static class Collection
             {
-                public const String RACEFeatData = "{0}FeatData";
-                public const String CLASSFeatData = "{0}FeatData";
+                public const string RACEFeatData = "{0}FeatData";
+                public const string CLASSFeatData = "{0}FeatData";
+                public const string CLASSTYPEAgeRolls = "{0}AgeRolls";
             }
 
             public static class Percentile
             {
-                public const String GOODNESSCharacterClasses = "{0}CharacterClasses";
-                public const String GOODNESSCLASSBaseRaces = "{0}{1}BaseRaces";
-                public const String GOODNESSCLASSMetaraces = "{0}{1}Metaraces";
-                public const String LevelXPower = "Level{0}Power";
+                public const string GOODNESSCharacterClasses = "{0}CharacterClasses";
+                public const string GOODNESSCLASSBaseRaces = "{0}{1}BaseRaces";
+                public const string GOODNESSCLASSMetaraces = "{0}{1}Metaraces";
+                public const string LevelXPower = "Level{0}Power";
             }
 
             public static class TrueOrFalse
             {
-                public const String CLASSHasSpecialistFields = "{0}HasSpecialistFields";
+                public const string CLASSHasSpecialistFields = "{0}HasSpecialistFields";
             }
         }
     }

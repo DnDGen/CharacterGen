@@ -1,16 +1,14 @@
-﻿using System;
-
-namespace CharacterGen.Generators.Randomizers.Stats
+﻿namespace CharacterGen.Generators.Randomizers.Stats
 {
     public static class StatsRandomizerTypeConstants
     {
-        public const String Average = "Average";
-        public const String BestOfFour = "Best of four";
-        public const String Good = "Good";
-        public const String Heroic = "Heroic";
-        public const String OnesAsSixes = "Ones as sixes";
-        public const String Poor = "Poor";
-        public const String Raw = "Raw";
-        public const String TwoTenSidedDice = "2d10";
+        public const string Average = "Average";
+        public const string BestOfFour = "Best of four";
+        public const string Good = "Good";
+        public const string Heroic = "Heroic";
+        public const string OnesAsSixes = "Ones as sixes";
+        public const string Poor = "Poor";
+        public const string Raw = "Raw";
+        public const string TwoTenSidedDice = "2d10";
     }
 }

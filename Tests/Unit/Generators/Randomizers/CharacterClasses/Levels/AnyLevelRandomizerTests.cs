@@ -23,7 +23,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses.Levels
         [Test]
         public void RandomizeReturnD20Result()
         {
-            mockDice.Setup(d => d.Roll(1).d20()).Returns(9266);
+            mockDice.Setup(d => d.Roll(1).IndividualRolls(20)).Returns(new[] { 9266 });
             var level = randomizer.Randomize();
             Assert.That(level, Is.EqualTo(9266));
         }

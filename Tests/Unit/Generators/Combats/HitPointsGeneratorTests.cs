@@ -45,8 +45,8 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             hitDice[characterClass.ClassName] = 9266;
             hitDice["otherclassname"] = 42;
 
-            mockDice.Setup(d => d.Roll(0).d8()).Returns(0);
-            mockDice.Setup(d => d.Roll(1).d(9266)).Returns(42);
+            mockDice.Setup(d => d.Roll(0).IndividualRolls(8)).Returns(new[] { 0 });
+            mockDice.Setup(d => d.Roll(1).IndividualRolls(9266)).Returns(new[] { 42 });
 
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.ClassHitDice)).Returns(hitDice);
         }
@@ -63,10 +63,10 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         public void RollHitPointsPerLevel()
         {
             characterClass.Level = 600;
+            mockDice.Setup(d => d.Roll(600).IndividualRolls(9266)).Returns(new[] { 90210 });
 
             var hitPoints = hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race, feats);
-            Assert.That(hitPoints, Is.EqualTo(42 * 600));
-            mockDice.Verify(d => d.Roll(1).d(9266), Times.Exactly(600));
+            Assert.That(hitPoints, Is.EqualTo(90210));
         }
 
         [Test]
@@ -74,27 +74,29 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         {
             characterClass.Level = 2;
             constitutionBonus = 5;
-
-            mockDice.Setup(d => d.Roll(1).d(9266)).Returns(42);
+            mockDice.Setup(d => d.Roll(2).IndividualRolls(9266)).Returns(new[] { 90210, 42 });
 
             var hitPoints = hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race, feats);
-            Assert.That(hitPoints, Is.EqualTo(94));
+            Assert.That(hitPoints, Is.EqualTo(90262));
         }
 
         [Test]
         public void CannotGainFewerThan1HitPointPerLevel()
         {
-            characterClass.Level = 600;
+            characterClass.Level = 5;
             constitutionBonus = int.MinValue;
+            mockDice.Setup(d => d.Roll(5).IndividualRolls(9266)).Returns(new[] { 90210, 42, 600, 1337, 1234 });
 
             var hitPoints = hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race, feats);
-            Assert.That(hitPoints, Is.EqualTo(600));
+            Assert.That(hitPoints, Is.EqualTo(5));
         }
 
         [Test]
         public void NonMonsterDoNotGetAdditionalHitDice()
         {
             characterClass.Level = 2;
+            mockDice.Setup(d => d.Roll(2).IndividualRolls(9266)).Returns(new[] { 90210, 42 });
+
             race.BaseRace = "differentbaserace";
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
                 .Returns(new[] { "otherbaserace", "baserace" });
@@ -105,7 +107,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice)).Returns(monsterHitDice);
 
             var hitPoints = hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race, feats);
-            Assert.That(hitPoints, Is.EqualTo(84));
+            Assert.That(hitPoints, Is.EqualTo(90252));
             mockAdjustmentsSelector.Verify(s => s.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice), Times.Never);
         }
 
@@ -113,6 +115,8 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         public void MonstersGetAdditionalHitDice()
         {
             characterClass.Level = 2;
+            mockDice.Setup(d => d.Roll(2).IndividualRolls(9266)).Returns(new[] { 90210, 42 });
+
             race.BaseRace = "baserace";
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
                 .Returns(new[] { "otherbaserace", "baserace" });
@@ -121,16 +125,19 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             monsterHitDice["monster"] = 1;
             monsterHitDice["baserace"] = 3;
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice)).Returns(monsterHitDice);
-            mockDice.Setup(d => d.Roll(1).d(8)).Returns(5);
+
+            mockDice.Setup(d => d.Roll(3).IndividualRolls(8)).Returns(new[] { 600, 1337, 1234 });
 
             var hitPoints = hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race, feats);
-            Assert.That(hitPoints, Is.EqualTo(99));
+            Assert.That(hitPoints, Is.EqualTo(93423));
         }
 
         [Test]
         public void MonstersApplyConstitutionBonusForEachAdditionalHitDie()
         {
             characterClass.Level = 2;
+            mockDice.Setup(d => d.Roll(2).IndividualRolls(9266)).Returns(new[] { 90210, 42 });
+
             race.BaseRace = "baserace";
             constitutionBonus = 5;
 
@@ -141,18 +148,21 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             monsterHitDice["monster"] = 1;
             monsterHitDice["baserace"] = 3;
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice)).Returns(monsterHitDice);
-            mockDice.Setup(d => d.Roll(1).d(8)).Returns(5);
+
+            mockDice.Setup(d => d.Roll(3).IndividualRolls(8)).Returns(new[] { 600, 1337, 1234 });
 
             var hitPoints = hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race, feats);
-            Assert.That(hitPoints, Is.EqualTo(124));
+            Assert.That(hitPoints, Is.EqualTo(93448));
         }
 
         [Test]
         public void MonstersCannotGainFewerThan1HitPointPerHitDie()
         {
             characterClass.Level = 2;
+            mockDice.Setup(d => d.Roll(2).IndividualRolls(9266)).Returns(new[] { 90210, 42 });
+
             race.BaseRace = "baserace";
-            constitutionBonus = -99999;
+            constitutionBonus = int.MinValue;
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
                 .Returns(new[] { "otherbaserace", "baserace" });
@@ -161,7 +171,8 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             monsterHitDice["monster"] = 1;
             monsterHitDice["baserace"] = 3;
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice)).Returns(monsterHitDice);
-            mockDice.Setup(d => d.Roll(1).d(8)).Returns(7);
+
+            mockDice.Setup(d => d.Roll(3).IndividualRolls(8)).Returns(new[] { 600, 1337, 1234 });
 
             var hitPoints = hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race, feats);
             Assert.That(hitPoints, Is.EqualTo(5));
@@ -171,6 +182,8 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         public void HalfDragonIncreasesMonsterHitDie()
         {
             characterClass.Level = 2;
+            mockDice.Setup(d => d.Roll(2).IndividualRolls(9266)).Returns(new[] { 90210, 42 });
+
             race.BaseRace = "baserace";
             race.Metarace = RaceConstants.Metaraces.HalfDragon;
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
@@ -180,19 +193,24 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             monsterHitDice["monster"] = 1;
             monsterHitDice["baserace"] = 3;
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice)).Returns(monsterHitDice);
-            mockDice.Setup(d => d.Roll(1).d(10)).Returns(5);
-            mockDice.Setup(d => d.Roll(1).d(8)).Returns(9);
+
+            mockDice.Setup(d => d.Roll(3).IndividualRolls(10)).Returns(new[] { 2345, 3456, 4567 });
+            mockDice.Setup(d => d.Roll(3).IndividualRolls(8)).Returns(new[] { 600, 1337, 1234 });
 
             var hitPoints = hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race, feats);
-            Assert.That(hitPoints, Is.EqualTo(99));
-            mockDice.Verify(d => d.Roll(It.IsAny<int>()).d(8), Times.Never);
-            mockDice.Verify(d => d.Roll(It.IsAny<int>()).d8(), Times.Never);
+            Assert.That(hitPoints, Is.EqualTo(100620));
+            mockDice.Verify(d => d.Roll(It.IsAny<int>()).IndividualRolls(8), Times.Never);
         }
 
         [Test]
         public void UndeadIncreasesMonsterHitDie()
         {
             characterClass.Level = 2;
+
+            var mockClassPartialRoll = new Mock<PartialRoll>();
+            mockClassPartialRoll.Setup(r => r.IndividualRolls(12)).Returns(new[] { 90210, 42 });
+            mockDice.Setup(d => d.Roll(2)).Returns(mockClassPartialRoll.Object);
+
             race.BaseRace = "baserace";
             race.Metarace = "undead";
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
@@ -200,31 +218,36 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Undead))
                 .Returns(new[] { "undead", "other undead" });
 
-            mockDice.SetupSequence(d => d.Roll(1).d(12)).Returns(1).Returns(3).Returns(5).Returns(6).Returns(8);
-
             var monsterHitDice = new Dictionary<string, int>();
             monsterHitDice["monster"] = 1;
             monsterHitDice["baserace"] = 3;
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice)).Returns(monsterHitDice);
 
+            var mockRacePartialRoll = new Mock<PartialRoll>();
+            mockRacePartialRoll.Setup(r => r.IndividualRolls(12)).Returns(new[] { 5678, 6789, 7890 });
+            mockRacePartialRoll.Setup(r => r.IndividualRolls(10)).Returns(new[] { 2345, 3456, 4567 });
+            mockRacePartialRoll.Setup(r => r.IndividualRolls(8)).Returns(new[] { 600, 1337, 1234 });
+            mockDice.Setup(d => d.Roll(3)).Returns(mockRacePartialRoll.Object);
+
             var hitPoints = hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race, feats);
-            Assert.That(hitPoints, Is.EqualTo(23));
-            mockDice.Verify(d => d.Roll(It.IsAny<int>()).d(8), Times.Never);
-            mockDice.Verify(d => d.Roll(It.IsAny<int>()).d8(), Times.Never);
+            Assert.That(hitPoints, Is.EqualTo(110609));
+            mockDice.Verify(d => d.Roll(It.IsAny<int>()).IndividualRolls(8), Times.Never);
+            mockDice.Verify(d => d.Roll(It.IsAny<int>()).IndividualRolls(10), Times.Never);
         }
 
         [Test]
         public void UndeadSetsClassHitDieTo12()
         {
             characterClass.Level = 2;
+            mockDice.Setup(d => d.Roll(2).IndividualRolls(12)).Returns(new[] { 90210, 42 });
+
             race.Metarace = "undead";
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Undead))
                 .Returns(new[] { "undead", "other undead" });
-            mockDice.Setup(d => d.Roll(1).d(12)).Returns(7);
 
             var hitPoints = hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race, feats);
-            Assert.That(hitPoints, Is.EqualTo(14));
-            mockDice.Verify(d => d.Roll(It.IsAny<int>()).d(9266), Times.Never);
+            Assert.That(hitPoints, Is.EqualTo(90252));
+            mockDice.Verify(d => d.Roll(It.IsAny<int>()).IndividualRolls(9266), Times.Never);
         }
 
         [Test]
@@ -233,7 +256,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             feats.Add(new Feat { Name = FeatConstants.Toughness, Power = 3 });
 
             var hitPoints = hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race, feats);
-            Assert.That(hitPoints, Is.EqualTo(3));
+            Assert.That(hitPoints, Is.EqualTo(45));
         }
 
         [Test]
@@ -243,7 +266,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             feats.Add(new Feat { Name = FeatConstants.Toughness, Power = 3 });
 
             var hitPoints = hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race, feats);
-            Assert.That(hitPoints, Is.EqualTo(6));
+            Assert.That(hitPoints, Is.EqualTo(48));
         }
 
         [Test]
@@ -252,7 +275,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             characterClass.Level = 3;
             constitutionBonus = -2;
 
-            mockDice.SetupSequence(d => d.Roll(1).d(9266)).Returns(1).Returns(2).Returns(4);
+            mockDice.SetupSequence(d => d.Roll(3).IndividualRolls(9266)).Returns(new[] { 1, 2, 4 });
 
             var hitPoints = hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race, feats);
             Assert.That(hitPoints, Is.EqualTo(4));
@@ -262,6 +285,8 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         public void MinimumCheckAppliedPerMonsterHitDie()
         {
             characterClass.Level = 2;
+            mockDice.Setup(d => d.Roll(2).IndividualRolls(9266)).Returns(new[] { 90210, 42 });
+
             race.BaseRace = "baserace";
             constitutionBonus = -2;
 
@@ -272,12 +297,40 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             monsterHitDice["monster"] = 1234;
             monsterHitDice["baserace"] = 3;
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice)).Returns(monsterHitDice);
-            mockDice.SetupSequence(d => d.Roll(1).d(8)).Returns(1).Returns(2).Returns(4);
+
+            mockDice.SetupSequence(d => d.Roll(3).IndividualRolls(8)).Returns(new[] { 1, 2, 4 });
 
             var hitPoints = hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race, feats);
-            var classHitPoints = 80;
-            var monsterHitPoints = 4;
-            Assert.That(hitPoints, Is.EqualTo(classHitPoints + monsterHitPoints));
+            Assert.That(hitPoints, Is.EqualTo(90252));
+        }
+
+        [Test]
+        public void MinimumCheckAppliedPerUndeadHitDie()
+        {
+            characterClass.Level = 5;
+            var mockClassPartialRoll = new Mock<PartialRoll>();
+            mockClassPartialRoll.Setup(r => r.IndividualRolls(12)).Returns(new[] { 4, 5, 7, 10, 12 });
+            mockDice.Setup(d => d.Roll(5)).Returns(mockClassPartialRoll.Object);
+            constitutionBonus = -5;
+
+            race.BaseRace = "baserace";
+            race.Metarace = "undead";
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
+                .Returns(new[] { "otherbaserace", "baserace" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Undead))
+                .Returns(new[] { "undead", "other undead" });
+
+            var monsterHitDice = new Dictionary<string, int>();
+            monsterHitDice["monster"] = 1;
+            monsterHitDice["baserace"] = 3;
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice)).Returns(monsterHitDice);
+
+            var mockRacePartialRoll = new Mock<PartialRoll>();
+            mockRacePartialRoll.Setup(r => r.IndividualRolls(12)).Returns(new[] { 1, 3, 8 });
+            mockDice.Setup(d => d.Roll(3)).Returns(mockRacePartialRoll.Object);
+
+            var hitPoints = hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race, feats);
+            Assert.That(hitPoints, Is.EqualTo(21));
         }
     }
 }

@@ -9,7 +9,6 @@ using CharacterGen.Tables;
 using Moq;
 using NUnit.Framework;
 using RollGen;
-using System;
 using System.Collections.Generic;
 
 namespace CharacterGen.Tests.Unit.Generators
@@ -17,8 +16,8 @@ namespace CharacterGen.Tests.Unit.Generators
     [TestFixture]
     public class RaceGeneratorTests
     {
-        private const String BaseRace = "baseRace";
-        private const String Metarace = "metarace";
+        private const string BaseRace = "baseRace";
+        private const string Metarace = "metarace";
 
         private Mock<IBooleanPercentileSelector> mockBooleanPercentileSelector;
         private Mock<ICollectionsSelector> mockCollectionsSelector;
@@ -30,9 +29,6 @@ namespace CharacterGen.Tests.Unit.Generators
         private CharacterClass characterClass;
         private Alignment alignment;
         private Dictionary<string, int> speeds;
-        private Dictionary<string, int> ageRolls;
-        private Dictionary<string, int> heightRolls;
-        private Dictionary<string, int> weightRolls;
         private List<string> intuitiveClasses;
         private List<string> trainedClasses;
 
@@ -43,17 +39,13 @@ namespace CharacterGen.Tests.Unit.Generators
             mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
             mockBooleanPercentileSelector = new Mock<IBooleanPercentileSelector>();
             mockDice = new Mock<Dice>();
-            raceGenerator = new RaceGenerator(mockBooleanPercentileSelector.Object, mockCollectionsSelector.Object,
-                mockAdjustmentsSelector.Object, mockDice.Object);
+            raceGenerator = new RaceGenerator(mockBooleanPercentileSelector.Object, mockCollectionsSelector.Object, mockAdjustmentsSelector.Object, mockDice.Object);
 
             mockBaseRaceRandomizer = new Mock<RaceRandomizer>();
             mockMetaraceRandomizer = new Mock<RaceRandomizer>();
             characterClass = new CharacterClass();
             alignment = new Alignment();
             speeds = new Dictionary<string, int>();
-            ageRolls = new Dictionary<string, int>();
-            heightRolls = new Dictionary<string, int>();
-            weightRolls = new Dictionary<string, int>();
             intuitiveClasses = new List<string>();
             trainedClasses = new List<string>();
 
@@ -61,39 +53,13 @@ namespace CharacterGen.Tests.Unit.Generators
             alignment.Goodness = "goodness";
             speeds[BaseRace] = 9266;
 
-            ageRolls[AdjustmentConstants.Quantity + GroupConstants.Intuitive] = 42;
-            ageRolls[AdjustmentConstants.Die + GroupConstants.Intuitive] = 600;
-            ageRolls[AdjustmentConstants.Quantity + GroupConstants.SelfTaught] = 420;
-            ageRolls[AdjustmentConstants.Die + GroupConstants.SelfTaught] = 6000;
-            ageRolls[AdjustmentConstants.Quantity + GroupConstants.Trained] = 4200;
-            ageRolls[AdjustmentConstants.Die + GroupConstants.Trained] = 60000;
-            ageRolls[RaceConstants.Ages.Adulthood] = 90210;
-            ageRolls[RaceConstants.Ages.MiddleAge] = 90230;
-            ageRolls[RaceConstants.Ages.Old] = 90240;
-            ageRolls[RaceConstants.Ages.Venerable] = 90250;
+            SetUpTablesForBaseRace(BaseRace);
 
-            heightRolls[AdjustmentConstants.Base + Boolean.FalseString] = 902;
-            heightRolls[AdjustmentConstants.Quantity] = 10;
-            heightRolls[AdjustmentConstants.Die] = 4;
-
-            weightRolls[AdjustmentConstants.Base + Boolean.FalseString] = 2;
-            weightRolls[AdjustmentConstants.Quantity] = 92;
-            weightRolls[AdjustmentConstants.Die] = 66;
-
-            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.RACEAges, BaseRace);
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(ageRolls);
-
-            tableName = String.Format(TableNameConstants.Formattable.Adjustments.RACEHeights, BaseRace);
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(heightRolls);
-
-            tableName = String.Format(TableNameConstants.Formattable.Adjustments.RACEWeights, BaseRace);
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(weightRolls);
-
-            mockDice.Setup(d => d.Roll(42).d(600)).Returns(14);
-            mockDice.Setup(d => d.Roll(420).d(6000)).Returns(24);
-            mockDice.Setup(d => d.Roll(4200).d(60000)).Returns(34);
-            mockDice.Setup(d => d.Roll(10).d(4)).Returns(104);
-            mockDice.Setup(d => d.Roll(92).d(66)).Returns(426);
+            mockDice.Setup(d => d.Roll("42d600")).Returns(14);
+            mockDice.Setup(d => d.Roll("420d6000")).Returns(24);
+            mockDice.Setup(d => d.Roll("4200d60000")).Returns(34);
+            mockDice.Setup(d => d.Roll("902+10d4")).Returns(104);
+            mockDice.Setup(d => d.Roll("2+92d66")).Returns(426);
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.LandSpeeds)).Returns(speeds);
             mockBaseRaceRandomizer.Setup(r => r.Randomize(alignment, characterClass)).Returns(BaseRace);
             mockMetaraceRandomizer.Setup(r => r.Randomize(alignment, characterClass)).Returns(Metarace);
@@ -101,6 +67,55 @@ namespace CharacterGen.Tests.Unit.Generators
                 .Returns(intuitiveClasses);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Trained))
                 .Returns(trainedClasses);
+        }
+
+        private void SetUpTablesForBaseRace(string baseRace)
+        {
+            var tableName = string.Format(TableNameConstants.Formattable.Collection.CLASSTYPEAgeRolls, GroupConstants.Trained);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(tableName, baseRace)).Returns(new[] { "4200d60000" });
+
+            tableName = string.Format(TableNameConstants.Formattable.Collection.CLASSTYPEAgeRolls, GroupConstants.SelfTaught);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(tableName, baseRace)).Returns(new[] { "420d6000" });
+
+            tableName = string.Format(TableNameConstants.Formattable.Collection.CLASSTYPEAgeRolls, GroupConstants.Intuitive);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(tableName, baseRace)).Returns(new[] { "42d600" });
+
+            var ages = new Dictionary<string, int>();
+            ages[RaceConstants.Ages.Adulthood] = 90210;
+            ages[RaceConstants.Ages.MiddleAge] = 90230;
+            ages[RaceConstants.Ages.Old] = 90240;
+            ages[RaceConstants.Ages.Venerable] = 90250;
+
+            var maleHeights = new Dictionary<string, int>();
+            var femaleHeights = new Dictionary<string, int>();
+            var maleWeights = new Dictionary<string, int>();
+            var femaleWeights = new Dictionary<string, int>();
+
+            maleHeights[baseRace] = 209;
+            femaleHeights[baseRace] = 902;
+            maleWeights[baseRace] = 22;
+            femaleWeights[baseRace] = 2;
+
+            tableName = string.Format(TableNameConstants.Formattable.Adjustments.RACEAges, baseRace);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(ages);
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.HeightRolls, baseRace))
+                .Returns(new[] { "10d4" });
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.WeightRolls, baseRace))
+                .Returns(new[] { "92d66" });
+
+            tableName = string.Format(TableNameConstants.Formattable.Adjustments.GENDERHeights, true);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(maleHeights);
+
+            tableName = string.Format(TableNameConstants.Formattable.Adjustments.GENDERHeights, false);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(femaleHeights);
+
+            tableName = string.Format(TableNameConstants.Formattable.Adjustments.GENDERWeights, true);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(maleWeights);
+
+            tableName = string.Format(TableNameConstants.Formattable.Adjustments.GENDERWeights, false);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(femaleWeights);
         }
 
         [Test]
@@ -122,9 +137,6 @@ namespace CharacterGen.Tests.Unit.Generators
         {
             mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.Male)).Returns(true);
 
-            heightRolls[AdjustmentConstants.Base + Boolean.TrueString] = 209;
-            weightRolls[AdjustmentConstants.Base + Boolean.TrueString] = 22;
-
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
             Assert.That(race.Male, Is.True);
         }
@@ -145,17 +157,7 @@ namespace CharacterGen.Tests.Unit.Generators
             mockBaseRaceRandomizer.Setup(r => r.Randomize(alignment, characterClass)).Returns(RaceConstants.BaseRaces.Drow);
             speeds[RaceConstants.BaseRaces.Drow] = 9266;
 
-            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.RACEAges, RaceConstants.BaseRaces.Drow);
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(ageRolls);
-
-            tableName = String.Format(TableNameConstants.Formattable.Adjustments.RACEHeights, RaceConstants.BaseRaces.Drow);
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(heightRolls);
-
-            tableName = String.Format(TableNameConstants.Formattable.Adjustments.RACEWeights, RaceConstants.BaseRaces.Drow);
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(weightRolls);
-
-            heightRolls[AdjustmentConstants.Base + Boolean.TrueString] = 209;
-            weightRolls[AdjustmentConstants.Base + Boolean.TrueString] = 22;
+            SetUpTablesForBaseRace(RaceConstants.BaseRaces.Drow);
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
             Assert.That(race.Male, Is.True);
@@ -168,14 +170,7 @@ namespace CharacterGen.Tests.Unit.Generators
             mockBaseRaceRandomizer.Setup(r => r.Randomize(alignment, characterClass)).Returns(RaceConstants.BaseRaces.Drow);
             speeds[RaceConstants.BaseRaces.Drow] = 9266;
 
-            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.RACEAges, RaceConstants.BaseRaces.Drow);
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(ageRolls);
-
-            tableName = String.Format(TableNameConstants.Formattable.Adjustments.RACEHeights, RaceConstants.BaseRaces.Drow);
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(heightRolls);
-
-            tableName = String.Format(TableNameConstants.Formattable.Adjustments.RACEWeights, RaceConstants.BaseRaces.Drow);
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(weightRolls);
+            SetUpTablesForBaseRace(RaceConstants.BaseRaces.Drow);
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
             Assert.That(race.Male, Is.False);
@@ -192,7 +187,7 @@ namespace CharacterGen.Tests.Unit.Generators
         [Test]
         public void MediumSizeIsDefault()
         {
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, It.IsAny<String>())).Returns(new[] { "other base race" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, It.IsAny<string>())).Returns(new[] { "other base race" });
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
             Assert.That(race.Size, Is.EqualTo(RaceConstants.Sizes.Medium));
         }
@@ -207,7 +202,7 @@ namespace CharacterGen.Tests.Unit.Generators
 
         [TestCase(RaceConstants.Metaraces.HalfCelestial)]
         [TestCase(RaceConstants.Metaraces.HalfFiend)]
-        public void HaveWings(String metarace)
+        public void HaveWings(string metarace)
         {
             mockMetaraceRandomizer.Setup(r => r.Randomize(alignment, characterClass)).Returns(metarace);
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
@@ -262,7 +257,7 @@ namespace CharacterGen.Tests.Unit.Generators
             alignment.Lawfulness = "lawfulness";
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
-            mockCollectionsSelector.Verify(s => s.SelectFrom(TableNameConstants.Set.Collection.DragonSpecies, It.IsAny<String>()), Times.Never);
+            mockCollectionsSelector.Verify(s => s.SelectFrom(TableNameConstants.Set.Collection.DragonSpecies, It.IsAny<string>()), Times.Never);
             Assert.That(race.MetaraceSpecies, Is.Empty);
         }
 

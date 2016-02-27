@@ -5,7 +5,6 @@ using CharacterGen.Generators.Randomizers.Races;
 using CharacterGen.Selectors;
 using CharacterGen.Tables;
 using RollGen;
-using System;
 using System.Linq;
 
 namespace CharacterGen.Generators.Domain
@@ -39,6 +38,16 @@ namespace CharacterGen.Generators.Domain
             race.LandSpeed = DetermineLandSpeed(race);
             race.AerialSpeed = DetermineAerialSpeed(race);
 
+            //race.Age = DetermineAge(race, characterClass);
+
+            //var baseHeights = adjustmentsSelector.SelectFrom(TableNameConstants.Formattable.Adjustments.GENDERHeights, race.Male);
+            //var heightModifier = GetModifier(race, TableNameConstants.Set.Collection.HeightRolls);
+            //race.Height = baseHeights[race.BaseRace] + heightModifier;
+
+            //var baseWeights = adjustmentsSelector.SelectFrom(TableNameConstants.Formattable.Adjustments.GENDERWeights, race.Male);
+            //var weightModifier = GetModifier(race, TableNameConstants.Set.Collection.WeightRolls);
+            //race.Weight = baseWeights[race.BaseRace] + heightModifier * weightModifier;
+
             return race;
         }
 
@@ -50,7 +59,7 @@ namespace CharacterGen.Generators.Domain
             return collectionsSelector.SelectRandomFrom(TableNameConstants.Set.Collection.DragonSpecies, alignment.ToString());
         }
 
-        private Boolean DetermineIfMale(string baseRace, string className)
+        private bool DetermineIfMale(string baseRace, string className)
         {
             if (baseRace == RaceConstants.BaseRaces.Drow && className == CharacterClassConstants.Wizard)
                 return true;
@@ -61,7 +70,7 @@ namespace CharacterGen.Generators.Domain
             return booleanPercentileSelector.SelectFrom(TableNameConstants.Set.TrueOrFalse.Male);
         }
 
-        private String DetermineSize(String baseRace)
+        private string DetermineSize(string baseRace)
         {
             var largeRaces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, RaceConstants.Sizes.Large);
             if (largeRaces.Contains(baseRace))
@@ -74,7 +83,7 @@ namespace CharacterGen.Generators.Domain
             return RaceConstants.Sizes.Medium;
         }
 
-        private Boolean DetermineIfRaceHasWings(Race race)
+        private bool DetermineIfRaceHasWings(Race race)
         {
             if (race.Metarace == RaceConstants.Metaraces.None)
                 return false;
@@ -88,13 +97,13 @@ namespace CharacterGen.Generators.Domain
             return false;
         }
 
-        private Int32 DetermineLandSpeed(Race race)
+        private int DetermineLandSpeed(Race race)
         {
             var speeds = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.LandSpeeds);
             return speeds[race.BaseRace];
         }
 
-        private Int32 DetermineAerialSpeed(Race race)
+        private int DetermineAerialSpeed(Race race)
         {
             if (race.Metarace == RaceConstants.Metaraces.Ghost)
                 return 30;
@@ -110,10 +119,13 @@ namespace CharacterGen.Generators.Domain
 
         private Age DetermineAge(Race race, CharacterClass characterClass)
         {
-            var tableName = String.Format(TableNameConstants.Formattable.Adjustments.RACEAges, race.BaseRace);
-            var ages = adjustmentsSelector.SelectFrom(tableName);
             var classType = GetClassType(characterClass);
-            var additionalAge = dice.Roll(ages[AdjustmentConstants.Quantity + classType]).d(ages[AdjustmentConstants.Die + classType]);
+            var tableName = string.Format(TableNameConstants.Formattable.Collection.CLASSTYPEAgeRolls, classType);
+            var ageRoll = collectionsSelector.SelectFrom(tableName, race.BaseRace).Single();
+            var additionalAge = dice.Roll(ageRoll);
+
+            tableName = string.Format(TableNameConstants.Formattable.Adjustments.RACEAges, race.BaseRace);
+            var ages = adjustmentsSelector.SelectFrom(tableName);
 
             var age = new Age();
             age.Years = ages[RaceConstants.Ages.Adulthood] + additionalAge;
@@ -130,7 +142,7 @@ namespace CharacterGen.Generators.Domain
             return age;
         }
 
-        private String GetClassType(CharacterClass characterClass)
+        private string GetClassType(CharacterClass characterClass)
         {
             var intuitiveClasses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Intuitive);
             if (intuitiveClasses.Contains(characterClass.ClassName))
@@ -141,6 +153,12 @@ namespace CharacterGen.Generators.Domain
                 return GroupConstants.Trained;
 
             return GroupConstants.SelfTaught;
+        }
+
+        private int GetModifier(Race race, string tableName)
+        {
+            var roll = collectionsSelector.SelectFrom(tableName, race.BaseRace).Single();
+            return dice.Roll(roll);
         }
     }
 }

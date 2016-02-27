@@ -1,27 +1,25 @@
-﻿using System;
-
-namespace CharacterGen.Common.Races
+﻿namespace CharacterGen.Common.Races
 {
     public class Race
     {
-        public String BaseRace { get; set; }
-        public String Metarace { get; set; }
-        public String MetaraceSpecies { get; set; }
-        public Boolean Male { get; set; }
-        public Boolean HasWings { get; set; }
-        public String Size { get; set; }
-        public Int32 LandSpeed { get; set; }
-        public Int32 AerialSpeed { get; set; }
-        //public Int32 HeightInInches { get; set; }
-        //public Int32 WeightInPounds { get; set; }
+        public string BaseRace { get; set; }
+        public string Metarace { get; set; }
+        public string MetaraceSpecies { get; set; }
+        public bool Male { get; set; }
+        public bool HasWings { get; set; }
+        public string Size { get; set; }
+        public int LandSpeed { get; set; }
+        public int AerialSpeed { get; set; }
+        //public int HeightInInches { get; set; }
+        //public int WeightInPounds { get; set; }
         //public Age Age { get; set; }
 
         public Race()
         {
-            BaseRace = String.Empty;
-            Metarace = String.Empty;
-            Size = String.Empty;
-            MetaraceSpecies = String.Empty;
+            BaseRace = string.Empty;
+            Metarace = string.Empty;
+            Size = string.Empty;
+            MetaraceSpecies = string.Empty;
             //Age = new Age();
         }
     }

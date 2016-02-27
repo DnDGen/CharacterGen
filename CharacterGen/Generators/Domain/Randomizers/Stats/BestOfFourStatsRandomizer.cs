@@ -25,18 +25,11 @@ namespace CharacterGen.Generators.Domain.Randomizers.Stats
 
         protected override int RollStat()
         {
-            var rolls = new List<int>();
+            var rolls = dice.Roll(4).IndividualRolls(6);
+            var orderedRolls = rolls.OrderBy(r => r);
+            var validRolls = orderedRolls.Skip(1);
 
-            for (var i = 0; i < 4; i++)
-            {
-                var roll = dice.Roll().d6();
-                rolls.Add(roll);
-            }
-
-            var lowest = rolls.Min();
-            rolls.Remove(lowest);
-
-            return rolls.Sum();
+            return validRolls.Sum();
         }
 
         protected override bool StatsAreAllowed(IEnumerable<Stat> stats)

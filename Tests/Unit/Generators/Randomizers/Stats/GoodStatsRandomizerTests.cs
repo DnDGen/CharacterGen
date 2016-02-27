@@ -3,7 +3,6 @@ using CharacterGen.Generators.Randomizers.Stats;
 using Moq;
 using NUnit.Framework;
 using RollGen;
-using System;
 using System.Linq;
 
 namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
@@ -11,21 +10,22 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
     [TestFixture]
     public class GoodStatsRandomizerTests
     {
+        private const int min = 13;
+        private const int max = 15;
+        private const int middle = (max + min) / 2;
+
         private IStatsRandomizer randomizer;
         private Mock<Dice> mockDice;
 
-        private const Int32 min = 13;
-        private const Int32 max = 15;
-        private Int32 middle;
 
         [SetUp]
         public void Setup()
         {
-            middle = (max + min) / 2;
-
             mockDice = new Mock<Dice>();
             var generator = new ConfigurableIterationGenerator(2);
-            mockDice.SetupSequence(d => d.Roll(3).d6()).Returns(min).Returns(max).Returns(middle).Returns(min - 1).Returns(max + 1).Returns(middle);
+            mockDice.SetupSequence(d => d.Roll(3).IndividualRolls(6))
+                .Returns(new[] { min }).Returns(new[] { max }).Returns(new[] { middle })
+                .Returns(new[] { min - 1 }).Returns(new[] { max + 1 }).Returns(new[] { middle });
 
             randomizer = new GoodStatsRandomizer(mockDice.Object, generator);
         }
@@ -34,7 +34,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
         public void GoodCalls3d6PerStat()
         {
             var stats = randomizer.Randomize();
-            mockDice.Verify(d => d.Roll(3).d6(), Times.Exactly(stats.Count));
+            mockDice.Verify(d => d.Roll(3).IndividualRolls(6), Times.Exactly(stats.Count));
         }
 
         [Test]
@@ -48,29 +48,33 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
         [Test]
         public void RerollIfStatAverageIsGreaterThanFifteen()
         {
-            mockDice.SetupSequence(d => d.Roll(3).d6())
-                .Returns(min).Returns(max).Returns(middle).Returns(min - 1).Returns(max + 1).Returns(9000) //invalid average
-                .Returns(min).Returns(max).Returns(middle).Returns(min - 1).Returns(max + 1).Returns(middle); //valid average
+            mockDice.SetupSequence(d => d.Roll(3).IndividualRolls(6))
+                .Returns(new[] { min }).Returns(new[] { max }).Returns(new[] { middle })
+                .Returns(new[] { min - 1 }).Returns(new[] { max + 1 }).Returns(new[] { 9000 }) //invalid average
+                .Returns(new[] { min }).Returns(new[] { max }).Returns(new[] { middle })
+                .Returns(new[] { min - 1 }).Returns(new[] { max + 1 }).Returns(new[] { middle }); //valid average
 
             var stats = randomizer.Randomize();
-            mockDice.Verify(d => d.Roll(3).d6(), Times.Exactly(stats.Count * 2));
+            mockDice.Verify(d => d.Roll(3).IndividualRolls(6), Times.Exactly(stats.Count * 2));
         }
 
         [Test]
         public void RerollIfStatAverageIsLessThanThirteen()
         {
-            mockDice.SetupSequence(d => d.Roll(3).d6())
-                .Returns(min).Returns(max).Returns(middle).Returns(min - 1).Returns(max + 1).Returns(3) //invalid average
-                .Returns(min).Returns(max).Returns(middle).Returns(min - 1).Returns(max + 1).Returns(middle); //valid average
+            mockDice.SetupSequence(d => d.Roll(3).IndividualRolls(6))
+                .Returns(new[] { min }).Returns(new[] { max }).Returns(new[] { middle })
+                .Returns(new[] { min - 1 }).Returns(new[] { max + 1 }).Returns(new[] { 3 }) //invalid average
+                .Returns(new[] { min }).Returns(new[] { max }).Returns(new[] { middle })
+                .Returns(new[] { min - 1 }).Returns(new[] { max + 1 }).Returns(new[] { middle }); //valid average
 
             var stats = randomizer.Randomize();
-            mockDice.Verify(d => d.Roll(3).d6(), Times.Exactly(stats.Count * 2));
+            mockDice.Verify(d => d.Roll(3).IndividualRolls(6), Times.Exactly(stats.Count * 2));
         }
 
         [Test]
         public void DefaultValueIs13()
         {
-            mockDice.Setup(d => d.Roll(3).d6()).Returns(9);
+            mockDice.Setup(d => d.Roll(3).IndividualRolls(6)).Returns(new[] { 9 });
 
             var stats = randomizer.Randomize();
 

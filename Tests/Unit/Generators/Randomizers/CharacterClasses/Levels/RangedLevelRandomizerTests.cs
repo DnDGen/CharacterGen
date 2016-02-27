@@ -2,7 +2,6 @@
 using Moq;
 using NUnit.Framework;
 using RollGen;
-using System;
 using System.Linq;
 
 namespace CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses.Levels
@@ -23,7 +22,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses.Levels
         [Test]
         public void BaseIsRollOf1d5()
         {
-            mockDice.Setup(d => d.Roll(1).d(5)).Returns(9266);
+            mockDice.Setup(d => d.Roll(1).IndividualRolls(5)).Returns(new[] { 9266 });
             var level = randomizer.Randomize();
             Assert.That(level, Is.EqualTo(9266));
         }
@@ -31,7 +30,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses.Levels
         [Test]
         public void AddRollBonusToRoll()
         {
-            mockDice.Setup(d => d.Roll(1).d(5)).Returns(9200);
+            mockDice.Setup(d => d.Roll(1).IndividualRolls(5)).Returns(new[] { 9200 });
             randomizer.RollBonus = 66;
 
             var level = randomizer.Randomize();
@@ -53,7 +52,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses.Levels
 
         private class TestRangedLevelRandomizer : RangedLevelRandomizer
         {
-            public Int32 RollBonus
+            public int RollBonus
             {
                 get { return rollBonus; }
                 set { rollBonus = value; }

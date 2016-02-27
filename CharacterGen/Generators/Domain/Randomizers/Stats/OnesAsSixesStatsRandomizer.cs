@@ -1,6 +1,5 @@
 ﻿using CharacterGen.Common.Abilities.Stats;
 using RollGen;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,7 +7,7 @@ namespace CharacterGen.Generators.Domain.Randomizers.Stats
 {
     public class OnesAsSixesStatsRandomizer : BaseStatsRandomizer
     {
-        protected override Int32 defaultValue
+        protected override int defaultValue
         {
             get
             {
@@ -26,25 +25,16 @@ namespace CharacterGen.Generators.Domain.Randomizers.Stats
 
         protected override int RollStat()
         {
-            var rolls = new List<int>();
+            var rawRolls = dice.Roll(3).IndividualRolls(6);
+            var validRolls = rawRolls.Where(r => r > 1);
 
-            for (var i = 0; i < 3; i++)
-            {
-                var roll = GetRollToAdd();
-                rolls.Add(roll);
-            }
+            var rolls = new List<int>();
+            rolls.AddRange(validRolls);
+
+            while (rolls.Count < 3)
+                rolls.Add(6);
 
             return rolls.Sum();
-        }
-
-        private int GetRollToAdd()
-        {
-            var roll = dice.Roll().d6();
-
-            if (roll == 1)
-                return 6;
-
-            return roll;
         }
 
         protected override bool StatsAreAllowed(IEnumerable<Stat> stats)

@@ -49,7 +49,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdjustmentConstants.cs" />
     <Compile Include="DataIndexConstants.cs" />
     <Compile Include="GroupConstants.cs" />
     <Compile Include="StreamLoader.cs" />

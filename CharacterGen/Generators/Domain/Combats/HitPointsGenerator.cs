@@ -65,15 +65,10 @@ namespace CharacterGen.Generators.Domain.Combats
 
         private int RollHitPoints(int quantity, int die, int constitutionBonus)
         {
-            var hitPoints = 0;
+            var rolls = dice.Roll(quantity).IndividualRolls(die);
+            rolls = rolls.Select(r => Math.Max(r + constitutionBonus, 1));
 
-            while (quantity-- > 0)
-            {
-                var roll = dice.Roll().d(die) + constitutionBonus;
-                hitPoints += Math.Max(roll, 1);
-            }
-
-            return hitPoints;
+            return rolls.Sum();
         }
     }
 }

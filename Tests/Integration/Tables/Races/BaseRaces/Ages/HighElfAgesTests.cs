@@ -8,9 +8,9 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Ages
     [TestFixture]
     public class HighElfAgesTests : AdjustmentsTests
     {
-        protected override String tableName
+        protected override string tableName
         {
-            get { return String.Format(TableNameConstants.Formattable.Adjustments.RACEAges, RaceConstants.BaseRaces.HighElf); }
+            get { return string.Format(TableNameConstants.Formattable.Adjustments.RACEAges, RaceConstants.BaseRaces.HighElf); }
         }
 
         [Test]
@@ -18,12 +18,6 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Ages
         {
             var names = new[]
             {
-                AdjustmentConstants.Quantity + GroupConstants.Intuitive,
-                AdjustmentConstants.Die + GroupConstants.Intuitive,
-                AdjustmentConstants.Quantity + GroupConstants.SelfTaught,
-                AdjustmentConstants.Die + GroupConstants.SelfTaught,
-                AdjustmentConstants.Quantity + GroupConstants.Trained,
-                AdjustmentConstants.Die + GroupConstants.Trained,
                 RaceConstants.Ages.Adulthood,
                 RaceConstants.Ages.MiddleAge,
                 RaceConstants.Ages.Old,
@@ -32,18 +26,12 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Ages
 
             AssertCollectionNames(names);
         }
-
-        [TestCase(AdjustmentConstants.Quantity + GroupConstants.Intuitive, 4)]
-        [TestCase(AdjustmentConstants.Die + GroupConstants.Intuitive, 6)]
-        [TestCase(AdjustmentConstants.Quantity + GroupConstants.SelfTaught, 6)]
-        [TestCase(AdjustmentConstants.Die + GroupConstants.SelfTaught, 6)]
-        [TestCase(AdjustmentConstants.Quantity + GroupConstants.Trained, 10)]
-        [TestCase(AdjustmentConstants.Die + GroupConstants.Trained, 6)]
+        
         [TestCase(RaceConstants.Ages.Adulthood, 110)]
         [TestCase(RaceConstants.Ages.MiddleAge, 175)]
         [TestCase(RaceConstants.Ages.Old, 263)]
         [TestCase(RaceConstants.Ages.Venerable, 350)]
-        public override void Adjustment(String name, Int32 adjustment)
+        public override void Adjustment(string name, int adjustment)
         {
             base.Adjustment(name, adjustment);
         }
