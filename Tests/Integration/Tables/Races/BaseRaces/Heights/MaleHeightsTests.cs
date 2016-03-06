@@ -5,11 +5,11 @@ using NUnit.Framework;
 namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Heights
 {
     [TestFixture]
-    public class FalseHeightsTests : AdjustmentsTests
+    public class MaleHeightsTests : AdjustmentsTests
     {
         protected override string tableName
         {
-            get { return string.Format(TableNameConstants.Formattable.Adjustments.GENDERHeights, false); }
+            get { return string.Format(TableNameConstants.Formattable.Adjustments.GENDERHeights, "Male"); }
         }
 
         [Test]
@@ -56,37 +56,37 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Heights
             AssertCollectionNames(names);
         }
 
-        [TestCase(RaceConstants.BaseRaces.Aasimar, 60)]
+        [TestCase(RaceConstants.BaseRaces.Aasimar, 62)]
         [TestCase(RaceConstants.BaseRaces.Bugbear, 66)]
-        [TestCase(RaceConstants.BaseRaces.DeepDwarf, 43)]
-        [TestCase(RaceConstants.BaseRaces.DeepHalfling, 30)]
-        [TestCase(RaceConstants.BaseRaces.Derro, 43)]
+        [TestCase(RaceConstants.BaseRaces.DeepDwarf, 45)]
+        [TestCase(RaceConstants.BaseRaces.DeepHalfling, 32)]
+        [TestCase(RaceConstants.BaseRaces.Derro, 45)]
         [TestCase(RaceConstants.BaseRaces.Doppelganger, 66)]
         [TestCase(RaceConstants.BaseRaces.Drow, 53)]
-        [TestCase(RaceConstants.BaseRaces.DuergarDwarf, 43)]
-        [TestCase(RaceConstants.BaseRaces.ForestGnome, 34)]
-        [TestCase(RaceConstants.BaseRaces.Gnoll, 63)]
-        [TestCase(RaceConstants.BaseRaces.Goblin, 30)]
+        [TestCase(RaceConstants.BaseRaces.DuergarDwarf, 45)]
+        [TestCase(RaceConstants.BaseRaces.ForestGnome, 36)]
+        [TestCase(RaceConstants.BaseRaces.Gnoll, 66)]
+        [TestCase(RaceConstants.BaseRaces.Goblin, 32)]
         [TestCase(RaceConstants.BaseRaces.GrayElf, 53)]
-        [TestCase(RaceConstants.BaseRaces.HalfElf, 53)]
-        [TestCase(RaceConstants.BaseRaces.HalfOrc, 53)]
+        [TestCase(RaceConstants.BaseRaces.HalfElf, 55)]
+        [TestCase(RaceConstants.BaseRaces.HalfOrc, 58)]
         [TestCase(RaceConstants.BaseRaces.HighElf, 53)]
-        [TestCase(RaceConstants.BaseRaces.HillDwarf, 43)]
-        [TestCase(RaceConstants.BaseRaces.Hobgoblin, 48)]
-        [TestCase(RaceConstants.BaseRaces.Human, 53)]
-        [TestCase(RaceConstants.BaseRaces.Kobold, 28)]
-        [TestCase(RaceConstants.BaseRaces.LightfootHalfling, 30)]
-        [TestCase(RaceConstants.BaseRaces.Lizardfolk, 50)]
-        [TestCase(RaceConstants.BaseRaces.MindFlayer, 72)]
-        [TestCase(RaceConstants.BaseRaces.Minotaur, 74)]
-        [TestCase(RaceConstants.BaseRaces.MountainDwarf, 43)]
-        [TestCase(RaceConstants.BaseRaces.Ogre, 100)]
-        [TestCase(RaceConstants.BaseRaces.OgreMage, 100)]
-        [TestCase(RaceConstants.BaseRaces.Orc, 57)]
-        [TestCase(RaceConstants.BaseRaces.RockGnome, 34)]
-        [TestCase(RaceConstants.BaseRaces.Svirfneblin, 34)]
-        [TestCase(RaceConstants.BaseRaces.TallfellowHalfling, 46)]
-        [TestCase(RaceConstants.BaseRaces.Tiefling, 60)]
+        [TestCase(RaceConstants.BaseRaces.HillDwarf, 45)]
+        [TestCase(RaceConstants.BaseRaces.Hobgoblin, 50)]
+        [TestCase(RaceConstants.BaseRaces.Human, 58)]
+        [TestCase(RaceConstants.BaseRaces.Kobold, 30)]
+        [TestCase(RaceConstants.BaseRaces.LightfootHalfling, 32)]
+        [TestCase(RaceConstants.BaseRaces.Lizardfolk, 58)]
+        [TestCase(RaceConstants.BaseRaces.MindFlayer, 74)]
+        [TestCase(RaceConstants.BaseRaces.Minotaur, 78)]
+        [TestCase(RaceConstants.BaseRaces.MountainDwarf, 45)]
+        [TestCase(RaceConstants.BaseRaces.Ogre, 108)]
+        [TestCase(RaceConstants.BaseRaces.OgreMage, 108)]
+        [TestCase(RaceConstants.BaseRaces.Orc, 61)]
+        [TestCase(RaceConstants.BaseRaces.RockGnome, 36)]
+        [TestCase(RaceConstants.BaseRaces.Svirfneblin, 36)]
+        [TestCase(RaceConstants.BaseRaces.TallfellowHalfling, 48)]
+        [TestCase(RaceConstants.BaseRaces.Tiefling, 62)]
         [TestCase(RaceConstants.BaseRaces.Troglodyte, 53)]
         [TestCase(RaceConstants.BaseRaces.WoodElf, 53)]
         [TestCase(RaceConstants.BaseRaces.WildElf, 53)]

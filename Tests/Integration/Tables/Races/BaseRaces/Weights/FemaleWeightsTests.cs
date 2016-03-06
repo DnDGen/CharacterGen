@@ -5,11 +5,11 @@ using NUnit.Framework;
 namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Weights
 {
     [TestFixture]
-    public class FalseWeightsTests : AdjustmentsTests
+    public class FemaleWeightsTests : AdjustmentsTests
     {
         protected override string tableName
         {
-            get { return string.Format(TableNameConstants.Formattable.Adjustments.GENDERWeights, false); }
+            get { return string.Format(TableNameConstants.Formattable.Adjustments.GENDERWeights, "Female"); }
         }
 
         [Test]

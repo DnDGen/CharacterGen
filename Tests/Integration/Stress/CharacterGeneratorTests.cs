@@ -58,6 +58,10 @@ namespace CharacterGen.Tests.Integration.Stress
             Assert.That(character.Race.Metarace, Is.Not.Null);
             Assert.That(character.Race.AerialSpeed, Is.Not.Negative);
             Assert.That(character.Race.AerialSpeed % 10, Is.EqualTo(0));
+            Assert.That(character.Race.Age.Stage, Is.Not.Empty);
+            Assert.That(character.Race.Age.Years, Is.Positive);
+            Assert.That(character.Race.HeightInInches, Is.Positive);
+            Assert.That(character.Race.WeightInPounds, Is.Positive);
 
             if (character.Race.HasWings)
                 Assert.That(character.Race.AerialSpeed, Is.Positive);

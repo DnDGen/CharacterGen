@@ -32,21 +32,23 @@ namespace CharacterGen.Generators.Domain
             race.BaseRace = baseRaceRandomizer.Randomize(alignment, characterClass);
             race.Metarace = metaraceRandomizer.Randomize(alignment, characterClass);
             race.MetaraceSpecies = DetermineMetaraceSpecies(alignment, race.Metarace);
-            race.Male = DetermineIfMale(race.BaseRace, characterClass.ClassName);
+            race.IsMale = DetermineIfMale(race.BaseRace, characterClass.ClassName);
             race.Size = DetermineSize(race.BaseRace);
             race.HasWings = DetermineIfRaceHasWings(race);
             race.LandSpeed = DetermineLandSpeed(race);
             race.AerialSpeed = DetermineAerialSpeed(race);
 
-            //race.Age = DetermineAge(race, characterClass);
+            race.Age = DetermineAge(race, characterClass);
 
-            //var baseHeights = adjustmentsSelector.SelectFrom(TableNameConstants.Formattable.Adjustments.GENDERHeights, race.Male);
-            //var heightModifier = GetModifier(race, TableNameConstants.Set.Collection.HeightRolls);
-            //race.Height = baseHeights[race.BaseRace] + heightModifier;
+            var tableName = string.Format(TableNameConstants.Formattable.Adjustments.GENDERHeights, race.Gender);
+            var baseHeights = adjustmentsSelector.SelectFrom(tableName);
+            var heightModifier = GetModifier(race, TableNameConstants.Set.Collection.HeightRolls);
+            race.HeightInInches = baseHeights[race.BaseRace] + heightModifier;
 
-            //var baseWeights = adjustmentsSelector.SelectFrom(TableNameConstants.Formattable.Adjustments.GENDERWeights, race.Male);
-            //var weightModifier = GetModifier(race, TableNameConstants.Set.Collection.WeightRolls);
-            //race.Weight = baseWeights[race.BaseRace] + heightModifier * weightModifier;
+            tableName = string.Format(TableNameConstants.Formattable.Adjustments.GENDERWeights, race.Gender);
+            var baseWeights = adjustmentsSelector.SelectFrom(tableName);
+            var weightModifier = GetModifier(race, TableNameConstants.Set.Collection.WeightRolls);
+            race.WeightInPounds = baseWeights[race.BaseRace] + heightModifier * weightModifier;
 
             return race;
         }

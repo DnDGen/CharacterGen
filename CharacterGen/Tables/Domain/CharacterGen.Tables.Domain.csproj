@@ -944,7 +944,7 @@
     <EmbeddedResource Include="Races\BaseRaces\Weights\WeightRolls.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Heights\FalseHeights.xml" />
+    <EmbeddedResource Include="Races\BaseRaces\Heights\FemaleHeights.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Races\BaseRaces\Ages\Ogre MageAges.xml" />
@@ -968,7 +968,7 @@
     <EmbeddedResource Include="Abilities\Stats\OldStatAdjustments.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Weights\FalseWeights.xml" />
+    <EmbeddedResource Include="Races\BaseRaces\Weights\FemaleWeights.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Abilities\Feats\Data\CharacterClasses\Domains\WaterFeatData.xml">
@@ -976,13 +976,13 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Heights\TrueHeights.xml" />
+    <EmbeddedResource Include="Races\BaseRaces\Heights\MaleHeights.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Races\BaseRaces\Ages\Rock GnomeAges.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Races\BaseRaces\Weights\TrueWeights.xml" />
+    <EmbeddedResource Include="Races\BaseRaces\Weights\MaleWeights.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Races\BaseRaces\Ages\Deep HalflingAges.xml" />
@@ -1856,6 +1856,30 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Races\BaseRaces\Ages\Forest GnomeAges.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\BaseRaces\Ages\Wild ElfAges.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\BaseRaces\Ages\Mountain DwarfAges.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\BaseRaces\Ages\DerroAges.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\BaseRaces\Ages\Duergar DwarfAges.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\BaseRaces\Ages\Gray ElfAges.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\BaseRaces\Ages\OgreAges.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\BaseRaces\Ages\Mind FlayerAges.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Races\BaseRaces\Ages\MinotaurAges.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -29,6 +29,10 @@ namespace CharacterGen.Tests.Integration.Stress
             Assert.That(race.LandSpeed % 10, Is.EqualTo(0));
             Assert.That(race.AerialSpeed, Is.Not.Negative);
             Assert.That(race.MetaraceSpecies, Is.Not.Null);
+            Assert.That(race.Age.Stage, Is.Not.Empty);
+            Assert.That(race.Age.Years, Is.Positive);
+            Assert.That(race.HeightInInches, Is.Positive);
+            Assert.That(race.WeightInPounds, Is.Positive);
         }
 
         private Race GenerateRace()
