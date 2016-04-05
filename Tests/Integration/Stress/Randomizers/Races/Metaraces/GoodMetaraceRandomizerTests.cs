@@ -1,6 +1,5 @@
 ﻿using CharacterGen.Common.Races;
 using CharacterGen.Generators.Randomizers.Races;
-using Ninject;
 using NUnit.Framework;
 using System.Collections.Generic;
 
@@ -9,9 +8,6 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
     [TestFixture]
     public class GoodMetaraceRandomizerTests : ForcableMetaraceRandomizerTests
     {
-        [Inject, Named(RaceRandomizerTypeConstants.Metarace.GoodMeta)]
-        public override IForcableMetaraceRandomizer ForcableMetaraceRandomizer { get; set; }
-
         protected override IEnumerable<string> allowedMetaraces
         {
             get
@@ -25,6 +21,12 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
                     RaceConstants.Metaraces.None
                 };
             }
+        }
+
+        [SetUp]
+        public void Setup()
+        {
+            forcableMetaraceRandomizer = GetNewInstanceOf<IForcableMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.GoodMeta);
         }
 
         [TestCase("Good Metarace Randomizer")]

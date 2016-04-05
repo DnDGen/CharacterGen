@@ -1,6 +1,5 @@
 ﻿using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Generators.Randomizers.CharacterClasses;
-using Ninject;
 using NUnit.Framework;
 using System.Collections.Generic;
 
@@ -9,9 +8,6 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.CharacterClasses.Cla
     [TestFixture]
     public class AnyPlayerClassNameRandomizerTests : ClassNameRandomizerTests
     {
-        [Inject, Named(ClassNameRandomizerTypeConstants.AnyPlayer)]
-        public override IClassNameRandomizer ClassNameRandomizer { get; set; }
-
         protected override IEnumerable<string> allowedClassNames
         {
             get
@@ -32,7 +28,13 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.CharacterClasses.Cla
             }
         }
 
-        [TestCase("AnyPlayerClassNameRandomizer")]
+        [SetUp]
+        public void Setup()
+        {
+            ClassNameRandomizer = GetNewInstanceOf<IClassNameRandomizer>(ClassNameRandomizerTypeConstants.AnyPlayer);
+        }
+
+        [TestCase("Any Player Class Name Randomizer")]
         public override void Stress(string stressSubject)
         {
             Stress();

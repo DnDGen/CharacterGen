@@ -20,10 +20,14 @@ namespace CharacterGen.Tests.Integration.Stress.Magics
         public ICombatGenerator CombatGenerator { get; set; }
         [Inject]
         public IMagicGenerator MagicGenerator { get; set; }
-        [Inject, Named(ClassNameRandomizerTypeConstants.Spellcaster)]
-        public override IClassNameRandomizer ClassNameRandomizer { get; set; }
         [Inject]
         public IEquipmentGenerator EquipmentGenerator { get; set; }
+
+        [SetUp]
+        public void Setup()
+        {
+            ClassNameRandomizer = GetNewInstanceOf<IClassNameRandomizer>(ClassNameRandomizerTypeConstants.Spellcaster);
+        }
 
         [TestCase("Magic Generator")]
         public override void Stress(string stressSubject)

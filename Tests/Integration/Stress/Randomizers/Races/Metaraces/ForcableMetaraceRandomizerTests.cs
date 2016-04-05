@@ -8,12 +8,10 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
     [TestFixture]
     public abstract class ForcableMetaraceRandomizerTests : StressTests
     {
-        public virtual IForcableMetaraceRandomizer ForcableMetaraceRandomizer { get; set; }
-
-        public override RaceRandomizer MetaraceRandomizer
+        protected IForcableMetaraceRandomizer forcableMetaraceRandomizer
         {
-            get { return ForcableMetaraceRandomizer; }
-            set { base.MetaraceRandomizer = value; }
+            get { return MetaraceRandomizer as IForcableMetaraceRandomizer; }
+            set { MetaraceRandomizer = value; }
         }
 
         protected abstract IEnumerable<string> allowedMetaraces { get; }
@@ -35,7 +33,7 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
 
         protected void AssertForcedMetarace()
         {
-            ForcableMetaraceRandomizer.ForceMetarace = true;
+            forcableMetaraceRandomizer.ForceMetarace = true;
 
             var metarace = GenerateMetarace();
             Assert.That(allowedMetaraces, Contains.Item(metarace));

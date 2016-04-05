@@ -1,19 +1,20 @@
 ﻿using CharacterGen.Common.Alignments;
 using CharacterGen.Generators.Randomizers.Alignments;
-using Ninject;
 using NUnit.Framework;
-using System;
 
 namespace CharacterGen.Tests.Integration.Stress.Randomizers.Alignments
 {
     [TestFixture]
     public class NonEvilAlignmentRandomizerTests : StressTests
     {
-        [Inject, Named(AlignmentRandomizerTypeConstants.NonEvil)]
-        public override IAlignmentRandomizer AlignmentRandomizer { get; set; }
+        [SetUp]
+        public void Setup()
+        {
+            AlignmentRandomizer = GetNewInstanceOf<IAlignmentRandomizer>(AlignmentRandomizerTypeConstants.NonEvil);
+        }
 
-        [TestCase("NonEvilAlignmentRandomizer")]
-        public override void Stress(String stressSubject)
+        [TestCase("Non-Evil Alignment Randomizer")]
+        public override void Stress(string stressSubject)
         {
             Stress();
         }

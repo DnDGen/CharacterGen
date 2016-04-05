@@ -2,7 +2,6 @@
 using Ninject;
 using NUnit.Framework;
 using RollGen.Bootstrap;
-using System;
 using TreasureGen.Bootstrap;
 
 namespace CharacterGen.Tests.Integration.Common
@@ -12,7 +11,7 @@ namespace CharacterGen.Tests.Integration.Common
     {
         private IKernel kernel;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void IntegrationTestsFixtureSetup()
         {
             kernel = new StandardKernel();
@@ -38,7 +37,7 @@ namespace CharacterGen.Tests.Integration.Common
             return kernel.Get<T>();
         }
 
-        protected T GetNewInstanceOf<T>(String name)
+        protected T GetNewInstanceOf<T>(string name)
         {
             return kernel.Get<T>(name);
         }

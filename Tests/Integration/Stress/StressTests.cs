@@ -27,15 +27,15 @@ namespace CharacterGen.Tests.Integration.Stress
         [Inject]
         public IRandomizerVerifier RandomizerVerifier { get; set; }
         [Inject, Named(AlignmentRandomizerTypeConstants.Any)]
-        public virtual IAlignmentRandomizer AlignmentRandomizer { get; set; }
+        public IAlignmentRandomizer AlignmentRandomizer { get; set; }
         [Inject, Named(ClassNameRandomizerTypeConstants.AnyPlayer)]
-        public virtual IClassNameRandomizer ClassNameRandomizer { get; set; }
+        public IClassNameRandomizer ClassNameRandomizer { get; set; }
         [Inject, Named(LevelRandomizerTypeConstants.Any)]
         public ILevelRandomizer LevelRandomizer { get; set; }
         [Inject, Named(RaceRandomizerTypeConstants.BaseRace.AnyBase)]
-        public virtual RaceRandomizer BaseRaceRandomizer { get; set; }
+        public RaceRandomizer BaseRaceRandomizer { get; set; }
         [Inject, Named(RaceRandomizerTypeConstants.Metarace.AnyMeta)]
-        public virtual RaceRandomizer MetaraceRandomizer { get; set; }
+        public RaceRandomizer MetaraceRandomizer { get; set; }
         [Inject]
         public ICharacterClassGenerator CharacterClassGenerator { get; set; }
         [Inject]
@@ -43,6 +43,7 @@ namespace CharacterGen.Tests.Integration.Stress
 
         private const int ConfidentIterations = 1000000;
         private const int TenMinutesInSeconds = 600;
+        private const int TwoHoursInSeconds = 3600 * 2;
 
         private readonly int timeLimitInSeconds;
 
@@ -53,10 +54,13 @@ namespace CharacterGen.Tests.Integration.Stress
             var assembly = Assembly.GetExecutingAssembly();
             var types = assembly.GetTypes();
             var methods = types.SelectMany(t => t.GetMethods());
-            var stressTestsCount = methods.Count(m => m.GetCustomAttributes<TestAttribute>(true).Any() || m.GetCustomAttributes<TestCaseAttribute>().Any());
+            var stressTestsCount = methods.Sum(m => m.GetCustomAttributes<TestAttribute>(true).Count());
+            var stressTestCasesCount = methods.Sum(m => m.GetCustomAttributes<TestCaseAttribute>().Count());
+            var stressTestsTotal = stressTestsCount + stressTestCasesCount;
 
+            var twoHourTimeLimitPerTest = TwoHoursInSeconds / stressTestsTotal;
 #if STRESS
-            timeLimitInSeconds = TenMinutesInSeconds / stressTestsCount;
+            timeLimitInSeconds = Math.Min(twoHourTimeLimitPerTest, TenMinutesInSeconds - 10);
 #else
             timeLimitInSeconds = 1;
 #endif
@@ -87,6 +91,8 @@ namespace CharacterGen.Tests.Integration.Stress
             do makeAssertions();
             while (TestShouldKeepRunning());
 
+            Console.WriteLine($"Stress test complete after {Stopwatch.Elapsed} and {iterations} iterations");
+
             if (Stopwatch.Elapsed.TotalSeconds > timeLimitInSeconds + 5)
                 Assert.Fail("Something took way too long");
         }
@@ -109,6 +115,8 @@ namespace CharacterGen.Tests.Integration.Stress
 
             do generatedObject = generate();
             while (TestShouldKeepRunning() && isValid(generatedObject) == false);
+
+            Console.WriteLine($"Generation complete after {Stopwatch.Elapsed} and {iterations} iterations");
 
             if (TestShouldKeepRunning() == false && isValid(generatedObject) == false)
                 Assert.Fail("Stress test timed out.");

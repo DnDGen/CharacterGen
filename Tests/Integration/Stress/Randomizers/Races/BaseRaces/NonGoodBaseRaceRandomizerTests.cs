@@ -1,8 +1,6 @@
 ﻿using CharacterGen.Common.Races;
 using CharacterGen.Generators.Randomizers.Races;
-using Ninject;
 using NUnit.Framework;
-using System;
 using System.Collections.Generic;
 
 namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
@@ -10,10 +8,7 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
     [TestFixture]
     public class NonGoodBaseRaceRandomizerTests : BaseRaceRandomizerTests
     {
-        [Inject, Named(RaceRandomizerTypeConstants.BaseRace.NonGoodBase)]
-        public override RaceRandomizer BaseRaceRandomizer { get; set; }
-
-        protected override IEnumerable<String> allowedBaseRaces
+        protected override IEnumerable<string> allowedBaseRaces
         {
             get
             {
@@ -54,8 +49,14 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
             }
         }
 
-        [TestCase("NonGoodBaseRaceRandomizer")]
-        public override void Stress(String stressSubject)
+        [SetUp]
+        public void Setup()
+        {
+            BaseRaceRandomizer = GetNewInstanceOf<RaceRandomizer>(RaceRandomizerTypeConstants.BaseRace.NonGoodBase);
+        }
+
+        [TestCase("Non-Good Base Race Randomizer")]
+        public override void Stress(string stressSubject)
         {
             Stress();
         }

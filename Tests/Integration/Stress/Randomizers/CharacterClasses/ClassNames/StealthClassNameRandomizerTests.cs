@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using Ninject;
-using CharacterGen.Common.CharacterClasses;
+﻿using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Generators.Randomizers.CharacterClasses;
 using NUnit.Framework;
+using System.Collections.Generic;
 
 namespace CharacterGen.Tests.Integration.Stress.Randomizers.CharacterClasses.ClassNames
 {
     [TestFixture]
     public class StealthClassNameRandomizerTests : ClassNameRandomizerTests
     {
-        [Inject, Named(ClassNameRandomizerTypeConstants.Stealth)]
-        public override IClassNameRandomizer ClassNameRandomizer { get; set; }
-
-        protected override IEnumerable<String> allowedClassNames
+        protected override IEnumerable<string> allowedClassNames
         {
             get
             {
@@ -26,8 +21,14 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.CharacterClasses.Cla
             }
         }
 
-        [TestCase("StealthClassNameRandomizer")]
-        public override void Stress(String stressSubject)
+        [SetUp]
+        public void Setup()
+        {
+            ClassNameRandomizer = GetNewInstanceOf<IClassNameRandomizer>(ClassNameRandomizerTypeConstants.Stealth);
+        }
+
+        [TestCase("Stealth Class Name Randomizer")]
+        public override void Stress(string stressSubject)
         {
             Stress();
         }

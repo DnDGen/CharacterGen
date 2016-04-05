@@ -51,9 +51,7 @@ namespace CharacterGen.Tests.Integration.Stress.Abilities.Feats
             var baseAttack = CombatGenerator.GenerateBaseAttackWith(characterClass, race);
 
             var feats = FeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack);
-            var minimumFeats = characterClass.Level / 3 + 1;
-
-            Assert.That(feats.Count(), Is.AtLeast(minimumFeats));
+            Assert.That(feats, Is.Not.Empty);
             Assert.That(feats, Is.Unique);
 
             foreach (var feat in feats)

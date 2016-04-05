@@ -5,11 +5,11 @@ install:
   - nuget install NUnit.Runners -OutputDirectory testrunner
 script:
   - xbuild CharacterGen.sln /p:TargetFrameworkVersion="v4.5" /p:Configuration=Stress
-  - mono ./testrunner/NUnit.Console.*/tools/nunit3-console.exe ./Tests/Unit/Common/bin/Stress/CharacterGen.Tests.Unit.Common.dll
-  - mono ./testrunner/NUnit.Console.*/tools/nunit3-console.exe ./Tests/Unit/Generators/bin/Stress/CharacterGen.Tests.Unit.Generators.dll
-  - mono ./testrunner/NUnit.Console.*/tools/nunit3-console.exe ./Tests/Unit/Selectors/bin/Stress/CharacterGen.Tests.Unit.Selectors.dll
-  - mono ./testrunner/NUnit.Console.*/tools/nunit3-console.exe ./Tests/Unit/Mappers/bin/Stress/CharacterGen.Tests.Unit.Mappers.dll
-  - mono ./testrunner/NUnit.Console.*/tools/nunit3-console.exe ./Tests/Unit/Tables/bin/Stress/CharacterGen.Tests.Unit.Tables.dll
-  - mono ./testrunner/NUnit.Console.*/tools/nunit3-console.exe ./Tests/Integration/Bootstrap/bin/Stress/CharacterGen.Tests.Integration.Bootstrap.dll
-  - mono ./testrunner/NUnit.Console.*/tools/nunit3-console.exe ./Tests/Integration/Tables/bin/Stress/CharacterGen.Tests.Integration.Tables.dll
-  - mono ./testrunner/NUnit.Console.*/tools/nunit3-console.exe ./Tests/Integration/Stress/bin/Stress/CharacterGen.Tests.Integration.Stress.dll
+  - mono ./testrunner/NUnit.ConsoleRunner.*/tools/nunit3-console.exe ./Tests/Unit/Common/bin/Stress/CharacterGen.Tests.Unit.Common.dll
+  - mono ./testrunner/NUnit.ConsoleRunner.*/tools/nunit3-console.exe ./Tests/Unit/Generators/bin/Stress/CharacterGen.Tests.Unit.Generators.dll
+  - mono ./testrunner/NUnit.ConsoleRunner.*/tools/nunit3-console.exe ./Tests/Unit/Selectors/bin/Stress/CharacterGen.Tests.Unit.Selectors.dll
+  - mono ./testrunner/NUnit.ConsoleRunner.*/tools/nunit3-console.exe ./Tests/Unit/Mappers/bin/Stress/CharacterGen.Tests.Unit.Mappers.dll
+  - mono ./testrunner/NUnit.ConsoleRunner.*/tools/nunit3-console.exe ./Tests/Unit/Tables/bin/Stress/CharacterGen.Tests.Unit.Tables.dll
+  - mono ./testrunner/NUnit.ConsoleRunner.*/tools/nunit3-console.exe ./Tests/Integration/Bootstrap/bin/Stress/CharacterGen.Tests.Integration.Bootstrap.dll
+  - mono ./testrunner/NUnit.ConsoleRunner.*/tools/nunit3-console.exe ./Tests/Integration/Tables/bin/Stress/CharacterGen.Tests.Integration.Tables.dll
+  - mono ./testrunner/NUnit.ConsoleRunner.*/tools/nunit3-console.exe ./Tests/Integration/Stress/bin/Stress/CharacterGen.Tests.Integration.Stress.dll

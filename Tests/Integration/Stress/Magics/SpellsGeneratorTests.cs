@@ -5,7 +5,6 @@ using CharacterGen.Generators.Randomizers.CharacterClasses;
 using CharacterGen.Generators.Randomizers.Stats;
 using Ninject;
 using NUnit.Framework;
-using System;
 using System.Linq;
 
 namespace CharacterGen.Tests.Integration.Stress.Magics
@@ -21,11 +20,15 @@ namespace CharacterGen.Tests.Integration.Stress.Magics
         public ICombatGenerator CombatGenerator { get; set; }
         [Inject]
         public ISpellsGenerator SpellsGenerator { get; set; }
-        [Inject, Named(ClassNameRandomizerTypeConstants.Spellcaster)]
-        public override IClassNameRandomizer ClassNameRandomizer { get; set; }
+
+        [SetUp]
+        public void Setup()
+        {
+            ClassNameRandomizer = GetNewInstanceOf<IClassNameRandomizer>(ClassNameRandomizerTypeConstants.Spellcaster);
+        }
 
         [TestCase("Spells Generator")]
-        public override void Stress(String stressSubject)
+        public override void Stress(string stressSubject)
         {
             Stress();
         }

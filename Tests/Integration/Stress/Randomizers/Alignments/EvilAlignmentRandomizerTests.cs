@@ -9,11 +9,14 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Alignments
     [TestFixture]
     public class EvilAlignmentRandomizerTests : StressTests
     {
-        [Inject, Named(AlignmentRandomizerTypeConstants.Evil)]
-        public override IAlignmentRandomizer AlignmentRandomizer { get; set; }
+        [SetUp]
+        public void Setup()
+        {
+            AlignmentRandomizer = GetNewInstanceOf<IAlignmentRandomizer>(AlignmentRandomizerTypeConstants.Evil);
+        }
 
-        [TestCase("EvilAlignmentRandomizer")]
-        public override void Stress(String stressSubject)
+        [TestCase("Evil Alignment Randomizer")]
+        public override void Stress(string stressSubject)
         {
             Stress();
         }

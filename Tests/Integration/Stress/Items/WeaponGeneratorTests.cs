@@ -134,7 +134,7 @@ namespace CharacterGen.Tests.Integration.Stress.Items
                 ability = AbilitiesGenerator.GenerateWith(characterClass, race, StatsRandomizer, baseAttack);
                 rangedWeapon = WeaponGenerator.GenerateRangedFrom(ability.Feats, characterClass, race);
             }
-            while (CollectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, rangedWeapon.Name).Count() < 2);
+            while (rangedWeapon == null || CollectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, rangedWeapon.Name).Count() < 2);
 
             var ammunitionType = CollectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, rangedWeapon.Name).Last();
 

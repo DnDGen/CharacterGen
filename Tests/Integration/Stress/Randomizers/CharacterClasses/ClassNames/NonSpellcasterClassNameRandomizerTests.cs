@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using Ninject;
-using CharacterGen.Common.CharacterClasses;
+﻿using CharacterGen.Common.CharacterClasses;
 using CharacterGen.Generators.Randomizers.CharacterClasses;
 using NUnit.Framework;
+using System.Collections.Generic;
 
 namespace CharacterGen.Tests.Integration.Stress.Randomizers.CharacterClasses.ClassNames
 {
     [TestFixture]
     public class NonSpellcasterClassNameRandomizerTests : ClassNameRandomizerTests
     {
-        [Inject, Named(ClassNameRandomizerTypeConstants.NonSpellcaster)]
-        public override IClassNameRandomizer ClassNameRandomizer { get; set; }
-
-        protected override IEnumerable<String> allowedClassNames
+        protected override IEnumerable<string> allowedClassNames
         {
             get
             {
@@ -27,8 +22,14 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.CharacterClasses.Cla
             }
         }
 
-        [TestCase("NonSpellcasterClassNameRandomizer")]
-        public override void Stress(String stressSubject)
+        [SetUp]
+        public void Setup()
+        {
+            ClassNameRandomizer = GetNewInstanceOf<IClassNameRandomizer>(ClassNameRandomizerTypeConstants.NonSpellcaster);
+        }
+
+        [TestCase("Non-Spellcaster Class Name Randomizer")]
+        public override void Stress(string stressSubject)
         {
             Stress();
         }
