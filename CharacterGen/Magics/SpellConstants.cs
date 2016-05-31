@@ -1,0 +1,82 @@
+﻿namespace CharacterGen.Magics
+{
+    public static class SpellConstants
+    {
+        public const string Arcane = "Arcane";
+        public const string Divine = "Divine";
+
+        public const string Aid = "Aid";
+        public const string Blasphemy = "Blasphemy";
+        public const string Bless = "Bless";
+        public const string BlindnessDeafness = "Blindness/deafness";
+        public const string Blur = "Blur";
+        public const string CharmMonster = "Charm monster";
+        public const string CharmPerson = "Charm person";
+        public const string ConeOfCold = "Cone of cold";
+        public const string Contagion = "Contagion";
+        public const string CureCriticalWounds = "Cure critical wounds";
+        public const string CureLightWounds = "Cure light wounds";
+        public const string CureModerateWounds = "Cure moderate wounds";
+        public const string CureSeriousWounds = "Cure serious wounds";
+        public const string DancingLights = "Dancing lights";
+        public const string Darkness = "Darkness";
+        public const string Daylight = "Daylight";
+        public const string Daze = "Daze";
+        public const string Desecrate = "Desecrate";
+        public const string Destruction = "Destruction";
+        public const string DetectEvil = "Detect evil";
+        public const string DetectThoughts = "Detect thoughts";
+        public const string DisguiseSelf = "Disguise self";
+        public const string DispelEvil = "Dispel evil";
+        public const string EnlargePerson = "Enlarge person";
+        public const string FaerieFire = "Faerie fire";
+        public const string FreedomOfMovement = "Freedom of movement";
+        public const string GaseousForm = "Gaseous form";
+        public const string GhostSound = "Ghost sound";
+        public const string Hallow = "Hallow";
+        public const string Heal = "Heal";
+        public const string HolyAura = "Holy aura";
+        public const string HolySmite = "Holy smite";
+        public const string HolyWord = "Holy word";
+        public const string HorridWilting = "Horrid wilting";
+        public const string Invisibility = "Invisibility";
+        public const string Levitate = "Levitate";
+        public const string MassCharmMonster = "Mass charm monster";
+        public const string NeutralizePoison = "Neutralize poison";
+        public const string Nondetection = "Nondetection";
+        public const string PassWithoutTrace = "Pass without trace";
+        public const string PlaneShift = "Plane shift";
+        public const string Poison = "Poison";
+        public const string Polymorph = "Polymorph";
+        public const string Prestidigitation = "Prestidigitation";
+        public const string ProtectionFromEvil = "Protection from evil";
+        public const string RemoveDisease = "Remove disease";
+        public const string Resurrection = "Resurrection";
+        public const string Sleep = "Sleep";
+        public const string SoundBurst = "Sound burst";
+        public const string SpeakWithAnimals = "Speak with animals";
+        public const string SpiderClimb = "Spider climb";
+        public const string Suggestion = "Suggestion";
+        public const string SummonMonsterI = "Summon monster I";
+        public const string SummonMonsterII = "Summon monster II";
+        public const string SummonMonsterIII = "Summon monster III";
+        public const string SummonMonsterIV = "Summon monster IV";
+        public const string SummonMonsterV = "Summon monster V";
+        public const string SummonMonsterVI = "Summon monster VI";
+        public const string SummonMonsterVII = "Summon monster VII";
+        public const string SummonMonsterVIII = "Summon monster VIII";
+        public const string SummonMonsterIX = "Summon monster IX";
+        public const string SummonNaturesAllyI = "Summon nature's ally I";
+        public const string SummonNaturesAllyII = "Summon nature's ally II";
+        public const string SummonNaturesAllyIII = "Summon nature's ally III";
+        public const string SummonNaturesAllyIV = "Summon nature's ally IV";
+        public const string SummonNaturesAllyV = "Summon nature's ally V";
+        public const string SummonNaturesAllyVI = "Summon nature's ally VI";
+        public const string SummonNaturesAllyVII = "Summon nature's ally VII";
+        public const string SummonNaturesAllyVIII = "Summon nature's ally VIII";
+        public const string SummonNaturesAllyIX = "Summon nature's ally IX";
+        public const string Unhallow = "Unhallow";
+        public const string UnholyAura = "Unholy aura";
+        public const string UnholyBlight = "Unholy blight";
+    }
+}
