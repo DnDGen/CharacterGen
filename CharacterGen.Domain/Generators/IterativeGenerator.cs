@@ -4,7 +4,7 @@ namespace CharacterGen.Domain.Generators
 {
     internal class IterativeGenerator : Generator
     {
-        private const int MaxRetries = 20000;
+        private const int MaxRetries = 30000;
 
         public T Generate<T>(Func<T> buildInstructions, Func<T, bool> isValid)
         {
