@@ -17,7 +17,7 @@ using CharacterGen.Verifiers;
 using CharacterGen.Verifiers.Exceptions;
 using System;
 using System.Linq;
-using TreasureGen.Common.Items;
+using TreasureGen.Items;
 
 namespace CharacterGen.Domain.Generators
 {

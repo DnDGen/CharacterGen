@@ -6,7 +6,7 @@ using CharacterGen.Domain.Selectors.Selections;
 using CharacterGen.Domain.Tables;
 using NUnit.Framework;
 using System.Collections.Generic;
-using TreasureGen.Common.Items;
+using TreasureGen.Items;
 
 namespace CharacterGen.Tests.Unit.Selectors.Selections
 {

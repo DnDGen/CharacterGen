@@ -10,6 +10,7 @@ using CharacterGen.Races;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TreasureGen.Items;
 
 namespace CharacterGen.Domain.Generators.Magics
 {
@@ -46,18 +47,18 @@ namespace CharacterGen.Domain.Generators.Magics
             if (equipment.Armor != null && (characterClass.ClassName != CharacterClassConstants.Bard || lightArmor.Contains(equipment.Armor.Name) == false))
                 magic.ArcaneSpellFailure += GetArcaneSpellFailure(equipment.Armor);
 
-            if (equipment.OffHand != null && equipment.OffHand.ItemType == TreasureGen.Common.Items.ItemTypeConstants.Armor && equipment.OffHand.Attributes.Contains(TreasureGen.Common.Items.AttributeConstants.Shield))
+            if (equipment.OffHand != null && equipment.OffHand.ItemType == ItemTypeConstants.Armor && equipment.OffHand.Attributes.Contains(AttributeConstants.Shield))
                 magic.ArcaneSpellFailure += GetArcaneSpellFailure(equipment.OffHand);
 
             return magic;
         }
 
-        private int GetArcaneSpellFailure(TreasureGen.Common.Items.Item item)
+        private int GetArcaneSpellFailure(Item item)
         {
             var arcaneSpellFailures = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.ArcaneSpellFailures);
             var arcaneSpellFailure = arcaneSpellFailures[item.Name];
 
-            if (item.Traits.Contains(TreasureGen.Common.Items.TraitConstants.Mithral))
+            if (item.Traits.Contains(TraitConstants.Mithral))
                 arcaneSpellFailure -= 10;
 
             return Math.Max(0, arcaneSpellFailure);

@@ -7,7 +7,7 @@ using CharacterGen.Races;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using TreasureGen.Common.Items;
+using TreasureGen.Items;
 using TreasureGen.Generators;
 
 namespace CharacterGen.Domain.Generators.Items

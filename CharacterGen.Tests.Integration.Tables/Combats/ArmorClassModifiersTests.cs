@@ -1,7 +1,7 @@
 ﻿using CharacterGen.Abilities.Feats;
 using CharacterGen.Domain.Tables;
 using NUnit.Framework;
-using TreasureGen.Common.Items;
+using TreasureGen.Items.Magical;
 
 namespace CharacterGen.Tests.Integration.Tables.Combats
 {

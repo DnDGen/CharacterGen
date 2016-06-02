@@ -9,7 +9,7 @@ using CharacterGen.Races;
 using NUnit.Framework;
 using System;
 using System.Linq;
-using TreasureGen.Common.Items;
+using TreasureGen.Items;
 
 namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
 {

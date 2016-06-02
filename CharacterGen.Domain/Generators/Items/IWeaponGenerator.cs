@@ -2,7 +2,7 @@
 using CharacterGen.CharacterClasses;
 using CharacterGen.Races;
 using System.Collections.Generic;
-using TreasureGen.Common.Items;
+using TreasureGen.Items;
 
 namespace CharacterGen.Domain.Generators.Items
 {

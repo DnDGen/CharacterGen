@@ -11,7 +11,7 @@ using CharacterGen.Races;
 using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
-using TreasureGen.Common.Items;
+using TreasureGen.Items;
 
 namespace CharacterGen.Tests.Unit.Generators.Magics
 {

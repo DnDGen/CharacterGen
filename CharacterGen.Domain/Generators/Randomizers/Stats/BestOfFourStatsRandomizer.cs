@@ -1,7 +1,6 @@
 ﻿using CharacterGen.Abilities.Stats;
 using RollGen;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace CharacterGen.Domain.Generators.Randomizers.Stats
 {
@@ -25,11 +24,7 @@ namespace CharacterGen.Domain.Generators.Randomizers.Stats
 
         protected override int RollStat()
         {
-            var rolls = dice.Roll(4).IndividualRolls(6);
-            var orderedRolls = rolls.OrderBy(r => r);
-            var validRolls = orderedRolls.Skip(1);
-
-            return validRolls.Sum();
+            return dice.Roll("4d6k3");
         }
 
         protected override bool StatsAreAllowed(IEnumerable<Stat> stats)

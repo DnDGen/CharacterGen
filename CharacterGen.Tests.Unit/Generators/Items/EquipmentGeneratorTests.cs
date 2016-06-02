@@ -10,8 +10,8 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using TreasureGen.Common;
-using TreasureGen.Common.Items;
+using TreasureGen;
+using TreasureGen.Items;
 using TreasureGen.Generators;
 
 namespace CharacterGen.Tests.Unit.Generators.Items

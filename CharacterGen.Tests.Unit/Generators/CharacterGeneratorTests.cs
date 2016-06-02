@@ -27,6 +27,7 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TreasureGen.Items;
 
 namespace CharacterGen.Tests.Unit.Generators
 {
@@ -367,7 +368,7 @@ namespace CharacterGen.Tests.Unit.Generators
 
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.ArmorCheckPenalties)).Returns(armorCheckPenalties);
 
-            equipment.Armor = new TreasureGen.Common.Items.Item { Name = "armor" };
+            equipment.Armor = new Item { Name = "armor" };
 
             var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object,
                 mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
@@ -413,8 +414,8 @@ namespace CharacterGen.Tests.Unit.Generators
 
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.ArmorCheckPenalties)).Returns(armorCheckPenalties);
 
-            equipment.OffHand = new TreasureGen.Common.Items.Item { Name = "shield" };
-            equipment.OffHand.Attributes = new[] { TreasureGen.Common.Items.AttributeConstants.Shield };
+            equipment.OffHand = new Item { Name = "shield" };
+            equipment.OffHand.Attributes = new[] { AttributeConstants.Shield };
 
             var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object,
                 mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
@@ -438,7 +439,7 @@ namespace CharacterGen.Tests.Unit.Generators
 
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.ArmorCheckPenalties)).Returns(armorCheckPenalties);
 
-            equipment.OffHand = new TreasureGen.Common.Items.Item { Name = "shield" };
+            equipment.OffHand = new Item { Name = "shield" };
 
             var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object,
                 mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
@@ -464,9 +465,9 @@ namespace CharacterGen.Tests.Unit.Generators
 
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.ArmorCheckPenalties)).Returns(armorCheckPenalties);
 
-            equipment.Armor = new TreasureGen.Common.Items.Item { Name = "armor" };
-            equipment.OffHand = new TreasureGen.Common.Items.Item { Name = "shield" };
-            equipment.OffHand.Attributes = new[] { TreasureGen.Common.Items.AttributeConstants.Shield };
+            equipment.Armor = new Item { Name = "armor" };
+            equipment.OffHand = new Item { Name = "shield" };
+            equipment.OffHand.Attributes = new[] { AttributeConstants.Shield };
 
             var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object,
                 mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
@@ -492,10 +493,10 @@ namespace CharacterGen.Tests.Unit.Generators
 
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.ArmorCheckPenalties)).Returns(armorCheckPenalties);
 
-            equipment.Armor = new TreasureGen.Common.Items.Item { Name = "armor" };
+            equipment.Armor = new Item { Name = "armor" };
             equipment.Armor.Traits.Add("mithral");
-            equipment.OffHand = new TreasureGen.Common.Items.Item { Name = "shield" };
-            equipment.OffHand.Attributes = new[] { TreasureGen.Common.Items.AttributeConstants.Shield };
+            equipment.OffHand = new Item { Name = "shield" };
+            equipment.OffHand.Attributes = new[] { AttributeConstants.Shield };
             equipment.OffHand.Traits.Add("darkwood");
 
             var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object,
@@ -520,8 +521,8 @@ namespace CharacterGen.Tests.Unit.Generators
 
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.ArmorCheckPenalties)).Returns(armorCheckPenalties);
 
-            equipment.OffHand = new TreasureGen.Common.Items.Item { Name = "shield" };
-            equipment.OffHand.Attributes = new[] { TreasureGen.Common.Items.AttributeConstants.Shield };
+            equipment.OffHand = new Item { Name = "shield" };
+            equipment.OffHand.Attributes = new[] { AttributeConstants.Shield };
             equipment.OffHand.Traits.Add("mithral");
 
             var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object,
@@ -549,9 +550,9 @@ namespace CharacterGen.Tests.Unit.Generators
 
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.ArmorCheckPenalties)).Returns(armorCheckPenalties);
 
-            equipment.Armor = new TreasureGen.Common.Items.Item { Name = "armor" };
-            equipment.OffHand = new TreasureGen.Common.Items.Item { Name = "shield" };
-            equipment.OffHand.Attributes = new[] { TreasureGen.Common.Items.AttributeConstants.Shield };
+            equipment.Armor = new Item { Name = "armor" };
+            equipment.OffHand = new Item { Name = "shield" };
+            equipment.OffHand.Attributes = new[] { AttributeConstants.Shield };
 
             var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object,
                 mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
@@ -581,10 +582,10 @@ namespace CharacterGen.Tests.Unit.Generators
 
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.ArmorCheckPenalties)).Returns(armorCheckPenalties);
 
-            equipment.Armor = new TreasureGen.Common.Items.Item { Name = "armor" };
+            equipment.Armor = new Item { Name = "armor" };
             equipment.Armor.Traits.Add("mithral");
-            equipment.OffHand = new TreasureGen.Common.Items.Item { Name = "shield" };
-            equipment.OffHand.Attributes = new[] { TreasureGen.Common.Items.AttributeConstants.Shield };
+            equipment.OffHand = new Item { Name = "shield" };
+            equipment.OffHand.Attributes = new[] { AttributeConstants.Shield };
             equipment.OffHand.Traits.Add("darkwood");
 
             var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object,
@@ -599,7 +600,7 @@ namespace CharacterGen.Tests.Unit.Generators
         public void SwimTakesNoPenaltyForPlateArmorOfTheDeep()
         {
             var armorCheckPenalties = new Dictionary<string, int>();
-            armorCheckPenalties[TreasureGen.Common.Items.ArmorConstants.PlateArmorOfTheDeep] = -6;
+            armorCheckPenalties[ArmorConstants.PlateArmorOfTheDeep] = -6;
 
             ability.Skills["skill"] = new Skill();
             ability.Skills["other skill"] = new Skill();
@@ -610,7 +611,7 @@ namespace CharacterGen.Tests.Unit.Generators
 
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.ArmorCheckPenalties)).Returns(armorCheckPenalties);
 
-            equipment.Armor = new TreasureGen.Common.Items.Item { Name = TreasureGen.Common.Items.ArmorConstants.PlateArmorOfTheDeep };
+            equipment.Armor = new Item { Name = ArmorConstants.PlateArmorOfTheDeep };
 
             var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object,
                 mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);

@@ -20,30 +20,20 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
             var generator = new ConfigurableIterationGenerator(2);
             randomizer = new BestOfFourStatsRandomizer(mockDice.Object, generator);
 
-            mockDice.Setup(d => d.Roll(4).IndividualRolls(6)).Returns(new[] { 1, 1, 1, 1 });
+            mockDice.Setup(d => d.Roll("4d6k3")).Returns(3);
         }
 
         [Test]
-        public void BestOfFourStatsCalls4d6OncePerStat()
+        public void BestOfFourStatsCalls4d6k3OncePerStat()
         {
             var stats = randomizer.Randomize();
-            mockDice.Verify(d => d.Roll(4).IndividualRolls(6), Times.Exactly(stats.Count));
+            mockDice.Verify(d => d.Roll("4d6k3"), Times.Exactly(stats.Count));
         }
 
         [Test]
         public void BestOfFourIgnoresLowestRollPerStat()
         {
-            mockDice.SetupSequence(d => d.Roll(4).IndividualRolls(6)).Returns(new[] { 2, 1, 3, 4 });
-
-            var stats = randomizer.Randomize();
-            var stat = stats.Values.First();
-            Assert.That(stat.Value, Is.EqualTo(9));
-        }
-
-        [Test]
-        public void BestOfFourIgnoresFirstInstanceOfLowestRoll()
-        {
-            mockDice.SetupSequence(d => d.Roll(4).IndividualRolls(6)).Returns(new[] { 2, 2, 3, 4 });
+            mockDice.SetupSequence(d => d.Roll("4d6k3")).Returns(9);
 
             var stats = randomizer.Randomize();
             var stat = stats.Values.First();

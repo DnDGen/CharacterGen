@@ -4,9 +4,9 @@ using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Selectors.Percentiles;
 using Ninject;
 using Ninject.Activation;
-using TreasureGen.Common.Items;
-using TreasureGen.Generators.Items.Magical;
-using TreasureGen.Generators.Items.Mundane;
+using TreasureGen.Items;
+using TreasureGen.Items.Magical;
+using TreasureGen.Items.Mundane;
 
 namespace CharacterGen.Domain.IoC.Providers
 {

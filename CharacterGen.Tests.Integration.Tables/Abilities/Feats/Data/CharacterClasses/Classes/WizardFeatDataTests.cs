@@ -3,7 +3,7 @@ using CharacterGen.CharacterClasses;
 using CharacterGen.Domain.Tables;
 using NUnit.Framework;
 using System;
-using TreasureGen.Common.Items;
+using TreasureGen.Items;
 
 namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses.Classes
 {

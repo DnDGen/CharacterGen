@@ -5,7 +5,7 @@ using CharacterGen.CharacterClasses;
 using CharacterGen.Domain.Tables;
 using System.Collections.Generic;
 using System.Linq;
-using TreasureGen.Common.Items;
+using TreasureGen.Items;
 
 namespace CharacterGen.Domain.Selectors.Selections
 {

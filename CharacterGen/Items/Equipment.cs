@@ -1,5 +1,5 @@
-﻿using TreasureGen.Common;
-using TreasureGen.Common.Items;
+﻿using TreasureGen;
+using TreasureGen.Items;
 
 namespace CharacterGen.Items
 {

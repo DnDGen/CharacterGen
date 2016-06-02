@@ -9,9 +9,9 @@ using CharacterGen.Races;
 using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
-using TreasureGen.Common.Items;
-using TreasureGen.Generators.Items.Magical;
-using TreasureGen.Generators.Items.Mundane;
+using TreasureGen.Items;
+using TreasureGen.Items.Magical;
+using TreasureGen.Items.Mundane;
 
 namespace CharacterGen.Tests.Unit.Generators.Items
 {

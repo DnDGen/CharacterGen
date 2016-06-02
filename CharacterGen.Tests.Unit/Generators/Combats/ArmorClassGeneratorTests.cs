@@ -8,7 +8,8 @@ using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
-using TreasureGen.Common.Items;
+using TreasureGen.Items;
+using TreasureGen.Items.Magical;
 
 namespace CharacterGen.Tests.Unit.Generators.Combats
 {
