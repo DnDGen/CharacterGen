@@ -36,6 +36,7 @@ namespace CharacterGen.Tests.Unit.Tables
         [TestCase(GroupConstants.NPCs, "NPCs")]
         [TestCase(GroupConstants.Players, "Players")]
         [TestCase(GroupConstants.PoorBaseAttack, "Poor Base Attack")]
+        [TestCase(GroupConstants.PreparesSpells, "Prepares Spells")]
         [TestCase(GroupConstants.Proficiency, "Proficiency")]
         [TestCase(GroupConstants.SavingThrows, "Saving Throws")]
         [TestCase(GroupConstants.SchoolsOfMagic, "Schools of Magic")]

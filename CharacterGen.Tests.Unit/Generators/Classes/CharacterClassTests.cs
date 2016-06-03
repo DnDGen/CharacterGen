@@ -17,7 +17,7 @@ namespace CharacterGen.Tests.Unit.Common.Classes
         [Test]
         public void CharacterClassInitialized()
         {
-            Assert.That(characterClass.ClassName, Is.Empty);
+            Assert.That(characterClass.Name, Is.Empty);
             Assert.That(characterClass.Level, Is.EqualTo(0));
             Assert.That(characterClass.SpecialistFields, Is.Empty);
             Assert.That(characterClass.ProhibitedFields, Is.Empty);

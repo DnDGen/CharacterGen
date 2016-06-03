@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+  <object>
+    <name>Sanctuary</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Shield other</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Protection from energy</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Spell immunity</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Spell resistance</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Antimagic field</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Repulsion</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Mind blank</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Prismatic sphere</name>
+    <item>9</item>
+  </object>
+</items>

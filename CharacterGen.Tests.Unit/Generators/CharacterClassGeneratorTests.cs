@@ -67,7 +67,7 @@ namespace CharacterGen.Tests.Unit.Generators
         public void GeneratorReturnsRandomizedClass()
         {
             var characterClass = characterClassGenerator.GenerateWith(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
-            Assert.That(characterClass.ClassName, Is.EqualTo(ClassName));
+            Assert.That(characterClass.Name, Is.EqualTo(ClassName));
         }
 
         [Test]
@@ -274,7 +274,7 @@ namespace CharacterGen.Tests.Unit.Generators
         public void IfNotASpecialist_ReturnNothingForRegeneratedSpecialistField()
         {
             var characterClass = new CharacterClass();
-            characterClass.ClassName = ClassName;
+            characterClass.Name = ClassName;
             var race = new Race();
             race.Metarace = "metarace";
 
@@ -292,7 +292,7 @@ namespace CharacterGen.Tests.Unit.Generators
         public void IfASpecialistButNoMetarace_ReturnOriginalSpecialistFields()
         {
             var characterClass = new CharacterClass();
-            characterClass.ClassName = ClassName;
+            characterClass.Name = ClassName;
             characterClass.SpecialistFields = new[] { "specialist field" };
             var race = new Race();
 
@@ -310,7 +310,7 @@ namespace CharacterGen.Tests.Unit.Generators
         public void IfASpecialistButMetaraceDoesNotAffect_ReturnOriginalSpecialistFields()
         {
             var characterClass = new CharacterClass();
-            characterClass.ClassName = ClassName;
+            characterClass.Name = ClassName;
             characterClass.SpecialistFields = new[] { "specialist field" };
             var race = new Race();
             race.Metarace = "metarace";
@@ -329,7 +329,7 @@ namespace CharacterGen.Tests.Unit.Generators
         public void IfASpecialistAndMetaraceAffects_ReturnNewSpecialistFields()
         {
             var characterClass = new CharacterClass();
-            characterClass.ClassName = ClassName;
+            characterClass.Name = ClassName;
             characterClass.SpecialistFields = new[] { "specialist field" };
             var race = new Race();
             race.Metarace = "metarace";
@@ -348,7 +348,7 @@ namespace CharacterGen.Tests.Unit.Generators
         public void OnlyUseAlignmentFieldsWhenRegeneratingSpecialistFields()
         {
             var characterClass = new CharacterClass();
-            characterClass.ClassName = ClassName;
+            characterClass.Name = ClassName;
             characterClass.SpecialistFields = new[] { "specialist field" };
             var race = new Race();
             race.Metarace = "metarace";
@@ -374,7 +374,7 @@ namespace CharacterGen.Tests.Unit.Generators
         public void RegenerateMultipleSpecialistFields()
         {
             var characterClass = new CharacterClass();
-            characterClass.ClassName = ClassName;
+            characterClass.Name = ClassName;
             characterClass.SpecialistFields = new[] { "original specialist field", "other original specialist field" };
             var race = new Race();
             race.Metarace = "metarace";

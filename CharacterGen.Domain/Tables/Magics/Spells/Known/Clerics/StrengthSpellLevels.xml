@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+  <object>
+    <name>Enlarge person</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Bull's strength</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Magic vestment</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Spell immunity</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Righteous might</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Stoneskin</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Grasping hand</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Clenched fist</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Crushing hand</name>
+    <item>9</item>
+  </object>
+</items>

@@ -34,10 +34,10 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
 
             alignment.Goodness = "goodness";
             alignment.Lawfulness = "lawfulness";
-            characterClass.ClassName = "class name";
+            characterClass.Name = "class name";
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, alignment.Goodness)).Returns(alignmentBaseRaces);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, characterClass.ClassName)).Returns(classBaseRaces);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, characterClass.Name)).Returns(classBaseRaces);
 
         }
 

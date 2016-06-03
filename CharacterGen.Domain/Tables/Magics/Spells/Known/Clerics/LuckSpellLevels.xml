@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+  <object>
+    <name>Entropic shield</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Aid</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Protection from energy</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Freedom of movement</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Break enchantment</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Mislead</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Spell turning</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Moment of prescience</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Miracle</name>
+    <item>9</item>
+  </object>
+</items>

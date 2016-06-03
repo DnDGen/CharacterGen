@@ -26,11 +26,16 @@ namespace CharacterGen.Tests.Integration.Tables
 
         protected void AssertCollectionNames(IEnumerable<string> names)
         {
-            var distinctCollection = names.Distinct();
-            Assert.That(distinctCollection.Count(), Is.EqualTo(names.Count()), "Provided collection is not distinct");
+            AssertUnique(names);
+            AssertCollection(table.Keys, names);
+        }
 
-            AssertMissingItems(table.Keys, names);
-            AssertExtraItems(table.Keys, names);
+        private void AssertUnique(IEnumerable<string> collection)
+        {
+            var duplicateItems = collection.Where(s => collection.Count(c => c == s) > 1);
+            var duplicates = string.Join(", ", duplicateItems.Distinct());
+
+            Assert.That(collection, Is.Unique, $"Collection is not distinct: {duplicates}");
         }
 
         protected virtual void PopulateIndices(IEnumerable<string> collection)
@@ -46,21 +51,28 @@ namespace CharacterGen.Tests.Integration.Tables
             if (table[name].Count() == 1 && collection.Count() == 1)
                 Assert.That(table[name].Single(), Is.EqualTo(collection.Single()));
 
-            AssertMissingItems(table[name], collection);
-            AssertExtraItems(table[name], collection);
+            AssertCollection(table[name], collection);
+        }
+
+        private void AssertCollection(IEnumerable<string> actual, IEnumerable<string> expected)
+        {
+            AssertMissingItems(expected, actual);
+            AssertExtraItems(expected, actual);
+            Assert.That(actual, Is.EquivalentTo(expected));
+            Assert.That(expected, Is.EquivalentTo(actual));
+            Assert.That(actual.Count(), Is.EqualTo(expected.Count()));
         }
 
         protected void AssertMissingItems(IEnumerable<string> expected, IEnumerable<string> collection)
         {
             var missingItems = collection.Except(expected);
-            Assert.That(missingItems, Is.Empty, "missing");
+            Assert.That(missingItems, Is.Empty, $"{missingItems.Count()} missing");
         }
 
         protected void AssertExtraItems(IEnumerable<string> expected, IEnumerable<string> collection)
         {
             var extras = expected.Except(collection);
-            Assert.That(extras, Is.Empty, "extra");
-            Assert.That(expected.Count(), Is.EqualTo(collection.Count()));
+            Assert.That(extras, Is.Empty, $"{extras.Count()} extra");
         }
 
         public virtual void OrderedCollection(string name, params string[] collection)
@@ -86,18 +98,9 @@ namespace CharacterGen.Tests.Integration.Tables
 
         public virtual void DistinctCollection(string name, params string[] collection)
         {
-            var distinctCollection = collection.Distinct();
-            Assert.That(distinctCollection.Count(), Is.EqualTo(collection.Count()), "Provided collection is not distinct");
-
+            AssertUnique(collection);
             Collection(name, collection);
-
-            distinctCollection = table[name].Distinct();
-            Assert.That(distinctCollection.Count(), Is.EqualTo(table[name].Count()), "Actual collection is not distinct");
-        }
-
-        public virtual void EmptyCollection()
-        {
-            Assert.That(table, Is.Empty, tableName);
+            AssertUnique(table[name]);
         }
     }
 }

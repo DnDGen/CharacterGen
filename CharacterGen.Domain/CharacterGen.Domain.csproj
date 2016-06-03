@@ -227,7 +227,9 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Adepts\Level10AdeptKnownSpells.xml" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Tables\Abilities\Feats\Data\Additional\AdditionalFeatData.xml" />
   </ItemGroup>
@@ -1095,64 +1097,64 @@
     <EmbeddedResource Include="Tables\Magics\Animals.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Adepts\Level10AdeptSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Adepts\Level10AdeptSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Adepts\Level11AdeptSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Adepts\Level11AdeptSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Adepts\Level12AdeptSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Adepts\Level12AdeptSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Adepts\Level13AdeptSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Adepts\Level13AdeptSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Adepts\Level14AdeptSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Adepts\Level14AdeptSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Adepts\Level15AdeptSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Adepts\Level15AdeptSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Adepts\Level16AdeptSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Adepts\Level16AdeptSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Adepts\Level17AdeptSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Adepts\Level17AdeptSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Adepts\Level18AdeptSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Adepts\Level18AdeptSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Adepts\Level19AdeptSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Adepts\Level19AdeptSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Adepts\Level1AdeptSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Adepts\Level1AdeptSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Adepts\Level20AdeptSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Adepts\Level20AdeptSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Adepts\Level2AdeptSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Adepts\Level2AdeptSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Adepts\Level3AdeptSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Adepts\Level3AdeptSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Adepts\Level4AdeptSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Adepts\Level4AdeptSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Adepts\Level5AdeptSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Adepts\Level5AdeptSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Adepts\Level6AdeptSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Adepts\Level6AdeptSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Adepts\Level7AdeptSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Adepts\Level7AdeptSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Adepts\Level8AdeptSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Adepts\Level8AdeptSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Adepts\Level9AdeptSpellsPerDay.xml">
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Adepts\Level9AdeptSpellsPerDay.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
@@ -1160,436 +1162,436 @@
     <EmbeddedResource Include="Tables\Magics\Spells\ArcaneSpellFailures.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Bards\Level10BardSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Bards\Level10BardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Bards\Level11BardSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Bards\Level11BardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Bards\Level12BardSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Bards\Level12BardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Bards\Level13BardSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Bards\Level13BardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Bards\Level14BardSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Bards\Level14BardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Bards\Level15BardSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Bards\Level15BardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Bards\Level16BardSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Bards\Level16BardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Bards\Level17BardSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Bards\Level17BardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Bards\Level18BardSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Bards\Level18BardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Bards\Level19BardSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Bards\Level19BardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Bards\Level1BardSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Bards\Level1BardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Bards\Level20BardSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Bards\Level20BardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Bards\Level2BardSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Bards\Level2BardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Bards\Level3BardSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Bards\Level3BardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Bards\Level4BardSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Bards\Level4BardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Bards\Level5BardSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Bards\Level5BardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Bards\Level6BardSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Bards\Level6BardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Bards\Level7BardSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Bards\Level7BardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Bards\Level8BardSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Bards\Level8BardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Bards\Level9BardSpellsPerDay.xml">
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Bards\Level9BardSpellsPerDay.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Clerics\Level10ClericSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Clerics\Level10ClericSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Clerics\Level11ClericSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Clerics\Level11ClericSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Clerics\Level12ClericSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Clerics\Level12ClericSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Clerics\Level13ClericSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Clerics\Level13ClericSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Clerics\Level14ClericSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Clerics\Level14ClericSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Clerics\Level15ClericSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Clerics\Level15ClericSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Clerics\Level16ClericSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Clerics\Level16ClericSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Clerics\Level17ClericSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Clerics\Level17ClericSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Clerics\Level18ClericSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Clerics\Level18ClericSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Clerics\Level19ClericSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Clerics\Level19ClericSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Clerics\Level1ClericSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Clerics\Level1ClericSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Clerics\Level20ClericSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Clerics\Level20ClericSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Clerics\Level2ClericSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Clerics\Level2ClericSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Clerics\Level3ClericSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Clerics\Level3ClericSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Clerics\Level4ClericSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Clerics\Level4ClericSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Clerics\Level5ClericSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Clerics\Level5ClericSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Clerics\Level6ClericSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Clerics\Level6ClericSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Clerics\Level7ClericSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Clerics\Level7ClericSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Clerics\Level8ClericSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Clerics\Level8ClericSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Clerics\Level9ClericSpellsPerDay.xml">
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Clerics\Level9ClericSpellsPerDay.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Druids\Level10DruidSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Druids\Level10DruidSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Druids\Level11DruidSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Druids\Level11DruidSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Druids\Level12DruidSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Druids\Level12DruidSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Druids\Level13DruidSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Druids\Level13DruidSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Druids\Level14DruidSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Druids\Level14DruidSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Druids\Level15DruidSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Druids\Level15DruidSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Druids\Level16DruidSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Druids\Level16DruidSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Druids\Level17DruidSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Druids\Level17DruidSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Druids\Level18DruidSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Druids\Level18DruidSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Druids\Level19DruidSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Druids\Level19DruidSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Druids\Level1DruidSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Druids\Level1DruidSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Druids\Level20DruidSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Druids\Level20DruidSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Druids\Level2DruidSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Druids\Level2DruidSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Druids\Level3DruidSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Druids\Level3DruidSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Druids\Level4DruidSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Druids\Level4DruidSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Druids\Level5DruidSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Druids\Level5DruidSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Druids\Level6DruidSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Druids\Level6DruidSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Druids\Level7DruidSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Druids\Level7DruidSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Druids\Level8DruidSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Druids\Level8DruidSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Druids\Level9DruidSpellsPerDay.xml">
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Druids\Level9DruidSpellsPerDay.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Paladins\Level10PaladinSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Paladins\Level10PaladinSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Paladins\Level11PaladinSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Paladins\Level11PaladinSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Paladins\Level12PaladinSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Paladins\Level12PaladinSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Paladins\Level13PaladinSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Paladins\Level13PaladinSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Paladins\Level14PaladinSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Paladins\Level14PaladinSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Paladins\Level15PaladinSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Paladins\Level15PaladinSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Paladins\Level16PaladinSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Paladins\Level16PaladinSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Paladins\Level17PaladinSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Paladins\Level17PaladinSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Paladins\Level18PaladinSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Paladins\Level18PaladinSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Paladins\Level19PaladinSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Paladins\Level19PaladinSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Paladins\Level1PaladinSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Paladins\Level1PaladinSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Paladins\Level20PaladinSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Paladins\Level20PaladinSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Paladins\Level2PaladinSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Paladins\Level2PaladinSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Paladins\Level3PaladinSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Paladins\Level3PaladinSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Paladins\Level4PaladinSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Paladins\Level4PaladinSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Paladins\Level5PaladinSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Paladins\Level5PaladinSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Paladins\Level6PaladinSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Paladins\Level6PaladinSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Paladins\Level7PaladinSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Paladins\Level7PaladinSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Paladins\Level8PaladinSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Paladins\Level8PaladinSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Paladins\Level9PaladinSpellsPerDay.xml">
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Paladins\Level9PaladinSpellsPerDay.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Rangers\Level10RangerSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Rangers\Level10RangerSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Rangers\Level11RangerSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Rangers\Level11RangerSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Rangers\Level12RangerSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Rangers\Level12RangerSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Rangers\Level13RangerSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Rangers\Level13RangerSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Rangers\Level14RangerSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Rangers\Level14RangerSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Rangers\Level15RangerSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Rangers\Level15RangerSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Rangers\Level16RangerSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Rangers\Level16RangerSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Rangers\Level17RangerSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Rangers\Level17RangerSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Rangers\Level18RangerSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Rangers\Level18RangerSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Rangers\Level19RangerSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Rangers\Level19RangerSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Rangers\Level1RangerSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Rangers\Level1RangerSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Rangers\Level20RangerSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Rangers\Level20RangerSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Rangers\Level2RangerSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Rangers\Level2RangerSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Rangers\Level3RangerSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Rangers\Level3RangerSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Rangers\Level4RangerSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Rangers\Level4RangerSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Rangers\Level5RangerSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Rangers\Level5RangerSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Rangers\Level6RangerSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Rangers\Level6RangerSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Rangers\Level7RangerSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Rangers\Level7RangerSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Rangers\Level8RangerSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Rangers\Level8RangerSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Rangers\Level9RangerSpellsPerDay.xml">
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Rangers\Level9RangerSpellsPerDay.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Sorcerers\Level10SorcererSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Sorcerers\Level10SorcererSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Sorcerers\Level11SorcererSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Sorcerers\Level11SorcererSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Sorcerers\Level12SorcererSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Sorcerers\Level12SorcererSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Sorcerers\Level13SorcererSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Sorcerers\Level13SorcererSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Sorcerers\Level14SorcererSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Sorcerers\Level14SorcererSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Sorcerers\Level15SorcererSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Sorcerers\Level15SorcererSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Sorcerers\Level16SorcererSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Sorcerers\Level16SorcererSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Sorcerers\Level17SorcererSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Sorcerers\Level17SorcererSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Sorcerers\Level18SorcererSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Sorcerers\Level18SorcererSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Sorcerers\Level19SorcererSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Sorcerers\Level19SorcererSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Sorcerers\Level1SorcererSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Sorcerers\Level1SorcererSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Sorcerers\Level20SorcererSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Sorcerers\Level20SorcererSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Sorcerers\Level2SorcererSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Sorcerers\Level2SorcererSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Sorcerers\Level3SorcererSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Sorcerers\Level3SorcererSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Sorcerers\Level4SorcererSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Sorcerers\Level4SorcererSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Sorcerers\Level5SorcererSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Sorcerers\Level5SorcererSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Sorcerers\Level6SorcererSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Sorcerers\Level6SorcererSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Sorcerers\Level7SorcererSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Sorcerers\Level7SorcererSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Sorcerers\Level8SorcererSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Sorcerers\Level8SorcererSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Sorcerers\Level9SorcererSpellsPerDay.xml">
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Sorcerers\Level9SorcererSpellsPerDay.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Wizards\Level10WizardSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Wizards\Level10WizardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Wizards\Level11WizardSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Wizards\Level11WizardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Wizards\Level12WizardSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Wizards\Level12WizardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Wizards\Level13WizardSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Wizards\Level13WizardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Wizards\Level14WizardSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Wizards\Level14WizardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Wizards\Level15WizardSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Wizards\Level15WizardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Wizards\Level16WizardSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Wizards\Level16WizardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Wizards\Level17WizardSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Wizards\Level17WizardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Wizards\Level18WizardSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Wizards\Level18WizardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Wizards\Level19WizardSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Wizards\Level19WizardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Wizards\Level1WizardSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Wizards\Level1WizardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Wizards\Level20WizardSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Wizards\Level20WizardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Wizards\Level2WizardSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Wizards\Level2WizardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Wizards\Level3WizardSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Wizards\Level3WizardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Wizards\Level4WizardSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Wizards\Level4WizardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Wizards\Level5WizardSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Wizards\Level5WizardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Wizards\Level6WizardSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Wizards\Level6WizardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Wizards\Level7WizardSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Wizards\Level7WizardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Wizards\Level8WizardSpellsPerDay.xml" />
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Wizards\Level8WizardSpellsPerDay.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\Wizards\Level9WizardSpellsPerDay.xml">
+    <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Wizards\Level9WizardSpellsPerDay.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
@@ -2050,6 +2052,625 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Tables\Traits.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Adepts\Level11AdeptKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Adepts\Level12AdeptKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Adepts\Level13AdeptKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Adepts\Level14AdeptKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Adepts\Level15AdeptKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Adepts\Level16AdeptKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Adepts\Level17AdeptKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Adepts\Level18AdeptKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Adepts\Level19AdeptKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Adepts\Level1AdeptKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Adepts\Level20AdeptKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Adepts\Level2AdeptKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Adepts\Level3AdeptKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Adepts\Level4AdeptKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Adepts\Level5AdeptKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Adepts\Level6AdeptKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Adepts\Level7AdeptKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Adepts\Level8AdeptKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Adepts\Level9AdeptKnownSpells.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Bards\Level10BardKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Bards\Level11BardKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Bards\Level12BardKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Bards\Level13BardKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Bards\Level14BardKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Bards\Level15BardKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Bards\Level16BardKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Bards\Level17BardKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Bards\Level18BardKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Bards\Level19BardKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Bards\Level1BardKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Bards\Level20BardKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Bards\Level2BardKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Bards\Level3BardKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Bards\Level4BardKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Bards\Level5BardKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Bards\Level6BardKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Bards\Level7BardKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Bards\Level8BardKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Bards\Level9BardKnownSpells.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Clerics\Level10ClericKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Clerics\Level11ClericKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Clerics\Level12ClericKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Clerics\Level13ClericKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Clerics\Level14ClericKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Clerics\Level15ClericKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Clerics\Level16ClericKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Clerics\Level17ClericKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Clerics\Level18ClericKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Clerics\Level19ClericKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Clerics\Level1ClericKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Clerics\Level20ClericKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Clerics\Level2ClericKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Clerics\Level3ClericKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Clerics\Level4ClericKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Clerics\Level5ClericKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Clerics\Level6ClericKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Clerics\Level7ClericKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Clerics\Level8ClericKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Clerics\Level9ClericKnownSpells.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Druids\Level10DruidKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Druids\Level11DruidKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Druids\Level12DruidKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Druids\Level13DruidKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Druids\Level14DruidKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Druids\Level15DruidKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Druids\Level16DruidKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Druids\Level17DruidKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Druids\Level18DruidKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Druids\Level19DruidKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Druids\Level1DruidKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Druids\Level20DruidKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Druids\Level2DruidKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Druids\Level3DruidKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Druids\Level4DruidKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Druids\Level5DruidKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Druids\Level6DruidKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Druids\Level7DruidKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Druids\Level8DruidKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Druids\Level9DruidKnownSpells.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Paladins\Level10PaladinKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Paladins\Level11PaladinKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Paladins\Level12PaladinKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Paladins\Level13PaladinKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Paladins\Level14PaladinKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Paladins\Level15PaladinKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Paladins\Level16PaladinKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Paladins\Level17PaladinKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Paladins\Level18PaladinKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Paladins\Level19PaladinKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Paladins\Level1PaladinKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Paladins\Level20PaladinKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Paladins\Level2PaladinKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Paladins\Level3PaladinKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Paladins\Level4PaladinKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Paladins\Level5PaladinKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Paladins\Level6PaladinKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Paladins\Level7PaladinKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Paladins\Level8PaladinKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Paladins\Level9PaladinKnownSpells.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Rangers\Level10RangerKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Rangers\Level11RangerKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Rangers\Level12RangerKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Rangers\Level13RangerKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Rangers\Level14RangerKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Rangers\Level15RangerKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Rangers\Level16RangerKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Rangers\Level17RangerKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Rangers\Level18RangerKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Rangers\Level19RangerKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Rangers\Level1RangerKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Rangers\Level20RangerKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Rangers\Level2RangerKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Rangers\Level3RangerKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Rangers\Level4RangerKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Rangers\Level5RangerKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Rangers\Level6RangerKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Rangers\Level7RangerKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Rangers\Level8RangerKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Rangers\Level9RangerKnownSpells.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Sorcerers\Level10SorcererKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Sorcerers\Level11SorcererKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Sorcerers\Level12SorcererKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Sorcerers\Level13SorcererKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Sorcerers\Level14SorcererKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Sorcerers\Level15SorcererKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Sorcerers\Level16SorcererKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Sorcerers\Level17SorcererKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Sorcerers\Level18SorcererKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Sorcerers\Level19SorcererKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Sorcerers\Level1SorcererKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Sorcerers\Level20SorcererKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Sorcerers\Level2SorcererKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Sorcerers\Level3SorcererKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Sorcerers\Level4SorcererKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Sorcerers\Level5SorcererKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Sorcerers\Level6SorcererKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Sorcerers\Level7SorcererKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Sorcerers\Level8SorcererKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Sorcerers\Level9SorcererKnownSpells.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Wizards\Level10WizardKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Wizards\Level11WizardKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Wizards\Level12WizardKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Wizards\Level13WizardKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Wizards\Level14WizardKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Wizards\Level15WizardKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Wizards\Level16WizardKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Wizards\Level17WizardKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Wizards\Level18WizardKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Wizards\Level19WizardKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Wizards\Level1WizardKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Wizards\Level20WizardKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Wizards\Level2WizardKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Wizards\Level3WizardKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Wizards\Level4WizardKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Wizards\Level5WizardKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Wizards\Level6WizardKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Wizards\Level7WizardKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Wizards\Level8WizardKnownSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Wizards\Level9WizardKnownSpells.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Sorcerers\SorcererKnowsAdditionalSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Wizards\WizardKnowsAdditionalSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Wizards\WizardSpellLevels.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Sorcerers\SorcererSpellLevels.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\SpellGroups.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Bards\BardKnowsAdditionalSpells.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Rangers\RangerSpellLevels.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Clerics\ClericSpellLevels.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Druids\DruidSpellLevels.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Bards\BardSpellLevels.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Adepts\AdeptSpellLevels.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Paladins\PaladinSpellLevels.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Wizards\AbjurationSpellLevels.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Wizards\IllusionSpellLevels.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Clerics\MagicSpellLevels.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Wizards\EnchantmentSpellLevels.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Clerics\ChaosSpellLevels.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Clerics\SunSpellLevels.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Clerics\StrengthSpellLevels.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Wizards\DivinationSpellLevels.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Clerics\TrickerySpellLevels.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Clerics\LuckSpellLevels.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Clerics\LawSpellLevels.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Clerics\GoodSpellLevels.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Clerics\FireSpellLevels.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Clerics\WarSpellLevels.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Clerics\TravelSpellLevels.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Clerics\PlantSpellLevels.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Clerics\DestructionSpellLevels.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Clerics\WaterSpellLevels.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Clerics\ProtectionSpellLevels.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Clerics\EarthSpellLevels.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Wizards\NecromancySpellLevels.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Clerics\HealingSpellLevels.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Clerics\AirSpellLevels.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Wizards\TransmutationSpellLevels.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Clerics\KnowledgeSpellLevels.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Clerics\EvilSpellLevels.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Clerics\DeathSpellLevels.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Clerics\AnimalSpellLevels.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Wizards\ConjurationSpellLevels.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Magics\Spells\Known\Wizards\EvocationSpellLevels.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

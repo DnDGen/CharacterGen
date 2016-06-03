@@ -58,7 +58,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
             characterRace.Metarace = "character metarace";
             characterRace.Size = "character size";
             characterClass.Level = 9266;
-            characterClass.ClassName = "class name";
+            characterClass.Name = "class name";
             animals.Add(Animal);
             animalsForSize.Add(Animal);
             animalsForMetarace.Add(Animal);
@@ -66,7 +66,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
 
             mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<string>>())).Returns((IEnumerable<string> c) => c.Last());
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.Animals, characterClass.ClassName)).Returns(animals);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.Animals, characterClass.Name)).Returns(animals);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.Animals, CharacterClassConstants.Druid)).Returns(druidAnimals);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.Animals, characterRace.Size)).Returns(animalsForSize);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.Animals, characterRace.Metarace)).Returns(animalsForMetarace);
@@ -117,7 +117,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         {
             animalsForMetarace.Clear();
             animalsForMetarace.Add("other animal");
-            mages.Add(characterClass.ClassName);
+            mages.Add(characterClass.Name);
 
             var animal = animalGenerator.GenerateFrom(alignment, characterClass, characterRace, feats);
             Assert.That(animal, Is.Empty);
@@ -185,7 +185,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
             levelAdjustments["other animal"] = 0;
             improvedFamiliars.Add("other animal");
             improvedFamiliars.Add(Animal);
-            mages.Add(characterClass.ClassName);
+            mages.Add(characterClass.Name);
 
             feats.Add(new Feat { Name = FeatConstants.ImprovedFamiliar });
 
@@ -196,7 +196,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         [Test]
         public void RangersUseHalfTheirLevelAsDruidLevel()
         {
-            characterClass.ClassName = CharacterClassConstants.Ranger;
+            characterClass.Name = CharacterClassConstants.Ranger;
             druidAnimals.Add("other animal");
             druidAnimals.Add(Animal);
             levelAdjustments["other animal"] = characterClass.Level / 2 + 1;
@@ -208,20 +208,20 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         [Test]
         public void OriginalClassNotModified()
         {
-            characterClass.ClassName = CharacterClassConstants.Ranger;
+            characterClass.Name = CharacterClassConstants.Ranger;
             druidAnimals.Add("other animal");
             druidAnimals.Add(Animal);
             levelAdjustments["other animal"] = characterClass.Level / -2 - 1;
 
             var animal = animalGenerator.GenerateFrom(alignment, characterClass, characterRace, feats);
-            Assert.That(characterClass.ClassName, Is.EqualTo(CharacterClassConstants.Ranger));
+            Assert.That(characterClass.Name, Is.EqualTo(CharacterClassConstants.Ranger));
             Assert.That(characterClass.Level, Is.EqualTo(9266));
         }
 
         [Test]
         public void AdeptDoesNotGetAnimalAtLevel1()
         {
-            characterClass.ClassName = CharacterClassConstants.Adept;
+            characterClass.Name = CharacterClassConstants.Adept;
             characterClass.Level = 1;
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.Animals, CharacterClassConstants.Adept)).Returns(animals);
@@ -233,7 +233,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         [Test]
         public void AdeptGetsAnimalAtLevel2()
         {
-            characterClass.ClassName = CharacterClassConstants.Adept;
+            characterClass.Name = CharacterClassConstants.Adept;
             characterClass.Level = 2;
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.Animals, CharacterClassConstants.Adept)).Returns(animals);

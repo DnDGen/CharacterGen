@@ -7,6 +7,8 @@ namespace CharacterGen.Domain.Generators.Magics
 {
     internal interface ISpellsGenerator
     {
-        IEnumerable<Spells> GenerateFrom(CharacterClass characterClass, Dictionary<string, Stat> stats);
+        IEnumerable<SpellQuantity> GeneratePerDay(CharacterClass characterClass, Dictionary<string, Stat> stats);
+        IEnumerable<Spell> GenerateKnown(CharacterClass characterClass, Dictionary<string, Stat> stats);
+        IEnumerable<Spell> GeneratePrepared(CharacterClass characterClass, IEnumerable<Spell> knownSpells, IEnumerable<SpellQuantity> spellsPerDay);
     }
 }

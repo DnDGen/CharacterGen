@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+  <object>
+    <name>Entangle</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Barkskin</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Plant growth</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Command plants</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Wall of thorns</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Repel wood</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Animate plants</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Control plants</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Shambler</name>
+    <item>9</item>
+  </object>
+</items>

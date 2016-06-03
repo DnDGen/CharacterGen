@@ -72,11 +72,11 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         [Test]
         public void RandomizeAccessesTableAlignmentGoodnessClassNameMetaraces()
         {
-            characterClass.ClassName = "className";
+            characterClass.Name = "className";
             alignment.Goodness = "goodness";
 
             randomizer.Randomize(alignment, characterClass);
-            var tableName = string.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSMetaraces, "goodness", characterClass.ClassName);
+            var tableName = string.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSMetaraces, "goodness", characterClass.Name);
             mockPercentileResultSelector.Verify(p => p.SelectFrom(tableName), Times.Once);
         }
 
@@ -109,7 +109,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         [Test]
         public void GetAllPossibleResultsAccessesTableAlignmentGoodnessClassNameBaseRaces()
         {
-            characterClass.ClassName = "className";
+            characterClass.Name = "className";
             alignment.Goodness = "goodness";
 
             randomizer.GetAllPossible(alignment, characterClass);

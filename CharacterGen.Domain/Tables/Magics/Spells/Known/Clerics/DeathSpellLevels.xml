@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+  <object>
+    <name>Cause fear</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Death knell</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Animate dead</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Death ward</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Slay living</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Create undead</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Destruction</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Create greater undead</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Wail of the banshee</name>
+    <item>9</item>
+  </object>
+</items>

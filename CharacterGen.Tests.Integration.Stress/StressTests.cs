@@ -148,7 +148,7 @@ namespace CharacterGen.Tests.Integration.Stress
         private CharacterClass GenerateCharacterClass(Alignment alignment)
         {
             var characterClass = new CharacterClass();
-            characterClass.ClassName = ClassNameRandomizer.Randomize(alignment);
+            characterClass.Name = ClassNameRandomizer.Randomize(alignment);
             characterClass.Level = LevelRandomizer.Randomize();
 
             return characterClass;

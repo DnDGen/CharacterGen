@@ -26,7 +26,7 @@ namespace CharacterGen.Domain.Generators.Abilities.Feats
 
         public IEnumerable<Feat> GenerateWith(CharacterClass characterClass, Race race, Dictionary<string, Stat> stats, IEnumerable<Feat> racialFeats, Dictionary<String, Skill> skills)
         {
-            var characterClassFeatSelections = featsSelector.SelectClass(characterClass.ClassName);
+            var characterClassFeatSelections = featsSelector.SelectClass(characterClass.Name);
             var classFeats = GetClassFeats(characterClassFeatSelections, race, racialFeats, stats, characterClass, skills);
 
             var specialistSelections = Enumerable.Empty<CharacterClassFeatSelection>();
@@ -40,7 +40,7 @@ namespace CharacterGen.Domain.Generators.Abilities.Feats
             var specialistFeats = GetClassFeats(specialistSelections, race, earnedFeats, stats, characterClass, skills);
             classFeats = classFeats.Union(specialistFeats);
 
-            if (characterClass.ClassName == CharacterClassConstants.Ranger)
+            if (characterClass.Name == CharacterClassConstants.Ranger)
                 return ImproveFavoredEnemyStrength(classFeats);
 
             return classFeats;

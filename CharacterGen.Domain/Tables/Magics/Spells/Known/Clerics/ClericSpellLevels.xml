@@ -1,0 +1,840 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+  <object>
+    <name>Detect poison</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Delay poison</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Read magic</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Cure/inflict light wounds</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Cure/inflict moderate wounds</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Cure/inflict serious wounds</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Freedom of movement</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Endure elements</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Neutralize poison</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Remove disease</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Repel vermin</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Water walk</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Resist energy</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Bear's endurance</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Owl's wisdom</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Protection from energy</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Wind wall</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Aid</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Air walk</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Align weapon</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Animate dead</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Animate objects</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Antilife shell</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Antimagic field</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Astral projection</name>
+    <item>9</item>
+  </object>
+  <object>
+    <name>Atonement</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Augury</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Bane</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Banishment</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Bestow curse</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Blade barrier</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Blasphemy</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Bless water</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Bless</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Blindness/deafness</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Break enchantment</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Bull's strength</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Calm emotions</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Cause fear</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Cloak of chaos</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Command</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Commune</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Comprehend languages</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Consecrate</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Contagion</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Continual flame</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Control water</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Control weather</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Create food and water</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Create greater undead</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Create undead</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Create water</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Cure/inflict critical wounds</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Cure/inflict minor wounds</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Curse water</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Darkness</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Daylight</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Death knell</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Death ward</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Deathwatch</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Deeper darkness</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Desecrate</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Destruction</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Detect chaos/law/good/evil</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Detect magic</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Detect undead</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Dictum</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Dimensional anchor</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Dimensional lock</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Discern lies</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Discern location</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Dismissal</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Dispel good/evil/law/chaos</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Dispel magic</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Disrupting weapon</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Divination</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Divine favor</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Divine power</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Doom</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Eagle's splendor</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Earthquake</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Energy drain</name>
+    <item>9</item>
+  </object>
+  <object>
+    <name>Enthrall</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Entropic shield</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Ethereal jaunt</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Etherealness</name>
+    <item>9</item>
+  </object>
+  <object>
+    <name>Find the path</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Find traps</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Fire storm</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Flame strike</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Forbiddance</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Gate</name>
+    <item>9</item>
+  </object>
+  <object>
+    <name>Geas/Quest</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Gentle repose</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Giant vermin</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Glyph of warding</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Greater magic weapon</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Greater planar ally</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Greater restoration</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Greater scrying</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Greater spell immunity</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Guidance</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Hallow</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Greater command</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Greater dispel magic</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Greater glyph of warding</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Heal/Harm</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Helping hand</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Heroes' feast</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Hide from undead</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Hold person</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Holy aura</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Holy word</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Imbue with spell ability</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Implosion</name>
+    <item>9</item>
+  </object>
+  <object>
+    <name>Insect plague</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Invisibility purge</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Lesser planar ally</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Lesser restoration</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Light</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Locate object</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Magic circle against chaos/law/good/evil</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Magic stone</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Magic vestment</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Magic weapon</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Make whole</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Mark of justice</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Mass bear's endurance</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Mass bull's strength</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Mass eagle's splendor</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Mass owl's wisdom</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Mass cure/inflict critical wounds</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Mass cure/inflict light wounds</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Mass cure/inflict moderate wounds</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Mass cure/inflict serious wounds</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Mass heal/harm</name>
+    <item>9</item>
+  </object>
+  <object>
+    <name>Meld into stone</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Mending</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Miracle</name>
+    <item>9</item>
+  </object>
+  <object>
+    <name>Obscure object</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Obscuring mist</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Planar ally</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Plane shift</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Poison</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Prayer</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Protection from chaos/law/good/evil</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Purify food and drink</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Raise dead</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Refuge</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Regenerate</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Remove blindness/deafness</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Remove curse</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Remove fear</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Remove paralysis</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Repulsion</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Resistance</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Restoration</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Resurrection</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Righteous might</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Sanctuary</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Scrying</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Searing light</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Sending</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Shatter</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Shield of faith</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Shield of law</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Shield other</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Silence</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Slay living</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Soul bind</name>
+    <item>9</item>
+  </object>
+  <object>
+    <name>Sound burst</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Speak with dead</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Spell immunity</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Spell resistance</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Spiritual weapon</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Status</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Stone shape</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Storm of vengeance</name>
+    <item>9</item>
+  </object>
+  <object>
+    <name>Summon monster I</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Summon monster II</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Summon monster III</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Summon monster IV</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Summon monster V</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Summon monster VI</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Summon monster VII</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Summon monster VIII</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Summon monster IX</name>
+    <item>9</item>
+  </object>
+  <object>
+    <name>Symbol of death</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Symbol of insanity</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Symbol of fear</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Symbol of pain</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Symbol of persuasion</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Symbol of sleep</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Symbol of stunning</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Symbol of weakness</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Tongues</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>True resurrection</name>
+    <item>9</item>
+  </object>
+  <object>
+    <name>True seeing</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Undeath to death</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Undetectable alignment</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Unhallow</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Unholy aura</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Virtue</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Wall of stone</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Water breathing</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Wind walk</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Word of chaos</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Word of recall</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Zone of truth</name>
+    <item>2</item>
+  </object>
+</items>

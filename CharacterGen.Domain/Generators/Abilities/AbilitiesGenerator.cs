@@ -35,7 +35,7 @@ namespace CharacterGen.Domain.Generators.Abilities
             var ability = new Ability();
 
             ability.Stats = statsGenerator.GenerateWith(statsRandomizer, characterClass, race);
-            ability.Languages = languageGenerator.GenerateWith(race, characterClass.ClassName, ability.Stats[StatConstants.Intelligence].Bonus);
+            ability.Languages = languageGenerator.GenerateWith(race, characterClass.Name, ability.Stats[StatConstants.Intelligence].Bonus);
             ability.Skills = skillsGenerator.GenerateWith(characterClass, race, ability.Stats);
             ability.Feats = featsGenerator.GenerateWith(characterClass, race, ability.Stats, ability.Skills, baseAttack);
 

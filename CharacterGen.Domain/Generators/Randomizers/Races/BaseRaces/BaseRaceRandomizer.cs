@@ -29,7 +29,7 @@ namespace CharacterGen.Domain.Generators.Randomizers.Races.BaseRaces
             if (results.Any() == false)
                 throw new IncompatibleRandomizersException();
 
-            var tableName = string.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSBaseRaces, alignment.Goodness, characterClass.ClassName);
+            var tableName = string.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSBaseRaces, alignment.Goodness, characterClass.Name);
 
             return generator.Generate(() => percentileResultSelector.SelectFrom(tableName),
                 b => results.Contains(b));
@@ -50,7 +50,7 @@ namespace CharacterGen.Domain.Generators.Randomizers.Races.BaseRaces
 
         public IEnumerable<string> GetAllPossible(Alignment alignment, CharacterClass characterClass)
         {
-            var tableName = string.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSBaseRaces, alignment.Goodness, characterClass.ClassName);
+            var tableName = string.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSBaseRaces, alignment.Goodness, characterClass.Name);
             var baseRaces = percentileResultSelector.SelectAllFrom(tableName);
 
             return baseRaces.Where(r => RaceIsAllowed(r, characterClass.Level));

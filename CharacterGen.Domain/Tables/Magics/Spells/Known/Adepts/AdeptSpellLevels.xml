@@ -1,0 +1,248 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+  <object>
+    <name>Delay poison</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Read magic</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Endure elements</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Neutralize poison</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Remove disease</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Resist energy</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Bear's endurance</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Cat's grace</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Aid</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Animal trance</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Animate dead</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Baleful polymorph</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Bestow curse</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Bless</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Break enchantment</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Bull's strength</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Burning hands</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Cause fear</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Command</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Commune</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Comprehend languages</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Contagion</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Continual flame</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Create water</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Cure/inflict critical wounds</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Cure/inflict light wounds</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Cure/inflict minor wounds</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Cure/inflict moderate wounds</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Cure/inflict serious wounds</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Darkness</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Daylight</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Deeper darkness</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Detect chaos/law/good/evil</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Detect magic</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Ghost sound</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Guidance</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Heal/Harm</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Invisibility</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Light</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Lightning bolt</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Major creation</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Mending</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Minor creation</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Mirror image</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Obscuring mist</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Polymorph</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Protection from chaos/law/good/evil</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Purify food and drink</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Raise dead</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Remove curse</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Restoration</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Scorching ray</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>See invisibility</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Sleep</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Stoneskin</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Tongues</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Touch of fatigue</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>True seeing</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Wall of fire</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Wall of stone</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Web</name>
+    <item>2</item>
+  </object>
+</items>

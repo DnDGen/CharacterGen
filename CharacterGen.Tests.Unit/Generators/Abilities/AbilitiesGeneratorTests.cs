@@ -46,7 +46,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
             characterClass = new CharacterClass();
             race = new Race();
 
-            characterClass.ClassName = "class name";
+            characterClass.Name = "class name";
             stats[StatConstants.Intelligence] = new Stat { Value = 9266 };
             mockStatsGenerator.Setup(g => g.GenerateWith(mockStatsRandomizer.Object, characterClass, race)).Returns(stats);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.Skills)).Returns(new[] { "skill 1", "skill 2", "skill 3", "skill 4", "skill 5" });
@@ -63,7 +63,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
         public void GetLanguagesFromLanguageGenerator()
         {
             var languages = new[] { "language 1", "language 2" };
-            mockLanguageGenerator.Setup(g => g.GenerateWith(race, characterClass.ClassName, stats[StatConstants.Intelligence].Bonus))
+            mockLanguageGenerator.Setup(g => g.GenerateWith(race, characterClass.Name, stats[StatConstants.Intelligence].Bonus))
                 .Returns(languages);
 
             var ability = abilitiesGenerator.GenerateWith(characterClass, race, mockStatsRandomizer.Object, baseAttack);

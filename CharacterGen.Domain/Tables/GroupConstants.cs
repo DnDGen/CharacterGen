@@ -31,6 +31,7 @@
         public const string NPCs = "NPCs";
         public const string Players = "Players";
         public const string PoorBaseAttack = "Poor Base Attack";
+        public const string PreparesSpells = "Prepares Spells";
         public const string Proficiency = "Proficiency";
         public const string SavingThrows = "Saving Throws";
         public const string SchoolsOfMagic = "Schools of Magic";

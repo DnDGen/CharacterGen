@@ -52,6 +52,7 @@
                 public const string SkillGroups = "SkillGroups";
                 public const string SkillSynergy = "SkillSynergy";
                 public const string SpecialistFields = "SpecialistFields";
+                public const string SpellGroups = "SpellGroups";
                 public const string StatGroups = "StatGroups";
                 public const string StatPriorities = "StatPriorities";
                 public const string WeightRolls = "WeightRolls";
@@ -83,6 +84,7 @@
             {
                 public const string AGEStatAdjustments = "{0}StatAdjustments";
                 public const string CLASSFeatLevelRequirements = "{0}FeatLevelRequirements";
+                public const string CLASSSpellLevels = "{0}SpellLevels";
                 public const string FEATClassRequirements = "{0}ClassRequirements";
                 public const string FEATSkillRankRequirements = "{0}SkillRankRequirements";
                 public const string FEATStatRequirements = "{0}StatRequirements";
@@ -90,6 +92,7 @@
                 public const string GENDERWeights = "{0}Weights";
                 public const string LevelXAnimalTricks = "Level{0}AnimalTricks";
                 public const string LevelXCLASSSpellsPerDay = "Level{0}{1}SpellsPerDay";
+                public const string LevelXCLASSKnownSpells = "Level{0}{1}KnownSpells";
                 public const string LevelXFollowerQuantities = "Level{0}FollowerQuantities";
                 public const string STATStatAdjustments = "{0}StatAdjustments";
                 public const string RACEAges = "{0}Ages";
@@ -113,6 +116,7 @@
             internal static class TrueOrFalse
             {
                 public const string CLASSHasSpecialistFields = "{0}HasSpecialistFields";
+                public const string CLASSKnowsAdditionalSpells = "{0}KnowsAdditionalSpells";
             }
         }
     }

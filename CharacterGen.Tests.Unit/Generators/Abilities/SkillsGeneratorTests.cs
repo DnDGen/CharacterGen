@@ -50,7 +50,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
             specialistSkills = new List<string>();
             allSkills = new List<string>();
 
-            characterClass.ClassName = "class name";
+            characterClass.Name = "class name";
             characterClass.Level = 5;
             characterClass.SpecialistFields = new[] { "specialist field" };
 
@@ -64,7 +64,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(It.IsAny<string>())).Returns(emptyAdjustments);
 
             skillPoints = new Dictionary<string, int>();
-            skillPoints[characterClass.ClassName] = 0;
+            skillPoints[characterClass.Name] = 0;
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.SkillPointsForClasses)).Returns(skillPoints);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, "specialist field")).Returns(specialistSkills);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.Skills)).Returns(allSkills);
@@ -94,7 +94,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
         public void GetSkillPointsPerLevel(int level, int points)
         {
             characterClass.Level = level;
-            skillPoints[characterClass.ClassName] = 1;
+            skillPoints[characterClass.Name] = 1;
             classSkills.Add("skill 1");
             classSkills.Add("skill 2");
 
@@ -106,7 +106,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
         [Test]
         public void GetSkillPointsForClass()
         {
-            skillPoints[characterClass.ClassName] = 2;
+            skillPoints[characterClass.Name] = 2;
             classSkills.Add("skill 1");
             classSkills.Add("skill 2");
             classSkills.Add("skill 3");
@@ -140,7 +140,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
         public void AddIntelligenceBonusToSkillPointsPerLevel(Int32 level, Int32 points)
         {
             characterClass.Level = level;
-            skillPoints[characterClass.ClassName] = 0;
+            skillPoints[characterClass.Name] = 0;
             classSkills.Add("skill 1");
             classSkills.Add("skill 2");
             intelligence.Value = 12;
@@ -297,7 +297,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
         [Test]
         public void AssignSkillPointsRandomlyAmongClassSkills()
         {
-            skillPoints[characterClass.ClassName] = 1;
+            skillPoints[characterClass.Name] = 1;
             characterClass.Level = 2;
 
             classSkills.Add("skill 1");
@@ -323,7 +323,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
         [Test]
         public void AssignSkillPointsRandomlyAmongCrossClassSkills()
         {
-            skillPoints[characterClass.ClassName] = 1;
+            skillPoints[characterClass.Name] = 1;
             characterClass.Level = 2;
 
             crossClassSkills.Add("skill 1");
@@ -349,7 +349,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
         [Test]
         public void AssignPointsToClassSkills()
         {
-            skillPoints[characterClass.ClassName] = 1;
+            skillPoints[characterClass.Name] = 1;
             mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
                 .Returns(false);
 
@@ -365,7 +365,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
         [Test]
         public void AssignPointsToCrossClassSkills()
         {
-            skillPoints[characterClass.ClassName] = 1;
+            skillPoints[characterClass.Name] = 1;
             mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
                 .Returns(true);
 
@@ -381,7 +381,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
         [Test]
         public void AssignPointsRandomlyBetweenClassAndCrossClassSkills()
         {
-            skillPoints[characterClass.ClassName] = 1;
+            skillPoints[characterClass.Name] = 1;
             characterClass.Level = 2;
 
             mockBooleanPercentileSelector.SetupSequence(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
@@ -399,7 +399,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
         [Test]
         public void CannotAssignMoreThanLevelPlusThreePointsPerClassSkill()
         {
-            skillPoints[characterClass.ClassName] = 2;
+            skillPoints[characterClass.Name] = 2;
             mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
                 .Returns(false);
 
@@ -421,7 +421,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
         [Test]
         public void CannotAssignMoreThanLevelPlusThreePointsPerCrossClassSkill()
         {
-            skillPoints[characterClass.ClassName] = 2;
+            skillPoints[characterClass.Name] = 2;
             mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
                 .Returns(true);
 
@@ -443,7 +443,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
         [Test]
         public void AllSkillsMaxedOut()
         {
-            skillPoints[characterClass.ClassName] = 3;
+            skillPoints[characterClass.Name] = 3;
             crossClassSkills.Add("skill 1");
             classSkills.Add("skill 2");
 
@@ -461,7 +461,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillSynergy, "skill 3")).Returns(new[] { "synergy 4" });
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillSynergy, "skill 4")).Returns(new[] { "synergy 5" });
 
-            skillPoints[characterClass.ClassName] = 2;
+            skillPoints[characterClass.Name] = 2;
             characterClass.Level = 13;
 
             classSkills.Add("skill 1");
@@ -529,7 +529,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillSynergy, "skill 1")).Returns(new[] { "synergy 1", "synergy 2" });
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillSynergy, "skill 2")).Returns(new[] { "synergy 1" });
 
-            skillPoints[characterClass.ClassName] = 2;
+            skillPoints[characterClass.Name] = 2;
             characterClass.Level = 2;
             classSkills.Add("skill 1");
             classSkills.Add("skill 2");
@@ -565,7 +565,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillSynergy, "skill 1")).Returns(Enumerable.Empty<string>());
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillSynergy, "skill 2")).Returns(new[] { "synergy 1" });
 
-            skillPoints[characterClass.ClassName] = 2;
+            skillPoints[characterClass.Name] = 2;
             characterClass.Level = 2;
 
             classSkills.Add("skill 1");
@@ -601,7 +601,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillSynergy, "skill 2")).Returns(new[] { "synergy 2" });
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillSynergy, "skill 3")).Returns(new[] { "synergy 3" });
 
-            skillPoints[characterClass.ClassName] = 3;
+            skillPoints[characterClass.Name] = 3;
             characterClass.Level = 6;
 
             classSkills.Add("skill 1");
@@ -674,7 +674,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
         public void HumansGetExtraSkillPointsPerLevel(int level, int points)
         {
             characterClass.Level = level;
-            skillPoints[characterClass.ClassName] = 0;
+            skillPoints[characterClass.Name] = 0;
             classSkills.Add("skill 1");
             classSkills.Add("skill 2");
             race.BaseRace = RaceConstants.BaseRaces.Human;
@@ -708,7 +708,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
         {
             var cap = level + 3;
             characterClass.Level = level;
-            skillPoints[characterClass.ClassName] = 2;
+            skillPoints[characterClass.Name] = 2;
             intelligence.Value = 12;
             race.BaseRace = RaceConstants.BaseRaces.Human;
             classSkills.Add("skill 1");
@@ -745,7 +745,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
                 .Returns(new[] { "baserace", "otherbaserace" });
 
             characterClass.Level = 20;
-            skillPoints[characterClass.ClassName] = 0;
+            skillPoints[characterClass.Name] = 0;
             intelligence.Value = 10;
 
             var monsterClassSkills = new List<string>();
@@ -780,7 +780,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
                 .Returns(new[] { "baserace", "otherbaserace" });
 
             characterClass.Level = 20;
-            skillPoints[characterClass.ClassName] = 0;
+            skillPoints[characterClass.Name] = 0;
             intelligence.Value = 12;
 
             var monsterClassSkills = new List<string>();
@@ -815,7 +815,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
                 .Returns(new[] { "baserace", "otherbaserace" });
 
             characterClass.Level = 1;
-            skillPoints[characterClass.ClassName] = 0;
+            skillPoints[characterClass.Name] = 0;
             intelligence.Value = -600;
 
             var monsterClassSkills = new List<string>();
@@ -858,7 +858,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
             race.BaseRace = "baserace";
             intelligence.Value = -9266;
             characterClass.Level = level;
-            skillPoints[characterClass.ClassName] = 1;
+            skillPoints[characterClass.Name] = 1;
             classSkills.Add("skill 1");
             classSkills.Add("skill 2");
 
@@ -870,7 +870,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
         [Test]
         public void ExpertGets10RandomSkillsAsClassSkills()
         {
-            characterClass.ClassName = CharacterClassConstants.Expert;
+            characterClass.Name = CharacterClassConstants.Expert;
             skillPoints[CharacterClassConstants.Expert] = 0;
 
             for (var i = 11; i > 0; i--)
@@ -897,7 +897,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
         [Test]
         public void ExpertCrossClassSkillsDoNotIncludeRandomClassSkills()
         {
-            characterClass.ClassName = CharacterClassConstants.Expert;
+            characterClass.Name = CharacterClassConstants.Expert;
             skillPoints[CharacterClassConstants.Expert] = 0;
 
             for (var i = 11; i > 0; i--)

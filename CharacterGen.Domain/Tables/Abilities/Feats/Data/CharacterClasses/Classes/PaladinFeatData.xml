@@ -93,10 +93,10 @@
       <item>True</item>
   </object>
   <object>
-    <name>Spell-Like AbilityDetect evil</name>
+    <name>Spell-Like AbilityDetect chaos/law/good/evil</name>
     <item>Spell-Like Ability</item>
     <item>1</item>
-    <item>Detect evil</item>
+    <item>Detect chaos/law/good/evil</item>
     <item>0</item>
     <item>0</item>
     <item>At Will</item>

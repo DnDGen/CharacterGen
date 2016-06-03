@@ -1,0 +1,292 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+  <object>
+    <name>Mage hand</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Mending</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Message</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Open/Close</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Animate rope</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Enlarge person</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Erase</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Expeditious retreat</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Feather fall</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Jump</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Magic weapon</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Reduce person</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Alter self</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Bear's endurance</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Bull's strength</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Cat's grace</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Darkvision</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Eagle's splendor</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Fox's cunning</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Knock</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Levitate</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Owl's wisdom</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Pyrotechnics</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Rope trick</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Spider climb</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Whispering wind</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Blink</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Flame arrow</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Fly</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Gaseous form</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Haste</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Keen edge</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Greater magic weapon</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Secret page</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Shrink item</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Slow</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Water breathing</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Mass enlarge person</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Mnemonic enhancer</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Polymorph</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Mass reduce person</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Stone shape</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Animal growth</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Fabricate</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Overland flight</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Passwall</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Telekinesis</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Transmute mud to rock</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Transmute rock to mud</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Mage's lucubration</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Mass bear's endurance</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Mass bull's strength</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Mass cat's grace</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Control water</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Disintegrate</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Mass eagle's splendor</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Flesh to stone</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Mass fox's cunning</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Move earth</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Mass owl's wisdom</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Stone to flesh</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Transformation</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Control weather</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Ethereal jaunt</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Reverse gravity</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Statue</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Iron body</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Polymorph any object</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Temporal stasis</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Etherealness</name>
+    <item>9</item>
+  </object>
+  <object>
+    <name>Shapechange</name>
+    <item>9</item>
+  </object>
+  <object>
+    <name>Time stop</name>
+    <item>9</item>
+  </object>
+</items>

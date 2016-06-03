@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+  <object>
+    <name>Magic weapon</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Spiritual weapon</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Magic vestment</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Divine power</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Flame strike</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Blade barrier</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Power word blind</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Power word stun</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Power word kill</name>
+    <item>9</item>
+  </object>
+</items>

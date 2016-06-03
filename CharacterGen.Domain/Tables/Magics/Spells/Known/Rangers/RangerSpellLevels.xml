@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+  <object>
+    <name>Animal messenger</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Detect poison</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Delay poison</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Read magic</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Barkskin</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Calm animals</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Charm animal</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Command plants</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Commune with nature</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Cure/inflict light wounds</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Cure/inflict moderate wounds</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Cure/inflict serious wounds</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Detect animals or plants</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Detect snares and pits</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Diminish plants</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Entangle</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Freedom of movement</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Greater magic fang</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Alarm</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Endure elements</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Hide from animals</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Hold animal</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Longstrider</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Magic fang</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Neutralize poison</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Summon nature's ally I</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Pass without trace</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Plant growth</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Reduce animal</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Remove disease</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Repel vermin</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Snare</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Speak with animals</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Speak with plants</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Spike growth</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Tree shape</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Tree stride</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Water walk</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Jump</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Resist energy</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Summon nature's ally II</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Bear's endurance</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Cat's grace</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Darkvision</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Owl's wisdom</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Nondetection</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Protection from energy</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Summon nature's ally III</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Wind wall</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Summon nature's ally IV</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Animal growth</name>
+    <item>4</item>
+  </object>
+</items>

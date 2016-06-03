@@ -1,117 +1,117 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <items>
-    <object>
-        <name>Natural Armor</name>
-        <item>Natural Armor</item>
-        <item></item>
-        <item>0</item>
-        <item>1</item>
-        <item></item>
-        <item>0</item>
-        <item></item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-    </object>
-    <object>
-      <name>Spell-Like AbilityDaylight</name>
-      <item>Spell-Like Ability</item>
-      <item></item>
-      <item>0</item>
-      <item>0</item>
-      <item>Daylight</item>
-      <item>0</item>
-      <item>At Will</item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-    </object>
-    <object>
-        <name>Spell-Like AbilityProtection from evil</name>
-      <item>Spell-Like Ability</item>
-        <item></item>
-        <item>1</item>
-        <item>0</item>
-        <item>Protection from evil</item>
-      <item>3</item>
-      <item>Day</item>
-      <item>0</item>
-      <item>Wisdom,Intelligence</item>
-      <item>8</item>
-    </object>
-    <object>
-        <name>Smite Evil</name>
-        <item>Smite Evil</item>
-        <item></item>
-        <item>0</item>
-        <item>0</item>
-        <item></item>
-      <item>1</item>
-      <item>Day</item>
-      <item>0</item>
+  <object>
+    <name>Natural Armor</name>
+    <item>Natural Armor</item>
     <item></item>
     <item>0</item>
-    </object>
-    <object>
-        <name>Spell-Like AbilityBless</name>
-      <item>Spell-Like Ability</item>
-      <item></item>
-      <item>1</item>
-      <item>0</item>
-      <item>Bless</item>
-      <item>1</item>
-      <item>Day</item>
-      <item>0</item>
-      <item>Wisdom,Intelligence</item>
-      <item>8</item>
-    </object>
-    <object>
-      <name>Spell-Like AbilityAid</name>
-      <item>Spell-Like Ability</item>
-        <item></item>
-        <item>3</item>
-        <item>0</item>
-        <item>Aid</item>
-      <item>1</item>
-      <item>Day</item>
-      <item>0</item>
-      <item>Wisdom,Intelligence</item>
-      <item>8</item>
-    </object>
-    <object>
-      <name>Darkvision</name>
-      <item>Darkvision</item>
-      <item></item>
-      <item>0</item>
-      <item>60</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-    </object>
-    <object>
-      <name>Spell-Like AbilityDetect evil</name>
-      <item>Spell-Like Ability</item>
-      <item></item>
-      <item>3</item>
-      <item>0</item>
-      <item>Detect evil</item>
-      <item>1</item>
-      <item>Day</item>
-      <item>0</item>
-      <item>Wisdom,Intelligence</item>
-      <item>8</item>
+    <item>1</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
   </object>
   <object>
-    <name>Spell-Like AbilityCure serious wounds</name>
+    <name>Spell-Like AbilityDaylight</name>
+    <item>Spell-Like Ability</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Daylight</item>
+    <item>0</item>
+    <item>At Will</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Spell-Like AbilityProtection from chaos/law/good/evil</name>
+    <item>Spell-Like Ability</item>
+    <item></item>
+    <item>1</item>
+    <item>0</item>
+    <item>Protection from chaos/law/good/evil</item>
+    <item>3</item>
+    <item>Day</item>
+    <item>0</item>
+    <item>Wisdom,Intelligence</item>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Smite Evil</name>
+    <item>Smite Evil</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>1</item>
+    <item>Day</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Spell-Like AbilityBless</name>
+    <item>Spell-Like Ability</item>
+    <item></item>
+    <item>1</item>
+    <item>0</item>
+    <item>Bless</item>
+    <item>1</item>
+    <item>Day</item>
+    <item>0</item>
+    <item>Wisdom,Intelligence</item>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Spell-Like AbilityAid</name>
+    <item>Spell-Like Ability</item>
+    <item></item>
+    <item>3</item>
+    <item>0</item>
+    <item>Aid</item>
+    <item>1</item>
+    <item>Day</item>
+    <item>0</item>
+    <item>Wisdom,Intelligence</item>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Darkvision</name>
+    <item>Darkvision</item>
+    <item></item>
+    <item>0</item>
+    <item>60</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Spell-Like AbilityDetect chaos/law/good/evil</name>
+    <item>Spell-Like Ability</item>
+    <item></item>
+    <item>3</item>
+    <item>0</item>
+    <item>Detect chaos/law/good/evil</item>
+    <item>1</item>
+    <item>Day</item>
+    <item>0</item>
+    <item>Wisdom,Intelligence</item>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Spell-Like AbilityCure/inflict serious wounds</name>
     <item>Spell-Like Ability</item>
     <item></item>
     <item>5</item>
     <item>0</item>
-    <item>Cure serious wounds</item>
+    <item>Cure/inflict serious wounds</item>
     <item>1</item>
     <item>Day</item>
     <item>0</item>
@@ -158,12 +158,12 @@
     <item>8</item>
   </object>
   <object>
-    <name>Spell-Like AbilityDispel evil</name>
+    <name>Spell-Like AbilityDispel good/evil/law/chaos</name>
     <item>Spell-Like Ability</item>
     <item></item>
     <item>9</item>
     <item>0</item>
-    <item>Dispel evil</item>
+    <item>Dispel good/evil/law/chaos</item>
     <item>1</item>
     <item>Day</item>
     <item>0</item>

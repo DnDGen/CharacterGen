@@ -44,7 +44,7 @@ namespace CharacterGen.Domain.Generators.Verifiers
 
             foreach (var className in classNames)
                 foreach (var level in levels)
-                    characterClasses.Add(new CharacterClass { ClassName = className, Level = level });
+                    characterClasses.Add(new CharacterClass { Name = className, Level = level });
 
             return characterClasses;
         }

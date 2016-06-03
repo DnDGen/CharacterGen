@@ -1,7 +1,7 @@
 ﻿using CharacterGen.CharacterClasses;
 using CharacterGen.Combats;
-using CharacterGen.Magics;
 using CharacterGen.Domain.Tables;
+using CharacterGen.Magics;
 using NUnit.Framework;
 
 namespace CharacterGen.Tests.Integration.Tables.CharacterClasses
@@ -42,9 +42,11 @@ namespace CharacterGen.Tests.Integration.Tables.CharacterClasses
                 GroupConstants.Intuitive,
                 GroupConstants.SelfTaught,
                 GroupConstants.Trained,
-                SpellConstants.Arcane,
+                SpellConstants.Sources.Arcane,
                 GroupConstants.Players,
-                GroupConstants.NPCs
+                GroupConstants.NPCs,
+                GroupConstants.PreparesSpells,
+                SpellConstants.Sources.Divine
             };
 
             AssertCollectionNames(names);
@@ -271,7 +273,7 @@ namespace CharacterGen.Tests.Integration.Tables.CharacterClasses
             CharacterClassConstants.Expert,
             CharacterClassConstants.Aristocrat,
             CharacterClassConstants.Adept)]
-        [TestCase(SpellConstants.Arcane,
+        [TestCase(SpellConstants.Sources.Arcane,
             CharacterClassConstants.Bard,
             CharacterClassConstants.Sorcerer,
             CharacterClassConstants.Wizard)]
@@ -293,6 +295,19 @@ namespace CharacterGen.Tests.Integration.Tables.CharacterClasses
             CharacterClassConstants.Rogue,
             CharacterClassConstants.Sorcerer,
             CharacterClassConstants.Wizard)]
+        [TestCase(GroupConstants.PreparesSpells,
+            CharacterClassConstants.Cleric,
+            CharacterClassConstants.Druid,
+            CharacterClassConstants.Paladin,
+            CharacterClassConstants.Ranger,
+            CharacterClassConstants.Wizard,
+            CharacterClassConstants.Adept)]
+        [TestCase(SpellConstants.Sources.Divine,
+            CharacterClassConstants.Cleric,
+            CharacterClassConstants.Druid,
+            CharacterClassConstants.Paladin,
+            CharacterClassConstants.Ranger,
+            CharacterClassConstants.Adept)]
         public override void DistinctCollection(string name, params string[] collection)
         {
             base.DistinctCollection(name, collection);

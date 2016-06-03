@@ -49,7 +49,7 @@ namespace CharacterGen.Domain.Generators.Abilities.Feats
             if (race.BaseRace == RaceConstants.BaseRaces.Human)
                 numberOfAdditionalFeats++;
 
-            if (characterClass.ClassName == CharacterClassConstants.Rogue && characterClass.Level >= 10)
+            if (characterClass.Name == CharacterClassConstants.Rogue && characterClass.Level >= 10)
                 numberOfAdditionalFeats += (characterClass.Level - 10) / 3 + 1;
 
             var monsters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters);
@@ -67,9 +67,9 @@ namespace CharacterGen.Domain.Generators.Abilities.Feats
         private IEnumerable<Feat> GetBonusFeats(CharacterClass characterClass, Race race, Dictionary<string, Stat> stats,
             Dictionary<string, Skill> skills, BaseAttack baseAttack, IEnumerable<Feat> preselectedFeats)
         {
-            if (characterClass.ClassName == CharacterClassConstants.Fighter)
+            if (characterClass.Name == CharacterClassConstants.Fighter)
                 return GetFighterFeats(characterClass, race, stats, skills, baseAttack, preselectedFeats);
-            else if (characterClass.ClassName == CharacterClassConstants.Wizard)
+            else if (characterClass.Name == CharacterClassConstants.Wizard)
                 return GetWizardBonusFeats(characterClass, race, stats, skills, baseAttack, preselectedFeats);
 
             return Enumerable.Empty<Feat>();

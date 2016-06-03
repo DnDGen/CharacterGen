@@ -59,7 +59,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             attackBonusFeats = new List<string>();
             poorBaseAttacks = new List<string>();
 
-            characterClass.ClassName = "class name";
+            characterClass.Name = "class name";
             characterClass.Level = 20;
             stats[StatConstants.Constitution] = new Stat { Value = 9266 };
             stats[StatConstants.Dexterity] = new Stat { Value = 42 };
@@ -67,7 +67,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             maxDexterityBonuses[string.Empty] = 42;
             averageBaseAttacks.Add("other class name");
             goodBaseAttacks.Add("other class name");
-            poorBaseAttacks.Add(characterClass.ClassName);
+            poorBaseAttacks.Add(characterClass.Name);
 
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.MaxDexterityBonus)).Returns(maxDexterityBonuses);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.GoodBaseAttack))
@@ -86,7 +86,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         [Test]
         public void GetGoodBaseAttack()
         {
-            goodBaseAttacks.Add(characterClass.ClassName);
+            goodBaseAttacks.Add(characterClass.Name);
             var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass, race);
             Assert.That(baseAttack.Bonus, Is.EqualTo(20));
         }
@@ -94,7 +94,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         [Test]
         public void GetAverageBaseAttack()
         {
-            averageBaseAttacks.Add(characterClass.ClassName);
+            averageBaseAttacks.Add(characterClass.Name);
             var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass, race);
             Assert.That(baseAttack.Bonus, Is.EqualTo(15));
         }
@@ -136,7 +136,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         public void GoodBaseAttackBonus(int level, int bonus)
         {
             characterClass.Level = level;
-            goodBaseAttacks.Add(characterClass.ClassName);
+            goodBaseAttacks.Add(characterClass.Name);
 
             var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass, race);
             Assert.That(baseAttack.Bonus, Is.EqualTo(bonus));
@@ -165,7 +165,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         public void AverageBaseAttackBonus(int level, int bonus)
         {
             characterClass.Level = level;
-            averageBaseAttacks.Add(characterClass.ClassName);
+            averageBaseAttacks.Add(characterClass.Name);
 
             var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass, race);
             Assert.That(baseAttack.Bonus, Is.EqualTo(bonus));

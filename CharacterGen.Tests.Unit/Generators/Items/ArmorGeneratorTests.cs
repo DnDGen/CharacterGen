@@ -179,7 +179,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         [Test]
         public void IfMundaneArmorContainsMetalAndClassIsDruid_Regenerate()
         {
-            characterClass.ClassName = CharacterClassConstants.Druid;
+            characterClass.Name = CharacterClassConstants.Druid;
             var mundaneArmor = CreateArmor("mundane armor");
             var wrongMundaneArmor = CreateArmor("wrong mundane armor");
             mockPercentileSelector.Setup(s => s.SelectFrom("Level9266Power")).Returns(PowerConstants.Mundane);
@@ -208,7 +208,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         [Test]
         public void IfMundaneArmorDoesNotContainMetalAndClassIsDruid_Keep()
         {
-            characterClass.ClassName = CharacterClassConstants.Druid;
+            characterClass.Name = CharacterClassConstants.Druid;
             var mundaneArmor = CreateArmor("mundane armor");
             var wrongMundaneArmor = CreateArmor("wrong mundane armor");
             mockPercentileSelector.Setup(s => s.SelectFrom("Level9266Power")).Returns(PowerConstants.Mundane);
@@ -270,7 +270,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         [Test]
         public void IfMagicalArmorContainsMetalAndClassIsDruid_Regenerate()
         {
-            characterClass.ClassName = CharacterClassConstants.Druid;
+            characterClass.Name = CharacterClassConstants.Druid;
             var wrongMagicalArmor = CreateArmor("wrong magical armor");
             mockMagicalArmorGenerator.SetupSequence(g => g.GenerateAtPower("power"))
                 .Returns(wrongMagicalArmor).Returns(magicalArmor);
@@ -297,7 +297,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         [Test]
         public void IfMagicalArmorDoesNotContainMetalAndClassIsDruid_Keep()
         {
-            characterClass.ClassName = CharacterClassConstants.Druid;
+            characterClass.Name = CharacterClassConstants.Druid;
             var wrongMagicalArmor = CreateArmor("wrong magical armor");
             mockMagicalArmorGenerator.SetupSequence(g => g.GenerateAtPower("power"))
                 .Returns(magicalArmor).Returns(wrongMagicalArmor);
@@ -444,7 +444,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         [Test]
         public void IfMundaneShieldContainsMetalAndClassIsDruid_Regenerate()
         {
-            characterClass.ClassName = CharacterClassConstants.Druid;
+            characterClass.Name = CharacterClassConstants.Druid;
             var mundaneShield = CreateShield("mundane shield");
             var wrongMundaneShield = CreateShield("wrong mundane shield");
             mockPercentileSelector.Setup(s => s.SelectFrom("Level9266Power")).Returns(PowerConstants.Mundane);
@@ -473,7 +473,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         [Test]
         public void IfMundaneShieldDoesNotContainMetalAndClassIsDruid_Keep()
         {
-            characterClass.ClassName = CharacterClassConstants.Druid;
+            characterClass.Name = CharacterClassConstants.Druid;
             var mundaneShield = CreateShield("mundane shield");
             var wrongMundaneShield = CreateShield("wrong mundane shield");
             mockPercentileSelector.Setup(s => s.SelectFrom("Level9266Power")).Returns(PowerConstants.Mundane);
@@ -536,7 +536,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         [Test]
         public void IfMagicalShieldContainsMetalAndClassIsDruid_Regenerate()
         {
-            characterClass.ClassName = CharacterClassConstants.Druid;
+            characterClass.Name = CharacterClassConstants.Druid;
             var wrongMagicalShield = CreateShield("wrong magical shield");
             mockMagicalArmorGenerator.SetupSequence(g => g.GenerateAtPower("power"))
                 .Returns(wrongMagicalShield).Returns(magicalShield);
@@ -563,7 +563,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         [Test]
         public void IfMagicalShieldDoesNotContainMetalAndClassIsDruid_Keep()
         {
-            characterClass.ClassName = CharacterClassConstants.Druid;
+            characterClass.Name = CharacterClassConstants.Druid;
             var wrongMagicalShield = CreateShield("wrong magical shield");
             mockMagicalArmorGenerator.SetupSequence(g => g.GenerateAtPower("power"))
                 .Returns(magicalShield).Returns(wrongMagicalShield);
@@ -652,8 +652,8 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         public void NPCArmorIsHalfLevel(int npcLevel, int effectiveLevel)
         {
             characterClass.Level = npcLevel;
-            characterClass.ClassName = "class name";
-            npcs.Add(characterClass.ClassName);
+            characterClass.Name = "class name";
+            npcs.Add(characterClass.Name);
 
             var npcArmor = CreateArmor("npc armor");
 
@@ -688,7 +688,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         public void PlayerCharacterArmorIsFullLevel(int level, int effectiveLevel)
         {
             characterClass.Level = level;
-            characterClass.ClassName = "class name";
+            characterClass.Name = "class name";
             npcs.Add("npc class");
 
             var playerArmor = CreateArmor("player weapon");
@@ -724,8 +724,8 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         public void NPCShieldIsHalfLevel(int npcLevel, int effectiveLevel)
         {
             characterClass.Level = npcLevel;
-            characterClass.ClassName = "class name";
-            npcs.Add(characterClass.ClassName);
+            characterClass.Name = "class name";
+            npcs.Add(characterClass.Name);
 
             var npcShield = CreateShield("npc shield");
 
@@ -760,7 +760,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         public void PlayerCharacterShieldIsFullLevel(int level, int effectiveLevel)
         {
             characterClass.Level = level;
-            characterClass.ClassName = "class name";
+            characterClass.Name = "class name";
             npcs.Add("npc class");
 
             var playerShield = CreateShield("player shield");

@@ -520,8 +520,8 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         public void NPCIsHalfLevel(int npcLevel, int effectiveLevel)
         {
             characterClass.Level = npcLevel;
-            characterClass.ClassName = "class name";
-            npcs.Add(characterClass.ClassName);
+            characterClass.Name = "class name";
+            npcs.Add(characterClass.Name);
 
             var npcTreasure = new Treasure();
             mockTreasureGenerator.Setup(g => g.GenerateAtLevel(effectiveLevel)).Returns(npcTreasure);
@@ -553,7 +553,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         public void PlayerCharacterIsFullLevel(int level, int effectiveLevel)
         {
             characterClass.Level = level;
-            characterClass.ClassName = "class name";
+            characterClass.Name = "class name";
             npcs.Add("npc class");
 
             var playerTreasure = new Treasure();

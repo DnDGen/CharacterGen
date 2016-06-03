@@ -44,18 +44,18 @@ namespace CharacterGen.Domain.Generators.Combats
         private int GetBaseAttackBonus(CharacterClass characterClass)
         {
             var goodBaseAttacks = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.GoodBaseAttack);
-            if (goodBaseAttacks.Contains(characterClass.ClassName))
+            if (goodBaseAttacks.Contains(characterClass.Name))
                 return GetGoodBaseAttackBonus(characterClass.Level);
 
             var averageBaseAttacks = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.AverageBaseAttack);
-            if (averageBaseAttacks.Contains(characterClass.ClassName))
+            if (averageBaseAttacks.Contains(characterClass.Name))
                 return GetAverageBaseAttackBonus(characterClass.Level);
 
             var poorBaseAttacks = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.PoorBaseAttack);
-            if (poorBaseAttacks.Contains(characterClass.ClassName))
+            if (poorBaseAttacks.Contains(characterClass.Name))
                 return GetPoorBaseAttackBonus(characterClass.Level);
 
-            var message = string.Format("{0} has no base attack", characterClass.ClassName);
+            var message = string.Format("{0} has no base attack", characterClass.Name);
             throw new ArgumentException(message);
         }
 

@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+  <object>
+    <name>Detect poison</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Detect magic</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Read magic</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Comprehend languages</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Detect secret doors</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Detect undead</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Identify</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>True strike</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Detect thoughts</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Locate object</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>See invisibility</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Arcane sight</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Clairaudience/Clairvoyance</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Tongues</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Arcane eye</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Detect scrying</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Locate creature</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Scrying</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Contact other plane</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Prying eyes</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Telepathic bond</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Analyze dweomer</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Legend lore</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>True seeing</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Greater arcane sight</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Greater scrying</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Vision</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Discern location</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Moment of prescience</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Greater prying eyes</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Foresight</name>
+    <item>9</item>
+  </object>
+</items>

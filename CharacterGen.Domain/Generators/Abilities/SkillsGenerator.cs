@@ -29,8 +29,8 @@ namespace CharacterGen.Domain.Generators.Abilities
 
         public Dictionary<string, Skill> GenerateWith(CharacterClass characterClass, Race race, Dictionary<string, Stat> stats)
         {
-            var classSkills = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassSkills, characterClass.ClassName);
-            var crossClassSkills = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.CrossClassSkills, characterClass.ClassName);
+            var classSkills = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassSkills, characterClass.Name);
+            var crossClassSkills = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.CrossClassSkills, characterClass.Name);
 
             var specialistSkills = Enumerable.Empty<string>();
             foreach (var specialistField in characterClass.SpecialistFields)
@@ -41,7 +41,7 @@ namespace CharacterGen.Domain.Generators.Abilities
 
             classSkills = classSkills.Union(specialistSkills);
 
-            if (characterClass.ClassName == CharacterClassConstants.Expert)
+            if (characterClass.Name == CharacterClassConstants.Expert)
                 classSkills = GetRandomClassSkills();
 
             var skills = InitializeSkills(stats, classSkills, crossClassSkills);
@@ -139,7 +139,7 @@ namespace CharacterGen.Domain.Generators.Abilities
         private int GetTotalSkillPoints(CharacterClass characterClass, Stat intelligence, Race race)
         {
             var pointsTable = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.SkillPointsForClasses);
-            var perLevel = pointsTable[characterClass.ClassName] + intelligence.Bonus;
+            var perLevel = pointsTable[characterClass.Name] + intelligence.Bonus;
             var multiplier = characterClass.Level;
 
             var monsters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters);

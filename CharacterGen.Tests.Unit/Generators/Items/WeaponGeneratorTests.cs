@@ -64,7 +64,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             magicalWeapon = CreateWeapon("magical weapon");
             magicalWeapon.IsMagical = true;
             magicalWeapon.Attributes = new[] { AttributeConstants.Melee };
-            characterClass.ClassName = "class name";
+            characterClass.Name = "class name";
             characterClass.Level = 9266;
             baseWeaponTypes.Add("base weapon");
             weapons.Remove(magicalWeapon.Name);
@@ -808,8 +808,8 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         public void NPCIsHalfLevel(int npcLevel, int effectiveLevel)
         {
             characterClass.Level = npcLevel;
-            characterClass.ClassName = "class name";
-            npcs.Add(characterClass.ClassName);
+            characterClass.Name = "class name";
+            npcs.Add(characterClass.Name);
 
             var npcWeapon = CreateWeapon("npc weapon");
 
@@ -844,7 +844,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         public void PlayerCharacterIsFullLevel(int level, int effectiveLevel)
         {
             characterClass.Level = level;
-            characterClass.ClassName = "class name";
+            characterClass.Name = "class name";
             npcs.Add("npc class");
 
             var playerWeapon = CreateWeapon("player weapon");

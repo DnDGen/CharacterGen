@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+  <object>
+    <name>Disguise self</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Invisibility</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Nondetection</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Confusion</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>False vision</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Mislead</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Screen</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Polymorph any object</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Time stop</name>
+    <item>9</item>
+  </object>
+</items>

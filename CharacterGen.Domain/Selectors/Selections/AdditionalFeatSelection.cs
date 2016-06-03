@@ -38,7 +38,7 @@ namespace CharacterGen.Domain.Selectors.Selections
                 if (stats[stat.Key].Value < stat.Value)
                     return false;
 
-            if (RequiredCharacterClasses.Any() && (RequiredCharacterClasses.ContainsKey(characterClass.ClassName) == false || RequiredCharacterClasses[characterClass.ClassName] > characterClass.Level))
+            if (RequiredCharacterClasses.Any() && (RequiredCharacterClasses.ContainsKey(characterClass.Name) == false || RequiredCharacterClasses[characterClass.Name] > characterClass.Level))
                 return false;
 
             if (baseAttack < RequiredBaseAttack)

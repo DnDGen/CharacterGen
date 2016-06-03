@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+  <object>
+    <name>Detect poison</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Delay poison</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Read magic</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Cure/inflict light wounds</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Cure/inflict moderate wounds</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Cure/inflict serious wounds</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Endure elements</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Neutralize poison</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Resist energy</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Owl's wisdom</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Bless water</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Bless weapon</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Bless</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Break enchantment</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Bull's strength</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Create water</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Daylight</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Death ward</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Detect undead</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Discern lies</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Dispel good/evil/law/chaos</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Dispel magic</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Divine favor</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Eagle's splendor</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Greater magic weapon</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Heal mount</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Holy sword</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Lesser restoration</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Magic circle against chaos/law/good/evil</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Magic weapon</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Mark of justice</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Prayer</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Protection from chaos/law/good/evil</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Remove blindness/deafness</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Remove curse</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Remove paralysis</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Resistance</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Restoration</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Shield other</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Undetectable alignment</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Virtue</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Zone of truth</name>
+    <item>2</item>
+  </object>
+</items>

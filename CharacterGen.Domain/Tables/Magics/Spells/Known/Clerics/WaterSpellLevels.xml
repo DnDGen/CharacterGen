@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+  <object>
+    <name>Obscuring mist</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Fog cloud</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Water breathing</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Control water</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Ice storm</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Cone of cold</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Acid fog</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Horrid wilting</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Elemental swarm</name>
+    <item>9</item>
+  </object>
+</items>

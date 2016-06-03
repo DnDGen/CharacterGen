@@ -118,7 +118,7 @@ namespace CharacterGen.Tests.Integration.Stress
             leaderClass.Level = Random.Next(6, 21);
             var cohortScore = Random.Next(3, 26);
 
-            var cohort = LeadershipGenerator.GenerateCohort(cohortScore, leaderClass.Level, leaderAlignment.Full, leaderClass.ClassName);
+            var cohort = LeadershipGenerator.GenerateCohort(cohortScore, leaderClass.Level, leaderAlignment.Full, leaderClass.Name);
             AssertCharacter(cohort);
             Assert.That(cohort.Equipment.Treasure.Items, Is.Not.Empty);
             Assert.That(cohort.Class.Level, Is.InRange(1, leaderClass.Level - 2));
@@ -133,7 +133,7 @@ namespace CharacterGen.Tests.Integration.Stress
                 .Or.EqualTo(AlignmentConstants.Neutral)
                 .Or.EqualTo(AlignmentConstants.Chaotic));
 
-            Assert.That(character.Class.ClassName, Is.Not.Empty);
+            Assert.That(character.Class.Name, Is.Not.Empty);
             Assert.That(character.Class.Level, Is.Positive);
             Assert.That(character.Class.ProhibitedFields, Is.Not.Null);
             Assert.That(character.Class.SpecialistFields, Is.Not.Null);
@@ -244,7 +244,7 @@ namespace CharacterGen.Tests.Integration.Stress
             var leaderClass = GetNewCharacterClass(leaderAlignment);
             var followerLevel = Random.Next(1, 7);
 
-            var follower = LeadershipGenerator.GenerateFollower(followerLevel, leaderAlignment.Full, leaderClass.ClassName);
+            var follower = LeadershipGenerator.GenerateFollower(followerLevel, leaderAlignment.Full, leaderClass.Name);
             AssertCharacter(follower);
             Assert.That(follower.Equipment.Treasure.Items, Is.Not.Empty);
             Assert.That(follower.Class.Level, Is.InRange(1, followerLevel));

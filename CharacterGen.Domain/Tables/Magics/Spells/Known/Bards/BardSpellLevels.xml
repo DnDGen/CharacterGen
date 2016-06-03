@@ -1,0 +1,660 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+  <object>
+    <name>Resistance</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Detect magic</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Read magic</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Daze</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Dancing lights</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Flare</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Light</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Ghost sound</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Mage hand</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Mending</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Message</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Open/Close</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Prestidigitation</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Alarm</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Grease</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Summon monster I</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Unseen servant</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Comprehend languages</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Detect secret doors</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Identify</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Charm person</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Hypnotism</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Sleep</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Magic aura</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Silent image</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Ventriloquism</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Cause fear</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Animate rope</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Erase</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Expeditious retreat</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Feather fall</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Obscure object</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Glitterdust</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Summon monster II</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Summon swarm</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Detect thoughts</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Locate object</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>See invisibility</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Daze monster</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Hideous laughter</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Darkness</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Shatter</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Blur</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Hypnotic pattern</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Invisibility</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Magic mouth</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Minor image</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Mirror image</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Misdirection</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Blindness/deafness</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Scare</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Alter self</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Cat's grace</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Eagle's splendor</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Fox's cunning</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Pyrotechnics</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Whispering wind</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Dispel magic</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Phantom steed</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Sepia snake sigil</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Summon monster III</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Clairaudience/Clairvoyance</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Tongues</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Deep slumber</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Heroism</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Hold person</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Rage</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Suggestion</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Daylight</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Tiny hut</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Displacement</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Illusory script</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Invisibility sphere</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Major image</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Blink</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Gaseous form</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Haste</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Secret page</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Slow</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Remove curse</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Dimension door</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Secure shelter</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Summon monster IV</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Detect scrying</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Locate creature</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Scrying</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Charm monster</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Confusion</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Crushing despair</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Lesser geas</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Shout</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Hallucinatory terrain</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Greater invisibility</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Rainbow pattern</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Fear</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Break enchantment</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Summon monster V</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Dominate person</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Hold monster</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Mind fog</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Dream</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>False vision</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Mirage arcana</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Nightmare</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Persistent image</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Seeming</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Shadow evocation</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Greater dispel magic</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Summon monster VI</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Analyze dweomer</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Legend lore</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Geas/Quest</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Greater heroism</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Mass suggestion</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Mislead</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Permanent image</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Programmed image</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Shadow walk</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Veil</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Eyebite</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Mass cat's grace</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Mass eagle's splendor</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Mass fox's cunning</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Animal messenger</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Animal trance</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Animate objects</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Calm emotions</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Cure/inflict critical wounds</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Cure/inflict light wounds</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Cure/inflict moderate wounds</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Cure/inflict serious wounds</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Delay poison</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Disguise self</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Enthrall</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Find the path</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Freedom of movement</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Glibness</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Good hope</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Greater scrying</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Greater shout</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Heroes' feast</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Irresistible dance</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Know direction</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Lesser confusion</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Lullaby</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Mass charm monster</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Mass cure/inflict light wounds</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Mass cure/inflict moderate wounds</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Modify memory</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Neutralize poison</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Project image</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Remove fear</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Repel vermin</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Sculpt sound</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Shadow conjuration</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Silence</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Song of discord</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Sound burst</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Speak with animals</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Speak with plants</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Summon instrument</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Sympathetic vibration</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Undetectable alignment</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Zone of silence</name>
+    <item>4</item>
+  </object>
+</items>

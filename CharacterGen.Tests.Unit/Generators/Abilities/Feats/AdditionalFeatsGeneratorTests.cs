@@ -216,7 +216,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         [TestCase(20, 11)]
         public void FightersGetBonusFighterFeats(int level, int numberOfBonusFeats)
         {
-            characterClass.ClassName = CharacterClassConstants.Fighter;
+            characterClass.Name = CharacterClassConstants.Fighter;
             characterClass.Level = level;
             AddFeatSelections(20);
 
@@ -237,7 +237,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         [Test]
         public void DoNotGetNonFighterFeats()
         {
-            characterClass.ClassName = CharacterClassConstants.Fighter;
+            characterClass.Name = CharacterClassConstants.Fighter;
             characterClass.Level = 1;
             AddFeatSelections(3);
             fighterBonusFeats.Add(additionalFeatSelections[2].Feat);
@@ -253,7 +253,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         [Test]
         public void DoNotGetFighterFeatsIfNoneAvailable()
         {
-            characterClass.ClassName = CharacterClassConstants.Fighter;
+            characterClass.Name = CharacterClassConstants.Fighter;
             characterClass.Level = 1;
             AddFeatSelections(1);
             fighterBonusFeats.Add(additionalFeatSelections[0].Feat);
@@ -268,7 +268,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         [Test]
         public void DoNotGetMoreFighterFeatsIfNoneAvailable()
         {
-            characterClass.ClassName = CharacterClassConstants.Fighter;
+            characterClass.Name = CharacterClassConstants.Fighter;
             characterClass.Level = 2;
             AddFeatSelections(3);
             additionalFeatSelections[1].RequiredBaseAttack = 9266;
@@ -286,7 +286,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         [Test]
         public void FighterFeatsPickedAtRandom()
         {
-            characterClass.ClassName = CharacterClassConstants.Fighter;
+            characterClass.Name = CharacterClassConstants.Fighter;
             characterClass.Level = 2;
             AddFeatSelections(4);
 
@@ -312,7 +312,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         [Test]
         public void DoNotGetFighterFeatWithUnmetPrerequisite()
         {
-            characterClass.ClassName = CharacterClassConstants.Fighter;
+            characterClass.Name = CharacterClassConstants.Fighter;
             characterClass.Level = 1;
             AddFeatSelections(3);
             additionalFeatSelections[1].RequiredFeats = new[] { new RequiredFeatSelection { Feat = "other feat" } };
@@ -330,7 +330,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         [Test]
         public void IfNoFighterFeatsAvailable_ThenStop()
         {
-            characterClass.ClassName = CharacterClassConstants.Fighter;
+            characterClass.Name = CharacterClassConstants.Fighter;
             characterClass.Level = 1;
             AddFeatSelections(3);
             fighterBonusFeats.Add(additionalFeatSelections[1].Feat);
@@ -368,7 +368,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         [TestCase(20, 4)]
         public void WizardsGetBonusWizardFeats(int level, int numberOfBonusFeats)
         {
-            characterClass.ClassName = CharacterClassConstants.Wizard;
+            characterClass.Name = CharacterClassConstants.Wizard;
             characterClass.Level = level;
             AddFeatSelections(20);
 
@@ -389,7 +389,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         [Test]
         public void DoNotGetNonWizardFeats()
         {
-            characterClass.ClassName = CharacterClassConstants.Wizard;
+            characterClass.Name = CharacterClassConstants.Wizard;
             characterClass.Level = 5;
             AddFeatSelections(5);
             wizardBonusFeats.Add(additionalFeatSelections[3].Feat);
@@ -406,7 +406,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         [Test]
         public void DoNotGetWizardFeatsIfNoneAvailable()
         {
-            characterClass.ClassName = CharacterClassConstants.Wizard;
+            characterClass.Name = CharacterClassConstants.Wizard;
             characterClass.Level = 5;
             AddFeatSelections(4);
             wizardBonusFeats.Add(additionalFeatSelections[0].Feat);
@@ -422,7 +422,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         [Test]
         public void DoNotGetMoreWizardFeatsIfNoneAvailable()
         {
-            characterClass.ClassName = CharacterClassConstants.Wizard;
+            characterClass.Name = CharacterClassConstants.Wizard;
             characterClass.Level = 10;
             AddFeatSelections(6);
             wizardBonusFeats.Add(additionalFeatSelections[1].Feat);
@@ -442,7 +442,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         [Test]
         public void WizardFeatsPickedAtRandom()
         {
-            characterClass.ClassName = CharacterClassConstants.Wizard;
+            characterClass.Name = CharacterClassConstants.Wizard;
             characterClass.Level = 10;
             AddFeatSelections(7);
 
@@ -614,7 +614,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         public void RoguesGetBonusFeats(int level, int quantity)
         {
             characterClass.Level = level;
-            characterClass.ClassName = CharacterClassConstants.Rogue;
+            characterClass.Name = CharacterClassConstants.Rogue;
             AddFeatSelections(12);
 
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);

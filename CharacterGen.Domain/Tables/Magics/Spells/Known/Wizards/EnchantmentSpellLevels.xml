@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+  <object>
+    <name>Daze</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Charm person</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Hypnotism</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Sleep</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Daze monster</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Hideous laughter</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Touch of idiocy</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Deep slumber</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Heroism</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Hold person</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Rage</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Suggestion</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Charm monster</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Confusion</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Crushing despair</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Lesser geas</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Dominate person</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Feeblemind</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Hold monster</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Mind fog</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Symbol of sleep</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Geas/Quest</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Greater heroism</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Mass suggestion</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Symbol of persuasion</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Mass hold person</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Insanity</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Power word blind</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Symbol of stunning</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Antipathy</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Binding</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Mass charm monster</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Demand</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Irresistible dance</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Power word stun</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Symbol of insanity</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Sympathy</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Dominate monster</name>
+    <item>9</item>
+  </object>
+  <object>
+    <name>Mass hold monster</name>
+    <item>9</item>
+  </object>
+  <object>
+    <name>Power word kill</name>
+    <item>9</item>
+  </object>
+</items>

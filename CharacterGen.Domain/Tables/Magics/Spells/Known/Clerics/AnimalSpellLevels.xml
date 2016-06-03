@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+  <object>
+    <name>Calm animals</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Hold animal</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Dominate animal</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Summon nature's ally IV</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Commune with nature</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Antilife shell</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Animal shapes</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Summon nature's ally VIII</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Shapechange</name>
+    <item>9</item>
+  </object>
+</items>

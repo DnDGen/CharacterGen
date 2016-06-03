@@ -33,7 +33,7 @@ namespace CharacterGen.Domain.Generators.Randomizers.Races.BaseRaces
         public IEnumerable<string> GetAllPossible(Alignment alignment, CharacterClass characterClass)
         {
             var alignmentBaseRaces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, alignment.Goodness);
-            var classBaseRaces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, characterClass.ClassName);
+            var classBaseRaces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, characterClass.Name);
 
             return alignmentBaseRaces.Intersect(classBaseRaces).Intersect(new[] { SetBaseRace });
         }

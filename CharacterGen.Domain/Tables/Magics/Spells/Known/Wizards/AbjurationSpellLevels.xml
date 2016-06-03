@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+  <object>
+    <name>Resistance</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Alarm</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Endure elements</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Hold portal</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Protection from chaos/law/good/evil</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Shield</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Arcane lock</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Obscure object</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Protection from arrows</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Resist energy</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Dispel magic</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Explosive runes</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Magic circle against chaos/law/good/evil</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Nondetection</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Protection from energy</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Dimensional anchor</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Fire trap</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Lesser globe of invulnerability</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Remove curse</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Stoneskin</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Break enchantment</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Dismissal</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Mage's private sanctum</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Antimagic field</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Greater dispel magic</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Globe of invulnerability</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Guards and wards</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Repulsion</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Banishment</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Sequester</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Spell turning</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Dimensional lock</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Mind blank</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Prismatic wall</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Protection from spells</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Freedom</name>
+    <item>9</item>
+  </object>
+  <object>
+    <name>Imprisonment</name>
+    <item>9</item>
+  </object>
+  <object>
+    <name>Mage's disjunction</name>
+    <item>9</item>
+  </object>
+  <object>
+    <name>Prismatic sphere</name>
+    <item>9</item>
+  </object>
+</items>

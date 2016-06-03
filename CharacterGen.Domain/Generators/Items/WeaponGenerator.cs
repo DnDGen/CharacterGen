@@ -145,7 +145,7 @@ namespace CharacterGen.Domain.Generators.Items
             var effectiveLevel = characterClass.Level;
             var npcs = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.NPCs);
 
-            if (npcs.Contains(characterClass.ClassName))
+            if (npcs.Contains(characterClass.Name))
                 effectiveLevel = Math.Max(1, characterClass.Level / 2);
 
             var tableName = string.Format(TableNameConstants.Formattable.Percentile.LevelXPower, effectiveLevel);

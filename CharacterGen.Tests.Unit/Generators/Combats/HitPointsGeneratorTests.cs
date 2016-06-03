@@ -38,10 +38,10 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             feats = new List<Feat>();
             hitDice = new Dictionary<string, int>();
 
-            characterClass.ClassName = "class name";
+            characterClass.Name = "class name";
             race.Metarace = "metarace";
             constitutionBonus = 0;
-            hitDice[characterClass.ClassName] = 9266;
+            hitDice[characterClass.Name] = 9266;
             hitDice["otherclassname"] = 42;
 
             mockDice.Setup(d => d.Roll(0).IndividualRolls(8)).Returns(new[] { 0 });

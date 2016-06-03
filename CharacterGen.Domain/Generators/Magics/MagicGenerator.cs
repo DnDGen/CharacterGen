@@ -32,19 +32,26 @@ namespace CharacterGen.Domain.Generators.Magics
         public Magic GenerateWith(Alignment alignment, CharacterClass characterClass, Race race, Dictionary<string, Stat> stats, IEnumerable<Feat> feats, Equipment equipment)
         {
             var magic = new Magic();
-            magic.SpellsPerDay = spellsGenerator.GenerateFrom(characterClass, stats);
+
+            magic.SpellsPerDay = spellsGenerator.GeneratePerDay(characterClass, stats);
+            magic.KnownSpells = spellsGenerator.GenerateKnown(characterClass, stats);
+
+            var classesThatPrepareSpells = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.PreparesSpells);
+            if (classesThatPrepareSpells.Contains(characterClass.Name))
+                magic.PreparedSpells = spellsGenerator.GeneratePrepared(characterClass, magic.KnownSpells, magic.SpellsPerDay);
+
             magic.Animal = animalGenerator.GenerateFrom(alignment, characterClass, race, feats);
 
             if (equipment.Armor == null && equipment.OffHand == null)
                 return magic;
 
-            var arcaneSpellcasters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, SpellConstants.Arcane);
-            if (arcaneSpellcasters.Contains(characterClass.ClassName) == false)
+            var arcaneSpellcasters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, SpellConstants.Sources.Arcane);
+            if (arcaneSpellcasters.Contains(characterClass.Name) == false)
                 return magic;
 
             var lightArmor = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, FeatConstants.LightArmorProficiency);
 
-            if (equipment.Armor != null && (characterClass.ClassName != CharacterClassConstants.Bard || lightArmor.Contains(equipment.Armor.Name) == false))
+            if (equipment.Armor != null && (characterClass.Name != CharacterClassConstants.Bard || lightArmor.Contains(equipment.Armor.Name) == false))
                 magic.ArcaneSpellFailure += GetArcaneSpellFailure(equipment.Armor);
 
             if (equipment.OffHand != null && equipment.OffHand.ItemType == ItemTypeConstants.Armor && equipment.OffHand.Attributes.Contains(AttributeConstants.Shield))

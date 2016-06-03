@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+  <object>
+    <name>Magic stone</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Soften earth and stone</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Stone shape</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Spike stones</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Wall of stone</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Stoneskin</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Earthquake</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Iron body</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Elemental swarm</name>
+    <item>9</item>
+  </object>
+</items>

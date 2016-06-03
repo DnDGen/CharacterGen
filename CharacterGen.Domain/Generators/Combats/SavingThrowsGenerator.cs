@@ -72,7 +72,7 @@ namespace CharacterGen.Domain.Generators.Combats
         private int GetClassSavingThrowBonus(CharacterClass characterClass, string savingThrow)
         {
             var strong = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, savingThrow);
-            if (strong.Contains(characterClass.ClassName))
+            if (strong.Contains(characterClass.Name))
                 return characterClass.Level / 2 + 2;
 
             return characterClass.Level / 3;

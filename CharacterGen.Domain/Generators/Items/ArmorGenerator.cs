@@ -48,7 +48,7 @@ namespace CharacterGen.Domain.Generators.Items
         private int GetEffectiveLevel(CharacterClass characterClass)
         {
             var npcs = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.NPCs);
-            if (npcs.Contains(characterClass.ClassName))
+            if (npcs.Contains(characterClass.Name))
                 return Math.Max(characterClass.Level / 2, 1);
 
             return characterClass.Level;
@@ -95,7 +95,7 @@ namespace CharacterGen.Domain.Generators.Items
             if (armor.ItemType != ItemTypeConstants.Armor)
                 return false;
 
-            if (armor.Attributes.Contains(AttributeConstants.Metal) && characterClass.ClassName == CharacterClassConstants.Druid)
+            if (armor.Attributes.Contains(AttributeConstants.Metal) && characterClass.Name == CharacterClassConstants.Druid)
                 return false;
 
             if (armor.IsMagical == false && armor.Traits.Contains(race.Size) == false)

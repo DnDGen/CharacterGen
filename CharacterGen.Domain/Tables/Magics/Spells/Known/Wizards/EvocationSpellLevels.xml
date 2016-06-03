@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+  <object>
+    <name>Dancing lights</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Flare</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Light</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Ray of frost</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Burning hands</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Floating disk</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Magic missile</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Shocking grasp</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Continual flame</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Darkness</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Flaming sphere</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Gust of wind</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Scorching ray</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Shatter</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Daylight</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Fireball</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Lightning bolt</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Tiny hut</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Wind wall</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Fire shield</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Ice storm</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Resilient sphere</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Shout</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Wall of fire</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Wall of ice</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Cone of cold</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Interposing hand</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Sending</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Wall of force</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Chain lightning</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Contingency</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Forceful hand</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Freezing sphere</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Delayed blast fireball</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Forcecage</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Grasping hand</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Mage's sword</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Prismatic spray</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Clenched fist</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Polar ray</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Greater shout</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Sunburst</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Telekinetic sphere</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Crushing hand</name>
+    <item>9</item>
+  </object>
+  <object>
+    <name>Meteor swarm</name>
+    <item>9</item>
+  </object>
+</items>

@@ -28,9 +28,9 @@ namespace CharacterGen.Domain.Generators
             var characterClass = new CharacterClass();
 
             characterClass.Level = levelRandomizer.Randomize();
-            characterClass.ClassName = classNameRandomizer.Randomize(alignment);
+            characterClass.Name = classNameRandomizer.Randomize(alignment);
 
-            var tableName = string.Format(TableNameConstants.Formattable.TrueOrFalse.CLASSHasSpecialistFields, characterClass.ClassName);
+            var tableName = string.Format(TableNameConstants.Formattable.TrueOrFalse.CLASSHasSpecialistFields, characterClass.Name);
             var isSpecialist = booleanPercentileSelector.SelectFrom(tableName);
 
             if (!isSpecialist)
@@ -44,12 +44,12 @@ namespace CharacterGen.Domain.Generators
 
         private IEnumerable<string> GenerateSpecialistFields(CharacterClass characterClass, Alignment alignment)
         {
-            var allSpecialistFields = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SpecialistFields, characterClass.ClassName);
+            var allSpecialistFields = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SpecialistFields, characterClass.Name);
             var specialistFieldQuantities = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.SpecialistFieldQuantities);
             var nonAlignmentFields = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ProhibitedFields, alignment.ToString());
             var possibleSpecialistFields = allSpecialistFields.Except(nonAlignmentFields);
 
-            return PopulateFields(specialistFieldQuantities[characterClass.ClassName], possibleSpecialistFields);
+            return PopulateFields(specialistFieldQuantities[characterClass.Name], possibleSpecialistFields);
         }
 
         private IEnumerable<string> PopulateFields(int quantity, IEnumerable<string> possibleFields)
@@ -73,7 +73,7 @@ namespace CharacterGen.Domain.Generators
             if (!characterClass.SpecialistFields.Any())
                 return Enumerable.Empty<string>();
 
-            var allProhibitedFields = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ProhibitedFields, characterClass.ClassName);
+            var allProhibitedFields = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ProhibitedFields, characterClass.Name);
             var possibleProhibitedFields = allProhibitedFields.Except(characterClass.SpecialistFields);
             var prohibitedFieldQuantities = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.ProhibitedFieldQuantities);
 
@@ -89,7 +89,7 @@ namespace CharacterGen.Domain.Generators
             if (characterClass.SpecialistFields.Any() == false || race.Metarace == RaceConstants.Metaraces.None)
                 return characterClass.SpecialistFields;
 
-            var allClassSpecialistFields = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SpecialistFields, characterClass.ClassName);
+            var allClassSpecialistFields = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SpecialistFields, characterClass.Name);
             var allMetaraceSpecialistFields = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SpecialistFields, race.Metarace);
             var applicableFields = allClassSpecialistFields.Intersect(allMetaraceSpecialistFields);
 

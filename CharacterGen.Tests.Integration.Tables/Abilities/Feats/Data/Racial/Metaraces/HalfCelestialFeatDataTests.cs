@@ -1,8 +1,8 @@
 ﻿using CharacterGen.Abilities.Feats;
 using CharacterGen.Abilities.Stats;
+using CharacterGen.Domain.Tables;
 using CharacterGen.Magics;
 using CharacterGen.Races;
-using CharacterGen.Domain.Tables;
 using NUnit.Framework;
 using System;
 
@@ -23,19 +23,19 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial.Meta
             {
                 FeatConstants.SpellLikeAbility + SpellConstants.Daylight,
                 FeatConstants.SmiteEvil,
-                FeatConstants.SpellLikeAbility + SpellConstants.ProtectionFromEvil,
+                FeatConstants.SpellLikeAbility + SpellConstants.ProtectionFromAlignment,
                 FeatConstants.SpellLikeAbility + SpellConstants.Bless,
                 FeatConstants.SpellLikeAbility + SpellConstants.Aid,
-                FeatConstants.SpellLikeAbility + SpellConstants.DetectEvil,
-                FeatConstants.SpellLikeAbility + SpellConstants.CureSeriousWounds,
+                FeatConstants.SpellLikeAbility + SpellConstants.DetectAlignment,
+                FeatConstants.SpellLikeAbility + SpellConstants.CureInflictSeriousWounds,
                 FeatConstants.SpellLikeAbility + SpellConstants.NeutralizePoison,
                 FeatConstants.SpellLikeAbility + SpellConstants.HolySmite,
                 FeatConstants.SpellLikeAbility + SpellConstants.RemoveDisease,
-                FeatConstants.SpellLikeAbility + SpellConstants.DispelEvil,
+                FeatConstants.SpellLikeAbility + SpellConstants.DispelAlignment,
                 FeatConstants.SpellLikeAbility + SpellConstants.HolyWord,
                 FeatConstants.SpellLikeAbility + SpellConstants.HolyAura,
                 FeatConstants.SpellLikeAbility + SpellConstants.Hallow,
-                FeatConstants.SpellLikeAbility + SpellConstants.MassCharmMonster,
+                FeatConstants.SpellLikeAbility + SpellConstants.CharmMonster_Mass,
                 FeatConstants.SpellLikeAbility + SpellConstants.SummonMonsterIX,
                 FeatConstants.SpellLikeAbility + SpellConstants.Resurrection,
                 FeatConstants.NaturalArmor,
@@ -161,9 +161,9 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial.Meta
             "",
             60,
             0, 0)]
-        [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.ProtectionFromEvil,
+        [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.ProtectionFromAlignment,
             FeatConstants.SpellLikeAbility,
-            SpellConstants.ProtectionFromEvil,
+            SpellConstants.ProtectionFromAlignment,
             3,
             FeatConstants.Frequencies.Day,
             1,
@@ -191,9 +191,9 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial.Meta
             0,
             0,
             8, StatConstants.Wisdom, StatConstants.Intelligence)]
-        [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.DetectEvil,
+        [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.DetectAlignment,
             FeatConstants.SpellLikeAbility,
-            SpellConstants.DetectEvil,
+            SpellConstants.DetectAlignment,
             1,
             FeatConstants.Frequencies.Day,
             3,
@@ -201,9 +201,9 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial.Meta
             0,
             0,
             8, StatConstants.Wisdom, StatConstants.Intelligence)]
-        [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.CureSeriousWounds,
+        [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.CureInflictSeriousWounds,
             FeatConstants.SpellLikeAbility,
-            SpellConstants.CureSeriousWounds,
+            SpellConstants.CureInflictSeriousWounds,
             1,
             FeatConstants.Frequencies.Day,
             5,
@@ -241,9 +241,9 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial.Meta
             0,
             0,
             8, StatConstants.Wisdom, StatConstants.Intelligence)]
-        [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.DispelEvil,
+        [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.DispelAlignment,
             FeatConstants.SpellLikeAbility,
-            SpellConstants.DispelEvil,
+            SpellConstants.DispelAlignment,
             1,
             FeatConstants.Frequencies.Day,
             9,
@@ -281,9 +281,9 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial.Meta
             0,
             0,
             8, StatConstants.Wisdom, StatConstants.Intelligence)]
-        [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.MassCharmMonster,
+        [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.CharmMonster_Mass,
             FeatConstants.SpellLikeAbility,
-            SpellConstants.MassCharmMonster,
+            SpellConstants.CharmMonster_Mass,
             1,
             FeatConstants.Frequencies.Day,
             15,

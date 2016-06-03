@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+  <object>
+    <name>Detect secret doors</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Detect thoughts</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Clairaudience/Clairvoyance</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Divination</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>True seeing</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Find the path</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Legend lore</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Discern location</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Foresight</name>
+    <item>9</item>
+  </object>
+</items>

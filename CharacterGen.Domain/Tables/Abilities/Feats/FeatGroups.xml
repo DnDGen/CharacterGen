@@ -614,18 +614,18 @@
         <item>Save Bonus</item>
         <item>Spell-Like AbilityDaylight</item>
         <item>Spell-Like AbilityBless</item>
-        <item>Spell-Like AbilityProtection from evil</item>
+        <item>Spell-Like AbilityProtection from chaos/law/good/evil</item>
         <item>Spell-Like AbilityHoly word</item>
         <item>Spell-Like AbilityHallow</item>
         <item>Spell-Like AbilityResurrection</item>
         <item>Smite Evil</item>
         <item>Spell-Like AbilityAid</item>
-        <item>Spell-Like AbilityDetect evil</item>
-        <item>Spell-Like AbilityCure serious wounds</item>
+        <item>Spell-Like AbilityDetect chaos/law/good/evil</item>
+        <item>Spell-Like AbilityCure/inflict serious wounds</item>
         <item>Spell-Like AbilityNeutralize poison</item>
         <item>Spell-Like AbilityHoly smite</item>
         <item>Spell-Like AbilityRemove disease</item>
-        <item>Spell-Like AbilityDispel evil</item>
+        <item>Spell-Like AbilityDispel good/evil/law/chaos</item>
         <item>Spell-Like AbilityHoly aura</item>
         <item>Spell-Like AbilityMass charm monster</item>
         <item>Spell-Like AbilitySummon monster IX</item>
@@ -1061,7 +1061,7 @@
     <item>Heavy Armor Proficiency</item>
     <item>Shield Proficiency</item>
     <item>Aura of Good</item>
-    <item>Spell-Like AbilityDetect evil</item>
+    <item>Spell-Like AbilityDetect chaos/law/good/evil</item>
     <item>Smite Evil1</item>
     <item>Smite Evil2</item>
     <item>Smite Evil3</item>

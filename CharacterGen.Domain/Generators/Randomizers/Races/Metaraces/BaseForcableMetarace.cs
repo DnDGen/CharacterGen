@@ -32,14 +32,14 @@ namespace CharacterGen.Domain.Generators.Randomizers.Races.Metaraces
             if (results.Any() == false)
                 throw new IncompatibleRandomizersException();
 
-            var tableName = string.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSMetaraces, alignment.Goodness, characterClass.ClassName);
+            var tableName = string.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSMetaraces, alignment.Goodness, characterClass.Name);
 
             return generator.Generate(() => percentileResultSelector.SelectFrom(tableName), m => results.Contains(m));
         }
 
         public IEnumerable<string> GetAllPossible(Alignment alignment, CharacterClass characterClass)
         {
-            var tableName = string.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSMetaraces, alignment.Goodness, characterClass.ClassName);
+            var tableName = string.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSMetaraces, alignment.Goodness, characterClass.Name);
             var metaraces = percentileResultSelector.SelectAllFrom(tableName);
             return metaraces.Where(r => RaceIsAllowed(r, characterClass.Level));
         }

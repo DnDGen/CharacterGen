@@ -49,7 +49,7 @@ namespace CharacterGen.Tests.Unit.Generators
             intuitiveClasses = new List<string>();
             trainedClasses = new List<string>();
 
-            characterClass.ClassName = "class name";
+            characterClass.Name = "class name";
             alignment.Goodness = "goodness";
             speeds[BaseRace] = 9266;
 
@@ -153,7 +153,7 @@ namespace CharacterGen.Tests.Unit.Generators
         [Test]
         public void RaceGeneratorReturnsMaleForDrowWizard()
         {
-            characterClass.ClassName = CharacterClassConstants.Wizard;
+            characterClass.Name = CharacterClassConstants.Wizard;
             mockBaseRaceRandomizer.Setup(r => r.Randomize(alignment, characterClass)).Returns(RaceConstants.BaseRaces.Drow);
             speeds[RaceConstants.BaseRaces.Drow] = 9266;
 
@@ -166,7 +166,7 @@ namespace CharacterGen.Tests.Unit.Generators
         [Test]
         public void RaceGeneratorReturnsFemaleForDrowCleric()
         {
-            characterClass.ClassName = CharacterClassConstants.Cleric;
+            characterClass.Name = CharacterClassConstants.Cleric;
             mockBaseRaceRandomizer.Setup(r => r.Randomize(alignment, characterClass)).Returns(RaceConstants.BaseRaces.Drow);
             speeds[RaceConstants.BaseRaces.Drow] = 9266;
 
@@ -332,7 +332,7 @@ namespace CharacterGen.Tests.Unit.Generators
         [Test]
         public void GetIntuitiveAge()
         {
-            intuitiveClasses.Add(characterClass.ClassName);
+            intuitiveClasses.Add(characterClass.Name);
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
             Assert.That(race.Age.Years, Is.EqualTo(90224));
@@ -348,7 +348,7 @@ namespace CharacterGen.Tests.Unit.Generators
         [Test]
         public void GetTrainedAge()
         {
-            trainedClasses.Add(characterClass.ClassName);
+            trainedClasses.Add(characterClass.Name);
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
             Assert.That(race.Age.Years, Is.EqualTo(90244));
@@ -357,7 +357,7 @@ namespace CharacterGen.Tests.Unit.Generators
         [Test]
         public void GetAdultAge()
         {
-            intuitiveClasses.Add(characterClass.ClassName);
+            intuitiveClasses.Add(characterClass.Name);
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
             Assert.That(race.Age.Stage, Is.EqualTo(RaceConstants.Ages.Adulthood));
@@ -373,7 +373,7 @@ namespace CharacterGen.Tests.Unit.Generators
         [Test]
         public void GetOldAge()
         {
-            trainedClasses.Add(characterClass.ClassName);
+            trainedClasses.Add(characterClass.Name);
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
             Assert.That(race.Age.Stage, Is.EqualTo(RaceConstants.Ages.Old));
@@ -383,7 +383,7 @@ namespace CharacterGen.Tests.Unit.Generators
         public void GetVenerableAge()
         {
             mockDice.Setup(d => d.Roll("4200d60000")).Returns(44);
-            trainedClasses.Add(characterClass.ClassName);
+            trainedClasses.Add(characterClass.Name);
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
             Assert.That(race.Age.Stage, Is.EqualTo(RaceConstants.Ages.Venerable));

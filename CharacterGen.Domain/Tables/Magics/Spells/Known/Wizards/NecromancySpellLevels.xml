@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+  <object>
+    <name>Disrupt undead</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Touch of fatigue</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Cause fear</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Chill touch</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Ray of enfeeblement</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Blindness/deafness</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Command undead</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>False life</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Ghoul touch</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Scare</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Spectral hand</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Gentle repose</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Halt undead</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Ray of exhaustion</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Vampiric touch</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Animate dead</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Bestow curse</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Contagion</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Enervation</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Fear</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Blight</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Magic jar</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Symbol of pain</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Waves of fatigue</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Circle of death</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Create undead</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Eyebite</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Symbol of fear</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Undeath to death</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Control undead</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Finger of death</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Symbol of weakness</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Waves of exhaustion</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Clone</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Create greater undead</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Horrid wilting</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Symbol of death</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Astral projection</name>
+    <item>9</item>
+  </object>
+  <object>
+    <name>Energy drain</name>
+    <item>9</item>
+  </object>
+  <object>
+    <name>Soul bind</name>
+    <item>9</item>
+  </object>
+  <object>
+    <name>Wail of the banshee</name>
+    <item>9</item>
+  </object>
+</items>

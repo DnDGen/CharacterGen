@@ -37,7 +37,7 @@ namespace CharacterGen.Domain.Generators.Items
             var npcs = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.NPCs);
 
             var effectiveLevel = characterClass.Level;
-            if (npcs.Contains(characterClass.ClassName))
+            if (npcs.Contains(characterClass.Name))
                 effectiveLevel = Math.Max(effectiveLevel / 2, 1);
 
             equipment.Treasure = treasureGenerator.GenerateAtLevel(effectiveLevel);

@@ -125,7 +125,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Selections
         {
             selection.RequiredCharacterClasses["class name"] = 1;
             selection.RequiredCharacterClasses["other class name"] = 2;
-            characterClass.ClassName = "different class name";
+            characterClass.Name = "different class name";
             characterClass.Level = 3;
 
             var met = selection.ImmutableRequirementsMet(1, stats, skills, characterClass);
@@ -137,7 +137,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Selections
         {
             selection.RequiredCharacterClasses["class name"] = 1;
             selection.RequiredCharacterClasses["other class name"] = 2;
-            characterClass.ClassName = "other class name";
+            characterClass.Name = "other class name";
             characterClass.Level = 1;
 
             var met = selection.ImmutableRequirementsMet(1, stats, skills, characterClass);
@@ -161,7 +161,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Selections
             skills["other cross-class skill"] = new Skill { Ranks = 4, ClassSkill = true };
 
             selection.RequiredCharacterClasses["class name"] = 1;
-            characterClass.ClassName = "class name";
+            characterClass.Name = "class name";
             characterClass.Level = 1;
 
             var met = selection.ImmutableRequirementsMet(2, stats, skills, characterClass);

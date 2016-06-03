@@ -140,7 +140,7 @@ namespace CharacterGen.Tests.Unit.Generators
             alignment.Goodness = "goodness";
             alignment.Lawfulness = "lawfulness";
             characterClass.Level = 1;
-            characterClass.ClassName = "class name";
+            characterClass.Name = "class name";
             race.BaseRace = BaseRace;
             race.Metarace = RaceConstants.Metaraces.None;
             ability.Feats = feats;

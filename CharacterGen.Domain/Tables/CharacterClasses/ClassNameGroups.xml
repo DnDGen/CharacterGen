@@ -296,4 +296,21 @@
     <item>Sorcerer</item>
     <item>Wizard</item>
   </object>
+  <object>
+    <name>Prepares Spells</name>
+    <item>Cleric</item>
+    <item>Druid</item>
+    <item>Paladin</item>
+    <item>Ranger</item>
+    <item>Wizard</item>
+    <item>Adept</item>
+  </object>
+  <object>
+    <name>Divine</name>
+    <item>Cleric</item>
+    <item>Druid</item>
+    <item>Paladin</item>
+    <item>Ranger</item>
+    <item>Adept</item>
+  </object>
 </items>

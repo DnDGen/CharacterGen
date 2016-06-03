@@ -45,7 +45,7 @@ namespace CharacterGen.Domain.Generators.Combats
                 return RollHitPoints(characterClass.Level, 12, constitutionBonus);
 
             var hitDice = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.ClassHitDice);
-            return RollHitPoints(characterClass.Level, hitDice[characterClass.ClassName], constitutionBonus);
+            return RollHitPoints(characterClass.Level, hitDice[characterClass.Name], constitutionBonus);
         }
 
         private int GetAdditionalMonsterHitDice(Race race, int constitutionBonus)

@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+  <object>
+    <name>Acid splash</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Grease</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Mage armor</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Mount</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Obscuring mist</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Summon monster I</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Unseen servant</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Acid arrow</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Fog cloud</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Glitterdust</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Summon monster II</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Summon swarm</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Web</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Phantom steed</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Sepia snake sigil</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Sleet storm</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Stinking cloud</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Summon monster III</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Black tentacles</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Dimension door</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Minor creation</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Secure shelter</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Solid fog</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Summon monster IV</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Cloudkill</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Mage's faithful hound</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Major creation</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Lesser planar binding</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Secret chest</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Summon monster V</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Teleport</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Wall of stone</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Acid fog</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Planar binding</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Summon monster VI</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Wall of iron</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Instant summons</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Mage's magnificent mansion</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Phase door</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Plane shift</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Summon monster VII</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Greater teleport</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Teleport object</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Incendiary cloud</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Maze</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Greater planar binding</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Summon monster VIII</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Trap the soul</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Gate</name>
+    <item>9</item>
+  </object>
+  <object>
+    <name>Refuge</name>
+    <item>9</item>
+  </object>
+  <object>
+    <name>Summon monster IX</name>
+    <item>9</item>
+  </object>
+  <object>
+    <name>Teleportation circle</name>
+    <item>9</item>
+  </object>
+</items>

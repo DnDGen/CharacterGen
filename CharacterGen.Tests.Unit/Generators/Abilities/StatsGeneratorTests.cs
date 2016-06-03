@@ -50,7 +50,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
             undead = new List<string>();
             statPriorities = new List<string>();
 
-            characterClass.ClassName = "class name";
+            characterClass.Name = "class name";
             characterClass.Level = 1;
             race.BaseRace = "base race";
             race.Metarace = "metarace";
@@ -78,7 +78,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
             mockStatsRandomizer.Setup(r => r.Randomize()).Returns(randomizedStats);
             mockSetStatsRandomizer.Setup(r => r.Randomize()).Returns(randomizedStats);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Undead)).Returns(undead);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.StatPriorities, characterClass.ClassName)).Returns(statPriorities);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.StatPriorities, characterClass.Name)).Returns(statPriorities);
             mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<string>>())).Returns((IEnumerable<string> c) => c.Last());
         }
 

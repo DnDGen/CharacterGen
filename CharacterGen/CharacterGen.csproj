@@ -80,8 +80,9 @@
     <Compile Include="Magics\Animal.cs" />
     <Compile Include="Items\Equipment.cs" />
     <Compile Include="Magics\Magic.cs" />
+    <Compile Include="Magics\Spell.cs" />
     <Compile Include="Magics\SpellConstants.cs" />
-    <Compile Include="Magics\Spells.cs" />
+    <Compile Include="Magics\SpellQuantity.cs" />
     <Compile Include="Races\Age.cs" />
     <Compile Include="Races\Race.cs" />
     <Compile Include="Races\RaceConstants.cs" />

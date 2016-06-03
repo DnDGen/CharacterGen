@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+  <object>
+    <name>Longstrider</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Locate object</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Fly</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Dimension door</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Teleport</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Find the path</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Greater teleport</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Phase door</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Astral projection</name>
+    <item>9</item>
+  </object>
+</items>

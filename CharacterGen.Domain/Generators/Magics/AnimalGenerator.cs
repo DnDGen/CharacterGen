@@ -24,7 +24,7 @@ namespace CharacterGen.Domain.Generators.Magics
 
         public string GenerateFrom(Alignment alignment, CharacterClass characterClass, Race race, IEnumerable<Feat> feats)
         {
-            if (characterClass.ClassName == CharacterClassConstants.Adept && characterClass.Level == 1)
+            if (characterClass.Name == CharacterClassConstants.Adept && characterClass.Level == 1)
                 return string.Empty;
 
             var levelAdjustments = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments);
@@ -45,11 +45,11 @@ namespace CharacterGen.Domain.Generators.Magics
 
         private CharacterClass GetEffectiveCharacterClass(CharacterClass characterClass)
         {
-            if (characterClass.ClassName != CharacterClassConstants.Ranger)
+            if (characterClass.Name != CharacterClassConstants.Ranger)
                 return characterClass;
 
             var effectiveCharacterClass = new CharacterClass();
-            effectiveCharacterClass.ClassName = CharacterClassConstants.Druid;
+            effectiveCharacterClass.Name = CharacterClassConstants.Druid;
             effectiveCharacterClass.Level = characterClass.Level / 2;
 
             return effectiveCharacterClass;
@@ -57,14 +57,14 @@ namespace CharacterGen.Domain.Generators.Magics
 
         private IEnumerable<string> AnimalsForCharacter(CharacterClass characterClass, Race race, Dictionary<string, int> levelAdjustments)
         {
-            var animals = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.Animals, characterClass.ClassName);
+            var animals = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.Animals, characterClass.Name);
             var animalsForSize = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.Animals, race.Size);
             var animalsWithinLevel = animals.Where(a => characterClass.Level + levelAdjustments[a] > 0);
             var filteredAnimals = animals.Intersect(animalsForSize).Intersect(animalsWithinLevel);
 
             var mages = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Mages);
 
-            if (mages.Contains(characterClass.ClassName) == false)
+            if (mages.Contains(characterClass.Name) == false)
                 return filteredAnimals;
 
             var animalsForMetarace = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.Animals, race.Metarace);

@@ -46,7 +46,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             stats[StatConstants.Constitution] = new Stat { Value = 10 };
             stats[StatConstants.Dexterity] = new Stat { Value = 10 };
             stats[StatConstants.Wisdom] = new Stat { Value = 10 };
-            characterClass.ClassName = "class name";
+            characterClass.Name = "class name";
             characterClass.Level = 600;
             allSaveFeats.Add("other feat");
             reflexSaveFeats.Add("other feat");
@@ -106,7 +106,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         public void StrongSaveBonuses(int level, int saveBonus)
         {
             characterClass.Level = level;
-            strongFortitude.Add(characterClass.ClassName);
+            strongFortitude.Add(characterClass.Name);
 
             var savingThrows = savingThrowsGenerator.GenerateWith(characterClass, feats, stats);
             Assert.That(savingThrows.Fortitude, Is.EqualTo(saveBonus));
@@ -142,7 +142,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         [Test]
         public void ApplyStrongCharacterClassFortitudeBonus()
         {
-            strongFortitude.Add(characterClass.ClassName);
+            strongFortitude.Add(characterClass.Name);
 
             var savingThrows = savingThrowsGenerator.GenerateWith(characterClass, feats, stats);
             Assert.That(savingThrows.Fortitude, Is.EqualTo(302));
@@ -164,7 +164,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         [Test]
         public void ApplyStrongCharacterClassReflexBonus()
         {
-            strongReflex.Add(characterClass.ClassName);
+            strongReflex.Add(characterClass.Name);
 
             var savingThrows = savingThrowsGenerator.GenerateWith(characterClass, feats, stats);
             Assert.That(savingThrows.Fortitude, Is.EqualTo(200));
@@ -186,7 +186,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         [Test]
         public void ApplyStrongCharacterClassWillBonus()
         {
-            strongWill.Add(characterClass.ClassName);
+            strongWill.Add(characterClass.Name);
 
             var savingThrows = savingThrowsGenerator.GenerateWith(characterClass, feats, stats);
             Assert.That(savingThrows.Fortitude, Is.EqualTo(200));
@@ -280,8 +280,8 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             stats[StatConstants.Dexterity].Value = 90210;
             stats[StatConstants.Wisdom].Value = -42;
 
-            strongWill.Add(characterClass.ClassName);
-            strongFortitude.Add(characterClass.ClassName);
+            strongWill.Add(characterClass.Name);
+            strongFortitude.Add(characterClass.Name);
 
             SetUpFeats();
 

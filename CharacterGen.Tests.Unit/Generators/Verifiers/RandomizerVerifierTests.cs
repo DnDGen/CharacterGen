@@ -80,8 +80,8 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
             alignments.Add(alignment);
 
             characterClass.Level = 1;
-            characterClass.ClassName = "class name";
-            classNames.Add(characterClass.ClassName);
+            characterClass.Name = "class name";
+            classNames.Add(characterClass.Name);
             levels.Add(characterClass.Level);
 
             race.BaseRace = "base race";

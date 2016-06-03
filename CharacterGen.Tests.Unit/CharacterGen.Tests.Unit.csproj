@@ -111,7 +111,8 @@
     <Compile Include="Generators\Magics\MagicTests.cs" />
     <Compile Include="Generators\Magics\SpellConstantsTests.cs" />
     <Compile Include="Generators\Magics\SpellsGeneratorTests.cs" />
-    <Compile Include="Generators\Magics\SpellsTests.cs" />
+    <Compile Include="Generators\Magics\SpellQuantityTests.cs" />
+    <Compile Include="Generators\Magics\SpellTests.cs" />
     <Compile Include="Generators\RaceGeneratorTests.cs" />
     <Compile Include="Generators\Randomizers\Alignments\AlignmentRandomizerTypeConstantsTests.cs" />
     <Compile Include="Generators\Randomizers\Alignments\AnyAlignmentRandomizerTests.cs" />

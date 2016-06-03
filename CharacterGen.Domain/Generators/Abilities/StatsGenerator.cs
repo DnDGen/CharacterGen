@@ -61,7 +61,7 @@ namespace CharacterGen.Domain.Generators.Abilities
 
         private Dictionary<string, Stat> PrioritizeStats(Dictionary<string, Stat> stats, CharacterClass characterClass)
         {
-            var statPriorities = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.StatPriorities, characterClass.ClassName);
+            var statPriorities = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.StatPriorities, characterClass.Name);
             if (statPriorities.Any() == false)
                 return stats;
 
@@ -134,7 +134,7 @@ namespace CharacterGen.Domain.Generators.Abilities
 
         private string GetStatToIncrease(Dictionary<string, Stat> stats, Race race, CharacterClass characterClass)
         {
-            var statPriorities = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.StatPriorities, characterClass.ClassName);
+            var statPriorities = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.StatPriorities, characterClass.Name);
             var undead = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Undead);
 
             if (undead.Contains(race.Metarace))

@@ -33,7 +33,7 @@ namespace CharacterGen.Domain.Generators
             race.BaseRace = baseRaceRandomizer.Randomize(alignment, characterClass);
             race.Metarace = metaraceRandomizer.Randomize(alignment, characterClass);
             race.MetaraceSpecies = DetermineMetaraceSpecies(alignment, race.Metarace);
-            race.IsMale = DetermineIfMale(race.BaseRace, characterClass.ClassName);
+            race.IsMale = DetermineIfMale(race.BaseRace, characterClass.Name);
             race.Size = DetermineSize(race.BaseRace);
             race.HasWings = DetermineIfRaceHasWings(race);
             race.LandSpeed = DetermineLandSpeed(race);
@@ -148,11 +148,11 @@ namespace CharacterGen.Domain.Generators
         private string GetClassType(CharacterClass characterClass)
         {
             var intuitiveClasses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Intuitive);
-            if (intuitiveClasses.Contains(characterClass.ClassName))
+            if (intuitiveClasses.Contains(characterClass.Name))
                 return GroupConstants.Intuitive;
 
             var trainedClasses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Trained);
-            if (trainedClasses.Contains(characterClass.ClassName))
+            if (trainedClasses.Contains(characterClass.Name))
                 return GroupConstants.Trained;
 
             return GroupConstants.SelfTaught;

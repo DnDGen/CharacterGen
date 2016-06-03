@@ -48,6 +48,7 @@ namespace CharacterGen.Tests.Unit.Tables
         [TestCase(TableNameConstants.Set.Collection.SkillGroups, "SkillGroups")]
         [TestCase(TableNameConstants.Set.Collection.SkillSynergy, "SkillSynergy")]
         [TestCase(TableNameConstants.Set.Collection.SpecialistFields, "SpecialistFields")]
+        [TestCase(TableNameConstants.Set.Collection.SpellGroups, "SpellGroups")]
         [TestCase(TableNameConstants.Set.Collection.StatGroups, "StatGroups")]
         [TestCase(TableNameConstants.Set.Collection.StatPriorities, "StatPriorities")]
         [TestCase(TableNameConstants.Set.Collection.WeightRolls, "WeightRolls")]
@@ -63,6 +64,7 @@ namespace CharacterGen.Tests.Unit.Tables
         [TestCase(TableNameConstants.Set.TrueOrFalse.KilledFollowers, "KilledFollowers")]
         [TestCase(TableNameConstants.Set.TrueOrFalse.Male, "Male")]
         [TestCase(TableNameConstants.Formattable.Adjustments.CLASSFeatLevelRequirements, "{0}FeatLevelRequirements")]
+        [TestCase(TableNameConstants.Formattable.Adjustments.CLASSSpellLevels, "{0}SpellLevels")]
         [TestCase(TableNameConstants.Formattable.Adjustments.FEATClassRequirements, "{0}ClassRequirements")]
         [TestCase(TableNameConstants.Formattable.Adjustments.FEATSkillRankRequirements, "{0}SkillRankRequirements")]
         [TestCase(TableNameConstants.Formattable.Adjustments.FEATStatRequirements, "{0}StatRequirements")]
@@ -70,6 +72,7 @@ namespace CharacterGen.Tests.Unit.Tables
         [TestCase(TableNameConstants.Formattable.Adjustments.GENDERWeights, "{0}Weights")]
         [TestCase(TableNameConstants.Formattable.Adjustments.LevelXAnimalTricks, "Level{0}AnimalTricks")]
         [TestCase(TableNameConstants.Formattable.Adjustments.LevelXCLASSSpellsPerDay, "Level{0}{1}SpellsPerDay")]
+        [TestCase(TableNameConstants.Formattable.Adjustments.LevelXCLASSKnownSpells, "Level{0}{1}KnownSpells")]
         [TestCase(TableNameConstants.Formattable.Adjustments.LevelXFollowerQuantities, "Level{0}FollowerQuantities")]
         [TestCase(TableNameConstants.Formattable.Adjustments.RACEAges, "{0}Ages")]
         [TestCase(TableNameConstants.Formattable.Collection.CLASSTYPEAgeRolls, "{0}AgeRolls")]
@@ -78,6 +81,7 @@ namespace CharacterGen.Tests.Unit.Tables
         [TestCase(TableNameConstants.Formattable.Percentile.GOODNESSCLASSMetaraces, "{0}{1}Metaraces")]
         [TestCase(TableNameConstants.Formattable.Percentile.LevelXPower, "Level{0}Power")]
         [TestCase(TableNameConstants.Formattable.TrueOrFalse.CLASSHasSpecialistFields, "{0}HasSpecialistFields")]
+        [TestCase(TableNameConstants.Formattable.TrueOrFalse.CLASSKnowsAdditionalSpells, "{0}KnowsAdditionalSpells")]
         public void Constant(string constant, string value)
         {
             Assert.That(constant, Is.EqualTo(value));

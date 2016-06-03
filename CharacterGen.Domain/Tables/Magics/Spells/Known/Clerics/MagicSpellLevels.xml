@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+  <object>
+    <name>Magic aura</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Identify</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Dispel magic</name>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Imbue with spell ability</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Spell resistance</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Antimagic field</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Spell turning</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Protection from spells</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Mage's disjunction</name>
+    <item>9</item>
+  </object>
+</items>

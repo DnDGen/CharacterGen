@@ -52,7 +52,7 @@ namespace CharacterGen.Domain.Generators.Abilities.Feats
                 foci = foci.Except(characterClass.ProhibitedFields);
 
             var spellcasters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Spellcasters);
-            if (spellcasters.Contains(characterClass.ClassName) == false)
+            if (spellcasters.Contains(characterClass.Name) == false)
                 foci = foci.Except(new[] { FeatConstants.Foci.Ray });
 
             if (foci.Any() == false)

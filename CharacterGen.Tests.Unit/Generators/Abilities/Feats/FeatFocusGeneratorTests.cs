@@ -35,7 +35,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             skills = new Dictionary<string, Skill>();
             focusTypes = new Dictionary<string, IEnumerable<string>>();
 
-            characterClass.ClassName = "class name";
+            characterClass.Name = "class name";
             mockCollectionsSelector.Setup(s => s.SelectAllFrom(TableNameConstants.Set.Collection.FeatFoci)).Returns(focusTypes);
             mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<string>>())).Returns((IEnumerable<string> c) => c.First());
         }
@@ -101,7 +101,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             focusTypes[FeatConstants.Foci.WeaponsWithUnarmedAndGrappleAndRay] = new[] { FeatConstants.Foci.Ray, "weapon" };
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Spellcasters))
-                .Returns(new[] { characterClass.ClassName });
+                .Returns(new[] { characterClass.Name });
 
             var focus = featFocusGenerator.GenerateFrom("featToFill", FeatConstants.Foci.WeaponsWithUnarmedAndGrappleAndRay, skills, requiredFeats, otherFeats, characterClass);
             Assert.That(focus, Is.EqualTo(FeatConstants.Foci.Ray));
@@ -433,7 +433,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, ItemTypeConstants.Weapon + GroupConstants.Proficiency)).Returns(proficiencyFeats);
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Spellcasters))
-                .Returns(new[] { characterClass.ClassName });
+                .Returns(new[] { characterClass.Name });
 
             var focus = featFocusGenerator.GenerateFrom("featToFill", FeatConstants.Foci.WeaponsWithUnarmedAndGrappleAndRay, skills, requiredFeats, otherFeats, characterClass);
             Assert.That(focus, Is.EqualTo(FeatConstants.Foci.Ray));

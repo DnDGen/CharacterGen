@@ -29,7 +29,7 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.CharacterClasses.Cla
             var alignment = GetNewAlignment();
             var characterClass = GetNewCharacterClass(alignment);
 
-            SetClassNameRandomizer.SetClassName = characterClass.ClassName;
+            SetClassNameRandomizer.SetClassName = characterClass.Name;
 
             var className = SetClassNameRandomizer.Randomize(alignment);
             Assert.That(className, Is.EqualTo(SetClassNameRandomizer.SetClassName));
@@ -46,7 +46,7 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.CharacterClasses.Cla
         {
             var alignment = GetNewAlignment();
             var characterClass = GetNewCharacterClass(alignment);
-            SetClassNameRandomizer.SetClassName = characterClass.ClassName;
+            SetClassNameRandomizer.SetClassName = characterClass.Name;
 
             var baseRace = SetClassNameRandomizer.Randomize(alignment);
             Assert.That(baseRace, Is.EqualTo(SetClassNameRandomizer.SetClassName));
