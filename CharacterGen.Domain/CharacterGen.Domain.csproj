@@ -7,8 +7,8 @@
     <ProjectGuid>{8611F130-C7BF-4EF9-BE78-E2624C58861F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CharacterGen.Generators.Domain</RootNamespace>
-    <AssemblyName>CharacterGen.Generators.Domain</AssemblyName>
+    <RootNamespace>CharacterGen.Domain</RootNamespace>
+    <AssemblyName>CharacterGen.Domain</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
