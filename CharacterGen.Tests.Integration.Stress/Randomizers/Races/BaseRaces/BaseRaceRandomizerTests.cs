@@ -8,7 +8,7 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
     {
         protected abstract IEnumerable<string> allowedBaseRaces { get; }
 
-        protected override void MakeAssertions()
+        protected void AssertBaseRace()
         {
             var alignment = GetNewAlignment();
             var characterClass = GetNewCharacterClass(alignment);

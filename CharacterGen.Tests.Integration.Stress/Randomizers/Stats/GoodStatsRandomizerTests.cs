@@ -2,7 +2,6 @@
 using CharacterGen.Randomizers.Stats;
 using Ninject;
 using NUnit.Framework;
-using System;
 using System.Linq;
 
 namespace CharacterGen.Tests.Integration.Stress.Randomizers.Stats
@@ -13,13 +12,13 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Stats
         [Inject, Named(StatsRandomizerTypeConstants.Good)]
         public IStatsRandomizer GoodStatsRandomizer { get; set; }
 
-        [TestCase("GoodStatsRandomizer")]
-        public override void Stress(string stressSubject)
+        [Test]
+        public void Stress()
         {
-            Stress();
+            Stress(AssertStats);
         }
 
-        protected override void MakeAssertions()
+        protected void AssertStats()
         {
             var stats = GoodStatsRandomizer.Randomize();
 

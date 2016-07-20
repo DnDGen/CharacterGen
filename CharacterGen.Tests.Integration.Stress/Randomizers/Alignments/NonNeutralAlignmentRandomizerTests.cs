@@ -13,13 +13,13 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Alignments
             AlignmentRandomizer = GetNewInstanceOf<IAlignmentRandomizer>(AlignmentRandomizerTypeConstants.NonNeutral);
         }
 
-        [TestCase("Non-Neutral Alignment Randomizer")]
-        public override void Stress(string stressSubject)
+        [Test]
+        public void StressAlignment()
         {
-            Stress();
+            Stress(AssertAlignment);
         }
 
-        protected override void MakeAssertions()
+        protected void AssertAlignment()
         {
             var alignment = AlignmentRandomizer.Randomize();
             Assert.That(alignment.Goodness, Is.EqualTo(AlignmentConstants.Good)

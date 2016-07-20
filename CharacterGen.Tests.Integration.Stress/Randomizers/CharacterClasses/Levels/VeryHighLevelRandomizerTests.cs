@@ -1,7 +1,6 @@
 ﻿using CharacterGen.Randomizers.CharacterClasses;
 using Ninject;
 using NUnit.Framework;
-using System;
 
 namespace CharacterGen.Tests.Integration.Stress.Randomizers.CharacterClasses.Levels
 {
@@ -11,13 +10,13 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.CharacterClasses.Lev
         [Inject, Named(LevelRandomizerTypeConstants.VeryHigh)]
         public ILevelRandomizer VeryHighLevelRandomizer { get; set; }
 
-        [TestCase("VeryHighLevelRandomizer")]
-        public override void Stress(string stressSubject)
+        [Test]
+        public void StressLevel()
         {
-            Stress();
+            Stress(AssertLevel);
         }
 
-        protected override void MakeAssertions()
+        protected void AssertLevel()
         {
             var level = VeryHighLevelRandomizer.Randomize();
             Assert.That(level, Is.InRange(16, 20));

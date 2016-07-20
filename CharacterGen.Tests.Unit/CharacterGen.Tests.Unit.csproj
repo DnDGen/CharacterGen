@@ -76,8 +76,8 @@
     <Compile Include="Generators\Abilities\Feats\FrequencyTests.cs" />
     <Compile Include="Generators\Abilities\Feats\RacialFeatsGeneratorTests.cs" />
     <Compile Include="Generators\Abilities\LanguageGeneratorTests.cs" />
-    <Compile Include="Generators\Abilities\SkillsGeneratorTests.cs" />
-    <Compile Include="Generators\Abilities\StatsGeneratorTests.cs" />
+    <Compile Include="Generators\Abilities\Skills\SkillsGeneratorTests.cs" />
+    <Compile Include="Generators\Abilities\Stats\StatsGeneratorTests.cs" />
     <Compile Include="Generators\AlignmentGeneratorTests.cs" />
     <Compile Include="Generators\Alignments\AlignmentConstantsTests.cs" />
     <Compile Include="Generators\Alignments\AlignmentTests.cs" />

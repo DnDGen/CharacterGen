@@ -45,7 +45,7 @@ namespace CharacterGen.Domain.Generators.Abilities
             var undead = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Undead);
 
             if (undead.Contains(race.Metarace))
-                stats[StatConstants.Constitution].Value = 0;
+                stats.Remove(StatConstants.Constitution);
 
             return stats;
         }

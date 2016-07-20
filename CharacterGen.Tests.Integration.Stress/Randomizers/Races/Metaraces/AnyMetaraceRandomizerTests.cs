@@ -35,10 +35,10 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
             forcableMetaraceRandomizer = GetNewInstanceOf<IForcableMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.AnyMeta);
         }
 
-        [TestCase("Any Metarace Randomizer")]
-        public override void Stress(string stressSubject)
+        [Test]
+        public void StressMetarace()
         {
-            Stress();
+            Stress(AssertMetarace);
         }
 
         [Test]

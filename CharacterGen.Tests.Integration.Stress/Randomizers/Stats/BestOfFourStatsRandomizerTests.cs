@@ -12,13 +12,13 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Stats
         [Inject, Named(StatsRandomizerTypeConstants.BestOfFour)]
         public IStatsRandomizer BestOfFourStatsRandomizer { get; set; }
 
-        [TestCase("Best of Four Stats Randomizer")]
-        public override void Stress(string stressSubject)
+        [Test]
+        public void Stress()
         {
-            Stress();
+            Stress(AssertStats);
         }
 
-        protected override void MakeAssertions()
+        protected void AssertStats()
         {
             var stats = BestOfFourStatsRandomizer.Randomize();
 

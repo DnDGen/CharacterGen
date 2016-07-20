@@ -73,6 +73,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="CharacterGeneratorTests.cs" />
+    <Compile Include="CharacterVerifier.cs" />
     <Compile Include="LeadershipGeneratorTests.cs" />
     <Compile Include="Randomizers\Alignments\SetAlignmentRandomizerTests.cs" />
     <Compile Include="Randomizers\CharacterClasses\ClassNames\AnyNPCClassNameRandomizerTests.cs" />

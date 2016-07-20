@@ -8,7 +8,7 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.CharacterClasses.Cla
     {
         protected abstract IEnumerable<string> allowedClassNames { get; }
 
-        protected override void MakeAssertions()
+        protected void AssertClassName()
         {
             var alignment = GetNewAlignment();
             var className = ClassNameRandomizer.Randomize(alignment);

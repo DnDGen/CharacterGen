@@ -14,13 +14,13 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Stats
         [Inject]
         public Random Random { get; set; }
 
-        [TestCase("SetStatsRandomizer")]
-        public override void Stress(string stressSubject)
+        [Test]
+        public void Stress()
         {
-            Stress();
+            Stress(AssertStats);
         }
 
-        protected override void MakeAssertions()
+        protected void AssertStats()
         {
             SetStatsRandomizer.SetCharisma = Random.Next();
             SetStatsRandomizer.SetConstitution = Random.Next();

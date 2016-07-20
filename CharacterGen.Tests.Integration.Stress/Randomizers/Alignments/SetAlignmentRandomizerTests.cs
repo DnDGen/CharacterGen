@@ -1,7 +1,7 @@
-﻿using System;
+﻿using CharacterGen.Randomizers.Alignments;
 using Ninject;
-using CharacterGen.Randomizers.Alignments;
 using NUnit.Framework;
+using System;
 
 namespace CharacterGen.Tests.Integration.Stress.Randomizers.Alignments
 {
@@ -11,13 +11,13 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Alignments
         [Inject]
         public ISetAlignmentRandomizer SetAlignmentRandomizer { get; set; }
 
-        [TestCase("SetAlignmentRandomizer")]
-        public override void Stress(string stressSubject)
+        [Test]
+        public void StressAlignment()
         {
-            Stress();
+            Stress(AssertAlignment);
         }
 
-        protected override void MakeAssertions()
+        protected void AssertAlignment()
         {
             SetAlignmentRandomizer.SetAlignment.Goodness = Guid.NewGuid().ToString();
             SetAlignmentRandomizer.SetAlignment.Lawfulness = Guid.NewGuid().ToString();

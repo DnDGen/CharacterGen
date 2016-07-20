@@ -81,6 +81,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             Assert.That(savingThrows.Reflex, Is.EqualTo(45300));
             Assert.That(savingThrows.Will, Is.EqualTo(174));
             Assert.That(savingThrows.CircumstantialBonus, Is.False);
+            Assert.That(savingThrows.HasFortitudeSave, Is.True);
         }
 
         [TestCase(1, 2)]
@@ -149,6 +150,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             Assert.That(savingThrows.Reflex, Is.EqualTo(200));
             Assert.That(savingThrows.Will, Is.EqualTo(200));
             Assert.That(savingThrows.CircumstantialBonus, Is.False);
+            Assert.That(savingThrows.HasFortitudeSave, Is.True);
         }
 
         [Test]
@@ -159,6 +161,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             Assert.That(savingThrows.Reflex, Is.EqualTo(200));
             Assert.That(savingThrows.Will, Is.EqualTo(200));
             Assert.That(savingThrows.CircumstantialBonus, Is.False);
+            Assert.That(savingThrows.HasFortitudeSave, Is.True);
         }
 
         [Test]
@@ -171,6 +174,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             Assert.That(savingThrows.Reflex, Is.EqualTo(302));
             Assert.That(savingThrows.Will, Is.EqualTo(200));
             Assert.That(savingThrows.CircumstantialBonus, Is.False);
+            Assert.That(savingThrows.HasFortitudeSave, Is.True);
         }
 
         [Test]
@@ -181,6 +185,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             Assert.That(savingThrows.Reflex, Is.EqualTo(200));
             Assert.That(savingThrows.Will, Is.EqualTo(200));
             Assert.That(savingThrows.CircumstantialBonus, Is.False);
+            Assert.That(savingThrows.HasFortitudeSave, Is.True);
         }
 
         [Test]
@@ -193,6 +198,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             Assert.That(savingThrows.Reflex, Is.EqualTo(200));
             Assert.That(savingThrows.Will, Is.EqualTo(302));
             Assert.That(savingThrows.CircumstantialBonus, Is.False);
+            Assert.That(savingThrows.HasFortitudeSave, Is.True);
         }
 
         [Test]
@@ -203,6 +209,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             Assert.That(savingThrows.Reflex, Is.EqualTo(200));
             Assert.That(savingThrows.Will, Is.EqualTo(200));
             Assert.That(savingThrows.CircumstantialBonus, Is.False);
+            Assert.That(savingThrows.HasFortitudeSave, Is.True);
         }
 
         [Test]
@@ -215,6 +222,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             Assert.That(savingThrows.Reflex, Is.EqualTo(210));
             Assert.That(savingThrows.Will, Is.EqualTo(212));
             Assert.That(savingThrows.CircumstantialBonus, Is.False);
+            Assert.That(savingThrows.HasFortitudeSave, Is.True);
         }
 
         private void SetUpFeats()
@@ -257,6 +265,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             Assert.That(savingThrows.Reflex, Is.EqualTo(206));
             Assert.That(savingThrows.Will, Is.EqualTo(207));
             Assert.That(savingThrows.CircumstantialBonus, Is.True);
+            Assert.That(savingThrows.HasFortitudeSave, Is.True);
         }
 
         [Test]
@@ -271,6 +280,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             Assert.That(savingThrows.Reflex, Is.EqualTo(209));
             Assert.That(savingThrows.Will, Is.EqualTo(211));
             Assert.That(savingThrows.CircumstantialBonus, Is.True);
+            Assert.That(savingThrows.HasFortitudeSave, Is.True);
         }
 
         [Test]
@@ -290,6 +300,28 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             Assert.That(savingThrows.Reflex, Is.EqualTo(45310));
             Assert.That(savingThrows.Will, Is.EqualTo(288));
             Assert.That(savingThrows.CircumstantialBonus, Is.False);
+            Assert.That(savingThrows.HasFortitudeSave, Is.True);
+        }
+
+        [Test]
+        public void CharactersWithoutConstitutionDoNotHaveFortitudeSaves()
+        {
+            stats.Remove(StatConstants.Constitution);
+
+            stats[StatConstants.Dexterity].Value = 90210;
+            stats[StatConstants.Wisdom].Value = -42;
+
+            strongWill.Add(characterClass.Name);
+            strongFortitude.Add(characterClass.Name);
+
+            SetUpFeats();
+
+            var savingThrows = savingThrowsGenerator.GenerateWith(characterClass, feats, stats);
+            Assert.That(savingThrows.Fortitude, Is.EqualTo(0));
+            Assert.That(savingThrows.Reflex, Is.EqualTo(45310));
+            Assert.That(savingThrows.Will, Is.EqualTo(288));
+            Assert.That(savingThrows.CircumstantialBonus, Is.False);
+            Assert.That(savingThrows.HasFortitudeSave, Is.False);
         }
     }
 }

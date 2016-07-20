@@ -13,13 +13,13 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
             MetaraceRandomizer = GetNewInstanceOf<RaceRandomizer>(RaceRandomizerTypeConstants.Metarace.NoMeta);
         }
 
-        [TestCase("No Metarace Randomizer")]
-        public override void Stress(string stressSubject)
+        [Test]
+        public void StressMetarace()
         {
-            Stress();
+            Stress(AssertMetarace);
         }
 
-        protected override void MakeAssertions()
+        protected void AssertMetarace()
         {
             var alignment = GetNewAlignment();
             var characterClass = GetNewCharacterClass(alignment);

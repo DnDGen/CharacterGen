@@ -1,7 +1,4 @@
-﻿using CharacterGen.Abilities.Feats;
-using CharacterGen.Abilities.Stats;
-using CharacterGen.Alignments;
-using CharacterGen.Races;
+﻿using CharacterGen.Abilities.Stats;
 using CharacterGen.Randomizers.CharacterClasses;
 using CharacterGen.Randomizers.Stats;
 using Ninject;
@@ -27,14 +24,16 @@ namespace CharacterGen.Tests.Integration.Stress
         public Random Random { get; set; }
         [Inject, Named(ClassNameRandomizerTypeConstants.AnyNPC)]
         public IClassNameRandomizer NPCClassNameRandomizer { get; set; }
+        [Inject]
+        public CharacterVerifier CharacterVerifier { get; set; }
 
-        [TestCase("Leadership Generator")]
-        public override void Stress(string stressSubject)
+        [Test]
+        public void StressLeadership()
         {
-            Stress();
+            Stress(AssertLeadership);
         }
 
-        protected override void MakeAssertions()
+        protected void AssertLeadership()
         {
             var leader = Generate(() => CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer, RawStatsRandomizer),
                 c => c.Class.Level > 5);
@@ -119,99 +118,9 @@ namespace CharacterGen.Tests.Integration.Stress
             var cohortScore = Random.Next(3, 26);
 
             var cohort = LeadershipGenerator.GenerateCohort(cohortScore, leaderClass.Level, leaderAlignment.Full, leaderClass.Name);
-            AssertCharacter(cohort);
+            CharacterVerifier.AssertCharacter(cohort);
             Assert.That(cohort.Equipment.Treasure.Items, Is.Not.Empty);
             Assert.That(cohort.Class.Level, Is.InRange(1, leaderClass.Level - 2));
-        }
-
-        private void AssertCharacter(Character character)
-        {
-            Assert.That(character.Alignment.Goodness, Is.EqualTo(AlignmentConstants.Good)
-                .Or.EqualTo(AlignmentConstants.Neutral)
-                .Or.EqualTo(AlignmentConstants.Evil));
-            Assert.That(character.Alignment.Lawfulness, Is.EqualTo(AlignmentConstants.Lawful)
-                .Or.EqualTo(AlignmentConstants.Neutral)
-                .Or.EqualTo(AlignmentConstants.Chaotic));
-
-            Assert.That(character.Class.Name, Is.Not.Empty);
-            Assert.That(character.Class.Level, Is.Positive);
-            Assert.That(character.Class.ProhibitedFields, Is.Not.Null);
-            Assert.That(character.Class.SpecialistFields, Is.Not.Null);
-
-            Assert.That(character.InterestingTrait, Is.Not.Null);
-
-            Assert.That(character.Race.BaseRace, Is.Not.Empty);
-            Assert.That(character.Race.Metarace, Is.Not.Null);
-            Assert.That(character.Race.AerialSpeed, Is.Not.Negative);
-            Assert.That(character.Race.AerialSpeed % 10, Is.EqualTo(0));
-            Assert.That(character.Race.Age.Stage, Is.Not.Empty);
-            Assert.That(character.Race.Age.Years, Is.Positive);
-            Assert.That(character.Race.HeightInInches, Is.Positive);
-            Assert.That(character.Race.WeightInPounds, Is.Positive);
-
-            if (character.Race.HasWings)
-                Assert.That(character.Race.AerialSpeed, Is.Positive);
-
-            Assert.That(character.Race.LandSpeed, Is.Positive);
-            Assert.That(character.Race.LandSpeed % 10, Is.EqualTo(0));
-            Assert.That(character.Race.MetaraceSpecies, Is.Not.Null);
-            Assert.That(character.Race.Size, Is.EqualTo(RaceConstants.Sizes.Large)
-                .Or.EqualTo(RaceConstants.Sizes.Medium)
-                .Or.EqualTo(RaceConstants.Sizes.Small));
-
-            Assert.That(character.Ability.Stats.Count, Is.EqualTo(6));
-            Assert.That(character.Ability.Stats.Keys, Contains.Item(StatConstants.Charisma));
-            Assert.That(character.Ability.Stats.Keys, Contains.Item(StatConstants.Constitution));
-            Assert.That(character.Ability.Stats.Keys, Contains.Item(StatConstants.Dexterity));
-            Assert.That(character.Ability.Stats.Keys, Contains.Item(StatConstants.Intelligence));
-            Assert.That(character.Ability.Stats.Keys, Contains.Item(StatConstants.Strength));
-            Assert.That(character.Ability.Stats.Keys, Contains.Item(StatConstants.Wisdom));
-            Assert.That(character.Ability.Stats[StatConstants.Charisma].Value, Is.Positive);
-            Assert.That(character.Ability.Stats[StatConstants.Constitution].Value, Is.Not.Negative);
-            Assert.That(character.Ability.Stats[StatConstants.Dexterity].Value, Is.Positive);
-            Assert.That(character.Ability.Stats[StatConstants.Intelligence].Value, Is.Positive);
-            Assert.That(character.Ability.Stats[StatConstants.Strength].Value, Is.Positive);
-            Assert.That(character.Ability.Stats[StatConstants.Wisdom].Value, Is.Positive);
-            Assert.That(character.Ability.Languages, Is.Not.Empty);
-            Assert.That(character.Ability.Skills, Is.Not.Empty);
-
-            Assert.That(character.Ability.Feats, Is.Not.Empty);
-
-            foreach (var feat in character.Ability.Feats)
-            {
-                Assert.That(feat.Name, Is.Not.Empty);
-                Assert.That(feat.Foci, Is.Not.Null, feat.Name);
-                Assert.That(feat.Power, Is.Not.Negative, feat.Name);
-                Assert.That(feat.Frequency.Quantity, Is.Not.Negative, feat.Name);
-                Assert.That(feat.Frequency.TimePeriod, Is.EqualTo(FeatConstants.Frequencies.Constant)
-                    .Or.EqualTo(FeatConstants.Frequencies.AtWill)
-                    .Or.EqualTo(FeatConstants.Frequencies.Day)
-                    .Or.EqualTo(FeatConstants.Frequencies.Week)
-                    .Or.EqualTo(FeatConstants.Frequencies.Round)
-                    .Or.EqualTo(FeatConstants.Frequencies.Hit)
-                    .Or.Empty, feat.Name);
-
-                if (feat.Name == FeatConstants.SaveBonus)
-                    Assert.That(feat.Foci, Is.Not.Empty, character.Race.BaseRace);
-            }
-
-            Assert.That(character.Equipment.Treasure, Is.Not.Null);
-            Assert.That(character.Equipment.Treasure.Items, Is.Not.Null);
-
-            foreach (var item in character.Equipment.Treasure.Items)
-                Assert.That(item, Is.Not.Null);
-
-            foreach (var spells in character.Magic.SpellsPerDay)
-            {
-                Assert.That(spells.Level, Is.Not.Negative, spells.Level.ToString());
-                Assert.That(spells.Quantity, Is.Not.Negative, spells.Level.ToString());
-            }
-
-            Assert.That(character.Combat.BaseAttack.Bonus, Is.Not.Negative);
-            Assert.That(character.Combat.HitPoints, Is.AtLeast(character.Class.Level));
-            Assert.That(character.Combat.ArmorClass.Full, Is.Positive);
-            Assert.That(character.Combat.ArmorClass.FlatFooted, Is.Positive);
-            Assert.That(character.Combat.ArmorClass.Touch, Is.Positive);
         }
 
         [Test]
@@ -228,7 +137,7 @@ namespace CharacterGen.Tests.Integration.Stress
             var cohortScore = Random.Next(3, 26);
 
             var cohort = LeadershipGenerator.GenerateCohort(cohortScore, leaderLevel, leaderAlignment.Full, leaderClass);
-            AssertCharacter(cohort);
+            CharacterVerifier.AssertCharacter(cohort);
             Assert.That(cohort.Class.Level, Is.InRange(1, leaderLevel - 2));
         }
 
@@ -245,7 +154,7 @@ namespace CharacterGen.Tests.Integration.Stress
             var followerLevel = Random.Next(1, 7);
 
             var follower = LeadershipGenerator.GenerateFollower(followerLevel, leaderAlignment.Full, leaderClass.Name);
-            AssertCharacter(follower);
+            CharacterVerifier.AssertCharacter(follower);
             Assert.That(follower.Equipment.Treasure.Items, Is.Not.Empty);
             Assert.That(follower.Class.Level, Is.InRange(1, followerLevel));
         }
@@ -263,7 +172,7 @@ namespace CharacterGen.Tests.Integration.Stress
             var followerLevel = Random.Next(1, 7);
 
             var follower = LeadershipGenerator.GenerateFollower(followerLevel, leaderAlignment.Full, leaderClass);
-            AssertCharacter(follower);
+            CharacterVerifier.AssertCharacter(follower);
             Assert.That(follower.Class.Level, Is.InRange(1, followerLevel));
         }
     }

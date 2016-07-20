@@ -99,7 +99,12 @@ namespace CharacterGen.Domain.Generators.Combats
             combat.BaseAttack.CircumstantialBonus = IsAttackBonusCircumstantial(feats);
             combat.AdjustedDexterityBonus = GetAdjustedDexterityBonus(stats, equipment);
             combat.ArmorClass = armorClassGenerator.GenerateWith(equipment, combat.AdjustedDexterityBonus, feats, race);
-            combat.HitPoints = hitPointsGenerator.GenerateWith(characterClass, stats[StatConstants.Constitution].Bonus, race, feats);
+
+            if (stats.ContainsKey(StatConstants.Constitution))
+                combat.HitPoints = hitPointsGenerator.GenerateWith(characterClass, stats[StatConstants.Constitution].Bonus, race, feats);
+            else
+                combat.HitPoints = hitPointsGenerator.GenerateWith(characterClass, 0, race, feats);
+
             combat.SavingThrows = savingThrowsGenerator.GenerateWith(characterClass, feats, stats);
             combat.InitiativeBonus = GetInitiativeBonus(combat.AdjustedDexterityBonus, feats);
 

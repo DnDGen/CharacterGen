@@ -12,13 +12,13 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Stats
         [Inject, Named(StatsRandomizerTypeConstants.Average)]
         public IStatsRandomizer AverageStatsRandomizer { get; set; }
 
-        [TestCase("AverageStatsRandomizer")]
-        public override void Stress(string stressSubject)
+        [Test]
+        public void Stress()
         {
-            Stress();
+            Stress(AssertStats);
         }
 
-        protected override void MakeAssertions()
+        protected void AssertStats()
         {
             var stats = AverageStatsRandomizer.Randomize();
 

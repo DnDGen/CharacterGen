@@ -16,7 +16,7 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
 
         protected abstract IEnumerable<string> allowedMetaraces { get; }
 
-        protected override void MakeAssertions()
+        protected void AssertMetarace()
         {
             var metarace = GenerateMetarace();
             Assert.That(allowedMetaraces, Contains.Item(metarace));

@@ -55,10 +55,10 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
             BaseRaceRandomizer = GetNewInstanceOf<RaceRandomizer>(RaceRandomizerTypeConstants.BaseRace.NonGoodBase);
         }
 
-        [TestCase("Non-Good Base Race Randomizer")]
-        public override void Stress(string stressSubject)
+        [Test]
+        public void StressBaseRace()
         {
-            Stress();
+            Stress(AssertBaseRace);
         }
     }
 }

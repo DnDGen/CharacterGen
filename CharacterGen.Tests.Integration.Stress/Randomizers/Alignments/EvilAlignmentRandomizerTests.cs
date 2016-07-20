@@ -1,8 +1,6 @@
 ﻿using CharacterGen.Alignments;
 using CharacterGen.Randomizers.Alignments;
-using Ninject;
 using NUnit.Framework;
-using System;
 
 namespace CharacterGen.Tests.Integration.Stress.Randomizers.Alignments
 {
@@ -15,13 +13,13 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Alignments
             AlignmentRandomizer = GetNewInstanceOf<IAlignmentRandomizer>(AlignmentRandomizerTypeConstants.Evil);
         }
 
-        [TestCase("Evil Alignment Randomizer")]
-        public override void Stress(string stressSubject)
+        [Test]
+        public void StressAlignment()
         {
-            Stress();
+            Stress(AssertAlignment);
         }
 
-        protected override void MakeAssertions()
+        protected void AssertAlignment()
         {
             var alignment = AlignmentRandomizer.Randomize();
             Assert.That(alignment.Goodness, Is.EqualTo(AlignmentConstants.Evil));

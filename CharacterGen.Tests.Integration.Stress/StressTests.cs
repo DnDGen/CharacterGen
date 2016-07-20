@@ -71,13 +71,6 @@ namespace CharacterGen.Tests.Integration.Stress
             Stopwatch.Reset();
         }
 
-        public abstract void Stress(string stressSubject);
-
-        protected void Stress()
-        {
-            Stress(MakeAssertions);
-        }
-
         protected void Stress(Action makeAssertions)
         {
             do makeAssertions();
@@ -88,8 +81,6 @@ namespace CharacterGen.Tests.Integration.Stress
             if (Stopwatch.Elapsed.TotalSeconds > timeLimitInSeconds + 5)
                 Assert.Fail("Something took way too long");
         }
-
-        protected abstract void MakeAssertions();
 
         protected T Generate<T>(Func<T> generate, Func<T, bool> isValid)
         {

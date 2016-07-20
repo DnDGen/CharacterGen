@@ -97,13 +97,13 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
         public void ApplyFeatThatGrantSkillBonusesToSkills()
         {
             var skills = new Dictionary<string, Skill>();
-            skills["skill 1"] = new Skill();
+            skills["skill 1"] = new Skill(1);
             skills["skill 1"].Bonus = 1;
-            skills["skill 2"] = new Skill();
+            skills["skill 2"] = new Skill(1);
             skills["skill 2"].Bonus = 2;
-            skills["skill 3"] = new Skill();
+            skills["skill 3"] = new Skill(1);
             skills["skill 3"].Bonus = 3;
-            skills["skill 4"] = new Skill();
+            skills["skill 4"] = new Skill(1);
             skills["skill 4"].Bonus = 4;
             mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats)).Returns(skills);
 
@@ -138,11 +138,11 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
         public void IfFocusIsSkill_ApplyBonusToThatSkill()
         {
             var skills = new Dictionary<string, Skill>();
-            skills["skill 1"] = new Skill();
+            skills["skill 1"] = new Skill(1);
             skills["skill 1"].Bonus = 1;
-            skills["skill 2"] = new Skill();
+            skills["skill 2"] = new Skill(1);
             skills["skill 2"].Bonus = 2;
-            skills["skill 3"] = new Skill();
+            skills["skill 3"] = new Skill(1);
             skills["skill 3"].Bonus = 3;
             mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats)).Returns(skills);
 
@@ -176,7 +176,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
         public void OnlyApplySkillFeatToSkillsIfSkillFocusIsPurelySkill()
         {
             var skills = new Dictionary<string, Skill>();
-            skills["skill 1"] = new Skill();
+            skills["skill 1"] = new Skill(1);
             skills["skill 1"].Bonus = 1;
             mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats)).Returns(skills);
 
@@ -200,9 +200,9 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
         public void NoCircumstantialBonusIfBonusApplied()
         {
             var skills = new Dictionary<string, Skill>();
-            skills["skill 1"] = new Skill();
+            skills["skill 1"] = new Skill(1);
             skills["skill 1"].Bonus = 1;
-            skills["skill 2"] = new Skill();
+            skills["skill 2"] = new Skill(1);
             skills["skill 2"].Bonus = 2;
             mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats)).Returns(skills);
 
@@ -234,7 +234,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
         public void IfSkillBonusFocusIsNotPurelySkill_MarkSkillAsHavingCircumstantialBonus()
         {
             var skills = new Dictionary<string, Skill>();
-            skills["skill 1"] = new Skill();
+            skills["skill 1"] = new Skill(1);
             skills["skill 1"].Bonus = 1;
             mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats)).Returns(skills);
 
@@ -258,9 +258,9 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
         public void MarkSkillWithCircumstantialBonusWhenOtherFociDoNotHaveCircumstantialBonus()
         {
             var skills = new Dictionary<string, Skill>();
-            skills["skill 1"] = new Skill();
+            skills["skill 1"] = new Skill(1);
             skills["skill 1"].Bonus = 1;
-            skills["skill 2"] = new Skill();
+            skills["skill 2"] = new Skill(1);
             skills["skill 2"].Bonus = 2;
             mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats)).Returns(skills);
 
@@ -285,9 +285,9 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
         public void CircumstantialBonusIsNotOverwritten()
         {
             var skills = new Dictionary<string, Skill>();
-            skills["skill 1"] = new Skill();
+            skills["skill 1"] = new Skill(1);
             skills["skill 1"].Bonus = 1;
-            skills["skill 2"] = new Skill();
+            skills["skill 2"] = new Skill(1);
             skills["skill 2"].Bonus = 2;
             mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats)).Returns(skills);
 

@@ -18,13 +18,13 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.CharacterClasses.Cla
             ClassNameRandomizer = GetNewInstanceOf<IClassNameRandomizer>(ClassNameRandomizerTypeConstants.AnyPlayer);
         }
 
-        [TestCase("Set Class Name Randomizer")]
-        public override void Stress(string stressSubject)
+        [Test]
+        public void StressClassName()
         {
-            Stress();
+            Stress(AssertClassName);
         }
 
-        protected override void MakeAssertions()
+        protected void AssertClassName()
         {
             var alignment = GetNewAlignment();
             var characterClass = GetNewCharacterClass(alignment);

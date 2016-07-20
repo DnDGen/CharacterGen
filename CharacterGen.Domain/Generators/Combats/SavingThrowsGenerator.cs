@@ -22,15 +22,14 @@ namespace CharacterGen.Domain.Generators.Combats
         {
             var savingThrows = new SavingThrows();
 
-            savingThrows.Fortitude = stats[StatConstants.Constitution].Bonus;
+            savingThrows.HasFortitudeSave = stats.ContainsKey(StatConstants.Constitution);
+
             savingThrows.Reflex = stats[StatConstants.Dexterity].Bonus;
             savingThrows.Will = stats[StatConstants.Wisdom].Bonus;
 
-            savingThrows.Fortitude += GetClassSavingThrowBonus(characterClass, SavingThrowConstants.Fortitude);
             savingThrows.Reflex += GetClassSavingThrowBonus(characterClass, SavingThrowConstants.Reflex);
             savingThrows.Will += GetClassSavingThrowBonus(characterClass, SavingThrowConstants.Will);
 
-            savingThrows.Fortitude += GetFeatSavingThrowBonus(feats, SavingThrowConstants.Fortitude);
             savingThrows.Reflex += GetFeatSavingThrowBonus(feats, SavingThrowConstants.Reflex);
             savingThrows.Will += GetFeatSavingThrowBonus(feats, SavingThrowConstants.Will);
 
@@ -39,10 +38,22 @@ namespace CharacterGen.Domain.Generators.Combats
 
             foreach (var feat in anySavingThrowFeats)
             {
-                savingThrows.Fortitude += GetBonus(feat, SavingThrowConstants.Fortitude);
                 savingThrows.Reflex += GetBonus(feat, SavingThrowConstants.Reflex);
                 savingThrows.Will += GetBonus(feat, SavingThrowConstants.Will);
                 savingThrows.CircumstantialBonus |= HasCircumstantialBonus(feat);
+            }
+
+            if (savingThrows.HasFortitudeSave)
+            {
+                savingThrows.Fortitude = stats[StatConstants.Constitution].Bonus;
+                savingThrows.Fortitude += GetClassSavingThrowBonus(characterClass, SavingThrowConstants.Fortitude);
+                savingThrows.Fortitude += GetFeatSavingThrowBonus(feats, SavingThrowConstants.Fortitude);
+
+                foreach (var feat in anySavingThrowFeats)
+                {
+                    savingThrows.Fortitude += GetBonus(feat, SavingThrowConstants.Fortitude);
+                    savingThrows.CircumstantialBonus |= HasCircumstantialBonus(feat);
+                }
             }
 
             return savingThrows;

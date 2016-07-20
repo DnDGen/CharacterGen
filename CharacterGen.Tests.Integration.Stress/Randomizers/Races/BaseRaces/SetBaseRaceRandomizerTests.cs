@@ -17,13 +17,13 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
             ClassNameRandomizer = GetNewInstanceOf<IClassNameRandomizer>(ClassNameRandomizerTypeConstants.AnyPlayer);
         }
 
-        [TestCase("Set Base Race Randomizer")]
-        public override void Stress(string stressSubject)
+        [Test]
+        public void Stress()
         {
-            Stress();
+            Stress(AssertBaseRace);
         }
 
-        protected override void MakeAssertions()
+        protected void AssertBaseRace()
         {
             var alignment = GetNewAlignment();
             var characterClass = GetNewCharacterClass(alignment);
@@ -37,7 +37,7 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
         public void StressNPCSetBaseRace()
         {
             ClassNameRandomizer = GetNewInstanceOf<IClassNameRandomizer>(ClassNameRandomizerTypeConstants.AnyNPC);
-            Stress(MakeAssertions);
+            Stress(AssertBaseRace);
         }
     }
 }

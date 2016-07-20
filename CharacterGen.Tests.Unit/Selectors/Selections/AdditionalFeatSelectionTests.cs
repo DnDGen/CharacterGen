@@ -80,8 +80,12 @@ namespace CharacterGen.Tests.Unit.Selectors.Selections
         public void SkillRequirementsWithCrossClassSkillNotMet()
         {
             selection.RequiredSkillRanks["skill"] = 5;
-            skills["skill"] = new Skill { Ranks = 9, ClassSkill = false };
-            skills["other skill"] = new Skill { Ranks = 10, ClassSkill = false };
+            skills["skill"] = new Skill(10);
+            skills["skill"].Ranks = 9;
+            skills["skill"].ClassSkill = false;
+            skills["other skill"] = new Skill(10);
+            skills["other skill"].Ranks = 10;
+            skills["other skill"].ClassSkill = false;
 
             var met = selection.ImmutableRequirementsMet(1, stats, skills, characterClass);
             Assert.That(met, Is.False);
@@ -91,8 +95,12 @@ namespace CharacterGen.Tests.Unit.Selectors.Selections
         public void SkillRequirementsWithClassSkillNotMet()
         {
             selection.RequiredSkillRanks["skill"] = 5;
-            skills["skill"] = new Skill { Ranks = 4, ClassSkill = true };
-            skills["other skill"] = new Skill { Ranks = 5, ClassSkill = true };
+            skills["skill"] = new Skill(10);
+            skills["skill"].Ranks = 4;
+            skills["skill"].ClassSkill = true;
+            skills["other skill"] = new Skill(10);
+            skills["other skill"].Ranks = 5;
+            skills["other skill"].ClassSkill = true;
 
             var met = selection.ImmutableRequirementsMet(1, stats, skills, characterClass);
             Assert.That(met, Is.False);
@@ -103,8 +111,12 @@ namespace CharacterGen.Tests.Unit.Selectors.Selections
         {
             selection.RequiredSkillRanks["skill"] = 5;
             selection.RequiredSkillRanks["other skill"] = 1;
-            skills["skill"] = new Skill { Ranks = 4, ClassSkill = true };
-            skills["other skill"] = new Skill { Ranks = 1, ClassSkill = true };
+            skills["skill"] = new Skill(10);
+            skills["skill"].Ranks = 4;
+            skills["skill"].ClassSkill = true;
+            skills["other skill"] = new Skill(10);
+            skills["other skill"].Ranks = 1;
+            skills["other skill"].ClassSkill = true;
 
             var met = selection.ImmutableRequirementsMet(1, stats, skills, characterClass);
             Assert.That(met, Is.True);
@@ -114,7 +126,8 @@ namespace CharacterGen.Tests.Unit.Selectors.Selections
         public void MeetSkillRequirementOf0Ranks()
         {
             selection.RequiredSkillRanks["skill"] = 0;
-            skills["skill"] = new Skill { Ranks = 0, ClassSkill = false };
+            skills["skill"] = new Skill(10);
+            skills["skill"].ClassSkill = false;
 
             var met = selection.ImmutableRequirementsMet(1, stats, skills, characterClass);
             Assert.That(met, Is.True);
@@ -155,10 +168,18 @@ namespace CharacterGen.Tests.Unit.Selectors.Selections
 
             selection.RequiredSkillRanks["class skill"] = 5;
             selection.RequiredSkillRanks["cross-class skill"] = 5;
-            skills["class skill"] = new Skill { Ranks = 10, ClassSkill = false };
-            skills["other class skill"] = new Skill { Ranks = 9, ClassSkill = false };
-            skills["cross-class skill"] = new Skill { Ranks = 5, ClassSkill = true };
-            skills["other cross-class skill"] = new Skill { Ranks = 4, ClassSkill = true };
+            skills["class skill"] = new Skill(10);
+            skills["class skill"].Ranks = 10;
+            skills["class skill"].ClassSkill = false;
+            skills["other class skill"] = new Skill(10);
+            skills["other class skill"].Ranks = 9;
+            skills["other class skill"].ClassSkill = false;
+            skills["cross-class skill"] = new Skill(10);
+            skills["cross-class skill"].Ranks = 5;
+            skills["cross-class skill"].ClassSkill = true;
+            skills["other cross-class skill"] = new Skill(10);
+            skills["other cross-class skill"].Ranks = 4;
+            skills["other cross-class skill"].ClassSkill = true;
 
             selection.RequiredCharacterClasses["class name"] = 1;
             characterClass.Name = "class name";

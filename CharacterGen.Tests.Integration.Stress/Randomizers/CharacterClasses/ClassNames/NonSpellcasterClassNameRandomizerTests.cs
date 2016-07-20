@@ -28,10 +28,10 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.CharacterClasses.Cla
             ClassNameRandomizer = GetNewInstanceOf<IClassNameRandomizer>(ClassNameRandomizerTypeConstants.NonSpellcaster);
         }
 
-        [TestCase("Non-Spellcaster Class Name Randomizer")]
-        public override void Stress(string stressSubject)
+        [Test]
+        public void StressClassName()
         {
-            Stress();
+            Stress(AssertClassName);
         }
     }
 }
