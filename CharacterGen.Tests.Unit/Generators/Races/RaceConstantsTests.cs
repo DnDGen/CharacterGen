@@ -1,6 +1,5 @@
 ﻿using CharacterGen.Races;
 using NUnit.Framework;
-using System;
 
 namespace CharacterGen.Tests.Unit.Common.Races
 {
@@ -167,7 +166,7 @@ namespace CharacterGen.Tests.Unit.Common.Races
         [TestCase(RaceConstants.Ages.MiddleAge, "Middle Age")]
         [TestCase(RaceConstants.Ages.Old, "Old")]
         [TestCase(RaceConstants.Ages.Venerable, "Venerable")]
-        public void Constant(String constant, String value)
+        public void Constant(string constant, string value)
         {
             Assert.That(constant, Is.EqualTo(value));
         }

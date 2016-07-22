@@ -1,5 +1,6 @@
-﻿using CharacterGen.Races;
+﻿using CharacterGen.CharacterClasses;
 using CharacterGen.Domain.Tables;
+using CharacterGen.Races;
 using NUnit.Framework;
 
 namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Ages.Rolls
@@ -9,7 +10,7 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Ages.Rolls
     {
         protected override string tableName
         {
-            get { return string.Format(TableNameConstants.Formattable.Collection.CLASSTYPEAgeRolls, GroupConstants.Trained); }
+            get { return string.Format(TableNameConstants.Formattable.Collection.CLASSTYPEAgeRolls, CharacterClassConstants.TrainingTypes.Trained); }
         }
 
         [Test]

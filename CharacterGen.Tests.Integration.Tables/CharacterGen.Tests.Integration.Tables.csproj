@@ -686,6 +686,7 @@
     <Compile Include="Races\BaseRaces\Ages\OrcAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\RockGnomeAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\Rolls\IntuitiveAgeRollsTests.cs" />
+    <Compile Include="Races\BaseRaces\Ages\Rolls\MaximumAgeRollsTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\Rolls\SelfTaughtAgeRollsTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\Rolls\TrainedAgeRollsTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\SvirfneblinAgesTests.cs" />

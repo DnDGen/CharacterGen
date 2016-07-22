@@ -1,6 +1,5 @@
 ﻿using CharacterGen.Domain.Tables;
 using NUnit.Framework;
-using System;
 
 namespace CharacterGen.Tests.Unit.Tables
 {
@@ -25,7 +24,6 @@ namespace CharacterGen.Tests.Unit.Tables
         [TestCase(GroupConstants.HasStatRequirements, "Has Stat Requirements")]
         [TestCase(GroupConstants.Healers, "Healers")]
         [TestCase(GroupConstants.Initiative, "Initiative")]
-        [TestCase(GroupConstants.Intuitive, "Intuitive")]
         [TestCase(GroupConstants.Knowledge, "Knowledge")]
         [TestCase(GroupConstants.Lycanthrope, "Lycanthrope")]
         [TestCase(GroupConstants.Mages, "Mages")]
@@ -40,19 +38,17 @@ namespace CharacterGen.Tests.Unit.Tables
         [TestCase(GroupConstants.Proficiency, "Proficiency")]
         [TestCase(GroupConstants.SavingThrows, "Saving Throws")]
         [TestCase(GroupConstants.SchoolsOfMagic, "Schools of Magic")]
-        [TestCase(GroupConstants.SelfTaught, "Self-Taught")]
         [TestCase(GroupConstants.Size, "Size")]
         [TestCase(GroupConstants.Skills, "Skills")]
         [TestCase(GroupConstants.Spellcasters, "Spellcasters")]
         [TestCase(GroupConstants.Standard, "Standard")]
         [TestCase(GroupConstants.Stealth, "Stealth")]
         [TestCase(GroupConstants.TakenMultipleTimes, "Taken Multiple Times")]
-        [TestCase(GroupConstants.Trained, "Trained")]
         [TestCase(GroupConstants.TwoHanded, "Two-Handed")]
         [TestCase(GroupConstants.Undead, "Undead")]
         [TestCase(GroupConstants.Warriors, "Warriors")]
         [TestCase(GroupConstants.WizardBonusFeats, "Wizard Bonus Feats")]
-        public void Constant(String constant, String value)
+        public void Constant(string constant, string value)
         {
             Assert.That(constant, Is.EqualTo(value));
         }

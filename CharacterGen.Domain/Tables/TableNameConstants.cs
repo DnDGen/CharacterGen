@@ -43,6 +43,7 @@
                 public const string FeatGroups = "FeatGroups";
                 public const string HeightRolls = "HeightRolls";
                 public const string ItemGroups = "ItemGroups";
+                public const string MaximumAgeRolls = "MaximumAgeRolls";
                 public const string MetaraceGroups = "MetaraceGroups";
                 public const string Names = "Names";
                 public const string ProhibitedFields = "ProhibitedFields";

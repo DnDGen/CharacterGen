@@ -56,5 +56,12 @@
             public const string Necromancy = "Necromancy";
             public const string Transmutation = "Transmutation";
         }
+
+        public static class TrainingTypes
+        {
+            public const string Intuitive = "Intuitive";
+            public const string SelfTaught = "Self-Taught";
+            public const string Trained = "Trained";
+        }
     }
 }

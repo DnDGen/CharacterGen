@@ -19,6 +19,7 @@ namespace CharacterGen.Tests.Unit.Common.Races
         {
             Assert.That(age.Years, Is.EqualTo(0));
             Assert.That(age.Stage, Is.Empty);
+            Assert.That(age.Maximum, Is.EqualTo(0));
         }
     }
 }

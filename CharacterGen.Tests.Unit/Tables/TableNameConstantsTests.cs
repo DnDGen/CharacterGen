@@ -39,6 +39,7 @@ namespace CharacterGen.Tests.Unit.Tables
         [TestCase(TableNameConstants.Set.Collection.FeatFoci, "FeatFoci")]
         [TestCase(TableNameConstants.Set.Collection.HeightRolls, "HeightRolls")]
         [TestCase(TableNameConstants.Set.Collection.ItemGroups, "ItemGroups")]
+        [TestCase(TableNameConstants.Set.Collection.MaximumAgeRolls, "MaximumAgeRolls")]
         [TestCase(TableNameConstants.Set.Collection.MetaraceGroups, "MetaraceGroups")]
         [TestCase(TableNameConstants.Set.Collection.Names, "Names")]
         [TestCase(TableNameConstants.Set.Collection.ProhibitedFields, "ProhibitedFields")]

@@ -4,6 +4,7 @@
     {
         public int Years { get; set; }
         public string Stage { get; set; }
+        public int Maximum { get; set; }
 
         public Age()
         {

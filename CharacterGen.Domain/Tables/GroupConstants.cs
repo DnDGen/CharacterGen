@@ -20,7 +20,6 @@
         public const string HasStatRequirements = "Has Stat Requirements";
         public const string Healers = "Healers";
         public const string Initiative = "Initiative";
-        public const string Intuitive = "Intuitive";
         public const string Knowledge = "Knowledge";
         public const string Lycanthrope = "Lycanthrope";
         public const string Mages = "Mages";
@@ -35,14 +34,12 @@
         public const string Proficiency = "Proficiency";
         public const string SavingThrows = "Saving Throws";
         public const string SchoolsOfMagic = "Schools of Magic";
-        public const string SelfTaught = "Self-Taught";
         public const string Size = "Size";
         public const string Skills = "Skills";
         public const string Spellcasters = "Spellcasters";
         public const string Standard = "Standard";
         public const string Stealth = "Stealth";
         public const string TakenMultipleTimes = "Taken Multiple Times";
-        public const string Trained = "Trained";
         public const string TwoHanded = "Two-Handed";
         public const string Undead = "Undead";
         public const string Warriors = "Warriors";

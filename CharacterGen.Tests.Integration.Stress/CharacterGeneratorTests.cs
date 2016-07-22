@@ -188,6 +188,9 @@ namespace CharacterGen.Tests.Integration.Stress
 
             CharacterVerifier.AssertCharacter(character);
             Assert.That(character.Equipment.Treasure.Items, Is.Not.Empty);
+            Assert.That(character.Race.Metarace, Is.Not.Empty);
+            Assert.That(character.Race.Metarace, Is.Not.EqualTo(RaceConstants.Metaraces.None));
+            Assert.That(character.Race.Metarace, Is.EqualTo(setMetaraceRandomizer.SetMetarace));
         }
 
         [Test]
@@ -215,6 +218,10 @@ namespace CharacterGen.Tests.Integration.Stress
 
             CharacterVerifier.AssertCharacter(character);
             Assert.That(character.Equipment.Treasure.Items, Is.Not.Empty);
+            Assert.That(character.Race.Metarace, Is.Not.Empty);
+            Assert.That(character.Race.Metarace, Is.Not.EqualTo(RaceConstants.Metaraces.None));
+            Assert.That(character.Race.Metarace, Is.EqualTo(setMetaraceRandomizer.SetMetarace));
+            Assert.That(character.Class.Level, Is.InRange(1, setLevelRandomizer.SetLevel - 1));
         }
 
         [Test]
@@ -266,6 +273,10 @@ namespace CharacterGen.Tests.Integration.Stress
 
             CharacterVerifier.AssertCharacter(character);
             Assert.That(character.Equipment.Treasure.Items, Is.Not.Empty);
+            Assert.That(character.Race.Metarace, Is.Not.Empty);
+            Assert.That(character.Race.Metarace, Is.Not.EqualTo(RaceConstants.Metaraces.None));
+            Assert.That(character.Race.Metarace, Is.EqualTo(setMetaraceRandomizer.SetMetarace));
+            Assert.That(character.Class.Level, Is.EqualTo(setLevelRandomizer.SetLevel));
         }
 
         [Test]

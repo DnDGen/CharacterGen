@@ -1,6 +1,5 @@
 ﻿using CharacterGen.CharacterClasses;
 using NUnit.Framework;
-using System;
 
 namespace CharacterGen.Tests.Unit.Common.Classes
 {
@@ -53,7 +52,10 @@ namespace CharacterGen.Tests.Unit.Common.Classes
         [TestCase(CharacterClassConstants.Schools.Illusion, "Illusion")]
         [TestCase(CharacterClassConstants.Schools.Necromancy, "Necromancy")]
         [TestCase(CharacterClassConstants.Schools.Transmutation, "Transmutation")]
-        public void Constant(String constant, String value)
+        [TestCase(CharacterClassConstants.TrainingTypes.Intuitive, "Intuitive")]
+        [TestCase(CharacterClassConstants.TrainingTypes.SelfTaught, "Self-Taught")]
+        [TestCase(CharacterClassConstants.TrainingTypes.Trained, "Trained")]
+        public void Constant(string constant, string value)
         {
             Assert.That(constant, Is.EqualTo(value));
         }
