@@ -26,7 +26,6 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
         private List<string> classSkills;
         private List<string> crossClassSkills;
         private Mock<ISkillSelector> mockSkillSelector;
-        private Stat intelligence;
         private Dictionary<string, int> skillPoints;
         private Race race;
         private List<string> specialistSkills;
@@ -45,7 +44,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
             stats = new Dictionary<string, Stat>();
             classSkills = new List<string>();
             crossClassSkills = new List<string>();
-            intelligence = new Stat { Value = 10 };
+            stats[StatConstants.Intelligence] = new Stat(StatConstants.Intelligence);
             race = new Race();
             specialistSkills = new List<string>();
             allSkills = new List<string>();
@@ -58,7 +57,6 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.CrossClassSkills, "class name")).Returns(crossClassSkills);
             var selection = new SkillSelection { BaseStatName = StatConstants.Intelligence };
             mockSkillSelector.Setup(s => s.SelectFor(It.IsAny<string>())).Returns(selection);
-            stats[StatConstants.Intelligence] = intelligence;
 
             var emptyAdjustments = new Dictionary<string, int>();
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(It.IsAny<string>())).Returns(emptyAdjustments);
@@ -143,7 +141,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
             skillPoints[characterClass.Name] = 0;
             classSkills.Add("skill 1");
             classSkills.Add("skill 2");
-            intelligence.Value = 12;
+            stats[StatConstants.Intelligence].Value = 12;
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
             Assert.That(skills["skill 1"].Ranks, Is.EqualTo(points));
@@ -250,9 +248,9 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
             mockSkillSelector.Setup(s => s.SelectFor("cross class skill")).Returns(crossClassSkillSelection);
             mockSkillSelector.Setup(s => s.SelectFor("specialist skill")).Returns(specialistSkillSelection);
 
-            stats["stat 1"] = new Stat();
-            stats["stat 2"] = new Stat();
-            stats["stat 3"] = new Stat();
+            stats["stat 1"] = new Stat("stat 1");
+            stats["stat 2"] = new Stat("stat 2");
+            stats["stat 3"] = new Stat("stat 3");
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
             Assert.That(skills["class skill"].BaseStat, Is.EqualTo(stats["stat 1"]));
@@ -709,7 +707,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
             var cap = level + 3;
             characterClass.Level = level;
             skillPoints[characterClass.Name] = 2;
-            intelligence.Value = 12;
+            stats[StatConstants.Intelligence].Value = 12;
             race.BaseRace = RaceConstants.BaseRaces.Human;
             classSkills.Add("skill 1");
             classSkills.Add("skill 2");
@@ -759,7 +757,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
             classSkills.Add("skill 1");
             classSkills.Add("class skill");
             crossClassSkills.Add("skill 2");
-            intelligence.Value = 10;
+            stats[StatConstants.Intelligence].Value = 10;
 
             mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
                 .Returns(true);
@@ -792,7 +790,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
 
             characterClass.Level = 20;
             skillPoints[characterClass.Name] = 0;
-            intelligence.Value = 10;
+            stats[StatConstants.Intelligence].Value = 10;
 
             var monsterClassSkills = new List<string>();
             monsterClassSkills.Add("skill 1");
@@ -822,7 +820,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
             skillPoints[characterClass.Name] = 0;
             classSkills.Add("skill 1");
             crossClassSkills.Add("skill 2");
-            intelligence.Value = 10;
+            stats[StatConstants.Intelligence].Value = 10;
 
             mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
                 .Returns(true);
@@ -863,7 +861,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
             classSkills.Add("skill 1");
             classSkills.Add("class skill");
             crossClassSkills.Add("skill 2");
-            intelligence.Value = 12;
+            stats[StatConstants.Intelligence].Value = 12;
 
             mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
                 .Returns(true);
@@ -905,7 +903,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
 
             characterClass.Level = 1;
             skillPoints[characterClass.Name] = 0;
-            intelligence.Value = -600;
+            stats[StatConstants.Intelligence].Value = -600;
 
             var monsterClassSkills = new List<string>();
             monsterClassSkills.Add("skill 1");
@@ -945,7 +943,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
         public void CannotHaveFewerThan1SkillPointPerLevel(int level)
         {
             race.BaseRace = "baserace";
-            intelligence.Value = -9266;
+            stats[StatConstants.Intelligence].Value = -9266;
             characterClass.Level = level;
             skillPoints[characterClass.Name] = 1;
             classSkills.Add("skill 1");
@@ -1119,7 +1117,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
 
             characterClass.Level = 20;
             skillPoints[characterClass.Name] = 0;
-            intelligence.Value = 10;
+            stats[StatConstants.Intelligence].Value = 10;
 
             var monsterClassSkills = new List<string>();
             monsterClassSkills.Add("skill 1");

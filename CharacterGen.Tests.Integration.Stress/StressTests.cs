@@ -79,7 +79,7 @@ namespace CharacterGen.Tests.Integration.Stress
             Console.WriteLine($"Stress test complete after {Stopwatch.Elapsed} and {iterations} iterations");
 
             if (Stopwatch.Elapsed.TotalSeconds > timeLimitInSeconds + 5)
-                Assert.Fail("Something took way too long");
+                Assert.Fail($"Something took way too long after {Stopwatch.Elapsed} and {iterations} iterations");
         }
 
         protected T Generate<T>(Func<T> generate, Func<T, bool> isValid)
@@ -102,7 +102,7 @@ namespace CharacterGen.Tests.Integration.Stress
             Console.WriteLine($"Generation complete after {Stopwatch.Elapsed} and {iterations} iterations");
 
             if (TestShouldKeepRunning() == false && isValid(generatedObject) == false)
-                Assert.Fail("Stress test timed out.");
+                Assert.Fail($"Generation timed out after {Stopwatch.Elapsed} and {iterations} iterations");
 
             return generatedObject;
         }

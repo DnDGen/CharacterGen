@@ -43,12 +43,12 @@ namespace CharacterGen.Domain.Generators.Randomizers.Stats
         {
             var stats = new Dictionary<string, Stat>();
 
-            stats[StatConstants.Charisma] = new Stat();
-            stats[StatConstants.Constitution] = new Stat();
-            stats[StatConstants.Dexterity] = new Stat();
-            stats[StatConstants.Intelligence] = new Stat();
-            stats[StatConstants.Strength] = new Stat();
-            stats[StatConstants.Wisdom] = new Stat();
+            stats[StatConstants.Charisma] = new Stat(StatConstants.Charisma);
+            stats[StatConstants.Constitution] = new Stat(StatConstants.Constitution);
+            stats[StatConstants.Dexterity] = new Stat(StatConstants.Dexterity);
+            stats[StatConstants.Intelligence] = new Stat(StatConstants.Intelligence);
+            stats[StatConstants.Strength] = new Stat(StatConstants.Strength);
+            stats[StatConstants.Wisdom] = new Stat(StatConstants.Wisdom);
 
             return stats;
         }

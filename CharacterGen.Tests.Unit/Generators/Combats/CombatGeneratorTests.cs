@@ -61,8 +61,10 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
 
             characterClass.Name = "class name";
             characterClass.Level = 20;
-            stats[StatConstants.Constitution] = new Stat { Value = 9266 };
-            stats[StatConstants.Dexterity] = new Stat { Value = 42 };
+            stats[StatConstants.Constitution] = new Stat(StatConstants.Constitution);
+            stats[StatConstants.Constitution].Value = 9266;
+            stats[StatConstants.Dexterity] = new Stat(StatConstants.Dexterity);
+            stats[StatConstants.Dexterity].Value = 42;
             racialBaseAttackAdjustments[string.Empty] = 0;
             maxDexterityBonuses[string.Empty] = 42;
             averageBaseAttacks.Add("other class name");

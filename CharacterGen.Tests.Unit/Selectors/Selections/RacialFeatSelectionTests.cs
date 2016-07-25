@@ -20,7 +20,8 @@ namespace CharacterGen.Tests.Unit.Selectors.Selections
             race = new Race();
             stats = new Dictionary<string, Stat>();
 
-            stats["stat"] = new Stat { Value = 42 };
+            stats["stat"] = new Stat("stat");
+            stats["stat"].Value = 42;
         }
 
         [Test]
@@ -111,7 +112,8 @@ namespace CharacterGen.Tests.Unit.Selectors.Selections
             selection.MinimumStats["stat"] = 9266;
             selection.MinimumStats["stat 2"] = 600;
 
-            stats["stat 2"] = new Stat { Value = 600 };
+            stats["stat 2"] = new Stat("stat 2");
+            stats["stat 2"].Value = 600;
 
             var met = selection.RequirementsMet(race, 4, stats);
             Assert.That(met, Is.True);

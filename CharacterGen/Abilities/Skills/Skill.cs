@@ -5,7 +5,9 @@ namespace CharacterGen.Abilities.Skills
 {
     public class Skill
     {
-        public Stat BaseStat { get; set; }
+        public readonly string Name;
+        public readonly Stat BaseStat;
+
         public int Bonus { get; set; }
         public bool ClassSkill { get; set; }
         public int ArmorCheckPenalty { get; set; }
@@ -56,8 +58,10 @@ namespace CharacterGen.Abilities.Skills
             }
         }
 
-        public Skill(int rankCap)
+        public Skill(string name, Stat baseStat, int rankCap)
         {
+            Name = name;
+            BaseStat = baseStat;
             RankCap = rankCap;
         }
     }

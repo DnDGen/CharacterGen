@@ -36,7 +36,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             classFeatsGenerator = new ClassFeatsGenerator(mockFeatsSelector.Object, mockFeatFocusGenerator.Object, mockCollectionsSelector.Object);
             characterClass = new CharacterClass();
             stats = new Dictionary<string, Stat>();
-            stats[StatConstants.Intelligence] = new Stat();
+            stats[StatConstants.Intelligence] = new Stat(StatConstants.Intelligence);
             classFeatSelections = new Dictionary<string, List<CharacterClassFeatSelection>>();
             racialFeats = new List<Feat>();
             skills = new Dictionary<string, Skill>();
@@ -263,7 +263,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             AddClassFeat(characterClass.Name, "feat1", frequencyQuantity: 1);
             classFeatSelections[characterClass.Name][0].FrequencyQuantityStat = "stat";
 
-            stats["stat"] = new Stat();
+            stats["stat"] = new Stat("stat");
             stats["stat"].Value = 15;
 
             var feats = classFeatsGenerator.GenerateWith(characterClass, race, stats, racialFeats, skills);
@@ -277,7 +277,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             AddClassFeat(characterClass.Name, "feat1", frequencyQuantity: 1);
             classFeatSelections[characterClass.Name][0].FrequencyQuantityStat = "stat";
 
-            stats["stat"] = new Stat();
+            stats["stat"] = new Stat("stat");
             stats["stat"].Value = 1;
 
             var feats = classFeatsGenerator.GenerateWith(characterClass, race, stats, racialFeats, skills);

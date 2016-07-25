@@ -46,7 +46,8 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             race.BaseRace = "base race";
             race.Metarace = "metarace";
             race.MetaraceSpecies = "metarace species";
-            stats["stat"] = new Stat { Value = 14 };
+            stats["stat"] = new Stat("stat");
+            stats["stat"].Value = 14;
 
             mockFeatsSelector.Setup(s => s.SelectRacial("base race")).Returns(baseRaceFeats);
             mockFeatsSelector.Setup(s => s.SelectRacial("metarace")).Returns(metaraceFeats);

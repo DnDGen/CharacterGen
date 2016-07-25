@@ -1,5 +1,6 @@
 ﻿using CharacterGen.Abilities.Feats;
 using CharacterGen.Abilities.Skills;
+using CharacterGen.Abilities.Stats;
 using CharacterGen.CharacterClasses;
 using CharacterGen.Domain.Generators.Abilities.Feats;
 using CharacterGen.Domain.Selectors.Collections;
@@ -296,8 +297,9 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             focusTypes["focus type"] = new[] { "skill 1", "skill 2" };
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.Skills)).Returns(new[] { "skill 1", "skill 2", "skill 3" });
 
-            skills["skill 2"] = new Skill(1);
-            skills["skill 3"] = new Skill(1);
+            var stat = new Stat("stat");
+            skills["skill 2"] = new Skill("skill 2", stat, 1);
+            skills["skill 3"] = new Skill("skill 3", stat, 1);
 
             var focus = featFocusGenerator.GenerateFrom("featToFill", "focus type", skills);
             Assert.That(focus, Is.EqualTo("skill 2"));
@@ -309,7 +311,8 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             focusTypes["focus type"] = new[] { "skill 1" };
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.Skills)).Returns(new[] { "skill 1", "skill 2" });
 
-            skills["skill 2"] = new Skill(1);
+            var stat = new Stat("stat");
+            skills["skill 2"] = new Skill("skill 2", stat, 1);
 
             var focus = featFocusGenerator.GenerateFrom("featToFill", "focus type", skills);
             Assert.That(focus, Is.EqualTo(FeatConstants.Foci.All));
@@ -492,8 +495,9 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             focusTypes["focus type"] = new[] { "skill 1", "skill 2" };
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.Skills)).Returns(new[] { "skill 1", "skill 2", "skill 3" });
 
-            skills["skill 2"] = new Skill(1);
-            skills["skill 3"] = new Skill(1);
+            var stat = new Stat("stat");
+            skills["skill 2"] = new Skill("skill 2", stat, 1);
+            skills["skill 3"] = new Skill("skill 3", stat, 1);
 
             var focus = featFocusGenerator.GenerateFrom("featId", "focus type", skills, requiredFeats, otherFeats, characterClass);
             Assert.That(focus, Is.EqualTo("skill 2"));
@@ -505,7 +509,8 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             focusTypes["focus type"] = new[] { "skill 1" };
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.Skills)).Returns(new[] { "skill 1", "skill 2" });
 
-            skills["skill 2"] = new Skill(1);
+            var stat = new Stat("stat");
+            skills["skill 2"] = new Skill("skill 2", stat, 1);
 
             var focus = featFocusGenerator.GenerateFrom("featId", "focus type", skills, requiredFeats, otherFeats, characterClass);
             Assert.That(focus, Is.EqualTo(FeatConstants.Foci.All));

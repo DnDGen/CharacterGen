@@ -43,9 +43,9 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             strongReflex = new List<string>();
             strongWill = new List<string>();
 
-            stats[StatConstants.Constitution] = new Stat { Value = 10 };
-            stats[StatConstants.Dexterity] = new Stat { Value = 10 };
-            stats[StatConstants.Wisdom] = new Stat { Value = 10 };
+            stats[StatConstants.Constitution] = new Stat(StatConstants.Constitution);
+            stats[StatConstants.Dexterity] = new Stat(StatConstants.Dexterity);
+            stats[StatConstants.Wisdom] = new Stat(StatConstants.Wisdom);
             characterClass.Name = "class name";
             characterClass.Level = 600;
             allSaveFeats.Add("other feat");

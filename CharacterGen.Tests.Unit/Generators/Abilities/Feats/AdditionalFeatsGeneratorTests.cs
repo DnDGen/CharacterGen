@@ -49,7 +49,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             skills = new Dictionary<string, Skill>();
             additionalFeatSelections = new List<AdditionalFeatSelection>();
             baseAttack = new BaseAttack();
-            stats[StatConstants.Intelligence] = new Stat();
+            stats[StatConstants.Intelligence] = new Stat(StatConstants.Intelligence);
             preselectedFeats = new List<Feat>();
             fighterBonusFeats = new List<string>();
             wizardBonusFeats = new List<string>();
@@ -720,7 +720,6 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             additionalFeatSelections[0].Feat = FeatConstants.SkillMastery;
             additionalFeatSelections[0].Power = 1;
             additionalFeatSelections[0].FocusType = GroupConstants.Skills;
-            stats[StatConstants.Intelligence].Value = 10;
             characterClass.Level = 3;
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TakenMultipleTimes))
@@ -748,7 +747,6 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             additionalFeatSelections[0].Feat = FeatConstants.SkillMastery;
             additionalFeatSelections[0].Power = 1;
             additionalFeatSelections[0].FocusType = GroupConstants.Skills;
-            stats[StatConstants.Intelligence].Value = 10;
             characterClass.Level = 3;
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TakenMultipleTimes))
@@ -774,7 +772,6 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             additionalFeatSelections[0].Feat = FeatConstants.SkillMastery;
             additionalFeatSelections[0].Power = 1;
             additionalFeatSelections[0].FocusType = GroupConstants.Skills;
-            stats[StatConstants.Intelligence].Value = 10;
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TakenMultipleTimes))
                 .Returns(new[] { FeatConstants.SkillMastery });
@@ -793,7 +790,6 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             additionalFeatSelections[0].Feat = FeatConstants.SkillMastery;
             additionalFeatSelections[0].Power = 1;
             additionalFeatSelections[0].FocusType = GroupConstants.Skills;
-            stats[StatConstants.Intelligence].Value = 10;
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TakenMultipleTimes))
                 .Returns(new[] { FeatConstants.SkillMastery });

@@ -52,8 +52,10 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
             spellsPerDayForClass["1"] = 42;
             spellsKnownForClass["0"] = 2;
             spellsKnownForClass["1"] = 1;
-            stats["stat"] = new Stat { Value = 11 };
-            stats["other stat"] = new Stat { Value = 11 };
+            stats["stat"] = new Stat("stat");
+            stats["stat"].Value = 11;
+            stats["other stat"] = new Stat("other stat");
+            stats["other stat"].Value = 11;
             classSpells.Add("spell 1");
             classSpells.Add("spell 2");
             classSpells.Add("spell 3");

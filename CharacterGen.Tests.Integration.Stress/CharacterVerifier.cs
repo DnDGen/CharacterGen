@@ -58,16 +58,22 @@ namespace CharacterGen.Tests.Integration.Stress
             Assert.That(character.Ability.Stats.Keys, Contains.Item(StatConstants.Strength));
             Assert.That(character.Ability.Stats.Keys, Contains.Item(StatConstants.Wisdom));
 
-            foreach (var stat in character.Ability.Stats.Values)
+            foreach (var statKVP in character.Ability.Stats)
             {
+                var stat = statKVP.Value;
+                Assert.That(stat.Name, Is.EqualTo(statKVP.Key));
                 Assert.That(stat.Value, Is.Positive);
             }
 
             Assert.That(character.Ability.Languages, Is.Not.Empty);
             Assert.That(character.Ability.Skills, Is.Not.Empty);
 
-            foreach (var skill in character.Ability.Skills)
-                Assert.That(skill.Value.ArmorCheckPenalty, Is.AtMost(0));
+            foreach (var skillKVP in character.Ability.Skills)
+            {
+                var skill = skillKVP.Value;
+                Assert.That(skill.Name, Is.EqualTo(skillKVP.Key));
+                Assert.That(skill.ArmorCheckPenalty, Is.Not.Positive);
+            }
 
             Assert.That(character.Ability.Feats, Is.Not.Empty);
 

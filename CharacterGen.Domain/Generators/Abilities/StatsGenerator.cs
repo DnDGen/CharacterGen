@@ -94,9 +94,9 @@ namespace CharacterGen.Domain.Generators.Abilities
 
         private Dictionary<string, Stat> SwapStat(Dictionary<string, Stat> stats, string priorityStat, string otherStat)
         {
-            var temp = stats[otherStat];
-            stats[otherStat] = stats[priorityStat];
-            stats[priorityStat] = temp;
+            var temp = stats[otherStat].Value;
+            stats[otherStat].Value = stats[priorityStat].Value;
+            stats[priorityStat].Value = temp;
 
             return stats;
         }

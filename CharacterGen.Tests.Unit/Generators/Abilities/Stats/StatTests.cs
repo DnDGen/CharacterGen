@@ -1,6 +1,6 @@
-﻿using System;
-using CharacterGen.Abilities.Stats;
+﻿using CharacterGen.Abilities.Stats;
 using NUnit.Framework;
+using System;
 
 namespace CharacterGen.Tests.Unit.Common.Abilities.Stats
 {
@@ -12,13 +12,14 @@ namespace CharacterGen.Tests.Unit.Common.Abilities.Stats
         [SetUp]
         public void Setup()
         {
-            stat = new Stat();
+            stat = new Stat("stat name");
         }
 
         [Test]
         public void StatInitialized()
         {
-            Assert.That(stat.Value, Is.EqualTo(0));
+            Assert.That(stat.Name, Is.EqualTo("stat name"));
+            Assert.That(stat.Value, Is.EqualTo(10));
         }
 
         [TestCase(1, -5)]

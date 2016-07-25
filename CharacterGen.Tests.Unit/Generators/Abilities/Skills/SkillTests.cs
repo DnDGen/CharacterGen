@@ -1,4 +1,5 @@
 ﻿using CharacterGen.Abilities.Skills;
+using CharacterGen.Abilities.Stats;
 using NUnit.Framework;
 
 namespace CharacterGen.Tests.Unit.Common.Abilities.Skills
@@ -7,17 +8,20 @@ namespace CharacterGen.Tests.Unit.Common.Abilities.Skills
     public class SkillTests
     {
         private Skill skill;
+        private Stat baseStat;
 
         [SetUp]
         public void Setup()
         {
-            skill = new Skill(90210);
+            baseStat = new Stat("base stat");
+            skill = new Skill("skill name", baseStat, 90210);
         }
 
         [Test]
         public void SkillInitialized()
         {
-            Assert.That(skill.BaseStat, Is.Null);
+            Assert.That(skill.Name, Is.EqualTo("skill name"));
+            Assert.That(skill.BaseStat, Is.EqualTo(baseStat));
             Assert.That(skill.ArmorCheckPenalty, Is.EqualTo(0));
             Assert.That(skill.ClassSkill, Is.False);
             Assert.That(skill.Bonus, Is.EqualTo(0));

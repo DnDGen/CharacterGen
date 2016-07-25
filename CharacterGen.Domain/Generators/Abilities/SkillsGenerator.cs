@@ -85,8 +85,7 @@ namespace CharacterGen.Domain.Generators.Abilities
                     if (stats.ContainsKey(selection.BaseStatName) == false)
                         continue;
 
-                    skills[monsterSkill] = new Skill(0);
-                    skills[monsterSkill].BaseStat = stats[selection.BaseStatName];
+                    skills[monsterSkill] = new Skill(monsterSkill, stats[selection.BaseStatName], 0);
                 }
 
                 skills[monsterSkill].RankCap += monsterHitDice[race.BaseRace] + 3;
@@ -118,9 +117,8 @@ namespace CharacterGen.Domain.Generators.Abilities
                 if (stats.ContainsKey(skillSelection.BaseStatName) == false)
                     continue;
 
-                skills[skillName] = new Skill(characterClass.Level + 3);
+                skills[skillName] = new Skill(skillName, stats[skillSelection.BaseStatName], characterClass.Level + 3);
                 skills[skillName].ClassSkill = classSkills.Contains(skillName);
-                skills[skillName].BaseStat = stats[skillSelection.BaseStatName];
             }
 
             return skills;

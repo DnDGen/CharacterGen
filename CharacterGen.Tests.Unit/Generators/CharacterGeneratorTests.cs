@@ -144,6 +144,7 @@ namespace CharacterGen.Tests.Unit.Generators
             race.BaseRace = BaseRace;
             race.Metarace = RaceConstants.Metaraces.None;
             ability.Feats = feats;
+            ability.Stats["stat"] = new Stat("stat");
 
             mockCombatGenerator.Setup(g => g.GenerateBaseAttackWith(It.IsAny<CharacterClass>(), It.IsAny<Race>())).Returns(() => new BaseAttack());
             mockTreasureGenerator.Setup(g => g.GenerateWith(It.IsAny<IEnumerable<Feat>>(), It.IsAny<CharacterClass>(), It.IsAny<Race>())).Returns(() => new Equipment());
@@ -360,8 +361,8 @@ namespace CharacterGen.Tests.Unit.Generators
             armorCheckPenalties["armor"] = -9266;
             armorCheckPenalties["other armor"] = -90210;
 
-            ability.Skills["skill"] = new Skill(1);
-            ability.Skills["other skill"] = new Skill(1);
+            ability.Skills["skill"] = new Skill("skill", ability.Stats["stat"], 1);
+            ability.Skills["other skill"] = new Skill("other skill", ability.Stats["stat"], 1);
 
             var armorCheckSkills = new[] { "other skill", "different skill" };
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.ArmorCheckPenalty)).Returns(armorCheckSkills);
@@ -384,8 +385,8 @@ namespace CharacterGen.Tests.Unit.Generators
             armorCheckPenalties["armor"] = -9266;
             armorCheckPenalties["other armor"] = -90210;
 
-            ability.Skills["skill"] = new Skill(1);
-            ability.Skills["other skill"] = new Skill(1);
+            ability.Skills["skill"] = new Skill("skill", ability.Stats["stat"], 1);
+            ability.Skills["other skill"] = new Skill("other skill", ability.Stats["stat"], 1);
 
             var armorCheckSkills = new[] { "other skill", "different skill" };
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.ArmorCheckPenalty)).Returns(armorCheckSkills);
@@ -406,8 +407,8 @@ namespace CharacterGen.Tests.Unit.Generators
             armorCheckPenalties["shield"] = -9266;
             armorCheckPenalties["other shield"] = -90210;
 
-            ability.Skills["skill"] = new Skill(1);
-            ability.Skills["other skill"] = new Skill(1);
+            ability.Skills["skill"] = new Skill("skill", ability.Stats["stat"], 1);
+            ability.Skills["other skill"] = new Skill("other skill", ability.Stats["stat"], 1);
 
             var armorCheckSkills = new[] { "other skill", "different skill" };
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.ArmorCheckPenalty)).Returns(armorCheckSkills);
@@ -431,8 +432,8 @@ namespace CharacterGen.Tests.Unit.Generators
             armorCheckPenalties["shield"] = -9266;
             armorCheckPenalties["other shield"] = -90210;
 
-            ability.Skills["skill"] = new Skill(1);
-            ability.Skills["other skill"] = new Skill(1);
+            ability.Skills["skill"] = new Skill("skill", ability.Stats["stat"], 1);
+            ability.Skills["other skill"] = new Skill("other skill", ability.Stats["stat"], 1);
 
             var armorCheckSkills = new[] { "other skill", "different skill" };
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.ArmorCheckPenalty)).Returns(armorCheckSkills);
@@ -457,8 +458,8 @@ namespace CharacterGen.Tests.Unit.Generators
             armorCheckPenalties["armor"] = -42;
             armorCheckPenalties["other armor"] = -600;
 
-            ability.Skills["skill"] = new Skill(1);
-            ability.Skills["other skill"] = new Skill(1);
+            ability.Skills["skill"] = new Skill("skill", ability.Stats["stat"], 1);
+            ability.Skills["other skill"] = new Skill("other skill", ability.Stats["stat"], 1);
 
             var armorCheckSkills = new[] { "other skill", "different skill" };
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.ArmorCheckPenalty)).Returns(armorCheckSkills);
@@ -485,8 +486,8 @@ namespace CharacterGen.Tests.Unit.Generators
             armorCheckPenalties["armor"] = -42;
             armorCheckPenalties["darkwood"] = 2;
 
-            ability.Skills["skill"] = new Skill(1);
-            ability.Skills["other skill"] = new Skill(1);
+            ability.Skills["skill"] = new Skill("skill", ability.Stats["stat"], 1);
+            ability.Skills["other skill"] = new Skill("other skill", ability.Stats["stat"], 1);
 
             var armorCheckSkills = new[] { "other skill", "different skill" };
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.ArmorCheckPenalty)).Returns(armorCheckSkills);
@@ -513,8 +514,8 @@ namespace CharacterGen.Tests.Unit.Generators
             armorCheckPenalties["shield"] = -9266;
             armorCheckPenalties["mithral"] = 90210;
 
-            ability.Skills["skill"] = new Skill(1);
-            ability.Skills["other skill"] = new Skill(1);
+            ability.Skills["skill"] = new Skill("skill", ability.Stats["stat"], 1);
+            ability.Skills["other skill"] = new Skill("other skill", ability.Stats["stat"], 1);
 
             var armorCheckSkills = new[] { "other skill", "different skill" };
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.ArmorCheckPenalty)).Returns(armorCheckSkills);
@@ -541,9 +542,9 @@ namespace CharacterGen.Tests.Unit.Generators
             armorCheckPenalties["armor"] = -42;
             armorCheckPenalties["other armor"] = -600;
 
-            ability.Skills["skill"] = new Skill(1);
-            ability.Skills["other skill"] = new Skill(1);
-            ability.Skills[SkillConstants.Swim] = new Skill(1);
+            ability.Skills["skill"] = new Skill("skill", ability.Stats["stat"], 1);
+            ability.Skills["other skill"] = new Skill("other skill", ability.Stats["stat"], 1);
+            ability.Skills[SkillConstants.Swim] = new Skill(SkillConstants.Swim, ability.Stats["stat"], 1);
 
             var armorCheckSkills = new[] { "other skill", "different skill", SkillConstants.Swim };
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.ArmorCheckPenalty)).Returns(armorCheckSkills);
@@ -573,9 +574,9 @@ namespace CharacterGen.Tests.Unit.Generators
             armorCheckPenalties["mithral"] = 1;
             armorCheckPenalties["darkwood"] = 2;
 
-            ability.Skills["skill"] = new Skill(1);
-            ability.Skills["other skill"] = new Skill(1);
-            ability.Skills[SkillConstants.Swim] = new Skill(1);
+            ability.Skills["skill"] = new Skill("skill", ability.Stats["stat"], 1);
+            ability.Skills["other skill"] = new Skill("other skill", ability.Stats["stat"], 1);
+            ability.Skills[SkillConstants.Swim] = new Skill(SkillConstants.Swim, ability.Stats["stat"], 1);
 
             var armorCheckSkills = new[] { "other skill", "different skill", SkillConstants.Swim };
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.ArmorCheckPenalty)).Returns(armorCheckSkills);
@@ -602,9 +603,9 @@ namespace CharacterGen.Tests.Unit.Generators
             var armorCheckPenalties = new Dictionary<string, int>();
             armorCheckPenalties[ArmorConstants.PlateArmorOfTheDeep] = -6;
 
-            ability.Skills["skill"] = new Skill(1);
-            ability.Skills["other skill"] = new Skill(1);
-            ability.Skills[SkillConstants.Swim] = new Skill(1);
+            ability.Skills["skill"] = new Skill("skill", ability.Stats["stat"], 1);
+            ability.Skills["other skill"] = new Skill("other skill", ability.Stats["stat"], 1);
+            ability.Skills[SkillConstants.Swim] = new Skill(SkillConstants.Swim, ability.Stats["stat"], 1);
 
             var armorCheckSkills = new[] { "other skill", "different skill", SkillConstants.Swim };
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.ArmorCheckPenalty)).Returns(armorCheckSkills);
