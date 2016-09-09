@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>CharacterGen</id>
+    <version>6.0.0</version>
+    <title>CharacterGen</title>
+    <authors>Karl M. Speer</authors>
+    <owners>cidthecoatrack</owners>
+    <description>
+      This generates characters for the Dungeons and Dragons 3.5 system.  One can generate characters at random or within certain parameters.  Characters are equipped.
+    </description>
+    <releaseNotes>
+      Bug #87, Features #86, #88
+    </releaseNotes>
+    <summary>
+      This generates characters for the Dungeons and Dragons 3.5 system.
+    </summary>
+    <language>en-US</language>
+    <projectUrl>https://github.com/DnDGen/CharacterGen</projectUrl>
+    <iconUrl>http://www.downloadclipart.net/thumb/18531-twenty-sided-dice-vector-thumb.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <licenseUrl>http://opensource.org/licenses/Apache-2.0</licenseUrl>
+    <copyright>Copyright 2016</copyright>
+    <dependencies>
+    </dependencies>
+    <references></references>
+    <tags> npc character equipment treasure generator dice dungeons dragons d20 dnd 3.5 gen </tags>
+  </metadata>
+  <files>
+    <file src="..\CharacterGen\bin\Debug\CharacterGen.dll" target="lib" />
+  </files>
+</package>

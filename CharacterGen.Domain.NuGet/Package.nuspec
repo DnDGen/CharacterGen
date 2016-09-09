@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>CharacterGen.Domain</id>
+    <version>6.0.0</version>
+    <title>CharacterGen.Domain</title>
+    <authors>Karl M. Speer</authors>
+    <owners>cidthecoatrack</owners>
+    <description>
+      This is a Ninject-based bootstrapper for CharacterGen
+    </description>
+    <releaseNotes>
+      Bug #87, Features #86, #88
+    </releaseNotes>
+    <summary>
+      This is a Ninject-based bootstrapper for CharacterGen
+    </summary>
+    <language>en-US</language>
+    <projectUrl>https://github.com/DnDGen/CharacterGen</projectUrl>
+    <iconUrl>http://www.downloadclipart.net/thumb/18531-twenty-sided-dice-vector-thumb.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <licenseUrl>http://opensource.org/licenses/Apache-2.0</licenseUrl>
+    <copyright>Copyright 2016</copyright>
+    <dependencies>
+    </dependencies>
+    <references></references>
+    <tags> npc character equipment treasure generator dice dungeons dragons d20 dnd 3.5 gen ninject ioc domain</tags>
+  </metadata>
+  <files>
+    <file src="..\CharacterGen.Domain\bin\Debug\CharacterGen.Domain.dll" target="lib" />
+  </files>
+</package>
