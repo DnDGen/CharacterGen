@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>CharacterGen</id>
-    <version>6.0.1</version>
+    <version>7.0.0</version>
     <title>CharacterGen</title>
     <authors>Karl M. Speer</authors>
     <owners>cidthecoatrack</owners>
@@ -10,7 +10,7 @@
       This generates characters for the Dungeons and Dragons 3.5 system.  One can generate characters at random or within certain parameters.  Characters are equipped.
     </description>
     <releaseNotes>
-      Bug #87, Features #86, #88
+      Updated TreasureGen to 5.0.0
     </releaseNotes>
     <summary>
       This generates characters for the Dungeons and Dragons 3.5 system.
