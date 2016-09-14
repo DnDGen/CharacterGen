@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+  <object>
+    <name>Colossal</name>
+    <item>-8</item>
+  </object>
+  <object>
+    <name>Gargantuan</name>
+    <item>-4</item>
+  </object>
+  <object>
+    <name>Huge</name>
+    <item>-2</item>
+  </object>
+  <object>
+    <name>Large</name>
+    <item>-1</item>
+  </object>
+  <object>
+    <name>Medium</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Small</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Tiny</name>
+    <item>2</item>
+  </object>
+</items>

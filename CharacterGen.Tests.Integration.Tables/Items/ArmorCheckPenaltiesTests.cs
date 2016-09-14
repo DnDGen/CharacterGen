@@ -1,6 +1,5 @@
 ﻿using CharacterGen.Domain.Tables;
 using NUnit.Framework;
-using System;
 using TreasureGen.Items;
 
 namespace CharacterGen.Tests.Integration.Tables.Items
@@ -52,9 +51,9 @@ namespace CharacterGen.Tests.Integration.Tables.Items
                 ArmorConstants.SpinedShield,
                 ArmorConstants.TowerShield,
                 ArmorConstants.WingedShield,
-                TraitConstants.Adamantine,
-                TraitConstants.Darkwood,
-                TraitConstants.Mithral
+                TraitConstants.SpecialMaterials.Adamantine,
+                TraitConstants.SpecialMaterials.Darkwood,
+                TraitConstants.SpecialMaterials.Mithral
             };
 
             AssertCollectionNames(names);
@@ -94,9 +93,9 @@ namespace CharacterGen.Tests.Integration.Tables.Items
         [TestCase(ArmorConstants.SpinedShield, -2)]
         [TestCase(ArmorConstants.TowerShield, -10)]
         [TestCase(ArmorConstants.WingedShield, -2)]
-        [TestCase(TraitConstants.Adamantine, 1)]
-        [TestCase(TraitConstants.Darkwood, 2)]
-        [TestCase(TraitConstants.Mithral, 3)]
+        [TestCase(TraitConstants.SpecialMaterials.Adamantine, 1)]
+        [TestCase(TraitConstants.SpecialMaterials.Darkwood, 2)]
+        [TestCase(TraitConstants.SpecialMaterials.Mithral, 3)]
         public override void Adjustment(string name, int adjustment)
         {
             base.Adjustment(name, adjustment);

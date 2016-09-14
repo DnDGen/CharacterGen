@@ -87,9 +87,10 @@ namespace CharacterGen.Domain.Generators
 
             character.Class.SpecialistFields = characterClassGenerator.RegenerateSpecialistFields(character.Alignment, character.Class, character.Race);
 
-            var baseAttack = combatGenerator.GenerateBaseAttackWith(character.Class, character.Race);
+            var stats = abilitiesGenerator.GenerateStats(character.Class, character.Race, statsRandomizer);
+            var baseAttack = combatGenerator.GenerateBaseAttackWith(character.Class, character.Race, stats);
 
-            character.Ability = abilitiesGenerator.GenerateWith(character.Class, character.Race, statsRandomizer, baseAttack);
+            character.Ability = abilitiesGenerator.GenerateWith(character.Class, character.Race, stats, baseAttack);
             character.Equipment = equipmentGenerator.GenerateWith(character.Ability.Feats, character.Class, character.Race);
 
             var armorCheckPenaltySkills = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.ArmorCheckPenalty);

@@ -31,12 +31,13 @@ namespace CharacterGen.Domain.Generators.Combats
             this.collectionsSelector = collectionsSelector;
         }
 
-        public BaseAttack GenerateBaseAttackWith(CharacterClass characterClass, Race race)
+        public BaseAttack GenerateBaseAttackWith(CharacterClass characterClass, Race race, Dictionary<string, Stat> stats)
         {
             var baseAttack = new BaseAttack();
-            baseAttack.Bonus = GetBaseAttackBonus(characterClass);
-            baseAttack.Bonus += GetRacialBaseAttackAdjustments(race);
-            baseAttack.Bonus += GetSizeAdjustments(race);
+            baseAttack.BaseBonus = GetBaseAttackBonus(characterClass) + GetRacialBaseAttackAdjustments(race);
+            baseAttack.SizeModifier = GetSizeAdjustments(race);
+            baseAttack.StrengthBonus = stats[StatConstants.Strength].Bonus;
+            baseAttack.DexterityBonus = stats[StatConstants.Dexterity].Bonus;
 
             return baseAttack;
         }
@@ -82,12 +83,8 @@ namespace CharacterGen.Domain.Generators.Combats
 
         private int GetSizeAdjustments(Race race)
         {
-            if (race.Size == RaceConstants.Sizes.Large)
-                return -1;
-            else if (race.Size == RaceConstants.Sizes.Small)
-                return 1;
-
-            return 0;
+            var sizeModifiers = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.SizeModifiers);
+            return sizeModifiers[race.Size];
         }
 
         public Combat GenerateWith(BaseAttack baseAttack, CharacterClass characterClass, Race race, IEnumerable<Feat> feats, Dictionary<String, Stat> stats, Equipment equipment)
@@ -95,7 +92,7 @@ namespace CharacterGen.Domain.Generators.Combats
             var combat = new Combat();
 
             combat.BaseAttack = baseAttack;
-            combat.BaseAttack.Bonus += GetBonusFromFeats(feats);
+            combat.BaseAttack.BaseBonus += GetBonusFromFeats(feats);
             combat.BaseAttack.CircumstantialBonus = IsAttackBonusCircumstantial(feats);
             combat.AdjustedDexterityBonus = GetAdjustedDexterityBonus(stats, equipment);
             combat.ArmorClass = armorClassGenerator.GenerateWith(equipment, combat.AdjustedDexterityBonus, feats, race);
@@ -138,7 +135,7 @@ namespace CharacterGen.Domain.Generators.Combats
             var maxDexterityBonuses = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.MaxDexterityBonus);
             var armorBonus = maxDexterityBonuses[equipment.Armor.Name];
 
-            if (equipment.Armor.Traits.Contains(TraitConstants.Mithral))
+            if (equipment.Armor.Traits.Contains(TraitConstants.SpecialMaterials.Mithral))
                 armorBonus += 2;
 
             return Math.Min(stats[StatConstants.Dexterity].Bonus, armorBonus);

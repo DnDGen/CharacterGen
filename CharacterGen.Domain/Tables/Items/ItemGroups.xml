@@ -80,43 +80,13 @@
       <item>Club</item>
     </object>
     <object>
-        <name>Composite (+0) longbow</name>
+        <name>Composite longbow</name>
       <item>Longbow</item>
       <item>Arrow</item>
     </object>
     <object>
-        <name>Composite (+0) shortbow</name>
+        <name>Composite shortbow</name>
       <item>Shortbow</item>
-      <item>Arrow</item>
-    </object>
-    <object>
-        <name>Composite (+1) longbow</name>
-      <item>Longbow</item>
-      <item>Arrow</item>
-    </object>
-    <object>
-        <name>Composite (+1) shortbow</name>
-      <item>Shortbow</item>
-      <item>Arrow</item>
-    </object>
-    <object>
-        <name>Composite (+2) longbow</name>
-      <item>Longbow</item>
-      <item>Arrow</item>
-    </object>
-    <object>
-        <name>Composite (+2) shortbow</name>
-      <item>Shortbow</item>
-      <item>Arrow</item>
-    </object>
-    <object>
-        <name>Composite (+3) longbow</name>
-      <item>Longbow</item>
-      <item>Arrow</item>
-    </object>
-    <object>
-        <name>Composite (+4) longbow</name>
-      <item>Longbow</item>
       <item>Arrow</item>
     </object>
     <object>

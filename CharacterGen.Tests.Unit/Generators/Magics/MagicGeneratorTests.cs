@@ -326,7 +326,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         {
             equipment.Armor = new Item();
             equipment.Armor.Name = "armor";
-            equipment.Armor.Traits.Add(TraitConstants.Mithral);
+            equipment.Armor.Traits.Add(TraitConstants.SpecialMaterials.Mithral);
             arcaneSpellFailures[equipment.Armor.Name] = 9266;
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, SpellConstants.Sources.Arcane)).Returns(new[] { characterClass.Name });
@@ -340,7 +340,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         {
             equipment.Armor = new Item();
             equipment.Armor.Name = "armor";
-            equipment.Armor.Traits.Add(TraitConstants.Mithral);
+            equipment.Armor.Traits.Add(TraitConstants.SpecialMaterials.Mithral);
             arcaneSpellFailures[equipment.Armor.Name] = 5;
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, SpellConstants.Sources.Arcane)).Returns(new[] { characterClass.Name });
@@ -356,7 +356,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
             equipment.OffHand.Name = "shield";
             equipment.OffHand.ItemType = ItemTypeConstants.Armor;
             equipment.OffHand.Attributes = new[] { AttributeConstants.Shield };
-            equipment.OffHand.Traits.Add(TraitConstants.Mithral);
+            equipment.OffHand.Traits.Add(TraitConstants.SpecialMaterials.Mithral);
             arcaneSpellFailures[equipment.OffHand.Name] = 9266;
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, SpellConstants.Sources.Arcane)).Returns(new[] { characterClass.Name });
@@ -372,7 +372,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
             equipment.OffHand.Name = "shield";
             equipment.OffHand.ItemType = ItemTypeConstants.Armor;
             equipment.OffHand.Attributes = new[] { AttributeConstants.Shield };
-            equipment.OffHand.Traits.Add(TraitConstants.Mithral);
+            equipment.OffHand.Traits.Add(TraitConstants.SpecialMaterials.Mithral);
             arcaneSpellFailures[equipment.OffHand.Name] = 5;
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, SpellConstants.Sources.Arcane)).Returns(new[] { characterClass.Name });

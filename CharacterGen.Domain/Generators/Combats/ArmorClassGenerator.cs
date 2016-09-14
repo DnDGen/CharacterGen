@@ -25,16 +25,14 @@ namespace CharacterGen.Domain.Generators.Combats
 
         public ArmorClass GenerateWith(Equipment equipment, int adjustedDexterityBonus, IEnumerable<Feat> feats, Race race)
         {
-            var armorBonuses = GetArmorBonus(equipment);
-            var sizeModifier = GetSizeModifier(race);
-            var deflectionBonus = GetDeflectionBonus(equipment.Treasure.Items);
-            var naturalArmorBonus = GetNaturalArmorBonus(equipment.Treasure.Items, feats, race);
-            var dodgeBonus = GetDodgeBonus(feats);
-
             var armorClass = new ArmorClass();
-            armorClass.Full = 10 + armorBonuses + sizeModifier + deflectionBonus + naturalArmorBonus + adjustedDexterityBonus + dodgeBonus;
-            armorClass.Touch = armorClass.Full - armorBonuses - naturalArmorBonus;
-            armorClass.FlatFooted = armorClass.Full - adjustedDexterityBonus - dodgeBonus;
+            armorClass.AdjustedDexterityBonus = adjustedDexterityBonus;
+            armorClass.ArmorBonus = GetArmorBonus(equipment);
+            armorClass.DeflectionBonus = GetDeflectionBonus(equipment.Treasure.Items);
+            armorClass.DodgeBonus = GetDodgeBonus(feats);
+            armorClass.NaturalArmorBonus = GetNaturalArmorBonus(equipment.Treasure.Items, feats, race);
+            armorClass.ShieldBonus = GetShieldBonus(equipment);
+            armorClass.SizeModifier = GetSizeModifier(race);
 
             var circumstantialDodgeBonus = IsDodgeBonusCircumstantial(feats);
             var circumstantialNaturalArmorBonus = IsNaturalArmorBonusCircumstantial(feats);
@@ -71,39 +69,38 @@ namespace CharacterGen.Domain.Generators.Combats
             return featsWithDeflectionBonuses.Sum(i => i.Power);
         }
 
-        private int GetArmorBonus(Equipment equipment)
+        private int GetShieldBonus(Equipment equipment)
         {
-            var armorBonuses = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.ArmorBonuses);
-
-            var armorBonus = GetArmorBonus(equipment, armorBonuses);
             var shieldBonus = 0;
 
             if (equipment.OffHand != null && equipment.OffHand.ItemType == ItemTypeConstants.Armor && equipment.OffHand.Attributes.Contains(AttributeConstants.Shield))
-                shieldBonus += GetTotalBonus(equipment.OffHand, armorBonuses);
+                shieldBonus += GetTotalItemArmorBonus(equipment.OffHand);
 
-            return armorBonus + shieldBonus;
+            return shieldBonus;
         }
 
-        private int GetArmorBonus(Equipment equipment, Dictionary<string, int> armorBonuses)
+        private int GetArmorBonus(Equipment equipment)
         {
-            var armorItemBonus = 0;
+            var armorBonus = 0;
 
             if (equipment.Armor != null)
-                armorItemBonus += GetTotalBonus(equipment.Armor, armorBonuses);
+                armorBonus += GetTotalItemArmorBonus(equipment.Armor);
 
             var itemNamesGrantingArmorBonuses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.ArmorBonus);
             var itemsGrantingArmorBonus = equipment.Treasure.Items.Where(i => itemNamesGrantingArmorBonuses.Contains(i.Name));
 
             if (itemsGrantingArmorBonus.Any() == false)
-                return armorItemBonus;
+                return armorBonus;
 
-            var maxItemArmorBonus = itemsGrantingArmorBonus.Max(i => i.Magic.Bonus);
+            var maxArmorBonus = itemsGrantingArmorBonus.Max(i => i.Magic.Bonus);
 
-            return Math.Max(armorItemBonus, maxItemArmorBonus);
+            return Math.Max(armorBonus, maxArmorBonus);
         }
 
-        private int GetTotalBonus(Item item, Dictionary<string, int> armorBonuses)
+        private int GetTotalItemArmorBonus(Item item)
         {
+            var armorBonuses = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.ArmorBonuses);
+
             if (item.Magic.Curse == CurseConstants.OppositeEffect)
                 return armorBonuses[item.Name] - item.Magic.Bonus;
             else if (item.Magic.Curse == CurseConstants.Delusion)
@@ -114,12 +111,8 @@ namespace CharacterGen.Domain.Generators.Combats
 
         private int GetSizeModifier(Race race)
         {
-            if (race.Size == RaceConstants.Sizes.Large)
-                return -1;
-            else if (race.Size == RaceConstants.Sizes.Small)
-                return 1;
-
-            return 0;
+            var sizeModifiers = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.SizeModifiers);
+            return sizeModifiers[race.Size];
         }
 
         private int GetDeflectionBonus(IEnumerable<Item> items)

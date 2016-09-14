@@ -1,4 +1,5 @@
 ﻿using CharacterGen.Abilities.Feats;
+using CharacterGen.Combats;
 using CharacterGen.Domain.Generators.Combats;
 using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Tables;
@@ -24,6 +25,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
         private Dictionary<string, int> armorBonuses;
         private Race race;
+        private Dictionary<string, int> sizeModifiers;
 
         [SetUp]
         public void Setup()
@@ -34,32 +36,41 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             equipment = new Equipment();
             feats = new List<Feat>();
             armorBonuses = new Dictionary<string, int>();
+            sizeModifiers = new Dictionary<string, int>();
             adjustedDexterityBonus = 0;
             race = new Race();
 
             armorBonuses[string.Empty] = 0;
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.ArmorBonuses)).Returns(armorBonuses);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.SizeModifiers)).Returns(sizeModifiers);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.Size))
                 .Returns(Enumerable.Empty<string>());
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.NaturalArmor))
                 .Returns(Enumerable.Empty<string>());
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.Deflection))
                 .Returns(Enumerable.Empty<string>());
+
+            race.Size = "size";
+            sizeModifiers["size"] = 0;
+            sizeModifiers["other size"] = 0;
         }
 
         [Test]
-        public void ArmorClassesStartsAt10()
+        public void ArmorClassesStartsAtBase()
         {
-            AssertArmorClass(10, 10, 10);
+            GenerateAndAssertArmorClass();
         }
 
-        private void AssertArmorClass(int flatFooted, int full, int touch, bool circumstantial = false)
+        private ArmorClass GenerateAndAssertArmorClass(int full = ArmorClass.BaseArmorClass, int flatFooted = ArmorClass.BaseArmorClass, int touch = ArmorClass.BaseArmorClass, bool circumstantial = false)
         {
             var armorClass = armorClassGenerator.GenerateWith(equipment, adjustedDexterityBonus, feats, race);
-            Assert.That(armorClass.FlatFooted, Is.EqualTo(flatFooted), "flat-footed");
             Assert.That(armorClass.Full, Is.EqualTo(full), "full");
+            Assert.That(armorClass.FlatFooted, Is.EqualTo(flatFooted), "flat-footed");
             Assert.That(armorClass.Touch, Is.EqualTo(touch), "touch");
             Assert.That(armorClass.CircumstantialBonus, Is.EqualTo(circumstantial));
+            Assert.That(armorClass.AdjustedDexterityBonus, Is.EqualTo(adjustedDexterityBonus));
+
+            return armorClass;
         }
 
         [Test]
@@ -69,7 +80,8 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             armorBonuses["other armor"] = -1;
             equipment.Armor = new Item { Name = "armor" };
 
-            AssertArmorClass(11, 11, 10);
+            var armorClass = GenerateAndAssertArmorClass(11, 11);
+            Assert.That(armorClass.ArmorBonus, Is.EqualTo(1));
         }
 
         [Test]
@@ -81,7 +93,8 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             equipment.OffHand.ItemType = ItemTypeConstants.Armor;
             equipment.OffHand.Attributes = new[] { AttributeConstants.Shield };
 
-            AssertArmorClass(11, 11, 10);
+            var armorClass = GenerateAndAssertArmorClass(11, 11);
+            Assert.That(armorClass.ShieldBonus, Is.EqualTo(1));
         }
 
         [Test]
@@ -93,7 +106,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             equipment.PrimaryHand.ItemType = ItemTypeConstants.Armor;
             equipment.PrimaryHand.Attributes = new[] { AttributeConstants.Shield };
 
-            AssertArmorClass(10, 10, 10);
+            GenerateAndAssertArmorClass();
         }
 
         [Test]
@@ -112,7 +125,8 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
 
             equipment.Treasure.Items = new[] { bracers, thing };
 
-            AssertArmorClass(11, 11, 10);
+            var armorClass = GenerateAndAssertArmorClass(11, 11);
+            Assert.That(armorClass.ArmorBonus, Is.EqualTo(1));
         }
 
         [Test]
@@ -134,7 +148,8 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
 
             equipment.Treasure.Items = new[] { bracers, thing };
 
-            AssertArmorClass(12, 12, 10);
+            var armorClass = GenerateAndAssertArmorClass(12, 12);
+            Assert.That(armorClass.ArmorBonus, Is.EqualTo(2));
         }
 
         [Test]
@@ -157,7 +172,8 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
 
             equipment.Treasure.Items = new[] { bracers, thing };
 
-            AssertArmorClass(12, 12, 10);
+            var armorClass = GenerateAndAssertArmorClass(12, 12);
+            Assert.That(armorClass.ArmorBonus, Is.EqualTo(2));
         }
 
         [Test]
@@ -179,7 +195,8 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
 
             equipment.Treasure.Items = new[] { bracers, thing };
 
-            AssertArmorClass(12, 12, 10);
+            var armorClass = GenerateAndAssertArmorClass(12, 12);
+            Assert.That(armorClass.ArmorBonus, Is.EqualTo(2));
         }
 
         [Test]
@@ -206,21 +223,25 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
 
             equipment.Treasure.Items = new[] { bracers, thing };
 
-            AssertArmorClass(13, 13, 10);
+            var armorClass = GenerateAndAssertArmorClass(13, 13);
+            Assert.That(armorClass.ArmorBonus, Is.EqualTo(2));
+            Assert.That(armorClass.ShieldBonus, Is.EqualTo(1));
         }
 
         [Test]
         public void DexterityBonusApplied()
         {
             adjustedDexterityBonus = 1;
-            AssertArmorClass(10, 11, 11);
+            var armorClass = GenerateAndAssertArmorClass(11, touch: 11);
+            Assert.That(armorClass.AdjustedDexterityBonus, Is.EqualTo(1));
         }
 
         [Test]
         public void NegativeDexterityBonusApplied()
         {
             adjustedDexterityBonus = -1;
-            AssertArmorClass(10, 9, 9);
+            var armorClass = GenerateAndAssertArmorClass(9, touch: 9);
+            Assert.That(armorClass.AdjustedDexterityBonus, Is.EqualTo(-1));
         }
 
         [Test]
@@ -230,7 +251,8 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             equipment.Armor = new Item { Name = "armor" };
             equipment.Armor.Magic.Bonus = 1;
 
-            AssertArmorClass(11, 11, 10);
+            var armorClass = GenerateAndAssertArmorClass(11, 11);
+            Assert.That(armorClass.ArmorBonus, Is.EqualTo(1));
         }
 
         [Test]
@@ -242,7 +264,8 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             equipment.OffHand.Attributes = new[] { AttributeConstants.Shield };
             equipment.OffHand.Magic.Bonus = 1;
 
-            AssertArmorClass(11, 11, 10);
+            var armorClass = GenerateAndAssertArmorClass(11, 11);
+            Assert.That(armorClass.ShieldBonus, Is.EqualTo(1));
         }
 
         [Test]
@@ -252,7 +275,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             equipment.OffHand.ItemType = "not armor";
             equipment.OffHand.Magic.Bonus = 1;
 
-            AssertArmorClass(10, 10, 10);
+            GenerateAndAssertArmorClass();
         }
 
         [Test]
@@ -261,7 +284,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             equipment.PrimaryHand = new Item();
             equipment.PrimaryHand.Magic.Bonus = 1;
 
-            AssertArmorClass(10, 10, 10);
+            GenerateAndAssertArmorClass();
         }
 
         [Test]
@@ -280,7 +303,8 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
 
             equipment.Treasure.Items = new[] { ring, thing };
 
-            AssertArmorClass(11, 11, 11);
+            var armorClass = GenerateAndAssertArmorClass(11, 11, 11);
+            Assert.That(armorClass.DeflectionBonus, Is.EqualTo(1));
         }
 
         [Test]
@@ -299,7 +323,8 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
 
             equipment.Treasure.Items = new[] { ring, otherRing };
 
-            AssertArmorClass(12, 12, 12);
+            var armorClass = GenerateAndAssertArmorClass(12, 12, 12);
+            Assert.That(armorClass.DeflectionBonus, Is.EqualTo(2));
         }
 
         [Test]
@@ -318,7 +343,8 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
 
             equipment.Treasure.Items = new[] { ring, otherRing };
 
-            AssertArmorClass(11, 11, 11);
+            var armorClass = GenerateAndAssertArmorClass(11, 11, 11);
+            Assert.That(armorClass.DeflectionBonus, Is.EqualTo(1));
         }
 
         [Test]
@@ -334,7 +360,8 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.NaturalArmor))
                 .Returns(new[] { "feat 1", "feat 2", "other feat" });
 
-            AssertArmorClass(12, 12, 10);
+            var armorClass = GenerateAndAssertArmorClass(12, 12);
+            Assert.That(armorClass.NaturalArmorBonus, Is.EqualTo(2));
         }
 
         [Test]
@@ -351,7 +378,8 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.NaturalArmor))
                 .Returns(new[] { "feat 1", "feat 2", "other feat" });
 
-            AssertArmorClass(11, 11, 10, true);
+            var armorClass = GenerateAndAssertArmorClass(11, 11, circumstantial: true);
+            Assert.That(armorClass.NaturalArmorBonus, Is.EqualTo(1));
         }
 
         [Test]
@@ -368,7 +396,8 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.NaturalArmor))
                 .Returns(new[] { "feat 1", "feat 2", "other feat" });
 
-            AssertArmorClass(11, 11, 10, true);
+            var armorClass = GenerateAndAssertArmorClass(11, 11, circumstantial: true);
+            Assert.That(armorClass.NaturalArmorBonus, Is.EqualTo(1));
         }
 
         [Test]
@@ -384,7 +413,8 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.DodgeBonus))
                 .Returns(new[] { "feat 1", "feat 2", "other feat" });
 
-            AssertArmorClass(10, 12, 12);
+            var armorClass = GenerateAndAssertArmorClass(12, touch: 12);
+            Assert.That(armorClass.DodgeBonus, Is.EqualTo(2));
         }
 
         [Test]
@@ -401,7 +431,8 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.DodgeBonus))
                 .Returns(new[] { "feat 1", "feat 2", "other feat" });
 
-            AssertArmorClass(10, 11, 11, true);
+            var armorClass = GenerateAndAssertArmorClass(11, touch: 11, circumstantial: true);
+            Assert.That(armorClass.DodgeBonus, Is.EqualTo(1));
         }
 
         [Test]
@@ -421,7 +452,8 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.DodgeBonus))
                 .Returns(new[] { "feat 2", "other feat" });
 
-            AssertArmorClass(10, 11, 11, true);
+            var armorClass = GenerateAndAssertArmorClass(11, touch: 11, circumstantial: true);
+            Assert.That(armorClass.DodgeBonus, Is.EqualTo(1));
         }
 
         [Test]
@@ -440,7 +472,8 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
 
             equipment.Treasure.Items = new[] { ring, thing };
 
-            AssertArmorClass(11, 11, 10);
+            var armorClass = GenerateAndAssertArmorClass(11, 11);
+            Assert.That(armorClass.NaturalArmorBonus, Is.EqualTo(1));
         }
 
         [Test]
@@ -459,7 +492,8 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
 
             equipment.Treasure.Items = new[] { ring, otherRing };
 
-            AssertArmorClass(12, 12, 10);
+            var armorClass = GenerateAndAssertArmorClass(12, 12, 10);
+            Assert.That(armorClass.NaturalArmorBonus, Is.EqualTo(2));
         }
 
         [Test]
@@ -485,21 +519,28 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
 
             equipment.Treasure.Items = new[] { ring, otherRing };
 
-            AssertArmorClass(14, 14, 10);
+            var armorClass = GenerateAndAssertArmorClass(14, 14, 10);
+            Assert.That(armorClass.NaturalArmorBonus, Is.EqualTo(4));
         }
 
         [Test]
-        public void LargeCreaturesAreMinusOneOnArmorClass()
+        public void SizeModifiesArmorClass()
         {
-            race.Size = RaceConstants.Sizes.Large;
-            AssertArmorClass(9, 9, 9);
+            sizeModifiers["size"] = 9266;
+            sizeModifiers["other size"] = 90210;
+
+            var armorClass = GenerateAndAssertArmorClass(9276, 9276, 9276);
+            Assert.That(armorClass.SizeModifier, Is.EqualTo(9266));
         }
 
         [Test]
-        public void SmallCreaturesArePlusOneOnArmorClass()
+        public void SizeModifiesArmorClassNegatively()
         {
-            race.Size = RaceConstants.Sizes.Small;
-            AssertArmorClass(11, 11, 11);
+            sizeModifiers["size"] = -4;
+            sizeModifiers["other size"] = -2;
+
+            var armorClass = GenerateAndAssertArmorClass(6, 6, 6);
+            Assert.That(armorClass.SizeModifier, Is.EqualTo(-4));
         }
 
         [Test]
@@ -514,10 +555,17 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             feat.Power = 1;
             feats.Add(feat);
 
+            var otherFeat = new Feat();
+            otherFeat.Name = "feat 2";
+            otherFeat.Power = 1;
+            feats.Add(otherFeat);
+
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.Deflection))
                 .Returns(new[] { "ring" });
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.NaturalArmor))
                 .Returns(new[] { "feat 1" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.DodgeBonus))
+                .Returns(new[] { "feat 2" });
 
             equipment.Armor = new Item { Name = "armor" };
             equipment.Armor.Magic.Bonus = 1;
@@ -532,9 +580,15 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
 
             equipment.Treasure.Items = new[] { ring };
 
-            race.Size = RaceConstants.Sizes.Small;
+            sizeModifiers[race.Size] = 1;
 
-            AssertArmorClass(17, 18, 13);
+            var armorClass = GenerateAndAssertArmorClass(19, 17, 14);
+            Assert.That(armorClass.ArmorBonus, Is.EqualTo(2));
+            Assert.That(armorClass.DeflectionBonus, Is.EqualTo(1));
+            Assert.That(armorClass.DodgeBonus, Is.EqualTo(1));
+            Assert.That(armorClass.NaturalArmorBonus, Is.EqualTo(1));
+            Assert.That(armorClass.ShieldBonus, Is.EqualTo(2));
+            Assert.That(armorClass.SizeModifier, Is.EqualTo(1));
         }
 
         [Test]
@@ -545,7 +599,8 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             equipment.Armor.Magic.Bonus = 1;
             equipment.Armor.Magic.Curse = CurseConstants.OppositeEffect;
 
-            AssertArmorClass(12, 12, 10);
+            var armorClass = GenerateAndAssertArmorClass(12, 12);
+            Assert.That(armorClass.ArmorBonus, Is.EqualTo(2));
         }
 
         [Test]
@@ -556,7 +611,8 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             equipment.Armor.Magic.Bonus = 2;
             equipment.Armor.Magic.Curse = CurseConstants.OppositeEffect;
 
-            AssertArmorClass(9, 9, 10);
+            var armorClass = GenerateAndAssertArmorClass(9, 9);
+            Assert.That(armorClass.ArmorBonus, Is.EqualTo(-1));
         }
 
         [Test]
@@ -576,7 +632,8 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
 
             equipment.Treasure.Items = new[] { bracers };
 
-            AssertArmorClass(11, 11, 10);
+            var armorClass = GenerateAndAssertArmorClass(11, 11);
+            Assert.That(armorClass.ArmorBonus, Is.EqualTo(1));
         }
 
         [Test]
@@ -596,7 +653,8 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
 
             equipment.Treasure.Items = new[] { bracers };
 
-            AssertArmorClass(12, 12, 10);
+            var armorClass = GenerateAndAssertArmorClass(12, 12);
+            Assert.That(armorClass.ArmorBonus, Is.EqualTo(2));
         }
 
         [Test]
@@ -609,7 +667,8 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             equipment.OffHand.Magic.Bonus = 1;
             equipment.OffHand.Magic.Curse = CurseConstants.OppositeEffect;
 
-            AssertArmorClass(12, 12, 10);
+            var armorClass = GenerateAndAssertArmorClass(12, 12);
+            Assert.That(armorClass.ShieldBonus, Is.EqualTo(2));
         }
 
         [Test]
@@ -622,7 +681,8 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             equipment.OffHand.Magic.Bonus = 2;
             equipment.OffHand.Magic.Curse = CurseConstants.OppositeEffect;
 
-            AssertArmorClass(9, 9, 10);
+            var armorClass = GenerateAndAssertArmorClass(9, 9);
+            Assert.That(armorClass.ShieldBonus, Is.EqualTo(-1));
         }
 
         [Test]
@@ -633,7 +693,8 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             equipment.Armor.Magic.Bonus = 1;
             equipment.Armor.Magic.Curse = CurseConstants.Delusion;
 
-            AssertArmorClass(13, 13, 10);
+            var armorClass = GenerateAndAssertArmorClass(13, 13);
+            Assert.That(armorClass.ArmorBonus, Is.EqualTo(3));
         }
 
         [Test]
@@ -653,7 +714,8 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
 
             equipment.Treasure.Items = new[] { bracers };
 
-            AssertArmorClass(12, 12, 10);
+            var armorClass = GenerateAndAssertArmorClass(12, 12);
+            Assert.That(armorClass.ArmorBonus, Is.EqualTo(2));
         }
 
         [Test]
@@ -673,7 +735,8 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
 
             equipment.Treasure.Items = new[] { bracers };
 
-            AssertArmorClass(13, 13, 10);
+            var armorClass = GenerateAndAssertArmorClass(13, 13);
+            Assert.That(armorClass.ArmorBonus, Is.EqualTo(3));
         }
 
         [Test]
@@ -686,7 +749,8 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             equipment.OffHand.Magic.Bonus = 1;
             equipment.OffHand.Magic.Curse = CurseConstants.Delusion;
 
-            AssertArmorClass(13, 13, 10);
+            var armorClass = GenerateAndAssertArmorClass(13, 13);
+            Assert.That(armorClass.ShieldBonus, Is.EqualTo(3));
         }
     }
 }

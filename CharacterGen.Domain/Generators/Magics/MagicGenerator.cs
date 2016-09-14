@@ -65,7 +65,7 @@ namespace CharacterGen.Domain.Generators.Magics
             var arcaneSpellFailures = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.ArcaneSpellFailures);
             var arcaneSpellFailure = arcaneSpellFailures[item.Name];
 
-            if (item.Traits.Contains(TraitConstants.Mithral))
+            if (item.Traits.Contains(TraitConstants.SpecialMaterials.Mithral))
                 arcaneSpellFailure -= 10;
 
             return Math.Max(0, arcaneSpellFailure);

@@ -1,5 +1,6 @@
 ﻿using CharacterGen.Races;
 using NUnit.Framework;
+using TreasureGen.Items;
 
 namespace CharacterGen.Tests.Unit.Common.Races
 {
@@ -149,9 +150,13 @@ namespace CharacterGen.Tests.Unit.Common.Races
         [TestCase(RaceConstants.Metaraces.Vampire, "Vampire")]
         [TestCase(RaceConstants.Metaraces.Ghost, "Ghost")]
         [TestCase(RaceConstants.Metaraces.Lich, "Lich")]
+        [TestCase(RaceConstants.Sizes.Colossal, "Colossal")]
+        [TestCase(RaceConstants.Sizes.Gargantuan, "Gargantuan")]
+        [TestCase(RaceConstants.Sizes.Huge, "Huge")]
         [TestCase(RaceConstants.Sizes.Large, "Large")]
         [TestCase(RaceConstants.Sizes.Medium, "Medium")]
         [TestCase(RaceConstants.Sizes.Small, "Small")]
+        [TestCase(RaceConstants.Sizes.Tiny, "Tiny")]
         [TestCase(RaceConstants.Metaraces.Species.Bronze, "Bronze")]
         [TestCase(RaceConstants.Metaraces.Species.Black, "Black")]
         [TestCase(RaceConstants.Metaraces.Species.Blue, "Blue")]
@@ -169,6 +174,18 @@ namespace CharacterGen.Tests.Unit.Common.Races
         public void Constant(string constant, string value)
         {
             Assert.That(constant, Is.EqualTo(value));
+        }
+
+        [TestCase(RaceConstants.Sizes.Colossal, TraitConstants.Sizes.Colossal)]
+        [TestCase(RaceConstants.Sizes.Gargantuan, TraitConstants.Sizes.Gargantuan)]
+        [TestCase(RaceConstants.Sizes.Huge, TraitConstants.Sizes.Huge)]
+        [TestCase(RaceConstants.Sizes.Large, TraitConstants.Sizes.Large)]
+        [TestCase(RaceConstants.Sizes.Medium, TraitConstants.Sizes.Medium)]
+        [TestCase(RaceConstants.Sizes.Small, TraitConstants.Sizes.Small)]
+        [TestCase(RaceConstants.Sizes.Tiny, TraitConstants.Sizes.Tiny)]
+        public void SizeConstantsMatchTreasureSizes(string characterSize, string treasureSize)
+        {
+            Assert.That(characterSize, Is.EqualTo(treasureSize));
         }
     }
 }

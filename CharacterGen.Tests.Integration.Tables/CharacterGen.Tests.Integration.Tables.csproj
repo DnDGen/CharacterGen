@@ -56,7 +56,7 @@
     <Reference Include="System" />
     <Reference Include="System.XML" />
     <Reference Include="TreasureGen, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DnDGen.TreasureGen.4.1.0\lib\TreasureGen.dll</HintPath>
+      <HintPath>..\packages\DnDGen.TreasureGen.5.0.0\lib\TreasureGen.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
@@ -282,6 +282,7 @@
     <Compile Include="CharacterClasses\HasSpecialistFields\SorcererHasSpecialistFieldsTests.cs" />
     <Compile Include="CharacterClasses\HasSpecialistFields\WarriorHasSpecialistFieldsTests.cs" />
     <Compile Include="CharacterClasses\HasSpecialistFields\WizardHasSpecialistFieldsTests.cs" />
+    <Compile Include="Combats\SizeModifiersTests.cs" />
     <Compile Include="Items\ArmorCheckPenaltiesTests.cs" />
     <Compile Include="Leadership\AttractCohortOfDifferentAlignmentTests.cs" />
     <Compile Include="Leadership\CohortLevelsTests.cs" />

@@ -42,7 +42,7 @@ namespace CharacterGen.Domain.Generators.Abilities.Feats
             BaseAttack baseAttack, IEnumerable<Feat> preselectedFeats)
         {
             var additionalFeatSelections = featsSelector.SelectAdditional();
-            var availableFeatSelections = additionalFeatSelections.Where(s => s.ImmutableRequirementsMet(baseAttack.Bonus, stats, skills, characterClass));
+            var availableFeatSelections = additionalFeatSelections.Where(s => s.ImmutableRequirementsMet(baseAttack.RangedBonus, stats, skills, characterClass));
 
             var numberOfAdditionalFeats = characterClass.Level / 3 + 1;
 
@@ -159,7 +159,7 @@ namespace CharacterGen.Domain.Generators.Abilities.Feats
         {
             var fighterFeatIds = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.FighterBonusFeats);
             var fighterFeats = featsSelector.SelectAdditional().Where(f => fighterFeatIds.Contains(f.Feat));
-            var availableFeats = fighterFeats.Where(f => f.ImmutableRequirementsMet(baseAttack.Bonus, stats, skills, characterClass));
+            var availableFeats = fighterFeats.Where(f => f.ImmutableRequirementsMet(baseAttack.RangedBonus, stats, skills, characterClass));
 
             var numberOfFighterFeats = characterClass.Level / 2 + 1;
             var feats = PopulateFeatsFrom(characterClass, stats, skills, baseAttack, selectedFeats, availableFeats, numberOfFighterFeats);
@@ -172,7 +172,7 @@ namespace CharacterGen.Domain.Generators.Abilities.Feats
         {
             var wizardFeatIds = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.WizardBonusFeats);
             var wizardFeats = featsSelector.SelectAdditional().Where(f => wizardFeatIds.Contains(f.Feat));
-            var availableFeats = wizardFeats.Where(f => f.ImmutableRequirementsMet(baseAttack.Bonus, stats, skills, characterClass));
+            var availableFeats = wizardFeats.Where(f => f.ImmutableRequirementsMet(baseAttack.RangedBonus, stats, skills, characterClass));
 
             var numberOfWizardFeats = characterClass.Level / 5;
             var feats = PopulateFeatsFrom(characterClass, stats, skills, baseAttack, selectedFeats, availableFeats, numberOfWizardFeats);

@@ -1,6 +1,5 @@
 ﻿using CharacterGen.Domain.Tables;
 using NUnit.Framework;
-using System;
 using TreasureGen.Items;
 
 namespace CharacterGen.Tests.Integration.Tables.Combats
@@ -51,7 +50,8 @@ namespace CharacterGen.Tests.Integration.Tables.Combats
                 ArmorConstants.LionsShield,
                 ArmorConstants.SpinedShield,
                 ArmorConstants.TowerShield,
-                ArmorConstants.WingedShield
+                ArmorConstants.WingedShield,
+
             };
 
             AssertCollectionNames(names);

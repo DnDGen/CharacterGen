@@ -11,6 +11,6 @@ namespace CharacterGen.Domain.Generators.Combats
     internal interface ICombatGenerator
     {
         Combat GenerateWith(BaseAttack baseAttack, CharacterClass characterClass, Race race, IEnumerable<Feat> feats, Dictionary<string, Stat> stats, Equipment equipment);
-        BaseAttack GenerateBaseAttackWith(CharacterClass characterClass, Race race);
+        BaseAttack GenerateBaseAttackWith(CharacterClass characterClass, Race race, Dictionary<string, Stat> stats);
     }
 }

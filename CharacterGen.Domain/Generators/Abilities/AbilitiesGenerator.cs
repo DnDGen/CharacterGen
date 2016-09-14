@@ -8,6 +8,7 @@ using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Tables;
 using CharacterGen.Races;
 using CharacterGen.Randomizers.Stats;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace CharacterGen.Domain.Generators.Abilities
@@ -30,11 +31,11 @@ namespace CharacterGen.Domain.Generators.Abilities
             this.collectionsSelector = collectionsSelector;
         }
 
-        public Ability GenerateWith(CharacterClass characterClass, Race race, IStatsRandomizer statsRandomizer, BaseAttack baseAttack)
+        public Ability GenerateWith(CharacterClass characterClass, Race race, Dictionary<string, Stat> stats, BaseAttack baseAttack)
         {
             var ability = new Ability();
 
-            ability.Stats = statsGenerator.GenerateWith(statsRandomizer, characterClass, race);
+            ability.Stats = stats;
             ability.Languages = languageGenerator.GenerateWith(race, characterClass.Name, ability.Stats[StatConstants.Intelligence].Bonus);
             ability.Skills = skillsGenerator.GenerateWith(characterClass, race, ability.Stats);
             ability.Feats = featsGenerator.GenerateWith(characterClass, race, ability.Stats, ability.Skills, baseAttack);
@@ -77,6 +78,11 @@ namespace CharacterGen.Domain.Generators.Abilities
             }
 
             return ability;
+        }
+
+        public Dictionary<string, Stat> GenerateStats(CharacterClass characterClass, Race race, IStatsRandomizer statsRandomizer)
+        {
+            return statsGenerator.GenerateWith(statsRandomizer, characterClass, race);
         }
     }
 }

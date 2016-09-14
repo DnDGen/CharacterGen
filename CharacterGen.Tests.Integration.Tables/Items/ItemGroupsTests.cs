@@ -66,14 +66,8 @@ namespace CharacterGen.Tests.Integration.Tables.Items
                 WeaponConstants.Battleaxe,
                 WeaponConstants.BerserkingSword,
                 WeaponConstants.Club,
-                WeaponConstants.CompositePlus0Longbow,
-                WeaponConstants.CompositePlus0Shortbow,
-                WeaponConstants.CompositePlus1Longbow,
-                WeaponConstants.CompositePlus1Shortbow,
-                WeaponConstants.CompositePlus2Longbow,
-                WeaponConstants.CompositePlus2Shortbow,
-                WeaponConstants.CompositePlus3Longbow,
-                WeaponConstants.CompositePlus4Longbow,
+                WeaponConstants.CompositeLongbow,
+                WeaponConstants.CompositeShortbow,
                 WeaponConstants.CrossbowBolt,
                 WeaponConstants.CursedBackbiterSpear,
                 WeaponConstants.CursedMinus2Sword,
@@ -241,14 +235,8 @@ namespace CharacterGen.Tests.Integration.Tables.Items
         [TestCase(WeaponConstants.Battleaxe, WeaponConstants.Battleaxe)]
         [TestCase(WeaponConstants.BerserkingSword, WeaponConstants.Greatsword)]
         [TestCase(WeaponConstants.Club, WeaponConstants.Club)]
-        [TestCase(WeaponConstants.CompositePlus0Longbow, WeaponConstants.Longbow, WeaponConstants.Arrow)]
-        [TestCase(WeaponConstants.CompositePlus0Shortbow, WeaponConstants.Shortbow, WeaponConstants.Arrow)]
-        [TestCase(WeaponConstants.CompositePlus1Longbow, WeaponConstants.Longbow, WeaponConstants.Arrow)]
-        [TestCase(WeaponConstants.CompositePlus1Shortbow, WeaponConstants.Shortbow, WeaponConstants.Arrow)]
-        [TestCase(WeaponConstants.CompositePlus2Longbow, WeaponConstants.Longbow, WeaponConstants.Arrow)]
-        [TestCase(WeaponConstants.CompositePlus2Shortbow, WeaponConstants.Shortbow, WeaponConstants.Arrow)]
-        [TestCase(WeaponConstants.CompositePlus3Longbow, WeaponConstants.Longbow, WeaponConstants.Arrow)]
-        [TestCase(WeaponConstants.CompositePlus4Longbow, WeaponConstants.Longbow, WeaponConstants.Arrow)]
+        [TestCase(WeaponConstants.CompositeLongbow, WeaponConstants.Longbow, WeaponConstants.Arrow)]
+        [TestCase(WeaponConstants.CompositeShortbow, WeaponConstants.Shortbow, WeaponConstants.Arrow)]
         [TestCase(WeaponConstants.CrossbowBolt, WeaponConstants.CrossbowBolt)]
         [TestCase(WeaponConstants.CursedBackbiterSpear, WeaponConstants.Shortspear)]
         [TestCase(WeaponConstants.CursedMinus2Sword, WeaponConstants.Longsword)]

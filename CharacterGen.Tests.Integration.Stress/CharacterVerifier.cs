@@ -134,7 +134,11 @@ namespace CharacterGen.Tests.Integration.Stress
                 Assert.That(knownSpellNames, Contains.Item(spell.Name), character.Class.Name);
             }
 
-            Assert.That(character.Combat.BaseAttack.Bonus, Is.Not.Negative);
+            Assert.That(character.Combat.BaseAttack.BaseBonus, Is.Not.Negative);
+            Assert.That(character.Combat.BaseAttack.AllMeleeBonuses.Count, Is.LessThanOrEqualTo(4));
+            Assert.That(character.Combat.BaseAttack.AllRangedBonuses.Count, Is.LessThanOrEqualTo(4));
+            Assert.That(character.Combat.BaseAttack.DexterityBonus, Is.EqualTo(character.Ability.Stats[StatConstants.Dexterity].Bonus));
+            Assert.That(character.Combat.BaseAttack.StrengthBonus, Is.EqualTo(character.Ability.Stats[StatConstants.Strength].Bonus));
             Assert.That(character.Combat.HitPoints, Is.AtLeast(character.Class.Level));
             Assert.That(character.Combat.ArmorClass.Full, Is.Positive);
             Assert.That(character.Combat.ArmorClass.FlatFooted, Is.Positive);

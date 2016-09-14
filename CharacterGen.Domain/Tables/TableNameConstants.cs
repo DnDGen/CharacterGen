@@ -21,6 +21,7 @@
                 public const string MonsterHitDice = "MonsterHitDice";
                 public const string ProhibitedFieldQuantities = "ProhibitedFieldQuantities";
                 public const string RacialBaseAttackAdjustments = "RacialBaseAttackAdjustments";
+                public const string SizeModifiers = "SizeModifiers";
                 public const string SkillPointsForClasses = "SkillPointsForClasses";
                 public const string SpecialistFieldQuantities = "SpecialistFieldQuantities";
             }
