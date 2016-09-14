@@ -17,7 +17,7 @@ var follower = leadershipGenerator.GenerateFollower(1, character.Alignment.Full,
 
 ### Getting the Generators
 
-You can obtain generators from the bootstrapper project.  Because the generators are very complex and are decorated in various ways, there is not a (recommended) way to build these generator manually.  Please use the Bootstrapper package.  **Note:** if using the CharacterGen bootstrapper, be sure to also load modules for RollGen and TreasureGen, as it is dependent on those modules
+You can obtain generators from the bootstrapper project.  Because the generators are very complex and are decorated in various ways, there is not a (recommended) way to build these generator manually.  Please use the IoC container in the Domain package.  **Note:** if using the CharacterGen IoC container, be sure to also load modules for RollGen and TreasureGen, as it is dependent on those modules
 
 ```C#
 var kernel = new StandardKernel();
@@ -47,6 +47,6 @@ The project is on [Nuget](https://www.nuget.org/packages/CharacterGen). Install 
 
     PM > Install-Package CharacterGen
 
-#### There's CharacterGen and CharacterGen.Bootstrap - which do I install?
+#### There's CharacterGen and CharacterGen.Domain - which do I install?
 
-That depends on your project.  If you are making a library that will only **reference** CharacterGen, but does not expressly implement it (such as the EncounterGen project), then you only need the CharacterGen package.  If you actually want to run and implement the dice (such as on the DnDGenSite or in the tests for EncounterGen), then you need CharacterGen.Bootstrap, which will install CharacterGen as a dependency.
+That depends on your project.  If you are making a library that will only **reference** CharacterGen, but does not expressly implement it (such as the EncounterGen project), then you only need the CharacterGen package.  If you actually want to run and implement the dice (such as in DnDGen.Web or in the tests for EncounterGen), then you need CharacterGen.Domain, which will install CharacterGen as a dependency.
