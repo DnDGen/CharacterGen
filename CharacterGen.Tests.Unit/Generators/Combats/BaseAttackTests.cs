@@ -25,6 +25,7 @@ namespace CharacterGen.Tests.Unit.Common.Combats
             Assert.That(baseAttack.StrengthBonus, Is.EqualTo(0));
             Assert.That(baseAttack.DexterityBonus, Is.EqualTo(0));
             Assert.That(baseAttack.SizeModifier, Is.EqualTo(0));
+            Assert.That(baseAttack.RacialModifier, Is.EqualTo(0));
         }
 
         [Test]
@@ -34,8 +35,9 @@ namespace CharacterGen.Tests.Unit.Common.Combats
             baseAttack.DexterityBonus = 90210;
             baseAttack.SizeModifier = 42;
             baseAttack.StrengthBonus = 600;
+            baseAttack.RacialModifier = 1337;
 
-            Assert.That(baseAttack.MeleeBonus, Is.EqualTo(9908));
+            Assert.That(baseAttack.MeleeBonus, Is.EqualTo(11245));
         }
 
         [Test]
@@ -45,8 +47,9 @@ namespace CharacterGen.Tests.Unit.Common.Combats
             baseAttack.DexterityBonus = 90210;
             baseAttack.SizeModifier = -42;
             baseAttack.StrengthBonus = -600;
+            baseAttack.RacialModifier = -1337;
 
-            Assert.That(baseAttack.MeleeBonus, Is.EqualTo(-9908));
+            Assert.That(baseAttack.MeleeBonus, Is.EqualTo(-11245));
         }
 
         [Test]
@@ -56,8 +59,9 @@ namespace CharacterGen.Tests.Unit.Common.Combats
             baseAttack.DexterityBonus = 90210;
             baseAttack.SizeModifier = 42;
             baseAttack.StrengthBonus = 600;
+            baseAttack.RacialModifier = 1337;
 
-            Assert.That(baseAttack.RangedBonus, Is.EqualTo(99518));
+            Assert.That(baseAttack.RangedBonus, Is.EqualTo(100855));
         }
 
         [Test]
@@ -67,8 +71,9 @@ namespace CharacterGen.Tests.Unit.Common.Combats
             baseAttack.DexterityBonus = -90210;
             baseAttack.SizeModifier = -42;
             baseAttack.StrengthBonus = 600;
+            baseAttack.RacialModifier = -1337;
 
-            Assert.That(baseAttack.RangedBonus, Is.EqualTo(-99518));
+            Assert.That(baseAttack.RangedBonus, Is.EqualTo(-100855));
         }
 
         [TestCase(-5, -5)]
@@ -105,16 +110,31 @@ namespace CharacterGen.Tests.Unit.Common.Combats
         public void RangedBonuses(int baseBonus, params int[] bonuses)
         {
             baseAttack.BaseBonus = baseBonus;
-            var attacks = baseAttack.AllRangedBonuses;
+            var attacks = baseAttack.AllRangedBonuses.ToArray();
 
             for (var i = 0; i < bonuses.Length; i++)
             {
-                var attack = attacks.ElementAt(i);
-                Assert.That(attack, Is.EqualTo(bonuses[i]));
+                Assert.That(attacks[i], Is.EqualTo(bonuses[i]));
             }
 
             var extras = attacks.Except(bonuses);
             Assert.That(extras, Is.Empty);
+        }
+
+        [Test]
+        public void AllRangedBonuses()
+        {
+            baseAttack.BaseBonus = 9266;
+            baseAttack.DexterityBonus = 90210;
+            baseAttack.SizeModifier = 42;
+            baseAttack.RacialModifier = 600;
+
+            var attacks = baseAttack.AllRangedBonuses.ToArray();
+            Assert.That(attacks[0], Is.EqualTo(100118));
+            Assert.That(attacks[1], Is.EqualTo(100113));
+            Assert.That(attacks[2], Is.EqualTo(100108));
+            Assert.That(attacks[3], Is.EqualTo(100103));
+            Assert.That(attacks.Length, Is.EqualTo(4));
         }
 
         [TestCase(0, 0)]
@@ -147,16 +167,129 @@ namespace CharacterGen.Tests.Unit.Common.Combats
         public void MeleeBonuses(int baseBonus, params int[] bonuses)
         {
             baseAttack.BaseBonus = baseBonus;
-            var attacks = baseAttack.AllMeleeBonuses;
+            var attacks = baseAttack.AllMeleeBonuses.ToArray();
 
             for (var i = 0; i < bonuses.Length; i++)
             {
-                var attack = attacks.ElementAt(i);
-                Assert.That(attack, Is.EqualTo(bonuses[i]));
+                Assert.That(attacks[i], Is.EqualTo(bonuses[i]));
             }
 
             var extras = attacks.Except(bonuses);
             Assert.That(extras, Is.Empty);
+        }
+
+        [Test]
+        public void AllMeleeBonuses()
+        {
+            baseAttack.BaseBonus = 9266;
+            baseAttack.StrengthBonus = 90210;
+            baseAttack.SizeModifier = 42;
+            baseAttack.RacialModifier = 600;
+
+            var attacks = baseAttack.AllMeleeBonuses.ToArray();
+            Assert.That(attacks[0], Is.EqualTo(100118));
+            Assert.That(attacks[1], Is.EqualTo(100113));
+            Assert.That(attacks[2], Is.EqualTo(100108));
+            Assert.That(attacks[3], Is.EqualTo(100103));
+            Assert.That(attacks.Length, Is.EqualTo(4));
+        }
+
+        [Test]
+        public void StrengthBonusDoesNotDetermineNumberOfMeleeBonuses()
+        {
+            baseAttack.BaseBonus = 10;
+            baseAttack.StrengthBonus = 1;
+
+            var meleeAttacks = baseAttack.AllMeleeBonuses.ToArray();
+            Assert.That(meleeAttacks[0], Is.EqualTo(11));
+            Assert.That(meleeAttacks[1], Is.EqualTo(6));
+            Assert.That(meleeAttacks.Length, Is.EqualTo(2));
+        }
+
+        [Test]
+        public void SizeModifierDoesNotDetermineNumberOfMeleeBonuses()
+        {
+            baseAttack.BaseBonus = 10;
+            baseAttack.SizeModifier = 1;
+
+            var meleeAttacks = baseAttack.AllMeleeBonuses.ToArray();
+            Assert.That(meleeAttacks[0], Is.EqualTo(11));
+            Assert.That(meleeAttacks[1], Is.EqualTo(6));
+            Assert.That(meleeAttacks.Length, Is.EqualTo(2));
+        }
+
+        [Test]
+        public void RacialModifierDoesNotDetermineNumberOfMeleeBonuses()
+        {
+            baseAttack.BaseBonus = 10;
+            baseAttack.RacialModifier = 1;
+
+            var meleeAttacks = baseAttack.AllMeleeBonuses.ToArray();
+            Assert.That(meleeAttacks[0], Is.EqualTo(11));
+            Assert.That(meleeAttacks[1], Is.EqualTo(6));
+            Assert.That(meleeAttacks.Length, Is.EqualTo(2));
+        }
+
+        [Test]
+        public void DexterityBonusDoesNotDetermineNumberOfRangedBonuses()
+        {
+            baseAttack.BaseBonus = 10;
+            baseAttack.DexterityBonus = 1;
+
+            var rangedAttacks = baseAttack.AllRangedBonuses.ToArray();
+            Assert.That(rangedAttacks[0], Is.EqualTo(11));
+            Assert.That(rangedAttacks[1], Is.EqualTo(6));
+            Assert.That(rangedAttacks.Length, Is.EqualTo(2));
+        }
+
+        [Test]
+        public void SizeModifierDoesNotDetermineNumberOfRangedBonuses()
+        {
+            baseAttack.BaseBonus = 10;
+            baseAttack.SizeModifier = 1;
+
+            var rangedAttacks = baseAttack.AllRangedBonuses.ToArray();
+            Assert.That(rangedAttacks[0], Is.EqualTo(11));
+            Assert.That(rangedAttacks[1], Is.EqualTo(6));
+            Assert.That(rangedAttacks.Length, Is.EqualTo(2));
+        }
+
+        [Test]
+        public void RacialModifierDoesNotDetermineNumberOfRangedBonuses()
+        {
+            baseAttack.BaseBonus = 10;
+            baseAttack.RacialModifier = 1;
+
+            var rangedAttacks = baseAttack.AllRangedBonuses.ToArray();
+            Assert.That(rangedAttacks[0], Is.EqualTo(11));
+            Assert.That(rangedAttacks[1], Is.EqualTo(6));
+            Assert.That(rangedAttacks.Length, Is.EqualTo(2));
+        }
+
+        [Test]
+        public void CanHaveNegativeBonusInAllMeleeBonuses()
+        {
+            baseAttack.BaseBonus = 6;
+            baseAttack.SizeModifier = -1;
+            baseAttack.StrengthBonus = -1;
+
+            var meleeAttacks = baseAttack.AllMeleeBonuses.ToArray();
+            Assert.That(meleeAttacks[0], Is.EqualTo(4));
+            Assert.That(meleeAttacks[1], Is.EqualTo(-1));
+            Assert.That(meleeAttacks.Length, Is.EqualTo(2));
+        }
+
+        [Test]
+        public void CanHaveNegativeBonusInAllRangedBonuses()
+        {
+            baseAttack.BaseBonus = 6;
+            baseAttack.SizeModifier = -1;
+            baseAttack.DexterityBonus = -1;
+
+            var rangedAttacks = baseAttack.AllRangedBonuses.ToArray();
+            Assert.That(rangedAttacks[0], Is.EqualTo(4));
+            Assert.That(rangedAttacks[1], Is.EqualTo(-1));
+            Assert.That(rangedAttacks.Length, Is.EqualTo(2));
         }
     }
 }

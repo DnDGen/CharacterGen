@@ -34,10 +34,11 @@ namespace CharacterGen.Domain.Generators.Combats
         public BaseAttack GenerateBaseAttackWith(CharacterClass characterClass, Race race, Dictionary<string, Stat> stats)
         {
             var baseAttack = new BaseAttack();
-            baseAttack.BaseBonus = GetBaseAttackBonus(characterClass) + GetRacialBaseAttackAdjustments(race);
+            baseAttack.BaseBonus = GetBaseAttackBonus(characterClass);
             baseAttack.SizeModifier = GetSizeAdjustments(race);
             baseAttack.StrengthBonus = stats[StatConstants.Strength].Bonus;
             baseAttack.DexterityBonus = stats[StatConstants.Dexterity].Bonus;
+            baseAttack.RacialModifier = GetRacialBaseAttackAdjustments(race);
 
             return baseAttack;
         }

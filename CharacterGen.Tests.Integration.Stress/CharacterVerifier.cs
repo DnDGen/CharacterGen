@@ -58,6 +58,9 @@ namespace CharacterGen.Tests.Integration.Stress
             Assert.That(character.Ability.Stats.Keys, Contains.Item(StatConstants.Strength));
             Assert.That(character.Ability.Stats.Keys, Contains.Item(StatConstants.Wisdom));
 
+            if (character.Ability.Stats.Count == 6)
+                Assert.That(character.Ability.Stats.Keys, Contains.Item(StatConstants.Constitution));
+
             foreach (var statKVP in character.Ability.Stats)
             {
                 var stat = statKVP.Value;
@@ -103,13 +106,18 @@ namespace CharacterGen.Tests.Integration.Stress
                 Assert.That(character.Equipment.PrimaryHand, Is.Not.Null, feats);
                 Assert.That(character.Equipment.PrimaryHand.ItemType, Is.EqualTo(ItemTypeConstants.Weapon), feats);
                 Assert.That(character.Equipment.PrimaryHand.Name, Is.Not.Empty, feats);
+                Assert.That(character.Equipment.PrimaryHand.Quantity, Is.Positive);
             }
 
             Assert.That(character.Equipment.Treasure, Is.Not.Null);
             Assert.That(character.Equipment.Treasure.Items, Is.Not.Null);
+            Assert.That(character.Equipment.Treasure.Items, Is.All.Not.Null);
 
             foreach (var item in character.Equipment.Treasure.Items)
-                Assert.That(item, Is.Not.Null);
+            {
+                Assert.That(item.Name, Is.Not.Empty);
+                Assert.That(item.Quantity, Is.Positive);
+            }
 
             foreach (var spells in character.Magic.SpellsPerDay)
             {
@@ -135,10 +143,19 @@ namespace CharacterGen.Tests.Integration.Stress
             }
 
             Assert.That(character.Combat.BaseAttack.BaseBonus, Is.Not.Negative);
-            Assert.That(character.Combat.BaseAttack.AllMeleeBonuses.Count, Is.LessThanOrEqualTo(4));
-            Assert.That(character.Combat.BaseAttack.AllRangedBonuses.Count, Is.LessThanOrEqualTo(4));
             Assert.That(character.Combat.BaseAttack.DexterityBonus, Is.EqualTo(character.Ability.Stats[StatConstants.Dexterity].Bonus));
             Assert.That(character.Combat.BaseAttack.StrengthBonus, Is.EqualTo(character.Ability.Stats[StatConstants.Strength].Bonus));
+            Assert.That(character.Combat.BaseAttack.AllMeleeBonuses.Count, Is.InRange(1, 4));
+            Assert.That(character.Combat.BaseAttack.AllRangedBonuses.Count, Is.InRange(1, 4));
+            Assert.That(character.Combat.BaseAttack.AllRangedBonuses.Count, Is.EqualTo(character.Combat.BaseAttack.AllMeleeBonuses.Count()));
+            Assert.That(character.Combat.BaseAttack.AllMeleeBonuses, Is.Unique);
+            Assert.That(character.Combat.BaseAttack.AllMeleeBonuses, Is.Ordered.Descending);
+            Assert.That(character.Combat.BaseAttack.AllRangedBonuses, Is.Unique);
+            Assert.That(character.Combat.BaseAttack.AllRangedBonuses, Is.Ordered.Descending);
+
+            if (character.Ability.Stats[StatConstants.Dexterity].Bonus != character.Ability.Stats[StatConstants.Strength].Bonus)
+                Assert.That(character.Combat.BaseAttack.AllMeleeBonuses, Is.Not.EquivalentTo(character.Combat.BaseAttack.AllRangedBonuses));
+
             Assert.That(character.Combat.HitPoints, Is.AtLeast(character.Class.Level));
             Assert.That(character.Combat.ArmorClass.Full, Is.Positive);
             Assert.That(character.Combat.ArmorClass.FlatFooted, Is.Positive);

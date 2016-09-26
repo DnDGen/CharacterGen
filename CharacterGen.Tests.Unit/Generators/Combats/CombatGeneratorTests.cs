@@ -216,7 +216,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.RacialBaseAttackAdjustments)).Returns(racialAdjustments);
 
             var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass, race, stats);
-            Assert.That(baseAttack.BaseBonus, Is.EqualTo(14));
+            Assert.That(baseAttack.RacialModifier, Is.EqualTo(4));
         }
 
         [Test]

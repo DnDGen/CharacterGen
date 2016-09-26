@@ -8,13 +8,14 @@ namespace CharacterGen.Combats
         public int StrengthBonus { get; set; }
         public int DexterityBonus { get; set; }
         public int SizeModifier { get; set; }
+        public int RacialModifier { get; set; }
         public bool CircumstantialBonus { get; set; }
 
         public int RangedBonus
         {
             get
             {
-                return BaseBonus + SizeModifier + DexterityBonus;
+                return GetTotalBonus(BaseBonus, DexterityBonus);
             }
         }
 
@@ -22,7 +23,7 @@ namespace CharacterGen.Combats
         {
             get
             {
-                return BaseBonus + SizeModifier + StrengthBonus;
+                return GetTotalBonus(BaseBonus, StrengthBonus);
             }
         }
 
@@ -30,7 +31,7 @@ namespace CharacterGen.Combats
         {
             get
             {
-                return GetBonuses(RangedBonus);
+                return GetBonuses(DexterityBonus);
             }
         }
 
@@ -38,20 +39,26 @@ namespace CharacterGen.Combats
         {
             get
             {
-                return GetBonuses(MeleeBonus);
+                return GetBonuses(StrengthBonus);
             }
         }
 
-        private IEnumerable<int> GetBonuses(int totalBonus)
+        private int GetTotalBonus(int baseBonus, int statBonus)
+        {
+            return baseBonus + statBonus + SizeModifier + RacialModifier;
+        }
+
+        private IEnumerable<int> GetBonuses(int statBonus)
         {
             var bonuses = new List<int>();
-            var attackBonus = MeleeBonus;
+            var baseBonus = BaseBonus;
 
             do
             {
-                bonuses.Add(attackBonus);
-                attackBonus -= 5;
-            } while (attackBonus > 0 && bonuses.Count < 4);
+                var total = GetTotalBonus(baseBonus, statBonus);
+                bonuses.Add(total);
+                baseBonus -= 5;
+            } while (baseBonus > 0 && bonuses.Count < 4);
 
             return bonuses;
         }
