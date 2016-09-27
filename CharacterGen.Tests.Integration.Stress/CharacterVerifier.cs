@@ -13,6 +13,13 @@ namespace CharacterGen.Tests.Integration.Stress
     {
         public void AssertCharacter(Character character)
         {
+            Assert.That(character.Summary, Is.Not.Empty);
+            Assert.That(character.Summary, Contains.Substring(character.Alignment.Full));
+            Assert.That(character.Summary, Contains.Substring($"Level {character.Class.Level}"));
+            Assert.That(character.Summary, Contains.Substring(character.Class.Name));
+            Assert.That(character.Summary, Contains.Substring(character.Race.BaseRace));
+            Assert.That(character.Summary, Contains.Substring(character.Race.Metarace));
+
             Assert.That(character.Alignment.Goodness, Is.EqualTo(AlignmentConstants.Good)
                 .Or.EqualTo(AlignmentConstants.Neutral)
                 .Or.EqualTo(AlignmentConstants.Evil));

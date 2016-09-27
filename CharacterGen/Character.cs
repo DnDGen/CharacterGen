@@ -30,6 +30,24 @@ namespace CharacterGen
             }
         }
 
+        public string Summary
+        {
+            get
+            {
+                if (Class.Level == 0)
+                    return string.Empty;
+
+                var summary = $"{Alignment.Full} Level {Class.Level} ";
+
+                if (string.IsNullOrEmpty(Race.Metarace) == false)
+                    summary += Race.Metarace + " ";
+
+                summary += $"{Race.BaseRace} {Class.Name}";
+
+                return summary;
+            }
+        }
+
         public Character()
         {
             Alignment = new Alignment();

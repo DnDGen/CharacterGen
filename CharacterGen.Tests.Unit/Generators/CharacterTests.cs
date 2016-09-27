@@ -1,5 +1,4 @@
-﻿using CharacterGen;
-using CharacterGen.Abilities.Feats;
+﻿using CharacterGen.Abilities.Feats;
 using NUnit.Framework;
 
 namespace CharacterGen.Tests.Unit.Common
@@ -27,6 +26,7 @@ namespace CharacterGen.Tests.Unit.Common
             Assert.That(character.Equipment, Is.Not.Null);
             Assert.That(character.Magic, Is.Not.Null);
             Assert.That(character.IsLeader, Is.False);
+            Assert.That(character.Summary, Is.Empty);
         }
 
         [Test]
@@ -51,6 +51,31 @@ namespace CharacterGen.Tests.Unit.Common
             };
 
             Assert.That(character.IsLeader, Is.False);
+        }
+
+        [Test]
+        public void CharacterHasSummary()
+        {
+            character.Alignment.Goodness = "goodness";
+            character.Alignment.Lawfulness = "lawfulness";
+            character.Class.Level = 9266;
+            character.Class.Name = "class name";
+            character.Race.BaseRace = "base race";
+
+            Assert.That(character.Summary, Is.EqualTo("lawfulness goodness Level 9266 base race class name"));
+        }
+
+        [Test]
+        public void CharacterHasSummaryWithMetarace()
+        {
+            character.Alignment.Goodness = "goodness";
+            character.Alignment.Lawfulness = "lawfulness";
+            character.Class.Level = 9266;
+            character.Class.Name = "class name";
+            character.Race.BaseRace = "base race";
+            character.Race.Metarace = "metarace";
+
+            Assert.That(character.Summary, Is.EqualTo("lawfulness goodness Level 9266 metarace base race class name"));
         }
     }
 }
