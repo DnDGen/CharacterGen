@@ -24,7 +24,7 @@ namespace CharacterGen.Domain.Generators.Randomizers.Stats
 
         protected override int RollStat()
         {
-            return dice.Roll("4d6k3");
+            return dice.Roll("4d6k3").AsSum();
         }
 
         protected override bool StatsAreAllowed(IEnumerable<Stat> stats)

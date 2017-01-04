@@ -34,8 +34,8 @@ namespace CharacterGen.Tests.Integration.Stress
         public RaceRandomizer MetaraceRandomizer { get; set; }
 
         private const int ConfidentIterations = 1000000;
-        private const int TenMinutesInSeconds = 600;
-        private const int TwoHoursInSeconds = 3600 * 2;
+        private const int TravisJobOutputTimeLimit = 60 * 10;
+        private const int TravisJobBuildTimeLimit = 60 * 50;
 
         private readonly int timeLimitInSeconds;
 
@@ -50,9 +50,9 @@ namespace CharacterGen.Tests.Integration.Stress
             var stressTestCasesCount = methods.Sum(m => m.GetCustomAttributes<TestCaseAttribute>().Count());
             var stressTestsTotal = stressTestsCount + stressTestCasesCount;
 
-            var twoHourTimeLimitPerTest = TwoHoursInSeconds / stressTestsTotal;
+            var twoHourTimeLimitPerTest = TravisJobBuildTimeLimit / stressTestsTotal;
 #if STRESS
-            timeLimitInSeconds = Math.Min(twoHourTimeLimitPerTest, TenMinutesInSeconds - 10);
+            timeLimitInSeconds = Math.Min(twoHourTimeLimitPerTest, TravisJobOutputTimeLimit - 10);
 #else
             timeLimitInSeconds = 1;
 #endif

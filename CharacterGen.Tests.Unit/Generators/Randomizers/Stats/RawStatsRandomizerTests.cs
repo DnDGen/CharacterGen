@@ -20,20 +20,20 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
             var generator = new ConfigurableIterationGenerator(2);
             randomizer = new RawStatsRandomizer(mockDice.Object, generator);
 
-            mockDice.Setup(d => d.Roll(It.IsAny<int>()).IndividualRolls(It.IsAny<int>())).Returns(new[] { 1 });
+            mockDice.Setup(d => d.Roll(It.IsAny<int>()).d(It.IsAny<int>()).AsSum()).Returns(1);
         }
 
         [Test]
         public void RawStatsCalls3d6PerStat()
         {
             var stats = randomizer.Randomize();
-            mockDice.Verify(d => d.Roll(3).IndividualRolls(6), Times.Exactly(stats.Count));
+            mockDice.Verify(d => d.Roll(3).d(6).AsSum(), Times.Exactly(stats.Count));
         }
 
         [Test]
         public void RawStatsReturnsUnmodified3d6PerStat()
         {
-            mockDice.Setup(d => d.Roll(3).IndividualRolls(6)).Returns(new[] { 4, 5, 3 });
+            mockDice.Setup(d => d.Roll(3).d(6).AsSum()).Returns(12);
             var stats = randomizer.Randomize();
 
             foreach (var stat in stats.Values)
@@ -43,9 +43,9 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
         [Test]
         public void RolledStatsAreAlwaysAllowed()
         {
-            mockDice.SetupSequence(d => d.Roll(3).IndividualRolls(6))
-                .Returns(new[] { 9266 }).Returns(new[] { -42 }).Returns(new[] { int.MaxValue })
-                .Returns(new[] { int.MinValue }).Returns(new[] { 0 }).Returns(new[] { 1337 });
+            mockDice.SetupSequence(d => d.Roll(3).d(6).AsSum())
+                .Returns(9266).Returns(-42).Returns(int.MaxValue)
+                .Returns(int.MinValue).Returns(0).Returns(1337);
 
             var stats = randomizer.Randomize();
 

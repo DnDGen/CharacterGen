@@ -55,7 +55,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
         public void SelectRandomItemFromCollection()
         {
             var collection = new[] { "item 1", "item 2", "item 3" };
-            mockDice.Setup(d => d.Roll(1).IndividualRolls(3)).Returns(new[] { 2 });
+            mockDice.Setup(d => d.Roll(1).d(3).AsSum()).Returns(2);
 
             var item = selector.SelectRandomFrom(collection);
             Assert.That(item, Is.EqualTo("item 2"));
@@ -65,7 +65,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
         public void SelectRandomItemFromTable()
         {
             allCollections["entry"] = new[] { "item 1", "item 2", "item 3" };
-            mockDice.Setup(d => d.Roll(1).IndividualRolls(3)).Returns(new[] { 2 });
+            mockDice.Setup(d => d.Roll(1).d(3).AsSum()).Returns(2);
 
             var item = selector.SelectRandomFrom(TableName, "entry");
             Assert.That(item, Is.EqualTo("item 2"));
@@ -100,7 +100,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
                 new AdditionalFeatSelection { Feat = "feat 2" }
             };
 
-            mockDice.Setup(d => d.Roll(1).IndividualRolls(2)).Returns(new[] { 2 });
+            mockDice.Setup(d => d.Roll(1).d(2).AsSum()).Returns(2);
 
             var item = selector.SelectRandomFrom(collection);
             Assert.That(item, Is.InstanceOf<AdditionalFeatSelection>());

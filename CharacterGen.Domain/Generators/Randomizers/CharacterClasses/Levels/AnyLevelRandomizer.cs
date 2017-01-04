@@ -16,7 +16,7 @@ namespace CharacterGen.Domain.Generators.Randomizers.CharacterClasses.Levels
 
         public int Randomize()
         {
-            return dice.Roll().d20();
+            return dice.Roll().d20().AsSum();
         }
 
         public IEnumerable<int> GetAllPossibleResults()

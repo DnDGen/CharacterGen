@@ -139,7 +139,7 @@ namespace CharacterGen.Domain.Generators
         {
             var maximumAgeRoll = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.MaximumAgeRolls, race.BaseRace).Single();
 
-            return ages[RaceConstants.Ages.Venerable] + dice.Roll(maximumAgeRoll);
+            return ages[RaceConstants.Ages.Venerable] + dice.Roll(maximumAgeRoll).AsSum();
         }
 
         private int GetAgeInYears(Race race, CharacterClass characterClass, Dictionary<string, int> ages, int maximumAge)
@@ -148,7 +148,7 @@ namespace CharacterGen.Domain.Generators
             var tableName = string.Format(TableNameConstants.Formattable.Collection.CLASSTYPEAgeRolls, classType);
             var trainingAgeRoll = collectionsSelector.SelectFrom(tableName, race.BaseRace).Single();
 
-            var startingAge = ages[RaceConstants.Ages.Adulthood] + dice.Roll(trainingAgeRoll);
+            var startingAge = ages[RaceConstants.Ages.Adulthood] + dice.Roll(trainingAgeRoll).AsSum();
             var additionalAge = GetAdditionalAge(race, characterClass, classType, maximumAge, ages, startingAge);
             var totalAge = startingAge + additionalAge;
 
@@ -161,7 +161,7 @@ namespace CharacterGen.Domain.Generators
             if (additionalAgeDie < 1)
                 return characterClass.Level;
 
-            return dice.Roll(characterClass.Level).d(additionalAgeDie);
+            return dice.Roll(characterClass.Level).d(additionalAgeDie).AsSum();
         }
 
         private int GetAdditionalAgeDie(string classType, int maximumAge, int startingAge)
@@ -207,7 +207,7 @@ namespace CharacterGen.Domain.Generators
         private int GetModifier(Race race, string tableName)
         {
             var roll = collectionsSelector.SelectFrom(tableName, race.BaseRace).Single();
-            return dice.Roll(roll);
+            return dice.Roll(roll).AsSum();
         }
     }
 }

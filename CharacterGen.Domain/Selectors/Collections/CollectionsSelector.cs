@@ -47,7 +47,7 @@ namespace CharacterGen.Domain.Selectors.Collections
                 throw new ArgumentException("Cannot select random from an empty collection");
 
             var count = collection.Count();
-            var index = dice.Roll().d(count) - 1;
+            var index = dice.Roll().d(count).AsSum() - 1;
             return collection.ElementAt(index);
         }
     }

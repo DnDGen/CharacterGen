@@ -25,7 +25,7 @@ namespace CharacterGen.Domain.Generators.Randomizers.Stats
 
         protected override int RollStat()
         {
-            var rawRolls = dice.Roll(3).IndividualRolls(6);
+            var rawRolls = dice.Roll(3).d(6).AsIndividualRolls();
             var validRolls = rawRolls.Where(r => r > 1);
 
             var rolls = new List<int>();

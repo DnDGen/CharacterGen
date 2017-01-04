@@ -64,7 +64,7 @@ namespace CharacterGen.Domain.Generators.Combats
 
         private int RollHitPoints(int quantity, int die, int constitutionBonus)
         {
-            var rolls = dice.Roll(quantity).IndividualRolls(die);
+            var rolls = dice.Roll(quantity).d(die).AsIndividualRolls();
             rolls = rolls.Select(r => Math.Max(r + constitutionBonus, 1));
 
             return rolls.Sum();

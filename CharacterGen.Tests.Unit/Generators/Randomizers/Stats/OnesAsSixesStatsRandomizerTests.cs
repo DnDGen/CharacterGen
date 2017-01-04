@@ -20,20 +20,20 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
             var generator = new ConfigurableIterationGenerator(2);
             randomizer = new OnesAsSixesStatsRandomizer(mockDice.Object, generator);
 
-            mockDice.Setup(d => d.Roll(3).IndividualRolls(6)).Returns(new[] { 2, 3, 4 });
+            mockDice.Setup(d => d.Roll(3).d(6).AsIndividualRolls()).Returns(new[] { 2, 3, 4 });
         }
 
         [Test]
         public void OnesAsSixesStatsCalls3d6OncePerStat()
         {
             var stats = randomizer.Randomize();
-            mockDice.Verify(d => d.Roll(3).IndividualRolls(6), Times.Exactly(stats.Count));
+            mockDice.Verify(d => d.Roll(3).d(6).AsIndividualRolls(), Times.Exactly(stats.Count));
         }
 
         [Test]
         public void OnesAsSixesTreatsOnesAsSixes()
         {
-            mockDice.Setup(d => d.Roll(3).IndividualRolls(6)).Returns(new[] { 2, 3, 1 });
+            mockDice.Setup(d => d.Roll(3).d(6).AsIndividualRolls()).Returns(new[] { 2, 3, 1 });
 
             var stats = randomizer.Randomize();
             var stat = stats.Values.First();

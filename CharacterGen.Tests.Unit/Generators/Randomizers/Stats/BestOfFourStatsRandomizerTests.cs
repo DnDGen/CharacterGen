@@ -20,20 +20,20 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
             var generator = new ConfigurableIterationGenerator(2);
             randomizer = new BestOfFourStatsRandomizer(mockDice.Object, generator);
 
-            mockDice.Setup(d => d.Roll("4d6k3")).Returns(3);
+            mockDice.Setup(d => d.Roll("4d6k3").AsSum()).Returns(3);
         }
 
         [Test]
         public void BestOfFourStatsCalls4d6k3OncePerStat()
         {
             var stats = randomizer.Randomize();
-            mockDice.Verify(d => d.Roll("4d6k3"), Times.Exactly(stats.Count));
+            mockDice.Verify(d => d.Roll("4d6k3").AsSum(), Times.Exactly(stats.Count));
         }
 
         [Test]
         public void BestOfFourIgnoresLowestRollPerStat()
         {
-            mockDice.SetupSequence(d => d.Roll("4d6k3")).Returns(9);
+            mockDice.SetupSequence(d => d.Roll("4d6k3").AsSum()).Returns(9);
 
             var stats = randomizer.Randomize();
             var stat = stats.Values.First();

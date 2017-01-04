@@ -17,7 +17,7 @@ namespace CharacterGen.Domain.Generators.Randomizers.CharacterClasses.Levels
 
         public int Randomize()
         {
-            var roll = dice.Roll().d(5);
+            var roll = dice.Roll().d(5).AsSum();
             return roll + rollBonus;
         }
 

@@ -22,7 +22,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses.Levels
         [Test]
         public void BaseIsRollOf1d5()
         {
-            mockDice.Setup(d => d.Roll(1).IndividualRolls(5)).Returns(new[] { 9266 });
+            mockDice.Setup(d => d.Roll(1).d(5).AsSum()).Returns(9266);
             var level = randomizer.Randomize();
             Assert.That(level, Is.EqualTo(9266));
         }
@@ -30,7 +30,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses.Levels
         [Test]
         public void AddRollBonusToRoll()
         {
-            mockDice.Setup(d => d.Roll(1).IndividualRolls(5)).Returns(new[] { 9200 });
+            mockDice.Setup(d => d.Roll(1).d(5).AsSum()).Returns(9200);
             randomizer.RollBonus = 66;
 
             var level = randomizer.Randomize();

@@ -12,7 +12,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses.Levels
         public void Add10ToRoll()
         {
             var mockDice = new Mock<Dice>();
-            mockDice.Setup(d => d.Roll(1).IndividualRolls(5)).Returns(new[] { 9266 });
+            mockDice.Setup(d => d.Roll(1).d(5).AsSum()).Returns(9266);
             var randomizer = new HighLevelRandomizer(mockDice.Object);
 
             var level = randomizer.Randomize();

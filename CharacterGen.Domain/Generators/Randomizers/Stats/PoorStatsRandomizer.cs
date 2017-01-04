@@ -1,6 +1,5 @@
 ﻿using CharacterGen.Abilities.Stats;
 using RollGen;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,7 +7,7 @@ namespace CharacterGen.Domain.Generators.Randomizers.Stats
 {
     internal class PoorStatsRandomizer : BaseStatsRandomizer
     {
-        protected override Int32 defaultValue
+        protected override int defaultValue
         {
             get
             {
@@ -26,7 +25,7 @@ namespace CharacterGen.Domain.Generators.Randomizers.Stats
 
         protected override int RollStat()
         {
-            return dice.Roll(3).d6();
+            return dice.Roll(3).d6().AsSum();
         }
 
         protected override bool StatsAreAllowed(IEnumerable<Stat> stats)

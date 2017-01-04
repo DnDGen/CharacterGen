@@ -23,9 +23,9 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
         {
             mockDice = new Mock<Dice>();
             var generator = new ConfigurableIterationGenerator(2);
-            mockDice.SetupSequence(d => d.Roll(3).IndividualRolls(6))
-                .Returns(new[] { min }).Returns(new[] { max }).Returns(new[] { middle })
-                .Returns(new[] { min - 1 }).Returns(new[] { max + 1 }).Returns(new[] { middle });
+            mockDice.SetupSequence(d => d.Roll(3).d(6).AsSum())
+                .Returns(min).Returns(max).Returns(middle)
+                .Returns(min - 1).Returns(max + 1).Returns(middle);
 
             randomizer = new GoodStatsRandomizer(mockDice.Object, generator);
         }
@@ -34,7 +34,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
         public void GoodCalls3d6PerStat()
         {
             var stats = randomizer.Randomize();
-            mockDice.Verify(d => d.Roll(3).IndividualRolls(6), Times.Exactly(stats.Count));
+            mockDice.Verify(d => d.Roll(3).d(6).AsSum(), Times.Exactly(stats.Count));
         }
 
         [Test]
@@ -48,33 +48,33 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
         [Test]
         public void RerollIfStatAverageIsGreaterThanFifteen()
         {
-            mockDice.SetupSequence(d => d.Roll(3).IndividualRolls(6))
-                .Returns(new[] { min }).Returns(new[] { max }).Returns(new[] { middle })
-                .Returns(new[] { min - 1 }).Returns(new[] { max + 1 }).Returns(new[] { 9000 }) //invalid average
-                .Returns(new[] { min }).Returns(new[] { max }).Returns(new[] { middle })
-                .Returns(new[] { min - 1 }).Returns(new[] { max + 1 }).Returns(new[] { middle }); //valid average
+            mockDice.SetupSequence(d => d.Roll(3).d(6).AsSum())
+                .Returns(min).Returns(max).Returns(middle)
+                .Returns(min - 1).Returns(max + 1).Returns(9000) //invalid average
+                .Returns(min).Returns(max).Returns(middle)
+                .Returns(min - 1).Returns(max + 1).Returns(middle); //valid average
 
             var stats = randomizer.Randomize();
-            mockDice.Verify(d => d.Roll(3).IndividualRolls(6), Times.Exactly(stats.Count * 2));
+            mockDice.Verify(d => d.Roll(3).d(6).AsSum(), Times.Exactly(stats.Count * 2));
         }
 
         [Test]
         public void RerollIfStatAverageIsLessThanThirteen()
         {
-            mockDice.SetupSequence(d => d.Roll(3).IndividualRolls(6))
-                .Returns(new[] { min }).Returns(new[] { max }).Returns(new[] { middle })
-                .Returns(new[] { min - 1 }).Returns(new[] { max + 1 }).Returns(new[] { 3 }) //invalid average
-                .Returns(new[] { min }).Returns(new[] { max }).Returns(new[] { middle })
-                .Returns(new[] { min - 1 }).Returns(new[] { max + 1 }).Returns(new[] { middle }); //valid average
+            mockDice.SetupSequence(d => d.Roll(3).d(6).AsSum())
+                .Returns(min).Returns(max).Returns(middle)
+                .Returns(min - 1).Returns(max + 1).Returns(3) //invalid average
+                .Returns(min).Returns(max).Returns(middle)
+                .Returns(min - 1).Returns(max + 1).Returns(middle); //valid average
 
             var stats = randomizer.Randomize();
-            mockDice.Verify(d => d.Roll(3).IndividualRolls(6), Times.Exactly(stats.Count * 2));
+            mockDice.Verify(d => d.Roll(3).d(6).AsSum(), Times.Exactly(stats.Count * 2));
         }
 
         [Test]
         public void DefaultValueIs13()
         {
-            mockDice.Setup(d => d.Roll(3).IndividualRolls(6)).Returns(new[] { 9 });
+            mockDice.Setup(d => d.Roll(3).d(6).AsSum()).Returns(9);
 
             var stats = randomizer.Randomize();
 

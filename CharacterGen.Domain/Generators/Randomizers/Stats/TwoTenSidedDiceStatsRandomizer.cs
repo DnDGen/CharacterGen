@@ -1,13 +1,12 @@
 ﻿using CharacterGen.Abilities.Stats;
 using RollGen;
-using System;
 using System.Collections.Generic;
 
 namespace CharacterGen.Domain.Generators.Randomizers.Stats
 {
     internal class TwoTenSidedDiceStatsRandomizer : BaseStatsRandomizer
     {
-        protected override Int32 defaultValue
+        protected override int defaultValue
         {
             get
             {
@@ -25,7 +24,7 @@ namespace CharacterGen.Domain.Generators.Randomizers.Stats
 
         protected override int RollStat()
         {
-            return dice.Roll(2).d10();
+            return dice.Roll(2).d10().AsSum();
         }
 
         protected override bool StatsAreAllowed(IEnumerable<Stat> stats)

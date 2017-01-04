@@ -22,7 +22,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
         {
             mockDice = new Mock<Dice>();
             var generator = new ConfigurableIterationGenerator(2);
-            mockDice.Setup(d => d.Roll(3).IndividualRolls(6)).Returns(new[] { 1, 1, 1 });
+            mockDice.Setup(d => d.Roll(3).d(6).AsIndividualRolls()).Returns(new[] { 1, 1, 1 });
 
             randomizer = new HeroicStatsRandomizer(mockDice.Object, generator);
         }
@@ -31,13 +31,13 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
         public void HeroicStatsCalls3d6OnceTimesPerStat()
         {
             var stats = randomizer.Randomize();
-            mockDice.Verify(d => d.Roll(3).IndividualRolls(6), Times.Exactly(stats.Count));
+            mockDice.Verify(d => d.Roll(3).d(6).AsIndividualRolls(), Times.Exactly(stats.Count));
         }
 
         [Test]
         public void HeroicStatRollsTreatsOnesAsSixes()
         {
-            var sequence = mockDice.SetupSequence(d => d.Roll(3).IndividualRolls(6));
+            var sequence = mockDice.SetupSequence(d => d.Roll(3).d(6).AsIndividualRolls());
             for (var i = 0; i < 6; i++)
                 sequence = sequence.Returns(new[] { 1, 5, 6 });
 
@@ -57,7 +57,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
         [Test]
         public void RerollIfStatAverageIsLessThanSixteen()
         {
-            var sequence = mockDice.SetupSequence(d => d.Roll(3).IndividualRolls(6));
+            var sequence = mockDice.SetupSequence(d => d.Roll(3).d(6).AsIndividualRolls());
             for (var i = 0; i < 6; i++)
                 sequence = sequence.Returns(new[] { 5, 5, 5 }); //invalid average
 
@@ -72,7 +72,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
         [Test]
         public void DefaultValueIs16()
         {
-            mockDice.Setup(d => d.Roll(3).IndividualRolls(6)).Returns(new[] { 2, 2, 2 });
+            mockDice.Setup(d => d.Roll(3).d(6).AsIndividualRolls()).Returns(new[] { 2, 2, 2 });
 
             var stats = randomizer.Randomize();
 
