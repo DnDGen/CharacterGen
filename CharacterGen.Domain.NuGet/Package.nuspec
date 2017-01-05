@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>CharacterGen.Domain</id>
-    <version>7.1.0</version>
+    <version>7.2.0</version>
     <title>CharacterGen.Domain</title>
     <authors>Karl M. Speer</authors>
     <owners>cidthecoatrack</owners>
@@ -10,7 +10,7 @@
       This is a Ninject-based bootstrapper for CharacterGen
     </description>
     <releaseNotes>
-      #90, #91
+      #94
     </releaseNotes>
     <summary>
       This is a Ninject-based bootstrapper for CharacterGen
