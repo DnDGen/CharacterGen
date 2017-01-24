@@ -5,10 +5,18 @@
     <name>Aasimar</name>
     <item>62</item>
   </object>
-    <object>
-      <name>Bugbear</name>
-        <item>66</item>
-    </object>
+  <object>
+    <name>Bugbear</name>
+    <item>66</item>
+  </object>
+  <object>
+    <name>Centaur</name>
+    <item>71</item>
+  </object>
+  <object>
+    <name>Cloud Giant</name>
+    <item>204</item>
+  </object>
   <object>
     <name>Deep Dwarf</name>
     <item>45</item>
@@ -25,29 +33,41 @@
     <name>Doppelganger</name>
     <item>66</item>
   </object>
-    <object>
-        <name>Drow</name>
-        <item>53</item>
-    </object>
+  <object>
+    <name>Drow</name>
+    <item>53</item>
+  </object>
   <object>
     <name>Duergar Dwarf</name>
     <item>45</item>
+  </object>
+  <object>
+    <name>Fire Giant</name>
+    <item>132</item>
   </object>
   <object>
     <name>Forest Gnome</name>
     <item>36</item>
   </object>
   <object>
+    <name>Frost Giant</name>
+    <item>168</item>
+  </object>
+  <object>
     <name>Gnoll</name>
     <item>66</item>
   </object>
-    <object>
-        <name>Goblin</name>
-        <item>32</item>
-    </object>
+  <object>
+    <name>Goblin</name>
+    <item>32</item>
+  </object>
   <object>
     <name>Gray Elf</name>
     <item>53</item>
+  </object>
+  <object>
+    <name>Grimlock</name>
+    <item>58</item>
   </object>
   <object>
     <name>Half-Elf</name>
@@ -55,6 +75,10 @@
   </object>
   <object>
     <name>Half-Orc</name>
+    <item>58</item>
+  </object>
+  <object>
+    <name>Harpy</name>
     <item>58</item>
   </object>
   <object>
@@ -66,11 +90,19 @@
     <item>45</item>
   </object>
   <object>
+    <name>Hill Giant</name>
+    <item>114</item>
+  </object>
+  <object>
     <name>Hobgoblin</name>
     <item>50</item>
   </object>
   <object>
     <name>Human</name>
+    <item>58</item>
+  </object>
+  <object>
+    <name>Janni</name>
     <item>58</item>
   </object>
   <object>
@@ -110,8 +142,32 @@
     <item>61</item>
   </object>
   <object>
+    <name>Pixie</name>
+    <item>18</item>
+  </object>
+  <object>
+    <name>Rakshasa</name>
+    <item>58</item>
+  </object>
+  <object>
     <name>Rock Gnome</name>
     <item>36</item>
+  </object>
+  <object>
+    <name>Satyr</name>
+    <item>70</item>
+  </object>
+  <object>
+    <name>Scorpionfolk</name>
+    <item>70</item>
+  </object>
+  <object>
+    <name>Stone Giant</name>
+    <item>132</item>
+  </object>
+  <object>
+    <name>Storm Giant</name>
+    <item>240</item>
   </object>
   <object>
     <name>Svirfneblin</name>
@@ -128,6 +184,10 @@
   <object>
     <name>Troglodyte</name>
     <item>53</item>
+  </object>
+  <object>
+    <name>Troll</name>
+    <item>96</item>
   </object>
   <object>
     <name>Wild Elf</name>

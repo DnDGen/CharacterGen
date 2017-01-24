@@ -23,7 +23,7 @@ namespace CharacterGen.Domain.Selectors.Collections
             foreach (var stat in stats)
             {
                 var tableName = string.Format(TableNameConstants.Formattable.Adjustments.STATStatAdjustments, stat);
-                var statAdjustments = innerSelector.SelectFrom(tableName);
+                var statAdjustments = innerSelector.SelectAllFrom(tableName);
 
                 adjustments[stat] = statAdjustments[race.BaseRace] + statAdjustments[race.Metarace];
             }

@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+  <object>
+    <name>Telepathy</name>
+    <item>Telepathy</item>
+    <item></item>
+    <item>0</item>
+    <item>100</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Darkvision</name>
+    <item>Darkvision</item>
+    <item></item>
+    <item>0</item>
+    <item>60</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Natural Armor</name>
+    <item>Natural Armor</item>
+    <item></item>
+    <item>0</item>
+    <item>1</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Change Size</name>
+    <item>Change Size</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>2</item>
+    <item>Day</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Resistance</name>
+    <item>Resistance</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Fire</item>
+    <item>10</item>
+    <item>Hit</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Elemental Endurance</name>
+    <item>Elemental Endurance</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Improved Initiative</name>
+    <item>Improved Initiative</item>
+    <item></item>
+    <item>0</item>
+    <item>4</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Save BonusFortitude</name>
+    <item>Save Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>5</item>
+    <item>Fortitude</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Save BonusReflex</name>
+    <item>Save Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>5</item>
+    <item>Reflex</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Save BonusWill</name>
+    <item>Save Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>5</item>
+    <item>Will</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Spell-Like AbilityCreate food and water</name>
+    <item>Spell-Like Ability</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Create food and water</item>
+    <item>1</item>
+    <item>Day</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Spell-Like AbilityEthereal jaunt</name>
+    <item>Spell-Like Ability</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Ethereal jaunt</item>
+    <item>1</item>
+    <item>Day</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Spell-Like AbilityInvisibility</name>
+    <item>Spell-Like Ability</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Invisibility (self only)</item>
+    <item>3</item>
+    <item>Day</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Spell-Like AbilitySpeak with animals</name>
+    <item>Spell-Like Ability</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Speak with animals</item>
+    <item>3</item>
+    <item>Day</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Spell-Like AbilityPlane shift</name>
+    <item>Spell-Like Ability</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Plane shift</item>
+    <item>0</item>
+    <item>At Will</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+</items>

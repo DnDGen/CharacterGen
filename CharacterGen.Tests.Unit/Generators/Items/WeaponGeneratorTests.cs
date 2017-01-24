@@ -35,7 +35,6 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         private List<string> meleeWeapons;
         private List<string> twoHandedWeapons;
         private List<string> ammunitions;
-        private List<string> npcs;
 
         [SetUp]
         public void Setup()
@@ -57,7 +56,6 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             meleeWeapons = new List<string>();
             twoHandedWeapons = new List<string>();
             ammunitions = new List<string>();
-            npcs = new List<string>();
 
             race.Size = "size";
             race.BaseRace = "base race";
@@ -98,8 +96,6 @@ namespace CharacterGen.Tests.Unit.Generators.Items
                 .Returns(ammunitions);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, feats[0].Name))
                 .Returns(allProficientWeapons);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.NPCs))
-                .Returns(npcs);
         }
 
         [Test]
@@ -809,7 +805,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         {
             characterClass.Level = npcLevel;
             characterClass.Name = "class name";
-            npcs.Add(characterClass.Name);
+            characterClass.IsNPC = true;
 
             var npcWeapon = CreateWeapon("npc weapon");
 
@@ -845,7 +841,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         {
             characterClass.Level = level;
             characterClass.Name = "class name";
-            npcs.Add("npc class");
+            characterClass.IsNPC = false;
 
             var playerWeapon = CreateWeapon("player weapon");
 

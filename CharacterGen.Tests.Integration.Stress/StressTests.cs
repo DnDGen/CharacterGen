@@ -76,10 +76,11 @@ namespace CharacterGen.Tests.Integration.Stress
             do makeAssertions();
             while (TestShouldKeepRunning());
 
-            Console.WriteLine($"Stress test complete after {Stopwatch.Elapsed} and {iterations} iterations");
+            var iterationsPerSecond = Math.Round(iterations / Stopwatch.Elapsed.TotalSeconds, 2);
+            Console.WriteLine($"Stress test complete after {Stopwatch.Elapsed} and {iterations} iterations, or {iterationsPerSecond} iterations per second");
 
             if (Stopwatch.Elapsed.TotalSeconds > timeLimitInSeconds + 5)
-                Assert.Fail($"Something took way too long after {Stopwatch.Elapsed} and {iterations} iterations");
+                Assert.Fail($"Something took way too long after {Stopwatch.Elapsed} and {iterations} iterations, or {iterationsPerSecond} iterations per second");
         }
 
         protected T Generate<T>(Func<T> generate, Func<T, bool> isValid)
@@ -99,10 +100,11 @@ namespace CharacterGen.Tests.Integration.Stress
             do generatedObject = generate();
             while (TestShouldKeepRunning() && isValid(generatedObject) == false);
 
-            Console.WriteLine($"Generation complete after {Stopwatch.Elapsed} and {iterations} iterations");
+            var iterationsPerSecond = Math.Round(iterations / Stopwatch.Elapsed.TotalSeconds, 2);
+            Console.WriteLine($"Generation complete after {Stopwatch.Elapsed} and {iterations} iterations, or {iterationsPerSecond} iterations per second");
 
             if (TestShouldKeepRunning() == false && isValid(generatedObject) == false)
-                Assert.Fail($"Generation timed out after {Stopwatch.Elapsed} and {iterations} iterations");
+                Assert.Fail($"Generation timed out after {Stopwatch.Elapsed} and {iterations} iterations, or {iterationsPerSecond} iterations per second");
 
             return generatedObject;
         }

@@ -50,5 +50,18 @@ namespace CharacterGen.Domain.Selectors.Collections
             var index = dice.Roll().d(count).AsSum() - 1;
             return collection.ElementAt(index);
         }
+
+        public string FindGroupOf(string tableName, string item, params string[] filteredGroupNames)
+        {
+            var allGroups = SelectAllFrom(tableName);
+            var filteredGroups = allGroups.Where(kvp => filteredGroupNames.Contains(kvp.Key));
+
+            if (!filteredGroups.Any(kvp => kvp.Value.Contains(item)))
+                throw new ArgumentException($"No filtered group from [{string.Join(", ", filteredGroupNames)}] in {tableName} is listed for {item}");
+
+            var groupName = filteredGroups.First(kvp => kvp.Value.Contains(item)).Key;
+
+            return groupName;
+        }
     }
 }

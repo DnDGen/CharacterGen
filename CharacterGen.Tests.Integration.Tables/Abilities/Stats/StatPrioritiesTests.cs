@@ -2,7 +2,6 @@
 using CharacterGen.CharacterClasses;
 using CharacterGen.Domain.Tables;
 using NUnit.Framework;
-using System;
 
 namespace CharacterGen.Tests.Integration.Tables.Abilities.Stats
 {
@@ -17,25 +16,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Stats
         [Test]
         public override void CollectionNames()
         {
-            var names = new[]
-            {
-                CharacterClassConstants.Barbarian,
-                CharacterClassConstants.Bard,
-                CharacterClassConstants.Cleric,
-                CharacterClassConstants.Druid,
-                CharacterClassConstants.Fighter,
-                CharacterClassConstants.Monk,
-                CharacterClassConstants.Paladin,
-                CharacterClassConstants.Ranger,
-                CharacterClassConstants.Rogue,
-                CharacterClassConstants.Sorcerer,
-                CharacterClassConstants.Wizard,
-                CharacterClassConstants.Adept,
-                CharacterClassConstants.Aristocrat,
-                CharacterClassConstants.Commoner,
-                CharacterClassConstants.Expert,
-                CharacterClassConstants.Warrior
-            };
+            var classGroups = CollectionsMapper.Map(TableNameConstants.Set.Collection.ClassNameGroups);
+            var names = classGroups[GroupConstants.All];
 
             AssertCollectionNames(names);
         }

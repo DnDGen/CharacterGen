@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+  <object>
+    <name>Change Shape</name>
+    <item>Change Shape</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Damage Reduction</name>
+    <item>Damage Reduction</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Must be both good and piercing to overcome</item>
+    <item>15</item>
+    <item>Hit</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Natural Armor</name>
+    <item>Natural Armor</item>
+    <item></item>
+    <item>0</item>
+    <item>9</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Spell Resistance</name>
+    <item>Spell Resistance</item>
+    <item></item>
+    <item>0</item>
+    <item>27</item>
+    <item>Add class levels to power</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Natural WeaponBite</name>
+    <item>Natural Weapon</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Bite (1d6)</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Natural WeaponClaw</name>
+    <item>Natural Weapon</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Claw (1d4) x2</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Save BonusFortitude</name>
+    <item>Save Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>5</item>
+    <item>Fortitude</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Save BonusWill</name>
+    <item>Save Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>5</item>
+    <item>Will</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Save BonusReflex</name>
+    <item>Save Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>5</item>
+    <item>Reflex</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Darkvision</name>
+    <item>Darkvision</item>
+    <item></item>
+    <item>0</item>
+    <item>60</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Skill BonusBluff</name>
+    <item>Skill Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>4</item>
+    <item>Bluff</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Skill BonusDisguise</name>
+    <item>Skill Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>4</item>
+    <item>Disguise</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Skill BonusDisguiseChange Shape</name>
+    <item>Skill Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>10</item>
+    <item>Disguise (when using Change Shape)</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Skill BonusBluffDetect thoughts</name>
+    <item>Skill Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>4</item>
+    <item>Bluff (when using Detect Thoughts)</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Skill BonusDisguiseDetect thoughts</name>
+    <item>Skill Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>4</item>
+    <item>Disguise (when using Detect Thoughts)</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Spell-Like AbilityDetect thoughts</name>
+    <item>Spell-Like Ability</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Detect thoughts</item>
+    <item>0</item>
+    <item>Constant</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+  </object>
+</items>

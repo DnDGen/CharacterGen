@@ -19,6 +19,16 @@
   <object>
     <lower>8</lower>
     <content>High Elf</content>
+    <upper>39</upper>
+  </object>
+  <object>
+    <lower>40</lower>
+    <content>Pixie</content>
+    <upper>40</upper>
+  </object>
+  <object>
+    <lower>41</lower>
+    <content>Storm Giant</content>
     <upper>41</upper>
   </object>
   <object>
@@ -64,16 +74,11 @@
   <object>
     <lower>69</lower>
     <content>Human</content>
-    <upper>96</upper>
+    <upper>99</upper>
   </object>
   <object>
-    <lower>97</lower>
+    <lower>100</lower>
     <content>Svirfneblin</content>
-    <upper>97</upper>
-  </object>
-  <object>
-    <lower>98</lower>
-    <content></content>
     <upper>100</upper>
   </object>
 </percentile>

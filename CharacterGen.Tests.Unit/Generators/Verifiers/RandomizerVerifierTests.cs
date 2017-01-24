@@ -27,6 +27,7 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
         private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
         private Mock<ICollectionsSelector> mockCollectionsSelector;
         private Mock<ISetLevelRandomizer> mockSetLevelRandomizer;
+        private Mock<ISetClassNameRandomizer> mockSetClassNameRandomizer;
 
         private CharacterClass characterClass;
         private List<Alignment> alignments;
@@ -36,21 +37,22 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
         private List<string> metaraces;
         private Dictionary<string, int> adjustments;
         private Alignment alignment;
-        private List<string> spellcasters;
         private Race race;
+        private List<string> npcs;
 
         [SetUp]
         public void Setup()
         {
-            mockAlignmentRandomizer = new Mock<IAlignmentRandomizer>();
-            mockClassNameRandomizer = new Mock<IClassNameRandomizer>();
-            mockLevelRandomizer = new Mock<ILevelRandomizer>();
-            mockBaseRaceRandomizer = new Mock<RaceRandomizer>();
-            mockMetaraceRandomizer = new Mock<RaceRandomizer>();
             mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
-            mockSetLevelRandomizer = new Mock<ISetLevelRandomizer>();
             verifier = new RandomizerVerifier(mockAdjustmentsSelector.Object, mockCollectionsSelector.Object);
+            mockAlignmentRandomizer = new Mock<IAlignmentRandomizer>();
+            mockClassNameRandomizer = new Mock<IClassNameRandomizer>();
+            mockSetClassNameRandomizer = new Mock<ISetClassNameRandomizer>();
+            mockLevelRandomizer = new Mock<ILevelRandomizer>();
+            mockSetLevelRandomizer = new Mock<ISetLevelRandomizer>();
+            mockBaseRaceRandomizer = new Mock<RaceRandomizer>();
+            mockMetaraceRandomizer = new Mock<RaceRandomizer>();
 
             alignments = new List<Alignment>();
             characterClass = new CharacterClass();
@@ -60,22 +62,20 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
             metaraces = new List<string>();
             adjustments = new Dictionary<string, int>();
             alignment = new Alignment();
-            spellcasters = new List<string>();
             race = new Race();
+            npcs = new List<string>();
 
             mockAlignmentRandomizer.Setup(r => r.GetAllPossibleResults()).Returns(alignments);
             mockClassNameRandomizer.Setup(r => r.GetAllPossibleResults(It.IsAny<Alignment>())).Returns(classNames);
             mockLevelRandomizer.Setup(r => r.GetAllPossibleResults()).Returns(levels);
-            mockBaseRaceRandomizer.Setup(r => r.GetAllPossible(It.IsAny<Alignment>(), It.IsAny<CharacterClass>()))
-                .Returns(baseRaces);
-            mockMetaraceRandomizer.Setup(r => r.GetAllPossible(It.IsAny<Alignment>(), It.IsAny<CharacterClass>()))
-                .Returns(metaraces);
-            mockAdjustmentsSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments)).Returns(adjustments);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Spellcasters))
-                .Returns(spellcasters);
+            mockBaseRaceRandomizer.Setup(r => r.GetAllPossible(It.IsAny<Alignment>(), It.IsAny<CharacterClass>())).Returns(baseRaces);
+            mockMetaraceRandomizer.Setup(r => r.GetAllPossible(It.IsAny<Alignment>(), It.IsAny<CharacterClass>())).Returns(metaraces);
 
             mockSetLevelRandomizer.SetupAllProperties();
             mockSetLevelRandomizer.Setup(r => r.GetAllPossibleResults()).Returns(() => new[] { mockSetLevelRandomizer.Object.SetLevel });
+
+            mockSetClassNameRandomizer.SetupAllProperties();
+            mockSetClassNameRandomizer.Setup(r => r.GetAllPossibleResults(It.IsAny<Alignment>())).Returns(() => new[] { mockSetClassNameRandomizer.Object.SetClassName });
 
             alignments.Add(alignment);
 
@@ -83,13 +83,19 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
             characterClass.Name = "class name";
             classNames.Add(characterClass.Name);
             levels.Add(characterClass.Level);
+            npcs.Add("npc class name");
 
             race.BaseRace = "base race";
+            race.Metarace = "metarace";
             baseRaces.Add(race.BaseRace);
             metaraces.Add(race.Metarace);
 
             adjustments[baseRaces[0]] = 0;
             adjustments[metaraces[0]] = 0;
+
+            mockAdjustmentsSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments, It.IsAny<string>())).Returns((string table, string name) => adjustments[name]);
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.NPCs)).Returns(npcs);
         }
 
         [Test]
@@ -183,8 +189,8 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
         [Test]
         public void RandomizersNotVerifiedIfLevelAdjustmentsCauseLevelToBeLessThan1()
         {
-            adjustments[baseRaces[0]] = -1;
-            adjustments[metaraces[0]] = -1;
+            adjustments[baseRaces[0]] = 1;
+            adjustments[metaraces[0]] = 1;
             levels.Clear();
             levels.Add(2);
 
@@ -199,8 +205,8 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
             metaraces.Add("other metarace");
 
             adjustments[baseRaces[0]] = 0;
-            adjustments[metaraces[0]] = -8;
-            adjustments[baseRaces[1]] = -3;
+            adjustments[metaraces[0]] = 8;
+            adjustments[baseRaces[1]] = 3;
             adjustments[metaraces[1]] = 0;
 
             levels.Clear();
@@ -213,8 +219,8 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
         [Test]
         public void RandomizersVerifiedIfSetLevelAdjustmentIsNotAllowed()
         {
-            adjustments[baseRaces[0]] = -1;
-            adjustments[metaraces[0]] = -1;
+            adjustments[baseRaces[0]] = 1;
+            adjustments[metaraces[0]] = 1;
 
             mockSetLevelRandomizer.Object.SetLevel = 2;
             mockSetLevelRandomizer.Object.AllowAdjustments = false;
@@ -226,8 +232,8 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
         [Test]
         public void RandomizersNotVerifiedIfSetLevelAdjustmentIsAllowed()
         {
-            adjustments[baseRaces[0]] = -1;
-            adjustments[metaraces[0]] = -1;
+            adjustments[baseRaces[0]] = 1;
+            adjustments[metaraces[0]] = 1;
 
             mockSetLevelRandomizer.Object.SetLevel = 2;
             mockSetLevelRandomizer.Object.AllowAdjustments = true;
@@ -242,7 +248,7 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
             metaraces.Clear();
             metaraces.Add("metarace");
 
-            adjustments[metaraces[0]] = -2;
+            adjustments[metaraces[0]] = 2;
             levels.Clear();
             levels.Add(1);
 
@@ -322,8 +328,8 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
         [Test]
         public void AlignmentNotVerifiedIfLevelAdjustmentsCaseLevelToBeLessThan1()
         {
-            adjustments[baseRaces[0]] = -1;
-            adjustments[metaraces[0]] = -1;
+            adjustments[baseRaces[0]] = 1;
+            adjustments[metaraces[0]] = 1;
             levels.Clear();
             levels.Add(2);
 
@@ -338,8 +344,8 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
             metaraces.Add("other metarace");
 
             adjustments[baseRaces[0]] = 0;
-            adjustments[metaraces[0]] = -8;
-            adjustments[baseRaces[1]] = -3;
+            adjustments[metaraces[0]] = 8;
+            adjustments[baseRaces[1]] = 3;
             adjustments[metaraces[1]] = 0;
 
             levels.Clear();
@@ -352,8 +358,8 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
         [Test]
         public void AlignmentVerifiedIfSetLevelAdjustmentIsNotAllowed()
         {
-            adjustments[baseRaces[0]] = -1;
-            adjustments[metaraces[0]] = -1;
+            adjustments[baseRaces[0]] = 1;
+            adjustments[metaraces[0]] = 1;
 
             mockSetLevelRandomizer.Object.SetLevel = 2;
             mockSetLevelRandomizer.Object.AllowAdjustments = false;
@@ -365,8 +371,8 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
         [Test]
         public void AlignmentNotVerifiedIfSetLevelAdjustmentIsAllowed()
         {
-            adjustments[baseRaces[0]] = -1;
-            adjustments[metaraces[0]] = -1;
+            adjustments[baseRaces[0]] = 1;
+            adjustments[metaraces[0]] = 1;
 
             mockSetLevelRandomizer.Object.SetLevel = 2;
             mockSetLevelRandomizer.Object.AllowAdjustments = true;
@@ -409,8 +415,8 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
         [Test]
         public void CharacterClassNotVerifiedIfLevelAdjustmentsMakeLevelLessThan1()
         {
-            adjustments[baseRaces[0]] = -1;
-            adjustments[metaraces[0]] = -1;
+            adjustments[baseRaces[0]] = 1;
+            adjustments[metaraces[0]] = 1;
 
             characterClass.Level = 2;
 
@@ -425,9 +431,9 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
             metaraces.Add("other metarace");
 
             adjustments[baseRaces[0]] = 0;
-            adjustments[metaraces[0]] = -8;
-            adjustments[baseRaces[1]] = -3;
-            adjustments[metaraces[1]] = -1;
+            adjustments[metaraces[0]] = 8;
+            adjustments[baseRaces[1]] = 3;
+            adjustments[metaraces[1]] = 1;
 
             characterClass.Level = 2;
 
@@ -438,8 +444,8 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
         [Test]
         public void CharacterClassVerifiedIfSetLevelAdjustmentIsNotAllowed()
         {
-            adjustments[baseRaces[0]] = -1;
-            adjustments[metaraces[0]] = -1;
+            adjustments[baseRaces[0]] = 1;
+            adjustments[metaraces[0]] = 1;
 
             characterClass.Level = 2;
             mockSetLevelRandomizer.Object.AllowAdjustments = false;
@@ -451,8 +457,8 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
         [Test]
         public void CharacterClassNotVerifiedIfSetLevelAdjustmentIsAllowed()
         {
-            adjustments[baseRaces[0]] = -1;
-            adjustments[metaraces[0]] = -1;
+            adjustments[baseRaces[0]] = 1;
+            adjustments[metaraces[0]] = 1;
 
             characterClass.Level = 2;
             mockSetLevelRandomizer.Object.AllowAdjustments = true;
@@ -464,8 +470,8 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
         [Test]
         public void RaceNotVerifiedIfLevelAdjustmentsMakeLevelLessThan1()
         {
-            adjustments[race.BaseRace] = -1;
-            adjustments[race.Metarace] = -1;
+            adjustments[race.BaseRace] = 1;
+            adjustments[race.Metarace] = 1;
 
             characterClass.Level = 2;
 
@@ -477,7 +483,7 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
         public void RaceVerifiedIfLevelAdjustmentIsAllowed()
         {
             adjustments[race.BaseRace] = 0;
-            adjustments[race.Metarace] = -1;
+            adjustments[race.Metarace] = 1;
 
             characterClass.Level = 2;
 
@@ -488,8 +494,8 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
         [Test]
         public void RaceVerifiedIfSetLevelAdjustmentIsNotAllowed()
         {
-            adjustments[race.BaseRace] = -1;
-            adjustments[race.Metarace] = -1;
+            adjustments[race.BaseRace] = 1;
+            adjustments[race.Metarace] = 1;
 
             characterClass.Level = 2;
             mockSetLevelRandomizer.Object.AllowAdjustments = false;
@@ -501,11 +507,52 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
         [Test]
         public void RaceNotVerifiedIfSetLevelAdjustmentIsAllowed()
         {
-            adjustments[race.BaseRace] = -1;
-            adjustments[race.Metarace] = -1;
+            adjustments[race.BaseRace] = 1;
+            adjustments[race.Metarace] = 1;
 
             characterClass.Level = 2;
             mockSetLevelRandomizer.Object.AllowAdjustments = true;
+
+            var verified = verifier.VerifyRaceCompatibility(race, characterClass, mockSetLevelRandomizer.Object);
+            Assert.That(verified, Is.False);
+        }
+
+        [Test]
+        public void RaceVerifiedForAnyNPC()
+        {
+            adjustments[race.BaseRace] = 9;
+            adjustments[race.Metarace] = 2;
+            npcs.Add(characterClass.Name);
+
+            characterClass.Level = 20;
+            mockSetLevelRandomizer.Object.AllowAdjustments = true;
+
+            var verified = verifier.VerifyRaceCompatibility(race, characterClass, mockSetLevelRandomizer.Object);
+            Assert.That(verified, Is.True);
+        }
+
+        [Test]
+        public void RaceVerifiedForSetNPC()
+        {
+            adjustments[race.BaseRace] = 9;
+            adjustments[race.Metarace] = 2;
+            mockSetClassNameRandomizer.Object.SetClassName = npcs[0];
+
+            characterClass.Level = 20;
+            mockSetLevelRandomizer.Object.AllowAdjustments = true;
+
+            var verified = verifier.VerifyRaceCompatibility(race, characterClass, mockSetLevelRandomizer.Object);
+            Assert.That(verified, Is.True);
+        }
+
+        [Test]
+        public void RaceNotVerifiedIfEffectiveLevelTooHigh()
+        {
+            adjustments[race.BaseRace] = 9;
+            adjustments[race.Metarace] = 2;
+
+            characterClass.Level = 20;
+            mockSetLevelRandomizer.Object.AllowAdjustments = false;
 
             var verified = verifier.VerifyRaceCompatibility(race, characterClass, mockSetLevelRandomizer.Object);
             Assert.That(verified, Is.False);

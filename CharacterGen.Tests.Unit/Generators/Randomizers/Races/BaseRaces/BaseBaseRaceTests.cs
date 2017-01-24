@@ -45,7 +45,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
 
             mockPercentileResultSelector.Setup(p => p.SelectAllFrom(It.IsAny<string>())).Returns(baseRaces);
             mockPercentileResultSelector.Setup(p => p.SelectFrom(It.IsAny<string>())).Returns(firstBaseRace);
-            mockLevelAdjustmentsSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments)).Returns(adjustments);
+            mockLevelAdjustmentsSelector.Setup(p => p.SelectAllFrom(TableNameConstants.Set.Adjustments.LevelAdjustments)).Returns(adjustments);
 
         }
 
@@ -82,12 +82,42 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         }
 
         [Test]
-        public void RandomizeLoopsUntilAllowedBaseRaceIsRolled()
+        public void RandomizeRerollsEmptyBaseRace()
         {
-            mockPercentileResultSelector.SetupSequence(p => p.SelectFrom(It.IsAny<string>())).Returns("invalid base race")
+            mockPercentileResultSelector.SetupSequence(p => p.SelectFrom(It.IsAny<string>()))
+                .Returns(string.Empty)
                 .Returns(firstBaseRace);
 
-            randomizer.Randomize(alignment, characterClass);
+            var baseRace = randomizer.Randomize(alignment, characterClass);
+            Assert.That(baseRace, Is.EqualTo(firstBaseRace));
+            mockPercentileResultSelector.Verify(p => p.SelectFrom(It.IsAny<string>()), Times.Exactly(2));
+        }
+
+        [Test]
+        public void RandomizeRerollsInvalidBaseRaceBecauseNotAllowed()
+        {
+            randomizer.ForbiddenBaseRace = firstBaseRace;
+
+            mockPercentileResultSelector.SetupSequence(p => p.SelectFrom(It.IsAny<string>()))
+                .Returns(firstBaseRace)
+                .Returns(secondBaseRace);
+
+            var baseRace = randomizer.Randomize(alignment, characterClass);
+            Assert.That(baseRace, Is.EqualTo(secondBaseRace));
+            mockPercentileResultSelector.Verify(p => p.SelectFrom(It.IsAny<string>()), Times.Exactly(2));
+        }
+
+        [Test]
+        public void RandomizeRerollsInvalidBaseRaceBecauseOfAdjustment()
+        {
+            adjustments[firstBaseRace] = 1;
+
+            mockPercentileResultSelector.SetupSequence(p => p.SelectFrom(It.IsAny<string>()))
+                .Returns(firstBaseRace)
+                .Returns(secondBaseRace);
+
+            var baseRace = randomizer.Randomize(alignment, characterClass);
+            Assert.That(baseRace, Is.EqualTo(secondBaseRace));
             mockPercentileResultSelector.Verify(p => p.SelectFrom(It.IsAny<string>()), Times.Exactly(2));
         }
 

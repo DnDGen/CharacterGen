@@ -54,11 +54,21 @@
   <object>
     <lower>65</lower>
     <content>Human</content>
+    <upper>96</upper>
+  </object>
+  <object>
+    <lower>97</lower>
+    <content>Storm Giant</content>
     <upper>97</upper>
   </object>
-    <object>
-        <lower>98</lower>
-        <content></content>
-        <upper>100</upper>
-    </object>
+  <object>
+    <lower>98</lower>
+    <content>Cloud Giant</content>
+    <upper>98</upper>
+  </object>
+  <object>
+    <lower>99</lower>
+    <content>Centaur</content>
+    <upper>100</upper>
+  </object>
 </percentile>

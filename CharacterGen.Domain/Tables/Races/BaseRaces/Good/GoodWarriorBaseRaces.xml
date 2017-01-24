@@ -1,8 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <percentile>
-  <object><lower>1</lower><content>Deep Dwarf</content><upper>3</upper></object>
-  <object><lower>4</lower><content>Hill Dwarf</content><upper>33</upper></object>
+  <object>
+    <lower>1</lower>
+    <content>Deep Dwarf</content>
+    <upper>3</upper>
+  </object>
+  <object>
+    <lower>4</lower>
+    <content>Hill Dwarf</content>
+    <upper>33</upper>
+  </object>
   <object>
     <lower>34</lower>
     <content>Mountain Dwarf</content>
@@ -13,20 +21,39 @@
     <content>Gray Elf</content>
     <upper>42</upper>
   </object>
-  <object><lower>43</lower><content>High Elf</content><upper>47</upper></object>
+  <object>
+    <lower>43</lower>
+    <content>High Elf</content>
+    <upper>47</upper>
+  </object>
   <object>
     <lower>48</lower>
     <content>Rock Gnome</content>
     <upper>48</upper>
   </object>
-  <object><lower>49</lower><content>Half-Elf</content><upper>50</upper></object>
-  <object><lower>51</lower><content>Lightfoot Halfling</content><upper>51</upper></object>
-  <object><lower>52</lower><content>Deep Halfling</content><upper>52</upper></object>
-  <object><lower>53</lower><content>Half-Orc</content><upper>57</upper></object>
-  <object><lower>58</lower><content>Human</content><upper>97</upper></object>
-    <object>
-        <lower>98</lower>
-        <content></content>
-        <upper>100</upper>
-    </object>
+  <object>
+    <lower>49</lower>
+    <content>Half-Elf</content>
+    <upper>50</upper>
+  </object>
+  <object>
+    <lower>51</lower>
+    <content>Lightfoot Halfling</content>
+    <upper>51</upper>
+  </object>
+  <object>
+    <lower>52</lower>
+    <content>Deep Halfling</content>
+    <upper>52</upper>
+  </object>
+  <object>
+    <lower>53</lower>
+    <content>Half-Orc</content>
+    <upper>57</upper>
+  </object>
+  <object>
+    <lower>58</lower>
+    <content>Human</content>
+    <upper>100</upper>
+  </object>
 </percentile>

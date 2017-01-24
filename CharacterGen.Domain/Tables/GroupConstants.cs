@@ -3,7 +3,6 @@
     internal static class GroupConstants
     {
         public const string AddMonsterHitDiceToPower = "Add Monster Hit Dice to Power";
-        public const string Additional = "Additional";
         public const string All = "All";
         public const string ArmorBonus = "Armor Bonus";
         public const string ArmorCheckPenalty = "Armor Check Penalty";
@@ -18,6 +17,7 @@
         public const string HasClassRequirements = "Has Class Requirements";
         public const string HasSkillRequirements = "Has Skill Requirements";
         public const string HasStatRequirements = "Has Stat Requirements";
+        public const string HasWings = "Has Wings";
         public const string Healers = "Healers";
         public const string Initiative = "Initiative";
         public const string Knowledge = "Knowledge";

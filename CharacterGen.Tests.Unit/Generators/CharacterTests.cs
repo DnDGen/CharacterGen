@@ -77,5 +77,59 @@ namespace CharacterGen.Tests.Unit.Common
 
             Assert.That(character.Summary, Is.EqualTo("lawfulness goodness Level 9266 metarace base race class name"));
         }
+
+        [Test]
+        public void ChallengeRatingForCharacterIsClassLevel()
+        {
+            character.Class.Level = 9266;
+            Assert.That(character.ChallengeRating, Is.EqualTo(9266));
+        }
+
+        [Test]
+        public void ChallengeRatingForCharacterIsClassLevelAndRacialChallengeRating()
+        {
+            character.Class.Level = 9266;
+            character.Race.ChallengeRating = 90210;
+
+            Assert.That(character.ChallengeRating, Is.EqualTo(9266 + 90210));
+        }
+
+        [Test]
+        public void ChallengeRatingForNPCIsHalfOfClassLevel()
+        {
+            character.Class.Level = 9266;
+            character.Class.IsNPC = true;
+
+            Assert.That(character.ChallengeRating, Is.EqualTo(9266 / 2));
+        }
+
+        [Test]
+        public void ChallengeRatingForNPCIsHalfOfClassLevelAndAllOfRacialChallengeRating()
+        {
+            character.Class.Level = 9266;
+            character.Class.IsNPC = true;
+            character.Race.ChallengeRating = 90210;
+
+            Assert.That(character.ChallengeRating, Is.EqualTo(9266 / 2 + 90210));
+        }
+
+        [Test]
+        public void ChallengeRatingForLevel1NPCIsOneHalf()
+        {
+            character.Class.Level = 1;
+            character.Class.IsNPC = true;
+
+            Assert.That(character.ChallengeRating, Is.EqualTo(.5));
+        }
+
+        [Test]
+        public void ChallengeRatingForLevel1NPCWithRacialChallengeRatingIsRacialChallengeRating()
+        {
+            character.Class.Level = 1;
+            character.Class.IsNPC = true;
+            character.Race.ChallengeRating = 90210;
+
+            Assert.That(character.ChallengeRating, Is.EqualTo(90210));
+        }
     }
 }

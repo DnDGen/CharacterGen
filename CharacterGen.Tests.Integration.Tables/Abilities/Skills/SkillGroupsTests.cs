@@ -3,7 +3,6 @@ using CharacterGen.Abilities.Skills;
 using CharacterGen.CharacterClasses;
 using CharacterGen.Domain.Tables;
 using NUnit.Framework;
-using System;
 
 namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
 {
@@ -166,7 +165,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
             SkillConstants.SleightOfHand,
             SkillConstants.Swim,
             SkillConstants.Tumble)]
-        public override void DistinctCollection(String name, params String[] collection)
+        public override void DistinctCollection(string name, params string[] collection)
         {
             base.DistinctCollection(name, collection);
         }

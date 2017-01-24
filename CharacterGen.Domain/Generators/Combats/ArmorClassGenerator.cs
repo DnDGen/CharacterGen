@@ -99,7 +99,7 @@ namespace CharacterGen.Domain.Generators.Combats
 
         private int GetTotalItemArmorBonus(Item item)
         {
-            var armorBonuses = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.ArmorBonuses);
+            var armorBonuses = adjustmentsSelector.SelectAllFrom(TableNameConstants.Set.Adjustments.ArmorBonuses);
 
             if (item.Magic.Curse == CurseConstants.OppositeEffect)
                 return armorBonuses[item.Name] - item.Magic.Bonus;
@@ -111,7 +111,7 @@ namespace CharacterGen.Domain.Generators.Combats
 
         private int GetSizeModifier(Race race)
         {
-            var sizeModifiers = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.SizeModifiers);
+            var sizeModifiers = adjustmentsSelector.SelectAllFrom(TableNameConstants.Set.Adjustments.SizeModifiers);
             return sizeModifiers[race.Size];
         }
 

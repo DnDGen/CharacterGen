@@ -1,10 +1,10 @@
 ﻿using CharacterGen.Abilities.Stats;
 using CharacterGen.CharacterClasses;
+using CharacterGen.Magics;
 using CharacterGen.Races;
 using CharacterGen.Randomizers.CharacterClasses;
 using CharacterGen.Randomizers.Races;
 using CharacterGen.Randomizers.Stats;
-using CharacterGen.Verifiers.Exceptions;
 using Ninject;
 using NUnit.Framework;
 using System;
@@ -29,6 +29,8 @@ namespace CharacterGen.Tests.Integration.Stress
         public ISetClassNameRandomizer SetClassNameRandomizer { get; set; }
         [Inject]
         public ISetLevelRandomizer SetLevelRandomizer { get; set; }
+        [Inject]
+        public ISetBaseRaceRandomizer SetBaseRaceRandomizer { get; set; }
         [Inject]
         public CharacterVerifier CharacterVerifier { get; set; }
 
@@ -57,6 +59,7 @@ namespace CharacterGen.Tests.Integration.Stress
             var npc = CharacterGenerator.GenerateWith(AlignmentRandomizer, NPCClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer, RawStatsRandomizer);
 
             CharacterVerifier.AssertCharacter(npc);
+            Assert.That(npc.Class.IsNPC, Is.True);
         }
 
         [Test]
@@ -72,6 +75,15 @@ namespace CharacterGen.Tests.Integration.Stress
             var commoner = CharacterGenerator.GenerateWith(AlignmentRandomizer, SetClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer, RawStatsRandomizer);
 
             CharacterVerifier.AssertCharacter(commoner);
+            Assert.That(commoner.Class.IsNPC, Is.True);
+            Assert.That(commoner.Class.Name, Is.EqualTo(CharacterClassConstants.Commoner));
+            Assert.That(commoner.Class.ProhibitedFields, Is.Empty);
+            Assert.That(commoner.Class.SpecialistFields, Is.Empty);
+            Assert.That(commoner.Magic.Animal, Is.Empty);
+            Assert.That(commoner.Magic.ArcaneSpellFailure, Is.EqualTo(0));
+            Assert.That(commoner.Magic.KnownSpells, Is.Empty);
+            Assert.That(commoner.Magic.PreparedSpells, Is.Empty);
+            Assert.That(commoner.Magic.SpellsPerDay, Is.Empty);
         }
 
         [Test]
@@ -88,6 +100,18 @@ namespace CharacterGen.Tests.Integration.Stress
             var commoner = CharacterGenerator.GenerateWith(AlignmentRandomizer, SetClassNameRandomizer, SetLevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer, RawStatsRandomizer);
 
             CharacterVerifier.AssertCharacter(commoner);
+            Assert.That(commoner.Class.IsNPC, Is.True);
+            Assert.That(commoner.Class.Level, Is.EqualTo(1));
+            Assert.That(commoner.Class.EffectiveLevel, Is.EqualTo(.5), commoner.Race.BaseRace + commoner.Race.Metarace);
+            Assert.That(commoner.Class.Name, Is.EqualTo(CharacterClassConstants.Commoner));
+            Assert.That(commoner.Class.ProhibitedFields, Is.Empty);
+            Assert.That(commoner.Class.SpecialistFields, Is.Empty);
+            Assert.That(commoner.ChallengeRating, Is.EqualTo(.5), commoner.Race.BaseRace + commoner.Race.Metarace);
+            Assert.That(commoner.Magic.Animal, Is.Empty);
+            Assert.That(commoner.Magic.ArcaneSpellFailure, Is.EqualTo(0));
+            Assert.That(commoner.Magic.KnownSpells, Is.Empty);
+            Assert.That(commoner.Magic.PreparedSpells, Is.Empty);
+            Assert.That(commoner.Magic.SpellsPerDay, Is.Empty);
         }
 
         [Test]
@@ -104,48 +128,51 @@ namespace CharacterGen.Tests.Integration.Stress
             CharacterVerifier.AssertCharacter(spellcaster);
             Assert.That(spellcaster.Equipment.Treasure.Items, Is.Not.Empty);
 
+            AssertSpellcaster(spellcaster);
+        }
+
+        private void AssertSpellcaster(Character spellcaster)
+        {
             Assert.That(spellcaster.Magic, Is.Not.Null);
             Assert.That(spellcaster.Magic.Animal, Is.Not.Null);
             Assert.That(spellcaster.Magic.ArcaneSpellFailure, Is.InRange(0, 100));
 
-            Assert.That(spellcaster.Magic.KnownSpells, Is.Not.Empty, spellcaster.Class.Name);
-
-            foreach (var knownSpell in spellcaster.Magic.KnownSpells)
-            {
-                Assert.That(knownSpell.Level, Is.InRange(0, 9));
-                Assert.That(knownSpell.Metamagic, Is.Empty);
-                Assert.That(knownSpell.Name, Is.Not.Empty);
-            }
-
-            var knownSpellLevels = spellcaster.Magic.KnownSpells.Select(s => s.Level).Distinct();
-            var maxSpellLevel = knownSpellLevels.Max();
-            var minSpellLevel = knownSpellLevels.Min();
-            Assert.That(minSpellLevel, Is.EqualTo(0).Or.EqualTo(1), $"{spellcaster.Class.Name} minimum known spell level");
-            Assert.That(knownSpellLevels.Count(), Is.EqualTo(maxSpellLevel - minSpellLevel + 1), $"{spellcaster.Class.Name} known spell levels count");
-
             Assert.That(spellcaster.Magic.SpellsPerDay, Is.Not.Empty, spellcaster.Class.Name);
+
+            var levelsAndSources = spellcaster.Magic.SpellsPerDay.Select(s => s.Source + s.Level);
+            Assert.That(levelsAndSources, Is.Unique);
+
+            var spellsPerDayLevels = spellcaster.Magic.SpellsPerDay.Select(s => s.Level);
+            var maxSpellLevel = spellsPerDayLevels.Max();
+            var minSpellLevel = spellsPerDayLevels.Min();
+
+            Assert.That(minSpellLevel, Is.InRange(0, 1));
+            Assert.That(maxSpellLevel, Is.InRange(0, 9));
 
             foreach (var spellQuantity in spellcaster.Magic.SpellsPerDay)
             {
                 Assert.That(spellQuantity.Level, Is.InRange(minSpellLevel, maxSpellLevel));
                 Assert.That(spellQuantity.Quantity, Is.Not.Negative);
+                Assert.That(spellQuantity.Source, Is.Not.Empty);
 
                 if (spellQuantity.HasDomainSpell == false)
                     Assert.That(spellQuantity.Quantity, Is.Positive);
 
-                if (spellQuantity.Level > 0)
+                if (spellQuantity.Level > 0 && spellQuantity.Source == spellcaster.Class.Name)
                     Assert.That(spellQuantity.HasDomainSpell, Is.EqualTo(spellcaster.Class.SpecialistFields.Any()));
                 else
                     Assert.That(spellQuantity.HasDomainSpell, Is.False);
             }
 
-            var spellsPerDayLevels = spellcaster.Magic.SpellsPerDay.Select(s => s.Level);
-            Assert.That(spellsPerDayLevels.Min(), Is.EqualTo(minSpellLevel), $"{spellcaster.Class.Name} min per day spell level");
-            Assert.That(spellsPerDayLevels.Max(), Is.InRange(maxSpellLevel - 1, maxSpellLevel), $"{spellcaster.Class.Name} max per day spell level");
-            Assert.That(spellsPerDayLevels, Is.Unique);
-            Assert.That(spellsPerDayLevels.Count(), Is.InRange(maxSpellLevel - minSpellLevel, maxSpellLevel - minSpellLevel + 1), $"{spellcaster.Class.Name} spells per day count");
+            Assert.That(spellcaster.Magic.KnownSpells, Is.Not.Empty, spellcaster.Class.Name);
 
-            if (spellcaster.Class.Name == CharacterClassConstants.Bard || spellcaster.Class.Name == CharacterClassConstants.Sorcerer)
+            //INFO: Adding 1 to max spell, because you might know a spell that you cannot yet cast
+            var maxKnownSpellLevel = Math.Min(9, maxSpellLevel + 1);
+
+            foreach (var knownSpell in spellcaster.Magic.KnownSpells)
+                AssertSpell(knownSpell, minSpellLevel, maxKnownSpellLevel);
+
+            if (spellcaster.Magic.SpellsPerDay.All(s => s.Source == CharacterClassConstants.Bard || s.Source == CharacterClassConstants.Sorcerer))
             {
                 Assert.That(spellcaster.Magic.PreparedSpells, Is.Empty, spellcaster.Class.Name);
             }
@@ -154,17 +181,37 @@ namespace CharacterGen.Tests.Integration.Stress
                 Assert.That(spellcaster.Magic.PreparedSpells, Is.Not.Empty, spellcaster.Class.Name);
 
                 foreach (var preparedSpell in spellcaster.Magic.PreparedSpells)
-                {
-                    Assert.That(preparedSpell.Level, Is.InRange(minSpellLevel, maxSpellLevel));
-                    Assert.That(preparedSpell.Metamagic, Is.Empty);
-                    Assert.That(preparedSpell.Name, Is.Not.Empty);
-                }
-
-                var preparedSpellLevels = spellcaster.Magic.PreparedSpells.Select(s => s.Level).Distinct();
-                Assert.That(preparedSpellLevels.Min(), Is.EqualTo(minSpellLevel), $"{spellcaster.Class.Name} min prepared spell level");
-                Assert.That(preparedSpellLevels.Max(), Is.InRange(maxSpellLevel - 1, maxSpellLevel), $"{spellcaster.Class.Name} max prepared spell level");
-                Assert.That(preparedSpellLevels.Count(), Is.InRange(maxSpellLevel - minSpellLevel, maxSpellLevel - minSpellLevel + 1), $"{spellcaster.Class.Name} prepared spell level count");
+                    AssertSpell(preparedSpell, minSpellLevel, maxSpellLevel);
             }
+        }
+
+        private void AssertSpell(Spell spell, int minSpellLevel, int maxSpellLevel)
+        {
+            Assert.That(spell.Name, Is.Not.Empty);
+            Assert.That(spell.Source, Is.Not.Empty, spell.Name);
+            Assert.That(spell.Level, Is.InRange(minSpellLevel, maxSpellLevel), spell.Source + spell.Name);
+            Assert.That(spell.Metamagic, Is.Empty, spell.Source + spell.Name);
+        }
+
+        [Test]
+        public void StressRakshasaSpellcaster()
+        {
+            Stress(AssertRakshasaSpellcaster);
+        }
+
+        private void AssertRakshasaSpellcaster()
+        {
+            SetBaseRaceRandomizer.SetBaseRace = RaceConstants.BaseRaces.Rakshasa;
+
+            var spellcaster = Generate(
+                () => CharacterGenerator.GenerateWith(AlignmentRandomizer, SpellcasterClassNameRandomizer, LevelRandomizer, SetBaseRaceRandomizer, MetaraceRandomizer, HeroicStatsRandomizer),
+                c => true);
+
+            CharacterVerifier.AssertCharacter(spellcaster);
+            Assert.That(spellcaster.Equipment.Treasure.Items, Is.Not.Empty);
+            Assert.That(spellcaster.Race.BaseRace, Is.EqualTo(RaceConstants.BaseRaces.Rakshasa));
+
+            AssertSpellcaster(spellcaster);
         }
 
         [Test]
@@ -191,6 +238,7 @@ namespace CharacterGen.Tests.Integration.Stress
             Assert.That(character.Race.Metarace, Is.Not.Empty);
             Assert.That(character.Race.Metarace, Is.Not.EqualTo(RaceConstants.Metaraces.None));
             Assert.That(character.Race.Metarace, Is.EqualTo(setMetaraceRandomizer.SetMetarace));
+            Assert.That(character.Class.LevelAdjustment, Is.Positive);
         }
 
         [Test]
@@ -221,31 +269,10 @@ namespace CharacterGen.Tests.Integration.Stress
             Assert.That(character.Race.Metarace, Is.Not.Empty);
             Assert.That(character.Race.Metarace, Is.Not.EqualTo(RaceConstants.Metaraces.None));
             Assert.That(character.Race.Metarace, Is.EqualTo(setMetaraceRandomizer.SetMetarace));
-            Assert.That(character.Class.Level, Is.InRange(1, setLevelRandomizer.SetLevel - 1));
-        }
-
-        [Test]
-        public void StressSetMetaraceAndSetLevelAllowingInvalidAdjustment()
-        {
-            Stress(AssertSetMetaraceAndSetLevelAllowingInvalidAdjustment);
-        }
-
-        private void AssertSetMetaraceAndSetLevelAllowingInvalidAdjustment()
-        {
-            var forcableMetaraceRandomizer = MetaraceRandomizer as IForcableMetaraceRandomizer;
-            forcableMetaraceRandomizer.ForceMetarace = true;
-
-            var setMetaraceRandomizer = GetNewInstanceOf<ISetMetaraceRandomizer>();
-
-            var alignment = GetNewAlignment();
-            var characterClass = GetNewCharacterClass(alignment);
-            setMetaraceRandomizer.SetMetarace = forcableMetaraceRandomizer.Randomize(alignment, characterClass);
-
-            var setLevelRandomizer = GetNewInstanceOf<ISetLevelRandomizer>();
-            setLevelRandomizer.SetLevel = 1;
-            setLevelRandomizer.AllowAdjustments = true;
-
-            Assert.That(() => CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, setLevelRandomizer, BaseRaceRandomizer, setMetaraceRandomizer, RawStatsRandomizer), Throws.InstanceOf<IncompatibleRandomizersException>());
+            Assert.That(character.Class.Level, Is.Positive);
+            Assert.That(character.Class.Level, Is.EqualTo(setLevelRandomizer.SetLevel - character.Class.LevelAdjustment));
+            Assert.That(character.Class.LevelAdjustment, Is.Positive);
+            Assert.That(character.Class.EffectiveLevel, Is.EqualTo(setLevelRandomizer.SetLevel));
         }
 
         [Test]
@@ -277,6 +304,8 @@ namespace CharacterGen.Tests.Integration.Stress
             Assert.That(character.Race.Metarace, Is.Not.EqualTo(RaceConstants.Metaraces.None));
             Assert.That(character.Race.Metarace, Is.EqualTo(setMetaraceRandomizer.SetMetarace));
             Assert.That(character.Class.Level, Is.EqualTo(setLevelRandomizer.SetLevel));
+            Assert.That(character.Class.LevelAdjustment, Is.Positive);
+            Assert.That(character.Class.EffectiveLevel, Is.EqualTo(setLevelRandomizer.SetLevel + character.Class.LevelAdjustment));
         }
 
         [Test]
@@ -299,6 +328,7 @@ namespace CharacterGen.Tests.Integration.Stress
             Assert.That(character.Equipment.Treasure.Items, Is.Not.Empty, character.Race.Metarace);
             Assert.That(character.Ability.Stats.Keys, Is.All.Not.EqualTo(StatConstants.Constitution), character.Race.Metarace);
             Assert.That(character.Combat.SavingThrows.HasFortitudeSave, Is.False, character.Race.Metarace);
+            Assert.That(character.Class.LevelAdjustment, Is.Positive);
         }
     }
 }

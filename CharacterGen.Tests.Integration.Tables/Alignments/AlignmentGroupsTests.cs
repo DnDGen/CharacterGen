@@ -1,4 +1,5 @@
-﻿using CharacterGen.Domain.Tables;
+﻿using CharacterGen.Alignments;
+using CharacterGen.Domain.Tables;
 using NUnit.Framework;
 using System;
 
@@ -20,76 +21,76 @@ namespace CharacterGen.Tests.Integration.Tables.Alignments
         {
             var names = new[]
             {
-                "Lawful Good",
-                "Neutral Good",
-                "Chaotic Good",
-                "Lawful Neutral",
-                "True Neutral",
-                "Chaotic Neutral",
-                "Lawful Evil",
-                "Neutral Evil",
-                "Chaotic Evil"
+                AlignmentConstants.LawfulGood,
+                AlignmentConstants.NeutralGood,
+                AlignmentConstants.ChaoticGood,
+                AlignmentConstants.LawfulNeutral,
+                AlignmentConstants.TrueNeutral,
+                AlignmentConstants.ChaoticNeutral,
+                AlignmentConstants.LawfulEvil,
+                AlignmentConstants.NeutralEvil,
+                AlignmentConstants.ChaoticEvil
             };
         }
 
-        [TestCase("Lawful Good",
-            "Lawful Good",
-            "Neutral Good",
-            "Lawful Neutral",
-            "True Neutral")]
-        [TestCase("Neutral Good",
-            "Lawful Good",
-            "Neutral Good",
-            "Chaotic Good",
-            "Lawful Neutral",
-            "True Neutral",
-            "Chaotic Neutral")]
-        [TestCase("Chaotic Good",
-            "Neutral Good",
-            "Chaotic Good",
-            "Chaotic Neutral",
-            "True Neutral")]
-        [TestCase("Lawful Neutral",
-            "Neutral Good",
-            "Lawful Good",
-            "Lawful Neutral",
-            "True Neutral",
-            "Neutral Evil",
-            "Lawful Evil")]
-        [TestCase("True Neutral",
-            "Lawful Good",
-            "Neutral Good",
-            "Chaotic Good",
-            "Lawful Neutral",
-            "True Neutral",
-            "Chaotic Neutral",
-            "Lawful Evil",
-            "Neutral Evil",
-            "Chaotic Evil")]
-        [TestCase("Chaotic Neutral",
-            "Neutral Good",
-            "Chaotic Good",
-            "Chaotic Neutral",
-            "True Neutral",
-            "Neutral Evil",
-            "Chaotic Evil")]
-        [TestCase("Lawful Evil",
-            "Lawful Evil",
-            "Neutral Evil",
-            "Lawful Neutral",
-            "True Neutral")]
-        [TestCase("Neutral Evil",
-            "Lawful Evil",
-            "Neutral Evil",
-            "Chaotic Evil",
-            "Lawful Neutral",
-            "True Neutral",
-            "Chaotic Neutral")]
-        [TestCase("Chaotic Evil",
-            "Neutral Evil",
-            "Chaotic Evil",
-            "Chaotic Neutral",
-            "True Neutral")]
+        [TestCase(AlignmentConstants.LawfulGood,
+            AlignmentConstants.LawfulGood,
+            AlignmentConstants.NeutralGood,
+            AlignmentConstants.LawfulNeutral,
+            AlignmentConstants.TrueNeutral)]
+        [TestCase(AlignmentConstants.NeutralGood,
+            AlignmentConstants.LawfulGood,
+            AlignmentConstants.NeutralGood,
+            AlignmentConstants.ChaoticGood,
+            AlignmentConstants.LawfulNeutral,
+            AlignmentConstants.TrueNeutral,
+            AlignmentConstants.ChaoticNeutral)]
+        [TestCase(AlignmentConstants.ChaoticGood,
+            AlignmentConstants.NeutralGood,
+            AlignmentConstants.ChaoticGood,
+            AlignmentConstants.ChaoticNeutral,
+            AlignmentConstants.TrueNeutral)]
+        [TestCase(AlignmentConstants.LawfulNeutral,
+            AlignmentConstants.NeutralGood,
+            AlignmentConstants.LawfulGood,
+            AlignmentConstants.LawfulNeutral,
+            AlignmentConstants.TrueNeutral,
+            AlignmentConstants.NeutralEvil,
+            AlignmentConstants.LawfulEvil)]
+        [TestCase(AlignmentConstants.TrueNeutral,
+            AlignmentConstants.LawfulGood,
+            AlignmentConstants.NeutralGood,
+            AlignmentConstants.ChaoticGood,
+            AlignmentConstants.LawfulNeutral,
+            AlignmentConstants.TrueNeutral,
+            AlignmentConstants.ChaoticNeutral,
+            AlignmentConstants.LawfulEvil,
+            AlignmentConstants.NeutralEvil,
+            AlignmentConstants.ChaoticEvil)]
+        [TestCase(AlignmentConstants.ChaoticNeutral,
+            AlignmentConstants.NeutralGood,
+            AlignmentConstants.ChaoticGood,
+            AlignmentConstants.ChaoticNeutral,
+            AlignmentConstants.TrueNeutral,
+            AlignmentConstants.NeutralEvil,
+            AlignmentConstants.ChaoticEvil)]
+        [TestCase(AlignmentConstants.LawfulEvil,
+            AlignmentConstants.LawfulEvil,
+            AlignmentConstants.NeutralEvil,
+            AlignmentConstants.LawfulNeutral,
+            AlignmentConstants.TrueNeutral)]
+        [TestCase(AlignmentConstants.NeutralEvil,
+            AlignmentConstants.LawfulEvil,
+            AlignmentConstants.NeutralEvil,
+            AlignmentConstants.ChaoticEvil,
+            AlignmentConstants.LawfulNeutral,
+            AlignmentConstants.TrueNeutral,
+            AlignmentConstants.ChaoticNeutral)]
+        [TestCase(AlignmentConstants.ChaoticEvil,
+            AlignmentConstants.NeutralEvil,
+            AlignmentConstants.ChaoticEvil,
+            AlignmentConstants.ChaoticNeutral,
+            AlignmentConstants.TrueNeutral)]
         public override void DistinctCollection(String name, params String[] collection)
         {
             base.DistinctCollection(name, collection);

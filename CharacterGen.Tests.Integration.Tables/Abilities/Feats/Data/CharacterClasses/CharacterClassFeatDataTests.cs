@@ -20,7 +20,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             indices[DataIndexConstants.CharacterClassFeatData.AllowFocusOfAllIndex] = "AllowFocusOfAll";
         }
 
-        public virtual void Data(string name, string feat, string focusType, int frequencyQuantity, string frequencyQuantityStat, string frequencyTimePeriod, int minimumLevel, int maximumLevel, int power, string sizeRequirement, bool allowFocusOfAll)
+        public virtual void ClassFeatData(string name, string feat, string focusType, int frequencyQuantity, string frequencyQuantityStat, string frequencyTimePeriod, int minimumLevel, int maximumLevel, int power, string sizeRequirement, bool allowFocusOfAll)
         {
             var data = new List<string>();
             for (var i = 0; i < 10; i++)

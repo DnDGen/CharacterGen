@@ -1,5 +1,4 @@
-﻿using System;
-using CharacterGen.Abilities.Skills;
+﻿using CharacterGen.Abilities.Skills;
 using CharacterGen.Domain.Tables;
 using NUnit.Framework;
 
@@ -16,7 +15,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
         [Test]
         public override void CollectionNames()
         {
-            var names = new[] 
+            var names = new[]
             {
                 SkillConstants.Appraise,
                 SkillConstants.Balance,
@@ -119,7 +118,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
         [TestCase(SkillConstants.Swim)]
         [TestCase(SkillConstants.UseMagicDevice)]
         [TestCase(SkillConstants.UseRope)]
-        public override void DistinctCollection(String name, params String[] collection)
+        public override void DistinctCollection(string name, params string[] collection)
         {
             base.DistinctCollection(name, collection);
         }

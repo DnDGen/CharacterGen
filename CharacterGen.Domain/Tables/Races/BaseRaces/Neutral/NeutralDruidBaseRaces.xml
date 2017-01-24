@@ -46,15 +46,24 @@
     <content>Half-Orc</content>
     <upper>40</upper>
   </object>
-  <object><lower>41</lower><content>Human</content><upper>88</upper></object>
+  <object>
+    <lower>41</lower>
+    <content>Human</content>
+    <upper>88</upper>
+  </object>
   <object>
     <lower>89</lower>
-    <content>Lizardfolk</content>
-    <upper>98</upper>
+    <content>Satyr</content>
+    <upper>89</upper>
   </object>
-    <object>
-        <lower>99</lower>
-        <content></content>
-        <upper>100</upper>
-    </object>
+  <object>
+    <lower>90</lower>
+    <content>Lizardfolk</content>
+    <upper>99</upper>
+  </object>
+  <object>
+    <lower>100</lower>
+    <content>Janni</content>
+    <upper>100</upper>
+  </object>
 </percentile>

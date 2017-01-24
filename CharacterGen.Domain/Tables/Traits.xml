@@ -124,7 +124,7 @@
     </object>
     <object>
         <lower>26</lower>
-        <content></content>
+        <content>Completely normal and uninteresting</content>
         <upper>26</upper>
     </object>
     <object>
@@ -194,22 +194,22 @@
     </object>
     <object>
         <lower>40</lower>
-        <content>Tall</content>
+        <content>Talks a lot</content>
         <upper>40</upper>
     </object>
     <object>
         <lower>41</lower>
-        <content>Short</content>
+        <content>Talks very little</content>
         <upper>41</upper>
     </object>
     <object>
         <lower>42</lower>
-        <content>Thin</content>
+        <content>Constantly quotes others</content>
         <upper>42</upper>
     </object>
     <object>
         <lower>43</lower>
-        <content>Fat</content>
+        <content>Has a thick accent</content>
         <upper>43</upper>
     </object>
     <object>

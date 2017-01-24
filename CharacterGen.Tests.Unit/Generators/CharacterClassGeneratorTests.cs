@@ -46,8 +46,8 @@ namespace CharacterGen.Tests.Unit.Generators
             specialistFields = new List<string>();
             prohibitedFields = new List<string>();
 
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.SpecialistFieldQuantities)).Returns(specialistFieldQuantities);
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.ProhibitedFieldQuantities)).Returns(prohibitedFieldQuantities);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.SpecialistFieldQuantities, ClassName)).Returns(() => specialistFieldQuantities[ClassName]);
+            mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(TableNameConstants.Set.Adjustments.ProhibitedFieldQuantities)).Returns(prohibitedFieldQuantities);
             mockClassNameRandomizer.Setup(r => r.Randomize(alignment)).Returns(ClassName);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SpecialistFields, ClassName)).Returns(specialistFields);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ProhibitedFields, ClassName)).Returns(prohibitedFields);
@@ -61,6 +61,7 @@ namespace CharacterGen.Tests.Unit.Generators
 
             var characterClass = characterClassGenerator.GenerateWith(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
             Assert.That(characterClass.Level, Is.EqualTo(9266));
+            Assert.That(characterClass.EffectiveLevel, Is.EqualTo(9266));
         }
 
         [Test]
@@ -276,6 +277,7 @@ namespace CharacterGen.Tests.Unit.Generators
             var characterClass = new CharacterClass();
             characterClass.Name = ClassName;
             var race = new Race();
+            race.BaseRace = "base race";
             race.Metarace = "metarace";
 
             specialistFields.Add("specialist field");
@@ -289,113 +291,116 @@ namespace CharacterGen.Tests.Unit.Generators
         }
 
         [Test]
-        public void IfASpecialistButNoMetarace_ReturnOriginalSpecialistFields()
+        public void ReturnIntersectionOfAllRestrictionsOfSpecialistFields()
         {
             var characterClass = new CharacterClass();
             characterClass.Name = ClassName;
             characterClass.SpecialistFields = new[] { "specialist field" };
             var race = new Race();
-
-            specialistFields.Add("specialist field");
-            specialistFields.Add("other specialist field");
-
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SpecialistFields, race.Metarace))
-                .Returns(new[] { "metarace specialist field", "other specialist field" });
-
-            var regeneratedSpecialistFields = characterClassGenerator.RegenerateSpecialistFields(alignment, characterClass, race);
-            Assert.That(regeneratedSpecialistFields, Is.EqualTo(characterClass.SpecialistFields));
-        }
-
-        [Test]
-        public void IfASpecialistButMetaraceDoesNotAffect_ReturnOriginalSpecialistFields()
-        {
-            var characterClass = new CharacterClass();
-            characterClass.Name = ClassName;
-            characterClass.SpecialistFields = new[] { "specialist field" };
-            var race = new Race();
+            race.BaseRace = "base race";
             race.Metarace = "metarace";
 
             specialistFields.Add("specialist field");
+            specialistFields.Add("alignment specialist field");
             specialistFields.Add("other specialist field");
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SpecialistFields, race.Metarace))
-                .Returns(new[] { "metarace specialist field" });
+                .Returns(new[] { "metarace specialist field", "specialist field" });
 
-            var regeneratedSpecialistFields = characterClassGenerator.RegenerateSpecialistFields(alignment, characterClass, race);
-            Assert.That(regeneratedSpecialistFields, Is.EqualTo(characterClass.SpecialistFields));
-        }
-
-        [Test]
-        public void IfASpecialistAndMetaraceAffects_ReturnNewSpecialistFields()
-        {
-            var characterClass = new CharacterClass();
-            characterClass.Name = ClassName;
-            characterClass.SpecialistFields = new[] { "specialist field" };
-            var race = new Race();
-            race.Metarace = "metarace";
-
-            specialistFields.Add("specialist field");
-            specialistFields.Add("other specialist field");
-
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SpecialistFields, race.Metarace))
-                .Returns(new[] { "metarace specialist field", "other specialist field" });
-
-            var regeneratedSpecialistFields = characterClassGenerator.RegenerateSpecialistFields(alignment, characterClass, race);
-            Assert.That(regeneratedSpecialistFields.Single(), Is.EqualTo("other specialist field"));
-        }
-
-        [Test]
-        public void OnlyUseAlignmentFieldsWhenRegeneratingSpecialistFields()
-        {
-            var characterClass = new CharacterClass();
-            characterClass.Name = ClassName;
-            characterClass.SpecialistFields = new[] { "specialist field" };
-            var race = new Race();
-            race.Metarace = "metarace";
-
-            specialistFields.Add("specialist field");
-            specialistFields.Add("other specialist field");
-
-            alignment.Goodness = "goodness";
-            alignment.Lawfulness = "lawfulness";
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SpecialistFields, race.BaseRace))
+                .Returns(new[] { "base race specialist field", "specialist field" });
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ProhibitedFields, alignment.ToString()))
-                .Returns(new[] { "non-alignment field" });
-
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SpecialistFields, race.Metarace))
-                .Returns(new[] { "metarace specialist field", "non-alignment field", "other specialist field" });
+                .Returns(new[] { "alignment specialist field" });
 
             var regeneratedSpecialistFields = characterClassGenerator.RegenerateSpecialistFields(alignment, characterClass, race);
-
-            Assert.That(regeneratedSpecialistFields.Single(), Is.EqualTo("other specialist field"));
+            Assert.That(regeneratedSpecialistFields.Single(), Is.EqualTo("specialist field"));
         }
 
         [Test]
-        public void RegenerateMultipleSpecialistFields()
+        public void ReturnEqualNumberOfIntersectionOfAllRestrictionsOfSpecialistFields()
         {
             var characterClass = new CharacterClass();
             characterClass.Name = ClassName;
-            characterClass.SpecialistFields = new[] { "original specialist field", "other original specialist field" };
+            characterClass.SpecialistFields = new[] { "specialist field", "other specialist field" };
             var race = new Race();
+            race.BaseRace = "base race";
             race.Metarace = "metarace";
 
             specialistFields.Add("specialist field");
             specialistFields.Add("other specialist field");
-            specialistFields.Add("metarace specialist field");
-            specialistFields.Add("original specialist field");
-            specialistFields.Add("other original specialist field");
+            specialistFields.Add("alignment specialist field");
 
-            var metaraceFields = new[] { "metarace specialist field", "other specialist field", "specialist field" };
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SpecialistFields, race.Metarace))
-                .Returns(metaraceFields);
+                .Returns(new[] { "metarace specialist field", "specialist field", "other specialist field" });
 
-            mockCollectionsSelector.SetupSequence(s => s.SelectRandomFrom(It.Is<IEnumerable<string>>(fs => fs.Intersect(metaraceFields).Any())))
-                .Returns("metarace specialist field").Returns("specialist field");
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SpecialistFields, race.BaseRace))
+                .Returns(new[] { "base race specialist field", "specialist field", "other specialist field" });
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ProhibitedFields, alignment.ToString()))
+                .Returns(new[] { "other alignment specialist field" });
+
+            var count = 0;
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<string>>())).Returns((IEnumerable<string> c) => c.ElementAt(count++ % c.Count()));
 
             var regeneratedSpecialistFields = characterClassGenerator.RegenerateSpecialistFields(alignment, characterClass, race);
-            Assert.That(regeneratedSpecialistFields, Contains.Item("specialist field"));
-            Assert.That(regeneratedSpecialistFields, Contains.Item("metarace specialist field"));
-            Assert.That(regeneratedSpecialistFields.Count(), Is.EqualTo(2));
+            Assert.That(regeneratedSpecialistFields.First, Is.EqualTo("specialist field"));
+            Assert.That(regeneratedSpecialistFields.Last, Is.EqualTo("other specialist field"));
+            Assert.That(regeneratedSpecialistFields.Count, Is.EqualTo(2));
+        }
+
+        [Test]
+        public void ReturnFewerIntersectionOfAllRestrictionsOfSpecialistFields()
+        {
+            var characterClass = new CharacterClass();
+            characterClass.Name = ClassName;
+            characterClass.SpecialistFields = new[] { "specialist field", "other specialist field" };
+            var race = new Race();
+            race.BaseRace = "base race";
+            race.Metarace = "metarace";
+
+            specialistFields.Add("specialist field");
+            specialistFields.Add("other specialist field");
+            specialistFields.Add("alignment specialist field");
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SpecialistFields, race.Metarace))
+                .Returns(new[] { "metarace specialist field", "specialist field", "other specialist field" });
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SpecialistFields, race.BaseRace))
+                .Returns(new[] { "base race specialist field", "specialist field" });
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ProhibitedFields, alignment.ToString()))
+                .Returns(new[] { "alignment specialist field" });
+
+            var regeneratedSpecialistFields = characterClassGenerator.RegenerateSpecialistFields(alignment, characterClass, race);
+            Assert.That(regeneratedSpecialistFields.Single, Is.EqualTo("specialist field"));
+        }
+
+        [Test]
+        public void ReturnNoSpecialistFieldsWhenTooRestricted()
+        {
+            var characterClass = new CharacterClass();
+            characterClass.Name = ClassName;
+            characterClass.SpecialistFields = new[] { "specialist field", "other specialist field" };
+            var race = new Race();
+            race.BaseRace = "base race";
+            race.Metarace = "metarace";
+
+            specialistFields.Add("specialist field");
+            specialistFields.Add("other specialist field");
+            specialistFields.Add("alignment specialist field");
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SpecialistFields, race.Metarace))
+                .Returns(new[] { "metarace specialist field", "other specialist field" });
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SpecialistFields, race.BaseRace))
+                .Returns(new[] { "base race specialist field", "specialist field" });
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ProhibitedFields, alignment.ToString()))
+                .Returns(new[] { "alignment specialist field" });
+
+            var regeneratedSpecialistFields = characterClassGenerator.RegenerateSpecialistFields(alignment, characterClass, race);
+            Assert.That(regeneratedSpecialistFields, Is.Empty);
         }
     }
 }

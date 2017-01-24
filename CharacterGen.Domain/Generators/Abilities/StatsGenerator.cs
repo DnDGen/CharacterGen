@@ -114,7 +114,7 @@ namespace CharacterGen.Domain.Generators.Abilities
         private Dictionary<string, Stat> SetMinimumStats(Dictionary<string, Stat> stats)
         {
             foreach (var stat in stats.Values)
-                stat.Value = Math.Max(stat.Value, 1);
+                stat.Value = Math.Max(stat.Value, 3);
 
             return stats;
         }

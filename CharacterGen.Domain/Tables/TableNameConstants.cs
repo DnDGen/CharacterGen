@@ -6,9 +6,11 @@
         {
             internal static class Adjustments
             {
+                public const string AerialSpeeds = "AerialSpeeds";
                 public const string ArcaneSpellFailures = "ArcaneSpellFailures";
                 public const string ArmorBonuses = "ArmorBonuses";
                 public const string ArmorCheckPenalties = "ArmorCheckPenalties";
+                public const string ChallengeRatings = "ChallengeRatings";
                 public const string ClassHitDice = "ClassHitDice";
                 public const string CohortLevels = "CohortLevels";
                 public const string FeatArmorAdjustments = "FeatArmorAdjustments";

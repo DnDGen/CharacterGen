@@ -1,182 +1,248 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <items>
-    <object>
-        <name></name>
-        <item>0</item>
-    </object>
-  <object><name>Aasimar</name><item>0</item></object>
-    <object>
-        <name>Bugbear</name>
-        <item>0</item>
-    </object>
-    <object>
-        <name>Derro</name>
-        <item>0</item>
-    </object>
-    <object>
-        <name>Deep Halfling</name>
-        <item>0</item>
-    </object>
-    <object>
-        <name>Deep Dwarf</name>
-        <item>0</item>
-    </object>
-    <object>
-        <name>Doppelganger</name>
-        <item>2</item>
-    </object>
-  <object><name>Drow</name><item>2</item></object>
-    <object>
-        <name>Duergar Dwarf</name>
-        <item>0</item>
-    </object>
-    <object>
-        <name>Forest Gnome</name>
-        <item>0</item>
-    </object>
+  <object>
+    <name></name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Aasimar</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Bugbear</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Centaur</name>
+    <item>-2</item>
+  </object>
+  <object>
+    <name>Cloud Giant</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Derro</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Deep Halfling</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Deep Dwarf</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Doppelganger</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Drow</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Duergar Dwarf</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Fire Giant</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Forest Gnome</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Frost Giant</name>
+    <item>0</item>
+  </object>
   <object>
     <name>Ghost</name>
     <item>0</item>
   </object>
-    <object>
-        <name>Gnoll</name>
-        <item>-2</item>
-    </object>
-    <object>
-        <name>Goblin</name>
-        <item>0</item>
-    </object>
-    <object>
-        <name>Gray Elf</name>
-        <item>2</item>
-    </object>
-    <object>
-        <name>Half-Celestial</name>
-        <item>2</item>
-    </object>
-    <object>
-        <name>Half-Dragon</name>
-        <item>0</item>
-    </object>
-    <object>
-        <name>Half-Elf</name>
-        <item>0</item>
-    </object>
-    <object>
-        <name>Half-Fiend</name>
-        <item>4</item>
-    </object>
-    <object>
-        <name>Half-Orc</name>
-        <item>-2</item>
-    </object>
-    <object>
-        <name>High Elf</name>
-        <item>0</item>
-    </object>
-    <object>
-        <name>Hill Dwarf</name>
-        <item>0</item>
-    </object>
-    <object>
-        <name>Hobgoblin</name>
-        <item>0</item>
-    </object>
-    <object>
-        <name>Human</name>
-        <item>0</item>
-    </object>
-    <object>
-        <name>Kobold</name>
-        <item>0</item>
-    </object>
+  <object>
+    <name>Gnoll</name>
+    <item>-2</item>
+  </object>
+  <object>
+    <name>Goblin</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Gray Elf</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Grimlock</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Half-Celestial</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Half-Dragon</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Half-Elf</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Half-Fiend</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Half-Orc</name>
+    <item>-2</item>
+  </object>
+  <object>
+    <name>Harpy</name>
+    <item>-4</item>
+  </object>
+  <object>
+    <name>High Elf</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Hill Dwarf</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Hill Giant</name>
+    <item>-4</item>
+  </object>
+  <object>
+    <name>Hobgoblin</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Human</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Janni</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Kobold</name>
+    <item>0</item>
+  </object>
   <object>
     <name>Lich</name>
     <item>2</item>
   </object>
-    <object>
-        <name>Lightfoot Halfling</name>
-        <item>0</item>
-    </object>
-    <object>
-        <name>Lizardfolk</name>
-        <item>-2</item>
-    </object>
-    <object>
-        <name>Mind Flayer</name>
-        <item>8</item>
-    </object>
-    <object>
-        <name>Minotaur</name>
-        <item>-4</item>
-    </object>
-    <object>
-        <name>Mountain Dwarf</name>
-        <item>0</item>
-    </object>
-    <object>
-        <name>Ogre Mage</name>
-        <item>4</item>
-    </object>
-    <object>
-        <name>Ogre</name>
-        <item>-4</item>
-    </object>
-    <object>
-        <name>Orc</name>
-        <item>-2</item>
-    </object>
-    <object>
-        <name>Rock Gnome</name>
-        <item>0</item>
-    </object>
-    <object>
-        <name>Svirfneblin</name>
-        <item>0</item>
-    </object>
-    <object>
-        <name>Tallfellow Halfling</name>
-        <item>0</item>
-    </object>
-    <object>
-        <name>Tiefling</name>
-        <item>2</item>
-    </object>
-    <object>
-        <name>Troglodyte</name>
-        <item>-2</item>
-    </object>
+  <object>
+    <name>Lightfoot Halfling</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Lizardfolk</name>
+    <item>-2</item>
+  </object>
+  <object>
+    <name>Mind Flayer</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Minotaur</name>
+    <item>-4</item>
+  </object>
+  <object>
+    <name>Mountain Dwarf</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Ogre Mage</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Ogre</name>
+    <item>-4</item>
+  </object>
+  <object>
+    <name>Orc</name>
+    <item>-2</item>
+  </object>
+  <object>
+    <name>Pixie</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Rakshasa</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Rock Gnome</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Satyr</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Scorpionfolk</name>
+    <item>-2</item>
+  </object>
+  <object>
+    <name>Stone Giant</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Storm Giant</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Svirfneblin</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Tallfellow Halfling</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Tiefling</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Troglodyte</name>
+    <item>-2</item>
+  </object>
+  <object>
+    <name>Troll</name>
+    <item>-4</item>
+  </object>
   <object>
     <name>Vampire</name>
     <item>2</item>
   </object>
-    <object>
-        <name>Werebear</name>
-        <item>0</item>
-    </object>
-    <object>
-        <name>Wereboar</name>
-        <item>0</item>
-    </object>
-    <object>
-        <name>Wererat</name>
-        <item>2</item>
-    </object>
-    <object>
-        <name>Weretiger</name>
-        <item>-2</item>
-    </object>
-    <object>
-        <name>Werewolf</name>
-        <item>-2</item>
-    </object>
-    <object>
-        <name>Wild Elf</name>
-        <item>-2</item>
-    </object>
-    <object>
-        <name>Wood Elf</name>
-        <item>-2</item>
-    </object>
+  <object>
+    <name>Werebear</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Wereboar</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Wererat</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Weretiger</name>
+    <item>-2</item>
+  </object>
+  <object>
+    <name>Werewolf</name>
+    <item>-2</item>
+  </object>
+  <object>
+    <name>Wild Elf</name>
+    <item>-2</item>
+  </object>
+  <object>
+    <name>Wood Elf</name>
+    <item>-2</item>
+  </object>
 </items>

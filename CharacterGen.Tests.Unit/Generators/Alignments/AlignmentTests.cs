@@ -23,12 +23,38 @@ namespace CharacterGen.Tests.Unit.Common.Alignments
             Assert.That(alignment.Lawfulness, Is.EqualTo("lawfulness"));
         }
 
-        [Test]
-        public void TrueNeutralBecomesNeutralNeutral()
+        [TestCase(AlignmentConstants.ChaoticEvil, AlignmentConstants.Chaotic, AlignmentConstants.Evil)]
+        [TestCase(AlignmentConstants.ChaoticGood, AlignmentConstants.Chaotic, AlignmentConstants.Good)]
+        [TestCase(AlignmentConstants.ChaoticNeutral, AlignmentConstants.Chaotic, AlignmentConstants.Neutral)]
+        [TestCase(AlignmentConstants.LawfulEvil, AlignmentConstants.Lawful, AlignmentConstants.Evil)]
+        [TestCase(AlignmentConstants.LawfulGood, AlignmentConstants.Lawful, AlignmentConstants.Good)]
+        [TestCase(AlignmentConstants.LawfulNeutral, AlignmentConstants.Lawful, AlignmentConstants.Neutral)]
+        [TestCase(AlignmentConstants.NeutralEvil, AlignmentConstants.Neutral, AlignmentConstants.Evil)]
+        [TestCase(AlignmentConstants.NeutralGood, AlignmentConstants.Neutral, AlignmentConstants.Good)]
+        [TestCase(AlignmentConstants.TrueNeutral, AlignmentConstants.Neutral, AlignmentConstants.Neutral)]
+        public void ParseAlignment(string fullAlignment, string lawfulness, string goodness)
         {
-            alignment = new Alignment("True Neutral");
-            Assert.That(alignment.Goodness, Is.EqualTo(AlignmentConstants.Neutral));
-            Assert.That(alignment.Lawfulness, Is.EqualTo(AlignmentConstants.Neutral));
+            alignment = new Alignment(fullAlignment);
+            Assert.That(alignment.Full, Is.EqualTo(fullAlignment));
+            Assert.That(alignment.Lawfulness, Is.EqualTo(lawfulness));
+            Assert.That(alignment.Goodness, Is.EqualTo(goodness));
+        }
+
+        [TestCase(AlignmentConstants.ChaoticEvil, AlignmentConstants.Chaotic, AlignmentConstants.Evil)]
+        [TestCase(AlignmentConstants.ChaoticGood, AlignmentConstants.Chaotic, AlignmentConstants.Good)]
+        [TestCase(AlignmentConstants.ChaoticNeutral, AlignmentConstants.Chaotic, AlignmentConstants.Neutral)]
+        [TestCase(AlignmentConstants.LawfulEvil, AlignmentConstants.Lawful, AlignmentConstants.Evil)]
+        [TestCase(AlignmentConstants.LawfulGood, AlignmentConstants.Lawful, AlignmentConstants.Good)]
+        [TestCase(AlignmentConstants.LawfulNeutral, AlignmentConstants.Lawful, AlignmentConstants.Neutral)]
+        [TestCase(AlignmentConstants.NeutralEvil, AlignmentConstants.Neutral, AlignmentConstants.Evil)]
+        [TestCase(AlignmentConstants.NeutralGood, AlignmentConstants.Neutral, AlignmentConstants.Good)]
+        [TestCase(AlignmentConstants.TrueNeutral, AlignmentConstants.Neutral, AlignmentConstants.Neutral)]
+        public void FullAlignment(string fullAlignment, string lawfulness, string goodness)
+        {
+            alignment.Goodness = goodness;
+            alignment.Lawfulness = lawfulness;
+
+            Assert.That(alignment.Full, Is.EqualTo(fullAlignment));
         }
 
         [Test]
@@ -63,38 +89,29 @@ namespace CharacterGen.Tests.Unit.Common.Alignments
         }
 
         [Test]
-        public void FullNeutralNeutralIsTrueNeutral()
-        {
-            alignment.Lawfulness = AlignmentConstants.Neutral;
-            alignment.Goodness = AlignmentConstants.Neutral;
-            Assert.That(alignment.Full, Is.EqualTo("True Neutral"));
-        }
-
-        [Test]
         public void ToStringIsFull()
         {
-            alignment.Lawfulness = "lawfulness";
-            alignment.Goodness = "goodness";
+            alignment.Lawfulness = Guid.NewGuid().ToString();
+            alignment.Goodness = Guid.NewGuid().ToString();
 
-            var alignmentString = alignment.ToString();
-            Assert.That(alignmentString, Is.EqualTo("lawfulness goodness"));
+            Assert.That(alignment.ToString(), Is.EqualTo(alignment.Full));
         }
 
         [Test]
         public void ConvertingToStringUsesFull()
         {
-            alignment.Lawfulness = "lawfulness";
-            alignment.Goodness = "goodness";
+            alignment.Lawfulness = Guid.NewGuid().ToString();
+            alignment.Goodness = Guid.NewGuid().ToString();
 
             var alignmentString = Convert.ToString(alignment);
-            Assert.That(alignmentString, Is.EqualTo("lawfulness goodness"));
+            Assert.That(alignmentString, Is.EqualTo(alignment.Full));
         }
 
         [Test]
         public void AlignmentIsNotEqualIfOtherItemNotAlignment()
         {
             alignment.Lawfulness = "lawfulness";
-            var otherAlignment = new Object();
+            var otherAlignment = new object();
 
             Assert.That(alignment, Is.Not.EqualTo(otherAlignment));
         }

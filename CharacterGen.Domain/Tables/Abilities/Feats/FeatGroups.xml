@@ -1,161 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <items>
-    <object>
-        <name></name>
-    </object>
-    <object>
-        <name>Aasimar</name>
-        <item>Spell-Like Ability</item>
-        <item>Darkvision</item>
-        <item>Skill BonusSpot</item>
-        <item>Skill BonusListen</item>
-        <item>ResistanceAcid</item>
-        <item>ResistanceCold</item>
-        <item>ResistanceElectricity</item>
-    </object>
-    <object>
-        <name>Abjuration</name>
-        <item>Skill Bonus</item>
-    </object>
-    <object>
-        <name>Adept</name>
-        <item>Simple Weapon Proficiency</item>
-    </object>
   <object>
     <name>Add Monster Hit Dice to Power</name>
     <item>Spell Resistance</item>
   </object>
-    <object>
-        <name>Additional</name>
-        <item>Acrobatic</item>
-        <item>Agile</item>
-        <item>Alertness</item>
-        <item>Animal Affinity</item>
-        <item>Athletic</item>
-        <item>Augment Summoning</item>
-        <item>Blind-Fight</item>
-        <item>Cleave</item>
-        <item>Combat Casting</item>
-        <item>Combat Expertise</item>
-        <item>Combat Reflexes</item>
-        <item>Crippling Strike</item>
-        <item>Deceitful</item>
-        <item>Defensive Roll</item>
-        <item>Deflect Arrows</item>
-        <item>Deft Hands</item>
-        <item>Diehard</item>
-        <item>Diligent</item>
-        <item>Dodge</item>
-        <item>Empower Spell</item>
-        <item>Endurance</item>
-        <item>Enlarge Spell</item>
-        <item>Eschew Materials</item>
-        <item>Exotic Weapon Proficiency</item>
-        <item>Extend Spell</item>
-        <item>Extra Turning</item>
-        <item>Far Shot</item>
-        <item>Great Cleave</item>
-        <item>Greater Spell Focus</item>
-        <item>Greater Spell Penetration</item>
-        <item>Greater Two-Weapon Fighting</item>
-        <item>Greater Weapon Focus</item>
-        <item>Greater Weapon Specialization</item>
-        <item>Great Fortitude</item>
-        <item>Heavy Armor Proficiency</item>
-        <item>Heighten Spell</item>
-        <item>Improved Bull Rush</item>
-        <item>Improved Counterspell</item>
-        <item>Improved Critical</item>
-        <item>Improved Disarm</item>
-        <item>Improved Evasion</item>
-        <item>Improved Familiar</item>
-        <item>Improved Feint</item>
-        <item>Improved Grapple</item>
-        <item>Improved Initiative</item>
-        <item>Improved Overrun</item>
-        <item>Improved Precise Shot</item>
-        <item>Improved Shield Bash</item>
-        <item>Improved Sunder</item>
-        <item>Improved Trip</item>
-        <item>Improved Turning</item>
-        <item>Improved Two-Weapon Fighting</item>
-        <item>Improved Unarmed Strike</item>
-        <item>Investigator</item>
-        <item>Iron Will</item>
-        <item>Leadership</item>
-        <item>Light Armor Proficiency</item>
-        <item>Lightning Reflexes</item>
-        <item>Magical Aptitude</item>
-        <item>Manyshot</item>
-        <item>Martial Weapon Proficiency</item>
-        <item>Maximize Spell</item>
-        <item>Medium Armor Proficiency</item>
-        <item>Mobility</item>
-        <item>Mounted Archery</item>
-        <item>Mounted Combat</item>
-        <item>Natural Spell</item>
-        <item>Negotiator</item>
-        <item>Nimble Fingers</item>
-        <item>Opportunist</item>
-        <item>Persuasive</item>
-        <item>Point Blank Shot</item>
-        <item>Power Attack</item>
-        <item>Precise Shot</item>
-        <item>Quick Draw</item>
-        <item>Quicken Spell</item>
-        <item>Rapid Reload</item>
-        <item>Rapid Shot</item>
-        <item>Ride-By Attack</item>
-        <item>Run</item>
-      <item>Scribe Scroll</item>
-        <item>Self-Sufficient</item>
-        <item>Shield Proficiency</item>
-        <item>Shot On The Run</item>
-        <item>Silent Spell</item>
-        <item>Simple Weapon Proficiency</item>
-        <item>Skill Focus</item>
-        <item>Skill Mastery</item>
-        <item>Slippery Mind</item>
-        <item>Snatch Arrows</item>
-        <item>Spell Focus</item>
-        <item>Spell Mastery</item>
-        <item>Spell Penetration</item>
-        <item>Spirited Charge</item>
-        <item>Spring Attack</item>
-        <item>Stealthy</item>
-        <item>Still Spell</item>
-        <item>Stunning Fist</item>
-        <item>Toughness</item>
-        <item>Tower Shield Proficiency</item>
-        <item>Track</item>
-        <item>Trample</item>
-        <item>Two-Weapon Defense</item>
-        <item>Two-Weapon Fighting</item>
-        <item>Weapon Focus</item>
-        <item>Weapon Finesse</item>
-        <item>Weapon Specialization</item>
-        <item>Whirlwind Attack</item>
-        <item>Widen Spell</item>
-    </object>
-    <object>
-        <name>Air</name>
-        <item>Turn</item>
-    </object>
-    <object>
-        <name>Animal</name>
-        <item>Spell-Like Ability</item>
-    </object>
-    <object>
-        <name>Aristocrat</name>
-        <item>Simple Weapon Proficiency</item>
-        <item>Martial Weapon Proficiency</item>
-        <item>Light Armor Proficiency</item>
-        <item>Medium Armor Proficiency</item>
-        <item>Heavy Armor Proficiency</item>
-        <item>Shield Proficiency</item>
-        <item>Tower Shield Proficiency</item>
-    </object>
   <object>
     <name>ArmorProficiency</name>
     <item>Heavy Armor Proficiency</item>
@@ -166,312 +15,6 @@
     <name>Attack Bonus</name>
     <item>Attack Bonus</item>
   </object>
-    <object>
-        <name>Barbarian</name>
-        <item>Simple Weapon Proficiency</item>
-        <item>Martial Weapon Proficiency</item>
-        <item>Light Armor Proficiency</item>
-        <item>Medium Armor Proficiency</item>
-        <item>Shield Proficiency</item>
-        <item>Fast Movement</item>
-        <item>Illiteracy</item>
-        <item>Rage1</item>
-        <item>Rage2</item>
-        <item>Rage3</item>
-        <item>Rage4</item>
-        <item>Rage5</item>
-        <item>Rage6</item>
-        <item>Uncanny Dodge</item>
-        <item>Trap Sense1</item>
-        <item>Trap Sense2</item>
-        <item>Trap Sense3</item>
-        <item>Trap Sense4</item>
-        <item>Trap Sense5</item>
-        <item>Trap Sense6</item>
-        <item>Improved Uncanny Dodge</item>
-        <item>Damage Reduction1</item>
-        <item>Damage Reduction2</item>
-        <item>Damage Reduction3</item>
-        <item>Damage Reduction4</item>
-        <item>Damage Reduction5</item>
-        <item>Greater Rage</item>
-        <item>Indomitable Will</item>
-        <item>Tireless Rage</item>
-        <item>Mighty Rage</item>
-    </object>
-    <object>
-        <name>Bard</name>
-        <item>Simple Weapon Proficiency</item>
-        <item>Martial Weapon ProficiencyLongsword</item>
-        <item>Martial Weapon ProficiencyRapier</item>
-        <item>Martial Weapon ProficiencySap</item>
-        <item>Martial Weapon ProficiencyShort sword</item>
-        <item>Martial Weapon ProficiencyShortbow</item>
-        <item>Exotic Weapon ProficiencyWhip</item>
-        <item>Light Armor Proficiency</item>
-        <item>Shield Proficiency</item>
-        <item>Bardic Music1</item>
-        <item>Bardic Music2</item>
-        <item>Bardic Music3</item>
-        <item>Bardic Music4</item>
-        <item>Bardic Music5</item>
-        <item>Bardic Music6</item>
-        <item>Bardic Music7</item>
-        <item>Bardic Music8</item>
-        <item>Bardic Music9</item>
-        <item>Bardic Music10</item>
-        <item>Bardic Music11</item>
-        <item>Bardic Music12</item>
-        <item>Bardic Music13</item>
-        <item>Bardic Music14</item>
-        <item>Bardic Music15</item>
-        <item>Bardic Music16</item>
-        <item>Bardic Music17</item>
-        <item>Bardic Music18</item>
-        <item>Bardic Music19</item>
-        <item>Bardic Music20</item>
-        <item>Bardic Knowledge</item>
-        <item>Countersong</item>
-        <item>Fascinate</item>
-        <item>Inspire Courage1</item>
-        <item>Inspire Courage2</item>
-        <item>Inspire Courage3</item>
-        <item>Inspire Courage4</item>
-        <item>Suggestion</item>
-        <item>Inspire Greatness</item>
-        <item>Song of Freedom</item>
-        <item>Inspire Heroics</item>
-        <item>Mass Suggestion</item>
-        <item>Inspire Competence</item>
-    </object>
-    <object>
-        <name>Black</name>
-        <item>Natural Weapon</item>
-        <item>Immune to Effect</item>
-    </object>
-    <object>
-        <name>Blue</name>
-        <item>Natural Weapon</item>
-        <item>Immune to Effect</item>
-    </object>
-    <object>
-        <name>Brass</name>
-        <item>Natural Weapon</item>
-        <item>Immune to Effect</item>
-    </object>
-    <object>
-        <name>Bronze</name>
-        <item>Natural Weapon</item>
-        <item>Immune to Effect</item>
-    </object>
-    <object>
-        <name>Bugbear</name>
-        <item>Save BonusWill</item>
-        <item>Save BonusFortitude</item>
-        <item>Save BonusReflex</item>
-        <item>Natural Armor</item>
-        <item>Skill BonusMove Silently</item>
-        <item>Darkvision</item>
-        <item>Scent</item>
-    </object>
-    <object>
-        <name>Chaos</name>
-        <item>Cast Spell Bonus</item>
-    </object>
-    <object>
-        <name>Cleric</name>
-        <item>Simple Weapon Proficiency</item>
-        <item>Light Armor Proficiency</item>
-        <item>Medium Armor Proficiency</item>
-        <item>Heavy Armor Proficiency</item>
-        <item>Shield Proficiency</item>
-        <item>Turn</item>
-    </object>
-    <object>
-        <name>Commoner</name>
-        <item>Simple Weapon Proficiency</item>
-    </object>
-    <object>
-        <name>Conjuration</name>
-        <item>Skill Bonus</item>
-    </object>
-    <object>
-        <name>Copper</name>
-        <item>Natural Weapon</item>
-        <item>Immune to Effect</item>
-    </object>
-    <object>
-        <name>Death</name>
-        <item>Death Touch</item>
-    </object>
-    <object>
-        <name>Deep Dwarf</name>
-        <item>Skill BonusAppraise</item>
-        <item>Save BonusPoison</item>
-        <item>Save BonusSpell</item>
-        <item>Attack BonusOrc</item>
-        <item>Attack BonusGoblin</item>
-        <item>Dodge Bonus</item>
-        <item>Weapon FamiliarityDwarven urgrosh</item>
-        <item>Weapon FamiliarityDwarven waraxe</item>
-        <item>Stonecunning</item>
-        <item>Darkvision</item>
-        <item>Stability</item>
-        <item>Light Sensitivity</item>
-    </object>
-    <object>
-        <name>Deep Halfling</name>
-        <item>Skill BonusListen</item>
-        <item>Skill BonusAppraise</item>
-        <item>Save BonusAll</item>
-        <item>Save BonusFear</item>
-        <item>Attack BonusThrowOrSling</item>
-        <item>Darkvision</item>
-        <item>Stonecunning</item>
-    </object>
-    <object>
-        <name>Derro</name>
-        <item>Madness</item>
-        <item>Poison Use</item>
-        <item>Sneak Attack</item>
-        <item>Spell-Like AbilityDarkness</item>
-        <item>Spell-Like AbilityGhost sound</item>
-        <item>Spell-Like AbilityDaze</item>
-        <item>Spell-Like AbilitySound burst</item>
-        <item>Vulnerability to Sunlight</item>
-        <item>Skill BonusHide</item>
-        <item>Skill BonusMove Silently</item>
-    </object>
-    <object>
-        <name>Destruction</name>
-        <item>Smite</item>
-    </object>
-    <object>
-        <name>Divination</name>
-        <item>Skill Bonus</item>
-    </object>
-    <object>
-        <name>Doppelganger</name>
-        <item>Skill BonusBluff</item>
-        <item>Skill BonusDisguise</item>
-      <item>Skill BonusBluffDetect thoughts</item>
-      <item>Skill BonusDisguiseDetect thoughts</item>
-      <item>Skill BonusDisguiseChange Shape</item>
-        <item>Darkvision</item>
-        <item>Natural Armor</item>
-        <item>Spell-Like AbilityDetect thoughts</item>
-        <item>Change Shape</item>
-        <item>Immune to EffectSleep</item>
-        <item>Immune to EffectCharm</item>
-    </object>
-    <object>
-        <name>Drow</name>
-        <item>Skill BonusSearch</item>
-        <item>Skill BonusSpot</item>
-        <item>Skill BonusListen</item>
-        <item>Save Bonus</item>
-        <item>Save BonusWill</item>
-        <item>Immune to Effect</item>
-        <item>Darkvision</item>
-        <item>Martial Weapon ProficiencyHand crossbow</item>
-        <item>Martial Weapon ProficiencyRapier</item>
-        <item>Martial Weapon ProficiencyShort sword</item>
-        <item>Passive Secret Door Search</item>
-        <item>Light Blindness</item>
-        <item>Spell-Like AbilityDarkness</item>
-        <item>Spell-Like AbilityDancing lights</item>
-        <item>Spell-Like AbilityFaerie fire</item>
-        <item>Spell Resistance</item>
-      <item>Poison</item>
-    </object>
-  <object>
-    <name>Druid</name>
-    <item>Light Armor Proficiency</item>
-    <item>Medium Armor Proficiency</item>
-    <item>Shield Proficiency</item>
-    <item>Nature Sense</item>
-    <item>Wild Empathy</item>
-    <item>Wild Shape1</item>
-    <item>Wild Shape2</item>
-    <item>Wild Shape3</item>
-    <item>Wild Shape4</item>
-    <item>Wild Shape5</item>
-    <item>Wild Shape6</item>
-      <item>Wild ShapeLarge</item>
-      <item>Wild ShapeTiny</item>
-      <item>Wild ShapeHuge</item>
-      <item>Wild ShapePlant</item>
-    <item>Wild ShapeElemental1</item>
-    <item>Wild ShapeElemental2</item>
-    <item>Wild ShapeElemental3</item>
-      <item>Wild ShapeElementalHuge</item>
-    <item>Woodland Stride</item>
-    <item>Simple Weapon ProficiencyQuarterstaff</item>
-    <item>Simple Weapon ProficiencyDagger</item>
-    <item>Simple Weapon ProficiencySling</item>
-    <item>Simple Weapon ProficiencyLongspear</item>
-    <item>Simple Weapon ProficiencyShortspear</item>
-    <item>Simple Weapon ProficiencyClub</item>
-    <item>Simple Weapon ProficiencyDart</item>
-    <item>Simple Weapon ProficiencySickle</item>
-    <item>Martial Weapon ProficiencyScimitar</item>
-    <item>Trackless Step</item>
-    <item>Resist Nature's Lure</item>
-    <item>Venom Immunity</item>
-    <item>A Thousand Faces</item>
-    <item>Timeless Body</item>
-  </object>
-    <object>
-        <name>Duergar Dwarf</name>
-        <item>Skill BonusAppraise</item>
-        <item>Immune to EffectParalysis</item>
-        <item>Immune to EffectPoison</item>
-        <item>Immune to EffectPhantasms</item>
-        <item>Save BonusSpell</item>
-        <item>Attack BonusOrc</item>
-        <item>Attack BonusGoblin</item>
-        <item>Dodge Bonus</item>
-        <item>Stonecunning</item>
-        <item>Darkvision</item>
-        <item>Stability</item>
-        <item>Spell-Like AbilityEnlarge person</item>
-        <item>Spell-Like AbilityInvisibility</item>
-        <item>Light Sensitivity</item>
-        <item>Skill BonusMove Silently</item>
-        <item>Skill BonusListen</item>
-        <item>Skill BonusSpot</item>
-    </object>
-    <object>
-        <name>Earth</name>
-        <item>Turn</item>
-    </object>
-    <object>
-        <name>Enchantment</name>
-        <item>Skill Bonus</item>
-    </object>
-    <object>
-        <name>Evil</name>
-        <item>Cast Spell Bonus</item>
-    </object>
-    <object>
-        <name>Evocation</name>
-        <item>Skill Bonus</item>
-    </object>
-    <object>
-        <name>Expert</name>
-        <item>Simple Weapon Proficiency</item>
-        <item>Light Armor Proficiency</item>
-    </object>
-    <object>
-        <name>Fighter</name>
-        <item>Simple Weapon Proficiency</item>
-        <item>Martial Weapon Proficiency</item>
-        <item>Light Armor Proficiency</item>
-        <item>Medium Armor Proficiency</item>
-        <item>Heavy Armor Proficiency</item>
-        <item>Shield Proficiency</item>
-        <item>Tower Shield Proficiency</item>
-    </object>
   <object>
     <name>Fighter Bonus Feats</name>
     <item>Blind-Fight</item>
@@ -523,653 +66,95 @@
     <item>Greater Weapon Focus</item>
     <item>Greater Weapon Specialization</item>
   </object>
-    <object>
-        <name>Fire</name>
-        <item>Turn</item>
-    </object>
-    <object>
-        <name>Forest Gnome</name>
-        <item>Low-Light Vision</item>
-        <item>Weapon Familiarity</item>
-        <item>Save Bonus</item>
-        <item>Improved Spell</item>
-        <item>Attack BonusGoblin</item>
-        <item>Attack BonusKobold</item>
-        <item>Attack BonusOrc</item>
-        <item>Attack BonusLizardfolk</item>
-        <item>Dodge Bonus</item>
-        <item>Skill BonusListen</item>
-        <item>Spell-Like AbilitySpeak with animals</item>
-        <item>Spell-Like AbilityDancing lights</item>
-        <item>Spell-Like AbilityGhost sound</item>
-        <item>Spell-Like AbilityPrestidigitation</item>
-        <item>Spell-Like AbilityPass without trace</item>
-        <item>Skill BonusHide</item>
-      <item>Skill BonusHideWoods</item>
-    </object>
   <object>
     <name>Fortitude</name>
     <item>Great Fortitude</item>
   </object>
   <object>
-    <name>Ghost</name>
-    <item>Corrupting Gaze</item>
-    <item>Corrupting Touch</item>
-    <item>Draining Touch</item>
-    <item>Frightful Moan</item>
-    <item>Horrific Appearance</item>
-    <item>Malevolence</item>
-    <item>Manifestation</item>
-    <item>Telekinesis</item>
-    <item>Rejuvenation</item>
-    <item>Turn Resistance</item>
-    <item>Skill BonusHide</item>
-    <item>Skill BonusListen</item>
-    <item>Skill BonusSearch</item>
-    <item>Skill BonusSpot</item>
+    <name>Has Class Requirements</name>
+    <item>Crippling Strike</item>
+    <item>Defensive Roll</item>
+    <item>Greater Weapon Focus</item>
+    <item>Greater Weapon Specialization</item>
+    <item>Improved Evasion</item>
+    <item>Opportunist</item>
+    <item>Skill Mastery</item>
+    <item>Slippery Mind</item>
+    <item>Improved Familiar</item>
+    <item>Leadership</item>
+    <item>Spell Mastery</item>
+    <item>Weapon Specialization</item>
+    <item>Combat Casting</item>
+    <item>Empower Spell</item>
+    <item>Enlarge Spell</item>
+    <item>Eschew Materials</item>
+    <item>Extend Spell</item>
+    <item>Heighten Spell</item>
+    <item>Improved Counterspell</item>
+    <item>Maximize Spell</item>
+    <item>Quicken Spell</item>
+    <item>Spell Focus</item>
+    <item>Still Spell</item>
+    <item>Silent Spell</item>
+    <item>Widen Spell</item>
+    <item>Scribe Scroll</item>
+    <item>Spell Penetration</item>
   </object>
-    <object>
-        <name>Gnoll</name>
-        <item>Natural Armor</item>
-        <item>Darkvision</item>
-    </object>
-    <object>
-        <name>Goblin</name>
-        <item>Skill BonusMove Silently</item>
-        <item>Skill BonusRide</item>
-        <item>Darkvision</item>
-    </object>
-    <object>
-        <name>Gold</name>
-        <item>Natural Weapon</item>
-        <item>Immune to Effect</item>
-    </object>
-    <object>
-        <name>Good</name>
-        <item>Cast Spell Bonus</item>
-    </object>
-    <object>
-        <name>Green</name>
-        <item>Natural Weapon</item>
-        <item>Immune to Effect</item>
-    </object>
-    <object>
-        <name>Gray Elf</name>
-        <item>Skill BonusSearch</item>
-        <item>Skill BonusSpot</item>
-        <item>Skill BonusListen</item>
-        <item>Save Bonus</item>
-        <item>Immune to Effect</item>
-        <item>Low-Light Vision</item>
-        <item>Martial Weapon ProficiencyLongsword</item>
-        <item>Martial Weapon ProficiencyRapier</item>
-        <item>Martial Weapon ProficiencyLongbow</item>
-        <item>Martial Weapon ProficiencyShortbow</item>
-        <item>Passive Secret Door Search</item>
-    </object>
-    <object>
-        <name>Half-Celestial</name>
-        <item>Darkvision</item>
-        <item>Immune to Effect</item>
-        <item>Save Bonus</item>
-        <item>Spell-Like AbilityDaylight</item>
-        <item>Spell-Like AbilityBless</item>
-        <item>Spell-Like AbilityProtection from chaos/law/good/evil</item>
-        <item>Spell-Like AbilityHoly word</item>
-        <item>Spell-Like AbilityHallow</item>
-        <item>Spell-Like AbilityResurrection</item>
-        <item>Smite Evil</item>
-        <item>Spell-Like AbilityAid</item>
-        <item>Spell-Like AbilityDetect chaos/law/good/evil</item>
-        <item>Spell-Like AbilityCure/inflict serious wounds</item>
-        <item>Spell-Like AbilityNeutralize poison</item>
-        <item>Spell-Like AbilityHoly smite</item>
-        <item>Spell-Like AbilityRemove disease</item>
-        <item>Spell-Like AbilityDispel good/evil/law/chaos</item>
-        <item>Spell-Like AbilityHoly aura</item>
-        <item>Spell-Like AbilityMass charm monster</item>
-        <item>Spell-Like AbilitySummon monster IX</item>
-        <item>Natural Armor</item>
-        <item>ResistanceAcid</item>
-        <item>ResistanceCold</item>
-        <item>ResistanceElectricity</item>
-        <item>Damage Reduction11-</item>
-        <item>Damage Reduction12+</item>
-        <item>Spell Resistance</item>
-    </object>
-    <object>
-        <name>Half-Dragon</name>
-        <item>Natural Armor</item>
-        <item>Darkvision</item>
-        <item>Low-Light Vision</item>
-        <item>Immune to EffectSleep</item>
-        <item>Immune to EffectParalysis</item>
-        <item>Natural WeaponClaw</item>
-        <item>Natural WeaponBite</item>
-    </object>
-    <object>
-        <name>Half-Fiend</name>
-        <item>Natural Armor</item>
-        <item>Natural WeaponClaw</item>
-        <item>Natural WeaponBite</item>
-        <item>Smite Good</item>
-        <item>Spell-Like AbilityDarkness</item>
-        <item>Spell-Like AbilityDesecrate</item>
-        <item>Spell-Like AbilityUnholy blight</item>
-        <item>Spell-Like AbilityPoison</item>
-        <item>Spell-Like AbilityContagion</item>
-        <item>Spell-Like AbilityBlasphemy</item>
-        <item>Spell-Like AbilityDestruction</item>
-        <item>Spell-Like AbilityUnholy aura</item>
-        <item>Spell-Like AbilityUnhallow</item>
-        <item>Spell-Like AbilityHorrid wilting</item>
-        <item>Spell-Like AbilitySummon monster IX</item>
-        <item>Immune to Effect</item>
-        <item>ResistanceAcid</item>
-        <item>ResistanceCold</item>
-        <item>ResistanceElectricity</item>
-        <item>ResistanceFire</item>
-        <item>Darkvision</item>
-        <item>Damage Reduction11-</item>
-        <item>Damage Reduction12+</item>
-        <item>Spell Resistance</item>
-    </object>
-    <object>
-        <name>Half-Elf</name>
-        <item>Skill BonusSearch</item>
-        <item>Skill BonusSpot</item>
-        <item>Skill BonusListen</item>
-        <item>Skill BonusDiplomacy</item>
-        <item>Skill BonusGather Information</item>
-        <item>Save Bonus</item>
-        <item>Immune to Effect</item>
-        <item>Low-Light Vision</item>
-        <item>Elven Blood</item>
-    </object>
-    <object>
-        <name>Half-Orc</name>
-        <item>Darkvision</item>
-        <item>Orc Blood</item>
-    </object>
-    <object>
-        <name>Has Class Requirements</name>
-        <item>Crippling Strike</item>
-        <item>Defensive Roll</item>
-        <item>Greater Weapon Focus</item>
-        <item>Greater Weapon Specialization</item>
-        <item>Improved Evasion</item>
-        <item>Opportunist</item>
-        <item>Skill Mastery</item>
-        <item>Slippery Mind</item>
-        <item>Improved Familiar</item>
-        <item>Leadership</item>
-        <item>Spell Mastery</item>
-        <item>Weapon Specialization</item>
-      <item>Combat Casting</item>
-      <item>Empower Spell</item>
-      <item>Enlarge Spell</item>
-      <item>Eschew Materials</item>
-      <item>Extend Spell</item>
-      <item>Heighten Spell</item>
-      <item>Improved Counterspell</item>
-      <item>Maximize Spell</item>
-      <item>Quicken Spell</item>
-      <item>Spell Focus</item>
-      <item>Still Spell</item>
-      <item>Silent Spell</item>
-      <item>Widen Spell</item>
-      <item>Scribe Scroll</item>
-      <item>Spell Penetration</item>
-    </object>
-    <object>
-        <name>Has Skill Requirements</name>
-        <item>Mounted Archery</item>
-        <item>Mounted Combat</item>
-        <item>Ride-By Attack</item>
-        <item>Spirited Charge</item>
-        <item>Trample</item>
-      <item>Acrobatic</item>
-      <item>Agile</item>
-      <item>Alertness</item>
-      <item>Animal Affinity</item>
-      <item>Athletic</item>
-      <item>Deceitful</item>
-      <item>Deft Hands</item>
-      <item>Diligent</item>
-      <item>Investigator</item>
-      <item>Magical Aptitude</item>
-      <item>Negotiator</item>
-      <item>Nature Sense</item>
-      <item>Nimble Fingers</item>
-      <item>Persuasive</item>
-      <item>Self-Sufficient</item>
-      <item>Stealthy</item>
-    </object>
-    <object>
-        <name>Has Stat Requirements</name>
-        <item>Power Attack</item>
-        <item>Combat Expertise</item>
-        <item>Deflect Arrows</item>
-        <item>Dodge</item>
-        <item>Greater Two-Weapon Fighting</item>
-        <item>Improved Grapple</item>
-        <item>Improved Precise Shot</item>
-        <item>Improved Two-Weapon Fighting</item>
-        <item>Manyshot</item>
-        <item>Mobility</item>
-        <item>Natural Spell</item>
-        <item>Rapid Shot</item>
-        <item>Shot On The Run</item>
-        <item>Snatch Arrows</item>
-      <item>Spell Mastery</item>
-        <item>Spring Attack</item>
-        <item>Stunning Fist</item>
-        <item>Two-Weapon Fighting</item>
-        <item>Two-Weapon Defense</item>
-        <item>Whirlwind Attack</item>
-    </object>
-    <object>
-        <name>Healing</name>
-        <item>Cast Spell Bonus</item>
-    </object>
-    <object>
-        <name>High Elf</name>
-        <item>Skill BonusSearch</item>
-        <item>Skill BonusSpot</item>
-        <item>Skill BonusListen</item>
-        <item>Save Bonus</item>
-        <item>Immune to Effect</item>
-        <item>Low-Light Vision</item>
-        <item>Martial Weapon ProficiencyLongsword</item>
-        <item>Martial Weapon ProficiencyRapier</item>
-        <item>Martial Weapon ProficiencyLongbow</item>
-        <item>Martial Weapon ProficiencyShortbow</item>
-        <item>Passive Secret Door Search</item>
-    </object>
-    <object>
-        <name>Hill Dwarf</name>
-        <item>Skill BonusAppraise</item>
-        <item>Save BonusPoison</item>
-        <item>Save BonusSpell</item>
-        <item>Attack BonusOrc</item>
-        <item>Attack BonusGoblin</item>
-        <item>Dodge Bonus</item>
-        <item>Weapon FamiliarityDwarven urgrosh</item>
-        <item>Weapon FamiliarityDwarven waraxe</item>
-        <item>Stonecunning</item>
-        <item>Darkvision</item>
-        <item>Stability</item>
-    </object>
-    <object>
-        <name>Hobgoblin</name>
-        <item>Darkvision</item>
-        <item>Skill Bonus</item>
-    </object>
-    <object>
-        <name>Human</name>
-    </object>
-    <object>
-        <name>Illusion</name>
-        <item>Skill Bonus</item>
-    </object>
+  <object>
+    <name>Has Skill Requirements</name>
+    <item>Mounted Archery</item>
+    <item>Mounted Combat</item>
+    <item>Ride-By Attack</item>
+    <item>Spirited Charge</item>
+    <item>Trample</item>
+    <item>Acrobatic</item>
+    <item>Agile</item>
+    <item>Alertness</item>
+    <item>Animal Affinity</item>
+    <item>Athletic</item>
+    <item>Deceitful</item>
+    <item>Deft Hands</item>
+    <item>Diligent</item>
+    <item>Investigator</item>
+    <item>Magical Aptitude</item>
+    <item>Negotiator</item>
+    <item>Nature Sense</item>
+    <item>Nimble Fingers</item>
+    <item>Persuasive</item>
+    <item>Self-Sufficient</item>
+    <item>Stealthy</item>
+  </object>
+  <object>
+    <name>Has Stat Requirements</name>
+    <item>Power Attack</item>
+    <item>Combat Expertise</item>
+    <item>Deflect Arrows</item>
+    <item>Dodge</item>
+    <item>Greater Two-Weapon Fighting</item>
+    <item>Improved Grapple</item>
+    <item>Improved Precise Shot</item>
+    <item>Improved Two-Weapon Fighting</item>
+    <item>Manyshot</item>
+    <item>Mobility</item>
+    <item>Natural Spell</item>
+    <item>Rapid Shot</item>
+    <item>Shot On The Run</item>
+    <item>Snatch Arrows</item>
+    <item>Spell Mastery</item>
+    <item>Spring Attack</item>
+    <item>Stunning Fist</item>
+    <item>Two-Weapon Fighting</item>
+    <item>Two-Weapon Defense</item>
+    <item>Whirlwind Attack</item>
+  </object>
   <object>
     <name>Initiative</name>
     <item>Improved Initiative</item>
   </object>
-    <object>
-        <name>Knowledge</name>
-        <item>Cast Spell Bonus</item>
-    </object>
-    <object>
-        <name>Kobold</name>
-        <item>Darkvision</item>
-        <item>Skill BonusSearch</item>
-        <item>Natural Armor</item>
-        <item>Light Sensitivity</item>
-    </object>
-    <object>
-        <name>Law</name>
-        <item>Cast Spell Bonus</item>
-    </object>
-  <object>
-    <name>Lich</name>
-    <item>Armor Bonus</item>
-    <item>Fear Aura</item>
-    <item>Paralyzing Touch</item>
-    <item>Turn Resistance</item>
-    <item>Damage Reduction</item>
-    <item>Immune to EffectCold</item>
-    <item>Immune to EffectElectricity</item>
-    <item>Immune to EffectPolymorph</item>
-    <item>Immune to EffectMind</item>
-    <item>Skill BonusHide</item>
-    <item>Skill BonusListen</item>
-    <item>Skill BonusMove Silently</item>
-    <item>Skill BonusSearch</item>
-    <item>Skill BonusSense Motive</item>
-    <item>Skill BonusSpot</item>
-  </object>
-    <object>
-        <name>Lightfoot Halfling</name>
-        <item>Skill BonusListen</item>
-        <item>Skill BonusClimb</item>
-        <item>Skill BonusJump</item>
-        <item>Skill BonusMove Silently</item>
-        <item>Save BonusAll</item>
-        <item>Save BonusFear</item>
-        <item>Attack BonusThrowOrSling</item>
-    </object>
-    <object>
-        <name>Lizardfolk</name>
-        <item>Natural WeaponClaw</item>
-        <item>Natural WeaponBite</item>
-        <item>Hold Breath</item>
-        <item>Natural Armor</item>
-        <item>Simple Weapon Proficiency</item>
-        <item>Shield Proficiency</item>
-    </object>
-    <object>
-        <name>Luck</name>
-        <item>Good Fortune</item>
-    </object>
-    <object>
-        <name>Magic</name>
-        <item>Use Magic Device as Wizard</item>
-    </object>
-    <object>
-        <name>Mind Flayer</name>
-        <item>Save BonusWill</item>
-        <item>Save BonusReflex</item>
-        <item>Save BonusFortitude</item>
-        <item>Natural Armor</item>
-        <item>Skill BonusBluff</item>
-        <item>Skill BonusConcentration</item>
-        <item>Skill BonusHide</item>
-        <item>Skill BonusIntimidate</item>
-        <item>Skill BonusMove Silently</item>
-        <item>Skill BonusListen</item>
-        <item>Skill BonusSpot</item>
-        <item>Skill BonusSense Motive</item>
-        <item>Darkvision</item>
-        <item>Mind Blast</item>
-        <item>Natural Weapon</item>
-        <item>Spell-Like AbilityDetect thoughts</item>
-        <item>Spell-Like AbilityLevitate</item>
-        <item>Spell-Like AbilityPlane shift</item>
-        <item>Spell-Like AbilitySuggestion</item>
-        <item>Spell-Like AbilityCharm monster</item>
-        <item>Improved Grab</item>
-        <item>Extract</item>
-    </object>
-    <object>
-        <name>Minotaur</name>
-        <item>Darkvision</item>
-        <item>Martial Weapon ProficiencyGreataxe</item>
-        <item>Simple Weapon Proficiency</item>
-        <item>Natural Armor</item>
-        <item>Natural Weapon</item>
-        <item>Powerful Charge</item>
-        <item>Natural Cunning</item>
-        <item>Scent</item>
-        <item>Skill BonusSearch</item>
-        <item>Skill BonusSpot</item>
-        <item>Skill BonusListen</item>
-      <item>Save BonusFortitude</item>
-      <item>Save BonusReflex</item>
-      <item>Save BonusWill</item>
-    </object>
-    <object>
-        <name>Monk</name>
-        <item>Monk Bonus Feat1</item>
-        <item>Monk Bonus Feat2</item>
-        <item>Monk Bonus Feat6</item>
-        <item>Improved Unarmed Strike</item>
-        <item>Perfect Self</item>
-        <item>Diamond Body</item>
-        <item>Tongue of Sun and Moon</item>
-        <item>Diamond Soul</item>
-        <item>Empty Body</item>
-        <item>Improved GrappleMonk</item>
-        <item>Stunning FistMonk</item>
-        <item>Improved DisarmMonk</item>
-        <item>Deflect ArrowsMonk</item>
-        <item>Improved TripMonk</item>
-        <item>Simple Weapon ProficiencyClub</item>
-        <item>Simple Weapon ProficiencyHeavy crossbow</item>
-        <item>Simple Weapon ProficiencyLight crossbow</item>
-        <item>Simple Weapon ProficiencyDagger</item>
-        <item>Simple Weapon ProficiencySling</item>
-        <item>Martial Weapon ProficiencyHandaxe</item>
-        <item>Simple Weapon ProficiencyJavelin</item>
-        <item>Exotic Weapon ProficiencyKama</item>
-        <item>Exotic Weapon ProficiencyNunchaku</item>
-        <item>Simple Weapon ProficiencyQuarterstaff</item>
-        <item>Exotic Weapon ProficiencyShuriken</item>
-        <item>Exotic Weapon ProficiencySiangham</item>
-        <item>Armor BonusWisdom</item>
-        <item>Armor Bonus1</item>
-        <item>Armor Bonus2</item>
-        <item>Armor Bonus3</item>
-        <item>Armor Bonus4</item>
-        <item>Flurry of Blows</item>
-        <item>Monk Unarmed StrikeSmall1d4</item>
-        <item>Monk Unarmed StrikeSmall1d6</item>
-        <item>Monk Unarmed StrikeSmall1d8</item>
-        <item>Monk Unarmed StrikeSmall1d10</item>
-        <item>Monk Unarmed StrikeSmall2d6</item>
-        <item>Monk Unarmed StrikeSmall2d8</item>
-        <item>Monk Unarmed StrikeMedium1d6</item>
-        <item>Monk Unarmed StrikeMedium1d8</item>
-        <item>Monk Unarmed StrikeMedium1d10</item>
-        <item>Monk Unarmed StrikeMedium2d6</item>
-        <item>Monk Unarmed StrikeMedium2d8</item>
-        <item>Monk Unarmed StrikeMedium2d10</item>
-        <item>Monk Unarmed StrikeLarge1d8</item>
-        <item>Monk Unarmed StrikeLarge2d6</item>
-        <item>Monk Unarmed StrikeLarge2d8</item>
-        <item>Monk Unarmed StrikeLarge3d6</item>
-        <item>Monk Unarmed StrikeLarge3d8</item>
-        <item>Monk Unarmed StrikeLarge4d8</item>
-        <item>Combat ReflexesMonk</item>
-        <item>Evasion</item>
-        <item>Fast Movement10</item>
-        <item>Fast Movement20</item>
-        <item>Fast Movement30</item>
-        <item>Fast Movement40</item>
-        <item>Fast Movement50</item>
-        <item>Fast Movement60</item>
-        <item>Still Mind</item>
-        <item>Ki StrikeMagic</item>
-      <item>Greater Flurry</item>
-      <item>Ki StrikeLawful</item>
-      <item>Ki StrikeAdamantine</item>
-        <item>Slow Fall20</item>
-      <item>Slow Fall30</item>
-      <item>Slow Fall40</item>
-      <item>Slow Fall50</item>
-      <item>Slow Fall60</item>
-      <item>Slow Fall70</item>
-      <item>Slow Fall80</item>
-      <item>Slow Fall90</item>
-      <item>Slow FallAny</item>
-        <item>Purity of Body</item>
-        <item>Wholeness of Body</item>
-        <item>Improved Evasion</item>
-        <item>Abundant Step</item>
-        <item>Quivering Palm</item>
-        <item>Timeless Body</item>
-    </object>
-    <object>
-        <name>Mountain Dwarf</name>
-        <item>Skill BonusAppraise</item>
-        <item>Save BonusPoison</item>
-        <item>Save BonusSpell</item>
-        <item>Attack BonusOrc</item>
-        <item>Attack BonusGoblin</item>
-        <item>Dodge Bonus</item>
-        <item>Weapon FamiliarityDwarven urgrosh</item>
-        <item>Weapon FamiliarityDwarven waraxe</item>
-        <item>Stonecunning</item>
-        <item>Darkvision</item>
-        <item>Stability</item>
-    </object>
-    <object>
-        <name>Necromancy</name>
-        <item>Skill Bonus</item>
-    </object>
-    <object>
-        <name>Ogre</name>
-        <item>Darkvision</item>
-        <item>Save BonusWill</item>
-        <item>Save BonusReflex</item>
-        <item>Save BonusFortitude</item>
-        <item>Simple Weapon Proficiency</item>
-        <item>Martial Weapon Proficiency</item>
-        <item>Light Armor Proficiency</item>
-        <item>Medium Armor Proficiency</item>
-        <item>Shield Proficiency</item>
-        <item>Natural Armor</item>
-    </object>
-    <object>
-        <name>Ogre Mage</name>
-        <item>Darkvision</item>
-        <item>Save BonusReflex</item>
-        <item>Save BonusWill</item>
-        <item>Save BonusFortitude</item>
-        <item>Natural Armor</item>
-        <item>Spell-Like AbilityDarkness</item>
-        <item>Spell-Like AbilityInvisibility</item>
-        <item>Spell-Like AbilityCharm person</item>
-        <item>Spell-Like AbilityCone of cold</item>
-        <item>Spell-Like AbilityGaseous form</item>
-        <item>Spell-Like AbilitySleep</item>
-        <item>Flight</item>
-        <item>Change Shape</item>
-        <item>Regeneration</item>
-        <item>Spell Resistance</item>
-    </object>
-    <object>
-        <name>Orc</name>
-        <item>Darkvision</item>
-        <item>Light Sensitivity</item>
-    </object>
-  <object>
-    <name>Paladin</name>
-    <item>Simple Weapon Proficiency</item>
-    <item>Light Armor Proficiency</item>
-    <item>Medium Armor Proficiency</item>
-    <item>Heavy Armor Proficiency</item>
-    <item>Shield Proficiency</item>
-    <item>Aura of Good</item>
-    <item>Spell-Like AbilityDetect chaos/law/good/evil</item>
-    <item>Smite Evil1</item>
-    <item>Smite Evil2</item>
-    <item>Smite Evil3</item>
-    <item>Smite Evil4</item>
-    <item>Smite Evil5</item>
-    <item>Martial Weapon Proficiency</item>
-    <item>Divine Grace</item>
-    <item>Lay On Hands</item>
-    <item>Aura of Courage</item>
-    <item>Divine Health</item>
-    <item>Turn</item>
-    <item>Spell-Like AbilityRemove disease1</item>
-    <item>Spell-Like AbilityRemove disease2</item>
-    <item>Spell-Like AbilityRemove disease3</item>
-    <item>Spell-Like AbilityRemove disease4</item>
-    <item>Spell-Like AbilityRemove disease5</item>
-  </object>
-    <object>
-        <name>Plant</name>
-        <item>Turn</item>
-    </object>
-    <object>
-        <name>Protection</name>
-        <item>Spell-Like Ability</item>
-    </object>
-    <object>
-        <name>Ranger</name>
-        <item>Favored Enemy1</item>
-        <item>Favored Enemy2</item>
-        <item>Favored Enemy3</item>
-        <item>Favored Enemy4</item>
-        <item>Favored Enemy5</item>
-        <item>Woodland Stride</item>
-        <item>Swift Tracker</item>
-        <item>Camouflage</item>
-        <item>Hide in Plain Sight</item>
-        <item>Evasion</item>
-        <item>Endurance</item>
-        <item>Simple Weapon Proficiency</item>
-        <item>Light Armor Proficiency</item>
-        <item>Martial Weapon Proficiency</item>
-        <item>Shield Proficiency</item>
-        <item>Track</item>
-        <item>Wild Empathy</item>
-        <item>Combat Style</item>
-        <item>Improved Combat Style</item>
-        <item>Combat Style Mastery</item>
-        <item>Rapid ShotRanger</item>
-        <item>Two-Weapon FightingRanger</item>
-        <item>ManyshotRanger</item>
-        <item>Improved Two-Weapon FightingRanger</item>
-        <item>Improved Precise ShotRanger</item>
-        <item>Greater Two-Weapon FightingRanger</item>
-    </object>
-    <object>
-        <name>Red</name>
-        <item>Natural Weapon</item>
-        <item>Immune to Effect</item>
-    </object>
   <object>
     <name>Reflex</name>
     <item>Lightning Reflexes</item>
   </object>
-    <object>
-        <name>Rock Gnome</name>
-        <item>Low-Light Vision</item>
-        <item>Weapon Familiarity</item>
-        <item>Save Bonus</item>
-        <item>Improved Spell</item>
-        <item>Attack BonusGoblin</item>
-        <item>Attack BonusKobold</item>
-        <item>Dodge Bonus</item>
-        <item>Skill Bonus</item>
-        <item>Spell-Like AbilitySpeak with animals</item>
-        <item>Spell-Like AbilityDancing lights</item>
-        <item>Spell-Like AbilityGhost sound</item>
-        <item>Spell-Like AbilityPrestidigitation</item>
-    </object>
-    <object>
-        <name>Rogue</name>
-        <item>Sneak Attack1</item>
-        <item>Sneak Attack2</item>
-        <item>Sneak Attack3</item>
-        <item>Sneak Attack4</item>
-        <item>Sneak Attack5</item>
-        <item>Sneak Attack6</item>
-        <item>Sneak Attack7</item>
-        <item>Sneak Attack8</item>
-        <item>Sneak Attack9</item>
-        <item>Sneak Attack10</item>
-        <item>Trapfinding</item>
-        <item>Trap Sense1</item>
-        <item>Trap Sense2</item>
-        <item>Trap Sense3</item>
-        <item>Trap Sense4</item>
-        <item>Trap Sense5</item>
-        <item>Trap Sense6</item>
-        <item>Evasion</item>
-        <item>Uncanny Dodge</item>
-        <item>Improved Uncanny Dodge</item>
-        <item>Simple Weapon Proficiency</item>
-        <item>Light Armor Proficiency</item>
-        <item>Exotic Weapon ProficiencyHand crossbow</item>
-        <item>Martial Weapon ProficiencyRapier</item>
-        <item>Martial Weapon ProficiencySap</item>
-        <item>Martial Weapon ProficiencyShortbow</item>
-        <item>Martial Weapon ProficiencyShort sword</item>
-    </object>
   <object>
     <name>Saving Throws</name>
     <item>Save Bonus</item>
@@ -1179,11 +164,6 @@
     <item>Shield Proficiency</item>
     <item>Tower Shield Proficiency</item>
   </object>
-    <object>
-        <name>Silver</name>
-        <item>Natural Weapon</item>
-        <item>Immune to Effect</item>
-    </object>
   <object>
     <name>Skill Bonus</name>
     <item>Acrobatic</item>
@@ -1205,276 +185,34 @@
     <item>Skill Focus</item>
     <item>Stealthy</item>
   </object>
-    <object>
-        <name>Sorcerer</name>
-        <item>Simple Weapon Proficiency</item>
-    </object>
-    <object>
-        <name>Strength</name>
-        <item>Supernatural Strength</item>
-    </object>
-    <object>
-        <name>Sun</name>
-        <item>Greater Turning</item>
-    </object>
-    <object>
-        <name>Svirfneblin</name>
-        <item>Low-Light Vision</item>
-        <item>Weapon Familiarity</item>
-        <item>Save Bonus</item>
-        <item>Improved Spell</item>
-        <item>Attack BonusGoblin</item>
-        <item>Attack BonusKobold</item>
-        <item>Dodge Bonus</item>
-        <item>Darkvision</item>
-        <item>Spell-Like AbilityBlindness/deafness</item>
-        <item>Spell-Like AbilityBlur</item>
-        <item>Spell-Like AbilityDisguise self</item>
-        <item>Stonecunning</item>
-        <item>Spell Resistance</item>
-        <item>Spell-Like AbilityNondetection</item>
-        <item>Skill BonusHide</item>
-      <item>Skill BonusHideUnderground</item>
-        <item>Skill BonusListen</item>
-    </object>
-    <object>
-        <name>Taken Multiple Times</name>
-        <item>Skill Mastery</item>
-        <item>Spell Mastery</item>
-        <item>Toughness</item>
-        <item>Skill Bonus</item>
-        <item>Attack Bonus</item>
-        <item>Save Bonus</item>
-        <item>Dodge Bonus</item>
-        <item>Extra Turning</item>
-    </object>
-    <object>
-        <name>Tallfellow Halfling</name>
-        <item>Skill BonusListen</item>
-        <item>Skill BonusSearch</item>
-        <item>Skill BonusSpot</item>
-        <item>Save BonusAll</item>
-        <item>Save BonusFear</item>
-        <item>Attack BonusThrowOrSling</item>
-        <item>Passive Secret Door Search</item>
-    </object>
-    <object>
-        <name>Tiefling</name>
-        <item>Spell-Like AbilityDarkness</item>
-        <item>Darkvision</item>
-        <item>Skill BonusBluff</item>
-        <item>Skill BonusHide</item>
-        <item>ResistanceFire</item>
-        <item>ResistanceCold</item>
-        <item>ResistanceElectricity</item>
-    </object>
-    <object>
-        <name>Transmutation</name>
-        <item>Skill Bonus</item>
-    </object>
-    <object>
-        <name>Travel</name>
-        <item>Spell-Like Ability</item>
-    </object>
-    <object>
-        <name>Trickery</name>
-    </object>
-    <object>
-        <name>Troglodyte</name>
-        <item>Darkvision</item>
-        <item>Save BonusFortitude</item>
-        <item>Skill BonusHide</item>
-      <item>Skill BonusHideUnderground</item>
-        <item>Natural Armor</item>
-        <item>Natural WeaponClaw</item>
-        <item>Natural WeaponBite</item>
-        <item>Stench</item>
-    </object>
+  <object>
+    <name>Taken Multiple Times</name>
+    <item>Skill Mastery</item>
+    <item>Spell Mastery</item>
+    <item>Toughness</item>
+    <item>Skill Bonus</item>
+    <item>Attack Bonus</item>
+    <item>Save Bonus</item>
+    <item>Dodge Bonus</item>
+    <item>Extra Turning</item>
+  </object>
   <object>
     <name>Two-Handed</name>
-  <item>Two-Weapon Fighting</item>
-  <item>Two-Weapon Defense</item>
-  <item>Improved Two-Weapon Fighting</item>
-  <item>Greater Two-Weapon Fighting</item>
+    <item>Two-Weapon Fighting</item>
+    <item>Two-Weapon Defense</item>
+    <item>Improved Two-Weapon Fighting</item>
+    <item>Greater Two-Weapon Fighting</item>
   </object>
-  <object>
-    <name>Vampire</name>
-    <item>Armor Bonus</item>
-    <item>SlamLarge</item>
-    <item>SlamMedium</item>
-    <item>SlamSmall</item>
-    <item>Blood Drain</item>
-    <item>Children of the Night</item>
-    <item>Dominate</item>
-    <item>Create Spawn</item>
-    <item>Energy Drain</item>
-    <item>Alternate Form</item>
-    <item>Damage Reduction</item>
-    <item>Fast Healing</item>
-    <item>Gaseous Form</item>
-    <item>ResistanceCold</item>
-    <item>ResistanceElectricity</item>
-    <item>Spell-Like AbilitySpider climb</item>
-    <item>Turn Resistance</item>
-    <item>Skill BonusBluff</item>
-    <item>Skill BonusHide</item>
-    <item>Skill BonusListen</item>
-    <item>Skill BonusMove Silently</item>
-    <item>Skill BonusSearch</item>
-    <item>Skill BonusSense Motive</item>
-    <item>Skill BonusSpot</item>
-    <item>Alertness</item>
-    <item>Combat Reflexes</item>
-    <item>Dodge</item>
-    <item>Improved Initiative</item>
-    <item>Lightning Reflexes</item>
-  </object>
-    <object>
-        <name>War</name>
-        <item>Martial Weapon Proficiency</item>
-        <item>Weapon Focus</item>
-    </object>
-    <object>
-        <name>Warrior</name>
-        <item>Simple Weapon Proficiency</item>
-        <item>Martial Weapon Proficiency</item>
-        <item>Light Armor Proficiency</item>
-        <item>Medium Armor Proficiency</item>
-        <item>Heavy Armor Proficiency</item>
-        <item>Shield Proficiency</item>
-        <item>Tower Shield Proficiency</item>
-    </object>
-    <object>
-        <name>Water</name>
-        <item>Turn</item>
-    </object>
   <object>
     <name>WeaponProficiency</name>
     <item>Exotic Weapon Proficiency</item>
     <item>Martial Weapon Proficiency</item>
     <item>Simple Weapon Proficiency</item>
   </object>
-    <object>
-        <name>Werebear</name>
-        <item>Alternate Form</item>
-        <item>Empathy</item>
-        <item>Lycanthropy</item>
-        <item>Improved Grab</item>
-        <item>Skill BonusSwim</item>
-        <item>Save BonusReflex</item>
-        <item>Save BonusFortitude</item>
-        <item>Save BonusWill</item>
-        <item>Natural Armor</item>
-        <item>Iron Will</item>
-        <item>Scent</item>
-        <item>Track</item>
-        <item>Skill BonusListen</item>
-        <item>Skill BonusSpot</item>
-        <item>Low-Light Vision</item>
-    </object>
-    <object>
-        <name>Wereboar</name>
-        <item>Alternate Form</item>
-        <item>Empathy</item>
-        <item>Lycanthropy</item>
-        <item>Skill BonusListen</item>
-        <item>Skill BonusSpot</item>
-        <item>Natural Armor</item>
-        <item>Scent</item>
-        <item>Ferocity</item>
-        <item>Save BonusReflex</item>
-        <item>Save BonusFortitude</item>
-        <item>Save BonusWill</item>
-        <item>Low-Light Vision</item>
-    </object>
-    <object>
-        <name>Wererat</name>
-        <item>Alternate Form</item>
-        <item>Empathy</item>
-        <item>Lycanthropy</item>
-        <item>Natural Armor</item>
-        <item>Iron Will</item>
-        <item>Scent</item>
-        <item>Low-Light Vision</item>
-        <item>Disease</item>
-        <item>Save Bonus</item>
-        <item>Skill BonusMove Silently</item>
-        <item>Alertness</item>
-        <item>Weapon Finesse</item>
-        <item>Skill BonusHide</item>
-    </object>
-    <object>
-        <name>Weretiger</name>
-        <item>Alternate Form</item>
-        <item>Empathy</item>
-        <item>Lycanthropy</item>
-        <item>Improved Grab</item>
-        <item>Save BonusReflex</item>
-        <item>Save BonusFortitude</item>
-        <item>Save BonusWill</item>
-        <item>Iron Will</item>
-        <item>Scent</item>
-        <item>Low-Light Vision</item>
-        <item>Pounce</item>
-        <item>Rake</item>
-        <item>Skill BonusMove Silently</item>
-        <item>Skill BonusBalance</item>
-        <item>Skill BonusHide</item>
-      <item>Skill BonusHideGrass</item>
-        <item>Skill BonusListen</item>
-        <item>Skill BonusSpot</item>
-        <item>Alertness</item>
-      <item>Natural Armor</item>
-    </object>
-    <object>
-        <name>Werewolf</name>
-        <item>Alternate Form</item>
-        <item>Empathy</item>
-        <item>Lycanthropy</item>
-        <item>Iron Will</item>
-        <item>Track</item>
-        <item>Skill BonusListen</item>
-        <item>Skill BonusSpot</item>
-      <item>Skill BonusSurvival</item>
-        <item>Natural Armor</item>
-        <item>Scent</item>
-        <item>Low-Light Vision</item>
-        <item>Save BonusFortitude</item>
-        <item>Save BonusReflex</item>
-        <item>Trip</item>
-    </object>
-    <object>
-        <name>White</name>
-        <item>Natural Weapon</item>
-        <item>Immune to Effect</item>
-    </object>
-    <object>
-        <name>Wild Elf</name>
-        <item>Skill BonusSearch</item>
-        <item>Skill BonusSpot</item>
-        <item>Skill BonusListen</item>
-        <item>Save Bonus</item>
-        <item>Immune to Effect</item>
-        <item>Low-Light Vision</item>
-        <item>Martial Weapon ProficiencyLongsword</item>
-        <item>Martial Weapon ProficiencyRapier</item>
-        <item>Martial Weapon ProficiencyLongbow</item>
-        <item>Martial Weapon ProficiencyShortbow</item>
-        <item>Passive Secret Door Search</item>
-    </object>
   <object>
     <name>Will</name>
     <item>Iron Will</item>
   </object>
-    <object>
-        <name>Wizard</name>
-        <item>Scribe Scroll</item>
-        <item>Simple Weapon ProficiencyHeavy crossbow</item>
-        <item>Simple Weapon ProficiencyLight crossbow</item>
-        <item>Simple Weapon ProficiencyClub</item>
-        <item>Simple Weapon ProficiencyDagger</item>
-        <item>Simple Weapon ProficiencyQuarterstaff</item>
-    </object>
   <object>
     <name>Wizard Bonus Feats</name>
     <item>Scribe Scroll</item>
@@ -1489,18 +227,4 @@
     <item>Widen Spell</item>
     <item>Quicken Spell</item>
   </object>
-    <object>
-        <name>Wood Elf</name>
-        <item>Skill BonusSearch</item>
-        <item>Skill BonusSpot</item>
-        <item>Skill BonusListen</item>
-        <item>Save Bonus</item>
-        <item>Immune to Effect</item>
-        <item>Low-Light Vision</item>
-        <item>Martial Weapon ProficiencyLongsword</item>
-        <item>Martial Weapon ProficiencyRapier</item>
-        <item>Martial Weapon ProficiencyLongbow</item>
-        <item>Martial Weapon ProficiencyShortbow</item>
-        <item>Passive Secret Door Search</item>
-    </object>
 </items>

@@ -6,6 +6,7 @@ namespace CharacterGen.Domain.Selectors.Collections
     {
         IEnumerable<string> SelectFrom(string tableName, string tableEntry);
         Dictionary<string, IEnumerable<string>> SelectAllFrom(string tableName);
+        string FindGroupOf(string tableName, string item, params string[] filteredGroupNames);
         T SelectRandomFrom<T>(IEnumerable<T> collection);
         string SelectRandomFrom(string tableName, string tableEntry);
     }

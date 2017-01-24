@@ -72,7 +72,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.Animals, characterRace.Metarace)).Returns(animalsForMetarace);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.Animals, FeatConstants.ImprovedFamiliar)).Returns(improvedFamiliars);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Mages)).Returns(mages);
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments)).Returns(levelAdjustments);
+            mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(TableNameConstants.Set.Adjustments.LevelAdjustments)).Returns(levelAdjustments);
         }
 
         [Test]

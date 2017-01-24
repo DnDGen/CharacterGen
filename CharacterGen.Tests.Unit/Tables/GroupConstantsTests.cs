@@ -7,7 +7,6 @@ namespace CharacterGen.Tests.Unit.Tables
     public class GroupConstantsTests
     {
         [TestCase(GroupConstants.AddMonsterHitDiceToPower, "Add Monster Hit Dice to Power")]
-        [TestCase(GroupConstants.Additional, "Additional")]
         [TestCase(GroupConstants.All, "All")]
         [TestCase(GroupConstants.ArmorBonus, "Armor Bonus")]
         [TestCase(GroupConstants.ArmorCheckPenalty, "Armor Check Penalty")]
@@ -22,6 +21,7 @@ namespace CharacterGen.Tests.Unit.Tables
         [TestCase(GroupConstants.HasClassRequirements, "Has Class Requirements")]
         [TestCase(GroupConstants.HasSkillRequirements, "Has Skill Requirements")]
         [TestCase(GroupConstants.HasStatRequirements, "Has Stat Requirements")]
+        [TestCase(GroupConstants.HasWings, "Has Wings")]
         [TestCase(GroupConstants.Healers, "Healers")]
         [TestCase(GroupConstants.Initiative, "Initiative")]
         [TestCase(GroupConstants.Knowledge, "Knowledge")]

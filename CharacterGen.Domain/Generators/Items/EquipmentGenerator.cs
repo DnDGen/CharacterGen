@@ -7,8 +7,8 @@ using CharacterGen.Races;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using TreasureGen.Items;
 using TreasureGen.Generators;
+using TreasureGen.Items;
 
 namespace CharacterGen.Domain.Generators.Items
 {
@@ -33,12 +33,7 @@ namespace CharacterGen.Domain.Generators.Items
         public Equipment GenerateWith(IEnumerable<Feat> feats, CharacterClass characterClass, Race race)
         {
             var equipment = new Equipment();
-
-            var npcs = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.NPCs);
-
-            var effectiveLevel = characterClass.Level;
-            if (npcs.Contains(characterClass.Name))
-                effectiveLevel = Math.Max(effectiveLevel / 2, 1);
+            var effectiveLevel = (int)Math.Max(1, characterClass.EffectiveLevel);
 
             equipment.Treasure = treasureGenerator.GenerateAtLevel(effectiveLevel);
             equipment.Armor = armorGenerator.GenerateArmorFrom(feats, characterClass, race);

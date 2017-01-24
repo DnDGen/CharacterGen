@@ -1,140 +1,200 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <items>
-    <object>
-        <name>Aasimar</name>
-        <item>30</item>
-    </object>
-    <object>
-        <name>Bugbear</name>
-        <item>30</item>
-    </object>
-    <object>
-        <name>Derro</name>
-        <item>20</item>
-    </object>
-    <object>
-        <name>Deep Halfling</name>
-        <item>20</item>
-    </object>
-    <object>
-        <name>Deep Dwarf</name>
-        <item>20</item>
-    </object>
-    <object>
-        <name>Doppelganger</name>
-        <item>30</item>
-    </object>
-    <object>
-        <name>Drow</name>
-        <item>30</item>
-    </object>
-    <object>
-        <name>Duergar Dwarf</name>
-        <item>20</item>
-    </object>
-    <object>
-        <name>Forest Gnome</name>
-        <item>20</item>
-    </object>
-    <object>
-        <name>Gnoll</name>
-        <item>30</item>
-    </object>
-    <object>
-        <name>Goblin</name>
-        <item>30</item>
-    </object>
-    <object>
-        <name>Gray Elf</name>
-        <item>30</item>
-    </object>
-    <object>
-        <name>Half-Elf</name>
-        <item>30</item>
-    </object>
-    <object>
-        <name>Half-Orc</name>
-        <item>30</item>
-    </object>
-    <object>
-        <name>High Elf</name>
-        <item>30</item>
-    </object>
-    <object>
-        <name>Hill Dwarf</name>
-        <item>20</item>
-    </object>
-    <object>
-        <name>Hobgoblin</name>
-        <item>30</item>
-    </object>
-    <object>
-        <name>Human</name>
-        <item>30</item>
-    </object>
-    <object>
-        <name>Kobold</name>
-        <item>30</item>
-    </object>
-    <object>
-        <name>Lightfoot Halfling</name>
-        <item>20</item>
-    </object>
-    <object>
-        <name>Lizardfolk</name>
-        <item>30</item>
-    </object>
-    <object>
-        <name>Mind Flayer</name>
-        <item>30</item>
-    </object>
-    <object>
-        <name>Minotaur</name>
-        <item>30</item>
-    </object>
-    <object>
-        <name>Mountain Dwarf</name>
-        <item>20</item>
-    </object>
-    <object>
-        <name>Ogre Mage</name>
-        <item>50</item>
-    </object>
-    <object>
-        <name>Ogre</name>
-        <item>40</item>
-    </object>
-    <object>
-        <name>Orc</name>
-        <item>30</item>
-    </object>
-    <object>
-        <name>Rock Gnome</name>
-        <item>20</item>
-    </object>
-    <object>
-        <name>Svirfneblin</name>
-        <item>20</item>
-    </object>
-    <object>
-        <name>Tallfellow Halfling</name>
-        <item>20</item>
-    </object>
-    <object>
-        <name>Tiefling</name>
-        <item>30</item>
-    </object>
-    <object>
-        <name>Troglodyte</name>
-        <item>30</item>
-    </object>
-    <object>
-        <name>Wild Elf</name>
-        <item>30</item>
-    </object>
-    <object>
-        <name>Wood Elf</name>
-        <item>30</item>
-    </object>
+  <object>
+    <name>Aasimar</name>
+    <item>30</item>
+  </object>
+  <object>
+    <name>Bugbear</name>
+    <item>30</item>
+  </object>
+  <object>
+    <name>Centaur</name>
+    <item>50</item>
+  </object>
+  <object>
+    <name>Cloud Giant</name>
+    <item>50</item>
+  </object>
+  <object>
+    <name>Derro</name>
+    <item>20</item>
+  </object>
+  <object>
+    <name>Deep Halfling</name>
+    <item>20</item>
+  </object>
+  <object>
+    <name>Deep Dwarf</name>
+    <item>20</item>
+  </object>
+  <object>
+    <name>Doppelganger</name>
+    <item>30</item>
+  </object>
+  <object>
+    <name>Drow</name>
+    <item>30</item>
+  </object>
+  <object>
+    <name>Duergar Dwarf</name>
+    <item>20</item>
+  </object>
+  <object>
+    <name>Fire Giant</name>
+    <item>40</item>
+  </object>
+  <object>
+    <name>Forest Gnome</name>
+    <item>20</item>
+  </object>
+  <object>
+    <name>Frost Giant</name>
+    <item>40</item>
+  </object>
+  <object>
+    <name>Gnoll</name>
+    <item>30</item>
+  </object>
+  <object>
+    <name>Goblin</name>
+    <item>30</item>
+  </object>
+  <object>
+    <name>Gray Elf</name>
+    <item>30</item>
+  </object>
+  <object>
+    <name>Grimlock</name>
+    <item>30</item>
+  </object>
+  <object>
+    <name>Half-Elf</name>
+    <item>30</item>
+  </object>
+  <object>
+    <name>Half-Orc</name>
+    <item>30</item>
+  </object>
+  <object>
+    <name>Harpy</name>
+    <item>20</item>
+  </object>
+  <object>
+    <name>High Elf</name>
+    <item>30</item>
+  </object>
+  <object>
+    <name>Hill Dwarf</name>
+    <item>20</item>
+  </object>
+  <object>
+    <name>Hill Giant</name>
+    <item>40</item>
+  </object>
+  <object>
+    <name>Hobgoblin</name>
+    <item>30</item>
+  </object>
+  <object>
+    <name>Human</name>
+    <item>30</item>
+  </object>
+  <object>
+    <name>Janni</name>
+    <item>30</item>
+  </object>
+  <object>
+    <name>Kobold</name>
+    <item>30</item>
+  </object>
+  <object>
+    <name>Lightfoot Halfling</name>
+    <item>20</item>
+  </object>
+  <object>
+    <name>Lizardfolk</name>
+    <item>30</item>
+  </object>
+  <object>
+    <name>Mind Flayer</name>
+    <item>30</item>
+  </object>
+  <object>
+    <name>Minotaur</name>
+    <item>30</item>
+  </object>
+  <object>
+    <name>Mountain Dwarf</name>
+    <item>20</item>
+  </object>
+  <object>
+    <name>Ogre Mage</name>
+    <item>50</item>
+  </object>
+  <object>
+    <name>Ogre</name>
+    <item>40</item>
+  </object>
+  <object>
+    <name>Orc</name>
+    <item>30</item>
+  </object>
+  <object>
+    <name>Pixie</name>
+    <item>20</item>
+  </object>
+  <object>
+    <name>Rakshasa</name>
+    <item>40</item>
+  </object>
+  <object>
+    <name>Rock Gnome</name>
+    <item>20</item>
+  </object>
+  <object>
+    <name>Satyr</name>
+    <item>40</item>
+  </object>
+  <object>
+    <name>Scorpionfolk</name>
+    <item>40</item>
+  </object>
+  <object>
+    <name>Stone Giant</name>
+    <item>40</item>
+  </object>
+  <object>
+    <name>Storm Giant</name>
+    <item>50</item>
+  </object>
+  <object>
+    <name>Svirfneblin</name>
+    <item>20</item>
+  </object>
+  <object>
+    <name>Tallfellow Halfling</name>
+    <item>20</item>
+  </object>
+  <object>
+    <name>Tiefling</name>
+    <item>30</item>
+  </object>
+  <object>
+    <name>Troglodyte</name>
+    <item>30</item>
+  </object>
+  <object>
+    <name>Troll</name>
+    <item>30</item>
+  </object>
+  <object>
+    <name>Wild Elf</name>
+    <item>30</item>
+  </object>
+  <object>
+    <name>Wood Elf</name>
+    <item>30</item>
+  </object>
 </items>

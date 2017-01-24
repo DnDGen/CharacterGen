@@ -1,22 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <items>
-    <object>
-        <name>Knowledge</name>
-        <item>Knowledge (Arcana)</item>
-        <item>Knowledge (Architecture and Engineering)</item>
-        <item>Knowledge (Dungeoneering)</item>
-        <item>Knowledge (Geography)</item>
-        <item>Knowledge (History)</item>
-        <item>Knowledge (Local)</item>
-        <item>Knowledge (Nature)</item>
-        <item>Knowledge (Nobility and Royalty)</item>
-        <item>Knowledge (Religion)</item>
-        <item>Knowledge (The Planes)</item>
-    </object>
-    <object>
-        <name>Abjuration</name>
-    </object>
+  <object>
+    <name>Abjuration</name>
+  </object>
   <object>
     <name>Acrobatic</name>
     <item>Jump</item>
@@ -27,18 +14,18 @@
     <item>Balance</item>
     <item>Escape Artist</item>
   </object>
-    <object>
-        <name>Air</name>
-    </object>
+  <object>
+    <name>Air</name>
+  </object>
   <object>
     <name>Alertness</name>
     <item>Listen</item>
     <item>Spot</item>
   </object>
-    <object>
-        <name>Animal</name>
-        <item>Knowledge (Nature)</item>
-    </object>
+  <object>
+    <name>Animal</name>
+    <item>Knowledge (Nature)</item>
+  </object>
   <object>
     <name>Animal Affinity</name>
     <item>Handle Animal</item>
@@ -61,15 +48,15 @@
     <item>Climb</item>
     <item>Swim</item>
   </object>
-    <object>
-        <name>Chaos</name>
-    </object>
-    <object>
-        <name>Conjuration</name>
-    </object>
-    <object>
-        <name>Death</name>
-    </object>
+  <object>
+    <name>Chaos</name>
+  </object>
+  <object>
+    <name>Conjuration</name>
+  </object>
+  <object>
+    <name>Death</name>
+  </object>
   <object>
     <name>Deceitful</name>
     <item>Disguise</item>
@@ -80,55 +67,68 @@
     <item>Sleight of Hand</item>
     <item>Use Rope</item>
   </object>
-    <object>
-        <name>Destruction</name>
-    </object>
+  <object>
+    <name>Destruction</name>
+  </object>
   <object>
     <name>Diligent</name>
     <item>Appraise</item>
     <item>Decipher Script</item>
   </object>
-    <object>
-        <name>Divination</name>
-    </object>
-    <object>
-        <name>Earth</name>
-    </object>
-    <object>
-        <name>Enchantment</name>
-    </object>
-    <object>
-        <name>Evil</name>
-    </object>
-    <object>
-        <name>Evocation</name>
-    </object>
-    <object>
-        <name>Fire</name>
-    </object>
-    <object>
-        <name>Good</name>
-    </object>
-    <object>
-        <name>Healing</name>
-    </object>
-    <object>
-        <name>Illusion</name>
-    </object>
-    <object>
-      <name>Investigator</name>
-      <item>Gather Information</item>
-      <item>Search</item>
-    </object>
-    <object>
-        <name>Law</name>
-    </object>
-    <object>
-        <name>Luck</name>
-    </object>
-    <object>
-        <name>Magic</name>
-    </object>
+  <object>
+    <name>Divination</name>
+  </object>
+  <object>
+    <name>Earth</name>
+  </object>
+  <object>
+    <name>Enchantment</name>
+  </object>
+  <object>
+    <name>Evil</name>
+  </object>
+  <object>
+    <name>Evocation</name>
+  </object>
+  <object>
+    <name>Fire</name>
+  </object>
+  <object>
+    <name>Good</name>
+  </object>
+  <object>
+    <name>Healing</name>
+  </object>
+  <object>
+    <name>Illusion</name>
+  </object>
+  <object>
+    <name>Investigator</name>
+    <item>Gather Information</item>
+    <item>Search</item>
+  </object>
+  <object>
+    <name>Knowledge</name>
+    <item>Knowledge (Arcana)</item>
+    <item>Knowledge (Architecture and Engineering)</item>
+    <item>Knowledge (Dungeoneering)</item>
+    <item>Knowledge (Geography)</item>
+    <item>Knowledge (History)</item>
+    <item>Knowledge (Local)</item>
+    <item>Knowledge (Nature)</item>
+    <item>Knowledge (Nobility and Royalty)</item>
+    <item>Knowledge (Religion)</item>
+    <item>Knowledge (The Planes)</item>
+  </object>
+  <object>
+    <name>Law</name>
+  </object>
+  <object>
+    <name>Luck</name>
+  </object>
+  <object>
+    <name>Magic</name>
+  </object>
   <object>
     <name>Magical Aptitude</name>
     <item>Spellcraft</item>
@@ -139,31 +139,31 @@
     <item>Knowledge (Nature)</item>
     <item>Survival</item>
   </object>
-    <object>
-        <name>Necromancy</name>
-    </object>
+  <object>
+    <name>Necromancy</name>
+  </object>
   <object>
     <name>Negotiator</name>
     <item>Diplomacy</item>
     <item>Sense Motive</item>
   </object>
-    <object>
-        <name>Nimble Fingers</name>
-        <item>Disable Device</item>
-        <item>Open Lock</item>
-    </object>
+  <object>
+    <name>Nimble Fingers</name>
+    <item>Disable Device</item>
+    <item>Open Lock</item>
+  </object>
   <object>
     <name>Persuasive</name>
     <item>Bluff</item>
     <item>Intimidate</item>
   </object>
-    <object>
-        <name>Plant</name>
-        <item>Knowledge (Nature)</item>
-    </object>
-    <object>
-        <name>Protection</name>
-    </object>
+  <object>
+    <name>Plant</name>
+    <item>Knowledge (Nature)</item>
+  </object>
+  <object>
+    <name>Protection</name>
+  </object>
   <object>
     <name>Self-Sufficient</name>
     <item>Heal</item>
@@ -174,74 +174,74 @@
     <item>Hide</item>
     <item>Move Silently</item>
   </object>
-    <object>
-        <name>Strength</name>
-    </object>
-    <object>
-        <name>Sun</name>
-    </object>
-    <object>
-        <name>Transmutation</name>
-    </object>
-    <object>
-        <name>Travel</name>
-        <item>Survival</item>
-    </object>
-    <object>
-        <name>Trickery</name>
-        <item>Bluff</item>
-        <item>Disguise</item>
-        <item>Hide</item>
-    </object>
-    <object>
-        <name>War</name>
-    </object>
-    <object>
-        <name>Water</name>
-    </object>
-    <object>
-        <name>Skills</name>
-        <item>Appraise</item>
-        <item>Balance</item>
-        <item>Bluff</item>
-        <item>Climb</item>
-        <item>Concentration</item>
-        <item>Decipher Script</item>
-        <item>Diplomacy</item>
-        <item>Disable Device</item>
-        <item>Disguise</item>
-        <item>Escape Artist</item>
-        <item>Forgery</item>
-        <item>Gather Information</item>
-        <item>Handle Animal</item>
-        <item>Heal</item>
-        <item>Hide</item>
-        <item>Intimidate</item>
-        <item>Jump</item>
-        <item>Knowledge (Arcana)</item>
-        <item>Knowledge (Architecture and Engineering)</item>
-        <item>Knowledge (Dungeoneering)</item>
-        <item>Knowledge (Geography)</item>
-        <item>Knowledge (History)</item>
-        <item>Knowledge (Local)</item>
-        <item>Knowledge (Nature)</item>
-        <item>Knowledge (Nobility and Royalty)</item>
-        <item>Knowledge (Religion)</item>
-        <item>Knowledge (The Planes)</item>
-        <item>Listen</item>
-        <item>Move Silently</item>
-        <item>Open Lock</item>
-        <item>Perform</item>
-        <item>Ride</item>
-        <item>Search</item>
-        <item>Sense Motive</item>
-        <item>Sleight of Hand</item>
-        <item>Spellcraft</item>
-        <item>Spot</item>
-        <item>Survival</item>
-        <item>Swim</item>
-        <item>Tumble</item>
-        <item>Use Magic Device</item>
-        <item>Use Rope</item>
-    </object>
+  <object>
+    <name>Strength</name>
+  </object>
+  <object>
+    <name>Sun</name>
+  </object>
+  <object>
+    <name>Transmutation</name>
+  </object>
+  <object>
+    <name>Travel</name>
+    <item>Survival</item>
+  </object>
+  <object>
+    <name>Trickery</name>
+    <item>Bluff</item>
+    <item>Disguise</item>
+    <item>Hide</item>
+  </object>
+  <object>
+    <name>War</name>
+  </object>
+  <object>
+    <name>Water</name>
+  </object>
+  <object>
+    <name>Skills</name>
+    <item>Appraise</item>
+    <item>Balance</item>
+    <item>Bluff</item>
+    <item>Climb</item>
+    <item>Concentration</item>
+    <item>Decipher Script</item>
+    <item>Diplomacy</item>
+    <item>Disable Device</item>
+    <item>Disguise</item>
+    <item>Escape Artist</item>
+    <item>Forgery</item>
+    <item>Gather Information</item>
+    <item>Handle Animal</item>
+    <item>Heal</item>
+    <item>Hide</item>
+    <item>Intimidate</item>
+    <item>Jump</item>
+    <item>Knowledge (Arcana)</item>
+    <item>Knowledge (Architecture and Engineering)</item>
+    <item>Knowledge (Dungeoneering)</item>
+    <item>Knowledge (Geography)</item>
+    <item>Knowledge (History)</item>
+    <item>Knowledge (Local)</item>
+    <item>Knowledge (Nature)</item>
+    <item>Knowledge (Nobility and Royalty)</item>
+    <item>Knowledge (Religion)</item>
+    <item>Knowledge (The Planes)</item>
+    <item>Listen</item>
+    <item>Move Silently</item>
+    <item>Open Lock</item>
+    <item>Perform</item>
+    <item>Ride</item>
+    <item>Search</item>
+    <item>Sense Motive</item>
+    <item>Sleight of Hand</item>
+    <item>Spellcraft</item>
+    <item>Spot</item>
+    <item>Survival</item>
+    <item>Swim</item>
+    <item>Tumble</item>
+    <item>Use Magic Device</item>
+    <item>Use Rope</item>
+  </object>
 </items>

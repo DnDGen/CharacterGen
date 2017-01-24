@@ -45,20 +45,15 @@ namespace CharacterGen.Domain.Generators.Combats
 
         private int GetBaseAttackBonus(CharacterClass characterClass)
         {
-            var goodBaseAttacks = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.GoodBaseAttack);
-            if (goodBaseAttacks.Contains(characterClass.Name))
-                return GetGoodBaseAttackBonus(characterClass.Level);
+            var baseAttackQuality = collectionsSelector.FindGroupOf(TableNameConstants.Set.Collection.ClassNameGroups, characterClass.Name, GroupConstants.GoodBaseAttack, GroupConstants.AverageBaseAttack, GroupConstants.PoorBaseAttack);
 
-            var averageBaseAttacks = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.AverageBaseAttack);
-            if (averageBaseAttacks.Contains(characterClass.Name))
-                return GetAverageBaseAttackBonus(characterClass.Level);
-
-            var poorBaseAttacks = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.PoorBaseAttack);
-            if (poorBaseAttacks.Contains(characterClass.Name))
-                return GetPoorBaseAttackBonus(characterClass.Level);
-
-            var message = string.Format("{0} has no base attack", characterClass.Name);
-            throw new ArgumentException(message);
+            switch (baseAttackQuality)
+            {
+                case GroupConstants.GoodBaseAttack: return GetGoodBaseAttackBonus(characterClass.Level);
+                case GroupConstants.AverageBaseAttack: return GetAverageBaseAttackBonus(characterClass.Level);
+                case GroupConstants.PoorBaseAttack: return GetPoorBaseAttackBonus(characterClass.Level);
+                default: throw new ArgumentException($"{characterClass.Name} has no base attack");
+            }
         }
 
         private int GetGoodBaseAttackBonus(int level)
@@ -78,24 +73,26 @@ namespace CharacterGen.Domain.Generators.Combats
 
         private int GetRacialBaseAttackAdjustments(Race race)
         {
-            var racialAdjustments = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.RacialBaseAttackAdjustments);
-            return racialAdjustments[race.BaseRace] + racialAdjustments[race.Metarace];
+            var baseRaceAdjustment = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.RacialBaseAttackAdjustments, race.BaseRace);
+            var metaraceAdjustment = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.RacialBaseAttackAdjustments, race.Metarace);
+
+            return baseRaceAdjustment + metaraceAdjustment;
         }
 
         private int GetSizeAdjustments(Race race)
         {
-            var sizeModifiers = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.SizeModifiers);
-            return sizeModifiers[race.Size];
+            var sizeModifier = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.SizeModifiers, race.Size);
+            return sizeModifier;
         }
 
-        public Combat GenerateWith(BaseAttack baseAttack, CharacterClass characterClass, Race race, IEnumerable<Feat> feats, Dictionary<String, Stat> stats, Equipment equipment)
+        public Combat GenerateWith(BaseAttack baseAttack, CharacterClass characterClass, Race race, IEnumerable<Feat> feats, Dictionary<string, Stat> stats, Equipment equipment)
         {
             var combat = new Combat();
 
             combat.BaseAttack = baseAttack;
             combat.BaseAttack.BaseBonus += GetBonusFromFeats(feats);
             combat.BaseAttack.CircumstantialBonus = IsAttackBonusCircumstantial(feats);
-            combat.AdjustedDexterityBonus = GetAdjustedDexterityBonus(stats, equipment);
+            combat.AdjustedDexterityBonus = GetAdjustedDexterityBonus(stats[StatConstants.Dexterity], equipment);
             combat.ArmorClass = armorClassGenerator.GenerateWith(equipment, combat.AdjustedDexterityBonus, feats, race);
 
             if (stats.ContainsKey(StatConstants.Constitution))
@@ -128,18 +125,17 @@ namespace CharacterGen.Domain.Generators.Combats
             return attackBonusFeats.Any(f => f.Foci.Any());
         }
 
-        private int GetAdjustedDexterityBonus(Dictionary<string, Stat> stats, Equipment equipment)
+        private int GetAdjustedDexterityBonus(Stat dexterity, Equipment equipment)
         {
             if (equipment.Armor == null)
-                return stats[StatConstants.Dexterity].Bonus;
+                return dexterity.Bonus;
 
-            var maxDexterityBonuses = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.MaxDexterityBonus);
-            var armorBonus = maxDexterityBonuses[equipment.Armor.Name];
+            var maxDexterityBonus = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.MaxDexterityBonus, equipment.Armor.Name);
 
             if (equipment.Armor.Traits.Contains(TraitConstants.SpecialMaterials.Mithral))
-                armorBonus += 2;
+                maxDexterityBonus += 2;
 
-            return Math.Min(stats[StatConstants.Dexterity].Bonus, armorBonus);
+            return Math.Min(dexterity.Bonus, maxDexterityBonus);
         }
 
         private int GetInitiativeBonus(int dexterityBonus, IEnumerable<Feat> feats)

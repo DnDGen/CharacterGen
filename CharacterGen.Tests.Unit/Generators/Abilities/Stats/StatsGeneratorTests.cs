@@ -108,7 +108,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Stats
             {
                 var stat = statKVP.Value;
                 Assert.That(stat.Name, Is.EqualTo(statKVP.Key));
-                Assert.That(stat.Value, Is.Positive);
+                Assert.That(stat.Value, Is.AtLeast(3));
             }
         }
 
@@ -404,14 +404,14 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Stats
         }
 
         [Test]
-        public void CannotHaveStatLessThan1()
+        public void CannotHaveStatLessThan3()
         {
             adjustments[StatConstants.Strength] = -9266;
             randomizedStats[StatConstants.Strength].Value = 3;
 
             var stats = statsGenerator.GenerateWith(mockStatsRandomizer.Object, characterClass, race);
             AssertStats(stats);
-            Assert.That(stats[StatConstants.Strength].Value, Is.EqualTo(1));
+            Assert.That(stats[StatConstants.Strength].Value, Is.EqualTo(3));
         }
 
         [Test]
@@ -425,7 +425,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Stats
 
             var stats = statsGenerator.GenerateWith(mockStatsRandomizer.Object, characterClass, race);
             AssertStats(stats);
-            Assert.That(stats[StatConstants.Strength].Value, Is.EqualTo(2));
+            Assert.That(stats[StatConstants.Strength].Value, Is.EqualTo(4));
         }
 
         [Test]
@@ -556,7 +556,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Stats
         }
 
         [Test]
-        public void CannotHaveSetStatBelow1IfAdjustingStats()
+        public void CannotHaveSetStatBelow3IfAdjustingStats()
         {
             randomizedStats[StatConstants.Charisma].Value = -10;
             randomizedStats[StatConstants.Constitution].Value = -11;
@@ -576,16 +576,16 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Stats
 
             var stats = statsGenerator.GenerateWith(mockSetStatsRandomizer.Object, characterClass, race);
             AssertStats(stats);
-            Assert.That(stats[StatConstants.Charisma].Value, Is.EqualTo(1));
-            Assert.That(stats[StatConstants.Constitution].Value, Is.EqualTo(1));
-            Assert.That(stats[StatConstants.Dexterity].Value, Is.EqualTo(1));
-            Assert.That(stats[StatConstants.Intelligence].Value, Is.EqualTo(1));
-            Assert.That(stats[StatConstants.Strength].Value, Is.EqualTo(1));
-            Assert.That(stats[StatConstants.Wisdom].Value, Is.EqualTo(1));
+            Assert.That(stats[StatConstants.Charisma].Value, Is.EqualTo(3));
+            Assert.That(stats[StatConstants.Constitution].Value, Is.EqualTo(3));
+            Assert.That(stats[StatConstants.Dexterity].Value, Is.EqualTo(3));
+            Assert.That(stats[StatConstants.Intelligence].Value, Is.EqualTo(3));
+            Assert.That(stats[StatConstants.Strength].Value, Is.EqualTo(3));
+            Assert.That(stats[StatConstants.Wisdom].Value, Is.EqualTo(3));
         }
 
         [Test]
-        public void CannotHaveSetStatBelow1IfNotAdjustingStats()
+        public void CannotHaveSetStatBelow3IfNotAdjustingStats()
         {
             randomizedStats[StatConstants.Charisma].Value = -10;
             randomizedStats[StatConstants.Constitution].Value = -11;
@@ -605,12 +605,12 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Stats
 
             var stats = statsGenerator.GenerateWith(mockSetStatsRandomizer.Object, characterClass, race);
             AssertStats(stats);
-            Assert.That(stats[StatConstants.Charisma].Value, Is.EqualTo(1));
-            Assert.That(stats[StatConstants.Constitution].Value, Is.EqualTo(1));
-            Assert.That(stats[StatConstants.Dexterity].Value, Is.EqualTo(1));
-            Assert.That(stats[StatConstants.Intelligence].Value, Is.EqualTo(1));
-            Assert.That(stats[StatConstants.Strength].Value, Is.EqualTo(1));
-            Assert.That(stats[StatConstants.Wisdom].Value, Is.EqualTo(1));
+            Assert.That(stats[StatConstants.Charisma].Value, Is.EqualTo(3));
+            Assert.That(stats[StatConstants.Constitution].Value, Is.EqualTo(3));
+            Assert.That(stats[StatConstants.Dexterity].Value, Is.EqualTo(3));
+            Assert.That(stats[StatConstants.Intelligence].Value, Is.EqualTo(3));
+            Assert.That(stats[StatConstants.Strength].Value, Is.EqualTo(3));
+            Assert.That(stats[StatConstants.Wisdom].Value, Is.EqualTo(3));
         }
 
         [Test]
@@ -649,7 +649,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Stats
         }
 
         [Test]
-        public void UndeadStillHaveNoConstitutionWhenAdjustingSetStatsBelow1()
+        public void UndeadStillHaveNoConstitutionWhenAdjustingSetStatsBelow3()
         {
             randomizedStats[StatConstants.Charisma].Value = -10;
             randomizedStats[StatConstants.Constitution].Value = -11;
@@ -672,11 +672,11 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Stats
 
             var stats = statsGenerator.GenerateWith(mockSetStatsRandomizer.Object, characterClass, race);
             AssertStats(stats);
-            Assert.That(stats[StatConstants.Charisma].Value, Is.EqualTo(1));
-            Assert.That(stats[StatConstants.Dexterity].Value, Is.EqualTo(1));
-            Assert.That(stats[StatConstants.Intelligence].Value, Is.EqualTo(1));
-            Assert.That(stats[StatConstants.Strength].Value, Is.EqualTo(1));
-            Assert.That(stats[StatConstants.Wisdom].Value, Is.EqualTo(1));
+            Assert.That(stats[StatConstants.Charisma].Value, Is.EqualTo(3));
+            Assert.That(stats[StatConstants.Dexterity].Value, Is.EqualTo(3));
+            Assert.That(stats[StatConstants.Intelligence].Value, Is.EqualTo(3));
+            Assert.That(stats[StatConstants.Strength].Value, Is.EqualTo(3));
+            Assert.That(stats[StatConstants.Wisdom].Value, Is.EqualTo(3));
             Assert.That(stats.Keys, Is.All.Not.EqualTo(StatConstants.Constitution));
             Assert.That(stats.Count, Is.EqualTo(5));
         }

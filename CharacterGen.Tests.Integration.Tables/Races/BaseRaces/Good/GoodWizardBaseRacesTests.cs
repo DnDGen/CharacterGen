@@ -23,7 +23,9 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Good
         [TestCase(1, 1, RaceConstants.BaseRaces.Aasimar)]
         [TestCase(2, 2, RaceConstants.BaseRaces.HillDwarf)]
         [TestCase(3, 7, RaceConstants.BaseRaces.GrayElf)]
-        [TestCase(8, 41, RaceConstants.BaseRaces.HighElf)]
+        [TestCase(8, 39, RaceConstants.BaseRaces.HighElf)]
+        [TestCase(40, 40, RaceConstants.BaseRaces.Pixie)]
+        [TestCase(41, 41, RaceConstants.BaseRaces.StormGiant)]
         [TestCase(42, 42, RaceConstants.BaseRaces.WoodElf)]
         [TestCase(43, 43, RaceConstants.BaseRaces.ForestGnome)]
         [TestCase(44, 48, RaceConstants.BaseRaces.RockGnome)]
@@ -32,9 +34,8 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Good
         [TestCase(64, 64, RaceConstants.BaseRaces.DeepHalfling)]
         [TestCase(65, 67, RaceConstants.BaseRaces.TallfellowHalfling)]
         [TestCase(68, 68, RaceConstants.BaseRaces.HalfOrc)]
-        [TestCase(69, 96, RaceConstants.BaseRaces.Human)]
-        [TestCase(97, 97, RaceConstants.BaseRaces.Svirfneblin)]
-        [TestCase(98, 100, EmptyContent)]
+        [TestCase(69, 99, RaceConstants.BaseRaces.Human)]
+        [TestCase(100, 100, RaceConstants.BaseRaces.Svirfneblin)]
         public override void Percentile(int lower, int upper, string content)
         {
             base.Percentile(lower, upper, content);

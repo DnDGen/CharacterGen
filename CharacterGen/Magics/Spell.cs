@@ -5,6 +5,7 @@ namespace CharacterGen.Magics
 {
     public class Spell
     {
+        public string Source { get; set; }
         public int Level { get; set; }
         public string Name { get; set; }
         public IEnumerable<string> Metamagic { get; set; }
@@ -12,6 +13,7 @@ namespace CharacterGen.Magics
         public Spell()
         {
             Name = string.Empty;
+            Source = string.Empty;
             Metamagic = Enumerable.Empty<string>();
         }
 
@@ -22,12 +24,12 @@ namespace CharacterGen.Magics
 
             var otherSpell = obj as Spell;
 
-            return Level == otherSpell.Level && Name == otherSpell.Name;
+            return Level == otherSpell.Level && Name == otherSpell.Name && Source == otherSpell.Source;
         }
 
         public override int GetHashCode()
         {
-            return Level.GetHashCode() + Name.GetHashCode();
+            return Level.GetHashCode() + Name.GetHashCode() + Source.GetHashCode();
         }
     }
 }

@@ -2,7 +2,6 @@
 using CharacterGen.Domain.Tables;
 using Moq;
 using NUnit.Framework;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,33 +10,36 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
     [TestFixture]
     public class FeatSelectorTests
     {
-        private IFeatsSelector selector;
+        private IFeatsSelector featsSelector;
         private Mock<ICollectionsSelector> mockCollectionsSelector;
         private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
+        private Dictionary<string, IEnumerable<string>> additionalFeatsData;
 
         [SetUp]
         public void Setup()
         {
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
             mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
-            selector = new FeatsSelector(mockCollectionsSelector.Object, mockAdjustmentsSelector.Object);
+            featsSelector = new FeatsSelector(mockCollectionsSelector.Object, mockAdjustmentsSelector.Object);
+
+            additionalFeatsData = new Dictionary<string, IEnumerable<string>>();
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(It.IsAny<string>(), It.IsAny<string>())).Returns(Enumerable.Empty<string>());
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(It.IsAny<string>())).Returns(new Dictionary<string, int>());
+            mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(It.IsAny<string>())).Returns(new Dictionary<string, int>());
+            mockCollectionsSelector.Setup(s => s.SelectAllFrom(TableNameConstants.Set.Collection.AdditionalFeatData)).Returns(additionalFeatsData);
         }
 
         [Test]
         public void GetRacialFeats()
         {
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, "race")).Returns(new[] { "racial feat 1", "racial feat 2" });
+            var racialFeatData = new Dictionary<string, IEnumerable<string>>();
+            racialFeatData["racial feat 1"] = new[] { "racialFeat1", "ginormous", "9266", "0", string.Empty, "0", "never", "600", string.Empty, "0" };
+            racialFeatData["racial feat 2"] = new[] { "racialFeat2", string.Empty, "0", "90210", "focusness", "42", "fortnight", "0", "stat,other stat", "14" };
 
             var racialFeatTableName = string.Format(TableNameConstants.Formattable.Collection.RACEFeatData, "race");
-            mockCollectionsSelector.Setup(s => s.SelectFrom(racialFeatTableName, "racial feat 1"))
-                .Returns(new[] { "racialFeat1", "ginormous", "9266", "0", string.Empty, "0", "never", "600", string.Empty, "0" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom(racialFeatTableName, "racial feat 2"))
-                .Returns(new[] { "racialFeat2", string.Empty, "0", "90210", "focusness", "42", "fortnight", "0", "stat,other stat", "14" });
+            mockCollectionsSelector.Setup(s => s.SelectAllFrom(racialFeatTableName)).Returns(racialFeatData);
 
-            var racialFeats = selector.SelectRacial("race");
+            var racialFeats = featsSelector.SelectRacial("race");
             Assert.That(racialFeats.Count(), Is.EqualTo(2));
 
             var first = racialFeats.First();
@@ -69,15 +71,14 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
         [Test]
         public void GetDifferentRacialFeatsWithSameId()
         {
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, "race")).Returns(new[] { "racial feat 1", "racial feat 2" });
+            var racialFeatData = new Dictionary<string, IEnumerable<string>>();
+            racialFeatData["racial feat 1"] = new[] { "racialFeat1", "ginormous", "9266", "0", string.Empty, "0", "never", "600", string.Empty, "0" };
+            racialFeatData["racial feat 2"] = new[] { "racialFeat1", string.Empty, "0", "90210", "focusness", "42", "fortnight", "0", "stat,other stat", "14" };
 
             var racialFeatTableName = string.Format(TableNameConstants.Formattable.Collection.RACEFeatData, "race");
-            mockCollectionsSelector.Setup(s => s.SelectFrom(racialFeatTableName, "racial feat 1"))
-                .Returns(new[] { "racialFeat1", "ginormous", "9266", "0", string.Empty, "0", "never", "600", string.Empty, "0" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom(racialFeatTableName, "racial feat 2"))
-                .Returns(new[] { "racialFeat1", string.Empty, "0", "90210", "focusness", "42", "fortnight", "0", "stat,other stat", "14" });
+            mockCollectionsSelector.Setup(s => s.SelectAllFrom(racialFeatTableName)).Returns(racialFeatData);
 
-            var racialFeats = selector.SelectRacial("race");
+            var racialFeats = featsSelector.SelectRacial("race");
             Assert.That(racialFeats.Count(), Is.EqualTo(2));
 
             var first = racialFeats.First();
@@ -109,18 +110,18 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
         [Test]
         public void GetClassFeats()
         {
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, "class name"))
-                .Returns(new[] { "class feat 1", "class feat 2" });
+            var classFeatData = new Dictionary<string, IEnumerable<string>>();
+            classFeatData["class feat 1"] = new[] { "classFeat1", "1", "focus type A", "0", "3", "Daily", "4", "stat", string.Empty, bool.TrueString };
+            classFeatData["class feat 2"] = new[] { "classFeat2", "5", string.Empty, "9266", "0", "never", "0", string.Empty, "large", bool.FalseString };
 
             var classFeatTableName = string.Format(TableNameConstants.Formattable.Collection.CLASSFeatData, "class name");
-            mockCollectionsSelector.Setup(s => s.SelectFrom(classFeatTableName, "class feat 1")).Returns(new[] { "classFeat1", "1", "focus type A", "0", "3", "Daily", "4", "stat", string.Empty, bool.TrueString });
-            mockCollectionsSelector.Setup(s => s.SelectFrom(classFeatTableName, "class feat 2")).Returns(new[] { "classFeat2", "5", string.Empty, "9266", "0", "never", "0", string.Empty, "large", bool.FalseString });
+            mockCollectionsSelector.Setup(s => s.SelectAllFrom(classFeatTableName)).Returns(classFeatData);
 
             var featRequirements = new Dictionary<string, IEnumerable<string>>();
             featRequirements["class feat 1"] = new[] { "feat 1", "feat 2/focus" };
             mockCollectionsSelector.Setup(s => s.SelectAllFrom(TableNameConstants.Set.Collection.RequiredFeats)).Returns(featRequirements);
 
-            var classFeats = selector.SelectClass("class name");
+            var classFeats = featsSelector.SelectClass("class name");
             Assert.That(classFeats.Count(), Is.EqualTo(2));
 
             var first = classFeats.First();
@@ -161,18 +162,18 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
         [Test]
         public void GetDifferentClassFeatsWithSameId()
         {
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, "class name"))
-                .Returns(new[] { "class feat 1", "class feat 2" });
+            var classFeatData = new Dictionary<string, IEnumerable<string>>();
+            classFeatData["class feat 1"] = new[] { "classFeat1", "1", "focus type A", "0", "3", "Daily", "4", "stat", string.Empty, bool.TrueString };
+            classFeatData["class feat 2"] = new[] { "classFeat1", "5", string.Empty, "9266", "0", "never", "0", string.Empty, "large", bool.FalseString };
 
             var classFeatTableName = string.Format(TableNameConstants.Formattable.Collection.CLASSFeatData, "class name");
-            mockCollectionsSelector.Setup(s => s.SelectFrom(classFeatTableName, "class feat 1")).Returns(new[] { "classFeat1", "1", "focus type A", "0", "3", "Daily", "4", "stat", string.Empty, bool.TrueString });
-            mockCollectionsSelector.Setup(s => s.SelectFrom(classFeatTableName, "class feat 2")).Returns(new[] { "classFeat1", "5", string.Empty, "9266", "0", "never", "0", string.Empty, "large", bool.FalseString });
+            mockCollectionsSelector.Setup(s => s.SelectAllFrom(classFeatTableName)).Returns(classFeatData);
 
             var featRequirements = new Dictionary<string, IEnumerable<string>>();
             featRequirements["class feat 1"] = new[] { "feat 1", "feat 2/focus" };
             mockCollectionsSelector.Setup(s => s.SelectAllFrom(TableNameConstants.Set.Collection.RequiredFeats)).Returns(featRequirements);
 
-            var classFeats = selector.SelectClass("class name");
+            var classFeats = featsSelector.SelectClass("class name");
             Assert.That(classFeats.Count(), Is.EqualTo(2));
 
             var first = classFeats.First();
@@ -213,10 +214,8 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
         [Test]
         public void GetAdditionalFeats()
         {
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.Additional))
-                .Returns(new[] { "additional feat 1", "additional feat 2" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AdditionalFeatData, "additional feat 1")).Returns(new[] { "9266", String.Empty, "42", "0", String.Empty });
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AdditionalFeatData, "additional feat 2")).Returns(new[] { "0", "focus", "0", "9266", "occasionally" });
+            additionalFeatsData["additional feat 1"] = new[] { "9266", string.Empty, "42", "0", string.Empty };
+            additionalFeatsData["additional feat 2"] = new[] { "0", "focus", "0", "9266", "occasionally" };
 
             var featRequirements = new Dictionary<string, IEnumerable<string>>();
             featRequirements["additional feat 1"] = new[] { "feat 1", "feat 2/focus" };
@@ -231,23 +230,23 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
             feat1ClassRequirements["class 3"] = 5;
 
             var tableName = string.Format(TableNameConstants.Formattable.Adjustments.FEATClassRequirements, "additional feat 1");
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(feat1ClassRequirements);
+            mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(tableName)).Returns(feat1ClassRequirements);
 
             var feat2SkillRankRequirements = new Dictionary<string, int>();
             feat2SkillRankRequirements["skill 1"] = 5;
             feat2SkillRankRequirements["skill 2"] = 4;
 
             tableName = string.Format(TableNameConstants.Formattable.Adjustments.FEATSkillRankRequirements, "additional feat 2");
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(feat2SkillRankRequirements);
+            mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(tableName)).Returns(feat2SkillRankRequirements);
 
             var feat2StatRequirements = new Dictionary<string, int>();
             feat2StatRequirements["stat 1"] = 13;
             feat2StatRequirements["stat 2"] = 16;
 
             tableName = string.Format(TableNameConstants.Formattable.Adjustments.FEATStatRequirements, "additional feat 2");
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName)).Returns(feat2StatRequirements);
+            mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(tableName)).Returns(feat2StatRequirements);
 
-            var additionalFeats = selector.SelectAdditional();
+            var additionalFeats = featsSelector.SelectAdditional();
             Assert.That(additionalFeats.Count(), Is.EqualTo(2));
 
             var first = additionalFeats.First();

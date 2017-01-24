@@ -29,8 +29,9 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Neutral
         [TestCase(48, 49, RaceConstants.BaseRaces.TallfellowHalfling)]
         [TestCase(50, 50, RaceConstants.BaseRaces.HalfOrc)]
         [TestCase(51, 97, RaceConstants.BaseRaces.Human)]
-        [TestCase(98, 98, RaceConstants.BaseRaces.Doppelganger)]
-        [TestCase(99, 100, EmptyContent)]
+        [TestCase(98, 98, RaceConstants.BaseRaces.Satyr)]
+        [TestCase(99, 99, RaceConstants.BaseRaces.Doppelganger)]
+        [TestCase(100, 100, RaceConstants.BaseRaces.Janni)]
         public override void Percentile(int lower, int upper, string content)
         {
             base.Percentile(lower, upper, content);

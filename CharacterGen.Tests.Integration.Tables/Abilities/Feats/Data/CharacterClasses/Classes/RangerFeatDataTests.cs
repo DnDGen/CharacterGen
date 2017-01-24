@@ -2,7 +2,7 @@
 using CharacterGen.CharacterClasses;
 using CharacterGen.Domain.Tables;
 using NUnit.Framework;
-using System;
+using System.Linq;
 
 namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterClasses.Classes
 {
@@ -48,6 +48,19 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             };
 
             AssertCollectionNames(names);
+        }
+
+        [TestCase(FeatConstants.CombatStyle, FeatConstants.ImprovedCombatStyle)]
+        [TestCase(FeatConstants.ImprovedCombatStyle, FeatConstants.CombatStyleMastery)]
+        public void FeatGroupDependency(string prerequisiteFeat, string dependentFeat)
+        {
+            var collection = table.Keys.ToList();
+            var prereqFeatIndex = collection.IndexOf(prerequisiteFeat);
+            var dependencyIndex = collection.IndexOf(dependentFeat);
+
+            Assert.That(prereqFeatIndex, Is.Positive);
+            Assert.That(dependencyIndex, Is.Positive);
+            Assert.That(prereqFeatIndex, Is.LessThan(dependencyIndex));
         }
 
         [TestCase(FeatConstants.SimpleWeaponProficiency,
@@ -310,9 +323,9 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
             0,
             0,
             "", true)]
-        public override void Data(string name, string feat, string focusType, int frequencyQuantity, string frequencyQuantityStat, string frequencyTimePeriod, int minimumLevel, int maximumLevel, int strength, string sizeRequirement, bool allowFocusOfAll)
+        public override void ClassFeatData(string name, string feat, string focusType, int frequencyQuantity, string frequencyQuantityStat, string frequencyTimePeriod, int minimumLevel, int maximumLevel, int strength, string sizeRequirement, bool allowFocusOfAll)
         {
-            base.Data(name, feat, focusType, frequencyQuantity, frequencyQuantityStat, frequencyTimePeriod, minimumLevel, maximumLevel, strength, sizeRequirement, allowFocusOfAll);
+            base.ClassFeatData(name, feat, focusType, frequencyQuantity, frequencyQuantityStat, frequencyTimePeriod, minimumLevel, maximumLevel, strength, sizeRequirement, allowFocusOfAll);
         }
     }
 }

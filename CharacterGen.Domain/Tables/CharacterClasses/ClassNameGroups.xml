@@ -1,31 +1,50 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <items>
-    <object>
-        <name>Healers</name>
-        <item>Cleric</item>
-        <item>Druid</item>
-        <item>Paladin</item>
-        <item>Ranger</item>
-        <item>Bard</item>
-      <item>Adept</item>
-    </object>
-    <object>
-        <name>Mages</name>
-        <item>Sorcerer</item>
-        <item>Wizard</item>
-    </object>
-    <object>
-        <name>Spellcasters</name>
-        <item>Bard</item>
-        <item>Cleric</item>
-        <item>Druid</item>
-        <item>Paladin</item>
-        <item>Ranger</item>
-        <item>Sorcerer</item>
-        <item>Wizard</item>
-      <item>Adept</item>
-    </object>
+  <object>
+    <name>All</name>
+    <item>Adept</item>
+    <item>Aristocrat</item>
+    <item>Barbarian</item>
+    <item>Bard</item>
+    <item>Cleric</item>
+    <item>Commoner</item>
+    <item>Druid</item>
+    <item>Expert</item>
+    <item>Fighter</item>
+    <item>Monk</item>
+    <item>Paladin</item>
+    <item>Ranger</item>
+    <item>Rogue</item>
+    <item>Sorcerer</item>
+    <item>Warrior</item>
+    <item>Wizard</item>
+  </object>
+  <object>
+    <name>Healers</name>
+    <item>Cleric</item>
+    <item>Druid</item>
+    <item>Paladin</item>
+    <item>Ranger</item>
+    <item>Bard</item>
+    <item>Adept</item>
+  </object>
+  <object>
+    <name>Mages</name>
+    <item>Sorcerer</item>
+    <item>Wizard</item>
+  </object>
+  <object>
+    <name>Spellcasters</name>
+    <item>Bard</item>
+    <item>Cleric</item>
+    <item>Druid</item>
+    <item>Paladin</item>
+    <item>Ranger</item>
+    <item>Sorcerer</item>
+    <item>Wizard</item>
+    <item>Adept</item>
+  </object>
   <object>
     <name>Players</name>
     <item>Barbarian</item>
@@ -48,39 +67,39 @@
     <item>Expert</item>
     <item>Warrior</item>
   </object>
-    <object>
-        <name>Stealth</name>
-        <item>Bard</item>
-        <item>Rogue</item>
-        <item>Ranger</item>
-    </object>
-    <object>
-        <name>Warriors</name>
-        <item>Fighter</item>
-        <item>Monk</item>
-        <item>Paladin</item>
-        <item>Ranger</item>
-        <item>Barbarian</item>
-      <item>Warrior</item>
-    </object>
-    <object>
-        <name>Good Base Attack</name>
-        <item>Fighter</item>
-        <item>Paladin</item>
-        <item>Ranger</item>
-        <item>Barbarian</item>
-      <item>Warrior</item>
-    </object>
-    <object>
-        <name>Average Base Attack</name>
-        <item>Cleric</item>
-        <item>Monk</item>
-        <item>Druid</item>
-        <item>Rogue</item>
-        <item>Bard</item>
-        <item>Aristocrat</item>
-        <item>Expert</item>
-    </object>
+  <object>
+    <name>Stealth</name>
+    <item>Bard</item>
+    <item>Rogue</item>
+    <item>Ranger</item>
+  </object>
+  <object>
+    <name>Warriors</name>
+    <item>Fighter</item>
+    <item>Monk</item>
+    <item>Paladin</item>
+    <item>Ranger</item>
+    <item>Barbarian</item>
+    <item>Warrior</item>
+  </object>
+  <object>
+    <name>Good Base Attack</name>
+    <item>Fighter</item>
+    <item>Paladin</item>
+    <item>Ranger</item>
+    <item>Barbarian</item>
+    <item>Warrior</item>
+  </object>
+  <object>
+    <name>Average Base Attack</name>
+    <item>Cleric</item>
+    <item>Monk</item>
+    <item>Druid</item>
+    <item>Rogue</item>
+    <item>Bard</item>
+    <item>Aristocrat</item>
+    <item>Expert</item>
+  </object>
   <object>
     <name>Poor Base Attack</name>
     <item>Wizard</item>
@@ -88,153 +107,153 @@
     <item>Commoner</item>
     <item>Adept</item>
   </object>
-    <object>
-        <name>Lawful Good</name>
-        <item>Cleric</item>
-        <item>Fighter</item>
-        <item>Monk</item>
-        <item>Paladin</item>
-        <item>Ranger</item>
-        <item>Rogue</item>
-        <item>Sorcerer</item>
-        <item>Wizard</item>
-      <item>Adept</item>
-      <item>Aristocrat</item>
-      <item>Commoner</item>
-      <item>Expert</item>
-      <item>Warrior</item>
-    </object>
-    <object>
-        <name>Neutral Good</name>
-        <item>Barbarian</item>
-        <item>Bard</item>
-        <item>Cleric</item>
-        <item>Druid</item>
-        <item>Fighter</item>
-        <item>Ranger</item>
-        <item>Rogue</item>
-        <item>Sorcerer</item>
-        <item>Wizard</item>
+  <object>
+    <name>Lawful Good</name>
+    <item>Cleric</item>
+    <item>Fighter</item>
+    <item>Monk</item>
+    <item>Paladin</item>
+    <item>Ranger</item>
+    <item>Rogue</item>
+    <item>Sorcerer</item>
+    <item>Wizard</item>
     <item>Adept</item>
     <item>Aristocrat</item>
     <item>Commoner</item>
     <item>Expert</item>
     <item>Warrior</item>
-    </object>
-    <object>
-        <name>Chaotic Good</name>
-        <item>Barbarian</item>
-        <item>Bard</item>
-        <item>Cleric</item>
-        <item>Fighter</item>
-        <item>Ranger</item>
-        <item>Rogue</item>
-        <item>Sorcerer</item>
-        <item>Wizard</item>
+  </object>
+  <object>
+    <name>Neutral Good</name>
+    <item>Barbarian</item>
+    <item>Bard</item>
+    <item>Cleric</item>
+    <item>Druid</item>
+    <item>Fighter</item>
+    <item>Ranger</item>
+    <item>Rogue</item>
+    <item>Sorcerer</item>
+    <item>Wizard</item>
     <item>Adept</item>
     <item>Aristocrat</item>
     <item>Commoner</item>
     <item>Expert</item>
     <item>Warrior</item>
-    </object>
-    <object>
-        <name>Lawful Neutral</name>
-        <item>Cleric</item>
-        <item>Druid</item>
-        <item>Fighter</item>
-        <item>Monk</item>
-        <item>Ranger</item>
-        <item>Rogue</item>
-        <item>Sorcerer</item>
-        <item>Wizard</item>
-      <item>Adept</item>
-      <item>Aristocrat</item>
-      <item>Commoner</item>
-      <item>Expert</item>
-      <item>Warrior</item>
-    </object>
-    <object>
-      <name>True Neutral</name>
-      <item>Barbarian</item>
-      <item>Bard</item>
-      <item>Cleric</item>
-      <item>Druid</item>
-      <item>Fighter</item>
-      <item>Ranger</item>
-      <item>Rogue</item>
-      <item>Sorcerer</item>
-      <item>Wizard</item>
-      <item>Adept</item>
-      <item>Aristocrat</item>
-      <item>Commoner</item>
-      <item>Expert</item>
-      <item>Warrior</item>
-    </object>
-    <object>
-        <name>Chaotic Neutral</name>
-        <item>Barbarian</item>
-        <item>Bard</item>
-        <item>Cleric</item>
-        <item>Druid</item>
-        <item>Fighter</item>
-        <item>Ranger</item>
-        <item>Rogue</item>
-        <item>Sorcerer</item>
-        <item>Wizard</item>
-      <item>Adept</item>
-      <item>Aristocrat</item>
-      <item>Commoner</item>
-      <item>Expert</item>
-      <item>Warrior</item>
-    </object>
-    <object>
-        <name>Lawful Evil</name>
-        <item>Cleric</item>
-        <item>Fighter</item>
-        <item>Monk</item>
-        <item>Ranger</item>
-        <item>Rogue</item>
-        <item>Sorcerer</item>
-        <item>Wizard</item>
+  </object>
+  <object>
+    <name>Chaotic Good</name>
+    <item>Barbarian</item>
+    <item>Bard</item>
+    <item>Cleric</item>
+    <item>Fighter</item>
+    <item>Ranger</item>
+    <item>Rogue</item>
+    <item>Sorcerer</item>
+    <item>Wizard</item>
     <item>Adept</item>
     <item>Aristocrat</item>
     <item>Commoner</item>
     <item>Expert</item>
     <item>Warrior</item>
-    </object>
-    <object>
-        <name>Neutral Evil</name>
-        <item>Barbarian</item>
-        <item>Bard</item>
-        <item>Cleric</item>
-        <item>Druid</item>
-        <item>Fighter</item>
-        <item>Ranger</item>
-        <item>Rogue</item>
-        <item>Sorcerer</item>
-        <item>Wizard</item>
-      <item>Adept</item>
-      <item>Aristocrat</item>
-      <item>Commoner</item>
-      <item>Expert</item>
-      <item>Warrior</item>
-    </object>
-    <object>
-        <name>Chaotic Evil</name>
-        <item>Barbarian</item>
-        <item>Bard</item>
-        <item>Cleric</item>
-        <item>Fighter</item>
-        <item>Ranger</item>
-        <item>Rogue</item>
-        <item>Sorcerer</item>
-        <item>Wizard</item>
-      <item>Adept</item>
-      <item>Aristocrat</item>
-      <item>Commoner</item>
-      <item>Expert</item>
-      <item>Warrior</item>
-    </object>
+  </object>
+  <object>
+    <name>Lawful Neutral</name>
+    <item>Cleric</item>
+    <item>Druid</item>
+    <item>Fighter</item>
+    <item>Monk</item>
+    <item>Ranger</item>
+    <item>Rogue</item>
+    <item>Sorcerer</item>
+    <item>Wizard</item>
+    <item>Adept</item>
+    <item>Aristocrat</item>
+    <item>Commoner</item>
+    <item>Expert</item>
+    <item>Warrior</item>
+  </object>
+  <object>
+    <name>True Neutral</name>
+    <item>Barbarian</item>
+    <item>Bard</item>
+    <item>Cleric</item>
+    <item>Druid</item>
+    <item>Fighter</item>
+    <item>Ranger</item>
+    <item>Rogue</item>
+    <item>Sorcerer</item>
+    <item>Wizard</item>
+    <item>Adept</item>
+    <item>Aristocrat</item>
+    <item>Commoner</item>
+    <item>Expert</item>
+    <item>Warrior</item>
+  </object>
+  <object>
+    <name>Chaotic Neutral</name>
+    <item>Barbarian</item>
+    <item>Bard</item>
+    <item>Cleric</item>
+    <item>Druid</item>
+    <item>Fighter</item>
+    <item>Ranger</item>
+    <item>Rogue</item>
+    <item>Sorcerer</item>
+    <item>Wizard</item>
+    <item>Adept</item>
+    <item>Aristocrat</item>
+    <item>Commoner</item>
+    <item>Expert</item>
+    <item>Warrior</item>
+  </object>
+  <object>
+    <name>Lawful Evil</name>
+    <item>Cleric</item>
+    <item>Fighter</item>
+    <item>Monk</item>
+    <item>Ranger</item>
+    <item>Rogue</item>
+    <item>Sorcerer</item>
+    <item>Wizard</item>
+    <item>Adept</item>
+    <item>Aristocrat</item>
+    <item>Commoner</item>
+    <item>Expert</item>
+    <item>Warrior</item>
+  </object>
+  <object>
+    <name>Neutral Evil</name>
+    <item>Barbarian</item>
+    <item>Bard</item>
+    <item>Cleric</item>
+    <item>Druid</item>
+    <item>Fighter</item>
+    <item>Ranger</item>
+    <item>Rogue</item>
+    <item>Sorcerer</item>
+    <item>Wizard</item>
+    <item>Adept</item>
+    <item>Aristocrat</item>
+    <item>Commoner</item>
+    <item>Expert</item>
+    <item>Warrior</item>
+  </object>
+  <object>
+    <name>Chaotic Evil</name>
+    <item>Barbarian</item>
+    <item>Bard</item>
+    <item>Cleric</item>
+    <item>Fighter</item>
+    <item>Ranger</item>
+    <item>Rogue</item>
+    <item>Sorcerer</item>
+    <item>Wizard</item>
+    <item>Adept</item>
+    <item>Aristocrat</item>
+    <item>Commoner</item>
+    <item>Expert</item>
+    <item>Warrior</item>
+  </object>
   <object>
     <name>Fortitude</name>
     <item>Barbarian</item>

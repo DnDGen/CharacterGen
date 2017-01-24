@@ -13,6 +13,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Additional
         {
             get { return TableNameConstants.Set.Collection.AdditionalFeatData; }
         }
+
         protected override void PopulateIndices(IEnumerable<string> collection)
         {
             indices[DataIndexConstants.AdditionalFeatData.BaseAttackRequirementIndex] = "Base Attack Requirement";

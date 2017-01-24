@@ -5,6 +5,7 @@ using CharacterGen.Domain.Selectors.Percentiles;
 using CharacterGen.Domain.Tables;
 using CharacterGen.Randomizers.Races;
 using CharacterGen.Verifiers.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -42,7 +43,11 @@ namespace CharacterGen.Domain.Generators.Randomizers.Races.BaseRaces
 
         private bool LevelAdjustmentIsAllowed(string baseRace, int level)
         {
-            var levelAdjustments = adjustmentSelector.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments);
+            var levelAdjustments = adjustmentSelector.SelectAllFrom(TableNameConstants.Set.Adjustments.LevelAdjustments);
+
+            if (!levelAdjustments.ContainsKey(baseRace))
+                throw new ArgumentException($"No level adjustment entry exists for {baseRace}");
+
             return levelAdjustments[baseRace] < level;
         }
 

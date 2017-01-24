@@ -29,10 +29,14 @@ namespace CharacterGen.Tests.Integration.Stress
 
             Assert.That(character.Class.Name, Is.Not.Empty);
             Assert.That(character.Class.Level, Is.Positive);
+            Assert.That(character.Class.LevelAdjustment, Is.Not.Negative);
+            Assert.That(character.Class.EffectiveLevel, Is.Positive);
             Assert.That(character.Class.ProhibitedFields, Is.Not.Null);
             Assert.That(character.Class.SpecialistFields, Is.Not.Null);
 
-            Assert.That(character.InterestingTrait, Is.Not.Null);
+            Assert.That(character.InterestingTrait, Is.Not.Empty);
+            Assert.That(character.ChallengeRating, Is.Positive);
+            Assert.That(character.ChallengeRating, Is.AtLeast(character.Race.ChallengeRating));
 
             Assert.That(character.Race.BaseRace, Is.Not.Empty);
             Assert.That(character.Race.Metarace, Is.Not.Null);
@@ -47,6 +51,7 @@ namespace CharacterGen.Tests.Integration.Stress
             Assert.That(character.Race.Age.Years, Is.LessThanOrEqualTo(character.Race.Age.Maximum));
             Assert.That(character.Race.HeightInInches, Is.Positive);
             Assert.That(character.Race.WeightInPounds, Is.Positive);
+            Assert.That(character.Race.ChallengeRating, Is.Not.Negative);
 
             if (character.Race.HasWings)
                 Assert.That(character.Race.AerialSpeed, Is.Positive);
@@ -55,6 +60,10 @@ namespace CharacterGen.Tests.Integration.Stress
             Assert.That(character.Race.LandSpeed % 10, Is.EqualTo(0));
             Assert.That(character.Race.MetaraceSpecies, Is.Not.Null);
             Assert.That(character.Race.Size, Is.EqualTo(RaceConstants.Sizes.Large)
+                .Or.EqualTo(RaceConstants.Sizes.Colossal)
+                .Or.EqualTo(RaceConstants.Sizes.Gargantuan)
+                .Or.EqualTo(RaceConstants.Sizes.Huge)
+                .Or.EqualTo(RaceConstants.Sizes.Tiny)
                 .Or.EqualTo(RaceConstants.Sizes.Medium)
                 .Or.EqualTo(RaceConstants.Sizes.Small));
 
@@ -72,7 +81,7 @@ namespace CharacterGen.Tests.Integration.Stress
             {
                 var stat = statKVP.Value;
                 Assert.That(stat.Name, Is.EqualTo(statKVP.Key));
-                Assert.That(stat.Value, Is.Positive);
+                Assert.That(stat.Value, Is.AtLeast(3));
             }
 
             Assert.That(character.Ability.Languages, Is.Not.Empty);
@@ -105,7 +114,6 @@ namespace CharacterGen.Tests.Integration.Stress
                     Assert.That(feat.Foci, Is.Not.Empty, character.Race.BaseRace);
             }
 
-
             if (character.Ability.Feats.SelectMany(f => f.Foci).Any(f => f == FeatConstants.Foci.UnarmedStrike) == false)
             {
                 var feats = GetAllFeatsMessage(character.Ability.Feats);
@@ -130,6 +138,7 @@ namespace CharacterGen.Tests.Integration.Stress
             {
                 Assert.That(spells.Level, Is.Not.Negative, spells.Level.ToString());
                 Assert.That(spells.Quantity, Is.Not.Negative, spells.Level.ToString());
+                Assert.That(spells.Source, Is.Not.Empty, spells.Level.ToString());
             }
 
             foreach (var spell in character.Magic.KnownSpells)
@@ -137,6 +146,7 @@ namespace CharacterGen.Tests.Integration.Stress
                 Assert.That(spell.Level, Is.Not.Negative);
                 Assert.That(spell.Metamagic, Is.Empty);
                 Assert.That(spell.Name, Is.Not.Empty);
+                Assert.That(spell.Source, Is.Not.Empty);
             }
 
             foreach (var spell in character.Magic.PreparedSpells)
@@ -144,6 +154,7 @@ namespace CharacterGen.Tests.Integration.Stress
                 Assert.That(spell.Level, Is.Not.Negative);
                 Assert.That(spell.Metamagic, Is.Empty);
                 Assert.That(spell.Name, Is.Not.Empty);
+                Assert.That(spell.Source, Is.Not.Empty);
 
                 var knownSpellNames = character.Magic.KnownSpells.Select(s => s.Name);
                 Assert.That(knownSpellNames, Contains.Item(spell.Name), character.Class.Name);

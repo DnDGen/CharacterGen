@@ -44,13 +44,16 @@ namespace CharacterGen.Domain.Generators.Combats
             if (undead.Contains(race.Metarace))
                 return RollHitPoints(characterClass.Level, 12, constitutionBonus);
 
-            var hitDice = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.ClassHitDice);
+            var hitDice = adjustmentsSelector.SelectAllFrom(TableNameConstants.Set.Adjustments.ClassHitDice);
             return RollHitPoints(characterClass.Level, hitDice[characterClass.Name], constitutionBonus);
         }
 
         private int GetAdditionalMonsterHitDice(Race race, int constitutionBonus)
         {
-            var hitDice = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice);
+            var hitDice = adjustmentsSelector.SelectAllFrom(TableNameConstants.Set.Adjustments.MonsterHitDice);
+
+            if (hitDice[race.BaseRace] == 0)
+                return 0;
 
             if (race.Metarace == RaceConstants.Metaraces.HalfDragon)
                 return RollHitPoints(hitDice[race.BaseRace], 10, constitutionBonus);

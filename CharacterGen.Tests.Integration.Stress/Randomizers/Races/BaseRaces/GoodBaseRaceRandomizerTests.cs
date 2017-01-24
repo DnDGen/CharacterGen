@@ -15,7 +15,8 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
                 return new[]
                 {
                     RaceConstants.BaseRaces.Aasimar,
-                    RaceConstants.BaseRaces.Svirfneblin,
+                    RaceConstants.BaseRaces.Centaur,
+                    RaceConstants.BaseRaces.CloudGiant,
                     RaceConstants.BaseRaces.DeepDwarf,
                     RaceConstants.BaseRaces.DeepHalfling,
                     RaceConstants.BaseRaces.ForestGnome,
@@ -27,7 +28,10 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
                     RaceConstants.BaseRaces.Human,
                     RaceConstants.BaseRaces.LightfootHalfling,
                     RaceConstants.BaseRaces.MountainDwarf,
+                    RaceConstants.BaseRaces.Pixie,
                     RaceConstants.BaseRaces.RockGnome,
+                    RaceConstants.BaseRaces.StormGiant,
+                    RaceConstants.BaseRaces.Svirfneblin,
                     RaceConstants.BaseRaces.TallfellowHalfling,
                     RaceConstants.BaseRaces.WildElf,
                     RaceConstants.BaseRaces.WoodElf

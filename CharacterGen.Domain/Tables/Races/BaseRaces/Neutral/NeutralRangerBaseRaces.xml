@@ -1,13 +1,41 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <percentile>
-  <object><lower>1</lower><content>Hill Dwarf</content><upper>1</upper></object>
-  <object><lower>2</lower><content>High Elf</content><upper>6</upper></object>
-  <object><lower>7</lower><content>Wild Elf</content><upper>7</upper></object>
-  <object><lower>8</lower><content>Wood Elf</content><upper>36</upper></object>
-  <object><lower>37</lower><content>Forest Gnome</content><upper>37</upper></object>
-  <object><lower>38</lower><content>Rock Gnome</content><upper>38</upper></object>
-  <object><lower>39</lower><content>Half-Elf</content><upper>55</upper></object>
+  <object>
+    <lower>1</lower>
+    <content>Hill Dwarf</content>
+    <upper>1</upper>
+  </object>
+  <object>
+    <lower>2</lower>
+    <content>High Elf</content>
+    <upper>6</upper>
+  </object>
+  <object>
+    <lower>7</lower>
+    <content>Wild Elf</content>
+    <upper>7</upper>
+  </object>
+  <object>
+    <lower>8</lower>
+    <content>Wood Elf</content>
+    <upper>36</upper>
+  </object>
+  <object>
+    <lower>37</lower>
+    <content>Forest Gnome</content>
+    <upper>37</upper>
+  </object>
+  <object>
+    <lower>38</lower>
+    <content>Rock Gnome</content>
+    <upper>38</upper>
+  </object>
+  <object>
+    <lower>39</lower>
+    <content>Half-Elf</content>
+    <upper>55</upper>
+  </object>
   <object>
     <lower>56</lower>
     <content>Lightfoot Halfling</content>
@@ -30,12 +58,17 @@
   </object>
   <object>
     <lower>97</lower>
-    <content>Lizardfolk</content>
-    <upper>98</upper>
+    <content>Janni</content>
+    <upper>97</upper>
   </object>
-    <object>
-        <lower>99</lower>
-        <content></content>
-        <upper>100</upper>
-    </object>
+  <object>
+    <lower>98</lower>
+    <content>Lizardfolk</content>
+    <upper>99</upper>
+  </object>
+  <object>
+    <lower>100</lower>
+    <content>Stone Giant</content>
+    <upper>100</upper>
+  </object>
 </percentile>

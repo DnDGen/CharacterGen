@@ -62,7 +62,7 @@ namespace CharacterGen.Domain.Generators
 
             var leadershipModifiers = new List<string>();
             var reputation = percentileSelector.SelectFrom(TableNameConstants.Set.Percentile.Reputation);
-            var leadershipAdjustments = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.LeadershipModifiers);
+            var leadershipAdjustments = adjustmentsSelector.SelectAllFrom(TableNameConstants.Set.Adjustments.LeadershipModifiers);
 
             if (string.IsNullOrEmpty(reputation) == false)
             {

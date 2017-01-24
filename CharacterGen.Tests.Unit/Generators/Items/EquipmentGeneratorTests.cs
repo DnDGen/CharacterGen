@@ -11,8 +11,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TreasureGen;
-using TreasureGen.Items;
 using TreasureGen.Generators;
+using TreasureGen.Items;
 
 namespace CharacterGen.Tests.Unit.Generators.Items
 {
@@ -36,7 +36,6 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         private List<string> shieldProficiencyFeats;
         private List<string> weaponProficiencyFeats;
         private Item treasureItem;
-        private List<string> npcs;
 
         [SetUp]
         public void Setup()
@@ -58,7 +57,6 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             race = new Race();
             shieldProficiencyFeats = new List<string>();
             weaponProficiencyFeats = new List<string>();
-            npcs = new List<string>();
 
             characterClass.Level = 9266;
             meleeWeapon.Name = "melee weapon";
@@ -77,15 +75,13 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             mockWeaponGenerator.Setup(g => g.GenerateRangedFrom(feats, characterClass, race)).Returns(rangedWeapon);
             mockWeaponGenerator.Setup(g => g.GenerateMeleeFrom(feats, characterClass, race)).Returns(meleeWeapon);
             mockArmorGenerator.Setup(g => g.GenerateArmorFrom(feats, characterClass, race)).Returns(armor);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, It.IsAny<string>())).Returns((String table, String name) => new[] { name });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, It.IsAny<string>())).Returns((string table, string name) => new[] { name });
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, rangedWeapon.Name)).Returns(baseRangedWeaponTypes);
             mockTreasureGenerator.Setup(g => g.GenerateAtLevel(9266)).Returns(treasure);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, AttributeConstants.Shield + GroupConstants.Proficiency))
                 .Returns(shieldProficiencyFeats);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, ItemTypeConstants.Weapon + GroupConstants.Proficiency))
                 .Returns(weaponProficiencyFeats);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.NPCs))
-                .Returns(npcs);
         }
 
         [Test]
@@ -521,7 +517,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         {
             characterClass.Level = npcLevel;
             characterClass.Name = "class name";
-            npcs.Add(characterClass.Name);
+            characterClass.IsNPC = true;
 
             var npcTreasure = new Treasure();
             mockTreasureGenerator.Setup(g => g.GenerateAtLevel(effectiveLevel)).Returns(npcTreasure);
@@ -554,7 +550,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         {
             characterClass.Level = level;
             characterClass.Name = "class name";
-            npcs.Add("npc class");
+            characterClass.IsNPC = false;
 
             var playerTreasure = new Treasure();
             mockTreasureGenerator.Setup(g => g.GenerateAtLevel(effectiveLevel)).Returns(playerTreasure);

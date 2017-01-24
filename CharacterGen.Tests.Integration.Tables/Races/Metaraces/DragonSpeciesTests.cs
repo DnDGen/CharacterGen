@@ -1,6 +1,6 @@
-﻿using System;
-using CharacterGen.Races;
+﻿using CharacterGen.Alignments;
 using CharacterGen.Domain.Tables;
+using CharacterGen.Races;
 using NUnit.Framework;
 
 namespace CharacterGen.Tests.Integration.Tables.Races.Metaraces
@@ -16,46 +16,46 @@ namespace CharacterGen.Tests.Integration.Tables.Races.Metaraces
         [Test]
         public override void CollectionNames()
         {
-            var names = new[] 
+            var names = new[]
             {
-                "Lawful Good",
-                "Neutral Good",
-                "Chaotic Good",
-                "Lawful Evil",
-                "Neutral Evil",
-                "Chaotic Evil"
+                AlignmentConstants.LawfulGood,
+                AlignmentConstants.NeutralGood,
+                AlignmentConstants.ChaoticGood,
+                AlignmentConstants.LawfulEvil,
+                AlignmentConstants.NeutralEvil,
+                AlignmentConstants.ChaoticEvil
             };
 
             AssertCollectionNames(names);
         }
 
-        [TestCase("Lawful Good",
+        [TestCase(AlignmentConstants.LawfulGood,
             RaceConstants.Metaraces.Species.Bronze,
             RaceConstants.Metaraces.Species.Gold,
             RaceConstants.Metaraces.Species.Silver)]
-        [TestCase("Neutral Good",
+        [TestCase(AlignmentConstants.NeutralGood,
             RaceConstants.Metaraces.Species.Bronze,
             RaceConstants.Metaraces.Species.Gold,
             RaceConstants.Metaraces.Species.Silver,
             RaceConstants.Metaraces.Species.Brass,
             RaceConstants.Metaraces.Species.Copper)]
-        [TestCase("Chaotic Good",
+        [TestCase(AlignmentConstants.ChaoticGood,
             RaceConstants.Metaraces.Species.Brass,
             RaceConstants.Metaraces.Species.Copper)]
-        [TestCase("Lawful Evil",
+        [TestCase(AlignmentConstants.LawfulEvil,
             RaceConstants.Metaraces.Species.Blue,
             RaceConstants.Metaraces.Species.Green)]
-        [TestCase("Neutral Evil",
+        [TestCase(AlignmentConstants.NeutralEvil,
             RaceConstants.Metaraces.Species.Blue,
             RaceConstants.Metaraces.Species.Green,
             RaceConstants.Metaraces.Species.Black,
             RaceConstants.Metaraces.Species.Red,
             RaceConstants.Metaraces.Species.White)]
-        [TestCase("Chaotic Evil",
+        [TestCase(AlignmentConstants.ChaoticEvil,
             RaceConstants.Metaraces.Species.Black,
             RaceConstants.Metaraces.Species.Red,
             RaceConstants.Metaraces.Species.White)]
-        public override void DistinctCollection(String name, params String[] collection)
+        public override void DistinctCollection(string name, params string[] collection)
         {
             base.DistinctCollection(name, collection);
         }

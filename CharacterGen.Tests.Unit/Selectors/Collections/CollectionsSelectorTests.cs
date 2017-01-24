@@ -106,5 +106,26 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
             Assert.That(item, Is.InstanceOf<AdditionalFeatSelection>());
             Assert.That(item.Feat, Is.EqualTo("feat 2"));
         }
+
+        [Test]
+        public void FindGroupOfItem()
+        {
+            allCollections["entry"] = new[] { "first", "second" };
+            allCollections["other entry"] = new[] { "third", "fourth" };
+            allCollections["wrong entry"] = new[] { "third", "fourth" };
+
+            var group = selector.FindGroupOf(TableName, "fourth", "entry", "other entry");
+            Assert.That(group, Is.EqualTo("other entry"));
+        }
+
+        [Test]
+        public void FindGroupOfItemThrowsExceptionIfNotInFilteredGroup()
+        {
+            allCollections["entry"] = new[] { "first", "second" };
+            allCollections["other entry"] = new[] { "third", "fifth" };
+            allCollections["wrong entry"] = new[] { "third", "fourth" };
+
+            Assert.That(() => selector.FindGroupOf(TableName, "fourth", "entry", "other entry"), Throws.ArgumentException.With.Message.EqualTo("No filtered group from [entry, other entry] in table name is listed for fourth"));
+        }
     }
 }

@@ -32,7 +32,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races
 
             characterClass.Level = 1;
 
-            mockAdjustmentsSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments)).Returns(adjustments);
+            mockAdjustmentsSelector.Setup(p => p.SelectAllFrom(TableNameConstants.Set.Adjustments.LevelAdjustments)).Returns(adjustments);
         }
     }
 }

@@ -12,6 +12,7 @@
         public int AerialSpeed { get; set; }
         public int HeightInInches { get; set; }
         public int WeightInPounds { get; set; }
+        public int ChallengeRating { get; set; }
         public Age Age { get; set; }
 
         public string Gender

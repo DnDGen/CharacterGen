@@ -142,12 +142,7 @@ namespace CharacterGen.Domain.Generators.Items
 
         private Item GenerateFrom(IEnumerable<string> allowedWeapons, CharacterClass characterClass, Race race)
         {
-            var effectiveLevel = characterClass.Level;
-            var npcs = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.NPCs);
-
-            if (npcs.Contains(characterClass.Name))
-                effectiveLevel = Math.Max(1, characterClass.Level / 2);
-
+            var effectiveLevel = (int)Math.Max(1, characterClass.EffectiveLevel);
             var tableName = string.Format(TableNameConstants.Formattable.Percentile.LevelXPower, effectiveLevel);
             var power = percentileSelector.SelectFrom(tableName);
             var weapon = generator.Generate(() => GenerateWeapon(power), w => WeaponIsValid(w, allowedWeapons, race));

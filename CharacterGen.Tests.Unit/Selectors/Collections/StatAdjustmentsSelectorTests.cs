@@ -32,7 +32,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
             race.Metarace = "metarace";
             defaultAdjustments[race.BaseRace] = 0;
             defaultAdjustments[race.Metarace] = 0;
-            mockInnerSelector.Setup(s => s.SelectFrom(It.IsAny<String>())).Returns(defaultAdjustments);
+            mockInnerSelector.Setup(s => s.SelectAllFrom(It.IsAny<String>())).Returns(defaultAdjustments);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.StatGroups, GroupConstants.All)).Returns(statNames);
 
             statNames.Add("first stat");
@@ -63,7 +63,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
             foreach (var stat in statNames)
             {
                 var tableName = String.Format("{0}StatAdjustments", stat);
-                mockInnerSelector.Setup(s => s.SelectFrom(tableName)).Returns(allAdjustments[stat]);
+                mockInnerSelector.Setup(s => s.SelectAllFrom(tableName)).Returns(allAdjustments[stat]);
             }
 
             var adjustments = selector.SelectFor(race);

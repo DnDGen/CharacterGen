@@ -6,6 +6,7 @@ using CharacterGen.Combats;
 using CharacterGen.Items;
 using CharacterGen.Magics;
 using CharacterGen.Races;
+using System;
 using System.Linq;
 
 namespace CharacterGen
@@ -16,7 +17,6 @@ namespace CharacterGen
         public CharacterClass Class { get; set; }
         public Race Race { get; set; }
         public string InterestingTrait { get; set; }
-
         public Combat Combat { get; set; }
         public Ability Ability { get; set; }
         public Equipment Equipment { get; set; }
@@ -45,6 +45,22 @@ namespace CharacterGen
                 summary += $"{Race.BaseRace} {Class.Name}";
 
                 return summary;
+            }
+        }
+
+        public double ChallengeRating
+        {
+            get
+            {
+                var divisor = Class.IsNPC ? 2d : 1d;
+                var classChallengeRating = Class.Level / divisor;
+
+                var challengeRating = Race.ChallengeRating + classChallengeRating;
+
+                if (challengeRating > 1)
+                    return Math.Floor(challengeRating);
+
+                return challengeRating;
             }
         }
 

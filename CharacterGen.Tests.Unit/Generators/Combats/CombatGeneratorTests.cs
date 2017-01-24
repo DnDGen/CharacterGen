@@ -29,13 +29,11 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         private Equipment equipment;
         private Race race;
         private Dictionary<string, int> maxDexterityBonuses;
-        private List<string> averageBaseAttacks;
-        private List<string> goodBaseAttacks;
         private Dictionary<string, int> racialBaseAttackAdjustments;
         private List<string> initiativeFeats;
         private List<string> attackBonusFeats;
-        private List<string> poorBaseAttacks;
         private Dictionary<string, int> sizeModifiers;
+        private string baseAttackType;
 
         [SetUp]
         public void Setup()
@@ -54,12 +52,10 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             race = new Race();
             maxDexterityBonuses = new Dictionary<string, int>();
             sizeModifiers = new Dictionary<string, int>();
-            averageBaseAttacks = new List<string>();
-            goodBaseAttacks = new List<string>();
             racialBaseAttackAdjustments = new Dictionary<string, int>();
             initiativeFeats = new List<string>();
             attackBonusFeats = new List<string>();
-            poorBaseAttacks = new List<string>();
+            baseAttackType = GroupConstants.PoorBaseAttack;
 
             characterClass.Name = "class name";
             characterClass.Level = 20;
@@ -73,24 +69,20 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             racialBaseAttackAdjustments[string.Empty] = 0;
             sizeModifiers[race.Size] = 0;
             maxDexterityBonuses[string.Empty] = 42;
-            averageBaseAttacks.Add("other class name");
-            goodBaseAttacks.Add("other class name");
-            poorBaseAttacks.Add(characterClass.Name);
 
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.MaxDexterityBonus)).Returns(maxDexterityBonuses);
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.SizeModifiers)).Returns(sizeModifiers);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.GoodBaseAttack)).Returns(goodBaseAttacks);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.AverageBaseAttack)).Returns(averageBaseAttacks);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.PoorBaseAttack)).Returns(poorBaseAttacks);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.MaxDexterityBonus, It.IsAny<string>())).Returns((string table, string name) => maxDexterityBonuses[name]);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.SizeModifiers, It.IsAny<string>())).Returns((string table, string name) => sizeModifiers[name]);
+            mockCollectionsSelector.Setup(s => s.FindGroupOf(TableNameConstants.Set.Collection.ClassNameGroups, characterClass.Name, GroupConstants.GoodBaseAttack, GroupConstants.AverageBaseAttack, GroupConstants.PoorBaseAttack))
+                .Returns(() => baseAttackType);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.Initiative)).Returns(initiativeFeats);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, FeatConstants.AttackBonus)).Returns(attackBonusFeats);
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.RacialBaseAttackAdjustments)).Returns(racialBaseAttackAdjustments);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.RacialBaseAttackAdjustments, It.IsAny<string>())).Returns((string table, string name) => racialBaseAttackAdjustments[name]);
         }
 
         [Test]
         public void GetGoodBaseAttack()
         {
-            goodBaseAttacks.Add(characterClass.Name);
+            baseAttackType = GroupConstants.GoodBaseAttack;
             var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass, race, stats);
             Assert.That(baseAttack.BaseBonus, Is.EqualTo(20));
         }
@@ -98,7 +90,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         [Test]
         public void GetAverageBaseAttack()
         {
-            averageBaseAttacks.Add(characterClass.Name);
+            baseAttackType = GroupConstants.AverageBaseAttack;
             var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass, race, stats);
             Assert.That(baseAttack.BaseBonus, Is.EqualTo(15));
         }
@@ -106,6 +98,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         [Test]
         public void GetPoorBaseAttack()
         {
+            baseAttackType = GroupConstants.PoorBaseAttack;
             var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass, race, stats);
             Assert.That(baseAttack.BaseBonus, Is.EqualTo(10));
         }
@@ -113,7 +106,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         [Test]
         public void ThrowExceptionIfNoBaseAttack()
         {
-            poorBaseAttacks.Clear();
+            baseAttackType = "not a base attack group";
             Assert.That(() => combatGenerator.GenerateBaseAttackWith(characterClass, race, stats), Throws.ArgumentException.With.Message.EqualTo("class name has no base attack"));
         }
 
@@ -140,7 +133,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         public void GoodBaseAttackBonus(int level, int bonus)
         {
             characterClass.Level = level;
-            goodBaseAttacks.Add(characterClass.Name);
+            baseAttackType = GroupConstants.GoodBaseAttack;
 
             var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass, race, stats);
             Assert.That(baseAttack.BaseBonus, Is.EqualTo(bonus));
@@ -169,7 +162,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         public void AverageBaseAttackBonus(int level, int bonus)
         {
             characterClass.Level = level;
-            averageBaseAttacks.Add(characterClass.Name);
+            baseAttackType = GroupConstants.AverageBaseAttack;
 
             var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass, race, stats);
             Assert.That(baseAttack.BaseBonus, Is.EqualTo(bonus));
@@ -198,6 +191,8 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         public void PoorBaseAttackBonus(int level, int bonus)
         {
             characterClass.Level = level;
+            baseAttackType = GroupConstants.PoorBaseAttack;
+
             var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass, race, stats);
             Assert.That(baseAttack.BaseBonus, Is.EqualTo(bonus));
         }
@@ -205,15 +200,13 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         [Test]
         public void GetAllRacialBaseAttackAdjustments()
         {
-            race.BaseRace = "baserace";
+            race.BaseRace = "base race";
             race.Metarace = "metarace";
 
-            var racialAdjustments = new Dictionary<string, int>();
-            racialAdjustments["baserace"] = 1;
-            racialAdjustments["otherbaserace"] = 7;
-            racialAdjustments["metarace"] = 3;
-            racialAdjustments["othermetarace"] = 5;
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.RacialBaseAttackAdjustments)).Returns(racialAdjustments);
+            racialBaseAttackAdjustments["base race"] = 1;
+            racialBaseAttackAdjustments["other base race"] = 7;
+            racialBaseAttackAdjustments["metarace"] = 3;
+            racialBaseAttackAdjustments["other metarace"] = 5;
 
             var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass, race, stats);
             Assert.That(baseAttack.RacialModifier, Is.EqualTo(4));

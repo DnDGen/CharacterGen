@@ -1,7 +1,7 @@
 ﻿using CharacterGen.Alignments;
 using CharacterGen.CharacterClasses;
-using CharacterGen.Races;
 using CharacterGen.Domain.Tables;
+using CharacterGen.Races;
 using NUnit.Framework;
 
 namespace CharacterGen.Tests.Integration.Tables.Races.Metaraces
@@ -40,7 +40,9 @@ namespace CharacterGen.Tests.Integration.Tables.Races.Metaraces
                 CharacterClassConstants.Rogue,
                 CharacterClassConstants.Sorcerer,
                 CharacterClassConstants.Warrior,
-                CharacterClassConstants.Wizard
+                CharacterClassConstants.Wizard,
+                GroupConstants.All,
+                GroupConstants.HasWings,
             };
 
             AssertCollectionNames(names);
@@ -77,6 +79,9 @@ namespace CharacterGen.Tests.Integration.Tables.Races.Metaraces
             RaceConstants.Metaraces.Vampire,
             RaceConstants.Metaraces.Lich,
             RaceConstants.Metaraces.Ghost)]
+        [TestCase(GroupConstants.HasWings,
+            RaceConstants.Metaraces.HalfFiend,
+            RaceConstants.Metaraces.HalfCelestial)]
         public override void DistinctCollection(string name, params string[] collection)
         {
             base.DistinctCollection(name, collection);
@@ -95,6 +100,28 @@ namespace CharacterGen.Tests.Integration.Tables.Races.Metaraces
             };
 
             base.DistinctCollection(CharacterClassConstants.Paladin, metaraces);
+        }
+
+        [Test]
+        public void AllMetaraces()
+        {
+            var metaraces = new[]
+            {
+                RaceConstants.Metaraces.Ghost,
+                RaceConstants.Metaraces.HalfCelestial,
+                RaceConstants.Metaraces.HalfDragon,
+                RaceConstants.Metaraces.HalfFiend,
+                RaceConstants.Metaraces.Lich,
+                RaceConstants.Metaraces.None,
+                RaceConstants.Metaraces.Vampire,
+                RaceConstants.Metaraces.Werebear,
+                RaceConstants.Metaraces.Wereboar,
+                RaceConstants.Metaraces.Weretiger,
+                RaceConstants.Metaraces.Wererat,
+                RaceConstants.Metaraces.Werewolf,
+            };
+
+            base.DistinctCollection(GroupConstants.All, metaraces);
         }
 
         [TestCase(CharacterClassConstants.Adept)]

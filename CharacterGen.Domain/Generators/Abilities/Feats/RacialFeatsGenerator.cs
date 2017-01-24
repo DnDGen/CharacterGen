@@ -66,8 +66,8 @@ namespace CharacterGen.Domain.Generators.Abilities.Feats
             if (monsters.Contains(baseRace) == false)
                 return 1;
 
-            var hitDice = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice);
-            return hitDice[baseRace];
+            var hitDice = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice, baseRace);
+            return hitDice;
         }
     }
 }

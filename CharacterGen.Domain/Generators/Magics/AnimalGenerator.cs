@@ -27,9 +27,8 @@ namespace CharacterGen.Domain.Generators.Magics
             if (characterClass.Name == CharacterClassConstants.Adept && characterClass.Level == 1)
                 return string.Empty;
 
-            var levelAdjustments = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments);
             var effectiveCharacterClass = GetEffectiveCharacterClass(characterClass);
-            var animals = AnimalsForCharacter(effectiveCharacterClass, race, levelAdjustments);
+            var animals = AnimalsForCharacter(effectiveCharacterClass, race);
 
             if (animals.Any() == false)
                 return string.Empty;
@@ -55,12 +54,14 @@ namespace CharacterGen.Domain.Generators.Magics
             return effectiveCharacterClass;
         }
 
-        private IEnumerable<string> AnimalsForCharacter(CharacterClass characterClass, Race race, Dictionary<string, int> levelAdjustments)
+        private IEnumerable<string> AnimalsForCharacter(CharacterClass characterClass, Race race)
         {
             var animals = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.Animals, characterClass.Name);
             var animalsForSize = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.Animals, race.Size);
-            var animalsWithinLevel = animals.Where(a => characterClass.Level + levelAdjustments[a] > 0);
-            var filteredAnimals = animals.Intersect(animalsForSize).Intersect(animalsWithinLevel);
+            var filteredAnimals = animals.Intersect(animalsForSize);
+
+            var levelAdjustments = adjustmentsSelector.SelectAllFrom(TableNameConstants.Set.Adjustments.LevelAdjustments);
+            filteredAnimals = filteredAnimals.Where(a => characterClass.Level + levelAdjustments[a] > 0);
 
             var mages = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Mages);
 

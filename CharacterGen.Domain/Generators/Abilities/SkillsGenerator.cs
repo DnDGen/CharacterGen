@@ -74,7 +74,10 @@ namespace CharacterGen.Domain.Generators.Abilities
         private Dictionary<string, Skill> AddMonsterSkillRanks(Race race, Dictionary<string, Stat> stats, Dictionary<string, Skill> skills)
         {
             var monsterSkills = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassSkills, race.BaseRace);
-            var monsterHitDice = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice);
+            var monsterHitDice = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice, race.BaseRace);
+
+            if (monsterHitDice == 0)
+                return skills;
 
             foreach (var monsterSkill in monsterSkills)
             {
@@ -85,15 +88,15 @@ namespace CharacterGen.Domain.Generators.Abilities
                     if (stats.ContainsKey(selection.BaseStatName) == false)
                         continue;
 
-                    skills[monsterSkill] = new Skill(monsterSkill, stats[selection.BaseStatName], 0);
+                    skills[monsterSkill] = new Skill(monsterSkill, stats[selection.BaseStatName], 3);
                 }
 
-                skills[monsterSkill].RankCap += monsterHitDice[race.BaseRace] + 3;
+                skills[monsterSkill].RankCap += monsterHitDice;
                 skills[monsterSkill].ClassSkill = true;
             }
 
             var intelligenceSkillBonus = Math.Max(1, 2 + stats[StatConstants.Intelligence].Bonus);
-            var points = (monsterHitDice[race.BaseRace] + 3) * intelligenceSkillBonus;
+            var points = (monsterHitDice + 3) * intelligenceSkillBonus;
             var validMonsterSkills = FilterOutInvalidSkills(monsterSkills, skills);
 
             while (points-- > 0 && validMonsterSkills.Any())
@@ -144,8 +147,8 @@ namespace CharacterGen.Domain.Generators.Abilities
 
         private int GetTotalSkillPoints(CharacterClass characterClass, Stat intelligence, Race race)
         {
-            var pointsTable = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.SkillPointsForClasses);
-            var perLevel = pointsTable[characterClass.Name] + intelligence.Bonus;
+            var points = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.SkillPointsForClasses, characterClass.Name);
+            var perLevel = points + intelligence.Bonus;
             var multiplier = characterClass.Level;
 
             var monsters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters);

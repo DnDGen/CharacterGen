@@ -47,11 +47,7 @@ namespace CharacterGen.Domain.Generators.Items
 
         private int GetEffectiveLevel(CharacterClass characterClass)
         {
-            var npcs = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.NPCs);
-            if (npcs.Contains(characterClass.Name))
-                return Math.Max(characterClass.Level / 2, 1);
-
-            return characterClass.Level;
+            return (int)Math.Max(1, characterClass.EffectiveLevel);
         }
 
         public Item GenerateShieldFrom(IEnumerable<Feat> feats, CharacterClass characterClass, Race race)

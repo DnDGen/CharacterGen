@@ -65,13 +65,13 @@ namespace CharacterGen.Tests.Integration.Tables
 
         protected void AssertMissingItems(IEnumerable<string> expected, IEnumerable<string> collection)
         {
-            var missingItems = collection.Except(expected);
-            Assert.That(missingItems, Is.Empty, $"{missingItems.Count()} missing");
+            var missingItems = expected.Except(collection);
+            Assert.That(missingItems, Is.Empty, $"{missingItems.Count()} of {expected.Count()} missing");
         }
 
         protected void AssertExtraItems(IEnumerable<string> expected, IEnumerable<string> collection)
         {
-            var extras = expected.Except(collection);
+            var extras = collection.Except(expected);
             Assert.That(extras, Is.Empty, $"{extras.Count()} extra");
         }
 

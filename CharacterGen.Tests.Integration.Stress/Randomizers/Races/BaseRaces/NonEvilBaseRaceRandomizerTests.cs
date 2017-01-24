@@ -14,6 +14,8 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
             {
                 return new[] {
                     RaceConstants.BaseRaces.Aasimar,
+                    RaceConstants.BaseRaces.Centaur,
+                    RaceConstants.BaseRaces.CloudGiant,
                     RaceConstants.BaseRaces.DeepDwarf,
                     RaceConstants.BaseRaces.DeepHalfling,
                     RaceConstants.BaseRaces.Doppelganger,
@@ -24,11 +26,16 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
                     RaceConstants.BaseRaces.HighElf,
                     RaceConstants.BaseRaces.HillDwarf,
                     RaceConstants.BaseRaces.Human,
+                    RaceConstants.BaseRaces.Janni,
                     RaceConstants.BaseRaces.LightfootHalfling,
                     RaceConstants.BaseRaces.Lizardfolk,
                     RaceConstants.BaseRaces.MountainDwarf,
+                    RaceConstants.BaseRaces.Pixie,
                     RaceConstants.BaseRaces.RockGnome,
+                    RaceConstants.BaseRaces.Satyr,
                     RaceConstants.BaseRaces.Svirfneblin,
+                    RaceConstants.BaseRaces.StoneGiant,
+                    RaceConstants.BaseRaces.StormGiant,
                     RaceConstants.BaseRaces.TallfellowHalfling,
                     RaceConstants.BaseRaces.WildElf,
                     RaceConstants.BaseRaces.WoodElf

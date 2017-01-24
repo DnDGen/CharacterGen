@@ -8,6 +8,7 @@
             public const string MiddleAge = "Middle Age";
             public const string Old = "Old";
             public const string Venerable = "Venerable";
+            public const int Ageless = -1;
         }
 
         public static class Sizes
@@ -25,22 +26,30 @@
         {
             public const string Aasimar = "Aasimar";
             public const string Bugbear = "Bugbear";
+            public const string Centaur = "Centaur";
+            public const string CloudGiant = "Cloud Giant";
             public const string DeepDwarf = "Deep Dwarf";
             public const string DeepHalfling = "Deep Halfling";
             public const string Derro = "Derro";
             public const string Doppelganger = "Doppelganger";
             public const string Drow = "Drow";
             public const string DuergarDwarf = "Duergar Dwarf";
+            public const string FireGiant = "Fire Giant";
             public const string ForestGnome = "Forest Gnome";
+            public const string FrostGiant = "Frost Giant";
             public const string Goblin = "Goblin";
             public const string Gnoll = "Gnoll";
             public const string GrayElf = "Gray Elf";
+            public const string Grimlock = "Grimlock";
             public const string HalfElf = "Half-Elf";
             public const string HalfOrc = "Half-Orc";
+            public const string Harpy = "Harpy";
             public const string HighElf = "High Elf";
             public const string HillDwarf = "Hill Dwarf";
+            public const string HillGiant = "Hill Giant";
             public const string Hobgoblin = "Hobgoblin";
             public const string Human = "Human";
+            public const string Janni = "Janni";
             public const string Kobold = "Kobold";
             public const string LightfootHalfling = "Lightfoot Halfling";
             public const string Lizardfolk = "Lizardfolk";
@@ -50,11 +59,18 @@
             public const string Ogre = "Ogre";
             public const string OgreMage = "Ogre Mage";
             public const string Orc = "Orc";
+            public const string Pixie = "Pixie";
+            public const string Rakshasa = "Rakshasa";
             public const string RockGnome = "Rock Gnome";
+            public const string Satyr = "Satyr";
+            public const string Scorpionfolk = "Scorpionfolk";
+            public const string StoneGiant = "Stone Giant";
+            public const string StormGiant = "Storm Giant";
             public const string Svirfneblin = "Svirfneblin";
             public const string TallfellowHalfling = "Tallfellow Halfling";
             public const string Tiefling = "Tiefling";
             public const string Troglodyte = "Troglodyte";
+            public const string Troll = "Troll";
             public const string WildElf = "Wild Elf";
             public const string WoodElf = "Wood Elf";
 

@@ -1,7 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <percentile>
-  <object><lower>1</lower><content>Deep Dwarf</content><upper>2</upper></object>
+  <object>
+    <lower>1</lower>
+    <content>Deep Dwarf</content>
+    <upper>2</upper>
+  </object>
   <object>
     <lower>3</lower>
     <content>Hill Dwarf</content>
@@ -50,86 +54,116 @@
   <object>
     <lower>26</lower>
     <content>Human</content>
-    <upper>56</upper>
+    <upper>58</upper>
   </object>
   <object>
-    <lower>57</lower>
+    <lower>59</lower>
+    <content>Frost Giant</content>
+    <upper>59</upper>
+  </object>
+  <object>
+    <lower>60</lower>
+    <content>Fire Giant</content>
+    <upper>60</upper>
+  </object>
+  <object>
+    <lower>61</lower>
     <content>Lizardfolk</content>
-    <upper>63</upper>
-  </object>
-  <object>
-    <lower>64</lower>
-    <content>Goblin</content>
-    <upper>64</upper>
-  </object>
-  <object>
-    <lower>65</lower>
-    <content>Hobgoblin</content>
-    <upper>65</upper>
-  </object>
-  <object>
-    <lower>66</lower>
-    <content>Kobold</content>
-    <upper>66</upper>
-  </object>
-  <object>
-    <lower>67</lower>
-    <content>Orc</content>
     <upper>67</upper>
   </object>
   <object>
     <lower>68</lower>
-    <content>Tiefling</content>
+    <content>Goblin</content>
     <upper>68</upper>
   </object>
   <object>
     <lower>69</lower>
-    <content>Drow</content>
+    <content>Hobgoblin</content>
+    <upper>69</upper>
+  </object>
+  <object>
+    <lower>70</lower>
+    <content>Kobold</content>
+    <upper>70</upper>
+  </object>
+  <object>
+    <lower>71</lower>
+    <content>Orc</content>
     <upper>71</upper>
   </object>
   <object>
     <lower>72</lower>
-    <content>Duergar Dwarf</content>
+    <content>Tiefling</content>
     <upper>72</upper>
   </object>
   <object>
     <lower>73</lower>
+    <content>Drow</content>
+    <upper>75</upper>
+  </object>
+  <object>
+    <lower>76</lower>
+    <content>Duergar Dwarf</content>
+    <upper>76</upper>
+  </object>
+  <object>
+    <lower>77</lower>
     <content>Gnoll</content>
-    <upper>74</upper>
+    <upper>78</upper>
   </object>
   <object>
-    <lower>75</lower>
+    <lower>79</lower>
+    <content>Scorpionfolk</content>
+    <upper>79</upper>
+  </object>
+  <object>
+    <lower>80</lower>
     <content>Troglodyte</content>
-    <upper>89</upper>
+    <upper>90</upper>
   </object>
   <object>
-    <lower>90</lower>
-    <content>Bugbear</content>
+    <lower>91</lower>
+    <content>Rakshasa</content>
     <upper>91</upper>
   </object>
   <object>
     <lower>92</lower>
-    <content>Ogre</content>
+    <content>Harpy</content>
     <upper>92</upper>
   </object>
   <object>
     <lower>93</lower>
-    <content>Minotaur</content>
+    <content>Cloud Giant</content>
     <upper>93</upper>
   </object>
   <object>
     <lower>94</lower>
-    <content>Mind Flayer</content>
-    <upper>94</upper>
-  </object>
-  <object>
-    <lower>95</lower>
-    <content>Ogre Mage</content>
+    <content>Bugbear</content>
     <upper>95</upper>
   </object>
-    <object>
-        <lower>96</lower>
-        <content></content>
-        <upper>100</upper>
-    </object>
+  <object>
+    <lower>96</lower>
+    <content>Ogre</content>
+    <upper>96</upper>
+  </object>
+  <object>
+    <lower>97</lower>
+    <content>Minotaur</content>
+    <upper>97</upper>
+  </object>
+  <object>
+    <lower>98</lower>
+    <content>Mind Flayer</content>
+    <upper>98</upper>
+  </object>
+  <object>
+    <lower>99</lower>
+    <content>Ogre Mage</content>
+    <upper>99</upper>
+  </object>
+  <object>
+    <lower>100</lower>
+    <content>Cloud Giant</content>
+    <upper>100</upper>
+  </object>
 </percentile>

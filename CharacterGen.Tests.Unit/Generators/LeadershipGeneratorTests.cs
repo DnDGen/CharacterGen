@@ -94,7 +94,7 @@ namespace CharacterGen.Tests.Unit.Generators
 
             var reputationAjustments = new Dictionary<string, int>();
             reputationAjustments["reputable"] = 0;
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.LeadershipModifiers)).Returns(reputationAjustments);
+            mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(TableNameConstants.Set.Adjustments.LeadershipModifiers)).Returns(reputationAjustments);
 
             var leadership = leadershipGenerator.GenerateLeadership(9266, 90210, string.Empty);
             Assert.That(leadership.LeadershipModifiers, Contains.Item("reputable"));
@@ -107,7 +107,7 @@ namespace CharacterGen.Tests.Unit.Generators
 
             var reputationAjustments = new Dictionary<string, int>();
             reputationAjustments["reputable"] = 42;
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.LeadershipModifiers)).Returns(reputationAjustments);
+            mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(TableNameConstants.Set.Adjustments.LeadershipModifiers)).Returns(reputationAjustments);
 
             var leadership = leadershipGenerator.GenerateLeadership(9266, 90210, string.Empty);
             Assert.That(leadership.LeadershipModifiers, Contains.Item("reputable"));
@@ -122,7 +122,7 @@ namespace CharacterGen.Tests.Unit.Generators
 
             var reputationAjustments = new Dictionary<string, int>();
             reputationAjustments["reputable"] = -42;
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.LeadershipModifiers)).Returns(reputationAjustments);
+            mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(TableNameConstants.Set.Adjustments.LeadershipModifiers)).Returns(reputationAjustments);
 
             var leadership = leadershipGenerator.GenerateLeadership(9266, 90210, string.Empty);
             Assert.That(leadership.LeadershipModifiers, Contains.Item("reputable"));
@@ -177,7 +177,7 @@ namespace CharacterGen.Tests.Unit.Generators
             leadershipAdjustments["moves"] = 42;
             leadershipAdjustments["murders"] = -5;
 
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.LeadershipModifiers)).Returns(leadershipAdjustments);
+            mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(TableNameConstants.Set.Adjustments.LeadershipModifiers)).Returns(leadershipAdjustments);
             mockLeadershipSelector.Setup(s => s.SelectFollowerQuantitiesFor(99518)).Returns(followerQuantities);
 
             var leadership = leadershipGenerator.GenerateLeadership(9266, 90210, string.Empty);

@@ -1,8 +1,8 @@
 ﻿using CharacterGen.CharacterClasses;
-using CharacterGen.Races;
 using CharacterGen.Domain.Tables;
+using CharacterGen.Races;
 using NUnit.Framework;
-using System;
+using System.Linq;
 
 namespace CharacterGen.Tests.Integration.Tables.CharacterClasses
 {
@@ -35,6 +35,7 @@ namespace CharacterGen.Tests.Integration.Tables.CharacterClasses
                 RaceConstants.Metaraces.HalfDragon,
                 RaceConstants.Metaraces.HalfFiend,
                 RaceConstants.Metaraces.Lich,
+                RaceConstants.Metaraces.None,
                 RaceConstants.Metaraces.Vampire,
                 RaceConstants.Metaraces.Werebear,
                 RaceConstants.Metaraces.Wereboar,
@@ -42,6 +43,10 @@ namespace CharacterGen.Tests.Integration.Tables.CharacterClasses
                 RaceConstants.Metaraces.Weretiger,
                 RaceConstants.Metaraces.Werewolf,
             };
+
+            var baseRaceGroups = CollectionsMapper.Map(TableNameConstants.Set.Collection.BaseRaceGroups);
+            var allBaseRaces = baseRaceGroups[GroupConstants.All];
+            names = names.Union(allBaseRaces).ToArray();
 
             AssertCollectionNames(names);
         }
@@ -87,24 +92,200 @@ namespace CharacterGen.Tests.Integration.Tables.CharacterClasses
             CharacterClassConstants.Schools.Illusion,
             CharacterClassConstants.Schools.Necromancy,
             CharacterClassConstants.Schools.Transmutation)]
+        [TestCase(RaceConstants.BaseRaces.CloudGiant,
+            CharacterClassConstants.Domains.Death,
+            CharacterClassConstants.Domains.Evil,
+            CharacterClassConstants.Domains.Good,
+            CharacterClassConstants.Domains.Strength,
+            CharacterClassConstants.Domains.Sun,
+            CharacterClassConstants.Domains.Trickery,
+            CharacterClassConstants.Schools.Abjuration,
+            CharacterClassConstants.Schools.Conjuration,
+            CharacterClassConstants.Schools.Divination,
+            CharacterClassConstants.Schools.Enchantment,
+            CharacterClassConstants.Schools.Evocation,
+            CharacterClassConstants.Schools.Illusion,
+            CharacterClassConstants.Schools.Necromancy,
+            CharacterClassConstants.Schools.Transmutation)]
+        [TestCase(RaceConstants.BaseRaces.FireGiant,
+            CharacterClassConstants.Domains.Evil,
+            CharacterClassConstants.Domains.Law,
+            CharacterClassConstants.Domains.Trickery,
+            CharacterClassConstants.Domains.War,
+            CharacterClassConstants.Schools.Abjuration,
+            CharacterClassConstants.Schools.Conjuration,
+            CharacterClassConstants.Schools.Divination,
+            CharacterClassConstants.Schools.Enchantment,
+            CharacterClassConstants.Schools.Evocation,
+            CharacterClassConstants.Schools.Illusion,
+            CharacterClassConstants.Schools.Necromancy,
+            CharacterClassConstants.Schools.Transmutation)]
+        [TestCase(RaceConstants.BaseRaces.FrostGiant,
+            CharacterClassConstants.Domains.Chaos,
+            CharacterClassConstants.Domains.Destruction,
+            CharacterClassConstants.Domains.Evil,
+            CharacterClassConstants.Domains.War,
+            CharacterClassConstants.Schools.Abjuration,
+            CharacterClassConstants.Schools.Conjuration,
+            CharacterClassConstants.Schools.Divination,
+            CharacterClassConstants.Schools.Enchantment,
+            CharacterClassConstants.Schools.Evocation,
+            CharacterClassConstants.Schools.Illusion,
+            CharacterClassConstants.Schools.Necromancy,
+            CharacterClassConstants.Schools.Transmutation)]
+        [TestCase(RaceConstants.BaseRaces.Orc,
+            CharacterClassConstants.Domains.Air,
+            CharacterClassConstants.Domains.Animal,
+            CharacterClassConstants.Domains.Chaos,
+            CharacterClassConstants.Domains.Death,
+            CharacterClassConstants.Domains.Destruction,
+            CharacterClassConstants.Domains.Earth,
+            CharacterClassConstants.Domains.Evil,
+            CharacterClassConstants.Domains.Fire,
+            CharacterClassConstants.Domains.Good,
+            CharacterClassConstants.Domains.Healing,
+            CharacterClassConstants.Domains.Knowledge,
+            CharacterClassConstants.Domains.Law,
+            CharacterClassConstants.Domains.Luck,
+            CharacterClassConstants.Domains.Magic,
+            CharacterClassConstants.Domains.Plant,
+            CharacterClassConstants.Domains.Protection,
+            CharacterClassConstants.Domains.Strength,
+            CharacterClassConstants.Domains.Travel,
+            CharacterClassConstants.Domains.Trickery,
+            CharacterClassConstants.Domains.War,
+            CharacterClassConstants.Domains.Water,
+            CharacterClassConstants.Schools.Abjuration,
+            CharacterClassConstants.Schools.Conjuration,
+            CharacterClassConstants.Schools.Divination,
+            CharacterClassConstants.Schools.Enchantment,
+            CharacterClassConstants.Schools.Evocation,
+            CharacterClassConstants.Schools.Illusion,
+            CharacterClassConstants.Schools.Necromancy,
+            CharacterClassConstants.Schools.Transmutation)]
+        [TestCase(RaceConstants.BaseRaces.StormGiant,
+            CharacterClassConstants.Domains.Chaos,
+            CharacterClassConstants.Domains.Good,
+            CharacterClassConstants.Domains.Protection,
+            CharacterClassConstants.Domains.War,
+            CharacterClassConstants.Schools.Abjuration,
+            CharacterClassConstants.Schools.Conjuration,
+            CharacterClassConstants.Schools.Divination,
+            CharacterClassConstants.Schools.Enchantment,
+            CharacterClassConstants.Schools.Evocation,
+            CharacterClassConstants.Schools.Illusion,
+            CharacterClassConstants.Schools.Necromancy,
+            CharacterClassConstants.Schools.Transmutation)]
+        [TestCase(RaceConstants.Metaraces.Vampire,
+            CharacterClassConstants.Domains.Chaos,
+            CharacterClassConstants.Domains.Destruction,
+            CharacterClassConstants.Domains.Evil,
+            CharacterClassConstants.Domains.Trickery,
+            CharacterClassConstants.Schools.Abjuration,
+            CharacterClassConstants.Schools.Conjuration,
+            CharacterClassConstants.Schools.Divination,
+            CharacterClassConstants.Schools.Enchantment,
+            CharacterClassConstants.Schools.Evocation,
+            CharacterClassConstants.Schools.Illusion,
+            CharacterClassConstants.Schools.Necromancy,
+            CharacterClassConstants.Schools.Transmutation)]
+        public override void DistinctCollection(string name, params string[] collection)
+        {
+            base.DistinctCollection(name, collection);
+        }
+
+        [TestCase(RaceConstants.BaseRaces.Aasimar)]
+        [TestCase(RaceConstants.BaseRaces.Bugbear)]
+        [TestCase(RaceConstants.BaseRaces.Centaur)]
+        [TestCase(RaceConstants.BaseRaces.DeepDwarf)]
+        [TestCase(RaceConstants.BaseRaces.DeepHalfling)]
+        [TestCase(RaceConstants.BaseRaces.Derro)]
+        [TestCase(RaceConstants.BaseRaces.Doppelganger)]
+        [TestCase(RaceConstants.BaseRaces.Drow)]
+        [TestCase(RaceConstants.BaseRaces.DuergarDwarf)]
+        [TestCase(RaceConstants.BaseRaces.ForestGnome)]
+        [TestCase(RaceConstants.BaseRaces.Gnoll)]
+        [TestCase(RaceConstants.BaseRaces.Goblin)]
+        [TestCase(RaceConstants.BaseRaces.GrayElf)]
+        [TestCase(RaceConstants.BaseRaces.Grimlock)]
+        [TestCase(RaceConstants.BaseRaces.HalfElf)]
+        [TestCase(RaceConstants.BaseRaces.HalfOrc)]
+        [TestCase(RaceConstants.BaseRaces.Harpy)]
+        [TestCase(RaceConstants.BaseRaces.HighElf)]
+        [TestCase(RaceConstants.BaseRaces.HillDwarf)]
+        [TestCase(RaceConstants.BaseRaces.HillGiant)]
+        [TestCase(RaceConstants.BaseRaces.Hobgoblin)]
+        [TestCase(RaceConstants.BaseRaces.Human)]
+        [TestCase(RaceConstants.BaseRaces.Janni)]
+        [TestCase(RaceConstants.BaseRaces.Kobold)]
+        [TestCase(RaceConstants.BaseRaces.LightfootHalfling)]
+        [TestCase(RaceConstants.BaseRaces.Lizardfolk)]
+        [TestCase(RaceConstants.BaseRaces.MindFlayer)]
+        [TestCase(RaceConstants.BaseRaces.Minotaur)]
+        [TestCase(RaceConstants.BaseRaces.MountainDwarf)]
+        [TestCase(RaceConstants.BaseRaces.Ogre)]
+        [TestCase(RaceConstants.BaseRaces.OgreMage)]
+        [TestCase(RaceConstants.BaseRaces.Pixie)]
+        [TestCase(RaceConstants.BaseRaces.Rakshasa)]
+        [TestCase(RaceConstants.BaseRaces.RockGnome)]
+        [TestCase(RaceConstants.BaseRaces.Satyr)]
+        [TestCase(RaceConstants.BaseRaces.Scorpionfolk)]
+        [TestCase(RaceConstants.BaseRaces.StoneGiant)]
+        [TestCase(RaceConstants.BaseRaces.Svirfneblin)]
+        [TestCase(RaceConstants.BaseRaces.TallfellowHalfling)]
+        [TestCase(RaceConstants.BaseRaces.Tiefling)]
+        [TestCase(RaceConstants.BaseRaces.Troglodyte)]
+        [TestCase(RaceConstants.BaseRaces.Troll)]
+        [TestCase(RaceConstants.BaseRaces.WildElf)]
+        [TestCase(RaceConstants.BaseRaces.WoodElf)]
         [TestCase(RaceConstants.Metaraces.Ghost)]
         [TestCase(RaceConstants.Metaraces.HalfCelestial)]
         [TestCase(RaceConstants.Metaraces.HalfDragon)]
         [TestCase(RaceConstants.Metaraces.HalfFiend)]
         [TestCase(RaceConstants.Metaraces.Lich)]
-        [TestCase(RaceConstants.Metaraces.Vampire,
-            CharacterClassConstants.Domains.Chaos,
-            CharacterClassConstants.Domains.Destruction,
-            CharacterClassConstants.Domains.Evil,
-            CharacterClassConstants.Domains.Trickery)]
+        [TestCase(RaceConstants.Metaraces.None)]
         [TestCase(RaceConstants.Metaraces.Werebear)]
         [TestCase(RaceConstants.Metaraces.Wereboar)]
         [TestCase(RaceConstants.Metaraces.Wererat)]
         [TestCase(RaceConstants.Metaraces.Weretiger)]
         [TestCase(RaceConstants.Metaraces.Werewolf)]
-        public override void DistinctCollection(String name, params String[] collection)
+        public void RaceHasAllSpecialistFields(string race)
         {
-            base.DistinctCollection(name, collection);
+            var fields = new[]
+            {
+                CharacterClassConstants.Domains.Air,
+                CharacterClassConstants.Domains.Animal,
+                CharacterClassConstants.Domains.Chaos,
+                CharacterClassConstants.Domains.Death,
+                CharacterClassConstants.Domains.Destruction,
+                CharacterClassConstants.Domains.Earth,
+                CharacterClassConstants.Domains.Evil,
+                CharacterClassConstants.Domains.Fire,
+                CharacterClassConstants.Domains.Good,
+                CharacterClassConstants.Domains.Healing,
+                CharacterClassConstants.Domains.Knowledge,
+                CharacterClassConstants.Domains.Law,
+                CharacterClassConstants.Domains.Luck,
+                CharacterClassConstants.Domains.Magic,
+                CharacterClassConstants.Domains.Plant,
+                CharacterClassConstants.Domains.Protection,
+                CharacterClassConstants.Domains.Strength,
+                CharacterClassConstants.Domains.Sun,
+                CharacterClassConstants.Domains.Travel,
+                CharacterClassConstants.Domains.Trickery,
+                CharacterClassConstants.Domains.War,
+                CharacterClassConstants.Domains.Water,
+                CharacterClassConstants.Schools.Abjuration,
+                CharacterClassConstants.Schools.Conjuration,
+                CharacterClassConstants.Schools.Divination,
+                CharacterClassConstants.Schools.Enchantment,
+                CharacterClassConstants.Schools.Evocation,
+                CharacterClassConstants.Schools.Illusion,
+                CharacterClassConstants.Schools.Necromancy,
+                CharacterClassConstants.Schools.Transmutation
+            };
+
+            DistinctCollection(race, fields);
         }
     }
 }

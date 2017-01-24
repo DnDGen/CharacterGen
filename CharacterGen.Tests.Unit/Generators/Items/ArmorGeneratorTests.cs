@@ -36,7 +36,6 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         private Item magicalArmor;
         private Item magicalShield;
         private Race race;
-        private List<string> npcs;
 
         [SetUp]
         public void Setup()
@@ -57,7 +56,6 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             baseShieldTypes = new List<string>();
             magicalArmor = new Item();
             race = new Race();
-            npcs = new List<string>();
 
             race.Size = "size";
             magicalArmor = CreateArmor("magical armor");
@@ -95,8 +93,6 @@ namespace CharacterGen.Tests.Unit.Generators.Items
                 .Returns(proficientArmors);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, feats[1].Name))
                 .Returns(proficientShields);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.NPCs))
-                .Returns(npcs);
         }
 
         [Test]
@@ -653,7 +649,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         {
             characterClass.Level = npcLevel;
             characterClass.Name = "class name";
-            npcs.Add(characterClass.Name);
+            characterClass.IsNPC = true;
 
             var npcArmor = CreateArmor("npc armor");
 
@@ -689,7 +685,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         {
             characterClass.Level = level;
             characterClass.Name = "class name";
-            npcs.Add("npc class");
+            characterClass.IsNPC = false;
 
             var playerArmor = CreateArmor("player weapon");
 
@@ -725,7 +721,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         {
             characterClass.Level = npcLevel;
             characterClass.Name = "class name";
-            npcs.Add(characterClass.Name);
+            characterClass.IsNPC = true;
 
             var npcShield = CreateShield("npc shield");
 
@@ -761,7 +757,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         {
             characterClass.Level = level;
             characterClass.Name = "class name";
-            npcs.Add("npc class");
+            characterClass.IsNPC = false;
 
             var playerShield = CreateShield("player shield");
 

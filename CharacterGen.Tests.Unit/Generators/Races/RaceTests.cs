@@ -28,6 +28,7 @@ namespace CharacterGen.Tests.Unit.Common.Races
             Assert.That(race.HeightInInches, Is.EqualTo(0));
             Assert.That(race.WeightInPounds, Is.EqualTo(0));
             Assert.That(race.Age, Is.Not.Null);
+            Assert.That(race.ChallengeRating, Is.EqualTo(0));
         }
 
         [Test]

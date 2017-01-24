@@ -6,7 +6,11 @@
     <content>Deep Dwarf</content>
     <upper>1</upper>
   </object>
-  <object><lower>2</lower><content>Hill Dwarf</content><upper>2</upper></object>
+  <object>
+    <lower>2</lower>
+    <content>Hill Dwarf</content>
+    <upper>2</upper>
+  </object>
   <object>
     <lower>3</lower>
     <content>Wild Elf</content>
@@ -44,12 +48,17 @@
   </object>
   <object>
     <lower>88</lower>
-    <content>Lizardfolk</content>
-    <upper>98</upper>
+    <content>Janni</content>
+    <upper>88</upper>
   </object>
-    <object>
-        <lower>99</lower>
-        <content></content>
-        <upper>100</upper>
-    </object>
+  <object>
+    <lower>89</lower>
+    <content>Lizardfolk</content>
+    <upper>99</upper>
+  </object>
+  <object>
+    <lower>100</lower>
+    <content>Stone Giant</content>
+    <upper>100</upper>
+  </object>
 </percentile>

@@ -1,13 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <items>
-    <object>
-        <name>Aasimar</name>
-        <item>4d6</item>
-    </object>
+  <object>
+    <name>Aasimar</name>
+    <item>4d6</item>
+  </object>
   <object>
     <name>Bugbear</name>
     <item>1d4</item>
+  </object>
+  <object>
+    <name>Centaur</name>
+    <item>1d6</item>
+  </object>
+  <object>
+    <name>Cloud Giant</name>
+    <item>2d8</item>
   </object>
   <object>
     <name>Deep Dwarf</name>
@@ -29,18 +37,26 @@
     <name>Drow</name>
     <item>4d6</item>
   </object>
-    <object>
-        <name>Duergar Dwarf</name>
-        <item>3d6</item>
-    </object>
-    <object>
-        <name>Forest Gnome</name>
-        <item>45</item>
-    </object>
-    <object>
-        <name>Gnoll</name>
-        <item>1d4</item>
-    </object>
+  <object>
+    <name>Duergar Dwarf</name>
+    <item>3d6</item>
+  </object>
+  <object>
+    <name>Fire Giant</name>
+    <item>1d12</item>
+  </object>
+  <object>
+    <name>Forest Gnome</name>
+    <item>4d6</item>
+  </object>
+  <object>
+    <name>Frost Giant</name>
+    <item>1d12</item>
+  </object>
+  <object>
+    <name>Gnoll</name>
+    <item>1d4</item>
+  </object>
   <object>
     <name>Goblin</name>
     <item>1d4</item>
@@ -48,6 +64,10 @@
   <object>
     <name>Gray Elf</name>
     <item>4d6</item>
+  </object>
+  <object>
+    <name>Grimlock</name>
+    <item>1d4</item>
   </object>
   <object>
     <name>Half-Elf</name>
@@ -58,6 +78,10 @@
     <item>1d4</item>
   </object>
   <object>
+    <name>Harpy</name>
+    <item>1d3</item>
+  </object>
+  <object>
     <name>High Elf</name>
     <item>4d6</item>
   </object>
@@ -66,11 +90,19 @@
     <item>3d6</item>
   </object>
   <object>
+    <name>Hill Giant</name>
+    <item>2d4</item>
+  </object>
+  <object>
     <name>Hobgoblin</name>
     <item>1d4</item>
   </object>
   <object>
     <name>Human</name>
+    <item>1d4</item>
+  </object>
+  <object>
+    <name>Janni</name>
     <item>1d4</item>
   </object>
   <object>
@@ -110,8 +142,32 @@
     <item>1d4</item>
   </object>
   <object>
+    <name>Pixie</name>
+    <item>1d2-1</item>
+  </object>
+  <object>
+    <name>Rakshasa</name>
+    <item>1d4</item>
+  </object>
+  <object>
     <name>Rock Gnome</name>
     <item>4d6</item>
+  </object>
+  <object>
+    <name>Satyr</name>
+    <item>2d6</item>
+  </object>
+  <object>
+    <name>Scorpionfolk</name>
+    <item>1d4</item>
+  </object>
+  <object>
+    <name>Stone Giant</name>
+    <item>4d8</item>
+  </object>
+  <object>
+    <name>Storm Giant</name>
+    <item>2d12</item>
   </object>
   <object>
     <name>Svirfneblin</name>
@@ -127,6 +183,10 @@
   </object>
   <object>
     <name>Troglodyte</name>
+    <item>1d4</item>
+  </object>
+  <object>
+    <name>Troll</name>
     <item>1d4</item>
   </object>
   <object>

@@ -40,7 +40,7 @@ namespace CharacterGen.Domain.Selectors.Collections
 
         private int GetAppropriateAdjustment(int leadershipScore, string tableName)
         {
-            var adjustments = adjustmentsSelector.SelectFrom(tableName);
+            var adjustments = adjustmentsSelector.SelectAllFrom(tableName);
             var numericScores = adjustments.Keys.Select(k => Convert.ToInt32(k));
             var maxScore = numericScores.Max();
 

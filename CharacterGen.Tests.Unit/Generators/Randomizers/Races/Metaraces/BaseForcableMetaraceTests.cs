@@ -45,7 +45,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
 
             mockPercentileResultSelector.Setup(p => p.SelectAllFrom(It.IsAny<string>())).Returns(metaraces);
             mockPercentileResultSelector.Setup(p => p.SelectFrom(It.IsAny<string>())).Returns(firstMetarace);
-            mockAdjustmentsSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments)).Returns(adjustments);
+            mockAdjustmentsSelector.Setup(p => p.SelectAllFrom(TableNameConstants.Set.Adjustments.LevelAdjustments)).Returns(adjustments);
         }
 
         [Test]
@@ -81,12 +81,58 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         }
 
         [Test]
-        public void RandomizeLoopsUntilAllowedMetaraceIsRolled()
+        public void RandomizeRerollsNoMetarace()
         {
-            mockPercentileResultSelector.SetupSequence(p => p.SelectFrom(It.IsAny<string>())).Returns("invalid metarace")
+            mockPercentileResultSelector.SetupSequence(p => p.SelectFrom(It.IsAny<string>()))
+                .Returns(RaceConstants.Metaraces.None)
                 .Returns(firstMetarace);
 
-            randomizer.Randomize(alignment, characterClass);
+            randomizer.ForceMetarace = true;
+
+            var metarace = randomizer.Randomize(alignment, characterClass);
+            Assert.That(metarace, Is.EqualTo(firstMetarace));
+            mockPercentileResultSelector.Verify(p => p.SelectFrom(It.IsAny<string>()), Times.Exactly(2));
+        }
+
+        [Test]
+        public void RandomizeDoesNotRerollNoMetarace()
+        {
+            mockPercentileResultSelector.SetupSequence(p => p.SelectFrom(It.IsAny<string>()))
+                .Returns(RaceConstants.Metaraces.None)
+                .Returns(firstMetarace);
+
+            randomizer.ForceMetarace = false;
+
+            var metarace = randomizer.Randomize(alignment, characterClass);
+            Assert.That(metarace, Is.EqualTo(RaceConstants.Metaraces.None));
+            mockPercentileResultSelector.Verify(p => p.SelectFrom(It.IsAny<string>()), Times.Once);
+        }
+
+        [Test]
+        public void RandomizeRerollsInvalidMetaraceBecauseNotAllowed()
+        {
+            randomizer.ForbiddenMetarace = firstMetarace;
+
+            mockPercentileResultSelector.SetupSequence(p => p.SelectFrom(It.IsAny<string>()))
+                .Returns(firstMetarace)
+                .Returns(secondMetarace);
+
+            var metarace = randomizer.Randomize(alignment, characterClass);
+            Assert.That(metarace, Is.EqualTo(secondMetarace));
+            mockPercentileResultSelector.Verify(p => p.SelectFrom(It.IsAny<string>()), Times.Exactly(2));
+        }
+
+        [Test]
+        public void RandomizeRerollsInvalidMetaraceBecauseOfAdjustment()
+        {
+            adjustments[firstMetarace] = 1;
+
+            mockPercentileResultSelector.SetupSequence(p => p.SelectFrom(It.IsAny<string>()))
+                .Returns(firstMetarace)
+                .Returns(secondMetarace);
+
+            var metarace = randomizer.Randomize(alignment, characterClass);
+            Assert.That(metarace, Is.EqualTo(secondMetarace));
             mockPercentileResultSelector.Verify(p => p.SelectFrom(It.IsAny<string>()), Times.Exactly(2));
         }
 

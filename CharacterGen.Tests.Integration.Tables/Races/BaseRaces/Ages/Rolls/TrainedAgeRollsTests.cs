@@ -16,65 +16,38 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Ages.Rolls
         [Test]
         public override void CollectionNames()
         {
-            var names = new[]
-            {
-                RaceConstants.BaseRaces.Aasimar,
-                RaceConstants.BaseRaces.Bugbear,
-                RaceConstants.BaseRaces.DeepDwarf,
-                RaceConstants.BaseRaces.DeepHalfling,
-                RaceConstants.BaseRaces.Derro,
-                RaceConstants.BaseRaces.Doppelganger,
-                RaceConstants.BaseRaces.Drow,
-                RaceConstants.BaseRaces.DuergarDwarf,
-                RaceConstants.BaseRaces.ForestGnome,
-                RaceConstants.BaseRaces.Gnoll,
-                RaceConstants.BaseRaces.Goblin,
-                RaceConstants.BaseRaces.GrayElf,
-                RaceConstants.BaseRaces.HalfElf,
-                RaceConstants.BaseRaces.HalfOrc,
-                RaceConstants.BaseRaces.HighElf,
-                RaceConstants.BaseRaces.HillDwarf,
-                RaceConstants.BaseRaces.Hobgoblin,
-                RaceConstants.BaseRaces.Human,
-                RaceConstants.BaseRaces.Kobold,
-                RaceConstants.BaseRaces.LightfootHalfling,
-                RaceConstants.BaseRaces.Lizardfolk,
-                RaceConstants.BaseRaces.MindFlayer,
-                RaceConstants.BaseRaces.Minotaur,
-                RaceConstants.BaseRaces.MountainDwarf,
-                RaceConstants.BaseRaces.Ogre,
-                RaceConstants.BaseRaces.OgreMage,
-                RaceConstants.BaseRaces.Orc,
-                RaceConstants.BaseRaces.RockGnome,
-                RaceConstants.BaseRaces.Svirfneblin,
-                RaceConstants.BaseRaces.TallfellowHalfling,
-                RaceConstants.BaseRaces.Tiefling,
-                RaceConstants.BaseRaces.Troglodyte,
-                RaceConstants.BaseRaces.WildElf,
-                RaceConstants.BaseRaces.WoodElf
-            };
+            var baseRaceGroups = CollectionsMapper.Map(TableNameConstants.Set.Collection.BaseRaceGroups);
+            var allBaseRaces = baseRaceGroups[GroupConstants.All];
 
-            AssertCollectionNames(names);
+            AssertCollectionNames(allBaseRaces);
         }
 
         [TestCase(RaceConstants.BaseRaces.Aasimar, "8d6")]
         [TestCase(RaceConstants.BaseRaces.Bugbear, "2d6")]
+        [TestCase(RaceConstants.BaseRaces.Centaur, "3d6")]
+        [TestCase(RaceConstants.BaseRaces.CloudGiant, "6d20")]
         [TestCase(RaceConstants.BaseRaces.DeepDwarf, "7d6")]
         [TestCase(RaceConstants.BaseRaces.DeepHalfling, "4d6")]
         [TestCase(RaceConstants.BaseRaces.Derro, "7d6")]
         [TestCase(RaceConstants.BaseRaces.Doppelganger, "2d6")]
         [TestCase(RaceConstants.BaseRaces.Drow, "10d6")]
         [TestCase(RaceConstants.BaseRaces.DuergarDwarf, "7d6")]
+        [TestCase(RaceConstants.BaseRaces.FireGiant, "9d12")]
         [TestCase(RaceConstants.BaseRaces.ForestGnome, "9d6")]
+        [TestCase(RaceConstants.BaseRaces.FrostGiant, "6d12")]
         [TestCase(RaceConstants.BaseRaces.Gnoll, "2d6")]
         [TestCase(RaceConstants.BaseRaces.Goblin, "2d6")]
         [TestCase(RaceConstants.BaseRaces.GrayElf, "10d6")]
+        [TestCase(RaceConstants.BaseRaces.Grimlock, "2d6")]
         [TestCase(RaceConstants.BaseRaces.HalfElf, "3d6")]
         [TestCase(RaceConstants.BaseRaces.HalfOrc, "2d6")]
+        [TestCase(RaceConstants.BaseRaces.Harpy, "2d4")]
         [TestCase(RaceConstants.BaseRaces.HighElf, "10d6")]
         [TestCase(RaceConstants.BaseRaces.HillDwarf, "7d6")]
+        [TestCase(RaceConstants.BaseRaces.HillGiant, "5d12")]
         [TestCase(RaceConstants.BaseRaces.Hobgoblin, "2d6")]
         [TestCase(RaceConstants.BaseRaces.Human, "2d6")]
+        [TestCase(RaceConstants.BaseRaces.Janni, "2d6")]
         [TestCase(RaceConstants.BaseRaces.Kobold, "2d6")]
         [TestCase(RaceConstants.BaseRaces.LightfootHalfling, "3d6")]
         [TestCase(RaceConstants.BaseRaces.Lizardfolk, "1d10")]
@@ -84,16 +57,23 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Ages.Rolls
         [TestCase(RaceConstants.BaseRaces.Ogre, "4d6")]
         [TestCase(RaceConstants.BaseRaces.OgreMage, "4d6")]
         [TestCase(RaceConstants.BaseRaces.Orc, "2d6")]
+        [TestCase(RaceConstants.BaseRaces.Pixie, "2d4")]
+        [TestCase(RaceConstants.BaseRaces.Rakshasa, "2d6")]
         [TestCase(RaceConstants.BaseRaces.RockGnome, "9d6")]
+        [TestCase(RaceConstants.BaseRaces.Satyr, "2d12")]
+        [TestCase(RaceConstants.BaseRaces.Scorpionfolk, "2d6")]
+        [TestCase(RaceConstants.BaseRaces.StoneGiant, "12d20")]
+        [TestCase(RaceConstants.BaseRaces.StormGiant, "9d20")]
         [TestCase(RaceConstants.BaseRaces.Svirfneblin, "9d6")]
         [TestCase(RaceConstants.BaseRaces.TallfellowHalfling, "3d6")]
         [TestCase(RaceConstants.BaseRaces.Tiefling, "8d6")]
         [TestCase(RaceConstants.BaseRaces.Troglodyte, "2d6")]
+        [TestCase(RaceConstants.BaseRaces.Troll, "2d6")]
         [TestCase(RaceConstants.BaseRaces.WildElf, "10d6")]
         [TestCase(RaceConstants.BaseRaces.WoodElf, "10d6")]
-        public override void DistinctCollection(string name, params string[] collection)
+        public void TrainedAgeRoll(string name, string ageRoll)
         {
-            base.DistinctCollection(name, collection);
+            DistinctCollection(name, ageRoll);
         }
     }
 }

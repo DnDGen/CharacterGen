@@ -2,6 +2,9 @@
 
 <items>
   <object>
+    <name>Aasimar</name>
+  </object>
+  <object>
     <name>Adept</name>
     <item>Concentration</item>
     <item>Handle Animal</item>
@@ -46,51 +49,51 @@
     <item>Survival</item>
     <item>Swim</item>
   </object>
-    <object>
-        <name>Barbarian</name>
-        <item>Climb</item>
-        <item>Handle Animal</item>
-        <item>Intimidate</item>
-        <item>Jump</item>
-        <item>Listen</item>
-        <item>Ride</item>
-        <item>Survival</item>
-        <item>Swim</item>
-    </object>
-    <object>
-        <name>Bard</name>
-        <item>Appraise</item>
-        <item>Balance</item>
-        <item>Bluff</item>
-        <item>Climb</item>
-        <item>Concentration</item>
-        <item>Decipher Script</item>
-        <item>Diplomacy</item>
-        <item>Disguise</item>
-        <item>Escape Artist</item>
-        <item>Gather Information</item>
-        <item>Hide</item>
-        <item>Jump</item>
-        <item>Knowledge (Arcana)</item>
-        <item>Knowledge (Architecture and Engineering)</item>
-        <item>Knowledge (Dungeoneering)</item>
-        <item>Knowledge (Geography)</item>
-        <item>Knowledge (History)</item>
-        <item>Knowledge (Local)</item>
-        <item>Knowledge (Nature)</item>
-        <item>Knowledge (Nobility and Royalty)</item>
-        <item>Knowledge (Religion)</item>
-        <item>Knowledge (The Planes)</item>
-        <item>Listen</item>
-        <item>Move Silently</item>
-        <item>Perform</item>
-        <item>Sense Motive</item>
-        <item>Sleight of Hand</item>
-        <item>Spellcraft</item>
-        <item>Swim</item>
-        <item>Tumble</item>
-        <item>Use Magic Device</item>
-    </object>
+  <object>
+    <name>Barbarian</name>
+    <item>Climb</item>
+    <item>Handle Animal</item>
+    <item>Intimidate</item>
+    <item>Jump</item>
+    <item>Listen</item>
+    <item>Ride</item>
+    <item>Survival</item>
+    <item>Swim</item>
+  </object>
+  <object>
+    <name>Bard</name>
+    <item>Appraise</item>
+    <item>Balance</item>
+    <item>Bluff</item>
+    <item>Climb</item>
+    <item>Concentration</item>
+    <item>Decipher Script</item>
+    <item>Diplomacy</item>
+    <item>Disguise</item>
+    <item>Escape Artist</item>
+    <item>Gather Information</item>
+    <item>Hide</item>
+    <item>Jump</item>
+    <item>Knowledge (Arcana)</item>
+    <item>Knowledge (Architecture and Engineering)</item>
+    <item>Knowledge (Dungeoneering)</item>
+    <item>Knowledge (Geography)</item>
+    <item>Knowledge (History)</item>
+    <item>Knowledge (Local)</item>
+    <item>Knowledge (Nature)</item>
+    <item>Knowledge (Nobility and Royalty)</item>
+    <item>Knowledge (Religion)</item>
+    <item>Knowledge (The Planes)</item>
+    <item>Listen</item>
+    <item>Move Silently</item>
+    <item>Perform</item>
+    <item>Sense Motive</item>
+    <item>Sleight of Hand</item>
+    <item>Spellcraft</item>
+    <item>Swim</item>
+    <item>Tumble</item>
+    <item>Use Magic Device</item>
+  </object>
   <object>
     <name>Bugbear</name>
     <item>Climb</item>
@@ -100,17 +103,34 @@
     <item>Search</item>
     <item>Spot</item>
   </object>
-    <object>
-        <name>Cleric</name>
-        <item>Concentration</item>
-        <item>Diplomacy</item>
-        <item>Heal</item>
-        <item>Knowledge (Arcana)</item>
-        <item>Knowledge (History)</item>
-        <item>Knowledge (Religion)</item>
-        <item>Knowledge (The Planes)</item>
-        <item>Spellcraft</item>
-    </object>
+  <object>
+    <name>Centaur</name>
+    <item>Listen</item>
+    <item>Move Silently</item>
+    <item>Spot</item>
+    <item>Survival</item>
+  </object>
+  <object>
+    <name>Cleric</name>
+    <item>Concentration</item>
+    <item>Diplomacy</item>
+    <item>Heal</item>
+    <item>Knowledge (Arcana)</item>
+    <item>Knowledge (History)</item>
+    <item>Knowledge (Religion)</item>
+    <item>Knowledge (The Planes)</item>
+    <item>Spellcraft</item>
+  </object>
+  <object>
+    <name>Cloud Giant</name>
+    <item>Climb</item>
+    <item>Diplomacy</item>
+    <item>Intimidate</item>
+    <item>Listen</item>
+    <item>Perform</item>
+    <item>Sense Motive</item>
+    <item>Spot</item>
+  </object>
   <object>
     <name>Commoner</name>
     <item>Climb</item>
@@ -121,6 +141,12 @@
     <item>Swim</item>
     <item>Spot</item>
     <item>Use Rope</item>
+  </object>
+  <object>
+    <name>Deep Dwarf</name>
+  </object>
+  <object>
+    <name>Deep Halfling</name>
   </object>
   <object>
     <name>Derro</name>
@@ -139,36 +165,122 @@
     <item>Sense Motive</item>
     <item>Spot</item>
   </object>
-    <object>
-        <name>Druid</name>
-        <item>Concentration</item>
-        <item>Diplomacy</item>
-        <item>Handle Animal</item>
-        <item>Heal</item>
-        <item>Knowledge (Nature)</item>
-        <item>Listen</item>
-        <item>Ride</item>
-        <item>Spellcraft</item>
-        <item>Spot</item>
-        <item>Survival</item>
-        <item>Swim</item>
-    </object>
+  <object>
+    <name>Drow</name>
+  </object>
+  <object>
+    <name>Druid</name>
+    <item>Concentration</item>
+    <item>Diplomacy</item>
+    <item>Handle Animal</item>
+    <item>Heal</item>
+    <item>Knowledge (Nature)</item>
+    <item>Listen</item>
+    <item>Ride</item>
+    <item>Spellcraft</item>
+    <item>Spot</item>
+    <item>Survival</item>
+    <item>Swim</item>
+  </object>
+  <object>
+    <name>Duergar Dwarf</name>
+  </object>
   <object>
     <name>Expert</name>
   </object>
-    <object>
-        <name>Fighter</name>
-        <item>Climb</item>
-        <item>Handle Animal</item>
-        <item>Intimidate</item>
-        <item>Jump</item>
-        <item>Ride</item>
-        <item>Swim</item>
-    </object>
+  <object>
+    <name>Fighter</name>
+    <item>Climb</item>
+    <item>Handle Animal</item>
+    <item>Intimidate</item>
+    <item>Jump</item>
+    <item>Ride</item>
+    <item>Swim</item>
+  </object>
+  <object>
+    <name>Fire Giant</name>
+    <item>Climb</item>
+    <item>Intimidate</item>
+    <item>Jump</item>
+    <item>Spot</item>
+  </object>
+  <object>
+    <name>Forest Gnome</name>
+  </object>
+  <object>
+    <name>Frost Giant</name>
+    <item>Climb</item>
+    <item>Intimidate</item>
+    <item>Jump</item>
+    <item>Spot</item>
+  </object>
   <object>
     <name>Gnoll</name>
-    <item>Spot</item>
     <item>Listen</item>
+    <item>Spot</item>
+  </object>
+  <object>
+    <name>Goblin</name>
+  </object>
+  <object>
+    <name>Gray Elf</name>
+  </object>
+  <object>
+    <name>Grimlock</name>
+    <item>Climb</item>
+    <item>Hide</item>
+    <item>Listen</item>
+    <item>Spot</item>
+  </object>
+  <object>
+    <name>Half-Elf</name>
+  </object>
+  <object>
+    <name>Half-Orc</name>
+  </object>
+  <object>
+    <name>Harpy</name>
+    <item>Bluff</item>
+    <item>Intimidate</item>
+    <item>Listen</item>
+    <item>Perform</item>
+    <item>Spot</item>
+  </object>
+  <object>
+    <name>High Elf</name>
+  </object>
+  <object>
+    <name>Hill Dwarf</name>
+  </object>
+  <object>
+    <name>Hill Giant</name>
+    <item>Climb</item>
+    <item>Jump</item>
+    <item>Listen</item>
+    <item>Spot</item>
+  </object>
+  <object>
+    <name>Hobgoblin</name>
+  </object>
+  <object>
+    <name>Human</name>
+  </object>
+  <object>
+    <name>Janni</name>
+    <item>Appraise</item>
+    <item>Concentration</item>
+    <item>Escape Artist</item>
+    <item>Listen</item>
+    <item>Move Silently</item>
+    <item>Ride</item>
+    <item>Sense Motive</item>
+    <item>Spot</item>
+  </object>
+  <object>
+    <name>Kobold</name>
+  </object>
+  <object>
+    <name>Lightfoot Halfling</name>
   </object>
   <object>
     <name>Lizardfolk</name>
@@ -194,25 +306,28 @@
     <item>Search</item>
     <item>Spot</item>
   </object>
-    <object>
-        <name>Monk</name>
-        <item>Balance</item>
-        <item>Climb</item>
-        <item>Concentration</item>
-        <item>Diplomacy</item>
-        <item>Escape Artist</item>
-        <item>Hide</item>
-        <item>Jump</item>
-        <item>Knowledge (Arcana)</item>
-        <item>Knowledge (Religion)</item>
-        <item>Listen</item>
-        <item>Move Silently</item>
-        <item>Perform</item>
-        <item>Sense Motive</item>
-        <item>Spot</item>
-        <item>Swim</item>
-        <item>Tumble</item>
-    </object>
+  <object>
+    <name>Monk</name>
+    <item>Balance</item>
+    <item>Climb</item>
+    <item>Concentration</item>
+    <item>Diplomacy</item>
+    <item>Escape Artist</item>
+    <item>Hide</item>
+    <item>Jump</item>
+    <item>Knowledge (Arcana)</item>
+    <item>Knowledge (Religion)</item>
+    <item>Listen</item>
+    <item>Move Silently</item>
+    <item>Perform</item>
+    <item>Sense Motive</item>
+    <item>Spot</item>
+    <item>Swim</item>
+    <item>Tumble</item>
+  </object>
+  <object>
+    <name>Mountain Dwarf</name>
+  </object>
   <object>
     <name>Ogre</name>
     <item>Spot</item>
@@ -226,78 +341,147 @@
     <item>Spellcraft</item>
     <item>Listen</item>
   </object>
-    <object>
-        <name>Paladin</name>
-        <item>Concentration</item>
-        <item>Diplomacy</item>
-        <item>Handle Animal</item>
-        <item>Heal</item>
-        <item>Knowledge (Nobility and Royalty)</item>
-        <item>Knowledge (Religion)</item>
-        <item>Ride</item>
-        <item>Sense Motive</item>
-    </object>
-    <object>
-        <name>Ranger</name>
-        <item>Climb</item>
-        <item>Concentration</item>
-        <item>Handle Animal</item>
-        <item>Heal</item>
-        <item>Hide</item>
-        <item>Jump</item>
-        <item>Knowledge (Dungeoneering)</item>
-        <item>Knowledge (Geography)</item>
-        <item>Knowledge (Nature)</item>
-        <item>Listen</item>
-        <item>Move Silently</item>
-        <item>Ride</item>
-        <item>Search</item>
-        <item>Spot</item>
-        <item>Survival</item>
-        <item>Swim</item>
-        <item>Use Rope</item>
-    </object>
-    <object>
-        <name>Rogue</name>
-        <item>Appraise</item>
-        <item>Balance</item>
-        <item>Bluff</item>
-        <item>Climb</item>
-        <item>Decipher Script</item>
-        <item>Diplomacy</item>
-        <item>Disable Device</item>
-        <item>Disguise</item>
-        <item>Escape Artist</item>
-        <item>Forgery</item>
-        <item>Gather Information</item>
-        <item>Hide</item>
-        <item>Intimidate</item>
-        <item>Jump</item>
-        <item>Knowledge (Local)</item>
-        <item>Listen</item>
-        <item>Move Silently</item>
-        <item>Open Lock</item>
-        <item>Perform</item>
-        <item>Search</item>
-        <item>Sense Motive</item>
-        <item>Sleight of Hand</item>
-        <item>Spot</item>
-        <item>Swim</item>
-        <item>Tumble</item>
-        <item>Use Magic Device</item>
-        <item>Use Rope</item>
-    </object>
-    <object>
-        <name>Sorcerer</name>
-        <item>Bluff</item>
-        <item>Concentration</item>
-        <item>Knowledge (Arcana)</item>
-        <item>Spellcraft</item>
-    </object>
+  <object>
+    <name>Orc</name>
+  </object>
+  <object>
+    <name>Paladin</name>
+    <item>Concentration</item>
+    <item>Diplomacy</item>
+    <item>Handle Animal</item>
+    <item>Heal</item>
+    <item>Knowledge (Nobility and Royalty)</item>
+    <item>Knowledge (Religion)</item>
+    <item>Ride</item>
+    <item>Sense Motive</item>
+  </object>
+  <object>
+    <name>Pixie</name>
+  </object>
+  <object>
+    <name>Rakshasa</name>
+    <item>Bluff</item>
+    <item>Disguise</item>
+    <item>Listen</item>
+    <item>Move Silently</item>
+    <item>Perform</item>
+    <item>Spot</item>
+    <item>Sense Motive</item>
+  </object>
+  <object>
+    <name>Ranger</name>
+    <item>Climb</item>
+    <item>Concentration</item>
+    <item>Handle Animal</item>
+    <item>Heal</item>
+    <item>Hide</item>
+    <item>Jump</item>
+    <item>Knowledge (Dungeoneering)</item>
+    <item>Knowledge (Geography)</item>
+    <item>Knowledge (Nature)</item>
+    <item>Listen</item>
+    <item>Move Silently</item>
+    <item>Ride</item>
+    <item>Search</item>
+    <item>Spot</item>
+    <item>Survival</item>
+    <item>Swim</item>
+    <item>Use Rope</item>
+  </object>
+  <object>
+    <name>Rock Gnome</name>
+  </object>
+  <object>
+    <name>Rogue</name>
+    <item>Appraise</item>
+    <item>Balance</item>
+    <item>Bluff</item>
+    <item>Climb</item>
+    <item>Decipher Script</item>
+    <item>Diplomacy</item>
+    <item>Disable Device</item>
+    <item>Disguise</item>
+    <item>Escape Artist</item>
+    <item>Forgery</item>
+    <item>Gather Information</item>
+    <item>Hide</item>
+    <item>Intimidate</item>
+    <item>Jump</item>
+    <item>Knowledge (Local)</item>
+    <item>Listen</item>
+    <item>Move Silently</item>
+    <item>Open Lock</item>
+    <item>Perform</item>
+    <item>Search</item>
+    <item>Sense Motive</item>
+    <item>Sleight of Hand</item>
+    <item>Spot</item>
+    <item>Swim</item>
+    <item>Tumble</item>
+    <item>Use Magic Device</item>
+    <item>Use Rope</item>
+  </object>
+  <object>
+    <name>Satyr</name>
+    <item>Bluff</item>
+    <item>Hide</item>
+    <item>Knowledge (Nature)</item>
+    <item>Listen</item>
+    <item>Move Silently</item>
+    <item>Perform</item>
+    <item>Spot</item>
+  </object>
+  <object>
+    <name>Scorpionfolk</name>
+    <item>Diplomacy</item>
+    <item>Intimidate</item>
+    <item>Listen</item>
+    <item>Sense Motive</item>
+    <item>Spot</item>
+  </object>
+  <object>
+    <name>Sorcerer</name>
+    <item>Bluff</item>
+    <item>Concentration</item>
+    <item>Knowledge (Arcana)</item>
+    <item>Spellcraft</item>
+  </object>
+  <object>
+    <name>Stone Giant</name>
+    <item>Climb</item>
+    <item>Hide</item>
+    <item>Listen</item>
+    <item>Spot</item>
+  </object>
+  <object>
+    <name>Storm Giant</name>
+    <item>Climb</item>
+    <item>Concentration</item>
+    <item>Diplomacy</item>
+    <item>Intimidate</item>
+    <item>Jump</item>
+    <item>Listen</item>
+    <item>Perform</item>
+    <item>Sense Motive</item>
+    <item>Spot</item>
+    <item>Swim</item>
+  </object>
+  <object>
+    <name>Svirfneblin</name>
+  </object>
+  <object>
+    <name>Tallfellow Halfling</name>
+  </object>
+  <object>
+    <name>Tiefling</name>
+  </object>
   <object>
     <name>Troglodyte</name>
     <item>Hide</item>
     <item>Listen</item>
+  </object>
+  <object>
+    <name>Troll</name>
   </object>
   <object>
     <name>Warrior</name>
@@ -308,20 +492,26 @@
     <item>Ride</item>
     <item>Swim</item>
   </object>
-    <object>
-        <name>Wizard</name>
-        <item>Concentration</item>
-        <item>Decipher Script</item>
-        <item>Knowledge (Arcana)</item>
-        <item>Knowledge (Architecture and Engineering)</item>
-        <item>Knowledge (Dungeoneering)</item>
-        <item>Knowledge (Geography)</item>
-        <item>Knowledge (History)</item>
-        <item>Knowledge (Local)</item>
-        <item>Knowledge (Nature)</item>
-        <item>Knowledge (Nobility and Royalty)</item>
-        <item>Knowledge (Religion)</item>
-        <item>Knowledge (The Planes)</item>
-        <item>Spellcraft</item>
-    </object>
+  <object>
+    <name>Wild Elf</name>
+  </object>
+  <object>
+    <name>Wizard</name>
+    <item>Concentration</item>
+    <item>Decipher Script</item>
+    <item>Knowledge (Arcana)</item>
+    <item>Knowledge (Architecture and Engineering)</item>
+    <item>Knowledge (Dungeoneering)</item>
+    <item>Knowledge (Geography)</item>
+    <item>Knowledge (History)</item>
+    <item>Knowledge (Local)</item>
+    <item>Knowledge (Nature)</item>
+    <item>Knowledge (Nobility and Royalty)</item>
+    <item>Knowledge (Religion)</item>
+    <item>Knowledge (The Planes)</item>
+    <item>Spellcraft</item>
+  </object>
+  <object>
+    <name>Wood Elf</name>
+  </object>
 </items>

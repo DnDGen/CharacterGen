@@ -9,22 +9,30 @@ namespace CharacterGen.Tests.Unit.Common.Races
     {
         [TestCase(RaceConstants.BaseRaces.Aasimar, "Aasimar")]
         [TestCase(RaceConstants.BaseRaces.Bugbear, "Bugbear")]
+        [TestCase(RaceConstants.BaseRaces.Centaur, "Centaur")]
+        [TestCase(RaceConstants.BaseRaces.CloudGiant, "Cloud Giant")]
         [TestCase(RaceConstants.BaseRaces.DeepDwarf, "Deep Dwarf")]
         [TestCase(RaceConstants.BaseRaces.DeepHalfling, "Deep Halfling")]
         [TestCase(RaceConstants.BaseRaces.Derro, "Derro")]
         [TestCase(RaceConstants.BaseRaces.Doppelganger, "Doppelganger")]
         [TestCase(RaceConstants.BaseRaces.Drow, "Drow")]
         [TestCase(RaceConstants.BaseRaces.DuergarDwarf, "Duergar Dwarf")]
+        [TestCase(RaceConstants.BaseRaces.FireGiant, "Fire Giant")]
         [TestCase(RaceConstants.BaseRaces.ForestGnome, "Forest Gnome")]
+        [TestCase(RaceConstants.BaseRaces.FrostGiant, "Frost Giant")]
         [TestCase(RaceConstants.BaseRaces.Gnoll, "Gnoll")]
         [TestCase(RaceConstants.BaseRaces.Goblin, "Goblin")]
         [TestCase(RaceConstants.BaseRaces.GrayElf, "Gray Elf")]
+        [TestCase(RaceConstants.BaseRaces.Grimlock, "Grimlock")]
         [TestCase(RaceConstants.BaseRaces.HalfElf, "Half-Elf")]
         [TestCase(RaceConstants.BaseRaces.HalfOrc, "Half-Orc")]
+        [TestCase(RaceConstants.BaseRaces.Harpy, "Harpy")]
         [TestCase(RaceConstants.BaseRaces.HighElf, "High Elf")]
         [TestCase(RaceConstants.BaseRaces.HillDwarf, "Hill Dwarf")]
+        [TestCase(RaceConstants.BaseRaces.HillGiant, "Hill Giant")]
         [TestCase(RaceConstants.BaseRaces.Hobgoblin, "Hobgoblin")]
         [TestCase(RaceConstants.BaseRaces.Human, "Human")]
+        [TestCase(RaceConstants.BaseRaces.Janni, "Janni")]
         [TestCase(RaceConstants.BaseRaces.Kobold, "Kobold")]
         [TestCase(RaceConstants.BaseRaces.LightfootHalfling, "Lightfoot Halfling")]
         [TestCase(RaceConstants.BaseRaces.Lizardfolk, "Lizardfolk")]
@@ -34,11 +42,18 @@ namespace CharacterGen.Tests.Unit.Common.Races
         [TestCase(RaceConstants.BaseRaces.Ogre, "Ogre")]
         [TestCase(RaceConstants.BaseRaces.OgreMage, "Ogre Mage")]
         [TestCase(RaceConstants.BaseRaces.Orc, "Orc")]
+        [TestCase(RaceConstants.BaseRaces.Pixie, "Pixie")]
+        [TestCase(RaceConstants.BaseRaces.Rakshasa, "Rakshasa")]
         [TestCase(RaceConstants.BaseRaces.RockGnome, "Rock Gnome")]
+        [TestCase(RaceConstants.BaseRaces.Satyr, "Satyr")]
+        [TestCase(RaceConstants.BaseRaces.Scorpionfolk, "Scorpionfolk")]
+        [TestCase(RaceConstants.BaseRaces.StoneGiant, "Stone Giant")]
+        [TestCase(RaceConstants.BaseRaces.StormGiant, "Storm Giant")]
         [TestCase(RaceConstants.BaseRaces.Svirfneblin, "Svirfneblin")]
         [TestCase(RaceConstants.BaseRaces.TallfellowHalfling, "Tallfellow Halfling")]
         [TestCase(RaceConstants.BaseRaces.Tiefling, "Tiefling")]
         [TestCase(RaceConstants.BaseRaces.Troglodyte, "Troglodyte")]
+        [TestCase(RaceConstants.BaseRaces.Troll, "Troll")]
         [TestCase(RaceConstants.BaseRaces.WildElf, "Wild Elf")]
         [TestCase(RaceConstants.BaseRaces.WoodElf, "Wood Elf")]
         [TestCase(RaceConstants.BaseRaces.Animals.Badger, "Badger")]
@@ -186,6 +201,12 @@ namespace CharacterGen.Tests.Unit.Common.Races
         public void SizeConstantsMatchTreasureSizes(string characterSize, string treasureSize)
         {
             Assert.That(characterSize, Is.EqualTo(treasureSize));
+        }
+
+        [Test]
+        public void AgelessConstant()
+        {
+            Assert.That(RaceConstants.Ages.Ageless, Is.EqualTo(-1));
         }
     }
 }

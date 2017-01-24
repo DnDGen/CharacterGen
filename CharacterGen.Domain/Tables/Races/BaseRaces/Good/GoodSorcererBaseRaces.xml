@@ -83,12 +83,22 @@
   </object>
   <object>
     <lower>96</lower>
-    <content>Svirfneblin</content>
-    <upper>96</upper>
+    <content>Pixie</content>
+    <upper>97</upper>
   </object>
-    <object>
-        <lower>97</lower>
-        <content></content>
-        <upper>100</upper>
-    </object>
+  <object>
+    <lower>98</lower>
+    <content>Storm Giant</content>
+    <upper>98</upper>
+  </object>
+  <object>
+    <lower>99</lower>
+    <content>Svirfneblin</content>
+    <upper>99</upper>
+  </object>
+  <object>
+    <lower>100</lower>
+    <content>Cloud Giant</content>
+    <upper>100</upper>
+  </object>
 </percentile>

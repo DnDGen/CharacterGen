@@ -30,6 +30,9 @@ namespace CharacterGen.Domain.Generators
             characterClass.Level = levelRandomizer.Randomize();
             characterClass.Name = classNameRandomizer.Randomize(alignment);
 
+            var npcs = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.NPCs);
+            characterClass.IsNPC = npcs.Contains(characterClass.Name);
+
             var tableName = string.Format(TableNameConstants.Formattable.TrueOrFalse.CLASSHasSpecialistFields, characterClass.Name);
             var isSpecialist = booleanPercentileSelector.SelectFrom(tableName);
 
@@ -45,19 +48,19 @@ namespace CharacterGen.Domain.Generators
         private IEnumerable<string> GenerateSpecialistFields(CharacterClass characterClass, Alignment alignment)
         {
             var allSpecialistFields = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SpecialistFields, characterClass.Name);
-            var specialistFieldQuantities = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.SpecialistFieldQuantities);
+            var specialistFieldQuantity = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.SpecialistFieldQuantities, characterClass.Name);
             var nonAlignmentFields = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ProhibitedFields, alignment.ToString());
             var possibleSpecialistFields = allSpecialistFields.Except(nonAlignmentFields);
 
-            return PopulateFields(specialistFieldQuantities[characterClass.Name], possibleSpecialistFields);
+            return PopulateFields(specialistFieldQuantity, possibleSpecialistFields);
         }
 
         private IEnumerable<string> PopulateFields(int quantity, IEnumerable<string> possibleFields)
         {
             var fields = new HashSet<string>();
 
-            if (!possibleFields.Any())
-                return fields;
+            if (possibleFields.Count() < quantity)
+                return possibleFields;
 
             while (fields.Count < quantity)
             {
@@ -75,7 +78,7 @@ namespace CharacterGen.Domain.Generators
 
             var allProhibitedFields = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ProhibitedFields, characterClass.Name);
             var possibleProhibitedFields = allProhibitedFields.Except(characterClass.SpecialistFields);
-            var prohibitedFieldQuantities = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.ProhibitedFieldQuantities);
+            var prohibitedFieldQuantities = adjustmentsSelector.SelectAllFrom(TableNameConstants.Set.Adjustments.ProhibitedFieldQuantities);
 
             var prohibitedfieldQuantity = 0;
             foreach (var specialistField in characterClass.SpecialistFields)
@@ -86,20 +89,20 @@ namespace CharacterGen.Domain.Generators
 
         public IEnumerable<string> RegenerateSpecialistFields(Alignment alignment, CharacterClass characterClass, Race race)
         {
-            if (characterClass.SpecialistFields.Any() == false || race.Metarace == RaceConstants.Metaraces.None)
+            if (!characterClass.SpecialistFields.Any())
                 return characterClass.SpecialistFields;
 
             var allClassSpecialistFields = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SpecialistFields, characterClass.Name);
+            var allBaseRaceSpecialistFields = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SpecialistFields, race.BaseRace);
             var allMetaraceSpecialistFields = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SpecialistFields, race.Metarace);
-            var applicableFields = allClassSpecialistFields.Intersect(allMetaraceSpecialistFields);
-
-            if (applicableFields.Any() == false)
-                return characterClass.SpecialistFields;
-
             var nonAlignmentFields = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ProhibitedFields, alignment.ToString());
-            var possibleSpecialistFields = applicableFields.Except(nonAlignmentFields);
 
-            return PopulateFields(characterClass.SpecialistFields.Count(), possibleSpecialistFields);
+            var applicableFields = allClassSpecialistFields
+                .Intersect(allBaseRaceSpecialistFields)
+                .Intersect(allMetaraceSpecialistFields)
+                .Except(nonAlignmentFields);
+
+            return PopulateFields(characterClass.SpecialistFields.Count(), applicableFields);
         }
     }
 }

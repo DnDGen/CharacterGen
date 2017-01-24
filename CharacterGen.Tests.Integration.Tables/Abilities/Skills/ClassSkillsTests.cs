@@ -1,9 +1,9 @@
 ﻿using CharacterGen.Abilities.Skills;
 using CharacterGen.CharacterClasses;
-using CharacterGen.Races;
 using CharacterGen.Domain.Tables;
+using CharacterGen.Races;
 using NUnit.Framework;
-using System;
+using System.Linq;
 
 namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
 {
@@ -20,33 +20,27 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
         {
             var names = new[]
             {
+                CharacterClassConstants.Adept,
+                CharacterClassConstants.Aristocrat,
                 CharacterClassConstants.Barbarian,
                 CharacterClassConstants.Bard,
                 CharacterClassConstants.Cleric,
+                CharacterClassConstants.Commoner,
                 CharacterClassConstants.Druid,
+                CharacterClassConstants.Expert,
                 CharacterClassConstants.Fighter,
                 CharacterClassConstants.Monk,
                 CharacterClassConstants.Paladin,
                 CharacterClassConstants.Ranger,
                 CharacterClassConstants.Rogue,
                 CharacterClassConstants.Sorcerer,
+                CharacterClassConstants.Warrior,
                 CharacterClassConstants.Wizard,
-                RaceConstants.BaseRaces.Bugbear,
-                RaceConstants.BaseRaces.Derro,
-                RaceConstants.BaseRaces.Doppelganger,
-                RaceConstants.BaseRaces.Gnoll,
-                RaceConstants.BaseRaces.Lizardfolk,
-                RaceConstants.BaseRaces.Ogre,
-                RaceConstants.BaseRaces.OgreMage,
-                RaceConstants.BaseRaces.MindFlayer,
-                RaceConstants.BaseRaces.Minotaur,
-                RaceConstants.BaseRaces.Troglodyte,
-                CharacterClassConstants.Adept,
-                CharacterClassConstants.Aristocrat,
-                CharacterClassConstants.Commoner,
-                CharacterClassConstants.Expert,
-                CharacterClassConstants.Warrior
             };
+
+            var baseRaceGroups = CollectionsMapper.Map(TableNameConstants.Set.Collection.BaseRaceGroups);
+            var allBaseRaces = baseRaceGroups[GroupConstants.All];
+            names = names.Union(allBaseRaces).ToArray();
 
             AssertCollectionNames(names);
         }
@@ -179,6 +173,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
             SkillConstants.KnowledgeReligion,
             SkillConstants.KnowledgeThePlanes,
             SkillConstants.Spellcraft)]
+        [TestCase(RaceConstants.BaseRaces.Aasimar)]
         [TestCase(RaceConstants.BaseRaces.Bugbear,
             SkillConstants.Climb,
             SkillConstants.Hide,
@@ -186,6 +181,21 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
             SkillConstants.MoveSilently,
             SkillConstants.Search,
             SkillConstants.Spot)]
+        [TestCase(RaceConstants.BaseRaces.Centaur,
+            SkillConstants.Listen,
+            SkillConstants.MoveSilently,
+            SkillConstants.Spot,
+            SkillConstants.Survival)]
+        [TestCase(RaceConstants.BaseRaces.CloudGiant,
+            SkillConstants.Climb,
+            SkillConstants.Diplomacy,
+            SkillConstants.Intimidate,
+            SkillConstants.Listen,
+            SkillConstants.Perform,
+            SkillConstants.SenseMotive,
+            SkillConstants.Spot)]
+        [TestCase(RaceConstants.BaseRaces.DeepDwarf)]
+        [TestCase(RaceConstants.BaseRaces.DeepHalfling)]
         [TestCase(RaceConstants.BaseRaces.Derro,
             SkillConstants.Bluff,
             SkillConstants.Hide,
@@ -199,9 +209,57 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
             SkillConstants.Listen,
             SkillConstants.SenseMotive,
             SkillConstants.Spot)]
+        [TestCase(RaceConstants.BaseRaces.Drow)]
+        [TestCase(RaceConstants.BaseRaces.DuergarDwarf)]
+        [TestCase(RaceConstants.BaseRaces.FireGiant,
+            SkillConstants.Climb,
+            SkillConstants.Intimidate,
+            SkillConstants.Jump,
+            SkillConstants.Spot)]
+        [TestCase(RaceConstants.BaseRaces.ForestGnome)]
+        [TestCase(RaceConstants.BaseRaces.FrostGiant,
+            SkillConstants.Climb,
+            SkillConstants.Intimidate,
+            SkillConstants.Jump,
+            SkillConstants.Spot)]
         [TestCase(RaceConstants.BaseRaces.Gnoll,
             SkillConstants.Listen,
             SkillConstants.Spot)]
+        [TestCase(RaceConstants.BaseRaces.Goblin)]
+        [TestCase(RaceConstants.BaseRaces.GrayElf)]
+        [TestCase(RaceConstants.BaseRaces.Grimlock,
+            SkillConstants.Climb,
+            SkillConstants.Hide,
+            SkillConstants.Listen,
+            SkillConstants.Spot)]
+        [TestCase(RaceConstants.BaseRaces.HalfElf)]
+        [TestCase(RaceConstants.BaseRaces.HalfOrc)]
+        [TestCase(RaceConstants.BaseRaces.Harpy,
+            SkillConstants.Bluff,
+            SkillConstants.Intimidate,
+            SkillConstants.Listen,
+            SkillConstants.Perform,
+            SkillConstants.Spot)]
+        [TestCase(RaceConstants.BaseRaces.HighElf)]
+        [TestCase(RaceConstants.BaseRaces.HillDwarf)]
+        [TestCase(RaceConstants.BaseRaces.HillGiant,
+            SkillConstants.Climb,
+            SkillConstants.Jump,
+            SkillConstants.Listen,
+            SkillConstants.Spot)]
+        [TestCase(RaceConstants.BaseRaces.Hobgoblin)]
+        [TestCase(RaceConstants.BaseRaces.Human)]
+        [TestCase(RaceConstants.BaseRaces.Janni,
+            SkillConstants.Appraise,
+            SkillConstants.Concentration,
+            SkillConstants.EscapeArtist,
+            SkillConstants.Listen,
+            SkillConstants.MoveSilently,
+            SkillConstants.Ride,
+            SkillConstants.SenseMotive,
+            SkillConstants.Spot)]
+        [TestCase(RaceConstants.BaseRaces.Kobold)]
+        [TestCase(RaceConstants.BaseRaces.LightfootHalfling)]
         [TestCase(RaceConstants.BaseRaces.Lizardfolk,
             SkillConstants.Balance,
             SkillConstants.Jump,
@@ -220,6 +278,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
             SkillConstants.Listen,
             SkillConstants.Search,
             SkillConstants.Spot)]
+        [TestCase(RaceConstants.BaseRaces.MountainDwarf)]
         [TestCase(RaceConstants.BaseRaces.Ogre,
             SkillConstants.Climb,
             SkillConstants.Listen,
@@ -229,9 +288,56 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
             SkillConstants.Spot,
             SkillConstants.Spellcraft,
             SkillConstants.Concentration)]
+        [TestCase(RaceConstants.BaseRaces.Orc)]
+        [TestCase(RaceConstants.BaseRaces.Pixie)]
+        [TestCase(RaceConstants.BaseRaces.Rakshasa,
+            SkillConstants.Bluff,
+            SkillConstants.Disguise,
+            SkillConstants.Listen,
+            SkillConstants.MoveSilently,
+            SkillConstants.Perform,
+            SkillConstants.SenseMotive,
+            SkillConstants.Spot)]
+        [TestCase(RaceConstants.BaseRaces.RockGnome)]
+        [TestCase(RaceConstants.BaseRaces.Satyr,
+            SkillConstants.Bluff,
+            SkillConstants.Hide,
+            SkillConstants.KnowledgeNature,
+            SkillConstants.Listen,
+            SkillConstants.MoveSilently,
+            SkillConstants.Perform,
+            SkillConstants.Spot)]
+        [TestCase(RaceConstants.BaseRaces.Scorpionfolk,
+            SkillConstants.Diplomacy,
+            SkillConstants.Intimidate,
+            SkillConstants.Listen,
+            SkillConstants.SenseMotive,
+            SkillConstants.Spot)]
+        [TestCase(RaceConstants.BaseRaces.StoneGiant,
+            SkillConstants.Climb,
+            SkillConstants.Hide,
+            SkillConstants.Listen,
+            SkillConstants.Spot)]
+        [TestCase(RaceConstants.BaseRaces.StormGiant,
+            SkillConstants.Climb,
+            SkillConstants.Concentration,
+            SkillConstants.Diplomacy,
+            SkillConstants.Intimidate,
+            SkillConstants.Jump,
+            SkillConstants.Listen,
+            SkillConstants.Perform,
+            SkillConstants.SenseMotive,
+            SkillConstants.Spot,
+            SkillConstants.Swim)]
+        [TestCase(RaceConstants.BaseRaces.Svirfneblin)]
+        [TestCase(RaceConstants.BaseRaces.TallfellowHalfling)]
+        [TestCase(RaceConstants.BaseRaces.Tiefling)]
         [TestCase(RaceConstants.BaseRaces.Troglodyte,
             SkillConstants.Listen,
             SkillConstants.Hide)]
+        [TestCase(RaceConstants.BaseRaces.Troll)]
+        [TestCase(RaceConstants.BaseRaces.WildElf)]
+        [TestCase(RaceConstants.BaseRaces.WoodElf)]
         [TestCase(CharacterClassConstants.Adept,
             SkillConstants.Concentration,
             SkillConstants.HandleAnimal,
@@ -265,7 +371,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
             SkillConstants.Jump,
             SkillConstants.Ride,
             SkillConstants.Swim)]
-        public override void DistinctCollection(String name, params String[] collection)
+        public override void DistinctCollection(string name, params string[] collection)
         {
             base.DistinctCollection(name, collection);
         }

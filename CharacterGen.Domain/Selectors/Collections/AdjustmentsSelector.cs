@@ -13,7 +13,7 @@ namespace CharacterGen.Domain.Selectors.Collections
             this.collectionsSelector = collectionsSelector;
         }
 
-        public Dictionary<string, int> SelectFrom(string tableName)
+        public Dictionary<string, int> SelectAllFrom(string tableName)
         {
             var collectionTable = collectionsSelector.SelectAllFrom(tableName);
             var adjustmentTable = new Dictionary<string, int>();
@@ -25,6 +25,16 @@ namespace CharacterGen.Domain.Selectors.Collections
             }
 
             return adjustmentTable;
+        }
+
+        public int SelectFrom(string tableName, string name)
+        {
+            var adjustments = SelectAllFrom(tableName);
+
+            if (!adjustments.ContainsKey(name))
+                throw new ArgumentException($"No adjustment in {tableName} exists for {name}");
+
+            return adjustments[name];
         }
     }
 }

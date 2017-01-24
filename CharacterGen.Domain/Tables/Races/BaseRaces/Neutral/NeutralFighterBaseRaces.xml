@@ -1,7 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <percentile>
-  <object><lower>1</lower><content>Deep Dwarf</content><upper>10</upper></object>
+  <object>
+    <lower>1</lower>
+    <content>Deep Dwarf</content>
+    <upper>10</upper>
+  </object>
   <object>
     <lower>11</lower>
     <content>Hill Dwarf</content>
@@ -45,21 +49,21 @@
   <object>
     <lower>59</lower>
     <content>Human</content>
-    <upper>96</upper>
-  </object>
-  <object>
-    <lower>97</lower>
-    <content>Lizardfolk</content>
     <upper>97</upper>
   </object>
   <object>
     <lower>98</lower>
-    <content>Doppelganger</content>
+    <content>Lizardfolk</content>
     <upper>98</upper>
   </object>
-    <object>
-        <lower>99</lower>
-        <content></content>
-        <upper>100</upper>
-    </object>
+  <object>
+    <lower>99</lower>
+    <content>Doppelganger</content>
+    <upper>99</upper>
+  </object>
+  <object>
+    <lower>100</lower>
+    <content>Janni</content>
+    <upper>100</upper>
+  </object>
 </percentile>

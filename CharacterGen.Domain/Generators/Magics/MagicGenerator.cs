@@ -33,12 +33,34 @@ namespace CharacterGen.Domain.Generators.Magics
         {
             var magic = new Magic();
 
-            magic.SpellsPerDay = spellsGenerator.GeneratePerDay(characterClass, stats);
-            magic.KnownSpells = spellsGenerator.GenerateKnown(characterClass, stats);
+            if (characterClass.Name != CharacterClassConstants.Sorcerer || race.BaseRace != RaceConstants.BaseRaces.Rakshasa)
+            {
+                magic = MakeSpells(magic, characterClass, stats);
+            }
 
-            var classesThatPrepareSpells = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.PreparesSpells);
-            if (classesThatPrepareSpells.Contains(characterClass.Name))
-                magic.PreparedSpells = spellsGenerator.GeneratePrepared(characterClass, magic.KnownSpells, magic.SpellsPerDay);
+            if (race.BaseRace == RaceConstants.BaseRaces.Rakshasa && characterClass.Name == CharacterClassConstants.Sorcerer)
+            {
+                var adjustedClass = new CharacterClass();
+                adjustedClass.Name = characterClass.Name;
+                adjustedClass.Level = characterClass.Level + 7;
+                adjustedClass.ProhibitedFields = characterClass.ProhibitedFields;
+                adjustedClass.SpecialistFields = characterClass.SpecialistFields;
+
+                magic = MakeSpells(magic, adjustedClass, stats);
+            }
+            else if (race.BaseRace == RaceConstants.BaseRaces.Rakshasa && characterClass.Name != CharacterClassConstants.Sorcerer)
+            {
+                var adjustedClass = new CharacterClass();
+                adjustedClass.Name = CharacterClassConstants.Sorcerer;
+                adjustedClass.Level = 7;
+
+                var rakshasaMagic = new Magic();
+                rakshasaMagic = MakeSpells(rakshasaMagic, adjustedClass, stats);
+
+                magic.SpellsPerDay = magic.SpellsPerDay.Union(rakshasaMagic.SpellsPerDay);
+                magic.KnownSpells = magic.KnownSpells.Union(rakshasaMagic.KnownSpells);
+                magic.PreparedSpells = magic.PreparedSpells.Union(rakshasaMagic.PreparedSpells);
+            }
 
             magic.Animal = animalGenerator.GenerateFrom(alignment, characterClass, race, feats);
 
@@ -60,10 +82,21 @@ namespace CharacterGen.Domain.Generators.Magics
             return magic;
         }
 
+        private Magic MakeSpells(Magic magic, CharacterClass characterClass, Dictionary<string, Stat> stats)
+        {
+            magic.SpellsPerDay = spellsGenerator.GeneratePerDay(characterClass, stats);
+            magic.KnownSpells = spellsGenerator.GenerateKnown(characterClass, stats);
+
+            var classesThatPrepareSpells = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.PreparesSpells);
+            if (classesThatPrepareSpells.Contains(characterClass.Name))
+                magic.PreparedSpells = spellsGenerator.GeneratePrepared(characterClass, magic.KnownSpells, magic.SpellsPerDay);
+
+            return magic;
+        }
+
         private int GetArcaneSpellFailure(Item item)
         {
-            var arcaneSpellFailures = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.ArcaneSpellFailures);
-            var arcaneSpellFailure = arcaneSpellFailures[item.Name];
+            var arcaneSpellFailure = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.ArcaneSpellFailures, item.Name);
 
             if (item.Traits.Contains(TraitConstants.SpecialMaterials.Mithral))
                 arcaneSpellFailure -= 10;

@@ -22,11 +22,12 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Evil
 
         [TestCase(1, 10, RaceConstants.BaseRaces.HalfElf)]
         [TestCase(11, 20, RaceConstants.BaseRaces.HalfOrc)]
-        [TestCase(21, 90, RaceConstants.BaseRaces.Human)]
-        [TestCase(91, 93, RaceConstants.BaseRaces.Hobgoblin)]
-        [TestCase(94, 94, RaceConstants.BaseRaces.Tiefling)]
-        [TestCase(95, 96, RaceConstants.BaseRaces.OgreMage)]
-        [TestCase(97, 100, EmptyContent)]
+        [TestCase(21, 92, RaceConstants.BaseRaces.Human)]
+        [TestCase(93, 93, RaceConstants.BaseRaces.Scorpionfolk)]
+        [TestCase(94, 96, RaceConstants.BaseRaces.Hobgoblin)]
+        [TestCase(97, 97, RaceConstants.BaseRaces.Tiefling)]
+        [TestCase(98, 99, RaceConstants.BaseRaces.OgreMage)]
+        [TestCase(100, 100, RaceConstants.BaseRaces.FireGiant)]
         public override void Percentile(int lower, int upper, string content)
         {
             base.Percentile(lower, upper, content);

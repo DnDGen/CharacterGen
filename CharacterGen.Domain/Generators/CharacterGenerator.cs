@@ -62,8 +62,7 @@ namespace CharacterGen.Domain.Generators
         {
             VerifyRandomizers(alignmentRandomizer, classNameRandomizer, levelRandomizer, baseRaceRandomizer, metaraceRandomizer);
 
-            var character = GenerateCharacter(alignmentRandomizer, classNameRandomizer, levelRandomizer, baseRaceRandomizer, metaraceRandomizer,
-                statsRandomizer);
+            var character = GenerateCharacter(alignmentRandomizer, classNameRandomizer, levelRandomizer, baseRaceRandomizer, metaraceRandomizer, statsRandomizer);
 
             return character;
         }
@@ -78,14 +77,7 @@ namespace CharacterGen.Domain.Generators
             character.Class = GenerateCharacterClass(classNameRandomizer, levelRandomizer, character.Alignment, baseRaceRandomizer, metaraceRandomizer);
             character.Race = GenerateRace(baseRaceRandomizer, metaraceRandomizer, character.Alignment, character.Class, levelRandomizer);
 
-            if ((levelRandomizer is ISetLevelRandomizer) == false || (levelRandomizer as ISetLevelRandomizer).AllowAdjustments)
-            {
-                var levelAdjustments = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments);
-                character.Class.Level += levelAdjustments[character.Race.BaseRace];
-                character.Class.Level += levelAdjustments[character.Race.Metarace];
-            }
-
-            character.Class.SpecialistFields = characterClassGenerator.RegenerateSpecialistFields(character.Alignment, character.Class, character.Race);
+            character.Class = EditCharacterClass(character.Alignment, character.Class, character.Race, levelRandomizer);
 
             var stats = abilitiesGenerator.GenerateStats(character.Class, character.Race, statsRandomizer);
             var baseAttack = combatGenerator.GenerateBaseAttackWith(character.Class, character.Race, stats);
@@ -94,7 +86,7 @@ namespace CharacterGen.Domain.Generators
             character.Equipment = equipmentGenerator.GenerateWith(character.Ability.Feats, character.Class, character.Race);
 
             var armorCheckPenaltySkills = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.ArmorCheckPenalty);
-            var armorCheckPenalties = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.ArmorCheckPenalties);
+            var armorCheckPenalties = adjustmentsSelector.SelectAllFrom(TableNameConstants.Set.Adjustments.ArmorCheckPenalties);
 
             if (character.Equipment.Armor != null)
             {
@@ -143,11 +135,25 @@ namespace CharacterGen.Domain.Generators
             return character;
         }
 
+        private CharacterClass EditCharacterClass(Alignment alignment, CharacterClass characterClass, Race race, ILevelRandomizer levelRandomizer)
+        {
+            characterClass.LevelAdjustment += adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments, race.BaseRace);
+            characterClass.LevelAdjustment += adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments, race.Metarace);
+
+            if (!(levelRandomizer is ISetLevelRandomizer) || (levelRandomizer as ISetLevelRandomizer).AllowAdjustments)
+            {
+                characterClass.Level -= characterClass.LevelAdjustment;
+            }
+
+            characterClass.SpecialistFields = characterClassGenerator.RegenerateSpecialistFields(alignment, characterClass, race);
+
+            return characterClass;
+        }
+
         private void VerifyRandomizers(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classNameRandomizer,
             ILevelRandomizer levelRandomizer, RaceRandomizer baseRaceRandomizer, RaceRandomizer metaraceRandomizer)
         {
-            var verified = randomizerVerifier.VerifyCompatibility(alignmentRandomizer, classNameRandomizer, levelRandomizer,
-                baseRaceRandomizer, metaraceRandomizer);
+            var verified = randomizerVerifier.VerifyCompatibility(alignmentRandomizer, classNameRandomizer, levelRandomizer, baseRaceRandomizer, metaraceRandomizer);
 
             if (verified == false)
                 throw new IncompatibleRandomizersException();
@@ -156,7 +162,8 @@ namespace CharacterGen.Domain.Generators
         private Alignment GenerateAlignment(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classNameRandomizer,
             ILevelRandomizer levelRandomizer, RaceRandomizer baseRaceRandomizer, RaceRandomizer metaraceRandomizer)
         {
-            var alignment = generator.Generate(() => alignmentGenerator.GenerateWith(alignmentRandomizer),
+            var alignment = generator.Generate(
+                () => alignmentGenerator.GenerateWith(alignmentRandomizer),
                 a => randomizerVerifier.VerifyAlignmentCompatibility(a, classNameRandomizer, levelRandomizer, baseRaceRandomizer, metaraceRandomizer));
 
             if (alignment == null)
@@ -168,7 +175,8 @@ namespace CharacterGen.Domain.Generators
         private CharacterClass GenerateCharacterClass(IClassNameRandomizer classNameRandomizer, ILevelRandomizer levelRandomizer,
             Alignment alignment, RaceRandomizer baseRaceRandomizer, RaceRandomizer metaraceRandomizer)
         {
-            var characterClass = generator.Generate(() => characterClassGenerator.GenerateWith(alignment, levelRandomizer, classNameRandomizer),
+            var characterClass = generator.Generate(
+                () => characterClassGenerator.GenerateWith(alignment, levelRandomizer, classNameRandomizer),
                 c => randomizerVerifier.VerifyCharacterClassCompatibility(alignment, c, levelRandomizer, baseRaceRandomizer, metaraceRandomizer));
 
             if (characterClass == null)
@@ -179,7 +187,8 @@ namespace CharacterGen.Domain.Generators
 
         private Race GenerateRace(RaceRandomizer baseRaceRandomizer, RaceRandomizer metaraceRandomizer, Alignment alignment, CharacterClass characterClass, ILevelRandomizer levelRandomizer)
         {
-            var race = generator.Generate(() => raceGenerator.GenerateWith(alignment, characterClass, baseRaceRandomizer, metaraceRandomizer),
+            var race = generator.Generate(
+                () => raceGenerator.GenerateWith(alignment, characterClass, baseRaceRandomizer, metaraceRandomizer),
                 r => randomizerVerifier.VerifyRaceCompatibility(r, characterClass, levelRandomizer));
 
             if (race == null)

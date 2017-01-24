@@ -1,4 +1,5 @@
-﻿using CharacterGen.CharacterClasses;
+﻿using CharacterGen.Alignments;
+using CharacterGen.CharacterClasses;
 using CharacterGen.Combats;
 using CharacterGen.Domain.Tables;
 using CharacterGen.Magics;
@@ -27,15 +28,15 @@ namespace CharacterGen.Tests.Integration.Tables.CharacterClasses
                 GroupConstants.GoodBaseAttack,
                 GroupConstants.AverageBaseAttack,
                 GroupConstants.PoorBaseAttack,
-                "Lawful Good",
-                "Neutral Good",
-                "Chaotic Good",
-                "Lawful Neutral",
-                "True Neutral",
-                "Chaotic Neutral",
-                "Lawful Evil",
-                "Neutral Evil",
-                "Chaotic Evil",
+                AlignmentConstants.LawfulGood,
+                AlignmentConstants.NeutralGood,
+                AlignmentConstants.ChaoticGood,
+                AlignmentConstants.LawfulNeutral,
+                AlignmentConstants.TrueNeutral,
+                AlignmentConstants.ChaoticNeutral,
+                AlignmentConstants.LawfulEvil,
+                AlignmentConstants.NeutralEvil,
+                AlignmentConstants.ChaoticEvil,
                 SavingThrowConstants.Fortitude,
                 SavingThrowConstants.Reflex,
                 SavingThrowConstants.Will,
@@ -46,7 +47,8 @@ namespace CharacterGen.Tests.Integration.Tables.CharacterClasses
                 GroupConstants.Players,
                 GroupConstants.NPCs,
                 GroupConstants.PreparesSpells,
-                SpellConstants.Sources.Divine
+                SpellConstants.Sources.Divine,
+                GroupConstants.All,
             };
 
             AssertCollectionNames(names);
@@ -101,7 +103,7 @@ namespace CharacterGen.Tests.Integration.Tables.CharacterClasses
             CharacterClassConstants.Wizard,
             CharacterClassConstants.Adept,
             CharacterClassConstants.Commoner)]
-        [TestCase("Lawful Good",
+        [TestCase(AlignmentConstants.LawfulGood,
             CharacterClassConstants.Cleric,
             CharacterClassConstants.Fighter,
             CharacterClassConstants.Monk,
@@ -115,7 +117,7 @@ namespace CharacterGen.Tests.Integration.Tables.CharacterClasses
             CharacterClassConstants.Commoner,
             CharacterClassConstants.Expert,
             CharacterClassConstants.Warrior)]
-        [TestCase("Neutral Good",
+        [TestCase(AlignmentConstants.NeutralGood,
             CharacterClassConstants.Cleric,
             CharacterClassConstants.Fighter,
             CharacterClassConstants.Barbarian,
@@ -130,7 +132,7 @@ namespace CharacterGen.Tests.Integration.Tables.CharacterClasses
             CharacterClassConstants.Commoner,
             CharacterClassConstants.Expert,
             CharacterClassConstants.Warrior)]
-        [TestCase("Chaotic Good",
+        [TestCase(AlignmentConstants.ChaoticGood,
             CharacterClassConstants.Cleric,
             CharacterClassConstants.Fighter,
             CharacterClassConstants.Barbarian,
@@ -144,7 +146,7 @@ namespace CharacterGen.Tests.Integration.Tables.CharacterClasses
             CharacterClassConstants.Commoner,
             CharacterClassConstants.Expert,
             CharacterClassConstants.Warrior)]
-        [TestCase("Lawful Neutral",
+        [TestCase(AlignmentConstants.LawfulNeutral,
             CharacterClassConstants.Cleric,
             CharacterClassConstants.Fighter,
             CharacterClassConstants.Monk,
@@ -158,7 +160,7 @@ namespace CharacterGen.Tests.Integration.Tables.CharacterClasses
             CharacterClassConstants.Commoner,
             CharacterClassConstants.Expert,
             CharacterClassConstants.Warrior)]
-        [TestCase("True Neutral",
+        [TestCase(AlignmentConstants.TrueNeutral,
             CharacterClassConstants.Cleric,
             CharacterClassConstants.Fighter,
             CharacterClassConstants.Barbarian,
@@ -173,7 +175,7 @@ namespace CharacterGen.Tests.Integration.Tables.CharacterClasses
             CharacterClassConstants.Commoner,
             CharacterClassConstants.Expert,
             CharacterClassConstants.Warrior)]
-        [TestCase("Chaotic Neutral",
+        [TestCase(AlignmentConstants.ChaoticNeutral,
             CharacterClassConstants.Cleric,
             CharacterClassConstants.Fighter,
             CharacterClassConstants.Barbarian,
@@ -188,7 +190,7 @@ namespace CharacterGen.Tests.Integration.Tables.CharacterClasses
             CharacterClassConstants.Commoner,
             CharacterClassConstants.Expert,
             CharacterClassConstants.Warrior)]
-        [TestCase("Lawful Evil",
+        [TestCase(AlignmentConstants.LawfulEvil,
             CharacterClassConstants.Cleric,
             CharacterClassConstants.Fighter,
             CharacterClassConstants.Monk,
@@ -201,7 +203,7 @@ namespace CharacterGen.Tests.Integration.Tables.CharacterClasses
             CharacterClassConstants.Commoner,
             CharacterClassConstants.Expert,
             CharacterClassConstants.Warrior)]
-        [TestCase("Neutral Evil",
+        [TestCase(AlignmentConstants.NeutralEvil,
             CharacterClassConstants.Cleric,
             CharacterClassConstants.Fighter,
             CharacterClassConstants.Barbarian,
@@ -216,7 +218,7 @@ namespace CharacterGen.Tests.Integration.Tables.CharacterClasses
             CharacterClassConstants.Commoner,
             CharacterClassConstants.Expert,
             CharacterClassConstants.Warrior)]
-        [TestCase("Chaotic Evil",
+        [TestCase(AlignmentConstants.ChaoticEvil,
             CharacterClassConstants.Cleric,
             CharacterClassConstants.Fighter,
             CharacterClassConstants.Barbarian,
@@ -311,6 +313,32 @@ namespace CharacterGen.Tests.Integration.Tables.CharacterClasses
         public override void DistinctCollection(string name, params string[] collection)
         {
             base.DistinctCollection(name, collection);
+        }
+
+        [Test]
+        public void AllClasses()
+        {
+            var classes = new[]
+            {
+                CharacterClassConstants.Adept,
+                CharacterClassConstants.Aristocrat,
+                CharacterClassConstants.Barbarian,
+                CharacterClassConstants.Bard,
+                CharacterClassConstants.Cleric,
+                CharacterClassConstants.Commoner,
+                CharacterClassConstants.Druid,
+                CharacterClassConstants.Expert,
+                CharacterClassConstants.Fighter,
+                CharacterClassConstants.Monk,
+                CharacterClassConstants.Paladin,
+                CharacterClassConstants.Ranger,
+                CharacterClassConstants.Rogue,
+                CharacterClassConstants.Sorcerer,
+                CharacterClassConstants.Warrior,
+                CharacterClassConstants.Wizard,
+            };
+
+            base.DistinctCollection(GroupConstants.All, classes);
         }
     }
 }

@@ -28,13 +28,13 @@ namespace CharacterGen.Domain.Generators.Randomizers.Races.Metaraces
 
         public string Randomize(Alignment alignment, CharacterClass characterClass)
         {
-            var results = GetAllPossible(alignment, characterClass);
-            if (results.Any() == false)
+            var allowedMetaraces = GetAllPossible(alignment, characterClass);
+            if (allowedMetaraces.Any() == false)
                 throw new IncompatibleRandomizersException();
 
             var tableName = string.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSMetaraces, alignment.Goodness, characterClass.Name);
 
-            return generator.Generate(() => percentileResultSelector.SelectFrom(tableName), m => results.Contains(m));
+            return generator.Generate(() => percentileResultSelector.SelectFrom(tableName), m => allowedMetaraces.Contains(m));
         }
 
         public IEnumerable<string> GetAllPossible(Alignment alignment, CharacterClass characterClass)
@@ -54,7 +54,7 @@ namespace CharacterGen.Domain.Generators.Randomizers.Races.Metaraces
 
         private bool LevelAdjustmentIsAllowed(string metarace, int level)
         {
-            var adjustments = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments);
+            var adjustments = adjustmentsSelector.SelectAllFrom(TableNameConstants.Set.Adjustments.LevelAdjustments);
             return adjustments[metarace] < level;
         }
 

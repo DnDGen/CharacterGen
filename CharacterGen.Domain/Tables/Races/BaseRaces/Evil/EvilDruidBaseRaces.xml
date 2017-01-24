@@ -21,7 +21,11 @@
     <content>Half-Orc</content>
     <upper>6</upper>
   </object>
-  <object><lower>7</lower><content>Human</content><upper>56</upper></object>
+  <object>
+    <lower>7</lower>
+    <content>Human</content>
+    <upper>56</upper>
+  </object>
   <object>
     <lower>57</lower>
     <content>Lizardfolk</content>
@@ -50,6 +54,11 @@
   <object>
     <lower>76</lower>
     <content>Gnoll</content>
+    <upper>99</upper>
+  </object>
+  <object>
+    <lower>100</lower>
+    <content>Cloud Giant</content>
     <upper>100</upper>
   </object>
 </percentile>

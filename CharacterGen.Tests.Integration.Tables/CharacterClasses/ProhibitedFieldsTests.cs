@@ -1,7 +1,8 @@
-﻿using System;
+﻿using CharacterGen.Alignments;
 using CharacterGen.CharacterClasses;
 using CharacterGen.Domain.Tables;
 using NUnit.Framework;
+using System;
 
 namespace CharacterGen.Tests.Integration.Tables.CharacterClasses
 {
@@ -16,28 +17,28 @@ namespace CharacterGen.Tests.Integration.Tables.CharacterClasses
         [Test]
         public override void CollectionNames()
         {
-            var names = new[] 
+            var names = new[]
             {
                 CharacterClassConstants.Barbarian,
                 CharacterClassConstants.Bard,
                 CharacterClassConstants.Cleric,
                 CharacterClassConstants.Druid,
-                CharacterClassConstants.Fighter, 
+                CharacterClassConstants.Fighter,
                 CharacterClassConstants.Monk,
-                CharacterClassConstants.Paladin, 
-                CharacterClassConstants.Ranger, 
-                CharacterClassConstants.Rogue, 
-                CharacterClassConstants.Sorcerer, 
+                CharacterClassConstants.Paladin,
+                CharacterClassConstants.Ranger,
+                CharacterClassConstants.Rogue,
+                CharacterClassConstants.Sorcerer,
                 CharacterClassConstants.Wizard,
-                "Lawful Good",
-                "Neutral Good",
-                "Chaotic Good",
-                "Lawful Neutral",
-                "True Neutral",
-                "Chaotic Neutral",
-                "Lawful Evil",
-                "Neutral Evil",
-                "Chaotic Evil"
+                AlignmentConstants.LawfulGood,
+                AlignmentConstants.NeutralGood,
+                AlignmentConstants.ChaoticGood,
+                AlignmentConstants.LawfulNeutral,
+                AlignmentConstants.TrueNeutral,
+                AlignmentConstants.ChaoticNeutral,
+                AlignmentConstants.LawfulEvil,
+                AlignmentConstants.NeutralEvil,
+                AlignmentConstants.ChaoticEvil
             };
 
             AssertCollectionNames(names);
@@ -61,37 +62,37 @@ namespace CharacterGen.Tests.Integration.Tables.CharacterClasses
             CharacterClassConstants.Schools.Illusion,
             CharacterClassConstants.Schools.Necromancy,
             CharacterClassConstants.Schools.Transmutation)]
-        [TestCase("Lawful Good",
+        [TestCase(AlignmentConstants.LawfulGood,
             CharacterClassConstants.Domains.Chaos,
             CharacterClassConstants.Domains.Evil)]
-        [TestCase("Neutral Good",
+        [TestCase(AlignmentConstants.NeutralGood,
             CharacterClassConstants.Domains.Chaos,
             CharacterClassConstants.Domains.Law,
             CharacterClassConstants.Domains.Evil)]
-        [TestCase("Chaotic Good",
+        [TestCase(AlignmentConstants.ChaoticGood,
             CharacterClassConstants.Domains.Law,
             CharacterClassConstants.Domains.Evil)]
-        [TestCase("Lawful Neutral",
+        [TestCase(AlignmentConstants.LawfulNeutral,
             CharacterClassConstants.Domains.Chaos,
             CharacterClassConstants.Domains.Good,
             CharacterClassConstants.Domains.Evil)]
-        [TestCase("True Neutral",
+        [TestCase(AlignmentConstants.TrueNeutral,
             CharacterClassConstants.Domains.Chaos,
             CharacterClassConstants.Domains.Law,
             CharacterClassConstants.Domains.Good,
             CharacterClassConstants.Domains.Evil)]
-        [TestCase("Chaotic Neutral",
+        [TestCase(AlignmentConstants.ChaoticNeutral,
             CharacterClassConstants.Domains.Law,
             CharacterClassConstants.Domains.Good,
             CharacterClassConstants.Domains.Evil)]
-        [TestCase("Lawful Evil",
+        [TestCase(AlignmentConstants.LawfulEvil,
             CharacterClassConstants.Domains.Chaos,
             CharacterClassConstants.Domains.Good)]
-        [TestCase("Neutral Evil",
+        [TestCase(AlignmentConstants.NeutralEvil,
             CharacterClassConstants.Domains.Chaos,
             CharacterClassConstants.Domains.Law,
             CharacterClassConstants.Domains.Good)]
-        [TestCase("Chaotic Evil",
+        [TestCase(AlignmentConstants.ChaoticEvil,
             CharacterClassConstants.Domains.Law,
             CharacterClassConstants.Domains.Good)]
         public override void DistinctCollection(String name, params String[] collection)

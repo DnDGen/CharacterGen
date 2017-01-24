@@ -10,7 +10,6 @@ using CharacterGen.Domain.Tables;
 using CharacterGen.Races;
 using Moq;
 using NUnit.Framework;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -817,9 +816,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             race.BaseRace = monsters[0];
             AddFeatSelections(monsterFeatQuantity + 10);
 
-            var monsterHitDice = new Dictionary<string, int>();
-            monsterHitDice[race.BaseRace] = monsterHitDie;
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice)).Returns(monsterHitDice);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice, race.BaseRace)).Returns(monsterHitDie);
 
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             Assert.That(feats.Count(), Is.EqualTo(monsterFeatQuantity + 1));
@@ -831,9 +828,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             race.BaseRace = "not a monster";
             AddFeatSelections(10);
 
-            var monsterHitDice = new Dictionary<String, Int32>();
-            monsterHitDice[race.BaseRace] = 10;
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice)).Returns(monsterHitDice);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice, race.BaseRace)).Returns(10);
 
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             Assert.That(feats.Count(), Is.EqualTo(1));

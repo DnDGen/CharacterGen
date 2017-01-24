@@ -55,8 +55,8 @@ namespace CharacterGen.Domain.Generators.Abilities.Feats
             var monsters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters);
             if (monsters.Contains(race.BaseRace))
             {
-                var monsterHitDice = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice);
-                numberOfAdditionalFeats += monsterHitDice[race.BaseRace] / 3 + 1;
+                var monsterHitDice = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice, race.BaseRace);
+                numberOfAdditionalFeats += monsterHitDice / 3 + 1;
             }
 
             var feats = PopulateFeatsFrom(characterClass, stats, skills, baseAttack, preselectedFeats, availableFeatSelections, numberOfAdditionalFeats);

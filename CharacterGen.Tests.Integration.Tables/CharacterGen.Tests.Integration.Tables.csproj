@@ -49,8 +49,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.framework, Version=3.5.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\NUnit.3.5.0\lib\net45\nunit.framework.dll</HintPath>
+    <Reference Include="nunit.framework, Version=3.6.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.3.6.0\lib\net45\nunit.framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="RollGen, Version=12.1.6162.15224, Culture=neutral, processorArchitecture=MSIL">
@@ -80,6 +80,7 @@
     <Compile Include="Abilities\Feats\Data\CharacterClasses\Classes\AristocratFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\Classes\WarriorFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\Classes\PaladinFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\CharacterClasses\CrossClassFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\Domains\AirFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\Domains\AnimalFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\Classes\BarbarianFeatDataTests.cs" />
@@ -92,6 +93,7 @@
     <Compile Include="Abilities\Feats\Data\CharacterClasses\Domains\EvilFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\Domains\GoodFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\Domains\PlantFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\CharacterClasses\Domains\TrickeryFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\Domains\TravelFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\Domains\WarFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\Domains\WaterFeatDataTests.cs" />
@@ -121,16 +123,33 @@
     <Compile Include="Abilities\Feats\Data\CharacterClasses\Classes\WizardFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\Schools\TransmutationFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\AasimarFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\CloudGiantFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\CentaurFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\BugbearFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\HumanFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\JanniFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\PixieFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\RakshasaFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\StormGiantFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\StoneGiantFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\ScorpionfolkFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\SatyrFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\TrollFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\CrossRaceFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\DeepDwarfFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\DeepHalflingFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\DerroFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\DoppelgangerFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\DrowFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\DuergarDwarfFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\HillGiantFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\FrostGiantFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\FireGiantFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\ForestGnomeFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\GnollFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\GrimlockFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\GrayElfFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\HarpyFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\MindFlayerFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\MinotaurFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\OgreFeatDataTests.cs" />
@@ -154,6 +173,7 @@
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\MountainDwarfFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\OrcFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\Metaraces\HalfFiendFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\Metaraces\NoneFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\Metaraces\LichFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\Metaraces\Species\BlackFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\Metaraces\Species\BlueFeatDataTests.cs" />
@@ -249,7 +269,7 @@
     <Compile Include="Abilities\Skills\AssignPointToCrossClassSkillTests.cs" />
     <Compile Include="Abilities\Skills\ClassSkillsTests.cs" />
     <Compile Include="Abilities\Skills\CrossClassSkillsTests.cs" />
-    <Compile Include="Abilities\Skills\SkillCollectionTests.cs" />
+    <Compile Include="Abilities\Skills\CrossSkillCollectionTests.cs" />
     <Compile Include="Abilities\Skills\SkillDataTests.cs" />
     <Compile Include="Abilities\Skills\SkillGroupsTests.cs" />
     <Compile Include="Abilities\Skills\SkillPointsForClassesTests.cs" />
@@ -288,6 +308,17 @@
     <Compile Include="CharacterClasses\HasSpecialistFields\WizardHasSpecialistFieldsTests.cs" />
     <Compile Include="Combats\SizeModifiersTests.cs" />
     <Compile Include="Items\ArmorCheckPenaltiesTests.cs" />
+    <Compile Include="Items\Powers\CrossPowersTests.cs" />
+    <Compile Include="Items\Powers\Level22PowerTests.cs" />
+    <Compile Include="Items\Powers\Level23PowerTests.cs" />
+    <Compile Include="Items\Powers\Level24PowerTests.cs" />
+    <Compile Include="Items\Powers\Level25PowerTests.cs" />
+    <Compile Include="Items\Powers\Level26PowerTests.cs" />
+    <Compile Include="Items\Powers\Level27PowerTests.cs" />
+    <Compile Include="Items\Powers\Level28PowerTests.cs" />
+    <Compile Include="Items\Powers\Level29PowerTests.cs" />
+    <Compile Include="Items\Powers\Level30PowerTests.cs" />
+    <Compile Include="Items\Powers\Level21PowerTests.cs" />
     <Compile Include="Leadership\AttractCohortOfDifferentAlignmentTests.cs" />
     <Compile Include="Leadership\CohortLevelsTests.cs" />
     <Compile Include="Leadership\KilledCohortTests.cs" />
@@ -664,6 +695,8 @@
     <Compile Include="Magics\Spells\PerDay\Wizards\Level12WizardSpellsPerDayTests.cs" />
     <Compile Include="Magics\Spells\SpellGroupsTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\AasimarAgesTests.cs" />
+    <Compile Include="Races\BaseRaces\Ages\CentaurAgesTests.cs" />
+    <Compile Include="Races\BaseRaces\Ages\CrossBaseRaceAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\BugbearAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\DeepDwarfAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\DeepHalflingAgesTests.cs" />
@@ -672,14 +705,24 @@
     <Compile Include="Races\BaseRaces\Ages\DrowAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\DuergarDwarfAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\ForestGnomeAgesTests.cs" />
+    <Compile Include="Races\BaseRaces\Ages\CloudGiantAgesTests.cs" />
+    <Compile Include="Races\BaseRaces\Ages\FireGiantAgesTests.cs" />
+    <Compile Include="Races\BaseRaces\Ages\FrostGiantAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\GnollAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\GoblinAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\GrayElfAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\HalfElfAgesTests.cs" />
+    <Compile Include="Races\BaseRaces\Ages\HarpyAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\HalfOrcAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\HighElfAgesTests.cs" />
+    <Compile Include="Races\BaseRaces\Ages\StoneGiantAgesTests.cs" />
+    <Compile Include="Races\BaseRaces\Ages\StormGiantAgesTests.cs" />
+    <Compile Include="Races\BaseRaces\Ages\HillGiantAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\HillDwarfAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\HobgoblinAgesTests.cs" />
+    <Compile Include="Races\BaseRaces\Ages\GrimlockAgesTests.cs" />
+    <Compile Include="Races\BaseRaces\Ages\RakshasaAgesTests.cs" />
+    <Compile Include="Races\BaseRaces\Ages\JanniAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\KoboldAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\LightfootHalflingAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\LizardfolkAgesTests.cs" />
@@ -688,15 +731,19 @@
     <Compile Include="Races\BaseRaces\Ages\MountainDwarfAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\OgreAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\OgreMageAgesTests.cs" />
+    <Compile Include="Races\BaseRaces\Ages\PixieAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\OrcAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\RockGnomeAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\Rolls\IntuitiveAgeRollsTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\Rolls\MaximumAgeRollsTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\Rolls\SelfTaughtAgeRollsTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\Rolls\TrainedAgeRollsTests.cs" />
+    <Compile Include="Races\BaseRaces\Ages\ScorpionfolkAgesTests.cs" />
+    <Compile Include="Races\BaseRaces\Ages\SatyrAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\SvirfneblinAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\TallfellowHalflingAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\TieflingAgesTests.cs" />
+    <Compile Include="Races\BaseRaces\Ages\TrollAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\TroglodyteAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\WildElfAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\WoodElfAgesTests.cs" />
@@ -713,6 +760,7 @@
     <Compile Include="Races\BaseRaces\Heights\FemaleHeightsTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\HumanAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Heights\MaleHeightsTests.cs" />
+    <Compile Include="Races\BaseRaces\AerialSpeedsTests.cs" />
     <Compile Include="Races\BaseRaces\Neutral\NeutralAristocratBaseRacesTests.cs" />
     <Compile Include="Races\BaseRaces\Neutral\NeutralCommonerBaseRacesTests.cs" />
     <Compile Include="Races\BaseRaces\Neutral\NeutralAdeptBaseRacesTests.cs" />
@@ -721,6 +769,7 @@
     <Compile Include="Races\BaseRaces\Weights\FemaleWeightsTests.cs" />
     <Compile Include="Races\BaseRaces\Weights\WeightRollsTests.cs" />
     <Compile Include="Races\BaseRaces\Weights\MaleWeightsTests.cs" />
+    <Compile Include="Races\ChallengeRatingsTests.cs" />
     <Compile Include="Races\LevelAdjustmentsTests.cs" />
     <Compile Include="CharacterClasses\NeutralCharacterClassesTests.cs" />
     <Compile Include="CharacterClasses\ProhibitedFieldQuantitiesTests.cs" />

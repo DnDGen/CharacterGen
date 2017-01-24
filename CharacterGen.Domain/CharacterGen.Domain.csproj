@@ -2678,6 +2678,143 @@
   <ItemGroup>
     <EmbeddedResource Include="Tables\Combats\SizeModifiers.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Races\BaseRaces\Ages\Frost GiantAges.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Races\BaseRaces\Ages\Cloud GiantAges.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Races\BaseRaces\Ages\Fire GiantAges.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Races\BaseRaces\AerialSpeeds.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Races\BaseRaces\Ages\CentaurAges.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Races\BaseRaces\Ages\GrimlockAges.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Races\BaseRaces\Ages\HarpyAges.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Abilities\Feats\Data\Racial\BaseRaces\CentaurFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Races\BaseRaces\Ages\Hill GiantAges.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Races\BaseRaces\Ages\JanniAges.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Abilities\Feats\Data\Racial\BaseRaces\Cloud GiantFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Races\BaseRaces\Ages\PixieAges.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Abilities\Feats\Data\Racial\BaseRaces\Fire GiantFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Races\BaseRaces\Ages\RakshasaAges.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Abilities\Feats\Data\Racial\BaseRaces\Frost GiantFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Races\BaseRaces\Ages\SatyrAges.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Abilities\Feats\Data\Racial\BaseRaces\GrimlockFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Races\BaseRaces\Ages\ScorpionfolkAges.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Races\BaseRaces\Ages\Storm GiantAges.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Races\BaseRaces\Ages\Stone GiantAges.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Races\BaseRaces\Ages\TrollAges.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Abilities\Feats\Data\Racial\BaseRaces\HarpyFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Abilities\Feats\Data\Racial\BaseRaces\Hill GiantFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Abilities\Feats\Data\Racial\BaseRaces\HumanFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Abilities\Feats\Data\CharacterClasses\Domains\TrickeryFeatData.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Abilities\Feats\Data\Racial\BaseRaces\JanniFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Abilities\Feats\Data\Racial\Metaraces\FeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Abilities\Feats\Data\Racial\BaseRaces\PixieFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Abilities\Feats\Data\Racial\BaseRaces\RakshasaFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Abilities\Feats\Data\Racial\BaseRaces\SatyrFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Abilities\Feats\Data\Racial\BaseRaces\ScorpionfolkFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Abilities\Feats\Data\Racial\BaseRaces\TrollFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Abilities\Feats\Data\Racial\BaseRaces\Storm GiantFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Abilities\Feats\Data\Racial\BaseRaces\Stone GiantFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Races\ChallengeRatings.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Items\Powers\Level30Power.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Items\Powers\Level22Power.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Items\Powers\Level23Power.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Items\Powers\Level24Power.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Items\Powers\Level25Power.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Items\Powers\Level26Power.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Items\Powers\Level27Power.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Items\Powers\Level28Power.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Items\Powers\Level29Power.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Items\Powers\Level21Power.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

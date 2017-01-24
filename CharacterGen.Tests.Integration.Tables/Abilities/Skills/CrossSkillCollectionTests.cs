@@ -11,7 +11,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
 {
     [TestFixture]
     [Table]
-    public class SkillCollectionTests : IntegrationTests
+    public class CrossSkillCollectionTests : IntegrationTests
     {
         [Inject]
         internal CollectionsMapper Mapper { get; set; }

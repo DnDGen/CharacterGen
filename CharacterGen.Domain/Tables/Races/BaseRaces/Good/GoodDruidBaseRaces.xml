@@ -1,8 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <percentile>
-  <object><lower>1</lower><content>Gray Elf</content><upper>1</upper></object>
-  <object><lower>2</lower><content>High Elf</content><upper>11</upper></object>
+  <object>
+    <lower>1</lower>
+    <content>Gray Elf</content>
+    <upper>1</upper>
+  </object>
+  <object>
+    <lower>2</lower>
+    <content>High Elf</content>
+    <upper>11</upper>
+  </object>
   <object>
     <lower>12</lower>
     <content>Wild Elf</content>
@@ -23,14 +31,44 @@
     <content>Rock Gnome</content>
     <upper>37</upper>
   </object>
-  <object><lower>38</lower><content>Half-Elf</content><upper>46</upper></object>
-  <object><lower>47</lower><content>Lightfoot Halfling</content><upper>47</upper></object>
-  <object><lower>48</lower><content>Tallfellow Halfling</content><upper>48</upper></object>
-  <object><lower>49</lower><content>Half-Orc</content><upper>49</upper></object>
-  <object><lower>50</lower><content>Human</content><upper>99</upper></object>
-    <object>
-        <lower>100</lower>
-        <content></content>
-        <upper>100</upper>
-    </object>
+  <object>
+    <lower>38</lower>
+    <content>Half-Elf</content>
+    <upper>46</upper>
+  </object>
+  <object>
+    <lower>47</lower>
+    <content>Lightfoot Halfling</content>
+    <upper>47</upper>
+  </object>
+  <object>
+    <lower>48</lower>
+    <content>Tallfellow Halfling</content>
+    <upper>48</upper>
+  </object>
+  <object>
+    <lower>49</lower>
+    <content>Half-Orc</content>
+    <upper>49</upper>
+  </object>
+  <object>
+    <lower>50</lower>
+    <content>Human</content>
+    <upper>97</upper>
+  </object>
+  <object>
+    <lower>98</lower>
+    <content>Pixie</content>
+    <upper>98</upper>
+  </object>
+  <object>
+    <lower>99</lower>
+    <content>Cloud Giant</content>
+    <upper>99</upper>
+  </object>
+  <object>
+    <lower>100</lower>
+    <content>Centaur</content>
+    <upper>100</upper>
+  </object>
 </percentile>

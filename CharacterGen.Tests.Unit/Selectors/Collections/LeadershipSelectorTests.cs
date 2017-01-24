@@ -55,8 +55,8 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
             followerLevels[string.Format(TableNameConstants.Formattable.Adjustments.LevelXFollowerQuantities, 6)]["3"] = 0;
             followerLevels[string.Format(TableNameConstants.Formattable.Adjustments.LevelXFollowerQuantities, 6)]["4"] = 1;
 
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(It.IsAny<string>())).Returns((string s) => followerLevels[s]);
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.CohortLevels)).Returns(cohortLevels);
+            mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(It.IsAny<string>())).Returns((string s) => followerLevels[s]);
+            mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(TableNameConstants.Set.Adjustments.CohortLevels)).Returns(cohortLevels);
         }
 
         [TestCase(2, 1)]

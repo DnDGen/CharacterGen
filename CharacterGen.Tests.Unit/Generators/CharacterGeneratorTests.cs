@@ -34,7 +34,7 @@ namespace CharacterGen.Tests.Unit.Generators
     public class CharacterGeneratorTests
     {
         private const string BaseRace = "baserace";
-        private const string BaseRaceMinusOne = "baserace-1";
+        private const string BaseRacePlusOne = "baserace+1";
         private const string Metarace = "metarace";
 
         private Mock<IAlignmentGenerator> mockAlignmentGenerator;
@@ -83,10 +83,10 @@ namespace CharacterGen.Tests.Unit.Generators
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
 
             levelAdjustments[BaseRace] = 0;
-            levelAdjustments[BaseRaceMinusOne] = -1;
+            levelAdjustments[BaseRacePlusOne] = 1;
             levelAdjustments[RaceConstants.Metaraces.None] = 0;
-            levelAdjustments[Metarace] = -1;
-            mockAdjustmentsSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments)).Returns(levelAdjustments);
+            levelAdjustments[Metarace] = 1;
+            mockAdjustmentsSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments, It.IsAny<string>())).Returns((string table, string name) => levelAdjustments[name]);
 
             mockRandomizerVerifier.Setup(v => v.VerifyCompatibility(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(true);
             mockRandomizerVerifier.Setup(v => v.VerifyCompatibility(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(true);
@@ -152,12 +152,9 @@ namespace CharacterGen.Tests.Unit.Generators
 
             mockAlignmentGenerator.Setup(g => g.GenerateWith(mockAlignmentRandomizer.Object)).Returns(alignment);
 
-            mockCharacterClassGenerator.Setup(g => g.GenerateWith(alignment, mockLevelRandomizer.Object,
-                mockClassNameRandomizer.Object)).Returns(characterClass);
-            mockCharacterClassGenerator.Setup(g => g.GenerateWith(alignment, mockSetLevelRandomizer.Object,
-                mockClassNameRandomizer.Object)).Returns(characterClass);
-            mockRaceGenerator.Setup(g => g.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object,
-                mockMetaraceRandomizer.Object)).Returns(race);
+            mockCharacterClassGenerator.Setup(g => g.GenerateWith(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object)).Returns(characterClass);
+            mockCharacterClassGenerator.Setup(g => g.GenerateWith(alignment, mockSetLevelRandomizer.Object, mockClassNameRandomizer.Object)).Returns(characterClass);
+            mockRaceGenerator.Setup(g => g.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(race);
             mockAbilitiesGenerator.Setup(g => g.GenerateStats(characterClass, race, mockStatsRandomizer.Object)).Returns(ability.Stats);
             mockAbilitiesGenerator.Setup(g => g.GenerateWith(characterClass, race, ability.Stats, baseAttack)).Returns(ability);
             mockTreasureGenerator.Setup(g => g.GenerateWith(ability.Feats, characterClass, race)).Returns(equipment);
@@ -177,15 +174,27 @@ namespace CharacterGen.Tests.Unit.Generators
 
         private Character GenerateCharacter()
         {
-            return characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object,
-                mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
+            return characterGenerator.GenerateWith(
+                mockAlignmentRandomizer.Object,
+                mockClassNameRandomizer.Object,
+                mockLevelRandomizer.Object,
+                mockBaseRaceRandomizer.Object,
+                mockMetaraceRandomizer.Object,
+                mockStatsRandomizer.Object);
         }
 
         [Test]
         public void IncompatibleAlignmentIsRegenerated()
         {
-            mockRandomizerVerifier.SetupSequence(v => v.VerifyAlignmentCompatibility(It.IsAny<Alignment>(), mockClassNameRandomizer.Object,
-                mockLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(false).Returns(true);
+            mockRandomizerVerifier
+                .SetupSequence(v => v.VerifyAlignmentCompatibility(
+                    It.IsAny<Alignment>(),
+                    mockClassNameRandomizer.Object,
+                    mockLevelRandomizer.Object,
+                    mockBaseRaceRandomizer.Object,
+                    mockMetaraceRandomizer.Object))
+                .Returns(false)
+                .Returns(true);
 
             GenerateCharacter();
             mockAlignmentGenerator.Verify(f => f.GenerateWith(mockAlignmentRandomizer.Object), Times.Exactly(2));
@@ -194,8 +203,14 @@ namespace CharacterGen.Tests.Unit.Generators
         [Test]
         public void NullAlignmentIndicatesIncompatibleRandomizers()
         {
-            mockRandomizerVerifier.Setup(v => v.VerifyAlignmentCompatibility(It.IsAny<Alignment>(), mockClassNameRandomizer.Object,
-                mockLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(false);
+            mockRandomizerVerifier
+                .Setup(v => v.VerifyAlignmentCompatibility(
+                    It.IsAny<Alignment>(),
+                    mockClassNameRandomizer.Object,
+                    mockLevelRandomizer.Object,
+                    mockBaseRaceRandomizer.Object,
+                    mockMetaraceRandomizer.Object))
+                .Returns(false);
 
             Assert.That(GenerateCharacter, Throws.InstanceOf<IncompatibleRandomizersException>());
         }
@@ -203,8 +218,15 @@ namespace CharacterGen.Tests.Unit.Generators
         [Test]
         public void IncompatibleCharacterClassIsRegenerated()
         {
-            mockRandomizerVerifier.SetupSequence(v => v.VerifyCharacterClassCompatibility(It.IsAny<Alignment>(), It.IsAny<CharacterClass>(),
-                mockLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(false).Returns(true);
+            mockRandomizerVerifier
+                .SetupSequence(v => v.VerifyCharacterClassCompatibility(
+                    It.IsAny<Alignment>(),
+                    It.IsAny<CharacterClass>(),
+                    mockLevelRandomizer.Object,
+                    mockBaseRaceRandomizer.Object,
+                    mockMetaraceRandomizer.Object
+                )).Returns(false)
+                .Returns(true);
 
             GenerateCharacter();
             mockCharacterClassGenerator.Verify(f => f.GenerateWith(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object), Times.Exactly(2));
@@ -213,8 +235,14 @@ namespace CharacterGen.Tests.Unit.Generators
         [Test]
         public void NullCharacterClassIndicatesIncompatibleRandomizers()
         {
-            mockRandomizerVerifier.Setup(v => v.VerifyCharacterClassCompatibility(It.IsAny<Alignment>(), It.IsAny<CharacterClass>(),
-                mockLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(false);
+            mockRandomizerVerifier
+                .Setup(v => v.VerifyCharacterClassCompatibility(
+                    It.IsAny<Alignment>(),
+                    It.IsAny<CharacterClass>(),
+                    mockLevelRandomizer.Object,
+                    mockBaseRaceRandomizer.Object,
+                    mockMetaraceRandomizer.Object))
+                .Returns(false);
 
             Assert.That(GenerateCharacter, Throws.InstanceOf<IncompatibleRandomizersException>());
         }
@@ -222,8 +250,13 @@ namespace CharacterGen.Tests.Unit.Generators
         [Test]
         public void IncompatibleRaceIsRegenerated()
         {
-            mockRandomizerVerifier.SetupSequence(v => v.VerifyRaceCompatibility(It.IsAny<Race>(), It.IsAny<CharacterClass>(), mockLevelRandomizer.Object))
-                .Returns(false).Returns(true);
+            mockRandomizerVerifier
+                .SetupSequence(v => v.VerifyRaceCompatibility(
+                    It.IsAny<Race>(),
+                    It.IsAny<CharacterClass>(),
+                    mockLevelRandomizer.Object))
+                .Returns(false)
+                .Returns(true);
 
             GenerateCharacter();
             mockRaceGenerator.Verify(f => f.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object), Times.Exactly(2));
@@ -232,7 +265,11 @@ namespace CharacterGen.Tests.Unit.Generators
         [Test]
         public void NullRaceIndicatesIncompatibleRandomizers()
         {
-            mockRandomizerVerifier.Setup(v => v.VerifyRaceCompatibility(It.IsAny<Race>(), It.IsAny<CharacterClass>(), mockLevelRandomizer.Object))
+            mockRandomizerVerifier
+                .Setup(v => v.VerifyRaceCompatibility(
+                    It.IsAny<Race>(),
+                    It.IsAny<CharacterClass>(),
+                    mockLevelRandomizer.Object))
                 .Returns(false);
 
             characterClass.Level = 2;
@@ -244,10 +281,12 @@ namespace CharacterGen.Tests.Unit.Generators
         public void AppliesBaseRaceLevelAdjustment()
         {
             characterClass.Level = 2;
-            race.BaseRace = BaseRaceMinusOne;
+            race.BaseRace = BaseRacePlusOne;
 
             GenerateCharacter();
             Assert.That(characterClass.Level, Is.EqualTo(1));
+            Assert.That(characterClass.LevelAdjustment, Is.EqualTo(1));
+            Assert.That(characterClass.EffectiveLevel, Is.EqualTo(2));
         }
 
         [Test]
@@ -258,17 +297,21 @@ namespace CharacterGen.Tests.Unit.Generators
 
             GenerateCharacter();
             Assert.That(characterClass.Level, Is.EqualTo(1));
+            Assert.That(characterClass.LevelAdjustment, Is.EqualTo(1));
+            Assert.That(characterClass.EffectiveLevel, Is.EqualTo(2));
         }
 
         [Test]
         public void ApplyBaseRaceAndMetaraceLevelAdjustments()
         {
-            race.BaseRace = BaseRaceMinusOne;
+            race.BaseRace = BaseRacePlusOne;
             race.Metarace = Metarace;
             characterClass.Level = 3;
 
             GenerateCharacter();
             Assert.That(characterClass.Level, Is.EqualTo(1));
+            Assert.That(characterClass.LevelAdjustment, Is.EqualTo(2));
+            Assert.That(characterClass.EffectiveLevel, Is.EqualTo(3));
         }
 
         [Test]
@@ -325,24 +368,24 @@ namespace CharacterGen.Tests.Unit.Generators
         }
 
         [Test]
-        public void AdjustSetLevel()
+        public void AdjustLevel()
         {
-            race.BaseRace = BaseRaceMinusOne;
+            race.BaseRace = BaseRacePlusOne;
             race.Metarace = Metarace;
             characterClass.Level = 3;
 
-            mockSetLevelRandomizer.Object.AllowAdjustments = true;
-
-            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object,
+            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object,
                 mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
 
             Assert.That(character.Class.Level, Is.EqualTo(1));
+            Assert.That(character.Class.LevelAdjustment, Is.EqualTo(2));
+            Assert.That(character.Class.EffectiveLevel, Is.EqualTo(3));
         }
 
         [Test]
         public void DoNotAdjustSetLevel()
         {
-            race.BaseRace = BaseRaceMinusOne;
+            race.BaseRace = BaseRacePlusOne;
             race.Metarace = Metarace;
             characterClass.Level = 3;
 
@@ -352,6 +395,43 @@ namespace CharacterGen.Tests.Unit.Generators
                 mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
 
             Assert.That(character.Class.Level, Is.EqualTo(3));
+            Assert.That(character.Class.LevelAdjustment, Is.EqualTo(2));
+            Assert.That(character.Class.EffectiveLevel, Is.EqualTo(5));
+        }
+
+        [Test]
+        public void AdjustSetLevel()
+        {
+            race.BaseRace = BaseRacePlusOne;
+            race.Metarace = Metarace;
+            characterClass.Level = 3;
+
+            mockSetLevelRandomizer.Object.AllowAdjustments = true;
+
+            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object,
+                mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
+
+            Assert.That(character.Class.Level, Is.EqualTo(1));
+            Assert.That(character.Class.LevelAdjustment, Is.EqualTo(2));
+            Assert.That(character.Class.EffectiveLevel, Is.EqualTo(3));
+        }
+
+        [Test]
+        public void AdjustNPCSetLevel()
+        {
+            race.BaseRace = BaseRacePlusOne;
+            race.Metarace = Metarace;
+            characterClass.Level = 3;
+            characterClass.IsNPC = true;
+
+            mockSetLevelRandomizer.Object.AllowAdjustments = true;
+
+            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object,
+                mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
+
+            Assert.That(character.Class.Level, Is.EqualTo(1));
+            Assert.That(character.Class.LevelAdjustment, Is.EqualTo(2));
+            Assert.That(character.Class.EffectiveLevel, Is.EqualTo(1));
         }
 
         [Test]
@@ -367,7 +447,7 @@ namespace CharacterGen.Tests.Unit.Generators
             var armorCheckSkills = new[] { "other skill", "different skill" };
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.ArmorCheckPenalty)).Returns(armorCheckSkills);
 
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.ArmorCheckPenalties)).Returns(armorCheckPenalties);
+            mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(TableNameConstants.Set.Adjustments.ArmorCheckPenalties)).Returns(armorCheckPenalties);
 
             equipment.Armor = new Item { Name = "armor" };
 
@@ -391,7 +471,7 @@ namespace CharacterGen.Tests.Unit.Generators
             var armorCheckSkills = new[] { "other skill", "different skill" };
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.ArmorCheckPenalty)).Returns(armorCheckSkills);
 
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.ArmorCheckPenalties)).Returns(armorCheckPenalties);
+            mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(TableNameConstants.Set.Adjustments.ArmorCheckPenalties)).Returns(armorCheckPenalties);
 
             var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object,
                 mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
@@ -413,7 +493,7 @@ namespace CharacterGen.Tests.Unit.Generators
             var armorCheckSkills = new[] { "other skill", "different skill" };
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.ArmorCheckPenalty)).Returns(armorCheckSkills);
 
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.ArmorCheckPenalties)).Returns(armorCheckPenalties);
+            mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(TableNameConstants.Set.Adjustments.ArmorCheckPenalties)).Returns(armorCheckPenalties);
 
             equipment.OffHand = new Item { Name = "shield" };
             equipment.OffHand.Attributes = new[] { AttributeConstants.Shield };
@@ -438,7 +518,7 @@ namespace CharacterGen.Tests.Unit.Generators
             var armorCheckSkills = new[] { "other skill", "different skill" };
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.ArmorCheckPenalty)).Returns(armorCheckSkills);
 
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.ArmorCheckPenalties)).Returns(armorCheckPenalties);
+            mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(TableNameConstants.Set.Adjustments.ArmorCheckPenalties)).Returns(armorCheckPenalties);
 
             equipment.OffHand = new Item { Name = "shield" };
 
@@ -464,7 +544,7 @@ namespace CharacterGen.Tests.Unit.Generators
             var armorCheckSkills = new[] { "other skill", "different skill" };
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.ArmorCheckPenalty)).Returns(armorCheckSkills);
 
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.ArmorCheckPenalties)).Returns(armorCheckPenalties);
+            mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(TableNameConstants.Set.Adjustments.ArmorCheckPenalties)).Returns(armorCheckPenalties);
 
             equipment.Armor = new Item { Name = "armor" };
             equipment.OffHand = new Item { Name = "shield" };
@@ -492,7 +572,7 @@ namespace CharacterGen.Tests.Unit.Generators
             var armorCheckSkills = new[] { "other skill", "different skill" };
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.ArmorCheckPenalty)).Returns(armorCheckSkills);
 
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.ArmorCheckPenalties)).Returns(armorCheckPenalties);
+            mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(TableNameConstants.Set.Adjustments.ArmorCheckPenalties)).Returns(armorCheckPenalties);
 
             equipment.Armor = new Item { Name = "armor" };
             equipment.Armor.Traits.Add("mithral");
@@ -520,7 +600,7 @@ namespace CharacterGen.Tests.Unit.Generators
             var armorCheckSkills = new[] { "other skill", "different skill" };
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.ArmorCheckPenalty)).Returns(armorCheckSkills);
 
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.ArmorCheckPenalties)).Returns(armorCheckPenalties);
+            mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(TableNameConstants.Set.Adjustments.ArmorCheckPenalties)).Returns(armorCheckPenalties);
 
             equipment.OffHand = new Item { Name = "shield" };
             equipment.OffHand.Attributes = new[] { AttributeConstants.Shield };
@@ -549,7 +629,7 @@ namespace CharacterGen.Tests.Unit.Generators
             var armorCheckSkills = new[] { "other skill", "different skill", SkillConstants.Swim };
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.ArmorCheckPenalty)).Returns(armorCheckSkills);
 
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.ArmorCheckPenalties)).Returns(armorCheckPenalties);
+            mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(TableNameConstants.Set.Adjustments.ArmorCheckPenalties)).Returns(armorCheckPenalties);
 
             equipment.Armor = new Item { Name = "armor" };
             equipment.OffHand = new Item { Name = "shield" };
@@ -581,7 +661,7 @@ namespace CharacterGen.Tests.Unit.Generators
             var armorCheckSkills = new[] { "other skill", "different skill", SkillConstants.Swim };
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.ArmorCheckPenalty)).Returns(armorCheckSkills);
 
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.ArmorCheckPenalties)).Returns(armorCheckPenalties);
+            mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(TableNameConstants.Set.Adjustments.ArmorCheckPenalties)).Returns(armorCheckPenalties);
 
             equipment.Armor = new Item { Name = "armor" };
             equipment.Armor.Traits.Add("mithral");
@@ -610,7 +690,7 @@ namespace CharacterGen.Tests.Unit.Generators
             var armorCheckSkills = new[] { "other skill", "different skill", SkillConstants.Swim };
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.ArmorCheckPenalty)).Returns(armorCheckSkills);
 
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.ArmorCheckPenalties)).Returns(armorCheckPenalties);
+            mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(TableNameConstants.Set.Adjustments.ArmorCheckPenalties)).Returns(armorCheckPenalties);
 
             equipment.Armor = new Item { Name = ArmorConstants.PlateArmorOfTheDeep };
 

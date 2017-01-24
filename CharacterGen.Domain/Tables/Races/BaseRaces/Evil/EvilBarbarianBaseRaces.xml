@@ -34,66 +34,86 @@
   <object>
     <lower>30</lower>
     <content>Human</content>
-    <upper>39</upper>
+    <upper>42</upper>
   </object>
   <object>
-    <lower>40</lower>
-    <content>Lizardfolk</content>
+    <lower>43</lower>
+    <content>Hill Giant</content>
     <upper>44</upper>
   </object>
   <object>
     <lower>45</lower>
+    <content>Lizardfolk</content>
+    <upper>49</upper>
+  </object>
+  <object>
+    <lower>50</lower>
     <content>Goblin</content>
-    <upper>45</upper>
+    <upper>50</upper>
   </object>
   <object>
-    <lower>46</lower>
+    <lower>51</lower>
     <content>Hobgoblin</content>
-    <upper>46</upper>
+    <upper>51</upper>
   </object>
   <object>
-    <lower>47</lower>
+    <lower>52</lower>
     <content>Kobold</content>
-    <upper>47</upper>
+    <upper>52</upper>
   </object>
   <object>
-    <lower>48</lower>
+    <lower>53</lower>
     <content>Orc</content>
-    <upper>77</upper>
-  </object>
-  <object>
-    <lower>78</lower>
-    <content>Tiefling</content>
     <upper>78</upper>
   </object>
   <object>
     <lower>79</lower>
-    <content>Gnoll</content>
+    <content>Troll</content>
+    <upper>79</upper>
+  </object>
+  <object>
+    <lower>80</lower>
+    <content>Cloud Giant</content>
+    <upper>80</upper>
+  </object>
+  <object>
+    <lower>81</lower>
+    <content>Grimlock</content>
+    <upper>82</upper>
+  </object>
+  <object>
+    <lower>83</lower>
+    <content>Tiefling</content>
     <upper>83</upper>
   </object>
   <object>
     <lower>84</lower>
+    <content>Gnoll</content>
+    <upper>88</upper>
+  </object>
+  <object>
+    <lower>89</lower>
     <content>Troglodyte</content>
-    <upper>84</upper>
+    <upper>89</upper>
   </object>
   <object>
-    <lower>85</lower>
+    <lower>90</lower>
     <content>Bugbear</content>
-    <upper>86</upper>
+    <upper>91</upper>
   </object>
   <object>
-    <lower>87</lower>
+    <lower>92</lower>
     <content>Ogre</content>
-    <upper>90</upper>
+    <upper>95</upper>
   </object>
   <object>
-    <lower>91</lower>
+    <lower>96</lower>
     <content>Minotaur</content>
-    <upper>94</upper>
+    <upper>99</upper>
   </object>
   <object>
-    <lower>95</lower>
-    <content></content>
+    <lower>100</lower>
+    <content>Frost Giant</content>
     <upper>100</upper>
   </object>
 </percentile>
