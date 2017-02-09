@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>CharacterGen</id>
-    <version>7.1.0</version>
+    <version>7.3.0</version>
     <title>CharacterGen</title>
     <authors>Karl M. Speer</authors>
     <owners>cidthecoatrack</owners>
@@ -10,7 +10,7 @@
       This generates characters for the Dungeons and Dragons 3.5 system.  One can generate characters at random or within certain parameters.  Characters are equipped.
     </description>
     <releaseNotes>
-      #90, #91
+      #95
     </releaseNotes>
     <summary>
       This generates characters for the Dungeons and Dragons 3.5 system.
@@ -22,7 +22,7 @@
     <licenseUrl>http://opensource.org/licenses/Apache-2.0</licenseUrl>
     <copyright>Copyright 2016</copyright>
     <dependencies>
-      <dependency id="DnDGen.TreasureGen" version="4.1.0" />
+      <dependency id="DnDGen.TreasureGen" version="5.0.0" />
     </dependencies>
     <references></references>
     <tags> npc character equipment treasure generator dice dungeons dragons d20 dnd 3.5 gen </tags>
