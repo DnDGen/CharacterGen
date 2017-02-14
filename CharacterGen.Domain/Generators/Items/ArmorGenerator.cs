@@ -42,7 +42,24 @@ namespace CharacterGen.Domain.Generators.Items
                 return null;
 
             return generator.Generate(() => GenerateArmor(power),
-                a => ArmorIsValid(a, proficientArmors, characterClass, race));
+                a => ArmorIsValid(a, proficientArmors, characterClass, race),
+                () => GenerateDefaultArmor(power, proficientArmors, race));
+        }
+
+        private Item GenerateDefaultArmor(string power, IEnumerable<string> proficientArmors, Race race)
+        {
+            var template = new Item();
+            template.Name = collectionsSelector.SelectRandomFrom(proficientArmors);
+            template.ItemType = ItemTypeConstants.Armor;
+
+            if (power == PowerConstants.Mundane)
+            {
+                template.Traits.Add(race.Size);
+                return mundaneArmorGenerator.Generate(template, true);
+            }
+
+            template.Magic.Bonus = 1;
+            return magicalArmorGenerator.Generate(template, true);
         }
 
         private int GetEffectiveLevel(CharacterClass characterClass)
@@ -61,7 +78,8 @@ namespace CharacterGen.Domain.Generators.Items
                 return null;
 
             return generator.Generate(() => GenerateArmor(power),
-                s => ShieldIsValid(s, proficientShields, characterClass, race));
+                s => ShieldIsValid(s, proficientShields, characterClass, race),
+                () => GenerateDefaultArmor(power, proficientShields, race));
         }
 
         private bool ArmorIsValid(Item armor, IEnumerable<string> proficientArmors, CharacterClass characterClass, Race race)

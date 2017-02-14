@@ -165,9 +165,9 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
             SkillConstants.SleightOfHand,
             SkillConstants.Swim,
             SkillConstants.Tumble)]
-        public override void DistinctCollection(string name, params string[] collection)
+        public void SkillGroup(string name, params string[] skills)
         {
-            base.DistinctCollection(name, collection);
+            base.DistinctCollection(name, skills);
         }
 
         [Test]
@@ -223,7 +223,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
         }
 
         [Test]
-        public void KnowledgeSkills()
+        public void KnowledgeSkillFoci()
         {
             var skills = new[]
             {
@@ -236,10 +236,10 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
                 SkillConstants.KnowledgeNature,
                 SkillConstants.KnowledgeNobilityAndRoyalty,
                 SkillConstants.KnowledgeReligion,
-                SkillConstants.KnowledgeThePlanes
+                SkillConstants.KnowledgeThePlanes,
             };
 
-            base.DistinctCollection(GroupConstants.Knowledge, skills);
+            base.DistinctCollection(SkillConstants.Knowledge, skills);
         }
 
         [Test]

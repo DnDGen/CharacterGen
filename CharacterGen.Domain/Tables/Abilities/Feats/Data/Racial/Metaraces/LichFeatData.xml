@@ -1,31 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <items>
-    <object>
-        <name>Armor Bonus</name>
-        <item>Armor Bonus</item>
-        <item></item>
-        <item>0</item>
-        <item>5</item>
-        <item></item>
-        <item>0</item>
-        <item></item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-    </object>
-    <object>
-      <name>Fear Aura</name>
-      <item>Fear Aura</item>
-      <item></item>
-      <item>0</item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
+  <object>
+    <name>Armor Bonus</name>
+    <item>Armor Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>5</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+  </object>
+  <object>
+    <name>Fear Aura</name>
+    <item>Fear Aura</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Paralyzing Touch</name>
@@ -39,6 +41,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Turn Resistance</name>
@@ -52,20 +55,22 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
-    <object>
-        <name>Immune to EffectCold</name>
-        <item>Immune to Effect</item>
-        <item></item>
-        <item>0</item>
-        <item>0</item>
-        <item>Cold</item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-    </object>
+  <object>
+    <name>Immune to EffectCold</name>
+    <item>Immune to Effect</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Cold</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+  </object>
   <object>
     <name>Immune to EffectElectricity</name>
     <item>Immune to Effect</item>
@@ -78,6 +83,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Immune to EffectPolymorph</name>
@@ -91,6 +97,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Immune to EffectMind</name>
@@ -104,6 +111,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Skill BonusHide</name>
@@ -117,6 +125,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Skill BonusMove Silently</name>
@@ -130,6 +139,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Skill BonusSearch</name>
@@ -143,6 +153,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Skill BonusSense Motive</name>
@@ -156,6 +167,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Damage Reduction</name>
@@ -169,6 +181,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Skill BonusSpot</name>
@@ -182,6 +195,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Skill BonusListen</name>
@@ -195,5 +209,6 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
 </items>

@@ -123,7 +123,7 @@ namespace CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizards
         [TestCase(SpellConstants.TelekineticSphere, 8)]
         [TestCase(SpellConstants.CrushingHand, 9)]
         [TestCase(SpellConstants.MeteorSwarm, 9)]
-        public override void Adjustment(string name, int adjustment)
+        public void SpellLevel(string name, int adjustment)
         {
             base.Adjustment(name, adjustment);
         }

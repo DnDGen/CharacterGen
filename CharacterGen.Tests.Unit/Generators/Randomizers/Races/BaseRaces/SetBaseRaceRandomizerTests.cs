@@ -20,7 +20,6 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         private Alignment alignment;
         private Mock<ICollectionsSelector> mockCollectionsSelector;
         private List<string> alignmentBaseRaces;
-        private List<string> classBaseRaces;
 
         [SetUp]
         public void Setup()
@@ -30,14 +29,12 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
             characterClass = new CharacterClass();
             alignment = new Alignment();
             alignmentBaseRaces = new List<string>();
-            classBaseRaces = new List<string>();
 
             alignment.Goodness = "goodness";
             alignment.Lawfulness = "lawfulness";
             characterClass.Name = "class name";
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, alignment.Goodness)).Returns(alignmentBaseRaces);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, characterClass.Name)).Returns(classBaseRaces);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, alignment.Full)).Returns(alignmentBaseRaces);
 
         }
 
@@ -53,8 +50,6 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
             randomizer.SetBaseRace = "base race";
             alignmentBaseRaces.Add("other base race");
             alignmentBaseRaces.Add("base race");
-            classBaseRaces.Add("other base race");
-            classBaseRaces.Add("base race");
 
             var baseRace = randomizer.Randomize(alignment, characterClass);
             Assert.That(baseRace, Is.EqualTo("base race"));
@@ -66,8 +61,6 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
             randomizer.SetBaseRace = "base race";
             alignmentBaseRaces.Add("other base race");
             alignmentBaseRaces.Add("base race");
-            classBaseRaces.Add("other base race");
-            classBaseRaces.Add("base race");
 
             var baseRaces = randomizer.GetAllPossible(alignment, characterClass);
             Assert.That(baseRaces, Contains.Item("base race"));
@@ -79,19 +72,6 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         {
             randomizer.SetBaseRace = "base race";
             alignmentBaseRaces.Add("other base race");
-            classBaseRaces.Add("other base race");
-            classBaseRaces.Add("base race");
-
-            Assert.That(() => randomizer.Randomize(alignment, characterClass), Throws.InstanceOf<IncompatibleRandomizersException>());
-        }
-
-        [Test]
-        public void ThrowExceptionIfBaseRaceDoesNotMatchClassName()
-        {
-            randomizer.SetBaseRace = "base race";
-            alignmentBaseRaces.Add("other base race");
-            alignmentBaseRaces.Add("base race");
-            classBaseRaces.Add("other base race");
 
             Assert.That(() => randomizer.Randomize(alignment, characterClass), Throws.InstanceOf<IncompatibleRandomizersException>());
         }
@@ -101,20 +81,6 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         {
             randomizer.SetBaseRace = "base race";
             alignmentBaseRaces.Add("other base race");
-            classBaseRaces.Add("other base race");
-            classBaseRaces.Add("base race");
-
-            var baseRaces = randomizer.GetAllPossible(alignment, characterClass);
-            Assert.That(baseRaces, Is.Empty);
-        }
-
-        [Test]
-        public void ReturnEmptyIfBaseRaceDoesNotMatchClassName()
-        {
-            randomizer.SetBaseRace = "base race";
-            alignmentBaseRaces.Add("other base race");
-            alignmentBaseRaces.Add("base race");
-            classBaseRaces.Add("other base race");
 
             var baseRaces = randomizer.GetAllPossible(alignment, characterClass);
             Assert.That(baseRaces, Is.Empty);

@@ -1,4 +1,5 @@
-﻿using CharacterGen.Abilities.Stats;
+﻿using CharacterGen.Abilities.Feats;
+using CharacterGen.Abilities.Stats;
 using CharacterGen.Domain.Selectors.Selections;
 using CharacterGen.Races;
 using NUnit.Framework;
@@ -12,6 +13,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Selections
         private RacialFeatSelection selection;
         private Race race;
         private Dictionary<string, Stat> stats;
+        private List<Feat> feats;
 
         [SetUp]
         public void Setup()
@@ -19,6 +21,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Selections
             selection = new RacialFeatSelection();
             race = new Race();
             stats = new Dictionary<string, Stat>();
+            feats = new List<Feat>();
 
             stats["stat"] = new Stat("stat");
             stats["stat"].Value = 42;
@@ -35,12 +38,14 @@ namespace CharacterGen.Tests.Unit.Selectors.Selections
             Assert.That(selection.Frequency, Is.Not.Null);
             Assert.That(selection.MaximumHitDieRequirement, Is.EqualTo(0));
             Assert.That(selection.MinimumStats, Is.Empty);
+            Assert.That(selection.RandomFociQuantity, Is.Empty);
+            Assert.That(selection.RequiredFeats, Is.Empty);
         }
 
         [Test]
         public void RequirementsMetIfNoRequirements()
         {
-            var met = selection.RequirementsMet(race, 0, stats);
+            var met = selection.RequirementsMet(race, 0, stats, feats);
             Assert.That(met, Is.True);
         }
 
@@ -50,7 +55,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Selections
             race.Size = "big";
             selection.SizeRequirement = "small";
 
-            var met = selection.RequirementsMet(race, 0, stats);
+            var met = selection.RequirementsMet(race, 0, stats, feats);
             Assert.That(met, Is.False);
         }
 
@@ -59,7 +64,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Selections
         {
             selection.MinimumHitDieRequirement = 3;
 
-            var met = selection.RequirementsMet(race, 2, stats);
+            var met = selection.RequirementsMet(race, 2, stats, feats);
             Assert.That(met, Is.False);
         }
 
@@ -68,14 +73,14 @@ namespace CharacterGen.Tests.Unit.Selectors.Selections
         {
             selection.MaximumHitDieRequirement = 3;
 
-            var met = selection.RequirementsMet(race, 4, stats);
+            var met = selection.RequirementsMet(race, 4, stats, feats);
             Assert.That(met, Is.False);
         }
 
         [Test]
         public void RequirementsMetIfAboveMaximumOfZero()
         {
-            var met = selection.RequirementsMet(race, 4, stats);
+            var met = selection.RequirementsMet(race, 4, stats, feats);
             Assert.That(met, Is.True);
         }
 
@@ -84,7 +89,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Selections
         {
             selection.MinimumHitDieRequirement = 4;
 
-            var met = selection.RequirementsMet(race, 4, stats);
+            var met = selection.RequirementsMet(race, 4, stats, feats);
             Assert.That(met, Is.True);
         }
 
@@ -93,7 +98,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Selections
         {
             selection.MaximumHitDieRequirement = 4;
 
-            var met = selection.RequirementsMet(race, 4, stats);
+            var met = selection.RequirementsMet(race, 4, stats, feats);
             Assert.That(met, Is.True);
         }
 
@@ -102,7 +107,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Selections
         {
             selection.MinimumStats["stat"] = 9266;
 
-            var met = selection.RequirementsMet(race, 4, stats);
+            var met = selection.RequirementsMet(race, 4, stats, feats);
             Assert.That(met, Is.False);
         }
 
@@ -115,8 +120,113 @@ namespace CharacterGen.Tests.Unit.Selectors.Selections
             stats["stat 2"] = new Stat("stat 2");
             stats["stat 2"].Value = 600;
 
-            var met = selection.RequirementsMet(race, 4, stats);
+            var met = selection.RequirementsMet(race, 4, stats, feats);
             Assert.That(met, Is.True);
+        }
+
+        [Test]
+        public void MetIfNoRequiredFeats()
+        {
+            var requirementsMet = selection.RequirementsMet(race, 0, stats, feats);
+            Assert.That(requirementsMet, Is.True);
+        }
+
+        [Test]
+        public void MetWithAllRequiredFeats()
+        {
+            selection.RequiredFeats = new[] { new RequiredFeatSelection { Feat = "feat 1" }, new RequiredFeatSelection { Feat = "feat 2" } };
+            feats.Add(new Feat { Name = "feat 1" });
+            feats.Add(new Feat { Name = "feat 2" });
+
+            var requirementsMet = selection.RequirementsMet(race, 0, stats, feats);
+            Assert.That(requirementsMet, Is.True);
+        }
+
+        [Test]
+        public void NotMetWithSomeRequiredFeats()
+        {
+            selection.RequiredFeats = new[] { new RequiredFeatSelection { Feat = "feat 1" }, new RequiredFeatSelection { Feat = "feat 2" } };
+            feats.Add(new Feat { Name = "feat 1" });
+
+            var requirementsMet = selection.RequirementsMet(race, 0, stats, feats);
+            Assert.That(requirementsMet, Is.False);
+        }
+
+        [Test]
+        public void NotMetWithNoRequiredFeats()
+        {
+            selection.RequiredFeats = new[] { new RequiredFeatSelection { Feat = "feat 1" }, new RequiredFeatSelection { Feat = "feat 2" } };
+
+            var requirementsMet = selection.RequirementsMet(race, 0, stats, feats);
+            Assert.That(requirementsMet, Is.False);
+        }
+
+        [Test]
+        public void MetWithAllRequiredFeatsAndFoci()
+        {
+            selection.RequiredFeats = new[]
+            {
+                new RequiredFeatSelection { Feat = "feat 1", Focus = "focus 1" },
+                new RequiredFeatSelection { Feat = "feat 2", Focus = "focus 2" }
+            };
+
+            feats.Add(new Feat { Name = "feat 1", Foci = new[] { "focus 1", "focus 3" } });
+            feats.Add(new Feat { Name = "feat 2", Foci = new[] { "focus 4", "focus 2" } });
+
+            var requirementsMet = selection.RequirementsMet(race, 0, stats, feats);
+            Assert.That(requirementsMet, Is.True);
+        }
+
+        [Test]
+        public void MetWithExtraRequiredFeatsAndFoci()
+        {
+            selection.RequiredFeats = new[]
+            {
+                new RequiredFeatSelection { Feat = "feat 1", Focus = "focus 1" },
+                new RequiredFeatSelection { Feat = "feat 2", Focus = "focus 2" }
+            };
+
+            feats.Add(new Feat { Name = "feat 1", Foci = new[] { "focus 1", "focus 2" } });
+            feats.Add(new Feat { Name = "feat 2", Foci = new[] { "focus 2", "focus 1", "focus 3" } });
+            feats.Add(new Feat { Name = "feat 3" });
+            feats.Add(new Feat { Name = "feat 4", Foci = new[] { "focus 4" } });
+
+            var requirementsMet = selection.RequirementsMet(race, 0, stats, feats);
+            Assert.That(requirementsMet, Is.True);
+        }
+
+        [Test]
+        public void NotMetWithSomeRequiredFeatsAndFoci()
+        {
+            selection.RequiredFeats = new[]
+            {
+                new RequiredFeatSelection { Feat = "feat 1", Focus = "focus 1" },
+                new RequiredFeatSelection { Feat = "feat 2", Focus = "focus 2" }
+            };
+
+            feats.Add(new Feat { Name = "feat 1", Foci = new[] { "focus 2" } });
+            feats.Add(new Feat { Name = "feat 2", Foci = new[] { "focus 2", "focus 1" } });
+            feats.Add(new Feat { Name = "feat 3", Foci = new[] { "focus 1" } });
+
+            var requirementsMet = selection.RequirementsMet(race, 0, stats, feats);
+            Assert.That(requirementsMet, Is.False);
+        }
+
+        [Test]
+        public void NotMetWithNoRequiredFeatsAndFoci()
+        {
+            selection.RequiredFeats = new[]
+            {
+                new RequiredFeatSelection { Feat = "feat 1", Focus = "focus 1" },
+                new RequiredFeatSelection { Feat = "feat 2", Focus = "focus 2" }
+            };
+
+            feats.Add(new Feat { Name = "feat 1", Foci = new[] { "focus 2" } });
+            feats.Add(new Feat { Name = "feat 2", Foci = new[] { "focus 1" } });
+            feats.Add(new Feat { Name = "feat 3", Foci = new[] { "focus 1", "focus 2" } });
+
+            var requirementsMet = selection.RequirementsMet(race, 0, stats, feats);
+            Assert.That(requirementsMet, Is.False);
         }
 
         [Test]
@@ -129,7 +239,16 @@ namespace CharacterGen.Tests.Unit.Selectors.Selections
             selection.MaximumHitDieRequirement = 5;
             selection.MinimumStats["stat"] = 42;
 
-            var met = selection.RequirementsMet(race, 4, stats);
+            selection.RequiredFeats = new[]
+            {
+                new RequiredFeatSelection { Feat = "feat 1" },
+                new RequiredFeatSelection { Feat = "feat 2", Focus = "focus 2" }
+            };
+
+            feats.Add(new Feat { Name = "feat 1" });
+            feats.Add(new Feat { Name = "feat 2", Foci = new[] { "focus 2" } });
+
+            var met = selection.RequirementsMet(race, 4, stats, feats);
             Assert.That(met, Is.True);
         }
     }

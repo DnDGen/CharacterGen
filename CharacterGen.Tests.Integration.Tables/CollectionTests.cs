@@ -54,7 +54,7 @@ namespace CharacterGen.Tests.Integration.Tables
             AssertCollection(table[name], collection);
         }
 
-        private void AssertCollection(IEnumerable<string> actual, IEnumerable<string> expected)
+        protected void AssertCollection(IEnumerable<string> actual, IEnumerable<string> expected)
         {
             AssertMissingItems(expected, actual);
             AssertExtraItems(expected, actual);

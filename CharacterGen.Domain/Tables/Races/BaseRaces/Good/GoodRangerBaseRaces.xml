@@ -19,6 +19,11 @@
   <object>
     <lower>22</lower>
     <content>Wood Elf</content>
+    <upper>34</upper>
+  </object>
+  <object>
+    <lower>35</lower>
+    <content>Hound Archon</content>
     <upper>36</upper>
   </object>
   <object>

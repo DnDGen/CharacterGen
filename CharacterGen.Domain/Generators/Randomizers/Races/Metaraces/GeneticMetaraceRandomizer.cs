@@ -5,21 +5,16 @@ using System.Linq;
 
 namespace CharacterGen.Domain.Generators.Randomizers.Races.Metaraces
 {
-    internal class GeneticMetaraceRandomizer : BaseForcableMetarace
+    internal class GeneticMetaraceRandomizer : ForcableMetaraceBase
     {
-        private ICollectionsSelector collectionsSelector;
-
-        public GeneticMetaraceRandomizer(IPercentileSelector percentileResultSelector, IAdjustmentsSelector levelAdjustmentSelector,
-            ICollectionsSelector collectionsSelector, Generator generator)
-            : base(percentileResultSelector, levelAdjustmentSelector, generator)
-        {
-            this.collectionsSelector = collectionsSelector;
-        }
+        public GeneticMetaraceRandomizer(IPercentileSelector percentileResultSelector, IAdjustmentsSelector levelAdjustmentSelector, ICollectionsSelector collectionsSelector, Generator generator)
+            : base(percentileResultSelector, levelAdjustmentSelector, generator, collectionsSelector)
+        { }
 
         protected override bool MetaraceIsAllowed(string metarace)
         {
-            var metaraceIds = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Genetic);
-            return metaraceIds.Contains(metarace);
+            var geneticMetaraces = collectionSelector.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Genetic);
+            return geneticMetaraces.Contains(metarace);
         }
     }
 }

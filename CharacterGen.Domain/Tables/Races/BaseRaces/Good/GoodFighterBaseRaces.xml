@@ -9,6 +9,11 @@
   <object>
     <lower>4</lower>
     <content>Hill Dwarf</content>
+    <upper>32</upper>
+  </object>
+  <object>
+    <lower>33</lower>
+    <content>Hound Archon</content>
     <upper>33</upper>
   </object>
   <object>

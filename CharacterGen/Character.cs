@@ -7,6 +7,7 @@ using CharacterGen.Items;
 using CharacterGen.Magics;
 using CharacterGen.Races;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace CharacterGen
@@ -52,6 +53,12 @@ namespace CharacterGen
         {
             get
             {
+                if (specialChallengeRatings.Contains(Race.BaseRace))
+                {
+                    var extra = Class.IsNPC ? 0 : 1;
+                    return Class.Level + extra + Race.ChallengeRating;
+                }
+
                 var divisor = Class.IsNPC ? 2d : 1d;
                 var classChallengeRating = Class.Level / divisor;
 
@@ -64,6 +71,8 @@ namespace CharacterGen
             }
         }
 
+        private readonly IEnumerable<string> specialChallengeRatings;
+
         public Character()
         {
             Alignment = new Alignment();
@@ -74,6 +83,13 @@ namespace CharacterGen
             Ability = new Ability();
             Equipment = new Equipment();
             Magic = new Magic();
+
+            specialChallengeRatings = new[]
+            {
+                RaceConstants.BaseRaces.Drow,
+                RaceConstants.BaseRaces.DuergarDwarf,
+                RaceConstants.BaseRaces.Svirfneblin,
+            };
         }
     }
 }

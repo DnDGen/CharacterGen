@@ -33,11 +33,15 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
         public void GetRacialFeats()
         {
             var racialFeatData = new Dictionary<string, IEnumerable<string>>();
-            racialFeatData["racial feat 1"] = new[] { "racialFeat1", "ginormous", "9266", "0", string.Empty, "0", "never", "600", string.Empty, "0" };
-            racialFeatData["racial feat 2"] = new[] { "racialFeat2", string.Empty, "0", "90210", "focusness", "42", "fortnight", "0", "stat,other stat", "14" };
+            racialFeatData["racial feat 1"] = BuildRacialFeatData("racial Feat 1", string.Empty, 0, string.Empty, 600, 9266, 0, string.Empty, 0, "ginormous");
+            racialFeatData["racial feat 2"] = BuildRacialFeatData("racial Feat 2", "focusness", 42, "fortnight", 0, 0, 90210, "12d34", 14, string.Empty, "stat", "other stat");
 
             var racialFeatTableName = string.Format(TableNameConstants.Formattable.Collection.RACEFeatData, "race");
             mockCollectionsSelector.Setup(s => s.SelectAllFrom(racialFeatTableName)).Returns(racialFeatData);
+
+            var featRequirements = new Dictionary<string, IEnumerable<string>>();
+            featRequirements["racial feat 1"] = new[] { "feat 1", "feat 2/focus" };
+            mockCollectionsSelector.Setup(s => s.SelectAllFrom(TableNameConstants.Set.Collection.RequiredFeats)).Returns(featRequirements);
 
             var racialFeats = featsSelector.SelectRacial("race");
             Assert.That(racialFeats.Count(), Is.EqualTo(2));
@@ -45,17 +49,26 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
             var first = racialFeats.First();
             var last = racialFeats.Last();
 
-            Assert.That(first.Feat, Is.EqualTo("racialFeat1"));
+            Assert.That(first.Feat, Is.EqualTo("racial Feat 1"));
             Assert.That(first.SizeRequirement, Is.EqualTo("ginormous"));
             Assert.That(first.MinimumHitDieRequirement, Is.EqualTo(9266));
             Assert.That(first.Power, Is.EqualTo(0));
             Assert.That(first.FocusType, Is.Empty);
             Assert.That(first.Frequency.Quantity, Is.EqualTo(0));
-            Assert.That(first.Frequency.TimePeriod, Is.EqualTo("never"));
+            Assert.That(first.Frequency.TimePeriod, Is.Empty);
             Assert.That(first.MaximumHitDieRequirement, Is.EqualTo(600));
             Assert.That(first.MinimumStats, Is.Empty);
+            Assert.That(first.RandomFociQuantity, Is.Empty);
 
-            Assert.That(last.Feat, Is.EqualTo("racialFeat2"));
+            var firstRequirement = first.RequiredFeats.First();
+            var lastRequirement = first.RequiredFeats.Last();
+            Assert.That(firstRequirement.Feat, Is.EqualTo("feat 1"));
+            Assert.That(firstRequirement.Focus, Is.Empty);
+            Assert.That(lastRequirement.Feat, Is.EqualTo("feat 2"));
+            Assert.That(lastRequirement.Focus, Is.EqualTo("focus"));
+            Assert.That(first.RequiredFeats.Count(), Is.EqualTo(2));
+
+            Assert.That(last.Feat, Is.EqualTo("racial Feat 2"));
             Assert.That(last.SizeRequirement, Is.Empty);
             Assert.That(last.MinimumHitDieRequirement, Is.EqualTo(0));
             Assert.That(last.Power, Is.EqualTo(90210));
@@ -66,17 +79,44 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
             Assert.That(last.MinimumStats["stat"], Is.EqualTo(14));
             Assert.That(last.MinimumStats["other stat"], Is.EqualTo(14));
             Assert.That(last.MinimumStats.Count, Is.EqualTo(2));
+            Assert.That(last.RandomFociQuantity, Is.EqualTo("12d34"));
+            Assert.That(last.RequiredFeats, Is.Empty);
+        }
+
+        private IEnumerable<string> BuildRacialFeatData(string featName, string focus, int frequencyQuantity, string frequencyTimePeriod, int maxHitDice, int minHitDice, int power, string randomFociQuantity, int requiredStatValue, string size, params string[] requiredStats)
+        {
+            var data = new List<string>(11);
+            while (data.Count < data.Capacity)
+                data.Add(string.Empty);
+
+            data[DataIndexConstants.RacialFeatData.FeatNameIndex] = featName;
+            data[DataIndexConstants.RacialFeatData.FocusIndex] = focus;
+            data[DataIndexConstants.RacialFeatData.FrequencyQuantityIndex] = frequencyQuantity.ToString();
+            data[DataIndexConstants.RacialFeatData.FrequencyTimePeriodIndex] = frequencyTimePeriod;
+            data[DataIndexConstants.RacialFeatData.MaximumHitDiceRequirementIndex] = maxHitDice.ToString();
+            data[DataIndexConstants.RacialFeatData.MinimumHitDiceRequirementIndex] = minHitDice.ToString();
+            data[DataIndexConstants.RacialFeatData.PowerIndex] = power.ToString();
+            data[DataIndexConstants.RacialFeatData.RandomFociQuantity] = randomFociQuantity;
+            data[DataIndexConstants.RacialFeatData.RequiredStatIndex] = string.Join(",", requiredStats);
+            data[DataIndexConstants.RacialFeatData.RequiredStatMinimumValueIndex] = requiredStatValue.ToString();
+            data[DataIndexConstants.RacialFeatData.SizeRequirementIndex] = size;
+
+            return data;
         }
 
         [Test]
-        public void GetDifferentRacialFeatsWithSameId()
+        public void GetDifferentRacialFeatsWithSameName()
         {
             var racialFeatData = new Dictionary<string, IEnumerable<string>>();
-            racialFeatData["racial feat 1"] = new[] { "racialFeat1", "ginormous", "9266", "0", string.Empty, "0", "never", "600", string.Empty, "0" };
-            racialFeatData["racial feat 2"] = new[] { "racialFeat1", string.Empty, "0", "90210", "focusness", "42", "fortnight", "0", "stat,other stat", "14" };
+            racialFeatData["racial feat 1"] = BuildRacialFeatData("racial Feat 1", string.Empty, 0, string.Empty, 600, 9266, 0, string.Empty, 0, "ginormous");
+            racialFeatData["racial feat 2"] = BuildRacialFeatData("racial Feat 1", "focusness", 42, "fortnight", 0, 0, 90210, "12d34", 14, string.Empty, "stat", "other stat");
 
             var racialFeatTableName = string.Format(TableNameConstants.Formattable.Collection.RACEFeatData, "race");
             mockCollectionsSelector.Setup(s => s.SelectAllFrom(racialFeatTableName)).Returns(racialFeatData);
+
+            var featRequirements = new Dictionary<string, IEnumerable<string>>();
+            featRequirements["racial feat 1"] = new[] { "feat 1", "feat 2/focus" };
+            mockCollectionsSelector.Setup(s => s.SelectAllFrom(TableNameConstants.Set.Collection.RequiredFeats)).Returns(featRequirements);
 
             var racialFeats = featsSelector.SelectRacial("race");
             Assert.That(racialFeats.Count(), Is.EqualTo(2));
@@ -84,17 +124,26 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
             var first = racialFeats.First();
             var last = racialFeats.Last();
 
-            Assert.That(first.Feat, Is.EqualTo("racialFeat1"));
+            Assert.That(first.Feat, Is.EqualTo("racial Feat 1"));
             Assert.That(first.SizeRequirement, Is.EqualTo("ginormous"));
             Assert.That(first.MinimumHitDieRequirement, Is.EqualTo(9266));
             Assert.That(first.Power, Is.EqualTo(0));
             Assert.That(first.FocusType, Is.Empty);
             Assert.That(first.Frequency.Quantity, Is.EqualTo(0));
-            Assert.That(first.Frequency.TimePeriod, Is.EqualTo("never"));
+            Assert.That(first.Frequency.TimePeriod, Is.Empty);
             Assert.That(first.MaximumHitDieRequirement, Is.EqualTo(600));
             Assert.That(first.MinimumStats, Is.Empty);
+            Assert.That(first.RandomFociQuantity, Is.Empty);
 
-            Assert.That(last.Feat, Is.EqualTo("racialFeat1"));
+            var firstRequirement = first.RequiredFeats.First();
+            var lastRequirement = first.RequiredFeats.Last();
+            Assert.That(firstRequirement.Feat, Is.EqualTo("feat 1"));
+            Assert.That(firstRequirement.Focus, Is.Empty);
+            Assert.That(lastRequirement.Feat, Is.EqualTo("feat 2"));
+            Assert.That(lastRequirement.Focus, Is.EqualTo("focus"));
+            Assert.That(first.RequiredFeats.Count(), Is.EqualTo(2));
+
+            Assert.That(last.Feat, Is.EqualTo("racial Feat 1"));
             Assert.That(last.SizeRequirement, Is.Empty);
             Assert.That(last.MinimumHitDieRequirement, Is.EqualTo(0));
             Assert.That(last.Power, Is.EqualTo(90210));
@@ -105,14 +154,16 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
             Assert.That(last.MinimumStats["stat"], Is.EqualTo(14));
             Assert.That(last.MinimumStats["other stat"], Is.EqualTo(14));
             Assert.That(last.MinimumStats.Count, Is.EqualTo(2));
+            Assert.That(last.RandomFociQuantity, Is.EqualTo("12d34"));
+            Assert.That(last.RequiredFeats, Is.Empty);
         }
 
         [Test]
         public void GetClassFeats()
         {
             var classFeatData = new Dictionary<string, IEnumerable<string>>();
-            classFeatData["class feat 1"] = new[] { "classFeat1", "1", "focus type A", "0", "3", "Daily", "4", "stat", string.Empty, bool.TrueString };
-            classFeatData["class feat 2"] = new[] { "classFeat2", "5", string.Empty, "9266", "0", "never", "0", string.Empty, "large", bool.FalseString };
+            classFeatData["class feat 1"] = BuildClassFeatData("class Feat 1", "focus type A", 3, "Daily", 4, 1, 0, true, string.Empty, "stat");
+            classFeatData["class feat 2"] = BuildClassFeatData("class Feat 2", string.Empty, 0, string.Empty, 0, 5, 9266, false, "large", string.Empty);
 
             var classFeatTableName = string.Format(TableNameConstants.Formattable.Collection.CLASSFeatData, "class name");
             mockCollectionsSelector.Setup(s => s.SelectAllFrom(classFeatTableName)).Returns(classFeatData);
@@ -127,7 +178,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
             var first = classFeats.First();
             var last = classFeats.Last();
 
-            Assert.That(first.Feat, Is.EqualTo("classFeat1"));
+            Assert.That(first.Feat, Is.EqualTo("class Feat 1"));
             Assert.That(first.FocusType, Is.EqualTo("focus type A"));
             Assert.That(first.MinimumLevel, Is.EqualTo(1));
             Assert.That(first.Power, Is.EqualTo(0));
@@ -146,12 +197,12 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
             Assert.That(lastRequirement.Focus, Is.EqualTo("focus"));
             Assert.That(first.RequiredFeats.Count(), Is.EqualTo(2));
 
-            Assert.That(last.Feat, Is.EqualTo("classFeat2"));
+            Assert.That(last.Feat, Is.EqualTo("class Feat 2"));
             Assert.That(last.FocusType, Is.Empty);
             Assert.That(last.MinimumLevel, Is.EqualTo(5));
             Assert.That(last.Power, Is.EqualTo(9266));
             Assert.That(last.Frequency.Quantity, Is.EqualTo(0));
-            Assert.That(last.Frequency.TimePeriod, Is.EqualTo("never"));
+            Assert.That(last.Frequency.TimePeriod, Is.Empty);
             Assert.That(last.FrequencyQuantityStat, Is.Empty);
             Assert.That(last.MaximumLevel, Is.EqualTo(0));
             Assert.That(last.RequiredFeats, Is.Empty);
@@ -159,12 +210,32 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
             Assert.That(last.AllowFocusOfAll, Is.False);
         }
 
+        private IEnumerable<string> BuildClassFeatData(string featName, string focus, int frequencyQuantity, string frequencyTimePeriod, int maxLevel, int minLevel, int power, bool allowFocusOfAll, string size, string frequencyQuantityStat)
+        {
+            var data = new List<string>(10);
+            while (data.Count < data.Capacity)
+                data.Add(string.Empty);
+
+            data[DataIndexConstants.CharacterClassFeatData.AllowFocusOfAllIndex] = allowFocusOfAll.ToString();
+            data[DataIndexConstants.CharacterClassFeatData.FeatNameIndex] = featName;
+            data[DataIndexConstants.CharacterClassFeatData.FocusTypeIndex] = focus;
+            data[DataIndexConstants.CharacterClassFeatData.FrequencyQuantityIndex] = frequencyQuantity.ToString();
+            data[DataIndexConstants.CharacterClassFeatData.FrequencyQuantityStatIndex] = frequencyQuantityStat;
+            data[DataIndexConstants.CharacterClassFeatData.FrequencyTimePeriodIndex] = frequencyTimePeriod;
+            data[DataIndexConstants.CharacterClassFeatData.MaximumLevelRequirementIndex] = maxLevel.ToString();
+            data[DataIndexConstants.CharacterClassFeatData.MinimumLevelRequirementIndex] = minLevel.ToString();
+            data[DataIndexConstants.CharacterClassFeatData.PowerIndex] = power.ToString();
+            data[DataIndexConstants.CharacterClassFeatData.SizeRequirementIndex] = size;
+
+            return data;
+        }
+
         [Test]
-        public void GetDifferentClassFeatsWithSameId()
+        public void GetDifferentClassFeatsWithSameName()
         {
             var classFeatData = new Dictionary<string, IEnumerable<string>>();
-            classFeatData["class feat 1"] = new[] { "classFeat1", "1", "focus type A", "0", "3", "Daily", "4", "stat", string.Empty, bool.TrueString };
-            classFeatData["class feat 2"] = new[] { "classFeat1", "5", string.Empty, "9266", "0", "never", "0", string.Empty, "large", bool.FalseString };
+            classFeatData["class feat 1"] = BuildClassFeatData("class Feat 1", "focus type A", 3, "Daily", 4, 1, 0, true, string.Empty, "stat");
+            classFeatData["class feat 2"] = BuildClassFeatData("class Feat 1", string.Empty, 0, string.Empty, 0, 5, 9266, false, "large", string.Empty);
 
             var classFeatTableName = string.Format(TableNameConstants.Formattable.Collection.CLASSFeatData, "class name");
             mockCollectionsSelector.Setup(s => s.SelectAllFrom(classFeatTableName)).Returns(classFeatData);
@@ -179,7 +250,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
             var first = classFeats.First();
             var last = classFeats.Last();
 
-            Assert.That(first.Feat, Is.EqualTo("classFeat1"));
+            Assert.That(first.Feat, Is.EqualTo("class Feat 1"));
             Assert.That(first.FocusType, Is.EqualTo("focus type A"));
             Assert.That(first.MinimumLevel, Is.EqualTo(1));
             Assert.That(first.Power, Is.EqualTo(0));
@@ -198,12 +269,12 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
             Assert.That(lastRequirement.Focus, Is.EqualTo("focus"));
             Assert.That(first.RequiredFeats.Count(), Is.EqualTo(2));
 
-            Assert.That(last.Feat, Is.EqualTo("classFeat1"));
+            Assert.That(last.Feat, Is.EqualTo("class Feat 1"));
             Assert.That(last.FocusType, Is.Empty);
             Assert.That(last.MinimumLevel, Is.EqualTo(5));
             Assert.That(last.Power, Is.EqualTo(9266));
             Assert.That(last.Frequency.Quantity, Is.EqualTo(0));
-            Assert.That(last.Frequency.TimePeriod, Is.EqualTo("never"));
+            Assert.That(last.Frequency.TimePeriod, Is.Empty);
             Assert.That(last.FrequencyQuantityStat, Is.Empty);
             Assert.That(last.MaximumLevel, Is.EqualTo(0));
             Assert.That(last.RequiredFeats, Is.Empty);
@@ -214,8 +285,8 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
         [Test]
         public void GetAdditionalFeats()
         {
-            additionalFeatsData["additional feat 1"] = new[] { "9266", string.Empty, "42", "0", string.Empty };
-            additionalFeatsData["additional feat 2"] = new[] { "0", "focus", "0", "9266", "occasionally" };
+            additionalFeatsData["additional feat 1"] = BuildAdditionalFeatData(string.Empty, 0, string.Empty, 9266, 42);
+            additionalFeatsData["additional feat 2"] = BuildAdditionalFeatData("focus", 9266, "occasionally", 0, 0);
 
             var featRequirements = new Dictionary<string, IEnumerable<string>>();
             featRequirements["additional feat 1"] = new[] { "feat 1", "feat 2/focus" };
@@ -287,6 +358,21 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
             Assert.That(last.RequiredStats["stat 2"], Is.EqualTo(16));
             Assert.That(last.RequiredStats.Count, Is.EqualTo(2));
             Assert.That(last.FocusType, Is.EqualTo("focus"));
+        }
+
+        private IEnumerable<string> BuildAdditionalFeatData(string focus, int frequencyQuantity, string frequencyTimePeriod, int baseAttack, int power)
+        {
+            var data = new List<string>(5);
+            while (data.Count < data.Capacity)
+                data.Add(string.Empty);
+
+            data[DataIndexConstants.AdditionalFeatData.BaseAttackRequirementIndex] = baseAttack.ToString();
+            data[DataIndexConstants.AdditionalFeatData.FocusTypeIndex] = focus;
+            data[DataIndexConstants.AdditionalFeatData.FrequencyQuantityIndex] = frequencyQuantity.ToString();
+            data[DataIndexConstants.AdditionalFeatData.FrequencyTimePeriodIndex] = frequencyTimePeriod;
+            data[DataIndexConstants.AdditionalFeatData.PowerIndex] = power.ToString();
+
+            return data;
         }
     }
 }

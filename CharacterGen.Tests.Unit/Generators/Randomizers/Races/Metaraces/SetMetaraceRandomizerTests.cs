@@ -36,7 +36,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
             alignment.Lawfulness = "lawfulness";
             characterClass.Name = "class name";
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, alignment.Goodness)).Returns(alignmentMetaraces);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, alignment.Full)).Returns(alignmentMetaraces);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, characterClass.Name)).Returns(classMetaraces);
         }
 

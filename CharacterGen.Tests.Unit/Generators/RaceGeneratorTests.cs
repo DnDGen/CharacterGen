@@ -49,7 +49,12 @@ namespace CharacterGen.Tests.Unit.Generators
             mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
             mockBooleanPercentileSelector = new Mock<IBooleanPercentileSelector>();
             mockDice = new Mock<Dice>();
-            raceGenerator = new RaceGenerator(mockBooleanPercentileSelector.Object, mockCollectionsSelector.Object, mockAdjustmentsSelector.Object, mockDice.Object);
+            var generator = new IterativeGenerator();
+            raceGenerator = new RaceGenerator(mockBooleanPercentileSelector.Object,
+                mockCollectionsSelector.Object,
+                mockAdjustmentsSelector.Object,
+                mockDice.Object,
+                generator);
 
             mockBaseRaceRandomizer = new Mock<RaceRandomizer>();
             mockMetaraceRandomizer = new Mock<RaceRandomizer>();
@@ -68,7 +73,7 @@ namespace CharacterGen.Tests.Unit.Generators
             femaleWeights = new Dictionary<string, int>();
 
             characterClass.Name = "class name";
-            characterClass.Level = 36;
+            characterClass.Level = 15;
             alignment.Goodness = "goodness";
 
             SetUpTablesForBaseRace(BaseRace);
@@ -80,12 +85,6 @@ namespace CharacterGen.Tests.Unit.Generators
             var mockPartial = new Mock<PartialRoll>();
             mockPartial.Setup(r => r.d(It.IsAny<int>())).Returns(endRoll.Object);
             mockDice.Setup(d => d.Roll(characterClass.Level)).Returns(mockPartial.Object);
-
-            SetUpRoll("42d600", 14);
-            SetUpRoll("420d6000", 24);
-            SetUpRoll("4200d60000", 34);
-            SetUpRoll("10d4", 104);
-            SetUpRoll("92d66", 424);
 
             mockBaseRaceRandomizer.Setup(r => r.Randomize(alignment, characterClass)).Returns(BaseRace);
             mockMetaraceRandomizer.Setup(r => r.Randomize(alignment, characterClass)).Returns(Metarace);
@@ -114,7 +113,9 @@ namespace CharacterGen.Tests.Unit.Generators
         private void SetUpRoll(string roll, int result)
         {
             var mockPartial = new Mock<PartialRoll>();
-            mockPartial.Setup(r => r.AsSum()).Returns(result);
+
+            var count = 0;
+            mockPartial.Setup(r => r.AsSum()).Returns(() => result + count++);
             mockDice.Setup(d => d.Roll(roll)).Returns(mockPartial.Object);
         }
 
@@ -122,21 +123,24 @@ namespace CharacterGen.Tests.Unit.Generators
         {
             var tableName = string.Format(TableNameConstants.Formattable.Collection.CLASSTYPEAgeRolls, CharacterClassConstants.TrainingTypes.Trained);
             mockCollectionsSelector.Setup(s => s.SelectFrom(tableName, baseRace)).Returns(new[] { "4200d60000" });
+            SetUpRoll("4200d60000", 34);
 
             tableName = string.Format(TableNameConstants.Formattable.Collection.CLASSTYPEAgeRolls, CharacterClassConstants.TrainingTypes.SelfTaught);
             mockCollectionsSelector.Setup(s => s.SelectFrom(tableName, baseRace)).Returns(new[] { "420d6000" });
+            SetUpRoll("420d6000", 24);
 
             tableName = string.Format(TableNameConstants.Formattable.Collection.CLASSTYPEAgeRolls, CharacterClassConstants.TrainingTypes.Intuitive);
             mockCollectionsSelector.Setup(s => s.SelectFrom(tableName, baseRace)).Returns(new[] { "42d600" });
+            SetUpRoll("42d600", 14);
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.MaximumAgeRolls, baseRace)).Returns(new[] { "4d26" });
-            SetUpRoll("4d26", 426);
+            SetUpRoll("4d26", 1000);
 
             ages = new Dictionary<string, int>();
             ages[RaceConstants.Ages.Adulthood] = 90210;
-            ages[RaceConstants.Ages.MiddleAge] = 90230;
-            ages[RaceConstants.Ages.Old] = 90240;
-            ages[RaceConstants.Ages.Venerable] = 90250;
+            ages[RaceConstants.Ages.MiddleAge] = 90250;
+            ages[RaceConstants.Ages.Old] = 90300;
+            ages[RaceConstants.Ages.Venerable] = 90350;
 
             maleHeights[baseRace] = 209;
             femaleHeights[baseRace] = 902;
@@ -148,7 +152,11 @@ namespace CharacterGen.Tests.Unit.Generators
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName, It.IsAny<string>())).Returns((string table, string name) => ages[name]);
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.HeightRolls, baseRace)).Returns(new[] { "10d4" });
+            SetUpRoll("10d4", 104);
+
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.WeightRolls, baseRace)).Returns(new[] { "92d66" });
+            SetUpRoll("92d66", 424);
+
             mockCollectionsSelector.Setup(s => s.FindGroupOf(TableNameConstants.Set.Collection.BaseRaceGroups, baseRace, It.IsAny<string[]>())).Returns(() => baseRaceSize);
 
             if (landSpeeds.Any())
@@ -424,92 +432,6 @@ namespace CharacterGen.Tests.Unit.Generators
         }
 
         [Test]
-        public void GetIntuitiveAge()
-        {
-            classType = CharacterClassConstants.TrainingTypes.Intuitive;
-
-            var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
-            Assert.That(race.Age.Years, Is.EqualTo(90229));
-        }
-
-        [Test]
-        public void GetSelfTaughtAge()
-        {
-            classType = CharacterClassConstants.TrainingTypes.SelfTaught;
-
-            var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
-            Assert.That(race.Age.Years, Is.EqualTo(90239));
-        }
-
-        [Test]
-        public void GetTrainedAge()
-        {
-            classType = CharacterClassConstants.TrainingTypes.Trained;
-
-            var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
-            Assert.That(race.Age.Years, Is.EqualTo(90249));
-        }
-
-        [Test]
-        public void GetAdultAge()
-        {
-            classType = CharacterClassConstants.TrainingTypes.Intuitive;
-
-            var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
-            Assert.That(race.Age.Years, Is.EqualTo(90229));
-            Assert.That(race.Age.Stage, Is.EqualTo(RaceConstants.Ages.Adulthood));
-        }
-
-        [Test]
-        public void GetMiddleAge()
-        {
-            classType = CharacterClassConstants.TrainingTypes.SelfTaught;
-
-            var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
-            Assert.That(race.Age.Years, Is.EqualTo(90239));
-            Assert.That(race.Age.Stage, Is.EqualTo(RaceConstants.Ages.MiddleAge));
-        }
-
-        [Test]
-        public void GetOldAge()
-        {
-            classType = CharacterClassConstants.TrainingTypes.Trained;
-            mockDice.Setup(d => d.Roll("420d6000").AsSum()).Returns(34);
-
-            var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
-            Assert.That(race.Age.Years, Is.EqualTo(90249));
-            Assert.That(race.Age.Stage, Is.EqualTo(RaceConstants.Ages.Old));
-        }
-
-        [Test]
-        public void GetVenerableAge()
-        {
-            classType = CharacterClassConstants.TrainingTypes.Trained;
-            mockDice.Setup(d => d.Roll("4200d60000").AsSum()).Returns(44);
-
-            var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
-            Assert.That(race.Age.Years, Is.EqualTo(90259));
-            Assert.That(race.Age.Stage, Is.EqualTo(RaceConstants.Ages.Venerable));
-        }
-
-        [TestCase(RaceConstants.Ages.Adulthood, RaceConstants.Ages.Ageless, RaceConstants.Ages.Ageless, RaceConstants.Ages.Ageless)]
-        [TestCase(RaceConstants.Ages.MiddleAge, 90230, RaceConstants.Ages.Ageless, RaceConstants.Ages.Ageless)]
-        [TestCase(RaceConstants.Ages.Old, 90230, 90240, RaceConstants.Ages.Ageless)]
-        public void GetAgeless(string ageStage, int middleAge, int old, int venerable)
-        {
-            classType = CharacterClassConstants.TrainingTypes.Trained;
-            mockDice.Setup(d => d.Roll("4200d60000").AsSum()).Returns(44);
-
-            ages[RaceConstants.Ages.MiddleAge] = middleAge;
-            ages[RaceConstants.Ages.Old] = old;
-            ages[RaceConstants.Ages.Venerable] = venerable;
-
-            var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
-            Assert.That(race.Age.Years, Is.EqualTo(90259));
-            Assert.That(race.Age.Stage, Is.EqualTo(ageStage));
-        }
-
-        [Test]
         public void GetMaleHeight()
         {
             mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.Male)).Returns(true);
@@ -546,71 +468,229 @@ namespace CharacterGen.Tests.Unit.Generators
         }
 
         [Test]
+        public void GetIntuitiveAge()
+        {
+            classType = CharacterClassConstants.TrainingTypes.Intuitive;
+
+            var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
+            Assert.That(race.Age.Years, Is.EqualTo(90320));
+        }
+
+        [Test]
+        public void GetSelfTaughtAge()
+        {
+            classType = CharacterClassConstants.TrainingTypes.SelfTaught;
+
+            var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
+            Assert.That(race.Age.Years, Is.EqualTo(90376));
+        }
+
+        [Test]
+        public void GetTrainedAge()
+        {
+            classType = CharacterClassConstants.TrainingTypes.Trained;
+
+            var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
+            Assert.That(race.Age.Years, Is.EqualTo(90433));
+        }
+
+        [TestCase(1, 90224)]
+        [TestCase(2, 90229)]
+        [TestCase(3, 90234)]
+        [TestCase(4, 90239)]
+        [TestCase(5, 90245)]
+        [TestCase(6, 90251)]
+        [TestCase(7, 90257)]
+        [TestCase(8, 90264)]
+        [TestCase(9, 90271)]
+        [TestCase(10, 90278)]
+        [TestCase(11, 90286)]
+        [TestCase(12, 90294)]
+        [TestCase(13, 90302)]
+        [TestCase(14, 90311)]
+        [TestCase(15, 90320)]
+        [TestCase(16, 90329)]
+        [TestCase(17, 90339)]
+        [TestCase(18, 90349)]
+        [TestCase(19, 90359)]
+        [TestCase(20, 90370)]
+        public void AgeIncreasesAsCharacterLevelsUp(int level, int age)
+        {
+            characterClass.Level = level;
+            var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
+            Assert.That(race.Age.Years, Is.EqualTo(age));
+        }
+
+        [TestCase(1, 90211)]
+        [TestCase(2, 90212)]
+        [TestCase(3, 90213)]
+        [TestCase(4, 90214)]
+        [TestCase(5, 90215)]
+        [TestCase(6, 90216)]
+        [TestCase(7, 90217)]
+        [TestCase(8, 90218)]
+        [TestCase(9, 90219)]
+        [TestCase(10, 90220)]
+        [TestCase(11, 90221)]
+        [TestCase(12, 90222)]
+        [TestCase(13, 90223)]
+        [TestCase(14, 90224)]
+        [TestCase(15, 90225)]
+        [TestCase(16, 90226)]
+        [TestCase(17, 90227)]
+        [TestCase(18, 90228)]
+        [TestCase(19, 90229)]
+        [TestCase(20, 90230)]
+        public void AgeIncreasesByAtLeastCharacterLevel(int level, int age)
+        {
+            characterClass.Level = level;
+            SetUpRoll("42d600", -9266);
+
+            var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
+            Assert.That(race.Age.Years, Is.EqualTo(age));
+        }
+
+        [Test]
+        public void GetAdultAge()
+        {
+            characterClass.Level = 1;
+
+            var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
+            Assert.That(race.Age.Years, Is.EqualTo(90224));
+            Assert.That(race.Age.Stage, Is.EqualTo(RaceConstants.Ages.Adulthood));
+        }
+
+        [Test]
+        public void GetMiddleAge()
+        {
+            characterClass.Level = 10;
+
+            var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
+            Assert.That(race.Age.Years, Is.EqualTo(90278));
+            Assert.That(race.Age.Stage, Is.EqualTo(RaceConstants.Ages.MiddleAge));
+        }
+
+        [Test]
+        public void GetOldAge()
+        {
+            characterClass.Level = 15;
+
+            var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
+            Assert.That(race.Age.Years, Is.EqualTo(90320));
+            Assert.That(race.Age.Stage, Is.EqualTo(RaceConstants.Ages.Old));
+        }
+
+        [Test]
+        public void GetVenerableAge()
+        {
+            characterClass.Level = 20;
+
+            var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
+            Assert.That(race.Age.Years, Is.EqualTo(90370));
+            Assert.That(race.Age.Stage, Is.EqualTo(RaceConstants.Ages.Venerable));
+        }
+
+        [TestCase(RaceConstants.Ages.Adulthood, RaceConstants.Ages.Ageless, RaceConstants.Ages.Ageless, RaceConstants.Ages.Ageless)]
+        [TestCase(RaceConstants.Ages.MiddleAge, 90250, RaceConstants.Ages.Ageless, RaceConstants.Ages.Ageless)]
+        [TestCase(RaceConstants.Ages.Old, 90250, 90300, RaceConstants.Ages.Ageless)]
+        public void GetAgeless(string ageStage, int middleAge, int old, int venerable)
+        {
+            characterClass.Level = 20;
+
+            ages[RaceConstants.Ages.MiddleAge] = middleAge;
+            ages[RaceConstants.Ages.Old] = old;
+            ages[RaceConstants.Ages.Venerable] = venerable;
+
+            var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
+            Assert.That(race.Age.Years, Is.EqualTo(90370));
+            Assert.That(race.Age.Stage, Is.EqualTo(ageStage));
+        }
+
+        [Test]
         public void GetMaximumAge()
         {
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
-            Assert.That(race.Age.Maximum, Is.EqualTo(90676));
+            Assert.That(race.Age.Maximum, Is.EqualTo(91350));
         }
 
         [Test]
-        public void IntuitiveIsOneThirdOfMax()
+        public void GetImmortalAge()
         {
-            ages[RaceConstants.Ages.Venerable] = ages[RaceConstants.Ages.Adulthood] + 34;
-            mockDice.Setup(d => d.Roll("4d26").AsSum()).Returns(100);
-
-            classType = CharacterClassConstants.TrainingTypes.Intuitive;
-            mockDice.Setup(d => d.Roll(characterClass.Level).d(2).AsSum()).Returns(13);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.MaximumAgeRolls, BaseRace)).Returns(new[] { RaceConstants.Ages.Ageless.ToString() });
+            SetUpRoll(RaceConstants.Ages.Ageless.ToString(), -1);
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
-            Assert.That(race.Age.Years, Is.EqualTo(90237));
+            Assert.That(race.Age.Years, Is.EqualTo(90320));
+            Assert.That(race.Age.Maximum, Is.EqualTo(RaceConstants.Ages.Ageless));
         }
 
         [Test]
-        public void SelfTaughtIsTwoThirdsOfMax()
+        public void UndeadAreImmortal()
         {
-            ages[RaceConstants.Ages.Venerable] = ages[RaceConstants.Ages.Adulthood] + 44;
-            mockDice.Setup(d => d.Roll("4d26").AsSum()).Returns(100);
-
-            classType = CharacterClassConstants.TrainingTypes.SelfTaught;
-            mockDice.Setup(d => d.Roll(characterClass.Level).d(4).AsSum()).Returns(13);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Undead)).Returns(new[] { Metarace });
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
-            Assert.That(race.Age.Years, Is.EqualTo(90247));
+            Assert.That(race.Age.Years, Is.EqualTo(90320));
+            Assert.That(race.Age.Maximum, Is.EqualTo(RaceConstants.Ages.Ageless));
         }
 
         [Test]
-        public void TrainedIsMax()
+        public void GetMetaraceMortalAge()
         {
-            ages[RaceConstants.Ages.Venerable] = ages[RaceConstants.Ages.Adulthood] + 54;
-            mockDice.Setup(d => d.Roll("4d26").AsSum()).Returns(100);
-
-            classType = CharacterClassConstants.TrainingTypes.Trained;
-            mockDice.Setup(d => d.Roll(characterClass.Level).d(6).AsSum()).Returns(13);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Undead)).Returns(new[] { "other metarace" });
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
-            Assert.That(race.Age.Years, Is.EqualTo(90257));
+            Assert.That(race.Age.Years, Is.EqualTo(90320));
+            Assert.That(race.Age.Maximum, Is.EqualTo(91350));
         }
 
         [Test]
-        public void IfAdditionalAgeDieLessThan1_UseLevel()
+        public void IfTooOld_RerollAge()
         {
-            ages[RaceConstants.Ages.Venerable] = ages[RaceConstants.Ages.Adulthood] + 34;
-            mockDice.Setup(d => d.Roll("4d26").AsSum()).Returns(39);
+            var mockPartial = new Mock<PartialRoll>();
+            mockPartial.SetupSequence(r => r.AsSum()).Returns(1).Returns(1000);
+            mockDice.Setup(d => d.Roll("4d26")).Returns(mockPartial.Object);
 
-            classType = CharacterClassConstants.TrainingTypes.Intuitive;
+            characterClass.Level = 20;
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
-            Assert.That(race.Age.Years, Is.EqualTo(90224 + characterClass.Level));
+            Assert.That(race.Age.Years, Is.LessThanOrEqualTo(race.Age.Maximum));
+            Assert.That(race.Age.Maximum, Is.EqualTo(91350));
+            Assert.That(race.Age.Years, Is.EqualTo(90516));
         }
 
         [Test]
-        public void IfAgeGreaterThanMax_UseMax()
+        public void UseDefaultAgeOfMaximum()
         {
-            mockDice.Setup(d => d.Roll(characterClass.Level).d(It.IsAny<int>()).AsSum()).Returns(9999999);
+            var mockPartial = new Mock<PartialRoll>();
+            mockPartial.Setup(r => r.AsSum()).Returns(1);
+            mockDice.Setup(d => d.Roll("4d26")).Returns(mockPartial.Object);
+
+            characterClass.Level = 20;
+
+            ages[RaceConstants.Ages.MiddleAge] = 90211;
+            ages[RaceConstants.Ages.Old] = 90212;
+            ages[RaceConstants.Ages.Venerable] = 90213;
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
-            Assert.That(race.Age.Years, Is.EqualTo(90676));
-            Assert.That(race.Age.Years, Is.EqualTo(race.Age.Maximum));
+            Assert.That(race.Age.Years, Is.LessThanOrEqualTo(race.Age.Maximum));
+            Assert.That(race.Age.Maximum, Is.EqualTo(90214));
+            Assert.That(race.Age.Years, Is.EqualTo(90214));
+        }
+
+        [Test]
+        public void UseDefaultAgeOfClassLevel()
+        {
+            var mockPartial = new Mock<PartialRoll>();
+            mockPartial.Setup(r => r.AsSum()).Returns(1);
+            mockDice.Setup(d => d.Roll("4d26")).Returns(mockPartial.Object);
+
+            characterClass.Level = 20;
+
+            var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
+            Assert.That(race.Age.Years, Is.LessThanOrEqualTo(race.Age.Maximum));
+            Assert.That(race.Age.Maximum, Is.EqualTo(90351));
+            Assert.That(race.Age.Years, Is.EqualTo(90230));
         }
 
         [Test]

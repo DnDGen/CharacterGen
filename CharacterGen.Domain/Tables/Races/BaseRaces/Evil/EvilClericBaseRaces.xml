@@ -119,21 +119,31 @@
   <object>
     <lower>80</lower>
     <content>Troglodyte</content>
+    <upper>87</upper>
+  </object>
+  <object>
+    <lower>88</lower>
+    <content>Death Slaad</content>
+    <upper>88</upper>
+  </object>
+  <object>
+    <lower>89</lower>
+    <content>Yuan-ti Abomination</content>
     <upper>90</upper>
   </object>
   <object>
     <lower>91</lower>
-    <content>Rakshasa</content>
+    <content>Yuan-ti Halfblood</content>
     <upper>91</upper>
   </object>
   <object>
     <lower>92</lower>
-    <content>Harpy</content>
+    <content>Rakshasa</content>
     <upper>92</upper>
   </object>
   <object>
     <lower>93</lower>
-    <content>Cloud Giant</content>
+    <content>Harpy</content>
     <upper>93</upper>
   </object>
   <object>

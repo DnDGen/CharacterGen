@@ -22,9 +22,12 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Heights
         }
 
         [TestCase(RaceConstants.BaseRaces.Aasimar, "2d8")]
+        [TestCase(RaceConstants.BaseRaces.Azer, "2d4")]
+        [TestCase(RaceConstants.BaseRaces.BlueSlaad, "2d6")]
         [TestCase(RaceConstants.BaseRaces.Bugbear, "2d6")]
         [TestCase(RaceConstants.BaseRaces.Centaur, "3d4")]
         [TestCase(RaceConstants.BaseRaces.CloudGiant, "2d12")]
+        [TestCase(RaceConstants.BaseRaces.DeathSlaad, "2d10")]
         [TestCase(RaceConstants.BaseRaces.DeepDwarf, "2d4")]
         [TestCase(RaceConstants.BaseRaces.DeepHalfling, "2d4")]
         [TestCase(RaceConstants.BaseRaces.Derro, "2d4")]
@@ -34,9 +37,12 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Heights
         [TestCase(RaceConstants.BaseRaces.FireGiant, "2d12")]
         [TestCase(RaceConstants.BaseRaces.ForestGnome, "2d4")]
         [TestCase(RaceConstants.BaseRaces.FrostGiant, "2d12")]
+        [TestCase(RaceConstants.BaseRaces.Gargoyle, "2d12")]
         [TestCase(RaceConstants.BaseRaces.Gnoll, "2d10")]
         [TestCase(RaceConstants.BaseRaces.Goblin, "2d4")]
         [TestCase(RaceConstants.BaseRaces.GrayElf, "2d6")]
+        [TestCase(RaceConstants.BaseRaces.GraySlaad, "2d10")]
+        [TestCase(RaceConstants.BaseRaces.GreenSlaad, "2d6")]
         [TestCase(RaceConstants.BaseRaces.Grimlock, "2d4")]
         [TestCase(RaceConstants.BaseRaces.HalfElf, "2d8")]
         [TestCase(RaceConstants.BaseRaces.HalfOrc, "2d12")]
@@ -45,6 +51,7 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Heights
         [TestCase(RaceConstants.BaseRaces.HillDwarf, "2d4")]
         [TestCase(RaceConstants.BaseRaces.HillGiant, "2d12")]
         [TestCase(RaceConstants.BaseRaces.Hobgoblin, "2d8")]
+        [TestCase(RaceConstants.BaseRaces.HoundArchon, "1d12")]
         [TestCase(RaceConstants.BaseRaces.Human, "2d10")]
         [TestCase(RaceConstants.BaseRaces.Janni, "2d10")]
         [TestCase(RaceConstants.BaseRaces.Kobold, "2d4")]
@@ -58,6 +65,7 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Heights
         [TestCase(RaceConstants.BaseRaces.Orc, "2d12")]
         [TestCase(RaceConstants.BaseRaces.Pixie, "3d8")]
         [TestCase(RaceConstants.BaseRaces.Rakshasa, "2d10")]
+        [TestCase(RaceConstants.BaseRaces.RedSlaad, "2d6")]
         [TestCase(RaceConstants.BaseRaces.RockGnome, "2d4")]
         [TestCase(RaceConstants.BaseRaces.Satyr, "1d10")]
         [TestCase(RaceConstants.BaseRaces.Scorpionfolk, "3d10")]
@@ -70,9 +78,12 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Heights
         [TestCase(RaceConstants.BaseRaces.Troll, "2d10")]
         [TestCase(RaceConstants.BaseRaces.WoodElf, "2d6")]
         [TestCase(RaceConstants.BaseRaces.WildElf, "2d6")]
-        public override void DistinctCollection(string name, params string[] collection)
+        [TestCase(RaceConstants.BaseRaces.YuanTiAbomination, "4d12")]
+        [TestCase(RaceConstants.BaseRaces.YuanTiHalfblood, "2d10")]
+        [TestCase(RaceConstants.BaseRaces.YuanTiPureblood, "2d10")]
+        public void HeightRoll(string name, string heightRoll)
         {
-            base.DistinctCollection(name, collection);
+            base.DistinctCollection(name, new[] { heightRoll });
         }
     }
 }

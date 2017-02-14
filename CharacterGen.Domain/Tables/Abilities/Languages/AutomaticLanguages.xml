@@ -10,6 +10,27 @@
     <item>Celestial</item>
   </object>
   <object>
+    <name>Adept</name>
+  </object>
+  <object>
+    <name>Aristocrat</name>
+  </object>
+  <object>
+    <name>Azer</name>
+    <item>Common</item>
+    <item>Ignan</item>
+  </object>
+  <object>
+    <name>Barbarian</name>
+  </object>
+  <object>
+    <name>Bard</name>
+  </object>
+  <object>
+    <name>Blue Slaad</name>
+    <item>Slaad</item>
+  </object>
+  <object>
     <name>Bugbear</name>
     <item>Common</item>
     <item>Goblin</item>
@@ -20,22 +41,23 @@
     <item>Elven</item>
   </object>
   <object>
+    <name>Cleric</name>
+  </object>
+  <object>
     <name>Cloud Giant</name>
     <item>Common</item>
     <item>Giant</item>
   </object>
   <object>
+    <name>Commoner</name>
+  </object>
+  <object>
+    <name>Death Slaad</name>
+    <item>Slaad</item>
+    <item>Common</item>
+  </object>
+  <object>
     <name>Deep Dwarf</name>
-    <item>Common</item>
-    <item>Dwarven</item>
-  </object>
-  <object>
-    <name>Hill Dwarf</name>
-    <item>Common</item>
-    <item>Dwarven</item>
-  </object>
-  <object>
-    <name>Mountain Dwarf</name>
     <item>Common</item>
     <item>Dwarven</item>
   </object>
@@ -61,10 +83,20 @@
     <item>Undercommon</item>
   </object>
   <object>
+    <name>Druid</name>
+    <item>Druidic</item>
+  </object>
+  <object>
     <name>Duergar Dwarf</name>
     <item>Common</item>
     <item>Dwarven</item>
     <item>Undercommon</item>
+  </object>
+  <object>
+    <name>Expert</name>
+  </object>
+  <object>
+    <name>Fighter</name>
   </object>
   <object>
     <name>Fire Giant</name>
@@ -84,6 +116,10 @@
     <item>Giant</item>
   </object>
   <object>
+    <name>Gargoyle</name>
+    <item>Common</item>
+  </object>
+  <object>
     <name>Ghost</name>
   </object>
   <object>
@@ -96,41 +132,32 @@
     <item>Goblin</item>
   </object>
   <object>
-    <name>Grimlock</name>
-    <item>Common</item>
-  </object>
-  <object>
-    <name>Harpy</name>
-    <item>Common</item>
-  </object>
-  <object>
-    <name>Hill Giant</name>
-    <item>Giant</item>
-  </object>
-  <object>
-    <name>Hobgoblin</name>
-    <item>Common</item>
-    <item>Goblin</item>
-  </object>
-  <object>
     <name>Gray Elf</name>
     <item>Common</item>
     <item>Elven</item>
   </object>
   <object>
-    <name>High Elf</name>
+    <name>Gray Slaad</name>
+    <item>Slaad</item>
     <item>Common</item>
-    <item>Elven</item>
   </object>
   <object>
-    <name>Wild Elf</name>
+    <name>Green Slaad</name>
+    <item>Slaad</item>
     <item>Common</item>
-    <item>Elven</item>
   </object>
   <object>
-    <name>Wood Elf</name>
+    <name>Grimlock</name>
+    <item>Grimlock</item>
     <item>Common</item>
-    <item>Elven</item>
+  </object>
+  <object>
+    <name>Half-Celestial</name>
+    <item>Celestial</item>
+  </object>
+  <object>
+    <name>Half-Dragon</name>
+    <item>Draconic</item>
   </object>
   <object>
     <name>Half-Elf</name>
@@ -142,34 +169,43 @@
     <item>Infernal</item>
   </object>
   <object>
-    <name>Half-Celestial</name>
-    <item>Celestial</item>
-  </object>
-  <object>
-    <name>Half-Dragon</name>
-    <item>Draconic</item>
-  </object>
-  <object>
     <name>Half-Orc</name>
     <item>Common</item>
     <item>Orc</item>
   </object>
   <object>
-    <name>Janni</name>
+    <name>Harpy</name>
     <item>Common</item>
   </object>
   <object>
-    <name>Orc</name>
+    <name>High Elf</name>
     <item>Common</item>
-    <item>Orc</item>
+    <item>Elven</item>
   </object>
   <object>
-    <name>Pixie</name>
+    <name>Hill Dwarf</name>
     <item>Common</item>
-    <item>Sylvan</item>
+    <item>Dwarven</item>
+  </object>
+  <object>
+    <name>Hill Giant</name>
+    <item>Giant</item>
+  </object>
+  <object>
+    <name>Hobgoblin</name>
+    <item>Common</item>
+    <item>Goblin</item>
+  </object>
+  <object>
+    <name>Hound Archon</name>
+    <item>Celestial</item>
   </object>
   <object>
     <name>Human</name>
+    <item>Common</item>
+  </object>
+  <object>
+    <name>Janni</name>
     <item>Common</item>
   </object>
   <object>
@@ -186,9 +222,9 @@
     <item>Halfling</item>
   </object>
   <object>
-    <name>Tallfellow Halfling</name>
+    <name>Lizardfolk</name>
     <item>Common</item>
-    <item>Halfling</item>
+    <item>Draconic</item>
   </object>
   <object>
     <name>Mind Flayer</name>
@@ -201,6 +237,18 @@
     <item>Giant</item>
   </object>
   <object>
+    <name>Monk</name>
+  </object>
+  <object>
+    <name>Mountain Dwarf</name>
+    <item>Common</item>
+    <item>Dwarven</item>
+  </object>
+  <object>
+    <name>Mummy</name>
+    <item>Common</item>
+  </object>
+  <object>
     <name>Ogre</name>
     <item>Common</item>
     <item>Giant</item>
@@ -211,14 +259,37 @@
     <item>Giant</item>
   </object>
   <object>
+    <name>Orc</name>
+    <item>Common</item>
+    <item>Orc</item>
+  </object>
+  <object>
+    <name>Paladin</name>
+  </object>
+  <object>
+    <name>Pixie</name>
+    <item>Common</item>
+    <item>Sylvan</item>
+  </object>
+  <object>
     <name>Rakshasa</name>
     <item>Common</item>
     <item>Infernal</item>
   </object>
   <object>
+    <name>Ranger</name>
+  </object>
+  <object>
+    <name>Red Slaad</name>
+    <item>Slaad</item>
+  </object>
+  <object>
     <name>Rock Gnome</name>
     <item>Common</item>
     <item>Gnome</item>
+  </object>
+  <object>
+    <name>Rogue</name>
   </object>
   <object>
     <name>Satyr</name>
@@ -228,6 +299,9 @@
     <name>Scorpionfolk</name>
     <item>Common</item>
     <item>Terran</item>
+  </object>
+  <object>
+    <name>Sorcerer</name>
   </object>
   <object>
     <name>Stone Giant</name>
@@ -245,6 +319,11 @@
     <item>Undercommon</item>
   </object>
   <object>
+    <name>Tallfellow Halfling</name>
+    <item>Common</item>
+    <item>Halfling</item>
+  </object>
+  <object>
     <name>Tiefling</name>
     <item>Common</item>
     <item>Infernal</item>
@@ -258,12 +337,10 @@
     <item>Giant</item>
   </object>
   <object>
-    <name>Lizardfolk</name>
-    <item>Common</item>
-    <item>Draconic</item>
+    <name>Vampire</name>
   </object>
   <object>
-    <name>Vampire</name>
+    <name>Warrior</name>
   </object>
   <object>
     <name>Werebear</name>
@@ -281,52 +358,31 @@
     <name>Werewolf</name>
   </object>
   <object>
-    <name>Barbarian</name>
-  </object>
-  <object>
-    <name>Bard</name>
-  </object>
-  <object>
-    <name>Cleric</name>
-  </object>
-  <object>
-    <name>Druid</name>
-    <item>Druidic</item>
-  </object>
-  <object>
-    <name>Fighter</name>
-  </object>
-  <object>
-    <name>Monk</name>
-  </object>
-  <object>
-    <name>Paladin</name>
-  </object>
-  <object>
-    <name>Ranger</name>
-  </object>
-  <object>
-    <name>Rogue</name>
-  </object>
-  <object>
-    <name>Sorcerer</name>
+    <name>Wild Elf</name>
+    <item>Common</item>
+    <item>Elven</item>
   </object>
   <object>
     <name>Wizard</name>
   </object>
   <object>
-    <name>Adept</name>
+    <name>Wood Elf</name>
+    <item>Common</item>
+    <item>Elven</item>
   </object>
   <object>
-    <name>Aristocrat</name>
+    <name>Yuan-ti Abomination</name>
+    <item>Yuan-ti</item>
+    <item>Common</item>
   </object>
   <object>
-    <name>Commoner</name>
+    <name>Yuan-ti Halfblood</name>
+    <item>Yuan-ti</item>
+    <item>Common</item>
   </object>
   <object>
-    <name>Expert</name>
-  </object>
-  <object>
-    <name>Warrior</name>
+    <name>Yuan-ti Pureblood</name>
+    <item>Yuan-ti</item>
+    <item>Common</item>
   </object>
 </items>

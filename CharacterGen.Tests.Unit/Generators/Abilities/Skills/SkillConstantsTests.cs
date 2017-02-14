@@ -24,6 +24,7 @@ namespace CharacterGen.Tests.Unit.Common.Abilities.Skills
         [TestCase(SkillConstants.Hide, "Hide")]
         [TestCase(SkillConstants.Intimidate, "Intimidate")]
         [TestCase(SkillConstants.Jump, "Jump")]
+        [TestCase(SkillConstants.Knowledge, "Knowledge")]
         [TestCase(SkillConstants.KnowledgeArcana, "Knowledge (Arcana)")]
         [TestCase(SkillConstants.KnowledgeArchitectureAndEngineering, "Knowledge (Architecture and Engineering)")]
         [TestCase(SkillConstants.KnowledgeDungeoneering, "Knowledge (Dungeoneering)")]

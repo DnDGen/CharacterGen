@@ -13,6 +13,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Blindsight</name>
@@ -26,6 +27,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Scent</name>
@@ -39,6 +41,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Natural Armor</name>
@@ -52,6 +55,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Immune to Effect</name>
@@ -65,6 +69,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Save BonusWill</name>
@@ -78,6 +83,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Save BonusReflex</name>
@@ -91,6 +97,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Martial Weapon Proficiency</name>
@@ -104,5 +111,6 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
 </items>

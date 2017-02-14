@@ -44,6 +44,11 @@
   <object>
     <lower>31</lower>
     <content>Human</content>
+    <upper>99</upper>
+  </object>
+  <object>
+    <lower>100</lower>
+    <content>Hound Archon</content>
     <upper>100</upper>
   </object>
 </percentile>

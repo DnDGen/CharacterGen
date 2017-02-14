@@ -1,19 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <items>
-    <object>
-        <name>Low-Light Vision</name>
-        <item>Low-Light Vision</item>
-        <item></item>
-        <item>0</item>
-        <item>0</item>
-        <item></item>
-        <item>0</item>
-        <item></item>
-        <item>0</item>
-      <item></item>
-      <item>0</item>
-    </object>
+  <object>
+    <name>Low-Light Vision</name>
+    <item>Low-Light Vision</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+  </object>
   <object>
     <name>Darkvision</name>
     <item>Darkvision</item>
@@ -26,20 +27,22 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
-    <object>
-      <name>Skill BonusListen</name>
-      <item>Skill Bonus</item>
-      <item></item>
-      <item>0</item>
-      <item>2</item>
-      <item>Listen</item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-    </object>
+  <object>
+    <name>Skill BonusListen</name>
+    <item>Skill Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>2</item>
+    <item>Listen</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+  </object>
   <object>
     <name>Skill BonusHide</name>
     <item>Skill Bonus</item>
@@ -52,6 +55,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Skill BonusHideUnderground</name>
@@ -65,20 +69,22 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
-    <object>
-      <name>Attack BonusGoblin</name>
-      <item>Attack Bonus</item>
-      <item></item>
-      <item>0</item>
-      <item>1</item>
-      <item>Goblinoids</item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-    </object>
+  <object>
+    <name>Attack BonusGoblin</name>
+    <item>Attack Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>1</item>
+    <item>Goblinoids</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+  </object>
   <object>
     <name>Attack BonusKobold</name>
     <item>Attack Bonus</item>
@@ -91,20 +97,22 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
-    <object>
-        <name>Save Bonus</name>
-        <item>Save Bonus</item>
-        <item></item>
-        <item>0</item>
-        <item>2</item>
-        <item>All</item>
-        <item>0</item>
-        <item></item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-    </object>
+  <object>
+    <name>Save Bonus</name>
+    <item>Save Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>2</item>
+    <item>All</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+  </object>
   <object>
     <name>Weapon Familiarity</name>
     <item>Weapon Familiarity</item>
@@ -117,6 +125,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Improved Spell</name>
@@ -130,6 +139,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Dodge Bonus</name>
@@ -143,6 +153,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Spell-Like AbilityBlindness/deafness</name>
@@ -156,6 +167,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Spell-Like AbilityBlur</name>
@@ -169,6 +181,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Spell-Like AbilityDisguise self</name>
@@ -182,6 +195,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Stonecunning</name>
@@ -195,6 +209,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Spell-Like AbilityNondetection</name>
@@ -208,6 +223,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Spell Resistance</name>
@@ -221,5 +237,6 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
 </items>

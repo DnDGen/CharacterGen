@@ -13,6 +13,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Darkvision</name>
@@ -26,6 +27,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Natural Armor</name>
@@ -39,6 +41,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Change Size</name>
@@ -52,6 +55,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Resistance</name>
@@ -65,6 +69,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Elemental Endurance</name>
@@ -78,6 +83,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Improved Initiative</name>
@@ -91,6 +97,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Save BonusFortitude</name>
@@ -104,6 +111,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Save BonusReflex</name>
@@ -117,6 +125,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Save BonusWill</name>
@@ -130,6 +139,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Spell-Like AbilityCreate food and water</name>
@@ -143,6 +153,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Spell-Like AbilityEthereal jaunt</name>
@@ -156,6 +167,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Spell-Like AbilityInvisibility</name>
@@ -169,6 +181,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Spell-Like AbilitySpeak with animals</name>
@@ -182,6 +195,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Spell-Like AbilityPlane shift</name>
@@ -195,5 +209,6 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
 </items>

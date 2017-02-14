@@ -14,10 +14,10 @@
   <object>
     <lower>3</lower>
     <content>Hill Dwarf</content>
-    <upper>22</upper>
+    <upper>21</upper>
   </object>
   <object>
-    <lower>23</lower>
+    <lower>22</lower>
     <content>Mountain Dwarf</content>
     <upper>24</upper>
   </object>
@@ -79,16 +79,6 @@
   <object>
     <lower>71</lower>
     <content>Human</content>
-    <upper>98</upper>
-  </object>
-  <object>
-    <lower>99</lower>
-    <content>Svirfneblin</content>
-    <upper>99</upper>
-  </object>
-  <object>
-    <lower>100</lower>
-    <content>Centaur</content>
     <upper>100</upper>
   </object>
 </percentile>

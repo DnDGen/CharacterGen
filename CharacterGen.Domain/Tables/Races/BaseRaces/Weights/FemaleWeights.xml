@@ -6,6 +6,14 @@
     <item>90</item>
   </object>
   <object>
+    <name>Azer</name>
+    <item>100</item>
+  </object>
+  <object>
+    <name>Blue Slaad</name>
+    <item>900</item>
+  </object>
+  <object>
     <name>Bugbear</name>
     <item>250</item>
   </object>
@@ -16,6 +24,10 @@
   <object>
     <name>Cloud Giant</name>
     <item>4200</item>
+  </object>
+  <object>
+    <name>Death Slaad</name>
+    <item>85</item>
   </object>
   <object>
     <name>Deep Dwarf</name>
@@ -54,6 +66,10 @@
     <item>2000</item>
   </object>
   <object>
+    <name>Gargoyle</name>
+    <item>220</item>
+  </object>
+  <object>
     <name>Gnoll</name>
     <item>150</item>
   </object>
@@ -64,6 +80,14 @@
   <object>
     <name>Gray Elf</name>
     <item>80</item>
+  </object>
+  <object>
+    <name>Gray Slaad</name>
+    <item>85</item>
+  </object>
+  <object>
+    <name>Green Slaad</name>
+    <item>900</item>
   </object>
   <object>
     <name>Grimlock</name>
@@ -96,6 +120,10 @@
   <object>
     <name>Hobgoblin</name>
     <item>145</item>
+  </object>
+  <object>
+    <name>Hound Archon</name>
+    <item>150</item>
   </object>
   <object>
     <name>Human</name>
@@ -150,6 +178,10 @@
     <item>85</item>
   </object>
   <object>
+    <name>Red Slaad</name>
+    <item>550</item>
+  </object>
+  <object>
     <name>Rock Gnome</name>
     <item>35</item>
   </object>
@@ -196,5 +228,17 @@
   <object>
     <name>Wood Elf</name>
     <item>80</item>
+  </object>
+  <object>
+    <name>Yuan-ti Abomination</name>
+    <item>196</item>
+  </object>
+  <object>
+    <name>Yuan-ti Halfblood</name>
+    <item>85</item>
+  </object>
+  <object>
+    <name>Yuan-ti Pureblood</name>
+    <item>85</item>
   </object>
 </items>

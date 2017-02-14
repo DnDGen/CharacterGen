@@ -22,6 +22,7 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Ages.Rolls
         }
 
         [TestCase(RaceConstants.BaseRaces.Aasimar, "2d20")]
+        [TestCase(RaceConstants.BaseRaces.Azer, "2d100")]
         [TestCase(RaceConstants.BaseRaces.Bugbear, "2d10")]
         [TestCase(RaceConstants.BaseRaces.Centaur, "2d12")]
         [TestCase(RaceConstants.BaseRaces.CloudGiant, "10d10")]
@@ -45,6 +46,7 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Ages.Rolls
         [TestCase(RaceConstants.BaseRaces.HillDwarf, "2d100")]
         [TestCase(RaceConstants.BaseRaces.HillGiant, "5d10")]
         [TestCase(RaceConstants.BaseRaces.Hobgoblin, "2d10")]
+        [TestCase(RaceConstants.BaseRaces.HoundArchon, "7d6")]
         [TestCase(RaceConstants.BaseRaces.Human, "2d20")]
         [TestCase(RaceConstants.BaseRaces.Janni, "2d20")]
         [TestCase(RaceConstants.BaseRaces.Kobold, "1d20")]
@@ -70,9 +72,23 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Ages.Rolls
         [TestCase(RaceConstants.BaseRaces.Troll, "2d20")]
         [TestCase(RaceConstants.BaseRaces.WildElf, "4d100")]
         [TestCase(RaceConstants.BaseRaces.WoodElf, "4d100")]
-        public override void DistinctCollection(string name, params string[] collection)
+        [TestCase(RaceConstants.BaseRaces.YuanTiAbomination, "3d20")]
+        [TestCase(RaceConstants.BaseRaces.YuanTiHalfblood, "3d20")]
+        [TestCase(RaceConstants.BaseRaces.YuanTiPureblood, "3d20")]
+        public void MaximumAgeRoll(string name, string ageRoll)
         {
-            base.DistinctCollection(name, collection);
+            base.DistinctCollection(name, ageRoll);
+        }
+
+        [TestCase(RaceConstants.BaseRaces.BlueSlaad)]
+        [TestCase(RaceConstants.BaseRaces.DeathSlaad)]
+        [TestCase(RaceConstants.BaseRaces.Gargoyle)]
+        [TestCase(RaceConstants.BaseRaces.GraySlaad)]
+        [TestCase(RaceConstants.BaseRaces.GreenSlaad)]
+        [TestCase(RaceConstants.BaseRaces.RedSlaad)]
+        public void ImmortalCreatures(string creature)
+        {
+            base.DistinctCollection(creature, RaceConstants.Ages.Ageless.ToString());
         }
     }
 }

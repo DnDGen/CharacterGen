@@ -13,32 +13,35 @@
       <item>0</item>
       <item></item>
       <item>0</item>
+      <item></item>
     </object>
     <object>
-        <name>Darkvision</name>
-        <item>Darkvision</item>
-        <item></item>
-        <item>0</item>
-        <item>60</item>
-        <item></item>
-        <item>0</item>
-        <item></item>
+      <name>Darkvision</name>
+      <item>Darkvision</item>
+      <item></item>
       <item>0</item>
-    <item></item>
-    <item>0</item>
+      <item>60</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
     </object>
-  <object>
-    <name>Save BonusWill</name>
-    <item>Save Bonus</item>
-    <item></item>
-    <item>0</item>
-    <item>6</item>
-    <item>Will</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
+    <object>
+      <name>Save BonusWill</name>
+      <item>Save Bonus</item>
+      <item></item>
+      <item>0</item>
+      <item>6</item>
+      <item>Will</item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
   </object>
   <object>
     <name>Save BonusFortitude</name>
@@ -52,6 +55,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Save BonusReflex</name>
@@ -65,6 +69,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Skill BonusBluff</name>
@@ -78,6 +83,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Skill BonusConcentration</name>
@@ -91,6 +97,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Skill BonusHide</name>
@@ -104,6 +111,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Skill BonusIntimidate</name>
@@ -117,6 +125,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Skill BonusMove Silently</name>
@@ -130,6 +139,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Skill BonusListen</name>
@@ -143,6 +153,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Skill BonusSense Motive</name>
@@ -156,6 +167,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Skill BonusSpot</name>
@@ -169,6 +181,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Mind Blast</name>
@@ -182,6 +195,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Natural Weapon</name>
@@ -195,6 +209,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Spell-Like AbilityCharm monster</name>
@@ -208,6 +223,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Spell-Like AbilityDetect thoughts</name>
@@ -221,6 +237,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Spell-Like AbilityLevitate</name>
@@ -234,6 +251,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Spell-Like AbilityPlane shift</name>
@@ -247,6 +265,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Spell-Like AbilitySuggestion</name>
@@ -260,6 +279,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Improved Grab</name>
@@ -273,6 +293,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Extract</name>
@@ -286,5 +307,6 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
 </items>

@@ -113,7 +113,7 @@ namespace CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizards
         [TestCase(SpellConstants.DominateMonster, 9)]
         [TestCase(SpellConstants.HoldMonster_Mass, 9)]
         [TestCase(SpellConstants.PowerWordKill, 9)]
-        public override void Adjustment(string name, int adjustment)
+        public void SpellLevel(string name, int adjustment)
         {
             base.Adjustment(name, adjustment);
         }

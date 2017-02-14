@@ -1,14 +1,13 @@
 ﻿using CharacterGen.Alignments;
-using CharacterGen.Domain.Selectors;
+using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Selectors.Percentiles;
-using System;
 
 namespace CharacterGen.Domain.Generators.Randomizers.Alignments
 {
     internal class NonNeutralAlignmentRandomizer : BaseAlignmentRandomizer
     {
-        public NonNeutralAlignmentRandomizer(IPercentileSelector innerSelector, Generator generator)
-            : base(innerSelector, generator)
+        public NonNeutralAlignmentRandomizer(IPercentileSelector innerSelector, Generator generator, ICollectionsSelector collectionsSelector)
+            : base(innerSelector, generator, collectionsSelector)
         { }
 
         protected override bool AlignmentIsAllowed(Alignment alignment)

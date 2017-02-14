@@ -7,6 +7,7 @@ using CharacterGen.Domain.Tables;
 using CharacterGen.Races;
 using Moq;
 using NUnit.Framework;
+using RollGen;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -20,6 +21,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
         private Mock<IFeatsSelector> mockFeatsSelector;
         private Mock<IFeatFocusGenerator> mockFeatFocusGenerator;
+        private Mock<Dice> mockDice;
         private Race race;
         private List<RacialFeatSelection> baseRaceFeats;
         private List<RacialFeatSelection> metaraceFeats;
@@ -34,8 +36,9 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
             mockFeatsSelector = new Mock<IFeatsSelector>();
             mockFeatFocusGenerator = new Mock<IFeatFocusGenerator>();
-            racialFeatsGenerator = new RacialFeatsGenerator(mockCollectionsSelector.Object, mockAdjustmentsSelector.Object, mockFeatsSelector.Object,
-                mockFeatFocusGenerator.Object);
+            mockDice = new Mock<Dice>();
+            racialFeatsGenerator = new RacialFeatsGenerator(mockCollectionsSelector.Object, mockAdjustmentsSelector.Object, mockFeatsSelector.Object, mockFeatFocusGenerator.Object, mockDice.Object);
+
             race = new Race();
             baseRaceFeats = new List<RacialFeatSelection>();
             metaraceFeats = new List<RacialFeatSelection>();
@@ -369,6 +372,89 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
 
             Assert.That(onlyFeat.Name, Is.EqualTo("metarace feat"));
             Assert.That(onlyFeat.Power, Is.EqualTo(11));
+        }
+
+        [Test]
+        public void GetOneRandomFociForRacialFeatIfNoRandomFociQuantity()
+        {
+            var featSelection = new RacialFeatSelection();
+            featSelection.Feat = "racial feat";
+            featSelection.FocusType = "focus type";
+
+            var count = 1;
+            mockFeatFocusGenerator.Setup(g => g.GenerateAllowingFocusOfAllFrom("racial feat", "focus type", skills)).Returns(() => $"focus {count++}");
+            mockDice.Setup(d => d.Roll("dice roll").AsSum()).Returns(3);
+
+            baseRaceFeats.Add(featSelection);
+
+            var feats = racialFeatsGenerator.GenerateWith(race, skills, stats);
+            var feat = feats.Single();
+
+            Assert.That(feat.Name, Is.EqualTo("racial feat"));
+            Assert.That(feat.Foci.Single(), Is.EqualTo("focus 1"));
+        }
+
+        [Test]
+        public void GetRandomFociForRacialFeat()
+        {
+            var featSelection = new RacialFeatSelection();
+            featSelection.Feat = "racial feat";
+            featSelection.FocusType = "focus type";
+            featSelection.RandomFociQuantity = "dice roll";
+
+            var count = 1;
+            mockFeatFocusGenerator.Setup(g => g.GenerateAllowingFocusOfAllFrom("racial feat", "focus type", skills)).Returns(() => $"focus {count++}");
+            mockDice.Setup(d => d.Roll("dice roll").AsSum()).Returns(3);
+
+            baseRaceFeats.Add(featSelection);
+
+            var feats = racialFeatsGenerator.GenerateWith(race, skills, stats);
+            var feat = feats.Single();
+
+            Assert.That(feat.Name, Is.EqualTo("racial feat"));
+            Assert.That(feat.Foci, Is.EquivalentTo(new[] { "focus 1", "focus 2", "focus 3" }));
+        }
+
+        [Test]
+        public void GetNoDuplicateRandomFociForRacialFeat()
+        {
+            var featSelection = new RacialFeatSelection();
+            featSelection.Feat = "racial feat";
+            featSelection.FocusType = "focus type";
+            featSelection.RandomFociQuantity = "dice roll";
+
+            var count = 1;
+            mockFeatFocusGenerator.Setup(g => g.GenerateAllowingFocusOfAllFrom("racial feat", "focus type", skills)).Returns(() => $"focus {count++ / 2}");
+            mockDice.Setup(d => d.Roll("dice roll").AsSum()).Returns(3);
+
+            baseRaceFeats.Add(featSelection);
+
+            var feats = racialFeatsGenerator.GenerateWith(race, skills, stats);
+            var feat = feats.Single();
+
+            Assert.That(feat.Name, Is.EqualTo("racial feat"));
+            Assert.That(feat.Foci, Is.Unique);
+            Assert.That(feat.Foci, Is.EquivalentTo(new[] { "focus 0", "focus 1", "focus 2" }));
+        }
+
+        [Test]
+        public void GetNoRandomFociForRacialFeatIfNoFocusType()
+        {
+            var featSelection = new RacialFeatSelection();
+            featSelection.Feat = "racial feat";
+            featSelection.RandomFociQuantity = "dice roll";
+
+            var count = 1;
+            mockFeatFocusGenerator.Setup(g => g.GenerateAllowingFocusOfAllFrom("racial feat", "focus type", skills)).Returns(() => $"focus {count++}");
+            mockDice.Setup(d => d.Roll("dice roll").AsSum()).Returns(3);
+
+            baseRaceFeats.Add(featSelection);
+
+            var feats = racialFeatsGenerator.GenerateWith(race, skills, stats);
+            var feat = feats.Single();
+
+            Assert.That(feat.Name, Is.EqualTo("racial feat"));
+            Assert.That(feat.Foci, Is.Empty);
         }
     }
 }

@@ -32,6 +32,26 @@
     <upper>81</upper>
   </object>
   <object>
+    <lower>78</lower>
+    <content>Death Slaad</content>
+    <upper>78</upper>
+  </object>
+  <object>
+    <lower>79</lower>
+    <content>Yuan-ti Pureblood</content>
+    <upper>79</upper>
+  </object>
+  <object>
+    <lower>80</lower>
+    <content>Yuan-ti Halfblood</content>
+    <upper>80</upper>
+  </object>
+  <object>
+    <lower>81</lower>
+    <content>Yuan-ti Abomination</content>
+    <upper>81</upper>
+  </object>
+  <object>
     <lower>82</lower>
     <content>Hobgoblin</content>
     <upper>83</upper>

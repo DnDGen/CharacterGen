@@ -13,6 +13,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Spell-Like AbilityDaylight</name>
@@ -26,6 +27,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Spell-Like AbilityProtection from chaos/law/good/evil</name>
@@ -39,6 +41,7 @@
     <item>0</item>
     <item>Wisdom,Intelligence</item>
     <item>8</item>
+    <item></item>
   </object>
   <object>
     <name>Smite Evil</name>
@@ -52,6 +55,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Spell-Like AbilityBless</name>
@@ -65,6 +69,7 @@
     <item>0</item>
     <item>Wisdom,Intelligence</item>
     <item>8</item>
+    <item></item>
   </object>
   <object>
     <name>Spell-Like AbilityAid</name>
@@ -78,6 +83,7 @@
     <item>0</item>
     <item>Wisdom,Intelligence</item>
     <item>8</item>
+    <item></item>
   </object>
   <object>
     <name>Darkvision</name>
@@ -91,6 +97,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Spell-Like AbilityDetect chaos/law/good/evil</name>
@@ -104,6 +111,7 @@
     <item>0</item>
     <item>Wisdom,Intelligence</item>
     <item>8</item>
+    <item></item>
   </object>
   <object>
     <name>Spell-Like AbilityCure/inflict serious wounds</name>
@@ -117,6 +125,7 @@
     <item>0</item>
     <item>Wisdom,Intelligence</item>
     <item>8</item>
+    <item></item>
   </object>
   <object>
     <name>Spell-Like AbilityNeutralize poison</name>
@@ -130,6 +139,7 @@
     <item>0</item>
     <item>Wisdom,Intelligence</item>
     <item>8</item>
+    <item></item>
   </object>
   <object>
     <name>Spell-Like AbilityHoly smite</name>
@@ -143,6 +153,7 @@
     <item>0</item>
     <item>Wisdom,Intelligence</item>
     <item>8</item>
+    <item></item>
   </object>
   <object>
     <name>Spell-Like AbilityRemove disease</name>
@@ -156,6 +167,7 @@
     <item>0</item>
     <item>Wisdom,Intelligence</item>
     <item>8</item>
+    <item></item>
   </object>
   <object>
     <name>Spell-Like AbilityDispel good/evil/law/chaos</name>
@@ -169,6 +181,7 @@
     <item>0</item>
     <item>Wisdom,Intelligence</item>
     <item>8</item>
+    <item></item>
   </object>
   <object>
     <name>Spell-Like AbilityHoly word</name>
@@ -182,6 +195,7 @@
     <item>0</item>
     <item>Wisdom,Intelligence</item>
     <item>8</item>
+    <item></item>
   </object>
   <object>
     <name>Spell-Like AbilityHoly aura</name>
@@ -195,6 +209,7 @@
     <item>0</item>
     <item>Wisdom,Intelligence</item>
     <item>8</item>
+    <item></item>
   </object>
   <object>
     <name>Spell-Like AbilityHallow</name>
@@ -208,6 +223,7 @@
     <item>0</item>
     <item>Wisdom,Intelligence</item>
     <item>8</item>
+    <item></item>
   </object>
   <object>
     <name>Spell-Like AbilityMass charm monster</name>
@@ -221,6 +237,7 @@
     <item>0</item>
     <item>Wisdom,Intelligence</item>
     <item>8</item>
+    <item></item>
   </object>
   <object>
     <name>Spell-Like AbilitySummon monster IX</name>
@@ -234,6 +251,7 @@
     <item>0</item>
     <item>Wisdom,Intelligence</item>
     <item>8</item>
+    <item></item>
   </object>
   <object>
     <name>Spell-Like AbilityResurrection</name>
@@ -247,6 +265,7 @@
     <item>0</item>
     <item>Wisdom,Intelligence</item>
     <item>8</item>
+    <item></item>
   </object>
   <object>
     <name>Immune to Effect</name>
@@ -260,6 +279,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>ResistanceAcid</name>
@@ -273,6 +293,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>ResistanceCold</name>
@@ -286,6 +307,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>ResistanceElectricity</name>
@@ -299,6 +321,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Damage Reduction11-</name>
@@ -312,6 +335,7 @@
     <item>11</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Damage Reduction12+</name>
@@ -325,6 +349,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Spell Resistance</name>
@@ -338,6 +363,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Save Bonus</name>
@@ -351,5 +377,6 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
 </items>

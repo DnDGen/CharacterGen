@@ -28,6 +28,7 @@
             public const int MaximumHitDiceRequirementIndex = 7;
             public const int RequiredStatIndex = 8;
             public const int RequiredStatMinimumValueIndex = 9;
+            public const int RandomFociQuantity = 10;
         }
 
         internal static class AdditionalFeatData
@@ -37,6 +38,13 @@
             public const int PowerIndex = 2;
             public const int FrequencyQuantityIndex = 3;
             public const int FrequencyTimePeriodIndex = 4;
+        }
+
+        internal static class SkillSelectionData
+        {
+            public const int BaseStatName = 0;
+            public const int SkillName = 1;
+            public const int RandomFociQuantity = 2;
         }
     }
 }

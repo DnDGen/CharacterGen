@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace CharacterGen.Abilities
+﻿namespace CharacterGen.Abilities
 {
     public static class LanguageConstants
     {
@@ -10,7 +8,6 @@ namespace CharacterGen.Abilities
         public const string Celestial = "Celestial";
         public const string Common = "Common";
         public const string Draconic = "Draconic";
-        public const string Druidic = "Druidic";
         public const string Dwarven = "Dwarven";
         public const string Elven = "Elven";
         public const string Giant = "Giant";
@@ -25,31 +22,12 @@ namespace CharacterGen.Abilities
         public const string Terran = "Terran";
         public const string Undercommon = "Undercommon";
 
-        public static IEnumerable<string> GetLanguages()
+        public static class Special
         {
-            return new[]
-            {
-                Common,
-                Celestial,
-                Goblin,
-                Druidic,
-                Dwarven,
-                Undercommon,
-                Elven,
-                Gnome,
-                Sylvan,
-                Gnoll,
-                Orc,
-                Draconic,
-                Halfling,
-                Giant,
-                Infernal,
-                Abyssal,
-                Aquan,
-                Auran,
-                Ignan,
-                Terran
-            };
+            public const string Druidic = "Druidic";
+            public const string Grimlock = "Grimlock";
+            public const string Slaad = "Slaad";
+            public const string YuanTi = "Yuan-ti";
         }
     }
 }

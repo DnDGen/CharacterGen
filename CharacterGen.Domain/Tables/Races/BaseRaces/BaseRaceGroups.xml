@@ -4,9 +4,12 @@
   <object>
     <name>All</name>
     <item>Aasimar</item>
+    <item>Azer</item>
+    <item>Blue Slaad</item>
     <item>Bugbear</item>
     <item>Centaur</item>
     <item>Cloud Giant</item>
+    <item>Death Slaad</item>
     <item>Deep Dwarf</item>
     <item>Deep Halfling</item>
     <item>Derro</item>
@@ -16,9 +19,12 @@
     <item>Fire Giant</item>
     <item>Forest Gnome</item>
     <item>Frost Giant</item>
+    <item>Gargoyle</item>
     <item>Gnoll</item>
     <item>Goblin</item>
     <item>Gray Elf</item>
+    <item>Gray Slaad</item>
+    <item>Green Slaad</item>
     <item>Grimlock</item>
     <item>Half-Elf</item>
     <item>Half-Orc</item>
@@ -27,6 +33,7 @@
     <item>Hill Dwarf</item>
     <item>Hill Giant</item>
     <item>Hobgoblin</item>
+    <item>Hound Archon</item>
     <item>Human</item>
     <item>Janni</item>
     <item>Kobold</item>
@@ -40,6 +47,7 @@
     <item>Orc</item>
     <item>Pixie</item>
     <item>Rakshasa</item>
+    <item>Red Slaad</item>
     <item>Rock Gnome</item>
     <item>Satyr</item>
     <item>Scorpionfolk</item>
@@ -52,34 +60,40 @@
     <item>Troll</item>
     <item>Wild Elf</item>
     <item>Wood Elf</item>
+    <item>Yuan-ti Abomination</item>
+    <item>Yuan-ti Halfblood</item>
+    <item>Yuan-ti Pureblood</item>
   </object>
   <object>
     <name>Has Wings</name>
+    <item>Gargoyle</item>
     <item>Harpy</item>
     <item>Pixie</item>
   </object>
   <object>
-    <name>Evil</name>
+    <name>Neutral Evil</name>
     <item>Bugbear</item>
     <item>Cloud Giant</item>
+    <item>Death Slaad</item>
     <item>Deep Dwarf</item>
     <item>Deep Halfling</item>
     <item>Derro</item>
+    <item>Doppelganger</item>
     <item>Drow</item>
     <item>Duergar Dwarf</item>
     <item>Fire Giant</item>
     <item>Frost Giant</item>
+    <item>Gargoyle</item>
     <item>Gnoll</item>
     <item>Goblin</item>
     <item>Grimlock</item>
     <item>Half-Elf</item>
     <item>Half-Orc</item>
     <item>Harpy</item>
-    <item>Hill Dwarf</item>
     <item>Hill Giant</item>
-    <item>High Elf</item>
     <item>Hobgoblin</item>
     <item>Human</item>
+    <item>Janni</item>
     <item>Kobold</item>
     <item>Lightfoot Halfling</item>
     <item>Lizardfolk</item>
@@ -88,61 +102,249 @@
     <item>Ogre</item>
     <item>Ogre Mage</item>
     <item>Orc</item>
-    <item>Rakshasa</item>
     <item>Scorpionfolk</item>
+    <item>Stone Giant</item>
+    <item>Svirfneblin</item>
     <item>Tallfellow Halfling</item>
     <item>Tiefling</item>
     <item>Troglodyte</item>
     <item>Troll</item>
-    <item>Wild Elf</item>
     <item>Wood Elf</item>
+    <item>Yuan-ti Abomination</item>
+    <item>Yuan-ti Halfblood</item>
+    <item>Yuan-ti Pureblood</item>
   </object>
   <object>
-    <name>Neutral</name>
+    <name>True Neutral</name>
+    <item>Aasimar</item>
+    <item>Blue Slaad</item>
+    <item>Centaur</item>
+    <item>Cloud Giant</item>
     <item>Deep Dwarf</item>
     <item>Deep Halfling</item>
     <item>Doppelganger</item>
+    <item>Drow</item>
     <item>Forest Gnome</item>
-    <item>Gray Elf</item>
+    <item>Goblin</item>
+    <item>Gray Slaad</item>
+    <item>Green Slaad</item>
+    <item>Grimlock</item>
     <item>Half-Elf</item>
     <item>Half-Orc</item>
-    <item>High Elf</item>
-    <item>Hill Dwarf</item>
     <item>Human</item>
     <item>Janni</item>
     <item>Lightfoot Halfling</item>
     <item>Lizardfolk</item>
-    <item>Mountain Dwarf</item>
+    <item>Red Slaad</item>
     <item>Rock Gnome</item>
     <item>Satyr</item>
     <item>Stone Giant</item>
+    <item>Svirfneblin</item>
     <item>Tallfellow Halfling</item>
-    <item>Wild Elf</item>
+    <item>Tiefling</item>
     <item>Wood Elf</item>
   </object>
   <object>
-    <name>Good</name>
+    <name>Neutral Good</name>
     <item>Aasimar</item>
     <item>Centaur</item>
     <item>Cloud Giant</item>
     <item>Deep Dwarf</item>
     <item>Deep Halfling</item>
+    <item>Doppelganger</item>
     <item>Forest Gnome</item>
     <item>Gray Elf</item>
+    <item>Grimlock</item>
     <item>Half-Elf</item>
     <item>Half-Orc</item>
     <item>High Elf</item>
     <item>Hill Dwarf</item>
     <item>Human</item>
+    <item>Janni</item>
     <item>Lightfoot Halfling</item>
+    <item>Lizardfolk</item>
     <item>Mountain Dwarf</item>
     <item>Pixie</item>
     <item>Rock Gnome</item>
+    <item>Stone Giant</item>
     <item>Storm Giant</item>
     <item>Svirfneblin</item>
     <item>Tallfellow Halfling</item>
     <item>Wild Elf</item>
     <item>Wood Elf</item>
+  </object>
+  <object>
+    <name>Lawful Evil</name>
+    <item>Cloud Giant</item>
+    <item>Deep Dwarf</item>
+    <item>Drow</item>
+    <item>Duergar Dwarf</item>
+    <item>Fire Giant</item>
+    <item>Frost Giant</item>
+    <item>Goblin</item>
+    <item>Grimlock</item>
+    <item>Half-Elf</item>
+    <item>Half-Orc</item>
+    <item>Hill Dwarf</item>
+    <item>Hill Giant</item>
+    <item>Hobgoblin</item>
+    <item>Human</item>
+    <item>Kobold</item>
+    <item>Mind Flayer</item>
+    <item>Mountain Dwarf</item>
+    <item>Ogre Mage</item>
+    <item>Orc</item>
+    <item>Rakshasa</item>
+    <item>Scorpionfolk</item>
+    <item>Tiefling</item>
+  </object>
+  <object>
+    <name>Lawful Neutral</name>
+    <item>Aasimar</item>
+    <item>Azer</item>
+    <item>Deep Dwarf</item>
+    <item>Deep Halfling</item>
+    <item>Doppelganger</item>
+    <item>Duergar Dwarf</item>
+    <item>Fire Giant</item>
+    <item>Half-Elf</item>
+    <item>Half-Orc</item>
+    <item>Hill Dwarf</item>
+    <item>Hobgoblin</item>
+    <item>Human</item>
+    <item>Janni</item>
+    <item>Kobold</item>
+    <item>Lightfoot Halfling</item>
+    <item>Lizardfolk</item>
+    <item>Mind Flayer</item>
+    <item>Mountain Dwarf</item>
+    <item>Ogre Mage</item>
+    <item>Scorpionfolk</item>
+    <item>Stone Giant</item>
+    <item>Svirfneblin</item>
+    <item>Tallfellow Halfling</item>
+    <item>Tiefling</item>
+  </object>
+  <object>
+    <name>Lawful Good</name>
+    <item>Aasimar</item>
+    <item>Centaur</item>
+    <item>Cloud Giant</item>
+    <item>Deep Dwarf</item>
+    <item>Duergar Dwarf</item>
+    <item>Fire Giant</item>
+    <item>Forest Gnome</item>
+    <item>Half-Elf</item>
+    <item>Half-Orc</item>
+    <item>Hill Dwarf</item>
+    <item>Hound Archon</item>
+    <item>Human</item>
+    <item>Mountain Dwarf</item>
+    <item>Rock Gnome</item>
+    <item>Storm Giant</item>
+  </object>
+  <object>
+    <name>Chaotic Evil</name>
+    <item>Blue Slaad</item>
+    <item>Bugbear</item>
+    <item>Cloud Giant</item>
+    <item>Death Slaad</item>
+    <item>Derro</item>
+    <item>Drow</item>
+    <item>Duergar Dwarf</item>
+    <item>Fire Giant</item>
+    <item>Frost Giant</item>
+    <item>Gargoyle</item>
+    <item>Gnoll</item>
+    <item>Goblin</item>
+    <item>Gray Slaad</item>
+    <item>Green Slaad</item>
+    <item>Grimlock</item>
+    <item>Half-Elf</item>
+    <item>Half-Orc</item>
+    <item>Harpy</item>
+    <item>Hill Giant</item>
+    <item>Human</item>
+    <item>Minotaur</item>
+    <item>Ogre</item>
+    <item>Orc</item>
+    <item>Red Slaad</item>
+    <item>Satyr</item>
+    <item>Storm Giant</item>
+    <item>Tiefling</item>
+    <item>Troglodyte</item>
+    <item>Troll</item>
+    <item>Yuan-ti Abomination</item>
+    <item>Yuan-ti Halfblood</item>
+    <item>Yuan-ti Pureblood</item>
+  </object>
+  <object>
+    <name>Chaotic Neutral</name>
+    <item>Aasimar</item>
+    <item>Blue Slaad</item>
+    <item>Bugbear</item>
+    <item>Death Slaad</item>
+    <item>Deep Dwarf</item>
+    <item>Deep Halfling</item>
+    <item>Derro</item>
+    <item>Doppelganger</item>
+    <item>Frost Giant</item>
+    <item>Gargoyle</item>
+    <item>Gnoll</item>
+    <item>Gray Elf</item>
+    <item>Gray Slaad</item>
+    <item>Green Slaad</item>
+    <item>Half-Elf</item>
+    <item>Half-Orc</item>
+    <item>Harpy</item>
+    <item>High Elf</item>
+    <item>Hill Giant</item>
+    <item>Human</item>
+    <item>Janni</item>
+    <item>Lightfoot Halfling</item>
+    <item>Lizardfolk</item>
+    <item>Minotaur</item>
+    <item>Ogre</item>
+    <item>Orc</item>
+    <item>Red Slaad</item>
+    <item>Satyr</item>
+    <item>Stone Giant</item>
+    <item>Storm Giant</item>
+    <item>Svirfneblin</item>
+    <item>Tallfellow Halfling</item>
+    <item>Tiefling</item>
+    <item>Troglodyte</item>
+    <item>Troll</item>
+    <item>Wild Elf</item>
+    <item>Wood Elf</item>
+    <item>Yuan-ti Abomination</item>
+    <item>Yuan-ti Halfblood</item>
+    <item>Yuan-ti Pureblood</item>
+  </object>
+  <object>
+    <name>Chaotic Good</name>
+    <item>Aasimar</item>
+    <item>Blue Slaad</item>
+    <item>Centaur</item>
+    <item>Cloud Giant</item>
+    <item>Forest Gnome</item>
+    <item>Frost Giant</item>
+    <item>Gray Elf</item>
+    <item>Gray Slaad</item>
+    <item>Green Slaad</item>
+    <item>Half-Elf</item>
+    <item>Half-Orc</item>
+    <item>High Elf</item>
+    <item>Hill Dwarf</item>
+    <item>Hill Giant</item>
+    <item>Human</item>
+    <item>Mountain Dwarf</item>
+    <item>Orc</item>
+    <item>Red Slaad</item>
+    <item>Rock Gnome</item>
+    <item>Satyr</item>
+    <item>Storm Giant</item>
+    <item>Wild Elf</item>
   </object>
   <object>
     <name>Standard</name>
@@ -167,27 +369,35 @@
   </object>
   <object>
     <name>Large</name>
+    <item>Blue Slaad</item>
     <item>Centaur</item>
     <item>Fire Giant</item>
     <item>Frost Giant</item>
+    <item>Green Slaad</item>
     <item>Hill Giant</item>
     <item>Minotaur</item>
     <item>Ogre</item>
     <item>Ogre Mage</item>
+    <item>Red Slaad</item>
     <item>Scorpionfolk</item>
     <item>Stone Giant</item>
     <item>Troll</item>
+    <item>Yuan-ti Abomination</item>
   </object>
   <object>
     <name>Medium</name>
     <item>Aasimar</item>
+    <item>Azer</item>
     <item>Bugbear</item>
+    <item>Death Slaad</item>
     <item>Deep Dwarf</item>
     <item>Doppelganger</item>
     <item>Drow</item>
     <item>Duergar Dwarf</item>
+    <item>Gargoyle</item>
     <item>Gnoll</item>
     <item>Gray Elf</item>
+    <item>Gray Slaad</item>
     <item>Grimlock</item>
     <item>Half-Elf</item>
     <item>Half-Orc</item>
@@ -195,6 +405,7 @@
     <item>High Elf</item>
     <item>Hill Dwarf</item>
     <item>Hobgoblin</item>
+    <item>Hound Archon</item>
     <item>Human</item>
     <item>Janni</item>
     <item>Lizardfolk</item>
@@ -207,6 +418,8 @@
     <item>Troglodyte</item>
     <item>Wild Elf</item>
     <item>Wood Elf</item>
+    <item>Yuan-ti Halfblood</item>
+    <item>Yuan-ti Pureblood</item>
   </object>
   <object>
     <name>Small</name>
@@ -226,19 +439,26 @@
   </object>
   <object>
     <name>Monsters</name>
+    <item>Azer</item>
+    <item>Blue Slaad</item>
     <item>Bugbear</item>
     <item>Centaur</item>
     <item>Cloud Giant</item>
+    <item>Death Slaad</item>
     <item>Derro</item>
     <item>Doppelganger</item>
     <item>Fire Giant</item>
     <item>Frost Giant</item>
+    <item>Gargoyle</item>
     <item>Gnoll</item>
     <item>Goblin</item>
+    <item>Gray Slaad</item>
+    <item>Green Slaad</item>
     <item>Grimlock</item>
     <item>Harpy</item>
     <item>Hill Giant</item>
     <item>Hobgoblin</item>
+    <item>Hound Archon</item>
     <item>Janni</item>
     <item>Kobold</item>
     <item>Lizardfolk</item>
@@ -249,815 +469,15 @@
     <item>Orc</item>
     <item>Pixie</item>
     <item>Rakshasa</item>
+    <item>Red Slaad</item>
     <item>Satyr</item>
     <item>Scorpionfolk</item>
     <item>Stone Giant</item>
     <item>Storm Giant</item>
     <item>Troglodyte</item>
     <item>Troll</item>
-  </object>
-  <object>
-    <name>Paladin</name>
-    <item>Aasimar</item>
-    <item>Centaur</item>
-    <item>Cloud Giant</item>
-    <item>Deep Dwarf</item>
-    <item>Deep Halfling</item>
-    <item>Forest Gnome</item>
-    <item>Gray Elf</item>
-    <item>Half-Elf</item>
-    <item>Half-Orc</item>
-    <item>High Elf</item>
-    <item>Hill Dwarf</item>
-    <item>Human</item>
-    <item>Lightfoot Halfling</item>
-    <item>Mountain Dwarf</item>
-    <item>Pixie</item>
-    <item>Rock Gnome</item>
-    <item>Storm Giant</item>
-    <item>Svirfneblin</item>
-    <item>Tallfellow Halfling</item>
-    <item>Wild Elf</item>
-    <item>Wood Elf</item>
-  </object>
-  <object>
-    <name>Adept</name>
-    <item>Aasimar</item>
-    <item>Bugbear</item>
-    <item>Centaur</item>
-    <item>Cloud Giant</item>
-    <item>Deep Dwarf</item>
-    <item>Deep Halfling</item>
-    <item>Derro</item>
-    <item>Doppelganger</item>
-    <item>Drow</item>
-    <item>Duergar Dwarf</item>
-    <item>Fire Giant</item>
-    <item>Forest Gnome</item>
-    <item>Frost Giant</item>
-    <item>Gnoll</item>
-    <item>Goblin</item>
-    <item>Gray Elf</item>
-    <item>Grimlock</item>
-    <item>Half-Elf</item>
-    <item>Half-Orc</item>
-    <item>Harpy</item>
-    <item>High Elf</item>
-    <item>Hill Dwarf</item>
-    <item>Hill Giant</item>
-    <item>Hobgoblin</item>
-    <item>Human</item>
-    <item>Janni</item>
-    <item>Kobold</item>
-    <item>Lightfoot Halfling</item>
-    <item>Lizardfolk</item>
-    <item>Mind Flayer</item>
-    <item>Minotaur</item>
-    <item>Mountain Dwarf</item>
-    <item>Ogre</item>
-    <item>Ogre Mage</item>
-    <item>Orc</item>
-    <item>Pixie</item>
-    <item>Rakshasa</item>
-    <item>Rock Gnome</item>
-    <item>Satyr</item>
-    <item>Scorpionfolk</item>
-    <item>Stone Giant</item>
-    <item>Storm Giant</item>
-    <item>Svirfneblin</item>
-    <item>Tallfellow Halfling</item>
-    <item>Tiefling</item>
-    <item>Troglodyte</item>
-    <item>Troll</item>
-    <item>Wild Elf</item>
-    <item>Wood Elf</item>
-  </object>
-  <object>
-    <name>Aristocrat</name>
-    <item>Aasimar</item>
-    <item>Bugbear</item>
-    <item>Centaur</item>
-    <item>Cloud Giant</item>
-    <item>Deep Dwarf</item>
-    <item>Deep Halfling</item>
-    <item>Derro</item>
-    <item>Doppelganger</item>
-    <item>Drow</item>
-    <item>Duergar Dwarf</item>
-    <item>Fire Giant</item>
-    <item>Forest Gnome</item>
-    <item>Frost Giant</item>
-    <item>Gnoll</item>
-    <item>Goblin</item>
-    <item>Gray Elf</item>
-    <item>Grimlock</item>
-    <item>Half-Elf</item>
-    <item>Half-Orc</item>
-    <item>Harpy</item>
-    <item>High Elf</item>
-    <item>Hill Dwarf</item>
-    <item>Hill Giant</item>
-    <item>Hobgoblin</item>
-    <item>Human</item>
-    <item>Janni</item>
-    <item>Kobold</item>
-    <item>Lightfoot Halfling</item>
-    <item>Lizardfolk</item>
-    <item>Mind Flayer</item>
-    <item>Minotaur</item>
-    <item>Mountain Dwarf</item>
-    <item>Ogre</item>
-    <item>Ogre Mage</item>
-    <item>Orc</item>
-    <item>Pixie</item>
-    <item>Rakshasa</item>
-    <item>Rock Gnome</item>
-    <item>Satyr</item>
-    <item>Scorpionfolk</item>
-    <item>Stone Giant</item>
-    <item>Storm Giant</item>
-    <item>Svirfneblin</item>
-    <item>Tallfellow Halfling</item>
-    <item>Tiefling</item>
-    <item>Troglodyte</item>
-    <item>Troll</item>
-    <item>Wild Elf</item>
-    <item>Wood Elf</item>
-  </object>
-  <object>
-    <name>Barbarian</name>
-    <item>Aasimar</item>
-    <item>Bugbear</item>
-    <item>Centaur</item>
-    <item>Cloud Giant</item>
-    <item>Deep Dwarf</item>
-    <item>Deep Halfling</item>
-    <item>Derro</item>
-    <item>Doppelganger</item>
-    <item>Drow</item>
-    <item>Duergar Dwarf</item>
-    <item>Fire Giant</item>
-    <item>Forest Gnome</item>
-    <item>Frost Giant</item>
-    <item>Gnoll</item>
-    <item>Goblin</item>
-    <item>Gray Elf</item>
-    <item>Grimlock</item>
-    <item>Half-Elf</item>
-    <item>Half-Orc</item>
-    <item>Harpy</item>
-    <item>High Elf</item>
-    <item>Hill Dwarf</item>
-    <item>Hill Giant</item>
-    <item>Hobgoblin</item>
-    <item>Human</item>
-    <item>Janni</item>
-    <item>Kobold</item>
-    <item>Lightfoot Halfling</item>
-    <item>Lizardfolk</item>
-    <item>Mind Flayer</item>
-    <item>Minotaur</item>
-    <item>Mountain Dwarf</item>
-    <item>Ogre</item>
-    <item>Ogre Mage</item>
-    <item>Orc</item>
-    <item>Pixie</item>
-    <item>Rakshasa</item>
-    <item>Rock Gnome</item>
-    <item>Satyr</item>
-    <item>Scorpionfolk</item>
-    <item>Stone Giant</item>
-    <item>Storm Giant</item>
-    <item>Svirfneblin</item>
-    <item>Tallfellow Halfling</item>
-    <item>Tiefling</item>
-    <item>Troglodyte</item>
-    <item>Troll</item>
-    <item>Wild Elf</item>
-    <item>Wood Elf</item>
-  </object>
-  <object>
-    <name>Bard</name>
-    <item>Aasimar</item>
-    <item>Bugbear</item>
-    <item>Centaur</item>
-    <item>Cloud Giant</item>
-    <item>Deep Dwarf</item>
-    <item>Deep Halfling</item>
-    <item>Derro</item>
-    <item>Doppelganger</item>
-    <item>Drow</item>
-    <item>Duergar Dwarf</item>
-    <item>Fire Giant</item>
-    <item>Forest Gnome</item>
-    <item>Frost Giant</item>
-    <item>Gnoll</item>
-    <item>Goblin</item>
-    <item>Gray Elf</item>
-    <item>Grimlock</item>
-    <item>Half-Elf</item>
-    <item>Half-Orc</item>
-    <item>Harpy</item>
-    <item>High Elf</item>
-    <item>Hill Dwarf</item>
-    <item>Hill Giant</item>
-    <item>Hobgoblin</item>
-    <item>Human</item>
-    <item>Janni</item>
-    <item>Kobold</item>
-    <item>Lightfoot Halfling</item>
-    <item>Lizardfolk</item>
-    <item>Mind Flayer</item>
-    <item>Minotaur</item>
-    <item>Mountain Dwarf</item>
-    <item>Ogre</item>
-    <item>Ogre Mage</item>
-    <item>Orc</item>
-    <item>Pixie</item>
-    <item>Rakshasa</item>
-    <item>Rock Gnome</item>
-    <item>Satyr</item>
-    <item>Scorpionfolk</item>
-    <item>Stone Giant</item>
-    <item>Storm Giant</item>
-    <item>Svirfneblin</item>
-    <item>Tallfellow Halfling</item>
-    <item>Tiefling</item>
-    <item>Troglodyte</item>
-    <item>Troll</item>
-    <item>Wild Elf</item>
-    <item>Wood Elf</item>
-  </object>
-  <object>
-    <name>Cleric</name>
-    <item>Aasimar</item>
-    <item>Bugbear</item>
-    <item>Centaur</item>
-    <item>Cloud Giant</item>
-    <item>Deep Dwarf</item>
-    <item>Deep Halfling</item>
-    <item>Derro</item>
-    <item>Doppelganger</item>
-    <item>Drow</item>
-    <item>Duergar Dwarf</item>
-    <item>Fire Giant</item>
-    <item>Forest Gnome</item>
-    <item>Frost Giant</item>
-    <item>Gnoll</item>
-    <item>Goblin</item>
-    <item>Gray Elf</item>
-    <item>Grimlock</item>
-    <item>Half-Elf</item>
-    <item>Half-Orc</item>
-    <item>Harpy</item>
-    <item>High Elf</item>
-    <item>Hill Dwarf</item>
-    <item>Hill Giant</item>
-    <item>Hobgoblin</item>
-    <item>Human</item>
-    <item>Janni</item>
-    <item>Kobold</item>
-    <item>Lightfoot Halfling</item>
-    <item>Lizardfolk</item>
-    <item>Mind Flayer</item>
-    <item>Minotaur</item>
-    <item>Mountain Dwarf</item>
-    <item>Ogre</item>
-    <item>Ogre Mage</item>
-    <item>Orc</item>
-    <item>Pixie</item>
-    <item>Rakshasa</item>
-    <item>Rock Gnome</item>
-    <item>Satyr</item>
-    <item>Scorpionfolk</item>
-    <item>Stone Giant</item>
-    <item>Storm Giant</item>
-    <item>Svirfneblin</item>
-    <item>Tallfellow Halfling</item>
-    <item>Tiefling</item>
-    <item>Troglodyte</item>
-    <item>Troll</item>
-    <item>Wild Elf</item>
-    <item>Wood Elf</item>
-  </object>
-  <object>
-    <name>Commoner</name>
-    <item>Aasimar</item>
-    <item>Bugbear</item>
-    <item>Centaur</item>
-    <item>Cloud Giant</item>
-    <item>Deep Dwarf</item>
-    <item>Deep Halfling</item>
-    <item>Derro</item>
-    <item>Doppelganger</item>
-    <item>Drow</item>
-    <item>Duergar Dwarf</item>
-    <item>Fire Giant</item>
-    <item>Forest Gnome</item>
-    <item>Frost Giant</item>
-    <item>Gnoll</item>
-    <item>Goblin</item>
-    <item>Gray Elf</item>
-    <item>Grimlock</item>
-    <item>Half-Elf</item>
-    <item>Half-Orc</item>
-    <item>Harpy</item>
-    <item>High Elf</item>
-    <item>Hill Dwarf</item>
-    <item>Hill Giant</item>
-    <item>Hobgoblin</item>
-    <item>Human</item>
-    <item>Janni</item>
-    <item>Kobold</item>
-    <item>Lightfoot Halfling</item>
-    <item>Lizardfolk</item>
-    <item>Mind Flayer</item>
-    <item>Minotaur</item>
-    <item>Mountain Dwarf</item>
-    <item>Ogre</item>
-    <item>Ogre Mage</item>
-    <item>Orc</item>
-    <item>Pixie</item>
-    <item>Rakshasa</item>
-    <item>Rock Gnome</item>
-    <item>Satyr</item>
-    <item>Scorpionfolk</item>
-    <item>Stone Giant</item>
-    <item>Storm Giant</item>
-    <item>Svirfneblin</item>
-    <item>Tallfellow Halfling</item>
-    <item>Tiefling</item>
-    <item>Troglodyte</item>
-    <item>Troll</item>
-    <item>Wild Elf</item>
-    <item>Wood Elf</item>
-  </object>
-  <object>
-    <name>Druid</name>
-    <item>Aasimar</item>
-    <item>Bugbear</item>
-    <item>Centaur</item>
-    <item>Cloud Giant</item>
-    <item>Deep Dwarf</item>
-    <item>Deep Halfling</item>
-    <item>Derro</item>
-    <item>Doppelganger</item>
-    <item>Drow</item>
-    <item>Duergar Dwarf</item>
-    <item>Fire Giant</item>
-    <item>Forest Gnome</item>
-    <item>Frost Giant</item>
-    <item>Gnoll</item>
-    <item>Goblin</item>
-    <item>Gray Elf</item>
-    <item>Grimlock</item>
-    <item>Half-Elf</item>
-    <item>Half-Orc</item>
-    <item>Harpy</item>
-    <item>High Elf</item>
-    <item>Hill Dwarf</item>
-    <item>Hill Giant</item>
-    <item>Hobgoblin</item>
-    <item>Human</item>
-    <item>Janni</item>
-    <item>Kobold</item>
-    <item>Lightfoot Halfling</item>
-    <item>Lizardfolk</item>
-    <item>Mind Flayer</item>
-    <item>Minotaur</item>
-    <item>Mountain Dwarf</item>
-    <item>Ogre</item>
-    <item>Ogre Mage</item>
-    <item>Orc</item>
-    <item>Pixie</item>
-    <item>Rakshasa</item>
-    <item>Rock Gnome</item>
-    <item>Satyr</item>
-    <item>Scorpionfolk</item>
-    <item>Stone Giant</item>
-    <item>Storm Giant</item>
-    <item>Svirfneblin</item>
-    <item>Tallfellow Halfling</item>
-    <item>Tiefling</item>
-    <item>Troglodyte</item>
-    <item>Troll</item>
-    <item>Wild Elf</item>
-    <item>Wood Elf</item>
-  </object>
-  <object>
-    <name>Expert</name>
-    <item>Aasimar</item>
-    <item>Bugbear</item>
-    <item>Centaur</item>
-    <item>Cloud Giant</item>
-    <item>Deep Dwarf</item>
-    <item>Deep Halfling</item>
-    <item>Derro</item>
-    <item>Doppelganger</item>
-    <item>Drow</item>
-    <item>Duergar Dwarf</item>
-    <item>Fire Giant</item>
-    <item>Forest Gnome</item>
-    <item>Frost Giant</item>
-    <item>Gnoll</item>
-    <item>Goblin</item>
-    <item>Gray Elf</item>
-    <item>Grimlock</item>
-    <item>Half-Elf</item>
-    <item>Half-Orc</item>
-    <item>Harpy</item>
-    <item>High Elf</item>
-    <item>Hill Dwarf</item>
-    <item>Hill Giant</item>
-    <item>Hobgoblin</item>
-    <item>Human</item>
-    <item>Janni</item>
-    <item>Kobold</item>
-    <item>Lightfoot Halfling</item>
-    <item>Lizardfolk</item>
-    <item>Mind Flayer</item>
-    <item>Minotaur</item>
-    <item>Mountain Dwarf</item>
-    <item>Ogre</item>
-    <item>Ogre Mage</item>
-    <item>Orc</item>
-    <item>Pixie</item>
-    <item>Rakshasa</item>
-    <item>Rock Gnome</item>
-    <item>Satyr</item>
-    <item>Scorpionfolk</item>
-    <item>Stone Giant</item>
-    <item>Storm Giant</item>
-    <item>Svirfneblin</item>
-    <item>Tallfellow Halfling</item>
-    <item>Tiefling</item>
-    <item>Troglodyte</item>
-    <item>Troll</item>
-    <item>Wild Elf</item>
-    <item>Wood Elf</item>
-  </object>
-  <object>
-    <name>Fighter</name>
-    <item>Aasimar</item>
-    <item>Bugbear</item>
-    <item>Centaur</item>
-    <item>Cloud Giant</item>
-    <item>Deep Dwarf</item>
-    <item>Deep Halfling</item>
-    <item>Derro</item>
-    <item>Doppelganger</item>
-    <item>Drow</item>
-    <item>Duergar Dwarf</item>
-    <item>Fire Giant</item>
-    <item>Forest Gnome</item>
-    <item>Frost Giant</item>
-    <item>Gnoll</item>
-    <item>Goblin</item>
-    <item>Gray Elf</item>
-    <item>Grimlock</item>
-    <item>Half-Elf</item>
-    <item>Half-Orc</item>
-    <item>Harpy</item>
-    <item>High Elf</item>
-    <item>Hill Dwarf</item>
-    <item>Hill Giant</item>
-    <item>Hobgoblin</item>
-    <item>Human</item>
-    <item>Janni</item>
-    <item>Kobold</item>
-    <item>Lightfoot Halfling</item>
-    <item>Lizardfolk</item>
-    <item>Mind Flayer</item>
-    <item>Minotaur</item>
-    <item>Mountain Dwarf</item>
-    <item>Ogre</item>
-    <item>Ogre Mage</item>
-    <item>Orc</item>
-    <item>Pixie</item>
-    <item>Rakshasa</item>
-    <item>Rock Gnome</item>
-    <item>Satyr</item>
-    <item>Scorpionfolk</item>
-    <item>Stone Giant</item>
-    <item>Storm Giant</item>
-    <item>Svirfneblin</item>
-    <item>Tallfellow Halfling</item>
-    <item>Tiefling</item>
-    <item>Troglodyte</item>
-    <item>Troll</item>
-    <item>Wild Elf</item>
-    <item>Wood Elf</item>
-  </object>
-  <object>
-    <name>Monk</name>
-    <item>Aasimar</item>
-    <item>Bugbear</item>
-    <item>Centaur</item>
-    <item>Cloud Giant</item>
-    <item>Deep Dwarf</item>
-    <item>Deep Halfling</item>
-    <item>Derro</item>
-    <item>Doppelganger</item>
-    <item>Drow</item>
-    <item>Duergar Dwarf</item>
-    <item>Fire Giant</item>
-    <item>Forest Gnome</item>
-    <item>Frost Giant</item>
-    <item>Gnoll</item>
-    <item>Goblin</item>
-    <item>Gray Elf</item>
-    <item>Grimlock</item>
-    <item>Half-Elf</item>
-    <item>Half-Orc</item>
-    <item>Harpy</item>
-    <item>High Elf</item>
-    <item>Hill Dwarf</item>
-    <item>Hill Giant</item>
-    <item>Hobgoblin</item>
-    <item>Human</item>
-    <item>Janni</item>
-    <item>Kobold</item>
-    <item>Lightfoot Halfling</item>
-    <item>Lizardfolk</item>
-    <item>Mind Flayer</item>
-    <item>Minotaur</item>
-    <item>Mountain Dwarf</item>
-    <item>Ogre</item>
-    <item>Ogre Mage</item>
-    <item>Orc</item>
-    <item>Pixie</item>
-    <item>Rakshasa</item>
-    <item>Rock Gnome</item>
-    <item>Satyr</item>
-    <item>Scorpionfolk</item>
-    <item>Stone Giant</item>
-    <item>Storm Giant</item>
-    <item>Svirfneblin</item>
-    <item>Tallfellow Halfling</item>
-    <item>Tiefling</item>
-    <item>Troglodyte</item>
-    <item>Troll</item>
-    <item>Wild Elf</item>
-    <item>Wood Elf</item>
-  </object>
-  <object>
-    <name>Ranger</name>
-    <item>Aasimar</item>
-    <item>Bugbear</item>
-    <item>Centaur</item>
-    <item>Cloud Giant</item>
-    <item>Deep Dwarf</item>
-    <item>Deep Halfling</item>
-    <item>Derro</item>
-    <item>Doppelganger</item>
-    <item>Drow</item>
-    <item>Duergar Dwarf</item>
-    <item>Fire Giant</item>
-    <item>Forest Gnome</item>
-    <item>Frost Giant</item>
-    <item>Gnoll</item>
-    <item>Goblin</item>
-    <item>Gray Elf</item>
-    <item>Grimlock</item>
-    <item>Half-Elf</item>
-    <item>Half-Orc</item>
-    <item>Harpy</item>
-    <item>High Elf</item>
-    <item>Hill Dwarf</item>
-    <item>Hill Giant</item>
-    <item>Hobgoblin</item>
-    <item>Human</item>
-    <item>Janni</item>
-    <item>Kobold</item>
-    <item>Lightfoot Halfling</item>
-    <item>Lizardfolk</item>
-    <item>Mind Flayer</item>
-    <item>Minotaur</item>
-    <item>Mountain Dwarf</item>
-    <item>Ogre</item>
-    <item>Ogre Mage</item>
-    <item>Orc</item>
-    <item>Pixie</item>
-    <item>Rakshasa</item>
-    <item>Rock Gnome</item>
-    <item>Satyr</item>
-    <item>Scorpionfolk</item>
-    <item>Stone Giant</item>
-    <item>Storm Giant</item>
-    <item>Svirfneblin</item>
-    <item>Tallfellow Halfling</item>
-    <item>Tiefling</item>
-    <item>Troglodyte</item>
-    <item>Troll</item>
-    <item>Wild Elf</item>
-    <item>Wood Elf</item>
-  </object>
-  <object>
-    <name>Rogue</name>
-    <item>Aasimar</item>
-    <item>Bugbear</item>
-    <item>Centaur</item>
-    <item>Cloud Giant</item>
-    <item>Deep Dwarf</item>
-    <item>Deep Halfling</item>
-    <item>Derro</item>
-    <item>Doppelganger</item>
-    <item>Drow</item>
-    <item>Duergar Dwarf</item>
-    <item>Fire Giant</item>
-    <item>Forest Gnome</item>
-    <item>Frost Giant</item>
-    <item>Gnoll</item>
-    <item>Goblin</item>
-    <item>Gray Elf</item>
-    <item>Grimlock</item>
-    <item>Half-Elf</item>
-    <item>Half-Orc</item>
-    <item>Harpy</item>
-    <item>High Elf</item>
-    <item>Hill Dwarf</item>
-    <item>Hill Giant</item>
-    <item>Hobgoblin</item>
-    <item>Human</item>
-    <item>Janni</item>
-    <item>Kobold</item>
-    <item>Lightfoot Halfling</item>
-    <item>Lizardfolk</item>
-    <item>Mind Flayer</item>
-    <item>Minotaur</item>
-    <item>Mountain Dwarf</item>
-    <item>Ogre</item>
-    <item>Ogre Mage</item>
-    <item>Orc</item>
-    <item>Pixie</item>
-    <item>Rakshasa</item>
-    <item>Rock Gnome</item>
-    <item>Satyr</item>
-    <item>Scorpionfolk</item>
-    <item>Stone Giant</item>
-    <item>Storm Giant</item>
-    <item>Svirfneblin</item>
-    <item>Tallfellow Halfling</item>
-    <item>Tiefling</item>
-    <item>Troglodyte</item>
-    <item>Troll</item>
-    <item>Wild Elf</item>
-    <item>Wood Elf</item>
-  </object>
-  <object>
-    <name>Sorcerer</name>
-    <item>Aasimar</item>
-    <item>Bugbear</item>
-    <item>Centaur</item>
-    <item>Cloud Giant</item>
-    <item>Deep Dwarf</item>
-    <item>Deep Halfling</item>
-    <item>Derro</item>
-    <item>Doppelganger</item>
-    <item>Drow</item>
-    <item>Duergar Dwarf</item>
-    <item>Fire Giant</item>
-    <item>Forest Gnome</item>
-    <item>Frost Giant</item>
-    <item>Gnoll</item>
-    <item>Goblin</item>
-    <item>Gray Elf</item>
-    <item>Grimlock</item>
-    <item>Half-Elf</item>
-    <item>Half-Orc</item>
-    <item>Harpy</item>
-    <item>High Elf</item>
-    <item>Hill Dwarf</item>
-    <item>Hill Giant</item>
-    <item>Hobgoblin</item>
-    <item>Human</item>
-    <item>Janni</item>
-    <item>Kobold</item>
-    <item>Lightfoot Halfling</item>
-    <item>Lizardfolk</item>
-    <item>Mind Flayer</item>
-    <item>Minotaur</item>
-    <item>Mountain Dwarf</item>
-    <item>Ogre</item>
-    <item>Ogre Mage</item>
-    <item>Orc</item>
-    <item>Pixie</item>
-    <item>Rakshasa</item>
-    <item>Rock Gnome</item>
-    <item>Satyr</item>
-    <item>Scorpionfolk</item>
-    <item>Stone Giant</item>
-    <item>Storm Giant</item>
-    <item>Svirfneblin</item>
-    <item>Tallfellow Halfling</item>
-    <item>Tiefling</item>
-    <item>Troglodyte</item>
-    <item>Troll</item>
-    <item>Wild Elf</item>
-    <item>Wood Elf</item>
-  </object>
-  <object>
-    <name>Warrior</name>
-    <item>Aasimar</item>
-    <item>Bugbear</item>
-    <item>Centaur</item>
-    <item>Cloud Giant</item>
-    <item>Deep Dwarf</item>
-    <item>Deep Halfling</item>
-    <item>Derro</item>
-    <item>Doppelganger</item>
-    <item>Drow</item>
-    <item>Duergar Dwarf</item>
-    <item>Fire Giant</item>
-    <item>Forest Gnome</item>
-    <item>Frost Giant</item>
-    <item>Gnoll</item>
-    <item>Goblin</item>
-    <item>Gray Elf</item>
-    <item>Grimlock</item>
-    <item>Half-Elf</item>
-    <item>Half-Orc</item>
-    <item>Harpy</item>
-    <item>High Elf</item>
-    <item>Hill Dwarf</item>
-    <item>Hill Giant</item>
-    <item>Hobgoblin</item>
-    <item>Human</item>
-    <item>Janni</item>
-    <item>Kobold</item>
-    <item>Lightfoot Halfling</item>
-    <item>Lizardfolk</item>
-    <item>Mind Flayer</item>
-    <item>Minotaur</item>
-    <item>Mountain Dwarf</item>
-    <item>Ogre</item>
-    <item>Ogre Mage</item>
-    <item>Orc</item>
-    <item>Pixie</item>
-    <item>Rakshasa</item>
-    <item>Rock Gnome</item>
-    <item>Satyr</item>
-    <item>Scorpionfolk</item>
-    <item>Stone Giant</item>
-    <item>Storm Giant</item>
-    <item>Svirfneblin</item>
-    <item>Tallfellow Halfling</item>
-    <item>Tiefling</item>
-    <item>Troglodyte</item>
-    <item>Troll</item>
-    <item>Wild Elf</item>
-    <item>Wood Elf</item>
-  </object>
-  <object>
-    <name>Wizard</name>
-    <item>Aasimar</item>
-    <item>Bugbear</item>
-    <item>Centaur</item>
-    <item>Cloud Giant</item>
-    <item>Deep Dwarf</item>
-    <item>Deep Halfling</item>
-    <item>Derro</item>
-    <item>Doppelganger</item>
-    <item>Drow</item>
-    <item>Duergar Dwarf</item>
-    <item>Fire Giant</item>
-    <item>Forest Gnome</item>
-    <item>Frost Giant</item>
-    <item>Gnoll</item>
-    <item>Goblin</item>
-    <item>Gray Elf</item>
-    <item>Grimlock</item>
-    <item>Half-Elf</item>
-    <item>Half-Orc</item>
-    <item>Harpy</item>
-    <item>High Elf</item>
-    <item>Hill Dwarf</item>
-    <item>Hill Giant</item>
-    <item>Hobgoblin</item>
-    <item>Human</item>
-    <item>Janni</item>
-    <item>Kobold</item>
-    <item>Lightfoot Halfling</item>
-    <item>Lizardfolk</item>
-    <item>Mind Flayer</item>
-    <item>Minotaur</item>
-    <item>Mountain Dwarf</item>
-    <item>Ogre</item>
-    <item>Ogre Mage</item>
-    <item>Orc</item>
-    <item>Pixie</item>
-    <item>Rakshasa</item>
-    <item>Rock Gnome</item>
-    <item>Satyr</item>
-    <item>Scorpionfolk</item>
-    <item>Stone Giant</item>
-    <item>Storm Giant</item>
-    <item>Svirfneblin</item>
-    <item>Tallfellow Halfling</item>
-    <item>Tiefling</item>
-    <item>Troglodyte</item>
-    <item>Troll</item>
-    <item>Wild Elf</item>
-    <item>Wood Elf</item>
+    <item>Yuan-ti Abomination</item>
+    <item>Yuan-ti Halfblood</item>
+    <item>Yuan-ti Pureblood</item>
   </object>
 </items>

@@ -19,6 +19,11 @@
   <object>
     <lower>12</lower>
     <content>Wood Elf</content>
+    <upper>30</upper>
+  </object>
+  <object>
+    <lower>31</lower>
+    <content>Azer</content>
     <upper>31</upper>
   </object>
   <object>
@@ -49,6 +54,11 @@
   <object>
     <lower>41</lower>
     <content>Human</content>
+    <upper>87</upper>
+  </object>
+  <object>
+    <lower>88</lower>
+    <content>Gray Slaad</content>
     <upper>88</upper>
   </object>
   <object>

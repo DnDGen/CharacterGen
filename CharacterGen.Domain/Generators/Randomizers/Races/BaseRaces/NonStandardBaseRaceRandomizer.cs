@@ -5,21 +5,16 @@ using System.Linq;
 
 namespace CharacterGen.Domain.Generators.Randomizers.Races.BaseRaces
 {
-    internal class NonStandardBaseRaceRandomizer : BaseRaceRandomizer
+    internal class NonStandardBaseRaceRandomizer : BaseRaceRandomizerBase
     {
-        private ICollectionsSelector collectionsSelector;
-
-        public NonStandardBaseRaceRandomizer(IPercentileSelector percentileResultSelector, IAdjustmentsSelector levelAdjustmentSelector,
-            ICollectionsSelector collectionsSelector, Generator generator)
-            : base(percentileResultSelector, levelAdjustmentSelector, generator)
-        {
-            this.collectionsSelector = collectionsSelector;
-        }
+        public NonStandardBaseRaceRandomizer(IPercentileSelector percentileResultSelector, IAdjustmentsSelector levelAdjustmentSelector, ICollectionsSelector collectionSelector, Generator generator)
+            : base(percentileResultSelector, levelAdjustmentSelector, generator, collectionSelector)
+        { }
 
         protected override bool BaseRaceIsAllowed(string baseRace)
         {
-            var baseRaces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Standard);
-            return !baseRaces.Contains(baseRace);
+            var standardBaseRaces = collectionSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Standard);
+            return !standardBaseRaces.Contains(baseRace);
         }
     }
 }

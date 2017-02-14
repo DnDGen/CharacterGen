@@ -13,19 +13,21 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Damage Reduction</name>
     <item>Damage Reduction</item>
     <item></item>
     <item>0</item>
-    <item>0</item>
-    <item>Must be both good and piercing to overcome</item>
     <item>15</item>
+    <item>Must be both good and piercing to overcome</item>
+    <item>1</item>
     <item>Hit</item>
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Natural Armor</name>
@@ -39,6 +41,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Spell Resistance</name>
@@ -52,6 +55,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Natural WeaponBite</name>
@@ -65,6 +69,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Natural WeaponClaw</name>
@@ -78,6 +83,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Save BonusFortitude</name>
@@ -91,6 +97,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Save BonusWill</name>
@@ -104,6 +111,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Save BonusReflex</name>
@@ -117,6 +125,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Darkvision</name>
@@ -130,6 +139,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Skill BonusBluff</name>
@@ -143,6 +153,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Skill BonusDisguise</name>
@@ -156,6 +167,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Skill BonusDisguiseChange Shape</name>
@@ -169,6 +181,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Skill BonusBluffDetect thoughts</name>
@@ -182,6 +195,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Skill BonusDisguiseDetect thoughts</name>
@@ -195,6 +209,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Spell-Like AbilityDetect thoughts</name>
@@ -208,5 +223,6 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
 </items>

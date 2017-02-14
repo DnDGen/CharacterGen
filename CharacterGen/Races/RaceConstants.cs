@@ -25,9 +25,12 @@
         public static class BaseRaces
         {
             public const string Aasimar = "Aasimar";
+            public const string Azer = "Azer";
+            public const string BlueSlaad = "Blue Slaad";
             public const string Bugbear = "Bugbear";
             public const string Centaur = "Centaur";
             public const string CloudGiant = "Cloud Giant";
+            public const string DeathSlaad = "Death Slaad";
             public const string DeepDwarf = "Deep Dwarf";
             public const string DeepHalfling = "Deep Halfling";
             public const string Derro = "Derro";
@@ -37,9 +40,12 @@
             public const string FireGiant = "Fire Giant";
             public const string ForestGnome = "Forest Gnome";
             public const string FrostGiant = "Frost Giant";
+            public const string Gargoyle = "Gargoyle";
             public const string Goblin = "Goblin";
             public const string Gnoll = "Gnoll";
             public const string GrayElf = "Gray Elf";
+            public const string GraySlaad = "Gray Slaad";
+            public const string GreenSlaad = "Green Slaad";
             public const string Grimlock = "Grimlock";
             public const string HalfElf = "Half-Elf";
             public const string HalfOrc = "Half-Orc";
@@ -48,6 +54,7 @@
             public const string HillDwarf = "Hill Dwarf";
             public const string HillGiant = "Hill Giant";
             public const string Hobgoblin = "Hobgoblin";
+            public const string HoundArchon = "Hound Archon";
             public const string Human = "Human";
             public const string Janni = "Janni";
             public const string Kobold = "Kobold";
@@ -61,6 +68,7 @@
             public const string Orc = "Orc";
             public const string Pixie = "Pixie";
             public const string Rakshasa = "Rakshasa";
+            public const string RedSlaad = "Red Slaad";
             public const string RockGnome = "Rock Gnome";
             public const string Satyr = "Satyr";
             public const string Scorpionfolk = "Scorpionfolk";
@@ -73,6 +81,9 @@
             public const string Troll = "Troll";
             public const string WildElf = "Wild Elf";
             public const string WoodElf = "Wood Elf";
+            public const string YuanTiAbomination = "Yuan-ti Abomination";
+            public const string YuanTiHalfblood = "Yuan-ti Halfblood";
+            public const string YuanTiPureblood = "Yuan-ti Pureblood";
 
             public static class Animals
             {
@@ -178,18 +189,19 @@
 
         public static class Metaraces
         {
+            public const string Ghost = "Ghost";
             public const string HalfCelestial = "Half-Celestial";
             public const string HalfDragon = "Half-Dragon";
             public const string HalfFiend = "Half-Fiend";
+            public const string Lich = "Lich";
+            public const string Mummy = "Mummy";
+            public const string None = "";
+            public const string Vampire = "Vampire";
             public const string Werebear = "Werebear";
             public const string Wereboar = "Wereboar";
             public const string Weretiger = "Weretiger";
             public const string Wererat = "Wererat";
             public const string Werewolf = "Werewolf";
-            public const string Vampire = "Vampire";
-            public const string Ghost = "Ghost";
-            public const string Lich = "Lich";
-            public const string None = "";
 
             public static class Species
             {

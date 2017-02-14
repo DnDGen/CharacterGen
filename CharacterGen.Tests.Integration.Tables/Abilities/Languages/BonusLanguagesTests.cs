@@ -18,30 +18,10 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Languages
         [Test]
         public override void CollectionNames()
         {
-            var names = new[]
-            {
-                CharacterClassConstants.Adept,
-                CharacterClassConstants.Aristocrat,
-                CharacterClassConstants.Barbarian,
-                CharacterClassConstants.Bard,
-                CharacterClassConstants.Cleric,
-                CharacterClassConstants.Commoner,
-                CharacterClassConstants.Druid,
-                CharacterClassConstants.Expert,
-                CharacterClassConstants.Fighter,
-                CharacterClassConstants.Monk,
-                CharacterClassConstants.Paladin,
-                CharacterClassConstants.Ranger,
-                CharacterClassConstants.Rogue,
-                CharacterClassConstants.Sorcerer,
-                CharacterClassConstants.Warrior,
-                CharacterClassConstants.Wizard,
-            };
-
             var baseRaceGroups = CollectionsMapper.Map(TableNameConstants.Set.Collection.BaseRaceGroups);
-            var allBaseRaces = baseRaceGroups[GroupConstants.All];
-            names = names.Union(allBaseRaces).ToArray();
+            var classes = CollectionsMapper.Map(TableNameConstants.Set.Collection.ClassNameGroups);
 
+            var names = classes[GroupConstants.All].Union(baseRaceGroups[GroupConstants.All]);
             AssertCollectionNames(names);
         }
 
@@ -52,6 +32,13 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Languages
             LanguageConstants.Draconic,
             LanguageConstants.Halfling,
             LanguageConstants.Sylvan)]
+        [TestCase(RaceConstants.BaseRaces.Azer,
+            LanguageConstants.Abyssal,
+            LanguageConstants.Aquan,
+            LanguageConstants.Auran,
+            LanguageConstants.Celestial,
+            LanguageConstants.Infernal,
+            LanguageConstants.Terran)]
         [TestCase(RaceConstants.BaseRaces.Bugbear,
             LanguageConstants.Giant,
             LanguageConstants.Elven,
@@ -130,6 +117,14 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Languages
             LanguageConstants.Elven,
             LanguageConstants.Goblin,
             LanguageConstants.Orc)]
+        [TestCase(RaceConstants.BaseRaces.Gargoyle,
+            LanguageConstants.Auran,
+            LanguageConstants.Dwarven,
+            LanguageConstants.Elven,
+            LanguageConstants.Gnome,
+            LanguageConstants.Halfling,
+            LanguageConstants.Giant,
+            LanguageConstants.Terran)]
         [TestCase(RaceConstants.BaseRaces.Gnoll,
             LanguageConstants.Common,
             LanguageConstants.Goblin,
@@ -190,6 +185,10 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Languages
             LanguageConstants.Orc,
             LanguageConstants.Draconic,
             LanguageConstants.Giant)]
+        [TestCase(RaceConstants.BaseRaces.HoundArchon,
+            LanguageConstants.Common,
+            LanguageConstants.Draconic,
+            LanguageConstants.Infernal)]
         [TestCase(RaceConstants.BaseRaces.Janni,
             LanguageConstants.Abyssal,
             LanguageConstants.Aquan,
@@ -313,6 +312,15 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Languages
             LanguageConstants.Orc,
             LanguageConstants.Gnome,
             LanguageConstants.Sylvan)]
+        [TestCase(RaceConstants.BaseRaces.YuanTiAbomination,
+            LanguageConstants.Draconic,
+            LanguageConstants.Abyssal)]
+        [TestCase(RaceConstants.BaseRaces.YuanTiHalfblood,
+            LanguageConstants.Draconic,
+            LanguageConstants.Abyssal)]
+        [TestCase(RaceConstants.BaseRaces.YuanTiPureblood,
+            LanguageConstants.Draconic,
+            LanguageConstants.Abyssal)]
         [TestCase(CharacterClassConstants.Cleric,
             LanguageConstants.Abyssal,
             LanguageConstants.Celestial,
@@ -334,21 +342,46 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Languages
         [TestCase(CharacterClassConstants.Commoner)]
         [TestCase(CharacterClassConstants.Expert)]
         [TestCase(CharacterClassConstants.Warrior)]
-        public override void DistinctCollection(string name, params string[] collection)
+        public void BonusLanguages(string name, params string[] collection)
         {
             base.DistinctCollection(name, collection);
         }
 
+        [TestCase(RaceConstants.BaseRaces.BlueSlaad)]
+        [TestCase(RaceConstants.BaseRaces.DeathSlaad)]
+        [TestCase(RaceConstants.BaseRaces.GraySlaad)]
+        [TestCase(RaceConstants.BaseRaces.GreenSlaad)]
         [TestCase(RaceConstants.BaseRaces.HalfElf)]
         [TestCase(RaceConstants.BaseRaces.Human)]
         [TestCase(RaceConstants.BaseRaces.MindFlayer)]
+        [TestCase(RaceConstants.BaseRaces.RedSlaad)]
         [TestCase(RaceConstants.BaseRaces.Scorpionfolk)]
-        public void AllLanguagesExceptDruidicAreBonusLanguages(string name)
+        public void AllGeneralLanguagesAreBonusLanguages(string name)
         {
-            var allLanguages = LanguageConstants.GetLanguages();
-            var bonusLanguages = allLanguages.Except(new[] { LanguageConstants.Druidic }).ToArray();
+            var generalLanguages = new[]
+            {
+                LanguageConstants.Abyssal,
+                LanguageConstants.Aquan,
+                LanguageConstants.Auran,
+                LanguageConstants.Celestial,
+                LanguageConstants.Common,
+                LanguageConstants.Draconic,
+                LanguageConstants.Dwarven,
+                LanguageConstants.Elven,
+                LanguageConstants.Giant,
+                LanguageConstants.Gnoll,
+                LanguageConstants.Gnome,
+                LanguageConstants.Goblin,
+                LanguageConstants.Halfling,
+                LanguageConstants.Ignan,
+                LanguageConstants.Infernal,
+                LanguageConstants.Orc,
+                LanguageConstants.Sylvan,
+                LanguageConstants.Terran,
+                LanguageConstants.Undercommon,
+            };
 
-            base.DistinctCollection(name, bonusLanguages);
+            base.DistinctCollection(name, generalLanguages);
         }
     }
 }

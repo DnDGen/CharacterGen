@@ -1,53 +1,52 @@
 ﻿using CharacterGen.Domain.Generators.Randomizers.Races.Metaraces;
-using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Tables;
 using CharacterGen.Races;
-using Moq;
+using CharacterGen.Randomizers.Races;
 using NUnit.Framework;
 using System.Collections.Generic;
 
 namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
 {
     [TestFixture]
-    public class LycanthropeMetaraceRandomizerTests : MetaraceRandomizerTests
+    public class LycanthropeMetaraceRandomizerTests : MetaraceRandomizerTestBase
     {
-        protected override IEnumerable<string> metaraceNames
+        protected override IEnumerable<string> metaraces
         {
             get
             {
                 return new[]
                 {
+                    "genetic metarace",
                     "lycanthrope metarace",
-                    RaceConstants.Metaraces.None
+                    "undead metarace",
+                    RaceConstants.Metaraces.None,
                 };
             }
         }
 
-        private Mock<ICollectionsSelector> mockCollectionsSelector;
-
         [SetUp]
         public void Setup()
         {
-            mockCollectionsSelector = new Mock<ICollectionsSelector>();
-            randomizer = new LycanthropeMetaraceRandomizer(mockPercentileResultSelector.Object, mockAdjustmentsSelector.Object, mockCollectionsSelector.Object, generator);
+            randomizer = new LycanthropeMetaraceRandomizer(mockPercentileSelector.Object, mockAdjustmentsSelector.Object, mockCollectionSelector.Object, generator);
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Lycanthrope))
+            mockCollectionSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Lycanthrope))
                 .Returns(new[] { "lycanthrope metarace" });
         }
 
-        [TestCase("lycanthrope metarace")]
-        [TestCase(RaceConstants.Metaraces.None)]
-        public void Allowed(string metarace)
+        [Test]
+        public void LycanthropeMetaracesAllowed()
         {
+            (randomizer as IForcableMetaraceRandomizer).ForceMetarace = false;
             var metaraces = randomizer.GetAllPossible(alignment, characterClass);
-            Assert.That(metaraces, Contains.Item(metarace));
+            Assert.That(metaraces, Is.EquivalentTo(new[] { "lycanthrope metarace", RaceConstants.Metaraces.None }));
         }
 
-        [TestCase("genetic metarace")]
-        public void NotAllowed(string metarace)
+        [Test]
+        public void OnlyLycanthropeMetaracesAllowed()
         {
+            (randomizer as IForcableMetaraceRandomizer).ForceMetarace = true;
             var metaraces = randomizer.GetAllPossible(alignment, characterClass);
-            Assert.That(metaraces, Is.All.Not.EqualTo(metarace));
+            Assert.That(metaraces, Is.EquivalentTo(new[] { "lycanthrope metarace" }));
         }
     }
 }

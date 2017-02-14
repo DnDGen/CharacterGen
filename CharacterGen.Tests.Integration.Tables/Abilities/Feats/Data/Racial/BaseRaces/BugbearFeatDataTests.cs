@@ -1,9 +1,9 @@
 ﻿using CharacterGen.Abilities.Feats;
 using CharacterGen.Abilities.Skills;
+using CharacterGen.Combats;
 using CharacterGen.Domain.Tables;
 using CharacterGen.Races;
 using NUnit.Framework;
-using System;
 
 namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial.BaseRaces
 {
@@ -20,9 +20,9 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial.Base
         {
             var names = new[]
             {
-                FeatConstants.SaveBonus + "Fortitude",
-                FeatConstants.SaveBonus + "Will",
-                FeatConstants.SaveBonus + "Reflex",
+                FeatConstants.SaveBonus + SavingThrowConstants.Fortitude,
+                FeatConstants.SaveBonus + SavingThrowConstants.Will,
+                FeatConstants.SaveBonus + SavingThrowConstants.Reflex,
                 FeatConstants.NaturalArmor,
                 FeatConstants.SkillBonus + SkillConstants.MoveSilently,
                 FeatConstants.Darkvision,
@@ -32,27 +32,27 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial.Base
             AssertCollectionNames(names);
         }
 
-        [TestCase(FeatConstants.SaveBonus + "Fortitude",
+        [TestCase(FeatConstants.SaveBonus + SavingThrowConstants.Fortitude,
             FeatConstants.SaveBonus,
-            "Fortitude",
+            SavingThrowConstants.Fortitude,
             0,
             "",
             0,
             "",
             1,
             0, 0)]
-        [TestCase(FeatConstants.SaveBonus + "Will",
+        [TestCase(FeatConstants.SaveBonus + SavingThrowConstants.Will,
             FeatConstants.SaveBonus,
-            "Will",
+            SavingThrowConstants.Will,
             0,
             "",
             0,
             "",
             1,
             0, 0)]
-        [TestCase(FeatConstants.SaveBonus + "Reflex",
+        [TestCase(FeatConstants.SaveBonus + SavingThrowConstants.Reflex,
             FeatConstants.SaveBonus,
-            "Reflex",
+            SavingThrowConstants.Reflex,
             0,
             "",
             0,
@@ -95,9 +95,9 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial.Base
             "",
             0,
             0, 0)]
-        public override void RacialFeatData(String name, String feat, String focus, Int32 frequencyQuantity, String frequencyTimePeriod, Int32 minimumHitDiceRequirement, String sizeRequirement, Int32 strength, Int32 maximumHitDiceRequirement, Int32 requiredStatMinimumValue, params String[] minimumStats)
+        public override void RacialFeatData(string name, string feat, string focus, int frequencyQuantity, string frequencyTimePeriod, int minimumHitDiceRequirement, string sizeRequirement, int power, int maximumHitDiceRequirement, int requiredStatMinimumValue, params string[] minimumStats)
         {
-            base.RacialFeatData(name, feat, focus, frequencyQuantity, frequencyTimePeriod, minimumHitDiceRequirement, sizeRequirement, strength, maximumHitDiceRequirement, requiredStatMinimumValue, minimumStats);
+            base.RacialFeatData(name, feat, focus, frequencyQuantity, frequencyTimePeriod, minimumHitDiceRequirement, sizeRequirement, power, maximumHitDiceRequirement, requiredStatMinimumValue, minimumStats);
         }
     }
 }

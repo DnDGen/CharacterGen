@@ -18,6 +18,8 @@ namespace CharacterGen.Tests.Unit.Selectors.Selections
         public void SkillSelectionInitialized()
         {
             Assert.That(selection.BaseStatName, Is.Empty);
+            Assert.That(selection.SkillName, Is.Empty);
+            Assert.That(selection.RandomFociQuantity, Is.EqualTo(0));
         }
     }
 }

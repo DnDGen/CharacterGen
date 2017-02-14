@@ -18,17 +18,22 @@ namespace CharacterGen.Domain.Generators
         private ICollectionsSelector collectionsSelector;
         private IAdjustmentsSelector adjustmentsSelector;
         private Dice dice;
+        private Generator generator;
 
         private readonly IEnumerable<string> allSizes;
         private readonly IEnumerable<string> allClassTypes;
 
-        public RaceGenerator(IBooleanPercentileSelector booleanPercentileSelector, ICollectionsSelector collectionsSelector, IAdjustmentsSelector adjustmentsSelector,
-            Dice dice)
+        public RaceGenerator(IBooleanPercentileSelector booleanPercentileSelector,
+            ICollectionsSelector collectionsSelector,
+            IAdjustmentsSelector adjustmentsSelector,
+            Dice dice,
+            Generator generator)
         {
             this.booleanPercentileSelector = booleanPercentileSelector;
             this.collectionsSelector = collectionsSelector;
             this.adjustmentsSelector = adjustmentsSelector;
             this.dice = dice;
+            this.generator = generator;
 
             allSizes = new[]
             {
@@ -61,8 +66,11 @@ namespace CharacterGen.Domain.Generators
             race.HasWings = DetermineIfRaceHasWings(race);
             race.LandSpeed = DetermineLandSpeed(race);
             race.AerialSpeed = DetermineAerialSpeed(race);
-            race.Age = DetermineAge(race, characterClass);
             race.ChallengeRating = DetermineChallengeRating(race);
+
+            race.Age = generator.Generate(() => DetermineAge(race, characterClass),
+                (a) => a.Maximum >= a.Years || a.Maximum == RaceConstants.Ages.Ageless,
+                () => GetDefaultAge(race, characterClass));
 
             var tableName = string.Format(TableNameConstants.Formattable.Adjustments.GENDERHeights, race.Gender);
             var baseHeight = adjustmentsSelector.SelectFrom(tableName, race.BaseRace);
@@ -177,9 +185,31 @@ namespace CharacterGen.Domain.Generators
             return age;
         }
 
+        private Age GetDefaultAge(Race race, CharacterClass characterClass)
+        {
+            var age = new Age();
+            age.Maximum = GetMaximumAge(race);
+
+            var tableName = string.Format(TableNameConstants.Formattable.Adjustments.RACEAges, race.BaseRace);
+            var adultAge = adjustmentsSelector.SelectFrom(tableName, RaceConstants.Ages.Adulthood);
+
+            age.Years = Math.Min(age.Maximum, adultAge + characterClass.Level);
+            age.Stage = GetAgeStage(race, age.Years);
+
+            return age;
+        }
+
         private int GetMaximumAge(Race race)
         {
             var maximumAgeRoll = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.MaximumAgeRolls, race.BaseRace).Single();
+
+            if (maximumAgeRoll == RaceConstants.Ages.Ageless.ToString())
+                return RaceConstants.Ages.Ageless;
+
+            var undead = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Undead);
+            if (undead.Contains(race.Metarace))
+                return RaceConstants.Ages.Ageless;
+
             var tableName = string.Format(TableNameConstants.Formattable.Adjustments.RACEAges, race.BaseRace);
             var ages = adjustmentsSelector.SelectAllFrom(tableName);
 
@@ -196,38 +226,31 @@ namespace CharacterGen.Domain.Generators
         {
             var tableName = string.Format(TableNameConstants.Formattable.Adjustments.RACEAges, race.BaseRace);
             var adultAge = adjustmentsSelector.SelectFrom(tableName, RaceConstants.Ages.Adulthood);
+            var additionalAge = GetAdditionalAge(race.BaseRace, characterClass, maximumAge);
+            var ageInYears = adultAge + additionalAge;
 
+            return ageInYears;
+        }
+
+        private int GetAdditionalAge(string baseRace, CharacterClass characterClass, int maximumAge)
+        {
             var classType = GetClassType(characterClass);
-            tableName = string.Format(TableNameConstants.Formattable.Collection.CLASSTYPEAgeRolls, classType);
-            var trainingAgeRoll = collectionsSelector.SelectFrom(tableName, race.BaseRace).Single();
+            var tableName = string.Format(TableNameConstants.Formattable.Collection.CLASSTYPEAgeRolls, classType);
+            var trainingAgeRoll = collectionsSelector.SelectFrom(tableName, baseRace).Single();
+            var additionalAge = GetAgeRollResult(trainingAgeRoll, 1);
 
-            var startingAge = adultAge + dice.Roll(trainingAgeRoll).AsSum();
-            var additionalAge = GetAdditionalAge(characterClass, classType, maximumAge, startingAge);
-            var totalAge = startingAge + additionalAge;
-
-            return Math.Min(maximumAge, totalAge);
-        }
-
-        private int GetAdditionalAge(CharacterClass characterClass, string classType, int maximumAge, int startingAge)
-        {
-            var additionalAgeDie = GetAdditionalAgeDie(classType, maximumAge, startingAge);
-            if (additionalAgeDie < 1)
-                return characterClass.Level;
-
-            return dice.Roll(characterClass.Level).d(additionalAgeDie).AsSum();
-        }
-
-        private int GetAdditionalAgeDie(string classType, int maximumAge, int startingAge)
-        {
-            var totalCap = maximumAge - startingAge;
-
-            switch (classType)
+            for (var i = 1; i < characterClass.Level; i++)
             {
-                case CharacterClassConstants.TrainingTypes.Intuitive: return totalCap / 60;
-                case CharacterClassConstants.TrainingTypes.SelfTaught: return totalCap / 30;
-                case CharacterClassConstants.TrainingTypes.Trained: return totalCap / 20;
-                default: throw new ArgumentException($"{classType} is not a valid class training type");
+                additionalAge += GetAgeRollResult(trainingAgeRoll, 3);
             }
+
+            return additionalAge;
+        }
+
+        private int GetAgeRollResult(string ageRoll, int divisor)
+        {
+            var roll = dice.Roll(ageRoll).AsSum() / divisor;
+            return Math.Max(1, roll);
         }
 
         private string GetAgeStage(Race race, int ageInYears)

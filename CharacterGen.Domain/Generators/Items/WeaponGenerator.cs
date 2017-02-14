@@ -145,9 +145,28 @@ namespace CharacterGen.Domain.Generators.Items
             var effectiveLevel = (int)Math.Max(1, characterClass.EffectiveLevel);
             var tableName = string.Format(TableNameConstants.Formattable.Percentile.LevelXPower, effectiveLevel);
             var power = percentileSelector.SelectFrom(tableName);
-            var weapon = generator.Generate(() => GenerateWeapon(power), w => WeaponIsValid(w, allowedWeapons, race));
+            var weapon = generator.Generate(
+                () => GenerateWeapon(power),
+                w => WeaponIsValid(w, allowedWeapons, race),
+                () => GenerateDefaultWeapon(power, allowedWeapons, race));
 
             return weapon;
+        }
+
+        private Item GenerateDefaultWeapon(string power, IEnumerable<string> allowedWeapons, Race race)
+        {
+            var template = new Item();
+            template.ItemType = ItemTypeConstants.Weapon;
+            template.Name = collectionsSelector.SelectRandomFrom(allowedWeapons);
+
+            if (power == PowerConstants.Mundane)
+            {
+                template.Traits.Add(race.Size);
+                return mundaneWeaponGenerator.Generate(template, true);
+            }
+
+            template.Magic.Bonus = 1;
+            return magicalWeaponGenerator.Generate(template, true);
         }
 
         private Item GenerateWeapon(string power)

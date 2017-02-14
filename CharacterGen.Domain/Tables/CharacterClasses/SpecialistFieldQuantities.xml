@@ -2,6 +2,14 @@
 
 <items>
     <object>
+        <name>Adept</name>
+        <item>0</item>
+    </object>
+    <object>
+        <name>Aristocrat</name>
+        <item>0</item>
+    </object>
+    <object>
         <name>Barbarian</name>
         <item>0</item>
     </object>
@@ -14,7 +22,15 @@
         <item>2</item>
     </object>
     <object>
+        <name>Commoner</name>
+        <item>0</item>
+    </object>
+    <object>
         <name>Druid</name>
+        <item>0</item>
+    </object>
+    <object>
+        <name>Expert</name>
         <item>0</item>
     </object>
     <object>
@@ -39,6 +55,10 @@
     </object>
     <object>
         <name>Sorcerer</name>
+        <item>0</item>
+    </object>
+    <object>
+        <name>Warrior</name>
         <item>0</item>
     </object>
     <object>

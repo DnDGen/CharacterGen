@@ -1,249 +1,277 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <items>
-    <object>
-        <name>Augment Summoning</name>
-        <item>Spell Focus/Conjuration</item>
-    </object>
-    <object>
-        <name>Cleave</name>
-        <item>Power Attack</item>
-    </object>
+  <object>
+    <name>Augment Summoning</name>
+    <item>Spell Focus/Conjuration</item>
+  </object>
+  <object>
+    <name>Cleave</name>
+    <item>Power Attack</item>
+  </object>
   <object>
     <name>Combat ReflexesMonk</name>
     <item>Monk Bonus Feat/Combat Reflexes</item>
   </object>
-    <object>
-        <name>Combat Style Mastery</name>
-        <item>Improved Combat Style</item>
-    </object>
-    <object>
-        <name>Deflect Arrows</name>
-        <item>Improved Unarmed Strike</item>
-    </object>
+  <object>
+    <name>Combat Style Mastery</name>
+    <item>Improved Combat Style</item>
+  </object>
+  <object>
+    <name>Corrupting Gaze</name>
+    <item>Ghost Special Attack/Corrupting Gaze</item>
+  </object>
+  <object>
+    <name>Corrupting Touch</name>
+    <item>Ghost Special Attack/Corrupting Touch</item>
+  </object>
+  <object>
+    <name>Deflect Arrows</name>
+    <item>Improved Unarmed Strike</item>
+  </object>
   <object>
     <name>Deflect ArrowsMonk</name>
     <item>Monk Bonus Feat/Deflect Arrows</item>
   </object>
-    <object>
-        <name>Diehard</name>
-        <item>Endurance</item>
-    </object>
-    <object>
-        <name>Extra Turning</name>
-        <item>Turn</item>
-    </object>
-    <object>
-        <name>Far Shot</name>
-        <item>Point Blank Shot</item>
-    </object>
-    <object>
-        <name>Great Cleave</name>
-        <item>Cleave</item>
-    </object>
-    <object>
-        <name>Greater Spell Focus</name>
-        <item>Spell Focus</item>
-    </object>
-    <object>
-        <name>Greater Spell Penetration</name>
-        <item>Spell Penetration</item>
-    </object>
-    <object>
-        <name>Greater Two-Weapon Fighting</name>
-        <item>Improved Two-Weapon Fighting</item>
-    </object>
-    <object>
-        <name>Greater Two-Weapon FightingRanger</name>
-        <item>Combat Style Mastery/Two-Weapon Fighting</item>
-    </object>
-    <object>
-        <name>Greater Weapon Focus</name>
-        <item>Weapon Focus</item>
-    </object>
-    <object>
-        <name>Greater Weapon Specialization</name>
-        <item>Weapon Specialization</item>
-        <item>Greater Weapon Focus</item>
-    </object>
-    <object>
-        <name>Heavy Armor Proficiency</name>
-        <item>Medium Armor Proficiency</item>
-    </object>
-    <object>
-        <name>Improved Combat Style</name>
-        <item>Combat Style</item>
-    </object>
-    <object>
-        <name>Improved Bull Rush</name>
-        <item>Power Attack</item>
-    </object>
-    <object>
-        <name>Improved Critical</name>
-        <item>WeaponProficiency</item>
-    </object>
-    <object>
-        <name>Improved Disarm</name>
-        <item>Combat Expertise</item>
-    </object>
+  <object>
+    <name>Diehard</name>
+    <item>Endurance</item>
+  </object>
+  <object>
+    <name>Draining Touch</name>
+    <item>Ghost Special Attack/Draining Touch</item>
+  </object>
+  <object>
+    <name>Extra Turning</name>
+    <item>Turn</item>
+  </object>
+  <object>
+    <name>Far Shot</name>
+    <item>Point Blank Shot</item>
+  </object>
+  <object>
+    <name>Frightful Moan</name>
+    <item>Ghost Special Attack/Frightful Moan</item>
+  </object>
+  <object>
+    <name>Great Cleave</name>
+    <item>Cleave</item>
+  </object>
+  <object>
+    <name>Greater Spell Focus</name>
+    <item>Spell Focus</item>
+  </object>
+  <object>
+    <name>Greater Spell Penetration</name>
+    <item>Spell Penetration</item>
+  </object>
+  <object>
+    <name>Greater Two-Weapon Fighting</name>
+    <item>Improved Two-Weapon Fighting</item>
+  </object>
+  <object>
+    <name>Greater Two-Weapon FightingRanger</name>
+    <item>Combat Style Mastery/Two-Weapon Fighting</item>
+  </object>
+  <object>
+    <name>Greater Weapon Focus</name>
+    <item>Weapon Focus</item>
+  </object>
+  <object>
+    <name>Greater Weapon Specialization</name>
+    <item>Weapon Specialization</item>
+    <item>Greater Weapon Focus</item>
+  </object>
+  <object>
+    <name>Heavy Armor Proficiency</name>
+    <item>Medium Armor Proficiency</item>
+  </object>
+  <object>
+    <name>Horrific Appearance</name>
+    <item>Ghost Special Attack/Horrific Appearance</item>
+  </object>
+  <object>
+    <name>Improved Combat Style</name>
+    <item>Combat Style</item>
+  </object>
+  <object>
+    <name>Improved Bull Rush</name>
+    <item>Power Attack</item>
+  </object>
+  <object>
+    <name>Improved Critical</name>
+    <item>WeaponProficiency</item>
+  </object>
+  <object>
+    <name>Improved Disarm</name>
+    <item>Combat Expertise</item>
+  </object>
   <object>
     <name>Improved DisarmMonk</name>
     <item>Monk Bonus Feat/Improved Disarm</item>
   </object>
-    <object>
-        <name>Improved Feint</name>
-        <item>Combat Expertise</item>
-    </object>
-    <object>
-        <name>Improved Grapple</name>
-        <item>Improved Unarmed Strike</item>
-    </object>
+  <object>
+    <name>Improved Feint</name>
+    <item>Combat Expertise</item>
+  </object>
+  <object>
+    <name>Improved Grapple</name>
+    <item>Improved Unarmed Strike</item>
+  </object>
   <object>
     <name>Improved GrappleMonk</name>
     <item>Monk Bonus Feat/Improved Grapple</item>
   </object>
-    <object>
-        <name>Improved Overrun</name>
-        <item>Power Attack</item>
-    </object>
-    <object>
-        <name>Improved Precise Shot</name>
-        <item>Precise Shot</item>
-    </object>
-    <object>
-        <name>Improved Precise ShotRanger</name>
-        <item>Combat Style Mastery/Archery</item>
-    </object>
-    <object>
-        <name>Improved Shield Bash</name>
-        <item>Shield Proficiency</item>
-    </object>
-    <object>
-        <name>Improved Sunder</name>
-        <item>Power Attack</item>
-    </object>
-    <object>
-        <name>Improved Two-Weapon Fighting</name>
-        <item>Two-Weapon Fighting</item>
-    </object>
-    <object>
-        <name>Improved Trip</name>
-        <item>Combat Expertise</item>
-    </object>
+  <object>
+    <name>Improved Overrun</name>
+    <item>Power Attack</item>
+  </object>
+  <object>
+    <name>Improved Precise Shot</name>
+    <item>Precise Shot</item>
+  </object>
+  <object>
+    <name>Improved Precise ShotRanger</name>
+    <item>Combat Style Mastery/Archery</item>
+  </object>
+  <object>
+    <name>Improved Shield Bash</name>
+    <item>Shield Proficiency</item>
+  </object>
+  <object>
+    <name>Improved Sunder</name>
+    <item>Power Attack</item>
+  </object>
+  <object>
+    <name>Improved Two-Weapon Fighting</name>
+    <item>Two-Weapon Fighting</item>
+  </object>
+  <object>
+    <name>Improved Trip</name>
+    <item>Combat Expertise</item>
+  </object>
   <object>
     <name>Improved TripMonk</name>
     <item>Monk Bonus Feat/Improved Trip</item>
   </object>
-    <object>
-        <name>Improved Turning</name>
-        <item>Turn</item>
-    </object>
-    <object>
-        <name>Improved Two-Weapon FightingRanger</name>
-        <item>Improved Combat Style/Two-Weapon Fighting</item>
-    </object>
-    <object>
-        <name>Manyshot</name>
-        <item>Rapid Shot</item>
-    </object>
-    <object>
-        <name>ManyshotRanger</name>
-        <item>Improved Combat Style/Archery</item>
-    </object>
-    <object>
-        <name>Medium Armor Proficiency</name>
-        <item>Light Armor Proficiency</item>
-    </object>
-    <object>
-        <name>Mobility</name>
-        <item>Dodge</item>
-    </object>
-    <object>
-        <name>Mounted Archery</name>
-        <item>Mounted Combat</item>
-    </object>
-    <object>
-        <name>Natural Spell</name>
-        <item>Wild Shape</item>
-    </object>
-    <object>
-        <name>Precise Shot</name>
-        <item>Point Blank Shot</item>
-    </object>
-    <object>
-        <name>Rapid Reload</name>
-        <item>WeaponProficiency</item>
-    </object>
-    <object>
-        <name>Rapid Shot</name>
-        <item>Point Blank Shot</item>
-    </object>
-    <object>
-        <name>Rapid ShotRanger</name>
-        <item>Combat Style/Archery</item>
-    </object>
-    <object>
-        <name>Ride-By Attack</name>
-        <item>Mounted Combat</item>
-    </object>
-    <object>
-        <name>Shot On The Run</name>
-        <item>Dodge</item>
-        <item>Mobility</item>
-        <item>Point Blank Shot</item>
-    </object>
-    <object>
-        <name>Snatch Arrows</name>
-        <item>Improved Unarmed Strike</item>
-        <item>Deflect Arrows</item>
-    </object>
-    <object>
-        <name>Spirited Charge</name>
-        <item>Mounted Combat</item>
-        <item>Ride-By Attack</item>
-    </object>
-    <object>
-        <name>Spring Attack</name>
-        <item>Dodge</item>
-        <item>Mobility</item>
-    </object>
-    <object>
-        <name>Stunning Fist</name>
-        <item>Improved Unarmed Strike</item>
-    </object>
+  <object>
+    <name>Improved Turning</name>
+    <item>Turn</item>
+  </object>
+  <object>
+    <name>Improved Two-Weapon FightingRanger</name>
+    <item>Improved Combat Style/Two-Weapon Fighting</item>
+  </object>
+  <object>
+    <name>Malevolence</name>
+    <item>Ghost Special Attack/Malevolence</item>
+  </object>
+  <object>
+    <name>Manyshot</name>
+    <item>Rapid Shot</item>
+  </object>
+  <object>
+    <name>ManyshotRanger</name>
+    <item>Improved Combat Style/Archery</item>
+  </object>
+  <object>
+    <name>Medium Armor Proficiency</name>
+    <item>Light Armor Proficiency</item>
+  </object>
+  <object>
+    <name>Mobility</name>
+    <item>Dodge</item>
+  </object>
+  <object>
+    <name>Mounted Archery</name>
+    <item>Mounted Combat</item>
+  </object>
+  <object>
+    <name>Natural Spell</name>
+    <item>Wild Shape</item>
+  </object>
+  <object>
+    <name>Precise Shot</name>
+    <item>Point Blank Shot</item>
+  </object>
+  <object>
+    <name>Rapid Reload</name>
+    <item>WeaponProficiency</item>
+  </object>
+  <object>
+    <name>Rapid Shot</name>
+    <item>Point Blank Shot</item>
+  </object>
+  <object>
+    <name>Rapid ShotRanger</name>
+    <item>Combat Style/Archery</item>
+  </object>
+  <object>
+    <name>Ride-By Attack</name>
+    <item>Mounted Combat</item>
+  </object>
+  <object>
+    <name>Shot On The Run</name>
+    <item>Dodge</item>
+    <item>Mobility</item>
+    <item>Point Blank Shot</item>
+  </object>
+  <object>
+    <name>Snatch Arrows</name>
+    <item>Improved Unarmed Strike</item>
+    <item>Deflect Arrows</item>
+  </object>
+  <object>
+    <name>Spirited Charge</name>
+    <item>Mounted Combat</item>
+    <item>Ride-By Attack</item>
+  </object>
+  <object>
+    <name>Spring Attack</name>
+    <item>Dodge</item>
+    <item>Mobility</item>
+  </object>
+  <object>
+    <name>Stunning Fist</name>
+    <item>Improved Unarmed Strike</item>
+  </object>
   <object>
     <name>Stunning FistMonk</name>
     <item>Monk Bonus Feat/Stunning Fist</item>
   </object>
-    <object>
-        <name>Tower Shield Proficiency</name>
-        <item>Shield Proficiency</item>
-    </object>
-    <object>
-        <name>Trample</name>
-        <item>Mounted Combat</item>
-    </object>
-    <object>
-        <name>Two-Weapon Defense</name>
-        <item>Two-Weapon Fighting</item>
-    </object>
-    <object>
-        <name>Two-Weapon FightingRanger</name>
-        <item>Combat Style/Two-Weapon Fighting</item>
-    </object>
-    <object>
-        <name>Weapon Focus</name>
-        <item>WeaponProficiency</item>
-    </object>
-    <object>
-        <name>Weapon Specialization</name>
-        <item>Weapon Focus</item>
-    </object>
-    <object>
-        <name>Whirlwind Attack</name>
-        <item>Combat Expertise</item>
-        <item>Dodge</item>
-        <item>Spring Attack</item>
-        <item>Mobility</item>
-    </object>
+  <object>
+    <name>Telekinesis</name>
+    <item>Ghost Special Attack/Telekinesis</item>
+  </object>
+  <object>
+    <name>Tower Shield Proficiency</name>
+    <item>Shield Proficiency</item>
+  </object>
+  <object>
+    <name>Trample</name>
+    <item>Mounted Combat</item>
+  </object>
+  <object>
+    <name>Two-Weapon Defense</name>
+    <item>Two-Weapon Fighting</item>
+  </object>
+  <object>
+    <name>Two-Weapon FightingRanger</name>
+    <item>Combat Style/Two-Weapon Fighting</item>
+  </object>
+  <object>
+    <name>Weapon Focus</name>
+    <item>WeaponProficiency</item>
+  </object>
+  <object>
+    <name>Weapon Specialization</name>
+    <item>Weapon Focus</item>
+  </object>
+  <object>
+    <name>Whirlwind Attack</name>
+    <item>Combat Expertise</item>
+    <item>Dodge</item>
+    <item>Spring Attack</item>
+    <item>Mobility</item>
+  </object>
 </items>

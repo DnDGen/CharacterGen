@@ -20,8 +20,7 @@ namespace CharacterGen.Tests.Integration.Tables.Races.Metaraces.Neutral
             AssertTableIsComplete();
         }
 
-        [TestCase(1, 99, RaceConstants.Metaraces.None)]
-        [TestCase(100, 100, RaceConstants.Metaraces.Ghost)]
+        [TestCase(1, 100, RaceConstants.Metaraces.None)]
         public override void Percentile(int lower, int upper, string content)
         {
             base.Percentile(lower, upper, content);

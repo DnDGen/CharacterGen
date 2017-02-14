@@ -14,10 +14,11 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
             {
                 return new[]
                 {
-                    RaceConstants.Metaraces.Vampire,
                     RaceConstants.Metaraces.Ghost,
                     RaceConstants.Metaraces.Lich,
-                    RaceConstants.Metaraces.None
+                    RaceConstants.Metaraces.Mummy,
+                    RaceConstants.Metaraces.None,
+                    RaceConstants.Metaraces.Vampire,
                 };
             }
         }
@@ -29,7 +30,7 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
         }
 
         [Test]
-        public void StressMetarace()
+        public void StressUndeadMetarace()
         {
             Stress(AssertMetarace);
         }

@@ -49,6 +49,31 @@
   <object>
     <lower>76</lower>
     <content>Gnoll</content>
+    <upper>84</upper>
+  </object>
+  <object>
+    <lower>85</lower>
+    <content>Death Slaad</content>
+    <upper>85</upper>
+  </object>
+  <object>
+    <lower>86</lower>
+    <content>Yuan-ti Pureblood</content>
+    <upper>87</upper>
+  </object>
+  <object>
+    <lower>88</lower>
+    <content>Yuan-ti Halfblood</content>
+    <upper>89</upper>
+  </object>
+  <object>
+    <lower>90</lower>
+    <content>Yuan-ti Abomination</content>
+    <upper>90</upper>
+  </object>
+  <object>
+    <lower>91</lower>
+    <content>Gargoyle</content>
     <upper>91</upper>
   </object>
   <object>

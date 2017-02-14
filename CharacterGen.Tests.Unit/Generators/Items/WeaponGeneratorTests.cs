@@ -9,6 +9,7 @@ using CharacterGen.Races;
 using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
+using System.Linq;
 using TreasureGen.Items;
 using TreasureGen.Items.Magical;
 using TreasureGen.Items.Mundane;
@@ -96,6 +97,9 @@ namespace CharacterGen.Tests.Unit.Generators.Items
                 .Returns(ammunitions);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, feats[0].Name))
                 .Returns(allProficientWeapons);
+
+            var index = 0;
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<string>>())).Returns((IEnumerable<string> ss) => ss.ElementAt(index++ % ss.Count()));
         }
 
         [Test]
@@ -466,6 +470,40 @@ namespace CharacterGen.Tests.Unit.Generators.Items
 
             var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
             Assert.That(weapon, Is.EqualTo(magicalWeapon), weapon.Name);
+        }
+
+        [Test]
+        public void GenerateMundaneDefaultWeapon()
+        {
+            var wrongWeapon = CreateWeapon("wrong weapon");
+
+            allProficientWeapons.Remove("wrong weapon");
+
+            mockPercentileSelector.Setup(s => s.SelectFrom("Level9266Power")).Returns(PowerConstants.Mundane);
+            mockMundaneWeaponGenerator.Setup(g => g.Generate()).Returns(wrongWeapon);
+
+            var defaultWeapon = new Item();
+            mockMundaneWeaponGenerator.Setup(g => g.Generate(It.Is<Item>(i => i.ItemType == ItemTypeConstants.Weapon && i.Name == "base weapon" && i.Traits.Single() == race.Size), true))
+                .Returns(defaultWeapon);
+
+            var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
+            Assert.That(weapon, Is.EqualTo(defaultWeapon));
+        }
+
+        [Test]
+        public void GenerateMagicalDefaultWeapon()
+        {
+            var wrongMagicalWeapon = CreateWeapon("wrong magical weapon");
+            mockMagicalWeaponGenerator.Setup(g => g.GenerateAtPower("power")).Returns(wrongMagicalWeapon);
+
+            allProficientWeapons.Remove(wrongMagicalWeapon.Name);
+
+            var defaultWeapon = new Item();
+            mockMagicalWeaponGenerator.Setup(g => g.Generate(It.Is<Item>(i => i.ItemType == ItemTypeConstants.Weapon && i.Name == "base weapon" && i.Magic.Bonus == 1), true))
+                .Returns(defaultWeapon);
+
+            var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
+            Assert.That(weapon, Is.EqualTo(defaultWeapon));
         }
 
         [Test]

@@ -95,22 +95,22 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
                 Assert.That(crossClassSkills[className], Is.All.Not.EqualTo(skill), className);
         }
 
+        [TestCase(CharacterClassConstants.Adept)]
+        [TestCase(CharacterClassConstants.Aristocrat)]
         [TestCase(CharacterClassConstants.Barbarian)]
         [TestCase(CharacterClassConstants.Bard)]
         [TestCase(CharacterClassConstants.Cleric)]
+        [TestCase(CharacterClassConstants.Commoner)]
         [TestCase(CharacterClassConstants.Druid)]
+        [TestCase(CharacterClassConstants.Expert)]
         [TestCase(CharacterClassConstants.Fighter)]
         [TestCase(CharacterClassConstants.Monk)]
         [TestCase(CharacterClassConstants.Paladin)]
         [TestCase(CharacterClassConstants.Ranger)]
         [TestCase(CharacterClassConstants.Rogue)]
         [TestCase(CharacterClassConstants.Sorcerer)]
-        [TestCase(CharacterClassConstants.Wizard)]
-        [TestCase(CharacterClassConstants.Adept)]
-        [TestCase(CharacterClassConstants.Aristocrat)]
-        [TestCase(CharacterClassConstants.Commoner)]
-        [TestCase(CharacterClassConstants.Expert)]
         [TestCase(CharacterClassConstants.Warrior)]
+        [TestCase(CharacterClassConstants.Wizard)]
         public void AllUntrainedSkills(string className)
         {
             var trainedSkills = new[]

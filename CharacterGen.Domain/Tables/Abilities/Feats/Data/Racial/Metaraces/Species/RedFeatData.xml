@@ -13,18 +13,20 @@
       <item>0</item>
       <item></item>
       <item>0</item>
+      <item></item>
     </object>
     <object>
-        <name>Immune to Effect</name>
-        <item>Immune to Effect</item>
-        <item></item>
-        <item>0</item>
-        <item>0</item>
-        <item>Fire</item>
-        <item>0</item>
-        <item></item>
+      <name>Immune to Effect</name>
+      <item>Immune to Effect</item>
+      <item></item>
       <item>0</item>
-    <item></item>
-    <item>0</item>
+      <item>0</item>
+      <item>Fire</item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
     </object>
 </items>

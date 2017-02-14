@@ -177,7 +177,7 @@ namespace CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizards
         [TestCase(SpellConstants.Etherealness, 9)]
         [TestCase(SpellConstants.Shapechange, 9)]
         [TestCase(SpellConstants.TimeStop, 9)]
-        public override void Adjustment(string name, int adjustment)
+        public void SpellLevel(string name, int adjustment)
         {
             base.Adjustment(name, adjustment);
         }

@@ -68,12 +68,12 @@ namespace CharacterGen.Domain.IoC.Modules
 
             Bind<IClassNameRandomizer>().To<AnyPlayerClassNameRandomizer>().Named(ClassNameRandomizerTypeConstants.AnyPlayer);
             Bind<IClassNameRandomizer>().To<AnyNPCClassNameRandomizer>().Named(ClassNameRandomizerTypeConstants.AnyNPC);
-            Bind<IClassNameRandomizer>().To<HealerClassNameRandomizer>().Named(ClassNameRandomizerTypeConstants.Healer);
-            Bind<IClassNameRandomizer>().To<MageClassNameRandomizer>().Named(ClassNameRandomizerTypeConstants.Mage);
+            Bind<IClassNameRandomizer>().To<DivineSpellcasterClassNameRandomizer>().Named(ClassNameRandomizerTypeConstants.DivineSpellcaster);
+            Bind<IClassNameRandomizer>().To<ArcaneSpellcasterClassNameRandomizer>().Named(ClassNameRandomizerTypeConstants.ArcaneSpellcaster);
             Bind<IClassNameRandomizer>().To<NonSpellcasterClassNameRandomizer>().Named(ClassNameRandomizerTypeConstants.NonSpellcaster);
             Bind<IClassNameRandomizer>().To<SpellcasterClassNameRandomizer>().Named(ClassNameRandomizerTypeConstants.Spellcaster);
             Bind<IClassNameRandomizer>().To<StealthClassNameRandomizer>().Named(ClassNameRandomizerTypeConstants.Stealth);
-            Bind<IClassNameRandomizer>().To<WarriorClassNameRandomizer>().Named(ClassNameRandomizerTypeConstants.Warrior);
+            Bind<IClassNameRandomizer>().To<PhysicalCombatClassNameRandomizer>().Named(ClassNameRandomizerTypeConstants.PhysicalCombat);
 
             Bind<ILevelRandomizer>().To<AnyLevelRandomizer>().Named(LevelRandomizerTypeConstants.Any);
             Bind<ILevelRandomizer>().To<HighLevelRandomizer>().Named(LevelRandomizerTypeConstants.High);
@@ -82,35 +82,19 @@ namespace CharacterGen.Domain.IoC.Modules
             Bind<ILevelRandomizer>().To<VeryHighLevelRandomizer>().Named(LevelRandomizerTypeConstants.VeryHigh);
 
             Bind<RaceRandomizer>().To<AnyBaseRaceRandomizer>().Named(RaceRandomizerTypeConstants.BaseRace.AnyBase);
-            Bind<RaceRandomizer>().To<EvilBaseRaceRandomizer>().Named(RaceRandomizerTypeConstants.BaseRace.EvilBase);
-            Bind<RaceRandomizer>().To<GoodBaseRaceRandomizer>().Named(RaceRandomizerTypeConstants.BaseRace.GoodBase);
-            Bind<RaceRandomizer>().To<NeutralBaseRaceRandomizer>().Named(RaceRandomizerTypeConstants.BaseRace.NeutralBase);
-            Bind<RaceRandomizer>().To<NonEvilBaseRaceRandomizer>().Named(RaceRandomizerTypeConstants.BaseRace.NonEvilBase);
-            Bind<RaceRandomizer>().To<NonGoodBaseRaceRandomizer>().Named(RaceRandomizerTypeConstants.BaseRace.NonGoodBase);
-            Bind<RaceRandomizer>().To<NonNeutralBaseRaceRandomizer>().Named(RaceRandomizerTypeConstants.BaseRace.NonNeutralBase);
+            Bind<RaceRandomizer>().To<MonsterBaseRaceRandomizer>().Named(RaceRandomizerTypeConstants.BaseRace.MonsterBase);
+            Bind<RaceRandomizer>().To<NonMonsterBaseRaceRandomizer>().Named(RaceRandomizerTypeConstants.BaseRace.NonMonsterBase);
             Bind<RaceRandomizer>().To<NonStandardBaseRaceRandomizer>().Named(RaceRandomizerTypeConstants.BaseRace.NonStandardBase);
             Bind<RaceRandomizer>().To<StandardBaseRaceRandomizer>().Named(RaceRandomizerTypeConstants.BaseRace.StandardBase);
 
             Bind<IForcableMetaraceRandomizer>().To<AnyMetaraceRandomizer>().Named(RaceRandomizerTypeConstants.Metarace.AnyMeta);
-            Bind<IForcableMetaraceRandomizer>().To<EvilMetaraceRandomizer>().Named(RaceRandomizerTypeConstants.Metarace.EvilMeta);
             Bind<IForcableMetaraceRandomizer>().To<GeneticMetaraceRandomizer>().Named(RaceRandomizerTypeConstants.Metarace.GeneticMeta);
-            Bind<IForcableMetaraceRandomizer>().To<GoodMetaraceRandomizer>().Named(RaceRandomizerTypeConstants.Metarace.GoodMeta);
             Bind<IForcableMetaraceRandomizer>().To<LycanthropeMetaraceRandomizer>().Named(RaceRandomizerTypeConstants.Metarace.LycanthropeMeta);
-            Bind<IForcableMetaraceRandomizer>().To<NeutralMetaraceRandomizer>().Named(RaceRandomizerTypeConstants.Metarace.NeutralMeta);
-            Bind<IForcableMetaraceRandomizer>().To<NonEvilMetaraceRandomizer>().Named(RaceRandomizerTypeConstants.Metarace.NonEvilMeta);
-            Bind<IForcableMetaraceRandomizer>().To<NonGoodMetaraceRandomizer>().Named(RaceRandomizerTypeConstants.Metarace.NonGoodMeta);
-            Bind<IForcableMetaraceRandomizer>().To<NonNeutralMetaraceRandomizer>().Named(RaceRandomizerTypeConstants.Metarace.NonNeutralMeta);
             Bind<IForcableMetaraceRandomizer>().To<UndeadMetaraceRandomizer>().Named(RaceRandomizerTypeConstants.Metarace.UndeadMeta);
 
             Bind<RaceRandomizer>().ToMethod(c => c.Kernel.Get<IForcableMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.AnyMeta)).Named(RaceRandomizerTypeConstants.Metarace.AnyMeta);
-            Bind<RaceRandomizer>().ToMethod(c => c.Kernel.Get<IForcableMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.EvilMeta)).Named(RaceRandomizerTypeConstants.Metarace.EvilMeta);
             Bind<RaceRandomizer>().ToMethod(c => c.Kernel.Get<IForcableMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.GeneticMeta)).Named(RaceRandomizerTypeConstants.Metarace.GeneticMeta);
-            Bind<RaceRandomizer>().ToMethod(c => c.Kernel.Get<IForcableMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.GoodMeta)).Named(RaceRandomizerTypeConstants.Metarace.GoodMeta);
             Bind<RaceRandomizer>().ToMethod(c => c.Kernel.Get<IForcableMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.LycanthropeMeta)).Named(RaceRandomizerTypeConstants.Metarace.LycanthropeMeta);
-            Bind<RaceRandomizer>().ToMethod(c => c.Kernel.Get<IForcableMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.NeutralMeta)).Named(RaceRandomizerTypeConstants.Metarace.NeutralMeta);
-            Bind<RaceRandomizer>().ToMethod(c => c.Kernel.Get<IForcableMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.NonEvilMeta)).Named(RaceRandomizerTypeConstants.Metarace.NonEvilMeta);
-            Bind<RaceRandomizer>().ToMethod(c => c.Kernel.Get<IForcableMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.NonGoodMeta)).Named(RaceRandomizerTypeConstants.Metarace.NonGoodMeta);
-            Bind<RaceRandomizer>().ToMethod(c => c.Kernel.Get<IForcableMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.NonNeutralMeta)).Named(RaceRandomizerTypeConstants.Metarace.NonNeutralMeta);
             Bind<RaceRandomizer>().ToMethod(c => c.Kernel.Get<IForcableMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.UndeadMeta)).Named(RaceRandomizerTypeConstants.Metarace.UndeadMeta);
             Bind<RaceRandomizer>().To<NoMetaraceRandomizer>().Named(RaceRandomizerTypeConstants.Metarace.NoMeta);
 

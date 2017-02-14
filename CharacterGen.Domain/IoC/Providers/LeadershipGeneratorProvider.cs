@@ -14,12 +14,10 @@ namespace CharacterGen.Domain.IoC.Providers
     {
         protected override ILeadershipGenerator CreateInstance(IContext context)
         {
-            var alignmentGenerator = context.Kernel.Get<IAlignmentGenerator>();
             var percentileSelector = context.Kernel.Get<IPercentileSelector>();
             var characterGenerator = context.Kernel.Get<ICharacterGenerator>();
             var setLevelRandomizer = context.Kernel.Get<ISetLevelRandomizer>();
             var setAlignmentRandomizer = context.Kernel.Get<ISetAlignmentRandomizer>();
-            var anyAlignmentRandomizer = context.Kernel.Get<IAlignmentRandomizer>(AlignmentRandomizerTypeConstants.Any);
             var anyPlayerClassNameRandomizer = context.Kernel.Get<IClassNameRandomizer>(ClassNameRandomizerTypeConstants.AnyPlayer);
             var anyNPCClassNameRandomizer = context.Kernel.Get<IClassNameRandomizer>(ClassNameRandomizerTypeConstants.AnyNPC);
             var anyBaseRaceRandomizer = context.Kernel.Get<RaceRandomizer>(RaceRandomizerTypeConstants.BaseRace.AnyBase);
@@ -31,9 +29,20 @@ namespace CharacterGen.Domain.IoC.Providers
             var collectionsSelector = context.Kernel.Get<ICollectionsSelector>();
             var generator = context.Kernel.Get<Generator>();
 
-            return new LeadershipGenerator(characterGenerator, leadershipSelector, percentileSelector, adjustmentsSelector,
-                setLevelRandomizer, setAlignmentRandomizer, anyAlignmentRandomizer, anyPlayerClassNameRandomizer, anyBaseRaceRandomizer, anyMetaraceRandomizer,
-                rawStatsRandomizer, booleanPercentileSelector, collectionsSelector, alignmentGenerator, generator, anyNPCClassNameRandomizer);
+            return new LeadershipGenerator(characterGenerator,
+                leadershipSelector,
+                percentileSelector,
+                adjustmentsSelector,
+                setLevelRandomizer,
+                setAlignmentRandomizer,
+                anyPlayerClassNameRandomizer,
+                anyBaseRaceRandomizer,
+                anyMetaraceRandomizer,
+                rawStatsRandomizer,
+                booleanPercentileSelector,
+                collectionsSelector,
+                generator,
+                anyNPCClassNameRandomizer);
         }
     }
 }

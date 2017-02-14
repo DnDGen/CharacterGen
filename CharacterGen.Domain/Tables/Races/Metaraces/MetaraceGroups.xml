@@ -9,6 +9,7 @@
     <item>Half-Dragon</item>
     <item>Half-Fiend</item>
     <item>Lich</item>
+    <item>Mummy</item>
     <item>Vampire</item>
     <item>Werebear</item>
     <item>Wereboar</item>
@@ -22,27 +23,66 @@
     <item>Half-Fiend</item>
   </object>
   <object>
-    <name>Evil</name>
+    <name>Lawful Evil</name>
+    <item>Ghost</item>
     <item>Half-Dragon</item>
     <item>Half-Fiend</item>
-    <item>Wererat</item>
-    <item>Werewolf</item>
-    <item>Ghost</item>
     <item>Lich</item>
+    <item>Mummy</item>
     <item>Vampire</item>
+    <item>Wererat</item>
   </object>
   <object>
-    <name>Neutral</name>
-    <item>Wereboar</item>
-    <item>Weretiger</item>
+    <name>Lawful Neutral</name>
     <item>Ghost</item>
+    <item>Mummy</item>
   </object>
   <object>
-    <name>Good</name>
+    <name>Lawful Good</name>
+    <item>Ghost</item>
     <item>Half-Dragon</item>
     <item>Half-Celestial</item>
     <item>Werebear</item>
+  </object>
+  <object>
+    <name>Chaotic Evil</name>
     <item>Ghost</item>
+    <item>Half-Dragon</item>
+    <item>Half-Fiend</item>
+    <item>Lich</item>
+    <item>Vampire</item>
+    <item>Werewolf</item>
+  </object>
+  <object>
+    <name>Chaotic Neutral</name>
+    <item>Ghost</item>
+  </object>
+  <object>
+    <name>Chaotic Good</name>
+    <item>Ghost</item>
+    <item>Half-Dragon</item>
+    <item>Half-Celestial</item>
+  </object>
+  <object>
+    <name>Neutral Evil</name>
+    <item>Ghost</item>
+    <item>Half-Dragon</item>
+    <item>Half-Fiend</item>
+    <item>Lich</item>
+    <item>Mummy</item>
+    <item>Vampire</item>
+  </object>
+  <object>
+    <name>True Neutral</name>
+    <item>Ghost</item>
+    <item>Wereboar</item>
+    <item>Weretiger</item>
+  </object>
+  <object>
+    <name>Neutral Good</name>
+    <item>Ghost</item>
+    <item>Half-Dragon</item>
+    <item>Half-Celestial</item>
   </object>
   <object>
     <name>Genetic</name>
@@ -60,233 +100,249 @@
   </object>
   <object>
     <name>Undead</name>
-    <item>Vampire</item>
-    <item>Lich</item>
     <item>Ghost</item>
+    <item>Lich</item>
+    <item>Mummy</item>
+    <item>Vampire</item>
   </object>
   <object>
     <name>Paladin</name>
+    <item></item>
+    <item>Ghost</item>
     <item>Half-Dragon</item>
     <item>Half-Celestial</item>
     <item>Werebear</item>
-    <item>Ghost</item>
-    <item></item>
   </object>
   <object>
     <name>Adept</name>
+    <item></item>
+    <item>Ghost</item>
     <item>Half-Dragon</item>
     <item>Half-Celestial</item>
     <item>Half-Fiend</item>
+    <item>Lich</item>
+    <item>Mummy</item>
+    <item>Vampire</item>
     <item>Werebear</item>
     <item>Wereboar</item>
     <item>Weretiger</item>
     <item>Wererat</item>
     <item>Werewolf</item>
-    <item>Vampire</item>
-    <item>Lich</item>
-    <item>Ghost</item>
-    <item></item>
   </object>
   <object>
     <name>Aristocrat</name>
+    <item></item>
+    <item>Ghost</item>
     <item>Half-Dragon</item>
     <item>Half-Celestial</item>
     <item>Half-Fiend</item>
+    <item>Mummy</item>
+    <item>Vampire</item>
     <item>Werebear</item>
     <item>Wereboar</item>
     <item>Weretiger</item>
     <item>Wererat</item>
     <item>Werewolf</item>
-    <item>Vampire</item>
-    <item>Ghost</item>
-    <item></item>
   </object>
   <object>
     <name>Barbarian</name>
+    <item></item>
+    <item>Ghost</item>
     <item>Half-Dragon</item>
     <item>Half-Celestial</item>
     <item>Half-Fiend</item>
+    <item>Mummy</item>
+    <item>Vampire</item>
     <item>Werebear</item>
     <item>Wereboar</item>
     <item>Weretiger</item>
     <item>Wererat</item>
     <item>Werewolf</item>
-    <item>Vampire</item>
-    <item>Ghost</item>
-    <item></item>
   </object>
   <object>
     <name>Bard</name>
+    <item></item>
+    <item>Ghost</item>
     <item>Half-Dragon</item>
     <item>Half-Celestial</item>
     <item>Half-Fiend</item>
+    <item>Lich</item>
+    <item>Mummy</item>
+    <item>Vampire</item>
     <item>Werebear</item>
     <item>Wereboar</item>
     <item>Weretiger</item>
     <item>Wererat</item>
     <item>Werewolf</item>
-    <item>Vampire</item>
-    <item>Lich</item>
-    <item>Ghost</item>
-    <item></item>
   </object>
   <object>
     <name>Cleric</name>
+    <item></item>
+    <item>Ghost</item>
     <item>Half-Dragon</item>
     <item>Half-Celestial</item>
     <item>Half-Fiend</item>
+    <item>Lich</item>
+    <item>Mummy</item>
+    <item>Vampire</item>
     <item>Werebear</item>
     <item>Wereboar</item>
     <item>Weretiger</item>
     <item>Wererat</item>
     <item>Werewolf</item>
-    <item>Vampire</item>
-    <item>Lich</item>
-    <item>Ghost</item>
-    <item></item>
   </object>
   <object>
     <name>Commoner</name>
+    <item></item>
+    <item>Ghost</item>
     <item>Half-Dragon</item>
     <item>Half-Celestial</item>
     <item>Half-Fiend</item>
+    <item>Mummy</item>
+    <item>Vampire</item>
     <item>Werebear</item>
     <item>Wereboar</item>
     <item>Weretiger</item>
     <item>Wererat</item>
     <item>Werewolf</item>
-    <item>Vampire</item>
-    <item>Ghost</item>
-    <item></item>
   </object>
   <object>
     <name>Druid</name>
+    <item></item>
+    <item>Ghost</item>
     <item>Half-Dragon</item>
     <item>Half-Celestial</item>
     <item>Half-Fiend</item>
+    <item>Lich</item>
+    <item>Mummy</item>
+    <item>Vampire</item>
     <item>Werebear</item>
     <item>Wereboar</item>
     <item>Weretiger</item>
     <item>Wererat</item>
     <item>Werewolf</item>
-    <item>Vampire</item>
-    <item>Lich</item>
-    <item>Ghost</item>
-    <item></item>
   </object>
   <object>
     <name>Expert</name>
+    <item></item>
+    <item>Ghost</item>
     <item>Half-Dragon</item>
     <item>Half-Celestial</item>
     <item>Half-Fiend</item>
+    <item>Mummy</item>
+    <item>Vampire</item>
     <item>Werebear</item>
     <item>Wereboar</item>
     <item>Weretiger</item>
     <item>Wererat</item>
     <item>Werewolf</item>
-    <item>Vampire</item>
-    <item>Ghost</item>
-    <item></item>
   </object>
   <object>
     <name>Fighter</name>
+    <item></item>
+    <item>Ghost</item>
     <item>Half-Dragon</item>
     <item>Half-Celestial</item>
     <item>Half-Fiend</item>
+    <item>Mummy</item>
+    <item>Vampire</item>
     <item>Werebear</item>
     <item>Wereboar</item>
     <item>Weretiger</item>
     <item>Wererat</item>
     <item>Werewolf</item>
-    <item>Vampire</item>
-    <item>Ghost</item>
-    <item></item>
   </object>
   <object>
     <name>Monk</name>
+    <item></item>
+    <item>Ghost</item>
     <item>Half-Dragon</item>
     <item>Half-Celestial</item>
     <item>Half-Fiend</item>
+    <item>Mummy</item>
+    <item>Vampire</item>
     <item>Werebear</item>
     <item>Wereboar</item>
     <item>Weretiger</item>
     <item>Wererat</item>
     <item>Werewolf</item>
-    <item>Vampire</item>
-    <item>Ghost</item>
-    <item></item>
   </object>
   <object>
     <name>Ranger</name>
+    <item></item>
+    <item>Ghost</item>
     <item>Half-Dragon</item>
     <item>Half-Celestial</item>
     <item>Half-Fiend</item>
+    <item>Lich</item>
+    <item>Mummy</item>
+    <item>Vampire</item>
     <item>Werebear</item>
     <item>Wereboar</item>
     <item>Weretiger</item>
     <item>Wererat</item>
     <item>Werewolf</item>
-    <item>Vampire</item>
-    <item>Lich</item>
-    <item>Ghost</item>
-    <item></item>
   </object>
   <object>
     <name>Rogue</name>
+    <item></item>
+    <item>Ghost</item>
     <item>Half-Dragon</item>
     <item>Half-Celestial</item>
     <item>Half-Fiend</item>
+    <item>Mummy</item>
+    <item>Vampire</item>
     <item>Werebear</item>
     <item>Wereboar</item>
     <item>Weretiger</item>
     <item>Wererat</item>
     <item>Werewolf</item>
-    <item>Vampire</item>
-    <item>Ghost</item>
-    <item></item>
   </object>
   <object>
     <name>Sorcerer</name>
+    <item></item>
+    <item>Ghost</item>
     <item>Half-Dragon</item>
     <item>Half-Celestial</item>
     <item>Half-Fiend</item>
+    <item>Lich</item>
+    <item>Mummy</item>
+    <item>Vampire</item>
     <item>Werebear</item>
     <item>Wereboar</item>
     <item>Weretiger</item>
     <item>Wererat</item>
     <item>Werewolf</item>
-    <item>Vampire</item>
-    <item>Lich</item>
-    <item>Ghost</item>
-    <item></item>
   </object>
   <object>
     <name>Warrior</name>
+    <item></item>
+    <item>Ghost</item>
     <item>Half-Dragon</item>
     <item>Half-Celestial</item>
     <item>Half-Fiend</item>
+    <item>Mummy</item>
+    <item>Vampire</item>
     <item>Werebear</item>
     <item>Wereboar</item>
     <item>Weretiger</item>
     <item>Wererat</item>
     <item>Werewolf</item>
-    <item>Vampire</item>
-    <item>Ghost</item>
-    <item></item>
   </object>
   <object>
     <name>Wizard</name>
+    <item></item>
+    <item>Ghost</item>
     <item>Half-Dragon</item>
     <item>Half-Celestial</item>
     <item>Half-Fiend</item>
+    <item>Lich</item>
+    <item>Mummy</item>
+    <item>Vampire</item>
     <item>Werebear</item>
     <item>Wereboar</item>
     <item>Weretiger</item>
     <item>Wererat</item>
     <item>Werewolf</item>
-    <item>Vampire</item>
-    <item>Lich</item>
-    <item>Ghost</item>
-    <item></item>
   </object>
 </items>

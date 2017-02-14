@@ -1,4 +1,5 @@
 ﻿using CharacterGen.Abilities.Feats;
+using CharacterGen.Races;
 using NUnit.Framework;
 
 namespace CharacterGen.Tests.Unit.Common
@@ -130,6 +131,58 @@ namespace CharacterGen.Tests.Unit.Common
             character.Race.ChallengeRating = 90210;
 
             Assert.That(character.ChallengeRating, Is.EqualTo(90210));
+        }
+
+        [TestCase(RaceConstants.BaseRaces.Drow)]
+        [TestCase(RaceConstants.BaseRaces.Svirfneblin)]
+        [TestCase(RaceConstants.BaseRaces.DuergarDwarf)]
+        public void SpecialNPCChallengeRatingIsClassLevel(string baseRace)
+        {
+            character.Class.Level = 9266;
+            character.Class.IsNPC = true;
+            character.Race.BaseRace = baseRace;
+
+            Assert.That(character.ChallengeRating, Is.EqualTo(9266));
+        }
+
+        [TestCase(RaceConstants.BaseRaces.Drow)]
+        [TestCase(RaceConstants.BaseRaces.Svirfneblin)]
+        [TestCase(RaceConstants.BaseRaces.DuergarDwarf)]
+        public void SpecialCharacterChallengeRatingIsClassLevelPlus1(string baseRace)
+        {
+            character.Class.Level = 9266;
+            character.Class.IsNPC = false;
+            character.Race.BaseRace = baseRace;
+
+            Assert.That(character.ChallengeRating, Is.EqualTo(9267));
+        }
+
+        [TestCase(RaceConstants.BaseRaces.Drow)]
+        [TestCase(RaceConstants.BaseRaces.Svirfneblin)]
+        [TestCase(RaceConstants.BaseRaces.DuergarDwarf)]
+        public void SpecialNPCChallengeRatingTakesRacialChallengeRatingIntoAccount(string baseRace)
+        {
+            character.Class.Level = 9266;
+            character.Class.IsNPC = true;
+            character.Race.BaseRace = baseRace;
+            character.Race.Metarace = "metarace";
+            character.Race.ChallengeRating = 90210;
+
+            Assert.That(character.ChallengeRating, Is.EqualTo(9266 + 90210));
+        }
+
+        [TestCase(RaceConstants.BaseRaces.Drow)]
+        [TestCase(RaceConstants.BaseRaces.Svirfneblin)]
+        [TestCase(RaceConstants.BaseRaces.DuergarDwarf)]
+        public void SpecialCharacterChallengeRatingTakesRacialChallengeRatingIntoAccount(string baseRace)
+        {
+            character.Class.Level = 9266;
+            character.Class.IsNPC = false;
+            character.Race.BaseRace = baseRace;
+            character.Race.Metarace = "metarace";
+            character.Race.ChallengeRating = 90210;
+
+            Assert.That(character.ChallengeRating, Is.EqualTo(9267 + 90210));
         }
     }
 }

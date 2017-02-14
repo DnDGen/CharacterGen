@@ -2,8 +2,10 @@
 using CharacterGen.Abilities.Skills;
 using CharacterGen.Abilities.Stats;
 using CharacterGen.Domain.Selectors.Collections;
+using CharacterGen.Domain.Selectors.Selections;
 using CharacterGen.Domain.Tables;
 using CharacterGen.Races;
+using RollGen;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -15,14 +17,15 @@ namespace CharacterGen.Domain.Generators.Abilities.Feats
         private IAdjustmentsSelector adjustmentsSelector;
         private IFeatsSelector featsSelector;
         private IFeatFocusGenerator featFocusGenerator;
+        private Dice dice;
 
-        public RacialFeatsGenerator(ICollectionsSelector collectionsSelector, IAdjustmentsSelector adjustmentsSelector,
-            IFeatsSelector featsSelector, IFeatFocusGenerator featFocusGenerator)
+        public RacialFeatsGenerator(ICollectionsSelector collectionsSelector, IAdjustmentsSelector adjustmentsSelector, IFeatsSelector featsSelector, IFeatFocusGenerator featFocusGenerator, Dice dice)
         {
             this.collectionsSelector = collectionsSelector;
             this.adjustmentsSelector = adjustmentsSelector;
             this.featsSelector = featsSelector;
             this.featFocusGenerator = featFocusGenerator;
+            this.dice = dice;
         }
 
         public IEnumerable<Feat> GenerateWith(Race race, Dictionary<string, Skill> skills, Dictionary<string, Stat> stats)
@@ -30,26 +33,24 @@ namespace CharacterGen.Domain.Generators.Abilities.Feats
             var baseRacialFeatSelections = featsSelector.SelectRacial(race.BaseRace);
             var metaracialFeatSelections = featsSelector.SelectRacial(race.Metarace);
             var featToIncreasePower = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.AddMonsterHitDiceToPower);
+            var monsterHitDice = GetMonsterHitDice(race.BaseRace);
 
             foreach (var selection in metaracialFeatSelections)
                 if (featToIncreasePower.Contains(selection.Feat))
-                    selection.Power += GetMonsterHitDice(race.BaseRace);
+                    selection.Power += monsterHitDice;
 
             var metaraceSpeciesFeatSelections = featsSelector.SelectRacial(race.MetaraceSpecies);
             var allRacialFeatSelections = baseRacialFeatSelections.Union(metaracialFeatSelections).Union(metaraceSpeciesFeatSelections);
-
-            var monsterHitDice = GetMonsterHitDice(race.BaseRace);
-            var applicableRacialFeatSelections = allRacialFeatSelections.Where(s => s.RequirementsMet(race, monsterHitDice, stats));
             var feats = new List<Feat>();
 
-            foreach (var racialFeatSelection in applicableRacialFeatSelections)
+            foreach (var racialFeatSelection in allRacialFeatSelections)
             {
+                if (racialFeatSelection.RequirementsMet(race, monsterHitDice, stats, feats) == false)
+                    continue;
+
                 var feat = new Feat();
                 feat.Name = racialFeatSelection.Feat;
-
-                var focus = featFocusGenerator.GenerateAllowingFocusOfAllFrom(racialFeatSelection.Feat, racialFeatSelection.FocusType, skills);
-                if (string.IsNullOrEmpty(focus) == false)
-                    feat.Foci = feat.Foci.Union(new[] { focus });
+                feat.Foci = GetFoci(racialFeatSelection, skills);
 
                 feat.Frequency = racialFeatSelection.Frequency;
                 feat.Power = racialFeatSelection.Power;
@@ -58,6 +59,27 @@ namespace CharacterGen.Domain.Generators.Abilities.Feats
             }
 
             return feats;
+        }
+
+        private IEnumerable<string> GetFoci(RacialFeatSelection racialFeatSelection, Dictionary<string, Skill> skills)
+        {
+            if (string.IsNullOrEmpty(racialFeatSelection.FocusType))
+                return Enumerable.Empty<string>();
+
+            var foci = new HashSet<string>();
+
+            var fociQuantity = 1;
+            if (racialFeatSelection.RandomFociQuantity.Any())
+                fociQuantity = dice.Roll(racialFeatSelection.RandomFociQuantity).AsSum();
+
+            while (fociQuantity > foci.Count)
+            {
+                var focus = featFocusGenerator.GenerateAllowingFocusOfAllFrom(racialFeatSelection.Feat, racialFeatSelection.FocusType, skills);
+                if (string.IsNullOrEmpty(focus) == false)
+                    foci.Add(focus);
+            }
+
+            return foci;
         }
 
         private int GetMonsterHitDice(string baseRace)

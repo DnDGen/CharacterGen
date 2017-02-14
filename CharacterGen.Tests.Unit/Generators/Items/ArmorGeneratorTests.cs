@@ -93,6 +93,9 @@ namespace CharacterGen.Tests.Unit.Generators.Items
                 .Returns(proficientArmors);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, feats[1].Name))
                 .Returns(proficientShields);
+
+            var index = 0;
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<string>>())).Returns((IEnumerable<string> ss) => ss.ElementAt(index++ % ss.Count()));
         }
 
         [Test]
@@ -360,6 +363,40 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         }
 
         [Test]
+        public void GenerateMundaneDefaultArmor()
+        {
+            var wrongArmor = CreateArmor("wrong armor");
+
+            proficientArmors.Remove("wrong armor");
+
+            mockPercentileSelector.Setup(s => s.SelectFrom("Level9266Power")).Returns(PowerConstants.Mundane);
+            mockMundaneArmorGenerator.Setup(g => g.Generate()).Returns(wrongArmor);
+
+            var defaultArmor = new Item();
+            mockMundaneArmorGenerator.Setup(g => g.Generate(It.Is<Item>(i => i.ItemType == ItemTypeConstants.Armor && i.Name == "base armor" && i.Traits.Single() == race.Size), true))
+                .Returns(defaultArmor);
+
+            var armor = armorGenerator.GenerateArmorFrom(feats, characterClass, race);
+            Assert.That(armor, Is.EqualTo(defaultArmor));
+        }
+
+        [Test]
+        public void GenerateMagicalDefaultArmor()
+        {
+            var wrongMagicalArmor = CreateArmor("wrong magical armor");
+            mockMagicalArmorGenerator.Setup(g => g.GenerateAtPower("power")).Returns(wrongMagicalArmor);
+
+            proficientArmors.Remove(wrongMagicalArmor.Name);
+
+            var defaultArmor = new Item();
+            mockMagicalArmorGenerator.Setup(g => g.Generate(It.Is<Item>(i => i.ItemType == ItemTypeConstants.Armor && i.Name == "base armor" && i.Magic.Bonus == 1), true))
+                .Returns(defaultArmor);
+
+            var armor = armorGenerator.GenerateArmorFrom(feats, characterClass, race);
+            Assert.That(armor, Is.EqualTo(defaultArmor));
+        }
+
+        [Test]
         public void GenerateNoShield()
         {
             feats.Remove(feats[1]);
@@ -623,6 +660,40 @@ namespace CharacterGen.Tests.Unit.Generators.Items
 
             var shield = armorGenerator.GenerateShieldFrom(feats, characterClass, race);
             Assert.That(shield, Is.EqualTo(magicalShield), shield.Name);
+        }
+
+        [Test]
+        public void GenerateMundaneDefaultShield()
+        {
+            var wrongShield = CreateShield("wrong shield");
+
+            proficientShields.Remove("wrong shield");
+
+            mockPercentileSelector.Setup(s => s.SelectFrom("Level9266Power")).Returns(PowerConstants.Mundane);
+            mockMundaneArmorGenerator.Setup(g => g.Generate()).Returns(wrongShield);
+
+            var defaultShield = new Item();
+            mockMundaneArmorGenerator.Setup(g => g.Generate(It.Is<Item>(i => i.ItemType == ItemTypeConstants.Armor && i.Name == "base shield" && i.Traits.Single() == race.Size), true))
+                .Returns(defaultShield);
+
+            var shield = armorGenerator.GenerateShieldFrom(feats, characterClass, race);
+            Assert.That(shield, Is.EqualTo(defaultShield));
+        }
+
+        [Test]
+        public void GenerateMagicalDefaultShield()
+        {
+            var wrongMagicalShield = CreateShield("wrong magical shield");
+            mockMagicalArmorGenerator.Setup(g => g.GenerateAtPower("power")).Returns(wrongMagicalShield);
+
+            proficientShields.Remove(wrongMagicalShield.Name);
+
+            var defaultShield = new Item();
+            mockMagicalArmorGenerator.Setup(g => g.Generate(It.Is<Item>(i => i.ItemType == ItemTypeConstants.Armor && i.Name == "base shield" && i.Magic.Bonus == 1), true))
+                .Returns(defaultShield);
+
+            var shield = armorGenerator.GenerateShieldFrom(feats, characterClass, race);
+            Assert.That(shield, Is.EqualTo(defaultShield));
         }
 
         [TestCase(1, 1)]

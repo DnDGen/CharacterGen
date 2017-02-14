@@ -21,7 +21,8 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Good
         }
 
         [TestCase(1, 3, RaceConstants.BaseRaces.DeepDwarf)]
-        [TestCase(4, 33, RaceConstants.BaseRaces.HillDwarf)]
+        [TestCase(4, 32, RaceConstants.BaseRaces.HillDwarf)]
+        [TestCase(33, 33, RaceConstants.BaseRaces.HoundArchon)]
         [TestCase(34, 41, RaceConstants.BaseRaces.MountainDwarf)]
         [TestCase(42, 42, RaceConstants.BaseRaces.GrayElf)]
         [TestCase(43, 47, RaceConstants.BaseRaces.HighElf)]

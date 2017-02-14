@@ -1,11 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <percentile>
-    <object>
-        <lower>1</lower>
-        <content></content>
-        <upper>91</upper>
-    </object>
+  <object>
+    <lower>1</lower>
+    <content></content>
+    <upper>90</upper>
+  </object>
+  <object>
+    <lower>91</lower>
+    <content>Mummy</content>
+    <upper>91</upper>
+  </object>
   <object>
     <lower>92</lower>
     <content>Ghost</content>

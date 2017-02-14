@@ -3,6 +3,7 @@ using CharacterGen.Alignments;
 using CharacterGen.CharacterClasses;
 using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Tables;
+using CharacterGen.Magics;
 using CharacterGen.Races;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,32 +14,25 @@ namespace CharacterGen.Domain.Generators.Magics
     {
         private ICollectionsSelector collectionsSelector;
         private IAdjustmentsSelector adjustmentsSelector;
-        private Generator generator;
 
-        public AnimalGenerator(ICollectionsSelector collectionsSelector, IAdjustmentsSelector adjustmentsSelector, Generator generator)
+        public AnimalGenerator(ICollectionsSelector collectionsSelector, IAdjustmentsSelector adjustmentsSelector)
         {
             this.collectionsSelector = collectionsSelector;
             this.adjustmentsSelector = adjustmentsSelector;
-            this.generator = generator;
         }
 
         public string GenerateFrom(Alignment alignment, CharacterClass characterClass, Race race, IEnumerable<Feat> feats)
         {
-            if (characterClass.Name == CharacterClassConstants.Adept && characterClass.Level == 1)
+            var effectiveCharacterClass = GetEffectiveCharacterClass(characterClass);
+            if (effectiveCharacterClass.EffectiveLevel < 1)
                 return string.Empty;
 
-            var effectiveCharacterClass = GetEffectiveCharacterClass(characterClass);
-            var animals = AnimalsForCharacter(effectiveCharacterClass, race);
+            var animals = AnimalsForCharacter(effectiveCharacterClass, race, feats);
 
             if (animals.Any() == false)
                 return string.Empty;
 
-            var improvedFamiliars = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.Animals, FeatConstants.ImprovedFamiliar);
-            var characterHasImprovedFamiliarFeat = feats.Any(f => f.Name == FeatConstants.ImprovedFamiliar);
-
-            var animal = generator.Generate(() => collectionsSelector.SelectRandomFrom(animals),
-                a => characterHasImprovedFamiliarFeat || improvedFamiliars.Contains(a) == false);
-
+            var animal = collectionsSelector.SelectRandomFrom(animals);
             return animal;
         }
 
@@ -49,26 +43,32 @@ namespace CharacterGen.Domain.Generators.Magics
 
             var effectiveCharacterClass = new CharacterClass();
             effectiveCharacterClass.Name = CharacterClassConstants.Druid;
-            effectiveCharacterClass.Level = characterClass.Level / 2;
+            effectiveCharacterClass.IsNPC = true;
+            effectiveCharacterClass.Level = characterClass.Level;
 
             return effectiveCharacterClass;
         }
 
-        private IEnumerable<string> AnimalsForCharacter(CharacterClass characterClass, Race race)
+        private IEnumerable<string> AnimalsForCharacter(CharacterClass characterClass, Race race, IEnumerable<Feat> feats)
         {
-            var animals = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.Animals, characterClass.Name);
-            var animalsForSize = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.Animals, race.Size);
+            var animals = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AnimalGroups, characterClass.Name);
+            var animalsForSize = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AnimalGroups, race.Size);
             var filteredAnimals = animals.Intersect(animalsForSize);
 
-            var levelAdjustments = adjustmentsSelector.SelectAllFrom(TableNameConstants.Set.Adjustments.LevelAdjustments);
-            filteredAnimals = filteredAnimals.Where(a => characterClass.Level + levelAdjustments[a] > 0);
+            var minimumLevels = adjustmentsSelector.SelectAllFrom(TableNameConstants.Set.Adjustments.LevelAdjustments);
+            filteredAnimals = filteredAnimals.Where(a => characterClass.Level > minimumLevels[a]);
 
-            var mages = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Mages);
+            var arcaneSpellcasters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, SpellConstants.Sources.Arcane);
 
-            if (mages.Contains(characterClass.Name) == false)
+            if (arcaneSpellcasters.Contains(characterClass.Name) == false)
                 return filteredAnimals;
 
-            var animalsForMetarace = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.Animals, race.Metarace);
+            var improvedFamiliars = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AnimalGroups, FeatConstants.ImprovedFamiliar);
+            var characterHasImprovedFamiliarFeat = feats.Any(f => f.Name == FeatConstants.ImprovedFamiliar);
+
+            var animalsForMetarace = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AnimalGroups, race.Metarace);
+            filteredAnimals = filteredAnimals.Where(a => characterHasImprovedFamiliarFeat || improvedFamiliars.Contains(a) == false);
+
             return filteredAnimals.Intersect(animalsForMetarace);
         }
     }

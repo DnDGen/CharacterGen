@@ -1,31 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <items>
-    <object>
-        <name>Armor Bonus</name>
-        <item>Armor Bonus</item>
-        <item></item>
-        <item>0</item>
-        <item>6</item>
-        <item></item>
-        <item>0</item>
-        <item></item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-    </object>
-    <object>
-      <name>SlamLarge</name>
-      <item>Slam</item>
-      <item>Large</item>
-      <item>0</item>
-      <item>0</item>
-      <item>1d8</item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
+  <object>
+    <name>Armor Bonus</name>
+    <item>Armor Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>6</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+  </object>
+  <object>
+    <name>SlamLarge</name>
+    <item>Slam</item>
+    <item>Large</item>
+    <item>0</item>
+    <item>0</item>
+    <item>1d8</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>SlamMedium</name>
@@ -39,6 +41,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Alternate Form</name>
@@ -52,20 +55,22 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
-    <object>
-        <name>SlamSmall</name>
-        <item>Slam</item>
-        <item>Small</item>
-        <item>0</item>
-        <item>0</item>
-        <item>1d4</item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-    </object>
+  <object>
+    <name>SlamSmall</name>
+    <item>Slam</item>
+    <item>Small</item>
+    <item>0</item>
+    <item>0</item>
+    <item>1d4</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+  </object>
   <object>
     <name>Blood Drain</name>
     <item>Blood Drain</item>
@@ -78,6 +83,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Children of the Night</name>
@@ -91,6 +97,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Dominate</name>
@@ -104,20 +111,22 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
-    <object>
-        <name>Create Spawn</name>
-        <item>Create Spawn</item>
-        <item></item>
-        <item>0</item>
-        <item>0</item>
-        <item></item>
-        <item>0</item>
-        <item></item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-    </object>
+  <object>
+    <name>Create Spawn</name>
+    <item>Create Spawn</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+  </object>
   <object>
     <name>Energy Drain</name>
     <item>Energy Drain</item>
@@ -130,6 +139,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Damage Reduction</name>
@@ -143,6 +153,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Fast Healing</name>
@@ -156,6 +167,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Gaseous Form</name>
@@ -169,6 +181,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>ResistanceCold</name>
@@ -182,6 +195,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>ResistanceElectricity</name>
@@ -195,6 +209,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Spell-Like AbilitySpider climb</name>
@@ -208,6 +223,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Skill BonusBluff</name>
@@ -221,6 +237,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Skill BonusHide</name>
@@ -234,6 +251,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Skill BonusListen</name>
@@ -247,6 +265,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Skill BonusMove Silently</name>
@@ -260,6 +279,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Skill BonusSearch</name>
@@ -273,6 +293,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Skill BonusSpot</name>
@@ -286,6 +307,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Skill BonusSense Motive</name>
@@ -299,6 +321,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Alertness</name>
@@ -312,6 +335,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Combat Reflexes</name>
@@ -325,6 +349,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Dodge</name>
@@ -338,6 +363,7 @@
     <item>0</item>
     <item>Dexterity</item>
     <item>13</item>
+    <item></item>
   </object>
   <object>
     <name>Turn Resistance</name>
@@ -351,6 +377,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Improved Initiative</name>
@@ -364,6 +391,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Lightning Reflexes</name>
@@ -377,5 +405,6 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
 </items>

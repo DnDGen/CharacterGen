@@ -18,33 +18,29 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
         [Test]
         public override void CollectionNames()
         {
-            var names = new[]
-            {
-                CharacterClassConstants.Adept,
-                CharacterClassConstants.Aristocrat,
-                CharacterClassConstants.Barbarian,
-                CharacterClassConstants.Bard,
-                CharacterClassConstants.Cleric,
-                CharacterClassConstants.Commoner,
-                CharacterClassConstants.Druid,
-                CharacterClassConstants.Expert,
-                CharacterClassConstants.Fighter,
-                CharacterClassConstants.Monk,
-                CharacterClassConstants.Paladin,
-                CharacterClassConstants.Ranger,
-                CharacterClassConstants.Rogue,
-                CharacterClassConstants.Sorcerer,
-                CharacterClassConstants.Warrior,
-                CharacterClassConstants.Wizard,
-            };
-
             var baseRaceGroups = CollectionsMapper.Map(TableNameConstants.Set.Collection.BaseRaceGroups);
-            var allBaseRaces = baseRaceGroups[GroupConstants.All];
-            names = names.Union(allBaseRaces).ToArray();
+            var classGroups = CollectionsMapper.Map(TableNameConstants.Set.Collection.ClassNameGroups);
 
+            var names = classGroups[GroupConstants.All].Union(baseRaceGroups[GroupConstants.All]);
             AssertCollectionNames(names);
         }
 
+        [TestCase(CharacterClassConstants.Adept,
+            SkillConstants.Concentration,
+            SkillConstants.HandleAnimal,
+            SkillConstants.Heal,
+            SkillConstants.KnowledgeArcana,
+            SkillConstants.KnowledgeArchitectureAndEngineering,
+            SkillConstants.KnowledgeDungeoneering,
+            SkillConstants.KnowledgeGeography,
+            SkillConstants.KnowledgeHistory,
+            SkillConstants.KnowledgeLocal,
+            SkillConstants.KnowledgeNature,
+            SkillConstants.KnowledgeNobilityAndRoyalty,
+            SkillConstants.KnowledgeReligion,
+            SkillConstants.KnowledgeThePlanes,
+            SkillConstants.Spellcraft,
+            SkillConstants.Survival)]
         [TestCase(CharacterClassConstants.Barbarian,
             SkillConstants.Climb,
             SkillConstants.HandleAnimal,
@@ -63,6 +59,15 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
             SkillConstants.KnowledgeReligion,
             SkillConstants.KnowledgeThePlanes,
             SkillConstants.Spellcraft)]
+        [TestCase(CharacterClassConstants.Commoner,
+            SkillConstants.Climb,
+            SkillConstants.HandleAnimal,
+            SkillConstants.Jump,
+            SkillConstants.Listen,
+            SkillConstants.Ride,
+            SkillConstants.Spot,
+            SkillConstants.Swim,
+            SkillConstants.UseRope)]
         [TestCase(CharacterClassConstants.Druid,
             SkillConstants.Concentration,
             SkillConstants.Diplomacy,
@@ -75,6 +80,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
             SkillConstants.Spot,
             SkillConstants.Survival,
             SkillConstants.Swim)]
+        [TestCase(CharacterClassConstants.Expert)]
         [TestCase(CharacterClassConstants.Fighter,
             SkillConstants.Climb,
             SkillConstants.HandleAnimal,
@@ -159,6 +165,13 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
             SkillConstants.Concentration,
             SkillConstants.KnowledgeArcana,
             SkillConstants.Spellcraft)]
+        [TestCase(CharacterClassConstants.Warrior,
+            SkillConstants.Climb,
+            SkillConstants.HandleAnimal,
+            SkillConstants.Intimidate,
+            SkillConstants.Jump,
+            SkillConstants.Ride,
+            SkillConstants.Swim)]
         [TestCase(CharacterClassConstants.Wizard,
             SkillConstants.Concentration,
             SkillConstants.DecipherScript,
@@ -174,6 +187,21 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
             SkillConstants.KnowledgeThePlanes,
             SkillConstants.Spellcraft)]
         [TestCase(RaceConstants.BaseRaces.Aasimar)]
+        [TestCase(RaceConstants.BaseRaces.Azer,
+            SkillConstants.Appraise,
+            SkillConstants.Climb,
+            SkillConstants.Hide,
+            SkillConstants.Jump,
+            SkillConstants.Listen,
+            SkillConstants.Search,
+            SkillConstants.Spot)]
+        [TestCase(RaceConstants.BaseRaces.BlueSlaad,
+            SkillConstants.Climb,
+            SkillConstants.Hide,
+            SkillConstants.Jump,
+            SkillConstants.Listen,
+            SkillConstants.MoveSilently,
+            SkillConstants.Spot)]
         [TestCase(RaceConstants.BaseRaces.Bugbear,
             SkillConstants.Climb,
             SkillConstants.Hide,
@@ -194,6 +222,21 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
             SkillConstants.Perform,
             SkillConstants.SenseMotive,
             SkillConstants.Spot)]
+        [TestCase(RaceConstants.BaseRaces.DeathSlaad,
+            SkillConstants.Climb,
+            SkillConstants.Concentration,
+            SkillConstants.EscapeArtist,
+            SkillConstants.Hide,
+            SkillConstants.Intimidate,
+            SkillConstants.Jump,
+            RaceConstants.BaseRaces.DeathSlaad + SkillConstants.Knowledge,
+            SkillConstants.Listen,
+            SkillConstants.MoveSilently,
+            SkillConstants.Search,
+            SkillConstants.Spellcraft,
+            SkillConstants.Spot,
+            SkillConstants.Survival,
+            SkillConstants.UseRope)]
         [TestCase(RaceConstants.BaseRaces.DeepDwarf)]
         [TestCase(RaceConstants.BaseRaces.DeepHalfling)]
         [TestCase(RaceConstants.BaseRaces.Derro,
@@ -222,11 +265,37 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
             SkillConstants.Intimidate,
             SkillConstants.Jump,
             SkillConstants.Spot)]
+        [TestCase(RaceConstants.BaseRaces.Gargoyle,
+            SkillConstants.Hide,
+            SkillConstants.Listen,
+            SkillConstants.Spot)]
         [TestCase(RaceConstants.BaseRaces.Gnoll,
             SkillConstants.Listen,
             SkillConstants.Spot)]
         [TestCase(RaceConstants.BaseRaces.Goblin)]
         [TestCase(RaceConstants.BaseRaces.GrayElf)]
+        [TestCase(RaceConstants.BaseRaces.GraySlaad,
+            SkillConstants.Climb,
+            SkillConstants.Concentration,
+            SkillConstants.Hide,
+            SkillConstants.Jump,
+            SkillConstants.KnowledgeArcana,
+            SkillConstants.Listen,
+            SkillConstants.MoveSilently,
+            SkillConstants.Search,
+            SkillConstants.Spellcraft,
+            SkillConstants.Spot,
+            SkillConstants.Survival)]
+        [TestCase(RaceConstants.BaseRaces.GreenSlaad,
+            SkillConstants.Climb,
+            SkillConstants.Concentration,
+            SkillConstants.Hide,
+            SkillConstants.Jump,
+            SkillConstants.Listen,
+            SkillConstants.MoveSilently,
+            SkillConstants.Search,
+            SkillConstants.Spot,
+            SkillConstants.Survival)]
         [TestCase(RaceConstants.BaseRaces.Grimlock,
             SkillConstants.Climb,
             SkillConstants.Hide,
@@ -248,6 +317,15 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
             SkillConstants.Listen,
             SkillConstants.Spot)]
         [TestCase(RaceConstants.BaseRaces.Hobgoblin)]
+        [TestCase(RaceConstants.BaseRaces.HoundArchon,
+            SkillConstants.Concentration,
+            SkillConstants.Hide,
+            SkillConstants.Jump,
+            SkillConstants.Listen,
+            SkillConstants.MoveSilently,
+            SkillConstants.SenseMotive,
+            SkillConstants.Spot,
+            SkillConstants.Survival)]
         [TestCase(RaceConstants.BaseRaces.Human)]
         [TestCase(RaceConstants.BaseRaces.Janni,
             SkillConstants.Appraise,
@@ -269,6 +347,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
             SkillConstants.Concentration,
             SkillConstants.Hide,
             SkillConstants.Intimidate,
+            RaceConstants.BaseRaces.MindFlayer + SkillConstants.Knowledge,
             SkillConstants.Listen,
             SkillConstants.MoveSilently,
             SkillConstants.Spot)]
@@ -297,6 +376,13 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
             SkillConstants.MoveSilently,
             SkillConstants.Perform,
             SkillConstants.SenseMotive,
+            SkillConstants.Spot)]
+        [TestCase(RaceConstants.BaseRaces.RedSlaad,
+            SkillConstants.Climb,
+            SkillConstants.Hide,
+            SkillConstants.Jump,
+            SkillConstants.Listen,
+            SkillConstants.MoveSilently,
             SkillConstants.Spot)]
         [TestCase(RaceConstants.BaseRaces.RockGnome)]
         [TestCase(RaceConstants.BaseRaces.Satyr,
@@ -338,48 +424,68 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
         [TestCase(RaceConstants.BaseRaces.Troll)]
         [TestCase(RaceConstants.BaseRaces.WildElf)]
         [TestCase(RaceConstants.BaseRaces.WoodElf)]
-        [TestCase(CharacterClassConstants.Adept,
+        [TestCase(RaceConstants.BaseRaces.YuanTiAbomination,
             SkillConstants.Concentration,
-            SkillConstants.HandleAnimal,
-            SkillConstants.Heal,
-            SkillConstants.KnowledgeArcana,
-            SkillConstants.KnowledgeArchitectureAndEngineering,
-            SkillConstants.KnowledgeDungeoneering,
-            SkillConstants.KnowledgeGeography,
-            SkillConstants.KnowledgeHistory,
-            SkillConstants.KnowledgeLocal,
-            SkillConstants.KnowledgeNature,
-            SkillConstants.KnowledgeNobilityAndRoyalty,
-            SkillConstants.KnowledgeReligion,
-            SkillConstants.KnowledgeThePlanes,
-            SkillConstants.Spellcraft,
-            SkillConstants.Survival)]
-        [TestCase(CharacterClassConstants.Commoner,
-            SkillConstants.Climb,
-            SkillConstants.HandleAnimal,
-            SkillConstants.Jump,
+            SkillConstants.Hide,
+            RaceConstants.BaseRaces.YuanTiAbomination + SkillConstants.Knowledge,
             SkillConstants.Listen,
-            SkillConstants.Ride,
-            SkillConstants.Spot,
-            SkillConstants.Swim,
-            SkillConstants.UseRope)]
-        [TestCase(CharacterClassConstants.Expert)]
-        [TestCase(CharacterClassConstants.Warrior,
-            SkillConstants.Climb,
-            SkillConstants.HandleAnimal,
-            SkillConstants.Intimidate,
-            SkillConstants.Jump,
-            SkillConstants.Ride,
-            SkillConstants.Swim)]
-        public override void DistinctCollection(string name, params string[] collection)
+            SkillConstants.MoveSilently,
+            SkillConstants.Spot)]
+        [TestCase(RaceConstants.BaseRaces.YuanTiHalfblood,
+            SkillConstants.Concentration,
+            SkillConstants.Hide,
+            RaceConstants.BaseRaces.YuanTiHalfblood + SkillConstants.Knowledge,
+            SkillConstants.Listen,
+            SkillConstants.Spot)]
+        [TestCase(RaceConstants.BaseRaces.YuanTiPureblood,
+            SkillConstants.Concentration,
+            SkillConstants.Disguise,
+            SkillConstants.Hide,
+            RaceConstants.BaseRaces.YuanTiPureblood + SkillConstants.Knowledge,
+            SkillConstants.Listen,
+            SkillConstants.Spot)]
+        public void ClassSkills(string name, params string[] skills)
         {
-            base.DistinctCollection(name, collection);
+            base.DistinctCollection(name, skills);
+        }
+
+        [Test]
+        public void AristocratClassSkills()
+        {
+            var classSkills = new[]
+            {
+                SkillConstants.Appraise,
+                SkillConstants.Bluff,
+                SkillConstants.Diplomacy,
+                SkillConstants.Disguise,
+                SkillConstants.Forgery,
+                SkillConstants.GatherInformation,
+                SkillConstants.HandleAnimal,
+                SkillConstants.Intimidate,
+                SkillConstants.KnowledgeArcana,
+                SkillConstants.KnowledgeArchitectureAndEngineering,
+                SkillConstants.KnowledgeDungeoneering,
+                SkillConstants.KnowledgeGeography,
+                SkillConstants.KnowledgeHistory,
+                SkillConstants.KnowledgeLocal,
+                SkillConstants.KnowledgeNature,
+                SkillConstants.KnowledgeNobilityAndRoyalty,
+                SkillConstants.KnowledgeReligion,
+                SkillConstants.KnowledgeThePlanes,
+                SkillConstants.Listen,
+                SkillConstants.Ride,
+                SkillConstants.SenseMotive,
+                SkillConstants.Spot,
+                SkillConstants.Swim,
+                SkillConstants.Survival
+            };
+
+            DistinctCollection(CharacterClassConstants.Aristocrat, classSkills);
         }
 
         [Test]
         public void BardClassSkills()
         {
-
             var classSkills = new[]
             {
                 SkillConstants.Appraise,
@@ -416,41 +522,6 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
             };
 
             DistinctCollection(CharacterClassConstants.Bard, classSkills);
-        }
-
-        [Test]
-        public void AristocratClassSkills()
-        {
-
-            var classSkills = new[]
-            {
-                SkillConstants.Appraise,
-                SkillConstants.Bluff,
-                SkillConstants.Diplomacy,
-                SkillConstants.Disguise,
-                SkillConstants.Forgery,
-                SkillConstants.GatherInformation,
-                SkillConstants.HandleAnimal,
-                SkillConstants.Intimidate,
-                SkillConstants.KnowledgeArcana,
-                SkillConstants.KnowledgeArchitectureAndEngineering,
-                SkillConstants.KnowledgeDungeoneering,
-                SkillConstants.KnowledgeGeography,
-                SkillConstants.KnowledgeHistory,
-                SkillConstants.KnowledgeLocal,
-                SkillConstants.KnowledgeNature,
-                SkillConstants.KnowledgeNobilityAndRoyalty,
-                SkillConstants.KnowledgeReligion,
-                SkillConstants.KnowledgeThePlanes,
-                SkillConstants.Listen,
-                SkillConstants.Ride,
-                SkillConstants.SenseMotive,
-                SkillConstants.Spot,
-                SkillConstants.Swim,
-                SkillConstants.Survival
-            };
-
-            DistinctCollection(CharacterClassConstants.Aristocrat, classSkills);
         }
     }
 }

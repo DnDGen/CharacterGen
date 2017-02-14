@@ -2,7 +2,6 @@
 using CharacterGen.CharacterClasses;
 using CharacterGen.Domain.Tables;
 using NUnit.Framework;
-using System;
 using TreasureGen.Items;
 
 namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
@@ -78,7 +77,14 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
                 FeatConstants.CombatReflexes + CharacterClassConstants.Monk,
                 FeatConstants.DeflectArrows + CharacterClassConstants.Monk,
                 FeatConstants.ImprovedDisarm + CharacterClassConstants.Monk,
-                FeatConstants.ImprovedTrip + CharacterClassConstants.Monk
+                FeatConstants.ImprovedTrip + CharacterClassConstants.Monk,
+                FeatConstants.CorruptingGaze,
+                FeatConstants.CorruptingTouch,
+                FeatConstants.DrainingTouch,
+                FeatConstants.FrightfulMoan,
+                FeatConstants.HorrificAppearance,
+                FeatConstants.Malevolence,
+                FeatConstants.Telekinesis,
             };
 
             AssertCollectionNames(names);
@@ -143,9 +149,9 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.Dodge,
             FeatConstants.Mobility,
             FeatConstants.SpringAttack)]
-        public void RequiredFeats(String name, params String[] requiredFeatIds)
+        public void RequiredFeats(string name, params string[] requiredFeats)
         {
-            DistinctCollection(name, requiredFeatIds);
+            DistinctCollection(name, requiredFeats);
         }
 
         [TestCase(FeatConstants.AugmentSummoning,
@@ -174,9 +180,23 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
             FeatConstants.MonkBonusFeat, FeatConstants.ImprovedDisarm)]
         [TestCase(FeatConstants.ImprovedTrip + CharacterClassConstants.Monk,
             FeatConstants.MonkBonusFeat, FeatConstants.ImprovedTrip)]
-        public void RequiredFeat(String name, String requiredFeat, String requiredFocus)
+        [TestCase(FeatConstants.CorruptingGaze,
+            FeatConstants.GhostSpecialAttack, FeatConstants.CorruptingGaze)]
+        [TestCase(FeatConstants.CorruptingTouch,
+            FeatConstants.GhostSpecialAttack, FeatConstants.CorruptingTouch)]
+        [TestCase(FeatConstants.DrainingTouch,
+            FeatConstants.GhostSpecialAttack, FeatConstants.DrainingTouch)]
+        [TestCase(FeatConstants.FrightfulMoan,
+            FeatConstants.GhostSpecialAttack, FeatConstants.FrightfulMoan)]
+        [TestCase(FeatConstants.HorrificAppearance,
+            FeatConstants.GhostSpecialAttack, FeatConstants.HorrificAppearance)]
+        [TestCase(FeatConstants.Malevolence,
+            FeatConstants.GhostSpecialAttack, FeatConstants.Malevolence)]
+        [TestCase(FeatConstants.Telekinesis,
+            FeatConstants.GhostSpecialAttack, FeatConstants.Telekinesis)]
+        public void RequiredFeat(string name, string requiredFeat, string requiredFocus)
         {
-            var collection = new[] { string.Format("{0}/{1}", requiredFeat, requiredFocus) };
+            var collection = new[] { $"{requiredFeat}/{requiredFocus}" };
             DistinctCollection(name, collection);
         }
     }

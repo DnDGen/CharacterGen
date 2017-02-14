@@ -2,6 +2,42 @@
 
 <items>
   <object>
+    <name>Aasimar</name>
+    <item>Air</item>
+    <item>Animal</item>
+    <item>Chaos</item>
+    <item>Death</item>
+    <item>Destruction</item>
+    <item>Earth</item>
+    <item>Evil</item>
+    <item>Fire</item>
+    <item>Good</item>
+    <item>Healing</item>
+    <item>Knowledge</item>
+    <item>Law</item>
+    <item>Luck</item>
+    <item>Magic</item>
+    <item>Plant</item>
+    <item>Protection</item>
+    <item>Strength</item>
+    <item>Sun</item>
+    <item>Travel</item>
+    <item>Trickery</item>
+    <item>War</item>
+    <item>Water</item>
+    <item>Abjuration</item>
+    <item>Conjuration</item>
+    <item>Divination</item>
+    <item>Enchantment</item>
+    <item>Evocation</item>
+    <item>Illusion</item>
+    <item>Necromancy</item>
+    <item>Transmutation</item>
+  </object>
+  <object>
+    <name>Adept</name>
+  </object>
+  <object>
     <name></name>
     <item>Air</item>
     <item>Animal</item>
@@ -35,7 +71,10 @@
     <item>Transmutation</item>
   </object>
   <object>
-    <name>Aasimar</name>
+    <name>Aristocrat</name>
+  </object>
+  <object>
+    <name>Azer</name>
     <item>Air</item>
     <item>Animal</item>
     <item>Chaos</item>
@@ -72,6 +111,39 @@
   </object>
   <object>
     <name>Bard</name>
+  </object>
+  <object>
+    <name>Blue Slaad</name>
+    <item>Air</item>
+    <item>Animal</item>
+    <item>Chaos</item>
+    <item>Death</item>
+    <item>Destruction</item>
+    <item>Earth</item>
+    <item>Evil</item>
+    <item>Fire</item>
+    <item>Good</item>
+    <item>Healing</item>
+    <item>Knowledge</item>
+    <item>Law</item>
+    <item>Luck</item>
+    <item>Magic</item>
+    <item>Plant</item>
+    <item>Protection</item>
+    <item>Strength</item>
+    <item>Sun</item>
+    <item>Travel</item>
+    <item>Trickery</item>
+    <item>War</item>
+    <item>Water</item>
+    <item>Abjuration</item>
+    <item>Conjuration</item>
+    <item>Divination</item>
+    <item>Enchantment</item>
+    <item>Evocation</item>
+    <item>Illusion</item>
+    <item>Necromancy</item>
+    <item>Transmutation</item>
   </object>
   <object>
     <name>Bugbear</name>
@@ -172,6 +244,42 @@
     <item>Strength</item>
     <item>Sun</item>
     <item>Trickery</item>
+    <item>Abjuration</item>
+    <item>Conjuration</item>
+    <item>Divination</item>
+    <item>Enchantment</item>
+    <item>Evocation</item>
+    <item>Illusion</item>
+    <item>Necromancy</item>
+    <item>Transmutation</item>
+  </object>
+  <object>
+    <name>Commoner</name>
+  </object>
+  <object>
+    <name>Death Slaad</name>
+    <item>Air</item>
+    <item>Animal</item>
+    <item>Chaos</item>
+    <item>Death</item>
+    <item>Destruction</item>
+    <item>Earth</item>
+    <item>Evil</item>
+    <item>Fire</item>
+    <item>Good</item>
+    <item>Healing</item>
+    <item>Knowledge</item>
+    <item>Law</item>
+    <item>Luck</item>
+    <item>Magic</item>
+    <item>Plant</item>
+    <item>Protection</item>
+    <item>Strength</item>
+    <item>Sun</item>
+    <item>Travel</item>
+    <item>Trickery</item>
+    <item>War</item>
+    <item>Water</item>
     <item>Abjuration</item>
     <item>Conjuration</item>
     <item>Divination</item>
@@ -383,6 +491,9 @@
     <item>Transmutation</item>
   </object>
   <object>
+    <name>Expert</name>
+  </object>
+  <object>
     <name>Fighter</name>
   </object>
   <object>
@@ -439,6 +550,39 @@
     <item>Destruction</item>
     <item>Evil</item>
     <item>War</item>
+    <item>Abjuration</item>
+    <item>Conjuration</item>
+    <item>Divination</item>
+    <item>Enchantment</item>
+    <item>Evocation</item>
+    <item>Illusion</item>
+    <item>Necromancy</item>
+    <item>Transmutation</item>
+  </object>
+  <object>
+    <name>Gargoyle</name>
+    <item>Air</item>
+    <item>Animal</item>
+    <item>Chaos</item>
+    <item>Death</item>
+    <item>Destruction</item>
+    <item>Earth</item>
+    <item>Evil</item>
+    <item>Fire</item>
+    <item>Good</item>
+    <item>Healing</item>
+    <item>Knowledge</item>
+    <item>Law</item>
+    <item>Luck</item>
+    <item>Magic</item>
+    <item>Plant</item>
+    <item>Protection</item>
+    <item>Strength</item>
+    <item>Sun</item>
+    <item>Travel</item>
+    <item>Trickery</item>
+    <item>War</item>
+    <item>Water</item>
     <item>Abjuration</item>
     <item>Conjuration</item>
     <item>Divination</item>
@@ -549,6 +693,72 @@
   </object>
   <object>
     <name>Gray Elf</name>
+    <item>Air</item>
+    <item>Animal</item>
+    <item>Chaos</item>
+    <item>Death</item>
+    <item>Destruction</item>
+    <item>Earth</item>
+    <item>Evil</item>
+    <item>Fire</item>
+    <item>Good</item>
+    <item>Healing</item>
+    <item>Knowledge</item>
+    <item>Law</item>
+    <item>Luck</item>
+    <item>Magic</item>
+    <item>Plant</item>
+    <item>Protection</item>
+    <item>Strength</item>
+    <item>Sun</item>
+    <item>Travel</item>
+    <item>Trickery</item>
+    <item>War</item>
+    <item>Water</item>
+    <item>Abjuration</item>
+    <item>Conjuration</item>
+    <item>Divination</item>
+    <item>Enchantment</item>
+    <item>Evocation</item>
+    <item>Illusion</item>
+    <item>Necromancy</item>
+    <item>Transmutation</item>
+  </object>
+  <object>
+    <name>Gray Slaad</name>
+    <item>Air</item>
+    <item>Animal</item>
+    <item>Chaos</item>
+    <item>Death</item>
+    <item>Destruction</item>
+    <item>Earth</item>
+    <item>Evil</item>
+    <item>Fire</item>
+    <item>Good</item>
+    <item>Healing</item>
+    <item>Knowledge</item>
+    <item>Law</item>
+    <item>Luck</item>
+    <item>Magic</item>
+    <item>Plant</item>
+    <item>Protection</item>
+    <item>Strength</item>
+    <item>Sun</item>
+    <item>Travel</item>
+    <item>Trickery</item>
+    <item>War</item>
+    <item>Water</item>
+    <item>Abjuration</item>
+    <item>Conjuration</item>
+    <item>Divination</item>
+    <item>Enchantment</item>
+    <item>Evocation</item>
+    <item>Illusion</item>
+    <item>Necromancy</item>
+    <item>Transmutation</item>
+  </object>
+  <object>
+    <name>Green Slaad</name>
     <item>Air</item>
     <item>Animal</item>
     <item>Chaos</item>
@@ -944,6 +1154,39 @@
     <item>Transmutation</item>
   </object>
   <object>
+    <name>Hound Archon</name>
+    <item>Air</item>
+    <item>Animal</item>
+    <item>Chaos</item>
+    <item>Death</item>
+    <item>Destruction</item>
+    <item>Earth</item>
+    <item>Evil</item>
+    <item>Fire</item>
+    <item>Good</item>
+    <item>Healing</item>
+    <item>Knowledge</item>
+    <item>Law</item>
+    <item>Luck</item>
+    <item>Magic</item>
+    <item>Plant</item>
+    <item>Protection</item>
+    <item>Strength</item>
+    <item>Sun</item>
+    <item>Travel</item>
+    <item>Trickery</item>
+    <item>War</item>
+    <item>Water</item>
+    <item>Abjuration</item>
+    <item>Conjuration</item>
+    <item>Divination</item>
+    <item>Enchantment</item>
+    <item>Evocation</item>
+    <item>Illusion</item>
+    <item>Necromancy</item>
+    <item>Transmutation</item>
+  </object>
+  <object>
     <name>Human</name>
     <item>Air</item>
     <item>Animal</item>
@@ -1244,6 +1487,39 @@
     <item>Transmutation</item>
   </object>
   <object>
+    <name>Mummy</name>
+    <item>Air</item>
+    <item>Animal</item>
+    <item>Chaos</item>
+    <item>Death</item>
+    <item>Destruction</item>
+    <item>Earth</item>
+    <item>Evil</item>
+    <item>Fire</item>
+    <item>Good</item>
+    <item>Healing</item>
+    <item>Knowledge</item>
+    <item>Law</item>
+    <item>Luck</item>
+    <item>Magic</item>
+    <item>Plant</item>
+    <item>Protection</item>
+    <item>Strength</item>
+    <item>Sun</item>
+    <item>Travel</item>
+    <item>Trickery</item>
+    <item>War</item>
+    <item>Water</item>
+    <item>Abjuration</item>
+    <item>Conjuration</item>
+    <item>Divination</item>
+    <item>Enchantment</item>
+    <item>Evocation</item>
+    <item>Illusion</item>
+    <item>Necromancy</item>
+    <item>Transmutation</item>
+  </object>
+  <object>
     <name>Ogre</name>
     <item>Air</item>
     <item>Animal</item>
@@ -1412,6 +1688,39 @@
   </object>
   <object>
     <name>Ranger</name>
+  </object>
+  <object>
+    <name>Red Slaad</name>
+    <item>Air</item>
+    <item>Animal</item>
+    <item>Chaos</item>
+    <item>Death</item>
+    <item>Destruction</item>
+    <item>Earth</item>
+    <item>Evil</item>
+    <item>Fire</item>
+    <item>Good</item>
+    <item>Healing</item>
+    <item>Knowledge</item>
+    <item>Law</item>
+    <item>Luck</item>
+    <item>Magic</item>
+    <item>Plant</item>
+    <item>Protection</item>
+    <item>Strength</item>
+    <item>Sun</item>
+    <item>Travel</item>
+    <item>Trickery</item>
+    <item>War</item>
+    <item>Water</item>
+    <item>Abjuration</item>
+    <item>Conjuration</item>
+    <item>Divination</item>
+    <item>Enchantment</item>
+    <item>Evocation</item>
+    <item>Illusion</item>
+    <item>Necromancy</item>
+    <item>Transmutation</item>
   </object>
   <object>
     <name>Rock Gnome</name>
@@ -1747,6 +2056,9 @@
     <item>Transmutation</item>
   </object>
   <object>
+    <name>Warrior</name>
+  </object>
+  <object>
     <name>Werebear</name>
     <item>Air</item>
     <item>Animal</item>
@@ -1957,6 +2269,105 @@
   </object>
   <object>
     <name>Wood Elf</name>
+    <item>Air</item>
+    <item>Animal</item>
+    <item>Chaos</item>
+    <item>Death</item>
+    <item>Destruction</item>
+    <item>Earth</item>
+    <item>Evil</item>
+    <item>Fire</item>
+    <item>Good</item>
+    <item>Healing</item>
+    <item>Knowledge</item>
+    <item>Law</item>
+    <item>Luck</item>
+    <item>Magic</item>
+    <item>Plant</item>
+    <item>Protection</item>
+    <item>Strength</item>
+    <item>Sun</item>
+    <item>Travel</item>
+    <item>Trickery</item>
+    <item>War</item>
+    <item>Water</item>
+    <item>Abjuration</item>
+    <item>Conjuration</item>
+    <item>Divination</item>
+    <item>Enchantment</item>
+    <item>Evocation</item>
+    <item>Illusion</item>
+    <item>Necromancy</item>
+    <item>Transmutation</item>
+  </object>
+  <object>
+    <name>Yuan-ti Abomination</name>
+    <item>Air</item>
+    <item>Animal</item>
+    <item>Chaos</item>
+    <item>Death</item>
+    <item>Destruction</item>
+    <item>Earth</item>
+    <item>Evil</item>
+    <item>Fire</item>
+    <item>Good</item>
+    <item>Healing</item>
+    <item>Knowledge</item>
+    <item>Law</item>
+    <item>Luck</item>
+    <item>Magic</item>
+    <item>Plant</item>
+    <item>Protection</item>
+    <item>Strength</item>
+    <item>Sun</item>
+    <item>Travel</item>
+    <item>Trickery</item>
+    <item>War</item>
+    <item>Water</item>
+    <item>Abjuration</item>
+    <item>Conjuration</item>
+    <item>Divination</item>
+    <item>Enchantment</item>
+    <item>Evocation</item>
+    <item>Illusion</item>
+    <item>Necromancy</item>
+    <item>Transmutation</item>
+  </object>
+  <object>
+    <name>Yuan-ti Halfblood</name>
+    <item>Air</item>
+    <item>Animal</item>
+    <item>Chaos</item>
+    <item>Death</item>
+    <item>Destruction</item>
+    <item>Earth</item>
+    <item>Evil</item>
+    <item>Fire</item>
+    <item>Good</item>
+    <item>Healing</item>
+    <item>Knowledge</item>
+    <item>Law</item>
+    <item>Luck</item>
+    <item>Magic</item>
+    <item>Plant</item>
+    <item>Protection</item>
+    <item>Strength</item>
+    <item>Sun</item>
+    <item>Travel</item>
+    <item>Trickery</item>
+    <item>War</item>
+    <item>Water</item>
+    <item>Abjuration</item>
+    <item>Conjuration</item>
+    <item>Divination</item>
+    <item>Enchantment</item>
+    <item>Evocation</item>
+    <item>Illusion</item>
+    <item>Necromancy</item>
+    <item>Transmutation</item>
+  </object>
+  <object>
+    <name>Yuan-ti Pureblood</name>
     <item>Air</item>
     <item>Animal</item>
     <item>Chaos</item>

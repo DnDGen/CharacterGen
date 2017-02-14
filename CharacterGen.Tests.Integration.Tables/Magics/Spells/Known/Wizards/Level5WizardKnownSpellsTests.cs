@@ -27,7 +27,7 @@ namespace CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizards
         [TestCase(1, 3)]
         [TestCase(2, 2)]
         [TestCase(3, 1)]
-        public void Adjustment(int spellLevel, int quantity)
+        public void SpellLevelAndQuantity(int spellLevel, int quantity)
         {
             base.Adjustment(spellLevel.ToString(), quantity);
         }

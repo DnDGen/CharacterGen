@@ -13,6 +13,7 @@
       <item>0</item>
       <item></item>
       <item>0</item>
+    <item></item>
     </object>
     <object>
         <name>Skill BonusListen</name>
@@ -26,19 +27,21 @@
       <item>0</item>
       <item></item>
       <item>0</item>
+      <item></item>
     </object>
     <object>
-        <name>Attack BonusThrowOrSling</name>
-        <item>Attack Bonus</item>
-        <item></item>
-        <item>0</item>
-        <item>1</item>
-        <item>Thrown weapons and slings</item>
-        <item>0</item>
-        <item></item>
+      <name>Attack BonusThrowOrSling</name>
+      <item>Attack Bonus</item>
+      <item></item>
       <item>0</item>
-    <item></item>
-    <item>0</item>
+      <item>1</item>
+      <item>Thrown weapons and slings</item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
     </object>
     <object>
         <name>Save BonusFear</name>
@@ -52,6 +55,7 @@
       <item>0</item>
       <item></item>
       <item>0</item>
+      <item></item>
     </object>
     <object>
       <name>Save BonusAll</name>
@@ -65,6 +69,7 @@
       <item>0</item>
       <item></item>
       <item>0</item>
+      <item></item>
     </object>
     <object>
         <name>Darkvision</name>
@@ -78,18 +83,20 @@
       <item>0</item>
     <item></item>
     <item>0</item>
+      <item></item>
     </object>
     <object>
-        <name>Stonecunning</name>
-        <item>Stonecunning</item>
-        <item></item>
-        <item>0</item>
-        <item>0</item>
-        <item></item>
-        <item>0</item>
-        <item></item>
+      <name>Stonecunning</name>
+      <item>Stonecunning</item>
+      <item></item>
       <item>0</item>
-    <item></item>
-    <item>0</item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
     </object>
 </items>

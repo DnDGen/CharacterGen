@@ -13,32 +13,35 @@
       <item>0</item>
     <item></item>
     <item>0</item>
+      <item></item>
     </object>
-  <object>
-    <name>Skill BonusMove Silently</name>
-    <item>Skill Bonus</item>
-    <item></item>
-    <item>0</item>
-    <item>4</item>
-    <item>Move Silently</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-  </object>
-  <object>
-    <name>Skill BonusListen</name>
-    <item>Skill Bonus</item>
-    <item></item>
-    <item>0</item>
-    <item>1</item>
-    <item>Listen</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
+    <object>
+      <name>Skill BonusMove Silently</name>
+      <item>Skill Bonus</item>
+      <item></item>
+      <item>0</item>
+      <item>4</item>
+      <item>Move Silently</item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
+    </object>
+    <object>
+      <name>Skill BonusListen</name>
+      <item>Skill Bonus</item>
+      <item></item>
+      <item>0</item>
+      <item>1</item>
+      <item>Listen</item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
   </object>
   <object>
     <name>Skill BonusSpot</name>
@@ -52,6 +55,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
     <object>
         <name>Attack BonusGoblin</name>
@@ -65,6 +69,7 @@
       <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
     </object>
     <object>
         <name>Attack BonusOrc</name>
@@ -78,6 +83,7 @@
       <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
     </object>
     <object>
         <name>Save BonusSpell</name>
@@ -91,32 +97,35 @@
       <item>0</item>
     <item></item>
     <item>0</item>
+      <item></item>
     </object>
     <object>
-        <name>Immune to EffectPoison</name>
-        <item>Immune to Effect</item>
-        <item></item>
-        <item>0</item>
-        <item>0</item>
-        <item>Poison</item>
-        <item>0</item>
-        <item></item>
-        <item>0</item>
-    <item></item>
-    <item>0</item>
+      <name>Immune to EffectPoison</name>
+      <item>Immune to Effect</item>
+      <item></item>
+      <item>0</item>
+      <item>0</item>
+      <item>Poison</item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
     </object>
-  <object>
-    <name>Immune to EffectPhantasms</name>
-    <item>Immune to Effect</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item>Phantasms</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
+    <object>
+      <name>Immune to EffectPhantasms</name>
+      <item>Immune to Effect</item>
+      <item></item>
+      <item>0</item>
+      <item>0</item>
+      <item>Phantasms</item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
   </object>
   <object>
     <name>Immune to EffectParalysis</name>
@@ -130,6 +139,7 @@
     <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
   </object>
     <object>
         <name>Dodge Bonus</name>
@@ -143,32 +153,35 @@
       <item>0</item>
     <item></item>
     <item>0</item>
+      <item></item>
     </object>
     <object>
-        <name>Stability</name>
-        <item>Stability</item>
-        <item></item>
-        <item>0</item>
-        <item>0</item>
-        <item></item>
-        <item>0</item>
-        <item></item>
+      <name>Stability</name>
+      <item>Stability</item>
+      <item></item>
       <item>0</item>
-    <item></item>
-    <item>0</item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
     </object>
     <object>
-        <name>Light Sensitivity</name>
-        <item>Light Sensitivity</item>
-        <item></item>
-        <item>0</item>
-        <item>0</item>
-        <item></item>
-        <item>0</item>
-        <item></item>
+      <name>Light Sensitivity</name>
+      <item>Light Sensitivity</item>
+      <item></item>
       <item>0</item>
-    <item></item>
-    <item>0</item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
     </object>
     <object>
         <name>Spell-Like AbilityEnlarge person</name>
@@ -182,19 +195,21 @@
       <item>0</item>
     <item></item>
     <item>0</item>
+      <item></item>
     </object>
-  <object>
-    <name>Spell-Like AbilityInvisibility</name>
-    <item>Spell-Like Ability</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item>Invisibility</item>
-    <item>1</item>
-    <item>Day</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
+    <object>
+      <name>Spell-Like AbilityInvisibility</name>
+      <item>Spell-Like Ability</item>
+      <item></item>
+      <item>0</item>
+      <item>0</item>
+      <item>Invisibility</item>
+      <item>1</item>
+      <item>Day</item>
+      <item>0</item>
+      <item></item>
+      <item>0</item>
+      <item></item>
   </object>
     <object>
         <name>Stonecunning</name>
@@ -208,6 +223,7 @@
         <item>0</item>
     <item></item>
     <item>0</item>
+      <item></item>
     </object>
     <object>
         <name>Darkvision</name>
@@ -221,5 +237,6 @@
       <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
     </object>
 </items>

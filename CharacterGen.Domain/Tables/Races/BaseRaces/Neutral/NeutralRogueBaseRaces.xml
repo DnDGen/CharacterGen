@@ -34,6 +34,31 @@
   <object>
     <lower>26</lower>
     <content>Lightfoot Halfling</content>
+    <upper>46</upper>
+  </object>
+  <object>
+    <lower>47</lower>
+    <content>Red Slaad</content>
+    <upper>47</upper>
+  </object>
+  <object>
+    <lower>48</lower>
+    <content>Blue Slaad</content>
+    <upper>48</upper>
+  </object>
+  <object>
+    <lower>49</lower>
+    <content>Green Slaad</content>
+    <upper>49</upper>
+  </object>
+  <object>
+    <lower>50</lower>
+    <content>Gray Slaad</content>
+    <upper>50</upper>
+  </object>
+  <object>
+    <lower>51</lower>
+    <content>Azer</content>
     <upper>51</upper>
   </object>
   <object>

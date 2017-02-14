@@ -32,7 +32,7 @@ namespace CharacterGen.Domain.Generators.Randomizers.Races.Metaraces
 
         public IEnumerable<string> GetAllPossible(Alignment alignment, CharacterClass characterClass)
         {
-            var alignmentMetaraces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, alignment.Goodness);
+            var alignmentMetaraces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, alignment.Full);
             var classMetaraces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, characterClass.Name);
 
             return alignmentMetaraces.Intersect(classMetaraces).Intersect(new[] { SetMetarace });

@@ -3,10 +3,10 @@ using CharacterGen.Domain.Selectors.Percentiles;
 
 namespace CharacterGen.Domain.Generators.Randomizers.Races.Metaraces
 {
-    internal class AnyMetaraceRandomizer : BaseForcableMetarace
+    internal class AnyMetaraceRandomizer : ForcableMetaraceBase
     {
-        public AnyMetaraceRandomizer(IPercentileSelector percentileResultSelector, IAdjustmentsSelector levelAdjustmentSelector, Generator generator)
-            : base(percentileResultSelector, levelAdjustmentSelector, generator)
+        public AnyMetaraceRandomizer(IPercentileSelector percentileResultSelector, IAdjustmentsSelector levelAdjustmentSelector, Generator generator, ICollectionsSelector collectionSelector)
+            : base(percentileResultSelector, levelAdjustmentSelector, generator, collectionSelector)
         { }
 
         protected override bool MetaraceIsAllowed(string metarace)

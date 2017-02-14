@@ -5,6 +5,7 @@ using CharacterGen.Domain.Generators;
 using CharacterGen.Domain.Generators.Magics;
 using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Tables;
+using CharacterGen.Magics;
 using CharacterGen.Races;
 using Moq;
 using NUnit.Framework;
@@ -32,15 +33,14 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         private List<string> animalsForSize;
         private List<string> improvedFamiliars;
         private List<string> animalsForMetarace;
-        private List<string> mages;
+        private List<string> arcaneSpellcasters;
 
         [SetUp]
         public void Setup()
         {
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
             mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
-            generator = new ConfigurableIterationGenerator();
-            animalGenerator = new AnimalGenerator(mockCollectionsSelector.Object, mockAdjustmentsSelector.Object, generator);
+            animalGenerator = new AnimalGenerator(mockCollectionsSelector.Object, mockAdjustmentsSelector.Object);
 
             characterClass = new CharacterClass();
             characterRace = new Race();
@@ -52,7 +52,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
             improvedFamiliars = new List<string>();
             druidAnimals = new List<string>();
             animalsForMetarace = new List<string>();
-            mages = new List<string>();
+            arcaneSpellcasters = new List<string>();
 
             characterRace.BaseRace = "character race";
             characterRace.Metarace = "character metarace";
@@ -66,12 +66,12 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
 
             mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<string>>())).Returns((IEnumerable<string> c) => c.Last());
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.Animals, characterClass.Name)).Returns(animals);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.Animals, CharacterClassConstants.Druid)).Returns(druidAnimals);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.Animals, characterRace.Size)).Returns(animalsForSize);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.Animals, characterRace.Metarace)).Returns(animalsForMetarace);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.Animals, FeatConstants.ImprovedFamiliar)).Returns(improvedFamiliars);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Mages)).Returns(mages);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AnimalGroups, characterClass.Name)).Returns(animals);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AnimalGroups, CharacterClassConstants.Druid)).Returns(druidAnimals);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AnimalGroups, characterRace.Size)).Returns(animalsForSize);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AnimalGroups, characterRace.Metarace)).Returns(animalsForMetarace);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AnimalGroups, FeatConstants.ImprovedFamiliar)).Returns(improvedFamiliars);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, SpellConstants.Sources.Arcane)).Returns(arcaneSpellcasters);
             mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(TableNameConstants.Set.Adjustments.LevelAdjustments)).Returns(levelAdjustments);
         }
 
@@ -107,28 +107,28 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         [Test]
         public void GenerateNoAnimalIfNoneFitWithinLevel()
         {
-            levelAdjustments[Animal] = characterClass.Level * -1;
+            levelAdjustments[Animal] = characterClass.Level;
             var animal = animalGenerator.GenerateFrom(alignment, characterClass, characterRace, feats);
             Assert.That(animal, Is.Empty);
         }
 
         [Test]
-        public void FilterByMetaraceIfClassIsMage()
+        public void FilterByMetaraceIfClassIsArcaneSpellcaster()
         {
             animalsForMetarace.Clear();
             animalsForMetarace.Add("other animal");
-            mages.Add(characterClass.Name);
+            arcaneSpellcasters.Add(characterClass.Name);
 
             var animal = animalGenerator.GenerateFrom(alignment, characterClass, characterRace, feats);
             Assert.That(animal, Is.Empty);
         }
 
         [Test]
-        public void DoNotFilterByMetaraceIfClassIsNotMage()
+        public void DoNotFilterByMetaraceIfClassIsNotArcaneSpellcaster()
         {
             animalsForMetarace.Clear();
             animalsForMetarace.Add("other animal");
-            mages.Add("other class");
+            arcaneSpellcasters.Add("other class");
 
             var animal = animalGenerator.GenerateFrom(alignment, characterClass, characterRace, feats);
             Assert.That(animal, Is.EqualTo(Animal));
@@ -185,7 +185,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
             levelAdjustments["other animal"] = 0;
             improvedFamiliars.Add("other animal");
             improvedFamiliars.Add(Animal);
-            mages.Add(characterClass.Name);
+            arcaneSpellcasters.Add(characterClass.Name);
 
             feats.Add(new Feat { Name = FeatConstants.ImprovedFamiliar });
 
@@ -199,7 +199,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
             characterClass.Name = CharacterClassConstants.Ranger;
             druidAnimals.Add("other animal");
             druidAnimals.Add(Animal);
-            levelAdjustments["other animal"] = characterClass.Level / 2 + 1;
+            levelAdjustments["other animal"] = characterClass.Level / 2 - 1;
 
             var animal = animalGenerator.GenerateFrom(alignment, characterClass, characterRace, feats);
             Assert.That(animal, Is.EqualTo(Animal));
@@ -211,7 +211,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
             characterClass.Name = CharacterClassConstants.Ranger;
             druidAnimals.Add("other animal");
             druidAnimals.Add(Animal);
-            levelAdjustments["other animal"] = characterClass.Level / -2 - 1;
+            levelAdjustments["other animal"] = characterClass.Level / 2 - 1;
 
             var animal = animalGenerator.GenerateFrom(alignment, characterClass, characterRace, feats);
             Assert.That(characterClass.Name, Is.EqualTo(CharacterClassConstants.Ranger));
@@ -219,24 +219,24 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         }
 
         [Test]
-        public void AdeptDoesNotGetAnimalAtLevel1()
+        public void NPCLevel1DoesNotHaveAnimal()
         {
-            characterClass.Name = CharacterClassConstants.Adept;
+            characterClass.IsNPC = true;
             characterClass.Level = 1;
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.Animals, CharacterClassConstants.Adept)).Returns(animals);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AnimalGroups, CharacterClassConstants.Adept)).Returns(animals);
 
             var animal = animalGenerator.GenerateFrom(alignment, characterClass, characterRace, feats);
             Assert.That(animal, Is.Empty);
         }
 
         [Test]
-        public void AdeptGetsAnimalAtLevel2()
+        public void NPCGetsAnimalAtLevel2()
         {
-            characterClass.Name = CharacterClassConstants.Adept;
+            characterClass.IsNPC = true;
             characterClass.Level = 2;
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.Animals, CharacterClassConstants.Adept)).Returns(animals);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AnimalGroups, CharacterClassConstants.Adept)).Returns(animals);
 
             var animal = animalGenerator.GenerateFrom(alignment, characterClass, characterRace, feats);
             Assert.That(animal, Is.EqualTo(Animal));

@@ -3,7 +3,15 @@
 <items>
   <object>
     <name>Aasimar</name>
-    <item>4d6</item>
+    <item>1d6</item>
+  </object>
+  <object>
+    <name>Azer</name>
+    <item>3d6</item>
+  </object>
+  <object>
+    <name>Blue Slaad</name>
+    <item>2d4</item>
   </object>
   <object>
     <name>Bugbear</name>
@@ -15,7 +23,11 @@
   </object>
   <object>
     <name>Cloud Giant</name>
-    <item>2d8</item>
+    <item>2d4</item>
+  </object>
+  <object>
+    <name>Death Slaad</name>
+    <item>2d4</item>
   </object>
   <object>
     <name>Deep Dwarf</name>
@@ -43,7 +55,7 @@
   </object>
   <object>
     <name>Fire Giant</name>
-    <item>1d12</item>
+    <item>2d4</item>
   </object>
   <object>
     <name>Forest Gnome</name>
@@ -51,7 +63,11 @@
   </object>
   <object>
     <name>Frost Giant</name>
-    <item>1d12</item>
+    <item>2d4</item>
+  </object>
+  <object>
+    <name>Gargoyle</name>
+    <item>1d4</item>
   </object>
   <object>
     <name>Gnoll</name>
@@ -64,6 +80,14 @@
   <object>
     <name>Gray Elf</name>
     <item>4d6</item>
+  </object>
+  <object>
+    <name>Gray Slaad</name>
+    <item>2d4</item>
+  </object>
+  <object>
+    <name>Green Slaad</name>
+    <item>2d4</item>
   </object>
   <object>
     <name>Grimlock</name>
@@ -95,6 +119,10 @@
   </object>
   <object>
     <name>Hobgoblin</name>
+    <item>1d4</item>
+  </object>
+  <object>
+    <name>Hound Archon</name>
     <item>1d4</item>
   </object>
   <object>
@@ -150,6 +178,10 @@
     <item>1d4</item>
   </object>
   <object>
+    <name>Red Slaad</name>
+    <item>2d4</item>
+  </object>
+  <object>
     <name>Rock Gnome</name>
     <item>4d6</item>
   </object>
@@ -163,11 +195,11 @@
   </object>
   <object>
     <name>Stone Giant</name>
-    <item>4d8</item>
+    <item>2d4</item>
   </object>
   <object>
     <name>Storm Giant</name>
-    <item>2d12</item>
+    <item>2d4</item>
   </object>
   <object>
     <name>Svirfneblin</name>
@@ -179,7 +211,7 @@
   </object>
   <object>
     <name>Tiefling</name>
-    <item>4d6</item>
+    <item>1d6</item>
   </object>
   <object>
     <name>Troglodyte</name>
@@ -196,5 +228,17 @@
   <object>
     <name>Wood Elf</name>
     <item>4d6</item>
+  </object>
+  <object>
+    <name>Yuan-ti Abomination</name>
+    <item>1d4</item>
+  </object>
+  <object>
+    <name>Yuan-ti Halfblood</name>
+    <item>1d4</item>
+  </object>
+  <object>
+    <name>Yuan-ti Pureblood</name>
+    <item>1d4</item>
   </object>
 </items>

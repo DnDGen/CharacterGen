@@ -14,6 +14,8 @@
         public const string AttackBonus = "Attack Bonus";
         public const string AuraOfCourage = "Aura of Courage";
         public const string AuraOfGood = "Aura of Good";
+        public const string AuraOfMenace = "Aura of Menace";
+        public const string Aversion = "Aversion";
         public const string AugmentSummoning = "Augment Summoning";
         public const string BardicKnowledge = "Bardic Knowledge";
         public const string BardicMusic = "Bardic Music";
@@ -23,6 +25,7 @@
         public const string Camouflage = "Camouflage";
         public const string CaptivatingSong = "Captivating Song";
         public const string CastSpellBonus = "Cast Spell Bonus";
+        public const string ChameleonPower = "Chameleon Power";
         public const string ChangeShape = "Change Shape";
         public const string ChangeSize = "Change Size";
         public const string ChildrenOfTheNight = "Children of the Night";
@@ -44,6 +47,7 @@
         public const string DefensiveRoll = "Defensive Roll";
         public const string DeflectArrows = "Deflect Arrows";
         public const string DeftHands = "Deft Hands";
+        public const string Despair = "Despair";
         public const string DiamondBody = "Diamond Body";
         public const string DiamondSoul = "Diamond Soul";
         public const string Diehard = "Diehard";
@@ -78,8 +82,10 @@
         public const string Ferocity = "Ferocity";
         public const string Flight = "Flight";
         public const string FlurryOfBlows = "Flurry of Blows";
+        public const string Freeze = "Freeze";
         public const string FrightfulMoan = "Frightful Moan";
         public const string GaseousForm = "Gaseous Form";
+        public const string GhostSpecialAttack = "Ghost Special Attack";
         public const string GoodFortune = "Good Fortune";
         public const string GreatCleave = "Great Cleave";
         public const string GreaterFlurry = "Greater Flurry";
@@ -91,6 +97,7 @@
         public const string GreaterWeaponFocus = "Greater Weapon Focus";
         public const string GreaterWeaponSpecialization = "Greater Weapon Specialization";
         public const string GreatFortitude = "Great Fortitude";
+        public const string Heat = "Heat";
         public const string HeavyArmorProficiency = "Heavy Armor Proficiency";
         public const string HeightenSpell = "Heighten Spell";
         public const string HideInPlainSight = "Hide in Plain Sight";
@@ -98,6 +105,7 @@
         public const string HorrificAppearance = "Horrific Appearance";
         public const string Illiteracy = "Illiteracy";
         public const string ImmuneToEffect = "Immune to Effect";
+        public const string Implant = "Implant";
         public const string ImprovedBullRush = "Improved Bull Rush";
         public const string ImprovedCombatStyle = "Improved Combat Style";
         public const string ImprovedCounterspell = "Improved Counterspell";
@@ -150,8 +158,9 @@
         public const string Mobility = "Mobility";
         public const string MonkBonusFeat = "Monk Bonus Feat";
         public const string MonkUnarmedStrike = "Monk Unarmed Strike";
-        public const string MountedCombat = "Mounted Combat";
         public const string MountedArchery = "Mounted Archery";
+        public const string MountedCombat = "Mounted Combat";
+        public const string MummyRot = "Mummy Rot";
         public const string NaturalArmor = "Natural Armor";
         public const string NaturalCunning = "Natural Cunning";
         public const string NaturalSpell = "Natural Spell";
@@ -173,6 +182,7 @@
         public const string PowerAttack = "Power Attack";
         public const string PowerfulCharge = "Powerful Charge";
         public const string PreciseShot = "Precise Shot";
+        public const string ProduceAcid = "Produce Acid";
         public const string PurityOfBody = "Purity of Body";
         public const string QuickDraw = "Quick Draw";
         public const string QuickenSpell = "Quicken Spell";
@@ -201,6 +211,7 @@
         public const string SkillBonus = "Skill Bonus";
         public const string SkillFocus = "Skill Focus";
         public const string SkillMastery = "Skill Mastery";
+        public const string SlaadFever = "Slaad Fever";
         public const string Slam = "Slam";
         public const string SlipperyMind = "Slippery Mind";
         public const string SlowFall = "Slow Fall";
@@ -224,9 +235,12 @@
         public const string StillMind = "Still Mind";
         public const string StillSpell = "Still Spell";
         public const string Stonecunning = "Stonecunning";
+        public const string Stun = "Stun";
+        public const string StunningCroak = "Stunning Croak";
         public const string StunningFist = "Stunning Fist";
         public const string Suggestion = "Suggestion";
         public const string SupernaturalStrength = "Supernatural Strength";
+        public const string SummonSlaad = "Summon Slaad";
         public const string SwiftTracker = "Swift Tracker";
         public const string Telekinesis = "Telekinesis";
         public const string Telepathy = "Telepathy";
@@ -269,6 +283,7 @@
             public const string Day = "Day";
             public const string Hit = "Hit";
             public const string Round = "Round";
+            public const string Turn = "Turn";
             public const string Week = "Week";
         }
 

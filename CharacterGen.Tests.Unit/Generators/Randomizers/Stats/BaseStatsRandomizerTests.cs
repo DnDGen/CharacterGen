@@ -1,7 +1,6 @@
 ﻿using CharacterGen.Abilities.Stats;
 using CharacterGen.Domain.Generators.Randomizers.Stats;
 using NUnit.Framework;
-using System;
 using System.Collections.Generic;
 
 namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
@@ -84,7 +83,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
         {
             randomizer.Roll = 11;
             randomizer.Reroll = 12;
-            randomizer.AllowedOnRandomize = Int32.MaxValue;
+            randomizer.AllowedOnRandomize = int.MaxValue;
 
             var stats = randomizer.Randomize();
 
@@ -98,11 +97,11 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
 
         private class TestStatRandomizer : BaseStatsRandomizer
         {
-            public Int32 Roll { get; set; }
-            public Int32 Reroll { get; set; }
-            public Int32 AllowedOnRandomize { get; set; }
+            public int Roll { get; set; }
+            public int Reroll { get; set; }
+            public int AllowedOnRandomize { get; set; }
 
-            protected override Int32 defaultValue
+            protected override int defaultValue
             {
                 get
                 {
@@ -110,7 +109,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
                 }
             }
 
-            private Int32 randomizeCount;
+            private int randomizeCount;
 
             public TestStatRandomizer()
                 : base(new ConfigurableIterationGenerator(10))
@@ -119,7 +118,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
                 AllowedOnRandomize = 1;
             }
 
-            protected override Int32 RollStat()
+            protected override int RollStat()
             {
                 if (randomizeCount + 1 < AllowedOnRandomize || Reroll == 0)
                     return Roll;
@@ -127,7 +126,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Stats
                 return Reroll++;
             }
 
-            protected override Boolean StatsAreAllowed(IEnumerable<Stat> stats)
+            protected override bool StatsAreAllowed(IEnumerable<Stat> stats)
             {
                 randomizeCount++;
                 return randomizeCount >= AllowedOnRandomize;

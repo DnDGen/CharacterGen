@@ -12,7 +12,7 @@ namespace CharacterGen.Tests.Unit.Generators
             this.maxRetries = maxRetries;
         }
 
-        public T Generate<T>(Func<T> buildInstructions, Func<T, bool> isValid)
+        public T Generate<T>(Func<T> buildInstructions, Func<T, bool> isValid, Func<T> buildDefault)
         {
             T builtObject;
             var retries = 1;
@@ -23,7 +23,7 @@ namespace CharacterGen.Tests.Unit.Generators
             if (isValid(builtObject))
                 return builtObject;
 
-            return default(T);
+            return buildDefault();
         }
     }
 }

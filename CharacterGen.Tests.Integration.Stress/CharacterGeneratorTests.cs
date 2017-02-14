@@ -1,4 +1,5 @@
-﻿using CharacterGen.Abilities.Stats;
+﻿using CharacterGen.Abilities.Feats;
+using CharacterGen.Abilities.Stats;
 using CharacterGen.CharacterClasses;
 using CharacterGen.Magics;
 using CharacterGen.Races;
@@ -32,7 +33,17 @@ namespace CharacterGen.Tests.Integration.Stress
         [Inject]
         public ISetBaseRaceRandomizer SetBaseRaceRandomizer { get; set; }
         [Inject]
+        public ISetMetaraceRandomizer SetMetaraceRandomizer { get; set; }
+        [Inject]
         public CharacterVerifier CharacterVerifier { get; set; }
+        [Inject]
+        public Random Random { get; set; }
+
+        [TearDown]
+        public void TearDown()
+        {
+            MetaraceRandomizer = GetNewInstanceOf<RaceRandomizer>(RaceRandomizerTypeConstants.Metarace.AnyMeta);
+        }
 
         [Test]
         public void StressCharacter()
@@ -63,31 +74,7 @@ namespace CharacterGen.Tests.Integration.Stress
         }
 
         [Test]
-        public void StressCommoner()
-        {
-            Stress(AssertCommoner);
-        }
-
-        private void AssertCommoner()
-        {
-            SetClassNameRandomizer.SetClassName = CharacterClassConstants.Commoner;
-
-            var commoner = CharacterGenerator.GenerateWith(AlignmentRandomizer, SetClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer, RawStatsRandomizer);
-
-            CharacterVerifier.AssertCharacter(commoner);
-            Assert.That(commoner.Class.IsNPC, Is.True);
-            Assert.That(commoner.Class.Name, Is.EqualTo(CharacterClassConstants.Commoner));
-            Assert.That(commoner.Class.ProhibitedFields, Is.Empty);
-            Assert.That(commoner.Class.SpecialistFields, Is.Empty);
-            Assert.That(commoner.Magic.Animal, Is.Empty);
-            Assert.That(commoner.Magic.ArcaneSpellFailure, Is.EqualTo(0));
-            Assert.That(commoner.Magic.KnownSpells, Is.Empty);
-            Assert.That(commoner.Magic.PreparedSpells, Is.Empty);
-            Assert.That(commoner.Magic.SpellsPerDay, Is.Empty);
-        }
-
-        [Test]
-        public void StressFirstLevelCommoner()
+        public void BUG_StressFirstLevelCommoner()
         {
             Stress(AssertFirstLevelCommoner);
         }
@@ -106,6 +93,8 @@ namespace CharacterGen.Tests.Integration.Stress
             Assert.That(commoner.Class.Name, Is.EqualTo(CharacterClassConstants.Commoner));
             Assert.That(commoner.Class.ProhibitedFields, Is.Empty);
             Assert.That(commoner.Class.SpecialistFields, Is.Empty);
+            Assert.That(commoner.Race.Metarace, Is.EqualTo(RaceConstants.Metaraces.None));
+            Assert.That(commoner.Race.MetaraceSpecies, Is.Empty);
             Assert.That(commoner.ChallengeRating, Is.EqualTo(.5), commoner.Race.BaseRace + commoner.Race.Metarace);
             Assert.That(commoner.Magic.Animal, Is.Empty);
             Assert.That(commoner.Magic.ArcaneSpellFailure, Is.EqualTo(0));
@@ -194,7 +183,7 @@ namespace CharacterGen.Tests.Integration.Stress
         }
 
         [Test]
-        public void StressRakshasaSpellcaster()
+        public void BUG_StressRakshasaSpellcaster()
         {
             Stress(AssertRakshasaSpellcaster);
         }
@@ -215,101 +204,7 @@ namespace CharacterGen.Tests.Integration.Stress
         }
 
         [Test]
-        public void StressSetMetarace()
-        {
-            Stress(AssertSetMetarace);
-        }
-
-        private void AssertSetMetarace()
-        {
-            var forcableMetaraceRandomizer = MetaraceRandomizer as IForcableMetaraceRandomizer;
-            forcableMetaraceRandomizer.ForceMetarace = true;
-
-            var setMetaraceRandomizer = GetNewInstanceOf<ISetMetaraceRandomizer>();
-
-            var alignment = GetNewAlignment();
-            var characterClass = GetNewCharacterClass(alignment);
-            setMetaraceRandomizer.SetMetarace = forcableMetaraceRandomizer.Randomize(alignment, characterClass);
-
-            var character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, setMetaraceRandomizer, RawStatsRandomizer);
-
-            CharacterVerifier.AssertCharacter(character);
-            Assert.That(character.Equipment.Treasure.Items, Is.Not.Empty);
-            Assert.That(character.Race.Metarace, Is.Not.Empty);
-            Assert.That(character.Race.Metarace, Is.Not.EqualTo(RaceConstants.Metaraces.None));
-            Assert.That(character.Race.Metarace, Is.EqualTo(setMetaraceRandomizer.SetMetarace));
-            Assert.That(character.Class.LevelAdjustment, Is.Positive);
-        }
-
-        [Test]
-        public void StressSetMetaraceAndSetLevelAllowingValidAdjustment()
-        {
-            Stress(AssertSetMetaraceAndSetLevelAllowingValidAdjustment);
-        }
-
-        private void AssertSetMetaraceAndSetLevelAllowingValidAdjustment()
-        {
-            var forcableMetaraceRandomizer = MetaraceRandomizer as IForcableMetaraceRandomizer;
-            forcableMetaraceRandomizer.ForceMetarace = true;
-
-            var setMetaraceRandomizer = GetNewInstanceOf<ISetMetaraceRandomizer>();
-
-            var alignment = GetNewAlignment();
-            var characterClass = GetNewCharacterClass(alignment);
-            setMetaraceRandomizer.SetMetarace = forcableMetaraceRandomizer.Randomize(alignment, characterClass);
-
-            var setLevelRandomizer = GetNewInstanceOf<ISetLevelRandomizer>();
-            setLevelRandomizer.SetLevel = Math.Max(LevelRandomizer.Randomize(), 9);
-            setLevelRandomizer.AllowAdjustments = true;
-
-            var character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, setLevelRandomizer, BaseRaceRandomizer, setMetaraceRandomizer, RawStatsRandomizer);
-
-            CharacterVerifier.AssertCharacter(character);
-            Assert.That(character.Equipment.Treasure.Items, Is.Not.Empty);
-            Assert.That(character.Race.Metarace, Is.Not.Empty);
-            Assert.That(character.Race.Metarace, Is.Not.EqualTo(RaceConstants.Metaraces.None));
-            Assert.That(character.Race.Metarace, Is.EqualTo(setMetaraceRandomizer.SetMetarace));
-            Assert.That(character.Class.Level, Is.Positive);
-            Assert.That(character.Class.Level, Is.EqualTo(setLevelRandomizer.SetLevel - character.Class.LevelAdjustment));
-            Assert.That(character.Class.LevelAdjustment, Is.Positive);
-            Assert.That(character.Class.EffectiveLevel, Is.EqualTo(setLevelRandomizer.SetLevel));
-        }
-
-        [Test]
-        public void StressSetMetaraceAndSetLevelNotAllowingAdjustment()
-        {
-            Stress(AssertSetMetaraceAndSetLevelNotAllowingAdjustment);
-        }
-
-        private void AssertSetMetaraceAndSetLevelNotAllowingAdjustment()
-        {
-            var forcableMetaraceRandomizer = MetaraceRandomizer as IForcableMetaraceRandomizer;
-            forcableMetaraceRandomizer.ForceMetarace = true;
-
-            var setMetaraceRandomizer = GetNewInstanceOf<ISetMetaraceRandomizer>();
-
-            var alignment = GetNewAlignment();
-            var characterClass = GetNewCharacterClass(alignment);
-            setMetaraceRandomizer.SetMetarace = forcableMetaraceRandomizer.Randomize(alignment, characterClass);
-
-            var setLevelRandomizer = GetNewInstanceOf<ISetLevelRandomizer>();
-            setLevelRandomizer.SetLevel = LevelRandomizer.Randomize();
-            setLevelRandomizer.AllowAdjustments = false;
-
-            var character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, setLevelRandomizer, BaseRaceRandomizer, setMetaraceRandomizer, RawStatsRandomizer);
-
-            CharacterVerifier.AssertCharacter(character);
-            Assert.That(character.Equipment.Treasure.Items, Is.Not.Empty);
-            Assert.That(character.Race.Metarace, Is.Not.Empty);
-            Assert.That(character.Race.Metarace, Is.Not.EqualTo(RaceConstants.Metaraces.None));
-            Assert.That(character.Race.Metarace, Is.EqualTo(setMetaraceRandomizer.SetMetarace));
-            Assert.That(character.Class.Level, Is.EqualTo(setLevelRandomizer.SetLevel));
-            Assert.That(character.Class.LevelAdjustment, Is.Positive);
-            Assert.That(character.Class.EffectiveLevel, Is.EqualTo(setLevelRandomizer.SetLevel + character.Class.LevelAdjustment));
-        }
-
-        [Test]
-        public void StressUndead()
+        public void BUG_StressUndeadCharacter()
         {
             Stress(AssertUndead);
         }
@@ -324,11 +219,67 @@ namespace CharacterGen.Tests.Integration.Stress
             CharacterVerifier.AssertCharacter(character);
             Assert.That(character.Race.Metarace, Is.EqualTo(RaceConstants.Metaraces.Ghost)
                 .Or.EqualTo(RaceConstants.Metaraces.Lich)
+                .Or.EqualTo(RaceConstants.Metaraces.Mummy)
                 .Or.EqualTo(RaceConstants.Metaraces.Vampire));
-            Assert.That(character.Equipment.Treasure.Items, Is.Not.Empty, character.Race.Metarace);
-            Assert.That(character.Ability.Stats.Keys, Is.All.Not.EqualTo(StatConstants.Constitution), character.Race.Metarace);
-            Assert.That(character.Combat.SavingThrows.HasFortitudeSave, Is.False, character.Race.Metarace);
-            Assert.That(character.Class.LevelAdjustment, Is.Positive);
+            Assert.That(character.Race.ChallengeRating, Is.Positive, character.Summary);
+            Assert.That(character.Equipment.Treasure.Items, Is.Not.Empty, character.Summary);
+            Assert.That(character.Ability.Stats.Keys, Is.All.Not.EqualTo(StatConstants.Constitution), character.Summary);
+            Assert.That(character.Combat.SavingThrows.HasFortitudeSave, Is.False, character.Summary);
+        }
+
+        [Test]
+        public void BUG_StressPlanetouchedCharacter()
+        {
+            Stress(AssertPlanetouched);
+        }
+
+        private void AssertPlanetouched()
+        {
+            var planetouched = new[] { RaceConstants.BaseRaces.Aasimar, RaceConstants.BaseRaces.Tiefling };
+            var randomIndex = Random.Next(2);
+            SetBaseRaceRandomizer.SetBaseRace = planetouched[randomIndex];
+
+            var character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, SetBaseRaceRandomizer, MetaraceRandomizer, RawStatsRandomizer);
+
+            CharacterVerifier.AssertCharacter(character);
+            Assert.That(character.Race.BaseRace, Is.EqualTo(RaceConstants.BaseRaces.Aasimar)
+                .Or.EqualTo(RaceConstants.BaseRaces.Tiefling));
+            Assert.That(character.Equipment.Treasure.Items, Is.Not.Empty, character.Summary);
+        }
+
+        [Test]
+        public void BUG_StressGhost()
+        {
+            Stress(AssertGhost);
+        }
+
+        private void AssertGhost()
+        {
+            SetMetaraceRandomizer.SetMetarace = RaceConstants.Metaraces.Ghost;
+
+            var character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, SetMetaraceRandomizer, RawStatsRandomizer);
+
+            CharacterVerifier.AssertCharacter(character);
+            Assert.That(character.Equipment.Treasure.Items, Is.Not.Empty, character.Summary);
+            Assert.That(character.Race.Metarace, Is.EqualTo(RaceConstants.Metaraces.Ghost));
+
+            var ghostSpecialAttacks = new[]
+            {
+                FeatConstants.CorruptingGaze,
+                FeatConstants.CorruptingTouch,
+                FeatConstants.DrainingTouch,
+                FeatConstants.FrightfulMoan,
+                FeatConstants.HorrificAppearance,
+                FeatConstants.Malevolence,
+                FeatConstants.Telekinesis,
+            };
+
+            var featNames = character.Ability.Feats.Select(f => f.Name);
+            var ghostSpecialAttackFeats = featNames.Intersect(ghostSpecialAttacks);
+            var ghostSpecialAttackFeat = character.Ability.Feats.Single(f => f.Name == FeatConstants.GhostSpecialAttack);
+
+            Assert.That(ghostSpecialAttackFeats.Count, Is.EqualTo(ghostSpecialAttackFeat.Foci.Count()));
+            Assert.That(ghostSpecialAttackFeats.Count, Is.InRange(1, 3));
         }
     }
 }

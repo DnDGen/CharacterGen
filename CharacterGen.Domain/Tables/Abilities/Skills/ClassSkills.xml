@@ -50,6 +50,16 @@
     <item>Swim</item>
   </object>
   <object>
+    <name>Azer</name>
+    <item>Appraise</item>
+    <item>Climb</item>
+    <item>Hide</item>
+    <item>Jump</item>
+    <item>Listen</item>
+    <item>Search</item>
+    <item>Spot</item>
+  </object>
+  <object>
     <name>Barbarian</name>
     <item>Climb</item>
     <item>Handle Animal</item>
@@ -93,6 +103,15 @@
     <item>Swim</item>
     <item>Tumble</item>
     <item>Use Magic Device</item>
+  </object>
+  <object>
+    <name>Blue Slaad</name>
+    <item>Climb</item>
+    <item>Hide</item>
+    <item>Jump</item>
+    <item>Listen</item>
+    <item>Move Silently</item>
+    <item>Spot</item>
   </object>
   <object>
     <name>Bugbear</name>
@@ -140,6 +159,23 @@
     <item>Ride</item>
     <item>Swim</item>
     <item>Spot</item>
+    <item>Use Rope</item>
+  </object>
+  <object>
+    <name>Death Slaad</name>
+    <item>Climb</item>
+    <item>Concentration</item>
+    <item>Escape Artist</item>
+    <item>Hide</item>
+    <item>Intimidate</item>
+    <item>Jump</item>
+    <item>Death SlaadKnowledge</item>
+    <item>Listen</item>
+    <item>Move Silently</item>
+    <item>Search</item>
+    <item>Spellcraft</item>
+    <item>Spot</item>
+    <item>Survival</item>
     <item>Use Rope</item>
   </object>
   <object>
@@ -215,6 +251,12 @@
     <item>Spot</item>
   </object>
   <object>
+    <name>Gargoyle</name>
+    <item>Hide</item>
+    <item>Listen</item>
+    <item>Spot</item>
+  </object>
+  <object>
     <name>Gnoll</name>
     <item>Listen</item>
     <item>Spot</item>
@@ -224,6 +266,32 @@
   </object>
   <object>
     <name>Gray Elf</name>
+  </object>
+  <object>
+    <name>Gray Slaad</name>
+    <item>Climb</item>
+    <item>Concentration</item>
+    <item>Hide</item>
+    <item>Jump</item>
+    <item>Knowledge (Arcana)</item>
+    <item>Listen</item>
+    <item>Move Silently</item>
+    <item>Search</item>
+    <item>Spellcraft</item>
+    <item>Spot</item>
+    <item>Survival</item>
+  </object>
+  <object>
+    <name>Green Slaad</name>
+    <item>Climb</item>
+    <item>Concentration</item>
+    <item>Hide</item>
+    <item>Jump</item>
+    <item>Listen</item>
+    <item>Move Silently</item>
+    <item>Search</item>
+    <item>Spot</item>
+    <item>Survival</item>
   </object>
   <object>
     <name>Grimlock</name>
@@ -263,6 +331,17 @@
     <name>Hobgoblin</name>
   </object>
   <object>
+    <name>Hound Archon</name>
+    <item>Concentration</item>
+    <item>Hide</item>
+    <item>Listen</item>
+    <item>Jump</item>
+    <item>Move Silently</item>
+    <item>Sense Motive</item>
+    <item>Spot</item>
+    <item>Survival</item>
+  </object>
+  <object>
     <name>Human</name>
   </object>
   <object>
@@ -294,6 +373,7 @@
     <item>Concentration</item>
     <item>Hide</item>
     <item>Intimidate</item>
+    <item>Mind FlayerKnowledge</item>
     <item>Listen</item>
     <item>Move Silently</item>
     <item>Spot</item>
@@ -387,6 +467,15 @@
     <item>Survival</item>
     <item>Swim</item>
     <item>Use Rope</item>
+  </object>
+  <object>
+    <name>Red Slaad</name>
+    <item>Climb</item>
+    <item>Hide</item>
+    <item>Jump</item>
+    <item>Listen</item>
+    <item>Move Silently</item>
+    <item>Spot</item>
   </object>
   <object>
     <name>Rock Gnome</name>
@@ -513,5 +602,31 @@
   </object>
   <object>
     <name>Wood Elf</name>
+  </object>
+  <object>
+    <name>Yuan-ti Abomination</name>
+    <item>Concentration</item>
+    <item>Hide</item>
+    <item>Listen</item>
+    <item>Move Silently</item>
+    <item>Spot</item>
+    <item>Yuan-ti AbominationKnowledge</item>
+  </object>
+  <object>
+    <name>Yuan-ti Halfblood</name>
+    <item>Concentration</item>
+    <item>Hide</item>
+    <item>Listen</item>
+    <item>Spot</item>
+    <item>Yuan-ti HalfbloodKnowledge</item>
+  </object>
+  <object>
+    <name>Yuan-ti Pureblood</name>
+    <item>Concentration</item>
+    <item>Disguise</item>
+    <item>Hide</item>
+    <item>Listen</item>
+    <item>Spot</item>
+    <item>Yuan-ti PurebloodKnowledge</item>
   </object>
 </items>

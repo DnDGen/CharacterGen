@@ -31,6 +31,7 @@ namespace CharacterGen.Tests.Unit.Tables
         [TestCase(DataIndexConstants.RacialFeatData.MaximumHitDiceRequirementIndex, 7)]
         [TestCase(DataIndexConstants.RacialFeatData.RequiredStatIndex, 8)]
         [TestCase(DataIndexConstants.RacialFeatData.RequiredStatMinimumValueIndex, 9)]
+        [TestCase(DataIndexConstants.RacialFeatData.RandomFociQuantity, 10)]
         public void RacialFeatDataIndex(int constant, int value)
         {
             Assert.That(constant, Is.EqualTo(value));
@@ -42,6 +43,14 @@ namespace CharacterGen.Tests.Unit.Tables
         [TestCase(DataIndexConstants.AdditionalFeatData.FrequencyQuantityIndex, 3)]
         [TestCase(DataIndexConstants.AdditionalFeatData.FrequencyTimePeriodIndex, 4)]
         public void AdditionalFeatDataIndex(int constant, int value)
+        {
+            Assert.That(constant, Is.EqualTo(value));
+        }
+
+        [TestCase(DataIndexConstants.SkillSelectionData.BaseStatName, 0)]
+        [TestCase(DataIndexConstants.SkillSelectionData.SkillName, 1)]
+        [TestCase(DataIndexConstants.SkillSelectionData.RandomFociQuantity, 2)]
+        public void SkillSelectionDataIndex(int constant, int value)
         {
             Assert.That(constant, Is.EqualTo(value));
         }

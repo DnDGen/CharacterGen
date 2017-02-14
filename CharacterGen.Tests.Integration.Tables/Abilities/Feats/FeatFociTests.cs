@@ -3,7 +3,6 @@ using CharacterGen.Abilities.Skills;
 using CharacterGen.CharacterClasses;
 using CharacterGen.Domain.Tables;
 using NUnit.Framework;
-using System;
 using TreasureGen.Items;
 
 namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
@@ -21,20 +20,21 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
         {
             var names = new[]
             {
-                GroupConstants.SchoolsOfMagic,
-                FeatConstants.SimpleWeaponProficiency,
-                FeatConstants.MartialWeaponProficiency,
+                FeatConstants.CombatStyle,
                 FeatConstants.ExoticWeaponProficiency,
+                FeatConstants.GhostSpecialAttack,
+                FeatConstants.MartialWeaponProficiency,
+                FeatConstants.MonkBonusFeat + "1",
+                FeatConstants.MonkBonusFeat + "2",
+                FeatConstants.MonkBonusFeat + "6",
+                FeatConstants.SimpleWeaponProficiency,
                 FeatConstants.Foci.Weapons,
                 FeatConstants.Foci.WeaponsWithUnarmed,
                 FeatConstants.Foci.WeaponsWithUnarmedAndGrapple,
                 FeatConstants.Foci.WeaponsWithUnarmedAndGrappleAndRay,
-                FeatConstants.CombatStyle,
+                GroupConstants.FavoredEnemies,
+                GroupConstants.SchoolsOfMagic,
                 GroupConstants.Skills,
-                FeatConstants.MonkBonusFeat + "1",
-                FeatConstants.MonkBonusFeat + "2",
-                FeatConstants.MonkBonusFeat + "6",
-                GroupConstants.FavoredEnemies
             };
 
             AssertCollectionNames(names);
@@ -127,9 +127,17 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
         [TestCase(FeatConstants.MonkBonusFeat + "6",
             FeatConstants.ImprovedDisarm,
             FeatConstants.ImprovedTrip)]
-        public override void DistinctCollection(String name, params String[] collection)
+        [TestCase(FeatConstants.GhostSpecialAttack,
+            FeatConstants.CorruptingGaze,
+            FeatConstants.CorruptingTouch,
+            FeatConstants.DrainingTouch,
+            FeatConstants.FrightfulMoan,
+            FeatConstants.HorrificAppearance,
+            FeatConstants.Malevolence,
+            FeatConstants.Telekinesis)]
+        public void FeatFoci(string feat, params string[] foci)
         {
-            base.DistinctCollection(name, collection);
+            base.DistinctCollection(feat, foci);
         }
 
         [Test]

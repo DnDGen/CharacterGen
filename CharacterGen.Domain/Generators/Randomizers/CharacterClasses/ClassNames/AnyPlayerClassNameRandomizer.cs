@@ -2,9 +2,6 @@
 using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Selectors.Percentiles;
 using CharacterGen.Domain.Tables;
-using CharacterGen.Randomizers.CharacterClasses;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace CharacterGen.Domain.Generators.Randomizers.CharacterClasses.ClassNames
@@ -14,7 +11,7 @@ namespace CharacterGen.Domain.Generators.Randomizers.CharacterClasses.ClassNames
         private ICollectionsSelector collectionsSelector;
 
         public AnyPlayerClassNameRandomizer(IPercentileSelector percentileResultSelector, ICollectionsSelector collectionsSelector, Generator generator)
-            : base(percentileResultSelector, generator)
+            : base(percentileResultSelector, generator, collectionsSelector)
         {
             this.collectionsSelector = collectionsSelector;
         }

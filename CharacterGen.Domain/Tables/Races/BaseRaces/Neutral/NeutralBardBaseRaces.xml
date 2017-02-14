@@ -64,6 +64,11 @@
   <object>
     <lower>41</lower>
     <content>Human</content>
+    <upper>96</upper>
+  </object>
+  <object>
+    <lower>97</lower>
+    <content>Gray Slaad</content>
     <upper>97</upper>
   </object>
   <object>

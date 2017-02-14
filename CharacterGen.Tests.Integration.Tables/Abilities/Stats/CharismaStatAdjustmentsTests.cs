@@ -26,9 +26,12 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Stats
         }
 
         [TestCase(RaceConstants.BaseRaces.Aasimar, 2)]
+        [TestCase(RaceConstants.BaseRaces.Azer, -2)]
+        [TestCase(RaceConstants.BaseRaces.BlueSlaad, 0)]
         [TestCase(RaceConstants.BaseRaces.Bugbear, -2)]
         [TestCase(RaceConstants.BaseRaces.Centaur, 0)]
         [TestCase(RaceConstants.BaseRaces.CloudGiant, 2)]
+        [TestCase(RaceConstants.BaseRaces.DeathSlaad, 8)]
         [TestCase(RaceConstants.BaseRaces.DeepDwarf, -2)]
         [TestCase(RaceConstants.BaseRaces.DeepHalfling, 0)]
         [TestCase(RaceConstants.BaseRaces.Derro, 6)]
@@ -38,9 +41,12 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Stats
         [TestCase(RaceConstants.BaseRaces.FireGiant, 0)]
         [TestCase(RaceConstants.BaseRaces.ForestGnome, 2)]
         [TestCase(RaceConstants.BaseRaces.FrostGiant, 0)]
+        [TestCase(RaceConstants.BaseRaces.Gargoyle, -4)]
         [TestCase(RaceConstants.BaseRaces.Gnoll, -2)]
         [TestCase(RaceConstants.BaseRaces.Goblin, -2)]
         [TestCase(RaceConstants.BaseRaces.GrayElf, 0)]
+        [TestCase(RaceConstants.BaseRaces.GraySlaad, 4)]
+        [TestCase(RaceConstants.BaseRaces.GreenSlaad, 2)]
         [TestCase(RaceConstants.BaseRaces.Grimlock, -4)]
         [TestCase(RaceConstants.BaseRaces.HalfElf, 0)]
         [TestCase(RaceConstants.BaseRaces.HalfOrc, -2)]
@@ -49,6 +55,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Stats
         [TestCase(RaceConstants.BaseRaces.HillDwarf, -2)]
         [TestCase(RaceConstants.BaseRaces.HillGiant, -4)]
         [TestCase(RaceConstants.BaseRaces.Hobgoblin, 0)]
+        [TestCase(RaceConstants.BaseRaces.HoundArchon, 2)]
         [TestCase(RaceConstants.BaseRaces.Human, 0)]
         [TestCase(RaceConstants.BaseRaces.Janni, 2)]
         [TestCase(RaceConstants.BaseRaces.Kobold, 0)]
@@ -62,6 +69,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Stats
         [TestCase(RaceConstants.BaseRaces.Orc, -2)]
         [TestCase(RaceConstants.BaseRaces.Pixie, 6)]
         [TestCase(RaceConstants.BaseRaces.Rakshasa, 6)]
+        [TestCase(RaceConstants.BaseRaces.RedSlaad, -2)]
         [TestCase(RaceConstants.BaseRaces.RockGnome, 0)]
         [TestCase(RaceConstants.BaseRaces.Satyr, 2)]
         [TestCase(RaceConstants.BaseRaces.Scorpionfolk, 4)]
@@ -74,11 +82,15 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Stats
         [TestCase(RaceConstants.BaseRaces.Troll, -4)]
         [TestCase(RaceConstants.BaseRaces.WildElf, 0)]
         [TestCase(RaceConstants.BaseRaces.WoodElf, 0)]
+        [TestCase(RaceConstants.BaseRaces.YuanTiAbomination, 8)]
+        [TestCase(RaceConstants.BaseRaces.YuanTiHalfblood, 6)]
+        [TestCase(RaceConstants.BaseRaces.YuanTiPureblood, 2)]
         [TestCase(RaceConstants.Metaraces.Ghost, 4)]
         [TestCase(RaceConstants.Metaraces.HalfCelestial, 4)]
         [TestCase(RaceConstants.Metaraces.HalfDragon, 2)]
         [TestCase(RaceConstants.Metaraces.HalfFiend, 2)]
         [TestCase(RaceConstants.Metaraces.Lich, 2)]
+        [TestCase(RaceConstants.Metaraces.Mummy, 4)]
         [TestCase(RaceConstants.Metaraces.None, 0)]
         [TestCase(RaceConstants.Metaraces.Vampire, 4)]
         [TestCase(RaceConstants.Metaraces.Werebear, -2)]
@@ -86,7 +98,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Stats
         [TestCase(RaceConstants.Metaraces.Wererat, -2)]
         [TestCase(RaceConstants.Metaraces.Weretiger, 0)]
         [TestCase(RaceConstants.Metaraces.Werewolf, -2)]
-        public override void Adjustment(string name, int adjustment)
+        public void CharismaStatAdjustment(string name, int adjustment)
         {
             base.Adjustment(name, adjustment);
         }

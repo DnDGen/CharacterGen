@@ -13,6 +13,7 @@
       <item>0</item>
       <item></item>
       <item>0</item>
+      <item></item>
     </object>
     <object>
       <name>Darkvision</name>
@@ -26,6 +27,7 @@
       <item>0</item>
       <item></item>
       <item>0</item>
+      <item></item>
     </object>
     <object>
         <name>Natural Armor</name>
@@ -39,6 +41,7 @@
       <item>0</item>
     <item></item>
     <item>0</item>
+    <item></item>
     </object>
     <object>
         <name>Light Sensitivity</name>
@@ -52,5 +55,6 @@
       <item>0</item>
       <item></item>
       <item>0</item>
+      <item></item>
     </object>
 </items>

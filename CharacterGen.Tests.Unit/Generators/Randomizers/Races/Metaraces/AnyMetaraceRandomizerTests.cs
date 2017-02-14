@@ -1,28 +1,23 @@
-﻿using CharacterGen.Races;
-using CharacterGen.Domain.Generators.Randomizers.Races.Metaraces;
+﻿using CharacterGen.Domain.Generators.Randomizers.Races.Metaraces;
+using CharacterGen.Races;
+using CharacterGen.Randomizers.Races;
 using NUnit.Framework;
-using System;
 using System.Collections.Generic;
 
 namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
 {
     [TestFixture]
-    public class AnyMetaraceRandomizerTests : MetaraceRandomizerTests
+    public class AnyMetaraceRandomizerTests : MetaraceRandomizerTestBase
     {
-        protected override IEnumerable<String> metaraceNames
+        protected override IEnumerable<string> metaraces
         {
             get
             {
                 return new[] {
-                    RaceConstants.Metaraces.HalfCelestial,
-                    RaceConstants.Metaraces.HalfDragon,
-                    RaceConstants.Metaraces.HalfFiend,
-                    RaceConstants.Metaraces.Werebear,
-                    RaceConstants.Metaraces.Wereboar,
-                    RaceConstants.Metaraces.Wererat,
-                    RaceConstants.Metaraces.Weretiger,
-                    RaceConstants.Metaraces.Werewolf,
-                    RaceConstants.Metaraces.None
+                    "genetic metarace",
+                    "lycanthrope metarace",
+                    "undead metarace",
+                    RaceConstants.Metaraces.None,
                 };
             }
         }
@@ -30,15 +25,23 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         [SetUp]
         public void Setup()
         {
-            randomizer = new AnyMetaraceRandomizer(mockPercentileResultSelector.Object, mockAdjustmentsSelector.Object, generator);
+            randomizer = new AnyMetaraceRandomizer(mockPercentileSelector.Object, mockAdjustmentsSelector.Object, generator, mockCollectionSelector.Object);
         }
 
         [Test]
         public void AllMetaracesAllowed()
         {
+            (randomizer as IForcableMetaraceRandomizer).ForceMetarace = false;
             var allMetaraces = randomizer.GetAllPossible(alignment, characterClass);
-            foreach (var metarace in metaraceNames)
-                Assert.That(allMetaraces, Contains.Item(metarace));
+            Assert.That(allMetaraces, Is.EquivalentTo(metaraces));
+        }
+
+        [Test]
+        public void OnlyMetaracesAllowed()
+        {
+            (randomizer as IForcableMetaraceRandomizer).ForceMetarace = true;
+            var metaraces = randomizer.GetAllPossible(alignment, characterClass);
+            Assert.That(metaraces, Is.EquivalentTo(new[] { "genetic metarace", "lycanthrope metarace", "undead metarace" }));
         }
     }
 }

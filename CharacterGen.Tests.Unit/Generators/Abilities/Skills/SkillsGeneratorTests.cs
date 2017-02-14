@@ -8,7 +8,6 @@ using CharacterGen.Domain.Tables;
 using CharacterGen.Races;
 using Moq;
 using NUnit.Framework;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -24,9 +23,12 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
         private CharacterClass characterClass;
         private Dictionary<string, Stat> stats;
         private List<string> classSkills;
+        private List<string> monsterClassSkills;
         private List<string> crossClassSkills;
         private Mock<ISkillSelector> mockSkillSelector;
         private int classSkillPoints;
+        private int racialSkillPoints;
+        private int monsterHitDice;
         private Race race;
         private List<string> specialistSkills;
         private List<string> allSkills;
@@ -48,23 +50,30 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
             race = new Race();
             specialistSkills = new List<string>();
             allSkills = new List<string>();
+            monsterClassSkills = new List<string>();
 
             characterClass.Name = "class name";
             characterClass.Level = 5;
             characterClass.SpecialistFields = new[] { "specialist field" };
+            race.BaseRace = "base race";
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassSkills, "class name")).Returns(classSkills);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.CrossClassSkills, "class name")).Returns(crossClassSkills);
-            var selection = new SkillSelection { BaseStatName = StatConstants.Intelligence };
-            mockSkillSelector.Setup(s => s.SelectFor(It.IsAny<string>())).Returns(selection);
 
             var emptyAdjustments = new Dictionary<string, int>();
             mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(It.IsAny<string>())).Returns(emptyAdjustments);
 
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.SkillPointsForClasses, characterClass.Name)).Returns(() => classSkillPoints);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.SkillPoints, characterClass.Name)).Returns(() => classSkillPoints);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.SkillPoints, race.BaseRace)).Returns(() => racialSkillPoints);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice, race.BaseRace)).Returns(() => monsterHitDice);
+
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, "specialist field")).Returns(specialistSkills);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.Skills)).Returns(allSkills);
             mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<string>>())).Returns((IEnumerable<string> ss) => ss.First());
+            mockSkillSelector.Setup(s => s.SelectFor(It.IsAny<string>())).Returns((string skill) => new SkillSelection { SkillName = skill, BaseStatName = StatConstants.Intelligence });
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassSkills, race.BaseRace)).Returns(monsterClassSkills);
+
         }
 
         [TestCase(1, 4)]
@@ -91,147 +100,148 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
         {
             characterClass.Level = level;
             classSkillPoints = 1;
-            classSkills.Add("skill 1");
-            classSkills.Add("skill 2");
+            AddClassSkills(3);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
-            Assert.That(skills["skill 1"].Ranks, Is.EqualTo(points));
-            Assert.That(skills["skill 2"].Ranks, Is.EqualTo(0));
+            var totalRanks = skills.Sum(kvp => kvp.Value.Ranks);
+            Assert.That(totalRanks, Is.EqualTo(points));
         }
 
-        [Test]
-        public void GetSkillPointsForClass()
+        private void AddClassSkills(int quantity)
         {
-            classSkillPoints = 2;
-            classSkills.Add("skill 1");
-            classSkills.Add("skill 2");
-            classSkills.Add("skill 3");
-
-            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
-            Assert.That(skills["skill 1"].Ranks, Is.EqualTo(8));
-            Assert.That(skills["skill 2"].Ranks, Is.EqualTo(8));
-            Assert.That(skills["skill 3"].Ranks, Is.EqualTo(0));
+            while (quantity > 0)
+            {
+                classSkills.Add($"class skill {quantity--}");
+            }
         }
 
         [TestCase(1, 4)]
-        [TestCase(2, 5)]
-        [TestCase(3, 6)]
-        [TestCase(4, 7)]
-        [TestCase(5, 8)]
-        [TestCase(6, 9)]
-        [TestCase(7, 10)]
-        [TestCase(8, 11)]
-        [TestCase(9, 12)]
-        [TestCase(10, 13)]
-        [TestCase(11, 14)]
-        [TestCase(12, 15)]
-        [TestCase(13, 16)]
-        [TestCase(14, 17)]
-        [TestCase(15, 18)]
-        [TestCase(16, 19)]
-        [TestCase(17, 20)]
-        [TestCase(18, 21)]
-        [TestCase(19, 22)]
-        [TestCase(20, 23)]
+        [TestCase(2, 8)]
+        [TestCase(3, 12)]
+        [TestCase(4, 16)]
+        [TestCase(5, 20)]
+        [TestCase(6, 24)]
+        [TestCase(7, 28)]
+        [TestCase(8, 32)]
+        [TestCase(9, 36)]
+        [TestCase(10, 40)]
+        public void GetSkillPointsForClass(int classPoints, int points)
+        {
+            characterClass.Level = 1;
+            classSkillPoints = classPoints;
+            AddClassSkills(classPoints + 1);
+
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
+            var totalRanks = skills.Sum(kvp => kvp.Value.Ranks);
+            Assert.That(totalRanks, Is.EqualTo(points));
+        }
+
+        [TestCase(1, 8)]
+        [TestCase(2, 10)]
+        [TestCase(3, 12)]
+        [TestCase(4, 14)]
+        [TestCase(5, 16)]
+        [TestCase(6, 18)]
+        [TestCase(7, 20)]
+        [TestCase(8, 22)]
+        [TestCase(9, 24)]
+        [TestCase(10, 26)]
+        [TestCase(11, 28)]
+        [TestCase(12, 30)]
+        [TestCase(13, 32)]
+        [TestCase(14, 34)]
+        [TestCase(15, 36)]
+        [TestCase(16, 38)]
+        [TestCase(17, 40)]
+        [TestCase(18, 42)]
+        [TestCase(19, 44)]
+        [TestCase(20, 46)]
         public void AddIntelligenceBonusToSkillPointsPerLevel(int level, int points)
         {
             characterClass.Level = level;
-            classSkillPoints = 0;
-            classSkills.Add("skill 1");
-            classSkills.Add("skill 2");
+            classSkillPoints = 1;
+            AddClassSkills(3);
             stats[StatConstants.Intelligence].Value = 12;
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
-            Assert.That(skills["skill 1"].Ranks, Is.EqualTo(points));
-            Assert.That(skills["skill 2"].Ranks, Is.EqualTo(0));
+            var totalRanks = skills.Sum(kvp => kvp.Value.Ranks);
+            Assert.That(totalRanks, Is.EqualTo(points));
         }
 
         [Test]
         public void GetClassSkills()
         {
-            classSkills.Add("skill 1");
-            classSkills.Add("skill 2");
-            classSkills.Add("skill 3");
-            classSkills.Add("skill 4");
+            AddClassSkills(4);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
-
-            foreach (var skill in classSkills)
-                Assert.That(skills.Keys, Contains.Item(skill));
-
-            Assert.That(skills.Count, Is.EqualTo(4));
+            Assert.That(skills.Keys, Is.EquivalentTo(classSkills));
         }
 
         [Test]
         public void GetCrossClassSkills()
         {
-            crossClassSkills.Add("skill 1");
-            crossClassSkills.Add("skill 2");
-            crossClassSkills.Add("skill 3");
-            crossClassSkills.Add("skill 4");
+            AddCrossClassSkills(4);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
+            Assert.That(skills.Keys, Is.EquivalentTo(crossClassSkills));
+        }
 
-            foreach (var skill in crossClassSkills)
-                Assert.That(skills.Keys, Contains.Item(skill));
-
-            Assert.That(skills.Count, Is.EqualTo(4));
+        private void AddCrossClassSkills(int quantity)
+        {
+            while (quantity > 0)
+            {
+                crossClassSkills.Add($"cross-class skill {quantity--}");
+            }
         }
 
         [Test]
         public void GetSkillsFromSpecialistFields()
         {
-            specialistSkills.Add("special skill");
-            specialistSkills.Add("special skill 2");
+            AddSpecialistSkills(2);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
+            Assert.That(skills.Keys, Is.EquivalentTo(specialistSkills));
+        }
 
-            foreach (var skill in specialistSkills)
-                Assert.That(skills.Keys, Contains.Item(skill));
-
-            Assert.That(skills.Count, Is.EqualTo(2));
+        private void AddSpecialistSkills(int quantity)
+        {
+            while (quantity > 0)
+            {
+                specialistSkills.Add($"specialist skill {quantity--}");
+            }
         }
 
         [Test]
         public void DoNotGetDuplicateSkillsFromSpecialistFields()
         {
-            classSkills.Add("skill 1");
-            specialistSkills.Add("skill 1");
+            AddClassSkills(1);
+            specialistSkills.Add(classSkills[0]);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
-            Assert.That(skills.Keys, Contains.Item("skill 1"));
+            Assert.That(skills.Keys, Contains.Item("class skill 1"));
             Assert.That(skills.Count, Is.EqualTo(1));
         }
 
         [Test]
         public void GetAllSkills()
         {
-            classSkills.Add("skill 1");
-            classSkills.Add("skill 2");
-            crossClassSkills.Add("skill 3");
-            crossClassSkills.Add("skill 4");
-            specialistSkills.Add("special skill");
+            AddClassSkills(2);
+            AddCrossClassSkills(2);
+            AddSpecialistSkills(1);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
-
-            foreach (var skill in crossClassSkills)
-                Assert.That(skills.Keys, Contains.Item(skill));
-
-            foreach (var skill in classSkills)
-                Assert.That(skills.Keys, Contains.Item(skill));
-
-            foreach (var skill in specialistSkills)
-                Assert.That(skills.Keys, Contains.Item(skill));
-
+            Assert.That(classSkills, Is.SubsetOf(skills.Keys));
+            Assert.That(crossClassSkills, Is.SubsetOf(skills.Keys));
+            Assert.That(specialistSkills, Is.SubsetOf(skills.Keys));
             Assert.That(skills.Count, Is.EqualTo(5));
         }
 
         [Test]
         public void AssignStatsToSkills()
         {
-            classSkills.Add("class skill");
-            crossClassSkills.Add("cross class skill");
-            specialistSkills.Add("specialist skill");
+            AddClassSkills(1);
+            AddCrossClassSkills(1);
+            AddSpecialistSkills(1);
 
             var classSkillSelection = new SkillSelection();
             classSkillSelection.BaseStatName = "stat 1";
@@ -242,52 +252,50 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
             var specialistSkillSelection = new SkillSelection();
             specialistSkillSelection.BaseStatName = "stat 3";
 
-            mockSkillSelector.Setup(s => s.SelectFor("class skill")).Returns(classSkillSelection);
-            mockSkillSelector.Setup(s => s.SelectFor("cross class skill")).Returns(crossClassSkillSelection);
-            mockSkillSelector.Setup(s => s.SelectFor("specialist skill")).Returns(specialistSkillSelection);
+            mockSkillSelector.Setup(s => s.SelectFor(classSkills[0])).Returns(classSkillSelection);
+            mockSkillSelector.Setup(s => s.SelectFor(crossClassSkills[0])).Returns(crossClassSkillSelection);
+            mockSkillSelector.Setup(s => s.SelectFor(specialistSkills[0])).Returns(specialistSkillSelection);
 
             stats["stat 1"] = new Stat("stat 1");
             stats["stat 2"] = new Stat("stat 2");
             stats["stat 3"] = new Stat("stat 3");
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
-            Assert.That(skills["class skill"].BaseStat, Is.EqualTo(stats["stat 1"]));
-            Assert.That(skills["cross class skill"].BaseStat, Is.EqualTo(stats["stat 2"]));
-            Assert.That(skills["specialist skill"].BaseStat, Is.EqualTo(stats["stat 3"]));
+            Assert.That(skills["class skill 1"].BaseStat, Is.EqualTo(stats["stat 1"]));
+            Assert.That(skills["cross-class skill 1"].BaseStat, Is.EqualTo(stats["stat 2"]));
+            Assert.That(skills["specialist skill 1"].BaseStat, Is.EqualTo(stats["stat 3"]));
         }
 
         [Test]
         public void SetClassSkill()
         {
-            classSkills.Add("skill 1");
-            classSkills.Add("skill 2");
-            crossClassSkills.Add("skill 3");
-            crossClassSkills.Add("skill 4");
+            AddClassSkills(2);
+            AddCrossClassSkills(2);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
 
-            Assert.That(skills["skill 1"].ClassSkill, Is.True);
-            Assert.That(skills["skill 2"].ClassSkill, Is.True);
-            Assert.That(skills["skill 3"].ClassSkill, Is.False);
-            Assert.That(skills["skill 4"].ClassSkill, Is.False);
+            Assert.That(skills["class skill 1"].ClassSkill, Is.True);
+            Assert.That(skills["class skill 2"].ClassSkill, Is.True);
+            Assert.That(skills["cross-class skill 1"].ClassSkill, Is.False);
+            Assert.That(skills["cross-class skill 2"].ClassSkill, Is.False);
         }
 
         [Test]
         public void SpecialistSkillsAreClassSkills()
         {
-            specialistSkills.Add("skill 1");
+            AddSpecialistSkills(1);
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
-            Assert.That(skills["skill 1"].ClassSkill, Is.True);
+            Assert.That(skills["specialist skill 1"].ClassSkill, Is.True);
         }
 
         [Test]
         public void SpecialistSkillOverwritesCrossClassSkill()
         {
-            specialistSkills.Add("skill 1");
-            crossClassSkills.Add("skill 1");
+            AddCrossClassSkills(1);
+            specialistSkills.Add(crossClassSkills[0]);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
-            Assert.That(skills["skill 1"].ClassSkill, Is.True);
+            Assert.That(skills["cross-class skill 1"].ClassSkill, Is.True);
         }
 
         [Test]
@@ -295,9 +303,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
         {
             classSkillPoints = 1;
             characterClass.Level = 2;
-
-            classSkills.Add("skill 1");
-            classSkills.Add("skill 2");
+            AddClassSkills(2);
 
             mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
                 .Returns(false);
@@ -310,10 +316,10 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
 
-            Assert.That(skills["skill 1"].Ranks, Is.EqualTo(2));
-            Assert.That(skills["skill 2"].Ranks, Is.EqualTo(3));
-            Assert.That(skills["skill 1"].EffectiveRanks, Is.EqualTo(2));
-            Assert.That(skills["skill 2"].EffectiveRanks, Is.EqualTo(3));
+            Assert.That(skills["class skill 1"].Ranks, Is.EqualTo(3));
+            Assert.That(skills["class skill 2"].Ranks, Is.EqualTo(2));
+            Assert.That(skills["class skill 1"].EffectiveRanks, Is.EqualTo(3));
+            Assert.That(skills["class skill 2"].EffectiveRanks, Is.EqualTo(2));
         }
 
         [Test]
@@ -321,9 +327,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
         {
             classSkillPoints = 1;
             characterClass.Level = 2;
-
-            crossClassSkills.Add("skill 1");
-            crossClassSkills.Add("skill 2");
+            AddCrossClassSkills(2);
 
             mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
                 .Returns(true);
@@ -336,10 +340,10 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
 
-            Assert.That(skills["skill 1"].Ranks, Is.EqualTo(2));
-            Assert.That(skills["skill 2"].Ranks, Is.EqualTo(3));
-            Assert.That(skills["skill 1"].EffectiveRanks, Is.EqualTo(1));
-            Assert.That(skills["skill 2"].EffectiveRanks, Is.EqualTo(1.5));
+            Assert.That(skills["cross-class skill 1"].Ranks, Is.EqualTo(3));
+            Assert.That(skills["cross-class skill 2"].Ranks, Is.EqualTo(2));
+            Assert.That(skills["cross-class skill 1"].EffectiveRanks, Is.EqualTo(1.5));
+            Assert.That(skills["cross-class skill 2"].EffectiveRanks, Is.EqualTo(1));
         }
 
         [Test]
@@ -393,47 +397,57 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
         }
 
         [Test]
-        public void CannotAssignMoreThanLevelPlusThreePointsPerClassSkill()
+        public void CannotAssignMoreThanRankCapPerClassSkill()
         {
             classSkillPoints = 2;
+            AddClassSkills(3);
+
             mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
                 .Returns(false);
 
-            var sequence = mockCollectionsSelector.SetupSequence(s => s.SelectRandomFrom(It.Is<IEnumerable<String>>(ss => ss.Count() == 3)));
-            for (var count = 4; count > 0; count--)
-                sequence = sequence.Returns("skill 2").Returns("skill 3").Returns("skill 1").Returns("skill 1");
-
-            classSkills.Add("skill 1");
-            classSkills.Add("skill 2");
-            classSkills.Add("skill 3");
+            var sequence = mockCollectionsSelector.SetupSequence(s => s.SelectRandomFrom(It.Is<IEnumerable<string>>(ss => ss.Count() == 3)));
+            for (var count = 6; count > 0; count--)
+                sequence = sequence.Returns(classSkills[0])
+                    .Returns(classSkills[1])
+                    .Returns(classSkills[0])
+                    .Returns(classSkills[2])
+                    .Returns(classSkills[0]);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
 
-            Assert.That(skills["skill 1"].Ranks, Is.EqualTo(8));
-            Assert.That(skills["skill 2"].Ranks, Is.EqualTo(4));
-            Assert.That(skills["skill 3"].Ranks, Is.EqualTo(4));
+            Assert.That(skills[classSkills[0]].Ranks, Is.EqualTo(8));
+            Assert.That(skills[classSkills[0]].RankCap, Is.EqualTo(8));
+            Assert.That(skills[classSkills[1]].Ranks, Is.EqualTo(6));
+            Assert.That(skills[classSkills[1]].RankCap, Is.EqualTo(8));
+            Assert.That(skills[classSkills[2]].Ranks, Is.EqualTo(2));
+            Assert.That(skills[classSkills[2]].RankCap, Is.EqualTo(8));
         }
 
         [Test]
         public void CannotAssignMoreThanLevelPlusThreePointsPerCrossClassSkill()
         {
             classSkillPoints = 2;
+            AddCrossClassSkills(3);
+
             mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
                 .Returns(true);
 
-            var sequence = mockCollectionsSelector.SetupSequence(s => s.SelectRandomFrom(It.Is<IEnumerable<String>>(ss => ss.Count() == 3)));
-            for (var count = 4; count > 0; count--)
-                sequence = sequence.Returns("skill 2").Returns("skill 3").Returns("skill 1").Returns("skill 1");
-
-            crossClassSkills.Add("skill 1");
-            crossClassSkills.Add("skill 2");
-            crossClassSkills.Add("skill 3");
+            var sequence = mockCollectionsSelector.SetupSequence(s => s.SelectRandomFrom(It.Is<IEnumerable<string>>(ss => ss.Count() == 3)));
+            for (var count = 6; count > 0; count--)
+                sequence = sequence.Returns(crossClassSkills[0])
+                    .Returns(crossClassSkills[1])
+                    .Returns(crossClassSkills[0])
+                    .Returns(crossClassSkills[2])
+                    .Returns(crossClassSkills[0]);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
 
-            Assert.That(skills["skill 1"].Ranks, Is.EqualTo(8));
-            Assert.That(skills["skill 2"].Ranks, Is.EqualTo(4));
-            Assert.That(skills["skill 3"].Ranks, Is.EqualTo(4));
+            Assert.That(skills[crossClassSkills[0]].Ranks, Is.EqualTo(8));
+            Assert.That(skills[crossClassSkills[0]].RankCap, Is.EqualTo(8));
+            Assert.That(skills[crossClassSkills[1]].Ranks, Is.EqualTo(6));
+            Assert.That(skills[crossClassSkills[1]].RankCap, Is.EqualTo(8));
+            Assert.That(skills[crossClassSkills[2]].Ranks, Is.EqualTo(2));
+            Assert.That(skills[crossClassSkills[2]].RankCap, Is.EqualTo(8));
         }
 
         [Test]
@@ -647,37 +661,36 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
             Assert.That(skills["synergy 3"].Bonus, Is.EqualTo(0));
         }
 
-        [TestCase(1, 4)]
-        [TestCase(2, 5)]
-        [TestCase(3, 6)]
-        [TestCase(4, 7)]
-        [TestCase(5, 8)]
-        [TestCase(6, 9)]
-        [TestCase(7, 10)]
-        [TestCase(8, 11)]
-        [TestCase(9, 12)]
-        [TestCase(10, 13)]
-        [TestCase(11, 14)]
-        [TestCase(12, 15)]
-        [TestCase(13, 16)]
-        [TestCase(14, 17)]
-        [TestCase(15, 18)]
-        [TestCase(16, 19)]
-        [TestCase(17, 20)]
-        [TestCase(18, 21)]
-        [TestCase(19, 22)]
-        [TestCase(20, 23)]
+        [TestCase(1, 8)]
+        [TestCase(2, 10)]
+        [TestCase(3, 12)]
+        [TestCase(4, 14)]
+        [TestCase(5, 16)]
+        [TestCase(6, 18)]
+        [TestCase(7, 20)]
+        [TestCase(8, 22)]
+        [TestCase(9, 24)]
+        [TestCase(10, 26)]
+        [TestCase(11, 28)]
+        [TestCase(12, 30)]
+        [TestCase(13, 32)]
+        [TestCase(14, 34)]
+        [TestCase(15, 36)]
+        [TestCase(16, 38)]
+        [TestCase(17, 40)]
+        [TestCase(18, 42)]
+        [TestCase(19, 44)]
+        [TestCase(20, 46)]
         public void HumansGetExtraSkillPointsPerLevel(int level, int points)
         {
             characterClass.Level = level;
-            classSkillPoints = 0;
-            classSkills.Add("skill 1");
-            classSkills.Add("skill 2");
+            classSkillPoints = 1;
+            AddClassSkills(3);
             race.BaseRace = RaceConstants.BaseRaces.Human;
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
-            Assert.That(skills["skill 1"].Ranks, Is.EqualTo(points));
-            Assert.That(skills["skill 2"].Ranks, Is.EqualTo(0));
+            var totalRanks = skills.Sum(kvp => kvp.Value.Ranks);
+            Assert.That(totalRanks, Is.EqualTo(points));
         }
 
         [TestCase(1, 16)]
@@ -702,134 +715,121 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
         [TestCase(20, 92)]
         public void AllPerLevelBonusesStack(int level, int points)
         {
-            var cap = level + 3;
             characterClass.Level = level;
             classSkillPoints = 2;
             stats[StatConstants.Intelligence].Value = 12;
             race.BaseRace = RaceConstants.BaseRaces.Human;
-            classSkills.Add("skill 1");
-            classSkills.Add("skill 2");
-            classSkills.Add("skill 3");
-            classSkills.Add("skill 4");
-            classSkills.Add("skill 5");
+            AddClassSkills(5);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
-            var sum = skills.Values.Sum(s => s.Ranks);
-
-            Assert.That(sum, Is.EqualTo(points));
-            Assert.That(skills["skill 1"].Ranks, Is.EqualTo(cap));
-            Assert.That(skills["skill 2"].Ranks, Is.EqualTo(cap));
-            Assert.That(skills["skill 3"].Ranks, Is.EqualTo(cap));
-            Assert.That(skills["skill 4"].Ranks, Is.EqualTo(cap));
-            Assert.That(skills["skill 5"].Ranks, Is.EqualTo(0));
-            Assert.That(skills["skill 1"].RankCap, Is.EqualTo(cap));
-            Assert.That(skills["skill 2"].RankCap, Is.EqualTo(cap));
-            Assert.That(skills["skill 3"].RankCap, Is.EqualTo(cap));
-            Assert.That(skills["skill 4"].RankCap, Is.EqualTo(cap));
-            Assert.That(skills["skill 5"].RankCap, Is.EqualTo(cap));
-            Assert.That(skills["skill 1"].RanksMaxedOut, Is.True);
-            Assert.That(skills["skill 2"].RanksMaxedOut, Is.True);
-            Assert.That(skills["skill 3"].RanksMaxedOut, Is.True);
-            Assert.That(skills["skill 4"].RanksMaxedOut, Is.True);
-            Assert.That(skills["skill 5"].RanksMaxedOut, Is.False);
+            var totalRanks = skills.Sum(kvp => kvp.Value.Ranks);
+            Assert.That(totalRanks, Is.EqualTo(points));
         }
 
-        [TestCase(0, 0)]
-        [TestCase(1, 8)]
-        [TestCase(2, 10)]
-        [TestCase(3, 12)]
-        [TestCase(4, 14)]
-        [TestCase(5, 16)]
-        [TestCase(6, 18)]
-        [TestCase(7, 20)]
-        [TestCase(8, 22)]
-        [TestCase(9, 24)]
-        [TestCase(10, 26)]
-        public void MonstersGetMoreSkillPointsByMonsterHitDice(int hitDie, int totalRanks)
+        [TestCase(1, 1, 4)]
+        [TestCase(2, 1, 5)]
+        [TestCase(3, 1, 6)]
+        [TestCase(4, 1, 7)]
+        [TestCase(5, 1, 8)]
+        [TestCase(6, 1, 9)]
+        [TestCase(7, 1, 10)]
+        [TestCase(8, 1, 11)]
+        [TestCase(9, 1, 12)]
+        [TestCase(10, 1, 13)]
+        [TestCase(11, 1, 14)]
+        [TestCase(12, 1, 15)]
+        [TestCase(13, 1, 16)]
+        [TestCase(14, 1, 17)]
+        [TestCase(15, 1, 18)]
+        [TestCase(16, 1, 19)]
+        [TestCase(17, 1, 20)]
+        [TestCase(18, 1, 21)]
+        [TestCase(19, 1, 22)]
+        [TestCase(20, 1, 23)]
+        [TestCase(1, 2, 8)]
+        [TestCase(2, 2, 10)]
+        [TestCase(3, 2, 12)]
+        [TestCase(4, 2, 14)]
+        [TestCase(5, 2, 16)]
+        [TestCase(6, 2, 18)]
+        [TestCase(7, 2, 20)]
+        [TestCase(8, 2, 22)]
+        [TestCase(9, 2, 24)]
+        [TestCase(10, 2, 26)]
+        [TestCase(11, 2, 28)]
+        [TestCase(12, 2, 30)]
+        [TestCase(13, 2, 32)]
+        [TestCase(14, 2, 34)]
+        [TestCase(15, 2, 36)]
+        [TestCase(16, 2, 38)]
+        [TestCase(17, 2, 40)]
+        [TestCase(18, 2, 42)]
+        [TestCase(19, 2, 44)]
+        [TestCase(20, 2, 46)]
+        public void MonstersGetMoreSkillPointsByMonsterHitDice(int hitDie, int monsterSkillPoints, int monsterPoints)
         {
-            race.BaseRace = "baserace";
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
-                .Returns(new[] { "baserace", "otherbaserace" });
+                .Returns(new[] { race.BaseRace, "other base race" });
 
-            characterClass.Level = 20;
-            classSkillPoints = 0;
-            classSkills.Add("skill 1");
-            classSkills.Add("class skill");
-            crossClassSkills.Add("skill 2");
+            characterClass.Level = 1;
+            classSkillPoints = 1;
+            racialSkillPoints = monsterSkillPoints;
             stats[StatConstants.Intelligence].Value = 10;
+            monsterHitDice = hitDie;
+            AddMonsterSkills(hitDie + 3);
+            AddClassSkills(2);
+            classSkills.Add(monsterClassSkills[0]);
+            crossClassSkills.Add(monsterClassSkills[1]);
 
             mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
                 .Returns(true);
 
-            var monsterClassSkills = new List<string>();
-            monsterClassSkills.Add("skill 1");
-            monsterClassSkills.Add("skill 2");
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassSkills, race.BaseRace)).Returns(monsterClassSkills);
-
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice, race.BaseRace)).Returns(hitDie);
-
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
-            Assert.That(skills["skill 1"].RankCap, Is.EqualTo(23 + hitDie));
-            Assert.That(skills["skill 2"].RankCap, Is.EqualTo(23 + hitDie));
-            Assert.That(skills["class skill"].RankCap, Is.EqualTo(23));
-            Assert.That(skills["skill 1"].Ranks, Is.EqualTo(totalRanks));
-            Assert.That(skills["skill 2"].Ranks, Is.EqualTo(20));
-            Assert.That(skills["class skill"].Ranks, Is.EqualTo(0));
+            var totalRanks = skills.Sum(kvp => kvp.Value.Ranks);
+
+            //INFO: Adding 8 to account for class skill points
+            Assert.That(totalRanks, Is.EqualTo(monsterPoints + 4));
+            Assert.That(skills[monsterClassSkills[0]].RankCap, Is.EqualTo(4 + hitDie));
+            Assert.That(skills[monsterClassSkills[1]].RankCap, Is.EqualTo(4 + hitDie));
+            Assert.That(skills["class skill 1"].RankCap, Is.EqualTo(4));
+            Assert.That(skills["class skill 2"].RankCap, Is.EqualTo(4));
+
+            foreach (var monsterSkill in monsterClassSkills.Skip(2))
+                Assert.That(skills[monsterSkill].RankCap, Is.EqualTo(hitDie + 3));
         }
 
-        [Test]
-        public void NewMonsterSkillsAreCapped()
+        private void AddMonsterSkills(int quantity)
         {
-            race.BaseRace = "baserace";
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
-                .Returns(new[] { "baserace", "otherbaserace" });
-
-            characterClass.Level = 20;
-            classSkillPoints = 0;
-            stats[StatConstants.Intelligence].Value = 10;
-
-            var monsterClassSkills = new List<string>();
-            monsterClassSkills.Add("skill 1");
-            monsterClassSkills.Add("skill 2");
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassSkills, race.BaseRace)).Returns(monsterClassSkills);
-
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice, race.BaseRace)).Returns(1);
-
-            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
-            Assert.That(skills["skill 1"].RankCap, Is.EqualTo(4));
-            Assert.That(skills["skill 2"].RankCap, Is.EqualTo(4));
-            Assert.That(skills["skill 1"].Ranks, Is.EqualTo(4));
-            Assert.That(skills["skill 2"].Ranks, Is.EqualTo(4));
+            while (quantity > 0)
+            {
+                monsterClassSkills.Add($"monster skill {quantity--}");
+            }
         }
 
         [Test]
         public void OldMonsterSkillsHaveCapIncreased()
         {
-            race.BaseRace = "baserace";
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
-                .Returns(new[] { "baserace", "otherbaserace" });
+                .Returns(new[] { race.BaseRace, "other base race" });
 
             characterClass.Level = 20;
             classSkillPoints = 0;
-            classSkills.Add("skill 1");
-            crossClassSkills.Add("skill 2");
+            racialSkillPoints = 2;
             stats[StatConstants.Intelligence].Value = 10;
+            monsterHitDice = 1;
+            AddClassSkills(1);
+            AddCrossClassSkills(1);
+            monsterClassSkills.AddRange(classSkills);
+            monsterClassSkills.AddRange(crossClassSkills);
 
             mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
                 .Returns(true);
 
-            var monsterClassSkills = new List<string>();
-            monsterClassSkills.Add("skill 1");
-            monsterClassSkills.Add("skill 2");
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassSkills, race.BaseRace)).Returns(monsterClassSkills);
-
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice, race.BaseRace)).Returns(1);
-
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
-            Assert.That(skills["skill 1"].RankCap, Is.EqualTo(24));
-            Assert.That(skills["skill 2"].RankCap, Is.EqualTo(24));
-            Assert.That(skills["skill 1"].Ranks, Is.EqualTo(8));
-            Assert.That(skills["skill 2"].Ranks, Is.EqualTo(20));
+            Assert.That(skills["class skill 1"].Ranks, Is.EqualTo(8));
+            Assert.That(skills["class skill 1"].RankCap, Is.EqualTo(24));
+            Assert.That(skills["cross-class skill 1"].Ranks, Is.EqualTo(20));
+            Assert.That(skills["cross-class skill 1"].RankCap, Is.EqualTo(24));
         }
 
         [TestCase(1, 12)]
@@ -839,68 +839,88 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
         [TestCase(5, 24)]
         [TestCase(6, 27)]
         [TestCase(7, 30)]
-        public void MonstersApplyIntelligenceBonusToMonsterSkillPoints(int hitDie, int totalRanks)
+        [TestCase(8, 33)]
+        [TestCase(9, 36)]
+        [TestCase(10, 39)]
+        [TestCase(11, 42)]
+        [TestCase(12, 45)]
+        [TestCase(13, 48)]
+        [TestCase(14, 51)]
+        [TestCase(15, 54)]
+        [TestCase(16, 57)]
+        [TestCase(17, 60)]
+        [TestCase(18, 63)]
+        [TestCase(19, 66)]
+        [TestCase(20, 69)]
+        public void MonstersApplyIntelligenceBonusToMonsterSkillPoints(int hitDie, int monsterPoints)
         {
-            race.BaseRace = "baserace";
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
-                .Returns(new[] { "baserace", "otherbaserace" });
+                .Returns(new[] { race.BaseRace, "other base race" });
 
-            characterClass.Level = 20;
-            classSkillPoints = 0;
-            classSkills.Add("skill 1");
-            classSkills.Add("class skill");
-            crossClassSkills.Add("skill 2");
+            characterClass.Level = 1;
+            classSkillPoints = 1;
+            racialSkillPoints = 2;
             stats[StatConstants.Intelligence].Value = 12;
+            monsterHitDice = hitDie;
+            AddMonsterSkills(hitDie + 3);
+            AddClassSkills(2);
+            classSkills.Add(monsterClassSkills[0]);
+            crossClassSkills.Add(monsterClassSkills[1]);
 
             mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
                 .Returns(true);
 
-            var monsterClassSkills = new List<string>();
-            monsterClassSkills.Add("skill 1");
-            monsterClassSkills.Add("skill 2");
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassSkills, race.BaseRace)).Returns(monsterClassSkills);
-
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice, race.BaseRace)).Returns(hitDie);
-
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
-            Assert.That(skills["skill 1"].RankCap, Is.EqualTo(23 + hitDie));
-            Assert.That(skills["skill 2"].RankCap, Is.EqualTo(23 + hitDie));
-            Assert.That(skills["class skill"].RankCap, Is.EqualTo(23));
-            Assert.That(skills["skill 1"].Ranks, Is.EqualTo(totalRanks));
-            Assert.That(skills["skill 2"].Ranks, Is.EqualTo(20));
-            Assert.That(skills["class skill"].Ranks, Is.EqualTo(0));
+            var totalRanks = skills.Sum(kvp => kvp.Value.Ranks);
+
+            //INFO: Adding 8 to account for class skill points
+            Assert.That(totalRanks, Is.EqualTo(monsterPoints + 8));
+            Assert.That(skills[monsterClassSkills[0]].RankCap, Is.EqualTo(4 + hitDie));
+            Assert.That(skills[monsterClassSkills[1]].RankCap, Is.EqualTo(4 + hitDie));
+            Assert.That(skills["class skill 1"].RankCap, Is.EqualTo(4));
+            Assert.That(skills["class skill 2"].RankCap, Is.EqualTo(4));
+
+            foreach (var monsterSkill in monsterClassSkills.Skip(2))
+                Assert.That(skills[monsterSkill].RankCap, Is.EqualTo(hitDie + 3));
         }
 
-        [TestCase(1, 4)]
-        [TestCase(2, 5)]
-        [TestCase(3, 6)]
-        [TestCase(4, 7)]
-        [TestCase(5, 8)]
-        [TestCase(6, 9)]
-        [TestCase(7, 10)]
-        [TestCase(8, 11)]
-        [TestCase(9, 12)]
-        [TestCase(10, 13)]
-        public void MonstersCannotHaveFewerThan1SkillPointPerMonsterHitDie(int hitDie, int totalRanks)
+        [TestCase(1)]
+        [TestCase(2)]
+        [TestCase(3)]
+        [TestCase(4)]
+        [TestCase(5)]
+        [TestCase(6)]
+        [TestCase(7)]
+        [TestCase(8)]
+        [TestCase(9)]
+        [TestCase(10)]
+        [TestCase(11)]
+        [TestCase(12)]
+        [TestCase(13)]
+        [TestCase(14)]
+        [TestCase(15)]
+        [TestCase(16)]
+        [TestCase(17)]
+        [TestCase(18)]
+        [TestCase(19)]
+        [TestCase(20)]
+        public void MonstersCannotHaveFewerThan1SkillPointPerMonsterHitDie(int hitDie)
         {
-            race.BaseRace = "baserace";
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
-                .Returns(new[] { "baserace", "otherbaserace" });
+                .Returns(new[] { race.BaseRace, "other base race" });
 
             characterClass.Level = 1;
-            classSkillPoints = 0;
+            classSkillPoints = 1;
+            racialSkillPoints = 2;
             stats[StatConstants.Intelligence].Value = -600;
-
-            var monsterClassSkills = new List<string>();
-            monsterClassSkills.Add("skill 1");
-            monsterClassSkills.Add("skill 2");
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassSkills, race.BaseRace)).Returns(monsterClassSkills);
-
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice, race.BaseRace)).Returns(hitDie);
+            AddMonsterSkills(hitDie + 2);
+            monsterHitDice = hitDie;
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
-            Assert.That(skills["skill 1"].Ranks, Is.EqualTo(totalRanks));
-            Assert.That(skills["skill 2"].Ranks, Is.EqualTo(0));
+            var totalRanks = skills.Values.Sum(v => v.Ranks);
+
+            //INFO: Don't need to worry about class skill points, because we do not specify any class skills
+            Assert.That(totalRanks, Is.EqualTo(hitDie));
         }
 
         [TestCase(1)]
@@ -925,16 +945,14 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
         [TestCase(20)]
         public void CannotHaveFewerThan1SkillPointPerLevel(int level)
         {
-            race.BaseRace = "baserace";
             stats[StatConstants.Intelligence].Value = -9266;
             characterClass.Level = level;
             classSkillPoints = 1;
-            classSkills.Add("skill 1");
-            classSkills.Add("skill 2");
+            AddClassSkills(2);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
-            Assert.That(skills["skill 1"].Ranks, Is.EqualTo(level));
-            Assert.That(skills["skill 2"].Ranks, Is.EqualTo(0));
+            var totalRanks = skills.Values.Sum(v => v.Ranks);
+            Assert.That(totalRanks, Is.EqualTo(level));
         }
 
         [Test]
@@ -942,7 +960,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
         {
             characterClass.Name = CharacterClassConstants.Expert;
             classSkillPoints = 0;
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.SkillPointsForClasses, CharacterClassConstants.Expert)).Returns(classSkillPoints);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.SkillPoints, CharacterClassConstants.Expert)).Returns(classSkillPoints);
 
             for (var i = 11; i > 0; i--)
                 allSkills.Add("skill " + i.ToString());
@@ -970,7 +988,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
         {
             characterClass.Name = CharacterClassConstants.Expert;
             classSkillPoints = 0;
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.SkillPointsForClasses, CharacterClassConstants.Expert)).Returns(classSkillPoints);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.SkillPoints, CharacterClassConstants.Expert)).Returns(classSkillPoints);
 
             for (var i = 11; i > 0; i--)
                 allSkills.Add("skill " + i.ToString());
@@ -1001,6 +1019,33 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
         }
 
         [Test]
+        public void IfCharacterHasBaseStat_GetSkill()
+        {
+            classSkills.Add("skill 1");
+            classSkills.Add("skill 2");
+            crossClassSkills.Add("skill 3");
+            crossClassSkills.Add("skill 4");
+            specialistSkills.Add("skill 5");
+            specialistSkills.Add("skill 6");
+
+            stats[StatConstants.Constitution] = new Stat(StatConstants.Constitution);
+
+            var constitutionSelection = new SkillSelection { BaseStatName = StatConstants.Constitution, SkillName = "skill 1" };
+            mockSkillSelector.Setup(s => s.SelectFor("skill 2")).Returns(constitutionSelection);
+            mockSkillSelector.Setup(s => s.SelectFor("skill 4")).Returns(constitutionSelection);
+            mockSkillSelector.Setup(s => s.SelectFor("skill 6")).Returns(constitutionSelection);
+
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
+            Assert.That(skills.Keys, Contains.Item("skill 1"));
+            Assert.That(skills.Keys, Contains.Item("skill 3"));
+            Assert.That(skills.Keys, Contains.Item("skill 5"));
+            Assert.That(skills.Keys, Contains.Item("skill 2"));
+            Assert.That(skills.Keys, Contains.Item("skill 4"));
+            Assert.That(skills.Keys, Contains.Item("skill 6"));
+            Assert.That(skills.Count, Is.EqualTo(6));
+        }
+
+        [Test]
         public void IfCharacterDoesNotHaveBaseStat_CannotGetSkill()
         {
             classSkills.Add("skill 1");
@@ -1010,11 +1055,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
             specialistSkills.Add("skill 5");
             specialistSkills.Add("skill 6");
 
-            var intelligenceSelection = new SkillSelection { BaseStatName = StatConstants.Intelligence };
-            var constitutionSelection = new SkillSelection { BaseStatName = StatConstants.Constitution };
-            mockSkillSelector.Setup(s => s.SelectFor("skill 1")).Returns(intelligenceSelection);
-            mockSkillSelector.Setup(s => s.SelectFor("skill 3")).Returns(intelligenceSelection);
-            mockSkillSelector.Setup(s => s.SelectFor("skill 5")).Returns(intelligenceSelection);
+            var constitutionSelection = new SkillSelection { BaseStatName = StatConstants.Constitution, SkillName = "skill 1" };
             mockSkillSelector.Setup(s => s.SelectFor("skill 2")).Returns(constitutionSelection);
             mockSkillSelector.Setup(s => s.SelectFor("skill 4")).Returns(constitutionSelection);
             mockSkillSelector.Setup(s => s.SelectFor("skill 6")).Returns(constitutionSelection);
@@ -1040,10 +1081,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
             specialistSkills.Add("skill 5");
             specialistSkills.Add("skill 6");
 
-            var intelligenceSelection = new SkillSelection { BaseStatName = StatConstants.Intelligence };
-            var constitutionSelection = new SkillSelection { BaseStatName = StatConstants.Constitution };
-            mockSkillSelector.Setup(s => s.SelectFor("skill 1")).Returns(intelligenceSelection);
-            mockSkillSelector.Setup(s => s.SelectFor("skill 5")).Returns(intelligenceSelection);
+            var constitutionSelection = new SkillSelection { BaseStatName = StatConstants.Constitution, SkillName = "skill 1" };
             mockSkillSelector.Setup(s => s.SelectFor("skill 2")).Returns(constitutionSelection);
             mockSkillSelector.Setup(s => s.SelectFor("skill 6")).Returns(constitutionSelection);
 
@@ -1073,9 +1111,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
             crossClassSkills.Add("skill 3");
             crossClassSkills.Add("skill 4");
 
-            var intelligenceSelection = new SkillSelection { BaseStatName = StatConstants.Intelligence };
-            var constitutionSelection = new SkillSelection { BaseStatName = StatConstants.Constitution };
-            mockSkillSelector.Setup(s => s.SelectFor("skill 3")).Returns(intelligenceSelection);
+            var constitutionSelection = new SkillSelection { BaseStatName = StatConstants.Constitution, SkillName = "skill 4" };
             mockSkillSelector.Setup(s => s.SelectFor("skill 4")).Returns(constitutionSelection);
 
             mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
@@ -1096,31 +1132,138 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
         [Test]
         public void DoNotAssignMonsterSkillPointsToMonsterSkillsIfCharacterDoesNotHaveRequiredBaseStat()
         {
-            race.BaseRace = "baserace";
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
-                .Returns(new[] { "baserace", "otherbaserace" });
+                .Returns(new[] { race.BaseRace, "other base race" });
 
             characterClass.Level = 20;
             classSkillPoints = 0;
+            racialSkillPoints = 2;
             stats[StatConstants.Intelligence].Value = 10;
-
-            var monsterClassSkills = new List<string>();
             monsterClassSkills.Add("skill 1");
             monsterClassSkills.Add("skill 2");
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassSkills, race.BaseRace)).Returns(monsterClassSkills);
+            monsterHitDice = 2;
 
-            var intelligenceSelection = new SkillSelection { BaseStatName = StatConstants.Intelligence };
-            var constitutionSelection = new SkillSelection { BaseStatName = StatConstants.Constitution };
+            var constitutionSelection = new SkillSelection { BaseStatName = StatConstants.Constitution, SkillName = "skill 1" };
             mockSkillSelector.Setup(s => s.SelectFor("skill 1")).Returns(constitutionSelection);
-            mockSkillSelector.Setup(s => s.SelectFor("skill 2")).Returns(intelligenceSelection);
-
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice, race.BaseRace)).Returns(2);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
             Assert.That(skills["skill 2"].Ranks, Is.EqualTo(5));
             Assert.That(skills["skill 2"].RanksMaxedOut, Is.True);
             Assert.That(skills.Keys, Is.All.Not.EqualTo("skill 1"));
             Assert.That(skills.Count, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void SelectRandomFocusForMonsterSkill()
+        {
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
+                .Returns(new[] { race.BaseRace, "other base race" });
+
+            characterClass.Level = 20;
+            classSkillPoints = 0;
+            racialSkillPoints = 2;
+            stats[StatConstants.Intelligence].Value = 10;
+            stats[StatConstants.Charisma] = new Stat(StatConstants.Charisma);
+            monsterClassSkills.Add("skill 1");
+            monsterClassSkills.Add("skill 2");
+            monsterHitDice = 2;
+
+            var randomSelection = new SkillSelection { BaseStatName = StatConstants.Charisma, RandomFociQuantity = 1, SkillName = "skill with random foci" };
+            mockSkillSelector.Setup(s => s.SelectFor("skill 2")).Returns(randomSelection);
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, "skill with random foci")).Returns(new[] { "random", "other random" });
+
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
+            Assert.That(skills["random"].BaseStat, Is.EqualTo(stats[StatConstants.Charisma]));
+            Assert.That(skills["skill 1"].BaseStat, Is.EqualTo(stats[StatConstants.Intelligence]));
+            Assert.That(skills.Count, Is.EqualTo(2));
+        }
+
+        [Test]
+        public void SelectMultipleRandomFociForMonsterSkill()
+        {
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
+                .Returns(new[] { race.BaseRace, "other base race" });
+
+            characterClass.Level = 20;
+            classSkillPoints = 0;
+            racialSkillPoints = 2;
+            stats[StatConstants.Intelligence].Value = 10;
+            stats[StatConstants.Charisma] = new Stat(StatConstants.Charisma);
+            monsterClassSkills.Add("skill 1");
+            monsterClassSkills.Add("skill 2");
+            monsterHitDice = 2;
+
+            var randomSelection = new SkillSelection { BaseStatName = StatConstants.Charisma, RandomFociQuantity = 2, SkillName = "skill with random foci" };
+            mockSkillSelector.Setup(s => s.SelectFor("skill 2")).Returns(randomSelection);
+
+            var count = 0;
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<string>>())).Returns((IEnumerable<string> ss) => ss.ElementAt(count++ % ss.Count()));
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, "skill with random foci")).Returns(new[] { "random", "other random" });
+
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
+            Assert.That(skills["random"].BaseStat, Is.EqualTo(stats[StatConstants.Charisma]));
+            Assert.That(skills["other random"].BaseStat, Is.EqualTo(stats[StatConstants.Charisma]));
+            Assert.That(skills["skill 1"].BaseStat, Is.EqualTo(stats[StatConstants.Intelligence]));
+            Assert.That(skills.Count, Is.EqualTo(3));
+        }
+
+        [Test]
+        public void DoNotSelectRepeatedRandomFociForMonsterSkill()
+        {
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
+                .Returns(new[] { race.BaseRace, "other base race" });
+
+            characterClass.Level = 20;
+            classSkillPoints = 0;
+            racialSkillPoints = 2;
+            stats[StatConstants.Intelligence].Value = 10;
+            stats[StatConstants.Charisma] = new Stat(StatConstants.Charisma);
+            monsterClassSkills.Add("skill 1");
+            monsterClassSkills.Add("skill 2");
+            monsterHitDice = 2;
+
+            var randomSelection = new SkillSelection { BaseStatName = StatConstants.Charisma, RandomFociQuantity = 2, SkillName = "skill with random foci" };
+            mockSkillSelector.Setup(s => s.SelectFor("skill 2")).Returns(randomSelection);
+
+            var count = 0;
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<string>>())).Returns((IEnumerable<string> ss) => ss.ElementAt(count++ / 2 % ss.Count()));
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, "skill with random foci")).Returns(new[] { "random", "other random" });
+
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
+            Assert.That(skills["random"].BaseStat, Is.EqualTo(stats[StatConstants.Charisma]));
+            Assert.That(skills["other random"].BaseStat, Is.EqualTo(stats[StatConstants.Charisma]));
+            Assert.That(skills["skill 1"].BaseStat, Is.EqualTo(stats[StatConstants.Intelligence]));
+            Assert.That(skills.Count, Is.EqualTo(3));
+        }
+
+        [Test]
+        public void SelectAllRandomFociForMonsterSkill()
+        {
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
+                .Returns(new[] { race.BaseRace, "other base race" });
+
+            characterClass.Level = 20;
+            classSkillPoints = 0;
+            racialSkillPoints = 2;
+            stats[StatConstants.Intelligence].Value = 10;
+            stats[StatConstants.Charisma] = new Stat(StatConstants.Charisma);
+            monsterClassSkills.Add("skill 1");
+            monsterClassSkills.Add("skill 2");
+            monsterHitDice = 2;
+
+            var randomSelection = new SkillSelection { BaseStatName = StatConstants.Charisma, RandomFociQuantity = 3, SkillName = "skill with random foci" };
+            mockSkillSelector.Setup(s => s.SelectFor("skill 2")).Returns(randomSelection);
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, "skill with random foci")).Returns(new[] { "random", "other random" });
+
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
+            Assert.That(skills["random"].BaseStat, Is.EqualTo(stats[StatConstants.Charisma]));
+            Assert.That(skills["other random"].BaseStat, Is.EqualTo(stats[StatConstants.Charisma]));
+            Assert.That(skills["skill 1"].BaseStat, Is.EqualTo(stats[StatConstants.Intelligence]));
+            Assert.That(skills.Count, Is.EqualTo(3));
         }
     }
 }

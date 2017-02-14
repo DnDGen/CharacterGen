@@ -29,36 +29,11 @@
   <object>
     <lower>46</lower>
     <content>Human</content>
-    <upper>91</upper>
-  </object>
-  <object>
-    <lower>92</lower>
-    <content>Tiefling</content>
-    <upper>92</upper>
-  </object>
-  <object>
-    <lower>93</lower>
-    <content>Goblin</content>
-    <upper>93</upper>
-  </object>
-  <object>
-    <lower>94</lower>
-    <content>Hobgoblin</content>
-    <upper>94</upper>
-  </object>
-  <object>
-    <lower>95</lower>
-    <content>Kobold</content>
-    <upper>95</upper>
-  </object>
-  <object>
-    <lower>96</lower>
-    <content>Orc</content>
     <upper>96</upper>
   </object>
   <object>
     <lower>97</lower>
-    <content>Lizardfolk</content>
+    <content>Tiefling</content>
     <upper>97</upper>
   </object>
   <object>
@@ -71,9 +46,9 @@
     <content>Wood Elf</content>
     <upper>99</upper>
   </object>
-    <object>
-        <lower>100</lower>
-        <content>Wild Elf</content>
-        <upper>100</upper>
-    </object>
+  <object>
+    <lower>100</lower>
+    <content>Wild Elf</content>
+    <upper>100</upper>
+  </object>
 </percentile>

@@ -10,6 +10,7 @@ using CharacterGen.Randomizers.Races;
 using CharacterGen.Verifiers;
 using Moq;
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -65,6 +66,9 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
             race = new Race();
             npcs = new List<string>();
 
+            alignment.Goodness = Guid.NewGuid().ToString();
+            alignment.Lawfulness = Guid.NewGuid().ToString();
+
             mockAlignmentRandomizer.Setup(r => r.GetAllPossibleResults()).Returns(alignments);
             mockClassNameRandomizer.Setup(r => r.GetAllPossibleResults(It.IsAny<Alignment>())).Returns(classNames);
             mockLevelRandomizer.Setup(r => r.GetAllPossibleResults()).Returns(levels);
@@ -90,11 +94,10 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
             baseRaces.Add(race.BaseRace);
             metaraces.Add(race.Metarace);
 
-            adjustments[baseRaces[0]] = 0;
-            adjustments[metaraces[0]] = 0;
+            adjustments[race.BaseRace] = 0;
+            adjustments[race.Metarace] = 0;
 
             mockAdjustmentsSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments, It.IsAny<string>())).Returns((string table, string name) => adjustments[name]);
-
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.NPCs)).Returns(npcs);
         }
 

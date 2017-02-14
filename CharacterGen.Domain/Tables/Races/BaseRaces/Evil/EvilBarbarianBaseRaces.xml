@@ -64,6 +64,26 @@
   <object>
     <lower>53</lower>
     <content>Orc</content>
+    <upper>74</upper>
+  </object>
+  <object>
+    <lower>75</lower>
+    <content>Death Slaad</content>
+    <upper>75</upper>
+  </object>
+  <object>
+    <lower>76</lower>
+    <content>Yuan-ti Halfblood</content>
+    <upper>76</upper>
+  </object>
+  <object>
+    <lower>77</lower>
+    <content>Yuan-ti Abomination</content>
+    <upper>77</upper>
+  </object>
+  <object>
+    <lower>78</lower>
+    <content>Gargoyle</content>
     <upper>78</upper>
   </object>
   <object>

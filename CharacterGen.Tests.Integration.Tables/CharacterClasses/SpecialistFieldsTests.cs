@@ -17,40 +17,16 @@ namespace CharacterGen.Tests.Integration.Tables.CharacterClasses
         [Test]
         public override void CollectionNames()
         {
-            var names = new[]
-            {
-                CharacterClassConstants.Barbarian,
-                CharacterClassConstants.Bard,
-                CharacterClassConstants.Cleric,
-                CharacterClassConstants.Druid,
-                CharacterClassConstants.Fighter,
-                CharacterClassConstants.Monk,
-                CharacterClassConstants.Paladin,
-                CharacterClassConstants.Ranger,
-                CharacterClassConstants.Rogue,
-                CharacterClassConstants.Sorcerer,
-                CharacterClassConstants.Wizard,
-                RaceConstants.Metaraces.Ghost,
-                RaceConstants.Metaraces.HalfCelestial,
-                RaceConstants.Metaraces.HalfDragon,
-                RaceConstants.Metaraces.HalfFiend,
-                RaceConstants.Metaraces.Lich,
-                RaceConstants.Metaraces.None,
-                RaceConstants.Metaraces.Vampire,
-                RaceConstants.Metaraces.Werebear,
-                RaceConstants.Metaraces.Wereboar,
-                RaceConstants.Metaraces.Wererat,
-                RaceConstants.Metaraces.Weretiger,
-                RaceConstants.Metaraces.Werewolf,
-            };
-
             var baseRaceGroups = CollectionsMapper.Map(TableNameConstants.Set.Collection.BaseRaceGroups);
-            var allBaseRaces = baseRaceGroups[GroupConstants.All];
-            names = names.Union(allBaseRaces).ToArray();
+            var metaraceGroups = CollectionsMapper.Map(TableNameConstants.Set.Collection.MetaraceGroups);
+            var classGroups = CollectionsMapper.Map(TableNameConstants.Set.Collection.ClassNameGroups);
+            var names = baseRaceGroups[GroupConstants.All].Union(metaraceGroups[GroupConstants.All]).Union(classGroups[GroupConstants.All]);
 
             AssertCollectionNames(names);
         }
 
+        [TestCase(CharacterClassConstants.Adept)]
+        [TestCase(CharacterClassConstants.Aristocrat)]
         [TestCase(CharacterClassConstants.Barbarian)]
         [TestCase(CharacterClassConstants.Bard)]
         [TestCase(CharacterClassConstants.Cleric,
@@ -76,13 +52,16 @@ namespace CharacterGen.Tests.Integration.Tables.CharacterClasses
             CharacterClassConstants.Domains.Trickery,
             CharacterClassConstants.Domains.War,
             CharacterClassConstants.Domains.Water)]
+        [TestCase(CharacterClassConstants.Commoner)]
         [TestCase(CharacterClassConstants.Druid)]
+        [TestCase(CharacterClassConstants.Expert)]
         [TestCase(CharacterClassConstants.Fighter)]
         [TestCase(CharacterClassConstants.Monk)]
         [TestCase(CharacterClassConstants.Paladin)]
         [TestCase(CharacterClassConstants.Ranger)]
         [TestCase(CharacterClassConstants.Rogue)]
         [TestCase(CharacterClassConstants.Sorcerer)]
+        [TestCase(CharacterClassConstants.Warrior)]
         [TestCase(CharacterClassConstants.Wizard,
             CharacterClassConstants.Schools.Abjuration,
             CharacterClassConstants.Schools.Conjuration,
@@ -189,14 +168,17 @@ namespace CharacterGen.Tests.Integration.Tables.CharacterClasses
             CharacterClassConstants.Schools.Illusion,
             CharacterClassConstants.Schools.Necromancy,
             CharacterClassConstants.Schools.Transmutation)]
-        public override void DistinctCollection(string name, params string[] collection)
+        public void SpecialistFields(string name, params string[] fields)
         {
-            base.DistinctCollection(name, collection);
+            base.DistinctCollection(name, fields);
         }
 
         [TestCase(RaceConstants.BaseRaces.Aasimar)]
+        [TestCase(RaceConstants.BaseRaces.Azer)]
+        [TestCase(RaceConstants.BaseRaces.BlueSlaad)]
         [TestCase(RaceConstants.BaseRaces.Bugbear)]
         [TestCase(RaceConstants.BaseRaces.Centaur)]
+        [TestCase(RaceConstants.BaseRaces.DeathSlaad)]
         [TestCase(RaceConstants.BaseRaces.DeepDwarf)]
         [TestCase(RaceConstants.BaseRaces.DeepHalfling)]
         [TestCase(RaceConstants.BaseRaces.Derro)]
@@ -204,9 +186,12 @@ namespace CharacterGen.Tests.Integration.Tables.CharacterClasses
         [TestCase(RaceConstants.BaseRaces.Drow)]
         [TestCase(RaceConstants.BaseRaces.DuergarDwarf)]
         [TestCase(RaceConstants.BaseRaces.ForestGnome)]
+        [TestCase(RaceConstants.BaseRaces.Gargoyle)]
         [TestCase(RaceConstants.BaseRaces.Gnoll)]
         [TestCase(RaceConstants.BaseRaces.Goblin)]
         [TestCase(RaceConstants.BaseRaces.GrayElf)]
+        [TestCase(RaceConstants.BaseRaces.GraySlaad)]
+        [TestCase(RaceConstants.BaseRaces.GreenSlaad)]
         [TestCase(RaceConstants.BaseRaces.Grimlock)]
         [TestCase(RaceConstants.BaseRaces.HalfElf)]
         [TestCase(RaceConstants.BaseRaces.HalfOrc)]
@@ -215,6 +200,7 @@ namespace CharacterGen.Tests.Integration.Tables.CharacterClasses
         [TestCase(RaceConstants.BaseRaces.HillDwarf)]
         [TestCase(RaceConstants.BaseRaces.HillGiant)]
         [TestCase(RaceConstants.BaseRaces.Hobgoblin)]
+        [TestCase(RaceConstants.BaseRaces.HoundArchon)]
         [TestCase(RaceConstants.BaseRaces.Human)]
         [TestCase(RaceConstants.BaseRaces.Janni)]
         [TestCase(RaceConstants.BaseRaces.Kobold)]
@@ -227,6 +213,7 @@ namespace CharacterGen.Tests.Integration.Tables.CharacterClasses
         [TestCase(RaceConstants.BaseRaces.OgreMage)]
         [TestCase(RaceConstants.BaseRaces.Pixie)]
         [TestCase(RaceConstants.BaseRaces.Rakshasa)]
+        [TestCase(RaceConstants.BaseRaces.RedSlaad)]
         [TestCase(RaceConstants.BaseRaces.RockGnome)]
         [TestCase(RaceConstants.BaseRaces.Satyr)]
         [TestCase(RaceConstants.BaseRaces.Scorpionfolk)]
@@ -238,11 +225,15 @@ namespace CharacterGen.Tests.Integration.Tables.CharacterClasses
         [TestCase(RaceConstants.BaseRaces.Troll)]
         [TestCase(RaceConstants.BaseRaces.WildElf)]
         [TestCase(RaceConstants.BaseRaces.WoodElf)]
+        [TestCase(RaceConstants.BaseRaces.YuanTiAbomination)]
+        [TestCase(RaceConstants.BaseRaces.YuanTiHalfblood)]
+        [TestCase(RaceConstants.BaseRaces.YuanTiPureblood)]
         [TestCase(RaceConstants.Metaraces.Ghost)]
         [TestCase(RaceConstants.Metaraces.HalfCelestial)]
         [TestCase(RaceConstants.Metaraces.HalfDragon)]
         [TestCase(RaceConstants.Metaraces.HalfFiend)]
         [TestCase(RaceConstants.Metaraces.Lich)]
+        [TestCase(RaceConstants.Metaraces.Mummy)]
         [TestCase(RaceConstants.Metaraces.None)]
         [TestCase(RaceConstants.Metaraces.Werebear)]
         [TestCase(RaceConstants.Metaraces.Wereboar)]
@@ -282,7 +273,7 @@ namespace CharacterGen.Tests.Integration.Tables.CharacterClasses
                 CharacterClassConstants.Schools.Evocation,
                 CharacterClassConstants.Schools.Illusion,
                 CharacterClassConstants.Schools.Necromancy,
-                CharacterClassConstants.Schools.Transmutation
+                CharacterClassConstants.Schools.Transmutation,
             };
 
             DistinctCollection(race, fields);

@@ -112,6 +112,8 @@
     <Compile Include="Generators\Randomizers\CharacterClasses\ClassNames\AnyNPCClassNameRandomizer.cs" />
     <Compile Include="Generators\Randomizers\CharacterClasses\ClassNames\SetClassNameRandomizer.cs" />
     <Compile Include="Generators\Randomizers\CharacterClasses\Levels\SetLevelRandomizer.cs" />
+    <Compile Include="Generators\Randomizers\Races\BaseRaces\MonsterBaseRaceRandomizer.cs" />
+    <Compile Include="Generators\Randomizers\Races\BaseRaces\NonMonsterBaseRaceRandomizer.cs" />
     <Compile Include="Generators\Randomizers\Races\BaseRaces\SetBaseRaceRandomizer.cs" />
     <Compile Include="Generators\Abilities\StatsGenerator.cs" />
     <Compile Include="Generators\Randomizers\Alignments\AnyAlignmentRandomizer.cs" />
@@ -128,12 +130,12 @@
     <Compile Include="Generators\Randomizers\Alignments\NonNeutralAlignmentRandomizer.cs" />
     <Compile Include="Generators\Randomizers\CharacterClasses\ClassNames\AnyPlayerClassNameRandomizer.cs" />
     <Compile Include="Generators\Randomizers\CharacterClasses\ClassNames\BaseClassNameRandomizer.cs" />
-    <Compile Include="Generators\Randomizers\CharacterClasses\ClassNames\HealerClassNameRandomizer.cs" />
-    <Compile Include="Generators\Randomizers\CharacterClasses\ClassNames\MageClassNameRandomizer.cs" />
+    <Compile Include="Generators\Randomizers\CharacterClasses\ClassNames\DivineSpellcasterClassNameRandomizer.cs" />
+    <Compile Include="Generators\Randomizers\CharacterClasses\ClassNames\ArcaneSpellcasterClassNameRandomizer.cs" />
     <Compile Include="Generators\Randomizers\CharacterClasses\ClassNames\NonSpellcasterClassNameRandomizer.cs" />
     <Compile Include="Generators\Randomizers\CharacterClasses\ClassNames\SpellcasterClassNameRandomizer.cs" />
     <Compile Include="Generators\Randomizers\CharacterClasses\ClassNames\StealthClassNameRandomizer.cs" />
-    <Compile Include="Generators\Randomizers\CharacterClasses\ClassNames\WarriorClassNameRandomizer.cs" />
+    <Compile Include="Generators\Randomizers\CharacterClasses\ClassNames\PhysicalCombatClassNameRandomizer.cs" />
     <Compile Include="Generators\Randomizers\CharacterClasses\Levels\AnyLevelRandomizer.cs" />
     <Compile Include="Generators\Randomizers\CharacterClasses\Levels\HighLevelRandomizer.cs" />
     <Compile Include="Generators\Randomizers\CharacterClasses\Levels\LowLevelRandomizer.cs" />
@@ -141,26 +143,14 @@
     <Compile Include="Generators\Randomizers\CharacterClasses\Levels\RangedLevelRandomizer.cs" />
     <Compile Include="Generators\Randomizers\CharacterClasses\Levels\VeryHighLevelRandomizer.cs" />
     <Compile Include="Generators\Randomizers\Races\BaseRaces\AnyBaseRaceRandomizer.cs" />
-    <Compile Include="Generators\Randomizers\Races\BaseRaces\BaseRaceRandomizer.cs" />
-    <Compile Include="Generators\Randomizers\Races\BaseRaces\EvilBaseRaceRandomizer.cs" />
-    <Compile Include="Generators\Randomizers\Races\BaseRaces\GoodBaseRaceRandomizer.cs" />
-    <Compile Include="Generators\Randomizers\Races\BaseRaces\NeutralBaseRaceRandomizer.cs" />
-    <Compile Include="Generators\Randomizers\Races\BaseRaces\NonEvilBaseRaceRandomizer.cs" />
-    <Compile Include="Generators\Randomizers\Races\BaseRaces\NonGoodBaseRaceRandomizer.cs" />
-    <Compile Include="Generators\Randomizers\Races\BaseRaces\NonNeutralBaseRaceRandomizer.cs" />
+    <Compile Include="Generators\Randomizers\Races\BaseRaces\BaseRaceRandomizerBase.cs" />
     <Compile Include="Generators\Randomizers\Races\BaseRaces\NonStandardBaseRaceRandomizer.cs" />
     <Compile Include="Generators\Randomizers\Races\BaseRaces\StandardBaseRaceRandomizer.cs" />
     <Compile Include="Generators\Randomizers\Races\Metaraces\AnyMetaraceRandomizer.cs" />
-    <Compile Include="Generators\Randomizers\Races\Metaraces\BaseForcableMetarace.cs" />
-    <Compile Include="Generators\Randomizers\Races\Metaraces\EvilMetaraceRandomizer.cs" />
+    <Compile Include="Generators\Randomizers\Races\Metaraces\ForcableMetaraceBase.cs" />
     <Compile Include="Generators\Randomizers\Races\Metaraces\GeneticMetaraceRandomizer.cs" />
-    <Compile Include="Generators\Randomizers\Races\Metaraces\GoodMetaraceRandomizer.cs" />
     <Compile Include="Generators\Randomizers\Races\Metaraces\LycanthropeMetaraceRandomizer.cs" />
-    <Compile Include="Generators\Randomizers\Races\Metaraces\NeutralMetaraceRandomizer.cs" />
     <Compile Include="Generators\Randomizers\Races\Metaraces\NoMetaraceRandomizer.cs" />
-    <Compile Include="Generators\Randomizers\Races\Metaraces\NonEvilMetaraceRandomizer.cs" />
-    <Compile Include="Generators\Randomizers\Races\Metaraces\NonGoodMetaraceRandomizer.cs" />
-    <Compile Include="Generators\Randomizers\Races\Metaraces\NonNeutralMetaraceRandomizer.cs" />
     <Compile Include="Generators\Randomizers\Races\Metaraces\SetMetaraceRandomizer.cs" />
     <Compile Include="Generators\Randomizers\Races\Metaraces\UndeadMetaraceRandomizer.cs" />
     <Compile Include="Generators\Randomizers\Stats\AverageStatsRandomizer.cs" />
@@ -843,7 +833,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Abilities\Skills\SkillPointsForClasses.xml" />
+    <EmbeddedResource Include="Tables\Abilities\Skills\SkillPoints.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Tables\Abilities\Skills\SkillSynergy.xml" />
@@ -1094,7 +1084,7 @@
     <EmbeddedResource Include="Tables\Leadership\Reputation.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Animals.xml" />
+    <EmbeddedResource Include="Tables\Magics\AnimalGroups.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Tables\Magics\Spells\PerDay\Adepts\Level10AdeptSpellsPerDay.xml" />
@@ -2814,6 +2804,75 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Tables\Items\Powers\Level21Power.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Races\BaseRaces\Ages\AzerAges.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Abilities\Feats\Data\Racial\BaseRaces\AzerFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Abilities\Feats\Data\Racial\Metaraces\MummyFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Races\BaseRaces\Ages\Blue SlaadAges.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Races\BaseRaces\Ages\Death SlaadAges.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Races\BaseRaces\Ages\Green SlaadAges.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Races\BaseRaces\Ages\Gray SlaadAges.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Races\BaseRaces\Ages\Red SlaadAges.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Abilities\Feats\Data\Racial\BaseRaces\Blue SlaadFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Abilities\Feats\Data\Racial\BaseRaces\Death SlaadFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Abilities\Feats\Data\Racial\BaseRaces\Red SlaadFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Abilities\Feats\Data\Racial\BaseRaces\Green SlaadFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Abilities\Feats\Data\Racial\BaseRaces\Gray SlaadFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Races\BaseRaces\Ages\GargoyleAges.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Abilities\Feats\Data\Racial\BaseRaces\GargoyleFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Races\BaseRaces\Ages\Hound ArchonAges.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Abilities\Feats\Data\Racial\BaseRaces\Hound ArchonFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Races\BaseRaces\Ages\Yuan-ti AbominationAges.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Races\BaseRaces\Ages\Yuan-ti HalfbloodAges.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Races\BaseRaces\Ages\Yuan-ti PurebloodAges.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Abilities\Feats\Data\Racial\BaseRaces\Yuan-ti HalfbloodFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Abilities\Feats\Data\Racial\BaseRaces\Yuan-ti AbominationFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Abilities\Feats\Data\Racial\BaseRaces\Yuan-ti PurebloodFeatData.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

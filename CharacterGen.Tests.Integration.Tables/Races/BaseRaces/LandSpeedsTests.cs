@@ -20,9 +20,12 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces
         }
 
         [TestCase(RaceConstants.BaseRaces.Aasimar, 30)]
+        [TestCase(RaceConstants.BaseRaces.Azer, 30)]
+        [TestCase(RaceConstants.BaseRaces.BlueSlaad, 30)]
         [TestCase(RaceConstants.BaseRaces.Bugbear, 30)]
         [TestCase(RaceConstants.BaseRaces.Centaur, 50)]
         [TestCase(RaceConstants.BaseRaces.CloudGiant, 50)]
+        [TestCase(RaceConstants.BaseRaces.DeathSlaad, 30)]
         [TestCase(RaceConstants.BaseRaces.DeepDwarf, 20)]
         [TestCase(RaceConstants.BaseRaces.DeepHalfling, 20)]
         [TestCase(RaceConstants.BaseRaces.Derro, 20)]
@@ -32,9 +35,12 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces
         [TestCase(RaceConstants.BaseRaces.FireGiant, 40)]
         [TestCase(RaceConstants.BaseRaces.ForestGnome, 20)]
         [TestCase(RaceConstants.BaseRaces.FrostGiant, 40)]
+        [TestCase(RaceConstants.BaseRaces.Gargoyle, 40)]
         [TestCase(RaceConstants.BaseRaces.Gnoll, 30)]
         [TestCase(RaceConstants.BaseRaces.Goblin, 30)]
         [TestCase(RaceConstants.BaseRaces.GrayElf, 30)]
+        [TestCase(RaceConstants.BaseRaces.GraySlaad, 30)]
+        [TestCase(RaceConstants.BaseRaces.GreenSlaad, 30)]
         [TestCase(RaceConstants.BaseRaces.Grimlock, 30)]
         [TestCase(RaceConstants.BaseRaces.HalfElf, 30)]
         [TestCase(RaceConstants.BaseRaces.HalfOrc, 30)]
@@ -43,6 +49,7 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces
         [TestCase(RaceConstants.BaseRaces.HillDwarf, 20)]
         [TestCase(RaceConstants.BaseRaces.HillGiant, 40)]
         [TestCase(RaceConstants.BaseRaces.Hobgoblin, 30)]
+        [TestCase(RaceConstants.BaseRaces.HoundArchon, 40)]
         [TestCase(RaceConstants.BaseRaces.Human, 30)]
         [TestCase(RaceConstants.BaseRaces.Janni, 30)]
         [TestCase(RaceConstants.BaseRaces.Kobold, 30)]
@@ -56,6 +63,7 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces
         [TestCase(RaceConstants.BaseRaces.Orc, 30)]
         [TestCase(RaceConstants.BaseRaces.Pixie, 20)]
         [TestCase(RaceConstants.BaseRaces.Rakshasa, 40)]
+        [TestCase(RaceConstants.BaseRaces.RedSlaad, 30)]
         [TestCase(RaceConstants.BaseRaces.RockGnome, 20)]
         [TestCase(RaceConstants.BaseRaces.Satyr, 40)]
         [TestCase(RaceConstants.BaseRaces.Scorpionfolk, 40)]
@@ -68,9 +76,12 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces
         [TestCase(RaceConstants.BaseRaces.Troll, 30)]
         [TestCase(RaceConstants.BaseRaces.WildElf, 30)]
         [TestCase(RaceConstants.BaseRaces.WoodElf, 30)]
-        public override void Adjustment(string name, int adjustment)
+        [TestCase(RaceConstants.BaseRaces.YuanTiAbomination, 30)]
+        [TestCase(RaceConstants.BaseRaces.YuanTiHalfblood, 30)]
+        [TestCase(RaceConstants.BaseRaces.YuanTiPureblood, 30)]
+        public void LandSpeed(string name, int speed)
         {
-            base.Adjustment(name, adjustment);
+            base.Adjustment(name, speed);
         }
     }
 }

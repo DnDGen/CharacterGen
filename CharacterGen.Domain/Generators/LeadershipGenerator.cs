@@ -20,7 +20,6 @@ namespace CharacterGen.Domain.Generators
         private IAdjustmentsSelector adjustmentsSelector;
         private ISetLevelRandomizer setLevelRandomizer;
         private ISetAlignmentRandomizer setAlignmentRandomizer;
-        private IAlignmentRandomizer anyAlignmentRandomizer;
         private IClassNameRandomizer anyPlayerClassNameRandomizer;
         private IClassNameRandomizer anyNPCClassNameRandomizer;
         private RaceRandomizer anyBaseRaceRandomizer;
@@ -28,14 +27,22 @@ namespace CharacterGen.Domain.Generators
         private IStatsRandomizer rawStatsRandomizer;
         private IBooleanPercentileSelector booleanPercentileSelector;
         private ICollectionsSelector collectionsSelector;
-        private IAlignmentGenerator alignmentGenerator;
         private Generator generator;
 
-        public LeadershipGenerator(ICharacterGenerator characterGenerator, ILeadershipSelector leadershipSelector, IPercentileSelector percentileSelector,
-            IAdjustmentsSelector adjustmentsSelector, ISetLevelRandomizer setLevelRandomizer, ISetAlignmentRandomizer setAlignmentRandomizer,
-            IAlignmentRandomizer anyAlignmentRandomizer, IClassNameRandomizer anyPlayerClassNameRandomizer, RaceRandomizer anyBaseRaceRandomizer,
-            RaceRandomizer anyMetaraceRandomizer, IStatsRandomizer rawStatsRandomizer, IBooleanPercentileSelector booleanPercentileSelector,
-            ICollectionsSelector collectionsSelector, IAlignmentGenerator alignmentGenerator, Generator generator, IClassNameRandomizer anyNPCClassNameRandomizer)
+        public LeadershipGenerator(ICharacterGenerator characterGenerator,
+            ILeadershipSelector leadershipSelector,
+            IPercentileSelector percentileSelector,
+            IAdjustmentsSelector adjustmentsSelector,
+            ISetLevelRandomizer setLevelRandomizer,
+            ISetAlignmentRandomizer setAlignmentRandomizer,
+            IClassNameRandomizer anyPlayerClassNameRandomizer,
+            RaceRandomizer anyBaseRaceRandomizer,
+            RaceRandomizer anyMetaraceRandomizer,
+            IStatsRandomizer rawStatsRandomizer,
+            IBooleanPercentileSelector booleanPercentileSelector,
+            ICollectionsSelector collectionsSelector,
+            Generator generator,
+            IClassNameRandomizer anyNPCClassNameRandomizer)
         {
             this.characterGenerator = characterGenerator;
             this.leadershipSelector = leadershipSelector;
@@ -43,14 +50,12 @@ namespace CharacterGen.Domain.Generators
             this.adjustmentsSelector = adjustmentsSelector;
             this.setLevelRandomizer = setLevelRandomizer;
             this.setAlignmentRandomizer = setAlignmentRandomizer;
-            this.anyAlignmentRandomizer = anyAlignmentRandomizer;
             this.anyPlayerClassNameRandomizer = anyPlayerClassNameRandomizer;
             this.anyBaseRaceRandomizer = anyBaseRaceRandomizer;
             this.anyMetaraceRandomizer = anyMetaraceRandomizer;
             this.rawStatsRandomizer = rawStatsRandomizer;
             this.booleanPercentileSelector = booleanPercentileSelector;
             this.collectionsSelector = collectionsSelector;
-            this.alignmentGenerator = alignmentGenerator;
             this.generator = generator;
             this.anyNPCClassNameRandomizer = anyNPCClassNameRandomizer;
         }
@@ -120,27 +125,24 @@ namespace CharacterGen.Domain.Generators
             if (cohortLevel <= 0)
                 return null;
 
-            if (alignmentDiffers == false)
-            {
-                setAlignmentRandomizer.SetAlignment = new Alignment(leaderAlignment);
-                return GenerateFollower(setAlignmentRandomizer, cohortLevel, leaderAlignment, leaderClass);
-            }
+            var alignment = new Alignment(leaderAlignment);
 
-            return GenerateFollower(cohortLevel, leaderAlignment, leaderClass);
+            if (alignmentDiffers)
+                alignment = GetAlignment(leaderAlignment, false);
+
+            return GenerateFollower(alignment, cohortLevel, leaderClass);
         }
 
         public Character GenerateFollower(int level, string leaderAlignment, string leaderClass)
         {
-            return GenerateFollower(anyAlignmentRandomizer, level, leaderAlignment, leaderClass);
+            var alignment = GetAlignment(leaderAlignment);
+            return GenerateFollower(alignment, level, leaderClass);
         }
 
-        private Character GenerateFollower(IAlignmentRandomizer alignmentRandomizer, int level, string leaderAlignment, string leaderClass)
+        private Character GenerateFollower(Alignment alignment, int level, string leaderClass)
         {
             setLevelRandomizer.SetLevel = level;
-            var allowedAlignments = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AlignmentGroups, leaderAlignment);
-
-            setAlignmentRandomizer.SetAlignment = generator.Generate(() => alignmentGenerator.GenerateWith(alignmentRandomizer),
-                a => allowedAlignments.Contains(a.ToString()));
+            setAlignmentRandomizer.SetAlignment = alignment;
 
             var npcs = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.NPCs);
 
@@ -148,6 +150,16 @@ namespace CharacterGen.Domain.Generators
                 return characterGenerator.GenerateWith(setAlignmentRandomizer, anyNPCClassNameRandomizer, setLevelRandomizer, anyBaseRaceRandomizer, anyMetaraceRandomizer, rawStatsRandomizer);
 
             return characterGenerator.GenerateWith(setAlignmentRandomizer, anyPlayerClassNameRandomizer, setLevelRandomizer, anyBaseRaceRandomizer, anyMetaraceRandomizer, rawStatsRandomizer);
+        }
+
+        private Alignment GetAlignment(string leaderAlignment, bool allowLeaderAlignment = true)
+        {
+            var alignment = generator.Generate(
+                () => collectionsSelector.SelectRandomFrom(TableNameConstants.Set.Collection.AlignmentGroups, leaderAlignment),
+                a => allowLeaderAlignment || a != leaderAlignment,
+                () => leaderAlignment);
+
+            return new Alignment(alignment);
         }
     }
 }

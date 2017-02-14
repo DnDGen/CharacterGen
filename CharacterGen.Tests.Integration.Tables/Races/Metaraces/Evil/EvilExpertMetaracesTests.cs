@@ -20,10 +20,7 @@ namespace CharacterGen.Tests.Integration.Tables.Races.Metaraces.Evil
             AssertTableIsComplete();
         }
 
-        [TestCase(1, 97, RaceConstants.Metaraces.None)]
-        [TestCase(98, 98, RaceConstants.Metaraces.Ghost)]
-        [TestCase(99, 99, RaceConstants.Metaraces.Vampire)]
-        [TestCase(100, 100, RaceConstants.Metaraces.Werewolf)]
+        [TestCase(1, 100, RaceConstants.Metaraces.None)]
         public override void Percentile(int lower, int upper, string content)
         {
             base.Percentile(lower, upper, content);

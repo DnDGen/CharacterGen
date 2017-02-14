@@ -22,9 +22,12 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Heights
         }
 
         [TestCase(RaceConstants.BaseRaces.Aasimar, 62)]
+        [TestCase(RaceConstants.BaseRaces.Azer, 45)]
+        [TestCase(RaceConstants.BaseRaces.BlueSlaad, 114)]
         [TestCase(RaceConstants.BaseRaces.Bugbear, 66)]
         [TestCase(RaceConstants.BaseRaces.Centaur, 71)]
         [TestCase(RaceConstants.BaseRaces.CloudGiant, 204)]
+        [TestCase(RaceConstants.BaseRaces.DeathSlaad, 58)]
         [TestCase(RaceConstants.BaseRaces.DeepDwarf, 45)]
         [TestCase(RaceConstants.BaseRaces.DeepHalfling, 32)]
         [TestCase(RaceConstants.BaseRaces.Derro, 45)]
@@ -34,9 +37,12 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Heights
         [TestCase(RaceConstants.BaseRaces.FireGiant, 132)]
         [TestCase(RaceConstants.BaseRaces.ForestGnome, 36)]
         [TestCase(RaceConstants.BaseRaces.FrostGiant, 168)]
+        [TestCase(RaceConstants.BaseRaces.Gargoyle, 58)]
         [TestCase(RaceConstants.BaseRaces.Gnoll, 66)]
         [TestCase(RaceConstants.BaseRaces.Goblin, 32)]
         [TestCase(RaceConstants.BaseRaces.GrayElf, 53)]
+        [TestCase(RaceConstants.BaseRaces.GraySlaad, 58)]
+        [TestCase(RaceConstants.BaseRaces.GreenSlaad, 114)]
         [TestCase(RaceConstants.BaseRaces.Grimlock, 58)]
         [TestCase(RaceConstants.BaseRaces.HalfElf, 55)]
         [TestCase(RaceConstants.BaseRaces.HalfOrc, 58)]
@@ -45,6 +51,7 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Heights
         [TestCase(RaceConstants.BaseRaces.HillDwarf, 45)]
         [TestCase(RaceConstants.BaseRaces.HillGiant, 114)]
         [TestCase(RaceConstants.BaseRaces.Hobgoblin, 50)]
+        [TestCase(RaceConstants.BaseRaces.HoundArchon, 72)]
         [TestCase(RaceConstants.BaseRaces.Human, 58)]
         [TestCase(RaceConstants.BaseRaces.Janni, 58)]
         [TestCase(RaceConstants.BaseRaces.Kobold, 30)]
@@ -58,6 +65,7 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Heights
         [TestCase(RaceConstants.BaseRaces.Orc, 61)]
         [TestCase(RaceConstants.BaseRaces.Pixie, 18)]
         [TestCase(RaceConstants.BaseRaces.Rakshasa, 58)]
+        [TestCase(RaceConstants.BaseRaces.RedSlaad, 90)]
         [TestCase(RaceConstants.BaseRaces.RockGnome, 36)]
         [TestCase(RaceConstants.BaseRaces.Satyr, 70)]
         [TestCase(RaceConstants.BaseRaces.Scorpionfolk, 70)]
@@ -70,6 +78,9 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Heights
         [TestCase(RaceConstants.BaseRaces.Troll, 96)]
         [TestCase(RaceConstants.BaseRaces.WoodElf, 53)]
         [TestCase(RaceConstants.BaseRaces.WildElf, 53)]
+        [TestCase(RaceConstants.BaseRaces.YuanTiAbomination, 96)]
+        [TestCase(RaceConstants.BaseRaces.YuanTiHalfblood, 53)]
+        [TestCase(RaceConstants.BaseRaces.YuanTiPureblood, 53)]
         public void MaleHeight(string name, int adjustment)
         {
             base.Adjustment(name, adjustment);

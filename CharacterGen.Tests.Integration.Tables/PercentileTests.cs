@@ -2,6 +2,7 @@
 using Ninject;
 using NUnit.Framework;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CharacterGen.Tests.Integration.Tables
 {
@@ -25,22 +26,20 @@ namespace CharacterGen.Tests.Integration.Tables
 
         protected void AssertTableIsComplete()
         {
-            for (var roll = 100; roll > 0; roll--)
-                Assert.That(table.Keys, Contains.Item(roll), tableName);
-
-            Assert.That(table.Keys.Count, Is.EqualTo(100), tableName);
+            var percentileRolls = Enumerable.Range(1, 100);
+            Assert.That(table.Keys, Is.EquivalentTo(percentileRolls), tableName);
         }
 
         public virtual void Percentile(int lower, int upper, string content)
         {
-            for (var roll = lower; roll <= upper; roll++)
-                AssertPercentile(content, roll);
-        }
+            for (var roll = 1; roll < lower; roll++)
+                Assert.That(table[roll], Is.Not.EqualTo(content), $"Roll: {roll}");
 
-        private void AssertPercentile(string content, int roll)
-        {
-            Assert.That(table.Keys, Contains.Item(roll), tableName);
-            Assert.That(table[roll], Is.EqualTo(content), $"Roll: {roll}");
+            for (var roll = lower; roll <= upper; roll++)
+                Assert.That(table[roll], Is.EqualTo(content), $"Roll: {roll}");
+
+            for (var roll = upper + 1; roll <= 100; roll++)
+                Assert.That(table[roll], Is.Not.EqualTo(content), $"Roll: {roll}");
         }
     }
 }

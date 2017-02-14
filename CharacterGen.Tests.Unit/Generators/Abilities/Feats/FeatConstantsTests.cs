@@ -19,6 +19,8 @@ namespace CharacterGen.Tests.Unit.Common.Abilities.Feats
         [TestCase(FeatConstants.AugmentSummoning, "Augment Summoning")]
         [TestCase(FeatConstants.AuraOfCourage, "Aura of Courage")]
         [TestCase(FeatConstants.AuraOfGood, "Aura of Good")]
+        [TestCase(FeatConstants.AuraOfMenace, "Aura of Menace")]
+        [TestCase(FeatConstants.Aversion, "Aversion")]
         [TestCase(FeatConstants.BardicKnowledge, "Bardic Knowledge")]
         [TestCase(FeatConstants.BardicMusic, "Bardic Music")]
         [TestCase(FeatConstants.BlindFight, "Blind-Fight")]
@@ -27,6 +29,7 @@ namespace CharacterGen.Tests.Unit.Common.Abilities.Feats
         [TestCase(FeatConstants.Camouflage, "Camouflage")]
         [TestCase(FeatConstants.CaptivatingSong, "Captivating Song")]
         [TestCase(FeatConstants.CastSpellBonus, "Cast Spell Bonus")]
+        [TestCase(FeatConstants.ChameleonPower, "Chameleon Power")]
         [TestCase(FeatConstants.ChangeShape, "Change Shape")]
         [TestCase(FeatConstants.ChangeSize, "Change Size")]
         [TestCase(FeatConstants.ChildrenOfTheNight, "Children of the Night")]
@@ -48,6 +51,7 @@ namespace CharacterGen.Tests.Unit.Common.Abilities.Feats
         [TestCase(FeatConstants.DefensiveRoll, "Defensive Roll")]
         [TestCase(FeatConstants.DeflectArrows, "Deflect Arrows")]
         [TestCase(FeatConstants.DeftHands, "Deft Hands")]
+        [TestCase(FeatConstants.Despair, "Despair")]
         [TestCase(FeatConstants.DiamondBody, "Diamond Body")]
         [TestCase(FeatConstants.DiamondSoul, "Diamond Soul")]
         [TestCase(FeatConstants.Diehard, "Diehard")]
@@ -82,8 +86,10 @@ namespace CharacterGen.Tests.Unit.Common.Abilities.Feats
         [TestCase(FeatConstants.Ferocity, "Ferocity")]
         [TestCase(FeatConstants.Flight, "Flight")]
         [TestCase(FeatConstants.FlurryOfBlows, "Flurry of Blows")]
+        [TestCase(FeatConstants.Freeze, "Freeze")]
         [TestCase(FeatConstants.FrightfulMoan, "Frightful Moan")]
         [TestCase(FeatConstants.GaseousForm, "Gaseous Form")]
+        [TestCase(FeatConstants.GhostSpecialAttack, "Ghost Special Attack")]
         [TestCase(FeatConstants.GoodFortune, "Good Fortune")]
         [TestCase(FeatConstants.GreatCleave, "Great Cleave")]
         [TestCase(FeatConstants.GreatFortitude, "Great Fortitude")]
@@ -95,6 +101,7 @@ namespace CharacterGen.Tests.Unit.Common.Abilities.Feats
         [TestCase(FeatConstants.GreaterTwoWeaponFighting, "Greater Two-Weapon Fighting")]
         [TestCase(FeatConstants.GreaterWeaponFocus, "Greater Weapon Focus")]
         [TestCase(FeatConstants.GreaterWeaponSpecialization, "Greater Weapon Specialization")]
+        [TestCase(FeatConstants.Heat, "Heat")]
         [TestCase(FeatConstants.HeavyArmorProficiency, "Heavy Armor Proficiency")]
         [TestCase(FeatConstants.HeightenSpell, "Heighten Spell")]
         [TestCase(FeatConstants.HideInPlainSight, "Hide in Plain Sight")]
@@ -102,6 +109,7 @@ namespace CharacterGen.Tests.Unit.Common.Abilities.Feats
         [TestCase(FeatConstants.HorrificAppearance, "Horrific Appearance")]
         [TestCase(FeatConstants.Illiteracy, "Illiteracy")]
         [TestCase(FeatConstants.ImmuneToEffect, "Immune to Effect")]
+        [TestCase(FeatConstants.Implant, "Implant")]
         [TestCase(FeatConstants.ImprovedBullRush, "Improved Bull Rush")]
         [TestCase(FeatConstants.ImprovedCombatStyle, "Improved Combat Style")]
         [TestCase(FeatConstants.ImprovedCounterspell, "Improved Counterspell")]
@@ -156,6 +164,7 @@ namespace CharacterGen.Tests.Unit.Common.Abilities.Feats
         [TestCase(FeatConstants.MonkUnarmedStrike, "Monk Unarmed Strike")]
         [TestCase(FeatConstants.MountedArchery, "Mounted Archery")]
         [TestCase(FeatConstants.MountedCombat, "Mounted Combat")]
+        [TestCase(FeatConstants.MummyRot, "Mummy Rot")]
         [TestCase(FeatConstants.NaturalArmor, "Natural Armor")]
         [TestCase(FeatConstants.NaturalCunning, "Natural Cunning")]
         [TestCase(FeatConstants.NaturalSpell, "Natural Spell")]
@@ -177,6 +186,7 @@ namespace CharacterGen.Tests.Unit.Common.Abilities.Feats
         [TestCase(FeatConstants.PowerAttack, "Power Attack")]
         [TestCase(FeatConstants.PowerfulCharge, "Powerful Charge")]
         [TestCase(FeatConstants.PreciseShot, "Precise Shot")]
+        [TestCase(FeatConstants.ProduceAcid, "Produce Acid")]
         [TestCase(FeatConstants.PurityOfBody, "Purity of Body")]
         [TestCase(FeatConstants.QuickDraw, "Quick Draw")]
         [TestCase(FeatConstants.QuickenSpell, "Quicken Spell")]
@@ -205,6 +215,7 @@ namespace CharacterGen.Tests.Unit.Common.Abilities.Feats
         [TestCase(FeatConstants.SkillBonus, "Skill Bonus")]
         [TestCase(FeatConstants.SkillFocus, "Skill Focus")]
         [TestCase(FeatConstants.SkillMastery, "Skill Mastery")]
+        [TestCase(FeatConstants.SlaadFever, "Slaad Fever")]
         [TestCase(FeatConstants.Slam, "Slam")]
         [TestCase(FeatConstants.SlipperyMind, "Slippery Mind")]
         [TestCase(FeatConstants.SlowFall, "Slow Fall")]
@@ -228,9 +239,12 @@ namespace CharacterGen.Tests.Unit.Common.Abilities.Feats
         [TestCase(FeatConstants.StillMind, "Still Mind")]
         [TestCase(FeatConstants.StillSpell, "Still Spell")]
         [TestCase(FeatConstants.Stonecunning, "Stonecunning")]
+        [TestCase(FeatConstants.Stun, "Stun")]
+        [TestCase(FeatConstants.StunningCroak, "Stunning Croak")]
         [TestCase(FeatConstants.StunningFist, "Stunning Fist")]
         [TestCase(FeatConstants.Suggestion, "Suggestion")]
         [TestCase(FeatConstants.SupernaturalStrength, "Supernatural Strength")]
+        [TestCase(FeatConstants.SummonSlaad, "Summon Slaad")]
         [TestCase(FeatConstants.SwiftTracker, "Swift Tracker")]
         [TestCase(FeatConstants.Telekinesis, "Telekinesis")]
         [TestCase(FeatConstants.Telepathy, "Telepathy")]
@@ -265,12 +279,23 @@ namespace CharacterGen.Tests.Unit.Common.Abilities.Feats
         [TestCase(FeatConstants.WildEmpathy, "Wild Empathy")]
         [TestCase(FeatConstants.WildShape, "Wild Shape")]
         [TestCase(FeatConstants.WoodlandStride, "Woodland Stride")]
+        public void FeatConstant(string constant, string value)
+        {
+            Assert.That(constant, Is.EqualTo(value));
+        }
+
         [TestCase(FeatConstants.Frequencies.AtWill, "At Will")]
         [TestCase(FeatConstants.Frequencies.Constant, "Constant")]
         [TestCase(FeatConstants.Frequencies.Day, "Day")]
         [TestCase(FeatConstants.Frequencies.Hit, "Hit")]
         [TestCase(FeatConstants.Frequencies.Round, "Round")]
+        [TestCase(FeatConstants.Frequencies.Turn, "Turn")]
         [TestCase(FeatConstants.Frequencies.Week, "Week")]
+        public void FeatFrequencyConstant(string constant, string value)
+        {
+            Assert.That(constant, Is.EqualTo(value));
+        }
+
         [TestCase(FeatConstants.Foci.Acid, "Acid")]
         [TestCase(FeatConstants.Foci.All, "All")]
         [TestCase(FeatConstants.Foci.Archery, "Archery")]
@@ -285,7 +310,7 @@ namespace CharacterGen.Tests.Unit.Common.Abilities.Feats
         [TestCase(FeatConstants.Foci.WeaponsWithUnarmed, "Weapons with unarmed")]
         [TestCase(FeatConstants.Foci.WeaponsWithUnarmedAndGrapple, "Weapons with unarmed and grapple")]
         [TestCase(FeatConstants.Foci.WeaponsWithUnarmedAndGrappleAndRay, "Weapons with unarmed, grapple, and ray")]
-        public void FeatConstant(string constant, string value)
+        public void FeatFocusConstant(string constant, string value)
         {
             Assert.That(constant, Is.EqualTo(value));
         }

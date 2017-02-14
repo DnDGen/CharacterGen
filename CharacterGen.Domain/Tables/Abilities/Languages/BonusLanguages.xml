@@ -17,10 +17,41 @@
     <name>Aristocrat</name>
   </object>
   <object>
+    <name>Azer</name>
+    <item>Abyssal</item>
+    <item>Aquan</item>
+    <item>Auran</item>
+    <item>Celestial</item>
+    <item>Infernal</item>
+    <item>Terran</item>
+  </object>
+  <object>
     <name>Barbarian</name>
   </object>
   <object>
     <name>Bard</name>
+  </object>
+  <object>
+    <name>Blue Slaad</name>
+    <item>Abyssal</item>
+    <item>Common</item>
+    <item>Elven</item>
+    <item>Celestial</item>
+    <item>Undercommon</item>
+    <item>Goblin</item>
+    <item>Dwarven</item>
+    <item>Draconic</item>
+    <item>Giant</item>
+    <item>Infernal</item>
+    <item>Gnome</item>
+    <item>Sylvan</item>
+    <item>Gnoll</item>
+    <item>Orc</item>
+    <item>Halfling</item>
+    <item>Aquan</item>
+    <item>Auran</item>
+    <item>Ignan</item>
+    <item>Terran</item>
   </object>
   <object>
     <name>Bugbear</name>
@@ -53,6 +84,28 @@
   </object>
   <object>
     <name>Commoner</name>
+  </object>
+  <object>
+    <name>Death Slaad</name>
+    <item>Abyssal</item>
+    <item>Common</item>
+    <item>Elven</item>
+    <item>Celestial</item>
+    <item>Undercommon</item>
+    <item>Goblin</item>
+    <item>Dwarven</item>
+    <item>Draconic</item>
+    <item>Giant</item>
+    <item>Infernal</item>
+    <item>Gnome</item>
+    <item>Sylvan</item>
+    <item>Gnoll</item>
+    <item>Orc</item>
+    <item>Halfling</item>
+    <item>Aquan</item>
+    <item>Auran</item>
+    <item>Ignan</item>
+    <item>Terran</item>
   </object>
   <object>
     <name>Deep Dwarf</name>
@@ -144,6 +197,16 @@
     <item>Goblin</item>
   </object>
   <object>
+    <name>Gargoyle</name>
+    <item>Auran</item>
+    <item>Dwarven</item>
+    <item>Elven</item>
+    <item>Halfling</item>
+    <item>Gnome</item>
+    <item>Giant</item>
+    <item>Terran</item>
+  </object>
+  <object>
     <name>Gnoll</name>
     <item>Common</item>
     <item>Goblin</item>
@@ -167,6 +230,50 @@
     <item>Orc</item>
     <item>Gnome</item>
     <item>Sylvan</item>
+  </object>
+  <object>
+    <name>Gray Slaad</name>
+    <item>Abyssal</item>
+    <item>Common</item>
+    <item>Elven</item>
+    <item>Celestial</item>
+    <item>Undercommon</item>
+    <item>Goblin</item>
+    <item>Dwarven</item>
+    <item>Draconic</item>
+    <item>Giant</item>
+    <item>Infernal</item>
+    <item>Gnome</item>
+    <item>Sylvan</item>
+    <item>Gnoll</item>
+    <item>Orc</item>
+    <item>Halfling</item>
+    <item>Aquan</item>
+    <item>Auran</item>
+    <item>Ignan</item>
+    <item>Terran</item>
+  </object>
+  <object>
+    <name>Green Slaad</name>
+    <item>Abyssal</item>
+    <item>Common</item>
+    <item>Elven</item>
+    <item>Celestial</item>
+    <item>Undercommon</item>
+    <item>Goblin</item>
+    <item>Dwarven</item>
+    <item>Draconic</item>
+    <item>Giant</item>
+    <item>Infernal</item>
+    <item>Gnome</item>
+    <item>Sylvan</item>
+    <item>Gnoll</item>
+    <item>Orc</item>
+    <item>Halfling</item>
+    <item>Aquan</item>
+    <item>Auran</item>
+    <item>Ignan</item>
+    <item>Terran</item>
   </object>
   <object>
     <name>Grimlock</name>
@@ -244,6 +351,12 @@
     <item>Orc</item>
     <item>Draconic</item>
     <item>Giant</item>
+  </object>
+  <object>
+    <name>Hound Archon</name>
+    <item>Common</item>
+    <item>Infernal</item>
+    <item>Draconic</item>
   </object>
   <object>
     <name>Human</name>
@@ -377,6 +490,28 @@
     <name>Ranger</name>
   </object>
   <object>
+    <name>Red Slaad</name>
+    <item>Abyssal</item>
+    <item>Common</item>
+    <item>Elven</item>
+    <item>Celestial</item>
+    <item>Undercommon</item>
+    <item>Goblin</item>
+    <item>Dwarven</item>
+    <item>Draconic</item>
+    <item>Giant</item>
+    <item>Infernal</item>
+    <item>Gnome</item>
+    <item>Sylvan</item>
+    <item>Gnoll</item>
+    <item>Orc</item>
+    <item>Halfling</item>
+    <item>Aquan</item>
+    <item>Auran</item>
+    <item>Ignan</item>
+    <item>Terran</item>
+  </object>
+  <object>
     <name>Rock Gnome</name>
     <item>Dwarven</item>
     <item>Elven</item>
@@ -499,5 +634,20 @@
     <item>Orc</item>
     <item>Gnome</item>
     <item>Sylvan</item>
+  </object>
+  <object>
+    <name>Yuan-ti Abomination</name>
+    <item>Draconic</item>
+    <item>Abyssal</item>
+  </object>
+  <object>
+    <name>Yuan-ti Halfblood</name>
+    <item>Draconic</item>
+    <item>Abyssal</item>
+  </object>
+  <object>
+    <name>Yuan-ti Pureblood</name>
+    <item>Draconic</item>
+    <item>Abyssal</item>
   </object>
 </items>

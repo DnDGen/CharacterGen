@@ -128,11 +128,11 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial.Base
         [TestCase(FeatConstants.Regeneration,
             FeatConstants.Regeneration,
             "",
-            5,
+            1,
             FeatConstants.Frequencies.Round,
             0,
             "",
-            0,
+            5,
             0, 0)]
         public override void RacialFeatData(string name, string feat, string focus, int frequencyQuantity, string frequencyTimePeriod, int minimumHitDiceRequirement, string sizeRequirement, int power, int maximumHitDiceRequirement, int requiredStatMinimumValue, params string[] minimumStats)
         {

@@ -1,5 +1,6 @@
 ﻿using CharacterGen.Abilities.Stats;
 using CharacterGen.Randomizers.Stats;
+using System;
 using System.Collections.Generic;
 
 namespace CharacterGen.Domain.Generators.Randomizers.Stats
@@ -17,24 +18,20 @@ namespace CharacterGen.Domain.Generators.Randomizers.Stats
 
         public Dictionary<string, Stat> Randomize()
         {
-            var stats = generator.Generate(() => RollStats(), s => StatsAreAllowed(s.Values));
-
-            if (stats != null)
-                return stats;
-
-            stats = InitializeStats();
-            foreach (var stat in stats.Values)
-                stat.Value = defaultValue;
+            var stats = generator.Generate(
+                () => RollStats(RollStat),
+                s => StatsAreAllowed(s.Values),
+                () => RollStats(() => defaultValue));
 
             return stats;
         }
 
-        private Dictionary<string, Stat> RollStats()
+        private Dictionary<string, Stat> RollStats(Func<int> roll)
         {
             var stats = InitializeStats();
 
             foreach (var stat in stats.Values)
-                stat.Value = RollStat();
+                stat.Value = roll();
 
             return stats;
         }

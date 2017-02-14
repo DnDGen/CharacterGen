@@ -44,6 +44,16 @@
   <object>
     <lower>49</lower>
     <content>Lightfoot Halfling</content>
+    <upper>56</upper>
+  </object>
+  <object>
+    <lower>57</lower>
+    <content>Gray Slaad</content>
+    <upper>57</upper>
+  </object>
+  <object>
+    <lower>58</lower>
+    <content>Azer</content>
     <upper>58</upper>
   </object>
   <object>

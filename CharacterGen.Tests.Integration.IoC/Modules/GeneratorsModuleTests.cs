@@ -173,13 +173,13 @@ namespace CharacterGen.Tests.Integration.IoC.Modules
         [Test]
         public void ClassNameRandomizerNamedHealerIsHealerClassNameRandomizer()
         {
-            AssertNamedIsInstanceOf<IClassNameRandomizer, HealerClassNameRandomizer>(ClassNameRandomizerTypeConstants.Healer);
+            AssertNamedIsInstanceOf<IClassNameRandomizer, DivineSpellcasterClassNameRandomizer>(ClassNameRandomizerTypeConstants.DivineSpellcaster);
         }
 
         [Test]
         public void ClassNameRandomizerNamedMageIsMageClassNameRandomizer()
         {
-            AssertNamedIsInstanceOf<IClassNameRandomizer, MageClassNameRandomizer>(ClassNameRandomizerTypeConstants.Mage);
+            AssertNamedIsInstanceOf<IClassNameRandomizer, ArcaneSpellcasterClassNameRandomizer>(ClassNameRandomizerTypeConstants.ArcaneSpellcaster);
         }
 
         [Test]
@@ -203,17 +203,17 @@ namespace CharacterGen.Tests.Integration.IoC.Modules
         [Test]
         public void ClassNameRandomizerNameWarriorIsWarriorClassNameRandomizer()
         {
-            AssertNamedIsInstanceOf<IClassNameRandomizer, WarriorClassNameRandomizer>(ClassNameRandomizerTypeConstants.Warrior);
+            AssertNamedIsInstanceOf<IClassNameRandomizer, PhysicalCombatClassNameRandomizer>(ClassNameRandomizerTypeConstants.PhysicalCombat);
         }
 
         [TestCase(ClassNameRandomizerTypeConstants.AnyPlayer)]
         [TestCase(ClassNameRandomizerTypeConstants.AnyNPC)]
-        [TestCase(ClassNameRandomizerTypeConstants.Healer)]
-        [TestCase(ClassNameRandomizerTypeConstants.Mage)]
+        [TestCase(ClassNameRandomizerTypeConstants.DivineSpellcaster)]
+        [TestCase(ClassNameRandomizerTypeConstants.ArcaneSpellcaster)]
         [TestCase(ClassNameRandomizerTypeConstants.NonSpellcaster)]
         [TestCase(ClassNameRandomizerTypeConstants.Spellcaster)]
         [TestCase(ClassNameRandomizerTypeConstants.Stealth)]
-        [TestCase(ClassNameRandomizerTypeConstants.Warrior)]
+        [TestCase(ClassNameRandomizerTypeConstants.PhysicalCombat)]
         public void ClassNameRandomizerIsNotBuiltAsSingleton(string name)
         {
             AssertNotSingleton<IClassNameRandomizer>(name);
@@ -284,15 +284,15 @@ namespace CharacterGen.Tests.Integration.IoC.Modules
         }
 
         [Test]
-        public void BaseRaceRandomizerNamedEvilIsEvilBaseRaceRandomizer()
+        public void BaseRaceRandomizerNamedMonsterIsMonsterBaseRaceRandomizer()
         {
-            AssertNamedIsInstanceOf<RaceRandomizer, EvilBaseRaceRandomizer>(RaceRandomizerTypeConstants.BaseRace.EvilBase);
+            AssertNamedIsInstanceOf<RaceRandomizer, MonsterBaseRaceRandomizer>(RaceRandomizerTypeConstants.BaseRace.MonsterBase);
         }
 
         [Test]
-        public void BaseRaceRandomizerNamedGoodIsGoodBaseRaceRandomizer()
+        public void BaseRaceRandomizerNamedNonMonsterIsNonMonsterBaseRaceRandomizer()
         {
-            AssertNamedIsInstanceOf<RaceRandomizer, GoodBaseRaceRandomizer>(RaceRandomizerTypeConstants.BaseRace.GoodBase);
+            AssertNamedIsInstanceOf<RaceRandomizer, NonMonsterBaseRaceRandomizer>(RaceRandomizerTypeConstants.BaseRace.NonMonsterBase);
         }
 
         [Test]
@@ -301,37 +301,9 @@ namespace CharacterGen.Tests.Integration.IoC.Modules
             AssertNamedIsInstanceOf<RaceRandomizer, StandardBaseRaceRandomizer>(RaceRandomizerTypeConstants.BaseRace.StandardBase);
         }
 
-        [Test]
-        public void BaseRaceRandomizerNamedNeutralIsNeutralBaseRaceRandomizer()
-        {
-            AssertNamedIsInstanceOf<RaceRandomizer, NeutralBaseRaceRandomizer>(RaceRandomizerTypeConstants.BaseRace.NeutralBase);
-        }
-
-        [Test]
-        public void BaseRaceRandomizerNamedNonEvilIsNonEvilBaseRaceRandomizer()
-        {
-            AssertNamedIsInstanceOf<RaceRandomizer, NonEvilBaseRaceRandomizer>(RaceRandomizerTypeConstants.BaseRace.NonEvilBase);
-        }
-
-        [Test]
-        public void BaseRaceRandomizerNamedNonGoodIsNonGoodBaseRaceRandomizer()
-        {
-            AssertNamedIsInstanceOf<RaceRandomizer, NonGoodBaseRaceRandomizer>(RaceRandomizerTypeConstants.BaseRace.NonGoodBase);
-        }
-
-        [Test]
-        public void BaseRaceRandomizerNamedNonNeutralIsNonNeutralBaseRaceRandomizer()
-        {
-            AssertNamedIsInstanceOf<RaceRandomizer, NonNeutralBaseRaceRandomizer>(RaceRandomizerTypeConstants.BaseRace.NonNeutralBase);
-        }
-
         [TestCase(RaceRandomizerTypeConstants.BaseRace.AnyBase)]
-        [TestCase(RaceRandomizerTypeConstants.BaseRace.EvilBase)]
-        [TestCase(RaceRandomizerTypeConstants.BaseRace.GoodBase)]
-        [TestCase(RaceRandomizerTypeConstants.BaseRace.NeutralBase)]
-        [TestCase(RaceRandomizerTypeConstants.BaseRace.NonEvilBase)]
-        [TestCase(RaceRandomizerTypeConstants.BaseRace.NonGoodBase)]
-        [TestCase(RaceRandomizerTypeConstants.BaseRace.NonNeutralBase)]
+        [TestCase(RaceRandomizerTypeConstants.BaseRace.MonsterBase)]
+        [TestCase(RaceRandomizerTypeConstants.BaseRace.NonMonsterBase)]
         [TestCase(RaceRandomizerTypeConstants.BaseRace.NonStandardBase)]
         [TestCase(RaceRandomizerTypeConstants.BaseRace.StandardBase)]
         public void BaseRaceRandomizerIsNotBuiltAsSingleton(string name)
@@ -360,52 +332,10 @@ namespace CharacterGen.Tests.Integration.IoC.Modules
         }
 
         [Test]
-        public void MetaraceRandomizerNamedEvilIsEvilMetaraceRandomizer()
-        {
-            AssertNamedIsInstanceOf<IForcableMetaraceRandomizer, EvilMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.EvilMeta);
-            AssertNamedIsInstanceOf<RaceRandomizer, EvilMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.EvilMeta);
-        }
-
-        [Test]
-        public void MetaraceRandomizerNamedGoodIsGoodMetaraceRandomizer()
-        {
-            AssertNamedIsInstanceOf<IForcableMetaraceRandomizer, GoodMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.GoodMeta);
-            AssertNamedIsInstanceOf<RaceRandomizer, GoodMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.GoodMeta);
-        }
-
-        [Test]
         public void MetaraceRandomizerNamedLycanthropeIsLycanthropeMetaraceRandomizer()
         {
             AssertNamedIsInstanceOf<IForcableMetaraceRandomizer, LycanthropeMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.LycanthropeMeta);
             AssertNamedIsInstanceOf<RaceRandomizer, LycanthropeMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.LycanthropeMeta);
-        }
-
-        [Test]
-        public void MetaraceRandomizerNamedNeutralIsNeutralMetaraceRandomizer()
-        {
-            AssertNamedIsInstanceOf<IForcableMetaraceRandomizer, NeutralMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.NeutralMeta);
-            AssertNamedIsInstanceOf<RaceRandomizer, NeutralMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.NeutralMeta);
-        }
-
-        [Test]
-        public void MetaraceRandomizerNamedNonEvilIsNonEvilMetaraceRandomizer()
-        {
-            AssertNamedIsInstanceOf<IForcableMetaraceRandomizer, NonEvilMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.NonEvilMeta);
-            AssertNamedIsInstanceOf<RaceRandomizer, NonEvilMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.NonEvilMeta);
-        }
-
-        [Test]
-        public void MetaraceRandomizerNamedNonGoodIsNonGoodMetaraceRandomizer()
-        {
-            AssertNamedIsInstanceOf<IForcableMetaraceRandomizer, NonGoodMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.NonGoodMeta);
-            AssertNamedIsInstanceOf<RaceRandomizer, NonGoodMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.NonGoodMeta);
-        }
-
-        [Test]
-        public void MetaraceRandomizerNamedNonNeutralIsNonNeutralMetaraceRandomizer()
-        {
-            AssertNamedIsInstanceOf<IForcableMetaraceRandomizer, NonNeutralMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.NonNeutralMeta);
-            AssertNamedIsInstanceOf<RaceRandomizer, NonNeutralMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.NonNeutralMeta);
         }
 
         [Test]
@@ -422,14 +352,8 @@ namespace CharacterGen.Tests.Integration.IoC.Modules
         }
 
         [TestCase(RaceRandomizerTypeConstants.Metarace.AnyMeta)]
-        [TestCase(RaceRandomizerTypeConstants.Metarace.EvilMeta)]
         [TestCase(RaceRandomizerTypeConstants.Metarace.GeneticMeta)]
-        [TestCase(RaceRandomizerTypeConstants.Metarace.GoodMeta)]
         [TestCase(RaceRandomizerTypeConstants.Metarace.LycanthropeMeta)]
-        [TestCase(RaceRandomizerTypeConstants.Metarace.NeutralMeta)]
-        [TestCase(RaceRandomizerTypeConstants.Metarace.NonEvilMeta)]
-        [TestCase(RaceRandomizerTypeConstants.Metarace.NonGoodMeta)]
-        [TestCase(RaceRandomizerTypeConstants.Metarace.NonNeutralMeta)]
         [TestCase(RaceRandomizerTypeConstants.Metarace.UndeadMeta)]
         public void MetaraceRandomizerIsNotBuiltAsSingleton(string name)
         {

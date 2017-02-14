@@ -54,6 +54,16 @@
   <object>
     <lower>49</lower>
     <content>Human</content>
+    <upper>91</upper>
+  </object>
+  <object>
+    <lower>92</lower>
+    <content>Green Slaad</content>
+    <upper>92</upper>
+  </object>
+  <object>
+    <lower>93</lower>
+    <content>Gray Slaad</content>
     <upper>94</upper>
   </object>
   <object>

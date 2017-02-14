@@ -24,7 +24,7 @@
                 public const string ProhibitedFieldQuantities = "ProhibitedFieldQuantities";
                 public const string RacialBaseAttackAdjustments = "RacialBaseAttackAdjustments";
                 public const string SizeModifiers = "SizeModifiers";
-                public const string SkillPointsForClasses = "SkillPointsForClasses";
+                public const string SkillPoints = "SkillPoints";
                 public const string SpecialistFieldQuantities = "SpecialistFieldQuantities";
             }
 
@@ -32,7 +32,7 @@
             {
                 public const string AdditionalFeatData = "AdditionalFeatData";
                 public const string AlignmentGroups = "AlignmentGroups";
-                public const string Animals = "Animals";
+                public const string AnimalGroups = "AnimalGroups";
                 public const string ArmorClassModifiers = "ArmorClassModifiers";
                 public const string AutomaticLanguages = "AutomaticLanguages";
                 public const string BaseRaceGroups = "BaseRaceGroups";

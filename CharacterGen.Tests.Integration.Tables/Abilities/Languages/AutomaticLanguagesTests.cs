@@ -18,48 +18,40 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Languages
         [Test]
         public override void CollectionNames()
         {
-            var names = new[]
-            {
-                RaceConstants.Metaraces.HalfCelestial,
-                RaceConstants.Metaraces.HalfDragon,
-                RaceConstants.Metaraces.HalfFiend,
-                RaceConstants.Metaraces.Werebear,
-                RaceConstants.Metaraces.Wereboar,
-                RaceConstants.Metaraces.Wererat,
-                RaceConstants.Metaraces.Weretiger,
-                RaceConstants.Metaraces.Werewolf,
-                RaceConstants.Metaraces.None,
-                RaceConstants.Metaraces.Ghost,
-                RaceConstants.Metaraces.Lich,
-                RaceConstants.Metaraces.Vampire,
-                CharacterClassConstants.Barbarian,
-                CharacterClassConstants.Bard,
-                CharacterClassConstants.Cleric,
-                CharacterClassConstants.Druid,
-                CharacterClassConstants.Fighter,
-                CharacterClassConstants.Monk,
-                CharacterClassConstants.Paladin,
-                CharacterClassConstants.Ranger,
-                CharacterClassConstants.Rogue,
-                CharacterClassConstants.Sorcerer,
-                CharacterClassConstants.Wizard,
-                CharacterClassConstants.Adept,
-                CharacterClassConstants.Aristocrat,
-                CharacterClassConstants.Commoner,
-                CharacterClassConstants.Expert,
-                CharacterClassConstants.Warrior
-            };
-
             var baseRaceGroups = CollectionsMapper.Map(TableNameConstants.Set.Collection.BaseRaceGroups);
-            var allBaseRaces = baseRaceGroups[GroupConstants.All];
-            names = names.Union(allBaseRaces).ToArray();
+            var metaraceGroups = CollectionsMapper.Map(TableNameConstants.Set.Collection.MetaraceGroups);
+            var classes = CollectionsMapper.Map(TableNameConstants.Set.Collection.ClassNameGroups);
+
+            var names = classes[GroupConstants.All].Union(baseRaceGroups[GroupConstants.All]).Union(metaraceGroups[GroupConstants.All]);
 
             AssertCollectionNames(names);
         }
 
+        [TestCase(CharacterClassConstants.Adept)]
+        [TestCase(CharacterClassConstants.Aristocrat)]
+        [TestCase(CharacterClassConstants.Barbarian)]
+        [TestCase(CharacterClassConstants.Bard)]
+        [TestCase(CharacterClassConstants.Cleric)]
+        [TestCase(CharacterClassConstants.Commoner)]
+        [TestCase(CharacterClassConstants.Druid,
+            LanguageConstants.Special.Druidic)]
+        [TestCase(CharacterClassConstants.Expert)]
+        [TestCase(CharacterClassConstants.Fighter)]
+        [TestCase(CharacterClassConstants.Monk)]
+        [TestCase(CharacterClassConstants.Paladin)]
+        [TestCase(CharacterClassConstants.Ranger)]
+        [TestCase(CharacterClassConstants.Rogue)]
+        [TestCase(CharacterClassConstants.Sorcerer)]
+        [TestCase(CharacterClassConstants.Warrior)]
+        [TestCase(CharacterClassConstants.Wizard)]
         [TestCase(RaceConstants.BaseRaces.Aasimar,
             LanguageConstants.Common,
             LanguageConstants.Celestial)]
+        [TestCase(RaceConstants.BaseRaces.Azer,
+            LanguageConstants.Common,
+            LanguageConstants.Ignan)]
+        [TestCase(RaceConstants.BaseRaces.BlueSlaad,
+            LanguageConstants.Special.Slaad)]
         [TestCase(RaceConstants.BaseRaces.Bugbear,
             LanguageConstants.Common,
             LanguageConstants.Goblin)]
@@ -69,6 +61,9 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Languages
         [TestCase(RaceConstants.BaseRaces.CloudGiant,
             LanguageConstants.Common,
             LanguageConstants.Giant)]
+        [TestCase(RaceConstants.BaseRaces.DeathSlaad,
+            LanguageConstants.Special.Slaad,
+            LanguageConstants.Common)]
         [TestCase(RaceConstants.BaseRaces.DeepDwarf,
             LanguageConstants.Common,
             LanguageConstants.Dwarven)]
@@ -89,6 +84,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Languages
             LanguageConstants.Common,
             LanguageConstants.Dwarven,
             LanguageConstants.Undercommon)]
+        [TestCase(RaceConstants.BaseRaces.Gargoyle,
+            LanguageConstants.Common)]
         [TestCase(RaceConstants.BaseRaces.Gnoll,
             LanguageConstants.Gnoll)]
         [TestCase(RaceConstants.BaseRaces.Goblin,
@@ -97,7 +94,14 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Languages
         [TestCase(RaceConstants.BaseRaces.GrayElf,
             LanguageConstants.Common,
             LanguageConstants.Elven)]
+        [TestCase(RaceConstants.BaseRaces.GraySlaad,
+            LanguageConstants.Special.Slaad,
+            LanguageConstants.Common)]
+        [TestCase(RaceConstants.BaseRaces.GreenSlaad,
+            LanguageConstants.Special.Slaad,
+            LanguageConstants.Common)]
         [TestCase(RaceConstants.BaseRaces.Grimlock,
+            LanguageConstants.Special.Grimlock,
             LanguageConstants.Common)]
         [TestCase(RaceConstants.BaseRaces.FireGiant,
             LanguageConstants.Common,
@@ -135,6 +139,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Languages
         [TestCase(RaceConstants.BaseRaces.Hobgoblin,
             LanguageConstants.Common,
             LanguageConstants.Goblin)]
+        [TestCase(RaceConstants.BaseRaces.HoundArchon,
+            LanguageConstants.Celestial)]
         [TestCase(RaceConstants.BaseRaces.Human,
             LanguageConstants.Common)]
         [TestCase(RaceConstants.BaseRaces.Janni,
@@ -171,6 +177,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Languages
         [TestCase(RaceConstants.BaseRaces.Rakshasa,
             LanguageConstants.Common,
             LanguageConstants.Infernal)]
+        [TestCase(RaceConstants.BaseRaces.RedSlaad,
+            LanguageConstants.Special.Slaad)]
         [TestCase(RaceConstants.BaseRaces.RockGnome,
             LanguageConstants.Common,
             LanguageConstants.Gnome)]
@@ -204,34 +212,28 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Languages
         [TestCase(RaceConstants.BaseRaces.WoodElf,
             LanguageConstants.Common,
             LanguageConstants.Elven)]
+        [TestCase(RaceConstants.BaseRaces.YuanTiAbomination,
+            LanguageConstants.Special.YuanTi,
+            LanguageConstants.Common)]
+        [TestCase(RaceConstants.BaseRaces.YuanTiHalfblood,
+            LanguageConstants.Special.YuanTi,
+            LanguageConstants.Common)]
+        [TestCase(RaceConstants.BaseRaces.YuanTiPureblood,
+            LanguageConstants.Special.YuanTi,
+            LanguageConstants.Common)]
+        [TestCase(RaceConstants.Metaraces.Ghost)]
+        [TestCase(RaceConstants.Metaraces.Lich,
+            LanguageConstants.Common)]
+        [TestCase(RaceConstants.Metaraces.Mummy,
+            LanguageConstants.Common)]
+        [TestCase(RaceConstants.Metaraces.None)]
+        [TestCase(RaceConstants.Metaraces.Vampire)]
         [TestCase(RaceConstants.Metaraces.Werebear)]
         [TestCase(RaceConstants.Metaraces.Wereboar)]
         [TestCase(RaceConstants.Metaraces.Wererat)]
         [TestCase(RaceConstants.Metaraces.Weretiger)]
         [TestCase(RaceConstants.Metaraces.Werewolf)]
-        [TestCase(RaceConstants.Metaraces.None)]
-        [TestCase(RaceConstants.Metaraces.Ghost)]
-        [TestCase(RaceConstants.Metaraces.Lich,
-            LanguageConstants.Common)]
-        [TestCase(RaceConstants.Metaraces.Vampire)]
-        [TestCase(CharacterClassConstants.Barbarian)]
-        [TestCase(CharacterClassConstants.Bard)]
-        [TestCase(CharacterClassConstants.Cleric)]
-        [TestCase(CharacterClassConstants.Druid,
-            LanguageConstants.Druidic)]
-        [TestCase(CharacterClassConstants.Fighter)]
-        [TestCase(CharacterClassConstants.Monk)]
-        [TestCase(CharacterClassConstants.Paladin)]
-        [TestCase(CharacterClassConstants.Ranger)]
-        [TestCase(CharacterClassConstants.Rogue)]
-        [TestCase(CharacterClassConstants.Sorcerer)]
-        [TestCase(CharacterClassConstants.Wizard)]
-        [TestCase(CharacterClassConstants.Adept)]
-        [TestCase(CharacterClassConstants.Aristocrat)]
-        [TestCase(CharacterClassConstants.Commoner)]
-        [TestCase(CharacterClassConstants.Expert)]
-        [TestCase(CharacterClassConstants.Warrior)]
-        public override void DistinctCollection(string name, params string[] languages)
+        public void AutomaticLanguages(string name, params string[] languages)
         {
             base.DistinctCollection(name, languages);
         }

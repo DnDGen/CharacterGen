@@ -9,6 +9,11 @@
   <object>
     <lower>11</lower>
     <content>Hill Dwarf</content>
+    <upper>27</upper>
+  </object>
+  <object>
+    <lower>28</lower>
+    <content>Azer</content>
     <upper>29</upper>
   </object>
   <object>
@@ -49,6 +54,26 @@
   <object>
     <lower>59</lower>
     <content>Human</content>
+    <upper>93</upper>
+  </object>
+  <object>
+    <lower>94</lower>
+    <content>Red Slaad</content>
+    <upper>94</upper>
+  </object>
+  <object>
+    <lower>95</lower>
+    <content>Blue Slaad</content>
+    <upper>95</upper>
+  </object>
+  <object>
+    <lower>96</lower>
+    <content>Green Slaad</content>
+    <upper>96</upper>
+  </object>
+  <object>
+    <lower>97</lower>
+    <content>Gray Slaad</content>
     <upper>97</upper>
   </object>
   <object>

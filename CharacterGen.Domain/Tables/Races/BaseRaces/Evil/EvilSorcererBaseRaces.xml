@@ -64,6 +64,26 @@
   <object>
     <lower>76</lower>
     <content>Kobold</content>
+    <upper>83</upper>
+  </object>
+  <object>
+    <lower>84</lower>
+    <content>Death Slaad</content>
+    <upper>84</upper>
+  </object>
+  <object>
+    <lower>85</lower>
+    <content>Yuan-ti Pureblood</content>
+    <upper>85</upper>
+  </object>
+  <object>
+    <lower>86</lower>
+    <content>Yuan-ti Halfblood</content>
+    <upper>86</upper>
+  </object>
+  <object>
+    <lower>87</lower>
+    <content>Yuan-ti Abomination</content>
     <upper>87</upper>
   </object>
   <object>

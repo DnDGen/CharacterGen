@@ -13,18 +13,19 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
             get
             {
                 return new[] {
+                    RaceConstants.Metaraces.Ghost,
                     RaceConstants.Metaraces.HalfCelestial,
                     RaceConstants.Metaraces.HalfDragon,
                     RaceConstants.Metaraces.HalfFiend,
+                    RaceConstants.Metaraces.Lich,
+                    RaceConstants.Metaraces.Mummy,
+                    RaceConstants.Metaraces.None,
+                    RaceConstants.Metaraces.Vampire,
                     RaceConstants.Metaraces.Werebear,
                     RaceConstants.Metaraces.Wereboar,
                     RaceConstants.Metaraces.Wererat,
                     RaceConstants.Metaraces.Weretiger,
                     RaceConstants.Metaraces.Werewolf,
-                    RaceConstants.Metaraces.Ghost,
-                    RaceConstants.Metaraces.Lich,
-                    RaceConstants.Metaraces.Vampire,
-                    RaceConstants.Metaraces.None
                 };
             }
         }
@@ -36,7 +37,7 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
         }
 
         [Test]
-        public void StressMetarace()
+        public void StressAnyMetarace()
         {
             Stress(AssertMetarace);
         }

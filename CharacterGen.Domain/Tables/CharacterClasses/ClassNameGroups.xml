@@ -21,20 +21,6 @@
     <item>Wizard</item>
   </object>
   <object>
-    <name>Healers</name>
-    <item>Cleric</item>
-    <item>Druid</item>
-    <item>Paladin</item>
-    <item>Ranger</item>
-    <item>Bard</item>
-    <item>Adept</item>
-  </object>
-  <object>
-    <name>Mages</name>
-    <item>Sorcerer</item>
-    <item>Wizard</item>
-  </object>
-  <object>
     <name>Spellcasters</name>
     <item>Bard</item>
     <item>Cleric</item>
@@ -74,7 +60,7 @@
     <item>Ranger</item>
   </object>
   <object>
-    <name>Warriors</name>
+    <name>Physical Combat</name>
     <item>Fighter</item>
     <item>Monk</item>
     <item>Paladin</item>

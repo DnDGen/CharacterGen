@@ -1,7 +1,6 @@
 ﻿using CharacterGen.Alignments;
 using CharacterGen.Domain.Tables;
 using NUnit.Framework;
-using System;
 
 namespace CharacterGen.Tests.Integration.Tables.Alignments
 {
@@ -29,8 +28,11 @@ namespace CharacterGen.Tests.Integration.Tables.Alignments
                 AlignmentConstants.ChaoticNeutral,
                 AlignmentConstants.LawfulEvil,
                 AlignmentConstants.NeutralEvil,
-                AlignmentConstants.ChaoticEvil
+                AlignmentConstants.ChaoticEvil,
+                GroupConstants.All,
             };
+
+            AssertCollectionNames(names);
         }
 
         [TestCase(AlignmentConstants.LawfulGood,
@@ -91,7 +93,17 @@ namespace CharacterGen.Tests.Integration.Tables.Alignments
             AlignmentConstants.ChaoticEvil,
             AlignmentConstants.ChaoticNeutral,
             AlignmentConstants.TrueNeutral)]
-        public override void DistinctCollection(String name, params String[] collection)
+        [TestCase(GroupConstants.All,
+            AlignmentConstants.LawfulGood,
+            AlignmentConstants.NeutralGood,
+            AlignmentConstants.ChaoticGood,
+            AlignmentConstants.LawfulNeutral,
+            AlignmentConstants.TrueNeutral,
+            AlignmentConstants.ChaoticNeutral,
+            AlignmentConstants.LawfulEvil,
+            AlignmentConstants.NeutralEvil,
+            AlignmentConstants.ChaoticEvil)]
+        public void AlignmentGroup(string name, params string[] collection)
         {
             base.DistinctCollection(name, collection);
         }

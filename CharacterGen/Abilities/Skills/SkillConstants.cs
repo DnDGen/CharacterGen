@@ -19,6 +19,7 @@
         public const string Hide = "Hide";
         public const string Intimidate = "Intimidate";
         public const string Jump = "Jump";
+        public const string Knowledge = "Knowledge";
         public const string KnowledgeArcana = "Knowledge (Arcana)";
         public const string KnowledgeArchitectureAndEngineering = "Knowledge (Architecture and Engineering)";
         public const string KnowledgeDungeoneering = "Knowledge (Dungeoneering)";

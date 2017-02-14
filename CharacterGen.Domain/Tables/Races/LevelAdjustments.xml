@@ -2,16 +2,24 @@
 
 <items>
   <object>
-    <name>Aasimar</name>
+    <name></name>
     <item>0</item>
   </object>
   <object>
+    <name>Aasimar</name>
+    <item>1</item>
+  </object>
+  <object>
     <name>Air Mephit</name>
-    <item>-6</item>
+    <item>6</item>
   </object>
   <object>
     <name>Ape</name>
-    <item>-3</item>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Azer</name>
+    <item>4</item>
   </object>
   <object>
     <name>Badger</name>
@@ -23,19 +31,23 @@
   </object>
   <object>
     <name>Bison</name>
-    <item>-3</item>
+    <item>3</item>
   </object>
   <object>
     <name>Black Bear</name>
-    <item>-3</item>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Blue Slaad</name>
+    <item>6</item>
   </object>
   <object>
     <name>Boar</name>
-    <item>-3</item>
+    <item>3</item>
   </object>
   <object>
     <name>Brown Bear</name>
-    <item>-6</item>
+    <item>6</item>
   </object>
   <object>
     <name>Bugbear</name>
@@ -51,43 +63,43 @@
   </object>
   <object>
     <name>Celestial Bat</name>
-    <item>-2</item>
+    <item>2</item>
   </object>
   <object>
     <name>Celestial Cat</name>
-    <item>-2</item>
+    <item>2</item>
   </object>
   <object>
     <name>Celestial Hawk</name>
-    <item>-2</item>
+    <item>2</item>
   </object>
   <object>
     <name>Celestial Lizard</name>
-    <item>-2</item>
+    <item>2</item>
   </object>
   <object>
     <name>Celestial Owl</name>
-    <item>-2</item>
+    <item>2</item>
   </object>
   <object>
     <name>Celestial Rat</name>
-    <item>-2</item>
+    <item>2</item>
   </object>
   <object>
     <name>Celestial Raven</name>
-    <item>-2</item>
+    <item>2</item>
   </object>
   <object>
     <name>Celestial Tiny Viper Snake</name>
-    <item>-2</item>
+    <item>2</item>
   </object>
   <object>
     <name>Celestial Toad</name>
-    <item>-2</item>
+    <item>2</item>
   </object>
   <object>
     <name>Celestial Weasel</name>
-    <item>-2</item>
+    <item>2</item>
   </object>
   <object>
     <name>Centaur</name>
@@ -95,7 +107,7 @@
   </object>
   <object>
     <name>Cheetah</name>
-    <item>-3</item>
+    <item>3</item>
   </object>
   <object>
     <name>Cloud Giant</name>
@@ -103,11 +115,15 @@
   </object>
   <object>
     <name>Constrictor Snake</name>
-    <item>-3</item>
+    <item>3</item>
+  </object>
+  <object>
+    <name>Death Slaad</name>
+    <item>6</item>
   </object>
   <object>
     <name>Deinonychus</name>
-    <item>-6</item>
+    <item>6</item>
   </object>
   <object>
     <name>Derro</name>
@@ -123,43 +139,43 @@
   </object>
   <object>
     <name>Dire Ape</name>
-    <item>-6</item>
+    <item>6</item>
   </object>
   <object>
     <name>Dire Badger</name>
-    <item>-3</item>
+    <item>3</item>
   </object>
   <object>
     <name>Dire Bat</name>
-    <item>-3</item>
+    <item>3</item>
   </object>
   <object>
     <name>Dire Bear</name>
-    <item>-12</item>
+    <item>12</item>
   </object>
   <object>
     <name>Dire Boar</name>
-    <item>-6</item>
+    <item>6</item>
   </object>
   <object>
     <name>Dire Lion</name>
-    <item>-9</item>
+    <item>9</item>
   </object>
   <object>
     <name>Dire Tiger</name>
-    <item>-15</item>
+    <item>15</item>
   </object>
   <object>
     <name>Dire Weasel</name>
-    <item>-3</item>
+    <item>3</item>
   </object>
   <object>
     <name>Dire Wolf</name>
-    <item>-6</item>
+    <item>6</item>
   </object>
   <object>
     <name>Dire Wolverine</name>
-    <item>-6</item>
+    <item>6</item>
   </object>
   <object>
     <name>Dire Rat</name>
@@ -175,7 +191,7 @@
   </object>
   <object>
     <name>Drow</name>
-    <item>1</item>
+    <item>2</item>
   </object>
   <object>
     <name>Duergar Dwarf</name>
@@ -183,7 +199,7 @@
   </object>
   <object>
     <name>Dust Mephit</name>
-    <item>-6</item>
+    <item>6</item>
   </object>
   <object>
     <name>Eagle</name>
@@ -191,51 +207,51 @@
   </object>
   <object>
     <name>Earth Mephit</name>
-    <item>-6</item>
+    <item>6</item>
   </object>
   <object>
     <name>Elephant</name>
-    <item>-12</item>
+    <item>12</item>
   </object>
   <object>
     <name>Fiendish Bat</name>
-    <item>-2</item>
+    <item>2</item>
   </object>
   <object>
     <name>Fiendish Cat</name>
-    <item>-2</item>
+    <item>2</item>
   </object>
   <object>
     <name>Fiendish Hawk</name>
-    <item>-2</item>
+    <item>2</item>
   </object>
   <object>
     <name>Fiendish Lizard</name>
-    <item>-2</item>
+    <item>2</item>
   </object>
   <object>
     <name>Fiendish Owl</name>
-    <item>-2</item>
+    <item>2</item>
   </object>
   <object>
     <name>Fiendish Rat</name>
-    <item>-2</item>
+    <item>2</item>
   </object>
   <object>
     <name>Fiendish Raven</name>
-    <item>-2</item>
+    <item>2</item>
   </object>
   <object>
     <name>Fiendish Tiny Viper Snake</name>
-    <item>-2</item>
+    <item>2</item>
   </object>
   <object>
     <name>Fiendish Toad</name>
-    <item>-2</item>
+    <item>2</item>
   </object>
   <object>
     <name>Fiendish Weasel</name>
-    <item>-2</item>
+    <item>2</item>
   </object>
   <object>
     <name>Fire Giant</name>
@@ -243,7 +259,7 @@
   </object>
   <object>
     <name>Fire Mephit</name>
-    <item>-6</item>
+    <item>6</item>
   </object>
   <object>
     <name>Forest Gnome</name>
@@ -251,11 +267,15 @@
   </object>
   <object>
     <name>Formian Worker</name>
-    <item>-6</item>
+    <item>6</item>
   </object>
   <object>
     <name>Frost Giant</name>
     <item>4</item>
+  </object>
+  <object>
+    <name>Gargoyle</name>
+    <item>5</item>
   </object>
   <object>
     <name>Ghost</name>
@@ -263,7 +283,7 @@
   </object>
   <object>
     <name>Giant Constrictor Snake</name>
-    <item>-9</item>
+    <item>9</item>
   </object>
   <object>
     <name>Gnoll</name>
@@ -276,6 +296,14 @@
   <object>
     <name>Gray Elf</name>
     <item>0</item>
+  </object>
+  <object>
+    <name>Gray Slaad</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Green Slaad</name>
+    <item>6</item>
   </object>
   <object>
     <name>Grimlock</name>
@@ -315,7 +343,7 @@
   </object>
   <object>
     <name>Heavy Warhorse</name>
-    <item>-4</item>
+    <item>4</item>
   </object>
   <object>
     <name>High Elf</name>
@@ -335,11 +363,15 @@
   </object>
   <object>
     <name>Homonculus</name>
-    <item>-6</item>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Hound Archon</name>
+    <item>5</item>
   </object>
   <object>
     <name>Huge Viper Snake</name>
-    <item>-6</item>
+    <item>6</item>
   </object>
   <object>
     <name>Human</name>
@@ -347,11 +379,11 @@
   </object>
   <object>
     <name>Ice Mephit</name>
-    <item>-6</item>
+    <item>6</item>
   </object>
   <object>
     <name>Imp</name>
-    <item>-6</item>
+    <item>6</item>
   </object>
   <object>
     <name>Janni</name>
@@ -363,11 +395,11 @@
   </object>
   <object>
     <name>Large Viper Snake</name>
-    <item>-3</item>
+    <item>3</item>
   </object>
   <object>
     <name>Leopard</name>
-    <item>-3</item>
+    <item>3</item>
   </object>
   <object>
     <name>Lich</name>
@@ -383,7 +415,7 @@
   </object>
   <object>
     <name>Lion</name>
-    <item>-6</item>
+    <item>6</item>
   </object>
   <object>
     <name>Lizard</name>
@@ -395,7 +427,7 @@
   </object>
   <object>
     <name>Magma Mephit</name>
-    <item>-6</item>
+    <item>6</item>
   </object>
   <object>
     <name>Medium Viper Snake</name>
@@ -403,7 +435,7 @@
   </object>
   <object>
     <name>Megaraptor</name>
-    <item>-9</item>
+    <item>9</item>
   </object>
   <object>
     <name>Mind Flayer</name>
@@ -415,10 +447,14 @@
   </object>
   <object>
     <name>Monitor Lizard</name>
-    <item>-3</item>
+    <item>3</item>
   </object>
   <object>
     <name>Mountain Dwarf</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Mummy</name>
     <item>0</item>
   </object>
   <object>
@@ -431,7 +467,7 @@
   </object>
   <object>
     <name>Ooze Mephit</name>
-    <item>-6</item>
+    <item>6</item>
   </object>
   <object>
     <name>Orc</name>
@@ -447,7 +483,7 @@
   </object>
   <object>
     <name>Polar Bear</name>
-    <item>-9</item>
+    <item>9</item>
   </object>
   <object>
     <name>Pony</name>
@@ -455,11 +491,11 @@
   </object>
   <object>
     <name>Pseudodragon</name>
-    <item>-6</item>
+    <item>6</item>
   </object>
   <object>
     <name>Quasit</name>
-    <item>-6</item>
+    <item>6</item>
   </object>
   <object>
     <name>Rakshasa</name>
@@ -474,8 +510,12 @@
     <item>0</item>
   </object>
   <object>
+    <name>Red Slaad</name>
+    <item>6</item>
+  </object>
+  <object>
     <name>Rhinoceras</name>
-    <item>-6</item>
+    <item>6</item>
   </object>
   <object>
     <name>Riding Dog</name>
@@ -487,7 +527,7 @@
   </object>
   <object>
     <name>Salt Mephit</name>
-    <item>-6</item>
+    <item>6</item>
   </object>
   <object>
     <name>Satyr</name>
@@ -499,23 +539,23 @@
   </object>
   <object>
     <name>Shocker Lizard</name>
-    <item>-4</item>
+    <item>4</item>
   </object>
   <object>
     <name>Small Air Elemental</name>
-    <item>-4</item>
+    <item>4</item>
   </object>
   <object>
     <name>Small Earth Elemental</name>
-    <item>-4</item>
+    <item>4</item>
   </object>
   <object>
     <name>Small Fire Elemental</name>
-    <item>-4</item>
+    <item>4</item>
   </object>
   <object>
     <name>Small Water Elemental</name>
-    <item>-4</item>
+    <item>4</item>
   </object>
   <object>
     <name>Small Viper Snake</name>
@@ -523,11 +563,11 @@
   </object>
   <object>
     <name>Steam Mephit</name>
-    <item>-6</item>
+    <item>6</item>
   </object>
   <object>
     <name>Stirge</name>
-    <item>-4</item>
+    <item>4</item>
   </object>
   <object>
     <name>Stone Giant</name>
@@ -539,7 +579,7 @@
   </object>
   <object>
     <name>Svirfneblin</name>
-    <item>1</item>
+    <item>3</item>
   </object>
   <object>
     <name>Tallfellow Halfling</name>
@@ -547,11 +587,11 @@
   </object>
   <object>
     <name>Tiefling</name>
-    <item>0</item>
+    <item>1</item>
   </object>
   <object>
     <name>Tiger</name>
-    <item>-6</item>
+    <item>6</item>
   </object>
   <object>
     <name>Tiny Viper Snake</name>
@@ -563,7 +603,7 @@
   </object>
   <object>
     <name>Triceratops</name>
-    <item>-15</item>
+    <item>15</item>
   </object>
   <object>
     <name>Troglodyte</name>
@@ -575,7 +615,7 @@
   </object>
   <object>
     <name>Tyrannosaurus</name>
-    <item>-15</item>
+    <item>15</item>
   </object>
   <object>
     <name>Vampire</name>
@@ -583,11 +623,11 @@
   </object>
   <object>
     <name>Water Mephit</name>
-    <item>-6</item>
+    <item>6</item>
   </object>
   <object>
     <name>Warpony</name>
-    <item>-4</item>
+    <item>4</item>
   </object>
   <object>
     <name>Weasel</name>
@@ -623,14 +663,22 @@
   </object>
   <object>
     <name>Wolverine</name>
-    <item>-3</item>
+    <item>3</item>
   </object>
   <object>
     <name>Wood Elf</name>
     <item>0</item>
   </object>
   <object>
-    <name></name>
-    <item>0</item>
+    <name>Yuan-ti Abomination</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Yuan-ti Halfblood</name>
+    <item>5</item>
+  </object>
+  <object>
+    <name>Yuan-ti Pureblood</name>
+    <item>2</item>
   </object>
 </items>

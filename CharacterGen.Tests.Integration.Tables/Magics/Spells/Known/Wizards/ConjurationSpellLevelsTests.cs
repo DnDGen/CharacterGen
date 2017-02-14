@@ -137,7 +137,7 @@ namespace CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizards
         [TestCase(SpellConstants.Refuge, 9)]
         [TestCase(SpellConstants.SummonMonsterIX, 9)]
         [TestCase(SpellConstants.TeleportationCircle, 9)]
-        public override void Adjustment(string name, int adjustment)
+        public void SpellLevel(string name, int adjustment)
         {
             base.Adjustment(name, adjustment);
         }

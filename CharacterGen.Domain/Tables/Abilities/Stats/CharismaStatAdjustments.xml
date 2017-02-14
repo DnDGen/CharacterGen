@@ -2,8 +2,20 @@
 
 <items>
   <object>
+    <name></name>
+    <item>0</item>
+  </object>
+  <object>
     <name>Aasimar</name>
     <item>2</item>
+  </object>
+  <object>
+    <name>Azer</name>
+    <item>-2</item>
+  </object>
+  <object>
+    <name>Blue Slaad</name>
+    <item>0</item>
   </object>
   <object>
     <name>Bugbear</name>
@@ -16,6 +28,10 @@
   <object>
     <name>Cloud Giant</name>
     <item>2</item>
+  </object>
+  <object>
+    <name>Death Slaad</name>
+    <item>8</item>
   </object>
   <object>
     <name>Derro</name>
@@ -54,6 +70,10 @@
     <item>0</item>
   </object>
   <object>
+    <name>Gargoyle</name>
+    <item>-4</item>
+  </object>
+  <object>
     <name>Ghost</name>
     <item>4</item>
   </object>
@@ -68,6 +88,14 @@
   <object>
     <name>Gray Elf</name>
     <item>0</item>
+  </object>
+  <object>
+    <name>Gray Slaad</name>
+    <item>4</item>
+  </object>
+  <object>
+    <name>Green Slaad</name>
+    <item>2</item>
   </object>
   <object>
     <name>Grimlock</name>
@@ -114,6 +142,10 @@
     <item>0</item>
   </object>
   <object>
+    <name>Hound Archon</name>
+    <item>2</item>
+  </object>
+  <object>
     <name>Human</name>
     <item>0</item>
   </object>
@@ -150,6 +182,10 @@
     <item>-2</item>
   </object>
   <object>
+    <name>Mummy</name>
+    <item>4</item>
+  </object>
+  <object>
     <name>Ogre Mage</name>
     <item>6</item>
   </object>
@@ -168,6 +204,10 @@
   <object>
     <name>Rakshasa</name>
     <item>6</item>
+  </object>
+  <object>
+    <name>Red Slaad</name>
+    <item>-2</item>
   </object>
   <object>
     <name>Rock Gnome</name>
@@ -242,7 +282,15 @@
     <item>0</item>
   </object>
   <object>
-    <name></name>
-    <item>0</item>
+    <name>Yuan-ti Abomination</name>
+    <item>8</item>
+  </object>
+  <object>
+    <name>Yuan-ti Halfblood</name>
+    <item>6</item>
+  </object>
+  <object>
+    <name>Yuan-ti Pureblood</name>
+    <item>2</item>
   </object>
 </items>

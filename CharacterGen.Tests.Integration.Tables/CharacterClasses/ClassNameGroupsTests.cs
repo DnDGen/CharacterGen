@@ -20,14 +20,16 @@ namespace CharacterGen.Tests.Integration.Tables.CharacterClasses
         {
             var names = new[]
             {
-                GroupConstants.Healers,
-                GroupConstants.Mages,
+                GroupConstants.All,
+                GroupConstants.AverageBaseAttack,
+                GroupConstants.GoodBaseAttack,
+                GroupConstants.NPCs,
+                GroupConstants.PhysicalCombat,
+                GroupConstants.Players,
+                GroupConstants.PoorBaseAttack,
+                GroupConstants.PreparesSpells,
                 GroupConstants.Spellcasters,
                 GroupConstants.Stealth,
-                GroupConstants.Warriors,
-                GroupConstants.GoodBaseAttack,
-                GroupConstants.AverageBaseAttack,
-                GroupConstants.PoorBaseAttack,
                 AlignmentConstants.LawfulGood,
                 AlignmentConstants.NeutralGood,
                 AlignmentConstants.ChaoticGood,
@@ -44,26 +46,12 @@ namespace CharacterGen.Tests.Integration.Tables.CharacterClasses
                 CharacterClassConstants.TrainingTypes.SelfTaught,
                 CharacterClassConstants.TrainingTypes.Trained,
                 SpellConstants.Sources.Arcane,
-                GroupConstants.Players,
-                GroupConstants.NPCs,
-                GroupConstants.PreparesSpells,
                 SpellConstants.Sources.Divine,
-                GroupConstants.All,
             };
 
             AssertCollectionNames(names);
         }
 
-        [TestCase(GroupConstants.Healers,
-            CharacterClassConstants.Bard,
-            CharacterClassConstants.Cleric,
-            CharacterClassConstants.Druid,
-            CharacterClassConstants.Paladin,
-            CharacterClassConstants.Ranger,
-            CharacterClassConstants.Adept)]
-        [TestCase(GroupConstants.Mages,
-            CharacterClassConstants.Sorcerer,
-            CharacterClassConstants.Wizard)]
         [TestCase(GroupConstants.Spellcasters,
             CharacterClassConstants.Bard,
             CharacterClassConstants.Cleric,
@@ -77,7 +65,7 @@ namespace CharacterGen.Tests.Integration.Tables.CharacterClasses
             CharacterClassConstants.Bard,
             CharacterClassConstants.Rogue,
             CharacterClassConstants.Ranger)]
-        [TestCase(GroupConstants.Warriors,
+        [TestCase(GroupConstants.PhysicalCombat,
             CharacterClassConstants.Barbarian,
             CharacterClassConstants.Fighter,
             CharacterClassConstants.Monk,
@@ -310,7 +298,7 @@ namespace CharacterGen.Tests.Integration.Tables.CharacterClasses
             CharacterClassConstants.Paladin,
             CharacterClassConstants.Ranger,
             CharacterClassConstants.Adept)]
-        public override void DistinctCollection(string name, params string[] collection)
+        public void ClassNameGroup(string name, params string[] collection)
         {
             base.DistinctCollection(name, collection);
         }

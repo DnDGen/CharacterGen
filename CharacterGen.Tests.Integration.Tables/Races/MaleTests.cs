@@ -19,7 +19,7 @@ namespace CharacterGen.Tests.Integration.Tables.Races
 
         [TestCase(1, 50, true)]
         [TestCase(51, 100, false)]
-        public override void BooleanPercentile(int lower, int upper, bool isTrue)
+        public void IsMalePercentile(int lower, int upper, bool isTrue)
         {
             base.BooleanPercentile(lower, upper, isTrue);
         }

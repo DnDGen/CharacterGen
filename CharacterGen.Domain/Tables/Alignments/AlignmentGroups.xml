@@ -1,80 +1,92 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <items>
-    <object>
-        <name>Lawful Good</name>
-      <item>Lawful Good</item>
-      <item>Neutral Good</item>
-      <item>Lawful Neutral</item>
-      <item>True Neutral</item>
-    </object>
-    <object>
-        <name>Neutral Good</name>
-      <item>Lawful Good</item>
-      <item>Neutral Good</item>
-      <item>Chaotic Good</item>
-      <item>Lawful Neutral</item>
-      <item>True Neutral</item>
-      <item>Chaotic Neutral</item>
-    </object>
-    <object>
-        <name>Chaotic Good</name>
-      <item>Neutral Good</item>
-      <item>Chaotic Good</item>
-      <item>True Neutral</item>
-      <item>Chaotic Neutral</item>
-    </object>
-    <object>
-        <name>Lawful Neutral</name>
-      <item>Lawful Good</item>
-      <item>Neutral Good</item>
-      <item>Lawful Neutral</item>
-      <item>True Neutral</item>
-      <item>Lawful Evil</item>
-      <item>Neutral Evil</item>
-    </object>
-    <object>
-        <name>True Neutral</name>
-        <item>Lawful Good</item>
-        <item>Neutral Good</item>
-        <item>Chaotic Good</item>
-      <item>Lawful Neutral</item>
-      <item>True Neutral</item>
-      <item>Chaotic Neutral</item>
-      <item>Lawful Evil</item>
-      <item>Neutral Evil</item>
-      <item>Chaotic Evil</item>
-    </object>
-    <object>
-        <name>Chaotic Neutral</name>
-      <item>Neutral Good</item>
-      <item>Chaotic Good</item>
-      <item>True Neutral</item>
-      <item>Chaotic Neutral</item>
-      <item>Neutral Evil</item>
-      <item>Chaotic Evil</item>
-    </object>
-    <object>
-        <name>Lawful Evil</name>
-      <item>Lawful Neutral</item>
-      <item>True Neutral</item>
-      <item>Lawful Evil</item>
-      <item>Neutral Evil</item>
-    </object>
-    <object>
-        <name>Neutral Evil</name>
-      <item>Lawful Neutral</item>
-      <item>True Neutral</item>
-      <item>Chaotic Neutral</item>
-      <item>Lawful Evil</item>
-      <item>Neutral Evil</item>
-      <item>Chaotic Evil</item>
-    </object>
-    <object>
-        <name>Chaotic Evil</name>
-      <item>True Neutral</item>
-      <item>Chaotic Neutral</item>
-      <item>Neutral Evil</item>
-      <item>Chaotic Evil</item>
-    </object>
+  <object>
+    <name>All</name>
+    <item>Lawful Good</item>
+    <item>Neutral Good</item>
+    <item>Chaotic Good</item>
+    <item>Lawful Neutral</item>
+    <item>True Neutral</item>
+    <item>Chaotic Neutral</item>
+    <item>Lawful Evil</item>
+    <item>Neutral Evil</item>
+    <item>Chaotic Evil</item>
+  </object>
+  <object>
+    <name>Lawful Good</name>
+    <item>Lawful Good</item>
+    <item>Neutral Good</item>
+    <item>Lawful Neutral</item>
+    <item>True Neutral</item>
+  </object>
+  <object>
+    <name>Neutral Good</name>
+    <item>Lawful Good</item>
+    <item>Neutral Good</item>
+    <item>Chaotic Good</item>
+    <item>Lawful Neutral</item>
+    <item>True Neutral</item>
+    <item>Chaotic Neutral</item>
+  </object>
+  <object>
+    <name>Chaotic Good</name>
+    <item>Neutral Good</item>
+    <item>Chaotic Good</item>
+    <item>True Neutral</item>
+    <item>Chaotic Neutral</item>
+  </object>
+  <object>
+    <name>Lawful Neutral</name>
+    <item>Lawful Good</item>
+    <item>Neutral Good</item>
+    <item>Lawful Neutral</item>
+    <item>True Neutral</item>
+    <item>Lawful Evil</item>
+    <item>Neutral Evil</item>
+  </object>
+  <object>
+    <name>True Neutral</name>
+    <item>Lawful Good</item>
+    <item>Neutral Good</item>
+    <item>Chaotic Good</item>
+    <item>Lawful Neutral</item>
+    <item>True Neutral</item>
+    <item>Chaotic Neutral</item>
+    <item>Lawful Evil</item>
+    <item>Neutral Evil</item>
+    <item>Chaotic Evil</item>
+  </object>
+  <object>
+    <name>Chaotic Neutral</name>
+    <item>Neutral Good</item>
+    <item>Chaotic Good</item>
+    <item>True Neutral</item>
+    <item>Chaotic Neutral</item>
+    <item>Neutral Evil</item>
+    <item>Chaotic Evil</item>
+  </object>
+  <object>
+    <name>Lawful Evil</name>
+    <item>Lawful Neutral</item>
+    <item>True Neutral</item>
+    <item>Lawful Evil</item>
+    <item>Neutral Evil</item>
+  </object>
+  <object>
+    <name>Neutral Evil</name>
+    <item>Lawful Neutral</item>
+    <item>True Neutral</item>
+    <item>Chaotic Neutral</item>
+    <item>Lawful Evil</item>
+    <item>Neutral Evil</item>
+    <item>Chaotic Evil</item>
+  </object>
+  <object>
+    <name>Chaotic Evil</name>
+    <item>True Neutral</item>
+    <item>Chaotic Neutral</item>
+    <item>Neutral Evil</item>
+    <item>Chaotic Evil</item>
+  </object>
 </items>

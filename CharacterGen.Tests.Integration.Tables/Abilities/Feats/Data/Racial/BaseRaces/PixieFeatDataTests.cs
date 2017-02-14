@@ -81,11 +81,11 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial.Base
         [TestCase(FeatConstants.DamageReduction,
             FeatConstants.DamageReduction,
             "Must be cold iron to overcome",
-            10,
+            1,
             FeatConstants.Frequencies.Hit,
             0,
             "",
-            0,
+            10,
             0, 0)]
         [TestCase(FeatConstants.SpellResistance,
             FeatConstants.SpellResistance,

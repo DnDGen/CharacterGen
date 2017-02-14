@@ -1,14 +1,15 @@
-﻿using System;
-
-namespace CharacterGen.Domain.Selectors.Selections
+﻿namespace CharacterGen.Domain.Selectors.Selections
 {
     internal class SkillSelection
     {
-        public String BaseStatName { get; set; }
+        public string BaseStatName { get; set; }
+        public int RandomFociQuantity { get; set; }
+        public string SkillName { get; set; }
 
         public SkillSelection()
         {
-            BaseStatName = String.Empty;
+            BaseStatName = string.Empty;
+            SkillName = string.Empty;
         }
     }
 }

@@ -52,14 +52,14 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.CharacterCl
 
         [TestCase(FeatConstants.CombatStyle, FeatConstants.ImprovedCombatStyle)]
         [TestCase(FeatConstants.ImprovedCombatStyle, FeatConstants.CombatStyleMastery)]
-        public void FeatGroupDependency(string prerequisiteFeat, string dependentFeat)
+        public void FeatGroupOrderDependency(string prerequisiteFeat, string dependentFeat)
         {
             var collection = table.Keys.ToList();
             var prereqFeatIndex = collection.IndexOf(prerequisiteFeat);
             var dependencyIndex = collection.IndexOf(dependentFeat);
 
-            Assert.That(prereqFeatIndex, Is.Positive);
-            Assert.That(dependencyIndex, Is.Positive);
+            Assert.That(prereqFeatIndex, Is.Not.Negative);
+            Assert.That(dependencyIndex, Is.Not.Negative);
             Assert.That(prereqFeatIndex, Is.LessThan(dependencyIndex));
         }
 

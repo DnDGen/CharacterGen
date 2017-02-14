@@ -1,95 +1,102 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <items>
-    <object>
-        <name>Skill BonusSearch</name>
-        <item>Skill Bonus</item>
-        <item></item>
-        <item>0</item>
-        <item>2</item>
-        <item>Search</item>
-        <item>0</item>
-        <item></item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-    </object>
-    <object>
-      <name>Skill BonusSpot</name>
-      <item>Skill Bonus</item>
-      <item></item>
-      <item>0</item>
-      <item>2</item>
-      <item>Spot</item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
+  <object>
+    <name>Skill BonusSearch</name>
+    <item>Skill Bonus</item>
     <item></item>
     <item>0</item>
-    </object>
-    <object>
-        <name>Passive Secret Door Search</name>
-        <item>Passive Secret Door Search</item>
-        <item></item>
-        <item>0</item>
-        <item>0</item>
-        <item></item>
-        <item>0</item>
-        <item></item>
-        <item>0</item>
-      <item></item>
-      <item>0</item>
-    </object>
-    <object>
-      <name>Skill BonusListen</name>
-      <item>Skill Bonus</item>
-      <item></item>
-      <item>0</item>
-      <item>2</item>
-      <item>Listen</item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-    </object>
-    <object>
-      <name>Attack BonusThrowOrSling</name>
-      <item>Attack Bonus</item>
-      <item></item>
-      <item>0</item>
-      <item>1</item>
-      <item>Thrown weapons and slings</item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-    </object>
-    <object>
-        <name>Save BonusFear</name>
-        <item>Save Bonus</item>
-        <item></item>
-        <item>0</item>
-        <item>2</item>
-        <item>Fear</item>
-        <item>0</item>
-        <item></item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-    </object>
-    <object>
-        <name>Save BonusAll</name>
-        <item>Save Bonus</item>
-        <item></item>
-        <item>0</item>
-        <item>1</item>
-        <item>All</item>
-        <item>0</item>
-        <item></item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-    </object>
+    <item>2</item>
+    <item>Search</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+  </object>
+  <object>
+    <name>Skill BonusSpot</name>
+    <item>Skill Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>2</item>
+    <item>Spot</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+  </object>
+  <object>
+    <name>Passive Secret Door Search</name>
+    <item>Passive Secret Door Search</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+  </object>
+  <object>
+    <name>Skill BonusListen</name>
+    <item>Skill Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>2</item>
+    <item>Listen</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+  </object>
+  <object>
+    <name>Attack BonusThrowOrSling</name>
+    <item>Attack Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>1</item>
+    <item>Thrown weapons and slings</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+  </object>
+  <object>
+    <name>Save BonusFear</name>
+    <item>Save Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>2</item>
+    <item>Fear</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+  </object>
+  <object>
+    <name>Save BonusAll</name>
+    <item>Save Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>1</item>
+    <item>All</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+  </object>
 </items>

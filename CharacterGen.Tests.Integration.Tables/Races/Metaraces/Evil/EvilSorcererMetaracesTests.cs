@@ -20,7 +20,8 @@ namespace CharacterGen.Tests.Integration.Tables.Races.Metaraces.Evil
             AssertTableIsComplete();
         }
 
-        [TestCase(1, 91, RaceConstants.Metaraces.None)]
+        [TestCase(1, 90, RaceConstants.Metaraces.None)]
+        [TestCase(91, 91, RaceConstants.Metaraces.Mummy)]
         [TestCase(92, 92, RaceConstants.Metaraces.Ghost)]
         [TestCase(93, 93, RaceConstants.Metaraces.Vampire)]
         [TestCase(94, 95, RaceConstants.Metaraces.Lich)]

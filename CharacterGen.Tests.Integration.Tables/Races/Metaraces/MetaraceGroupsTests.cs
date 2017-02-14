@@ -19,9 +19,15 @@ namespace CharacterGen.Tests.Integration.Tables.Races.Metaraces
         {
             var names = new[]
             {
-                AlignmentConstants.Evil,
-                AlignmentConstants.Good,
-                AlignmentConstants.Neutral,
+                AlignmentConstants.LawfulEvil,
+                AlignmentConstants.LawfulGood,
+                AlignmentConstants.LawfulNeutral,
+                AlignmentConstants.ChaoticEvil,
+                AlignmentConstants.ChaoticGood,
+                AlignmentConstants.ChaoticNeutral,
+                AlignmentConstants.NeutralEvil,
+                AlignmentConstants.NeutralGood,
+                AlignmentConstants.TrueNeutral,
                 GroupConstants.Genetic,
                 GroupConstants.Lycanthrope,
                 GroupConstants.Undead,
@@ -48,22 +54,49 @@ namespace CharacterGen.Tests.Integration.Tables.Races.Metaraces
             AssertCollectionNames(names);
         }
 
-        [TestCase(AlignmentConstants.Good,
+        [TestCase(AlignmentConstants.LawfulGood,
+            RaceConstants.Metaraces.Ghost,
             RaceConstants.Metaraces.HalfDragon,
             RaceConstants.Metaraces.HalfCelestial,
-            RaceConstants.Metaraces.Werebear,
-            RaceConstants.Metaraces.Ghost)]
-        [TestCase(AlignmentConstants.Evil,
+            RaceConstants.Metaraces.Werebear)]
+        [TestCase(AlignmentConstants.NeutralGood,
+            RaceConstants.Metaraces.Ghost,
+            RaceConstants.Metaraces.HalfDragon,
+            RaceConstants.Metaraces.HalfCelestial)]
+        [TestCase(AlignmentConstants.ChaoticGood,
+            RaceConstants.Metaraces.Ghost,
+            RaceConstants.Metaraces.HalfDragon,
+            RaceConstants.Metaraces.HalfCelestial)]
+        [TestCase(AlignmentConstants.LawfulEvil,
+            RaceConstants.Metaraces.Ghost,
             RaceConstants.Metaraces.HalfDragon,
             RaceConstants.Metaraces.HalfFiend,
-            RaceConstants.Metaraces.Wererat,
-            RaceConstants.Metaraces.Werewolf,
-            RaceConstants.Metaraces.Vampire,
             RaceConstants.Metaraces.Lich,
-            RaceConstants.Metaraces.Ghost)]
-        [TestCase(AlignmentConstants.Neutral,
+            RaceConstants.Metaraces.Mummy,
+            RaceConstants.Metaraces.Vampire,
+            RaceConstants.Metaraces.Wererat)]
+        [TestCase(AlignmentConstants.NeutralEvil,
+            RaceConstants.Metaraces.Ghost,
+            RaceConstants.Metaraces.HalfDragon,
+            RaceConstants.Metaraces.HalfFiend,
+            RaceConstants.Metaraces.Lich,
+            RaceConstants.Metaraces.Mummy,
+            RaceConstants.Metaraces.Vampire)]
+        [TestCase(AlignmentConstants.ChaoticEvil,
+            RaceConstants.Metaraces.Ghost,
+            RaceConstants.Metaraces.HalfDragon,
+            RaceConstants.Metaraces.HalfFiend,
+            RaceConstants.Metaraces.Lich,
+            RaceConstants.Metaraces.Vampire,
+            RaceConstants.Metaraces.Werewolf)]
+        [TestCase(AlignmentConstants.LawfulNeutral,
+            RaceConstants.Metaraces.Ghost,
+            RaceConstants.Metaraces.Mummy)]
+        [TestCase(AlignmentConstants.TrueNeutral,
+            RaceConstants.Metaraces.Ghost,
             RaceConstants.Metaraces.Wereboar,
-            RaceConstants.Metaraces.Weretiger,
+            RaceConstants.Metaraces.Weretiger)]
+        [TestCase(AlignmentConstants.ChaoticNeutral,
             RaceConstants.Metaraces.Ghost)]
         [TestCase(GroupConstants.Genetic,
             RaceConstants.Metaraces.HalfDragon,
@@ -76,13 +109,14 @@ namespace CharacterGen.Tests.Integration.Tables.Races.Metaraces
             RaceConstants.Metaraces.Wererat,
             RaceConstants.Metaraces.Werewolf)]
         [TestCase(GroupConstants.Undead,
-            RaceConstants.Metaraces.Vampire,
+            RaceConstants.Metaraces.Ghost,
             RaceConstants.Metaraces.Lich,
-            RaceConstants.Metaraces.Ghost)]
+            RaceConstants.Metaraces.Mummy,
+            RaceConstants.Metaraces.Vampire)]
         [TestCase(GroupConstants.HasWings,
             RaceConstants.Metaraces.HalfFiend,
             RaceConstants.Metaraces.HalfCelestial)]
-        public override void DistinctCollection(string name, params string[] collection)
+        public void MetaraceGroup(string name, params string[] collection)
         {
             base.DistinctCollection(name, collection);
         }
@@ -92,11 +126,11 @@ namespace CharacterGen.Tests.Integration.Tables.Races.Metaraces
         {
             var metaraces = new[]
             {
-                RaceConstants.Metaraces.HalfDragon,
                 RaceConstants.Metaraces.HalfCelestial,
-                RaceConstants.Metaraces.Werebear,
+                RaceConstants.Metaraces.HalfDragon,
                 RaceConstants.Metaraces.Ghost,
-                RaceConstants.Metaraces.None
+                RaceConstants.Metaraces.None,
+                RaceConstants.Metaraces.Werebear,
             };
 
             base.DistinctCollection(CharacterClassConstants.Paladin, metaraces);
@@ -112,6 +146,7 @@ namespace CharacterGen.Tests.Integration.Tables.Races.Metaraces
                 RaceConstants.Metaraces.HalfDragon,
                 RaceConstants.Metaraces.HalfFiend,
                 RaceConstants.Metaraces.Lich,
+                RaceConstants.Metaraces.Mummy,
                 RaceConstants.Metaraces.None,
                 RaceConstants.Metaraces.Vampire,
                 RaceConstants.Metaraces.Werebear,
@@ -135,18 +170,19 @@ namespace CharacterGen.Tests.Integration.Tables.Races.Metaraces
         {
             var metaraces = new[]
             {
+                RaceConstants.Metaraces.Ghost,
+                RaceConstants.Metaraces.HalfDragon,
+                RaceConstants.Metaraces.HalfFiend,
+                RaceConstants.Metaraces.HalfCelestial,
+                RaceConstants.Metaraces.Lich,
+                RaceConstants.Metaraces.Mummy,
+                RaceConstants.Metaraces.None,
+                RaceConstants.Metaraces.Vampire,
                 RaceConstants.Metaraces.Werebear,
                 RaceConstants.Metaraces.Wereboar,
                 RaceConstants.Metaraces.Weretiger,
                 RaceConstants.Metaraces.Wererat,
                 RaceConstants.Metaraces.Werewolf,
-                RaceConstants.Metaraces.Vampire,
-                RaceConstants.Metaraces.Lich,
-                RaceConstants.Metaraces.Ghost,
-                RaceConstants.Metaraces.HalfDragon,
-                RaceConstants.Metaraces.HalfFiend,
-                RaceConstants.Metaraces.HalfCelestial,
-                RaceConstants.Metaraces.None
             };
 
             base.DistinctCollection(className, metaraces);
@@ -164,17 +200,18 @@ namespace CharacterGen.Tests.Integration.Tables.Races.Metaraces
         {
             var metaraces = new[]
             {
+                RaceConstants.Metaraces.Ghost,
+                RaceConstants.Metaraces.HalfDragon,
+                RaceConstants.Metaraces.HalfFiend,
+                RaceConstants.Metaraces.HalfCelestial,
+                RaceConstants.Metaraces.Mummy,
+                RaceConstants.Metaraces.None,
+                RaceConstants.Metaraces.Vampire,
                 RaceConstants.Metaraces.Werebear,
                 RaceConstants.Metaraces.Wereboar,
                 RaceConstants.Metaraces.Weretiger,
                 RaceConstants.Metaraces.Wererat,
                 RaceConstants.Metaraces.Werewolf,
-                RaceConstants.Metaraces.Vampire,
-                RaceConstants.Metaraces.Ghost,
-                RaceConstants.Metaraces.HalfDragon,
-                RaceConstants.Metaraces.HalfFiend,
-                RaceConstants.Metaraces.HalfCelestial,
-                RaceConstants.Metaraces.None
             };
 
             base.DistinctCollection(className, metaraces);

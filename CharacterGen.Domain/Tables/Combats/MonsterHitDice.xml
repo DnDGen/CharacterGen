@@ -2,6 +2,14 @@
 
 <items>
   <object>
+    <name>Azer</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Blue Slaad</name>
+    <item>8</item>
+  </object>
+  <object>
     <name>Bugbear</name>
     <item>3</item>
   </object>
@@ -12,6 +20,10 @@
   <object>
     <name>Cloud Giant</name>
     <item>17</item>
+  </object>
+  <object>
+    <name>Death Slaad</name>
+    <item>15</item>
   </object>
   <object>
     <name>Derro</name>
@@ -30,12 +42,24 @@
     <item>14</item>
   </object>
   <object>
+    <name>Gargoyle</name>
+    <item>4</item>
+  </object>
+  <object>
     <name>Gnoll</name>
     <item>2</item>
   </object>
   <object>
     <name>Goblin</name>
     <item>0</item>
+  </object>
+  <object>
+    <name>Gray Slaad</name>
+    <item>10</item>
+  </object>
+  <object>
+    <name>Green Slaad</name>
+    <item>9</item>
   </object>
   <object>
     <name>Grimlock</name>
@@ -52,6 +76,10 @@
   <object>
     <name>Hobgoblin</name>
     <item>0</item>
+  </object>
+  <object>
+    <name>Hound Archon</name>
+    <item>6</item>
   </object>
   <object>
     <name>Janni</name>
@@ -94,6 +122,10 @@
     <item>7</item>
   </object>
   <object>
+    <name>Red Slaad</name>
+    <item>7</item>
+  </object>
+  <object>
     <name>Satyr</name>
     <item>5</item>
   </object>
@@ -116,5 +148,17 @@
   <object>
     <name>Troll</name>
     <item>6</item>
+  </object>
+  <object>
+    <name>Yuan-ti Abomination</name>
+    <item>9</item>
+  </object>
+  <object>
+    <name>Yuan-ti Halfblood</name>
+    <item>7</item>
+  </object>
+  <object>
+    <name>Yuan-ti Pureblood</name>
+    <item>4</item>
   </object>
 </items>

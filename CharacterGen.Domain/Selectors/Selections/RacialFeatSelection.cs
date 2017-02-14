@@ -16,6 +16,8 @@ namespace CharacterGen.Domain.Selectors.Selections
         public string FocusType { get; set; }
         public int Power { get; set; }
         public Dictionary<string, int> MinimumStats { get; set; }
+        public string RandomFociQuantity { get; set; }
+        public IEnumerable<RequiredFeatSelection> RequiredFeats { get; set; }
 
         public RacialFeatSelection()
         {
@@ -24,9 +26,11 @@ namespace CharacterGen.Domain.Selectors.Selections
             Frequency = new Frequency();
             FocusType = string.Empty;
             MinimumStats = new Dictionary<string, int>();
+            RandomFociQuantity = string.Empty;
+            RequiredFeats = Enumerable.Empty<RequiredFeatSelection>();
         }
 
-        public bool RequirementsMet(Race race, int monsterHitDice, Dictionary<string, Stat> stats)
+        public bool RequirementsMet(Race race, int monsterHitDice, Dictionary<string, Stat> stats, IEnumerable<Feat> feats)
         {
             if (string.IsNullOrEmpty(SizeRequirement) == false && SizeRequirement != race.Size)
                 return false;
@@ -36,6 +40,17 @@ namespace CharacterGen.Domain.Selectors.Selections
 
             if (MinimumStatMet(stats) == false)
                 return false;
+
+            foreach (var requirement in RequiredFeats)
+            {
+                var requirementFeats = feats.Where(f => f.Name == requirement.Feat);
+
+                if (requirementFeats.Any() == false)
+                    return false;
+
+                if (requirement.Focus != string.Empty && requirementFeats.Any(f => f.Foci.Contains(requirement.Focus)) == false)
+                    return false;
+            }
 
             return monsterHitDice >= MinimumHitDieRequirement;
         }

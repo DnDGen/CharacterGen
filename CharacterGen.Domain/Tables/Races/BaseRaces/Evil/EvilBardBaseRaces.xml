@@ -39,6 +39,26 @@
   <object>
     <lower>23</lower>
     <content>Human</content>
+    <upper>92</upper>
+  </object>
+  <object>
+    <lower>93</lower>
+    <content>Death Slaad</content>
+    <upper>93</upper>
+  </object>
+  <object>
+    <lower>94</lower>
+    <content>Yuan-ti Pureblood</content>
+    <upper>94</upper>
+  </object>
+  <object>
+    <lower>95</lower>
+    <content>Yuan-ti Halfblood</content>
+    <upper>95</upper>
+  </object>
+  <object>
+    <lower>96</lower>
+    <content>Yuan-ti Abomination</content>
     <upper>96</upper>
   </object>
   <object>

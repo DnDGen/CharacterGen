@@ -21,7 +21,8 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Neutral
         }
 
         [TestCase(1, 10, RaceConstants.BaseRaces.DeepDwarf)]
-        [TestCase(11, 29, RaceConstants.BaseRaces.HillDwarf)]
+        [TestCase(11, 27, RaceConstants.BaseRaces.HillDwarf)]
+        [TestCase(28, 29, RaceConstants.BaseRaces.Azer)]
         [TestCase(30, 34, RaceConstants.BaseRaces.MountainDwarf)]
         [TestCase(35, 35, RaceConstants.BaseRaces.HighElf)]
         [TestCase(36, 41, RaceConstants.BaseRaces.WoodElf)]
@@ -29,7 +30,11 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Neutral
         [TestCase(47, 47, RaceConstants.BaseRaces.LightfootHalfling)]
         [TestCase(48, 48, RaceConstants.BaseRaces.DeepHalfling)]
         [TestCase(49, 58, RaceConstants.BaseRaces.HalfOrc)]
-        [TestCase(59, 97, RaceConstants.BaseRaces.Human)]
+        [TestCase(59, 93, RaceConstants.BaseRaces.Human)]
+        [TestCase(94, 94, RaceConstants.BaseRaces.RedSlaad)]
+        [TestCase(95, 95, RaceConstants.BaseRaces.BlueSlaad)]
+        [TestCase(96, 96, RaceConstants.BaseRaces.GreenSlaad)]
+        [TestCase(97, 97, RaceConstants.BaseRaces.GraySlaad)]
         [TestCase(98, 98, RaceConstants.BaseRaces.Lizardfolk)]
         [TestCase(99, 99, RaceConstants.BaseRaces.Doppelganger)]
         [TestCase(100, 100, RaceConstants.BaseRaces.Janni)]

@@ -18,16 +18,14 @@
         public const string HasSkillRequirements = "Has Skill Requirements";
         public const string HasStatRequirements = "Has Stat Requirements";
         public const string HasWings = "Has Wings";
-        public const string Healers = "Healers";
         public const string Initiative = "Initiative";
-        public const string Knowledge = "Knowledge";
         public const string Lycanthrope = "Lycanthrope";
-        public const string Mages = "Mages";
         public const string ManualCrossbows = "Manual Crossbows";
         public const string Monsters = "Monsters";
         public const string NaturalArmor = "Natural Armor";
         public const string NeedsAmmunition = "Needs Ammunition";
         public const string NPCs = "NPCs";
+        public const string PhysicalCombat = "Physical Combat";
         public const string Players = "Players";
         public const string PoorBaseAttack = "Poor Base Attack";
         public const string PreparesSpells = "Prepares Spells";
@@ -42,7 +40,6 @@
         public const string TakenMultipleTimes = "Taken Multiple Times";
         public const string TwoHanded = "Two-Handed";
         public const string Undead = "Undead";
-        public const string Warriors = "Warriors";
         public const string WizardBonusFeats = "Wizard Bonus Feats";
     }
 }

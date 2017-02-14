@@ -3,6 +3,7 @@ using CharacterGen.Abilities.Stats;
 using CharacterGen.CharacterClasses;
 using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Selectors.Percentiles;
+using CharacterGen.Domain.Selectors.Selections;
 using CharacterGen.Domain.Tables;
 using CharacterGen.Races;
 using System;
@@ -73,30 +74,29 @@ namespace CharacterGen.Domain.Generators.Abilities
 
         private Dictionary<string, Skill> AddMonsterSkillRanks(Race race, Dictionary<string, Stat> stats, Dictionary<string, Skill> skills)
         {
-            var monsterSkills = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassSkills, race.BaseRace);
             var monsterHitDice = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice, race.BaseRace);
 
             if (monsterHitDice == 0)
                 return skills;
 
-            foreach (var monsterSkill in monsterSkills)
-            {
-                if (skills.ContainsKey(monsterSkill) == false)
-                {
-                    var selection = skillSelector.SelectFor(monsterSkill);
+            var monsterSkills = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassSkills, race.BaseRace);
+            var monsterSkillSelections = monsterSkills.Select(s => skillSelector.SelectFor(s)).SelectMany(s => ExplodeSelectedSkill(s));
 
-                    if (stats.ContainsKey(selection.BaseStatName) == false)
+            foreach (var monsterSkillSelection in monsterSkillSelections)
+            {
+                if (skills.ContainsKey(monsterSkillSelection.SkillName) == false)
+                {
+                    if (stats.ContainsKey(monsterSkillSelection.BaseStatName) == false)
                         continue;
 
-                    skills[monsterSkill] = new Skill(monsterSkill, stats[selection.BaseStatName], 3);
+                    skills[monsterSkillSelection.SkillName] = new Skill(monsterSkillSelection.SkillName, stats[monsterSkillSelection.BaseStatName], 3);
                 }
 
-                skills[monsterSkill].RankCap += monsterHitDice;
-                skills[monsterSkill].ClassSkill = true;
+                skills[monsterSkillSelection.SkillName].RankCap += monsterHitDice;
+                skills[monsterSkillSelection.SkillName].ClassSkill = true;
             }
 
-            var intelligenceSkillBonus = Math.Max(1, 2 + stats[StatConstants.Intelligence].Bonus);
-            var points = (monsterHitDice + 3) * intelligenceSkillBonus;
+            var points = GetTotalSkillPoints(race.BaseRace, monsterHitDice, stats[StatConstants.Intelligence], race);
             var validMonsterSkills = FilterOutInvalidSkills(monsterSkills, skills);
 
             while (points-- > 0 && validMonsterSkills.Any())
@@ -107,6 +107,36 @@ namespace CharacterGen.Domain.Generators.Abilities
             }
 
             return skills;
+        }
+
+        private IEnumerable<SkillSelection> ExplodeSelectedSkill(SkillSelection skillSelection)
+        {
+            if (skillSelection.RandomFociQuantity == 0)
+                return new[] { skillSelection };
+
+            var skillFoci = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, skillSelection.SkillName);
+
+            if (skillSelection.RandomFociQuantity >= skillFoci.Count())
+            {
+                return skillFoci.Select(f => new SkillSelection { BaseStatName = skillSelection.BaseStatName, SkillName = f });
+            }
+
+            var selections = new List<SkillSelection>();
+
+            while (skillSelection.RandomFociQuantity > selections.Count)
+            {
+                var focus = collectionsSelector.SelectRandomFrom(skillFoci);
+                if (selections.Any(s => s.SkillName == focus))
+                    continue;
+
+                var selection = new SkillSelection();
+                selection.BaseStatName = skillSelection.BaseStatName;
+                selection.SkillName = focus;
+
+                selections.Add(selection);
+            }
+
+            return selections;
         }
 
         private Dictionary<string, Skill> InitializeSkills(Dictionary<string, Stat> stats, IEnumerable<string> classSkills, IEnumerable<string> crossClassSkills, CharacterClass characterClass)
@@ -129,7 +159,7 @@ namespace CharacterGen.Domain.Generators.Abilities
 
         private Dictionary<string, Skill> AddRanks(CharacterClass characterClass, Race race, Dictionary<string, Stat> stats, IEnumerable<string> classSkills, IEnumerable<string> crossClassSkills, Dictionary<string, Skill> skills)
         {
-            var points = GetTotalSkillPoints(characterClass, stats[StatConstants.Intelligence], race);
+            var points = GetTotalSkillPoints(characterClass.Name, characterClass.Level, stats[StatConstants.Intelligence], race);
             var validSkills = FilterOutInvalidSkills(skills.Keys, skills);
 
             while (points > 0 && validSkills.Any())
@@ -145,20 +175,16 @@ namespace CharacterGen.Domain.Generators.Abilities
             return skills;
         }
 
-        private int GetTotalSkillPoints(CharacterClass characterClass, Stat intelligence, Race race)
+        private int GetTotalSkillPoints(string source, int levels, Stat intelligence, Race race)
         {
-            var points = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.SkillPointsForClasses, characterClass.Name);
+            var points = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.SkillPoints, source);
             var perLevel = points + intelligence.Bonus;
-            var multiplier = characterClass.Level;
-
-            var monsters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters);
-            if (monsters.Contains(race.BaseRace) == false)
-                multiplier += 3;
+            var multiplier = levels + 3;
 
             if (race.BaseRace == RaceConstants.BaseRaces.Human)
                 perLevel++;
 
-            return Math.Max(perLevel * multiplier, characterClass.Level);
+            return Math.Max(perLevel * multiplier, levels);
         }
 
         private IEnumerable<string> GetSkillCollection(Dictionary<string, Skill> skills, IEnumerable<string> classSkills, IEnumerable<string> crossClassSkills)

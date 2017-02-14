@@ -39,6 +39,11 @@
   <object>
     <lower>26</lower>
     <content>Human</content>
+    <upper>98</upper>
+  </object>
+  <object>
+    <lower>99</lower>
+    <content>Hound Archon</content>
     <upper>99</upper>
   </object>
   <object>

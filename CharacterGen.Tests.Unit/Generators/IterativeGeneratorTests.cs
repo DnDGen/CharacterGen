@@ -7,7 +7,7 @@ namespace CharacterGen.Tests.Unit.Generators
     [TestFixture]
     public class IterativeGeneratorTests
     {
-        private const int Limit = 30000;
+        private const int Limit = 10000;
 
         private Generator generator;
         private int iterations;
@@ -23,16 +23,16 @@ namespace CharacterGen.Tests.Unit.Generators
         public void BuildWithLambda()
         {
             var builtString = "built string";
-            var randomString = generator.Generate(() => builtString, s => s.Contains("string"));
+            var randomString = generator.Generate(() => builtString, s => s.Contains("string"), () => string.Empty);
             Assert.That(randomString, Is.EqualTo(builtString));
         }
 
         [Test]
         public void BuildWithMethods()
         {
-            var date = generator.Generate(Build, IsValid);
+            var date = generator.Generate(Build, IsValid, BuildDefault);
             Assert.That(iterations, Is.EqualTo(1));
-            Assert.That(date.ToShortDateString(), Is.EqualTo(DateTime.Now.ToShortDateString()));
+            Assert.That(date, Is.EqualTo(DateTime.Now).Within(1).Seconds);
         }
 
         private DateTime Build()
@@ -46,32 +46,38 @@ namespace CharacterGen.Tests.Unit.Generators
             return date.Year == DateTime.Now.Year;
         }
 
+        private DateTime BuildDefault()
+        {
+            return new DateTime(1989, 10, 29);
+        }
+
         [Test]
         public void BuildNull()
         {
-            var randomObject = generator.Generate<string>(() => null, s => true);
+            var randomObject = generator.Generate(() => null, s => true, () => new object());
             Assert.That(randomObject, Is.Null);
         }
 
         [Test]
         public void RebuildIfInvalid()
         {
-            var randomNumber = generator.Generate(() => iterations++, i => i > 0 && i % 2 == 0);
+            var randomNumber = generator.Generate(() => iterations++, i => i > 0 && i % 2 == 0, () => -1);
             Assert.That(randomNumber, Is.EqualTo(2));
             Assert.That(iterations, Is.EqualTo(3));
         }
 
         [Test]
-        public void ThrowExceptionAfterTooManyRetries()
+        public void ReturnDefault()
         {
-            Assert.That(() => generator.Generate(() => iterations++, i => false), Throws.Exception.With.Message.EqualTo($"Failed to generate Int32 after {Limit + 1} iterations"));
+            var number = generator.Generate(() => iterations++, i => false, () => -1);
+            Assert.That(number, Is.EqualTo(-1));
             Assert.That(iterations, Is.EqualTo(Limit));
         }
 
         [Test]
         public void ReturnValidObjectAfterTooManyRetries()
         {
-            var randomString = generator.Generate(() => iterations++.ToString(), i => Convert.ToInt32(i) == Limit - 1);
+            var randomString = generator.Generate(() => iterations++.ToString(), i => Convert.ToInt32(i) == Limit - 1, () => "nope");
             Assert.That(iterations, Is.EqualTo(Limit));
             Assert.That(randomString, Is.EqualTo($"{Limit - 1}"));
         }

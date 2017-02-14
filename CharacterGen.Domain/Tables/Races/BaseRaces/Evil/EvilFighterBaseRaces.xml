@@ -64,6 +64,26 @@
   <object>
     <lower>59</lower>
     <content>Hobgoblin</content>
+    <upper>72</upper>
+  </object>
+  <object>
+    <lower>73</lower>
+    <content>Death Slaad</content>
+    <upper>73</upper>
+  </object>
+  <object>
+    <lower>74</lower>
+    <content>Yuan-ti Halfblood</content>
+    <upper>74</upper>
+  </object>
+  <object>
+    <lower>75</lower>
+    <content>Yuan-ti Abomination</content>
+    <upper>75</upper>
+  </object>
+  <object>
+    <lower>76</lower>
+    <content>Gargoyle</content>
     <upper>77</upper>
   </object>
   <object>

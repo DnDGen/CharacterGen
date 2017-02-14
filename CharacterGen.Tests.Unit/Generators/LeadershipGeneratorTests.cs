@@ -23,14 +23,12 @@ namespace CharacterGen.Tests.Unit.Generators
         private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
         private Mock<ISetLevelRandomizer> mockSetLevelRandomizer;
         private Mock<ISetAlignmentRandomizer> mockSetAlignmentRandomizer;
-        private Mock<IAlignmentRandomizer> mockAnyAlignmentRandomizer;
         private Mock<IClassNameRandomizer> mockAnyPlayerClassNameRandomizer;
         private Mock<RaceRandomizer> mockAnyBaseRaceRandomizer;
         private Mock<RaceRandomizer> mockAnyMetaraceRandomizer;
         private Mock<IStatsRandomizer> mockRawStatRandomizer;
         private Mock<IBooleanPercentileSelector> mockBooleanPercentileSelector;
         private Mock<ICollectionsSelector> mockCollectionsSelector;
-        private Mock<IAlignmentGenerator> mockAlignmentGenerator;
         private Mock<IClassNameRandomizer> mockAnyNPCClassNameRandomizer;
         private Generator generator;
         private List<string> allowedAlignments;
@@ -47,20 +45,29 @@ namespace CharacterGen.Tests.Unit.Generators
             mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
             mockSetLevelRandomizer = new Mock<ISetLevelRandomizer>();
             mockSetAlignmentRandomizer = new Mock<ISetAlignmentRandomizer>();
-            mockAnyAlignmentRandomizer = new Mock<IAlignmentRandomizer>();
             mockAnyPlayerClassNameRandomizer = new Mock<IClassNameRandomizer>();
             mockAnyBaseRaceRandomizer = new Mock<RaceRandomizer>();
             mockAnyMetaraceRandomizer = new Mock<RaceRandomizer>();
             mockRawStatRandomizer = new Mock<IStatsRandomizer>();
             mockBooleanPercentileSelector = new Mock<IBooleanPercentileSelector>();
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
-            mockAlignmentGenerator = new Mock<IAlignmentGenerator>();
             generator = new ConfigurableIterationGenerator(2);
             mockAnyNPCClassNameRandomizer = new Mock<IClassNameRandomizer>();
-            leadershipGenerator = new LeadershipGenerator(mockCharacterGenerator.Object, mockLeadershipSelector.Object, mockPercentileSelector.Object,
-                mockAdjustmentsSelector.Object, mockSetLevelRandomizer.Object, mockSetAlignmentRandomizer.Object, mockAnyAlignmentRandomizer.Object,
-                mockAnyPlayerClassNameRandomizer.Object, mockAnyBaseRaceRandomizer.Object, mockAnyMetaraceRandomizer.Object, mockRawStatRandomizer.Object,
-                mockBooleanPercentileSelector.Object, mockCollectionsSelector.Object, mockAlignmentGenerator.Object, generator, mockAnyNPCClassNameRandomizer.Object);
+            leadershipGenerator = new LeadershipGenerator(mockCharacterGenerator.Object,
+                mockLeadershipSelector.Object,
+                mockPercentileSelector.Object,
+                mockAdjustmentsSelector.Object,
+                mockSetLevelRandomizer.Object,
+                mockSetAlignmentRandomizer.Object,
+                mockAnyPlayerClassNameRandomizer.Object,
+                mockAnyBaseRaceRandomizer.Object,
+                mockAnyMetaraceRandomizer.Object,
+                mockRawStatRandomizer.Object,
+                mockBooleanPercentileSelector.Object,
+                mockCollectionsSelector.Object,
+                generator,
+                mockAnyNPCClassNameRandomizer.Object);
+
             allowedAlignments = new List<string>();
             followerQuantities = new FollowerQuantities();
             npcClasses = new List<string>();
@@ -74,9 +81,10 @@ namespace CharacterGen.Tests.Unit.Generators
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AlignmentGroups, leaderAlignment))
                 .Returns(allowedAlignments);
 
-            mockAlignmentGenerator.Setup(g => g.GenerateWith(mockSetAlignmentRandomizer.Object)).Returns((IAlignmentRandomizer r) => (r as ISetAlignmentRandomizer).SetAlignment);
-            mockAlignmentGenerator.Setup(g => g.GenerateWith(mockAnyAlignmentRandomizer.Object)).Returns(new Alignment("any alignment"));
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.NPCs)).Returns(npcClasses);
+
+            var index = 0;
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(TableNameConstants.Set.Collection.AlignmentGroups, leaderAlignment)).Returns(() => allowedAlignments[index++ % allowedAlignments.Count]);
         }
 
         [Test]
@@ -187,7 +195,7 @@ namespace CharacterGen.Tests.Unit.Generators
         }
 
         [Test]
-        public void CharacterDoesNotHaveEmptyLeadershipModifiers()
+        public void CharacterDoesNotHaveEmptyStringLeadershipModifiers()
         {
             mockPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Percentile.LeadershipMovement)).Returns(string.Empty);
             var leadership = leadershipGenerator.GenerateLeadership(9266, 90210, string.Empty);
@@ -255,13 +263,17 @@ namespace CharacterGen.Tests.Unit.Generators
             mockLeadershipSelector.Setup(s => s.SelectCohortLevelFor(9266)).Returns(42);
             mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AttractCohortOfDifferentAlignment)).Returns(false);
 
+            var cohortAlignment = new Alignment("cohort alignment");
+            var leadersAlignment = new Alignment(leaderAlignment);
+            allowedAlignments.Add(cohortAlignment.ToString());
+
             var cohort = new Character();
             mockCharacterGenerator.Setup(g => g.GenerateWith(mockSetAlignmentRandomizer.Object, mockAnyPlayerClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockAnyBaseRaceRandomizer.Object, mockAnyMetaraceRandomizer.Object, mockRawStatRandomizer.Object))
                 .Returns(cohort);
 
             var generatedCohort = leadershipGenerator.GenerateCohort(9266, 90210, leaderAlignment, "class name");
             Assert.That(generatedCohort, Is.EqualTo(cohort));
-            mockSetAlignmentRandomizer.VerifySet(r => r.SetAlignment = new Alignment(leaderAlignment));
+            mockSetAlignmentRandomizer.VerifySet(r => r.SetAlignment = leadersAlignment);
         }
 
         [Test]
@@ -270,13 +282,8 @@ namespace CharacterGen.Tests.Unit.Generators
             mockLeadershipSelector.Setup(s => s.SelectCohortLevelFor(9265)).Returns(42);
             mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AttractCohortOfDifferentAlignment)).Returns(true);
 
-            var incompatibleAlignment = new Alignment("incompatible alignment");
             var cohortAlignment = new Alignment("cohort alignment");
-
             allowedAlignments.Add(cohortAlignment.ToString());
-
-            mockAlignmentGenerator.SetupSequence(g => g.GenerateWith(mockAnyAlignmentRandomizer.Object))
-                .Returns(incompatibleAlignment).Returns(cohortAlignment);
 
             var cohort = new Character();
             mockCharacterGenerator.Setup(g => g.GenerateWith(mockSetAlignmentRandomizer.Object, mockAnyPlayerClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockAnyBaseRaceRandomizer.Object, mockAnyMetaraceRandomizer.Object, mockRawStatRandomizer.Object))
@@ -328,13 +335,10 @@ namespace CharacterGen.Tests.Unit.Generators
         [Test]
         public void FollowerCannotOpposeAlignment()
         {
-            var incompatibleAlignment = new Alignment("incompatible alignment");
             var followerAlignment = new Alignment("cohort alignment");
 
+            allowedAlignments.Clear();
             allowedAlignments.Add(followerAlignment.ToString());
-
-            mockAlignmentGenerator.SetupSequence(g => g.GenerateWith(mockAnyAlignmentRandomizer.Object))
-                .Returns(incompatibleAlignment).Returns(followerAlignment);
 
             var follower = new Character();
             mockCharacterGenerator.Setup(g => g.GenerateWith(mockSetAlignmentRandomizer.Object, mockAnyPlayerClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockAnyBaseRaceRandomizer.Object, mockAnyMetaraceRandomizer.Object, mockRawStatRandomizer.Object))

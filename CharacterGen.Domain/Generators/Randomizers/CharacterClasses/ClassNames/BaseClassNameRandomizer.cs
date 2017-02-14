@@ -1,4 +1,5 @@
 ﻿using CharacterGen.Alignments;
+using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Selectors.Percentiles;
 using CharacterGen.Domain.Tables;
 using CharacterGen.Randomizers.CharacterClasses;
@@ -12,11 +13,13 @@ namespace CharacterGen.Domain.Generators.Randomizers.CharacterClasses.ClassNames
     {
         private IPercentileSelector percentileResultSelector;
         private Generator generator;
+        private ICollectionsSelector collectionsSelector;
 
-        public BaseClassNameRandomizer(IPercentileSelector percentileResultSelector, Generator generator)
+        public BaseClassNameRandomizer(IPercentileSelector percentileResultSelector, Generator generator, ICollectionsSelector collectionsSelector)
         {
             this.percentileResultSelector = percentileResultSelector;
             this.generator = generator;
+            this.collectionsSelector = collectionsSelector;
         }
 
         public string Randomize(Alignment alignment)
@@ -27,8 +30,10 @@ namespace CharacterGen.Domain.Generators.Randomizers.CharacterClasses.ClassNames
 
             var tableName = string.Format(TableNameConstants.Formattable.Percentile.GOODNESSCharacterClasses, alignment.Goodness);
 
-            return generator.Generate(() => percentileResultSelector.SelectFrom(tableName),
-                c => possibleClassNames.Contains(c));
+            return generator.Generate(
+                () => percentileResultSelector.SelectFrom(tableName),
+                c => possibleClassNames.Contains(c),
+                () => collectionsSelector.SelectRandomFrom(possibleClassNames));
         }
 
         protected abstract bool CharacterClassIsAllowed(string className, Alignment alignment);

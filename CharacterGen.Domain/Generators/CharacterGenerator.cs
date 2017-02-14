@@ -36,10 +36,18 @@ namespace CharacterGen.Domain.Generators
         private Generator generator;
         private ICollectionsSelector collectionsSelector;
 
-        public CharacterGenerator(IAlignmentGenerator alignmentGenerator, ICharacterClassGenerator characterClassGenerator, IRaceGenerator raceGenerator,
-            IAdjustmentsSelector adjustmentsSelector, IRandomizerVerifier randomizerVerifier, IPercentileSelector percentileSelector,
-            IAbilitiesGenerator abilitiesGenerator, ICombatGenerator combatGenerator, IEquipmentGenerator equipmentGenerator,
-            IMagicGenerator magicGenerator, Generator generator, ICollectionsSelector collectionsSelector)
+        public CharacterGenerator(IAlignmentGenerator alignmentGenerator,
+            ICharacterClassGenerator characterClassGenerator,
+            IRaceGenerator raceGenerator,
+            IAdjustmentsSelector adjustmentsSelector,
+            IRandomizerVerifier randomizerVerifier,
+            IPercentileSelector percentileSelector,
+            IAbilitiesGenerator abilitiesGenerator,
+            ICombatGenerator combatGenerator,
+            IEquipmentGenerator equipmentGenerator,
+            IMagicGenerator magicGenerator,
+            Generator generator,
+            ICollectionsSelector collectionsSelector)
         {
             this.alignmentGenerator = alignmentGenerator;
             this.characterClassGenerator = characterClassGenerator;
@@ -56,8 +64,11 @@ namespace CharacterGen.Domain.Generators
             this.collectionsSelector = collectionsSelector;
         }
 
-        public Character GenerateWith(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classNameRandomizer,
-            ILevelRandomizer levelRandomizer, RaceRandomizer baseRaceRandomizer, RaceRandomizer metaraceRandomizer,
+        public Character GenerateWith(IAlignmentRandomizer alignmentRandomizer,
+            IClassNameRandomizer classNameRandomizer,
+            ILevelRandomizer levelRandomizer,
+            RaceRandomizer baseRaceRandomizer,
+            RaceRandomizer metaraceRandomizer,
             IStatsRandomizer statsRandomizer)
         {
             VerifyRandomizers(alignmentRandomizer, classNameRandomizer, levelRandomizer, baseRaceRandomizer, metaraceRandomizer);
@@ -67,8 +78,11 @@ namespace CharacterGen.Domain.Generators
             return character;
         }
 
-        private Character GenerateCharacter(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classNameRandomizer,
-            ILevelRandomizer levelRandomizer, RaceRandomizer baseRaceRandomizer, RaceRandomizer metaraceRandomizer,
+        private Character GenerateCharacter(IAlignmentRandomizer alignmentRandomizer,
+            IClassNameRandomizer classNameRandomizer,
+            ILevelRandomizer levelRandomizer,
+            RaceRandomizer baseRaceRandomizer,
+            RaceRandomizer metaraceRandomizer,
             IStatsRandomizer statsRandomizer)
         {
             var character = new Character();
@@ -150,8 +164,11 @@ namespace CharacterGen.Domain.Generators
             return characterClass;
         }
 
-        private void VerifyRandomizers(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classNameRandomizer,
-            ILevelRandomizer levelRandomizer, RaceRandomizer baseRaceRandomizer, RaceRandomizer metaraceRandomizer)
+        private void VerifyRandomizers(IAlignmentRandomizer alignmentRandomizer,
+            IClassNameRandomizer classNameRandomizer,
+            ILevelRandomizer levelRandomizer,
+            RaceRandomizer baseRaceRandomizer,
+            RaceRandomizer metaraceRandomizer)
         {
             var verified = randomizerVerifier.VerifyCompatibility(alignmentRandomizer, classNameRandomizer, levelRandomizer, baseRaceRandomizer, metaraceRandomizer);
 
@@ -159,40 +176,49 @@ namespace CharacterGen.Domain.Generators
                 throw new IncompatibleRandomizersException();
         }
 
-        private Alignment GenerateAlignment(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classNameRandomizer,
-            ILevelRandomizer levelRandomizer, RaceRandomizer baseRaceRandomizer, RaceRandomizer metaraceRandomizer)
+        private Alignment GenerateAlignment(IAlignmentRandomizer alignmentRandomizer,
+            IClassNameRandomizer classNameRandomizer,
+            ILevelRandomizer levelRandomizer,
+            RaceRandomizer baseRaceRandomizer,
+            RaceRandomizer metaraceRandomizer)
         {
             var alignment = generator.Generate(
                 () => alignmentGenerator.GenerateWith(alignmentRandomizer),
-                a => randomizerVerifier.VerifyAlignmentCompatibility(a, classNameRandomizer, levelRandomizer, baseRaceRandomizer, metaraceRandomizer));
-
-            if (alignment == null)
-                throw new IncompatibleRandomizersException();
+                a => randomizerVerifier.VerifyAlignmentCompatibility(a, classNameRandomizer, levelRandomizer, baseRaceRandomizer, metaraceRandomizer),
+                () => DefaultIsIncompatible<Alignment>());
 
             return alignment;
         }
 
-        private CharacterClass GenerateCharacterClass(IClassNameRandomizer classNameRandomizer, ILevelRandomizer levelRandomizer,
-            Alignment alignment, RaceRandomizer baseRaceRandomizer, RaceRandomizer metaraceRandomizer)
+        private T DefaultIsIncompatible<T>()
+        {
+            throw new IncompatibleRandomizersException();
+        }
+
+        private CharacterClass GenerateCharacterClass(IClassNameRandomizer classNameRandomizer,
+            ILevelRandomizer levelRandomizer,
+            Alignment alignment,
+            RaceRandomizer baseRaceRandomizer,
+            RaceRandomizer metaraceRandomizer)
         {
             var characterClass = generator.Generate(
                 () => characterClassGenerator.GenerateWith(alignment, levelRandomizer, classNameRandomizer),
-                c => randomizerVerifier.VerifyCharacterClassCompatibility(alignment, c, levelRandomizer, baseRaceRandomizer, metaraceRandomizer));
-
-            if (characterClass == null)
-                throw new IncompatibleRandomizersException();
+                c => randomizerVerifier.VerifyCharacterClassCompatibility(alignment, c, levelRandomizer, baseRaceRandomizer, metaraceRandomizer),
+                () => DefaultIsIncompatible<CharacterClass>());
 
             return characterClass;
         }
 
-        private Race GenerateRace(RaceRandomizer baseRaceRandomizer, RaceRandomizer metaraceRandomizer, Alignment alignment, CharacterClass characterClass, ILevelRandomizer levelRandomizer)
+        private Race GenerateRace(RaceRandomizer baseRaceRandomizer,
+            RaceRandomizer metaraceRandomizer,
+            Alignment alignment,
+            CharacterClass characterClass,
+            ILevelRandomizer levelRandomizer)
         {
             var race = generator.Generate(
                 () => raceGenerator.GenerateWith(alignment, characterClass, baseRaceRandomizer, metaraceRandomizer),
-                r => randomizerVerifier.VerifyRaceCompatibility(r, characterClass, levelRandomizer));
-
-            if (race == null)
-                throw new IncompatibleRandomizersException();
+                r => randomizerVerifier.VerifyRaceCompatibility(r, characterClass, levelRandomizer),
+                () => DefaultIsIncompatible<Race>());
 
             return race;
         }

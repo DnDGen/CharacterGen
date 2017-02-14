@@ -15,25 +15,32 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
                 return new[]
                 {
                     RaceConstants.BaseRaces.Aasimar,
+                    RaceConstants.BaseRaces.Azer,
+                    RaceConstants.BaseRaces.BlueSlaad,
                     RaceConstants.BaseRaces.Bugbear,
                     RaceConstants.BaseRaces.Centaur,
                     RaceConstants.BaseRaces.CloudGiant,
-                    RaceConstants.BaseRaces.Derro,
+                    RaceConstants.BaseRaces.DeathSlaad,
                     RaceConstants.BaseRaces.DeepDwarf,
                     RaceConstants.BaseRaces.DeepHalfling,
+                    RaceConstants.BaseRaces.Derro,
                     RaceConstants.BaseRaces.Doppelganger,
                     RaceConstants.BaseRaces.Drow,
                     RaceConstants.BaseRaces.DuergarDwarf,
                     RaceConstants.BaseRaces.FireGiant,
                     RaceConstants.BaseRaces.ForestGnome,
                     RaceConstants.BaseRaces.FrostGiant,
+                    RaceConstants.BaseRaces.Gargoyle,
                     RaceConstants.BaseRaces.Gnoll,
                     RaceConstants.BaseRaces.Goblin,
                     RaceConstants.BaseRaces.GrayElf,
+                    RaceConstants.BaseRaces.GraySlaad,
+                    RaceConstants.BaseRaces.GreenSlaad,
                     RaceConstants.BaseRaces.Grimlock,
                     RaceConstants.BaseRaces.Harpy,
                     RaceConstants.BaseRaces.HillGiant,
                     RaceConstants.BaseRaces.Hobgoblin,
+                    RaceConstants.BaseRaces.HoundArchon,
                     RaceConstants.BaseRaces.Janni,
                     RaceConstants.BaseRaces.Kobold,
                     RaceConstants.BaseRaces.Lizardfolk,
@@ -45,6 +52,7 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
                     RaceConstants.BaseRaces.Orc,
                     RaceConstants.BaseRaces.Pixie,
                     RaceConstants.BaseRaces.Rakshasa,
+                    RaceConstants.BaseRaces.RedSlaad,
                     RaceConstants.BaseRaces.Satyr,
                     RaceConstants.BaseRaces.Scorpionfolk,
                     RaceConstants.BaseRaces.StoneGiant,
@@ -55,7 +63,10 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
                     RaceConstants.BaseRaces.Troglodyte,
                     RaceConstants.BaseRaces.Troll,
                     RaceConstants.BaseRaces.WildElf,
-                    RaceConstants.BaseRaces.WoodElf
+                    RaceConstants.BaseRaces.WoodElf,
+                    RaceConstants.BaseRaces.YuanTiAbomination,
+                    RaceConstants.BaseRaces.YuanTiHalfblood,
+                    RaceConstants.BaseRaces.YuanTiPureblood,
                 };
             }
         }
@@ -67,7 +78,7 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
         }
 
         [Test]
-        public void StressBaseRace()
+        public void StressNonStandardBaseRace()
         {
             Stress(AssertBaseRace);
         }

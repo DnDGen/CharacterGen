@@ -1,10 +1,12 @@
 ﻿using CharacterGen.Alignments;
 using CharacterGen.Domain.Generators;
 using CharacterGen.Domain.Generators.Randomizers.CharacterClasses.ClassNames;
+using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Selectors.Percentiles;
 using CharacterGen.Verifiers.Exceptions;
 using Moq;
 using NUnit.Framework;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassNames
@@ -12,8 +14,9 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassN
     [TestFixture]
     public class BaseClassNameRandomizerTests
     {
-        private TestClassRandomizer randomizer;
-        private Mock<IPercentileSelector> mockPercentileResultSelector;
+        private TestClassRandomizer classNameRandomizer;
+        private Mock<IPercentileSelector> mockPercentileSelector;
+        private Mock<ICollectionsSelector> mockCollectionsSelector;
         private Alignment alignment;
 
         private string firstClass = "first class";
@@ -22,62 +25,75 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassN
         [SetUp]
         public void Setup()
         {
+            mockPercentileSelector = new Mock<IPercentileSelector>();
+            mockCollectionsSelector = new Mock<ICollectionsSelector>();
+            var generator = new ConfigurableIterationGenerator(2);
+
+            classNameRandomizer = new TestClassRandomizer(mockPercentileSelector.Object, generator, mockCollectionsSelector.Object);
+
             alignment = new Alignment();
             alignment.Goodness = AlignmentConstants.Good;
 
-            mockPercentileResultSelector = new Mock<IPercentileSelector>();
-            var generator = new ConfigurableIterationGenerator(2);
+            mockPercentileSelector.Setup(p => p.SelectAllFrom(It.IsAny<string>())).Returns(new[] { firstClass, secondClass });
+            mockPercentileSelector.Setup(p => p.SelectFrom(It.IsAny<string>())).Returns(firstClass);
 
-            mockPercentileResultSelector.Setup(p => p.SelectAllFrom(It.IsAny<string>())).Returns(new[] { firstClass, secondClass });
-            mockPercentileResultSelector.Setup(p => p.SelectFrom(It.IsAny<string>())).Returns(firstClass);
-
-            randomizer = new TestClassRandomizer(mockPercentileResultSelector.Object, generator);
+            var index = 0;
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<string>>())).Returns((IEnumerable<string> ss) => ss.ElementAt(index++ % ss.Count()));
         }
 
         [Test]
         public void RandomizeGetsAllPossibleResultsFromGetAllPossibleResults()
         {
-            randomizer.Randomize(alignment);
-            mockPercentileResultSelector.Verify(p => p.SelectAllFrom(It.IsAny<string>()), Times.Once);
+            classNameRandomizer.Randomize(alignment);
+            mockPercentileSelector.Verify(p => p.SelectAllFrom(It.IsAny<string>()), Times.Once);
         }
 
         [Test]
         public void RandomizeThrowsErrorIfNoPossibleResults()
         {
-            mockPercentileResultSelector.Setup(p => p.SelectAllFrom(It.IsAny<string>())).Returns(Enumerable.Empty<string>());
-            Assert.That(() => randomizer.Randomize(alignment), Throws.InstanceOf<IncompatibleRandomizersException>());
+            mockPercentileSelector.Setup(p => p.SelectAllFrom(It.IsAny<string>())).Returns(Enumerable.Empty<string>());
+            Assert.That(() => classNameRandomizer.Randomize(alignment), Throws.InstanceOf<IncompatibleRandomizersException>());
         }
 
         [Test]
         public void RandomizeReturnCharacterClassFromPercentileResultSelector()
         {
-            var result = randomizer.Randomize(alignment);
+            var result = classNameRandomizer.Randomize(alignment);
             Assert.That(result, Is.EqualTo(firstClass));
         }
 
         [Test]
         public void RandomizeAccessesTableAlignmentGoodnessClassNames()
         {
-            randomizer.Randomize(alignment);
+            classNameRandomizer.Randomize(alignment);
 
             var tableName = string.Format("{0}CharacterClasses", alignment.Goodness);
-            mockPercentileResultSelector.Verify(p => p.SelectFrom(tableName), Times.Once);
+            mockPercentileSelector.Verify(p => p.SelectFrom(tableName), Times.Once);
         }
 
         [Test]
         public void RandomizeLoopsUntilAllowedClassNameIsRolled()
         {
-            mockPercentileResultSelector.SetupSequence(p => p.SelectFrom(It.IsAny<string>())).Returns("invalid class name")
+            mockPercentileSelector.SetupSequence(p => p.SelectFrom(It.IsAny<string>())).Returns("invalid class name")
                 .Returns(firstClass);
 
-            randomizer.Randomize(alignment);
-            mockPercentileResultSelector.Verify(p => p.SelectFrom(It.IsAny<string>()), Times.Exactly(2));
+            classNameRandomizer.Randomize(alignment);
+            mockPercentileSelector.Verify(p => p.SelectFrom(It.IsAny<string>()), Times.Exactly(2));
+        }
+
+        [Test]
+        public void RandomizeReturnsDefault()
+        {
+            mockPercentileSelector.Setup(p => p.SelectFrom(It.IsAny<string>())).Returns("invalid class name");
+
+            var className = classNameRandomizer.Randomize(alignment);
+            Assert.That(className, Is.EqualTo(firstClass));
         }
 
         [Test]
         public void GetAllPossibleResultsGetsResultsFromSelector()
         {
-            var classNames = randomizer.GetAllPossibleResults(alignment);
+            var classNames = classNameRandomizer.GetAllPossibleResults(alignment);
 
             Assert.That(classNames, Contains.Item(firstClass));
             Assert.That(classNames, Contains.Item(secondClass));
@@ -87,17 +103,17 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassN
         [Test]
         public void GetAllPossibleResultsAccessesTableAlignmentGoodnessClassNames()
         {
-            randomizer.GetAllPossibleResults(alignment);
+            classNameRandomizer.GetAllPossibleResults(alignment);
 
             var tableName = string.Format("{0}CharacterClasses", alignment.Goodness);
-            mockPercentileResultSelector.Verify(p => p.SelectAllFrom(tableName), Times.Once);
+            mockPercentileSelector.Verify(p => p.SelectAllFrom(tableName), Times.Once);
         }
 
         [Test]
         public void GetAllPossibleResultsFiltersOutUnallowedCharacterClasses()
         {
-            randomizer.NotAllowedClassName = firstClass;
-            var results = randomizer.GetAllPossibleResults(alignment);
+            classNameRandomizer.NotAllowedClassName = firstClass;
+            var results = classNameRandomizer.GetAllPossibleResults(alignment);
 
             Assert.That(results, Contains.Item(secondClass));
             Assert.That(results.Count(), Is.EqualTo(1));
@@ -107,8 +123,8 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassN
         {
             public string NotAllowedClassName { get; set; }
 
-            public TestClassRandomizer(IPercentileSelector percentileResultSelector, Generator generator)
-                : base(percentileResultSelector, generator)
+            public TestClassRandomizer(IPercentileSelector percentileResultSelector, Generator generator, ICollectionsSelector collectionsSelector)
+                : base(percentileResultSelector, generator, collectionsSelector)
             { }
 
             protected override bool CharacterClassIsAllowed(string className, Alignment alignment)

@@ -171,11 +171,11 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Data.Racial.Base
         [TestCase(FeatConstants.DamageReduction,
             FeatConstants.DamageReduction,
             "Must be both good and piercing to overcome",
-            15,
+            1,
             FeatConstants.Frequencies.Hit,
             0,
             "",
-            0,
+            15,
             0, 0)]
         [TestCase(FeatConstants.SpellResistance,
             FeatConstants.SpellResistance,

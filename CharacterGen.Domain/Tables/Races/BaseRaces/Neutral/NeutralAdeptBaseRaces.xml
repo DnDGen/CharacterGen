@@ -60,21 +60,6 @@
   <object>
     <lower>63</lower>
     <content>Human</content>
-    <upper>90</upper>
+    <upper>100</upper>
   </object>
-  <object>
-    <lower>91</lower>
-    <content>Lizardfolk</content>
-    <upper>97</upper>
-  </object>
-  <object>
-    <lower>98</lower>
-    <content>Doppelganger</content>
-    <upper>98</upper>
-  </object>
-    <object>
-        <lower>99</lower>
-        <content></content>
-        <upper>100</upper>
-    </object>
 </percentile>

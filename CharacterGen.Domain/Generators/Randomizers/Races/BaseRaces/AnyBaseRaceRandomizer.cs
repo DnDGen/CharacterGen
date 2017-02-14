@@ -3,10 +3,10 @@ using CharacterGen.Domain.Selectors.Percentiles;
 
 namespace CharacterGen.Domain.Generators.Randomizers.Races.BaseRaces
 {
-    internal class AnyBaseRaceRandomizer : BaseRaceRandomizer
+    internal class AnyBaseRaceRandomizer : BaseRaceRandomizerBase
     {
-        public AnyBaseRaceRandomizer(IPercentileSelector percentileResultSelector, IAdjustmentsSelector levelAdjustmentSelector, Generator generator)
-            : base(percentileResultSelector, levelAdjustmentSelector, generator) { }
+        public AnyBaseRaceRandomizer(IPercentileSelector percentileResultSelector, IAdjustmentsSelector levelAdjustmentSelector, Generator generator, ICollectionsSelector collectionSelector)
+            : base(percentileResultSelector, levelAdjustmentSelector, generator, collectionSelector) { }
 
         protected override bool BaseRaceIsAllowed(string baseRace)
         {

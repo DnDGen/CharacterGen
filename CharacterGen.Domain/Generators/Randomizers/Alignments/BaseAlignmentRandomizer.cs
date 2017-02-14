@@ -1,9 +1,9 @@
 ﻿using CharacterGen.Alignments;
+using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Selectors.Percentiles;
 using CharacterGen.Domain.Tables;
 using CharacterGen.Randomizers.Alignments;
 using CharacterGen.Verifiers.Exceptions;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -13,11 +13,13 @@ namespace CharacterGen.Domain.Generators.Randomizers.Alignments
     {
         private IPercentileSelector percentileResultSelector;
         private Generator generator;
+        private ICollectionsSelector collectionsSelector;
 
-        public BaseAlignmentRandomizer(IPercentileSelector percentileResultSelector, Generator generator)
+        public BaseAlignmentRandomizer(IPercentileSelector percentileResultSelector, Generator generator, ICollectionsSelector collectionsSelector)
         {
             this.percentileResultSelector = percentileResultSelector;
             this.generator = generator;
+            this.collectionsSelector = collectionsSelector;
         }
 
         public Alignment Randomize()
@@ -26,7 +28,10 @@ namespace CharacterGen.Domain.Generators.Randomizers.Alignments
             if (possibleAlignments.Any() == false)
                 throw new IncompatibleRandomizersException();
 
-            return generator.Generate(GenerateAlignment, a => possibleAlignments.Contains(a));
+            return generator.Generate(
+                GenerateAlignment,
+                a => possibleAlignments.Contains(a),
+                () => collectionsSelector.SelectRandomFrom(possibleAlignments));
         }
 
         private Alignment GenerateAlignment()
@@ -52,6 +57,6 @@ namespace CharacterGen.Domain.Generators.Randomizers.Alignments
             return alignments.Where(a => AlignmentIsAllowed(a));
         }
 
-        protected abstract Boolean AlignmentIsAllowed(Alignment alignment);
+        protected abstract bool AlignmentIsAllowed(Alignment alignment);
     }
 }

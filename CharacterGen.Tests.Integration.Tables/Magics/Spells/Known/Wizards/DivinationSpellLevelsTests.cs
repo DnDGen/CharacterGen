@@ -95,7 +95,7 @@ namespace CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizards
         [TestCase(SpellConstants.MomentOfPrescience, 8)]
         [TestCase(SpellConstants.PryingEyes_Greater, 8)]
         [TestCase(SpellConstants.Foresight, 9)]
-        public override void Adjustment(string name, int adjustment)
+        public void SpellLevel(string name, int adjustment)
         {
             base.Adjustment(name, adjustment);
         }

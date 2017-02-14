@@ -111,7 +111,7 @@ namespace CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizards
         [TestCase(SpellConstants.Imprisonment, 9)]
         [TestCase(SpellConstants.MagesDisjunction, 9)]
         [TestCase(SpellConstants.PrismaticSphere, 9)]
-        public override void Adjustment(string name, int adjustment)
+        public void SpellLevel(string name, int adjustment)
         {
             base.Adjustment(name, adjustment);
         }
