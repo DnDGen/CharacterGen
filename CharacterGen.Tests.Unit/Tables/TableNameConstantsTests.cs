@@ -27,6 +27,7 @@ namespace CharacterGen.Tests.Unit.Tables
         [TestCase(TableNameConstants.Set.Adjustments.SkillPoints, "SkillPoints")]
         [TestCase(TableNameConstants.Set.Adjustments.SpecialistFieldQuantities, "SpecialistFieldQuantities")]
         [TestCase(TableNameConstants.Set.Collection.AdditionalFeatData, "AdditionalFeatData")]
+        [TestCase(TableNameConstants.Set.Collection.AerialManeuverability, "AerialManeuverability")]
         [TestCase(TableNameConstants.Set.Collection.AlignmentGroups, "AlignmentGroups")]
         [TestCase(TableNameConstants.Set.Collection.AnimalGroups, "AnimalGroups")]
         [TestCase(TableNameConstants.Set.Collection.ArmorClassModifiers, "ArmorClassModifiers")]
@@ -86,7 +87,7 @@ namespace CharacterGen.Tests.Unit.Tables
         [TestCase(TableNameConstants.Formattable.Percentile.LevelXPower, "Level{0}Power")]
         [TestCase(TableNameConstants.Formattable.TrueOrFalse.CLASSHasSpecialistFields, "{0}HasSpecialistFields")]
         [TestCase(TableNameConstants.Formattable.TrueOrFalse.CLASSKnowsAdditionalSpells, "{0}KnowsAdditionalSpells")]
-        public void Constant(string constant, string value)
+        public void TableNameConstant(string constant, string value)
         {
             Assert.That(constant, Is.EqualTo(value));
         }

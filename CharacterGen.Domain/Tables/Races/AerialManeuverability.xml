@@ -1,0 +1,296 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+  <object>
+    <name></name>
+    <item></item>
+  </object>
+  <object>
+    <name>Aasimar</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Azer</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Blue Slaad</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Bugbear</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Centaur</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Cloud Giant</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Death Slaad</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Deep Halfling</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Deep Dwarf</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Derro</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Doppelganger</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Drow</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Duergar Dwarf</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Fire Giant</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Forest Gnome</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Frost Giant</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Gargoyle</name>
+    <item>Average Maneuverability</item>
+  </object>
+  <object>
+    <name>Ghost</name>
+    <item>Perfect Maneuverability</item>
+  </object>
+  <object>
+    <name>Gnoll</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Goblin</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Gray Elf</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Gray Slaad</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Green Slaad</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Grimlock</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Half-Celestial</name>
+    <item>Good Maneuverability</item>
+  </object>
+  <object>
+    <name>Half-Dragon</name>
+    <item>Average Maneuverability</item>
+  </object>
+  <object>
+    <name>Half-Elf</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Half-Fiend</name>
+    <item>Average Maneuverability</item>
+  </object>
+  <object>
+    <name>Half-Orc</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Harpy</name>
+    <item>Average Maneuverability</item>
+  </object>
+  <object>
+    <name>High Elf</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Hill Dwarf</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Hill Giant</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Hobgoblin</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Hound Archon</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Human</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Janni</name>
+    <item>Perfect Maneuverability</item>
+  </object>
+  <object>
+    <name>Kobold</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Lich</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Lightfoot Halfling</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Lizardfolk</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Mind Flayer</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Minotaur</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Mountain Dwarf</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Mummy</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Ogre Mage</name>
+    <item>Good Maneuverability</item>
+  </object>
+  <object>
+    <name>Ogre</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Orc</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Pixie</name>
+    <item>Good Maneuverability</item>
+  </object>
+  <object>
+    <name>Rakshasa</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Red Slaad</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Rock Gnome</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Satyr</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Scorpionfolk</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Stone Giant</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Storm Giant</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Svirfneblin</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Tallfellow Halfling</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Tiefling</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Troglodyte</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Troll</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Vampire</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Werebear</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Wereboar</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Wererat</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Weretiger</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Werewolf</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Wild Elf</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Wood Elf</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Yuan-ti Abomination</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Yuan-ti Halfblood</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Yuan-ti Pureblood</name>
+    <item></item>
+  </object>
+</items>

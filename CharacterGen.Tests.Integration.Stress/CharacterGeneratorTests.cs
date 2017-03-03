@@ -39,12 +39,6 @@ namespace CharacterGen.Tests.Integration.Stress
         [Inject]
         public Random Random { get; set; }
 
-        [TearDown]
-        public void TearDown()
-        {
-            MetaraceRandomizer = GetNewInstanceOf<RaceRandomizer>(RaceRandomizerTypeConstants.Metarace.AnyMeta);
-        }
-
         [Test]
         public void StressCharacter()
         {
@@ -242,9 +236,9 @@ namespace CharacterGen.Tests.Integration.Stress
             var character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, SetBaseRaceRandomizer, MetaraceRandomizer, RawStatsRandomizer);
 
             CharacterVerifier.AssertCharacter(character);
-            Assert.That(character.Race.BaseRace, Is.EqualTo(RaceConstants.BaseRaces.Aasimar)
-                .Or.EqualTo(RaceConstants.BaseRaces.Tiefling));
+            Assert.That(character.Race.BaseRace, Is.EqualTo(RaceConstants.BaseRaces.Aasimar).Or.EqualTo(RaceConstants.BaseRaces.Tiefling));
             Assert.That(character.Equipment.Treasure.Items, Is.Not.Empty, character.Summary);
+            Assert.That(character.Class.LevelAdjustment, Is.Positive);
         }
 
         [Test]
@@ -262,6 +256,8 @@ namespace CharacterGen.Tests.Integration.Stress
             CharacterVerifier.AssertCharacter(character);
             Assert.That(character.Equipment.Treasure.Items, Is.Not.Empty, character.Summary);
             Assert.That(character.Race.Metarace, Is.EqualTo(RaceConstants.Metaraces.Ghost));
+            Assert.That(character.Race.AerialSpeed.Value, Is.Positive);
+            Assert.That(character.Race.AerialSpeed.Description, Is.Not.Empty);
 
             var ghostSpecialAttacks = new[]
             {

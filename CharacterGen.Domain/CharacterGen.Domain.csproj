@@ -2678,7 +2678,7 @@
     <EmbeddedResource Include="Tables\Races\BaseRaces\Ages\Fire GiantAges.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Races\BaseRaces\AerialSpeeds.xml" />
+    <EmbeddedResource Include="Tables\Races\AerialSpeeds.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Tables\Races\BaseRaces\Ages\CentaurAges.xml" />
@@ -2873,6 +2873,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Tables\Abilities\Feats\Data\Racial\BaseRaces\Yuan-ti PurebloodFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Races\AerialManeuverability.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

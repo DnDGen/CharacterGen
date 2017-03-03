@@ -31,6 +31,7 @@
             internal static class Collection
             {
                 public const string AdditionalFeatData = "AdditionalFeatData";
+                public const string AerialManeuverability = "AerialManeuverability";
                 public const string AlignmentGroups = "AlignmentGroups";
                 public const string AnimalGroups = "AnimalGroups";
                 public const string ArmorClassModifiers = "ArmorClassModifiers";

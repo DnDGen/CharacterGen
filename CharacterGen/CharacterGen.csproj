@@ -83,7 +83,7 @@
     <Compile Include="Magics\Spell.cs" />
     <Compile Include="Magics\SpellConstants.cs" />
     <Compile Include="Magics\SpellQuantity.cs" />
-    <Compile Include="Races\Age.cs" />
+    <Compile Include="Races\Measurement.cs" />
     <Compile Include="Races\Race.cs" />
     <Compile Include="Races\RaceConstants.cs" />
     <Compile Include="Abilities\Skills\SkillConstants.cs" />

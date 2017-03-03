@@ -37,6 +37,7 @@ namespace CharacterGen.Tests.Unit.Generators
         private Dictionary<string, int> femaleHeights;
         private Dictionary<string, int> maleWeights;
         private Dictionary<string, int> femaleWeights;
+        private Dictionary<string, List<string>> aerialManeuverability;
         private string classType;
         private string baseRaceSize;
         private List<string> baseRacesWithWings;
@@ -49,7 +50,7 @@ namespace CharacterGen.Tests.Unit.Generators
             mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
             mockBooleanPercentileSelector = new Mock<IBooleanPercentileSelector>();
             mockDice = new Mock<Dice>();
-            var generator = new IterativeGenerator();
+            var generator = new ConfigurableIterationGenerator(5);
             raceGenerator = new RaceGenerator(mockBooleanPercentileSelector.Object,
                 mockCollectionsSelector.Object,
                 mockAdjustmentsSelector.Object,
@@ -71,6 +72,7 @@ namespace CharacterGen.Tests.Unit.Generators
             femaleHeights = new Dictionary<string, int>();
             maleWeights = new Dictionary<string, int>();
             femaleWeights = new Dictionary<string, int>();
+            aerialManeuverability = new Dictionary<string, List<string>>();
 
             characterClass.Name = "class name";
             characterClass.Level = 15;
@@ -92,6 +94,7 @@ namespace CharacterGen.Tests.Unit.Generators
                 .Returns(() => classType);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.HasWings)).Returns(baseRacesWithWings);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.HasWings)).Returns(metaracesWithWings);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AerialManeuverability, It.IsAny<string>())).Returns((string table, string name) => aerialManeuverability[name]);
 
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.ChallengeRatings, It.IsAny<string>())).Returns((string table, string name) => challengeRatings[name]);
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.AerialSpeeds, It.IsAny<string>())).Returns((string table, string name) => aerialSpeeds[name]);
@@ -110,12 +113,15 @@ namespace CharacterGen.Tests.Unit.Generators
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName, It.IsAny<string>())).Returns((string table, string name) => femaleWeights[name]);
         }
 
-        private void SetUpRoll(string roll, int result)
+        private void SetUpRoll(string roll, int result, int min = 0, int max = int.MaxValue)
         {
             var mockPartial = new Mock<PartialRoll>();
 
             var count = 0;
             mockPartial.Setup(r => r.AsSum()).Returns(() => result + count++);
+            mockPartial.Setup(r => r.AsPotentialMaximum()).Returns(max);
+            mockPartial.Setup(r => r.AsPotentialMinimum()).Returns(min);
+
             mockDice.Setup(d => d.Roll(roll)).Returns(mockPartial.Object);
         }
 
@@ -165,12 +171,14 @@ namespace CharacterGen.Tests.Unit.Generators
                 landSpeeds[baseRace] = 9266;
 
             aerialSpeeds[baseRace] = 0;
+            aerialManeuverability[baseRace] = new List<string> { string.Empty };
             challengeRatings[baseRace] = 0;
         }
 
         private void SetUpTablesForMetarace(string metarace)
         {
             aerialSpeeds[metarace] = 0;
+            aerialManeuverability[metarace] = new List<string> { string.Empty };
             challengeRatings[metarace] = 0;
         }
 
@@ -366,7 +374,9 @@ namespace CharacterGen.Tests.Unit.Generators
             landSpeeds["other base race"] = 42;
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
-            Assert.That(race.LandSpeed, Is.EqualTo(9266));
+            Assert.That(race.LandSpeed.Value, Is.EqualTo(9266));
+            Assert.That(race.LandSpeed.Unit, Is.EqualTo("feet per round"));
+            Assert.That(race.LandSpeed.Description, Is.Empty);
         }
 
         [Test]
@@ -374,9 +384,26 @@ namespace CharacterGen.Tests.Unit.Generators
         {
             aerialSpeeds[Metarace] = 30;
             aerialSpeeds[BaseRace] = 20;
+            aerialManeuverability[Metarace][0] = "awkward maneuverability";
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
-            Assert.That(race.AerialSpeed, Is.EqualTo(30));
+            Assert.That(race.AerialSpeed.Value, Is.EqualTo(30));
+            Assert.That(race.AerialSpeed.Unit, Is.EqualTo("feet per round"));
+            Assert.That(race.AerialSpeed.Description, Is.EqualTo("awkward maneuverability"));
+        }
+
+        [Test]
+        public void MetaraceAerialSpeedIsSet_ButBaseRaceAerialSpeedIsHigher()
+        {
+            aerialSpeeds[Metarace] = 30;
+            aerialSpeeds[BaseRace] = 40;
+            aerialManeuverability[Metarace][0] = "awkward maneuverability";
+            aerialManeuverability[BaseRace][0] = "awesome maneuverability";
+
+            var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
+            Assert.That(race.AerialSpeed.Value, Is.EqualTo(40));
+            Assert.That(race.AerialSpeed.Unit, Is.EqualTo("feet per round"));
+            Assert.That(race.AerialSpeed.Description, Is.EqualTo("awesome maneuverability"));
         }
 
         [Test]
@@ -386,12 +413,15 @@ namespace CharacterGen.Tests.Unit.Generators
 
             aerialSpeeds[RaceConstants.Metaraces.HalfDragon] = 2;
             aerialSpeeds[BaseRace] = 20;
+            aerialManeuverability[BaseRace][0] = "awkward maneuverability";
 
             mockMetaraceRandomizer.Setup(r => r.Randomize(alignment, characterClass)).Returns(RaceConstants.Metaraces.HalfDragon);
             baseRaceSize = RaceConstants.Sizes.Large;
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
-            Assert.That(race.AerialSpeed, Is.EqualTo(20));
+            Assert.That(race.AerialSpeed.Value, Is.EqualTo(20));
+            Assert.That(race.AerialSpeed.Unit, Is.EqualTo("feet per round"));
+            Assert.That(race.AerialSpeed.Description, Is.EqualTo("awkward maneuverability"));
         }
 
         [Test]
@@ -400,12 +430,15 @@ namespace CharacterGen.Tests.Unit.Generators
             SetUpTablesForMetarace(RaceConstants.Metaraces.HalfDragon);
             aerialSpeeds[RaceConstants.Metaraces.HalfDragon] = 2;
             aerialSpeeds[BaseRace] = 0;
+            aerialManeuverability[RaceConstants.Metaraces.HalfDragon][0] = "awkward maneuverability";
 
             mockMetaraceRandomizer.Setup(r => r.Randomize(alignment, characterClass)).Returns(RaceConstants.Metaraces.HalfDragon);
             baseRaceSize = RaceConstants.Sizes.Large;
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
-            Assert.That(race.AerialSpeed, Is.EqualTo(9266 * 2));
+            Assert.That(race.AerialSpeed.Value, Is.EqualTo(9266 * 2));
+            Assert.That(race.AerialSpeed.Unit, Is.EqualTo("feet per round"));
+            Assert.That(race.AerialSpeed.Description, Is.EqualTo("awkward maneuverability"));
         }
 
         [Test]
@@ -414,11 +447,14 @@ namespace CharacterGen.Tests.Unit.Generators
             SetUpTablesForMetarace(RaceConstants.Metaraces.HalfDragon);
             aerialSpeeds[RaceConstants.Metaraces.HalfDragon] = 2;
             aerialSpeeds[BaseRace] = 0;
+            aerialManeuverability[RaceConstants.Metaraces.HalfDragon][0] = "awkward maneuverability";
 
             mockMetaraceRandomizer.Setup(r => r.Randomize(alignment, characterClass)).Returns(RaceConstants.Metaraces.HalfDragon);
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
-            Assert.That(race.AerialSpeed, Is.EqualTo(0));
+            Assert.That(race.AerialSpeed.Value, Is.EqualTo(0));
+            Assert.That(race.AerialSpeed.Unit, Is.EqualTo("feet per round"));
+            Assert.That(race.AerialSpeed.Description, Is.Empty);
         }
 
         [Test]
@@ -428,97 +464,108 @@ namespace CharacterGen.Tests.Unit.Generators
             aerialSpeeds[BaseRace] = 0;
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
-            Assert.That(race.AerialSpeed, Is.EqualTo(0));
+            Assert.That(race.AerialSpeed.Value, Is.EqualTo(0));
+            Assert.That(race.AerialSpeed.Unit, Is.EqualTo("feet per round"));
+            Assert.That(race.AerialSpeed.Description, Is.Empty);
         }
 
-        [Test]
-        public void GetMaleHeight()
+        [TestCase(1, "Short")]
+        [TestCase(2, "Average")]
+        [TestCase(3, "Tall")]
+        public void GetMaleHeight(int roll, string description)
         {
+            SetUpRoll("10d4", roll, 1, 3);
             mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.Male)).Returns(true);
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
-            Assert.That(race.HeightInInches, Is.EqualTo(313));
+            Assert.That(race.Height.Value, Is.EqualTo(209 + roll));
+            Assert.That(race.Height.Unit, Is.EqualTo("Inches"));
+            Assert.That(race.Height.Description, Is.EqualTo(description));
         }
 
-        [Test]
-        public void GetFemaleHeight()
+        [TestCase(1, "Short")]
+        [TestCase(2, "Average")]
+        [TestCase(3, "Tall")]
+        public void GetFemaleHeight(int roll, string description)
         {
+            SetUpRoll("10d4", roll, 1, 3);
             mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.Male)).Returns(false);
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
-            Assert.That(race.HeightInInches, Is.EqualTo(1006));
+            Assert.That(race.Height.Value, Is.EqualTo(902 + roll));
+            Assert.That(race.Height.Unit, Is.EqualTo("Inches"));
+            Assert.That(race.Height.Description, Is.EqualTo(description));
         }
 
-        [Test]
-        public void GetMaleWeight()
+        [TestCase(1, "Light")]
+        [TestCase(2, "Average")]
+        [TestCase(3, "Heavy")]
+        public void GetMaleWeight(int roll, string description)
         {
+            SetUpRoll("92d66", roll, 1, 3);
             mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.Male)).Returns(true);
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
-            Assert.That(race.WeightInPounds, Is.EqualTo(44118));
+            Assert.That(race.Weight.Value, Is.EqualTo(22 + 104 * roll));
+            Assert.That(race.Weight.Unit, Is.EqualTo("Pounds"));
+            Assert.That(race.Weight.Description, Is.EqualTo(description));
         }
 
-        [Test]
-        public void GetFemaleWeight()
+        [TestCase(1, "Light")]
+        [TestCase(2, "Average")]
+        [TestCase(3, "Heavy")]
+        public void GetFemaleWeight(int roll, string description)
         {
+            SetUpRoll("92d66", roll, 1, 3);
             mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.Male)).Returns(false);
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
-            Assert.That(race.WeightInPounds, Is.EqualTo(44098));
+            Assert.That(race.Weight.Value, Is.EqualTo(2 + 104 * roll));
+            Assert.That(race.Weight.Unit, Is.EqualTo("Pounds"));
+            Assert.That(race.Weight.Description, Is.EqualTo(description));
         }
 
-        [Test]
-        public void GetIntuitiveAge()
+        [TestCase(CharacterClassConstants.TrainingTypes.Intuitive, 90320)]
+        [TestCase(CharacterClassConstants.TrainingTypes.SelfTaught, 90376)]
+        [TestCase(CharacterClassConstants.TrainingTypes.Trained, 90433)]
+        public void GetAgeByClassType(string classTypeForAge, int age)
         {
-            classType = CharacterClassConstants.TrainingTypes.Intuitive;
+            classType = classTypeForAge;
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
-            Assert.That(race.Age.Years, Is.EqualTo(90320));
+            Assert.That(race.Age.Value, Is.EqualTo(age));
+            Assert.That(race.Age.Unit, Is.EqualTo("Years"));
+            Assert.That(race.Age.Description, Is.Not.Empty);
         }
 
-        [Test]
-        public void GetSelfTaughtAge()
-        {
-            classType = CharacterClassConstants.TrainingTypes.SelfTaught;
-
-            var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
-            Assert.That(race.Age.Years, Is.EqualTo(90376));
-        }
-
-        [Test]
-        public void GetTrainedAge()
-        {
-            classType = CharacterClassConstants.TrainingTypes.Trained;
-
-            var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
-            Assert.That(race.Age.Years, Is.EqualTo(90433));
-        }
-
-        [TestCase(1, 90224)]
-        [TestCase(2, 90229)]
-        [TestCase(3, 90234)]
-        [TestCase(4, 90239)]
-        [TestCase(5, 90245)]
-        [TestCase(6, 90251)]
-        [TestCase(7, 90257)]
-        [TestCase(8, 90264)]
-        [TestCase(9, 90271)]
-        [TestCase(10, 90278)]
-        [TestCase(11, 90286)]
-        [TestCase(12, 90294)]
-        [TestCase(13, 90302)]
-        [TestCase(14, 90311)]
-        [TestCase(15, 90320)]
-        [TestCase(16, 90329)]
-        [TestCase(17, 90339)]
-        [TestCase(18, 90349)]
-        [TestCase(19, 90359)]
-        [TestCase(20, 90370)]
-        public void AgeIncreasesAsCharacterLevelsUp(int level, int age)
+        [TestCase(1, 90224, RaceConstants.Ages.Adulthood)]
+        [TestCase(2, 90229, RaceConstants.Ages.Adulthood)]
+        [TestCase(3, 90234, RaceConstants.Ages.Adulthood)]
+        [TestCase(4, 90239, RaceConstants.Ages.Adulthood)]
+        [TestCase(5, 90245, RaceConstants.Ages.Adulthood)]
+        [TestCase(6, 90251, RaceConstants.Ages.MiddleAge)]
+        [TestCase(7, 90257, RaceConstants.Ages.MiddleAge)]
+        [TestCase(8, 90264, RaceConstants.Ages.MiddleAge)]
+        [TestCase(9, 90271, RaceConstants.Ages.MiddleAge)]
+        [TestCase(10, 90278, RaceConstants.Ages.MiddleAge)]
+        [TestCase(11, 90286, RaceConstants.Ages.MiddleAge)]
+        [TestCase(12, 90294, RaceConstants.Ages.MiddleAge)]
+        [TestCase(13, 90302, RaceConstants.Ages.Old)]
+        [TestCase(14, 90311, RaceConstants.Ages.Old)]
+        [TestCase(15, 90320, RaceConstants.Ages.Old)]
+        [TestCase(16, 90329, RaceConstants.Ages.Old)]
+        [TestCase(17, 90339, RaceConstants.Ages.Old)]
+        [TestCase(18, 90349, RaceConstants.Ages.Old)]
+        [TestCase(19, 90359, RaceConstants.Ages.Venerable)]
+        [TestCase(20, 90370, RaceConstants.Ages.Venerable)]
+        public void AgeIncreasesAsCharacterLevelsUp(int level, int age, string description)
         {
             characterClass.Level = level;
+
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
-            Assert.That(race.Age.Years, Is.EqualTo(age));
+            Assert.That(race.Age.Value, Is.EqualTo(age));
+            Assert.That(race.Age.Unit, Is.EqualTo("Years"));
+            Assert.That(race.Age.Description, Is.EqualTo(description));
         }
 
         [TestCase(1, 90211)]
@@ -547,53 +594,15 @@ namespace CharacterGen.Tests.Unit.Generators
             SetUpRoll("42d600", -9266);
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
-            Assert.That(race.Age.Years, Is.EqualTo(age));
-        }
-
-        [Test]
-        public void GetAdultAge()
-        {
-            characterClass.Level = 1;
-
-            var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
-            Assert.That(race.Age.Years, Is.EqualTo(90224));
-            Assert.That(race.Age.Stage, Is.EqualTo(RaceConstants.Ages.Adulthood));
-        }
-
-        [Test]
-        public void GetMiddleAge()
-        {
-            characterClass.Level = 10;
-
-            var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
-            Assert.That(race.Age.Years, Is.EqualTo(90278));
-            Assert.That(race.Age.Stage, Is.EqualTo(RaceConstants.Ages.MiddleAge));
-        }
-
-        [Test]
-        public void GetOldAge()
-        {
-            characterClass.Level = 15;
-
-            var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
-            Assert.That(race.Age.Years, Is.EqualTo(90320));
-            Assert.That(race.Age.Stage, Is.EqualTo(RaceConstants.Ages.Old));
-        }
-
-        [Test]
-        public void GetVenerableAge()
-        {
-            characterClass.Level = 20;
-
-            var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
-            Assert.That(race.Age.Years, Is.EqualTo(90370));
-            Assert.That(race.Age.Stage, Is.EqualTo(RaceConstants.Ages.Venerable));
+            Assert.That(race.Age.Value, Is.EqualTo(age));
+            Assert.That(race.Age.Unit, Is.EqualTo("Years"));
+            Assert.That(race.Age.Description, Is.EqualTo(RaceConstants.Ages.Adulthood));
         }
 
         [TestCase(RaceConstants.Ages.Adulthood, RaceConstants.Ages.Ageless, RaceConstants.Ages.Ageless, RaceConstants.Ages.Ageless)]
         [TestCase(RaceConstants.Ages.MiddleAge, 90250, RaceConstants.Ages.Ageless, RaceConstants.Ages.Ageless)]
         [TestCase(RaceConstants.Ages.Old, 90250, 90300, RaceConstants.Ages.Ageless)]
-        public void GetAgeless(string ageStage, int middleAge, int old, int venerable)
+        public void GetAgeless(string description, int middleAge, int old, int venerable)
         {
             characterClass.Level = 20;
 
@@ -602,15 +611,18 @@ namespace CharacterGen.Tests.Unit.Generators
             ages[RaceConstants.Ages.Venerable] = venerable;
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
-            Assert.That(race.Age.Years, Is.EqualTo(90370));
-            Assert.That(race.Age.Stage, Is.EqualTo(ageStage));
+            Assert.That(race.Age.Value, Is.EqualTo(90370));
+            Assert.That(race.Age.Unit, Is.EqualTo("Years"));
+            Assert.That(race.Age.Description, Is.EqualTo(description));
         }
 
         [Test]
         public void GetMaximumAge()
         {
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
-            Assert.That(race.Age.Maximum, Is.EqualTo(91350));
+            Assert.That(race.MaximumAge.Value, Is.EqualTo(91350));
+            Assert.That(race.MaximumAge.Unit, Is.EqualTo("Years"));
+            Assert.That(race.MaximumAge.Description, Is.EqualTo("Will die of natural causes"));
         }
 
         [Test]
@@ -620,8 +632,21 @@ namespace CharacterGen.Tests.Unit.Generators
             SetUpRoll(RaceConstants.Ages.Ageless.ToString(), -1);
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
-            Assert.That(race.Age.Years, Is.EqualTo(90320));
-            Assert.That(race.Age.Maximum, Is.EqualTo(RaceConstants.Ages.Ageless));
+            Assert.That(race.MaximumAge.Value, Is.EqualTo(RaceConstants.Ages.Ageless));
+            Assert.That(race.MaximumAge.Unit, Is.EqualTo("Years"));
+            Assert.That(race.MaximumAge.Description, Is.EqualTo("Immortal"));
+        }
+
+        [Test]
+        public void GetPixieMaximumAgeDescription()
+        {
+            mockBaseRaceRandomizer.Setup(r => r.Randomize(alignment, characterClass)).Returns(RaceConstants.BaseRaces.Pixie);
+            SetUpTablesForBaseRace(RaceConstants.BaseRaces.Pixie);
+
+            var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
+            Assert.That(race.MaximumAge.Value, Is.EqualTo(91350));
+            Assert.That(race.MaximumAge.Unit, Is.EqualTo("Years"));
+            Assert.That(race.MaximumAge.Description, Is.EqualTo("Will return to their plane of origin"));
         }
 
         [Test]
@@ -630,8 +655,9 @@ namespace CharacterGen.Tests.Unit.Generators
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Undead)).Returns(new[] { Metarace });
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
-            Assert.That(race.Age.Years, Is.EqualTo(90320));
-            Assert.That(race.Age.Maximum, Is.EqualTo(RaceConstants.Ages.Ageless));
+            Assert.That(race.MaximumAge.Value, Is.EqualTo(RaceConstants.Ages.Ageless));
+            Assert.That(race.MaximumAge.Unit, Is.EqualTo("Years"));
+            Assert.That(race.MaximumAge.Description, Is.EqualTo("Immortal"));
         }
 
         [Test]
@@ -640,57 +666,91 @@ namespace CharacterGen.Tests.Unit.Generators
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Undead)).Returns(new[] { "other metarace" });
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
-            Assert.That(race.Age.Years, Is.EqualTo(90320));
-            Assert.That(race.Age.Maximum, Is.EqualTo(91350));
+            Assert.That(race.MaximumAge.Value, Is.EqualTo(91350));
+            Assert.That(race.MaximumAge.Unit, Is.EqualTo("Years"));
+            Assert.That(race.MaximumAge.Description, Is.EqualTo("Will die of natural causes"));
         }
 
         [Test]
         public void IfTooOld_RerollAge()
         {
             var mockPartial = new Mock<PartialRoll>();
-            mockPartial.SetupSequence(r => r.AsSum()).Returns(1).Returns(1000);
-            mockDice.Setup(d => d.Roll("4d26")).Returns(mockPartial.Object);
+            mockPartial.SetupSequence(r => r.AsSum()).Returns(1141).Returns(1139);
+            mockDice.Setup(d => d.Roll("42d600")).Returns(mockPartial.Object);
 
-            characterClass.Level = 20;
+            characterClass.Level = 1;
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
-            Assert.That(race.Age.Years, Is.LessThanOrEqualTo(race.Age.Maximum));
-            Assert.That(race.Age.Maximum, Is.EqualTo(91350));
-            Assert.That(race.Age.Years, Is.EqualTo(90516));
+            Assert.That(race.Age.Value, Is.LessThanOrEqualTo(race.MaximumAge.Value));
+            Assert.That(race.MaximumAge.Value, Is.EqualTo(91350));
+            Assert.That(race.Age.Value, Is.EqualTo(91349));
+        }
+
+        [Test]
+        public void DoNotRerollImmortalAge()
+        {
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.MaximumAgeRolls, BaseRace)).Returns(new[] { RaceConstants.Ages.Ageless.ToString() });
+            SetUpRoll(RaceConstants.Ages.Ageless.ToString(), -1);
+
+            characterClass.Level = 1;
+            SetUpRoll("42d600", 1141);
+
+            var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
+            Assert.That(race.Age.Value, Is.EqualTo(91351));
+            Assert.That(race.Age.Unit, Is.EqualTo("Years"));
+            Assert.That(race.Age.Description, Is.EqualTo(RaceConstants.Ages.Venerable));
+            Assert.That(race.MaximumAge.Value, Is.EqualTo(RaceConstants.Ages.Ageless));
+            Assert.That(race.MaximumAge.Unit, Is.EqualTo("Years"));
+            Assert.That(race.MaximumAge.Description, Is.EqualTo("Immortal"));
+        }
+
+        [Test]
+        public void IfTooOld_RerollAgeAsMaximum()
+        {
+            var mockPartial = new Mock<PartialRoll>();
+            mockPartial.SetupSequence(r => r.AsSum()).Returns(1141).Returns(1140);
+            mockDice.Setup(d => d.Roll("42d600")).Returns(mockPartial.Object);
+
+            characterClass.Level = 1;
+
+            var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
+            Assert.That(race.Age.Value, Is.LessThanOrEqualTo(race.MaximumAge.Value));
+            Assert.That(race.MaximumAge.Value, Is.EqualTo(91350));
+            Assert.That(race.Age.Value, Is.EqualTo(91350));
         }
 
         [Test]
         public void UseDefaultAgeOfMaximum()
         {
-            var mockPartial = new Mock<PartialRoll>();
-            mockPartial.Setup(r => r.AsSum()).Returns(1);
-            mockDice.Setup(d => d.Roll("4d26")).Returns(mockPartial.Object);
+            characterClass.Level = 21;
 
-            characterClass.Level = 20;
-
-            ages[RaceConstants.Ages.MiddleAge] = 90211;
-            ages[RaceConstants.Ages.Old] = 90212;
-            ages[RaceConstants.Ages.Venerable] = 90213;
+            ages[RaceConstants.Ages.MiddleAge] = 90215;
+            ages[RaceConstants.Ages.Old] = 90220;
+            ages[RaceConstants.Ages.Venerable] = 90225;
+            SetUpRoll("4d26", 5);
+            SetUpRoll("42d600", 1);
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
-            Assert.That(race.Age.Years, Is.LessThanOrEqualTo(race.Age.Maximum));
-            Assert.That(race.Age.Maximum, Is.EqualTo(90214));
-            Assert.That(race.Age.Years, Is.EqualTo(90214));
+            Assert.That(race.Age.Value, Is.LessThanOrEqualTo(race.MaximumAge.Value));
+            Assert.That(race.MaximumAge.Value, Is.EqualTo(90230));
+            Assert.That(race.Age.Value, Is.EqualTo(90230));
         }
 
         [Test]
         public void UseDefaultAgeOfClassLevel()
         {
-            var mockPartial = new Mock<PartialRoll>();
-            mockPartial.Setup(r => r.AsSum()).Returns(1);
-            mockDice.Setup(d => d.Roll("4d26")).Returns(mockPartial.Object);
+            characterClass.Level = 1;
 
-            characterClass.Level = 20;
+            ages[RaceConstants.Ages.MiddleAge] = 90215;
+            ages[RaceConstants.Ages.Old] = 90220;
+            ages[RaceConstants.Ages.Venerable] = 90225;
+            SetUpRoll("4d26", 5);
+            SetUpRoll("42d600", 21);
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
-            Assert.That(race.Age.Years, Is.LessThanOrEqualTo(race.Age.Maximum));
-            Assert.That(race.Age.Maximum, Is.EqualTo(90351));
-            Assert.That(race.Age.Years, Is.EqualTo(90230));
+            Assert.That(race.Age.Value, Is.LessThanOrEqualTo(race.MaximumAge.Value));
+            Assert.That(race.MaximumAge.Value, Is.EqualTo(90230));
+            Assert.That(race.Age.Value, Is.EqualTo(90211));
         }
 
         [Test]

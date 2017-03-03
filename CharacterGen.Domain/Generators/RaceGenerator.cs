@@ -67,24 +67,65 @@ namespace CharacterGen.Domain.Generators
             race.LandSpeed = DetermineLandSpeed(race);
             race.AerialSpeed = DetermineAerialSpeed(race);
             race.ChallengeRating = DetermineChallengeRating(race);
+            race.MaximumAge = DetermineMaximumAge(race);
 
             race.Age = generator.Generate(() => DetermineAge(race, characterClass),
-                (a) => a.Maximum >= a.Years || a.Maximum == RaceConstants.Ages.Ageless,
+                (a) => race.MaximumAge.Value >= a.Value || race.MaximumAge.Value == RaceConstants.Ages.Ageless,
                 () => GetDefaultAge(race, characterClass));
 
             var tableName = string.Format(TableNameConstants.Formattable.Adjustments.GENDERHeights, race.Gender);
             var baseHeight = adjustmentsSelector.SelectFrom(tableName, race.BaseRace);
             var heightModifier = RollModifier(race, TableNameConstants.Set.Collection.HeightRolls);
 
-            race.HeightInInches = baseHeight + heightModifier;
+            race.Height.Value = baseHeight + heightModifier;
+            race.Height.Description = GetHeightDescription(race, heightModifier);
 
             tableName = string.Format(TableNameConstants.Formattable.Adjustments.GENDERWeights, race.Gender);
             var baseWeight = adjustmentsSelector.SelectFrom(tableName, race.BaseRace);
             var weightModifier = RollModifier(race, TableNameConstants.Set.Collection.WeightRolls);
 
-            race.WeightInPounds = baseWeight + heightModifier * weightModifier;
+            race.Weight.Value = baseWeight + heightModifier * weightModifier;
+            race.Weight.Description = GetWeightDescription(race, weightModifier);
 
             return race;
+        }
+
+        private string GetHeightDescription(Race race, int heightModifier)
+        {
+            var roll = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.HeightRolls, race.BaseRace).Single();
+            var percentile = GetPercentile(roll, heightModifier);
+
+            if (percentile < 1d / 3)
+                return "Short";
+
+            if (percentile > 2d / 3)
+                return "Tall";
+
+            return "Average";
+        }
+
+        private string GetWeightDescription(Race race, int weightModifier)
+        {
+            var roll = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.WeightRolls, race.BaseRace).Single();
+            var percentile = GetPercentile(roll, weightModifier);
+
+            if (percentile < 1d / 3)
+                return "Light";
+
+            if (percentile > 2d / 3)
+                return "Heavy";
+
+            return "Average";
+        }
+
+        private double GetPercentile(string roll, int modifier)
+        {
+            var minimumRoll = dice.Roll(roll).AsPotentialMinimum();
+            var maximumRoll = dice.Roll(roll).AsPotentialMaximum();
+            var totalRange = maximumRoll - minimumRoll;
+            var range = modifier - minimumRoll;
+
+            return (double)range / totalRange;
         }
 
         private int DetermineChallengeRating(Race race)
@@ -141,28 +182,45 @@ namespace CharacterGen.Domain.Generators
             return size[0] <= atLeast[0];
         }
 
-        private int DetermineLandSpeed(Race race)
+        private Measurement DetermineLandSpeed(Race race)
         {
-            var speed = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.LandSpeeds, race.BaseRace);
-            return speed;
+            var measurement = new Measurement("feet per round");
+            measurement.Value = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.LandSpeeds, race.BaseRace);
+
+            return measurement;
         }
 
-        private int DetermineAerialSpeed(Race race)
+        private Measurement DetermineAerialSpeed(Race race)
         {
+            var measurement = new Measurement("feet per round");
             var metaraceAerialSpeed = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.AerialSpeeds, race.Metarace);
-
-            if (SpeedIsPreset(metaraceAerialSpeed))
-                return metaraceAerialSpeed;
-
             var baseRaceAerialSpeed = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.AerialSpeeds, race.BaseRace);
 
-            if (SpeedIsPreset(baseRaceAerialSpeed))
-                return baseRaceAerialSpeed;
+            if (SpeedIsPreset(metaraceAerialSpeed) && metaraceAerialSpeed > baseRaceAerialSpeed)
+            {
+                measurement.Value = metaraceAerialSpeed;
+                measurement.Description = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AerialManeuverability, race.Metarace).Single();
+
+                return measurement;
+            }
+
+            if (SpeedIsPreset(baseRaceAerialSpeed) && baseRaceAerialSpeed > metaraceAerialSpeed)
+            {
+                measurement.Value = baseRaceAerialSpeed;
+                measurement.Description = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AerialManeuverability, race.BaseRace).Single();
+
+                return measurement;
+            }
 
             if (SpeedIsMultiplier(metaraceAerialSpeed) && race.HasWings)
-                return race.LandSpeed * metaraceAerialSpeed;
+            {
+                measurement.Value = race.LandSpeed.Value * metaraceAerialSpeed;
+                measurement.Description = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AerialManeuverability, race.Metarace).Single();
 
-            return 0;
+                return measurement;
+            }
+
+            return measurement;
         }
 
         private bool SpeedIsMultiplier(int speed)
@@ -175,28 +233,41 @@ namespace CharacterGen.Domain.Generators
             return speed > 0 && speed % 10 == 0;
         }
 
-        private Age DetermineAge(Race race, CharacterClass characterClass)
+        private Measurement DetermineAge(Race race, CharacterClass characterClass)
         {
-            var age = new Age();
-            age.Maximum = GetMaximumAge(race);
-            age.Years = GetAgeInYears(race, characterClass, age.Maximum);
-            age.Stage = GetAgeStage(race, age.Years);
+            var age = new Measurement("Years");
+            age.Value = GetAgeInYears(race, characterClass, race.MaximumAge.Value);
+            age.Description = GetAgeDescription(race, age.Value);
 
             return age;
         }
 
-        private Age GetDefaultAge(Race race, CharacterClass characterClass)
+        private Measurement GetDefaultAge(Race race, CharacterClass characterClass)
         {
-            var age = new Age();
-            age.Maximum = GetMaximumAge(race);
+            var age = new Measurement("Years");
 
             var tableName = string.Format(TableNameConstants.Formattable.Adjustments.RACEAges, race.BaseRace);
             var adultAge = adjustmentsSelector.SelectFrom(tableName, RaceConstants.Ages.Adulthood);
 
-            age.Years = Math.Min(age.Maximum, adultAge + characterClass.Level);
-            age.Stage = GetAgeStage(race, age.Years);
+            age.Value = Math.Min(race.MaximumAge.Value, adultAge + characterClass.Level);
+            age.Description = GetAgeDescription(race, age.Value);
 
             return age;
+        }
+
+        private Measurement DetermineMaximumAge(Race race)
+        {
+            var measurement = new Measurement("Years");
+            measurement.Value = GetMaximumAge(race);
+
+            if (measurement.Value == RaceConstants.Ages.Ageless)
+                measurement.Description = "Immortal";
+            else if (race.BaseRace == RaceConstants.BaseRaces.Pixie)
+                measurement.Description = "Will return to their plane of origin";
+            else
+                measurement.Description = "Will die of natural causes";
+
+            return measurement;
         }
 
         private int GetMaximumAge(Race race)
@@ -234,7 +305,7 @@ namespace CharacterGen.Domain.Generators
 
         private int GetAdditionalAge(string baseRace, CharacterClass characterClass, int maximumAge)
         {
-            var classType = GetClassType(characterClass);
+            var classType = collectionsSelector.FindGroupOf(TableNameConstants.Set.Collection.ClassNameGroups, characterClass.Name, allClassTypes.ToArray());
             var tableName = string.Format(TableNameConstants.Formattable.Collection.CLASSTYPEAgeRolls, classType);
             var trainingAgeRoll = collectionsSelector.SelectFrom(tableName, baseRace).Single();
             var additionalAge = GetAgeRollResult(trainingAgeRoll, 1);
@@ -253,7 +324,7 @@ namespace CharacterGen.Domain.Generators
             return Math.Max(1, roll);
         }
 
-        private string GetAgeStage(Race race, int ageInYears)
+        private string GetAgeDescription(Race race, int ageInYears)
         {
             var tableName = string.Format(TableNameConstants.Formattable.Adjustments.RACEAges, race.BaseRace);
             var ages = adjustmentsSelector.SelectAllFrom(tableName);
@@ -268,13 +339,6 @@ namespace CharacterGen.Domain.Generators
                 return RaceConstants.Ages.MiddleAge;
 
             return RaceConstants.Ages.Adulthood;
-        }
-
-        private string GetClassType(CharacterClass characterClass)
-        {
-            var classType = collectionsSelector.FindGroupOf(TableNameConstants.Set.Collection.ClassNameGroups, characterClass.Name, allClassTypes.ToArray());
-
-            return classType;
         }
 
         private int RollModifier(Race race, string tableName)

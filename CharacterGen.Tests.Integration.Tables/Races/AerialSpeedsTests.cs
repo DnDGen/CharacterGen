@@ -3,7 +3,7 @@ using CharacterGen.Races;
 using NUnit.Framework;
 using System.Linq;
 
-namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces
+namespace CharacterGen.Tests.Integration.Tables.Races
 {
     [TestFixture]
     public class AerialSpeedsTests : AdjustmentsTests
@@ -85,8 +85,8 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces
         [TestCase(RaceConstants.BaseRaces.YuanTiPureblood, 0)]
         [TestCase(RaceConstants.Metaraces.Ghost, 30)]
         [TestCase(RaceConstants.Metaraces.HalfCelestial, 2)]
-        [TestCase(RaceConstants.Metaraces.HalfDragon, 1)]
-        [TestCase(RaceConstants.Metaraces.HalfFiend, 2)]
+        [TestCase(RaceConstants.Metaraces.HalfDragon, 2)]
+        [TestCase(RaceConstants.Metaraces.HalfFiend, 1)]
         [TestCase(RaceConstants.Metaraces.Lich, 0)]
         [TestCase(RaceConstants.Metaraces.Mummy, 0)]
         [TestCase(RaceConstants.Metaraces.None, 0)]

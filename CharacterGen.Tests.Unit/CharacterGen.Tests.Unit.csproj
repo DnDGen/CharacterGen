@@ -118,6 +118,7 @@
     <Compile Include="Generators\Magics\SpellQuantityTests.cs" />
     <Compile Include="Generators\Magics\SpellTests.cs" />
     <Compile Include="Generators\RaceGeneratorTests.cs" />
+    <Compile Include="Generators\Races\MeasurementTests.cs" />
     <Compile Include="Generators\Randomizers\Alignments\AlignmentRandomizerTypeConstantsTests.cs" />
     <Compile Include="Generators\Randomizers\Alignments\AnyAlignmentRandomizerTests.cs" />
     <Compile Include="Generators\Randomizers\Alignments\BaseAlignmentRandomizerTests.cs" />
@@ -187,7 +188,6 @@
     <Compile Include="Mappers\Percentiles\PercentileMapperCachingProxyTests.cs" />
     <Compile Include="Mappers\Percentiles\PercentileXmlMapperTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Generators\Races\AgeTests.cs" />
     <Compile Include="Generators\Races\RaceConstantsTests.cs" />
     <Compile Include="Generators\Races\RaceTests.cs" />
     <Compile Include="Generators\Combats\SavingThrowTests.cs" />

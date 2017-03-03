@@ -8,12 +8,13 @@
         public bool IsMale { get; set; }
         public bool HasWings { get; set; }
         public string Size { get; set; }
-        public int LandSpeed { get; set; }
-        public int AerialSpeed { get; set; }
-        public int HeightInInches { get; set; }
-        public int WeightInPounds { get; set; }
         public int ChallengeRating { get; set; }
-        public Age Age { get; set; }
+        public Measurement Age { get; set; }
+        public Measurement MaximumAge { get; set; }
+        public Measurement Height { get; set; }
+        public Measurement Weight { get; set; }
+        public Measurement LandSpeed { get; set; }
+        public Measurement AerialSpeed { get; set; }
 
         public string Gender
         {
@@ -29,7 +30,12 @@
             Metarace = string.Empty;
             Size = string.Empty;
             MetaraceSpecies = string.Empty;
-            Age = new Age();
+            Age = new Measurement("Years");
+            MaximumAge = new Measurement("Years");
+            Height = new Measurement("Inches");
+            Weight = new Measurement("Pounds");
+            LandSpeed = new Measurement("feet per round");
+            AerialSpeed = new Measurement("feet per round");
         }
     }
 }

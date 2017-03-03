@@ -17,17 +17,24 @@ namespace CharacterGen.Tests.Unit.Common.Races
         [Test]
         public void RaceInitialized()
         {
-            Assert.That(race.BaseRace, Is.Not.Null);
-            Assert.That(race.Metarace, Is.Not.Null);
+            Assert.That(race.BaseRace, Is.Empty);
+            Assert.That(race.Metarace, Is.Empty);
             Assert.That(race.IsMale, Is.False);
             Assert.That(race.HasWings, Is.False);
             Assert.That(race.Size, Is.Empty);
-            Assert.That(race.AerialSpeed, Is.EqualTo(0));
-            Assert.That(race.LandSpeed, Is.EqualTo(0));
             Assert.That(race.MetaraceSpecies, Is.Empty);
-            Assert.That(race.HeightInInches, Is.EqualTo(0));
-            Assert.That(race.WeightInPounds, Is.EqualTo(0));
             Assert.That(race.Age, Is.Not.Null);
+            Assert.That(race.Age.Unit, Is.EqualTo("Years"));
+            Assert.That(race.MaximumAge, Is.Not.Null);
+            Assert.That(race.MaximumAge.Unit, Is.EqualTo("Years"));
+            Assert.That(race.Height, Is.Not.Null);
+            Assert.That(race.Height.Unit, Is.EqualTo("Inches"));
+            Assert.That(race.Weight, Is.Not.Null);
+            Assert.That(race.Weight.Unit, Is.EqualTo("Pounds"));
+            Assert.That(race.LandSpeed, Is.Not.Null);
+            Assert.That(race.LandSpeed.Unit, Is.EqualTo("feet per round"));
+            Assert.That(race.AerialSpeed, Is.Not.Null);
+            Assert.That(race.AerialSpeed.Unit, Is.EqualTo("feet per round"));
             Assert.That(race.ChallengeRating, Is.EqualTo(0));
         }
 
