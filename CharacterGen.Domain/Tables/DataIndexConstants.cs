@@ -45,6 +45,7 @@
             public const int BaseStatName = 0;
             public const int SkillName = 1;
             public const int RandomFociQuantity = 2;
+            public const int Focus = 3;
         }
     }
 }

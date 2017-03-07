@@ -27,6 +27,14 @@ namespace CharacterGen.CharacterClasses
             }
         }
 
+        public string Summary
+        {
+            get
+            {
+                return $"Level {Level} {Name}";
+            }
+        }
+
         public CharacterClass()
         {
             Name = string.Empty;

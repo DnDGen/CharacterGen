@@ -9,6 +9,6 @@ namespace CharacterGen.Domain.Generators.Abilities.Feats
 {
     internal interface IClassFeatsGenerator
     {
-        IEnumerable<Feat> GenerateWith(CharacterClass characterClass, Race race, Dictionary<string, Stat> stats, IEnumerable<Feat> racialFeats, Dictionary<string, Skill> skills);
+        IEnumerable<Feat> GenerateWith(CharacterClass characterClass, Race race, Dictionary<string, Stat> stats, IEnumerable<Feat> racialFeats, IEnumerable<Skill> skills);
     }
 }

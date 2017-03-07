@@ -28,26 +28,28 @@ namespace CharacterGen.Domain.Generators.Abilities
             this.booleanPercentileSelector = booleanPercentileSelector;
         }
 
-        public Dictionary<string, Skill> GenerateWith(CharacterClass characterClass, Race race, Dictionary<string, Stat> stats)
+        public IEnumerable<Skill> GenerateWith(CharacterClass characterClass, Race race, Dictionary<string, Stat> stats)
         {
-            var classSkills = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassSkills, characterClass.Name);
-            var crossClassSkills = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.CrossClassSkills, characterClass.Name);
+            var classSkillNames = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassSkills, characterClass.Name).ToList(); //INFO: Calling ToList so we can add specialist skills later
+            var crossClassSkillNames = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.Untrained);
 
-            var specialistSkills = Enumerable.Empty<string>();
             foreach (var specialistField in characterClass.SpecialistFields)
             {
-                var newSpecialistSkills = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, specialistField);
-                specialistSkills = specialistSkills.Union(newSpecialistSkills);
+                var specialistSkills = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassSkills, specialistField);
+                classSkillNames.AddRange(specialistSkills);
             }
 
-            classSkills = classSkills.Union(specialistSkills);
+            var classSkillSelections = GetSkillSelections(classSkillNames);
+            var crossClassSkillSelections = GetSkillSelections(crossClassSkillNames);
 
             if (characterClass.Name == CharacterClassConstants.Expert)
-                classSkills = GetRandomClassSkills();
+                classSkillSelections = GetRandomClassSkillSelections();
 
-            var skills = InitializeSkills(stats, classSkills, crossClassSkills, characterClass);
+            classSkillSelections = AddProfessionSkills(classSkillSelections);
 
-            skills = AddRanks(characterClass, race, stats, classSkills, crossClassSkills, skills);
+            var skills = InitializeSkills(stats, classSkillSelections, crossClassSkillSelections, characterClass);
+
+            skills = AddRanks(characterClass, race, stats, classSkillSelections, crossClassSkillSelections, skills);
 
             var monsters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters);
             if (monsters.Contains(race.BaseRace))
@@ -58,55 +60,88 @@ namespace CharacterGen.Domain.Generators.Abilities
             return skills;
         }
 
-        private IEnumerable<string> GetRandomClassSkills()
+        private IEnumerable<SkillSelection> AddProfessionSkills(IEnumerable<SkillSelection> classSkillSelections)
         {
-            var allSkills = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.Skills);
-            var randomSkills = new HashSet<string>();
+            var professionSkill = classSkillSelections.FirstOrDefault(s => s.SkillName == SkillConstants.Profession);
 
-            while (randomSkills.Count < 10)
-            {
-                var skill = collectionsSelector.SelectRandomFrom(allSkills);
-                randomSkills.Add(skill);
-            }
+            if (professionSkill == null)
+                return classSkillSelections;
 
-            return randomSkills;
+            var profession = professionSkill.Focus;
+            var professionSkillNames = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassSkills, profession);
+            var professionSkillSelections = GetSkillSelections(professionSkillNames);
+
+            return classSkillSelections.Union(professionSkillSelections);
         }
 
-        private Dictionary<string, Skill> AddMonsterSkillRanks(Race race, Dictionary<string, Stat> stats, Dictionary<string, Skill> skills)
+        private IEnumerable<SkillSelection> GetRandomClassSkillSelections()
+        {
+            var allSkills = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.All);
+            var randomSkillSelections = new List<SkillSelection>();
+
+            while (randomSkillSelections.Count < 10)
+            {
+                var skill = collectionsSelector.SelectRandomFrom(allSkills);
+                var skillSelection = skillSelector.SelectFor(skill);
+                var explodedSelections = ExplodeSelectedSkill(skillSelection);
+                var newSelections = explodedSelections.Where(ss => !randomSkillSelections.Any(s => s.IsEqualTo(ss)));
+
+                randomSkillSelections.AddRange(newSelections);
+            }
+
+            return randomSkillSelections;
+        }
+
+        private IEnumerable<Skill> AddMonsterSkillRanks(Race race, Dictionary<string, Stat> stats, IEnumerable<Skill> skills)
         {
             var monsterHitDice = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice, race.BaseRace);
 
             if (monsterHitDice == 0)
                 return skills;
 
+            var skillsList = skills.ToList();
             var monsterSkills = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassSkills, race.BaseRace);
-            var monsterSkillSelections = monsterSkills.Select(s => skillSelector.SelectFor(s)).SelectMany(s => ExplodeSelectedSkill(s));
+            var monsterSkillSelections = GetSkillSelections(monsterSkills);
 
             foreach (var monsterSkillSelection in monsterSkillSelections)
             {
-                if (skills.ContainsKey(monsterSkillSelection.SkillName) == false)
+                if (skillsList.Any(s => monsterSkillSelection.IsEqualTo(s)) == false)
                 {
                     if (stats.ContainsKey(monsterSkillSelection.BaseStatName) == false)
                         continue;
 
-                    skills[monsterSkillSelection.SkillName] = new Skill(monsterSkillSelection.SkillName, stats[monsterSkillSelection.BaseStatName], 3);
+                    var newSkill = new Skill(monsterSkillSelection.SkillName, stats[monsterSkillSelection.BaseStatName], 3, monsterSkillSelection.Focus);
+                    skillsList.Add(newSkill);
                 }
 
-                skills[monsterSkillSelection.SkillName].RankCap += monsterHitDice;
-                skills[monsterSkillSelection.SkillName].ClassSkill = true;
+                var monsterSkill = skillsList.First(s => monsterSkillSelection.IsEqualTo(s));
+
+                monsterSkill.RankCap += monsterHitDice;
+                monsterSkill.ClassSkill = true;
             }
 
             var points = GetTotalSkillPoints(race.BaseRace, monsterHitDice, stats[StatConstants.Intelligence], race);
-            var validMonsterSkills = FilterOutInvalidSkills(monsterSkills, skills);
+            var validMonsterSkills = FilterOutInvalidSkills(monsterSkillSelections, skillsList);
 
             while (points-- > 0 && validMonsterSkills.Any())
             {
-                var skill = collectionsSelector.SelectRandomFrom(validMonsterSkills);
-                skills[skill].Ranks++;
-                validMonsterSkills = FilterOutInvalidSkills(monsterSkills, skills);
+                var skillSelection = collectionsSelector.SelectRandomFrom(validMonsterSkills);
+                var skill = skillsList.First(s => skillSelection.IsEqualTo(s));
+                skill.Ranks++;
+
+                validMonsterSkills = FilterOutInvalidSkills(monsterSkillSelections, skillsList);
             }
 
-            return skills;
+            return skillsList;
+        }
+
+        private IEnumerable<SkillSelection> GetSkillSelections(IEnumerable<string> skillNames)
+        {
+            var selections = skillNames.Select(s => skillSelector.SelectFor(s));
+            var explodedSelections = selections.SelectMany(s => ExplodeSelectedSkill(s));
+
+            //INFO: Calling immediate execution, since exploding includes potentially random results, and after this method is complete, we want consistent results.
+            return explodedSelections.ToList();
         }
 
         private IEnumerable<SkillSelection> ExplodeSelectedSkill(SkillSelection skillSelection)
@@ -114,11 +149,11 @@ namespace CharacterGen.Domain.Generators.Abilities
             if (skillSelection.RandomFociQuantity == 0)
                 return new[] { skillSelection };
 
-            var skillFoci = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, skillSelection.SkillName);
+            var skillFoci = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, skillSelection.SkillName).ToList();
 
-            if (skillSelection.RandomFociQuantity >= skillFoci.Count())
+            if (skillSelection.RandomFociQuantity >= skillFoci.Count)
             {
-                return skillFoci.Select(f => new SkillSelection { BaseStatName = skillSelection.BaseStatName, SkillName = f });
+                return skillFoci.Select(f => new SkillSelection { BaseStatName = skillSelection.BaseStatName, SkillName = skillSelection.SkillName, Focus = f });
             }
 
             var selections = new List<SkillSelection>();
@@ -126,50 +161,59 @@ namespace CharacterGen.Domain.Generators.Abilities
             while (skillSelection.RandomFociQuantity > selections.Count)
             {
                 var focus = collectionsSelector.SelectRandomFrom(skillFoci);
-                if (selections.Any(s => s.SkillName == focus))
-                    continue;
-
                 var selection = new SkillSelection();
+
                 selection.BaseStatName = skillSelection.BaseStatName;
-                selection.SkillName = focus;
+                selection.SkillName = skillSelection.SkillName;
+                selection.Focus = focus;
 
                 selections.Add(selection);
+                skillFoci.Remove(focus);
             }
 
             return selections;
         }
 
-        private Dictionary<string, Skill> InitializeSkills(Dictionary<string, Stat> stats, IEnumerable<string> classSkills, IEnumerable<string> crossClassSkills, CharacterClass characterClass)
+        private IEnumerable<Skill> InitializeSkills(Dictionary<string, Stat> stats, IEnumerable<SkillSelection> classSkillSelections, IEnumerable<SkillSelection> crossClassSkillSelections, CharacterClass characterClass)
         {
-            var skills = new Dictionary<string, Skill>();
-            var allSkillNames = classSkills.Union(crossClassSkills);
+            var skills = new List<Skill>();
+            var allSkillSelections = classSkillSelections.Union(crossClassSkillSelections);
 
-            foreach (var skillName in allSkillNames)
+            foreach (var skillSelection in allSkillSelections)
             {
-                var skillSelection = skillSelector.SelectFor(skillName);
                 if (stats.ContainsKey(skillSelection.BaseStatName) == false)
                     continue;
 
-                skills[skillName] = new Skill(skillName, stats[skillSelection.BaseStatName], characterClass.Level + 3);
-                skills[skillName].ClassSkill = classSkills.Contains(skillName);
+                var skill = skills.FirstOrDefault(s => skillSelection.IsEqualTo(s));
+
+                if (skill == null)
+                {
+                    skill = new Skill(skillSelection.SkillName, stats[skillSelection.BaseStatName], characterClass.Level + 3, skillSelection.Focus);
+                    skills.Add(skill);
+                }
+
+                skill.ClassSkill = classSkillSelections.Any(s => s.IsEqualTo(skill));
             }
 
             return skills;
         }
 
-        private Dictionary<string, Skill> AddRanks(CharacterClass characterClass, Race race, Dictionary<string, Stat> stats, IEnumerable<string> classSkills, IEnumerable<string> crossClassSkills, Dictionary<string, Skill> skills)
+        private IEnumerable<Skill> AddRanks(CharacterClass characterClass, Race race, Dictionary<string, Stat> stats, IEnumerable<SkillSelection> classSkillSelections, IEnumerable<SkillSelection> crossClassSkillSelections, IEnumerable<Skill> skills)
         {
             var points = GetTotalSkillPoints(characterClass.Name, characterClass.Level, stats[StatConstants.Intelligence], race);
-            var validSkills = FilterOutInvalidSkills(skills.Keys, skills);
+            var allSkillSelections = classSkillSelections.Union(crossClassSkillSelections);
+            var validSkills = FilterOutInvalidSkills(allSkillSelections, skills);
 
             while (points > 0 && validSkills.Any())
             {
-                var skillCollection = GetSkillCollection(skills, classSkills, crossClassSkills);
-                var skill = collectionsSelector.SelectRandomFrom(skillCollection);
+                var skillCollection = GetRandomSkillCollection(skills, classSkillSelections, crossClassSkillSelections);
+                var skillSelection = collectionsSelector.SelectRandomFrom(skillCollection);
+                var skill = skills.First(s => skillSelection.IsEqualTo(s));
 
-                skills[skill].Ranks++;
+                skill.Ranks++;
                 points--;
-                validSkills = FilterOutInvalidSkills(skills.Keys, skills);
+
+                validSkills = FilterOutInvalidSkills(allSkillSelections, skills);
             }
 
             return skills;
@@ -187,10 +231,10 @@ namespace CharacterGen.Domain.Generators.Abilities
             return Math.Max(perLevel * multiplier, levels);
         }
 
-        private IEnumerable<string> GetSkillCollection(Dictionary<string, Skill> skills, IEnumerable<string> classSkills, IEnumerable<string> crossClassSkills)
+        private IEnumerable<SkillSelection> GetRandomSkillCollection(IEnumerable<Skill> skills, IEnumerable<SkillSelection> classSkillSelections, IEnumerable<SkillSelection> crossClassSkillSelections)
         {
-            var validClassSkills = FilterOutInvalidSkills(classSkills, skills);
-            var validCrossClassSkills = FilterOutInvalidSkills(crossClassSkills, skills);
+            var validClassSkills = FilterOutInvalidSkills(classSkillSelections, skills);
+            var validCrossClassSkills = FilterOutInvalidSkills(crossClassSkillSelections, skills);
 
             if (validClassSkills.Any() == false)
                 return validCrossClassSkills;
@@ -205,22 +249,27 @@ namespace CharacterGen.Domain.Generators.Abilities
             return validClassSkills;
         }
 
-        private IEnumerable<string> FilterOutInvalidSkills(IEnumerable<string> skillNameCollection, Dictionary<string, Skill> skills)
+        private IEnumerable<SkillSelection> FilterOutInvalidSkills(IEnumerable<SkillSelection> skillSelections, IEnumerable<Skill> skills)
         {
-            return skillNameCollection.Where(s => skills.ContainsKey(s) && skills[s].RanksMaxedOut == false);
+            return skillSelections.Where(ss => skills.Any(s => ss.IsEqualTo(s) && s.RanksMaxedOut == false));
         }
 
-        private Dictionary<string, Skill> ApplySkillSynergies(Dictionary<string, Skill> skills)
+        private IEnumerable<Skill> ApplySkillSynergies(IEnumerable<Skill> skills)
         {
-            var skillsWarrantingSynergy = skills.Where(s => s.Value.QualifiesForSkillSynergy);
+            var skillsWarrantingSynergy = skills.Where(s => s.QualifiesForSkillSynergy);
 
             foreach (var skill in skillsWarrantingSynergy)
             {
-                var synergySkills = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillSynergy, skill.Key);
+                var name = skill.Focus.Any() ? $"{skill.Name}/{skill.Focus}" : skill.Name;
+                var synergySkillNames = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillSynergy, name);
 
-                foreach (var synergySkill in synergySkills)
-                    if (skills.ContainsKey(synergySkill))
-                        skills[synergySkill].Bonus += 2;
+                foreach (var synergySkillName in synergySkillNames)
+                {
+                    var synergySkill = skills.FirstOrDefault(s => s.IsEqualTo(synergySkillName));
+
+                    if (synergySkill != null)
+                        synergySkill.Bonus += 2;
+                }
             }
 
             return skills;

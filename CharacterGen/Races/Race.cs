@@ -1,4 +1,6 @@
-﻿namespace CharacterGen.Races
+﻿using System.Linq;
+
+namespace CharacterGen.Races
 {
     public class Race
     {
@@ -21,6 +23,21 @@
             get
             {
                 return IsMale ? "Male" : "Female";
+            }
+        }
+
+        public string Summary
+        {
+            get
+            {
+                var summary = $"{Gender} ";
+
+                if (Metarace.Any())
+                    summary += $"{Metarace} ";
+
+                summary += BaseRace;
+
+                return summary;
             }
         }
 

@@ -26,7 +26,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         private List<RacialFeatSelection> baseRaceFeats;
         private List<RacialFeatSelection> metaraceFeats;
         private List<RacialFeatSelection> speciesFeats;
-        private Dictionary<string, Skill> skills;
+        private List<Skill> skills;
         private Dictionary<string, Stat> stats;
 
         [SetUp]
@@ -43,7 +43,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             baseRaceFeats = new List<RacialFeatSelection>();
             metaraceFeats = new List<RacialFeatSelection>();
             speciesFeats = new List<RacialFeatSelection>();
-            skills = new Dictionary<string, Skill>();
+            skills = new List<Skill>();
             stats = new Dictionary<string, Stat>();
 
             race.BaseRace = "base race";

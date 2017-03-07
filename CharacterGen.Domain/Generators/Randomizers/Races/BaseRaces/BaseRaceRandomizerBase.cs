@@ -37,7 +37,8 @@ namespace CharacterGen.Domain.Generators.Randomizers.Races.BaseRaces
             return generator.Generate(
                 () => percentileResultSelector.SelectFrom(tableName),
                 b => allowedBaseRaces.Contains(b),
-                () => collectionSelector.SelectRandomFrom(allowedBaseRaces));
+                () => collectionSelector.SelectRandomFrom(allowedBaseRaces),
+                $"base race from [{string.Join(",", allowedBaseRaces)}]");
         }
 
         private bool RaceIsAllowed(string baseRace, Alignment alignment, CharacterClass characterClass)

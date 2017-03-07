@@ -21,13 +21,18 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
         [Test]
         public void GetCollectionFromInnerCollectionSelector()
         {
-            var skillData = new[] { "base stat", "skill name", "9266" };
+            var skillData = new string[4];
+            skillData[DataIndexConstants.SkillSelectionData.BaseStatName] = "base stat";
+            skillData[DataIndexConstants.SkillSelectionData.Focus] = "focus";
+            skillData[DataIndexConstants.SkillSelectionData.RandomFociQuantity] = "9266";
+            skillData[DataIndexConstants.SkillSelectionData.SkillName] = "skill name";
 
             mockInnerSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillData, "skill")).Returns(skillData);
 
             var selection = skillSelector.SelectFor("skill");
             Assert.That(selection.BaseStatName, Is.EqualTo("base stat"));
             Assert.That(selection.SkillName, Is.EqualTo("skill name"));
+            Assert.That(selection.Focus, Is.EqualTo("focus"));
             Assert.That(selection.RandomFociQuantity, Is.EqualTo(9266));
         }
     }

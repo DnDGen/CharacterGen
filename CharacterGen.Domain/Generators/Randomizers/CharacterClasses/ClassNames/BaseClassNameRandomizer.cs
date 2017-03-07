@@ -33,7 +33,8 @@ namespace CharacterGen.Domain.Generators.Randomizers.CharacterClasses.ClassNames
             return generator.Generate(
                 () => percentileResultSelector.SelectFrom(tableName),
                 c => possibleClassNames.Contains(c),
-                () => collectionsSelector.SelectRandomFrom(possibleClassNames));
+                () => collectionsSelector.SelectRandomFrom(possibleClassNames),
+                $"class name from [{string.Join(",", possibleClassNames)}]");
         }
 
         protected abstract bool CharacterClassIsAllowed(string className, Alignment alignment);

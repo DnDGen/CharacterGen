@@ -2,9 +2,6 @@
 
 <items>
   <object>
-    <name>Abjuration</name>
-  </object>
-  <object>
     <name>Acrobatic</name>
     <item>Jump</item>
     <item>Tumble</item>
@@ -15,16 +12,46 @@
     <item>Escape Artist</item>
   </object>
   <object>
-    <name>Air</name>
-  </object>
-  <object>
     <name>Alertness</name>
     <item>Listen</item>
     <item>Spot</item>
   </object>
   <object>
-    <name>Animal</name>
-    <item>Knowledge (Nature)</item>
+    <name>All</name>
+    <item>Appraise</item>
+    <item>Balance</item>
+    <item>Bluff</item>
+    <item>Climb</item>
+    <item>Concentration</item>
+    <item>Craft</item>
+    <item>Decipher Script</item>
+    <item>Diplomacy</item>
+    <item>Disable Device</item>
+    <item>Disguise</item>
+    <item>Escape Artist</item>
+    <item>Forgery</item>
+    <item>Gather Information</item>
+    <item>Handle Animal</item>
+    <item>Heal</item>
+    <item>Hide</item>
+    <item>Intimidate</item>
+    <item>Jump</item>
+    <item>Knowledge</item>
+    <item>Listen</item>
+    <item>Move Silently</item>
+    <item>Open Lock</item>
+    <item>Perform</item>
+    <item>Ride</item>
+    <item>Search</item>
+    <item>Sense Motive</item>
+    <item>Sleight of Hand</item>
+    <item>Spellcraft</item>
+    <item>Spot</item>
+    <item>Survival</item>
+    <item>Swim</item>
+    <item>Tumble</item>
+    <item>Use Magic Device</item>
+    <item>Use Rope</item>
   </object>
   <object>
     <name>Animal Affinity</name>
@@ -49,13 +76,46 @@
     <item>Swim</item>
   </object>
   <object>
-    <name>Chaos</name>
-  </object>
-  <object>
-    <name>Conjuration</name>
-  </object>
-  <object>
-    <name>Death</name>
+    <name>Craft</name>
+    <item>Alchemy</item>
+    <item>Armorsmithing</item>
+    <item>Blacksmithing</item>
+    <item>Bookbinding</item>
+    <item>Bowmaking</item>
+    <item>Brassmaking</item>
+    <item>Brewing</item>
+    <item>Candlemaking</item>
+    <item>Cloth</item>
+    <item>Coppersmithing</item>
+    <item>Dyemaking</item>
+    <item>Gemcutting</item>
+    <item>Glass</item>
+    <item>Goldsmithing</item>
+    <item>Hatmaking</item>
+    <item>Hornworking</item>
+    <item>Jewelmaking</item>
+    <item>Leather</item>
+    <item>Locksmithing</item>
+    <item>Mapmaking</item>
+    <item>Milling</item>
+    <item>Painting</item>
+    <item>Parchmentmaking</item>
+    <item>Pewtermaking</item>
+    <item>Potterymaking</item>
+    <item>Sculpting</item>
+    <item>Shipmaking</item>
+    <item>Shoemaking</item>
+    <item>Silversmithing</item>
+    <item>Skinning</item>
+    <item>Soapmaking</item>
+    <item>Stonemasonry</item>
+    <item>Tanning</item>
+    <item>Trapmaking</item>
+    <item>Weaponsmithing</item>
+    <item>Weaving</item>
+    <item>Wheelmaking</item>
+    <item>Winemaking</item>
+    <item>Woodworking</item>
   </object>
   <object>
     <name>Deceitful</name>
@@ -68,39 +128,9 @@
     <item>Use Rope</item>
   </object>
   <object>
-    <name>Destruction</name>
-  </object>
-  <object>
     <name>Diligent</name>
     <item>Appraise</item>
     <item>Decipher Script</item>
-  </object>
-  <object>
-    <name>Divination</name>
-  </object>
-  <object>
-    <name>Earth</name>
-  </object>
-  <object>
-    <name>Enchantment</name>
-  </object>
-  <object>
-    <name>Evil</name>
-  </object>
-  <object>
-    <name>Evocation</name>
-  </object>
-  <object>
-    <name>Fire</name>
-  </object>
-  <object>
-    <name>Good</name>
-  </object>
-  <object>
-    <name>Healing</name>
-  </object>
-  <object>
-    <name>Illusion</name>
   </object>
   <object>
     <name>Investigator</name>
@@ -109,25 +139,16 @@
   </object>
   <object>
     <name>Knowledge</name>
-    <item>Knowledge (Arcana)</item>
-    <item>Knowledge (Architecture and Engineering)</item>
-    <item>Knowledge (Dungeoneering)</item>
-    <item>Knowledge (Geography)</item>
-    <item>Knowledge (History)</item>
-    <item>Knowledge (Local)</item>
-    <item>Knowledge (Nature)</item>
-    <item>Knowledge (Nobility and Royalty)</item>
-    <item>Knowledge (Religion)</item>
-    <item>Knowledge (The Planes)</item>
-  </object>
-  <object>
-    <name>Law</name>
-  </object>
-  <object>
-    <name>Luck</name>
-  </object>
-  <object>
-    <name>Magic</name>
+    <item>Arcana</item>
+    <item>Architecture and Engineering</item>
+    <item>Dungeoneering</item>
+    <item>Geography</item>
+    <item>History</item>
+    <item>Local</item>
+    <item>Nature</item>
+    <item>Nobility and Royalty</item>
+    <item>Religion</item>
+    <item>The Planes</item>
   </object>
   <object>
     <name>Magical Aptitude</name>
@@ -136,11 +157,8 @@
   </object>
   <object>
     <name>Nature Sense</name>
-    <item>Knowledge (Nature)</item>
+    <item>Knowledge/Nature</item>
     <item>Survival</item>
-  </object>
-  <object>
-    <name>Necromancy</name>
   </object>
   <object>
     <name>Negotiator</name>
@@ -153,16 +171,108 @@
     <item>Open Lock</item>
   </object>
   <object>
+    <name>Perform</name>
+    <item>Act</item>
+    <item>Comedy</item>
+    <item>Dance</item>
+    <item>Keyboard instruments</item>
+    <item>Oratory</item>
+    <item>Percussion instruments</item>
+    <item>Sing</item>
+    <item>String instruments</item>
+    <item>Wind instruments</item>
+  </object>
+  <object>
     <name>Persuasive</name>
     <item>Bluff</item>
     <item>Intimidate</item>
   </object>
   <object>
-    <name>Plant</name>
-    <item>Knowledge (Nature)</item>
-  </object>
-  <object>
-    <name>Protection</name>
+    <name>Profession</name>
+    <item>Adviser</item>
+    <item>Alchemist</item>
+    <item>Animal Groomer</item>
+    <item>Animal Trainer</item>
+    <item>Apothecary</item>
+    <item>Appraiser</item>
+    <item>Architect</item>
+    <item>Armorer</item>
+    <item>Barrister</item>
+    <item>Blacksmith</item>
+    <item>Bookbinder</item>
+    <item>Bowyer</item>
+    <item>Brazier</item>
+    <item>Brewer</item>
+    <item>Butler</item>
+    <item>Carpenter</item>
+    <item>Cartographer</item>
+    <item>Cartwright</item>
+    <item>Chandler</item>
+    <item>City Guide</item>
+    <item>Clerk</item>
+    <item>Cobbler</item>
+    <item>Coffinmaker</item>
+    <item>Coiffeur</item>
+    <item>Cook</item>
+    <item>Coppersmith</item>
+    <item>Craftsman</item>
+    <item>Dowser</item>
+    <item>Dyer</item>
+    <item>Embalmer</item>
+    <item>Engineer</item>
+    <item>Entertainer</item>
+    <item>Exotic Animal Trainer</item>
+    <item>Farmer</item>
+    <item>Fletcher</item>
+    <item>Footman</item>
+    <item>Gemcutter</item>
+    <item>Goldsmith</item>
+    <item>Governess</item>
+    <item>Haberdasher</item>
+    <item>Healer</item>
+    <item>Horner</item>
+    <item>Interpreter</item>
+    <item>Jeweler</item>
+    <item>Laborer</item>
+    <item>Launderer</item>
+    <item>Limner</item>
+    <item>Local Courier</item>
+    <item>Locksmith</item>
+    <item>Maid</item>
+    <item>Masseuse</item>
+    <item>Matchmaker</item>
+    <item>Midwife</item>
+    <item>Miller</item>
+    <item>Navigator</item>
+    <item>Nursemaid</item>
+    <item>Out-of-Town Courier</item>
+    <item>Painter</item>
+    <item>Parchmentmaker</item>
+    <item>Pewterer</item>
+    <item>Polisher</item>
+    <item>Porter</item>
+    <item>Potter</item>
+    <item>Sage</item>
+    <item>Sailor Crewmember</item>
+    <item>Sailor Mate</item>
+    <item>Scribe</item>
+    <item>Sculptor</item>
+    <item>Shepherd</item>
+    <item>Shipwright</item>
+    <item>Silversmith</item>
+    <item>Skinner</item>
+    <item>Soapmaker</item>
+    <item>Soothsayer</item>
+    <item>Tanner</item>
+    <item>Teacher</item>
+    <item>Teamster</item>
+    <item>Trader</item>
+    <item>Valet</item>
+    <item>Vintner</item>
+    <item>Weaponsmith</item>
+    <item>Weaver</item>
+    <item>Wheelwright</item>
+    <item>Wilderness Guide</item>
   </object>
   <object>
     <name>Self-Sufficient</name>
@@ -175,73 +285,31 @@
     <item>Move Silently</item>
   </object>
   <object>
-    <name>Strength</name>
-  </object>
-  <object>
-    <name>Sun</name>
-  </object>
-  <object>
-    <name>Transmutation</name>
-  </object>
-  <object>
-    <name>Travel</name>
-    <item>Survival</item>
-  </object>
-  <object>
-    <name>Trickery</name>
-    <item>Bluff</item>
-    <item>Disguise</item>
-    <item>Hide</item>
-  </object>
-  <object>
-    <name>War</name>
-  </object>
-  <object>
-    <name>Water</name>
-  </object>
-  <object>
-    <name>Skills</name>
+    <name>Untrained</name>
     <item>Appraise</item>
     <item>Balance</item>
     <item>Bluff</item>
     <item>Climb</item>
     <item>Concentration</item>
-    <item>Decipher Script</item>
+    <item>Craft</item>
     <item>Diplomacy</item>
-    <item>Disable Device</item>
     <item>Disguise</item>
     <item>Escape Artist</item>
     <item>Forgery</item>
     <item>Gather Information</item>
-    <item>Handle Animal</item>
     <item>Heal</item>
     <item>Hide</item>
     <item>Intimidate</item>
     <item>Jump</item>
-    <item>Knowledge (Arcana)</item>
-    <item>Knowledge (Architecture and Engineering)</item>
-    <item>Knowledge (Dungeoneering)</item>
-    <item>Knowledge (Geography)</item>
-    <item>Knowledge (History)</item>
-    <item>Knowledge (Local)</item>
-    <item>Knowledge (Nature)</item>
-    <item>Knowledge (Nobility and Royalty)</item>
-    <item>Knowledge (Religion)</item>
-    <item>Knowledge (The Planes)</item>
     <item>Listen</item>
     <item>Move Silently</item>
-    <item>Open Lock</item>
     <item>Perform</item>
     <item>Ride</item>
     <item>Search</item>
     <item>Sense Motive</item>
-    <item>Sleight of Hand</item>
-    <item>Spellcraft</item>
     <item>Spot</item>
     <item>Survival</item>
     <item>Swim</item>
-    <item>Tumble</item>
-    <item>Use Magic Device</item>
     <item>Use Rope</item>
   </object>
 </items>

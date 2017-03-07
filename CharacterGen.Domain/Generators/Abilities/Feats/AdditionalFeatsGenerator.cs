@@ -28,8 +28,7 @@ namespace CharacterGen.Domain.Generators.Abilities.Feats
             this.adjustmentsSelector = adjustmentsSelector;
         }
 
-        public IEnumerable<Feat> GenerateWith(CharacterClass characterClass, Race race, Dictionary<string, Stat> stats,
-            Dictionary<string, Skill> skills, BaseAttack baseAttack, IEnumerable<Feat> preselectedFeats)
+        public IEnumerable<Feat> GenerateWith(CharacterClass characterClass, Race race, Dictionary<string, Stat> stats, IEnumerable<Skill> skills, BaseAttack baseAttack, IEnumerable<Feat> preselectedFeats)
         {
             var additionalFeats = GetAdditionalFeats(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             var allButBonusFeats = preselectedFeats.Union(additionalFeats);
@@ -38,8 +37,7 @@ namespace CharacterGen.Domain.Generators.Abilities.Feats
             return additionalFeats.Union(bonusFeats);
         }
 
-        private IEnumerable<Feat> GetAdditionalFeats(CharacterClass characterClass, Race race, Dictionary<string, Stat> stats, Dictionary<String, Skill> skills,
-            BaseAttack baseAttack, IEnumerable<Feat> preselectedFeats)
+        private IEnumerable<Feat> GetAdditionalFeats(CharacterClass characterClass, Race race, Dictionary<string, Stat> stats, IEnumerable<Skill> skills, BaseAttack baseAttack, IEnumerable<Feat> preselectedFeats)
         {
             var additionalFeatSelections = featsSelector.SelectAdditional();
             var availableFeatSelections = additionalFeatSelections.Where(s => s.ImmutableRequirementsMet(baseAttack.RangedBonus, stats, skills, characterClass));
@@ -64,8 +62,7 @@ namespace CharacterGen.Domain.Generators.Abilities.Feats
             return feats;
         }
 
-        private IEnumerable<Feat> GetBonusFeats(CharacterClass characterClass, Race race, Dictionary<string, Stat> stats,
-            Dictionary<string, Skill> skills, BaseAttack baseAttack, IEnumerable<Feat> preselectedFeats)
+        private IEnumerable<Feat> GetBonusFeats(CharacterClass characterClass, Race race, Dictionary<string, Stat> stats, IEnumerable<Skill> skills, BaseAttack baseAttack, IEnumerable<Feat> preselectedFeats)
         {
             if (characterClass.Name == CharacterClassConstants.Fighter)
                 return GetFighterFeats(characterClass, race, stats, skills, baseAttack, preselectedFeats);
@@ -75,7 +72,7 @@ namespace CharacterGen.Domain.Generators.Abilities.Feats
             return Enumerable.Empty<Feat>();
         }
 
-        private List<Feat> PopulateFeatsFrom(CharacterClass characterClass, Dictionary<string, Stat> stats, Dictionary<string, Skill> skills, BaseAttack baseAttack, IEnumerable<Feat> preselectedFeats, IEnumerable<AdditionalFeatSelection> sourceFeats, Int32 quantity)
+        private List<Feat> PopulateFeatsFrom(CharacterClass characterClass, Dictionary<string, Stat> stats, IEnumerable<Skill> skills, BaseAttack baseAttack, IEnumerable<Feat> preselectedFeats, IEnumerable<AdditionalFeatSelection> sourceFeats, Int32 quantity)
         {
             var feats = new List<Feat>();
             var chosenFeats = preselectedFeats;
@@ -154,8 +151,7 @@ namespace CharacterGen.Domain.Generators.Abilities.Feats
             return featsWithRequirementsMet.Except(excludedFeats);
         }
 
-        private IEnumerable<Feat> GetFighterFeats(CharacterClass characterClass, Race race, Dictionary<string, Stat> stats, Dictionary<String, Skill> skills,
-            BaseAttack baseAttack, IEnumerable<Feat> selectedFeats)
+        private IEnumerable<Feat> GetFighterFeats(CharacterClass characterClass, Race race, Dictionary<string, Stat> stats, IEnumerable<Skill> skills, BaseAttack baseAttack, IEnumerable<Feat> selectedFeats)
         {
             var fighterFeatIds = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.FighterBonusFeats);
             var fighterFeats = featsSelector.SelectAdditional().Where(f => fighterFeatIds.Contains(f.Feat));
@@ -167,8 +163,7 @@ namespace CharacterGen.Domain.Generators.Abilities.Feats
             return feats;
         }
 
-        private IEnumerable<Feat> GetWizardBonusFeats(CharacterClass characterClass, Race race, Dictionary<string, Stat> stats, Dictionary<string, Skill> skills,
-            BaseAttack baseAttack, IEnumerable<Feat> selectedFeats)
+        private IEnumerable<Feat> GetWizardBonusFeats(CharacterClass characterClass, Race race, Dictionary<string, Stat> stats, IEnumerable<Skill> skills, BaseAttack baseAttack, IEnumerable<Feat> selectedFeats)
         {
             var wizardFeatIds = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.WizardBonusFeats);
             var wizardFeats = featsSelector.SelectAdditional().Where(f => wizardFeatIds.Contains(f.Feat));

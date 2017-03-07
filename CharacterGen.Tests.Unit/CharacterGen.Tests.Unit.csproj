@@ -205,6 +205,7 @@
     <Compile Include="Selectors\Selections\CharacterClassFeatSelectionTests.cs" />
     <Compile Include="Selectors\Selections\RacialFeatSelectionTests.cs" />
     <Compile Include="Selectors\Selections\RequiredFeatSelectionTests.cs" />
+    <Compile Include="Selectors\Selections\RequiredSkillSelectionTests.cs" />
     <Compile Include="Selectors\Selections\SkillSelectionTests.cs" />
     <Compile Include="Selectors\Percentiles\PercentileSelectorTests.cs" />
     <Compile Include="Selectors\Collections\SkillSelectorTests.cs" />

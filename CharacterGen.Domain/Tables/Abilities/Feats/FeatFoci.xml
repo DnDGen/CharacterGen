@@ -155,6 +155,45 @@
     <item>Balance</item>
     <item>Bluff</item>
     <item>Climb</item>
+    <item>Craft/Alchemy</item>
+    <item>Craft/Armorsmithing</item>
+    <item>Craft/Blacksmithing</item>
+    <item>Craft/Bookbinding</item>
+    <item>Craft/Bowmaking</item>
+    <item>Craft/Brassmaking</item>
+    <item>Craft/Brewing</item>
+    <item>Craft/Candlemaking</item>
+    <item>Craft/Cloth</item>
+    <item>Craft/Coppersmithing</item>
+    <item>Craft/Dyemaking</item>
+    <item>Craft/Gemcutting</item>
+    <item>Craft/Glass</item>
+    <item>Craft/Goldsmithing</item>
+    <item>Craft/Hatmaking</item>
+    <item>Craft/Hornworking</item>
+    <item>Craft/Jewelmaking</item>
+    <item>Craft/Leather</item>
+    <item>Craft/Locksmithing</item>
+    <item>Craft/Mapmaking</item>
+    <item>Craft/Milling</item>
+    <item>Craft/Painting</item>
+    <item>Craft/Parchmentmaking</item>
+    <item>Craft/Pewtermaking</item>
+    <item>Craft/Potterymaking</item>
+    <item>Craft/Sculpting</item>
+    <item>Craft/Shipmaking</item>
+    <item>Craft/Shoemaking</item>
+    <item>Craft/Silversmithing</item>
+    <item>Craft/Skinning</item>
+    <item>Craft/Soapmaking</item>
+    <item>Craft/Stonemasonry</item>
+    <item>Craft/Tanning</item>
+    <item>Craft/Trapmaking</item>
+    <item>Craft/Weaponsmithing</item>
+    <item>Craft/Weaving</item>
+    <item>Craft/Wheelmaking</item>
+    <item>Craft/Winemaking</item>
+    <item>Craft/Woodworking</item>
     <item>Concentration</item>
     <item>Decipher Script</item>
     <item>Diplomacy</item>
@@ -168,20 +207,112 @@
     <item>Hide</item>
     <item>Intimidate</item>
     <item>Jump</item>
-    <item>Knowledge (Arcana)</item>
-    <item>Knowledge (Architecture and Engineering)</item>
-    <item>Knowledge (Dungeoneering)</item>
-    <item>Knowledge (Geography)</item>
-    <item>Knowledge (History)</item>
-    <item>Knowledge (Local)</item>
-    <item>Knowledge (Nature)</item>
-    <item>Knowledge (Nobility and Royalty)</item>
-    <item>Knowledge (Religion)</item>
-    <item>Knowledge (The Planes)</item>
+    <item>Knowledge/Arcana</item>
+    <item>Knowledge/Architecture and Engineering</item>
+    <item>Knowledge/Dungeoneering</item>
+    <item>Knowledge/Geography</item>
+    <item>Knowledge/History</item>
+    <item>Knowledge/Local</item>
+    <item>Knowledge/Nature</item>
+    <item>Knowledge/Nobility and Royalty</item>
+    <item>Knowledge/Religion</item>
+    <item>Knowledge/The Planes</item>
     <item>Listen</item>
     <item>Move Silently</item>
     <item>Open Lock</item>
-    <item>Perform</item>
+    <item>Perform/Act</item>
+    <item>Perform/Comedy</item>
+    <item>Perform/Dance</item>
+    <item>Perform/Keyboard instruments</item>
+    <item>Perform/Oratory</item>
+    <item>Perform/Percussion instruments</item>
+    <item>Perform/Sing</item>
+    <item>Perform/String instruments</item>
+    <item>Perform/Wind instruments</item>
+    <item>Profession/Adviser</item>
+    <item>Profession/Alchemist</item>
+    <item>Profession/Animal Groomer</item>
+    <item>Profession/Animal Trainer</item>
+    <item>Profession/Apothecary</item>
+    <item>Profession/Appraiser</item>
+    <item>Profession/Architect</item>
+    <item>Profession/Armorer</item>
+    <item>Profession/Barrister</item>
+    <item>Profession/Blacksmith</item>
+    <item>Profession/Bookbinder</item>
+    <item>Profession/Bowyer</item>
+    <item>Profession/Brazier</item>
+    <item>Profession/Brewer</item>
+    <item>Profession/Butler</item>
+    <item>Profession/Carpenter</item>
+    <item>Profession/Cartographer</item>
+    <item>Profession/Cartwright</item>
+    <item>Profession/Chandler</item>
+    <item>Profession/City Guide</item>
+    <item>Profession/Clerk</item>
+    <item>Profession/Cobbler</item>
+    <item>Profession/Coffinmaker</item>
+    <item>Profession/Coiffeur</item>
+    <item>Profession/Cook</item>
+    <item>Profession/Coppersmith</item>
+    <item>Profession/Craftsman</item>
+    <item>Profession/Dowser</item>
+    <item>Profession/Dyer</item>
+    <item>Profession/Embalmer</item>
+    <item>Profession/Engineer</item>
+    <item>Profession/Entertainer</item>
+    <item>Profession/Exotic Animal Trainer</item>
+    <item>Profession/Farmer</item>
+    <item>Profession/Fletcher</item>
+    <item>Profession/Footman</item>
+    <item>Profession/Gemcutter</item>
+    <item>Profession/Goldsmith</item>
+    <item>Profession/Governess</item>
+    <item>Profession/Haberdasher</item>
+    <item>Profession/Healer</item>
+    <item>Profession/Horner</item>
+    <item>Profession/Interpreter</item>
+    <item>Profession/Jeweler</item>
+    <item>Profession/Laborer</item>
+    <item>Profession/Launderer</item>
+    <item>Profession/Limner</item>
+    <item>Profession/Local Courier</item>
+    <item>Profession/Locksmith</item>
+    <item>Profession/Maid</item>
+    <item>Profession/Masseuse</item>
+    <item>Profession/Matchmaker</item>
+    <item>Profession/Midwife</item>
+    <item>Profession/Miller</item>
+    <item>Profession/Navigator</item>
+    <item>Profession/Nursemaid</item>
+    <item>Profession/Out-of-Town Courier</item>
+    <item>Profession/Painter</item>
+    <item>Profession/Parchmentmaker</item>
+    <item>Profession/Pewterer</item>
+    <item>Profession/Polisher</item>
+    <item>Profession/Porter</item>
+    <item>Profession/Potter</item>
+    <item>Profession/Sage</item>
+    <item>Profession/Sailor Crewmember</item>
+    <item>Profession/Sailor Mate</item>
+    <item>Profession/Scribe</item>
+    <item>Profession/Sculptor</item>
+    <item>Profession/Shepherd</item>
+    <item>Profession/Shipwright</item>
+    <item>Profession/Silversmith</item>
+    <item>Profession/Skinner</item>
+    <item>Profession/Soapmaker</item>
+    <item>Profession/Soothsayer</item>
+    <item>Profession/Tanner</item>
+    <item>Profession/Teacher</item>
+    <item>Profession/Teamster</item>
+    <item>Profession/Trader</item>
+    <item>Profession/Valet</item>
+    <item>Profession/Vintner</item>
+    <item>Profession/Weaponsmith</item>
+    <item>Profession/Weaver</item>
+    <item>Profession/Wheelwright</item>
+    <item>Profession/Wilderness Guide</item>
     <item>Ride</item>
     <item>Search</item>
     <item>Sense Motive</item>

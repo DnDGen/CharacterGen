@@ -28,7 +28,7 @@ namespace CharacterGen.Domain.Generators.Abilities.Feats
             this.dice = dice;
         }
 
-        public IEnumerable<Feat> GenerateWith(Race race, Dictionary<string, Skill> skills, Dictionary<string, Stat> stats)
+        public IEnumerable<Feat> GenerateWith(Race race, IEnumerable<Skill> skills, Dictionary<string, Stat> stats)
         {
             var baseRacialFeatSelections = featsSelector.SelectRacial(race.BaseRace);
             var metaracialFeatSelections = featsSelector.SelectRacial(race.Metarace);
@@ -61,7 +61,7 @@ namespace CharacterGen.Domain.Generators.Abilities.Feats
             return feats;
         }
 
-        private IEnumerable<string> GetFoci(RacialFeatSelection racialFeatSelection, Dictionary<string, Skill> skills)
+        private IEnumerable<string> GetFoci(RacialFeatSelection racialFeatSelection, IEnumerable<Skill> skills)
         {
             if (string.IsNullOrEmpty(racialFeatSelection.FocusType))
                 return Enumerable.Empty<string>();

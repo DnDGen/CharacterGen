@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <items>
-    <object>
-        <name>Knowledge (Nature)</name>
-        <item>0</item>
-    </object>
+  <object>
+    <name>Knowledge/Nature</name>
+    <item>0</item>
+  </object>
   <object>
     <name>Survival</name>
     <item>0</item>

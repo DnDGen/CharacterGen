@@ -5,22 +5,54 @@
     <name>Aasimar</name>
   </object>
   <object>
+    <name>Abjuration</name>
+  </object>
+  <object>
     <name>Adept</name>
     <item>Concentration</item>
+    <item>Craft</item>
     <item>Handle Animal</item>
     <item>Heal</item>
-    <item>Knowledge (Arcana)</item>
-    <item>Knowledge (Architecture and Engineering)</item>
-    <item>Knowledge (Dungeoneering)</item>
-    <item>Knowledge (Geography)</item>
-    <item>Knowledge (History)</item>
-    <item>Knowledge (Local)</item>
-    <item>Knowledge (Nature)</item>
-    <item>Knowledge (Nobility and Royalty)</item>
-    <item>Knowledge (Religion)</item>
-    <item>Knowledge (The Planes)</item>
+    <item>KnowledgeAll</item>
+    <item>Profession</item>
     <item>Spellcraft</item>
     <item>Survival</item>
+  </object>
+  <object>
+    <name>Adviser</name>
+    <item>Diplomacy</item>
+    <item>Knowledge</item>
+  </object>
+  <object>
+    <name>Air</name>
+  </object>
+  <object>
+    <name>Alchemist</name>
+    <item>Craft/Alchemy</item>
+  </object>
+  <object>
+    <name>Animal</name>
+    <item>Knowledge/Nature</item>
+  </object>
+  <object>
+    <name>Animal Groomer</name>
+    <item>Handle Animal</item>
+  </object>
+  <object>
+    <name>Animal Trainer</name>
+    <item>Handle Animal</item>
+  </object>
+  <object>
+    <name>Apothecary</name>
+    <item>Knowledge/Nature</item>
+  </object>
+  <object>
+    <name>Appraiser</name>
+    <item>Appraise</item>
+  </object>
+  <object>
+    <name>Architect</name>
+    <item>Knowledge/Architecture and Engineering</item>
   </object>
   <object>
     <name>Aristocrat</name>
@@ -32,17 +64,9 @@
     <item>Gather Information</item>
     <item>Handle Animal</item>
     <item>Intimidate</item>
-    <item>Knowledge (Arcana)</item>
-    <item>Knowledge (Architecture and Engineering)</item>
-    <item>Knowledge (Dungeoneering)</item>
-    <item>Knowledge (Geography)</item>
-    <item>Knowledge (History)</item>
-    <item>Knowledge (Local)</item>
-    <item>Knowledge (Nature)</item>
-    <item>Knowledge (Nobility and Royalty)</item>
-    <item>Knowledge (Religion)</item>
-    <item>Knowledge (The Planes)</item>
+    <item>KnowledgeAll</item>
     <item>Listen</item>
+    <item>Perform</item>
     <item>Ride</item>
     <item>Sense Motive</item>
     <item>Spot</item>
@@ -50,9 +74,14 @@
     <item>Swim</item>
   </object>
   <object>
+    <name>Armorer</name>
+    <item>Craft/Armorsmithing</item>
+  </object>
+  <object>
     <name>Azer</name>
     <item>Appraise</item>
     <item>Climb</item>
+    <item>Craft</item>
     <item>Hide</item>
     <item>Jump</item>
     <item>Listen</item>
@@ -62,6 +91,7 @@
   <object>
     <name>Barbarian</name>
     <item>Climb</item>
+    <item>Craft</item>
     <item>Handle Animal</item>
     <item>Intimidate</item>
     <item>Jump</item>
@@ -77,6 +107,7 @@
     <item>Bluff</item>
     <item>Climb</item>
     <item>Concentration</item>
+    <item>Craft</item>
     <item>Decipher Script</item>
     <item>Diplomacy</item>
     <item>Disguise</item>
@@ -84,25 +115,25 @@
     <item>Gather Information</item>
     <item>Hide</item>
     <item>Jump</item>
-    <item>Knowledge (Arcana)</item>
-    <item>Knowledge (Architecture and Engineering)</item>
-    <item>Knowledge (Dungeoneering)</item>
-    <item>Knowledge (Geography)</item>
-    <item>Knowledge (History)</item>
-    <item>Knowledge (Local)</item>
-    <item>Knowledge (Nature)</item>
-    <item>Knowledge (Nobility and Royalty)</item>
-    <item>Knowledge (Religion)</item>
-    <item>Knowledge (The Planes)</item>
+    <item>KnowledgeAll</item>
     <item>Listen</item>
     <item>Move Silently</item>
     <item>Perform</item>
+    <item>Profession</item>
     <item>Sense Motive</item>
     <item>Sleight of Hand</item>
     <item>Spellcraft</item>
     <item>Swim</item>
     <item>Tumble</item>
     <item>Use Magic Device</item>
+  </object>
+  <object>
+    <name>Barrister</name>
+    <item>Diplomacy</item>
+  </object>
+  <object>
+    <name>Blacksmith</name>
+    <item>Craft/Blacksmithing</item>
   </object>
   <object>
     <name>Blue Slaad</name>
@@ -114,6 +145,22 @@
     <item>Spot</item>
   </object>
   <object>
+    <name>Bookbinder</name>
+    <item>Craft/Bookbinding</item>
+  </object>
+  <object>
+    <name>Bowyer</name>
+    <item>Craft/Bowmaking</item>
+  </object>
+  <object>
+    <name>Brazier</name>
+    <item>Craft/Brassmaking</item>
+  </object>
+  <object>
+    <name>Brewer</name>
+    <item>Craft/Brewing</item>
+  </object>
+  <object>
     <name>Bugbear</name>
     <item>Climb</item>
     <item>Hide</item>
@@ -123,6 +170,23 @@
     <item>Spot</item>
   </object>
   <object>
+    <name>Butler</name>
+    <item>Diplomacy</item>
+    <item>Knowledge/Nobility and Royalty</item>
+  </object>
+  <object>
+    <name>Carpenter</name>
+    <item>Craft/Woodworking</item>
+  </object>
+  <object>
+    <name>Cartographer</name>
+    <item>Craft/Mapmaking</item>
+  </object>
+  <object>
+    <name>Cartwright</name>
+    <item>Craft/Woodworking</item>
+  </object>
+  <object>
     <name>Centaur</name>
     <item>Listen</item>
     <item>Move Silently</item>
@@ -130,19 +194,37 @@
     <item>Survival</item>
   </object>
   <object>
+    <name>Chandler</name>
+    <item>Craft/Candlemaking</item>
+  </object>
+  <object>
+    <name>Chaos</name>
+  </object>
+  <object>
+    <name>City Guide</name>
+    <item>Diplomacy</item>
+    <item>Knowledge/Local</item>
+  </object>
+  <object>
     <name>Cleric</name>
     <item>Concentration</item>
+    <item>Craft</item>
     <item>Diplomacy</item>
     <item>Heal</item>
-    <item>Knowledge (Arcana)</item>
-    <item>Knowledge (History)</item>
-    <item>Knowledge (Religion)</item>
-    <item>Knowledge (The Planes)</item>
+    <item>Knowledge/Arcana</item>
+    <item>Knowledge/History</item>
+    <item>Knowledge/Religion</item>
+    <item>Knowledge/The Planes</item>
+    <item>Profession</item>
     <item>Spellcraft</item>
+  </object>
+  <object>
+    <name>Clerk</name>
   </object>
   <object>
     <name>Cloud Giant</name>
     <item>Climb</item>
+    <item>Craft</item>
     <item>Diplomacy</item>
     <item>Intimidate</item>
     <item>Listen</item>
@@ -151,15 +233,45 @@
     <item>Spot</item>
   </object>
   <object>
+    <name>Cobbler</name>
+    <item>Craft/Shoemaking</item>
+  </object>
+  <object>
+    <name>Coffinmaker</name>
+    <item>Craft/Woodworking</item>
+  </object>
+  <object>
+    <name>Coiffeur</name>
+  </object>
+  <object>
     <name>Commoner</name>
     <item>Climb</item>
+    <item>Craft</item>
     <item>Handle Animal</item>
     <item>Jump</item>
     <item>Listen</item>
+    <item>Profession</item>
     <item>Ride</item>
     <item>Swim</item>
     <item>Spot</item>
     <item>Use Rope</item>
+  </object>
+  <object>
+    <name>Conjuration</name>
+  </object>
+  <object>
+    <name>Cook</name>
+  </object>
+  <object>
+    <name>Coppersmith</name>
+    <item>Craft/Coppersmithing</item>
+  </object>
+  <object>
+    <name>Craftsman</name>
+    <item>Craft</item>
+  </object>
+  <object>
+    <name>Death</name>
   </object>
   <object>
     <name>Death Slaad</name>
@@ -169,7 +281,7 @@
     <item>Hide</item>
     <item>Intimidate</item>
     <item>Jump</item>
-    <item>Death SlaadKnowledge</item>
+    <item>Knowledge2</item>
     <item>Listen</item>
     <item>Move Silently</item>
     <item>Search</item>
@@ -192,6 +304,12 @@
     <item>Move Silently</item>
   </object>
   <object>
+    <name>Destruction</name>
+  </object>
+  <object>
+    <name>Divination</name>
+  </object>
+  <object>
     <name>Doppelganger</name>
     <item>Bluff</item>
     <item>Diplomacy</item>
@@ -202,17 +320,24 @@
     <item>Spot</item>
   </object>
   <object>
+    <name>Dowser</name>
+    <item>Bluff</item>
+    <item>Survival</item>
+  </object>
+  <object>
     <name>Drow</name>
   </object>
   <object>
     <name>Druid</name>
     <item>Concentration</item>
+    <item>Craft</item>
     <item>Diplomacy</item>
     <item>Handle Animal</item>
     <item>Heal</item>
-    <item>Knowledge (Nature)</item>
+    <item>Knowledge/Nature</item>
     <item>Listen</item>
     <item>Ride</item>
+    <item>Profession</item>
     <item>Spellcraft</item>
     <item>Spot</item>
     <item>Survival</item>
@@ -222,11 +347,48 @@
     <name>Duergar Dwarf</name>
   </object>
   <object>
+    <name>Dyer</name>
+    <item>Craft/Dyemaking</item>
+  </object>
+  <object>
+    <name>Earth</name>
+  </object>
+  <object>
+    <name>Embalmer</name>
+    <item>Craft/Alchemy</item>
+  </object>
+  <object>
+    <name>Enchantment</name>
+  </object>
+  <object>
+    <name>Engineer</name>
+    <item>Knowledge/Architecture and Engineering</item>
+  </object>
+  <object>
+    <name>Entertainer</name>
+    <item>Perform</item>
+  </object>
+  <object>
+    <name>Evil</name>
+  </object>
+  <object>
+    <name>Evocation</name>
+  </object>
+  <object>
+    <name>Exotic Animal Trainer</name>
+    <item>Handle Animal</item>
+  </object>
+  <object>
     <name>Expert</name>
+  </object>
+  <object>
+    <name>Farmer</name>
+    <item>Knowledge/Nature</item>
   </object>
   <object>
     <name>Fighter</name>
     <item>Climb</item>
+    <item>Craft</item>
     <item>Handle Animal</item>
     <item>Intimidate</item>
     <item>Jump</item>
@@ -234,11 +396,24 @@
     <item>Swim</item>
   </object>
   <object>
+    <name>Fire</name>
+  </object>
+  <object>
     <name>Fire Giant</name>
     <item>Climb</item>
+    <item>Craft</item>
     <item>Intimidate</item>
     <item>Jump</item>
     <item>Spot</item>
+  </object>
+  <object>
+    <name>Fletcher</name>
+    <item>Craft/Bowmaking</item>
+  </object>
+  <object>
+    <name>Footman</name>
+    <item>Diplomacy</item>
+    <item>Knowledge/Nobility and Royalty</item>
   </object>
   <object>
     <name>Forest Gnome</name>
@@ -246,6 +421,7 @@
   <object>
     <name>Frost Giant</name>
     <item>Climb</item>
+    <item>Craft</item>
     <item>Intimidate</item>
     <item>Jump</item>
     <item>Spot</item>
@@ -257,12 +433,28 @@
     <item>Spot</item>
   </object>
   <object>
+    <name>Gemcutter</name>
+    <item>Craft/Gemcutting</item>
+  </object>
+  <object>
     <name>Gnoll</name>
     <item>Listen</item>
     <item>Spot</item>
   </object>
   <object>
     <name>Goblin</name>
+  </object>
+  <object>
+    <name>Goldsmith</name>
+    <item>Craft/Goldsmithing</item>
+  </object>
+  <object>
+    <name>Good</name>
+  </object>
+  <object>
+    <name>Governess</name>
+    <item>Diplomacy</item>
+    <item>Knowledge/Nobility and Royalty</item>
   </object>
   <object>
     <name>Gray Elf</name>
@@ -273,7 +465,7 @@
     <item>Concentration</item>
     <item>Hide</item>
     <item>Jump</item>
-    <item>Knowledge (Arcana)</item>
+    <item>Knowledge/Arcana</item>
     <item>Listen</item>
     <item>Move Silently</item>
     <item>Search</item>
@@ -301,6 +493,10 @@
     <item>Spot</item>
   </object>
   <object>
+    <name>Haberdasher</name>
+    <item>Craft/Hatmaking</item>
+  </object>
+  <object>
     <name>Half-Elf</name>
   </object>
   <object>
@@ -311,8 +507,15 @@
     <item>Bluff</item>
     <item>Intimidate</item>
     <item>Listen</item>
-    <item>Perform</item>
+    <item>Perform/Sing</item>
     <item>Spot</item>
+  </object>
+  <object>
+    <name>Healer</name>
+    <item>Heal</item>
+  </object>
+  <object>
+    <name>Healing</name>
   </object>
   <object>
     <name>High Elf</name>
@@ -331,6 +534,10 @@
     <name>Hobgoblin</name>
   </object>
   <object>
+    <name>Horner</name>
+    <item>Craft/Hornworking</item>
+  </object>
+  <object>
     <name>Hound Archon</name>
     <item>Concentration</item>
     <item>Hide</item>
@@ -345,9 +552,16 @@
     <name>Human</name>
   </object>
   <object>
+    <name>Illusion</name>
+  </object>
+  <object>
+    <name>Interpreter</name>
+  </object>
+  <object>
     <name>Janni</name>
     <item>Appraise</item>
     <item>Concentration</item>
+    <item>Craft</item>
     <item>Escape Artist</item>
     <item>Listen</item>
     <item>Move Silently</item>
@@ -356,10 +570,31 @@
     <item>Spot</item>
   </object>
   <object>
+    <name>Jeweler</name>
+    <item>Craft/Jewelmaking</item>
+  </object>
+  <object>
+    <name>Knowledge</name>
+    <item>KnowledgeAll</item>
+  </object>
+  <object>
     <name>Kobold</name>
   </object>
   <object>
+    <name>Laborer</name>
+  </object>
+  <object>
+    <name>Launderer</name>
+  </object>
+  <object>
+    <name>Law</name>
+  </object>
+  <object>
     <name>Lightfoot Halfling</name>
+  </object>
+  <object>
+    <name>Limner</name>
+    <item>Craft/Painting</item>
   </object>
   <object>
     <name>Lizardfolk</name>
@@ -368,12 +603,47 @@
     <item>Swim</item>
   </object>
   <object>
+    <name>Local Courier</name>
+    <item>Knowledge/Local</item>
+  </object>
+  <object>
+    <name>Locksmith</name>
+    <item>Craft/Locksmithing</item>
+  </object>
+  <object>
+    <name>Luck</name>
+  </object>
+  <object>
+    <name>Magic</name>
+  </object>
+  <object>
+    <name>Maid</name>
+    <item>Knowledge/Nobility and Royalty</item>
+  </object>
+  <object>
+    <name>Masseuse</name>
+    <item>Heal</item>
+  </object>
+  <object>
+    <name>Matchmaker</name>
+    <item>Diplomacy</item>
+    <item>Sense Motive</item>
+  </object>
+  <object>
+    <name>Midwife</name>
+    <item>Heal</item>
+  </object>
+  <object>
+    <name>Miller</name>
+    <item>Craft/Milling</item>
+  </object>
+  <object>
     <name>Mind Flayer</name>
     <item>Bluff</item>
     <item>Concentration</item>
     <item>Hide</item>
     <item>Intimidate</item>
-    <item>Mind FlayerKnowledge</item>
+    <item>Knowledge</item>
     <item>Listen</item>
     <item>Move Silently</item>
     <item>Spot</item>
@@ -391,15 +661,17 @@
     <item>Balance</item>
     <item>Climb</item>
     <item>Concentration</item>
+    <item>Craft</item>
     <item>Diplomacy</item>
     <item>Escape Artist</item>
     <item>Hide</item>
     <item>Jump</item>
-    <item>Knowledge (Arcana)</item>
-    <item>Knowledge (Religion)</item>
+    <item>Knowledge/Arcana</item>
+    <item>Knowledge/Religion</item>
     <item>Listen</item>
     <item>Move Silently</item>
     <item>Perform</item>
+    <item>Profession</item>
     <item>Sense Motive</item>
     <item>Spot</item>
     <item>Swim</item>
@@ -407,6 +679,16 @@
   </object>
   <object>
     <name>Mountain Dwarf</name>
+  </object>
+  <object>
+    <name>Navigator</name>
+    <item>Survival</item>
+  </object>
+  <object>
+    <name>Necromancy</name>
+  </object>
+  <object>
+    <name>Nursemaid</name>
   </object>
   <object>
     <name>Ogre</name>
@@ -425,18 +707,54 @@
     <name>Orc</name>
   </object>
   <object>
+    <name>Out-of-Town Courier</name>
+    <item>Knowledge/Local</item>
+    <item>Ride</item>
+  </object>
+  <object>
+    <name>Painter</name>
+    <item>Craft/Painting</item>
+  </object>
+  <object>
     <name>Paladin</name>
     <item>Concentration</item>
+    <item>Craft</item>
     <item>Diplomacy</item>
     <item>Handle Animal</item>
     <item>Heal</item>
-    <item>Knowledge (Nobility and Royalty)</item>
-    <item>Knowledge (Religion)</item>
+    <item>Knowledge/Nobility and Royalty</item>
+    <item>Knowledge/Religion</item>
+    <item>Profession</item>
     <item>Ride</item>
     <item>Sense Motive</item>
   </object>
   <object>
+    <name>Parchmentmaker</name>
+    <item>Craft/Parchmentmaking</item>
+  </object>
+  <object>
+    <name>Pewterer</name>
+    <item>Craft/Pewtermaking</item>
+  </object>
+  <object>
     <name>Pixie</name>
+  </object>
+  <object>
+    <name>Plant</name>
+    <item>Knowledge/Nature</item>
+  </object>
+  <object>
+    <name>Polisher</name>
+  </object>
+  <object>
+    <name>Porter</name>
+  </object>
+  <object>
+    <name>Potter</name>
+    <item>Craft/Potterymaking</item>
+  </object>
+  <object>
+    <name>Protection</name>
   </object>
   <object>
     <name>Rakshasa</name>
@@ -452,15 +770,17 @@
     <name>Ranger</name>
     <item>Climb</item>
     <item>Concentration</item>
+    <item>Craft</item>
     <item>Handle Animal</item>
     <item>Heal</item>
     <item>Hide</item>
     <item>Jump</item>
-    <item>Knowledge (Dungeoneering)</item>
-    <item>Knowledge (Geography)</item>
-    <item>Knowledge (Nature)</item>
+    <item>Knowledge/Dungeoneering</item>
+    <item>Knowledge/Geography</item>
+    <item>Knowledge/Nature</item>
     <item>Listen</item>
     <item>Move Silently</item>
+    <item>Profession</item>
     <item>Ride</item>
     <item>Search</item>
     <item>Spot</item>
@@ -486,6 +806,7 @@
     <item>Balance</item>
     <item>Bluff</item>
     <item>Climb</item>
+    <item>Craft/Trapmaking</item>
     <item>Decipher Script</item>
     <item>Diplomacy</item>
     <item>Disable Device</item>
@@ -496,11 +817,12 @@
     <item>Hide</item>
     <item>Intimidate</item>
     <item>Jump</item>
-    <item>Knowledge (Local)</item>
+    <item>Knowledge/Local</item>
     <item>Listen</item>
     <item>Move Silently</item>
     <item>Open Lock</item>
     <item>Perform</item>
+    <item>Profession</item>
     <item>Search</item>
     <item>Sense Motive</item>
     <item>Sleight of Hand</item>
@@ -511,14 +833,30 @@
     <item>Use Rope</item>
   </object>
   <object>
+    <name>Sage</name>
+    <item>Knowledge</item>
+  </object>
+  <object>
+    <name>Sailor Crewmember</name>
+    <item>Swim</item>
+  </object>
+  <object>
+    <name>Sailor Mate</name>
+    <item>Intimidate</item>
+    <item>Swim</item>
+  </object>
+  <object>
     <name>Satyr</name>
     <item>Bluff</item>
     <item>Hide</item>
-    <item>Knowledge (Nature)</item>
+    <item>Knowledge/Nature</item>
     <item>Listen</item>
     <item>Move Silently</item>
-    <item>Perform</item>
+    <item>Perform/Wind instruments</item>
     <item>Spot</item>
+  </object>
+  <object>
+    <name>Scribe</name>
   </object>
   <object>
     <name>Scorpionfolk</name>
@@ -529,10 +867,40 @@
     <item>Spot</item>
   </object>
   <object>
+    <name>Sculptor</name>
+    <item>Craft/Sculpting</item>
+  </object>
+  <object>
+    <name>Shepherd</name>
+    <item>Handle Animal</item>
+  </object>
+  <object>
+    <name>Shipwright</name>
+    <item>Craft/Shipmaking</item>
+  </object>
+  <object>
+    <name>Silversmith</name>
+    <item>Craft/Silversmithing</item>
+  </object>
+  <object>
+    <name>Skinner</name>
+    <item>Craft/Skinning</item>
+  </object>
+  <object>
+    <name>Soapmaker</name>
+    <item>Craft/Soapmaking</item>
+  </object>
+  <object>
+    <name>Soothsayer</name>
+    <item>Bluff</item>
+  </object>
+  <object>
     <name>Sorcerer</name>
     <item>Bluff</item>
     <item>Concentration</item>
-    <item>Knowledge (Arcana)</item>
+    <item>Craft</item>
+    <item>Knowledge/Arcana</item>
+    <item>Profession</item>
     <item>Spellcraft</item>
   </object>
   <object>
@@ -546,6 +914,7 @@
     <name>Storm Giant</name>
     <item>Climb</item>
     <item>Concentration</item>
+    <item>Craft</item>
     <item>Diplomacy</item>
     <item>Intimidate</item>
     <item>Jump</item>
@@ -556,13 +925,50 @@
     <item>Swim</item>
   </object>
   <object>
+    <name>Strength</name>
+  </object>
+  <object>
+    <name>Sun</name>
+  </object>
+  <object>
     <name>Svirfneblin</name>
   </object>
   <object>
     <name>Tallfellow Halfling</name>
   </object>
   <object>
+    <name>Tanner</name>
+    <item>Craft/Tanning</item>
+  </object>
+  <object>
+    <name>Teacher</name>
+    <item>Knowledge</item>
+  </object>
+  <object>
+    <name>Teamster</name>
+    <item>Handle Animal</item>
+    <item>Ride</item>
+  </object>
+  <object>
     <name>Tiefling</name>
+  </object>
+  <object>
+    <name>Trader</name>
+    <item>Appraise</item>
+    <item>Sense Motive</item>
+  </object>
+  <object>
+    <name>Transmutation</name>
+  </object>
+  <object>
+    <name>Travel</name>
+    <item>Survival</item>
+  </object>
+  <object>
+    <name>Trickery</name>
+    <item>Bluff</item>
+    <item>Disguise</item>
+    <item>Hide</item>
   </object>
   <object>
     <name>Troglodyte</name>
@@ -571,6 +977,17 @@
   </object>
   <object>
     <name>Troll</name>
+  </object>
+  <object>
+    <name>Valet</name>
+    <item>Diplomacy</item>
+  </object>
+  <object>
+    <name>Vintner</name>
+    <item>Craft/Winemaking</item>
+  </object>
+  <object>
+    <name>War</name>
   </object>
   <object>
     <name>Warrior</name>
@@ -582,22 +999,35 @@
     <item>Swim</item>
   </object>
   <object>
+    <name>Water</name>
+  </object>
+  <object>
+    <name>Weaponsmith</name>
+    <item>Craft/Weaponsmithing</item>
+  </object>
+  <object>
+    <name>Weaver</name>
+    <item>Craft/Weaving</item>
+  </object>
+  <object>
+    <name>Wheelwright</name>
+    <item>Craft/Wheelmaking</item>
+  </object>
+  <object>
     <name>Wild Elf</name>
+  </object>
+  <object>
+    <name>Wilderness Guide</name>
+    <item>Knowledge/Local</item>
+    <item>Knowledge/Nature</item>
   </object>
   <object>
     <name>Wizard</name>
     <item>Concentration</item>
+    <item>Craft</item>
     <item>Decipher Script</item>
-    <item>Knowledge (Arcana)</item>
-    <item>Knowledge (Architecture and Engineering)</item>
-    <item>Knowledge (Dungeoneering)</item>
-    <item>Knowledge (Geography)</item>
-    <item>Knowledge (History)</item>
-    <item>Knowledge (Local)</item>
-    <item>Knowledge (Nature)</item>
-    <item>Knowledge (Nobility and Royalty)</item>
-    <item>Knowledge (Religion)</item>
-    <item>Knowledge (The Planes)</item>
+    <item>KnowledgeAll</item>
+    <item>Profession</item>
     <item>Spellcraft</item>
   </object>
   <object>
@@ -606,19 +1036,21 @@
   <object>
     <name>Yuan-ti Abomination</name>
     <item>Concentration</item>
+    <item>Craft2</item>
     <item>Hide</item>
     <item>Listen</item>
     <item>Move Silently</item>
     <item>Spot</item>
-    <item>Yuan-ti AbominationKnowledge</item>
+    <item>Knowledge2</item>
   </object>
   <object>
     <name>Yuan-ti Halfblood</name>
     <item>Concentration</item>
+    <item>Craft2</item>
     <item>Hide</item>
     <item>Listen</item>
     <item>Spot</item>
-    <item>Yuan-ti HalfbloodKnowledge</item>
+    <item>Knowledge2</item>
   </object>
   <object>
     <name>Yuan-ti Pureblood</name>
@@ -627,6 +1059,6 @@
     <item>Hide</item>
     <item>Listen</item>
     <item>Spot</item>
-    <item>Yuan-ti PurebloodKnowledge</item>
+    <item>Knowledge</item>
   </object>
 </items>

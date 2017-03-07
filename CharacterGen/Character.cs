@@ -38,12 +38,7 @@ namespace CharacterGen
                 if (Class.Level == 0)
                     return string.Empty;
 
-                var summary = $"{Alignment.Full} Level {Class.Level} ";
-
-                if (string.IsNullOrEmpty(Race.Metarace) == false)
-                    summary += Race.Metarace + " ";
-
-                summary += $"{Race.BaseRace} {Class.Name}";
+                var summary = $"{Alignment.Full} {Race.Summary} {Class.Summary}";
 
                 return summary;
             }

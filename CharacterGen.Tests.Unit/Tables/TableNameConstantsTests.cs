@@ -36,7 +36,6 @@ namespace CharacterGen.Tests.Unit.Tables
         [TestCase(TableNameConstants.Set.Collection.BonusLanguages, "BonusLanguages")]
         [TestCase(TableNameConstants.Set.Collection.ClassNameGroups, "ClassNameGroups")]
         [TestCase(TableNameConstants.Set.Collection.ClassSkills, "ClassSkills")]
-        [TestCase(TableNameConstants.Set.Collection.CrossClassSkills, "CrossClassSkills")]
         [TestCase(TableNameConstants.Set.Collection.DragonSpecies, "DragonSpecies")]
         [TestCase(TableNameConstants.Set.Collection.EquivalentFeats, "EquivalentFeats")]
         [TestCase(TableNameConstants.Set.Collection.FeatGroups, "FeatGroups")]

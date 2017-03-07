@@ -8,6 +8,6 @@ namespace CharacterGen.Domain.Generators.Abilities
 {
     internal interface ISkillsGenerator
     {
-        Dictionary<string, Skill> GenerateWith(CharacterClass characterClass, Race race, Dictionary<string, Stat> stats);
+        IEnumerable<Skill> GenerateWith(CharacterClass characterClass, Race race, Dictionary<string, Stat> stats);
     }
 }

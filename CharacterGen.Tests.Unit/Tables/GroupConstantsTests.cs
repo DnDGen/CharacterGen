@@ -44,6 +44,7 @@ namespace CharacterGen.Tests.Unit.Tables
         [TestCase(GroupConstants.TakenMultipleTimes, "Taken Multiple Times")]
         [TestCase(GroupConstants.TwoHanded, "Two-Handed")]
         [TestCase(GroupConstants.Undead, "Undead")]
+        [TestCase(GroupConstants.Untrained, "Untrained")]
         [TestCase(GroupConstants.WizardBonusFeats, "Wizard Bonus Feats")]
         public void GroupConstant(string constant, string value)
         {

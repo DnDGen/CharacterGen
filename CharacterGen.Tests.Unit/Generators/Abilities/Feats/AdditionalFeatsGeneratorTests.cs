@@ -26,7 +26,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         private CharacterClass characterClass;
         private Race race;
         private Dictionary<string, Stat> stats;
-        private Dictionary<string, Skill> skills;
+        private List<Skill> skills;
         private List<AdditionalFeatSelection> additionalFeatSelections;
         private BaseAttack baseAttack;
         private List<Feat> preselectedFeats;
@@ -45,7 +45,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             characterClass = new CharacterClass();
             race = new Race();
             stats = new Dictionary<string, Stat>();
-            skills = new Dictionary<string, Skill>();
+            skills = new List<Skill>();
             additionalFeatSelections = new List<AdditionalFeatSelection>();
             baseAttack = new BaseAttack();
             stats[StatConstants.Intelligence] = new Stat(StatConstants.Intelligence);

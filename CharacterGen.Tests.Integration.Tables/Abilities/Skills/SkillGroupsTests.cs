@@ -1,6 +1,5 @@
 ﻿using CharacterGen.Abilities.Feats;
 using CharacterGen.Abilities.Skills;
-using CharacterGen.CharacterClasses;
 using CharacterGen.Domain.Tables;
 using NUnit.Framework;
 
@@ -19,37 +18,6 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
         {
             var names = new[]
             {
-                CharacterClassConstants.Domains.Air,
-                CharacterClassConstants.Domains.Animal,
-                CharacterClassConstants.Domains.Chaos,
-                CharacterClassConstants.Domains.Death,
-                CharacterClassConstants.Domains.Destruction,
-                CharacterClassConstants.Domains.Earth,
-                CharacterClassConstants.Domains.Evil,
-                CharacterClassConstants.Domains.Fire,
-                CharacterClassConstants.Domains.Good,
-                CharacterClassConstants.Domains.Healing,
-                CharacterClassConstants.Domains.Knowledge,
-                CharacterClassConstants.Domains.Law,
-                CharacterClassConstants.Domains.Luck,
-                CharacterClassConstants.Domains.Magic,
-                CharacterClassConstants.Domains.Plant,
-                CharacterClassConstants.Domains.Protection,
-                CharacterClassConstants.Domains.Strength,
-                CharacterClassConstants.Domains.Sun,
-                CharacterClassConstants.Domains.Travel,
-                CharacterClassConstants.Domains.Trickery,
-                CharacterClassConstants.Domains.War,
-                CharacterClassConstants.Domains.Water,
-                CharacterClassConstants.Schools.Abjuration,
-                CharacterClassConstants.Schools.Conjuration,
-                CharacterClassConstants.Schools.Divination,
-                CharacterClassConstants.Schools.Enchantment,
-                CharacterClassConstants.Schools.Evocation,
-                CharacterClassConstants.Schools.Illusion,
-                CharacterClassConstants.Schools.Necromancy,
-                CharacterClassConstants.Schools.Transmutation,
-                GroupConstants.Skills,
                 FeatConstants.Acrobatic,
                 FeatConstants.Agile,
                 FeatConstants.Alertness,
@@ -66,47 +34,18 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
                 FeatConstants.Persuasive,
                 FeatConstants.SelfSufficient,
                 FeatConstants.Stealthy,
-                GroupConstants.ArmorCheckPenalty
+                GroupConstants.All,
+                GroupConstants.ArmorCheckPenalty,
+                GroupConstants.Untrained,
+                SkillConstants.Craft,
+                SkillConstants.Knowledge,
+                SkillConstants.Perform,
+                SkillConstants.Profession,
             };
 
             AssertCollectionNames(names);
         }
 
-        [TestCase(CharacterClassConstants.Domains.Air)]
-        [TestCase(CharacterClassConstants.Domains.Animal,
-            SkillConstants.KnowledgeNature)]
-        [TestCase(CharacterClassConstants.Domains.Chaos)]
-        [TestCase(CharacterClassConstants.Domains.Death)]
-        [TestCase(CharacterClassConstants.Domains.Destruction)]
-        [TestCase(CharacterClassConstants.Domains.Earth)]
-        [TestCase(CharacterClassConstants.Domains.Evil)]
-        [TestCase(CharacterClassConstants.Domains.Fire)]
-        [TestCase(CharacterClassConstants.Domains.Good)]
-        [TestCase(CharacterClassConstants.Domains.Healing)]
-        [TestCase(CharacterClassConstants.Domains.Law)]
-        [TestCase(CharacterClassConstants.Domains.Luck)]
-        [TestCase(CharacterClassConstants.Domains.Magic)]
-        [TestCase(CharacterClassConstants.Domains.Plant,
-            SkillConstants.KnowledgeNature)]
-        [TestCase(CharacterClassConstants.Domains.Protection)]
-        [TestCase(CharacterClassConstants.Domains.Strength)]
-        [TestCase(CharacterClassConstants.Domains.Sun)]
-        [TestCase(CharacterClassConstants.Domains.Travel,
-            SkillConstants.Survival)]
-        [TestCase(CharacterClassConstants.Domains.Trickery,
-            SkillConstants.Bluff,
-            SkillConstants.Disguise,
-            SkillConstants.Hide)]
-        [TestCase(CharacterClassConstants.Domains.War)]
-        [TestCase(CharacterClassConstants.Domains.Water)]
-        [TestCase(CharacterClassConstants.Schools.Abjuration)]
-        [TestCase(CharacterClassConstants.Schools.Conjuration)]
-        [TestCase(CharacterClassConstants.Schools.Divination)]
-        [TestCase(CharacterClassConstants.Schools.Enchantment)]
-        [TestCase(CharacterClassConstants.Schools.Evocation)]
-        [TestCase(CharacterClassConstants.Schools.Illusion)]
-        [TestCase(CharacterClassConstants.Schools.Necromancy)]
-        [TestCase(CharacterClassConstants.Schools.Transmutation)]
         [TestCase(FeatConstants.Acrobatic,
             SkillConstants.Jump,
             SkillConstants.Tumble)]
@@ -138,7 +77,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
             SkillConstants.Spellcraft,
             SkillConstants.UseMagicDevice)]
         [TestCase(FeatConstants.NatureSense,
-            SkillConstants.KnowledgeNature,
+            SkillConstants.Knowledge + "/" + SkillConstants.Foci.Knowledge.Nature,
             SkillConstants.Survival)]
         [TestCase(FeatConstants.Negotiator,
             SkillConstants.Diplomacy,
@@ -180,6 +119,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
                 SkillConstants.Bluff,
                 SkillConstants.Climb,
                 SkillConstants.Concentration,
+                SkillConstants.Craft,
                 SkillConstants.DecipherScript,
                 SkillConstants.Diplomacy,
                 SkillConstants.DisableDevice,
@@ -192,16 +132,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
                 SkillConstants.Hide,
                 SkillConstants.Intimidate,
                 SkillConstants.Jump,
-                SkillConstants.KnowledgeArcana,
-                SkillConstants.KnowledgeArchitectureAndEngineering,
-                SkillConstants.KnowledgeDungeoneering,
-                SkillConstants.KnowledgeGeography,
-                SkillConstants.KnowledgeHistory,
-                SkillConstants.KnowledgeLocal,
-                SkillConstants.KnowledgeNature,
-                SkillConstants.KnowledgeNobilityAndRoyalty,
-                SkillConstants.KnowledgeReligion,
-                SkillConstants.KnowledgeThePlanes,
+                SkillConstants.Knowledge,
                 SkillConstants.Listen,
                 SkillConstants.MoveSilently,
                 SkillConstants.OpenLock,
@@ -216,50 +147,227 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
                 SkillConstants.Swim,
                 SkillConstants.Tumble,
                 SkillConstants.UseMagicDevice,
-                SkillConstants.UseRope
+                SkillConstants.UseRope,
             };
 
-            base.DistinctCollection(GroupConstants.Skills, skills);
+            base.DistinctCollection(GroupConstants.All, skills);
+        }
+
+        [Test]
+        public void UntrainedSkills()
+        {
+            var skills = new[]
+            {
+                SkillConstants.Appraise,
+                SkillConstants.Balance,
+                SkillConstants.Bluff,
+                SkillConstants.Climb,
+                SkillConstants.Concentration,
+                SkillConstants.Craft,
+                SkillConstants.Diplomacy,
+                SkillConstants.Disguise,
+                SkillConstants.EscapeArtist,
+                SkillConstants.Forgery,
+                SkillConstants.GatherInformation,
+                SkillConstants.Heal,
+                SkillConstants.Hide,
+                SkillConstants.Intimidate,
+                SkillConstants.Jump,
+                SkillConstants.Listen,
+                SkillConstants.MoveSilently,
+                SkillConstants.Perform,
+                SkillConstants.Ride,
+                SkillConstants.Search,
+                SkillConstants.SenseMotive,
+                SkillConstants.Spot,
+                SkillConstants.Survival,
+                SkillConstants.Swim,
+                SkillConstants.UseRope,
+            };
+
+            base.DistinctCollection(GroupConstants.Untrained, skills);
+        }
+
+        [Test]
+        public void CraftSkillFoci()
+        {
+            var foci = new[]
+            {
+                SkillConstants.Foci.Craft.Alchemy,
+                SkillConstants.Foci.Craft.Armorsmithing,
+                SkillConstants.Foci.Craft.Blacksmithing,
+                SkillConstants.Foci.Craft.Bookbinding,
+                SkillConstants.Foci.Craft.Bowmaking,
+                SkillConstants.Foci.Craft.Brassmaking,
+                SkillConstants.Foci.Craft.Brewing,
+                SkillConstants.Foci.Craft.Candlemaking,
+                SkillConstants.Foci.Craft.Cloth,
+                SkillConstants.Foci.Craft.Coppersmithing,
+                SkillConstants.Foci.Craft.Dyemaking,
+                SkillConstants.Foci.Craft.Gemcutting,
+                SkillConstants.Foci.Craft.Glass,
+                SkillConstants.Foci.Craft.Goldsmithing,
+                SkillConstants.Foci.Craft.Hatmaking,
+                SkillConstants.Foci.Craft.Hornworking,
+                SkillConstants.Foci.Craft.Jewelmaking,
+                SkillConstants.Foci.Craft.Leather,
+                SkillConstants.Foci.Craft.Locksmithing,
+                SkillConstants.Foci.Craft.Mapmaking,
+                SkillConstants.Foci.Craft.Milling,
+                SkillConstants.Foci.Craft.Painting,
+                SkillConstants.Foci.Craft.Parchmentmaking,
+                SkillConstants.Foci.Craft.Pewtermaking,
+                SkillConstants.Foci.Craft.Potterymaking,
+                SkillConstants.Foci.Craft.Sculpting,
+                SkillConstants.Foci.Craft.Shipmaking,
+                SkillConstants.Foci.Craft.Shoemaking,
+                SkillConstants.Foci.Craft.Silversmithing,
+                SkillConstants.Foci.Craft.Skinning,
+                SkillConstants.Foci.Craft.Soapmaking,
+                SkillConstants.Foci.Craft.Stonemasonry,
+                SkillConstants.Foci.Craft.Tanning,
+                SkillConstants.Foci.Craft.Trapmaking,
+                SkillConstants.Foci.Craft.Weaponsmithing,
+                SkillConstants.Foci.Craft.Weaving,
+                SkillConstants.Foci.Craft.Wheelmaking,
+                SkillConstants.Foci.Craft.Winemaking,
+                SkillConstants.Foci.Craft.Woodworking,
+            };
+
+            base.DistinctCollection(SkillConstants.Craft, foci);
         }
 
         [Test]
         public void KnowledgeSkillFoci()
         {
-            var skills = new[]
+            var foci = new[]
             {
-                SkillConstants.KnowledgeArcana,
-                SkillConstants.KnowledgeArchitectureAndEngineering,
-                SkillConstants.KnowledgeDungeoneering,
-                SkillConstants.KnowledgeGeography,
-                SkillConstants.KnowledgeHistory,
-                SkillConstants.KnowledgeLocal,
-                SkillConstants.KnowledgeNature,
-                SkillConstants.KnowledgeNobilityAndRoyalty,
-                SkillConstants.KnowledgeReligion,
-                SkillConstants.KnowledgeThePlanes,
+                SkillConstants.Foci.Knowledge.Arcana,
+                SkillConstants.Foci.Knowledge.ArchitectureAndEngineering,
+                SkillConstants.Foci.Knowledge.Dungeoneering,
+                SkillConstants.Foci.Knowledge.Geography,
+                SkillConstants.Foci.Knowledge.History,
+                SkillConstants.Foci.Knowledge.Local,
+                SkillConstants.Foci.Knowledge.Nature,
+                SkillConstants.Foci.Knowledge.NobilityAndRoyalty,
+                SkillConstants.Foci.Knowledge.Religion,
+                SkillConstants.Foci.Knowledge.ThePlanes,
             };
 
-            base.DistinctCollection(SkillConstants.Knowledge, skills);
+            base.DistinctCollection(SkillConstants.Knowledge, foci);
         }
 
         [Test]
-        public void KnowledgeDomainSkills()
+        public void PerformSkillFoci()
         {
-            var skills = new[]
+            var foci = new[]
             {
-                SkillConstants.KnowledgeArcana,
-                SkillConstants.KnowledgeArchitectureAndEngineering,
-                SkillConstants.KnowledgeDungeoneering,
-                SkillConstants.KnowledgeGeography,
-                SkillConstants.KnowledgeHistory,
-                SkillConstants.KnowledgeLocal,
-                SkillConstants.KnowledgeNature,
-                SkillConstants.KnowledgeNobilityAndRoyalty,
-                SkillConstants.KnowledgeReligion,
-                SkillConstants.KnowledgeThePlanes
+                SkillConstants.Foci.Perform.Act,
+                SkillConstants.Foci.Perform.Comedy,
+                SkillConstants.Foci.Perform.Dance,
+                SkillConstants.Foci.Perform.KeyboardInstruments,
+                SkillConstants.Foci.Perform.Oratory,
+                SkillConstants.Foci.Perform.PercussionInstruments,
+                SkillConstants.Foci.Perform.Sing,
+                SkillConstants.Foci.Perform.StringInstruments,
+                SkillConstants.Foci.Perform.WindInstruments,
             };
 
-            base.DistinctCollection(CharacterClassConstants.Domains.Knowledge, skills);
+            base.DistinctCollection(SkillConstants.Perform, foci);
+        }
+
+        [Test]
+        public void ProfessionSkillFoci()
+        {
+            var foci = new[]
+            {
+                SkillConstants.Foci.Profession.Adviser,
+                SkillConstants.Foci.Profession.Alchemist,
+                SkillConstants.Foci.Profession.AnimalGroomer,
+                SkillConstants.Foci.Profession.AnimalTrainer,
+                SkillConstants.Foci.Profession.Apothecary,
+                SkillConstants.Foci.Profession.Appraiser,
+                SkillConstants.Foci.Profession.Architect,
+                SkillConstants.Foci.Profession.Armorer,
+                SkillConstants.Foci.Profession.Barrister,
+                SkillConstants.Foci.Profession.Blacksmith,
+                SkillConstants.Foci.Profession.Bookbinder,
+                SkillConstants.Foci.Profession.Bowyer,
+                SkillConstants.Foci.Profession.Brazier,
+                SkillConstants.Foci.Profession.Brewer,
+                SkillConstants.Foci.Profession.Butler,
+                SkillConstants.Foci.Profession.Carpenter,
+                SkillConstants.Foci.Profession.Cartographer,
+                SkillConstants.Foci.Profession.Cartwright,
+                SkillConstants.Foci.Profession.Chandler,
+                SkillConstants.Foci.Profession.CityGuide,
+                SkillConstants.Foci.Profession.Clerk,
+                SkillConstants.Foci.Profession.Cobbler,
+                SkillConstants.Foci.Profession.Coffinmaker,
+                SkillConstants.Foci.Profession.Coiffeur,
+                SkillConstants.Foci.Profession.Cook,
+                SkillConstants.Foci.Profession.Coppersmith,
+                SkillConstants.Foci.Profession.Craftsman,
+                SkillConstants.Foci.Profession.Dowser,
+                SkillConstants.Foci.Profession.Dyer,
+                SkillConstants.Foci.Profession.Embalmer,
+                SkillConstants.Foci.Profession.Engineer,
+                SkillConstants.Foci.Profession.Entertainer,
+                SkillConstants.Foci.Profession.ExoticAnimalTrainer,
+                SkillConstants.Foci.Profession.Farmer,
+                SkillConstants.Foci.Profession.Fletcher,
+                SkillConstants.Foci.Profession.Footman,
+                SkillConstants.Foci.Profession.Gemcutter,
+                SkillConstants.Foci.Profession.Goldsmith,
+                SkillConstants.Foci.Profession.Governess,
+                SkillConstants.Foci.Profession.Haberdasher,
+                SkillConstants.Foci.Profession.Healer,
+                SkillConstants.Foci.Profession.Horner,
+                SkillConstants.Foci.Profession.Interpreter,
+                SkillConstants.Foci.Profession.Jeweler,
+                SkillConstants.Foci.Profession.Laborer,
+                SkillConstants.Foci.Profession.Launderer,
+                SkillConstants.Foci.Profession.Limner,
+                SkillConstants.Foci.Profession.LocalCourier,
+                SkillConstants.Foci.Profession.Locksmith,
+                SkillConstants.Foci.Profession.Maid,
+                SkillConstants.Foci.Profession.Masseuse,
+                SkillConstants.Foci.Profession.Matchmaker,
+                SkillConstants.Foci.Profession.Midwife,
+                SkillConstants.Foci.Profession.Miller,
+                SkillConstants.Foci.Profession.Navigator,
+                SkillConstants.Foci.Profession.Nursemaid,
+                SkillConstants.Foci.Profession.OutOfTownCourier,
+                SkillConstants.Foci.Profession.Painter,
+                SkillConstants.Foci.Profession.Parchmentmaker,
+                SkillConstants.Foci.Profession.Pewterer,
+                SkillConstants.Foci.Profession.Polisher,
+                SkillConstants.Foci.Profession.Porter,
+                SkillConstants.Foci.Profession.Potter,
+                SkillConstants.Foci.Profession.Sage,
+                SkillConstants.Foci.Profession.SailorCrewmember,
+                SkillConstants.Foci.Profession.SailorMate,
+                SkillConstants.Foci.Profession.Scribe,
+                SkillConstants.Foci.Profession.Sculptor,
+                SkillConstants.Foci.Profession.Shepherd,
+                SkillConstants.Foci.Profession.Shipwright,
+                SkillConstants.Foci.Profession.Silversmith,
+                SkillConstants.Foci.Profession.Skinner,
+                SkillConstants.Foci.Profession.Soapmaker,
+                SkillConstants.Foci.Profession.Soothsayer,
+                SkillConstants.Foci.Profession.Tanner,
+                SkillConstants.Foci.Profession.Teacher,
+                SkillConstants.Foci.Profession.Teamster,
+                SkillConstants.Foci.Profession.Trader,
+                SkillConstants.Foci.Profession.Valet,
+                SkillConstants.Foci.Profession.Vintner,
+                SkillConstants.Foci.Profession.Weaponsmith,
+                SkillConstants.Foci.Profession.Weaver,
+                SkillConstants.Foci.Profession.Wheelwright,
+                SkillConstants.Foci.Profession.WildernessGuide,
+            };
+
+            base.DistinctCollection(SkillConstants.Profession, foci);
         }
     }
 }

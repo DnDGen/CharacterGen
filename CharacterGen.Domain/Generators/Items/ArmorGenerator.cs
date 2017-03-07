@@ -43,7 +43,8 @@ namespace CharacterGen.Domain.Generators.Items
 
             return generator.Generate(() => GenerateArmor(power),
                 a => ArmorIsValid(a, proficientArmors, characterClass, race),
-                () => GenerateDefaultArmor(power, proficientArmors, race));
+                () => GenerateDefaultArmor(power, proficientArmors, race),
+                $"{power} armor from [{string.Join(",", proficientArmors)}]");
         }
 
         private Item GenerateDefaultArmor(string power, IEnumerable<string> proficientArmors, Race race)
@@ -78,30 +79,20 @@ namespace CharacterGen.Domain.Generators.Items
                 return null;
 
             return generator.Generate(() => GenerateArmor(power),
-                s => ShieldIsValid(s, proficientShields, characterClass, race),
-                () => GenerateDefaultArmor(power, proficientShields, race));
+                s => ArmorIsValid(s, proficientShields, characterClass, race, true),
+                () => GenerateDefaultArmor(power, proficientShields, race),
+                $"{power} shield from [{string.Join(",", proficientShields)}]");
         }
 
-        private bool ArmorIsValid(Item armor, IEnumerable<string> proficientArmors, CharacterClass characterClass, Race race)
+        private bool ArmorIsValid(Item armor, IEnumerable<string> proficientArmors, CharacterClass characterClass, Race race, bool isShield = false)
         {
             if (armor == null)
                 return true;
 
-            if (armor.Attributes.Contains(AttributeConstants.Shield))
+            if (armor.Attributes.Contains(AttributeConstants.Shield) != isShield)
                 return false;
 
             return IsValid(armor, proficientArmors, characterClass, race);
-        }
-
-        private bool ShieldIsValid(Item shield, IEnumerable<String> proficientArmors, CharacterClass characterClass, Race race)
-        {
-            if (shield == null)
-                return true;
-
-            if (shield.Attributes.Contains(AttributeConstants.Shield) == false)
-                return false;
-
-            return IsValid(shield, proficientArmors, characterClass, race);
         }
 
         private bool IsValid(Item armor, IEnumerable<string> proficientArmors, CharacterClass characterClass, Race race)

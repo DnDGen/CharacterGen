@@ -40,6 +40,7 @@
         public const string TakenMultipleTimes = "Taken Multiple Times";
         public const string TwoHanded = "Two-Handed";
         public const string Undead = "Undead";
+        public const string Untrained = "Untrained";
         public const string WizardBonusFeats = "Wizard Bonus Feats";
     }
 }

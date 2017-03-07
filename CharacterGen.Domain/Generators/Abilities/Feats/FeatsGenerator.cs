@@ -18,8 +18,7 @@ namespace CharacterGen.Domain.Generators.Abilities.Feats
         private IAdditionalFeatsGenerator additionalFeatsGenerator;
         private ICollectionsSelector collectionsSelector;
 
-        public FeatsGenerator(IRacialFeatsGenerator racialFeatsGenerator, IClassFeatsGenerator classFeatsGenerator,
-            IAdditionalFeatsGenerator additionalFeatsGenerator, ICollectionsSelector collectionsSelector)
+        public FeatsGenerator(IRacialFeatsGenerator racialFeatsGenerator, IClassFeatsGenerator classFeatsGenerator, IAdditionalFeatsGenerator additionalFeatsGenerator, ICollectionsSelector collectionsSelector)
         {
             this.racialFeatsGenerator = racialFeatsGenerator;
             this.classFeatsGenerator = classFeatsGenerator;
@@ -27,8 +26,7 @@ namespace CharacterGen.Domain.Generators.Abilities.Feats
             this.collectionsSelector = collectionsSelector;
         }
 
-        public IEnumerable<Feat> GenerateWith(CharacterClass characterClass, Race race, Dictionary<string, Stat> stats,
-            Dictionary<string, Skill> skills, BaseAttack baseAttack)
+        public IEnumerable<Feat> GenerateWith(CharacterClass characterClass, Race race, Dictionary<string, Stat> stats, IEnumerable<Skill> skills, BaseAttack baseAttack)
         {
             var racialFeats = racialFeatsGenerator.GenerateWith(race, skills, stats);
             var classFeats = classFeatsGenerator.GenerateWith(characterClass, race, stats, racialFeats, skills);

@@ -205,5 +205,14 @@ namespace CharacterGen.Tests.Unit.Common.Classes
             characterClass.IsNPC = true;
             Assert.That(characterClass.EffectiveLevel, Is.EqualTo(effectiveLevel));
         }
+
+        [Test]
+        public void CharacterClassSummary()
+        {
+            characterClass.Name = "class name";
+            characterClass.Level = 9266;
+
+            Assert.That(characterClass.Summary, Is.EqualTo("Level 9266 class name"));
+        }
     }
 }

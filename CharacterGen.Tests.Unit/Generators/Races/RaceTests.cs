@@ -51,5 +51,43 @@ namespace CharacterGen.Tests.Unit.Common.Races
             race.IsMale = true;
             Assert.That(race.Gender, Is.EqualTo("Male"));
         }
+
+        [Test]
+        public void MaleSummary()
+        {
+            race.IsMale = true;
+            race.BaseRace = "base race";
+
+            Assert.That(race.Summary, Is.EqualTo("Male base race"));
+        }
+
+        [Test]
+        public void FemaleSummary()
+        {
+            race.IsMale = false;
+            race.BaseRace = "base race";
+
+            Assert.That(race.Summary, Is.EqualTo("Female base race"));
+        }
+
+        [Test]
+        public void MaleSummaryWithMetarace()
+        {
+            race.IsMale = true;
+            race.BaseRace = "base race";
+            race.Metarace = "metarace";
+
+            Assert.That(race.Summary, Is.EqualTo("Male metarace base race"));
+        }
+
+        [Test]
+        public void FemaleSummaryWithMetarace()
+        {
+            race.IsMale = false;
+            race.BaseRace = "base race";
+            race.Metarace = "metarace";
+
+            Assert.That(race.Summary, Is.EqualTo("Female metarace base race"));
+        }
     }
 }

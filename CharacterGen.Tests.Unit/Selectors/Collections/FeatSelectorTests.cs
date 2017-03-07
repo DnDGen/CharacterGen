@@ -304,7 +304,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
             mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(tableName)).Returns(feat1ClassRequirements);
 
             var feat2SkillRankRequirements = new Dictionary<string, int>();
-            feat2SkillRankRequirements["skill 1"] = 5;
+            feat2SkillRankRequirements["skill 1"] = 0;
             feat2SkillRankRequirements["skill 2"] = 4;
 
             tableName = string.Format(TableNameConstants.Formattable.Adjustments.FEATSkillRankRequirements, "additional feat 2");
@@ -340,7 +340,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
             Assert.That(lastRequirement.Focus, Is.EqualTo("focus"));
             Assert.That(first.RequiredFeats.Count(), Is.EqualTo(2));
 
-            Assert.That(first.RequiredSkillRanks, Is.Empty);
+            Assert.That(first.RequiredSkills, Is.Empty);
             Assert.That(first.RequiredStats, Is.Empty);
             Assert.That(first.FocusType, Is.Empty);
 
@@ -351,9 +351,17 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
             Assert.That(last.RequiredBaseAttack, Is.EqualTo(0));
             Assert.That(last.RequiredCharacterClasses, Is.Empty);
             Assert.That(last.RequiredFeats, Is.Empty);
-            Assert.That(last.RequiredSkillRanks["skill 1"], Is.EqualTo(5));
-            Assert.That(last.RequiredSkillRanks["skill 2"], Is.EqualTo(4));
-            Assert.That(last.RequiredSkillRanks.Count, Is.EqualTo(2));
+
+            var requiredSkills = last.RequiredSkills.ToArray();
+            Assert.That(requiredSkills[0].Skill, Is.EqualTo("skill 1"));
+            Assert.That(requiredSkills[0].Ranks, Is.EqualTo(0));
+            Assert.That(requiredSkills[0].Focus, Is.Empty);
+            Assert.That(requiredSkills[1].Skill, Is.EqualTo("skill 2"));
+            Assert.That(requiredSkills[1].Ranks, Is.EqualTo(4));
+            Assert.That(requiredSkills[1].Focus, Is.Empty);
+            Assert.That(requiredSkills.Length, Is.EqualTo(2));
+
+            Assert.That(last.RequiredSkills.Count, Is.EqualTo(2));
             Assert.That(last.RequiredStats["stat 1"], Is.EqualTo(13));
             Assert.That(last.RequiredStats["stat 2"], Is.EqualTo(16));
             Assert.That(last.RequiredStats.Count, Is.EqualTo(2));
@@ -373,6 +381,38 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
             data[DataIndexConstants.AdditionalFeatData.PowerIndex] = power.ToString();
 
             return data;
+        }
+
+        [Test]
+        public void GetAdditionalFeatsWithRequiredSkillWithFocus()
+        {
+            additionalFeatsData["additional feat"] = BuildAdditionalFeatData(string.Empty, 0, string.Empty, 0, 0);
+
+            var featRequirements = new Dictionary<string, IEnumerable<string>>();
+            featRequirements["additional feat"] = Enumerable.Empty<string>();
+            mockCollectionsSelector.Setup(s => s.SelectAllFrom(TableNameConstants.Set.Collection.RequiredFeats)).Returns(featRequirements);
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.HasSkillRequirements)).Returns(new[] { "additional feat" });
+
+            var skillRankRequirements = new Dictionary<string, int>();
+            skillRankRequirements["skill 1"] = 0;
+            skillRankRequirements["skill 2/focus"] = 4;
+
+            var tableName = string.Format(TableNameConstants.Formattable.Adjustments.FEATSkillRankRequirements, "additional feat");
+            mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(tableName)).Returns(skillRankRequirements);
+
+            var additionalFeats = featsSelector.SelectAdditional();
+            var featSelection = additionalFeats.Single();
+            Assert.That(featSelection.Feat, Is.EqualTo("additional feat"));
+
+            var requiredSkills = featSelection.RequiredSkills.ToArray();
+            Assert.That(requiredSkills[0].Skill, Is.EqualTo("skill 1"));
+            Assert.That(requiredSkills[0].Ranks, Is.EqualTo(0));
+            Assert.That(requiredSkills[0].Focus, Is.Empty);
+            Assert.That(requiredSkills[1].Skill, Is.EqualTo("skill 2"));
+            Assert.That(requiredSkills[1].Ranks, Is.EqualTo(4));
+            Assert.That(requiredSkills[1].Focus, Is.EqualTo("focus"));
+            Assert.That(requiredSkills.Length, Is.EqualTo(2));
         }
     }
 }

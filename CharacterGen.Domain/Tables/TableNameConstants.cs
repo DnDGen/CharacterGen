@@ -40,7 +40,6 @@
                 public const string BonusLanguages = "BonusLanguages";
                 public const string ClassNameGroups = "ClassNameGroups";
                 public const string ClassSkills = "ClassSkills";
-                public const string CrossClassSkills = "CrossClassSkills";
                 public const string DragonSpecies = "DragonSpecies";
                 public const string EquivalentFeats = "EquivalentFeats";
                 public const string FeatFoci = "FeatFoci";

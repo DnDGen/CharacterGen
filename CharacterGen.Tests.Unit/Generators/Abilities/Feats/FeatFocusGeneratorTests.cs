@@ -22,8 +22,9 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         private List<RequiredFeatSelection> requiredFeats;
         private List<Feat> otherFeats;
         private CharacterClass characterClass;
-        private Dictionary<string, Skill> skills;
+        private List<Skill> skills;
         private Dictionary<string, IEnumerable<string>> focusTypes;
+        private List<string> featSkillFoci;
 
         [SetUp]
         public void Setup()
@@ -33,10 +34,13 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             requiredFeats = new List<RequiredFeatSelection>();
             otherFeats = new List<Feat>();
             characterClass = new CharacterClass();
-            skills = new Dictionary<string, Skill>();
+            skills = new List<Skill>();
             focusTypes = new Dictionary<string, IEnumerable<string>>();
+            featSkillFoci = new List<string>();
 
             characterClass.Name = "class name";
+            focusTypes[GroupConstants.Skills] = featSkillFoci;
+
             mockCollectionsSelector.Setup(s => s.SelectAllFrom(TableNameConstants.Set.Collection.FeatFoci)).Returns(focusTypes);
             mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<string>>())).Returns((IEnumerable<string> c) => c.First());
         }
@@ -295,11 +299,13 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         public void IfAvailableFociFromSkillsContainsSkills_OnlyUseProvidedSkills()
         {
             focusTypes["focus type"] = new[] { "skill 1", "skill 2" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.Skills)).Returns(new[] { "skill 1", "skill 2", "skill 3" });
+            featSkillFoci.Add("skill 1");
+            featSkillFoci.Add("skill 2");
+            featSkillFoci.Add("skill 3");
 
             var stat = new Stat("stat");
-            skills["skill 2"] = new Skill("skill 2", stat, 1);
-            skills["skill 3"] = new Skill("skill 3", stat, 1);
+            skills.Add(new Skill("skill 2", stat, 1));
+            skills.Add(new Skill("skill 3", stat, 1));
 
             var focus = featFocusGenerator.GenerateFrom("featToFill", "focus type", skills);
             Assert.That(focus, Is.EqualTo("skill 2"));
@@ -309,10 +315,11 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         public void IfNoWorkingSkillFociFromSkills_ReturnNoFocus()
         {
             focusTypes["focus type"] = new[] { "skill 1" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.Skills)).Returns(new[] { "skill 1", "skill 2" });
+            featSkillFoci.Add("skill 1");
+            featSkillFoci.Add("skill 2");
 
             var stat = new Stat("stat");
-            skills["skill 2"] = new Skill("skill 2", stat, 1);
+            skills.Add(new Skill("skill 2", stat, 1));
 
             var focus = featFocusGenerator.GenerateFrom("featToFill", "focus type", skills);
             Assert.That(focus, Is.EqualTo(FeatConstants.Foci.All));
@@ -467,12 +474,12 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         public void CannotChooseFocusWhenFocusedInAll()
         {
             otherFeats.Add(new Feat());
-            otherFeats[0].Name = "featId";
+            otherFeats[0].Name = "feat";
             otherFeats[0].Foci = new[] { FeatConstants.Foci.All };
 
             focusTypes["focus type"] = new[] { "school 1" };
 
-            var focus = featFocusGenerator.GenerateFrom("featId", "focus type", skills, requiredFeats, otherFeats, characterClass);
+            var focus = featFocusGenerator.GenerateFrom("feat", "focus type", skills, requiredFeats, otherFeats, characterClass);
             Assert.That(focus, Is.EqualTo(FeatConstants.Foci.All));
         }
 
@@ -493,13 +500,15 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         public void IfAvailableFociContainsSkills_OnlyUseProvidedSkills()
         {
             focusTypes["focus type"] = new[] { "skill 1", "skill 2" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.Skills)).Returns(new[] { "skill 1", "skill 2", "skill 3" });
+            featSkillFoci.Add("skill 1");
+            featSkillFoci.Add("skill 2");
+            featSkillFoci.Add("skill 3");
 
             var stat = new Stat("stat");
-            skills["skill 2"] = new Skill("skill 2", stat, 1);
-            skills["skill 3"] = new Skill("skill 3", stat, 1);
+            skills.Add(new Skill("skill 2", stat, 1));
+            skills.Add(new Skill("skill 3", stat, 1));
 
-            var focus = featFocusGenerator.GenerateFrom("featId", "focus type", skills, requiredFeats, otherFeats, characterClass);
+            var focus = featFocusGenerator.GenerateFrom("feat", "focus type", skills, requiredFeats, otherFeats, characterClass);
             Assert.That(focus, Is.EqualTo("skill 2"));
         }
 
@@ -507,12 +516,13 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         public void IfNoWorkingSkillFoci_ReturnNoFocus()
         {
             focusTypes["focus type"] = new[] { "skill 1" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.Skills)).Returns(new[] { "skill 1", "skill 2" });
+            featSkillFoci.Add("skill 1");
+            featSkillFoci.Add("skill 2");
 
             var stat = new Stat("stat");
-            skills["skill 2"] = new Skill("skill 2", stat, 1);
+            skills.Add(new Skill("skill 2", stat, 1));
 
-            var focus = featFocusGenerator.GenerateFrom("featId", "focus type", skills, requiredFeats, otherFeats, characterClass);
+            var focus = featFocusGenerator.GenerateFrom("feat", "focus type", skills, requiredFeats, otherFeats, characterClass);
             Assert.That(focus, Is.EqualTo(FeatConstants.Foci.All));
         }
 

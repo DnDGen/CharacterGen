@@ -31,7 +31,8 @@ namespace CharacterGen.Domain.Generators.Randomizers.Alignments
             return generator.Generate(
                 GenerateAlignment,
                 a => possibleAlignments.Contains(a),
-                () => collectionsSelector.SelectRandomFrom(possibleAlignments));
+                () => collectionsSelector.SelectRandomFrom(possibleAlignments),
+                $"alignment from [{string.Join(",", possibleAlignments)}]");
         }
 
         private Alignment GenerateAlignment()

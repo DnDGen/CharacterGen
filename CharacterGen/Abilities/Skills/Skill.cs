@@ -7,6 +7,7 @@ namespace CharacterGen.Abilities.Skills
     {
         public readonly string Name;
         public readonly Stat BaseStat;
+        public readonly string Focus;
 
         public int Bonus { get; set; }
         public bool ClassSkill { get; set; }
@@ -21,7 +22,7 @@ namespace CharacterGen.Abilities.Skills
                 if (ClassSkill)
                     return ranks;
 
-                return (double)ranks / 2;
+                return ranks / 2d;
             }
         }
 
@@ -58,11 +59,37 @@ namespace CharacterGen.Abilities.Skills
             }
         }
 
-        public Skill(string name, Stat baseStat, int rankCap)
+        public int TotalBonus
+        {
+            get
+            {
+                var total = EffectiveRanks + Bonus + BaseStat.Bonus + ArmorCheckPenalty;
+                var floor = Math.Floor(total);
+
+                return Convert.ToInt32(floor);
+            }
+        }
+
+        public Skill(string name, Stat baseStat, int rankCap, string focus = "")
         {
             Name = name;
             BaseStat = baseStat;
             RankCap = rankCap;
+            Focus = focus;
+        }
+
+        public bool IsEqualTo(Skill skill)
+        {
+            return skill.Name == Name && skill.Focus == Focus;
+        }
+
+        public bool IsEqualTo(string skill)
+        {
+            var sections = skill.Split('/');
+            var name = sections[0];
+            var focus = sections.Length > 1 ? sections[1] : string.Empty;
+
+            return name == Name && focus == Focus;
         }
     }
 }

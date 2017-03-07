@@ -148,7 +148,8 @@ namespace CharacterGen.Domain.Generators.Items
             var weapon = generator.Generate(
                 () => GenerateWeapon(power),
                 w => WeaponIsValid(w, allowedWeapons, race),
-                () => GenerateDefaultWeapon(power, allowedWeapons, race));
+                () => GenerateDefaultWeapon(power, allowedWeapons, race),
+                $"{power} weapon from [{string.Join(",", allowedWeapons)}]");
 
             return weapon;
         }

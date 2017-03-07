@@ -1,4 +1,6 @@
-﻿using CharacterGen.Domain.Generators.Abilities;
+﻿using CharacterGen.Abilities.Skills;
+using CharacterGen.Abilities.Stats;
+using CharacterGen.Domain.Generators.Abilities;
 using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Races;
 using Moq;
@@ -16,6 +18,9 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
         private ILanguageGenerator languageGenerator;
         private Race race;
         private string className;
+        private List<Skill> skills;
+        private List<string> automaticLanguages;
+        private List<string> bonusLanguages;
 
         [SetUp]
         public void Setup()
@@ -24,19 +29,41 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
             mockLanguageSelector = new Mock<ILanguageCollectionsSelector>();
             languageGenerator = new LanguageGenerator(mockLanguageSelector.Object, mockCollectionsSelector.Object);
             race = new Race();
+            skills = new List<Skill>();
+            automaticLanguages = new List<string>();
+            bonusLanguages = new List<string>();
 
             race.BaseRace = "baserace";
             race.Metarace = "metarace";
             className = "class name";
+            AddSkill("skill 1");
+            AddSkill("skill 2");
+            automaticLanguages.Add("lang 1");
+            automaticLanguages.Add("lang 2");
+            bonusLanguages.Add("lang 1");
+            bonusLanguages.Add("lang 2");
+            bonusLanguages.Add("lang 3");
+
+            var index = 0;
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<string>>())).Returns((IEnumerable<string> ss) => ss.ElementAt(index++ % ss.Count()));
+            mockLanguageSelector.Setup(s => s.SelectAutomaticLanguagesFor(race, className)).Returns(automaticLanguages);
+            mockLanguageSelector.Setup(s => s.SelectBonusLanguagesFor(race.BaseRace, className)).Returns(bonusLanguages);
+        }
+
+        private void AddSkill(string skillName, string focus = "")
+        {
+            var stat = new Stat("base state");
+            var skill = new Skill(skillName, stat, 0, focus);
+
+            skills.Add(skill);
         }
 
         [Test]
         public void GetAutomaticLanguagesFromSelector()
         {
-            var automaticLanguages = new[] { "lang 1", "lang 2" };
-            mockLanguageSelector.Setup(s => s.SelectAutomaticLanguagesFor(race, className)).Returns(automaticLanguages);
+            bonusLanguages.Clear();
 
-            var languages = languageGenerator.GenerateWith(race, className, 0);
+            var languages = languageGenerator.GenerateWith(race, className, 0, skills);
             Assert.That(languages, Contains.Item("lang 1"));
             Assert.That(languages, Contains.Item("lang 2"));
             Assert.That(languages.Count(), Is.EqualTo(2));
@@ -45,13 +72,9 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
         [Test]
         public void GetNumberOfBonusLanguagesEqualToIntelligenceModifier()
         {
-            var bonusLanguages = new[] { "lang 1", "lang 2", "lang 3" };
-            mockLanguageSelector.Setup(p => p.SelectBonusLanguagesFor(race.BaseRace, className)).Returns(bonusLanguages);
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(bonusLanguages)).Returns("lang 1");
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.Is<IEnumerable<string>>(ls => ls.Count() == 2 && ls.Contains("lang 1") == false)))
-                .Returns("lang 3");
+            automaticLanguages.Clear();
 
-            var languages = languageGenerator.GenerateWith(race, className, 2);
+            var languages = languageGenerator.GenerateWith(race, className, 2, skills);
             Assert.That(languages, Contains.Item("lang 1"));
             Assert.That(languages, Contains.Item("lang 3"));
             Assert.That(languages.Count(), Is.EqualTo(2));
@@ -60,24 +83,25 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
         [Test]
         public void GetAllBonusLanguagesIfIntelligenceBonusIsHigher()
         {
-            var bonusLanguages = new[] { "lang 1", "lang 2" };
-            mockLanguageSelector.Setup(p => p.SelectBonusLanguagesFor(race.BaseRace, className)).Returns(bonusLanguages);
+            automaticLanguages.Clear();
 
-            var languages = languageGenerator.GenerateWith(race, className, 9266);
+            var languages = languageGenerator.GenerateWith(race, className, 9266, skills);
             Assert.That(languages, Contains.Item("lang 1"));
             Assert.That(languages, Contains.Item("lang 2"));
-            Assert.That(languages.Count(), Is.EqualTo(2));
+            Assert.That(languages, Contains.Item("lang 3"));
+            Assert.That(languages.Count(), Is.EqualTo(3));
         }
 
         [Test]
         public void LanguagesContainAutomaticLanguagesAndBonusLanguages()
         {
-            var automaticLanguages = new[] { "automatic language" };
-            var bonusLanguages = new[] { "bonus language" };
-            mockLanguageSelector.Setup(s => s.SelectAutomaticLanguagesFor(race, className)).Returns(automaticLanguages);
-            mockLanguageSelector.Setup(p => p.SelectBonusLanguagesFor(race.BaseRace, className)).Returns(bonusLanguages);
+            automaticLanguages.Clear();
+            bonusLanguages.Clear();
 
-            var languages = languageGenerator.GenerateWith(race, className, 1);
+            automaticLanguages.Add("automatic language");
+            bonusLanguages.Add("bonus language");
+
+            var languages = languageGenerator.GenerateWith(race, className, 1, skills);
             Assert.That(languages, Contains.Item("automatic language"));
             Assert.That(languages, Contains.Item("bonus language"));
             Assert.That(languages.Count(), Is.EqualTo(2));
@@ -86,16 +110,72 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
         [Test]
         public void LanguagesAreNotDuplicated()
         {
-            var automaticLanguages = new[] { "automatic language", "other language" };
-            var bonusLanguages = new[] { "bonus language", "automatic language" };
-            mockLanguageSelector.Setup(s => s.SelectAutomaticLanguagesFor(race, className)).Returns(automaticLanguages);
-            mockLanguageSelector.Setup(p => p.SelectBonusLanguagesFor(race.BaseRace, className)).Returns(bonusLanguages);
-
-            var languages = languageGenerator.GenerateWith(race, className, 2);
-            Assert.That(languages, Contains.Item("automatic language"));
-            Assert.That(languages, Contains.Item("bonus language"));
-            Assert.That(languages, Contains.Item("other language"));
+            var languages = languageGenerator.GenerateWith(race, className, 2, skills);
+            Assert.That(languages, Contains.Item("lang 1"));
+            Assert.That(languages, Contains.Item("lang 2"));
+            Assert.That(languages, Contains.Item("lang 3"));
             Assert.That(languages.Count(), Is.EqualTo(3));
+        }
+
+        [Test]
+        public void InterpreterGainsExtraLanguage()
+        {
+            automaticLanguages.Clear();
+
+            AddSkill(SkillConstants.Profession, SkillConstants.Foci.Profession.Interpreter);
+
+            var languages = languageGenerator.GenerateWith(race, className, 1, skills);
+            Assert.That(languages, Contains.Item("lang 1"));
+            Assert.That(languages, Contains.Item("lang 3"));
+            Assert.That(languages.Count(), Is.EqualTo(2));
+        }
+
+        [Test]
+        public void InterpreterGainsExtraLanguageEvenIfIntelligenceBonusIs0()
+        {
+            automaticLanguages.Clear();
+
+            AddSkill(SkillConstants.Profession, SkillConstants.Foci.Profession.Interpreter);
+
+            var languages = languageGenerator.GenerateWith(race, className, 0, skills);
+            Assert.That(languages, Contains.Item("lang 1"));
+            Assert.That(languages.Count(), Is.EqualTo(1));
+        }
+
+        [Test]
+        public void InterpreterGainsExtraLanguageEvenIfIntelligenceBonusIsNegative()
+        {
+            automaticLanguages.Clear();
+
+            AddSkill(SkillConstants.Profession, SkillConstants.Foci.Profession.Interpreter);
+
+            var languages = languageGenerator.GenerateWith(race, className, -1, skills);
+            Assert.That(languages, Contains.Item("lang 1"));
+            Assert.That(languages.Count(), Is.EqualTo(1));
+        }
+
+        [Test]
+        public void NonInterpreterGainsNoExtraLanguage()
+        {
+            automaticLanguages.Clear();
+
+            AddSkill(SkillConstants.Profession, SkillConstants.Foci.Profession.Adviser);
+
+            var languages = languageGenerator.GenerateWith(race, className, 1, skills);
+            Assert.That(languages, Contains.Item("lang 1"));
+            Assert.That(languages.Count(), Is.EqualTo(1));
+        }
+
+        [Test]
+        public void NoProfessionGainsNoExtraLanguage()
+        {
+            automaticLanguages.Clear();
+
+            AddSkill("other skill", SkillConstants.Foci.Profession.Adviser);
+
+            var languages = languageGenerator.GenerateWith(race, className, 1, skills);
+            Assert.That(languages, Contains.Item("lang 1"));
+            Assert.That(languages.Count(), Is.EqualTo(1));
         }
     }
 }

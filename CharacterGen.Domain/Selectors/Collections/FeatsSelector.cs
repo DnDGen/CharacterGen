@@ -90,8 +90,7 @@ namespace CharacterGen.Domain.Selectors.Collections
             var featsWithSkillRequirements = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.HasSkillRequirements);
             if (featsWithSkillRequirements.Contains(dataKVP.Key))
             {
-                var tableName = string.Format(TableNameConstants.Formattable.Adjustments.FEATSkillRankRequirements, dataKVP.Key);
-                additionalFeatSelection.RequiredSkillRanks = adjustmentsSelector.SelectAllFrom(tableName);
+                additionalFeatSelection.RequiredSkills = GetRequiredSkills(additionalFeatSelection.Feat);
             }
 
             var featWithStatRequirements = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.HasStatRequirements);
@@ -156,6 +155,28 @@ namespace CharacterGen.Domain.Selectors.Collections
             }
 
             return requiredFeats;
+        }
+
+        private IEnumerable<RequiredSkillSelection> GetRequiredSkills(string feat)
+        {
+            var tableName = string.Format(TableNameConstants.Formattable.Adjustments.FEATSkillRankRequirements, feat);
+            var requiredSkillsAndRanks = adjustmentsSelector.SelectAllFrom(tableName);
+            var requiredSkillSelections = new List<RequiredSkillSelection>();
+
+            foreach (var kvp in requiredSkillsAndRanks)
+            {
+                var splitData = kvp.Key.Split('/');
+                var requiredSkill = new RequiredSkillSelection();
+                requiredSkill.Skill = splitData[0];
+                requiredSkill.Ranks = kvp.Value;
+
+                if (splitData.Length > 1)
+                    requiredSkill.Focus = splitData[1];
+
+                requiredSkillSelections.Add(requiredSkill);
+            }
+
+            return requiredSkillSelections;
         }
     }
 }

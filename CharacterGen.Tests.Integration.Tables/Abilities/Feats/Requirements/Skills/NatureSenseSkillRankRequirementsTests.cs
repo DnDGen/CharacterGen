@@ -2,7 +2,7 @@
 using CharacterGen.Abilities.Skills;
 using CharacterGen.Domain.Tables;
 using NUnit.Framework;
-using System;
+using System.Linq;
 
 namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Requirements.Skills
 {
@@ -17,15 +17,23 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats.Requirements.Ski
         [Test]
         public override void CollectionNames()
         {
-            var skills = new[] { SkillConstants.KnowledgeNature, SkillConstants.Survival };
+            var skills = new[]
+            {
+                $"{SkillConstants.Knowledge}/{SkillConstants.Foci.Knowledge.Nature}",
+                SkillConstants.Survival
+            };
             AssertCollectionNames(skills);
         }
 
-        [TestCase(SkillConstants.KnowledgeNature, 0)]
+        [TestCase(SkillConstants.Knowledge, 0, SkillConstants.Foci.Knowledge.Nature)]
         [TestCase(SkillConstants.Survival, 0)]
-        public override void Adjustment(string name, int adjustment)
+        public void RequiredSkill(string skill, int ranks, string focus = "")
         {
-            base.Adjustment(name, adjustment);
+            var name = skill;
+            if (focus.Any())
+                name = $"{skill}/{focus}";
+
+            Adjustment(name, ranks);
         }
     }
 }

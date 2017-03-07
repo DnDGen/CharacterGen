@@ -12,6 +12,7 @@ using CharacterGen.Randomizers.Stats;
 using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CharacterGen.Tests.Unit.Generators.Abilities
 {
@@ -29,6 +30,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
         private Race race;
         private Dictionary<string, Stat> stats;
         private BaseAttack baseAttack;
+        private List<string> featSkillFoci;
 
         [SetUp]
         public void Setup()
@@ -45,12 +47,19 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
             baseAttack = new BaseAttack();
             characterClass = new CharacterClass();
             race = new Race();
+            featSkillFoci = new List<string>();
 
             characterClass.Name = "class name";
             stats[StatConstants.Intelligence] = new Stat(StatConstants.Intelligence);
             stats[StatConstants.Intelligence].Value = 9266;
+            featSkillFoci.Add("skill 1");
+            featSkillFoci.Add("skill 2");
+            featSkillFoci.Add("skill 3");
+            featSkillFoci.Add("skill 4");
+            featSkillFoci.Add("skill 5");
+
             mockStatsGenerator.Setup(g => g.GenerateWith(mockStatsRandomizer.Object, characterClass, race)).Returns(stats);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.Skills)).Returns(new[] { "skill 1", "skill 2", "skill 3", "skill 4", "skill 5" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, GroupConstants.Skills)).Returns(featSkillFoci);
         }
 
         [Test]
@@ -68,20 +77,9 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
         }
 
         [Test]
-        public void GetLanguagesFromLanguageGenerator()
-        {
-            var languages = new[] { "language 1", "language 2" };
-            mockLanguageGenerator.Setup(g => g.GenerateWith(race, characterClass.Name, stats[StatConstants.Intelligence].Bonus))
-                .Returns(languages);
-
-            var ability = abilitiesGenerator.GenerateWith(characterClass, race, stats, baseAttack);
-            Assert.That(ability.Languages, Is.EqualTo(languages));
-        }
-
-        [Test]
         public void GetSkillsFromSkillGenerator()
         {
-            var skills = new Dictionary<string, Skill>();
+            var skills = new List<Skill>();
             mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats)).Returns(skills);
 
             var ability = abilitiesGenerator.GenerateWith(characterClass, race, stats, baseAttack);
@@ -89,9 +87,23 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
         }
 
         [Test]
+        public void GetLanguagesFromLanguageGenerator()
+        {
+            var skills = new List<Skill>();
+            mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats)).Returns(skills);
+
+            var languages = new[] { "language 1", "language 2" };
+            mockLanguageGenerator.Setup(g => g.GenerateWith(race, characterClass.Name, stats[StatConstants.Intelligence].Bonus, skills))
+                .Returns(languages);
+
+            var ability = abilitiesGenerator.GenerateWith(characterClass, race, stats, baseAttack);
+            Assert.That(ability.Languages, Is.EqualTo(languages));
+        }
+
+        [Test]
         public void GetFeatsFromFeatGenerator()
         {
-            var skills = new Dictionary<string, Skill>();
+            var skills = new List<Skill>();
             mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats)).Returns(skills);
 
             var feats = new List<Feat>();
@@ -104,17 +116,17 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
         [Test]
         public void ApplyFeatThatGrantSkillBonusesToSkills()
         {
-            var skills = new Dictionary<string, Skill>();
+            var skills = new List<Skill>();
             var baseStat = new Stat("base stat");
 
-            skills["skill 1"] = new Skill("skill 1", baseStat, 1);
-            skills["skill 1"].Bonus = 1;
-            skills["skill 2"] = new Skill("skill 2", baseStat, 1);
-            skills["skill 2"].Bonus = 2;
-            skills["skill 3"] = new Skill("skill 3", baseStat, 1);
-            skills["skill 3"].Bonus = 3;
-            skills["skill 4"] = new Skill("skill 4", baseStat, 1);
-            skills["skill 4"].Bonus = 4;
+            skills.Add(new Skill("skill 1", baseStat, 1));
+            skills.Add(new Skill("skill 2", baseStat, 1));
+            skills.Add(new Skill("skill 3", baseStat, 1));
+            skills.Add(new Skill("skill 4", baseStat, 1));
+            skills[0].Bonus = 1;
+            skills[1].Bonus = 2;
+            skills[2].Bonus = 3;
+            skills[3].Bonus = 4;
             mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats)).Returns(skills);
 
             var feats = new List<Feat>();
@@ -138,24 +150,67 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, "feat3")).Returns(new[] { "skill 2", "skill 4" });
 
             var ability = abilitiesGenerator.GenerateWith(characterClass, race, stats, baseAttack);
-            Assert.That(ability.Skills["skill 1"].Bonus, Is.EqualTo(2));
-            Assert.That(ability.Skills["skill 2"].Bonus, Is.EqualTo(5));
-            Assert.That(ability.Skills["skill 3"].Bonus, Is.EqualTo(3));
-            Assert.That(ability.Skills["skill 4"].Bonus, Is.EqualTo(7));
+            Assert.That(ability.Skills.First(s => s.IsEqualTo(skills[0])).Bonus, Is.EqualTo(2));
+            Assert.That(ability.Skills.First(s => s.IsEqualTo(skills[1])).Bonus, Is.EqualTo(5));
+            Assert.That(ability.Skills.First(s => s.IsEqualTo(skills[2])).Bonus, Is.EqualTo(3));
+            Assert.That(ability.Skills.First(s => s.IsEqualTo(skills[3])).Bonus, Is.EqualTo(7));
+        }
+
+        [Test]
+        public void ApplyFeatThatGrantSkillBonusesToSkillsWithFocus()
+        {
+            var skills = new List<Skill>();
+            var baseStat = new Stat("base stat");
+
+            skills.Add(new Skill("skill 1", baseStat, 1));
+            skills.Add(new Skill("skill 2", baseStat, 1));
+            skills.Add(new Skill("skill 3", baseStat, 1, "other focus"));
+            skills.Add(new Skill("skill 3", baseStat, 1, "focus"));
+            skills[0].Bonus = 1;
+            skills[1].Bonus = 2;
+            skills[2].Bonus = 3;
+            skills[3].Bonus = 4;
+            mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats)).Returns(skills);
+
+            var feats = new List<Feat>();
+            feats.Add(new Feat());
+            feats.Add(new Feat());
+            feats.Add(new Feat());
+            feats[0].Name = "feat1";
+            feats[0].Power = 1;
+            feats[1].Name = "feat2";
+            feats[1].Power = 2;
+            feats[2].Name = "feat3";
+            feats[2].Power = 3;
+
+            mockFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills, baseAttack)).Returns(feats);
+
+            var featGrantingSkillBonuses = new[] { "feat3", "feat1" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus))
+                .Returns(featGrantingSkillBonuses);
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, "feat1")).Returns(new[] { "skill 1" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, "feat3")).Returns(new[] { "skill 2", "skill 3/focus" });
+
+            var ability = abilitiesGenerator.GenerateWith(characterClass, race, stats, baseAttack);
+            Assert.That(ability.Skills.First(s => s.IsEqualTo(skills[0])).Bonus, Is.EqualTo(2));
+            Assert.That(ability.Skills.First(s => s.IsEqualTo(skills[1])).Bonus, Is.EqualTo(5));
+            Assert.That(ability.Skills.First(s => s.IsEqualTo(skills[2])).Bonus, Is.EqualTo(3));
+            Assert.That(ability.Skills.First(s => s.IsEqualTo(skills[3])).Bonus, Is.EqualTo(7));
         }
 
         [Test]
         public void IfFocusIsSkill_ApplyBonusToThatSkill()
         {
-            var skills = new Dictionary<string, Skill>();
+            var skills = new List<Skill>();
             var baseStat = new Stat("base stat");
 
-            skills["skill 1"] = new Skill("skill 1", baseStat, 1);
-            skills["skill 1"].Bonus = 1;
-            skills["skill 2"] = new Skill("skill 2", baseStat, 1);
-            skills["skill 2"].Bonus = 2;
-            skills["skill 3"] = new Skill("skill 3", baseStat, 1);
-            skills["skill 3"].Bonus = 3;
+            skills.Add(new Skill("skill 1", baseStat, 1));
+            skills.Add(new Skill("skill 2", baseStat, 1));
+            skills.Add(new Skill("skill 3", baseStat, 1));
+            skills[0].Bonus = 1;
+            skills[1].Bonus = 2;
+            skills[2].Bonus = 3;
             mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats)).Returns(skills);
 
             var feats = new List<Feat>();
@@ -175,23 +230,66 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
             mockFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills, baseAttack)).Returns(feats);
 
             var featGrantingSkillBonuses = new[] { "feat2", "feat1" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus))
-                .Returns(featGrantingSkillBonuses);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus)).Returns(featGrantingSkillBonuses);
 
             var ability = abilitiesGenerator.GenerateWith(characterClass, race, stats, baseAttack);
-            Assert.That(ability.Skills["skill 1"].Bonus, Is.EqualTo(1));
-            Assert.That(ability.Skills["skill 2"].Bonus, Is.EqualTo(9));
-            Assert.That(ability.Skills["skill 3"].Bonus, Is.EqualTo(8));
+            Assert.That(ability.Skills.First(s => s.Name == "skill 1").Bonus, Is.EqualTo(1));
+            Assert.That(ability.Skills.First(s => s.Name == "skill 2").Bonus, Is.EqualTo(9));
+            Assert.That(ability.Skills.First(s => s.Name == "skill 3").Bonus, Is.EqualTo(8));
+        }
+
+        [Test]
+        public void IfFocusIsSkillWithFocus_ApplyBonusToThatSkill()
+        {
+            var skills = new List<Skill>();
+            var baseStat = new Stat("base stat");
+
+            skills.Add(new Skill("skill 1", baseStat, 1, "focus 1"));
+            skills.Add(new Skill("skill 2", baseStat, 1));
+            skills.Add(new Skill("skill 1", baseStat, 1, "focus 2"));
+            skills[0].Bonus = 1;
+            skills[1].Bonus = 2;
+            skills[2].Bonus = 3;
+            mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats)).Returns(skills);
+
+            var feats = new List<Feat>();
+            feats.Add(new Feat());
+            feats.Add(new Feat());
+            feats.Add(new Feat());
+            feats[0].Name = "feat1";
+            feats[0].Foci = new[] { "skill 2", "skill 1/focus 2", "non-skill focus" };
+            feats[0].Power = 4;
+            feats[1].Name = "feat2";
+            feats[1].Foci = new[] { "skill 1/focus 2", "non-skill focus" };
+            feats[1].Power = 1;
+            feats[2].Name = "feat1";
+            feats[2].Foci = new[] { "skill 2", "non-skill focus" };
+            feats[2].Power = 3;
+
+            featSkillFoci.Add("skill 1/focus 1");
+            featSkillFoci.Add("skill 1/focus 2");
+            featSkillFoci.Add("skill 1/focus 3");
+            featSkillFoci.Remove("skill 1"); //INFO: Doing this because a skill either has focus all the time or never
+
+            mockFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills, baseAttack)).Returns(feats);
+
+            var featGrantingSkillBonuses = new[] { "feat2", "feat1" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus)).Returns(featGrantingSkillBonuses);
+
+            var ability = abilitiesGenerator.GenerateWith(characterClass, race, stats, baseAttack);
+            Assert.That(ability.Skills.First(s => s.IsEqualTo(skills[0])).Bonus, Is.EqualTo(1));
+            Assert.That(ability.Skills.First(s => s.IsEqualTo(skills[1])).Bonus, Is.EqualTo(9));
+            Assert.That(ability.Skills.First(s => s.IsEqualTo(skills[2])).Bonus, Is.EqualTo(8));
         }
 
         [Test]
         public void OnlyApplySkillFeatToSkillsIfSkillFocusIsPurelySkill()
         {
-            var skills = new Dictionary<string, Skill>();
+            var skills = new List<Skill>();
             var baseStat = new Stat("base stat");
 
-            skills["skill 1"] = new Skill("skill 1", baseStat, 1);
-            skills["skill 1"].Bonus = 1;
+            skills.Add(new Skill("skill 1", baseStat, 1));
+            skills[0].Bonus = 1;
             mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats)).Returns(skills);
 
             var feats = new List<Feat>();
@@ -207,19 +305,19 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
             mockFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills, baseAttack)).Returns(feats);
 
             var ability = abilitiesGenerator.GenerateWith(characterClass, race, stats, baseAttack);
-            Assert.That(ability.Skills["skill 1"].Bonus, Is.EqualTo(1));
+            Assert.That(ability.Skills.First(s => s.Name == "skill 1").Bonus, Is.EqualTo(1));
         }
 
         [Test]
         public void NoCircumstantialBonusIfBonusApplied()
         {
-            var skills = new Dictionary<string, Skill>();
+            var skills = new List<Skill>();
             var baseStat = new Stat("base stat");
 
-            skills["skill 1"] = new Skill("skill 1", baseStat, 1);
-            skills["skill 1"].Bonus = 1;
-            skills["skill 2"] = new Skill("skill 2", baseStat, 1);
-            skills["skill 2"].Bonus = 2;
+            skills.Add(new Skill("skill 1", baseStat, 1));
+            skills.Add(new Skill("skill 2", baseStat, 1));
+            skills[0].Bonus = 1;
+            skills[1].Bonus = 2;
             mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats)).Returns(skills);
 
             var feats = new List<Feat>();
@@ -240,20 +338,20 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, "feat1")).Returns(new[] { "skill 1" });
 
             var ability = abilitiesGenerator.GenerateWith(characterClass, race, stats, baseAttack);
-            Assert.That(ability.Skills["skill 1"].Bonus, Is.EqualTo(2));
-            Assert.That(ability.Skills["skill 1"].CircumstantialBonus, Is.False);
-            Assert.That(ability.Skills["skill 2"].Bonus, Is.EqualTo(4));
-            Assert.That(ability.Skills["skill 2"].CircumstantialBonus, Is.False);
+            Assert.That(ability.Skills.First(s => s.Name == "skill 1").Bonus, Is.EqualTo(2));
+            Assert.That(ability.Skills.First(s => s.Name == "skill 1").CircumstantialBonus, Is.False);
+            Assert.That(ability.Skills.First(s => s.Name == "skill 2").Bonus, Is.EqualTo(4));
+            Assert.That(ability.Skills.First(s => s.Name == "skill 2").CircumstantialBonus, Is.False);
         }
 
         [Test]
         public void IfSkillBonusFocusIsNotPurelySkill_MarkSkillAsHavingCircumstantialBonus()
         {
-            var skills = new Dictionary<string, Skill>();
+            var skills = new List<Skill>();
             var baseStat = new Stat("base stat");
 
-            skills["skill 1"] = new Skill("skill 1", baseStat, 1);
-            skills["skill 1"].Bonus = 1;
+            skills.Add(new Skill("skill 1", baseStat, 1));
+            skills[0].Bonus = 1;
             mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats)).Returns(skills);
 
             var feats = new List<Feat>();
@@ -269,19 +367,19 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
                 .Returns(featGrantingSkillBonuses);
 
             var ability = abilitiesGenerator.GenerateWith(characterClass, race, stats, baseAttack);
-            Assert.That(ability.Skills["skill 1"].CircumstantialBonus, Is.True);
+            Assert.That(ability.Skills.First(s => s.Name == "skill 1").CircumstantialBonus, Is.True);
         }
 
         [Test]
         public void MarkSkillWithCircumstantialBonusWhenOtherFociDoNotHaveCircumstantialBonus()
         {
-            var skills = new Dictionary<string, Skill>();
+            var skills = new List<Skill>();
             var baseStat = new Stat("base stat");
 
-            skills["skill 1"] = new Skill("skill 1", baseStat, 1);
-            skills["skill 1"].Bonus = 1;
-            skills["skill 2"] = new Skill("skill 2", baseStat, 1);
-            skills["skill 2"].Bonus = 2;
+            skills.Add(new Skill("skill 1", baseStat, 1));
+            skills.Add(new Skill("skill 2", baseStat, 1));
+            skills[0].Bonus = 1;
+            skills[1].Bonus = 2;
             mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats)).Returns(skills);
 
             var feats = new List<Feat>();
@@ -297,20 +395,20 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
                 .Returns(featGrantingSkillBonuses);
 
             var ability = abilitiesGenerator.GenerateWith(characterClass, race, stats, baseAttack);
-            Assert.That(ability.Skills["skill 1"].CircumstantialBonus, Is.True);
-            Assert.That(ability.Skills["skill 2"].CircumstantialBonus, Is.False);
+            Assert.That(ability.Skills.First(s => s.Name == "skill 1").CircumstantialBonus, Is.True);
+            Assert.That(ability.Skills.First(s => s.Name == "skill 2").CircumstantialBonus, Is.False);
         }
 
         [Test]
         public void CircumstantialBonusIsNotOverwritten()
         {
-            var skills = new Dictionary<string, Skill>();
+            var skills = new List<Skill>();
             var baseStat = new Stat("base stat");
 
-            skills["skill 1"] = new Skill("skill 1", baseStat, 1);
-            skills["skill 1"].Bonus = 1;
-            skills["skill 2"] = new Skill("skill 2", baseStat, 1);
-            skills["skill 2"].Bonus = 2;
+            skills.Add(new Skill("skill 1", baseStat, 1));
+            skills.Add(new Skill("skill 2", baseStat, 1));
+            skills[0].Bonus = 1;
+            skills[1].Bonus = 2;
             mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats)).Returns(skills);
 
             var feats = new List<Feat>();
@@ -330,8 +428,8 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
                 .Returns(featGrantingSkillBonuses);
 
             var ability = abilitiesGenerator.GenerateWith(characterClass, race, stats, baseAttack);
-            Assert.That(ability.Skills["skill 1"].CircumstantialBonus, Is.True);
-            Assert.That(ability.Skills["skill 2"].CircumstantialBonus, Is.False);
+            Assert.That(ability.Skills.First(s => s.Name == "skill 1").CircumstantialBonus, Is.True);
+            Assert.That(ability.Skills.First(s => s.Name == "skill 2").CircumstantialBonus, Is.False);
         }
     }
 }

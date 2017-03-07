@@ -24,7 +24,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         private Dictionary<string, Stat> stats;
         private Dictionary<string, List<CharacterClassFeatSelection>> classFeatSelections;
         private List<Feat> racialFeats;
-        private Dictionary<string, Skill> skills;
+        private List<Skill> skills;
         private Race race;
 
         [SetUp]
@@ -39,7 +39,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             stats[StatConstants.Intelligence] = new Stat(StatConstants.Intelligence);
             classFeatSelections = new Dictionary<string, List<CharacterClassFeatSelection>>();
             racialFeats = new List<Feat>();
-            skills = new Dictionary<string, Skill>();
+            skills = new List<Skill>();
             race = new Race();
 
             mockFeatsSelector.Setup(s => s.SelectClass(It.IsAny<string>())).Returns(Enumerable.Empty<CharacterClassFeatSelection>());

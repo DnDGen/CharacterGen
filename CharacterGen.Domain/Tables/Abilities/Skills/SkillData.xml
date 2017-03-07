@@ -6,281 +6,1259 @@
     <item>Intelligence</item>
     <item>Appraise</item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Balance</name>
     <item>Dexterity</item>
     <item>Balance</item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Bluff</name>
     <item>Charisma</item>
     <item>Bluff</item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Climb</name>
     <item>Strength</item>
     <item>Climb</item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Concentration</name>
     <item>Constitution</item>
     <item>Concentration</item>
     <item>0</item>
+    <item></item>
+  </object>
+  <object>
+    <name>Craft</name>
+    <item>Intelligence</item>
+    <item>Craft</item>
+    <item>1</item>
+    <item></item>
+  </object>
+  <object>
+    <name>Craft2</name>
+    <item>Intelligence</item>
+    <item>Craft</item>
+    <item>2</item>
+    <item></item>
+  </object>
+  <object>
+    <name>Craft/Alchemy</name>
+    <item>Intelligence</item>
+    <item>Craft</item>
+    <item>0</item>
+    <item>Alchemy</item>
+  </object>
+  <object>
+    <name>Craft/Armorsmithing</name>
+    <item>Intelligence</item>
+    <item>Craft</item>
+    <item>0</item>
+    <item>Armorsmithing</item>
+  </object>
+  <object>
+    <name>Craft/Blacksmithing</name>
+    <item>Intelligence</item>
+    <item>Craft</item>
+    <item>0</item>
+    <item>Blacksmithing</item>
+  </object>
+  <object>
+    <name>Craft/Bookbinding</name>
+    <item>Intelligence</item>
+    <item>Craft</item>
+    <item>0</item>
+    <item>Bookbinding</item>
+  </object>
+  <object>
+    <name>Craft/Bowmaking</name>
+    <item>Intelligence</item>
+    <item>Craft</item>
+    <item>0</item>
+    <item>Bowmaking</item>
+  </object>
+  <object>
+    <name>Craft/Brassmaking</name>
+    <item>Intelligence</item>
+    <item>Craft</item>
+    <item>0</item>
+    <item>Brassmaking</item>
+  </object>
+  <object>
+    <name>Craft/Brewing</name>
+    <item>Intelligence</item>
+    <item>Craft</item>
+    <item>0</item>
+    <item>Brewing</item>
+  </object>
+  <object>
+    <name>Craft/Candlemaking</name>
+    <item>Intelligence</item>
+    <item>Craft</item>
+    <item>0</item>
+    <item>Candlemaking</item>
+  </object>
+  <object>
+    <name>Craft/Cloth</name>
+    <item>Intelligence</item>
+    <item>Craft</item>
+    <item>0</item>
+    <item>Cloth</item>
+  </object>
+  <object>
+    <name>Craft/Coppersmithing</name>
+    <item>Intelligence</item>
+    <item>Craft</item>
+    <item>0</item>
+    <item>Coppersmithing</item>
+  </object>
+  <object>
+    <name>Craft/Dyemaking</name>
+    <item>Intelligence</item>
+    <item>Craft</item>
+    <item>0</item>
+    <item>Dyemaking</item>
+  </object>
+  <object>
+    <name>Craft/Gemcutting</name>
+    <item>Intelligence</item>
+    <item>Craft</item>
+    <item>0</item>
+    <item>Gemcutting</item>
+  </object>
+  <object>
+    <name>Craft/Glass</name>
+    <item>Intelligence</item>
+    <item>Craft</item>
+    <item>0</item>
+    <item>Glass</item>
+  </object>
+  <object>
+    <name>Craft/Goldsmithing</name>
+    <item>Intelligence</item>
+    <item>Craft</item>
+    <item>0</item>
+    <item>Goldsmithing</item>
+  </object>
+  <object>
+    <name>Craft/Hatmaking</name>
+    <item>Intelligence</item>
+    <item>Craft</item>
+    <item>0</item>
+    <item>Hatmaking</item>
+  </object>
+  <object>
+    <name>Craft/Hornworking</name>
+    <item>Intelligence</item>
+    <item>Craft</item>
+    <item>0</item>
+    <item>Hornworking</item>
+  </object>
+  <object>
+    <name>Craft/Jewelmaking</name>
+    <item>Intelligence</item>
+    <item>Craft</item>
+    <item>0</item>
+    <item>Jewelmaking</item>
+  </object>
+  <object>
+    <name>Craft/Leather</name>
+    <item>Intelligence</item>
+    <item>Craft</item>
+    <item>0</item>
+    <item>Leather</item>
+  </object>
+  <object>
+    <name>Craft/Locksmithing</name>
+    <item>Intelligence</item>
+    <item>Craft</item>
+    <item>0</item>
+    <item>Locksmithing</item>
+  </object>
+  <object>
+    <name>Craft/Mapmaking</name>
+    <item>Intelligence</item>
+    <item>Craft</item>
+    <item>0</item>
+    <item>Mapmaking</item>
+  </object>
+  <object>
+    <name>Craft/Milling</name>
+    <item>Intelligence</item>
+    <item>Craft</item>
+    <item>0</item>
+    <item>Milling</item>
+  </object>
+  <object>
+    <name>Craft/Painting</name>
+    <item>Intelligence</item>
+    <item>Craft</item>
+    <item>0</item>
+    <item>Painting</item>
+  </object>
+  <object>
+    <name>Craft/Parchmentmaking</name>
+    <item>Intelligence</item>
+    <item>Craft</item>
+    <item>0</item>
+    <item>Parchmentmaking</item>
+  </object>
+  <object>
+    <name>Craft/Pewtermaking</name>
+    <item>Intelligence</item>
+    <item>Craft</item>
+    <item>0</item>
+    <item>Pewtermaking</item>
+  </object>
+  <object>
+    <name>Craft/Potterymaking</name>
+    <item>Intelligence</item>
+    <item>Craft</item>
+    <item>0</item>
+    <item>Potterymaking</item>
+  </object>
+  <object>
+    <name>Craft/Sculpting</name>
+    <item>Intelligence</item>
+    <item>Craft</item>
+    <item>0</item>
+    <item>Sculpting</item>
+  </object>
+  <object>
+    <name>Craft/Shipmaking</name>
+    <item>Intelligence</item>
+    <item>Craft</item>
+    <item>0</item>
+    <item>Shipmaking</item>
+  </object>
+  <object>
+    <name>Craft/Shoemaking</name>
+    <item>Intelligence</item>
+    <item>Craft</item>
+    <item>0</item>
+    <item>Shoemaking</item>
+  </object>
+  <object>
+    <name>Craft/Silversmithing</name>
+    <item>Intelligence</item>
+    <item>Craft</item>
+    <item>0</item>
+    <item>Silversmithing</item>
+  </object>
+  <object>
+    <name>Craft/Skinning</name>
+    <item>Intelligence</item>
+    <item>Craft</item>
+    <item>0</item>
+    <item>Skinning</item>
+  </object>
+  <object>
+    <name>Craft/Soapmaking</name>
+    <item>Intelligence</item>
+    <item>Craft</item>
+    <item>0</item>
+    <item>Soapmaking</item>
+  </object>
+  <object>
+    <name>Craft/Stonemasonry</name>
+    <item>Intelligence</item>
+    <item>Craft</item>
+    <item>0</item>
+    <item>Stonemasonry</item>
+  </object>
+  <object>
+    <name>Craft/Tanning</name>
+    <item>Intelligence</item>
+    <item>Craft</item>
+    <item>0</item>
+    <item>Tanning</item>
+  </object>
+  <object>
+    <name>Craft/Trapmaking</name>
+    <item>Intelligence</item>
+    <item>Craft</item>
+    <item>0</item>
+    <item>Trapmaking</item>
+  </object>
+  <object>
+    <name>Craft/Weaponsmithing</name>
+    <item>Intelligence</item>
+    <item>Craft</item>
+    <item>0</item>
+    <item>Weaponsmithing</item>
+  </object>
+  <object>
+    <name>Craft/Weaving</name>
+    <item>Intelligence</item>
+    <item>Craft</item>
+    <item>0</item>
+    <item>Weaving</item>
+  </object>
+  <object>
+    <name>Craft/Wheelmaking</name>
+    <item>Intelligence</item>
+    <item>Craft</item>
+    <item>0</item>
+    <item>Wheelmaking</item>
+  </object>
+  <object>
+    <name>Craft/Winemaking</name>
+    <item>Intelligence</item>
+    <item>Craft</item>
+    <item>0</item>
+    <item>Winemaking</item>
+  </object>
+  <object>
+    <name>Craft/Woodworking</name>
+    <item>Intelligence</item>
+    <item>Craft</item>
+    <item>0</item>
+    <item>Woodworking</item>
   </object>
   <object>
     <name>Decipher Script</name>
     <item>Intelligence</item>
     <item>Decipher Script</item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Diplomacy</name>
     <item>Charisma</item>
     <item>Diplomacy</item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Disable Device</name>
     <item>Intelligence</item>
     <item>Disable Device</item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Disguise</name>
     <item>Charisma</item>
     <item>Disguise</item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Escape Artist</name>
     <item>Dexterity</item>
     <item>Escape Artist</item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Forgery</name>
     <item>Intelligence</item>
     <item>Forgery</item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Gather Information</name>
     <item>Charisma</item>
     <item>Gather Information</item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Handle Animal</name>
     <item>Charisma</item>
     <item>Handle Animal</item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Heal</name>
     <item>Wisdom</item>
     <item>Heal</item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Hide</name>
     <item>Dexterity</item>
     <item>Hide</item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Intimidate</name>
     <item>Charisma</item>
     <item>Intimidate</item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Jump</name>
     <item>Strength</item>
     <item>Jump</item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
-    <name>Knowledge (Arcana)</name>
+    <name>Knowledge</name>
     <item>Intelligence</item>
-    <item>Knowledge (Arcana)</item>
-    <item>0</item>
+    <item>Knowledge</item>
+    <item>1</item>
+    <item></item>
   </object>
   <object>
-    <name>Knowledge (Architecture and Engineering)</name>
+    <name>Knowledge2</name>
     <item>Intelligence</item>
-    <item>Knowledge (Architecture and Engineering)</item>
-    <item>0</item>
+    <item>Knowledge</item>
+    <item>2</item>
+    <item></item>
   </object>
   <object>
-    <name>Knowledge (Dungeoneering)</name>
+    <name>KnowledgeAll</name>
     <item>Intelligence</item>
-    <item>Knowledge (Dungeoneering)</item>
-    <item>0</item>
+    <item>Knowledge</item>
+    <item>2147483647</item>
+    <item></item>
   </object>
   <object>
-    <name>Knowledge (Geography)</name>
+    <name>Knowledge/Arcana</name>
     <item>Intelligence</item>
-    <item>Knowledge (Geography)</item>
+    <item>Knowledge</item>
     <item>0</item>
+    <item>Arcana</item>
   </object>
   <object>
-    <name>Knowledge (History)</name>
+    <name>Knowledge/Architecture and Engineering</name>
     <item>Intelligence</item>
-    <item>Knowledge (History)</item>
+    <item>Knowledge</item>
     <item>0</item>
+    <item>Architecture and Engineering</item>
   </object>
   <object>
-    <name>Knowledge (Local)</name>
+    <name>Knowledge/Dungeoneering</name>
     <item>Intelligence</item>
-    <item>Knowledge (Local)</item>
+    <item>Knowledge</item>
     <item>0</item>
+    <item>Dungeoneering</item>
   </object>
   <object>
-    <name>Knowledge (Nature)</name>
+    <name>Knowledge/Geography</name>
     <item>Intelligence</item>
-    <item>Knowledge (Nature)</item>
+    <item>Knowledge</item>
     <item>0</item>
+    <item>Geography</item>
   </object>
   <object>
-    <name>Knowledge (Nobility and Royalty)</name>
+    <name>Knowledge/History</name>
     <item>Intelligence</item>
-    <item>Knowledge (Nobility and Royalty)</item>
+    <item>Knowledge</item>
     <item>0</item>
+    <item>History</item>
   </object>
   <object>
-    <name>Knowledge (Religion)</name>
+    <name>Knowledge/Local</name>
     <item>Intelligence</item>
-    <item>Knowledge (Religion)</item>
+    <item>Knowledge</item>
     <item>0</item>
+    <item>Local</item>
   </object>
   <object>
-    <name>Knowledge (The Planes)</name>
+    <name>Knowledge/Nature</name>
     <item>Intelligence</item>
-    <item>Knowledge (The Planes)</item>
+    <item>Knowledge</item>
     <item>0</item>
+    <item>Nature</item>
+  </object>
+  <object>
+    <name>Knowledge/Nobility and Royalty</name>
+    <item>Intelligence</item>
+    <item>Knowledge</item>
+    <item>0</item>
+    <item>Nobility and Royalty</item>
+  </object>
+  <object>
+    <name>Knowledge/Religion</name>
+    <item>Intelligence</item>
+    <item>Knowledge</item>
+    <item>0</item>
+    <item>Religion</item>
+  </object>
+  <object>
+    <name>Knowledge/The Planes</name>
+    <item>Intelligence</item>
+    <item>Knowledge</item>
+    <item>0</item>
+    <item>The Planes</item>
   </object>
   <object>
     <name>Listen</name>
     <item>Wisdom</item>
     <item>Listen</item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Move Silently</name>
     <item>Dexterity</item>
     <item>Move Silently</item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Open Lock</name>
     <item>Dexterity</item>
     <item>Open Lock</item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Perform</name>
     <item>Charisma</item>
     <item>Perform</item>
+    <item>1</item>
+    <item></item>
+  </object>
+  <object>
+    <name>Perform/Act</name>
+    <item>Charisma</item>
+    <item>Perform</item>
     <item>0</item>
+    <item>Act</item>
+  </object>
+  <object>
+    <name>Perform/Comedy</name>
+    <item>Charisma</item>
+    <item>Perform</item>
+    <item>0</item>
+    <item>Comedy</item>
+  </object>
+  <object>
+    <name>Perform/Dance</name>
+    <item>Charisma</item>
+    <item>Perform</item>
+    <item>0</item>
+    <item>Dance</item>
+  </object>
+  <object>
+    <name>Perform/Keyboard instruments</name>
+    <item>Charisma</item>
+    <item>Perform</item>
+    <item>0</item>
+    <item>Keyboard instruments</item>
+  </object>
+  <object>
+    <name>Perform/Oratory</name>
+    <item>Charisma</item>
+    <item>Perform</item>
+    <item>0</item>
+    <item>Oratory</item>
+  </object>
+  <object>
+    <name>Perform/Percussion instruments</name>
+    <item>Charisma</item>
+    <item>Perform</item>
+    <item>0</item>
+    <item>Percussion instruments</item>
+  </object>
+  <object>
+    <name>Perform/Sing</name>
+    <item>Charisma</item>
+    <item>Perform</item>
+    <item>0</item>
+    <item>Sing</item>
+  </object>
+  <object>
+    <name>Perform/String instruments</name>
+    <item>Charisma</item>
+    <item>Perform</item>
+    <item>0</item>
+    <item>String instruments</item>
+  </object>
+  <object>
+    <name>Perform/Wind instruments</name>
+    <item>Charisma</item>
+    <item>Perform</item>
+    <item>0</item>
+    <item>Wind instruments</item>
+  </object>
+  <object>
+    <name>Profession</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>1</item>
+    <item></item>
+  </object>
+  <object>
+    <name>Profession/Adviser</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Adviser</item>
+  </object>
+  <object>
+    <name>Profession/Alchemist</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Alchemist</item>
+  </object>
+  <object>
+    <name>Profession/Animal Groomer</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Animal Groomer</item>
+  </object>
+  <object>
+    <name>Profession/Animal Trainer</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Animal Trainer</item>
+  </object>
+  <object>
+    <name>Profession/Apothecary</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Apothecary</item>
+  </object>
+  <object>
+    <name>Profession/Appraiser</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Appraiser</item>
+  </object>
+  <object>
+    <name>Profession/Architect</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Architect</item>
+  </object>
+  <object>
+    <name>Profession/Armorer</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Armorer</item>
+  </object>
+  <object>
+    <name>Profession/Barrister</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Barrister</item>
+  </object>
+  <object>
+    <name>Profession/Blacksmith</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Blacksmith</item>
+  </object>
+  <object>
+    <name>Profession/Bookbinder</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Bookbinder</item>
+  </object>
+  <object>
+    <name>Profession/Bowyer</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Bowyer</item>
+  </object>
+  <object>
+    <name>Profession/Brazier</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Brazier</item>
+  </object>
+  <object>
+    <name>Profession/Brewer</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Brewer</item>
+  </object>
+  <object>
+    <name>Profession/Butler</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Butler</item>
+  </object>
+  <object>
+    <name>Profession/Carpenter</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Carpenter</item>
+  </object>
+  <object>
+    <name>Profession/Cartographer</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Cartographer</item>
+  </object>
+  <object>
+    <name>Profession/Cartwright</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Cartwright</item>
+  </object>
+  <object>
+    <name>Profession/Chandler</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Chandler</item>
+  </object>
+  <object>
+    <name>Profession/City Guide</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>City Guide</item>
+  </object>
+  <object>
+    <name>Profession/Clerk</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Clerk</item>
+  </object>
+  <object>
+    <name>Profession/Cobbler</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Cobbler</item>
+  </object>
+  <object>
+    <name>Profession/Coffinmaker</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Coffinmaker</item>
+  </object>
+  <object>
+    <name>Profession/Coiffeur</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Coiffeur</item>
+  </object>
+  <object>
+    <name>Profession/Cook</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Cook</item>
+  </object>
+  <object>
+    <name>Profession/Coppersmith</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Coppersmith</item>
+  </object>
+  <object>
+    <name>Profession/Craftsman</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Craftsman</item>
+  </object>
+  <object>
+    <name>Profession/Dowser</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Dowser</item>
+  </object>
+  <object>
+    <name>Profession/Dyer</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Dyer</item>
+  </object>
+  <object>
+    <name>Profession/Engineer</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Engineer</item>
+  </object>
+  <object>
+    <name>Profession/Embalmer</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Embalmer</item>
+  </object>
+  <object>
+    <name>Profession/Entertainer</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Entertainer</item>
+  </object>
+  <object>
+    <name>Profession/Exotic Animal Trainer</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Exotic Animal Trainer</item>
+  </object>
+  <object>
+    <name>Profession/Farmer</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Farmer</item>
+  </object>
+  <object>
+    <name>Profession/Fletcher</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Fletcher</item>
+  </object>
+  <object>
+    <name>Profession/Footman</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Footman</item>
+  </object>
+  <object>
+    <name>Profession/Gemcutter</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Gemcutter</item>
+  </object>
+  <object>
+    <name>Profession/Goldsmith</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Goldsmith</item>
+  </object>
+  <object>
+    <name>Profession/Governess</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Governess</item>
+  </object>
+  <object>
+    <name>Profession/Haberdasher</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Haberdasher</item>
+  </object>
+  <object>
+    <name>Profession/Healer</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Healer</item>
+  </object>
+  <object>
+    <name>Profession/Horner</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Horner</item>
+  </object>
+  <object>
+    <name>Profession/Interpreter</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Interpreter</item>
+  </object>
+  <object>
+    <name>Profession/Jeweler</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Jeweler</item>
+  </object>
+  <object>
+    <name>Profession/Laborer</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Laborer</item>
+  </object>
+  <object>
+    <name>Profession/Launderer</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Launderer</item>
+  </object>
+  <object>
+    <name>Profession/Limner</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Limner</item>
+  </object>
+  <object>
+    <name>Profession/Local Courier</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Local Courier</item>
+  </object>
+  <object>
+    <name>Profession/Locksmith</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Locksmith</item>
+  </object>
+  <object>
+    <name>Profession/Maid</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Maid</item>
+  </object>
+  <object>
+    <name>Profession/Masseuse</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Masseuse</item>
+  </object>
+  <object>
+    <name>Profession/Matchmaker</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Matchmaker</item>
+  </object>
+  <object>
+    <name>Profession/Midwife</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Midwife</item>
+  </object>
+  <object>
+    <name>Profession/Miller</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Miller</item>
+  </object>
+  <object>
+    <name>Profession/Navigator</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Navigator</item>
+  </object>
+  <object>
+    <name>Profession/Nursemaid</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Nursemaid</item>
+  </object>
+  <object>
+    <name>Profession/Out-of-Town Courier</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Out-of-Town Courier</item>
+  </object>
+  <object>
+    <name>Profession/Painter</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Painter</item>
+  </object>
+  <object>
+    <name>Profession/Parchmentmaker</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Parchmentmaker</item>
+  </object>
+  <object>
+    <name>Profession/Pewterer</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Pewterer</item>
+  </object>
+  <object>
+    <name>Profession/Polisher</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Polisher</item>
+  </object>
+  <object>
+    <name>Profession/Porter</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Porter</item>
+  </object>
+  <object>
+    <name>Profession/Potter</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Potter</item>
+  </object>
+  <object>
+    <name>Profession/Sage</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Sage</item>
+  </object>
+  <object>
+    <name>Profession/Sailor Crewmember</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Sailor Crewmember</item>
+  </object>
+  <object>
+    <name>Profession/Sailor Mate</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Sailor Mate</item>
+  </object>
+  <object>
+    <name>Profession/Scribe</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Scribe</item>
+  </object>
+  <object>
+    <name>Profession/Sculptor</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Sculptor</item>
+  </object>
+  <object>
+    <name>Profession/Shepherd</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Shepherd</item>
+  </object>
+  <object>
+    <name>Profession/Shipwright</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Shipwright</item>
+  </object>
+  <object>
+    <name>Profession/Silversmith</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Silversmith</item>
+  </object>
+  <object>
+    <name>Profession/Skinner</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Skinner</item>
+  </object>
+  <object>
+    <name>Profession/Soapmaker</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Soapmaker</item>
+  </object>
+  <object>
+    <name>Profession/Soothsayer</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Soothsayer</item>
+  </object>
+  <object>
+    <name>Profession/Tanner</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Tanner</item>
+  </object>
+  <object>
+    <name>Profession/Teacher</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Teacher</item>
+  </object>
+  <object>
+    <name>Profession/Teamster</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Teamster</item>
+  </object>
+  <object>
+    <name>Profession/Trader</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Trader</item>
+  </object>
+  <object>
+    <name>Profession/Valet</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Valet</item>
+  </object>
+  <object>
+    <name>Profession/Vintner</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Vintner</item>
+  </object>
+  <object>
+    <name>Profession/Weaponsmith</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Weaponsmith</item>
+  </object>
+  <object>
+    <name>Profession/Weaver</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Weaver</item>
+  </object>
+  <object>
+    <name>Profession/Wheelwright</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Wheelwright</item>
+  </object>
+  <object>
+    <name>Profession/Wilderness Guide</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Wilderness Guide</item>
   </object>
   <object>
     <name>Ride</name>
     <item>Dexterity</item>
     <item>Ride</item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Search</name>
     <item>Intelligence</item>
     <item>Search</item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Sense Motive</name>
     <item>Wisdom</item>
     <item>Sense Motive</item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Sleight of Hand</name>
     <item>Dexterity</item>
     <item>Sleight of Hand</item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Spellcraft</name>
     <item>Intelligence</item>
     <item>Spellcraft</item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Spot</name>
     <item>Wisdom</item>
     <item>Spot</item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Survival</name>
     <item>Wisdom</item>
     <item>Survival</item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Swim</name>
     <item>Strength</item>
     <item>Swim</item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Tumble</name>
     <item>Dexterity</item>
     <item>Tumble</item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Use Magic Device</name>
     <item>Charisma</item>
     <item>Use Magic Device</item>
     <item>0</item>
+    <item></item>
   </object>
   <object>
     <name>Use Rope</name>
     <item>Dexterity</item>
     <item>Use Rope</item>
     <item>0</item>
-  </object>
-  <object>
-    <name>Mind FlayerKnowledge</name>
-    <item>Intelligence</item>
-    <item>Knowledge</item>
-    <item>1</item>
-  </object>
-  <object>
-    <name>Death SlaadKnowledge</name>
-    <item>Intelligence</item>
-    <item>Knowledge</item>
-    <item>2</item>
-  </object>
-  <object>
-    <name>Yuan-ti PurebloodKnowledge</name>
-    <item>Intelligence</item>
-    <item>Knowledge</item>
-    <item>1</item>
-  </object>
-  <object>
-    <name>Yuan-ti HalfbloodKnowledge</name>
-    <item>Intelligence</item>
-    <item>Knowledge</item>
-    <item>2</item>
-  </object>
-  <object>
-    <name>Yuan-ti AbominationKnowledge</name>
-    <item>Intelligence</item>
-    <item>Knowledge</item>
-    <item>2</item>
+    <item></item>
   </object>
 </items>

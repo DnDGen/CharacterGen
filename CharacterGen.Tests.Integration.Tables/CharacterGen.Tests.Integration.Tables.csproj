@@ -280,8 +280,6 @@
     <Compile Include="Abilities\Feats\Requirements\Stats\WhirlwindAttackStatRequirementsTests.cs" />
     <Compile Include="Abilities\Skills\AssignPointToCrossClassSkillTests.cs" />
     <Compile Include="Abilities\Skills\ClassSkillsTests.cs" />
-    <Compile Include="Abilities\Skills\CrossClassSkillsTests.cs" />
-    <Compile Include="Abilities\Skills\CrossSkillCollectionTests.cs" />
     <Compile Include="Abilities\Skills\SkillDataTests.cs" />
     <Compile Include="Abilities\Skills\SkillGroupsTests.cs" />
     <Compile Include="Abilities\Skills\SkillPointsTests.cs" />

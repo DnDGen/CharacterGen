@@ -22,6 +22,7 @@ namespace CharacterGen.Domain.Selectors.Collections
             selection.BaseStatName = data[DataIndexConstants.SkillSelectionData.BaseStatName];
             selection.SkillName = data[DataIndexConstants.SkillSelectionData.SkillName];
             selection.RandomFociQuantity = Convert.ToInt32(data[DataIndexConstants.SkillSelectionData.RandomFociQuantity]);
+            selection.Focus = data[DataIndexConstants.SkillSelectionData.Focus];
 
             return selection;
         }

@@ -6,7 +6,6 @@ using CharacterGen.Domain.Tables;
 using CharacterGen.Races;
 using CharacterGen.Randomizers.Races;
 using RollGen;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -71,7 +70,8 @@ namespace CharacterGen.Domain.Generators
 
             race.Age = generator.Generate(() => DetermineAge(race, characterClass),
                 (a) => race.MaximumAge.Value >= a.Value || race.MaximumAge.Value == RaceConstants.Ages.Ageless,
-                () => GetDefaultAge(race, characterClass));
+                () => GetDefaultAge(race, characterClass),
+                $"age for {race.Summary} {characterClass.Summary} of {race.MaximumAge.Value} years");
 
             var tableName = string.Format(TableNameConstants.Formattable.Adjustments.GENDERHeights, race.Gender);
             var baseHeight = adjustmentsSelector.SelectFrom(tableName, race.BaseRace);
@@ -245,11 +245,7 @@ namespace CharacterGen.Domain.Generators
         private Measurement GetDefaultAge(Race race, CharacterClass characterClass)
         {
             var age = new Measurement("Years");
-
-            var tableName = string.Format(TableNameConstants.Formattable.Adjustments.RACEAges, race.BaseRace);
-            var adultAge = adjustmentsSelector.SelectFrom(tableName, RaceConstants.Ages.Adulthood);
-
-            age.Value = Math.Min(race.MaximumAge.Value, adultAge + characterClass.Level);
+            age.Value = race.MaximumAge.Value;
             age.Description = GetAgeDescription(race, age.Value);
 
             return age;
@@ -308,20 +304,14 @@ namespace CharacterGen.Domain.Generators
             var classType = collectionsSelector.FindGroupOf(TableNameConstants.Set.Collection.ClassNameGroups, characterClass.Name, allClassTypes.ToArray());
             var tableName = string.Format(TableNameConstants.Formattable.Collection.CLASSTYPEAgeRolls, classType);
             var trainingAgeRoll = collectionsSelector.SelectFrom(tableName, baseRace).Single();
-            var additionalAge = GetAgeRollResult(trainingAgeRoll, 1);
+            var additionalAge = 0;
 
-            for (var i = 1; i < characterClass.Level; i++)
+            for (var i = 0; i < characterClass.Level; i++)
             {
-                additionalAge += GetAgeRollResult(trainingAgeRoll, 3);
+                additionalAge += dice.Roll(trainingAgeRoll).AsSum();
             }
 
             return additionalAge;
-        }
-
-        private int GetAgeRollResult(string ageRoll, int divisor)
-        {
-            var roll = dice.Roll(ageRoll).AsSum() / divisor;
-            return Math.Max(1, roll);
         }
 
         private string GetAgeDescription(Race race, int ageInYears)

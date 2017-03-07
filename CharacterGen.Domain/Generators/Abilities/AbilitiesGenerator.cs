@@ -36,15 +36,13 @@ namespace CharacterGen.Domain.Generators.Abilities
             var ability = new Ability();
 
             ability.Stats = stats;
-            ability.Languages = languageGenerator.GenerateWith(race, characterClass.Name, ability.Stats[StatConstants.Intelligence].Bonus);
             ability.Skills = skillsGenerator.GenerateWith(characterClass, race, ability.Stats);
             ability.Feats = featsGenerator.GenerateWith(characterClass, race, ability.Stats, ability.Skills, baseAttack);
+            ability.Languages = languageGenerator.GenerateWith(race, characterClass.Name, ability.Stats[StatConstants.Intelligence].Bonus, ability.Skills);
 
             var allFeatGrantingSkillBonuses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus);
-            var featNames = ability.Feats.Select(f => f.Name);
-            var featNamesGrantingSkillBonuses = allFeatGrantingSkillBonuses.Intersect(featNames);
-            var featGrantingSkillBonuses = ability.Feats.Where(f => featNamesGrantingSkillBonuses.Contains(f.Name));
-            var allSkills = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.Skills);
+            var featGrantingSkillBonuses = ability.Feats.Where(f => allFeatGrantingSkillBonuses.Contains(f.Name));
+            var allSkillNames = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, GroupConstants.Skills);
 
             foreach (var feat in featGrantingSkillBonuses)
             {
@@ -52,28 +50,33 @@ namespace CharacterGen.Domain.Generators.Abilities
                 {
                     foreach (var focus in feat.Foci)
                     {
-                        if (allSkills.Any(s => focus.StartsWith(s)) == false)
+                        if (allSkillNames.Any(s => focus.StartsWith(s)) == false)
                             continue;
 
-                        var skill = allSkills.First(s => focus.StartsWith(s));
+                        var skillName = allSkillNames.First(s => focus.StartsWith(s));
+                        var skill = ability.Skills.FirstOrDefault(s => s.IsEqualTo(skillName));
 
-                        if (ability.Skills.ContainsKey(skill) == false)
+                        if (skill == null)
                             continue;
 
-                        var circumstantial = allSkills.Contains(focus) == false;
-                        ability.Skills[skill].CircumstantialBonus |= circumstantial;
+                        var circumstantial = allSkillNames.Contains(focus) == false;
+                        skill.CircumstantialBonus |= circumstantial;
 
                         if (circumstantial == false)
-                            ability.Skills[skill].Bonus += feat.Power;
+                            skill.Bonus += feat.Power;
                     }
                 }
                 else
                 {
                     var skillsToReceiveBonus = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, feat.Name);
 
-                    foreach (var skill in skillsToReceiveBonus)
-                        if (ability.Skills.ContainsKey(skill))
-                            ability.Skills[skill].Bonus += feat.Power;
+                    foreach (var skillName in skillsToReceiveBonus)
+                    {
+                        var skill = ability.Skills.FirstOrDefault(s => s.IsEqualTo(skillName));
+
+                        if (skill != null)
+                            skill.Bonus += feat.Power;
+                    }
                 }
             }
 

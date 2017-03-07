@@ -4,7 +4,6 @@ using CharacterGen.CharacterClasses;
 using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Selectors.Selections;
 using CharacterGen.Domain.Tables;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using TreasureGen.Items;
@@ -20,7 +19,7 @@ namespace CharacterGen.Domain.Generators.Abilities.Feats
             this.collectionsSelector = collectionsSelector;
         }
 
-        public string GenerateFrom(string feat, string focusType, Dictionary<string, Skill> skills, IEnumerable<RequiredFeatSelection> requiredFeats, IEnumerable<Feat> otherFeats, CharacterClass characterClass)
+        public string GenerateFrom(string feat, string focusType, IEnumerable<Skill> skills, IEnumerable<RequiredFeatSelection> requiredFeats, IEnumerable<Feat> otherFeats, CharacterClass characterClass)
         {
             if (string.IsNullOrEmpty(focusType))
                 return string.Empty;
@@ -38,14 +37,12 @@ namespace CharacterGen.Domain.Generators.Abilities.Feats
                 return FeatConstants.Foci.All;
 
             foci = foci.Except(usedFoci);
-
-            var allSkills = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.Skills);
-            var skillFoci = allSkills.Intersect(foci);
+            var skillFoci = allSourceFeatFoci[GroupConstants.Skills].Intersect(foci);
 
             if (skillFoci.Any())
             {
-                var missingSkills = allSkills.Except(skills.Keys);
-                foci = foci.Except(missingSkills);
+                var potentialSkillFoci = skills.Select(s => s.Focus.Any() ? $"{s.Name}/{s.Focus}" : s.Name);
+                foci = skillFoci.Intersect(potentialSkillFoci);
             }
 
             if (focusType == GroupConstants.SchoolsOfMagic)
@@ -123,7 +120,7 @@ namespace CharacterGen.Domain.Generators.Abilities.Feats
             return requiredFeatNames.Contains(feat.Name) && feat.Foci.Any();
         }
 
-        public string GenerateFrom(string feat, string focusType, Dictionary<string, Skill> skills)
+        public string GenerateFrom(string feat, string focusType, IEnumerable<Skill> skills)
         {
             if (string.IsNullOrEmpty(focusType))
                 return string.Empty;
@@ -133,13 +130,12 @@ namespace CharacterGen.Domain.Generators.Abilities.Feats
                 return focusType;
 
             var foci = GetFoci(feat, focusType, allSourceFeatFoci, Enumerable.Empty<Feat>(), Enumerable.Empty<string>());
-            var allSkills = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.Skills);
-            var skillFoci = allSkills.Intersect(foci);
+            var skillFoci = allSourceFeatFoci[GroupConstants.Skills].Intersect(foci);
 
             if (skillFoci.Any())
             {
-                var missingSkills = allSkills.Except(skills.Keys);
-                foci = foci.Except(missingSkills);
+                var potentialSkillFoci = skills.Select(s => s.Focus.Any() ? $"{s.Name}/{s.Focus}" : s.Name);
+                foci = skillFoci.Intersect(potentialSkillFoci);
             }
 
             if (foci.Any() == false)
@@ -148,8 +144,7 @@ namespace CharacterGen.Domain.Generators.Abilities.Feats
             return collectionsSelector.SelectRandomFrom(foci);
         }
 
-
-        public String GenerateAllowingFocusOfAllFrom(String feat, String focusType, Dictionary<String, Skill> skills, IEnumerable<RequiredFeatSelection> requiredFeats, IEnumerable<Feat> otherFeats, CharacterClass characterClass)
+        public string GenerateAllowingFocusOfAllFrom(string feat, string focusType, IEnumerable<Skill> skills, IEnumerable<RequiredFeatSelection> requiredFeats, IEnumerable<Feat> otherFeats, CharacterClass characterClass)
         {
             if (focusType == FeatConstants.Foci.All)
                 return focusType;
@@ -157,7 +152,7 @@ namespace CharacterGen.Domain.Generators.Abilities.Feats
             return GenerateFrom(feat, focusType, skills, requiredFeats, otherFeats, characterClass);
         }
 
-        public String GenerateAllowingFocusOfAllFrom(String feat, String focusType, Dictionary<String, Skill> skills)
+        public string GenerateAllowingFocusOfAllFrom(string feat, string focusType, IEnumerable<Skill> skills)
         {
             if (focusType == FeatConstants.Foci.All)
                 return focusType;

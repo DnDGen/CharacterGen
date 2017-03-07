@@ -63,7 +63,7 @@ namespace CharacterGen.Tests.Unit.Common
             character.Class.Name = "class name";
             character.Race.BaseRace = "base race";
 
-            Assert.That(character.Summary, Is.EqualTo("lawfulness goodness Level 9266 base race class name"));
+            Assert.That(character.Summary, Is.EqualTo("lawfulness goodness Female base race Level 9266 class name"));
         }
 
         [Test]
@@ -75,8 +75,9 @@ namespace CharacterGen.Tests.Unit.Common
             character.Class.Name = "class name";
             character.Race.BaseRace = "base race";
             character.Race.Metarace = "metarace";
+            character.Race.IsMale = true;
 
-            Assert.That(character.Summary, Is.EqualTo("lawfulness goodness Level 9266 metarace base race class name"));
+            Assert.That(character.Summary, Is.EqualTo("lawfulness goodness Male metarace base race Level 9266 class name"));
         }
 
         [Test]

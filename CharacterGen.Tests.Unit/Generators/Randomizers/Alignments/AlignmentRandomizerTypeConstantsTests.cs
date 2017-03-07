@@ -1,6 +1,5 @@
 ﻿using CharacterGen.Randomizers.Alignments;
 using NUnit.Framework;
-using System;
 
 namespace CharacterGen.Tests.Unit.Generators.Randomizers.Alignments
 {
@@ -18,7 +17,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Alignments
         [TestCase(AlignmentRandomizerTypeConstants.NonGood, "Non-good")]
         [TestCase(AlignmentRandomizerTypeConstants.NonLawful, "Non-lawful")]
         [TestCase(AlignmentRandomizerTypeConstants.NonNeutral, "Non-neutral")]
-        public void Constant(String constant, String value)
+        public void AlignmentRandomizerTypeConstant(string constant, string value)
         {
             Assert.That(constant, Is.EqualTo(value));
         }

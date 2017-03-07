@@ -1,4 +1,5 @@
-﻿using CharacterGen.Abilities.Stats;
+﻿using CharacterGen.Abilities.Skills;
+using CharacterGen.Abilities.Stats;
 using CharacterGen.CharacterClasses;
 using CharacterGen.Domain.Generators.Abilities;
 using CharacterGen.Domain.Selectors.Collections;
@@ -8,6 +9,7 @@ using CharacterGen.Domain.Tables;
 using CharacterGen.Races;
 using Moq;
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -58,7 +60,9 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
             race.BaseRace = "base race";
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassSkills, "class name")).Returns(classSkills);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.CrossClassSkills, "class name")).Returns(crossClassSkills);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassSkills, "specialist field")).Returns(specialistSkills);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.Untrained)).Returns(crossClassSkills);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.All)).Returns(allSkills);
 
             var emptyAdjustments = new Dictionary<string, int>();
             mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(It.IsAny<string>())).Returns(emptyAdjustments);
@@ -67,13 +71,16 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.SkillPoints, race.BaseRace)).Returns(() => racialSkillPoints);
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice, race.BaseRace)).Returns(() => monsterHitDice);
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, "specialist field")).Returns(specialistSkills);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.Skills)).Returns(allSkills);
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<string>>())).Returns((IEnumerable<string> ss) => ss.First());
+            var count = 0;
+            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(() => Convert.ToBoolean(count++ % 2));
+
+            var index = 0;
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<string>>())).Returns((IEnumerable<string> ss) => ss.ElementAt(index++ % ss.Count()));
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<SkillSelection>>())).Returns((IEnumerable<SkillSelection> ss) => ss.ElementAt(index++ % ss.Count()));
+
             mockSkillSelector.Setup(s => s.SelectFor(It.IsAny<string>())).Returns((string skill) => new SkillSelection { SkillName = skill, BaseStatName = StatConstants.Intelligence });
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassSkills, race.BaseRace)).Returns(monsterClassSkills);
-
         }
 
         [TestCase(1, 4)]
@@ -103,7 +110,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
             AddClassSkills(3);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
-            var totalRanks = skills.Sum(kvp => kvp.Value.Ranks);
+            var totalRanks = skills.Sum(s => s.Ranks);
             Assert.That(totalRanks, Is.EqualTo(points));
         }
 
@@ -132,7 +139,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
             AddClassSkills(classPoints + 1);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
-            var totalRanks = skills.Sum(kvp => kvp.Value.Ranks);
+            var totalRanks = skills.Sum(s => s.Ranks);
             Assert.That(totalRanks, Is.EqualTo(points));
         }
 
@@ -164,7 +171,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
             stats[StatConstants.Intelligence].Value = 12;
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
-            var totalRanks = skills.Sum(kvp => kvp.Value.Ranks);
+            var totalRanks = skills.Sum(s => s.Ranks);
             Assert.That(totalRanks, Is.EqualTo(points));
         }
 
@@ -174,7 +181,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
             AddClassSkills(4);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
-            Assert.That(skills.Keys, Is.EquivalentTo(classSkills));
+            Assert.That(skills.Select(s => s.Name), Is.EquivalentTo(classSkills));
         }
 
         [Test]
@@ -183,7 +190,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
             AddCrossClassSkills(4);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
-            Assert.That(skills.Keys, Is.EquivalentTo(crossClassSkills));
+            Assert.That(skills.Select(s => s.Name), Is.EquivalentTo(crossClassSkills));
         }
 
         private void AddCrossClassSkills(int quantity)
@@ -200,7 +207,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
             AddSpecialistSkills(2);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
-            Assert.That(skills.Keys, Is.EquivalentTo(specialistSkills));
+            Assert.That(skills.Select(s => s.Name), Is.EquivalentTo(specialistSkills));
         }
 
         private void AddSpecialistSkills(int quantity)
@@ -218,8 +225,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
             specialistSkills.Add(classSkills[0]);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
-            Assert.That(skills.Keys, Contains.Item("class skill 1"));
-            Assert.That(skills.Count, Is.EqualTo(1));
+            Assert.That(skills.Single().Name, Is.EqualTo("class skill 1"));
         }
 
         [Test]
@@ -230,9 +236,10 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
             AddSpecialistSkills(1);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
-            Assert.That(classSkills, Is.SubsetOf(skills.Keys));
-            Assert.That(crossClassSkills, Is.SubsetOf(skills.Keys));
-            Assert.That(specialistSkills, Is.SubsetOf(skills.Keys));
+            var skillNames = skills.Select(s => s.Name);
+            Assert.That(classSkills, Is.SubsetOf(skillNames));
+            Assert.That(crossClassSkills, Is.SubsetOf(skillNames));
+            Assert.That(specialistSkills, Is.SubsetOf(skillNames));
             Assert.That(skills.Count, Is.EqualTo(5));
         }
 
@@ -245,12 +252,15 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
 
             var classSkillSelection = new SkillSelection();
             classSkillSelection.BaseStatName = "stat 1";
+            classSkillSelection.SkillName = "class skill name";
 
             var crossClassSkillSelection = new SkillSelection();
             crossClassSkillSelection.BaseStatName = "stat 2";
+            crossClassSkillSelection.SkillName = "cross-class skill name";
 
             var specialistSkillSelection = new SkillSelection();
             specialistSkillSelection.BaseStatName = "stat 3";
+            specialistSkillSelection.SkillName = "specialist class skill name";
 
             mockSkillSelector.Setup(s => s.SelectFor(classSkills[0])).Returns(classSkillSelection);
             mockSkillSelector.Setup(s => s.SelectFor(crossClassSkills[0])).Returns(crossClassSkillSelection);
@@ -260,10 +270,16 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
             stats["stat 2"] = new Stat("stat 2");
             stats["stat 3"] = new Stat("stat 3");
 
-            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
-            Assert.That(skills["class skill 1"].BaseStat, Is.EqualTo(stats["stat 1"]));
-            Assert.That(skills["cross-class skill 1"].BaseStat, Is.EqualTo(stats["stat 2"]));
-            Assert.That(skills["specialist skill 1"].BaseStat, Is.EqualTo(stats["stat 3"]));
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats).ToArray();
+
+            Assert.That(skills[0].Name, Is.EqualTo("class skill name"));
+            Assert.That(skills[0].BaseStat, Is.EqualTo(stats["stat 1"]));
+
+            Assert.That(skills[1].Name, Is.EqualTo("specialist class skill name"));
+            Assert.That(skills[1].BaseStat, Is.EqualTo(stats["stat 3"]));
+
+            Assert.That(skills[2].Name, Is.EqualTo("cross-class skill name"));
+            Assert.That(skills[2].BaseStat, Is.EqualTo(stats["stat 2"]));
         }
 
         [Test]
@@ -274,10 +290,10 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
 
-            Assert.That(skills["class skill 1"].ClassSkill, Is.True);
-            Assert.That(skills["class skill 2"].ClassSkill, Is.True);
-            Assert.That(skills["cross-class skill 1"].ClassSkill, Is.False);
-            Assert.That(skills["cross-class skill 2"].ClassSkill, Is.False);
+            Assert.That(skills.Single(s => s.Name == "class skill 1").ClassSkill, Is.True);
+            Assert.That(skills.Single(s => s.Name == "class skill 2").ClassSkill, Is.True);
+            Assert.That(skills.Single(s => s.Name == "cross-class skill 1").ClassSkill, Is.False);
+            Assert.That(skills.Single(s => s.Name == "cross-class skill 2").ClassSkill, Is.False);
         }
 
         [Test]
@@ -285,7 +301,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
         {
             AddSpecialistSkills(1);
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
-            Assert.That(skills["specialist skill 1"].ClassSkill, Is.True);
+            Assert.That(skills.Single(s => s.Name == "specialist skill 1").ClassSkill, Is.True);
         }
 
         [Test]
@@ -295,7 +311,379 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
             specialistSkills.Add(crossClassSkills[0]);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
-            Assert.That(skills["cross-class skill 1"].ClassSkill, Is.True);
+            Assert.That(skills.Single(s => s.Name == "cross-class skill 1").ClassSkill, Is.True);
+        }
+
+        [Test]
+        public void GetClassSkillWithSetFocus()
+        {
+            AddClassSkills(1);
+
+            var skillSelection = new SkillSelection();
+            skillSelection.BaseStatName = StatConstants.Intelligence;
+            skillSelection.SkillName = Guid.NewGuid().ToString();
+            skillSelection.Focus = Guid.NewGuid().ToString();
+
+            mockSkillSelector.Setup(s => s.SelectFor(classSkills[0])).Returns(skillSelection);
+
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
+            var skill = skills.Single();
+            Assert.That(skill.Name, Is.EqualTo(skillSelection.SkillName));
+            Assert.That(skill.Focus, Is.EqualTo(skillSelection.Focus));
+            Assert.That(skill.ClassSkill, Is.True);
+        }
+
+        [Test]
+        public void GetCrossClassSkillWithSetFocus()
+        {
+            AddCrossClassSkills(1);
+
+            var skillSelection = new SkillSelection();
+            skillSelection.BaseStatName = StatConstants.Intelligence;
+            skillSelection.SkillName = Guid.NewGuid().ToString();
+            skillSelection.Focus = Guid.NewGuid().ToString();
+
+            mockSkillSelector.Setup(s => s.SelectFor(crossClassSkills[0])).Returns(skillSelection);
+
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
+            var skill = skills.Single();
+            Assert.That(skill.Name, Is.EqualTo(skillSelection.SkillName));
+            Assert.That(skill.Focus, Is.EqualTo(skillSelection.Focus));
+            Assert.That(skill.ClassSkill, Is.False);
+        }
+
+        [Test]
+        public void GetSpecialistSkillWithSetFocus()
+        {
+            AddSpecialistSkills(1);
+
+            var skillSelection = new SkillSelection();
+            skillSelection.BaseStatName = StatConstants.Intelligence;
+            skillSelection.SkillName = Guid.NewGuid().ToString();
+            skillSelection.Focus = Guid.NewGuid().ToString();
+
+            mockSkillSelector.Setup(s => s.SelectFor(specialistSkills[0])).Returns(skillSelection);
+
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
+            var skill = skills.Single();
+            Assert.That(skill.Name, Is.EqualTo(skillSelection.SkillName));
+            Assert.That(skill.Focus, Is.EqualTo(skillSelection.Focus));
+            Assert.That(skill.ClassSkill, Is.True);
+        }
+
+        [Test]
+        public void GetClassSkillWithRandomFocus()
+        {
+            AddClassSkills(1);
+
+            var skillSelection = new SkillSelection();
+            skillSelection.BaseStatName = StatConstants.Intelligence;
+            skillSelection.SkillName = Guid.NewGuid().ToString();
+            skillSelection.RandomFociQuantity = 1;
+
+            mockSkillSelector.Setup(s => s.SelectFor(classSkills[0])).Returns(skillSelection);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, skillSelection.SkillName)).Returns(new[] { "random", "other random" });
+
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
+            var skill = skills.Single();
+            Assert.That(skill.Name, Is.EqualTo(skillSelection.SkillName));
+            Assert.That(skill.Focus, Is.EqualTo("random"));
+            Assert.That(skill.ClassSkill, Is.True);
+        }
+
+        [Test]
+        public void GetCrossClassSkillWithRandomFocus()
+        {
+            AddCrossClassSkills(1);
+
+            var skillSelection = new SkillSelection();
+            skillSelection.BaseStatName = StatConstants.Intelligence;
+            skillSelection.SkillName = Guid.NewGuid().ToString();
+            skillSelection.RandomFociQuantity = 1;
+
+            mockSkillSelector.Setup(s => s.SelectFor(crossClassSkills[0])).Returns(skillSelection);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, skillSelection.SkillName)).Returns(new[] { "random", "other random" });
+
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
+            var skill = skills.Single();
+            Assert.That(skill.Name, Is.EqualTo(skillSelection.SkillName));
+            Assert.That(skill.Focus, Is.EqualTo("random"));
+            Assert.That(skill.ClassSkill, Is.False);
+        }
+
+        [Test]
+        public void GetSpecialistSkillWithRandomFocus()
+        {
+            AddSpecialistSkills(1);
+
+            var skillSelection = new SkillSelection();
+            skillSelection.BaseStatName = StatConstants.Intelligence;
+            skillSelection.SkillName = Guid.NewGuid().ToString();
+            skillSelection.RandomFociQuantity = 1;
+
+            mockSkillSelector.Setup(s => s.SelectFor(specialistSkills[0])).Returns(skillSelection);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, skillSelection.SkillName)).Returns(new[] { "random", "other random" });
+
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
+            var skill = skills.Single();
+            Assert.That(skill.Name, Is.EqualTo(skillSelection.SkillName));
+            Assert.That(skill.Focus, Is.EqualTo("random"));
+            Assert.That(skill.ClassSkill, Is.True);
+        }
+
+        [Test]
+        public void GetClassSkillWithMultipleRandomFoci()
+        {
+            AddClassSkills(1);
+
+            var skillSelection = new SkillSelection();
+            skillSelection.BaseStatName = StatConstants.Intelligence;
+            skillSelection.SkillName = Guid.NewGuid().ToString();
+            skillSelection.RandomFociQuantity = 2;
+
+            mockSkillSelector.Setup(s => s.SelectFor(classSkills[0])).Returns(skillSelection);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, skillSelection.SkillName)).Returns(new[] { "random", "other random", "third random" });
+
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats).ToArray();
+
+            Assert.That(skills[0].Name, Is.EqualTo(skillSelection.SkillName));
+            Assert.That(skills[0].Focus, Is.EqualTo("random"));
+            Assert.That(skills[0].ClassSkill, Is.True);
+
+            Assert.That(skills[1].Name, Is.EqualTo(skillSelection.SkillName));
+            Assert.That(skills[1].Focus, Is.EqualTo("third random"));
+            Assert.That(skills[1].ClassSkill, Is.True);
+
+            Assert.That(skills.Length, Is.EqualTo(2));
+        }
+
+        [Test]
+        public void GetCrossClassSkillWithMultipleRandomFoci()
+        {
+            AddCrossClassSkills(1);
+
+            var skillSelection = new SkillSelection();
+            skillSelection.BaseStatName = StatConstants.Intelligence;
+            skillSelection.SkillName = Guid.NewGuid().ToString();
+            skillSelection.RandomFociQuantity = 2;
+
+            mockSkillSelector.Setup(s => s.SelectFor(crossClassSkills[0])).Returns(skillSelection);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, skillSelection.SkillName)).Returns(new[] { "random", "other random", "third random" });
+
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats).ToArray();
+
+            Assert.That(skills[0].Name, Is.EqualTo(skillSelection.SkillName));
+            Assert.That(skills[0].Focus, Is.EqualTo("random"));
+            Assert.That(skills[0].ClassSkill, Is.False);
+
+            Assert.That(skills[1].Name, Is.EqualTo(skillSelection.SkillName));
+            Assert.That(skills[1].Focus, Is.EqualTo("third random"));
+            Assert.That(skills[1].ClassSkill, Is.False);
+
+            Assert.That(skills.Length, Is.EqualTo(2));
+        }
+
+        [Test]
+        public void GetSpecialistSkillWithMultipleRandomFoci()
+        {
+            AddSpecialistSkills(1);
+
+            var skillSelection = new SkillSelection();
+            skillSelection.BaseStatName = StatConstants.Intelligence;
+            skillSelection.SkillName = Guid.NewGuid().ToString();
+            skillSelection.RandomFociQuantity = 2;
+
+            mockSkillSelector.Setup(s => s.SelectFor(specialistSkills[0])).Returns(skillSelection);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, skillSelection.SkillName)).Returns(new[] { "random", "other random", "third random" });
+
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats).ToArray();
+
+            Assert.That(skills[0].Name, Is.EqualTo(skillSelection.SkillName));
+            Assert.That(skills[0].Focus, Is.EqualTo("random"));
+            Assert.That(skills[0].ClassSkill, Is.True);
+
+            Assert.That(skills[1].Name, Is.EqualTo(skillSelection.SkillName));
+            Assert.That(skills[1].Focus, Is.EqualTo("third random"));
+            Assert.That(skills[1].ClassSkill, Is.True);
+
+            Assert.That(skills.Length, Is.EqualTo(2));
+        }
+
+        [Test]
+        public void DoNotRepeatFociForClassSkill()
+        {
+            AddClassSkills(1);
+
+            var skillSelection = new SkillSelection();
+            skillSelection.BaseStatName = StatConstants.Intelligence;
+            skillSelection.SkillName = Guid.NewGuid().ToString();
+            skillSelection.RandomFociQuantity = 2;
+
+            mockSkillSelector.Setup(s => s.SelectFor(classSkills[0])).Returns(skillSelection);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, skillSelection.SkillName)).Returns(new[] { "random", "other random", "third random" });
+
+            var index = 0;
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<string>>())).Returns((IEnumerable<string> ss) => ss.ElementAt((index++ / 2) % ss.Count()));
+
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats).ToArray();
+
+            Assert.That(skills[0].Name, Is.EqualTo(skillSelection.SkillName));
+            Assert.That(skills[0].Focus, Is.EqualTo("random"));
+            Assert.That(skills[0].ClassSkill, Is.True);
+
+            Assert.That(skills[1].Name, Is.EqualTo(skillSelection.SkillName));
+            Assert.That(skills[1].Focus, Is.EqualTo("other random"));
+            Assert.That(skills[1].ClassSkill, Is.True);
+
+            Assert.That(skills.Length, Is.EqualTo(2));
+        }
+
+        [Test]
+        public void DoNotRepeatFociForCrossClassSkill()
+        {
+            AddCrossClassSkills(1);
+
+            var skillSelection = new SkillSelection();
+            skillSelection.BaseStatName = StatConstants.Intelligence;
+            skillSelection.SkillName = Guid.NewGuid().ToString();
+            skillSelection.RandomFociQuantity = 2;
+
+            mockSkillSelector.Setup(s => s.SelectFor(crossClassSkills[0])).Returns(skillSelection);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, skillSelection.SkillName)).Returns(new[] { "random", "other random", "third random" });
+
+            var index = 0;
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<string>>())).Returns((IEnumerable<string> ss) => ss.ElementAt((index++ / 2) % ss.Count()));
+
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats).ToArray();
+
+            Assert.That(skills[0].Name, Is.EqualTo(skillSelection.SkillName));
+            Assert.That(skills[0].Focus, Is.EqualTo("random"));
+            Assert.That(skills[0].ClassSkill, Is.False);
+
+            Assert.That(skills[1].Name, Is.EqualTo(skillSelection.SkillName));
+            Assert.That(skills[1].Focus, Is.EqualTo("other random"));
+            Assert.That(skills[1].ClassSkill, Is.False);
+
+            Assert.That(skills.Length, Is.EqualTo(2));
+        }
+
+        [Test]
+        public void DoNotRepeatFociForSpecialistSkill()
+        {
+            AddSpecialistSkills(1);
+
+            var skillSelection = new SkillSelection();
+            skillSelection.BaseStatName = StatConstants.Intelligence;
+            skillSelection.SkillName = Guid.NewGuid().ToString();
+            skillSelection.RandomFociQuantity = 2;
+
+            mockSkillSelector.Setup(s => s.SelectFor(specialistSkills[0])).Returns(skillSelection);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, skillSelection.SkillName)).Returns(new[] { "random", "other random", "third random" });
+
+            var index = 0;
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<string>>())).Returns((IEnumerable<string> ss) => ss.ElementAt((index++ / 2) % ss.Count()));
+
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats).ToArray();
+
+            Assert.That(skills[0].Name, Is.EqualTo(skillSelection.SkillName));
+            Assert.That(skills[0].Focus, Is.EqualTo("random"));
+            Assert.That(skills[0].ClassSkill, Is.True);
+
+            Assert.That(skills[1].Name, Is.EqualTo(skillSelection.SkillName));
+            Assert.That(skills[1].Focus, Is.EqualTo("other random"));
+            Assert.That(skills[1].ClassSkill, Is.True);
+
+            Assert.That(skills.Length, Is.EqualTo(2));
+        }
+
+        [Test]
+        public void GetClassSkillWithAllFoci()
+        {
+            AddClassSkills(1);
+
+            var skillSelection = new SkillSelection();
+            skillSelection.BaseStatName = StatConstants.Intelligence;
+            skillSelection.SkillName = Guid.NewGuid().ToString();
+            skillSelection.RandomFociQuantity = SkillConstants.Foci.QuantityOfAll;
+
+            mockSkillSelector.Setup(s => s.SelectFor(classSkills[0])).Returns(skillSelection);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, skillSelection.SkillName)).Returns(new[] { "random", "other random", "third random" });
+
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats).ToArray();
+
+            Assert.That(skills[0].Name, Is.EqualTo(skillSelection.SkillName));
+            Assert.That(skills[0].Focus, Is.EqualTo("random"));
+            Assert.That(skills[0].ClassSkill, Is.True);
+
+            Assert.That(skills[1].Name, Is.EqualTo(skillSelection.SkillName));
+            Assert.That(skills[1].Focus, Is.EqualTo("other random"));
+            Assert.That(skills[1].ClassSkill, Is.True);
+
+            Assert.That(skills[2].Name, Is.EqualTo(skillSelection.SkillName));
+            Assert.That(skills[2].Focus, Is.EqualTo("third random"));
+            Assert.That(skills[2].ClassSkill, Is.True);
+
+            Assert.That(skills.Length, Is.EqualTo(3));
+        }
+
+        [Test]
+        public void GetCrossClassSkillWithAllFoci()
+        {
+            AddCrossClassSkills(1);
+
+            var skillSelection = new SkillSelection();
+            skillSelection.BaseStatName = StatConstants.Intelligence;
+            skillSelection.SkillName = Guid.NewGuid().ToString();
+            skillSelection.RandomFociQuantity = SkillConstants.Foci.QuantityOfAll;
+
+            mockSkillSelector.Setup(s => s.SelectFor(crossClassSkills[0])).Returns(skillSelection);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, skillSelection.SkillName)).Returns(new[] { "random", "other random", "third random" });
+
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats).ToArray();
+
+            Assert.That(skills[0].Name, Is.EqualTo(skillSelection.SkillName));
+            Assert.That(skills[0].Focus, Is.EqualTo("random"));
+            Assert.That(skills[0].ClassSkill, Is.False);
+
+            Assert.That(skills[1].Name, Is.EqualTo(skillSelection.SkillName));
+            Assert.That(skills[1].Focus, Is.EqualTo("other random"));
+            Assert.That(skills[1].ClassSkill, Is.False);
+
+            Assert.That(skills[2].Name, Is.EqualTo(skillSelection.SkillName));
+            Assert.That(skills[2].Focus, Is.EqualTo("third random"));
+            Assert.That(skills[2].ClassSkill, Is.False);
+
+            Assert.That(skills.Length, Is.EqualTo(3));
+        }
+
+        [Test]
+        public void GetSpecialistSkillWithAllFoci()
+        {
+            AddSpecialistSkills(1);
+
+            var skillSelection = new SkillSelection();
+            skillSelection.BaseStatName = StatConstants.Intelligence;
+            skillSelection.SkillName = Guid.NewGuid().ToString();
+            skillSelection.RandomFociQuantity = SkillConstants.Foci.QuantityOfAll;
+
+            mockSkillSelector.Setup(s => s.SelectFor(specialistSkills[0])).Returns(skillSelection);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, skillSelection.SkillName)).Returns(new[] { "random", "other random", "third random" });
+
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats).ToArray();
+
+            Assert.That(skills[0].Name, Is.EqualTo(skillSelection.SkillName));
+            Assert.That(skills[0].Focus, Is.EqualTo("random"));
+            Assert.That(skills[0].ClassSkill, Is.True);
+
+            Assert.That(skills[1].Name, Is.EqualTo(skillSelection.SkillName));
+            Assert.That(skills[1].Focus, Is.EqualTo("other random"));
+            Assert.That(skills[1].ClassSkill, Is.True);
+
+            Assert.That(skills[2].Name, Is.EqualTo(skillSelection.SkillName));
+            Assert.That(skills[2].Focus, Is.EqualTo("third random"));
+            Assert.That(skills[2].ClassSkill, Is.True);
+
+            Assert.That(skills.Length, Is.EqualTo(3));
         }
 
         [Test]
@@ -305,21 +693,48 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
             characterClass.Level = 2;
             AddClassSkills(2);
 
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
-                .Returns(false);
-            mockCollectionsSelector.SetupSequence(s => s.SelectRandomFrom(It.Is<IEnumerable<string>>(ss => ss.Count() == 2)))
-                .Returns(classSkills[1])
-                .Returns(classSkills[0])
-                .Returns(classSkills[0])
-                .Returns(classSkills[1])
-                .Returns(classSkills[1]);
+            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(false);
 
-            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats).ToArray();
 
-            Assert.That(skills["class skill 1"].Ranks, Is.EqualTo(3));
-            Assert.That(skills["class skill 2"].Ranks, Is.EqualTo(2));
-            Assert.That(skills["class skill 1"].EffectiveRanks, Is.EqualTo(3));
-            Assert.That(skills["class skill 2"].EffectiveRanks, Is.EqualTo(2));
+            Assert.That(skills[1].Name, Is.EqualTo("class skill 1"));
+            Assert.That(skills[0].Name, Is.EqualTo("class skill 2"));
+            Assert.That(skills[1].Ranks, Is.EqualTo(2));
+            Assert.That(skills[0].Ranks, Is.EqualTo(3));
+            Assert.That(skills[1].EffectiveRanks, Is.EqualTo(2));
+            Assert.That(skills[0].EffectiveRanks, Is.EqualTo(3));
+        }
+
+        [Test]
+        public void AssignSkillPointsRandomlyAmongClassSkillsWithFoci()
+        {
+            classSkillPoints = 1;
+            characterClass.Level = 2;
+            classSkills.Add($"class skill/focus");
+            classSkills.Add($"class skill/other focus");
+            classSkills.Add($"other class skill");
+
+            mockSkillSelector.Setup(s => s.SelectFor("class skill/focus")).Returns(new SkillSelection { SkillName = "class skill", BaseStatName = StatConstants.Intelligence, Focus = "focus" });
+            mockSkillSelector.Setup(s => s.SelectFor("class skill/other focus")).Returns(new SkillSelection { SkillName = "class skill", BaseStatName = StatConstants.Intelligence, Focus = "other focus" });
+
+            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(false);
+
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats).ToArray();
+
+            Assert.That(skills[0].Name, Is.EqualTo("class skill"));
+            Assert.That(skills[0].Focus, Is.EqualTo("focus"));
+            Assert.That(skills[0].Ranks, Is.EqualTo(2));
+            Assert.That(skills[0].EffectiveRanks, Is.EqualTo(2));
+
+            Assert.That(skills[1].Name, Is.EqualTo("class skill"));
+            Assert.That(skills[1].Focus, Is.EqualTo("other focus"));
+            Assert.That(skills[1].Ranks, Is.EqualTo(2));
+            Assert.That(skills[1].EffectiveRanks, Is.EqualTo(2));
+
+            Assert.That(skills[2].Name, Is.EqualTo("other class skill"));
+            Assert.That(skills[2].Focus, Is.Empty);
+            Assert.That(skills[2].Ranks, Is.EqualTo(1));
+            Assert.That(skills[2].EffectiveRanks, Is.EqualTo(1));
         }
 
         [Test]
@@ -331,19 +746,48 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
 
             mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
                 .Returns(true);
-            mockCollectionsSelector.SetupSequence(s => s.SelectRandomFrom(It.Is<IEnumerable<string>>(ss => ss.Count() == 2)))
-                .Returns(crossClassSkills[1])
-                .Returns(crossClassSkills[0])
-                .Returns(crossClassSkills[0])
-                .Returns(crossClassSkills[1])
-                .Returns(crossClassSkills[1]);
 
-            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats).ToArray();
 
-            Assert.That(skills["cross-class skill 1"].Ranks, Is.EqualTo(3));
-            Assert.That(skills["cross-class skill 2"].Ranks, Is.EqualTo(2));
-            Assert.That(skills["cross-class skill 1"].EffectiveRanks, Is.EqualTo(1.5));
-            Assert.That(skills["cross-class skill 2"].EffectiveRanks, Is.EqualTo(1));
+            Assert.That(skills[0].Name, Is.EqualTo("cross-class skill 2"));
+            Assert.That(skills[0].Ranks, Is.EqualTo(3));
+            Assert.That(skills[0].EffectiveRanks, Is.EqualTo(1.5));
+
+            Assert.That(skills[1].Name, Is.EqualTo("cross-class skill 1"));
+            Assert.That(skills[1].Ranks, Is.EqualTo(2));
+            Assert.That(skills[1].EffectiveRanks, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void AssignSkillPointsRandomlyAmongCrossClassSkillsWithFoci()
+        {
+            classSkillPoints = 1;
+            characterClass.Level = 2;
+            crossClassSkills.Add($"cross-class skill/focus");
+            crossClassSkills.Add($"cross-class skill/other focus");
+            crossClassSkills.Add($"other cross-class skill");
+
+            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(true);
+
+            mockSkillSelector.Setup(s => s.SelectFor("cross-class skill/focus")).Returns(new SkillSelection { SkillName = "cross-class skill", BaseStatName = StatConstants.Intelligence, Focus = "focus" });
+            mockSkillSelector.Setup(s => s.SelectFor("cross-class skill/other focus")).Returns(new SkillSelection { SkillName = "cross-class skill", BaseStatName = StatConstants.Intelligence, Focus = "other focus" });
+
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats).ToArray();
+
+            Assert.That(skills[0].Name, Is.EqualTo("cross-class skill"));
+            Assert.That(skills[0].Focus, Is.EqualTo("focus"));
+            Assert.That(skills[0].Ranks, Is.EqualTo(2));
+            Assert.That(skills[0].EffectiveRanks, Is.EqualTo(1));
+
+            Assert.That(skills[1].Name, Is.EqualTo("cross-class skill"));
+            Assert.That(skills[1].Focus, Is.EqualTo("other focus"));
+            Assert.That(skills[1].Ranks, Is.EqualTo(2));
+            Assert.That(skills[1].EffectiveRanks, Is.EqualTo(1));
+
+            Assert.That(skills[2].Name, Is.EqualTo("other cross-class skill"));
+            Assert.That(skills[2].Focus, Is.Empty);
+            Assert.That(skills[2].Ranks, Is.EqualTo(1));
+            Assert.That(skills[2].EffectiveRanks, Is.EqualTo(.5));
         }
 
         [Test]
@@ -356,10 +800,13 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
             classSkills.Add("class skill");
             crossClassSkills.Add("cross-class skill");
 
-            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats).ToArray();
 
-            Assert.That(skills["class skill"].Ranks, Is.EqualTo(8));
-            Assert.That(skills["cross-class skill"].Ranks, Is.EqualTo(0));
+            Assert.That(skills[0].Name, Is.EqualTo("class skill"));
+            Assert.That(skills[0].Ranks, Is.EqualTo(8));
+
+            Assert.That(skills[1].Name, Is.EqualTo("cross-class skill"));
+            Assert.That(skills[1].Ranks, Is.EqualTo(0));
         }
 
         [Test]
@@ -372,10 +819,13 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
             classSkills.Add("class skill");
             crossClassSkills.Add("cross-class skill");
 
-            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats).ToArray();
 
-            Assert.That(skills["class skill"].Ranks, Is.EqualTo(0));
-            Assert.That(skills["cross-class skill"].Ranks, Is.EqualTo(8));
+            Assert.That(skills[0].Name, Is.EqualTo("class skill"));
+            Assert.That(skills[0].Ranks, Is.EqualTo(0));
+
+            Assert.That(skills[1].Name, Is.EqualTo("cross-class skill"));
+            Assert.That(skills[1].Ranks, Is.EqualTo(8));
         }
 
         [Test]
@@ -390,10 +840,13 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
             classSkills.Add("class skill");
             crossClassSkills.Add("cross-class skill");
 
-            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats).ToArray();
 
-            Assert.That(skills["class skill"].Ranks, Is.EqualTo(3));
-            Assert.That(skills["cross-class skill"].Ranks, Is.EqualTo(2));
+            Assert.That(skills[0].Name, Is.EqualTo("class skill"));
+            Assert.That(skills[0].Ranks, Is.EqualTo(3));
+
+            Assert.That(skills[1].Name, Is.EqualTo("cross-class skill"));
+            Assert.That(skills[1].Ranks, Is.EqualTo(2));
         }
 
         [Test]
@@ -402,25 +855,21 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
             classSkillPoints = 2;
             AddClassSkills(3);
 
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
-                .Returns(false);
+            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(false);
+            var index = 0;
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.Is<IEnumerable<SkillSelection>>(ss => ss.Count() == 3))).Returns((IEnumerable<SkillSelection> ss) => ss.ElementAt(index++ % 4 % 3));
 
-            var sequence = mockCollectionsSelector.SetupSequence(s => s.SelectRandomFrom(It.Is<IEnumerable<string>>(ss => ss.Count() == 3)));
-            for (var count = 6; count > 0; count--)
-                sequence = sequence.Returns(classSkills[0])
-                    .Returns(classSkills[1])
-                    .Returns(classSkills[0])
-                    .Returns(classSkills[2])
-                    .Returns(classSkills[0]);
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats).ToArray();
 
-            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
-
-            Assert.That(skills[classSkills[0]].Ranks, Is.EqualTo(8));
-            Assert.That(skills[classSkills[0]].RankCap, Is.EqualTo(8));
-            Assert.That(skills[classSkills[1]].Ranks, Is.EqualTo(6));
-            Assert.That(skills[classSkills[1]].RankCap, Is.EqualTo(8));
-            Assert.That(skills[classSkills[2]].Ranks, Is.EqualTo(2));
-            Assert.That(skills[classSkills[2]].RankCap, Is.EqualTo(8));
+            Assert.That(skills[0].Name, Is.EqualTo(classSkills[0]));
+            Assert.That(skills[1].Name, Is.EqualTo(classSkills[1]));
+            Assert.That(skills[2].Name, Is.EqualTo(classSkills[2]));
+            Assert.That(skills[0].Ranks, Is.EqualTo(8));
+            Assert.That(skills[1].Ranks, Is.EqualTo(4));
+            Assert.That(skills[2].Ranks, Is.EqualTo(4));
+            Assert.That(skills[0].RankCap, Is.EqualTo(8));
+            Assert.That(skills[1].RankCap, Is.EqualTo(8));
+            Assert.That(skills[2].RankCap, Is.EqualTo(8));
         }
 
         [Test]
@@ -429,25 +878,21 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
             classSkillPoints = 2;
             AddCrossClassSkills(3);
 
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
-                .Returns(true);
+            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(true);
+            var index = 0;
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.Is<IEnumerable<SkillSelection>>(ss => ss.Count() == 3))).Returns((IEnumerable<SkillSelection> ss) => ss.ElementAt(index++ % 4 % 3));
 
-            var sequence = mockCollectionsSelector.SetupSequence(s => s.SelectRandomFrom(It.Is<IEnumerable<string>>(ss => ss.Count() == 3)));
-            for (var count = 6; count > 0; count--)
-                sequence = sequence.Returns(crossClassSkills[0])
-                    .Returns(crossClassSkills[1])
-                    .Returns(crossClassSkills[0])
-                    .Returns(crossClassSkills[2])
-                    .Returns(crossClassSkills[0]);
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats).ToArray();
 
-            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
-
-            Assert.That(skills[crossClassSkills[0]].Ranks, Is.EqualTo(8));
-            Assert.That(skills[crossClassSkills[0]].RankCap, Is.EqualTo(8));
-            Assert.That(skills[crossClassSkills[1]].Ranks, Is.EqualTo(6));
-            Assert.That(skills[crossClassSkills[1]].RankCap, Is.EqualTo(8));
-            Assert.That(skills[crossClassSkills[2]].Ranks, Is.EqualTo(2));
-            Assert.That(skills[crossClassSkills[2]].RankCap, Is.EqualTo(8));
+            Assert.That(skills[0].Name, Is.EqualTo(crossClassSkills[0]));
+            Assert.That(skills[1].Name, Is.EqualTo(crossClassSkills[1]));
+            Assert.That(skills[2].Name, Is.EqualTo(crossClassSkills[2]));
+            Assert.That(skills[0].Ranks, Is.EqualTo(8));
+            Assert.That(skills[1].Ranks, Is.EqualTo(4));
+            Assert.That(skills[2].Ranks, Is.EqualTo(4));
+            Assert.That(skills[0].RankCap, Is.EqualTo(8));
+            Assert.That(skills[1].RankCap, Is.EqualTo(8));
+            Assert.That(skills[2].RankCap, Is.EqualTo(8));
         }
 
         [Test]
@@ -459,8 +904,8 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
 
-            Assert.That(skills["skill 1"].Ranks, Is.EqualTo(characterClass.Level + 3));
-            Assert.That(skills["skill 2"].Ranks, Is.EqualTo(characterClass.Level + 3));
+            Assert.That(skills.Single(s => s.Name == "skill 1").Ranks, Is.EqualTo(characterClass.Level + 3));
+            Assert.That(skills.Single(s => s.Name == "skill 2").Ranks, Is.EqualTo(characterClass.Level + 3));
         }
 
         [Test]
@@ -485,52 +930,171 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
             classSkills.Add("synergy 5");
             classSkills.Add("synergy 6");
 
-            var sequence = mockBooleanPercentileSelector.SetupSequence(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill));
-            for (var count = 0; count < 11; count++)
-                sequence = sequence.Returns(false);
-            for (var count = 0; count < 21; count++)
-                sequence = sequence.Returns(true);
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats).ToArray();
 
-            var randomSequence = mockCollectionsSelector.SetupSequence(s => s.SelectRandomFrom(It.Is<IEnumerable<string>>(ss => ss.Count() == 8)))
-                .Returns(classSkills[0]);
+            Assert.That(skills[0].Name, Is.EqualTo("skill 1"));
+            Assert.That(skills[0].Ranks, Is.EqualTo(4));
+            Assert.That(skills[0].EffectiveRanks, Is.EqualTo(4));
+            Assert.That(skills[0].Bonus, Is.EqualTo(0));
 
-            for (var index = 0; index < 10; index++)
-                randomSequence = randomSequence.Returns(classSkills[index % 2]);
+            Assert.That(skills[1].Name, Is.EqualTo("skill 2"));
+            Assert.That(skills[1].Ranks, Is.EqualTo(0));
+            Assert.That(skills[1].EffectiveRanks, Is.EqualTo(0));
+            Assert.That(skills[1].Bonus, Is.EqualTo(0));
 
-            randomSequence = mockCollectionsSelector.SetupSequence(s => s.SelectRandomFrom(It.Is<IEnumerable<string>>(ss => ss.Count() == 2)))
-                .Returns(crossClassSkills[0]);
+            Assert.That(skills[2].Name, Is.EqualTo("synergy 1"));
+            Assert.That(skills[2].Ranks, Is.EqualTo(4));
+            Assert.That(skills[2].EffectiveRanks, Is.EqualTo(4));
+            Assert.That(skills[2].Bonus, Is.EqualTo(0));
 
-            for (var index = 0; index < 20; index++)
-                randomSequence = randomSequence.Returns(crossClassSkills[index % 2]);
+            Assert.That(skills[3].Name, Is.EqualTo("synergy 2"));
+            Assert.That(skills[3].Ranks, Is.EqualTo(0));
+            Assert.That(skills[3].EffectiveRanks, Is.EqualTo(0));
+            Assert.That(skills[3].Bonus, Is.EqualTo(0));
 
-            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
+            Assert.That(skills[4].Name, Is.EqualTo("synergy 3"));
+            Assert.That(skills[4].Ranks, Is.EqualTo(4));
+            Assert.That(skills[4].EffectiveRanks, Is.EqualTo(4));
+            Assert.That(skills[4].Bonus, Is.EqualTo(0));
 
-            Assert.That(skills["skill 1"].Ranks, Is.EqualTo(6));
-            Assert.That(skills["skill 2"].Ranks, Is.EqualTo(5));
-            Assert.That(skills["skill 3"].Ranks, Is.EqualTo(11));
-            Assert.That(skills["skill 4"].Ranks, Is.EqualTo(10));
-            Assert.That(skills["synergy 1"].Ranks, Is.EqualTo(0));
-            Assert.That(skills["synergy 2"].Ranks, Is.EqualTo(0));
-            Assert.That(skills["synergy 3"].Ranks, Is.EqualTo(0));
-            Assert.That(skills["synergy 4"].Ranks, Is.EqualTo(0));
-            Assert.That(skills["skill 1"].EffectiveRanks, Is.EqualTo(6));
-            Assert.That(skills["skill 2"].EffectiveRanks, Is.EqualTo(5));
-            Assert.That(skills["skill 3"].EffectiveRanks, Is.EqualTo(5.5));
-            Assert.That(skills["skill 4"].EffectiveRanks, Is.EqualTo(5));
-            Assert.That(skills["synergy 1"].EffectiveRanks, Is.EqualTo(0));
-            Assert.That(skills["synergy 2"].EffectiveRanks, Is.EqualTo(0));
-            Assert.That(skills["synergy 3"].EffectiveRanks, Is.EqualTo(0));
-            Assert.That(skills["synergy 4"].EffectiveRanks, Is.EqualTo(0));
-            Assert.That(skills["skill 1"].Bonus, Is.EqualTo(0));
-            Assert.That(skills["skill 2"].Bonus, Is.EqualTo(0));
-            Assert.That(skills["skill 3"].Bonus, Is.EqualTo(0));
-            Assert.That(skills["skill 4"].Bonus, Is.EqualTo(0));
-            Assert.That(skills["synergy 1"].Bonus, Is.EqualTo(2));
-            Assert.That(skills["synergy 2"].Bonus, Is.EqualTo(2));
-            Assert.That(skills["synergy 3"].Bonus, Is.EqualTo(2));
-            Assert.That(skills["synergy 4"].Bonus, Is.EqualTo(2));
-            Assert.That(skills["synergy 5"].Bonus, Is.EqualTo(2));
-            Assert.That(skills["synergy 6"].Bonus, Is.EqualTo(0));
+            Assert.That(skills[5].Name, Is.EqualTo("synergy 4"));
+            Assert.That(skills[5].Ranks, Is.EqualTo(0));
+            Assert.That(skills[5].EffectiveRanks, Is.EqualTo(0));
+            Assert.That(skills[5].Bonus, Is.EqualTo(0));
+
+            Assert.That(skills[6].Name, Is.EqualTo("synergy 5"));
+            Assert.That(skills[6].Ranks, Is.EqualTo(4));
+            Assert.That(skills[6].EffectiveRanks, Is.EqualTo(4));
+            Assert.That(skills[6].Bonus, Is.EqualTo(2));
+
+            Assert.That(skills[7].Name, Is.EqualTo("synergy 6"));
+            Assert.That(skills[7].Ranks, Is.EqualTo(0));
+            Assert.That(skills[7].EffectiveRanks, Is.EqualTo(0));
+            Assert.That(skills[7].Bonus, Is.EqualTo(0));
+
+            Assert.That(skills[8].Name, Is.EqualTo("skill 3"));
+            Assert.That(skills[8].Ranks, Is.EqualTo(0));
+            Assert.That(skills[8].EffectiveRanks, Is.EqualTo(0));
+            Assert.That(skills[8].Bonus, Is.EqualTo(0));
+
+            Assert.That(skills[9].Name, Is.EqualTo("skill 4"));
+            Assert.That(skills[9].Ranks, Is.EqualTo(16));
+            Assert.That(skills[9].EffectiveRanks, Is.EqualTo(8));
+            Assert.That(skills[9].Bonus, Is.EqualTo(0));
+        }
+
+        [Test]
+        public void ApplySkillSynergyWithFociIfSufficientRanks()
+        {
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillSynergy, "skill 1")).Returns(new[] { "synergy 1", "synergy 2/focus" });
+
+            classSkillPoints = 2;
+            characterClass.Level = 13;
+
+            classSkills.Add("skill 1");
+            classSkills.Add("skill 2");
+            classSkills.Add("skill 3");
+            classSkills.Add("skill 4");
+            classSkills.Add("synergy 1");
+            classSkills.Add("synergy 3");
+
+            mockSkillSelector.Setup(s => s.SelectFor("skill 2")).Returns(new SkillSelection { SkillName = "synergy 2", BaseStatName = StatConstants.Intelligence, Focus = "focus" });
+            mockSkillSelector.Setup(s => s.SelectFor("skill 3")).Returns(new SkillSelection { SkillName = "synergy 2", BaseStatName = StatConstants.Intelligence, Focus = "other focus" });
+            mockSkillSelector.Setup(s => s.SelectFor("synergy 2/focus")).Returns(new SkillSelection { SkillName = "synergy 2", BaseStatName = StatConstants.Intelligence, Focus = "focus" });
+
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats).ToArray();
+
+            Assert.That(skills[0].Name, Is.EqualTo("skill 1"));
+            Assert.That(skills[0].Focus, Is.Empty);
+            Assert.That(skills[0].Ranks, Is.EqualTo(6));
+            Assert.That(skills[0].EffectiveRanks, Is.EqualTo(6));
+            Assert.That(skills[0].Bonus, Is.EqualTo(0));
+
+            Assert.That(skills[1].Name, Is.EqualTo("synergy 2"));
+            Assert.That(skills[1].Focus, Is.EqualTo("focus"));
+            Assert.That(skills[1].Ranks, Is.EqualTo(6));
+            Assert.That(skills[1].EffectiveRanks, Is.EqualTo(6));
+            Assert.That(skills[1].Bonus, Is.EqualTo(2));
+
+            Assert.That(skills[2].Name, Is.EqualTo("synergy 2"));
+            Assert.That(skills[2].Focus, Is.EqualTo("other focus"));
+            Assert.That(skills[2].Ranks, Is.EqualTo(5));
+            Assert.That(skills[2].EffectiveRanks, Is.EqualTo(5));
+            Assert.That(skills[2].Bonus, Is.EqualTo(0));
+
+            Assert.That(skills[3].Name, Is.EqualTo("skill 4"));
+            Assert.That(skills[3].Focus, Is.Empty);
+            Assert.That(skills[3].Ranks, Is.EqualTo(5));
+            Assert.That(skills[3].EffectiveRanks, Is.EqualTo(5));
+            Assert.That(skills[3].Bonus, Is.EqualTo(0));
+
+            Assert.That(skills[4].Name, Is.EqualTo("synergy 1"));
+            Assert.That(skills[4].Focus, Is.Empty);
+            Assert.That(skills[4].Ranks, Is.EqualTo(5));
+            Assert.That(skills[4].EffectiveRanks, Is.EqualTo(5));
+            Assert.That(skills[4].Bonus, Is.EqualTo(2));
+
+            Assert.That(skills[5].Name, Is.EqualTo("synergy 3"));
+            Assert.That(skills[5].Focus, Is.Empty);
+            Assert.That(skills[5].Ranks, Is.EqualTo(5));
+            Assert.That(skills[5].EffectiveRanks, Is.EqualTo(5));
+            Assert.That(skills[5].Bonus, Is.EqualTo(0));
+        }
+
+        [Test]
+        public void ApplySkillSynergyIfSufficientRanksWithFoci()
+        {
+            classSkillPoints = 2;
+            characterClass.Level = 13;
+
+            classSkills.Add("skill 1");
+            classSkills.Add("skill 2");
+            classSkills.Add("skill 3");
+            classSkills.Add("skill 4");
+            classSkills.Add("synergy 1");
+            classSkills.Add("synergy 2");
+
+            mockSkillSelector.Setup(s => s.SelectFor("skill 1")).Returns(new SkillSelection { SkillName = "skill 1", BaseStatName = StatConstants.Intelligence, Focus = "focus" });
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillSynergy, "skill 1/focus")).Returns(new[] { "synergy 1", "synergy 2" });
+
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats).ToArray();
+
+            Assert.That(skills[0].Name, Is.EqualTo("skill 1"));
+            Assert.That(skills[0].Focus, Is.EqualTo("focus"));
+            Assert.That(skills[0].Ranks, Is.EqualTo(6));
+            Assert.That(skills[0].EffectiveRanks, Is.EqualTo(6));
+            Assert.That(skills[0].Bonus, Is.EqualTo(0));
+
+            Assert.That(skills[1].Name, Is.EqualTo("skill 2"));
+            Assert.That(skills[1].Focus, Is.Empty);
+            Assert.That(skills[1].Ranks, Is.EqualTo(6));
+            Assert.That(skills[1].EffectiveRanks, Is.EqualTo(6));
+            Assert.That(skills[1].Bonus, Is.EqualTo(0));
+
+            Assert.That(skills[2].Name, Is.EqualTo("skill 3"));
+            Assert.That(skills[2].Focus, Is.Empty);
+            Assert.That(skills[2].Ranks, Is.EqualTo(5));
+            Assert.That(skills[2].EffectiveRanks, Is.EqualTo(5));
+            Assert.That(skills[2].Bonus, Is.EqualTo(0));
+
+            Assert.That(skills[3].Name, Is.EqualTo("skill 4"));
+            Assert.That(skills[3].Focus, Is.Empty);
+            Assert.That(skills[3].Ranks, Is.EqualTo(5));
+            Assert.That(skills[3].EffectiveRanks, Is.EqualTo(5));
+            Assert.That(skills[3].Bonus, Is.EqualTo(0));
+
+            Assert.That(skills[4].Name, Is.EqualTo("synergy 1"));
+            Assert.That(skills[4].Focus, Is.Empty);
+            Assert.That(skills[4].Ranks, Is.EqualTo(5));
+            Assert.That(skills[4].EffectiveRanks, Is.EqualTo(5));
+            Assert.That(skills[4].Bonus, Is.EqualTo(2));
+
+            Assert.That(skills[5].Name, Is.EqualTo("synergy 2"));
+            Assert.That(skills[5].Focus, Is.Empty);
+            Assert.That(skills[5].Ranks, Is.EqualTo(5));
+            Assert.That(skills[5].EffectiveRanks, Is.EqualTo(5));
+            Assert.That(skills[5].Bonus, Is.EqualTo(2));
         }
 
         [Test]
@@ -539,34 +1103,34 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillSynergy, "skill 1")).Returns(new[] { "synergy 1", "synergy 2" });
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillSynergy, "skill 2")).Returns(new[] { "synergy 1" });
 
-            classSkillPoints = 2;
+            classSkillPoints = 4;
             characterClass.Level = 2;
             classSkills.Add("skill 1");
             classSkills.Add("skill 2");
             classSkills.Add("synergy 1");
             classSkills.Add("synergy 2");
 
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
-                .Returns(false);
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats).ToArray();
 
-            var randomSequence = mockCollectionsSelector.SetupSequence(s => s.SelectRandomFrom(It.Is<IEnumerable<string>>(ss => ss.Count() == 4)));
+            Assert.That(skills[0].Name, Is.EqualTo("skill 1"));
+            Assert.That(skills[0].Ranks, Is.EqualTo(5));
+            Assert.That(skills[0].EffectiveRanks, Is.EqualTo(5));
+            Assert.That(skills[0].Bonus, Is.EqualTo(0));
 
-            for (var index = 0; index < 5; index++)
-                randomSequence = randomSequence.Returns(classSkills[1]).Returns(classSkills[0]);
+            Assert.That(skills[1].Name, Is.EqualTo("skill 2"));
+            Assert.That(skills[1].Ranks, Is.EqualTo(5));
+            Assert.That(skills[1].EffectiveRanks, Is.EqualTo(5));
+            Assert.That(skills[1].Bonus, Is.EqualTo(0));
 
-            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
-            Assert.That(skills["skill 1"].Ranks, Is.EqualTo(5));
-            Assert.That(skills["skill 2"].Ranks, Is.EqualTo(5));
-            Assert.That(skills["synergy 1"].Ranks, Is.EqualTo(0));
-            Assert.That(skills["synergy 2"].Ranks, Is.EqualTo(0));
-            Assert.That(skills["skill 1"].EffectiveRanks, Is.EqualTo(5));
-            Assert.That(skills["skill 2"].EffectiveRanks, Is.EqualTo(5));
-            Assert.That(skills["synergy 1"].EffectiveRanks, Is.EqualTo(0));
-            Assert.That(skills["synergy 2"].EffectiveRanks, Is.EqualTo(0));
-            Assert.That(skills["skill 1"].Bonus, Is.EqualTo(0));
-            Assert.That(skills["skill 2"].Bonus, Is.EqualTo(0));
-            Assert.That(skills["synergy 1"].Bonus, Is.EqualTo(4));
-            Assert.That(skills["synergy 2"].Bonus, Is.EqualTo(2));
+            Assert.That(skills[2].Name, Is.EqualTo("synergy 1"));
+            Assert.That(skills[2].Ranks, Is.EqualTo(5));
+            Assert.That(skills[2].EffectiveRanks, Is.EqualTo(5));
+            Assert.That(skills[2].Bonus, Is.EqualTo(4));
+
+            Assert.That(skills[3].Name, Is.EqualTo("synergy 2"));
+            Assert.That(skills[3].Ranks, Is.EqualTo(5));
+            Assert.That(skills[3].EffectiveRanks, Is.EqualTo(5));
+            Assert.That(skills[3].Bonus, Is.EqualTo(2));
         }
 
         [Test]
@@ -582,26 +1146,66 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
             classSkills.Add("skill 2");
             classSkills.Add("synergy 2");
 
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
-                .Returns(false);
+            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(false);
 
-            var randomSequence = mockCollectionsSelector.SetupSequence(s => s.SelectRandomFrom(It.Is<IEnumerable<string>>(ss => ss.Count() == 3)));
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats).ToArray();
 
-            for (var index = 0; index < 10; index++)
-                randomSequence = randomSequence.Returns(classSkills[index % 2]);
+            Assert.That(skills[0].Name, Is.EqualTo("skill 1"));
+            Assert.That(skills[0].Ranks, Is.EqualTo(4));
+            Assert.That(skills[0].EffectiveRanks, Is.EqualTo(4));
+            Assert.That(skills[0].Bonus, Is.EqualTo(0));
 
-            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
+            Assert.That(skills[1].Name, Is.EqualTo("skill 2"));
+            Assert.That(skills[1].Ranks, Is.EqualTo(3));
+            Assert.That(skills[1].EffectiveRanks, Is.EqualTo(3));
+            Assert.That(skills[1].Bonus, Is.EqualTo(0));
 
-            Assert.That(skills["skill 1"].Ranks, Is.EqualTo(5));
-            Assert.That(skills["skill 2"].Ranks, Is.EqualTo(5));
-            Assert.That(skills["synergy 2"].Ranks, Is.EqualTo(0));
-            Assert.That(skills["skill 1"].EffectiveRanks, Is.EqualTo(5));
-            Assert.That(skills["skill 2"].EffectiveRanks, Is.EqualTo(5));
-            Assert.That(skills["synergy 2"].EffectiveRanks, Is.EqualTo(0));
-            Assert.That(skills["skill 1"].Bonus, Is.EqualTo(0));
-            Assert.That(skills["skill 2"].Bonus, Is.EqualTo(0));
-            Assert.That(skills["synergy 2"].Bonus, Is.EqualTo(0));
-            Assert.That(skills.Keys, Is.All.Not.EqualTo("synergy 1"));
+            Assert.That(skills[2].Name, Is.EqualTo("synergy 2"));
+            Assert.That(skills[2].Ranks, Is.EqualTo(3));
+            Assert.That(skills[2].EffectiveRanks, Is.EqualTo(3));
+            Assert.That(skills[2].Bonus, Is.EqualTo(0));
+
+            Assert.That(skills.Length, Is.EqualTo(3));
+        }
+
+        [Test]
+        public void DoNotApplySkillSynergyIfThereIsNoSynergisticSkillWithCorrectFocus()
+        {
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillSynergy, "skill 1")).Returns(Enumerable.Empty<string>());
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillSynergy, "skill 2")).Returns(new[] { "synergy 1/focus" });
+
+            classSkillPoints = 2;
+            characterClass.Level = 2;
+
+            classSkills.Add("skill 1");
+            classSkills.Add("skill 2");
+            classSkills.Add("synergy 1/other focus");
+
+            mockSkillSelector.Setup(s => s.SelectFor("synergy 1/focus")).Returns(new SkillSelection { SkillName = "synergy 1", BaseStatName = StatConstants.Intelligence, Focus = "focus" });
+            mockSkillSelector.Setup(s => s.SelectFor("synergy 1/other focus")).Returns(new SkillSelection { SkillName = "synergy 1", BaseStatName = StatConstants.Intelligence, Focus = "other focus" });
+            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(false);
+
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats).ToArray();
+
+            Assert.That(skills[0].Name, Is.EqualTo("skill 1"));
+            Assert.That(skills[0].Focus, Is.Empty);
+            Assert.That(skills[0].Ranks, Is.EqualTo(4));
+            Assert.That(skills[0].EffectiveRanks, Is.EqualTo(4));
+            Assert.That(skills[0].Bonus, Is.EqualTo(0));
+
+            Assert.That(skills[1].Name, Is.EqualTo("skill 2"));
+            Assert.That(skills[1].Focus, Is.Empty);
+            Assert.That(skills[1].Ranks, Is.EqualTo(3));
+            Assert.That(skills[1].EffectiveRanks, Is.EqualTo(3));
+            Assert.That(skills[1].Bonus, Is.EqualTo(0));
+
+            Assert.That(skills[2].Name, Is.EqualTo("synergy 1"));
+            Assert.That(skills[2].Focus, Is.EqualTo("other focus"));
+            Assert.That(skills[2].Ranks, Is.EqualTo(3));
+            Assert.That(skills[2].EffectiveRanks, Is.EqualTo(3));
+            Assert.That(skills[2].Bonus, Is.EqualTo(0));
+
+            Assert.That(skills.Length, Is.EqualTo(3));
         }
 
         [Test]
@@ -621,44 +1225,37 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
             classSkills.Add("synergy 2");
             classSkills.Add("synergy 3");
 
-            var sequence = mockBooleanPercentileSelector.SetupSequence(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill));
-            for (var count = 0; count < 10; count++)
-                sequence = sequence.Returns(false);
-            for (var count = 0; count < 17; count++)
-                sequence = sequence.Returns(true);
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats).ToArray();
 
-            var randomSequence = mockCollectionsSelector.SetupSequence(s => s.SelectRandomFrom(It.Is<IEnumerable<string>>(ss => ss.Count() == 4)));
+            Assert.That(skills[0].Name, Is.EqualTo("skill 1"));
+            Assert.That(skills[0].Ranks, Is.EqualTo(7));
+            Assert.That(skills[0].EffectiveRanks, Is.EqualTo(7));
+            Assert.That(skills[0].Bonus, Is.EqualTo(0));
 
-            for (var index = 0; index < 4; index++)
-                randomSequence = randomSequence.Returns(classSkills[0]);
-            for (var index = 0; index < 6; index++)
-                randomSequence = randomSequence.Returns(classSkills[1]);
+            Assert.That(skills[1].Name, Is.EqualTo("synergy 1"));
+            Assert.That(skills[1].Ranks, Is.EqualTo(0));
+            Assert.That(skills[1].EffectiveRanks, Is.EqualTo(0));
+            Assert.That(skills[1].Bonus, Is.EqualTo(2));
 
-            randomSequence = mockCollectionsSelector.SetupSequence(s => s.SelectRandomFrom(It.Is<IEnumerable<string>>(ss => ss.Count() == 2)));
+            Assert.That(skills[2].Name, Is.EqualTo("synergy 2"));
+            Assert.That(skills[2].Ranks, Is.EqualTo(7));
+            Assert.That(skills[2].EffectiveRanks, Is.EqualTo(7));
+            Assert.That(skills[2].Bonus, Is.EqualTo(0));
 
-            for (var index = 0; index < 17; index++)
-                randomSequence = randomSequence.Returns(crossClassSkills[index % 2]);
+            Assert.That(skills[3].Name, Is.EqualTo("synergy 3"));
+            Assert.That(skills[3].Ranks, Is.EqualTo(0));
+            Assert.That(skills[3].EffectiveRanks, Is.EqualTo(0));
+            Assert.That(skills[3].Bonus, Is.EqualTo(0));
 
-            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
+            Assert.That(skills[4].Name, Is.EqualTo("skill 2"));
+            Assert.That(skills[4].Ranks, Is.EqualTo(4));
+            Assert.That(skills[4].EffectiveRanks, Is.EqualTo(2));
+            Assert.That(skills[4].Bonus, Is.EqualTo(0));
 
-            Assert.That(skills["skill 1"].Ranks, Is.EqualTo(4));
-            Assert.That(skills["skill 2"].Ranks, Is.EqualTo(9));
-            Assert.That(skills["skill 3"].Ranks, Is.EqualTo(8));
-            Assert.That(skills["synergy 1"].Ranks, Is.EqualTo(6));
-            Assert.That(skills["synergy 2"].Ranks, Is.EqualTo(0));
-            Assert.That(skills["synergy 3"].Ranks, Is.EqualTo(0));
-            Assert.That(skills["skill 1"].EffectiveRanks, Is.EqualTo(4));
-            Assert.That(skills["skill 2"].EffectiveRanks, Is.EqualTo(4.5));
-            Assert.That(skills["skill 3"].EffectiveRanks, Is.EqualTo(4));
-            Assert.That(skills["synergy 1"].EffectiveRanks, Is.EqualTo(6));
-            Assert.That(skills["synergy 2"].EffectiveRanks, Is.EqualTo(0));
-            Assert.That(skills["synergy 3"].EffectiveRanks, Is.EqualTo(0));
-            Assert.That(skills["skill 1"].Bonus, Is.EqualTo(0));
-            Assert.That(skills["skill 2"].Bonus, Is.EqualTo(0));
-            Assert.That(skills["skill 3"].Bonus, Is.EqualTo(0));
-            Assert.That(skills["synergy 1"].Bonus, Is.EqualTo(0));
-            Assert.That(skills["synergy 2"].Bonus, Is.EqualTo(0));
-            Assert.That(skills["synergy 3"].Bonus, Is.EqualTo(0));
+            Assert.That(skills[5].Name, Is.EqualTo("skill 3"));
+            Assert.That(skills[5].Ranks, Is.EqualTo(9));
+            Assert.That(skills[5].EffectiveRanks, Is.EqualTo(4.5));
+            Assert.That(skills[5].Bonus, Is.EqualTo(0));
         }
 
         [TestCase(1, 8)]
@@ -689,7 +1286,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
             race.BaseRace = RaceConstants.BaseRaces.Human;
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
-            var totalRanks = skills.Sum(kvp => kvp.Value.Ranks);
+            var totalRanks = skills.Sum(s => s.Ranks);
             Assert.That(totalRanks, Is.EqualTo(points));
         }
 
@@ -722,7 +1319,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
             AddClassSkills(5);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
-            var totalRanks = skills.Sum(kvp => kvp.Value.Ranks);
+            var totalRanks = skills.Sum(s => s.Ranks);
             Assert.That(totalRanks, Is.EqualTo(points));
         }
 
@@ -784,18 +1381,26 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
             mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
                 .Returns(true);
 
-            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
-            var totalRanks = skills.Sum(kvp => kvp.Value.Ranks);
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats).ToArray();
+            var totalRanks = skills.Sum(s => s.Ranks);
 
-            //INFO: Adding 8 to account for class skill points
+            //INFO: Adding 4 to account for class skill points
             Assert.That(totalRanks, Is.EqualTo(monsterPoints + 4));
-            Assert.That(skills[monsterClassSkills[0]].RankCap, Is.EqualTo(4 + hitDie));
-            Assert.That(skills[monsterClassSkills[1]].RankCap, Is.EqualTo(4 + hitDie));
-            Assert.That(skills["class skill 1"].RankCap, Is.EqualTo(4));
-            Assert.That(skills["class skill 2"].RankCap, Is.EqualTo(4));
 
-            foreach (var monsterSkill in monsterClassSkills.Skip(2))
-                Assert.That(skills[monsterSkill].RankCap, Is.EqualTo(hitDie + 3));
+            Assert.That(skills[0].Name, Is.EqualTo(classSkills[0]));
+            Assert.That(skills[0].RankCap, Is.EqualTo(4));
+
+            Assert.That(skills[1].Name, Is.EqualTo(classSkills[1]));
+            Assert.That(skills[1].RankCap, Is.EqualTo(4));
+
+            Assert.That(skills[2].Name, Is.EqualTo(monsterClassSkills[0]));
+            Assert.That(skills[2].RankCap, Is.EqualTo(4 + hitDie));
+
+            Assert.That(skills[3].Name, Is.EqualTo(monsterClassSkills[1]));
+            Assert.That(skills[3].RankCap, Is.EqualTo(4 + hitDie));
+
+            for (var i = 4; i < skills.Length; i++)
+                Assert.That(skills[i].RankCap, Is.EqualTo(hitDie + 3));
         }
 
         private void AddMonsterSkills(int quantity)
@@ -809,27 +1414,32 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
         [Test]
         public void OldMonsterSkillsHaveCapIncreased()
         {
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
-                .Returns(new[] { race.BaseRace, "other base race" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters)).Returns(new[] { race.BaseRace, "other base race" });
 
-            characterClass.Level = 20;
-            classSkillPoints = 0;
             racialSkillPoints = 2;
-            stats[StatConstants.Intelligence].Value = 10;
             monsterHitDice = 1;
-            AddClassSkills(1);
-            AddCrossClassSkills(1);
-            monsterClassSkills.AddRange(classSkills);
-            monsterClassSkills.AddRange(crossClassSkills);
+            AddClassSkills(2);
+            AddCrossClassSkills(2);
+            monsterClassSkills.Add(classSkills[0]);
+            monsterClassSkills.Add(crossClassSkills[0]);
+            AddMonsterSkills(1);
 
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
-                .Returns(true);
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats).ToArray();
 
-            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
-            Assert.That(skills["class skill 1"].Ranks, Is.EqualTo(8));
-            Assert.That(skills["class skill 1"].RankCap, Is.EqualTo(24));
-            Assert.That(skills["cross-class skill 1"].Ranks, Is.EqualTo(20));
-            Assert.That(skills["cross-class skill 1"].RankCap, Is.EqualTo(24));
+            Assert.That(skills[0].Name, Is.EqualTo(monsterClassSkills[0]));
+            Assert.That(skills[0].RankCap, Is.EqualTo(9));
+
+            Assert.That(skills[1].Name, Is.EqualTo(classSkills[1]));
+            Assert.That(skills[1].RankCap, Is.EqualTo(8));
+
+            Assert.That(skills[2].Name, Is.EqualTo(monsterClassSkills[1]));
+            Assert.That(skills[2].RankCap, Is.EqualTo(9));
+
+            Assert.That(skills[3].Name, Is.EqualTo(crossClassSkills[1]));
+            Assert.That(skills[3].RankCap, Is.EqualTo(8));
+
+            Assert.That(skills[4].Name, Is.EqualTo(monsterClassSkills[2]));
+            Assert.That(skills[4].RankCap, Is.EqualTo(4));
         }
 
         [TestCase(1, 12)]
@@ -870,18 +1480,26 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
             mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
                 .Returns(true);
 
-            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
-            var totalRanks = skills.Sum(kvp => kvp.Value.Ranks);
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats).ToArray();
+            var totalRanks = skills.Sum(s => s.Ranks);
 
             //INFO: Adding 8 to account for class skill points
             Assert.That(totalRanks, Is.EqualTo(monsterPoints + 8));
-            Assert.That(skills[monsterClassSkills[0]].RankCap, Is.EqualTo(4 + hitDie));
-            Assert.That(skills[monsterClassSkills[1]].RankCap, Is.EqualTo(4 + hitDie));
-            Assert.That(skills["class skill 1"].RankCap, Is.EqualTo(4));
-            Assert.That(skills["class skill 2"].RankCap, Is.EqualTo(4));
 
-            foreach (var monsterSkill in monsterClassSkills.Skip(2))
-                Assert.That(skills[monsterSkill].RankCap, Is.EqualTo(hitDie + 3));
+            Assert.That(skills[0].Name, Is.EqualTo(classSkills[0]));
+            Assert.That(skills[0].RankCap, Is.EqualTo(4));
+
+            Assert.That(skills[1].Name, Is.EqualTo(classSkills[1]));
+            Assert.That(skills[1].RankCap, Is.EqualTo(4));
+
+            Assert.That(skills[2].Name, Is.EqualTo(monsterClassSkills[0]));
+            Assert.That(skills[2].RankCap, Is.EqualTo(4 + hitDie));
+
+            Assert.That(skills[3].Name, Is.EqualTo(monsterClassSkills[1]));
+            Assert.That(skills[3].RankCap, Is.EqualTo(4 + hitDie));
+
+            for (var i = 4; i < skills.Length; i++)
+                Assert.That(skills[i].RankCap, Is.EqualTo(hitDie + 3));
         }
 
         [TestCase(1)]
@@ -917,7 +1535,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
             monsterHitDice = hitDie;
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
-            var totalRanks = skills.Values.Sum(v => v.Ranks);
+            var totalRanks = skills.Sum(s => s.Ranks);
 
             //INFO: Don't need to worry about class skill points, because we do not specify any class skills
             Assert.That(totalRanks, Is.EqualTo(hitDie));
@@ -951,7 +1569,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
             AddClassSkills(2);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
-            var totalRanks = skills.Values.Sum(v => v.Ranks);
+            var totalRanks = skills.Sum(s => s.Ranks);
             Assert.That(totalRanks, Is.EqualTo(level));
         }
 
@@ -970,17 +1588,173 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
                 .Returns(allSkills[3]).Returns(allSkills[1]);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
-            Assert.That(skills["skill 1"].ClassSkill, Is.True);
-            Assert.That(skills["skill 2"].ClassSkill, Is.True);
-            Assert.That(skills["skill 3"].ClassSkill, Is.True);
-            Assert.That(skills["skill 4"].ClassSkill, Is.True);
-            Assert.That(skills["skill 5"].ClassSkill, Is.True);
-            Assert.That(skills["skill 6"].ClassSkill, Is.True);
-            Assert.That(skills["skill 7"].ClassSkill, Is.True);
-            Assert.That(skills["skill 8"].ClassSkill, Is.True);
-            Assert.That(skills["skill 10"].ClassSkill, Is.True);
-            Assert.That(skills["skill 11"].ClassSkill, Is.True);
+            Assert.That(skills.Single(s => s.Name == "skill 1").ClassSkill, Is.True);
+            Assert.That(skills.Single(s => s.Name == "skill 2").ClassSkill, Is.True);
+            Assert.That(skills.Single(s => s.Name == "skill 3").ClassSkill, Is.True);
+            Assert.That(skills.Single(s => s.Name == "skill 4").ClassSkill, Is.True);
+            Assert.That(skills.Single(s => s.Name == "skill 5").ClassSkill, Is.True);
+            Assert.That(skills.Single(s => s.Name == "skill 6").ClassSkill, Is.True);
+            Assert.That(skills.Single(s => s.Name == "skill 7").ClassSkill, Is.True);
+            Assert.That(skills.Single(s => s.Name == "skill 8").ClassSkill, Is.True);
+            Assert.That(skills.Single(s => s.Name == "skill 10").ClassSkill, Is.True);
+            Assert.That(skills.Single(s => s.Name == "skill 11").ClassSkill, Is.True);
             Assert.That(skills.Count, Is.EqualTo(10));
+        }
+
+        [Test]
+        public void ExpertGetsRandomSkillWithSetFocusAsClassSkill()
+        {
+            characterClass.Name = CharacterClassConstants.Expert;
+            classSkillPoints = 0;
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.SkillPoints, CharacterClassConstants.Expert)).Returns(classSkillPoints);
+
+            for (var i = 11; i > 0; i--)
+                allSkills.Add("skill " + i.ToString());
+
+            mockCollectionsSelector.SetupSequence(s => s.SelectRandomFrom(allSkills)).Returns(allSkills[0]).Returns(allSkills[0]).Returns(allSkills[10])
+                .Returns(allSkills[9]).Returns(allSkills[8]).Returns(allSkills[7]).Returns(allSkills[6]).Returns(allSkills[5]).Returns(allSkills[4])
+                .Returns(allSkills[3]).Returns(allSkills[1]);
+
+            var skillSelection = new SkillSelection();
+            skillSelection.BaseStatName = StatConstants.Intelligence;
+            skillSelection.SkillName = Guid.NewGuid().ToString();
+            skillSelection.Focus = Guid.NewGuid().ToString();
+
+            mockSkillSelector.Setup(s => s.SelectFor(allSkills[6])).Returns(skillSelection);
+
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
+            Assert.That(skills.Count, Is.EqualTo(10));
+
+            var skillsWithFocus = skills.Where(s => s.Focus != string.Empty).ToArray();
+
+            Assert.That(skillsWithFocus[0].Name, Is.EqualTo(skillSelection.SkillName));
+            Assert.That(skillsWithFocus[0].Focus, Is.EqualTo(skillSelection.Focus));
+            Assert.That(skillsWithFocus[0].ClassSkill, Is.True);
+
+            Assert.That(skillsWithFocus.Length, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void ExpertGetsRandomSkillWithRandomFocusAsClassSkill()
+        {
+            characterClass.Name = CharacterClassConstants.Expert;
+            classSkillPoints = 0;
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.SkillPoints, CharacterClassConstants.Expert)).Returns(classSkillPoints);
+
+            for (var i = 11; i > 0; i--)
+                allSkills.Add("skill " + i.ToString());
+
+            mockCollectionsSelector.SetupSequence(s => s.SelectRandomFrom(allSkills)).Returns(allSkills[0]).Returns(allSkills[0]).Returns(allSkills[10])
+                .Returns(allSkills[9]).Returns(allSkills[8]).Returns(allSkills[7]).Returns(allSkills[6]).Returns(allSkills[5]).Returns(allSkills[4])
+                .Returns(allSkills[3]).Returns(allSkills[1]);
+
+            var skillSelection = new SkillSelection();
+            skillSelection.BaseStatName = StatConstants.Intelligence;
+            skillSelection.SkillName = Guid.NewGuid().ToString();
+            skillSelection.RandomFociQuantity = 1;
+
+            mockSkillSelector.Setup(s => s.SelectFor(allSkills[6])).Returns(skillSelection);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, skillSelection.SkillName)).Returns(new[] { "random", "other random", "third random" });
+
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
+            Assert.That(skills.Count, Is.EqualTo(10));
+
+            var skillsWithFocus = skills.Where(s => s.Focus != string.Empty).ToArray();
+
+            Assert.That(skillsWithFocus[0].Name, Is.EqualTo(skillSelection.SkillName));
+            Assert.That(skillsWithFocus[0].Focus, Is.EqualTo("random"));
+            Assert.That(skillsWithFocus[0].ClassSkill, Is.True);
+
+            Assert.That(skillsWithFocus.Length, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void ExpertCanTakeMultipleFociForSkills()
+        {
+            characterClass.Name = CharacterClassConstants.Expert;
+            classSkillPoints = 0;
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.SkillPoints, CharacterClassConstants.Expert)).Returns(classSkillPoints);
+
+            for (var i = 11; i > 0; i--)
+                allSkills.Add("skill " + i.ToString());
+
+            mockCollectionsSelector.SetupSequence(s => s.SelectRandomFrom(allSkills)).Returns(allSkills[0]).Returns(allSkills[0]).Returns(allSkills[10])
+                .Returns(allSkills[9]).Returns(allSkills[8]).Returns(allSkills[7]).Returns(allSkills[6]).Returns(allSkills[5]).Returns(allSkills[4])
+                .Returns(allSkills[3]).Returns(allSkills[1]);
+
+            var skillSelection = new SkillSelection();
+            skillSelection.BaseStatName = StatConstants.Intelligence;
+            skillSelection.SkillName = Guid.NewGuid().ToString();
+            skillSelection.RandomFociQuantity = 1;
+
+            mockSkillSelector.Setup(s => s.SelectFor(allSkills[0])).Returns(skillSelection);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, skillSelection.SkillName)).Returns(new[] { "random", "other random", "third random" });
+
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
+            Assert.That(skills.Count, Is.EqualTo(10));
+
+            var skillsWithFocus = skills.Where(s => s.Focus != string.Empty).ToArray();
+
+            Assert.That(skillsWithFocus[0].Name, Is.EqualTo(skillSelection.SkillName));
+            Assert.That(skillsWithFocus[0].Focus, Is.EqualTo("random"));
+            Assert.That(skillsWithFocus[0].ClassSkill, Is.True);
+
+            Assert.That(skillsWithFocus[1].Name, Is.EqualTo(skillSelection.SkillName));
+            Assert.That(skillsWithFocus[1].Focus, Is.EqualTo("other random"));
+            Assert.That(skillsWithFocus[1].ClassSkill, Is.True);
+
+            Assert.That(skillsWithFocus.Length, Is.EqualTo(2));
+        }
+
+        [Test]
+        public void ExpertCannotTakeDuplicateFociForSkills()
+        {
+            characterClass.Name = CharacterClassConstants.Expert;
+            classSkillPoints = 0;
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.SkillPoints, CharacterClassConstants.Expert)).Returns(classSkillPoints);
+
+            for (var i = 11; i > 0; i--)
+                allSkills.Add("skill " + i.ToString());
+
+            var skillSelection = new SkillSelection();
+            skillSelection.BaseStatName = StatConstants.Intelligence;
+            skillSelection.SkillName = Guid.NewGuid().ToString();
+            skillSelection.RandomFociQuantity = 1;
+
+            mockSkillSelector.Setup(s => s.SelectFor(allSkills[0])).Returns(skillSelection);
+            var foci = new[] { "random", "other random", "third random" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, skillSelection.SkillName)).Returns(foci);
+
+            var index = 0;
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(foci)).Returns(() => foci.ElementAt((index++ / 2) % foci.Count()));
+            mockCollectionsSelector.SetupSequence(s => s.SelectRandomFrom(allSkills))
+                .Returns(allSkills[0]) //random
+                .Returns(allSkills[0]) //duplicate random
+                .Returns(allSkills[0]) //other random
+                .Returns(allSkills[10])
+                .Returns(allSkills[9])
+                .Returns(allSkills[8])
+                .Returns(allSkills[7])
+                .Returns(allSkills[6])
+                .Returns(allSkills[5])
+                .Returns(allSkills[4])
+                .Returns(allSkills[3])
+                .Returns(allSkills[1]);
+
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
+            Assert.That(skills.Count, Is.EqualTo(10));
+
+            var skillsWithFocus = skills.Where(s => s.Focus != string.Empty).ToArray();
+
+            Assert.That(skillsWithFocus[0].Name, Is.EqualTo(skillSelection.SkillName));
+            Assert.That(skillsWithFocus[0].Focus, Is.EqualTo("random"));
+            Assert.That(skillsWithFocus[0].ClassSkill, Is.True);
+
+            Assert.That(skillsWithFocus[1].Name, Is.EqualTo(skillSelection.SkillName));
+            Assert.That(skillsWithFocus[1].Focus, Is.EqualTo("other random"));
+            Assert.That(skillsWithFocus[1].ClassSkill, Is.True);
+
+            Assert.That(skillsWithFocus.Length, Is.EqualTo(2));
         }
 
         [Test]
@@ -993,7 +1767,6 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
             for (var i = 11; i > 0; i--)
                 allSkills.Add("skill " + i.ToString());
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.CrossClassSkills, CharacterClassConstants.Expert)).Returns(crossClassSkills);
             crossClassSkills.Add("other skill");
             crossClassSkills.Add("different skill");
             crossClassSkills.Add("skill 3");
@@ -1003,18 +1776,18 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
                 .Returns(allSkills[3]).Returns(allSkills[1]);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
-            Assert.That(skills["skill 1"].ClassSkill, Is.True);
-            Assert.That(skills["skill 2"].ClassSkill, Is.True);
-            Assert.That(skills["skill 3"].ClassSkill, Is.True);
-            Assert.That(skills["skill 4"].ClassSkill, Is.True);
-            Assert.That(skills["skill 5"].ClassSkill, Is.True);
-            Assert.That(skills["skill 6"].ClassSkill, Is.True);
-            Assert.That(skills["skill 7"].ClassSkill, Is.True);
-            Assert.That(skills["skill 8"].ClassSkill, Is.True);
-            Assert.That(skills["skill 10"].ClassSkill, Is.True);
-            Assert.That(skills["skill 11"].ClassSkill, Is.True);
-            Assert.That(skills["other skill"].ClassSkill, Is.False);
-            Assert.That(skills["different skill"].ClassSkill, Is.False);
+            Assert.That(skills.Single(s => s.Name == "skill 1").ClassSkill, Is.True);
+            Assert.That(skills.Single(s => s.Name == "skill 2").ClassSkill, Is.True);
+            Assert.That(skills.Single(s => s.Name == "skill 3").ClassSkill, Is.True);
+            Assert.That(skills.Single(s => s.Name == "skill 4").ClassSkill, Is.True);
+            Assert.That(skills.Single(s => s.Name == "skill 5").ClassSkill, Is.True);
+            Assert.That(skills.Single(s => s.Name == "skill 6").ClassSkill, Is.True);
+            Assert.That(skills.Single(s => s.Name == "skill 7").ClassSkill, Is.True);
+            Assert.That(skills.Single(s => s.Name == "skill 8").ClassSkill, Is.True);
+            Assert.That(skills.Single(s => s.Name == "skill 10").ClassSkill, Is.True);
+            Assert.That(skills.Single(s => s.Name == "skill 11").ClassSkill, Is.True);
+            Assert.That(skills.Single(s => s.Name == "other skill").ClassSkill, Is.False);
+            Assert.That(skills.Single(s => s.Name == "different skill").ClassSkill, Is.False);
             Assert.That(skills.Count, Is.EqualTo(12));
         }
 
@@ -1030,18 +1803,19 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
 
             stats[StatConstants.Constitution] = new Stat(StatConstants.Constitution);
 
-            var constitutionSelection = new SkillSelection { BaseStatName = StatConstants.Constitution, SkillName = "skill 1" };
-            mockSkillSelector.Setup(s => s.SelectFor("skill 2")).Returns(constitutionSelection);
-            mockSkillSelector.Setup(s => s.SelectFor("skill 4")).Returns(constitutionSelection);
-            mockSkillSelector.Setup(s => s.SelectFor("skill 6")).Returns(constitutionSelection);
+            mockSkillSelector.Setup(s => s.SelectFor("skill 2")).Returns(() => new SkillSelection { BaseStatName = StatConstants.Constitution, SkillName = "skill 2" });
+            mockSkillSelector.Setup(s => s.SelectFor("skill 4")).Returns(() => new SkillSelection { BaseStatName = StatConstants.Constitution, SkillName = "skill 4" });
+            mockSkillSelector.Setup(s => s.SelectFor("skill 6")).Returns(() => new SkillSelection { BaseStatName = StatConstants.Constitution, SkillName = "skill 6" });
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
-            Assert.That(skills.Keys, Contains.Item("skill 1"));
-            Assert.That(skills.Keys, Contains.Item("skill 3"));
-            Assert.That(skills.Keys, Contains.Item("skill 5"));
-            Assert.That(skills.Keys, Contains.Item("skill 2"));
-            Assert.That(skills.Keys, Contains.Item("skill 4"));
-            Assert.That(skills.Keys, Contains.Item("skill 6"));
+            var skillNames = skills.Select(s => s.Name);
+
+            Assert.That(skillNames, Contains.Item("skill 1"));
+            Assert.That(skillNames, Contains.Item("skill 3"));
+            Assert.That(skillNames, Contains.Item("skill 5"));
+            Assert.That(skillNames, Contains.Item("skill 2"));
+            Assert.That(skillNames, Contains.Item("skill 4"));
+            Assert.That(skillNames, Contains.Item("skill 6"));
             Assert.That(skills.Count, Is.EqualTo(6));
         }
 
@@ -1055,18 +1829,19 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
             specialistSkills.Add("skill 5");
             specialistSkills.Add("skill 6");
 
-            var constitutionSelection = new SkillSelection { BaseStatName = StatConstants.Constitution, SkillName = "skill 1" };
-            mockSkillSelector.Setup(s => s.SelectFor("skill 2")).Returns(constitutionSelection);
-            mockSkillSelector.Setup(s => s.SelectFor("skill 4")).Returns(constitutionSelection);
-            mockSkillSelector.Setup(s => s.SelectFor("skill 6")).Returns(constitutionSelection);
+            mockSkillSelector.Setup(s => s.SelectFor("skill 2")).Returns(() => new SkillSelection { BaseStatName = StatConstants.Constitution, SkillName = "skill 2" });
+            mockSkillSelector.Setup(s => s.SelectFor("skill 4")).Returns(() => new SkillSelection { BaseStatName = StatConstants.Constitution, SkillName = "skill 4" });
+            mockSkillSelector.Setup(s => s.SelectFor("skill 6")).Returns(() => new SkillSelection { BaseStatName = StatConstants.Constitution, SkillName = "skill 6" });
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
-            Assert.That(skills.Keys, Contains.Item("skill 1"));
-            Assert.That(skills.Keys, Contains.Item("skill 3"));
-            Assert.That(skills.Keys, Contains.Item("skill 5"));
-            Assert.That(skills.Keys, Is.All.Not.EqualTo("skill 2"));
-            Assert.That(skills.Keys, Is.All.Not.EqualTo("skill 4"));
-            Assert.That(skills.Keys, Is.All.Not.EqualTo("skill 6"));
+            var skillNames = skills.Select(s => s.Name);
+
+            Assert.That(skillNames, Contains.Item("skill 1"));
+            Assert.That(skillNames, Contains.Item("skill 3"));
+            Assert.That(skillNames, Contains.Item("skill 5"));
+            Assert.That(skillNames, Is.All.Not.EqualTo("skill 2"));
+            Assert.That(skillNames, Is.All.Not.EqualTo("skill 4"));
+            Assert.That(skillNames, Is.All.Not.EqualTo("skill 6"));
             Assert.That(skills.Count, Is.EqualTo(3));
         }
 
@@ -1085,21 +1860,17 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
             mockSkillSelector.Setup(s => s.SelectFor("skill 2")).Returns(constitutionSelection);
             mockSkillSelector.Setup(s => s.SelectFor("skill 6")).Returns(constitutionSelection);
 
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
-                .Returns(false);
-            mockCollectionsSelector.SetupSequence(s => s.SelectRandomFrom(It.Is<IEnumerable<string>>(ss => ss.Count() == 2)))
-                .Returns("skill 5")
-                .Returns("skill 1")
-                .Returns("skill 1")
-                .Returns("skill 5")
-                .Returns("skill 5");
+            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(false);
 
-            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats).ToArray();
 
-            Assert.That(skills["skill 1"].Ranks, Is.EqualTo(2));
-            Assert.That(skills["skill 5"].Ranks, Is.EqualTo(3));
-            Assert.That(skills["skill 1"].EffectiveRanks, Is.EqualTo(2));
-            Assert.That(skills["skill 5"].EffectiveRanks, Is.EqualTo(3));
+            Assert.That(skills[0].Name, Is.EqualTo("skill 1"));
+            Assert.That(skills[0].Ranks, Is.EqualTo(4));
+            Assert.That(skills[0].EffectiveRanks, Is.EqualTo(4));
+
+            Assert.That(skills[1].Name, Is.EqualTo("skill 5"));
+            Assert.That(skills[1].Ranks, Is.EqualTo(1));
+            Assert.That(skills[1].EffectiveRanks, Is.EqualTo(1));
         }
 
         [Test]
@@ -1114,26 +1885,19 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
             var constitutionSelection = new SkillSelection { BaseStatName = StatConstants.Constitution, SkillName = "skill 4" };
             mockSkillSelector.Setup(s => s.SelectFor("skill 4")).Returns(constitutionSelection);
 
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
-                .Returns(true);
-            mockCollectionsSelector.SetupSequence(s => s.SelectRandomFrom(It.Is<IEnumerable<string>>(ss => ss.Count() == 1)))
-                .Returns("skill 3")
-                .Returns("skill 3")
-                .Returns("skill 3")
-                .Returns("skill 3")
-                .Returns("skill 3");
+            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(true);
 
-            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats).ToArray();
 
-            Assert.That(skills["skill 3"].Ranks, Is.EqualTo(5));
-            Assert.That(skills["skill 3"].EffectiveRanks, Is.EqualTo(2.5));
+            Assert.That(skills[0].Name, Is.EqualTo("skill 3"));
+            Assert.That(skills[0].Ranks, Is.EqualTo(5));
+            Assert.That(skills[0].EffectiveRanks, Is.EqualTo(2.5));
         }
 
         [Test]
         public void DoNotAssignMonsterSkillPointsToMonsterSkillsIfCharacterDoesNotHaveRequiredBaseStat()
         {
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
-                .Returns(new[] { race.BaseRace, "other base race" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters)).Returns(new[] { race.BaseRace, "other base race" });
 
             characterClass.Level = 20;
             classSkillPoints = 0;
@@ -1146,23 +1910,49 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
             var constitutionSelection = new SkillSelection { BaseStatName = StatConstants.Constitution, SkillName = "skill 1" };
             mockSkillSelector.Setup(s => s.SelectFor("skill 1")).Returns(constitutionSelection);
 
-            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
-            Assert.That(skills["skill 2"].Ranks, Is.EqualTo(5));
-            Assert.That(skills["skill 2"].RanksMaxedOut, Is.True);
-            Assert.That(skills.Keys, Is.All.Not.EqualTo("skill 1"));
-            Assert.That(skills.Count, Is.EqualTo(1));
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats).ToArray();
+            var skill = skills.Single();
+
+            Assert.That(skill.Name, Is.EqualTo("skill 2"));
+            Assert.That(skill.Ranks, Is.EqualTo(5));
+            Assert.That(skill.RanksMaxedOut, Is.True);
+        }
+
+        [Test]
+        public void SelectPresetFocusForMonsterSkill()
+        {
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters)).Returns(new[] { race.BaseRace, "other base race" });
+
+            racialSkillPoints = 2;
+            stats[StatConstants.Charisma] = new Stat(StatConstants.Charisma);
+            monsterClassSkills.Add("skill 1");
+            monsterClassSkills.Add("skill 2");
+            monsterHitDice = 2;
+
+            var selection = new SkillSelection { BaseStatName = StatConstants.Charisma, Focus = "focus", SkillName = "skill with focus" };
+            mockSkillSelector.Setup(s => s.SelectFor("skill 2")).Returns(selection);
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, "skill with random foci")).Returns(new[] { "random", "other random" });
+
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats).ToArray();
+
+            Assert.That(skills[0].Name, Is.EqualTo("skill 1"));
+            Assert.That(skills[0].Focus, Is.Empty);
+            Assert.That(skills[0].BaseStat, Is.EqualTo(stats[StatConstants.Intelligence]));
+
+            Assert.That(skills[1].Name, Is.EqualTo("skill with focus"));
+            Assert.That(skills[1].Focus, Is.EqualTo("focus"));
+            Assert.That(skills[1].BaseStat, Is.EqualTo(stats[StatConstants.Charisma]));
+
+            Assert.That(skills.Count, Is.EqualTo(2));
         }
 
         [Test]
         public void SelectRandomFocusForMonsterSkill()
         {
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
-                .Returns(new[] { race.BaseRace, "other base race" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters)).Returns(new[] { race.BaseRace, "other base race" });
 
-            characterClass.Level = 20;
-            classSkillPoints = 0;
             racialSkillPoints = 2;
-            stats[StatConstants.Intelligence].Value = 10;
             stats[StatConstants.Charisma] = new Stat(StatConstants.Charisma);
             monsterClassSkills.Add("skill 1");
             monsterClassSkills.Add("skill 2");
@@ -1173,9 +1963,14 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, "skill with random foci")).Returns(new[] { "random", "other random" });
 
-            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
-            Assert.That(skills["random"].BaseStat, Is.EqualTo(stats[StatConstants.Charisma]));
-            Assert.That(skills["skill 1"].BaseStat, Is.EqualTo(stats[StatConstants.Intelligence]));
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats).ToArray();
+
+            Assert.That(skills[0].Name, Is.EqualTo("skill 1"));
+            Assert.That(skills[0].Focus, Is.Empty);
+            Assert.That(skills[0].BaseStat, Is.EqualTo(stats[StatConstants.Intelligence]));
+            Assert.That(skills[1].Name, Is.EqualTo("skill with random foci"));
+            Assert.That(skills[1].Focus, Is.EqualTo("random"));
+            Assert.That(skills[1].BaseStat, Is.EqualTo(stats[StatConstants.Charisma]));
             Assert.That(skills.Count, Is.EqualTo(2));
         }
 
@@ -1202,10 +1997,17 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, "skill with random foci")).Returns(new[] { "random", "other random" });
 
-            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
-            Assert.That(skills["random"].BaseStat, Is.EqualTo(stats[StatConstants.Charisma]));
-            Assert.That(skills["other random"].BaseStat, Is.EqualTo(stats[StatConstants.Charisma]));
-            Assert.That(skills["skill 1"].BaseStat, Is.EqualTo(stats[StatConstants.Intelligence]));
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats).ToArray();
+
+            Assert.That(skills[0].Name, Is.EqualTo("skill 1"));
+            Assert.That(skills[0].Focus, Is.Empty);
+            Assert.That(skills[0].BaseStat, Is.EqualTo(stats[StatConstants.Intelligence]));
+            Assert.That(skills[1].Name, Is.EqualTo("skill with random foci"));
+            Assert.That(skills[1].Focus, Is.EqualTo("random"));
+            Assert.That(skills[1].BaseStat, Is.EqualTo(stats[StatConstants.Charisma]));
+            Assert.That(skills[2].Name, Is.EqualTo("skill with random foci"));
+            Assert.That(skills[2].Focus, Is.EqualTo("other random"));
+            Assert.That(skills[2].BaseStat, Is.EqualTo(stats[StatConstants.Charisma]));
             Assert.That(skills.Count, Is.EqualTo(3));
         }
 
@@ -1232,10 +2034,17 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, "skill with random foci")).Returns(new[] { "random", "other random" });
 
-            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
-            Assert.That(skills["random"].BaseStat, Is.EqualTo(stats[StatConstants.Charisma]));
-            Assert.That(skills["other random"].BaseStat, Is.EqualTo(stats[StatConstants.Charisma]));
-            Assert.That(skills["skill 1"].BaseStat, Is.EqualTo(stats[StatConstants.Intelligence]));
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats).ToArray();
+
+            Assert.That(skills[0].Name, Is.EqualTo("skill 1"));
+            Assert.That(skills[0].Focus, Is.Empty);
+            Assert.That(skills[0].BaseStat, Is.EqualTo(stats[StatConstants.Intelligence]));
+            Assert.That(skills[1].Name, Is.EqualTo("skill with random foci"));
+            Assert.That(skills[1].Focus, Is.EqualTo("random"));
+            Assert.That(skills[1].BaseStat, Is.EqualTo(stats[StatConstants.Charisma]));
+            Assert.That(skills[2].Name, Is.EqualTo("skill with random foci"));
+            Assert.That(skills[2].Focus, Is.EqualTo("other random"));
+            Assert.That(skills[2].BaseStat, Is.EqualTo(stats[StatConstants.Charisma]));
             Assert.That(skills.Count, Is.EqualTo(3));
         }
 
@@ -1259,11 +2068,447 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, "skill with random foci")).Returns(new[] { "random", "other random" });
 
-            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
-            Assert.That(skills["random"].BaseStat, Is.EqualTo(stats[StatConstants.Charisma]));
-            Assert.That(skills["other random"].BaseStat, Is.EqualTo(stats[StatConstants.Charisma]));
-            Assert.That(skills["skill 1"].BaseStat, Is.EqualTo(stats[StatConstants.Intelligence]));
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats).ToArray();
+
+            Assert.That(skills[0].Name, Is.EqualTo("skill 1"));
+            Assert.That(skills[0].Focus, Is.Empty);
+            Assert.That(skills[0].BaseStat, Is.EqualTo(stats[StatConstants.Intelligence]));
+            Assert.That(skills[1].Name, Is.EqualTo("skill with random foci"));
+            Assert.That(skills[1].Focus, Is.EqualTo("random"));
+            Assert.That(skills[1].BaseStat, Is.EqualTo(stats[StatConstants.Charisma]));
+            Assert.That(skills[2].Name, Is.EqualTo("skill with random foci"));
+            Assert.That(skills[2].Focus, Is.EqualTo("other random"));
+            Assert.That(skills[2].BaseStat, Is.EqualTo(stats[StatConstants.Charisma]));
             Assert.That(skills.Count, Is.EqualTo(3));
+        }
+
+        [Test]
+        public void ProfessionSkillGrantsAdditionalClassSkills()
+        {
+            AddClassSkills(1);
+            stats["stat 1"] = new Stat("stat 1");
+            stats["stat 2"] = new Stat("stat 2");
+            stats["stat 3"] = new Stat("stat 3");
+
+            var professionSkillSelection = new SkillSelection();
+            professionSkillSelection.BaseStatName = StatConstants.Intelligence;
+            professionSkillSelection.SkillName = SkillConstants.Profession;
+            professionSkillSelection.Focus = "software developer";
+
+            var professionBonusSkillSelection = new SkillSelection();
+            professionBonusSkillSelection.BaseStatName = "stat 1";
+            professionBonusSkillSelection.SkillName = "professional skill 1";
+
+            var professionBonusWithSetFocusSkillSelection = new SkillSelection();
+            professionBonusWithSetFocusSkillSelection.BaseStatName = "stat 2";
+            professionBonusWithSetFocusSkillSelection.SkillName = "professional skill 2";
+            professionBonusWithSetFocusSkillSelection.Focus = "set focus";
+
+            var professionBonusWithRandomFocusSkillSelection = new SkillSelection();
+            professionBonusWithRandomFocusSkillSelection.BaseStatName = "stat 3";
+            professionBonusWithRandomFocusSkillSelection.SkillName = "professional skill 3";
+            professionBonusWithRandomFocusSkillSelection.RandomFociQuantity = 1;
+
+            mockSkillSelector.Setup(s => s.SelectFor(classSkills[0])).Returns(professionSkillSelection);
+            mockSkillSelector.Setup(s => s.SelectFor("professional skill 1")).Returns(professionBonusSkillSelection);
+            mockSkillSelector.Setup(s => s.SelectFor("professional skill 2")).Returns(professionBonusWithSetFocusSkillSelection);
+            mockSkillSelector.Setup(s => s.SelectFor("professional skill 3")).Returns(professionBonusWithRandomFocusSkillSelection);
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, "professional skill 3")).Returns(new[] { "random", "other random" });
+
+            var professionSkills = new[] { "professional skill 1", "professional skill 2", "professional skill 3" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassSkills, "software developer")).Returns(professionSkills);
+
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats).ToArray();
+
+            Assert.That(skills[0].Name, Is.EqualTo(SkillConstants.Profession));
+            Assert.That(skills[0].Focus, Is.EqualTo("software developer"));
+            Assert.That(skills[0].BaseStat, Is.EqualTo(stats[StatConstants.Intelligence]));
+            Assert.That(skills[0].ClassSkill, Is.True);
+
+            Assert.That(skills[1].Name, Is.EqualTo("professional skill 1"));
+            Assert.That(skills[1].Focus, Is.Empty);
+            Assert.That(skills[1].BaseStat, Is.EqualTo(stats["stat 1"]));
+            Assert.That(skills[1].ClassSkill, Is.True);
+
+            Assert.That(skills[2].Name, Is.EqualTo("professional skill 2"));
+            Assert.That(skills[2].Focus, Is.EqualTo("set focus"));
+            Assert.That(skills[2].BaseStat, Is.EqualTo(stats["stat 2"]));
+            Assert.That(skills[2].ClassSkill, Is.True);
+
+            Assert.That(skills[3].Name, Is.EqualTo("professional skill 3"));
+            Assert.That(skills[3].Focus, Is.EqualTo("random"));
+            Assert.That(skills[3].BaseStat, Is.EqualTo(stats["stat 3"]));
+            Assert.That(skills[3].ClassSkill, Is.True);
+
+            Assert.That(skills.Length, Is.EqualTo(4));
+        }
+
+        [Test]
+        public void ProfessionSkillConvertsCrossClassSkillToClassSkill()
+        {
+            AddClassSkills(1);
+            stats["stat 1"] = new Stat("stat 1");
+            stats["stat 2"] = new Stat("stat 2");
+            stats["stat 3"] = new Stat("stat 3");
+
+            crossClassSkills.Add("professional skill 1");
+            crossClassSkills.Add("professional skill 3");
+
+            var professionSkillSelection = new SkillSelection();
+            professionSkillSelection.BaseStatName = StatConstants.Intelligence;
+            professionSkillSelection.SkillName = SkillConstants.Profession;
+            professionSkillSelection.Focus = "software developer";
+
+            var professionBonusSkillSelection = new SkillSelection();
+            professionBonusSkillSelection.BaseStatName = "stat 1";
+            professionBonusSkillSelection.SkillName = "professional skill 1";
+
+            var professionBonusWithSetFocusSkillSelection = new SkillSelection();
+            professionBonusWithSetFocusSkillSelection.BaseStatName = "stat 2";
+            professionBonusWithSetFocusSkillSelection.SkillName = "professional skill 2";
+            professionBonusWithSetFocusSkillSelection.Focus = "set focus";
+
+            var professionBonusWithRandomFocusSkillSelection = new SkillSelection();
+            professionBonusWithRandomFocusSkillSelection.BaseStatName = "stat 3";
+            professionBonusWithRandomFocusSkillSelection.SkillName = "professional skill 3";
+            professionBonusWithRandomFocusSkillSelection.RandomFociQuantity = 1;
+
+            mockSkillSelector.Setup(s => s.SelectFor(classSkills[0])).Returns(professionSkillSelection);
+            mockSkillSelector.Setup(s => s.SelectFor("professional skill 1")).Returns(professionBonusSkillSelection);
+            mockSkillSelector.Setup(s => s.SelectFor("professional skill 2")).Returns(professionBonusWithSetFocusSkillSelection);
+            mockSkillSelector.Setup(s => s.SelectFor("professional skill 3")).Returns(professionBonusWithRandomFocusSkillSelection);
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, "professional skill 3")).Returns(new[] { "random", "other random" });
+
+            var professionSkills = new[] { "professional skill 1", "professional skill 2", "professional skill 3" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassSkills, "software developer")).Returns(professionSkills);
+
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats).ToArray();
+
+            Assert.That(skills[0].Name, Is.EqualTo(SkillConstants.Profession));
+            Assert.That(skills[0].Focus, Is.EqualTo("software developer"));
+            Assert.That(skills[0].BaseStat, Is.EqualTo(stats[StatConstants.Intelligence]));
+            Assert.That(skills[0].ClassSkill, Is.True);
+
+            Assert.That(skills[1].Name, Is.EqualTo("professional skill 1"));
+            Assert.That(skills[1].Focus, Is.Empty);
+            Assert.That(skills[1].BaseStat, Is.EqualTo(stats["stat 1"]));
+            Assert.That(skills[1].ClassSkill, Is.True);
+
+            Assert.That(skills[2].Name, Is.EqualTo("professional skill 2"));
+            Assert.That(skills[2].Focus, Is.EqualTo("set focus"));
+            Assert.That(skills[2].BaseStat, Is.EqualTo(stats["stat 2"]));
+            Assert.That(skills[2].ClassSkill, Is.True);
+
+            Assert.That(skills[3].Name, Is.EqualTo("professional skill 3"));
+            Assert.That(skills[3].Focus, Is.EqualTo("other random"));
+            Assert.That(skills[3].BaseStat, Is.EqualTo(stats["stat 3"]));
+            Assert.That(skills[3].ClassSkill, Is.True);
+
+            Assert.That(skills[4].Name, Is.EqualTo("professional skill 3"));
+            Assert.That(skills[4].Focus, Is.EqualTo("random"));
+            Assert.That(skills[4].BaseStat, Is.EqualTo(stats["stat 3"]));
+            Assert.That(skills[4].ClassSkill, Is.False);
+
+            Assert.That(skills.Length, Is.EqualTo(5));
+        }
+
+        [Test]
+        public void RandomProfessionSkillGrantsAdditionalClassSkills()
+        {
+            AddClassSkills(1);
+            stats["stat 1"] = new Stat("stat 1");
+            stats["stat 2"] = new Stat("stat 2");
+            stats["stat 3"] = new Stat("stat 3");
+
+            var professionSkillSelection = new SkillSelection();
+            professionSkillSelection.BaseStatName = StatConstants.Intelligence;
+            professionSkillSelection.SkillName = SkillConstants.Profession;
+            professionSkillSelection.RandomFociQuantity = 1;
+
+            var professionBonusSkillSelection = new SkillSelection();
+            professionBonusSkillSelection.BaseStatName = "stat 1";
+            professionBonusSkillSelection.SkillName = "professional skill 1";
+
+            var professionBonusWithSetFocusSkillSelection = new SkillSelection();
+            professionBonusWithSetFocusSkillSelection.BaseStatName = "stat 2";
+            professionBonusWithSetFocusSkillSelection.SkillName = "professional skill 2";
+            professionBonusWithSetFocusSkillSelection.Focus = "set focus";
+
+            var professionBonusWithRandomFocusSkillSelection = new SkillSelection();
+            professionBonusWithRandomFocusSkillSelection.BaseStatName = "stat 3";
+            professionBonusWithRandomFocusSkillSelection.SkillName = "professional skill 3";
+            professionBonusWithRandomFocusSkillSelection.RandomFociQuantity = 1;
+
+            mockSkillSelector.Setup(s => s.SelectFor(classSkills[0])).Returns(professionSkillSelection);
+            mockSkillSelector.Setup(s => s.SelectFor("professional skill 1")).Returns(professionBonusSkillSelection);
+            mockSkillSelector.Setup(s => s.SelectFor("professional skill 2")).Returns(professionBonusWithSetFocusSkillSelection);
+            mockSkillSelector.Setup(s => s.SelectFor("professional skill 3")).Returns(professionBonusWithRandomFocusSkillSelection);
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, "professional skill 3")).Returns(new[] { "random", "other random" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, SkillConstants.Profession)).Returns(new[] { "random job", "other random job" });
+
+            var professionSkills = new[] { "professional skill 1", "professional skill 2", "professional skill 3" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassSkills, "random job")).Returns(professionSkills);
+
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats).ToArray();
+
+            Assert.That(skills[0].Name, Is.EqualTo(SkillConstants.Profession));
+            Assert.That(skills[0].Focus, Is.EqualTo("random job"));
+            Assert.That(skills[0].BaseStat, Is.EqualTo(stats[StatConstants.Intelligence]));
+            Assert.That(skills[0].ClassSkill, Is.True);
+
+            Assert.That(skills[1].Name, Is.EqualTo("professional skill 1"));
+            Assert.That(skills[1].Focus, Is.Empty);
+            Assert.That(skills[1].BaseStat, Is.EqualTo(stats["stat 1"]));
+            Assert.That(skills[1].ClassSkill, Is.True);
+
+            Assert.That(skills[2].Name, Is.EqualTo("professional skill 2"));
+            Assert.That(skills[2].Focus, Is.EqualTo("set focus"));
+            Assert.That(skills[2].BaseStat, Is.EqualTo(stats["stat 2"]));
+            Assert.That(skills[2].ClassSkill, Is.True);
+
+            Assert.That(skills[3].Name, Is.EqualTo("professional skill 3"));
+            Assert.That(skills[3].Focus, Is.EqualTo("other random"));
+            Assert.That(skills[3].BaseStat, Is.EqualTo(stats["stat 3"]));
+            Assert.That(skills[3].ClassSkill, Is.True);
+
+            Assert.That(skills.Length, Is.EqualTo(4));
+        }
+
+        [Test]
+        public void ProfessionSkillGrantsNoDuplicateClassSkills()
+        {
+            AddClassSkills(1);
+            stats["stat 1"] = new Stat("stat 1");
+            stats["stat 2"] = new Stat("stat 2");
+            stats["stat 3"] = new Stat("stat 3");
+
+            classSkills.Add("professional skill 1");
+
+            var professionSkillSelection = new SkillSelection();
+            professionSkillSelection.BaseStatName = StatConstants.Intelligence;
+            professionSkillSelection.SkillName = SkillConstants.Profession;
+            professionSkillSelection.Focus = "software developer";
+
+            var professionBonusSkillSelection = new SkillSelection();
+            professionBonusSkillSelection.BaseStatName = "stat 1";
+            professionBonusSkillSelection.SkillName = "professional skill 1";
+
+            var professionBonusWithSetFocusSkillSelection = new SkillSelection();
+            professionBonusWithSetFocusSkillSelection.BaseStatName = "stat 2";
+            professionBonusWithSetFocusSkillSelection.SkillName = "professional skill 2";
+            professionBonusWithSetFocusSkillSelection.Focus = "set focus";
+
+            var professionBonusWithRandomFocusSkillSelection = new SkillSelection();
+            professionBonusWithRandomFocusSkillSelection.BaseStatName = "stat 3";
+            professionBonusWithRandomFocusSkillSelection.SkillName = "professional skill 3";
+            professionBonusWithRandomFocusSkillSelection.RandomFociQuantity = 1;
+
+            mockSkillSelector.Setup(s => s.SelectFor(classSkills[0])).Returns(professionSkillSelection);
+            mockSkillSelector.Setup(s => s.SelectFor("professional skill 1")).Returns(professionBonusSkillSelection);
+            mockSkillSelector.Setup(s => s.SelectFor("professional skill 2")).Returns(professionBonusWithSetFocusSkillSelection);
+            mockSkillSelector.Setup(s => s.SelectFor("professional skill 3")).Returns(professionBonusWithRandomFocusSkillSelection);
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, "professional skill 3")).Returns(new[] { "random", "other random" });
+
+            var professionSkills = new[] { "professional skill 1", "professional skill 2", "professional skill 3" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassSkills, "software developer")).Returns(professionSkills);
+
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats).ToArray();
+
+            Assert.That(skills[0].Name, Is.EqualTo(SkillConstants.Profession));
+            Assert.That(skills[0].Focus, Is.EqualTo("software developer"));
+            Assert.That(skills[0].BaseStat, Is.EqualTo(stats[StatConstants.Intelligence]));
+            Assert.That(skills[0].ClassSkill, Is.True);
+
+            Assert.That(skills[1].Name, Is.EqualTo("professional skill 1"));
+            Assert.That(skills[1].Focus, Is.Empty);
+            Assert.That(skills[1].BaseStat, Is.EqualTo(stats["stat 1"]));
+            Assert.That(skills[1].ClassSkill, Is.True);
+
+            Assert.That(skills[2].Name, Is.EqualTo("professional skill 2"));
+            Assert.That(skills[2].Focus, Is.EqualTo("set focus"));
+            Assert.That(skills[2].BaseStat, Is.EqualTo(stats["stat 2"]));
+            Assert.That(skills[2].ClassSkill, Is.True);
+
+            Assert.That(skills[3].Name, Is.EqualTo("professional skill 3"));
+            Assert.That(skills[3].Focus, Is.EqualTo("random"));
+            Assert.That(skills[3].BaseStat, Is.EqualTo(stats["stat 3"]));
+            Assert.That(skills[3].ClassSkill, Is.True);
+
+            Assert.That(skills.Length, Is.EqualTo(4));
+        }
+
+        [Test]
+        public void ProfessionSkillGrantsNoAdditionalClassSkills()
+        {
+            AddClassSkills(1);
+            stats["stat 1"] = new Stat("stat 1");
+            stats["stat 2"] = new Stat("stat 2");
+            stats["stat 3"] = new Stat("stat 3");
+
+            var professionSkillSelection = new SkillSelection();
+            professionSkillSelection.BaseStatName = StatConstants.Intelligence;
+            professionSkillSelection.SkillName = SkillConstants.Profession;
+            professionSkillSelection.Focus = "software developer";
+
+            mockSkillSelector.Setup(s => s.SelectFor(classSkills[0])).Returns(professionSkillSelection);
+
+            var professionSkills = Enumerable.Empty<string>();
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassSkills, "software developer")).Returns(professionSkills);
+
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats).ToArray();
+
+            Assert.That(skills[0].Name, Is.EqualTo(SkillConstants.Profession));
+            Assert.That(skills[0].Focus, Is.EqualTo("software developer"));
+            Assert.That(skills[0].BaseStat, Is.EqualTo(stats[StatConstants.Intelligence]));
+            Assert.That(skills[0].ClassSkill, Is.True);
+
+            Assert.That(skills.Length, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void NoProfessionSkillGrantsNoAdditionalClassSkills()
+        {
+            AddClassSkills(1);
+            stats["stat 1"] = new Stat("stat 1");
+            stats["stat 2"] = new Stat("stat 2");
+            stats["stat 3"] = new Stat("stat 3");
+
+            var otherSkillSelection = new SkillSelection();
+            otherSkillSelection.BaseStatName = StatConstants.Intelligence;
+            otherSkillSelection.SkillName = "other skill";
+            otherSkillSelection.Focus = "software developer";
+
+            mockSkillSelector.Setup(s => s.SelectFor(classSkills[0])).Returns(otherSkillSelection);
+
+            var professionSkills = new[] { "profession skill 1", "profession skill 2", "professional skill 3" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassSkills, "software developer")).Returns(professionSkills);
+
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats).ToArray();
+
+            Assert.That(skills[0].Name, Is.EqualTo("other skill"));
+            Assert.That(skills[0].Focus, Is.EqualTo("software developer"));
+            Assert.That(skills[0].BaseStat, Is.EqualTo(stats[StatConstants.Intelligence]));
+            Assert.That(skills[0].ClassSkill, Is.True);
+
+            Assert.That(skills.Length, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void GetSynergyFromProfessionSkill()
+        {
+            classSkillPoints = 2;
+            characterClass.Level = 13;
+
+            AddClassSkills(4);
+            classSkills.Add("synergy 1");
+            classSkills.Add("synergy 2");
+
+            var professionSkillSelection = new SkillSelection();
+            professionSkillSelection.BaseStatName = StatConstants.Intelligence;
+            professionSkillSelection.SkillName = SkillConstants.Profession;
+            professionSkillSelection.Focus = "software developer";
+
+            mockSkillSelector.Setup(s => s.SelectFor(classSkills[0])).Returns(professionSkillSelection);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillSynergy, $"{SkillConstants.Profession}/software developer")).Returns(new[] { "synergy 1", "synergy 2" });
+
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats).ToArray();
+
+            Assert.That(skills[0].Name, Is.EqualTo(SkillConstants.Profession));
+            Assert.That(skills[0].Focus, Is.EqualTo("software developer"));
+            Assert.That(skills[0].Ranks, Is.EqualTo(6));
+            Assert.That(skills[0].EffectiveRanks, Is.EqualTo(6));
+            Assert.That(skills[0].Bonus, Is.EqualTo(0));
+
+            Assert.That(skills[1].Name, Is.EqualTo("class skill 3"));
+            Assert.That(skills[1].Focus, Is.Empty);
+            Assert.That(skills[1].Ranks, Is.EqualTo(6));
+            Assert.That(skills[1].EffectiveRanks, Is.EqualTo(6));
+            Assert.That(skills[1].Bonus, Is.EqualTo(0));
+
+            Assert.That(skills[2].Name, Is.EqualTo("class skill 2"));
+            Assert.That(skills[2].Focus, Is.Empty);
+            Assert.That(skills[2].Ranks, Is.EqualTo(5));
+            Assert.That(skills[2].EffectiveRanks, Is.EqualTo(5));
+            Assert.That(skills[2].Bonus, Is.EqualTo(0));
+
+            Assert.That(skills[3].Name, Is.EqualTo("class skill 1"));
+            Assert.That(skills[3].Focus, Is.Empty);
+            Assert.That(skills[3].Ranks, Is.EqualTo(5));
+            Assert.That(skills[3].EffectiveRanks, Is.EqualTo(5));
+            Assert.That(skills[3].Bonus, Is.EqualTo(0));
+
+            Assert.That(skills[4].Name, Is.EqualTo("synergy 1"));
+            Assert.That(skills[4].Focus, Is.Empty);
+            Assert.That(skills[4].Ranks, Is.EqualTo(5));
+            Assert.That(skills[4].EffectiveRanks, Is.EqualTo(5));
+            Assert.That(skills[4].Bonus, Is.EqualTo(2));
+
+            Assert.That(skills[5].Name, Is.EqualTo("synergy 2"));
+            Assert.That(skills[5].Focus, Is.Empty);
+            Assert.That(skills[5].Ranks, Is.EqualTo(5));
+            Assert.That(skills[5].EffectiveRanks, Is.EqualTo(5));
+            Assert.That(skills[5].Bonus, Is.EqualTo(2));
+        }
+
+        [Test]
+        public void ApplySynergyToProfessionSkill()
+        {
+            classSkillPoints = 2;
+            characterClass.Level = 13;
+
+            AddClassSkills(4);
+            classSkills.Add("synergy 1");
+            classSkills.Add("synergy 2");
+
+            var professionSkillSelection = new SkillSelection();
+            professionSkillSelection.BaseStatName = StatConstants.Intelligence;
+            professionSkillSelection.SkillName = SkillConstants.Profession;
+            professionSkillSelection.Focus = "software developer";
+
+            mockSkillSelector.Setup(s => s.SelectFor(classSkills[0])).Returns(professionSkillSelection);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillSynergy, classSkills[1])).Returns(new[] { "synergy 1", $"{SkillConstants.Profession}/software developer" });
+
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats).ToArray();
+
+            Assert.That(skills[0].Name, Is.EqualTo(SkillConstants.Profession));
+            Assert.That(skills[0].Focus, Is.EqualTo("software developer"));
+            Assert.That(skills[0].Ranks, Is.EqualTo(6));
+            Assert.That(skills[0].EffectiveRanks, Is.EqualTo(6));
+            Assert.That(skills[0].Bonus, Is.EqualTo(2));
+
+            Assert.That(skills[1].Name, Is.EqualTo("class skill 3"));
+            Assert.That(skills[1].Focus, Is.Empty);
+            Assert.That(skills[1].Ranks, Is.EqualTo(6));
+            Assert.That(skills[1].EffectiveRanks, Is.EqualTo(6));
+            Assert.That(skills[1].Bonus, Is.EqualTo(0));
+
+            Assert.That(skills[2].Name, Is.EqualTo("class skill 2"));
+            Assert.That(skills[2].Focus, Is.Empty);
+            Assert.That(skills[2].Ranks, Is.EqualTo(5));
+            Assert.That(skills[2].EffectiveRanks, Is.EqualTo(5));
+            Assert.That(skills[2].Bonus, Is.EqualTo(0));
+
+            Assert.That(skills[3].Name, Is.EqualTo("class skill 1"));
+            Assert.That(skills[3].Focus, Is.Empty);
+            Assert.That(skills[3].Ranks, Is.EqualTo(5));
+            Assert.That(skills[3].EffectiveRanks, Is.EqualTo(5));
+            Assert.That(skills[3].Bonus, Is.EqualTo(0));
+
+            Assert.That(skills[4].Name, Is.EqualTo("synergy 1"));
+            Assert.That(skills[4].Focus, Is.Empty);
+            Assert.That(skills[4].Ranks, Is.EqualTo(5));
+            Assert.That(skills[4].EffectiveRanks, Is.EqualTo(5));
+            Assert.That(skills[4].Bonus, Is.EqualTo(2));
+
+            Assert.That(skills[5].Name, Is.EqualTo("synergy 2"));
+            Assert.That(skills[5].Focus, Is.Empty);
+            Assert.That(skills[5].Ranks, Is.EqualTo(5));
+            Assert.That(skills[5].EffectiveRanks, Is.EqualTo(5));
+            Assert.That(skills[5].Bonus, Is.EqualTo(0));
         }
     }
 }

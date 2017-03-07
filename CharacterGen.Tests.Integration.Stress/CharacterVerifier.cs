@@ -1,4 +1,5 @@
 ﻿using CharacterGen.Abilities.Feats;
+using CharacterGen.Abilities.Skills;
 using CharacterGen.Abilities.Stats;
 using CharacterGen.Alignments;
 using CharacterGen.Races;
@@ -11,6 +12,19 @@ namespace CharacterGen.Tests.Integration.Stress
 {
     public class CharacterVerifier
     {
+        private readonly IEnumerable<string> skillsWithFoci;
+
+        public CharacterVerifier()
+        {
+            skillsWithFoci = new[]
+            {
+                SkillConstants.Craft,
+                SkillConstants.Knowledge,
+                SkillConstants.Perform,
+                SkillConstants.Profession,
+            };
+        }
+
         public void AssertCharacter(Character character)
         {
             VerifySummary(character);
@@ -55,6 +69,7 @@ namespace CharacterGen.Tests.Integration.Stress
             Assert.That(character.Class.EffectiveLevel, Is.Positive, character.Summary);
             Assert.That(character.Class.ProhibitedFields, Is.Not.Null, character.Summary);
             Assert.That(character.Class.SpecialistFields, Is.Not.Null, character.Summary);
+            Assert.That(character.Class.Summary, Is.Not.Empty, character.Summary);
         }
 
         private void VerifyRace(Character character)
@@ -63,6 +78,7 @@ namespace CharacterGen.Tests.Integration.Stress
             Assert.That(character.Race.Metarace, Is.Not.Null, character.Summary);
             Assert.That(character.Race.MetaraceSpecies, Is.Not.Null, character.Summary);
             Assert.That(character.Race.ChallengeRating, Is.Not.Negative, character.Summary);
+            Assert.That(character.Race.Summary, Is.Not.Empty, character.Summary);
             Assert.That(character.Race.Size, Is.EqualTo(RaceConstants.Sizes.Large)
                 .Or.EqualTo(RaceConstants.Sizes.Colossal)
                 .Or.EqualTo(RaceConstants.Sizes.Gargantuan)
@@ -174,15 +190,24 @@ namespace CharacterGen.Tests.Integration.Stress
         {
             Assert.That(character.Ability.Skills, Is.Not.Empty, character.Summary);
 
-            foreach (var skillKVP in character.Ability.Skills)
+            foreach (var skill in character.Ability.Skills)
             {
-                var skill = skillKVP.Value;
-                Assert.That(skill.Name, Is.EqualTo(skillKVP.Key), character.Summary);
                 Assert.That(skill.ArmorCheckPenalty, Is.Not.Positive, character.Summary);
                 Assert.That(skill.Ranks, Is.AtMost(skill.RankCap), character.Summary);
                 Assert.That(skill.RankCap, Is.Positive, character.Summary);
                 Assert.That(skill.Bonus, Is.Not.Negative);
+                Assert.That(skill.BaseStat, Is.Not.Null);
+                Assert.That(character.Ability.Stats.Values, Contains.Item(skill.BaseStat));
+                Assert.That(skill.Focus, Is.Not.Null);
+
+                if (skillsWithFoci.Contains(skill.Name))
+                    Assert.That(skill.Focus, Is.Not.Empty);
+                else
+                    Assert.That(skill.Focus, Is.Empty);
             }
+
+            var skillNamesAndFoci = character.Ability.Skills.Select(s => s.Name + s.Focus);
+            Assert.That(skillNamesAndFoci, Is.Unique);
         }
 
         private void VerifyFeats(Character character)

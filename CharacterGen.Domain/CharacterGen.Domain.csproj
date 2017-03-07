@@ -198,6 +198,7 @@
     <Compile Include="Selectors\Selections\CharacterClassFeatSelection.cs" />
     <Compile Include="Selectors\Selections\RacialFeatSelection.cs" />
     <Compile Include="Selectors\Selections\RequiredFeatSelection.cs" />
+    <Compile Include="Selectors\Selections\RequiredSkillSelection.cs" />
     <Compile Include="Selectors\Selections\SkillSelection.cs" />
     <Compile Include="Selectors\Percentiles\PercentileSelector.cs" />
     <Compile Include="Selectors\Collections\SkillSelector.cs" />
@@ -816,11 +817,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Tables\Abilities\Skills\ClassSkills.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Tables\Abilities\Skills\CrossClassSkills.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Tables\Abilities\Skills\SkillData.xml">

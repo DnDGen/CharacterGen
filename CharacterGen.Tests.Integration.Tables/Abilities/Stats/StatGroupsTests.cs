@@ -2,7 +2,6 @@
 using CharacterGen.CharacterClasses;
 using CharacterGen.Domain.Tables;
 using NUnit.Framework;
-using System;
 
 namespace CharacterGen.Tests.Integration.Tables.Abilities.Stats
 {
@@ -50,9 +49,9 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Stats
             StatConstants.Intelligence,
             StatConstants.Strength,
             StatConstants.Wisdom)]
-        public override void DistinctCollection(String name, params String[] collection)
+        public void StatGroup(string name, params string[] stats)
         {
-            base.Collection(name, collection);
+            base.Collection(name, stats);
         }
     }
 }

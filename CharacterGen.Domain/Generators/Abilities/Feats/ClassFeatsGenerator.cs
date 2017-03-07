@@ -5,7 +5,6 @@ using CharacterGen.CharacterClasses;
 using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Selectors.Selections;
 using CharacterGen.Races;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -24,7 +23,7 @@ namespace CharacterGen.Domain.Generators.Abilities.Feats
             this.collectionsSelector = collectionsSelector;
         }
 
-        public IEnumerable<Feat> GenerateWith(CharacterClass characterClass, Race race, Dictionary<string, Stat> stats, IEnumerable<Feat> racialFeats, Dictionary<String, Skill> skills)
+        public IEnumerable<Feat> GenerateWith(CharacterClass characterClass, Race race, Dictionary<string, Stat> stats, IEnumerable<Feat> racialFeats, IEnumerable<Skill> skills)
         {
             var characterClassFeatSelections = featsSelector.SelectClass(characterClass.Name);
             var classFeats = GetClassFeats(characterClassFeatSelections, race, racialFeats, stats, characterClass, skills);
@@ -46,7 +45,7 @@ namespace CharacterGen.Domain.Generators.Abilities.Feats
             return classFeats;
         }
 
-        private IEnumerable<Feat> GetClassFeats(IEnumerable<CharacterClassFeatSelection> classFeatSelections, Race race, IEnumerable<Feat> earnedFeat, Dictionary<string, Stat> stats, CharacterClass characterClass, Dictionary<string, Skill> skills)
+        private IEnumerable<Feat> GetClassFeats(IEnumerable<CharacterClassFeatSelection> classFeatSelections, Race race, IEnumerable<Feat> earnedFeat, Dictionary<string, Stat> stats, CharacterClass characterClass, IEnumerable<Skill> skills)
         {
             var classFeats = new List<Feat>();
 
@@ -71,7 +70,7 @@ namespace CharacterGen.Domain.Generators.Abilities.Feats
             return classFeats;
         }
 
-        private Feat BuildFeatFrom(CharacterClassFeatSelection selection, string focus, IEnumerable<Feat> earnedFeat, Dictionary<string, Stat> stats, CharacterClass characterClass, Dictionary<string, Skill> skills)
+        private Feat BuildFeatFrom(CharacterClassFeatSelection selection, string focus, IEnumerable<Feat> earnedFeat, Dictionary<string, Stat> stats, CharacterClass characterClass, IEnumerable<Skill> skills)
         {
             var feat = new Feat();
             feat.Name = selection.Feat;

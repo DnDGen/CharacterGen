@@ -21,7 +21,8 @@ namespace CharacterGen.Domain.Generators.Randomizers.Stats
             var stats = generator.Generate(
                 () => RollStats(RollStat),
                 s => StatsAreAllowed(s.Values),
-                () => RollStats(() => defaultValue));
+                () => RollStats(() => defaultValue),
+                $"stats of value {defaultValue}");
 
             return stats;
         }

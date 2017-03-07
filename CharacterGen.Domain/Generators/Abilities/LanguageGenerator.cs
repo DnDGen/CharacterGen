@@ -1,5 +1,7 @@
-﻿using CharacterGen.Domain.Selectors.Collections;
+﻿using CharacterGen.Abilities.Skills;
+using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Races;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -16,7 +18,7 @@ namespace CharacterGen.Domain.Generators.Abilities
             this.collectionsSelector = collectionsSelector;
         }
 
-        public IEnumerable<string> GenerateWith(Race race, string className, int intelligenceBonus)
+        public IEnumerable<string> GenerateWith(Race race, string className, int intelligenceBonus, IEnumerable<Skill> skills)
         {
             var languages = new List<string>();
 
@@ -26,6 +28,9 @@ namespace CharacterGen.Domain.Generators.Abilities
             var bonusLanguages = languagesSelector.SelectBonusLanguagesFor(race.BaseRace, className);
             var remainingBonusLanguages = bonusLanguages.Except(languages).ToList();
             var numberOfBonusLanguages = intelligenceBonus;
+
+            if (IsInterpreter(skills))
+                numberOfBonusLanguages = Math.Max(1, intelligenceBonus + 1);
 
             if (numberOfBonusLanguages >= remainingBonusLanguages.Count)
             {
@@ -41,6 +46,11 @@ namespace CharacterGen.Domain.Generators.Abilities
             }
 
             return languages;
+        }
+
+        private bool IsInterpreter(IEnumerable<Skill> skills)
+        {
+            return skills.Any(s => s.Name == SkillConstants.Profession && s.Focus == SkillConstants.Foci.Profession.Interpreter);
         }
     }
 }

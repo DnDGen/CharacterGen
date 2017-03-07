@@ -1,6 +1,7 @@
 ﻿using CharacterGen.Abilities.Skills;
 using CharacterGen.Abilities.Stats;
 using NUnit.Framework;
+using System.Linq;
 
 namespace CharacterGen.Tests.Unit.Common.Abilities.Skills
 {
@@ -21,6 +22,7 @@ namespace CharacterGen.Tests.Unit.Common.Abilities.Skills
         public void SkillInitialized()
         {
             Assert.That(skill.Name, Is.EqualTo("skill name"));
+            Assert.That(skill.Focus, Is.Empty);
             Assert.That(skill.BaseStat, Is.EqualTo(baseStat));
             Assert.That(skill.ArmorCheckPenalty, Is.EqualTo(0));
             Assert.That(skill.ClassSkill, Is.False);
@@ -28,6 +30,24 @@ namespace CharacterGen.Tests.Unit.Common.Abilities.Skills
             Assert.That(skill.Ranks, Is.EqualTo(0));
             Assert.That(skill.CircumstantialBonus, Is.False);
             Assert.That(skill.RankCap, Is.EqualTo(90210));
+            Assert.That(skill.TotalBonus, Is.EqualTo(0));
+        }
+
+        [Test]
+        public void SkillInitializedWithFocus()
+        {
+            skill = new Skill("skill name", baseStat, 90210, "focus");
+
+            Assert.That(skill.Name, Is.EqualTo("skill name"));
+            Assert.That(skill.Focus, Is.EqualTo("focus"));
+            Assert.That(skill.BaseStat, Is.EqualTo(baseStat));
+            Assert.That(skill.ArmorCheckPenalty, Is.EqualTo(0));
+            Assert.That(skill.ClassSkill, Is.False);
+            Assert.That(skill.Bonus, Is.EqualTo(0));
+            Assert.That(skill.Ranks, Is.EqualTo(0));
+            Assert.That(skill.CircumstantialBonus, Is.False);
+            Assert.That(skill.RankCap, Is.EqualTo(90210));
+            Assert.That(skill.TotalBonus, Is.EqualTo(0));
         }
 
         [Test]
@@ -117,6 +137,73 @@ namespace CharacterGen.Tests.Unit.Common.Abilities.Skills
             skill.ClassSkill = false;
 
             Assert.That(skill.QualifiesForSkillSynergy, Is.False);
+        }
+
+        [Test]
+        public void TotalBonusForClassSkill()
+        {
+            skill.Ranks = 9266;
+            skill.ClassSkill = true;
+            skill.Bonus = 42;
+            skill.ArmorCheckPenalty = -600;
+
+            Assert.That(skill.TotalBonus, Is.EqualTo(8708));
+        }
+
+        [Test]
+        public void TotalBonusForCrossClassSkill()
+        {
+            skill.Ranks = 9266;
+            skill.ClassSkill = false;
+            skill.Bonus = 42;
+            skill.ArmorCheckPenalty = -600;
+            baseStat.Value = 7;
+
+            Assert.That(skill.TotalBonus, Is.EqualTo(4073));
+        }
+
+        [Test]
+        public void TotalBonusForCrossClassSkillRoundedDown()
+        {
+            skill.Ranks = 9265;
+            skill.ClassSkill = false;
+            skill.Bonus = 42;
+            skill.ArmorCheckPenalty = -600;
+            baseStat.Value = 7;
+
+            Assert.That(skill.TotalBonus, Is.EqualTo(4072));
+        }
+
+        [TestCase("skill", "", "skill", "", true)]
+        [TestCase("skill", "focus", "skill", "focus", true)]
+        [TestCase("skill", "", "skill", "focus", false)]
+        [TestCase("skill", "focus", "skill", "", false)]
+        [TestCase("skill", "", "other skill", "", false)]
+        [TestCase("skill", "focus", "other skill", "focus", false)]
+        [TestCase("skill", "focus", "skill", "other focus", false)]
+        public void SkillIsEqualToOtherSkill(string skillName, string skillFocus, string otherSkillName, string otherSkillFocus, bool shouldEqual)
+        {
+            skill = new Skill(skillName, baseStat, 0, skillFocus);
+            var otherSkill = new Skill(otherSkillName, baseStat, 0, otherSkillFocus);
+
+            var isEqual = skill.IsEqualTo(otherSkill);
+            Assert.That(isEqual, Is.EqualTo(shouldEqual));
+        }
+
+        [TestCase("skill", "", "skill", "", true)]
+        [TestCase("skill", "focus", "skill", "focus", true)]
+        [TestCase("skill", "", "skill", "focus", false)]
+        [TestCase("skill", "focus", "skill", "", false)]
+        [TestCase("skill", "", "other skill", "", false)]
+        [TestCase("skill", "focus", "other skill", "focus", false)]
+        [TestCase("skill", "focus", "skill", "other focus", false)]
+        public void SkillIsEqualToString(string skillName, string skillFocus, string otherSkillName, string otherSkillFocus, bool shouldEqual)
+        {
+            skill = new Skill(skillName, baseStat, 0, skillFocus);
+            var otherSkill = otherSkillFocus.Any() ? $"{otherSkillName}/{otherSkillFocus}" : otherSkillName;
+
+            var isEqual = skill.IsEqualTo(otherSkill);
+            Assert.That(isEqual, Is.EqualTo(shouldEqual));
         }
     }
 }
