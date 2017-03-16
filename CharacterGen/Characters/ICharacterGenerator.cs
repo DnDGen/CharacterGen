@@ -3,7 +3,7 @@ using CharacterGen.Randomizers.CharacterClasses;
 using CharacterGen.Randomizers.Races;
 using CharacterGen.Randomizers.Stats;
 
-namespace CharacterGen
+namespace CharacterGen.Characters
 {
     public interface ICharacterGenerator
     {

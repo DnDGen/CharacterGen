@@ -1,10 +1,18 @@
-﻿using System;
+﻿using EventGen;
+using System;
 
 namespace CharacterGen.Domain.Generators
 {
     internal class IterativeGenerator : Generator
     {
         private const int MaxRetries = 1000;
+
+        private readonly GenEventQueue eventQueue;
+
+        public IterativeGenerator(GenEventQueue eventQueue)
+        {
+            this.eventQueue = eventQueue;
+        }
 
         public T Generate<T>(Func<T> buildInstructions, Func<T, bool> isValid, Func<T> buildDefault, string defaultDescription)
         {
@@ -18,9 +26,7 @@ namespace CharacterGen.Domain.Generators
                 return builtObject;
 
             builtObject = buildDefault();
-
-            //HACK: Replace this with EventGen eventually
-            Console.WriteLine($"Generating {defaultDescription} by default");
+            eventQueue.Enqueue("CharacterGen", $"Generating {defaultDescription} by default");
 
             return builtObject;
         }

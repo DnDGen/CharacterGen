@@ -1,4 +1,6 @@
 ﻿using CharacterGen.Domain.Generators;
+using EventGen;
+using Moq;
 using NUnit.Framework;
 using System;
 
@@ -11,11 +13,13 @@ namespace CharacterGen.Tests.Unit.Generators
 
         private Generator generator;
         private int iterations;
+        private Mock<GenEventQueue> mockEventQueue;
 
         [SetUp]
         public void Setup()
         {
-            generator = new IterativeGenerator();
+            mockEventQueue = new Mock<GenEventQueue>();
+            generator = new IterativeGenerator(mockEventQueue.Object);
             iterations = 0;
         }
 
@@ -69,9 +73,10 @@ namespace CharacterGen.Tests.Unit.Generators
         [Test]
         public void ReturnDefault()
         {
-            var number = generator.Generate(() => iterations++, i => false, () => -1, string.Empty);
+            var number = generator.Generate(() => iterations++, i => false, () => -1, "a thing and stuff");
             Assert.That(number, Is.EqualTo(-1));
             Assert.That(iterations, Is.EqualTo(Limit));
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", "Generating a thing and stuff by default"), Times.Once);
         }
 
         [Test]

@@ -1,7 +1,7 @@
-﻿using CharacterGen;
+﻿using CharacterGen.Leaders;
 using NUnit.Framework;
 
-namespace CharacterGen.Tests.Unit.Common
+namespace CharacterGen.Tests.Unit.Generators.Leaders
 {
     [TestFixture]
     public class LeadershipTests

@@ -1,4 +1,6 @@
-﻿namespace CharacterGen
+﻿using CharacterGen.Characters;
+
+namespace CharacterGen.Leaders
 {
     public interface ILeadershipGenerator
     {

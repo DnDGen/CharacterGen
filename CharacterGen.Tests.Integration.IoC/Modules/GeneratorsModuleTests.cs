@@ -1,15 +1,21 @@
-﻿using CharacterGen.Domain.Generators;
+﻿using CharacterGen.Characters;
+using CharacterGen.Domain.Generators;
 using CharacterGen.Domain.Generators.Abilities;
 using CharacterGen.Domain.Generators.Abilities.Feats;
+using CharacterGen.Domain.Generators.Alignments;
+using CharacterGen.Domain.Generators.Characters;
+using CharacterGen.Domain.Generators.Classes;
 using CharacterGen.Domain.Generators.Combats;
 using CharacterGen.Domain.Generators.Items;
 using CharacterGen.Domain.Generators.Magics;
+using CharacterGen.Domain.Generators.Races;
 using CharacterGen.Domain.Generators.Randomizers.Alignments;
 using CharacterGen.Domain.Generators.Randomizers.CharacterClasses.ClassNames;
 using CharacterGen.Domain.Generators.Randomizers.CharacterClasses.Levels;
 using CharacterGen.Domain.Generators.Randomizers.Races.BaseRaces;
 using CharacterGen.Domain.Generators.Randomizers.Races.Metaraces;
 using CharacterGen.Domain.Generators.Randomizers.Stats;
+using CharacterGen.Leaders;
 using CharacterGen.Randomizers.Alignments;
 using CharacterGen.Randomizers.CharacterClasses;
 using CharacterGen.Randomizers.Races;
@@ -32,6 +38,12 @@ namespace CharacterGen.Tests.Integration.IoC.Modules
         public void CharacterGeneratorIsNotBuiltAsSingleton()
         {
             AssertNotSingleton<ICharacterGenerator>();
+        }
+
+        [Test]
+        public void CharacterGeneratorIsDecorated()
+        {
+            AssertIsInstanceOf<ICharacterGenerator, CharacterGeneratorEventGenDecorator>();
         }
 
         [Test]

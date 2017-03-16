@@ -1,7 +1,7 @@
 ﻿using CharacterGen.CharacterClasses;
 using NUnit.Framework;
 
-namespace CharacterGen.Tests.Unit.Common.Classes
+namespace CharacterGen.Tests.Unit.Generators.Classes
 {
     [TestFixture]
     public class CharacterClassConstantsTests

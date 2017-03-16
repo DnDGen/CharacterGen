@@ -1,7 +1,7 @@
 ﻿using CharacterGen.Races;
 using NUnit.Framework;
 
-namespace CharacterGen.Tests.Unit.Common.Races
+namespace CharacterGen.Tests.Unit.Generators.Races
 {
     [TestFixture]
     public class RaceTests

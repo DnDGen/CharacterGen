@@ -50,7 +50,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="TreasureGen, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DnDGen.TreasureGen.5.0.0\lib\TreasureGen.dll</HintPath>
+      <HintPath>..\packages\DnDGen.TreasureGen.6.0.0\lib\TreasureGen.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
@@ -65,7 +65,7 @@
     <Compile Include="Abilities\Stats\StatConstants.cs" />
     <Compile Include="Alignments\Alignment.cs" />
     <Compile Include="Alignments\AlignmentConstants.cs" />
-    <Compile Include="Character.cs" />
+    <Compile Include="Characters\Character.cs" />
     <Compile Include="CharacterClasses\CharacterClass.cs" />
     <Compile Include="CharacterClasses\CharacterClassConstants.cs" />
     <Compile Include="Combats\ArmorClass.cs" />
@@ -73,10 +73,10 @@
     <Compile Include="Combats\Combat.cs" />
     <Compile Include="Combats\SavingThrowConstants.cs" />
     <Compile Include="Combats\SavingThrows.cs" />
-    <Compile Include="FollowerQuantities.cs" />
-    <Compile Include="ICharacterGenerator.cs" />
-    <Compile Include="ILeadershipGenerator.cs" />
-    <Compile Include="Leadership.cs" />
+    <Compile Include="Leaders\FollowerQuantities.cs" />
+    <Compile Include="Characters\ICharacterGenerator.cs" />
+    <Compile Include="Leaders\ILeadershipGenerator.cs" />
+    <Compile Include="Leaders\Leadership.cs" />
     <Compile Include="Magics\Animal.cs" />
     <Compile Include="Items\Equipment.cs" />
     <Compile Include="Magics\Magic.cs" />

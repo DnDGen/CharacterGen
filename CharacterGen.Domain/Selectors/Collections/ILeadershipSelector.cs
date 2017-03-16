@@ -1,4 +1,6 @@
-﻿namespace CharacterGen.Domain.Selectors.Collections
+﻿using CharacterGen.Leaders;
+
+namespace CharacterGen.Domain.Selectors.Collections
 {
     internal interface ILeadershipSelector
     {

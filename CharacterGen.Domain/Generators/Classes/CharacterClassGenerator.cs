@@ -8,7 +8,7 @@ using CharacterGen.Randomizers.CharacterClasses;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace CharacterGen.Domain.Generators
+namespace CharacterGen.Domain.Generators.Classes
 {
     internal class CharacterClassGenerator : ICharacterClassGenerator
     {

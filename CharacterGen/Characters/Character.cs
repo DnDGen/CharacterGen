@@ -10,7 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace CharacterGen
+namespace CharacterGen.Characters
 {
     public class Character
     {

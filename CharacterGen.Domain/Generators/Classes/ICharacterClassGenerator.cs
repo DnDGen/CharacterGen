@@ -4,7 +4,7 @@ using CharacterGen.Races;
 using CharacterGen.Randomizers.CharacterClasses;
 using System.Collections.Generic;
 
-namespace CharacterGen.Domain.Generators
+namespace CharacterGen.Domain.Generators.Classes
 {
     internal interface ICharacterClassGenerator
     {

@@ -9,7 +9,7 @@ using RollGen;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace CharacterGen.Domain.Generators
+namespace CharacterGen.Domain.Generators.Races
 {
     internal class RaceGenerator : IRaceGenerator
     {

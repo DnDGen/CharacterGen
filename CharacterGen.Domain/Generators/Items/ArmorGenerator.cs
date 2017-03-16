@@ -49,8 +49,11 @@ namespace CharacterGen.Domain.Generators.Items
 
         private Item GenerateDefaultArmor(string power, IEnumerable<string> proficientArmors, Race race)
         {
+            var standardArmors = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, GroupConstants.Standard + ItemTypeConstants.Armor);
+            var standardProficientArmors = standardArmors.Intersect(proficientArmors);
+
             var template = new Item();
-            template.Name = collectionsSelector.SelectRandomFrom(proficientArmors);
+            template.Name = collectionsSelector.SelectRandomFrom(standardProficientArmors);
             template.ItemType = ItemTypeConstants.Armor;
 
             if (power == PowerConstants.Mundane)
@@ -89,15 +92,10 @@ namespace CharacterGen.Domain.Generators.Items
             if (armor == null)
                 return true;
 
-            if (armor.Attributes.Contains(AttributeConstants.Shield) != isShield)
+            if (armor.ItemType != ItemTypeConstants.Armor)
                 return false;
 
-            return IsValid(armor, proficientArmors, characterClass, race);
-        }
-
-        private bool IsValid(Item armor, IEnumerable<string> proficientArmors, CharacterClass characterClass, Race race)
-        {
-            if (armor.ItemType != ItemTypeConstants.Armor)
+            if (armor.Attributes.Contains(AttributeConstants.Shield) != isShield)
                 return false;
 
             if (armor.Attributes.Contains(AttributeConstants.Metal) && characterClass.Name == CharacterClassConstants.Druid)

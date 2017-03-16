@@ -1,8 +1,10 @@
 ﻿using CharacterGen.Alignments;
+using CharacterGen.Characters;
 using CharacterGen.Domain.Generators;
 using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Selectors.Percentiles;
 using CharacterGen.Domain.Tables;
+using CharacterGen.Leaders;
 using CharacterGen.Randomizers.Alignments;
 using CharacterGen.Randomizers.CharacterClasses;
 using CharacterGen.Randomizers.Races;
@@ -11,7 +13,7 @@ using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
 
-namespace CharacterGen.Tests.Unit.Generators
+namespace CharacterGen.Tests.Unit.Generators.Leaders
 {
     [TestFixture]
     public class LeadershipGeneratorTests

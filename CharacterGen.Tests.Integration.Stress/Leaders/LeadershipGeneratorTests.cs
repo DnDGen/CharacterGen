@@ -1,11 +1,14 @@
 ﻿using CharacterGen.Abilities.Stats;
+using CharacterGen.Characters;
+using CharacterGen.Leaders;
 using CharacterGen.Randomizers.CharacterClasses;
 using CharacterGen.Randomizers.Stats;
+using CharacterGen.Tests.Integration.Stress.Characters;
 using Ninject;
 using NUnit.Framework;
 using System;
 
-namespace CharacterGen.Tests.Integration.Stress
+namespace CharacterGen.Tests.Integration.Stress.Leaders
 {
     [TestFixture]
     public class LeadershipGeneratorTests : StressTests

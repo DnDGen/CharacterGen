@@ -1,7 +1,6 @@
 ﻿using CharacterGen.Abilities.Feats;
 using CharacterGen.Domain.Tables;
 using NUnit.Framework;
-using System;
 using System.Linq;
 using TreasureGen.Items;
 
@@ -54,12 +53,17 @@ namespace CharacterGen.Tests.Integration.Tables.Items
                 ArmorConstants.StuddedLeatherArmor,
                 ArmorConstants.TowerShield,
                 ArmorConstants.WingedShield,
+                AttributeConstants.Ammunition,
+                AttributeConstants.Melee,
+                AttributeConstants.TwoHanded,
                 FeatConstants.LightArmorProficiency,
                 FeatConstants.MediumArmorProficiency,
                 FeatConstants.HeavyArmorProficiency,
                 FeatConstants.ShieldProficiency,
                 FeatConstants.TowerShieldProficiency,
+                FeatConstants.Foci.UnarmedStrike,
                 FeatConstants.Foci.Weapons,
+                GroupConstants.Standard + ItemTypeConstants.Armor,
                 WeaponConstants.Arrow,
                 WeaponConstants.AssassinsDagger,
                 WeaponConstants.BastardSword,
@@ -160,10 +164,6 @@ namespace CharacterGen.Tests.Integration.Tables.Items
                 WeaponConstants.TwoBladedSword,
                 WeaponConstants.Warhammer,
                 WeaponConstants.Whip,
-                FeatConstants.Foci.UnarmedStrike,
-                AttributeConstants.Ammunition,
-                AttributeConstants.Melee,
-                AttributeConstants.TwoHanded
             };
 
             AssertCollectionNames(names);
@@ -229,6 +229,25 @@ namespace CharacterGen.Tests.Integration.Tables.Items
             ArmorConstants.ChainShirt,
             ArmorConstants.ElvenChain,
             ArmorConstants.CelestialArmor)]
+        [TestCase(GroupConstants.Standard + ItemTypeConstants.Armor,
+            ArmorConstants.BandedMail,
+            ArmorConstants.Breastplate,
+            ArmorConstants.Buckler,
+            ArmorConstants.ChainShirt,
+            ArmorConstants.Chainmail,
+            ArmorConstants.FullPlate,
+            ArmorConstants.HalfPlate,
+            ArmorConstants.HeavySteelShield,
+            ArmorConstants.HeavyWoodenShield,
+            ArmorConstants.HideArmor,
+            ArmorConstants.LeatherArmor,
+            ArmorConstants.LightSteelShield,
+            ArmorConstants.LightWoodenShield,
+            ArmorConstants.PaddedArmor,
+            ArmorConstants.ScaleMail,
+            ArmorConstants.SplintMail,
+            ArmorConstants.StuddedLeatherArmor,
+            ArmorConstants.TowerShield)]
         [TestCase(WeaponConstants.Arrow, WeaponConstants.Arrow)]
         [TestCase(WeaponConstants.AssassinsDagger, WeaponConstants.Dagger)]
         [TestCase(WeaponConstants.BastardSword, WeaponConstants.BastardSword)]
@@ -334,7 +353,7 @@ namespace CharacterGen.Tests.Integration.Tables.Items
             WeaponConstants.Arrow,
             WeaponConstants.CrossbowBolt,
             WeaponConstants.SlingBullet)]
-        public override void DistinctCollection(String name, params String[] collection)
+        public void ItemGroup(string name, params string[] collection)
         {
             base.DistinctCollection(name, collection);
         }

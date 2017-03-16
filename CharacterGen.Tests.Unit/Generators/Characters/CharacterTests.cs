@@ -1,8 +1,9 @@
 ﻿using CharacterGen.Abilities.Feats;
+using CharacterGen.Characters;
 using CharacterGen.Races;
 using NUnit.Framework;
 
-namespace CharacterGen.Tests.Unit.Common
+namespace CharacterGen.Tests.Unit.Generators.Characters
 {
     [TestFixture]
     public class CharacterTests

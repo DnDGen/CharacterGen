@@ -1,4 +1,5 @@
 ﻿using CharacterGen.Domain.IoC;
+using EventGen.IoC;
 using Ninject;
 using NUnit.Framework;
 using RollGen.Domain.IoC;
@@ -18,6 +19,9 @@ namespace CharacterGen.Tests.Integration
 
             var rollGenLoader = new RollGenModuleLoader();
             rollGenLoader.LoadModules(kernel);
+
+            var eventGenLoader = new EventGenModuleLoader();
+            eventGenLoader.LoadModules(kernel);
 
             var treasureGenLoader = new TreasureGenModuleLoader();
             treasureGenLoader.LoadModules(kernel);

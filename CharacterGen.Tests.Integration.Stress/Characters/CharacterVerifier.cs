@@ -2,13 +2,14 @@
 using CharacterGen.Abilities.Skills;
 using CharacterGen.Abilities.Stats;
 using CharacterGen.Alignments;
+using CharacterGen.Characters;
 using CharacterGen.Races;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
 using TreasureGen.Items;
 
-namespace CharacterGen.Tests.Integration.Stress
+namespace CharacterGen.Tests.Integration.Stress.Characters
 {
     public class CharacterVerifier
     {

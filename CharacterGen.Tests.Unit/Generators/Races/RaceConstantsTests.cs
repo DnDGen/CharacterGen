@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using TreasureGen.Items;
 
-namespace CharacterGen.Tests.Unit.Common.Races
+namespace CharacterGen.Tests.Unit.Generators.Races
 {
     [TestFixture]
     public class RaceConstantsTests

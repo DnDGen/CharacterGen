@@ -1,6 +1,6 @@
 ﻿using CharacterGen.Alignments;
 using CharacterGen.CharacterClasses;
-using CharacterGen.Domain.Generators;
+using CharacterGen.Domain.Generators.Races;
 using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Selectors.Percentiles;
 using CharacterGen.Domain.Tables;
@@ -12,7 +12,7 @@ using RollGen;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace CharacterGen.Tests.Unit.Generators
+namespace CharacterGen.Tests.Unit.Generators.Races
 {
     [TestFixture]
     public class RaceGeneratorTests

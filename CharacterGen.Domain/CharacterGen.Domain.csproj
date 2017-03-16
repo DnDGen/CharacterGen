@@ -40,6 +40,10 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EventGen, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EventGen.1.0.0\lib\EventGen.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
       <Private>True</Private>
@@ -56,7 +60,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="TreasureGen, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DnDGen.TreasureGen.5.0.0\lib\TreasureGen.dll</HintPath>
+      <HintPath>..\packages\DnDGen.TreasureGen.6.0.0\lib\TreasureGen.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
@@ -77,9 +81,10 @@
     <Compile Include="Generators\Abilities\ISkillsGenerator.cs" />
     <Compile Include="Generators\Abilities\IStatsGenerator.cs" />
     <Compile Include="Generators\Abilities\SkillsGenerator.cs" />
-    <Compile Include="Generators\AlignmentGenerator.cs" />
-    <Compile Include="Generators\CharacterClassGenerator.cs" />
-    <Compile Include="Generators\CharacterGenerator.cs" />
+    <Compile Include="Generators\Alignments\AlignmentGenerator.cs" />
+    <Compile Include="Generators\Characters\CharacterGeneratorEventGenDecorator.cs" />
+    <Compile Include="Generators\Classes\CharacterClassGenerator.cs" />
+    <Compile Include="Generators\Characters\CharacterGenerator.cs" />
     <Compile Include="Generators\Combats\ArmorClassGenerator.cs" />
     <Compile Include="Generators\Combats\CombatGenerator.cs" />
     <Compile Include="Generators\Combats\HitPointsGenerator.cs" />
@@ -90,9 +95,9 @@
     <Compile Include="Generators\Combats\ISavingThrowsGenerator.cs" />
     <Compile Include="Generators\Combats\SavingThrowsGenerator.cs" />
     <Compile Include="Generators\Generator.cs" />
-    <Compile Include="Generators\IAlignmentGenerator.cs" />
-    <Compile Include="Generators\ICharacterClassGenerator.cs" />
-    <Compile Include="Generators\IRaceGenerator.cs" />
+    <Compile Include="Generators\Alignments\IAlignmentGenerator.cs" />
+    <Compile Include="Generators\Classes\ICharacterClassGenerator.cs" />
+    <Compile Include="Generators\Races\IRaceGenerator.cs" />
     <Compile Include="Generators\Items\IArmorGenerator.cs" />
     <Compile Include="Generators\Items\IEquipmentGenerator.cs" />
     <Compile Include="Generators\Items\IWeaponGenerator.cs" />
@@ -100,14 +105,14 @@
     <Compile Include="Generators\Items\ArmorGenerator.cs" />
     <Compile Include="Generators\Items\EquipmentGenerator.cs" />
     <Compile Include="Generators\Items\WeaponGenerator.cs" />
-    <Compile Include="Generators\LeadershipGenerator.cs" />
+    <Compile Include="Generators\Leaders\LeadershipGenerator.cs" />
     <Compile Include="Generators\Magics\AnimalGenerator.cs" />
     <Compile Include="Generators\Magics\IAnimalGenerator.cs" />
     <Compile Include="Generators\Magics\IMagicGenerator.cs" />
     <Compile Include="Generators\Magics\ISpellsGenerator.cs" />
     <Compile Include="Generators\Magics\MagicGenerator.cs" />
     <Compile Include="Generators\Magics\SpellsGenerator.cs" />
-    <Compile Include="Generators\RaceGenerator.cs" />
+    <Compile Include="Generators\Races\RaceGenerator.cs" />
     <Compile Include="Generators\Randomizers\Alignments\SetAlignmentRandomizer.cs" />
     <Compile Include="Generators\Randomizers\CharacterClasses\ClassNames\AnyNPCClassNameRandomizer.cs" />
     <Compile Include="Generators\Randomizers\CharacterClasses\ClassNames\SetClassNameRandomizer.cs" />

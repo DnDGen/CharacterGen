@@ -1,7 +1,9 @@
 ﻿using CharacterGen.Alignments;
+using CharacterGen.Characters;
 using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Selectors.Percentiles;
 using CharacterGen.Domain.Tables;
+using CharacterGen.Leaders;
 using CharacterGen.Randomizers.Alignments;
 using CharacterGen.Randomizers.CharacterClasses;
 using CharacterGen.Randomizers.Races;

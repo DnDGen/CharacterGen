@@ -3,7 +3,7 @@ using CharacterGen.CharacterClasses;
 using CharacterGen.Races;
 using CharacterGen.Randomizers.Races;
 
-namespace CharacterGen.Domain.Generators
+namespace CharacterGen.Domain.Generators.Races
 {
     internal interface IRaceGenerator
     {

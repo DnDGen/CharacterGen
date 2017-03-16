@@ -1,9 +1,14 @@
-﻿using CharacterGen.Domain.Generators;
+﻿using CharacterGen.Characters;
+using CharacterGen.Domain.Generators;
 using CharacterGen.Domain.Generators.Abilities;
 using CharacterGen.Domain.Generators.Abilities.Feats;
+using CharacterGen.Domain.Generators.Alignments;
+using CharacterGen.Domain.Generators.Characters;
+using CharacterGen.Domain.Generators.Classes;
 using CharacterGen.Domain.Generators.Combats;
 using CharacterGen.Domain.Generators.Items;
 using CharacterGen.Domain.Generators.Magics;
+using CharacterGen.Domain.Generators.Races;
 using CharacterGen.Domain.Generators.Randomizers.Alignments;
 using CharacterGen.Domain.Generators.Randomizers.CharacterClasses.ClassNames;
 using CharacterGen.Domain.Generators.Randomizers.CharacterClasses.Levels;
@@ -12,6 +17,7 @@ using CharacterGen.Domain.Generators.Randomizers.Races.Metaraces;
 using CharacterGen.Domain.Generators.Randomizers.Stats;
 using CharacterGen.Domain.Generators.Verifiers;
 using CharacterGen.Domain.IoC.Providers;
+using CharacterGen.Leaders;
 using CharacterGen.Randomizers.Alignments;
 using CharacterGen.Randomizers.CharacterClasses;
 using CharacterGen.Randomizers.Races;
@@ -26,9 +32,11 @@ namespace CharacterGen.Domain.IoC.Modules
     {
         public override void Load()
         {
+            Bind<ICharacterGenerator>().To<CharacterGenerator>().WhenInjectedInto<CharacterGeneratorEventGenDecorator>();
+            Bind<ICharacterGenerator>().To<CharacterGeneratorEventGenDecorator>();
+
             Bind<IAlignmentGenerator>().To<AlignmentGenerator>();
             Bind<ICharacterClassGenerator>().To<CharacterClassGenerator>();
-            Bind<ICharacterGenerator>().To<CharacterGenerator>();
             Bind<IHitPointsGenerator>().To<HitPointsGenerator>();
             Bind<ILanguageGenerator>().To<LanguageGenerator>();
             Bind<IRaceGenerator>().To<RaceGenerator>();

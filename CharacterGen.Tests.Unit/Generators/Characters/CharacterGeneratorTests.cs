@@ -4,12 +4,17 @@ using CharacterGen.Abilities.Skills;
 using CharacterGen.Abilities.Stats;
 using CharacterGen.Alignments;
 using CharacterGen.CharacterClasses;
+using CharacterGen.Characters;
 using CharacterGen.Combats;
 using CharacterGen.Domain.Generators;
 using CharacterGen.Domain.Generators.Abilities;
+using CharacterGen.Domain.Generators.Alignments;
+using CharacterGen.Domain.Generators.Characters;
+using CharacterGen.Domain.Generators.Classes;
 using CharacterGen.Domain.Generators.Combats;
 using CharacterGen.Domain.Generators.Items;
 using CharacterGen.Domain.Generators.Magics;
+using CharacterGen.Domain.Generators.Races;
 using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Selectors.Percentiles;
 using CharacterGen.Domain.Tables;
@@ -28,7 +33,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TreasureGen.Items;
 
-namespace CharacterGen.Tests.Unit.Generators
+namespace CharacterGen.Tests.Unit.Generators.Characters
 {
     [TestFixture]
     public class CharacterGeneratorTests

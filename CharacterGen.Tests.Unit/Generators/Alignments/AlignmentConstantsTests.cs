@@ -1,7 +1,7 @@
 ﻿using CharacterGen.Alignments;
 using NUnit.Framework;
 
-namespace CharacterGen.Tests.Unit.Common.Alignments
+namespace CharacterGen.Tests.Unit.Generators.Alignments
 {
     [TestFixture]
     public class AlignmentConstantsTests

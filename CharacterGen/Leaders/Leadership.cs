@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace CharacterGen
+namespace CharacterGen.Leaders
 {
     public class Leadership
     {
@@ -13,7 +12,7 @@ namespace CharacterGen
 
         public Leadership()
         {
-            LeadershipModifiers = Enumerable.Empty<String>();
+            LeadershipModifiers = Enumerable.Empty<string>();
             FollowerQuantities = new FollowerQuantities();
         }
     }

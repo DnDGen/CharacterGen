@@ -1,6 +1,7 @@
 ﻿using CharacterGen.Abilities.Feats;
 using CharacterGen.Abilities.Stats;
 using CharacterGen.CharacterClasses;
+using CharacterGen.Characters;
 using CharacterGen.Magics;
 using CharacterGen.Races;
 using CharacterGen.Randomizers.CharacterClasses;
@@ -11,7 +12,7 @@ using NUnit.Framework;
 using System;
 using System.Linq;
 
-namespace CharacterGen.Tests.Integration.Stress
+namespace CharacterGen.Tests.Integration.Stress.Characters
 {
     [TestFixture]
     public class CharacterGeneratorTests : StressTests

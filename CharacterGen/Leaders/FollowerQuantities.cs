@@ -1,4 +1,4 @@
-﻿namespace CharacterGen
+﻿namespace CharacterGen.Leaders
 {
     public class FollowerQuantities
     {

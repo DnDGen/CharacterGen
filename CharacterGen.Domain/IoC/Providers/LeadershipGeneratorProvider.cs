@@ -1,6 +1,8 @@
-﻿using CharacterGen.Domain.Generators;
+﻿using CharacterGen.Characters;
+using CharacterGen.Domain.Generators;
 using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Selectors.Percentiles;
+using CharacterGen.Leaders;
 using CharacterGen.Randomizers.Alignments;
 using CharacterGen.Randomizers.CharacterClasses;
 using CharacterGen.Randomizers.Races;

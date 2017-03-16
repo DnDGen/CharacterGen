@@ -1,4 +1,5 @@
 ﻿using CharacterGen.Domain.Tables;
+using CharacterGen.Leaders;
 using System;
 using System.Linq;
 

@@ -5,6 +5,7 @@ using CharacterGen.Randomizers.CharacterClasses;
 using CharacterGen.Randomizers.Races;
 using CharacterGen.Verifiers;
 using CharacterGen.Verifiers.Exceptions;
+using EventGen;
 using Ninject;
 using NUnit.Framework;
 using System;
@@ -32,6 +33,10 @@ namespace CharacterGen.Tests.Integration.Stress
         public RaceRandomizer BaseRaceRandomizer { get; set; }
         [Inject, Named(RaceRandomizerTypeConstants.Metarace.AnyMeta)]
         public RaceRandomizer MetaraceRandomizer { get; set; }
+        [Inject]
+        public ClientIDManager ClientIdManager { get; set; }
+        [Inject]
+        public GenEventQueue EventQueue { get; set; }
 
         private const int ConfidentIterations = 1000000;
         private const int TravisJobOutputTimeLimit = 60 * 10;
@@ -40,6 +45,7 @@ namespace CharacterGen.Tests.Integration.Stress
         private readonly int timeLimitInSeconds;
 
         private int iterations;
+        private Guid clientId;
 
         public StressTests()
         {
@@ -63,12 +69,23 @@ namespace CharacterGen.Tests.Integration.Stress
         {
             iterations = 0;
             Stopwatch.Start();
+
+            clientId = Guid.NewGuid();
+            ClientIdManager.SetClientID(clientId);
         }
 
         [TearDown]
         public void StressTearDown()
         {
             Stopwatch.Reset();
+
+            var events = EventQueue.DequeueAll(clientId);
+
+            //INFO: We want to truncate the events to just a summary per second, so last event per minute
+            events = events.GroupBy(e => e.When.Second).Select(g => g.First());
+
+            foreach (var genEvent in events)
+                Console.WriteLine($"[{genEvent.When.ToShortTimeString()}] {genEvent.Source}: {genEvent.Message}");
         }
 
         protected void Stress(Action makeAssertions)

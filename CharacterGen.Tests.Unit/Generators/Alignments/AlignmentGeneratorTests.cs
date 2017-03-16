@@ -1,10 +1,10 @@
 ﻿using CharacterGen.Alignments;
-using CharacterGen.Domain.Generators;
+using CharacterGen.Domain.Generators.Alignments;
 using CharacterGen.Randomizers.Alignments;
 using Moq;
 using NUnit.Framework;
 
-namespace CharacterGen.Tests.Unit.Generators
+namespace CharacterGen.Tests.Unit.Generators.Alignments
 {
     [TestFixture]
     public class AlignmentGeneratorTests
